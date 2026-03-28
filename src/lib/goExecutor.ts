@@ -7,6 +7,8 @@
  * 3. Once WASM is ready → all subsequent runs use local WASM
  */
 
+import { getAuthToken } from '../contexts/AuthContext';
+
 export type GoBackend = 'api' | 'wasm' | 'wasm-loading';
 
 interface GoResult {
@@ -31,9 +33,12 @@ function extractErrorLine(err: string): number | null {
 async function executeViaAPI(code: string): Promise<GoResult> {
   const t0 = performance.now();
   try {
+    const token = getAuthToken();
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
     const res = await fetch('/api/go-run', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ code }),
     });
     const data = await res.json();

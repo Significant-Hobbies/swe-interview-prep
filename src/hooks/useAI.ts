@@ -219,9 +219,12 @@ const LOCAL_TOOL_MAP: Partial<Record<AIProvider, string>> = {
 
 async function streamLocalCLI(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
   const tool = LOCAL_TOOL_MAP[config.provider] || 'claude';
+  const token = getAuthToken();
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch('/api/chat', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       messages,
       systemPrompt: SYSTEM_PROMPT + '\n\n' + systemContext,
