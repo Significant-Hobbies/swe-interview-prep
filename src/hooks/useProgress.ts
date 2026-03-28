@@ -1,7 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { useAuth, getAuthToken } from '../contexts/AuthContext';
 import type { Progress, Language } from '../types';
 
 const STORAGE_KEY = 'dsa-prep-progress';
+const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 function loadProgress(): Progress {
   try {
@@ -12,12 +14,50 @@ function loadProgress(): Progress {
   }
 }
 
-function saveProgress(progress: Progress) {
+function saveProgressLocal(progress: Progress) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
 }
 
 export function useProgress() {
+  const { user } = useAuth();
   const [progress, setProgress] = useState<Progress>(loadProgress);
+  const syncTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  // Load from DB when user signs in
+  useEffect(() => {
+    if (!user) return;
+    const token = getAuthToken();
+    if (!token) return;
+
+    fetch(`${API_URL}/api/progress`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.progress && typeof data.progress === 'object') {
+          // Merge: DB wins for conflicts, localStorage fills gaps
+          const local = loadProgress();
+          const merged = { ...local, ...data.progress };
+          setProgress(merged);
+          saveProgressLocal(merged);
+        }
+      })
+      .catch(err => console.error('Failed to load progress:', err));
+  }, [user]);
+
+  const syncToDb = useCallback((problemId: string, entry: Record<string, unknown>) => {
+    if (!user) return;
+    if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    syncTimerRef.current = setTimeout(() => {
+      const token = getAuthToken();
+      if (!token) return;
+      fetch(`${API_URL}/api/progress`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ problemId, data: entry }),
+      }).catch(err => console.error('Failed to sync progress:', err));
+    }, 500);
+  }, [user]);
 
   const getStatus = useCallback((problemId: string): string => {
     return progress[problemId]?.status || 'unseen';
@@ -29,10 +69,11 @@ export function useProgress() {
         ...prev,
         [problemId]: { ...prev[problemId], status, lastAttempted: new Date().toISOString() },
       };
-      saveProgress(next);
+      saveProgressLocal(next);
+      syncToDb(problemId, next[problemId]);
       return next;
     });
-  }, []);
+  }, [syncToDb]);
 
   const getNotes = useCallback((problemId: string): string => {
     return progress[problemId]?.notes || '';
@@ -41,10 +82,11 @@ export function useProgress() {
   const saveNotes = useCallback((problemId: string, notes: string) => {
     setProgress(prev => {
       const next: Progress = { ...prev, [problemId]: { ...prev[problemId], notes } };
-      saveProgress(next);
+      saveProgressLocal(next);
+      syncToDb(problemId, next[problemId]);
       return next;
     });
-  }, []);
+  }, [syncToDb]);
 
   const getSavedCode = useCallback((problemId: string): string | null => {
     return progress[problemId]?.code || null;
@@ -57,10 +99,11 @@ export function useProgress() {
   const saveCode = useCallback((problemId: string, code: string, language: Language) => {
     setProgress(prev => {
       const next: Progress = { ...prev, [problemId]: { ...prev[problemId], code, language } };
-      saveProgress(next);
+      saveProgressLocal(next);
+      syncToDb(problemId, next[problemId]);
       return next;
     });
-  }, []);
+  }, [syncToDb]);
 
   const isBookmarked = useCallback((problemId: string): boolean => {
     return progress[problemId]?.bookmarked || false;
@@ -72,10 +115,11 @@ export function useProgress() {
         ...prev,
         [problemId]: { ...prev[problemId], bookmarked: !prev[problemId]?.bookmarked },
       };
-      saveProgress(next);
+      saveProgressLocal(next);
+      syncToDb(problemId, next[problemId]);
       return next;
     });
-  }, []);
+  }, [syncToDb]);
 
   const getStats = useCallback(() => {
     const values = Object.values(progress);

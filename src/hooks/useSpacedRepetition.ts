@@ -1,7 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { useAuth, getAuthToken } from '../contexts/AuthContext';
 import type { AnkiCardWithMeta, ReviewData } from '../types';
 
 const STORAGE_KEY = 'dsa-prep-anki';
+const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 interface CardState {
   ease: number;
@@ -51,7 +53,65 @@ function sm2(cardState: CardState, quality: number) {
 }
 
 export function useSpacedRepetition() {
+  const { user } = useAuth();
   const [ankiData, setAnkiData] = useState<ReviewData>(loadAnkiData);
+  const syncTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  // Load SR data from DB when user signs in (stored alongside progress)
+  useEffect(() => {
+    if (!user) return;
+    const token = getAuthToken();
+    if (!token) return;
+
+    fetch(`${API_URL}/api/progress`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.progress && typeof data.progress === 'object') {
+          // Extract SR fields from progress entries
+          const local = loadAnkiData();
+          const dbAnki: ReviewData = {};
+          for (const [pid, entry] of Object.entries(data.progress) as [string, any][]) {
+            if (entry.ease !== undefined || entry.nextReview) {
+              dbAnki[pid] = {
+                easeFactor: entry.ease ?? 2.5,
+                interval: entry.interval ?? 0,
+                repetitions: entry.repetitions ?? 0,
+                lastReview: entry.lastReview || '',
+              };
+            }
+          }
+          const merged = { ...local, ...dbAnki };
+          setAnkiData(merged);
+          saveAnkiData(merged);
+        }
+      })
+      .catch(err => console.error('Failed to load SR data:', err));
+  }, [user]);
+
+  const syncToDb = useCallback((cardId: string, state: CardState) => {
+    if (!user) return;
+    if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    syncTimerRef.current = setTimeout(() => {
+      const token = getAuthToken();
+      if (!token) return;
+      fetch(`${API_URL}/api/progress`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({
+          problemId: cardId,
+          data: {
+            ease: state.ease,
+            interval: state.interval,
+            repetitions: state.repetitions,
+            nextReview: state.nextReview,
+            lastReview: state.lastReview,
+          },
+        }),
+      }).catch(err => console.error('Failed to sync SR data:', err));
+    }, 500);
+  }, [user]);
 
   const getCardState = useCallback((cardId: string): CardState => {
     return (ankiData as any)[cardId] || {
@@ -77,9 +137,10 @@ export function useSpacedRepetition() {
       const newState = sm2(cardState, quality);
       const next = { ...prev, [cardId]: newState } as ReviewData;
       saveAnkiData(next);
+      syncToDb(cardId, newState);
       return next;
     });
-  }, []);
+  }, [syncToDb]);
 
   const getReviewStats = useCallback(() => {
     const values = Object.values(ankiData) as any[];

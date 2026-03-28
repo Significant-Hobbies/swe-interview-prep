@@ -54,5 +54,27 @@ export async function initDatabase() {
     )
   `);
 
+  // User progress table (status, code, bookmarks, spaced repetition)
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_progress (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      problem_id TEXT NOT NULL,
+      status TEXT DEFAULT 'unseen',
+      code TEXT,
+      language TEXT DEFAULT 'typescript',
+      bookmarked INTEGER DEFAULT 0,
+      last_attempted TEXT,
+      ease REAL DEFAULT 2.5,
+      interval INTEGER DEFAULT 0,
+      repetitions INTEGER DEFAULT 0,
+      next_review TEXT,
+      last_review TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, problem_id)
+    )
+  `);
+
   console.log('Database schema initialized');
 }
