@@ -1,4 +1,9 @@
+import { requireAuth } from './auth/verify.mjs';
+
 export default async function handler(req, res) {
+  const user = await requireAuth(req, res);
+  if (!user) return;
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

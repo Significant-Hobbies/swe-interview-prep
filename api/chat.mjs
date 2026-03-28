@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import { requireAuth } from './auth/verify.mjs';
 
 const CLI_TOOLS = {
   claude: {
@@ -54,6 +55,9 @@ const CLI_TOOLS = {
 };
 
 export default async function handler(req, res) {
+  const user = await requireAuth(req, res);
+  if (!user) return;
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
