@@ -4,7 +4,10 @@ import { findOrCreateUser } from '../db/users.mjs';
 import { initDatabase } from '../db/schema.mjs';
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 if (!GOOGLE_CLIENT_ID) {
   console.warn('GOOGLE_CLIENT_ID not set');
@@ -65,9 +68,6 @@ export default async function handler(req, res) {
     console.error('Google auth error:', error.message, error.stack);
     return res.status(401).json({
       error: 'Authentication failed',
-      details: error.message,
-      hasClientId: !!GOOGLE_CLIENT_ID,
-      clientIdLength: GOOGLE_CLIENT_ID?.length,
     });
   }
 }
