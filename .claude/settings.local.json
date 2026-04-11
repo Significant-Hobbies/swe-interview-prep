@@ -78,7 +78,12 @@
       "Bash(gh api:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm add:*)",
-      "Bash(pnpm update:*)"
+      "Bash(pnpm update:*)",
+      "Bash(go version:*)",
+      "Read(//private/tmp/go-wasm-build/**)",
+      "Bash(go build:*)",
+      "Bash(gzip -k /tmp/go-wasm-build/go-interp.wasm)",
+      "Read(//tmp/go-wasm-build/**)"
     ]
   }
 }

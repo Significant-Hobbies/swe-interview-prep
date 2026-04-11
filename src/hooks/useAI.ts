@@ -1,45 +1,37 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAuth, getAuthToken } from '../contexts/AuthContext';
+import {
+  type AIConfig,
+  getAIConfig,
+  saveAIConfig as _saveAIConfig,
+} from '@saas-maker/ai';
+
+export type { AIConfig };
 
 // Local AI providers that don't need API keys (dev only)
 export const LOCAL_PROVIDERS = new Set(['claude-code', 'codex', 'gemini-cli']);
 export const IS_LOCAL = import.meta.env.DEV;
+
+const STORAGE_KEY = 'dsa-prep-ai-config';
 
 interface AIMessage {
   role: 'user' | 'assistant';
   content: string;
 }
 
-export interface AIConfig {
-  endpointUrl: string;
-  apiKey: string;
-  model: string;
-}
-
-const AI_CONFIG_KEY = 'dsa-prep-ai-config';
 const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 export function loadAIConfig(): AIConfig {
-  try {
-    const raw = localStorage.getItem(AI_CONFIG_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      // Migrate old config format
-      if ('provider' in parsed && !('endpointUrl' in parsed)) {
-        return IS_LOCAL
-          ? { endpointUrl: '', apiKey: '', model: 'claude-code-local' }
-          : { endpointUrl: '', apiKey: '', model: '' };
-      }
-      return parsed;
-    }
-  } catch { }
-  return IS_LOCAL
-    ? { endpointUrl: '', apiKey: '', model: 'claude-code-local' }
-    : { endpointUrl: '', apiKey: '', model: '' };
+  const config = getAIConfig(STORAGE_KEY);
+  // If dev mode and config is empty, default to local
+  if (IS_LOCAL && !config.endpointUrl && !config.apiKey && !config.model) {
+    return { endpointUrl: '', apiKey: '', model: 'claude-code-local' };
+  }
+  return config;
 }
 
 export function saveAIConfig(config: AIConfig) {
-  localStorage.setItem(AI_CONFIG_KEY, JSON.stringify(config));
+  _saveAIConfig(config, STORAGE_KEY);
 }
 
 const SYSTEM_PROMPT = `You are a DSA (Data Structures & Algorithms) coding tutor embedded in a practice tool. The student is working on a coding problem and needs guidance.
@@ -149,21 +141,6 @@ async function streamRemoteAI(config: AIConfig, messages: AIMessage[], systemCon
         }
       }
     }
-  }
-}
-
-export async function fetchModels(endpointUrl: string, apiKey: string): Promise<{ id: string; name: string }[]> {
-  try {
-    const res = await fetch('/api/ai/models', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ endpointUrl, apiKey }),
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.models || [];
-  } catch {
-    return [];
   }
 }
 
