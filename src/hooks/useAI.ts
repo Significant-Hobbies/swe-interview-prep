@@ -1,10 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAuth, getAuthToken } from '../contexts/AuthContext';
 
-export type AIProvider = 'claude-code' | 'codex' | 'gemini-cli' | 'openai' | 'anthropic' | 'google' | 'deepseek' | 'qwen';
-
-// Local CLI providers that don't need API keys (dev only)
-export const LOCAL_PROVIDERS = new Set<AIProvider>(['claude-code', 'codex', 'gemini-cli']);
+// Local AI providers that don't need API keys (dev only)
+export const LOCAL_PROVIDERS = new Set(['claude-code', 'codex', 'gemini-cli']);
 export const IS_LOCAL = import.meta.env.DEV;
 
 interface AIMessage {
@@ -12,8 +10,8 @@ interface AIMessage {
   content: string;
 }
 
-interface AIConfig {
-  provider: AIProvider;
+export interface AIConfig {
+  endpointUrl: string;
   apiKey: string;
   model: string;
 }
@@ -21,29 +19,23 @@ interface AIConfig {
 const AI_CONFIG_KEY = 'dsa-prep-ai-config';
 const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
-const MODELS: Record<AIProvider, string[]> = {
-  'claude-code': ['claude-code-local'],
-  'codex': ['codex-local'],
-  'gemini-cli': ['gemini-cli-local'],
-  openai: ['gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1', 'gpt-4o-mini', 'gpt-4o', 'o4-mini', 'o3-mini', 'gpt-4.5-preview'],
-  anthropic: ['claude-haiku-4-5-20251001', 'claude-sonnet-4-5-20250929', 'claude-opus-4-6'],
-  google: ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro', 'gemini-3-flash-preview', 'gemini-3-pro-preview'],
-  deepseek: ['deepseek-chat', 'deepseek-reasoner'],
-  qwen: ['qwen-turbo-latest', 'qwen-plus-latest', 'qwen-max-latest', 'qwen3-235b-a22b', 'qwen3-32b', 'qwq-32b'],
-};
-
-export function getModels(provider: AIProvider): string[] {
-  return MODELS[provider] || [];
-}
-
 export function loadAIConfig(): AIConfig {
   try {
     const raw = localStorage.getItem(AI_CONFIG_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      // Migrate old config format
+      if ('provider' in parsed && !('endpointUrl' in parsed)) {
+        return IS_LOCAL
+          ? { endpointUrl: '', apiKey: '', model: 'claude-code-local' }
+          : { endpointUrl: '', apiKey: '', model: '' };
+      }
+      return parsed;
+    }
   } catch { }
   return IS_LOCAL
-    ? { provider: 'claude-code' as AIProvider, apiKey: '', model: 'claude-code-local' }
-    : { provider: 'anthropic' as AIProvider, apiKey: '', model: 'claude-sonnet-4-5-20250929' };
+    ? { endpointUrl: '', apiKey: '', model: 'claude-code-local' }
+    : { endpointUrl: '', apiKey: '', model: '' };
 }
 
 export function saveAIConfig(config: AIConfig) {
@@ -65,160 +57,15 @@ RULES:
 
 You have context about the problem they're solving and their current code.`;
 
-const OPENAI_COMPAT_URLS: Partial<Record<AIProvider, string>> = {
-  openai: 'https://api.openai.com/v1/chat/completions',
-  deepseek: 'https://api.deepseek.com/chat/completions',
-  qwen: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
-};
-
-async function streamOpenAICompat(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
-  const url = OPENAI_COMPAT_URLS[config.provider] || OPENAI_COMPAT_URLS.openai!;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${config.apiKey}`,
-    },
-    body: JSON.stringify({
-      model: config.model,
-      stream: true,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT + '\n\n' + systemContext },
-        ...messages,
-      ],
-    }),
-    signal,
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`${config.provider} API error: ${res.status} - ${err}`);
-  }
-
-  const reader = res.body!.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split('\n');
-    buffer = lines.pop() || '';
-    for (const line of lines) {
-      if (line.startsWith('data: ') && line !== 'data: [DONE]') {
-        try {
-          const json = JSON.parse(line.slice(6));
-          const content = json.choices?.[0]?.delta?.content;
-          if (content) onChunk(content);
-        } catch { }
-      }
-    }
-  }
-}
-
-async function streamAnthropic(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': config.apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify({
-      model: config.model,
-      max_tokens: 512,
-      stream: true,
-      system: SYSTEM_PROMPT + '\n\n' + systemContext,
-      messages,
-    }),
-    signal,
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Anthropic API error: ${res.status} - ${err}`);
-  }
-
-  const reader = res.body!.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split('\n');
-    buffer = lines.pop() || '';
-    for (const line of lines) {
-      if (line.startsWith('data: ')) {
-        try {
-          const json = JSON.parse(line.slice(6));
-          if (json.type === 'content_block_delta' && json.delta?.text) {
-            onChunk(json.delta.text);
-          }
-        } catch { }
-      }
-    }
-  }
-}
-
-async function streamGoogle(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
-  const contents = messages.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }],
-  }));
-
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${config.model}:streamGenerateContent?alt=sse`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': config.apiKey },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT + '\n\n' + systemContext }] },
-        contents,
-      }),
-      signal,
-    }
-  );
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Google API error: ${res.status} - ${err}`);
-  }
-
-  const reader = res.body!.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split('\n');
-    buffer = lines.pop() || '';
-    for (const line of lines) {
-      if (line.startsWith('data: ')) {
-        try {
-          const json = JSON.parse(line.slice(6));
-          const text = json.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (text) onChunk(text);
-        } catch { }
-      }
-    }
-  }
-}
-
-// Maps frontend provider names to server-side tool names
-const LOCAL_TOOL_MAP: Partial<Record<AIProvider, string>> = {
+// Maps frontend local provider names to server-side tool names
+const LOCAL_TOOL_MAP: Record<string, string> = {
   'claude-code': 'claude',
   'codex': 'codex',
   'gemini-cli': 'gemini',
 };
 
-async function streamLocalCLI(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
-  const tool = LOCAL_TOOL_MAP[config.provider] || 'claude';
+async function streamLocalAI(_config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
+  const tool = LOCAL_TOOL_MAP[_config.model] || LOCAL_TOOL_MAP['claude-code'] || 'claude';
   const token = getAuthToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
@@ -235,7 +82,7 @@ async function streamLocalCLI(config: AIConfig, messages: AIMessage[], systemCon
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`Local CLI server error: ${res.status} - ${err}`);
+    throw new Error(`Local AI server error: ${res.status} - ${err}`);
   }
 
   const reader = res.body!.getReader();
@@ -259,6 +106,64 @@ async function streamLocalCLI(config: AIConfig, messages: AIMessage[], systemCon
         }
       }
     }
+  }
+}
+
+async function streamRemoteAI(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
+  const res = await fetch('/api/ai/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      endpointUrl: config.endpointUrl,
+      apiKey: config.apiKey,
+      model: config.model,
+      messages,
+      systemPrompt: SYSTEM_PROMPT + '\n\n' + systemContext,
+    }),
+    signal,
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`AI API error: ${res.status} - ${err}`);
+  }
+
+  const reader = res.body!.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() || '';
+    for (const line of lines) {
+      if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+        try {
+          const json = JSON.parse(line.slice(6));
+          if (json.text) onChunk(json.text);
+          if (json.error) throw new Error(json.error);
+        } catch (e: any) {
+          if (e.message && !e.message.includes('JSON')) throw e;
+        }
+      }
+    }
+  }
+}
+
+export async function fetchModels(endpointUrl: string, apiKey: string): Promise<{ id: string; name: string }[]> {
+  try {
+    const res = await fetch('/api/ai/models', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ endpointUrl, apiKey }),
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.models || [];
+  } catch {
+    return [];
   }
 }
 
@@ -363,10 +268,8 @@ export function useAI(problemId?: string) {
     };
 
     try {
-      const streamFn = LOCAL_PROVIDERS.has(config.provider) ? streamLocalCLI
-        : config.provider === 'anthropic' ? streamAnthropic
-        : config.provider === 'google' ? streamGoogle
-        : streamOpenAICompat;
+      const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
+      const streamFn = isLocal ? streamLocalAI : streamRemoteAI;
 
       await streamFn(config, newMessages, systemContext, onChunk, signal || new AbortController().signal);
 

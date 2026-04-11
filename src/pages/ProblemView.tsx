@@ -5,7 +5,7 @@ import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from 'reac
 import { useProblems } from '../hooks/useProblems';
 import { useProgress } from '../hooks/useProgress';
 import { useCodeExecution } from '../hooks/useCodeExecution';
-import { useAI, loadAIConfig, saveAIConfig, getModels, LOCAL_PROVIDERS, IS_LOCAL, type AIProvider } from '../hooks/useAI';
+import { useAI, loadAIConfig, saveAIConfig, fetchModels, LOCAL_PROVIDERS, IS_LOCAL, type AIConfig } from '../hooks/useAI';
 import { useNotes } from '../hooks/useNotes';
 import { fetchLeetCodeProblem, buildProblemFromLeetCode } from '../lib/leetcode';
 import { extractDiagramText } from '../lib/diagramToText';
@@ -619,18 +619,47 @@ function EditorToolbar({ handleReset, handleRun, isRunning, language, setLanguag
 }
 
 /** AI Advisor Panel */
-const PROVIDER_LABELS: Record<string, string> = {
-  'claude-code': 'Claude', codex: 'Codex', 'gemini-cli': 'Gemini',
-  openai: 'OpenAI', anthropic: 'Anthropic', google: 'Gemini', deepseek: 'DeepSeek', qwen: 'Qwen',
-};
 
 function AIPanel({ ai, problem, code, language, selectedCode, diagramElements, editorMode }: { ai: ReturnType<typeof useAI>; problem: any; code: string; language: Language; selectedCode?: string; diagramElements?: any[]; editorMode?: 'code' | 'diagram' }) {
   const [input, setInput] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const [config, setConfig] = useState(loadAIConfig);
+  const [availableModels, setAvailableModels] = useState<{ id: string; name: string }[]>([]);
+  const [modelsLoading, setModelsLoading] = useState(false);
+  const [modelInput, setModelInput] = useState(config.model);
+  const [showModelDropdown, setShowModelDropdown] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const modelDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fetch models when endpoint + key are available
+  useEffect(() => {
+    if (!config.endpointUrl || !config.apiKey) {
+      setAvailableModels([]);
+      return;
+    }
+    let cancelled = false;
+    setModelsLoading(true);
+    fetchModels(config.endpointUrl, config.apiKey).then(models => {
+      if (!cancelled) {
+        setAvailableModels(models);
+        setModelsLoading(false);
+      }
+    });
+    return () => { cancelled = true; };
+  }, [config.endpointUrl, config.apiKey]);
+
+  // Close model dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (modelDropdownRef.current && !modelDropdownRef.current.contains(e.target as Node)) {
+        setShowModelDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -649,7 +678,8 @@ function AIPanel({ ai, problem, code, language, selectedCode, diagramElements, e
     return ctx;
   };
 
-  const isReady = LOCAL_PROVIDERS.has(config.provider) || !!config.apiKey;
+  const isLocalMode = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
+  const isReady = isLocalMode || (!!config.endpointUrl && !!config.apiKey);
 
   const handleSend = () => {
     if (!input.trim() || ai.isStreaming) return;
@@ -688,6 +718,10 @@ function AIPanel({ ai, problem, code, language, selectedCode, diagramElements, e
 
   // ── Settings panel ──
   if (showSettings) {
+    const filteredModels = availableModels.filter(m =>
+      !modelInput || m.id.toLowerCase().includes(modelInput.toLowerCase()) || (m.name && m.name.toLowerCase().includes(modelInput.toLowerCase()))
+    );
+
     return (
       <div className="flex flex-col h-full bg-gray-950">
         <div className="flex h-10 items-center justify-between border-b border-gray-800/80 px-4">
@@ -697,63 +731,71 @@ function AIPanel({ ai, problem, code, language, selectedCode, diagramElements, e
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          <div>
-            <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">Provider</label>
-            <select
-              value={config.provider}
-              onChange={e => {
-                const p = e.target.value as AIProvider;
-                setConfig(prev => ({ ...prev, provider: p, model: getModels(p)[0] }));
-              }}
-              className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 outline-none focus:border-purple-500/50 transition-colors"
-            >
-              {IS_LOCAL && (
-                <optgroup label="Local CLI (no API key)">
-                  <option value="claude-code">Claude Code</option>
-                  <option value="codex">Codex CLI</option>
-                  <option value="gemini-cli">Gemini CLI</option>
-                </optgroup>
-              )}
-              <optgroup label="Cloud API (needs key)">
-                <option value="openai">OpenAI</option>
-                <option value="anthropic">Anthropic</option>
-                <option value="google">Google Gemini</option>
-                <option value="deepseek">DeepSeek</option>
-                <option value="qwen">Qwen (Alibaba)</option>
-              </optgroup>
-            </select>
-          </div>
-          <div>
-            <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">Model</label>
-            <select
-              value={config.model}
-              onChange={e => setConfig(prev => ({ ...prev, model: e.target.value }))}
-              className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 outline-none focus:border-purple-500/50 transition-colors"
-            >
-              {getModels(config.provider).map(m => <option key={m} value={m}>{m}</option>)}
-            </select>
-          </div>
-          {LOCAL_PROVIDERS.has(config.provider) ? (
+          {IS_LOCAL && (
             <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-3.5">
               <div className="flex items-center gap-2 mb-1">
                 <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs font-medium text-green-400">Local mode</span>
+                <span className="text-xs font-medium text-green-400">Local AI mode</span>
               </div>
-              <p className="text-xs text-gray-400 leading-relaxed">No API key needed. Uses your local CLI installation. Make sure the server is running with <code className="rounded bg-gray-800 px-1.5 py-0.5 text-green-300 text-[11px]">npm run dev</code></p>
-            </div>
-          ) : (
-            <div>
-              <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">API Key</label>
-              <input
-                type="password"
-                value={config.apiKey}
-                onChange={e => setConfig(prev => ({ ...prev, apiKey: e.target.value }))}
-                placeholder="sk-..."
-                className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors"
-              />
-              <p className="mt-1.5 text-[10px] text-gray-600">Stored locally in your browser. Never sent to our servers.</p>
+              <p className="text-xs text-gray-400 leading-relaxed">Dev mode detected. Local AI tools available. Make sure the server is running with <code className="rounded bg-gray-800 px-1.5 py-0.5 text-green-300 text-[11px]">pnpm dev</code></p>
             </div>
           )}
+          <div>
+            <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">Endpoint URL</label>
+            <input
+              type="text"
+              value={config.endpointUrl}
+              onChange={e => setConfig(prev => ({ ...prev, endpointUrl: e.target.value }))}
+              placeholder="https://api.openai.com/v1"
+              className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors"
+            />
+          </div>
+          <div>
+            <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">API Key</label>
+            <input
+              type="password"
+              value={config.apiKey}
+              onChange={e => setConfig(prev => ({ ...prev, apiKey: e.target.value }))}
+              placeholder="sk-..."
+              className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors"
+            />
+            <p className="mt-1.5 text-[10px] text-gray-600">Stored locally in your browser. Never sent to our servers.</p>
+          </div>
+          <div ref={modelDropdownRef} className="relative">
+            <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-gray-500">
+              Model
+              {modelsLoading && <span className="ml-2 text-purple-400 animate-pulse">loading...</span>}
+            </label>
+            <input
+              type="text"
+              value={modelInput}
+              onChange={e => {
+                setModelInput(e.target.value);
+                setConfig(prev => ({ ...prev, model: e.target.value }));
+                setShowModelDropdown(true);
+              }}
+              onFocus={() => setShowModelDropdown(true)}
+              placeholder="Type or select a model..."
+              className="w-full rounded-lg border border-gray-700/80 bg-gray-900 px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors"
+            />
+            {showModelDropdown && filteredModels.length > 0 && (
+              <div className="absolute z-50 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-gray-700/80 bg-gray-900 shadow-xl">
+                {filteredModels.map(m => (
+                  <button
+                    key={m.id}
+                    onClick={() => {
+                      setModelInput(m.id);
+                      setConfig(prev => ({ ...prev, model: m.id }));
+                      setShowModelDropdown(false);
+                    }}
+                    className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-purple-500/10 hover:text-purple-300 transition-colors"
+                  >
+                    {m.id}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <button
             onClick={handleSaveSettings}
             className="w-full rounded-xl bg-purple-600 py-2.5 text-sm font-semibold text-white transition-all hover:bg-purple-500 active:scale-[0.98]"
@@ -775,9 +817,11 @@ function AIPanel({ ai, problem, code, language, selectedCode, diagramElements, e
             <Bot className="h-3.5 w-3.5 text-purple-400" />
           </div>
           <span className="text-xs font-semibold text-gray-200">AI Tutor</span>
-          <span className="rounded-full bg-gray-800 px-2 py-0.5 text-[10px] font-medium text-gray-400">
-            {PROVIDER_LABELS[config.provider] || config.provider}
-          </span>
+          {config.model && (
+            <span className="rounded-full bg-gray-800 px-2 py-0.5 text-[10px] font-medium text-gray-400 max-w-[120px] truncate">
+              {config.model}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-0.5">
           {ai.messages.length > 0 && (
