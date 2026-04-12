@@ -11,10 +11,10 @@ All-in-one SWE interview prep platform: DSA, LLD, HLD, Behavioral -- with code e
 - **Database**: TursoDB (libSQL) -- migrated from Supabase
 - **Auth**: Google One Tap (OAuth2) + JWT tokens -- no redirect flow
 - **Backend**: Vercel serverless functions (`api/` directory, `.mjs` files)
-- **Local dev server**: Express on port 3456 (`server/index.mjs`) -- CLI bridge for claude/codex/gemini
+- **Local dev server**: Express on port 3456 (`server/index.mjs`) -- local AI server for claude/codex/gemini
 - **Code editor**: Monaco Editor (`@monaco-editor/react`)
 - **Diagrams**: Excalidraw
-- **AI**: Multi-provider streaming (OpenAI, Anthropic, Google, DeepSeek, Qwen, + local CLI tools)
+- **AI**: Multi-provider streaming (OpenAI, Anthropic, Google, DeepSeek, Qwen, + local AI tools)
 - **Analytics/Feedback**: SASS Maker SDK
 - **Deployment**: Vercel
 
@@ -62,14 +62,14 @@ src/
 api/                    # Vercel serverless functions
   auth/google.mjs       # POST: verify Google credential, create/find user, return JWT
   auth/verify.mjs       # GET: verify JWT
-  chat.mjs              # POST: CLI bridge (spawns claude/codex/gemini, streams SSE)
+  chat.mjs              # POST: local AI server (spawns claude/codex/gemini, streams SSE)
   chats.mjs             # GET/POST/DELETE: per-problem chat history (TursoDB)
   notes.mjs             # GET/POST: per-problem notes (TursoDB)
   problems.mjs          # GET/POST: user-imported problems (TursoDB)
   db/client.mjs         # TursoDB client singleton
   db/schema.mjs         # Auto-create tables on first request
 
-server/                 # Local dev Express server (CLI bridge only)
+server/                 # Local dev Express server (local AI only)
   index.mjs             # POST /chat -> spawn CLI tools, SSE streaming
 ```
 
@@ -85,9 +85,9 @@ server/                 # Local dev Express server (CLI bridge only)
 ## Commands
 
 ```bash
-npm run dev              # Express CLI bridge (:3456) + Vite (:5173) concurrently
+npm run dev              # Express local AI server (:3456) + Vite (:5173) concurrently
 npm run dev:frontend     # Vite only
-npm run server           # Express CLI bridge only
+npm run server           # Express local AI server only
 npm run build            # vite build -> dist/
 npm run fetch-library    # Clone repos, parse markdown, write JSON
 npm run lint             # ESLint
@@ -114,7 +114,7 @@ Guest mode works with zero env vars -- all data stays in localStorage.
 - 4-category interview prep (DSA, LLD, HLD, Behavioral) with static problem sets
 - Monaco code editor with sandboxed JS/TS execution
 - Excalidraw diagram integration
-- Multi-provider AI streaming (8 providers including 3 local CLI tools)
+- Multi-provider AI streaming (8 providers including 3 local AI tools)
 - Spaced repetition (SM-2) with Anki-style review
 - Google OAuth + guest mode
 - TursoDB backend for chat history, notes, imported problems

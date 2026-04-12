@@ -15,7 +15,7 @@ Interview Coder consolidates everything into a single platform with integrated c
 
 - **Interactive Code Editor** - Write and run TypeScript code with Monaco Editor (VS Code engine)
 - **Visual Design Tool** - Draw system architecture diagrams with Excalidraw integration
-- **Multi-Provider AI Hints** - Get Socratic guidance without spoilers from OpenAI, Anthropic, Google Gemini, DeepSeek, or local CLI tools
+- **Multi-Provider AI Hints** - Get Socratic guidance without spoilers from OpenAI, Anthropic, Google Gemini, DeepSeek, or local AI tools
 - **Spaced Repetition System** - Review concepts using Anki-style flashcards with SM-2 algorithm
 - **LeetCode Import** - Fetch problems directly via LeetCode API
 - **Progress Tracking** - Monitor completion rates across DSA, LLD, HLD, and Behavioral categories
@@ -46,7 +46,7 @@ graph TB
     end
 
     subgraph "Local Dev Server - Express"
-        R[CLI Bridge API] --> S[claude CLI]
+        R[Local AI API] --> S[claude CLI]
         R --> T[codex CLI]
         R --> U[gemini CLI]
     end
@@ -87,7 +87,7 @@ graph TB
 **Key Components:**
 
 - **Frontend**: React 19 SPA with TailwindCSS, Monaco Editor for code, Excalidraw for diagrams
-- **Local Dev Server**: Express proxy for CLI tools (claude, codex, gemini) to avoid API keys during development
+- **Local Dev Server**: Express local AI server for CLI tools (claude, codex, gemini) to avoid API keys during development
 - **Database**: Supabase PostgreSQL stores problems, user progress, notes, and spaced repetition schedules
 - **External Integrations**: LeetCode API for problem import, multiple AI providers for hints
 
@@ -128,7 +128,7 @@ graph TB
    npm run dev
    ```
 
-   Opens at `http://localhost:5173` (frontend) and `http://localhost:3456` (CLI bridge)
+   Opens at `http://localhost:5173` (frontend) and `http://localhost:3456` (local AI server)
 
 ### Production Build
 
