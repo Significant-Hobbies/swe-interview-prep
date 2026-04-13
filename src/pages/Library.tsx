@@ -17,7 +17,7 @@ import {
   Layout as LayoutIcon,
 } from 'lucide-react';
 import { useLibrary } from '../hooks/useLibrary';
-import type { RepoManifestEntry } from '../adapters/types';
+import type { RepoFormat, RepoManifestEntry } from '../adapters/types';
 
 const ICON_MAP: Record<string, typeof Code2> = {
   FileCode2,
@@ -60,6 +60,25 @@ function getTagColor(tag: string): string {
   return 'bg-gray-700/50 text-gray-400';
 }
 
+const FORMAT_BADGES: Record<RepoFormat, { label: string; cls: string }> = {
+  'qa': { label: 'Q&A', cls: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30' },
+  'visual': { label: 'Visual', cls: 'bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/30' },
+  'long-form': { label: 'Long-form', cls: 'bg-sky-500/15 text-sky-300 border-sky-500/30' },
+  'code-heavy': { label: 'Code-heavy', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
+};
+
+function formatRelative(iso: string): string {
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (days < 1) return 'today';
+  if (days < 2) return 'yesterday';
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months}mo ago`;
+  const years = Math.floor(days / 365);
+  return `${years}y ago`;
+}
+
 function RepoCard({ repo }: { repo: RepoManifestEntry }) {
   const IconComponent = ICON_MAP[repo.icon] || BookOpen;
 
@@ -72,8 +91,17 @@ function RepoCard({ repo }: { repo: RepoManifestEntry }) {
       />
 
       <div className="flex items-start justify-between mb-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10">
-          <IconComponent className="h-5 w-5 text-emerald-400" />
+        <div className="flex items-center gap-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10">
+            <IconComponent className="h-5 w-5 text-emerald-400" />
+          </div>
+          {repo.format && FORMAT_BADGES[repo.format] && (
+            <span
+              className={`relative z-20 inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide ${FORMAT_BADGES[repo.format].cls}`}
+            >
+              {FORMAT_BADGES[repo.format].label}
+            </span>
+          )}
         </div>
         <a
           href={repo.source}
@@ -110,14 +138,21 @@ function RepoCard({ repo }: { repo: RepoManifestEntry }) {
         )}
       </div>
 
-      <div className="mt-4 flex items-center gap-4 text-xs text-gray-500 border-t border-gray-800 pt-3">
-        <span className="flex items-center gap-1">
-          <BookOpen className="h-3.5 w-3.5" />
-          {repo.sectionCount} sections
-        </span>
-        <span className="flex items-center gap-1">
-          <FileCode2 className="h-3.5 w-3.5" />
-          {repo.exerciseCount} exercises
+      <div className="mt-4 flex items-center justify-between gap-3 text-xs text-gray-500 border-t border-gray-800 pt-3">
+        <div className="flex items-center gap-4">
+          <span className="flex items-center gap-1">
+            <BookOpen className="h-3.5 w-3.5" />
+            {repo.sectionCount}
+          </span>
+          {repo.exerciseCount > 0 && (
+            <span className="flex items-center gap-1">
+              <FileCode2 className="h-3.5 w-3.5" />
+              {repo.exerciseCount}
+            </span>
+          )}
+        </div>
+        <span className="text-gray-600" title={`Last fetched ${new Date(repo.lastFetched).toLocaleString()}`}>
+          {formatRelative(repo.lastFetched)}
         </span>
       </div>
     </div>

@@ -105,37 +105,34 @@ export default function RepoView() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Mode Toggle */}
-          <div className="flex items-center rounded-lg border border-gray-700 bg-gray-900 p-0.5">
-            <button
-              onClick={() => setMode('read')}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                mode === 'read'
-                  ? 'bg-emerald-500/20 text-emerald-400'
-                  : 'text-gray-400 hover:text-gray-200'
-              }`}
-            >
-              <BookOpen className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Read</span>
-            </button>
-            <div className="relative">
+          {/* Mode Toggle — only show when practice is possible */}
+          {hasExercises && (
+            <div className="flex items-center rounded-lg border border-gray-700 bg-gray-900 p-0.5">
               <button
-                onClick={() => hasExercises && setMode('practice')}
-                disabled={!hasExercises}
+                onClick={() => setMode('read')}
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                  mode === 'read'
+                    ? 'bg-emerald-500/20 text-emerald-400'
+                    : 'text-gray-400 hover:text-gray-200'
+                }`}
+              >
+                <BookOpen className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Read</span>
+              </button>
+              <button
+                onClick={() => setMode('practice')}
                 className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors ${
                   mode === 'practice'
                     ? 'bg-emerald-500/20 text-emerald-400'
-                    : hasExercises
-                    ? 'text-gray-400 hover:text-gray-200'
-                    : 'text-gray-600 cursor-not-allowed'
+                    : 'text-gray-400 hover:text-gray-200'
                 }`}
-                title={!hasExercises ? 'No exercises available for this repo' : 'Practice exercises'}
+                title="Practice exercises"
               >
                 <Dumbbell className="h-3.5 w-3.5" />
                 <span className="hidden sm:inline">Practice</span>
               </button>
             </div>
-          </div>
+          )}
 
           {/* GitHub Link */}
           <a
@@ -228,7 +225,7 @@ export default function RepoView() {
           {/* Main content */}
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-8 lg:px-12">
             {activeSection?.content ? (
-              <MarkdownViewer content={activeSection.content} />
+              <MarkdownViewer content={activeSection.content} sourceBaseUrl={repo.sourceBaseUrl} />
             ) : (
               <div className="flex flex-col items-center justify-center py-16 text-center">
                 <BookOpen className="h-8 w-8 text-gray-600 mb-3" />

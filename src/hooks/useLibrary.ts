@@ -33,8 +33,8 @@ function enrichExercises(repoId: string, data: ParsedRepo): ParsedRepo {
     ? []
     : deriveExercisesFromSections(data.sections, {
         baseTags,
-        maxExercises: 70,
-        minScore: 70,
+        maxExercises: 100,
+        minScore: 55,
       });
 
   const deduped = new Map<string, (typeof existing)[number]>();

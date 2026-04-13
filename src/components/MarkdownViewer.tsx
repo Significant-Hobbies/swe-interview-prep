@@ -5,6 +5,15 @@ import rehypeHighlight from 'rehype-highlight';
 
 interface MarkdownViewerProps {
   content: string;
+  sourceBaseUrl?: string;
+}
+
+function resolveImg(src: string | undefined, base?: string): string | undefined {
+  if (!src) return src;
+  if (/^(https?:|data:)/i.test(src)) return src;
+  if (!base) return undefined; // drop known-broken relative refs
+  const clean = src.replace(/^\.\//, '').replace(/^\/+/, '');
+  return `${base.replace(/\/$/, '')}/${clean}`;
 }
 
 function extractText(node: React.ReactNode): string {
@@ -34,7 +43,7 @@ function getCalloutStyle(rawText: string): string {
   return 'border-gray-700 bg-gray-900/40 text-gray-300';
 }
 
-export default function MarkdownViewer({ content }: MarkdownViewerProps) {
+export default function MarkdownViewer({ content, sourceBaseUrl }: MarkdownViewerProps) {
   return (
     <div
       className="prose prose-invert prose-base max-w-none
@@ -98,6 +107,11 @@ export default function MarkdownViewer({ content }: MarkdownViewerProps) {
               {children}
             </summary>
           ),
+          img: ({ src, alt, ...props }) => {
+            const resolved = resolveImg(typeof src === 'string' ? src : undefined, sourceBaseUrl);
+            if (!resolved) return null;
+            return <img {...props} src={resolved} alt={alt || ''} loading="lazy" />;
+          },
           h2: ({ children, ...props }) => (
             <h2 {...props} className="scroll-mt-20">
               {children}

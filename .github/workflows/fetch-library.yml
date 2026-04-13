@@ -1,0 +1,46 @@
+name: Refresh Library
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Fetch library content
+        run: pnpm fetch-library
+
+      - name: Open PR if changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore(library): weekly refresh'
+          title: 'chore(library): weekly refresh'
+          body: |
+            Automated refresh of `src/data/library/` via `pnpm fetch-library`.
+
+            Review the diff before merging — upstream repos may have added/removed
+            sections, renamed files, or broken the parser.
+          branch: chore/library-refresh
+          delete-branch: true
+          add-paths: |
+            src/data/library/**

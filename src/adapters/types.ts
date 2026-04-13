@@ -41,13 +41,17 @@ export interface RepoAdapter {
   parseContent(files: RepoFile[]): ParsedRepo;
 }
 
+export type RepoFormat = 'qa' | 'visual' | 'long-form' | 'code-heavy';
+
 export interface RepoManifestEntry {
   id: string;
   name: string;
   source: string;
+  sourceBaseUrl?: string;
   description: string;
   tags: string[];
   icon: string;
+  format?: RepoFormat;
   sectionCount: number;
   exerciseCount: number;
   lastFetched: string;
