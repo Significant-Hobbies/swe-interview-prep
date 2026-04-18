@@ -3,33 +3,12 @@ import { useEffect } from 'react';
 import { useAuth } from './contexts/AuthContext';
 import { saasmaker } from './lib/saasmaker';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
-import { CategoryProvider } from './contexts/CategoryContext';
 import Layout from './components/Layout';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import Patterns from './pages/Patterns';
-import ProblemView from './pages/ProblemView';
-import AnkiReview from './pages/AnkiReview';
-import ImportProblem from './pages/ImportProblem';
-import Library from './pages/Library';
-import RepoView from './pages/RepoView';
+import Today from './pages/Today';
+import Concepts from './pages/Concepts';
+import Review from './pages/Review';
 import Playground from './pages/Playground';
 import Login from './pages/Login';
-import VibeLearning from './pages/VibeLearning';
-
-function CategoryRoutes() {
-  return (
-    <CategoryProvider>
-      <Routes>
-        <Route index element={<Dashboard />} />
-        <Route path="patterns" element={<Patterns />} />
-        <Route path="problem/:id" element={<ProblemView />} />
-        <Route path="review" element={<AnkiReview />} />
-        <Route path="import" element={<ImportProblem />} />
-      </Routes>
-    </CategoryProvider>
-  );
-}
 
 function App() {
   const { user, isGuest, loading } = useAuth();
@@ -56,17 +35,20 @@ function App() {
       <SaaSMakerFeedback />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="library" element={<Library />} />
-          <Route path="library/:repoSlug" element={<RepoView />} />
+          <Route index element={<Today />} />
+          <Route path="concepts" element={<Concepts />} />
+          <Route path="review" element={<Review />} />
           <Route path="playground" element={<Playground />} />
-          <Route path="vibe-learning" element={<VibeLearning />} />
-          <Route path=":category/*" element={<CategoryRoutes />} />
-          {/* Legacy routes redirect to DSA */}
-          <Route path="patterns" element={<Navigate to="/dsa/patterns" replace />} />
-          <Route path="problem/:id" element={<Navigate to="/dsa/problem/:id" replace />} />
-          <Route path="anki" element={<Navigate to="/dsa/review" replace />} />
-          <Route path="import" element={<Navigate to="/dsa/import" replace />} />
+          {/* Legacy route catch-alls */}
+          <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="p/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="lld/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="hld/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="behavioral/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="library" element={<Navigate to="/concepts" replace />} />
+          <Route path="library/*" element={<Navigate to="/concepts" replace />} />
+          <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </>

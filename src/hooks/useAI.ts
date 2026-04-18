@@ -1,12 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAuth, getAuthToken } from '../contexts/AuthContext';
-import {
-  type AIConfig,
-  getAIConfig,
-  saveAIConfig as _saveAIConfig,
-} from '@saas-maker/ai';
 
-export type { AIConfig };
+export interface AIConfig {
+  endpointUrl: string;
+  apiKey: string;
+  model: string;
+}
 
 // Local AI providers that don't need API keys (dev only)
 export const LOCAL_PROVIDERS = new Set(['claude-code', 'codex', 'gemini-cli']);
@@ -21,8 +20,23 @@ interface AIMessage {
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
+function readConfig(): AIConfig {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { endpointUrl: '', apiKey: '', model: '' };
+    const parsed = JSON.parse(raw);
+    return {
+      endpointUrl: parsed.endpointUrl || '',
+      apiKey: parsed.apiKey || '',
+      model: parsed.model || '',
+    };
+  } catch {
+    return { endpointUrl: '', apiKey: '', model: '' };
+  }
+}
+
 export function loadAIConfig(): AIConfig {
-  const config = getAIConfig(STORAGE_KEY);
+  const config = readConfig();
   // If dev mode and config is empty, default to local
   if (IS_LOCAL && !config.endpointUrl && !config.apiKey && !config.model) {
     return { endpointUrl: '', apiKey: '', model: 'claude-code-local' };
@@ -31,7 +45,7 @@ export function loadAIConfig(): AIConfig {
 }
 
 export function saveAIConfig(config: AIConfig) {
-  _saveAIConfig(config, STORAGE_KEY);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
 }
 
 const SYSTEM_PROMPT = `You are a DSA (Data Structures & Algorithms) coding tutor embedded in a practice tool. The student is working on a coding problem and needs guidance.

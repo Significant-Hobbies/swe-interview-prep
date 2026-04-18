@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { getUserById } from '../db/users.mjs';
+import { getUserById } from '../../shared/db/users.mjs';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {

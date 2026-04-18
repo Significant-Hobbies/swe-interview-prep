@@ -10,7 +10,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fetch-library": "node scripts/fetch-library.mjs"
+    "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs",
+    "build-concept-index": "node scripts/build-concept-index.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
@@ -20,7 +24,6 @@
     "@excalidraw/excalidraw": "^0.18.0",
     "@libsql/client": "^0.17.2",
     "@monaco-editor/react": "^4.7.0",
-    "@saas-maker/ai": "file:/Users/sarthakagrawal/Desktop/saas-maker/packages/ai",
     "@saas-maker/changelog-widget": "0.2.1",
     "@saas-maker/feedback": "0.2.1",
     "@saas-maker/sdk": "0.3.1",
@@ -39,22 +42,27 @@
     "react-router-dom": "^7.13.2",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
-    "sucrase": "^3.35.1"
+    "sucrase": "^3.35.1",
+    "ts-fsrs": "^5.3.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "^4.2.2",
     "@types/lz-string": "^1.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vercel/node": "^5.7.4",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/ui": "^4.1.4",
     "eslint": "^10.1.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "happy-dom": "^20.9.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
-    "vite": "^8.0.2"
+    "vite": "^8.0.2",
+    "vitest": "^4.1.4"
   }
 }

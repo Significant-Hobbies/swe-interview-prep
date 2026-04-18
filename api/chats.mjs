@@ -1,4 +1,4 @@
-import { getDb } from './db/client.mjs';
+import { getDb } from '../shared/db/client.mjs';
 import { requireAuth } from './auth/verify.mjs';
 import { randomBytes } from 'crypto';
 
