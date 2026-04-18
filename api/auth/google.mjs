@@ -1,7 +1,7 @@
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
-import { findOrCreateUser } from '../db/users.mjs';
-import { initDatabase } from '../db/schema.mjs';
+import { findOrCreateUser } from '../../shared/db/users.mjs';
+import { initDatabase } from '../../shared/db/schema.mjs';
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const JWT_SECRET = process.env.JWT_SECRET;

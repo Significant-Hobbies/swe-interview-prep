@@ -1,7 +1,7 @@
-import { getDb } from '../db/client.mjs';
-import { initDatabase } from '../db/schema.mjs';
-import { requireAuth } from '../auth/verify.mjs';
-import { generate, parseJSON } from '../lib/ai.mjs';
+import { getDb } from '../shared/db/client.mjs';
+import { initDatabase } from '../shared/db/schema.mjs';
+import { requireAuth } from '../api/auth/verify.mjs';
+import { generate, parseJSON } from '../shared/lib/ai.mjs';
 import { randomBytes } from 'crypto';
 
 let initialized = false;

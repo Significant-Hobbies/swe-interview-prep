@@ -1,7 +1,7 @@
-import { getDb } from '../db/client.mjs';
-import { initDatabase } from '../db/schema.mjs';
-import { requireAuth } from '../auth/verify.mjs';
-import { reviewConcept, decayConfidence } from '../lib/fsrs.mjs';
+import { getDb } from '../shared/db/client.mjs';
+import { initDatabase } from '../shared/db/schema.mjs';
+import { requireAuth } from '../api/auth/verify.mjs';
+import { reviewConcept, decayConfidence } from '../shared/lib/fsrs.mjs';
 import { randomBytes } from 'crypto';
 
 let initialized = false;
