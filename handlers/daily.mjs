@@ -3,6 +3,7 @@ import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
 import { decayConfidence } from '../shared/lib/fsrs.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
+import { pickDailyConcept } from '../shared/lib/heuristics.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -117,11 +118,21 @@ ${recentSummary}
 Pick today's single highest-leverage activity. JSON only.`;
 
     let plan;
-    try {
-      const text = await generate({ ...(aiConfig || {}), system: SYSTEM, prompt, maxTokens: 800 });
-      plan = parseJSON(text);
-    } catch (e) {
-      return res.status(500).json({ error: 'Daily gen failed: ' + e.message });
+    const useAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+    if (useAI) {
+      try {
+        const text = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 800 });
+        plan = parseJSON(text);
+      } catch (e) {
+        // AI failed — fall back to heuristic instead of 500
+        plan = pickDailyConcept(concepts, masteryRows.rows);
+        if (plan) plan.rationale = `[AI failed: ${e.message.slice(0,120)}] ${plan.rationale}`;
+      }
+    } else {
+      plan = pickDailyConcept(concepts, masteryRows.rows);
+    }
+    if (!plan) {
+      return res.status(500).json({ error: 'No suitable concept found' });
     }
 
     const id = randomBytes(16).toString('hex');

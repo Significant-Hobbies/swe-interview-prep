@@ -1,6 +1,7 @@
 import { requireAuth } from '../api/auth/verify.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
+import { tagConcepts } from '../shared/lib/heuristics.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -61,11 +62,15 @@ ${code.slice(0, 4000)}
 
 Tag now. JSON only.`;
 
-  try {
-    const text = await generate({ ...(aiConfig || {}), system: SYSTEM, prompt, maxTokens: 600 });
-    const parsed = parseJSON(text);
-    return res.status(200).json(parsed);
-  } catch (e) {
-    return res.status(500).json({ error: 'Tag failed: ' + e.message, concepts: [] });
+  const useAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+  if (useAI) {
+    try {
+      const text = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 600 });
+      const parsed = parseJSON(text);
+      return res.status(200).json({ ...parsed, generator: 'ai' });
+    } catch {
+      // Fall through to heuristic
+    }
   }
+  return res.status(200).json({ concepts: tagConcepts(code, language), generator: 'heuristic' });
 }

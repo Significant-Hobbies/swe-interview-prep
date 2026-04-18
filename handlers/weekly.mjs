@@ -3,7 +3,23 @@ import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
 import { decayConfidence } from '../shared/lib/fsrs.mjs';
 import { generate } from '../shared/lib/ai.mjs';
+import { buildWeeklyReport } from '../shared/lib/heuristics.mjs';
 import { randomBytes } from 'crypto';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+let CONCEPTS = null;
+function loadConcepts() {
+  if (!CONCEPTS) {
+    try {
+      const p = join(__dirname, '..', 'src', 'data', 'concepts.json');
+      CONCEPTS = JSON.parse(readFileSync(p, 'utf8')).concepts;
+    } catch { CONCEPTS = []; }
+  }
+  return CONCEPTS;
+}
 
 let initialized = false;
 async function ensureInit() {
@@ -97,10 +113,28 @@ ${activity.rows.slice(0, 30).map(r => `${r.created_at}: ${r.kind} concepts=${r.c
 Write the review now.`;
 
     let report;
-    try {
-      report = await generate({ ...(aiConfig || {}), system: SYSTEM, prompt, maxTokens: 1500 });
-    } catch (e) {
-      return res.status(500).json({ error: 'Weekly gen failed: ' + e.message });
+    let finalStats = stats;
+    const useAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+    if (useAI) {
+      try {
+        report = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 1500 });
+      } catch {
+        // Fall through to heuristic
+      }
+    }
+    if (!report) {
+      const activityForHeur = activity.rows.map(r => ({
+        ...r,
+        concept_ids: r.concept_ids ? JSON.parse(r.concept_ids) : [],
+      }));
+      const built = buildWeeklyReport({
+        activity: activityForHeur,
+        mastery: mastery.rows,
+        feynman: feynman.rows,
+        concepts: loadConcepts(),
+      });
+      report = built.reportMd;
+      finalStats = built.stats;
     }
 
     const id = randomBytes(16).toString('hex');
@@ -110,10 +144,10 @@ Write the review now.`;
               report_md = excluded.report_md,
               stats_json = excluded.stats_json,
               created_at = datetime('now')`,
-      args: [id, user.id, ws, report, JSON.stringify(stats)],
+      args: [id, user.id, ws, report, JSON.stringify(finalStats)],
     });
 
-    return res.status(200).json({ review: { reportMd: report, stats, createdAt: new Date().toISOString() } });
+    return res.status(200).json({ review: { reportMd: report, stats: finalStats, createdAt: new Date().toISOString() } });
   }
 
   return res.status(405).json({ error: 'Method not allowed' });
