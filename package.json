@@ -24,7 +24,6 @@
     "@excalidraw/excalidraw": "^0.18.0",
     "@libsql/client": "^0.17.2",
     "@monaco-editor/react": "^4.7.0",
-    "@saas-maker/ai": "file:/Users/sarthakagrawal/Desktop/saas-maker/packages/ai",
     "@saas-maker/changelog-widget": "0.2.1",
     "@saas-maker/feedback": "0.2.1",
     "@saas-maker/sdk": "0.3.1",
