@@ -9,4 +9,9 @@ export default defineConfig({
       '/api': 'http://localhost:3456',
     },
   },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    include: ['src/**/*.test.{ts,tsx}', 'api/**/*.test.{mjs,js}'],
+  },
 })

@@ -1,10 +1,15 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
+import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import DiagramEditor from '../components/DiagramEditor';
 import CodeEditor from '../components/CodeEditor';
+import CompanionPanel from '../components/CompanionPanel';
+import FeynmanGate from '../components/FeynmanGate';
 import { useCodeExecution } from '../hooks/useCodeExecution';
-import { Code2, PenTool, GripVertical, Play, Loader2, Copy, Check, Share2, Clock, FileText, Eye, Pencil, AlertTriangle } from 'lucide-react';
+import { useTagger } from '../hooks/useTagger';
+import { Code2, PenTool, GripVertical, Play, Loader2, Copy, Check, Share2, Clock, FileText, Eye, Pencil, AlertTriangle, Sparkles, Brain } from 'lucide-react';
 import MarkdownViewer from '../components/MarkdownViewer';
 import type { Language } from '../types';
 
@@ -13,7 +18,7 @@ const LANG_KEY = 'playground-language';
 const PROBLEM_KEY = 'playground-problem';
 const PANELS_KEY = 'playground-panels';
 
-type PanelId = 'problem' | 'code' | 'diagram';
+type PanelId = 'problem' | 'code' | 'diagram' | 'companion';
 
 function loadFromHash(): { code: string; lang: Language } | null {
   const hash = window.location.hash.slice(1);
@@ -33,11 +38,12 @@ function loadPanels(): Set<PanelId> {
     const saved = localStorage.getItem(PANELS_KEY);
     if (saved) return new Set(JSON.parse(saved));
   } catch {}
-  return new Set(['code', 'diagram']);
+  return new Set(['code', 'companion']);
 }
 
 export default function Playground() {
   const shared = loadFromHash();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [language, setLanguage] = useState<Language>(
     () => shared?.lang || (localStorage.getItem(LANG_KEY) as Language) || 'typescript'
@@ -55,6 +61,37 @@ export default function Playground() {
   const [problemPreview, setProblemPreview] = useState(false);
   const [bottomTab, setBottomTab] = useState<'output' | 'problems'>('output');
   const [markers, setMarkers] = useState<any[]>([]);
+  const [feynmanOpen, setFeynmanOpen] = useState(false);
+  const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
+
+  useTagger(code, language, problem, (tags) => {
+    setTaggedConcepts(tags.map(t => t.concept_id));
+  });
+
+  // Hydrate from query params (Today / Concepts deep-links)
+  useEffect(() => {
+    const conceptId = searchParams.get('concept');
+    const promptText = searchParams.get('prompt');
+    if (!conceptId && !promptText) return;
+    const concept = conceptId ? CONCEPT_BY_ID[conceptId] : null;
+    const newProblem = [
+      promptText || '',
+      concept ? `\n\n**Concept:** ${concept.name}\n${concept.description}` : '',
+    ].filter(Boolean).join('').trim();
+    if (newProblem) {
+      setProblem(newProblem);
+      localStorage.setItem(PROBLEM_KEY, newProblem);
+      setVisiblePanels(prev => {
+        const next = new Set(prev);
+        next.add('problem');
+        localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
+        return next;
+      });
+    }
+    if (conceptId) setTaggedConcepts([conceptId]);
+    setSearchParams({}, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const togglePanel = (id: PanelId) => {
     setVisiblePanels(prev => {
@@ -133,7 +170,7 @@ export default function Playground() {
       active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'
     }`;
 
-  const panels = ['problem', 'code', 'diagram'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
+  const panels = ['problem', 'code', 'diagram', 'companion'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
   const panelSize = Math.floor(100 / panels.length);
 
   return (
@@ -155,6 +192,10 @@ export default function Playground() {
               <PenTool className="h-3 w-3" />
               Draw
             </button>
+            <button onClick={() => togglePanel('companion')} className={panelBtn('companion', visiblePanels.has('companion'))}>
+              <Sparkles className="h-3 w-3" />
+              Companion
+            </button>
           </div>
 
           {visiblePanels.has('code') && (
@@ -169,6 +210,15 @@ export default function Playground() {
           )}
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setFeynmanOpen(true)}
+            disabled={code.length < 50}
+            className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-purple-400 transition-colors hover:bg-purple-900/20 hover:text-purple-300 disabled:opacity-30"
+            title="Explain what you built (Feynman gate)"
+          >
+            <Brain className="h-3.5 w-3.5" />
+            Explain
+          </button>
           <button
             onClick={handleShare}
             className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200"
@@ -365,9 +415,22 @@ export default function Playground() {
             {id === 'diagram' && (
               <DiagramEditor problemId="playground" />
             )}
+            {id === 'companion' && (
+              <CompanionPanel context={{ code, language, problem }} />
+            )}
           </PanelWrapper>
         ))}
       </PanelGroup>
+
+      <FeynmanGate
+        open={feynmanOpen}
+        onClose={() => setFeynmanOpen(false)}
+        code={code}
+        language={language}
+        problem={problem}
+        conceptIds={taggedConcepts}
+        problemId="playground"
+      />
     </div>
   );
 }
