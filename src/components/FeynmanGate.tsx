@@ -50,7 +50,7 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
     const token = getAuthToken();
     const config = loadAIConfig();
     try {
-      const res = await fetch('/api/feynman', {
+      const res = await fetch('/api/learning?action=feynman', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
 
       // Apply ratings to concept mastery
       if (data.ratings?.length && token) {
-        await fetch('/api/concepts', {
+        await fetch('/api/learning?action=concepts', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({
@@ -76,7 +76,7 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
       }
       // Activity log
       if (token) {
-        fetch('/api/activity', {
+        fetch('/api/learning?action=activity', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({
@@ -96,7 +96,7 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
   const skip = () => {
     const token = getAuthToken();
     if (token) {
-      fetch('/api/activity', {
+      fetch('/api/learning?action=activity', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ kind: 'feynman_skip', problemId, conceptIds }),

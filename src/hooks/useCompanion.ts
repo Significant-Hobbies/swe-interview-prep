@@ -145,7 +145,7 @@ ${ctx.code.slice(0, 6000)}
       // Fire-and-forget activity log
       const token = getAuthToken();
       if (token) {
-        fetch('/api/activity', {
+        fetch('/api/learning?action=activity', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({

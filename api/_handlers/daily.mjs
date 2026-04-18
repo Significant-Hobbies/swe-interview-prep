@@ -1,8 +1,8 @@
-import { getDb } from './db/client.mjs';
-import { initDatabase } from './db/schema.mjs';
-import { requireAuth } from './auth/verify.mjs';
-import { decayConfidence } from './lib/fsrs.mjs';
-import { generate, parseJSON } from './lib/ai.mjs';
+import { getDb } from '../db/client.mjs';
+import { initDatabase } from '../db/schema.mjs';
+import { requireAuth } from '../auth/verify.mjs';
+import { decayConfidence } from '../lib/fsrs.mjs';
+import { generate, parseJSON } from '../lib/ai.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 let CONCEPTS = null;
 function loadConcepts() {
   if (!CONCEPTS) {
-    const p = join(__dirname, '..', 'src', 'data', 'concepts.json');
+    const p = join(__dirname, '..', '..', 'src', 'data', 'concepts.json');
     CONCEPTS = JSON.parse(readFileSync(p, 'utf8')).concepts;
   }
   return CONCEPTS;

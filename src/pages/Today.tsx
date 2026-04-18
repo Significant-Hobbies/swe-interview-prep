@@ -33,11 +33,11 @@ export default function Today() {
   useEffect(() => {
     const token = getAuthToken();
     if (!token) { setLoading(false); return; }
-    fetch('/api/daily', { headers: { Authorization: `Bearer ${token}` } })
+    fetch('/api/learning?action=daily', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => { setPlan(d.plan); setLoading(false); })
       .catch(() => setLoading(false));
-    fetch('/api/weekly', { headers: { Authorization: `Bearer ${token}` } })
+    fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => setWeekly(d.review))
       .catch(() => {});
@@ -51,7 +51,7 @@ export default function Today() {
     if (!token) { setError('Sign in required'); setGenerating(false); return; }
     if (!config.model) { setError('Configure AI first'); setGenerating(false); return; }
     try {
-      const res = await fetch('/api/daily', {
+      const res = await fetch('/api/learning?action=daily', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ aiConfig: config, force }),

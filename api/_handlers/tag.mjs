@@ -1,6 +1,6 @@
-import { requireAuth } from './auth/verify.mjs';
-import { initDatabase } from './db/schema.mjs';
-import { generate, parseJSON } from './lib/ai.mjs';
+import { requireAuth } from '../auth/verify.mjs';
+import { initDatabase } from '../db/schema.mjs';
+import { generate, parseJSON } from '../lib/ai.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -11,7 +11,7 @@ async function ensureInit() {
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const conceptsPath = join(__dirname, '..', 'src', 'data', 'concepts.json');
+const conceptsPath = join(__dirname, '..', '..', 'src', 'data', 'concepts.json');
 let CONCEPTS = null;
 function loadConcepts() {
   if (!CONCEPTS) {

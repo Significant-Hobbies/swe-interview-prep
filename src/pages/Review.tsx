@@ -19,7 +19,7 @@ export default function Review() {
   useEffect(() => {
     const token = getAuthToken();
     if (!token) { setLoading(false); return; }
-    fetch('/api/weekly', { headers: { Authorization: `Bearer ${token}` } })
+    fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => { setReview(d.review); setLoading(false); })
       .catch(() => setLoading(false));
@@ -33,7 +33,7 @@ export default function Review() {
     if (!token) { setError('Sign in required'); setGenerating(false); return; }
     if (!config.model) { setError('Configure AI first'); setGenerating(false); return; }
     try {
-      const res = await fetch('/api/weekly', {
+      const res = await fetch('/api/learning?action=weekly', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ aiConfig: config }),

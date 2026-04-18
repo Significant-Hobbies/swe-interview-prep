@@ -31,7 +31,7 @@ export function useTagger(code: string, language: string, problem: string, onTag
       if (!config.model) return;
 
       try {
-        const res = await fetch('/api/tag', {
+        const res = await fetch('/api/learning?action=tag', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({ code, language, problem, aiConfig: config }),
@@ -47,12 +47,12 @@ export function useTagger(code: string, language: string, problem: string, onTag
           conceptId: t.concept_id,
           rating: t.depth === 'deep' ? 'easy' : t.depth === 'working' ? 'good' : 'hard',
         }));
-        await fetch('/api/concepts', {
+        await fetch('/api/learning?action=concepts', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({ updates }),
         });
-        await fetch('/api/activity', {
+        await fetch('/api/learning?action=activity', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({

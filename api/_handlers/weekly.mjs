@@ -1,8 +1,8 @@
-import { getDb } from './db/client.mjs';
-import { initDatabase } from './db/schema.mjs';
-import { requireAuth } from './auth/verify.mjs';
-import { decayConfidence } from './lib/fsrs.mjs';
-import { generate } from './lib/ai.mjs';
+import { getDb } from '../db/client.mjs';
+import { initDatabase } from '../db/schema.mjs';
+import { requireAuth } from '../auth/verify.mjs';
+import { decayConfidence } from '../lib/fsrs.mjs';
+import { generate } from '../lib/ai.mjs';
 import { randomBytes } from 'crypto';
 
 let initialized = false;

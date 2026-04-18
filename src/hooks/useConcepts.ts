@@ -37,7 +37,7 @@ export function useConceptMastery() {
     if (!token) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/concepts', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch('/api/learning?action=concepts', { headers: { Authorization: `Bearer ${token}` } });
       const data = await res.json();
       setMastery(data.mastery || {});
     } finally {
@@ -50,7 +50,7 @@ export function useConceptMastery() {
   const review = useCallback(async (conceptId: string, rating: 'again' | 'hard' | 'good' | 'easy') => {
     const token = getAuthToken();
     if (!token) return;
-    const res = await fetch('/api/concepts', {
+    const res = await fetch('/api/learning?action=concepts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ conceptId, rating }),
