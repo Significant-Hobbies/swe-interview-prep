@@ -18,13 +18,22 @@ export async function generate({ endpointUrl, apiKey, model, system, prompt, mes
     name: 'custom',
     headers: { 'x-gateway-project-id': 'swe-interview-prep' },
   });
-  const result = await generateText({
-    model: provider(m),
-    system,
-    messages: messages || [{ role: 'user', content: prompt }],
-    maxOutputTokens: maxTokens,
-  });
-  return result.text;
+  try {
+    const result = await generateText({
+      model: provider(m),
+      system,
+      messages: messages || [{ role: 'user', content: prompt }],
+      maxOutputTokens: maxTokens,
+    });
+    return result.text;
+  } catch (e) {
+    // Surface upstream API error body when present
+    const upstream = e?.responseBody || e?.data?.error?.message || e?.cause?.message;
+    const msg = upstream ? `${e.message} — ${typeof upstream === 'string' ? upstream.slice(0, 400) : JSON.stringify(upstream).slice(0, 400)}` : e.message;
+    const wrapped = new Error(msg);
+    wrapped.cause = e;
+    throw wrapped;
+  }
 }
 
 /**
