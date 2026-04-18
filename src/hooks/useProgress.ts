@@ -45,7 +45,7 @@ export function useProgress() {
       .catch(err => console.error('Failed to load progress:', err));
   }, [user]);
 
-  const syncToDb = useCallback((problemId: string, entry: Record<string, unknown>) => {
+  const syncToDb = useCallback((problemId: string, entry: any) => {
     if (!user) return;
     if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
     syncTimerRef.current = setTimeout(() => {

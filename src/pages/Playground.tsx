@@ -6,10 +6,11 @@ import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import DiagramEditor from '../components/DiagramEditor';
 import CodeEditor from '../components/CodeEditor';
 import CompanionPanel from '../components/CompanionPanel';
+import AmbientLibrary from '../components/AmbientLibrary';
 import FeynmanGate from '../components/FeynmanGate';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { useTagger } from '../hooks/useTagger';
-import { Code2, PenTool, GripVertical, Play, Loader2, Copy, Check, Share2, Clock, FileText, Eye, Pencil, AlertTriangle, Sparkles, Brain } from 'lucide-react';
+import { Code2, PenTool, GripVertical, Play, Loader2, Copy, Check, Share2, Clock, FileText, Eye, Pencil, AlertTriangle, Sparkles, Brain, BookOpen } from 'lucide-react';
 import MarkdownViewer from '../components/MarkdownViewer';
 import type { Language } from '../types';
 
@@ -18,7 +19,7 @@ const LANG_KEY = 'playground-language';
 const PROBLEM_KEY = 'playground-problem';
 const PANELS_KEY = 'playground-panels';
 
-type PanelId = 'problem' | 'code' | 'diagram' | 'companion';
+type PanelId = 'problem' | 'code' | 'diagram' | 'companion' | 'library';
 
 function loadFromHash(): { code: string; lang: Language } | null {
   const hash = window.location.hash.slice(1);
@@ -170,7 +171,7 @@ export default function Playground() {
       active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'
     }`;
 
-  const panels = ['problem', 'code', 'diagram', 'companion'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
+  const panels = ['problem', 'code', 'diagram', 'companion', 'library'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
   const panelSize = Math.floor(100 / panels.length);
 
   return (
@@ -195,6 +196,10 @@ export default function Playground() {
             <button onClick={() => togglePanel('companion')} className={panelBtn('companion', visiblePanels.has('companion'))}>
               <Sparkles className="h-3 w-3" />
               Companion
+            </button>
+            <button onClick={() => togglePanel('library')} className={panelBtn('library', visiblePanels.has('library'))}>
+              <BookOpen className="h-3 w-3" />
+              Library
             </button>
           </div>
 
@@ -417,6 +422,9 @@ export default function Playground() {
             )}
             {id === 'companion' && (
               <CompanionPanel context={{ code, language, problem }} />
+            )}
+            {id === 'library' && (
+              <AmbientLibrary conceptIds={taggedConcepts} />
             )}
           </PanelWrapper>
         ))}

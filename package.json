@@ -10,9 +10,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fetch-library": "node scripts/fetch-library.mjs",
+    "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs",
+    "build-concept-index": "node scripts/build-concept-index.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "^4.2.2",
     "@types/lz-string": "^1.5.0",
     "@types/react": "^19.2.14",

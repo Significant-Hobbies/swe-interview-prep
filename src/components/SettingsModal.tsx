@@ -44,7 +44,6 @@ export default function SettingsModal({ open, onClose }: Props) {
               input: 'w-full rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50',
               label: 'block text-xs font-medium text-gray-400 mb-1',
               button: 'w-full rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 disabled:opacity-50',
-              subtitle: 'text-xs text-gray-500 mb-4',
             }}
           />
         </div>

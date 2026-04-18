@@ -29,7 +29,7 @@ declare global {
       accounts: {
         id: {
           initialize: (config: any) => void;
-          prompt: () => void;
+          prompt: (callback?: (notification: any) => void) => void;
           renderButton: (parent: HTMLElement, options: any) => void;
         };
       };
