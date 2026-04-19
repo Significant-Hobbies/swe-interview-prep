@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, RefreshCw, FlaskConical, Brain, Loader2, Network } from 'lucide-react';
+import { Sparkles, RefreshCw, FlaskConical, Brain, Loader2, Network, Calendar, Hammer, Eye, BookOpen, MessageSquare } from 'lucide-react';
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
@@ -22,9 +22,21 @@ interface WeeklyReview {
   createdAt: string;
 }
 
+interface UpcomingPlan extends DailyPlan {
+  date: string;
+}
+
+const TASK_ICONS: Record<string, typeof Hammer> = {
+  build: Hammer,
+  review: Eye,
+  read: BookOpen,
+  explain: MessageSquare,
+};
+
 export default function Today() {
   const navigate = useNavigate();
   const [plan, setPlan] = useState<DailyPlan | null>(null);
+  const [upcoming, setUpcoming] = useState<UpcomingPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +47,7 @@ export default function Today() {
     if (!token) { setLoading(false); return; }
     fetch('/api/learning?action=daily', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
-      .then(d => { setPlan(d.plan); setLoading(false); })
+      .then(d => { setPlan(d.plan); setUpcoming(d.upcoming || []); setLoading(false); })
       .catch(() => setLoading(false));
     fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
@@ -148,6 +160,38 @@ export default function Today() {
               <Brain className="h-4 w-4" /> Weekly Review
             </Link>
           </div>
+        </div>
+      )}
+
+      {upcoming.length > 0 && (
+        <div className="mt-8">
+          <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            <Calendar className="h-3.5 w-3.5" />
+            Coming up · {upcoming.length} planned
+          </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {upcoming.slice(0, 8).map(u => {
+              const Icon = TASK_ICONS[u.task_type] || Hammer;
+              const date = new Date(u.date + 'T00:00:00');
+              return (
+                <div key={u.date} className="flex items-start gap-3 rounded-lg border border-gray-800 bg-gray-900/30 px-3 py-2.5 hover:bg-gray-900/60 transition-colors">
+                  <Icon className="mt-0.5 h-4 w-4 flex-shrink-0 text-purple-400" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="text-xs font-medium text-gray-300">
+                        {date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                      </div>
+                      <div className="text-[10px] uppercase text-gray-600">{u.task_type} · {u.minutes}m</div>
+                    </div>
+                    <div className="mt-0.5 text-sm text-gray-100 truncate">{u.concept_name || CONCEPT_BY_ID[u.concept_id]?.name || u.concept_id}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {upcoming.length > 8 && (
+            <p className="mt-2 text-[10px] text-gray-600">+ {upcoming.length - 8} more queued</p>
+          )}
         </div>
       )}
 

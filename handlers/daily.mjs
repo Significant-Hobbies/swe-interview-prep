@@ -43,6 +43,75 @@ function todayDate() {
   return new Date().toISOString().slice(0, 10);
 }
 
+function dateNDaysAhead(n) {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+const TOPUP_MIN_AHEAD = 7;     // Trigger topup if fewer future plans than this
+const TOPUP_TARGET_AHEAD = 30; // Generate up to this many days ahead
+
+/**
+ * Auto-extend daily_plan: if fewer than TOPUP_MIN_AHEAD plans exist for
+ * future dates, generate plans up to TOPUP_TARGET_AHEAD days ahead.
+ * Uses heuristic only (no AI). Simulates progressive completion to
+ * vary picks day-to-day.
+ */
+async function ensureUpcomingPlans(db, userId) {
+  const today = todayDate();
+  const r = await db.execute({
+    sql: `SELECT date FROM daily_plan WHERE user_id = ? AND date >= ? ORDER BY date`,
+    args: [userId, today],
+  });
+  const existingDates = new Set(r.rows.map(row => row.date));
+  const futureCount = [...existingDates].filter(d => d > today).length;
+  if (futureCount >= TOPUP_MIN_AHEAD) return 0;
+
+  // Load real mastery state
+  const masteryRes = await db.execute({
+    sql: 'SELECT concept_id, stability, difficulty, reps, lapses, last_review, due, state FROM concept_mastery WHERE user_id = ?',
+    args: [userId],
+  });
+  const masteryRows = masteryRes.rows.map(r => ({ ...r }));
+  const concepts = loadConcepts();
+
+  let inserted = 0;
+  for (let i = 0; i < TOPUP_TARGET_AHEAD; i++) {
+    const date = dateNDaysAhead(i);
+    if (existingDates.has(date)) continue;
+    const simulatedDate = new Date(Date.now() + i * 86400000);
+    const plan = pickDailyConcept(concepts, masteryRows, simulatedDate);
+    if (!plan) continue;
+
+    const id = randomBytes(16).toString('hex');
+    await db.execute({
+      sql: `INSERT INTO daily_plan (id, user_id, date, plan_json) VALUES (?, ?, ?, ?)
+            ON CONFLICT(user_id, date) DO UPDATE SET plan_json = excluded.plan_json`,
+      args: [id, userId, date, JSON.stringify(plan)],
+    });
+    inserted++;
+
+    // Simulate completion to vary tomorrow's pick
+    const existing = masteryRows.find(m => m.concept_id === plan.concept_id);
+    const reviewedAt = simulatedDate.toISOString();
+    if (existing) {
+      existing.stability = (existing.stability || 1) * 1.5;
+      existing.reps = (existing.reps || 0) + 1;
+      existing.last_review = reviewedAt;
+      existing.due = new Date(simulatedDate.getTime() + Math.ceil(existing.stability) * 86400000).toISOString();
+    } else {
+      masteryRows.push({
+        concept_id: plan.concept_id,
+        stability: 1, difficulty: 5, reps: 1, lapses: 0, state: 1,
+        last_review: reviewedAt,
+        due: new Date(simulatedDate.getTime() + 86400000).toISOString(),
+      });
+    }
+  }
+  return inserted;
+}
+
 export default async function handler(req, res) {
   await ensureInit();
   const user = await requireAuth(req, res);
@@ -50,16 +119,30 @@ export default async function handler(req, res) {
   const db = getDb();
   const today = todayDate();
 
-  // GET: return cached plan if exists
+  // GET: return today's cached plan + upcoming preview. Auto-extends if needed.
   if (req.method === 'GET') {
+    // Background top-up. Don't block the response on it for too long.
+    let toppedUp = 0;
+    try { toppedUp = await ensureUpcomingPlans(db, user.id); } catch (e) {
+      console.error('Topup failed:', e.message);
+    }
+
     const r = await db.execute({
-      sql: 'SELECT plan_json FROM daily_plan WHERE user_id = ? AND date = ?',
+      sql: 'SELECT date, plan_json FROM daily_plan WHERE user_id = ? AND date >= ? ORDER BY date LIMIT 14',
       args: [user.id, today],
     });
-    if (r.rows.length > 0) {
-      return res.status(200).json({ plan: JSON.parse(r.rows[0].plan_json), cached: true });
-    }
-    return res.status(200).json({ plan: null, cached: false });
+
+    const todayRow = r.rows.find(row => row.date === today);
+    const upcoming = r.rows
+      .filter(row => row.date > today)
+      .map(row => ({ date: row.date, ...JSON.parse(row.plan_json) }));
+
+    return res.status(200).json({
+      plan: todayRow ? JSON.parse(todayRow.plan_json) : null,
+      cached: !!todayRow,
+      upcoming,
+      toppedUp,
+    });
   }
 
   // POST: regenerate
