@@ -37,11 +37,50 @@ export async function generate({ endpointUrl, apiKey, model, system, prompt, mes
 }
 
 /**
- * Strip ```json fences and parse. Throws on parse failure.
+ * Strip ```json fences and parse. Tolerates missing closing fence and
+ * extracts the first JSON object/array if surrounded by prose.
+ * Throws on parse failure.
  */
 export function parseJSON(text) {
-  let t = text.trim();
-  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/);
-  if (fence) t = fence[1].trim();
-  return JSON.parse(t);
+  let t = String(text || '').trim();
+
+  // 1. Closed fence: ```json ... ```
+  const closed = t.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (closed) t = closed[1].trim();
+  else {
+    // 2. Open fence (no closing): ```json ... <eof>
+    const open = t.match(/```(?:json)?\s*([\s\S]*)$/);
+    if (open) t = open[1].trim();
+  }
+
+  // 3. Extract first balanced { ... } or [ ... ] if there's leading/trailing prose
+  try {
+    return JSON.parse(t);
+  } catch (e) {
+    const start = t.search(/[{\[]/);
+    if (start === -1) throw e;
+    const open = t[start];
+    const close = open === '{' ? '}' : ']';
+    let depth = 0;
+    let inStr = false;
+    let esc = false;
+    for (let i = start; i < t.length; i++) {
+      const ch = t[i];
+      if (inStr) {
+        if (esc) esc = false;
+        else if (ch === '\\') esc = true;
+        else if (ch === '"') inStr = false;
+        continue;
+      }
+      if (ch === '"') { inStr = true; continue; }
+      if (ch === open) depth++;
+      else if (ch === close) {
+        depth--;
+        if (depth === 0) {
+          return JSON.parse(t.slice(start, i + 1));
+        }
+      }
+    }
+    throw e;
+  }
 }
