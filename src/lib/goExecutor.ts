@@ -100,7 +100,7 @@ export function startWASMLoading(): void {
       if (!(window as any).Go) {
         await new Promise<void>((resolve, reject) => {
           const script = document.createElement('script');
-          script.src = '/wasm/wasm_exec.js';
+          script.src = 'https://pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm/wasm_exec.js';
           script.onload = () => resolve();
           script.onerror = () => reject(new Error('Failed to load wasm_exec.js'));
           document.head.appendChild(script);
@@ -109,7 +109,7 @@ export function startWASMLoading(): void {
 
       // Instantiate the Go WASM module
       const go = new (window as any).Go();
-      const response = await fetch('/wasm/go-interp.wasm');
+      const response = await fetch('https://pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm/go-interp.wasm');
       const result = await WebAssembly.instantiateStreaming(response, go.importObject);
       go.run(result.instance); // starts the Go main() which sets __goRunCode
 

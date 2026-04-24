@@ -16,6 +16,7 @@ export function SaaSMakerFeedback() {
       apiBaseUrl={API_BASE}
       position="bottom-right"
       theme="dark"
+      triggerText="Give feedback"
     />
   );
 }
@@ -28,4 +29,8 @@ export function SaaSMakerTestimonials() {
 export function SaaSMakerChangelog() {
   if (!API_KEY) return null;
   return <ChangelogTimeline projectId={API_KEY} apiBaseUrl={API_BASE} theme="dark" />;
+}
+
+export function SaaSMakerWaitlist() {
+  return null;
 }
