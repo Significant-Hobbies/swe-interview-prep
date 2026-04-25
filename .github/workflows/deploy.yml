@@ -22,6 +22,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm build
+        env:
+          VITE_SAASMAKER_API_KEY: ${{ secrets.VITE_SAASMAKER_API_KEY }}
 
       - name: Deploy to Cloudflare Pages
         id: deploy
