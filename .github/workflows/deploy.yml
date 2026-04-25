@@ -24,6 +24,7 @@ jobs:
       - run: pnpm build
         env:
           VITE_SAASMAKER_API_KEY: ${{ secrets.VITE_SAASMAKER_API_KEY }}
+      - run: rm -rf dist/wasm  # 38MB Go WASM hosted on R2, not CF Pages
 
       - name: Deploy to Cloudflare Pages
         id: deploy
