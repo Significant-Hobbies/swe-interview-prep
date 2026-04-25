@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Code2, LogOut, LogIn, Network, FlaskConical, Brain, Sun, Settings } from 'lucide-react';
+import { Code2, LogOut, LogIn, Network, FlaskConical, Brain, Sun, Settings, Sparkles } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import SettingsModal from './SettingsModal';
+import { SaaSMakerChangelog } from './saasmaker-feedback';
 
 export default function Layout() {
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [changelogOpen, setChangelogOpen] = useState(false);
+  const changelogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!changelogOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (changelogRef.current && !changelogRef.current.contains(e.target as Node)) {
+        setChangelogOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [changelogOpen]);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
@@ -37,6 +51,32 @@ export default function Layout() {
           </div>
 
           <div className="flex items-center gap-2">
+            {/* What's new changelog dropdown */}
+            <div ref={changelogRef} className="relative">
+              <button
+                onClick={() => setChangelogOpen(o => !o)}
+                className={`rounded-lg p-1.5 transition-colors ${changelogOpen ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'}`}
+                title="What's new"
+              >
+                <Sparkles className="h-4 w-4" />
+              </button>
+              {changelogOpen && (
+                <div className="absolute right-0 top-full mt-2 w-96 max-h-[70vh] overflow-y-auto rounded-xl border border-gray-800 bg-gray-900 shadow-xl z-50">
+                  <div className="flex items-center justify-between border-b border-gray-800 px-4 py-3">
+                    <span className="text-sm font-semibold text-white">What's new</span>
+                    <button
+                      onClick={() => setChangelogOpen(false)}
+                      className="text-gray-500 hover:text-gray-300 text-xs"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="p-4">
+                    <SaaSMakerChangelog />
+                  </div>
+                </div>
+              )}
+            </div>
             <button
               onClick={() => setSettingsOpen(true)}
               className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200"

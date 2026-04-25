@@ -1,6 +1,7 @@
 import { Code2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useEffect, useRef, useState } from 'react';
+import { SaaSMakerTestimonials } from '../components/saasmaker-feedback';
 
 export default function Login() {
   const { signInWithGoogle, continueAsGuest } = useAuth();
@@ -13,7 +14,7 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-950 px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 px-4 py-16">
       <div className="w-full max-w-sm space-y-8 text-center">
         <div className="flex flex-col items-center gap-4">
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/20">
@@ -76,6 +77,13 @@ export default function Login() {
           </p>
         </div>
       </div>
+
+      <section className="mt-16 w-full max-w-3xl mx-auto">
+        <h2 className="text-center text-xs font-semibold text-gray-500 uppercase tracking-widest mb-6">
+          What users say
+        </h2>
+        <SaaSMakerTestimonials />
+      </section>
     </div>
   );
 }

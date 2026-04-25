@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, RefreshCw, FlaskConical, Brain, Loader2, Network, Calendar, Hammer, Eye, BookOpen, MessageSquare } from 'lucide-react';
+import { Sparkles, RefreshCw, FlaskConical, Brain, Loader2, Network, Calendar, Hammer, Eye, BookOpen, MessageSquare, Rocket } from 'lucide-react';
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import MarkdownViewer from '../components/MarkdownViewer';
+import { SaaSMakerWaitlist } from '../components/saasmaker-feedback';
 
 interface DailyPlan {
   headline: string;
@@ -207,6 +208,18 @@ export default function Today() {
           <Link to="/review" className="mt-2 inline-block text-xs text-purple-400 hover:underline">Read full review →</Link>
         </div>
       )}
+
+      <div className="mt-10 rounded-xl border border-purple-900/30 bg-purple-950/20 p-6">
+        <div className="mb-1 flex items-center gap-2">
+          <Rocket className="h-4 w-4 text-purple-400" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400">Coming soon</span>
+        </div>
+        <h3 className="mb-1 text-sm font-semibold text-gray-200">Pro features</h3>
+        <p className="mb-4 text-xs text-gray-500">
+          AI-generated interview simulations, peer benchmarking, and spaced-repetition scheduling — join the waitlist to get early access.
+        </p>
+        <SaaSMakerWaitlist />
+      </div>
     </div>
   );
 }
