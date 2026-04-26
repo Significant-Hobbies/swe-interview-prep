@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SYSTEM://THE_TERMINAL - Performance Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ebffe2",
+                    "on-primary-container": "#007117",
+                    "background": "#131313",
+                    "tertiary": "#edffe2",
+                    "on-tertiary-fixed": "#002200",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline": "#84967e",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed-variant": "#00530e",
+                    "on-secondary-container": "#bab8b7",
+                    "on-primary": "#003907",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-bright": "#3a3939",
+                    "surface-tint": "#00e639",
+                    "on-tertiary-fixed-variant": "#1b5114",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed": "#002203",
+                    "on-background": "#e5e2e1",
+                    "surface-container-highest": "#353534",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#4a4949",
+                    "on-surface-variant": "#b9ccb2",
+                    "secondary": "#c8c6c5",
+                    "primary-fixed": "#72ff70",
+                    "outline-variant": "#3b4b37",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#006e16",
+                    "primary-fixed-dim": "#00e639",
+                    "surface": "#131313",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#00ff41",
+                    "surface-dim": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-container": "#366d2c",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#474646",
+                    "tertiary-fixed-dim": "#99d688",
+                    "on-tertiary": "#003a00",
+                    "tertiary-fixed": "#b5f3a2",
+                    "tertiary-container": "#afed9d",
+                    "on-secondary": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "display": ["Space Grotesk"],
+                    "body": ["Space Grotesk"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 65, 0.03) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+        }
+        .primary-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest font-body text-on-surface selection:bg-primary-container selection:text-on-primary">
+<!-- Scanline Overlay -->
+<div class="fixed inset-0 scanline z-[100] pointer-events-none"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-neutral-950/90 backdrop-blur-md border-b border-[#3b4b37]/30 shadow-[0_2px_10px_rgba(0,255,65,0.05)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00FF41]">terminal</span>
+<h1 class="text-[#00FF41] font-black tracking-widest drop-shadow-[0_0_5px_#00FF41] font-mono uppercase text-xs">SYSTEM://THE_TERMINAL</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-6">
+<a class="text-[#00FF41]/40 font-mono text-xs uppercase tracking-widest hover:bg-[#00FF41]/10 transition-colors px-2 py-1" href="#">DASHBOARD</a>
+<a class="text-[#00FF41]/40 font-mono text-xs uppercase tracking-widest hover:bg-[#00FF41]/10 transition-colors px-2 py-1" href="#">CHALLENGES</a>
+<a class="text-[#00FF41] font-bold font-mono text-xs uppercase tracking-widest px-2 py-1" href="#">ANALYTICS</a>
+</nav>
+<div class="w-8 h-8 bg-surface-container-high border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-primary">person</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-8">
+<!-- Hero Header Sector -->
+<section class="flex flex-col md:flex-row justify-between items-end border-l-4 border-primary-container pl-6 py-2">
+<div>
+<p class="font-mono text-primary text-[10px] tracking-[0.2em] mb-1">METRICS_PROTOCOL_V4.1</p>
+<h2 class="text-4xl font-light tracking-tighter text-on-surface uppercase">Neuro-Link Analytics</h2>
+</div>
+<div class="mt-4 md:mt-0 flex gap-4 font-mono text-[10px]">
+<div class="text-right">
+<span class="block text-on-surface-variant">UPTIME</span>
+<span class="block text-primary">1,242:12:04</span>
+</div>
+<div class="text-right">
+<span class="block text-on-surface-variant">SYNC_RATE</span>
+<span class="block text-primary">98.4%</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid Analytics -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-1">
+<!-- Main Performance Chart -->
+<div class="md:col-span-8 bg-surface-container-low p-6 border border-outline-variant/20 relative group">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-primary font-mono text-xs tracking-widest uppercase">Performance_Timeline</h3>
+<p class="text-on-surface-variant text-[10px] uppercase">Cross-topic proficiency evolution</p>
+</div>
+<div class="flex gap-2">
+<div class="w-2 h-2 bg-primary"></div>
+<div class="w-2 h-2 bg-primary/20"></div>
+<div class="w-2 h-2 bg-primary/20"></div>
+</div>
+</div>
+<!-- Visualization Placeholder (Line Graph) -->
+<div class="h-64 flex items-end justify-between relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+<div class="border-t border-primary"></div>
+<div class="border-t border-primary"></div>
+<div class="border-t border-primary"></div>
+<div class="border-t border-primary"></div>
+</div>
+<!-- Glowing SVG Graph -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<defs>
+<lineargradient id="glowGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00FF41" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#00FF41" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path class="drop-shadow-[0_0_8px_#00FF41]" d="M0 180 Q 100 140, 200 160 T 400 80 T 600 100 T 800 40" fill="transparent" stroke="#00FF41" stroke-width="2"></path>
+<path d="M0 180 Q 100 140, 200 160 T 400 80 T 600 100 T 800 40 V 256 H 0 Z" fill="url(#glowGradient)"></path>
+</svg>
+<!-- Data Points Labels -->
+<div class="absolute bottom-[-20px] w-full flex justify-between font-mono text-[9px] text-on-surface-variant">
+<span>MAR_01</span>
+<span>MAR_10</span>
+<span>MAR_20</span>
+<span>APR_01</span>
+<span>APR_10</span>
+</div>
+</div>
+</div>
+<!-- Radar Chart: Topic Weights -->
+<div class="md:col-span-4 bg-surface-container-high p-6 border border-outline-variant/20 flex flex-col items-center justify-center">
+<h3 class="text-primary font-mono text-xs tracking-widest uppercase mb-8 self-start">Neural_Balance</h3>
+<div class="relative w-48 h-48">
+<!-- Radar Polygons -->
+<div class="absolute inset-0 border border-primary/20 rotate-45"></div>
+<div class="absolute inset-2 border border-primary/10 rotate-45"></div>
+<div class="absolute inset-4 border border-primary/5 rotate-45"></div>
+<!-- Skill Lines -->
+<svg class="absolute inset-0 w-full h-full overflow-visible">
+<polygon fill="#00FF41" fill-opacity="0.2" points="96,20 160,70 140,160 50,150 30,80" stroke="#00FF41" stroke-width="1"></polygon>
+<!-- Labels -->
+<text class="fill-primary font-mono text-[8px]" text-anchor="middle" x="96" y="10">ALGORITHMS</text>
+<text class="fill-primary font-mono text-[8px]" text-anchor="start" x="180" y="80">SYSTEM_DESIGN</text>
+<text class="fill-primary font-mono text-[8px]" text-anchor="start" x="160" y="180">DATA_STRUCTURES</text>
+<text class="fill-primary font-mono text-[8px]" text-anchor="end" x="30" y="180">DATABASE</text>
+<text class="fill-primary font-mono text-[8px]" text-anchor="end" x="10" y="80">CONCURRENCY</text>
+</svg>
+</div>
+<div class="mt-8 grid grid-cols-2 gap-4 w-full">
+<div class="border-t border-outline-variant pt-2">
+<span class="block text-on-surface-variant font-mono text-[8px]">MAX_PROF</span>
+<span class="block text-primary font-mono text-sm">88.2%</span>
+</div>
+<div class="border-t border-outline-variant pt-2">
+<span class="block text-on-surface-variant font-mono text-[8px]">MIN_PROF</span>
+<span class="block text-primary font-mono text-sm">42.1%</span>
+</div>
+</div>
+</div>
+<!-- Strengths & Weaknesses Section -->
+<div class="md:col-span-12 mt-1 grid grid-cols-1 md:grid-cols-2 gap-1">
+<!-- Strengths -->
+<div class="bg-surface-container-low p-6 border border-outline-variant/20">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+<h3 class="text-primary font-mono text-xs tracking-widest uppercase">System_Optimizations (Strengths)</h3>
+</div>
+<ul class="space-y-4 font-mono">
+<li class="flex justify-between items-start group">
+<div class="flex gap-4">
+<span class="text-primary/40">[01]</span>
+<div>
+<span class="block text-on-surface text-xs uppercase">Graph Theory Recursion</span>
+<span class="block text-on-surface-variant text-[10px]">Exceptional efficiency in path-finding logic</span>
+</div>
+</div>
+<span class="text-primary text-[10px]">94%</span>
+</li>
+<li class="flex justify-between items-start group">
+<div class="flex gap-4">
+<span class="text-primary/40">[02]</span>
+<div>
+<span class="block text-on-surface text-xs uppercase">Load Balancing Protocols</span>
+<span class="block text-on-surface-variant text-[10px]">High mastery of horizontal scaling patterns</span>
+</div>
+</div>
+<span class="text-primary text-[10px]">89%</span>
+</li>
+</ul>
+</div>
+<!-- Weaknesses -->
+<div class="bg-surface-container-low p-6 border border-outline-variant/20">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+<h3 class="text-error font-mono text-xs tracking-widest uppercase">Kernel_Errors (Weaknesses)</h3>
+</div>
+<ul class="space-y-4 font-mono">
+<li class="flex justify-between items-start group">
+<div class="flex gap-4">
+<span class="text-error/40">[01]</span>
+<div>
+<span class="block text-on-surface text-xs uppercase">Dynamic Programming (Bottom-Up)</span>
+<span class="block text-on-surface-variant text-[10px]">Latency detected in tabulation logic</span>
+</div>
+</div>
+<span class="text-error text-[10px]">32%</span>
+</li>
+<li class="flex justify-between items-start group">
+<div class="flex gap-4">
+<span class="text-error/40">[02]</span>
+<div>
+<span class="block text-on-surface text-xs uppercase">Distributed Locks</span>
+<span class="block text-on-surface-variant text-[10px]">Inconsistent execution in race condition sims</span>
+</div>
+</div>
+<span class="text-error text-[10px]">45%</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Detailed Data Feed -->
+<div class="md:col-span-12 bg-neutral-950 p-4 border border-outline-variant/10 overflow-hidden relative">
+<div class="flex justify-between items-center mb-4">
+<span class="text-[8px] font-mono text-primary/30 uppercase tracking-[0.4em]">RAW_DATA_STREAM_00xFF</span>
+<span class="text-[8px] font-mono text-primary/30">LIVE_CONNECTION: STABLE</span>
+</div>
+<div class="font-mono text-[9px] text-primary/50 space-y-1">
+<p class="hover:text-primary transition-colors cursor-default cursor-default">0x0012: ACCESSING RECENT CHALLENGE_ID: 9812 ... [SUCCESS]</p>
+<p class="hover:text-primary transition-colors cursor-default">0x0013: PARSING EXECUTION TIME: 12ms ... [OPTIMAL]</p>
+<p class="hover:text-primary transition-colors cursor-default text-primary/80">0x0014: COMPARING WITH GLOBAL PEER BASE ... TOP 2% TIER</p>
+<p class="hover:text-primary transition-colors cursor-default">0x0015: UPDATING NEURO-LINK PROFICIENCY CODES ... [COMPLETE]</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile & Desktop Persistent) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-neutral-950/95 border-t border-[#3b4b37]/50 shadow-[0_-4px_20px_rgba(0,255,65,0.1)]">
+<a class="flex flex-col items-center justify-center text-[#00FF41]/30 py-2 w-full hover:text-[#00FF41]/80 hover:bg-neutral-900 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="font-mono text-[10px] tracking-tight uppercase">DASHBOARD</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00FF41]/30 py-2 w-full hover:text-[#00FF41]/80 hover:bg-neutral-900 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1">code_blocks</span>
+<span class="font-mono text-[10px] tracking-tight uppercase">CHALLENGES</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00FF41]/30 py-2 w-full hover:text-[#00FF41]/80 hover:bg-neutral-900 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="font-mono text-[10px] tracking-tight uppercase">SCHEDULE</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00FF41] bg-[#00FF41]/10 border-t-2 border-[#00FF41] py-2 w-full transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-mono text-[10px] tracking-tight uppercase">ANALYTICS</span>
+</a>
+</nav>
+<!-- Visual Polish: Ghost UI Elements -->
+<div class="fixed top-20 right-4 hidden lg:block opacity-20 pointer-events-none">
+<div class="text-[8px] font-mono space-y-4">
+<div class="border-r-2 border-primary pr-2">
+<p>LATENCY_CHECK: PASS</p>
+<p>PACKET_LOSS: 0.00%</p>
+</div>
+<div class="border-r-2 border-primary pr-2">
+<p>MODULE_7: LOADED</p>
+<p>ENCRYPTION: AES-256</p>
+</div>
+</div>
+</div>
+</body></html>
