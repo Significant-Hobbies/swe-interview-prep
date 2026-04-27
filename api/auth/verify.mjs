@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { getUserById } from '../../shared/db/users.mjs';
+import { readAuthCookie } from './cookies.mjs';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -14,14 +15,26 @@ export function verifyToken(token) {
   }
 }
 
-export async function requireAuth(req, res) {
+function extractToken(req) {
+  // Prefer the httpOnly cookie (XSS-safe). Fall back to the legacy
+  // Authorization header so we don't break clients still on the old flow
+  // during the rollout window.
+  const cookieToken = readAuthCookie(req);
+  if (cookieToken) return cookieToken;
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    return authHeader.slice(7);
+  }
+  return null;
+}
+
+export async function requireAuth(req, res) {
+  const token = extractToken(req);
+  if (!token) {
     res.status(401).json({ error: 'Unauthorized' });
     return null;
   }
 
-  const token = authHeader.slice(7);
   const decoded = verifyToken(token);
 
   if (!decoded || !decoded.userId) {

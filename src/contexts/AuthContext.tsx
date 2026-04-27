@@ -1,8 +1,13 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
 const GUEST_KEY = 'dsa-prep-guest';
-const AUTH_KEY = 'dsa-prep-auth';
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
+// Profile cache only — the JWT now lives in an httpOnly cookie (XSS hardening).
+const PROFILE_KEY = 'dsa-prep-profile';
+// Legacy key (used to store the JWT in localStorage). Purged on load.
+const LEGACY_KEY = 'dsa-prep-auth';
+// Same-origin in dev (Vite proxies /api → :3456) and in prod (Vercel).
+// Empty base means cookies attach automatically.
+const API_URL = '';
 
 interface User {
   id: string;
@@ -13,6 +18,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  /** @deprecated Token is now in an httpOnly cookie; this always returns null. */
   token: string | null;
   isGuest: boolean;
   loading: boolean;
@@ -39,26 +45,55 @@ declare global {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
   const [isGuest, setIsGuest] = useState(() => localStorage.getItem(GUEST_KEY) === '1');
   const [loading, setLoading] = useState(true);
   const [googleLoaded, setGoogleLoaded] = useState(false);
 
-  // Load auth from localStorage
+  // Load profile from localStorage (just non-sensitive metadata) and validate
+  // the cookie session against the server. The token itself is no longer in
+  // localStorage — it's in an httpOnly cookie.
   useEffect(() => {
+    let cancelled = false;
+    // Drop any legacy entry that contained the JWT in localStorage.
+    if (localStorage.getItem(LEGACY_KEY)) {
+      localStorage.removeItem(LEGACY_KEY);
+    }
     try {
-      const raw = localStorage.getItem(AUTH_KEY);
+      const raw = localStorage.getItem(PROFILE_KEY);
       if (raw) {
-        const data = JSON.parse(raw);
-        setUser(data.user);
-        setToken(data.token);
+        setUser(JSON.parse(raw) as User);
         setIsGuest(false);
       }
     } catch (error) {
-      console.error('Failed to load auth from localStorage:', error);
-    } finally {
-      setLoading(false);
+      console.error('Failed to load profile from localStorage:', error);
+      localStorage.removeItem(PROFILE_KEY);
     }
+
+    // Hydrate from cookie session — confirms the cookie is still valid.
+    fetch('/api/auth/verify', { credentials: 'include' })
+      .then(async (res) => {
+        if (cancelled) return;
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.user) {
+            setUser(data.user);
+            setIsGuest(false);
+            localStorage.setItem(PROFILE_KEY, JSON.stringify(data.user));
+          }
+        } else if (res.status === 401) {
+          // Cookie missing/invalid — drop any cached profile.
+          setUser(null);
+          localStorage.removeItem(PROFILE_KEY);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Load Google Sign-In script
@@ -82,6 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch(`${API_URL}/api/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // server sets the auth cookie
         body: JSON.stringify({ credential }),
       });
 
@@ -91,9 +127,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const data = await res.json();
       setUser(data.user);
-      setToken(data.token);
       setIsGuest(false);
-      localStorage.setItem(AUTH_KEY, JSON.stringify(data));
+      // Cache profile only — the JWT lives in an httpOnly cookie now.
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(data.user));
       localStorage.removeItem(GUEST_KEY);
     } catch (error) {
       console.error('Login error:', error);
@@ -182,10 +218,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     setUser(null);
-    setToken(null);
     setIsGuest(false);
-    localStorage.removeItem(AUTH_KEY);
+    localStorage.removeItem(PROFILE_KEY);
+    localStorage.removeItem(LEGACY_KEY);
     localStorage.removeItem(GUEST_KEY);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    } catch {
+      // best-effort
+    }
   };
 
   const continueAsGuest = () => {
@@ -194,7 +235,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, isGuest, loading, signInWithGoogle, signOut, continueAsGuest }}>
+    <AuthContext.Provider value={{ user, token: null, isGuest, loading, signInWithGoogle, signOut, continueAsGuest }}>
       {children}
     </AuthContext.Provider>
   );
@@ -206,15 +247,13 @@ export function useAuth() {
   return context;
 }
 
+/**
+ * @deprecated The auth token is now in an httpOnly cookie and unreadable from
+ * JS. Always returns null. Existing call sites that spread this into an
+ * Authorization header will simply send no header — the server reads the
+ * cookie automatically. Keep using `credentials: 'include'` (or rely on
+ * default same-origin) so the cookie attaches.
+ */
 export function getAuthToken(): string | null {
-  try {
-    const raw = localStorage.getItem(AUTH_KEY);
-    if (raw) {
-      const data = JSON.parse(raw);
-      return data.token;
-    }
-  } catch (error) {
-    console.error('Failed to get auth token:', error);
-  }
   return null;
 }

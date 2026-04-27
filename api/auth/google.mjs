@@ -2,6 +2,7 @@ import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
 import { findOrCreateUser } from '../../shared/db/users.mjs';
 import { initDatabase } from '../../shared/db/schema.mjs';
+import { buildAuthCookie } from './cookies.mjs';
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -63,6 +64,10 @@ export default async function handler(req, res) {
       picture: user.picture,
     });
 
+    // XSS hardening: token is set in an httpOnly cookie. The body still
+    // returns `user` (and `token` for backward compatibility during the
+    // rollout — clients no longer persist it).
+    res.setHeader('Set-Cookie', buildAuthCookie(token));
     return res.status(200).json({ user, token });
   } catch (error) {
     console.error('Google auth error:', error.message, error.stack);
