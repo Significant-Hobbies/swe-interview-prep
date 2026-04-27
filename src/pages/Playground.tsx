@@ -1,17 +1,18 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from 'react-resizable-panels';
+import { AlertTriangle, BookOpen,Brain, Check, Clock, Code2, Copy, Eye, FileText, GripVertical, Loader2, Pencil, PenTool, Play, Share2, Sparkles } from 'lucide-react';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
-import { CONCEPT_BY_ID } from '../hooks/useConcepts';
-import DiagramEditor from '../components/DiagramEditor';
+import { useCallback, useEffect,useRef, useState } from 'react';
+import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
+import { useSearchParams } from 'react-router-dom';
+
+import AmbientLibrary from '../components/AmbientLibrary';
 import CodeEditor from '../components/CodeEditor';
 import CompanionPanel from '../components/CompanionPanel';
-import AmbientLibrary from '../components/AmbientLibrary';
+import DiagramEditor from '../components/DiagramEditor';
 import FeynmanGate from '../components/FeynmanGate';
-import { useCodeExecution } from '../hooks/useCodeExecution';
-import { useTagger } from '../hooks/useTagger';
-import { Code2, PenTool, GripVertical, Play, Loader2, Copy, Check, Share2, Clock, FileText, Eye, Pencil, AlertTriangle, Sparkles, Brain, BookOpen } from 'lucide-react';
 import MarkdownViewer from '../components/MarkdownViewer';
+import { useCodeExecution } from '../hooks/useCodeExecution';
+import { CONCEPT_BY_ID } from '../hooks/useConcepts';
+import { useTagger } from '../hooks/useTagger';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';

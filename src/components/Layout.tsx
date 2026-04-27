@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { Brain, Code2, FlaskConical, LogIn, LogOut, Network, Settings, Sparkles,Sun } from 'lucide-react';
+import { useEffect,useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Code2, LogOut, LogIn, Network, FlaskConical, Brain, Sun, Settings, Sparkles } from 'lucide-react';
+
 import { useAuth } from '../contexts/AuthContext';
-import SettingsModal from './SettingsModal';
 import { SaaSMakerChangelog } from './saasmaker-feedback';
+import SettingsModal from './SettingsModal';
 
 export default function Layout() {
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();

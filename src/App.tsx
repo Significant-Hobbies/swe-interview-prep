@@ -1,14 +1,15 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+
+import Layout from './components/Layout';
+import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { saasmaker } from './lib/saasmaker';
-import { SaaSMakerFeedback } from './components/saasmaker-feedback';
-import Layout from './components/Layout';
-import Today from './pages/Today';
 import Concepts from './pages/Concepts';
-import Review from './pages/Review';
-import Playground from './pages/Playground';
 import Login from './pages/Login';
+import Playground from './pages/Playground';
+import Review from './pages/Review';
+import Today from './pages/Today';
 
 function App() {
   const { user, isGuest, loading } = useAuth();

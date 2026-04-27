@@ -1,7 +1,8 @@
-import { Code2, Sparkles, GitBranch, Brain, ArrowRight } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { ArrowRight,Brain, Code2, GitBranch, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
+
 import { SaaSMakerTestimonials } from '../components/saasmaker-feedback';
+import { useAuth } from '../contexts/AuthContext';
 
 const FEATURES = [
   {

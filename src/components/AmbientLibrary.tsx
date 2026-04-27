@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { BookOpen, ChevronDown, ChevronRight, Loader2, ExternalLink } from 'lucide-react';
+import { BookOpen, ChevronDown, ChevronRight, ExternalLink,Loader2 } from 'lucide-react';
+import { useEffect,useState } from 'react';
+
+import { type LibrarySection,loadSectionContent, useAmbientSections } from '../hooks/useAmbientLibrary';
 import MarkdownViewer from './MarkdownViewer';
-import { useAmbientSections, loadSectionContent, type LibrarySection } from '../hooks/useAmbientLibrary';
 
 interface Props {
   conceptIds: string[];

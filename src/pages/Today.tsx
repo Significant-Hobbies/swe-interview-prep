@@ -1,11 +1,12 @@
+import { BookOpen, Brain, Calendar, Eye, FlaskConical, Hammer, Loader2, MessageSquare, Network, RefreshCw, Rocket,Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, RefreshCw, FlaskConical, Brain, Loader2, Network, Calendar, Hammer, Eye, BookOpen, MessageSquare, Rocket } from 'lucide-react';
+
+import MarkdownViewer from '../components/MarkdownViewer';
+import { SaaSMakerWaitlist } from '../components/saasmaker-feedback';
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
-import MarkdownViewer from '../components/MarkdownViewer';
-import { SaaSMakerWaitlist } from '../components/saasmaker-feedback';
 
 interface DailyPlan {
   headline: string;

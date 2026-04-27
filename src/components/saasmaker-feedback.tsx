@@ -1,9 +1,10 @@
-import { FeedbackWidget } from "@saas-maker/feedback";
 import "@saas-maker/feedback/dist/index.css";
-import { TestimonialWall } from "@saas-maker/testimonials";
 import "@saas-maker/testimonials/dist/index.css";
-import { ChangelogTimeline } from "@saas-maker/changelog-widget";
 import "@saas-maker/changelog-widget/dist/index.css";
+
+import { ChangelogTimeline } from "@saas-maker/changelog-widget";
+import { FeedbackWidget } from "@saas-maker/feedback";
+import { TestimonialWall } from "@saas-maker/testimonials";
 
 const API_KEY = import.meta.env.VITE_SAASMAKER_API_KEY ?? "";
 const API_BASE = "https://api.sassmaker.com";

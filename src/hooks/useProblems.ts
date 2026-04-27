@@ -1,7 +1,8 @@
-import React, { useMemo, useCallback, useSyncExternalStore, useEffect } from 'react';
+import React, { useCallback, useEffect,useMemo, useSyncExternalStore } from 'react';
+
+import { getAuthToken,useAuth } from '../contexts/AuthContext';
 import dsaData from '../data/problems.json';
-import type { Problem, AnkiCardWithMeta, ProblemsData, InterviewCategory } from '../types';
-import { useAuth, getAuthToken } from '../contexts/AuthContext';
+import type { AnkiCardWithMeta, InterviewCategory,Problem, ProblemsData } from '../types';
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 

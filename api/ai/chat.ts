@@ -1,5 +1,5 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { streamText } from 'ai';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

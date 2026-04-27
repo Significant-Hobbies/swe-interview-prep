@@ -1,8 +1,9 @@
+import { Loader2,Send, Sparkles, Square, Trash2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { Send, Square, Trash2, Sparkles, Loader2 } from 'lucide-react';
-import MarkdownViewer from './MarkdownViewer';
-import { useCompanion, type CompanionContext } from '../hooks/useCompanion';
+
 import { loadAIConfig } from '../hooks/useAI';
+import { type CompanionContext,useCompanion } from '../hooks/useCompanion';
+import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
   context: CompanionContext;

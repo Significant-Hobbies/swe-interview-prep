@@ -1,4 +1,4 @@
-import type { RepoFile, RepoAdapter, ParsedRepo, Section } from './types';
+import type { ParsedRepo, RepoAdapter, RepoFile, Section } from './types';
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

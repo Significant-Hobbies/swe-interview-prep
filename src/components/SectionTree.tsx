@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { ChevronRight, ChevronDown, FileText } from 'lucide-react';
+import { ChevronDown, ChevronRight, FileText } from 'lucide-react';
+import { useEffect,useState } from 'react';
+
 import type { Section } from '../adapters/types';
 
 interface SectionTreeProps {

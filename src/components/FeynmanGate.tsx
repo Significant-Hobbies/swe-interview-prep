@@ -1,8 +1,9 @@
+import { Brain, Loader2,X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Brain, X, Loader2 } from 'lucide-react';
-import MarkdownViewer from './MarkdownViewer';
+
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
+import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
   open: boolean;

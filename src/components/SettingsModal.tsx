@@ -1,6 +1,7 @@
+import { Loader2,Save, Settings as SettingsIcon, X } from 'lucide-react';
 import { useState } from 'react';
-import { X, Settings as SettingsIcon, Save, Loader2 } from 'lucide-react';
-import { loadAIConfig, saveAIConfig, type AIConfig } from '../hooks/useAI';
+
+import { type AIConfig,loadAIConfig, saveAIConfig } from '../hooks/useAI';
 
 interface Props {
   open: boolean;

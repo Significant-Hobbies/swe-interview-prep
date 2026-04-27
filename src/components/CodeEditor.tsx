@@ -1,9 +1,10 @@
-import { useRef, useCallback, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import * as prettier from 'prettier/standalone';
 import * as parserBabel from 'prettier/plugins/babel';
 import * as parserEstree from 'prettier/plugins/estree';
 import * as parserTS from 'prettier/plugins/typescript';
+import * as prettier from 'prettier/standalone';
+import { useCallback, useEffect,useRef } from 'react';
+
 import type { Language } from '../types';
 
 interface CodeEditorProps {

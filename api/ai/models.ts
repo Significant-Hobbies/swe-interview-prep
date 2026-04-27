@@ -13,7 +13,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // Strip trailing /chat/completions or similar paths to get base URL for /models
-    let baseUrl = endpointUrl.replace(/\/chat\/completions\/?$/, '').replace(/\/$/, '');
+    const baseUrl = endpointUrl.replace(/\/chat\/completions\/?$/, '').replace(/\/$/, '');
     // If baseUrl doesn't end with /v1, try appending it for common providers
     const modelsUrl = `${baseUrl}/models`;
 

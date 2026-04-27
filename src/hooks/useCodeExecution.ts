@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useCallback,useState } from 'react';
 import { transform } from 'sucrase';
+
 import { executeGo, type GoBackend } from '../lib/goExecutor';
-import type { TestCase, Language } from '../types';
+import type { Language,TestCase } from '../types';
 
 export interface TestResult extends TestCase {
   actual: unknown;

@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
-import { Loader2 } from 'lucide-react';
 import '@excalidraw/excalidraw/index.css';
+
+import { Loader2 } from 'lucide-react';
+import { lazy, Suspense,useCallback, useEffect, useRef, useState } from 'react';
 
 const Excalidraw = lazy(() =>
   import('@excalidraw/excalidraw').then(mod => ({ default: mod.Excalidraw }))

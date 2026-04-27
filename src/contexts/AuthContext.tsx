@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { createContext, useCallback,useContext, useEffect, useState } from 'react';
 
 const GUEST_KEY = 'dsa-prep-guest';
 // Profile cache only — the JWT now lives in an httpOnly cookie (XSS hardening).
