@@ -49,8 +49,10 @@ function SectionRow({ section }: { section: LibrarySection }) {
   useEffect(() => {
     if (!open || content) return;
     setLoading(true);
+    // eslint-disable-next-line promise/catch-or-return
     loadSectionContent(section.repoId, section.sectionId)
       .then(setContent)
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, [open, content, section.repoId, section.sectionId]);
 

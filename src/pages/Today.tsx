@@ -49,7 +49,7 @@ export default function Today() {
     if (!token) { setLoading(false); return; }
     fetch('/api/learning?action=daily', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
-      .then(d => { setPlan(d.plan); setUpcoming(d.upcoming || []); setLoading(false); })
+      .then(d => { setPlan(d.plan); setUpcoming(d.upcoming || []); setLoading(false); return undefined; })
       .catch(() => setLoading(false));
     fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())

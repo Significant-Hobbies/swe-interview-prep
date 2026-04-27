@@ -39,7 +39,7 @@ function loadPanels(): Set<PanelId> {
   try {
     const saved = localStorage.getItem(PANELS_KEY);
     if (saved) return new Set(JSON.parse(saved));
-  } catch {}
+  } catch { /* invalid JSON */ }
   return new Set(['code', 'companion']);
 }
 

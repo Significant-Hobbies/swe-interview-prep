@@ -70,9 +70,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Hydrate from cookie session — confirms the cookie is still valid.
+    // eslint-disable-next-line promise/catch-or-return
     fetch('/api/auth/verify', { credentials: 'include' })
       .then(async (res) => {
-        if (cancelled) return;
+        if (cancelled) return undefined;
         if (res.ok) {
           const data = await res.json();
           if (data?.user) {
@@ -85,6 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(null);
           localStorage.removeItem(PROFILE_KEY);
         }
+        return undefined;
       })
       .catch(() => {})
       .finally(() => {

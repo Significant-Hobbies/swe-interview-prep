@@ -134,6 +134,7 @@ export function useCodeExecution() {
         }
       </script></body></html>`;
 
+      // eslint-disable-next-line prefer-const
       let timeout: ReturnType<typeof setTimeout>;
       const handler = (event: MessageEvent) => {
         if (event.data?.type === 'exec-result') {

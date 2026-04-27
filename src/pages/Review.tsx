@@ -22,7 +22,7 @@ export default function Review() {
     if (!token) { setLoading(false); return; }
     fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
-      .then(d => { setReview(d.review); setLoading(false); })
+      .then(d => { setReview(d.review); setLoading(false); return undefined; })
       .catch(() => setLoading(false));
   }, []);
 

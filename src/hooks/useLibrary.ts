@@ -96,6 +96,7 @@ export function useRepoContent(repoId: string) {
     loadRepoContent(repoId)
       .then(data => {
         if (!cancelled) { setContent(data); setLoading(false); }
+        return undefined;
       })
       .catch(() => {
         if (!cancelled) { setError('Failed to load content.'); setLoading(false); }

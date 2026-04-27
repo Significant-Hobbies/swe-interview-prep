@@ -42,6 +42,7 @@ export function useProgress() {
           setProgress(merged);
           saveProgressLocal(merged);
         }
+        return undefined;
       })
       .catch(err => console.error('Failed to load progress:', err));
   }, [user]);

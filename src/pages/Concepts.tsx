@@ -2,7 +2,7 @@ import { Brain, FlaskConical, Loader2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ALL_CONCEPTS, type Concept,useConceptMastery } from '../hooks/useConcepts';
+import { ALL_CONCEPTS, type Concept, type MasteryEntry,useConceptMastery } from '../hooks/useConcepts';
 
 const CATEGORIES = [
   { id: 'dsa', name: 'DSA', color: 'blue' },
@@ -150,7 +150,7 @@ function FilterBtn({ active, onClick, children }: { active: boolean; onClick: ()
 
 function ConceptDrawer({ concept, mastery, onClose, onReview }: {
   concept: Concept;
-  mastery?: import('../hooks/useConcepts').MasteryEntry;
+  mastery?: MasteryEntry;
   onClose: () => void;
   onReview: (rating: 'again' | 'hard' | 'good' | 'easy') => void;
 }) {

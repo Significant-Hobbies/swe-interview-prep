@@ -69,7 +69,7 @@ export function parseTestCasesFromDescription(desc: string, _funcName: string) {
           const valMatch = part.match(/=\s*(.+)/);
           if (!valMatch) return part.trim();
           const val = valMatch[1].trim();
-          try { return JSON.parse(val); } catch { }
+          try { return JSON.parse(val); } catch { /* not JSON */ }
           if (/^".*"$/.test(val) || /^'.*'$/.test(val)) return val.slice(1, -1);
           if (!isNaN(Number(val))) return Number(val);
           if (val === 'true') return true;

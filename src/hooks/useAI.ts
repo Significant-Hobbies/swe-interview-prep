@@ -200,6 +200,7 @@ export function useAI(problemId?: string) {
           if (data.messages && Array.isArray(data.messages)) {
             setMessages(data.messages as AIMessage[]);
           }
+          return undefined;
         })
         .catch(err => console.error('Failed to load chats:', err));
     } else {

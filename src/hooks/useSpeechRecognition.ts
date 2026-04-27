@@ -77,7 +77,7 @@ export function useSpeechRecognition(): SpeechRecognitionResult {
     recognition.onend = () => {
       // Auto-restart if we're still supposed to be listening
       if (isListening) {
-        try { recognition.start(); } catch {}
+        try { recognition.start(); } catch { /* already started */ }
       } else {
         setIsListening(false);
       }

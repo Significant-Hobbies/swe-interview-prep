@@ -42,7 +42,9 @@ export default function CodeEditor({
   const editorRef = useRef<any>(null);
   const runRef = useRef<(() => void) | undefined>(undefined);
   const decorationsRef = useRef<any>(null);
-  runRef.current = onRun;
+  useEffect(() => {
+    runRef.current = onRun;
+  }, [onRun]);
 
   const handleFormat = useCallback(async () => {
     const editor = editorRef.current;

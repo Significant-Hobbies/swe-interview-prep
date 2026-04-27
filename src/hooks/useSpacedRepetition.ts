@@ -87,6 +87,7 @@ export function useSpacedRepetition() {
           setAnkiData(merged);
           saveAnkiData(merged);
         }
+        return undefined;
       })
       .catch(err => console.error('Failed to load SR data:', err));
   }, [user]);

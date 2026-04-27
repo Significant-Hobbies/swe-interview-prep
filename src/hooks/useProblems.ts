@@ -56,7 +56,7 @@ export function useProblems(category: InterviewCategory = 'dsa') {
   );
 
   useEffect(() => {
-    loadCategoryData(category).then(setCategoryData);
+    loadCategoryData(category).then(setCategoryData).catch(() => {});
   }, [category]);
 
   // Load imported problems from backend on mount
@@ -74,6 +74,7 @@ export function useProblems(category: InterviewCategory = 'dsa') {
           const problems = data.problems.map((item: any) => item.problemData as Problem);
           setStore(problems);
         }
+        return undefined;
       })
       .catch(err => console.error('Failed to load problems:', err));
   }, [user]);

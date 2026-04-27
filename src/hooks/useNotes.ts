@@ -38,6 +38,7 @@ export function useNotes(problemId: string | undefined) {
         .then(res => res.json())
         .then(data => {
           setNotes(data.notes || '');
+          return undefined;
         })
         .catch(err => console.error('Failed to load notes:', err));
     } else {
