@@ -1,4 +1,4 @@
-import type { type Card, createEmptyCard, fsrs, generatorParameters, type Grade,Rating,State } from 'ts-fsrs';
+import { type Card, createEmptyCard, fsrs, generatorParameters, type Grade, Rating, type State } from 'ts-fsrs';
 
 const params = generatorParameters({ enable_fuzz: false, request_retention: 0.9, maximum_interval: 365 });
 const scheduler = fsrs(params);
