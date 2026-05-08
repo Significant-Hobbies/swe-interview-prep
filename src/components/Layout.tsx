@@ -1,4 +1,4 @@
-import { Brain, Code2, FlaskConical, LogIn, LogOut, Network, Settings, Sparkles,Sun } from 'lucide-react';
+import { Brain, Code2, FlaskConical, LogIn, LogOut, Network, Settings, Sparkles, Sun, Timer } from 'lucide-react';
 import { useEffect,useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -47,6 +47,7 @@ export default function Layout() {
           <div className="hidden md:flex items-center gap-1">
             <NavLink to="/" end className={navClass}><Sun className="h-4 w-4" /> Today</NavLink>
             <NavLink to="/playground" className={navClass}><FlaskConical className="h-4 w-4" /> Playground</NavLink>
+            <NavLink to="/mock" className={navClass}><Timer className="h-4 w-4" /> Mock</NavLink>
             <NavLink to="/concepts" className={navClass}><Network className="h-4 w-4" /> Concepts</NavLink>
             <NavLink to="/review" className={navClass}><Brain className="h-4 w-4" /> Review</NavLink>
           </div>
@@ -118,6 +119,7 @@ export default function Layout() {
       <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-gray-800 bg-gray-950/95 backdrop-blur-xl md:hidden">
         <NavLink to="/" end className={tabClass}><Sun className="h-5 w-5" /><span>Today</span></NavLink>
         <NavLink to="/playground" className={tabClass}><FlaskConical className="h-5 w-5" /><span>Play</span></NavLink>
+        <NavLink to="/mock" className={tabClass}><Timer className="h-5 w-5" /><span>Mock</span></NavLink>
         <NavLink to="/concepts" className={tabClass}><Network className="h-5 w-5" /><span>Concepts</span></NavLink>
         <NavLink to="/review" className={tabClass}><Brain className="h-5 w-5" /><span>Review</span></NavLink>
       </div>

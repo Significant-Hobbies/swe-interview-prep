@@ -7,6 +7,7 @@ import { useAuth } from './contexts/AuthContext';
 import { saasmaker } from './lib/saasmaker';
 import Concepts from './pages/Concepts';
 import Login from './pages/Login';
+import MockInterview from './pages/MockInterview';
 import Playground from './pages/Playground';
 import Review from './pages/Review';
 import Today from './pages/Today';
@@ -39,6 +40,7 @@ function App() {
           <Route index element={<Today />} />
           <Route path="concepts" element={<Concepts />} />
           <Route path="review" element={<Review />} />
+          <Route path="mock" element={<MockInterview />} />
           <Route path="playground" element={<Playground />} />
           {/* Legacy route catch-alls */}
           <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
