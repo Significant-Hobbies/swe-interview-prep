@@ -1,8 +1,9 @@
-import { Brain, FlaskConical, Loader2 } from 'lucide-react';
+import { Brain, CalendarDays, FlaskConical, Loader2, Target } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ALL_CONCEPTS, type Concept, type MasteryEntry,useConceptMastery } from '../hooks/useConcepts';
+import { buildWeaknessStudyPlan, type WeaknessPlanItem } from '../lib/studyPlanner';
 
 const CATEGORIES = [
   { id: 'dsa', name: 'DSA', color: 'blue' },
@@ -48,6 +49,8 @@ export default function Concepts() {
     return { touched, due, rotting, strong, total: ALL_CONCEPTS.length };
   }, [mastery]);
 
+  const studyPlan = useMemo(() => buildWeaknessStudyPlan(ALL_CONCEPTS, mastery), [mastery]);
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-6">
       <div className="mb-6">
@@ -64,6 +67,8 @@ export default function Concepts() {
         <Stat label="Strong" value={stats.strong} accent="green" />
         <Stat label="Untouched" value={stats.total - stats.touched} accent="gray" />
       </div>
+
+      <WeaknessPlanner plan={studyPlan} />
 
       <div className="mb-4 flex flex-wrap gap-2">
         <FilterBtn active={filter === 'all'} onClick={() => setFilter('all')}>All</FilterBtn>
@@ -119,6 +124,109 @@ export default function Concepts() {
           onReview={(rating) => review(selected.id, rating)}
         />
       )}
+    </div>
+  );
+}
+
+function practiceHref(item: WeaknessPlanItem): string {
+  const params = new URLSearchParams({
+    concept: item.concept.id,
+    task: item.taskType,
+    prompt: item.prompt,
+  });
+  return `/playground?${params}`;
+}
+
+function confidenceLabel(item: WeaknessPlanItem): string {
+  if (item.confidence === null) return 'new';
+  return `${Math.round(item.confidence * 100)}%`;
+}
+
+function WeaknessPlanner({ plan }: { plan: ReturnType<typeof buildWeaknessStudyPlan> }) {
+  return (
+    <section className="mb-6 rounded-xl border border-gray-800 bg-gray-900/40 p-4 sm:p-5">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
+            <Target className="h-4 w-4 text-purple-400" />
+            Weakness-driven planner
+          </h2>
+          <p className="mt-1 text-sm text-gray-500">
+            Ranked from FSRS confidence, due dates, lapses, untouched concepts, and prereq readiness.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-right sm:grid-cols-4">
+          <MiniStat label="Ready" value={plan.summary.readyWeaknesses} />
+          <MiniStat label="Due" value={plan.summary.due} />
+          <MiniStat label="New" value={plan.summary.untouched} />
+          <MiniStat label="Blocked" value={plan.summary.blockedWeaknesses} />
+        </div>
+      </div>
+
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]">
+        <div className="grid gap-2 sm:grid-cols-2">
+          {plan.focus.slice(0, 4).map(item => (
+            <Link
+              key={item.concept.id}
+              to={practiceHref(item)}
+              className="group rounded-lg border border-gray-800 bg-gray-950/70 p-3 transition-colors hover:border-purple-700/60 hover:bg-purple-950/20"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="truncate text-sm font-medium text-gray-100">{item.concept.name}</div>
+                  <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[10px] uppercase tracking-wide text-gray-500">
+                    <span>{item.concept.category}</span>
+                    <span>·</span>
+                    <span>{item.taskType}</span>
+                    <span>·</span>
+                    <span>{item.minutes}m</span>
+                  </div>
+                </div>
+                <span className="rounded bg-black/40 px-2 py-0.5 text-xs text-purple-300">
+                  {confidenceLabel(item)}
+                </span>
+              </div>
+              <p className="mt-2 line-clamp-2 text-xs text-gray-500">{item.reason}</p>
+              {item.blockedBy.length > 0 && (
+                <div className="mt-2 text-[10px] text-orange-300">Repair prereq first: {item.blockedBy.join(', ')}</div>
+              )}
+            </Link>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
+          <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            <CalendarDays className="h-3.5 w-3.5" />
+            7-day rotation
+          </div>
+          <div className="space-y-2">
+            {plan.schedule.map(day => (
+              <Link
+                key={`${day.dayIndex}-${day.item.concept.id}`}
+                to={practiceHref(day.item)}
+                className="flex items-center justify-between gap-3 rounded-md px-2 py-1.5 transition-colors hover:bg-gray-900"
+              >
+                <div className="min-w-0">
+                  <div className="text-xs text-gray-500">{day.label}</div>
+                  <div className="truncate text-sm text-gray-200">{day.item.concept.name}</div>
+                </div>
+                <div className="shrink-0 text-right text-[10px] uppercase text-gray-600">
+                  {day.item.taskType} · {day.item.minutes}m
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MiniStat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded border border-gray-800 bg-gray-950 px-2 py-1">
+      <div className="text-[9px] uppercase tracking-wide text-gray-600">{label}</div>
+      <div className="text-sm font-semibold text-gray-200">{value}</div>
     </div>
   );
 }
