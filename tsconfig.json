@@ -1,3 +1,14 @@
 {
-  "extends": "@saas-maker/tsconfig/vite.json"
+  "extends": "@saas-maker/tsconfig/vite.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noPropertyAccessFromIndexSignature": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["api", "server", "shared", "src", "tests", "vite-env.d.ts", "vite.config.js"],
+  "exclude": ["dist", "node_modules"]
 }

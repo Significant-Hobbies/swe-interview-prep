@@ -74,14 +74,17 @@ const PATTERNS: Record<InterviewCategory, string[]> = {
   behavioral: ['specific situation', 'measured result', 'reflection'],
 };
 
+const INTERVIEW_CATEGORIES: InterviewCategory[] = ['dsa', 'lld', 'hld', 'behavioral'];
+
 export function startMockInterview(config: MockInterviewConfig): MockInterviewSession {
-  const mix = config.mix.length > 0 ? config.mix : ['dsa', 'hld', 'behavioral'];
-  const turns = mix.slice(0, 6).map((type, index) => {
-    const category = type === 'mixed' ? (['dsa', 'lld', 'hld', 'behavioral'][index % 4] as InterviewCategory) : type;
+  const mix: MockInterviewType[] = config.mix.length > 0 ? config.mix : ['dsa', 'hld', 'behavioral'];
+  const turns: MockTurn[] = mix.slice(0, 6).map((type, index) => {
+    const category = type === 'mixed' ? INTERVIEW_CATEGORIES[index % INTERVIEW_CATEGORIES.length] : type;
+    const prompts = PROMPTS[category];
     return {
       id: `turn-${index + 1}`,
       type: category,
-      prompt: PROMPTS[category][index % PROMPTS[category].length],
+      prompt: prompts[index % prompts.length],
     };
   });
 

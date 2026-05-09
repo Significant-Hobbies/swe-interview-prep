@@ -18,7 +18,7 @@ function loadDiagram(problemId: string) {
   }
 }
 
-function saveDiagram(problemId: string, elements: any[], appState: any) {
+function saveDiagram(problemId: string, elements: readonly any[], appState: any) {
   localStorage.setItem(
     STORAGE_PREFIX + problemId,
     JSON.stringify({ elements, appState: { zoom: appState.zoom, scrollX: appState.scrollX, scrollY: appState.scrollY } })
@@ -35,11 +35,11 @@ export default function DiagramEditor({ problemId, onElementsChange }: { problem
   }, [problemId]);
 
   const handleChange = useCallback(
-    (elements: any[], appState: any) => {
+    (elements: readonly any[], appState: any) => {
       if (saveTimer.current) clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(() => {
         saveDiagram(problemId, elements, appState);
-        onElementsChange?.(elements);
+        onElementsChange?.([...elements]);
       }, 500);
     },
     [problemId, onElementsChange]

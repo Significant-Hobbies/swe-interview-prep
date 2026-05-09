@@ -85,7 +85,7 @@ export function useRepoContent(repoId: string) {
   const [content, setContent] = useState<ParsedRepo>(
     contentCache[repoId] || emptyContent
   );
-  const [loading, setLoading] = useState(!!repoId && !contentCache[repoId]);
+  const [loading, setLoading] = useState<boolean>(!!repoId && !contentCache[repoId]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

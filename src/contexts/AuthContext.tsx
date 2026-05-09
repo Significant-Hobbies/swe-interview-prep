@@ -176,14 +176,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (!window.google?.accounts?.id) {
+    const google = window.google;
+    if (!google?.accounts?.id) {
       console.error('Google Sign-In API not available');
       alert('Google Sign-In is not available. Please check your connection.');
       return;
     }
 
     // Initialize and show One Tap prompt
-    window.google.accounts.id.initialize({
+    google.accounts.id.initialize({
       client_id: clientId,
       callback: (response: any) => {
         if (response.credential) {
@@ -195,7 +196,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
     });
 
-    window.google.accounts.id.prompt((notification: any) => {
+    google.accounts.id.prompt((notification: any) => {
       if (notification.isNotDisplayed()) {
         console.error('One Tap not displayed:', notification.getNotDisplayedReason());
         // Fallback: try to render a button instead
@@ -203,7 +204,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         buttonDiv.id = 'google-signin-button-temp';
         document.body.appendChild(buttonDiv);
 
-        window.google.accounts.id.renderButton(buttonDiv, {
+        google.accounts.id.renderButton(buttonDiv, {
           theme: 'filled_blue',
           size: 'large',
           width: 250,
