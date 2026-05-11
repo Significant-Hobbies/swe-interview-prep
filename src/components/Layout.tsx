@@ -57,6 +57,7 @@ export default function Layout() {
             <div ref={changelogRef} className="relative">
               <button
                 onClick={() => setChangelogOpen(o => !o)}
+                aria-label="What's new"
                 className={`rounded-lg p-1.5 transition-colors ${changelogOpen ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'}`}
                 title="What's new"
               >
@@ -68,6 +69,7 @@ export default function Layout() {
                     <span className="text-sm font-semibold text-white">What's new</span>
                     <button
                       onClick={() => setChangelogOpen(false)}
+                      aria-label="Close changelog"
                       className="text-gray-500 hover:text-gray-300 text-xs"
                     >
                       ✕
@@ -81,6 +83,7 @@ export default function Layout() {
             </div>
             <button
               onClick={() => setSettingsOpen(true)}
+              aria-label="AI settings"
               className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200"
               title="AI Settings"
             >
@@ -95,7 +98,7 @@ export default function Layout() {
                     {((user as any).email?.[0] || '?').toUpperCase()}
                   </div>
                 )}
-                <button onClick={signOut} className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200" title="Sign out">
+                <button onClick={signOut} aria-label="Sign out" className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200" title="Sign out">
                   <LogOut className="h-4 w-4" />
                 </button>
               </>

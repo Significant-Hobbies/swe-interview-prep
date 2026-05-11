@@ -134,6 +134,7 @@ export default function Today() {
             <button
               onClick={() => generate(true)}
               disabled={generating}
+              aria-label="Regenerate daily plan"
               className="text-gray-500 hover:text-gray-300 disabled:opacity-30"
               title="Regenerate"
             >

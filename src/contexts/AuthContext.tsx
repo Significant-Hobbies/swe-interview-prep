@@ -54,6 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // localStorage — it's in an httpOnly cookie.
   useEffect(() => {
     let cancelled = false;
+    let hasCachedProfile = false;
     // Drop any legacy entry that contained the JWT in localStorage.
     if (localStorage.getItem(LEGACY_KEY)) {
       localStorage.removeItem(LEGACY_KEY);
@@ -61,12 +62,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const raw = localStorage.getItem(PROFILE_KEY);
       if (raw) {
+        hasCachedProfile = true;
         setUser(JSON.parse(raw) as User);
         setIsGuest(false);
       }
     } catch (error) {
       console.error('Failed to load profile from localStorage:', error);
       localStorage.removeItem(PROFILE_KEY);
+    }
+
+    if (isGuest || !hasCachedProfile) {
+      setLoading(false);
+    }
+
+    if (isGuest) {
+      return () => {
+        cancelled = true;
+      };
     }
 
     // Hydrate from cookie session — confirms the cookie is still valid.
@@ -90,13 +102,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       })
       .catch(() => {})
       .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled && hasCachedProfile) setLoading(false);
       });
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isGuest]);
 
   // Load Google Sign-In script
   useEffect(() => {

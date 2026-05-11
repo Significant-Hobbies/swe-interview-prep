@@ -51,14 +51,14 @@ export default function Login() {
         </div>
         <button
           onClick={signInWithGoogle}
-          className="rounded-md px-3 py-1.5 text-sm text-gray-300 transition-colors hover:text-white"
+          className="rounded-md px-3 py-1.5 text-sm text-gray-200 transition-colors hover:text-white"
         >
           Sign in
         </button>
       </header>
 
       <section className="relative z-10 mx-auto w-full max-w-4xl px-6 pt-16 pb-12 text-center sm:pt-24">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900/60 px-3 py-1 text-xs text-gray-300 backdrop-blur">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-700 bg-gray-900/60 px-3 py-1 text-xs text-gray-200 backdrop-blur">
           <Sparkles className="h-3.5 w-3.5 text-blue-400" />
           AI picks your next concept. Every day.
         </div>
@@ -71,7 +71,7 @@ export default function Login() {
           </span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-gray-400">
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-gray-300">
           A daily plan tells you exactly what to work on. Build, draw, and explain in one
           screen — and your AI tutor asks the questions a real interviewer would.
         </p>
@@ -97,7 +97,7 @@ export default function Login() {
             Try as guest
           </button>
         </div>
-        <p className="mt-4 text-xs text-gray-500">No credit card. Set up in under a minute.</p>
+        <p className="mt-4 text-xs text-gray-400">No credit card. Set up in under a minute.</p>
 
         {import.meta.env.DEV && debugInfo && (
           <p className="mt-4 text-xs text-gray-600">{debugInfo}</p>
@@ -114,13 +114,13 @@ export default function Login() {
               <Icon className="h-5 w-5 text-blue-400" />
             </div>
             <h3 className="text-sm font-semibold text-white">{title}</h3>
-            <p className="mt-1.5 text-sm text-gray-400">{body}</p>
+            <p className="mt-1.5 text-sm text-gray-300">{body}</p>
           </div>
         ))}
       </section>
 
       <section className="relative z-10 mx-auto w-full max-w-3xl px-6 py-16">
-        <h2 className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-gray-500">
+        <h2 className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-gray-400">
           What users say
         </h2>
         <SaaSMakerTestimonials />
