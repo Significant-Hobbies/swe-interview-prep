@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef,useState } from 'react';
 
 import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { API_URL } from '../lib/api-url';
 
 const LOCAL_NOTES_KEY = 'dsa-prep-notes';
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 function loadLocalNotes(): Record<string, string> {
   try {

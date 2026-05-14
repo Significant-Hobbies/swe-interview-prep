@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef,useState } from 'react';
 
 import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { API_URL } from '../lib/api-url';
 import type { AnkiCardWithMeta, ReviewData } from '../types';
 
 const STORAGE_KEY = 'dsa-prep-anki';
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 interface CardState {
   ease: number;

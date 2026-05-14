@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef,useState } from 'react';
 
 import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { API_URL } from '../lib/api-url';
 
 export interface AIConfig {
   endpointUrl: string;
@@ -18,8 +19,6 @@ interface AIMessage {
   role: 'user' | 'assistant';
   content: string;
 }
-
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 function readConfig(): AIConfig {
   try {

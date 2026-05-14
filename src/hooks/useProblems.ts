@@ -2,9 +2,8 @@ import React, { useCallback, useEffect,useMemo, useSyncExternalStore } from 'rea
 
 import { getAuthToken,useAuth } from '../contexts/AuthContext';
 import dsaData from '../data/problems.json';
+import { API_URL } from '../lib/api-url';
 import type { AnkiCardWithMeta, InterviewCategory,Problem, ProblemsData } from '../types';
-
-const API_URL = import.meta.env.DEV ? 'http://localhost:3001' : '';
 
 // Lazy-load category data (only DSA is bundled, others loaded on demand)
 const dataCache: Record<string, ProblemsData> = {
