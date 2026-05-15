@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import MarkdownViewer from '../components/MarkdownViewer';
 import { SaaSMakerWaitlist } from '../components/saasmaker-feedback';
+import StudyStats from '../components/StudyStats';
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
@@ -108,6 +109,8 @@ export default function Today() {
           <Network className="h-3.5 w-3.5" /> Concept Graph
         </Link>
       </div>
+
+      <StudyStats />
 
       {!plan ? (
         <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-8 text-center">
