@@ -6,10 +6,12 @@ import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { saasmaker } from './lib/saasmaker';
 
+const About = lazy(() => import('./pages/About'));
 const Concepts = lazy(() => import('./pages/Concepts'));
 const Login = lazy(() => import('./pages/Login'));
 const MockInterview = lazy(() => import('./pages/MockInterview'));
 const Playground = lazy(() => import('./pages/Playground'));
+const Privacy = lazy(() => import('./pages/Privacy'));
 const Review = lazy(() => import('./pages/Review'));
 const Today = lazy(() => import('./pages/Today'));
 
@@ -52,6 +54,8 @@ function App() {
             <Route path="review" element={<Review />} />
             <Route path="mock" element={<MockInterview />} />
             <Route path="playground" element={<Playground />} />
+            <Route path="about" element={<About />} />
+            <Route path="privacy" element={<Privacy />} />
             {/* Legacy route catch-alls */}
             <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
             <Route path="p/*" element={<Navigate to="/concepts" replace />} />
