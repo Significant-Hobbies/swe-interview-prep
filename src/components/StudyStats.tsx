@@ -16,7 +16,7 @@ function calculateStreak(reviewDays: Set<string>): number {
   // Allow today OR yesterday as the starting point — reviewing once a day
   // shouldn't break the streak just because the user reviewed in the
   // morning yesterday and it's now early the next morning.
-  let start = new Date(today);
+  const start = new Date(today);
   if (!reviewDays.has(dayKey(start))) {
     start.setUTCDate(start.getUTCDate() - 1);
     if (!reviewDays.has(dayKey(start))) return 0;
@@ -45,6 +45,7 @@ export default function StudyStats() {
       return { streak: 0, dueNow: 0, weekConcepts: 0, avgConfidence: 0, totalReviewed: 0 };
     }
     const reviewDays = new Set<string>();
+    // eslint-disable-next-line react-hooks/purity
     const now = Date.now();
     const weekAgo = now - 7 * 24 * 60 * 60 * 1000;
     let dueNow = 0;
