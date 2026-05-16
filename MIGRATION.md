@@ -127,6 +127,12 @@ JWT_SECRET=                 # Secret for JWT signing (use strong random string)
    - Add all environment variables in Vercel project settings
    - Redeploy after adding env vars
 
+5. **Deployment validation**
+   - `pnpm build` fails when `VITE_GOOGLE_CLIENT_ID` is missing, because the frontend cannot initialize Google One Tap without it.
+   - `pnpm validate:env:deploy` fails when any production auth/database variable is missing.
+   - GitHub deploy also checks that Cloudflare Pages production has `GOOGLE_CLIENT_ID`, `JWT_SECRET`, `TURSO_DATABASE_URL`, and `TURSO_AUTH_TOKEN` configured as runtime secrets.
+   - The validator only prints missing variable names, not secret values.
+
 ## Guest Mode
 
 Guest mode still works with localStorage fallback:

@@ -6,12 +6,15 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App.jsx'
 import { AuthProvider } from './contexts/AuthContext'
+import { installBrowserMonitoring } from './lib/foundry-monitoring'
 
 const root = document.getElementById('root')
 
 if (!root) {
   throw new Error('Root element not found')
 }
+
+installBrowserMonitoring()
 
 createRoot(root).render(
   <StrictMode>

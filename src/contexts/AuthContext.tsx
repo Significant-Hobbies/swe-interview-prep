@@ -1,4 +1,5 @@
 import { createContext, useCallback,useContext, useEffect, useState } from 'react';
+import { captureAuthFailure } from '../lib/foundry-monitoring';
 
 const GUEST_KEY = 'dsa-prep-guest';
 // Profile cache only — the JWT now lives in an httpOnly cookie (XSS hardening).
@@ -178,12 +179,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (!clientId) {
       console.error('VITE_GOOGLE_CLIENT_ID not configured');
+      captureAuthFailure({
+        provider: 'google',
+        stage: 'signin',
+        reason: 'Missing VITE_GOOGLE_CLIENT_ID',
+        source: 'auth-context',
+      });
       alert('Google Sign-In not configured. Please check environment variables.');
       return;
     }
 
     if (!googleLoaded) {
       console.error('Google Sign-In script not loaded yet');
+      captureAuthFailure({
+        provider: 'google',
+        stage: 'signin',
+        reason: 'Google Sign-In script not loaded',
+        source: 'auth-context',
+      });
       alert('Google Sign-In is loading, please try again in a moment.');
       return;
     }
@@ -191,6 +204,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const google = window.google;
     if (!google?.accounts?.id) {
       console.error('Google Sign-In API not available');
+      captureAuthFailure({
+        provider: 'google',
+        stage: 'signin',
+        reason: 'Google Sign-In API not available',
+        source: 'auth-context',
+      });
       alert('Google Sign-In is not available. Please check your connection.');
       return;
     }
@@ -202,6 +221,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (response.credential) {
           login(response.credential).catch(err => {
             console.error('Login failed:', err);
+            captureAuthFailure({
+              provider: 'google',
+              stage: 'signin',
+              reason: err instanceof Error ? err.message : 'Login failed',
+              source: 'auth-context',
+            });
             alert('Sign-in failed. Please try again.');
           });
         }
@@ -211,6 +236,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     google.accounts.id.prompt((notification: any) => {
       if (notification.isNotDisplayed()) {
         console.error('One Tap not displayed:', notification.getNotDisplayedReason());
+        captureAuthFailure({
+          provider: 'google',
+          stage: 'signin',
+          reason: notification.getNotDisplayedReason(),
+          source: 'auth-context',
+        });
         // Fallback: try to render a button instead
         const buttonDiv = document.createElement('div');
         buttonDiv.id = 'google-signin-button-temp';

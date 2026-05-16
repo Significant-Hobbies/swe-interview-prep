@@ -14,7 +14,7 @@ SWE interview prep tool — Playground (Monaco + Excalidraw + Socratic AI + Feyn
 - DB: Turso (libSQL via `@libsql/client`) — schema auto-initialized on first server start
 - Auth: Google One Tap + JWT (no OAuth redirect flow)
 - Testing: Vitest (unit), Playwright (e2e in `tests/e2e/`)
-- Deploy: Vercel (frontend: `vite build → dist/`; backend: Vercel serverless functions in `api/`)
+- Deploy: Cloudflare Pages (frontend: `vite build → dist/`; backend: Pages Functions in `functions/api/[[path]].js`)
 - Package manager: pnpm
 
 ## Repo structure
@@ -41,7 +41,7 @@ src/                    # React SPA
     behavioral-problems.json
   lib/
     fsrs.ts             # Client FSRS wrapper (ts-fsrs)
-api/                    # Vercel serverless functions (.mjs)
+api/                    # Legacy Vercel-style handlers (.mjs)
   _lib/                 # Shared: DB client, schema, AI helpers
   ai/                   # chat.ts (streaming proxy), models.ts
   auth/                 # Google JWT verify, token issue
@@ -54,16 +54,16 @@ api/                    # Vercel serverless functions (.mjs)
 shared/                 # Shared between api/ and server/
   db/                   # Schema, client, users
   lib/                  # AI helpers, FSRS (server), heuristics
-server/                 # Local Express AI proxy (git submodule) — port 3001
+server/                 # Local Express AI proxy (git submodule) — port 3456
   index.mjs             # Proxies claude/codex/gemini CLI calls
 public/wasm/            # Go WASM interpreter (go-interp.wasm, wasm_exec.js)
 ```
 
 ## Key commands
 ```bash
-pnpm dev            # Express server (:3001) + Vite (:5173) concurrently
+pnpm dev            # Express AI server (:3456) + Vite (:5173) concurrently
 pnpm dev:frontend   # Vite only
-pnpm server         # Express AI server only
+pnpm server         # ensure submodule deps, then Express AI server only
 pnpm build          # vite build → dist/
 pnpm test           # vitest run
 pnpm test:e2e       # playwright test
@@ -78,6 +78,7 @@ pnpm lint           # ESLint
 - **Feynman Gate**: user explains code in plain English → AI grades 0-100 + returns gaps → updates per-concept mastery. Gaps trigger `again`/`hard` FSRS ratings.
 - **Go execution**: WASM-based Go runner in `public/wasm/`. `/api/go-run.mjs` handles execution.
 - **`server/` is a git submodule** — local Express AI proxy. Clone with `git submodule update --init`.
+- **Local server dependencies**: `pnpm dev` and `pnpm server` run `npm --prefix server ci --ignore-scripts` before starting the submodule server.
 - **DB auto-init**: schema tables created on server startup — no migration runner needed.
 - **AI is multi-provider**: client passes `aiConfig: {endpointUrl, apiKey, model}` to any API endpoint; server falls back to `AI_ENDPOINT_URL`/`AI_API_KEY`/`AI_MODEL` env vars.
 - **Guest mode**: partial (no concept mastery, no daily/weekly plan). Full loop requires Google sign-in.

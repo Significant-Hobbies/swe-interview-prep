@@ -46,17 +46,17 @@ graph TB
     end
 
     subgraph "Local Dev Server - Express"
-        R[Local AI API] --> S[claude CLI]
+        R[Local AI API :3456] --> S[claude CLI]
         R --> T[codex CLI]
         R --> U[gemini CLI]
     end
 
-    subgraph "Backend - Supabase"
-        V[PostgreSQL] --> W[problems]
+    subgraph "Cloudflare Pages Functions + Turso"
+        V[Turso libSQL] --> W[problems]
         V --> X[progress]
         V --> Y[notes]
         V --> Z[spaced_repetition]
-        AA[Auth] --> AB[Email/Password]
+        AA[Google One Tap] --> AB[JWT Cookie]
     end
 
     subgraph "External APIs"
@@ -87,16 +87,20 @@ graph TB
 **Key Components:**
 
 - **Frontend**: React 19 SPA with TailwindCSS, Monaco Editor for code, Excalidraw for diagrams
-- **Local Dev Server**: Express local AI server for CLI tools (claude, codex, gemini) to avoid API keys during development
-- **Database**: Supabase PostgreSQL stores problems, user progress, notes, and spaced repetition schedules
+- **Local Dev Server**: Express local AI server on `:3456` for CLI tools (claude, codex, gemini) to avoid API keys during development
+- **Backend**: Cloudflare Pages Functions handle auth, progress, notes, spaced repetition, and AI endpoints
+- **Database**: Turso/libSQL stores problems, user progress, notes, and spaced repetition schedules
+- **Auth**: Google One Tap posts credentials to `/api/auth/google`; the server issues an httpOnly JWT cookie
 - **External Integrations**: LeetCode API for problem import, multiple AI providers for hints
 
 ## Run Steps
 
 ### Prerequisites
 
-- Node.js 18+
-- Supabase account (free tier)
+- Node.js 22+
+- pnpm
+- Cloudflare account for production deploys
+- Turso database for production runtime data
 
 ### Setup
 
@@ -104,7 +108,7 @@ graph TB
    ```bash
    git clone https://github.com/yourusername/interview-coder.git
    cd interview-coder
-   npm install
+   pnpm install
    ```
 
 2. **Configure environment**
@@ -112,34 +116,50 @@ graph TB
    cp .env.example .env.local
    ```
 
-   Edit `.env.local`:
+   Required build-time value:
    ```bash
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id
    ```
 
-3. **Run database migrations**
+   Required runtime values for Cloudflare Pages Functions:
    ```bash
-   npx supabase db push
+   GOOGLE_CLIENT_ID=your_google_oauth_client_id
+   JWT_SECRET=your_jwt_secret
+   TURSO_DATABASE_URL=libsql://...
+   TURSO_AUTH_TOKEN=...
+   ```
+
+   Optional AI/provider values can be supplied through the UI per request or via server env fallbacks such as `AI_ENDPOINT_URL`, `AI_API_KEY`, and `AI_MODEL`.
+
+3. **Validate local env**
+   ```bash
+   pnpm validate:env:build
+   pnpm validate:env:runtime
    ```
 
 4. **Start development server**
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
-   Opens at `http://localhost:5173` (frontend) and `http://localhost:3456` (local AI server)
+   Opens at `http://localhost:5173` (frontend) and `http://localhost:3456` (local AI server). The first run installs the `server/` submodule dependencies.
 
 ### Production Build
 
 ```bash
-npm run build
-npm run preview
+pnpm build
+pnpm preview
 ```
 
-Deploy to Vercel by importing the GitHub repository and setting environment variables.
+Production deploys through Cloudflare Pages:
+
+```bash
+pnpm deploy
+```
+
+The deploy path validates env, builds `dist/`, and runs `wrangler pages deploy dist/ --project-name=swe-interview-prep`. GitHub Actions also validates Cloudflare Pages runtime secret names before deploying.
 
 ---
 
-**Tech Stack**: React 19, TypeScript, TailwindCSS, Vite, Supabase, Vercel
+**Tech Stack**: React 19, TypeScript, TailwindCSS, Vite, Cloudflare Pages Functions, Turso/libSQL
 **License**: MIT
