@@ -1,0 +1,247 @@
+{
+  "defaultByCategory": {
+    "dsa": {
+      "track": "Runtime",
+      "milestone": "Algorithm fluency lab",
+      "exitCriteria": [
+        "Solve from scratch without references.",
+        "Explain the invariant, complexity, and one failure case.",
+        "Add one edge-case test before marking it reviewed."
+      ],
+      "artifacts": [
+        "Runnable solution",
+        "Test command or playground output",
+        "Short explanation note"
+      ]
+    },
+    "lld": {
+      "track": "Runtime",
+      "milestone": "Product modeling drill",
+      "exitCriteria": [
+        "Model state, behavior, and extension points explicitly.",
+        "Explain the tradeoff behind each class/interface boundary.",
+        "Prove one mutation or interaction path with a tiny test."
+      ],
+      "artifacts": [
+        "Class/state sketch",
+        "Runnable implementation snippet",
+        "Design tradeoff note"
+      ]
+    },
+    "hld": {
+      "track": "Infra",
+      "milestone": "System design evidence pack",
+      "exitCriteria": [
+        "State assumptions, bottlenecks, and failure modes.",
+        "Choose storage, cache, queue, and deploy boundaries deliberately.",
+        "Describe how you would observe and roll back the design in production."
+      ],
+      "artifacts": [
+        "Architecture sketch",
+        "Capacity or query estimate",
+        "Failure-mode checklist"
+      ]
+    },
+    "behavioral": {
+      "track": "Runtime",
+      "milestone": "Interview narrative bank",
+      "exitCriteria": [
+        "Tell one concrete story with situation, action, result, and lesson.",
+        "Name the tradeoff you made and what you would do differently.",
+        "Practice one skeptical follow-up answer."
+      ],
+      "artifacts": [
+        "STAR story draft",
+        "Follow-up answer",
+        "Evidence or metric from the story"
+      ]
+    },
+    "ml": {
+      "track": "TinyGPT",
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Pass shape or parity checks for the concept.",
+        "Explain the forward path and the failure mode without notes.",
+        "Produce an overfit, eval, or checkpoint proof where relevant."
+      ],
+      "artifacts": [
+        "Reference implementation",
+        "Test/eval output",
+        "Shape or loss note"
+      ]
+    }
+  },
+  "byConceptId": {
+    "ml-math": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Write expected dimensions for every vector, matrix, and matmul operation.",
+        "Pass tiny NumPy shape drills.",
+        "Explain where broadcasting is allowed and where it should fail."
+      ],
+      "artifacts": ["Shape drill code", "Passing test output", "Dimension trace note"]
+    },
+    "ml-gradient-descent": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Train a tiny model with a visible loss decrease.",
+        "Explain learning rate, gradient step, and why loss can diverge.",
+        "Compare at least two optimizer settings."
+      ],
+      "artifacts": ["Training snippet", "Loss output", "Optimizer comparison note"]
+    },
+    "ml-backprop": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Trace one forward and backward pass.",
+        "Verify gradients against a finite-difference or autograd reference.",
+        "Explain the chain rule path in plain English."
+      ],
+      "artifacts": ["Backward-pass code", "Gradient check output", "Chain-rule note"]
+    },
+    "ml-softmax-xent": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Compute one softmax cross-entropy example by hand.",
+        "Use a numerically stable implementation.",
+        "Connect loss to next-token prediction."
+      ],
+      "artifacts": ["Hand calculation", "Stable implementation", "Loss verification output"]
+    },
+    "ml-adamw": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Show moment updates and weight decay separately.",
+        "Explain AdamW vs Adam weight decay.",
+        "Run one gradient clipping failure drill."
+      ],
+      "artifacts": ["Optimizer step trace", "Training comparison output", "Failure note"]
+    },
+    "ml-tokenization": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Encode and decode text losslessly.",
+        "Document byte-level vs BPE tradeoffs.",
+        "Pass round-trip tests for edge cases."
+      ],
+      "artifacts": ["Tokenizer code", "Round-trip tests", "Vocabulary note"]
+    },
+    "ml-language-modeling": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Train a next-token model with train/validation loss.",
+        "Generate samples from the trained model.",
+        "Explain perplexity and context-window limits."
+      ],
+      "artifacts": ["Training loop", "Generated samples", "Loss/perplexity note"]
+    },
+    "ml-sampling": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Compare greedy, temperature, and top-k decoding.",
+        "Explain repetition and randomness failure modes.",
+        "Save fixed-prompt outputs for comparison."
+      ],
+      "artifacts": ["Sampling code", "Output comparison", "Decoding tradeoff note"]
+    },
+    "ml-embeddings": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Trace token and position embedding shapes.",
+        "Explain context length and tied weights.",
+        "Pass an output projection shape test."
+      ],
+      "artifacts": ["Embedding code", "Shape assertions", "B/T/C trace note"]
+    },
+    "ml-self-attention": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Implement Q/K/V attention with causal masking.",
+        "Pass shape and mask tests.",
+        "Explain why future tokens are hidden."
+      ],
+      "artifacts": ["Attention code", "Mask/parity tests", "Attention trace note"]
+    },
+    "ml-multi-head": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Split and rejoin heads correctly.",
+        "Pass head-dimension shape assertions.",
+        "Explain output projection and parallel heads."
+      ],
+      "artifacts": ["Multi-head code", "Shape test output", "Projection note"]
+    },
+    "ml-transformer-block": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Build pre-LayerNorm, attention, MLP, and residual paths.",
+        "Pass full block shape tests.",
+        "Overfit a tiny repeated dataset."
+      ],
+      "artifacts": ["Transformer block code", "Overfit loss output", "Residual path note"]
+    },
+    "ml-training": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Run seeded training with train/validation loss.",
+        "Catch NaNs or exploding gradients.",
+        "Prove the model can overfit 1-10 KB of text."
+      ],
+      "artifacts": ["Training harness", "Loss chart or log", "Debug checklist"]
+    },
+    "ml-checkpointing": {
+      "milestone": "Python TinyGPT reference",
+      "exitCriteria": [
+        "Save model, optimizer, config, and dataset manifest.",
+        "Reload and resume training.",
+        "Verify deterministic behavior after restore."
+      ],
+      "artifacts": ["Checkpoint files", "Resume command output", "Manifest note"]
+    },
+    "ml-lora": {
+      "milestone": "Browser TinyGPT prototype",
+      "exitCriteria": [
+        "Inject LoRA into selected linear layers.",
+        "Freeze base weights and save adapter-only checkpoints.",
+        "Compare base, few-shot, LoRA, and LoRA plus retrieval."
+      ],
+      "artifacts": ["LoRA layer code", "Adapter checkpoint", "Baseline comparison"]
+    },
+    "ml-data-engineering": {
+      "milestone": "Browser TinyGPT prototype",
+      "exitCriteria": [
+        "Clean, dedupe, and format JSONL examples.",
+        "Add leakage and memorization checks.",
+        "Document what style signal the data should teach."
+      ],
+      "artifacts": ["JSONL dataset", "Dedup report", "Leakage test output"]
+    },
+    "ml-browser-runtime": {
+      "milestone": "Browser TinyGPT prototype",
+      "exitCriteria": [
+        "Run work inside a Web Worker.",
+        "Persist checkpoint state through reload.",
+        "Keep UI responsive during inference or training shell work."
+      ],
+      "artifacts": ["Worker runtime", "OPFS checkpoint proof", "Responsiveness screenshot"]
+    },
+    "ml-webgpu": {
+      "milestone": "Browser TinyGPT prototype",
+      "exitCriteria": [
+        "Implement one WGSL compute kernel.",
+        "Match CPU/WASM output within tolerance.",
+        "Measure whether acceleration is real."
+      ],
+      "artifacts": ["WGSL kernel", "Parity test output", "Benchmark result"]
+    },
+    "ml-evaluation": {
+      "milestone": "Browser TinyGPT prototype",
+      "exitCriteria": [
+        "Run held-out prompts against multiple baselines.",
+        "Check for leakage, copying, and hallucination.",
+        "Write a pass/fail decision before more training."
+      ],
+      "artifacts": ["Eval prompt set", "Baseline table", "Decision note"]
+    }
+  }
+}

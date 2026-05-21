@@ -17,6 +17,10 @@ describe('pickDailyConcept', () => {
     expect(plan).not.toBeNull();
     expect(['a', 'b', 'c']).toContain(plan.concept_id);
     expect(plan.generator).toBe('heuristic');
+    expect(plan.roadmap_track).toBeTruthy();
+    expect(plan.exit_criteria.length).toBeGreaterThan(0);
+    expect(plan.artifacts.length).toBeGreaterThan(0);
+    expect(plan.task_prompt).toContain('Roadmap proof contract');
   });
 
   it('picks lowest-confidence concept', () => {

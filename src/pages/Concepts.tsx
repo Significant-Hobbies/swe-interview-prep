@@ -179,6 +179,49 @@ type PersonalTrack = {
   phases: PersonalRoadmapPhase[];
 };
 
+const TRACK_MILESTONES: Record<PersonalTrackId, Array<{ title: string; output: string }>> = {
+  runtime: [
+    {
+      title: 'URL monitor in TS/Python/Go/Rust',
+      output: 'Same service, four runtimes, with notes on blocking, memory, deploy shape, and failure handling.',
+    },
+    {
+      title: 'AI product workflow',
+      output: 'One browser UI plus API adapter, fallback behavior, logs, tests, and production smoke proof.',
+    },
+  ],
+  database: [
+    {
+      title: 'Product truth schema',
+      output: 'Users, tasks, events, scores, feedback, migrations, rollback script, and invalid-state tests.',
+    },
+    {
+      title: 'Performance lab',
+      output: 'Slow query, index fix, transaction race, cache invalidation path, and restore drill.',
+    },
+  ],
+  infra: [
+    {
+      title: 'Deployable service template',
+      output: 'Docker, env validation, CI, Cloudflare deploy, smoke checks, release notes, rollback steps.',
+    },
+    {
+      title: 'Incident drill book',
+      output: 'Three simulated incidents with timeline, evidence, mitigation, prevention, and monitoring gaps.',
+    },
+  ],
+  ml: [
+    {
+      title: 'Python TinyGPT reference',
+      output: 'Tokenizer, bigram, transformer block, training loop, checkpointing, eval prompts, overfit proof.',
+    },
+    {
+      title: 'Browser TinyGPT prototype',
+      output: 'Worker runtime, WASM path, OPFS checkpoint, WebGPU parity test, and base-vs-LoRA comparison.',
+    },
+  ],
+};
+
 function roadmapNodeKey(phase: PersonalRoadmapPhase, node: PersonalRoadmapNode) {
   return `${phase.id}:${node.title}`;
 }
@@ -217,21 +260,20 @@ function DeepDiveRoadmaps() {
               Pick one track and one node. Everything else stays as a compact outline.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-1 rounded-md border border-gray-800 bg-gray-900 p-1 sm:min-w-[420px] sm:grid-cols-4">
-            {PERSONAL_TRACKS.map(item => (
-              <button
-                key={item.id}
-                onClick={() => selectTrack(item.id)}
-                className={`rounded px-3 py-2 text-xs font-medium transition-colors ${
-                  trackId === item.id
-                    ? 'bg-gray-100 text-gray-950'
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
-                }`}
-              >
-                {item.title}
-              </button>
-            ))}
-          </div>
+          <label className="flex flex-col gap-1 text-xs font-medium text-gray-500 sm:min-w-[260px]">
+            Track
+            <select
+              value={trackId}
+              onChange={(event) => selectTrack(event.target.value as PersonalTrackId)}
+              className="h-10 rounded-md border border-gray-700 bg-gray-900 px-3 text-sm font-semibold text-gray-100 outline-none transition-colors hover:border-gray-600 focus:border-blue-500"
+            >
+              {PERSONAL_TRACKS.map(item => (
+                <option key={item.id} value={item.id}>
+                  {item.title}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       </div>
 
@@ -243,6 +285,19 @@ function DeepDiveRoadmaps() {
             </div>
             <div className="mt-1 text-sm font-medium text-gray-100">{track.title}</div>
             <p className="mt-1 line-clamp-2 text-xs leading-5 text-gray-500">{track.description}</p>
+          </div>
+          <div className="border-b border-gray-800 p-3">
+            <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+              Milestones
+            </div>
+            <div className="space-y-2">
+              {TRACK_MILESTONES[track.id].map(item => (
+                <div key={item.title} className="rounded-md border border-gray-800 bg-gray-900/40 p-2">
+                  <div className="text-xs font-medium text-gray-200">{item.title}</div>
+                  <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-gray-500">{item.output}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="max-h-[440px] overflow-y-auto p-3">
             {track.phases.map(phase => (
@@ -289,6 +344,7 @@ function RoadmapFocusPanel({ node, phase }: { node: PersonalRoadmapNode; phase: 
     prompt: node.prompt,
   });
   const resource = roadmapResource(node);
+  const execution = roadmapExecutionPlan(node);
 
   return (
     <div className="min-w-0 p-4 sm:p-6">
@@ -348,11 +404,85 @@ function RoadmapFocusPanel({ node, phase }: { node: PersonalRoadmapNode; phase: 
         </div>
       </div>
 
+      <div className="mt-3 grid gap-3 xl:grid-cols-3">
+        <RoadmapChecklist title="Exit criteria" items={execution.exitCriteria} tone="blue" />
+        <RoadmapChecklist title="Drills" items={execution.drills} tone="purple" />
+        <RoadmapChecklist title="Artifacts" items={execution.artifacts} tone="amber" />
+      </div>
+
       <p className="mt-3 text-xs leading-5 text-gray-600">
         Ask AI opens this node with the right prompt prefilled.
       </p>
     </div>
   );
+}
+
+function RoadmapChecklist({
+  title,
+  items,
+  tone,
+}: {
+  title: string;
+  items: string[];
+  tone: 'amber' | 'blue' | 'purple';
+}) {
+  const toneClass = {
+    amber: 'text-amber-300 border-amber-900/40 bg-amber-950/10',
+    blue: 'text-blue-300 border-blue-900/40 bg-blue-950/10',
+    purple: 'text-purple-300 border-purple-900/40 bg-purple-950/10',
+  }[tone];
+
+  return (
+    <div className={`rounded-md border p-3 ${toneClass}`}>
+      <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide opacity-80">
+        {title}
+      </div>
+      <ul className="space-y-1.5 text-xs leading-5 text-gray-300">
+        {items.map(item => (
+          <li key={item} className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-current" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function roadmapExecutionPlan(node: PersonalRoadmapNode) {
+  const laneExit: Partial<Record<PersonalRoadmapNode['lane'], string>> = {
+    database: 'Queries, constraints, and migration behavior are proven against realistic sample data.',
+    data: 'Backfill or analytics result is reproducible, idempotent, and verified with before/after checks.',
+    devops: 'Pipeline, release, or rollback path fails loudly and has a documented recovery command.',
+    foundation: 'You can explain the runtime behavior before and after a forced failure.',
+    go: 'Service handles cancellation, shutdown, races, and slow paths under test.',
+    infra: 'Local, container, and deployed behavior match with explicit config boundaries.',
+    ml: 'Reference implementation passes shape/parity tests and has an overfit or eval proof.',
+    production: 'Logs, metrics, tests, and smoke checks prove the behavior outside the happy path.',
+    python: 'Typed service or script runs with isolated deps, tests, and reproducible CLI commands.',
+    rust: 'Compiler-enforced ownership/error model is explained without clone-or-unwrap shortcuts.',
+    typescript: 'Browser, server, and Worker boundaries are typed and tested where they differ.',
+  };
+
+  return {
+    exitCriteria: [
+      node.proof,
+      laneExit[node.lane] ?? 'Behavior is implemented, tested, and explained from first principles.',
+      'One concise note explains what failed, what was fixed, and what remains risky.',
+    ],
+    drills: [
+      `Explain: ${node.learn.slice(0, 3).join(', ')} without looking up notes.`,
+      `Build: ${node.prompt}`,
+      'Debug: intentionally break one assumption and write the evidence trail.',
+      'Interview: answer one design, one coding, and one failure-mode question for this node.',
+    ],
+    artifacts: [
+      'Code commit or runnable snippet',
+      'Test/check command with result',
+      'Screenshot, log excerpt, benchmark, query plan, or eval output',
+      'Short review note linked to the next roadmap node',
+    ],
+  };
 }
 
 function roadmapResource(node: PersonalRoadmapNode) {

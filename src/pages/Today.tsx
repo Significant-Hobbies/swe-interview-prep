@@ -5,9 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { SaaSMakerWaitlist } from '../components/saasmaker-feedback';
 import StudyStats from '../components/StudyStats';
-import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
+import { getRoadmapContext, type RoadmapContext } from '../lib/roadmapContext';
 
 interface DailyPlan {
   headline: string;
@@ -17,6 +17,10 @@ interface DailyPlan {
   task_prompt: string;
   minutes: number;
   rationale: string;
+  roadmap_track?: string;
+  roadmap_milestone?: string;
+  exit_criteria?: string[];
+  artifacts?: string[];
 }
 
 interface WeeklyReview {
@@ -47,22 +51,20 @@ export default function Today() {
   const [weekly, setWeekly] = useState<WeeklyReview | null>(null);
 
   const loadPlan = useCallback((isRetry = false) => {
-    const token = getAuthToken();
-    if (!token) { setLoading(false); return; }
     if (isRetry) {
       // Reset state when the user explicitly retries; on first load the
       // initial state already reflects "loading".
       setLoading(true);
       setLoadFailed(false);
     }
-    fetch('/api/learning?action=daily', { headers: { Authorization: `Bearer ${token}` } })
+    fetch('/api/learning?action=daily', { credentials: 'include' })
       .then(r => {
         if (!r.ok) throw new Error(`request failed (${r.status})`);
         return r.json();
       })
       .then(d => { setPlan(d.plan); setUpcoming(d.upcoming || []); setLoading(false); return undefined; })
       .catch(() => { setLoadFailed(true); setLoading(false); });
-    fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
+    fetch('/api/learning?action=weekly', { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
       .then(d => setWeekly(d?.review ?? null))
       .catch(() => {});
@@ -75,14 +77,12 @@ export default function Today() {
   const generate = async (force = false) => {
     setGenerating(true);
     setError(null);
-    const token = getAuthToken();
     const config = loadAIConfig();
-    if (!token) { setError('Sign in required'); setGenerating(false); return; }
-    if (!config.model) { setError('Configure AI first'); setGenerating(false); return; }
     try {
       const res = await fetch('/api/learning?action=daily', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ aiConfig: config, force }),
       });
       const data = await res.json();
@@ -104,6 +104,25 @@ export default function Today() {
     });
     navigate(`/playground?${params}`);
   };
+  const selectedConcept = plan ? CONCEPT_BY_ID[plan.concept_id] : null;
+  const roadmap = plan
+    ? ({
+        track: plan.roadmap_track,
+        milestone: plan.roadmap_milestone,
+        exitCriteria: plan.exit_criteria,
+        artifacts: plan.artifacts,
+      } as Partial<RoadmapContext>)
+    : null;
+  const fallbackRoadmap = getRoadmapContext(selectedConcept);
+  const planRoadmap = plan
+    ? {
+        track: roadmap?.track ?? fallbackRoadmap?.track,
+        milestone: roadmap?.milestone ?? fallbackRoadmap?.milestone,
+        exitCriteria: roadmap?.exitCriteria ?? fallbackRoadmap?.exitCriteria ?? [],
+        artifacts: roadmap?.artifacts ?? fallbackRoadmap?.artifacts ?? [],
+      }
+    : null;
+  const todayTaskPrompt = plan ? visibleTaskPrompt(plan.task_prompt) : '';
 
   if (loading) {
     return <div className="flex h-[60vh] items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-gray-600" /></div>;
@@ -178,8 +197,22 @@ export default function Today() {
             <span className="font-medium">{plan.concept_name || CONCEPT_BY_ID[plan.concept_id]?.name || plan.concept_id}</span>
           </div>
           <div className="mt-5 rounded-lg border border-gray-800 bg-black/30 p-4 text-sm text-gray-200">
-            <MarkdownViewer content={plan.task_prompt} />
+            <MarkdownViewer content={todayTaskPrompt} />
           </div>
+          {planRoadmap && (
+            <div className="mt-4 rounded-lg border border-blue-900/40 bg-blue-950/10 p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <span className="rounded bg-blue-500/15 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-blue-300">
+                  {planRoadmap.track}
+                </span>
+                <span className="text-xs font-medium text-gray-200">{planRoadmap.milestone}</span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <ProofList title="Exit criteria" items={planRoadmap.exitCriteria} />
+                <ProofList title="Artifacts" items={planRoadmap.artifacts} />
+              </div>
+            </div>
+          )}
           <p className="mt-3 text-xs italic text-gray-500">{plan.rationale}</p>
           <div className="mt-6 flex gap-2">
             <button
@@ -254,6 +287,31 @@ export default function Today() {
         </p>
         <SaaSMakerWaitlist />
       </div>
+    </div>
+  );
+}
+
+function visibleTaskPrompt(prompt: string): string {
+  const marker = 'Roadmap proof contract:';
+  const index = prompt.indexOf(marker);
+  if (index === -1) return prompt;
+  return prompt.slice(0, index).trim();
+}
+
+function ProofList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-blue-300/80">
+        {title}
+      </div>
+      <ul className="space-y-1.5 text-xs leading-5 text-gray-300">
+        {items.map(item => (
+          <li key={item} className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-300" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

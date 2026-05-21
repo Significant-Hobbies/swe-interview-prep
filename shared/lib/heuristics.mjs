@@ -3,6 +3,7 @@
  */
 
 import { decayConfidence } from './fsrs.mjs';
+import { enrichPlanWithRoadmap, roadmapPromptSuffix } from './roadmap-context.mjs';
 
 const TASK_TYPES = ['build', 'review', 'read', 'explain'];
 
@@ -51,11 +52,12 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
     : dayOfYear;
   const taskType = TASK_TYPES[day % TASK_TYPES.length];
 
+  const proofContract = roadmapPromptSuffix(c);
   const prompts = {
-    build: `Implement ${c.name} from scratch. No reference. Aim for a tested, idiomatic solution.`,
-    review: `Recall the key API/properties of ${c.name}. Rewrite a small example. Identify one edge case you've missed before.`,
-    read: `Read the pinned library section on ${c.name}. Then write 3 questions a senior would ask in an interview.`,
-    explain: `Open Companion. Have it grill you on ${c.name} — tradeoffs, complexity, when NOT to use it.`,
+    build: `Implement ${c.name} from scratch. No reference. Aim for a tested, idiomatic solution.${proofContract}`,
+    review: `Recall the key API/properties of ${c.name}. Rewrite a small example. Identify one edge case you've missed before.${proofContract}`,
+    read: `Read the pinned library section on ${c.name}. Then write 3 questions a senior would ask in an interview.${proofContract}`,
+    explain: `Open Companion. Have it grill you on ${c.name} — tradeoffs, complexity, when NOT to use it.${proofContract}`,
   };
 
   const headline = conf === null
@@ -68,7 +70,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
 
   const minutes = taskType === 'build' ? 30 : taskType === 'read' ? 20 : 15;
 
-  return {
+  return enrichPlanWithRoadmap({
     headline,
     concept_id: c.id,
     concept_name: c.name,
@@ -79,7 +81,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
       ? `${c.category.toUpperCase()} concept, prereqs satisfied, no prior reps logged.`
       : `Decayed to ${Math.round(conf * 100)}% confidence — highest-leverage gap among ${concepts.length} tracked concepts.`,
     generator: 'heuristic',
-  };
+  }, c);
 }
 
 const CONCEPT_KEYWORDS = {

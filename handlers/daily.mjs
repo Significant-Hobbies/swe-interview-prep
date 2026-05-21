@@ -4,6 +4,7 @@ import { requireAuth } from '../api/auth/verify.mjs';
 import { decayConfidence } from '../shared/lib/fsrs.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
 import { pickDailyConcept } from '../shared/lib/heuristics.mjs';
+import { enrichPlanWithRoadmap, getRoadmapContext } from '../shared/lib/roadmap-context.mjs';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -37,7 +38,9 @@ Output STRICT JSON:
   "rationale": "1-2 sentences why this beats other options"
 }
 
-Pick from weak/due concepts but respect prereqs. Prefer concepts with rotting confidence over untouched ones. Vary task_type day-to-day to avoid burnout.`;
+Pick from weak/due concepts but respect prereqs. Prefer concepts with rotting confidence over untouched ones. Vary task_type day-to-day to avoid burnout.
+
+The task_prompt must include the roadmap proof contract for the selected concept: track, milestone, exit criteria, and required artifacts.`;
 
 function todayDate() {
   return new Date().toISOString().slice(0, 10);
@@ -175,12 +178,14 @@ export default async function handler(req, res) {
     }
 
     const concepts = loadConcepts();
+    const conceptById = Object.fromEntries(concepts.map(c => [c.id, c]));
     const summary = concepts.map(c => {
       const mst = masteryMap[c.id];
+      const roadmap = getRoadmapContext(c);
       const status = mst
         ? `conf=${mst.confidence.toFixed(2)} reps=${mst.reps} lapses=${mst.lapses} due=${mst.due?.slice(0,10)}`
         : 'untouched';
-      return `${c.id} (${c.category}, prereqs:[${(c.prereqs || []).join(',')}]): ${status}`;
+      return `${c.id} (${c.category}, roadmap:${roadmap?.track || 'n/a'} > ${roadmap?.milestone || 'n/a'}, prereqs:[${(c.prereqs || []).join(',')}]): ${status}`;
     }).join('\n');
 
     const recent = await db.execute({
@@ -217,6 +222,7 @@ Pick today's single highest-leverage activity. JSON only.`;
     if (!plan) {
       return res.status(500).json({ error: 'No suitable concept found' });
     }
+    plan = enrichPlanWithRoadmap(plan, conceptById[plan.concept_id]);
 
     const id = randomBytes(16).toString('hex');
     await db.execute({
