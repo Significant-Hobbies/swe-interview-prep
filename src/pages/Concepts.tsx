@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import {
   COMPARATIVE_PROJECT,
   FOUNDATION_CONCEPTS,
+  PERSONAL_RUNTIME_TRACK,
+  type PersonalRoadmapNode,
   RUNTIME_LAYERS,
   RUNTIME_ROADMAPS,
   type RuntimeRoadmap,
@@ -75,6 +77,8 @@ export default function Concepts() {
         <Stat label="Untouched" value={stats.total - stats.touched} accent="gray" />
       </div>
 
+      <PersonalRuntimeRoadmap />
+
       <RuntimeRoadmapPlanner />
 
       <WeaknessPlanner plan={studyPlan} />
@@ -135,6 +139,168 @@ export default function Concepts() {
       )}
     </div>
   );
+}
+
+function PersonalRuntimeRoadmap() {
+  return (
+    <section className="mb-6 rounded-xl border border-blue-900/40 bg-blue-950/10 p-4 sm:p-5">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
+            <Target className="h-4 w-4 text-blue-400" />
+            Sarthak runtime path
+          </h2>
+          <p className="mt-1 max-w-3xl text-sm text-gray-500">
+            A precise path for shipping and debugging your fleet: TypeScript + Python first,
+            Go for backend infrastructure, Rust selectively for correctness and tooling.
+          </p>
+        </div>
+        <div className="grid grid-cols-4 gap-1 text-[10px] uppercase tracking-wide">
+          <RoadmapLegend label="Now" color="bg-emerald-500/20 text-emerald-300" />
+          <RoadmapLegend label="Next" color="bg-blue-500/20 text-blue-300" />
+          <RoadmapLegend label="Later" color="bg-amber-500/20 text-amber-300" />
+          <RoadmapLegend label="Defer" color="bg-gray-800 text-gray-400" />
+        </div>
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-4">
+        {PERSONAL_RUNTIME_TRACK.map((phase, phaseIndex) => (
+          <div key={phase.id} className="relative rounded-lg border border-gray-800 bg-gray-950/80 p-3">
+            {phaseIndex < PERSONAL_RUNTIME_TRACK.length - 1 && (
+              <div className="pointer-events-none absolute right-[-1rem] top-10 hidden h-px w-4 bg-blue-900/60 xl:block" />
+            )}
+            <div className="mb-3">
+              <div className="text-sm font-semibold text-gray-100">{phase.title}</div>
+              <p className="mt-1 text-xs leading-5 text-gray-500">{phase.goal}</p>
+            </div>
+            <div className="space-y-2">
+              {phase.nodes.map(node => (
+                <PersonalRoadmapCard key={node.title} node={node} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PersonalRoadmapCard({ node }: { node: PersonalRoadmapNode }) {
+  const params = new URLSearchParams({
+    task: 'explain',
+    prompt: node.prompt,
+  });
+  const resource = roadmapResource(node);
+
+  return (
+    <div className={`rounded-md border p-3 ${nodeBorderClass(node)}`}>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-sm font-medium text-gray-100">{node.title}</div>
+          <div className="mt-1 flex flex-wrap gap-1">
+            <span className={`rounded px-1.5 py-0.5 text-[10px] uppercase ${nodeStatusClass(node.status)}`}>
+              {node.status}
+            </span>
+            <span className="rounded bg-gray-900 px-1.5 py-0.5 text-[10px] uppercase text-gray-500">
+              {node.lane}
+            </span>
+          </div>
+        </div>
+        <div className="flex shrink-0 gap-1">
+          <a
+            href={resource.href}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded border border-gray-700 px-2 py-1 text-[10px] font-medium text-gray-300 hover:bg-gray-800"
+          >
+            {resource.label}
+          </a>
+          <Link
+            to={`/playground?${params}`}
+            className="rounded border border-blue-800 bg-blue-950/30 px-2 py-1 text-[10px] font-medium text-blue-300 hover:bg-blue-900/40"
+          >
+            Ask AI
+          </Link>
+        </div>
+      </div>
+
+      <p className="mt-2 text-xs leading-5 text-gray-400">{node.whyForYou}</p>
+      <div className="mt-2 flex flex-wrap gap-1">
+        {node.learn.map(item => (
+          <span key={item} className="rounded bg-gray-900 px-1.5 py-0.5 text-[11px] text-gray-500">
+            {item}
+          </span>
+        ))}
+      </div>
+      <p className="mt-2 text-xs leading-5 text-emerald-300/80">Proof: {node.proof}</p>
+    </div>
+  );
+}
+
+function roadmapResource(node: PersonalRoadmapNode) {
+  if (node.lane === 'typescript') {
+    return {
+      label: 'TS Docs',
+      href: 'https://www.typescriptlang.org/docs/',
+    };
+  }
+  if (node.lane === 'python') {
+    return {
+      label: 'Py Docs',
+      href: 'https://docs.python.org/3/',
+    };
+  }
+  if (node.lane === 'go') {
+    return {
+      label: 'Go Docs',
+      href: 'https://go.dev/doc/',
+    };
+  }
+  if (node.lane === 'rust') {
+    return {
+      label: 'Rust Book',
+      href: 'https://doc.rust-lang.org/book/',
+    };
+  }
+  if (node.lane === 'production') {
+    return {
+      label: 'OTel',
+      href: 'https://opentelemetry.io/docs/',
+    };
+  }
+  if (node.title.includes('Blocking')) {
+    return {
+      label: 'MDN',
+      href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model',
+    };
+  }
+  return {
+    label: 'Linux',
+    href: 'https://man7.org/linux/man-pages/man7/signal.7.html',
+  };
+}
+
+function RoadmapLegend({ label, color }: { label: string; color: string }) {
+  return <div className={`rounded px-2 py-1 text-center ${color}`}>{label}</div>;
+}
+
+function nodeStatusClass(status: PersonalRoadmapNode['status']) {
+  if (status === 'now') return 'bg-emerald-500/20 text-emerald-300';
+  if (status === 'next') return 'bg-blue-500/20 text-blue-300';
+  if (status === 'later') return 'bg-amber-500/20 text-amber-300';
+  return 'bg-gray-800 text-gray-400';
+}
+
+function nodeBorderClass(node: PersonalRoadmapNode) {
+  const laneClasses: Record<PersonalRoadmapNode['lane'], string> = {
+    foundation: 'border-sky-900/50 bg-sky-950/10',
+    typescript: 'border-blue-900/50 bg-blue-950/10',
+    python: 'border-yellow-900/50 bg-yellow-950/10',
+    go: 'border-cyan-900/50 bg-cyan-950/10',
+    rust: 'border-orange-900/50 bg-orange-950/10',
+    production: 'border-emerald-900/50 bg-emerald-950/10',
+  };
+  return laneClasses[node.lane];
 }
 
 function RuntimeRoadmapPlanner() {

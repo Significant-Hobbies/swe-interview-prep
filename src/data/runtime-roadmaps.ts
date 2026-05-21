@@ -29,6 +29,208 @@ export interface RuntimeRoadmap {
   layerPlan: RuntimeLayer[];
 }
 
+export interface PersonalRoadmapNode {
+  title: string;
+  whyForYou: string;
+  learn: string[];
+  proof: string;
+  lane: 'foundation' | 'typescript' | 'python' | 'go' | 'rust' | 'production';
+  status: 'now' | 'next' | 'later' | 'defer';
+  prompt: string;
+}
+
+export interface PersonalRoadmapPhase {
+  id: string;
+  title: string;
+  goal: string;
+  nodes: PersonalRoadmapNode[];
+}
+
+export const PERSONAL_RUNTIME_TRACK: PersonalRoadmapPhase[] = [
+  {
+    id: 'runtime-basics',
+    title: '0. Runtime Foundations',
+    goal: 'Stop memorizing framework behavior; predict why code blocks, leaks, crashes, or scales.',
+    nodes: [
+      {
+        title: 'Process, thread, task, worker',
+        whyForYou:
+          'You bounce between Vite apps, Workers, local AI proxies, and backend scripts. This is the base model for every debugging session.',
+        learn: ['process lifecycle', 'threads vs tasks', 'signals', 'worker isolation'],
+        proof: 'Run one CPU-bound and one I/O-bound workload in JS, Python, and Go; write when each blocks.',
+        lane: 'foundation',
+        status: 'now',
+        prompt:
+          'Create a comparison note for process vs thread vs task vs worker using JS, Python, and Go examples. Include one blocking and one non-blocking workload.',
+      },
+      {
+        title: 'Blocking I/O, async, and backpressure',
+        whyForYou:
+          'Most fleet bugs are not syntax problems; they are stale fetches, slow APIs, stuck streams, retries, or overloaded clients.',
+        learn: ['event loop', 'async I/O', 'timeouts', 'stream backpressure'],
+        proof: 'Build a URL fetcher with bounded concurrency, cancellation, and slow-response handling.',
+        lane: 'foundation',
+        status: 'now',
+        prompt:
+          'Build a bounded-concurrency URL fetcher with timeout, cancellation, retry policy, and slow-response logging. Explain backpressure.',
+      },
+      {
+        title: 'Memory and allocation model',
+        whyForYou:
+          'This is what separates “works locally” from diagnosing Worker limits, browser leaks, large JSON payloads, and Rust ownership.',
+        learn: ['stack vs heap', 'GC roots', 'retained references', 'escape analysis', 'ownership'],
+        proof: 'Create a memory leak in a browser component, a Python script, and a Go service; fix each one.',
+        lane: 'foundation',
+        status: 'next',
+        prompt:
+          'Design three tiny memory-retention bugs: browser listener leak, Python shared mutable object, Go slice retention. Show fixes and explanations.',
+      },
+      {
+        title: 'Production observability loop',
+        whyForYou:
+          'Your work needs proof: logs, metrics, smoke checks, screenshots, and mature outcome scoring instead of vibes.',
+        learn: ['structured logs', 'metrics', 'traces', 'profiles', 'smoke tests'],
+        proof: 'Add logs, metrics, one profile, and a smoke test to a toy service; debug a forced failure.',
+        lane: 'production',
+        status: 'now',
+        prompt:
+          'Add structured logs, latency metrics, one CPU profile, and a browser/API smoke check to a toy service. Force a failure and write the debug path.',
+      },
+    ],
+  },
+  {
+    id: 'ship-web-ai-products',
+    title: '1. Ship Web + AI Products',
+    goal: 'Use TypeScript and Python as the default product loop: UI, APIs, AI calls, data jobs, and verification.',
+    nodes: [
+      {
+        title: 'TypeScript platform mastery',
+        whyForYou:
+          'Your fleet is full of React/Vite/Workers surfaces. TS is the highest-leverage daily runtime for product polish and deploy safety.',
+        learn: ['browser vs Node vs Worker APIs', 'ESM', 'fetch/streams', 'React state boundaries', 'type contracts'],
+        proof: 'Build one feature that runs in browser, Node, and Cloudflare Worker with explicit platform boundaries.',
+        lane: 'typescript',
+        status: 'now',
+        prompt:
+          'Build a TypeScript feature with shared types, a browser UI, a Node/local endpoint, and a Cloudflare Worker-compatible function. Mark platform-only APIs.',
+      },
+      {
+        title: 'Python leverage stack',
+        whyForYou:
+          'High Signal-style ingest, scoring, local scripts, data wrangling, and AI evals are Python-shaped problems.',
+        learn: ['uv/venv', 'pyproject', 'asyncio', 'FastAPI', 'pytest', 'typing', 'native wheels'],
+        proof: 'Build a typed FastAPI ingest/scoring service with a CLI backfill and tests.',
+        lane: 'python',
+        status: 'now',
+        prompt:
+          'Build a typed Python FastAPI ingest/scoring service with uv, pyproject.toml, async HTTP fetching, pytest tests, and a CLI backfill command.',
+      },
+      {
+        title: 'AI adapter and failure discipline',
+        whyForYou:
+          'Your products use multiple AI paths. The skill is not calling an API; it is fallback, cost control, observability, and user-safe failure.',
+        learn: ['OpenAI-compatible adapters', 'timeouts', 'retries', 'schema validation', 'cost logging'],
+        proof: 'Create one AI feature with model config, schema validation, fallback, and captured failure states.',
+        lane: 'production',
+        status: 'next',
+        prompt:
+          'Implement an AI adapter with endpoint/model config, timeout, retry, schema validation, fallback result, and cost/failure logging.',
+      },
+      {
+        title: 'End-to-end product verification',
+        whyForYou:
+          'You care whether the behavior is real. Every feature should have the smallest proof: unit, API, browser, or production smoke.',
+        learn: ['Vitest', 'Playwright', 'MSW/page.route', 'API smoke checks', 'screenshots'],
+        proof: 'Ship one UI workflow with create/edit/delete or input/output proof, not only render checks.',
+        lane: 'production',
+        status: 'now',
+        prompt:
+          'Add a Playwright workflow test that proves a real user path, including state change and visible result. Keep it scoped and stable.',
+      },
+    ],
+  },
+  {
+    id: 'backend-infra-depth',
+    title: '2. Backend Infrastructure Depth',
+    goal: 'Add Go where services, concurrency, binaries, and operational simplicity matter.',
+    nodes: [
+      {
+        title: 'Go service core',
+        whyForYou:
+          'Go is the right boring tool for crawlers, webhooks, reverse proxies, metrics exporters, and small reliable services.',
+        learn: ['net/http', 'context', 'errors', 'goroutines', 'worker pools', 'graceful shutdown'],
+        proof: 'Build the URL monitor in Go with REST, workers, cancellation, and graceful shutdown.',
+        lane: 'go',
+        status: 'next',
+        prompt:
+          'Build the URL monitoring service in Go with net/http, bounded workers, context cancellation, graceful shutdown, SQLite/Postgres persistence, and tests.',
+      },
+      {
+        title: 'Go production diagnostics',
+        whyForYou:
+          'For backend incidents, pprof, race detector, and clean logs beat framework intuition.',
+        learn: ['race detector', 'pprof', 'benchmarks', 'connection pooling', 'rate limiting'],
+        proof: 'Introduce a race and a slow handler, catch both with Go tooling, then fix them.',
+        lane: 'go',
+        status: 'next',
+        prompt:
+          'Create a Go service with an intentional data race and slow handler. Catch them with race detector and pprof, then fix and explain.',
+      },
+      {
+        title: 'Protocol and worker architecture',
+        whyForYou:
+          'Useful for SaaS Maker/fleet orchestration: queues, job runners, webhooks, and internal APIs.',
+        learn: ['queues', 'gRPC basics', 'idempotency', 'retries', 'dead-letter handling'],
+        proof: 'Build a webhook worker that is idempotent, retries safely, and records failure state.',
+        lane: 'production',
+        status: 'later',
+        prompt:
+          'Build an idempotent webhook worker with retry policy, dead-letter state, structured logs, and a replay command.',
+      },
+    ],
+  },
+  {
+    id: 'systems-control',
+    title: '3. Systems Control',
+    goal: 'Use Rust selectively for correctness, parsers, CLIs, WASM, and performance-critical internals.',
+    nodes: [
+      {
+        title: 'Rust ownership before async',
+        whyForYou:
+          'Rust is valuable if it changes how you think about correctness. Async Rust before ownership will waste time.',
+        learn: ['ownership', 'borrowing', 'lifetimes', 'Result/Option', 'traits', 'Copy vs Clone'],
+        proof: 'Build a parser that returns borrowed slices, then refactor it to owned output.',
+        lane: 'rust',
+        status: 'later',
+        prompt:
+          'Build a Rust parser that returns borrowed string slices, then refactor to owned output. Explain every lifetime and clone.',
+      },
+      {
+        title: 'Rust CLI or WASM utility',
+        whyForYou:
+          'Best fit for personal tools: fast local analyzers, parsers, diff tools, or browser-side WASM modules.',
+        learn: ['Cargo', 'clap', 'serde', 'WASM', 'error modeling'],
+        proof: 'Build a CLI that parses repo output and returns structured JSON for another app to consume.',
+        lane: 'rust',
+        status: 'later',
+        prompt:
+          'Build a Rust CLI that parses git or test output into structured JSON, with serde, typed errors, and integration tests.',
+      },
+      {
+        title: 'Async Rust only after proof',
+        whyForYou:
+          'Tokio is worth it only when you already understand ownership and have a real networking/performance reason.',
+        learn: ['futures', 'Tokio', 'Send/Sync', 'Arc<Mutex<T>>', 'channels'],
+        proof: 'Port the Go URL monitor worker core to Rust/Tokio and compare complexity.',
+        lane: 'rust',
+        status: 'defer',
+        prompt:
+          'Port a bounded URL monitor worker core from Go to Rust/Tokio. Compare cancellation, shared state, error handling, and code complexity.',
+      },
+    ],
+  },
+];
+
 export const FOUNDATION_CONCEPTS: FoundationConcept[] = [
   {
     name: 'Process vs thread',
