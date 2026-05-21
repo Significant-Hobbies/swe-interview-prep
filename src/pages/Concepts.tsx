@@ -1,7 +1,14 @@
-import { Brain, CalendarDays, FlaskConical, Loader2, Target } from 'lucide-react';
+import { BookOpen, CalendarDays, FlaskConical, Layers3, Loader2, Rocket, Target } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  COMPARATIVE_PROJECT,
+  FOUNDATION_CONCEPTS,
+  RUNTIME_LAYERS,
+  RUNTIME_ROADMAPS,
+  type RuntimeRoadmap,
+} from '../data/runtime-roadmaps';
 import { ALL_CONCEPTS, type Concept, type MasteryEntry,useConceptMastery } from '../hooks/useConcepts';
 import { buildWeaknessStudyPlan, type WeaknessPlanItem } from '../lib/studyPlanner';
 
@@ -68,6 +75,8 @@ export default function Concepts() {
         <Stat label="Untouched" value={stats.total - stats.touched} accent="gray" />
       </div>
 
+      <RuntimeRoadmapPlanner />
+
       <WeaknessPlanner plan={studyPlan} />
 
       <div className="mb-4 flex flex-wrap gap-2">
@@ -124,6 +133,148 @@ export default function Concepts() {
           onReview={(rating) => review(selected.id, rating)}
         />
       )}
+    </div>
+  );
+}
+
+function RuntimeRoadmapPlanner() {
+  const [selectedId, setSelectedId] = useState<RuntimeRoadmap['id']>('javascript');
+  const selected =
+    RUNTIME_ROADMAPS.find(roadmap => roadmap.id === selectedId) ?? RUNTIME_ROADMAPS[0];
+  const projectParams = new URLSearchParams({
+    task: 'build',
+    prompt: `${COMPARATIVE_PROJECT.name}: ${COMPARATIVE_PROJECT.prompt} Start with the ${selected.name} version and call out what the runtime teaches.`,
+  });
+
+  return (
+    <section className="mb-6 rounded-xl border border-gray-800 bg-gray-900/40 p-4 sm:p-5">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
+            <Layers3 className="h-4 w-4 text-blue-400" />
+            Runtime roadmap
+          </h2>
+          <p className="mt-1 max-w-3xl text-sm text-gray-500">
+            Learn JavaScript, Python, Go, and Rust as runtime philosophies: how code runs, blocks,
+            allocates, ships, scales, and fails.
+          </p>
+        </div>
+        <Link
+          to={`/playground?${projectParams}`}
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700"
+        >
+          <Rocket className="h-3.5 w-3.5" />
+          Build shared project
+        </Link>
+      </div>
+
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="space-y-3">
+          <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+              <BookOpen className="h-3.5 w-3.5" />
+              Foundation first
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {FOUNDATION_CONCEPTS.map(concept => (
+                <span
+                  key={concept}
+                  className="rounded border border-gray-800 bg-gray-900 px-2 py-1 text-[11px] text-gray-400"
+                >
+                  {concept}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+              Universal layers
+            </div>
+            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3 lg:grid-cols-1">
+              {RUNTIME_LAYERS.map((layer, index) => (
+                <div
+                  key={layer}
+                  className="flex items-center gap-2 rounded-md bg-gray-900/60 px-2 py-1.5 text-xs text-gray-300"
+                >
+                  <span className="font-mono text-[10px] text-gray-600">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  {layer}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
+          <div className="mb-3 flex flex-wrap gap-2">
+            {RUNTIME_ROADMAPS.map(roadmap => (
+              <button
+                key={roadmap.id}
+                onClick={() => setSelectedId(roadmap.id)}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                  selectedId === roadmap.id
+                    ? 'bg-blue-500/20 text-blue-300'
+                    : 'bg-gray-900 text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+                }`}
+              >
+                {roadmap.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="rounded-lg border border-blue-900/30 bg-blue-950/10 p-3">
+            <div className="text-sm font-semibold text-gray-100">{selected.name}</div>
+            <div className="mt-1 text-xs text-blue-300">{selected.philosophy}</div>
+          </div>
+
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <RoadmapDetail label="Runtime" value={selected.runtimeModel} />
+            <RoadmapDetail label="Memory" value={selected.memoryModel} />
+            <RoadmapDetail label="Concurrency" value={selected.concurrencyModel} />
+            <RoadmapDetail label="Package/build" value={selected.packaging} />
+            <RoadmapDetail label="Deployment" value={selected.deployment} />
+          </div>
+
+          <div className="mt-3 grid gap-3 md:grid-cols-3">
+            <RoadmapList title="Build" items={selected.builds} />
+            <RoadmapList title="Explain" items={selected.checklist} />
+            <RoadmapList title="Avoid" items={selected.traps} />
+          </div>
+
+          <div className="mt-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3">
+            <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+              Suggested sequence
+            </div>
+            <p className="mt-2 text-xs leading-6 text-gray-400">
+              {COMPARATIVE_PROJECT.sequence.join(' -> ')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RoadmapDetail({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-gray-800 bg-gray-900/40 p-2">
+      <div className="text-[10px] uppercase tracking-wide text-gray-600">{label}</div>
+      <div className="mt-1 text-xs leading-5 text-gray-300">{value}</div>
+    </div>
+  );
+}
+
+function RoadmapList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-gray-500">{title}</div>
+      <ul className="space-y-1 text-xs text-gray-400">
+        {items.map(item => (
+          <li key={item} className="rounded bg-gray-900/60 px-2 py-1 leading-5">{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
