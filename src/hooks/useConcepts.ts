@@ -6,7 +6,7 @@ import conceptsData from '../data/concepts.json';
 export interface Concept {
   id: string;
   name: string;
-  category: 'dsa' | 'lld' | 'hld' | 'behavioral';
+  category: 'dsa' | 'lld' | 'hld' | 'behavioral' | 'ml';
   prereqs: string[];
   description: string;
 }

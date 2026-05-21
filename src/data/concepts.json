@@ -63,6 +63,25 @@
     { "id": "time-management-and-prioritization", "name": "Prioritization", "category": "behavioral", "prereqs": [], "description": "Eisenhower, OKR alignment" },
     { "id": "innovation-and-creativity", "name": "Innovation", "category": "behavioral", "prereqs": [], "description": "Novel solutions, experimentation" },
     { "id": "customer-obsession", "name": "Customer Obsession", "category": "behavioral", "prereqs": [], "description": "User-centered tradeoffs" },
-    { "id": "ownership-and-accountability", "name": "Ownership", "category": "behavioral", "prereqs": [], "description": "End-to-end responsibility" }
+    { "id": "ownership-and-accountability", "name": "Ownership", "category": "behavioral", "prereqs": [], "description": "End-to-end responsibility" },
+    { "id": "ml-math", "name": "ML Math Foundations", "category": "ml", "prereqs": [], "description": "Vectors, matrices, dot products, matmul, shapes" },
+    { "id": "ml-gradient-descent", "name": "Gradient Descent", "category": "ml", "prereqs": ["ml-math"], "description": "Loss surfaces, learning rate, SGD steps" },
+    { "id": "ml-backprop", "name": "Backpropagation", "category": "ml", "prereqs": ["ml-gradient-descent"], "description": "Chain rule, autograd, forward/backward passes" },
+    { "id": "ml-softmax-xent", "name": "Softmax & Cross-Entropy", "category": "ml", "prereqs": ["ml-math"], "description": "Logits to probabilities, negative log-likelihood loss" },
+    { "id": "ml-adamw", "name": "AdamW Optimizer", "category": "ml", "prereqs": ["ml-backprop"], "description": "Moments, weight decay, gradient clipping" },
+    { "id": "ml-tokenization", "name": "Tokenization", "category": "ml", "prereqs": [], "description": "Byte-level, char-level, BPE, vocab design" },
+    { "id": "ml-language-modeling", "name": "Language Modeling", "category": "ml", "prereqs": ["ml-tokenization", "ml-softmax-xent"], "description": "Next-token prediction, context windows, perplexity" },
+    { "id": "ml-sampling", "name": "Sampling & Decoding", "category": "ml", "prereqs": ["ml-language-modeling"], "description": "Temperature, top-k, greedy decoding" },
+    { "id": "ml-embeddings", "name": "Embeddings", "category": "ml", "prereqs": ["ml-language-modeling"], "description": "Token & position embeddings, tied weights" },
+    { "id": "ml-self-attention", "name": "Self-Attention", "category": "ml", "prereqs": ["ml-embeddings"], "description": "Q/K/V, scaled dot-product, causal masking" },
+    { "id": "ml-multi-head", "name": "Multi-Head Attention", "category": "ml", "prereqs": ["ml-self-attention"], "description": "Parallel heads, head_dim split, output projection" },
+    { "id": "ml-transformer-block", "name": "Transformer Block", "category": "ml", "prereqs": ["ml-multi-head", "ml-adamw"], "description": "Pre-LayerNorm, residuals, MLP, GELU" },
+    { "id": "ml-training", "name": "Training & Debugging", "category": "ml", "prereqs": ["ml-transformer-block"], "description": "Init, NaNs, overfit tests, gradient checks" },
+    { "id": "ml-checkpointing", "name": "Checkpointing", "category": "ml", "prereqs": ["ml-training"], "description": "Weights + optimizer state, resume, dataset manifests" },
+    { "id": "ml-lora", "name": "LoRA & PEFT", "category": "ml", "prereqs": ["ml-training"], "description": "Frozen base, low-rank adapters, rank/alpha" },
+    { "id": "ml-data-engineering", "name": "Style Data Engineering", "category": "ml", "prereqs": ["ml-lora"], "description": "Cleaning, dedup, JSONL tasks, memorization tests" },
+    { "id": "ml-browser-runtime", "name": "Browser ML Runtime", "category": "ml", "prereqs": ["ml-checkpointing"], "description": "Web Workers, WASM, OPFS, TypedArrays" },
+    { "id": "ml-webgpu", "name": "WebGPU Compute", "category": "ml", "prereqs": ["ml-browser-runtime", "ml-transformer-block"], "description": "WGSL, compute kernels, matmul, CPU parity" },
+    { "id": "ml-evaluation", "name": "Model Evaluation", "category": "ml", "prereqs": ["ml-lora", "ml-sampling"], "description": "Held-out loss, baselines, hallucination, leakage" }
   ]
 }

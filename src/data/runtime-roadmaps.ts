@@ -44,7 +44,8 @@ export interface PersonalRoadmapNode {
     | 'database'
     | 'data'
     | 'infra'
-    | 'devops';
+    | 'devops'
+    | 'ml';
   status: 'now' | 'next' | 'later' | 'defer';
   prompt: string;
 }
@@ -482,6 +483,176 @@ export const PERSONAL_INFRA_TRACK: PersonalRoadmapPhase[] = [
         status: 'later',
         prompt:
           'Run three incident drills: stale feed, missing env var, slow query. For each, write symptom, evidence, root cause, mitigation, and prevention.',
+      },
+    ],
+  },
+];
+
+export const PERSONAL_ML_TRACK: PersonalRoadmapPhase[] = [
+  {
+    id: 'tinygpt-foundations',
+    title: '0. ML Foundations',
+    goal: 'Make the math executable before touching transformers or browser runtimes.',
+    nodes: [
+      {
+        title: 'ML math and shapes',
+        whyForYou:
+          'TinyGPT breaks when tensor shapes are handwaved. You need vectors, matrices, matmul, and broadcasting to feel mechanical.',
+        learn: ['vectors', 'matmul', 'shapes', 'broadcasting', 'dot products'],
+        proof: 'Implement tiny NumPy shape drills and write expected dimensions for every operation.',
+        lane: 'ml',
+        status: 'now',
+        prompt:
+          'Create ML math drills for TinyGPT: vectors, matrices, matmul, broadcasting, and shape tracing. Include expected dimensions and failure cases.',
+      },
+      {
+        title: 'Gradient descent to AdamW',
+        whyForYou:
+          'Training is not magic; it is loss, gradients, optimizer state, learning rate, and regularization interacting.',
+        learn: ['loss surfaces', 'SGD', 'backprop', 'AdamW', 'gradient clipping'],
+        proof: 'Train a tiny model with SGD and AdamW, then explain the loss curve and optimizer state.',
+        lane: 'ml',
+        status: 'now',
+        prompt:
+          'Build a minimal gradient descent to AdamW walkthrough for a tiny model. Show loss, gradients, moments, weight decay, and clipping.',
+      },
+      {
+        title: 'Softmax and cross-entropy',
+        whyForYou:
+          'Next-token prediction is logits plus cross-entropy. If this is fuzzy, language modeling stays fuzzy.',
+        learn: ['logits', 'softmax', 'negative log likelihood', 'perplexity'],
+        proof: 'Compute softmax cross-entropy by hand for one row, then verify with code.',
+        lane: 'ml',
+        status: 'now',
+        prompt:
+          'Explain softmax and cross-entropy for next-token prediction. Include a hand-computed example, numerical stability, and code verification.',
+      },
+    ],
+  },
+  {
+    id: 'tinygpt-language-modeling',
+    title: '1. Language Modeling',
+    goal: 'Build a small language model before building a transformer.',
+    nodes: [
+      {
+        title: 'Tokenization',
+        whyForYou:
+          'Browser TinyGPT needs explicit tradeoffs: byte-level simplicity, vocabulary size, and reproducible encode/decode.',
+        learn: ['byte tokens', 'BPE tradeoffs', 'vocab size', 'encode/decode tests'],
+        proof: 'Write a tokenizer with round-trip tests and clear failure cases.',
+        lane: 'ml',
+        status: 'now',
+        prompt:
+          'Design a byte-level tokenizer for TinyGPT with encode/decode, vocab tradeoffs, round-trip tests, and edge cases.',
+      },
+      {
+        title: 'Bigram model and sampling',
+        whyForYou:
+          'A bigram model is the smallest useful end-to-end language modeling loop: data, loss, training, generation.',
+        learn: ['next-token prediction', 'train/val split', 'temperature', 'top-k', 'greedy'],
+        proof: 'Train a bigram model that reports train/val loss and generates text with multiple decoding modes.',
+        lane: 'ml',
+        status: 'now',
+        prompt:
+          'Build a bigram language model with train/val loss and generation. Compare greedy, temperature, and top-k decoding.',
+      },
+    ],
+  },
+  {
+    id: 'tinygpt-transformer',
+    title: '2. Transformer Core',
+    goal: 'Implement the GPT block with shape checks at every boundary.',
+    nodes: [
+      {
+        title: 'Embeddings and position',
+        whyForYou:
+          'Token and position embeddings are the first place sequence length, vocab size, and model dimension become concrete.',
+        learn: ['token embeddings', 'position embeddings', 'weight tying', 'context length'],
+        proof: 'Trace B/T/C shapes through embedding lookup and tied output projection.',
+        lane: 'ml',
+        status: 'next',
+        prompt:
+          'Explain token embeddings, position embeddings, context length, and tied weights in a TinyGPT. Include B/T/C shape tracing.',
+      },
+      {
+        title: 'Self-attention and heads',
+        whyForYou:
+          'Attention is the core runtime cost. You need Q/K/V, causal masks, head split, and output projection without mystery.',
+        learn: ['QKV', 'causal mask', 'scaled dot product', 'multi-head', 'head dim'],
+        proof: 'Implement single-head attention, then multi-head attention with CPU parity tests.',
+        lane: 'ml',
+        status: 'next',
+        prompt:
+          'Implement self-attention for TinyGPT: Q/K/V, scaled dot-product, causal masking, multi-head split, and output projection with shape tests.',
+      },
+      {
+        title: 'Transformer block',
+        whyForYou:
+          'This is where residuals, LayerNorm, MLP, GELU, dropout, and optimizer behavior start interacting.',
+        learn: ['pre-LayerNorm', 'residuals', 'MLP', 'GELU', 'dropout'],
+        proof: 'Build one transformer block, assert shapes, and overfit a tiny repeated dataset.',
+        lane: 'ml',
+        status: 'next',
+        prompt:
+          'Build a TinyGPT transformer block with pre-LayerNorm, residuals, MLP, GELU, and shape assertions. Include an overfit test.',
+      },
+    ],
+  },
+  {
+    id: 'tinygpt-training-lora',
+    title: '3. Training + LoRA',
+    goal: 'Make runs reproducible, resumable, and comparable before personalizing style.',
+    nodes: [
+      {
+        title: 'Training and checkpointing',
+        whyForYou:
+          'A model that cannot overfit, save, resume, and reproduce a run is not ready for browser or LoRA work.',
+        learn: ['seeded runs', 'validation loss', 'NaN checks', 'checkpoint state', 'resume'],
+        proof: 'Train, save, reload, resume, and prove identical behavior from the checkpoint.',
+        lane: 'ml',
+        status: 'next',
+        prompt:
+          'Design a TinyGPT training harness with seeded runs, validation loss, NaN checks, checkpoint save/load, resume, and reproducibility checks.',
+      },
+      {
+        title: 'LoRA and style data',
+        whyForYou:
+          'For personal writing/style experiments, LoRA only matters if the dataset is clean and beats simpler baselines.',
+        learn: ['LoRALinear', 'rank/alpha', 'frozen base', 'JSONL data', 'few-shot baseline'],
+        proof: 'Train adapter-only checkpoints and compare base, few-shot, LoRA, and LoRA plus retrieval.',
+        lane: 'ml',
+        status: 'later',
+        prompt:
+          'Create a LoRA plan for TinyGPT: LoRALinear, adapter injection, rank/alpha, frozen base, clean JSONL data, and baseline comparisons.',
+      },
+    ],
+  },
+  {
+    id: 'tinygpt-browser',
+    title: '4. Browser Runtime',
+    goal: 'Port only after the Python reference is correct.',
+    nodes: [
+      {
+        title: 'WASM and browser storage',
+        whyForYou:
+          'The browser target is a systems problem: workers, typed arrays, OPFS, checkpoints, and UI responsiveness.',
+        learn: ['Web Workers', 'WASM', 'TypedArrays', 'OPFS', 'checkpoint persistence'],
+        proof: 'Run training/inference in a Worker without freezing the UI and survive reload with a checkpoint.',
+        lane: 'ml',
+        status: 'later',
+        prompt:
+          'Plan a browser TinyGPT runtime with Web Workers, WASM, TypedArrays, OPFS checkpoint persistence, and responsiveness checks.',
+      },
+      {
+        title: 'WebGPU parity and evaluation',
+        whyForYou:
+          'Acceleration only counts after CPU parity. Evaluation keeps the project honest about style, leakage, and hallucination.',
+        learn: ['WGSL', 'compute kernels', 'matmul parity', 'held-out loss', 'leakage tests'],
+        proof: 'Write a WebGPU matmul that matches CPU/WASM within tolerance and run held-out eval prompts.',
+        lane: 'ml',
+        status: 'defer',
+        prompt:
+          'Design WebGPU parity and evaluation for TinyGPT: matmul kernel, CPU/WASM tolerance tests, held-out prompts, leakage checks, and baselines.',
       },
     ],
   },

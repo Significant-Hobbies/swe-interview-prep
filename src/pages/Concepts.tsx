@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   PERSONAL_DATABASE_TRACK,
   PERSONAL_INFRA_TRACK,
+  PERSONAL_ML_TRACK,
   PERSONAL_RUNTIME_TRACK,
   type PersonalRoadmapNode,
   type PersonalRoadmapPhase,
@@ -17,6 +18,7 @@ const CATEGORIES = [
   { id: 'lld', name: 'LLD', color: 'amber' },
   { id: 'hld', name: 'HLD', color: 'emerald' },
   { id: 'behavioral', name: 'Behavioral', color: 'purple' },
+  { id: 'ml', name: 'ML', color: 'pink' },
 ] as const;
 
 function confidenceColor(conf: number): string {
@@ -159,6 +161,13 @@ const PERSONAL_TRACKS = [
     description: 'Linux, Docker, config, CI/CD, Cloudflare, observability, rollbacks.',
     phases: PERSONAL_INFRA_TRACK,
   },
+  {
+    id: 'ml',
+    title: 'TinyGPT',
+    eyebrow: 'Browser ML',
+    description: 'ML math, language modeling, transformers, LoRA, WASM, WebGPU, evaluation.',
+    phases: PERSONAL_ML_TRACK,
+  },
 ] as const;
 
 type PersonalTrackId = (typeof PERSONAL_TRACKS)[number]['id'];
@@ -208,7 +217,7 @@ function DeepDiveRoadmaps() {
               Pick one track and one node. Everything else stays as a compact outline.
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-1 rounded-md border border-gray-800 bg-gray-900 p-1 sm:min-w-[340px]">
+          <div className="grid grid-cols-2 gap-1 rounded-md border border-gray-800 bg-gray-900 p-1 sm:min-w-[420px] sm:grid-cols-4">
             {PERSONAL_TRACKS.map(item => (
               <button
                 key={item.id}
@@ -399,6 +408,12 @@ function roadmapResource(node: PersonalRoadmapNode) {
     return {
       label: 'OTel',
       href: 'https://opentelemetry.io/docs/',
+    };
+  }
+  if (node.lane === 'ml') {
+    return {
+      label: 'nanoGPT',
+      href: 'https://github.com/karpathy/nanoGPT',
     };
   }
   if (node.title.includes('Blocking')) {

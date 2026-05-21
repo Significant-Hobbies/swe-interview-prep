@@ -18,7 +18,7 @@ describe('concept taxonomy', () => {
     for (const c of concepts) {
       expect(c.id).toBeTruthy();
       expect(c.name).toBeTruthy();
-      expect(['dsa', 'lld', 'hld', 'behavioral']).toContain(c.category);
+      expect(['dsa', 'lld', 'hld', 'behavioral', 'ml']).toContain(c.category);
       expect(Array.isArray(c.prereqs)).toBe(true);
       expect(c.description).toBeTruthy();
     }

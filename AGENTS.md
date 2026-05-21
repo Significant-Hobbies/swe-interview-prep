@@ -34,7 +34,7 @@ src/                    # React SPA
     AmbientLibrary.tsx  # Concept → library section browser
   hooks/                # All stateful logic (components are thin)
   data/
-    concepts.json       # 60-concept taxonomy (DSA/LLD/HLD/Behavioral)
+    concepts.json       # 79-concept taxonomy (DSA/LLD/HLD/Behavioral/ML)
     problems.json       # DSA problems (legacy SM-2, retained for data continuity)
     lld-problems.json
     hld-problems.json
