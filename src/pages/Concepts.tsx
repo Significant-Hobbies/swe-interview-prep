@@ -1,17 +1,13 @@
-import { BookOpen, CalendarDays, FlaskConical, Layers3, Loader2, Rocket, Target } from 'lucide-react';
+import { CalendarDays, FlaskConical, Loader2, Target } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  COMPARATIVE_PROJECT,
-  FOUNDATION_CONCEPTS,
   PERSONAL_DATABASE_TRACK,
   PERSONAL_INFRA_TRACK,
   PERSONAL_RUNTIME_TRACK,
   type PersonalRoadmapNode,
-  RUNTIME_LAYERS,
-  RUNTIME_ROADMAPS,
-  type RuntimeRoadmap,
+  type PersonalRoadmapPhase,
 } from '../data/runtime-roadmaps';
 import { ALL_CONCEPTS, type Concept, type MasteryEntry,useConceptMastery } from '../hooks/useConcepts';
 import { buildWeaknessStudyPlan, type WeaknessPlanItem } from '../lib/studyPlanner';
@@ -79,28 +75,7 @@ export default function Concepts() {
         <Stat label="Untouched" value={stats.total - stats.touched} accent="gray" />
       </div>
 
-      <PersonalRoadmapBoard
-        title="Sarthak runtime path"
-        description="A precise path for shipping and debugging your fleet: TypeScript + Python first, Go for backend infrastructure, Rust selectively for correctness and tooling."
-        phases={PERSONAL_RUNTIME_TRACK}
-        accent="blue"
-      />
-
-      <PersonalRoadmapBoard
-        title="DB / data systems path"
-        description="A deep dive for product truth: schema design, SQL, migrations, query plans, transactions, caches, analytics tables, backfills, and restore drills."
-        phases={PERSONAL_DATABASE_TRACK}
-        accent="emerald"
-      />
-
-      <PersonalRoadmapBoard
-        title="Infra / DevOps path"
-        description="A production path for keeping products alive: Linux, Docker, config, CI/CD, Cloudflare deploys, observability, jobs, rollbacks, and incident drills."
-        phases={PERSONAL_INFRA_TRACK}
-        accent="amber"
-      />
-
-      <RuntimeRoadmapPlanner />
+      <DeepDiveRoadmaps />
 
       <WeaknessPlanner plan={studyPlan} />
 
@@ -162,76 +137,144 @@ export default function Concepts() {
   );
 }
 
-function PersonalRoadmapBoard({
-  title,
-  description,
-  phases,
-  accent,
-}: {
+const PERSONAL_TRACKS = [
+  {
+    id: 'runtime',
+    title: 'Runtime',
+    eyebrow: 'Code execution',
+    description: 'How code runs, blocks, allocates, ships, and fails.',
+    phases: PERSONAL_RUNTIME_TRACK,
+  },
+  {
+    id: 'database',
+    title: 'DB',
+    eyebrow: 'Product truth',
+    description: 'Schema design, query plans, transactions, caches, analytics, backfills.',
+    phases: PERSONAL_DATABASE_TRACK,
+  },
+  {
+    id: 'infra',
+    title: 'Infra',
+    eyebrow: 'Production control',
+    description: 'Linux, Docker, config, CI/CD, Cloudflare, observability, rollbacks.',
+    phases: PERSONAL_INFRA_TRACK,
+  },
+] as const;
+
+type PersonalTrackId = (typeof PERSONAL_TRACKS)[number]['id'];
+type PersonalTrack = {
+  id: PersonalTrackId;
   title: string;
+  eyebrow: string;
   description: string;
-  phases: typeof PERSONAL_RUNTIME_TRACK;
-  accent: 'blue' | 'emerald' | 'amber';
-}) {
-  const sectionClass = {
-    blue: 'border-blue-900/40 bg-blue-950/10',
-    emerald: 'border-emerald-900/40 bg-emerald-950/10',
-    amber: 'border-amber-900/40 bg-amber-950/10',
-  }[accent];
-  const iconClass = {
-    blue: 'text-blue-400',
-    emerald: 'text-emerald-400',
-    amber: 'text-amber-400',
-  }[accent];
-  const connectorClass = {
-    blue: 'bg-blue-900/60',
-    emerald: 'bg-emerald-900/60',
-    amber: 'bg-amber-900/60',
-  }[accent];
+  phases: PersonalRoadmapPhase[];
+};
+
+function roadmapNodeKey(phase: PersonalRoadmapPhase, node: PersonalRoadmapNode) {
+  return `${phase.id}:${node.title}`;
+}
+
+function DeepDiveRoadmaps() {
+  const [trackId, setTrackId] = useState<PersonalTrackId>('runtime');
+  const track = (PERSONAL_TRACKS.find(item => item.id === trackId) ?? PERSONAL_TRACKS[0]) as PersonalTrack;
+  const nodes = track.phases.flatMap(phase =>
+    phase.nodes.map(node => ({ phase, node, key: roadmapNodeKey(phase, node) }))
+  );
+  const [selectedKey, setSelectedKey] = useState(() =>
+    roadmapNodeKey(PERSONAL_RUNTIME_TRACK[0], PERSONAL_RUNTIME_TRACK[0].nodes[0])
+  );
+  const selected = nodes.find(item => item.key === selectedKey) ?? nodes[0];
+
+  const selectTrack = (id: PersonalTrackId) => {
+    const next = (PERSONAL_TRACKS.find(item => item.id === id) ?? PERSONAL_TRACKS[0]) as PersonalTrack;
+    setTrackId(id);
+    const firstPhase = next.phases[0];
+    const firstNode = firstPhase?.nodes[0];
+    if (firstPhase && firstNode) {
+      setSelectedKey(roadmapNodeKey(firstPhase, firstNode));
+    }
+  };
 
   return (
-    <section className={`mb-6 rounded-xl border p-4 sm:p-5 ${sectionClass}`}>
-      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
-        <div>
-          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
-            <Target className={`h-4 w-4 ${iconClass}`} />
-            {title}
-          </h2>
-          <p className="mt-1 max-w-3xl text-sm text-gray-500">
-            {description}
-          </p>
-        </div>
-        <div className="grid grid-cols-4 gap-1 text-[10px] uppercase tracking-wide">
-          <RoadmapLegend label="Now" color="bg-emerald-500/20 text-emerald-300" />
-          <RoadmapLegend label="Next" color="bg-blue-500/20 text-blue-300" />
-          <RoadmapLegend label="Later" color="bg-amber-500/20 text-amber-300" />
-          <RoadmapLegend label="Defer" color="bg-gray-800 text-gray-400" />
+    <section className="mb-6 overflow-hidden rounded-lg border border-gray-800 bg-gray-950">
+      <div className="border-b border-gray-800 p-4 sm:p-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
+              <Target className="h-4 w-4 text-blue-400" />
+              Deep-dive roadmap
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Pick one track and one node. Everything else stays as a compact outline.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-1 rounded-md border border-gray-800 bg-gray-900 p-1 sm:min-w-[340px]">
+            {PERSONAL_TRACKS.map(item => (
+              <button
+                key={item.id}
+                onClick={() => selectTrack(item.id)}
+                className={`rounded px-3 py-2 text-xs font-medium transition-colors ${
+                  trackId === item.id
+                    ? 'bg-gray-100 text-gray-950'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+                }`}
+              >
+                {item.title}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-3 2xl:grid-cols-4">
-        {phases.map((phase, phaseIndex) => (
-          <div key={phase.id} className="relative rounded-lg border border-gray-800 bg-gray-950/80 p-3">
-            {phaseIndex < phases.length - 1 && (
-              <div className={`pointer-events-none absolute right-[-1rem] top-10 hidden h-px w-4 xl:block ${connectorClass}`} />
-            )}
-            <div className="mb-3">
-              <div className="text-sm font-semibold text-gray-100">{phase.title}</div>
-              <p className="mt-1 text-xs leading-5 text-gray-500">{phase.goal}</p>
+      <div className="grid gap-0 lg:grid-cols-[320px_minmax(0,1fr)]">
+        <div className="border-b border-gray-800 lg:border-b-0 lg:border-r">
+          <div className="border-b border-gray-800 p-3">
+            <div className="text-[10px] font-semibold uppercase tracking-wide text-gray-600">
+              {track.eyebrow}
             </div>
-            <div className="space-y-2">
-              {phase.nodes.map(node => (
-                <PersonalRoadmapCard key={node.title} node={node} />
-              ))}
-            </div>
+            <div className="mt-1 text-sm font-medium text-gray-100">{track.title}</div>
+            <p className="mt-1 line-clamp-2 text-xs leading-5 text-gray-500">{track.description}</p>
           </div>
-        ))}
+          <div className="max-h-[440px] overflow-y-auto p-3">
+            {track.phases.map(phase => (
+              <div key={phase.id} className="mb-4 last:mb-0">
+                <div className="mb-2">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                    {phase.title}
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  {phase.nodes.map(node => (
+                    <button
+                      key={node.title}
+                      onClick={() => setSelectedKey(roadmapNodeKey(phase, node))}
+                      className={`flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2 text-left transition-colors ${
+                        selected?.key === roadmapNodeKey(phase, node)
+                          ? 'border-blue-700 bg-blue-950/30'
+                          : 'border-gray-800 bg-gray-900/40 hover:border-gray-700 hover:bg-gray-900'
+                      }`}
+                    >
+                      <span className="min-w-0 truncate text-xs font-medium text-gray-200">
+                        {node.title}
+                      </span>
+                      <span className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] uppercase ${nodeStatusClass(node.status)}`}>
+                        {node.status}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {selected && <RoadmapFocusPanel node={selected.node} phase={selected.phase} />}
       </div>
     </section>
   );
 }
 
-function PersonalRoadmapCard({ node }: { node: PersonalRoadmapNode }) {
+function RoadmapFocusPanel({ node, phase }: { node: PersonalRoadmapNode; phase: PersonalRoadmapPhase }) {
   const params = new URLSearchParams({
     task: 'explain',
     prompt: node.prompt,
@@ -239,46 +282,66 @@ function PersonalRoadmapCard({ node }: { node: PersonalRoadmapNode }) {
   const resource = roadmapResource(node);
 
   return (
-    <div className={`rounded-md border p-3 ${nodeBorderClass(node)}`}>
-      <div className="flex items-start justify-between gap-3">
+    <div className="min-w-0 p-4 sm:p-6">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
-          <div className="text-sm font-medium text-gray-100">{node.title}</div>
-          <div className="mt-1 flex flex-wrap gap-1">
-            <span className={`rounded px-1.5 py-0.5 text-[10px] uppercase ${nodeStatusClass(node.status)}`}>
+          <div className="mb-2 flex flex-wrap gap-1.5">
+            <span className="rounded bg-gray-900 px-2 py-1 text-[10px] uppercase text-gray-500">
+              {phase.title}
+            </span>
+            <span className={`rounded px-2 py-1 text-[10px] uppercase ${nodeStatusClass(node.status)}`}>
               {node.status}
             </span>
-            <span className="rounded bg-gray-900 px-1.5 py-0.5 text-[10px] uppercase text-gray-500">
+            <span className="rounded bg-gray-900 px-2 py-1 text-[10px] uppercase text-gray-500">
               {node.lane}
             </span>
           </div>
+          <h3 className="text-xl font-semibold tracking-tight text-gray-100">{node.title}</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-400">{node.whyForYou}</p>
         </div>
-        <div className="flex shrink-0 gap-1">
+        <div className="flex shrink-0 gap-2 sm:pt-1">
           <a
             href={resource.href}
             target="_blank"
             rel="noreferrer"
-            className="rounded border border-gray-700 px-2 py-1 text-[10px] font-medium text-gray-300 hover:bg-gray-800"
+            className="rounded-md border border-gray-700 px-3 py-2 text-xs font-medium text-gray-300 hover:bg-gray-900"
           >
             {resource.label}
           </a>
           <Link
             to={`/playground?${params}`}
-            className="rounded border border-blue-800 bg-blue-950/30 px-2 py-1 text-[10px] font-medium text-blue-300 hover:bg-blue-900/40"
+            className="rounded-md bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700"
           >
             Ask AI
           </Link>
         </div>
       </div>
 
-      <p className="mt-2 text-xs leading-5 text-gray-400">{node.whyForYou}</p>
-      <div className="mt-2 flex flex-wrap gap-1">
-        {node.learn.map(item => (
-          <span key={item} className="rounded bg-gray-900 px-1.5 py-0.5 text-[11px] text-gray-500">
-            {item}
-          </span>
-        ))}
+      <div className="grid gap-3 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="rounded-md border border-gray-800 bg-gray-900/40 p-3">
+          <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+            Learn
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {node.learn.map(item => (
+              <span key={item} className="rounded border border-gray-800 bg-gray-950 px-2 py-1 text-xs text-gray-300">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-md border border-emerald-900/40 bg-emerald-950/10 p-3">
+          <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-emerald-400/80">
+            Proof
+          </div>
+          <p className="text-sm leading-6 text-emerald-100/80">{node.proof}</p>
+        </div>
       </div>
-      <p className="mt-2 text-xs leading-5 text-emerald-300/80">Proof: {node.proof}</p>
+
+      <p className="mt-3 text-xs leading-5 text-gray-600">
+        Ask AI opens this node with the right prompt prefilled.
+      </p>
     </div>
   );
 }
@@ -359,211 +422,6 @@ function nodeStatusClass(status: PersonalRoadmapNode['status']) {
   if (status === 'next') return 'bg-blue-500/20 text-blue-300';
   if (status === 'later') return 'bg-amber-500/20 text-amber-300';
   return 'bg-gray-800 text-gray-400';
-}
-
-function nodeBorderClass(node: PersonalRoadmapNode) {
-  const laneClasses: Record<PersonalRoadmapNode['lane'], string> = {
-    foundation: 'border-sky-900/50 bg-sky-950/10',
-    typescript: 'border-blue-900/50 bg-blue-950/10',
-    python: 'border-yellow-900/50 bg-yellow-950/10',
-    go: 'border-cyan-900/50 bg-cyan-950/10',
-    rust: 'border-orange-900/50 bg-orange-950/10',
-    production: 'border-emerald-900/50 bg-emerald-950/10',
-    database: 'border-lime-900/50 bg-lime-950/10',
-    data: 'border-teal-900/50 bg-teal-950/10',
-    infra: 'border-amber-900/50 bg-amber-950/10',
-    devops: 'border-fuchsia-900/50 bg-fuchsia-950/10',
-  };
-  return laneClasses[node.lane];
-}
-
-function RuntimeRoadmapPlanner() {
-  const [selectedId, setSelectedId] = useState<RuntimeRoadmap['id']>('javascript');
-  const selected =
-    RUNTIME_ROADMAPS.find(roadmap => roadmap.id === selectedId) ?? RUNTIME_ROADMAPS[0];
-  const projectParams = new URLSearchParams({
-    task: 'build',
-    prompt: `${COMPARATIVE_PROJECT.name}: ${COMPARATIVE_PROJECT.prompt} Start with the ${selected.name} version and call out what the runtime teaches.`,
-  });
-
-  return (
-    <section className="mb-6 rounded-xl border border-gray-800 bg-gray-900/40 p-4 sm:p-5">
-      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
-        <div>
-          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
-            <Layers3 className="h-4 w-4 text-blue-400" />
-            Runtime roadmap
-          </h2>
-          <p className="mt-1 max-w-3xl text-sm text-gray-500">
-            Learn JavaScript, Python, Go, and Rust as runtime philosophies: how code runs, blocks,
-            allocates, ships, scales, and fails.
-          </p>
-        </div>
-        <Link
-          to={`/playground?${projectParams}`}
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-700"
-        >
-          <Rocket className="h-3.5 w-3.5" />
-          Build shared project
-        </Link>
-      </div>
-
-      <div className="grid gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="space-y-3">
-          <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-              <BookOpen className="h-3.5 w-3.5" />
-              Foundation first
-            </div>
-            <div className="grid gap-2">
-              {FOUNDATION_CONCEPTS.map(concept => (
-                <div key={concept.name} className="rounded-md border border-gray-800 bg-gray-900/60 p-2">
-                  <div className="text-xs font-medium text-gray-200">{concept.name}</div>
-                  <p className="mt-1 text-[11px] leading-5 text-gray-500">{concept.why}</p>
-                  <p className="mt-1 text-[11px] leading-5 text-blue-300/80">Drill: {concept.drill}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
-            <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-              Universal layers
-            </div>
-            <div className="grid gap-2">
-              {RUNTIME_LAYERS.map((layer, index) => (
-                <div
-                  key={layer.name}
-                  className="rounded-md bg-gray-900/60 p-2 text-xs text-gray-300"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-[10px] text-gray-600">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="font-medium text-gray-200">{layer.name}</span>
-                  </div>
-                  <p className="mt-1 text-[11px] leading-5 text-gray-500">{layer.build}</p>
-                  <p className="mt-1 text-[11px] leading-5 text-emerald-300/80">Prove: {layer.prove}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-gray-800 bg-gray-950/70 p-3">
-          <div className="mb-3 flex flex-wrap gap-2">
-            {RUNTIME_ROADMAPS.map(roadmap => (
-              <button
-                key={roadmap.id}
-                onClick={() => setSelectedId(roadmap.id)}
-                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-                  selectedId === roadmap.id
-                    ? 'bg-blue-500/20 text-blue-300'
-                    : 'bg-gray-900 text-gray-400 hover:bg-gray-800 hover:text-gray-200'
-                }`}
-              >
-                {roadmap.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="rounded-lg border border-blue-900/30 bg-blue-950/10 p-3">
-            <div className="text-sm font-semibold text-gray-100">{selected.name}</div>
-            <div className="mt-1 text-xs text-blue-300">{selected.philosophy}</div>
-          </div>
-
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            <RoadmapDetail label="Runtime" value={selected.runtimeModel} />
-            <RoadmapDetail label="Memory" value={selected.memoryModel} />
-            <RoadmapDetail label="Concurrency" value={selected.concurrencyModel} />
-            <RoadmapDetail label="Package/build" value={selected.packaging} />
-            <RoadmapDetail label="Deployment" value={selected.deployment} />
-          </div>
-
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
-            <RoadmapList title="Must understand" items={selected.mustUnderstand} />
-            <RoadmapList title="Then learn" items={selected.thenLearn} />
-            <RoadmapList title="Build" items={selected.builds} />
-            <RoadmapList title="Explain" items={selected.checklist} />
-            <RoadmapList title="Avoid" items={selected.traps} />
-          </div>
-
-          <div className="mt-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3">
-            <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-              Filled layer plan for {selected.name}
-            </div>
-            <div className="mt-3 grid gap-2">
-              {selected.layerPlan.map(layer => (
-                <div key={layer.name} className="rounded-md border border-gray-800 bg-gray-950/70 p-3">
-                  <div className="text-sm font-medium text-gray-100">{layer.name}</div>
-                  <div className="mt-2 grid gap-2 md:grid-cols-2">
-                    <RoadmapMiniList title="Ask" items={layer.questions} />
-                    <RoadmapMiniList title="Learn" items={layer.learn} />
-                  </div>
-                  <p className="mt-2 text-xs leading-5 text-blue-300/80">Build: {layer.build}</p>
-                  <p className="mt-1 text-xs leading-5 text-emerald-300/80">Prove: {layer.prove}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3">
-            <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-              Shared project: {COMPARATIVE_PROJECT.name}
-            </div>
-            <p className="mt-2 text-xs leading-5 text-gray-400">{COMPARATIVE_PROJECT.prompt}</p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {COMPARATIVE_PROJECT.features.map(feature => (
-                <span key={feature} className="rounded border border-gray-800 bg-gray-950 px-2 py-1 text-[11px] text-gray-400">
-                  {feature}
-                </span>
-              ))}
-            </div>
-            <p className="mt-3 text-xs leading-6 text-gray-500">
-              Sequence: {COMPARATIVE_PROJECT.sequence.join(' -> ')}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RoadmapDetail({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-md border border-gray-800 bg-gray-900/40 p-2">
-      <div className="text-[10px] uppercase tracking-wide text-gray-600">{label}</div>
-      <div className="mt-1 text-xs leading-5 text-gray-300">{value}</div>
-    </div>
-  );
-}
-
-function RoadmapList({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-gray-500">{title}</div>
-      <ul className="space-y-1 text-xs text-gray-400">
-        {items.map(item => (
-          <li key={item} className="rounded bg-gray-900/60 px-2 py-1 leading-5">{item}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function RoadmapMiniList({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-600">{title}</div>
-      <div className="flex flex-wrap gap-1">
-        {items.map(item => (
-          <span key={item} className="rounded bg-gray-900 px-1.5 py-0.5 text-[11px] text-gray-400">
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 function practiceHref(item: WeaknessPlanItem): string {
