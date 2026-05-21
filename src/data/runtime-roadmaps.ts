@@ -1,3 +1,17 @@
+export interface FoundationConcept {
+  name: string;
+  why: string;
+  drill: string;
+}
+
+export interface RuntimeLayer {
+  name: string;
+  questions: string[];
+  learn: string[];
+  build: string;
+  prove: string;
+}
+
 export interface RuntimeRoadmap {
   id: 'javascript' | 'python' | 'go' | 'rust';
   name: string;
@@ -7,36 +21,282 @@ export interface RuntimeRoadmap {
   concurrencyModel: string;
   packaging: string;
   deployment: string;
+  mustUnderstand: string[];
+  thenLearn: string[];
   builds: string[];
   checklist: string[];
   traps: string[];
+  layerPlan: RuntimeLayer[];
 }
 
-export const FOUNDATION_CONCEPTS = [
-  'Process vs thread',
-  'Heap vs stack',
-  'Garbage collection',
-  'Blocking vs non-blocking I/O',
-  'Concurrency vs parallelism',
-  'CPU-bound vs I/O-bound work',
-  'HTTP/TCP/WebSockets',
-  'Serialization',
-  'Database transactions and pooling',
-  'Containers',
-  'Linux process lifecycle',
-  'Observability',
+export const FOUNDATION_CONCEPTS: FoundationConcept[] = [
+  {
+    name: 'Process vs thread',
+    why: 'Explains Node workers, Python GIL limits, Go scheduling, and Rust OS threads.',
+    drill: 'Run two CPU-bound tasks and two I/O-bound tasks; measure single process, threads, and processes.',
+  },
+  {
+    name: 'Heap vs stack',
+    why: 'Shows why allocation, escape analysis, borrowing, object lifetimes, and GC pressure matter.',
+    drill: 'Trace where a request object, local variable, closure, and returned pointer live in each runtime.',
+  },
+  {
+    name: 'Garbage collection',
+    why: 'JS, Python, and Go pause or reclaim differently; Rust makes lifetime costs explicit.',
+    drill: 'Create many short-lived objects, watch memory, then remove references and explain when memory returns.',
+  },
+  {
+    name: 'Blocking vs non-blocking I/O',
+    why: 'Determines whether async, threads, workers, goroutines, or processes are the right tool.',
+    drill: 'Build a slow HTTP client and compare sequential, concurrent async, threaded, and worker versions.',
+  },
+  {
+    name: 'Concurrency vs parallelism',
+    why: 'Concurrency is structure; parallelism is execution. Confusing them causes bad architecture.',
+    drill: 'Explain why 1,000 pending HTTP requests can be concurrent without 1,000 CPU cores.',
+  },
+  {
+    name: 'CPU-bound vs I/O-bound work',
+    why: 'CPU work wants parallel compute; I/O work wants waiting to be cheap.',
+    drill: 'Benchmark JSON parsing vs fetching 100 URLs, then choose async, threads, processes, or workers.',
+  },
+  {
+    name: 'HTTP/TCP/WebSockets',
+    why: 'Every backend and browser runtime sits on request/response, streams, sockets, and failure modes.',
+    drill: 'Write an HTTP server, a streaming response, and a WebSocket echo in one language.',
+  },
+  {
+    name: 'Serialization',
+    why: 'JSON is not free; binary protocols, schema drift, and compatibility show up in production.',
+    drill: 'Encode the same payload as JSON and a binary format; compare size, parse cost, and versioning.',
+  },
+  {
+    name: 'Databases',
+    why: 'Connection pooling, transactions, isolation, and migrations shape real service behavior.',
+    drill: 'Create a table, write two concurrent updates, and explain the transaction result.',
+  },
+  {
+    name: 'Containers',
+    why: 'Deployment is runtime behavior: env vars, image layers, ports, volumes, and process signals.',
+    drill: 'Containerize a tiny API and make config work only through environment variables.',
+  },
+  {
+    name: 'Linux basics',
+    why: 'Files, permissions, signals, process lifecycle, and syscalls are where services actually run.',
+    drill: 'Start a server, send SIGTERM, inspect open ports, read logs, and explain shutdown.',
+  },
+  {
+    name: 'Observability',
+    why: 'Without logs, metrics, traces, and profiling, performance and reliability claims are guesses.',
+    drill: 'Add structured logs, request latency metrics, and one CPU or allocation profile to a toy service.',
+  },
 ];
 
-export const RUNTIME_LAYERS = [
-  'Runtime model',
-  'Memory model',
-  'Type system',
-  'Concurrency model',
-  'Package/build system',
-  'I/O and networking',
-  'Error handling',
-  'Testing, debugging, profiling',
-  'Deployment model',
+export const RUNTIME_LAYERS: RuntimeLayer[] = [
+  {
+    name: 'Runtime model',
+    questions: [
+      'Who executes the code?',
+      'What happens at startup?',
+      'What happens when I import a file?',
+      'What happens when I await or block?',
+    ],
+    learn: [
+      'VM/interpreter/compiler boundary',
+      'module loading',
+      'startup cost',
+      'event loop or scheduler',
+    ],
+    build: 'Print startup order across multiple modules, then add one async/blocking operation.',
+    prove: 'Explain what runs before main/user code and what can block the process.',
+  },
+  {
+    name: 'Memory model',
+    questions: [
+      'What allocates on stack vs heap?',
+      'Who owns this value?',
+      'When is memory reclaimed?',
+      'Can references outlive the data?',
+    ],
+    learn: ['stack', 'heap', 'references', 'copy vs move', 'GC/RAII', 'leaks'],
+    build: 'Write a cache that intentionally leaks, fix it, then explain retention.',
+    prove: 'Use a memory/profile tool or compiler explanation to show where allocation happens.',
+  },
+  {
+    name: 'Type system',
+    questions: [
+      'What does the compiler protect?',
+      'What fails only at runtime?',
+      'How are interfaces/traits/protocols expressed?',
+    ],
+    learn: ['dynamic vs static', 'gradual typing', 'generics', 'interfaces/traits', 'nullability'],
+    build: 'Model success/failure for a small API without using vague any/object maps.',
+    prove: 'Break the contract and show whether compiler, type checker, or runtime catches it.',
+  },
+  {
+    name: 'Concurrency model',
+    questions: [
+      'What is a task?',
+      'What runs in parallel?',
+      'How do I cancel work?',
+      'How does backpressure appear?',
+    ],
+    learn: ['async I/O', 'threads', 'workers', 'channels/queues', 'cancellation', 'backpressure'],
+    build: 'Fetch 100 URLs with cancellation, timeout, and bounded concurrency.',
+    prove: 'Show what happens when one task hangs and how the rest are protected.',
+  },
+  {
+    name: 'Package/build system',
+    questions: [
+      'How are dependencies locked?',
+      'How are native dependencies built?',
+      'What artifact ships?',
+    ],
+    learn: ['lockfiles', 'modules', 'native extensions', 'workspaces', 'release artifact'],
+    build: 'Create a tiny package/CLI and install it into a fresh project.',
+    prove: 'Delete caches, reinstall from lockfile, and explain why the build is reproducible.',
+  },
+  {
+    name: 'I/O and networking',
+    questions: [
+      'How does the HTTP server accept work?',
+      'How are streams represented?',
+      'Where do timeouts live?',
+    ],
+    learn: ['HTTP server/client', 'streams', 'uploads', 'WebSockets', 'database I/O'],
+    build: 'Implement REST, WebSocket live updates, file upload, and a database-backed endpoint.',
+    prove: 'Simulate slow clients and failed upstreams; explain resource cleanup.',
+  },
+  {
+    name: 'Error handling',
+    questions: [
+      'Are errors values or exceptions?',
+      'Can failures be ignored?',
+      'How do async failures propagate?',
+    ],
+    learn: ['exceptions', 'Result/Option', 'error returns', 'retries', 'panic/crash policy'],
+    build: 'Wrap a flaky upstream call with timeout, retry, typed error, and user-safe message.',
+    prove: 'Force network, validation, and programmer errors; show the different paths.',
+  },
+  {
+    name: 'Testing/debugging/profiling',
+    questions: [
+      'How do I test units, integration, and concurrency?',
+      'How do I inspect CPU and memory?',
+      'How do I reproduce production bugs?',
+    ],
+    learn: ['unit tests', 'integration tests', 'race tools', 'debuggers', 'profilers', 'benchmarks'],
+    build: 'Add tests, one benchmark, and one profile for a deliberately slow endpoint.',
+    prove: 'Use profiling output to remove a real bottleneck instead of guessing.',
+  },
+  {
+    name: 'Deployment model',
+    questions: [
+      'What exact artifact ships?',
+      'How is config injected?',
+      'How does shutdown work?',
+      'How do upgrades happen safely?',
+    ],
+    learn: ['static assets', 'single binary', 'containers', 'serverless', 'signals', 'rollbacks'],
+    build: 'Dockerize and run the service with only env vars, health checks, and graceful shutdown.',
+    prove: 'Kill and restart it while requests are in flight; explain what is preserved or lost.',
+  },
+];
+
+const jsLayerPlan: RuntimeLayer[] = [
+  {
+    name: 'Runtime model',
+    questions: ['Browser or Node?', 'Which APIs are platform APIs?', 'What enters the microtask queue?'],
+    learn: ['V8', 'event loop', 'tasks vs microtasks', 'ESM/CJS loading', 'Web APIs'],
+    build: 'Create a script that logs sync code, Promise.then, queueMicrotask, setTimeout, fetch, and worker messages.',
+    prove: 'Explain the exact printed order and why Promise callbacks beat timers.',
+  },
+  {
+    name: 'Memory model',
+    questions: ['Which closures retain data?', 'How do objects and arrays share references?'],
+    learn: ['GC roots', 'closures', 'WeakMap/WeakRef', 'Buffer memory', 'DOM leaks'],
+    build: 'Create and fix a retained-listener leak in a small browser component.',
+    prove: 'Show why removing a DOM node is not enough if a closure still references it.',
+  },
+  {
+    name: 'Concurrency model',
+    questions: ['What is non-blocking?', 'When do workers matter?', 'What is backpressure?'],
+    learn: ['promises', 'async/await', 'AbortController', 'streams', 'worker_threads/Web Workers'],
+    build: 'Build a streaming HTTP proxy with cancellation and a CPU-heavy transform moved to a worker.',
+    prove: 'Show the main thread stays responsive while the worker runs.',
+  },
+];
+
+const pythonLayerPlan: RuntimeLayer[] = [
+  {
+    name: 'Runtime model',
+    questions: ['What is CPython doing?', 'What happens on import?', 'Where does venv isolation happen?'],
+    learn: ['CPython', 'bytecode', 'import system', 'venv', 'native wheels'],
+    build: 'Make a package with two modules, inspect import side effects, and run it in a fresh venv.',
+    prove: 'Explain why import-time work can slow startup or break serverless cold starts.',
+  },
+  {
+    name: 'Memory model',
+    questions: ['What does refcounting reclaim immediately?', 'When does cyclic GC matter?'],
+    learn: ['object identity', 'mutability', 'reference counting', 'cyclic GC', 'native extension memory'],
+    build: 'Create shared mutable default state, fix it, then inspect object ids and references.',
+    prove: 'Explain why two variables can mutate the same list.',
+  },
+  {
+    name: 'Concurrency model',
+    questions: ['When do threads help?', 'When does the GIL block CPU parallelism?', 'When use processes?'],
+    learn: ['asyncio', 'threading', 'multiprocessing', 'queues', 'Celery/RQ/Dramatiq'],
+    build: 'Write the same URL checker with asyncio, threads, and multiprocessing for CPU parsing.',
+    prove: 'Explain which version wins for I/O and which for CPU-heavy Python bytecode.',
+  },
+];
+
+const goLayerPlan: RuntimeLayer[] = [
+  {
+    name: 'Runtime model',
+    questions: ['What is inside a Go binary?', 'What does the scheduler do?', 'How does startup differ from Node/Python?'],
+    learn: ['go build', 'static binaries', 'runtime scheduler', 'GC', 'cross-compilation'],
+    build: 'Compile one HTTP server for local architecture and Linux, then run both in containers.',
+    prove: 'Explain why deploying a Go service can be a single binary copy.',
+  },
+  {
+    name: 'Memory model',
+    questions: ['Did this value escape?', 'Is this slice sharing an array?', 'What does GC scan?'],
+    learn: ['pointers', 'slices/maps internals', 'escape analysis', 'stack growth', 'GC tuning'],
+    build: 'Write a slice-sharing bug, fix it, and inspect escape analysis output.',
+    prove: 'Explain why appending to a slice can mutate or detach from the original array.',
+  },
+  {
+    name: 'Concurrency model',
+    questions: ['Who owns cancellation?', 'Should this be a channel or a mutex?', 'How does shutdown drain?'],
+    learn: ['goroutines', 'channels', 'select', 'context', 'worker pools', 'race detector'],
+    build: 'Build a bounded crawler with context cancellation, rate limits, and graceful shutdown.',
+    prove: 'Run the race detector and explain what it catches and what it does not.',
+  },
+];
+
+const rustLayerPlan: RuntimeLayer[] = [
+  {
+    name: 'Runtime model',
+    questions: ['What code runs without a GC?', 'What does Cargo produce?', 'Where does async execution come from?'],
+    learn: ['LLVM', 'Cargo', 'panic unwind/abort', 'Tokio executors', 'WASM', 'FFI'],
+    build: 'Create a CLI, then add an async HTTP command behind Tokio.',
+    prove: 'Explain why async Rust needs a runtime even though Rust itself has no default async executor.',
+  },
+  {
+    name: 'Memory model',
+    questions: ['Who owns the value?', 'Who borrows it?', 'How long is the borrow valid?'],
+    learn: ['ownership', 'borrowing', 'lifetimes', 'Copy vs Clone', 'RAII', 'Box/Rc/Arc'],
+    build: 'Write a parser that returns borrowed slices, then refactor it to owned output.',
+    prove: 'Explain why the borrowed result cannot outlive the source string.',
+  },
+  {
+    name: 'Concurrency model',
+    questions: ['Is this type Send?', 'Is shared state Sync?', 'Should this use Arc<Mutex<T>>?'],
+    learn: ['threads', 'channels', 'Send/Sync', 'Mutex/RwLock', 'async futures', 'pinning basics'],
+    build: 'Build a concurrent worker pool and then the same shape with Tokio tasks.',
+    prove: 'Explain why the compiler rejects unsafe sharing before runtime.',
+  },
 ];
 
 export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
@@ -49,27 +309,50 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
     concurrencyModel: 'Event loop, tasks vs microtasks, promises, async/await, workers.',
     packaging: 'npm/pnpm/yarn, ESM vs CommonJS, bundlers, lockfiles.',
     deployment: 'Static frontend, Node server, serverless, edge workers.',
+    mustUnderstand: [
+      'Browser runtime vs Node runtime',
+      'V8 and the event loop',
+      'Tasks vs microtasks',
+      'Promises and async/await',
+      'DOM, Fetch, Web APIs, Workers',
+      'ESM vs CommonJS',
+      'TypeScript as a compile-time guardrail',
+      'Streams, buffers, and backpressure',
+    ],
+    thenLearn: [
+      'Node internals and process lifecycle',
+      'EventEmitter and stream composition',
+      'HTTP server model',
+      'Worker threads and cluster/process managers',
+      'Cloudflare Workers, Vercel Edge, Deno Deploy',
+      'npm package publishing and supply-chain hygiene',
+    ],
     builds: [
       'CLI tool',
       'REST API',
       'WebSocket chat',
-      'React frontend',
+      'React/Next frontend',
+      'Node backend',
       'Cloudflare Worker',
+      'Package published to npm',
     ],
     checklist: [
       'Why Promise.then runs before setTimeout',
       'ESM vs CommonJS',
       'Node APIs vs browser APIs',
       'Streams and backpressure',
+      'What bundling changes',
       'What TypeScript is actually checking',
       'What runs in an edge worker',
     ],
     traps: [
       'Thinking JS is only frontend',
       'Avoiding TypeScript',
+      'Not understanding the event loop',
       'Confusing async with parallel',
       'Depending blindly on npm packages',
     ],
+    layerPlan: jsLayerPlan,
   },
   {
     id: 'python',
@@ -80,12 +363,33 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
     concurrencyModel: 'asyncio, threads, multiprocessing, task queues.',
     packaging: 'venv, pip, uv/poetry, pyproject.toml, wheels, native deps.',
     deployment: 'Containers, serverless Python, FastAPI/Django apps, notebooks, workers.',
+    mustUnderstand: [
+      'CPython and interpreter lifecycle',
+      'Object identity, mutability, and reference counting',
+      'Garbage collection and the GIL',
+      'Virtual environments',
+      'pip/uv, pyproject.toml, wheels',
+      'Native extensions',
+      'asyncio, threading, multiprocessing',
+    ],
+    thenLearn: [
+      'FastAPI and Django basics',
+      'SQLAlchemy and migrations',
+      'Pydantic validation',
+      'Celery/RQ/Dramatiq workers',
+      'pytest and mypy/pyright',
+      'NumPy/Pandas and Jupyter',
+      'Pyodide and serverless/containerized Python',
+    ],
     builds: [
       'FastAPI service',
       'CLI tool',
-      'Async scraper',
+      'Web scraper',
+      'Async HTTP client/server',
       'Background worker',
       'Data pipeline',
+      'Small ML/data project',
+      'Package published to PyPI',
     ],
     checklist: [
       'What the GIL does',
@@ -93,14 +397,18 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
       'When processes help',
       'What a wheel is',
       'Why virtual environments exist',
+      'asyncio vs threading',
       'CPython vs PyPy vs Pyodide',
     ],
     traps: [
       'Treating Python as only scripting',
       'Ignoring packaging',
-      'Using threads for CPU-heavy Python bytecode',
-      'Writing untyped production Python forever',
+      'Ignoring the GIL',
+      'Using threads for CPU-heavy work',
+      'Skipping dependency isolation',
+      'Writing untyped Python forever',
     ],
+    layerPlan: pythonLayerPlan,
   },
   {
     id: 'go',
@@ -111,12 +419,33 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
     concurrencyModel: 'Goroutines, channels, select, context cancellation, scheduler.',
     packaging: 'Go modules, go build, go test, cross-compilation.',
     deployment: 'Single binary, containers, Kubernetes-style services, CLIs.',
+    mustUnderstand: [
+      'Go toolchain and modules',
+      'Structs, interfaces, pointers',
+      'Slices and maps internals',
+      'Goroutines, channels, select',
+      'context cancellation',
+      'errors and defer',
+      'GC, scheduler, race detector, pprof',
+    ],
+    thenLearn: [
+      'net/http deeply',
+      'gRPC',
+      'Database access and connection pooling',
+      'Worker pools and rate limiting',
+      'Graceful shutdown',
+      'Kubernetes-style service design',
+      'Metrics exporters',
+    ],
     builds: [
       'HTTP API',
       'gRPC service',
+      'CLI tool',
       'Concurrent crawler',
       'Worker queue',
+      'Reverse proxy',
       'Metrics exporter',
+      'Small distributed service',
     ],
     checklist: [
       'What a goroutine is',
@@ -124,14 +453,18 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
       'How context cancellation works',
       'How graceful shutdown works',
       'What the race detector catches',
-      'What pprof and escape analysis show',
+      'What pprof shows',
+      'What escape analysis means',
     ],
     traps: [
       'Thinking simple means shallow',
       'Overusing channels',
       'Ignoring context',
-      'Skipping graceful shutdown and pprof',
+      'Skipping graceful shutdown',
+      'Not using pprof',
+      'Writing Java-style Go',
     ],
+    layerPlan: goLayerPlan,
   },
   {
     id: 'rust',
@@ -145,27 +478,54 @@ export const RUNTIME_ROADMAPS: RuntimeRoadmap[] = [
     packaging: 'Cargo, crates.io, features, workspaces, lockfiles.',
     deployment:
       'Static/native binary, WASM, systems software, high-performance services.',
+    mustUnderstand: [
+      'Ownership, borrowing, lifetimes',
+      'Move semantics, Copy vs Clone',
+      'References and slices',
+      'Enums and pattern matching',
+      'Traits and generics',
+      'Result, Option, and the question mark operator',
+      'Cargo and crates',
+    ],
+    thenLearn: [
+      'Box, Rc, Arc',
+      'Cell, RefCell, Mutex, RwLock',
+      'Threads, channels, Send/Sync',
+      'Async Rust and Tokio',
+      'Serde',
+      'FFI and unsafe Rust',
+      'WASM',
+      'Systems and networking',
+    ],
     builds: [
       'CLI tool',
       'Axum/Actix HTTP service',
       'Parser',
       'WebSocket server',
+      'Concurrent worker system',
       'WASM module',
+      'Small database/storage engine',
+      'FFI wrapper',
     ],
     checklist: [
-      'Ownership and borrowing',
+      'What ownership is',
+      'What borrowing is',
       'What a lifetime is',
       'Send vs Sync',
       'Box vs Rc vs Arc',
+      'Interior mutability',
       'Result vs panic',
       'Why async Rust needs a runtime',
+      'What unsafe is actually for',
     ],
     traps: [
       'Learning async before ownership is solid',
+      'Fighting the borrow checker instead of learning the model',
       'Using clone to avoid design questions',
       'Avoiding lifetimes',
       'Thinking Rust is only systems programming',
     ],
+    layerPlan: rustLayerPlan,
   },
 ];
 
@@ -173,6 +533,18 @@ export const COMPARATIVE_PROJECT = {
   name: 'URL monitoring service',
   prompt:
     'Build a URL monitoring service with submitted URLs, periodic checks, status history, failure webhooks, REST API, WebSocket live updates, CLI client, background workers, metrics, tests, and Docker deployment notes.',
+  features: [
+    'User submits URLs',
+    'Service checks them every N seconds',
+    'Stores status history',
+    'Sends webhook on failure',
+    'Has REST API',
+    'Has WebSocket live updates',
+    'Has CLI client',
+    'Has background workers',
+    'Has metrics and tests',
+    'Is deployable in Docker',
+  ],
   sequence: [
     'OS/process/thread/networking basics',
     'JavaScript runtime + TypeScript',

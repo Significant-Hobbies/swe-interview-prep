@@ -175,14 +175,13 @@ function RuntimeRoadmapPlanner() {
               <BookOpen className="h-3.5 w-3.5" />
               Foundation first
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="grid gap-2">
               {FOUNDATION_CONCEPTS.map(concept => (
-                <span
-                  key={concept}
-                  className="rounded border border-gray-800 bg-gray-900 px-2 py-1 text-[11px] text-gray-400"
-                >
-                  {concept}
-                </span>
+                <div key={concept.name} className="rounded-md border border-gray-800 bg-gray-900/60 p-2">
+                  <div className="text-xs font-medium text-gray-200">{concept.name}</div>
+                  <p className="mt-1 text-[11px] leading-5 text-gray-500">{concept.why}</p>
+                  <p className="mt-1 text-[11px] leading-5 text-blue-300/80">Drill: {concept.drill}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -191,16 +190,20 @@ function RuntimeRoadmapPlanner() {
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
               Universal layers
             </div>
-            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="grid gap-2">
               {RUNTIME_LAYERS.map((layer, index) => (
                 <div
-                  key={layer}
-                  className="flex items-center gap-2 rounded-md bg-gray-900/60 px-2 py-1.5 text-xs text-gray-300"
+                  key={layer.name}
+                  className="rounded-md bg-gray-900/60 p-2 text-xs text-gray-300"
                 >
-                  <span className="font-mono text-[10px] text-gray-600">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  {layer}
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[10px] text-gray-600">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="font-medium text-gray-200">{layer.name}</span>
+                  </div>
+                  <p className="mt-1 text-[11px] leading-5 text-gray-500">{layer.build}</p>
+                  <p className="mt-1 text-[11px] leading-5 text-emerald-300/80">Prove: {layer.prove}</p>
                 </div>
               ))}
             </div>
@@ -237,7 +240,9 @@ function RuntimeRoadmapPlanner() {
             <RoadmapDetail label="Deployment" value={selected.deployment} />
           </div>
 
-          <div className="mt-3 grid gap-3 md:grid-cols-3">
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <RoadmapList title="Must understand" items={selected.mustUnderstand} />
+            <RoadmapList title="Then learn" items={selected.thenLearn} />
             <RoadmapList title="Build" items={selected.builds} />
             <RoadmapList title="Explain" items={selected.checklist} />
             <RoadmapList title="Avoid" items={selected.traps} />
@@ -245,10 +250,37 @@ function RuntimeRoadmapPlanner() {
 
           <div className="mt-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3">
             <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-              Suggested sequence
+              Filled layer plan for {selected.name}
             </div>
-            <p className="mt-2 text-xs leading-6 text-gray-400">
-              {COMPARATIVE_PROJECT.sequence.join(' -> ')}
+            <div className="mt-3 grid gap-2">
+              {selected.layerPlan.map(layer => (
+                <div key={layer.name} className="rounded-md border border-gray-800 bg-gray-950/70 p-3">
+                  <div className="text-sm font-medium text-gray-100">{layer.name}</div>
+                  <div className="mt-2 grid gap-2 md:grid-cols-2">
+                    <RoadmapMiniList title="Ask" items={layer.questions} />
+                    <RoadmapMiniList title="Learn" items={layer.learn} />
+                  </div>
+                  <p className="mt-2 text-xs leading-5 text-blue-300/80">Build: {layer.build}</p>
+                  <p className="mt-1 text-xs leading-5 text-emerald-300/80">Prove: {layer.prove}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3">
+            <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+              Shared project: {COMPARATIVE_PROJECT.name}
+            </div>
+            <p className="mt-2 text-xs leading-5 text-gray-400">{COMPARATIVE_PROJECT.prompt}</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {COMPARATIVE_PROJECT.features.map(feature => (
+                <span key={feature} className="rounded border border-gray-800 bg-gray-950 px-2 py-1 text-[11px] text-gray-400">
+                  {feature}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-xs leading-6 text-gray-500">
+              Sequence: {COMPARATIVE_PROJECT.sequence.join(' -> ')}
             </p>
           </div>
         </div>
@@ -275,6 +307,21 @@ function RoadmapList({ title, items }: { title: string; items: string[] }) {
           <li key={item} className="rounded bg-gray-900/60 px-2 py-1 leading-5">{item}</li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function RoadmapMiniList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-600">{title}</div>
+      <div className="flex flex-wrap gap-1">
+        {items.map(item => (
+          <span key={item} className="rounded bg-gray-900 px-1.5 py-0.5 text-[11px] text-gray-400">
+            {item}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
