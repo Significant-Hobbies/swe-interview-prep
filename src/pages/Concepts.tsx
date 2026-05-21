@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import {
   COMPARATIVE_PROJECT,
   FOUNDATION_CONCEPTS,
+  PERSONAL_DATABASE_TRACK,
+  PERSONAL_INFRA_TRACK,
   PERSONAL_RUNTIME_TRACK,
   type PersonalRoadmapNode,
   RUNTIME_LAYERS,
@@ -77,7 +79,26 @@ export default function Concepts() {
         <Stat label="Untouched" value={stats.total - stats.touched} accent="gray" />
       </div>
 
-      <PersonalRuntimeRoadmap />
+      <PersonalRoadmapBoard
+        title="Sarthak runtime path"
+        description="A precise path for shipping and debugging your fleet: TypeScript + Python first, Go for backend infrastructure, Rust selectively for correctness and tooling."
+        phases={PERSONAL_RUNTIME_TRACK}
+        accent="blue"
+      />
+
+      <PersonalRoadmapBoard
+        title="DB / data systems path"
+        description="A deep dive for product truth: schema design, SQL, migrations, query plans, transactions, caches, analytics tables, backfills, and restore drills."
+        phases={PERSONAL_DATABASE_TRACK}
+        accent="emerald"
+      />
+
+      <PersonalRoadmapBoard
+        title="Infra / DevOps path"
+        description="A production path for keeping products alive: Linux, Docker, config, CI/CD, Cloudflare deploys, observability, jobs, rollbacks, and incident drills."
+        phases={PERSONAL_INFRA_TRACK}
+        accent="amber"
+      />
 
       <RuntimeRoadmapPlanner />
 
@@ -141,18 +162,43 @@ export default function Concepts() {
   );
 }
 
-function PersonalRuntimeRoadmap() {
+function PersonalRoadmapBoard({
+  title,
+  description,
+  phases,
+  accent,
+}: {
+  title: string;
+  description: string;
+  phases: typeof PERSONAL_RUNTIME_TRACK;
+  accent: 'blue' | 'emerald' | 'amber';
+}) {
+  const sectionClass = {
+    blue: 'border-blue-900/40 bg-blue-950/10',
+    emerald: 'border-emerald-900/40 bg-emerald-950/10',
+    amber: 'border-amber-900/40 bg-amber-950/10',
+  }[accent];
+  const iconClass = {
+    blue: 'text-blue-400',
+    emerald: 'text-emerald-400',
+    amber: 'text-amber-400',
+  }[accent];
+  const connectorClass = {
+    blue: 'bg-blue-900/60',
+    emerald: 'bg-emerald-900/60',
+    amber: 'bg-amber-900/60',
+  }[accent];
+
   return (
-    <section className="mb-6 rounded-xl border border-blue-900/40 bg-blue-950/10 p-4 sm:p-5">
+    <section className={`mb-6 rounded-xl border p-4 sm:p-5 ${sectionClass}`}>
       <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="flex items-center gap-2 text-base font-semibold text-gray-100">
-            <Target className="h-4 w-4 text-blue-400" />
-            Sarthak runtime path
+            <Target className={`h-4 w-4 ${iconClass}`} />
+            {title}
           </h2>
           <p className="mt-1 max-w-3xl text-sm text-gray-500">
-            A precise path for shipping and debugging your fleet: TypeScript + Python first,
-            Go for backend infrastructure, Rust selectively for correctness and tooling.
+            {description}
           </p>
         </div>
         <div className="grid grid-cols-4 gap-1 text-[10px] uppercase tracking-wide">
@@ -163,11 +209,11 @@ function PersonalRuntimeRoadmap() {
         </div>
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-4">
-        {PERSONAL_RUNTIME_TRACK.map((phase, phaseIndex) => (
+      <div className="grid gap-4 xl:grid-cols-3 2xl:grid-cols-4">
+        {phases.map((phase, phaseIndex) => (
           <div key={phase.id} className="relative rounded-lg border border-gray-800 bg-gray-950/80 p-3">
-            {phaseIndex < PERSONAL_RUNTIME_TRACK.length - 1 && (
-              <div className="pointer-events-none absolute right-[-1rem] top-10 hidden h-px w-4 bg-blue-900/60 xl:block" />
+            {phaseIndex < phases.length - 1 && (
+              <div className={`pointer-events-none absolute right-[-1rem] top-10 hidden h-px w-4 xl:block ${connectorClass}`} />
             )}
             <div className="mb-3">
               <div className="text-sm font-semibold text-gray-100">{phase.title}</div>
@@ -262,6 +308,30 @@ function roadmapResource(node: PersonalRoadmapNode) {
       href: 'https://doc.rust-lang.org/book/',
     };
   }
+  if (node.lane === 'database') {
+    return {
+      label: 'PG Docs',
+      href: 'https://www.postgresql.org/docs/current/',
+    };
+  }
+  if (node.lane === 'data') {
+    return {
+      label: 'SQLite',
+      href: 'https://www.sqlite.org/docs.html',
+    };
+  }
+  if (node.lane === 'infra') {
+    return {
+      label: 'Docker',
+      href: 'https://docs.docker.com/',
+    };
+  }
+  if (node.lane === 'devops') {
+    return {
+      label: 'Actions',
+      href: 'https://docs.github.com/en/actions',
+    };
+  }
   if (node.lane === 'production') {
     return {
       label: 'OTel',
@@ -299,6 +369,10 @@ function nodeBorderClass(node: PersonalRoadmapNode) {
     go: 'border-cyan-900/50 bg-cyan-950/10',
     rust: 'border-orange-900/50 bg-orange-950/10',
     production: 'border-emerald-900/50 bg-emerald-950/10',
+    database: 'border-lime-900/50 bg-lime-950/10',
+    data: 'border-teal-900/50 bg-teal-950/10',
+    infra: 'border-amber-900/50 bg-amber-950/10',
+    devops: 'border-fuchsia-900/50 bg-fuchsia-950/10',
   };
   return laneClasses[node.lane];
 }

@@ -34,7 +34,17 @@ export interface PersonalRoadmapNode {
   whyForYou: string;
   learn: string[];
   proof: string;
-  lane: 'foundation' | 'typescript' | 'python' | 'go' | 'rust' | 'production';
+  lane:
+    | 'foundation'
+    | 'typescript'
+    | 'python'
+    | 'go'
+    | 'rust'
+    | 'production'
+    | 'database'
+    | 'data'
+    | 'infra'
+    | 'devops';
   status: 'now' | 'next' | 'later' | 'defer';
   prompt: string;
 }
@@ -226,6 +236,252 @@ export const PERSONAL_RUNTIME_TRACK: PersonalRoadmapPhase[] = [
         status: 'defer',
         prompt:
           'Port a bounded URL monitor worker core from Go to Rust/Tokio. Compare cancellation, shared state, error handling, and code complexity.',
+      },
+    ],
+  },
+];
+
+export const PERSONAL_DATABASE_TRACK: PersonalRoadmapPhase[] = [
+  {
+    id: 'db-core-model',
+    title: '0. SQL + Data Modeling',
+    goal: 'Design tables that make product behavior correct before worrying about scale.',
+    nodes: [
+      {
+        title: 'Relational modeling',
+        whyForYou:
+          'High Signal scoring, SaaS Maker tasks, reviews, feedback, and product analytics all depend on clean entities and relationships.',
+        learn: ['entities', 'relationships', 'constraints', 'foreign keys', 'normalization'],
+        proof: 'Model users, tasks, events, scores, and feedback with constraints that prevent invalid state.',
+        lane: 'database',
+        status: 'now',
+        prompt:
+          'Design a relational schema for users, tasks, events, scores, and feedback. Include keys, constraints, invalid states prevented, and example queries.',
+      },
+      {
+        title: 'SQL beyond CRUD',
+        whyForYou:
+          'Most product questions are joins, groups, time windows, ranks, and filtered aggregates, not simple selects.',
+        learn: ['joins', 'CTEs', 'aggregates', 'window functions', 'upserts'],
+        proof: 'Answer activation, retention, stale-feed, and hit-rate questions from raw rows using SQL only.',
+        lane: 'database',
+        status: 'now',
+        prompt:
+          'Write SQL queries for activation, D1/D7 retention, stale-feed detection, and mature hit-rate from raw product event and score tables.',
+      },
+      {
+        title: 'Schema evolution',
+        whyForYou:
+          'You keep shipping live products. Bad migrations create production-only bugs and painful repair scripts.',
+        learn: ['migrations', 'backfills', 'expand/contract', 'defaults', 'rollback planning'],
+        proof: 'Add a non-null column to a live table safely with a backfill and compatibility window.',
+        lane: 'database',
+        status: 'next',
+        prompt:
+          'Plan a safe migration that adds a non-null derived field to a live table. Include expand/contract steps, backfill, verification query, and rollback.',
+      },
+    ],
+  },
+  {
+    id: 'db-performance-correctness',
+    title: '1. Performance + Correctness',
+    goal: 'Know why a query is slow, why a transaction is wrong, and when a cache lies.',
+    nodes: [
+      {
+        title: 'Indexes and query plans',
+        whyForYou:
+          'Dashboards and feed pages die from missing indexes, wrong sort order, or accidental full scans.',
+        learn: ['B-tree indexes', 'composite indexes', 'EXPLAIN', 'covering indexes', 'selectivity'],
+        proof: 'Make a dashboard query slow, add the right index, and explain the plan change.',
+        lane: 'database',
+        status: 'now',
+        prompt:
+          'Create a slow dashboard query, read the EXPLAIN plan, add a composite index, and explain why the new plan is faster.',
+      },
+      {
+        title: 'Transactions and isolation',
+        whyForYou:
+          'Task claiming, scoring, inventory-like updates, and webhook replay all need correct concurrent behavior.',
+        learn: ['ACID', 'isolation levels', 'lost updates', 'locks', 'idempotency keys'],
+        proof: 'Reproduce a lost update, then fix it with a transaction or idempotent write pattern.',
+        lane: 'database',
+        status: 'next',
+        prompt:
+          'Show a lost-update bug for two concurrent workers claiming the same job, then fix it with transactions, locks, or idempotency.',
+      },
+      {
+        title: 'Caching and invalidation',
+        whyForYou:
+          'You have seen stale public feeds and tiny cached artifacts. Cache correctness is product correctness.',
+        learn: ['TTL', 'cache keys', 'stale-while-revalidate', 'negative caching', 'cache busting'],
+        proof: 'Build a cache that goes stale, then add validation and fallback behavior.',
+        lane: 'data',
+        status: 'next',
+        prompt:
+          'Design a cache strategy for a public feed that avoids stale or tiny artifacts. Include TTLs, validation, fallback, and observability.',
+      },
+    ],
+  },
+  {
+    id: 'db-product-data',
+    title: '2. Product Data Systems',
+    goal: 'Separate operational truth from analytics truth and make backfills boring.',
+    nodes: [
+      {
+        title: 'OLTP vs analytics tables',
+        whyForYou:
+          'Product actions need normalized correctness; dashboards need queryable event and rollup shapes.',
+        learn: ['event tables', 'rollups', 'materialized views', 'denormalization', 'late data'],
+        proof: 'Design source tables plus daily rollups for signup, activation, core action, returned.',
+        lane: 'data',
+        status: 'now',
+        prompt:
+          'Design OLTP and analytics tables for signup, activated, core_action, and returned across multiple products. Include daily rollups and late-event handling.',
+      },
+      {
+        title: 'Backfills and repair scripts',
+        whyForYou:
+          'A lot of real product work is repairing old rows without corrupting new ones.',
+        learn: ['idempotent scripts', 'dry runs', 'batching', 'audit logs', 'verification queries'],
+        proof: 'Write a dry-run backfill plan with before/after counts and a replay-safe repair script.',
+        lane: 'data',
+        status: 'next',
+        prompt:
+          'Write a backfill plan and script outline that repairs stale score rows safely. Include dry run, batching, audit log, verification, and rerun behavior.',
+      },
+      {
+        title: 'Backup, restore, and data drills',
+        whyForYou:
+          'If you cannot restore, you do not really have data durability.',
+        learn: ['backups', 'point-in-time restore', 'export/import', 'seed data', 'restore verification'],
+        proof: 'Create a local restore drill for a product DB and verify row counts plus key queries.',
+        lane: 'database',
+        status: 'later',
+        prompt:
+          'Design a backup and restore drill for a small product database. Include export, restore, verification queries, and what failures to simulate.',
+      },
+    ],
+  },
+];
+
+export const PERSONAL_INFRA_TRACK: PersonalRoadmapPhase[] = [
+  {
+    id: 'infra-local-to-prod',
+    title: '0. Local to Production',
+    goal: 'Make every app explainable from local dev through deployment artifact.',
+    nodes: [
+      {
+        title: 'Linux and process lifecycle',
+        whyForYou:
+          'Ports, signals, logs, file permissions, and stuck local servers show up in nearly every repo.',
+        learn: ['processes', 'signals', 'ports', 'permissions', 'system logs'],
+        proof: 'Start, inspect, terminate, and restart a service while preserving logs and explaining state.',
+        lane: 'infra',
+        status: 'now',
+        prompt:
+          'Create a Linux/process lifecycle drill: start a local server, inspect port/process, send SIGTERM, verify shutdown, and explain logs.',
+      },
+      {
+        title: 'Docker and runtime config',
+        whyForYou:
+          'Containers force clean boundaries: env vars, ports, volumes, image layers, and startup commands.',
+        learn: ['Dockerfile', 'image layers', 'volumes', 'env vars', 'health checks'],
+        proof: 'Containerize a small API with no local-only assumptions and a working health check.',
+        lane: 'infra',
+        status: 'now',
+        prompt:
+          'Containerize a small API. Include Dockerfile, env-only config, healthcheck, volume decision, and commands to run and debug it.',
+      },
+      {
+        title: 'Secrets and config discipline',
+        whyForYou:
+          'Your fleet often fails from missing or empty env/config, not broken application code.',
+        learn: ['env validation', 'secret scopes', 'repo variables', 'runtime vs build-time config'],
+        proof: 'Add validation that catches missing, empty, or wrong-scope deploy config before runtime.',
+        lane: 'devops',
+        status: 'now',
+        prompt:
+          'Design env/config validation for a Cloudflare/Vite app that catches missing, empty, or wrong-scope variables before deploy.',
+      },
+    ],
+  },
+  {
+    id: 'infra-ci-cd',
+    title: '1. CI/CD + Deploys',
+    goal: 'Turn pushes into predictable previews, checks, deploys, and rollbacks.',
+    nodes: [
+      {
+        title: 'GitHub Actions pipeline',
+        whyForYou:
+          'You need fast signal: typecheck, lint, unit, e2e, build, and deploy guards with clear failure logs.',
+        learn: ['workflow triggers', 'caching', 'matrix jobs', 'artifacts', 'log inspection'],
+        proof: 'Create a pipeline that fails clearly for env, test, build, and deploy mistakes.',
+        lane: 'devops',
+        status: 'now',
+        prompt:
+          'Design a GitHub Actions pipeline for a Vite/Cloudflare app with typecheck, lint, unit, e2e, build, env validation, and readable failure logs.',
+      },
+      {
+        title: 'Cloudflare Pages + Workers',
+        whyForYou:
+          'Your products deploy heavily through Cloudflare, so runtime limits and bindings matter more than generic cloud theory.',
+        learn: ['Pages', 'Workers', 'bindings', 'D1/KV/R2', 'wrangler', 'preview deploys'],
+        proof: 'Deploy a small Pages app with a Worker/API binding and a production smoke check.',
+        lane: 'infra',
+        status: 'next',
+        prompt:
+          'Plan a Cloudflare Pages + Workers deployment with bindings, preview deploys, production smoke checks, and rollback notes.',
+      },
+      {
+        title: 'Release and rollback discipline',
+        whyForYou:
+          'A green deploy is not proof. You need smoke checks, artifact checks, and a known rollback path.',
+        learn: ['release checklist', 'smoke tests', 'artifact verification', 'rollback', 'changelog'],
+        proof: 'Ship a change, verify production behavior, and document exact rollback steps.',
+        lane: 'devops',
+        status: 'next',
+        prompt:
+          'Create a release checklist for a small product: preflight, deploy, production smoke, artifact verification, changelog, rollback.',
+      },
+    ],
+  },
+  {
+    id: 'infra-ops-reliability',
+    title: '2. Operations + Reliability',
+    goal: 'Debug production from symptoms to root cause without guessing.',
+    nodes: [
+      {
+        title: 'Logs, metrics, traces',
+        whyForYou:
+          'Fleet status should be evidence-backed: what failed, where, for whom, and since when.',
+        learn: ['structured logs', 'metrics', 'tracing', 'correlation ids', 'dashboards'],
+        proof: 'Add correlation IDs and latency/error metrics to a request path, then debug a forced failure.',
+        lane: 'production',
+        status: 'now',
+        prompt:
+          'Add correlation IDs, structured logs, latency metrics, and error metrics to a request path. Force a failure and write the debug path.',
+      },
+      {
+        title: 'Jobs, cron, and queues',
+        whyForYou:
+          'Ingest, scoring, audits, weekly refreshes, and notifications are background reliability problems.',
+        learn: ['cron', 'queues', 'retries', 'dead letters', 'idempotency', 'replay'],
+        proof: 'Build a scheduled job with retries, idempotent writes, failure state, and replay command.',
+        lane: 'production',
+        status: 'next',
+        prompt:
+          'Build a scheduled job system with idempotent writes, retries, failure records, dead-letter state, and a replay command.',
+      },
+      {
+        title: 'Incident drills',
+        whyForYou:
+          'The skill is not never breaking prod; it is narrowing the cause fast and communicating accurately.',
+        learn: ['triage', 'blast radius', 'timeline', 'mitigation', 'postmortem'],
+        proof: 'Simulate stale feed, missing env var, and slow query incidents; write concise postmortems.',
+        lane: 'devops',
+        status: 'later',
+        prompt:
+          'Run three incident drills: stale feed, missing env var, slow query. For each, write symptom, evidence, root cause, mitigation, and prevention.',
       },
     ],
   },
