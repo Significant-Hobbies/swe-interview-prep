@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35" />
+      <stop offset="55%" stop-color="#a855f7" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#030712" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#030712" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- brand -->
+  <g transform="translate(72,72)">
+    <rect width="44" height="44" rx="11" fill="#3b82f6" fill-opacity="0.18" />
+    <text x="22" y="30" font-family="ui-monospace, Menlo, monospace" font-size="22"
+          font-weight="700" fill="#60a5fa" text-anchor="middle">&lt;/&gt;</text>
+    <text x="60" y="29" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+          font-size="24" font-weight="600" fill="#e5e7eb">DSA Prep Studio</text>
+  </g>
+
+  <!-- headline -->
+  <text x="72" y="290" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="74" font-weight="800" fill="#f9fafb">Stop grinding problems.</text>
+  <text x="72" y="372" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="74" font-weight="800" fill="url(#accent)">Start drilling patterns.</text>
+
+  <!-- subhead -->
+  <text x="72" y="438" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="28" fill="#9ca3af">A daily plan picks your next concept. Build, draw,</text>
+  <text x="72" y="476" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="28" fill="#9ca3af">and explain in one screen — with an AI tutor that grills you.</text>
+
+  <!-- footer chips -->
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="20" fill="#cbd5e1">
+    <rect x="72" y="528" width="160" height="44" rx="22" fill="#111827" stroke="#1f2937" />
+    <text x="152" y="556" text-anchor="middle">Daily plan</text>
+    <rect x="248" y="528" width="190" height="44" rx="22" fill="#111827" stroke="#1f2937" />
+    <text x="343" y="556" text-anchor="middle">Spaced repetition</text>
+    <rect x="454" y="528" width="170" height="44" rx="22" fill="#111827" stroke="#1f2937" />
+    <text x="539" y="556" text-anchor="middle">AI tutor</text>
+  </g>
+</svg>

@@ -1,10 +1,16 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
+import { ErrorBoundary } from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
+import { trackReturned, trackSignup } from './lib/analytics';
 import { saasmaker } from './lib/saasmaker';
+
+// Session-level analytics. The app is usable as a guest, so `signup` means
+// "first ever session on this browser" and `returned` means a later session.
+const SEEN_KEY = 'swe-interview-prep:seen';
 
 const About = lazy(() => import('./pages/About'));
 const Concepts = lazy(() => import('./pages/Concepts'));
@@ -31,6 +37,20 @@ function App() {
     saasmaker.analytics.track({ name: 'page_view', url: location.pathname }).catch(() => {});
   }, [location.pathname]);
 
+  // Fire the session-level taxonomy events once per app load.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(SEEN_KEY)) {
+        trackReturned();
+      } else {
+        localStorage.setItem(SEEN_KEY, '1');
+        trackSignup();
+      }
+    } catch {
+      // localStorage unavailable — skip session attribution silently.
+    }
+  }, []);
+
   if (loading) {
     return <PageFallback />;
   }
@@ -46,29 +66,34 @@ function App() {
   return (
     <>
       <SaaSMakerFeedback />
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Today />} />
-            <Route path="concepts" element={<Concepts />} />
-            <Route path="review" element={<Review />} />
-            <Route path="mock" element={<MockInterview />} />
-            <Route path="playground" element={<Playground />} />
-            <Route path="about" element={<About />} />
-            <Route path="privacy" element={<Privacy />} />
-            {/* Legacy route catch-alls */}
-            <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="p/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="lld/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="hld/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="behavioral/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="library" element={<Navigate to="/concepts" replace />} />
-            <Route path="library/*" element={<Navigate to="/concepts" replace />} />
-            <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      {/* Route-scoped boundary: a crash in one page falls back here instead
+          of blanking the whole app. */}
+      <ErrorBoundary scope="route">
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Today />} />
+              <Route path="concepts" element={<Concepts />} />
+              <Route path="review" element={<Review />} />
+              <Route path="mock" element={<MockInterview />} />
+              <Route path="playground" element={<Playground />} />
+              <Route path="about" element={<About />} />
+              <Route path="privacy" element={<Privacy />} />
+              {/* Legacy route catch-alls */}
+              <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="p/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="lld/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="hld/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="behavioral/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="library" element={<Navigate to="/concepts" replace />} />
+              <Route path="library/*" element={<Navigate to="/concepts" replace />} />
+              <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
+              {/* Unknown route → fall back to the app home. */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

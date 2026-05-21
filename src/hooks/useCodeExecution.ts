@@ -1,6 +1,7 @@
 import { useCallback,useState } from 'react';
 import { transform } from 'sucrase';
 
+import { trackCoreAction } from '../lib/analytics';
 import { executeGo, type GoBackend } from '../lib/goExecutor';
 import type { Language,TestCase } from '../types';
 
@@ -41,6 +42,8 @@ export function useCodeExecution() {
     setOutput('');
     setErrors(null);
     setTestResults([]);
+    // Owner-facing analytics: code was run in the playground (a core action).
+    trackCoreAction('code_run');
 
     if (language === 'go') {
       return executeGo(code).then((result) => {

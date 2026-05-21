@@ -12,6 +12,7 @@ import FeynmanGate from '../components/FeynmanGate';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import type { Language } from '../types';
 
@@ -66,6 +67,12 @@ export default function Playground() {
   const [feynmanOpen, setFeynmanOpen] = useState(false);
   const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
 
+  // The Playground is a multi-panel desktop layout. Below `md` we render a
+  // single panel at a time (the toggle row acts as a tab switcher) so each
+  // panel gets the full width instead of being squeezed to ~80px.
+  const isMobile = useIsMobile();
+  const [activePanel, setActivePanel] = useState<PanelId>('code');
+
   useTagger(code, language, problem, (tags) => {
     setTaggedConcepts(tags.map(t => t.concept_id));
   });
@@ -96,6 +103,12 @@ export default function Playground() {
   }, []);
 
   const togglePanel = (id: PanelId) => {
+    // On mobile the toggle row is a single-select tab switcher.
+    if (isMobile) {
+      setActivePanel(id);
+      setVisiblePanels(prev => (prev.has(id) ? prev : new Set([...prev, id])));
+      return;
+    }
     setVisiblePanels(prev => {
       const next = new Set(prev);
       if (next.has(id)) {
@@ -162,43 +175,52 @@ export default function Playground() {
 
   const formatTime = (ms: number) => ms < 1 ? '<1ms' : ms < 1000 ? `${ms.toFixed(1)}ms` : `${(ms / 1000).toFixed(2)}s`;
 
-  const panelBtn = (id: PanelId, active: boolean) =>
-    `flex items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
+  const panelBtn = (_id: PanelId, active: boolean) =>
+    `flex shrink-0 items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
       active ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'
     }`;
+
+  // On mobile the toggle row is a tab switcher, so "active" = the shown panel.
+  const isPanelActive = (id: PanelId) =>
+    isMobile ? activePanel === id : visiblePanels.has(id);
 
   const langBtn = (active: boolean) =>
     `px-2 py-1 rounded text-xs font-medium transition-colors ${
       active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'
     }`;
 
-  const panels = ['problem', 'code', 'diagram', 'companion', 'library'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
+  const allVisiblePanels = ['problem', 'code', 'diagram', 'companion', 'library'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
+  // On mobile show a single panel; fall back to the first visible one if the
+  // chosen active panel was toggled off.
+  const panels: PanelId[] = isMobile
+    ? [allVisiblePanels.includes(activePanel) ? activePanel : (allVisiblePanels[0] ?? 'code')]
+    : allVisiblePanels;
   const panelSize = Math.floor(100 / panels.length);
 
   return (
     <div className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Toolbar */}
-      <div className="flex items-center justify-between border-b border-gray-800 bg-gray-950 px-4 py-2">
-        <div className="flex items-center gap-2">
-          {/* Panel toggles */}
-          <div className="flex items-center gap-1 rounded-lg bg-gray-800 p-0.5">
-            <button onClick={() => togglePanel('problem')} className={panelBtn('problem', visiblePanels.has('problem'))}>
+      <div className="flex items-center justify-between gap-2 border-b border-gray-800 bg-gray-950 px-2 py-2 sm:px-4">
+        <div className="flex min-w-0 items-center gap-2">
+          {/* Panel toggles — scroll horizontally if they overflow on mobile */}
+          <div className="flex items-center gap-1 overflow-x-auto rounded-lg bg-gray-800 p-0.5">
+            <button onClick={() => togglePanel('problem')} className={panelBtn('problem', isPanelActive('problem'))}>
               <FileText className="h-3 w-3" />
               Problem
             </button>
-            <button onClick={() => togglePanel('code')} className={panelBtn('code', visiblePanels.has('code'))}>
+            <button onClick={() => togglePanel('code')} className={panelBtn('code', isPanelActive('code'))}>
               <Code2 className="h-3 w-3" />
               Code
             </button>
-            <button onClick={() => togglePanel('diagram')} className={panelBtn('diagram', visiblePanels.has('diagram'))}>
+            <button onClick={() => togglePanel('diagram')} className={panelBtn('diagram', isPanelActive('diagram'))}>
               <PenTool className="h-3 w-3" />
               Draw
             </button>
-            <button onClick={() => togglePanel('companion')} className={panelBtn('companion', visiblePanels.has('companion'))}>
+            <button onClick={() => togglePanel('companion')} className={panelBtn('companion', isPanelActive('companion'))}>
               <Sparkles className="h-3 w-3" />
               Companion
             </button>
-            <button onClick={() => togglePanel('library')} className={panelBtn('library', visiblePanels.has('library'))}>
+            <button onClick={() => togglePanel('library')} className={panelBtn('library', isPanelActive('library'))}>
               <BookOpen className="h-3 w-3" />
               Library
             </button>
@@ -215,7 +237,7 @@ export default function Playground() {
             </>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <button
             onClick={() => setFeynmanOpen(true)}
             disabled={code.length < 50}
@@ -223,20 +245,20 @@ export default function Playground() {
             title="Explain what you built (Feynman gate)"
           >
             <Brain className="h-3.5 w-3.5" />
-            Explain
+            <span className="hidden sm:inline">Explain</span>
           </button>
           <button
             onClick={handleShare}
             className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200"
           >
             {shared_ ? <Check className="h-3.5 w-3.5 text-green-400" /> : <Share2 className="h-3.5 w-3.5" />}
-            {shared_ ? 'Copied!' : 'Share'}
+            <span className="hidden sm:inline">{shared_ ? 'Copied!' : 'Share'}</span>
           </button>
           {visiblePanels.has('code') && (
             <>
               <button
                 onClick={handleFormat}
-                className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200"
+                className="hidden items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200 sm:flex"
               >
                 <Code2 className="h-3.5 w-3.5" />
                 Format <span className="ml-1 text-gray-500">&#x21E7;&#x2318;F</span>
@@ -251,7 +273,7 @@ export default function Playground() {
                 ) : (
                   <Play className="h-3.5 w-3.5" />
                 )}
-                Run <span className="ml-1 opacity-70">&#x2318;&#x23CE;</span>
+                Run <span className="ml-1 hidden opacity-70 sm:inline">&#x2318;&#x23CE;</span>
               </button>
             </>
           )}

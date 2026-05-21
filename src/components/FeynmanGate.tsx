@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
+import { trackCoreAction } from '../lib/analytics';
 import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
@@ -64,6 +65,9 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
       if (!res.ok) throw new Error(`Grade failed: ${res.status}`);
       const data = await res.json();
       setResult(data);
+
+      // Owner-facing analytics: a Feynman-gate explanation was graded.
+      trackCoreAction('explanation_graded');
 
       // Apply ratings to concept mastery
       if (data.ratings?.length && token) {

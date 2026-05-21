@@ -22,6 +22,24 @@ const FEATURES = [
   },
 ];
 
+const STEPS = [
+  {
+    n: '01',
+    title: 'Open Today',
+    body: 'A single recommendation card tells you exactly which concept to work on next, based on what is fading.',
+  },
+  {
+    n: '02',
+    title: 'Build in the Playground',
+    body: 'Code it in Monaco, diagram it in Excalidraw, and explain it back through the Feynman Gate for a 0–100 grade.',
+  },
+  {
+    n: '03',
+    title: 'Let mastery decay guide you',
+    body: 'FSRS spaced repetition tracks each concept on a heatmap, so reviews surface right before you would forget.',
+  },
+];
+
 export default function Login() {
   const { signInWithGoogle, continueAsGuest } = useAuth();
   const [debugInfo, setDebugInfo] = useState<string>('');
@@ -117,6 +135,27 @@ export default function Login() {
             <p className="mt-1.5 text-sm text-gray-300">{body}</p>
           </div>
         ))}
+      </section>
+
+      {/* How it works */}
+      <section className="relative z-10 mx-auto w-full max-w-5xl px-6 pb-12">
+        <h2 className="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-gray-400">
+          How it works
+        </h2>
+        <ol className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {STEPS.map((s) => (
+            <li
+              key={s.n}
+              className="rounded-xl border border-gray-800 bg-gray-900/40 p-5 backdrop-blur"
+            >
+              <div className="font-mono text-xs tracking-[0.15em] text-blue-400/70">
+                {s.n}
+              </div>
+              <h3 className="mt-3 text-sm font-semibold text-white">{s.title}</h3>
+              <p className="mt-1.5 text-sm text-gray-300">{s.body}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="relative z-10 mx-auto w-full max-w-3xl px-6 py-16">

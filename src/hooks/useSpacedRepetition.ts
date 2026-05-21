@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef,useState } from 'react';
 
 import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { trackCoreAction } from '../lib/analytics';
 import { API_URL } from '../lib/api-url';
 import type { AnkiCardWithMeta, ReviewData } from '../types';
 
@@ -142,6 +143,8 @@ export function useSpacedRepetition() {
       syncToDb(cardId, newState);
       return next;
     });
+    // Owner-facing analytics: a concept was reviewed (the core study action).
+    trackCoreAction('concept_reviewed');
   }, [syncToDb]);
 
   const getReviewStats = useCallback(() => {
