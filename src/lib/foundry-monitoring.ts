@@ -42,6 +42,31 @@ export function capturePageCrash(error: unknown, source: "window_error" | "unhan
   });
 }
 
+type ErrorBoundaryScope = "root" | "route" | "playground" | "wasm" | "unknown";
+
+/**
+ * Emits an "error_captured" event for an error surfaced by a React error
+ * boundary. Safe to call from the client — never throws.
+ */
+export function captureError(
+  error: unknown,
+  options: { scope?: ErrorBoundaryScope; source?: string; componentStack?: string } = {},
+) {
+  try {
+    track("error_captured", {
+      project_slug: PROJECT_SLUG,
+      route: route(),
+      scope: options.scope ?? "unknown",
+      source: options.source ?? "error_boundary",
+      message: messageFrom(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      component_stack: options.componentStack,
+    });
+  } catch {
+    // Never let monitoring throw inside an error boundary.
+  }
+}
+
 export function installBrowserMonitoring() {
   if (typeof window === "undefined") return () => {};
   initPostHog({ apiKey: POSTHOG_KEY, host: POSTHOG_HOST });

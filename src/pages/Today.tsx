@@ -1,5 +1,5 @@
 import { BookOpen, Brain, Calendar, Eye, FlaskConical, Hammer, Loader2, MessageSquare, Network, RefreshCw, Rocket,Sparkles } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import MarkdownViewer from '../components/MarkdownViewer';
@@ -43,20 +43,34 @@ export default function Today() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [weekly, setWeekly] = useState<WeeklyReview | null>(null);
 
-  useEffect(() => {
+  const loadPlan = useCallback((isRetry = false) => {
     const token = getAuthToken();
     if (!token) { setLoading(false); return; }
+    if (isRetry) {
+      // Reset state when the user explicitly retries; on first load the
+      // initial state already reflects "loading".
+      setLoading(true);
+      setLoadFailed(false);
+    }
     fetch('/api/learning?action=daily', { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error(`request failed (${r.status})`);
+        return r.json();
+      })
       .then(d => { setPlan(d.plan); setUpcoming(d.upcoming || []); setLoading(false); return undefined; })
-      .catch(() => setLoading(false));
+      .catch(() => { setLoadFailed(true); setLoading(false); });
     fetch('/api/learning?action=weekly', { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.json())
-      .then(d => setWeekly(d.review))
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => setWeekly(d?.review ?? null))
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    loadPlan();
+  }, [loadPlan]);
 
   const generate = async (force = false) => {
     setGenerating(true);
@@ -112,7 +126,22 @@ export default function Today() {
 
       <StudyStats />
 
-      {!plan ? (
+      {loadFailed ? (
+        <div className="rounded-2xl border border-red-900/40 bg-red-950/20 p-8 text-center">
+          <h2 className="mb-2 text-lg font-medium text-gray-200">
+            Couldn&apos;t load today&apos;s plan
+          </h2>
+          <p className="mb-5 text-sm text-gray-500">
+            We couldn&apos;t reach the server. Check your connection and try again.
+          </p>
+          <button
+            onClick={() => loadPlan(true)}
+            className="inline-flex items-center gap-2 rounded-lg border border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-200 hover:bg-gray-900"
+          >
+            <RefreshCw className="h-4 w-4" /> Retry
+          </button>
+        </div>
+      ) : !plan ? (
         <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-8 text-center">
           <Sparkles className="mx-auto mb-3 h-8 w-8 text-purple-400" />
           <h2 className="mb-2 text-lg font-medium text-gray-200">No plan yet for today</h2>

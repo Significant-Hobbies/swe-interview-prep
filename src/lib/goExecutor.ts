@@ -3,8 +3,17 @@
  *
  * Flow:
  * 1. First Go run → API call to /api/go-run
- * 2. Background: start loading WASM interpreter
- * 3. Once WASM is ready → all subsequent runs use local WASM
+ * 2. Background: start loading WASM interpreter (inside a Web Worker)
+ * 3. Once WASM is ready → subsequent runs use the local WASM worker
+ *
+ * GUARDRAILS (why WASM runs in a Worker, not on the main thread):
+ *   - Execution timeout — `executeViaWASM` races the worker against a
+ *     WASM_EXEC_TIMEOUT_MS deadline. On timeout the worker is `terminate()`d,
+ *     which kills even a tight `for {}` infinite loop instantly. The page
+ *     stays responsive the whole time.
+ *   - Memory cap — the worker patches `WebAssembly.Memory.grow` so a runaway
+ *     allocation fails cleanly inside the VM (see goWasmWorker.ts).
+ * A hang or OOM in user code therefore costs at most one worker, never the tab.
  */
 
 import { getAuthToken } from '../contexts/AuthContext';
@@ -19,9 +28,23 @@ interface GoResult {
   backend: GoBackend;
 }
 
+const WASM_BASE = 'https://pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm';
+const WASM_EXEC_URL = `${WASM_BASE}/wasm_exec.js`;
+const WASM_MODULE_URL = `${WASM_BASE}/go-interp.wasm`;
+
+// Hard ceiling for a single WASM run. Interview snippets finish in well
+// under a second; anything past this is treated as a hang.
+const WASM_EXEC_TIMEOUT_MS = 5000;
+// Allow the worker this long to fetch + instantiate the WASM module.
+const WASM_LOAD_TIMEOUT_MS = 20_000;
+
 let wasmReady = false;
 let wasmLoading = false;
 let wasmLoadPromise: Promise<boolean> | null = null;
+
+let worker: Worker | null = null;
+let workerLoadFailed = false;
+let runId = 0;
 
 function extractErrorLine(err: string): number | null {
   // Go compile errors: "prog.go:5:3:" or yaegi: "1:5:"
@@ -41,6 +64,9 @@ async function executeViaAPI(code: string): Promise<GoResult> {
       headers,
       body: JSON.stringify({ code }),
     });
+    if (!res.ok) {
+      throw new Error(`Go API responded ${res.status}`);
+    }
     const data = await res.json();
     const time = performance.now() - t0;
     const errors = data.errors || data.error || null;
@@ -54,7 +80,7 @@ async function executeViaAPI(code: string): Promise<GoResult> {
   } catch (e: any) {
     return {
       output: '',
-      errors: 'Go API error: ' + e.message,
+      errors: 'Go runner unavailable: ' + (e?.message ?? String(e)),
       execTimeMs: performance.now() - t0,
       errorLine: null,
       backend: 'api',
@@ -62,76 +88,172 @@ async function executeViaAPI(code: string): Promise<GoResult> {
   }
 }
 
-/** Run Go code via the local WASM interpreter (Yaegi) */
-async function executeViaWASM(code: string): Promise<GoResult> {
-  const goRunCode = (window as any).__goRunCode;
-  if (!goRunCode) {
-    return executeViaAPI(code);
+/** Create (or reuse) the WASM execution worker.
+ *
+ * Deliberately a *classic* worker (not `type: 'module'`): the worker uses
+ * `importScripts()` to pull Go's `wasm_exec.js` glue, which is a classic
+ * script and is not loadable from a module worker. The worker file itself has
+ * no ES imports, so a classic worker is the right fit. */
+function getWorker(): Worker {
+  if (!worker) {
+    worker = new Worker(new URL('./goWasmWorker.ts', import.meta.url));
   }
+  return worker;
+}
 
-  const t0 = performance.now();
-  try {
-    const result = goRunCode(code);
-    const time = performance.now() - t0;
-    const output = result.output || '';
-    const errors = result.errors || null;
-    return {
-      output,
-      errors,
-      execTimeMs: time,
-      errorLine: errors ? extractErrorLine(errors) : null,
-      backend: 'wasm',
-    };
-  } catch (e: any) {
-    // WASM execution failed — fall back to API
-    console.warn('WASM execution failed, falling back to API:', e.message);
-    return executeViaAPI(code);
+/** Tear down the worker — used after a timeout or a fatal worker error. */
+function killWorker() {
+  if (worker) {
+    worker.terminate();
+    worker = null;
   }
 }
 
-/** Load the WASM interpreter in the background */
+/**
+ * Run Go code in the WASM worker with a hard timeout. If the deadline passes
+ * the worker is terminated (killing any infinite loop), and we fall back to
+ * the API so the user still gets a result.
+ *
+ * `timeoutMs` is the watchdog budget for this run. The warm-up run passes the
+ * larger load budget since it also has to fetch + instantiate the module;
+ * normal runs use the strict execution ceiling.
+ */
+function executeViaWASM(
+  code: string,
+  timeoutMs: number = WASM_EXEC_TIMEOUT_MS,
+): Promise<GoResult> {
+  return new Promise<GoResult>((resolve) => {
+    const t0 = performance.now();
+    const id = ++runId;
+    let settled = false;
+    const w = getWorker();
+
+    const cleanup = () => {
+      w.removeEventListener('message', onMessage);
+      w.removeEventListener('error', onError);
+      clearTimeout(timer);
+    };
+
+    const finishWithApi = async (note: string) => {
+      // The worker is gone (or unusable) — recover via the API backend.
+      const apiResult = await executeViaAPI(code);
+      resolve({
+        ...apiResult,
+        errors: apiResult.errors
+          ? `${note}\n${apiResult.errors}`
+          : note || apiResult.errors,
+      });
+    };
+
+    const onMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (!data || data.id !== id) return;
+      if (settled) return;
+      settled = true;
+      cleanup();
+
+      if (data.type === 'result') {
+        const errors: string | null = data.errors ?? null;
+        resolve({
+          output: data.output ?? '',
+          errors,
+          execTimeMs: performance.now() - t0,
+          errorLine: errors ? extractErrorLine(errors) : null,
+          backend: 'wasm',
+        });
+      } else {
+        // Worker reported an error (memory cap hit, load failure, etc.).
+        const message: string = data.message ?? 'WASM execution failed';
+        if (/memory limit/i.test(message)) {
+          // A memory-cap breach is a real user-code error — surface it as such.
+          resolve({
+            output: '',
+            errors: `Memory limit exceeded — your program allocated too much memory.`,
+            execTimeMs: performance.now() - t0,
+            errorLine: null,
+            backend: 'wasm',
+          });
+        } else {
+          console.warn('WASM worker error, falling back to API:', message);
+          void finishWithApi('');
+        }
+      }
+    };
+
+    const onError = () => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      // An uncaught worker error usually means an OOM crash — discard it.
+      killWorker();
+      console.warn('WASM worker crashed, falling back to API');
+      void finishWithApi('');
+    };
+
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      // Infinite loop / runaway run — kill the worker outright. A fresh one
+      // will be created (and re-load WASM) on the next execution.
+      killWorker();
+      wasmReady = false;
+      wasmLoading = false;
+      wasmLoadPromise = null;
+      resolve({
+        output: '',
+        errors: `Execution timed out (${WASM_EXEC_TIMEOUT_MS / 1000}s limit) — your code may contain an infinite loop.`,
+        execTimeMs: timeoutMs,
+        errorLine: null,
+        backend: 'wasm',
+      });
+    }, timeoutMs);
+
+    w.addEventListener('message', onMessage);
+    w.addEventListener('error', onError);
+    w.postMessage({
+      type: 'run',
+      id,
+      code,
+      wasmExecUrl: WASM_EXEC_URL,
+      wasmUrl: WASM_MODULE_URL,
+    });
+  });
+}
+
+/**
+ * Load the WASM interpreter in the background by sending a tiny warm-up run to
+ * the worker. The worker fetches + instantiates the module once; if that fails
+ * we stay on the API backend.
+ */
 export function startWASMLoading(): void {
-  if (wasmReady || wasmLoading) return;
+  if (wasmReady || wasmLoading || workerLoadFailed) return;
   wasmLoading = true;
 
   wasmLoadPromise = (async () => {
     try {
-      // Load wasm_exec.js (Go's WASM glue)
-      if (!(window as any).Go) {
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = 'https://pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm/wasm_exec.js';
-          script.onload = () => resolve();
-          script.onerror = () => reject(new Error('Failed to load wasm_exec.js'));
-          document.head.appendChild(script);
-        });
+      // A trivial program forces the worker to load + instantiate the module.
+      // The warm-up gets the larger load budget (it has to fetch the .wasm).
+      const warmup = await executeViaWASM(
+        'package main\nfunc main() {}',
+        WASM_LOAD_TIMEOUT_MS,
+      );
+
+      if (warmup.backend === 'wasm' && !warmup.errors) {
+        wasmReady = true;
+        wasmLoading = false;
+        return true;
       }
-
-      // Instantiate the Go WASM module
-      const go = new (window as any).Go();
-      const response = await fetch('https://pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm/go-interp.wasm');
-      const result = await WebAssembly.instantiateStreaming(response, go.importObject);
-      go.run(result.instance); // starts the Go main() which sets __goRunCode
-
-      // Wait for __goRunCode to be available
-      await new Promise<void>((resolve) => {
-        const check = () => {
-          if ((window as any).__goRunCode) {
-            resolve();
-          } else {
-            setTimeout(check, 50);
-          }
-        };
-        check();
-      });
-
-      wasmReady = true;
+      // Warm-up fell back to the API or timed out — WASM is not available.
+      workerLoadFailed = true;
       wasmLoading = false;
-      console.log('Go WASM interpreter loaded successfully');
-      return true;
+      killWorker();
+      return false;
     } catch (e) {
       console.warn('Failed to load Go WASM interpreter:', e);
+      workerLoadFailed = true;
       wasmLoading = false;
+      killWorker();
       return false;
     }
   })();
@@ -143,8 +265,8 @@ export async function executeGo(code: string): Promise<GoResult> {
     return executeViaWASM(code);
   }
 
-  // Start loading WASM in background on first Go execution
-  if (!wasmLoading && !wasmLoadPromise) {
+  // Start loading WASM in background on first Go execution.
+  if (!wasmLoading && !wasmLoadPromise && !workerLoadFailed) {
     startWASMLoading();
   }
 

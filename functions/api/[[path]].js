@@ -293,13 +293,23 @@ async function handleProgress(request, env) {
 export async function onRequest({ request, env, params }) {
   const path = (params.path || []).join("/");
   try {
-    if (path === "auth/google") return handleGoogle(request, env);
-    if (path === "auth/logout") return handleLogout(request);
-    if (path === "auth/verify") return handleVerify(request, env);
-    if (path === "progress") return handleProgress(request, env);
+    // NOTE: each handler is `await`ed so a rejected promise is caught here —
+    // returning the promise bare would let the rejection escape this try/catch.
+    if (path === "auth/google") return await handleGoogle(request, env);
+    if (path === "auth/logout") return await handleLogout(request);
+    if (path === "auth/verify") return await handleVerify(request, env);
+    if (path === "progress") return await handleProgress(request, env);
     return json({ error: "API route not found" }, { status: 404 });
   } catch (error) {
     console.error("Pages API route failed", path, error);
-    return json({ error: "Internal server error" }, { status: 500 });
+    // Malformed JSON bodies surface as a SyntaxError — that's a client error.
+    if (error instanceof SyntaxError) {
+      return json({ error: "Invalid request body" }, { status: 400 });
+    }
+    // Never leak the raw error message to the client.
+    return json(
+      { error: "Something went wrong. Please try again." },
+      { status: 500 },
+    );
   }
 }
