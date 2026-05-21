@@ -134,7 +134,7 @@ export default function Concepts() {
                   >
                     <div className="text-sm font-medium">{c.name}</div>
                     <div className="mt-1 flex items-center justify-between text-[10px] opacity-70">
-                      <span>{m ? `${Math.round(conf * 100)}%` : 'new'}</span>
+                      <span>{m ? `${Math.round(conf * 100)}%` : '0%'}</span>
                       {m && due && <span className="rounded bg-black/30 px-1">due</span>}
                     </div>
                     {m && (
@@ -576,7 +576,7 @@ function practiceHref(item: WeaknessPlanItem): string {
 }
 
 function confidenceLabel(item: WeaknessPlanItem): string {
-  if (item.confidence === null) return 'new';
+  if (item.confidence === null) return '0%';
   return `${Math.round(item.confidence * 100)}%`;
 }
 
@@ -596,7 +596,7 @@ function WeaknessPlanner({ plan }: { plan: ReturnType<typeof buildWeaknessStudyP
         <div className="grid grid-cols-2 gap-2 text-right sm:grid-cols-4">
           <MiniStat label="Ready" value={plan.summary.readyWeaknesses} />
           <MiniStat label="Due" value={plan.summary.due} />
-          <MiniStat label="New" value={plan.summary.untouched} />
+          <MiniStat label="Untouched" value={plan.summary.untouched} />
           <MiniStat label="Blocked" value={plan.summary.blockedWeaknesses} />
         </div>
       </div>
