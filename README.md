@@ -11,6 +11,18 @@ Technical interview preparation is fragmented across multiple tools: LeetCode fo
 
 Interview Coder consolidates everything into a single platform with integrated code execution, diagram drawing, AI assistance, and spaced repetition review.
 
+## Deployment & External Services
+
+| Concern | Service |
+|---------|---------|
+| Hosting | Cloudflare Pages (`swe-interview-prep`) + Pages Functions backend (`functions/api/[[path]].js`) |
+| Database | Turso (libSQL) |
+| Auth | Google One Tap (JWT cookie) |
+| File storage | Cloudflare R2 (`swe-interview-prep-assets`) — hosts the Go WASM interpreter |
+| Analytics | PostHog (via `@saas-maker/posthog-client`) |
+| AI | Multi-provider via Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek |
+| CI/CD | GitHub Actions — auto-deploy on push to `main` |
+
 ## Features
 
 - **Interactive Code Editor** - Write and run TypeScript code with Monaco Editor (VS Code engine)
