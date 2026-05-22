@@ -5,7 +5,7 @@
 Also read and follow the shared fleet-level agent standard at `../AGENTS.md`. Treat this repository as owned product code: protect production stability, keep changes scoped, verify work, and record durable follow-up tasks when something remains incomplete or blocked.
 
 ## Purpose
-SWE interview prep tool — Playground (Monaco + Excalidraw + Socratic AI + Feynman Gate) with FSRS spaced repetition for concept mastery tracking.
+Personal SWE Learning OS — a 9-page command center (Dashboard, Roadmaps, Concepts, Drills, Build Lab, Projects, Reviews, Notes, Progress) that drives the loop Concept → Drill → Build → Review → Apply across 8 tracks (search-ir, vector-db, ai-systems, backend, databases, system-design, dsa, product). FSRS spaced repetition tracks concept mastery; the Playground (Monaco + Excalidraw + Socratic AI + Feynman Gate) is the build/drill workspace.
 
 ## Stack
 - Framework: React 19 SPA (React Router v7), Vite 8
@@ -20,27 +20,30 @@ SWE interview prep tool — Playground (Monaco + Excalidraw + Socratic AI + Feyn
 ## Repo structure
 ```
 src/                    # React SPA
-  App.tsx               # React Router routes (4 pages: Today, Playground, Concepts, Review)
-  pages/
-    Today.tsx           # Daily AI-generated recommendation card
-    Playground.tsx      # Monaco + Excalidraw + Companion + Feynman Gate
-    Concepts.tsx        # FSRS mastery heatmap
-    Review.tsx          # Weekly AI report
+  App.tsx               # React Router routes — 9-page IA + Playground + Mock
+  pages/                # Dashboard, Roadmaps(+Detail), Concepts(+Detail),
+                        # Drills, BuildLab, Projects(+Detail), Reviews, Notes,
+                        # Progress, Playground, MockInterview
   components/
+    ui.tsx              # Shared UI kit (PageShell, Card, Badge, color tokens…)
+    Layout.tsx          # 9-page nav shell (desktop nav + mobile bottom bar)
     CodeEditor.tsx      # Monaco editor wrapper
     DiagramEditor.tsx   # Excalidraw wrapper
     CompanionPanel.tsx  # Socratic AI (never gives solutions, only probes)
     FeynmanGate.tsx     # Explain-back modal → AI grades 0-100 → mastery update
-    AmbientLibrary.tsx  # Concept → library section browser
   hooks/                # All stateful logic (components are thin)
+    useUserStore.ts     # Hybrid localStorage+DB stores (artifacts/drills/projects/notes)
   data/
-    concepts.json       # 79-concept taxonomy (DSA/LLD/HLD/Behavioral/ML)
-    problems.json       # DSA problems (legacy SM-2, retained for data continuity)
-    lld-problems.json
-    hld-problems.json
-    behavioral-problems.json
+    learning-os.ts      # Typed loaders for all static content below
+    concepts.json       # ~119 concepts across 8 tracks (new schema)
+    tracks.json roadmaps.json artifacts.json drills.json
+    projects.json review-questions.json
+    problems.json lld-/hld-/behavioral-problems.json  # back Playground + Mock
   lib/
     fsrs.ts             # Client FSRS wrapper (ts-fsrs)
+    userStore.ts        # Pure localStorage+merge helpers (unit-tested)
+    conceptState.ts     # Derives concept status/confidence from FSRS mastery
+    recommend.ts        # "What should I do next?" dashboard logic
 api/                    # Legacy Vercel-style handlers (.mjs)
   _lib/                 # Shared: DB client, schema, AI helpers
   ai/                   # chat.ts (streaming proxy), models.ts
@@ -71,7 +74,9 @@ pnpm lint           # ESLint
 ```
 
 ## Architecture notes
-- **4-page app only**: Today → Playground → Concepts → Review. No nav menus. Playground is the core; everything feeds it or learns from it.
+- **9-page Learning OS**: Dashboard, Roadmaps, Concepts, Drills, Build Lab, Projects, Reviews, Notes, Progress. Core principle — "no learning without an artifact": every concept maps to drills + an artifact you build.
+- **Static content vs user state**: concepts/roadmaps/drills/artifacts/projects/review-questions are static JSON in `src/data/` (loaded via `learning-os.ts`); mutable user state is hybrid — localStorage for guests, Turso DB for signed-in users (`useUserStore`).
+- **DB**: `concept_mastery` (FSRS) + `user_artifacts` / `user_drills` / `user_projects` / `user_learning_notes`. New API actions consolidated under `/api/learning?action=…` (`artifacts`, `drills`, `projects`, `notes`) to respect the Vercel 12-function cap.
 - **FSRS spaced repetition** (`ts-fsrs`): per-user per-concept state in `concept_mastery` DB table. Confidence formula: `(1 + elapsed/(9×stability))^-1`. Mastery decays over time.
 - **Socratic AI**: `CompanionPanel.tsx` — never gives direct solutions, only probes understanding. This is intentional behavior — do not change it.
 - **Auto-tagging**: after 5 minutes of stable code, `useTagger` POSTs to `/api/tag`. AI returns concept tags with depth (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
@@ -81,7 +86,7 @@ pnpm lint           # ESLint
 - **Local server dependencies**: `pnpm dev` and `pnpm server` run `npm --prefix server ci --ignore-scripts` before starting the submodule server.
 - **DB auto-init**: schema tables created on server startup — no migration runner needed.
 - **AI is multi-provider**: client passes `aiConfig: {endpointUrl, apiKey, model}` to any API endpoint; server falls back to `AI_ENDPOINT_URL`/`AI_API_KEY`/`AI_MODEL` env vars.
-- **Guest mode**: partial (no concept mastery, no daily/weekly plan). Full loop requires Google sign-in.
+- **Guest mode**: artifacts, drills, projects, and notes persist to localStorage. Concept mastery (FSRS reviews) is DB-backed and needs Google sign-in; signing in merges localStorage state into the DB.
 
 <!-- FLEET-GUIDANCE:START -->
 

@@ -153,5 +153,68 @@ export async function initDatabase() {
     )
   `);
 
+  // Learning OS: artifact build status per user.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_artifacts (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      artifact_id TEXT NOT NULL,
+      status TEXT DEFAULT 'todo',
+      url TEXT,
+      path TEXT,
+      notes TEXT,
+      criteria_json TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, artifact_id)
+    )
+  `);
+
+  // Learning OS: drill attempt state per user. Detailed attempts go to activity_log.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_drills (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      drill_id TEXT NOT NULL,
+      status TEXT DEFAULT 'unsolved',
+      attempts INTEGER DEFAULT 0,
+      last_code TEXT,
+      last_attempt TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, drill_id)
+    )
+  `);
+
+  // Learning OS: project state per user.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_projects (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      project_id TEXT NOT NULL,
+      status TEXT DEFAULT 'planned',
+      next_action TEXT,
+      milestones_json TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, project_id)
+    )
+  `);
+
+  // Learning OS: free-form notes scoped to a concept, roadmap, project, or nothing.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_learning_notes (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      scope TEXT NOT NULL,
+      ref_id TEXT,
+      title TEXT,
+      body TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+  await db.execute(`CREATE INDEX IF NOT EXISTS idx_lnotes_user_scope ON user_learning_notes(user_id, scope, ref_id)`);
+
   console.log('Database schema initialized');
 }

@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "highsignal",
+      "name": "HighSignal",
+      "lane": "main",
+      "status": "active",
+      "purpose": "Search, retrieval, and AI intelligence engine — the lab for everything search/IR, vector, and RAG.",
+      "tracks": ["search-ir", "vector-db", "ai-systems", "databases"],
+      "milestones": [
+        "Lexical search (BM25) over indexed articles",
+        "Hybrid search with reciprocal rank fusion",
+        "RAG summarization pipeline with evals"
+      ],
+      "nextAction": "Implement BM25 over the indexed article corpus.",
+      "repo": ""
+    },
+    {
+      "id": "codevetter",
+      "name": "Codevetter",
+      "lane": "main",
+      "status": "active",
+      "purpose": "Code intelligence and AI devtool — the lab for code search, review agents, and structured AI output.",
+      "tracks": ["ai-systems", "search-ir", "backend"],
+      "milestones": [
+        "Semantic code search over a repository",
+        "AI review agent with tool calling",
+        "Structured-output review reports with evals"
+      ],
+      "nextAction": "Add a structured-output schema for review findings.",
+      "repo": ""
+    },
+    {
+      "id": "sassmaker",
+      "name": "SassMaker",
+      "lane": "workshop",
+      "status": "active",
+      "purpose": "Reusable infra/dev workshop — where backend components (API keys, rate limiter, job queue) become reusable modules.",
+      "tracks": ["backend"],
+      "milestones": [
+        "Reusable API key system",
+        "Reusable rate limiter",
+        "Reusable job queue with retries and DLQ"
+      ],
+      "nextAction": "Extract the rate limiter into a standalone module.",
+      "repo": ""
+    },
+    {
+      "id": "tiny-vector-db",
+      "name": "tiny-vector-db",
+      "lane": "personal",
+      "status": "planned",
+      "purpose": "A from-scratch vector database to internalize ANN, filtering, and recall/latency tradeoffs.",
+      "tracks": ["vector-db", "databases"],
+      "milestones": [
+        "Brute-force exact index with metadata filtering",
+        "HNSW approximate index",
+        "Recall/latency benchmark dashboard"
+      ],
+      "nextAction": "Build the brute-force exact index.",
+      "repo": ""
+    },
+    {
+      "id": "tiny-search-engine",
+      "name": "tiny-search-engine",
+      "lane": "personal",
+      "status": "planned",
+      "purpose": "A from-scratch search engine to internalize inverted indexes, BM25, WAL, and segment storage.",
+      "tracks": ["search-ir", "databases"],
+      "milestones": [
+        "Inverted index with BM25 ranking",
+        "WAL-backed durable index",
+        "Segment files with compaction"
+      ],
+      "nextAction": "Build the inverted index.",
+      "repo": ""
+    },
+    {
+      "id": "sarthakagrawal-dev",
+      "name": "sarthakagrawal.dev",
+      "lane": "personal",
+      "status": "guided",
+      "purpose": "Proof-of-work hub — where artifacts and writeups get published.",
+      "tracks": ["product"],
+      "milestones": ["Publish first technical writeup", "Artifact showcase page"],
+      "nextAction": "Draft a writeup from the first completed artifact.",
+      "repo": ""
+    },
+    {
+      "id": "significant-hobbies",
+      "name": "Significant Hobbies",
+      "lane": "marketing",
+      "status": "guided",
+      "purpose": "Distribution and SEO experiments.",
+      "tracks": ["product"],
+      "milestones": ["Programmatic SEO page template"],
+      "nextAction": "Test one programmatic SEO page template.",
+      "repo": ""
+    },
+    {
+      "id": "rolepatch",
+      "name": "Rolepatch",
+      "lane": "marketing",
+      "status": "guided",
+      "purpose": "Marketing and distribution experiments.",
+      "tracks": ["product"],
+      "milestones": ["Landing page variant test"],
+      "nextAction": "Ship one landing page variant.",
+      "repo": ""
+    },
+    {
+      "id": "aliveville",
+      "name": "Aliveville",
+      "lane": "fun",
+      "status": "AI-managed",
+      "purpose": "Fun AI agents/game lane — agent loops, memory, and tool use without production pressure.",
+      "tracks": ["ai-systems"],
+      "milestones": ["Agent with tools and memory"],
+      "nextAction": "Prototype a single agent loop with two tools.",
+      "repo": ""
+    }
+  ]
+}

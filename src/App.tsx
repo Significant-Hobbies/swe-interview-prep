@@ -12,19 +12,28 @@ import { saasmaker } from './lib/saasmaker';
 // "first ever session on this browser" and `returned` means a later session.
 const SEEN_KEY = 'swe-interview-prep:seen';
 
-const About = lazy(() => import('./pages/About'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Roadmaps = lazy(() => import('./pages/Roadmaps'));
+const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
 const Concepts = lazy(() => import('./pages/Concepts'));
-const Login = lazy(() => import('./pages/Login'));
+const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
+const Drills = lazy(() => import('./pages/Drills'));
+const BuildLab = lazy(() => import('./pages/BuildLab'));
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const Reviews = lazy(() => import('./pages/Reviews'));
+const Notes = lazy(() => import('./pages/Notes'));
+const Progress = lazy(() => import('./pages/Progress'));
 const MockInterview = lazy(() => import('./pages/MockInterview'));
 const Playground = lazy(() => import('./pages/Playground'));
+const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
-const Review = lazy(() => import('./pages/Review'));
-const Today = lazy(() => import('./pages/Today'));
+const Login = lazy(() => import('./pages/Login'));
 
 function PageFallback() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-950">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-700 border-t-blue-400" />
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-700 border-t-purple-400" />
     </div>
   );
 }
@@ -37,7 +46,6 @@ function App() {
     saasmaker.analytics.track({ name: 'page_view', url: location.pathname }).catch(() => {});
   }, [location.pathname]);
 
-  // Fire the session-level taxonomy events once per app load.
   useEffect(() => {
     try {
       if (localStorage.getItem(SEEN_KEY)) {
@@ -66,29 +74,37 @@ function App() {
   return (
     <>
       <SaaSMakerFeedback />
-      {/* Route-scoped boundary: a crash in one page falls back here instead
-          of blanking the whole app. */}
       <ErrorBoundary scope="route">
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Today />} />
+              <Route index element={<Dashboard />} />
+              <Route path="roadmaps" element={<Roadmaps />} />
+              <Route path="roadmaps/:id" element={<RoadmapDetail />} />
               <Route path="concepts" element={<Concepts />} />
-              <Route path="review" element={<Review />} />
+              <Route path="concepts/:id" element={<ConceptDetail />} />
+              <Route path="drills" element={<Drills />} />
+              <Route path="drills/:id" element={<BuildLab />} />
+              <Route path="build" element={<BuildLab />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="projects/:id" element={<ProjectDetail />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="notes" element={<Notes />} />
+              <Route path="progress" element={<Progress />} />
               <Route path="mock" element={<MockInterview />} />
               <Route path="playground" element={<Playground />} />
               <Route path="about" element={<About />} />
               <Route path="privacy" element={<Privacy />} />
-              {/* Legacy route catch-alls */}
+              {/* Legacy route redirects */}
+              <Route path="today" element={<Navigate to="/" replace />} />
+              <Route path="review" element={<Navigate to="/reviews" replace />} />
               <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
               <Route path="p/*" element={<Navigate to="/concepts" replace />} />
               <Route path="lld/*" element={<Navigate to="/concepts" replace />} />
               <Route path="hld/*" element={<Navigate to="/concepts" replace />} />
               <Route path="behavioral/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="library" element={<Navigate to="/concepts" replace />} />
               <Route path="library/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
-              {/* Unknown route → fall back to the app home. */}
+              <Route path="vibe-learning" element={<Navigate to="/build" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>

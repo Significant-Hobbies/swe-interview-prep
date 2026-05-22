@@ -4,8 +4,8 @@ import { expect, test } from '@playwright/test';
  * Mobile-viewport checks. Run only the mobile project:
  *   pnpm exec playwright test --project=mobile
  *
- * Verifies the app is usable at 390px — no horizontal scroll, the bottom tab
- * bar works, and the Playground shows a single full-width panel.
+ * Verifies the app is usable at 390px — no horizontal scroll and the bottom
+ * tab bar of the 9-page IA works.
  */
 test.beforeEach(async ({ context, page }) => {
   await context.addInitScript(() => {
@@ -16,46 +16,41 @@ test.beforeEach(async ({ context, page }) => {
     .catch(() => {});
 });
 
-test.describe('Loop mobile (390px)', () => {
-  test.skip(
-    ({ viewport }) => (viewport?.width ?? 0) > 500,
-    'mobile-only checks',
-  );
+test.describe('Learning OS mobile (390px)', () => {
+  test.skip(({ viewport }) => (viewport?.width ?? 0) > 500, 'mobile-only checks');
 
-  test('Today renders with no horizontal scroll', async ({ page }) => {
+  test('Dashboard renders with no horizontal scroll', async ({ page }) => {
     await page.goto('/');
     await expect(
-      page.getByRole('heading', { name: 'Today', exact: true }),
+      page.getByRole('heading', { name: /What should I do next/i }),
     ).toBeVisible({ timeout: 10000 });
 
     const overflow = await page.evaluate(
-      () =>
-        document.documentElement.scrollWidth >
-        document.documentElement.clientWidth + 1,
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
     );
     expect(overflow).toBe(false);
   });
 
-  test('bottom tab bar navigates to the Playground', async ({ page }) => {
+  test('bottom tab bar navigates to Concepts', async ({ page }) => {
     await page.goto('/');
-    // The mobile bottom tab bar exposes a "Play" tab.
-    await page.getByRole('link', { name: 'Play' }).click();
-    await expect(page).toHaveURL(/playground/);
-    await expect(page.locator('.monaco-editor').first()).toBeVisible({
-      timeout: 15000,
-    });
+    const bottomNav = page.locator('div.fixed.bottom-0');
+    await bottomNav.getByRole('link', { name: 'Concepts' }).click();
+    await expect(page).toHaveURL(/concepts/);
+    await expect(page.getByRole('heading', { name: /Concept Library/i })).toBeVisible();
   });
 
-  test('Playground does not overflow horizontally', async ({ page }) => {
-    await page.goto('/playground');
-    await page
-      .locator('.monaco-editor')
-      .first()
-      .waitFor({ state: 'visible', timeout: 15000 });
+  test('bottom tab bar "More" sheet exposes secondary pages', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('div.fixed.bottom-0').getByRole('button', { name: 'More' }).click();
+    await page.getByRole('link', { name: 'Progress' }).click();
+    await expect(page).toHaveURL(/progress/);
+  });
+
+  test('Concepts page does not overflow horizontally', async ({ page }) => {
+    await page.goto('/concepts');
+    await page.getByRole('heading', { name: /Concept Library/i }).waitFor({ state: 'visible' });
     const overflow = await page.evaluate(
-      () =>
-        document.documentElement.scrollWidth >
-        document.documentElement.clientWidth + 1,
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
     );
     expect(overflow).toBe(false);
   });

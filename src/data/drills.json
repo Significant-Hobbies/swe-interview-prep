@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "id": "build-tokenizer",
+      "title": "Build a search tokenizer",
+      "conceptId": "tokenization",
+      "type": "implementation-task",
+      "difficulty": "intro",
+      "prompt": "Write a tokenizer that lowercases, splits on non-alphanumerics, removes a small stop-word set, and applies simple suffix stemming. Use the exact same function for indexing and querying.",
+      "expectedOutput": "tokenize('The Quick Brown Foxes!') → ['quick','brown','fox']",
+      "hints": ["The analyzer must be symmetric across index and query time.", "Keep stop words minimal — they hurt short queries."],
+      "solutionNotes": "Stemming should be conservative; aggressive stemming makes distinct words collide."
+    },
+    {
+      "id": "build-inverted-index",
+      "title": "Build an inverted index",
+      "conceptId": "inverted-index",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "From a list of documents, build a term → sorted posting list map. Support a boolean AND query by intersecting posting lists. Track document frequency per term.",
+      "expectedOutput": "Query 'quick fox' returns docs containing both terms, found by list intersection.",
+      "hints": ["Keep posting lists sorted by doc id so intersection is linear.", "Store document frequency now — ranking needs it later."],
+      "solutionNotes": "Separate the dictionary (term → metadata) from the postings storage."
+    },
+    {
+      "id": "calculate-tfidf",
+      "title": "Calculate a TF-IDF score by hand",
+      "conceptId": "tf-idf",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given term counts per document and document frequencies, compute the TF-IDF weight of a term in a document. Use dampened TF (1 + log tf) and IDF = log(N / df).",
+      "expectedOutput": "A single numeric weight, higher for frequent-here-but-rare-overall terms.",
+      "hints": ["IDF rewards rarity across the corpus.", "Dampen raw term frequency."],
+      "solutionNotes": "TF-IDF ignores document length — that is exactly what BM25 fixes."
+    },
+    {
+      "id": "calculate-bm25-score",
+      "title": "Calculate a BM25 score by hand",
+      "conceptId": "bm25",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given tf, df, N, document length, average document length, k1=1.2 and b=0.75, compute the BM25 score of a query term for a document.",
+      "expectedOutput": "A numeric score; verify TF saturation by checking the 10th occurrence adds little.",
+      "hints": ["Score = IDF · (tf·(k1+1)) / (tf + k1·(1 - b + b·dl/avgdl)).", "b controls length normalization; k1 controls TF saturation."],
+      "solutionNotes": "Try b=0 (no length norm) and b=1 (full) to feel the effect."
+    },
+    {
+      "id": "implement-bm25-ranker",
+      "title": "Implement a BM25 ranker",
+      "conceptId": "bm25",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "On top of your inverted index, implement BM25 scoring and return the top-k documents for a multi-term query.",
+      "expectedOutput": "Ranked top-k results for a query, scored by summed per-term BM25.",
+      "hints": ["Sum per-term BM25 contributions for multi-term queries.", "Use a k-sized heap for the top-k."],
+      "solutionNotes": "This ranker is the lexical leg of hybrid search."
+    },
+    {
+      "id": "build-search-eval-harness",
+      "title": "Build a search eval harness",
+      "conceptId": "search-evals",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Create a labelled query set (query → relevant doc ids) and a harness that scores any retriever with recall@k, MRR, and nDCG.",
+      "expectedOutput": "A single command that prints the three metrics for a retriever.",
+      "hints": ["Freeze the query set before tuning.", "Score retrievers through one common interface."],
+      "solutionNotes": "Without this harness, every ranking change is a guess."
+    },
+    {
+      "id": "implement-rrf",
+      "title": "Implement reciprocal rank fusion",
+      "conceptId": "hybrid-search",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Given two ranked result lists (BM25 and vector), fuse them with RRF: score(d) = Σ 1/(k + rank_i(d)), k≈60.",
+      "expectedOutput": "A single fused ranking that uses rank, not raw scores.",
+      "hints": ["RRF uses ranks, sidestepping incomparable score scales.", "A document missing from a list simply contributes nothing from it."],
+      "solutionNotes": "Verify the fused list beats both inputs on your eval set."
+    },
+    {
+      "id": "embed-and-search",
+      "title": "Embed a corpus and search it",
+      "conceptId": "embeddings",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.",
+      "expectedOutput": "Semantically relevant documents for a query that shares no exact keywords.",
+      "hints": ["Normalize vectors before cosine.", "Use the same model for corpus and query."],
+      "solutionNotes": "This is the vector leg of hybrid search."
+    },
+    {
+      "id": "implement-similarity-metrics",
+      "title": "Implement similarity metrics",
+      "conceptId": "vector-similarity",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement cosine similarity, dot product, and L2 distance. Show that on normalized vectors, cosine and dot product produce the same ranking.",
+      "expectedOutput": "Three functions; a demonstration that normalized cosine == dot ranking.",
+      "hints": ["Cosine = dot / (‖a‖·‖b‖).", "On unit vectors L2² = 2 − 2·cosine."],
+      "solutionNotes": "The metric must match what the embedding model was trained for."
+    },
+    {
+      "id": "implement-topk-heap",
+      "title": "Top-k with a bounded heap",
+      "conceptId": "topk-vector-search",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given a stream of (id, score) pairs, return the top-k by score using a size-k min-heap — without sorting everything.",
+      "expectedOutput": "Correct top-k in O(n log k) time and O(k) space.",
+      "hints": ["Keep a min-heap of size k; the root is the weakest kept item.", "Replace the root when a better score arrives."],
+      "solutionNotes": "This selection pattern is the core of every nearest-neighbour search."
+    },
+    {
+      "id": "build-brute-force-index",
+      "title": "Build a brute-force vector index",
+      "conceptId": "brute-force-vector-db",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Build an index that stores vectors and answers top-k queries by scanning every vector. Benchmark latency as the vector count grows.",
+      "expectedOutput": "Exact top-k results; a latency-vs-n table.",
+      "hints": ["Batch the scan as a matrix multiply.", "This is your recall=1.0 baseline."],
+      "solutionNotes": "Every ANN index is measured against this for recall."
+    },
+    {
+      "id": "explain-hnsw-layers",
+      "title": "Explain HNSW search on paper",
+      "conceptId": "hnsw",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Draw a 3-layer HNSW graph and trace a query: which layer it enters, how it greedily hops, when it descends, and where efSearch widens the search.",
+      "expectedOutput": "A diagram + walkthrough showing O(log n) traversal instead of O(n) scan.",
+      "hints": ["Upper layers = long hops; lower layers = fine search.", "efSearch trades recall for latency."],
+      "solutionNotes": "HNSW is approximate — there is no exactness guarantee."
+    },
+    {
+      "id": "implement-metadata-filter",
+      "title": "Add metadata filtering to vector search",
+      "conceptId": "metadata-filtering",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Extend your brute-force index to support 'nearest WHERE field = value'. Implement both pre-filtering and post-filtering and compare results and timing.",
+      "expectedOutput": "Filtered top-k that always returns k items when k qualify.",
+      "hints": ["Post-filtering an ANN result can return fewer than k.", "Pre-filtering is exact but scans the filtered subset."],
+      "solutionNotes": "Pre vs post filtering is a core vector DB design decision."
+    },
+    {
+      "id": "build-rag-pipeline",
+      "title": "Build a minimal RAG pipeline",
+      "conceptId": "rag",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Chunk a small document set, embed and index it, retrieve for a query, pack context, and generate a grounded answer.",
+      "expectedOutput": "Answers grounded in retrieved chunks, with sources.",
+      "hints": ["Retrieval quality is the ceiling — debug retrieval first.", "Keep the eval set fixed."],
+      "solutionNotes": "Most RAG failures are retrieval failures, not generation failures."
+    },
+    {
+      "id": "build-chunker",
+      "title": "Build a structure-aware chunker",
+      "conceptId": "chunking",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Write a chunker that splits on document structure (headings/paragraphs) with a target size and overlap, instead of fixed character cuts.",
+      "expectedOutput": "Chunks that respect structure and overlap at boundaries.",
+      "hints": ["Overlap prevents losing boundary-spanning answers.", "Different document types may need different strategies."],
+      "solutionNotes": "Chunk size is a retrieval-quality knob — tune it against evals."
+    },
+    {
+      "id": "structured-extraction",
+      "title": "Schema-constrained extraction",
+      "conceptId": "structured-outputs",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Define a JSON schema and use structured-output mode to extract typed fields from unstructured text. Validate the result and reject on failure.",
+      "expectedOutput": "A validated typed object, or an explicit rejection.",
+      "hints": ["Use schema/JSON mode, not regex on prose.", "Always validate before trusting downstream."],
+      "solutionNotes": "Keep schemas shallow enough for the model to fill reliably."
+    },
+    {
+      "id": "build-tool-loop",
+      "title": "Build a tool-calling loop",
+      "conceptId": "tool-calling",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a tool call, you execute it, feed the result back, repeat until done.",
+      "expectedOutput": "A task solved across multiple tool calls.",
+      "hints": ["Tool descriptions must be precise.", "Handle failed tool calls explicitly."],
+      "solutionNotes": "Add a step limit so the loop cannot run away."
+    },
+    {
+      "id": "build-llm-eval",
+      "title": "Build an LLM eval",
+      "conceptId": "llm-evals",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Create a dataset of inputs with expected behavior and a grader (deterministic or LLM-as-judge). Run it as one command and score a prompt.",
+      "expectedOutput": "A pass-rate score that changes when you change the prompt.",
+      "hints": ["Cover real failure modes, not just happy paths.", "Validate an LLM judge against human labels."],
+      "solutionNotes": "Evals are unit tests for non-deterministic systems."
+    },
+    {
+      "id": "implement-token-bucket",
+      "title": "Implement a token-bucket rate limiter",
+      "conceptId": "rate-limiting",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Implement a token bucket: tokens refill at a fixed rate, each request spends one, an empty bucket returns 429 with Retry-After.",
+      "expectedOutput": "Allows bursts up to bucket size, then throttles to the refill rate.",
+      "hints": ["Compute refill lazily from elapsed time.", "Set Retry-After from time-to-next-token."],
+      "solutionNotes": "For a cluster, the bucket state must be shared (e.g. Redis)."
+    },
+    {
+      "id": "implement-idempotency-key",
+      "title": "Implement idempotency keys",
+      "conceptId": "idempotency",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Add idempotency-key handling to a mutating endpoint: first request executes and stores the result; duplicates replay the stored result.",
+      "expectedOutput": "Two identical requests with the same key cause one effect.",
+      "hints": ["Store key → result with an expiry.", "Guard against two concurrent requests with the same key."],
+      "solutionNotes": "Idempotency makes retries safe — pair it with retry logic."
+    },
+    {
+      "id": "implement-backoff-jitter",
+      "title": "Implement backoff with jitter",
+      "conceptId": "retries-dlq",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement exponential backoff with full jitter for a retry loop, and route a message to a DLQ after N failed attempts.",
+      "expectedOutput": "Retry delays that grow exponentially and are randomized; poison messages land in a DLQ.",
+      "hints": ["Full jitter: delay = random(0, base·2^attempt).", "Jitter de-syncs many clients retrying at once."],
+      "solutionNotes": "Without jitter, all clients retry in lockstep — a thundering herd."
+    },
+    {
+      "id": "build-memtable-sstable",
+      "title": "Build a memtable + SSTable flush",
+      "conceptId": "lsm-tree",
+      "type": "implementation-task",
+      "difficulty": "advanced",
+      "prompt": "Implement an in-memory memtable that flushes to an immutable sorted file (SSTable). Support reads that merge memtable and SSTables; deletes as tombstones.",
+      "expectedOutput": "Writes go to the memtable; reads see the latest value across files.",
+      "hints": ["SSTables are immutable and sorted.", "A read may need to check several files newest-first."],
+      "solutionNotes": "Add bloom filters so reads skip files that lack the key."
+    },
+    {
+      "id": "build-wal",
+      "title": "Build a write-ahead log",
+      "conceptId": "wal",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Implement an append-only WAL: append + fsync each change before acknowledging it, and replay the log on startup to recover state.",
+      "expectedOutput": "State survives a simulated crash by replaying the log.",
+      "hints": ["fsync before you acknowledge the write.", "Checkpoint so the log does not grow forever."],
+      "solutionNotes": "A write() syscall does not mean the data is durable — fsync does."
+    }
+  ]
+}

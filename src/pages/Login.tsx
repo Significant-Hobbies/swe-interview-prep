@@ -1,4 +1,4 @@
-import { ArrowRight,Brain, Code2, GitBranch, Sparkles } from 'lucide-react';
+import { ArrowRight, Hammer, Map as MapIcon, Sparkles, Target } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { SaaSMakerTestimonials } from '../components/saasmaker-feedback';
@@ -6,37 +6,37 @@ import { useAuth } from '../contexts/AuthContext';
 
 const FEATURES = [
   {
-    icon: Sparkles,
-    title: 'Daily plan, no decision fatigue',
-    body: 'Open the app and the next concept is waiting — chosen for what you actually need to review.',
+    icon: Target,
+    title: 'Always answers "what next?"',
+    body: 'The dashboard picks one concept to learn, one drill to solve, and the reviews that are due. No decision fatigue.',
   },
   {
-    icon: GitBranch,
-    title: 'Patterns, not problems',
-    body: 'Curated concepts grouped by the patterns that show up across companies. Drill the structure, not random questions.',
+    icon: Hammer,
+    title: 'No learning without an artifact',
+    body: 'Every concept maps to drills and something you build — code, a benchmark, a design doc. Theory becomes proof.',
   },
   {
-    icon: Brain,
-    title: 'An AI tutor that grills you',
-    body: 'Explain it back Feynman-style. Code it. Diagram it. The tutor asks the follow-up a real interviewer would.',
+    icon: MapIcon,
+    title: 'Roadmaps with real progress',
+    body: 'Structured paths from a 9-day reset to a 12-month run at AI infrastructure depth. Progress is mastered concepts, not pages read.',
   },
 ];
 
 const STEPS = [
   {
     n: '01',
-    title: 'Open Today',
-    body: 'A single recommendation card tells you exactly which concept to work on next, based on what is fading.',
+    title: 'Pick a concept',
+    body: 'Browse 8 tracks — search, vector databases, AI systems, backend, storage — or let the dashboard choose your next concept.',
   },
   {
     n: '02',
-    title: 'Build in the Playground',
-    body: 'Code it in Monaco, diagram it in Excalidraw, and explain it back through the Feynman Gate for a 0–100 grade.',
+    title: 'Drill it, then build it',
+    body: 'Solve focused drills, then ship the artifact in the Build Lab. A concept is not learned until an artifact exists.',
   },
   {
     n: '03',
-    title: 'Let mastery decay guide you',
-    body: 'FSRS spaced repetition tracks each concept on a heatmap, so reviews surface right before you would forget.',
+    title: 'Review and compound',
+    body: 'FSRS spaced repetition surfaces concepts right before you forget, and the progress page tracks whether learning is compounding.',
   },
 ];
 
@@ -62,10 +62,10 @@ export default function Login() {
 
       <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
-            <Code2 className="h-4 w-4 text-blue-400" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
+            <Sparkles className="h-4 w-4 text-purple-400" />
           </div>
-          <span className="text-sm font-semibold tracking-tight text-white">DSA Prep Studio</span>
+          <span className="text-sm font-semibold tracking-tight text-white">SWE Learning OS</span>
         </div>
         <button
           onClick={signInWithGoogle}
@@ -77,21 +77,21 @@ export default function Login() {
 
       <section className="relative z-10 mx-auto w-full max-w-4xl px-6 pt-16 pb-12 text-center sm:pt-24">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-700 bg-gray-900/60 px-3 py-1 text-xs text-gray-200 backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-          AI picks your next concept. Every day.
+          <Sparkles className="h-3.5 w-3.5 text-purple-400" />
+          Concept → Drill → Build → Review → Apply
         </div>
 
         <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-          Stop grinding problems.
+          Stop collecting tutorials.
           <br />
-          <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent">
-            Start drilling patterns.
+          <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">
+            Build real engineering depth.
           </span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-gray-300">
-          A daily plan tells you exactly what to work on. Build, draw, and explain in one
-          screen — and your AI tutor asks the questions a real interviewer would.
+          A personal learning OS for backend, search, vector databases, and AI systems.
+          Every concept maps to a drill, an artifact you build, and a spaced-repetition review.
         </p>
 
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">

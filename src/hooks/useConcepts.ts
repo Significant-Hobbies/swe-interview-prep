@@ -1,15 +1,10 @@
-import { useCallback,useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { getAuthToken,useAuth } from '../contexts/AuthContext';
-import conceptsData from '../data/concepts.json';
+import { useAuth } from '../contexts/AuthContext';
+import { type Concept as BaseConcept, CONCEPTS } from '../data/learning-os';
 
-export interface Concept {
-  id: string;
-  name: string;
-  category: 'dsa' | 'lld' | 'hld' | 'behavioral' | 'ml';
-  prereqs: string[];
-  description: string;
-}
+// Back-compat alias: older code reads `prereqs`; the new schema uses `prerequisites`.
+export type Concept = BaseConcept & { prereqs: string[] };
 
 export interface MasteryEntry {
   stability: number;
@@ -22,7 +17,7 @@ export interface MasteryEntry {
   confidence: number;
 }
 
-export const ALL_CONCEPTS: Concept[] = (conceptsData as any).concepts;
+export const ALL_CONCEPTS: Concept[] = CONCEPTS.map(c => ({ ...c, prereqs: c.prerequisites }));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(
   ALL_CONCEPTS.map(c => [c.id, c]),
 );
@@ -32,15 +27,17 @@ export function useConceptMastery() {
   const [mastery, setMastery] = useState<Record<string, MasteryEntry>>({});
   const [loading, setLoading] = useState(false);
 
+  // The auth token lives in an httpOnly cookie — send it with credentials.
   const fetchMastery = useCallback(async () => {
     if (!user) return;
-    const token = getAuthToken();
-    if (!token) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/learning?action=concepts', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch('/api/learning?action=concepts', { credentials: 'include' });
+      if (!res.ok) return;
       const data = await res.json();
       setMastery(data.mastery || {});
+    } catch {
+      // Offline / no endpoint — leave mastery empty.
     } finally {
       setLoading(false);
     }
@@ -49,18 +46,23 @@ export function useConceptMastery() {
   useEffect(() => { fetchMastery(); }, [fetchMastery]);
 
   const review = useCallback(async (conceptId: string, rating: 'again' | 'hard' | 'good' | 'easy') => {
-    const token = getAuthToken();
-    if (!token) return;
-    const res = await fetch('/api/learning?action=concepts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ conceptId, rating }),
-    });
-    const data = await res.json();
-    if (data.mastery) {
-      setMastery(prev => ({ ...prev, [conceptId]: { ...data.mastery, confidence: data.mastery.confidence } }));
+    if (!user) return;
+    try {
+      const res = await fetch('/api/learning?action=concepts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ conceptId, rating }),
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.mastery) {
+        setMastery(prev => ({ ...prev, [conceptId]: { ...data.mastery, confidence: data.mastery.confidence } }));
+      }
+    } catch {
+      // best-effort
     }
-  }, []);
+  }, [user]);
 
   return { mastery, loading, refresh: fetchMastery, review };
 }

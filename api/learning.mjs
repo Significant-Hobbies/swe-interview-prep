@@ -1,10 +1,14 @@
 // Consolidated handler — Hobby plan caps Vercel at 12 serverless functions.
 // Routes via ?action= to keep all learning-loop endpoints in one function.
 import activityHandler from '../handlers/activity.mjs';
+import artifactsHandler from '../handlers/artifacts.mjs';
 import conceptsHandler from '../handlers/concepts.mjs';
-import tagHandler from '../handlers/tag.mjs';
-import feynmanHandler from '../handlers/feynman.mjs';
 import dailyHandler from '../handlers/daily.mjs';
+import drillsHandler from '../handlers/drills.mjs';
+import feynmanHandler from '../handlers/feynman.mjs';
+import notesHandler from '../handlers/learning-notes.mjs';
+import projectsHandler from '../handlers/projects.mjs';
+import tagHandler from '../handlers/tag.mjs';
 import weeklyHandler from '../handlers/weekly.mjs';
 
 const HANDLERS = {
@@ -14,6 +18,10 @@ const HANDLERS = {
   feynman: feynmanHandler,
   daily: dailyHandler,
   weekly: weeklyHandler,
+  artifacts: artifactsHandler,
+  drills: drillsHandler,
+  projects: projectsHandler,
+  notes: notesHandler,
 };
 
 export default async function handler(req, res) {
