@@ -380,7 +380,14 @@
         "bm25",
         "hybrid-search"
       ],
-      "description": "Inverted index, ranking, autocomplete at scale."
+      "description": "Inverted index, ranking, autocomplete at scale.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "embeddings",
@@ -485,6 +492,13 @@
       ],
       "reviewQuestions": [
         "rq-topk-heap"
+      ],
+      "resources": [
+        {
+          "title": "Nearest neighbor search (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Nearest_neighbor_search",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -823,6 +837,13 @@
       ],
       "reviewQuestions": [
         "rq-lost-in-middle"
+      ],
+      "resources": [
+        {
+          "title": "Lost in the Middle (Liu et al.)",
+          "url": "https://arxiv.org/abs/2307.03172",
+          "type": "paper"
+        }
       ]
     },
     {
@@ -934,6 +955,13 @@
       ],
       "reviewQuestions": [
         "rq-agent-stopping"
+      ],
+      "resources": [
+        {
+          "title": "Building Effective Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "article"
+        }
       ]
     },
     {
@@ -967,6 +995,13 @@
       ],
       "reviewQuestions": [
         "rq-routing-eval"
+      ],
+      "resources": [
+        {
+          "title": "Building Effective Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "article"
+        }
       ]
     },
     {
@@ -1048,7 +1083,14 @@
       "related": [
         "ml-gradient-descent"
       ],
-      "description": "Vectors, matrices, dot products, matmul, shapes."
+      "description": "Vectors, matrices, dot products, matmul, shapes.",
+      "resources": [
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "ml-gradient-descent",
@@ -1064,7 +1106,14 @@
       "related": [
         "ml-backprop"
       ],
-      "description": "Loss surfaces, learning rate, SGD steps."
+      "description": "Loss surfaces, learning rate, SGD steps.",
+      "resources": [
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "ml-backprop",
@@ -1080,7 +1129,14 @@
       "related": [
         "ml-adamw"
       ],
-      "description": "Chain rule, autograd, forward/backward passes."
+      "description": "Chain rule, autograd, forward/backward passes.",
+      "resources": [
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "ml-softmax-xent",
@@ -1096,7 +1152,19 @@
       "related": [
         "ml-language-modeling"
       ],
-      "description": "Logits to probabilities, negative log-likelihood loss."
+      "description": "Logits to probabilities, negative log-likelihood loss.",
+      "resources": [
+        {
+          "title": "Softmax function (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Softmax_function",
+          "type": "doc"
+        },
+        {
+          "title": "Cross entropy (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Cross_entropy",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-adamw",
@@ -1112,7 +1180,14 @@
       "related": [
         "ml-training"
       ],
-      "description": "Moments, weight decay, gradient clipping."
+      "description": "Moments, weight decay, gradient clipping.",
+      "resources": [
+        {
+          "title": "Decoupled Weight Decay Regularization (Loshchilov & Hutter)",
+          "url": "https://arxiv.org/abs/1711.05101",
+          "type": "paper"
+        }
+      ]
     },
     {
       "id": "ml-tokenization",
@@ -1127,7 +1202,14 @@
         "tokenization",
         "ml-language-modeling"
       ],
-      "description": "Byte-level, char-level, BPE, vocab design."
+      "description": "Byte-level, char-level, BPE, vocab design.",
+      "resources": [
+        {
+          "title": "Let's build the GPT Tokenizer (Karpathy)",
+          "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+          "type": "video"
+        }
+      ]
     },
     {
       "id": "ml-language-modeling",
@@ -1144,7 +1226,14 @@
       "related": [
         "ml-sampling"
       ],
-      "description": "Next-token prediction, context windows, perplexity."
+      "description": "Next-token prediction, context windows, perplexity.",
+      "resources": [
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "ml-sampling",
@@ -1160,7 +1249,14 @@
       "related": [
         "ml-evaluation"
       ],
-      "description": "Temperature, top-k, greedy decoding."
+      "description": "Temperature, top-k, greedy decoding.",
+      "resources": [
+        {
+          "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
+          "url": "https://arxiv.org/abs/1904.09751",
+          "type": "paper"
+        }
+      ]
     },
     {
       "id": "ml-embeddings",
@@ -1177,7 +1273,14 @@
         "ml-self-attention",
         "embeddings"
       ],
-      "description": "Token & position embeddings, tied weights."
+      "description": "Token & position embeddings, tied weights.",
+      "resources": [
+        {
+          "title": "Word embedding (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Word_embedding",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-self-attention",
@@ -1222,7 +1325,14 @@
       "related": [
         "ml-transformer-block"
       ],
-      "description": "Parallel heads, head_dim split, output projection."
+      "description": "Parallel heads, head_dim split, output projection.",
+      "resources": [
+        {
+          "title": "The Illustrated Transformer",
+          "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "ml-transformer-block",
@@ -1269,7 +1379,14 @@
         "ml-checkpointing",
         "ml-lora"
       ],
-      "description": "Init, NaNs, overfit tests, gradient checks."
+      "description": "Init, NaNs, overfit tests, gradient checks.",
+      "resources": [
+        {
+          "title": "A Recipe for Training Neural Networks (Karpathy)",
+          "url": "https://karpathy.github.io/2019/04/25/recipe/",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "ml-checkpointing",
@@ -1285,7 +1402,14 @@
       "related": [
         "ml-browser-runtime"
       ],
-      "description": "Weights + optimizer state, resume, dataset manifests."
+      "description": "Weights + optimizer state, resume, dataset manifests.",
+      "resources": [
+        {
+          "title": "Saving & loading models (PyTorch)",
+          "url": "https://pytorch.org/tutorials/beginner/saving_loading_models.html",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-lora",
@@ -1301,7 +1425,14 @@
       "related": [
         "ml-data-engineering"
       ],
-      "description": "Frozen base, low-rank adapters, rank/alpha."
+      "description": "Frozen base, low-rank adapters, rank/alpha.",
+      "resources": [
+        {
+          "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
+          "url": "https://arxiv.org/abs/2106.09685",
+          "type": "paper"
+        }
+      ]
     },
     {
       "id": "ml-data-engineering",
@@ -1333,7 +1464,14 @@
       "related": [
         "ml-webgpu"
       ],
-      "description": "Web Workers, WASM, OPFS, TypedArrays."
+      "description": "Web Workers, WASM, OPFS, TypedArrays.",
+      "resources": [
+        {
+          "title": "Transformers.js (Hugging Face)",
+          "url": "https://huggingface.co/docs/transformers.js/index",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-webgpu",
@@ -1348,7 +1486,14 @@
         "ml-transformer-block"
       ],
       "related": [],
-      "description": "WGSL, compute kernels, matmul, CPU parity."
+      "description": "WGSL, compute kernels, matmul, CPU parity.",
+      "resources": [
+        {
+          "title": "WebGPU API (MDN)",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-evaluation",
@@ -1468,6 +1613,13 @@
       ],
       "reviewQuestions": [
         "rq-token-vs-leaky"
+      ],
+      "resources": [
+        {
+          "title": "429 Too Many Requests (MDN)",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1547,6 +1699,13 @@
       "reviewQuestions": [
         "rq-dlq-purpose",
         "rq-jitter-why"
+      ],
+      "resources": [
+        {
+          "title": "Timeouts, retries and backoff with jitter (AWS)",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -1613,6 +1772,13 @@
       "realWorldUsage": "Redis/Memcached, CDN edges, HTTP caching.",
       "reviewQuestions": [
         "rq-cache-invalidation"
+      ],
+      "resources": [
+        {
+          "title": "HTTP caching (MDN)",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1641,6 +1807,18 @@
       ],
       "reviewQuestions": [
         "rq-exactly-once"
+      ],
+      "resources": [
+        {
+          "title": "Message queue (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Message_queue",
+          "type": "doc"
+        },
+        {
+          "title": "Apache Kafka documentation",
+          "url": "https://kafka.apache.org/documentation/",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1672,6 +1850,13 @@
       ],
       "reviewQuestions": [
         "rq-three-pillars"
+      ],
+      "resources": [
+        {
+          "title": "Monitoring Distributed Systems (Google SRE Book)",
+          "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1703,6 +1888,13 @@
       ],
       "reviewQuestions": [
         "rq-api-pagination"
+      ],
+      "resources": [
+        {
+          "title": "API design guide (Google Cloud)",
+          "url": "https://cloud.google.com/apis/design",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1729,6 +1921,18 @@
       "realWorldUsage": "OAuth2/OIDC, every multi-user product.",
       "reviewQuestions": [
         "rq-jwt-vs-session"
+      ],
+      "resources": [
+        {
+          "title": "OAuth 2.0",
+          "url": "https://oauth.net/2/",
+          "type": "doc"
+        },
+        {
+          "title": "Introduction to JSON Web Tokens",
+          "url": "https://jwt.io/introduction",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1746,7 +1950,14 @@
       "related": [
         "idempotency"
       ],
-      "description": "Idempotency, sagas, double-entry."
+      "description": "Idempotency, sagas, double-entry.",
+      "resources": [
+        {
+          "title": "Stripe Payments documentation",
+          "url": "https://docs.stripe.com/payments",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "b-tree",
@@ -1895,6 +2106,13 @@
       "realWorldUsage": "RocksDB/Cassandra compaction strategies; segment merges in search engines.",
       "reviewQuestions": [
         "rq-compaction-tradeoff"
+      ],
+      "resources": [
+        {
+          "title": "RocksDB Compaction",
+          "url": "https://github.com/facebook/rocksdb/wiki/Compaction",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1973,7 +2191,14 @@
       "related": [
         "storage-retrieval"
       ],
-      "description": "Extra indexes for non-primary-key lookups, and what they cost on writes."
+      "description": "Extra indexes for non-primary-key lookups, and what they cost on writes.",
+      "resources": [
+        {
+          "title": "Database index (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Database_index",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "storage-retrieval",
@@ -2229,7 +2454,14 @@
       "related": [
         "state-management"
       ],
-      "description": "Thread-safety, locks, producer-consumer."
+      "description": "Thread-safety, locks, producer-consumer.",
+      "resources": [
+        {
+          "title": "Concurrency (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Concurrency_(computer_science)",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "command-chain",
@@ -2265,7 +2497,14 @@
         "concurrency-design"
       ],
       "related": [],
-      "description": "Reservation, hold-confirm, optimistic locking."
+      "description": "Reservation, hold-confirm, optimistic locking.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "game-design",
@@ -2519,6 +2758,13 @@
       ],
       "reviewQuestions": [
         "rq-search-platform-paths"
+      ],
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
       ]
     },
     {
@@ -2553,6 +2799,13 @@
       ],
       "reviewQuestions": [
         "rq-rag-two-pipelines"
+      ],
+      "resources": [
+        {
+          "title": "Building Effective Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "article"
+        }
       ]
     },
     {
@@ -2918,7 +3171,14 @@
         "dp-1d"
       ],
       "related": [],
-      "description": "Grid DP, edit distance, knapsack."
+      "description": "Grid DP, edit distance, knapsack.",
+      "resources": [
+        {
+          "title": "Dynamic programming (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Dynamic_programming",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "greedy",
@@ -2955,7 +3215,14 @@
         "greedy"
       ],
       "related": [],
-      "description": "Merge, overlap, sweep line."
+      "description": "Merge, overlap, sweep line.",
+      "resources": [
+        {
+          "title": "Interval scheduling (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Interval_scheduling",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "math-geometry",
@@ -2967,7 +3234,14 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Number theory, modular, geometry."
+      "description": "Number theory, modular, geometry.",
+      "resources": [
+        {
+          "title": "Computational geometry (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Computational_geometry",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "bit-manipulation",
@@ -2979,7 +3253,14 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Bitwise ops, masks, XOR tricks."
+      "description": "Bitwise ops, masks, XOR tricks.",
+      "resources": [
+        {
+          "title": "Bitwise operation (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Bitwise_operation",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "leadership-and-influence",
@@ -2991,7 +3272,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Driving outcomes through others."
+      "description": "Driving outcomes through others.",
+      "resources": [
+        {
+          "title": "Leadership (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Leadership",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "conflict-resolution",
@@ -3003,7 +3296,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Disagreement handling."
+      "description": "Disagreement handling.",
+      "resources": [
+        {
+          "title": "Conflict resolution (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Conflict_resolution",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "problem-solving-and-decision-making",
@@ -3015,7 +3320,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Tradeoffs under uncertainty."
+      "description": "Tradeoffs under uncertainty.",
+      "resources": [
+        {
+          "title": "Decision-making (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Decision-making",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "teamwork-and-collaboration",
@@ -3027,7 +3344,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Cross-functional work."
+      "description": "Cross-functional work.",
+      "resources": [
+        {
+          "title": "Teamwork (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Teamwork",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "failure-and-learning",
@@ -3039,7 +3368,14 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Owning mistakes, post-mortem."
+      "description": "Owning mistakes, post-mortem.",
+      "resources": [
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "communication",
@@ -3051,7 +3387,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Written/verbal, audience adaptation."
+      "description": "Written/verbal, audience adaptation.",
+      "resources": [
+        {
+          "title": "Communication (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Communication",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "time-management-and-prioritization",
@@ -3063,7 +3411,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Eisenhower, OKR alignment."
+      "description": "Eisenhower, OKR alignment.",
+      "resources": [
+        {
+          "title": "Time management (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Time_management",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "innovation-and-creativity",
@@ -3075,7 +3435,19 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "Novel solutions, experimentation."
+      "description": "Novel solutions, experimentation.",
+      "resources": [
+        {
+          "title": "Creativity (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Creativity",
+          "type": "doc"
+        },
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "customer-obsession",
@@ -3087,7 +3459,14 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "User-centered tradeoffs."
+      "description": "User-centered tradeoffs.",
+      "resources": [
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ownership-and-accountability",
@@ -3099,7 +3478,14 @@
       "priority": 2,
       "prerequisites": [],
       "related": [],
-      "description": "End-to-end responsibility."
+      "description": "End-to-end responsibility.",
+      "resources": [
+        {
+          "title": "STAR interview method (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "positioning",
@@ -3155,6 +3541,13 @@
       "projectApplications": [
         "significant-hobbies",
         "rolepatch"
+      ],
+      "resources": [
+        {
+          "title": "SEO Starter Guide (Google Search Central)",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+          "type": "doc"
+        }
       ]
     },
     {

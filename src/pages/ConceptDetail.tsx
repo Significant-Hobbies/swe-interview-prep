@@ -148,6 +148,37 @@ export default function ConceptDetail() {
             )}
           </section>
 
+          {/* Learn it — curated external sources are the primary content */}
+          <section>
+            <SectionTitle>Learn it</SectionTitle>
+            {concept.resources && concept.resources.length > 0 ? (
+              <div className="space-y-2">
+                {concept.resources.map(res => (
+                  <a
+                    key={res.url}
+                    href={res.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/40 p-3 transition-colors hover:border-cyan-500/40 hover:bg-gray-900/70"
+                  >
+                    <BookOpen className="h-4 w-4 shrink-0 text-cyan-400" />
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-medium text-gray-100">{res.title}</div>
+                      <div className="text-[11px] uppercase tracking-wide text-gray-600">{res.type}</div>
+                    </div>
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-gray-600" />
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <Card className="p-4">
+                <p className="text-sm text-gray-400">
+                  No curated source yet for this concept. Add the link you trust in your notes below.
+                </p>
+              </Card>
+            )}
+          </section>
+
           {/* Common mistakes */}
           {concept.commonMistakes && concept.commonMistakes.length > 0 && (
             <section>
@@ -250,30 +281,6 @@ export default function ConceptDetail() {
                     </Card>
                   );
                 })}
-              </div>
-            </div>
-          )}
-
-          {concept.resources && concept.resources.length > 0 && (
-            <div>
-              <SectionTitle>Resources</SectionTitle>
-              <div className="space-y-2">
-                {concept.resources.map(r => (
-                  <a
-                    key={r.url}
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-start gap-2 rounded-lg border border-gray-800 bg-gray-900/40 p-3 transition-colors hover:border-gray-700"
-                  >
-                    <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
-                    <div className="min-w-0">
-                      <div className="truncate text-sm text-gray-200">{r.title}</div>
-                      <div className="text-[11px] uppercase tracking-wide text-gray-600">{r.type}</div>
-                    </div>
-                    <ExternalLink className="ml-auto h-3.5 w-3.5 shrink-0 text-gray-600" />
-                  </a>
-                ))}
               </div>
             </div>
           )}
