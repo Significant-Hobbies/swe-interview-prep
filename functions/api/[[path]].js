@@ -1,5 +1,7 @@
 import { createClient } from "@libsql/client/web";
 
+import { decayConfidence, reviewConcept } from "../../shared/lib/fsrs.mjs";
+
 const AUTH_COOKIE_NAME = "dsa_prep_auth";
 const AUTH_COOKIE_MAX_AGE = 30 * 24 * 60 * 60;
 
@@ -48,6 +50,61 @@ async function initDatabase(env) {
       updated_at TEXT NOT NULL DEFAULT (datetime('now')),
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
       UNIQUE(user_id, problem_id)
+    )
+  `);
+  // Learning OS tables.
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS concept_mastery (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, concept_id TEXT NOT NULL,
+      stability REAL DEFAULT 0, difficulty REAL DEFAULT 5, elapsed_days INTEGER DEFAULT 0,
+      scheduled_days INTEGER DEFAULT 0, reps INTEGER DEFAULT 0, lapses INTEGER DEFAULT 0,
+      state INTEGER DEFAULT 0, last_review TEXT, due TEXT, confidence REAL DEFAULT 0,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, concept_id)
+    )
+  `);
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS activity_log (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, kind TEXT NOT NULL,
+      problem_id TEXT, concept_ids TEXT, duration_ms INTEGER DEFAULT 0, payload TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS user_artifacts (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, artifact_id TEXT NOT NULL,
+      status TEXT DEFAULT 'todo', url TEXT, path TEXT, notes TEXT, criteria_json TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, artifact_id)
+    )
+  `);
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS user_drills (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, drill_id TEXT NOT NULL,
+      status TEXT DEFAULT 'unsolved', attempts INTEGER DEFAULT 0, last_code TEXT, last_attempt TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, drill_id)
+    )
+  `);
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS user_projects (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, project_id TEXT NOT NULL,
+      status TEXT DEFAULT 'planned', next_action TEXT, milestones_json TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, project_id)
+    )
+  `);
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS user_learning_notes (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, scope TEXT NOT NULL, ref_id TEXT,
+      title TEXT, body TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
   `);
 }
@@ -290,6 +347,317 @@ async function handleProgress(request, env) {
   return json({ error: "Method not allowed" }, { status: 405 });
 }
 
+// --- Learning OS API (consolidated under /api/learning?action=...) ----------
+
+async function readJson(request) {
+  try {
+    return await request.json();
+  } catch {
+    return {};
+  }
+}
+
+async function upsertMastery(client, userId, conceptId, row) {
+  await client.execute({
+    sql: `INSERT INTO concept_mastery (id, user_id, concept_id, stability, difficulty,
+        elapsed_days, scheduled_days, reps, lapses, state, last_review, due, confidence)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(user_id, concept_id) DO UPDATE SET
+        stability = excluded.stability, difficulty = excluded.difficulty,
+        elapsed_days = excluded.elapsed_days, scheduled_days = excluded.scheduled_days,
+        reps = excluded.reps, lapses = excluded.lapses, state = excluded.state,
+        last_review = excluded.last_review, due = excluded.due,
+        confidence = excluded.confidence, updated_at = datetime('now')`,
+    args: [
+      crypto.randomUUID(), userId, conceptId, row.stability, row.difficulty,
+      row.elapsed_days, row.scheduled_days, row.reps, row.lapses, row.state,
+      row.last_review, row.due, row.confidence,
+    ],
+  });
+}
+
+async function handleConcepts(request, client, user) {
+  if (request.method === "GET") {
+    const r = await client.execute({ sql: "SELECT * FROM concept_mastery WHERE user_id = ?", args: [user.id] });
+    const now = new Date();
+    const mastery = {};
+    for (const row of r.rows) {
+      mastery[row.concept_id] = {
+        stability: row.stability, difficulty: row.difficulty, reps: row.reps,
+        lapses: row.lapses, state: row.state, lastReview: row.last_review,
+        due: row.due, confidence: decayConfidence(row, now),
+      };
+    }
+    return json({ mastery });
+  }
+  if (request.method === "POST") {
+    const { conceptId, rating } = await readJson(request);
+    if (!conceptId || !rating) return json({ error: "conceptId, rating required" }, { status: 400 });
+    const prev = (await client.execute({
+      sql: "SELECT * FROM concept_mastery WHERE user_id = ? AND concept_id = ?",
+      args: [user.id, conceptId],
+    })).rows[0] || null;
+    const next = reviewConcept(prev, rating);
+    await upsertMastery(client, user.id, conceptId, next);
+    return json({ mastery: { ...next, confidence: decayConfidence(next) } });
+  }
+  if (request.method === "PUT") {
+    const { updates } = await readJson(request);
+    if (!Array.isArray(updates)) return json({ error: "updates array required" }, { status: 400 });
+    const results = [];
+    for (const u of updates) {
+      if (!u.conceptId || !u.rating) continue;
+      const prev = (await client.execute({
+        sql: "SELECT * FROM concept_mastery WHERE user_id = ? AND concept_id = ?",
+        args: [user.id, u.conceptId],
+      })).rows[0] || null;
+      const next = reviewConcept(prev, u.rating);
+      await upsertMastery(client, user.id, u.conceptId, next);
+      results.push({ conceptId: u.conceptId, mastery: { ...next, confidence: decayConfidence(next) } });
+    }
+    return json({ results });
+  }
+  return json({ error: "Method not allowed" }, { status: 405 });
+}
+
+async function handleArtifacts(request, client, user) {
+  if (request.method === "GET") {
+    const r = await client.execute({ sql: "SELECT * FROM user_artifacts WHERE user_id = ?", args: [user.id] });
+    const artifacts = {};
+    for (const row of r.rows) {
+      artifacts[row.artifact_id] = {
+        status: row.status, url: row.url || "", path: row.path || "", notes: row.notes || "",
+        criteria: row.criteria_json ? JSON.parse(row.criteria_json) : [], updatedAt: row.updated_at,
+      };
+    }
+    return json({ artifacts });
+  }
+  if (request.method === "POST") {
+    const { artifactId, status, url, path, notes, criteria } = await readJson(request);
+    if (!artifactId) return json({ error: "artifactId required" }, { status: 400 });
+    await client.execute({
+      sql: `INSERT INTO user_artifacts (id, user_id, artifact_id, status, url, path, notes, criteria_json)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(user_id, artifact_id) DO UPDATE SET
+          status = excluded.status, url = excluded.url, path = excluded.path,
+          notes = excluded.notes, criteria_json = excluded.criteria_json, updated_at = datetime('now')`,
+      args: [
+        crypto.randomUUID(), user.id, artifactId, status || "todo", url || null,
+        path || null, notes || null, criteria ? JSON.stringify(criteria) : null,
+      ],
+    });
+    return json({ ok: true });
+  }
+  return json({ error: "Method not allowed" }, { status: 405 });
+}
+
+async function handleDrills(request, client, user) {
+  if (request.method === "GET") {
+    const r = await client.execute({ sql: "SELECT * FROM user_drills WHERE user_id = ?", args: [user.id] });
+    const drills = {};
+    for (const row of r.rows) {
+      drills[row.drill_id] = {
+        status: row.status, attempts: row.attempts, lastCode: row.last_code || "",
+        lastAttempt: row.last_attempt, updatedAt: row.updated_at,
+      };
+    }
+    return json({ drills });
+  }
+  if (request.method === "POST") {
+    const { drillId, status, lastCode } = await readJson(request);
+    if (!drillId) return json({ error: "drillId required" }, { status: 400 });
+    await client.execute({
+      sql: `INSERT INTO user_drills (id, user_id, drill_id, status, attempts, last_code, last_attempt)
+        VALUES (?, ?, ?, ?, 1, ?, ?)
+        ON CONFLICT(user_id, drill_id) DO UPDATE SET
+          status = excluded.status, attempts = user_drills.attempts + 1,
+          last_code = excluded.last_code, last_attempt = excluded.last_attempt, updated_at = datetime('now')`,
+      args: [crypto.randomUUID(), user.id, drillId, status || "attempted", lastCode || null, new Date().toISOString()],
+    });
+    return json({ ok: true });
+  }
+  return json({ error: "Method not allowed" }, { status: 405 });
+}
+
+async function handleProjectsState(request, client, user) {
+  if (request.method === "GET") {
+    const r = await client.execute({ sql: "SELECT * FROM user_projects WHERE user_id = ?", args: [user.id] });
+    const projects = {};
+    for (const row of r.rows) {
+      projects[row.project_id] = {
+        status: row.status, nextAction: row.next_action || "",
+        milestones: row.milestones_json ? JSON.parse(row.milestones_json) : {}, updatedAt: row.updated_at,
+      };
+    }
+    return json({ projects });
+  }
+  if (request.method === "POST") {
+    const { projectId, status, nextAction, milestones } = await readJson(request);
+    if (!projectId) return json({ error: "projectId required" }, { status: 400 });
+    await client.execute({
+      sql: `INSERT INTO user_projects (id, user_id, project_id, status, next_action, milestones_json)
+        VALUES (?, ?, ?, ?, ?, ?)
+        ON CONFLICT(user_id, project_id) DO UPDATE SET
+          status = excluded.status, next_action = excluded.next_action,
+          milestones_json = excluded.milestones_json, updated_at = datetime('now')`,
+      args: [
+        crypto.randomUUID(), user.id, projectId, status || "planned",
+        nextAction || null, milestones ? JSON.stringify(milestones) : null,
+      ],
+    });
+    return json({ ok: true });
+  }
+  return json({ error: "Method not allowed" }, { status: 405 });
+}
+
+async function handleLearningNotes(request, client, user) {
+  const url = new URL(request.url);
+  if (request.method === "GET") {
+    let sql = "SELECT * FROM user_learning_notes WHERE user_id = ?";
+    const args = [user.id];
+    const scope = url.searchParams.get("scope");
+    const refId = url.searchParams.get("refId");
+    if (scope) { sql += " AND scope = ?"; args.push(scope); }
+    if (refId) { sql += " AND ref_id = ?"; args.push(refId); }
+    sql += " ORDER BY updated_at DESC";
+    const r = await client.execute({ sql, args });
+    return json({
+      notes: r.rows.map((row) => ({
+        id: row.id, scope: row.scope, refId: row.ref_id || "",
+        title: row.title || "", body: row.body, updatedAt: row.updated_at,
+      })),
+    });
+  }
+  if (request.method === "POST") {
+    const { id, scope, refId, title, body } = await readJson(request);
+    if (!scope || !body) return json({ error: "scope, body required" }, { status: 400 });
+    const noteId = id || crypto.randomUUID();
+    if (id) {
+      await client.execute({
+        sql: `UPDATE user_learning_notes SET scope = ?, ref_id = ?, title = ?, body = ?, updated_at = datetime('now')
+          WHERE id = ? AND user_id = ?`,
+        args: [scope, refId || null, title || null, body, id, user.id],
+      });
+    } else {
+      await client.execute({
+        sql: "INSERT INTO user_learning_notes (id, user_id, scope, ref_id, title, body) VALUES (?, ?, ?, ?, ?, ?)",
+        args: [noteId, user.id, scope, refId || null, title || null, body],
+      });
+    }
+    return json({ id: noteId });
+  }
+  if (request.method === "DELETE") {
+    const id = url.searchParams.get("id");
+    if (!id) return json({ error: "id required" }, { status: 400 });
+    await client.execute({ sql: "DELETE FROM user_learning_notes WHERE id = ? AND user_id = ?", args: [id, user.id] });
+    return json({ ok: true });
+  }
+  return json({ error: "Method not allowed" }, { status: 405 });
+}
+
+function parseAiJson(text) {
+  let t = (text || "").trim();
+  if (t.startsWith("```")) t = t.replace(/^```[a-z]*\n?/i, "").replace(/```\s*$/, "").trim();
+  const start = t.indexOf("{");
+  const end = t.lastIndexOf("}");
+  if (start >= 0 && end > start) t = t.slice(start, end + 1);
+  return JSON.parse(t);
+}
+
+async function callByokAI(aiConfig, system, prompt, maxTokens) {
+  const endpoint = `${aiConfig.endpointUrl.replace(/\/$/, "")}/chat/completions`;
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "content-type": "application/json", authorization: `Bearer ${aiConfig.apiKey}` },
+    body: JSON.stringify({
+      model: aiConfig.model,
+      max_tokens: maxTokens,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: prompt },
+      ],
+    }),
+  });
+  if (!res.ok) throw new Error(`AI provider returned ${res.status}`);
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || "";
+}
+
+const GAPS_SYSTEM = `You are a learning coach for an engineer building toward AI search/infrastructure depth.
+Given the learner's mastery profile, return STRICT JSON:
+{"summary":"2-3 sentences","weakAreas":["..."],"nextConcepts":[{"conceptId":"...","why":"one line"}],"recommendedArtifact":{"artifactId":"...","why":"one line"}}
+Only use conceptId/artifactId values from the provided catalog. nextConcepts: 3-5 items. Be concrete.`;
+
+const CRITIQUE_SYSTEM = `You grade an engineer's recall answer against a reference answer.
+Return STRICT JSON:
+{"score":0-100,"verdict":"one sentence","missing":["..."],"strongerAnswer":"3-5 sentences","followUps":["..."]}
+Grade on substance, not wording. missing: 0-4 items. followUps: 1-2 items. Be honest.`;
+
+async function handleGaps(request) {
+  if (request.method !== "POST") return json({ error: "Method not allowed" }, { status: 405 });
+  const { aiConfig, profile, catalog } = await readJson(request);
+  if (!aiConfig?.endpointUrl || !aiConfig?.apiKey || !aiConfig?.model) {
+    return json({ error: "Configure an AI provider in Settings to use the Gap Analyzer." }, { status: 400 });
+  }
+  const prompt = `Concept catalog (id: name [track]):
+${(catalog?.concepts || []).map((c) => `${c.id}: ${c.name} [${c.track}]`).join("\n")}
+
+Artifact catalog (id: title):
+${(catalog?.artifacts || []).map((a) => `${a.id}: ${a.title}`).join("\n")}
+
+Learner profile:
+${JSON.stringify(profile || {}, null, 2)}
+
+Analyze now. JSON only.`;
+  try {
+    return json(parseAiJson(await callByokAI(aiConfig, GAPS_SYSTEM, prompt, 900)));
+  } catch (err) {
+    return json({ error: `AI request failed: ${err.message}` }, { status: 502 });
+  }
+}
+
+async function handleCritique(request) {
+  if (request.method !== "POST") return json({ error: "Method not allowed" }, { status: 405 });
+  const { aiConfig, question, answer, expected } = await readJson(request);
+  if (!aiConfig?.endpointUrl || !aiConfig?.apiKey || !aiConfig?.model) {
+    return json({ error: "Configure an AI provider in Settings to use the Review Critic." }, { status: 400 });
+  }
+  if (!question || !answer) return json({ error: "question and answer are required" }, { status: 400 });
+  const prompt = `Question:
+${question}
+
+Reference answer:
+${expected || "(none provided)"}
+
+Learner's answer:
+${answer}
+
+Grade now. JSON only.`;
+  try {
+    return json(parseAiJson(await callByokAI(aiConfig, CRITIQUE_SYSTEM, prompt, 800)));
+  } catch (err) {
+    return json({ error: `AI request failed: ${err.message}` }, { status: 502 });
+  }
+}
+
+async function handleLearning(request, env) {
+  const action = new URL(request.url).searchParams.get("action");
+  // gaps/critique are BYOK AI proxies — no auth or DB needed.
+  if (action === "gaps") return handleGaps(request);
+  if (action === "critique") return handleCritique(request);
+
+  await initDatabase(env);
+  const user = await currentUser(request, env);
+  if (!user) return json({ error: "Unauthorized" }, { status: 401 });
+  const client = getDb(env);
+  if (action === "concepts") return handleConcepts(request, client, user);
+  if (action === "artifacts") return handleArtifacts(request, client, user);
+  if (action === "drills") return handleDrills(request, client, user);
+  if (action === "projects") return handleProjectsState(request, client, user);
+  if (action === "notes") return handleLearningNotes(request, client, user);
+  return json({ error: `Unknown learning action: ${action}` }, { status: 400 });
+}
+
 export async function onRequest({ request, env, params }) {
   const path = (params.path || []).join("/");
   try {
@@ -299,6 +667,7 @@ export async function onRequest({ request, env, params }) {
     if (path === "auth/logout") return await handleLogout(request);
     if (path === "auth/verify") return await handleVerify(request, env);
     if (path === "progress") return await handleProgress(request, env);
+    if (path === "learning") return await handleLearning(request, env);
     return json({ error: "API route not found" }, { status: 404 });
   } catch (error) {
     console.error("Pages API route failed", path, error);
