@@ -253,6 +253,94 @@
       "expectedOutput": "State survives a simulated crash by replaying the log.",
       "hints": ["fsync before you acknowledge the write.", "Checkpoint so the log does not grow forever."],
       "solutionNotes": "A write() syscall does not mean the data is durable — fsync does."
+    },
+    {
+      "id": "two-sum-hashmap",
+      "title": "Two Sum with a hash map",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Given an array of integers and a target, return the indices of the two numbers that add to the target. Solve it in a single pass.",
+      "expectedOutput": "twoSum([2,7,11,15], 9) -> [0,1]",
+      "hints": ["For each number, what value would complete the pair?", "Store value -> index as you scan; check for the complement before inserting."],
+      "solutionNotes": "One pass, O(n) time, O(n) space. The map turns the inner scan into an O(1) lookup."
+    },
+    {
+      "id": "valid-palindrome-two-pointers",
+      "title": "Valid palindrome with two pointers",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Given a string, decide if it reads the same forwards and backwards, ignoring case and non-alphanumeric characters. Use two pointers, no extra string.",
+      "expectedOutput": "isPalindrome('A man, a plan, a canal: Panama') -> true",
+      "hints": ["Start one pointer at each end, move inward.", "Skip non-alphanumeric characters without allocating a cleaned copy."],
+      "solutionNotes": "Converging pointers give O(n) time and O(1) space."
+    },
+    {
+      "id": "longest-substring-sliding-window",
+      "title": "Longest substring without repeats",
+      "conceptId": "sliding-window",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Find the length of the longest substring with no repeating characters using a variable-size sliding window.",
+      "expectedOutput": "lengthOfLongestSubstring('abcabcbb') -> 3",
+      "hints": ["Expand the right edge; on a duplicate, shrink the left edge until the window is valid again.", "Track the last index of each character."],
+      "solutionNotes": "Each character enters and leaves the window once — O(n)."
+    },
+    {
+      "id": "search-rotated-array",
+      "title": "Search in a rotated sorted array",
+      "conceptId": "binary-search",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "A sorted array was rotated at an unknown pivot. Find a target's index in O(log n).",
+      "expectedOutput": "search([4,5,6,7,0,1,2], 0) -> 4",
+      "hints": ["At each step one half is still sorted — identify which.", "Decide whether the target lies in the sorted half, then recurse there."],
+      "solutionNotes": "Standard binary search with an extra check for which half is ordered."
+    },
+    {
+      "id": "level-order-traversal",
+      "title": "Binary tree level-order traversal",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Return the values of a binary tree grouped by level, top to bottom.",
+      "expectedOutput": "levelOrder of [3,9,20,null,null,15,7] -> [[3],[9,20],[15,7]]",
+      "hints": ["Levels mean BFS — use a queue.", "Process the queue one level at a time by capturing its size before the loop."],
+      "solutionNotes": "BFS with a per-level size snapshot; O(n)."
+    },
+    {
+      "id": "number-of-islands",
+      "title": "Number of islands",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given a grid of '1' (land) and '0' (water), count the connected land masses (4-directionally).",
+      "expectedOutput": "A single integer — the island count.",
+      "hints": ["Each unvisited '1' starts a new island; flood-fill it with DFS or BFS.", "Mark cells visited as you go to avoid recounting."],
+      "solutionNotes": "Grid-as-graph: every cell is a node, neighbours are edges. O(rows*cols)."
+    },
+    {
+      "id": "house-robber-dp",
+      "title": "House robber (1D DP)",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given values along a line, pick a non-adjacent subset with maximum sum.",
+      "expectedOutput": "rob([2,7,9,3,1]) -> 12",
+      "hints": ["Define dp[i] = best sum using houses 0..i.", "dp[i] = max(dp[i-1], dp[i-2] + value[i])."],
+      "solutionNotes": "Classic 1D DP; can be reduced to two rolling variables, O(1) space."
+    },
+    {
+      "id": "kth-largest-heap",
+      "title": "Kth largest element with a heap",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Return the k-th largest element of an unsorted array using a heap, without fully sorting.",
+      "expectedOutput": "findKthLargest([3,2,1,5,6,4], 2) -> 5",
+      "hints": ["Keep a min-heap of size k; the root is the answer.", "If the heap exceeds k, pop the smallest."],
+      "solutionNotes": "O(n log k) time, O(k) space — beats sorting when k is small."
     }
   ]
 }

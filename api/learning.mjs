@@ -3,9 +3,11 @@
 import activityHandler from '../handlers/activity.mjs';
 import artifactsHandler from '../handlers/artifacts.mjs';
 import conceptsHandler from '../handlers/concepts.mjs';
+import critiqueHandler from '../handlers/critique.mjs';
 import dailyHandler from '../handlers/daily.mjs';
 import drillsHandler from '../handlers/drills.mjs';
 import feynmanHandler from '../handlers/feynman.mjs';
+import gapsHandler from '../handlers/gaps.mjs';
 import notesHandler from '../handlers/learning-notes.mjs';
 import projectsHandler from '../handlers/projects.mjs';
 import tagHandler from '../handlers/tag.mjs';
@@ -22,6 +24,8 @@ const HANDLERS = {
   drills: drillsHandler,
   projects: projectsHandler,
   notes: notesHandler,
+  gaps: gapsHandler,
+  critique: critiqueHandler,
 };
 
 export default async function handler(req, res) {

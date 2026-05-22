@@ -10,7 +10,11 @@
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
-      "related": ["inverted-index", "bm25", "ml-tokenization"],
+      "related": [
+        "inverted-index",
+        "bm25",
+        "ml-tokenization"
+      ],
       "description": "Splitting text into terms: lowercasing, stemming, stop words, n-grams.",
       "mentalModel": "Tokenization decides what counts as a 'word' for search. The same analyzer must run at index time and query time, or the query term will never match the indexed term.",
       "commonMistakes": [
@@ -19,12 +23,26 @@
         "Dropping stop words that carry meaning in short queries"
       ],
       "realWorldUsage": "Elasticsearch/Lucene analyzers, Tantivy tokenizers, every lexical search engine.",
-      "projectApplications": ["highsignal"],
-      "drills": ["build-tokenizer"],
-      "reviewQuestions": ["rq-tokenization-symmetry"],
+      "projectApplications": [
+        "highsignal"
+      ],
+      "drills": [
+        "build-tokenizer"
+      ],
+      "reviewQuestions": [
+        "rq-tokenization-symmetry"
+      ],
       "resources": [
-        { "title": "Stanford IR Book — Tokenization", "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html", "type": "doc" },
-        { "title": "Let's build the GPT Tokenizer (Karpathy)", "url": "https://www.youtube.com/watch?v=zduSFxRajkE", "type": "video" }
+        {
+          "title": "Stanford IR Book — Tokenization",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
+          "type": "doc"
+        },
+        {
+          "title": "Let's build the GPT Tokenizer (Karpathy)",
+          "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+          "type": "video"
+        }
       ]
     },
     {
@@ -35,8 +53,14 @@
       "subtrack": "indexing",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["tokenization"],
-      "related": ["bm25", "tf-idf", "search-discovery"],
+      "prerequisites": [
+        "tokenization"
+      ],
+      "related": [
+        "bm25",
+        "tf-idf",
+        "search-discovery"
+      ],
       "description": "Term → posting list mapping that powers fast keyword lookup.",
       "mentalModel": "An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.",
       "commonMistakes": [
@@ -45,11 +69,22 @@
         "Not separating the dictionary from the postings on disk"
       ],
       "realWorldUsage": "Lucene, Tantivy, PostgreSQL GIN indexes, every full-text search system.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "drills": ["build-inverted-index"],
-      "reviewQuestions": ["rq-inverted-vs-forward"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "drills": [
+        "build-inverted-index"
+      ],
+      "reviewQuestions": [
+        "rq-inverted-vs-forward"
+      ],
       "resources": [
-        { "title": "Stanford IR Book — The term vocabulary & postings lists", "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html", "type": "doc" }
+        {
+          "title": "Stanford IR Book — The term vocabulary & postings lists",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -60,8 +95,12 @@
       "subtrack": "ranking",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["inverted-index"],
-      "related": ["bm25"],
+      "prerequisites": [
+        "inverted-index"
+      ],
+      "related": [
+        "bm25"
+      ],
       "description": "Term frequency × inverse document frequency weighting for relevance.",
       "mentalModel": "TF-IDF says a term matters more when it appears often in a document (TF) but is rare across the corpus (IDF). It is the conceptual ancestor of BM25.",
       "commonMistakes": [
@@ -69,10 +108,18 @@
         "Using raw counts instead of dampened term frequency"
       ],
       "realWorldUsage": "Baseline ranking, feature input to learning-to-rank models.",
-      "drills": ["calculate-tfidf"],
-      "reviewQuestions": ["rq-tfidf-idf-why"],
+      "drills": [
+        "calculate-tfidf"
+      ],
+      "reviewQuestions": [
+        "rq-tfidf-idf-why"
+      ],
       "resources": [
-        { "title": "Stanford IR Book — Scoring & term weighting", "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html", "type": "doc" }
+        {
+          "title": "Stanford IR Book — Scoring & term weighting",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -83,8 +130,15 @@
       "subtrack": "ranking",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["inverted-index", "tf-idf"],
-      "related": ["hybrid-search", "search-evals", "reranking"],
+      "prerequisites": [
+        "inverted-index",
+        "tf-idf"
+      ],
+      "related": [
+        "hybrid-search",
+        "search-evals",
+        "reranking"
+      ],
       "description": "The standard lexical ranking function: TF saturation + IDF + length normalization.",
       "mentalModel": "BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter). It is still the strongest single keyword ranker and the lexical half of hybrid search.",
       "commonMistakes": [
@@ -94,13 +148,34 @@
         "Not building search evals to compare against vector retrieval"
       ],
       "realWorldUsage": "Default scorer in Elasticsearch, OpenSearch, Lucene, Tantivy; lexical leg of hybrid retrieval.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "artifacts": ["implement-bm25-highsignal"],
-      "drills": ["calculate-bm25-score", "implement-bm25-ranker"],
-      "reviewQuestions": ["rq-bm25-length-norm", "rq-bm25-vs-tfidf", "rq-bm25-vs-embeddings", "rq-bm25-hybrid"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "artifacts": [
+        "implement-bm25-highsignal"
+      ],
+      "drills": [
+        "calculate-bm25-score",
+        "implement-bm25-ranker"
+      ],
+      "reviewQuestions": [
+        "rq-bm25-length-norm",
+        "rq-bm25-vs-tfidf",
+        "rq-bm25-vs-embeddings",
+        "rq-bm25-hybrid"
+      ],
       "resources": [
-        { "title": "Okapi BM25 (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Okapi_BM25", "type": "doc" },
-        { "title": "Practical BM25 (Elastic blog)", "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables", "type": "article" }
+        {
+          "title": "Okapi BM25 (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Okapi_BM25",
+          "type": "doc"
+        },
+        {
+          "title": "Practical BM25 (Elastic blog)",
+          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables",
+          "type": "article"
+        }
       ]
     },
     {
@@ -111,8 +186,12 @@
       "subtrack": "evaluation",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["bm25"],
-      "related": ["search-evals"],
+      "prerequisites": [
+        "bm25"
+      ],
+      "related": [
+        "search-evals"
+      ],
       "description": "Precision, recall, MRR, and nDCG for measuring retrieval quality.",
       "mentalModel": "Precision/recall measure set quality; MRR rewards getting one right answer near the top; nDCG rewards graded relevance discounted by rank. Pick the metric that matches what users feel.",
       "commonMistakes": [
@@ -121,9 +200,15 @@
         "Measuring recall without a fixed cutoff k"
       ],
       "realWorldUsage": "Every search/recommendation quality dashboard.",
-      "reviewQuestions": ["rq-mrr-vs-ndcg"],
+      "reviewQuestions": [
+        "rq-mrr-vs-ndcg"
+      ],
       "resources": [
-        { "title": "Stanford IR Book — Evaluation in IR", "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html", "type": "doc" }
+        {
+          "title": "Stanford IR Book — Evaluation in IR",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -134,8 +219,14 @@
       "subtrack": "evaluation",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["ranking-metrics"],
-      "related": ["bm25", "hybrid-search", "llm-evals"],
+      "prerequisites": [
+        "ranking-metrics"
+      ],
+      "related": [
+        "bm25",
+        "hybrid-search",
+        "llm-evals"
+      ],
       "description": "Building a labelled query set and harness to compare retrieval approaches.",
       "mentalModel": "You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever — it turns ranking changes from vibes into numbers.",
       "commonMistakes": [
@@ -144,12 +235,24 @@
         "Too few queries to detect real regressions"
       ],
       "realWorldUsage": "BEIR benchmark, internal relevance suites at every search company.",
-      "projectApplications": ["highsignal"],
-      "artifacts": ["search-eval-harness"],
-      "drills": ["build-search-eval-harness"],
-      "reviewQuestions": ["rq-eval-frozen-set"],
+      "projectApplications": [
+        "highsignal"
+      ],
+      "artifacts": [
+        "search-eval-harness"
+      ],
+      "drills": [
+        "build-search-eval-harness"
+      ],
+      "reviewQuestions": [
+        "rq-eval-frozen-set"
+      ],
       "resources": [
-        { "title": "BEIR: Heterogeneous IR Benchmark", "url": "https://github.com/beir-cellar/beir", "type": "article" }
+        {
+          "title": "BEIR: Heterogeneous IR Benchmark",
+          "url": "https://github.com/beir-cellar/beir",
+          "type": "article"
+        }
       ]
     },
     {
@@ -160,8 +263,15 @@
       "subtrack": "hybrid",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["bm25", "vector-similarity"],
-      "related": ["reranking", "search-evals", "rag"],
+      "prerequisites": [
+        "bm25",
+        "vector-similarity"
+      ],
+      "related": [
+        "reranking",
+        "search-evals",
+        "rag"
+      ],
       "description": "Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.",
       "mentalModel": "Lexical search nails exact terms and rare tokens; vector search captures meaning. Hybrid search runs both and fuses the rankings (commonly Reciprocal Rank Fusion) so you get precision and recall together.",
       "commonMistakes": [
@@ -170,12 +280,25 @@
         "Not re-evaluating after adding the second retriever"
       ],
       "realWorldUsage": "Production RAG retrieval, Elasticsearch hybrid, Weaviate/Qdrant hybrid modes.",
-      "projectApplications": ["highsignal"],
-      "artifacts": ["hybrid-search-v0"],
-      "drills": ["implement-rrf"],
-      "reviewQuestions": ["rq-hybrid-fusion", "rq-bm25-hybrid"],
+      "projectApplications": [
+        "highsignal"
+      ],
+      "artifacts": [
+        "hybrid-search-v0"
+      ],
+      "drills": [
+        "implement-rrf"
+      ],
+      "reviewQuestions": [
+        "rq-hybrid-fusion",
+        "rq-bm25-hybrid"
+      ],
       "resources": [
-        { "title": "Reciprocal Rank Fusion (Cormack et al.)", "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf", "type": "paper" }
+        {
+          "title": "Reciprocal Rank Fusion (Cormack et al.)",
+          "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+          "type": "paper"
+        }
       ]
     },
     {
@@ -186,8 +309,14 @@
       "subtrack": "ranking",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["bm25"],
-      "related": ["hybrid-search", "rag", "search-evals"],
+      "prerequisites": [
+        "bm25"
+      ],
+      "related": [
+        "hybrid-search",
+        "rag",
+        "search-evals"
+      ],
       "description": "A second-stage cross-encoder pass that reorders the top-k candidates.",
       "mentalModel": "Retrieval is recall-oriented and cheap; reranking is precision-oriented and expensive. Retrieve ~100 candidates fast, then run a heavier cross-encoder on just those to reorder the top 10.",
       "commonMistakes": [
@@ -196,10 +325,19 @@
         "Not checking that reranking actually beats the retriever on evals"
       ],
       "realWorldUsage": "Cohere Rerank, cross-encoder rerankers in RAG pipelines.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "reviewQuestions": ["rq-rerank-two-stage"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "reviewQuestions": [
+        "rq-rerank-two-stage"
+      ],
       "resources": [
-        { "title": "Sentence-Transformers — Cross-Encoders", "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html", "type": "doc" }
+        {
+          "title": "Sentence-Transformers — Cross-Encoders",
+          "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -210,11 +348,20 @@
       "subtrack": "ranking",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["tokenization"],
-      "related": ["hybrid-search", "rag"],
+      "prerequisites": [
+        "tokenization"
+      ],
+      "related": [
+        "hybrid-search",
+        "rag"
+      ],
       "description": "Expanding, correcting, and normalizing queries before retrieval.",
       "resources": [
-        { "title": "Stanford IR Book — Query expansion", "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html", "type": "doc" }
+        {
+          "title": "Stanford IR Book — Query expansion",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -225,8 +372,14 @@
       "subtrack": "indexing",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["inverted-index", "storage-retrieval"],
-      "related": ["bm25", "hybrid-search"],
+      "prerequisites": [
+        "inverted-index",
+        "storage-retrieval"
+      ],
+      "related": [
+        "bm25",
+        "hybrid-search"
+      ],
       "description": "Inverted index, ranking, autocomplete at scale."
     },
     {
@@ -238,7 +391,11 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["vector-similarity", "rag", "ml-embeddings"],
+      "related": [
+        "vector-similarity",
+        "rag",
+        "ml-embeddings"
+      ],
       "description": "Mapping text/images into dense vectors where distance encodes meaning.",
       "mentalModel": "An embedding model projects content into a space where 'close' means 'semantically similar'. Search becomes geometry: find the nearest vectors to the query vector.",
       "commonMistakes": [
@@ -247,11 +404,22 @@
         "Ignoring the model's max input length and silently truncating"
       ],
       "realWorldUsage": "OpenAI/Cohere/Voyage embedding APIs, semantic search, RAG retrieval.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "drills": ["embed-and-search"],
-      "reviewQuestions": ["rq-embeddings-space"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "drills": [
+        "embed-and-search"
+      ],
+      "reviewQuestions": [
+        "rq-embeddings-space"
+      ],
       "resources": [
-        { "title": "MTEB: Massive Text Embedding Benchmark", "url": "https://huggingface.co/spaces/mteb/leaderboard", "type": "article" }
+        {
+          "title": "MTEB: Massive Text Embedding Benchmark",
+          "url": "https://huggingface.co/spaces/mteb/leaderboard",
+          "type": "article"
+        }
       ]
     },
     {
@@ -262,8 +430,13 @@
       "subtrack": "similarity",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["embeddings"],
-      "related": ["topk-vector-search", "brute-force-vector-db"],
+      "prerequisites": [
+        "embeddings"
+      ],
+      "related": [
+        "topk-vector-search",
+        "brute-force-vector-db"
+      ],
       "description": "Cosine, dot product, and L2 distance — how to score vector closeness.",
       "mentalModel": "Cosine measures angle (direction), dot product measures angle and magnitude, L2 measures straight-line distance. On normalized vectors cosine and dot product rank identically, and L2 becomes a monotonic function of them.",
       "commonMistakes": [
@@ -272,10 +445,18 @@
         "Assuming the metric does not matter for the chosen index"
       ],
       "realWorldUsage": "Every vector index exposes a metric choice; it must match the embedding model.",
-      "drills": ["implement-similarity-metrics"],
-      "reviewQuestions": ["rq-cosine-vs-dot"],
+      "drills": [
+        "implement-similarity-metrics"
+      ],
+      "reviewQuestions": [
+        "rq-cosine-vs-dot"
+      ],
       "resources": [
-        { "title": "Pinecone — Vector similarity explained", "url": "https://www.pinecone.io/learn/vector-similarity/", "type": "article" }
+        {
+          "title": "Pinecone — Vector similarity explained",
+          "url": "https://www.pinecone.io/learn/vector-similarity/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -286,16 +467,25 @@
       "subtrack": "ann",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["vector-similarity"],
-      "related": ["brute-force-vector-db", "hnsw"],
+      "prerequisites": [
+        "vector-similarity"
+      ],
+      "related": [
+        "brute-force-vector-db",
+        "hnsw"
+      ],
       "description": "Returning the k nearest vectors to a query, exact or approximate.",
       "mentalModel": "Top-k is a bounded selection problem: maintain a size-k min-heap of best candidates while scanning. Exact search scans everything; ANN scans a clever subset.",
       "commonMistakes": [
         "Sorting all scores instead of using a k-sized heap",
         "Confusing recall@k (quality) with k (result count)"
       ],
-      "drills": ["implement-topk-heap"],
-      "reviewQuestions": ["rq-topk-heap"]
+      "drills": [
+        "implement-topk-heap"
+      ],
+      "reviewQuestions": [
+        "rq-topk-heap"
+      ]
     },
     {
       "id": "brute-force-vector-db",
@@ -305,8 +495,14 @@
       "subtrack": "ann",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["vector-similarity", "topk-vector-search"],
-      "related": ["hnsw", "metadata-filtering"],
+      "prerequisites": [
+        "vector-similarity",
+        "topk-vector-search"
+      ],
+      "related": [
+        "hnsw",
+        "metadata-filtering"
+      ],
       "description": "Exact nearest-neighbour search by scanning every vector — the correctness baseline.",
       "mentalModel": "Brute force computes the metric against every stored vector. It is O(n·d) and slow at scale, but it is exact — making it the recall=1.0 baseline that every ANN index is measured against.",
       "commonMistakes": [
@@ -315,12 +511,25 @@
         "Assuming brute force is always too slow — it is fine for <100k vectors"
       ],
       "realWorldUsage": "FAISS IndexFlat, the ground-truth oracle for ANN benchmarks.",
-      "projectApplications": ["tiny-vector-db", "highsignal"],
-      "artifacts": ["tiny-vector-db-brute-force"],
-      "drills": ["build-brute-force-index"],
-      "reviewQuestions": ["rq-bruteforce-baseline"],
+      "projectApplications": [
+        "tiny-vector-db",
+        "highsignal"
+      ],
+      "artifacts": [
+        "tiny-vector-db-brute-force"
+      ],
+      "drills": [
+        "build-brute-force-index"
+      ],
+      "reviewQuestions": [
+        "rq-bruteforce-baseline"
+      ],
       "resources": [
-        { "title": "FAISS — Getting started", "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started", "type": "doc" }
+        {
+          "title": "FAISS — Getting started",
+          "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -331,8 +540,13 @@
       "subtrack": "ann",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["brute-force-vector-db"],
-      "related": ["ivf", "recall-latency-tradeoffs"],
+      "prerequisites": [
+        "brute-force-vector-db"
+      ],
+      "related": [
+        "ivf",
+        "recall-latency-tradeoffs"
+      ],
       "description": "Hierarchical Navigable Small World graphs — the dominant ANN index.",
       "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.",
       "commonMistakes": [
@@ -341,11 +555,22 @@
         "Expecting exact results — it is approximate by design"
       ],
       "realWorldUsage": "Default index in Qdrant, Weaviate, pgvector, Lucene/Elasticsearch kNN.",
-      "projectApplications": ["tiny-vector-db"],
-      "drills": ["explain-hnsw-layers"],
-      "reviewQuestions": ["rq-hnsw-layers", "rq-hnsw-recall-tradeoff"],
+      "projectApplications": [
+        "tiny-vector-db"
+      ],
+      "drills": [
+        "explain-hnsw-layers"
+      ],
+      "reviewQuestions": [
+        "rq-hnsw-layers",
+        "rq-hnsw-recall-tradeoff"
+      ],
       "resources": [
-        { "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)", "url": "https://arxiv.org/abs/1603.09320", "type": "paper" }
+        {
+          "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+          "url": "https://arxiv.org/abs/1603.09320",
+          "type": "paper"
+        }
       ]
     },
     {
@@ -356,8 +581,13 @@
       "subtrack": "ann",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["brute-force-vector-db"],
-      "related": ["hnsw", "product-quantization"],
+      "prerequisites": [
+        "brute-force-vector-db"
+      ],
+      "related": [
+        "hnsw",
+        "product-quantization"
+      ],
       "description": "Cluster vectors with k-means, then search only the nearest cells (nprobe).",
       "mentalModel": "IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned — trading recall for a big speedup.",
       "commonMistakes": [
@@ -365,9 +595,15 @@
         "Too few or too many centroids for the dataset size"
       ],
       "realWorldUsage": "FAISS IVF indexes, often combined with product quantization (IVF-PQ).",
-      "reviewQuestions": ["rq-ivf-nprobe"],
+      "reviewQuestions": [
+        "rq-ivf-nprobe"
+      ],
       "resources": [
-        { "title": "Pinecone — IVF index", "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/", "type": "article" }
+        {
+          "title": "Pinecone — IVF index",
+          "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -378,8 +614,12 @@
       "subtrack": "quantization",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["ivf"],
-      "related": ["recall-latency-tradeoffs"],
+      "prerequisites": [
+        "ivf"
+      ],
+      "related": [
+        "recall-latency-tradeoffs"
+      ],
       "description": "Compress vectors into sub-space codebooks for tiny memory footprint.",
       "mentalModel": "PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) shrinks to a handful of bytes, at the cost of approximate distances.",
       "commonMistakes": [
@@ -387,9 +627,15 @@
         "Too-aggressive compression that destroys recall"
       ],
       "realWorldUsage": "FAISS IVF-PQ, billion-scale vector search under a memory budget.",
-      "reviewQuestions": ["rq-pq-memory"],
+      "reviewQuestions": [
+        "rq-pq-memory"
+      ],
       "resources": [
-        { "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)", "url": "https://ieeexplore.ieee.org/document/5432202", "type": "paper" }
+        {
+          "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
+          "url": "https://ieeexplore.ieee.org/document/5432202",
+          "type": "paper"
+        }
       ]
     },
     {
@@ -400,8 +646,13 @@
       "subtrack": "filtering",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["brute-force-vector-db"],
-      "related": ["hnsw", "rag"],
+      "prerequisites": [
+        "brute-force-vector-db"
+      ],
+      "related": [
+        "hnsw",
+        "rag"
+      ],
       "description": "Combining vector search with structured predicates (tenant, date, tags).",
       "mentalModel": "Real queries are 'nearest vectors WHERE tenant=X AND date>Y'. Pre-filtering shrinks the candidate set before ANN (accurate, can be slow); post-filtering runs ANN then drops misses (fast, can return too few). The hard part is doing it inside a graph index.",
       "commonMistakes": [
@@ -410,10 +661,19 @@
         "Ignoring multi-tenancy isolation in a shared index"
       ],
       "realWorldUsage": "Every production vector DB; critical for multi-tenant RAG.",
-      "projectApplications": ["tiny-vector-db", "highsignal"],
-      "artifacts": ["vector-metadata-filter"],
-      "drills": ["implement-metadata-filter"],
-      "reviewQuestions": ["rq-pre-vs-post-filter"]
+      "projectApplications": [
+        "tiny-vector-db",
+        "highsignal"
+      ],
+      "artifacts": [
+        "vector-metadata-filter"
+      ],
+      "drills": [
+        "implement-metadata-filter"
+      ],
+      "reviewQuestions": [
+        "rq-pre-vs-post-filter"
+      ]
     },
     {
       "id": "recall-latency-tradeoffs",
@@ -423,8 +683,13 @@
       "subtrack": "ann",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["hnsw"],
-      "related": ["ivf", "product-quantization"],
+      "prerequisites": [
+        "hnsw"
+      ],
+      "related": [
+        "ivf",
+        "product-quantization"
+      ],
       "description": "Reading recall-vs-latency curves to choose ANN parameters.",
       "mentalModel": "Every ANN knob trades recall for speed/memory. The honest artifact is a curve: recall on the y-axis, latency (or QPS, or memory) on the x-axis, with brute force as the recall=1.0 anchor.",
       "commonMistakes": [
@@ -432,10 +697,18 @@
         "Comparing indexes at different recall operating points"
       ],
       "realWorldUsage": "ann-benchmarks.com, every vector DB selection decision.",
-      "artifacts": ["recall-latency-dashboard"],
-      "reviewQuestions": ["rq-recall-latency-curve"],
+      "artifacts": [
+        "recall-latency-dashboard"
+      ],
+      "reviewQuestions": [
+        "rq-recall-latency-curve"
+      ],
       "resources": [
-        { "title": "ANN-Benchmarks", "url": "https://ann-benchmarks.com/", "type": "article" }
+        {
+          "title": "ANN-Benchmarks",
+          "url": "https://ann-benchmarks.com/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -446,8 +719,15 @@
       "subtrack": "rag",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["embeddings"],
-      "related": ["chunking", "hybrid-search", "reranking", "context-packing"],
+      "prerequisites": [
+        "embeddings"
+      ],
+      "related": [
+        "chunking",
+        "hybrid-search",
+        "reranking",
+        "context-packing"
+      ],
       "description": "Retrieval-Augmented Generation: ground an LLM answer in retrieved context.",
       "mentalModel": "RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval — a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.",
       "commonMistakes": [
@@ -457,12 +737,26 @@
         "Skipping reranking and hybrid retrieval"
       ],
       "realWorldUsage": "Doc Q&A, support bots, code assistants, HighSignal's intelligence engine.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "artifacts": ["rag-pipeline-v0"],
-      "drills": ["build-rag-pipeline"],
-      "reviewQuestions": ["rq-rag-quality-ceiling", "rq-rag-vs-finetune"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "artifacts": [
+        "rag-pipeline-v0"
+      ],
+      "drills": [
+        "build-rag-pipeline"
+      ],
+      "reviewQuestions": [
+        "rq-rag-quality-ceiling",
+        "rq-rag-vs-finetune"
+      ],
       "resources": [
-        { "title": "Retrieval-Augmented Generation (Lewis et al.)", "url": "https://arxiv.org/abs/2005.11401", "type": "paper" }
+        {
+          "title": "Retrieval-Augmented Generation (Lewis et al.)",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "type": "paper"
+        }
       ]
     },
     {
@@ -473,8 +767,13 @@
       "subtrack": "rag",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["rag"],
-      "related": ["context-packing", "embeddings"],
+      "prerequisites": [
+        "rag"
+      ],
+      "related": [
+        "context-packing",
+        "embeddings"
+      ],
       "description": "Splitting documents into retrievable units that preserve meaning.",
       "mentalModel": "A chunk is the atomic unit of retrieval — too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.",
       "commonMistakes": [
@@ -483,11 +782,22 @@
         "One chunk strategy for every document type"
       ],
       "realWorldUsage": "Every RAG ingestion pipeline.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "drills": ["build-chunker"],
-      "reviewQuestions": ["rq-chunk-size-tradeoff"],
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "drills": [
+        "build-chunker"
+      ],
+      "reviewQuestions": [
+        "rq-chunk-size-tradeoff"
+      ],
       "resources": [
-        { "title": "Pinecone — Chunking strategies", "url": "https://www.pinecone.io/learn/chunking-strategies/", "type": "article" }
+        {
+          "title": "Pinecone — Chunking strategies",
+          "url": "https://www.pinecone.io/learn/chunking-strategies/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -498,15 +808,22 @@
       "subtrack": "rag",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["chunking"],
-      "related": ["rag", "reranking"],
+      "prerequisites": [
+        "chunking"
+      ],
+      "related": [
+        "rag",
+        "reranking"
+      ],
       "description": "Ordering and budgeting retrieved context within the model's window.",
       "mentalModel": "Context is a budget. Models attend unevenly (lost-in-the-middle), so order matters: put the strongest evidence at the edges, dedupe, and cut before you overflow.",
       "commonMistakes": [
         "Filling the whole window because it is available",
         "Ignoring position effects on attention"
       ],
-      "reviewQuestions": ["rq-lost-in-middle"]
+      "reviewQuestions": [
+        "rq-lost-in-middle"
+      ]
     },
     {
       "id": "structured-outputs",
@@ -517,7 +834,10 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["tool-calling", "llm-evals"],
+      "related": [
+        "tool-calling",
+        "llm-evals"
+      ],
       "description": "Forcing LLM output into a validated JSON schema.",
       "mentalModel": "Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust — or reject.",
       "commonMistakes": [
@@ -526,11 +846,22 @@
         "Over-nesting schemas the model cannot reliably fill"
       ],
       "realWorldUsage": "Function arguments, extraction pipelines, agent state, every LLM-to-code boundary.",
-      "projectApplications": ["codevetter", "highsignal"],
-      "drills": ["structured-extraction"],
-      "reviewQuestions": ["rq-structured-why"],
+      "projectApplications": [
+        "codevetter",
+        "highsignal"
+      ],
+      "drills": [
+        "structured-extraction"
+      ],
+      "reviewQuestions": [
+        "rq-structured-why"
+      ],
       "resources": [
-        { "title": "OpenAI — Structured Outputs", "url": "https://platform.openai.com/docs/guides/structured-outputs", "type": "doc" }
+        {
+          "title": "OpenAI — Structured Outputs",
+          "url": "https://platform.openai.com/docs/guides/structured-outputs",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -541,8 +872,13 @@
       "subtrack": "agents",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["structured-outputs"],
-      "related": ["agent-loops", "rag"],
+      "prerequisites": [
+        "structured-outputs"
+      ],
+      "related": [
+        "agent-loops",
+        "rag"
+      ],
       "description": "Letting an LLM invoke functions/APIs via structured calls.",
       "mentalModel": "Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code — it decides what to run.",
       "commonMistakes": [
@@ -551,11 +887,22 @@
         "Letting tools take dangerous actions without approval"
       ],
       "realWorldUsage": "MCP servers, agent frameworks, Claude/OpenAI tool use.",
-      "projectApplications": ["codevetter", "aliveville"],
-      "drills": ["build-tool-loop"],
-      "reviewQuestions": ["rq-tool-planner"],
+      "projectApplications": [
+        "codevetter",
+        "aliveville"
+      ],
+      "drills": [
+        "build-tool-loop"
+      ],
+      "reviewQuestions": [
+        "rq-tool-planner"
+      ],
       "resources": [
-        { "title": "Anthropic — Tool use", "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use", "type": "doc" }
+        {
+          "title": "Anthropic — Tool use",
+          "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -566,8 +913,13 @@
       "subtrack": "agents",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["tool-calling"],
-      "related": ["context-packing", "llm-evals"],
+      "prerequisites": [
+        "tool-calling"
+      ],
+      "related": [
+        "context-packing",
+        "llm-evals"
+      ],
       "description": "The plan → act → observe loop, with memory and stopping conditions.",
       "mentalModel": "An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done. The engineering is in the guardrails — step limits, memory, and human approval — not the prompt.",
       "commonMistakes": [
@@ -576,8 +928,13 @@
         "No human approval gate for irreversible actions"
       ],
       "realWorldUsage": "Coding agents, research agents, Aliveville's agent world.",
-      "projectApplications": ["aliveville", "codevetter"],
-      "reviewQuestions": ["rq-agent-stopping"]
+      "projectApplications": [
+        "aliveville",
+        "codevetter"
+      ],
+      "reviewQuestions": [
+        "rq-agent-stopping"
+      ]
     },
     {
       "id": "model-routing",
@@ -587,8 +944,13 @@
       "subtrack": "llm-apps",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["structured-outputs"],
-      "related": ["llm-evals", "prompt-versioning"],
+      "prerequisites": [
+        "structured-outputs"
+      ],
+      "related": [
+        "llm-evals",
+        "prompt-versioning"
+      ],
       "description": "Sending each request to the cheapest model that can handle it.",
       "mentalModel": "Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones — with cost and latency tracked per route.",
       "commonMistakes": [
@@ -596,9 +958,16 @@
         "No fallback when the cheap model fails"
       ],
       "realWorldUsage": "Cost optimization in production LLM apps, the free-AI-first principle.",
-      "projectApplications": ["sassmaker", "highsignal"],
-      "artifacts": ["model-router"],
-      "reviewQuestions": ["rq-routing-eval"]
+      "projectApplications": [
+        "sassmaker",
+        "highsignal"
+      ],
+      "artifacts": [
+        "model-router"
+      ],
+      "reviewQuestions": [
+        "rq-routing-eval"
+      ]
     },
     {
       "id": "prompt-versioning",
@@ -609,10 +978,17 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["llm-evals", "model-routing"],
+      "related": [
+        "llm-evals",
+        "model-routing"
+      ],
       "description": "Treating prompts as versioned artifacts with logged inputs/outputs.",
       "resources": [
-        { "title": "PostHog — LLM analytics", "url": "https://posthog.com/docs/ai-engineering", "type": "doc" }
+        {
+          "title": "PostHog — LLM analytics",
+          "url": "https://posthog.com/docs/ai-engineering",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -623,8 +999,14 @@
       "subtrack": "evals",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["structured-outputs"],
-      "related": ["search-evals", "model-routing", "ml-evaluation"],
+      "prerequisites": [
+        "structured-outputs"
+      ],
+      "related": [
+        "search-evals",
+        "model-routing",
+        "ml-evaluation"
+      ],
       "description": "Measuring LLM output quality with datasets, graders, and LLM-as-judge.",
       "mentalModel": "Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change.",
       "commonMistakes": [
@@ -633,12 +1015,25 @@
         "Eval set that does not cover real failure modes"
       ],
       "realWorldUsage": "Every serious LLM product; regression gates in CI.",
-      "projectApplications": ["codevetter", "highsignal"],
-      "artifacts": ["llm-eval-harness"],
-      "drills": ["build-llm-eval"],
-      "reviewQuestions": ["rq-llm-judge-validate"],
+      "projectApplications": [
+        "codevetter",
+        "highsignal"
+      ],
+      "artifacts": [
+        "llm-eval-harness"
+      ],
+      "drills": [
+        "build-llm-eval"
+      ],
+      "reviewQuestions": [
+        "rq-llm-judge-validate"
+      ],
       "resources": [
-        { "title": "Your AI product needs evals (Hamel Husain)", "url": "https://hamel.dev/blog/posts/evals/", "type": "article" }
+        {
+          "title": "Your AI product needs evals (Hamel Husain)",
+          "url": "https://hamel.dev/blog/posts/evals/",
+          "type": "article"
+        }
       ]
     },
     {
@@ -650,7 +1045,9 @@
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
-      "related": ["ml-gradient-descent"],
+      "related": [
+        "ml-gradient-descent"
+      ],
       "description": "Vectors, matrices, dot products, matmul, shapes."
     },
     {
@@ -661,8 +1058,12 @@
       "subtrack": "foundations",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["ml-math"],
-      "related": ["ml-backprop"],
+      "prerequisites": [
+        "ml-math"
+      ],
+      "related": [
+        "ml-backprop"
+      ],
       "description": "Loss surfaces, learning rate, SGD steps."
     },
     {
@@ -673,8 +1074,12 @@
       "subtrack": "foundations",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["ml-gradient-descent"],
-      "related": ["ml-adamw"],
+      "prerequisites": [
+        "ml-gradient-descent"
+      ],
+      "related": [
+        "ml-adamw"
+      ],
       "description": "Chain rule, autograd, forward/backward passes."
     },
     {
@@ -685,8 +1090,12 @@
       "subtrack": "foundations",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-math"],
-      "related": ["ml-language-modeling"],
+      "prerequisites": [
+        "ml-math"
+      ],
+      "related": [
+        "ml-language-modeling"
+      ],
       "description": "Logits to probabilities, negative log-likelihood loss."
     },
     {
@@ -697,8 +1106,12 @@
       "subtrack": "foundations",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-backprop"],
-      "related": ["ml-training"],
+      "prerequisites": [
+        "ml-backprop"
+      ],
+      "related": [
+        "ml-training"
+      ],
       "description": "Moments, weight decay, gradient clipping."
     },
     {
@@ -710,7 +1123,10 @@
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
-      "related": ["tokenization", "ml-language-modeling"],
+      "related": [
+        "tokenization",
+        "ml-language-modeling"
+      ],
       "description": "Byte-level, char-level, BPE, vocab design."
     },
     {
@@ -721,8 +1137,13 @@
       "subtrack": "language-modeling",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["ml-tokenization", "ml-softmax-xent"],
-      "related": ["ml-sampling"],
+      "prerequisites": [
+        "ml-tokenization",
+        "ml-softmax-xent"
+      ],
+      "related": [
+        "ml-sampling"
+      ],
       "description": "Next-token prediction, context windows, perplexity."
     },
     {
@@ -733,8 +1154,12 @@
       "subtrack": "language-modeling",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-language-modeling"],
-      "related": ["ml-evaluation"],
+      "prerequisites": [
+        "ml-language-modeling"
+      ],
+      "related": [
+        "ml-evaluation"
+      ],
       "description": "Temperature, top-k, greedy decoding."
     },
     {
@@ -745,8 +1170,13 @@
       "subtrack": "transformers",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-language-modeling"],
-      "related": ["ml-self-attention", "embeddings"],
+      "prerequisites": [
+        "ml-language-modeling"
+      ],
+      "related": [
+        "ml-self-attention",
+        "embeddings"
+      ],
       "description": "Token & position embeddings, tied weights."
     },
     {
@@ -757,9 +1187,26 @@
       "subtrack": "transformers",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["ml-embeddings"],
-      "related": ["ml-multi-head"],
-      "description": "Q/K/V, scaled dot-product, causal masking."
+      "prerequisites": [
+        "ml-embeddings"
+      ],
+      "related": [
+        "ml-multi-head"
+      ],
+      "description": "Q/K/V, scaled dot-product, causal masking.",
+      "mentalModel": "Self-attention lets every token look at every other token and pull in what is relevant. Each token emits a query, a key, and a value; the query-key dot products (scaled, softmaxed) become weights over the values. Causal masking blocks a token from seeing the future.",
+      "commonMistakes": [
+        "Forgetting the 1/sqrt(d_k) scaling, which destabilizes the softmax",
+        "Omitting the causal mask in a decoder, leaking future tokens",
+        "Confusing the query/key/value roles"
+      ],
+      "resources": [
+        {
+          "title": "The Illustrated Transformer",
+          "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "ml-multi-head",
@@ -769,8 +1216,12 @@
       "subtrack": "transformers",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["ml-self-attention"],
-      "related": ["ml-transformer-block"],
+      "prerequisites": [
+        "ml-self-attention"
+      ],
+      "related": [
+        "ml-transformer-block"
+      ],
       "description": "Parallel heads, head_dim split, output projection."
     },
     {
@@ -781,9 +1232,27 @@
       "subtrack": "transformers",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["ml-multi-head", "ml-adamw"],
-      "related": ["ml-training"],
-      "description": "Pre-LayerNorm, residuals, MLP, GELU."
+      "prerequisites": [
+        "ml-multi-head",
+        "ml-adamw"
+      ],
+      "related": [
+        "ml-training"
+      ],
+      "description": "Pre-LayerNorm, residuals, MLP, GELU.",
+      "mentalModel": "A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.",
+      "commonMistakes": [
+        "Dropping residual connections and watching deep models fail to train",
+        "Post-LayerNorm placement causing instability in deep stacks",
+        "Mismatched dimensions between the attention output and the MLP"
+      ],
+      "resources": [
+        {
+          "title": "The Illustrated Transformer",
+          "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "ml-training",
@@ -793,8 +1262,13 @@
       "subtrack": "training",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["ml-transformer-block"],
-      "related": ["ml-checkpointing", "ml-lora"],
+      "prerequisites": [
+        "ml-transformer-block"
+      ],
+      "related": [
+        "ml-checkpointing",
+        "ml-lora"
+      ],
       "description": "Init, NaNs, overfit tests, gradient checks."
     },
     {
@@ -805,8 +1279,12 @@
       "subtrack": "training",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-training"],
-      "related": ["ml-browser-runtime"],
+      "prerequisites": [
+        "ml-training"
+      ],
+      "related": [
+        "ml-browser-runtime"
+      ],
       "description": "Weights + optimizer state, resume, dataset manifests."
     },
     {
@@ -817,8 +1295,12 @@
       "subtrack": "training",
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["ml-training"],
-      "related": ["ml-data-engineering"],
+      "prerequisites": [
+        "ml-training"
+      ],
+      "related": [
+        "ml-data-engineering"
+      ],
       "description": "Frozen base, low-rank adapters, rank/alpha."
     },
     {
@@ -829,8 +1311,12 @@
       "subtrack": "training",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["ml-lora"],
-      "related": ["ml-evaluation"],
+      "prerequisites": [
+        "ml-lora"
+      ],
+      "related": [
+        "ml-evaluation"
+      ],
       "description": "Cleaning, dedup, JSONL tasks, memorization tests."
     },
     {
@@ -841,8 +1327,12 @@
       "subtrack": "runtime",
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["ml-checkpointing"],
-      "related": ["ml-webgpu"],
+      "prerequisites": [
+        "ml-checkpointing"
+      ],
+      "related": [
+        "ml-webgpu"
+      ],
       "description": "Web Workers, WASM, OPFS, TypedArrays."
     },
     {
@@ -853,7 +1343,10 @@
       "subtrack": "runtime",
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["ml-browser-runtime", "ml-transformer-block"],
+      "prerequisites": [
+        "ml-browser-runtime",
+        "ml-transformer-block"
+      ],
       "related": [],
       "description": "WGSL, compute kernels, matmul, CPU parity."
     },
@@ -865,8 +1358,13 @@
       "subtrack": "evals",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["ml-lora", "ml-sampling"],
-      "related": ["llm-evals"],
+      "prerequisites": [
+        "ml-lora",
+        "ml-sampling"
+      ],
+      "related": [
+        "llm-evals"
+      ],
       "description": "Held-out loss, baselines, hallucination, leakage."
     },
     {
@@ -878,7 +1376,10 @@
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
-      "related": ["api-design", "caching"],
+      "related": [
+        "api-design",
+        "caching"
+      ],
       "description": "DNS → TCP/TLS → request → response: status codes, headers, keep-alive.",
       "mentalModel": "An HTTP request is a journey: resolve DNS, open a TCP connection, negotiate TLS, send the request, the server routes and responds, the connection is reused or closed. Latency and failures hide in each hop.",
       "commonMistakes": [
@@ -887,9 +1388,15 @@
         "Treating all 5xx as retryable and all 4xx as not"
       ],
       "realWorldUsage": "Every web service; the substrate under API design.",
-      "reviewQuestions": ["rq-http-status"],
+      "reviewQuestions": [
+        "rq-http-status"
+      ],
       "resources": [
-        { "title": "MDN — An overview of HTTP", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview", "type": "doc" }
+        {
+          "title": "MDN — An overview of HTTP",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -900,8 +1407,13 @@
       "subtrack": "auth",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["http-lifecycle"],
-      "related": ["auth-systems", "rate-limiting"],
+      "prerequisites": [
+        "http-lifecycle"
+      ],
+      "related": [
+        "auth-systems",
+        "rate-limiting"
+      ],
       "description": "Issuing, hashing, scoping, and rotating keys for machine clients.",
       "mentalModel": "An API key identifies a machine caller. Store only a hash (like a password), show the secret once, attach scopes, and support rotation — because a leaked key is inevitable.",
       "commonMistakes": [
@@ -910,9 +1422,16 @@
         "No rotation or revocation path"
       ],
       "realWorldUsage": "Stripe, OpenAI, every developer platform.",
-      "projectApplications": ["codevetter", "sassmaker"],
-      "artifacts": ["api-key-system"],
-      "reviewQuestions": ["rq-api-key-storage"]
+      "projectApplications": [
+        "codevetter",
+        "sassmaker"
+      ],
+      "artifacts": [
+        "api-key-system"
+      ],
+      "reviewQuestions": [
+        "rq-api-key-storage"
+      ]
     },
     {
       "id": "rate-limiting",
@@ -922,8 +1441,13 @@
       "subtrack": "rate-limiting",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["http-lifecycle"],
-      "related": ["api-keys", "idempotency"],
+      "prerequisites": [
+        "http-lifecycle"
+      ],
+      "related": [
+        "api-keys",
+        "idempotency"
+      ],
       "description": "Token bucket, leaky bucket, sliding window.",
       "mentalModel": "Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 — allowing bursts up to the bucket size.",
       "commonMistakes": [
@@ -932,10 +1456,19 @@
         "No Retry-After header on 429 responses"
       ],
       "realWorldUsage": "API gateways, every public API.",
-      "projectApplications": ["codevetter", "sassmaker"],
-      "artifacts": ["rate-limiter"],
-      "drills": ["implement-token-bucket"],
-      "reviewQuestions": ["rq-token-vs-leaky"]
+      "projectApplications": [
+        "codevetter",
+        "sassmaker"
+      ],
+      "artifacts": [
+        "rate-limiter"
+      ],
+      "drills": [
+        "implement-token-bucket"
+      ],
+      "reviewQuestions": [
+        "rq-token-vs-leaky"
+      ]
     },
     {
       "id": "idempotency",
@@ -945,8 +1478,13 @@
       "subtrack": "idempotency",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["http-lifecycle"],
-      "related": ["retries-dlq", "ecommerce-payments"],
+      "prerequisites": [
+        "http-lifecycle"
+      ],
+      "related": [
+        "retries-dlq",
+        "ecommerce-payments"
+      ],
       "description": "Idempotency keys and dedup windows for safe retries of mutations.",
       "mentalModel": "Networks make retries inevitable, and retrying a POST can charge a card twice. An idempotency key lets the client say 'this is the same operation' — the server stores the first result and replays it for duplicates.",
       "commonMistakes": [
@@ -955,11 +1493,21 @@
         "Race between two concurrent requests with the same key"
       ],
       "realWorldUsage": "Stripe payments, any mutating API that clients retry.",
-      "projectApplications": ["codevetter"],
-      "drills": ["implement-idempotency-key"],
-      "reviewQuestions": ["rq-idempotency-why"],
+      "projectApplications": [
+        "codevetter"
+      ],
+      "drills": [
+        "implement-idempotency-key"
+      ],
+      "reviewQuestions": [
+        "rq-idempotency-why"
+      ],
       "resources": [
-        { "title": "Stripe — Designing robust APIs with idempotency", "url": "https://stripe.com/blog/idempotency", "type": "article" }
+        {
+          "title": "Stripe — Designing robust APIs with idempotency",
+          "url": "https://stripe.com/blog/idempotency",
+          "type": "article"
+        }
       ]
     },
     {
@@ -970,8 +1518,13 @@
       "subtrack": "queues",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["idempotency"],
-      "related": ["message-queues", "background-jobs"],
+      "prerequisites": [
+        "idempotency"
+      ],
+      "related": [
+        "message-queues",
+        "background-jobs"
+      ],
       "description": "Backoff + jitter, poison messages, dead-letter queues.",
       "mentalModel": "Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable.",
       "commonMistakes": [
@@ -981,10 +1534,20 @@
         "Retrying non-idempotent work and causing double effects"
       ],
       "realWorldUsage": "SQS/Kafka consumers, every background job system.",
-      "projectApplications": ["highsignal", "codevetter"],
-      "artifacts": ["job-queue-retries"],
-      "drills": ["implement-backoff-jitter"],
-      "reviewQuestions": ["rq-dlq-purpose", "rq-jitter-why"]
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "artifacts": [
+        "job-queue-retries"
+      ],
+      "drills": [
+        "implement-backoff-jitter"
+      ],
+      "reviewQuestions": [
+        "rq-dlq-purpose",
+        "rq-jitter-why"
+      ]
     },
     {
       "id": "webhooks",
@@ -994,11 +1557,19 @@
       "subtrack": "webhooks",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["retries-dlq"],
-      "related": ["idempotency"],
+      "prerequisites": [
+        "retries-dlq"
+      ],
+      "related": [
+        "idempotency"
+      ],
       "description": "Outbound event delivery: signing, retries, idempotent receivers.",
       "resources": [
-        { "title": "Stripe — Webhooks", "url": "https://docs.stripe.com/webhooks", "type": "doc" }
+        {
+          "title": "Stripe — Webhooks",
+          "url": "https://docs.stripe.com/webhooks",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1009,8 +1580,12 @@
       "subtrack": "jobs",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["message-queues"],
-      "related": ["retries-dlq"],
+      "prerequisites": [
+        "message-queues"
+      ],
+      "related": [
+        "retries-dlq"
+      ],
       "description": "Offloading slow work to workers: scheduling, concurrency, visibility."
     },
     {
@@ -1021,8 +1596,13 @@
       "subtrack": "caching",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["http-lifecycle"],
-      "related": ["object-storage", "load-balancing"],
+      "prerequisites": [
+        "http-lifecycle"
+      ],
+      "related": [
+        "object-storage",
+        "load-balancing"
+      ],
       "description": "Cache-aside, write-through, eviction policies.",
       "mentalModel": "A cache trades memory and staleness for speed. The hard parts are not the hit — they are invalidation, the stampede when a hot key expires, and deciding how stale is acceptable.",
       "commonMistakes": [
@@ -1031,7 +1611,9 @@
         "Caching per-user data in a shared key"
       ],
       "realWorldUsage": "Redis/Memcached, CDN edges, HTTP caching.",
-      "reviewQuestions": ["rq-cache-invalidation"]
+      "reviewQuestions": [
+        "rq-cache-invalidation"
+      ]
     },
     {
       "id": "message-queues",
@@ -1042,7 +1624,10 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["retries-dlq", "background-jobs"],
+      "related": [
+        "retries-dlq",
+        "background-jobs"
+      ],
       "description": "Kafka, SQS, exactly-once vs at-least-once.",
       "mentalModel": "A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. 'Exactly once' is mostly a myth — design for at-least-once delivery plus idempotent consumers.",
       "commonMistakes": [
@@ -1051,8 +1636,12 @@
         "Ignoring ordering guarantees (or their absence)"
       ],
       "realWorldUsage": "Kafka, SQS, RabbitMQ; ingestion and event pipelines.",
-      "projectApplications": ["highsignal"],
-      "reviewQuestions": ["rq-exactly-once"]
+      "projectApplications": [
+        "highsignal"
+      ],
+      "reviewQuestions": [
+        "rq-exactly-once"
+      ]
     },
     {
       "id": "monitoring-analytics",
@@ -1063,7 +1652,9 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["api-design"],
+      "related": [
+        "api-design"
+      ],
       "description": "Metrics, traces, logs, SLOs.",
       "mentalModel": "The three pillars answer different questions: metrics say something is wrong, traces say where, logs say why. Structured logs and a request id stitch them together.",
       "commonMistakes": [
@@ -1072,9 +1663,16 @@
         "No correlation id across services"
       ],
       "realWorldUsage": "OpenTelemetry, Datadog, PostHog, every production service.",
-      "projectApplications": ["codevetter", "highsignal"],
-      "artifacts": ["structured-logging"],
-      "reviewQuestions": ["rq-three-pillars"]
+      "projectApplications": [
+        "codevetter",
+        "highsignal"
+      ],
+      "artifacts": [
+        "structured-logging"
+      ],
+      "reviewQuestions": [
+        "rq-three-pillars"
+      ]
     },
     {
       "id": "api-design",
@@ -1084,8 +1682,13 @@
       "subtrack": "api-design",
       "difficulty": "core",
       "priority": 5,
-      "prerequisites": ["http-lifecycle"],
-      "related": ["auth-systems", "idempotency"],
+      "prerequisites": [
+        "http-lifecycle"
+      ],
+      "related": [
+        "auth-systems",
+        "idempotency"
+      ],
       "description": "REST, gRPC, versioning, pagination.",
       "mentalModel": "An API is a contract you cannot easily change. Design for evolution: version it, paginate every list, make errors machine-readable, and keep resources consistent.",
       "commonMistakes": [
@@ -1094,8 +1697,13 @@
         "Inconsistent error shapes across endpoints"
       ],
       "realWorldUsage": "Every backend; the Codevetter and HighSignal public surfaces.",
-      "projectApplications": ["codevetter", "highsignal"],
-      "reviewQuestions": ["rq-api-pagination"]
+      "projectApplications": [
+        "codevetter",
+        "highsignal"
+      ],
+      "reviewQuestions": [
+        "rq-api-pagination"
+      ]
     },
     {
       "id": "auth-systems",
@@ -1105,8 +1713,12 @@
       "subtrack": "auth",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["api-design"],
-      "related": ["api-keys"],
+      "prerequisites": [
+        "api-design"
+      ],
+      "related": [
+        "api-keys"
+      ],
       "description": "OAuth2, JWT, session, RBAC.",
       "mentalModel": "Authentication proves who you are; authorization decides what you may do. JWTs are stateless and fast but hard to revoke; sessions are revocable but need a store. Pick per the revocation requirement.",
       "commonMistakes": [
@@ -1115,7 +1727,9 @@
         "Trusting client-supplied roles"
       ],
       "realWorldUsage": "OAuth2/OIDC, every multi-user product.",
-      "reviewQuestions": ["rq-jwt-vs-session"]
+      "reviewQuestions": [
+        "rq-jwt-vs-session"
+      ]
     },
     {
       "id": "ecommerce-payments",
@@ -1125,8 +1739,13 @@
       "subtrack": "payments",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["idempotency", "replication"],
-      "related": ["idempotency"],
+      "prerequisites": [
+        "idempotency",
+        "replication"
+      ],
+      "related": [
+        "idempotency"
+      ],
       "description": "Idempotency, sagas, double-entry."
     },
     {
@@ -1138,7 +1757,11 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["lsm-tree", "secondary-index", "storage-retrieval"],
+      "related": [
+        "lsm-tree",
+        "secondary-index",
+        "storage-retrieval"
+      ],
       "description": "The balanced, disk-friendly tree behind most relational indexes.",
       "mentalModel": "A B-tree is a wide, shallow tree sized to disk pages: each node holds many keys so the tree stays ~3-4 levels deep even for billions of rows. Reads are fast and in-place; writes do random page updates.",
       "commonMistakes": [
@@ -1147,10 +1770,19 @@
         "Forgetting that B-trees keep keys sorted, enabling range scans"
       ],
       "realWorldUsage": "PostgreSQL, MySQL/InnoDB, SQLite — the default index.",
-      "projectApplications": ["tiny-search-engine"],
-      "reviewQuestions": ["rq-btree-vs-lsm", "rq-btree-page-size"],
+      "projectApplications": [
+        "tiny-search-engine"
+      ],
+      "reviewQuestions": [
+        "rq-btree-vs-lsm",
+        "rq-btree-page-size"
+      ],
       "resources": [
-        { "title": "CMU 15-445 — Tree indexes", "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf", "type": "doc" }
+        {
+          "title": "CMU 15-445 — Tree indexes",
+          "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1161,8 +1793,13 @@
       "subtrack": "storage-engines",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["wal"],
-      "related": ["b-tree", "compaction"],
+      "prerequisites": [
+        "wal"
+      ],
+      "related": [
+        "b-tree",
+        "compaction"
+      ],
       "description": "Log-structured merge tree: write-optimized storage via sorted runs.",
       "mentalModel": "An LSM tree turns random writes into sequential ones: buffer writes in an in-memory memtable, flush to immutable sorted files (SSTables), and merge them in the background. Writes are fast; reads may touch several files (bloom filters help).",
       "commonMistakes": [
@@ -1171,12 +1808,25 @@
         "Forgetting that deletes are tombstones, not removals"
       ],
       "realWorldUsage": "RocksDB, Cassandra, LevelDB, ScyllaDB; the write-heavy storage engine.",
-      "projectApplications": ["tiny-search-engine"],
-      "artifacts": ["toy-lsm"],
-      "drills": ["build-memtable-sstable"],
-      "reviewQuestions": ["rq-btree-vs-lsm", "rq-lsm-read-amp"],
+      "projectApplications": [
+        "tiny-search-engine"
+      ],
+      "artifacts": [
+        "toy-lsm"
+      ],
+      "drills": [
+        "build-memtable-sstable"
+      ],
+      "reviewQuestions": [
+        "rq-btree-vs-lsm",
+        "rq-lsm-read-amp"
+      ],
       "resources": [
-        { "title": "RocksDB Wiki — LSM overview", "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview", "type": "doc" }
+        {
+          "title": "RocksDB Wiki — LSM overview",
+          "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1188,7 +1838,10 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["lsm-tree", "compaction"],
+      "related": [
+        "lsm-tree",
+        "compaction"
+      ],
       "description": "Append-only durability log written before the data pages.",
       "mentalModel": "The WAL is the database's promise: write the change to an append-only log and fsync it before touching the real data structure. A crash mid-write is recoverable by replaying the log. Durability before convenience.",
       "commonMistakes": [
@@ -1197,12 +1850,25 @@
         "Assuming a write() syscall means data is on disk"
       ],
       "realWorldUsage": "PostgreSQL WAL, SQLite WAL mode, every durable store and LSM engine.",
-      "projectApplications": ["tiny-search-engine"],
-      "artifacts": ["toy-wal"],
-      "drills": ["build-wal"],
-      "reviewQuestions": ["rq-wal-why", "rq-wal-fsync"],
+      "projectApplications": [
+        "tiny-search-engine"
+      ],
+      "artifacts": [
+        "toy-wal"
+      ],
+      "drills": [
+        "build-wal"
+      ],
+      "reviewQuestions": [
+        "rq-wal-why",
+        "rq-wal-fsync"
+      ],
       "resources": [
-        { "title": "PostgreSQL — Write-Ahead Logging", "url": "https://www.postgresql.org/docs/current/wal-intro.html", "type": "doc" }
+        {
+          "title": "PostgreSQL — Write-Ahead Logging",
+          "url": "https://www.postgresql.org/docs/current/wal-intro.html",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1213,8 +1879,12 @@
       "subtrack": "write-path",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["lsm-tree"],
-      "related": ["wal"],
+      "prerequisites": [
+        "lsm-tree"
+      ],
+      "related": [
+        "wal"
+      ],
       "description": "Merging sorted runs to reclaim space and bound read amplification.",
       "mentalModel": "An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers. Compaction merges files, drops tombstones, and bounds read amplification — at the cost of write amplification and IO spikes.",
       "commonMistakes": [
@@ -1223,7 +1893,9 @@
         "Compaction storms that starve foreground traffic"
       ],
       "realWorldUsage": "RocksDB/Cassandra compaction strategies; segment merges in search engines.",
-      "reviewQuestions": ["rq-compaction-tradeoff"]
+      "reviewQuestions": [
+        "rq-compaction-tradeoff"
+      ]
     },
     {
       "id": "object-storage",
@@ -1234,7 +1906,10 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
-      "related": ["caching", "lsm-tree"],
+      "related": [
+        "caching",
+        "lsm-tree"
+      ],
       "description": "S3-style blob storage: cheap, durable, high-latency, immutable objects.",
       "mentalModel": "Object storage (S3/R2) is infinite, cheap, durable bytes — but with ~tens-of-ms latency and no in-place edits. Modern systems like Turbopuffer put cold data here and keep a hot cache in front. Storage and compute separate.",
       "commonMistakes": [
@@ -1243,11 +1918,22 @@
         "Ignoring request cost (GETs/PUTs are billed)"
       ],
       "realWorldUsage": "S3, Cloudflare R2, GCS; the durable layer of object-storage-first databases.",
-      "projectApplications": ["highsignal", "tiny-vector-db"],
-      "artifacts": ["object-storage-index"],
-      "reviewQuestions": ["rq-object-storage-latency"],
+      "projectApplications": [
+        "highsignal",
+        "tiny-vector-db"
+      ],
+      "artifacts": [
+        "object-storage-index"
+      ],
+      "reviewQuestions": [
+        "rq-object-storage-latency"
+      ],
       "resources": [
-        { "title": "Turbopuffer — Architecture", "url": "https://turbopuffer.com/architecture", "type": "article" }
+        {
+          "title": "Turbopuffer — Architecture",
+          "url": "https://turbopuffer.com/architecture",
+          "type": "article"
+        }
       ]
     },
     {
@@ -1258,11 +1944,19 @@
       "subtrack": "storage-engines",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["b-tree"],
-      "related": ["object-storage"],
+      "prerequisites": [
+        "b-tree"
+      ],
+      "related": [
+        "object-storage"
+      ],
       "description": "Column-oriented layout for analytics: compression and vectorized scans.",
       "resources": [
-        { "title": "Apache Parquet — File format", "url": "https://parquet.apache.org/docs/file-format/", "type": "doc" }
+        {
+          "title": "Apache Parquet — File format",
+          "url": "https://parquet.apache.org/docs/file-format/",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1273,8 +1967,12 @@
       "subtrack": "indexing",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["b-tree"],
-      "related": ["storage-retrieval"],
+      "prerequisites": [
+        "b-tree"
+      ],
+      "related": [
+        "storage-retrieval"
+      ],
       "description": "Extra indexes for non-primary-key lookups, and what they cost on writes."
     },
     {
@@ -1286,8 +1984,24 @@
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [],
-      "related": ["b-tree", "lsm-tree"],
-      "description": "B-tree vs LSM, indexing, WAL."
+      "related": [
+        "b-tree",
+        "lsm-tree"
+      ],
+      "description": "B-tree vs LSM, indexing, WAL.",
+      "mentalModel": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else — WAL, indexes, caching — serves durability and lookup speed.",
+      "commonMistakes": [
+        "Picking an engine without knowing the read/write ratio of the workload",
+        "Ignoring write amplification and its effect on SSD lifetime",
+        "Forgetting that every secondary index is extra write cost"
+      ],
+      "resources": [
+        {
+          "title": "Designing Data-Intensive Applications",
+          "url": "https://dataintensive.net/",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "sharding",
@@ -1297,9 +2011,26 @@
       "subtrack": "partitioning",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["consistent-hashing"],
-      "related": ["replication"],
-      "description": "Range/hash/geo partitioning."
+      "prerequisites": [
+        "consistent-hashing"
+      ],
+      "related": [
+        "replication"
+      ],
+      "description": "Range/hash/geo partitioning.",
+      "mentalModel": "Sharding splits one dataset across many machines so it scales past a single box. The shard key is the whole game: hash keys spread load evenly but kill range scans; range keys keep scans but invite hot spots. Re-sharding later is painful, so choose deliberately.",
+      "commonMistakes": [
+        "A shard key that creates a hot shard (e.g. sharding by date)",
+        "Cross-shard joins and transactions, which are slow or impossible",
+        "No plan for re-sharding as data grows"
+      ],
+      "resources": [
+        {
+          "title": "Designing Data-Intensive Applications",
+          "url": "https://dataintensive.net/",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "replication",
@@ -1310,8 +2041,24 @@
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [],
-      "related": ["cap-theorem", "consensus"],
-      "description": "Leader-follower, multi-leader, quorum."
+      "related": [
+        "cap-theorem",
+        "consensus"
+      ],
+      "description": "Leader-follower, multi-leader, quorum.",
+      "mentalModel": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag — followers are always slightly behind.",
+      "commonMistakes": [
+        "Reading from a follower and seeing stale data (\"read your own writes\" violation)",
+        "Assuming failover is instant and lossless",
+        "Ignoring replication lag in capacity and correctness planning"
+      ],
+      "resources": [
+        {
+          "title": "Designing Data-Intensive Applications",
+          "url": "https://dataintensive.net/",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "cap-theorem",
@@ -1321,9 +2068,26 @@
       "subtrack": "consistency",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["replication"],
-      "related": ["consensus"],
-      "description": "Strong/eventual/causal, PACELC."
+      "prerequisites": [
+        "replication"
+      ],
+      "related": [
+        "consensus"
+      ],
+      "description": "Strong/eventual/causal, PACELC.",
+      "mentalModel": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency.",
+      "commonMistakes": [
+        "Thinking you \"pick 2 of 3\" at all times — the choice only applies during a partition",
+        "Calling a system \"CA\" — partitions are not optional in a distributed system",
+        "Ignoring the latency-vs-consistency tradeoff that exists even with no partition"
+      ],
+      "resources": [
+        {
+          "title": "CAP theorem (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/CAP_theorem",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "object-modeling",
@@ -1334,8 +2098,17 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["state-management"],
-      "description": "Identifying classes, attributes, relationships."
+      "related": [
+        "state-management"
+      ],
+      "description": "Identifying classes, attributes, relationships.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Design Patterns",
+          "url": "https://refactoring.guru/design-patterns",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "state-management",
@@ -1345,9 +2118,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "States, transitions, guards."
+      "description": "States, transitions, guards.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — State",
+          "url": "https://refactoring.guru/design-patterns/state",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "strategy-pattern",
@@ -1357,9 +2139,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "Interchangeable algorithms."
+      "description": "Interchangeable algorithms.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Strategy",
+          "url": "https://refactoring.guru/design-patterns/strategy",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "observer-pattern",
@@ -1369,9 +2160,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "Pub/sub, event propagation."
+      "description": "Pub/sub, event propagation.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Observer",
+          "url": "https://refactoring.guru/design-patterns/observer",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "factory-creational",
@@ -1381,9 +2181,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "Abstract factory, builder, singleton."
+      "description": "Abstract factory, builder, singleton.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Factory Method",
+          "url": "https://refactoring.guru/design-patterns/factory-method",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "decorator-structural",
@@ -1393,9 +2202,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "Decorator, adapter, composite."
+      "description": "Decorator, adapter, composite.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Decorator",
+          "url": "https://refactoring.guru/design-patterns/decorator",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "concurrency-design",
@@ -1405,8 +2223,12 @@
       "subtrack": "low-level-design",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["object-modeling"],
-      "related": ["state-management"],
+      "prerequisites": [
+        "object-modeling"
+      ],
+      "related": [
+        "state-management"
+      ],
       "description": "Thread-safety, locks, producer-consumer."
     },
     {
@@ -1417,9 +2239,18 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["object-modeling"],
+      "prerequisites": [
+        "object-modeling"
+      ],
       "related": [],
-      "description": "Command, undo, chain of responsibility."
+      "description": "Command, undo, chain of responsibility.",
+      "resources": [
+        {
+          "title": "Refactoring Guru — Command",
+          "url": "https://refactoring.guru/design-patterns/command",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "booking-inventory",
@@ -1429,7 +2260,10 @@
       "subtrack": "low-level-design",
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["state-management", "concurrency-design"],
+      "prerequisites": [
+        "state-management",
+        "concurrency-design"
+      ],
       "related": [],
       "description": "Reservation, hold-confirm, optimistic locking."
     },
@@ -1441,7 +2275,10 @@
       "subtrack": "low-level-design",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["state-management", "object-modeling"],
+      "prerequisites": [
+        "state-management",
+        "object-modeling"
+      ],
       "related": [],
       "description": "Turn engines, board state, rules."
     },
@@ -1454,8 +2291,23 @@
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [],
-      "related": ["consistent-hashing"],
-      "description": "L4/L7, consistent hashing, health checks."
+      "related": [
+        "consistent-hashing"
+      ],
+      "description": "L4/L7, consistent hashing, health checks.",
+      "mentalModel": "A load balancer is the seam between \"one address\" and \"many servers\". L4 routes by IP/port (fast, dumb); L7 routes by request content (slower, smart). Health checks and the balancing algorithm (round-robin, least-connections, consistent hashing) decide who gets each request.",
+      "commonMistakes": [
+        "Treating the load balancer as a single point of failure with no redundancy",
+        "Round-robin to stateful servers that need sticky sessions",
+        "No health checks, so traffic keeps hitting a dead instance"
+      ],
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "consistent-hashing",
@@ -1465,9 +2317,20 @@
       "subtrack": "scalability",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["load-balancing"],
-      "related": ["sharding"],
-      "description": "Ring, virtual nodes, rebalancing."
+      "prerequisites": [
+        "load-balancing"
+      ],
+      "related": [
+        "sharding"
+      ],
+      "description": "Ring, virtual nodes, rebalancing.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "consensus",
@@ -1477,9 +2340,26 @@
       "subtrack": "distributed-systems",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["replication"],
-      "related": ["cap-theorem"],
-      "description": "Raft, Paxos, leader election."
+      "prerequisites": [
+        "replication"
+      ],
+      "related": [
+        "cap-theorem"
+      ],
+      "description": "Raft, Paxos, leader election.",
+      "mentalModel": "Consensus is how a cluster agrees on one value despite crashes and network delays. Raft makes it understandable: elect a leader, replicate an append-only log, and a write commits once a majority (quorum) has it. A majority guarantees any two quorums overlap.",
+      "commonMistakes": [
+        "Assuming consensus survives a network partition without a majority",
+        "Confusing leader election with data replication — Raft does both",
+        "Thinking more replicas always means more durability (it costs latency)"
+      ],
+      "resources": [
+        {
+          "title": "The Raft Consensus Algorithm",
+          "url": "https://raft.github.io/",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "distributed-infra",
@@ -1489,9 +2369,18 @@
       "subtrack": "distributed-systems",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["consensus"],
+      "prerequisites": [
+        "consensus"
+      ],
       "related": [],
-      "description": "Service discovery, orchestration."
+      "description": "Service discovery, orchestration.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "messaging-realtime",
@@ -1501,9 +2390,18 @@
       "subtrack": "event-driven",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["message-queues"],
+      "prerequisites": [
+        "message-queues"
+      ],
       "related": [],
-      "description": "WebSockets, presence, delivery."
+      "description": "WebSockets, presence, delivery.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "social-media",
@@ -1513,9 +2411,19 @@
       "subtrack": "system-design-cases",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["caching", "message-queues"],
+      "prerequisites": [
+        "caching",
+        "message-queues"
+      ],
       "related": [],
-      "description": "Fan-out write/read, timeline."
+      "description": "Fan-out write/read, timeline.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "streaming-media",
@@ -1525,9 +2433,18 @@
       "subtrack": "system-design-cases",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["caching"],
+      "prerequisites": [
+        "caching"
+      ],
       "related": [],
-      "description": "CDN, HLS, transcoding pipeline."
+      "description": "CDN, HLS, transcoding pipeline.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "location-transport",
@@ -1537,9 +2454,18 @@
       "subtrack": "system-design-cases",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["sharding"],
+      "prerequisites": [
+        "sharding"
+      ],
       "related": [],
-      "description": "Geohash, quadtree, dispatch."
+      "description": "Geohash, quadtree, dispatch.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "collaboration-productivity",
@@ -1549,9 +2475,18 @@
       "subtrack": "system-design-cases",
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["messaging-realtime"],
+      "prerequisites": [
+        "messaging-realtime"
+      ],
       "related": [],
-      "description": "OT, CRDT, conflict resolution."
+      "description": "OT, CRDT, conflict resolution.",
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "article"
+        }
+      ]
     },
     {
       "id": "search-platform-design",
@@ -1561,8 +2496,14 @@
       "subtrack": "system-design-cases",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["inverted-index", "object-storage"],
-      "related": ["search-discovery", "bm25"],
+      "prerequisites": [
+        "inverted-index",
+        "object-storage"
+      ],
+      "related": [
+        "search-discovery",
+        "bm25"
+      ],
       "description": "End-to-end design of a search platform: ingestion, indexing, query, ranking.",
       "mentalModel": "A search platform splits into an ingestion/indexing path (durable, batchy, write-optimized) and a query path (low-latency, cacheable, read-optimized). Segment files, an object-storage tier, and an eval harness tie them together.",
       "commonMistakes": [
@@ -1570,9 +2511,15 @@
         "No segment/compaction story for updates",
         "Forgetting evals as part of the architecture"
       ],
-      "projectApplications": ["highsignal"],
-      "artifacts": ["search-platform-design-doc"],
-      "reviewQuestions": ["rq-search-platform-paths"]
+      "projectApplications": [
+        "highsignal"
+      ],
+      "artifacts": [
+        "search-platform-design-doc"
+      ],
+      "reviewQuestions": [
+        "rq-search-platform-paths"
+      ]
     },
     {
       "id": "rag-system-design",
@@ -1582,8 +2529,14 @@
       "subtrack": "system-design-cases",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["rag", "hybrid-search"],
-      "related": ["chunking", "llm-evals"],
+      "prerequisites": [
+        "rag",
+        "hybrid-search"
+      ],
+      "related": [
+        "chunking",
+        "llm-evals"
+      ],
       "description": "Architecting a production RAG system: ingestion, retrieval, generation, evals.",
       "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate), bound by an eval harness that gates every change.",
       "commonMistakes": [
@@ -1591,9 +2544,16 @@
         "No eval gate, so quality regresses silently",
         "Ignoring freshness and re-indexing"
       ],
-      "projectApplications": ["highsignal", "codevetter"],
-      "artifacts": ["rag-system-design-doc"],
-      "reviewQuestions": ["rq-rag-two-pipelines"]
+      "projectApplications": [
+        "highsignal",
+        "codevetter"
+      ],
+      "artifacts": [
+        "rag-system-design-doc"
+      ],
+      "reviewQuestions": [
+        "rq-rag-two-pipelines"
+      ]
     },
     {
       "id": "array-hashing",
@@ -1604,8 +2564,23 @@
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
-      "related": ["two-pointers"],
-      "description": "Hash maps, sets, frequency counting."
+      "related": [
+        "two-pointers"
+      ],
+      "description": "Hash maps, sets, frequency counting.",
+      "mentalModel": "A hash map trades memory for time: it turns an O(n) scan for \"have I seen this?\" into an O(1) lookup. Most array problems that feel quadratic collapse to linear once you ask what you would store in a map keyed by value, complement, or frequency.",
+      "commonMistakes": [
+        "Reaching for nested loops before asking \"what would a hash map key on?\"",
+        "Mutating a collection while iterating it",
+        "Forgetting hash maps have no order — sort separately if order matters"
+      ],
+      "resources": [
+        {
+          "title": "Hash table (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Hash_table",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "two-pointers",
@@ -1615,9 +2590,26 @@
       "subtrack": "two-pointers",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["array-hashing"],
-      "related": ["sliding-window"],
-      "description": "Converging/diverging pointer scans."
+      "prerequisites": [
+        "array-hashing"
+      ],
+      "related": [
+        "sliding-window"
+      ],
+      "description": "Converging/diverging pointer scans.",
+      "mentalModel": "Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once.",
+      "commonMistakes": [
+        "Using two pointers on unsorted data when the technique needs order",
+        "Off-by-one errors at the start/end conditions",
+        "Moving the wrong pointer and skipping valid pairs"
+      ],
+      "resources": [
+        {
+          "title": "NeetCode Roadmap",
+          "url": "https://neetcode.io/roadmap",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "sliding-window",
@@ -1627,9 +2619,24 @@
       "subtrack": "sliding-window",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["two-pointers"],
+      "prerequisites": [
+        "two-pointers"
+      ],
       "related": [],
-      "description": "Variable/fixed window over sequences."
+      "description": "Variable/fixed window over sequences.",
+      "mentalModel": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once — O(n).",
+      "commonMistakes": [
+        "Recomputing the aggregate from scratch instead of updating incrementally",
+        "Shrinking with an `if` when a `while` is needed to restore the invariant",
+        "Confusing fixed-size and variable-size window templates"
+      ],
+      "resources": [
+        {
+          "title": "NeetCode Roadmap",
+          "url": "https://neetcode.io/roadmap",
+          "type": "course"
+        }
+      ]
     },
     {
       "id": "stack",
@@ -1639,9 +2646,18 @@
       "subtrack": "stack-queue",
       "difficulty": "intro",
       "priority": 3,
-      "prerequisites": ["array-hashing"],
+      "prerequisites": [
+        "array-hashing"
+      ],
       "related": [],
-      "description": "LIFO, parsing, monotonic stack."
+      "description": "LIFO, parsing, monotonic stack.",
+      "resources": [
+        {
+          "title": "Stack (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Stack_(abstract_data_type)",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "binary-search",
@@ -1651,9 +2667,24 @@
       "subtrack": "binary-search",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["array-hashing"],
+      "prerequisites": [
+        "array-hashing"
+      ],
       "related": [],
-      "description": "Halving sorted search space, predicate search."
+      "description": "Halving sorted search space, predicate search.",
+      "mentalModel": "Binary search is not about sorted arrays — it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step.",
+      "commonMistakes": [
+        "Infinite loops from a wrong mid update or loop condition",
+        "Searching values when you should search the answer space",
+        "Integer overflow in `(lo + hi) / 2` — use `lo + (hi - lo) / 2`"
+      ],
+      "resources": [
+        {
+          "title": "Binary search algorithm (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Binary_search_algorithm",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "linked-list",
@@ -1664,8 +2695,17 @@
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
-      "related": ["trees"],
-      "description": "Pointer manipulation, fast/slow, reversal."
+      "related": [
+        "trees"
+      ],
+      "description": "Pointer manipulation, fast/slow, reversal.",
+      "resources": [
+        {
+          "title": "VisuAlgo — Linked List",
+          "url": "https://visualgo.net/en/list",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "trees",
@@ -1675,9 +2715,26 @@
       "subtrack": "trees",
       "difficulty": "core",
       "priority": 4,
-      "prerequisites": ["linked-list"],
-      "related": ["graphs"],
-      "description": "Binary trees, BSTs, DFS/BFS."
+      "prerequisites": [
+        "linked-list"
+      ],
+      "related": [
+        "graphs"
+      ],
+      "description": "Binary trees, BSTs, DFS/BFS.",
+      "mentalModel": "A tree is recursion made concrete: almost every tree problem is \"solve it for the children, then combine\". DFS (pre/in/post-order) is a recursion or an explicit stack; BFS is a queue, level by level. Pick the traversal that matches what you need to combine.",
+      "commonMistakes": [
+        "Forgetting the null/empty base case",
+        "Using DFS when the problem is about levels or shortest depth (use BFS)",
+        "Returning the wrong thing from recursion — separate \"answer\" from \"info passed up\""
+      ],
+      "resources": [
+        {
+          "title": "VisuAlgo — Binary Search Tree",
+          "url": "https://visualgo.net/en/bst",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "tries",
@@ -1687,9 +2744,18 @@
       "subtrack": "trees",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["trees"],
+      "prerequisites": [
+        "trees"
+      ],
       "related": [],
-      "description": "Prefix trees."
+      "description": "Prefix trees.",
+      "resources": [
+        {
+          "title": "Trie (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Trie",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "heap",
@@ -1699,9 +2765,24 @@
       "subtrack": "heap",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["array-hashing"],
+      "prerequisites": [
+        "array-hashing"
+      ],
       "related": [],
-      "description": "Top-k, k-way merge, scheduling."
+      "description": "Top-k, k-way merge, scheduling.",
+      "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything.",
+      "commonMistakes": [
+        "Sorting the whole input when a size-k heap suffices",
+        "Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)",
+        "Forgetting most languages give a min-heap by default"
+      ],
+      "resources": [
+        {
+          "title": "VisuAlgo — Binary Heap",
+          "url": "https://visualgo.net/en/heap",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "backtracking",
@@ -1711,9 +2792,18 @@
       "subtrack": "backtracking",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["trees"],
+      "prerequisites": [
+        "trees"
+      ],
       "related": [],
-      "description": "DFS with state restoration, pruning."
+      "description": "DFS with state restoration, pruning.",
+      "resources": [
+        {
+          "title": "Backtracking (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Backtracking",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "graphs",
@@ -1723,9 +2813,26 @@
       "subtrack": "graphs",
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["trees"],
-      "related": ["shortest-path"],
-      "description": "BFS/DFS, topo sort, union-find."
+      "prerequisites": [
+        "trees"
+      ],
+      "related": [
+        "shortest-path"
+      ],
+      "description": "BFS/DFS, topo sort, union-find.",
+      "mentalModel": "Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find). The skill is recognizing the template and modeling the input as nodes and edges.",
+      "commonMistakes": [
+        "No visited set — revisiting nodes and looping forever",
+        "Using DFS for shortest path on an unweighted graph instead of BFS",
+        "Not handling disconnected components"
+      ],
+      "resources": [
+        {
+          "title": "VisuAlgo — Graph Traversal",
+          "url": "https://visualgo.net/en/dfsbfs",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "shortest-path",
@@ -1735,9 +2842,19 @@
       "subtrack": "graphs",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["graphs", "heap"],
+      "prerequisites": [
+        "graphs",
+        "heap"
+      ],
       "related": [],
-      "description": "Dijkstra, Bellman-Ford, A*."
+      "description": "Dijkstra, Bellman-Ford, A*.",
+      "resources": [
+        {
+          "title": "VisuAlgo — Single-Source Shortest Paths",
+          "url": "https://visualgo.net/en/sssp",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "union-find",
@@ -1747,9 +2864,18 @@
       "subtrack": "graphs",
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["graphs"],
+      "prerequisites": [
+        "graphs"
+      ],
       "related": [],
-      "description": "Disjoint set, path compression."
+      "description": "Disjoint set, path compression.",
+      "resources": [
+        {
+          "title": "VisuAlgo — Union-Find Disjoint Sets",
+          "url": "https://visualgo.net/en/ufds",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "dp-1d",
@@ -1759,9 +2885,26 @@
       "subtrack": "dynamic-programming",
       "difficulty": "advanced",
       "priority": 4,
-      "prerequisites": ["array-hashing"],
-      "related": ["dp-2d"],
-      "description": "Linear state recurrences."
+      "prerequisites": [
+        "array-hashing"
+      ],
+      "related": [
+        "dp-2d"
+      ],
+      "description": "Linear state recurrences.",
+      "mentalModel": "Dynamic programming is recursion with the repeated work cached. Define the state (what does dp[i] mean?), the recurrence (how does dp[i] build on earlier states?), and the base case. 1D DP means the state is a single index along a sequence.",
+      "commonMistakes": [
+        "Starting to code before clearly defining what dp[i] represents",
+        "Wrong iteration order so a state is read before it is computed",
+        "Missing or wrong base cases"
+      ],
+      "resources": [
+        {
+          "title": "Dynamic programming (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Dynamic_programming",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "dp-2d",
@@ -1771,7 +2914,9 @@
       "subtrack": "dynamic-programming",
       "difficulty": "advanced",
       "priority": 3,
-      "prerequisites": ["dp-1d"],
+      "prerequisites": [
+        "dp-1d"
+      ],
       "related": [],
       "description": "Grid DP, edit distance, knapsack."
     },
@@ -1783,9 +2928,20 @@
       "subtrack": "greedy",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["array-hashing"],
-      "related": ["intervals"],
-      "description": "Local-optimal-as-global proofs."
+      "prerequisites": [
+        "array-hashing"
+      ],
+      "related": [
+        "intervals"
+      ],
+      "description": "Local-optimal-as-global proofs.",
+      "resources": [
+        {
+          "title": "Greedy algorithm (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Greedy_algorithm",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "intervals",
@@ -1795,7 +2951,9 @@
       "subtrack": "intervals",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["greedy"],
+      "prerequisites": [
+        "greedy"
+      ],
       "related": [],
       "description": "Merge, overlap, sweep line."
     },
@@ -1952,10 +3110,16 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["landing-pages"],
+      "related": [
+        "landing-pages"
+      ],
       "description": "Naming the problem, the audience, and the alternative you beat.",
       "resources": [
-        { "title": "April Dunford — Positioning", "url": "https://www.aprildunford.com/post/the-perils-of-positioning", "type": "article" }
+        {
+          "title": "April Dunford — Positioning",
+          "url": "https://www.aprildunford.com/post/the-perils-of-positioning",
+          "type": "article"
+        }
       ]
     },
     {
@@ -1966,8 +3130,13 @@
       "subtrack": "positioning",
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["positioning"],
-      "related": ["seo", "product-analytics"],
+      "prerequisites": [
+        "positioning"
+      ],
+      "related": [
+        "seo",
+        "product-analytics"
+      ],
       "description": "Turning a visitor into an activated user: hero, proof, single CTA."
     },
     {
@@ -1979,9 +3148,14 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["landing-pages"],
+      "related": [
+        "landing-pages"
+      ],
       "description": "Programmatic and content SEO: intent, structure, indexability.",
-      "projectApplications": ["significant-hobbies", "rolepatch"]
+      "projectApplications": [
+        "significant-hobbies",
+        "rolepatch"
+      ]
     },
     {
       "id": "product-analytics",
@@ -1992,10 +3166,16 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["landing-pages"],
+      "related": [
+        "landing-pages"
+      ],
       "description": "Activation, retention, funnels — measuring whether the product works.",
       "resources": [
-        { "title": "PostHog — Product analytics docs", "url": "https://posthog.com/docs/product-analytics", "type": "doc" }
+        {
+          "title": "PostHog — Product analytics docs",
+          "url": "https://posthog.com/docs/product-analytics",
+          "type": "doc"
+        }
       ]
     }
   ]

@@ -1,7 +1,8 @@
-import { ArrowLeft, Check, CheckCircle2, Circle, ExternalLink, Hammer, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Check, CheckCircle2, Circle, ExternalLink, Hammer, Lightbulb, Play, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import CodeEditor from '../components/CodeEditor';
 import { Badge, Button, Card, color, DIFFICULTY_COLOR, EmptyState, PageHeader, PageShell, SectionTitle } from '../components/ui';
 import {
   type Artifact,
@@ -10,7 +11,10 @@ import {
   CONCEPT_BY_ID,
   DRILL_BY_ID,
 } from '../data/learning-os';
+import { useCodeExecution } from '../hooks/useCodeExecution';
+import { useConceptMastery } from '../hooks/useConcepts';
 import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore } from '../hooks/useUserStore';
+import type { Language } from '../types';
 
 export default function BuildLab() {
   const { id } = useParams();
@@ -29,14 +33,24 @@ const COLUMNS: { status: ArtifactStatus; label: string; tone: string }[] = [
 
 function ArtifactBoard() {
   const { getArtifact, setArtifact } = useArtifactStore();
+  const { review } = useConceptMastery();
   const [openId, setOpenId] = useState<string | null>(null);
+
+  // Shipping an artifact closes the loop: it nudges every linked concept's
+  // mastery upward, since a completed artifact is proof of learning.
+  function handleChange(artifact: Artifact, prev: ArtifactEntry, next: ArtifactEntry) {
+    setArtifact(artifact.id, next);
+    if (next.status === 'shipped' && prev.status !== 'shipped') {
+      for (const cid of artifact.concepts) void review(cid, 'good');
+    }
+  }
 
   return (
     <PageShell wide>
       <PageHeader
         eyebrow="Build Lab"
         title="Build Lab"
-        subtitle="No learning without an artifact. Move each one from idea to shipped — code, benchmark, or design doc."
+        subtitle="No learning without an artifact. Move each one from idea to shipped — code, benchmark, or design doc. Shipping nudges its concepts toward mastered."
         actions={
           <Link to="/playground" className="inline-flex items-center gap-1.5 rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-800">
             <Hammer className="h-4 w-4" /> Open workspace
@@ -46,7 +60,7 @@ function ArtifactBoard() {
 
       <div className="grid gap-4 md:grid-cols-3">
         {COLUMNS.map(col => {
-          const items = ARTIFACTS.filter(a => (getArtifact(a.id).status) === col.status);
+          const items = ARTIFACTS.filter(a => getArtifact(a.id).status === col.status);
           return (
             <div key={col.status}>
               <div className="mb-2 flex items-center gap-2">
@@ -62,7 +76,7 @@ function ArtifactBoard() {
                     entry={getArtifact(a.id)}
                     open={openId === a.id}
                     onToggle={() => setOpenId(openId === a.id ? null : a.id)}
-                    onChange={e => setArtifact(a.id, e)}
+                    onChange={next => handleChange(a, getArtifact(a.id), next)}
                   />
                 ))}
                 {items.length === 0 && (
@@ -173,13 +187,24 @@ function ArtifactCard({
 
 // --- Drill workspace --------------------------------------------------------
 
+const STARTER: Record<Language, string> = {
+  typescript: '// Write your solution here\n\nfunction solve() {\n  \n}\n\nconsole.log(solve());\n',
+  javascript: '// Write your solution here\n\nfunction solve() {\n  \n}\n\nconsole.log(solve());\n',
+  go: 'package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("hello")\n}\n',
+};
+
+const LANGUAGES: Language[] = ['typescript', 'go'];
+
 function DrillWorkspace({ drillId }: { drillId: string }) {
   const drill = DRILL_BY_ID[drillId];
   const { getDrill, setDrill } = useDrillStore();
+  const { review } = useConceptMastery();
+  const { output, errors, isRunning, execute } = useCodeExecution();
   const [showHints, setShowHints] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const entry = getDrill(drillId);
-  const [scratch, setScratch] = useState(entry.lastCode);
+  const [language, setLanguage] = useState<Language>('typescript');
+  const [code, setCode] = useState(entry.lastCode || STARTER.typescript);
 
   if (!drill) {
     return (
@@ -191,12 +216,24 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
   const concept = CONCEPT_BY_ID[drill.conceptId];
 
+  function run() {
+    void execute(code, [], language);
+  }
+
   function mark(status: DrillEntry['status']) {
-    setDrill(drillId, { status, lastCode: scratch, attempts: entry.attempts });
+    setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
+    // Solving a drill closes the loop — it nudges the concept toward mastery.
+    if (status === 'solved') void review(drill!.conceptId, 'good');
+  }
+
+  function switchLanguage(lang: Language) {
+    setLanguage(lang);
+    const isStarter = !code.trim() || Object.values(STARTER).includes(code);
+    if (isStarter) setCode(STARTER[lang]);
   }
 
   return (
-    <PageShell>
+    <PageShell wide>
       <Link to="/drills" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Drills
       </Link>
@@ -217,56 +254,82 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         <h1 className="text-2xl font-bold text-white">{drill.title}</h1>
       </div>
 
-      <Card className="mb-4 p-4">
-        <SectionTitle>Prompt</SectionTitle>
-        <p className="text-sm leading-relaxed text-gray-300">{drill.prompt}</p>
-        <div className="mt-3 rounded-lg border border-gray-800 bg-gray-950 p-3">
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Expected output</div>
-          <p className="mt-1 text-sm text-gray-400">{drill.expectedOutput}</p>
-        </div>
-      </Card>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <div className="space-y-4">
+          <Card className="p-4">
+            <SectionTitle>Prompt</SectionTitle>
+            <p className="text-sm leading-relaxed text-gray-300">{drill.prompt}</p>
+            <div className="mt-3 rounded-lg border border-gray-800 bg-gray-950 p-3">
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Expected output</div>
+              <p className="mt-1 text-sm text-gray-400">{drill.expectedOutput}</p>
+            </div>
+          </Card>
 
-      <Card className="mb-4 p-4">
-        <SectionTitle>Scratchpad</SectionTitle>
-        <textarea
-          value={scratch}
-          onChange={e => setScratch(e.target.value)}
-          placeholder="Sketch your solution here, or open the full workspace to write and run code."
-          rows={8}
-          className="w-full resize-y rounded-md border border-gray-800 bg-gray-950 p-2 font-mono text-xs text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
-        />
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          <Button tone="ghost" onClick={() => mark('attempted')}>Save attempt</Button>
-          <Button onClick={() => mark('solved')}>
-            <Check className="h-4 w-4" /> Mark solved
-          </Button>
-          <Link to="/playground" className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-800">
-            <Hammer className="h-4 w-4" /> Full workspace
-          </Link>
-        </div>
-      </Card>
+          <Card className="p-4">
+            <button onClick={() => setShowHints(s => !s)} className="flex w-full items-center gap-1.5 text-sm font-semibold text-amber-300">
+              <Lightbulb className="h-4 w-4" /> {showHints ? 'Hide' : 'Show'} hints ({drill.hints.length})
+            </button>
+            {showHints && (
+              <ul className="mt-2 space-y-1.5">
+                {drill.hints.map((h, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
+                    <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-amber-400" /> {h}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Card className="p-4">
-          <button onClick={() => setShowHints(s => !s)} className="flex w-full items-center gap-1.5 text-sm font-semibold text-amber-300">
-            <Lightbulb className="h-4 w-4" /> {showHints ? 'Hide' : 'Show'} hints ({drill.hints.length})
-          </button>
-          {showHints && (
-            <ul className="mt-2 space-y-1.5">
-              {drill.hints.map((h, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
-                  <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-amber-400" /> {h}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-        <Card className="p-4">
-          <button onClick={() => setShowSolution(s => !s)} className="text-sm font-semibold text-cyan-300">
-            {showSolution ? 'Hide' : 'Show'} solution notes
-          </button>
-          {showSolution && <p className="mt-2 text-xs text-gray-400">{drill.solutionNotes}</p>}
-        </Card>
+          <Card className="p-4">
+            <button onClick={() => setShowSolution(s => !s)} className="flex items-center gap-1.5 text-sm font-semibold text-cyan-300">
+              <Sparkles className="h-4 w-4" /> {showSolution ? 'Hide' : 'Show'} solution notes
+            </button>
+            {showSolution && <p className="mt-2 text-xs leading-relaxed text-gray-400">{drill.solutionNotes}</p>}
+          </Card>
+        </div>
+
+        <div className="space-y-3">
+          <Card className="overflow-hidden">
+            <div className="flex items-center justify-between border-b border-gray-800 px-3 py-2">
+              <div className="flex gap-1">
+                {LANGUAGES.map(l => (
+                  <button
+                    key={l}
+                    onClick={() => switchLanguage(l)}
+                    className={`rounded px-2 py-0.5 text-xs font-medium ${language === l ? 'bg-purple-500/20 text-purple-300' : 'text-gray-500 hover:text-gray-300'}`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+              <Button tone="subtle" onClick={run} disabled={isRunning}>
+                <Play className="h-3.5 w-3.5" /> {isRunning ? 'Running…' : 'Run'}
+              </Button>
+            </div>
+            <div className="h-[320px]">
+              <CodeEditor code={code} language={language} onChange={v => setCode(v || '')} onRun={run} />
+            </div>
+          </Card>
+
+          <Card className="p-3">
+            <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Output</div>
+            <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-gray-300">
+              {errors
+                ? <span className="text-rose-400">{errors}</span>
+                : output || <span className="text-gray-600">Run your code to see output.</span>}
+            </pre>
+          </Card>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <Button tone="ghost" onClick={() => mark('attempted')}>Save attempt</Button>
+            <Button onClick={() => mark('solved')}>
+              <Check className="h-4 w-4" /> Mark solved
+            </Button>
+            <Link to="/playground" className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-800">
+              <Hammer className="h-4 w-4" /> Full workspace
+            </Link>
+          </div>
+        </div>
       </div>
     </PageShell>
   );

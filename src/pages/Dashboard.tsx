@@ -7,6 +7,7 @@ import { ALL_CONCEPTS, useConceptMastery } from '../hooks/useConcepts';
 import { useArtifactStore } from '../hooks/useUserStore';
 import { confidencePct, rollupMastery } from '../lib/conceptState';
 import { dueReviewQuestions, pickDrillForConcept, pickNextConcept, weakConcepts } from '../lib/recommend';
+import { GapAnalyzer } from './partials/GapAnalyzer';
 
 const FEATURED_ROADMAP = 'ai-search-infra-90-day';
 
@@ -149,6 +150,11 @@ export default function Dashboard() {
               </p>
             </Card>
           )}
+
+          <div className="mt-6">
+            <SectionTitle>Gap analysis</SectionTitle>
+            <GapAnalyzer />
+          </div>
         </div>
       </div>
     </PageShell>
