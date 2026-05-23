@@ -56,11 +56,11 @@ jobs:
       - name: Validate build environment contract
         run: pnpm validate:env:build
         env:
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID || vars.VITE_GOOGLE_CLIENT_ID }}
 
       - run: pnpm build
         env:
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID || vars.VITE_GOOGLE_CLIENT_ID }}
           VITE_SAASMAKER_API_KEY: ${{ secrets.VITE_SAASMAKER_API_KEY }}
       - run: rm -rf dist/wasm  # 38MB Go WASM hosted on R2, not CF Pages
 

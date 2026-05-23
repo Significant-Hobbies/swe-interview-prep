@@ -41,6 +41,8 @@ jobs:
           fi
 
       - name: Run available quality scripts
+        env:
+          VITE_GOOGLE_CLIENT_ID: ci-placeholder.apps.googleusercontent.com
         run: |
           run_script() {
             local script="$1"
