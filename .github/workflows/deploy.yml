@@ -71,6 +71,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: 7d048325699a5acddb44d3be31cf6ba9
           command: pages deploy dist/ --project-name=swe-interview-prep --branch=${{ github.head_ref || github.ref_name }}
 
       - name: Smoke production
