@@ -16,6 +16,7 @@ on:
       - 'tsconfig.json'
       - 'vite.config.js'
       - 'vite-env.d.ts'
+      - 'wrangler.toml'
   pull_request:
     branches: [main]
     paths:
@@ -32,6 +33,7 @@ on:
       - 'tsconfig.json'
       - 'vite.config.js'
       - 'vite-env.d.ts'
+      - 'wrangler.toml'
 
 jobs:
   deploy:
