@@ -12,20 +12,15 @@ import { saasmaker } from './lib/saasmaker';
 // "first ever session on this browser" and `returned` means a later session.
 const SEEN_KEY = 'swe-interview-prep:seen';
 
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Roadmaps = lazy(() => import('./pages/Roadmaps'));
-const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
-const Concepts = lazy(() => import('./pages/Concepts'));
-const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
-const Drills = lazy(() => import('./pages/Drills'));
-const BuildLab = lazy(() => import('./pages/BuildLab'));
-const Projects = lazy(() => import('./pages/Projects'));
-const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
-const Reviews = lazy(() => import('./pages/Reviews'));
-const Notes = lazy(() => import('./pages/Notes'));
-const Progress = lazy(() => import('./pages/Progress'));
-const MockInterview = lazy(() => import('./pages/MockInterview'));
+const Learn = lazy(() => import('./pages/Learn'));
+const Practice = lazy(() => import('./pages/Practice'));
 const Playground = lazy(() => import('./pages/Playground'));
+const Progress = lazy(() => import('./pages/Progress'));
+const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
+const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const BuildLab = lazy(() => import('./pages/BuildLab'));
+const MockInterview = lazy(() => import('./pages/MockInterview'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
@@ -78,34 +73,44 @@ function App() {
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="roadmaps" element={<Roadmaps />} />
-              <Route path="roadmaps/:id" element={<RoadmapDetail />} />
-              <Route path="concepts" element={<Concepts />} />
-              <Route path="concepts/:id" element={<ConceptDetail />} />
-              <Route path="drills" element={<Drills />} />
-              <Route path="drills/:id" element={<BuildLab />} />
-              <Route path="build" element={<BuildLab />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/:id" element={<ProjectDetail />} />
-              <Route path="reviews" element={<Reviews />} />
-              <Route path="notes" element={<Notes />} />
-              <Route path="progress" element={<Progress />} />
-              <Route path="mock" element={<MockInterview />} />
+              {/* Five-tab IA */}
+              <Route index element={<Navigate to="/learn" replace />} />
+              <Route path="learn" element={<Learn />} />
+              <Route path="learn/:id" element={<ConceptDetail />} />
+              <Route path="practice" element={<Practice />} />
               <Route path="playground" element={<Playground />} />
+              <Route path="mock" element={<MockInterview />} />
+              <Route path="progress" element={<Progress />} />
+
+              {/* Detail pages reachable from within the five tabs */}
+              <Route path="concepts/:id" element={<ConceptDetail />} />
+              <Route path="roadmaps/:id" element={<RoadmapDetail />} />
+              <Route path="projects/:id" element={<ProjectDetail />} />
+              <Route path="drills/:id" element={<BuildLab />} />
+
+              {/* Static */}
               <Route path="about" element={<About />} />
               <Route path="privacy" element={<Privacy />} />
-              {/* Legacy route redirects */}
-              <Route path="today" element={<Navigate to="/" replace />} />
-              <Route path="review" element={<Navigate to="/reviews" replace />} />
-              <Route path="dsa/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="p/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="lld/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="hld/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="behavioral/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="library/*" element={<Navigate to="/concepts" replace />} />
-              <Route path="vibe-learning" element={<Navigate to="/build" replace />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
+
+              {/* Legacy redirects — old 9-page IA */}
+              <Route path="today" element={<Navigate to="/learn" replace />} />
+              <Route path="dashboard" element={<Navigate to="/learn" replace />} />
+              <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
+              <Route path="concepts" element={<Navigate to="/learn" replace />} />
+              <Route path="drills" element={<Navigate to="/practice" replace />} />
+              <Route path="reviews" element={<Navigate to="/practice" replace />} />
+              <Route path="review" element={<Navigate to="/practice" replace />} />
+              <Route path="build" element={<Navigate to="/playground" replace />} />
+              <Route path="projects" element={<Navigate to="/progress" replace />} />
+              <Route path="notes" element={<Navigate to="/progress" replace />} />
+              <Route path="dsa/*" element={<Navigate to="/learn" replace />} />
+              <Route path="p/*" element={<Navigate to="/learn" replace />} />
+              <Route path="lld/*" element={<Navigate to="/learn" replace />} />
+              <Route path="hld/*" element={<Navigate to="/learn" replace />} />
+              <Route path="behavioral/*" element={<Navigate to="/learn" replace />} />
+              <Route path="library/*" element={<Navigate to="/learn" replace />} />
+              <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
+              <Route path="*" element={<Navigate to="/learn" replace />} />
             </Route>
           </Routes>
         </Suspense>

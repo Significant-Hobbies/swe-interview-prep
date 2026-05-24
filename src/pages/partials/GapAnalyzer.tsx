@@ -102,7 +102,7 @@ export function GapAnalyzer() {
           {result.recommendedArtifact?.artifactId && (
             <div>
               <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Build this</div>
-              <Link to="/build" className="mt-1 block rounded-md border border-purple-500/30 bg-purple-500/10 p-2">
+              <Link to="/playground" className="mt-1 block rounded-md border border-purple-500/30 bg-purple-500/10 p-2">
                 <div className="text-sm font-medium text-purple-200">
                   {ARTIFACT_BY_ID[result.recommendedArtifact.artifactId]?.title || result.recommendedArtifact.artifactId}
                 </div>

@@ -1,19 +1,13 @@
 import {
   BarChart3,
+  Code2,
   Dumbbell,
-  FolderKanban,
-  Hammer,
-  LayoutDashboard,
   LogIn,
   LogOut,
-  Map as MapIcon,
   Network,
-  NotebookPen,
-  RotateCcw,
   Settings,
   Sparkles,
   Timer,
-  X,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -25,31 +19,24 @@ import SettingsModal from './SettingsModal';
 interface NavItem {
   to: string;
   label: string;
-  icon: typeof LayoutDashboard;
-  end?: boolean;
+  icon: typeof Network;
 }
 
-// The 9-page Learning OS information architecture.
+// Five-tab IA. Learn = roadmaps + concept library. Practice = drills + spaced
+// reviews. Playground = free coding canvas. Mock = timed interview sim.
+// Progress = stats, notes, artifacts shipped.
 const PRIMARY_NAV: NavItem[] = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/roadmaps', label: 'Roadmaps', icon: MapIcon },
-  { to: '/concepts', label: 'Concepts', icon: Network },
-  { to: '/drills', label: 'Drills', icon: Dumbbell },
-  { to: '/build', label: 'Build Lab', icon: Hammer },
-  { to: '/projects', label: 'Projects', icon: FolderKanban },
-  { to: '/reviews', label: 'Reviews', icon: RotateCcw },
-  { to: '/notes', label: 'Notes', icon: NotebookPen },
+  { to: '/learn', label: 'Learn', icon: Network },
+  { to: '/practice', label: 'Practice', icon: Dumbbell },
+  { to: '/playground', label: 'Playground', icon: Code2 },
+  { to: '/mock', label: 'Mock', icon: Timer },
   { to: '/progress', label: 'Progress', icon: BarChart3 },
 ];
-
-// Mobile bottom bar shows the five highest-traffic destinations.
-const MOBILE_PRIMARY = ['/', '/roadmaps', '/concepts', '/drills', '/reviews'];
 
 export default function Layout() {
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
   const changelogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,7 +51,7 @@ export default function Layout() {
   }, [changelogOpen]);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+    `flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
       isActive ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'
     }`;
 
@@ -72,8 +59,6 @@ export default function Layout() {
     `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] font-medium transition-colors ${
       isActive ? 'text-purple-400' : 'text-gray-500'
     }`;
-
-  const mobileSecondary = PRIMARY_NAV.filter(n => !MOBILE_PRIMARY.includes(n.to));
 
   return (
     <div className="min-h-screen bg-gray-950 pb-16 md:pb-0">
@@ -83,14 +68,14 @@ export default function Layout() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
               <Sparkles className="h-4 w-4 text-purple-400" />
             </div>
-            <span className="hidden text-base font-bold text-white lg:inline">Learning OS</span>
+            <span className="hidden text-base font-bold text-white sm:inline">SWE Prep</span>
           </NavLink>
 
-          <div className="hidden flex-1 items-center justify-center gap-0.5 overflow-x-auto md:flex">
-            {PRIMARY_NAV.map(({ to, label, icon: Icon, end }) => (
-              <NavLink key={to} to={to} end={end} className={navClass}>
+          <div className="hidden flex-1 items-center justify-center gap-1 md:flex">
+            {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
+              <NavLink key={to} to={to} className={navClass}>
                 <Icon className="h-4 w-4 shrink-0" />
-                <span className="hidden xl:inline">{label}</span>
+                <span>{label}</span>
               </NavLink>
             ))}
           </div>
@@ -152,51 +137,13 @@ export default function Layout() {
 
       <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
-      {/* Mobile "More" sheet */}
-      {moreOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 md:hidden" onClick={() => setMoreOpen(false)}>
-          <div className="rounded-t-2xl border-t border-gray-800 bg-gray-900 p-4" onClick={e => e.stopPropagation()}>
-            <div className="mb-3 flex items-center justify-between">
-              <span className="text-sm font-semibold text-white">More</span>
-              <button onClick={() => setMoreOpen(false)} aria-label="Close"><X className="h-4 w-4 text-gray-400" /></button>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {mobileSecondary.map(({ to, label, icon: Icon }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  onClick={() => setMoreOpen(false)}
-                  className="flex flex-col items-center gap-1.5 rounded-lg border border-gray-800 bg-gray-950 py-3 text-[11px] font-medium text-gray-300"
-                >
-                  <Icon className="h-5 w-5 text-purple-400" />
-                  {label}
-                </NavLink>
-              ))}
-              <NavLink
-                to="/mock"
-                onClick={() => setMoreOpen(false)}
-                className="flex flex-col items-center gap-1.5 rounded-lg border border-gray-800 bg-gray-950 py-3 text-[11px] font-medium text-gray-300"
-              >
-                <Timer className="h-5 w-5 text-purple-400" />
-                Mock
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Bottom tab bar — mobile */}
       <div className="fixed bottom-0 left-0 right-0 z-40 flex border-t border-gray-800 bg-gray-950/95 backdrop-blur-xl md:hidden">
-        {PRIMARY_NAV.filter(n => MOBILE_PRIMARY.includes(n.to)).map(({ to, label, icon: Icon, end }) => (
-          <NavLink key={to} to={to} end={end} className={tabClass}>
+        {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
+          <NavLink key={to} to={to} className={tabClass}>
             <Icon className="h-5 w-5" />
             <span>{label}</span>
           </NavLink>
         ))}
-        <button onClick={() => setMoreOpen(true)} className="flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] font-medium text-gray-500">
-          <FolderKanban className="h-5 w-5" />
-          <span>More</span>
-        </button>
       </div>
     </div>
   );

@@ -234,7 +234,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
   return (
     <PageShell wide>
-      <Link to="/drills" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/practice" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Drills
       </Link>
 

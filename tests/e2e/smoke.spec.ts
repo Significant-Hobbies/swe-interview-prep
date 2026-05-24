@@ -9,90 +9,78 @@ test.beforeEach(async ({ context, page }) => {
   await page.addStyleTag({ content: '[data-saasmaker-widget]{display:none!important}' }).catch(() => {});
 });
 
-test.describe('Learning OS smoke', () => {
-  test('Dashboard renders the next-action heading', async ({ page }) => {
+test.describe('Five-tab IA smoke', () => {
+  test('root redirects to /learn and shows roadmaps + concepts', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { name: /What should I do next/i })).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText("Today's learning loop")).toBeVisible();
-  });
-
-  test('Concepts page lists tracks and concept cards', async ({ page }) => {
-    await page.goto('/concepts');
-    await expect(page.getByRole('heading', { name: /Concept Library/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'All tracks' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Search & IR' })).toBeVisible();
+    await expect(page).toHaveURL(/\/learn$/);
+    await expect(page.getByRole('heading', { name: 'Learn', exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: /BM25/i }).first()).toBeVisible();
   });
 
-  test('Concept detail shows mental model and self-review buttons', async ({ page }) => {
-    await page.goto('/concepts/bm25');
-    await expect(page.getByRole('heading', { name: 'BM25', exact: true })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Again' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Good' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Easy' })).toBeVisible();
+  test('Practice page renders drills by default with track filter', async ({ page }) => {
+    await page.goto('/practice');
+    await expect(page.getByRole('heading', { name: 'Practice', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: /^All \(/ })).toBeVisible();
   });
 
-  test('Roadmaps page shows the four roadmaps', async ({ page }) => {
-    await page.goto('/roadmaps');
-    await expect(page.getByRole('heading', { name: /Learning Roadmaps/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: '9-Day Reset' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /90-Day AI Search/i })).toBeVisible();
+  test('Practice → Reviews tab switches view', async ({ page }) => {
+    await page.goto('/practice');
+    await page.getByRole('button', { name: 'Reviews', exact: true }).click();
+    // Either the no-reviews empty state or an active review card is fine.
+    await expect(
+      page.getByText(/No reviews yet|How well did you recall it|Reveal answer/i),
+    ).toBeVisible();
   });
 
-  test('Roadmap detail shows milestones', async ({ page }) => {
-    await page.goto('/roadmaps/reset-9-day');
-    await expect(page.getByRole('heading', { name: '9-Day Reset' })).toBeVisible();
-    await expect(page.getByText(/Milestone 1/i)).toBeVisible();
-  });
-
-  test('Drills page lists drills', async ({ page }) => {
-    await page.goto('/drills');
-    await expect(page.getByRole('heading', { name: /Drill Bank/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /BM25/i }).first()).toBeVisible();
-  });
-
-  test('Build Lab shows the artifact board', async ({ page }) => {
-    await page.goto('/build');
-    await expect(page.getByRole('heading', { name: 'Build Lab', exact: true })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'To build' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Shipped' })).toBeVisible();
-  });
-
-  test('Reviews page renders an empty or active state', async ({ page }) => {
-    await page.goto('/reviews');
-    await expect(page.getByRole('heading', { name: /Spaced Repetition/i })).toBeVisible();
-  });
-
-  test('Projects page lists core projects', async ({ page }) => {
-    await page.goto('/projects');
-    await expect(page.getByRole('heading', { name: 'Projects', exact: true })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'HighSignal' })).toBeVisible();
-  });
-
-  test('Progress page renders metrics', async ({ page }) => {
-    await page.goto('/progress');
-    await expect(page.getByRole('heading', { name: 'Progress', exact: true })).toBeVisible();
-    await expect(page.getByText('Mastery by track')).toBeVisible();
-  });
-
-  test('Playground loads with the Monaco editor', async ({ page }) => {
+  test('Playground loads the Monaco editor', async ({ page }) => {
     await page.goto('/playground');
     await expect(page.locator('.monaco-editor').first()).toBeVisible({ timeout: 15000 });
   });
 
+  test('Mock interview page loads', async ({ page }) => {
+    await page.goto('/mock');
+    await expect(page).toHaveURL(/\/mock/);
+  });
+
+  test('Progress page shows mastery and notes tab', async ({ page }) => {
+    await page.goto('/progress');
+    await expect(page.getByRole('heading', { name: 'Progress', exact: true })).toBeVisible();
+    await expect(page.getByText('Mastery by track')).toBeVisible();
+    await page.getByRole('button', { name: 'Notes', exact: true }).click();
+    await expect(page.getByRole('button', { name: /New note/i })).toBeVisible();
+  });
+
+  test('Concept detail still reachable and shows self-review buttons', async ({ page }) => {
+    await page.goto('/concepts/bm25');
+    await expect(page.getByRole('heading', { name: 'BM25', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Again' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Good' })).toBeVisible();
+  });
+
+  test('Roadmap detail still reachable', async ({ page }) => {
+    await page.goto('/roadmaps/reset-9-day');
+    await expect(page.getByRole('heading', { name: '9-Day Reset' })).toBeVisible();
+  });
+
   test('Settings modal opens', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/learn');
     await page.getByRole('button', { name: /AI Settings/i }).click();
     await expect(page.getByRole('heading', { name: /AI Configuration/i })).toBeVisible();
   });
 
-  test('Legacy URLs redirect into the new IA', async ({ page }) => {
-    await page.goto('/dsa/patterns');
-    await expect(page).toHaveURL(/\/concepts/);
-    await page.goto('/review');
-    await expect(page).toHaveURL(/\/reviews/);
-    await page.goto('/today');
-    await expect(page).toHaveURL(/\/$/);
+  test('legacy URLs redirect into the five-tab IA', async ({ page }) => {
+    await page.goto('/concepts');
+    await expect(page).toHaveURL(/\/learn$/);
+    await page.goto('/drills');
+    await expect(page).toHaveURL(/\/practice$/);
+    await page.goto('/reviews');
+    await expect(page).toHaveURL(/\/practice$/);
+    await page.goto('/build');
+    await expect(page).toHaveURL(/\/playground$/);
+    await page.goto('/notes');
+    await expect(page).toHaveURL(/\/progress$/);
+    await page.goto('/projects');
+    await expect(page).toHaveURL(/\/progress$/);
   });
 
   test('core loop: concept detail links to a drill', async ({ page }) => {

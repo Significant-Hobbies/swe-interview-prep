@@ -25,7 +25,7 @@ export default function About() {
           Feynman Gate (explain it back, get graded 0&ndash;100).
         </li>
         <li>
-          <Link to="/concepts" className="underline">Concepts</Link> &mdash; FSRS
+          <Link to="/learn" className="underline">Concepts</Link> &mdash; FSRS
           mastery heatmap across a 60-concept taxonomy (DSA / LLD / HLD / Behavioral).
         </li>
         <li>

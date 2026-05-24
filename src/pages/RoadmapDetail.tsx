@@ -24,7 +24,7 @@ export default function RoadmapDetail() {
       <PageShell>
         <Card className="p-8 text-center">
           <p className="text-sm text-gray-400">Roadmap not found.</p>
-          <Link to="/roadmaps" className="mt-2 inline-block text-sm text-purple-400">← Back to roadmaps</Link>
+          <Link to="/learn" className="mt-2 inline-block text-sm text-purple-400">← Back to roadmaps</Link>
         </Card>
       </PageShell>
     );
@@ -36,7 +36,7 @@ export default function RoadmapDetail() {
 
   return (
     <PageShell>
-      <Link to="/roadmaps" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/learn" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Roadmaps
       </Link>
 
@@ -143,7 +143,7 @@ function MilestoneBlock({
                 const a = ARTIFACT_BY_ID[aid];
                 if (!a) return null;
                 return (
-                  <Link key={aid} to="/build" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white">
+                  <Link key={aid} to="/playground" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white">
                     <Hammer className="h-4 w-4 shrink-0 text-purple-400" />
                     <span className="truncate">{a.title}</span>
                   </Link>

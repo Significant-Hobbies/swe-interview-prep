@@ -27,7 +27,7 @@ export default function ProjectDetail() {
       <PageShell>
         <Card className="p-8 text-center">
           <p className="text-sm text-gray-400">Project not found.</p>
-          <Link to="/projects" className="mt-2 inline-block text-sm text-purple-400">← Back to projects</Link>
+          <Link to="/progress" className="mt-2 inline-block text-sm text-purple-400">← Back to projects</Link>
         </Card>
       </PageShell>
     );
@@ -53,7 +53,7 @@ export default function ProjectDetail() {
 
   return (
     <PageShell>
-      <Link to="/projects" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/progress" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Projects
       </Link>
 
@@ -89,7 +89,7 @@ export default function ProjectDetail() {
             {artifacts.length ? (
               <div className="space-y-2">
                 {artifacts.map(a => (
-                  <Card key={a.id} as="link" to="/build" className="p-3">
+                  <Card key={a.id} as="link" to="/playground" className="p-3">
                     <div className="text-sm font-medium text-white">{a.title}</div>
                     <div className="text-xs text-gray-500">{a.type} · {a.successCriteria.length} success criteria</div>
                   </Card>

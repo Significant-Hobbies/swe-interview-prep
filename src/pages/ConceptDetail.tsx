@@ -51,7 +51,7 @@ export default function ConceptDetail() {
       <PageShell>
         <Card className="p-8 text-center">
           <p className="text-sm text-gray-400">Concept not found.</p>
-          <Link to="/concepts" className="mt-2 inline-block text-sm text-purple-400">← Back to concepts</Link>
+          <Link to="/learn" className="mt-2 inline-block text-sm text-purple-400">← Back to concepts</Link>
         </Card>
       </PageShell>
     );
@@ -77,7 +77,7 @@ export default function ConceptDetail() {
 
   return (
     <PageShell>
-      <Link to="/concepts" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/learn" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Concepts
       </Link>
 
@@ -230,7 +230,7 @@ export default function ConceptDetail() {
             {artifacts.length ? (
               <div className="space-y-2">
                 {artifacts.map(a => (
-                  <Card key={a.id} as="link" to="/build" className="flex items-center justify-between gap-3 p-3">
+                  <Card key={a.id} as="link" to="/playground" className="flex items-center justify-between gap-3 p-3">
                     <div>
                       <div className="text-sm font-medium text-white">{a.title}</div>
                       <div className="text-xs text-gray-500">{a.type}</div>
