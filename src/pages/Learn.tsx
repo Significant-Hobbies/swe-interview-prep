@@ -26,7 +26,7 @@ import {
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { confidencePct, deriveConceptStatus, rollupMastery } from '../lib/conceptState';
-import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
+import { pickDrillForConcept, pickNextConcept, weakConcepts } from '../lib/recommend';
 
 type StatusFilter = 'all' | 'untouched' | 'active' | 'mastered';
 
@@ -49,7 +49,7 @@ const STATUS_TONE: Record<string, string> = {
 const PRIMARY_ROADMAP_ID = 'ai-search-infra-90-day';
 
 export default function Learn() {
-  const { mastery } = useConceptMastery();
+  const { mastery, loading } = useConceptMastery();
 
   // The "active" roadmap is the one with the most progress, falling back to the
   // canonical 90-day path for a fresh user.
@@ -72,6 +72,8 @@ export default function Learn() {
         upNext={upNext}
         mastery={mastery}
       />
+
+      <WeakAreasPanel mastery={mastery} loading={loading} />
 
       <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_300px]">
         <RoadmapPicker activeId={activeRoadmap.id} mastery={mastery} />
@@ -211,6 +213,93 @@ function Stat({ label, value, tone = 'gray' }: { label: string; value: number | 
       <div className={`text-base font-bold ${tone === 'amber' ? 'text-amber-400' : 'text-white'}`}>{value}</div>
       <div className="text-[10px] uppercase tracking-wider text-gray-500">{label}</div>
     </div>
+  );
+}
+
+// --- Weak areas panel -------------------------------------------------------
+
+function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryEntry>; loading: boolean }) {
+  const weak = weakConcepts(mastery, 4);
+  const hasAnyMastery = Object.keys(mastery).length > 0;
+
+  return (
+    <section className="mt-6">
+      <SectionHeader
+        title="Weak areas"
+        subtitle="Concepts you've started but whose confidence is still low — review or drill to strengthen them."
+      />
+      {loading && !hasAnyMastery ? (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-32 animate-pulse rounded-xl border border-gray-800 bg-gray-900/40" />
+          ))}
+        </div>
+      ) : weak.length === 0 ? (
+        <EmptyState
+          title={hasAnyMastery ? 'No weak areas right now' : 'Start a concept to see weak areas'}
+          hint={
+            hasAnyMastery
+              ? 'Your weakest concepts will surface here as confidence decays or you start new ones.'
+              : 'Rate your first concept review to begin tracking mastery.'
+          }
+        />
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {weak.map(c => {
+            const m = mastery[c.id];
+            const drill = pickDrillForConcept(c.id);
+            const trk = TRACK_BY_ID[c.track];
+            const pct = confidencePct(m);
+            return (
+              <div
+                key={c.id}
+                className="flex flex-col gap-3 rounded-xl border border-rose-500/20 bg-rose-500/5 p-4"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <Link
+                      to={`/concepts/${c.id}`}
+                      className="line-clamp-1 text-sm font-semibold text-white hover:text-rose-300"
+                    >
+                      {c.name}
+                    </Link>
+                    {trk && <div className="mt-0.5 text-[11px] text-gray-500">{trk.short}</div>}
+                  </div>
+                  <span className="shrink-0 font-mono text-xs text-rose-300">{pct}%</span>
+                </div>
+                <div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-gray-800">
+                    <div
+                      className="h-full bg-gradient-to-r from-rose-500 to-amber-500 transition-all"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <div className="mt-1 text-[10px] text-gray-600">
+                    {m?.reps ?? 0} rep{(m?.reps ?? 0) !== 1 ? 's' : ''}
+                  </div>
+                </div>
+                <div className="mt-auto flex gap-2">
+                  <Link
+                    to="/practice?tab=reviews"
+                    className="flex-1 rounded-md border border-rose-500/30 bg-rose-500/10 py-1.5 text-center text-[11px] font-semibold text-rose-300 transition-colors hover:bg-rose-500/20"
+                  >
+                    Review
+                  </Link>
+                  {drill && (
+                    <Link
+                      to={`/drills/${drill.id}`}
+                      className="flex-1 rounded-md border border-amber-500/30 bg-amber-500/10 py-1.5 text-center text-[11px] font-semibold text-amber-300 transition-colors hover:bg-amber-500/20"
+                    >
+                      Drill
+                    </Link>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
   );
 }
 
