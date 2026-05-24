@@ -98,8 +98,8 @@ function App() {
               <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
               <Route path="concepts" element={<Navigate to="/learn" replace />} />
               <Route path="drills" element={<Navigate to="/practice" replace />} />
-              <Route path="reviews" element={<Navigate to="/practice" replace />} />
-              <Route path="review" element={<Navigate to="/practice" replace />} />
+              <Route path="reviews" element={<Navigate to="/practice?tab=reviews" replace />} />
+              <Route path="review" element={<Navigate to="/practice?tab=reviews" replace />} />
               <Route path="build" element={<Navigate to="/playground" replace />} />
               <Route path="projects" element={<Navigate to="/progress" replace />} />
               <Route path="notes" element={<Navigate to="/progress" replace />} />

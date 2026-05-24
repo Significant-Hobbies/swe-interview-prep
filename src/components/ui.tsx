@@ -192,3 +192,126 @@ export function Button({
     </button>
   );
 }
+
+// --- Tabs & collapsible panels (Learn / Practice / Progress) ---------------
+
+export function TabGroup({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`flex rounded-lg border border-gray-800 p-0.5 sm:w-fit ${className}`} role="tablist">
+      {children}
+    </div>
+  );
+}
+
+export function TabButton({
+  active,
+  onClick,
+  label,
+  count,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+  count?: React.ReactNode;
+  children?: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={`flex-1 rounded-md px-4 py-1.5 text-xs font-medium transition-colors sm:flex-none ${
+        active ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:text-gray-200'
+      }`}
+    >
+      {children ?? (
+        <>
+          {label}
+          {count != null && <span className="ml-1.5 text-gray-600">{count}</span>}
+        </>
+      )}
+    </button>
+  );
+}
+
+export function CollapsiblePanel({
+  title,
+  subtitle,
+  open,
+  onToggle,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  open: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-2xl border border-gray-800 bg-gray-900/30">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
+      >
+        <div>
+          <div className="text-sm font-semibold text-white">{title}</div>
+          {subtitle && <div className="text-[11px] text-gray-500">{subtitle}</div>}
+        </div>
+        <span className="text-gray-500" aria-hidden="true">
+          {open ? '▾' : '▸'}
+        </span>
+      </button>
+      {open && <div className="border-t border-gray-800 px-5 pb-5 pt-4">{children}</div>}
+    </div>
+  );
+}
+
+export function FilterPill({
+  children,
+  active,
+  tone = 'purple',
+  onClick,
+}: {
+  children: React.ReactNode;
+  active: boolean;
+  tone?: string;
+  onClick: () => void;
+}) {
+  const c = color(tone);
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`shrink-0 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
+        active ? `${c.bg} ${c.border} ${c.text}` : 'border-gray-800 text-gray-500 hover:border-gray-700 hover:text-gray-200'
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function SessionStatBar({
+  items,
+}: {
+  items: { label: string; value: React.ReactNode; hint?: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-3">
+      {items.map(item => (
+        <div
+          key={item.label}
+          className="rounded-lg border border-gray-800 bg-gray-900/40 px-3 py-2 sm:min-w-[120px]"
+        >
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">{item.label}</div>
+          <div className="text-lg font-bold text-white">{item.value}</div>
+          {item.hint && <div className="text-[10px] text-gray-600">{item.hint}</div>}
+        </div>
+      ))}
+    </div>
+  );
+}

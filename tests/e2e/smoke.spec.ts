@@ -25,7 +25,7 @@ test.describe('Five-tab IA smoke', () => {
 
   test('Practice → Reviews tab switches view', async ({ page }) => {
     await page.goto('/practice');
-    await page.getByRole('button', { name: 'Reviews', exact: true }).click();
+    await page.getByRole('tab', { name: /^Reviews/ }).click();
     // Either the no-reviews empty state or an active review card is fine.
     await expect(
       page.getByText(/No reviews yet|How well did you recall it|Reveal answer/i),
@@ -46,7 +46,7 @@ test.describe('Five-tab IA smoke', () => {
     await page.goto('/progress');
     await expect(page.getByRole('heading', { name: 'Progress', exact: true })).toBeVisible();
     await expect(page.getByText('Mastery by track')).toBeVisible();
-    await page.getByRole('button', { name: 'Notes', exact: true }).click();
+    await page.getByRole('tab', { name: 'Notes' }).click();
     await expect(page.getByRole('button', { name: /New note/i })).toBeVisible();
   });
 
@@ -74,7 +74,7 @@ test.describe('Five-tab IA smoke', () => {
     await page.goto('/drills');
     await expect(page).toHaveURL(/\/practice$/);
     await page.goto('/reviews');
-    await expect(page).toHaveURL(/\/practice$/);
+    await expect(page).toHaveURL(/\/practice\?tab=reviews$/);
     await page.goto('/build');
     await expect(page).toHaveURL(/\/playground$/);
     await page.goto('/notes');

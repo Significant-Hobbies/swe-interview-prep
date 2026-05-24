@@ -2,7 +2,7 @@ import { Hammer, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Badge, Button, Card, color, EmptyState, PageShell, ProgressBar, SectionTitle, StatTile } from '../components/ui';
+import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, StatTile, TabButton, TabGroup } from '../components/ui';
 import {
   ARTIFACTS,
   CONCEPT_BY_ID,
@@ -23,29 +23,19 @@ export default function Progress() {
 
   return (
     <PageShell wide>
-      <header className="mb-5 flex items-end justify-between gap-3">
-        <h1 className="text-xl font-bold text-white sm:text-2xl">Progress</h1>
-        <div className="flex rounded-lg border border-gray-800 p-0.5">
-          <TabBtn active={section === 'overview'} onClick={() => setSection('overview')}>Overview</TabBtn>
-          <TabBtn active={section === 'notes'} onClick={() => setSection('notes')}>Notes</TabBtn>
-        </div>
-      </header>
+      <PageHeader
+        title="Progress"
+        subtitle="Mastery rollups, artifact pipeline, and learning notes."
+        actions={
+          <TabGroup>
+            <TabButton active={section === 'overview'} onClick={() => setSection('overview')} label="Overview" />
+            <TabButton active={section === 'notes'} onClick={() => setSection('notes')} label="Notes" />
+          </TabGroup>
+        }
+      />
 
       {section === 'overview' ? <Overview /> : <NotesPanel />}
     </PageShell>
-  );
-}
-
-function TabBtn({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-        active ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:text-gray-200'
-      }`}
-    >
-      {children}
-    </button>
   );
 }
 

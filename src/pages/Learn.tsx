@@ -1,8 +1,8 @@
-import { ArrowRight, ChevronDown, ChevronUp, Search, Sparkles, Target } from 'lucide-react';
+import { ArrowRight, Search, Sparkles, Target } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Badge, color, DIFFICULTY_COLOR, EmptyState, PageShell, STATUS_META } from '../components/ui';
+import { Badge, CollapsiblePanel, color, DIFFICULTY_COLOR, EmptyState, FilterPill, PageHeader, PageShell, STATUS_META } from '../components/ui';
 import {
   ConceptChain,
   type DonutSegment,
@@ -60,13 +60,10 @@ export default function Learn() {
 
   return (
     <PageShell wide>
-      <header className="mb-6">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-purple-400">Learn</div>
-        <h1 className="mt-1 text-2xl font-bold text-white sm:text-3xl">Your learning path</h1>
-        <p className="mt-1 text-sm text-gray-500">
-          {ROADMAPS.length} roadmaps · {ALL_CONCEPTS.length} concepts · 8 tracks · driven by spaced repetition.
-        </p>
-      </header>
+      <PageHeader
+        title="Learn"
+        subtitle={`${ROADMAPS.length} roadmaps · ${ALL_CONCEPTS.length} concepts · 8 tracks · driven by spaced repetition.`}
+      />
 
       <ActivePathHero
         roadmap={activeRoadmap}
@@ -366,59 +363,49 @@ function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) 
   });
 
   return (
-    <div className="rounded-2xl border border-gray-800 bg-gray-900/30">
-      <button
-        onClick={() => setOpen(v => !v)}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
-      >
-        <div>
-          <div className="text-sm font-semibold text-white">Browse all concepts</div>
-          <div className="text-[11px] text-gray-500">Search, filter, deep-link.</div>
+    <CollapsiblePanel
+      title="Browse all concepts"
+      subtitle="Search, filter, deep-link."
+      open={open}
+      onToggle={() => setOpen(v => !v)}
+    >
+      <div className="mb-4 flex flex-col gap-2">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <input
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search concepts…"
+            className="w-full rounded-lg border border-gray-800 bg-gray-950 py-2 pl-9 pr-3 text-sm text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
+          />
         </div>
-        {open ? <ChevronUp className="h-4 w-4 text-gray-500" /> : <ChevronDown className="h-4 w-4 text-gray-500" />}
-      </button>
+        <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
+          <FilterPill active={track === 'all'} onClick={() => setTrack('all')}>All</FilterPill>
+          {tracks.map(t => (
+            <FilterPill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
+              {t.title}
+            </FilterPill>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {(['all', 'untouched', 'active', 'mastered'] as StatusFilter[]).map(s => (
+            <FilterPill key={s} active={status === s} onClick={() => setStatus(s)}>
+              {s === 'all' ? 'Any status' : s[0].toUpperCase() + s.slice(1)}
+            </FilterPill>
+          ))}
+        </div>
+      </div>
 
-      {open && (
-        <div className="border-t border-gray-800 px-5 pb-5 pt-4">
-          <div className="mb-4 flex flex-col gap-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-              <input
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Search concepts…"
-                className="w-full rounded-lg border border-gray-800 bg-gray-950 py-2 pl-9 pr-3 text-sm text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              <Pill active={track === 'all'} onClick={() => setTrack('all')}>All</Pill>
-              {tracks.map(t => (
-                <Pill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
-                  {t.title}
-                </Pill>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(['all', 'untouched', 'active', 'mastered'] as StatusFilter[]).map(s => (
-                <Pill key={s} active={status === s} onClick={() => setStatus(s)}>
-                  {s === 'all' ? 'Any status' : s[0].toUpperCase() + s.slice(1)}
-                </Pill>
-              ))}
-            </div>
-          </div>
-
-          {filtered.length === 0 ? (
-            <EmptyState title="No concepts match" hint="Clear the search or filters." />
-          ) : (
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map(c => (
-                <ConceptCard key={c.id} concept={c} mastery={mastery[c.id]} />
-              ))}
-            </div>
-          )}
+      {filtered.length === 0 ? (
+        <EmptyState title="No concepts match" hint="Clear the search or filters." />
+      ) : (
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map(c => (
+            <ConceptCard key={c.id} concept={c} mastery={mastery[c.id]} />
+          ))}
         </div>
       )}
-    </div>
+    </CollapsiblePanel>
   );
 }
 
@@ -446,30 +433,6 @@ function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: Mastery
         {sparse && <span className="text-gray-700" title="Links-first concept (no mental model authored)">·</span>}
       </div>
     </Link>
-  );
-}
-
-function Pill({
-  children,
-  active,
-  tone = 'purple',
-  onClick,
-}: {
-  children: React.ReactNode;
-  active: boolean;
-  tone?: string;
-  onClick: () => void;
-}) {
-  const c = color(tone);
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
-        active ? `${c.bg} ${c.border} ${c.text}` : 'border-gray-800 text-gray-500 hover:border-gray-700 hover:text-gray-200'
-      }`}
-    >
-      {children}
-    </button>
   );
 }
 
