@@ -172,8 +172,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
     });
 
-    // Show One Tap prompt
-    window.google?.accounts.id.prompt();
+    // Do not auto-prompt on page load. Headless/prod smoke sessions can emit
+    // Google One Tap provider errors before the user has asked to sign in.
   }, [googleLoaded, user, isGuest, login]);
 
   const signInWithGoogle = async () => {
@@ -236,7 +236,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     google.accounts.id.prompt((notification: any) => {
       if (notification.isNotDisplayed()) {
-        console.error('One Tap not displayed:', notification.getNotDisplayedReason());
+        console.warn('One Tap not displayed:', notification.getNotDisplayedReason());
         captureAuthFailure({
           provider: 'google',
           stage: 'signin',
