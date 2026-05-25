@@ -687,6 +687,18 @@
       ],
       "reviewQuestions": [
         "rq-pre-vs-post-filter"
+      ],
+      "resources": [
+        {
+          "title": "Pinecone — Filtering with metadata",
+          "url": "https://www.pinecone.io/learn/vector-search-filtering/",
+          "type": "doc"
+        },
+        {
+          "title": "Weaviate — Filtered ANN search",
+          "url": "https://weaviate.io/blog/speed-up-filtered-vector-search",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1448,7 +1460,19 @@
       "related": [
         "ml-evaluation"
       ],
-      "description": "Cleaning, dedup, JSONL tasks, memorization tests."
+      "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
+      "resources": [
+        {
+          "title": "Eugene Yan — Data Flywheels for LLM Applications",
+          "url": "https://eugeneyan.com/writing/llm-patterns/",
+          "type": "doc"
+        },
+        {
+          "title": "Made With ML — Data engineering",
+          "url": "https://madewithml.com/courses/mlops/data-stack/",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "ml-browser-runtime",
@@ -1510,7 +1534,19 @@
       "related": [
         "llm-evals"
       ],
-      "description": "Held-out loss, baselines, hallucination, leakage."
+      "description": "Held-out loss, baselines, hallucination, leakage.",
+      "resources": [
+        {
+          "title": "Eugene Yan — Evaluation & Hallucination",
+          "url": "https://eugeneyan.com/writing/evals/",
+          "type": "doc"
+        },
+        {
+          "title": "Hamel Husain — Your AI Product Needs Evals",
+          "url": "https://hamel.dev/blog/posts/evals/",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "http-lifecycle",
@@ -1576,6 +1612,18 @@
       ],
       "reviewQuestions": [
         "rq-api-key-storage"
+      ],
+      "resources": [
+        {
+          "title": "OWASP — API Security Top 10 (Broken Auth)",
+          "url": "https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/",
+          "type": "doc"
+        },
+        {
+          "title": "Stripe — API key best practices",
+          "url": "https://docs.stripe.com/keys",
+          "type": "doc"
+        }
       ]
     },
     {
@@ -1745,7 +1793,19 @@
       "related": [
         "retries-dlq"
       ],
-      "description": "Offloading slow work to workers: scheduling, concurrency, visibility."
+      "description": "Offloading slow work to workers: scheduling, concurrency, visibility.",
+      "resources": [
+        {
+          "title": "Sidekiq — The Job lifecycle",
+          "url": "https://github.com/sidekiq/sidekiq/wiki/Best-Practices",
+          "type": "doc"
+        },
+        {
+          "title": "Brandur Leach — Transactionally Staged Job Drains",
+          "url": "https://brandur.org/job-drain",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "caching",
@@ -2519,7 +2579,19 @@
         "object-modeling"
       ],
       "related": [],
-      "description": "Turn engines, board state, rules."
+      "description": "Turn engines, board state, rules.",
+      "resources": [
+        {
+          "title": "Hugo Lin — Designing a tic-tac-toe / chess engine",
+          "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/",
+          "type": "doc"
+        },
+        {
+          "title": "Refactoring.Guru — State pattern in games",
+          "url": "https://refactoring.guru/design-patterns/state",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "load-balancing",
@@ -3523,7 +3595,19 @@
         "seo",
         "product-analytics"
       ],
-      "description": "Turning a visitor into an activated user: hero, proof, single CTA."
+      "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
+      "resources": [
+        {
+          "title": "Julian Shapiro — Marketing & landing pages",
+          "url": "https://www.julian.com/guide/marketing/landing-pages",
+          "type": "doc"
+        },
+        {
+          "title": "Marketing Examples — Landing page teardowns",
+          "url": "https://marketingexamples.com/landing-page",
+          "type": "doc"
+        }
+      ]
     },
     {
       "id": "seo",

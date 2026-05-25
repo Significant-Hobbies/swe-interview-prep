@@ -9,7 +9,10 @@
       "difficulty": "intro",
       "prompt": "Write a tokenizer that lowercases, splits on non-alphanumerics, removes a small stop-word set, and applies simple suffix stemming. Use the exact same function for indexing and querying.",
       "expectedOutput": "tokenize('The Quick Brown Foxes!') → ['quick','brown','fox']",
-      "hints": ["The analyzer must be symmetric across index and query time.", "Keep stop words minimal — they hurt short queries."],
+      "hints": [
+        "The analyzer must be symmetric across index and query time.",
+        "Keep stop words minimal — they hurt short queries."
+      ],
       "solutionNotes": "Stemming should be conservative; aggressive stemming makes distinct words collide."
     },
     {
@@ -20,7 +23,10 @@
       "difficulty": "core",
       "prompt": "From a list of documents, build a term → sorted posting list map. Support a boolean AND query by intersecting posting lists. Track document frequency per term.",
       "expectedOutput": "Query 'quick fox' returns docs containing both terms, found by list intersection.",
-      "hints": ["Keep posting lists sorted by doc id so intersection is linear.", "Store document frequency now — ranking needs it later."],
+      "hints": [
+        "Keep posting lists sorted by doc id so intersection is linear.",
+        "Store document frequency now — ranking needs it later."
+      ],
       "solutionNotes": "Separate the dictionary (term → metadata) from the postings storage."
     },
     {
@@ -31,7 +37,10 @@
       "difficulty": "core",
       "prompt": "Given term counts per document and document frequencies, compute the TF-IDF weight of a term in a document. Use dampened TF (1 + log tf) and IDF = log(N / df).",
       "expectedOutput": "A single numeric weight, higher for frequent-here-but-rare-overall terms.",
-      "hints": ["IDF rewards rarity across the corpus.", "Dampen raw term frequency."],
+      "hints": [
+        "IDF rewards rarity across the corpus.",
+        "Dampen raw term frequency."
+      ],
       "solutionNotes": "TF-IDF ignores document length — that is exactly what BM25 fixes."
     },
     {
@@ -42,7 +51,10 @@
       "difficulty": "core",
       "prompt": "Given tf, df, N, document length, average document length, k1=1.2 and b=0.75, compute the BM25 score of a query term for a document.",
       "expectedOutput": "A numeric score; verify TF saturation by checking the 10th occurrence adds little.",
-      "hints": ["Score = IDF · (tf·(k1+1)) / (tf + k1·(1 - b + b·dl/avgdl)).", "b controls length normalization; k1 controls TF saturation."],
+      "hints": [
+        "Score = IDF · (tf·(k1+1)) / (tf + k1·(1 - b + b·dl/avgdl)).",
+        "b controls length normalization; k1 controls TF saturation."
+      ],
       "solutionNotes": "Try b=0 (no length norm) and b=1 (full) to feel the effect."
     },
     {
@@ -53,7 +65,10 @@
       "difficulty": "core",
       "prompt": "On top of your inverted index, implement BM25 scoring and return the top-k documents for a multi-term query.",
       "expectedOutput": "Ranked top-k results for a query, scored by summed per-term BM25.",
-      "hints": ["Sum per-term BM25 contributions for multi-term queries.", "Use a k-sized heap for the top-k."],
+      "hints": [
+        "Sum per-term BM25 contributions for multi-term queries.",
+        "Use a k-sized heap for the top-k."
+      ],
       "solutionNotes": "This ranker is the lexical leg of hybrid search."
     },
     {
@@ -64,7 +79,10 @@
       "difficulty": "core",
       "prompt": "Create a labelled query set (query → relevant doc ids) and a harness that scores any retriever with recall@k, MRR, and nDCG.",
       "expectedOutput": "A single command that prints the three metrics for a retriever.",
-      "hints": ["Freeze the query set before tuning.", "Score retrievers through one common interface."],
+      "hints": [
+        "Freeze the query set before tuning.",
+        "Score retrievers through one common interface."
+      ],
       "solutionNotes": "Without this harness, every ranking change is a guess."
     },
     {
@@ -75,7 +93,10 @@
       "difficulty": "core",
       "prompt": "Given two ranked result lists (BM25 and vector), fuse them with RRF: score(d) = Σ 1/(k + rank_i(d)), k≈60.",
       "expectedOutput": "A single fused ranking that uses rank, not raw scores.",
-      "hints": ["RRF uses ranks, sidestepping incomparable score scales.", "A document missing from a list simply contributes nothing from it."],
+      "hints": [
+        "RRF uses ranks, sidestepping incomparable score scales.",
+        "A document missing from a list simply contributes nothing from it."
+      ],
       "solutionNotes": "Verify the fused list beats both inputs on your eval set."
     },
     {
@@ -86,7 +107,10 @@
       "difficulty": "core",
       "prompt": "Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.",
       "expectedOutput": "Semantically relevant documents for a query that shares no exact keywords.",
-      "hints": ["Normalize vectors before cosine.", "Use the same model for corpus and query."],
+      "hints": [
+        "Normalize vectors before cosine.",
+        "Use the same model for corpus and query."
+      ],
       "solutionNotes": "This is the vector leg of hybrid search."
     },
     {
@@ -97,7 +121,10 @@
       "difficulty": "core",
       "prompt": "Implement cosine similarity, dot product, and L2 distance. Show that on normalized vectors, cosine and dot product produce the same ranking.",
       "expectedOutput": "Three functions; a demonstration that normalized cosine == dot ranking.",
-      "hints": ["Cosine = dot / (‖a‖·‖b‖).", "On unit vectors L2² = 2 − 2·cosine."],
+      "hints": [
+        "Cosine = dot / (‖a‖·‖b‖).",
+        "On unit vectors L2² = 2 − 2·cosine."
+      ],
       "solutionNotes": "The metric must match what the embedding model was trained for."
     },
     {
@@ -108,7 +135,10 @@
       "difficulty": "core",
       "prompt": "Given a stream of (id, score) pairs, return the top-k by score using a size-k min-heap — without sorting everything.",
       "expectedOutput": "Correct top-k in O(n log k) time and O(k) space.",
-      "hints": ["Keep a min-heap of size k; the root is the weakest kept item.", "Replace the root when a better score arrives."],
+      "hints": [
+        "Keep a min-heap of size k; the root is the weakest kept item.",
+        "Replace the root when a better score arrives."
+      ],
       "solutionNotes": "This selection pattern is the core of every nearest-neighbour search."
     },
     {
@@ -119,7 +149,10 @@
       "difficulty": "core",
       "prompt": "Build an index that stores vectors and answers top-k queries by scanning every vector. Benchmark latency as the vector count grows.",
       "expectedOutput": "Exact top-k results; a latency-vs-n table.",
-      "hints": ["Batch the scan as a matrix multiply.", "This is your recall=1.0 baseline."],
+      "hints": [
+        "Batch the scan as a matrix multiply.",
+        "This is your recall=1.0 baseline."
+      ],
       "solutionNotes": "Every ANN index is measured against this for recall."
     },
     {
@@ -130,7 +163,10 @@
       "difficulty": "advanced",
       "prompt": "Draw a 3-layer HNSW graph and trace a query: which layer it enters, how it greedily hops, when it descends, and where efSearch widens the search.",
       "expectedOutput": "A diagram + walkthrough showing O(log n) traversal instead of O(n) scan.",
-      "hints": ["Upper layers = long hops; lower layers = fine search.", "efSearch trades recall for latency."],
+      "hints": [
+        "Upper layers = long hops; lower layers = fine search.",
+        "efSearch trades recall for latency."
+      ],
       "solutionNotes": "HNSW is approximate — there is no exactness guarantee."
     },
     {
@@ -141,7 +177,10 @@
       "difficulty": "core",
       "prompt": "Extend your brute-force index to support 'nearest WHERE field = value'. Implement both pre-filtering and post-filtering and compare results and timing.",
       "expectedOutput": "Filtered top-k that always returns k items when k qualify.",
-      "hints": ["Post-filtering an ANN result can return fewer than k.", "Pre-filtering is exact but scans the filtered subset."],
+      "hints": [
+        "Post-filtering an ANN result can return fewer than k.",
+        "Pre-filtering is exact but scans the filtered subset."
+      ],
       "solutionNotes": "Pre vs post filtering is a core vector DB design decision."
     },
     {
@@ -152,7 +191,10 @@
       "difficulty": "core",
       "prompt": "Chunk a small document set, embed and index it, retrieve for a query, pack context, and generate a grounded answer.",
       "expectedOutput": "Answers grounded in retrieved chunks, with sources.",
-      "hints": ["Retrieval quality is the ceiling — debug retrieval first.", "Keep the eval set fixed."],
+      "hints": [
+        "Retrieval quality is the ceiling — debug retrieval first.",
+        "Keep the eval set fixed."
+      ],
       "solutionNotes": "Most RAG failures are retrieval failures, not generation failures."
     },
     {
@@ -163,7 +205,10 @@
       "difficulty": "core",
       "prompt": "Write a chunker that splits on document structure (headings/paragraphs) with a target size and overlap, instead of fixed character cuts.",
       "expectedOutput": "Chunks that respect structure and overlap at boundaries.",
-      "hints": ["Overlap prevents losing boundary-spanning answers.", "Different document types may need different strategies."],
+      "hints": [
+        "Overlap prevents losing boundary-spanning answers.",
+        "Different document types may need different strategies."
+      ],
       "solutionNotes": "Chunk size is a retrieval-quality knob — tune it against evals."
     },
     {
@@ -174,7 +219,10 @@
       "difficulty": "core",
       "prompt": "Define a JSON schema and use structured-output mode to extract typed fields from unstructured text. Validate the result and reject on failure.",
       "expectedOutput": "A validated typed object, or an explicit rejection.",
-      "hints": ["Use schema/JSON mode, not regex on prose.", "Always validate before trusting downstream."],
+      "hints": [
+        "Use schema/JSON mode, not regex on prose.",
+        "Always validate before trusting downstream."
+      ],
       "solutionNotes": "Keep schemas shallow enough for the model to fill reliably."
     },
     {
@@ -185,7 +233,10 @@
       "difficulty": "core",
       "prompt": "Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a tool call, you execute it, feed the result back, repeat until done.",
       "expectedOutput": "A task solved across multiple tool calls.",
-      "hints": ["Tool descriptions must be precise.", "Handle failed tool calls explicitly."],
+      "hints": [
+        "Tool descriptions must be precise.",
+        "Handle failed tool calls explicitly."
+      ],
       "solutionNotes": "Add a step limit so the loop cannot run away."
     },
     {
@@ -196,7 +247,10 @@
       "difficulty": "core",
       "prompt": "Create a dataset of inputs with expected behavior and a grader (deterministic or LLM-as-judge). Run it as one command and score a prompt.",
       "expectedOutput": "A pass-rate score that changes when you change the prompt.",
-      "hints": ["Cover real failure modes, not just happy paths.", "Validate an LLM judge against human labels."],
+      "hints": [
+        "Cover real failure modes, not just happy paths.",
+        "Validate an LLM judge against human labels."
+      ],
       "solutionNotes": "Evals are unit tests for non-deterministic systems."
     },
     {
@@ -207,7 +261,10 @@
       "difficulty": "core",
       "prompt": "Implement a token bucket: tokens refill at a fixed rate, each request spends one, an empty bucket returns 429 with Retry-After.",
       "expectedOutput": "Allows bursts up to bucket size, then throttles to the refill rate.",
-      "hints": ["Compute refill lazily from elapsed time.", "Set Retry-After from time-to-next-token."],
+      "hints": [
+        "Compute refill lazily from elapsed time.",
+        "Set Retry-After from time-to-next-token."
+      ],
       "solutionNotes": "For a cluster, the bucket state must be shared (e.g. Redis)."
     },
     {
@@ -218,7 +275,10 @@
       "difficulty": "core",
       "prompt": "Add idempotency-key handling to a mutating endpoint: first request executes and stores the result; duplicates replay the stored result.",
       "expectedOutput": "Two identical requests with the same key cause one effect.",
-      "hints": ["Store key → result with an expiry.", "Guard against two concurrent requests with the same key."],
+      "hints": [
+        "Store key → result with an expiry.",
+        "Guard against two concurrent requests with the same key."
+      ],
       "solutionNotes": "Idempotency makes retries safe — pair it with retry logic."
     },
     {
@@ -229,7 +289,10 @@
       "difficulty": "core",
       "prompt": "Implement exponential backoff with full jitter for a retry loop, and route a message to a DLQ after N failed attempts.",
       "expectedOutput": "Retry delays that grow exponentially and are randomized; poison messages land in a DLQ.",
-      "hints": ["Full jitter: delay = random(0, base·2^attempt).", "Jitter de-syncs many clients retrying at once."],
+      "hints": [
+        "Full jitter: delay = random(0, base·2^attempt).",
+        "Jitter de-syncs many clients retrying at once."
+      ],
       "solutionNotes": "Without jitter, all clients retry in lockstep — a thundering herd."
     },
     {
@@ -240,7 +303,10 @@
       "difficulty": "advanced",
       "prompt": "Implement an in-memory memtable that flushes to an immutable sorted file (SSTable). Support reads that merge memtable and SSTables; deletes as tombstones.",
       "expectedOutput": "Writes go to the memtable; reads see the latest value across files.",
-      "hints": ["SSTables are immutable and sorted.", "A read may need to check several files newest-first."],
+      "hints": [
+        "SSTables are immutable and sorted.",
+        "A read may need to check several files newest-first."
+      ],
       "solutionNotes": "Add bloom filters so reads skip files that lack the key."
     },
     {
@@ -251,7 +317,10 @@
       "difficulty": "core",
       "prompt": "Implement an append-only WAL: append + fsync each change before acknowledging it, and replay the log on startup to recover state.",
       "expectedOutput": "State survives a simulated crash by replaying the log.",
-      "hints": ["fsync before you acknowledge the write.", "Checkpoint so the log does not grow forever."],
+      "hints": [
+        "fsync before you acknowledge the write.",
+        "Checkpoint so the log does not grow forever."
+      ],
       "solutionNotes": "A write() syscall does not mean the data is durable — fsync does."
     },
     {
@@ -262,7 +331,10 @@
       "difficulty": "intro",
       "prompt": "Given an array of integers and a target, return the indices of the two numbers that add to the target. Solve it in a single pass.",
       "expectedOutput": "twoSum([2,7,11,15], 9) -> [0,1]",
-      "hints": ["For each number, what value would complete the pair?", "Store value -> index as you scan; check for the complement before inserting."],
+      "hints": [
+        "For each number, what value would complete the pair?",
+        "Store value -> index as you scan; check for the complement before inserting."
+      ],
       "solutionNotes": "One pass, O(n) time, O(n) space. The map turns the inner scan into an O(1) lookup."
     },
     {
@@ -273,7 +345,10 @@
       "difficulty": "intro",
       "prompt": "Given a string, decide if it reads the same forwards and backwards, ignoring case and non-alphanumeric characters. Use two pointers, no extra string.",
       "expectedOutput": "isPalindrome('A man, a plan, a canal: Panama') -> true",
-      "hints": ["Start one pointer at each end, move inward.", "Skip non-alphanumeric characters without allocating a cleaned copy."],
+      "hints": [
+        "Start one pointer at each end, move inward.",
+        "Skip non-alphanumeric characters without allocating a cleaned copy."
+      ],
       "solutionNotes": "Converging pointers give O(n) time and O(1) space."
     },
     {
@@ -284,7 +359,10 @@
       "difficulty": "core",
       "prompt": "Find the length of the longest substring with no repeating characters using a variable-size sliding window.",
       "expectedOutput": "lengthOfLongestSubstring('abcabcbb') -> 3",
-      "hints": ["Expand the right edge; on a duplicate, shrink the left edge until the window is valid again.", "Track the last index of each character."],
+      "hints": [
+        "Expand the right edge; on a duplicate, shrink the left edge until the window is valid again.",
+        "Track the last index of each character."
+      ],
       "solutionNotes": "Each character enters and leaves the window once — O(n)."
     },
     {
@@ -295,7 +373,10 @@
       "difficulty": "core",
       "prompt": "A sorted array was rotated at an unknown pivot. Find a target's index in O(log n).",
       "expectedOutput": "search([4,5,6,7,0,1,2], 0) -> 4",
-      "hints": ["At each step one half is still sorted — identify which.", "Decide whether the target lies in the sorted half, then recurse there."],
+      "hints": [
+        "At each step one half is still sorted — identify which.",
+        "Decide whether the target lies in the sorted half, then recurse there."
+      ],
       "solutionNotes": "Standard binary search with an extra check for which half is ordered."
     },
     {
@@ -306,7 +387,10 @@
       "difficulty": "core",
       "prompt": "Return the values of a binary tree grouped by level, top to bottom.",
       "expectedOutput": "levelOrder of [3,9,20,null,null,15,7] -> [[3],[9,20],[15,7]]",
-      "hints": ["Levels mean BFS — use a queue.", "Process the queue one level at a time by capturing its size before the loop."],
+      "hints": [
+        "Levels mean BFS — use a queue.",
+        "Process the queue one level at a time by capturing its size before the loop."
+      ],
       "solutionNotes": "BFS with a per-level size snapshot; O(n)."
     },
     {
@@ -317,7 +401,10 @@
       "difficulty": "core",
       "prompt": "Given a grid of '1' (land) and '0' (water), count the connected land masses (4-directionally).",
       "expectedOutput": "A single integer — the island count.",
-      "hints": ["Each unvisited '1' starts a new island; flood-fill it with DFS or BFS.", "Mark cells visited as you go to avoid recounting."],
+      "hints": [
+        "Each unvisited '1' starts a new island; flood-fill it with DFS or BFS.",
+        "Mark cells visited as you go to avoid recounting."
+      ],
       "solutionNotes": "Grid-as-graph: every cell is a node, neighbours are edges. O(rows*cols)."
     },
     {
@@ -328,7 +415,10 @@
       "difficulty": "core",
       "prompt": "Given values along a line, pick a non-adjacent subset with maximum sum.",
       "expectedOutput": "rob([2,7,9,3,1]) -> 12",
-      "hints": ["Define dp[i] = best sum using houses 0..i.", "dp[i] = max(dp[i-1], dp[i-2] + value[i])."],
+      "hints": [
+        "Define dp[i] = best sum using houses 0..i.",
+        "dp[i] = max(dp[i-1], dp[i-2] + value[i])."
+      ],
       "solutionNotes": "Classic 1D DP; can be reduced to two rolling variables, O(1) space."
     },
     {
@@ -339,8 +429,501 @@
       "difficulty": "core",
       "prompt": "Return the k-th largest element of an unsorted array using a heap, without fully sorting.",
       "expectedOutput": "findKthLargest([3,2,1,5,6,4], 2) -> 5",
-      "hints": ["Keep a min-heap of size k; the root is the answer.", "If the heap exceeds k, pop the smallest."],
+      "hints": [
+        "Keep a min-heap of size k; the root is the answer.",
+        "If the heap exceeds k, pop the smallest."
+      ],
       "solutionNotes": "O(n log k) time, O(k) space — beats sorting when k is small."
+    },
+    {
+      "id": "design-parking-lot",
+      "title": "Design a parking lot",
+      "conceptId": "object-modeling",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Model a parking lot with vehicle classes (Car/Bike/Truck), spot sizes, a Lot/Level/Spot hierarchy, and entry/exit. Define the 4-6 classes, their fields, and the park()/leave() interactions.",
+      "expectedOutput": "Class diagram + the park() flow showing how spot allocation handles size mismatch.",
+      "hints": [
+        "Composition over inheritance for vehicle ↔ spot fit.",
+        "Where does pricing live — Spot, Level, or Lot?"
+      ],
+      "solutionNotes": "Avoid one mega-class. Spot allocation is the real decision point."
+    },
+    {
+      "id": "design-vending-machine",
+      "title": "Design a vending machine",
+      "conceptId": "state-management",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Draw the state machine for a vending machine: Idle → Coin → Selecting → Dispense → Idle, plus refund / out-of-stock branches. List every transition trigger.",
+      "expectedOutput": "A state diagram with 5-7 states, transitions labeled by input event.",
+      "hints": [
+        "What does pressing a button do in each state?",
+        "Where does coin-return live?"
+      ],
+      "solutionNotes": "States hold behavior; transitions hold guards. Keep illegal transitions impossible."
+    },
+    {
+      "id": "design-pricing-strategies",
+      "title": "Pluggable pricing strategies",
+      "conceptId": "strategy-pattern",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Design a checkout system where pricing strategy is swappable: flat, percentage-off, BOGO, member-tier. Each strategy is a class with the same price(cart) signature.",
+      "expectedOutput": "Interface + 4 concrete strategies + how the cart picks one at runtime.",
+      "hints": [
+        "Inject the strategy; do not let cart code know its type.",
+        "Compose strategies for stacked discounts."
+      ],
+      "solutionNotes": "Strategy pattern shines when an algorithm varies independently of its caller."
+    },
+    {
+      "id": "design-pub-sub-bus",
+      "title": "In-process pub/sub bus",
+      "conceptId": "observer-pattern",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Build an in-memory event bus: publishers fire events, subscribers register handlers by topic. Decide sync vs async delivery, error isolation, and unsubscribe semantics.",
+      "expectedOutput": "Bus interface (publish, subscribe, unsubscribe) + the subscriber registry data structure.",
+      "hints": [
+        "What happens if one subscriber throws?",
+        "Keep the bus simple — no ordering guarantee unless asked."
+      ],
+      "solutionNotes": "Observer decouples emitter and listener; bus is the registry between them."
+    },
+    {
+      "id": "design-notification-factory",
+      "title": "Notification factory",
+      "conceptId": "factory-creational",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Design a Notification factory that returns Email / SMS / Push notifiers from a single create(type, payload) call. Show where channel-specific config lives.",
+      "expectedOutput": "Factory + 3 concrete notifiers + the registration mechanism for adding a 4th.",
+      "hints": [
+        "Map of type → constructor beats a switch.",
+        "Keep the factory dumb; let notifiers carry their own config."
+      ],
+      "solutionNotes": "Factories pay off when you add the 4th type without touching callers."
+    },
+    {
+      "id": "design-coffee-decorator",
+      "title": "Coffee-shop order decorator",
+      "conceptId": "decorator-structural",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Model a coffee order with milk / sugar / whip add-ons via the decorator pattern. cost() and description() should compose automatically.",
+      "expectedOutput": "Base Beverage + 3 decorators, plus a sample order chain and its computed cost.",
+      "hints": [
+        "Each decorator wraps a Beverage and is itself a Beverage.",
+        "Order of wrapping matters for description, not cost."
+      ],
+      "solutionNotes": "Decorator > deep inheritance trees when feature combinations explode."
+    },
+    {
+      "id": "design-bank-account-locking",
+      "title": "Concurrent bank transfers",
+      "conceptId": "concurrency-design",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Design transfer(from, to, amount) that is safe under concurrent calls. Address deadlock from circular locking, isolation, and what happens if one side fails mid-write.",
+      "expectedOutput": "Locking order rule + pseudocode for the transfer + how you would test for deadlock.",
+      "hints": [
+        "Always acquire locks in a globally consistent order (e.g. by account id).",
+        "Use a single transaction; rollback on failure."
+      ],
+      "solutionNotes": "Concurrency bugs are not about more locks — they are about a discipline for which locks and in what order."
+    },
+    {
+      "id": "design-undo-redo",
+      "title": "Undo / redo stack",
+      "conceptId": "command-chain",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Design undo/redo for a text editor using the Command pattern. Each user action becomes a Command with execute/undo. Decide how the redo stack interacts with new edits.",
+      "expectedOutput": "Command interface + 2-3 concrete commands + the two stacks and their invariants.",
+      "hints": [
+        "New action after undo should clear the redo stack.",
+        "Group small typing actions into one Command for usability."
+      ],
+      "solutionNotes": "Each command must store enough state to perfectly invert itself."
+    },
+    {
+      "id": "design-hotel-booking",
+      "title": "Hotel booking system",
+      "conceptId": "booking-inventory",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Design a hotel-room booking system: search availability for a date range, hold a room during checkout, finalize the reservation. Address concurrent bookers fighting for the last room.",
+      "expectedOutput": "Inventory model + hold/confirm flow + the consistency strategy (optimistic vs pessimistic).",
+      "hints": [
+        "A hold is itself a write — model it.",
+        "Expire holds aggressively (5-10 min)."
+      ],
+      "solutionNotes": "Overbooking is a business decision, not just a race condition."
+    },
+    {
+      "id": "design-load-balancer",
+      "title": "L7 load balancer",
+      "conceptId": "load-balancing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Design an L7 load balancer in front of N application servers. Pick a routing algorithm (round-robin, least-connections, hashing), explain health checks, and how you drain a node.",
+      "expectedOutput": "Routing decision tree + health-check loop + a graceful-drain sequence.",
+      "hints": [
+        "Sticky sessions cost you flexibility — only enable when needed.",
+        "Health checks should mimic real traffic, not just /ping."
+      ],
+      "solutionNotes": "The hard part is not picking an algorithm — it is failing safely when a backend goes bad."
+    },
+    {
+      "id": "design-rate-limiter",
+      "title": "Distributed rate limiter",
+      "conceptId": "distributed-infra",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a rate limiter for an API: 1000 req/min per user, deployed across 10 app servers. Compare token bucket vs sliding window, and where the counter lives.",
+      "expectedOutput": "Algorithm choice + storage backend (Redis?) + how you handle a Redis outage.",
+      "hints": [
+        "Per-instance counters undercount; central counters add latency.",
+        "Approximation (e.g. sketch) can be acceptable."
+      ],
+      "solutionNotes": "Pick the cheapest approximation that does not violate the contract you advertise."
+    },
+    {
+      "id": "design-chat-system",
+      "title": "Realtime chat system",
+      "conceptId": "messaging-realtime",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a Slack-like chat: 1:1 + channels, presence, delivery + read receipts, offline message queue. Pick the wire protocol and how messages fan out.",
+      "expectedOutput": "Connection layer + message storage + the fan-out strategy for a 10k-member channel.",
+      "hints": [
+        "WebSocket connections are stateful — that constrains your load balancer.",
+        "Fan-out on write vs on read changes everything downstream."
+      ],
+      "solutionNotes": "Hot channels (>10k members) often need a different fan-out path than the long tail."
+    },
+    {
+      "id": "design-news-feed",
+      "title": "News feed (Twitter-style)",
+      "conceptId": "social-media",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a home timeline feed: who you follow → posts you see, ranked recency-first. Compare fan-out-on-write vs fan-out-on-read. Address celebrity-follower asymmetry.",
+      "expectedOutput": "Hybrid fan-out strategy + storage layout + a back-of-envelope read/write QPS estimate.",
+      "hints": [
+        "Celebrities (>1M followers) break pure fan-out-on-write.",
+        "A feed cache that is 80% pre-computed is usually enough."
+      ],
+      "solutionNotes": "Hybrid is the norm: precompute for normal users, pull for celebrities at read time."
+    },
+    {
+      "id": "design-video-streaming",
+      "title": "Video streaming (Netflix-style)",
+      "conceptId": "streaming-media",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a video-on-demand service: catalog browse, adaptive bitrate streaming, CDN distribution. Walk through what happens from play-button press to first frame on screen.",
+      "expectedOutput": "CDN + manifest (HLS/DASH) flow + the bitrate-adaptation loop.",
+      "hints": [
+        "Origin servers should never serve video to end users.",
+        "Pre-warm the CDN for predictable launches."
+      ],
+      "solutionNotes": "The 99th-percentile player is on bad wifi — design for that, not the demo."
+    },
+    {
+      "id": "design-ride-sharing",
+      "title": "Ride-sharing dispatch",
+      "conceptId": "location-transport",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design driver-rider matching: rider requests, dispatch finds the nearest available driver, ETA + price quoted, ride lifecycle. Address geo-indexing and surge.",
+      "expectedOutput": "Geo index choice (geohash / S2 / quadtree) + the dispatch decision loop.",
+      "hints": [
+        "Nearest is rarely best — factor ETA, not just distance.",
+        "Driver state updates are write-heavy; pick a store that handles that."
+      ],
+      "solutionNotes": "Match quality (not match speed) is the business metric — optimize for it explicitly."
+    },
+    {
+      "id": "design-collaborative-editor",
+      "title": "Collaborative doc editor",
+      "conceptId": "collaboration-productivity",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Pick a conflict resolution model (OT vs CRDT) and explain the sync protocol.",
+      "expectedOutput": "Conflict model + a worked example of two concurrent edits being merged.",
+      "hints": [
+        "CRDTs are easier to reason about; OT is more compact on the wire.",
+        "Cursor presence is a separate channel from edits."
+      ],
+      "solutionNotes": "Pick the model that matches your latency budget — CRDTs tolerate offline, OT does not."
+    },
+    {
+      "id": "design-search-platform",
+      "title": "Search platform end-to-end",
+      "conceptId": "search-platform-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a product search platform: ingestion → analyzer → inverted index → query parser → ranking → result page. Identify where you would add a learned ranker.",
+      "expectedOutput": "Pipeline diagram + the index update strategy (full rebuild vs near-real-time).",
+      "hints": [
+        "Recall first, precision second — bad recall is unrecoverable downstream.",
+        "Two-stage ranking: cheap recall, expensive rerank."
+      ],
+      "solutionNotes": "Search quality lives in the analyzer + the ranker — not the index data structure."
+    },
+    {
+      "id": "design-rag-system",
+      "title": "Production RAG pipeline",
+      "conceptId": "rag-system-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design a RAG system: doc ingestion → chunking → embedding → vector index, plus query-time retrieval → rerank → LLM. Identify the 3 most likely quality regressions.",
+      "expectedOutput": "Pipeline + the evals you would run on every change.",
+      "hints": [
+        "Chunking dominates retrieval quality more than embeddings do.",
+        "Eval the retriever and the generator separately."
+      ],
+      "solutionNotes": "Most RAG bugs are upstream of the LLM — fix retrieval before tuning prompts."
+    },
+    {
+      "id": "design-consistent-hashing",
+      "title": "Consistent-hash key router",
+      "conceptId": "consistent-hashing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Design a key router for a sharded cache using consistent hashing with virtual nodes. Show how add/remove of a node redistributes keys.",
+      "expectedOutput": "Ring diagram + the algorithm for routing a key + the % of keys that move when N→N+1 nodes.",
+      "hints": [
+        "Without vnodes the distribution is lumpy.",
+        "Hash the node id with k different seeds for vnodes."
+      ],
+      "solutionNotes": "The whole point is that only ~1/N of keys move on a node change."
+    },
+    {
+      "id": "design-leader-election",
+      "title": "Leader election walkthrough",
+      "conceptId": "consensus",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Walk through Raft leader election: timeouts, candidacy, vote granting, split votes. Trace what happens when the current leader is partitioned from a majority.",
+      "expectedOutput": "A 3-node trace showing one election cycle, including a split-vote retry.",
+      "hints": [
+        "Randomized election timeouts break split-vote loops.",
+        "Majority quorum, not consensus, is what guarantees safety."
+      ],
+      "solutionNotes": "Safety (no two leaders) is non-negotiable; liveness can briefly stall during partitions."
+    },
+    {
+      "id": "design-online-game-server",
+      "title": "Realtime game server",
+      "conceptId": "game-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Design the server for a 1v1 realtime game (chess clock, but with sub-100ms moves). Cover tick rate, authoritative state, and cheat resistance.",
+      "expectedOutput": "Tick loop + the input → state-update → broadcast cycle + one cheat mitigation.",
+      "hints": [
+        "Clients predict; the server reconciles.",
+        "Never trust client-reported timestamps."
+      ],
+      "solutionNotes": "The server is the source of truth; clients exist to make latency tolerable."
+    },
+    {
+      "id": "star-leadership",
+      "title": "STAR: leadership story",
+      "conceptId": "leadership-and-influence",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a 4-paragraph STAR (Situation / Task / Action / Result) about a time you led without authority. Quantify the result.",
+      "expectedOutput": "A 250-350 word story with one concrete metric in the Result.",
+      "hints": [
+        "Leadership without authority = persuasion + alignment, not org charts.",
+        "Cut adjectives; keep verbs and numbers."
+      ],
+      "solutionNotes": "The Action section is where you spend 60% of the words."
+    },
+    {
+      "id": "star-conflict",
+      "title": "STAR: peer conflict",
+      "conceptId": "conflict-resolution",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about resolving a disagreement with a peer. Show the other person’s reasoning fairly; describe how you de-escalated.",
+      "expectedOutput": "A 250-350 word story where the other person is not the villain.",
+      "hints": [
+        "Steelman the counter-position.",
+        "End with what you would do differently."
+      ],
+      "solutionNotes": "Hiring bars reject the \"I was right, they were wrong\" arc."
+    },
+    {
+      "id": "star-tough-decision",
+      "title": "STAR: tough decision",
+      "conceptId": "problem-solving-and-decision-making",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Write a STAR about a hard call you made with incomplete information. Show your reasoning and what you tracked to know if you were wrong.",
+      "expectedOutput": "A story + a single sentence: how would you have known sooner if this was wrong?",
+      "hints": [
+        "Frame it as a bet, not a certainty.",
+        "Reversibility matters — was this a one-way door?"
+      ],
+      "solutionNotes": "Decision quality > outcome quality. Judge the call by what you knew at the time."
+    },
+    {
+      "id": "star-cross-team",
+      "title": "STAR: cross-team collab",
+      "conceptId": "teamwork-and-collaboration",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about a project that needed another team’s buy-in. Show how you got it without escalation.",
+      "expectedOutput": "A 250-350 word story emphasizing the alignment work, not the technical work.",
+      "hints": [
+        "Make the other team’s win visible up front.",
+        "Async > sync for written alignment."
+      ],
+      "solutionNotes": "Most cross-team friction is unclear ownership — name it explicitly."
+    },
+    {
+      "id": "star-failure",
+      "title": "STAR: a real failure",
+      "conceptId": "failure-and-learning",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Write a STAR about a project that failed. Be specific about what you got wrong. End with what concretely changed in your behavior since.",
+      "expectedOutput": "A 250-350 word story where the failure is non-trivial and your role in it is named.",
+      "hints": [
+        "\"It taught me a lot\" is not a lesson.",
+        "Pick a failure you actually moved past, not a fresh wound."
+      ],
+      "solutionNotes": "A safe failure (e.g. \"I worked too hard\") signals you have not learned anything."
+    },
+    {
+      "id": "star-communication",
+      "title": "STAR: explaining to a non-expert",
+      "conceptId": "communication",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about explaining a technical concept to a non-technical stakeholder so they could make a decision. Show the analogy or framing you chose.",
+      "expectedOutput": "A 250-350 word story including the actual analogy you used.",
+      "hints": [
+        "One core analogy beats five small ones.",
+        "Audit: what does the stakeholder need to decide?"
+      ],
+      "solutionNotes": "Good communication makes the listener’s next decision easier, not yours."
+    },
+    {
+      "id": "star-prioritization",
+      "title": "STAR: ruthless prioritization",
+      "conceptId": "time-management-and-prioritization",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about a quarter where you had 2x the work you could deliver. Show the cut list and how you got buy-in on it.",
+      "expectedOutput": "A 250-350 word story including the explicit list of what you did NOT do.",
+      "hints": [
+        "Saying no to a good thing is the actual skill.",
+        "A written cut list is a forcing function for buy-in."
+      ],
+      "solutionNotes": "Prioritization stories should make the listener uncomfortable about what got dropped."
+    },
+    {
+      "id": "star-innovation",
+      "title": "STAR: an unconventional idea",
+      "conceptId": "innovation-and-creativity",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about a solution you proposed that was not the obvious one. Show why the obvious one was insufficient.",
+      "expectedOutput": "A 250-350 word story where the alternative options are credibly evaluated, not strawmanned.",
+      "hints": [
+        "Anchor on a constraint nobody else was taking seriously.",
+        "Show your cost-benefit, not just your conclusion."
+      ],
+      "solutionNotes": "Innovation theater is when the \"creative\" answer ignores known tradeoffs."
+    },
+    {
+      "id": "star-customer-feedback",
+      "title": "STAR: acting on customer feedback",
+      "conceptId": "customer-obsession",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about a time you changed a roadmap based on a single customer signal. Address how you knew it would generalize.",
+      "expectedOutput": "A 250-350 word story including the disqualifying-or-confirming evidence you collected.",
+      "hints": [
+        "n=1 is a hypothesis, not a conclusion.",
+        "Talk to the customer, then look at the data."
+      ],
+      "solutionNotes": "Customer obsession is not saying yes — it is taking their problem seriously, even when you say no."
+    },
+    {
+      "id": "star-ownership",
+      "title": "STAR: end-to-end ownership",
+      "conceptId": "ownership-and-accountability",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a STAR about a problem that was not your job but you owned anyway. Show how you escalated when you needed help.",
+      "expectedOutput": "A 250-350 word story where you stayed accountable even when the work was hard.",
+      "hints": [
+        "Ownership is about closing the loop, not heroics.",
+        "Escalation is part of ownership, not a failure of it."
+      ],
+      "solutionNotes": "The opposite of ownership is \"that is not my team\" — name where you could have said that and did not."
+    },
+    {
+      "id": "draft-positioning-statement",
+      "title": "Draft a product positioning statement",
+      "conceptId": "positioning",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Write a 2-sentence positioning statement for a product you use, using the form: \"For [target] who [need], [product] is the [category] that [unique benefit]. Unlike [competitor], it [differentiator].\" Then write a worse version and explain why yours is sharper.",
+      "expectedOutput": "Two positioning statements (good + worse) + a one-line critique of the worse one.",
+      "hints": [
+        "Specific target > broad target.",
+        "The differentiator must be testable."
+      ],
+      "solutionNotes": "A statement that fits 3 competitors is not positioning."
+    },
+    {
+      "id": "critique-landing-page",
+      "title": "Critique a real landing page",
+      "conceptId": "landing-pages",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Pick a real landing page (not your own). Score it against: clear hero (3s rule), specific audience, single primary CTA, social proof, friction-free signup. Write a rewrite for the hero section.",
+      "expectedOutput": "A scoring rubric (1-5 per criterion) + a rewritten hero (headline + sub + CTA).",
+      "hints": [
+        "Read the headline; close your eyes; can you say what the product does?",
+        "Cut adjectives. Replace with nouns and verbs."
+      ],
+      "solutionNotes": "A landing page does one job: get the right visitor to take one action."
+    },
+    {
+      "id": "audit-seo-onpage",
+      "title": "On-page SEO audit",
+      "conceptId": "seo",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "prompt": "Pick a page on a real product site. Audit: title tag, meta description, H1, internal links, mobile usability, Core Web Vitals (LCP target <2.5s). List 3 fixes ranked by impact.",
+      "expectedOutput": "A short audit table + 3 prioritized fixes with a rationale.",
+      "hints": [
+        "Title tag is the single biggest on-page lever.",
+        "LCP is usually one bad image away from green."
+      ],
+      "solutionNotes": "On-page SEO is hygiene; content + links are the actual fight."
+    },
+    {
+      "id": "define-north-star-metric",
+      "title": "Define a north-star metric",
+      "conceptId": "product-analytics",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Pick a product. Define its north-star metric (one number that captures customer value), 2-3 input metrics that drive it, and a guardrail metric you must not regress.",
+      "expectedOutput": "A tree: north-star → inputs → guardrail, each with a one-sentence rationale.",
+      "hints": [
+        "North-star is not revenue. It is the value the user gets.",
+        "A good guardrail is something you would never trade away."
+      ],
+      "solutionNotes": "The test: can a PM make a tradeoff call from this tree alone?"
     }
   ]
 }
