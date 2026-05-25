@@ -9,6 +9,13 @@ export default defineConfig({
       '/api': 'http://localhost:3456',
     },
   },
+  build: {
+    // Initial bundle is ~430 KB. The chunks Vite warns about are all lazy:
+    // Mermaid core, useCodeExecution (Go WASM runtime), and per-repo library
+    // content.json files behind AmbientLibrary clicks. Bump to silence the
+    // false positive rather than chasing unsplitable third-party blobs.
+    chunkSizeWarningLimit: 2000,
+  },
   test: {
     environment: 'happy-dom',
     globals: true,
