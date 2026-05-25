@@ -1,12 +1,11 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { trackReturned, trackSignup } from './lib/analytics';
-import { saasmaker } from './lib/saasmaker';
 
 // Session-level analytics. The app is usable as a guest, so `signup` means
 // "first ever session on this browser" and `returned` means a later session.
@@ -35,11 +34,6 @@ function PageFallback() {
 
 function App() {
   const { user, isGuest, loading } = useAuth();
-  const location = useLocation();
-
-  useEffect(() => {
-    saasmaker.analytics.track({ name: 'page_view', url: location.pathname }).catch(() => {});
-  }, [location.pathname]);
 
   useEffect(() => {
     try {
