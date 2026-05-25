@@ -363,7 +363,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Query rewriting reshapes the user's input before retrieval: spell correction, synonym expansion, stop-word removal, intent classification. Do it once before the index lookup — never trust the raw query."
+      "mentalModel": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work — never trust the raw query."
     },
     {
       "id": "search-discovery",
@@ -389,7 +389,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Discovery search is \"I do not know what I want yet\": no query, just signals (recency, popularity, personalization, taxonomy browse). Different rank function, different eval — do not measure it like keyword search."
+      "mentalModel": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
     },
     {
       "id": "embeddings",
@@ -1039,7 +1039,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Prompts are code: any production change should be versioned, the diff captured, and the eval rerun before rollout. Without prompt versioning a regression has no commit to blame."
+      "mentalModel": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
     },
     {
       "id": "llm-evals",
@@ -1106,7 +1106,7 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Linear algebra (vectors, matrices) describes representations; calculus (gradients) drives learning; probability quantifies belief. Pick the lens that matches the question you are asking."
+      "mentalModel": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question."
     },
     {
       "id": "ml-gradient-descent",
@@ -1130,7 +1130,7 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Gradient descent is iterated nudging: at each step, walk a small distance in the direction that lowers the loss. Learning rate is the size of that step — too big and you overshoot, too small and you crawl."
+      "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls."
     },
     {
       "id": "ml-backprop",
@@ -1154,7 +1154,7 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Backprop is the chain rule applied layer by layer: compute the loss at the output, then push the gradient back through each operation. The trick is reusing forward activations to avoid recomputing."
+      "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them."
     },
     {
       "id": "ml-softmax-xent",
@@ -1183,7 +1183,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Softmax turns logits into a probability distribution; cross-entropy measures how surprised that distribution is by the true label. Pairing them is what makes the gradient clean to backprop."
+      "mentalModel": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with."
     },
     {
       "id": "ml-adamw",
@@ -1207,7 +1207,7 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "AdamW = Adam optimizer with weight decay applied directly (not folded into the gradient). It is the default for transformer training because it adapts learning rates per parameter without overfitting from L2 leakage."
+      "mentalModel": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch."
     },
     {
       "id": "ml-tokenization",
@@ -1230,7 +1230,7 @@
           "type": "video"
         }
       ],
-      "mentalModel": "LLM tokenization splits text into subword units (BPE, SentencePiece) so the vocab covers any string at the cost of word boundaries. Same model = same tokenizer; mismatched tokenizers silently destroy quality."
+      "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
     },
     {
       "id": "ml-language-modeling",
@@ -1255,7 +1255,7 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Language modeling is next-token prediction: given a prefix, output a distribution over the next token. Every other LLM capability (chat, code, reasoning) is a downstream specialization of this one objective."
+      "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective."
     },
     {
       "id": "ml-sampling",
@@ -1279,7 +1279,7 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "Decoding turns logits into text via temperature, top-k, top-p (nucleus), or beam search. Greedy is deterministic and dull; sampling is varied and risky — pick by whether your task tolerates variance."
+      "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
     },
     {
       "id": "ml-embeddings",
@@ -1304,7 +1304,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Embeddings map discrete tokens to dense vectors so similar meanings land near each other. The geometry of the embedding space is the model — distance, direction, and clustering all carry meaning."
+      "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from."
     },
     {
       "id": "ml-self-attention",
@@ -1357,7 +1357,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Attention lets each token look at every other token, weighted by relevance. Multi-head splits the attention into parallel subspaces so the model can attend to different relations (syntax, coref, position) simultaneously."
+      "mentalModel": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position)."
     },
     {
       "id": "ml-transformer-block",
@@ -1412,7 +1412,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "A training loop is forward → loss → backward → step, repeated over batches. Most \"training is broken\" bugs are data bugs (leaked, mislabeled, wrong shape) — instrument the data before the model."
+      "mentalModel": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model."
     },
     {
       "id": "ml-checkpointing",
@@ -1436,7 +1436,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Checkpoints save weights + optimizer state so training can resume after a crash. Save frequently enough that a single failure costs less than one hour; keep the last-N and the best-by-eval separately."
+      "mentalModel": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately."
     },
     {
       "id": "ml-lora",
@@ -1460,7 +1460,7 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "LoRA fine-tunes by inserting low-rank trainable matrices into a frozen model. You update <1% of parameters yet recover most of the quality of full fine-tuning — and you can hot-swap adapters at inference."
+      "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time."
     },
     {
       "id": "ml-data-engineering",
@@ -1489,7 +1489,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "In ML, the dataset is the product. Pipelines need versioning, deduplication, quality filtering, and provenance — most quality gains come from data work, not from changing the model."
+      "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does."
     },
     {
       "id": "ml-browser-runtime",
@@ -1513,7 +1513,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Running ML in the browser (ONNX Runtime Web, TF.js, Transformers.js) trades server cost and privacy for cold-start latency and model size. WebGPU is fast; WASM is portable; CPU is the fallback."
+      "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback."
     },
     {
       "id": "ml-webgpu",
@@ -1536,7 +1536,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "WebGPU exposes the GPU directly to JS via compute shaders, enabling 10-100x speedups for matrix ops in the browser. Buffer transfers and shader compilation are the real bottlenecks, not raw compute."
+      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself."
     },
     {
       "id": "ml-evaluation",
@@ -1566,7 +1566,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Offline eval (held-out test set) tells you the model improved; online eval (A/B test, user metrics) tells you the product improved. Both are necessary — neither is sufficient."
+      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough."
     },
     {
       "id": "http-lifecycle",
@@ -1798,7 +1798,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Webhooks are inverse APIs: instead of you polling, the provider POSTs to you when an event happens. Always verify signatures, return 200 fast (queue the work), and design for retries — webhooks are at-least-once."
+      "mentalModel": "A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once."
     },
     {
       "id": "background-jobs",
@@ -1827,7 +1827,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Background jobs move work off the request path so the user sees a fast response. The hard problems are idempotency (same job runs twice), retries (transient vs permanent failures), and visibility (where did my job go?)."
+      "mentalModel": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?)."
     },
     {
       "id": "caching",
@@ -2040,7 +2040,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Payment systems are coordination problems with money: card networks, processors, your DB, and accounting must agree. Treat every state change as a ledger entry, idempotency keys are non-optional, and reconcile against the processor daily."
+      "mentalModel": "Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting. Treat every state change like a ledger entry, use idempotency keys on every request, and reconcile against the processor daily."
     },
     {
       "id": "b-tree",
@@ -2259,7 +2259,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Columnar stores group values by column, not by row. Reading a single column is ~100x faster than from a row store; updating a single row is much slower. Pick by query shape — wide analytics yes, OLTP no."
+      "mentalModel": "A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics."
     },
     {
       "id": "secondary-index",
@@ -2283,7 +2283,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A secondary index is a separate sorted structure that maps a non-primary-key value back to row locations. It makes lookups by that value fast, at the cost of slower writes and extra storage. Every index is a bet — make it count."
+      "mentalModel": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff — only add the ones queries actually need."
     },
     {
       "id": "storage-retrieval",
@@ -2419,7 +2419,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Object modeling is finding the 4-7 nouns that carry the system's state and the verbs they pass between them. Reach for composition before inheritance; the right model makes the next requirement easy."
+      "mentalModel": "Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them. Prefer composition (this has-a) over inheritance (this is-a). A good model makes the next requirement easy to add."
     },
     {
       "id": "state-management",
@@ -2441,7 +2441,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A state machine is a discrete set of states + the transitions between them. The win is making illegal transitions impossible by construction — if your code has \"if status === X && Y\" guards, you are simulating a state machine badly."
+      "mentalModel": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
     },
     {
       "id": "strategy-pattern",
@@ -2463,7 +2463,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Strategy pattern injects an algorithm so the caller does not know its type. Pick it when the same operation has multiple swappable implementations (pricing, sorting, routing). Strategy = noun-shaped if/else."
+      "mentalModel": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" — pricing rules, sort orders, routing strategies."
     },
     {
       "id": "observer-pattern",
@@ -2485,7 +2485,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Observer decouples emitter from listener: publishers fire events, subscribers register handlers, the bus is the registry between them. The tradeoff is harder debugging — flows are not in the call stack."
+      "mentalModel": "The observer pattern decouples who emits an event from who listens. Publishers fire events, subscribers register handlers, and the event bus is the registry that connects them. The tradeoff: flows are no longer visible in a single call stack, so debugging gets harder."
     },
     {
       "id": "factory-creational",
@@ -2507,7 +2507,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Creational patterns (Factory, Builder, Singleton) hide how an object gets constructed so callers do not pin themselves to a concrete type. Pay off when you add the 4th variant without touching callers."
+      "mentalModel": "Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class. They earn their keep when you add the 4th variant without callers needing to change."
     },
     {
       "id": "decorator-structural",
@@ -2529,7 +2529,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Decorator wraps an object in another of the same interface, adding behavior without subclassing. The pattern shines when feature combinations explode and inheritance would force you to enumerate them."
+      "mentalModel": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode — instead of one class per combination, you stack small decorators."
     },
     {
       "id": "concurrency-design",
@@ -2553,7 +2553,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Concurrency bugs are not about more locks — they are about a discipline for which locks, in what order, and for how long. The cheapest fix is usually a single transaction or a single-writer model."
+      "mentalModel": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design."
     },
     {
       "id": "command-chain",
@@ -2575,7 +2575,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Command turns an action into an object you can store, queue, log, or invert. Pair with two stacks for undo/redo, with a queue for jobs, with a chain for middleware-style pipelines."
+      "mentalModel": "The command pattern turns an action into a small object you can store, queue, log, or reverse. Pair it with two stacks for undo/redo, with a queue for background jobs, or with a chain for middleware-style processing."
     },
     {
       "id": "booking-inventory",
@@ -2598,7 +2598,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Booking systems are about holds: a reservation is itself a write that blocks others. Decide hold duration aggressively, model overbooking as a business choice, and pick optimistic vs pessimistic concurrency by collision rate."
+      "mentalModel": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
     },
     {
       "id": "game-design",
@@ -2626,7 +2626,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Game / simulation servers are tight loops over a shared world state. The server is the source of truth; clients predict to hide latency and reconcile when the server disagrees."
+      "mentalModel": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees."
     },
     {
       "id": "load-balancing",
@@ -2677,7 +2677,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Consistent hashing maps both nodes and keys onto a ring so that adding a node only moves ~1/N of keys. Virtual nodes smooth the distribution; without them you get hot shards."
+      "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly."
     },
     {
       "id": "consensus",
@@ -2728,7 +2728,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Distributed systems multiply your failure modes: every network call can be slow, retried, lost, or duplicated. Build for partial failure first — timeouts, idempotency, bounded queues — then optimize."
+      "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second."
     },
     {
       "id": "messaging-realtime",
@@ -2750,7 +2750,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Realtime messaging is stateful connections + a fan-out problem. WebSockets pin users to one server (load-balancer constraint); the message fan-out (per-channel vs per-user) is the architecture choice."
+      "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice."
     },
     {
       "id": "social-media",
@@ -2773,7 +2773,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Feed systems pick between fan-out on write (precompute per follower) and fan-out on read (assemble at request time). The real answer is hybrid — celebrities break write-fan-out, the long tail breaks read-fan-out."
+      "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
     },
     {
       "id": "streaming-media",
@@ -2795,7 +2795,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Video streaming is CDN + adaptive bitrate (HLS/DASH). The origin should never serve to end users; the player adapts to bandwidth on the fly. Design for the bad-wifi 99th percentile, not the demo."
+      "mentalModel": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo."
     },
     {
       "id": "location-transport",
@@ -2817,7 +2817,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) for fast \"nearest\" queries. Driver-state updates are write-heavy — pick storage that handles that, and remember nearest ≠ best (ETA matters more than distance)."
+      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters."
     },
     {
       "id": "collaboration-productivity",
@@ -2839,7 +2839,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Collaborative editors pick between OT (operations transformed against each other) and CRDTs (data types that merge automatically). CRDTs tolerate offline; OT is more compact on the wire — pick by latency budget."
+      "mentalModel": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs."
     },
     {
       "id": "search-platform-design",
@@ -3025,7 +3025,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A stack is LIFO: the last thing pushed is the first thing popped. The signal to reach for one is \"I need to revisit the most recent unfinished thing\" — parsing, recursion, undo, bracket matching."
+      "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets."
     },
     {
       "id": "binary-search",
@@ -3074,7 +3074,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A linked list trades O(1) random access for O(1) insertion anywhere you already hold a pointer. The classic moves are dummy heads, two-pointer / fast-slow, and reversing in place."
+      "mentalModel": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place."
     },
     {
       "id": "trees",
@@ -3125,7 +3125,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A trie indexes strings by their characters in a tree: each path from root to node spells a prefix. The win is prefix queries (autocomplete, IP routing) in O(length), not O(n × length)."
+      "mentalModel": "A trie stores strings in a tree where each path from the root spells out a prefix. It makes prefix queries (autocomplete, IP routing) take time proportional to the length of the prefix, not the size of the dataset."
     },
     {
       "id": "heap",
@@ -3174,7 +3174,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Backtracking is recursion + undo: try a choice, recurse, and if it fails, undo and try the next one. The whole tree shrinks if you prune branches that cannot reach a valid answer (constraint propagation)."
+      "mentalModel": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer."
     },
     {
       "id": "graphs",
@@ -3226,7 +3226,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "BFS for unweighted graphs, Dijkstra for non-negative weights, Bellman-Ford for negative weights, A* when you have a heuristic. The cost of using the wrong one is wrong answers (Dijkstra + negative weights) or wasted time."
+      "mentalModel": "Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal. Using the wrong one gives wrong answers or wasted time."
     },
     {
       "id": "union-find",
@@ -3248,7 +3248,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Union-Find tracks connected components: two operations, union(a,b) merges, find(a) returns the root. With path compression + union by rank, both are effectively O(1). Use it whenever the question is \"are these in the same group?\"."
+      "mentalModel": "Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id. With path compression and union by rank, both run in essentially constant time. Use it whenever the question is \"are these two in the same group?\""
     },
     {
       "id": "dp-1d",
@@ -3299,7 +3299,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "2D DP fills a table where each cell depends on its neighbors above and to the left (or some local set). The art is naming the state precisely — once dp[i][j] has a one-sentence meaning, the recurrence usually writes itself."
+      "mentalModel": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely — once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
     },
     {
       "id": "greedy",
@@ -3323,7 +3323,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Greedy makes the locally optimal choice and hopes it composes. It only works when an exchange argument or matroid structure justifies it — when it does not, you get wrong answers that look right on small inputs."
+      "mentalModel": "A greedy algorithm always picks the choice that looks best right now. It only gives the right answer when the problem has a structure (an exchange argument) that proves local choices add up correctly. When they do not, greedy quietly returns wrong answers."
     },
     {
       "id": "intervals",
@@ -3345,7 +3345,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Interval problems usually start with sorting by start or end. Once sorted, a single sweep + a few invariants (last end, current count) handles merge / overlap / scheduling / room allocation."
+      "mentalModel": "Interval problems almost always start by sorting — usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
     },
     {
       "id": "math-geometry",
@@ -3365,7 +3365,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Coding interviews use math sparingly: GCD/LCM, modular arithmetic, primes, combinatorics, and a little geometry (cross product, line intersection). Recognize the shape; the formula is one search away."
+      "mentalModel": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem — the formula is a quick lookup away."
     },
     {
       "id": "bit-manipulation",
@@ -3385,7 +3385,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Bits give you O(1) set membership (bitmasks), parity (XOR), and fast power-of-2 tests. The two tricks worth memorizing: n & (n-1) clears the lowest set bit; XOR cancels duplicates."
+      "mentalModel": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero."
     },
     {
       "id": "leadership-and-influence",
@@ -3410,7 +3410,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Leadership without authority is the ability to align people around an outcome without org-chart power. The signal is sustained behavior change in others, measured in weeks — not the meeting where they agreed with you."
+      "mentalModel": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks — not the meeting where they nodded along."
     },
     {
       "id": "conflict-resolution",
@@ -3435,7 +3435,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Conflict is information: it surfaces a disagreement that was already there. Resolution is naming the disagreement, finding the shared goal underneath, and choosing a path — not winning the argument."
+      "mentalModel": "Conflict means information surfaced — two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
     },
     {
       "id": "problem-solving-and-decision-making",
@@ -3460,7 +3460,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Decisions are bets under uncertainty. Judge them on the reasoning at the time, not the outcome. The good ones name their disconfirming evidence in advance."
+      "mentalModel": "Decisions are bets you make with incomplete information. Judge them by the reasoning at the time, not the outcome. Good decisions name in advance what evidence would tell you you are wrong."
     },
     {
       "id": "teamwork-and-collaboration",
@@ -3485,7 +3485,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Collaboration is making the other person's job easier than they expected. Most cross-team friction comes from unclear ownership and unwritten expectations — fix those first, vibes second."
+      "mentalModel": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations — fix those before worrying about chemistry."
     },
     {
       "id": "failure-and-learning",
@@ -3505,7 +3505,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A real failure is one that cost something you cannot get back. A useful failure story names what you got wrong, what you tried after, and the behavior that changed since."
+      "mentalModel": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson."
     },
     {
       "id": "communication",
@@ -3530,7 +3530,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Good communication is audience-first: the listener's next decision should be easier after hearing you. Specificity beats sophistication; one analogy beats five."
+      "mentalModel": "Good communication is audience-first: after listening, the other person's next decision should be easier. Be specific, not sophisticated. One sharp analogy beats five vague ones."
     },
     {
       "id": "time-management-and-prioritization",
@@ -3555,7 +3555,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Prioritization is saying no to good things, not bad ones. A written cut list is a forcing function — if you cannot list what got dropped, you have not prioritized."
+      "mentalModel": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized — you have just written a wish list."
     },
     {
       "id": "innovation-and-creativity",
@@ -3580,7 +3580,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Innovation usually looks like a constraint reframed: a tradeoff you stopped accepting. The signal of real innovation is that it weakens an assumption others were taking for granted."
+      "mentalModel": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake — it is finding the assumption you can credibly weaken."
     },
     {
       "id": "customer-obsession",
@@ -3600,7 +3600,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Customer obsession is not saying yes — it is taking the customer's underlying problem seriously, even when you ship something they did not ask for. n=1 is a hypothesis, not a conclusion."
+      "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes."
     },
     {
       "id": "ownership-and-accountability",
@@ -3620,7 +3620,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Ownership is closing the loop, not heroics. The opposite is \"that is not my team\" — true ownership notices where you could have said that and chose not to."
+      "mentalModel": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to."
     },
     {
       "id": "positioning",
@@ -3642,7 +3642,7 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Positioning is the answer to \"for whom, against what alternative.\" If your statement could describe three competitors, it is not positioning — it is a vague description."
+      "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning."
     },
     {
       "id": "landing-pages",
@@ -3672,7 +3672,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A landing page does one job: get the right visitor to take one action. Headline (what / for whom), one CTA, social proof, no second priority. If you cannot say what the product does in 3 seconds, neither can the visitor."
+      "mentalModel": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them."
     },
     {
       "id": "seo",
@@ -3698,7 +3698,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "SEO is matching search intent + earning authority through links and content. On-page hygiene (title, H1, speed) is necessary but rarely sufficient — the real fight is content depth and credible inbound links."
+      "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links."
     },
     {
       "id": "product-analytics",
@@ -3720,7 +3720,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Analytics is a tree: one north-star metric that captures user value, 2-3 input metrics that drive it, guardrails you must not regress. If a PM cannot make tradeoffs from the tree, the tree is wrong."
+      "mentalModel": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong."
     }
   ]
 }
