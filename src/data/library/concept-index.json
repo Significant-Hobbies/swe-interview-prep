@@ -1,4 +1,504 @@
 {
+  "search-discovery": [
+    {
+      "repoId": "ood-interview",
+      "repoName": "OOD Interview",
+      "sectionId": "file-search-filesearch-readme-md",
+      "title": "Filesearch",
+      "snippet": "# Unix File Search Project This project implements a flexible file search system similar to Unix's find command, allowing users to search for files based on various criteria such as name, owner, siz…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-graph-breadth-first-search-readme-md",
+      "title": "Breadth First Search",
+      "snippet": "# Breadth-First Search (BFS) Breadth-first search (BFS) is an algorithm for traversing, searching tree, or graph data structures. It starts at the tree root (or some arbitrary node of a graph, some…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-graph-depth-first-search-readme-md",
+      "title": "Depth First Search",
+      "snippet": "# Depth-First Search (DFS) Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root (selecting some arbitrary node as the root in…"
+    }
+  ],
+  "rag": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-42",
+      "title": "42. What are the differences between cookie, local storage and session storage",
+      "snippet": "### What are the differences between cookie, local storage and session storage Below are some of the differences between cookie, local storage and session storage, | Feature | Cookie…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-43",
+      "title": "43. What is the main difference between localStorage and sessionStorage",
+      "snippet": "### What is the main difference between localStorage and sessionStorage LocalStorage is the same as SessionStorage but it persists the data even when the browser is closed and reopened(i.e it has no expiration time) whereas in sessionStorage data…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-36",
+      "title": "36. What is web storage",
+      "snippet": "### What is web storage Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies. The web storag…"
+    }
+  ],
+  "rate-limiting": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-438",
+      "title": "438. What is throttling?",
+      "snippet": "…vents * Mouse movement or drag events * API rate limiting **How does throttling work?** Throttling will execute the function at most once every specified time interval, ignoring additional calls until the interval has passed.…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-388",
+      "title": "388. What is minimum timeout throttling",
+      "snippet": "### What is minimum timeout throttling Both browser and NodeJS javascript environments throttles with a minimum delay that is greater than 0ms. That means even though setting a delay of 0ms will not…"
+    }
+  ],
+  "caching": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-465",
+      "title": "465. What is inline caching?",
+      "snippet": "### What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects. The V8 compiler stores a cache of the type o…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-cpp-lrucache-readme-md",
+      "title": "Lrucache",
+      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-csharp-lrucache-readme-md",
+      "title": "Lrucache",
+      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
+    }
+  ],
+  "message-queues": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-kafka",
+      "title": "Kafka",
+      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+    }
+  ],
+  "monitoring-analytics": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-observability",
+      "title": "Observability",
+      "snippet": "# Observability - [Observability](#observability) - [Monitoring](#monitoring) - [Data](#data) - [Application Performance Management](#application-performance-management) <details> <summary>What'…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-5",
+      "title": "5. What is the purpose of the array slice method",
+      "snippet": "### What is the purpose of the array slice method The `slice()` method in JavaScript is used to extract a section of an array, returning a new array containing the selected elements. It does not mod…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-7",
+      "title": "7. What is the difference between slice and splice",
+      "snippet": "### What is the difference between slice and splice Here are the key differences between `slice()` and `splice()` methods in JavaScript arrays: | `slice()`…"
+    }
+  ],
+  "auth-systems": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-aws",
+      "title": "AWS",
+      "snippet": "# AWS **Note**: Some of the exercises <b>cost $$$</b> and can't be performed using the free tier or resources **2nd Note**: The provided solutions are using the AWS console. It's recommended you us…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-security",
+      "title": "Security",
+      "snippet": "# Security <details> <summary>What is DevSecOps? What its core principals?</summary><br><b> A couple of quotations from chosen companies: [Snyk](https://snyk.io/series/devsecops): \"DevSecOps refer…"
+    }
+  ],
+  "ecommerce-payments": [
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
+      "title": "Airlinemanagementsystem",
+      "snippet": "…lights, manage passengers, handle seat assignments, process payments, and track bookings and flights. --- ## Requirements - **Flight Management:** The system manages flights, each with a unique flight number, aircraft, source, destination, and schedule. - *…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-restaurantmanagementsystem-readme-md",
+      "title": "Restaurantmanagementsystem",
+      "snippet": "…s, place orders, manage tables, generate bills, and process payments. The system should also support staff management and menu management. --- ## Requirements - **Table Management:** The system manages tables, their availability, and assignments. - **Reserv…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-ridesharingservice-readme-md",
+      "title": "Ridesharingservice",
+      "snippet": "…to accept trips, and the system to manage trip assignments, payments, and trip status. --- ## Requirements - **User Management:** The system manages both riders and drivers. - **Location Management:** The system tracks the current location of drivers and ri…"
+    }
+  ],
+  "object-storage": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "…itory - for storing images. This can be a filesystem, swift object storage, HTTP, etc. </b></details> #### OpenStack - Swift <details> <summary>Explain Swift in detail</summary><br><b> * Swift is Object Store service and is an highly available, distribute…"
+    }
+  ],
+  "storage-retrieval": [
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-cpp-digitalwalletservice-readme-md",
+      "title": "Digitalwalletservice",
+      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-csharp-digitalwalletservice-readme-md",
+      "title": "Digitalwalletservice",
+      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-golang-digitalwalletservice-readme-md",
+      "title": "Digitalwalletservice",
+      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
+    }
+  ],
+  "sharding": [
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-math-integer-partition-readme-md",
+      "title": "Integer Partition",
+      "snippet": "# Integer Partition In number theory and combinatorics, a partition of a positive integer `n`, also called an **integer partition**, is a way of writing `n` as a sum of positive integers. Two su…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-aws",
+      "title": "AWS",
+      "snippet": "…details> <details> <summary>You need a cache that supports sharding and built with multi-threaded architecture in mind. Which one would you use?</summary><br><b> ElastiCache Memcached </b></details> <details> <summary>True or False? ElastiCache doesn't supp…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-databases",
+      "title": "Databases",
+      "snippet": "…dered ACID compliant </details> <details> <summary>What is sharding?</summary><br><b> Sharding is a horizontal partitioning. Are you able to explain what is it good for? </b></details> <details> <summary>You find out your database became a bottleneck and u…"
+    }
+  ],
+  "replication": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-kubernetes",
+      "title": "Kubernetes",
+      "snippet": "…bjects are there?</summary><br><b> * Pod * Service * ReplicationController * ReplicaSet * DaemonSet * Namespace * ConfigMap ... </b></details> <details> <summary>What fields are mandatory with any Kubernetes object?</summary><br><b> metadata…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "…ed through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or software failure…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-aws",
+      "title": "AWS",
+      "snippet": "…healing where corrupted data replaced by doing peer-to-peer replication</summary><br><b> True </b></details> <details> <summary>True or False? Aurora storage is striped across 20 volumes</summary><br><b> False. 100 volumes. </b></details> <details> <summar…"
+    }
+  ],
+  "object-modeling": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-231",
+      "title": "231. What are the two types of loops in javascript",
+      "snippet": "### What are the two types of loops in javascript 1. **Entry Controlled loops:** In this kind of loop type, the test condition is tested before entering the loop body. For example, For Loop and Whil…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-304",
+      "title": "304. What is the output of the following for loops",
+      "snippet": "### What is the output of the following for loops ```javascript for (var i = 0; i < 4; i++) { // global scope setTimeout(() => console.log(i)); } for (let i = 0; i…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-392",
+      "title": "392. What are different event loops",
+      "snippet": "### What are different event loops In JavaScript, there are multiple event loops that can be used depending on the context of your application. The most common event loops are: 1. The Browser…"
+    }
+  ],
+  "state-management": [
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "object-diagram-documentation-md",
+      "title": "Object Diagram Documentation",
+      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+    }
+  ],
+  "strategy-pattern": [
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "design-patterns-reference-md",
+      "title": "Design Patterns Reference",
+      "snippet": "…lassing is impractical --- ## Behavioral Patterns ### 5. Strategy Pattern **Purpose**: Define a family of algorithms, encapsulate each one, and make them interchangeable. **Used In**: - **Chess Game**: Different movement strategies for different pieces -…"
+    },
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "diagrams-readme-md",
+      "title": "Diagrams Readme",
+      "snippet": "…Pattern (ParkingLot) - Factory Pattern (multiple systems) - Strategy Pattern (Chess, Parking) - Command Pattern (ATM, Chess) - State Pattern (Orders, Bookings) - Observer Pattern (Notifications) - Composite Pattern (Shopping Cart, Itinerary) - Decorator Patter…"
+    },
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "object-diagram-documentation-md",
+      "title": "Object Diagram Documentation",
+      "snippet": "…n**: ParkingLot class (only one instance in the system) - **Strategy Pattern**: Different parking spot allocation strategies - **Factory Pattern**: Vehicle and ParkingSpot creation **Key Features:** - Multi-floor parking management - Different spot types (Com…"
+    }
+  ],
+  "observer-pattern": [
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-pubsubsystem-readme-md",
+      "title": "Pubsubsystem",
+      "snippet": "…er, Message), shutdown() --- ## Design Patterns Used - **Observer Pattern:** The Pub/Sub system is a concrete implementation of the Observer pattern. Topics (subjects) maintain a list of subscribers (observers) and notify them asynchronously when a new mess…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-cpp-pubsubsystem-readme-md",
+      "title": "Pubsubsystem",
+      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-csharp-pubsubsystem-readme-md",
+      "title": "Pubsubsystem",
+      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
+    }
+  ],
+  "factory-creational": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-1",
+      "title": "1. What are the possible ways to create objects in JavaScript",
+      "snippet": "### What are the possible ways to create objects in JavaScript There are many ways to create objects in javascript as mentioned below: 1. **Object literal syntax:** The object literal s…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "design-patterns-python-readme-md",
+      "title": "Python",
+      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-musicstreamingservice-readme-md",
+      "title": "Musicstreamingservice",
+      "snippet": "# Music Streaming Service (LLD) ## Problem Statement Design and implement an online music streaming service (like Spotify) that allows users to browse, search, and play songs, manage playlists, fol…"
+    }
+  ],
+  "decorator-structural": [
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "design-patterns-python-readme-md",
+      "title": "Python",
+      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
+    }
+  ],
+  "concurrency-design": [
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "<p align=\"center\"> <img src=\"https://raw.githubusercontent.com/ashishps1/awesome-low-level-design/HEAD/images/lld-repo-logo.png\" width=\"350\" height=\"200\"> </p> <p align=\"center\"> <a href=\"https:/…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-kubernetes",
+      "title": "Kubernetes",
+      "snippet": "# Kubernetes <!-- {% raw %} --> What's your goal? * I would like to prepare for CKA certification * See [CKA](CKA.md) page * I would like to learn Kubernetes by practicing both theoritcal and pr…"
+    }
+  ],
+  "command-chain": [
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "object-diagram-documentation-md",
+      "title": "Object Diagram Documentation",
+      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+    }
+  ],
+  "load-balancing": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "certificates-aws-solutions-architect-associate-md",
+      "title": "AWS Solutions Architect Associate",
+      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "certificates-aws-cloud-practitioner-md",
+      "title": "AWS Cloud Practitioner",
+      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "…is can be achieved through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or…"
+    }
+  ],
+  "consistent-hashing": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "…summary><br><b> </b></details> <details> <summary>Explain \"Consistent Hashing\"</summary><br><b> </b></details> <details> <summary>How would you update each of the services in the following drawing without having app (foo.com) downtime?<br> <img src=\"https://…"
+    }
+  ],
+  "consensus": [
+    {
+      "repoId": "react-questions",
+      "repoName": "React Interview Questions",
+      "sectionId": "q-257",
+      "title": "257. How do you use immer library for state updates?",
+      "snippet": "### How do you use immer library for state updates? Immer library enforces the immutability of state based on **copy-on-write** mechanism. It uses JavaScript proxy to keep track of updates to immuta…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
+      "title": "Airlinemanagementsystem",
+      "snippet": "# Airline Management System (LLD) ## Problem Statement Design and implement an Airline Management System that allows users to book flights, manage passengers, handle seat assignments, process payme…"
+    },
+    {
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "object-diagram-documentation-md",
+      "title": "Object Diagram Documentation",
+      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+    }
+  ],
+  "messaging-realtime": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-java-src-cricinfo-readme-md",
+      "title": "Cricinfo",
+      "snippet": "# Cricket Information System (LLD) ## Problem Statement Design and implement a Cricket Information System similar to CricInfo that provides comprehensive information about cricket matches, teams, p…"
+    },
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-kafka",
+      "title": "Kafka",
+      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
+    }
+  ],
+  "social-media": [
+    {
+      "repoId": "react-questions",
+      "repoName": "React Interview Questions",
+      "sectionId": "q-74",
+      "title": "74. What are the common folder structures for React?",
+      "snippet": "### What are the common folder structures for React? There are two common practices for React project file structure. 1. **Grouping by features or routes:** One common way to structu…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-cpp-socialnetworkingservice-readme-md",
+      "title": "Socialnetworkingservice",
+      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
+    },
+    {
+      "repoId": "low-level-design",
+      "repoName": "Awesome Low-Level Design",
+      "sectionId": "solutions-csharp-socialnetworkingservice-readme-md",
+      "title": "Socialnetworkingservice",
+      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
+    }
+  ],
+  "streaming-media": [
+    {
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "readme-md",
+      "title": "Overview",
+      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
+      "title": "Levenshtein Distance",
+      "snippet": "# Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number…"
+    }
+  ],
   "array-hashing": [
     {
       "repoId": "javascript-algorithms",
@@ -274,474 +774,6 @@
       "snippet": "…s comes from the usage of the memo table. ### Approach 4: Greedy Once we have our code in the bottom-up state, we can make one final, important observation. From a given position, when we try to see if we can jump to a GOOD position, we only ever use one -…"
     }
   ],
-  "object-modeling": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-231",
-      "title": "231. What are the two types of loops in javascript",
-      "snippet": "### What are the two types of loops in javascript 1. **Entry Controlled loops:** In this kind of loop type, the test condition is tested before entering the loop body. For example, For Loop and Whil…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-304",
-      "title": "304. What is the output of the following for loops",
-      "snippet": "### What is the output of the following for loops ```javascript for (var i = 0; i < 4; i++) { // global scope setTimeout(() => console.log(i)); } for (let i = 0; i…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-392",
-      "title": "392. What are different event loops",
-      "snippet": "### What are different event loops In JavaScript, there are multiple event loops that can be used depending on the context of your application. The most common event loops are: 1. The Browser…"
-    }
-  ],
-  "state-management": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
-    }
-  ],
-  "strategy-pattern": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "design-patterns-reference-md",
-      "title": "Design Patterns Reference",
-      "snippet": "…lassing is impractical --- ## Behavioral Patterns ### 5. Strategy Pattern **Purpose**: Define a family of algorithms, encapsulate each one, and make them interchangeable. **Used In**: - **Chess Game**: Different movement strategies for different pieces -…"
-    },
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "diagrams-readme-md",
-      "title": "Diagrams Readme",
-      "snippet": "…Pattern (ParkingLot) - Factory Pattern (multiple systems) - Strategy Pattern (Chess, Parking) - Command Pattern (ATM, Chess) - State Pattern (Orders, Bookings) - Observer Pattern (Notifications) - Composite Pattern (Shopping Cart, Itinerary) - Decorator Patter…"
-    },
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "…n**: ParkingLot class (only one instance in the system) - **Strategy Pattern**: Different parking spot allocation strategies - **Factory Pattern**: Vehicle and ParkingSpot creation **Key Features:** - Multi-floor parking management - Different spot types (Com…"
-    }
-  ],
-  "observer-pattern": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "…er, Message), shutdown() --- ## Design Patterns Used - **Observer Pattern:** The Pub/Sub system is a concrete implementation of the Observer pattern. Topics (subjects) maintain a list of subscribers (observers) and notify them asynchronously when a new mess…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
-    }
-  ],
-  "factory-creational": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-1",
-      "title": "1. What are the possible ways to create objects in JavaScript",
-      "snippet": "### What are the possible ways to create objects in JavaScript There are many ways to create objects in javascript as mentioned below: 1. **Object literal syntax:** The object literal s…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "design-patterns-python-readme-md",
-      "title": "Python",
-      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-musicstreamingservice-readme-md",
-      "title": "Musicstreamingservice",
-      "snippet": "# Music Streaming Service (LLD) ## Problem Statement Design and implement an online music streaming service (like Spotify) that allows users to browse, search, and play songs, manage playlists, fol…"
-    }
-  ],
-  "decorator-structural": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "design-patterns-python-readme-md",
-      "title": "Python",
-      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
-    }
-  ],
-  "concurrency-design": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"> <img src=\"https://raw.githubusercontent.com/ashishps1/awesome-low-level-design/HEAD/images/lld-repo-logo.png\" width=\"350\" height=\"200\"> </p> <p align=\"center\"> <a href=\"https:/…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kubernetes",
-      "title": "Kubernetes",
-      "snippet": "# Kubernetes <!-- {% raw %} --> What's your goal? * I would like to prepare for CKA certification * See [CKA](CKA.md) page * I would like to learn Kubernetes by practicing both theoritcal and pr…"
-    }
-  ],
-  "command-chain": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
-    }
-  ],
-  "load-balancing": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "certificates-aws-solutions-architect-associate-md",
-      "title": "AWS Solutions Architect Associate",
-      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "certificates-aws-cloud-practitioner-md",
-      "title": "AWS Cloud Practitioner",
-      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…is can be achieved through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or…"
-    }
-  ],
-  "caching": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-465",
-      "title": "465. What is inline caching?",
-      "snippet": "### What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects. The V8 compiler stores a cache of the type o…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-lrucache-readme-md",
-      "title": "Lrucache",
-      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-lrucache-readme-md",
-      "title": "Lrucache",
-      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
-    }
-  ],
-  "consistent-hashing": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…summary><br><b> </b></details> <details> <summary>Explain \"Consistent Hashing\"</summary><br><b> </b></details> <details> <summary>How would you update each of the services in the following drawing without having app (foo.com) downtime?<br> <img src=\"https://…"
-    }
-  ],
-  "sharding": [
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-math-integer-partition-readme-md",
-      "title": "Integer Partition",
-      "snippet": "# Integer Partition In number theory and combinatorics, a partition of a positive integer `n`, also called an **integer partition**, is a way of writing `n` as a sum of positive integers. Two su…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "…details> <details> <summary>You need a cache that supports sharding and built with multi-threaded architecture in mind. Which one would you use?</summary><br><b> ElastiCache Memcached </b></details> <details> <summary>True or False? ElastiCache doesn't supp…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-databases",
-      "title": "Databases",
-      "snippet": "…dered ACID compliant </details> <details> <summary>What is sharding?</summary><br><b> Sharding is a horizontal partitioning. Are you able to explain what is it good for? </b></details> <details> <summary>You find out your database became a bottleneck and u…"
-    }
-  ],
-  "replication": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kubernetes",
-      "title": "Kubernetes",
-      "snippet": "…bjects are there?</summary><br><b> * Pod * Service * ReplicationController * ReplicaSet * DaemonSet * Namespace * ConfigMap ... </b></details> <details> <summary>What fields are mandatory with any Kubernetes object?</summary><br><b> metadata…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…ed through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or software failure…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "…healing where corrupted data replaced by doing peer-to-peer replication</summary><br><b> True </b></details> <details> <summary>True or False? Aurora storage is striped across 20 volumes</summary><br><b> False. 100 volumes. </b></details> <details> <summar…"
-    }
-  ],
-  "consensus": [
-    {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-257",
-      "title": "257. How do you use immer library for state updates?",
-      "snippet": "### How do you use immer library for state updates? Immer library enforces the immutability of state based on **copy-on-write** mechanism. It uses JavaScript proxy to keep track of updates to immuta…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
-      "title": "Airlinemanagementsystem",
-      "snippet": "# Airline Management System (LLD) ## Problem Statement Design and implement an Airline Management System that allows users to book flights, manage passengers, handle seat assignments, process payme…"
-    },
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
-    }
-  ],
-  "message-queues": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kafka",
-      "title": "Kafka",
-      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
-    }
-  ],
-  "rate-limiting": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-438",
-      "title": "438. What is throttling?",
-      "snippet": "…vents * Mouse movement or drag events * API rate limiting **How does throttling work?** Throttling will execute the function at most once every specified time interval, ignoring additional calls until the interval has passed.…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-388",
-      "title": "388. What is minimum timeout throttling",
-      "snippet": "### What is minimum timeout throttling Both browser and NodeJS javascript environments throttles with a minimum delay that is greater than 0ms. That means even though setting a delay of 0ms will not…"
-    }
-  ],
-  "storage-retrieval": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-golang-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
-    }
-  ],
-  "search-discovery": [
-    {
-      "repoId": "ood-interview",
-      "repoName": "OOD Interview",
-      "sectionId": "file-search-filesearch-readme-md",
-      "title": "Filesearch",
-      "snippet": "# Unix File Search Project This project implements a flexible file search system similar to Unix's find command, allowing users to search for files based on various criteria such as name, owner, siz…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-breadth-first-search-readme-md",
-      "title": "Breadth First Search",
-      "snippet": "# Breadth-First Search (BFS) Breadth-first search (BFS) is an algorithm for traversing, searching tree, or graph data structures. It starts at the tree root (or some arbitrary node of a graph, some…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-depth-first-search-readme-md",
-      "title": "Depth First Search",
-      "snippet": "# Depth-First Search (DFS) Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root (selecting some arbitrary node as the root in…"
-    }
-  ],
-  "social-media": [
-    {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-74",
-      "title": "74. What are the common folder structures for React?",
-      "snippet": "### What are the common folder structures for React? There are two common practices for React project file structure. 1. **Grouping by features or routes:** One common way to structu…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-socialnetworkingservice-readme-md",
-      "title": "Socialnetworkingservice",
-      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-socialnetworkingservice-readme-md",
-      "title": "Socialnetworkingservice",
-      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
-    }
-  ],
-  "messaging-realtime": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-cricinfo-readme-md",
-      "title": "Cricinfo",
-      "snippet": "# Cricket Information System (LLD) ## Problem Statement Design and implement a Cricket Information System similar to CricInfo that provides comprehensive information about cricket matches, teams, p…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kafka",
-      "title": "Kafka",
-      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
-    }
-  ],
-  "streaming-media": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
-      "title": "Levenshtein Distance",
-      "snippet": "# Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number…"
-    }
-  ],
-  "ecommerce-payments": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
-      "title": "Airlinemanagementsystem",
-      "snippet": "…lights, manage passengers, handle seat assignments, process payments, and track bookings and flights. --- ## Requirements - **Flight Management:** The system manages flights, each with a unique flight number, aircraft, source, destination, and schedule. - *…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-restaurantmanagementsystem-readme-md",
-      "title": "Restaurantmanagementsystem",
-      "snippet": "…s, place orders, manage tables, generate bills, and process payments. The system should also support staff management and menu management. --- ## Requirements - **Table Management:** The system manages tables, their availability, and assignments. - **Reserv…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-ridesharingservice-readme-md",
-      "title": "Ridesharingservice",
-      "snippet": "…to accept trips, and the system to manage trip assignments, payments, and trip status. --- ## Requirements - **User Management:** The system manages both riders and drivers. - **Location Management:** The system tracks the current location of drivers and ri…"
-    }
-  ],
-  "monitoring-analytics": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-observability",
-      "title": "Observability",
-      "snippet": "# Observability - [Observability](#observability) - [Monitoring](#monitoring) - [Data](#data) - [Application Performance Management](#application-performance-management) <details> <summary>What'…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-5",
-      "title": "5. What is the purpose of the array slice method",
-      "snippet": "### What is the purpose of the array slice method The `slice()` method in JavaScript is used to extract a section of an array, returning a new array containing the selected elements. It does not mod…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-7",
-      "title": "7. What is the difference between slice and splice",
-      "snippet": "### What is the difference between slice and splice Here are the key differences between `slice()` and `splice()` methods in JavaScript arrays: | `slice()`…"
-    }
-  ],
-  "auth-systems": [
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "# AWS **Note**: Some of the exercises <b>cost $$$</b> and can't be performed using the free tier or resources **2nd Note**: The provided solutions are using the AWS console. It's recommended you us…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-security",
-      "title": "Security",
-      "snippet": "# Security <details> <summary>What is DevSecOps? What its core principals?</summary><br><b> A couple of quotations from chosen companies: [Snyk](https://snyk.io/series/devsecops): \"DevSecOps refer…"
-    }
-  ],
   "teamwork-and-collaboration": [
     {
       "repoId": "devops-exercises",
@@ -802,6 +834,15 @@
       "sectionId": "oop-rust-aggregation-readme-md",
       "title": "Aggregation",
       "snippet": "…alive.\", prof.name); } ``` --- ## **4. Advanced: Shared Ownership (`Rc<T>`)** Sometimes, you don't know who will die first. Maybe the Professor belongs to 3 Universities at once. For this, Rust uses **Reference Counting (`Rc`)**. * **`Rc<T>`**: A smart p…"
+    }
+  ],
+  "seo": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-478",
+      "title": "478. What is the difference between const and Object.freeze",
+      "snippet": "…What is the output of below code? ```javascript const promiseOne = new Promise((resolve, reject) => setTimeout(resolve, 4000)); const promiseTwo = new Promise((resolve, reject) => setTimeout(reject, 4000)); Promise.all([promiseOne, promiseTwo]).then((data) =…"
     }
   ]
 }
