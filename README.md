@@ -175,3 +175,24 @@ The deploy path validates env, builds `dist/`, and runs `wrangler pages deploy d
 
 **Tech Stack**: React 19, TypeScript, TailwindCSS, Vite, Cloudflare Pages Functions, Turso/libSQL
 **License**: MIT
+
+<!-- ACTIVE-AI-TASK-LOG:START -->
+## Active AI Task Log
+
+This section is maintained by the SaaS Maker Active-AI product/design loop so future agents do not reopen duplicate UI tasks.
+
+- Business lane: P0 Can make money
+- Rule: do not create another broad "improve the UI" task unless the acceptance criteria differ materially from the tasks listed here.
+- Source of truth for task status: SaaS Maker task board. README entries are durable context only.
+
+| Task | Status | Priority | Last known note |
+| --- | --- | --- | --- |
+| `5261150e` swe-interview-prep: make value + proof obvious above the fold | done | high | 2026-05-25 18:52:42 |
+| `6b17627a` [fleet-smoke] swe-interview-prep/web analytics endpoint 404 | done | medium | 2026-05-25 17:25:17 |
+| `bc1219df` swe-interview-prep: add one-click mock interview proof | done | high | 2026-05-26 — added sample question + feedback preview cards + primary "Start a mock interview" CTA to Login page |
+| `6bf51c84` swe-interview-prep: add post-answer feedback sample | done | high | 2026-05-26 — added SampleFeedbackPanel on Mock setup screen (example prompt + answer + 4 rubric score bars + missed patterns); renamed CTA to "Start practice" |
+| `d585ad1e` swe-interview-prep: add interview readiness score explainer | done | high | 2026-05-26 — added ScoreExplainerPanel showing per-dimension raises/lowers tips (Clarity, Correctness, Tradeoffs, Communication); shown on setup screen and results screen |
+| `97949bda` swe-interview-prep: add weak-topic next-step card | done | medium | 2026-05-26 — added NextStepCard component; shown statically (Tradeoffs/68) in SampleFeedbackPanel and dynamically (lowest-avg dimension) in completed session view; directs user to Practice → Drills |
+| `f66caa8c` swe-interview-prep: add role-specific practice picker proof | done | medium | 2026-05-26 — added Login role picker (Frontend / Backend / System design tabs) on landing; each tab swaps a sample question card (prompt + kind + tags); defaults to Backend, no auth required |
+| `10c4e62c` swe-interview-prep: add paid mock-interview outcome preview | done | high | 2026-05-26 — added PaidMockPackPreview component on Mock setup screen: hiring signal verdict (Strong Yes / L4–L5), overall readiness score bar, blurred written analysis teaser, pattern gaps list, personalized drill roadmap preview; one full-width CTA button ("Get my mock pack") with click-to-confirm state; no backend/auth/data changes |
+<!-- ACTIVE-AI-TASK-LOG:END -->

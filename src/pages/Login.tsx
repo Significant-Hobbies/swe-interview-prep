@@ -1,4 +1,4 @@
-import { ArrowRight, Hammer, Map as MapIcon, Sparkles, Target } from 'lucide-react';
+import { ArrowRight, Boxes, CheckCircle, ChevronRight, Clock, Code2, Hammer, Layout as LayoutIcon, Map as MapIcon, Server, Sparkles, Target, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { SaaSMakerTestimonials } from '../components/saasmaker-feedback';
@@ -22,6 +22,58 @@ const FEATURES = [
   },
 ];
 
+const SAMPLE_DRILLS = [
+  { track: 'search', title: 'Build a BM25 scorer' },
+  { track: 'vector-db', title: 'Implement HNSW' },
+  { track: 'backend', title: 'Design a rate limiter' },
+  { track: 'databases', title: 'Simulate an LSM tree' },
+];
+
+const ROLE_PICKER = [
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    icon: LayoutIcon,
+    accent: 'text-cyan-300',
+    accentBg: 'bg-cyan-500/15',
+    tagline: 'React, perf, accessibility',
+    sample: {
+      kind: 'Coding · Medium',
+      title: 'Throttled search with race-safe results',
+      prompt: 'Build a typeahead that calls an API on each keystroke but always renders results from the latest query — even if responses arrive out of order.',
+      tags: ['debounce', 'AbortController', 'state races'],
+    },
+  },
+  {
+    id: 'backend',
+    label: 'Backend',
+    icon: Server,
+    accent: 'text-emerald-300',
+    accentBg: 'bg-emerald-500/15',
+    tagline: 'APIs, concurrency, storage',
+    sample: {
+      kind: 'Coding · Medium',
+      title: 'Idempotent payment endpoint',
+      prompt: 'Design and implement POST /charges so that a retried request with the same Idempotency-Key never double-charges, even under concurrent retries.',
+      tags: ['idempotency', 'transactions', 'race conditions'],
+    },
+  },
+  {
+    id: 'system-design',
+    label: 'System design',
+    icon: Boxes,
+    accent: 'text-purple-300',
+    accentBg: 'bg-purple-500/15',
+    tagline: 'Scale, tradeoffs, data flow',
+    sample: {
+      kind: 'HLD · 45 min',
+      title: 'Design a URL shortener at 10k QPS',
+      prompt: 'Sketch a system that issues short codes, redirects under 50ms p99, and survives a hot-key burst on a single short link.',
+      tags: ['hashing', 'cache', 'sharding', 'hot keys'],
+    },
+  },
+] as const;
+
 const STEPS = [
   {
     n: '01',
@@ -43,6 +95,8 @@ const STEPS = [
 export default function Login() {
   const { signInWithGoogle, continueAsGuest } = useAuth();
   const [debugInfo, setDebugInfo] = useState<string>('');
+  const [activeRole, setActiveRole] = useState<typeof ROLE_PICKER[number]['id']>('backend');
+  const activeRoleData = ROLE_PICKER.find((r) => r.id === activeRole) ?? ROLE_PICKER[1];
 
   useEffect(() => {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -90,14 +144,27 @@ export default function Login() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-gray-300">
-          A personal learning OS for backend, search, vector databases, and AI systems.
-          Every concept maps to a drill, an artifact you build, and a spaced-repetition review.
+          125 concepts across 8 engineering tracks — backend, search, vector databases, AI systems — each mapped to a drill you code and an artifact you ship.
         </p>
 
-        <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mx-auto mt-5 flex max-w-2xl flex-wrap justify-center gap-2">
+          {SAMPLE_DRILLS.map(({ track, title }) => (
+            <span
+              key={title}
+              className="inline-flex items-center gap-1.5 rounded-full border border-gray-700 bg-gray-900/60 px-3 py-1 text-xs text-gray-300 backdrop-blur"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-purple-400/80" />
+              <span className="text-gray-500">{track}</span>
+              <span className="text-gray-600">·</span>
+              {title}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <button
             onClick={signInWithGoogle}
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-gray-950 shadow-[0_0_30px_-10px_rgba(255,255,255,0.6)] transition-transform hover:scale-[1.02] sm:w-auto"
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-semibold text-gray-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.7)] transition-transform hover:scale-[1.02] sm:w-auto"
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -135,6 +202,180 @@ export default function Login() {
             <p className="mt-1.5 text-sm text-gray-300">{body}</p>
           </div>
         ))}
+      </section>
+
+      {/* Mock interview proof */}
+      <section className="relative z-10 mx-auto w-full max-w-5xl px-6 pb-16">
+        <div className="mb-8 text-center">
+          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
+            <Code2 className="h-3 w-3" />
+            Try it right now
+          </span>
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            See a real question. Get real feedback.
+          </h2>
+          <p className="mt-2 text-sm text-gray-400">
+            This is exactly what a mock interview looks like — pick a topic, code your answer, get scored.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {/* Sample question card */}
+          <div className="rounded-xl border border-gray-700 bg-gray-900/60 p-5 backdrop-blur">
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-blue-500/15 px-2 py-0.5 text-xs font-medium text-blue-400">
+                  Backend · Medium
+                </span>
+                <span className="flex items-center gap-1 text-xs text-gray-500">
+                  <Clock className="h-3 w-3" />
+                  30 min
+                </span>
+              </div>
+              <span className="text-xs text-gray-600">Sample question</span>
+            </div>
+            <h3 className="mb-2 text-sm font-semibold text-white">Design a Rate Limiter</h3>
+            <p className="mb-4 text-sm leading-relaxed text-gray-300">
+              Implement a token bucket rate limiter that allows <code className="rounded bg-gray-800 px-1 text-purple-300">N</code> requests per second. It must handle burst traffic correctly and be safe to call from multiple goroutines.
+            </p>
+            <div className="rounded-lg bg-gray-950 p-3 font-mono text-xs text-gray-400">
+              <span className="text-blue-400">type</span>{' '}
+              <span className="text-green-400">RateLimiter</span>{' '}
+              <span className="text-gray-300">interface {'{'}</span>
+              <br />
+              {'  '}<span className="text-yellow-400">Allow</span>
+              <span className="text-gray-300">() bool</span>
+              <br />
+              <span className="text-gray-300">{'}'}</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {['token bucket', 'concurrency', 'sliding window'].map((t) => (
+                <span key={t} className="rounded-full border border-gray-700 px-2 py-0.5 text-xs text-gray-400">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Sample feedback card */}
+          <div className="rounded-xl border border-gray-700 bg-gray-900/60 p-5 backdrop-blur">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-xs font-medium text-gray-400">AI feedback after your session</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-white">74</span>
+                <span className="text-xs text-gray-500">/100</span>
+              </div>
+            </div>
+
+            <div className="mb-1 h-1.5 w-full overflow-hidden rounded-full bg-gray-800">
+              <div className="h-full w-[74%] rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+            </div>
+            <p className="mb-4 text-xs text-gray-500">Score — good start, two gaps to close</p>
+
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start gap-2">
+                <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                <span className="text-gray-300">Correct algorithm — token bucket fits bursty traffic</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                <span className="text-gray-300">Clean interface, easy to swap implementations</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                <span className="text-gray-300">No handling for clock drift — causes silent throttle errors</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                <span className="text-gray-300">Missing test cases — interviewers notice this fast</span>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-purple-500/20 bg-purple-500/5 p-3 text-xs text-gray-400">
+              <span className="font-medium text-purple-300">Next to study:</span> monotonic clocks, sync.Mutex patterns
+            </div>
+          </div>
+        </div>
+
+        {/* Primary CTA */}
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <button
+            onClick={continueAsGuest}
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 text-base font-semibold text-white shadow-[0_0_40px_-8px_rgba(168,85,247,0.6)] transition-all hover:scale-[1.02] hover:shadow-[0_0_55px_-8px_rgba(168,85,247,0.8)] sm:w-auto"
+          >
+            Start a mock interview — no account needed
+            <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+          </button>
+          <p className="text-xs text-gray-500">30-minute session · immediate score · no sign-up required</p>
+        </div>
+      </section>
+
+      {/* Role-specific practice picker proof */}
+      <section className="relative z-10 mx-auto w-full max-w-5xl px-6 pb-16">
+        <div className="mb-6 text-center">
+          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300">
+            <Target className="h-3 w-3" />
+            Practice for your role
+          </span>
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            Pick a role. Get a question shaped for it.
+          </h2>
+          <p className="mt-2 text-sm text-gray-400">
+            Drills, mock prompts, and feedback are tuned to what your interview loop actually asks.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-gray-700 bg-gray-900/60 p-4 backdrop-blur sm:p-5">
+          <div role="tablist" aria-label="Practice role" className="mb-4 grid grid-cols-3 gap-2">
+            {ROLE_PICKER.map((role) => {
+              const isActive = role.id === activeRole;
+              const Icon = role.icon;
+              return (
+                <button
+                  key={role.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveRole(role.id)}
+                  className={`flex flex-col items-start gap-1 rounded-lg border px-3 py-2.5 text-left transition-colors ${
+                    isActive
+                      ? 'border-gray-600 bg-gray-800/80'
+                      : 'border-gray-800 bg-gray-900/40 hover:border-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className={`inline-flex h-6 w-6 items-center justify-center rounded-md ${role.accentBg}`}>
+                      <Icon className={`h-3.5 w-3.5 ${role.accent}`} />
+                    </span>
+                    <span className="text-sm font-semibold text-white">{role.label}</span>
+                  </div>
+                  <span className="text-xs text-gray-400">{role.tagline}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="rounded-lg border border-gray-800 bg-gray-950/60 p-4">
+            <div className="mb-2 flex items-center justify-between">
+              <span className={`rounded-md px-2 py-0.5 text-xs font-medium ${activeRoleData.accentBg} ${activeRoleData.accent}`}>
+                {activeRoleData.sample.kind}
+              </span>
+              <span className="text-xs text-gray-500">Example for {activeRoleData.label}</span>
+            </div>
+            <h3 className="text-sm font-semibold text-white">{activeRoleData.sample.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-gray-300">{activeRoleData.sample.prompt}</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {activeRoleData.sample.tags.map((t) => (
+                <span key={t} className="rounded-full border border-gray-700 px-2 py-0.5 text-xs text-gray-400">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-3 text-center text-xs text-gray-500">
+            Switch roles to preview each track — your actual session pulls from 8 tracks of role-shaped drills.
+          </p>
+        </div>
       </section>
 
       {/* How it works */}
