@@ -6,14 +6,14 @@
  * cross-fleet funnel (signup -> activated -> core_action) and a D1/D7
  * retention insight, with no custom dashboard.
  *
- * Every event carries a `project` property. This is what makes per-app and
+ * Every event carries a `project_id` property. This is what makes per-app and
  * cross-fleet views possible from one PostHog login.
  *
  * This is a Vite SPA, so the wrapper is browser-only. PostHog is initialized
  * once by `installBrowserMonitoring()` (see `foundry-monitoring.ts`).
  */
 
-import { track } from "@saas-maker/posthog-client";
+import posthog from "posthog-js";
 
 const PROJECT = "swe-interview-prep" as const;
 
@@ -36,24 +36,28 @@ export type CoreAction =
  */
 interface AnalyticsEventMap {
   /** First session after an account is created. */
-  signup: { project: typeof PROJECT };
+  signup: { project_id: typeof PROJECT };
   /** The user reaches first real value — their first study action. */
-  activated: { project: typeof PROJECT };
+  activated: { project_id: typeof PROJECT };
   /** The thing the product exists to do. */
-  core_action: { project: typeof PROJECT; action: CoreAction };
+  core_action: { project_id: typeof PROJECT; action: CoreAction };
   /** A return session by a user with prior activity. */
-  returned: { project: typeof PROJECT };
+  returned: { project_id: typeof PROJECT };
+}
+
+export function trackEvent(event: string, properties: Record<string, unknown> = {}): void {
+  try {
+    posthog.capture(event, { project_id: PROJECT, ...properties });
+  } catch {
+    // Analytics must NEVER break a user flow. Swallow and move on.
+  }
 }
 
 function emit<K extends keyof AnalyticsEventMap>(
   event: K,
-  props: Omit<AnalyticsEventMap[K], "project">,
+  props: Omit<AnalyticsEventMap[K], "project_id">,
 ): void {
-  try {
-    track(event, { project: PROJECT, ...props });
-  } catch {
-    // Analytics must NEVER break a user flow. Swallow and move on.
-  }
+  trackEvent(event, props);
 }
 
 const ACTIVATED_KEY = "swe-interview-prep:activated";

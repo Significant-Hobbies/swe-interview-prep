@@ -33,7 +33,6 @@
     "@monaco-editor/react": "4.7.0",
     "@saas-maker/changelog-widget": "^0.2.1",
     "@saas-maker/feedback": "^0.2.1",
-    "@saas-maker/posthog-client": "^0.1.0",
     "@saas-maker/testimonials": "^0.2.1",
     "ai": "6.0.168",
     "google-auth-library": "10.6.2",
@@ -50,7 +49,8 @@
     "rehype-highlight": "7.0.2",
     "remark-gfm": "4.0.1",
     "sucrase": "3.35.1",
-    "ts-fsrs": "5.3.2"
+    "ts-fsrs": "5.3.2",
+    "posthog-js": "^1.372.1"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

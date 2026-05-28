@@ -1,8 +1,5 @@
 # Interview Coder
 
-![AI Generated](https://ai-percentage-pin.vercel.app/api/ai-percentage?value=70)
-![AI PRs Welcome](https://ai-percentage-pin.vercel.app/api/ai-prs?welcome=yes)
-
 A comprehensive interview preparation platform for mastering DSA, Low-Level Design, System Design, and Behavioral interviews.
 
 ## Problem
@@ -19,7 +16,7 @@ Interview Coder consolidates everything into a single platform with integrated c
 | Database | Turso (libSQL) |
 | Auth | Google One Tap (JWT cookie) |
 | File storage | Cloudflare R2 (`swe-interview-prep-assets`) — hosts the Go WASM interpreter |
-| Analytics | PostHog (via `@saas-maker/posthog-client`) |
+| Analytics | PostHog (via `local posthog-js wrapper`) |
 | AI | Multi-provider via Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek |
 | CI/CD | GitHub Actions — auto-deploy on push to `main` |
 
@@ -187,6 +184,7 @@ This section is maintained by the SaaS Maker Active-AI product/design loop so fu
 
 | Task | Status | Priority | Last known note |
 | --- | --- | --- | --- |
+| `f6544982` swe-interview-prep: show interview outcome proof in hero | done | medium | 2026-05-27 — updated hero to focus on interview prep, added compact mock interview result |
 | `5261150e` swe-interview-prep: make value + proof obvious above the fold | done | high | 2026-05-25 18:52:42 |
 | `6b17627a` [fleet-smoke] swe-interview-prep/web analytics endpoint 404 | done | medium | 2026-05-25 17:25:17 |
 | `bc1219df` swe-interview-prep: add one-click mock interview proof | done | high | 2026-05-26 — added sample question + feedback preview cards + primary "Start a mock interview" CTA to Login page |
