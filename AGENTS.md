@@ -46,7 +46,7 @@ src/                    # React SPA
     userStore.ts        # Pure localStorage+merge helpers (unit-tested)
     conceptState.ts     # Derives concept status/confidence from FSRS mastery
     recommend.ts        # "What should I do next?" dashboard logic
-api/                    # Legacy Vercel-style handlers (.mjs) — kept for local dev
+api/                    # Legacy local handlers (.mjs) — kept for local dev
   _lib/                 # Shared: DB client, schema, AI helpers
   ai/                   # chat.ts (streaming proxy), models.ts
   auth/                 # Google JWT verify, token issue
@@ -78,7 +78,7 @@ pnpm lint           # ESLint
 - **Legacy redirects**: `/today`, `/dashboard`, `/roadmaps`, `/concepts` → `/learn`; `/drills`, `/reviews`, `/review` → `/practice`; `/build`, `/vibe-learning` → `/playground`; `/projects`, `/notes` → `/progress`. Listed in `src/App.tsx` so external links keep working.
 - **Visualization layer**: `src/components/viz.tsx` exposes hand-rolled SVG primitives (no chart-lib dep): Ring, MasteryDonut, StackedBar, ConceptChain, MilestoneTimeline, Sparkline. Palette matches Tailwind `*-500` swatches; reused by Learn / Practice / Progress.
 - **Static content vs user state**: concepts/roadmaps/drills/artifacts/projects/review-questions are static JSON in `src/data/` (loaded via `learning-os.ts`); mutable user state is hybrid — localStorage for guests, Turso DB for signed-in users (`useUserStore`).
-- **DB**: `concept_mastery` (FSRS) + `user_artifacts` / `user_drills` / `user_projects` / `user_learning_notes`. API actions consolidated under `/api/learning?action=…` (`artifacts`, `drills`, `projects`, `notes`) to respect the Vercel 12-function cap.
+- **DB**: `concept_mastery` (FSRS) + `user_artifacts` / `user_drills` / `user_projects` / `user_learning_notes`. API actions consolidated under `/api/learning?action=…` (`artifacts`, `drills`, `projects`, `notes`) to keep the serverless API surface small.
 - **FSRS spaced repetition** (`ts-fsrs`): per-user per-concept state in `concept_mastery` DB table. Confidence formula: `(1 + elapsed/(9×stability))^-1`. Mastery decays over time.
 - **Socratic AI**: `CompanionPanel.tsx` — never gives direct solutions, only probes understanding. This is intentional behavior — do not change it.
 - **Auto-tagging**: after 5 minutes of stable code, `useTagger` POSTs to `/api/tag`. AI returns concept tags with depth (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
