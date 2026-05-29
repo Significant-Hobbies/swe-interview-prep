@@ -15,13 +15,15 @@ const MIN_CODE_LEN = 80;
 /**
  * Periodically tags code in playground with concepts and bumps mastery.
  * Triggers when code stabilizes (no edits for 5min) AND length > MIN_CODE_LEN.
+ * Pass enabled=false (e.g. from focus mode) to suppress all tagging and AI calls.
  */
-export function useTagger(code: string, language: string, problem: string, onTagged?: (tags: TagResult[]) => void) {
+export function useTagger(code: string, language: string, problem: string, onTagged?: (tags: TagResult[]) => void, enabled: boolean = true) {
   const lastTaggedRef = useRef<string>('');
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
+    if (!enabled) return;
     if (code.length < MIN_CODE_LEN) return;
     if (code === lastTaggedRef.current) return;
 
@@ -69,5 +71,5 @@ export function useTagger(code: string, language: string, problem: string, onTag
     }, IDLE_MS);
 
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [code, language, problem, onTagged]);
+  }, [code, language, problem, onTagged, enabled]);
 }

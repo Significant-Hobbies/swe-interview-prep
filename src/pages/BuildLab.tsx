@@ -13,7 +13,8 @@ import {
 } from '../data/learning-os';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { useConceptMastery } from '../hooks/useConcepts';
-import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore } from '../hooks/useUserStore';
+import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, useUserElo } from '../hooks/useUserStore';
+import { difficultyToElo } from '../lib/elo';
 import type { Language } from '../types';
 
 export default function BuildLab() {
@@ -199,6 +200,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   const drill = DRILL_BY_ID[drillId];
   const { getDrill, setDrill } = useDrillStore();
   const { review } = useConceptMastery();
+  const { recordResult } = useUserElo();
   const { output, errors, isRunning, execute } = useCodeExecution();
   const [showHints, setShowHints] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
@@ -221,9 +223,15 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   }
 
   function mark(status: DrillEntry['status']) {
+    const wasSolved = entry.status === 'solved';
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Solving a drill closes the loop — it nudges the concept toward mastery.
     if (status === 'solved') void review(drill!.conceptId, 'good');
+    // First-time solve bumps the per-track ELO. v1 only counts the success
+    // signal; an explicit "couldn't solve" path would be needed to push ELO down.
+    if (status === 'solved' && !wasSolved && concept) {
+      recordResult(concept.track, difficultyToElo(drill!.difficulty), 1);
+    }
   }
 
   function switchLanguage(lang: Language) {

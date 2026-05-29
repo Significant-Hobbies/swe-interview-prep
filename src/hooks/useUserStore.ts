@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
-import type { ArtifactStatus, DrillStatus, ProjectStatus } from '../data/learning-os';
+import type { ArtifactStatus, DrillStatus, ProjectStatus, TrackId } from '../data/learning-os';
+import { DEFAULT_USER_ELO, updatePlayerElo } from '../lib/elo';
 import {
   loadLocal,
   type MergeableNote,
@@ -228,4 +229,91 @@ export function useLearningNotes() {
   }, [user]);
 
   return { notes, saveNote, deleteNote };
+}
+
+// ---------------------------------------------------------------------------
+// Focus mode — no-tools audit. Hides AI assistance from Playground.
+// Tracks each toggle-on transition as a "session" so weekly counts surface
+// how often the user actually trains without scaffolding.
+// localStorage-only for v1; not synced to DB.
+// ---------------------------------------------------------------------------
+
+interface FocusModeState {
+  enabled: boolean;
+  // Unix ms timestamps of each toggle-on transition. Truncated to last 90 days.
+  sessions: number[];
+}
+
+const EMPTY_FOCUS: FocusModeState = { enabled: false, sessions: [] };
+const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+export function useFocusMode() {
+  const [state, setState] = useState<FocusModeState>(() =>
+    loadLocal<FocusModeState>(STORE_KEYS.focusMode, EMPTY_FOCUS),
+  );
+
+  const setEnabled = useCallback((next: boolean) => {
+    setState(prev => {
+      const now = Date.now();
+      const sessions = prev.sessions.filter(t => now - t < NINETY_DAYS_MS);
+      // Log a session only on the off → on transition.
+      if (next && !prev.enabled) sessions.push(now);
+      const updated = { enabled: next, sessions };
+      saveLocal(STORE_KEYS.focusMode, updated);
+      return updated;
+    });
+  }, []);
+
+  // Returned as a function so Date.now() — an impure call — happens at the
+  // consumer's read site rather than during this hook's render. The count
+  // is naturally bounded by the 7-day window in the filter.
+  const sessionsThisWeek = useCallback(
+    () => state.sessions.filter(t => Date.now() - t < SEVEN_DAYS_MS).length,
+    [state.sessions],
+  );
+
+  return { enabled: state.enabled, setEnabled, sessionsThisWeek };
+}
+
+// ---------------------------------------------------------------------------
+// Per-track user ELO — adaptive difficulty calibration.
+// Problem ratings come from `difficultyToElo` (static); only the player's
+// ELO moves. K-factor is elevated during the first ~10 solves per track for
+// faster convergence. localStorage-only for v1.
+// ---------------------------------------------------------------------------
+
+interface UserEloState {
+  // Per-track ELO. Missing tracks default to DEFAULT_USER_ELO.
+  elo: Partial<Record<TrackId, number>>;
+  // Per-track solve counter used to scale K-factor (provisional vs stable).
+  solves: Partial<Record<TrackId, number>>;
+}
+
+const EMPTY_USER_ELO: UserEloState = { elo: {}, solves: {} };
+
+export function useUserElo() {
+  const [state, setState] = useState<UserEloState>(() =>
+    loadLocal<UserEloState>(STORE_KEYS.userElo, EMPTY_USER_ELO),
+  );
+
+  const getElo = useCallback(
+    (trackId: TrackId): number => state.elo[trackId] ?? DEFAULT_USER_ELO,
+    [state.elo],
+  );
+
+  const recordResult = useCallback((trackId: TrackId, problemElo: number, score: number) => {
+    setState(prev => {
+      const current = prev.elo[trackId] ?? DEFAULT_USER_ELO;
+      const solveCount = prev.solves[trackId] ?? 0;
+      const next: UserEloState = {
+        elo: { ...prev.elo, [trackId]: updatePlayerElo(current, problemElo, score, solveCount) },
+        solves: { ...prev.solves, [trackId]: solveCount + 1 },
+      };
+      saveLocal(STORE_KEYS.userElo, next);
+      return next;
+    });
+  }, []);
+
+  return { getElo, recordResult, elo: state.elo, solves: state.solves };
 }

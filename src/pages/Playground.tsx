@@ -1,6 +1,6 @@
-import { AlertTriangle, BookOpen,Brain, Check, Clock, Code2, Copy, Eye, FileText, GripVertical, Loader2, Pencil, PenTool, Play, Share2, Sparkles } from 'lucide-react';
+import { AlertTriangle, BookOpen,Brain, Check, Clock, Code2, Copy, Eye, FileText, Focus, GripVertical, Loader2, Pencil, PenTool, Play, Share2, Sparkles } from 'lucide-react';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
-import { useCallback, useEffect,useRef, useState } from 'react';
+import { useCallback, useEffect,useMemo, useRef, useState } from 'react';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { useSearchParams } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ import { useCodeExecution } from '../hooks/useCodeExecution';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
+import { useFocusMode } from '../hooks/useUserStore';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';
@@ -66,6 +67,7 @@ export default function Playground() {
   const [markers, setMarkers] = useState<any[]>([]);
   const [feynmanOpen, setFeynmanOpen] = useState(false);
   const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
+  const { enabled: focusMode, setEnabled: setFocusMode, sessionsThisWeek } = useFocusMode();
 
   // The Playground is a multi-panel desktop layout. Below `md` we render a
   // single panel at a time (the toggle row acts as a tab switcher) so each
@@ -73,9 +75,11 @@ export default function Playground() {
   const isMobile = useIsMobile();
   const [activePanel, setActivePanel] = useState<PanelId>('code');
 
+  // Focus mode suppresses AI-assist surfaces: Socratic Companion panel and
+  // the periodic auto-tagger. Forced-production tools (Feynman Gate) stay on.
   useTagger(code, language, problem, (tags) => {
     setTaggedConcepts(tags.map(t => t.concept_id));
-  });
+  }, !focusMode);
 
   // Hydrate from query params (Today / Concepts deep-links)
   useEffect(() => {
@@ -189,7 +193,16 @@ export default function Playground() {
       active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'
     }`;
 
-  const allVisiblePanels = ['problem', 'code', 'diagram', 'companion', 'library'].filter(id => visiblePanels.has(id as PanelId)) as PanelId[];
+  // Focus mode evicts the Companion panel from the layout without mutating
+  // the user's saved panel preferences — toggling focus off restores it.
+  // If focus mode would empty the layout (companion was the only panel),
+  // fall back to code so the editor stays visible.
+  const allVisiblePanels = useMemo(() => {
+    const filtered = (['problem', 'code', 'diagram', 'companion', 'library'] as PanelId[])
+      .filter(id => visiblePanels.has(id))
+      .filter(id => !(focusMode && id === 'companion'));
+    return filtered.length > 0 ? filtered : (['code'] as PanelId[]);
+  }, [visiblePanels, focusMode]);
   // On mobile show a single panel; fall back to the first visible one if the
   // chosen active panel was toggled off.
   const panels: PanelId[] = isMobile
@@ -216,10 +229,12 @@ export default function Playground() {
               <PenTool className="h-3 w-3" />
               Draw
             </button>
-            <button onClick={() => togglePanel('companion')} className={panelBtn('companion', isPanelActive('companion'))}>
-              <Sparkles className="h-3 w-3" />
-              Companion
-            </button>
+            {!focusMode && (
+              <button onClick={() => togglePanel('companion')} className={panelBtn('companion', isPanelActive('companion'))}>
+                <Sparkles className="h-3 w-3" />
+                Companion
+              </button>
+            )}
             <button onClick={() => togglePanel('library')} className={panelBtn('library', isPanelActive('library'))}>
               <BookOpen className="h-3 w-3" />
               Library
@@ -238,6 +253,23 @@ export default function Playground() {
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <button
+            onClick={() => setFocusMode(!focusMode)}
+            className={`flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors ${
+              focusMode
+                ? 'bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25'
+                : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+            }`}
+            title={focusMode
+              ? 'Focus mode on — Companion + auto-tag suppressed. Click to disable.'
+              : 'Focus mode — train without AI assist (Companion + auto-tag off). Click to enable.'}
+          >
+            <Focus className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Focus</span>
+            <span className={`ml-0.5 rounded px-1 text-[10px] font-semibold ${
+              focusMode ? 'bg-cyan-500/20 text-cyan-200' : 'bg-gray-800 text-gray-500'
+            }`}>{sessionsThisWeek()}/wk</span>
+          </button>
           <button
             onClick={() => setFeynmanOpen(true)}
             disabled={code.length < 50}

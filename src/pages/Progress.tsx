@@ -13,7 +13,7 @@ import {
   sortedTracks,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, useConceptMastery } from '../hooks/useConcepts';
-import { type LearningNote, useArtifactStore, useDrillStore, useLearningNotes } from '../hooks/useUserStore';
+import { type LearningNote, useArtifactStore, useDrillStore, useFocusMode, useLearningNotes, useUserElo } from '../hooks/useUserStore';
 import { rollupMastery } from '../lib/conceptState';
 
 type Section = 'overview' | 'notes';
@@ -43,6 +43,9 @@ function Overview() {
   const { mastery } = useConceptMastery();
   const { artifacts } = useArtifactStore();
   const { drills } = useDrillStore();
+  const { sessionsThisWeek } = useFocusMode();
+  const focusSessions = sessionsThisWeek();
+  const { getElo } = useUserElo();
 
   const overall = rollupMastery(ALL_CONCEPTS.map(c => c.id), mastery);
   const started = overall.total - overall.untouched;
@@ -52,11 +55,12 @@ function Overview() {
 
   return (
     <>
-      <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-5">
         <StatTile label="Started" value={started} hint={`of ${overall.total}`} tone="blue" />
         <StatTile label="Mastered" value={overall.mastered} tone="emerald" />
         <StatTile label="Drills solved" value={drillsSolved} hint={`of ${DRILLS.length}`} tone="amber" />
         <StatTile label="Shipped" value={shipped} hint={`${building} building`} tone="purple" />
+        <StatTile label="Focus sessions" value={focusSessions} hint="last 7 days" tone="cyan" />
       </div>
 
       <section className="mb-8">
@@ -66,6 +70,7 @@ function Overview() {
             const ids = conceptsByTrack(t.id).map(c => c.id);
             const roll = rollupMastery(ids, mastery);
             const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
+            const elo = getElo(t.id);
             return (
               <div key={t.id} className="rounded-lg border border-gray-800 bg-gray-900/40 p-3">
                 <div className="mb-1.5 flex items-center justify-between">
@@ -73,9 +78,14 @@ function Overview() {
                     <span className={`h-2 w-2 rounded-full ${color(t.color).solid}`} />
                     <span className="text-sm font-medium text-gray-200">{t.title}</span>
                   </div>
-                  <span className="text-[11px] text-gray-500">
-                    {roll.mastered} / {ids.length}
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] text-cyan-300/80" title="Adaptive ELO for this track">
+                      {elo}
+                    </span>
+                    <span className="text-[11px] text-gray-500">
+                      {roll.mastered} / {ids.length}
+                    </span>
+                  </div>
                 </div>
                 <ProgressBar value={pct} tone={t.color} />
               </div>

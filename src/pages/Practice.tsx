@@ -29,9 +29,10 @@ import {
   type TrackId,
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
-import { type DrillEntry, useDrillStore } from '../hooks/useUserStore';
+import { type DrillEntry, useDrillStore, useUserElo } from '../hooks/useUserStore';
 import { type Critique, critiqueAnswer } from '../lib/aiClient';
 import { isDue } from '../lib/conceptState';
+import { DEFAULT_USER_ELO, difficultyToElo } from '../lib/elo';
 
 type Tab = 'drills' | 'reviews';
 
@@ -193,11 +194,21 @@ function PracticeHero({
 
 function DrillsTab() {
   const { drills: drillState, getDrill } = useDrillStore();
+  const { getElo } = useUserElo();
   const [track, setTrack] = useState<TrackId | 'all'>('all');
 
+  // Attach track + problem ELO + distance to user ELO once per drill.
+  // The "distance" is the absolute gap between the user's per-track rating
+  // and the drill's static rating — smaller distance = closer to their edge.
   const withTrack = useMemo(
-    () => DRILLS.map(d => ({ drill: d, track: CONCEPT_BY_ID[d.conceptId]?.track })),
-    [],
+    () => DRILLS.map(d => {
+      const tid = CONCEPT_BY_ID[d.conceptId]?.track;
+      const problemElo = difficultyToElo(d.difficulty);
+      const userElo = tid ? getElo(tid) : DEFAULT_USER_ELO;
+      const distance = Math.abs(problemElo - userElo);
+      return { drill: d, track: tid, problemElo, userElo, distance };
+    }),
+    [getElo],
   );
 
   const tracksRollup = useMemo(() => {
@@ -207,12 +218,24 @@ function DrillsTab() {
         const drills = withTrack.filter(x => x.track === t.id).map(x => x.drill);
         if (!drills.length) return null;
         const solved = drills.filter(d => drillState[d.id]?.status === 'solved').length;
-        return { track: t, total: drills.length, solved };
+        return { track: t, total: drills.length, solved, elo: getElo(t.id) };
       })
-      .filter(Boolean) as { track: ReturnType<typeof sortedTracks>[number]; total: number; solved: number }[];
-  }, [drillState, withTrack]);
+      .filter(Boolean) as { track: ReturnType<typeof sortedTracks>[number]; total: number; solved: number; elo: number }[];
+  }, [drillState, withTrack, getElo]);
 
-  const filtered = track === 'all' ? withTrack : withTrack.filter(x => x.track === track);
+  // Filter, then sort by proximity to user ELO so the "edge" drills bubble up.
+  const filtered = useMemo(() => {
+    const base = track === 'all' ? withTrack : withTrack.filter(x => x.track === track);
+    return [...base].sort((a, b) => a.distance - b.distance);
+  }, [withTrack, track]);
+
+  // Recommended: closest unsolved drills to the user's current ELO.
+  const recommended = useMemo(
+    () => filtered
+      .filter(x => (drillState[x.drill.id]?.status ?? 'unsolved') !== 'solved')
+      .slice(0, 3),
+    [filtered, drillState],
+  );
 
   return (
     <div>
@@ -222,13 +245,31 @@ function DrillsTab() {
           <FilterPill active={track === 'all'} onClick={() => setTrack('all')}>
             All ({DRILLS.length})
           </FilterPill>
-          {tracksRollup.map(({ track: t, total, solved }) => (
+          {tracksRollup.map(({ track: t, total, solved, elo }) => (
             <FilterPill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
-              {t.short} ({solved}/{total})
+              {t.short} ({solved}/{total}) · <span className="font-mono text-gray-500">{elo}</span>
             </FilterPill>
           ))}
         </div>
       </div>
+
+      {recommended.length > 0 && (
+        <div className="mb-6">
+          <div className="mb-2 flex items-center gap-2">
+            <Target className="h-3.5 w-3.5 text-cyan-400" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300">
+              Recommended for your level
+            </span>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {recommended.map(({ drill: d, track: tid }) => {
+              const st = getDrill(d.id);
+              const concept = CONCEPT_BY_ID[d.conceptId];
+              return <DrillCard key={d.id} drill={d} state={st} trackId={tid} conceptName={concept?.name} />;
+            })}
+          </div>
+        </div>
+      )}
 
       {filtered.length === 0 ? (
         <EmptyState title="No drills in this track yet" hint="Pick a different track above." />

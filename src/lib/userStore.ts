@@ -60,4 +60,6 @@ export const STORE_KEYS = {
   drills: 'swe-os:drills',
   projects: 'swe-os:projects',
   notes: 'swe-os:notes',
+  focusMode: 'swe-os:focus-mode',
+  userElo: 'swe-os:user-elo',
 } as const;
