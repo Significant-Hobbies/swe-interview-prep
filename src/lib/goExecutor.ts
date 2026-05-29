@@ -37,6 +37,16 @@ const WASM_MODULE_URL = `${WASM_BASE}/go-interp.wasm`;
 const WASM_EXEC_TIMEOUT_MS = 5000;
 // Allow the worker this long to fetch + instantiate the WASM module.
 const WASM_LOAD_TIMEOUT_MS = 20_000;
+// Cap how much stdout/stderr we keep from a single run. A tight
+// `fmt.Println` loop can fire millions of times before the 5s timeout
+// hits — rendering that much text into the DOM crashes the tab. 64 KiB
+// is far more than any reasonable interview output.
+const MAX_OUTPUT_CHARS = 64 * 1024;
+
+function truncateOutput(text: string): string {
+  if (!text || text.length <= MAX_OUTPUT_CHARS) return text;
+  return text.slice(0, MAX_OUTPUT_CHARS) + '\n…[output truncated]';
+}
 
 let wasmReady = false;
 let wasmLoading = false;
@@ -71,8 +81,8 @@ async function executeViaAPI(code: string): Promise<GoResult> {
     const time = performance.now() - t0;
     const errors = data.errors || data.error || null;
     return {
-      output: data.output || '',
-      errors,
+      output: truncateOutput(data.output || ''),
+      errors: errors ? truncateOutput(errors) : null,
       execTimeMs: time,
       errorLine: errors ? extractErrorLine(errors) : null,
       backend: 'api',
@@ -155,8 +165,8 @@ function executeViaWASM(
       if (data.type === 'result') {
         const errors: string | null = data.errors ?? null;
         resolve({
-          output: data.output ?? '',
-          errors,
+          output: truncateOutput(data.output ?? ''),
+          errors: errors ? truncateOutput(errors) : null,
           execTimeMs: performance.now() - t0,
           errorLine: errors ? extractErrorLine(errors) : null,
           backend: 'wasm',
