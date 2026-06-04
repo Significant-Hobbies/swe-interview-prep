@@ -40,6 +40,7 @@
     "jsonwebtoken": "9.0.3",
     "lucide-react": "1.11.0",
     "lz-string": "1.5.0",
+    "posthog-js": "^1.372.1",
     "prettier": "3.8.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
@@ -49,8 +50,7 @@
     "rehype-highlight": "7.0.2",
     "remark-gfm": "4.0.1",
     "sucrase": "3.35.1",
-    "ts-fsrs": "5.3.2",
-    "posthog-js": "^1.372.1"
+    "ts-fsrs": "5.3.2"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
@@ -72,6 +72,7 @@
     "globals": "17.5.0",
     "happy-dom": "20.9.0",
     "husky": "^9.1.7",
+    "lightningcss": "^1.32.0",
     "tailwindcss": "4",
     "typescript": "6.0.3",
     "vite": "8.0.11",
