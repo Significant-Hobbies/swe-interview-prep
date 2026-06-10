@@ -487,6 +487,18 @@ async function main() {
   mkdirSync(TEMP_DIR, { recursive: true });
   mkdirSync(OUTPUT_DIR, { recursive: true });
 
+  // Previous manifest entries, keyed by repo id. A failed fetch must not drop
+  // a repo from the manifest (the manifest is bundled into the app, so a
+  // dropped entry removes the repo from the library UI even though its
+  // content.json is still on disk). On failure we carry the old entry forward.
+  const previousRepos = new Map();
+  try {
+    const prev = JSON.parse(readFileSync(join(OUTPUT_DIR, 'manifest.json'), 'utf-8'));
+    for (const r of prev.repos || []) previousRepos.set(r.id, r);
+  } catch {
+    // No previous manifest (first run) — nothing to carry forward.
+  }
+
   const manifest = { repos: [], generatedAt: new Date().toISOString() };
 
   for (const repo of config.repos) {
@@ -540,6 +552,13 @@ async function main() {
         }
       })(repoDir);
 
+      // An upstream restructure (or a clone that silently fetched nothing)
+      // can parse to zero content. Refuse to overwrite good content.json with
+      // an empty shell — treat it like a fetch failure instead.
+      if ((parsed.sections?.length || 0) === 0 && (parsed.exercises?.length || 0) === 0) {
+        throw new Error('parsed zero sections/exercises — keeping existing content');
+      }
+
       const format = classifyFormat(parsed, allSourceFiles);
       const meaningfulCount = repo.adapter === 'javascript-questions' || repo.adapter === 'react-questions' || repo.adapter === 'devops-exercises'
         ? parsed.sections.length
@@ -565,7 +584,14 @@ async function main() {
 
       console.log(`  -> ${meaningfulCount} sections, ${parsed.exercises.length} exercises, format=${format}\n`);
     } catch (err) {
-      console.error(`  ERROR cloning ${repo.id}: ${err.message}\n`);
+      console.error(`  ERROR fetching ${repo.id}: ${err.message}`);
+      const prev = previousRepos.get(repo.id);
+      if (prev) {
+        manifest.repos.push(prev);
+        console.error(`  -> kept previous manifest entry (lastFetched ${prev.lastFetched})\n`);
+      } else {
+        console.error(`  -> no previous entry to carry forward; repo omitted\n`);
+      }
     }
   }
 
@@ -576,4 +602,7 @@ async function main() {
   console.log('Temp directory cleaned up.');
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exitCode = 1;
+});
