@@ -80,6 +80,7 @@ function App() {
               <Route path="concepts/:id" element={<ConceptDetail />} />
               <Route path="roadmaps/:id" element={<RoadmapDetail />} />
               <Route path="projects/:id" element={<ProjectDetail />} />
+              <Route path="build" element={<BuildLab />} />
               <Route path="drills/:id" element={<BuildLab />} />
 
               {/* Static */}
@@ -94,7 +95,6 @@ function App() {
               <Route path="drills" element={<Navigate to="/practice" replace />} />
               <Route path="reviews" element={<Navigate to="/practice?tab=reviews" replace />} />
               <Route path="review" element={<Navigate to="/practice?tab=reviews" replace />} />
-              <Route path="build" element={<Navigate to="/playground" replace />} />
               <Route path="projects" element={<Navigate to="/progress" replace />} />
               <Route path="notes" element={<Navigate to="/progress" replace />} />
               <Route path="dsa/*" element={<Navigate to="/learn" replace />} />
