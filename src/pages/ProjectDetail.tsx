@@ -14,7 +14,15 @@ import { useConceptMastery } from '../hooks/useConcepts';
 import { useProjectStore } from '../hooks/useUserStore';
 import { deriveConceptStatus } from '../lib/conceptState';
 
-const STATUS_OPTIONS: ProjectStatus[] = ['planned', 'active', 'paused', 'done'];
+export const PROJECT_STATUS_OPTIONS = [
+  { value: 'planned', label: 'planned' },
+  { value: 'active', label: 'active' },
+  { value: 'guided', label: 'guided' },
+  { value: 'AI-managed', label: 'AI-managed' },
+  { value: 'paused', label: 'paused' },
+  { value: 'done', label: 'done' },
+  { value: 'archived', label: 'archived' },
+] as const satisfies readonly { value: ProjectStatus; label: string }[];
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -128,9 +136,13 @@ export default function ProjectDetail() {
           <section>
             <SectionTitle>Status</SectionTitle>
             <div className="flex flex-wrap gap-1.5">
-              {STATUS_OPTIONS.map(s => (
-                <Button key={s} tone={state.status === s ? 'primary' : 'ghost'} onClick={() => update({ status: s })}>
-                  {s}
+              {PROJECT_STATUS_OPTIONS.map(option => (
+                <Button
+                  key={option.value}
+                  tone={state.status === option.value ? 'primary' : 'ghost'}
+                  onClick={() => update({ status: option.value })}
+                >
+                  {option.label}
                 </Button>
               ))}
             </div>
