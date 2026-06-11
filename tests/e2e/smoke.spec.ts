@@ -68,7 +68,7 @@ test.describe('Five-tab IA smoke', () => {
     await expect(page.getByRole('heading', { name: /AI Configuration/i })).toBeVisible();
   });
 
-  test('legacy URLs redirect into the five-tab IA', async ({ page }) => {
+  test('legacy URLs redirect into the five-tab IA and /build loads Build Lab', async ({ page }) => {
     await page.goto('/concepts');
     await expect(page).toHaveURL(/\/learn$/);
     await page.goto('/drills');
@@ -76,7 +76,8 @@ test.describe('Five-tab IA smoke', () => {
     await page.goto('/reviews');
     await expect(page).toHaveURL(/\/practice\?tab=reviews$/);
     await page.goto('/build');
-    await expect(page).toHaveURL(/\/playground$/);
+    await expect(page).toHaveURL(/\/build$/);
+    await expect(page.getByRole('heading', { name: 'Build Lab', exact: true })).toBeVisible();
     await page.goto('/notes');
     await expect(page).toHaveURL(/\/progress$/);
     await page.goto('/projects');
