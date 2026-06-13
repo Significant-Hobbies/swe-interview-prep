@@ -403,6 +403,25 @@ export default function Login() {
         </h2>
         <SaaSMakerTestimonials />
       </section>
+
+      <footer className="relative z-10 border-t border-gray-800 bg-gray-950/80 py-10 text-center">
+        <p className="text-sm font-semibold text-white">
+          Every offer starts with one practice session.
+        </p>
+        <p className="mt-1 text-xs text-gray-500">
+          DSA · System Design · LLD · Behavioral — all in one place, no tab-switching required.
+        </p>
+        <button
+          onClick={continueAsGuest}
+          className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-purple-500/40 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-300 transition-colors hover:border-purple-500/70 hover:bg-purple-500/20"
+        >
+          Start a mock interview — free, no sign-up
+          <ChevronRight className="h-4 w-4" />
+        </button>
+        <p className="mt-6 text-xs text-gray-600">
+          © {new Date().getFullYear()} Interview Coder · <a href="/privacy" className="underline hover:text-gray-400">Privacy</a>
+        </p>
+      </footer>
     </div>
   );
 }
