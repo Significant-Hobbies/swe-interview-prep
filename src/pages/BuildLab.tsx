@@ -17,10 +17,17 @@ import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, u
 import { difficultyToElo } from '../lib/elo';
 import type { Language } from '../types';
 
+export function resolveBuildLabView(id?: string): 'artifact-board' | 'drill-workspace' | 'not-found' {
+  if (!id) return 'artifact-board';
+  if (DRILL_BY_ID[id]) return 'drill-workspace';
+  return 'not-found';
+}
+
 export default function BuildLab() {
   const { id } = useParams();
-  // /drills/:id renders the drill workspace; /build renders the artifact board.
-  if (id && DRILL_BY_ID[id]) return <DrillWorkspace drillId={id} />;
+  const view = resolveBuildLabView(id);
+  if (view === 'drill-workspace') return <DrillWorkspace drillId={id} />;
+  if (view === 'not-found') return <EmptyState title="Drill not found" />;
   return <ArtifactBoard />;
 }
 
