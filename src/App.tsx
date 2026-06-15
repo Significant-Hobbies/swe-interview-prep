@@ -20,6 +20,7 @@ const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const BuildLab = lazy(() => import('./pages/BuildLab'));
 const MockInterview = lazy(() => import('./pages/MockInterview'));
+const LearningDoc = lazy(() => import('./pages/LearningDoc'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
@@ -82,6 +83,10 @@ function App() {
               <Route path="projects/:id" element={<ProjectDetail />} />
               <Route path="build" element={<BuildLab />} />
               <Route path="drills/:id" element={<BuildLab />} />
+
+              {/* Markdown deep-dive docs (Learning OS) */}
+              <Route path="learning" element={<LearningDoc />} />
+              <Route path="learning/:slug" element={<LearningDoc />} />
 
               {/* Static */}
               <Route path="about" element={<About />} />
