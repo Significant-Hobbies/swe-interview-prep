@@ -138,6 +138,239 @@
           "artifacts": ["search-platform-design-doc", "rag-system-design-doc", "model-router"]
         }
       ]
+    },
+    {
+      "id": "db-disk-first",
+      "title": "Disk-First Databases & RAM",
+      "horizon": "12mo",
+      "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
+      "description": "Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.",
+      "tracks": ["databases", "system-design"],
+      "milestones": [
+        {
+          "title": "Phase 0-1 — Thesis + hardware",
+          "goal": "Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.",
+          "concepts": ["storage-retrieval"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 2 — Disk-oriented storage engines",
+          "goal": "Pages, B+trees, WAL, buffer pools, recovery.",
+          "concepts": ["b-tree", "wal", "storage-retrieval"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 3 — LSM and SSD-first design",
+          "goal": "Memtables, SSTables, Bloom filters, compaction, read/write/space amplification.",
+          "concepts": ["lsm-tree", "compaction"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 4-5 — Columnar execution + ClickHouse",
+          "goal": "Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.",
+          "concepts": ["columnar-storage", "secondary-index"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 6 — Cloud warehouses",
+          "goal": "Storage/compute separation, shuffle, slots/warehouses, result caching.",
+          "concepts": ["object-storage", "sharding"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 7 — Search + vector DBs",
+          "goal": "Inverted indexes, BM25, HNSW, IVF, PQ, DiskANN, recall/latency/memory tradeoff.",
+          "concepts": ["inverted-index", "bm25", "hnsw", "ivf", "recall-latency-tradeoffs"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 8 — Distributed correctness",
+          "goal": "Replication, Raft/Paxos, MVCC across nodes, 2PC, serializability.",
+          "concepts": ["replication", "consensus", "cap-theorem", "distributed-infra"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 9 — Synthesis project",
+          "goal": "Ship one of: low-RAM benchmark, ch-lowram CLI, spill-first OLAP engine, or disk-backed vector search.",
+          "concepts": [],
+          "drills": [],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "runtime",
+      "title": "Runtime — what every runtime has to do",
+      "horizon": "12mo",
+      "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
+      "description": "Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.",
+      "tracks": ["system-design", "ai-systems", "backend"],
+      "milestones": [
+        {
+          "title": "Phase 0-1 — Five-job model + execution",
+          "goal": "Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimising JIT, deopt.",
+          "concepts": ["state-management", "strategy-pattern"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 2 — Memory & GC",
+          "goal": "Allocation, escape analysis, generational/concurrent/pauseless collectors, read/write barriers.",
+          "concepts": [],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 3 — Scheduling",
+          "goal": "Cooperative vs preemptive, async runtimes, fibers, work-stealing, goroutine + BEAM schedulers.",
+          "concepts": ["concurrency-design"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 4 — Isolation",
+          "goal": "Process, thread, V8 isolate, Wasm sandbox, Firecracker, gVisor.",
+          "concepts": ["distributed-infra"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 5 — Observability & control",
+          "goal": "Sampling profilers, JFR, async-profiler, Go pprof, eBPF runtime hooks.",
+          "concepts": ["monitoring-analytics"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 6 — Language runtimes deep-dive",
+          "goal": "Pick at least one outside your comfort zone: JVM, Go, BEAM, V8, or .NET CLR.",
+          "concepts": [],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 7 — AI inference runtimes",
+          "goal": "vLLM PagedAttention, SGLang RadixAttention, llama.cpp, TensorRT-LLM, continuous batching.",
+          "concepts": ["model-routing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 8 — Edge & serverless runtimes",
+          "goal": "Workers, Deno, Bun, wasmtime, Firecracker — cold start, isolate startup, multi-tenant scheduling.",
+          "concepts": ["distributed-infra", "load-balancing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Phase 9 — Synthesis project",
+          "goal": "Ship one of: cross-runtime benchmark, tier-up JIT, mini paged KV-cache, or isolate sandbox.",
+          "concepts": [],
+          "drills": [],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "swe-landscape",
+      "title": "The Software Engineering Landscape (2026)",
+      "horizon": "12mo",
+      "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
+      "description": "Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.",
+      "tracks": ["system-design", "databases", "ai-systems", "backend"],
+      "milestones": [
+        {
+          "title": "LLMs and inference engines",
+          "goal": "Transformers end-to-end, KV cache, paged attention, quantization.",
+          "concepts": ["ml-self-attention", "ml-transformer-block", "ml-sampling", "rag", "model-routing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Databases and storage engines",
+          "goal": "B-trees, LSM, WAL, MVCC, columnar — see the dedicated DB roadmap.",
+          "concepts": ["b-tree", "lsm-tree", "wal", "columnar-storage"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Streaming and event systems",
+          "goal": "Append-only logs, partitions, watermarks, stateful stream processing.",
+          "concepts": ["message-queues", "messaging-realtime", "retries-dlq"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Game engines and real-time graphics",
+          "goal": "Fixed-step loops, ECS, render pipelines, GPU command buffers.",
+          "concepts": ["game-design", "concurrency-design"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Containers and orchestration",
+          "goal": "Linux namespaces, cgroups, OCI runtimes, Kubernetes scheduling.",
+          "concepts": ["distributed-infra", "load-balancing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Browsers (Chromium, Firefox, Servo)",
+          "goal": "Parser, layout, JS engine, compositor, sandboxing, WebAssembly.",
+          "concepts": ["ml-browser-runtime", "ml-webgpu"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Compilers and language runtimes",
+          "goal": "Lexer → parser → AST → IR → optimization → codegen; GC, JIT.",
+          "concepts": ["state-management", "strategy-pattern"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Operating systems and kernels",
+          "goal": "Processes, virtual memory, schedulers, file systems, syscalls.",
+          "concepts": ["concurrency-design"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Networking and protocols",
+          "goal": "TCP/IP, TLS, HTTP/2 and HTTP/3, QUIC, BGP.",
+          "concepts": ["http-lifecycle", "load-balancing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Distributed systems",
+          "goal": "Consensus, replication, 2PC, gossip, vector clocks.",
+          "concepts": ["consensus", "cap-theorem", "distributed-infra", "sharding", "replication"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Build systems and developer tooling",
+          "goal": "Incremental builds, content-addressed caches, LSP, tree-sitter.",
+          "concepts": [],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Cryptography (applied)",
+          "goal": "Primitives, signatures, AEAD, TLS, MLS, ZKPs.",
+          "concepts": ["auth-systems"],
+          "drills": [],
+          "artifacts": []
+        }
+      ]
     }
   ]
 }

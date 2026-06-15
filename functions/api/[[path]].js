@@ -640,11 +640,86 @@ Grade now. JSON only.`;
   }
 }
 
+const UNDERSTANDING_QUIZ_SYSTEM = `You write open-ended comprehension questions that test whether a reader has internalised a learning doc.
+
+Return STRICT JSON, no prose, no markdown:
+{"questions":[{"q":"the question","hint":"one-line concrete grounding from the doc"}]}
+
+Rules: Exactly 5 questions. Each targets a different section/phase. Open-ended ("explain", "compare", "why", "what tradeoff") — not yes/no, not multiple-choice. Good answer should require 2-5 sentences. "hint" cites a specific source from the doc.`;
+
+const UNDERSTANDING_GRADE_QUIZ_SYSTEM = `You grade a reader's quiz answers against a learning doc.
+
+Return STRICT JSON, no prose, no markdown:
+{"overall":0-100,"perQuestion":[{"q":"...","a":"...","grade":0-100,"feedback":"one paragraph, blunt and specific"}],"summary":"one paragraph","gaps":["topic to re-read","..."]}
+
+Grade on substance. 90-100: precise. 70-89: minor handwaving. 50-69: missed an invariant. 0-49: superficial/wrong. gaps: 0-5 items.`;
+
+const UNDERSTANDING_GRADE_EXPL_SYSTEM = `You grade a free-form explain-back of a learning doc.
+
+Return STRICT JSON, no prose, no markdown:
+{"grade":0-100,"feedback":"one paragraph, blunt and specific","gaps":["topic","..."],"missedSources":["specific paper/blog/talk","..."]}
+
+Grade on substance. 90-100: precise + correct sources. 70-89: misses one mechanism. 50-69: bluffs on a key invariant. 0-49: buzzwords. gaps: 0-5 items. missedSources: 0-3 items.`;
+
+function uTruncate(s, n) {
+  s = String(s || "");
+  return s.length > n ? s.slice(0, n) + "\n…[truncated]" : s;
+}
+
+async function handleUnderstanding(request) {
+  if (request.method !== "POST") return json({ error: "Method not allowed" }, { status: 405 });
+  const { op, docTitle, docContent, questions, answers, explanation, aiConfig } = await readJson(request);
+  if (!aiConfig?.endpointUrl || !aiConfig?.apiKey || !aiConfig?.model) {
+    return json({ error: "Configure an AI provider in Settings to test your understanding." }, { status: 400 });
+  }
+  if (!op) return json({ error: "op required: quiz | grade-quiz | grade-explanation" }, { status: 400 });
+  if (!docContent) return json({ error: "docContent required" }, { status: 400 });
+
+  const docExcerpt = uTruncate(docContent, 8000);
+  const title = docTitle || "(untitled doc)";
+
+  let system;
+  let prompt;
+  let maxTokens;
+
+  if (op === "quiz") {
+    system = UNDERSTANDING_QUIZ_SYSTEM;
+    prompt = `Doc title: ${title}\n\nDoc content:\n"""\n${docExcerpt}\n"""\n\nWrite 5 questions. JSON only.`;
+    maxTokens = 900;
+  } else if (op === "grade-quiz") {
+    if (!Array.isArray(questions) || !Array.isArray(answers)) {
+      return json({ error: "questions and answers arrays required" }, { status: 400 });
+    }
+    const qa = questions
+      .map((q, i) => `Q${i + 1}: ${q}\nA${i + 1}: ${uTruncate(answers[i] || "(blank)", 1500)}`)
+      .join("\n\n");
+    system = UNDERSTANDING_GRADE_QUIZ_SYSTEM;
+    prompt = `Doc title: ${title}\n\nDoc content:\n"""\n${docExcerpt}\n"""\n\nQuiz transcript:\n${qa}\n\nGrade now. JSON only.`;
+    maxTokens = 1800;
+  } else if (op === "grade-explanation") {
+    if (!explanation || explanation.trim().length < 30) {
+      return json({ error: "explanation required (at least 30 chars)" }, { status: 400 });
+    }
+    system = UNDERSTANDING_GRADE_EXPL_SYSTEM;
+    prompt = `Doc title: ${title}\n\nDoc content:\n"""\n${docExcerpt}\n"""\n\nReader's explanation:\n"""\n${uTruncate(explanation, 4000)}\n"""\n\nGrade now. JSON only.`;
+    maxTokens = 1200;
+  } else {
+    return json({ error: `unknown op: ${op}` }, { status: 400 });
+  }
+
+  try {
+    return json(parseAiJson(await callByokAI(aiConfig, system, prompt, maxTokens)));
+  } catch (err) {
+    return json({ error: `AI request failed: ${err.message}` }, { status: 502 });
+  }
+}
+
 async function handleLearning(request, env) {
   const action = new URL(request.url).searchParams.get("action");
-  // gaps/critique are BYOK AI proxies — no auth or DB needed.
+  // gaps/critique/understanding are BYOK AI proxies — no auth or DB needed.
   if (action === "gaps") return handleGaps(request);
   if (action === "critique") return handleCritique(request);
+  if (action === "understanding") return handleUnderstanding(request);
 
   await initDatabase(env);
   const user = await currentUser(request, env);

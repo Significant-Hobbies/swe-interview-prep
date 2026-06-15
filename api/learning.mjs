@@ -11,6 +11,7 @@ import gapsHandler from '../handlers/gaps.mjs';
 import notesHandler from '../handlers/learning-notes.mjs';
 import projectsHandler from '../handlers/projects.mjs';
 import tagHandler from '../handlers/tag.mjs';
+import understandingHandler from '../handlers/understanding-check.mjs';
 import weeklyHandler from '../handlers/weekly.mjs';
 
 const HANDLERS = {
@@ -26,6 +27,7 @@ const HANDLERS = {
   notes: notesHandler,
   gaps: gapsHandler,
   critique: critiqueHandler,
+  understanding: understandingHandler,
 };
 
 export default async function handler(req, res) {
