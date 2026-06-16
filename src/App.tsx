@@ -12,9 +12,12 @@ import { trackReturned, trackSignup } from './lib/analytics';
 const SEEN_KEY = 'swe-interview-prep:seen';
 
 const Learn = lazy(() => import('./pages/Learn'));
+const LearnAll = lazy(() => import('./pages/LearnAll'));
 const Practice = lazy(() => import('./pages/Practice'));
+const PracticeAll = lazy(() => import('./pages/PracticeAll'));
 const Playground = lazy(() => import('./pages/Playground'));
 const Progress = lazy(() => import('./pages/Progress'));
+const ProgressAll = lazy(() => import('./pages/ProgressAll'));
 const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
 const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -67,13 +70,17 @@ function App() {
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>
-              {/* Five-tab IA */}
+              {/* Four-tab IA. Each tab lands on a minimal "what's next" page;
+                  the rich browsable view is one click away at /<tab>/all. */}
               <Route index element={<Navigate to="/learn" replace />} />
               <Route path="learn" element={<Learn />} />
+              <Route path="learn/all" element={<LearnAll />} />
               <Route path="learn/:id" element={<ConceptDetail />} />
               <Route path="practice" element={<Practice />} />
+              <Route path="practice/all" element={<PracticeAll />} />
               <Route path="playground" element={<Playground />} />
               <Route path="progress" element={<Progress />} />
+              <Route path="progress/all" element={<ProgressAll />} />
 
               {/* Detail pages reachable from within the five tabs */}
               <Route path="concepts/:id" element={<ConceptDetail />} />
@@ -96,10 +103,10 @@ function App() {
               <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
               <Route path="concepts" element={<Navigate to="/learn" replace />} />
               <Route path="drills" element={<Navigate to="/practice" replace />} />
-              <Route path="reviews" element={<Navigate to="/practice?tab=reviews" replace />} />
-              <Route path="review" element={<Navigate to="/practice?tab=reviews" replace />} />
-              <Route path="projects" element={<Navigate to="/progress" replace />} />
-              <Route path="notes" element={<Navigate to="/progress" replace />} />
+              <Route path="reviews" element={<Navigate to="/practice/all?tab=reviews" replace />} />
+              <Route path="review" element={<Navigate to="/practice/all?tab=reviews" replace />} />
+              <Route path="projects" element={<Navigate to="/progress/all" replace />} />
+              <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
               <Route path="library/*" element={<Navigate to="/learn" replace />} />
               <Route path="mock" element={<Navigate to="/practice" replace />} />
               <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
