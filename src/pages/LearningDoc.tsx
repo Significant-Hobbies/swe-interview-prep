@@ -49,6 +49,18 @@ const DOC_META: Record<string, DocMeta> = {
     blurb: 'One page per major systems-software domain. Vocabulary first, depth on demand.',
     companionRoadmapId: 'swe-landscape',
   },
+  'system-design': {
+    title: 'System design — LLD + HLD',
+    blurb: 'Design patterns + classic "design X" problems, in one place. The two halves of system design interviews and real engineering.',
+  },
+  'interview-prep': {
+    title: 'Interview prep — checklist + where to apply',
+    blurb: 'Breadth-first topic checklist for SWE interviews plus a curated index of remote-friendly companies.',
+  },
+  'ml-case-studies': {
+    title: 'ML system design case studies',
+    blurb: '450 real production ML write-ups from company engineering blogs, grouped by category.',
+  },
 };
 
 // Rewrite intra-doc markdown links so they resolve at /learning/* on the web.
