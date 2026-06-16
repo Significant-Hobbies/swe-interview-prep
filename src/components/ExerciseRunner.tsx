@@ -64,7 +64,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
   if (!current) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-gray-400 mb-4">
+        <p className="text-slate-400 mb-4">
           {exercises.length === 0 ? 'No exercises available for this repo yet.' : 'No exercises match your filter.'}
         </p>
       </div>
@@ -92,23 +92,23 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
       {/* Controls */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-500">
             {index + 1} / {filtered.length}
           </span>
           {score.total > 0 && (
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-slate-500">
               Score: {score.correct}/{score.total}
             </span>
           )}
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center rounded-lg border border-gray-700 bg-gray-900 p-0.5">
+          <div className="flex items-center rounded-lg border border-slate-700 bg-slate-900 p-0.5">
             <button
               onClick={() => { setQualityFilter('high'); setIndex(0); }}
               className={`rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 qualityFilter === 'high'
                   ? 'bg-emerald-500/20 text-emerald-400'
-                  : 'text-gray-400 hover:text-gray-200'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               High signal
@@ -118,7 +118,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
               className={`rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 qualityFilter === 'all'
                   ? 'bg-emerald-500/20 text-emerald-400'
-                  : 'text-gray-400 hover:text-gray-200'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               All
@@ -129,7 +129,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
             <select
               value={tagFilter}
               onChange={e => { setTagFilter(e.target.value); setIndex(0); }}
-              className="rounded-lg border border-gray-700 bg-gray-800 px-3 py-1.5 text-xs text-gray-300"
+              className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs text-slate-300"
             >
               <option value="all">All tags</option>
               {allTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
@@ -137,14 +137,14 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
           )}
           <button
             onClick={() => { setShuffled(!shuffled); setIndex(0); }}
-            className={`rounded-lg p-2 transition-colors ${shuffled ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-800 text-gray-400 hover:text-gray-200'}`}
+            className={`rounded-lg p-2 transition-colors ${shuffled ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-400 hover:text-slate-200'}`}
             title="Shuffle"
           >
             <Shuffle className="h-4 w-4" />
           </button>
           <button
             onClick={() => { setIndex(0); setScore({ correct: 0, total: 0 }); setRevealed(false); setSelectedOption(null); }}
-            className="rounded-lg bg-gray-800 p-2 text-gray-400 hover:text-gray-200 transition-colors"
+            className="rounded-lg bg-slate-800 p-2 text-slate-400 hover:text-slate-200 transition-colors"
             title="Reset"
           >
             <RotateCcw className="h-4 w-4" />
@@ -153,7 +153,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
       </div>
 
       {/* Exercise Card */}
-      <div className="rounded-2xl border border-gray-800 bg-gray-900 p-6 sm:p-8">
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
         {/* Question */}
         <div className="mb-6">
           <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -172,13 +172,13 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
                   ? 'bg-emerald-500/10 text-emerald-400'
                   : current.qualityTier === 'medium'
                   ? 'bg-sky-500/10 text-sky-400'
-                  : 'bg-gray-700/60 text-gray-400'
+                  : 'bg-slate-700/60 text-slate-400'
               }`}>
                 Quality {current.qualityScore}
               </span>
             )}
           </div>
-          <p className="text-lg text-gray-200 whitespace-pre-wrap">{current.question}</p>
+          <p className="text-lg text-slate-200 whitespace-pre-wrap">{current.question}</p>
         </div>
 
         {/* MCQ Options */}
@@ -201,7 +201,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
                       ? 'border-red-500/50 bg-red-500/10 text-red-300'
                       : isSelected
                       ? 'border-blue-500/50 bg-blue-500/10 text-blue-300'
-                      : 'border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600'
+                      : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
         {(current.type === 'qa' || current.type === 'flashcard') && !revealed && (
           <button
             onClick={() => setRevealed(true)}
-            className="w-full rounded-xl border border-gray-700 bg-gray-800 py-3 text-sm font-medium text-gray-300 hover:border-emerald-500/40 hover:text-emerald-400 transition-colors"
+            className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 text-sm font-medium text-slate-300 hover:border-emerald-500/40 hover:text-emerald-400 transition-colors"
           >
             Show Answer
           </button>
@@ -227,9 +227,9 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
 
         {/* Answer */}
         {(revealed || (current.type === 'mcq' && selectedOption !== null)) && (
-          <div className="mt-4 rounded-xl border border-gray-700 bg-gray-800/50 p-4">
-            <p className="text-xs font-medium text-gray-500 uppercase mb-2">Answer</p>
-            <p className="text-sm text-gray-300 whitespace-pre-wrap">{current.answer}</p>
+          <div className="mt-4 rounded-xl border border-slate-700 bg-slate-800/50 p-4">
+            <p className="text-xs font-medium text-slate-500 uppercase mb-2">Answer</p>
+            <p className="text-sm text-slate-300 whitespace-pre-wrap">{current.answer}</p>
           </div>
         )}
       </div>

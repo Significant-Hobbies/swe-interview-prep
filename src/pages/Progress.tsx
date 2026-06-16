@@ -2,7 +2,7 @@ import { Hammer, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, StatTile, TabButton, TabGroup } from '../components/ui';
+import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, TabButton, TabGroup } from '../components/ui';
 import {
   ARTIFACTS,
   CONCEPT_BY_ID,
@@ -55,39 +55,38 @@ function Overview() {
 
   return (
     <>
-      <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-5">
-        <StatTile label="Started" value={started} hint={`of ${overall.total}`} tone="blue" />
-        <StatTile label="Mastered" value={overall.mastered} tone="emerald" />
-        <StatTile label="Drills solved" value={drillsSolved} hint={`of ${DRILLS.length}`} tone="amber" />
-        <StatTile label="Shipped" value={shipped} hint={`${building} building`} tone="purple" />
-        <StatTile label="Focus sessions" value={focusSessions} hint="last 7 days" tone="cyan" />
+      {/* Single stat row — no colored tiles */}
+      <div className="mb-8 rounded-xl border border-slate-800 bg-slate-900/40 p-5">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
+          <ProgressStat label="Started" value={started} sub={`of ${overall.total}`} />
+          <ProgressStat label="Mastered" value={overall.mastered} sub={`of ${overall.total}`} />
+          <ProgressStat label="Drills" value={drillsSolved} sub={`of ${DRILLS.length}`} />
+          <ProgressStat label="Shipped" value={shipped} sub={`${building} building`} />
+          <ProgressStat label="Focus sessions" value={focusSessions} sub="last 7 days" />
+        </div>
       </div>
 
-      <section className="mb-8">
+      <section className="mb-10">
         <SectionTitle>Mastery by track</SectionTitle>
-        <div className="space-y-2">
+        <div className="rounded-xl border border-slate-800 bg-slate-900/40 divide-y divide-slate-800/80">
           {sortedTracks().map(t => {
             const ids = conceptsByTrack(t.id).map(c => c.id);
             const roll = rollupMastery(ids, mastery);
             const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
             const elo = getElo(t.id);
             return (
-              <div key={t.id} className="rounded-lg border border-gray-800 bg-gray-900/40 p-3">
-                <div className="mb-1.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className={`h-2 w-2 rounded-full ${color(t.color).solid}`} />
-                    <span className="text-sm font-medium text-gray-200">{t.title}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[11px] text-cyan-300/80" title="Adaptive ELO for this track">
-                      {elo}
-                    </span>
-                    <span className="text-[11px] text-gray-500">
-                      {roll.mastered} / {ids.length}
-                    </span>
-                  </div>
+              <div key={t.id} className="flex items-center gap-4 px-4 py-3">
+                <span className={`h-2 w-2 shrink-0 rounded-full ${color(t.color).solid}`} />
+                <span className="min-w-[10rem] text-sm font-medium text-slate-200">{t.title}</span>
+                <div className="flex-1">
+                  <ProgressBar value={pct} tone={t.color} />
                 </div>
-                <ProgressBar value={pct} tone={t.color} />
+                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-slate-400">
+                  {roll.mastered}/{ids.length}
+                </span>
+                <span className="w-16 shrink-0 text-right font-mono text-xs text-slate-500" title="Adaptive ELO for this track">
+                  {elo}
+                </span>
               </div>
             );
           })}
@@ -96,27 +95,42 @@ function Overview() {
 
       <section>
         <SectionTitle>Artifact pipeline</SectionTitle>
-        <div className="grid gap-2 sm:grid-cols-3">
-          {(['todo', 'building', 'shipped'] as const).map(status => {
+        <div className="rounded-xl border border-slate-800 bg-slate-900/40">
+          {(['shipped', 'building', 'todo'] as const).map(status => {
             const items = ARTIFACTS.filter(a => (artifacts[a.id]?.status || 'todo') === status);
+            if (!items.length) return null;
+            const dot = status === 'shipped' ? 'bg-emerald-500' : status === 'building' ? 'bg-amber-500' : 'bg-slate-500';
             return (
-              <Card key={status} className="p-3">
-                <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold capitalize text-gray-300">
-                  <Hammer className="h-3.5 w-3.5 text-purple-400" /> {status}
-                  <span className="ml-auto text-gray-500">{items.length}</span>
+              <div key={status} className="border-b border-slate-800/80 last:border-b-0 px-4 py-3">
+                <div className="mb-2 flex items-center gap-2 text-xs font-medium capitalize text-slate-300">
+                  <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+                  {status}
+                  <span className="text-slate-500">· {items.length}</span>
                 </div>
-                <div className="space-y-0.5">
-                  {items.slice(0, 5).map(a => (
-                    <div key={a.id} className="truncate text-[11px] text-gray-500">{a.title}</div>
+                <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+                  {items.map(a => (
+                    <li key={a.id} className="truncate text-sm text-slate-400">
+                      <Hammer className="mr-1.5 inline h-3 w-3 text-slate-600" />
+                      {a.title}
+                    </li>
                   ))}
-                  {items.length > 5 && <div className="text-[11px] text-gray-600">+{items.length - 5} more</div>}
-                </div>
-              </Card>
+                </ul>
+              </div>
             );
           })}
         </div>
       </section>
     </>
+  );
+}
+
+function ProgressStat({ label, value, sub }: { label: string; value: React.ReactNode; sub?: string }) {
+  return (
+    <div>
+      <div className="text-xs font-medium text-slate-400">{label}</div>
+      <div className="mt-1 text-2xl font-semibold tabular-nums text-slate-50">{value}</div>
+      {sub && <div className="mt-0.5 text-xs text-slate-500">{sub}</div>}
+    </div>
   );
 }
 
@@ -153,14 +167,14 @@ function NotesPanel() {
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Title (optional)"
-            className="mb-2 w-full rounded-md border border-gray-800 bg-gray-950 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
+            className="mb-2 w-full rounded-md border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
           />
           <textarea
             value={body}
             onChange={e => setBody(e.target.value)}
             placeholder="Write…"
             rows={4}
-            className="w-full resize-y rounded-md border border-gray-800 bg-gray-950 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
+            className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
           />
           <div className="mt-2 flex justify-end gap-2">
             <Button tone="ghost" onClick={() => setComposing(false)}>Cancel</Button>
@@ -188,16 +202,16 @@ function NoteRow({ note, onDelete }: { note: LearningNote; onDelete: () => void 
     <Card className="flex items-start justify-between gap-3 p-3">
       <div className="min-w-0">
         <div className="mb-1 flex items-center gap-2">
-          <Badge tone={note.scope === 'free' ? 'gray' : 'purple'}>{note.scope}</Badge>
+          <Badge tone={note.scope === 'free' ? 'default' : 'info'}>{note.scope}</Badge>
           {link && (
-            <Link to={link.to} className="text-xs text-purple-400 hover:underline">{link.label}</Link>
+            <Link to={link.to} className="text-xs text-sky-400 hover:underline">{link.label}</Link>
           )}
-          <span className="text-[11px] text-gray-600">{new Date(note.updatedAt).toLocaleDateString()}</span>
+          <span className="text-[11px] text-slate-500">{new Date(note.updatedAt).toLocaleDateString()}</span>
         </div>
         {note.title && <div className="text-sm font-semibold text-white">{note.title}</div>}
-        <p className="whitespace-pre-wrap text-sm text-gray-300">{note.body}</p>
+        <p className="whitespace-pre-wrap text-sm text-slate-300">{note.body}</p>
       </div>
-      <button onClick={onDelete} aria-label="Delete note" className="shrink-0 text-gray-600 hover:text-rose-400">
+      <button onClick={onDelete} aria-label="Delete note" className="shrink-0 text-slate-500 hover:text-rose-400">
         <Trash2 className="h-4 w-4" />
       </button>
     </Card>

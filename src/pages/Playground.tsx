@@ -1,4 +1,4 @@
-import { AlertTriangle, BookOpen,Brain, Check, Clock, Code2, Copy, Eye, FileText, Focus, GripVertical, Loader2, Pencil, PenTool, Play, Share2, Sparkles } from 'lucide-react';
+import { AlertTriangle, BookOpen, Brain, Check, Clock, Code2, Copy, Eye, FileText, Focus, GripVertical, Loader2, Pencil, PenTool, Play, Share2 } from 'lucide-react';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 import { useCallback, useEffect,useMemo, useRef, useState } from 'react';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
@@ -181,8 +181,10 @@ export default function Playground() {
   const formatTime = (ms: number) => ms < 1 ? '<1ms' : ms < 1000 ? `${ms.toFixed(1)}ms` : `${(ms / 1000).toFixed(2)}s`;
 
   const panelBtn = (_id: PanelId, active: boolean) =>
-    `flex shrink-0 items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
-      active ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'
+    `relative flex shrink-0 items-center gap-1.5 px-2 py-1.5 text-xs font-medium transition-colors duration-150 after:absolute after:inset-x-1 after:-bottom-px after:h-px after:transition-colors ${
+      active
+        ? 'text-slate-50 after:bg-sky-400'
+        : 'text-slate-400 hover:text-slate-200 after:bg-transparent'
     }`;
 
   // In compact mode the toggle row is a tab switcher, so "active" = the shown panel.
@@ -190,8 +192,8 @@ export default function Playground() {
     isCompact ? activePanel === id : visiblePanels.has(id);
 
   const langBtn = (active: boolean) =>
-    `px-2 py-1 rounded text-xs font-medium transition-colors ${
-      active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'
+    `px-2 py-1 rounded text-xs font-medium transition-colors duration-150 ${
+      active ? 'bg-slate-800 text-slate-50' : 'text-slate-400 hover:text-slate-200'
     }`;
 
   // Focus mode evicts the Companion panel from the layout without mutating
@@ -214,38 +216,38 @@ export default function Playground() {
   return (
     <div className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Toolbar */}
-      <div className="flex items-center justify-between gap-2 border-b border-gray-800 bg-gray-950 px-2 py-2 sm:px-4">
-        <div className="flex min-w-0 items-center gap-2">
-          {/* Panel toggles — scroll horizontally if they overflow on mobile */}
-          <div className="flex items-center gap-1 overflow-x-auto rounded-lg bg-gray-800 p-0.5">
+      <div className="flex items-center justify-between gap-2 border-b border-slate-800 bg-slate-950/95 px-3 py-2 sm:px-4 sm:py-2.5">
+        <div className="flex min-w-0 items-center gap-3">
+          {/* Panel toggles — underline indicator on active, no chip bg */}
+          <div className="flex items-center gap-3 overflow-x-auto border-b border-transparent">
             <button onClick={() => togglePanel('problem')} className={panelBtn('problem', isPanelActive('problem'))}>
-              <FileText className="h-3 w-3" />
+              <FileText className="h-3.5 w-3.5" />
               Problem
             </button>
             <button onClick={() => togglePanel('code')} className={panelBtn('code', isPanelActive('code'))}>
-              <Code2 className="h-3 w-3" />
+              <Code2 className="h-3.5 w-3.5" />
               Code
             </button>
             <button onClick={() => togglePanel('diagram')} className={panelBtn('diagram', isPanelActive('diagram'))}>
-              <PenTool className="h-3 w-3" />
+              <PenTool className="h-3.5 w-3.5" />
               Draw
             </button>
             {!focusMode && (
               <button onClick={() => togglePanel('companion')} className={panelBtn('companion', isPanelActive('companion'))}>
-                <Sparkles className="h-3 w-3" />
+                <Brain className="h-3.5 w-3.5" />
                 Companion
               </button>
             )}
             <button onClick={() => togglePanel('library')} className={panelBtn('library', isPanelActive('library'))}>
-              <BookOpen className="h-3 w-3" />
+              <BookOpen className="h-3.5 w-3.5" />
               Library
             </button>
           </div>
 
           {visiblePanels.has('code') && (
             <>
-              <div className="mx-1 h-4 w-px bg-gray-800" />
-              <div className="flex items-center gap-1 rounded-lg bg-gray-800 p-0.5">
+              <div className="h-4 w-px bg-slate-800" />
+              <div className="flex items-center gap-1 rounded-md border border-slate-800 p-0.5">
                 <button onClick={() => handleLanguageChange('javascript')} className={langBtn(language === 'javascript')}>JS</button>
                 <button onClick={() => handleLanguageChange('typescript')} className={langBtn(language === 'typescript')}>TS</button>
                 <button onClick={() => handleLanguageChange('go')} className={langBtn(language === 'go')}>Go</button>
@@ -256,10 +258,10 @@ export default function Playground() {
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <button
             onClick={() => setFocusMode(!focusMode)}
-            className={`flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors ${
+            className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-xs transition-colors duration-150 ${
               focusMode
-                ? 'bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25'
-                : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+                ? 'text-sky-300 hover:text-sky-200'
+                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
             }`}
             title={focusMode
               ? 'Focus mode on — Companion + auto-tag suppressed. Click to disable.'
@@ -267,14 +269,13 @@ export default function Playground() {
           >
             <Focus className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Focus</span>
-            <span className={`ml-0.5 rounded px-1 text-[10px] font-semibold ${
-              focusMode ? 'bg-cyan-500/20 text-cyan-200' : 'bg-gray-800 text-gray-500'
-            }`}>{sessionsThisWeek()}/wk</span>
+            <span className="ml-0.5 text-slate-500">·</span>
+            <span className="ml-0.5 text-[11px] tabular-nums">{sessionsThisWeek()}/wk</span>
           </button>
           <button
             onClick={() => setFeynmanOpen(true)}
             disabled={code.length < 50}
-            className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-purple-400 transition-colors hover:bg-purple-900/20 hover:text-purple-300 disabled:opacity-30"
+            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-slate-300 transition-colors duration-150 hover:bg-slate-900 hover:text-slate-100 disabled:cursor-not-allowed disabled:opacity-30"
             title="Explain what you built (Feynman gate)"
           >
             <Brain className="h-3.5 w-3.5" />
@@ -282,31 +283,31 @@ export default function Playground() {
           </button>
           <button
             onClick={handleShare}
-            className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200"
+            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-slate-400 transition-colors duration-150 hover:bg-slate-900 hover:text-slate-200"
           >
-            {shared_ ? <Check className="h-3.5 w-3.5 text-green-400" /> : <Share2 className="h-3.5 w-3.5" />}
-            <span className="hidden sm:inline">{shared_ ? 'Copied!' : 'Share'}</span>
+            {shared_ ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Share2 className="h-3.5 w-3.5" />}
+            <span className="hidden sm:inline">{shared_ ? 'Copied' : 'Share'}</span>
           </button>
           {visiblePanels.has('code') && (
             <>
               <button
                 onClick={handleFormat}
-                className="hidden items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-colors hover:bg-gray-800 hover:text-gray-200 sm:flex"
+                className="hidden items-center gap-1.5 rounded-md px-2 py-1 text-xs text-slate-400 transition-colors duration-150 hover:bg-slate-900 hover:text-slate-200 sm:flex"
               >
                 <Code2 className="h-3.5 w-3.5" />
-                Format <span className="ml-1 text-gray-500">&#x21E7;&#x2318;F</span>
+                Format <span className="ml-1 text-slate-600">⇧⌘F</span>
               </button>
               <button
                 onClick={handleRun}
                 disabled={isRunning}
-                className="flex items-center gap-1.5 rounded-md bg-green-600 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-50"
+                className="flex items-center gap-1.5 rounded-md bg-sky-500 px-3 py-1.5 text-xs font-semibold text-slate-950 transition-colors duration-150 hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isRunning ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
                 ) : (
                   <Play className="h-3.5 w-3.5" />
                 )}
-                Run <span className="ml-1 hidden opacity-70 sm:inline">&#x2318;&#x23CE;</span>
+                Run <span className="ml-1 hidden text-slate-700 sm:inline">⌘↵</span>
               </button>
             </>
           )}
@@ -318,12 +319,12 @@ export default function Playground() {
         {panels.map((id, i) => (
           <PanelWrapper key={id} id={id} index={i} total={panels.length} defaultSize={panelSize}>
             {id === 'problem' && (
-              <div className="flex flex-col h-full bg-gray-950">
-                <div className="flex h-9 items-center justify-between border-b border-gray-800 px-4">
-                  <span className="text-xs font-medium text-gray-400">Problem Statement</span>
+              <div className="flex flex-col h-full bg-slate-950">
+                <div className="flex h-9 items-center justify-between border-b border-slate-800 px-4">
+                  <span className="text-xs font-medium text-slate-400">Problem Statement</span>
                   <button
                     onClick={() => setProblemPreview(!problemPreview)}
-                    className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-gray-500 transition-colors hover:bg-gray-800 hover:text-gray-300"
+                    className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-slate-500 transition-colors hover:bg-slate-800 hover:text-slate-300"
                   >
                     {problemPreview ? <Pencil className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                     {problemPreview ? 'Edit' : 'Preview'}
@@ -334,7 +335,7 @@ export default function Playground() {
                     {problem ? (
                       <MarkdownViewer content={problem} />
                     ) : (
-                      <div className="flex items-center justify-center h-full text-sm text-gray-600">
+                      <div className="flex items-center justify-center h-full text-sm text-slate-500">
                         Nothing to preview.
                       </div>
                     )}
@@ -344,7 +345,7 @@ export default function Playground() {
                     value={problem}
                     onChange={handleProblemChange}
                     placeholder="Paste your problem statement here (supports Markdown)..."
-                    className="flex-1 resize-none bg-transparent p-4 text-sm text-gray-200 placeholder-gray-600 focus:outline-none font-mono leading-relaxed"
+                    className="flex-1 resize-none bg-transparent p-4 text-sm text-slate-200 placeholder-slate-500 focus:outline-none font-mono leading-relaxed"
                   />
                 )}
               </div>
@@ -362,22 +363,22 @@ export default function Playground() {
                     errorLine={errorLine}
                   />
                 </Panel>
-                <PanelResizeHandle className="group relative flex h-2 items-center justify-center bg-gray-900 hover:bg-gray-800 transition-colors">
-                  <div className="h-0.5 w-8 rounded-full bg-gray-700 group-hover:bg-gray-500 transition-colors" />
+                <PanelResizeHandle className="group relative flex h-2 items-center justify-center bg-slate-900 hover:bg-slate-800 transition-colors">
+                  <div className="h-0.5 w-8 rounded-full bg-slate-700 group-hover:bg-slate-500 transition-colors" />
                 </PanelResizeHandle>
                 <Panel defaultSize={hasRun ? 40 : 15} minSize={10}>
-                  <div className="flex flex-col h-full overflow-y-auto bg-gray-900">
-                    <div className="flex h-9 items-center justify-between border-b border-gray-800 px-4">
+                  <div className="flex flex-col h-full overflow-y-auto bg-slate-900">
+                    <div className="flex h-9 items-center justify-between border-b border-slate-800 px-4">
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => setBottomTab('output')}
                           className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
-                            bottomTab === 'output' ? 'bg-gray-800 text-gray-200' : 'text-gray-500 hover:text-gray-300'
+                            bottomTab === 'output' ? 'bg-slate-800 text-slate-200' : 'text-slate-500 hover:text-slate-300'
                           }`}
                         >
                           Output
                           {hasRun && execTimeMs > 0 && (
-                            <span className="ml-1.5 text-gray-500">
+                            <span className="ml-1.5 text-slate-500">
                               {formatTime(execTimeMs)}
                             </span>
                           )}
@@ -385,7 +386,7 @@ export default function Playground() {
                             <span className={`ml-1.5 rounded px-1 text-[10px] font-bold ${
                               goBackend === 'wasm' ? 'bg-green-500/20 text-green-400' :
                               goBackend === 'wasm-loading' ? 'bg-blue-500/20 text-blue-400' :
-                              'bg-gray-700 text-gray-400'
+                              'bg-slate-700 text-slate-400'
                             }`}>
                               {goBackend === 'wasm' ? 'LOCAL' : goBackend === 'wasm-loading' ? 'API (loading WASM...)' : 'API'}
                             </span>
@@ -395,8 +396,8 @@ export default function Playground() {
                           onClick={() => setBottomTab('problems')}
                           className={`flex items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
                             bottomTab === 'problems'
-                              ? 'bg-gray-800 text-gray-200'
-                              : markers.length > 0 ? 'text-yellow-400 hover:text-yellow-300' : 'text-gray-500 hover:text-gray-300'
+                              ? 'bg-slate-800 text-slate-200'
+                              : markers.length > 0 ? 'text-yellow-400 hover:text-yellow-300' : 'text-slate-500 hover:text-slate-300'
                           }`}
                         >
                           Problems
@@ -412,7 +413,7 @@ export default function Playground() {
                       {bottomTab === 'output' && (output || errors) && (
                         <button
                           onClick={handleCopy}
-                          className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-gray-500 transition-colors hover:bg-gray-800 hover:text-gray-300"
+                          className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-slate-500 transition-colors hover:bg-slate-800 hover:text-slate-300"
                         >
                           {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
                           {copied ? 'Copied' : 'Copy'}
@@ -423,7 +424,7 @@ export default function Playground() {
                     {bottomTab === 'output' && (
                       <div className="p-4 font-mono text-xs">
                         {output && (
-                          <pre className="whitespace-pre-wrap rounded-lg bg-gray-950 p-3 text-gray-300">
+                          <pre className="whitespace-pre-wrap rounded-lg bg-slate-950 p-3 text-slate-300">
                             {output}
                           </pre>
                         )}
@@ -433,7 +434,7 @@ export default function Playground() {
                           </pre>
                         )}
                         {!output && !errors && (
-                          <div className="flex items-center justify-center py-8 text-sm text-gray-600">
+                          <div className="flex items-center justify-center py-8 text-sm text-slate-500">
                             Click "Run" to execute your code.
                           </div>
                         )}
@@ -443,7 +444,7 @@ export default function Playground() {
                     {bottomTab === 'problems' && (
                       <div className="p-4">
                         {markers.length === 0 ? (
-                          <div className="flex items-center justify-center py-8 text-sm text-gray-600">
+                          <div className="flex items-center justify-center py-8 text-sm text-slate-500">
                             No problems detected.
                           </div>
                         ) : (
@@ -461,7 +462,7 @@ export default function Playground() {
                                 <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 text-yellow-400 mt-0.5" />
                                 <div className="text-xs">
                                   <span className="text-yellow-500 font-mono">Ln {m.startLineNumber}, Col {m.startColumn}</span>
-                                  <span className="text-gray-400 ml-2">{m.message}</span>
+                                  <span className="text-slate-400 ml-2">{m.message}</span>
                                 </div>
                               </div>
                             ))}
@@ -506,8 +507,8 @@ function PanelWrapper({ id, index, total, defaultSize, children }: {
   return (
     <>
       {index > 0 && (
-        <PanelResizeHandle className="group flex w-2 items-center justify-center bg-gray-900 transition-colors hover:bg-gray-700">
-          <GripVertical className="h-4 w-4 text-gray-600 group-hover:text-gray-400" />
+        <PanelResizeHandle className="group flex w-2 items-center justify-center bg-slate-900 transition-colors hover:bg-slate-700">
+          <GripVertical className="h-4 w-4 text-slate-500 group-hover:text-slate-400" />
         </PanelResizeHandle>
       )}
       <Panel defaultSize={defaultSize} minSize={20}>

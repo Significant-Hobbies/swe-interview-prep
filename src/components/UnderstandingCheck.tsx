@@ -63,12 +63,12 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
   const [mode, setMode] = useState<Mode | null>(null);
 
   return (
-    <div className="mt-10 rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-fuchsia-500/5 p-5 sm:p-6">
+    <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900/40 p-5 sm:p-6">
       <div className="mb-3 flex items-center gap-2">
-        <Brain className="h-5 w-5 text-purple-400" />
+        <Brain className="h-5 w-5 text-sky-400" />
         <h2 className="text-base font-semibold text-white">Test your understanding</h2>
       </div>
-      <p className="mb-4 max-w-2xl text-sm text-gray-400">
+      <p className="mb-4 max-w-2xl text-sm text-slate-400">
         Don't take it from me — verify you got the doc. Two modes: AI asks
         you five open questions, or you explain the thesis back in your own
         words. Either way, you get a 0–100 grade and a list of gaps to
@@ -79,12 +79,12 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
         <div className="grid gap-3 sm:grid-cols-2">
           <button
             onClick={() => setMode('quiz')}
-            className="group flex items-start gap-3 rounded-xl border border-purple-500/30 bg-purple-500/10 p-4 text-left transition-colors hover:bg-purple-500/20"
+            className="group flex items-start gap-3 rounded-xl border border-sky-500/30 bg-sky-500/10 p-4 text-left transition-colors hover:bg-sky-500/15"
           >
-            <FileQuestion className="mt-0.5 h-5 w-5 shrink-0 text-purple-300" />
+            <FileQuestion className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" />
             <div>
               <div className="text-sm font-semibold text-white">Quiz me</div>
-              <div className="mt-0.5 text-xs text-gray-400">
+              <div className="mt-0.5 text-xs text-slate-400">
                 AI asks 5 open-ended questions about this doc. You type
                 answers. AI grades each.
               </div>
@@ -92,12 +92,12 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
           </button>
           <button
             onClick={() => setMode('explain')}
-            className="group flex items-start gap-3 rounded-xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-4 text-left transition-colors hover:bg-fuchsia-500/20"
+            className="group flex items-start gap-3 rounded-xl border border-sky-500/30 bg-sky-500/10 p-4 text-left transition-colors hover:bg-sky-500/15"
           >
-            <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-fuchsia-300" />
+            <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" />
             <div>
               <div className="text-sm font-semibold text-white">Explain back</div>
-              <div className="mt-0.5 text-xs text-gray-400">
+              <div className="mt-0.5 text-xs text-slate-400">
                 Write the doc's thesis in your own words, as if teaching a
                 peer. AI grades + lists what you missed.
               </div>
@@ -211,7 +211,7 @@ function QuizFlow({
         </Button>
         <button
           onClick={onReset}
-          className="ml-2 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300"
+          className="ml-2 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
         >
           <X className="h-3 w-3" /> Cancel
         </button>
@@ -226,25 +226,25 @@ function QuizFlow({
         <Card className="p-4">
           <div className="mb-2 flex items-baseline gap-3">
             <span className={`text-4xl font-bold ${gradeColor(result.overall)}`}>{result.overall}</span>
-            <span className="text-xs text-gray-500">/ 100 overall</span>
+            <span className="text-xs text-slate-500">/ 100 overall</span>
           </div>
-          <p className="text-sm text-gray-300">{result.summary}</p>
+          <p className="text-sm text-slate-300">{result.summary}</p>
         </Card>
 
         <div>
           <SectionTitle>Per-question feedback</SectionTitle>
           <div className="space-y-2">
             {result.perQuestion.map((pq, i) => (
-              <div key={i} className="rounded-lg border border-gray-800 bg-gray-900/40 p-3">
+              <div key={i} className="rounded-lg border border-slate-800 bg-slate-900/40 p-3">
                 <div className="mb-1 flex items-baseline justify-between gap-3">
-                  <div className="text-sm font-medium text-gray-200">{pq.q}</div>
+                  <div className="text-sm font-medium text-slate-200">{pq.q}</div>
                   <span className={`shrink-0 font-mono text-xs ${gradeColor(pq.grade)}`}>{pq.grade}/100</span>
                 </div>
                 <details className="mt-1 text-xs">
-                  <summary className="cursor-pointer text-gray-500 hover:text-gray-300">Your answer</summary>
-                  <div className="mt-1 rounded bg-gray-950 px-2 py-1.5 text-gray-400">{pq.a}</div>
+                  <summary className="cursor-pointer text-slate-500 hover:text-slate-300">Your answer</summary>
+                  <div className="mt-1 rounded bg-slate-950 px-2 py-1.5 text-slate-400">{pq.a}</div>
                 </details>
-                <div className="mt-2 text-xs text-gray-300">{pq.feedback}</div>
+                <div className="mt-2 text-xs text-slate-300">{pq.feedback}</div>
               </div>
             ))}
           </div>
@@ -277,16 +277,16 @@ function QuizFlow({
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-slate-500">
         Answer each in 2-5 sentences. Use your own words. Don't peek.
       </p>
       {questions.map((q, i) => (
-        <div key={i} className="rounded-lg border border-gray-800 bg-gray-900/40 p-3">
+        <div key={i} className="rounded-lg border border-slate-800 bg-slate-900/40 p-3">
           <div className="mb-1.5 text-sm font-medium text-white">
-            <span className="mr-2 text-purple-400">Q{i + 1}.</span>
+            <span className="mr-2 text-sky-400">Q{i + 1}.</span>
             {q.q}
           </div>
-          {q.hint && <div className="mb-2 text-[11px] italic text-gray-500">Hint: {q.hint}</div>}
+          {q.hint && <div className="mb-2 text-[11px] italic text-slate-500">Hint: {q.hint}</div>}
           <textarea
             value={answers[i] || ''}
             onChange={e => {
@@ -296,7 +296,7 @@ function QuizFlow({
             }}
             placeholder="Type your answer…"
             rows={3}
-            className="w-full resize-y rounded-md border border-gray-800 bg-gray-950 p-2 text-sm text-gray-100 placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
+            className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-2 text-sm text-slate-100 placeholder-slate-500 focus:border-sky-500/50 focus:outline-none"
           />
         </div>
       ))}
@@ -375,9 +375,9 @@ function ExplainFlow({
         <Card className="p-4">
           <div className="mb-2 flex items-baseline gap-3">
             <span className={`text-4xl font-bold ${gradeColor(result.grade)}`}>{result.grade}</span>
-            <span className="text-xs text-gray-500">/ 100</span>
+            <span className="text-xs text-slate-500">/ 100</span>
           </div>
-          <p className="text-sm text-gray-300">{result.feedback}</p>
+          <p className="text-sm text-slate-300">{result.feedback}</p>
         </Card>
 
         {result.gaps?.length > 0 && (
@@ -403,7 +403,7 @@ function ExplainFlow({
               {result.missedSources.map((s, i) => (
                 <li
                   key={i}
-                  className="rounded-md border border-fuchsia-500/30 bg-fuchsia-500/10 px-3 py-2 text-xs text-fuchsia-100"
+                  className="rounded-md border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-xs text-slate-200"
                 >
                   {s}
                 </li>
@@ -423,7 +423,7 @@ function ExplainFlow({
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-slate-500">
         Pretend you're teaching the doc's thesis to a smart peer. Reference
         the actual sources (papers, blogs, talks) where they apply.
       </p>
@@ -433,7 +433,7 @@ function ExplainFlow({
         onChange={e => setExplanation(e.target.value)}
         placeholder="The thesis of this doc is… The key mechanism is… The canonical source for this is…"
         rows={10}
-        className="w-full resize-y rounded-md border border-gray-800 bg-gray-950 p-3 text-sm text-gray-100 placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
+        className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 placeholder-slate-500 focus:border-sky-500/50 focus:outline-none"
       />
       {error && (
         <div className="rounded-md bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{error}</div>

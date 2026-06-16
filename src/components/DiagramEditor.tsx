@@ -57,9 +57,9 @@ export default function DiagramEditor({ problemId, onElementsChange }: { problem
     <div style={{ width: '100%', height: '100%' }}>
       <Suspense
         fallback={
-          <div className="flex h-full items-center justify-center bg-gray-950">
-            <Loader2 className="h-6 w-6 animate-spin text-gray-500" />
-            <span className="ml-2 text-sm text-gray-500">Loading diagram editor...</span>
+          <div className="flex h-full items-center justify-center bg-slate-950">
+            <Loader2 className="h-6 w-6 animate-spin text-slate-500" />
+            <span className="ml-2 text-sm text-slate-500">Loading diagram editor...</span>
           </div>
         }
       >

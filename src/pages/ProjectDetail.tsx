@@ -34,8 +34,8 @@ export default function ProjectDetail() {
     return (
       <PageShell>
         <Card className="p-8 text-center">
-          <p className="text-sm text-gray-400">Project not found.</p>
-          <Link to="/progress" className="mt-2 inline-block text-sm text-purple-400">← Back to projects</Link>
+          <p className="text-sm text-slate-400">Project not found.</p>
+          <Link to="/progress" className="mt-2 inline-block text-sm text-sky-400">← Back to projects</Link>
         </Card>
       </PageShell>
     );
@@ -61,7 +61,7 @@ export default function ProjectDetail() {
 
   return (
     <PageShell>
-      <Link to="/progress" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/progress" className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Projects
       </Link>
 
@@ -73,7 +73,7 @@ export default function ProjectDetail() {
           ))}
         </div>
         <h1 className="text-2xl font-bold text-white sm:text-3xl">{project.name}</h1>
-        <p className="mt-1 text-sm text-gray-400">{project.purpose}</p>
+        <p className="mt-1 text-sm text-slate-400">{project.purpose}</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
@@ -85,8 +85,8 @@ export default function ProjectDetail() {
                 <Card key={m} as="button" onClick={() => toggleMilestone(m)} className="flex w-full items-center gap-3 p-3">
                   {state.milestones[m]
                     ? <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" />
-                    : <Circle className="h-5 w-5 shrink-0 text-gray-600" />}
-                  <span className={`text-sm ${state.milestones[m] ? 'text-gray-500 line-through' : 'text-gray-200'}`}>{m}</span>
+                    : <Circle className="h-5 w-5 shrink-0 text-slate-500" />}
+                  <span className={`text-sm ${state.milestones[m] ? 'text-slate-500 line-through' : 'text-slate-200'}`}>{m}</span>
                 </Card>
               ))}
             </div>
@@ -99,12 +99,12 @@ export default function ProjectDetail() {
                 {artifacts.map(a => (
                   <Card key={a.id} as="link" to="/playground" className="p-3">
                     <div className="text-sm font-medium text-white">{a.title}</div>
-                    <div className="text-xs text-gray-500">{a.type} · {a.successCriteria.length} success criteria</div>
+                    <div className="text-xs text-slate-500">{a.type} · {a.successCriteria.length} success criteria</div>
                   </Card>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-gray-500">No artifacts mapped yet.</p>
+              <p className="text-sm text-slate-500">No artifacts mapped yet.</p>
             )}
           </section>
 
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
                     <Link
                       key={c.id}
                       to={`/concepts/${c.id}`}
-                      className="rounded-md border border-gray-800 bg-gray-900/40 px-2 py-1 text-xs text-gray-300 hover:border-gray-700 hover:text-white"
+                      className="rounded-md border border-slate-800 bg-slate-900/40 px-2 py-1 text-xs text-slate-300 hover:border-slate-700 hover:text-white"
                     >
                       {c.name}
                       {status === 'mastered' && <span className="ml-1 text-emerald-400">✓</span>}
@@ -127,7 +127,7 @@ export default function ProjectDetail() {
                 })}
               </div>
             ) : (
-              <p className="text-sm text-gray-500">No concepts mapped yet.</p>
+              <p className="text-sm text-slate-500">No concepts mapped yet.</p>
             )}
           </section>
         </div>
@@ -154,7 +154,7 @@ export default function ProjectDetail() {
                 value={state.nextAction}
                 onChange={e => update({ nextAction: e.target.value })}
                 rows={3}
-                className="w-full resize-y rounded-md border border-gray-800 bg-gray-950 p-2 text-sm text-gray-100 focus:border-purple-500/50 focus:outline-none"
+                className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-2 text-sm text-slate-100 focus:border-sky-500/50 focus:outline-none"
               />
             </Card>
           </section>

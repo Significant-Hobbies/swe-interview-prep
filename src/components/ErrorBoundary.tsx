@@ -42,23 +42,23 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.props.fallback) return this.props.fallback(this.reset);
 
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-950 p-8">
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 p-8">
         <div className="max-w-md text-center">
           <h2 className="mb-3 text-xl font-bold text-white">Something went wrong</h2>
-          <p className="mb-6 text-sm text-gray-400">
+          <p className="mb-6 text-sm text-slate-400">
             An unexpected error occurred. Your progress is saved locally — try
             again, and if it keeps happening, reload the page.
           </p>
           <div className="flex justify-center gap-3">
             <button
               onClick={this.reset}
-              className="rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-200 transition-colors hover:bg-gray-900"
+              className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:bg-slate-900"
             >
               Try again
             </button>
             <button
               onClick={() => window.location.assign('/')}
-              className="rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-200 transition-colors hover:bg-gray-900"
+              className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:bg-slate-900"
             >
               Home
             </button>

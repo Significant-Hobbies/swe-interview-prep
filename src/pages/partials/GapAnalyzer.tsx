@@ -43,7 +43,7 @@ export function GapAnalyzer() {
   return (
     <Card className="p-4">
       <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 text-sm font-semibold text-purple-200">
+        <div className="flex items-center gap-1.5 text-sm font-semibold text-sky-200">
           <Sparkles className="h-4 w-4" /> AI Gap Analyzer
         </div>
         <Button tone="ghost" onClick={() => void run()} disabled={loading}>
@@ -52,7 +52,7 @@ export function GapAnalyzer() {
       </div>
 
       {!result && !error && (
-        <p className="mt-2 text-xs text-gray-500">
+        <p className="mt-2 text-xs text-slate-500">
           {aiConfigured()
             ? 'Sends your mastery profile to your AI provider and returns weak areas, the next concepts to study, and an artifact to build.'
             : 'Add an AI provider in Settings to enable the Gap Analyzer.'}
@@ -63,11 +63,11 @@ export function GapAnalyzer() {
 
       {result && (
         <div className="mt-3 space-y-3">
-          <p className="text-sm text-gray-300">{result.summary}</p>
+          <p className="text-sm text-slate-300">{result.summary}</p>
 
           {result.weakAreas?.length > 0 && (
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Weak areas</div>
+              <div className="text-[11px] font-medium text-slate-500">Weak areas</div>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {result.weakAreas.map((w, i) => (
                   <span key={i} className="rounded-md border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 text-[11px] text-rose-300">
@@ -80,7 +80,7 @@ export function GapAnalyzer() {
 
           {result.nextConcepts?.length > 0 && (
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Study next</div>
+              <div className="text-[11px] font-medium text-slate-500">Study next</div>
               <div className="mt-1 space-y-1.5">
                 {result.nextConcepts.map((n, i) => {
                   const c = CONCEPT_BY_ID[n.conceptId];
@@ -88,10 +88,10 @@ export function GapAnalyzer() {
                     <Link
                       key={i}
                       to={c ? `/concepts/${n.conceptId}` : '/concepts'}
-                      className="block rounded-md border border-gray-800 bg-gray-950 p-2 hover:border-gray-700"
+                      className="block rounded-md border border-slate-800 bg-slate-950 p-2 hover:border-slate-700"
                     >
                       <div className="text-sm font-medium text-white">{c?.name || n.conceptId}</div>
-                      <div className="text-xs text-gray-500">{n.why}</div>
+                      <div className="text-xs text-slate-500">{n.why}</div>
                     </Link>
                   );
                 })}
@@ -101,12 +101,12 @@ export function GapAnalyzer() {
 
           {result.recommendedArtifact?.artifactId && (
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Build this</div>
-              <Link to="/playground" className="mt-1 block rounded-md border border-purple-500/30 bg-purple-500/10 p-2">
-                <div className="text-sm font-medium text-purple-200">
+              <div className="text-[11px] font-medium text-slate-500">Build this</div>
+              <Link to="/playground" className="mt-1 block rounded-md border border-sky-500/30 bg-sky-500/10 p-2">
+                <div className="text-sm font-medium text-sky-200">
                   {ARTIFACT_BY_ID[result.recommendedArtifact.artifactId]?.title || result.recommendedArtifact.artifactId}
                 </div>
-                <div className="text-xs text-gray-400">{result.recommendedArtifact.why}</div>
+                <div className="text-xs text-slate-400">{result.recommendedArtifact.why}</div>
               </Link>
             </div>
           )}

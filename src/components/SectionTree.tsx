@@ -49,7 +49,7 @@ function SectionNode({
         className={`flex items-center gap-1.5 w-full text-left px-2 py-1.5 rounded-lg text-sm transition-colors ${
           isActive
             ? 'bg-emerald-500/15 text-emerald-400 font-medium'
-            : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >

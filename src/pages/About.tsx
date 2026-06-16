@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom';
 
 export default function About() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12 text-gray-200">
-      <Link to="/" className="text-xs text-gray-500 hover:text-blue-400">
+    <main className="mx-auto max-w-3xl px-4 py-12 text-slate-200">
+      <Link to="/" className="text-xs text-slate-500 hover:text-blue-400">
         ← Loop
       </Link>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-white">About</h1>
-      <p className="mt-4 text-sm leading-7 text-gray-300">
+      <p className="mt-4 text-sm leading-7 text-slate-300">
         Loop is an SWE interview prep tool built around four screens: Today,
         Playground, Concepts, Review. No nav drawer, no menus &mdash; everything
         feeds the playground or learns from it.
       </p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">The four pages</h2>
-      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-300">
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
         <li>
           <Link to="/" className="underline">Today</Link> &mdash; one AI-generated
           recommendation card based on your FSRS state.
@@ -35,25 +35,25 @@ export default function About() {
       </ul>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">Why FSRS</h2>
-      <p className="mt-2 text-sm leading-7 text-gray-300">
+      <p className="mt-2 text-sm leading-7 text-slate-300">
         Confidence isn&apos;t binary. Loop uses FSRS spaced repetition with a
-        decay curve <code className="rounded bg-gray-800 px-1 text-blue-300">(1 + elapsed / (9 &times; stability))^-1</code>{' '}
+        decay curve <code className="rounded bg-slate-800 px-1 text-blue-300">(1 + elapsed / (9 &times; stability))^-1</code>{' '}
         so you can see mastery slip over time on the heatmap and Today
         surfaces what&apos;s actually fading.
       </p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">Bring your own AI</h2>
-      <p className="mt-2 text-sm leading-7 text-gray-300">
-        Configure any OpenAI-compatible <code className="rounded bg-gray-800 px-1 text-blue-300">endpointUrl</code> + key + model in
+      <p className="mt-2 text-sm leading-7 text-slate-300">
+        Configure any OpenAI-compatible <code className="rounded bg-slate-800 px-1 text-blue-300">endpointUrl</code> + key + model in
         settings. The Socratic companion, auto-tagger, and Feynman grader all use
         the same adapter. Local dev can use the bundled Express bridge that proxies
-        <code className="rounded bg-gray-800 px-1 text-blue-300"> claude</code> /
-        <code className="rounded bg-gray-800 px-1 text-blue-300"> codex</code> /
-        <code className="rounded bg-gray-800 px-1 text-blue-300"> gemini</code> CLIs.
+        <code className="rounded bg-slate-800 px-1 text-blue-300"> claude</code> /
+        <code className="rounded bg-slate-800 px-1 text-blue-300"> codex</code> /
+        <code className="rounded bg-slate-800 px-1 text-blue-300"> gemini</code> CLIs.
       </p>
 
       <h2 className="mt-10 text-base font-semibold text-cyan-400">Research basis</h2>
-      <p className="mt-2 text-sm leading-7 text-gray-300">
+      <p className="mt-2 text-sm leading-7 text-slate-300">
         Loop is positioned as <em>cognitive fitness through hard novel problems at the edge
         of skill in your chosen domain</em>. The defensible mechanism is <strong>cognitive
         reserve</strong> — compounding crystallized intelligence in a complex domain to
@@ -61,8 +61,8 @@ export default function About() {
         Below are the load-bearing sources behind the design.
       </p>
 
-      <h3 className="mt-6 text-sm font-semibold text-gray-200">What works</h3>
-      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-300">
+      <h3 className="mt-6 text-sm font-semibold text-slate-200">What works</h3>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
         <li>
           <strong>Cognitive reserve</strong> — Stern, <em>Lancet Neurology</em> 2012.
           Education, occupational complexity, and lifelong cognitive engagement
@@ -106,8 +106,8 @@ export default function About() {
         </li>
       </ul>
 
-      <h3 className="mt-6 text-sm font-semibold text-gray-200">What doesn't (and why this isn't a brain-training app)</h3>
-      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-300">
+      <h3 className="mt-6 text-sm font-semibold text-slate-200">What doesn't (and why this isn't a brain-training app)</h3>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
         <li>
           <strong>Brain-training games</strong> — Simons et al. 2016 review in
           <em> Psychological Science in the Public Interest</em>: robust near transfer,
@@ -131,13 +131,13 @@ export default function About() {
         </li>
       </ul>
 
-      <h3 className="mt-6 text-sm font-semibold text-gray-200">The offloading question (Focus mode)</h3>
-      <p className="mt-2 text-sm leading-7 text-gray-300">
+      <h3 className="mt-6 text-sm font-semibold text-slate-200">The offloading question (Focus mode)</h3>
+      <p className="mt-2 text-sm leading-7 text-slate-300">
         Tools that perform generation for you can atrophy what they replace. Focus
         mode is the audit affordance — a deliberate "no AI assist" mode you can flip
         on, tracking how often you train without scaffolding.
       </p>
-      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-300">
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
         <li>
           <strong>GPS → hippocampal decline</strong> — Dahmani &amp; Bohbot 2020.
           Heavy lifetime GPS use linked to worse spatial memory; longitudinal subsample
@@ -170,8 +170,8 @@ export default function About() {
         </li>
       </ul>
 
-      <h3 className="mt-6 text-sm font-semibold text-gray-200">Design principles applied here</h3>
-      <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-gray-300">
+      <h3 className="mt-6 text-sm font-semibold text-slate-200">Design principles applied here</h3>
+      <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-300">
         <li><strong>Production before consumption</strong> — Feynman Gate forces you to commit before any AI feedback (generation effect).</li>
         <li><strong>Retrieval before recognition</strong> — Reviews ask free-recall, not multiple-choice (testing effect, g ≈ 0.5-0.7).</li>
         <li><strong>Desirable difficulty</strong> — Spacing (FSRS), interleaving, retrieval over re-reading. Feels worse, works better.</li>
