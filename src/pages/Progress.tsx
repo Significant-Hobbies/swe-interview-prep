@@ -44,10 +44,7 @@ export default function Progress() {
 
       <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
         <Link to="/progress/all" className="text-sky-400 hover:text-sky-300">
-          See by-track breakdown →
-        </Link>
-        <Link to="/progress/all#artifacts" className="text-slate-400 hover:text-slate-200">
-          Artifact pipeline
+          By-track breakdown & artifacts →
         </Link>
         <Link to="/progress/all?tab=notes" className="text-slate-400 hover:text-slate-200">
           Notes

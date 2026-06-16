@@ -1,6 +1,6 @@
 import { ArrowLeft, Hammer, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, TabButton, TabGroup } from '../components/ui';
 import {
@@ -19,7 +19,17 @@ import { rollupMastery } from '../lib/conceptState';
 type Section = 'overview' | 'notes';
 
 export default function Progress() {
-  const [section, setSection] = useState<Section>('overview');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const section: Section = searchParams.get('tab') === 'notes' ? 'notes' : 'overview';
+
+  function setSection(next: Section) {
+    if (next === 'overview') {
+      searchParams.delete('tab');
+    } else {
+      searchParams.set('tab', next);
+    }
+    setSearchParams(searchParams, { replace: true });
+  }
 
   return (
     <PageShell wide>

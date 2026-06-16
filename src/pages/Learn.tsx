@@ -58,10 +58,7 @@ export default function Learn() {
           Browse all concepts →
         </Link>
         <Link to={`/roadmaps/${activeRoadmap.id}`} className="text-slate-400 hover:text-slate-200">
-          Open roadmap
-        </Link>
-        <Link to="/learn/all#roadmaps" className="text-slate-400 hover:text-slate-200">
-          Switch roadmap
+          Open active roadmap
         </Link>
       </nav>
     </PageShell>
