@@ -60,7 +60,7 @@ function ArtifactBoard() {
         title="Build Lab"
         subtitle="No learning without an artifact. Move each one from idea to shipped — code, benchmark, or design doc. Shipping nudges its concepts toward mastered."
         actions={
-          <Link to="/playground" className="inline-flex items-center gap-1.5 rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-800">
+          <Link to="/playground" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800">
             <Hammer className="h-4 w-4" /> Open workspace
           </Link>
         }
@@ -73,8 +73,8 @@ function ArtifactBoard() {
             <div key={col.status}>
               <div className="mb-2 flex items-center gap-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${color(col.tone).solid}`} />
-                <h2 className="text-sm font-semibold text-gray-200">{col.label}</h2>
-                <span className="text-xs text-gray-600">{items.length}</span>
+                <h2 className="text-sm font-semibold text-slate-200">{col.label}</h2>
+                <span className="text-xs text-slate-500">{items.length}</span>
               </div>
               <div className="space-y-2">
                 {items.map(a => (
@@ -88,7 +88,7 @@ function ArtifactBoard() {
                   />
                 ))}
                 {items.length === 0 && (
-                  <div className="rounded-lg border border-dashed border-gray-800 py-6 text-center text-xs text-gray-600">
+                  <div className="rounded-lg border border-dashed border-slate-800 py-6 text-center text-xs text-slate-500">
                     Nothing here
                   </div>
                 )}
@@ -128,23 +128,23 @@ function ArtifactCard({
           <h3 className="text-sm font-semibold text-white">{artifact.title}</h3>
           <Badge tone={DIFFICULTY_COLOR[artifact.difficulty]}>{artifact.difficulty}</Badge>
         </div>
-        <p className="mt-1 line-clamp-2 text-xs text-gray-400">{artifact.description}</p>
-        <div className="mt-2 text-[11px] text-gray-500">
+        <p className="mt-1 line-clamp-2 text-xs text-slate-400">{artifact.description}</p>
+        <div className="mt-2 text-[11px] text-slate-500">
           {doneCount}/{artifact.successCriteria.length} criteria met
         </div>
       </button>
 
       {open && (
-        <div className="mt-3 space-y-3 border-t border-gray-800 pt-3">
+        <div className="mt-3 space-y-3 border-t border-slate-800 pt-3">
           <div>
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">Success criteria</div>
+            <div className="mb-1 text-[11px] font-medium text-slate-500">Success criteria</div>
             <div className="space-y-1">
               {artifact.successCriteria.map((c, i) => (
-                <button key={i} onClick={() => toggleCriterion(i)} className="flex w-full items-start gap-2 text-left text-xs text-gray-300">
+                <button key={i} onClick={() => toggleCriterion(i)} className="flex w-full items-start gap-2 text-left text-xs text-slate-300">
                   {entry.criteria.includes(i)
                     ? <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                    : <Circle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-600" />}
-                  <span className={entry.criteria.includes(i) ? 'text-gray-500 line-through' : ''}>{c}</span>
+                    : <Circle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />}
+                  <span className={entry.criteria.includes(i) ? 'text-slate-500 line-through' : ''}>{c}</span>
                 </button>
               ))}
             </div>
@@ -154,7 +154,7 @@ function ArtifactCard({
             value={entry.url}
             onChange={e => onChange({ ...entry, url: e.target.value })}
             placeholder="Link to commit / PR / demo / notes"
-            className="w-full rounded-md border border-gray-800 bg-gray-950 px-2 py-1.5 text-xs text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
+            className="w-full rounded-md border border-slate-800 bg-slate-950 px-2 py-1.5 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
           />
 
           <div className="flex flex-wrap gap-1.5">
@@ -175,7 +175,7 @@ function ArtifactCard({
               <Link
                 key={cid}
                 to={`/concepts/${cid}`}
-                className="rounded-md border border-gray-800 px-2 py-0.5 text-[11px] text-gray-400 hover:text-white"
+                className="rounded-md border border-slate-800 px-2 py-0.5 text-[11px] text-slate-400 hover:text-white"
               >
                 {CONCEPT_BY_ID[cid]?.name || cid}
               </Link>
@@ -183,7 +183,7 @@ function ArtifactCard({
           </div>
 
           {entry.url && (
-            <a href={entry.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-purple-400">
+            <a href={entry.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-sky-400">
               Open artifact <ExternalLink className="h-3 w-3" />
             </a>
           )}
@@ -249,7 +249,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
   return (
     <PageShell wide>
-      <Link to="/practice" className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300">
+      <Link to="/practice" className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300">
         <ArrowLeft className="h-3.5 w-3.5" /> Drills
       </Link>
 
@@ -273,10 +273,10 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         <div className="space-y-4">
           <Card className="p-4">
             <SectionTitle>Prompt</SectionTitle>
-            <p className="text-sm leading-relaxed text-gray-300">{drill.prompt}</p>
-            <div className="mt-3 rounded-lg border border-gray-800 bg-gray-950 p-3">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Expected output</div>
-              <p className="mt-1 text-sm text-gray-400">{drill.expectedOutput}</p>
+            <p className="text-sm leading-relaxed text-slate-300">{drill.prompt}</p>
+            <div className="mt-3 rounded-lg border border-slate-800 bg-slate-950 p-3">
+              <div className="text-[11px] font-medium text-slate-500">Expected output</div>
+              <p className="mt-1 text-sm text-slate-400">{drill.expectedOutput}</p>
             </div>
           </Card>
 
@@ -287,7 +287,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
             {showHints && (
               <ul className="mt-2 space-y-1.5">
                 {drill.hints.map((h, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
+                  <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
                     <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-amber-400" /> {h}
                   </li>
                 ))}
@@ -299,19 +299,19 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
             <button onClick={() => setShowSolution(s => !s)} className="flex items-center gap-1.5 text-sm font-semibold text-cyan-300">
               <Sparkles className="h-4 w-4" /> {showSolution ? 'Hide' : 'Show'} solution notes
             </button>
-            {showSolution && <p className="mt-2 text-xs leading-relaxed text-gray-400">{drill.solutionNotes}</p>}
+            {showSolution && <p className="mt-2 text-xs leading-relaxed text-slate-400">{drill.solutionNotes}</p>}
           </Card>
         </div>
 
         <div className="space-y-3">
           <Card className="overflow-hidden">
-            <div className="flex items-center justify-between border-b border-gray-800 px-3 py-2">
+            <div className="flex items-center justify-between border-b border-slate-800 px-3 py-2">
               <div className="flex gap-1">
                 {LANGUAGES.map(l => (
                   <button
                     key={l}
                     onClick={() => switchLanguage(l)}
-                    className={`rounded px-2 py-0.5 text-xs font-medium ${language === l ? 'bg-purple-500/20 text-purple-300' : 'text-gray-500 hover:text-gray-300'}`}
+                    className={`rounded px-2 py-0.5 text-xs font-medium ${language === l ? 'bg-sky-500/15 text-sky-300' : 'text-slate-500 hover:text-slate-300'}`}
                   >
                     {l}
                   </button>
@@ -327,11 +327,11 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           </Card>
 
           <Card className="p-3">
-            <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Output</div>
-            <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-gray-300">
+            <div className="text-[11px] font-medium text-slate-500">Output</div>
+            <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-slate-300">
               {errors
                 ? <span className="text-rose-400">{errors}</span>
-                : output || <span className="text-gray-600">Run your code to see output.</span>}
+                : output || <span className="text-slate-500">Run your code to see output.</span>}
             </pre>
           </Card>
 
@@ -340,7 +340,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
             <Button onClick={() => mark('solved')}>
               <Check className="h-4 w-4" /> Mark solved
             </Button>
-            <Link to="/playground" className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-800">
+            <Link to="/playground" className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800">
               <Hammer className="h-4 w-4" /> Full workspace
             </Link>
           </div>

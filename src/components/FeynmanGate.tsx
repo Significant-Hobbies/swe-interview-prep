@@ -112,21 +112,21 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border border-purple-900/50 bg-gray-950 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-gray-800 px-5 py-4">
+      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border border-slate-800 bg-slate-950 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
           <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-purple-400" />
-            <h2 className="text-base font-semibold text-gray-100">Feynman Gate</h2>
-            <span className="text-xs text-gray-600">{elapsed}s</span>
+            <Brain className="h-5 w-5 text-sky-400" />
+            <h2 className="text-base font-semibold text-slate-100">Feynman Gate</h2>
+            <span className="text-xs text-slate-500">{elapsed}s</span>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300">
+          <button onClick={onClose} className="text-slate-500 hover:text-slate-300">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {!result ? (
           <div className="p-5 space-y-4">
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-sm text-slate-400 leading-relaxed">
               Explain in plain English what you just built — the core idea, the tradeoffs, complexity.
               No code. Pretend you're teaching a junior.
             </p>
@@ -136,19 +136,19 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
               onChange={e => setExplanation(e.target.value)}
               placeholder="The approach is… The key insight is… Time complexity is… Edge cases I handle…"
               rows={10}
-              className="w-full resize-none rounded-md border border-gray-800 bg-gray-900 p-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50"
+              className="w-full resize-none rounded-md border border-slate-800 bg-slate-900 p-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40"
             />
             <div className="flex items-center justify-between">
               <button
                 onClick={skip}
-                className="text-xs text-gray-500 hover:text-gray-300"
+                className="text-xs text-slate-500 hover:text-slate-300"
               >
                 Skip (logged)
               </button>
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="flex items-center gap-2 rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-700 disabled:opacity-50"
+                className="flex items-center gap-2 rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-400 disabled:opacity-50"
               >
                 {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Brain className="h-4 w-4" />}
                 Grade me
@@ -163,19 +163,19 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
                 result.grade >= 70 ? 'text-yellow-400' :
                 result.grade >= 50 ? 'text-orange-400' : 'text-red-400'
               }`}>{result.grade}</span>
-              <span className="text-xs text-gray-500">/ 100</span>
+              <span className="text-xs text-slate-500">/ 100</span>
             </div>
-            <div className="rounded-md border border-gray-800 bg-gray-900/50 p-3 text-sm text-gray-200">
+            <div className="rounded-md border border-slate-800 bg-slate-900/50 p-3 text-sm text-slate-200">
               <MarkdownViewer content={result.feedback} />
             </div>
             {result.gaps?.length > 0 && (
               <div>
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Gaps</h3>
+                <h3 className="mb-2 text-xs font-medium text-slate-500">Gaps</h3>
                 <ul className="space-y-1.5">
                   {result.gaps.map((g, i) => (
                     <li key={i} className="rounded-md border border-orange-900/30 bg-orange-950/20 px-3 py-2 text-xs">
                       <span className="font-mono text-orange-400">{g.concept_id}</span>
-                      <span className="ml-2 text-gray-300">{g.weakness}</span>
+                      <span className="ml-2 text-slate-300">{g.weakness}</span>
                     </li>
                   ))}
                 </ul>
@@ -183,7 +183,7 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
             )}
             <button
               onClick={onClose}
-              className="w-full rounded-md bg-gray-800 px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:bg-gray-700"
+              className="w-full rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-700"
             >
               Done
             </button>

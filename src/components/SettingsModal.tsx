@@ -59,24 +59,24 @@ export default function SettingsModal({ open, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
-      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl border border-gray-800 bg-gray-950 shadow-2xl" onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between border-b border-gray-800 px-5 py-4">
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl border border-slate-800 bg-slate-950 shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
           <div className="flex items-center gap-2">
-            <SettingsIcon className="h-4 w-4 text-purple-400" />
-            <h2 className="text-base font-semibold text-gray-100">AI Configuration</h2>
+            <SettingsIcon className="h-4 w-4 text-sky-400" />
+            <h2 className="text-base font-semibold text-slate-100">AI Configuration</h2>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300" aria-label="Close">
+          <button onClick={onClose} className="text-slate-500 hover:text-slate-300" aria-label="Close">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         <div className="p-5 space-y-4">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-slate-500">
             OpenAI-compatible endpoint. Used for Companion, Tagger, Feynman, Today plan, Weekly review.
           </p>
 
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1">Provider preset</label>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Provider preset</label>
             <div className="flex flex-wrap gap-1.5">
               {PRESETS.map(p => (
                 <button
@@ -84,8 +84,8 @@ export default function SettingsModal({ open, onClose }: Props) {
                   onClick={() => update('endpointUrl', p.endpointUrl)}
                   className={`rounded-md px-2 py-1 text-[11px] transition-colors ${
                     config.endpointUrl === p.endpointUrl
-                      ? 'bg-purple-500/20 text-purple-300'
-                      : 'bg-gray-900 text-gray-400 hover:bg-gray-800'
+                      ? 'bg-sky-500/15 text-sky-300'
+                      : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
                   }`}
                 >
                   {p.label}
@@ -95,35 +95,35 @@ export default function SettingsModal({ open, onClose }: Props) {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1">Endpoint URL</label>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Endpoint URL</label>
             <input
               type="url"
               value={config.endpointUrl}
               onChange={e => update('endpointUrl', e.target.value)}
               placeholder="https://api.openai.com/v1"
-              className="w-full rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50"
+              className="w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1">API Key</label>
+            <label className="block text-xs font-medium text-slate-400 mb-1">API Key</label>
             <input
               type="password"
               value={config.apiKey}
               onChange={e => update('apiKey', e.target.value)}
               placeholder="sk-…"
               autoComplete="off"
-              className="w-full rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50 font-mono"
+              className="w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40 font-mono"
             />
           </div>
 
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <label className="block text-xs font-medium text-gray-400">Model</label>
+              <label className="block text-xs font-medium text-slate-400">Model</label>
               <button
                 onClick={fetchModels}
                 disabled={discovering}
-                className="flex items-center gap-1 text-[11px] text-purple-400 hover:text-purple-300 disabled:opacity-50"
+                className="flex items-center gap-1 text-[11px] text-sky-400 hover:text-sky-300 disabled:opacity-50"
               >
                 {discovering ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
                 {discovering ? 'Fetching…' : 'Discover models'}
@@ -133,7 +133,7 @@ export default function SettingsModal({ open, onClose }: Props) {
               <select
                 value={config.model}
                 onChange={e => update('model', e.target.value)}
-                className="w-full rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-100 focus:outline-none focus:ring-1 focus:ring-purple-500/50"
+                className="w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-1 focus:ring-sky-500/40"
               >
                 <option value="">Select…</option>
                 {models.map(m => <option key={m} value={m}>{m}</option>)}
@@ -144,7 +144,7 @@ export default function SettingsModal({ open, onClose }: Props) {
                 value={config.model}
                 onChange={e => update('model', e.target.value)}
                 placeholder="gpt-4o-mini"
-                className="w-full rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50 font-mono"
+                className="w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40 font-mono"
               />
             )}
           </div>
@@ -157,7 +157,7 @@ export default function SettingsModal({ open, onClose }: Props) {
 
           <button
             onClick={handleSave}
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white hover:bg-sky-400"
           >
             <Save className="h-4 w-4" />
             Save

@@ -19,7 +19,6 @@ const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
 const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const BuildLab = lazy(() => import('./pages/BuildLab'));
-const MockInterview = lazy(() => import('./pages/MockInterview'));
 const LearningDoc = lazy(() => import('./pages/LearningDoc'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
@@ -27,8 +26,8 @@ const Login = lazy(() => import('./pages/Login'));
 
 function PageFallback() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-950">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-700 border-t-purple-400" />
+    <div className="flex min-h-screen items-center justify-center bg-slate-950">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-800 border-t-sky-400" />
     </div>
   );
 }
@@ -74,7 +73,6 @@ function App() {
               <Route path="learn/:id" element={<ConceptDetail />} />
               <Route path="practice" element={<Practice />} />
               <Route path="playground" element={<Playground />} />
-              <Route path="mock" element={<MockInterview />} />
               <Route path="progress" element={<Progress />} />
 
               {/* Detail pages reachable from within the five tabs */}
@@ -102,12 +100,8 @@ function App() {
               <Route path="review" element={<Navigate to="/practice?tab=reviews" replace />} />
               <Route path="projects" element={<Navigate to="/progress" replace />} />
               <Route path="notes" element={<Navigate to="/progress" replace />} />
-              <Route path="dsa/*" element={<Navigate to="/learn" replace />} />
-              <Route path="p/*" element={<Navigate to="/learn" replace />} />
-              <Route path="lld/*" element={<Navigate to="/learn" replace />} />
-              <Route path="hld/*" element={<Navigate to="/learn" replace />} />
-              <Route path="behavioral/*" element={<Navigate to="/learn" replace />} />
               <Route path="library/*" element={<Navigate to="/learn" replace />} />
+              <Route path="mock" element={<Navigate to="/practice" replace />} />
               <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
               <Route path="*" element={<Navigate to="/learn" replace />} />
             </Route>

@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Flame, RotateCcw, Target } from 'lucide-react';
+import { ArrowRight, CheckCircle2, RotateCcw, Target } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import {
   TabButton,
   TabGroup,
 } from '../components/ui';
-import { Ring, Sparkline, StackedBar } from '../components/viz';
+import { Sparkline, StackedBar } from '../components/viz';
 import {
   CONCEPT_BY_ID,
   type Drill,
@@ -37,7 +37,7 @@ import { DEFAULT_USER_ELO, difficultyToElo } from '../lib/elo';
 type Tab = 'drills' | 'reviews';
 
 const DRILL_STATUS_TONE: Record<string, string> = {
-  unsolved: 'gray',
+  unsolved: 'slate',
   attempted: 'amber',
   solved: 'emerald',
 };
@@ -116,77 +116,42 @@ function PracticeHero({
   const streak = activeStreak === -1 ? sparkline.length : activeStreak;
 
   return (
-    <>
-      {/* Mobile: compact stat row */}
-      <div className="grid grid-cols-3 gap-2 sm:hidden">
-        <div className="rounded-lg border border-gray-800 bg-gray-900/40 px-3 py-2 text-center">
-          <div className="text-lg font-bold text-emerald-300">{solvedCount}</div>
-          <div className="text-[10px] uppercase tracking-wider text-gray-500">Solved</div>
+    <Card className="p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="grid grid-cols-3 gap-6 sm:flex sm:gap-10">
+          <StatNumber label="Solved" value={`${solvedCount}/${DRILLS.length}`} hint={`${attemptedCount} in progress · ${unsolved} untouched`} />
+          <StatNumber label="Due" value={dueCount} hint={dueCount === 0 ? 'all caught up' : 'concepts ready'} tone={dueCount ? 'amber' : 'default'} />
+          <StatNumber label="Streak" value={`${streak}d`} hint={`${totalReps} total reps`} />
         </div>
-        <div className="rounded-lg border border-gray-800 bg-gray-900/40 px-3 py-2 text-center">
-          <div className="text-lg font-bold text-amber-300">{dueCount}</div>
-          <div className="text-[10px] uppercase tracking-wider text-gray-500">Due</div>
-        </div>
-        <div className="rounded-lg border border-gray-800 bg-gray-900/40 px-3 py-2 text-center">
-          <div className="text-lg font-bold text-fuchsia-300">{streak}d</div>
-          <div className="text-[10px] uppercase tracking-wider text-gray-500">Streak</div>
+        <div className="flex items-center justify-end gap-2 text-right">
+          <div className="text-xs text-slate-500">Last 14 days</div>
+          <Sparkline values={sparkline} width={140} height={32} tone="sky" />
         </div>
       </div>
-
-      {/* Desktop: full hero cards */}
-      <div className="hidden gap-4 sm:grid md:grid-cols-3">
-        <Card className="flex items-center gap-4 p-5">
-          <Ring value={solvedPct} size={80} stroke={8} tone="emerald" label={`${solvedCount}`} sublabel="SOLVED" />
-          <div className="min-w-0 flex-1">
-            <div className="text-[11px] uppercase tracking-wider text-gray-500">Drill progress</div>
-            <div className="text-sm font-semibold text-white">{solvedCount} of {DRILLS.length} solved</div>
-            <p className="mt-1 text-[11px] text-gray-500">{attemptedCount} in progress · {unsolved} untouched</p>
-            <div className="mt-2">
-              <StackedBar
-                segments={[
-                  { count: solvedCount, tone: 'emerald', label: 'Solved' },
-                  { count: attemptedCount, tone: 'amber', label: 'Attempted' },
-                  { count: unsolved, tone: 'gray', label: 'Unsolved' },
-                ]}
-                height={4}
-              />
-            </div>
-          </div>
-        </Card>
-
-        <Card className="flex items-center gap-4 p-5">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-amber-500/10 ring-1 ring-amber-500/30">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-amber-300">{dueCount}</div>
-              <div className="text-[9px] font-semibold uppercase tracking-wider text-amber-400/80">DUE</div>
-            </div>
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[11px] uppercase tracking-wider text-gray-500">Spaced reviews</div>
-            <div className="text-sm font-semibold text-white">
-              {dueCount === 0 ? 'All caught up' : `${dueCount} concept${dueCount > 1 ? 's' : ''} ready`}
-            </div>
-            <p className="mt-1 text-[11px] text-gray-500">
-              {dueCount === 0 ? 'Start more concepts to feed the queue.' : 'Recall, don\'t reread. Rate honestly.'}
-            </p>
-          </div>
-        </Card>
-
-        <Card className="flex items-center gap-4 p-5">
-          <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-2xl bg-fuchsia-500/10 ring-1 ring-fuchsia-500/30">
-            <Flame className="h-5 w-5 text-fuchsia-300" />
-            <div className="mt-0.5 text-xl font-bold text-fuchsia-200">{streak}d</div>
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[11px] uppercase tracking-wider text-gray-500">Recent activity</div>
-            <div className="text-sm font-semibold text-white">{totalReps} total reps</div>
-            <div className="mt-2">
-              <Sparkline values={sparkline} width={180} height={28} tone="fuchsia" />
-            </div>
-          </div>
-        </Card>
+      <div className="mt-4">
+        <StackedBar
+          segments={[
+            { count: solvedCount, tone: 'emerald', label: 'Solved' },
+            { count: attemptedCount, tone: 'amber', label: 'Attempted' },
+            { count: unsolved, tone: 'slate', label: 'Unsolved' },
+          ]}
+          height={6}
+          showLegend
+        />
       </div>
-    </>
+    </Card>
+  );
+}
+
+function StatNumber({ label, value, hint, tone }: { label: string; value: React.ReactNode; hint?: string; tone?: 'default' | 'amber' }) {
+  return (
+    <div>
+      <div className="text-xs font-medium text-slate-400">{label}</div>
+      <div className={`mt-1 text-2xl font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-slate-50'}`}>
+        {value}
+      </div>
+      {hint && <div className="mt-0.5 text-xs text-slate-500">{hint}</div>}
+    </div>
   );
 }
 
@@ -240,14 +205,14 @@ function DrillsTab() {
   return (
     <div>
       <div className="mb-4">
-        <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">Filter by track</div>
+        <div className="mb-2 text-xs font-medium text-slate-400">Filter by track</div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
           <FilterPill active={track === 'all'} onClick={() => setTrack('all')}>
             All ({DRILLS.length})
           </FilterPill>
           {tracksRollup.map(({ track: t, total, solved, elo }) => (
             <FilterPill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
-              {t.short} ({solved}/{total}) · <span className="font-mono text-gray-500">{elo}</span>
+              {t.short} ({solved}/{total}) · <span className="font-mono text-slate-500">{elo}</span>
             </FilterPill>
           ))}
         </div>
@@ -256,8 +221,8 @@ function DrillsTab() {
       {recommended.length > 0 && (
         <div className="mb-6">
           <div className="mb-2 flex items-center gap-2">
-            <Target className="h-3.5 w-3.5 text-cyan-400" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300">
+            <Target className="h-3.5 w-3.5 text-sky-400" />
+            <span className="text-xs font-medium text-sky-300">
               Recommended for your level
             </span>
           </div>
@@ -301,23 +266,23 @@ function DrillCard({
   return (
     <Link
       to={`/drills/${drill.id}`}
-      className="group flex flex-col gap-2 rounded-lg border border-gray-800 bg-gray-900/40 p-4 transition-colors hover:border-gray-700 hover:bg-gray-900/70"
+      className="group flex flex-col gap-2 rounded-lg border border-slate-800 bg-slate-900/40 p-4 transition-colors hover:border-slate-700 hover:bg-slate-900/70"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-gray-100 group-hover:text-white">{drill.title}</h3>
+          <h3 className="text-sm font-semibold text-slate-100 group-hover:text-white">{drill.title}</h3>
           {conceptName && (
-            <div className="mt-0.5 text-[11px] text-gray-500">via <span className="text-gray-400">{conceptName}</span></div>
+            <div className="mt-0.5 text-[11px] text-slate-500">via <span className="text-slate-400">{conceptName}</span></div>
           )}
         </div>
-        <ArrowRight className="h-4 w-4 shrink-0 text-gray-700 group-hover:text-gray-400" />
+        <ArrowRight className="h-4 w-4 shrink-0 text-slate-600 group-hover:text-slate-400" />
       </div>
-      <p className="line-clamp-2 text-xs text-gray-400">{drill.prompt}</p>
+      <p className="line-clamp-2 text-xs text-slate-400">{drill.prompt}</p>
       <div className="mt-auto flex flex-wrap items-center gap-1.5 text-[11px]">
         {trk && <Badge tone={trk.color}>{trk.short}</Badge>}
         <Badge tone={DIFFICULTY_COLOR[drill.difficulty]}>{drill.difficulty}</Badge>
         <Badge tone={DRILL_STATUS_TONE[state.status]}>{state.status}</Badge>
-        {state.attempts > 0 && <span className="text-gray-600">· {state.attempts} attempt{state.attempts > 1 ? 's' : ''}</span>}
+        {state.attempts > 0 && <span className="text-slate-500">· {state.attempts} attempt{state.attempts > 1 ? 's' : ''}</span>}
       </div>
     </Link>
   );
@@ -391,7 +356,7 @@ function ReviewSession() {
             <Badge tone="cyan">{current.type}</Badge>
             {mode === 'practice' && <Badge tone="gray">practice</Badge>}
           </div>
-          <Link to={`/concepts/${current.conceptId}`} className="text-xs text-gray-500 hover:text-gray-300">
+          <Link to={`/concepts/${current.conceptId}`} className="text-xs text-slate-500 hover:text-slate-300">
             {CONCEPT_BY_ID[current.conceptId]?.name}
           </Link>
         </div>
@@ -403,7 +368,7 @@ function ReviewSession() {
           placeholder="Write your answer from memory…"
           rows={5}
           disabled={revealed}
-          className="mt-4 w-full resize-y rounded-md border border-gray-800 bg-gray-950 p-3 text-sm text-gray-100 placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none disabled:opacity-70"
+          className="mt-4 w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none disabled:opacity-70"
         />
 
         {!revealed ? (
@@ -414,9 +379,9 @@ function ReviewSession() {
           </div>
         ) : (
           <div className="mt-5 space-y-4">
-            <div className="rounded-lg border border-gray-800 bg-gray-950 p-4">
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">Reference answer</div>
-              <p className="text-sm leading-relaxed text-gray-300">{current.answer}</p>
+            <div className="rounded-lg border border-slate-800 bg-slate-950 p-4">
+              <div className="mb-1 text-[11px] font-medium text-slate-500">Reference answer</div>
+              <p className="text-sm leading-relaxed text-slate-300">{current.answer}</p>
             </div>
 
             {answer.trim() && (

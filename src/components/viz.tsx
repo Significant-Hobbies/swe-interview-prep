@@ -4,7 +4,11 @@
 import { Link } from 'react-router-dom';
 
 // Hex matches Tailwind's *-500 swatch so SVG ↔ utility-class palettes line up.
+// Track colors stay (8 hues distinguish 8 tracks inside viz); chrome is slate.
 export const PALETTE: Record<string, string> = {
+  // Single chrome accent.
+  sky: '#0ea5e9',
+  // Track palette (functional).
   purple: '#a855f7',
   fuchsia: '#d946ef',
   cyan: '#06b6d4',
@@ -13,8 +17,13 @@ export const PALETTE: Record<string, string> = {
   orange: '#f97316',
   blue: '#3b82f6',
   rose: '#f43f5e',
-  gray: '#4b5563',
+  // Neutral fallback — slate-500.
+  slate: '#64748b',
+  gray: '#64748b',
 };
+
+const SVG_TRACK = '#1e293b'; // slate-800
+const SVG_MUTED = '#64748b'; // slate-500
 
 export function hex(name: string): string {
   return PALETTE[name] || PALETTE.gray;
@@ -46,7 +55,7 @@ export function Ring({
   return (
     <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} stroke="#1f2937" strokeWidth={stroke} fill="none" />
+        <circle cx={size / 2} cy={size / 2} r={r} stroke={SVG_TRACK} strokeWidth={stroke} fill="none" />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -61,8 +70,8 @@ export function Ring({
       </svg>
       {(label || sublabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center leading-tight">
-          {label && <span className="text-sm font-bold text-white">{label}</span>}
-          {sublabel && <span className="text-[9px] uppercase tracking-wider text-gray-500">{sublabel}</span>}
+          {label && <span className="text-sm font-semibold text-slate-50">{label}</span>}
+          {sublabel && <span className="text-[10px] font-medium text-slate-400">{sublabel}</span>}
         </div>
       )}
     </div>
@@ -135,7 +144,7 @@ export function MasteryDonut({
         <path
           key={`bg-${a.id}`}
           d={arcPath(a.start + 0.01, a.end - 0.01)}
-          stroke="#1f2937"
+          stroke={SVG_TRACK}
           strokeWidth={thickness}
           strokeLinecap="butt"
           fill="none"
@@ -153,11 +162,11 @@ export function MasteryDonut({
         />
       ))}
       {/* Center text */}
-      <text x={cx} y={cy - 4} textAnchor="middle" className="fill-white" fontSize="28" fontWeight="700">
+      <text x={cx} y={cy - 4} textAnchor="middle" className="fill-slate-50" fontSize="26" fontWeight="600">
         {overallPct}%
       </text>
-      <text x={cx} y={cy + 16} textAnchor="middle" fill="#6b7280" fontSize="10" letterSpacing="1">
-        OVERALL
+      <text x={cx} y={cy + 16} textAnchor="middle" fill={SVG_MUTED} fontSize="11" fontWeight="500">
+        Mastered
       </text>
     </svg>
   );
@@ -198,11 +207,11 @@ export function StackedBar({
         })}
       </div>
       {showLegend && (
-        <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-500">
+        <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-400">
           {segments.map((s, i) => (
             <span key={i} className="inline-flex items-center gap-1">
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: hex(s.tone) }} />
-              {s.label} <span className="text-gray-600">· {s.count}</span>
+              {s.label} <span className="text-slate-500">· {s.count}</span>
             </span>
           ))}
         </div>
@@ -235,14 +244,14 @@ export function ConceptChain({ nodes }: { nodes: ChainNode[] }) {
               to={n.href}
               title={n.name}
               aria-label={n.name}
-              className="block rounded-full ring-offset-2 ring-offset-gray-950 transition-transform hover:scale-125 focus:outline-none focus:ring-2"
+              className="block rounded-full opacity-80 ring-offset-2 ring-offset-slate-950 transition-opacity duration-150 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
               style={{
                 width: size,
                 height: size,
                 backgroundColor: hex(n.tone),
               }}
             />
-            {i < nodes.length - 1 && <span className="h-px w-2 bg-gray-800" />}
+            {i < nodes.length - 1 && <span className="h-px w-2 bg-slate-800" />}
           </div>
         );
       })}
@@ -267,7 +276,7 @@ export function MilestoneTimeline({ steps }: { steps: TimelineStep[] }) {
   return (
     <div className="relative">
       {/* connecting line */}
-      <div className="absolute left-3 top-3 bottom-3 w-px bg-gray-800 sm:left-0 sm:right-0 sm:top-3 sm:bottom-auto sm:h-px sm:w-auto sm:bg-gray-800" />
+      <div className="absolute left-3 top-3 bottom-3 w-px bg-slate-800 sm:left-0 sm:right-0 sm:top-3 sm:bottom-auto sm:h-px sm:w-auto sm:bg-slate-800" />
       <ol className="relative flex flex-col gap-4 sm:flex-row sm:gap-3">
         {steps.map(step => {
           const filled = step.pct >= 1;
@@ -275,10 +284,10 @@ export function MilestoneTimeline({ steps }: { steps: TimelineStep[] }) {
           return (
             <li key={step.id} className="flex items-start gap-3 sm:flex-1 sm:flex-col sm:items-stretch">
               <span
-                className="relative z-10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 sm:mx-auto sm:mt-0"
+                className="relative z-10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-150 sm:mx-auto sm:mt-0"
                 style={{
-                  backgroundColor: filled ? hex(step.tone) : '#0a0a0a',
-                  borderColor: started ? hex(step.tone) : '#374151',
+                  backgroundColor: filled ? hex(step.tone) : '#020617',
+                  borderColor: started ? hex(step.tone) : SVG_TRACK,
                 }}
               >
                 {filled ? (
@@ -286,15 +295,15 @@ export function MilestoneTimeline({ steps }: { steps: TimelineStep[] }) {
                     <path d="M2 6.5L5 9L10 3.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ) : (
-                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: started ? hex(step.tone) : '#4b5563' }} />
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: started ? hex(step.tone) : SVG_MUTED }} />
                 )}
               </span>
               <div className="min-w-0 sm:mt-2 sm:text-center">
-                <div className={`text-xs font-semibold ${step.active ? 'text-white' : 'text-gray-300'}`}>
+                <div className={`text-sm font-semibold ${step.active ? 'text-slate-50' : 'text-slate-300'}`}>
                   {step.title}
                 </div>
-                <div className="text-[10px] uppercase tracking-wider text-gray-500">{step.sublabel}</div>
-                <div className="mt-1 text-[10px] text-gray-500">{Math.round(step.pct * 100)}% mastered</div>
+                <div className="text-xs text-slate-400">{step.sublabel}</div>
+                <div className="mt-1 text-xs text-slate-500">{Math.round(step.pct * 100)}% mastered</div>
               </div>
             </li>
           );
@@ -311,7 +320,7 @@ export function Sparkline({
   values,
   width = 120,
   height = 28,
-  tone = 'purple',
+  tone = 'sky',
 }: {
   values: number[];
   width?: number;
@@ -321,7 +330,7 @@ export function Sparkline({
   if (!values.length) {
     return (
       <svg width={width} height={height}>
-        <line x1={0} y1={height / 2} x2={width} y2={height / 2} stroke="#1f2937" strokeWidth={1} />
+        <line x1={0} y1={height / 2} x2={width} y2={height / 2} stroke={SVG_TRACK} strokeWidth={1} />
       </svg>
     );
   }

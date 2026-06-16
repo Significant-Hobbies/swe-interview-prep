@@ -73,13 +73,13 @@ export default function LearningDoc() {
       <PageShell>
         <Link
           to="/learning"
-          className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300"
+          className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Learning OS
         </Link>
         <Card className="p-8 text-center">
-          <p className="text-sm text-gray-400">Document not found.</p>
-          <p className="mt-1 text-xs text-gray-600">Looked for slug: <code>{activeSlug}</code></p>
+          <p className="text-sm text-slate-400">Document not found.</p>
+          <p className="mt-1 text-xs text-slate-500">Looked for slug: <code>{activeSlug}</code></p>
         </Card>
       </PageShell>
     );
@@ -93,24 +93,24 @@ export default function LearningDoc() {
       {activeSlug !== DEFAULT_SLUG && (
         <Link
           to="/learning"
-          className="mb-4 inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300"
+          className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Learning OS index
         </Link>
       )}
 
       {meta?.companionRoadmapId && (
-        <div className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-purple-500/20 bg-purple-500/5 px-4 py-3">
+        <div className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-sky-500/20 bg-sky-500/5 px-4 py-3">
           <div className="flex items-center gap-3">
-            <Hammer className="h-4 w-4 text-purple-400" />
+            <Hammer className="h-4 w-4 text-sky-400" />
             <div>
               <div className="text-sm font-medium text-white">Companion roadmap in /learn</div>
-              <div className="text-xs text-gray-500">Track your progress through this material with FSRS.</div>
+              <div className="text-xs text-slate-500">Track your progress through this material with FSRS.</div>
             </div>
           </div>
           <Link
             to={`/roadmaps/${meta.companionRoadmapId}`}
-            className="shrink-0 rounded-md border border-purple-500/30 bg-purple-500/10 px-3 py-1.5 text-xs font-semibold text-purple-300 transition-colors hover:bg-purple-500/20"
+            className="shrink-0 rounded-md border border-sky-500/30 bg-sky-500/10 px-3 py-1.5 text-xs font-semibold text-sky-300 transition-colors hover:bg-sky-500/15"
           >
             Open roadmap →
           </Link>
@@ -138,23 +138,23 @@ export default function LearningDoc() {
                 <Link
                   key={s}
                   to={isIndex ? '/learning' : `/learning/${s}`}
-                  className="group flex items-start gap-3 rounded-xl border border-gray-800 bg-gray-900/40 p-4 transition-colors hover:border-gray-700 hover:bg-gray-900/70"
+                  className="group flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-900/40 p-4 transition-colors hover:border-slate-700 hover:bg-slate-900/70"
                 >
                   {isIndex ? (
-                    <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-purple-400" />
+                    <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" />
                   ) : (
-                    <FileText className="mt-0.5 h-4 w-4 shrink-0 text-gray-500 group-hover:text-gray-300" />
+                    <FileText className="mt-0.5 h-4 w-4 shrink-0 text-slate-500 group-hover:text-slate-300" />
                   )}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-white">{title}</span>
                       {isIndex && (
-                        <span className="rounded-md border border-purple-500/30 bg-purple-500/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-purple-300">
+                        <span className="rounded-md border border-sky-500/30 bg-sky-500/10 px-1.5 py-0.5 text-[10px] font-medium text-sky-300">
                           Start here
                         </span>
                       )}
                     </div>
-                    {blurb && <div className="mt-0.5 text-xs text-gray-500">{blurb}</div>}
+                    {blurb && <div className="mt-0.5 text-xs text-slate-500">{blurb}</div>}
                   </div>
                 </Link>
               );
