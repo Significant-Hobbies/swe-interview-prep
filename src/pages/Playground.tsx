@@ -12,7 +12,7 @@ import FeynmanGate from '../components/FeynmanGate';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
-import { useIsMobile } from '../hooks/useMediaQuery';
+import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import { useFocusMode } from '../hooks/useUserStore';
 import type { Language } from '../types';
@@ -69,10 +69,11 @@ export default function Playground() {
   const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
   const { enabled: focusMode, setEnabled: setFocusMode, sessionsThisWeek } = useFocusMode();
 
-  // The Playground is a multi-panel desktop layout. Below `md` we render a
-  // single panel at a time (the toggle row acts as a tab switcher) so each
-  // panel gets the full width instead of being squeezed to ~80px.
-  const isMobile = useIsMobile();
+  // The Playground is a multi-panel desktop layout. Below `lg` (covers phones
+  // AND iPad portrait) we render a single panel at a time so Monaco/Excalidraw
+  // get full width instead of being squeezed. The toggle row acts as a tab
+  // switcher in compact mode.
+  const isCompact = useIsCompactLayout();
   const [activePanel, setActivePanel] = useState<PanelId>('code');
 
   // Focus mode suppresses AI-assist surfaces: Socratic Companion panel and
@@ -107,8 +108,8 @@ export default function Playground() {
   }, []);
 
   const togglePanel = (id: PanelId) => {
-    // On mobile the toggle row is a single-select tab switcher.
-    if (isMobile) {
+    // In compact mode the toggle row is a single-select tab switcher.
+    if (isCompact) {
       setActivePanel(id);
       setVisiblePanels(prev => (prev.has(id) ? prev : new Set([...prev, id])));
       return;
@@ -184,9 +185,9 @@ export default function Playground() {
       active ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'
     }`;
 
-  // On mobile the toggle row is a tab switcher, so "active" = the shown panel.
+  // In compact mode the toggle row is a tab switcher, so "active" = the shown panel.
   const isPanelActive = (id: PanelId) =>
-    isMobile ? activePanel === id : visiblePanels.has(id);
+    isCompact ? activePanel === id : visiblePanels.has(id);
 
   const langBtn = (active: boolean) =>
     `px-2 py-1 rounded text-xs font-medium transition-colors ${
@@ -203,9 +204,9 @@ export default function Playground() {
       .filter(id => !(focusMode && id === 'companion'));
     return filtered.length > 0 ? filtered : (['code'] as PanelId[]);
   }, [visiblePanels, focusMode]);
-  // On mobile show a single panel; fall back to the first visible one if the
-  // chosen active panel was toggled off.
-  const panels: PanelId[] = isMobile
+  // In compact mode show a single panel; fall back to the first visible one if
+  // the chosen active panel was toggled off.
+  const panels: PanelId[] = isCompact
     ? [allVisiblePanels.includes(activePanel) ? activePanel : (allVisiblePanels[0] ?? 'code')]
     : allVisiblePanels;
   const panelSize = Math.floor(100 / panels.length);
@@ -509,7 +510,7 @@ function PanelWrapper({ id, index, total, defaultSize, children }: {
           <GripVertical className="h-4 w-4 text-gray-600 group-hover:text-gray-400" />
         </PanelResizeHandle>
       )}
-      <Panel defaultSize={defaultSize} minSize={15}>
+      <Panel defaultSize={defaultSize} minSize={20}>
         {children}
       </Panel>
     </>

@@ -46,7 +46,7 @@ function getCalloutStyle(rawText: string): string {
 export default function MarkdownViewer({ content, sourceBaseUrl }: MarkdownViewerProps) {
   return (
     <div
-      className="prose prose-invert prose-base max-w-none
+      className="prose prose-invert prose-base max-w-none md:max-w-[72ch] md:mx-auto
       prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-gray-100
       prose-h1:text-3xl prose-h1:mb-5 prose-h1:mt-2 prose-h1:border-b prose-h1:border-gray-800 prose-h1:pb-3
       prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-800/60 prose-h2:pb-2

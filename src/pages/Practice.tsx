@@ -134,7 +134,7 @@ function PracticeHero({
       </div>
 
       {/* Desktop: full hero cards */}
-      <div className="hidden gap-4 sm:grid lg:grid-cols-3">
+      <div className="hidden gap-4 sm:grid md:grid-cols-3">
         <Card className="flex items-center gap-4 p-5">
           <Ring value={solvedPct} size={80} stroke={8} tone="emerald" label={`${solvedCount}`} sublabel="SOLVED" />
           <div className="min-w-0 flex-1">

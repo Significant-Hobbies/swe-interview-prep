@@ -51,7 +51,7 @@ export default function Layout() {
   }, [changelogOpen]);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+    `flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors md:py-2 ${
       isActive ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'
     }`;
 
@@ -63,7 +63,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-gray-950 pb-16 md:pb-0">
       <nav className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4">
+        <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 md:h-16 md:px-6">
           <NavLink to="/" className="flex shrink-0 items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
               <Sparkles className="h-4 w-4 text-purple-400" />
@@ -85,7 +85,7 @@ export default function Layout() {
               <button
                 onClick={() => setChangelogOpen(o => !o)}
                 aria-label="What's new"
-                className={`rounded-lg p-1.5 transition-colors ${changelogOpen ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'}`}
+                className={`rounded-lg p-2 transition-colors md:p-2.5 ${changelogOpen ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-gray-900 hover:text-gray-200'}`}
                 title="What's new"
               >
                 <Sparkles className="h-4 w-4" />
@@ -103,7 +103,7 @@ export default function Layout() {
             <button
               onClick={() => setSettingsOpen(true)}
               aria-label="AI settings"
-              className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200"
+              className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200 md:p-2.5"
               title="AI Settings"
             >
               <Settings className="h-4 w-4" />
@@ -111,13 +111,13 @@ export default function Layout() {
             {user ? (
               <>
                 {(user as any).picture ? (
-                  <img src={(user as any).picture} alt="" className="h-7 w-7 rounded-full" />
+                  <img src={(user as any).picture} alt="" className="h-8 w-8 rounded-full md:h-9 md:w-9" />
                 ) : (
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-purple-500/20 text-xs font-medium text-purple-400">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/20 text-xs font-medium text-purple-400 md:h-9 md:w-9">
                     {((user as any).email?.[0] || '?').toUpperCase()}
                   </div>
                 )}
-                <button onClick={signOut} aria-label="Sign out" className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200" title="Sign out">
+                <button onClick={signOut} aria-label="Sign out" className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-900 hover:text-gray-200 md:p-2.5" title="Sign out">
                   <LogOut className="h-4 w-4" />
                 </button>
               </>
