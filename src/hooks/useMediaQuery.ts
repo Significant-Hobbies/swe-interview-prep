@@ -25,3 +25,8 @@ export function useMediaQuery(query: string): boolean {
 export function useIsMobile(): boolean {
   return useMediaQuery('(max-width: 767px)');
 }
+
+/** True below the Tailwind `lg` breakpoint (1024px) — phone + iPad portrait. */
+export function useIsCompactLayout(): boolean {
+  return useMediaQuery('(max-width: 1023px)');
+}

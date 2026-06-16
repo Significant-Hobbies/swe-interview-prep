@@ -117,7 +117,7 @@ export default function LearningDoc() {
         </div>
       )}
 
-      <Card className="p-6 sm:p-8">
+      <Card className="p-6 sm:p-8 md:p-10">
         <MarkdownViewer content={content} />
       </Card>
 

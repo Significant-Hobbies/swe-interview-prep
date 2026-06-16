@@ -49,7 +49,7 @@ export const STATUS_META: Record<ConceptStatus, { label: string; color: string }
 
 export function PageShell({ children, wide }: { children: React.ReactNode; wide?: boolean }) {
   return (
-    <div className={`mx-auto w-full px-4 py-6 sm:py-8 ${wide ? 'max-w-7xl' : 'max-w-6xl'}`}>
+    <div className={`mx-auto w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 ${wide ? 'max-w-7xl' : 'max-w-6xl'}`}>
       {children}
     </div>
   );
@@ -72,7 +72,7 @@ export function PageHeader({
         {eyebrow && (
           <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-purple-400">{eyebrow}</div>
         )}
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">{title}</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">{title}</h1>
         {subtitle && <p className="mt-1 max-w-2xl text-sm text-gray-400">{subtitle}</p>}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
