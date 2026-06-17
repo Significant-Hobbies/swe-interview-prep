@@ -176,7 +176,11 @@ export function groupForTag(tag: string): Track | undefined {
   return TRACK_BY_ID[tag];
 }
 
-/** A concept's primary display group — first tag the UI knows about. */
+/**
+ * A concept's primary display group — first tag the UI knows about.
+ * Convention: tags[0] is the primary-group slot; the migration script
+ * preserves that, and any future tag editor should keep it.
+ */
 export function primaryGroup(concept: Concept): Track | undefined {
   for (const t of concept.tags) {
     const g = TRACK_BY_ID[t];
