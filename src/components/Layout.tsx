@@ -49,36 +49,33 @@ export default function Layout() {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [changelogOpen]);
 
-  // Top-nav pill: underline indicator on active, no chip background.
+  // Top-nav: full white on active, dim white on hover. No icons — Vercel-style word marks.
   const navClass = ({ isActive }: { isActive: boolean }) =>
-    `relative inline-flex h-16 items-center gap-1.5 border-b-2 px-1 text-sm font-medium transition-colors duration-150 ${
+    `relative inline-flex h-16 items-center px-1 text-sm transition-colors duration-150 ${
       isActive
-        ? 'border-sky-400 text-slate-50'
-        : 'border-transparent text-slate-400 hover:text-slate-200'
+        ? 'text-white'
+        : 'text-white/50 hover:text-white'
     }`;
 
-  // Mobile bottom-bar: text only, sky on active.
+  // Mobile bottom-bar: text only.
   const tabClass = ({ isActive }: { isActive: boolean }) =>
-    `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] font-medium transition-colors duration-150 ${
-      isActive ? 'text-sky-300' : 'text-slate-500'
+    `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors duration-150 ${
+      isActive ? 'text-white' : 'text-white/40'
     }`;
 
   return (
     <TooltipProvider delayDuration={250}>
-      <div className="min-h-screen bg-slate-950 pb-16 md:pb-0">
-        <nav className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
+      <div className="min-h-screen bg-black pb-16 md:pb-0">
+        <nav className="sticky top-0 z-40 border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
-            <NavLink to="/" className="flex shrink-0 items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-md">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-800 bg-slate-900">
-                <BookOpen className="h-4 w-4 text-sky-400" />
-              </div>
-              <span className="text-sm font-semibold tracking-tight text-slate-100 sm:inline">SWE Prep</span>
+            <NavLink to="/" className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40">
+              <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
+              <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
             </NavLink>
 
             <div className="hidden flex-1 items-center justify-center gap-6 md:flex">
-              {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
+              {PRIMARY_NAV.map(({ to, label }) => (
                 <NavLink key={to} to={to} className={navClass}>
-                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{label}</span>
                 </NavLink>
               ))}
@@ -93,8 +90,8 @@ export default function Layout() {
                       aria-label="Updates"
                       className={`flex h-9 w-9 items-center justify-center rounded-md transition-colors duration-150 ${
                         changelogOpen
-                          ? 'bg-slate-900 text-slate-100'
-                          : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+                          ? 'bg-white/10 text-white'
+                          : 'text-white/50 hover:bg-white/5 hover:text-white'
                       }`}
                     >
                       <Bell className="h-4 w-4" />
@@ -103,13 +100,13 @@ export default function Layout() {
                   <TooltipContent side="bottom">Updates</TooltipContent>
                 </Tooltip>
                 {changelogOpen && (
-                  <div className="absolute right-0 top-full mt-2 max-h-[70vh] w-96 overflow-y-auto rounded-xl border border-slate-800 bg-slate-950 shadow-xl">
-                    <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
-                      <span className="text-sm font-semibold text-slate-100">Updates</span>
+                  <div className="absolute right-0 top-full mt-2 max-h-[70vh] w-96 overflow-y-auto rounded-xl border border-white/10 bg-black shadow-2xl shadow-black/50">
+                    <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                      <span className="text-sm font-semibold text-white">Updates</span>
                       <button
                         onClick={() => setChangelogOpen(false)}
                         aria-label="Close"
-                        className="text-xs text-slate-500 hover:text-slate-300"
+                        className="text-xs text-white/40 hover:text-white"
                       >
                         ✕
                       </button>
@@ -125,7 +122,7 @@ export default function Layout() {
                   <button
                     onClick={() => setSettingsOpen(true)}
                     aria-label="AI settings"
-                    className="flex h-9 w-9 items-center justify-center rounded-md text-slate-400 transition-colors duration-150 hover:bg-slate-900 hover:text-slate-200"
+                    className="flex h-9 w-9 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </button>
@@ -138,10 +135,10 @@ export default function Layout() {
                     <img
                       src={(user as any).picture}
                       alt=""
-                      className="ml-1 h-8 w-8 rounded-full ring-1 ring-slate-800"
+                      className="ml-1 h-8 w-8 rounded-full ring-1 ring-white/10"
                     />
                   ) : (
-                    <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-xs font-medium text-slate-300 ring-1 ring-slate-800">
+                    <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-xs font-medium text-white/80 ring-1 ring-white/10">
                       {((user as any).email?.[0] || '?').toUpperCase()}
                     </div>
                   )}
@@ -150,7 +147,7 @@ export default function Layout() {
                       <button
                         onClick={signOut}
                         aria-label="Sign out"
-                        className="flex h-9 w-9 items-center justify-center rounded-md text-slate-400 transition-colors duration-150 hover:bg-slate-900 hover:text-slate-200"
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
                       >
                         <LogOut className="h-4 w-4" />
                       </button>
@@ -161,7 +158,7 @@ export default function Layout() {
               ) : isGuest ? (
                 <button
                   onClick={signInWithGoogle}
-                  className="ml-1 inline-flex items-center gap-1.5 rounded-md border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-200 transition-colors duration-150 hover:border-slate-600 hover:bg-slate-900"
+                  className="ml-1 inline-flex items-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
                 >
                   <LogIn className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Sign in</span>
@@ -177,7 +174,7 @@ export default function Layout() {
 
         <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
-        <div className="fixed bottom-0 left-0 right-0 z-40 flex border-t border-slate-800/80 bg-slate-950/95 backdrop-blur-xl md:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-40 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
           {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
             <NavLink key={to} to={to} className={tabClass}>
               <Icon className="h-5 w-5" />

@@ -37,7 +37,7 @@ export default function Progress() {
     <PageShell wide>
       <Link
         to="/progress"
-        className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
       >
         <ArrowLeft className="h-3.5 w-3.5" /> Progress
       </Link>
@@ -74,7 +74,7 @@ function Overview() {
   return (
     <>
       {/* Single stat row — no colored tiles */}
-      <div className="mb-8 rounded-xl border border-slate-800 bg-slate-900/40 p-5">
+      <div className="mb-8 rounded-xl border border-white/[0.08] bg-white/[0.02] p-5">
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
           <ProgressStat label="Started" value={started} sub={`of ${overall.total}`} />
           <ProgressStat label="Mastered" value={overall.mastered} sub={`of ${overall.total}`} />
@@ -86,7 +86,7 @@ function Overview() {
 
       <section className="mb-10">
         <SectionTitle>Mastery by group</SectionTitle>
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 divide-y divide-slate-800/80">
+        <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] divide-y divide-white/[0.08]">
           {sortedTracks().map(t => {
             const ids = conceptsByTag(t.id).map(c => c.id);
             const roll = rollupMastery(ids, mastery);
@@ -94,11 +94,11 @@ function Overview() {
             return (
               <div key={t.id} className="flex items-center gap-4 px-4 py-3">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${color(t.color).solid}`} />
-                <span className="min-w-[10rem] text-sm font-medium text-slate-200">{t.title}</span>
+                <span className="min-w-[10rem] text-sm font-medium text-white/80">{t.title}</span>
                 <div className="flex-1">
                   <ProgressBar value={pct} tone={t.color} />
                 </div>
-                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-slate-400">
+                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-white/50">
                   {roll.mastered}/{ids.length}
                 </span>
               </div>
@@ -109,7 +109,7 @@ function Overview() {
 
       <section className="mb-10">
         <SectionTitle>ELO by roadmap</SectionTitle>
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40 divide-y divide-slate-800/80">
+        <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] divide-y divide-white/[0.08]">
           {ROADMAPS.map(r => {
             const ids = conceptsInRoadmap(r.id).map(c => c.id);
             if (!ids.length) return null;
@@ -117,13 +117,13 @@ function Overview() {
             const elo = getElo(r.id);
             return (
               <div key={r.id} className="flex items-center gap-4 px-4 py-3">
-                <span className="min-w-[14rem] text-sm font-medium text-slate-200">{r.title}</span>
-                <span className="text-xs text-slate-500">{r.horizon}</span>
+                <span className="min-w-[14rem] text-sm font-medium text-white/80">{r.title}</span>
+                <span className="text-xs text-white/40">{r.horizon}</span>
                 <span className="flex-1" />
-                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-slate-400">
+                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-white/50">
                   {roll.mastered}/{ids.length}
                 </span>
-                <span className="w-16 shrink-0 text-right font-mono text-xs text-slate-500" title="Adaptive ELO for drills solved within this roadmap">
+                <span className="w-16 shrink-0 text-right font-mono text-xs text-white/40" title="Adaptive ELO for drills solved within this roadmap">
                   {elo}
                 </span>
               </div>
@@ -134,22 +134,22 @@ function Overview() {
 
       <section>
         <SectionTitle>Artifact pipeline</SectionTitle>
-        <div className="rounded-xl border border-slate-800 bg-slate-900/40">
+        <div className="rounded-xl border border-white/[0.08] bg-white/[0.02]">
           {(['shipped', 'building', 'todo'] as const).map(status => {
             const items = ARTIFACTS.filter(a => (artifacts[a.id]?.status || 'todo') === status);
             if (!items.length) return null;
-            const dot = status === 'shipped' ? 'bg-emerald-500' : status === 'building' ? 'bg-amber-500' : 'bg-slate-500';
+            const dot = status === 'shipped' ? 'bg-emerald-300' : status === 'building' ? 'bg-amber-300' : 'bg-white/30';
             return (
-              <div key={status} className="border-b border-slate-800/80 last:border-b-0 px-4 py-3">
-                <div className="mb-2 flex items-center gap-2 text-xs font-medium capitalize text-slate-300">
+              <div key={status} className="border-b border-white/[0.08] last:border-b-0 px-4 py-3">
+                <div className="mb-2 flex items-center gap-2 text-xs font-medium capitalize text-white/70">
                   <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
                   {status}
-                  <span className="text-slate-500">· {items.length}</span>
+                  <span className="text-white/40">· {items.length}</span>
                 </div>
                 <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map(a => (
-                    <li key={a.id} className="truncate text-sm text-slate-400">
-                      <Hammer className="mr-1.5 inline h-3 w-3 text-slate-600" />
+                    <li key={a.id} className="truncate text-sm text-white/50">
+                      <Hammer className="mr-1.5 inline h-3 w-3 text-white/30" />
                       {a.title}
                     </li>
                   ))}
@@ -166,9 +166,9 @@ function Overview() {
 function ProgressStat({ label, value, sub }: { label: string; value: React.ReactNode; sub?: string }) {
   return (
     <div>
-      <div className="text-xs font-medium text-slate-400">{label}</div>
-      <div className="mt-1 text-2xl font-semibold tabular-nums text-slate-50">{value}</div>
-      {sub && <div className="mt-0.5 text-xs text-slate-500">{sub}</div>}
+      <div className="text-xs font-medium text-white/50">{label}</div>
+      <div className="mt-1 text-2xl font-semibold tabular-nums text-white">{value}</div>
+      {sub && <div className="mt-0.5 text-xs text-white/40">{sub}</div>}
     </div>
   );
 }
@@ -206,14 +206,14 @@ function NotesPanel() {
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Title (optional)"
-            className="mb-2 w-full rounded-md border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
+            className="mb-2 w-full rounded-md border border-white/[0.08] bg-black px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
           <textarea
             value={body}
             onChange={e => setBody(e.target.value)}
             placeholder="Write…"
             rows={4}
-            className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
+            className="w-full resize-y rounded-md border border-white/[0.08] bg-black px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
           <div className="mt-2 flex justify-end gap-2">
             <Button tone="ghost" onClick={() => setComposing(false)}>Cancel</Button>
@@ -243,14 +243,14 @@ function NoteRow({ note, onDelete }: { note: LearningNote; onDelete: () => void 
         <div className="mb-1 flex items-center gap-2">
           <Badge tone={note.scope === 'free' ? 'default' : 'info'}>{note.scope}</Badge>
           {link && (
-            <Link to={link.to} className="text-xs text-sky-400 hover:underline">{link.label}</Link>
+            <Link to={link.to} className="text-xs text-white hover:underline">{link.label}</Link>
           )}
-          <span className="text-[11px] text-slate-500">{new Date(note.updatedAt).toLocaleDateString()}</span>
+          <span className="text-[11px] text-white/40">{new Date(note.updatedAt).toLocaleDateString()}</span>
         </div>
         {note.title && <div className="text-sm font-semibold text-white">{note.title}</div>}
-        <p className="whitespace-pre-wrap text-sm text-slate-300">{note.body}</p>
+        <p className="whitespace-pre-wrap text-sm text-white/70">{note.body}</p>
       </div>
-      <button onClick={onDelete} aria-label="Delete note" className="shrink-0 text-slate-500 hover:text-rose-400">
+      <button onClick={onDelete} aria-label="Delete note" className="shrink-0 text-white/40 hover:text-rose-400">
         <Trash2 className="h-4 w-4" />
       </button>
     </Card>

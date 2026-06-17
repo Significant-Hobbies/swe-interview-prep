@@ -2,7 +2,6 @@ import { ArrowRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, color, PageShell } from '../components/ui';
 import { Sparkline } from '../components/viz';
 import { CONCEPT_BY_ID, type Drill, DRILLS, primaryGroup, REVIEW_QUESTIONS } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
@@ -23,92 +22,99 @@ export default function Practice() {
   const nextDrill = useMemo(() => pickNextDrill(drillState, getElo), [drillState, getElo]);
 
   return (
-    <PageShell>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tight text-slate-50">Practice</h1>
+    <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
+      {nextDrill ? <NextDrillHero drill={nextDrill} /> : <AllCaughtUp />}
 
-      {nextDrill ? <NextDrillCard drill={nextDrill} /> : <AllCaughtUp />}
-
-      <div className="mt-6 flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/40 px-5 py-4">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-          <StatLine label="Solved" value={`${solvedCount}/${DRILLS.length}`} />
-          <StatLine label="Due" value={dueCount} tone={dueCount ? 'amber' : 'default'} />
-          <StatLine label="Streak" value={`${streak}d`} />
+      <section className="section-rule mt-20 pt-10">
+        <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+          This week
         </div>
-        <Sparkline values={sparkline} width={120} height={28} tone="sky" />
-      </div>
+        <div className="grid grid-cols-3 gap-8">
+          <Stat label="Solved" value={solvedCount} sub={`of ${DRILLS.length}`} />
+          <Stat label="Due" value={dueCount} sub={dueCount ? 'reviews' : 'caught up'} accent={dueCount > 0} />
+          <Stat label="Streak" value={`${streak}d`} sub="active" />
+        </div>
+        <div className="mt-8">
+          <Sparkline values={sparkline} width={520} height={36} tone="sky" />
+        </div>
+      </section>
 
-      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <Link to="/practice/all" className="text-sky-400 hover:text-sky-300">
-          Browse all drills →
+      <nav className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
+        <Link to="/practice/all" className="text-white hover:text-white/70">
+          Browse all drills <span className="text-white/40">→</span>
         </Link>
-        <Link to="/practice/all?tab=reviews" className="text-slate-400 hover:text-slate-200">
-          Review queue {dueCount > 0 && <span className="text-slate-500">· {dueCount}</span>}
+        <Link to="/practice/all?tab=reviews" className="text-white/50 hover:text-white">
+          Review queue{dueCount > 0 && <span className="text-white/40"> · {dueCount}</span>}
         </Link>
       </nav>
-    </PageShell>
+    </div>
   );
 }
 
-function NextDrillCard({ drill }: { drill: Drill }) {
+function NextDrillHero({ drill }: { drill: Drill }) {
   const concept = CONCEPT_BY_ID[drill.conceptId];
-  const trk = concept ? primaryGroup(concept) : undefined;
+  const grp = concept ? primaryGroup(concept) : undefined;
   return (
-    <Card className="p-6 sm:p-8">
-      <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-400">
-        <span>Next drill</span>
-        {trk && (
-          <>
-            <span className="text-slate-700">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className={`h-1.5 w-1.5 rounded-full ${color(trk.color).solid}`} />
-              {trk.short}
-            </span>
-          </>
-        )}
-        <span className="text-slate-700">·</span>
-        <span>{drill.difficulty}</span>
-      </div>
-      <h2 className="text-xl font-semibold text-slate-50 sm:text-2xl">{drill.title}</h2>
-      {concept && (
-        <p className="mt-1 text-xs text-slate-500">via <span className="text-slate-300">{concept.name}</span></p>
-      )}
-      <p className="mt-3 line-clamp-3 max-w-prose text-sm text-slate-400">{drill.prompt}</p>
+    <div className="relative">
+      <div className="dot-grid absolute -inset-x-6 -inset-y-10 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
-      <div className="mt-6">
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        Next drill {grp && <span className="text-white/30">· {grp.short}</span>} <span className="text-white/30">· {drill.difficulty}</span>
+      </div>
+
+      <h1 className="text-balance text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+        {drill.title}
+      </h1>
+
+      {concept && (
+        <p className="mt-4 font-mono text-xs text-white/40">
+          via <span className="text-white/70">{concept.name}</span>
+        </p>
+      )}
+
+      <p className="mt-6 line-clamp-3 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+        {drill.prompt}
+      </p>
+
+      <div className="mt-10">
         <Link
           to={`/drills/${drill.id}`}
-          className="inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-sky-400"
+          className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-all duration-150 hover:bg-white/90"
         >
-          Open in Playground <ArrowRight className="h-4 w-4" />
+          Open in Playground
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
       </div>
-    </Card>
+    </div>
   );
 }
 
 function AllCaughtUp() {
   return (
-    <Card className="p-6 sm:p-8">
-      <div className="mb-2 text-xs font-medium text-slate-400">Next drill</div>
-      <h2 className="text-xl font-semibold text-slate-50">All solved.</h2>
-      <p className="mt-2 text-sm text-slate-400">Browse drills by track to revisit any.</p>
+    <div>
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Next drill</div>
+      <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl">All solved.</h1>
+      <p className="mt-6 max-w-prose text-base text-white/60 sm:text-lg">
+        Browse drills by group to revisit any.
+      </p>
       <Link
         to="/practice/all"
-        className="mt-6 inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-sky-400"
+        className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black hover:bg-white/90"
       >
         Browse drills <ArrowRight className="h-4 w-4" />
       </Link>
-    </Card>
+    </div>
   );
 }
 
-function StatLine({ label, value, tone }: { label: string; value: React.ReactNode; tone?: 'default' | 'amber' }) {
+function Stat({ label, value, sub, accent }: { label: string; value: React.ReactNode; sub?: string; accent?: boolean }) {
   return (
     <div>
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className={`text-lg font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-slate-100'}`}>
+      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
+      <div className={`mt-2 text-4xl font-semibold tabular-nums tracking-tight ${accent ? 'text-amber-200' : 'text-white'}`}>
         {value}
       </div>
+      {sub && <div className="mt-1 font-mono text-xs text-white/40">{sub}</div>}
     </div>
   );
 }
@@ -122,10 +128,7 @@ function pickNextDrill(
   const ranked = unsolved
     .map(d => {
       const roadmaps = CONCEPT_BY_ID[d.conceptId]?.roadmaps ?? [];
-      // Sort against the user's strongest roadmap-context for this concept.
-      const userElo = roadmaps.length
-        ? Math.max(...roadmaps.map(getElo))
-        : DEFAULT_USER_ELO;
+      const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : DEFAULT_USER_ELO;
       const problemElo = difficultyToElo(d.difficulty);
       const distance = Math.abs(problemElo - userElo);
       const inProgressBoost = drillState[d.id]?.status === 'attempted' ? -100 : 0;

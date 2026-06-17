@@ -1,15 +1,16 @@
 @import 'highlight.js/styles/github-dark.css';
 @import "tailwindcss";
 
+/* Geist Sans + Geist Mono loaded via <link> in index.html. */
+
 html, body {
   margin: 0;
   min-height: 100vh;
-  /* slate-950 */
-  background-color: #020617;
-  /* slate-100 */
-  color: #e2e8f0;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  /* near-black — Vercel uses #000; we lift fractionally so deep shadows still read */
+  background-color: #000;
+  /* near-white */
+  color: #ededed;
+  font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -21,40 +22,51 @@ html, body {
   overflow-x: hidden;
 }
 
-/* sky-500 selection (single accent) */
-::selection {
-  background-color: rgba(14, 165, 233, 0.25);
-  color: #f1f5f9;
+/* Mono font — Tailwind's font-mono utility plus code/kbd/pre/samp tags. */
+.font-mono, code, kbd, pre, samp {
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Custom scrollbar — slate */
+/* Selection — subtle white tint rather than a brand accent. */
+::selection {
+  background-color: rgba(255, 255, 255, 0.18);
+  color: #fafafa;
+}
+
+/* Scrollbar — barely visible on black. */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  /* slate-950 */
-  background: #020617;
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* slate-800 */
-  background: #1e293b;
+  background: #262626;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  /* slate-700 */
-  background: #334155;
+  background: #404040;
 }
 
-/* Focus visible default for keyboard users — sky ring */
 :focus-visible {
   outline: none;
 }
 
-/* Respect reduced motion globally */
+/* Dotted grid backdrop — apply with `.dot-grid` on the hero container. */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Vercel-style horizontal rule — faint top border between sections. */
+.section-rule {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

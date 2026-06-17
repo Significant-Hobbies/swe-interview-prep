@@ -1,7 +1,6 @@
-import { ArrowRight, Hammer } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import { Card, color, PageShell, ProgressBar } from '../components/ui';
 import {
   type Concept,
   primaryGroup,
@@ -26,46 +25,44 @@ export default function Learn() {
   const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
 
   return (
-    <PageShell>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tight text-slate-50">Learn</h1>
-
+    <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
       {next ? (
-        <UpNextCard concept={next} drillTitle={nextDrill?.title} drillId={nextDrill?.id} />
+        <UpNextHero concept={next} drillTitle={nextDrill?.title} drillId={nextDrill?.id} />
       ) : (
         <EmptyUpNext />
       )}
 
-      <section className="mt-6">
-        <div className="mb-2 flex items-baseline justify-between gap-3">
-          <div className="min-w-0">
-            <div className="text-xs font-medium text-slate-400">Active path</div>
-            <div className="truncate text-sm text-slate-200">{activeRoadmap.title}</div>
-          </div>
-          <div className="shrink-0 text-right">
-            <div className="text-sm font-semibold tabular-nums text-slate-50">
-              {Math.round(pct)}%
-            </div>
-            <div className="text-xs text-slate-500">
-              {roll.mastered} / {ids.length}
-            </div>
+      <section className="section-rule mt-20 pt-10">
+        <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+          Active path
+        </div>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h2 className="text-2xl font-semibold tracking-tight text-white">{activeRoadmap.title}</h2>
+          <div className="flex items-baseline gap-3 font-mono text-sm text-white/40">
+            <span className="text-white">{Math.round(pct)}%</span>
+            <span>·</span>
+            <span>{roll.mastered}/{ids.length}</span>
           </div>
         </div>
-        <ProgressBar value={pct} />
+        <div className="mt-4 h-px w-full overflow-hidden bg-white/10">
+          <div className="h-full bg-white transition-[width] duration-500" style={{ width: `${pct}%` }} />
+        </div>
+        <p className="mt-4 max-w-prose text-sm text-white/50">{activeRoadmap.goal}</p>
       </section>
 
-      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <Link to="/learn/all" className="text-sky-400 hover:text-sky-300">
-          Browse all concepts →
+      <nav className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
+        <Link to="/learn/all" className="text-white hover:text-white/70">
+          Browse all concepts <span className="text-white/40">→</span>
         </Link>
-        <Link to={`/roadmaps/${activeRoadmap.id}`} className="text-slate-400 hover:text-slate-200">
+        <Link to={`/roadmaps/${activeRoadmap.id}`} className="text-white/50 hover:text-white">
           Open active roadmap
         </Link>
       </nav>
-    </PageShell>
+    </div>
   );
 }
 
-function UpNextCard({
+function UpNextHero({
   concept,
   drillTitle,
   drillId,
@@ -74,66 +71,69 @@ function UpNextCard({
   drillTitle?: string;
   drillId?: string;
 }) {
-  const trk = primaryGroup(concept);
+  const grp = primaryGroup(concept);
   return (
-    <Card className="p-6 sm:p-8">
-      <div className="mb-3 flex items-center gap-2 text-xs font-medium text-slate-400">
-        <span>Up next</span>
-        {trk && (
-          <>
-            <span className="text-slate-700">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className={`h-1.5 w-1.5 rounded-full ${color(trk.color).solid}`} />
-              {trk.short}
-            </span>
-          </>
-        )}
+    <div className="relative">
+      <div className="dot-grid absolute -inset-x-6 -inset-y-10 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        Up next {grp && <span className="text-white/30">· {grp.short}</span>}
       </div>
-      <h2 className="text-xl font-semibold text-slate-50 sm:text-2xl">{concept.name}</h2>
-      <p className="mt-2 line-clamp-2 max-w-prose text-sm text-slate-400">{concept.description}</p>
+
+      <h1 className="text-balance text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+        {concept.name}
+      </h1>
+
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+        {concept.description}
+      </p>
 
       {drillTitle && (
-        <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
-          <Hammer className="h-3 w-3 text-slate-500" />
-          Pair with drill: <span className="text-slate-200">{drillTitle}</span>
-        </div>
+        <p className="mt-3 font-mono text-xs text-white/40">
+          Pair with drill: <span className="text-white/70">{drillTitle}</span>
+        </p>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
+      <div className="mt-10 flex flex-wrap items-center gap-4">
         <Link
           to={`/concepts/${concept.id}`}
-          className="inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-sky-400"
+          className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-all duration-150 hover:bg-white/90"
         >
-          Start <ArrowRight className="h-4 w-4" />
+          Start
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
         {drillId && (
           <Link
             to={`/drills/${drillId}`}
-            className="text-sm text-slate-400 hover:text-slate-200"
+            className="font-mono text-sm text-white/50 hover:text-white"
           >
             Open drill →
           </Link>
         )}
       </div>
-    </Card>
+    </div>
   );
 }
 
 function EmptyUpNext() {
   return (
-    <Card className="p-6 sm:p-8">
-      <div className="mb-2 text-xs font-medium text-slate-400">Up next</div>
-      <h2 className="text-xl font-semibold text-slate-50">All caught up.</h2>
-      <p className="mt-2 text-sm text-slate-400">
+    <div>
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        Up next
+      </div>
+      <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+        All caught up.
+      </h1>
+      <p className="mt-6 max-w-prose text-base text-white/60 sm:text-lg">
         Nothing is due right now. Browse the library to pick something new.
       </p>
       <Link
         to="/learn/all"
-        className="mt-6 inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors duration-150 hover:bg-sky-400"
+        className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black hover:bg-white/90"
       >
         Browse concepts <ArrowRight className="h-4 w-4" />
       </Link>
-    </Card>
+    </div>
   );
 }
 
