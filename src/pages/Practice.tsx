@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Card, color, PageShell } from '../components/ui';
 import { Sparkline } from '../components/viz';
-import { CONCEPT_BY_ID, type Drill, DRILLS, REVIEW_QUESTIONS, TRACK_BY_ID } from '../data/learning-os';
+import { CONCEPT_BY_ID, type Drill, DRILLS, primaryGroup, REVIEW_QUESTIONS } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useDrillStore, useUserElo } from '../hooks/useUserStore';
 import { isDue } from '../lib/conceptState';
@@ -51,7 +51,7 @@ export default function Practice() {
 
 function NextDrillCard({ drill }: { drill: Drill }) {
   const concept = CONCEPT_BY_ID[drill.conceptId];
-  const trk = concept ? TRACK_BY_ID[concept.track] : undefined;
+  const trk = concept ? primaryGroup(concept) : undefined;
   return (
     <Card className="p-6 sm:p-8">
       <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-400">

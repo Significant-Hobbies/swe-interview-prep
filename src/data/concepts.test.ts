@@ -85,6 +85,20 @@ describe('concept taxonomy', () => {
     expect(cycles).toEqual([]);
   });
 
+  it('every concept has tags[] with the primary group first', () => {
+    for (const c of concepts) {
+      expect(Array.isArray(c.tags), `${c.id} tags`).toBe(true);
+      expect(c.tags.length, `${c.id} tags non-empty`).toBeGreaterThanOrEqual(1);
+      expect(trackIds.has(c.tags[0]), `${c.id} tags[0]=${c.tags[0]} is a known group`).toBe(true);
+    }
+  });
+
+  it('every concept has roadmaps[] (may be empty)', () => {
+    for (const c of concepts) {
+      expect(Array.isArray(c.roadmaps), `${c.id} roadmaps`).toBe(true);
+    }
+  });
+
   it('every track has at least 3 concepts', () => {
     const counts: Record<string, number> = {};
     for (const c of concepts) counts[c.track] = (counts[c.track] || 0) + 1;

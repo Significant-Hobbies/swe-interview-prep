@@ -53,9 +53,15 @@ export interface Resource {
 export interface Concept {
   id: string;
   name: string;
-  /** Legacy taxonomy bucket — retained for back-compat with older problem data. */
+  /** Flat labels. First entry is the "primary group" used for color / icon. */
+  tags: string[];
+  /** Roadmap IDs whose milestones include this concept. Derived from roadmaps.json. */
+  roadmaps: string[];
+  /** @deprecated Use tags[]. Retained until ELO migrates off per-track keying. */
   category: string;
+  /** @deprecated Use tags[0]. Same value as tags[0] today. */
   track: TrackId;
+  /** @deprecated Use tags[1]. Same value as tags[1] today. */
   subtrack: string;
   difficulty: Difficulty;
   priority: number;
@@ -155,6 +161,38 @@ export const REVIEW_QUESTION_BY_ID: Record<string, ReviewQuestion> = Object.from
 
 export function conceptsByTrack(track: TrackId): Concept[] {
   return CONCEPTS.filter(c => c.track === track);
+}
+
+// --- Tag-first taxonomy ----------------------------------------------------
+// New mental model: concepts have tags[] + roadmaps[]. The 8 "tracks" are now
+// just known top-level tags with display metadata. Use these helpers in new
+// code; conceptsByTrack remains as a thin wrapper for unmigrated callers.
+
+/** Tags that the UI knows about — gives them a color + icon + title. */
+export const KNOWN_GROUP_TAGS: TrackId[] = TRACKS.map(t => t.id as TrackId);
+
+/** Display metadata for a tag, if the UI knows about it. */
+export function groupForTag(tag: string): Track | undefined {
+  return TRACK_BY_ID[tag];
+}
+
+/** A concept's primary display group — first tag the UI knows about. */
+export function primaryGroup(concept: Concept): Track | undefined {
+  for (const t of concept.tags) {
+    const g = TRACK_BY_ID[t];
+    if (g) return g;
+  }
+  return undefined;
+}
+
+/** Every concept tagged with this tag (group tag or otherwise). */
+export function conceptsByTag(tag: string): Concept[] {
+  return CONCEPTS.filter(c => c.tags.includes(tag));
+}
+
+/** Every concept in a roadmap, by id. */
+export function conceptsInRoadmap(roadmapId: string): Concept[] {
+  return CONCEPTS.filter(c => c.roadmaps.includes(roadmapId));
 }
 
 export function drillsForConcept(conceptId: string): Drill[] {
