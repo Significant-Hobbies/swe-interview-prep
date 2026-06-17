@@ -21,7 +21,7 @@ export default function Progress() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
       <div className="relative">
-        <div className="dot-grid absolute -inset-x-6 -inset-y-10 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
         <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
           Mastery
