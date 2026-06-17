@@ -25,9 +25,9 @@ import {
   artifactsForConcept,
   CONCEPT_BY_ID,
   drillsForConcept,
+  groupForTag,
   PROJECT_BY_ID,
   reviewQuestionsForConcept,
-  TRACK_BY_ID,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { confidence1to5, deriveConceptStatus } from '../lib/conceptState';
@@ -57,7 +57,6 @@ export default function ConceptDetail() {
     );
   }
 
-  const track = TRACK_BY_ID[concept.track];
   const m = mastery[concept.id];
   const status = deriveConceptStatus(m);
   const meta = STATUS_META[status];
@@ -81,18 +80,19 @@ export default function ConceptDetail() {
         <ArrowLeft className="h-3.5 w-3.5" /> Concepts
       </Link>
 
-      {/* Header — quiet: track + difficulty only as badges, rest as plain text */}
+      {/* Header — tags row + difficulty + status. First tag is the primary group. */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight text-slate-50">{concept.name}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
-          {track && (
-            <span className="inline-flex items-center gap-1.5">
-              <span className={`h-1.5 w-1.5 rounded-full ${color(track.color).solid}`} />
-              {track.title}
-            </span>
-          )}
-          <span className="text-slate-600">·</span>
-          <span>{concept.subtrack}</span>
+          {concept.tags.map(tag => {
+            const grp = groupForTag(tag);
+            return (
+              <span key={tag} className="inline-flex items-center gap-1.5 rounded-md border border-slate-700/70 px-1.5 py-0.5">
+                {grp && <span className={`h-1.5 w-1.5 rounded-full ${color(grp.color).solid}`} />}
+                {grp ? grp.short : tag}
+              </span>
+            );
+          })}
           <span className="text-slate-600">·</span>
           <Badge tone={DIFFICULTY_COLOR[concept.difficulty] === 'emerald' ? 'success' : DIFFICULTY_COLOR[concept.difficulty] === 'amber' ? 'warning' : 'danger'}>
             {concept.difficulty}
@@ -336,9 +336,10 @@ function ReviewQA({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-function buildExpanderPrompt(concept: { name: string; track: string; description: string }): string {
+function buildExpanderPrompt(concept: { name: string; tags: string[]; description: string }): string {
+  const primary = concept.tags[0] ?? '';
   return [
-    `You are helping me learn the concept "${concept.name}" (track: ${concept.track}).`,
+    `You are helping me learn the concept "${concept.name}" (tags: ${concept.tags.join(', ')}; primary group: ${primary}).`,
     `Current one-line description: ${concept.description}`,
     '',
     'Produce, concisely:',

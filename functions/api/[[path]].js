@@ -599,8 +599,8 @@ async function handleGaps(request) {
   if (!aiConfig?.endpointUrl || !aiConfig?.apiKey || !aiConfig?.model) {
     return json({ error: "Configure an AI provider in Settings to use the Gap Analyzer." }, { status: 400 });
   }
-  const prompt = `Concept catalog (id: name [track]):
-${(catalog?.concepts || []).map((c) => `${c.id}: ${c.name} [${c.track}]`).join("\n")}
+  const prompt = `Concept catalog (id: name [tags]):
+${(catalog?.concepts || []).map((c) => `${c.id}: ${c.name} [${(c.tags || []).join(", ")}]`).join("\n")}
 
 Artifact catalog (id: title):
 ${(catalog?.artifacts || []).map((a) => `${a.id}: ${a.title}`).join("\n")}

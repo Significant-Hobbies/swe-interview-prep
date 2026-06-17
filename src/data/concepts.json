@@ -4,9 +4,14 @@
     {
       "id": "tokenization",
       "name": "Tokenization",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "tokenization",
+      "tags": [
+        "search-ir",
+        "tokenization"
+      ],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -34,7 +39,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book — Tokenization",
+          "title": "Stanford IR Book \u2014 Tokenization",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
           "type": "doc"
         },
@@ -48,9 +53,16 @@
     {
       "id": "inverted-index",
       "name": "Inverted Index",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "indexing",
+      "tags": [
+        "search-ir",
+        "indexing"
+      ],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -61,8 +73,8 @@
         "tf-idf",
         "search-discovery"
       ],
-      "description": "Term → posting list mapping that powers fast keyword lookup.",
-      "mentalModel": "An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.",
+      "description": "Term \u2192 posting list mapping that powers fast keyword lookup.",
+      "mentalModel": "An inverted index flips documents inside out: instead of doc \u2192 terms, you store term \u2192 list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.",
       "commonMistakes": [
         "Storing postings unsorted, making intersection O(n*m)",
         "Forgetting document frequency, which ranking later needs",
@@ -81,7 +93,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book — The term vocabulary & postings lists",
+          "title": "Stanford IR Book \u2014 The term vocabulary & postings lists",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
           "type": "doc"
         }
@@ -90,9 +102,14 @@
     {
       "id": "tf-idf",
       "name": "TF-IDF",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -101,7 +118,7 @@
       "related": [
         "bm25"
       ],
-      "description": "Term frequency × inverse document frequency weighting for relevance.",
+      "description": "Term frequency \u00d7 inverse document frequency weighting for relevance.",
       "mentalModel": "TF-IDF says a term matters more when it appears often in a document (TF) but is rare across the corpus (IDF). It is the conceptual ancestor of BM25.",
       "commonMistakes": [
         "Ignoring document length so long docs always win",
@@ -116,7 +133,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book — Scoring & term weighting",
+          "title": "Stanford IR Book \u2014 Scoring & term weighting",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
           "type": "doc"
         }
@@ -125,9 +142,17 @@
     {
       "id": "bm25",
       "name": "BM25",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -142,7 +167,7 @@
       "description": "The standard lexical ranking function: TF saturation + IDF + length normalization.",
       "mentalModel": "BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter). It is still the strongest single keyword ranker and the lexical half of hybrid search.",
       "commonMistakes": [
-        "Believing embeddings make BM25 obsolete — they are complementary",
+        "Believing embeddings make BM25 obsolete \u2014 they are complementary",
         "Leaving k1/b at defaults without tuning on your corpus",
         "Skipping document length normalization",
         "Not building search evals to compare against vector retrieval"
@@ -181,9 +206,13 @@
     {
       "id": "ranking-metrics",
       "name": "Ranking Metrics",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "evaluation",
+      "tags": [
+        "search-ir",
+        "evaluation"
+      ],
+      "roadmaps": [
+        "retrieval-30-day"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -205,7 +234,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book — Evaluation in IR",
+          "title": "Stanford IR Book \u2014 Evaluation in IR",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
           "type": "doc"
         }
@@ -214,9 +243,15 @@
     {
       "id": "search-evals",
       "name": "Search Evals",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "evaluation",
+      "tags": [
+        "search-ir",
+        "evaluation"
+      ],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -228,7 +263,7 @@
         "llm-evals"
       ],
       "description": "Building a labelled query set and harness to compare retrieval approaches.",
-      "mentalModel": "You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever — it turns ranking changes from vibes into numbers.",
+      "mentalModel": "You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever \u2014 it turns ranking changes from vibes into numbers.",
       "commonMistakes": [
         "Tuning ranking without a frozen eval set",
         "Letting the eval set leak into tuning decisions",
@@ -258,9 +293,15 @@
     {
       "id": "hybrid-search",
       "name": "Hybrid Search",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "hybrid",
+      "tags": [
+        "search-ir",
+        "hybrid"
+      ],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -304,9 +345,14 @@
     {
       "id": "reranking",
       "name": "Reranking",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -334,7 +380,7 @@
       ],
       "resources": [
         {
-          "title": "Sentence-Transformers — Cross-Encoders",
+          "title": "Sentence-Transformers \u2014 Cross-Encoders",
           "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
           "type": "doc"
         }
@@ -343,9 +389,11 @@
     {
       "id": "query-rewriting",
       "name": "Query Rewriting",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -358,19 +406,21 @@
       "description": "Expanding, correcting, and normalizing queries before retrieval.",
       "resources": [
         {
-          "title": "Stanford IR Book — Query expansion",
+          "title": "Stanford IR Book \u2014 Query expansion",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
           "type": "doc"
         }
       ],
-      "mentalModel": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work — never trust the raw query."
+      "mentalModel": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work \u2014 never trust the raw query."
     },
     {
       "id": "search-discovery",
       "name": "Search Systems",
-      "category": "hld",
-      "track": "search-ir",
-      "subtrack": "indexing",
+      "tags": [
+        "search-ir",
+        "indexing"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -389,14 +439,19 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
+      "mentalModel": "Discovery search is for \"I do not know what I want yet\" \u2014 no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
     },
     {
       "id": "embeddings",
       "name": "Embeddings",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "embeddings",
+      "tags": [
+        "vector-db",
+        "embeddings"
+      ],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -434,9 +489,13 @@
     {
       "id": "vector-similarity",
       "name": "Vector Similarity",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "similarity",
+      "tags": [
+        "vector-db",
+        "similarity"
+      ],
+      "roadmaps": [
+        "retrieval-30-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -446,7 +505,7 @@
         "topk-vector-search",
         "brute-force-vector-db"
       ],
-      "description": "Cosine, dot product, and L2 distance — how to score vector closeness.",
+      "description": "Cosine, dot product, and L2 distance \u2014 how to score vector closeness.",
       "mentalModel": "Cosine measures angle (direction), dot product measures angle and magnitude, L2 measures straight-line distance. On normalized vectors cosine and dot product rank identically, and L2 becomes a monotonic function of them.",
       "commonMistakes": [
         "Mixing distance metrics between indexing and querying",
@@ -462,7 +521,7 @@
       ],
       "resources": [
         {
-          "title": "Pinecone — Vector similarity explained",
+          "title": "Pinecone \u2014 Vector similarity explained",
           "url": "https://www.pinecone.io/learn/vector-similarity/",
           "type": "article"
         }
@@ -471,9 +530,11 @@
     {
       "id": "topk-vector-search",
       "name": "Top-k Vector Search",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -506,9 +567,14 @@
     {
       "id": "brute-force-vector-db",
       "name": "Brute-Force Vector DB",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -519,12 +585,12 @@
         "hnsw",
         "metadata-filtering"
       ],
-      "description": "Exact nearest-neighbour search by scanning every vector — the correctness baseline.",
-      "mentalModel": "Brute force computes the metric against every stored vector. It is O(n·d) and slow at scale, but it is exact — making it the recall=1.0 baseline that every ANN index is measured against.",
+      "description": "Exact nearest-neighbour search by scanning every vector \u2014 the correctness baseline.",
+      "mentalModel": "Brute force computes the metric against every stored vector. It is O(n\u00b7d) and slow at scale, but it is exact \u2014 making it the recall=1.0 baseline that every ANN index is measured against.",
       "commonMistakes": [
         "Skipping the brute-force baseline, so ANN recall is unmeasurable",
         "Not batching the matrix multiply for the scan",
-        "Assuming brute force is always too slow — it is fine for <100k vectors"
+        "Assuming brute force is always too slow \u2014 it is fine for <100k vectors"
       ],
       "realWorldUsage": "FAISS IndexFlat, the ground-truth oracle for ANN benchmarks.",
       "projectApplications": [
@@ -542,7 +608,7 @@
       ],
       "resources": [
         {
-          "title": "FAISS — Getting started",
+          "title": "FAISS \u2014 Getting started",
           "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started",
           "type": "doc"
         }
@@ -551,9 +617,15 @@
     {
       "id": "hnsw",
       "name": "HNSW",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -563,12 +635,12 @@
         "ivf",
         "recall-latency-tradeoffs"
       ],
-      "description": "Hierarchical Navigable Small World graphs — the dominant ANN index.",
-      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.",
+      "description": "Hierarchical Navigable Small World graphs \u2014 the dominant ANN index.",
+      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers \u2014 turning O(n) scan into O(log n) graph traversal.",
       "commonMistakes": [
         "Tuning efSearch/efConstruction blindly without a recall curve",
         "Ignoring that HNSW is memory-hungry and hard to update/delete",
-        "Expecting exact results — it is approximate by design"
+        "Expecting exact results \u2014 it is approximate by design"
       ],
       "realWorldUsage": "Default index in Qdrant, Weaviate, pgvector, Lucene/Elasticsearch kNN.",
       "projectApplications": [
@@ -592,9 +664,14 @@
     {
       "id": "ivf",
       "name": "IVF (Inverted File)",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -605,7 +682,7 @@
         "product-quantization"
       ],
       "description": "Cluster vectors with k-means, then search only the nearest cells (nprobe).",
-      "mentalModel": "IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned — trading recall for a big speedup.",
+      "mentalModel": "IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned \u2014 trading recall for a big speedup.",
       "commonMistakes": [
         "Setting nprobe=1 and wondering why recall is poor",
         "Too few or too many centroids for the dataset size"
@@ -616,7 +693,7 @@
       ],
       "resources": [
         {
-          "title": "Pinecone — IVF index",
+          "title": "Pinecone \u2014 IVF index",
           "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/",
           "type": "article"
         }
@@ -625,9 +702,11 @@
     {
       "id": "product-quantization",
       "name": "Product Quantization",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "quantization",
+      "tags": [
+        "vector-db",
+        "quantization"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -648,7 +727,7 @@
       ],
       "resources": [
         {
-          "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
+          "title": "Product Quantization for Nearest Neighbor Search (J\u00e9gou et al.)",
           "url": "https://ieeexplore.ieee.org/document/5432202",
           "type": "paper"
         }
@@ -657,9 +736,15 @@
     {
       "id": "metadata-filtering",
       "name": "Metadata Filtering",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "filtering",
+      "tags": [
+        "vector-db",
+        "filtering"
+      ],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -692,12 +777,12 @@
       ],
       "resources": [
         {
-          "title": "Pinecone — Filtering with metadata",
+          "title": "Pinecone \u2014 Filtering with metadata",
           "url": "https://www.pinecone.io/learn/vector-search-filtering/",
           "type": "doc"
         },
         {
-          "title": "Weaviate — Filtered ANN search",
+          "title": "Weaviate \u2014 Filtered ANN search",
           "url": "https://weaviate.io/blog/speed-up-filtered-vector-search",
           "type": "doc"
         }
@@ -706,9 +791,14 @@
     {
       "id": "recall-latency-tradeoffs",
       "name": "Recall / Latency Tradeoffs",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -742,9 +832,15 @@
     {
       "id": "rag",
       "name": "RAG",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -757,7 +853,7 @@
         "context-packing"
       ],
       "description": "Retrieval-Augmented Generation: ground an LLM answer in retrieved context.",
-      "mentalModel": "RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval — a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.",
+      "mentalModel": "RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval \u2014 a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.",
       "commonMistakes": [
         "Blaming the LLM when retrieval failed",
         "No eval set, so retrieval changes are guesswork",
@@ -790,9 +886,13 @@
     {
       "id": "chunking",
       "name": "Chunking",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -803,7 +903,7 @@
         "embeddings"
       ],
       "description": "Splitting documents into retrievable units that preserve meaning.",
-      "mentalModel": "A chunk is the atomic unit of retrieval — too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.",
+      "mentalModel": "A chunk is the atomic unit of retrieval \u2014 too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.",
       "commonMistakes": [
         "Fixed character splits that cut sentences mid-thought",
         "Zero overlap, so boundary-spanning answers are lost",
@@ -822,7 +922,7 @@
       ],
       "resources": [
         {
-          "title": "Pinecone — Chunking strategies",
+          "title": "Pinecone \u2014 Chunking strategies",
           "url": "https://www.pinecone.io/learn/chunking-strategies/",
           "type": "article"
         }
@@ -831,9 +931,11 @@
     {
       "id": "context-packing",
       "name": "Context Packing",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -863,9 +965,11 @@
     {
       "id": "structured-outputs",
       "name": "Structured Outputs",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
+      "tags": [
+        "ai-systems",
+        "llm-apps"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -874,7 +978,7 @@
         "llm-evals"
       ],
       "description": "Forcing LLM output into a validated JSON schema.",
-      "mentalModel": "Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust — or reject.",
+      "mentalModel": "Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust \u2014 or reject.",
       "commonMistakes": [
         "Parsing JSON out of prose with regex instead of schema mode",
         "No validation step, so malformed output crashes downstream",
@@ -893,7 +997,7 @@
       ],
       "resources": [
         {
-          "title": "OpenAI — Structured Outputs",
+          "title": "OpenAI \u2014 Structured Outputs",
           "url": "https://platform.openai.com/docs/guides/structured-outputs",
           "type": "doc"
         }
@@ -902,9 +1006,11 @@
     {
       "id": "tool-calling",
       "name": "Tool Calling",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "agents",
+      "tags": [
+        "ai-systems",
+        "agents"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -915,7 +1021,7 @@
         "rag"
       ],
       "description": "Letting an LLM invoke functions/APIs via structured calls.",
-      "mentalModel": "Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code — it decides what to run.",
+      "mentalModel": "Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code \u2014 it decides what to run.",
       "commonMistakes": [
         "Vague tool descriptions, so the model picks the wrong tool",
         "No error handling for failed tool calls",
@@ -934,7 +1040,7 @@
       ],
       "resources": [
         {
-          "title": "Anthropic — Tool use",
+          "title": "Anthropic \u2014 Tool use",
           "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
           "type": "doc"
         }
@@ -943,9 +1049,13 @@
     {
       "id": "agent-loops",
       "name": "Agent Loops",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "agents",
+      "tags": [
+        "ai-systems",
+        "agents"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -955,8 +1065,8 @@
         "context-packing",
         "llm-evals"
       ],
-      "description": "The plan → act → observe loop, with memory and stopping conditions.",
-      "mentalModel": "An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done. The engineering is in the guardrails — step limits, memory, and human approval — not the prompt.",
+      "description": "The plan \u2192 act \u2192 observe loop, with memory and stopping conditions.",
+      "mentalModel": "An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done. The engineering is in the guardrails \u2014 step limits, memory, and human approval \u2014 not the prompt.",
       "commonMistakes": [
         "No step limit, so the loop runs away",
         "Letting context grow unbounded across iterations",
@@ -981,9 +1091,15 @@
     {
       "id": "model-routing",
       "name": "Model Routing",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
+      "tags": [
+        "ai-systems",
+        "llm-apps"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -994,7 +1110,7 @@
         "prompt-versioning"
       ],
       "description": "Sending each request to the cheapest model that can handle it.",
-      "mentalModel": "Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones — with cost and latency tracked per route.",
+      "mentalModel": "Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones \u2014 with cost and latency tracked per route.",
       "commonMistakes": [
         "Routing without evals, so quality silently drops",
         "No fallback when the cheap model fails"
@@ -1021,9 +1137,11 @@
     {
       "id": "prompt-versioning",
       "name": "Prompt & Version Logging",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
+      "tags": [
+        "ai-systems",
+        "llm-apps"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -1034,19 +1152,23 @@
       "description": "Treating prompts as versioned artifacts with logged inputs/outputs.",
       "resources": [
         {
-          "title": "PostHog — LLM analytics",
+          "title": "PostHog \u2014 LLM analytics",
           "url": "https://posthog.com/docs/ai-engineering",
           "type": "doc"
         }
       ],
-      "mentalModel": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
+      "mentalModel": "Treat prompts like code \u2014 every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
     },
     {
       "id": "llm-evals",
       "name": "LLM Evals",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "evals",
+      "tags": [
+        "ai-systems",
+        "evals"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1089,9 +1211,11 @@
     {
       "id": "ml-math",
       "name": "ML Math Foundations",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -1111,9 +1235,11 @@
     {
       "id": "ml-gradient-descent",
       "name": "Gradient Descent",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -1130,14 +1256,16 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls."
+      "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is \u2014 too big and you overshoot the answer, too small and training crawls."
     },
     {
       "id": "ml-backprop",
       "name": "Backpropagation",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -1159,9 +1287,11 @@
     {
       "id": "ml-softmax-xent",
       "name": "Softmax & Cross-Entropy",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1188,9 +1318,11 @@
     {
       "id": "ml-adamw",
       "name": "AdamW Optimizer",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1212,9 +1344,11 @@
     {
       "id": "ml-tokenization",
       "name": "Tokenization (LLM)",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -1230,14 +1364,16 @@
           "type": "video"
         }
       ],
-      "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
+      "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces \u2014 often subwords \u2014 so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
     },
     {
       "id": "ml-language-modeling",
       "name": "Language Modeling",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -1255,14 +1391,18 @@
           "type": "course"
         }
       ],
-      "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective."
+      "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning \u2014 all of it is built on top of this single objective."
     },
     {
       "id": "ml-sampling",
       "name": "Sampling & Decoding",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1279,14 +1419,16 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
+      "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top \u2014 safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
     },
     {
       "id": "ml-embeddings",
       "name": "Embeddings (Transformer)",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1304,14 +1446,18 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from."
+      "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning \u2014 that geometry is what the model learns from."
     },
     {
       "id": "ml-self-attention",
       "name": "Self-Attention",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -1338,9 +1484,11 @@
     {
       "id": "ml-multi-head",
       "name": "Multi-Head Attention",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -1362,9 +1510,13 @@
     {
       "id": "ml-transformer-block",
       "name": "Transformer Block",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -1375,7 +1527,7 @@
         "ml-training"
       ],
       "description": "Pre-LayerNorm, residuals, MLP, GELU.",
-      "mentalModel": "A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.",
+      "mentalModel": "A transformer block is two sublayers \u2014 multi-head attention then a position-wise MLP \u2014 each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.",
       "commonMistakes": [
         "Dropping residual connections and watching deep models fail to train",
         "Post-LayerNorm placement causing instability in deep stacks",
@@ -1392,9 +1544,11 @@
     {
       "id": "ml-training",
       "name": "Training & Debugging",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -1412,14 +1566,16 @@
           "type": "article"
         }
       ],
-      "mentalModel": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model."
+      "mentalModel": "A training loop is forward pass \u2192 loss \u2192 backward pass \u2192 optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) \u2014 check it before blaming the model."
     },
     {
       "id": "ml-checkpointing",
       "name": "Checkpointing",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1441,9 +1597,11 @@
     {
       "id": "ml-lora",
       "name": "LoRA & PEFT",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -1465,9 +1623,11 @@
     {
       "id": "ml-data-engineering",
       "name": "Style Data Engineering",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -1479,24 +1639,28 @@
       "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
       "resources": [
         {
-          "title": "Eugene Yan — Data Flywheels for LLM Applications",
+          "title": "Eugene Yan \u2014 Data Flywheels for LLM Applications",
           "url": "https://eugeneyan.com/writing/llm-patterns/",
           "type": "doc"
         },
         {
-          "title": "Made With ML — Data engineering",
+          "title": "Made With ML \u2014 Data engineering",
           "url": "https://madewithml.com/courses/mlops/data-stack/",
           "type": "doc"
         }
       ],
-      "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does."
+      "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data \u2014 not from changing the model. Pipelines need versioning and provenance the same way code does."
     },
     {
       "id": "ml-browser-runtime",
       "name": "Browser ML Runtime",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "runtime",
+      "tags": [
+        "ai-systems",
+        "runtime"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -1518,9 +1682,13 @@
     {
       "id": "ml-webgpu",
       "name": "WebGPU Compute",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "runtime",
+      "tags": [
+        "ai-systems",
+        "runtime"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -1536,14 +1704,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself."
+      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders \u2014 not the math itself."
     },
     {
       "id": "ml-evaluation",
       "name": "Model Evaluation",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "evals",
+      "tags": [
+        "ai-systems",
+        "evals"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -1556,24 +1726,28 @@
       "description": "Held-out loss, baselines, hallucination, leakage.",
       "resources": [
         {
-          "title": "Eugene Yan — Evaluation & Hallucination",
+          "title": "Eugene Yan \u2014 Evaluation & Hallucination",
           "url": "https://eugeneyan.com/writing/evals/",
           "type": "doc"
         },
         {
-          "title": "Hamel Husain — Your AI Product Needs Evals",
+          "title": "Hamel Husain \u2014 Your AI Product Needs Evals",
           "url": "https://hamel.dev/blog/posts/evals/",
           "type": "doc"
         }
       ],
-      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough."
+      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both \u2014 neither alone is enough."
     },
     {
       "id": "http-lifecycle",
       "name": "HTTP Lifecycle",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "http",
+      "tags": [
+        "backend",
+        "http"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -1581,7 +1755,7 @@
         "api-design",
         "caching"
       ],
-      "description": "DNS → TCP/TLS → request → response: status codes, headers, keep-alive.",
+      "description": "DNS \u2192 TCP/TLS \u2192 request \u2192 response: status codes, headers, keep-alive.",
       "mentalModel": "An HTTP request is a journey: resolve DNS, open a TCP connection, negotiate TLS, send the request, the server routes and responds, the connection is reused or closed. Latency and failures hide in each hop.",
       "commonMistakes": [
         "Confusing 401 (unauthenticated) with 403 (unauthorized)",
@@ -1594,7 +1768,7 @@
       ],
       "resources": [
         {
-          "title": "MDN — An overview of HTTP",
+          "title": "MDN \u2014 An overview of HTTP",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
           "type": "doc"
         }
@@ -1603,9 +1777,13 @@
     {
       "id": "api-keys",
       "name": "API Keys",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "auth",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -1616,7 +1794,7 @@
         "rate-limiting"
       ],
       "description": "Issuing, hashing, scoping, and rotating keys for machine clients.",
-      "mentalModel": "An API key identifies a machine caller. Store only a hash (like a password), show the secret once, attach scopes, and support rotation — because a leaked key is inevitable.",
+      "mentalModel": "An API key identifies a machine caller. Store only a hash (like a password), show the secret once, attach scopes, and support rotation \u2014 because a leaked key is inevitable.",
       "commonMistakes": [
         "Storing API keys in plaintext",
         "No prefix, so leaked keys are unsearchable in logs",
@@ -1635,12 +1813,12 @@
       ],
       "resources": [
         {
-          "title": "OWASP — API Security Top 10 (Broken Auth)",
+          "title": "OWASP \u2014 API Security Top 10 (Broken Auth)",
           "url": "https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/",
           "type": "doc"
         },
         {
-          "title": "Stripe — API key best practices",
+          "title": "Stripe \u2014 API key best practices",
           "url": "https://docs.stripe.com/keys",
           "type": "doc"
         }
@@ -1649,9 +1827,13 @@
     {
       "id": "rate-limiting",
       "name": "Rate Limiting",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "rate-limiting",
+      "tags": [
+        "backend",
+        "rate-limiting"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1662,7 +1844,7 @@
         "idempotency"
       ],
       "description": "Token bucket, leaky bucket, sliding window.",
-      "mentalModel": "Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 — allowing bursts up to the bucket size.",
+      "mentalModel": "Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 \u2014 allowing bursts up to the bucket size.",
       "commonMistakes": [
         "Fixed-window counters that allow 2x burst at the boundary",
         "Limiting per-server instead of globally in a cluster",
@@ -1693,9 +1875,13 @@
     {
       "id": "idempotency",
       "name": "Idempotency",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "idempotency",
+      "tags": [
+        "backend",
+        "idempotency"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1706,7 +1892,7 @@
         "ecommerce-payments"
       ],
       "description": "Idempotency keys and dedup windows for safe retries of mutations.",
-      "mentalModel": "Networks make retries inevitable, and retrying a POST can charge a card twice. An idempotency key lets the client say 'this is the same operation' — the server stores the first result and replays it for duplicates.",
+      "mentalModel": "Networks make retries inevitable, and retrying a POST can charge a card twice. An idempotency key lets the client say 'this is the same operation' \u2014 the server stores the first result and replays it for duplicates.",
       "commonMistakes": [
         "Assuming GET-only idempotency and leaving POST unsafe",
         "No expiry on stored idempotency keys",
@@ -1724,7 +1910,7 @@
       ],
       "resources": [
         {
-          "title": "Stripe — Designing robust APIs with idempotency",
+          "title": "Stripe \u2014 Designing robust APIs with idempotency",
           "url": "https://stripe.com/blog/idempotency",
           "type": "article"
         }
@@ -1733,9 +1919,14 @@
     {
       "id": "retries-dlq",
       "name": "Retries & DLQ",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "queues",
+      "tags": [
+        "backend",
+        "queues"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1779,9 +1970,11 @@
     {
       "id": "webhooks",
       "name": "Webhooks",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "webhooks",
+      "tags": [
+        "backend",
+        "webhooks"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -1793,7 +1986,7 @@
       "description": "Outbound event delivery: signing, retries, idempotent receivers.",
       "resources": [
         {
-          "title": "Stripe — Webhooks",
+          "title": "Stripe \u2014 Webhooks",
           "url": "https://docs.stripe.com/webhooks",
           "type": "doc"
         }
@@ -1803,9 +1996,11 @@
     {
       "id": "background-jobs",
       "name": "Background Jobs",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "jobs",
+      "tags": [
+        "backend",
+        "jobs"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -1817,12 +2012,12 @@
       "description": "Offloading slow work to workers: scheduling, concurrency, visibility.",
       "resources": [
         {
-          "title": "Sidekiq — The Job lifecycle",
+          "title": "Sidekiq \u2014 The Job lifecycle",
           "url": "https://github.com/sidekiq/sidekiq/wiki/Best-Practices",
           "type": "doc"
         },
         {
-          "title": "Brandur Leach — Transactionally Staged Job Drains",
+          "title": "Brandur Leach \u2014 Transactionally Staged Job Drains",
           "url": "https://brandur.org/job-drain",
           "type": "doc"
         }
@@ -1832,9 +2027,11 @@
     {
       "id": "caching",
       "name": "Caching",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "caching",
+      "tags": [
+        "backend",
+        "caching"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1845,7 +2042,7 @@
         "load-balancing"
       ],
       "description": "Cache-aside, write-through, eviction policies.",
-      "mentalModel": "A cache trades memory and staleness for speed. The hard parts are not the hit — they are invalidation, the stampede when a hot key expires, and deciding how stale is acceptable.",
+      "mentalModel": "A cache trades memory and staleness for speed. The hard parts are not the hit \u2014 they are invalidation, the stampede when a hot key expires, and deciding how stale is acceptable.",
       "commonMistakes": [
         "Cache-aside with no stampede protection on a hot key",
         "No TTL, so stale data lives forever",
@@ -1866,9 +2063,13 @@
     {
       "id": "message-queues",
       "name": "Message Queues",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "queues",
+      "tags": [
+        "backend",
+        "queues"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -1877,7 +2078,7 @@
         "background-jobs"
       ],
       "description": "Kafka, SQS, exactly-once vs at-least-once.",
-      "mentalModel": "A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. 'Exactly once' is mostly a myth — design for at-least-once delivery plus idempotent consumers.",
+      "mentalModel": "A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. 'Exactly once' is mostly a myth \u2014 design for at-least-once delivery plus idempotent consumers.",
       "commonMistakes": [
         "Assuming exactly-once delivery",
         "Non-idempotent consumers on an at-least-once queue",
@@ -1906,9 +2107,14 @@
     {
       "id": "monitoring-analytics",
       "name": "Observability",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "observability",
+      "tags": [
+        "backend",
+        "observability"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "runtime"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -1944,9 +2150,13 @@
     {
       "id": "api-design",
       "name": "API Design",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "api-design",
+      "tags": [
+        "backend",
+        "api-design"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
@@ -1982,9 +2192,13 @@
     {
       "id": "auth-systems",
       "name": "Auth Systems",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "auth",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -2020,9 +2234,11 @@
     {
       "id": "ecommerce-payments",
       "name": "Payments",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "payments",
+      "tags": [
+        "backend",
+        "payments"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -2045,9 +2261,15 @@
     {
       "id": "b-tree",
       "name": "B-Tree",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -2063,7 +2285,7 @@
         "Ignoring page splits and write amplification",
         "Forgetting that B-trees keep keys sorted, enabling range scans"
       ],
-      "realWorldUsage": "PostgreSQL, MySQL/InnoDB, SQLite — the default index.",
+      "realWorldUsage": "PostgreSQL, MySQL/InnoDB, SQLite \u2014 the default index.",
       "projectApplications": [
         "tiny-search-engine"
       ],
@@ -2073,7 +2295,7 @@
       ],
       "resources": [
         {
-          "title": "CMU 15-445 — Tree indexes",
+          "title": "CMU 15-445 \u2014 Tree indexes",
           "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf",
           "type": "doc"
         }
@@ -2082,9 +2304,16 @@
     {
       "id": "lsm-tree",
       "name": "LSM Tree",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -2117,7 +2346,7 @@
       ],
       "resources": [
         {
-          "title": "RocksDB Wiki — LSM overview",
+          "title": "RocksDB Wiki \u2014 LSM overview",
           "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview",
           "type": "doc"
         }
@@ -2126,9 +2355,16 @@
     {
       "id": "wal",
       "name": "Write-Ahead Log",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "write-path",
+      "tags": [
+        "databases",
+        "write-path"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -2159,7 +2395,7 @@
       ],
       "resources": [
         {
-          "title": "PostgreSQL — Write-Ahead Logging",
+          "title": "PostgreSQL \u2014 Write-Ahead Logging",
           "url": "https://www.postgresql.org/docs/current/wal-intro.html",
           "type": "doc"
         }
@@ -2168,9 +2404,14 @@
     {
       "id": "compaction",
       "name": "Compaction",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "write-path",
+      "tags": [
+        "databases",
+        "write-path"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -2180,7 +2421,7 @@
         "wal"
       ],
       "description": "Merging sorted runs to reclaim space and bound read amplification.",
-      "mentalModel": "An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers. Compaction merges files, drops tombstones, and bounds read amplification — at the cost of write amplification and IO spikes.",
+      "mentalModel": "An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers. Compaction merges files, drops tombstones, and bounds read amplification \u2014 at the cost of write amplification and IO spikes.",
       "commonMistakes": [
         "Ignoring the write-amplification cost of compaction",
         "Not understanding leveled vs size-tiered strategies",
@@ -2201,9 +2442,15 @@
     {
       "id": "object-storage",
       "name": "Object Storage",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "object-storage",
+      "tags": [
+        "databases",
+        "object-storage"
+      ],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -2212,7 +2459,7 @@
         "lsm-tree"
       ],
       "description": "S3-style blob storage: cheap, durable, high-latency, immutable objects.",
-      "mentalModel": "Object storage (S3/R2) is infinite, cheap, durable bytes — but with ~tens-of-ms latency and no in-place edits. Modern systems like Turbopuffer put cold data here and keep a hot cache in front. Storage and compute separate.",
+      "mentalModel": "Object storage (S3/R2) is infinite, cheap, durable bytes \u2014 but with ~tens-of-ms latency and no in-place edits. Modern systems like Turbopuffer put cold data here and keep a hot cache in front. Storage and compute separate.",
       "commonMistakes": [
         "Treating object storage like a low-latency disk",
         "Many tiny objects instead of batched segment files",
@@ -2231,7 +2478,7 @@
       ],
       "resources": [
         {
-          "title": "Turbopuffer — Architecture",
+          "title": "Turbopuffer \u2014 Architecture",
           "url": "https://turbopuffer.com/architecture",
           "type": "article"
         }
@@ -2240,9 +2487,15 @@
     {
       "id": "columnar-storage",
       "name": "Columnar Storage",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -2254,7 +2507,7 @@
       "description": "Column-oriented layout for analytics: compression and vectorized scans.",
       "resources": [
         {
-          "title": "Apache Parquet — File format",
+          "title": "Apache Parquet \u2014 File format",
           "url": "https://parquet.apache.org/docs/file-format/",
           "type": "doc"
         }
@@ -2264,9 +2517,13 @@
     {
       "id": "secondary-index",
       "name": "Secondary Indexes",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "indexing",
+      "tags": [
+        "databases",
+        "indexing"
+      ],
+      "roadmaps": [
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -2283,14 +2540,18 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff — only add the ones queries actually need."
+      "mentalModel": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff \u2014 only add the ones queries actually need."
     },
     {
       "id": "storage-retrieval",
       "name": "Storage Engines",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "storage-engines",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "roadmaps": [
+        "db-disk-first"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [],
@@ -2299,7 +2560,7 @@
         "lsm-tree"
       ],
       "description": "B-tree vs LSM, indexing, WAL.",
-      "mentalModel": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else — WAL, indexes, caching — serves durability and lookup speed.",
+      "mentalModel": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else \u2014 WAL, indexes, caching \u2014 serves durability and lookup speed.",
       "commonMistakes": [
         "Picking an engine without knowing the read/write ratio of the workload",
         "Ignoring write amplification and its effect on SSD lifetime",
@@ -2316,9 +2577,14 @@
     {
       "id": "sharding",
       "name": "Sharding",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "partitioning",
+      "tags": [
+        "databases",
+        "partitioning"
+      ],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -2345,9 +2611,14 @@
     {
       "id": "replication",
       "name": "Replication",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "replication",
+      "tags": [
+        "databases",
+        "replication"
+      ],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [],
@@ -2356,7 +2627,7 @@
         "consensus"
       ],
       "description": "Leader-follower, multi-leader, quorum.",
-      "mentalModel": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag — followers are always slightly behind.",
+      "mentalModel": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag \u2014 followers are always slightly behind.",
       "commonMistakes": [
         "Reading from a follower and seeing stale data (\"read your own writes\" violation)",
         "Assuming failover is instant and lossless",
@@ -2373,9 +2644,14 @@
     {
       "id": "cap-theorem",
       "name": "CAP & Consistency Models",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "consistency",
+      "tags": [
+        "databases",
+        "consistency"
+      ],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -2385,10 +2661,10 @@
         "consensus"
       ],
       "description": "Strong/eventual/causal, PACELC.",
-      "mentalModel": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency.",
+      "mentalModel": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff \u2014 Else, Latency vs Consistency.",
       "commonMistakes": [
-        "Thinking you \"pick 2 of 3\" at all times — the choice only applies during a partition",
-        "Calling a system \"CA\" — partitions are not optional in a distributed system",
+        "Thinking you \"pick 2 of 3\" at all times \u2014 the choice only applies during a partition",
+        "Calling a system \"CA\" \u2014 partitions are not optional in a distributed system",
         "Ignoring the latency-vs-consistency tradeoff that exists even with no partition"
       ],
       "resources": [
@@ -2402,9 +2678,11 @@
     {
       "id": "object-modeling",
       "name": "Object Modeling",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -2414,7 +2692,7 @@
       "description": "Identifying classes, attributes, relationships.",
       "resources": [
         {
-          "title": "Refactoring Guru — Design Patterns",
+          "title": "Refactoring Guru \u2014 Design Patterns",
           "url": "https://refactoring.guru/design-patterns",
           "type": "doc"
         }
@@ -2424,9 +2702,14 @@
     {
       "id": "state-management",
       "name": "State Machines",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -2436,19 +2719,24 @@
       "description": "States, transitions, guards.",
       "resources": [
         {
-          "title": "Refactoring Guru — State",
+          "title": "Refactoring Guru \u2014 State",
           "url": "https://refactoring.guru/design-patterns/state",
           "type": "doc"
         }
       ],
-      "mentalModel": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
+      "mentalModel": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design \u2014 if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
     },
     {
       "id": "strategy-pattern",
       "name": "Strategy Pattern",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2458,19 +2746,21 @@
       "description": "Interchangeable algorithms.",
       "resources": [
         {
-          "title": "Refactoring Guru — Strategy",
+          "title": "Refactoring Guru \u2014 Strategy",
           "url": "https://refactoring.guru/design-patterns/strategy",
           "type": "doc"
         }
       ],
-      "mentalModel": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" — pricing rules, sort orders, routing strategies."
+      "mentalModel": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" \u2014 pricing rules, sort orders, routing strategies."
     },
     {
       "id": "observer-pattern",
       "name": "Observer Pattern",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2480,7 +2770,7 @@
       "description": "Pub/sub, event propagation.",
       "resources": [
         {
-          "title": "Refactoring Guru — Observer",
+          "title": "Refactoring Guru \u2014 Observer",
           "url": "https://refactoring.guru/design-patterns/observer",
           "type": "doc"
         }
@@ -2490,9 +2780,11 @@
     {
       "id": "factory-creational",
       "name": "Factory & Creational",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2502,7 +2794,7 @@
       "description": "Abstract factory, builder, singleton.",
       "resources": [
         {
-          "title": "Refactoring Guru — Factory Method",
+          "title": "Refactoring Guru \u2014 Factory Method",
           "url": "https://refactoring.guru/design-patterns/factory-method",
           "type": "doc"
         }
@@ -2512,9 +2804,11 @@
     {
       "id": "decorator-structural",
       "name": "Decorator & Structural",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2524,19 +2818,24 @@
       "description": "Decorator, adapter, composite.",
       "resources": [
         {
-          "title": "Refactoring Guru — Decorator",
+          "title": "Refactoring Guru \u2014 Decorator",
           "url": "https://refactoring.guru/design-patterns/decorator",
           "type": "doc"
         }
       ],
-      "mentalModel": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode — instead of one class per combination, you stack small decorators."
+      "mentalModel": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode \u2014 instead of one class per combination, you stack small decorators."
     },
     {
       "id": "concurrency-design",
       "name": "Concurrency Design",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -2558,9 +2857,11 @@
     {
       "id": "command-chain",
       "name": "Command & Chain",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2570,7 +2871,7 @@
       "description": "Command, undo, chain of responsibility.",
       "resources": [
         {
-          "title": "Refactoring Guru — Command",
+          "title": "Refactoring Guru \u2014 Command",
           "url": "https://refactoring.guru/design-patterns/command",
           "type": "doc"
         }
@@ -2580,9 +2881,11 @@
     {
       "id": "booking-inventory",
       "name": "Booking & Inventory",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -2598,14 +2901,18 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
+      "mentalModel": "Booking systems are about \"holds\" \u2014 a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
     },
     {
       "id": "game-design",
       "name": "Game/Simulation Design",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2616,12 +2923,12 @@
       "description": "Turn engines, board state, rules.",
       "resources": [
         {
-          "title": "Hugo Lin — Designing a tic-tac-toe / chess engine",
+          "title": "Hugo Lin \u2014 Designing a tic-tac-toe / chess engine",
           "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/",
           "type": "doc"
         },
         {
-          "title": "Refactoring.Guru — State pattern in games",
+          "title": "Refactoring.Guru \u2014 State pattern in games",
           "url": "https://refactoring.guru/design-patterns/state",
           "type": "doc"
         }
@@ -2631,9 +2938,14 @@
     {
       "id": "load-balancing",
       "name": "Load Balancing",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "scalability",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "roadmaps": [
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [],
@@ -2658,9 +2970,11 @@
     {
       "id": "consistent-hashing",
       "name": "Consistent Hashing",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "scalability",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -2677,14 +2991,19 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly."
+      "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" \u2014 multiple ring positions per server \u2014 to spread load evenly."
     },
     {
       "id": "consensus",
       "name": "Consensus",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "distributed-systems",
+      "tags": [
+        "system-design",
+        "distributed-systems"
+      ],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -2697,7 +3016,7 @@
       "mentalModel": "Consensus is how a cluster agrees on one value despite crashes and network delays. Raft makes it understandable: elect a leader, replicate an append-only log, and a write commits once a majority (quorum) has it. A majority guarantees any two quorums overlap.",
       "commonMistakes": [
         "Assuming consensus survives a network partition without a majority",
-        "Confusing leader election with data replication — Raft does both",
+        "Confusing leader election with data replication \u2014 Raft does both",
         "Thinking more replicas always means more durability (it costs latency)"
       ],
       "resources": [
@@ -2711,9 +3030,15 @@
     {
       "id": "distributed-infra",
       "name": "Distributed Infra",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "distributed-systems",
+      "tags": [
+        "system-design",
+        "distributed-systems"
+      ],
+      "roadmaps": [
+        "db-disk-first",
+        "runtime",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -2728,14 +3053,18 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second."
+      "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first \u2014 timeouts, idempotency, bounded queues \u2014 and worry about speed second."
     },
     {
       "id": "messaging-realtime",
       "name": "Real-time Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "event-driven",
+      "tags": [
+        "system-design",
+        "event-driven"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -2755,9 +3084,11 @@
     {
       "id": "social-media",
       "name": "Feed Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2773,14 +3104,16 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
+      "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid \u2014 fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
     },
     {
       "id": "streaming-media",
       "name": "Streaming Media",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2800,9 +3133,11 @@
     {
       "id": "location-transport",
       "name": "Geo Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2817,14 +3152,16 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters."
+      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA \u2014 match on the metric that actually matters."
     },
     {
       "id": "collaboration-productivity",
       "name": "Collaboration Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -2844,9 +3181,13 @@
     {
       "id": "search-platform-design",
       "name": "Search Platform Design",
-      "category": "system-design",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -2884,9 +3225,13 @@
     {
       "id": "rag-system-design",
       "name": "RAG System Design",
-      "category": "system-design",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "roadmaps": [
+        "ai-infra-12-month"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -2898,7 +3243,7 @@
         "llm-evals"
       ],
       "description": "Architecting a production RAG system: ingestion, retrieval, generation, evals.",
-      "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate), bound by an eval harness that gates every change.",
+      "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk \u2192 embed \u2192 index) and an online query pipeline (retrieve \u2192 rerank \u2192 pack \u2192 generate), bound by an eval harness that gates every change.",
       "commonMistakes": [
         "No offline/online separation",
         "No eval gate, so quality regresses silently",
@@ -2925,9 +3270,11 @@
     {
       "id": "array-hashing",
       "name": "Arrays & Hashing",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "arrays-hashing",
+      "tags": [
+        "dsa",
+        "arrays-hashing"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -2939,7 +3286,7 @@
       "commonMistakes": [
         "Reaching for nested loops before asking \"what would a hash map key on?\"",
         "Mutating a collection while iterating it",
-        "Forgetting hash maps have no order — sort separately if order matters"
+        "Forgetting hash maps have no order \u2014 sort separately if order matters"
       ],
       "resources": [
         {
@@ -2952,9 +3299,11 @@
     {
       "id": "two-pointers",
       "name": "Two Pointers",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "two-pointers",
+      "tags": [
+        "dsa",
+        "two-pointers"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -2964,7 +3313,7 @@
         "sliding-window"
       ],
       "description": "Converging/diverging pointer scans.",
-      "mentalModel": "Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once.",
+      "mentalModel": "Two pointers replace a nested loop with a single pass by exploiting structure \u2014 usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once.",
       "commonMistakes": [
         "Using two pointers on unsorted data when the technique needs order",
         "Off-by-one errors at the start/end conditions",
@@ -2981,9 +3330,11 @@
     {
       "id": "sliding-window",
       "name": "Sliding Window",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "sliding-window",
+      "tags": [
+        "dsa",
+        "sliding-window"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -2991,7 +3342,7 @@
       ],
       "related": [],
       "description": "Variable/fixed window over sequences.",
-      "mentalModel": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once — O(n).",
+      "mentalModel": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once \u2014 O(n).",
       "commonMistakes": [
         "Recomputing the aggregate from scratch instead of updating incrementally",
         "Shrinking with an `if` when a `while` is needed to restore the invariant",
@@ -3008,9 +3359,11 @@
     {
       "id": "stack",
       "name": "Stack",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "stack-queue",
+      "tags": [
+        "dsa",
+        "stack-queue"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [
@@ -3025,14 +3378,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets."
+      "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" \u2014 parsing, recursion, undo, matching brackets."
     },
     {
       "id": "binary-search",
       "name": "Binary Search",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "binary-search",
+      "tags": [
+        "dsa",
+        "binary-search"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3040,11 +3395,11 @@
       ],
       "related": [],
       "description": "Halving sorted search space, predicate search.",
-      "mentalModel": "Binary search is not about sorted arrays — it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step.",
+      "mentalModel": "Binary search is not about sorted arrays \u2014 it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step.",
       "commonMistakes": [
         "Infinite loops from a wrong mid update or loop condition",
         "Searching values when you should search the answer space",
-        "Integer overflow in `(lo + hi) / 2` — use `lo + (hi - lo) / 2`"
+        "Integer overflow in `(lo + hi) / 2` \u2014 use `lo + (hi - lo) / 2`"
       ],
       "resources": [
         {
@@ -3057,9 +3412,11 @@
     {
       "id": "linked-list",
       "name": "Linked List",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "linked-list",
+      "tags": [
+        "dsa",
+        "linked-list"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -3069,7 +3426,7 @@
       "description": "Pointer manipulation, fast/slow, reversal.",
       "resources": [
         {
-          "title": "VisuAlgo — Linked List",
+          "title": "VisuAlgo \u2014 Linked List",
           "url": "https://visualgo.net/en/list",
           "type": "doc"
         }
@@ -3079,9 +3436,11 @@
     {
       "id": "trees",
       "name": "Trees",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "trees",
+      "tags": [
+        "dsa",
+        "trees"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3095,11 +3454,11 @@
       "commonMistakes": [
         "Forgetting the null/empty base case",
         "Using DFS when the problem is about levels or shortest depth (use BFS)",
-        "Returning the wrong thing from recursion — separate \"answer\" from \"info passed up\""
+        "Returning the wrong thing from recursion \u2014 separate \"answer\" from \"info passed up\""
       ],
       "resources": [
         {
-          "title": "VisuAlgo — Binary Search Tree",
+          "title": "VisuAlgo \u2014 Binary Search Tree",
           "url": "https://visualgo.net/en/bst",
           "type": "doc"
         }
@@ -3108,9 +3467,11 @@
     {
       "id": "tries",
       "name": "Trie",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "trees",
+      "tags": [
+        "dsa",
+        "trees"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3130,9 +3491,11 @@
     {
       "id": "heap",
       "name": "Heap / Priority Queue",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "heap",
+      "tags": [
+        "dsa",
+        "heap"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3140,7 +3503,7 @@
       ],
       "related": [],
       "description": "Top-k, k-way merge, scheduling.",
-      "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything.",
+      "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer \u2014 far cheaper than sorting everything.",
       "commonMistakes": [
         "Sorting the whole input when a size-k heap suffices",
         "Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)",
@@ -3148,7 +3511,7 @@
       ],
       "resources": [
         {
-          "title": "VisuAlgo — Binary Heap",
+          "title": "VisuAlgo \u2014 Binary Heap",
           "url": "https://visualgo.net/en/heap",
           "type": "doc"
         }
@@ -3157,9 +3520,11 @@
     {
       "id": "backtracking",
       "name": "Backtracking",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "backtracking",
+      "tags": [
+        "dsa",
+        "backtracking"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3179,9 +3544,11 @@
     {
       "id": "graphs",
       "name": "Graphs",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -3193,13 +3560,13 @@
       "description": "BFS/DFS, topo sort, union-find.",
       "mentalModel": "Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find). The skill is recognizing the template and modeling the input as nodes and edges.",
       "commonMistakes": [
-        "No visited set — revisiting nodes and looping forever",
+        "No visited set \u2014 revisiting nodes and looping forever",
         "Using DFS for shortest path on an unweighted graph instead of BFS",
         "Not handling disconnected components"
       ],
       "resources": [
         {
-          "title": "VisuAlgo — Graph Traversal",
+          "title": "VisuAlgo \u2014 Graph Traversal",
           "url": "https://visualgo.net/en/dfsbfs",
           "type": "doc"
         }
@@ -3208,9 +3575,11 @@
     {
       "id": "shortest-path",
       "name": "Shortest Path",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3221,7 +3590,7 @@
       "description": "Dijkstra, Bellman-Ford, A*.",
       "resources": [
         {
-          "title": "VisuAlgo — Single-Source Shortest Paths",
+          "title": "VisuAlgo \u2014 Single-Source Shortest Paths",
           "url": "https://visualgo.net/en/sssp",
           "type": "doc"
         }
@@ -3231,9 +3600,11 @@
     {
       "id": "union-find",
       "name": "Union-Find",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3243,7 +3614,7 @@
       "description": "Disjoint set, path compression.",
       "resources": [
         {
-          "title": "VisuAlgo — Union-Find Disjoint Sets",
+          "title": "VisuAlgo \u2014 Union-Find Disjoint Sets",
           "url": "https://visualgo.net/en/ufds",
           "type": "doc"
         }
@@ -3253,9 +3624,11 @@
     {
       "id": "dp-1d",
       "name": "1D DP",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "dynamic-programming",
+      "tags": [
+        "dsa",
+        "dynamic-programming"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -3282,9 +3655,11 @@
     {
       "id": "dp-2d",
       "name": "2D DP",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "dynamic-programming",
+      "tags": [
+        "dsa",
+        "dynamic-programming"
+      ],
+      "roadmaps": [],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3299,14 +3674,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely — once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
+      "mentalModel": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely \u2014 once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
     },
     {
       "id": "greedy",
       "name": "Greedy",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "greedy",
+      "tags": [
+        "dsa",
+        "greedy"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3328,9 +3705,11 @@
     {
       "id": "intervals",
       "name": "Intervals",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "intervals",
+      "tags": [
+        "dsa",
+        "intervals"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3345,14 +3724,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Interval problems almost always start by sorting — usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
+      "mentalModel": "Interval problems almost always start by sorting \u2014 usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
     },
     {
       "id": "math-geometry",
       "name": "Math & Geometry",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "math",
+      "tags": [
+        "dsa",
+        "math"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3365,14 +3746,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem — the formula is a quick lookup away."
+      "mentalModel": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem \u2014 the formula is a quick lookup away."
     },
     {
       "id": "bit-manipulation",
       "name": "Bit Manipulation",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "bit-manipulation",
+      "tags": [
+        "dsa",
+        "bit-manipulation"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3390,9 +3773,11 @@
     {
       "id": "leadership-and-influence",
       "name": "Leadership",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3410,14 +3795,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks — not the meeting where they nodded along."
+      "mentalModel": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks \u2014 not the meeting where they nodded along."
     },
     {
       "id": "conflict-resolution",
       "name": "Conflict Resolution",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3435,14 +3822,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Conflict means information surfaced — two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
+      "mentalModel": "Conflict means information surfaced \u2014 two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
     },
     {
       "id": "problem-solving-and-decision-making",
       "name": "Decision Making",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3465,9 +3854,11 @@
     {
       "id": "teamwork-and-collaboration",
       "name": "Collaboration",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3485,14 +3876,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations — fix those before worrying about chemistry."
+      "mentalModel": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations \u2014 fix those before worrying about chemistry."
     },
     {
       "id": "failure-and-learning",
       "name": "Failure & Learning",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3510,9 +3903,11 @@
     {
       "id": "communication",
       "name": "Communication",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3535,9 +3930,11 @@
     {
       "id": "time-management-and-prioritization",
       "name": "Prioritization",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3555,14 +3952,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized — you have just written a wish list."
+      "mentalModel": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized \u2014 you have just written a wish list."
     },
     {
       "id": "innovation-and-creativity",
       "name": "Innovation",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3580,14 +3979,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake — it is finding the assumption you can credibly weaken."
+      "mentalModel": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake \u2014 it is finding the assumption you can credibly weaken."
     },
     {
       "id": "customer-obsession",
       "name": "Customer Obsession",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3600,14 +4001,16 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes."
+      "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof \u2014 go check whether it generalizes."
     },
     {
       "id": "ownership-and-accountability",
       "name": "Ownership",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "roadmaps": [],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3625,9 +4028,11 @@
     {
       "id": "positioning",
       "name": "Positioning",
-      "category": "product",
-      "track": "product",
-      "subtrack": "positioning",
+      "tags": [
+        "product",
+        "positioning"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -3637,19 +4042,21 @@
       "description": "Naming the problem, the audience, and the alternative you beat.",
       "resources": [
         {
-          "title": "April Dunford — Positioning",
+          "title": "April Dunford \u2014 Positioning",
           "url": "https://www.aprildunford.com/post/the-perils-of-positioning",
           "type": "article"
         }
       ],
-      "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning."
+      "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description \u2014 not positioning."
     },
     {
       "id": "landing-pages",
       "name": "Landing Pages",
-      "category": "product",
-      "track": "product",
-      "subtrack": "positioning",
+      "tags": [
+        "product",
+        "positioning"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3662,12 +4069,12 @@
       "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
       "resources": [
         {
-          "title": "Julian Shapiro — Marketing & landing pages",
+          "title": "Julian Shapiro \u2014 Marketing & landing pages",
           "url": "https://www.julian.com/guide/marketing/landing-pages",
           "type": "doc"
         },
         {
-          "title": "Marketing Examples — Landing page teardowns",
+          "title": "Marketing Examples \u2014 Landing page teardowns",
           "url": "https://marketingexamples.com/landing-page",
           "type": "doc"
         }
@@ -3677,9 +4084,11 @@
     {
       "id": "seo",
       "name": "SEO",
-      "category": "product",
-      "track": "product",
-      "subtrack": "growth",
+      "tags": [
+        "product",
+        "growth"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -3698,24 +4107,26 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links."
+      "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient \u2014 the real fight is content depth and inbound links."
     },
     {
       "id": "product-analytics",
       "name": "Product Analytics",
-      "category": "product",
-      "track": "product",
-      "subtrack": "analytics",
+      "tags": [
+        "product",
+        "analytics"
+      ],
+      "roadmaps": [],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
       "related": [
         "landing-pages"
       ],
-      "description": "Activation, retention, funnels — measuring whether the product works.",
+      "description": "Activation, retention, funnels \u2014 measuring whether the product works.",
       "resources": [
         {
-          "title": "PostHog — Product analytics docs",
+          "title": "PostHog \u2014 Product analytics docs",
           "url": "https://posthog.com/docs/product-analytics",
           "type": "doc"
         }

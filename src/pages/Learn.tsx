@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { Card, color, PageShell, ProgressBar } from '../components/ui';
 import {
   type Concept,
+  primaryGroup,
   type Roadmap,
   roadmapConceptIds,
   ROADMAPS,
-  TRACK_BY_ID,
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { rollupMastery } from '../lib/conceptState';
@@ -74,7 +74,7 @@ function UpNextCard({
   drillTitle?: string;
   drillId?: string;
 }) {
-  const trk = TRACK_BY_ID[concept.track];
+  const trk = primaryGroup(concept);
   return (
     <Card className="p-6 sm:p-8">
       <div className="mb-3 flex items-center gap-2 text-xs font-medium text-slate-400">

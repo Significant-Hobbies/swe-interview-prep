@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
-import type { ArtifactStatus, DrillStatus, ProjectStatus, TrackId } from '../data/learning-os';
+import type { ArtifactStatus, DrillStatus, ProjectStatus } from '../data/learning-os';
 import { DEFAULT_USER_ELO, updatePlayerElo } from '../lib/elo';
 import {
   loadLocal,
@@ -277,39 +277,56 @@ export function useFocusMode() {
 }
 
 // ---------------------------------------------------------------------------
-// Per-track user ELO — adaptive difficulty calibration.
+// Per-roadmap user ELO — adaptive difficulty calibration.
 // Problem ratings come from `difficultyToElo` (static); only the player's
-// ELO moves. K-factor is elevated during the first ~10 solves per track for
-// faster convergence. localStorage-only for v1.
+// ELO moves. K-factor is elevated during the first ~10 solves per roadmap
+// for faster convergence. localStorage-only for v1.
+//
+// Pre-tags-migration the keys here were track IDs. Old state is detected
+// and reset on first read — ELO recovers in 5-10 drill solves anyway.
 // ---------------------------------------------------------------------------
 
 interface UserEloState {
-  // Per-track ELO. Missing tracks default to DEFAULT_USER_ELO.
-  elo: Partial<Record<TrackId, number>>;
-  // Per-track solve counter used to scale K-factor (provisional vs stable).
-  solves: Partial<Record<TrackId, number>>;
+  // Per-roadmap ELO. Missing roadmaps default to DEFAULT_USER_ELO.
+  elo: Record<string, number>;
+  // Per-roadmap solve counter used to scale K-factor (provisional vs stable).
+  solves: Record<string, number>;
+  // Schema version — bumped to invalidate per-track state.
+  v?: 2;
 }
 
-const EMPTY_USER_ELO: UserEloState = { elo: {}, solves: {} };
+const EMPTY_USER_ELO: UserEloState = { elo: {}, solves: {}, v: 2 };
+
+function loadElo(): UserEloState {
+  const raw = loadLocal<UserEloState>(STORE_KEYS.userElo, EMPTY_USER_ELO);
+  if (raw.v === 2) return raw;
+  // Legacy state — keys were track IDs. Drop it; ELO is soft and will reconverge.
+  const fresh = { ...EMPTY_USER_ELO };
+  saveLocal(STORE_KEYS.userElo, fresh);
+  return fresh;
+}
 
 export function useUserElo() {
-  const [state, setState] = useState<UserEloState>(() =>
-    loadLocal<UserEloState>(STORE_KEYS.userElo, EMPTY_USER_ELO),
-  );
+  const [state, setState] = useState<UserEloState>(loadElo);
 
   const getElo = useCallback(
-    (trackId: TrackId): number => state.elo[trackId] ?? DEFAULT_USER_ELO,
+    (roadmapId: string): number => state.elo[roadmapId] ?? DEFAULT_USER_ELO,
     [state.elo],
   );
 
-  const recordResult = useCallback((trackId: TrackId, problemElo: number, score: number) => {
+  /** Record a drill result against every roadmap the concept belongs to. */
+  const recordResult = useCallback((roadmapIds: string[], problemElo: number, score: number) => {
+    if (!roadmapIds.length) return;
     setState(prev => {
-      const current = prev.elo[trackId] ?? DEFAULT_USER_ELO;
-      const solveCount = prev.solves[trackId] ?? 0;
-      const next: UserEloState = {
-        elo: { ...prev.elo, [trackId]: updatePlayerElo(current, problemElo, score, solveCount) },
-        solves: { ...prev.solves, [trackId]: solveCount + 1 },
-      };
+      const elo = { ...prev.elo };
+      const solves = { ...prev.solves };
+      for (const rid of roadmapIds) {
+        const current = elo[rid] ?? DEFAULT_USER_ELO;
+        const solveCount = solves[rid] ?? 0;
+        elo[rid] = updatePlayerElo(current, problemElo, score, solveCount);
+        solves[rid] = solveCount + 1;
+      }
+      const next: UserEloState = { elo, solves, v: 2 };
       saveLocal(STORE_KEYS.userElo, next);
       return next;
     });

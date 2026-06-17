@@ -6,10 +6,12 @@ import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, Progress
 import {
   ARTIFACTS,
   CONCEPT_BY_ID,
-  conceptsByTrack,
+  conceptsByTag,
+  conceptsInRoadmap,
   DRILLS,
   PROJECT_BY_ID,
   ROADMAP_BY_ID,
+  ROADMAPS,
   sortedTracks,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, useConceptMastery } from '../hooks/useConcepts';
@@ -83,13 +85,12 @@ function Overview() {
       </div>
 
       <section className="mb-10">
-        <SectionTitle>Mastery by track</SectionTitle>
+        <SectionTitle>Mastery by group</SectionTitle>
         <div className="rounded-xl border border-slate-800 bg-slate-900/40 divide-y divide-slate-800/80">
           {sortedTracks().map(t => {
-            const ids = conceptsByTrack(t.id).map(c => c.id);
+            const ids = conceptsByTag(t.id).map(c => c.id);
             const roll = rollupMastery(ids, mastery);
             const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
-            const elo = getElo(t.id);
             return (
               <div key={t.id} className="flex items-center gap-4 px-4 py-3">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${color(t.color).solid}`} />
@@ -100,7 +101,29 @@ function Overview() {
                 <span className="w-16 shrink-0 text-right text-xs tabular-nums text-slate-400">
                   {roll.mastered}/{ids.length}
                 </span>
-                <span className="w-16 shrink-0 text-right font-mono text-xs text-slate-500" title="Adaptive ELO for this track">
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <SectionTitle>ELO by roadmap</SectionTitle>
+        <div className="rounded-xl border border-slate-800 bg-slate-900/40 divide-y divide-slate-800/80">
+          {ROADMAPS.map(r => {
+            const ids = conceptsInRoadmap(r.id).map(c => c.id);
+            if (!ids.length) return null;
+            const roll = rollupMastery(ids, mastery);
+            const elo = getElo(r.id);
+            return (
+              <div key={r.id} className="flex items-center gap-4 px-4 py-3">
+                <span className="min-w-[14rem] text-sm font-medium text-slate-200">{r.title}</span>
+                <span className="text-xs text-slate-500">{r.horizon}</span>
+                <span className="flex-1" />
+                <span className="w-16 shrink-0 text-right text-xs tabular-nums text-slate-400">
+                  {roll.mastered}/{ids.length}
+                </span>
+                <span className="w-16 shrink-0 text-right font-mono text-xs text-slate-500" title="Adaptive ELO for drills solved within this roadmap">
                   {elo}
                 </span>
               </div>

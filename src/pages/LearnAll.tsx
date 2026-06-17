@@ -14,14 +14,14 @@ import {
 import {
   type Concept,
   CONCEPT_BY_ID,
-  conceptsByTrack,
+  conceptsByTag,
   drillsForConcept,
+  groupForTag,
+  primaryGroup,
   type Roadmap,
   roadmapConceptIds,
   ROADMAPS,
   sortedTracks,
-  TRACK_BY_ID,
-  type TrackId,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { confidencePct, deriveConceptStatus, rollupMastery } from '../lib/conceptState';
@@ -237,7 +237,7 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
           {weak.map(c => {
             const m = mastery[c.id];
             const drill = pickDrillForConcept(c.id);
-            const trk = TRACK_BY_ID[c.track];
+            const trk = primaryGroup(c);
             const pct = confidencePct(m);
             return (
               <div
@@ -297,7 +297,7 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
 function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
   const tracks = sortedTracks();
   const segments: DonutSegment[] = tracks.map(t => {
-    const ids = conceptsByTrack(t.id).map(c => c.id);
+    const ids = conceptsByTag(t.id).map(c => c.id);
     const roll = rollupMastery(ids, mastery);
     return {
       id: t.id,
@@ -371,9 +371,10 @@ function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Recor
 
 // --- Track lane ------------------------------------------------------------
 
-function TrackLane({ trackId, mastery }: { trackId: TrackId; mastery: Record<string, MasteryEntry> }) {
-  const track = TRACK_BY_ID[trackId];
-  const concepts = [...conceptsByTrack(trackId)].sort((a, b) => b.priority - a.priority);
+function TrackLane({ trackId, mastery }: { trackId: string; mastery: Record<string, MasteryEntry> }) {
+  const track = groupForTag(trackId);
+  if (!track) return null;
+  const concepts = [...conceptsByTag(trackId)].sort((a, b) => b.priority - a.priority);
   const roll = rollupMastery(concepts.map(c => c.id), mastery);
   const nodes = concepts.map(c => ({
     id: c.id,
@@ -419,19 +420,19 @@ function TrackLane({ trackId, mastery }: { trackId: TrackId; mastery: Record<str
 function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [track, setTrack] = useState<TrackId | 'all'>('all');
+  const [group, setGroup] = useState<string | 'all'>('all');
   const [status, setStatus] = useState<StatusFilter>('all');
 
   const tracks = sortedTracks();
   const q = query.trim().toLowerCase();
 
   const filtered = ALL_CONCEPTS.filter(c => {
-    if (track !== 'all' && c.track !== track) return false;
+    if (group !== 'all' && !c.tags.includes(group)) return false;
     const st = deriveConceptStatus(mastery[c.id]);
     if (status === 'untouched' && st !== 'not-started') return false;
     if (status === 'mastered' && st !== 'mastered') return false;
     if (status === 'active' && (st === 'not-started' || st === 'mastered')) return false;
-    if (q && !`${c.name} ${c.description} ${c.subtrack}`.toLowerCase().includes(q)) return false;
+    if (q && !`${c.name} ${c.description} ${c.tags.join(' ')}`.toLowerCase().includes(q)) return false;
     return true;
   });
 
@@ -453,9 +454,9 @@ function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) 
           />
         </div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
-          <FilterPill active={track === 'all'} onClick={() => setTrack('all')}>All</FilterPill>
+          <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>All</FilterPill>
           {tracks.map(t => (
-            <FilterPill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
+            <FilterPill key={t.id} active={group === t.id} tone={t.color} onClick={() => setGroup(t.id)}>
               {t.title}
             </FilterPill>
           ))}
@@ -486,7 +487,7 @@ function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: Mastery
   const status = deriveConceptStatus(mastery);
   const meta = STATUS_META[status];
   const drills = drillsForConcept(concept.id).length;
-  const trk = TRACK_BY_ID[concept.track];
+  const trk = primaryGroup(concept);
   const sparse = !concept.mentalModel || !(concept.resources?.length ?? 0);
   return (
     <Link

@@ -2,6 +2,7 @@
  * Pure-logic alternatives to AI-driven endpoints. No network, no LLM.
  */
 
+import { categoryForConcept } from './category.mjs';
 import { decayConfidence } from './fsrs.mjs';
 import { enrichPlanWithRoadmap, roadmapPromptSuffix } from './roadmap-context.mjs';
 
@@ -78,7 +79,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
     task_prompt: prompts[taskType],
     minutes,
     rationale: conf === null
-      ? `${c.category.toUpperCase()} concept, prereqs satisfied, no prior reps logged.`
+      ? `${categoryForConcept(c).toUpperCase()} concept, prereqs satisfied, no prior reps logged.`
       : `Decayed to ${Math.round(conf * 100)}% confidence — highest-leverage gap among ${concepts.length} tracked concepts.`,
     generator: 'heuristic',
   }, c);
@@ -151,7 +152,7 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
     ...m,
     confidence: decayConfidence(m, now),
     name: conceptIndex[m.concept_id]?.name || m.concept_id,
-    category: conceptIndex[m.concept_id]?.category || '?',
+    category: conceptIndex[m.concept_id] ? categoryForConcept(conceptIndex[m.concept_id]) : '?',
   }));
 
   const rotting = masteryEnriched
@@ -173,8 +174,10 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
 
   const categoryCount = {};
   for (const cid of touchedThisWeek) {
-    const cat = conceptIndex[cid]?.category;
-    if (cat) categoryCount[cat] = (categoryCount[cat] || 0) + 1;
+    const c = conceptIndex[cid];
+    if (!c) continue;
+    const cat = categoryForConcept(c);
+    categoryCount[cat] = (categoryCount[cat] || 0) + 1;
   }
   const avoided = ['dsa', 'lld', 'hld', 'behavioral'].filter(c => !categoryCount[c]);
 

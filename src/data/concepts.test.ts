@@ -3,13 +3,13 @@ import { describe, expect, it } from 'vitest';
 import artifactsData from './artifacts.json';
 import conceptsData from './concepts.json';
 import drillsData from './drills.json';
+import { TRACKS } from './learning-os';
 import projectsData from './projects.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
-import tracksData from './tracks.json';
 
 const concepts = (conceptsData as any).concepts;
-const tracks = (tracksData as any).tracks;
+const tracks = TRACKS;
 const artifacts = (artifactsData as any).artifacts;
 const drills = (drillsData as any).drills;
 const projects = (projectsData as any).projects;
@@ -38,8 +38,6 @@ describe('concept taxonomy', () => {
     for (const c of concepts) {
       expect(c.id, `${c.id} id`).toBeTruthy();
       expect(c.name, `${c.id} name`).toBeTruthy();
-      expect(trackIds.has(c.track), `${c.id} track ${c.track}`).toBe(true);
-      expect(c.subtrack, `${c.id} subtrack`).toBeTruthy();
       expect(DIFFICULTIES, `${c.id} difficulty`).toContain(c.difficulty);
       expect(c.priority, `${c.id} priority`).toBeGreaterThanOrEqual(1);
       expect(c.priority, `${c.id} priority`).toBeLessThanOrEqual(5);
@@ -85,11 +83,28 @@ describe('concept taxonomy', () => {
     expect(cycles).toEqual([]);
   });
 
-  it('every track has at least 3 concepts', () => {
+  it('every concept has tags[] with the primary group first', () => {
+    for (const c of concepts) {
+      expect(Array.isArray(c.tags), `${c.id} tags`).toBe(true);
+      expect(c.tags.length, `${c.id} tags non-empty`).toBeGreaterThanOrEqual(1);
+      expect(trackIds.has(c.tags[0]), `${c.id} tags[0]=${c.tags[0]} is a known group`).toBe(true);
+    }
+  });
+
+  it('every concept has roadmaps[] (may be empty)', () => {
+    for (const c of concepts) {
+      expect(Array.isArray(c.roadmaps), `${c.id} roadmaps`).toBe(true);
+    }
+  });
+
+  it('every known group has at least 3 concepts', () => {
     const counts: Record<string, number> = {};
-    for (const c of concepts) counts[c.track] = (counts[c.track] || 0) + 1;
+    for (const c of concepts) {
+      const grp = c.tags?.[0];
+      if (grp) counts[grp] = (counts[grp] || 0) + 1;
+    }
     for (const t of tracks) {
-      expect(counts[t.id] || 0, `track ${t.id}`).toBeGreaterThanOrEqual(3);
+      expect(counts[t.id] || 0, `group ${t.id}`).toBeGreaterThanOrEqual(3);
     }
   });
 

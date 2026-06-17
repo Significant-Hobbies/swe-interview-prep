@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button, Card } from '../../components/ui';
-import { ARTIFACT_BY_ID, conceptsByTrack, sortedTracks } from '../../data/learning-os';
+import { ARTIFACT_BY_ID, conceptsByTag, sortedTracks } from '../../data/learning-os';
 import { CONCEPT_BY_ID, useConceptMastery } from '../../hooks/useConcepts';
 import { aiConfigured, analyzeGaps, type GapAnalysis } from '../../lib/aiClient';
 import { rollupMastery } from '../../lib/conceptState';
@@ -21,10 +21,10 @@ export function GapAnalyzer() {
     setError('');
     try {
       const profile = {
-        tracks: sortedTracks().map(t => {
-          const ids = conceptsByTrack(t.id).map(c => c.id);
+        groups: sortedTracks().map(t => {
+          const ids = conceptsByTag(t.id).map(c => c.id);
           const roll = rollupMastery(ids, mastery);
-          return { track: t.id, total: ids.length, started: ids.length - roll.untouched, mastered: roll.mastered };
+          return { group: t.id, total: ids.length, started: ids.length - roll.untouched, mastered: roll.mastered };
         }),
         weakConcepts: weakConcepts(mastery, 10).map(c => ({
           id: c.id,
