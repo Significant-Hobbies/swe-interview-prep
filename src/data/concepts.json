@@ -2682,7 +2682,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -2708,7 +2710,8 @@
       ],
       "roadmaps": [
         "runtime",
-        "swe-landscape"
+        "swe-landscape",
+        "lld-practice"
       ],
       "difficulty": "core",
       "priority": 3,
@@ -2735,7 +2738,8 @@
       ],
       "roadmaps": [
         "runtime",
-        "swe-landscape"
+        "swe-landscape",
+        "lld-practice"
       ],
       "difficulty": "core",
       "priority": 2,
@@ -2760,7 +2764,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2784,7 +2790,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2808,7 +2816,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2834,7 +2844,8 @@
       ],
       "roadmaps": [
         "runtime",
-        "swe-landscape"
+        "swe-landscape",
+        "lld-practice"
       ],
       "difficulty": "advanced",
       "priority": 3,
@@ -2861,7 +2872,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -2885,7 +2898,9 @@
         "system-design",
         "low-level-design"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "lld-practice"
+      ],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -2911,7 +2926,8 @@
         "low-level-design"
       ],
       "roadmaps": [
-        "swe-landscape"
+        "swe-landscape",
+        "lld-practice"
       ],
       "difficulty": "core",
       "priority": 2,
@@ -2944,7 +2960,8 @@
       ],
       "roadmaps": [
         "runtime",
-        "swe-landscape"
+        "swe-landscape",
+        "hld-practice"
       ],
       "difficulty": "core",
       "priority": 4,
@@ -2974,7 +2991,9 @@
         "system-design",
         "scalability"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "hld-practice"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3002,7 +3021,8 @@
       ],
       "roadmaps": [
         "db-disk-first",
-        "swe-landscape"
+        "swe-landscape",
+        "hld-practice"
       ],
       "difficulty": "advanced",
       "priority": 3,
@@ -3037,7 +3057,8 @@
       "roadmaps": [
         "db-disk-first",
         "runtime",
-        "swe-landscape"
+        "swe-landscape",
+        "hld-practice"
       ],
       "difficulty": "advanced",
       "priority": 3,
@@ -3063,7 +3084,8 @@
         "event-driven"
       ],
       "roadmaps": [
-        "swe-landscape"
+        "swe-landscape",
+        "hld-practice"
       ],
       "difficulty": "core",
       "priority": 3,
@@ -3088,7 +3110,9 @@
         "system-design",
         "system-design-cases"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3113,7 +3137,9 @@
         "system-design",
         "system-design-cases"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3137,7 +3163,9 @@
         "system-design",
         "system-design-cases"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3161,7 +3189,9 @@
         "system-design",
         "system-design-cases"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "hld-practice"
+      ],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": [
@@ -3186,7 +3216,8 @@
         "system-design-cases"
       ],
       "roadmaps": [
-        "ai-infra-12-month"
+        "ai-infra-12-month",
+        "hld-practice"
       ],
       "difficulty": "advanced",
       "priority": 5,
@@ -3230,7 +3261,8 @@
         "system-design-cases"
       ],
       "roadmaps": [
-        "ai-infra-12-month"
+        "ai-infra-12-month",
+        "hld-practice"
       ],
       "difficulty": "advanced",
       "priority": 5,
@@ -3274,7 +3306,9 @@
         "dsa",
         "arrays-hashing"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -3303,7 +3337,9 @@
         "dsa",
         "two-pointers"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3334,7 +3370,9 @@
         "dsa",
         "sliding-window"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3363,7 +3401,9 @@
         "dsa",
         "stack-queue"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [
@@ -3387,7 +3427,9 @@
         "dsa",
         "binary-search"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3416,7 +3458,9 @@
         "dsa",
         "linked-list"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -3440,7 +3484,9 @@
         "dsa",
         "trees"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [
@@ -3471,7 +3517,9 @@
         "dsa",
         "trees"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3495,7 +3543,9 @@
         "dsa",
         "heap"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3524,7 +3574,9 @@
         "dsa",
         "backtracking"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3548,7 +3600,9 @@
         "dsa",
         "graphs"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": [
@@ -3579,7 +3633,9 @@
         "dsa",
         "graphs"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3604,7 +3660,9 @@
         "dsa",
         "graphs"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [
@@ -3628,7 +3686,9 @@
         "dsa",
         "dynamic-programming"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [
@@ -3659,7 +3719,9 @@
         "dsa",
         "dynamic-programming"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": [
@@ -3683,7 +3745,9 @@
         "dsa",
         "greedy"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3709,7 +3773,9 @@
         "dsa",
         "intervals"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [
@@ -3733,7 +3799,9 @@
         "dsa",
         "math"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3755,7 +3823,9 @@
         "dsa",
         "bit-manipulation"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "dsa-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3777,7 +3847,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3804,7 +3876,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3831,7 +3905,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3858,7 +3934,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3885,7 +3963,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3907,7 +3987,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3934,7 +4016,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -3961,7 +4045,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": [],
@@ -3988,7 +4074,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
@@ -4010,7 +4098,9 @@
         "product",
         "behavioral"
       ],
-      "roadmaps": [],
+      "roadmaps": [
+        "behavioral-practice"
+      ],
       "difficulty": "intro",
       "priority": 2,
       "prerequisites": [],
