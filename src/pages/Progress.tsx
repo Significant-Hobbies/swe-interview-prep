@@ -1,8 +1,6 @@
-import { ArrowRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, PageShell } from '../components/ui';
 import { Sparkline } from '../components/viz';
 import { ARTIFACTS, DRILLS } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
@@ -18,47 +16,61 @@ export default function Progress() {
   const drillsSolved = Object.values(drills).filter(d => d.status === 'solved').length;
   const shipped = Object.values(artifacts).filter(a => a.status === 'shipped').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 30), [mastery]);
+  const pct = overall.total ? (overall.mastered / overall.total) * 100 : 0;
 
   return (
-    <PageShell>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tight text-slate-50">Progress</h1>
+    <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
+      <div className="relative">
+        <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
-      <Card className="p-8 sm:p-10">
-        <div className="text-xs font-medium text-slate-400">Mastery</div>
-        <div className="mt-3 flex items-baseline gap-3">
-          <span className="text-5xl font-semibold tabular-nums text-slate-50">{overall.mastered}</span>
-          <span className="text-2xl text-slate-500">/ {overall.total}</span>
-          <span className="ml-2 text-sm text-slate-400">concepts</span>
-        </div>
-        <div className="mt-6">
-          <Sparkline values={sparkline} width={360} height={48} tone="sky" />
-          <div className="mt-1 text-xs text-slate-500">Last 30 days of review activity</div>
+        <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+          Mastery
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-slate-800 pt-6 text-sm">
-          <Sub label="Drills solved" value={`${drillsSolved} / ${DRILLS.length}`} />
-          <Sub label="Artifacts shipped" value={`${shipped} / ${ARTIFACTS.length}`} />
-          <Sub label="Started" value={`${overall.total - overall.untouched} / ${overall.total}`} />
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+          <span className="text-[110px] font-bold leading-none tracking-tighter tabular-nums text-white sm:text-[140px] lg:text-[160px]">
+            {overall.mastered}
+          </span>
+          <span className="font-mono text-3xl text-white/30 sm:text-4xl">
+            / {overall.total}
+          </span>
         </div>
-      </Card>
 
-      <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <Link to="/progress/all" className="text-sky-400 hover:text-sky-300">
-          By-track breakdown & artifacts →
+        <div className="mt-2 font-mono text-xs text-white/50">
+          concepts mastered · {Math.round(pct)}%
+        </div>
+
+        <div className="mt-10 -mx-1">
+          <Sparkline values={sparkline} width={520} height={48} tone="sky" />
+          <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            Last 30 days
+          </div>
+        </div>
+      </div>
+
+      <section className="section-rule mt-20 grid grid-cols-3 gap-8 pt-10">
+        <Sub label="Drills solved" value={`${drillsSolved}/${DRILLS.length}`} />
+        <Sub label="Artifacts shipped" value={`${shipped}/${ARTIFACTS.length}`} />
+        <Sub label="Started" value={`${overall.total - overall.untouched}/${overall.total}`} />
+      </section>
+
+      <nav className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
+        <Link to="/progress/all" className="text-white hover:text-white/70">
+          By-group breakdown <span className="text-white/40">→</span>
         </Link>
-        <Link to="/progress/all?tab=notes" className="text-slate-400 hover:text-slate-200">
+        <Link to="/progress/all?tab=notes" className="text-white/50 hover:text-white">
           Notes
         </Link>
       </nav>
-    </PageShell>
+    </div>
   );
 }
 
 function Sub({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="text-base font-semibold tabular-nums text-slate-200">{value}</div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
+      <div className="mt-2 text-2xl font-semibold tabular-nums text-white">{value}</div>
     </div>
   );
 }

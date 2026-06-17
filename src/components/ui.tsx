@@ -59,7 +59,7 @@ export const STATUS_META: Record<ConceptStatus, { label: string; color: string }
 
 export function PageShell({ children, wide }: { children: React.ReactNode; wide?: boolean }) {
   return (
-    <div className={`mx-auto w-full px-4 py-8 sm:px-6 lg:px-8 lg:py-10 ${wide ? 'max-w-7xl' : 'max-w-6xl'}`}>
+    <div className={`mx-auto w-full px-6 py-12 lg:py-16 ${wide ? 'max-w-7xl' : 'max-w-5xl'}`}>
       {children}
     </div>
   );
@@ -77,13 +77,13 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         {eyebrow && (
-          <div className="mb-1 text-xs font-medium text-sky-400">{eyebrow}</div>
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{eyebrow}</div>
         )}
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-50">{title}</h1>
-        {subtitle && <p className="mt-1.5 max-w-2xl text-sm text-slate-400">{subtitle}</p>}
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h1>
+        {subtitle && <p className="mt-3 max-w-2xl text-sm text-white/60">{subtitle}</p>}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </div>
@@ -103,17 +103,17 @@ export function Card({
   to?: string;
   onClick?: () => void;
 }) {
-  const base = `rounded-xl border border-slate-800 bg-slate-900/40 ${className}`;
+  const base = `rounded-xl border border-white/[0.08] bg-white/[0.02] ${className}`;
   if (as === 'link' && to) {
     return (
-      <Link to={to} className={`${base} block transition-colors duration-150 hover:border-slate-700 hover:bg-slate-900/70`}>
+      <Link to={to} className={`${base} block transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}>
         {children}
       </Link>
     );
   }
   if (as === 'button') {
     return (
-      <button onClick={onClick} className={`${base} text-left transition-colors duration-150 hover:border-slate-700 hover:bg-slate-900/70`}>
+      <button onClick={onClick} className={`${base} text-left transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}>
         {children}
       </button>
     );
@@ -122,26 +122,25 @@ export function Card({
 }
 
 export function Badge({ children, tone = 'default' }: { children: React.ReactNode; tone?: string }) {
-  // Single quiet chip. Tone only shifts the text color slightly to carry
-  // semantic meaning (success/warning/danger/info); decorative bg is gone.
+  // Single quiet chip. White-on-black with subtle tone shifts for semantics.
   const TONE_TEXT: Record<string, string> = {
-    default: 'text-slate-300 border-slate-700',
-    slate: 'text-slate-300 border-slate-700',
-    gray: 'text-slate-300 border-slate-700',
-    sky: 'text-sky-300 border-sky-900/60',
-    emerald: 'text-emerald-300 border-emerald-900/60',
-    amber: 'text-amber-300 border-amber-900/60',
-    rose: 'text-rose-300 border-rose-900/60',
-    // Track-coded badges still render but as plain text-only chips.
-    purple: 'text-violet-300 border-violet-900/60',
-    fuchsia: 'text-sky-300 border-fuchsia-900/60',
-    cyan: 'text-cyan-300 border-cyan-900/60',
-    orange: 'text-orange-300 border-orange-900/60',
-    blue: 'text-blue-300 border-blue-900/60',
+    default: 'text-white/70 border-white/15',
+    slate: 'text-white/70 border-white/15',
+    gray: 'text-white/70 border-white/15',
+    sky: 'text-white border-white/20',
+    emerald: 'text-emerald-200 border-emerald-200/20',
+    amber: 'text-amber-200 border-amber-200/20',
+    rose: 'text-rose-200 border-rose-200/20',
+    // Track-coded badges render as quiet text-only chips.
+    purple: 'text-white/70 border-white/15',
+    fuchsia: 'text-white/70 border-white/15',
+    cyan: 'text-white/70 border-white/15',
+    orange: 'text-white/70 border-white/15',
+    blue: 'text-white/70 border-white/15',
   };
   const cls = TONE_TEXT[tone] ?? TONE_TEXT.default;
   return (
-    <span className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${cls}`}>
+    <span className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 font-mono text-[10px] ${cls}`}>
       {children}
     </span>
   );
@@ -149,60 +148,59 @@ export function Badge({ children, tone = 'default' }: { children: React.ReactNod
 
 export function StatTile({ label, value, hint }: { label: string; value: React.ReactNode; hint?: string; tone?: string }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3">
-      <div className="text-xs font-medium text-slate-400">{label}</div>
-      <div className="mt-1 text-2xl font-semibold text-slate-50">{value}</div>
-      {hint && <div className="mt-0.5 text-xs text-slate-500">{hint}</div>}
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3">
+      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
+      <div className="mt-2 text-2xl font-semibold tabular-nums text-white">{value}</div>
+      {hint && <div className="mt-0.5 font-mono text-xs text-white/40">{hint}</div>}
     </div>
   );
 }
 
 export function ProgressBar({ value, tone = 'sky' }: { value: number; tone?: string }) {
   const TONE_BAR: Record<string, string> = {
-    sky: 'bg-sky-500',
-    emerald: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-    rose: 'bg-rose-500',
-    slate: 'bg-slate-400',
-    // Old tone names → sky (default).
-    purple: 'bg-sky-500',
-    fuchsia: 'bg-sky-500',
-    cyan: 'bg-sky-500',
-    blue: 'bg-sky-500',
-    gray: 'bg-slate-400',
+    sky: 'bg-white',
+    emerald: 'bg-emerald-300',
+    amber: 'bg-amber-300',
+    rose: 'bg-rose-300',
+    slate: 'bg-white/60',
+    purple: 'bg-white',
+    fuchsia: 'bg-white',
+    cyan: 'bg-white',
+    blue: 'bg-white',
+    gray: 'bg-white/60',
   };
   const pct = Math.max(0, Math.min(100, Math.round(value)));
   const fill = TONE_BAR[tone] ?? TONE_BAR.sky;
   return (
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
-      <div className={`h-full rounded-full transition-[width] duration-300 ${fill}`} style={{ width: `${pct}%` }} />
+    <div className="h-px w-full overflow-hidden bg-white/10">
+      <div className={`h-full transition-[width] duration-500 ${fill}`} style={{ width: `${pct}%` }} />
     </div>
   );
 }
 
 export function EmptyState({ icon, title, hint }: { icon?: React.ReactNode; title: string; hint?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-800 px-6 py-12 text-center">
-      {icon && <div className="mb-3 text-slate-600">{icon}</div>}
-      <div className="text-sm font-medium text-slate-200">{title}</div>
-      {hint && <div className="mt-1 max-w-sm text-xs text-slate-500">{hint}</div>}
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 px-6 py-12 text-center">
+      {icon && <div className="mb-3 text-white/30">{icon}</div>}
+      <div className="text-sm font-medium text-white">{title}</div>
+      {hint && <div className="mt-1 max-w-sm text-xs text-white/50">{hint}</div>}
     </div>
   );
 }
 
 export function SectionTitle({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
   return (
-    <div className="mb-3 flex items-center justify-between">
-      <h2 className="text-sm font-semibold text-slate-200">{children}</h2>
+    <div className="mb-4 flex items-center justify-between">
+      <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{children}</h2>
       {action}
     </div>
   );
 }
 
 const BUTTON_TONES: Record<string, string> = {
-  primary: 'bg-sky-500 text-slate-950 hover:bg-sky-400',
-  ghost: 'border border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-900 hover:text-slate-100',
-  subtle: 'bg-slate-900 text-slate-200 hover:bg-slate-800',
+  primary: 'bg-white text-black hover:bg-white/90',
+  ghost: 'border border-white/15 text-white hover:border-white/30 hover:bg-white/5',
+  subtle: 'bg-white/5 text-white hover:bg-white/10',
 };
 
 export function Button({
@@ -225,7 +223,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${BUTTON_TONES[tone]} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${BUTTON_TONES[tone]} ${className}`}
     >
       {children}
     </button>
@@ -236,7 +234,7 @@ export function Button({
 
 export function TabGroup({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`flex items-center gap-4 border-b border-slate-800 ${className}`} role="tablist">
+    <div className={`flex items-center gap-6 border-b border-white/[0.08] ${className}`} role="tablist">
       {children}
     </div>
   );
@@ -261,16 +259,16 @@ export function TabButton({
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={`-mb-px inline-flex items-center gap-1.5 border-b-2 px-0.5 py-2.5 text-sm font-medium transition-colors duration-150 focus-visible:outline-none ${
+      className={`-mb-px inline-flex items-center gap-1.5 border-b-2 px-0.5 py-3 text-sm transition-colors duration-150 focus-visible:outline-none ${
         active
-          ? 'border-sky-400 text-slate-50'
-          : 'border-transparent text-slate-400 hover:text-slate-200'
+          ? 'border-white text-white'
+          : 'border-transparent text-white/40 hover:text-white'
       }`}
     >
       {children ?? (
         <>
           {label}
-          {count != null && <span className="ml-1 text-slate-500">{count}</span>}
+          {count != null && <span className="ml-1 font-mono text-xs text-white/30">{count}</span>}
         </>
       )}
     </button>
@@ -291,22 +289,22 @@ export function CollapsiblePanel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/30">
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02]">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left transition-colors hover:bg-slate-900/60"
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left transition-colors hover:bg-white/[0.04]"
       >
         <div>
-          <div className="text-sm font-semibold text-slate-100">{title}</div>
-          {subtitle && <div className="mt-0.5 text-xs text-slate-500">{subtitle}</div>}
+          <div className="text-sm font-semibold text-white">{title}</div>
+          {subtitle && <div className="mt-0.5 font-mono text-xs text-white/40">{subtitle}</div>}
         </div>
-        <span className="text-slate-500" aria-hidden="true">
+        <span className="text-white/30" aria-hidden="true">
           {open ? '▾' : '▸'}
         </span>
       </button>
-      {open && <div className="border-t border-slate-800 px-5 pb-5 pt-4">{children}</div>}
+      {open && <div className="border-t border-white/[0.08] px-5 pb-5 pt-4">{children}</div>}
     </div>
   );
 }
@@ -325,10 +323,10 @@ export function FilterPill({
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 ${
+      className={`shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150 focus-visible:outline-none ${
         active
-          ? 'border-sky-500/40 bg-sky-500/10 text-sky-300'
-          : 'border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+          ? 'border-white bg-white text-black'
+          : 'border-white/15 text-white/60 hover:border-white/30 hover:text-white'
       }`}
     >
       {children}
@@ -346,11 +344,11 @@ export function SessionStatBar({
       {items.map(item => (
         <div
           key={item.label}
-          className="rounded-lg border border-slate-800 bg-slate-900/40 px-3 py-2 sm:min-w-[120px]"
+          className="rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2 sm:min-w-[120px]"
         >
-          <div className="text-xs font-medium text-slate-400">{item.label}</div>
-          <div className="mt-0.5 text-lg font-semibold text-slate-50">{item.value}</div>
-          {item.hint && <div className="text-[10px] text-slate-500">{item.hint}</div>}
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{item.label}</div>
+          <div className="mt-1 text-lg font-semibold tabular-nums text-white">{item.value}</div>
+          {item.hint && <div className="mt-0.5 font-mono text-[10px] text-white/40">{item.hint}</div>}
         </div>
       ))}
     </div>

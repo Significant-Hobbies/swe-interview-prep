@@ -61,7 +61,7 @@ export default function Learn() {
     <PageShell wide>
       <Link
         to="/learn"
-        className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
       >
         <ArrowLeft className="h-3.5 w-3.5" /> Learn
       </Link>
@@ -136,63 +136,63 @@ function ActivePathHero({
   });
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/40">
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02]">
       <div className="p-5 sm:p-6">
-        <div className="mb-2 flex items-center gap-2 text-xs text-slate-400">
+        <div className="mb-2 flex items-center gap-2 text-xs text-white/50">
           <span>Active roadmap · {HORIZON[roadmap.horizon]}</span>
-          <span className="text-slate-600">·</span>
+          <span className="text-white/30">·</span>
           <span>{roadmap.tracks.length} tracks</span>
         </div>
         <div className="flex items-baseline justify-between gap-4">
-          <h2 className="text-xl font-semibold tracking-tight text-slate-50 sm:text-2xl">{roadmap.title}</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">{roadmap.title}</h2>
           <div className="shrink-0 text-right">
-            <div className="text-2xl font-semibold tabular-nums text-slate-50">{Math.round(pct * 100)}%</div>
-            <div className="text-xs text-slate-500">{roll.mastered} of {ids.length} mastered</div>
+            <div className="text-2xl font-semibold tabular-nums text-white">{Math.round(pct * 100)}%</div>
+            <div className="text-xs text-white/40">{roll.mastered} of {ids.length} mastered</div>
           </div>
         </div>
-        <p className="mt-2 line-clamp-2 max-w-2xl text-sm text-slate-400">{roadmap.goal}</p>
-        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-800">
-          <div className="h-full rounded-full bg-sky-500 transition-[width] duration-300" style={{ width: `${pct * 100}%` }} />
+        <p className="mt-2 line-clamp-2 max-w-2xl text-sm text-white/50">{roadmap.goal}</p>
+        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/5">
+          <div className="h-full rounded-full bg-white transition-[width] duration-300" style={{ width: `${pct * 100}%` }} />
         </div>
         {activeMilestone && (
-          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400">
-            <span><span className="text-slate-200">Milestone {pickActiveMilestoneIdx(roadmap, mastery) + 1} of {roadmap.milestones.length}</span> · {activeMilestone.title.split(' — ')[0]}</span>
-            <span className="text-slate-600">·</span>
+          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/50">
+            <span><span className="text-white/80">Milestone {pickActiveMilestoneIdx(roadmap, mastery) + 1} of {roadmap.milestones.length}</span> · {activeMilestone.title.split(' — ')[0]}</span>
+            <span className="text-white/30">·</span>
             <span>{ids.length - roll.untouched} started</span>
-            <span className="text-slate-600">·</span>
+            <span className="text-white/30">·</span>
             <span className={roll.due ? 'text-amber-300' : ''}>{roll.due} due</span>
           </div>
         )}
       </div>
 
-      <div className="border-t border-slate-800/80 px-5 py-4 sm:px-6">
+      <div className="border-t border-white/[0.08] px-5 py-4 sm:px-6">
         <MilestoneTimeline steps={timelineSteps} />
       </div>
 
       {nextConcept && (
-        <div className="grid gap-px border-t border-slate-800/80 bg-slate-800/40 sm:grid-cols-[1fr_auto]">
-          <div className="bg-slate-900/40 p-5 sm:p-6">
-            <div className="mb-1 flex items-center gap-1.5 text-xs font-medium text-sky-400">
+        <div className="grid gap-px border-t border-white/[0.08] bg-white/5/40 sm:grid-cols-[1fr_auto]">
+          <div className="bg-white/[0.02] p-5 sm:p-6">
+            <div className="mb-1 flex items-center gap-1.5 text-xs font-medium text-white">
               <Target className="h-3.5 w-3.5" /> Up next
             </div>
-            <Link to={`/concepts/${nextConcept.id}`} className="group inline-flex items-center gap-1 text-lg font-semibold text-slate-50 transition-colors hover:text-sky-300">
+            <Link to={`/concepts/${nextConcept.id}`} className="group inline-flex items-center gap-1 text-lg font-semibold text-white transition-colors hover:text-white">
               {nextConcept.name}
               <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
             </Link>
-            <p className="mt-0.5 line-clamp-1 text-sm text-slate-400">{nextConcept.description}</p>
+            <p className="mt-0.5 line-clamp-1 text-sm text-white/50">{nextConcept.description}</p>
             {nextDrillTitle && (
-              <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-400">
-                <Hammer className="h-3 w-3 text-slate-500" /> Pair with drill: <span className="text-slate-200">{nextDrillTitle}</span>
+              <div className="mt-2 flex items-center gap-1.5 text-xs text-white/50">
+                <Hammer className="h-3 w-3 text-white/40" /> Pair with drill: <span className="text-white/80">{nextDrillTitle}</span>
               </div>
             )}
           </div>
 
           {upNext.length > 1 && (
-            <div className="hidden bg-slate-900/40 p-5 sm:block sm:p-6">
-              <div className="mb-2 text-xs font-medium text-slate-400">After that</div>
+            <div className="hidden bg-white/[0.02] p-5 sm:block sm:p-6">
+              <div className="mb-2 text-xs font-medium text-white/50">After that</div>
               <div className="space-y-1.5">
                 {upNext.slice(1, 4).map(c => (
-                  <Link key={c.id} to={`/concepts/${c.id}`} className="block truncate text-sm text-slate-400 transition-colors hover:text-slate-200">
+                  <Link key={c.id} to={`/concepts/${c.id}`} className="block truncate text-sm text-white/50 transition-colors hover:text-white/80">
                     · {c.name}
                   </Link>
                 ))}
@@ -220,7 +220,7 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
       {loading && !hasAnyMastery ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-xl border border-slate-800 bg-slate-900/40" />
+            <div key={i} className="h-32 animate-pulse rounded-xl border border-white/[0.08] bg-white/[0.02]" />
           ))}
         </div>
       ) : weak.length === 0 ? (
@@ -242,42 +242,42 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
             return (
               <div
                 key={c.id}
-                className="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-900/40 p-4 transition-colors duration-150 hover:border-slate-700"
+                className="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 transition-colors duration-150 hover:border-white/15"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <Link
                       to={`/concepts/${c.id}`}
-                      className="line-clamp-1 text-sm font-semibold text-slate-100 transition-colors hover:text-sky-300"
+                      className="line-clamp-1 text-sm font-semibold text-white transition-colors hover:text-white"
                     >
                       {c.name}
                     </Link>
-                    {trk && <div className="mt-0.5 text-xs text-slate-500">{trk.short}</div>}
+                    {trk && <div className="mt-0.5 text-xs text-white/40">{trk.short}</div>}
                   </div>
                   <span className="shrink-0 font-mono text-xs text-amber-300">{pct}%</span>
                 </div>
                 <div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                     <div
                       className="h-full rounded-full bg-amber-500 transition-[width] duration-300"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
-                  <div className="mt-1 text-xs text-slate-500">
+                  <div className="mt-1 text-xs text-white/40">
                     {m?.reps ?? 0} rep{(m?.reps ?? 0) !== 1 ? 's' : ''}
                   </div>
                 </div>
                 <div className="mt-auto flex gap-2">
                   <Link
                     to="/practice?tab=reviews"
-                    className="flex-1 rounded-md border border-slate-700 py-1.5 text-center text-xs font-medium text-slate-200 transition-colors duration-150 hover:border-slate-600 hover:bg-slate-800"
+                    className="flex-1 rounded-md border border-white/15 py-1.5 text-center text-xs font-medium text-white/80 transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
                   >
                     Review
                   </Link>
                   {drill && (
                     <Link
                       to={`/drills/${drill.id}`}
-                      className="flex-1 rounded-md bg-sky-500 py-1.5 text-center text-xs font-medium text-slate-950 transition-colors duration-150 hover:bg-sky-400"
+                      className="flex-1 rounded-md bg-white py-1.5 text-center text-xs font-medium text-black transition-colors duration-150 hover:bg-white/90"
                     >
                       Drill
                     </Link>
@@ -309,16 +309,16 @@ function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
   });
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5">
-      <div className="mb-3 text-xs font-medium text-slate-400">Mastery by track</div>
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5">
+      <div className="mb-3 text-xs font-medium text-white/50">Mastery by track</div>
       <div className="flex flex-col items-center gap-3">
         <MasteryDonut segments={segments} size={180} thickness={16} />
         <ul className="grid w-full grid-cols-2 gap-x-3 gap-y-1 text-xs">
           {segments.map(s => (
             <li key={s.id} className="flex items-center gap-1.5 truncate">
               <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${color(s.tone).solid}`} />
-              <span className="truncate text-slate-300">{s.label}</span>
-              <span className="ml-auto tabular-nums text-slate-500">{s.mastered}/{s.total}</span>
+              <span className="truncate text-white/70">{s.label}</span>
+              <span className="ml-auto tabular-nums text-white/40">{s.mastered}/{s.total}</span>
             </li>
           ))}
         </ul>
@@ -331,8 +331,8 @@ function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
 
 function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Record<string, MasteryEntry> }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5">
-      <div className="mb-3 text-xs font-medium text-slate-400">All roadmaps</div>
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5">
+      <div className="mb-3 text-xs font-medium text-white/50">All roadmaps</div>
       <div className="grid gap-2 sm:grid-cols-2">
         {ROADMAPS.map(r => {
           const ids = roadmapConceptIds(r);
@@ -345,19 +345,19 @@ function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Recor
               to={`/roadmaps/${r.id}`}
               className={`group block rounded-lg border p-3 transition-colors duration-150 ${
                 isActive
-                  ? 'border-sky-500/40 bg-sky-500/5'
-                  : 'border-slate-800 bg-slate-950/40 hover:border-slate-700'
+                  ? 'border-white/30 bg-white/[0.03]'
+                  : 'border-white/[0.08] bg-black/40 hover:border-white/15'
               }`}
             >
               <div className="mb-1 flex items-center justify-between gap-2">
-                <span className="text-xs text-slate-500">{HORIZON[r.horizon]}</span>
-                {isActive && <span className="text-xs font-medium text-sky-300">Active</span>}
+                <span className="text-xs text-white/40">{HORIZON[r.horizon]}</span>
+                {isActive && <span className="text-xs font-medium text-white">Active</span>}
               </div>
-              <h3 className="truncate text-sm font-semibold text-slate-100">{r.title}</h3>
-              <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-800">
-                <div className={`h-full rounded-full ${isActive ? 'bg-sky-500' : 'bg-emerald-500'}`} style={{ width: `${pct * 100}%` }} />
+              <h3 className="truncate text-sm font-semibold text-white">{r.title}</h3>
+              <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/5">
+                <div className={`h-full rounded-full ${isActive ? 'bg-white' : 'bg-emerald-500'}`} style={{ width: `${pct * 100}%` }} />
               </div>
-              <div className="mt-1 flex items-center justify-between text-xs text-slate-500">
+              <div className="mt-1 flex items-center justify-between text-xs text-white/40">
                 <span>{r.milestones.length} milestones</span>
                 <span className="tabular-nums">{roll.mastered}/{ids.length}</span>
               </div>
@@ -392,18 +392,18 @@ function TrackLane({ trackId, mastery }: { trackId: string; mastery: Record<stri
   ];
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4">
       <div className="mb-3 flex items-center gap-3">
         <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${color(track.color).solid}`} />
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2">
-            <h3 className="text-sm font-semibold text-slate-100">{track.title}</h3>
-            <span className="text-[11px] text-slate-500">{concepts.length} concepts</span>
+            <h3 className="text-sm font-semibold text-white">{track.title}</h3>
+            <span className="text-[11px] text-white/40">{concepts.length} concepts</span>
           </div>
-          <p className="line-clamp-1 text-[11px] text-slate-500">{track.description}</p>
+          <p className="line-clamp-1 text-[11px] text-white/40">{track.description}</p>
         </div>
-        <div className="shrink-0 text-right text-[11px] text-slate-500">
-          <div className="font-mono text-slate-300">{roll.mastered}/{concepts.length}</div>
+        <div className="shrink-0 text-right text-[11px] text-white/40">
+          <div className="font-mono text-white/70">{roll.mastered}/{concepts.length}</div>
           <div className="text-[10px]">mastered</div>
         </div>
       </div>
@@ -445,12 +445,12 @@ function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) 
     >
       <div className="mb-4 flex flex-col gap-2">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
           <input
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search concepts…"
-            className="w-full rounded-lg border border-slate-800 bg-slate-950 py-2 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
+            className="w-full rounded-lg border border-white/[0.08] bg-black py-2 pl-9 pr-3 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
         </div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
@@ -492,19 +492,19 @@ function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: Mastery
   return (
     <Link
       to={`/concepts/${concept.id}`}
-      className="group flex flex-col gap-1 rounded-lg border border-slate-800 bg-slate-950/40 p-3 transition-colors hover:border-slate-700 hover:bg-slate-900/70"
+      className="group flex flex-col gap-1 rounded-lg border border-white/[0.08] bg-black/40 p-3 transition-colors hover:border-white/15 hover:bg-white/[0.02]"
     >
       <div className="flex items-start justify-between gap-2">
-        <h3 className="text-sm font-medium text-slate-100 group-hover:text-white">{concept.name}</h3>
-        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-600 group-hover:text-slate-400" />
+        <h3 className="text-sm font-medium text-white group-hover:text-white">{concept.name}</h3>
+        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-white/30 group-hover:text-white/50" />
       </div>
       <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
         <Badge tone={meta.color}>{meta.label}</Badge>
         <Badge tone={DIFFICULTY_COLOR[concept.difficulty]}>{concept.difficulty}</Badge>
-        {trk && <span className="text-slate-500">{trk.short}</span>}
-        {drills > 0 && <span className="text-slate-500">· {drills} drill{drills > 1 ? 's' : ''}</span>}
-        {mastery && <span className="text-slate-500">· {confidencePct(mastery)}%</span>}
-        {sparse && <span className="text-slate-600" title="Links-first concept (no mental model authored)">·</span>}
+        {trk && <span className="text-white/40">{trk.short}</span>}
+        {drills > 0 && <span className="text-white/40">· {drills} drill{drills > 1 ? 's' : ''}</span>}
+        {mastery && <span className="text-white/40">· {confidencePct(mastery)}%</span>}
+        {sparse && <span className="text-white/30" title="Links-first concept (no mental model authored)">·</span>}
       </div>
     </Link>
   );
@@ -513,8 +513,8 @@ function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: Mastery
 function SectionHeader({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="mb-3">
-      <h2 className="text-xs font-medium text-slate-400">{title}</h2>
-      <p className="text-[11px] text-slate-500">{subtitle}</p>
+      <h2 className="text-xs font-medium text-white/50">{title}</h2>
+      <p className="text-[11px] text-white/40">{subtitle}</p>
     </div>
   );
 }

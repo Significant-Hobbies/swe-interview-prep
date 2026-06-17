@@ -69,7 +69,7 @@ export default function Practice() {
     <PageShell wide>
       <Link
         to="/practice"
-        className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
       >
         <ArrowLeft className="h-3.5 w-3.5" /> Practice
       </Link>
@@ -129,7 +129,7 @@ function PracticeHero({
           <StatNumber label="Streak" value={`${streak}d`} hint={`${totalReps} total reps`} />
         </div>
         <div className="flex items-center justify-end gap-2 text-right">
-          <div className="text-xs text-slate-500">Last 14 days</div>
+          <div className="text-xs text-white/40">Last 14 days</div>
           <Sparkline values={sparkline} width={140} height={32} tone="sky" />
         </div>
       </div>
@@ -151,11 +151,11 @@ function PracticeHero({
 function StatNumber({ label, value, hint, tone }: { label: string; value: React.ReactNode; hint?: string; tone?: 'default' | 'amber' }) {
   return (
     <div>
-      <div className="text-xs font-medium text-slate-400">{label}</div>
-      <div className={`mt-1 text-2xl font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-slate-50'}`}>
+      <div className="text-xs font-medium text-white/50">{label}</div>
+      <div className={`mt-1 text-2xl font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-white'}`}>
         {value}
       </div>
-      {hint && <div className="mt-0.5 text-xs text-slate-500">{hint}</div>}
+      {hint && <div className="mt-0.5 text-xs text-white/40">{hint}</div>}
     </div>
   );
 }
@@ -210,7 +210,7 @@ function DrillsTab() {
   return (
     <div>
       <div className="mb-4">
-        <div className="mb-2 text-xs font-medium text-slate-400">Filter by group</div>
+        <div className="mb-2 text-xs font-medium text-white/50">Filter by group</div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
           <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>
             All ({DRILLS.length})
@@ -226,8 +226,8 @@ function DrillsTab() {
       {recommended.length > 0 && (
         <div className="mb-6">
           <div className="mb-2 flex items-center gap-2">
-            <Target className="h-3.5 w-3.5 text-sky-400" />
-            <span className="text-xs font-medium text-sky-300">
+            <Target className="h-3.5 w-3.5 text-white" />
+            <span className="text-xs font-medium text-white">
               Recommended for your level
             </span>
           </div>
@@ -271,23 +271,23 @@ function DrillCard({
   return (
     <Link
       to={`/drills/${drill.id}`}
-      className="group flex flex-col gap-2 rounded-lg border border-slate-800 bg-slate-900/40 p-4 transition-colors hover:border-slate-700 hover:bg-slate-900/70"
+      className="group flex flex-col gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] p-4 transition-colors hover:border-white/15 hover:bg-white/[0.02]"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-slate-100 group-hover:text-white">{drill.title}</h3>
+          <h3 className="text-sm font-semibold text-white group-hover:text-white">{drill.title}</h3>
           {conceptName && (
-            <div className="mt-0.5 text-[11px] text-slate-500">via <span className="text-slate-400">{conceptName}</span></div>
+            <div className="mt-0.5 text-[11px] text-white/40">via <span className="text-white/50">{conceptName}</span></div>
           )}
         </div>
-        <ArrowRight className="h-4 w-4 shrink-0 text-slate-600 group-hover:text-slate-400" />
+        <ArrowRight className="h-4 w-4 shrink-0 text-white/30 group-hover:text-white/50" />
       </div>
-      <p className="line-clamp-2 text-xs text-slate-400">{drill.prompt}</p>
+      <p className="line-clamp-2 text-xs text-white/50">{drill.prompt}</p>
       <div className="mt-auto flex flex-wrap items-center gap-1.5 text-[11px]">
         {trk && <Badge tone={trk.color}>{trk.short}</Badge>}
         <Badge tone={DIFFICULTY_COLOR[drill.difficulty]}>{drill.difficulty}</Badge>
         <Badge tone={DRILL_STATUS_TONE[state.status]}>{state.status}</Badge>
-        {state.attempts > 0 && <span className="text-slate-500">· {state.attempts} attempt{state.attempts > 1 ? 's' : ''}</span>}
+        {state.attempts > 0 && <span className="text-white/40">· {state.attempts} attempt{state.attempts > 1 ? 's' : ''}</span>}
       </div>
     </Link>
   );
@@ -361,7 +361,7 @@ function ReviewSession() {
             <Badge tone="cyan">{current.type}</Badge>
             {mode === 'practice' && <Badge tone="gray">practice</Badge>}
           </div>
-          <Link to={`/concepts/${current.conceptId}`} className="text-xs text-slate-500 hover:text-slate-300">
+          <Link to={`/concepts/${current.conceptId}`} className="text-xs text-white/40 hover:text-white/70">
             {CONCEPT_BY_ID[current.conceptId]?.name}
           </Link>
         </div>
@@ -373,7 +373,7 @@ function ReviewSession() {
           placeholder="Write your answer from memory…"
           rows={5}
           disabled={revealed}
-          className="mt-4 w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none disabled:opacity-70"
+          className="mt-4 w-full resize-y rounded-md border border-white/[0.08] bg-black p-3 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none disabled:opacity-70"
         />
 
         {!revealed ? (
@@ -384,9 +384,9 @@ function ReviewSession() {
           </div>
         ) : (
           <div className="mt-5 space-y-4">
-            <div className="rounded-lg border border-slate-800 bg-slate-950 p-4">
-              <div className="mb-1 text-[11px] font-medium text-slate-500">Reference answer</div>
-              <p className="text-sm leading-relaxed text-slate-300">{current.answer}</p>
+            <div className="rounded-lg border border-white/[0.08] bg-black p-4">
+              <div className="mb-1 text-[11px] font-medium text-white/40">Reference answer</div>
+              <p className="text-sm leading-relaxed text-white/70">{current.answer}</p>
             </div>
 
             {answer.trim() && (
