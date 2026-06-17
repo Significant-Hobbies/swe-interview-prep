@@ -4,9 +4,6 @@
     {
       "id": "tokenization",
       "name": "Tokenization",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "tokenization",
       "tags": [
         "search-ir",
         "tokenization"
@@ -56,9 +53,6 @@
     {
       "id": "inverted-index",
       "name": "Inverted Index",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "indexing",
       "tags": [
         "search-ir",
         "indexing"
@@ -108,9 +102,6 @@
     {
       "id": "tf-idf",
       "name": "TF-IDF",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
       "tags": [
         "search-ir",
         "ranking"
@@ -151,9 +142,6 @@
     {
       "id": "bm25",
       "name": "BM25",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
       "tags": [
         "search-ir",
         "ranking"
@@ -218,9 +206,6 @@
     {
       "id": "ranking-metrics",
       "name": "Ranking Metrics",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "evaluation",
       "tags": [
         "search-ir",
         "evaluation"
@@ -258,9 +243,6 @@
     {
       "id": "search-evals",
       "name": "Search Evals",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "evaluation",
       "tags": [
         "search-ir",
         "evaluation"
@@ -311,9 +293,6 @@
     {
       "id": "hybrid-search",
       "name": "Hybrid Search",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "hybrid",
       "tags": [
         "search-ir",
         "hybrid"
@@ -366,9 +345,6 @@
     {
       "id": "reranking",
       "name": "Reranking",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
       "tags": [
         "search-ir",
         "ranking"
@@ -413,9 +389,6 @@
     {
       "id": "query-rewriting",
       "name": "Query Rewriting",
-      "category": "search-ir",
-      "track": "search-ir",
-      "subtrack": "ranking",
       "tags": [
         "search-ir",
         "ranking"
@@ -443,9 +416,6 @@
     {
       "id": "search-discovery",
       "name": "Search Systems",
-      "category": "hld",
-      "track": "search-ir",
-      "subtrack": "indexing",
       "tags": [
         "search-ir",
         "indexing"
@@ -474,9 +444,6 @@
     {
       "id": "embeddings",
       "name": "Embeddings",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "embeddings",
       "tags": [
         "vector-db",
         "embeddings"
@@ -522,9 +489,6 @@
     {
       "id": "vector-similarity",
       "name": "Vector Similarity",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "similarity",
       "tags": [
         "vector-db",
         "similarity"
@@ -566,9 +530,6 @@
     {
       "id": "topk-vector-search",
       "name": "Top-k Vector Search",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
       "tags": [
         "vector-db",
         "ann"
@@ -606,9 +567,6 @@
     {
       "id": "brute-force-vector-db",
       "name": "Brute-Force Vector DB",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
       "tags": [
         "vector-db",
         "ann"
@@ -659,9 +617,6 @@
     {
       "id": "hnsw",
       "name": "HNSW",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
       "tags": [
         "vector-db",
         "ann"
@@ -709,9 +664,6 @@
     {
       "id": "ivf",
       "name": "IVF (Inverted File)",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
       "tags": [
         "vector-db",
         "ann"
@@ -750,9 +702,6 @@
     {
       "id": "product-quantization",
       "name": "Product Quantization",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "quantization",
       "tags": [
         "vector-db",
         "quantization"
@@ -787,9 +736,6 @@
     {
       "id": "metadata-filtering",
       "name": "Metadata Filtering",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "filtering",
       "tags": [
         "vector-db",
         "filtering"
@@ -845,9 +791,6 @@
     {
       "id": "recall-latency-tradeoffs",
       "name": "Recall / Latency Tradeoffs",
-      "category": "vector-db",
-      "track": "vector-db",
-      "subtrack": "ann",
       "tags": [
         "vector-db",
         "ann"
@@ -889,9 +832,6 @@
     {
       "id": "rag",
       "name": "RAG",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
       "tags": [
         "ai-systems",
         "rag"
@@ -946,9 +886,6 @@
     {
       "id": "chunking",
       "name": "Chunking",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
       "tags": [
         "ai-systems",
         "rag"
@@ -994,9 +931,6 @@
     {
       "id": "context-packing",
       "name": "Context Packing",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "rag",
       "tags": [
         "ai-systems",
         "rag"
@@ -1031,9 +965,6 @@
     {
       "id": "structured-outputs",
       "name": "Structured Outputs",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
       "tags": [
         "ai-systems",
         "llm-apps"
@@ -1075,9 +1006,6 @@
     {
       "id": "tool-calling",
       "name": "Tool Calling",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "agents",
       "tags": [
         "ai-systems",
         "agents"
@@ -1121,9 +1049,6 @@
     {
       "id": "agent-loops",
       "name": "Agent Loops",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "agents",
       "tags": [
         "ai-systems",
         "agents"
@@ -1166,9 +1091,6 @@
     {
       "id": "model-routing",
       "name": "Model Routing",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
       "tags": [
         "ai-systems",
         "llm-apps"
@@ -1215,9 +1137,6 @@
     {
       "id": "prompt-versioning",
       "name": "Prompt & Version Logging",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "llm-apps",
       "tags": [
         "ai-systems",
         "llm-apps"
@@ -1243,9 +1162,6 @@
     {
       "id": "llm-evals",
       "name": "LLM Evals",
-      "category": "ai-systems",
-      "track": "ai-systems",
-      "subtrack": "evals",
       "tags": [
         "ai-systems",
         "evals"
@@ -1295,9 +1211,6 @@
     {
       "id": "ml-math",
       "name": "ML Math Foundations",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
       "tags": [
         "ai-systems",
         "foundations"
@@ -1322,9 +1235,6 @@
     {
       "id": "ml-gradient-descent",
       "name": "Gradient Descent",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
       "tags": [
         "ai-systems",
         "foundations"
@@ -1351,9 +1261,6 @@
     {
       "id": "ml-backprop",
       "name": "Backpropagation",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
       "tags": [
         "ai-systems",
         "foundations"
@@ -1380,9 +1287,6 @@
     {
       "id": "ml-softmax-xent",
       "name": "Softmax & Cross-Entropy",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
       "tags": [
         "ai-systems",
         "foundations"
@@ -1414,9 +1318,6 @@
     {
       "id": "ml-adamw",
       "name": "AdamW Optimizer",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "foundations",
       "tags": [
         "ai-systems",
         "foundations"
@@ -1443,9 +1344,6 @@
     {
       "id": "ml-tokenization",
       "name": "Tokenization (LLM)",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
       "tags": [
         "ai-systems",
         "language-modeling"
@@ -1471,9 +1369,6 @@
     {
       "id": "ml-language-modeling",
       "name": "Language Modeling",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
       "tags": [
         "ai-systems",
         "language-modeling"
@@ -1501,9 +1396,6 @@
     {
       "id": "ml-sampling",
       "name": "Sampling & Decoding",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "language-modeling",
       "tags": [
         "ai-systems",
         "language-modeling"
@@ -1532,9 +1424,6 @@
     {
       "id": "ml-embeddings",
       "name": "Embeddings (Transformer)",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
       "tags": [
         "ai-systems",
         "transformers"
@@ -1562,9 +1451,6 @@
     {
       "id": "ml-self-attention",
       "name": "Self-Attention",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
       "tags": [
         "ai-systems",
         "transformers"
@@ -1598,9 +1484,6 @@
     {
       "id": "ml-multi-head",
       "name": "Multi-Head Attention",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
       "tags": [
         "ai-systems",
         "transformers"
@@ -1627,9 +1510,6 @@
     {
       "id": "ml-transformer-block",
       "name": "Transformer Block",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "transformers",
       "tags": [
         "ai-systems",
         "transformers"
@@ -1664,9 +1544,6 @@
     {
       "id": "ml-training",
       "name": "Training & Debugging",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
       "tags": [
         "ai-systems",
         "training"
@@ -1694,9 +1571,6 @@
     {
       "id": "ml-checkpointing",
       "name": "Checkpointing",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
       "tags": [
         "ai-systems",
         "training"
@@ -1723,9 +1597,6 @@
     {
       "id": "ml-lora",
       "name": "LoRA & PEFT",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
       "tags": [
         "ai-systems",
         "training"
@@ -1752,9 +1623,6 @@
     {
       "id": "ml-data-engineering",
       "name": "Style Data Engineering",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "training",
       "tags": [
         "ai-systems",
         "training"
@@ -1786,9 +1654,6 @@
     {
       "id": "ml-browser-runtime",
       "name": "Browser ML Runtime",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "runtime",
       "tags": [
         "ai-systems",
         "runtime"
@@ -1817,9 +1682,6 @@
     {
       "id": "ml-webgpu",
       "name": "WebGPU Compute",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "runtime",
       "tags": [
         "ai-systems",
         "runtime"
@@ -1847,9 +1709,6 @@
     {
       "id": "ml-evaluation",
       "name": "Model Evaluation",
-      "category": "ml",
-      "track": "ai-systems",
-      "subtrack": "evals",
       "tags": [
         "ai-systems",
         "evals"
@@ -1882,9 +1741,6 @@
     {
       "id": "http-lifecycle",
       "name": "HTTP Lifecycle",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "http",
       "tags": [
         "backend",
         "http"
@@ -1921,9 +1777,6 @@
     {
       "id": "api-keys",
       "name": "API Keys",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "auth",
       "tags": [
         "backend",
         "auth"
@@ -1974,9 +1827,6 @@
     {
       "id": "rate-limiting",
       "name": "Rate Limiting",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "rate-limiting",
       "tags": [
         "backend",
         "rate-limiting"
@@ -2025,9 +1875,6 @@
     {
       "id": "idempotency",
       "name": "Idempotency",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "idempotency",
       "tags": [
         "backend",
         "idempotency"
@@ -2072,9 +1919,6 @@
     {
       "id": "retries-dlq",
       "name": "Retries & DLQ",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "queues",
       "tags": [
         "backend",
         "queues"
@@ -2126,9 +1970,6 @@
     {
       "id": "webhooks",
       "name": "Webhooks",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "webhooks",
       "tags": [
         "backend",
         "webhooks"
@@ -2155,9 +1996,6 @@
     {
       "id": "background-jobs",
       "name": "Background Jobs",
-      "category": "backend",
-      "track": "backend",
-      "subtrack": "jobs",
       "tags": [
         "backend",
         "jobs"
@@ -2189,9 +2027,6 @@
     {
       "id": "caching",
       "name": "Caching",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "caching",
       "tags": [
         "backend",
         "caching"
@@ -2228,9 +2063,6 @@
     {
       "id": "message-queues",
       "name": "Message Queues",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "queues",
       "tags": [
         "backend",
         "queues"
@@ -2275,9 +2107,6 @@
     {
       "id": "monitoring-analytics",
       "name": "Observability",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "observability",
       "tags": [
         "backend",
         "observability"
@@ -2321,9 +2150,6 @@
     {
       "id": "api-design",
       "name": "API Design",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "api-design",
       "tags": [
         "backend",
         "api-design"
@@ -2366,9 +2192,6 @@
     {
       "id": "auth-systems",
       "name": "Auth Systems",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "auth",
       "tags": [
         "backend",
         "auth"
@@ -2411,9 +2234,6 @@
     {
       "id": "ecommerce-payments",
       "name": "Payments",
-      "category": "hld",
-      "track": "backend",
-      "subtrack": "payments",
       "tags": [
         "backend",
         "payments"
@@ -2441,9 +2261,6 @@
     {
       "id": "b-tree",
       "name": "B-Tree",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
       "tags": [
         "databases",
         "storage-engines"
@@ -2487,9 +2304,6 @@
     {
       "id": "lsm-tree",
       "name": "LSM Tree",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
       "tags": [
         "databases",
         "storage-engines"
@@ -2541,9 +2355,6 @@
     {
       "id": "wal",
       "name": "Write-Ahead Log",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "write-path",
       "tags": [
         "databases",
         "write-path"
@@ -2593,9 +2404,6 @@
     {
       "id": "compaction",
       "name": "Compaction",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "write-path",
       "tags": [
         "databases",
         "write-path"
@@ -2634,9 +2442,6 @@
     {
       "id": "object-storage",
       "name": "Object Storage",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "object-storage",
       "tags": [
         "databases",
         "object-storage"
@@ -2682,9 +2487,6 @@
     {
       "id": "columnar-storage",
       "name": "Columnar Storage",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "storage-engines",
       "tags": [
         "databases",
         "storage-engines"
@@ -2715,9 +2517,6 @@
     {
       "id": "secondary-index",
       "name": "Secondary Indexes",
-      "category": "databases",
-      "track": "databases",
-      "subtrack": "indexing",
       "tags": [
         "databases",
         "indexing"
@@ -2746,9 +2545,6 @@
     {
       "id": "storage-retrieval",
       "name": "Storage Engines",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "storage-engines",
       "tags": [
         "databases",
         "storage-engines"
@@ -2781,9 +2577,6 @@
     {
       "id": "sharding",
       "name": "Sharding",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "partitioning",
       "tags": [
         "databases",
         "partitioning"
@@ -2818,9 +2611,6 @@
     {
       "id": "replication",
       "name": "Replication",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "replication",
       "tags": [
         "databases",
         "replication"
@@ -2854,9 +2644,6 @@
     {
       "id": "cap-theorem",
       "name": "CAP & Consistency Models",
-      "category": "hld",
-      "track": "databases",
-      "subtrack": "consistency",
       "tags": [
         "databases",
         "consistency"
@@ -2891,9 +2678,6 @@
     {
       "id": "object-modeling",
       "name": "Object Modeling",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -2918,9 +2702,6 @@
     {
       "id": "state-management",
       "name": "State Machines",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -2948,9 +2729,6 @@
     {
       "id": "strategy-pattern",
       "name": "Strategy Pattern",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -2978,9 +2756,6 @@
     {
       "id": "observer-pattern",
       "name": "Observer Pattern",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3005,9 +2780,6 @@
     {
       "id": "factory-creational",
       "name": "Factory & Creational",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3032,9 +2804,6 @@
     {
       "id": "decorator-structural",
       "name": "Decorator & Structural",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3059,9 +2828,6 @@
     {
       "id": "concurrency-design",
       "name": "Concurrency Design",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3091,9 +2857,6 @@
     {
       "id": "command-chain",
       "name": "Command & Chain",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3118,9 +2881,6 @@
     {
       "id": "booking-inventory",
       "name": "Booking & Inventory",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3146,9 +2906,6 @@
     {
       "id": "game-design",
       "name": "Game/Simulation Design",
-      "category": "lld",
-      "track": "system-design",
-      "subtrack": "low-level-design",
       "tags": [
         "system-design",
         "low-level-design"
@@ -3181,9 +2938,6 @@
     {
       "id": "load-balancing",
       "name": "Load Balancing",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "scalability",
       "tags": [
         "system-design",
         "scalability"
@@ -3216,9 +2970,6 @@
     {
       "id": "consistent-hashing",
       "name": "Consistent Hashing",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "scalability",
       "tags": [
         "system-design",
         "scalability"
@@ -3245,9 +2996,6 @@
     {
       "id": "consensus",
       "name": "Consensus",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "distributed-systems",
       "tags": [
         "system-design",
         "distributed-systems"
@@ -3282,9 +3030,6 @@
     {
       "id": "distributed-infra",
       "name": "Distributed Infra",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "distributed-systems",
       "tags": [
         "system-design",
         "distributed-systems"
@@ -3313,9 +3058,6 @@
     {
       "id": "messaging-realtime",
       "name": "Real-time Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "event-driven",
       "tags": [
         "system-design",
         "event-driven"
@@ -3342,9 +3084,6 @@
     {
       "id": "social-media",
       "name": "Feed Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3370,9 +3109,6 @@
     {
       "id": "streaming-media",
       "name": "Streaming Media",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3397,9 +3133,6 @@
     {
       "id": "location-transport",
       "name": "Geo Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3424,9 +3157,6 @@
     {
       "id": "collaboration-productivity",
       "name": "Collaboration Systems",
-      "category": "hld",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3451,9 +3181,6 @@
     {
       "id": "search-platform-design",
       "name": "Search Platform Design",
-      "category": "system-design",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3498,9 +3225,6 @@
     {
       "id": "rag-system-design",
       "name": "RAG System Design",
-      "category": "system-design",
-      "track": "system-design",
-      "subtrack": "system-design-cases",
       "tags": [
         "system-design",
         "system-design-cases"
@@ -3546,9 +3270,6 @@
     {
       "id": "array-hashing",
       "name": "Arrays & Hashing",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "arrays-hashing",
       "tags": [
         "dsa",
         "arrays-hashing"
@@ -3578,9 +3299,6 @@
     {
       "id": "two-pointers",
       "name": "Two Pointers",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "two-pointers",
       "tags": [
         "dsa",
         "two-pointers"
@@ -3612,9 +3330,6 @@
     {
       "id": "sliding-window",
       "name": "Sliding Window",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "sliding-window",
       "tags": [
         "dsa",
         "sliding-window"
@@ -3644,9 +3359,6 @@
     {
       "id": "stack",
       "name": "Stack",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "stack-queue",
       "tags": [
         "dsa",
         "stack-queue"
@@ -3671,9 +3383,6 @@
     {
       "id": "binary-search",
       "name": "Binary Search",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "binary-search",
       "tags": [
         "dsa",
         "binary-search"
@@ -3703,9 +3412,6 @@
     {
       "id": "linked-list",
       "name": "Linked List",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "linked-list",
       "tags": [
         "dsa",
         "linked-list"
@@ -3730,9 +3436,6 @@
     {
       "id": "trees",
       "name": "Trees",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "trees",
       "tags": [
         "dsa",
         "trees"
@@ -3764,9 +3467,6 @@
     {
       "id": "tries",
       "name": "Trie",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "trees",
       "tags": [
         "dsa",
         "trees"
@@ -3791,9 +3491,6 @@
     {
       "id": "heap",
       "name": "Heap / Priority Queue",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "heap",
       "tags": [
         "dsa",
         "heap"
@@ -3823,9 +3520,6 @@
     {
       "id": "backtracking",
       "name": "Backtracking",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "backtracking",
       "tags": [
         "dsa",
         "backtracking"
@@ -3850,9 +3544,6 @@
     {
       "id": "graphs",
       "name": "Graphs",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
       "tags": [
         "dsa",
         "graphs"
@@ -3884,9 +3575,6 @@
     {
       "id": "shortest-path",
       "name": "Shortest Path",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
       "tags": [
         "dsa",
         "graphs"
@@ -3912,9 +3600,6 @@
     {
       "id": "union-find",
       "name": "Union-Find",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "graphs",
       "tags": [
         "dsa",
         "graphs"
@@ -3939,9 +3624,6 @@
     {
       "id": "dp-1d",
       "name": "1D DP",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "dynamic-programming",
       "tags": [
         "dsa",
         "dynamic-programming"
@@ -3973,9 +3655,6 @@
     {
       "id": "dp-2d",
       "name": "2D DP",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "dynamic-programming",
       "tags": [
         "dsa",
         "dynamic-programming"
@@ -4000,9 +3679,6 @@
     {
       "id": "greedy",
       "name": "Greedy",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "greedy",
       "tags": [
         "dsa",
         "greedy"
@@ -4029,9 +3705,6 @@
     {
       "id": "intervals",
       "name": "Intervals",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "intervals",
       "tags": [
         "dsa",
         "intervals"
@@ -4056,9 +3729,6 @@
     {
       "id": "math-geometry",
       "name": "Math & Geometry",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "math",
       "tags": [
         "dsa",
         "math"
@@ -4081,9 +3751,6 @@
     {
       "id": "bit-manipulation",
       "name": "Bit Manipulation",
-      "category": "dsa",
-      "track": "dsa",
-      "subtrack": "bit-manipulation",
       "tags": [
         "dsa",
         "bit-manipulation"
@@ -4106,9 +3773,6 @@
     {
       "id": "leadership-and-influence",
       "name": "Leadership",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4136,9 +3800,6 @@
     {
       "id": "conflict-resolution",
       "name": "Conflict Resolution",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4166,9 +3827,6 @@
     {
       "id": "problem-solving-and-decision-making",
       "name": "Decision Making",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4196,9 +3854,6 @@
     {
       "id": "teamwork-and-collaboration",
       "name": "Collaboration",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4226,9 +3881,6 @@
     {
       "id": "failure-and-learning",
       "name": "Failure & Learning",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4251,9 +3903,6 @@
     {
       "id": "communication",
       "name": "Communication",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4281,9 +3930,6 @@
     {
       "id": "time-management-and-prioritization",
       "name": "Prioritization",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4311,9 +3957,6 @@
     {
       "id": "innovation-and-creativity",
       "name": "Innovation",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4341,9 +3984,6 @@
     {
       "id": "customer-obsession",
       "name": "Customer Obsession",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4366,9 +4006,6 @@
     {
       "id": "ownership-and-accountability",
       "name": "Ownership",
-      "category": "behavioral",
-      "track": "product",
-      "subtrack": "behavioral",
       "tags": [
         "product",
         "behavioral"
@@ -4391,9 +4028,6 @@
     {
       "id": "positioning",
       "name": "Positioning",
-      "category": "product",
-      "track": "product",
-      "subtrack": "positioning",
       "tags": [
         "product",
         "positioning"
@@ -4418,9 +4052,6 @@
     {
       "id": "landing-pages",
       "name": "Landing Pages",
-      "category": "product",
-      "track": "product",
-      "subtrack": "positioning",
       "tags": [
         "product",
         "positioning"
@@ -4453,9 +4084,6 @@
     {
       "id": "seo",
       "name": "SEO",
-      "category": "product",
-      "track": "product",
-      "subtrack": "growth",
       "tags": [
         "product",
         "growth"
@@ -4484,9 +4112,6 @@
     {
       "id": "product-analytics",
       "name": "Product Analytics",
-      "category": "product",
-      "track": "product",
-      "subtrack": "analytics",
       "tags": [
         "product",
         "analytics"

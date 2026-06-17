@@ -115,14 +115,17 @@ function StatLine({ label, value, tone }: { label: string; value: React.ReactNod
 
 function pickNextDrill(
   drillState: Record<string, { status: string; attempts: number }>,
-  getElo: (trackId: string) => number,
+  getElo: (roadmapId: string) => number,
 ): Drill | null {
   const unsolved = DRILLS.filter(d => (drillState[d.id]?.status ?? 'unsolved') !== 'solved');
   if (!unsolved.length) return null;
   const ranked = unsolved
     .map(d => {
-      const trackId = CONCEPT_BY_ID[d.conceptId]?.track;
-      const userElo = trackId ? getElo(trackId) : DEFAULT_USER_ELO;
+      const roadmaps = CONCEPT_BY_ID[d.conceptId]?.roadmaps ?? [];
+      // Sort against the user's strongest roadmap-context for this concept.
+      const userElo = roadmaps.length
+        ? Math.max(...roadmaps.map(getElo))
+        : DEFAULT_USER_ELO;
       const problemElo = difficultyToElo(d.difficulty);
       const distance = Math.abs(problemElo - userElo);
       const inProgressBoost = drillState[d.id]?.status === 'attempted' ? -100 : 0;

@@ -22,11 +22,10 @@ import {
   CONCEPT_BY_ID,
   type Drill,
   DRILLS,
+  groupForTag,
   REVIEW_QUESTIONS,
   type ReviewQuestion,
   sortedTracks,
-  TRACK_BY_ID,
-  type TrackId,
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { type DrillEntry, useDrillStore, useUserElo } from '../hooks/useUserStore';
@@ -166,39 +165,39 @@ function StatNumber({ label, value, hint, tone }: { label: string; value: React.
 function DrillsTab() {
   const { drills: drillState, getDrill } = useDrillStore();
   const { getElo } = useUserElo();
-  const [track, setTrack] = useState<TrackId | 'all'>('all');
+  const [group, setGroup] = useState<string | 'all'>('all');
 
-  // Attach track + problem ELO + distance to user ELO once per drill.
-  // The "distance" is the absolute gap between the user's per-track rating
-  // and the drill's static rating — smaller distance = closer to their edge.
-  const withTrack = useMemo(
+  // Attach primary group + problem ELO + distance to the user's strongest
+  // roadmap-context for this concept. Smaller distance = closer to user's edge.
+  const withMeta = useMemo(
     () => DRILLS.map(d => {
-      const tid = CONCEPT_BY_ID[d.conceptId]?.track;
+      const concept = CONCEPT_BY_ID[d.conceptId];
+      const grp = concept?.tags[0];
+      const roadmaps = concept?.roadmaps ?? [];
       const problemElo = difficultyToElo(d.difficulty);
-      const userElo = tid ? getElo(tid) : DEFAULT_USER_ELO;
+      const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : DEFAULT_USER_ELO;
       const distance = Math.abs(problemElo - userElo);
-      return { drill: d, track: tid, problemElo, userElo, distance };
+      return { drill: d, group: grp, problemElo, userElo, distance };
     }),
     [getElo],
   );
 
-  const tracksRollup = useMemo(() => {
-    const tracks = sortedTracks();
-    return tracks
+  const groupsRollup = useMemo(() => {
+    return sortedTracks()
       .map(t => {
-        const drills = withTrack.filter(x => x.track === t.id).map(x => x.drill);
+        const drills = withMeta.filter(x => x.group === t.id).map(x => x.drill);
         if (!drills.length) return null;
         const solved = drills.filter(d => drillState[d.id]?.status === 'solved').length;
-        return { track: t, total: drills.length, solved, elo: getElo(t.id) };
+        return { group: t, total: drills.length, solved };
       })
-      .filter(Boolean) as { track: ReturnType<typeof sortedTracks>[number]; total: number; solved: number; elo: number }[];
-  }, [drillState, withTrack, getElo]);
+      .filter(Boolean) as { group: ReturnType<typeof sortedTracks>[number]; total: number; solved: number }[];
+  }, [drillState, withMeta]);
 
   // Filter, then sort by proximity to user ELO so the "edge" drills bubble up.
   const filtered = useMemo(() => {
-    const base = track === 'all' ? withTrack : withTrack.filter(x => x.track === track);
+    const base = group === 'all' ? withMeta : withMeta.filter(x => x.group === group);
     return [...base].sort((a, b) => a.distance - b.distance);
-  }, [withTrack, track]);
+  }, [withMeta, group]);
 
   // Recommended: closest unsolved drills to the user's current ELO.
   const recommended = useMemo(
@@ -211,14 +210,14 @@ function DrillsTab() {
   return (
     <div>
       <div className="mb-4">
-        <div className="mb-2 text-xs font-medium text-slate-400">Filter by track</div>
+        <div className="mb-2 text-xs font-medium text-slate-400">Filter by group</div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
-          <FilterPill active={track === 'all'} onClick={() => setTrack('all')}>
+          <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>
             All ({DRILLS.length})
           </FilterPill>
-          {tracksRollup.map(({ track: t, total, solved, elo }) => (
-            <FilterPill key={t.id} active={track === t.id} tone={t.color} onClick={() => setTrack(t.id)}>
-              {t.short} ({solved}/{total}) · <span className="font-mono text-slate-500">{elo}</span>
+          {groupsRollup.map(({ group: g, total, solved }) => (
+            <FilterPill key={g.id} active={group === g.id} tone={g.color} onClick={() => setGroup(g.id)}>
+              {g.short} ({solved}/{total})
             </FilterPill>
           ))}
         </div>
@@ -233,23 +232,23 @@ function DrillsTab() {
             </span>
           </div>
           <div className="grid gap-2 sm:grid-cols-3">
-            {recommended.map(({ drill: d, track: tid }) => {
+            {recommended.map(({ drill: d, group: gid }) => {
               const st = getDrill(d.id);
               const concept = CONCEPT_BY_ID[d.conceptId];
-              return <DrillCard key={d.id} drill={d} state={st} trackId={tid} conceptName={concept?.name} />;
+              return <DrillCard key={d.id} drill={d} state={st} groupTag={gid} conceptName={concept?.name} />;
             })}
           </div>
         </div>
       )}
 
       {filtered.length === 0 ? (
-        <EmptyState title="No drills in this track yet" hint="Pick a different track above." />
+        <EmptyState title="No drills in this group yet" hint="Pick a different group above." />
       ) : (
         <div className="grid gap-2 sm:grid-cols-2">
-          {filtered.map(({ drill: d, track: tid }) => {
+          {filtered.map(({ drill: d, group: gid }) => {
             const st = getDrill(d.id);
             const concept = CONCEPT_BY_ID[d.conceptId];
-            return <DrillCard key={d.id} drill={d} state={st} trackId={tid} conceptName={concept?.name} />;
+            return <DrillCard key={d.id} drill={d} state={st} groupTag={gid} conceptName={concept?.name} />;
           })}
         </div>
       )}
@@ -260,15 +259,15 @@ function DrillsTab() {
 function DrillCard({
   drill,
   state,
-  trackId,
+  groupTag,
   conceptName,
 }: {
   drill: Drill;
   state: DrillEntry;
-  trackId?: TrackId;
+  groupTag?: string;
   conceptName?: string;
 }) {
-  const trk = trackId ? TRACK_BY_ID[trackId] : undefined;
+  const trk = groupTag ? groupForTag(groupTag) : undefined;
   return (
     <Link
       to={`/drills/${drill.id}`}

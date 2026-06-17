@@ -6,9 +6,9 @@ import { Badge, Button, Card, PageShell, SectionTitle } from '../components/ui';
 import {
   artifactsForProject,
   conceptsForProject,
+  groupForTag,
   PROJECT_BY_ID,
   type ProjectStatus,
-  TRACK_BY_ID,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useProjectStore } from '../hooks/useUserStore';
@@ -68,9 +68,10 @@ export default function ProjectDetail() {
       <div className="mb-6">
         <div className="mb-2 flex flex-wrap gap-1.5">
           <Badge tone="purple">{project.lane}</Badge>
-          {project.tracks.map(t => (
-            <Badge key={t} tone={TRACK_BY_ID[t]?.color}>{TRACK_BY_ID[t]?.title}</Badge>
-          ))}
+          {project.tracks.map(t => {
+            const g = groupForTag(t);
+            return <Badge key={t} tone={g?.color}>{g?.title ?? t}</Badge>;
+          })}
         </div>
         <h1 className="text-2xl font-bold text-white sm:text-3xl">{project.name}</h1>
         <p className="mt-1 text-sm text-slate-400">{project.purpose}</p>

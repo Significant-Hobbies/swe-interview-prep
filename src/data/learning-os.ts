@@ -6,7 +6,6 @@ import drillsData from './drills.json';
 import projectsData from './projects.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
-import tracksData from './tracks.json';
 
 export type TrackId =
   | 'search-ir'
@@ -57,12 +56,6 @@ export interface Concept {
   tags: string[];
   /** Roadmap IDs whose milestones include this concept. Derived from roadmaps.json. */
   roadmaps: string[];
-  /** @deprecated Use tags[]. Retained until ELO migrates off per-track keying. */
-  category: string;
-  /** @deprecated Use tags[0]. Same value as tags[0] today. */
-  track: TrackId;
-  /** @deprecated Use tags[1]. Same value as tags[1] today. */
-  subtrack: string;
   difficulty: Difficulty;
   priority: number;
   prerequisites: string[];
@@ -141,7 +134,90 @@ export interface ReviewQuestion {
   answer: string;
 }
 
-export const TRACKS: Track[] = (tracksData as any).tracks;
+// The 8 "known groups" — top-level tags the UI gives a color/icon/title.
+// Any tag not in this list renders as a plain text chip.
+export const TRACKS: Track[] = [
+  {
+    id: 'search-ir',
+    title: 'Search & IR',
+    short: 'Search',
+    description: 'Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.',
+    icon: 'Search',
+    color: 'purple',
+    order: 1,
+    primary: true,
+  },
+  {
+    id: 'vector-db',
+    title: 'Vector DB & ANN',
+    short: 'Vectors',
+    description: 'Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.',
+    icon: 'Boxes',
+    color: 'fuchsia',
+    order: 2,
+    primary: true,
+  },
+  {
+    id: 'ai-systems',
+    title: 'AI Systems',
+    short: 'AI',
+    description: 'Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.',
+    icon: 'Sparkles',
+    color: 'cyan',
+    order: 3,
+    primary: true,
+  },
+  {
+    id: 'backend',
+    title: 'Backend',
+    short: 'Backend',
+    description: 'Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.',
+    icon: 'Server',
+    color: 'emerald',
+    order: 4,
+    primary: true,
+  },
+  {
+    id: 'databases',
+    title: 'Databases & Storage',
+    short: 'Storage',
+    description: 'Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.',
+    icon: 'Database',
+    color: 'amber',
+    order: 5,
+    primary: false,
+  },
+  {
+    id: 'system-design',
+    title: 'System Design',
+    short: 'Design',
+    description: 'Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.',
+    icon: 'Network',
+    color: 'orange',
+    order: 6,
+    primary: false,
+  },
+  {
+    id: 'dsa',
+    title: 'DSA & Implementation',
+    short: 'DSA',
+    description: 'Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.',
+    icon: 'Binary',
+    color: 'blue',
+    order: 7,
+    primary: false,
+  },
+  {
+    id: 'product',
+    title: 'Product & Distribution',
+    short: 'Product',
+    description: 'Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.',
+    icon: 'Rocket',
+    color: 'rose',
+    order: 8,
+    primary: false,
+  },
+];
 export const CONCEPTS: Concept[] = (conceptsData as any).concepts;
 export const ROADMAPS: Roadmap[] = (roadmapsData as any).roadmaps;
 export const ARTIFACTS: Artifact[] = (artifactsData as any).artifacts;
@@ -159,14 +235,10 @@ export const REVIEW_QUESTION_BY_ID: Record<string, ReviewQuestion> = Object.from
   REVIEW_QUESTIONS.map(q => [q.id, q]),
 );
 
-export function conceptsByTrack(track: TrackId): Concept[] {
-  return CONCEPTS.filter(c => c.track === track);
-}
-
 // --- Tag-first taxonomy ----------------------------------------------------
-// New mental model: concepts have tags[] + roadmaps[]. The 8 "tracks" are now
-// just known top-level tags with display metadata. Use these helpers in new
-// code; conceptsByTrack remains as a thin wrapper for unmigrated callers.
+// Concepts have tags[] + roadmaps[]. The 8 "tracks" are just known top-level
+// tags with display metadata; TrackId remains as the type for those known
+// group IDs (used by Roadmap.tracks and Project.tracks).
 
 /** Tags that the UI knows about — gives them a color + icon + title. */
 export const KNOWN_GROUP_TAGS: TrackId[] = TRACKS.map(t => t.id as TrackId);

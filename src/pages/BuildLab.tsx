@@ -234,10 +234,11 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Solving a drill closes the loop — it nudges the concept toward mastery.
     if (status === 'solved') void review(drill!.conceptId, 'good');
-    // First-time solve bumps the per-track ELO. v1 only counts the success
-    // signal; an explicit "couldn't solve" path would be needed to push ELO down.
+    // First-time solve bumps ELO for every roadmap this concept belongs to.
+    // v1 only counts the success signal; an explicit "couldn't solve" path
+    // would be needed to push ELO down.
     if (status === 'solved' && !wasSolved && concept) {
-      recordResult(concept.track, difficultyToElo(drill!.difficulty), 1);
+      recordResult(concept.roadmaps, difficultyToElo(drill!.difficulty), 1);
     }
   }
 

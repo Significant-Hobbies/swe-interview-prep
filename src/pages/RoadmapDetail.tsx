@@ -6,10 +6,10 @@ import {
   ARTIFACT_BY_ID,
   CONCEPT_BY_ID,
   DRILL_BY_ID,
+  groupForTag,
   type Milestone,
   ROADMAP_BY_ID,
   roadmapConceptIds,
-  TRACK_BY_ID,
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
@@ -51,7 +51,7 @@ export default function RoadmapDetail() {
         <h1 className="text-2xl font-semibold tracking-tight text-slate-50">{roadmap.title}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400">
           {roadmap.tracks.map((t, i) => {
-            const trk = TRACK_BY_ID[t];
+            const trk = groupForTag(t);
             if (!trk) return null;
             return (
               <span key={t} className="inline-flex items-center gap-1.5">
