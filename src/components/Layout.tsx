@@ -23,13 +23,15 @@ interface NavItem {
   icon: typeof Network;
 }
 
-// Four-tab IA. Learn = roadmaps + concept library. Practice = drills + spaced
+// Primary IA. Learn = roadmaps + concept library. Practice = drills + spaced
 // reviews. Playground = free coding canvas. Progress = mastery + notes.
+// Docs = long-form reference (system design, interview prep, ML case studies).
 const PRIMARY_NAV: NavItem[] = [
   { to: '/learn', label: 'Learn', icon: Network },
   { to: '/practice', label: 'Practice', icon: Dumbbell },
   { to: '/playground', label: 'Playground', icon: Code2 },
   { to: '/progress', label: 'Progress', icon: BarChart3 },
+  { to: '/learning', label: 'Docs', icon: BookOpen },
 ];
 
 export default function Layout() {

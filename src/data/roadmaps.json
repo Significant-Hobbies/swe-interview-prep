@@ -6,29 +6,53 @@
       "title": "9-Day Reset",
       "horizon": "9d",
       "goal": "Rebuild learning momentum by taking one concept all the way to a shipped artifact.",
-      "description": "A short sprint to break inertia. End the nine days with one real artifact — a working BM25 search — and the loop muscle memory restored.",
-      "tracks": ["search-ir"],
+      "description": "A short sprint to break inertia. End the nine days with one real artifact \u2014 a working BM25 search \u2014 and the loop muscle memory restored.",
+      "tracks": [
+        "search-ir"
+      ],
       "milestones": [
         {
-          "title": "Days 1-3 — Retrieval foundations",
+          "title": "Days 1-3 \u2014 Retrieval foundations",
           "goal": "Understand how lexical search ranks documents.",
-          "concepts": ["tokenization", "inverted-index", "tf-idf", "bm25"],
-          "drills": ["build-tokenizer", "calculate-bm25-score"],
+          "concepts": [
+            "tokenization",
+            "inverted-index",
+            "tf-idf",
+            "bm25"
+          ],
+          "drills": [
+            "build-tokenizer",
+            "calculate-bm25-score"
+          ],
           "artifacts": []
         },
         {
-          "title": "Days 4-6 — Build",
+          "title": "Days 4-6 \u2014 Build",
           "goal": "Implement a working BM25 ranker on a real index.",
-          "concepts": ["bm25", "inverted-index"],
-          "drills": ["build-inverted-index", "implement-bm25-ranker"],
-          "artifacts": ["implement-bm25-highsignal"]
+          "concepts": [
+            "bm25",
+            "inverted-index"
+          ],
+          "drills": [
+            "build-inverted-index",
+            "implement-bm25-ranker"
+          ],
+          "artifacts": [
+            "implement-bm25-highsignal"
+          ]
         },
         {
-          "title": "Days 7-9 — Ship and review",
+          "title": "Days 7-9 \u2014 Ship and review",
           "goal": "Finish the artifact, write it up, and schedule reviews.",
-          "concepts": ["search-evals"],
-          "drills": ["build-search-eval-harness"],
-          "artifacts": ["search-eval-harness"]
+          "concepts": [
+            "search-evals"
+          ],
+          "drills": [
+            "build-search-eval-harness"
+          ],
+          "artifacts": [
+            "search-eval-harness"
+          ]
         }
       ]
     },
@@ -38,35 +62,73 @@
       "horizon": "30d",
       "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
       "description": "Four weeks that take you from tokenization to a working hybrid retriever evaluated against a frozen query set.",
-      "tracks": ["search-ir", "vector-db"],
+      "tracks": [
+        "search-ir",
+        "vector-db"
+      ],
       "milestones": [
         {
-          "title": "Week 1 — Lexical retrieval",
+          "title": "Week 1 \u2014 Lexical retrieval",
           "goal": "Tokenization, inverted index, BM25.",
-          "concepts": ["tokenization", "inverted-index", "tf-idf", "bm25"],
-          "drills": ["build-tokenizer", "build-inverted-index", "implement-bm25-ranker"],
-          "artifacts": ["implement-bm25-highsignal"]
+          "concepts": [
+            "tokenization",
+            "inverted-index",
+            "tf-idf",
+            "bm25"
+          ],
+          "drills": [
+            "build-tokenizer",
+            "build-inverted-index",
+            "implement-bm25-ranker"
+          ],
+          "artifacts": [
+            "implement-bm25-highsignal"
+          ]
         },
         {
-          "title": "Week 2 — Evaluation",
+          "title": "Week 2 \u2014 Evaluation",
           "goal": "Make retrieval quality measurable.",
-          "concepts": ["ranking-metrics", "search-evals"],
-          "drills": ["build-search-eval-harness"],
-          "artifacts": ["search-eval-harness"]
+          "concepts": [
+            "ranking-metrics",
+            "search-evals"
+          ],
+          "drills": [
+            "build-search-eval-harness"
+          ],
+          "artifacts": [
+            "search-eval-harness"
+          ]
         },
         {
-          "title": "Week 3 — Vector retrieval",
+          "title": "Week 3 \u2014 Vector retrieval",
           "goal": "Embeddings, similarity, exact nearest-neighbour search.",
-          "concepts": ["embeddings", "vector-similarity", "brute-force-vector-db", "metadata-filtering"],
-          "drills": ["embed-and-search", "build-brute-force-index"],
-          "artifacts": ["tiny-vector-db-brute-force"]
+          "concepts": [
+            "embeddings",
+            "vector-similarity",
+            "brute-force-vector-db",
+            "metadata-filtering"
+          ],
+          "drills": [
+            "embed-and-search",
+            "build-brute-force-index"
+          ],
+          "artifacts": [
+            "tiny-vector-db-brute-force"
+          ]
         },
         {
-          "title": "Week 4 — Hybrid search",
+          "title": "Week 4 \u2014 Hybrid search",
           "goal": "Fuse lexical and vector retrieval and prove it wins.",
-          "concepts": ["hybrid-search", "reranking"],
-          "drills": ["implement-rrf"],
-          "artifacts": ["hybrid-search-v0"]
+          "concepts": [
+            "hybrid-search",
+            "reranking"
+          ],
+          "drills": [
+            "implement-rrf"
+          ],
+          "artifacts": [
+            "hybrid-search-v0"
+          ]
         }
       ]
     },
@@ -76,28 +138,79 @@
       "horizon": "90d",
       "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
       "description": "The core roadmap. Three months that move from retrieval basics to ANN, RAG, and the storage foundations behind systems like Turbopuffer.",
-      "tracks": ["search-ir", "vector-db", "ai-systems", "databases"],
+      "tracks": [
+        "search-ir",
+        "vector-db",
+        "ai-systems",
+        "databases"
+      ],
       "milestones": [
         {
-          "title": "Month 1 — Retrieval and evaluation",
+          "title": "Month 1 \u2014 Retrieval and evaluation",
           "goal": "Lexical + vector retrieval, hybrid search, evals.",
-          "concepts": ["inverted-index", "bm25", "embeddings", "hybrid-search", "search-evals"],
-          "drills": ["implement-bm25-ranker", "implement-rrf", "build-search-eval-harness"],
-          "artifacts": ["implement-bm25-highsignal", "hybrid-search-v0", "search-eval-harness"]
+          "concepts": [
+            "inverted-index",
+            "bm25",
+            "embeddings",
+            "hybrid-search",
+            "search-evals"
+          ],
+          "drills": [
+            "implement-bm25-ranker",
+            "implement-rrf",
+            "build-search-eval-harness"
+          ],
+          "artifacts": [
+            "implement-bm25-highsignal",
+            "hybrid-search-v0",
+            "search-eval-harness"
+          ]
         },
         {
-          "title": "Month 2 — Vector databases and ANN",
+          "title": "Month 2 \u2014 Vector databases and ANN",
           "goal": "Brute force, HNSW, filtering, recall/latency tradeoffs.",
-          "concepts": ["brute-force-vector-db", "hnsw", "ivf", "metadata-filtering", "recall-latency-tradeoffs"],
-          "drills": ["build-brute-force-index", "implement-metadata-filter", "explain-hnsw-layers"],
-          "artifacts": ["tiny-vector-db-brute-force", "vector-metadata-filter", "recall-latency-dashboard"]
+          "concepts": [
+            "brute-force-vector-db",
+            "hnsw",
+            "ivf",
+            "metadata-filtering",
+            "recall-latency-tradeoffs"
+          ],
+          "drills": [
+            "build-brute-force-index",
+            "implement-metadata-filter",
+            "explain-hnsw-layers"
+          ],
+          "artifacts": [
+            "tiny-vector-db-brute-force",
+            "vector-metadata-filter",
+            "recall-latency-dashboard"
+          ]
         },
         {
-          "title": "Month 3 — AI systems and storage",
+          "title": "Month 3 \u2014 AI systems and storage",
           "goal": "RAG with evals, plus the storage foundations underneath.",
-          "concepts": ["rag", "chunking", "reranking", "llm-evals", "wal", "lsm-tree", "object-storage"],
-          "drills": ["build-rag-pipeline", "build-chunker", "build-wal", "build-memtable-sstable"],
-          "artifacts": ["rag-pipeline-v0", "llm-eval-harness", "toy-wal", "object-storage-index"]
+          "concepts": [
+            "rag",
+            "chunking",
+            "reranking",
+            "llm-evals",
+            "wal",
+            "lsm-tree",
+            "object-storage"
+          ],
+          "drills": [
+            "build-rag-pipeline",
+            "build-chunker",
+            "build-wal",
+            "build-memtable-sstable"
+          ],
+          "artifacts": [
+            "rag-pipeline-v0",
+            "llm-eval-harness",
+            "toy-wal",
+            "object-storage-index"
+          ]
         }
       ]
     },
@@ -106,36 +219,95 @@
       "title": "12-Month Advanced AI Infrastructure",
       "horizon": "12mo",
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
-      "description": "The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.",
-      "tracks": ["search-ir", "vector-db", "ai-systems", "backend", "databases", "system-design"],
+      "description": "The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design \u2014 measured in shipped artifacts and project features.",
+      "tracks": [
+        "search-ir",
+        "vector-db",
+        "ai-systems",
+        "backend",
+        "databases",
+        "system-design"
+      ],
       "milestones": [
         {
-          "title": "Q1 — Retrieval and vector foundations",
+          "title": "Q1 \u2014 Retrieval and vector foundations",
           "goal": "Complete the 90-day AI search/infra roadmap.",
-          "concepts": ["bm25", "hybrid-search", "hnsw", "metadata-filtering", "rag"],
+          "concepts": [
+            "bm25",
+            "hybrid-search",
+            "hnsw",
+            "metadata-filtering",
+            "rag"
+          ],
           "drills": [],
-          "artifacts": ["hybrid-search-v0", "tiny-vector-db-brute-force", "rag-pipeline-v0"]
+          "artifacts": [
+            "hybrid-search-v0",
+            "tiny-vector-db-brute-force",
+            "rag-pipeline-v0"
+          ]
         },
         {
-          "title": "Q2 — Production backend depth",
+          "title": "Q2 \u2014 Production backend depth",
           "goal": "API platform strength: keys, limits, idempotency, queues, observability.",
-          "concepts": ["api-design", "api-keys", "rate-limiting", "idempotency", "retries-dlq", "monitoring-analytics"],
-          "drills": ["implement-token-bucket", "implement-idempotency-key", "implement-backoff-jitter"],
-          "artifacts": ["api-key-system", "rate-limiter", "job-queue-retries", "structured-logging"]
+          "concepts": [
+            "api-design",
+            "api-keys",
+            "rate-limiting",
+            "idempotency",
+            "retries-dlq",
+            "monitoring-analytics"
+          ],
+          "drills": [
+            "implement-token-bucket",
+            "implement-idempotency-key",
+            "implement-backoff-jitter"
+          ],
+          "artifacts": [
+            "api-key-system",
+            "rate-limiter",
+            "job-queue-retries",
+            "structured-logging"
+          ]
         },
         {
-          "title": "Q3 — Storage systems",
+          "title": "Q3 \u2014 Storage systems",
           "goal": "Build the storage foundations behind a Turbopuffer-class system.",
-          "concepts": ["b-tree", "lsm-tree", "wal", "compaction", "object-storage", "columnar-storage"],
-          "drills": ["build-wal", "build-memtable-sstable"],
-          "artifacts": ["toy-wal", "toy-lsm", "object-storage-index"]
+          "concepts": [
+            "b-tree",
+            "lsm-tree",
+            "wal",
+            "compaction",
+            "object-storage",
+            "columnar-storage"
+          ],
+          "drills": [
+            "build-wal",
+            "build-memtable-sstable"
+          ],
+          "artifacts": [
+            "toy-wal",
+            "toy-lsm",
+            "object-storage-index"
+          ]
         },
         {
-          "title": "Q4 — System design and synthesis",
+          "title": "Q4 \u2014 System design and synthesis",
           "goal": "Turn the depth into architecture-level design and a real prototype.",
-          "concepts": ["search-platform-design", "rag-system-design", "model-routing", "agent-loops"],
-          "drills": ["build-tool-loop", "build-llm-eval"],
-          "artifacts": ["search-platform-design-doc", "rag-system-design-doc", "model-router"]
+          "concepts": [
+            "search-platform-design",
+            "rag-system-design",
+            "model-routing",
+            "agent-loops"
+          ],
+          "drills": [
+            "build-tool-loop",
+            "build-llm-eval"
+          ],
+          "artifacts": [
+            "search-platform-design-doc",
+            "rag-system-design-doc",
+            "model-router"
+          ]
         }
       ]
     },
@@ -145,59 +317,88 @@
       "horizon": "12mo",
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
       "description": "Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.",
-      "tracks": ["databases", "system-design"],
+      "tracks": [
+        "databases",
+        "system-design"
+      ],
       "milestones": [
         {
-          "title": "Phase 0-1 — Thesis + hardware",
+          "title": "Phase 0-1 \u2014 Thesis + hardware",
           "goal": "Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.",
-          "concepts": ["storage-retrieval"],
+          "concepts": [
+            "storage-retrieval"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 2 — Disk-oriented storage engines",
+          "title": "Phase 2 \u2014 Disk-oriented storage engines",
           "goal": "Pages, B+trees, WAL, buffer pools, recovery.",
-          "concepts": ["b-tree", "wal", "storage-retrieval"],
+          "concepts": [
+            "b-tree",
+            "wal",
+            "storage-retrieval"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 3 — LSM and SSD-first design",
+          "title": "Phase 3 \u2014 LSM and SSD-first design",
           "goal": "Memtables, SSTables, Bloom filters, compaction, read/write/space amplification.",
-          "concepts": ["lsm-tree", "compaction"],
+          "concepts": [
+            "lsm-tree",
+            "compaction"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 4-5 — Columnar execution + ClickHouse",
+          "title": "Phase 4-5 \u2014 Columnar execution + ClickHouse",
           "goal": "Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.",
-          "concepts": ["columnar-storage", "secondary-index"],
+          "concepts": [
+            "columnar-storage",
+            "secondary-index"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 6 — Cloud warehouses",
+          "title": "Phase 6 \u2014 Cloud warehouses",
           "goal": "Storage/compute separation, shuffle, slots/warehouses, result caching.",
-          "concepts": ["object-storage", "sharding"],
+          "concepts": [
+            "object-storage",
+            "sharding"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 7 — Search + vector DBs",
+          "title": "Phase 7 \u2014 Search + vector DBs",
           "goal": "Inverted indexes, BM25, HNSW, IVF, PQ, DiskANN, recall/latency/memory tradeoff.",
-          "concepts": ["inverted-index", "bm25", "hnsw", "ivf", "recall-latency-tradeoffs"],
+          "concepts": [
+            "inverted-index",
+            "bm25",
+            "hnsw",
+            "ivf",
+            "recall-latency-tradeoffs"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 8 — Distributed correctness",
+          "title": "Phase 8 \u2014 Distributed correctness",
           "goal": "Replication, Raft/Paxos, MVCC across nodes, 2PC, serializability.",
-          "concepts": ["replication", "consensus", "cap-theorem", "distributed-infra"],
+          "concepts": [
+            "replication",
+            "consensus",
+            "cap-theorem",
+            "distributed-infra"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 9 — Synthesis project",
+          "title": "Phase 9 \u2014 Synthesis project",
           "goal": "Ship one of: low-RAM benchmark, ch-lowram CLI, spill-first OLAP engine, or disk-backed vector search.",
           "concepts": [],
           "drills": [],
@@ -207,70 +408,88 @@
     },
     {
       "id": "runtime",
-      "title": "Runtime — what every runtime has to do",
+      "title": "Runtime \u2014 what every runtime has to do",
       "horizon": "12mo",
       "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
       "description": "Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.",
-      "tracks": ["system-design", "ai-systems", "backend"],
+      "tracks": [
+        "system-design",
+        "ai-systems",
+        "backend"
+      ],
       "milestones": [
         {
-          "title": "Phase 0-1 — Five-job model + execution",
+          "title": "Phase 0-1 \u2014 Five-job model + execution",
           "goal": "Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimising JIT, deopt.",
-          "concepts": ["state-management", "strategy-pattern"],
+          "concepts": [
+            "state-management",
+            "strategy-pattern"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 2 — Memory & GC",
+          "title": "Phase 2 \u2014 Memory & GC",
           "goal": "Allocation, escape analysis, generational/concurrent/pauseless collectors, read/write barriers.",
           "concepts": [],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 3 — Scheduling",
+          "title": "Phase 3 \u2014 Scheduling",
           "goal": "Cooperative vs preemptive, async runtimes, fibers, work-stealing, goroutine + BEAM schedulers.",
-          "concepts": ["concurrency-design"],
+          "concepts": [
+            "concurrency-design"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 4 — Isolation",
+          "title": "Phase 4 \u2014 Isolation",
           "goal": "Process, thread, V8 isolate, Wasm sandbox, Firecracker, gVisor.",
-          "concepts": ["distributed-infra"],
+          "concepts": [
+            "distributed-infra"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 5 — Observability & control",
+          "title": "Phase 5 \u2014 Observability & control",
           "goal": "Sampling profilers, JFR, async-profiler, Go pprof, eBPF runtime hooks.",
-          "concepts": ["monitoring-analytics"],
+          "concepts": [
+            "monitoring-analytics"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 6 — Language runtimes deep-dive",
+          "title": "Phase 6 \u2014 Language runtimes deep-dive",
           "goal": "Pick at least one outside your comfort zone: JVM, Go, BEAM, V8, or .NET CLR.",
           "concepts": [],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 7 — AI inference runtimes",
+          "title": "Phase 7 \u2014 AI inference runtimes",
           "goal": "vLLM PagedAttention, SGLang RadixAttention, llama.cpp, TensorRT-LLM, continuous batching.",
-          "concepts": ["model-routing"],
+          "concepts": [
+            "model-routing"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 8 — Edge & serverless runtimes",
-          "goal": "Workers, Deno, Bun, wasmtime, Firecracker — cold start, isolate startup, multi-tenant scheduling.",
-          "concepts": ["distributed-infra", "load-balancing"],
+          "title": "Phase 8 \u2014 Edge & serverless runtimes",
+          "goal": "Workers, Deno, Bun, wasmtime, Firecracker \u2014 cold start, isolate startup, multi-tenant scheduling.",
+          "concepts": [
+            "distributed-infra",
+            "load-balancing"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
-          "title": "Phase 9 — Synthesis project",
+          "title": "Phase 9 \u2014 Synthesis project",
           "goal": "Ship one of: cross-runtime benchmark, tier-up JIT, mini paged KV-cache, or isolate sandbox.",
           "concepts": [],
           "drills": [],
@@ -282,77 +501,120 @@
       "id": "swe-landscape",
       "title": "The Software Engineering Landscape (2026)",
       "horizon": "12mo",
-      "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
+      "goal": "Get a working mental model of every major systems-software domain \u2014 LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "description": "Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.",
-      "tracks": ["system-design", "databases", "ai-systems", "backend"],
+      "tracks": [
+        "system-design",
+        "databases",
+        "ai-systems",
+        "backend"
+      ],
       "milestones": [
         {
           "title": "LLMs and inference engines",
           "goal": "Transformers end-to-end, KV cache, paged attention, quantization.",
-          "concepts": ["ml-self-attention", "ml-transformer-block", "ml-sampling", "rag", "model-routing"],
+          "concepts": [
+            "ml-self-attention",
+            "ml-transformer-block",
+            "ml-sampling",
+            "rag",
+            "model-routing"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Databases and storage engines",
-          "goal": "B-trees, LSM, WAL, MVCC, columnar — see the dedicated DB roadmap.",
-          "concepts": ["b-tree", "lsm-tree", "wal", "columnar-storage"],
+          "goal": "B-trees, LSM, WAL, MVCC, columnar \u2014 see the dedicated DB roadmap.",
+          "concepts": [
+            "b-tree",
+            "lsm-tree",
+            "wal",
+            "columnar-storage"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Streaming and event systems",
           "goal": "Append-only logs, partitions, watermarks, stateful stream processing.",
-          "concepts": ["message-queues", "messaging-realtime", "retries-dlq"],
+          "concepts": [
+            "message-queues",
+            "messaging-realtime",
+            "retries-dlq"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Game engines and real-time graphics",
           "goal": "Fixed-step loops, ECS, render pipelines, GPU command buffers.",
-          "concepts": ["game-design", "concurrency-design"],
+          "concepts": [
+            "game-design",
+            "concurrency-design"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Containers and orchestration",
           "goal": "Linux namespaces, cgroups, OCI runtimes, Kubernetes scheduling.",
-          "concepts": ["distributed-infra", "load-balancing"],
+          "concepts": [
+            "distributed-infra",
+            "load-balancing"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Browsers (Chromium, Firefox, Servo)",
           "goal": "Parser, layout, JS engine, compositor, sandboxing, WebAssembly.",
-          "concepts": ["ml-browser-runtime", "ml-webgpu"],
+          "concepts": [
+            "ml-browser-runtime",
+            "ml-webgpu"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Compilers and language runtimes",
-          "goal": "Lexer → parser → AST → IR → optimization → codegen; GC, JIT.",
-          "concepts": ["state-management", "strategy-pattern"],
+          "goal": "Lexer \u2192 parser \u2192 AST \u2192 IR \u2192 optimization \u2192 codegen; GC, JIT.",
+          "concepts": [
+            "state-management",
+            "strategy-pattern"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Operating systems and kernels",
           "goal": "Processes, virtual memory, schedulers, file systems, syscalls.",
-          "concepts": ["concurrency-design"],
+          "concepts": [
+            "concurrency-design"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Networking and protocols",
           "goal": "TCP/IP, TLS, HTTP/2 and HTTP/3, QUIC, BGP.",
-          "concepts": ["http-lifecycle", "load-balancing"],
+          "concepts": [
+            "http-lifecycle",
+            "load-balancing"
+          ],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Distributed systems",
           "goal": "Consensus, replication, 2PC, gossip, vector clocks.",
-          "concepts": ["consensus", "cap-theorem", "distributed-infra", "sharding", "replication"],
+          "concepts": [
+            "consensus",
+            "cap-theorem",
+            "distributed-infra",
+            "sharding",
+            "replication"
+          ],
           "drills": [],
           "artifacts": []
         },
@@ -366,8 +628,281 @@
         {
           "title": "Cryptography (applied)",
           "goal": "Primitives, signatures, AEAD, TLS, MLS, ZKPs.",
-          "concepts": ["auth-systems"],
+          "concepts": [
+            "auth-systems"
+          ],
           "drills": [],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "lld-practice",
+      "title": "LLD Practice",
+      "horizon": "30d",
+      "goal": "Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.",
+      "description": "A 30-day sprint through the canonical low-level-design problems. Patterns first, then applied \"design X\" exercises. End able to walk through a parking lot, ticketing system, or game design with implementation and tradeoff notes.",
+      "tracks": [
+        "system-design"
+      ],
+      "milestones": [
+        {
+          "title": "Days 1-7 \u2014 Modelling foundations",
+          "goal": "State, behaviour, extension points. The vocabulary every LLD problem reaches for.",
+          "concepts": [
+            "object-modeling",
+            "state-management",
+            "factory-creational",
+            "strategy-pattern"
+          ],
+          "drills": [
+            "design-parking-lot",
+            "design-vending-machine",
+            "design-notification-factory",
+            "design-pricing-strategies"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 8-18 \u2014 Patterns in practice",
+          "goal": "The handful of patterns that earn their weight in real interviews.",
+          "concepts": [
+            "observer-pattern",
+            "decorator-structural",
+            "command-chain"
+          ],
+          "drills": [
+            "design-pub-sub-bus",
+            "design-coffee-decorator",
+            "design-undo-redo"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 19-30 \u2014 Applied designs",
+          "goal": "Take the patterns into full design problems with concurrency and inventory edge cases.",
+          "concepts": [
+            "concurrency-design",
+            "booking-inventory",
+            "game-design"
+          ],
+          "drills": [
+            "design-bank-account-locking",
+            "design-hotel-booking",
+            "design-online-game-server"
+          ],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "hld-practice",
+      "title": "HLD Practice",
+      "horizon": "30d",
+      "goal": "Be able to design X \u2014 feed, chat, ride-hailing, search \u2014 under a 45-minute clock with credible numbers.",
+      "description": "A 30-day sprint through high-level system design. Primitives first (load balancing, consistent hashing, consensus), then full-stack \"design X\" cases. End comfortable scoping requirements, capacity, storage choice, queue boundaries, and failure modes.",
+      "tracks": [
+        "system-design"
+      ],
+      "milestones": [
+        {
+          "title": "Days 1-7 \u2014 Primitives",
+          "goal": "The building blocks every HLD answer relies on.",
+          "concepts": [
+            "load-balancing",
+            "consistent-hashing",
+            "consensus"
+          ],
+          "drills": [
+            "design-load-balancer",
+            "design-consistent-hashing",
+            "design-leader-election"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 8-14 \u2014 Distributed components",
+          "goal": "Storage, infra, messaging \u2014 what sits behind the LB.",
+          "concepts": [
+            "distributed-infra",
+            "messaging-realtime"
+          ],
+          "drills": [
+            "design-rate-limiter",
+            "design-chat-system"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 15-30 \u2014 Full system cases",
+          "goal": "Walk a complete \"design X\" with capacity, storage choice, and failure modes.",
+          "concepts": [
+            "social-media",
+            "streaming-media",
+            "location-transport",
+            "collaboration-productivity",
+            "search-platform-design",
+            "rag-system-design"
+          ],
+          "drills": [
+            "design-news-feed",
+            "design-video-streaming",
+            "design-ride-sharing",
+            "design-collaborative-editor",
+            "design-search-platform",
+            "design-rag-system"
+          ],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "dsa-practice",
+      "title": "DSA Practice",
+      "horizon": "30d",
+      "goal": "Solve canonical patterns from scratch \u2014 no references, explain the invariant, add one edge-case test.",
+      "description": "A 30-day algorithmic sprint covering the NeetCode roadmap surface area. End able to recognise the pattern from problem shape, implement cleanly, and reason about complexity without slipping.",
+      "tracks": [
+        "dsa"
+      ],
+      "milestones": [
+        {
+          "title": "Days 1-5 \u2014 Arrays & strings",
+          "goal": "The pattern recognition that unlocks 30%+ of interview problems.",
+          "concepts": [
+            "array-hashing",
+            "two-pointers",
+            "sliding-window",
+            "intervals"
+          ],
+          "drills": [
+            "two-sum-hashmap",
+            "valid-palindrome-two-pointers",
+            "longest-substring-sliding-window"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 6-10 \u2014 Linear structures",
+          "goal": "Stack, linked list, math/geometry \u2014 the bread-and-butter scaffolds.",
+          "concepts": [
+            "stack",
+            "linked-list",
+            "math-geometry"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
+        {
+          "title": "Days 11-16 \u2014 Trees & heaps",
+          "goal": "Recursive thinking and priority-queue patterns.",
+          "concepts": [
+            "trees",
+            "tries",
+            "heap"
+          ],
+          "drills": [
+            "level-order-traversal",
+            "kth-largest-heap"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 17-21 \u2014 Search & greedy",
+          "goal": "Two of the highest-leverage problem-solving frames.",
+          "concepts": [
+            "binary-search",
+            "greedy"
+          ],
+          "drills": [
+            "search-rotated-array"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 22-27 \u2014 Graphs",
+          "goal": "Traversal, shortest-path, union-find, backtracking \u2014 the harder half of any interview.",
+          "concepts": [
+            "graphs",
+            "backtracking",
+            "shortest-path",
+            "union-find"
+          ],
+          "drills": [
+            "number-of-islands"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 28-30 \u2014 DP & bit tricks",
+          "goal": "The \"hardest\" categories \u2014 1D/2D DP and bit manipulation.",
+          "concepts": [
+            "dp-1d",
+            "dp-2d",
+            "bit-manipulation"
+          ],
+          "drills": [
+            "house-robber-dp"
+          ],
+          "artifacts": []
+        }
+      ]
+    },
+    {
+      "id": "behavioral-practice",
+      "title": "Behavioral Practice",
+      "horizon": "30d",
+      "goal": "Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware \"what I would do differently\".",
+      "description": "A 30-day pass through behavioural interview frames. Two stories per dimension, each with situation, action, result, and a learned lesson. End able to map an unfamiliar question to a relevant story in under 10 seconds.",
+      "tracks": [
+        "product"
+      ],
+      "milestones": [
+        {
+          "title": "Days 1-10 \u2014 Self & ownership",
+          "goal": "Leadership, ownership, customer obsession, innovation.",
+          "concepts": [
+            "leadership-and-influence",
+            "ownership-and-accountability",
+            "customer-obsession",
+            "innovation-and-creativity"
+          ],
+          "drills": [
+            "star-leadership",
+            "star-ownership",
+            "star-customer-feedback",
+            "star-innovation"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 11-20 \u2014 Working with people",
+          "goal": "Teamwork, conflict, communication.",
+          "concepts": [
+            "teamwork-and-collaboration",
+            "conflict-resolution",
+            "communication"
+          ],
+          "drills": [
+            "star-cross-team",
+            "star-conflict",
+            "star-communication"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Days 21-30 \u2014 Judgment under pressure",
+          "goal": "Decision-making, failure, prioritisation.",
+          "concepts": [
+            "problem-solving-and-decision-making",
+            "failure-and-learning",
+            "time-management-and-prioritization"
+          ],
+          "drills": [
+            "star-tough-decision",
+            "star-failure",
+            "star-prioritization"
+          ],
           "artifacts": []
         }
       ]
