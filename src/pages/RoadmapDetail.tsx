@@ -1,6 +1,7 @@
 import { ArrowLeft, BookOpen, CheckCircle2, Circle, Dumbbell, Hammer } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
+import { FurtherReading } from '../components/FurtherReading';
 import { Card, color, PageShell, ProgressBar, SectionTitle } from '../components/ui';
 import {
   ARTIFACT_BY_ID,
@@ -97,6 +98,8 @@ export default function RoadmapDetail() {
           <MilestoneBlock key={i} milestone={m} index={i} mastery={mastery} />
         ))}
       </div>
+
+      <FurtherReading tags={roadmap.tracks} limit={15} />
     </PageShell>
   );
 }
