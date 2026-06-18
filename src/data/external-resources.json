@@ -1,0 +1,1247 @@
+{
+  "_meta": {
+    "source": [
+      "Developer-Y/cs-video-courses",
+      "Developer-Y/Scalable-Software-Architecture",
+      "Developer-Y/technical-interviews"
+    ],
+    "generated_by": "scripts/harvest-developer-y.mjs",
+    "cap_per_tag": 20
+  },
+  "byTag": {
+    "ai-systems": [
+      {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "10-202: Introduction to Modern AI - CMU",
+        "url": "https://modernaicourse.org/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2024",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp24/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "6.034 Artificial Intelligence, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/lecture-videos/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
+        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "15-780 - Graduate Artificial Intelligence, Spring 14, CMU",
+        "url": "http://www.cs.cmu.edu/~zkolter/course/15-780-s14/lectures.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSE 592 Applications of Artificial Intelligence, Winter 2003 - University of Washington",
+        "url": "https://courses.cs.washington.edu/courses/csep573/03wi/lectures/index.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS322 - Introduction to Artificial Intelligence, Winter 2012-13 - UBC",
+        "url": "http://www.cs.ubc.ca/~mack/CS322/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLDPnGbm0sUmpzvcGvktbz446SLdFbfZVU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4804: Introduction to Artificial Intelligence, Fall 2016",
+        "url": "https://www.youtube.com/playlist?list=PLUenpfvlyoa1iiSbGy9BBewgiXjzxVgBd",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 5804: Introduction to Artificial Intelligence, Spring 2015",
+        "url": "https://www.youtube.com/playlist?list=PLUenpfvlyoa0PB6_kqJ9WU7m6i6z1RhfJ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Artificial Intelligence, Fall 2023 - FAU",
+        "url": "https://www.fau.tv/course/id/3595",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2023",
+        "url": "https://www.fau.tv/course/id/3386",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2022",
+        "url": "https://www.fau.tv/course/id/3180",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2021",
+        "url": "https://www.fau.tv/course/id/2095",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2020",
+        "url": "https://www.fau.tv/course/id/1690",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2018",
+        "url": "https://www.fau.tv/course/id/713",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2018",
+        "url": "https://www.fau.tv/course/id/657",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "auth": [
+      {
+        "title": "Internet Security (WT 2018/19) - HPI University of Potsdam",
+        "url": "https://www.tele-task.de/series/1227/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "6.1600 Foundations of Computer Security - MIT Fall 2023",
+        "url": "https://61600.csail.mit.edu/2023/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "6.858 Computer Systems Security - MIT OCW",
+        "url": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-858-computer-systems-security-fall-2014/video_galleries/video-lectures/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 253 Web Security - Stanford University",
+        "url": "https://www.youtube.com/playlist?list=PL1y1iaEtjSYiiSGVlL1cHsXN_kvJOOhu-",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 161: Computer Security, UC Berkeley",
+        "url": "https://fa23.cs161.org/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos - Fall 2023",
+        "url": "https://www.youtube.com/playlist?list=PLfBkt1-_BHX_VxOWlmstguFxojSN742vz",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos - Fall 2025",
+        "url": "https://www.youtube.com/playlist?list=PLfBkt1-_BHX8kQZhisgrCLAnuAd3-Ek5U",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2025",
+        "url": "https://sp25.cs161.org/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "6.875 - Cryptography - Fall 2021 - MIT",
+        "url": "https://mit6875.github.io/fall2021.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Spring 2018",
+        "url": "https://www.youtube.com/playlist?list=PL6ogFv-ieghe8MOIcpD6UDtdK-UMHG8oH",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSEP590A - Practical Aspects of Modern Cryptography, Winter 2011 - University of Washington",
+        "url": "https://courses.cs.washington.edu/courses/csep590a/11wi/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "https://courses.cs.washington.edu/courses/csep590a/11wi/video/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS461/ECE422 - Computer Security - University of Illinois at Urbana-Champaign",
+        "url": "https://courses.engr.illinois.edu/cs461/sp2016/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "https://recordings.engineering.illinois.edu:8443/ess/portal/section/8a560718-345a-417a-b665-6bd375a71ee2",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Cryptography, Christof Paar - Ruhr University Bochum, Germany",
+        "url": "https://www.youtube.com/playlist?list=PLwJWuZfL_Ga2KJrTf9hOIgAQWkSpn9RNm",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECS235B Foundations of Computer and Information Security - UC Davis",
+        "url": "https://itunes.apple.com/us/itunes-u/computer-science-foundations/id389259109",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CIS 4930/ CIS 5930 - Offensive Computer Security, Florida State University",
+        "url": "http://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/lectures.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Information Security I - IIT Madras",
+        "url": "https://nptel.ac.in/courses/106106129/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Information Security - II - IIT Madras",
+        "url": "https://nptel.ac.in/courses/106106141/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Cryptology - IIT Roorkee",
+        "url": "https://nptel.ac.in/courses/106107155/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "backend": [
+      {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Systems: A programmer's Perspective",
+        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 3650 - Computer Systems - Fall 2020 - Nat Tuck - NEU",
+        "url": "https://web.archive.org/web/20210423030302/https://ntuck-neu.site/2020-09/cs3650/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLtg_A_3rzLAtBuwQp6mA3WveYw9Q7GzIZ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4400 – Computer Systems Fall 2016 - UoUtah",
+        "url": "https://www.eng.utah.edu/~cs4400/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Systems - Aduni",
+        "url": "http://aduni.org/courses/systems/index.php?view=cw",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS110: Principles of Computer Systems - Stanford",
+        "url": "https://web.stanford.edu/class/archive/cs/cs110/cs110.1202/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Gatech CS6200 Intro to OS",
+        "url": "https://www.youtube.com/playlist?list=PLTsf9UeqkReZbK7xqIYn_mXmsQZIb011T",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "APS 105 - Computer Fundamentals - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnm3ycdZKCg5Ex6DeuJhEWaG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2024",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 344 - Operating Systems - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnntWWNJ64E7wC4KhsEwHWxB",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2024 Section 2",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlW3S8i4gSV9I_8qGX8xwtr",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2023",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2022",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2024",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnnfpqfSzQVbj4JWPAn1ByiF",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2023",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnl0SZ2zsgyVjU9NDD_Rn-re",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "behavioral": [
+      {
+        "title": "Free online mock Interviews",
+        "url": "https://www.pramp.com/",
+        "kind": "link",
+        "source": "Developer-Y/technical-interviews"
+      },
+      {
+        "title": "Mock Interview -InterviewBit",
+        "url": "https://www.interviewbit.com/mock-interview/",
+        "kind": "link",
+        "source": "Developer-Y/technical-interviews"
+      }
+    ],
+    "databases": [
+      {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 5530 - Database Systems, Spring 2016 - University of Utah",
+        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCrercQNP9tTsjjPdgRVYvC7",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Distributed Data Management (WT 2018/19) - HPI University of Potsdam",
+        "url": "https://www.tele-task.de/series/1224/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "MOOC - Database Stanford Dbclass",
+        "url": "https://www.youtube.com/playlist?list=PL6hGtHedy2Z4EkgY76QOcueU8lAC4o6c3",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSEP 544, Database Management Systems, Au 2015 - University of Washington",
+        "url": "https://www.youtube.com/playlist?list=PLTPQEx-31JXjQYrUKvAjUTWgCYluHGs_L",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Database Design - IIT Madras",
+        "url": "https://nptel.ac.in/courses/106106093/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fundamentals of Database Systems - IIT Kanpur",
+        "url": "https://nptel.ac.in/courses/106104135/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Principles of Database Management, Bart Baesens",
+        "url": "https://www.youtube.com/playlist?list=PLdQddgMBv5zEhlpqdiUcf9aTNEtmESgyl",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "FIT9003 Database Systems Design - Monash University",
+        "url": "https://itunes.apple.com/us/podcast/fit9003-database-systems-design/id306569364",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "15-445 - Introduction to Database Systems, CMU",
+        "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2017",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2018",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2019",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2021",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2022",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2023",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjbj8BMuIrRcacnQh20hmY9g&si=R7F_J9zbXsG07PjR",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2024",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq&si=H-wfgjoLz6ifhZqS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2025",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&si=KKXgy16Zm20utGyH",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "dsa": [
+      {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Programming and Data Structures with Python, 2021-2022, Sem I - by Prof. Madhavan Mukund, CMI",
+        "url": "https://www.cmi.ac.in/~madhavan/courses/python2021sep/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "EECS 477 - Introduction to Algorithms, Winter 2023, UMichigan",
+        "url": "https://sites.google.com/site/thsaranurak/teaching/intro-algo",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "EECS 498 / 598 - Advanced Graph Algorithms: Graph Algorithms via Graph Decomposition, Fall 2025, UMichigan",
+        "url": "https://sites.google.com/site/thsaranurak/teaching/GraphDecomp25",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "EECS 498 / 598 - Advanced Graph Algorithms: Expanders and Fast Graph Algorithms, Fall 2021, UMichigan",
+        "url": "https://sites.google.com/site/thsaranurak/teaching/Expander",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "MIT 6.006 Introduction to Algorithms, Spring 2020",
+        "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Algorithms: Design and Analysis 1 - Stanford University",
+        "url": "https://www.youtube.com/playlist?list=PLXFMmlk03Dt7Q0xr1PIAriY5623cKiH7V",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Algorithms: Design and Analysis 2 - Stanford University",
+        "url": "https://www.youtube.com/playlist?list=PLXFMmlk03Dt5EMI2s2WQBsLsZl7A5HEK6",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "COS 226 Algorithms, Youtube, Princeton - by Robert Sedgewick and Kevin Wayne",
+        "url": "https://www.youtube.com/watch?v=1QZDe28peZk&list=PLRdD1c6QbAqJn0606RlOR6T3yUqFWKwmX&index=1",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSE 331 Introduction to Algorithm Design and Analysis, SUNY University at Buffalo, NY - Fall 2017",
+        "url": "http://www-student.cse.buffalo.edu/~atri/cse331/fall17/index.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoiHeO17FlLADJ38Kb3EiPU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Homework Walkthroughs",
+        "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoVyQCIUDHiXnL-zdFD_ixk",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSE 373 - Analysis of Algorithms, Stony Brook - Prof Skiena",
+        "url": "http://www.cs.sunysb.edu/~algorith/video-lectures/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "COP 3530 Data Structures and Algorithms, Prof Sahni, UFL",
+        "url": "http://www.cise.ufl.edu/~sahni/cop3530/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "http://www.cise.ufl.edu/academics/courses/preview/cop3530sahni/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS225 - Data Structures - University of Illinois at Urbana-Champaign",
+        "url": "https://cs.illinois.edu/courses/profile/CS225",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Video lectures",
+        "url": "https://www.youtube.com/playlist?list=PLRdSp8jtJxBqG3KNQPKKB-0Z2hh9omoDo",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS2 - Data Structures and Algorithms Sim-Mautner - UNSW",
+        "url": "https://www.youtube.com/playlist?list=PLsPlf0OhSLIqfpyxmomKcIcrht5K3IUOr",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "foundations": [
+      {
+        "title": "ECE 462 Object-Oriented Programming using C++ and Java - Purdue",
+        "url": "https://engineering.purdue.edu/OOSD/F2008/F2008.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object-oriented Program Design and Software Engineering - Aduni",
+        "url": "http://aduni.org/courses/java/index.php?view=cw",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "OOSE - Object-Oriented Software Engineering, Dr. Tim Lethbridge",
+        "url": "https://www.youtube.com/playlist?list=PL6iDJCG2nkhfNlig8NY5ePPfGvtQX6yLa",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object Oriented Systems Analysis and Design (Systems Analysis and Design in a Changing World)",
+        "url": "https://www.youtube.com/playlist?list=PL6XklZATqYx9dj72MKG6wLYjljeB2odra",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 251 - Intermediate Software Design (C++ version) - Vanderbilt University",
+        "url": "https://www.youtube.com/playlist?list=PLZ9NgFYEMxp4ZsvD10uXmClGnukcu3Uff",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "OOSE - Software Dev Using UML and Java",
+        "url": "https://www.youtube.com/playlist?list=PLJ9pm_Rc9HesnkwKlal_buSIHA-jTZMpO",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object-Oriented Analysis and Design - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105153/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS3 - Design in Computing - Richard Buckland UNSW",
+        "url": "https://www.youtube.com/playlist?list=PL0C5D85DBA20E685C",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Informatics 1 - Object-Oriented Programming 2014/15- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/inf1op.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Software Engineering with Objects and Components 2015/16- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2015/seoc.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "COMP1531 - Software Engineering Fundamentals - UNSW (2025)",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1531/25T2/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Video Playlist",
+        "url": "https://www.youtube.com/playlist?list=PLxmsQaZsRXBRsn6Vk1RFo6hOlioMMdQBL",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Science 169- Software Engineering - Spring 2015 - UCBerkeley",
+        "url": "https://youtube.com/playlist?list=PLVEFwJhglgHJQEQ6RjMMjcclix94gp1k2",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Science 169- Software Engineering - Fall 2019 - UCBerkeley",
+        "url": "https://www.youtube.com/playlist?list=PLkFD6_40KJIxCKgzL0uysjsAtfY3JawLS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 5150 - Software Engineering, Fall 2014 - Cornell University",
+        "url": "http://www.cs.cornell.edu/courses/cs5150/2014fa/materials.html",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Service Design and Engineering - University of Trento, Italy",
+        "url": "https://www.youtube.com/playlist?list=PLBdajHWwi0JCn87QuFT3e58mekU0-6WUT",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 164 Software Engineering - Harvard",
+        "url": "https://www.youtube.com/watch?v=3zdfCR6c8vw&list=PLuhjguFxSeVLvKvWwTUIpVwXdLtZPX1ZS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "System Analysis and Design - IISC Bangalore",
+        "url": "https://nptel.ac.in/courses/106108102/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Software Engineering - IIT Bombay",
+        "url": "https://nptel.ac.in/courses/106101061/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Dependable Systems (SS 2014)- HPI University of Potsdam",
+        "url": "https://www.tele-task.de/series/1005/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "http": [
+      {
+        "title": "CS 144 Introduction to Computer Networking - Stanford University, Fall 2013",
+        "url": "http://www.scs.stanford.edu/10au-cs144/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lecture videos",
+        "url": "https://www.youtube.com/playlist?list=PL6RdenZrxrw9inR-IJv-erlOKRHjymxMN",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Networking: A Top-Down Approach",
+        "url": "https://www.youtube.com/playlist?list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Communication Networks, Rensselaer Polytechnic Institute - Fall 2001",
+        "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_video",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Slides",
+        "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_foils",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Audio/Video Recordings and Podcasts of Professor Raj Jain's Lectures - Washington University in St. Louis",
+        "url": "http://www.cse.wustl.edu/~jain/videos.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube",
+        "url": "https://www.youtube.com/user/ProfRajJain/playlists",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Networks, Tanenbaum, Wetherall Computer Networks 5e - Video Lectures",
+        "url": "http://media.pearsoncmg.com/ph/streaming/esm/tanenbaum5e_videonotes/tanenbaum_videoNotes.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSEP 561 - PMP Network Systems, Fall 2013 - University of Washington",
+        "url": "https://courses.cs.washington.edu/courses/csep561/13au/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "https://courses.cs.washington.edu/courses/csep561/13au/video/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSEP 561 – Network Systems, Autumn 2008 - University of Washington",
+        "url": "https://courses.cs.washington.edu/courses/csep561/08au/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Videos",
+        "url": "https://courses.cs.washington.edu/courses/csep561/08au/lectures/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE/CS 438 - Communication Networks, Fall 2020 - UIUC",
+        "url": "https://courses.physics.illinois.edu/cs438/fa2020/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Networks - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105081/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Data Communications 2013, Steven Gordon - Thammasat University, Thailand",
+        "url": "https://www.youtube.com/playlist?list=PLvifRcqOOwF8u4iC7hFTMVC_WD6SEpnkx",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Complex Networks - RIT",
+        "url": "https://www.youtube.com/playlist?list=PLE9AAD550EA21F3DC",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Networks and Internet Protocol - IIT Kharagpur",
+        "url": "https://www.youtube.com/playlist?list=PLbRMhDVUMngf-peFloB7kyiA40EptH1up",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Structural Analysis and Visualization of Networks",
+        "url": "http://www.leonidzhukov.net/hse/2015/networks/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Columbia ELEN E4703 Wireless Communications spring 2006, by Angel Lozano",
+        "url": "https://www.youtube.com/playlist?list=PLIygTcviGPKAaY0VGGjQ2whITq23AOjaR",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "storage-engines": [
+      {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 5530 - Database Systems, Spring 2016 - University of Utah",
+        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCrercQNP9tTsjjPdgRVYvC7",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Distributed Data Management (WT 2018/19) - HPI University of Potsdam",
+        "url": "https://www.tele-task.de/series/1224/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "MOOC - Database Stanford Dbclass",
+        "url": "https://www.youtube.com/playlist?list=PL6hGtHedy2Z4EkgY76QOcueU8lAC4o6c3",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CSEP 544, Database Management Systems, Au 2015 - University of Washington",
+        "url": "https://www.youtube.com/playlist?list=PLTPQEx-31JXjQYrUKvAjUTWgCYluHGs_L",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Database Design - IIT Madras",
+        "url": "https://nptel.ac.in/courses/106106093/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fundamentals of Database Systems - IIT Kanpur",
+        "url": "https://nptel.ac.in/courses/106104135/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Principles of Database Management, Bart Baesens",
+        "url": "https://www.youtube.com/playlist?list=PLdQddgMBv5zEhlpqdiUcf9aTNEtmESgyl",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "FIT9003 Database Systems Design - Monash University",
+        "url": "https://itunes.apple.com/us/podcast/fit9003-database-systems-design/id306569364",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "15-445 - Introduction to Database Systems, CMU",
+        "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2017",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2018",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2019",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2021",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2022",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2023",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjbj8BMuIrRcacnQh20hmY9g&si=R7F_J9zbXsG07PjR",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2024",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq&si=H-wfgjoLz6ifhZqS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2025",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&si=KKXgy16Zm20utGyH",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "system-design": [
+      {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Systems: A programmer's Perspective",
+        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 3650 - Computer Systems - Fall 2020 - Nat Tuck - NEU",
+        "url": "https://web.archive.org/web/20210423030302/https://ntuck-neu.site/2020-09/cs3650/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLtg_A_3rzLAtBuwQp6mA3WveYw9Q7GzIZ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4400 – Computer Systems Fall 2016 - UoUtah",
+        "url": "https://www.eng.utah.edu/~cs4400/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Systems - Aduni",
+        "url": "http://aduni.org/courses/systems/index.php?view=cw",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS110: Principles of Computer Systems - Stanford",
+        "url": "https://web.stanford.edu/class/archive/cs/cs110/cs110.1202/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Gatech CS6200 Intro to OS",
+        "url": "https://www.youtube.com/playlist?list=PLTsf9UeqkReZbK7xqIYn_mXmsQZIb011T",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "APS 105 - Computer Fundamentals - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnm3ycdZKCg5Ex6DeuJhEWaG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2024",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 344 - Operating Systems - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnntWWNJ64E7wC4KhsEwHWxB",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2024 Section 2",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlW3S8i4gSV9I_8qGX8xwtr",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2023",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2022",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2024",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnnfpqfSzQVbj4JWPAn1ByiF",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Winter 2023",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnl0SZ2zsgyVjU9NDD_Rn-re",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "training": [
+      {
+        "title": "Introduction to Machine Learning for Coders",
+        "url": "https://course18.fast.ai/ml",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "MOOC - Statistical Learning, Stanford University",
+        "url": "http://www.dataschool.io/15-hours-of-expert-machine-learning-videos/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Statistical Learning with Python - Stanford Online",
+        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Foundations of Machine Learning Boot Camp, Berkeley Simons Institute",
+        "url": "https://www.youtube.com/playlist?list=PLgKuh-lKre11GbZWneln-VZDLHyejO7YD",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 155 - Machine Learning & Data Mining, 2023 - Caltech",
+        "url": "https://www.youtube.com/playlist?list=PLu5yXJ11s4r-nBlojSQC9seeUF1IxX-_z",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Notes-2020",
+        "url": "http://www.yisongyue.com/courses/cs155/2020_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2020",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi67hPzb9zJXH1cbeN7LKNiD",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Notes-2019",
+        "url": "http://www.yisongyue.com/courses/cs155/2019_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2019",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi7r2trKGgwaedY17MADTay4",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Notes-2018",
+        "url": "http://www.yisongyue.com/courses/cs155/2018_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2018",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi644ypoxzP1frkPYVHdjDJU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Notes-2017",
+        "url": "http://www.yisongyue.com/courses/cs155/2017_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2017",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi6BfMrltePqMAHdl5W33-bC",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Notes-2016",
+        "url": "http://www.yisongyue.com/courses/cs155/2016_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube-2016",
+        "url": "https://www.youtube.com/playlist?list=PL5HdMttxBY0BVTP9y7qQtzTgmcjQ3P0mb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 156 - Learning from Data, Caltech",
+        "url": "https://work.caltech.edu/lectures.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "10-601 - Introduction to Machine Learning (MS) - Tom Mitchell - 2015, CMU",
+        "url": "http://www.cs.cmu.edu/~ninamf/courses/601sp15/lectures.shtml",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLAJ0alZrN8rD63LD0FkzKFiFgkOmEtltQ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "10-601 Machine Learning | CMU | Fall 2017",
+        "url": "https://www.youtube.com/playlist?list=PL7k0r4t5c10-g7CWCnHfZOAxLaiNinChk",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "10-701 - Introduction to Machine Learning (PhD) - Tom Mitchell, Spring 2011, CMU",
+        "url": "http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ]
+  }
+}

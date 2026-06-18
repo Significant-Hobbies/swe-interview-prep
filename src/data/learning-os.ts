@@ -3,6 +3,7 @@
 import artifactsData from './artifacts.json';
 import conceptsData from './concepts.json';
 import drillsData from './drills.json';
+import externalResourcesData from './external-resources.json';
 import projectsData from './projects.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
@@ -300,4 +301,49 @@ export function roadmapConceptIds(roadmap: Roadmap): string[] {
   const ids = new Set<string>();
   for (const m of roadmap.milestones) for (const c of m.concepts) ids.add(c);
   return [...ids];
+}
+
+// --- External resources (harvested from curated public lists) --------------
+// Source repos preserved in `_meta.source` for attribution. Re-run
+// `node scripts/harvest-developer-y.mjs` to refresh.
+
+export interface ExternalResource {
+  title: string;
+  url: string;
+  kind: 'video' | 'course' | 'paper' | 'link';
+  source: string;
+}
+
+interface ExternalResourcesFile {
+  _meta: { source: string[]; generated_by: string; cap_per_tag: number };
+  byTag: Record<string, ExternalResource[]>;
+}
+
+export const EXTERNAL_RESOURCES = externalResourcesData as ExternalResourcesFile;
+
+/** Resources for a single tag, in curated order. */
+export function externalResourcesForTag(tag: string): ExternalResource[] {
+  return EXTERNAL_RESOURCES.byTag[tag] ?? [];
+}
+
+/**
+ * Merge resources across multiple tags, dedupe by URL, preserve order
+ * within the first tag that contributed each URL.
+ */
+export function externalResourcesForTags(tags: string[]): ExternalResource[] {
+  const out: ExternalResource[] = [];
+  const seen = new Set<string>();
+  for (const tag of tags) {
+    for (const r of externalResourcesForTag(tag)) {
+      if (seen.has(r.url)) continue;
+      seen.add(r.url);
+      out.push(r);
+    }
+  }
+  return out;
+}
+
+/** Every tag that has at least one curated external resource. */
+export function tagsWithExternalResources(): string[] {
+  return Object.keys(EXTERNAL_RESOURCES.byTag).sort();
 }
