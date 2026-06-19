@@ -36,3 +36,4 @@ playwright/.cache/
 # fallow cache
 .fallow/
 cache.bin
+.tmp/

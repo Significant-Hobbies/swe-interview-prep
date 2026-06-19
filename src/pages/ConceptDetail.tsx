@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import { FurtherReading } from '../components/FurtherReading';
 import {
   Badge,
   Button,
@@ -294,6 +295,8 @@ export default function ConceptDetail() {
             </div>
           )}
         </div>
+
+        <FurtherReading tags={concept.tags} limit={10} />
       </div>
     </PageShell>
   );
