@@ -54,7 +54,3 @@ export function SaaSMakerChangelog() {
     </Suspense>
   );
 }
-
-export function SaaSMakerWaitlist() {
-  return null;
-}

@@ -2,7 +2,7 @@ import posthog from "posthog-js";
 
 type AuthFailureStage = "signin" | "signup" | "callback" | "session" | "unknown";
 const PROJECT_SLUG = "swe-interview-prep";
-const POSTHOG_KEY = "phc_qgiAarw4Co4pw9fz3Fxj4UJaHmqzFetqs4JrXhGc35Nd";
+const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY ?? "phc_qgiAarw4Co4pw9fz3Fxj4UJaHmqzFetqs4JrXhGc35Nd";
 const POSTHOG_HOST = "https://us.i.posthog.com";
 
 function route() {
