@@ -36,6 +36,7 @@ export default defineConfig({
     },
   },
   build: {
+    modulePreload: false,
     // Initial bundle is ~430 KB. The chunks Vite warns about are all lazy:
     // Mermaid core, useCodeExecution (Go WASM runtime), and per-repo library
     // content.json files behind AmbientLibrary clicks. Bump to silence the
