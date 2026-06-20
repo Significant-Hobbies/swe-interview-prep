@@ -2,8 +2,28 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
+/** Load extracted app CSS without blocking first paint — index.html carries the LCP shell. */
+function deferAppCss() {
+  return {
+    name: 'defer-app-css',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return html.replace(
+          /<link rel="stylesheet" crossorigin href="(\/assets\/index-[^"]+\.css)">/,
+          [
+            '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">',
+            '<noscript><link rel="stylesheet" href="$1"></noscript>',
+          ].join('\n    '),
+        )
+      },
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), deferAppCss()],
   server: {
     proxy: {
       '/api': 'http://localhost:3456',

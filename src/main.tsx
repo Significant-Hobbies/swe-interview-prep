@@ -15,8 +15,6 @@ if (!root) {
   throw new Error('Root element not found')
 }
 
-installBrowserMonitoring()
-
 createRoot(root).render(
   <StrictMode>
     <ErrorBoundary scope="root">
@@ -28,3 +26,10 @@ createRoot(root).render(
     </ErrorBoundary>
   </StrictMode>,
 )
+
+const scheduleMonitoring = () => installBrowserMonitoring()
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(scheduleMonitoring, { timeout: 3000 })
+} else {
+  setTimeout(scheduleMonitoring, 1)
+}

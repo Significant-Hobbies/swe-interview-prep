@@ -34,16 +34,42 @@
     />
     <meta name="twitter:image" content="/og-image.svg" />
 
-    <!-- Geist Sans + Geist Mono via Google Fonts. -->
+    <!-- Geist — non-blocking so the LCP shell paints before font CSS resolves. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- LCP shell: mirrors Login hero so first paint doesn't wait on React + auth. -->
+    <div id="root">
+      <div style="min-height:100vh;background:#000;color:#fff;">
+        <header style="border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="margin:0 auto;max-width:72rem;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;">
+            <span style="font-size:1rem;font-weight:700;letter-spacing:-0.01em;">SWE Prep</span>
+          </div>
+        </header>
+        <section style="padding:6rem 1.5rem 5rem;max-width:64rem;margin:0 auto;">
+          <p style="margin:0 0 1.5rem;font-family:ui-monospace,monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.4);">
+            A learning OS for systems software
+          </p>
+          <h1 style="margin:0;font-size:clamp(3rem,8vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;">
+            Learn deeply.<br />
+            <span style="color:rgba(255,255,255,0.4);">Practice with intent.</span>
+          </h1>
+        </section>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
