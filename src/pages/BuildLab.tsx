@@ -26,7 +26,7 @@ export function resolveBuildLabView(id?: string): 'artifact-board' | 'drill-work
 export default function BuildLab() {
   const { id } = useParams();
   const view = resolveBuildLabView(id);
-  if (view === 'drill-workspace') return <DrillWorkspace drillId={id} />;
+  if (view === 'drill-workspace') return <DrillWorkspace drillId={id ?? ''} />;
   if (view === 'not-found') return <EmptyState title="Drill not found" />;
   return <ArtifactBoard />;
 }

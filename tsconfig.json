@@ -1,14 +1,45 @@
 {
-  "extends": "@saas-maker/tsconfig/vite.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "noPropertyAccessFromIndexSignature": false,
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["api", "server", "shared", "src", "tests", "vite-env.d.ts", "vite.config.js"],
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    "api",
+    "server",
+    "shared",
+    "src",
+    "tests",
+    "vite-env.d.ts",
+    "vite.config.js"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }
