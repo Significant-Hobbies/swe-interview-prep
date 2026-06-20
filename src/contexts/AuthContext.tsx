@@ -1,6 +1,15 @@
 import { createContext, useCallback,useContext, useEffect, useState } from 'react';
 
-import { captureAuthFailure } from '../lib/foundry-monitoring';
+type AuthFailureStage = 'signin' | 'signup' | 'callback' | 'session' | 'unknown';
+
+function reportAuthFailure(options: {
+  provider?: string;
+  stage?: AuthFailureStage;
+  reason?: string;
+  source?: string;
+}) {
+  void import('../lib/foundry-monitoring').then((m) => m.captureAuthFailure(options));
+}
 
 const GUEST_KEY = 'dsa-prep-guest';
 // Profile cache only — the JWT now lives in an httpOnly cookie (XSS hardening).
@@ -180,7 +189,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (!clientId) {
       console.error('VITE_GOOGLE_CLIENT_ID not configured');
-      captureAuthFailure({
+      reportAuthFailure({
         provider: 'google',
         stage: 'signin',
         reason: 'Missing VITE_GOOGLE_CLIENT_ID',
@@ -192,7 +201,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (!googleLoaded) {
       console.error('Google Sign-In script not loaded yet');
-      captureAuthFailure({
+      reportAuthFailure({
         provider: 'google',
         stage: 'signin',
         reason: 'Google Sign-In script not loaded',
@@ -205,7 +214,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const google = window.google;
     if (!google?.accounts?.id) {
       console.error('Google Sign-In API not available');
-      captureAuthFailure({
+      reportAuthFailure({
         provider: 'google',
         stage: 'signin',
         reason: 'Google Sign-In API not available',
@@ -222,7 +231,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (response.credential) {
           login(response.credential).catch(err => {
             console.error('Login failed:', err);
-            captureAuthFailure({
+            reportAuthFailure({
               provider: 'google',
               stage: 'signin',
               reason: err instanceof Error ? err.message : 'Login failed',
@@ -237,7 +246,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     google.accounts.id.prompt((notification: any) => {
       if (notification.isNotDisplayed()) {
         console.warn('One Tap not displayed:', notification.getNotDisplayedReason());
-        captureAuthFailure({
+        reportAuthFailure({
           provider: 'google',
           stage: 'signin',
           reason: notification.getNotDisplayedReason(),

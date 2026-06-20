@@ -1,6 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-import { captureError } from '../lib/foundry-monitoring';
+
 
 interface Props {
   children: ReactNode;
@@ -28,10 +28,12 @@ export class ErrorBoundary extends Component<Props, State> {
 
   override componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('ErrorBoundary caught:', error, info);
-    captureError(error, {
-      scope: this.props.scope ?? 'root',
-      componentStack: info.componentStack ?? undefined,
-    });
+    void import('../lib/foundry-monitoring').then((m) =>
+      m.captureError(error, {
+        scope: this.props.scope ?? 'root',
+        componentStack: info.componentStack ?? undefined,
+      }),
+    );
   }
 
   reset = () => this.setState({ hasError: false });

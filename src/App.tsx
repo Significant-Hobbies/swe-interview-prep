@@ -27,12 +27,8 @@ const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
 
-function PageFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-800 border-t-sky-400" />
-    </div>
-  );
+function removeLcpShell() {
+  document.getElementById('lcp-shell')?.remove();
 }
 
 function App() {
@@ -51,13 +47,17 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!loading && (user || isGuest)) removeLcpShell();
+  }, [loading, user, isGuest]);
+
   if (loading) {
-    return <PageFallback />;
+    return null;
   }
 
   if (!user && !isGuest) {
     return (
-      <Suspense fallback={<PageFallback />}>
+      <Suspense fallback={null}>
         <Login />
       </Suspense>
     );
@@ -67,7 +67,7 @@ function App() {
     <>
       <SaaSMakerFeedback />
       <ErrorBoundary scope="route">
-        <Suspense fallback={<PageFallback />}>
+        <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* Four-tab IA. Each tab lands on a minimal "what's next" page;

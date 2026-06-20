@@ -1,8 +1,13 @@
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
-import { SaaSMakerTestimonials } from '../components/saasmaker-feedback';
 import { useAuth } from '../contexts/AuthContext';
+
+const SaaSMakerTestimonials = lazy(() =>
+  import('../components/saasmaker-feedback').then((m) => ({
+    default: m.SaaSMakerTestimonials,
+  })),
+);
 
 const PRINCIPLES = [
   {
@@ -36,6 +41,7 @@ export default function Login() {
   const [debugInfo, setDebugInfo] = useState<string>('');
 
   useEffect(() => {
+    document.getElementById('lcp-shell')?.remove();
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     setDebugInfo(clientId ? 'Client ID configured' : 'Missing VITE_GOOGLE_CLIENT_ID');
   }, []);
@@ -163,7 +169,9 @@ export default function Login() {
           <div className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
             What users say
           </div>
-          <SaaSMakerTestimonials />
+          <Suspense fallback={null}>
+            <SaaSMakerTestimonials />
+          </Suspense>
         </div>
       </section>
 
