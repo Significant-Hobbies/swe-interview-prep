@@ -1,6 +1,7 @@
 import { ArrowLeft, BookOpen, FileText, Hammer } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
+import FeaturedPaths from '../components/FeaturedPaths';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { Card, PageShell, SectionTitle } from '../components/ui';
 import UnderstandingCheck from '../components/UnderstandingCheck';
@@ -126,6 +127,12 @@ export default function LearningDoc() {
           >
             Open roadmap →
           </Link>
+        </div>
+      )}
+
+      {activeSlug === DEFAULT_SLUG && (
+        <div className="mb-8">
+          <FeaturedPaths variant="link" />
         </div>
       )}
 

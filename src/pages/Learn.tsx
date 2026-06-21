@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import FeaturedPaths from '../components/FeaturedPaths';
 import {
   CONCEPT_BY_ID,
   type Roadmap,
@@ -13,6 +14,7 @@ import { useGateContext } from '../hooks/useGates';
 import { rollupMastery } from '../lib/conceptState';
 import { conceptAccessible } from '../lib/gates';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
+import { ROADMAP_GROUPS, roadmapsInGroup, ungroupedRoadmaps } from '../lib/roadmapGroups';
 
 const HORIZON_LABEL: Record<string, string> = {
   '9d': '9 days',
@@ -54,18 +56,42 @@ export default function Learn() {
         </p>
       </div>
 
-      <section className="mt-12">
-        <div className="grid gap-px overflow-hidden rounded-xl bg-white/10">
-          {ROADMAPS.map(r => (
-            <RoadmapRow
-              key={r.id}
-              roadmap={r}
+      <div className="mt-10">
+        <FeaturedPaths activeRoadmapId={active.id} onPick={pick} />
+      </div>
+
+      <section className="mt-14 space-y-10">
+        {ROADMAP_GROUPS.map(group => {
+          const roadmaps = roadmapsInGroup(group);
+          if (!roadmaps.length) return null;
+          return (
+            <div key={group.id}>
+              <div className="mb-3">
+                <h2 className="text-lg font-semibold tracking-tight text-white">{group.title}</h2>
+                <p className="mt-1 max-w-prose text-xs text-white/45">{group.subtitle}</p>
+              </div>
+              <RoadmapList
+                roadmaps={roadmaps}
+                mastery={mastery}
+                activeId={active.id}
+                onPick={pick}
+              />
+            </div>
+          );
+        })}
+        {ungroupedRoadmaps(ROADMAPS).length > 0 && (
+          <div>
+            <div className="mb-3">
+              <h2 className="text-lg font-semibold tracking-tight text-white">More paths</h2>
+            </div>
+            <RoadmapList
+              roadmaps={ungroupedRoadmaps(ROADMAPS)}
               mastery={mastery}
-              active={r.id === active.id}
-              onPick={() => pick(r.id)}
+              activeId={active.id}
+              onPick={pick}
             />
-          ))}
-        </div>
+          </div>
+        )}
       </section>
 
       {next && (
@@ -102,6 +128,32 @@ export default function Learn() {
           Open active roadmap detail
         </Link>
       </nav>
+    </div>
+  );
+}
+
+function RoadmapList({
+  roadmaps,
+  mastery,
+  activeId,
+  onPick,
+}: {
+  roadmaps: Roadmap[];
+  mastery: Record<string, MasteryEntry>;
+  activeId: string;
+  onPick: (id: string) => void;
+}) {
+  return (
+    <div className="grid gap-px overflow-hidden rounded-xl bg-white/10">
+      {roadmaps.map(r => (
+        <RoadmapRow
+          key={r.id}
+          roadmap={r}
+          mastery={mastery}
+          active={r.id === activeId}
+          onPick={() => onPick(r.id)}
+        />
+      ))}
     </div>
   );
 }

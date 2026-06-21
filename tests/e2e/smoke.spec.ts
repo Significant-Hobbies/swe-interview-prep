@@ -22,6 +22,8 @@ test.describe('Learning OS smoke', () => {
   test('Learn page shows roadmaps + concepts', async ({ page }) => {
     await page.goto('/learn');
     await expect(page.getByRole('heading', { name: 'Pick a path.', exact: true })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Interview and systems paths' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Browse all concepts/i })).toBeVisible();
   });
