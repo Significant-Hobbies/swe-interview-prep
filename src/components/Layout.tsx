@@ -6,19 +6,21 @@ import {
   Dumbbell,
   FolderKanban,
   Hammer,
+  LayoutGrid,
   LogIn,
   LogOut,
   Mic,
-  MoreHorizontal,
   Network,
   NotebookPen,
   RotateCcw,
   Settings,
+  type LucideIcon,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
+import { BROWSE_DESTINATIONS } from '../lib/browseLinks';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
 import { SaaSMakerChangelog } from './saasmaker-feedback';
 import { DigestBanner } from './DigestBanner';
@@ -31,7 +33,19 @@ interface NavItem {
   icon: typeof Network;
 }
 
-// Six primary tabs + Docs. Older 9-page IA (Build, Notes, Reviews, Projects) lives under More.
+const BROWSE_ICONS: Record<string, LucideIcon> = {
+  concepts: Network,
+  drills: Dumbbell,
+  reviews: RotateCcw,
+  docs: BookOpen,
+  build: Hammer,
+  playground: Code2,
+  projects: FolderKanban,
+  notes: NotebookPen,
+  mock: Mic,
+};
+
+// Six primary tabs + Docs. Full catalog lives under Browse.
 const PRIMARY_NAV: NavItem[] = [
   { to: '/today', label: 'Today', icon: Network },
   { to: '/learn', label: 'Learn', icon: BookOpen },
@@ -42,15 +56,13 @@ const PRIMARY_NAV: NavItem[] = [
   { to: '/learning', label: 'Docs', icon: BookOpen },
 ];
 
-const MORE_NAV: NavItem[] = [
-  { to: '/build', label: 'Build Lab', icon: Hammer },
-  { to: '/practice/all?tab=reviews', label: 'Reviews', icon: RotateCcw },
-  { to: '/progress/all?tab=notes', label: 'Notes', icon: NotebookPen },
-  { to: '/progress/all', label: 'Projects', icon: FolderKanban },
-  { to: '/learn/all', label: 'All concepts', icon: Network },
-];
+const BROWSE_NAV: NavItem[] = BROWSE_DESTINATIONS.map(d => ({
+  to: d.to,
+  label: d.label,
+  icon: BROWSE_ICONS[d.id] ?? LayoutGrid,
+}));
 
-// Mobile bottom bar — five highest-traffic + overflow menu (matches pre-collapse pattern).
+// Mobile bottom bar — five highest-traffic + browse overflow.
 const MOBILE_PRIMARY: NavItem[] = [
   { to: '/today', label: 'Today', icon: Network },
   { to: '/learn', label: 'Learn', icon: BookOpen },
@@ -71,33 +83,33 @@ export default function Layout() {
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [browseOpen, setBrowseOpen] = useState(false);
   const changelogRef = useRef<HTMLDivElement>(null);
-  const moreDesktopRef = useRef<HTMLDivElement>(null);
-  const moreMobileRef = useRef<HTMLDivElement>(null);
+  const browseDesktopRef = useRef<HTMLDivElement>(null);
+  const browseMobileRef = useRef<HTMLDivElement>(null);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
 
   useEffect(() => {
-    if (!changelogOpen && !moreOpen) return;
+    if (!changelogOpen && !browseOpen) return;
     function handleClick(e: MouseEvent) {
       const t = e.target as Node;
       if (changelogOpen && changelogRef.current && !changelogRef.current.contains(t)) {
         setChangelogOpen(false);
       }
       if (
-        moreOpen &&
-        !moreDesktopRef.current?.contains(t) &&
-        !moreMobileRef.current?.contains(t)
+        browseOpen &&
+        !browseDesktopRef.current?.contains(t) &&
+        !browseMobileRef.current?.contains(t)
       ) {
-        setMoreOpen(false);
+        setBrowseOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, [changelogOpen, moreOpen]);
+  }, [changelogOpen, browseOpen]);
 
   useEffect(() => {
-    setMoreOpen(false);
+    setBrowseOpen(false);
   }, [location.pathname, location.search]);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -112,9 +124,7 @@ export default function Layout() {
     }`;
   };
 
-  const moreActive = MORE_NAV.some(item => navActive(location.pathname, item.to))
-    || navActive(location.pathname, '/playground')
-    || navActive(location.pathname, '/learning');
+  const browseActive = BROWSE_NAV.some(item => navActive(location.pathname, item.to));
 
   return (
     <TooltipProvider delayDuration={250}>
@@ -133,25 +143,25 @@ export default function Layout() {
                     <span>{label}</span>
                   </NavLink>
                 ))}
-                <div ref={moreDesktopRef} className="relative">
+                <div ref={browseDesktopRef} className="relative">
                   <button
                     type="button"
-                    onClick={() => setMoreOpen(o => !o)}
+                    onClick={() => setBrowseOpen(o => !o)}
                     className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
-                      moreOpen || moreActive ? 'text-white' : 'text-white/50 hover:text-white'
+                      browseOpen || browseActive ? 'text-white' : 'text-white/50 hover:text-white'
                     }`}
-                    aria-expanded={moreOpen}
+                    aria-expanded={browseOpen}
                     aria-haspopup="menu"
                   >
-                    More
-                    <MoreHorizontal className="h-3.5 w-3.5" />
+                    Browse
+                    <LayoutGrid className="h-3.5 w-3.5" />
                   </button>
-                  {moreOpen && (
+                  {browseOpen && (
                     <div
                       role="menu"
-                      className="absolute left-1/2 top-full z-50 mt-1 min-w-[11rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
+                      className="absolute left-1/2 top-full z-50 mt-1 min-w-[12rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
                     >
-                      {MORE_NAV.map(({ to, label, icon: Icon }) => (
+                      {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
                         <Link
                           key={to}
                           to={to}
@@ -275,40 +285,28 @@ export default function Layout() {
                 <span>{label}</span>
               </NavLink>
             ))}
-            <div ref={moreMobileRef} className="relative flex flex-1 flex-col">
+            <div ref={browseMobileRef} className="relative flex flex-1 flex-col">
               <button
                 type="button"
-                onClick={() => setMoreOpen(o => !o)}
+                onClick={() => setBrowseOpen(o => !o)}
                 className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors ${
-                  moreOpen || moreActive ? 'text-white' : 'text-white/40'
+                  browseOpen || browseActive ? 'text-white' : 'text-white/40'
                 }`}
-                aria-expanded={moreOpen}
-                aria-label="More destinations"
+                aria-expanded={browseOpen}
+                aria-label="Browse catalog"
               >
-                <MoreHorizontal className="h-5 w-5" />
-                <span>More</span>
+                <LayoutGrid className="h-5 w-5" />
+                <span>Browse</span>
               </button>
-              {moreOpen && (
-                <div className="absolute bottom-full right-0 mb-2 min-w-[10.5rem] rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
-                  <Link
-                    to="/playground"
-                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
-                  >
-                    <Code2 className="h-3.5 w-3.5 text-white/40" /> Playground
-                  </Link>
-                  <Link
-                    to="/learning"
-                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
-                  >
-                    <BookOpen className="h-3.5 w-3.5 text-white/40" /> Docs
-                  </Link>
-                  {MORE_NAV.map(({ to, label, icon: Icon }) => (
+              {browseOpen && (
+                <div className="absolute bottom-full right-0 mb-2 max-h-[70vh] min-w-[11rem] overflow-y-auto rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
+                  {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
                     <Link
                       key={to}
                       to={to}
                       className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
                     >
-                      <Icon className="h-3.5 w-3.5 text-white/40" />
+                      <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
                       {label}
                     </Link>
                   ))}

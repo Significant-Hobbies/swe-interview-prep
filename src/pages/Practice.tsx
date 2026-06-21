@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+import BrowseLinks from '../components/BrowseLinks';
 import { Sparkline } from '../components/viz';
 import { CONCEPT_BY_ID, type Drill, EDITORIAL_DRILLS, primaryGroup } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
@@ -50,14 +51,7 @@ export default function Practice() {
         </div>
       </section>
 
-      <nav className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
-        <Link to="/practice/all" className="text-white hover:text-white/70">
-          Browse all drills <span className="text-white/40">→</span>
-        </Link>
-        <Link to="/practice/all?tab=reviews" className="text-white/50 hover:text-white">
-          Review queue{dueCount > 0 && <span className="text-white/40"> · {dueCount}</span>}
-        </Link>
-      </nav>
+      <BrowseLinks className="mt-12" omit={['drills', 'reviews']} />
     </div>
   );
 }

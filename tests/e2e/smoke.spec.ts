@@ -25,13 +25,14 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('region', { name: 'Interview and systems paths' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /Browse all concepts/i })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Browse catalog' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'All concepts' })).toBeVisible();
   });
 
   test('Practice page renders drill hub', async ({ page }) => {
     await page.goto('/practice');
     await expect(page.getByText('This week')).toBeVisible();
-    await expect(page.getByRole('link', { name: /Browse all drills/i })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Browse catalog' })).toBeVisible();
   });
 
   test('Practice → Reviews view on drill browser', async ({ page }) => {

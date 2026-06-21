@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import BrowseLinks from '../components/BrowseLinks';
 import FeaturedPaths from '../components/FeaturedPaths';
 import {
   CONCEPT_BY_ID,
@@ -59,6 +60,8 @@ export default function Learn() {
       <div className="mt-10">
         <FeaturedPaths activeRoadmapId={active.id} onPick={pick} />
       </div>
+
+      <BrowseLinks className="mt-12" />
 
       <section className="mt-14 space-y-10">
         {ROADMAP_GROUPS.map(group => {
@@ -120,12 +123,9 @@ export default function Learn() {
         </section>
       )}
 
-      <nav className="mt-16 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
-        <Link to="/learn/all" className="text-white hover:text-white/70">
-          Browse all concepts <span className="text-white/40">→</span>
-        </Link>
+      <nav className="mt-16 font-mono text-sm">
         <Link to={`/roadmaps/${active.id}`} className="text-white/50 hover:text-white">
-          Open active roadmap detail
+          Open active roadmap detail <span className="text-white/40">→</span>
         </Link>
       </nav>
     </div>
