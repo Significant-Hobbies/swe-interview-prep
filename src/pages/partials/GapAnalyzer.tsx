@@ -1,115 +1,111 @@
 import { Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button, Card } from '../../components/ui';
-import { ARTIFACT_BY_ID, conceptsByTag, sortedTracks } from '../../data/learning-os';
+import { ARTIFACT_BY_ID } from '../../data/learning-os';
 import { CONCEPT_BY_ID, useConceptMastery } from '../../hooks/useConcepts';
 import { aiConfigured, analyzeGaps, type GapAnalysis } from '../../lib/aiClient';
-import { rollupMastery } from '../../lib/conceptState';
-import { weakConcepts } from '../../lib/recommend';
+import { analyzeGapsHeuristic } from '../../lib/heuristicGaps';
 
-/** AI Gap Analyzer — sends the mastery profile to the BYOK model. */
 export function GapAnalyzer() {
   const { mastery } = useConceptMastery();
-  const [result, setResult] = useState<GapAnalysis | null>(null);
+  const heuristic = useMemo(() => analyzeGapsHeuristic(mastery), [mastery]);
+  const [aiResult, setAiResult] = useState<GapAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  async function run() {
+  const result = aiResult ?? heuristic;
+
+  async function runAi() {
+    if (!aiConfigured()) return;
     setLoading(true);
     setError('');
     try {
       const profile = {
-        groups: sortedTracks().map(t => {
-          const ids = conceptsByTag(t.id).map(c => c.id);
-          const roll = rollupMastery(ids, mastery);
-          return { group: t.id, total: ids.length, started: ids.length - roll.untouched, mastered: roll.mastered };
-        }),
-        weakConcepts: weakConcepts(mastery, 10).map(c => ({
-          id: c.id,
-          name: c.name,
-          confidence: Math.round((mastery[c.id]?.confidence ?? 0) * 100),
+        weakConcepts: heuristic.nextConcepts.map(n => ({
+          id: n.conceptId,
+          name: CONCEPT_BY_ID[n.conceptId]?.name ?? n.conceptId,
+          confidence: Math.round((mastery[n.conceptId]?.confidence ?? 0) * 100),
         })),
       };
-      setResult(await analyzeGaps(profile));
+      const data = await analyzeGaps(profile);
+      setAiResult({ ...data, generator: 'ai' });
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Gap analysis failed.');
+      setError(e instanceof Error ? e.message : 'AI analysis failed.');
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <Card className="p-4">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 text-sm font-semibold text-sky-200">
-          <Sparkles className="h-4 w-4" /> AI Gap Analyzer
+    <Card className="p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+            <Sparkles className="h-4 w-4 text-sky-400" /> Your gaps
+          </div>
+          <p className="mt-1 text-[11px] text-white/40">
+            {result.generator === 'ai' ? 'AI synthesis' : 'Personalized from your mastery — no AI needed'}
+          </p>
         </div>
-        <Button tone="ghost" onClick={() => void run()} disabled={loading}>
-          {loading ? 'Analyzing…' : result ? 'Re-analyze' : 'Analyze my gaps'}
-        </Button>
+        {aiConfigured() && (
+          <Button tone="ghost" onClick={() => void runAi()} disabled={loading}>
+            {loading ? 'Synthesizing…' : 'Deepen with AI'}
+          </Button>
+        )}
       </div>
 
-      {!result && !error && (
-        <p className="mt-2 text-xs text-slate-500">
-          {aiConfigured()
-            ? 'Sends your mastery profile to your AI provider and returns weak areas, the next concepts to study, and an artifact to build.'
-            : 'Add an AI provider in Settings to enable the Gap Analyzer.'}
-        </p>
+      {error && <p className="mt-3 text-xs text-rose-400">{error}</p>}
+
+      <p className="mt-4 text-sm leading-relaxed text-white/70">{result.summary}</p>
+
+      {result.weakAreas?.length > 0 && (
+        <div className="mt-4">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-white/40">Weak areas</div>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {result.weakAreas.map((w, i) => (
+              <span key={i} className="rounded-md border border-rose-500/25 bg-rose-500/10 px-2 py-0.5 text-[11px] text-rose-200">
+                {w}
+              </span>
+            ))}
+          </div>
+        </div>
       )}
 
-      {error && <p className="mt-2 text-xs text-rose-400">{error}</p>}
+      {result.nextConcepts?.length > 0 && (
+        <div className="mt-4">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-white/40">Study next</div>
+          <div className="mt-2 space-y-2">
+            {result.nextConcepts.map((n, i) => {
+              const c = CONCEPT_BY_ID[n.conceptId];
+              return (
+                <Link
+                  key={i}
+                  to={c ? `/concepts/${n.conceptId}` : '/concepts'}
+                  className="block rounded-lg border border-white/[0.08] bg-black/40 p-3 transition-colors hover:border-white/15"
+                >
+                  <div className="text-sm font-medium text-white">{c?.name || n.conceptId}</div>
+                  <div className="text-xs text-white/45">{n.why}</div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-      {result && (
-        <div className="mt-3 space-y-3">
-          <p className="text-sm text-slate-300">{result.summary}</p>
-
-          {result.weakAreas?.length > 0 && (
-            <div>
-              <div className="text-[11px] font-medium text-slate-500">Weak areas</div>
-              <div className="mt-1 flex flex-wrap gap-1.5">
-                {result.weakAreas.map((w, i) => (
-                  <span key={i} className="rounded-md border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 text-[11px] text-rose-300">
-                    {w}
-                  </span>
-                ))}
-              </div>
+      {result.recommendedArtifact?.artifactId && (
+        <div className="mt-4">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-white/40">Build this</div>
+          <Link
+            to={`/playground?artifact=${result.recommendedArtifact.artifactId}`}
+            className="mt-2 block rounded-lg border border-sky-500/25 bg-sky-500/10 p-3 transition-colors hover:border-sky-500/40"
+          >
+            <div className="text-sm font-medium text-sky-200">
+              {ARTIFACT_BY_ID[result.recommendedArtifact.artifactId]?.title || result.recommendedArtifact.artifactId}
             </div>
-          )}
-
-          {result.nextConcepts?.length > 0 && (
-            <div>
-              <div className="text-[11px] font-medium text-slate-500">Study next</div>
-              <div className="mt-1 space-y-1.5">
-                {result.nextConcepts.map((n, i) => {
-                  const c = CONCEPT_BY_ID[n.conceptId];
-                  return (
-                    <Link
-                      key={i}
-                      to={c ? `/concepts/${n.conceptId}` : '/concepts'}
-                      className="block rounded-md border border-slate-800 bg-slate-950 p-2 hover:border-slate-700"
-                    >
-                      <div className="text-sm font-medium text-white">{c?.name || n.conceptId}</div>
-                      <div className="text-xs text-slate-500">{n.why}</div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {result.recommendedArtifact?.artifactId && (
-            <div>
-              <div className="text-[11px] font-medium text-slate-500">Build this</div>
-              <Link to="/playground" className="mt-1 block rounded-md border border-sky-500/30 bg-sky-500/10 p-2">
-                <div className="text-sm font-medium text-sky-200">
-                  {ARTIFACT_BY_ID[result.recommendedArtifact.artifactId]?.title || result.recommendedArtifact.artifactId}
-                </div>
-                <div className="text-xs text-slate-400">{result.recommendedArtifact.why}</div>
-              </Link>
-            </div>
-          )}
+            <div className="text-xs text-white/45">{result.recommendedArtifact.why}</div>
+          </Link>
         </div>
       )}
     </Card>

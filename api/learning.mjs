@@ -1,41 +1,19 @@
-// Consolidated handler — Hobby plan caps Vercel at 12 serverless functions.
-// Routes via ?action= to keep all learning-loop endpoints in one function.
-import activityHandler from '../handlers/activity.mjs';
-import artifactsHandler from '../handlers/artifacts.mjs';
-import conceptsHandler from '../handlers/concepts.mjs';
-import critiqueHandler from '../handlers/critique.mjs';
-import dailyHandler from '../handlers/daily.mjs';
-import drillsHandler from '../handlers/drills.mjs';
-import feynmanHandler from '../handlers/feynman.mjs';
-import gapsHandler from '../handlers/gaps.mjs';
-import notesHandler from '../handlers/learning-notes.mjs';
-import projectsHandler from '../handlers/projects.mjs';
-import tagHandler from '../handlers/tag.mjs';
-import understandingHandler from '../handlers/understanding-check.mjs';
-import weeklyHandler from '../handlers/weekly.mjs';
-
-const HANDLERS = {
-  activity: activityHandler,
-  concepts: conceptsHandler,
-  tag: tagHandler,
-  feynman: feynmanHandler,
-  daily: dailyHandler,
-  weekly: weeklyHandler,
-  artifacts: artifactsHandler,
-  drills: drillsHandler,
-  projects: projectsHandler,
-  notes: notesHandler,
-  gaps: gapsHandler,
-  critique: critiqueHandler,
-  understanding: understandingHandler,
-};
+// Consolidated handler — routes via ?action= (see shared/api/learning-registry.mjs).
+import { HANDLER_MODULES, LEARNING_ACTIONS } from '../shared/api/learning-registry.mjs';
 
 export default async function handler(req, res) {
   const action = req.query?.action;
-  if (!action || !HANDLERS[action]) {
+  if (!action || !LEARNING_ACTIONS.includes(action)) {
     return res.status(400).json({
-      error: `Unknown action. Expected one of: ${Object.keys(HANDLERS).join(', ')}`,
+      error: `Unknown action. Expected one of: ${LEARNING_ACTIONS.join(', ')}`,
     });
   }
-  return HANDLERS[action](req, res);
+
+  const loader = HANDLER_MODULES[action];
+  if (!loader) {
+    return res.status(500).json({ error: `No handler module for action: ${action}` });
+  }
+
+  const mod = await loader();
+  return mod.default(req, res);
 }

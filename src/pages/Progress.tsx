@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+import { RetentionDashboard } from '../components/RetentionDashboard';
+import { WeeklyReport } from '../components/WeeklyReport';
 import { Sparkline } from '../components/viz';
 import { EDITORIAL_ARTIFACTS, EDITORIAL_DRILLS } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
@@ -52,6 +54,14 @@ export default function Progress() {
         <Sub label="Drills solved" value={`${drillsSolved}/${EDITORIAL_DRILLS.length}`} />
         <Sub label="Artifacts shipped" value={`${shipped}/${EDITORIAL_ARTIFACTS.length}`} />
         <Sub label="Started" value={`${overall.total - overall.untouched}/${overall.total}`} />
+      </section>
+
+      <section className="section-rule mt-16 pt-10">
+        <RetentionDashboard />
+      </section>
+
+      <section className="section-rule mt-16 pt-10">
+        <WeeklyReport />
       </section>
 
       <nav className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">

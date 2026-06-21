@@ -7,7 +7,6 @@ import {
   Badge,
   Button,
   Card,
-  color,
   DIFFICULTY_COLOR,
   EmptyState,
   FilterPill,
@@ -27,10 +26,17 @@ import {
   type ReviewQuestion,
   sortedTracks,
 } from '../data/learning-os';
+import { pickDrillForConcept } from '../lib/recommend';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
+import { useImportedReviews } from '../hooks/useImportedReviews';
+import { useReviewMastery } from '../hooks/useReviewMastery';
 import { type DrillEntry, useDrillStore, useUserElo } from '../hooks/useUserStore';
-import { type Critique, critiqueAnswer } from '../lib/aiClient';
-import { isDue } from '../lib/conceptState';
+import { useActivityLogger } from '../hooks/useActivity';
+import { aiConfigured, type Critique, critiqueAnswer } from '../lib/aiClient';
+import { critiqueAnswerHeuristic } from '../lib/heuristicCritique';
+import { dueReviewQuestions, reviewQuestionPool } from '../lib/planner';
+import { isLeech, suspendReviewQuestion } from '../lib/reviewMastery';
+import { recordSessionActivity } from '../lib/session';
 import { DEFAULT_USER_ELO, difficultyToElo } from '../lib/elo';
 
 type Tab = 'drills' | 'reviews';
@@ -48,11 +54,12 @@ export default function Practice() {
 
   const { drills: drillState } = useDrillStore();
   const { mastery } = useConceptMastery();
+  const { mastery: rqMastery } = useReviewMastery();
+  const { reviews: importedReviews } = useImportedReviews();
 
-  const dueCount = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId])).length;
+  const dueCount = dueReviewQuestions(rqMastery, mastery, importedReviews).length;
   const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
   const attemptedCount = Object.values(drillState).filter(d => d.status === 'attempted').length;
-  const solvedPct = EDITORIAL_DRILLS.length ? solvedCount / EDITORIAL_DRILLS.length : 0;
   const totalReps = Object.values(drillState).reduce((s, d) => s + (d.attempts ?? 0), 0);
   const sparkline = buildRecentActivity(mastery, 14);
 
@@ -81,7 +88,6 @@ export default function Practice() {
       <PracticeHero
         solvedCount={solvedCount}
         attemptedCount={attemptedCount}
-        solvedPct={solvedPct}
         totalReps={totalReps}
         dueCount={dueCount}
         sparkline={sparkline}
@@ -104,14 +110,12 @@ export default function Practice() {
 function PracticeHero({
   solvedCount,
   attemptedCount,
-  solvedPct,
   totalReps,
   dueCount,
   sparkline,
 }: {
   solvedCount: number;
   attemptedCount: number;
-  solvedPct: number;
   totalReps: number;
   dueCount: number;
   sparkline: number[];
@@ -296,44 +300,71 @@ function DrillCard({
 // --- Reviews tab ------------------------------------------------------------
 
 function ReviewSession() {
-  const { mastery, review } = useConceptMastery();
+  const { mastery, review: reviewConcept } = useConceptMastery();
+  const { mastery: rqMastery, review: reviewRq } = useReviewMastery();
+  const { reviews: importedReviews } = useImportedReviews();
+  const logActivity = useActivityLogger();
   const [revealed, setRevealed] = useState(false);
   const [answer, setAnswer] = useState('');
   const [done, setDone] = useState<Set<string>>(new Set());
   const [critique, setCritique] = useState<Critique | null>(null);
   const [critiquing, setCritiquing] = useState(false);
   const [critiqueError, setCritiqueError] = useState('');
+  const [critiqueSource, setCritiqueSource] = useState<'heuristic' | 'ai' | null>(null);
 
   const { queue, mode } = useMemo(() => {
-    const due = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId]) && !done.has(q.id));
+    const pool = reviewQuestionPool(importedReviews);
+    const due = dueReviewQuestions(rqMastery, mastery, importedReviews).filter(q => !done.has(q.id));
     if (due.length) return { queue: due, mode: 'due' as const };
-    const practice = REVIEW_QUESTIONS.filter(q => mastery[q.conceptId] && !done.has(q.id));
-    return { queue: practice, mode: 'practice' as const };
-  }, [mastery, done]);
+    const practice = pool.filter(q => {
+      if (done.has(q.id)) return false;
+      return rqMastery[q.id] || mastery[q.conceptId];
+    });
+    if (practice.length) return { queue: practice, mode: 'practice' as const };
+    const starter = pool.filter(q => !done.has(q.id));
+    return { queue: starter, mode: 'new' as const };
+  }, [mastery, rqMastery, importedReviews, done]);
 
   const current: ReviewQuestion | undefined = queue[0];
+  const leech = current ? isLeech(rqMastery[current.id]) : false;
 
   function next(rating: 'again' | 'hard' | 'good' | 'easy') {
     if (!current) return;
-    void review(current.conceptId, rating);
+    void reviewRq(current.id, rating);
+    void reviewConcept(current.conceptId, rating);
+    void logActivity({ kind: 'review_session', conceptIds: [current.conceptId], problemId: current.id });
+    recordSessionActivity('review_session');
     setDone(prev => new Set(prev).add(current.id));
     setRevealed(false);
     setAnswer('');
     setCritique(null);
     setCritiqueError('');
+    setCritiqueSource(null);
   }
 
-  async function runCritique() {
+  function runHeuristicCritique() {
     if (!current) return;
+    setCritique(critiqueAnswerHeuristic(current.question, answer, current.answer));
+    setCritiqueSource('heuristic');
+  }
+
+  async function runAiCritique() {
+    if (!current || !aiConfigured()) return;
     setCritiquing(true);
     setCritiqueError('');
     try {
       setCritique(await critiqueAnswer(current.question, answer, current.answer));
+      setCritiqueSource('ai');
     } catch (e) {
       setCritiqueError(e instanceof Error ? e.message : 'Critique failed.');
     } finally {
       setCritiquing(false);
     }
+  }
+
+  function onReveal() {
+    setRevealed(true);
+    if (answer.trim()) runHeuristicCritique();
   }
 
   if (!current) {
@@ -359,12 +390,39 @@ function ReviewSession() {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             <Badge tone="cyan">{current.type}</Badge>
+            {current.source === 'library' && <Badge tone="purple">library</Badge>}
+            {current.source === 'anki' && <Badge tone="indigo">anki</Badge>}
             {mode === 'practice' && <Badge tone="gray">practice</Badge>}
+            {leech && <Badge tone="rose">leech</Badge>}
           </div>
           <Link to={`/concepts/${current.conceptId}`} className="text-xs text-white/40 hover:text-white/70">
             {CONCEPT_BY_ID[current.conceptId]?.name}
           </Link>
         </div>
+        {leech && (
+          <div className="mb-3 flex flex-wrap gap-2">
+            {pickDrillForConcept(current.conceptId) && (
+              <Link
+                to={`/drills/${pickDrillForConcept(current.conceptId)!.id}`}
+                className="inline-flex items-center gap-1 rounded-full border border-rose-500/30 bg-rose-500/10 px-3 py-1 text-xs text-rose-200 hover:border-rose-500/50"
+              >
+                <Target className="h-3 w-3" /> Drill first — then retry card
+              </Link>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                suspendReviewQuestion(current.id);
+                setDone(prev => new Set(prev).add(current.id));
+                setRevealed(false);
+                setAnswer('');
+              }}
+              className="text-xs text-white/40 hover:text-white/70"
+            >
+              Suspend until drill solved
+            </button>
+          </div>
+        )}
         <h2 className="text-base font-semibold text-white sm:text-lg">{current.question}</h2>
 
         <textarea
@@ -378,7 +436,7 @@ function ReviewSession() {
 
         {!revealed ? (
           <div className="mt-4">
-            <Button onClick={() => setRevealed(true)}>
+            <Button onClick={onReveal}>
               <RotateCcw className="h-4 w-4" /> Reveal answer
             </Button>
           </div>
@@ -390,13 +448,24 @@ function ReviewSession() {
             </div>
 
             {answer.trim() && (
-              <AnswerCritiquePanel
-                critique={critique}
-                critiquing={critiquing}
-                critiqueError={critiqueError}
-                onCritique={() => void runCritique()}
-                showTrigger={!critique}
-              />
+              <>
+                {critiqueSource === 'heuristic' && aiConfigured() && !critiquing && (
+                  <button
+                    type="button"
+                    onClick={() => void runAiCritique()}
+                    className="text-xs text-sky-400 hover:text-sky-300"
+                  >
+                    Deepen critique with AI →
+                  </button>
+                )}
+                <AnswerCritiquePanel
+                  critique={critique}
+                  critiquing={critiquing}
+                  critiqueError={critiqueError}
+                  onCritique={() => (aiConfigured() ? void runAiCritique() : runHeuristicCritique())}
+                  showTrigger={!critique && !answer.trim()}
+                />
+              </>
             )}
 
             <ReviewRatingButtons onRate={next} />

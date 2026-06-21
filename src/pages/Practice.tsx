@@ -3,28 +3,33 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Sparkline } from '../components/viz';
-import { CONCEPT_BY_ID, type Drill, EDITORIAL_DRILLS, primaryGroup, REVIEW_QUESTIONS } from '../data/learning-os';
+import { CONCEPT_BY_ID, type Drill, EDITORIAL_DRILLS, primaryGroup } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
+import { useReviewMastery } from '../hooks/useReviewMastery';
+import { useSessionPlan } from '../hooks/useSessionPlan';
 import { useDrillStore, useUserElo } from '../hooks/useUserStore';
-import { useGateContext } from '../hooks/useGates';
-import { isDue } from '../lib/conceptState';
-import { pickPracticeDrill, pickTodayPlan } from '../lib/recommend';
+import { useProfile } from '../hooks/useProfile';
+import { dueReviewQuestions } from '../lib/planner';
+import { pickPracticeDrill } from '../lib/recommend';
+import { computeSessionStreak } from '../lib/session';
 
 export default function Practice() {
   const { drills: drillState } = useDrillStore();
   const { mastery } = useConceptMastery();
+  const { mastery: rqMastery } = useReviewMastery();
   const { getElo } = useUserElo();
-  const gateCtx = useGateContext();
-  const todayConcept = pickTodayPlan(mastery, gateCtx)?.concept.id;
+  const { profile } = useProfile();
+  const session = useSessionPlan();
+  const todayConcept = session?.concept.id;
 
-  const dueCount = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId])).length;
+  const dueCount = dueReviewQuestions(rqMastery, mastery).length;
   const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 14), [mastery]);
-  const streak = computeStreak(sparkline);
+  const streak = computeSessionStreak();
 
   const nextDrill = useMemo(
-    () => pickPracticeDrill(drillState, getElo, todayConcept),
-    [drillState, getElo, todayConcept],
+    () => pickPracticeDrill(drillState, getElo, todayConcept, profile.experience),
+    [drillState, getElo, todayConcept, profile.experience],
   );
 
   return (
@@ -140,7 +145,4 @@ function buildRecentActivity(mastery: Record<string, MasteryEntry>, days: number
   return buckets;
 }
 
-function computeStreak(sparkline: number[]): number {
-  const firstZero = sparkline.slice().reverse().findIndex(v => v === 0);
-  return firstZero === -1 ? sparkline.length : firstZero;
-}
+

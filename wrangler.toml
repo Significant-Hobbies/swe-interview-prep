@@ -1,3 +1,11 @@
 name = "swe-interview-prep"
 pages_build_output_dir = "dist"
 compatibility_date = "2024-09-23"
+
+# Daily digest at 13:00 UTC (~8am US Eastern)
+[triggers]
+crons = ["0 13 * * *"]
+
+# Cloudflare Email Service — enable domain first: wrangler email sending enable yourdomain.com
+[[send_email]]
+name = "EMAIL"

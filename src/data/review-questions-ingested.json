@@ -1,0 +1,986 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-21T08:47:51.016Z",
+  "reviewQuestions": [
+    {
+      "id": "rq-lib-devops-exercises-certificates-aws-cloud-practitioner-md",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: AWS Cloud Practitioner — explain the core idea in your own words.",
+      "answer": "AWS Cloud Practitioner A summary of what you need to know for the exam can be found here Cloud 101 What is cloud computing?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "certificates-aws-cloud-practitioner-md",
+        "title": "AWS Cloud Practitioner"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-certificates-aws-solutions-architect-associate-md",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: AWS Solutions Architect Associate — explain the core idea in your own words.",
+      "answer": "AWS Solutions Architect Associate Last update: 2021 AWS Global Infrastructure Explain the following Availability zone Region Edge location AWS regions are data centers hosted across different geographical locations worldwide, each region is completely independent of one another.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "certificates-aws-solutions-architect-associate-md",
+        "title": "AWS Solutions Architect Associate"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-aws",
+      "conceptId": "auth-systems",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: AWS — explain the core idea in your own words.",
+      "answer": "AWS Note : Some of the exercises cost $$$ and can't be performed using the free tier or resources 2nd Note : The provided solutions are using the AWS console.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-aws",
+        "title": "AWS"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-databases",
+      "conceptId": "sharding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Databases — explain the core idea in your own words.",
+      "answer": "Databases Databases Exercises Questions SQL Time Series Exercises Name Topic Objective & Instructions Solution Comments Message Board Tables Relational DB Tables Exercise Solution Questions What type of databases are you familiar with?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-databases",
+        "title": "Databases"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-devops",
+      "conceptId": "teamwork-and-collaboration",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Devops — explain the core idea in your own words.",
+      "answer": "DevOps Questions General What is DevOps? The definition of DevOps from selected companies: Amazon : \"DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-devops",
+        "title": "Devops"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-kafka",
+      "conceptId": "message-queues",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Kafka — explain the core idea in your own words.",
+      "answer": "Apache Kafka Kafka Exercises Name Topic Objective & Instructions Solution Comments Kafka Self Assessment Kafka 101 Kafka 101 What is Kafka?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-kafka",
+        "title": "Kafka"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-kubernetes",
+      "conceptId": "replication",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Kubernetes — explain the core idea in your own words.",
+      "answer": "CKA (Certified Kubernetes Administrator) CKA (Certified Kubernetes Administrator) Setup Pods Troubleshooting Pods Namespaces Nodes Services ReplicaSets Troubleshooting ReplicaSets Deployments Troubleshooting Deployments Scheduler Node Affinity Labels and Selectors Node Selector Taints Resources Limits Monitoring Scheduler Setup Set up Kubernetes cluster.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-kubernetes",
+        "title": "Kubernetes"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-observability",
+      "conceptId": "monitoring-analytics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Observability — explain the core idea in your own words.",
+      "answer": "Observability Observability Monitoring Data Application Performance Management What's Observability?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-observability",
+        "title": "Observability"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-security",
+      "conceptId": "auth-systems",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Security — explain the core idea in your own words.",
+      "answer": "Security What is DevSecOps? What its core principals? A couple of quotations from chosen companies: Snyk: \"DevSecOps refers to the integration of security practices into a DevOps software delivery model.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-security",
+        "title": "Security"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-software_development",
+      "conceptId": "two-pointers",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Software Development — explain the core idea in your own words.",
+      "answer": "Software Development Agile Software Development What is Agile in regards to software development?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-software_development",
+        "title": "Software Development"
+      }
+    },
+    {
+      "id": "rq-lib-devops-exercises-devops-terraform",
+      "conceptId": "teamwork-and-collaboration",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "DevOps Exercises: Terraform — explain the core idea in your own words.",
+      "answer": "Terraform Terraform Exercises Terraform 101 AWS Questions Terraform 101 Terraform Hands On Basics Dependencies Providers Variables Input Variables Output Variables Locals Variables Hands On Data Sources Lifecycle Provisioners State Terraform Backend Workspaces State Hands On Terraform Structures and Syntax Lists Loops Maps Conditionals Misc Modules Modules Hands On Interview Cheatsheet Import Version Control AWS Validations Secrets Production Exercises Terraform 101 Name Topi",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "devops-exercises",
+        "sectionId": "devops-terraform",
+        "title": "Terraform"
+      }
+    },
+    {
+      "id": "rq-lib-grokking-oop-design-patterns-reference-md",
+      "conceptId": "strategy-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Grokking OOP Design: Design Patterns Reference — explain the core idea in your own words.",
+      "answer": "Design Patterns Quick Reference Guide This guide provides a quick reference for all design patterns used across the case studies in this project.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "grokking-oop",
+        "sectionId": "design-patterns-reference-md",
+        "title": "Design Patterns Reference"
+      }
+    },
+    {
+      "id": "rq-lib-grokking-oop-diagrams-readme-md",
+      "conceptId": "strategy-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Grokking OOP Design: Diagrams Readme — explain the core idea in your own words.",
+      "answer": "Object Diagrams Quick Start Guide 📋 Overview This project now includes comprehensive object diagrams that visualize the class structures, relationships, and design patterns across all case studies.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "grokking-oop",
+        "sectionId": "diagrams-readme-md",
+        "title": "Diagrams Readme"
+      }
+    },
+    {
+      "id": "rq-lib-grokking-oop-object-diagram-documentation-md",
+      "conceptId": "state-management",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Grokking OOP Design: Object Diagram Documentation — explain the core idea in your own words.",
+      "answer": "Object Diagram Documentation Overview This document provides comprehensive documentation for the object oriented design patterns and relationships across all case studies in the \"Grokking the Object Oriented Design Interview\" project.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "grokking-oop",
+        "sectionId": "object-diagram-documentation-md",
+        "title": "Object Diagram Documentation"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-readme-ja-jp-md",
+      "conceptId": "shortest-path",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Readme.ja Jp — explain the core idea in your own words.",
+      "answer": "JavaScriptアルゴリズムとデータ構造 ![CI](https://github.com/trekhleb/javascript algorithms/actions?",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "readme-ja-jp-md",
+        "title": "Readme.ja Jp"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-cryptography-polynomial-hash-readme-md",
+      "conceptId": "array-hashing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Polynomial Hash — explain the core idea in your own words.",
+      "answer": "Polynomial Rolling Hash Hash Function Hash functions are used to map large data sets of elements of an arbitrary length ( the keys ) to smaller data sets of elements of a fixed length ( the fingerprints ).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-cryptography-polynomial-hash-readme-md",
+        "title": "Polynomial Hash"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-bellman-ford-readme-md",
+      "conceptId": "shortest-path",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Bellman Ford — explain the core idea in your own words.",
+      "answer": "Bellman–Ford Algorithm The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-bellman-ford-readme-md",
+        "title": "Bellman Ford"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-breadth-first-search-readme-md",
+      "conceptId": "search-discovery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Breadth First Search — explain the core idea in your own words.",
+      "answer": "Breadth First Search (BFS) Breadth first search (BFS) is an algorithm for traversing, searching tree, or graph data structures.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-breadth-first-search-readme-md",
+        "title": "Breadth First Search"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-depth-first-search-readme-md",
+      "conceptId": "search-discovery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Depth First Search — explain the core idea in your own words.",
+      "answer": "Depth First Search (DFS) Depth first search (DFS) is an algorithm for traversing or searching tree or graph data structures.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-depth-first-search-readme-md",
+        "title": "Depth First Search"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-detect-cycle-readme-md",
+      "conceptId": "graphs",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Detect Cycle — explain the core idea in your own words.",
+      "answer": "Detect Cycle in Graphs In graph theory, a cycle is a path of edges and vertices wherein a vertex is reachable from itself.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-detect-cycle-readme-md",
+        "title": "Detect Cycle"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-prim-readme-md",
+      "conceptId": "trees",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Prim — explain the core idea in your own words.",
+      "answer": "Prim's Algorithm In computer science, Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-prim-readme-md",
+        "title": "Prim"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-math-integer-partition-readme-md",
+      "conceptId": "sharding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Integer Partition — explain the core idea in your own words.",
+      "answer": "Integer Partition In number theory and combinatorics, a partition of a positive integer , also called an integer partition , is a way of writing as a sum of positive integers.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-math-integer-partition-readme-md",
+        "title": "Integer Partition"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-search-interpolation-search-readme-md",
+      "conceptId": "binary-search",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Interpolation Search — explain the core idea in your own words.",
+      "answer": "Interpolation Search Interpolation search is an algorithm for searching for a key in an array that has been ordered by numerical values assigned to the keys (key values).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-search-interpolation-search-readme-md",
+        "title": "Interpolation Search"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-sets-knapsack-problem-readme-md",
+      "conceptId": "dp-2d",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Knapsack Problem — explain the core idea in your own words.",
+      "answer": "Knapsack Problem The knapsack problem or rucksack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-sets-knapsack-problem-readme-md",
+        "title": "Knapsack Problem"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-sets-power-set-readme-md",
+      "conceptId": "backtracking",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Power Set — explain the core idea in your own words.",
+      "answer": "Power Set Power set of a set is the set of all of the subsets of , including the empty set and itself.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-sets-power-set-readme-md",
+        "title": "Power Set"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-string-levenshtein-distance-readme-md",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Levenshtein Distance — explain the core idea in your own words.",
+      "answer": "Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
+        "title": "Levenshtein Distance"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-uncategorized-jump-game-readme-md",
+      "conceptId": "backtracking",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Jump Game — explain the core idea in your own words.",
+      "answer": "Jump Game The Problem Given an array of non negative integers, you are initially positioned at the first index of the array.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
+        "title": "Jump Game"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-uncategorized-n-queens-readme-md",
+      "conceptId": "backtracking",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: N Queens — explain the core idea in your own words.",
+      "answer": "N Queens Problem The eight queens puzzle is the problem of placing eight chess queens on an chessboard so that no two queens threaten each other.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-uncategorized-n-queens-readme-md",
+        "title": "N Queens"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-1",
+      "conceptId": "factory-creational",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Interview Questions: 1. What are the possible ways to create objects in JavaScript — explain the core idea in your own words.",
+      "answer": "What are the possible ways to create objects in JavaScript There are many ways to create objects in javascript as mentioned below: 1.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-1",
+        "title": "1. What are the possible ways to create objects in JavaScript"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-201",
+      "conceptId": "tries",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 201. What is the main difference between Object.values and Object.entries method — explain the core idea in your own words.",
+      "answer": "What is the main difference between Object.values and Object.entries method The method's behavior is similar to method but it returns an array of values instead [key,value] pairs.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-201",
+        "title": "201. What is the main difference between Object.values and Object.entries method"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-231",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Interview Questions: 231. What are the two types of loops in javascript — explain the core idea in your own words.",
+      "answer": "What are the two types of loops in javascript 1. Entry Controlled loops: In this kind of loop type, the test condition is tested before entering the loop body.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-231",
+        "title": "231. What are the two types of loops in javascript"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-238",
+      "conceptId": "stack",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 238. What is the call stack — explain the core idea in your own words.",
+      "answer": "What is the call stack Call Stack is a data structure for javascript interpreters to keep track of function calls(creates execution context) in the program.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-238",
+        "title": "238. What is the call stack"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-25",
+      "conceptId": "dp-1d",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 25. What is memoization — explain the core idea in your own words.",
+      "answer": "What is memoization Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-25",
+        "title": "25. What is memoization"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-304",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 304. What is the output of the following for loops — explain the core idea in your own words.",
+      "answer": "What is the output of the following for loops The output of the above for loops is 4 4 4 4 and 0 1 2 3 Explanation: Due to the event queue/loop of javascript, the callback function is called after the loop has been executed.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-304",
+        "title": "304. What is the output of the following for loops"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-36",
+      "conceptId": "rag",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 36. What is web storage — explain the core idea in your own words.",
+      "answer": "What is web storage Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-36",
+        "title": "36. What is web storage"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-388",
+      "conceptId": "rate-limiting",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 388. What is minimum timeout throttling — explain the core idea in your own words.",
+      "answer": "What is minimum timeout throttling Both browser and NodeJS javascript environments throttles with a minimum delay that is greater than 0ms.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-388",
+        "title": "388. What is minimum timeout throttling"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-392",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Interview Questions: 392. What are different event loops — explain the core idea in your own words.",
+      "answer": "What are different event loops In JavaScript, there are multiple event loops that can be used depending on the context of your application.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-392",
+        "title": "392. What are different event loops"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-396",
+      "conceptId": "heap",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 396. What is heap — explain the core idea in your own words.",
+      "answer": "What is heap Heap(Or memory heap) is the memory location where objects are stored when we define variables.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-396",
+        "title": "396. What is heap"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-42",
+      "conceptId": "rag",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Interview Questions: 42. What are the differences between cookie, local storage and session storage — explain the core idea in your own words.",
+      "answer": "What are the differences between cookie, local storage and session storage Below are some of the differences between cookie, local storage and session storage, Feature Cookie Local storage Session storage Accessed on client or server side Both server side & client side.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-42",
+        "title": "42. What are the differences between cookie, local storage and session storage"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-43",
+      "conceptId": "rag",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 43. What is the main difference between localStorage and sessionStorage — explain the core idea in your own words.",
+      "answer": "What is the main difference between localStorage and sessionStorage LocalStorage is the same as SessionStorage but it persists the data even when the browser is closed and reopened(i.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-43",
+        "title": "43. What is the main difference between localStorage and sessionStorage"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-438",
+      "conceptId": "rate-limiting",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 438. What is throttling? — explain the core idea in your own words.",
+      "answer": "What is throttling? Throttling is a programming technique used to control the rate at which a function is executed.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-438",
+        "title": "438. What is throttling?"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-465",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 465. What is inline caching? — explain the core idea in your own words.",
+      "answer": "What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-465",
+        "title": "465. What is inline caching?"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-478",
+      "conceptId": "seo",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 478. What is the difference between const and Object.freeze — explain the core idea in your own words.",
+      "answer": "What is the difference between const and Object.freeze The main difference is that applies to variables (bindings), while applies to values (objects).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-478",
+        "title": "478. What is the difference between const and Object.freeze"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-5",
+      "conceptId": "monitoring-analytics",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 5. What is the purpose of the array slice method — explain the core idea in your own words.",
+      "answer": "What is the purpose of the array slice method The method in JavaScript is used to extract a section of an array, returning a new array containing the selected elements.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-5",
+        "title": "5. What is the purpose of the array slice method"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-7",
+      "conceptId": "monitoring-analytics",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "JavaScript Interview Questions: 7. What is the difference between slice and splice — explain the core idea in your own words.",
+      "answer": "What is the difference between slice and splice Here are the key differences between and methods in JavaScript arrays: Does not modify the original array (immutable) Modifies the original array (mutable) Returns a shallow copy (subset) of selected elements Returns an array of the removed elements Used to extract elements from an array Used to add , remove , or replace elements in an array Syntax: Syntax: Summary: Use when you want to copy or extract elements without altering",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-7",
+        "title": "7. What is the difference between slice and splice"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-questions-q-8",
+      "conceptId": "tries",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Interview Questions: 8. How do you compare Object and Map — explain the core idea in your own words.",
+      "answer": "How do you compare Object and Map Objects and Maps both allow you to associate keys with values, retrieve those values, delete keys, and check if a key exists.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-questions",
+        "sectionId": "q-8",
+        "title": "8. How do you compare Object and Map"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-design-patterns-python-readme-md",
+      "conceptId": "factory-creational",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Python — explain the core idea in your own words.",
+      "answer": "Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "design-patterns-python-readme-md",
+        "title": "Python"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-oop-rust-aggregation-readme-md",
+      "conceptId": "ownership-and-accountability",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Aggregation — explain the core idea in your own words.",
+      "answer": "Aggregation in Rust (References & Lifetimes) Introduction Aggregation is a specific type of association in Object Oriented Programming (OOP) representing a \"Has A\" relationship.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "oop-rust-aggregation-readme-md",
+        "title": "Aggregation"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-oop-rust-association-readme-md",
+      "conceptId": "ownership-and-accountability",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Association — explain the core idea in your own words.",
+      "answer": "Association in Rust (Shared Ownership & Weak Pointers) Introduction Association represents a \"Knows a\" or \"Uses a\" relationship.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "oop-rust-association-readme-md",
+        "title": "Association"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-oop-rust-composition-readme-md",
+      "conceptId": "ownership-and-accountability",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Composition — explain the core idea in your own words.",
+      "answer": "Composition in Rust (Ownership & Embedding) Introduction Composition is a fundamental Object Oriented Programming (OOP) principle that represents a \"Has A\" relationship.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "oop-rust-composition-readme-md",
+        "title": "Composition"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-cpp-digitalwalletservice-readme-md",
+      "conceptId": "storage-retrieval",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
+      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-cpp-digitalwalletservice-readme-md",
+        "title": "Digitalwalletservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-cpp-lrucache-readme-md",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Lrucache — explain the core idea in your own words.",
+      "answer": "Designing a LRU Cache Requirements 1. The LRU cache should support the following operations: put(key, value): Insert a key value pair into the cache.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-cpp-lrucache-readme-md",
+        "title": "Lrucache"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-cpp-pubsubsystem-readme-md",
+      "conceptId": "observer-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
+      "answer": "Designing a Pub Sub System in Java Requirements 1. The Pub Sub system should allow publishers to publish messages to specific topics.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-cpp-pubsubsystem-readme-md",
+        "title": "Pubsubsystem"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-cpp-socialnetworkingservice-readme-md",
+      "conceptId": "social-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Socialnetworkingservice — explain the core idea in your own words.",
+      "answer": "Designing a Social Network Like Facebook Requirements User Registration and Authentication: Users should be able to create an account with their personal information, such as name, email, and password.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-cpp-socialnetworkingservice-readme-md",
+        "title": "Socialnetworkingservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-cpp-stackoverflow-readme-md",
+      "conceptId": "stack",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Stackoverflow — explain the core idea in your own words.",
+      "answer": "Designing Stack Overflow Requirements 1. Users can post questions, answer questions, and comment on questions and answers.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-cpp-stackoverflow-readme-md",
+        "title": "Stackoverflow"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-csharp-digitalwalletservice-readme-md",
+      "conceptId": "storage-retrieval",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
+      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-csharp-digitalwalletservice-readme-md",
+        "title": "Digitalwalletservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-csharp-lrucache-readme-md",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Lrucache — explain the core idea in your own words.",
+      "answer": "Designing a LRU Cache Requirements 1. The LRU cache should support the following operations: put(key, value): Insert a key value pair into the cache.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-csharp-lrucache-readme-md",
+        "title": "Lrucache"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-csharp-pubsubsystem-readme-md",
+      "conceptId": "observer-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
+      "answer": "Designing a Pub Sub System in Java Requirements 1. The Pub Sub system should allow publishers to publish messages to specific topics.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-csharp-pubsubsystem-readme-md",
+        "title": "Pubsubsystem"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-csharp-socialnetworkingservice-readme-md",
+      "conceptId": "social-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Socialnetworkingservice — explain the core idea in your own words.",
+      "answer": "Designing a Social Network Like Facebook Requirements User Registration and Authentication: Users should be able to create an account with their personal information, such as name, email, and password.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-csharp-socialnetworkingservice-readme-md",
+        "title": "Socialnetworkingservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-golang-digitalwalletservice-readme-md",
+      "conceptId": "storage-retrieval",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
+      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-golang-digitalwalletservice-readme-md",
+        "title": "Digitalwalletservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-airlinemanagementsystem-readme-md",
+      "conceptId": "ecommerce-payments",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Airlinemanagementsystem — explain the core idea in your own words.",
+      "answer": "Airline Management System (LLD) Problem Statement Design and implement an Airline Management System that allows users to book flights, manage passengers, handle seat assignments, process payments, and track bookings and flights.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
+        "title": "Airlinemanagementsystem"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-cricinfo-readme-md",
+      "conceptId": "messaging-realtime",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Cricinfo — explain the core idea in your own words.",
+      "answer": "Cricket Information System (LLD) Problem Statement Design and implement a Cricket Information System similar to CricInfo that provides comprehensive information about cricket matches, teams, players, and live scores.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-cricinfo-readme-md",
+        "title": "Cricinfo"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-musicstreamingservice-readme-md",
+      "conceptId": "factory-creational",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Musicstreamingservice — explain the core idea in your own words.",
+      "answer": "Music Streaming Service (LLD) Problem Statement Design and implement an online music streaming service (like Spotify) that allows users to browse, search, and play songs, manage playlists, follow artists, and receive recommendations.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-musicstreamingservice-readme-md",
+        "title": "Musicstreamingservice"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-pubsubsystem-readme-md",
+      "conceptId": "observer-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
+      "answer": "Pub/Sub System (LLD) Problem Statement Design and implement a Publish Subscribe (Pub/Sub) system that allows publishers to send messages to topics, and subscribers to receive messages from topics they are interested in.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-pubsubsystem-readme-md",
+        "title": "Pubsubsystem"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-restaurantmanagementsystem-readme-md",
+      "conceptId": "ecommerce-payments",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Restaurantmanagementsystem — explain the core idea in your own words.",
+      "answer": "Restaurant Management System (LLD) Problem Statement Design and implement a Restaurant Management System that allows customers to make reservations, place orders, manage tables, generate bills, and process payments.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-restaurantmanagementsystem-readme-md",
+        "title": "Restaurantmanagementsystem"
+      }
+    },
+    {
+      "id": "rq-lib-low-level-design-solutions-java-src-ridesharingservice-readme-md",
+      "conceptId": "ecommerce-payments",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Awesome Low-Level Design: Ridesharingservice — explain the core idea in your own words.",
+      "answer": "Ride Sharing Service (LLD) Problem Statement Design and implement a Ride Sharing Service that allows riders to request rides, drivers to accept trips, and the system to manage trip assignments, payments, and trip status.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "low-level-design",
+        "sectionId": "solutions-java-src-ridesharingservice-readme-md",
+        "title": "Ridesharingservice"
+      }
+    },
+    {
+      "id": "rq-lib-ood-interview-file-search-filesearch-readme-md",
+      "conceptId": "search-discovery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "OOD Interview: Filesearch — explain the core idea in your own words.",
+      "answer": "Unix File Search Project This project implements a flexible file search system similar to Unix's find command, allowing users to search for files based on various criteria such as name, owner, size, and directory status.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "ood-interview",
+        "sectionId": "file-search-filesearch-readme-md",
+        "title": "Filesearch"
+      }
+    },
+    {
+      "id": "rq-lib-react-questions-q-175",
+      "conceptId": "stack",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "React Interview Questions: 175. What is the benefit of component stack trace from error boundary? — explain the core idea in your own words.",
+      "answer": "What is the benefit of component stack trace from error boundary? Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "react-questions",
+        "sectionId": "q-175",
+        "title": "175. What is the benefit of component stack trace from error boundary?"
+      }
+    },
+    {
+      "id": "rq-lib-react-questions-q-257",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "React Interview Questions: 257. How do you use immer library for state updates? — explain the core idea in your own words.",
+      "answer": "How do you use immer library for state updates? Immer library enforces the immutability of state based on copy on write mechanism.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "react-questions",
+        "sectionId": "q-257",
+        "title": "257. How do you use immer library for state updates?"
+      }
+    },
+    {
+      "id": "rq-lib-react-questions-q-74",
+      "conceptId": "social-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "React Interview Questions: 74. What are the common folder structures for React? — explain the core idea in your own words.",
+      "answer": "What are the common folder structures for React? There are two common practices for React project file structure.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "react-questions",
+        "sectionId": "q-74",
+        "title": "74. What are the common folder structures for React?"
+      }
+    }
+  ]
+}

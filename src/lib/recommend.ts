@@ -13,9 +13,10 @@ import {
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type Concept, type MasteryEntry } from '../hooks/useConcepts';
 import type { ArtifactEntry, DrillEntry } from '../hooks/useUserStore';
-import { isEditorialArtifact, isEditorialDrill } from './contentQuality'; // gates + contentQuality tests
+import { isEditorialArtifact, isEditorialDrill, isSchedulableReviewQuestion } from './contentQuality';
 import { deriveConceptStatus, isDue } from './conceptState';
 import { type GateContext, conceptAccessible } from './gates';
+import { type ExperienceLevel, experienceEloOffset } from './profile';
 
 const PREREQ_THRESHOLD = 0.4;
 const ACTIVE_ROADMAP_KEY = 'swe-os:active-roadmap';
@@ -127,7 +128,9 @@ export function pickTodayPlan(
   const concept = pickNextConceptInRoadmap(roadmap, mastery, gateCtx);
   if (!concept) return null;
 
-  const reviewsDue = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId])).length;
+  const reviewsDue = REVIEW_QUESTIONS.filter(
+    q => isSchedulableReviewQuestion(q) && isDue(mastery[q.conceptId]),
+  ).length;
 
   return {
     roadmap,
@@ -146,7 +149,7 @@ export function dueConcepts(mastery: Record<string, MasteryEntry>): Concept[] {
 
 /** Review questions whose parent concept is due for review. */
 export function dueReviewQuestions(mastery: Record<string, MasteryEntry>): ReviewQuestion[] {
-  return REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId]));
+  return REVIEW_QUESTIONS.filter(q => isSchedulableReviewQuestion(q) && isDue(mastery[q.conceptId]));
 }
 
 /** The weakest touched concepts — low confidence but already started. */
@@ -162,6 +165,7 @@ export function pickPracticeDrill(
   drillState: Record<string, DrillEntry>,
   getElo: (roadmapId: string) => number,
   todayConceptId?: string | null,
+  experience: ExperienceLevel = 'mid',
 ): Drill | null {
   const pool = EDITORIAL_DRILLS.filter(d => (drillState[d.id]?.status ?? 'unsolved') !== 'solved');
   if (!pool.length) return null;
@@ -171,14 +175,16 @@ export function pickPracticeDrill(
     if (match) return match;
   }
 
+  const eloOffset = experienceEloOffset(experience);
   const ranked = pool
     .map(d => {
       const roadmaps = ALL_CONCEPTS.find(c => c.id === d.conceptId)?.roadmaps ?? [];
-      const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : 1500;
+      const userElo = (roadmaps.length ? Math.max(...roadmaps.map(getElo)) : 1500) + eloOffset;
       const problemElo = d.difficulty === 'intro' ? 1200 : d.difficulty === 'core' ? 1600 : 2000;
       const distance = Math.abs(problemElo - userElo);
       const inProgressBoost = drillState[d.id]?.status === 'attempted' ? -100 : 0;
-      return { drill: d, score: distance + inProgressBoost };
+      const failBoost = (drillState[d.id]?.attempts ?? 0) >= 2 && drillState[d.id]?.status !== 'solved' ? -150 : 0;
+      return { drill: d, score: distance + inProgressBoost + failBoost };
     })
     .sort((a, b) => a.score - b.score);
   return ranked[0]?.drill ?? null;

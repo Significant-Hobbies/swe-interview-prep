@@ -6,6 +6,7 @@ import {
   Dumbbell,
   LogIn,
   LogOut,
+  Mic,
   Network,
   Settings,
 } from 'lucide-react';
@@ -14,6 +15,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { SaaSMakerChangelog } from './saasmaker-feedback';
+import { DigestBanner } from './DigestBanner';
 import SettingsModal from './SettingsModal';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
@@ -30,8 +32,8 @@ const PRIMARY_NAV: NavItem[] = [
   { to: '/today', label: 'Today', icon: Network },
   { to: '/learn', label: 'Learn', icon: BookOpen },
   { to: '/practice', label: 'Practice', icon: Dumbbell },
+  { to: '/mock', label: 'Mock', icon: Mic },
   { to: '/playground', label: 'Playground', icon: Code2 },
-  { to: '/build', label: 'Build', icon: Code2 },
   { to: '/progress', label: 'Progress', icon: BarChart3 },
 ];
 
@@ -170,6 +172,8 @@ export default function Layout() {
             </div>
           </div>
         </nav>
+
+        <DigestBanner />
 
         <main>
           <Outlet />

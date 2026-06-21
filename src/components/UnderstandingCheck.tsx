@@ -11,6 +11,11 @@ import { Brain, FileQuestion, Loader2, RotateCcw, Sparkles, X } from 'lucide-rea
 import { useState } from 'react';
 
 import { loadAIConfig } from '../hooks/useAI';
+import { useConceptMastery } from '../hooks/useConcepts';
+import { aiConfigured } from '../lib/aiClient';
+import { conceptsForDoc, gradeToFsrsRating } from '../lib/docConcepts';
+import { critiqueAnswerHeuristic } from '../lib/heuristicCritique';
+import { recordSessionActivity } from '../lib/session';
 import { Button, Card, SectionTitle } from './ui';
 
 interface Question {
@@ -37,6 +42,7 @@ type Mode = 'quiz' | 'explain';
 interface Props {
   docTitle: string;
   docContent: string;
+  docSlug?: string;
 }
 
 async function callUnderstanding(body: Record<string, unknown>): Promise<any> {
@@ -59,7 +65,20 @@ function gradeColor(n: number): string {
   return 'text-rose-400';
 }
 
-export default function UnderstandingCheck({ docTitle, docContent }: Props) {
+function applyDocMastery(
+  docSlug: string | undefined,
+  grade: number,
+  review: (id: string, rating: 'again' | 'hard' | 'good' | 'easy') => void,
+) {
+  const concepts = docSlug ? conceptsForDoc(docSlug) : [];
+  if (!concepts.length) return;
+  const rating = gradeToFsrsRating(grade);
+  for (const cid of concepts) void review(cid, rating);
+  recordSessionActivity('concept_read');
+}
+
+export default function UnderstandingCheck({ docTitle, docContent, docSlug }: Props) {
+  const { review } = useConceptMastery();
   const [mode, setMode] = useState<Mode | null>(null);
 
   return (
@@ -69,10 +88,8 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
         <h2 className="text-base font-semibold text-white">Test your understanding</h2>
       </div>
       <p className="mb-4 max-w-2xl text-sm text-slate-400">
-        Don't take it from me — verify you got the doc. Two modes: AI asks
-        you five open questions, or you explain the thesis back in your own
-        words. Either way, you get a 0–100 grade and a list of gaps to
-        re-read.
+        Verify you got the doc — grades update concept mastery (FSRS).
+        Quiz mode needs AI; explain-back works heuristically without AI.
       </p>
 
       {mode === null && (
@@ -110,7 +127,9 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
         <QuizFlow
           docTitle={docTitle}
           docContent={docContent}
+          docSlug={docSlug}
           onReset={() => setMode(null)}
+          onGraded={(grade) => applyDocMastery(docSlug, grade, review)}
         />
       )}
 
@@ -118,7 +137,9 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
         <ExplainFlow
           docTitle={docTitle}
           docContent={docContent}
+          docSlug={docSlug}
           onReset={() => setMode(null)}
+          onGraded={(grade) => applyDocMastery(docSlug, grade, review)}
         />
       )}
     </div>
@@ -130,11 +151,15 @@ export default function UnderstandingCheck({ docTitle, docContent }: Props) {
 function QuizFlow({
   docTitle,
   docContent,
+  docSlug,
   onReset,
+  onGraded,
 }: {
   docTitle: string;
   docContent: string;
+  docSlug?: string;
   onReset: () => void;
+  onGraded: (grade: number) => void;
 }) {
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -180,6 +205,7 @@ function QuizFlow({
         aiConfig: loadAIConfig(),
       });
       setResult(data);
+      onGraded(data.overall ?? 0);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -329,10 +355,13 @@ function ExplainFlow({
   docTitle,
   docContent,
   onReset,
+  onGraded,
 }: {
   docTitle: string;
   docContent: string;
+  docSlug?: string;
   onReset: () => void;
+  onGraded: (grade: number) => void;
 }) {
   const [explanation, setExplanation] = useState('');
   const [result, setResult] = useState<ExplanationGrade | null>(null);
@@ -347,14 +376,30 @@ function ExplainFlow({
     setLoading(true);
     setError(null);
     try {
-      const data = await callUnderstanding({
-        op: 'grade-explanation',
-        docTitle,
-        docContent,
-        explanation,
-        aiConfig: loadAIConfig(),
-      });
-      setResult(data);
+      if (aiConfigured()) {
+        const data = await callUnderstanding({
+          op: 'grade-explanation',
+          docTitle,
+          docContent,
+          explanation,
+          aiConfig: loadAIConfig(),
+        });
+        setResult(data);
+        onGraded(data.grade ?? 0);
+      } else {
+        const h = critiqueAnswerHeuristic(
+          `Explain the thesis of: ${docTitle}`,
+          explanation,
+          docContent.slice(0, 2500),
+        );
+        const data: ExplanationGrade = {
+          grade: h.score,
+          feedback: h.verdict,
+          gaps: h.missing,
+        };
+        setResult(data);
+        onGraded(h.score);
+      }
     } catch (e: any) {
       setError(e.message);
     } finally {

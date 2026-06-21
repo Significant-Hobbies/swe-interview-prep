@@ -10,12 +10,17 @@ import {
   type ArtifactStatus,
   CONCEPT_BY_ID,
   DRILL_BY_ID,
+  REVIEW_QUESTIONS,
 } from '../data/learning-os';
 import { useCodeExecution } from '../hooks/useCodeExecution';
+import { useActivityLogger } from '../hooks/useActivity';
 import { useConceptMastery } from '../hooks/useConcepts';
+import { useReviewMastery } from '../hooks/useReviewMastery';
 import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, useUserElo } from '../hooks/useUserStore';
 import { runDrillTests } from '../lib/drillRunner';
 import { difficultyToElo } from '../lib/elo';
+import { loadSuspendedRqs, reviewsToSeedForConcept, unsuspendReviewQuestion } from '../lib/reviewMastery';
+import { recordSessionActivity } from '../lib/session';
 import { playgroundArtifactUrl } from '../lib/gates';
 import type { Language } from '../types';
 
@@ -216,6 +221,8 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   const drill = DRILL_BY_ID[drillId];
   const { getDrill, setDrill } = useDrillStore();
   const { review } = useConceptMastery();
+  const { mastery: rqMastery, review: reviewRq } = useReviewMastery();
+  const logActivity = useActivityLogger();
   const { recordResult } = useUserElo();
   const { output, errors, isRunning, execute } = useCodeExecution();
   const [showHints, setShowHints] = useState(false);
@@ -257,13 +264,49 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     const wasSolved = entry.status === 'solved';
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Solving a drill closes the loop — it nudges the concept toward mastery.
-    if (status === 'solved') void review(drill!.conceptId, 'good');
+    if (status === 'solved') {
+      void review(drill!.conceptId, 'good');
+      void logActivity({
+        kind: 'drill_solve',
+        conceptIds: [drill!.conceptId],
+        problemId: drillId,
+        payload: { difficulty: drill!.difficulty },
+      });
+      recordSessionActivity('drill_solve');
+      for (const seed of reviewsToSeedForConcept(drill!.conceptId, REVIEW_QUESTIONS, rqMastery)) {
+        void reviewRq(seed.questionId, seed.rating);
+      }
+      for (const q of REVIEW_QUESTIONS.filter(rq => rq.conceptId === drill!.conceptId)) {
+        if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
+      }
+    } else if (status === 'attempted') {
+      void logActivity({
+        kind: 'drill_fail',
+        conceptIds: [drill!.conceptId],
+        problemId: drillId,
+        payload: { attempts: entry.attempts + 1 },
+      });
+      recordSessionActivity('drill_fail');
+    }
     // First-time solve bumps ELO for every roadmap this concept belongs to.
     // v1 only counts the success signal; an explicit "couldn't solve" path
     // would be needed to push ELO down.
     if (status === 'solved' && !wasSolved && concept) {
       recordResult(concept.roadmaps, difficultyToElo(drill!.difficulty), 1);
     }
+  }
+
+  function markGiveUp() {
+    if (!concept) return;
+    setDrill(drillId, { status: 'attempted', lastCode: code, attempts: entry.attempts + 1 });
+    recordResult(concept.roadmaps, difficultyToElo(drill!.difficulty), 0);
+    void logActivity({
+      kind: 'drill_fail',
+      conceptIds: [drill!.conceptId],
+      problemId: drillId,
+      payload: { attempts: entry.attempts + 1, gaveUp: true },
+    });
+    recordSessionActivity('drill_fail');
   }
 
   function switchLanguage(lang: Language) {
@@ -367,6 +410,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
           <div className="flex flex-wrap items-center gap-2">
             <Button tone="ghost" onClick={() => mark('attempted')}>Save attempt</Button>
+            <Button tone="ghost" onClick={markGiveUp}>Couldn&apos;t solve</Button>
             <Button onClick={() => mark('solved')}>
               <Check className="h-4 w-4" /> Mark solved
             </Button>

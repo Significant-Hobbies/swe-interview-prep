@@ -14,7 +14,9 @@ test.describe('Learning OS smoke', () => {
   test('root redirects to /today and shows today plan', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/today$/);
-    await expect(page.getByText(/Today ·/)).toBeVisible();
+    await expect(
+      page.getByText(/^Today$/).or(page.getByText(/You're caught up|min session/i)),
+    ).toBeVisible();
   });
 
   test('Learn page shows roadmaps + concepts', async ({ page }) => {
@@ -42,9 +44,10 @@ test.describe('Learning OS smoke', () => {
     await expect(page.locator('.monaco-editor').first()).toBeVisible({ timeout: 15000 });
   });
 
-  test('Mock interview legacy route redirects to Practice', async ({ page }) => {
+  test('Mock interview page loads timed prompts', async ({ page }) => {
     await page.goto('/mock');
-    await expect(page).toHaveURL(/\/practice$/);
+    await expect(page).toHaveURL(/\/mock$/);
+    await expect(page.getByRole('heading', { name: 'Mock interview' })).toBeVisible();
   });
 
   test('Progress page shows mastery rollup and notes link', async ({ page }) => {

@@ -1,5 +1,5 @@
 // Editorial quality bar — bootstrap-generated content is quarantined from recommendations.
-import type { Artifact, Drill } from '../data/learning-os';
+import type { Artifact, Drill, ReviewQuestion } from '../data/learning-os';
 
 const GENERIC_DRILL_MARKERS = [
   'Task: Implement the core mechanism in TypeScript',
@@ -23,6 +23,26 @@ export function isEditorialArtifact(artifact: Artifact): boolean {
 
 export function isFormulaicReviewQuestion(id: string): boolean {
   return id.endsWith('-core') && id.startsWith('rq-');
+}
+
+export function isIngestedReviewQuestion(id: string): boolean {
+  return id.startsWith('rq-lib-');
+}
+
+export function isAnkiReviewQuestion(id: string): boolean {
+  return id.startsWith('rq-anki-');
+}
+
+/** Questions eligible for FSRS scheduling and session planning. */
+export function isSchedulableReviewQuestion(q: ReviewQuestion): boolean {
+  if (isFormulaicReviewQuestion(q.id)) return false;
+  if (q.source === 'library' || isIngestedReviewQuestion(q.id)) {
+    return (q.answer?.length ?? 0) >= 80;
+  }
+  if (q.source === 'anki' || isAnkiReviewQuestion(q.id)) {
+    return (q.question?.length ?? 0) >= 8 && (q.answer?.length ?? 0) >= 20;
+  }
+  return true;
 }
 
 /** Playground templates with only stub implementations. */

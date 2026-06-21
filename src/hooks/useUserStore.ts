@@ -306,8 +306,36 @@ function loadElo(): UserEloState {
   return fresh;
 }
 
+function syncEloToDb(state: UserEloState) {
+  fetch('/api/learning?action=elo', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ state }),
+  }).catch(() => {});
+}
+
 export function useUserElo() {
   const [state, setState] = useState<UserEloState>(loadElo);
+
+  useEffect(() => {
+    fetch('/api/learning?action=elo', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        if (data.state?.v === 2) {
+          setState(prev => {
+            const merged = {
+              elo: { ...prev.elo, ...data.state.elo },
+              solves: { ...prev.solves, ...data.state.solves },
+              v: 2 as const,
+            };
+            saveLocal(STORE_KEYS.userElo, merged);
+            return merged;
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const getElo = useCallback(
     (roadmapId: string): number => state.elo[roadmapId] ?? DEFAULT_USER_ELO,
@@ -328,6 +356,7 @@ export function useUserElo() {
       }
       const next: UserEloState = { elo, solves, v: 2 };
       saveLocal(STORE_KEYS.userElo, next);
+      syncEloToDb(next);
       return next;
     });
   }, []);

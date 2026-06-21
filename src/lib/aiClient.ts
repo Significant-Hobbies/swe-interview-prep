@@ -14,6 +14,7 @@ export interface GapAnalysis {
   weakAreas: string[];
   nextConcepts: { conceptId: string; why: string }[];
   recommendedArtifact: { artifactId: string; why: string };
+  generator?: 'heuristic' | 'ai';
 }
 
 export interface Critique {

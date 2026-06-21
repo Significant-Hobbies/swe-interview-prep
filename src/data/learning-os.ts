@@ -6,8 +6,13 @@ import drillsData from './drills.json';
 import externalResourcesData from './external-resources.json';
 import projectsData from './projects.json';
 import reviewQuestionsData from './review-questions.json';
+import reviewQuestionsIngestedData from './review-questions-ingested.json';
 import roadmapsData from './roadmaps.json';
-import { isEditorialArtifact, isEditorialDrill } from '../lib/contentQuality';
+import {
+  isEditorialArtifact,
+  isEditorialDrill,
+  isSchedulableReviewQuestion,
+} from '../lib/contentQuality';
 
 export type TrackId =
   | 'search-ir'
@@ -143,6 +148,9 @@ export interface ReviewQuestion {
   difficulty: Difficulty;
   question: string;
   answer: string;
+  source?: 'editorial' | 'library' | 'anki';
+  libraryRef?: { repoId: string; sectionId: string; title: string };
+  ankiRef?: { deckName: string; externalId: string; tags?: string[] };
 }
 
 // The 8 "known groups" — top-level tags the UI gives a color/icon/title.
@@ -248,7 +256,16 @@ export const EDITORIAL_DRILLS: Drill[] = DRILLS.filter(isEditorialDrill);
 /** Curated artifacts with real playground templates (no build-* scaffolds). */
 export const EDITORIAL_ARTIFACTS: Artifact[] = ARTIFACTS.filter(isEditorialArtifact);
 export const PROJECTS: Project[] = (projectsData as any).projects;
-export const REVIEW_QUESTIONS: ReviewQuestion[] = (reviewQuestionsData as any).reviewQuestions;
+const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (reviewQuestionsData as any).reviewQuestions.map(
+  (q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }),
+);
+const INGESTED_REVIEW_QUESTIONS: ReviewQuestion[] = (
+  (reviewQuestionsIngestedData as any).reviewQuestions ?? []
+).filter(isSchedulableReviewQuestion);
+export const REVIEW_QUESTIONS: ReviewQuestion[] = [
+  ...EDITORIAL_REVIEW_QUESTIONS,
+  ...INGESTED_REVIEW_QUESTIONS,
+];
 
 export const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map(t => [t.id, t]));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(CONCEPTS.map(c => [c.id, c]));

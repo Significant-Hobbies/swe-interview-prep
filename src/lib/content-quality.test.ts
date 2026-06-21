@@ -6,11 +6,14 @@ import artifactsData from '../data/artifacts.json';
 import conceptsData from '../data/concepts.json';
 import drillsData from '../data/drills.json';
 import reviewQuestionsData from '../data/review-questions.json';
-import { type Artifact, type Drill, DRILLS } from '../data/learning-os';
+import { type Artifact, type Drill, DRILLS, type ReviewQuestion } from '../data/learning-os';
+import reviewQuestionsIngestedData from '../data/review-questions-ingested.json';
 import {
   isEditorialArtifact,
   isEditorialDrill,
   isFormulaicReviewQuestion,
+  isIngestedReviewQuestion,
+  isSchedulableReviewQuestion,
   isStubPlaygroundCode,
 } from './contentQuality';
 
@@ -54,6 +57,13 @@ describe('content quality bar', () => {
       .flatMap((c: { reviewQuestions?: string[] }) => c.reviewQuestions ?? []);
     const bad = spineRqs.filter(isFormulaicReviewQuestion);
     expect(bad).toEqual([]);
+  });
+
+  it('ingested library review questions pass schedulability bar', () => {
+    const ingested = reviewQuestionsIngestedData.reviewQuestions ?? [];
+    expect(ingested.length).toBeGreaterThan(0);
+    expect(ingested.every((q: { id: string }) => isIngestedReviewQuestion(q.id))).toBe(true);
+    expect(ingested.every((q: ReviewQuestion) => isSchedulableReviewQuestion(q))).toBe(true);
   });
 
   it('spine playground templates are not stubs', () => {

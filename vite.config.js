@@ -35,7 +35,9 @@ function deferAppCss() {
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), deferAppCss()],
+  assetsInclude: ['**/*.wasm'],
   server: {
+    fs: { allow: ['..'] },
     proxy: {
       '/api': 'http://localhost:3456',
     },

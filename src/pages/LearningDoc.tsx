@@ -134,7 +134,11 @@ export default function LearningDoc() {
       </Card>
 
       {activeSlug !== DEFAULT_SLUG && (
-        <UnderstandingCheck docTitle={meta?.title ?? activeSlug} docContent={raw} />
+        <UnderstandingCheck
+          docTitle={meta?.title ?? activeSlug}
+          docContent={raw}
+          docSlug={activeSlug}
+        />
       )}
 
       {activeSlug !== DEFAULT_SLUG && allDocs.length > 0 && (

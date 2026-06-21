@@ -65,4 +65,6 @@ export const STORE_KEYS = {
   mastery: 'swe-os:mastery',
   onboarding: 'swe-os:onboarding-v1',
   activeRoadmap: 'swe-os:active-roadmap',
+  profile: 'swe-os:profile-v1',
+  reviewMastery: 'swe-os:review-mastery-v1',
 } as const;

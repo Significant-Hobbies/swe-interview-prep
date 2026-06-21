@@ -29,6 +29,7 @@ function extractToken(req) {
 }
 
 export async function requireAuth(req, res) {
+  if (req._authenticatedUser) return req._authenticatedUser;
   const token = extractToken(req);
   if (!token) {
     res.status(401).json({ error: 'Unauthorized' });

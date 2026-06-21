@@ -24,6 +24,7 @@ const ConceptDetail = lazy(() => import('./pages/ConceptDetail'));
 const RoadmapDetail = lazy(() => import('./pages/RoadmapDetail'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const BuildLab = lazy(() => import('./pages/BuildLab'));
+const MockInterview = lazy(() => import('./pages/MockInterview'));
 const LearningDoc = lazy(() => import('./pages/LearningDoc'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
@@ -79,7 +80,7 @@ function AppRoutes() {
         <Route path="projects" element={<Navigate to="/progress/all" replace />} />
         <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
         <Route path="library/*" element={<Navigate to="/learn" replace />} />
-        <Route path="mock" element={<Navigate to="/practice" replace />} />
+        <Route path="mock" element={<MockInterview />} />
         <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
         <Route path="*" element={<Navigate to="/today" replace />} />
       </Route>

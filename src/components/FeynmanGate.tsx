@@ -1,9 +1,13 @@
 import { Brain, Loader2,X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { REVIEW_QUESTIONS } from '../data/learning-os';
 import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
+import { useReviewMastery } from '../hooks/useReviewMastery';
 import { trackCoreAction } from '../lib/analytics';
+import type { MasteryRating } from '../lib/fsrs';
+import { recordSessionActivity } from '../lib/session';
 import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
@@ -24,10 +28,19 @@ interface GradeResult {
 }
 
 export default function FeynmanGate({ open, onClose, code, language, problem, conceptIds, problemId }: Props) {
+  const { review: reviewRq } = useReviewMastery();
   const [explanation, setExplanation] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<GradeResult | null>(null);
   const [elapsed, setElapsed] = useState(0);
+
+  function scheduleReviewsForGaps(gapConceptIds: string[], rating: MasteryRating) {
+    for (const cid of gapConceptIds) {
+      for (const q of REVIEW_QUESTIONS.filter(rq => rq.conceptId === cid && rq.source !== 'library')) {
+        void reviewRq(q.id, rating);
+      }
+    }
+  }
 
   useEffect(() => {
     if (!open) {
@@ -79,7 +92,15 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
           }),
         });
       }
-      // Activity log
+      recordSessionActivity('feynman');
+      const gapIds = (data.gaps || []).map((g: { concept_id: string }) => g.concept_id);
+      if (gapIds.length) scheduleReviewsForGaps(gapIds, 'again');
+      else if (data.ratings?.length) {
+        const weak = data.ratings
+          .filter((r: { rating: string }) => r.rating === 'again' || r.rating === 'hard')
+          .map((r: { concept_id: string }) => r.concept_id);
+        if (weak.length) scheduleReviewsForGaps(weak, 'hard');
+      }
       if (token) {
         fetch('/api/learning?action=activity', {
           method: 'POST',

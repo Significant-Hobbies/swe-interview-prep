@@ -5,7 +5,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['src/**/__tests__/**/*.test.ts', 'src/**/*.test.ts'],
+    include: [
+      'src/**/__tests__/**/*.test.ts',
+      'src/**/*.test.ts',
+      'shared/**/*.test.mjs',
+    ],
     exclude: ['node_modules', 'dist', '.next', '.wrangler'],
     testTimeout: 15_000,
     coverage: {

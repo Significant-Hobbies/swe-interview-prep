@@ -110,7 +110,7 @@ export async function initDatabase() {
   `);
   await db.execute(`CREATE INDEX IF NOT EXISTS idx_mastery_user_due ON concept_mastery(user_id, due)`);
 
-  // Cached daily recommendation.
+  // Legacy — superseded by client-side planner (src/lib/planner.ts). Kept for existing DBs.
   await db.execute(`
     CREATE TABLE IF NOT EXISTS daily_plan (
       id TEXT PRIMARY KEY,
@@ -215,6 +215,80 @@ export async function initDatabase() {
     )
   `);
   await db.execute(`CREATE INDEX IF NOT EXISTS idx_lnotes_user_scope ON user_learning_notes(user_id, scope, ref_id)`);
+
+  // Learner profile — time budget, roadmap blend, modality mix, skips.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_profile (
+      user_id TEXT PRIMARY KEY,
+      profile_json TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  // Per-review-question FSRS (finer than concept-level scheduling).
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS review_question_mastery (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      question_id TEXT NOT NULL,
+      stability REAL DEFAULT 0,
+      difficulty REAL DEFAULT 5,
+      elapsed_days INTEGER DEFAULT 0,
+      scheduled_days INTEGER DEFAULT 0,
+      reps INTEGER DEFAULT 0,
+      lapses INTEGER DEFAULT 0,
+      state INTEGER DEFAULT 0,
+      last_review TEXT,
+      due TEXT,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, question_id)
+    )
+  `);
+  await db.execute(`CREATE INDEX IF NOT EXISTS idx_rqm_user_due ON review_question_mastery(user_id, due)`);
+
+  // Per-roadmap ELO — synced from client for cross-device calibration.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_elo_state (
+      user_id TEXT PRIMARY KEY,
+      state_json TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  // Per-user Anki / external deck cards.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_imported_reviews (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      external_id TEXT NOT NULL,
+      deck_name TEXT,
+      concept_id TEXT NOT NULL,
+      question TEXT NOT NULL,
+      answer TEXT NOT NULL,
+      tags TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, external_id)
+    )
+  `);
+  await db.execute(`CREATE INDEX IF NOT EXISTS idx_imported_reviews_user ON user_imported_reviews(user_id)`);
+
+  // Web Push subscriptions for digest reminders.
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS user_push_subscriptions (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      endpoint TEXT NOT NULL,
+      p256dh TEXT NOT NULL,
+      auth TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, endpoint)
+    )
+  `);
 
   console.log('Database schema initialized');
 }
