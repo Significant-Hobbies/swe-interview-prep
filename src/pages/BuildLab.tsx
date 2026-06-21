@@ -6,7 +6,7 @@ import CodeEditor from '../components/CodeEditor';
 import { Badge, Button, Card, color, DIFFICULTY_COLOR, EmptyState, PageHeader, PageShell, SectionTitle } from '../components/ui';
 import {
   type Artifact,
-  ARTIFACTS,
+  EDITORIAL_ARTIFACTS,
   type ArtifactStatus,
   CONCEPT_BY_ID,
   DRILL_BY_ID,
@@ -14,7 +14,9 @@ import {
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, useUserElo } from '../hooks/useUserStore';
+import { runDrillTests } from '../lib/drillRunner';
 import { difficultyToElo } from '../lib/elo';
+import { playgroundArtifactUrl } from '../lib/gates';
 import type { Language } from '../types';
 
 export function resolveBuildLabView(id?: string): 'artifact-board' | 'drill-workspace' | 'not-found' {
@@ -68,7 +70,7 @@ function ArtifactBoard() {
 
       <div className="grid gap-4 md:grid-cols-3">
         {COLUMNS.map(col => {
-          const items = ARTIFACTS.filter(a => getArtifact(a.id).status === col.status);
+          const items = EDITORIAL_ARTIFACTS.filter(a => getArtifact(a.id).status === col.status);
           return (
             <div key={col.status}>
               <div className="mb-2 flex items-center gap-2">
@@ -182,6 +184,13 @@ function ArtifactCard({
             ))}
           </div>
 
+          <Link
+            to={playgroundArtifactUrl(artifact.id)}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-sky-500/30 bg-sky-500/10 px-3 py-1.5 text-xs font-medium text-sky-300 hover:bg-sky-500/15"
+          >
+            <Hammer className="h-3.5 w-3.5" /> Build in Playground
+          </Link>
+
           {entry.url && (
             <a href={entry.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-sky-400">
               Open artifact <ExternalLink className="h-3 w-3" />
@@ -214,6 +223,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   const entry = getDrill(drillId);
   const [language, setLanguage] = useState<Language>('typescript');
   const [code, setCode] = useState(entry.lastCode || STARTER.typescript);
+  const [testMessage, setTestMessage] = useState<string | null>(null);
 
   if (!drill) {
     return (
@@ -226,10 +236,24 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   const concept = CONCEPT_BY_ID[drill.conceptId];
 
   function run() {
+    if (drill.testCases?.length && (language === 'typescript' || language === 'javascript')) {
+      const result = runDrillTests(code, drill.testCases, language);
+      setTestMessage(result.message);
+      if (result.passed) {
+        void execute(code, [], language);
+      }
+      return;
+    }
+    setTestMessage(null);
     void execute(code, [], language);
   }
 
   function mark(status: DrillEntry['status']) {
+    if (status === 'solved' && drill.testCases?.length && (language === 'typescript' || language === 'javascript')) {
+      const result = runDrillTests(code, drill.testCases, language);
+      setTestMessage(result.message);
+      if (!result.passed) return;
+    }
     const wasSolved = entry.status === 'solved';
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Solving a drill closes the loop — it nudges the concept toward mastery.
@@ -329,6 +353,11 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
           <Card className="p-3">
             <div className="text-[11px] font-medium text-slate-500">Output</div>
+            {testMessage && (
+              <p className={`mt-1 text-xs ${testMessage.includes('passed') ? 'text-emerald-400' : 'text-amber-300'}`}>
+                {testMessage}
+              </p>
+            )}
             <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-slate-300">
               {errors
                 ? <span className="text-rose-400">{errors}</span>

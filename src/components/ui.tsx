@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import type { ConceptStatus } from '../data/learning-os';
 
 // --- Color tokens -----------------------------------------------------------
-// Track colors stay (used inside viz.tsx where 8 hues distinguish 8 tracks).
+// Track colors stay (used inside viz.tsx where hues distinguish tracks).
 // Chrome (buttons, nav, cards, badges) is slate + sky only.
 
 interface ColorSet {
@@ -32,6 +32,7 @@ export const COLORS: Record<string, ColorSet> = {
   cyan: { text: 'text-cyan-300', bg: 'bg-cyan-500/10', border: 'border-cyan-700/60', solid: 'bg-cyan-500', ring: 'ring-cyan-500/40' },
   orange: { text: 'text-orange-300', bg: 'bg-orange-500/10', border: 'border-orange-700/60', solid: 'bg-orange-500', ring: 'ring-orange-500/40' },
   blue: { text: 'text-blue-300', bg: 'bg-blue-500/10', border: 'border-blue-700/60', solid: 'bg-blue-500', ring: 'ring-blue-500/40' },
+  indigo: { text: 'text-indigo-300', bg: 'bg-indigo-500/10', border: 'border-indigo-700/60', solid: 'bg-indigo-500', ring: 'ring-indigo-500/40' },
   // Back-compat alias — old code that asked for `gray` now gets slate.
   gray: { text: 'text-slate-300', bg: 'bg-slate-800/40', border: 'border-slate-800', solid: 'bg-slate-500', ring: 'ring-slate-500/40' },
 };

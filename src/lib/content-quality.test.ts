@@ -1,0 +1,73 @@
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import { describe, expect, it } from 'vitest';
+
+import artifactsData from '../data/artifacts.json';
+import conceptsData from '../data/concepts.json';
+import drillsData from '../data/drills.json';
+import reviewQuestionsData from '../data/review-questions.json';
+import { type Artifact, type Drill, DRILLS } from '../data/learning-os';
+import {
+  isEditorialArtifact,
+  isEditorialDrill,
+  isFormulaicReviewQuestion,
+  isStubPlaygroundCode,
+} from './contentQuality';
+
+const concepts = conceptsData.concepts;
+const artifacts = artifactsData.artifacts;
+
+describe('content quality bar', () => {
+  it('editorial drills are a majority of catalog', () => {
+    const editorial = DRILLS.filter(isEditorialDrill);
+    expect(editorial.length).toBeGreaterThanOrEqual(80);
+  });
+
+  it('spine concepts use editorial drills only', () => {
+    const spine = [
+      'tokenization', 'bm25', 'hybrid-search', 'search-evals', 'hnsw', 'rag',
+      'hypothesis-testing', 'probability-fundamentals', 'returns-volatility',
+    ];
+    for (const id of spine) {
+      const c = concepts.find((x: { id: string }) => x.id === id);
+      const drillIds: string[] = c?.drills ?? [];
+      const bad = drillIds.filter(did => {
+        const d = drillsData.drills.find((x: { id: string }) => x.id === did) as Drill | undefined;
+        return d && !isEditorialDrill(d);
+      });
+      expect(bad, id).toEqual([]);
+    }
+  });
+
+  it('hand-authored artifacts are not bootstrap scaffolds', () => {
+    const hand = artifacts.filter((a: { id: string }) => !a.id.startsWith('build-')) as Artifact[];
+    expect(hand.every(isEditorialArtifact)).toBe(true);
+  });
+
+  it('formulaic review questions are quarantined from spine', () => {
+    const formulaic = reviewQuestionsData.reviewQuestions.filter((q: { id: string }) =>
+      isFormulaicReviewQuestion(q.id),
+    );
+    expect(formulaic.length).toBeGreaterThan(0);
+    const spineRqs = concepts
+      .filter((c: { id: string }) => ['bm25', 'hypothesis-testing'].includes(c.id))
+      .flatMap((c: { reviewQuestions?: string[] }) => c.reviewQuestions ?? []);
+    const bad = spineRqs.filter(isFormulaicReviewQuestion);
+    expect(bad).toEqual([]);
+  });
+
+  it('spine playground templates are not stubs', () => {
+    const src = readFileSync(resolve(__dirname, '../data/playground-templates.ts'), 'utf8');
+    const spineArtifacts = [
+      'simulate-random-processes',
+      'implement-bm25-highsignal',
+      'search-eval-harness',
+      'impl-ols-from-scratch',
+    ];
+    for (const id of spineArtifacts) {
+      const block = src.match(new RegExp(`artifactId: '${id}'[\\s\\S]*?code: \\\`([\\s\\S]*?)\\\``));
+      expect(block, id).toBeTruthy();
+      expect(isStubPlaygroundCode(block![1]), id).toBe(false);
+    }
+  });
+});

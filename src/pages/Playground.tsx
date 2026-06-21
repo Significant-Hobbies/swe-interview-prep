@@ -10,11 +10,12 @@ import CompanionPanel from '../components/CompanionPanel';
 import DiagramEditor from '../components/DiagramEditor';
 import FeynmanGate from '../components/FeynmanGate';
 import MarkdownViewer from '../components/MarkdownViewer';
+import { getPlaygroundTemplate } from '../data/playground-templates';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
-import { useFocusMode } from '../hooks/useUserStore';
+import { useArtifactStore, useFocusMode } from '../hooks/useUserStore';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';
@@ -67,7 +68,9 @@ export default function Playground() {
   const [markers, setMarkers] = useState<any[]>([]);
   const [feynmanOpen, setFeynmanOpen] = useState(false);
   const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
+  const [artifactTitle, setArtifactTitle] = useState<string | null>(null);
   const { enabled: focusMode, setEnabled: setFocusMode, sessionsThisWeek } = useFocusMode();
+  const { getArtifact, setArtifact } = useArtifactStore();
 
   // The Playground is a multi-panel desktop layout. Below `lg` (covers phones
   // AND iPad portrait) we render a single panel at a time so Monaco/Excalidraw
@@ -82,27 +85,55 @@ export default function Playground() {
     setTaggedConcepts(tags.map(t => t.concept_id));
   }, !focusMode);
 
-  // Hydrate from query params (Today / Concepts deep-links)
+  // Hydrate from query params (artifact templates, concept deep-links, prompts)
   useEffect(() => {
+    const artifactId = searchParams.get('artifact');
     const conceptId = searchParams.get('concept');
     const promptText = searchParams.get('prompt');
-    if (!conceptId && !promptText) return;
-    const concept = conceptId ? CONCEPT_BY_ID[conceptId] : null;
-    const newProblem = [
-      promptText || '',
-      concept ? `\n\n**Concept:** ${concept.name}\n${concept.description}` : '',
-    ].filter(Boolean).join('').trim();
-    if (newProblem) {
-      setProblem(newProblem);
-      localStorage.setItem(PROBLEM_KEY, newProblem);
-      setVisiblePanels(prev => {
-        const next = new Set(prev);
-        next.add('problem');
-        localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
-        return next;
-      });
+    if (!artifactId && !conceptId && !promptText) return;
+
+    if (artifactId && !window.location.hash.slice(1)) {
+      const template = getPlaygroundTemplate(artifactId);
+      if (template) {
+        setCode(template.code);
+        setProblem(template.problem);
+        setLanguage(template.language);
+        setArtifactTitle(template.title);
+        localStorage.setItem(STORAGE_KEY, template.code);
+        localStorage.setItem(PROBLEM_KEY, template.problem);
+        localStorage.setItem(LANG_KEY, template.language);
+        setVisiblePanels(prev => {
+          const next = new Set(prev);
+          next.add('problem');
+          localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
+          return next;
+        });
+        const entry = getArtifact(artifactId);
+        if (entry.status === 'todo') {
+          setArtifact(artifactId, { ...entry, status: 'building' });
+        }
+      }
     }
-    if (conceptId) setTaggedConcepts([conceptId]);
+
+    if (conceptId || promptText) {
+      const concept = conceptId ? CONCEPT_BY_ID[conceptId] : null;
+      const newProblem = [
+        promptText || '',
+        concept ? `\n\n**Concept:** ${concept.name}\n${concept.description}` : '',
+      ].filter(Boolean).join('').trim();
+      if (newProblem && !artifactId) {
+        setProblem(newProblem);
+        localStorage.setItem(PROBLEM_KEY, newProblem);
+        setVisiblePanels(prev => {
+          const next = new Set(prev);
+          next.add('problem');
+          localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
+          return next;
+        });
+      }
+      if (conceptId) setTaggedConcepts([conceptId]);
+    }
+
     setSearchParams({}, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -218,6 +249,11 @@ export default function Playground() {
       {/* Toolbar */}
       <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] bg-black/95 px-3 py-2 sm:px-4 sm:py-2.5">
         <div className="flex min-w-0 items-center gap-3">
+          {artifactTitle && (
+            <span className="hidden max-w-[12rem] truncate text-xs font-medium text-white/60 sm:inline" title={artifactTitle}>
+              {artifactTitle}
+            </span>
+          )}
           {/* Panel toggles — underline indicator on active, no chip bg */}
           <div className="flex items-center gap-3 overflow-x-auto border-b border-transparent">
             <button onClick={() => togglePanel('problem')} className={panelBtn('problem', isPanelActive('problem'))}>

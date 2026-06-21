@@ -14,6 +14,7 @@
     "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs",
     "build-concept-index": "node scripts/build-concept-index.mjs",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "validate:env:build": "node scripts/validate-env.mjs build",
@@ -62,6 +63,7 @@
     "ts-fsrs": "5.3.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.0",
     "@eslint/js": "9.39.4",
     "@playwright/test": "1.59.1",
     "@tailwindcss/vite": "4.2.4",
@@ -70,23 +72,23 @@
     "@types/react-dom": "19",
     "@vercel/node": "5.7.13",
     "@vitejs/plugin-react": "6.0.1",
+    "@vitest/coverage-v8": "4.1.5",
     "@vitest/ui": "4.1.5",
     "eslint": "9.39.4",
+    "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.2",
     "globals": "17.5.0",
     "happy-dom": "20.9.0",
     "husky": "^9.1.7",
     "lightningcss": "^1.32.0",
+    "prettier": "3.8.3",
     "tailwindcss": "4",
     "typescript": "6.0.3",
+    "typescript-eslint": "8.59.0",
     "vite": "8.0.11",
     "vitest": "4.1.5",
-    "wrangler": "4.90.0",
-    "@biomejs/biome": "2.5.0",
-    "prettier": "3.8.3",
-    "typescript-eslint": "8.59.0",
-    "eslint-plugin-promise": "7.2.1"
+    "wrangler": "4.90.0"
   },
   "pnpm": {
     "peerDependencyRules": {

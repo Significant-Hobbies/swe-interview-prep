@@ -1,55 +1,1349 @@
 {
   "version": 1,
   "reviewQuestions": [
-    { "id": "rq-tokenization-symmetry", "conceptId": "tokenization", "type": "explain", "difficulty": "intro", "question": "Why must the same analyzer run at index time and query time?", "answer": "Search matches tokens, not raw text. If indexing lowercases and stems but the query does not, the query token will never equal the indexed token, so the document is unfindable." },
-    { "id": "rq-inverted-vs-forward", "conceptId": "inverted-index", "type": "compare", "difficulty": "core", "question": "How does an inverted index differ from a forward index, and why is it faster for search?", "answer": "A forward index maps doc → terms; an inverted index maps term → docs (postings). Search asks 'which docs contain this term', which the inverted index answers directly by reading one posting list instead of scanning every document." },
-    { "id": "rq-tfidf-idf-why", "conceptId": "tf-idf", "type": "explain", "difficulty": "core", "question": "What does the IDF factor accomplish in TF-IDF?", "answer": "IDF down-weights terms that appear in many documents (like 'the') and up-weights rare terms, because rare terms are more discriminative for relevance." },
-    { "id": "rq-bm25-length-norm", "conceptId": "bm25", "type": "explain", "difficulty": "core", "question": "Why does BM25 normalize by document length?", "answer": "Without length normalization a long document accumulates term matches just by being long. The b parameter scales the score by document length relative to the average so long and short documents compete fairly." },
-    { "id": "rq-bm25-vs-tfidf", "conceptId": "bm25", "type": "compare", "difficulty": "core", "question": "How is BM25 different from TF-IDF?", "answer": "BM25 adds two things TF-IDF lacks: term-frequency saturation (the k1 parameter, so the 10th occurrence adds little) and document-length normalization (the b parameter). It is TF-IDF with diminishing returns and fairness built in." },
-    { "id": "rq-bm25-vs-embeddings", "conceptId": "bm25", "type": "compare", "difficulty": "core", "question": "When can BM25 outperform embedding-based retrieval?", "answer": "On exact terms, rare tokens, codes, names, and identifiers — anything where the literal string matters. Embeddings capture meaning but blur exact tokens, so BM25 wins on precision for keyword-literal queries." },
-    { "id": "rq-bm25-hybrid", "conceptId": "bm25", "type": "design", "difficulty": "advanced", "question": "How would you combine BM25 and vector search?", "answer": "Run both retrievers, then fuse their rankings — typically with reciprocal rank fusion, which uses ranks (not incomparable scores). Validate that the fused result beats both single retrievers on an eval set." },
-    { "id": "rq-mrr-vs-ndcg", "conceptId": "ranking-metrics", "type": "compare", "difficulty": "core", "question": "When would you use MRR versus nDCG?", "answer": "MRR rewards getting one correct answer near the top — good for known-item search. nDCG uses graded relevance discounted by rank — good when there are multiple results of varying usefulness." },
-    { "id": "rq-eval-frozen-set", "conceptId": "search-evals", "type": "explain", "difficulty": "core", "question": "Why must the eval query set be frozen before tuning?", "answer": "If you change the eval set while tuning, you are optimizing to a moving target and can no longer tell whether a change is a real improvement or a regression. A frozen set makes comparisons valid." },
-    { "id": "rq-hybrid-fusion", "conceptId": "hybrid-search", "type": "explain", "difficulty": "advanced", "question": "Why use reciprocal rank fusion instead of averaging BM25 and cosine scores?", "answer": "BM25 and cosine scores live on different, uncalibrated scales — averaging them is meaningless. RRF uses each result's rank position, which is comparable across retrievers." },
-    { "id": "rq-rerank-two-stage", "conceptId": "reranking", "type": "explain", "difficulty": "advanced", "question": "Why is reranking done as a second stage instead of over the whole corpus?", "answer": "Cross-encoder rerankers are accurate but expensive — too slow to run over millions of documents. A cheap retriever narrows to ~100 candidates; the reranker only reorders those, getting precision within a latency budget." },
-    { "id": "rq-embeddings-space", "conceptId": "embeddings", "type": "explain", "difficulty": "core", "question": "What does 'distance' mean in an embedding space?", "answer": "An embedding model places semantically similar content close together, so geometric distance approximates semantic dissimilarity. Search becomes finding the nearest vectors to the query vector." },
-    { "id": "rq-cosine-vs-dot", "conceptId": "vector-similarity", "type": "compare", "difficulty": "core", "question": "When do cosine similarity and dot product give the same ranking?", "answer": "When all vectors are L2-normalized to unit length: then dot product equals cosine, so they rank identically. On un-normalized vectors, dot product is also influenced by magnitude." },
-    { "id": "rq-topk-heap", "conceptId": "topk-vector-search", "type": "implement", "difficulty": "core", "question": "How do you return top-k without sorting all n scores?", "answer": "Maintain a size-k min-heap. For each score, if the heap has fewer than k items push it; otherwise if it beats the heap root, replace the root. This is O(n log k) time and O(k) space." },
-    { "id": "rq-bruteforce-baseline", "conceptId": "brute-force-vector-db", "type": "explain", "difficulty": "core", "question": "Why is a brute-force index essential even though it is slow?", "answer": "It is exact — recall is 1.0 by definition. It is the ground-truth oracle against which an approximate index's recall is measured. Without it, ANN recall is unknowable." },
-    { "id": "rq-hnsw-layers", "conceptId": "hnsw", "type": "explain", "difficulty": "advanced", "question": "What do the layers in an HNSW graph do?", "answer": "Upper layers are sparse with long-range links for fast coarse navigation; lower layers are dense for fine-grained search. A query takes long hops up top, then descends to refine — turning O(n) scan into O(log n) traversal." },
-    { "id": "rq-hnsw-recall-tradeoff", "conceptId": "hnsw", "type": "explain", "difficulty": "advanced", "question": "What does the efSearch parameter trade off in HNSW?", "answer": "efSearch is the size of the dynamic candidate list during search. Larger efSearch explores more of the graph: higher recall but higher latency. It is the main recall/latency knob at query time." },
-    { "id": "rq-ivf-nprobe", "conceptId": "ivf", "type": "explain", "difficulty": "advanced", "question": "What happens to recall and latency as you increase nprobe in IVF?", "answer": "nprobe is how many Voronoi cells a query scans. More cells means more vectors examined: higher recall, higher latency. nprobe=1 is fast but misses neighbours near cell boundaries." },
-    { "id": "rq-pq-memory", "conceptId": "product-quantization", "type": "explain", "difficulty": "advanced", "question": "How does product quantization shrink vector memory?", "answer": "It splits each vector into m sub-vectors and replaces each with the 1-byte id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) becomes a few bytes, at the cost of approximate distances." },
-    { "id": "rq-pre-vs-post-filter", "conceptId": "metadata-filtering", "type": "compare", "difficulty": "core", "question": "Compare pre-filtering and post-filtering in vector search.", "answer": "Pre-filtering restricts the candidate set before search — exact, but can be slow inside a graph index. Post-filtering runs ANN then drops non-matches — fast, but may return fewer than k results when matches are sparse." },
-    { "id": "rq-recall-latency-curve", "conceptId": "recall-latency-tradeoffs", "type": "explain", "difficulty": "advanced", "question": "Why report a recall/latency curve instead of a single recall number?", "answer": "Recall alone is meaningless without its cost. Every ANN knob trades recall for latency or memory, so the honest artifact is a curve showing the achievable operating points, anchored by brute force at recall 1.0." },
-    { "id": "rq-rag-quality-ceiling", "conceptId": "rag", "type": "explain", "difficulty": "core", "question": "Why is retrieval the quality ceiling of a RAG system?", "answer": "The model can only answer from the context it receives. If retrieval misses the relevant chunk, no amount of model quality recovers the answer — so most 'RAG is bad' problems are retrieval problems." },
-    { "id": "rq-rag-vs-finetune", "conceptId": "rag", "type": "compare", "difficulty": "core", "question": "When would you choose RAG over fine-tuning?", "answer": "RAG when knowledge changes often, must be cited, or is too large to bake into weights. Fine-tuning when you need to change behavior, format, or style rather than inject facts. They are often combined." },
-    { "id": "rq-chunk-size-tradeoff", "conceptId": "chunking", "type": "explain", "difficulty": "core", "question": "What is the tradeoff in choosing chunk size?", "answer": "Large chunks dilute embeddings and retrieve irrelevant text alongside the answer; small chunks lose surrounding context and may split an answer. Good chunking respects structure and adds overlap." },
-    { "id": "rq-lost-in-middle", "conceptId": "context-packing", "type": "explain", "difficulty": "advanced", "question": "What is the 'lost in the middle' effect and how do you mitigate it?", "answer": "LLMs attend more strongly to the start and end of the context window than the middle. Mitigate by placing the strongest evidence at the edges, deduping, and cutting low-value context rather than overflowing the window." },
-    { "id": "rq-structured-why", "conceptId": "structured-outputs", "type": "explain", "difficulty": "core", "question": "Why constrain LLM output to a schema instead of parsing prose?", "answer": "Prose is unreliable to parse and breaks silently. Schema-constrained generation yields a typed object your code can validate and trust — or explicitly reject — making the LLM-to-code boundary safe." },
-    { "id": "rq-tool-planner", "conceptId": "tool-calling", "type": "explain", "difficulty": "core", "question": "In tool calling, what does the LLM actually do — and not do?", "answer": "The LLM decides which tool to call and with what arguments (it is the planner). It does not execute anything — your code runs the tool and feeds the result back into context." },
-    { "id": "rq-agent-stopping", "conceptId": "agent-loops", "type": "design", "difficulty": "advanced", "question": "What guardrails keep an agent loop from running away?", "answer": "A hard step/iteration limit, a bounded context (summarize or drop old turns), explicit stopping conditions, and a human-approval gate before irreversible actions." },
-    { "id": "rq-routing-eval", "conceptId": "model-routing", "type": "explain", "difficulty": "core", "question": "Why must model routing be backed by evals?", "answer": "Routing sends some requests to a weaker model to save cost. Without evals you cannot tell whether that routed traffic still meets quality — cost savings would silently come at the price of regressions." },
-    { "id": "rq-llm-judge-validate", "conceptId": "llm-evals", "type": "explain", "difficulty": "core", "question": "Why must an LLM-as-judge be validated against human labels?", "answer": "An LLM judge has its own biases and blind spots. If it disagrees with humans, your eval scores are wrong. Validate it on a labelled sample before trusting it to gate releases." },
-    { "id": "rq-http-status", "conceptId": "http-lifecycle", "type": "recall", "difficulty": "intro", "question": "What is the difference between HTTP 401 and 403?", "answer": "401 Unauthorized means the request is not authenticated — you have not proven who you are. 403 Forbidden means you are authenticated but not allowed to perform this action." },
-    { "id": "rq-api-key-storage", "conceptId": "api-keys", "type": "explain", "difficulty": "core", "question": "How should API keys be stored, and why?", "answer": "Store only a hash of the key, like a password — so a database leak does not expose usable keys. Show the secret once at creation, add a searchable prefix, and support rotation and revocation." },
-    { "id": "rq-token-vs-leaky", "conceptId": "rate-limiting", "type": "compare", "difficulty": "core", "question": "How does a token bucket differ from a fixed-window counter?", "answer": "A fixed window resets counts on a boundary, allowing up to 2x the limit across the boundary. A token bucket refills continuously, smoothing the rate while still permitting bursts up to the bucket size." },
-    { "id": "rq-idempotency-why", "conceptId": "idempotency", "type": "explain", "difficulty": "core", "question": "Why are idempotency keys needed for POST endpoints?", "answer": "Network failures make clients retry, and retrying a non-idempotent POST (like a payment) repeats the effect. An idempotency key lets the server recognize a duplicate and replay the original result instead of re-executing." },
-    { "id": "rq-dlq-purpose", "conceptId": "retries-dlq", "type": "explain", "difficulty": "core", "question": "What problem does a dead-letter queue solve?", "answer": "A message that always fails (a poison message) would be retried forever, blocking the queue. A DLQ moves it aside after N attempts so the pipeline keeps flowing and the failure can be inspected." },
-    { "id": "rq-jitter-why", "conceptId": "retries-dlq", "type": "explain", "difficulty": "core", "question": "Why add jitter to retry backoff?", "answer": "Without jitter, many clients that failed at the same moment retry at the same moment, creating a synchronized thundering herd. Randomized delay spreads the retries out." },
-    { "id": "rq-cache-invalidation", "conceptId": "caching", "type": "explain", "difficulty": "core", "question": "What is a cache stampede and how do you prevent it?", "answer": "When a hot key expires, many concurrent requests all miss and hit the origin at once. Prevent it with a lock/single-flight so only one request recomputes, or with early/probabilistic refresh before expiry." },
-    { "id": "rq-three-pillars", "conceptId": "monitoring-analytics", "type": "compare", "difficulty": "core", "question": "What question does each of metrics, traces, and logs answer?", "answer": "Metrics tell you that something is wrong; traces tell you where in the system; logs tell you why. A correlation id stitches them into one story for a request." },
-    { "id": "rq-exactly-once", "conceptId": "message-queues", "type": "explain", "difficulty": "advanced", "question": "Why is 'exactly-once' delivery usually a myth, and what do you do instead?", "answer": "Failures and retries make true exactly-once delivery effectively impossible end-to-end. Design for at-least-once delivery plus idempotent consumers, which yields exactly-once *effects*." },
-    { "id": "rq-api-pagination", "conceptId": "api-design", "type": "explain", "difficulty": "core", "question": "Why should every list endpoint be paginated from day one?", "answer": "An unpaginated list grows without bound and eventually returns huge responses or times out. Adding pagination later is a breaking change, so it should be designed in from the start (cursor-based preferred)." },
-    { "id": "rq-jwt-vs-session", "conceptId": "auth-systems", "type": "compare", "difficulty": "core", "question": "What is the core tradeoff between JWTs and server sessions?", "answer": "JWTs are stateless and fast to verify but hard to revoke before expiry. Sessions are revocable instantly but require a lookup store. Choose based on how quickly you must be able to revoke access." },
-    { "id": "rq-btree-vs-lsm", "conceptId": "b-tree", "type": "compare", "difficulty": "core", "question": "When would you choose an LSM tree over a B-tree?", "answer": "Choose an LSM tree for write-heavy workloads: it turns random writes into sequential ones. Choose a B-tree for read-heavy workloads with in-place updates and predictable read latency." },
-    { "id": "rq-btree-page-size", "conceptId": "b-tree", "type": "explain", "difficulty": "core", "question": "Why are B-tree nodes sized to disk pages?", "answer": "Disk and memory move data in pages. Sizing a node to a page means one IO loads many keys, keeping the tree shallow (~3-4 levels) so a lookup costs only a few IOs even for billions of rows." },
-    { "id": "rq-lsm-read-amp", "conceptId": "lsm-tree", "type": "explain", "difficulty": "advanced", "question": "Why can reads be slow in an LSM tree, and what helps?", "answer": "A key may live in the memtable or any SSTable, so a read might check several files (read amplification). Bloom filters let a read skip files that definitely lack the key; compaction reduces the file count." },
-    { "id": "rq-wal-why", "conceptId": "wal", "type": "explain", "difficulty": "core", "question": "Why write to a WAL before updating the main data structure?", "answer": "The main structure may be mid-update when a crash hits, leaving it corrupt. An append-only WAL records the intended change durably first, so recovery can replay it and restore a consistent state." },
-    { "id": "rq-wal-fsync", "conceptId": "wal", "type": "explain", "difficulty": "core", "question": "Why is fsync required for WAL durability?", "answer": "A write() syscall only hands data to the OS page cache, which can be lost on a crash. fsync forces it to stable storage. The write may only be acknowledged to the client after the WAL entry is fsync'd." },
-    { "id": "rq-compaction-tradeoff", "conceptId": "compaction", "type": "explain", "difficulty": "advanced", "question": "What does compaction cost, and what does it buy?", "answer": "Compaction rewrites data (write amplification, IO spikes) but it reclaims space from tombstones/overwrites and bounds read amplification by reducing the number of files a read must check." },
-    { "id": "rq-object-storage-latency", "conceptId": "object-storage", "type": "explain", "difficulty": "core", "question": "Why can't you treat object storage like a local disk?", "answer": "Object storage has ~tens-of-ms latency, per-request billing, and no in-place edits. Systems built on it batch data into large immutable segment files and keep a hot cache in front to hide the latency." },
-    { "id": "rq-search-platform-paths", "conceptId": "search-platform-design", "type": "design", "difficulty": "advanced", "question": "Why split a search platform into an indexing path and a query path?", "answer": "They have opposite requirements: indexing is durable, batchy, and write-optimized; querying is low-latency, cacheable, and read-optimized. Separating them lets each be designed and scaled independently." },
-    { "id": "rq-rag-two-pipelines", "conceptId": "rag-system-design", "type": "design", "difficulty": "advanced", "question": "What are the two pipelines in a RAG system, and what binds them?", "answer": "An offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate). An eval harness binds them — it gates every change to either pipeline." }
+    {
+      "id": "rq-tokenization-symmetry",
+      "conceptId": "tokenization",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Why must the same analyzer run at index time and query time?",
+      "answer": "Search matches tokens, not raw text. If indexing lowercases and stems but the query does not, the query token will never equal the indexed token, so the document is unfindable."
+    },
+    {
+      "id": "rq-inverted-vs-forward",
+      "conceptId": "inverted-index",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "How does an inverted index differ from a forward index, and why is it faster for search?",
+      "answer": "A forward index maps doc → terms; an inverted index maps term → docs (postings). Search asks 'which docs contain this term', which the inverted index answers directly by reading one posting list instead of scanning every document."
+    },
+    {
+      "id": "rq-tfidf-idf-why",
+      "conceptId": "tf-idf",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What does the IDF factor accomplish in TF-IDF?",
+      "answer": "IDF down-weights terms that appear in many documents (like 'the') and up-weights rare terms, because rare terms are more discriminative for relevance."
+    },
+    {
+      "id": "rq-bm25-length-norm",
+      "conceptId": "bm25",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why does BM25 normalize by document length?",
+      "answer": "Without length normalization a long document accumulates term matches just by being long. The b parameter scales the score by document length relative to the average so long and short documents compete fairly."
+    },
+    {
+      "id": "rq-bm25-vs-tfidf",
+      "conceptId": "bm25",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "How is BM25 different from TF-IDF?",
+      "answer": "BM25 adds two things TF-IDF lacks: term-frequency saturation (the k1 parameter, so the 10th occurrence adds little) and document-length normalization (the b parameter). It is TF-IDF with diminishing returns and fairness built in."
+    },
+    {
+      "id": "rq-bm25-vs-embeddings",
+      "conceptId": "bm25",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When can BM25 outperform embedding-based retrieval?",
+      "answer": "On exact terms, rare tokens, codes, names, and identifiers — anything where the literal string matters. Embeddings capture meaning but blur exact tokens, so BM25 wins on precision for keyword-literal queries."
+    },
+    {
+      "id": "rq-bm25-hybrid",
+      "conceptId": "bm25",
+      "type": "design",
+      "difficulty": "advanced",
+      "question": "How would you combine BM25 and vector search?",
+      "answer": "Run both retrievers, then fuse their rankings — typically with reciprocal rank fusion, which uses ranks (not incomparable scores). Validate that the fused result beats both single retrievers on an eval set."
+    },
+    {
+      "id": "rq-mrr-vs-ndcg",
+      "conceptId": "ranking-metrics",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When would you use MRR versus nDCG?",
+      "answer": "MRR rewards getting one correct answer near the top — good for known-item search. nDCG uses graded relevance discounted by rank — good when there are multiple results of varying usefulness."
+    },
+    {
+      "id": "rq-eval-frozen-set",
+      "conceptId": "search-evals",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why must the eval query set be frozen before tuning?",
+      "answer": "If you change the eval set while tuning, you are optimizing to a moving target and can no longer tell whether a change is a real improvement or a regression. A frozen set makes comparisons valid."
+    },
+    {
+      "id": "rq-hybrid-fusion",
+      "conceptId": "hybrid-search",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why use reciprocal rank fusion instead of averaging BM25 and cosine scores?",
+      "answer": "BM25 and cosine scores live on different, uncalibrated scales — averaging them is meaningless. RRF uses each result's rank position, which is comparable across retrievers."
+    },
+    {
+      "id": "rq-rerank-two-stage",
+      "conceptId": "reranking",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why is reranking done as a second stage instead of over the whole corpus?",
+      "answer": "Cross-encoder rerankers are accurate but expensive — too slow to run over millions of documents. A cheap retriever narrows to ~100 candidates; the reranker only reorders those, getting precision within a latency budget."
+    },
+    {
+      "id": "rq-embeddings-space",
+      "conceptId": "embeddings",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What does 'distance' mean in an embedding space?",
+      "answer": "An embedding model places semantically similar content close together, so geometric distance approximates semantic dissimilarity. Search becomes finding the nearest vectors to the query vector."
+    },
+    {
+      "id": "rq-cosine-vs-dot",
+      "conceptId": "vector-similarity",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When do cosine similarity and dot product give the same ranking?",
+      "answer": "When all vectors are L2-normalized to unit length: then dot product equals cosine, so they rank identically. On un-normalized vectors, dot product is also influenced by magnitude."
+    },
+    {
+      "id": "rq-topk-heap",
+      "conceptId": "topk-vector-search",
+      "type": "implement",
+      "difficulty": "core",
+      "question": "How do you return top-k without sorting all n scores?",
+      "answer": "Maintain a size-k min-heap. For each score, if the heap has fewer than k items push it; otherwise if it beats the heap root, replace the root. This is O(n log k) time and O(k) space."
+    },
+    {
+      "id": "rq-bruteforce-baseline",
+      "conceptId": "brute-force-vector-db",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is a brute-force index essential even though it is slow?",
+      "answer": "It is exact — recall is 1.0 by definition. It is the ground-truth oracle against which an approximate index's recall is measured. Without it, ANN recall is unknowable."
+    },
+    {
+      "id": "rq-hnsw-layers",
+      "conceptId": "hnsw",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What do the layers in an HNSW graph do?",
+      "answer": "Upper layers are sparse with long-range links for fast coarse navigation; lower layers are dense for fine-grained search. A query takes long hops up top, then descends to refine — turning O(n) scan into O(log n) traversal."
+    },
+    {
+      "id": "rq-hnsw-recall-tradeoff",
+      "conceptId": "hnsw",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What does the efSearch parameter trade off in HNSW?",
+      "answer": "efSearch is the size of the dynamic candidate list during search. Larger efSearch explores more of the graph: higher recall but higher latency. It is the main recall/latency knob at query time."
+    },
+    {
+      "id": "rq-ivf-nprobe",
+      "conceptId": "ivf",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What happens to recall and latency as you increase nprobe in IVF?",
+      "answer": "nprobe is how many Voronoi cells a query scans. More cells means more vectors examined: higher recall, higher latency. nprobe=1 is fast but misses neighbours near cell boundaries."
+    },
+    {
+      "id": "rq-pq-memory",
+      "conceptId": "product-quantization",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "How does product quantization shrink vector memory?",
+      "answer": "It splits each vector into m sub-vectors and replaces each with the 1-byte id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) becomes a few bytes, at the cost of approximate distances."
+    },
+    {
+      "id": "rq-pre-vs-post-filter",
+      "conceptId": "metadata-filtering",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Compare pre-filtering and post-filtering in vector search.",
+      "answer": "Pre-filtering restricts the candidate set before search — exact, but can be slow inside a graph index. Post-filtering runs ANN then drops non-matches — fast, but may return fewer than k results when matches are sparse."
+    },
+    {
+      "id": "rq-recall-latency-curve",
+      "conceptId": "recall-latency-tradeoffs",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why report a recall/latency curve instead of a single recall number?",
+      "answer": "Recall alone is meaningless without its cost. Every ANN knob trades recall for latency or memory, so the honest artifact is a curve showing the achievable operating points, anchored by brute force at recall 1.0."
+    },
+    {
+      "id": "rq-rag-quality-ceiling",
+      "conceptId": "rag",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is retrieval the quality ceiling of a RAG system?",
+      "answer": "The model can only answer from the context it receives. If retrieval misses the relevant chunk, no amount of model quality recovers the answer — so most 'RAG is bad' problems are retrieval problems."
+    },
+    {
+      "id": "rq-rag-vs-finetune",
+      "conceptId": "rag",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When would you choose RAG over fine-tuning?",
+      "answer": "RAG when knowledge changes often, must be cited, or is too large to bake into weights. Fine-tuning when you need to change behavior, format, or style rather than inject facts. They are often combined."
+    },
+    {
+      "id": "rq-chunk-size-tradeoff",
+      "conceptId": "chunking",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What is the tradeoff in choosing chunk size?",
+      "answer": "Large chunks dilute embeddings and retrieve irrelevant text alongside the answer; small chunks lose surrounding context and may split an answer. Good chunking respects structure and adds overlap."
+    },
+    {
+      "id": "rq-lost-in-middle",
+      "conceptId": "context-packing",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What is the 'lost in the middle' effect and how do you mitigate it?",
+      "answer": "LLMs attend more strongly to the start and end of the context window than the middle. Mitigate by placing the strongest evidence at the edges, deduping, and cutting low-value context rather than overflowing the window."
+    },
+    {
+      "id": "rq-structured-why",
+      "conceptId": "structured-outputs",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why constrain LLM output to a schema instead of parsing prose?",
+      "answer": "Prose is unreliable to parse and breaks silently. Schema-constrained generation yields a typed object your code can validate and trust — or explicitly reject — making the LLM-to-code boundary safe."
+    },
+    {
+      "id": "rq-tool-planner",
+      "conceptId": "tool-calling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "In tool calling, what does the LLM actually do — and not do?",
+      "answer": "The LLM decides which tool to call and with what arguments (it is the planner). It does not execute anything — your code runs the tool and feeds the result back into context."
+    },
+    {
+      "id": "rq-agent-stopping",
+      "conceptId": "agent-loops",
+      "type": "design",
+      "difficulty": "advanced",
+      "question": "What guardrails keep an agent loop from running away?",
+      "answer": "A hard step/iteration limit, a bounded context (summarize or drop old turns), explicit stopping conditions, and a human-approval gate before irreversible actions."
+    },
+    {
+      "id": "rq-routing-eval",
+      "conceptId": "model-routing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why must model routing be backed by evals?",
+      "answer": "Routing sends some requests to a weaker model to save cost. Without evals you cannot tell whether that routed traffic still meets quality — cost savings would silently come at the price of regressions."
+    },
+    {
+      "id": "rq-llm-judge-validate",
+      "conceptId": "llm-evals",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why must an LLM-as-judge be validated against human labels?",
+      "answer": "An LLM judge has its own biases and blind spots. If it disagrees with humans, your eval scores are wrong. Validate it on a labelled sample before trusting it to gate releases."
+    },
+    {
+      "id": "rq-http-status",
+      "conceptId": "http-lifecycle",
+      "type": "recall",
+      "difficulty": "intro",
+      "question": "What is the difference between HTTP 401 and 403?",
+      "answer": "401 Unauthorized means the request is not authenticated — you have not proven who you are. 403 Forbidden means you are authenticated but not allowed to perform this action."
+    },
+    {
+      "id": "rq-api-key-storage",
+      "conceptId": "api-keys",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "How should API keys be stored, and why?",
+      "answer": "Store only a hash of the key, like a password — so a database leak does not expose usable keys. Show the secret once at creation, add a searchable prefix, and support rotation and revocation."
+    },
+    {
+      "id": "rq-token-vs-leaky",
+      "conceptId": "rate-limiting",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "How does a token bucket differ from a fixed-window counter?",
+      "answer": "A fixed window resets counts on a boundary, allowing up to 2x the limit across the boundary. A token bucket refills continuously, smoothing the rate while still permitting bursts up to the bucket size."
+    },
+    {
+      "id": "rq-idempotency-why",
+      "conceptId": "idempotency",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why are idempotency keys needed for POST endpoints?",
+      "answer": "Network failures make clients retry, and retrying a non-idempotent POST (like a payment) repeats the effect. An idempotency key lets the server recognize a duplicate and replay the original result instead of re-executing."
+    },
+    {
+      "id": "rq-dlq-purpose",
+      "conceptId": "retries-dlq",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What problem does a dead-letter queue solve?",
+      "answer": "A message that always fails (a poison message) would be retried forever, blocking the queue. A DLQ moves it aside after N attempts so the pipeline keeps flowing and the failure can be inspected."
+    },
+    {
+      "id": "rq-jitter-why",
+      "conceptId": "retries-dlq",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why add jitter to retry backoff?",
+      "answer": "Without jitter, many clients that failed at the same moment retry at the same moment, creating a synchronized thundering herd. Randomized delay spreads the retries out."
+    },
+    {
+      "id": "rq-cache-invalidation",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What is a cache stampede and how do you prevent it?",
+      "answer": "When a hot key expires, many concurrent requests all miss and hit the origin at once. Prevent it with a lock/single-flight so only one request recomputes, or with early/probabilistic refresh before expiry."
+    },
+    {
+      "id": "rq-three-pillars",
+      "conceptId": "monitoring-analytics",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "What question does each of metrics, traces, and logs answer?",
+      "answer": "Metrics tell you that something is wrong; traces tell you where in the system; logs tell you why. A correlation id stitches them into one story for a request."
+    },
+    {
+      "id": "rq-exactly-once",
+      "conceptId": "message-queues",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why is 'exactly-once' delivery usually a myth, and what do you do instead?",
+      "answer": "Failures and retries make true exactly-once delivery effectively impossible end-to-end. Design for at-least-once delivery plus idempotent consumers, which yields exactly-once *effects*."
+    },
+    {
+      "id": "rq-api-pagination",
+      "conceptId": "api-design",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why should every list endpoint be paginated from day one?",
+      "answer": "An unpaginated list grows without bound and eventually returns huge responses or times out. Adding pagination later is a breaking change, so it should be designed in from the start (cursor-based preferred)."
+    },
+    {
+      "id": "rq-jwt-vs-session",
+      "conceptId": "auth-systems",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "What is the core tradeoff between JWTs and server sessions?",
+      "answer": "JWTs are stateless and fast to verify but hard to revoke before expiry. Sessions are revocable instantly but require a lookup store. Choose based on how quickly you must be able to revoke access."
+    },
+    {
+      "id": "rq-btree-vs-lsm",
+      "conceptId": "b-tree",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When would you choose an LSM tree over a B-tree?",
+      "answer": "Choose an LSM tree for write-heavy workloads: it turns random writes into sequential ones. Choose a B-tree for read-heavy workloads with in-place updates and predictable read latency."
+    },
+    {
+      "id": "rq-btree-page-size",
+      "conceptId": "b-tree",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why are B-tree nodes sized to disk pages?",
+      "answer": "Disk and memory move data in pages. Sizing a node to a page means one IO loads many keys, keeping the tree shallow (~3-4 levels) so a lookup costs only a few IOs even for billions of rows."
+    },
+    {
+      "id": "rq-lsm-read-amp",
+      "conceptId": "lsm-tree",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why can reads be slow in an LSM tree, and what helps?",
+      "answer": "A key may live in the memtable or any SSTable, so a read might check several files (read amplification). Bloom filters let a read skip files that definitely lack the key; compaction reduces the file count."
+    },
+    {
+      "id": "rq-wal-why",
+      "conceptId": "wal",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why write to a WAL before updating the main data structure?",
+      "answer": "The main structure may be mid-update when a crash hits, leaving it corrupt. An append-only WAL records the intended change durably first, so recovery can replay it and restore a consistent state."
+    },
+    {
+      "id": "rq-wal-fsync",
+      "conceptId": "wal",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is fsync required for WAL durability?",
+      "answer": "A write() syscall only hands data to the OS page cache, which can be lost on a crash. fsync forces it to stable storage. The write may only be acknowledged to the client after the WAL entry is fsync'd."
+    },
+    {
+      "id": "rq-compaction-tradeoff",
+      "conceptId": "compaction",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What does compaction cost, and what does it buy?",
+      "answer": "Compaction rewrites data (write amplification, IO spikes) but it reclaims space from tombstones/overwrites and bounds read amplification by reducing the number of files a read must check."
+    },
+    {
+      "id": "rq-object-storage-latency",
+      "conceptId": "object-storage",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why can't you treat object storage like a local disk?",
+      "answer": "Object storage has ~tens-of-ms latency, per-request billing, and no in-place edits. Systems built on it batch data into large immutable segment files and keep a hot cache in front to hide the latency."
+    },
+    {
+      "id": "rq-search-platform-paths",
+      "conceptId": "search-platform-design",
+      "type": "design",
+      "difficulty": "advanced",
+      "question": "Why split a search platform into an indexing path and a query path?",
+      "answer": "They have opposite requirements: indexing is durable, batchy, and write-optimized; querying is low-latency, cacheable, and read-optimized. Separating them lets each be designed and scaled independently."
+    },
+    {
+      "id": "rq-rag-two-pipelines",
+      "conceptId": "rag-system-design",
+      "type": "design",
+      "difficulty": "advanced",
+      "question": "What are the two pipelines in a RAG system, and what binds them?",
+      "answer": "An offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate). An eval harness binds them — it gates every change to either pipeline."
+    },
+    {
+      "id": "rq-dot-product-geometry",
+      "conceptId": "vectors-and-spaces",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "What does the dot product measure geometrically?",
+      "answer": "The dot product measures how much one vector projects onto another — alignment. u·v = ||u|| ||v|| cos θ. Zero dot product means orthogonal (perpendicular) vectors."
+    },
+    {
+      "id": "rq-matrix-as-transformation",
+      "conceptId": "matrices-and-transformations",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "How do the columns of a matrix relate to a linear transformation?",
+      "answer": "Each column is where a basis vector lands after the transformation. Matrix multiplication composes transformations: the columns of AB are A applied to the columns of B."
+    },
+    {
+      "id": "rq-eigenvalue-intuition",
+      "conceptId": "eigenvalues-decomposition",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "What is an eigenvector, and why does SVD matter?",
+      "answer": "An eigenvector is a direction unchanged by a matrix except for scaling by the eigenvalue. SVD factors any matrix into rotations and scalings, enabling low-rank approximation (PCA, compression)."
+    },
+    {
+      "id": "rq-bayes-rule",
+      "conceptId": "probability-fundamentals",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "State Bayes' rule and when you need it.",
+      "answer": "P(A|B) = P(B|A)·P(A) / P(B). Use it when you have a likelihood and a prior but need the posterior — e.g. updating disease probability after a test result."
+    },
+    {
+      "id": "rq-expectation-vs-sample-mean",
+      "conceptId": "random-variables",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "How does the sample mean relate to expectation?",
+      "answer": "Expectation is the theoretical long-run average of a random variable. The sample mean estimates it from data; by the law of large numbers, the sample mean converges to the expectation as n grows."
+    },
+    {
+      "id": "rq-mean-vs-median",
+      "conceptId": "descriptive-statistics",
+      "type": "compare",
+      "difficulty": "intro",
+      "question": "When should you report median instead of mean?",
+      "answer": "When the distribution is skewed or has heavy tails (latency, income, error rates). The median resists outliers; the mean gets pulled by them and misrepresents the typical value."
+    },
+    {
+      "id": "rq-confidence-interval-meaning",
+      "conceptId": "estimation-confidence",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What does a 95% confidence interval mean?",
+      "answer": "If you repeated the experiment many times, 95% of the intervals you'd construct would contain the true parameter. It is not 'there is a 95% chance this specific interval contains the truth'."
+    },
+    {
+      "id": "rq-p-value-misread",
+      "conceptId": "hypothesis-testing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What is a p-value, and what is it not?",
+      "answer": "A p-value is the probability of seeing data at least this extreme if the null hypothesis were true. It is not the probability that the null is true, nor proof that an effect is large or important."
+    },
+    {
+      "id": "rq-regression-as-projection",
+      "conceptId": "regression-basics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is least-squares regression called a projection?",
+      "answer": "The fitted values ŷ are the orthogonal projection of the target vector y onto the column space of the feature matrix X. Residuals are perpendicular to that subspace."
+    },
+    {
+      "id": "rq-gradient-descent-direction",
+      "conceptId": "derivatives-and-gradients",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why does gradient descent step opposite the gradient?",
+      "answer": "The gradient points in the direction of steepest increase. To minimize a loss, move in the opposite direction — the steepest decrease — scaled by a learning rate."
+    },
+    {
+      "id": "rq-convex-vs-nonconvex",
+      "conceptId": "multivariable-optimization",
+      "type": "compare",
+      "difficulty": "advanced",
+      "question": "Why is convex optimization easier than training neural networks?",
+      "answer": "Convex functions have a single global minimum; any local minimum is global. Neural loss surfaces are non-convex with many saddle points, so we rely on SGD heuristics rather than global guarantees."
+    },
+    {
+      "id": "rq-cross-entropy-loss",
+      "conceptId": "information-entropy",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why is cross-entropy a natural classification loss?",
+      "answer": "Cross-entropy measures the extra surprise (nats/bits) when you use your predicted distribution instead of the true one. Minimizing it pushes predicted probabilities toward the correct class labels."
+    },
+    {
+      "id": "rq-independence-vs-exclusive",
+      "conceptId": "probability-fundamentals",
+      "type": "compare",
+      "difficulty": "intro",
+      "question": "How is independence different from mutual exclusivity?",
+      "answer": "Mutually exclusive events cannot both happen (P(A∩B)=0). Independent events can co-occur, and P(A∩B)=P(A)P(B). Independence is about information; exclusivity is about overlap."
+    },
+    {
+      "id": "rq-pdf-not-probability",
+      "conceptId": "random-variables",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is f(x) in a PDF not a probability?",
+      "answer": "For continuous random variables, P(X=x)=0. The PDF value f(x) is a density; probability comes from integrating over an interval. Only the integral over a range is between 0 and 1."
+    },
+    {
+      "id": "rq-correlation-not-causation",
+      "conceptId": "descriptive-statistics",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Why does correlation not imply causation?",
+      "answer": "Correlation only measures linear association. A third confounding variable, reverse causality, or coincidence can produce high r without A causing B."
+    },
+    {
+      "id": "rq-type-i-vs-type-ii",
+      "conceptId": "hypothesis-testing",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Define Type I and Type II errors.",
+      "answer": "Type I: reject a true null (false alarm), controlled by α. Type II: fail to reject a false null (missed detection). Power = 1 − P(Type II) for a specific alternative effect size."
+    },
+    {
+      "id": "rq-poisson-vs-binomial",
+      "conceptId": "classical-distributions",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "When use Poisson instead of Binomial?",
+      "answer": "Binomial counts successes in n fixed trials with probability p. Poisson models counts of rare events in a fixed interval when n is large and p is small (or events arrive continuously). Poisson is the limit of Binomial under those conditions."
+    },
+    {
+      "id": "rq-when-normal-approximation",
+      "conceptId": "classical-distributions",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "When is a Normal approximation reasonable for a Binomial?",
+      "answer": "When np and n(1−p) are both moderately large (rule of thumb ≥5–10), the Binomial is well approximated by Normal(np, np(1−p)). Small n or extreme p breaks the approximation."
+    },
+    {
+      "id": "rq-clt-why-averages",
+      "conceptId": "sampling-and-clt",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What does the Central Limit Theorem say about sample means?",
+      "answer": "For i.i.d. samples with finite variance, the distribution of the sample mean approaches Normal as n grows, regardless of the population shape (with known mean/variance scaling). That justifies z-tests and CIs on means and proportions at scale."
+    },
+    {
+      "id": "rq-standard-error-vs-stddev",
+      "conceptId": "sampling-and-clt",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Standard error vs standard deviation?",
+      "answer": "Standard deviation describes spread of individual observations. Standard error is SD/√n and describes uncertainty in the sample mean (or other estimator). CIs use SE, not raw SD."
+    },
+    {
+      "id": "rq-peeking-problem",
+      "conceptId": "ab-testing-engineering",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is peeking at A/B results mid-test dangerous?",
+      "answer": "Repeated optional stopping inflates false-positive rate far above α. If you check often and stop when p<0.05, you'll find 'significance' by chance even when there is no effect. Pre-register sample size or use sequential testing methods."
+    },
+    {
+      "id": "rq-power-vs-significance",
+      "conceptId": "ab-testing-engineering",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Statistical significance vs statistical power?",
+      "answer": "Significance (α) bounds false alarms when the null is true. Power is the chance to detect a real effect of a given size. Underpowered tests often yield 'not significant' while a meaningful effect exists."
+    },
+    {
+      "id": "rq-credible-vs-confidence",
+      "conceptId": "bayesian-inference",
+      "type": "compare",
+      "difficulty": "advanced",
+      "question": "Credible interval vs confidence interval?",
+      "answer": "A 95% credible interval means the parameter lies in the interval with 95% posterior probability given data and prior. A 95% CI is about the procedure: 95% of such intervals from repeated experiments would contain the true parameter."
+    },
+    {
+      "id": "rq-when-bayesian-wins",
+      "conceptId": "bayesian-inference",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "When is Bayesian inference especially useful?",
+      "answer": "With scarce data, hierarchical structure, sequential updating, or when you need a direct distribution over parameters (not just reject/don't reject). Also natural when you have informative priors from past experiments."
+    },
+    {
+      "id": "rq-mle-cross-entropy-link",
+      "conceptId": "maximum-likelihood",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "How does MLE relate to cross-entropy loss?",
+      "answer": "Maximizing likelihood for Bernoulli/categorical outcomes is equivalent to minimizing cross-entropy between the true one-hot labels and the model's predicted probabilities. Training classifiers with cross-entropy is MLE under that model."
+    },
+    {
+      "id": "rq-likelihood-vs-posterior",
+      "conceptId": "maximum-likelihood",
+      "type": "compare",
+      "difficulty": "advanced",
+      "question": "Likelihood vs posterior?",
+      "answer": "Likelihood is P(data|θ) as a function of θ with data fixed. Posterior is P(θ|data) ∝ likelihood × prior. MLE picks θ that maximizes likelihood; Bayesian inference integrates the posterior."
+    },
+    {
+      "id": "rq-covariance-vs-correlation",
+      "conceptId": "covariance-correlation",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Covariance vs correlation?",
+      "answer": "Covariance measures co-movement in original units (sign matters, scale-dependent). Correlation is covariance divided by both standard deviations, always in [−1,1], unitless and comparable across pairs."
+    },
+    {
+      "id": "rq-bias-variance-tradeoff",
+      "conceptId": "bias-variance-overfitting",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain the bias-variance tradeoff.",
+      "answer": "Simple models have high bias (underfit), low variance. Complex models fit training noise (low bias, high variance). Generalization error is roughly bias² + variance + irreducible noise. Overfitting is excess variance."
+    },
+    {
+      "id": "rq-rank-vs-dimensions",
+      "conceptId": "matrix-rank-basis",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What is matrix rank?",
+      "answer": "Rank is the dimension of the column space — the number of linearly independent columns (equals independent rows). It is the true degrees of freedom of the linear map, not the matrix size."
+    },
+    {
+      "id": "rq-pca-as-projection",
+      "conceptId": "pca-projection",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why is PCA a projection?",
+      "answer": "PCA finds an orthogonal basis ordered by variance. Keeping the top k components is the orthogonal projection of centered data onto the k-dimensional subspace that minimizes squared reconstruction error."
+    },
+    {
+      "id": "rq-returns-not-prices",
+      "conceptId": "returns-volatility",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why model returns instead of prices?",
+      "answer": "Price levels are non-stationary (trend, scale changes). Returns are closer to stable, comparable across assets, and the object of portfolio math. Correlations and regressions on prices are usually misleading."
+    },
+    {
+      "id": "rq-stationarity-why-matters",
+      "conceptId": "stationarity-autocorrelation",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why does stationarity matter for inference?",
+      "answer": "Many statistical tools assume fixed mean/variance and stable dependence structure. Non-stationary series (trending levels, changing vol) make sample moments, correlations, and hypothesis tests unreliable without transformation or regime handling."
+    },
+    {
+      "id": "rq-markov-property",
+      "conceptId": "random-walks-markov",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What is the Markov property?",
+      "answer": "Future state depends only on the present state, not the full history: P(X_{t+1}|X_t, X_{t-1},...) = P(X_{t+1}|X_t). Random walks are Markov chains on position."
+    },
+    {
+      "id": "rq-sharpe-limitations",
+      "conceptId": "portfolio-risk-metrics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What are limitations of the Sharpe ratio?",
+      "answer": "Assumes returns are well-summarized by mean and vol (penalizes upside vol too), sensitive to non-normality and short samples, ignores tail risk and drawdowns, and can be inflated by leverage or in-sample selection."
+    },
+    {
+      "id": "rq-backtest-overfitting",
+      "conceptId": "momentum-backtest",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why do most backtests overfit?",
+      "answer": "Researchers try many rules/parameters on the same history (implicit multiple testing), use survivorship-biased universes, omit costs, and lack holdout/walk-forward validation — so in-sample edge is curve-fit, not alpha."
+    },
+    {
+      "id": "rq-query-rewriting-core",
+      "conceptId": "query-rewriting",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Query Rewriting in your own words. What problem does it solve and where is it used?",
+      "answer": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work — never trust the raw query."
+    },
+    {
+      "id": "rq-search-discovery-core",
+      "conceptId": "search-discovery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Search Systems in your own words. What problem does it solve and where is it used?",
+      "answer": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
+    },
+    {
+      "id": "rq-prompt-versioning-core",
+      "conceptId": "prompt-versioning",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Prompt & Version Logging in your own words. What problem does it solve and where is it used?",
+      "answer": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
+    },
+    {
+      "id": "rq-ml-math-core",
+      "conceptId": "ml-math",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain ML Math Foundations in your own words. What problem does it solve and where is it used?",
+      "answer": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question."
+    },
+    {
+      "id": "rq-ml-gradient-descent-core",
+      "conceptId": "ml-gradient-descent",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Gradient Descent in your own words. What problem does it solve and where is it used?",
+      "answer": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls."
+    },
+    {
+      "id": "rq-ml-backprop-core",
+      "conceptId": "ml-backprop",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Backpropagation in your own words. What problem does it solve and where is it used?",
+      "answer": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them."
+    },
+    {
+      "id": "rq-ml-softmax-xent-core",
+      "conceptId": "ml-softmax-xent",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Softmax & Cross-Entropy in your own words. What problem does it solve and where is it used?",
+      "answer": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with."
+    },
+    {
+      "id": "rq-ml-adamw-core",
+      "conceptId": "ml-adamw",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain AdamW Optimizer in your own words. What problem does it solve and where is it used?",
+      "answer": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch."
+    },
+    {
+      "id": "rq-ml-tokenization-core",
+      "conceptId": "ml-tokenization",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Tokenization (LLM) in your own words. What problem does it solve and where is it used?",
+      "answer": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
+    },
+    {
+      "id": "rq-ml-language-modeling-core",
+      "conceptId": "ml-language-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Language Modeling in your own words. What problem does it solve and where is it used?",
+      "answer": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective."
+    },
+    {
+      "id": "rq-ml-sampling-core",
+      "conceptId": "ml-sampling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Sampling & Decoding in your own words. What problem does it solve and where is it used?",
+      "answer": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
+    },
+    {
+      "id": "rq-ml-embeddings-core",
+      "conceptId": "ml-embeddings",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Embeddings (Transformer) in your own words. What problem does it solve and where is it used?",
+      "answer": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from."
+    },
+    {
+      "id": "rq-ml-self-attention-core",
+      "conceptId": "ml-self-attention",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Self-Attention and name one common mistake: \"Forgetting the 1/sqrt(d_k) scaling, which destabilizes the softmax…\"",
+      "answer": "Self-attention lets every token look at every other token and pull in what is relevant. Each token emits a query, a key, and a value; the query-key dot products (scaled, softmaxed) become weights over the values. Causal masking blocks a token from seeing the future."
+    },
+    {
+      "id": "rq-ml-multi-head-core",
+      "conceptId": "ml-multi-head",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Multi-Head Attention in your own words. What problem does it solve and where is it used?",
+      "answer": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position)."
+    },
+    {
+      "id": "rq-ml-transformer-block-core",
+      "conceptId": "ml-transformer-block",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Transformer Block and name one common mistake: \"Dropping residual connections and watching deep models fail to train…\"",
+      "answer": "A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably."
+    },
+    {
+      "id": "rq-ml-training-core",
+      "conceptId": "ml-training",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Training & Debugging in your own words. What problem does it solve and where is it used?",
+      "answer": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model."
+    },
+    {
+      "id": "rq-ml-checkpointing-core",
+      "conceptId": "ml-checkpointing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Checkpointing in your own words. What problem does it solve and where is it used?",
+      "answer": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately."
+    },
+    {
+      "id": "rq-ml-lora-core",
+      "conceptId": "ml-lora",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain LoRA & PEFT in your own words. What problem does it solve and where is it used?",
+      "answer": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time."
+    },
+    {
+      "id": "rq-ml-data-engineering-core",
+      "conceptId": "ml-data-engineering",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Style Data Engineering in your own words. What problem does it solve and where is it used?",
+      "answer": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does."
+    },
+    {
+      "id": "rq-ml-browser-runtime-core",
+      "conceptId": "ml-browser-runtime",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Browser ML Runtime in your own words. What problem does it solve and where is it used?",
+      "answer": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback."
+    },
+    {
+      "id": "rq-ml-webgpu-core",
+      "conceptId": "ml-webgpu",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain WebGPU Compute in your own words. What problem does it solve and where is it used?",
+      "answer": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself."
+    },
+    {
+      "id": "rq-ml-evaluation-core",
+      "conceptId": "ml-evaluation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Model Evaluation in your own words. What problem does it solve and where is it used?",
+      "answer": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough."
+    },
+    {
+      "id": "rq-webhooks-core",
+      "conceptId": "webhooks",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Webhooks in your own words. What problem does it solve and where is it used?",
+      "answer": "A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once."
+    },
+    {
+      "id": "rq-background-jobs-core",
+      "conceptId": "background-jobs",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Background Jobs in your own words. What problem does it solve and where is it used?",
+      "answer": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?)."
+    },
+    {
+      "id": "rq-ecommerce-payments-core",
+      "conceptId": "ecommerce-payments",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Payments in your own words. What problem does it solve and where is it used?",
+      "answer": "Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting. Treat every state change like a ledger entry, use idempotency keys on every request, and reconcile against the processor daily."
+    },
+    {
+      "id": "rq-columnar-storage-core",
+      "conceptId": "columnar-storage",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Columnar Storage in your own words. What problem does it solve and where is it used?",
+      "answer": "A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics."
+    },
+    {
+      "id": "rq-secondary-index-core",
+      "conceptId": "secondary-index",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Secondary Indexes in your own words. What problem does it solve and where is it used?",
+      "answer": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff — only add the ones queries actually need."
+    },
+    {
+      "id": "rq-storage-retrieval-core",
+      "conceptId": "storage-retrieval",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Storage Engines and name one common mistake: \"Picking an engine without knowing the read/write ratio of the workload…\"",
+      "answer": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else — WAL, indexes, caching — serves durability and lookup speed."
+    },
+    {
+      "id": "rq-sharding-core",
+      "conceptId": "sharding",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Sharding and name one common mistake: \"A shard key that creates a hot shard (e.g. sharding by date)…\"",
+      "answer": "Sharding splits one dataset across many machines so it scales past a single box. The shard key is the whole game: hash keys spread load evenly but kill range scans; range keys keep scans but invite hot spots. Re-sharding later is painful, so choose deliberately."
+    },
+    {
+      "id": "rq-replication-core",
+      "conceptId": "replication",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Replication and name one common mistake: \"Reading from a follower and seeing stale data (\"read your own writes\" violation)…\"",
+      "answer": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag — followers are always slightly behind."
+    },
+    {
+      "id": "rq-cap-theorem-core",
+      "conceptId": "cap-theorem",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain CAP & Consistency Models and name one common mistake: \"Thinking you \"pick 2 of 3\" at all times — the choice only applies during a parti…\"",
+      "answer": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency."
+    },
+    {
+      "id": "rq-object-modeling-core",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Object Modeling in your own words. What problem does it solve and where is it used?",
+      "answer": "Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them. Prefer composition (this has-a) over inheritance (this is-a). A good model makes the next requirement easy to add."
+    },
+    {
+      "id": "rq-state-management-core",
+      "conceptId": "state-management",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain State Machines in your own words. What problem does it solve and where is it used?",
+      "answer": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
+    },
+    {
+      "id": "rq-strategy-pattern-core",
+      "conceptId": "strategy-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Strategy Pattern in your own words. What problem does it solve and where is it used?",
+      "answer": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" — pricing rules, sort orders, routing strategies."
+    },
+    {
+      "id": "rq-observer-pattern-core",
+      "conceptId": "observer-pattern",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Observer Pattern in your own words. What problem does it solve and where is it used?",
+      "answer": "The observer pattern decouples who emits an event from who listens. Publishers fire events, subscribers register handlers, and the event bus is the registry that connects them. The tradeoff: flows are no longer visible in a single call stack, so debugging gets harder."
+    },
+    {
+      "id": "rq-factory-creational-core",
+      "conceptId": "factory-creational",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Factory & Creational in your own words. What problem does it solve and where is it used?",
+      "answer": "Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class. They earn their keep when you add the 4th variant without callers needing to change."
+    },
+    {
+      "id": "rq-decorator-structural-core",
+      "conceptId": "decorator-structural",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Decorator & Structural in your own words. What problem does it solve and where is it used?",
+      "answer": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode — instead of one class per combination, you stack small decorators."
+    },
+    {
+      "id": "rq-concurrency-design-core",
+      "conceptId": "concurrency-design",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Concurrency Design in your own words. What problem does it solve and where is it used?",
+      "answer": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design."
+    },
+    {
+      "id": "rq-command-chain-core",
+      "conceptId": "command-chain",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Command & Chain in your own words. What problem does it solve and where is it used?",
+      "answer": "The command pattern turns an action into a small object you can store, queue, log, or reverse. Pair it with two stacks for undo/redo, with a queue for background jobs, or with a chain for middleware-style processing."
+    },
+    {
+      "id": "rq-booking-inventory-core",
+      "conceptId": "booking-inventory",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Booking & Inventory in your own words. What problem does it solve and where is it used?",
+      "answer": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
+    },
+    {
+      "id": "rq-game-design-core",
+      "conceptId": "game-design",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Game/Simulation Design in your own words. What problem does it solve and where is it used?",
+      "answer": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees."
+    },
+    {
+      "id": "rq-load-balancing-core",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Load Balancing and name one common mistake: \"Treating the load balancer as a single point of failure with no redundancy…\"",
+      "answer": "A load balancer is the seam between \"one address\" and \"many servers\". L4 routes by IP/port (fast, dumb); L7 routes by request content (slower, smart). Health checks and the balancing algorithm (round-robin, least-connections, consistent hashing) decide who gets each request."
+    },
+    {
+      "id": "rq-consistent-hashing-core",
+      "conceptId": "consistent-hashing",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Consistent Hashing in your own words. What problem does it solve and where is it used?",
+      "answer": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly."
+    },
+    {
+      "id": "rq-consensus-core",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Consensus and name one common mistake: \"Assuming consensus survives a network partition without a majority…\"",
+      "answer": "Consensus is how a cluster agrees on one value despite crashes and network delays. Raft makes it understandable: elect a leader, replicate an append-only log, and a write commits once a majority (quorum) has it. A majority guarantees any two quorums overlap."
+    },
+    {
+      "id": "rq-distributed-infra-core",
+      "conceptId": "distributed-infra",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Distributed Infra in your own words. What problem does it solve and where is it used?",
+      "answer": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second."
+    },
+    {
+      "id": "rq-messaging-realtime-core",
+      "conceptId": "messaging-realtime",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Real-time Systems in your own words. What problem does it solve and where is it used?",
+      "answer": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice."
+    },
+    {
+      "id": "rq-social-media-core",
+      "conceptId": "social-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Feed Systems in your own words. What problem does it solve and where is it used?",
+      "answer": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
+    },
+    {
+      "id": "rq-streaming-media-core",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Streaming Media in your own words. What problem does it solve and where is it used?",
+      "answer": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo."
+    },
+    {
+      "id": "rq-location-transport-core",
+      "conceptId": "location-transport",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Geo Systems in your own words. What problem does it solve and where is it used?",
+      "answer": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters."
+    },
+    {
+      "id": "rq-collaboration-productivity-core",
+      "conceptId": "collaboration-productivity",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Collaboration Systems in your own words. What problem does it solve and where is it used?",
+      "answer": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs."
+    },
+    {
+      "id": "rq-array-hashing-core",
+      "conceptId": "array-hashing",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Arrays & Hashing and name one common mistake: \"Reaching for nested loops before asking \"what would a hash map key on?\"…\"",
+      "answer": "A hash map trades memory for time: it turns an O(n) scan for \"have I seen this?\" into an O(1) lookup. Most array problems that feel quadratic collapse to linear once you ask what you would store in a map keyed by value, complement, or frequency."
+    },
+    {
+      "id": "rq-two-pointers-core",
+      "conceptId": "two-pointers",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Two Pointers and name one common mistake: \"Using two pointers on unsorted data when the technique needs order…\"",
+      "answer": "Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once."
+    },
+    {
+      "id": "rq-sliding-window-core",
+      "conceptId": "sliding-window",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Sliding Window and name one common mistake: \"Recomputing the aggregate from scratch instead of updating incrementally…\"",
+      "answer": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once — O(n)."
+    },
+    {
+      "id": "rq-stack-core",
+      "conceptId": "stack",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Stack in your own words. What problem does it solve and where is it used?",
+      "answer": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets."
+    },
+    {
+      "id": "rq-binary-search-core",
+      "conceptId": "binary-search",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Binary Search and name one common mistake: \"Infinite loops from a wrong mid update or loop condition…\"",
+      "answer": "Binary search is not about sorted arrays — it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step."
+    },
+    {
+      "id": "rq-linked-list-core",
+      "conceptId": "linked-list",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Linked List in your own words. What problem does it solve and where is it used?",
+      "answer": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place."
+    },
+    {
+      "id": "rq-trees-core",
+      "conceptId": "trees",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Trees and name one common mistake: \"Forgetting the null/empty base case…\"",
+      "answer": "A tree is recursion made concrete: almost every tree problem is \"solve it for the children, then combine\". DFS (pre/in/post-order) is a recursion or an explicit stack; BFS is a queue, level by level. Pick the traversal that matches what you need to combine."
+    },
+    {
+      "id": "rq-tries-core",
+      "conceptId": "tries",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Trie in your own words. What problem does it solve and where is it used?",
+      "answer": "A trie stores strings in a tree where each path from the root spells out a prefix. It makes prefix queries (autocomplete, IP routing) take time proportional to the length of the prefix, not the size of the dataset."
+    },
+    {
+      "id": "rq-heap-core",
+      "conceptId": "heap",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Heap / Priority Queue and name one common mistake: \"Sorting the whole input when a size-k heap suffices…\"",
+      "answer": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything."
+    },
+    {
+      "id": "rq-backtracking-core",
+      "conceptId": "backtracking",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Backtracking in your own words. What problem does it solve and where is it used?",
+      "answer": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer."
+    },
+    {
+      "id": "rq-graphs-core",
+      "conceptId": "graphs",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Graphs and name one common mistake: \"No visited set — revisiting nodes and looping forever…\"",
+      "answer": "Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find). The skill is recognizing the template and modeling the input as nodes and edges."
+    },
+    {
+      "id": "rq-shortest-path-core",
+      "conceptId": "shortest-path",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain Shortest Path in your own words. What problem does it solve and where is it used?",
+      "answer": "Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal. Using the wrong one gives wrong answers or wasted time."
+    },
+    {
+      "id": "rq-union-find-core",
+      "conceptId": "union-find",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Union-Find in your own words. What problem does it solve and where is it used?",
+      "answer": "Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id. With path compression and union by rank, both run in essentially constant time. Use it whenever the question is \"are these two in the same group?\""
+    },
+    {
+      "id": "rq-dp-1d-core",
+      "conceptId": "dp-1d",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain 1D DP and name one common mistake: \"Starting to code before clearly defining what dp[i] represents…\"",
+      "answer": "Dynamic programming is recursion with the repeated work cached. Define the state (what does dp[i] mean?), the recurrence (how does dp[i] build on earlier states?), and the base case. 1D DP means the state is a single index along a sequence."
+    },
+    {
+      "id": "rq-dp-2d-core",
+      "conceptId": "dp-2d",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain 2D DP in your own words. What problem does it solve and where is it used?",
+      "answer": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely — once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
+    },
+    {
+      "id": "rq-greedy-core",
+      "conceptId": "greedy",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Greedy in your own words. What problem does it solve and where is it used?",
+      "answer": "A greedy algorithm always picks the choice that looks best right now. It only gives the right answer when the problem has a structure (an exchange argument) that proves local choices add up correctly. When they do not, greedy quietly returns wrong answers."
+    },
+    {
+      "id": "rq-intervals-core",
+      "conceptId": "intervals",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Intervals in your own words. What problem does it solve and where is it used?",
+      "answer": "Interval problems almost always start by sorting — usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
+    },
+    {
+      "id": "rq-math-geometry-core",
+      "conceptId": "math-geometry",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Math & Geometry in your own words. What problem does it solve and where is it used?",
+      "answer": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem — the formula is a quick lookup away."
+    },
+    {
+      "id": "rq-bit-manipulation-core",
+      "conceptId": "bit-manipulation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Bit Manipulation in your own words. What problem does it solve and where is it used?",
+      "answer": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero."
+    },
+    {
+      "id": "rq-leadership-and-influence-core",
+      "conceptId": "leadership-and-influence",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Leadership in your own words. What problem does it solve and where is it used?",
+      "answer": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks — not the meeting where they nodded along."
+    },
+    {
+      "id": "rq-conflict-resolution-core",
+      "conceptId": "conflict-resolution",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Conflict Resolution in your own words. What problem does it solve and where is it used?",
+      "answer": "Conflict means information surfaced — two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
+    },
+    {
+      "id": "rq-problem-solving-and-decision-making-core",
+      "conceptId": "problem-solving-and-decision-making",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Decision Making in your own words. What problem does it solve and where is it used?",
+      "answer": "Decisions are bets you make with incomplete information. Judge them by the reasoning at the time, not the outcome. Good decisions name in advance what evidence would tell you you are wrong."
+    },
+    {
+      "id": "rq-teamwork-and-collaboration-core",
+      "conceptId": "teamwork-and-collaboration",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Collaboration in your own words. What problem does it solve and where is it used?",
+      "answer": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations — fix those before worrying about chemistry."
+    },
+    {
+      "id": "rq-failure-and-learning-core",
+      "conceptId": "failure-and-learning",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Failure & Learning in your own words. What problem does it solve and where is it used?",
+      "answer": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson."
+    },
+    {
+      "id": "rq-communication-core",
+      "conceptId": "communication",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Communication in your own words. What problem does it solve and where is it used?",
+      "answer": "Good communication is audience-first: after listening, the other person's next decision should be easier. Be specific, not sophisticated. One sharp analogy beats five vague ones."
+    },
+    {
+      "id": "rq-time-management-and-prioritization-core",
+      "conceptId": "time-management-and-prioritization",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Prioritization in your own words. What problem does it solve and where is it used?",
+      "answer": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized — you have just written a wish list."
+    },
+    {
+      "id": "rq-innovation-and-creativity-core",
+      "conceptId": "innovation-and-creativity",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Innovation in your own words. What problem does it solve and where is it used?",
+      "answer": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake — it is finding the assumption you can credibly weaken."
+    },
+    {
+      "id": "rq-customer-obsession-core",
+      "conceptId": "customer-obsession",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Customer Obsession in your own words. What problem does it solve and where is it used?",
+      "answer": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes."
+    },
+    {
+      "id": "rq-ownership-and-accountability-core",
+      "conceptId": "ownership-and-accountability",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "Explain Ownership in your own words. What problem does it solve and where is it used?",
+      "answer": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to."
+    },
+    {
+      "id": "rq-positioning-core",
+      "conceptId": "positioning",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Positioning in your own words. What problem does it solve and where is it used?",
+      "answer": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning."
+    },
+    {
+      "id": "rq-landing-pages-core",
+      "conceptId": "landing-pages",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Landing Pages in your own words. What problem does it solve and where is it used?",
+      "answer": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them."
+    },
+    {
+      "id": "rq-seo-core",
+      "conceptId": "seo",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain SEO in your own words. What problem does it solve and where is it used?",
+      "answer": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links."
+    },
+    {
+      "id": "rq-product-analytics-core",
+      "conceptId": "product-analytics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Explain Product Analytics in your own words. What problem does it solve and where is it used?",
+      "answer": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong."
+    }
   ]
 }

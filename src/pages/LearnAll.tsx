@@ -22,9 +22,12 @@ import {
   roadmapConceptIds,
   ROADMAPS,
   sortedTracks,
+  TRACKS,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
+import { useGateContext } from '../hooks/useGates';
 import { confidencePct, deriveConceptStatus, rollupMastery } from '../lib/conceptState';
+import { conceptAccessible } from '../lib/gates';
 import { pickDrillForConcept, pickNextConcept, weakConcepts } from '../lib/recommend';
 
 type StatusFilter = 'all' | 'untouched' | 'active' | 'mastered';
@@ -49,13 +52,14 @@ const PRIMARY_ROADMAP_ID = 'ai-search-infra-90-day';
 
 export default function Learn() {
   const { mastery, loading } = useConceptMastery();
+  const gateCtx = useGateContext();
 
   // The "active" roadmap is the one with the most progress, falling back to the
   // canonical 90-day path for a fresh user.
   const activeRoadmap = pickActiveRoadmap(mastery);
-  const next = pickNextConcept(mastery);
+  const next = pickNextConcept(mastery, gateCtx);
   const nextDrill = next ? pickDrillForConcept(next.id) : null;
-  const upNext = pickUpNextChain(mastery, 4);
+  const upNext = pickUpNextChain(mastery, 4, gateCtx);
 
   return (
     <PageShell wide>
@@ -67,7 +71,7 @@ export default function Learn() {
       </Link>
       <PageHeader
         title="Everything in Learn"
-        subtitle={`${ROADMAPS.length} roadmaps · ${ALL_CONCEPTS.length} concepts · 8 tracks. Search, browse, switch roadmaps.`}
+        subtitle={`${ROADMAPS.length} roadmaps · ${ALL_CONCEPTS.length} concepts · ${TRACKS.length} tracks. Search, browse, switch roadmaps.`}
       />
 
       <ActivePathHero
@@ -95,7 +99,7 @@ export default function Learn() {
       </section>
 
       <section className="mt-8">
-        <ConceptBrowser mastery={mastery} />
+        <ConceptBrowser mastery={mastery} gateCtx={gateCtx} />
       </section>
     </PageShell>
   );
@@ -417,7 +421,13 @@ function TrackLane({ trackId, mastery }: { trackId: string; mastery: Record<stri
 
 // --- Concept browser (collapsed) -------------------------------------------
 
-function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) {
+function ConceptBrowser({
+  mastery,
+  gateCtx,
+}: {
+  mastery: Record<string, MasteryEntry>;
+  gateCtx: ReturnType<typeof useGateContext>;
+}) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState<string | 'all'>('all');
@@ -475,7 +485,12 @@ function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) 
       ) : (
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(c => (
-            <ConceptCard key={c.id} concept={c} mastery={mastery[c.id]} />
+            <ConceptCard
+              key={c.id}
+              concept={c}
+              mastery={mastery[c.id]}
+              gated={!conceptAccessible(c, gateCtx)}
+            />
           ))}
         </div>
       )}
@@ -483,7 +498,15 @@ function ConceptBrowser({ mastery }: { mastery: Record<string, MasteryEntry> }) 
   );
 }
 
-function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: MasteryEntry }) {
+function ConceptCard({
+  concept,
+  mastery,
+  gated,
+}: {
+  concept: Concept;
+  mastery?: MasteryEntry;
+  gated?: boolean;
+}) {
   const status = deriveConceptStatus(mastery);
   const meta = STATUS_META[status];
   const drills = drillsForConcept(concept.id).length;
@@ -501,6 +524,7 @@ function ConceptCard({ concept, mastery }: { concept: Concept; mastery?: Mastery
       <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
         <Badge tone={meta.color}>{meta.label}</Badge>
         <Badge tone={DIFFICULTY_COLOR[concept.difficulty]}>{concept.difficulty}</Badge>
+        {gated && <Badge tone="amber">Gated</Badge>}
         {trk && <span className="text-white/40">{trk.short}</span>}
         {drills > 0 && <span className="text-white/40">· {drills} drill{drills > 1 ? 's' : ''}</span>}
         {mastery && <span className="text-white/40">· {confidencePct(mastery)}%</span>}
@@ -549,8 +573,12 @@ function pickActiveMilestoneIdx(roadmap: Roadmap, mastery: Record<string, Master
 
 // Sequence of next concepts: the recommendation's pick first, then concepts
 // whose prerequisites are satisfied and which the user hasn't mastered.
-function pickUpNextChain(mastery: Record<string, MasteryEntry>, limit: number): Concept[] {
-  const first = pickNextConcept(mastery);
+function pickUpNextChain(
+  mastery: Record<string, MasteryEntry>,
+  limit: number,
+  gateCtx: ReturnType<typeof useGateContext>,
+): Concept[] {
+  const first = pickNextConcept(mastery, gateCtx);
   const chain: Concept[] = [];
   if (first) chain.push(first);
   const seen = new Set(chain.map(c => c.id));
@@ -559,6 +587,7 @@ function pickUpNextChain(mastery: Record<string, MasteryEntry>, limit: number): 
     if (seen.has(c.id)) continue;
     const status = deriveConceptStatus(mastery[c.id]);
     if (status === 'mastered') continue;
+    if (!conceptAccessible(c, gateCtx)) continue;
     const ok = c.prerequisites.every(p => {
       const conf = mastery[p]?.confidence ?? 0;
       return conf >= 0.4 || !CONCEPT_BY_ID[p];

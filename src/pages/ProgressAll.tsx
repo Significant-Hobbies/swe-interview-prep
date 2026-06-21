@@ -4,11 +4,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, TabButton, TabGroup } from '../components/ui';
 import {
-  ARTIFACTS,
+  EDITORIAL_ARTIFACTS,
   CONCEPT_BY_ID,
   conceptsByTag,
   conceptsInRoadmap,
-  DRILLS,
+  EDITORIAL_DRILLS,
   PROJECT_BY_ID,
   ROADMAP_BY_ID,
   ROADMAPS,
@@ -78,7 +78,7 @@ function Overview() {
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
           <ProgressStat label="Started" value={started} sub={`of ${overall.total}`} />
           <ProgressStat label="Mastered" value={overall.mastered} sub={`of ${overall.total}`} />
-          <ProgressStat label="Drills" value={drillsSolved} sub={`of ${DRILLS.length}`} />
+          <ProgressStat label="Drills" value={drillsSolved} sub={`of ${EDITORIAL_DRILLS.length}`} />
           <ProgressStat label="Shipped" value={shipped} sub={`${building} building`} />
           <ProgressStat label="Focus sessions" value={focusSessions} sub="last 7 days" />
         </div>
@@ -136,7 +136,7 @@ function Overview() {
         <SectionTitle>Artifact pipeline</SectionTitle>
         <div className="rounded-xl border border-white/[0.08] bg-white/[0.02]">
           {(['shipped', 'building', 'todo'] as const).map(status => {
-            const items = ARTIFACTS.filter(a => (artifacts[a.id]?.status || 'todo') === status);
+            const items = EDITORIAL_ARTIFACTS.filter(a => (artifacts[a.id]?.status || 'todo') === status);
             if (!items.length) return null;
             const dot = status === 'shipped' ? 'bg-emerald-300' : status === 'building' ? 'bg-amber-300' : 'bg-white/30';
             return (

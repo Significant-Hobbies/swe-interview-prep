@@ -5,6 +5,7 @@ import conceptsData from './concepts.json';
 import drillsData from './drills.json';
 import { TRACKS } from './learning-os';
 import projectsData from './projects.json';
+import externalResourcesData from './external-resources.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
 
@@ -151,6 +152,29 @@ describe('cross-file integrity', () => {
     expect(broken).toEqual([]);
   });
 
+  it('every drill has at least one testCase', () => {
+    const missing = drills
+      .filter((d: { id: string; testCases?: unknown[] }) => !d.testCases?.length)
+      .map((d: { id: string }) => d.id);
+    expect(missing).toEqual([]);
+  });
+
+  it('concepts link at least one catalog drill when drills exist for conceptId', () => {
+    const byConcept = Object.groupBy(
+      drills as { id: string; conceptId: string }[],
+      d => d.conceptId,
+    );
+    const unlinked = concepts
+      .filter((c: { id: string; drills?: string[] }) => {
+        const catalog = byConcept[c.id] ?? [];
+        if (!catalog.length) return false;
+        const linked = new Set(c.drills ?? []);
+        return !catalog.some(d => linked.has(d.id));
+      })
+      .map((c: { id: string }) => c.id);
+    expect(unlinked).toEqual([]);
+  });
+
   it('review questions reference existing concepts', () => {
     const broken = reviewQuestions.filter((q: any) => !conceptIds.has(q.conceptId)).map((q: any) => q.id);
     expect(broken).toEqual([]);
@@ -176,5 +200,106 @@ describe('cross-file integrity', () => {
       }
     }
     expect(broken).toEqual([]);
+  });
+});
+
+describe('learning loop coverage (roadmap.sh parity bar)', () => {
+  const spine = [
+    'tokenization', 'bm25', 'ranking-metrics', 'search-evals', 'hybrid-search', 'hnsw', 'rag',
+    'hypothesis-testing', 'probability-fundamentals', 'returns-volatility', 'momentum-backtest',
+  ];
+
+  it('spine concepts have editorial drills linked', () => {
+    const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
+    const missing: string[] = [];
+    for (const id of spine) {
+      const c = concepts.find((x: { id: string }) => x.id === id);
+      const linked = (c?.drills ?? []).some((did: string) => {
+        const d = drillById[did];
+        return d && !did.startsWith('drill-');
+      });
+      if (!linked) missing.push(id);
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it('spine concepts have editorial artifacts linked', () => {
+    const missing = spine.filter(id => {
+      const c = concepts.find((x: { id: string }) => x.id === id);
+      return !(c?.artifacts ?? []).some((aid: string) => !aid.startsWith('build-'));
+    });
+    expect(missing).toEqual([]);
+  });
+
+  it('every concept has at least one review question', () => {
+    const missing = concepts.filter((c: { reviewQuestions?: string[] }) => !(c.reviewQuestions?.length));
+    expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
+  });
+
+  it('ml-* concepts have editorial drills linked', () => {
+    const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
+    const ml = concepts.filter((c: { id: string }) => c.id.startsWith('ml-'));
+    const missing = ml.filter((c: { drills?: string[] }) =>
+      !(c.drills ?? []).some((did: string) => {
+        const d = drillById[did];
+        return d && !did.startsWith('drill-');
+      }),
+    );
+    expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
+  });
+
+  it('catalog has no bootstrap drill-* placeholders', () => {
+    const bootstrap = drills.filter((d: { id: string }) => d.id.startsWith('drill-'));
+    expect(bootstrap).toEqual([]);
+    expect(drills.length).toBeGreaterThanOrEqual(120);
+  });
+
+  it('every concept has a drill or review question for practice', () => {
+    const missing = concepts.filter(
+      (c: { drills?: string[]; reviewQuestions?: string[] }) =>
+        !(c.drills?.length) && !(c.reviewQuestions?.length),
+    );
+    expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
+  });
+
+  it('every concept has at least one editorial drill linked', () => {
+    const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
+    const missing = concepts.filter((c: { id: string; drills?: string[] }) =>
+      !(c.drills ?? []).some((did: string) => drillById[did] && !did.startsWith('drill-')),
+    );
+    expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
+  });
+
+  it('dsa track concepts have editorial drills linked', () => {
+    const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
+    const track = concepts.filter((c: { tags: string[] }) => c.tags.includes('dsa'));
+    const missing = track.filter((c: { drills?: string[] }) =>
+      !(c.drills ?? []).some((did: string) => {
+        const d = drillById[did];
+        return d && !did.startsWith('drill-');
+      }),
+    );
+    expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
+  });
+
+  it('dsa and product tracks have editorial drills on priority concepts', () => {
+    const priority = [
+      'array-hashing', 'two-pointers', 'graphs',
+      'leadership-and-influence', 'conflict-resolution',
+      'rate-limiting', 'idempotency',
+    ];
+    const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
+    const missing = priority.filter(id => {
+      const c = concepts.find((x: { id: string }) => x.id === id);
+      return !(c?.drills ?? []).some((did: string) => drillById[did] && !did.startsWith('drill-'));
+    });
+    expect(missing).toEqual([]);
+  });
+
+  it('priority external tags have at least 15 curated links', () => {
+    const ext = externalResourcesData as { byTag: Record<string, unknown[]> };
+    for (const tag of ['mathematics', 'probability', 'statistics', 'quant', 'search-ir', 'vector-db']) {
+      expect((ext.byTag[tag] ?? []).length, tag).toBeGreaterThanOrEqual(15);
+    }
   });
 });

@@ -62,4 +62,7 @@ export const STORE_KEYS = {
   notes: 'swe-os:notes',
   focusMode: 'swe-os:focus-mode',
   userElo: 'swe-os:user-elo',
+  mastery: 'swe-os:mastery',
+  onboarding: 'swe-os:onboarding-v1',
+  activeRoadmap: 'swe-os:active-roadmap',
 } as const;

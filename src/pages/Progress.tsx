@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Sparkline } from '../components/viz';
-import { ARTIFACTS, DRILLS } from '../data/learning-os';
+import { EDITORIAL_ARTIFACTS, EDITORIAL_DRILLS } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useArtifactStore, useDrillStore } from '../hooks/useUserStore';
 import { rollupMastery } from '../lib/conceptState';
@@ -49,8 +49,8 @@ export default function Progress() {
       </div>
 
       <section className="section-rule mt-20 grid grid-cols-3 gap-8 pt-10">
-        <Sub label="Drills solved" value={`${drillsSolved}/${DRILLS.length}`} />
-        <Sub label="Artifacts shipped" value={`${shipped}/${ARTIFACTS.length}`} />
+        <Sub label="Drills solved" value={`${drillsSolved}/${EDITORIAL_DRILLS.length}`} />
+        <Sub label="Artifacts shipped" value={`${shipped}/${EDITORIAL_ARTIFACTS.length}`} />
         <Sub label="Started" value={`${overall.total - overall.untouched}/${overall.total}`} />
       </section>
 

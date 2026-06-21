@@ -5,23 +5,24 @@ import { expect, test } from '@playwright/test';
  *   pnpm exec playwright test --project=mobile
  *
  * Verifies the app is usable at 390px — no horizontal scroll and the bottom
- * tab bar of the 5-tab IA works.
+ * tab bar of the Learning OS works.
  */
 test.beforeEach(async ({ context, page }) => {
   await context.addInitScript(() => {
     localStorage.setItem('dsa-prep-guest', '1');
+    localStorage.setItem('swe-os:onboarding-v1', JSON.stringify({ done: true }));
   });
   await page
     .addStyleTag({ content: '[data-saasmaker-widget]{display:none!important}' })
     .catch(() => {});
 });
 
-test.describe('Five-tab IA mobile (390px)', () => {
+test.describe('Learning OS mobile (390px)', () => {
   test.skip(({ viewport }) => (viewport?.width ?? 0) > 500, 'mobile-only checks');
 
   test('Learn renders with no horizontal scroll', async ({ page }) => {
     await page.goto('/learn');
-    await expect(page.getByRole('heading', { name: 'Learn', exact: true })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('heading', { name: 'Pick a path.', exact: true })).toBeVisible({ timeout: 10000 });
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -34,7 +35,7 @@ test.describe('Five-tab IA mobile (390px)', () => {
     const bottomNav = page.locator('div.fixed.bottom-0');
     await bottomNav.getByRole('link', { name: 'Practice' }).click();
     await expect(page).toHaveURL(/practice/);
-    await expect(page.getByRole('heading', { name: 'Practice', exact: true })).toBeVisible();
+    await expect(page.getByText('This week')).toBeVisible();
   });
 
   test('bottom tab bar reaches Playground and Progress', async ({ page }) => {
@@ -48,7 +49,7 @@ test.describe('Five-tab IA mobile (390px)', () => {
 
   test('Practice does not overflow horizontally', async ({ page }) => {
     await page.goto('/practice');
-    await page.getByRole('heading', { name: 'Practice', exact: true }).waitFor({ state: 'visible' });
+    await page.getByText('This week').waitFor({ state: 'visible' });
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
     );

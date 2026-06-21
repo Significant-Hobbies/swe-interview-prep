@@ -6,8 +6,14 @@
       "title": "Implement BM25 search in HighSignal",
       "type": "project-feature",
       "difficulty": "core",
-      "concepts": ["bm25", "inverted-index", "tokenization"],
-      "projects": ["highsignal"],
+      "concepts": [
+        "bm25",
+        "inverted-index",
+        "tokenization"
+      ],
+      "projects": [
+        "highsignal"
+      ],
       "description": "Index a corpus of articles and serve ranked keyword search using BM25.",
       "successCriteria": [
         "Index at least 100 documents",
@@ -15,90 +21,144 @@
         "Return top-k ranked results scored by BM25",
         "Add a small set of eval queries with expected results"
       ],
-      "deliverables": ["Code commit", "Test/check command with output", "Short note on k1/b tuning"]
+      "deliverables": [
+        "Code commit",
+        "Test/check command with output",
+        "Short note on k1/b tuning"
+      ]
     },
     {
       "id": "hybrid-search-v0",
       "title": "Hybrid search v0 in HighSignal",
       "type": "project-feature",
       "difficulty": "advanced",
-      "concepts": ["hybrid-search", "bm25", "vector-similarity"],
-      "projects": ["highsignal"],
+      "concepts": [
+        "hybrid-search",
+        "bm25",
+        "vector-similarity"
+      ],
+      "projects": [
+        "highsignal"
+      ],
       "description": "Combine BM25 and vector retrieval with reciprocal rank fusion.",
       "successCriteria": [
         "Run BM25 and vector retrieval over the same corpus",
         "Fuse results with reciprocal rank fusion",
         "Beat both single retrievers on the search eval set"
       ],
-      "deliverables": ["Code commit", "Eval comparison table"]
+      "deliverables": [
+        "Code commit",
+        "Eval comparison table"
+      ]
     },
     {
       "id": "search-eval-harness",
       "title": "Search eval harness",
       "type": "test-harness",
       "difficulty": "core",
-      "concepts": ["search-evals", "ranking-metrics"],
-      "projects": ["highsignal"],
+      "concepts": [
+        "search-evals",
+        "ranking-metrics"
+      ],
+      "projects": [
+        "highsignal"
+      ],
       "description": "A reusable harness that scores any retriever against a labelled query set.",
       "successCriteria": [
         "At least 15 labelled queries with known-good results",
         "Computes recall@k, MRR, and nDCG",
         "Can score any retriever via a common interface"
       ],
-      "deliverables": ["Harness code", "Baseline scores for BM25"]
+      "deliverables": [
+        "Harness code",
+        "Baseline scores for BM25"
+      ]
     },
     {
       "id": "tiny-vector-db-brute-force",
       "title": "Brute-force vector index",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["brute-force-vector-db", "vector-similarity", "topk-vector-search"],
-      "projects": ["tiny-vector-db"],
+      "concepts": [
+        "brute-force-vector-db",
+        "vector-similarity",
+        "topk-vector-search"
+      ],
+      "projects": [
+        "tiny-vector-db"
+      ],
       "description": "An exact nearest-neighbour index — the recall=1.0 baseline.",
       "successCriteria": [
         "Insert and search vectors with a chosen metric",
         "Return correct top-k via a k-sized heap",
         "Benchmark query latency vs vector count"
       ],
-      "deliverables": ["Code commit", "Latency benchmark"]
+      "deliverables": [
+        "Code commit",
+        "Latency benchmark"
+      ]
     },
     {
       "id": "vector-metadata-filter",
       "title": "Metadata filtering for vector search",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["metadata-filtering", "brute-force-vector-db"],
-      "projects": ["tiny-vector-db", "highsignal"],
+      "concepts": [
+        "metadata-filtering",
+        "brute-force-vector-db"
+      ],
+      "projects": [
+        "tiny-vector-db",
+        "highsignal"
+      ],
       "description": "Add structured predicate filtering to vector search.",
       "successCriteria": [
         "Support 'nearest WHERE field = value' queries",
         "Implement both pre-filter and post-filter and compare",
         "Always return k results when k are available"
       ],
-      "deliverables": ["Code commit", "Note on pre vs post filtering"]
+      "deliverables": [
+        "Code commit",
+        "Note on pre vs post filtering"
+      ]
     },
     {
       "id": "recall-latency-dashboard",
       "title": "Recall / latency benchmark dashboard",
       "type": "benchmark",
       "difficulty": "advanced",
-      "concepts": ["recall-latency-tradeoffs", "hnsw"],
-      "projects": ["tiny-vector-db"],
+      "concepts": [
+        "recall-latency-tradeoffs",
+        "hnsw"
+      ],
+      "projects": [
+        "tiny-vector-db"
+      ],
       "description": "Plot recall vs latency for ANN parameter sweeps against the brute-force baseline.",
       "successCriteria": [
         "Brute force used as the recall=1.0 ground truth",
         "Sweep at least one ANN parameter",
         "Produce a recall-vs-latency curve"
       ],
-      "deliverables": ["Benchmark code", "Curve chart"]
+      "deliverables": [
+        "Benchmark code",
+        "Curve chart"
+      ]
     },
     {
       "id": "rag-pipeline-v0",
       "title": "RAG pipeline v0",
       "type": "project-feature",
       "difficulty": "core",
-      "concepts": ["rag", "chunking", "embeddings"],
-      "projects": ["highsignal", "codevetter"],
+      "concepts": [
+        "rag",
+        "chunking",
+        "embeddings"
+      ],
+      "projects": [
+        "highsignal",
+        "codevetter"
+      ],
       "description": "An end-to-end retrieve → pack → generate pipeline grounded in a document corpus.",
       "successCriteria": [
         "Ingest documents with a chunking strategy",
@@ -106,172 +166,544 @@
         "Generate an answer grounded in retrieved context",
         "Have at least 10 eval questions"
       ],
-      "deliverables": ["Pipeline code", "Eval results"]
+      "deliverables": [
+        "Pipeline code",
+        "Eval results"
+      ]
     },
     {
       "id": "llm-eval-harness",
       "title": "LLM eval harness",
       "type": "test-harness",
       "difficulty": "core",
-      "concepts": ["llm-evals", "structured-outputs"],
-      "projects": ["codevetter", "highsignal"],
+      "concepts": [
+        "llm-evals",
+        "structured-outputs"
+      ],
+      "projects": [
+        "codevetter",
+        "highsignal"
+      ],
       "description": "A dataset + grader harness that scores LLM output on every prompt/model change.",
       "successCriteria": [
         "Fixed dataset of inputs with expected behavior",
         "At least one deterministic grader and one LLM-as-judge grader",
         "Runs as a single command and prints a score"
       ],
-      "deliverables": ["Harness code", "Baseline score"]
+      "deliverables": [
+        "Harness code",
+        "Baseline score"
+      ]
     },
     {
       "id": "model-router",
       "title": "Model router",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["model-routing", "llm-evals"],
-      "projects": ["sassmaker", "highsignal"],
+      "concepts": [
+        "model-routing",
+        "llm-evals"
+      ],
+      "projects": [
+        "sassmaker",
+        "highsignal"
+      ],
       "description": "Route each request to the cheapest model that passes evals for that request class.",
       "successCriteria": [
         "Classify request difficulty",
         "Dispatch to a cheap or strong model accordingly",
         "Track cost and latency per route"
       ],
-      "deliverables": ["Router code", "Cost comparison"]
+      "deliverables": [
+        "Router code",
+        "Cost comparison"
+      ]
     },
     {
       "id": "api-key-system",
       "title": "Reusable API key system",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["api-keys", "auth-systems"],
-      "projects": ["sassmaker", "codevetter"],
+      "concepts": [
+        "api-keys",
+        "auth-systems"
+      ],
+      "projects": [
+        "sassmaker",
+        "codevetter"
+      ],
       "description": "Issue, hash, scope, and rotate API keys for machine clients.",
       "successCriteria": [
         "Keys stored only as hashes",
         "Prefix for log-searchability",
         "Scopes and a revocation path"
       ],
-      "deliverables": ["Module code", "Tests"]
+      "deliverables": [
+        "Module code",
+        "Tests"
+      ]
     },
     {
       "id": "rate-limiter",
       "title": "Reusable rate limiter",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["rate-limiting"],
-      "projects": ["sassmaker"],
+      "concepts": [
+        "rate-limiting"
+      ],
+      "projects": [
+        "sassmaker"
+      ],
       "description": "A token-bucket rate limiter usable as middleware.",
       "successCriteria": [
         "Token bucket with configurable rate and burst",
         "Returns 429 with a Retry-After header",
         "Works across processes (shared store)"
       ],
-      "deliverables": ["Module code", "Tests"]
+      "deliverables": [
+        "Module code",
+        "Tests"
+      ]
     },
     {
       "id": "job-queue-retries",
       "title": "Job queue with retries and DLQ",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["retries-dlq", "message-queues", "background-jobs"],
-      "projects": ["sassmaker", "highsignal"],
+      "concepts": [
+        "retries-dlq",
+        "message-queues",
+        "background-jobs"
+      ],
+      "projects": [
+        "sassmaker",
+        "highsignal"
+      ],
       "description": "A background job queue with backoff, jitter, and a dead-letter queue.",
       "successCriteria": [
         "Retries with exponential backoff and jitter",
         "Poison messages routed to a DLQ",
         "Idempotent consumer handling"
       ],
-      "deliverables": ["Module code", "Tests"]
+      "deliverables": [
+        "Module code",
+        "Tests"
+      ]
     },
     {
       "id": "structured-logging",
       "title": "Structured logging package",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["monitoring-analytics"],
-      "projects": ["codevetter", "highsignal"],
+      "concepts": [
+        "monitoring-analytics"
+      ],
+      "projects": [
+        "codevetter",
+        "highsignal"
+      ],
       "description": "A structured logger with a request correlation id.",
       "successCriteria": [
         "JSON-structured log lines",
         "Correlation id propagated through a request",
         "Log levels and queryable fields"
       ],
-      "deliverables": ["Module code"]
+      "deliverables": [
+        "Module code"
+      ]
     },
     {
       "id": "toy-lsm",
       "title": "Toy LSM tree",
       "type": "code-implementation",
       "difficulty": "advanced",
-      "concepts": ["lsm-tree", "compaction"],
-      "projects": ["tiny-search-engine"],
+      "concepts": [
+        "lsm-tree",
+        "compaction"
+      ],
+      "projects": [
+        "tiny-search-engine"
+      ],
       "description": "A minimal LSM storage engine: memtable, SSTables, compaction.",
       "successCriteria": [
         "Writes buffered in a memtable and flushed to immutable sorted files",
         "Reads merge across files; deletes are tombstones",
         "A simple compaction pass"
       ],
-      "deliverables": ["Code commit", "Note on read/write amplification"]
+      "deliverables": [
+        "Code commit",
+        "Note on read/write amplification"
+      ]
     },
     {
       "id": "toy-wal",
       "title": "Toy write-ahead log",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["wal"],
-      "projects": ["tiny-search-engine"],
+      "concepts": [
+        "wal"
+      ],
+      "projects": [
+        "tiny-search-engine"
+      ],
       "description": "An append-only WAL with crash recovery.",
       "successCriteria": [
         "Append + fsync before acknowledging a write",
         "Replay the log to recover state after a crash",
         "Checkpoint/truncation to bound log size"
       ],
-      "deliverables": ["Code commit", "Crash-recovery test"]
+      "deliverables": [
+        "Code commit",
+        "Crash-recovery test"
+      ]
     },
     {
       "id": "object-storage-index",
       "title": "Object-storage-backed index",
       "type": "code-implementation",
       "difficulty": "advanced",
-      "concepts": ["object-storage", "inverted-index"],
-      "projects": ["highsignal"],
+      "concepts": [
+        "object-storage",
+        "inverted-index"
+      ],
+      "projects": [
+        "highsignal"
+      ],
       "description": "Store index segments in object storage with a hot in-memory cache.",
       "successCriteria": [
         "Index segments persisted as immutable objects",
         "A cache in front of object storage",
         "Cold-read latency measured and noted"
       ],
-      "deliverables": ["Code commit", "Latency note"]
+      "deliverables": [
+        "Code commit",
+        "Latency note"
+      ]
     },
     {
       "id": "search-platform-design-doc",
       "title": "Search platform design doc",
       "type": "design-doc",
       "difficulty": "advanced",
-      "concepts": ["search-platform-design", "search-discovery"],
-      "projects": ["highsignal"],
+      "concepts": [
+        "search-platform-design",
+        "search-discovery"
+      ],
+      "projects": [
+        "highsignal"
+      ],
       "description": "An architecture doc for a search platform: ingestion, indexing, query, ranking.",
       "successCriteria": [
         "Separate ingestion/indexing and query paths",
         "Storage and segment/compaction story",
         "Capacity estimate and failure-mode review"
       ],
-      "deliverables": ["Design doc", "Architecture diagram"]
+      "deliverables": [
+        "Design doc",
+        "Architecture diagram"
+      ]
     },
     {
       "id": "rag-system-design-doc",
       "title": "RAG system design doc",
       "type": "design-doc",
       "difficulty": "advanced",
-      "concepts": ["rag-system-design", "rag"],
-      "projects": ["highsignal", "codevetter"],
+      "concepts": [
+        "rag-system-design",
+        "rag"
+      ],
+      "projects": [
+        "highsignal",
+        "codevetter"
+      ],
       "description": "An architecture doc for a production RAG system with an eval gate.",
       "successCriteria": [
         "Offline ingestion and online query pipelines defined",
         "Eval harness as part of the architecture",
         "Freshness/re-indexing strategy"
       ],
-      "deliverables": ["Design doc", "Architecture diagram"]
+      "deliverables": [
+        "Design doc",
+        "Architecture diagram"
+      ]
+    },
+    {
+      "id": "ab-test-analysis-report",
+      "title": "A/B test analysis report",
+      "type": "written-analysis",
+      "difficulty": "core",
+      "concepts": [
+        "ab-testing-engineering",
+        "hypothesis-testing",
+        "estimation-confidence"
+      ],
+      "projects": [
+        "sassmaker",
+        "highsignal"
+      ],
+      "description": "Analyze a mock or real experiment: check SRM, compute CI on the lift, interpret p-value and practical significance, and write a ship/no-ship recommendation.",
+      "successCriteria": [
+        "Document sample sizes per variant and check for sample ratio mismatch",
+        "Report point estimate and 95% CI for the primary metric",
+        "State null/alternative, p-value interpretation, and Type I/II tradeoff in plain English",
+        "Recommend ship, iterate, or extend the test with a one-paragraph rationale"
+      ],
+      "deliverables": [
+        "Written report (1–2 pages)",
+        "Optional notebook or spreadsheet with calculations"
+      ]
+    },
+    {
+      "id": "simulate-random-processes",
+      "title": "Simulate coin flips, dice, and random walks",
+      "type": "implementation",
+      "difficulty": "intro",
+      "concepts": [
+        "probability-fundamentals",
+        "random-variables",
+        "random-walks-markov"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Code simulators (no stats libraries): Bernoulli trials, dice sums, and a 1D random walk. Plot or print distributions and compare sample mean to theory.",
+      "successCriteria": [
+        "10k coin flips: sample proportion within 0.02 of 0.5",
+        "Dice sum histogram matches triangular shape qualitatively",
+        "Random walk: report mean displacement and max |position| over T steps"
+      ],
+      "deliverables": [
+        "Runnable script/notebook",
+        "One paragraph: what matched theory vs sampling noise"
+      ]
+    },
+    {
+      "id": "impl-descriptive-stats",
+      "title": "Implement mean, variance, correlation from scratch",
+      "type": "implementation",
+      "difficulty": "intro",
+      "concepts": [
+        "descriptive-statistics",
+        "covariance-correlation"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "On a real CSV (or synthetic data), compute mean, variance, std dev, covariance, and Pearson r without pandas/numpy — loops only.",
+      "successCriteria": [
+        "Functions: mean, variance (sample), covariance, correlation",
+        "Spot-check against a calculator on 5 hand-picked pairs",
+        "Document when you would use median instead of mean on this dataset"
+      ],
+      "deliverables": [
+        "Code",
+        "Output table for ≥3 columns"
+      ]
+    },
+    {
+      "id": "debunk-fake-trading-signal",
+      "title": "Analyze a fake trading signal",
+      "type": "written-analysis",
+      "difficulty": "core",
+      "concepts": [
+        "hypothesis-testing",
+        "sampling-and-clt",
+        "bias-variance-overfitting"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Given (or generate) a spurious 'alpha' signal on synthetic or historical noise, show why it fails: multiple testing, in-sample overfit, or non-stationarity.",
+      "successCriteria": [
+        "Reproduce the 'great' in-sample metric",
+        "Show out-of-sample or holdout collapse",
+        "Name the statistical mistake (p-hacking, data snooping, regime shift, etc.)"
+      ],
+      "deliverables": [
+        "Short writeup",
+        "One chart or table"
+      ]
+    },
+    {
+      "id": "math-weekly-writeup",
+      "title": "Weekly math writeup (public note)",
+      "type": "written-analysis",
+      "difficulty": "intro",
+      "concepts": [
+        "probability-fundamentals"
+      ],
+      "projects": [
+        "quant-lab",
+        "sarthakagrawal-dev"
+      ],
+      "description": "Explain one concept you drilled this week in your own words — derive or prove one step, include one mistake you caught yourself making.",
+      "successCriteria": [
+        "No copy-paste from videos; prose is yours",
+        "Contains at least one worked example or derivation",
+        "States one assumption you had wrong and corrected"
+      ],
+      "deliverables": [
+        "Published or draft note (≥300 words)"
+      ]
+    },
+    {
+      "id": "impl-matrix-multiply",
+      "title": "Implement matrix multiplication from scratch",
+      "type": "implementation",
+      "difficulty": "core",
+      "concepts": [
+        "matrices-and-transformations"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "General m×n by n×p matmul with nested loops; apply to a 2D rotation + scale transform on points.",
+      "successCriteria": [
+        "Correct matmul on 3×3 test case vs hand calculation",
+        "Apply transform to ≥4 points; verify orthogonality preserved for pure rotation"
+      ],
+      "deliverables": [
+        "Code",
+        "Before/after coordinates"
+      ]
+    },
+    {
+      "id": "impl-ols-from-scratch",
+      "title": "Least-squares regression from scratch",
+      "type": "implementation",
+      "difficulty": "core",
+      "concepts": [
+        "regression-basics",
+        "matrices-and-transformations"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Fit y = Xβ via normal equations (XᵀX)β = Xᵀy using your matmul — no sklearn. Report β, residuals, R².",
+      "successCriteria": [
+        "Matches sklearn/polyfit on a 2-feature toy dataset within 1e-6",
+        "Plot residuals; comment on one outlier's leverage"
+      ],
+      "deliverables": [
+        "Code",
+        "β vector and R²"
+      ]
+    },
+    {
+      "id": "impl-pca-from-scratch",
+      "title": "PCA from scratch",
+      "type": "implementation",
+      "difficulty": "advanced",
+      "concepts": [
+        "pca-projection",
+        "eigenvalues-decomposition"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Center data, compute covariance matrix, eigen-decompose, project to 2D. Visualize.",
+      "successCriteria": [
+        "Top-2 eigenvectors explain ≥70% variance on a test dataset",
+        "2D scatter of projected points",
+        "One sentence: what the first principal component 'means' for your data"
+      ],
+      "deliverables": [
+        "Code",
+        "Scree plot or variance ratios"
+      ]
+    },
+    {
+      "id": "visualize-projections",
+      "title": "Visualize linear projections",
+      "type": "implementation",
+      "difficulty": "core",
+      "concepts": [
+        "vectors-and-spaces",
+        "pca-projection"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Draw vector projection onto a line/subspace: show orthogonal residual. Connect to OLS geometry.",
+      "successCriteria": [
+        "Diagram or plot: vector, subspace, projection, residual orthogonal",
+        "Numeric check: residual · subspace direction = 0"
+      ],
+      "deliverables": [
+        "Figure",
+        "3-sentence geometric explanation"
+      ]
+    },
+    {
+      "id": "quant-returns-pipeline",
+      "title": "Price data → daily returns pipeline",
+      "type": "implementation",
+      "difficulty": "core",
+      "concepts": [
+        "returns-volatility"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "Ingest adjusted close prices (CSV or free API), compute simple/log daily returns, handle missing days.",
+      "successCriteria": [
+        "≥1 year daily data for one ticker",
+        "Returns series with correct alignment (no look-ahead)",
+        "Sanity: mean daily return and count of trading days documented"
+      ],
+      "deliverables": [
+        "Code",
+        "returns.csv or equivalent"
+      ]
+    },
+    {
+      "id": "quant-risk-dashboard",
+      "title": "Volatility, Sharpe, drawdown, correlation matrix",
+      "type": "implementation",
+      "difficulty": "core",
+      "concepts": [
+        "returns-volatility",
+        "portfolio-risk-metrics",
+        "covariance-correlation"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "On 2–5 tickers: annualized vol, Sharpe (assume rf=0 or document rate), max drawdown, pairwise correlation matrix.",
+      "successCriteria": [
+        "All metrics computed from returns you built (not pre-built risk APIs)",
+        "Correlation matrix symmetric, diag = 1",
+        "One paragraph interpreting whether diversification shows up"
+      ],
+      "deliverables": [
+        "Code",
+        "Metrics table"
+      ]
+    },
+    {
+      "id": "momentum-backtest-benchmark",
+      "title": "Simple momentum backtest vs SPY/QQQ",
+      "type": "implementation",
+      "difficulty": "advanced",
+      "concepts": [
+        "momentum-backtest",
+        "portfolio-risk-metrics",
+        "hypothesis-testing"
+      ],
+      "projects": [
+        "quant-lab"
+      ],
+      "description": "12-month momentum rule on 1–3 names; compare cumulative return to SPY or QQQ over the same window. State assumptions and survivorship bias.",
+      "successCriteria": [
+        "Rule written before seeing full-sample results (or use holdout half)",
+        "Equity curve: strategy vs benchmark",
+        "Honest limitations section (costs, slippage, overfitting)"
+      ],
+      "deliverables": [
+        "Code",
+        "Equity curve chart",
+        "Limitations paragraph"
+      ]
     }
   ]
 }

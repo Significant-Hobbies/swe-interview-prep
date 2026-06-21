@@ -110,6 +110,21 @@
       "repo": ""
     },
     {
+      "id": "quant-lab",
+      "name": "Quant Lab",
+      "lane": "personal",
+      "status": "planned",
+      "purpose": "Math made real — simulations, from-scratch implementations, and a simple quant research pipeline (returns, risk, backtests).",
+      "tracks": ["mathematics"],
+      "milestones": [
+        "Descriptive stats + random-process simulators from scratch",
+        "Matrix ops, OLS, and PCA without libraries",
+        "Returns ingestion, risk metrics, momentum backtest vs benchmark"
+      ],
+      "nextAction": "Implement mean/variance/correlation on a CSV without pandas.",
+      "repo": ""
+    },
+    {
       "id": "aliveville",
       "name": "Aliveville",
       "lane": "fun",

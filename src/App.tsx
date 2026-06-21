@@ -1,16 +1,18 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { trackReturned, trackSignup } from './lib/analytics';
+import { loadLocal, STORE_KEYS } from './lib/userStore';
 
-// Session-level analytics. The app is usable as a guest, so `signup` means
-// "first ever session on this browser" and `returned` means a later session.
 const SEEN_KEY = 'swe-interview-prep:seen';
 
+const Today = lazy(() => import('./pages/Today'));
+const Onboarding = lazy(() => import('./pages/Onboarding'));
+const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
 const Practice = lazy(() => import('./pages/Practice'));
@@ -31,19 +33,74 @@ function removeLcpShell() {
   document.getElementById('lcp-shell')?.remove();
 }
 
-function App() {
+function OnboardingGate({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const done = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
+  if (!done && location.pathname !== '/onboarding') {
+    return <Navigate to="/onboarding" replace />;
+  }
+  if (done && location.pathname === '/onboarding') {
+    return <Navigate to="/today" replace />;
+  }
+  return <>{children}</>;
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/share/roadmaps/:id" element={<PublicRoadmap />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/today" replace />} />
+        <Route path="today" element={<Today />} />
+        <Route path="onboarding" element={<Onboarding />} />
+        <Route path="learn" element={<Learn />} />
+        <Route path="learn/all" element={<LearnAll />} />
+        <Route path="learn/:id" element={<ConceptDetail />} />
+        <Route path="practice" element={<Practice />} />
+        <Route path="practice/all" element={<PracticeAll />} />
+        <Route path="playground" element={<Playground />} />
+        <Route path="progress" element={<Progress />} />
+        <Route path="progress/all" element={<ProgressAll />} />
+        <Route path="concepts/:id" element={<ConceptDetail />} />
+        <Route path="roadmaps/:id" element={<RoadmapDetail />} />
+        <Route path="projects/:id" element={<ProjectDetail />} />
+        <Route path="build" element={<BuildLab />} />
+        <Route path="drills/:id" element={<BuildLab />} />
+        <Route path="learning" element={<LearningDoc />} />
+        <Route path="learning/:slug" element={<LearningDoc />} />
+        <Route path="about" element={<About />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="dashboard" element={<Navigate to="/today" replace />} />
+        <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
+        <Route path="concepts" element={<Navigate to="/learn/all" replace />} />
+        <Route path="drills" element={<Navigate to="/practice" replace />} />
+        <Route path="reviews" element={<Navigate to="/practice/all?tab=reviews" replace />} />
+        <Route path="review" element={<Navigate to="/practice/all?tab=reviews" replace />} />
+        <Route path="projects" element={<Navigate to="/progress/all" replace />} />
+        <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
+        <Route path="library/*" element={<Navigate to="/learn" replace />} />
+        <Route path="mock" element={<Navigate to="/practice" replace />} />
+        <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
+        <Route path="*" element={<Navigate to="/today" replace />} />
+      </Route>
+    </Routes>
+  );
+}
+
+export default function App() {
   const { user, isGuest, loading } = useAuth();
+  const location = useLocation();
+  const isPublicShare = location.pathname.startsWith('/share/');
 
   useEffect(() => {
     try {
-      if (localStorage.getItem(SEEN_KEY)) {
-        trackReturned();
-      } else {
+      if (localStorage.getItem(SEEN_KEY)) trackReturned();
+      else {
         localStorage.setItem(SEEN_KEY, '1');
         trackSignup();
       }
     } catch {
-      // localStorage unavailable — skip session attribution silently.
+      /* noop */
     }
   }, []);
 
@@ -51,11 +108,9 @@ function App() {
     if (!loading && (user || isGuest)) removeLcpShell();
   }, [loading, user, isGuest]);
 
-  if (loading) {
-    return null;
-  }
+  if (loading) return null;
 
-  if (!user && !isGuest) {
+  if (!user && !isGuest && !isPublicShare) {
     return (
       <Suspense fallback={null}>
         <Login />
@@ -63,60 +118,20 @@ function App() {
     );
   }
 
+  const body = isPublicShare ? (
+    <AppRoutes />
+  ) : (
+    <OnboardingGate>
+      <AppRoutes />
+    </OnboardingGate>
+  );
+
   return (
     <>
-      <SaaSMakerFeedback />
+      {!isPublicShare && <SaaSMakerFeedback />}
       <ErrorBoundary scope="route">
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              {/* Four-tab IA. Each tab lands on a minimal "what's next" page;
-                  the rich browsable view is one click away at /<tab>/all. */}
-              <Route index element={<Navigate to="/learn" replace />} />
-              <Route path="learn" element={<Learn />} />
-              <Route path="learn/all" element={<LearnAll />} />
-              <Route path="learn/:id" element={<ConceptDetail />} />
-              <Route path="practice" element={<Practice />} />
-              <Route path="practice/all" element={<PracticeAll />} />
-              <Route path="playground" element={<Playground />} />
-              <Route path="progress" element={<Progress />} />
-              <Route path="progress/all" element={<ProgressAll />} />
-
-              {/* Detail pages reachable from within the five tabs */}
-              <Route path="concepts/:id" element={<ConceptDetail />} />
-              <Route path="roadmaps/:id" element={<RoadmapDetail />} />
-              <Route path="projects/:id" element={<ProjectDetail />} />
-              <Route path="build" element={<BuildLab />} />
-              <Route path="drills/:id" element={<BuildLab />} />
-
-              {/* Markdown deep-dive docs (Learning OS) */}
-              <Route path="learning" element={<LearningDoc />} />
-              <Route path="learning/:slug" element={<LearningDoc />} />
-
-              {/* Static */}
-              <Route path="about" element={<About />} />
-              <Route path="privacy" element={<Privacy />} />
-
-              {/* Legacy redirects — old 9-page IA */}
-              <Route path="today" element={<Navigate to="/learn" replace />} />
-              <Route path="dashboard" element={<Navigate to="/learn" replace />} />
-              <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
-              <Route path="concepts" element={<Navigate to="/learn" replace />} />
-              <Route path="drills" element={<Navigate to="/practice" replace />} />
-              <Route path="reviews" element={<Navigate to="/practice/all?tab=reviews" replace />} />
-              <Route path="review" element={<Navigate to="/practice/all?tab=reviews" replace />} />
-              <Route path="projects" element={<Navigate to="/progress/all" replace />} />
-              <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
-              <Route path="library/*" element={<Navigate to="/learn" replace />} />
-              <Route path="mock" element={<Navigate to="/practice" replace />} />
-              <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
-              <Route path="*" element={<Navigate to="/learn" replace />} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <Suspense fallback={null}>{body}</Suspense>
       </ErrorBoundary>
     </>
   );
 }
-
-export default App;

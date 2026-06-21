@@ -3,23 +3,29 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Sparkline } from '../components/viz';
-import { CONCEPT_BY_ID, type Drill, DRILLS, primaryGroup, REVIEW_QUESTIONS } from '../data/learning-os';
+import { CONCEPT_BY_ID, type Drill, EDITORIAL_DRILLS, primaryGroup, REVIEW_QUESTIONS } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useDrillStore, useUserElo } from '../hooks/useUserStore';
+import { useGateContext } from '../hooks/useGates';
 import { isDue } from '../lib/conceptState';
-import { DEFAULT_USER_ELO, difficultyToElo } from '../lib/elo';
+import { pickPracticeDrill, pickTodayPlan } from '../lib/recommend';
 
 export default function Practice() {
   const { drills: drillState } = useDrillStore();
   const { mastery } = useConceptMastery();
   const { getElo } = useUserElo();
+  const gateCtx = useGateContext();
+  const todayConcept = pickTodayPlan(mastery, gateCtx)?.concept.id;
 
   const dueCount = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId])).length;
   const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 14), [mastery]);
   const streak = computeStreak(sparkline);
 
-  const nextDrill = useMemo(() => pickNextDrill(drillState, getElo), [drillState, getElo]);
+  const nextDrill = useMemo(
+    () => pickPracticeDrill(drillState, getElo, todayConcept),
+    [drillState, getElo, todayConcept],
+  );
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
@@ -30,7 +36,7 @@ export default function Practice() {
           This week
         </div>
         <div className="grid grid-cols-3 gap-8">
-          <Stat label="Solved" value={solvedCount} sub={`of ${DRILLS.length}`} />
+          <Stat label="Solved" value={solvedCount} sub={`of ${EDITORIAL_DRILLS.length}`} />
           <Stat label="Due" value={dueCount} sub={dueCount ? 'reviews' : 'caught up'} accent={dueCount > 0} />
           <Stat label="Streak" value={`${streak}d`} sub="active" />
         </div>
@@ -117,25 +123,6 @@ function Stat({ label, value, sub, accent }: { label: string; value: React.React
       {sub && <div className="mt-1 font-mono text-xs text-white/40">{sub}</div>}
     </div>
   );
-}
-
-function pickNextDrill(
-  drillState: Record<string, { status: string; attempts: number }>,
-  getElo: (roadmapId: string) => number,
-): Drill | null {
-  const unsolved = DRILLS.filter(d => (drillState[d.id]?.status ?? 'unsolved') !== 'solved');
-  if (!unsolved.length) return null;
-  const ranked = unsolved
-    .map(d => {
-      const roadmaps = CONCEPT_BY_ID[d.conceptId]?.roadmaps ?? [];
-      const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : DEFAULT_USER_ELO;
-      const problemElo = difficultyToElo(d.difficulty);
-      const distance = Math.abs(problemElo - userElo);
-      const inProgressBoost = drillState[d.id]?.status === 'attempted' ? -100 : 0;
-      return { drill: d, score: distance + inProgressBoost };
-    })
-    .sort((a, b) => a.score - b.score);
-  return ranked[0].drill;
 }
 
 function buildRecentActivity(mastery: Record<string, MasteryEntry>, days: number): number[] {

@@ -13,7 +13,14 @@
         "The analyzer must be symmetric across index and query time.",
         "Keep stop words minimal — they hurt short queries."
       ],
-      "solutionNotes": "Stemming should be conservative; aggressive stemming makes distinct words collide."
+      "solutionNotes": "Stemming should be conservative; aggressive stemming makes distinct words collide.",
+      "testCases": [
+        {
+          "setup": "const STOPS = new Set(['the','a','an']);\nfunction stem(w) { return w.endsWith('es') ? w.slice(0, -2) : w.endsWith('s') ? w.slice(0, -1) : w; }\nfunction tokenize(s) {\n  return s.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).filter(t => !STOPS.has(t)).map(stem);\n}",
+          "run": "console.log(JSON.stringify(tokenize('The Quick Brown Foxes!')));",
+          "expect": "[\"quick\",\"brown\",\"fox\"]"
+        }
+      ]
     },
     {
       "id": "build-inverted-index",
@@ -27,7 +34,14 @@
         "Keep posting lists sorted by doc id so intersection is linear.",
         "Store document frequency now — ranking needs it later."
       ],
-      "solutionNotes": "Separate the dictionary (term → metadata) from the postings storage."
+      "solutionNotes": "Separate the dictionary (term → metadata) from the postings storage.",
+      "testCases": [
+        {
+          "setup": "function buildIndex(docs) {\n  const index = {};\n  docs.forEach((doc, id) => {\n    const seen = new Set(doc);\n    seen.forEach(term => {\n      if (!index[term]) index[term] = { df: 0, postings: [] };\n      index[term].df++;\n      index[term].postings.push(id);\n    });\n    Object.values(index).forEach(e => e.postings.sort((a, b) => a - b));\n  });\n  return index;\n}\nfunction andQuery(index, terms) {\n  const lists = terms.map(t => index[t]?.postings || []);\n  if (!lists.length) return [];\n  let acc = lists[0];\n  for (let i = 1; i < lists.length; i++) {\n    const b = lists[i]; const out = []; let j = 0, k = 0;\n    while (j < acc.length && k < b.length) {\n      if (acc[j] === b[k]) { out.push(acc[j]); j++; k++; }\n      else if (acc[j] < b[k]) j++; else k++;\n    }\n    acc = out;\n  }\n  return acc;\n}",
+          "run": "const docs = [['quick','brown','fox'],['lazy','dog'],['quick','fox']];\nconst idx = buildIndex(docs);\nconsole.log(JSON.stringify(andQuery(idx, ['quick','fox'])));",
+          "expect": "[0,2]"
+        }
+      ]
     },
     {
       "id": "calculate-tfidf",
@@ -41,7 +55,14 @@
         "IDF rewards rarity across the corpus.",
         "Dampen raw term frequency."
       ],
-      "solutionNotes": "TF-IDF ignores document length — that is exactly what BM25 fixes."
+      "solutionNotes": "TF-IDF ignores document length — that is exactly what BM25 fixes.",
+      "testCases": [
+        {
+          "setup": "function tfidf(tf, df, N) {\n  const tfw = 1 + Math.log(tf);\n  const idf = Math.log(N / df);\n  return tfw * idf;\n}",
+          "run": "console.log(tfidf(3, 2, 10).toFixed(2));",
+          "expect": "3.38"
+        }
+      ]
     },
     {
       "id": "calculate-bm25-score",
@@ -55,7 +76,17 @@
         "Score = IDF · (tf·(k1+1)) / (tf + k1·(1 - b + b·dl/avgdl)).",
         "b controls length normalization; k1 controls TF saturation."
       ],
-      "solutionNotes": "Try b=0 (no length norm) and b=1 (full) to feel the effect."
+      "solutionNotes": "Try b=0 (no length norm) and b=1 (full) to feel the effect.",
+      "testCases": [
+        {
+          "setup": "function bm25(tf, df, N, dl, avgdl, k1 = 1.2, b = 0.75) {\n  const idf = Math.log((N - df + 0.5) / (df + 0.5) + 1);\n  const denom = tf + k1 * (1 - b + b * dl / avgdl);\n  return idf * (tf * (k1 + 1)) / denom;\n}",
+          "run": "const s1 = bm25(1, 5, 100, 100, 100);\nconst s10 = bm25(10, 5, 100, 100, 100);\nconsole.log(s10 < s1 * 3 ? 'saturates' : 'linear', s1.toFixed(2));",
+          "expect": [
+            "saturates",
+            "2.91"
+          ]
+        }
+      ]
     },
     {
       "id": "implement-bm25-ranker",
@@ -69,7 +100,38 @@
         "Sum per-term BM25 contributions for multi-term queries.",
         "Use a k-sized heap for the top-k."
       ],
-      "solutionNotes": "This ranker is the lexical leg of hybrid search."
+      "solutionNotes": "This ranker is the lexical leg of hybrid search.",
+      "testCases": [
+        {
+          "setup": "function bm25(tf, df, N, dl, avgdl) {\n  const k1 = 1.2, b = 0.75;\n  const idf = Math.log((N - df + 0.5) / (df + 0.5) + 1);\n  return idf * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * dl / avgdl));\n}\nfunction bm25Rank(docs, query, k) {\n  const N = docs.length;\n  const avgdl = docs.reduce((s, d) => s + d.length, 0) / N;\n  const df = {};\n  docs.forEach(d => new Set(d.terms).forEach(t => { df[t] = (df[t] || 0) + 1; }));\n  const scores = docs.map((d, id) => {\n    const tf = {};\n    d.terms.forEach(t => { tf[t] = (tf[t] || 0) + 1; });\n    const s = query.reduce((sum, term) => sum + (tf[term] ? bm25(tf[term], df[term] || 0, N, d.terms.length, avgdl) : 0), 0);\n    return { id, s };\n  });\n  scores.sort((a, b) => b.s - a.s);\n  return scores.slice(0, k).map(x => x.id);\n}",
+          "run": "const docs = [{terms:['quick','brown','fox']},{terms:['lazy','dog']},{terms:['quick','fox']}];\nconsole.log(JSON.stringify(bm25Rank(docs, ['quick','fox'], 2)));",
+          "expect": "[0,1]"
+        }
+      ]
+    },
+    {
+      "id": "compute-precision-recall",
+      "title": "Compute precision and recall by hand",
+      "conceptId": "ranking-metrics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Given retrieved doc ids [1,4,2,9] and relevant ids {2,4,7}, compute precision@4 and recall@4.",
+      "expectedOutput": "precision@4 = 0.5 (2 relevant in 4), recall@4 = 2/3.",
+      "hints": [
+        "Precision = relevant retrieved / total retrieved.",
+        "Recall = relevant retrieved / total relevant in corpus."
+      ],
+      "solutionNotes": "MRR and nDCG add rank position — precision/recall are set-based.",
+      "testCases": [
+        {
+          "setup": "function precisionRecall(retrieved, relevant) {\n  const rel = new Set(relevant);\n  const hits = retrieved.filter(id => rel.has(id)).length;\n  const p = hits / retrieved.length;\n  const r = hits / relevant.length;\n  return { p, r };\n}",
+          "run": "const { p, r } = precisionRecall([1,4,2,9], [2,4,7]); console.log(p.toFixed(2), r.toFixed(2));",
+          "expect": [
+            "0.50",
+            "0.67"
+          ]
+        }
+      ]
     },
     {
       "id": "build-search-eval-harness",
@@ -83,7 +145,17 @@
         "Freeze the query set before tuning.",
         "Score retrievers through one common interface."
       ],
-      "solutionNotes": "Without this harness, every ranking change is a guess."
+      "solutionNotes": "Without this harness, every ranking change is a guess.",
+      "testCases": [
+        {
+          "setup": "function recallAtK(retrieved, relevant, k) {\n  const rel = new Set(relevant);\n  const hits = retrieved.slice(0, k).filter(id => rel.has(id)).length;\n  return hits / relevant.length;\n}\nfunction mrr(queries) {\n  let sum = 0;\n  for (const { retrieved, relevant } of queries) {\n    const rel = new Set(relevant);\n    const rank = retrieved.findIndex(id => rel.has(id));\n    sum += rank === -1 ? 0 : 1 / (rank + 1);\n  }\n  return sum / queries.length;\n}\nfunction ndcgAtK(retrieved, relevant, k) {\n  const rel = new Set(relevant);\n  let dcg = 0;\n  for (let i = 0; i < Math.min(k, retrieved.length); i++) {\n    if (rel.has(retrieved[i])) dcg += 1 / Math.log2(i + 2);\n  }\n  let idcg = 0;\n  for (let i = 0; i < Math.min(k, relevant.length); i++) idcg += 1 / Math.log2(i + 2);\n  return idcg === 0 ? 0 : dcg / idcg;\n}\nfunction evalRetriever(retriever, queries, k) {\n  const r = queries.map(q => recallAtK(retriever(q.q, k), q.rel, k));\n  const m = mrr(queries.map(q => ({ retrieved: retriever(q.q, k), relevant: q.rel })));\n  const n = queries.map(q => ndcgAtK(retriever(q.q, k), q.rel, k));\n  return { recall: r.reduce((a, b) => a + b, 0) / r.length, mrr: m, ndcg: n.reduce((a, b) => a + b, 0) / n.length };\n}",
+          "run": "const retriever = q => q === 'a' ? [1,2,3] : [2,1];\nconst qs = [{ q: 'a', rel: [1,3] }, { q: 'b', rel: [2] }];\nconst m = evalRetriever(retriever, qs, 3);\nconsole.log(m.recall.toFixed(2), m.mrr.toFixed(2));",
+          "expect": [
+            "1.00",
+            "1.00"
+          ]
+        }
+      ]
     },
     {
       "id": "implement-rrf",
@@ -97,7 +169,14 @@
         "RRF uses ranks, sidestepping incomparable score scales.",
         "A document missing from a list simply contributes nothing from it."
       ],
-      "solutionNotes": "Verify the fused list beats both inputs on your eval set."
+      "solutionNotes": "Verify the fused list beats both inputs on your eval set.",
+      "testCases": [
+        {
+          "setup": "function rrf(lists, k = 60) {\n  const scores = new Map();\n  for (const list of lists) {\n    list.forEach((id, rank) => {\n      scores.set(id, (scores.get(id) || 0) + 1 / (k + rank + 1));\n    });\n  }\n  return [...scores.entries()].sort((a, b) => b[1] - a[1]).map(([id]) => id);\n}",
+          "run": "const bm25 = ['d1','d2','d3'];\nconst vec = ['d2','d4','d1'];\nconsole.log(JSON.stringify(rrf([bm25, vec])));",
+          "expect": "[\"d2\",\"d1\",\"d4\",\"d3\"]"
+        }
+      ]
     },
     {
       "id": "embed-and-search",
@@ -111,7 +190,14 @@
         "Normalize vectors before cosine.",
         "Use the same model for corpus and query."
       ],
-      "solutionNotes": "This is the vector leg of hybrid search."
+      "solutionNotes": "This is the vector leg of hybrid search.",
+      "testCases": [
+        {
+          "setup": "function cosine(a, b) {\n  const dot = a.reduce((s, x, i) => s + x * b[i], 0);\n  const na = Math.sqrt(a.reduce((s, x) => s + x * x, 0));\n  const nb = Math.sqrt(b.reduce((s, x) => s + x * x, 0));\n  return dot / (na * nb);\n}\nfunction embedSearch(corpus, query, k) {\n  const scored = corpus.map(doc => ({ id: doc.id, s: cosine(doc.vec, query) }));\n  scored.sort((a, b) => b.s - a.s);\n  return scored.slice(0, k).map(x => x.id);\n}",
+          "run": "const corpus = [{ id: 'a', vec: [1, 0] }, { id: 'b', vec: [0.9, 0.1] }, { id: 'c', vec: [0, 1] }];\nconsole.log(JSON.stringify(embedSearch(corpus, [1, 0], 2)));",
+          "expect": "[\"a\",\"b\"]"
+        }
+      ]
     },
     {
       "id": "implement-similarity-metrics",
@@ -125,7 +211,14 @@
         "Cosine = dot / (‖a‖·‖b‖).",
         "On unit vectors L2² = 2 − 2·cosine."
       ],
-      "solutionNotes": "The metric must match what the embedding model was trained for."
+      "solutionNotes": "The metric must match what the embedding model was trained for.",
+      "testCases": [
+        {
+          "setup": "function dot(a, b) { return a.reduce((s, x, i) => s + x * b[i], 0); }\nfunction l2(a, b) { return Math.sqrt(a.reduce((s, x, i) => s + (x - b[i]) ** 2, 0)); }\nfunction cosine(a, b) {\n  const d = dot(a, b);\n  const na = Math.sqrt(dot(a, a));\n  const nb = Math.sqrt(dot(b, b));\n  return d / (na * nb);\n}\nfunction norm(a) { const n = Math.sqrt(dot(a, a)); return a.map(x => x / n); }\nfunction sameRanking(a, b, c) {\n  const pairs = [[0, 1], [0, 2], [1, 2]];\n  return pairs.every(([i, j]) => (a[i] > a[j]) === (b[i] > b[j]) && (b[i] > b[j]) === (c[i] > c[j]));\n}",
+          "run": "const u = [1, 2, 3], v = [2, 1, 0];\nconst nu = norm(u), nv = norm(v);\nconst scores = [cosine(u, v), dot(nu, nv), -l2(nu, nv)];\nconsole.log(sameRanking(scores, scores, scores));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "implement-topk-heap",
@@ -139,7 +232,14 @@
         "Keep a min-heap of size k; the root is the weakest kept item.",
         "Replace the root when a better score arrives."
       ],
-      "solutionNotes": "This selection pattern is the core of every nearest-neighbour search."
+      "solutionNotes": "This selection pattern is the core of every nearest-neighbour search.",
+      "testCases": [
+        {
+          "setup": "function topK(stream, k) {\n  const heap = [];\n  function push(x) {\n    heap.push(x);\n    heap.sort((a, b) => a.score - b.score);\n    if (heap.length > k) heap.shift();\n  }\n  stream.forEach(push);\n  return heap.sort((a, b) => b.score - a.score).map(x => x.id);\n}",
+          "run": "const stream = [{id:'a',score:1},{id:'b',score:5},{id:'c',score:3},{id:'d',score:4},{id:'e',score:2}];\nconsole.log(JSON.stringify(topK(stream, 3)));",
+          "expect": "[\"b\",\"d\",\"c\"]"
+        }
+      ]
     },
     {
       "id": "build-brute-force-index",
@@ -153,7 +253,14 @@
         "Batch the scan as a matrix multiply.",
         "This is your recall=1.0 baseline."
       ],
-      "solutionNotes": "Every ANN index is measured against this for recall."
+      "solutionNotes": "Every ANN index is measured against this for recall.",
+      "testCases": [
+        {
+          "setup": "function bruteForceTopK(vectors, query, k) {\n  const scored = vectors.map((v, id) => {\n    const dot = v.reduce((s, x, i) => s + x * query[i], 0);\n    return { id, score: dot };\n  });\n  scored.sort((a, b) => b.score - a.score);\n  return scored.slice(0, k).map(x => x.id);\n}",
+          "run": "const vecs = [[1,0],[0.9,0.1],[0,1]];\nconsole.log(JSON.stringify(bruteForceTopK(vecs, [1,0], 2)));",
+          "expect": "[0,1]"
+        }
+      ]
     },
     {
       "id": "explain-hnsw-layers",
@@ -167,7 +274,14 @@
         "Upper layers = long hops; lower layers = fine search.",
         "efSearch trades recall for latency."
       ],
-      "solutionNotes": "HNSW is approximate — there is no exactness guarantee."
+      "solutionNotes": "HNSW is approximate — there is no exactness guarantee.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"layers\",\"greedyTraversal\",\"efSearch\",\"descent\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "implement-metadata-filter",
@@ -181,7 +295,14 @@
         "Post-filtering an ANN result can return fewer than k.",
         "Pre-filtering is exact but scans the filtered subset."
       ],
-      "solutionNotes": "Pre vs post filtering is a core vector DB design decision."
+      "solutionNotes": "Pre vs post filtering is a core vector DB design decision.",
+      "testCases": [
+        {
+          "setup": "function filteredTopK(items, query, field, value, k) {\n  const filtered = items.filter(x => x.meta[field] === value);\n  const scored = filtered.map(x => ({ id: x.id, s: x.vec.reduce((s, v, i) => s + v * query[i], 0) }));\n  scored.sort((a, b) => b.s - a.s);\n  return scored.slice(0, k).map(x => x.id);\n}",
+          "run": "const items = [\n  { id: 'a', vec: [1,0], meta: { cat: 'x' } },\n  { id: 'b', vec: [0.9,0.1], meta: { cat: 'y' } },\n  { id: 'c', vec: [0.8,0.2], meta: { cat: 'x' } },\n];\nconsole.log(JSON.stringify(filteredTopK(items, [1,0], 'cat', 'x', 2)));",
+          "expect": "[\"a\",\"c\"]"
+        }
+      ]
     },
     {
       "id": "build-rag-pipeline",
@@ -195,7 +316,17 @@
         "Retrieval quality is the ceiling — debug retrieval first.",
         "Keep the eval set fixed."
       ],
-      "solutionNotes": "Most RAG failures are retrieval failures, not generation failures."
+      "solutionNotes": "Most RAG failures are retrieval failures, not generation failures.",
+      "testCases": [
+        {
+          "setup": "function ragAnswer(chunks, query, budget) {\n  const scored = chunks.map(c => ({ ...c, s: c.text.includes(query) ? 1 : c.vec.reduce((s, v, i) => s + v * query[i], 0) }));\n  scored.sort((a, b) => b.s - a.s);\n  const picked = [];\n  let used = 0;\n  for (const c of scored) {\n    if (used + c.tokens <= budget) { picked.push(c.id); used += c.tokens; }\n  }\n  return { answer: picked.join('+'), sources: picked };\n}",
+          "run": "const chunks = [\n  { id: 'c1', text: 'payment API', tokens: 100, vec: [1,0] },\n  { id: 'c2', text: 'other', tokens: 200, vec: [0,1] },\n  { id: 'c3', text: 'payment docs', tokens: 150, vec: [0.9,0.1] },\n];\nconst r = ragAnswer(chunks, [1,0], 300);\nconsole.log(r.sources.length >= 2 ? 'grounded' : 'weak', r.sources[0]);",
+          "expect": [
+            "grounded",
+            "c1"
+          ]
+        }
+      ]
     },
     {
       "id": "build-chunker",
@@ -209,7 +340,17 @@
         "Overlap prevents losing boundary-spanning answers.",
         "Different document types may need different strategies."
       ],
-      "solutionNotes": "Chunk size is a retrieval-quality knob — tune it against evals."
+      "solutionNotes": "Chunk size is a retrieval-quality knob — tune it against evals.",
+      "testCases": [
+        {
+          "setup": "function chunkDoc(paragraphs, target, overlap) {\n  const chunks = [];\n  let buf = [];\n  let size = 0;\n  for (const p of paragraphs) {\n    const len = p.length;\n    if (size + len > target && buf.length) {\n      chunks.push(buf.join('\\n'));\n      const tail = buf.join(' ').slice(-overlap);\n      buf = tail ? [tail, p] : [p];\n      size = buf.join(' ').length;\n    } else {\n      buf.push(p);\n      size += len;\n    }\n  }\n  if (buf.length) chunks.push(buf.join('\\n'));\n  return chunks;\n}",
+          "run": "const paras = ['# Intro', 'Para one text.', 'Para two text.', '## Details', 'More content here.'];\nconst c = chunkDoc(paras, 30, 5);\nconsole.log(c.length >= 2 ? 'chunked' : 'fail', c[0].includes('Intro') ? 'struct' : 'flat');",
+          "expect": [
+            "chunked",
+            "struct"
+          ]
+        }
+      ]
     },
     {
       "id": "structured-extraction",
@@ -223,7 +364,17 @@
         "Use schema/JSON mode, not regex on prose.",
         "Always validate before trusting downstream."
       ],
-      "solutionNotes": "Keep schemas shallow enough for the model to fill reliably."
+      "solutionNotes": "Keep schemas shallow enough for the model to fill reliably.",
+      "testCases": [
+        {
+          "setup": "function extractInvoice(text) {\n  const schema = { vendor: 'string', amount: 'number', date: 'string' };\n  const m = text.match(/(.+) billed \\$(\\d+\\.\\d+) on (\\d{4}-\\d{2}-\\d{2})/);\n  if (!m) return { ok: false };\n  const out = { vendor: m[1].trim(), amount: parseFloat(m[2]), date: m[3] };\n  const valid = typeof out.vendor === 'string' && typeof out.amount === 'number' && out.date.length === 10;\n  return valid ? { ok: true, data: out } : { ok: false };\n}",
+          "run": "const r = extractInvoice('Acme Corp billed $42.50 on 2024-06-01');\nconsole.log(r.ok, r.data.amount);",
+          "expect": [
+            "true",
+            "42.5"
+          ]
+        }
+      ]
     },
     {
       "id": "build-tool-loop",
@@ -237,7 +388,17 @@
         "Tool descriptions must be precise.",
         "Handle failed tool calls explicitly."
       ],
-      "solutionNotes": "Add a step limit so the loop cannot run away."
+      "solutionNotes": "Add a step limit so the loop cannot run away.",
+      "testCases": [
+        {
+          "setup": "function toolLoop(task, tools, maxSteps) {\n  const log = [];\n  let state = task;\n  for (let i = 0; i < maxSteps; i++) {\n    if (state.startsWith('search:')) {\n      const q = state.slice(7);\n      state = tools.search(q);\n      log.push('search');\n    } else if (state.startsWith('calc:')) {\n      state = String(tools.calc(state.slice(5)));\n      log.push('calc');\n    } else break;\n  }\n  return { result: state, steps: log.length };\n}",
+          "run": "const tools = { search: q => 'calc:2+2', calc: expr => eval(expr) };\nconst r = toolLoop('search:query', tools, 5);\nconsole.log(r.result, r.steps);",
+          "expect": [
+            "4",
+            "2"
+          ]
+        }
+      ]
     },
     {
       "id": "build-llm-eval",
@@ -251,7 +412,14 @@
         "Cover real failure modes, not just happy paths.",
         "Validate an LLM judge against human labels."
       ],
-      "solutionNotes": "Evals are unit tests for non-deterministic systems."
+      "solutionNotes": "Evals are unit tests for non-deterministic systems.",
+      "testCases": [
+        {
+          "setup": "function gradeEval(dataset, fn) {\n  let pass = 0;\n  for (const row of dataset) {\n    const out = fn(row.input);\n    if (out === row.expect) pass++;\n  }\n  return pass / dataset.length;\n}",
+          "run": "const ds = [{ input: 'a', expect: 'A' }, { input: 'b', expect: 'B' }];\nconst fn = s => s.toUpperCase();\nconsole.log(gradeEval(ds, fn).toFixed(2));",
+          "expect": "1.00"
+        }
+      ]
     },
     {
       "id": "implement-token-bucket",
@@ -265,7 +433,18 @@
         "Compute refill lazily from elapsed time.",
         "Set Retry-After from time-to-next-token."
       ],
-      "solutionNotes": "For a cluster, the bucket state must be shared (e.g. Redis)."
+      "solutionNotes": "For a cluster, the bucket state must be shared (e.g. Redis).",
+      "testCases": [
+        {
+          "setup": "function TokenBucket(capacity, refillPerSec) {\n  let tokens = capacity;\n  let last = Date.now();\n  return {\n    allow() {\n      const now = Date.now();\n      const elapsed = (now - last) / 1000;\n      tokens = Math.min(capacity, tokens + elapsed * refillPerSec);\n      last = now;\n      if (tokens >= 1) { tokens -= 1; return { ok: true, retryAfter: 0 }; }\n      return { ok: false, retryAfter: Math.ceil((1 - tokens) / refillPerSec) };\n    },\n  };\n}",
+          "run": "const b = TokenBucket(2, 1);\nconsole.log(b.allow().ok, b.allow().ok, b.allow().ok);",
+          "expect": [
+            "true",
+            "true",
+            "false"
+          ]
+        }
+      ]
     },
     {
       "id": "implement-idempotency-key",
@@ -279,7 +458,18 @@
         "Store key → result with an expiry.",
         "Guard against two concurrent requests with the same key."
       ],
-      "solutionNotes": "Idempotency makes retries safe — pair it with retry logic."
+      "solutionNotes": "Idempotency makes retries safe — pair it with retry logic.",
+      "testCases": [
+        {
+          "setup": "function idempotentStore() {\n  const map = new Map();\n  return {\n    execute(key, fn) {\n      if (map.has(key)) return { duplicate: true, result: map.get(key) };\n      const result = fn();\n      map.set(key, result);\n      return { duplicate: false, result };\n    },\n  };\n}",
+          "run": "let calls = 0;\nconst store = idempotentStore();\nconst r1 = store.execute('k1', () => { calls++; return 42; });\nconst r2 = store.execute('k1', () => { calls++; return 99; });\nconsole.log(calls, r2.result, r2.duplicate);",
+          "expect": [
+            "1",
+            "42",
+            "true"
+          ]
+        }
+      ]
     },
     {
       "id": "implement-backoff-jitter",
@@ -293,7 +483,18 @@
         "Full jitter: delay = random(0, base·2^attempt).",
         "Jitter de-syncs many clients retrying at once."
       ],
-      "solutionNotes": "Without jitter, all clients retry in lockstep — a thundering herd."
+      "solutionNotes": "Without jitter, all clients retry in lockstep — a thundering herd.",
+      "testCases": [
+        {
+          "setup": "function backoffDelays(attempt, base, max) {\n  const cap = Math.min(base * Math.pow(2, attempt), max);\n  return Math.floor(Math.random() * cap);\n}\nfunction retryWithDlq(fn, maxAttempts, dlq) {\n  for (let i = 0; i < maxAttempts; i++) {\n    try { return fn(); } catch (e) { if (i === maxAttempts - 1) { dlq.push(e.message); throw e; } }\n  }\n}",
+          "run": "const d0 = backoffDelays(0, 100, 1000);\nconst d3 = backoffDelays(3, 100, 1000);\nconst dlq = [];\ntry { retryWithDlq(() => { throw new Error('poison'); }, 3, dlq); } catch {}\nconsole.log(d0 < 100, d3 <= 800, dlq.length);",
+          "expect": [
+            "true",
+            "true",
+            "1"
+          ]
+        }
+      ]
     },
     {
       "id": "build-memtable-sstable",
@@ -307,7 +508,17 @@
         "SSTables are immutable and sorted.",
         "A read may need to check several files newest-first."
       ],
-      "solutionNotes": "Add bloom filters so reads skip files that lack the key."
+      "solutionNotes": "Add bloom filters so reads skip files that lack the key.",
+      "testCases": [
+        {
+          "setup": "function lsm() {\n  let mem = new Map();\n  const sst = [];\n  return {\n    put(k, v) { mem.set(k, v); },\n    del(k) { mem.set(k, null); },\n    flush() { const sorted = [...mem.entries()].sort((a, b) => a[0].localeCompare(b[0])); sst.unshift(sorted); mem = new Map(); },\n    get(k) {\n      if (mem.has(k)) return mem.get(k);\n      for (const file of sst) {\n        const hit = file.find(([key]) => key === k);\n        if (hit) return hit[1];\n      }\n      return undefined;\n    },\n  };\n}",
+          "run": "const db = lsm();\ndb.put('a', 1); db.flush(); db.put('a', 2);\nconsole.log(db.get('a'), db.get('b') === undefined ? 'miss' : 'hit');",
+          "expect": [
+            "2",
+            "miss"
+          ]
+        }
+      ]
     },
     {
       "id": "build-wal",
@@ -321,7 +532,14 @@
         "fsync before you acknowledge the write.",
         "Checkpoint so the log does not grow forever."
       ],
-      "solutionNotes": "A write() syscall does not mean the data is durable — fsync does."
+      "solutionNotes": "A write() syscall does not mean the data is durable — fsync does.",
+      "testCases": [
+        {
+          "setup": "function walStore() {\n  const log = [];\n  let state = {};\n  return {\n    append(op) { log.push(op); if (op.type === 'put') state[op.key] = op.val; if (op.type === 'del') delete state[op.key]; },\n    crash() { const snap = { ...state }; state = {}; return snap; },\n    replay(snap) { state = { ...snap }; for (const op of log) { if (op.type === 'put') state[op.key] = op.val; if (op.type === 'del') delete state[op.key]; } },\n    get(k) { return state[k]; },\n  };\n}",
+          "run": "const s = walStore();\ns.append({ type: 'put', key: 'x', val: 10 });\nconst snap = s.crash();\ns.replay(snap);\nconsole.log(s.get('x'));",
+          "expect": "10"
+        }
+      ]
     },
     {
       "id": "two-sum-hashmap",
@@ -335,7 +553,14 @@
         "For each number, what value would complete the pair?",
         "Store value -> index as you scan; check for the complement before inserting."
       ],
-      "solutionNotes": "One pass, O(n) time, O(n) space. The map turns the inner scan into an O(1) lookup."
+      "solutionNotes": "One pass, O(n) time, O(n) space. The map turns the inner scan into an O(1) lookup.",
+      "testCases": [
+        {
+          "setup": "function twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const need = target - nums[i];\n    if (map.has(need)) return [map.get(need), i];\n    map.set(nums[i], i);\n  }\n  return [];\n}",
+          "run": "console.log(JSON.stringify(twoSum([2,7,11,15], 9)));",
+          "expect": "[0,1]"
+        }
+      ]
     },
     {
       "id": "valid-palindrome-two-pointers",
@@ -349,7 +574,14 @@
         "Start one pointer at each end, move inward.",
         "Skip non-alphanumeric characters without allocating a cleaned copy."
       ],
-      "solutionNotes": "Converging pointers give O(n) time and O(1) space."
+      "solutionNotes": "Converging pointers give O(n) time and O(1) space.",
+      "testCases": [
+        {
+          "setup": "function isPalindrome(s) {\n  let l = 0, r = s.length - 1;\n  const alnum = c => /[a-z0-9]/i.test(c);\n  while (l < r) {\n    while (l < r && !alnum(s[l])) l++;\n    while (l < r && !alnum(s[r])) r--;\n    if (s[l].toLowerCase() !== s[r].toLowerCase()) return false;\n    l++; r--;\n  }\n  return true;\n}",
+          "run": "console.log(isPalindrome('A man, a plan, a canal: Panama'));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "longest-substring-sliding-window",
@@ -363,7 +595,14 @@
         "Expand the right edge; on a duplicate, shrink the left edge until the window is valid again.",
         "Track the last index of each character."
       ],
-      "solutionNotes": "Each character enters and leaves the window once — O(n)."
+      "solutionNotes": "Each character enters and leaves the window once — O(n).",
+      "testCases": [
+        {
+          "setup": "function lengthOfLongestSubstring(s) {\n  const last = new Map();\n  let best = 0, l = 0;\n  for (let r = 0; r < s.length; r++) {\n    if (last.has(s[r])) l = Math.max(l, last.get(s[r]) + 1);\n    last.set(s[r], r);\n    best = Math.max(best, r - l + 1);\n  }\n  return best;\n}",
+          "run": "console.log(lengthOfLongestSubstring('abcabcbb'));",
+          "expect": "3"
+        }
+      ]
     },
     {
       "id": "search-rotated-array",
@@ -377,7 +616,14 @@
         "At each step one half is still sorted — identify which.",
         "Decide whether the target lies in the sorted half, then recurse there."
       ],
-      "solutionNotes": "Standard binary search with an extra check for which half is ordered."
+      "solutionNotes": "Standard binary search with an extra check for which half is ordered.",
+      "testCases": [
+        {
+          "setup": "function search(nums, target) {\n  let lo = 0, hi = nums.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (nums[mid] === target) return mid;\n    if (nums[lo] <= nums[mid]) {\n      if (nums[lo] <= target && target < nums[mid]) hi = mid - 1;\n      else lo = mid + 1;\n    } else {\n      if (nums[mid] < target && target <= nums[hi]) lo = mid + 1;\n      else hi = mid - 1;\n    }\n  }\n  return -1;\n}",
+          "run": "console.log(search([4,5,6,7,0,1,2], 0));",
+          "expect": "4"
+        }
+      ]
     },
     {
       "id": "level-order-traversal",
@@ -391,7 +637,14 @@
         "Levels mean BFS — use a queue.",
         "Process the queue one level at a time by capturing its size before the loop."
       ],
-      "solutionNotes": "BFS with a per-level size snapshot; O(n)."
+      "solutionNotes": "BFS with a per-level size snapshot; O(n).",
+      "testCases": [
+        {
+          "setup": "function levelOrder(root) {\n  if (!root) return [];\n  const out = [], q = [root];\n  while (q.length) {\n    const size = q.length, level = [];\n    for (let i = 0; i < size; i++) {\n      const n = q.shift();\n      level.push(n.v);\n      if (n.l) q.push(n.l);\n      if (n.r) q.push(n.r);\n    }\n    out.push(level);\n  }\n  return out;\n}",
+          "run": "const root = { v: 3, l: { v: 9 }, r: { v: 20, l: { v: 15 }, r: { v: 7 } } };\nconsole.log(JSON.stringify(levelOrder(root)));",
+          "expect": "[[3],[9,20],[15,7]]"
+        }
+      ]
     },
     {
       "id": "number-of-islands",
@@ -405,7 +658,14 @@
         "Each unvisited '1' starts a new island; flood-fill it with DFS or BFS.",
         "Mark cells visited as you go to avoid recounting."
       ],
-      "solutionNotes": "Grid-as-graph: every cell is a node, neighbours are edges. O(rows*cols)."
+      "solutionNotes": "Grid-as-graph: every cell is a node, neighbours are edges. O(rows*cols).",
+      "testCases": [
+        {
+          "setup": "function numIslands(grid) {\n  const rows = grid.length, cols = grid[0].length;\n  let count = 0;\n  function dfs(r, c) {\n    if (r < 0 || c < 0 || r >= rows || c >= cols || grid[r][c] !== '1') return;\n    grid[r][c] = '0';\n    dfs(r + 1, c); dfs(r - 1, c); dfs(r, c + 1); dfs(r, c - 1);\n  }\n  for (let r = 0; r < rows; r++)\n    for (let c = 0; c < cols; c++)\n      if (grid[r][c] === '1') { count++; dfs(r, c); }\n  return count;\n}",
+          "run": "const g = [['1','0','0'],['0','1','0'],['0','0','1']];\nconsole.log(numIslands(g));",
+          "expect": "3"
+        }
+      ]
     },
     {
       "id": "house-robber-dp",
@@ -419,7 +679,14 @@
         "Define dp[i] = best sum using houses 0..i.",
         "dp[i] = max(dp[i-1], dp[i-2] + value[i])."
       ],
-      "solutionNotes": "Classic 1D DP; can be reduced to two rolling variables, O(1) space."
+      "solutionNotes": "Classic 1D DP; can be reduced to two rolling variables, O(1) space.",
+      "testCases": [
+        {
+          "setup": "function rob(nums) {\n  let prev2 = 0, prev1 = 0;\n  for (const n of nums) {\n    const cur = Math.max(prev1, prev2 + n);\n    prev2 = prev1;\n    prev1 = cur;\n  }\n  return prev1;\n}",
+          "run": "console.log(rob([2,7,9,3,1]));",
+          "expect": "12"
+        }
+      ]
     },
     {
       "id": "kth-largest-heap",
@@ -433,7 +700,14 @@
         "Keep a min-heap of size k; the root is the answer.",
         "If the heap exceeds k, pop the smallest."
       ],
-      "solutionNotes": "O(n log k) time, O(k) space — beats sorting when k is small."
+      "solutionNotes": "O(n log k) time, O(k) space — beats sorting when k is small.",
+      "testCases": [
+        {
+          "setup": "function findKthLargest(nums, k) {\n  const heap = [];\n  function push(x) {\n    heap.push(x);\n    heap.sort((a, b) => a - b);\n    if (heap.length > k) heap.shift();\n  }\n  nums.forEach(push);\n  return heap[0];\n}",
+          "run": "console.log(findKthLargest([3,2,1,5,6,4], 2));",
+          "expect": "5"
+        }
+      ]
     },
     {
       "id": "design-parking-lot",
@@ -447,7 +721,14 @@
         "Composition over inheritance for vehicle ↔ spot fit.",
         "Where does pricing live — Spot, Level, or Lot?"
       ],
-      "solutionNotes": "Avoid one mega-class. Spot allocation is the real decision point."
+      "solutionNotes": "Avoid one mega-class. Spot allocation is the real decision point.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"components\",\"parkFlow\",\"spotAllocation\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-vending-machine",
@@ -461,7 +742,14 @@
         "What does pressing a button do in each state?",
         "Where does coin-return live?"
       ],
-      "solutionNotes": "States hold behavior; transitions hold guards. Keep illegal transitions impossible."
+      "solutionNotes": "States hold behavior; transitions hold guards. Keep illegal transitions impossible.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"states\",\"transitions\",\"refundBranch\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-pricing-strategies",
@@ -475,7 +763,14 @@
         "Inject the strategy; do not let cart code know its type.",
         "Compose strategies for stacked discounts."
       ],
-      "solutionNotes": "Strategy pattern shines when an algorithm varies independently of its caller."
+      "solutionNotes": "Strategy pattern shines when an algorithm varies independently of its caller.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"pricingInterface\",\"strategies\",\"runtimeSelection\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-pub-sub-bus",
@@ -489,7 +784,14 @@
         "What happens if one subscriber throws?",
         "Keep the bus simple — no ordering guarantee unless asked."
       ],
-      "solutionNotes": "Observer decouples emitter and listener; bus is the registry between them."
+      "solutionNotes": "Observer decouples emitter and listener; bus is the registry between them.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"busInterface\",\"subscriberRegistry\",\"errorIsolation\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-notification-factory",
@@ -503,7 +805,14 @@
         "Map of type → constructor beats a switch.",
         "Keep the factory dumb; let notifiers carry their own config."
       ],
-      "solutionNotes": "Factories pay off when you add the 4th type without touching callers."
+      "solutionNotes": "Factories pay off when you add the 4th type without touching callers.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"factory\",\"notifiers\",\"registration\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-coffee-decorator",
@@ -517,7 +826,14 @@
         "Each decorator wraps a Beverage and is itself a Beverage.",
         "Order of wrapping matters for description, not cost."
       ],
-      "solutionNotes": "Decorator > deep inheritance trees when feature combinations explode."
+      "solutionNotes": "Decorator > deep inheritance trees when feature combinations explode.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"baseBeverage\",\"decorators\",\"sampleOrder\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-bank-account-locking",
@@ -531,7 +847,14 @@
         "Always acquire locks in a globally consistent order (e.g. by account id).",
         "Use a single transaction; rollback on failure."
       ],
-      "solutionNotes": "Concurrency bugs are not about more locks — they are about a discipline for which locks and in what order."
+      "solutionNotes": "Concurrency bugs are not about more locks — they are about a discipline for which locks and in what order.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"lockingOrder\",\"transferFlow\",\"deadlockTest\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-undo-redo",
@@ -545,7 +868,14 @@
         "New action after undo should clear the redo stack.",
         "Group small typing actions into one Command for usability."
       ],
-      "solutionNotes": "Each command must store enough state to perfectly invert itself."
+      "solutionNotes": "Each command must store enough state to perfectly invert itself.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"commandInterface\",\"concreteCommands\",\"stackInvariants\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-hotel-booking",
@@ -559,7 +889,14 @@
         "A hold is itself a write — model it.",
         "Expire holds aggressively (5-10 min)."
       ],
-      "solutionNotes": "Overbooking is a business decision, not just a race condition."
+      "solutionNotes": "Overbooking is a business decision, not just a race condition.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"inventoryModel\",\"holdConfirmFlow\",\"concurrencyStrategy\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-load-balancer",
@@ -573,7 +910,14 @@
         "Sticky sessions cost you flexibility — only enable when needed.",
         "Health checks should mimic real traffic, not just /ping."
       ],
-      "solutionNotes": "The hard part is not picking an algorithm — it is failing safely when a backend goes bad."
+      "solutionNotes": "The hard part is not picking an algorithm — it is failing safely when a backend goes bad.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"routingAlgorithm\",\"healthChecks\",\"gracefulDrain\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-rate-limiter",
@@ -587,7 +931,14 @@
         "Per-instance counters undercount; central counters add latency.",
         "Approximation (e.g. sketch) can be acceptable."
       ],
-      "solutionNotes": "Pick the cheapest approximation that does not violate the contract you advertise."
+      "solutionNotes": "Pick the cheapest approximation that does not violate the contract you advertise.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"algorithmChoice\",\"counterStorage\",\"outageHandling\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-chat-system",
@@ -601,7 +952,14 @@
         "WebSocket connections are stateful — that constrains your load balancer.",
         "Fan-out on write vs on read changes everything downstream."
       ],
-      "solutionNotes": "Hot channels (>10k members) often need a different fan-out path than the long tail."
+      "solutionNotes": "Hot channels (>10k members) often need a different fan-out path than the long tail.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"connectionLayer\",\"messageStorage\",\"fanoutStrategy\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-news-feed",
@@ -615,7 +973,14 @@
         "Celebrities (>1M followers) break pure fan-out-on-write.",
         "A feed cache that is 80% pre-computed is usually enough."
       ],
-      "solutionNotes": "Hybrid is the norm: precompute for normal users, pull for celebrities at read time."
+      "solutionNotes": "Hybrid is the norm: precompute for normal users, pull for celebrities at read time.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"fanoutStrategy\",\"storageLayout\",\"celebrityHandling\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-video-streaming",
@@ -629,7 +994,14 @@
         "Origin servers should never serve video to end users.",
         "Pre-warm the CDN for predictable launches."
       ],
-      "solutionNotes": "The 99th-percentile player is on bad wifi — design for that, not the demo."
+      "solutionNotes": "The 99th-percentile player is on bad wifi — design for that, not the demo.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"cdnFlow\",\"manifestProtocol\",\"bitrateAdaptation\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-ride-sharing",
@@ -643,7 +1015,14 @@
         "Nearest is rarely best — factor ETA, not just distance.",
         "Driver state updates are write-heavy; pick a store that handles that."
       ],
-      "solutionNotes": "Match quality (not match speed) is the business metric — optimize for it explicitly."
+      "solutionNotes": "Match quality (not match speed) is the business metric — optimize for it explicitly.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"geoIndex\",\"dispatchLoop\",\"surgePricing\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-collaborative-editor",
@@ -657,7 +1036,14 @@
         "CRDTs are easier to reason about; OT is more compact on the wire.",
         "Cursor presence is a separate channel from edits."
       ],
-      "solutionNotes": "Pick the model that matches your latency budget — CRDTs tolerate offline, OT does not."
+      "solutionNotes": "Pick the model that matches your latency budget — CRDTs tolerate offline, OT does not.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"conflictModel\",\"syncProtocol\",\"mergeExample\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-search-platform",
@@ -671,7 +1057,14 @@
         "Recall first, precision second — bad recall is unrecoverable downstream.",
         "Two-stage ranking: cheap recall, expensive rerank."
       ],
-      "solutionNotes": "Search quality lives in the analyzer + the ranker — not the index data structure."
+      "solutionNotes": "Search quality lives in the analyzer + the ranker — not the index data structure.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"ingestionPipeline\",\"indexUpdate\",\"learnedRanker\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-rag-system",
@@ -685,7 +1078,14 @@
         "Chunking dominates retrieval quality more than embeddings do.",
         "Eval the retriever and the generator separately."
       ],
-      "solutionNotes": "Most RAG bugs are upstream of the LLM — fix retrieval before tuning prompts."
+      "solutionNotes": "Most RAG bugs are upstream of the LLM — fix retrieval before tuning prompts.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"ingestionPipeline\",\"queryPipeline\",\"qualityRegressions\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-consistent-hashing",
@@ -699,7 +1099,14 @@
         "Without vnodes the distribution is lumpy.",
         "Hash the node id with k different seeds for vnodes."
       ],
-      "solutionNotes": "The whole point is that only ~1/N of keys move on a node change."
+      "solutionNotes": "The whole point is that only ~1/N of keys move on a node change.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"ringDiagram\",\"keyRouting\",\"nodeAddRemove\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-leader-election",
@@ -713,7 +1120,14 @@
         "Randomized election timeouts break split-vote loops.",
         "Majority quorum, not consensus, is what guarantees safety."
       ],
-      "solutionNotes": "Safety (no two leaders) is non-negotiable; liveness can briefly stall during partitions."
+      "solutionNotes": "Safety (no two leaders) is non-negotiable; liveness can briefly stall during partitions.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"electionCycle\",\"splitVote\",\"partitionBehavior\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "design-online-game-server",
@@ -727,7 +1141,14 @@
         "Clients predict; the server reconciles.",
         "Never trust client-reported timestamps."
       ],
-      "solutionNotes": "The server is the source of truth; clients exist to make latency tolerable."
+      "solutionNotes": "The server is the source of truth; clients exist to make latency tolerable.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"tickLoop\",\"authoritativeState\",\"cheatMitigation\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-leadership",
@@ -741,7 +1162,14 @@
         "Leadership without authority = persuasion + alignment, not org charts.",
         "Cut adjectives; keep verbs and numbers."
       ],
-      "solutionNotes": "The Action section is where you spend 60% of the words."
+      "solutionNotes": "The Action section is where you spend 60% of the words.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-conflict",
@@ -755,7 +1183,14 @@
         "Steelman the counter-position.",
         "End with what you would do differently."
       ],
-      "solutionNotes": "Hiring bars reject the \"I was right, they were wrong\" arc."
+      "solutionNotes": "Hiring bars reject the \"I was right, they were wrong\" arc.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-tough-decision",
@@ -769,7 +1204,14 @@
         "Frame it as a bet, not a certainty.",
         "Reversibility matters — was this a one-way door?"
       ],
-      "solutionNotes": "Decision quality > outcome quality. Judge the call by what you knew at the time."
+      "solutionNotes": "Decision quality > outcome quality. Judge the call by what you knew at the time.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-cross-team",
@@ -783,7 +1225,14 @@
         "Make the other team’s win visible up front.",
         "Async > sync for written alignment."
       ],
-      "solutionNotes": "Most cross-team friction is unclear ownership — name it explicitly."
+      "solutionNotes": "Most cross-team friction is unclear ownership — name it explicitly.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-failure",
@@ -797,7 +1246,14 @@
         "\"It taught me a lot\" is not a lesson.",
         "Pick a failure you actually moved past, not a fresh wound."
       ],
-      "solutionNotes": "A safe failure (e.g. \"I worked too hard\") signals you have not learned anything."
+      "solutionNotes": "A safe failure (e.g. \"I worked too hard\") signals you have not learned anything.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-communication",
@@ -811,7 +1267,14 @@
         "One core analogy beats five small ones.",
         "Audit: what does the stakeholder need to decide?"
       ],
-      "solutionNotes": "Good communication makes the listener’s next decision easier, not yours."
+      "solutionNotes": "Good communication makes the listener’s next decision easier, not yours.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-prioritization",
@@ -825,7 +1288,14 @@
         "Saying no to a good thing is the actual skill.",
         "A written cut list is a forcing function for buy-in."
       ],
-      "solutionNotes": "Prioritization stories should make the listener uncomfortable about what got dropped."
+      "solutionNotes": "Prioritization stories should make the listener uncomfortable about what got dropped.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-innovation",
@@ -839,7 +1309,14 @@
         "Anchor on a constraint nobody else was taking seriously.",
         "Show your cost-benefit, not just your conclusion."
       ],
-      "solutionNotes": "Innovation theater is when the \"creative\" answer ignores known tradeoffs."
+      "solutionNotes": "Innovation theater is when the \"creative\" answer ignores known tradeoffs.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-customer-feedback",
@@ -853,7 +1330,14 @@
         "n=1 is a hypothesis, not a conclusion.",
         "Talk to the customer, then look at the data."
       ],
-      "solutionNotes": "Customer obsession is not saying yes — it is taking their problem seriously, even when you say no."
+      "solutionNotes": "Customer obsession is not saying yes — it is taking their problem seriously, even when you say no.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "star-ownership",
@@ -867,7 +1351,14 @@
         "Ownership is about closing the loop, not heroics.",
         "Escalation is part of ownership, not a failure of it."
       ],
-      "solutionNotes": "The opposite of ownership is \"that is not my team\" — name where you could have said that and did not."
+      "solutionNotes": "The opposite of ownership is \"that is not my team\" — name where you could have said that and did not.",
+      "testCases": [
+        {
+          "setup": "function validateStar(s) {\n  const keys = ['situation','task','action','result'];\n  if (!s || typeof s !== 'object') return false;\n  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;\n  return /\\d/.test(String(s.result));\n}",
+          "run": "console.log(validateStar(starStory()));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "draft-positioning-statement",
@@ -881,7 +1372,14 @@
         "Specific target > broad target.",
         "The differentiator must be testable."
       ],
-      "solutionNotes": "A statement that fits 3 competitors is not positioning."
+      "solutionNotes": "A statement that fits 3 competitors is not positioning.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"goodStatement\",\"worseStatement\",\"critique\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "critique-landing-page",
@@ -895,7 +1393,14 @@
         "Read the headline; close your eyes; can you say what the product does?",
         "Cut adjectives. Replace with nouns and verbs."
       ],
-      "solutionNotes": "A landing page does one job: get the right visitor to take one action."
+      "solutionNotes": "A landing page does one job: get the right visitor to take one action.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"scoringRubric\",\"heroRewrite\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "audit-seo-onpage",
@@ -909,7 +1414,14 @@
         "Title tag is the single biggest on-page lever.",
         "LCP is usually one bad image away from green."
       ],
-      "solutionNotes": "On-page SEO is hygiene; content + links are the actual fight."
+      "solutionNotes": "On-page SEO is hygiene; content + links are the actual fight.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"auditTable\",\"prioritizedFixes\"]));",
+          "expect": "true"
+        }
+      ]
     },
     {
       "id": "define-north-star-metric",
@@ -923,7 +1435,2135 @@
         "North-star is not revenue. It is the value the user gets.",
         "A good guardrail is something you would never trade away."
       ],
-      "solutionNotes": "The test: can a PM make a tradeoff call from this tree alone?"
+      "solutionNotes": "The test: can a PM make a tradeoff call from this tree alone?",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"northStar\",\"inputMetrics\",\"guardrailMetric\"]));",
+          "expect": "true"
+        }
+      ]
+    },
+    {
+      "id": "compute-dot-product",
+      "title": "Compute a dot product and angle",
+      "conceptId": "vectors-and-spaces",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Given u = [3, 4] and v = [1, 2], compute u·v, ||u||, ||v||, and cos θ between them. State whether the vectors are orthogonal.",
+      "expectedOutput": "u·v = 11, ||u|| = 5, ||v|| = √5, cos θ = 11/(5√5) ≈ 0.98, not orthogonal.",
+      "hints": [
+        "Dot product is sum of element-wise products.",
+        "Orthogonal ⟺ dot product is zero."
+      ],
+      "solutionNotes": "The angle formula cos θ = (u·v)/(||u|| ||v||) is the bridge between algebra and geometry.",
+      "testCases": [
+        {
+          "setup": "function dot(a, b) { return a.reduce((s, x, i) => s + x * b[i], 0); }\nfunction norm(a) { return Math.sqrt(dot(a, a)); }\nfunction cosAngle(a, b) { return dot(a, b) / (norm(a) * norm(b)); }",
+          "run": "const u = [3,4], v = [1,2];\nconsole.log(dot(u,v), norm(u).toFixed(0), cosAngle(u,v).toFixed(2), dot(u,v) === 0 ? 'orth' : 'not');",
+          "expect": [
+            "11",
+            "5",
+            "0.98",
+            "not"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multiply-2x2-matrix",
+      "title": "Multiply 2×2 matrices by hand",
+      "conceptId": "matrices-and-transformations",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Compute AB where A = [[1, 2], [0, 1]] and B = [[1, 0], [3, 1]]. Then apply A to vector x = [1, 1] and B to the result — does AB·x equal A·(B·x)?",
+      "expectedOutput": "AB = [[7, 2], [3, 1]]; AB·x = [9, 4] = A·(B·x). Matrix multiplication is composition.",
+      "hints": [
+        "Row × column for each entry.",
+        "Order matters: AB ≠ BA in general."
+      ],
+      "solutionNotes": "The columns of AB are A applied to the columns of B — that's the transformation picture.",
+      "testCases": [
+        {
+          "setup": "function matmul(A, B) {\n  const m = A.length, n = B[0].length, k = B.length;\n  const C = Array.from({ length: m }, () => Array(n).fill(0));\n  for (let i = 0; i < m; i++)\n    for (let j = 0; j < n; j++)\n      for (let t = 0; t < k; t++) C[i][j] += A[i][t] * B[t][j];\n  return C;\n}\nfunction apply(M, x) { return [M[0][0]*x[0]+M[0][1]*x[1], M[1][0]*x[0]+M[1][1]*x[1]]; }",
+          "run": "const A = [[1,2],[0,1]], B = [[1,0],[3,1]], x = [1,1];\nconst AB = matmul(A,B);\nconsole.log(JSON.stringify(AB), JSON.stringify(apply(AB,x)));",
+          "expect": [
+            "[[7,2],[3,1]]",
+            "[9,4]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interpret-eigenvalue",
+      "title": "Interpret an eigenvalue",
+      "conceptId": "eigenvalues-decomposition",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Matrix A = [[2, 1], [1, 2]] has eigenvector v = [1, 1] with eigenvalue λ = 3. Explain in one sentence what Av looks like geometrically. What is the other eigenvalue of this symmetric matrix?",
+      "expectedOutput": "Av = 3v — v is only stretched by 3, not rotated. The other eigenvalue is 1 (eigenvector [1, -1]).",
+      "hints": [
+        "Eigenvectors are fixed directions under the map.",
+        "Trace = sum of eigenvalues for 2×2."
+      ],
+      "solutionNotes": "Symmetric matrices have real eigenvalues and orthogonal eigenvectors — PCA relies on this.",
+      "testCases": [
+        {
+          "setup": "function applyA(x) { return [2*x[0]+x[1], x[0]+2*x[1]]; }\nfunction eigenvalue2x2Symmetric(a, b, c) { return [(a+c+Math.sqrt((a-c)**2+4*b*b))/2, (a+c-Math.sqrt((a-c)**2+4*b*b))/2]; }",
+          "run": "const v = [1,1];\nconst Av = applyA(v);\nconst ev = eigenvalue2x2Symmetric(2,1,2);\nconsole.log(Av[0]/v[0] === 3 ? 'stretch' : 'rotate', ev[1]);",
+          "expect": [
+            "stretch",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditional-probability-bayes",
+      "title": "Apply Bayes' rule",
+      "conceptId": "probability-fundamentals",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "A test has 99% sensitivity and 95% specificity. Disease prevalence is 1%. A patient tests positive. Using Bayes' rule, compute P(disease | positive) to 2 decimal places.",
+      "expectedOutput": "≈ 0.17 (17%). Most positives are false alarms when the base rate is low.",
+      "hints": [
+        "P(D|+) = P(+|D)·P(D) / P(+).",
+        "P(+) = P(+|D)·P(D) + P(+|¬D)·P(¬D)."
+      ],
+      "solutionNotes": "Low base rates make naive test interpretation dangerous — always condition on prevalence.",
+      "testCases": [
+        {
+          "setup": "function bayes(sens, spec, prev) {\n  const pPos = sens * prev + (1 - spec) * (1 - prev);\n  return (sens * prev) / pPos;\n}",
+          "run": "console.log(bayes(0.99, 0.95, 0.01).toFixed(2));",
+          "expect": "0.17"
+        }
+      ]
+    },
+    {
+      "id": "compute-expectation-variance",
+      "title": "Expectation and variance of a discrete RV",
+      "conceptId": "random-variables",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "X takes values {0, 1, 2} with probabilities {0.2, 0.5, 0.3}. Compute E[X] and Var(X) = E[X²] − (E[X])².",
+      "expectedOutput": "E[X] = 1.1, E[X²] = 1.5, Var(X) = 0.29.",
+      "hints": [
+        "E[X] = Σ x·P(X=x).",
+        "Compute E[X²] before subtracting the squared mean."
+      ],
+      "solutionNotes": "Variance measures spread around the mean, not around zero.",
+      "testCases": [
+        {
+          "setup": "function evVar(xs, ps) {\n  const ex = xs.reduce((s, x, i) => s + x * ps[i], 0);\n  const ex2 = xs.reduce((s, x, i) => s + x * x * ps[i], 0);\n  return { ex, var: ex2 - ex * ex };\n}",
+          "run": "const r = evVar([0,1,2], [0.2,0.5,0.3]);\nconsole.log(r.ex.toFixed(1), r.var.toFixed(2));",
+          "expect": [
+            "1.1",
+            "0.49"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summarize-dataset-stats",
+      "title": "Summarize a small dataset",
+      "conceptId": "descriptive-statistics",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Latency samples (ms): 12, 14, 15, 16, 200. Compute mean, median, and sample standard deviation. Which summary is misleading for SLA reporting and why?",
+      "expectedOutput": "Mean ≈ 51.4 (pulled by outlier), median = 15 (robust), std dev is large. Report median + p95 for SLAs, not mean.",
+      "hints": [
+        "Sort for median.",
+        "One outlier dominates the mean."
+      ],
+      "solutionNotes": "Heavy tails are normal in systems data — mean is often the wrong headline number.",
+      "testCases": [
+        {
+          "setup": "function stats(xs) {\n  const sorted = [...xs].sort((a, b) => a - b);\n  const mean = xs.reduce((a, b) => a + b, 0) / xs.length;\n  const mid = Math.floor(sorted.length / 2);\n  const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;\n  const sd = Math.sqrt(xs.reduce((s, x) => s + (x - mean) ** 2, 0) / (xs.length - 1));\n  return { mean, median, sd };\n}",
+          "run": "const s = stats([12,14,15,16,200]);\nconsole.log(s.median, s.mean > 40 ? 'mean-misleading' : 'ok');",
+          "expect": [
+            "15",
+            "mean-misleading"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construct-confidence-interval",
+      "title": "Construct a 95% confidence interval",
+      "conceptId": "estimation-confidence",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "n = 100 coin flips, 55 heads. Assuming a normal approximation, construct a 95% CI for the true heads probability p. (Use z = 1.96.)",
+      "expectedOutput": "p̂ = 0.55, SE ≈ 0.0498, CI ≈ [0.452, 0.648].",
+      "hints": [
+        "SE = √(p̂(1−p̂)/n).",
+        "CI = p̂ ± z·SE."
+      ],
+      "solutionNotes": "The interval width shrinks as 1/√n — quadruple the data to halve the error bar.",
+      "testCases": [
+        {
+          "setup": "function ci95(phat,n,z=1.96){const se=Math.sqrt(phat*(1-phat)/n);return [phat-z*se,phat+z*se].map(x=>+x.toFixed(3));}",
+          "run": "console.log(JSON.stringify(ci95(0.55,100)));",
+          "expect": [
+            "[0.452,0.648]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interpret-p-value",
+      "title": "Interpret a p-value correctly",
+      "conceptId": "hypothesis-testing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "An A/B test reports p = 0.03 for H₀: 'no difference in conversion'. The lift is 0.1% absolute (0.5% → 0.6%). Write two sentences: one correct interpretation of the p-value, one reason you might still not ship.",
+      "expectedOutput": "Correct: if there were truly no effect, we'd see data this extreme ~3% of the time. Might not ship: effect is tiny (practical insignificance) or the test was one of many without correction.",
+      "hints": [
+        "p-value is about the null, not P(null is true).",
+        "Statistical ≠ practical significance."
+      ],
+      "solutionNotes": "Always pair p-values with effect size and business context.",
+      "testCases": [
+        {
+          "setup": "function shouldShip(p,alpha,absLift,minLift){return p<alpha && absLift>=minLift;}",
+          "run": "console.log(shouldShip(0.03,0.05,0.001,0.005), shouldShip(0.03,0.05,0.01,0.005));",
+          "expect": [
+            "false",
+            "true"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fit-simple-regression",
+      "title": "Fit a simple linear regression",
+      "conceptId": "regression-basics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Points: (1, 2), (2, 3), (3, 5). Fit y = a + bx by least squares. Compute a, b, and the predicted ŷ at x = 4.",
+      "expectedOutput": "b ≈ 1.5, a ≈ 0.17, ŷ(4) ≈ 6.17. (Exact: b = 3/2, a = 1/6.)",
+      "hints": [
+        "b = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)².",
+        "a = ȳ − b·x̄."
+      ],
+      "solutionNotes": "With only 3 points the fit is exact in spirit; with noise, residuals matter.",
+      "testCases": [
+        {
+          "setup": "function ols(points) {\n  const n = points.length;\n  const mx = points.reduce((s, p) => s + p[0], 0) / n;\n  const my = points.reduce((s, p) => s + p[1], 0) / n;\n  let num = 0, den = 0;\n  for (const [x, y] of points) { num += (x - mx) * (y - my); den += (x - mx) ** 2; }\n  const b = num / den;\n  const a = my - b * mx;\n  return { a, b, predict: x => a + b * x };\n}",
+          "run": "const m = ols([[1,2],[2,3],[3,5]]);\nconsole.log(m.b.toFixed(1), m.predict(4).toFixed(2));",
+          "expect": [
+            "1.5",
+            "6.33"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compute-gradient-2d",
+      "title": "Compute a 2D gradient",
+      "conceptId": "derivatives-and-gradients",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "f(x, y) = x² + 3xy + y². Compute ∇f at (1, 2). In which direction should you step to decrease f fastest, and what is the directional derivative in that direction?",
+      "expectedOutput": "∇f = [2x+3y, 3x+2y] → [8, 7] at (1,2). Steepest descent: −∇f/||∇f||. Directional derivative along −∇f/||∇f|| is −||∇f|| = −√113.",
+      "hints": [
+        "Partial w.r.t. x treats y as constant.",
+        "Steepest descent is opposite the gradient."
+      ],
+      "solutionNotes": "This is exactly what gradient descent does — step opposite ∇f with a learning rate.",
+      "testCases": [
+        {
+          "setup": "function grad(x,y){return [2*x+3*y,3*x+2*y];} function norm(v){return Math.sqrt(v[0]*v[0]+v[1]*v[1]);}",
+          "run": "const g=grad(1,2);console.log(g[0],g[1],norm(g).toFixed(3));",
+          "expect": [
+            "8",
+            "7",
+            "10.630"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "independence-inclusion-exclusion",
+      "title": "Independence and inclusion-exclusion",
+      "conceptId": "probability-fundamentals",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "P(A)=0.4, P(B)=0.5, P(A∩B)=0.2. Are A and B independent? Compute P(A∪B). If they were mutually exclusive, what would P(A∪B) be instead?",
+      "expectedOutput": "P(A)P(B)=0.2=P(A∩B) → independent. P(A∪B)=0.4+0.5−0.2=0.7. Mutually exclusive would give 0.9 — conflating the two is a common bug.",
+      "hints": [
+        "Independent ⟺ P(A∩B)=P(A)P(B).",
+        "Union: P(A)+P(B)−P(A∩B)."
+      ],
+      "solutionNotes": "Mutually exclusive implies P(A∩B)=0, which is much stronger than independence.",
+      "testCases": [
+        {
+          "setup": "function indep(pA, pB, pAB) { return Math.abs(pA * pB - pAB) < 1e-9; }\nfunction union(pA, pB, pAB) { return pA + pB - pAB; }",
+          "run": "console.log(indep(0.4,0.5,0.2), union(0.4,0.5,0.2).toFixed(1), union(0.4,0.5,0).toFixed(1));",
+          "expect": [
+            "true",
+            "0.7",
+            "0.9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "normal-tail-probability",
+      "title": "Normal tail probability",
+      "conceptId": "random-variables",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Latency is Normal(μ=100ms, σ=20ms). Approximate P(X > 140ms) using the z-score and a standard normal table (Φ(2) ≈ 0.977). What fraction is within 1σ of the mean?",
+      "expectedOutput": "z=(140−100)/20=2; P(X>140)≈1−0.977=0.023. Within 1σ: ≈68%.",
+      "hints": [
+        "z = (x−μ)/σ.",
+        "Tail probability is 1−Φ(z) for upper tail."
+      ],
+      "solutionNotes": "The 68–95–99.7 rule is the CLT's everyday face.",
+      "testCases": [
+        {
+          "setup": "function zScore(x, mu, sigma) { return (x - mu) / sigma; }\nfunction upperTail(z) { return 1 - 0.5 * (1 + erf(z / Math.SQRT2)); }\nfunction erf(x) {\n  const sign = x < 0 ? -1 : 1;\n  x = Math.abs(x);\n  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;\n  const t = 1/(1+p*x);\n  const y = 1-((((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x);\n  return sign*y;\n}",
+          "run": "const z = zScore(140, 100, 20);\nconsole.log(z.toFixed(0), upperTail(z).toFixed(3), '0.68');",
+          "expect": [
+            "2",
+            "0.023",
+            "0.68"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "correlation-pitfalls",
+      "title": "Correlation pitfalls",
+      "conceptId": "descriptive-statistics",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Dataset: ice cream sales and drowning deaths are strongly correlated (r≈0.9). (a) Does ice cream cause drowning? (b) Name the lurking variable. (c) When would correlation still be useful for engineers?",
+      "expectedOutput": "(a) No — correlation ≠ causation. (b) Summer/temperature drives both. (c) Feature screening, anomaly pairs, quick linear sanity checks — never causal claims.",
+      "hints": [
+        "Look for a confounder that affects both series.",
+        "Correlation measures linear co-movement only."
+      ],
+      "solutionNotes": "Always ask what third variable could explain both.",
+      "testCases": [
+        {
+          "setup": "function explainsCausation(r) { return false; }\nfunction lurkingVariable() { return 'temperature'; }\nfunction usefulForEngineers(r) { return Math.abs(r) > 0.5 ? 'screening' : 'weak'; }",
+          "run": "console.log(explainsCausation(0.9), lurkingVariable(), usefulForEngineers(0.9));",
+          "expect": [
+            "false",
+            "temperature",
+            "screening"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "type-errors-power",
+      "title": "Type I vs Type II errors",
+      "conceptId": "hypothesis-testing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "A security patch test: H₀ = 'no change in error rate'. You fail to reject H₀, but errors actually rose 0.5%. (a) Which error type? (b) If α=0.05 and power=0.8, what does each number mean in one sentence?",
+      "expectedOutput": "(a) Type II error (false negative) — missed a real regression. α=5% false-alarm rate if H₀ true; power=80% chance to detect a real effect of the assumed size.",
+      "hints": [
+        "Type I: reject true H₀. Type II: fail to reject false H₀.",
+        "Power = 1 − P(Type II) for a specific alternative."
+      ],
+      "solutionNotes": "Low power + 'not significant' ≠ 'no effect'.",
+      "testCases": [
+        {
+          "setup": "function errorType(h0True,rejected){if(h0True&&rejected)return \"I\";if(!h0True&&!rejected)return \"II\";return \"ok\";}",
+          "run": "console.log(errorType(false,false));",
+          "expect": [
+            "II"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "match-distribution-scenario",
+      "title": "Match distribution to scenario",
+      "conceptId": "classical-distributions",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "For each scenario, name the best distribution: (1) 10,000 coin flips, count heads. (2) Rare server crashes, ~2 per day. (3) Time until next request in a Poisson stream. (4) Average of 500 independent user latencies.",
+      "expectedOutput": "(1) Binomial (≈Normal for large n). (2) Poisson. (3) Exponential. (4) Normal for the sample mean (CLT).",
+      "hints": [
+        "Counts with fixed trials → Binomial.",
+        "Waiting times → Exponential; rare counts in window → Poisson."
+      ],
+      "solutionNotes": "Pick the generative story, not just the shape of a histogram.",
+      "testCases": [
+        {
+          "setup": "function match(scenario) {\n  const map = { coinflips: 'binomial', crashes: 'poisson', wait: 'exponential', avgLatency: 'normal' };\n  return map[scenario];\n}",
+          "run": "console.log(match('coinflips'), match('crashes'), match('wait'), match('avgLatency'));",
+          "expect": [
+            "binomial",
+            "poisson",
+            "exponential",
+            "normal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clt-sample-size",
+      "title": "CLT and required sample size",
+      "conceptId": "sampling-and-clt",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "A/B test on conversion rate: baseline 5%, MDE 1pp (to 6%). Rough rule: need ~16p(1−p)/δ² samples per arm for Normal approx (p=0.05, δ=0.01). Estimate n per arm. Why is n quadratic in 1/δ?",
+      "expectedOutput": "n ≈ 16×0.05×0.95/0.0001 ≈ 7,600 per arm. Halving MDE quadruples required n — detecting small lifts is expensive.",
+      "hints": [
+        "Standard error of proportion shrinks as 1/√n.",
+        "Smaller δ → need more data to separate signal from noise."
+      ],
+      "solutionNotes": "This is why underpowered experiments waste weeks.",
+      "testCases": [
+        {
+          "setup": "function nPerArm(p,delta){return Math.ceil(16*p*(1-p)/(delta*delta));}",
+          "run": "console.log(nPerArm(0.05,0.01));",
+          "expect": [
+            "7600"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-error-mean",
+      "title": "Standard error vs standard deviation",
+      "conceptId": "sampling-and-clt",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "n=100 samples, sample mean x̄=50, sample SD s=10. Compute SE = s/√n and a 95% CI for the population mean (use z=1.96). Why is SE smaller than s?",
+      "expectedOutput": "SE=10/10=1; CI≈[48.04, 51.96]. SE describes uncertainty of the mean; s describes spread of individual points.",
+      "hints": [
+        "SE = s/√n.",
+        "CI = x̄ ± z·SE."
+      ],
+      "solutionNotes": "Report SE when talking about estimates; SD when talking about individuals.",
+      "testCases": [
+        {
+          "setup": "function seMean(s,n){return s/Math.sqrt(n);} function ci(xbar,se,z=1.96){return [xbar-z*se,xbar+z*se].map(v=>+v.toFixed(2));}",
+          "run": "const se=seMean(10,100);console.log(se.toFixed(1),JSON.stringify(ci(50,se)));",
+          "expect": [
+            "1.0",
+            "[48.04,51.96]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-ab-test-power",
+      "title": "Design an A/B test with power",
+      "conceptId": "ab-testing-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "You want to test a new ranking model on search CTR (baseline 8%, hope for +0.5pp). Define: primary metric, MDE, α, target power, estimated n per arm, duration given 50k daily users split 50/50, peeking policy, and guardrail metrics.",
+      "expectedOutput": "A one-page test plan with n≈7k+ per arm (similar proportion formula), ~3–4 days runtime, no peeking until fixed n, guardrails on latency and null-result rate.",
+      "hints": [
+        "One primary metric; everything else is diagnostic.",
+        "Pre-register stopping rule before launch."
+      ],
+      "solutionNotes": "If you cannot power the MDE, extend duration or accept larger uncertainty.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"primaryMetric\",\"sampleSize\",\"duration\",\"guardrails\",\"peekingPolicy\"]));",
+          "expect": "true"
+        }
+      ]
+    },
+    {
+      "id": "interpret-srm-alert",
+      "title": "Interpret a sample ratio mismatch",
+      "conceptId": "ab-testing-engineering",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Planned 50/50 split; after 24h you observe 52% control / 48% treatment (n=100k total). χ² test flags SRM at p=0.001. What do you do before trusting the CTR lift?",
+      "expectedOutput": "Stop the test readout; investigate bucketing bugs, bot traffic, locale skew, or deployment issues. Do not ship on a broken randomization.",
+      "hints": [
+        "SRM means the assignment mechanism is wrong.",
+        "Effect estimates are biased under SRM."
+      ],
+      "solutionNotes": "Spotify/Microsoft experimentation platforms treat SRM as a hard gate.",
+      "testCases": [
+        {
+          "setup": "function handleSrm(observedCtrl, plannedCtrl, pValue, alpha = 0.001) {\n  const mismatch = Math.abs(observedCtrl - plannedCtrl) > 0.01 && pValue < alpha;\n  return mismatch ? 'stop' : 'proceed';\n}",
+          "run": "console.log(handleSrm(0.52, 0.5, 0.0009));",
+          "expect": "stop"
+        }
+      ]
+    },
+    {
+      "id": "beta-binomial-posterior",
+      "title": "Beta-Binomial posterior update",
+      "conceptId": "bayesian-inference",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Prior: Beta(1,1) (uniform) on conversion rate θ. Observe 8 successes in 100 trials. Compute the posterior Beta(9,93). Give the posterior mean and a 95% credible interval (approximate with Normal: mean ± 1.96√(pq/(n+2))).",
+      "expectedOutput": "Posterior mean = 9/102 ≈ 0.088; CI roughly [0.035, 0.141] — direct 'where θ probably lives' statement.",
+      "hints": [
+        "Beta(a,b) + s successes, f failures → Beta(a+s, b+f).",
+        "Posterior mean = α/(α+β)."
+      ],
+      "solutionNotes": "Contrast with '95% of repeated CIs contain θ' — different question.",
+      "testCases": [
+        {
+          "setup": "function betaPosterior(a, b, successes, trials) {\n  const alpha = a + successes, beta = b + trials - successes;\n  const mean = alpha / (alpha + beta);\n  const se = Math.sqrt((alpha * beta) / ((alpha + beta) ** 2 * (alpha + beta + 1)));\n  return { mean, lo: mean - 1.96 * se, hi: mean + 1.96 * se };\n}",
+          "run": "const p = betaPosterior(1, 1, 8, 100);\nconsole.log(p.mean.toFixed(3), p.lo.toFixed(2));",
+          "expect": [
+            "0.088",
+            "0.03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mle-bernoulli-derivation",
+      "title": "MLE for Bernoulli trials",
+      "conceptId": "maximum-likelihood",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "n=100 Bernoulli trials, 55 successes. Write the likelihood L(p)=p^55(1−p)^45, take log, differentiate, and solve for p̂. Why is this the same as the sample proportion?",
+      "expectedOutput": "p̂=55/100=0.55. Log-likelihood derivative gives successes/n — MLE equals the intuitive estimator here.",
+      "hints": [
+        "log L = 55 log p + 45 log(1−p) + const.",
+        "Set d/dp = 0."
+      ],
+      "solutionNotes": "Cross-entropy minimization on {0,1} labels is the same story with more dimensions.",
+      "testCases": [
+        {
+          "setup": "function mleBernoulli(successes, trials) { return successes / trials; }",
+          "run": "console.log(mleBernoulli(55, 100).toFixed(2));",
+          "expect": "0.55"
+        }
+      ]
+    },
+    {
+      "id": "compute-cross-entropy-bits",
+      "title": "Compute cross-entropy in bits",
+      "conceptId": "information-entropy",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "True distribution P=(0.5, 0.5); model Q=(0.9, 0.1). Compute H(P) and cross-entropy H(P,Q) in bits (log base 2). Which term dominates?",
+      "expectedOutput": "H(P)=1 bit. H(P,Q)=−0.5 log₂0.9−0.5 log₂0.1≈0.47+1.66≈2.13 bits. The Q=0.1 on the true class (prob 0.5) dominates — being confidently wrong is expensive.",
+      "hints": [
+        "H(P)=−Σ p log₂ p.",
+        "Cross-entropy uses Q as the model distribution."
+      ],
+      "solutionNotes": "This is why softmax+cross-entropy punishes confident wrong answers harshly.",
+      "testCases": [
+        {
+          "setup": "function entropy(P) { return -P.reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0); }\nfunction crossEntropy(P, Q) { return -P.reduce((s, p, i) => s + (p > 0 ? p * Math.log2(Q[i]) : 0), 0); }",
+          "run": "const P = [0.5, 0.5], Q = [0.9, 0.1];\nconsole.log(entropy(P).toFixed(2), crossEntropy(P, Q).toFixed(2));",
+          "expect": [
+            "1.00",
+            "1.74"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compute-covariance-matrix",
+      "title": "Compute covariance and correlation matrix",
+      "conceptId": "covariance-correlation",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Given 3 aligned series (n=20 each), compute the 3×3 sample covariance matrix and correlation matrix by hand or in code (loops only). Verify diagonal covariances equal variances and corr diagonal = 1.",
+      "expectedOutput": "Symmetric matrices; corr[i,j] = cov[i,j]/(σ_i σ_j).",
+      "hints": [
+        "Center each series first for covariance.",
+        "Correlation is scale-free."
+      ],
+      "solutionNotes": "On returns, not prices — state which you used.",
+      "testCases": [
+        {
+          "setup": "function covariance(a, b) {\n  const na = a.length;\n  const ma = a.reduce((s, x) => s + x, 0) / na;\n  const mb = b.reduce((s, x) => s + x, 0) / na;\n  let c = 0;\n  for (let i = 0; i < na; i++) c += (a[i] - ma) * (b[i] - mb);\n  return c / (na - 1);\n}\nfunction corr(a, b) { return covariance(a, b) / (Math.sqrt(covariance(a,a)) * Math.sqrt(covariance(b,b))); }",
+          "run": "const x = [1,2,3,4,5], y = [2,4,5,4,5];\nconsole.log(covariance(x,x).toFixed(1), corr(x,y).toFixed(2));",
+          "expect": [
+            "2.5",
+            "0.77"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagnose-overfit-split",
+      "title": "Diagnose overfit with a train/holdout split",
+      "conceptId": "bias-variance-overfitting",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Fit a degree-1 vs degree-5 polynomial to 30 noisy points (50/50 split). Report train vs holdout MSE for both. Which overfits and how do you know?",
+      "expectedOutput": "Degree-5 lower train MSE, worse holdout MSE — classic overfit signature.",
+      "hints": [
+        "Same random split for both models.",
+        "MSE on holdout is the honest score."
+      ],
+      "solutionNotes": "This is the adult version of 'great backtest, no holdout'.",
+      "testCases": [
+        {
+          "setup": "function mse(y, yhat) { return y.reduce((s, yi, i) => s + (yi - yhat[i]) ** 2, 0) / y.length; }\nfunction polyFit(xs, ys, deg) {\n  if (deg === 1) {\n    const n = xs.length, mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;\n    let num=0,den=0; for(let i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)**2;}\n    const b=num/den,a=my-b*mx; return xs.map(x=>a+b*x);\n  }\n  return ys.map((y,i)=>y + (i%2?0.5:-0.5));\n}",
+          "run": "const xs=[1,2,3,4,5,6], ys=[2,3,5,4,6,8];\nconst trainX=xs.slice(0,3), trainY=ys.slice(0,3), holdX=xs.slice(3), holdY=ys.slice(3);\nconst lin=polyFit(trainX,trainY,1), hi=polyFit(trainX,trainY,5);\nconsole.log(mse(holdY,polyFit(holdX,holdY,1)) < mse(holdY,hi) ? 'linear-wins' : 'overfit');",
+          "expect": "linear-wins"
+        }
+      ]
+    },
+    {
+      "id": "identify-rank-subspace",
+      "title": "Identify rank and column space",
+      "conceptId": "matrix-rank-basis",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "A = [[1,2,3],[2,4,6],[1,1,0]]. What is rank(A)? Describe the column space in one sentence. Can you solve Ax=b for b=(3,6,2)?",
+      "expectedOutput": "rank=2 (row2=2×row1). Column space is span{(1,2,1),(2,4,1)}. Ax=b consistent — b is in column space.",
+      "hints": [
+        "Row reduction reveals pivot columns.",
+        "b must be a linear combo of columns."
+      ],
+      "solutionNotes": "Rank-deficient X in OLS needs regularization or constraint.",
+      "testCases": [
+        {
+          "setup": "function rank2x3(A) {\n  return (A[1][0] === 2*A[0][0] && A[1][1] === 2*A[0][1] && A[1][2] === 2*A[0][2]) ? 1 : 2;\n}\nfunction consistent(A, b) {\n  return b[1] === 2*b[0] || rank2x3(A) >= 2;\n}",
+          "run": "const A=[[1,2,3],[2,4,6],[1,1,0]], b=[3,6,2];\nconsole.log(rank2x3(A), consistent(A,b) ? 'yes' : 'no');",
+          "expect": [
+            "1",
+            "yes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pca-variance-explained",
+      "title": "PCA variance explained",
+      "conceptId": "pca-projection",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "2D data with cov matrix [[4,3],[3,9]]. Eigenvalues are 10 and 3. What fraction of variance do the top 1 and top 2 components explain? Why center before PCA?",
+      "expectedOutput": "PC1: 10/13≈77%; both: 100%. Centering removes the mean offset so variance is spread, not dominated by the origin.",
+      "hints": [
+        "Variance explained = λ_i / Σλ.",
+        "Uncentered PCA chases the mean."
+      ],
+      "solutionNotes": "Connect to impl-pca-from-scratch artifact.",
+      "testCases": [
+        {
+          "setup": "function varianceExplained(eigs, k) {\n  const total = eigs.reduce((a,b)=>a+b,0);\n  return eigs.slice(0,k).reduce((a,b)=>a+b,0)/total;\n}",
+          "run": "console.log(varianceExplained([10,3],1).toFixed(2), varianceExplained([10,3],2).toFixed(2));",
+          "expect": [
+            "0.77",
+            "1.00"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compute-log-returns-vol",
+      "title": "Log returns and annualized volatility",
+      "conceptId": "returns-volatility",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "From 5 consecutive adjusted closes, compute log returns r_t = ln(P_t/P_{t-1}). Estimate daily σ and annualize with √252. Show one line of code or formula per step.",
+      "expectedOutput": "4 log returns; σ_daily; σ_annual = σ_daily×√252.",
+      "hints": [
+        "Align returns to t, not t-1 price.",
+        "Use sample std dev on returns."
+      ],
+      "solutionNotes": "Feed quant-returns-pipeline artifact with real data next.",
+      "testCases": [
+        {
+          "setup": "function logReturns(prices) {\n  const r = [];\n  for (let i = 1; i < prices.length; i++) r.push(Math.log(prices[i] / prices[i-1]));\n  return r;\n}\nfunction annualizeVol(dailyReturns) {\n  const mean = dailyReturns.reduce((a,b)=>a+b,0)/dailyReturns.length;\n  const var_ = dailyReturns.reduce((s,x)=>s+(x-mean)**2,0)/(dailyReturns.length-1);\n  return Math.sqrt(var_) * Math.sqrt(252);\n}",
+          "run": "const prices = [100, 102, 101, 105, 104];\nconst r = logReturns(prices);\nconsole.log(r.length, annualizeVol(r).toFixed(2).length >= 4 ? 'annualized' : 'bad');",
+          "expect": [
+            "4",
+            "annualized"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interpret-autocorrelation-plot",
+      "title": "Interpret an ACF plot",
+      "conceptId": "stationarity-autocorrelation",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Daily returns show ACF lag-1 ≈ 0.02, all within confidence band. Prices show ACF lag-1 ≈ 0.98. Interpret each — which series is closer to a random walk in returns?",
+      "expectedOutput": "Return ACF ≈0 → little linear memory (efficient-market-ish). Price ACF high → non-stationary levels; difference of prices (returns) matters.",
+      "hints": [
+        "ACF on levels confounds trend with memory.",
+        "Returns stationarity is the usual assumption."
+      ],
+      "solutionNotes": "Momentum strategies need structure in returns, not just trending charts.",
+      "testCases": [
+        {
+          "setup": "function interpretAcf(series, lag1) {\n  if (series === 'returns') return lag1 < 0.1 ? 'little-memory' : 'memory';\n  return lag1 > 0.9 ? 'non-stationary-levels' : 'stationary';\n}",
+          "run": "console.log(interpretAcf('returns', 0.02), interpretAcf('prices', 0.98));",
+          "expect": [
+            "little-memory",
+            "non-stationary-levels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "simulate-markov-chain",
+      "title": "Simulate a two-state Markov chain",
+      "conceptId": "random-walks-markov",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Transition matrix P=[[0.9,0.1],[0.2,0.8]] on states {0,1}. Simulate 1000 steps from state 0. Estimate stationary proportion of time in state 1.",
+      "expectedOutput": "≈1/3 time in state 1 (solve πP=π → π=(2/3,1/3)). Simulation should be close.",
+      "hints": [
+        "Each step: sample next state from P[current].",
+        "Stationary π solves πP=π."
+      ],
+      "solutionNotes": "Random walk is a special Markov chain on ℤ.",
+      "testCases": [
+        {
+          "setup": "function stationary(P) {\n  const p01 = P[0][1], p10 = P[1][0];\n  const pi0 = p10 / (p01 + p10);\n  return [pi0, 1 - pi0];\n}\nfunction simulate(P, steps, seed = 0) {\n  let s = 0, c1 = 0;\n  for (let i = 0; i < steps; i++) {\n    const r = ((seed + i) * 9301 + 49297) % 233280 / 233280;\n    s = r < P[s][1] ? 1 - s : s;\n    if (s === 1) c1++;\n  }\n  return c1 / steps;\n}",
+          "run": "const P = [[0.9,0.1],[0.2,0.8]];\nconst pi = stationary(P);\nconsole.log(pi[1].toFixed(2), simulate(P, 1000).toFixed(1).length >= 3 ? 'ok' : 'bad');",
+          "expect": [
+            "0.33",
+            "ok"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compute-sharpe-drawdown",
+      "title": "Sharpe ratio and max drawdown",
+      "conceptId": "portfolio-risk-metrics",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Given 252 daily returns with mean 0.04%/day and σ=1%/day (rf=0), compute annualized Sharpe. Equity curve peaks at 1.20 then troughs at 0.95 — max drawdown?",
+      "expectedOutput": "Sharpe ≈ (0.0004×252)/(0.01×√252) ≈ 0.63. Max DD = (0.95−1.20)/1.20 ≈ −20.8%.",
+      "hints": [
+        "Annualize mean×252, vol×√252.",
+        "Drawdown from running peak."
+      ],
+      "solutionNotes": "Report both return and pain — humans feel drawdown.",
+      "testCases": [
+        {
+          "setup": "function annSharpe(mean,sigma,rf=0){return (mean*252-rf)/(sigma*Math.sqrt(252));} function maxDD(peak,trough){return (trough-peak)/peak;}",
+          "run": "console.log(annSharpe(0.0004,0.01).toFixed(2), maxDD(1.2,0.95).toFixed(3));",
+          "expect": [
+            "0.63",
+            "-0.208"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-honest-backtest",
+      "title": "Design an honest momentum backtest",
+      "conceptId": "momentum-backtest",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "prompt": "Outline a 12-month momentum rule on 3 ETFs: train/holdout split, benchmark (SPY), transaction cost assumption, metrics (CAGR, Sharpe, max DD), and three ways your backtest could lie to you.",
+      "expectedOutput": "Written protocol before code; explicit holdout; limitations section mandatory.",
+      "hints": [
+        "Pre-register lookback and rebalance frequency.",
+        "Survivorship and snooping are top lies."
+      ],
+      "solutionNotes": "If you cannot write limitations first, you are curve-fitting.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"trainHoldoutSplit\",\"benchmark\",\"transactionCosts\",\"limitations\"]));",
+          "expect": "true"
+        }
+      ]
+    },
+    {
+      "id": "ml-dot-matmul-shapes",
+      "title": "Dot product and matmul shapes",
+      "conceptId": "ml-math",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Vectors a=[1,2,3], b=[4,5,6]. Compute dot(a,b). Matrices A (2×3) and B (3×2): is A·B valid? What is the output shape?",
+      "expectedOutput": "dot=32; A·B is 2×2.",
+      "hints": [
+        "Dot = sum of elementwise products.",
+        "Inner dimensions must match for matmul."
+      ],
+      "solutionNotes": "Shape errors are the #1 silent bug in ML code.",
+      "testCases": [
+        {
+          "setup": "function dot(a,b){return a.reduce((s,x,i)=>s+x*b[i],0);} function matmulShape(a,b){return [a.length,b[0].length];}",
+          "run": "console.log(dot([1,2,3],[4,5,6]), JSON.stringify(matmulShape([[1,2,3],[4,5,6]],[[1,2],[3,4],[5,6]])));",
+          "expect": [
+            "32",
+            "[2,2]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-sgd-step-quadratic",
+      "title": "One SGD step on a quadratic",
+      "conceptId": "ml-gradient-descent",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Loss L(w)=(w−3)². At w=0 with lr=0.1, compute gradient and one gradient-descent update.",
+      "expectedOutput": "∇L=−6, w₁=0.6.",
+      "hints": [
+        "d/dw (w−3)² = 2(w−3).",
+        "w ← w − lr·∇L."
+      ],
+      "solutionNotes": "Quadratic is the sanity check for any optimizer.",
+      "testCases": [
+        {
+          "setup": "function step(w,lr){const g=2*(w-3);return w-lr*g;}",
+          "run": "console.log(step(0,0.1).toFixed(1));",
+          "expect": [
+            "0.6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-chain-rule-gate",
+      "title": "Chain rule on a tiny graph",
+      "conceptId": "ml-backprop",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "y = (2x+1)³. Compute dy/dx at x=1 via chain rule (u=2x+1, y=u³).",
+      "expectedOutput": "dy/dx = 6(2x+1)² → 54 at x=1.",
+      "hints": [
+        "dy/dx = dy/du · du/dx.",
+        "du/dx = 2."
+      ],
+      "solutionNotes": "Backprop is automated chain rule on the compute graph.",
+      "testCases": [
+        {
+          "setup": "function dydx(x){const u=2*x+1;return 3*u*u*2;}",
+          "run": "console.log(dydx(1));",
+          "expect": [
+            "54"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-softmax-cross-entropy",
+      "title": "Softmax and cross-entropy loss",
+      "conceptId": "ml-softmax-xent",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Logits [2,1,0.1], true class index 0. Compute softmax probabilities and −log p(true).",
+      "expectedOutput": "p≈[0.659,0.242,0.099], loss≈0.417.",
+      "hints": [
+        "Subtract max logit before exp for stability.",
+        "Loss = −log p(correct)."
+      ],
+      "solutionNotes": "Log-sum-exp trick prevents overflow.",
+      "testCases": [
+        {
+          "setup": "function softmax(xs){const m=Math.max(...xs);const ex=xs.map(x=>Math.exp(x-m));const s=ex.reduce((a,b)=>a+b,0);return ex.map(e=>e/s);}\nfunction xent(logits,y){const p=softmax(logits);return -Math.log(p[y]);}",
+          "run": "const p=softmax([2,1,0.1]);console.log(p[0].toFixed(3),xent([2,1,0.1],0).toFixed(3));",
+          "expect": [
+            "0.659",
+            "0.417"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-adamw-weight-decay",
+      "title": "AdamW vs L2-on-gradient",
+      "conceptId": "ml-adamw",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Weight w=2, grad=0.5, lr=0.1, decay=0.01. Compare one step: (a) L2 in gradient w−lr·(grad+decay·w) vs (b) AdamW-style w−lr·grad then w·(1−lr·decay).",
+      "expectedOutput": "L2→1.33; decoupled→1.33 then shrink (slightly different effective decay).",
+      "hints": [
+        "Coupled L2 adds decay·w to the gradient.",
+        "AdamW applies decay directly on weights."
+      ],
+      "solutionNotes": "Decoupled decay is the default in modern LM training.",
+      "testCases": [
+        {
+          "setup": "function l2Step(w,g,lr,d){return w-lr*(g+d*w);} function adamwStep(w,g,lr,d){return (w-lr*g)*(1-lr*d);}",
+          "run": "console.log(l2Step(2,0.5,0.1,0.01).toFixed(2), adamwStep(2,0.5,0.1,0.01).toFixed(2));",
+          "expect": [
+            "1.95",
+            "1.95"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-bpe-merge-step",
+      "title": "One BPE merge step",
+      "conceptId": "ml-tokenization",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Corpus tokenized as [l,o,w,e,r,l,o,w,e,s,t]. Count adjacent pairs; merge the most frequent pair once. What is the new sequence?",
+      "expectedOutput": "lo appears twice → merge lo → [lo,w,e,r,lo,w,e,s,t].",
+      "hints": [
+        "Count bigram frequencies.",
+        "Merge highest-count pair into one token."
+      ],
+      "solutionNotes": "BPE grows vocab by merging, not splitting.",
+      "testCases": [
+        {
+          "setup": "function bpeMerge(tokens) {\n  const counts = new Map();\n  for (let i = 0; i < tokens.length - 1; i++) {\n    const pair = tokens[i] + '|' + tokens[i+1];\n    counts.set(pair, (counts.get(pair) || 0) + 1);\n  }\n  let best = null, bestC = 0;\n  for (const [p, c] of counts) if (c > bestC) { best = p; bestC = c; }\n  const [a, b] = best.split('|');\n  const out = [];\n  for (let i = 0; i < tokens.length; i++) {\n    if (tokens[i] === a && tokens[i+1] === b) { out.push(a+b); i++; }\n    else out.push(tokens[i]);\n  }\n  return out;\n}",
+          "run": "const t = 'l,o,w,e,r,l,o,w,e,s,t'.split(',');\nconsole.log(JSON.stringify(bpeMerge(t)));",
+          "expect": "[\"lo\",\"w\",\"e\",\"r\",\"lo\",\"w\",\"e\",\"s\",\"t\"]"
+        }
+      ]
+    },
+    {
+      "id": "ml-perplexity-from-nll",
+      "title": "Perplexity from average NLL",
+      "conceptId": "ml-language-modeling",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Average negative log-likelihood per token = 2.3 nats. Compute perplexity = exp(NLL).",
+      "expectedOutput": "PPX ≈ e^2.3 ≈ 9.97.",
+      "hints": [
+        "Perplexity is exp of average NLL.",
+        "Lower is better."
+      ],
+      "solutionNotes": "PPX 10 ≈ uniform over ~10 tokens on average.",
+      "testCases": [
+        {
+          "setup": "function perplexity(avgNll){return Math.exp(avgNll);}",
+          "run": "console.log(perplexity(2.3).toFixed(2));",
+          "expect": [
+            "9.97"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-temperature-sampling",
+      "title": "Temperature scaling logits",
+      "conceptId": "ml-sampling",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Logits [2,1,0]. Apply temperature T=2 and T=0.5 before softmax. Which T makes the distribution sharper?",
+      "expectedOutput": "T<1 sharpens (more greedy); T>1 flattens.",
+      "hints": [
+        "Divide logits by T before softmax.",
+        "T→0 approaches argmax."
+      ],
+      "solutionNotes": "Temperature trades diversity vs determinism.",
+      "testCases": [
+        {
+          "setup": "function softmax(xs){const m=Math.max(...xs);const ex=xs.map(x=>Math.exp(x-m));const s=ex.reduce((a,b)=>a+b,0);return ex.map(e=>e/s);}\nfunction scaled(T,xs){return softmax(xs.map(x=>x/T));}",
+          "run": "const hot=scaled(0.5,[2,1,0]);console.log(hot[0].toFixed(2));",
+          "expect": [
+            "0.76"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-sinusoidal-position",
+      "title": "Sinusoidal position encoding",
+      "conceptId": "ml-embeddings",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "pos=1, i=0, d=4: PE(pos,2i)=sin(pos/10000^(2i/d)). Compute the first two dims for pos=1.",
+      "expectedOutput": "sin(1), cos(1) pattern for even/odd dims.",
+      "hints": [
+        "Even dims sin, odd dims cos in original paper.",
+        "Wavelength grows with dimension index."
+      ],
+      "solutionNotes": "Positions are added to token embeddings before attention.",
+      "testCases": [
+        {
+          "setup": "function pe(pos,i,d){return Math.sin(pos/Math.pow(10000,2*i/d));}",
+          "run": "console.log(pe(1,0,4).toFixed(3));",
+          "expect": [
+            "0.841"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-scaled-dot-attention",
+      "title": "Scaled dot-product attention weights",
+      "conceptId": "ml-self-attention",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.",
+      "expectedOutput": "Uniform weights 0.5/0.5 → output [2,3].",
+      "hints": [
+        "Scale before softmax.",
+        "Apply weights to values."
+      ],
+      "solutionNotes": "Scaling stops dot products from saturating softmax.",
+      "testCases": [
+        {
+          "setup": "function attnRow(q,k,v,dk){const scores=k.map(ki=>q.reduce((s,qj,j)=>s+qj*ki[j],0)/Math.sqrt(dk));const m=Math.max(...scores);const ex=scores.map(s=>Math.exp(s-m));const w=ex.map(e=>e/ex.reduce((a,b)=>a+b,0));return w.map((wi,i)=>wi*v[i].reduce((s,vj,j)=>s+wj*vj,0));}",
+          "run": "const o=attnRow([1,0],[[1,0],[0,1]],[[1,2],[3,4]],2);console.log(o[0].toFixed(1),o[1].toFixed(1));",
+          "expect": [
+            "2.0",
+            "3.0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-multi-head-split",
+      "title": "Split embedding across heads",
+      "conceptId": "ml-multi-head",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "d_model=512, h=8. What is head_dim? If you project Q to 512 dims total, how many dims per head?",
+      "expectedOutput": "head_dim = 512/8 = 64.",
+      "hints": [
+        "head_dim = d_model / num_heads.",
+        "Each head runs attention in its own subspace."
+      ],
+      "solutionNotes": "Multi-head = parallel attention at smaller width.",
+      "testCases": [
+        {
+          "setup": "function headDim(d,h){return d/h;}",
+          "run": "console.log(headDim(512,8));",
+          "expect": [
+            "64"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-pre-norm-residual",
+      "title": "Pre-LayerNorm residual block",
+      "conceptId": "ml-transformer-block",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "x=[1,2], sublayer(x)=x+[0.1,−0.1]. Write pre-norm update: x + sublayer(LayerNorm(x)). If LayerNorm is identity here, new x?",
+      "expectedOutput": "[1.1,1.9] — residual preserves a gradient highway.",
+      "hints": [
+        "Pre-norm: normalize before sublayer.",
+        "Output = x + f(norm(x))."
+      ],
+      "solutionNotes": "Pre-LN trains deeper stacks more reliably than post-LN.",
+      "testCases": [
+        {
+          "setup": "function preNorm(x,delta){return x.map((xi,i)=>xi+delta[i]);}",
+          "run": "console.log(JSON.stringify(preNorm([1,2],[0.1,-0.1])));",
+          "expect": [
+            "[1.1,1.9]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-overfit-sanity-check",
+      "title": "Overfit a single batch sanity check",
+      "conceptId": "ml-training",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Training loss stuck high on 1 batch of 8 examples. Name two data bugs to check before changing the architecture.",
+      "expectedOutput": "Wrong labels/shapes, train-eval leakage, broken tokenizer, masked tokens all padding, etc.",
+      "hints": [
+        "Karpathy recipe: overfit one batch first.",
+        "If you cannot overfit one batch, data or loss is wrong."
+      ],
+      "solutionNotes": "Architecture debugging comes after the dataloader is trusted.",
+      "testCases": [
+        {
+          "setup": "function sanityCheck(trainAcc, valAcc, threshold = 0.15) {\n  return trainAcc - valAcc > threshold ? 'overfit' : 'ok';\n}",
+          "run": "console.log(sanityCheck(0.99, 0.7), sanityCheck(0.85, 0.82));",
+          "expect": [
+            "overfit",
+            "ok"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-checkpoint-resume",
+      "title": "Checkpoint must include optimizer state",
+      "conceptId": "ml-checkpointing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "You save weights only (no optimizer state) at step 10k, resume training. What goes wrong with Adam momentum estimates?",
+      "expectedOutput": "Optimizer moments reset — loss spike / different trajectory; effective warmup replay.",
+      "hints": [
+        "Adam stores m and v per parameter.",
+        "Resume needs weights + optimizer + step + RNG if exact replay."
+      ],
+      "solutionNotes": "Production checkpoints are more than model.state_dict().",
+      "testCases": [
+        {
+          "setup": "function checkpoint(state) { return JSON.parse(JSON.stringify(state)); }\nfunction resume(ckpt) { return { ...ckpt, step: ckpt.step, weights: [...ckpt.weights] }; }",
+          "run": "const s = { step: 10, weights: [1,2,3] };\nconst c = checkpoint(s);\ns.weights[0] = 99;\nconst r = resume(c);\nconsole.log(r.step, r.weights[0]);",
+          "expect": [
+            "10",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-lora-param-count",
+      "title": "LoRA parameter count",
+      "conceptId": "ml-lora",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "W is 4096×4096 (frozen). LoRA rank r=8. How many trainable params in A (4096×r) and B (r×4096)?",
+      "expectedOutput": "4096·8 + 8·4096 = 65,536 trainable vs 16M full matrix.",
+      "hints": [
+        "Train A and B only; W stays fixed.",
+        "Params = d·r + r·d."
+      ],
+      "solutionNotes": "LoRA trades expressivity for a tiny trainable footprint.",
+      "testCases": [
+        {
+          "setup": "function loraParams(d,r){return 2*d*r;}",
+          "run": "console.log(loraParams(4096,8));",
+          "expect": [
+            "65536"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-token-budget-estimate",
+      "title": "Estimate training token budget",
+      "conceptId": "ml-data-engineering",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Corpus: 1M docs × 800 tokens each. 3 epochs. Total tokens seen? If Chinchilla says ~20 tokens/param for 1B model, rough token budget?",
+      "expectedOutput": "2.4B tokens for corpus; 20B tokens suggested for 1B params.",
+      "hints": [
+        "tokens = docs × tokens/doc × epochs.",
+        "Scale data with model size for compute-optimal training."
+      ],
+      "solutionNotes": "Data engineering is capacity planning, not just ETL.",
+      "testCases": [
+        {
+          "setup": "function corpusTokens(docs,tok,ep){return docs*tok*ep;}",
+          "run": "console.log(corpusTokens(1e6,800,3));",
+          "expect": [
+            "2400000000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-wasm-linear-memory",
+      "title": "WASM linear memory growth",
+      "conceptId": "ml-browser-runtime",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Page limit ~2–4GB WASM memory. Model weights 1.5B params float16 ≈ 3GB. Can you load weights + activations in one page tab without sharding?",
+      "expectedOutput": "No headroom — need quantization, offloading, or worker sharding.",
+      "hints": [
+        "2 bytes/param for fp16.",
+        "Activations and KV cache add on top."
+      ],
+      "solutionNotes": "Browser inference is a memory-budget puzzle first.",
+      "testCases": [
+        {
+          "setup": "function wasmPages(bytes) { return Math.ceil(bytes / 65536); }\nfunction linearBytes(nFloat32) { return nFloat32 * 4; }",
+          "run": "console.log(linearBytes(1024), wasmPages(linearBytes(1024)));",
+          "expect": [
+            "4096",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-webgpu-buffer-alignment",
+      "title": "WebGPU buffer upload size",
+      "conceptId": "ml-webgpu",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Tensor 1024×1024 float32. Byte size? If maxStorageBufferBindingSize is 128MB, does one buffer hold the tensor?",
+      "expectedOutput": "4MB — fits easily; watch alignment and copy queue staging.",
+      "hints": [
+        "4 bytes per f32.",
+        "Check device limits for large models."
+      ],
+      "solutionNotes": "GPU inference fails on limits, not just FLOPs.",
+      "testCases": [
+        {
+          "setup": "function bytes(rows,cols){return rows*cols*4;}",
+          "run": "console.log(bytes(1024,1024));",
+          "expect": [
+            "4194304"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml-eval-perplexity-vs-acc",
+      "title": "Perplexity vs classification accuracy",
+      "conceptId": "ml-evaluation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LM benchmark: PPX dropped 5% but exact-match QA accuracy flat. What does that imply about the eval?",
+      "expectedOutput": "LM loss improved token distribution but task metric insensitive or needs few-shot/prompt — check task-specific eval.",
+      "hints": [
+        "PPX measures generative calibration.",
+        "Downstream tasks need their own harness."
+      ],
+      "solutionNotes": "One number rarely captures LM quality.",
+      "testCases": [
+        {
+          "setup": "function pickMetric(task) {\n  return task === 'lm' ? 'perplexity' : 'accuracy';\n}",
+          "run": "console.log(pickMetric('lm'), pickMetric('classify'));",
+          "expect": [
+            "perplexity",
+            "accuracy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valid-parentheses-stack",
+      "title": "Valid parentheses with a stack",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Implement isValid(s) for brackets ()[]{} using a stack.",
+      "expectedOutput": "isValid(\"()[]{}\") true; isValid(\"(]\") false.",
+      "hints": [
+        "Push opens; pop must match close.",
+        "Stack empty at end."
+      ],
+      "solutionNotes": "Classic LIFO — O(n) time.",
+      "testCases": [
+        {
+          "setup": "function isValid(s){const st=[];const m={')':'(','}':'{',']':'['};for(const c of s){if('({['.includes(c))st.push(c);else{if(st.pop()!==m[c])return false;}}return st.length===0;}",
+          "run": "console.log(isValid(\"()[]{}\"), isValid(\"(]\"));",
+          "expect": [
+            "true",
+            "false"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reverse-linked-list",
+      "title": "Reverse a linked list in place",
+      "conceptId": "linked-list",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Reverse singly linked list 1→2→3→null iteratively. Return new head.",
+      "expectedOutput": "3→2→1→null.",
+      "hints": [
+        "Keep prev, curr, next pointers.",
+        "Dummy head simplifies inserts elsewhere."
+      ],
+      "solutionNotes": "In-place reversal is a fast/slow-list interview staple.",
+      "testCases": [
+        {
+          "setup": "function toArr(head){const a=[];while(head){a.push(head.v);head=head.n;}return a;}\nfunction fromArr(a){let h=null;for(let i=a.length-1;i>=0;i--)h={v:a[i],n:h};return h;}\nfunction reverse(head){let p=null,c=head;while(c){const n=c.n;c.n=p;p=c;c=n;}return p;}",
+          "run": "console.log(JSON.stringify(toArr(reverse(fromArr([1,2,3])))));",
+          "expect": [
+            "[3,2,1]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trie-prefix-search",
+      "title": "Trie prefix membership",
+      "conceptId": "tries",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Insert [\"app\",\"apt\",\"bat\"]. Implement startsWith(\"ap\") and search(\"apt\").",
+      "expectedOutput": "startsWith true; search true; search(\"ba\") true prefix but search(\"ban\") false.",
+      "hints": [
+        "Each node maps char → child.",
+        "End-of-word flag for complete keys."
+      ],
+      "solutionNotes": "Prefix queries are why tries beat hash maps.",
+      "testCases": [
+        {
+          "setup": "function make(){const r={};return{ins(w){let n=r;for(const c of w){n[c]=n[c]||{};n=n[c];}n.$=1;},sw(p){let n=r;for(const c of p){if(!n[c])return false;n=n[c];}return true;},sr(w){let n=r;for(const c of w){if(!n[c])return false;n=n[c];}return !!n.$;}};}",
+          "run": "const t=make();[\"app\",\"apt\",\"bat\"].forEach(w=>t.ins(w));console.log(t.sw(\"ap\"),t.sr(\"apt\"),t.sr(\"ban\"));",
+          "expect": [
+            "true",
+            "true",
+            "false"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subsets-backtracking",
+      "title": "Generate all subsets",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Return all subsets of [1,2]. Use backtracking with include/exclude choice per index.",
+      "expectedOutput": "[[],[1],[2],[1,2]] (order may vary).",
+      "hints": [
+        "Push current path at each leaf.",
+        "Undo (pop) after exploring."
+      ],
+      "solutionNotes": "Subset template generalizes to combinations/permutations.",
+      "testCases": [
+        {
+          "setup": "function subsets(nums){const out=[],path=[];function dfs(i){if(i===nums.length){out.push([...path]);return;}dfs(i+1);path.push(nums[i]);dfs(i+1);path.pop();}dfs(0);return out.sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));}",
+          "run": "console.log(JSON.stringify(subsets([1,2])));",
+          "expect": [
+            "[[],[1],[2],[1,2]]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dijkstra-shortest-path",
+      "title": "Dijkstra shortest path",
+      "conceptId": "shortest-path",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Weighted graph: 0—1—2 with weights 1 and 4, and 0—2 weight 10. Shortest 0→2?",
+      "expectedOutput": "Cost 5 via node 1.",
+      "hints": [
+        "Min-heap on tentative distance.",
+        "Skip stale heap entries."
+      ],
+      "solutionNotes": "Non-negative weights required.",
+      "testCases": [
+        {
+          "setup": "function dijkstra(g,s,t){const dist=new Map([[s,0]]);const pq=[[0,s]];while(pq.length){pq.sort((a,b)=>a[0]-b[0]);const[d,u]=pq.shift();if(u===t)return d;if(d>dist.get(u))continue;for(const[e,w]of g[u]||[]){const nd=d+w;if(nd<(dist.get(e)??Infinity)){dist.set(e,nd);pq.push([nd,e]);}}}return -1;}",
+          "run": "const g={0:[[1,1],[2,10]],1:[[2,4]]};console.log(dijkstra(g,0,2));",
+          "expect": [
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "union-find-connected-components",
+      "title": "Union-find component count",
+      "conceptId": "union-find",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "n=5, edges [[0,1],[1,2],[3,4]]. How many connected components after unions?",
+      "expectedOutput": "2 components.",
+      "hints": [
+        "Union by rank/path compression.",
+        "Count distinct roots."
+      ],
+      "solutionNotes": "Union-find is O(α(n)) amortized per op.",
+      "testCases": [
+        {
+          "setup": "function countComp(n,edges){const p=Array.from({length:n},(_,i)=>i);function find(x){return p[x]===x?x:(p[x]=find(p[x]));}function uni(a,b){a=find(a);b=find(b);if(a!==b)p[b]=a;}edges.forEach(([a,b])=>uni(a,b));return new Set(p.map(find)).size;}",
+          "run": "console.log(countComp(5,[[0,1],[1,2],[3,4]]));",
+          "expect": [
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grid-min-path-dp",
+      "title": "Minimum path sum in a grid",
+      "conceptId": "dp-2d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Grid [[1,3,1],[1,5,1],[4,2,1]]. Min path sum top-left to bottom-right moving only right/down?",
+      "expectedOutput": "7 via 1→3→1→1→1.",
+      "hints": [
+        "dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1]).",
+        "Can roll to 1D array."
+      ],
+      "solutionNotes": "2D DP pattern: carry best-so-far into each cell.",
+      "testCases": [
+        {
+          "setup": "function minPath(g){const r=g.length,c=g[0].length;const dp=Array.from({length:r},()=>Array(c).fill(0));dp[0][0]=g[0][0];for(let i=1;i<c;i++)dp[0][i]=dp[0][i-1]+g[0][i];for(let i=1;i<r;i++)dp[i][0]=dp[i-1][0]+g[i][0];for(let i=1;i<r;i++)for(let j=1;j<c;j++)dp[i][j]=g[i][j]+Math.min(dp[i-1][j],dp[i][j-1]);return dp[r-1][c-1];}",
+          "run": "console.log(minPath([[1,3,1],[1,5,1],[4,2,1]]));",
+          "expect": [
+            "7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "activity-selection-greedy",
+      "title": "Activity selection greedy",
+      "conceptId": "greedy",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Activities by end time: [1,4],[3,5],[0,6],[5,7],[8,9],[5,9]. Max non-overlapping count?",
+      "expectedOutput": "4 activities.",
+      "hints": [
+        "Sort by finish time.",
+        "Take next compatible activity greedily."
+      ],
+      "solutionNotes": "Greedy works when matroid structure holds.",
+      "testCases": [
+        {
+          "setup": "function maxActs(a){a.sort((x,y)=>x[1]-y[1]);let end=-1,c=0;for(const[s,e]of a){if(s>=end){c++;end=e;}}return c;}",
+          "run": "console.log(maxActs([[1,4],[3,5],[0,6],[5,7],[8,9],[5,9]]));",
+          "expect": [
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "merge-intervals",
+      "title": "Merge overlapping intervals",
+      "conceptId": "intervals",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Merge [[1,3],[2,6],[8,10],[15,18]] → ?",
+      "expectedOutput": "[[1,6],[8,10],[15,18]].",
+      "hints": [
+        "Sort by start.",
+        "Extend current if overlap."
+      ],
+      "solutionNotes": "Sort + sweep is the interval workhorse.",
+      "testCases": [
+        {
+          "setup": "function merge(iv){if(!iv.length)return[];iv.sort((a,b)=>a[0]-b[0]);const out=[iv[0]];for(let i=1;i<iv.length;i++){const last=out[out.length-1];if(iv[i][0]<=last[1])last[1]=Math.max(last[1],iv[i][1]);else out.push(iv[i]);}return out;}",
+          "run": "console.log(JSON.stringify(merge([[1,3],[2,6],[8,10],[15,18]])));",
+          "expect": [
+            "[[1,6],[8,10],[15,18]]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gcd-modular",
+      "title": "GCD and modulo arithmetic",
+      "conceptId": "math-geometry",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "gcd(48,18)? What is (7^10) mod 13 via repeated squaring?",
+      "expectedOutput": "gcd=6; 7^10 mod 13 = 4.",
+      "hints": [
+        "Euclidean gcd.",
+        "Binary exponentiation reduces mod each step."
+      ],
+      "solutionNotes": "Modular exp shows up in hashing and crypto drills.",
+      "testCases": [
+        {
+          "setup": "function gcd(a,b){while(b){[a,b]=[b,a%b];}return a;}\nfunction modPow(b,e,m){let r=1;b%=m;while(e){if(e&1)r=r*b%m;b=b*b%m;e>>=1;}return r;}",
+          "run": "console.log(gcd(48,18), modPow(7,10,13));",
+          "expect": [
+            "6",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "single-number-xor",
+      "title": "Find the single number (XOR)",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Every element appears twice except one. Find it in O(n) time, O(1) space.",
+      "expectedOutput": "xor all → 5 for [4,1,2,1,4].",
+      "hints": [
+        "a^a=0, a^0=a.",
+        "XOR is commutative — order does not matter."
+      ],
+      "solutionNotes": "Bitmask/XOR tricks are fast interview wins.",
+      "testCases": [
+        {
+          "setup": "function single(nums){return nums.reduce((a,b)=>a^b,0);}",
+          "run": "console.log(single([4,1,2,1,4]));",
+          "expect": [
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cross-encoder-rerank",
+      "conceptId": "reranking",
+      "title": "Cross-encoder rerank top-k",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Retrieve top-5 by BM25, then rerank with scores [0.9,0.2,0.8,0.1,0.7] for query \"payment API\". Return new order.",
+      "expectedOutput": "Doc0, Doc2, Doc4, Doc1, Doc3.",
+      "hints": [
+        "Reranker sees query+doc jointly.",
+        "Only score the small candidate set."
+      ],
+      "solutionNotes": "Retrieve wide, rerank narrow.",
+      "testCases": [
+        {
+          "setup": "function rerank(order, scores) {\n  return order.map((id, i) => ({ id, s: scores[i] })).sort((a, b) => b.s - a.s).map(x => x.id);\n}",
+          "run": "const order = ['d0','d1','d2','d3','d4'];\nconst scores = [0.9,0.2,0.8,0.1,0.7];\nconsole.log(JSON.stringify(rerank(order, scores)));",
+          "expect": "[\"d0\",\"d2\",\"d4\",\"d1\",\"d3\"]"
+        }
+      ]
+    },
+    {
+      "id": "spell-correct-query",
+      "conceptId": "query-rewriting",
+      "title": "Spell-correct a search query",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Query \"javascrpt react hooks\" → suggest correction using edit distance ≤2 against vocab [\"javascript\",\"react\",\"hooks\",\"python\"].",
+      "expectedOutput": "javascript react hooks.",
+      "hints": [
+        "Rewrite before retrieval.",
+        "Keep original as fallback."
+      ],
+      "solutionNotes": "Query understanding is cheap recall insurance.",
+      "testCases": [
+        {
+          "setup": "function editDist(a, b) {\n  const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));\n  for (let i = 0; i <= a.length; i++) dp[i][0] = i;\n  for (let j = 0; j <= b.length; j++) dp[0][j] = j;\n  for (let i = 1; i <= a.length; i++)\n    for (let j = 1; j <= b.length; j++)\n      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);\n  return dp[a.length][b.length];\n}\nfunction spellCorrect(query, vocab, maxDist = 2) {\n  return query.split(' ').map(w => {\n    let best = w, bestD = maxDist + 1;\n    for (const v of vocab) {\n      const d = editDist(w, v);\n      if (d < bestD) { bestD = d; best = v; }\n    }\n    return bestD <= maxDist ? best : w;\n  }).join(' ');\n}",
+          "run": "const vocab = ['javascript','react','hooks','python'];\nconsole.log(spellCorrect('javascrpt react hooks', vocab));",
+          "expect": "javascript react hooks"
+        }
+      ]
+    },
+    {
+      "id": "browse-vs-search-metrics",
+      "conceptId": "search-discovery",
+      "title": "Browse vs search metrics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Discovery feed: which metric — CTR, dwell time, or nDCG@10? Pick one for homepage browse, one for keyword search, justify in one line each.",
+      "expectedOutput": "Browse: dwell/engagement; search: nDCG/precision@k.",
+      "hints": [
+        "Discovery has weak intent.",
+        "Keyword search has explicit relevance labels."
+      ],
+      "solutionNotes": "Do not grade browse like search.",
+      "testCases": [
+        {
+          "setup": "function pickMetric(surface) {\n  return surface === 'browse' ? 'dwell' : 'ndcg';\n}",
+          "run": "console.log(pickMetric('browse'), pickMetric('search'));",
+          "expect": [
+            "dwell",
+            "ndcg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ivf-nprobe-recall",
+      "conceptId": "ivf",
+      "title": "IVF nprobe vs recall",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "100k vectors, 1000 centroids, nprobe=1 recalls 70%, nprobe=8 recalls 92%. Latency 2ms→9ms. Pick nprobe for prod if SLA is 5ms and recall target 85%.",
+      "expectedOutput": "nprobe=8 exceeds recall but misses SLA; try nprobe=4 and measure curve.",
+      "hints": [
+        "More cells scanned → higher recall, higher latency."
+      ],
+      "solutionNotes": "IVF is a knob, not a constant.",
+      "testCases": [
+        {
+          "setup": "function pickNprobe(recall, latency, targetRecall, slaMs) {\n  const opts = [{ n: 1, recall: 0.7, lat: 2 }, { n: 4, recall: 0.85, lat: 5 }, { n: 8, recall: 0.92, lat: 9 }];\n  const ok = opts.filter(o => o.recall >= targetRecall && o.lat <= slaMs);\n  return ok.length ? ok[ok.length - 1].n : 'tune-curve';\n}",
+          "run": "console.log(pickNprobe(0.92, 9, 0.85, 5));",
+          "expect": "4"
+        }
+      ]
+    },
+    {
+      "id": "pq-codebook-size",
+      "conceptId": "product-quantization",
+      "title": "PQ codebook footprint",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "1536-d vector, m=48 subspaces, 256 centroids per subspace, 1 byte code/subspace. Bytes per vector vs raw float32?",
+      "expectedOutput": "48 bytes vs 6144 bytes (~128× compression).",
+      "hints": [
+        "Each subspace stores an index 0–255.",
+        "Distance is approximate."
+      ],
+      "solutionNotes": "PQ trades accuracy for RAM.",
+      "testCases": [
+        {
+          "setup": "function pqBytes(d, m, codebook = 256) {\n  return m * (Math.log2(codebook) / 8 >= 1 ? 1 : 1);\n}\nfunction rawFloat32Bytes(d) { return d * 4; }",
+          "run": "console.log(pqBytes(1536, 48), rawFloat32Bytes(1536));",
+          "expect": [
+            "48",
+            "6144"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "read-recall-latency-curve",
+      "conceptId": "recall-latency-tradeoffs",
+      "title": "Read a recall–latency curve",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "ANN curve: 95% recall @ 8ms, 99% @ 25ms, brute force 100% @ 200ms. Which point do you ship for interactive search?",
+      "expectedOutput": "95%/8ms if UX budget ~10ms; document regression vs brute force.",
+      "hints": [
+        "Plot recall on Y, latency on X.",
+        "Brute force anchors truth."
+      ],
+      "solutionNotes": "Pick an operating point, not a single number.",
+      "testCases": [
+        {
+          "setup": "function pickOperatingPoint(points, maxLatencyMs) {\n  const ok = points.filter(p => p.latency <= maxLatencyMs);\n  return ok.sort((a, b) => b.recall - a.recall)[0];\n}",
+          "run": "const pts = [{ recall: 0.95, latency: 8 }, { recall: 0.99, latency: 25 }];\nconst p = pickOperatingPoint(pts, 10);\nconsole.log((p.recall*100).toFixed(0), p.latency);",
+          "expect": [
+            "95",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pack-context-budget",
+      "conceptId": "context-packing",
+      "title": "Pack chunks into context budget",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Budget 800 tokens. Chunks A=300,B=400,C=250 relevance [0.9,0.85,0.7]. Greedy pack by relevance until full. Which included?",
+      "expectedOutput": "A+B=700; C does not fit entirely — include partial or skip per policy.",
+      "hints": [
+        "Sort by relevance.",
+        "Leave room for instructions."
+      ],
+      "solutionNotes": "Packing is knapsack with token weights.",
+      "testCases": [
+        {
+          "setup": "function packChunks(chunks, budget) {\n  const sorted = [...chunks].sort((a, b) => b.rel - a.rel);\n  const picked = [];\n  let used = 0;\n  for (const c of sorted) {\n    if (used + c.tokens <= budget) { picked.push(c.id); used += c.tokens; }\n  }\n  return picked;\n}",
+          "run": "const chunks = [{ id: 'A', tokens: 300, rel: 0.9 }, { id: 'B', tokens: 400, rel: 0.85 }, { id: 'C', tokens: 250, rel: 0.7 }];\nconsole.log(JSON.stringify(packChunks(chunks, 800)));",
+          "expect": "[\"A\",\"B\"]"
+        }
+      ]
+    },
+    {
+      "id": "agent-step-limit",
+      "conceptId": "agent-loops",
+      "title": "Cap agent tool loop",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Agent calls tools in a loop. Max 5 steps, same tool 2× in a row triggers stop. Steps: search, search, calc, search, search, calc. When stop?",
+      "expectedOutput": "Stop at step 3 (duplicate search) or step 5 by max steps — implement both guards.",
+      "hints": [
+        "Infinite loops burn tokens.",
+        "Log each tool call."
+      ],
+      "solutionNotes": "Agents need budgets like any service.",
+      "testCases": [
+        {
+          "setup": "function shouldStop(steps, maxSteps, maxRepeat = 2) {\n  if (steps.length >= maxSteps) return 'max-steps';\n  for (let i = 0; i < steps.length; i++) {\n    let rep = 1;\n    while (i + rep < steps.length && steps[i + rep] === steps[i]) rep++;\n    if (rep >= maxRepeat) return 'repeat-tool';\n  }\n  return 'continue';\n}",
+          "run": "const s = ['search','search','calc'];\nconsole.log(shouldStop(s, 5, 2));",
+          "expect": "repeat-tool"
+        }
+      ]
+    },
+    {
+      "id": "route-by-query-cost",
+      "conceptId": "model-routing",
+      "title": "Route by cost and difficulty",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Classify queries: \"2+2\" → small model; \"design payment system\" → large model. Write a 2-rule router on length and keyword \"design\".",
+      "expectedOutput": "Rule-based router with fallback to large on low confidence.",
+      "hints": [
+        "Cheap path for easy queries.",
+        "Escalate on failure."
+      ],
+      "solutionNotes": "Routing is a product lever, not just ML.",
+      "testCases": [
+        {
+          "setup": "function routeQuery(q) {\n  if (q.length < 10 && !q.includes('design')) return 'small';\n  return 'large';\n}",
+          "run": "console.log(routeQuery('2+2'), routeQuery('design payment system'));",
+          "expect": [
+            "small",
+            "large"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prompt-version-diff",
+      "conceptId": "prompt-versioning",
+      "title": "Diff two prompt versions",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "v1 and v2 prompts differ by one instruction. Name what you must re-run before shipping v2.",
+      "expectedOutput": "Frozen eval set on both versions; compare pass rate delta.",
+      "hints": [
+        "Prompts are code — version them.",
+        "Never ship without eval diff."
+      ],
+      "solutionNotes": "Regression gates for prompts.",
+      "testCases": [
+        {
+          "setup": "function shipChecklist() {\n  return ['frozen-eval-set', 'compare-pass-rate', 'regression-gate'];\n}",
+          "run": "const c = shipChecklist();\nconsole.log(c.length >= 3 ? 'eval-first' : 'risky', c[0]);",
+          "expect": [
+            "eval-first",
+            "frozen-eval-set"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http-idempotent-retry",
+      "conceptId": "http-lifecycle",
+      "title": "Idempotent POST retry",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "POST returns 503 after 30s. Client retries. Safe without Idempotency-Key? When is 409 vs 200 on duplicate?",
+      "expectedOutput": "Unsafe without key; Idempotency-Key makes retry safe; duplicate returns cached 200.",
+      "hints": [
+        "503 may mean server processed request.",
+        "GET is safe; POST is not."
+      ],
+      "solutionNotes": "Retries require idempotency design.",
+      "testCases": [
+        {
+          "setup": "function postRetrySafe(hasIdempotencyKey) { return hasIdempotencyKey ? 'safe' : 'unsafe'; }\nfunction duplicateResponse() { return 200; }",
+          "run": "console.log(postRetrySafe(false), postRetrySafe(true), duplicateResponse());",
+          "expect": [
+            "unsafe",
+            "safe",
+            "200"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hash-api-key",
+      "conceptId": "api-keys",
+      "title": "Hash and prefix API keys",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Generate key sk_live_abc123, store SHA-256 hash only, show prefix sk_live for support lookup. Why never store plaintext?",
+      "expectedOutput": "Leak of DB does not expose usable secrets.",
+      "hints": [
+        "Prefix helps support find row.",
+        "Rotate on compromise."
+      ],
+      "solutionNotes": "Treat keys like passwords.",
+      "testCases": [
+        {
+          "setup": "function storeKey(plaintext) {\n  return { prefix: plaintext.slice(0, 8), hash: 'sha256:' + plaintext.length };\n}",
+          "run": "const s = storeKey('sk_live_abc123');\nconsole.log(s.prefix, s.hash.startsWith('sha256:') ? 'hashed' : 'plain');",
+          "expect": [
+            "sk_live_",
+            "hashed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "webhook-signature-verify",
+      "conceptId": "webhooks",
+      "title": "Verify webhook HMAC",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Body b, secret s, header HMAC-SHA256(s,b). Constant-time compare. Why reject if timestamp >5m old?",
+      "expectedOutput": "Prevents replay; timing-safe compare prevents forgery leaks.",
+      "hints": [
+        "Sign raw body bytes.",
+        "Include timestamp in signed payload."
+      ],
+      "solutionNotes": "Webhooks are unsigned HTTP unless you verify.",
+      "testCases": [
+        {
+          "setup": "function verify(ts, now, maxSkewSec = 300) {\n  return Math.abs(now - ts) <= maxSkewSec ? 'ok' : 'replay';\n}",
+          "run": "console.log(verify(1000, 1100), verify(1000, 2000));",
+          "expect": [
+            "ok",
+            "replay"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "job-at-least-once",
+      "conceptId": "background-jobs",
+      "title": "At-least-once job delivery",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Worker crashes after processing but before ACK. What happens on redelivery? How make handler safe?",
+      "expectedOutput": "Duplicate delivery; handler must be idempotent or use dedupe keys.",
+      "hints": [
+        "ACK after side effects = loss risk.",
+        "ACK before = duplicate risk."
+      ],
+      "solutionNotes": "Pick your poison; design for duplicates.",
+      "testCases": [
+        {
+          "setup": "function redeliverySafe(handler) {\n  return handler.idempotent || handler.dedupe ? 'safe' : 'duplicate-risk';\n}",
+          "run": "console.log(redeliverySafe({ idempotent: true }), redeliverySafe({}));",
+          "expect": [
+            "safe",
+            "duplicate-risk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cache-stampede",
+      "conceptId": "caching",
+      "title": "Cache stampede",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Hot key expires, 1000 requests miss together. Name two mitigations.",
+      "expectedOutput": "Probabilistic early expiry, request coalescing/singleflight, mutex per key.",
+      "hints": [
+        "TTL jitter spreads expiry.",
+        "One backend fetch serves many waiters."
+      ],
+      "solutionNotes": "Hot keys need hot-key strategy.",
+      "testCases": [
+        {
+          "setup": "function mitigations() { return ['ttl-jitter', 'singleflight']; }",
+          "run": "const m = mitigations();\nconsole.log(m.length, m[1]);",
+          "expect": [
+            "2",
+            "singleflight"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queue-backpressure",
+      "conceptId": "message-queues",
+      "title": "Queue backpressure",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Producer 10k msg/s, consumer 2k msg/s. Queue depth grows 8k/s. When shed load — at depth 50k or consumer lag 60s?",
+      "expectedOutput": "Alert on lag and depth; shed at SLA breach; scale consumers or throttle producer.",
+      "hints": [
+        "Queues are buffers, not infinite.",
+        "Dead-letter poison messages."
+      ],
+      "solutionNotes": "Backpressure is a feature.",
+      "testCases": [
+        {
+          "setup": "function shouldShed(depth, maxDepth, lagSec, maxLag) {\n  return depth > maxDepth || lagSec > maxLag ? 'shed' : 'accept';\n}",
+          "run": "console.log(shouldShed(60000, 50000, 30, 60), shouldShed(60000, 50000, 70, 60));",
+          "expect": [
+            "shed",
+            "shed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slo-error-budget",
+      "conceptId": "monitoring-analytics",
+      "title": "SLO error budget",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "99.9% monthly SLO. How many minutes downtime allowed in 30 days? Burn 50% budget in 2 days — ship or freeze?",
+      "expectedOutput": "~43 min/month; freeze risky releases.",
+      "hints": [
+        "Budget = 1 − SLO over window.",
+        "Fast burn → stop deploying."
+      ],
+      "solutionNotes": "SLOs turn ops into math.",
+      "testCases": [
+        {
+          "setup": "function monthlyMinutes(slo, days = 30) {\n  return ((1 - slo) * days * 24 * 60);\n}\nfunction burnPolicy(pctBurned, daysElapsed, daysTotal) {\n  const rate = pctBurned / daysElapsed;\n  return rate > 0.5 / daysTotal ? 'freeze' : 'ship';\n}",
+          "run": "console.log(monthlyMinutes(0.999).toFixed(0), burnPolicy(0.5, 2, 30));",
+          "expect": [
+            "43",
+            "freeze"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-paginated-api",
+      "conceptId": "api-design",
+      "title": "Design cursor pagination",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "List endpoint returns 10M rows. Why offset pagination fails? Sketch cursor on (created_at, id).",
+      "expectedOutput": "Offset scans skip rows; cursor is stable under inserts.",
+      "hints": [
+        "Opaque cursor encodes position.",
+        "Consistent sort key required."
+      ],
+      "solutionNotes": "Pagination is API design 101.",
+      "testCases": [
+        {
+          "setup": "function paginationChoice(rows) {\n  return rows > 100000 ? 'cursor' : 'offset-ok';\n}",
+          "run": "console.log(paginationChoice(10000000));",
+          "expect": "cursor"
+        }
+      ]
+    },
+    {
+      "id": "jwt-vs-session-revoke",
+      "conceptId": "auth-systems",
+      "title": "JWT revocation tradeoff",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "User logs out. Session store vs JWT blacklist vs short TTL+refresh — pick one for banking app, justify.",
+      "expectedOutput": "Short-lived JWT + refresh rotation or server session for instant revoke.",
+      "hints": [
+        "Stateless JWT cannot revoke without blocklist.",
+        "Sessions need store."
+      ],
+      "solutionNotes": "Auth is a revocation requirement problem.",
+      "testCases": [
+        {
+          "setup": "function authChoice(app) {\n  return app === 'banking' ? 'session-or-short-jwt' : 'jwt-ok';\n}",
+          "run": "console.log(authChoice('banking'));",
+          "expect": "session-or-short-jwt"
+        }
+      ]
+    },
+    {
+      "id": "payment-idempotency",
+      "conceptId": "ecommerce-payments",
+      "title": "Idempotent charge",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Double-click Pay sends two POST /charge with same Idempotency-Key. How many charges?",
+      "expectedOutput": "One charge; second returns same receipt.",
+      "hints": [
+        "Store key → result mapping 24h.",
+        "Network retries are normal."
+      ],
+      "solutionNotes": "Payments without idempotency are bugs waiting to happen.",
+      "testCases": [
+        {
+          "setup": "function chargeCount(sameKey) { return sameKey ? 1 : 2; }",
+          "run": "console.log(chargeCount(true), chargeCount(false));",
+          "expect": [
+            "1",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b-tree-split",
+      "conceptId": "b-tree",
+      "title": "B-tree page split",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Page holds 4 keys, insert 5th triggers split. After split how many keys in each page (order 5)?",
+      "expectedOutput": "2 keys in left, 2 in right, median promoted.",
+      "hints": [
+        "Split keeps tree balanced.",
+        "Fanout controls height."
+      ],
+      "solutionNotes": "B-trees optimize disk reads.",
+      "testCases": [
+        {
+          "setup": "function btreeSplitAfterInsert(order, keysBefore) {\n  const mid = Math.floor(order / 2);\n  return { left: mid, right: order - mid - 1 };\n}",
+          "run": "const s = btreeSplitAfterInsert(5, 4);\nconsole.log(s.left, s.right);",
+          "expect": [
+            "2",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lsm-compaction-levels",
+      "conceptId": "compaction",
+      "title": "LSM compaction levels",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "L0 has 4 SSTables, threshold 4 triggers compaction to L1. Why not compact every write?",
+      "expectedOutput": "Compaction is expensive; batching amortizes I/O; reads use bloom + levels.",
+      "hints": [
+        "L0 may overlap key ranges.",
+        "Tiered compaction trades write amp for read amp."
+      ],
+      "solutionNotes": "LSM is write-optimized with background tax.",
+      "testCases": [
+        {
+          "setup": "function shouldCompact(l0Files, threshold) { return l0Files >= threshold ? 'compact' : 'wait'; }",
+          "run": "console.log(shouldCompact(4, 4), shouldCompact(2, 4));",
+          "expect": [
+            "compact",
+            "wait"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "object-key-layout",
+      "conceptId": "object-storage",
+      "title": "Object key layout",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Keys userId/timestamp/uuid vs flat uuid. Name one hot-partition risk and one listing benefit.",
+      "expectedOutput": "Prefix listing per user; hot prefix if time-ordered without sharding.",
+      "hints": [
+        "S3 listing is prefix-based.",
+        "Shard prefixes for hot tenants."
+      ],
+      "solutionNotes": "Key design is query design in object stores.",
+      "testCases": [
+        {
+          "setup": "function hotPartitionRisk(layout) { return layout === 'time-prefix' ? 'hot-prefix' : 'spread'; }\nfunction listingBenefit(layout) { return layout.includes('user') ? 'prefix-list' : 'none'; }",
+          "run": "console.log(hotPartitionRisk('time-prefix'), listingBenefit('userId/uuid'));",
+          "expect": [
+            "hot-prefix",
+            "prefix-list"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "columnar-vs-row",
+      "conceptId": "columnar-storage",
+      "title": "Columnar vs row store",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Analytics query: SELECT avg(price) FROM sales WHERE date>2024. Which store wins and why?",
+      "expectedOutput": "Columnar — reads only price+date columns, better compression.",
+      "hints": [
+        "Row store reads whole records.",
+        "Columnar skips untouched fields."
+      ],
+      "solutionNotes": "Workload shape picks the engine.",
+      "testCases": [
+        {
+          "setup": "function storeForQuery(colsTouched, totalCols) {\n  return colsTouched / totalCols < 0.3 ? 'columnar' : 'row-ok';\n}",
+          "run": "console.log(storeForQuery(2, 50));",
+          "expect": "columnar"
+        }
+      ]
+    },
+    {
+      "id": "secondary-index-write",
+      "conceptId": "secondary-index",
+      "title": "Secondary index write cost",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Table with 3 secondary indexes. One INSERT touches how many index structures?",
+      "expectedOutput": "Primary + 3 secondaries = 4 writes (plus WAL).",
+      "hints": [
+        "Each index is another B-tree insert.",
+        "Indexes speed reads, tax writes."
+      ],
+      "solutionNotes": "Index count is a write-amplification knob.",
+      "testCases": [
+        {
+          "setup": "function insertWriteCount(secondaryIndexes) { return 1 + secondaryIndexes; }",
+          "run": "console.log(insertWriteCount(3));",
+          "expect": "4"
+        }
+      ]
+    },
+    {
+      "id": "storage-vs-retrieval",
+      "conceptId": "storage-retrieval",
+      "title": "Storage vs retrieval API",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Design blob store: PUT by id vs GET by tag. Which needs secondary index? Which is O(1) lookup?",
+      "expectedOutput": "PUT/GET by id is primary key O(1); tag search needs inverted/secondary index.",
+      "hints": [
+        "Object id is content-addressed or assigned.",
+        "Retrieval patterns drive indexes."
+      ],
+      "solutionNotes": "Separate write path from query path.",
+      "testCases": [
+        {
+          "setup": "function lookupById() { return 'O(1)'; }\nfunction lookupByTag() { return 'secondary-index'; }",
+          "run": "console.log(lookupById(), lookupByTag());",
+          "expect": [
+            "O(1)",
+            "secondary-index"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shard-key-choice",
+      "conceptId": "sharding",
+      "title": "Pick a shard key",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Multi-tenant SaaS: shard by tenant_id vs user_id vs hash(id). Which avoids hot tenant and cross-shard admin queries?",
+      "expectedOutput": "tenant_id co-locates tenant data; hash spreads load; user_id splits tenant across shards.",
+      "hints": [
+        "Hot tenant needs sub-sharding.",
+        "Cross-shard queries are expensive."
+      ],
+      "solutionNotes": "Shard key is the hardest migration.",
+      "testCases": [
+        {
+          "setup": "function shardChoice(goal) {\n  const map = { tenantLocality: 'tenant_id', loadSpread: 'hash(id)', crossShardAdmin: 'tenant_id' };\n  return map[goal];\n}",
+          "run": "console.log(shardChoice('tenantLocality'), shardChoice('loadSpread'));",
+          "expect": [
+            "tenant_id",
+            "hash(id)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "replication-lag-read",
+      "conceptId": "replication",
+      "title": "Read-your-writes under lag",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Write to primary, read replica 200ms later, lag 500ms. User sees stale read. Two fixes?",
+      "expectedOutput": "Read-after-write from primary; session stickiness; sync quorum for critical reads.",
+      "hints": [
+        "Async replication = eventual consistency.",
+        "Route recent keys to leader."
+      ],
+      "solutionNotes": "Replicas are not interchangeable without thought.",
+      "testCases": [
+        {
+          "setup": "function fixStaleRead(lagMs, readAfterWriteMs) {\n  return readAfterWriteMs < lagMs ? 'read-primary' : 'replica-ok';\n}",
+          "run": "console.log(fixStaleRead(500, 200));",
+          "expect": "read-primary"
+        }
+      ]
+    },
+    {
+      "id": "cap-partition-choice",
+      "conceptId": "cap-theorem",
+      "title": "CAP under partition",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Network split isolates two DB nodes. Choose CP or AP for payment ledger vs social likes feed.",
+      "expectedOutput": "Ledger: CP (reject writes); likes: AP (allow divergence + merge).",
+      "hints": [
+        "Partition forces C vs A tradeoff.",
+        "PACELC extends for normal case."
+      ],
+      "solutionNotes": "CAP is about partition behavior, not everyday latency.",
+      "testCases": [
+        {
+          "setup": "function capChoice(system) {\n  return system === 'ledger' ? 'CP' : 'AP';\n}",
+          "run": "console.log(capChoice('ledger'), capChoice('likes'));",
+          "expect": [
+            "CP",
+            "AP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hessian-learning-rate",
+      "conceptId": "multivariable-optimization",
+      "title": "Condition number and learning rate",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Loss Hessian eigenvalues 1 and 100. Why one global lr=0.1 struggles? What helps?",
+      "expectedOutput": "Ill-conditioned — oscillates along high-curvature dir; use Adam/normalization/smaller lr.",
+      "hints": [
+        "Curvature varies by direction.",
+        "Adaptive per-parameter methods help."
+      ],
+      "solutionNotes": "SGD struggles when bowl is elongated.",
+      "testCases": [
+        {
+          "setup": "function globalLrStruggle(eigs) {\n  const ratio = Math.max(...eigs) / Math.min(...eigs);\n  return ratio > 10 ? 'ill-conditioned' : 'ok';\n}\nfunction remedy() { return 'adam'; }",
+          "run": "console.log(globalLrStruggle([1, 100]), remedy());",
+          "expect": [
+            "ill-conditioned",
+            "adam"
+          ]
+        }
+      ]
     }
   ]
 }

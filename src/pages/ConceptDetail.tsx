@@ -6,6 +6,7 @@ import {
   Copy,
   ExternalLink,
   Lightbulb,
+  Lock,
   Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -31,6 +32,7 @@ import {
   reviewQuestionsForConcept,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
+import { useGates } from '../hooks/useGates';
 import { confidence1to5, deriveConceptStatus } from '../lib/conceptState';
 import { ConceptNotes } from './partials/ConceptNotes';
 
@@ -45,6 +47,7 @@ export default function ConceptDetail() {
   const { id } = useParams();
   const concept = id ? CONCEPT_BY_ID[id] : undefined;
   const { mastery, review } = useConceptMastery();
+  const { gateStatus } = useGates();
   const [copied, setCopied] = useState(false);
 
   if (!concept) {
@@ -64,6 +67,7 @@ export default function ConceptDetail() {
   const drills = drillsForConcept(concept.id);
   const artifacts = artifactsForConcept(concept.id);
   const questions = reviewQuestionsForConcept(concept.id);
+  const gate = gateStatus(concept.id);
 
   async function copyAiPrompt() {
     try {
@@ -103,6 +107,32 @@ export default function ConceptDetail() {
         </div>
         <p className="mt-3 max-w-2xl text-sm text-white/70">{concept.description}</p>
       </div>
+
+      {gate.blocked && (
+        <Card className="mb-6 border-amber-500/30 bg-amber-500/5 p-4">
+          <div className="flex items-start gap-3">
+            <Lock className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-medium text-amber-200">Gated — complete one unlock path</div>
+              <p className="mt-1 text-xs text-white/50">{gate.reason}</p>
+              <ul className="mt-3 space-y-1.5">
+                {gate.requirements.map((req, i) => (
+                  <li key={i} className="flex items-center gap-2 text-xs">
+                    {req.met
+                      ? <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                      : <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-white/20" />}
+                    {req.href && !req.met ? (
+                      <Link to={req.href} className="text-sky-300 hover:text-sky-200">{req.label}</Link>
+                    ) : (
+                      <span className={req.met ? 'text-white/40 line-through' : 'text-white/70'}>{req.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Card>
+      )}
 
       {/* Confidence + rating */}
       <Card className="mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
@@ -240,7 +270,7 @@ export default function ConceptDetail() {
             {artifacts.length ? (
               <div className="space-y-2">
                 {artifacts.map(a => (
-                  <Card key={a.id} as="link" to="/playground" className="flex items-center justify-between gap-3 p-3">
+                  <Card key={a.id} as="link" to={`/playground?artifact=${a.id}`} className="flex items-center justify-between gap-3 p-3">
                     <div>
                       <div className="text-sm font-medium text-white">{a.title}</div>
                       <div className="text-xs text-white/40">{a.type}</div>

@@ -25,13 +25,13 @@ const PRINCIPLES = [
 ];
 
 const SURFACES = [
-  { tag: '01', title: 'Learn', body: 'Roadmaps and a 125-concept library. FSRS surfaces concepts right before you forget.' },
-  { tag: '02', title: 'Practice', body: '66 drills tuned to your ELO. Spaced reviews keep what you\'ve learned from decaying.' },
+  { tag: '01', title: 'Today', body: 'One plan: concept → drill → artifact → review. Like roadmap.sh, but you ship code.' },
+  { tag: '02', title: 'Practice', body: '158 editorial drills with verified tests on the spine. FSRS keeps it sticky.' },
   { tag: '03', title: 'Playground', body: 'Monaco + Excalidraw + Socratic AI + a Feynman gate. Build the artifact; explain it back.' },
 ];
 
 const STEPS = [
-  { tag: '01', title: 'Pick a concept', body: 'Browse 125 concepts or let the dashboard pick. The hero is always "what next".' },
+  { tag: '01', title: 'Pick a path', body: 'Onboarding picks your roadmap. Today always shows the next checkbox.' },
   { tag: '02', title: 'Drill, then build', body: 'Solve focused drills, then ship the artifact in the Playground. Not learned until it exists.' },
   { tag: '03', title: 'Review and compound', body: 'FSRS spaced repetition keeps it sticky. Progress is whether learning is compounding.' },
 ];

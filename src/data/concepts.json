@@ -39,7 +39,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book \u2014 Tokenization",
+          "title": "Stanford IR Book — Tokenization",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
           "type": "doc"
         },
@@ -48,6 +48,9 @@
           "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
           "type": "video"
         }
+      ],
+      "artifacts": [
+        "implement-bm25-highsignal"
       ]
     },
     {
@@ -73,8 +76,8 @@
         "tf-idf",
         "search-discovery"
       ],
-      "description": "Term \u2192 posting list mapping that powers fast keyword lookup.",
-      "mentalModel": "An inverted index flips documents inside out: instead of doc \u2192 terms, you store term \u2192 list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.",
+      "description": "Term → posting list mapping that powers fast keyword lookup.",
+      "mentalModel": "An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.",
       "commonMistakes": [
         "Storing postings unsorted, making intersection O(n*m)",
         "Forgetting document frequency, which ranking later needs",
@@ -93,10 +96,14 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book \u2014 The term vocabulary & postings lists",
+          "title": "Stanford IR Book — The term vocabulary & postings lists",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
           "type": "doc"
         }
+      ],
+      "artifacts": [
+        "implement-bm25-highsignal",
+        "object-storage-index"
       ]
     },
     {
@@ -118,7 +125,7 @@
       "related": [
         "bm25"
       ],
-      "description": "Term frequency \u00d7 inverse document frequency weighting for relevance.",
+      "description": "Term frequency × inverse document frequency weighting for relevance.",
       "mentalModel": "TF-IDF says a term matters more when it appears often in a document (TF) but is rare across the corpus (IDF). It is the conceptual ancestor of BM25.",
       "commonMistakes": [
         "Ignoring document length so long docs always win",
@@ -133,11 +140,12 @@
       ],
       "resources": [
         {
-          "title": "Stanford IR Book \u2014 Scoring & term weighting",
+          "title": "Stanford IR Book — Scoring & term weighting",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
           "type": "doc"
         }
-      ]
+      ],
+      "artifacts": []
     },
     {
       "id": "bm25",
@@ -167,7 +175,7 @@
       "description": "The standard lexical ranking function: TF saturation + IDF + length normalization.",
       "mentalModel": "BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter). It is still the strongest single keyword ranker and the lexical half of hybrid search.",
       "commonMistakes": [
-        "Believing embeddings make BM25 obsolete \u2014 they are complementary",
+        "Believing embeddings make BM25 obsolete — they are complementary",
         "Leaving k1/b at defaults without tuning on your corpus",
         "Skipping document length normalization",
         "Not building search evals to compare against vector retrieval"
@@ -178,7 +186,8 @@
         "codevetter"
       ],
       "artifacts": [
-        "implement-bm25-highsignal"
+        "implement-bm25-highsignal",
+        "hybrid-search-v0"
       ],
       "drills": [
         "calculate-bm25-score",
@@ -219,7 +228,9 @@
         "bm25"
       ],
       "related": [
-        "search-evals"
+        "search-evals",
+        "descriptive-statistics",
+        "hypothesis-testing"
       ],
       "description": "Precision, recall, MRR, and nDCG for measuring retrieval quality.",
       "mentalModel": "Precision/recall measure set quality; MRR rewards getting one right answer near the top; nDCG rewards graded relevance discounted by rank. Pick the metric that matches what users feel.",
@@ -232,9 +243,15 @@
       "reviewQuestions": [
         "rq-mrr-vs-ndcg"
       ],
+      "drills": [
+        "compute-precision-recall"
+      ],
+      "artifacts": [
+        "search-eval-harness"
+      ],
       "resources": [
         {
-          "title": "Stanford IR Book \u2014 Evaluation in IR",
+          "title": "Stanford IR Book — Evaluation in IR",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
           "type": "doc"
         }
@@ -255,15 +272,17 @@
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [
-        "ranking-metrics"
+        "ranking-metrics",
+        "hypothesis-testing"
       ],
       "related": [
         "bm25",
         "hybrid-search",
-        "llm-evals"
+        "llm-evals",
+        "ab-testing-engineering"
       ],
       "description": "Building a labelled query set and harness to compare retrieval approaches.",
-      "mentalModel": "You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever \u2014 it turns ranking changes from vibes into numbers.",
+      "mentalModel": "You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever — it turns ranking changes from vibes into numbers.",
       "commonMistakes": [
         "Tuning ranking without a frozen eval set",
         "Letting the eval set leak into tuning decisions",
@@ -380,11 +399,15 @@
       ],
       "resources": [
         {
-          "title": "Sentence-Transformers \u2014 Cross-Encoders",
+          "title": "Sentence-Transformers — Cross-Encoders",
           "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "cross-encoder-rerank"
+      ],
+      "artifacts": []
     },
     {
       "id": "query-rewriting",
@@ -406,12 +429,19 @@
       "description": "Expanding, correcting, and normalizing queries before retrieval.",
       "resources": [
         {
-          "title": "Stanford IR Book \u2014 Query expansion",
+          "title": "Stanford IR Book — Query expansion",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
           "type": "doc"
         }
       ],
-      "mentalModel": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work \u2014 never trust the raw query."
+      "mentalModel": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work — never trust the raw query.",
+      "drills": [
+        "spell-correct-query"
+      ],
+      "reviewQuestions": [
+        "rq-query-rewriting-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "search-discovery",
@@ -439,7 +469,16 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Discovery search is for \"I do not know what I want yet\" \u2014 no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
+      "mentalModel": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way.",
+      "drills": [
+        "browse-vs-search-metrics"
+      ],
+      "reviewQuestions": [
+        "rq-search-discovery-core"
+      ],
+      "artifacts": [
+        "search-platform-design-doc"
+      ]
     },
     {
       "id": "embeddings",
@@ -484,6 +523,9 @@
           "url": "https://huggingface.co/spaces/mteb/leaderboard",
           "type": "article"
         }
+      ],
+      "artifacts": [
+        "rag-pipeline-v0"
       ]
     },
     {
@@ -505,7 +547,7 @@
         "topk-vector-search",
         "brute-force-vector-db"
       ],
-      "description": "Cosine, dot product, and L2 distance \u2014 how to score vector closeness.",
+      "description": "Cosine, dot product, and L2 distance — how to score vector closeness.",
       "mentalModel": "Cosine measures angle (direction), dot product measures angle and magnitude, L2 measures straight-line distance. On normalized vectors cosine and dot product rank identically, and L2 becomes a monotonic function of them.",
       "commonMistakes": [
         "Mixing distance metrics between indexing and querying",
@@ -521,10 +563,14 @@
       ],
       "resources": [
         {
-          "title": "Pinecone \u2014 Vector similarity explained",
+          "title": "Pinecone — Vector similarity explained",
           "url": "https://www.pinecone.io/learn/vector-similarity/",
           "type": "article"
         }
+      ],
+      "artifacts": [
+        "hybrid-search-v0",
+        "tiny-vector-db-brute-force"
       ]
     },
     {
@@ -562,6 +608,9 @@
           "url": "https://en.wikipedia.org/wiki/Nearest_neighbor_search",
           "type": "doc"
         }
+      ],
+      "artifacts": [
+        "tiny-vector-db-brute-force"
       ]
     },
     {
@@ -585,12 +634,12 @@
         "hnsw",
         "metadata-filtering"
       ],
-      "description": "Exact nearest-neighbour search by scanning every vector \u2014 the correctness baseline.",
-      "mentalModel": "Brute force computes the metric against every stored vector. It is O(n\u00b7d) and slow at scale, but it is exact \u2014 making it the recall=1.0 baseline that every ANN index is measured against.",
+      "description": "Exact nearest-neighbour search by scanning every vector — the correctness baseline.",
+      "mentalModel": "Brute force computes the metric against every stored vector. It is O(n·d) and slow at scale, but it is exact — making it the recall=1.0 baseline that every ANN index is measured against.",
       "commonMistakes": [
         "Skipping the brute-force baseline, so ANN recall is unmeasurable",
         "Not batching the matrix multiply for the scan",
-        "Assuming brute force is always too slow \u2014 it is fine for <100k vectors"
+        "Assuming brute force is always too slow — it is fine for <100k vectors"
       ],
       "realWorldUsage": "FAISS IndexFlat, the ground-truth oracle for ANN benchmarks.",
       "projectApplications": [
@@ -598,7 +647,8 @@
         "highsignal"
       ],
       "artifacts": [
-        "tiny-vector-db-brute-force"
+        "tiny-vector-db-brute-force",
+        "vector-metadata-filter"
       ],
       "drills": [
         "build-brute-force-index"
@@ -608,7 +658,7 @@
       ],
       "resources": [
         {
-          "title": "FAISS \u2014 Getting started",
+          "title": "FAISS — Getting started",
           "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started",
           "type": "doc"
         }
@@ -635,12 +685,12 @@
         "ivf",
         "recall-latency-tradeoffs"
       ],
-      "description": "Hierarchical Navigable Small World graphs \u2014 the dominant ANN index.",
-      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers \u2014 turning O(n) scan into O(log n) graph traversal.",
+      "description": "Hierarchical Navigable Small World graphs — the dominant ANN index.",
+      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.",
       "commonMistakes": [
         "Tuning efSearch/efConstruction blindly without a recall curve",
         "Ignoring that HNSW is memory-hungry and hard to update/delete",
-        "Expecting exact results \u2014 it is approximate by design"
+        "Expecting exact results — it is approximate by design"
       ],
       "realWorldUsage": "Default index in Qdrant, Weaviate, pgvector, Lucene/Elasticsearch kNN.",
       "projectApplications": [
@@ -659,6 +709,9 @@
           "url": "https://arxiv.org/abs/1603.09320",
           "type": "paper"
         }
+      ],
+      "artifacts": [
+        "recall-latency-dashboard"
       ]
     },
     {
@@ -682,7 +735,7 @@
         "product-quantization"
       ],
       "description": "Cluster vectors with k-means, then search only the nearest cells (nprobe).",
-      "mentalModel": "IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned \u2014 trading recall for a big speedup.",
+      "mentalModel": "IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned — trading recall for a big speedup.",
       "commonMistakes": [
         "Setting nprobe=1 and wondering why recall is poor",
         "Too few or too many centroids for the dataset size"
@@ -693,11 +746,15 @@
       ],
       "resources": [
         {
-          "title": "Pinecone \u2014 IVF index",
+          "title": "Pinecone — IVF index",
           "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/",
           "type": "article"
         }
-      ]
+      ],
+      "drills": [
+        "ivf-nprobe-recall"
+      ],
+      "artifacts": []
     },
     {
       "id": "product-quantization",
@@ -727,11 +784,15 @@
       ],
       "resources": [
         {
-          "title": "Product Quantization for Nearest Neighbor Search (J\u00e9gou et al.)",
+          "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
           "url": "https://ieeexplore.ieee.org/document/5432202",
           "type": "paper"
         }
-      ]
+      ],
+      "drills": [
+        "pq-codebook-size"
+      ],
+      "artifacts": []
     },
     {
       "id": "metadata-filtering",
@@ -777,12 +838,12 @@
       ],
       "resources": [
         {
-          "title": "Pinecone \u2014 Filtering with metadata",
+          "title": "Pinecone — Filtering with metadata",
           "url": "https://www.pinecone.io/learn/vector-search-filtering/",
           "type": "doc"
         },
         {
-          "title": "Weaviate \u2014 Filtered ANN search",
+          "title": "Weaviate — Filtered ANN search",
           "url": "https://weaviate.io/blog/speed-up-filtered-vector-search",
           "type": "doc"
         }
@@ -827,6 +888,9 @@
           "url": "https://ann-benchmarks.com/",
           "type": "article"
         }
+      ],
+      "drills": [
+        "read-recall-latency-curve"
       ]
     },
     {
@@ -853,7 +917,7 @@
         "context-packing"
       ],
       "description": "Retrieval-Augmented Generation: ground an LLM answer in retrieved context.",
-      "mentalModel": "RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval \u2014 a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.",
+      "mentalModel": "RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval — a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.",
       "commonMistakes": [
         "Blaming the LLM when retrieval failed",
         "No eval set, so retrieval changes are guesswork",
@@ -866,7 +930,8 @@
         "codevetter"
       ],
       "artifacts": [
-        "rag-pipeline-v0"
+        "rag-pipeline-v0",
+        "rag-system-design-doc"
       ],
       "drills": [
         "build-rag-pipeline"
@@ -903,7 +968,7 @@
         "embeddings"
       ],
       "description": "Splitting documents into retrievable units that preserve meaning.",
-      "mentalModel": "A chunk is the atomic unit of retrieval \u2014 too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.",
+      "mentalModel": "A chunk is the atomic unit of retrieval — too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.",
       "commonMistakes": [
         "Fixed character splits that cut sentences mid-thought",
         "Zero overlap, so boundary-spanning answers are lost",
@@ -922,10 +987,13 @@
       ],
       "resources": [
         {
-          "title": "Pinecone \u2014 Chunking strategies",
+          "title": "Pinecone — Chunking strategies",
           "url": "https://www.pinecone.io/learn/chunking-strategies/",
           "type": "article"
         }
+      ],
+      "artifacts": [
+        "rag-pipeline-v0"
       ]
     },
     {
@@ -960,7 +1028,11 @@
           "url": "https://arxiv.org/abs/2307.03172",
           "type": "paper"
         }
-      ]
+      ],
+      "drills": [
+        "pack-context-budget"
+      ],
+      "artifacts": []
     },
     {
       "id": "structured-outputs",
@@ -978,7 +1050,7 @@
         "llm-evals"
       ],
       "description": "Forcing LLM output into a validated JSON schema.",
-      "mentalModel": "Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust \u2014 or reject.",
+      "mentalModel": "Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust — or reject.",
       "commonMistakes": [
         "Parsing JSON out of prose with regex instead of schema mode",
         "No validation step, so malformed output crashes downstream",
@@ -997,10 +1069,13 @@
       ],
       "resources": [
         {
-          "title": "OpenAI \u2014 Structured Outputs",
+          "title": "OpenAI — Structured Outputs",
           "url": "https://platform.openai.com/docs/guides/structured-outputs",
           "type": "doc"
         }
+      ],
+      "artifacts": [
+        "llm-eval-harness"
       ]
     },
     {
@@ -1021,7 +1096,7 @@
         "rag"
       ],
       "description": "Letting an LLM invoke functions/APIs via structured calls.",
-      "mentalModel": "Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code \u2014 it decides what to run.",
+      "mentalModel": "Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code — it decides what to run.",
       "commonMistakes": [
         "Vague tool descriptions, so the model picks the wrong tool",
         "No error handling for failed tool calls",
@@ -1040,11 +1115,12 @@
       ],
       "resources": [
         {
-          "title": "Anthropic \u2014 Tool use",
+          "title": "Anthropic — Tool use",
           "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
           "type": "doc"
         }
-      ]
+      ],
+      "artifacts": []
     },
     {
       "id": "agent-loops",
@@ -1065,8 +1141,8 @@
         "context-packing",
         "llm-evals"
       ],
-      "description": "The plan \u2192 act \u2192 observe loop, with memory and stopping conditions.",
-      "mentalModel": "An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done. The engineering is in the guardrails \u2014 step limits, memory, and human approval \u2014 not the prompt.",
+      "description": "The plan → act → observe loop, with memory and stopping conditions.",
+      "mentalModel": "An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done. The engineering is in the guardrails — step limits, memory, and human approval — not the prompt.",
       "commonMistakes": [
         "No step limit, so the loop runs away",
         "Letting context grow unbounded across iterations",
@@ -1086,7 +1162,11 @@
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         }
-      ]
+      ],
+      "drills": [
+        "agent-step-limit"
+      ],
+      "artifacts": []
     },
     {
       "id": "model-routing",
@@ -1110,7 +1190,7 @@
         "prompt-versioning"
       ],
       "description": "Sending each request to the cheapest model that can handle it.",
-      "mentalModel": "Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones \u2014 with cost and latency tracked per route.",
+      "mentalModel": "Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones — with cost and latency tracked per route.",
       "commonMistakes": [
         "Routing without evals, so quality silently drops",
         "No fallback when the cheap model fails"
@@ -1132,6 +1212,9 @@
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         }
+      ],
+      "drills": [
+        "route-by-query-cost"
       ]
     },
     {
@@ -1152,12 +1235,19 @@
       "description": "Treating prompts as versioned artifacts with logged inputs/outputs.",
       "resources": [
         {
-          "title": "PostHog \u2014 LLM analytics",
+          "title": "PostHog — LLM analytics",
           "url": "https://posthog.com/docs/ai-engineering",
           "type": "doc"
         }
       ],
-      "mentalModel": "Treat prompts like code \u2014 every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
+      "mentalModel": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at.",
+      "drills": [
+        "prompt-version-diff"
+      ],
+      "reviewQuestions": [
+        "rq-prompt-versioning-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "llm-evals",
@@ -1177,7 +1267,10 @@
       "related": [
         "search-evals",
         "model-routing",
-        "ml-evaluation"
+        "ml-evaluation",
+        "hypothesis-testing",
+        "ab-testing-engineering",
+        "estimation-confidence"
       ],
       "description": "Measuring LLM output quality with datasets, graders, and LLM-as-judge.",
       "mentalModel": "Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change.",
@@ -1192,7 +1285,8 @@
         "highsignal"
       ],
       "artifacts": [
-        "llm-eval-harness"
+        "llm-eval-harness",
+        "model-router"
       ],
       "drills": [
         "build-llm-eval"
@@ -1218,9 +1312,16 @@
       "roadmaps": [],
       "difficulty": "intro",
       "priority": 3,
-      "prerequisites": [],
+      "prerequisites": [
+        "probability-fundamentals",
+        "descriptive-statistics"
+      ],
       "related": [
-        "ml-gradient-descent"
+        "ml-gradient-descent",
+        "vectors-and-spaces",
+        "matrices-and-transformations",
+        "derivatives-and-gradients",
+        "maximum-likelihood"
       ],
       "description": "Vectors, matrices, dot products, matmul, shapes.",
       "resources": [
@@ -1230,7 +1331,14 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question."
+      "mentalModel": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question.",
+      "drills": [
+        "ml-dot-matmul-shapes"
+      ],
+      "reviewQuestions": [
+        "rq-ml-math-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-gradient-descent",
@@ -1256,7 +1364,14 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is \u2014 too big and you overshoot the answer, too small and training crawls."
+      "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls.",
+      "drills": [
+        "ml-sgd-step-quadratic"
+      ],
+      "reviewQuestions": [
+        "rq-ml-gradient-descent-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-backprop",
@@ -1282,7 +1397,14 @@
           "type": "course"
         }
       ],
-      "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them."
+      "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them.",
+      "drills": [
+        "ml-chain-rule-gate"
+      ],
+      "reviewQuestions": [
+        "rq-ml-backprop-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-softmax-xent",
@@ -1313,7 +1435,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with."
+      "mentalModel": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with.",
+      "drills": [
+        "ml-softmax-cross-entropy"
+      ],
+      "reviewQuestions": [
+        "rq-ml-softmax-xent-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-adamw",
@@ -1339,7 +1468,14 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch."
+      "mentalModel": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch.",
+      "drills": [
+        "ml-adamw-weight-decay"
+      ],
+      "reviewQuestions": [
+        "rq-ml-adamw-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-tokenization",
@@ -1364,7 +1500,14 @@
           "type": "video"
         }
       ],
-      "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces \u2014 often subwords \u2014 so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
+      "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other.",
+      "drills": [
+        "ml-bpe-merge-step"
+      ],
+      "reviewQuestions": [
+        "rq-ml-tokenization-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-language-modeling",
@@ -1391,7 +1534,14 @@
           "type": "course"
         }
       ],
-      "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning \u2014 all of it is built on top of this single objective."
+      "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective.",
+      "drills": [
+        "ml-perplexity-from-nll"
+      ],
+      "reviewQuestions": [
+        "rq-ml-language-modeling-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-sampling",
@@ -1419,7 +1569,14 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top \u2014 safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
+      "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate.",
+      "drills": [
+        "ml-temperature-sampling"
+      ],
+      "reviewQuestions": [
+        "rq-ml-sampling-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-embeddings",
@@ -1446,7 +1603,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning \u2014 that geometry is what the model learns from."
+      "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from.",
+      "drills": [
+        "ml-sinusoidal-position"
+      ],
+      "reviewQuestions": [
+        "rq-ml-embeddings-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-self-attention",
@@ -1479,7 +1643,14 @@
           "url": "https://jalammar.github.io/illustrated-transformer/",
           "type": "article"
         }
-      ]
+      ],
+      "drills": [
+        "ml-scaled-dot-attention"
+      ],
+      "reviewQuestions": [
+        "rq-ml-self-attention-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-multi-head",
@@ -1505,7 +1676,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position)."
+      "mentalModel": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position).",
+      "drills": [
+        "ml-multi-head-split"
+      ],
+      "reviewQuestions": [
+        "rq-ml-multi-head-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-transformer-block",
@@ -1527,7 +1705,7 @@
         "ml-training"
       ],
       "description": "Pre-LayerNorm, residuals, MLP, GELU.",
-      "mentalModel": "A transformer block is two sublayers \u2014 multi-head attention then a position-wise MLP \u2014 each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.",
+      "mentalModel": "A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.",
       "commonMistakes": [
         "Dropping residual connections and watching deep models fail to train",
         "Post-LayerNorm placement causing instability in deep stacks",
@@ -1539,7 +1717,14 @@
           "url": "https://jalammar.github.io/illustrated-transformer/",
           "type": "article"
         }
-      ]
+      ],
+      "drills": [
+        "ml-pre-norm-residual"
+      ],
+      "reviewQuestions": [
+        "rq-ml-transformer-block-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-training",
@@ -1566,7 +1751,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "A training loop is forward pass \u2192 loss \u2192 backward pass \u2192 optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) \u2014 check it before blaming the model."
+      "mentalModel": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model.",
+      "drills": [
+        "ml-overfit-sanity-check"
+      ],
+      "reviewQuestions": [
+        "rq-ml-training-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-checkpointing",
@@ -1592,7 +1784,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately."
+      "mentalModel": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately.",
+      "drills": [
+        "ml-checkpoint-resume"
+      ],
+      "reviewQuestions": [
+        "rq-ml-checkpointing-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-lora",
@@ -1618,7 +1817,14 @@
           "type": "paper"
         }
       ],
-      "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time."
+      "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time.",
+      "drills": [
+        "ml-lora-param-count"
+      ],
+      "reviewQuestions": [
+        "rq-ml-lora-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-data-engineering",
@@ -1639,17 +1845,24 @@
       "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
       "resources": [
         {
-          "title": "Eugene Yan \u2014 Data Flywheels for LLM Applications",
+          "title": "Eugene Yan — Data Flywheels for LLM Applications",
           "url": "https://eugeneyan.com/writing/llm-patterns/",
           "type": "doc"
         },
         {
-          "title": "Made With ML \u2014 Data engineering",
+          "title": "Made With ML — Data engineering",
           "url": "https://madewithml.com/courses/mlops/data-stack/",
           "type": "doc"
         }
       ],
-      "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data \u2014 not from changing the model. Pipelines need versioning and provenance the same way code does."
+      "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does.",
+      "drills": [
+        "ml-token-budget-estimate"
+      ],
+      "reviewQuestions": [
+        "rq-ml-data-engineering-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-browser-runtime",
@@ -1677,7 +1890,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback."
+      "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback.",
+      "drills": [
+        "ml-wasm-linear-memory"
+      ],
+      "reviewQuestions": [
+        "rq-ml-browser-runtime-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-webgpu",
@@ -1704,7 +1924,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders \u2014 not the math itself."
+      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself.",
+      "drills": [
+        "ml-webgpu-buffer-alignment"
+      ],
+      "reviewQuestions": [
+        "rq-ml-webgpu-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ml-evaluation",
@@ -1726,17 +1953,24 @@
       "description": "Held-out loss, baselines, hallucination, leakage.",
       "resources": [
         {
-          "title": "Eugene Yan \u2014 Evaluation & Hallucination",
+          "title": "Eugene Yan — Evaluation & Hallucination",
           "url": "https://eugeneyan.com/writing/evals/",
           "type": "doc"
         },
         {
-          "title": "Hamel Husain \u2014 Your AI Product Needs Evals",
+          "title": "Hamel Husain — Your AI Product Needs Evals",
           "url": "https://hamel.dev/blog/posts/evals/",
           "type": "doc"
         }
       ],
-      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both \u2014 neither alone is enough."
+      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough.",
+      "drills": [
+        "ml-eval-perplexity-vs-acc"
+      ],
+      "reviewQuestions": [
+        "rq-ml-evaluation-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "http-lifecycle",
@@ -1755,7 +1989,7 @@
         "api-design",
         "caching"
       ],
-      "description": "DNS \u2192 TCP/TLS \u2192 request \u2192 response: status codes, headers, keep-alive.",
+      "description": "DNS → TCP/TLS → request → response: status codes, headers, keep-alive.",
       "mentalModel": "An HTTP request is a journey: resolve DNS, open a TCP connection, negotiate TLS, send the request, the server routes and responds, the connection is reused or closed. Latency and failures hide in each hop.",
       "commonMistakes": [
         "Confusing 401 (unauthenticated) with 403 (unauthorized)",
@@ -1768,11 +2002,15 @@
       ],
       "resources": [
         {
-          "title": "MDN \u2014 An overview of HTTP",
+          "title": "MDN — An overview of HTTP",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "http-idempotent-retry"
+      ],
+      "artifacts": []
     },
     {
       "id": "api-keys",
@@ -1794,7 +2032,7 @@
         "rate-limiting"
       ],
       "description": "Issuing, hashing, scoping, and rotating keys for machine clients.",
-      "mentalModel": "An API key identifies a machine caller. Store only a hash (like a password), show the secret once, attach scopes, and support rotation \u2014 because a leaked key is inevitable.",
+      "mentalModel": "An API key identifies a machine caller. Store only a hash (like a password), show the secret once, attach scopes, and support rotation — because a leaked key is inevitable.",
       "commonMistakes": [
         "Storing API keys in plaintext",
         "No prefix, so leaked keys are unsearchable in logs",
@@ -1813,15 +2051,18 @@
       ],
       "resources": [
         {
-          "title": "OWASP \u2014 API Security Top 10 (Broken Auth)",
+          "title": "OWASP — API Security Top 10 (Broken Auth)",
           "url": "https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/",
           "type": "doc"
         },
         {
-          "title": "Stripe \u2014 API key best practices",
+          "title": "Stripe — API key best practices",
           "url": "https://docs.stripe.com/keys",
           "type": "doc"
         }
+      ],
+      "drills": [
+        "hash-api-key"
       ]
     },
     {
@@ -1844,7 +2085,7 @@
         "idempotency"
       ],
       "description": "Token bucket, leaky bucket, sliding window.",
-      "mentalModel": "Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 \u2014 allowing bursts up to the bucket size.",
+      "mentalModel": "Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 — allowing bursts up to the bucket size.",
       "commonMistakes": [
         "Fixed-window counters that allow 2x burst at the boundary",
         "Limiting per-server instead of globally in a cluster",
@@ -1892,7 +2133,7 @@
         "ecommerce-payments"
       ],
       "description": "Idempotency keys and dedup windows for safe retries of mutations.",
-      "mentalModel": "Networks make retries inevitable, and retrying a POST can charge a card twice. An idempotency key lets the client say 'this is the same operation' \u2014 the server stores the first result and replays it for duplicates.",
+      "mentalModel": "Networks make retries inevitable, and retrying a POST can charge a card twice. An idempotency key lets the client say 'this is the same operation' — the server stores the first result and replays it for duplicates.",
       "commonMistakes": [
         "Assuming GET-only idempotency and leaving POST unsafe",
         "No expiry on stored idempotency keys",
@@ -1910,11 +2151,12 @@
       ],
       "resources": [
         {
-          "title": "Stripe \u2014 Designing robust APIs with idempotency",
+          "title": "Stripe — Designing robust APIs with idempotency",
           "url": "https://stripe.com/blog/idempotency",
           "type": "article"
         }
-      ]
+      ],
+      "artifacts": []
     },
     {
       "id": "retries-dlq",
@@ -1986,12 +2228,19 @@
       "description": "Outbound event delivery: signing, retries, idempotent receivers.",
       "resources": [
         {
-          "title": "Stripe \u2014 Webhooks",
+          "title": "Stripe — Webhooks",
           "url": "https://docs.stripe.com/webhooks",
           "type": "doc"
         }
       ],
-      "mentalModel": "A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once."
+      "mentalModel": "A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once.",
+      "drills": [
+        "webhook-signature-verify"
+      ],
+      "reviewQuestions": [
+        "rq-webhooks-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "background-jobs",
@@ -2012,17 +2261,26 @@
       "description": "Offloading slow work to workers: scheduling, concurrency, visibility.",
       "resources": [
         {
-          "title": "Sidekiq \u2014 The Job lifecycle",
+          "title": "Sidekiq — The Job lifecycle",
           "url": "https://github.com/sidekiq/sidekiq/wiki/Best-Practices",
           "type": "doc"
         },
         {
-          "title": "Brandur Leach \u2014 Transactionally Staged Job Drains",
+          "title": "Brandur Leach — Transactionally Staged Job Drains",
           "url": "https://brandur.org/job-drain",
           "type": "doc"
         }
       ],
-      "mentalModel": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?)."
+      "mentalModel": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?).",
+      "drills": [
+        "job-at-least-once"
+      ],
+      "reviewQuestions": [
+        "rq-background-jobs-core"
+      ],
+      "artifacts": [
+        "job-queue-retries"
+      ]
     },
     {
       "id": "caching",
@@ -2042,7 +2300,7 @@
         "load-balancing"
       ],
       "description": "Cache-aside, write-through, eviction policies.",
-      "mentalModel": "A cache trades memory and staleness for speed. The hard parts are not the hit \u2014 they are invalidation, the stampede when a hot key expires, and deciding how stale is acceptable.",
+      "mentalModel": "A cache trades memory and staleness for speed. The hard parts are not the hit — they are invalidation, the stampede when a hot key expires, and deciding how stale is acceptable.",
       "commonMistakes": [
         "Cache-aside with no stampede protection on a hot key",
         "No TTL, so stale data lives forever",
@@ -2058,7 +2316,11 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "cache-stampede"
+      ],
+      "artifacts": []
     },
     {
       "id": "message-queues",
@@ -2078,7 +2340,7 @@
         "background-jobs"
       ],
       "description": "Kafka, SQS, exactly-once vs at-least-once.",
-      "mentalModel": "A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. 'Exactly once' is mostly a myth \u2014 design for at-least-once delivery plus idempotent consumers.",
+      "mentalModel": "A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. 'Exactly once' is mostly a myth — design for at-least-once delivery plus idempotent consumers.",
       "commonMistakes": [
         "Assuming exactly-once delivery",
         "Non-idempotent consumers on an at-least-once queue",
@@ -2102,6 +2364,12 @@
           "url": "https://kafka.apache.org/documentation/",
           "type": "doc"
         }
+      ],
+      "drills": [
+        "queue-backpressure"
+      ],
+      "artifacts": [
+        "job-queue-retries"
       ]
     },
     {
@@ -2145,6 +2413,9 @@
           "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
           "type": "doc"
         }
+      ],
+      "drills": [
+        "slo-error-budget"
       ]
     },
     {
@@ -2187,7 +2458,11 @@
           "url": "https://cloud.google.com/apis/design",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "design-paginated-api"
+      ],
+      "artifacts": []
     },
     {
       "id": "auth-systems",
@@ -2229,6 +2504,12 @@
           "url": "https://jwt.io/introduction",
           "type": "doc"
         }
+      ],
+      "drills": [
+        "jwt-vs-session-revoke"
+      ],
+      "artifacts": [
+        "api-key-system"
       ]
     },
     {
@@ -2256,7 +2537,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting. Treat every state change like a ledger entry, use idempotency keys on every request, and reconcile against the processor daily."
+      "mentalModel": "Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting. Treat every state change like a ledger entry, use idempotency keys on every request, and reconcile against the processor daily.",
+      "drills": [
+        "payment-idempotency"
+      ],
+      "reviewQuestions": [
+        "rq-ecommerce-payments-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "b-tree",
@@ -2285,7 +2573,7 @@
         "Ignoring page splits and write amplification",
         "Forgetting that B-trees keep keys sorted, enabling range scans"
       ],
-      "realWorldUsage": "PostgreSQL, MySQL/InnoDB, SQLite \u2014 the default index.",
+      "realWorldUsage": "PostgreSQL, MySQL/InnoDB, SQLite — the default index.",
       "projectApplications": [
         "tiny-search-engine"
       ],
@@ -2295,11 +2583,15 @@
       ],
       "resources": [
         {
-          "title": "CMU 15-445 \u2014 Tree indexes",
+          "title": "CMU 15-445 — Tree indexes",
           "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "b-tree-split"
+      ],
+      "artifacts": []
     },
     {
       "id": "lsm-tree",
@@ -2346,7 +2638,7 @@
       ],
       "resources": [
         {
-          "title": "RocksDB Wiki \u2014 LSM overview",
+          "title": "RocksDB Wiki — LSM overview",
           "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview",
           "type": "doc"
         }
@@ -2395,7 +2687,7 @@
       ],
       "resources": [
         {
-          "title": "PostgreSQL \u2014 Write-Ahead Logging",
+          "title": "PostgreSQL — Write-Ahead Logging",
           "url": "https://www.postgresql.org/docs/current/wal-intro.html",
           "type": "doc"
         }
@@ -2421,7 +2713,7 @@
         "wal"
       ],
       "description": "Merging sorted runs to reclaim space and bound read amplification.",
-      "mentalModel": "An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers. Compaction merges files, drops tombstones, and bounds read amplification \u2014 at the cost of write amplification and IO spikes.",
+      "mentalModel": "An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers. Compaction merges files, drops tombstones, and bounds read amplification — at the cost of write amplification and IO spikes.",
       "commonMistakes": [
         "Ignoring the write-amplification cost of compaction",
         "Not understanding leveled vs size-tiered strategies",
@@ -2437,6 +2729,12 @@
           "url": "https://github.com/facebook/rocksdb/wiki/Compaction",
           "type": "doc"
         }
+      ],
+      "drills": [
+        "lsm-compaction-levels"
+      ],
+      "artifacts": [
+        "toy-lsm"
       ]
     },
     {
@@ -2459,7 +2757,7 @@
         "lsm-tree"
       ],
       "description": "S3-style blob storage: cheap, durable, high-latency, immutable objects.",
-      "mentalModel": "Object storage (S3/R2) is infinite, cheap, durable bytes \u2014 but with ~tens-of-ms latency and no in-place edits. Modern systems like Turbopuffer put cold data here and keep a hot cache in front. Storage and compute separate.",
+      "mentalModel": "Object storage (S3/R2) is infinite, cheap, durable bytes — but with ~tens-of-ms latency and no in-place edits. Modern systems like Turbopuffer put cold data here and keep a hot cache in front. Storage and compute separate.",
       "commonMistakes": [
         "Treating object storage like a low-latency disk",
         "Many tiny objects instead of batched segment files",
@@ -2478,10 +2776,13 @@
       ],
       "resources": [
         {
-          "title": "Turbopuffer \u2014 Architecture",
+          "title": "Turbopuffer — Architecture",
           "url": "https://turbopuffer.com/architecture",
           "type": "article"
         }
+      ],
+      "drills": [
+        "object-key-layout"
       ]
     },
     {
@@ -2507,12 +2808,19 @@
       "description": "Column-oriented layout for analytics: compression and vectorized scans.",
       "resources": [
         {
-          "title": "Apache Parquet \u2014 File format",
+          "title": "Apache Parquet — File format",
           "url": "https://parquet.apache.org/docs/file-format/",
           "type": "doc"
         }
       ],
-      "mentalModel": "A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics."
+      "mentalModel": "A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics.",
+      "drills": [
+        "columnar-vs-row"
+      ],
+      "reviewQuestions": [
+        "rq-columnar-storage-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "secondary-index",
@@ -2540,7 +2848,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff \u2014 only add the ones queries actually need."
+      "mentalModel": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff — only add the ones queries actually need.",
+      "drills": [
+        "secondary-index-write"
+      ],
+      "reviewQuestions": [
+        "rq-secondary-index-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "storage-retrieval",
@@ -2560,7 +2875,7 @@
         "lsm-tree"
       ],
       "description": "B-tree vs LSM, indexing, WAL.",
-      "mentalModel": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else \u2014 WAL, indexes, caching \u2014 serves durability and lookup speed.",
+      "mentalModel": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else — WAL, indexes, caching — serves durability and lookup speed.",
       "commonMistakes": [
         "Picking an engine without knowing the read/write ratio of the workload",
         "Ignoring write amplification and its effect on SSD lifetime",
@@ -2572,7 +2887,14 @@
           "url": "https://dataintensive.net/",
           "type": "course"
         }
-      ]
+      ],
+      "drills": [
+        "storage-vs-retrieval"
+      ],
+      "reviewQuestions": [
+        "rq-storage-retrieval-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "sharding",
@@ -2606,7 +2928,14 @@
           "url": "https://dataintensive.net/",
           "type": "course"
         }
-      ]
+      ],
+      "drills": [
+        "shard-key-choice"
+      ],
+      "reviewQuestions": [
+        "rq-sharding-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "replication",
@@ -2627,7 +2956,7 @@
         "consensus"
       ],
       "description": "Leader-follower, multi-leader, quorum.",
-      "mentalModel": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag \u2014 followers are always slightly behind.",
+      "mentalModel": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag — followers are always slightly behind.",
       "commonMistakes": [
         "Reading from a follower and seeing stale data (\"read your own writes\" violation)",
         "Assuming failover is instant and lossless",
@@ -2639,7 +2968,14 @@
           "url": "https://dataintensive.net/",
           "type": "course"
         }
-      ]
+      ],
+      "drills": [
+        "replication-lag-read"
+      ],
+      "reviewQuestions": [
+        "rq-replication-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "cap-theorem",
@@ -2661,10 +2997,10 @@
         "consensus"
       ],
       "description": "Strong/eventual/causal, PACELC.",
-      "mentalModel": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff \u2014 Else, Latency vs Consistency.",
+      "mentalModel": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency.",
       "commonMistakes": [
-        "Thinking you \"pick 2 of 3\" at all times \u2014 the choice only applies during a partition",
-        "Calling a system \"CA\" \u2014 partitions are not optional in a distributed system",
+        "Thinking you \"pick 2 of 3\" at all times — the choice only applies during a partition",
+        "Calling a system \"CA\" — partitions are not optional in a distributed system",
         "Ignoring the latency-vs-consistency tradeoff that exists even with no partition"
       ],
       "resources": [
@@ -2673,7 +3009,14 @@
           "url": "https://en.wikipedia.org/wiki/CAP_theorem",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "cap-partition-choice"
+      ],
+      "reviewQuestions": [
+        "rq-cap-theorem-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "object-modeling",
@@ -2694,12 +3037,19 @@
       "description": "Identifying classes, attributes, relationships.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Design Patterns",
+          "title": "Refactoring Guru — Design Patterns",
           "url": "https://refactoring.guru/design-patterns",
           "type": "doc"
         }
       ],
-      "mentalModel": "Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them. Prefer composition (this has-a) over inheritance (this is-a). A good model makes the next requirement easy to add."
+      "mentalModel": "Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them. Prefer composition (this has-a) over inheritance (this is-a). A good model makes the next requirement easy to add.",
+      "drills": [
+        "design-parking-lot"
+      ],
+      "reviewQuestions": [
+        "rq-object-modeling-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "state-management",
@@ -2722,12 +3072,19 @@
       "description": "States, transitions, guards.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 State",
+          "title": "Refactoring Guru — State",
           "url": "https://refactoring.guru/design-patterns/state",
           "type": "doc"
         }
       ],
-      "mentalModel": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design \u2014 if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
+      "mentalModel": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way.",
+      "drills": [
+        "design-vending-machine"
+      ],
+      "reviewQuestions": [
+        "rq-state-management-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "strategy-pattern",
@@ -2750,12 +3107,19 @@
       "description": "Interchangeable algorithms.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Strategy",
+          "title": "Refactoring Guru — Strategy",
           "url": "https://refactoring.guru/design-patterns/strategy",
           "type": "doc"
         }
       ],
-      "mentalModel": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" \u2014 pricing rules, sort orders, routing strategies."
+      "mentalModel": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" — pricing rules, sort orders, routing strategies.",
+      "drills": [
+        "design-pricing-strategies"
+      ],
+      "reviewQuestions": [
+        "rq-strategy-pattern-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "observer-pattern",
@@ -2776,12 +3140,19 @@
       "description": "Pub/sub, event propagation.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Observer",
+          "title": "Refactoring Guru — Observer",
           "url": "https://refactoring.guru/design-patterns/observer",
           "type": "doc"
         }
       ],
-      "mentalModel": "The observer pattern decouples who emits an event from who listens. Publishers fire events, subscribers register handlers, and the event bus is the registry that connects them. The tradeoff: flows are no longer visible in a single call stack, so debugging gets harder."
+      "mentalModel": "The observer pattern decouples who emits an event from who listens. Publishers fire events, subscribers register handlers, and the event bus is the registry that connects them. The tradeoff: flows are no longer visible in a single call stack, so debugging gets harder.",
+      "drills": [
+        "design-pub-sub-bus"
+      ],
+      "reviewQuestions": [
+        "rq-observer-pattern-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "factory-creational",
@@ -2802,12 +3173,19 @@
       "description": "Abstract factory, builder, singleton.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Factory Method",
+          "title": "Refactoring Guru — Factory Method",
           "url": "https://refactoring.guru/design-patterns/factory-method",
           "type": "doc"
         }
       ],
-      "mentalModel": "Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class. They earn their keep when you add the 4th variant without callers needing to change."
+      "mentalModel": "Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class. They earn their keep when you add the 4th variant without callers needing to change.",
+      "drills": [
+        "design-notification-factory"
+      ],
+      "reviewQuestions": [
+        "rq-factory-creational-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "decorator-structural",
@@ -2828,12 +3206,19 @@
       "description": "Decorator, adapter, composite.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Decorator",
+          "title": "Refactoring Guru — Decorator",
           "url": "https://refactoring.guru/design-patterns/decorator",
           "type": "doc"
         }
       ],
-      "mentalModel": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode \u2014 instead of one class per combination, you stack small decorators."
+      "mentalModel": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode — instead of one class per combination, you stack small decorators.",
+      "drills": [
+        "design-coffee-decorator"
+      ],
+      "reviewQuestions": [
+        "rq-decorator-structural-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "concurrency-design",
@@ -2863,7 +3248,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design."
+      "mentalModel": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design.",
+      "drills": [
+        "design-bank-account-locking"
+      ],
+      "reviewQuestions": [
+        "rq-concurrency-design-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "command-chain",
@@ -2884,12 +3276,19 @@
       "description": "Command, undo, chain of responsibility.",
       "resources": [
         {
-          "title": "Refactoring Guru \u2014 Command",
+          "title": "Refactoring Guru — Command",
           "url": "https://refactoring.guru/design-patterns/command",
           "type": "doc"
         }
       ],
-      "mentalModel": "The command pattern turns an action into a small object you can store, queue, log, or reverse. Pair it with two stacks for undo/redo, with a queue for background jobs, or with a chain for middleware-style processing."
+      "mentalModel": "The command pattern turns an action into a small object you can store, queue, log, or reverse. Pair it with two stacks for undo/redo, with a queue for background jobs, or with a chain for middleware-style processing.",
+      "drills": [
+        "design-undo-redo"
+      ],
+      "reviewQuestions": [
+        "rq-command-chain-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "booking-inventory",
@@ -2916,7 +3315,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Booking systems are about \"holds\" \u2014 a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
+      "mentalModel": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen.",
+      "drills": [
+        "design-hotel-booking"
+      ],
+      "reviewQuestions": [
+        "rq-booking-inventory-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "game-design",
@@ -2939,17 +3345,24 @@
       "description": "Turn engines, board state, rules.",
       "resources": [
         {
-          "title": "Hugo Lin \u2014 Designing a tic-tac-toe / chess engine",
+          "title": "Hugo Lin — Designing a tic-tac-toe / chess engine",
           "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/",
           "type": "doc"
         },
         {
-          "title": "Refactoring.Guru \u2014 State pattern in games",
+          "title": "Refactoring.Guru — State pattern in games",
           "url": "https://refactoring.guru/design-patterns/state",
           "type": "doc"
         }
       ],
-      "mentalModel": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees."
+      "mentalModel": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees.",
+      "drills": [
+        "design-online-game-server"
+      ],
+      "reviewQuestions": [
+        "rq-game-design-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "load-balancing",
@@ -2982,7 +3395,14 @@
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
         }
-      ]
+      ],
+      "drills": [
+        "design-load-balancer"
+      ],
+      "reviewQuestions": [
+        "rq-load-balancing-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "consistent-hashing",
@@ -3010,7 +3430,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" \u2014 multiple ring positions per server \u2014 to spread load evenly."
+      "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly.",
+      "drills": [
+        "design-consistent-hashing"
+      ],
+      "reviewQuestions": [
+        "rq-consistent-hashing-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "consensus",
@@ -3036,7 +3463,7 @@
       "mentalModel": "Consensus is how a cluster agrees on one value despite crashes and network delays. Raft makes it understandable: elect a leader, replicate an append-only log, and a write commits once a majority (quorum) has it. A majority guarantees any two quorums overlap.",
       "commonMistakes": [
         "Assuming consensus survives a network partition without a majority",
-        "Confusing leader election with data replication \u2014 Raft does both",
+        "Confusing leader election with data replication — Raft does both",
         "Thinking more replicas always means more durability (it costs latency)"
       ],
       "resources": [
@@ -3045,7 +3472,14 @@
           "url": "https://raft.github.io/",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "design-leader-election"
+      ],
+      "reviewQuestions": [
+        "rq-consensus-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "distributed-infra",
@@ -3074,7 +3508,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first \u2014 timeouts, idempotency, bounded queues \u2014 and worry about speed second."
+      "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second.",
+      "drills": [
+        "design-rate-limiter"
+      ],
+      "reviewQuestions": [
+        "rq-distributed-infra-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "messaging-realtime",
@@ -3101,7 +3542,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice."
+      "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice.",
+      "drills": [
+        "design-chat-system"
+      ],
+      "reviewQuestions": [
+        "rq-messaging-realtime-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "social-media",
@@ -3128,7 +3576,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid \u2014 fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
+      "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail.",
+      "drills": [
+        "design-news-feed"
+      ],
+      "reviewQuestions": [
+        "rq-social-media-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "streaming-media",
@@ -3154,7 +3609,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo."
+      "mentalModel": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo.",
+      "drills": [
+        "design-video-streaming"
+      ],
+      "reviewQuestions": [
+        "rq-streaming-media-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "location-transport",
@@ -3180,7 +3642,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA \u2014 match on the metric that actually matters."
+      "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters.",
+      "drills": [
+        "design-ride-sharing"
+      ],
+      "reviewQuestions": [
+        "rq-location-transport-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "collaboration-productivity",
@@ -3206,7 +3675,14 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs."
+      "mentalModel": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs.",
+      "drills": [
+        "design-collaborative-editor"
+      ],
+      "reviewQuestions": [
+        "rq-collaboration-productivity-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "search-platform-design",
@@ -3251,6 +3727,9 @@
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
         }
+      ],
+      "drills": [
+        "design-search-platform"
       ]
     },
     {
@@ -3275,7 +3754,7 @@
         "llm-evals"
       ],
       "description": "Architecting a production RAG system: ingestion, retrieval, generation, evals.",
-      "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk \u2192 embed \u2192 index) and an online query pipeline (retrieve \u2192 rerank \u2192 pack \u2192 generate), bound by an eval harness that gates every change.",
+      "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate), bound by an eval harness that gates every change.",
       "commonMistakes": [
         "No offline/online separation",
         "No eval gate, so quality regresses silently",
@@ -3297,6 +3776,9 @@
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         }
+      ],
+      "drills": [
+        "design-rag-system"
       ]
     },
     {
@@ -3320,7 +3802,7 @@
       "commonMistakes": [
         "Reaching for nested loops before asking \"what would a hash map key on?\"",
         "Mutating a collection while iterating it",
-        "Forgetting hash maps have no order \u2014 sort separately if order matters"
+        "Forgetting hash maps have no order — sort separately if order matters"
       ],
       "resources": [
         {
@@ -3328,7 +3810,14 @@
           "url": "https://en.wikipedia.org/wiki/Hash_table",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "two-sum-hashmap"
+      ],
+      "reviewQuestions": [
+        "rq-array-hashing-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "two-pointers",
@@ -3349,7 +3838,7 @@
         "sliding-window"
       ],
       "description": "Converging/diverging pointer scans.",
-      "mentalModel": "Two pointers replace a nested loop with a single pass by exploiting structure \u2014 usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once.",
+      "mentalModel": "Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once.",
       "commonMistakes": [
         "Using two pointers on unsorted data when the technique needs order",
         "Off-by-one errors at the start/end conditions",
@@ -3361,7 +3850,14 @@
           "url": "https://neetcode.io/roadmap",
           "type": "course"
         }
-      ]
+      ],
+      "drills": [
+        "valid-palindrome-two-pointers"
+      ],
+      "reviewQuestions": [
+        "rq-two-pointers-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "sliding-window",
@@ -3380,7 +3876,7 @@
       ],
       "related": [],
       "description": "Variable/fixed window over sequences.",
-      "mentalModel": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once \u2014 O(n).",
+      "mentalModel": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once — O(n).",
       "commonMistakes": [
         "Recomputing the aggregate from scratch instead of updating incrementally",
         "Shrinking with an `if` when a `while` is needed to restore the invariant",
@@ -3392,7 +3888,14 @@
           "url": "https://neetcode.io/roadmap",
           "type": "course"
         }
-      ]
+      ],
+      "drills": [
+        "longest-substring-sliding-window"
+      ],
+      "reviewQuestions": [
+        "rq-sliding-window-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "stack",
@@ -3418,7 +3921,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" \u2014 parsing, recursion, undo, matching brackets."
+      "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets.",
+      "drills": [
+        "valid-parentheses-stack"
+      ],
+      "reviewQuestions": [
+        "rq-stack-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "binary-search",
@@ -3437,11 +3947,11 @@
       ],
       "related": [],
       "description": "Halving sorted search space, predicate search.",
-      "mentalModel": "Binary search is not about sorted arrays \u2014 it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step.",
+      "mentalModel": "Binary search is not about sorted arrays — it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step.",
       "commonMistakes": [
         "Infinite loops from a wrong mid update or loop condition",
         "Searching values when you should search the answer space",
-        "Integer overflow in `(lo + hi) / 2` \u2014 use `lo + (hi - lo) / 2`"
+        "Integer overflow in `(lo + hi) / 2` — use `lo + (hi - lo) / 2`"
       ],
       "resources": [
         {
@@ -3449,7 +3959,14 @@
           "url": "https://en.wikipedia.org/wiki/Binary_search_algorithm",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "search-rotated-array"
+      ],
+      "reviewQuestions": [
+        "rq-binary-search-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "linked-list",
@@ -3470,12 +3987,19 @@
       "description": "Pointer manipulation, fast/slow, reversal.",
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Linked List",
+          "title": "VisuAlgo — Linked List",
           "url": "https://visualgo.net/en/list",
           "type": "doc"
         }
       ],
-      "mentalModel": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place."
+      "mentalModel": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place.",
+      "drills": [
+        "reverse-linked-list"
+      ],
+      "reviewQuestions": [
+        "rq-linked-list-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "trees",
@@ -3500,15 +4024,22 @@
       "commonMistakes": [
         "Forgetting the null/empty base case",
         "Using DFS when the problem is about levels or shortest depth (use BFS)",
-        "Returning the wrong thing from recursion \u2014 separate \"answer\" from \"info passed up\""
+        "Returning the wrong thing from recursion — separate \"answer\" from \"info passed up\""
       ],
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Binary Search Tree",
+          "title": "VisuAlgo — Binary Search Tree",
           "url": "https://visualgo.net/en/bst",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "level-order-traversal"
+      ],
+      "reviewQuestions": [
+        "rq-trees-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "tries",
@@ -3534,7 +4065,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A trie stores strings in a tree where each path from the root spells out a prefix. It makes prefix queries (autocomplete, IP routing) take time proportional to the length of the prefix, not the size of the dataset."
+      "mentalModel": "A trie stores strings in a tree where each path from the root spells out a prefix. It makes prefix queries (autocomplete, IP routing) take time proportional to the length of the prefix, not the size of the dataset.",
+      "drills": [
+        "trie-prefix-search"
+      ],
+      "reviewQuestions": [
+        "rq-tries-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "heap",
@@ -3553,7 +4091,7 @@
       ],
       "related": [],
       "description": "Top-k, k-way merge, scheduling.",
-      "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer \u2014 far cheaper than sorting everything.",
+      "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything.",
       "commonMistakes": [
         "Sorting the whole input when a size-k heap suffices",
         "Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)",
@@ -3561,11 +4099,18 @@
       ],
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Binary Heap",
+          "title": "VisuAlgo — Binary Heap",
           "url": "https://visualgo.net/en/heap",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "kth-largest-heap"
+      ],
+      "reviewQuestions": [
+        "rq-heap-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "backtracking",
@@ -3591,7 +4136,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer."
+      "mentalModel": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer.",
+      "drills": [
+        "subsets-backtracking"
+      ],
+      "reviewQuestions": [
+        "rq-backtracking-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "graphs",
@@ -3614,17 +4166,24 @@
       "description": "BFS/DFS, topo sort, union-find.",
       "mentalModel": "Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find). The skill is recognizing the template and modeling the input as nodes and edges.",
       "commonMistakes": [
-        "No visited set \u2014 revisiting nodes and looping forever",
+        "No visited set — revisiting nodes and looping forever",
         "Using DFS for shortest path on an unweighted graph instead of BFS",
         "Not handling disconnected components"
       ],
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Graph Traversal",
+          "title": "VisuAlgo — Graph Traversal",
           "url": "https://visualgo.net/en/dfsbfs",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "number-of-islands"
+      ],
+      "reviewQuestions": [
+        "rq-graphs-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "shortest-path",
@@ -3646,12 +4205,19 @@
       "description": "Dijkstra, Bellman-Ford, A*.",
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Single-Source Shortest Paths",
+          "title": "VisuAlgo — Single-Source Shortest Paths",
           "url": "https://visualgo.net/en/sssp",
           "type": "doc"
         }
       ],
-      "mentalModel": "Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal. Using the wrong one gives wrong answers or wasted time."
+      "mentalModel": "Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal. Using the wrong one gives wrong answers or wasted time.",
+      "drills": [
+        "dijkstra-shortest-path"
+      ],
+      "reviewQuestions": [
+        "rq-shortest-path-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "union-find",
@@ -3672,12 +4238,19 @@
       "description": "Disjoint set, path compression.",
       "resources": [
         {
-          "title": "VisuAlgo \u2014 Union-Find Disjoint Sets",
+          "title": "VisuAlgo — Union-Find Disjoint Sets",
           "url": "https://visualgo.net/en/ufds",
           "type": "doc"
         }
       ],
-      "mentalModel": "Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id. With path compression and union by rank, both run in essentially constant time. Use it whenever the question is \"are these two in the same group?\""
+      "mentalModel": "Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id. With path compression and union by rank, both run in essentially constant time. Use it whenever the question is \"are these two in the same group?\"",
+      "drills": [
+        "union-find-connected-components"
+      ],
+      "reviewQuestions": [
+        "rq-union-find-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "dp-1d",
@@ -3710,7 +4283,14 @@
           "url": "https://en.wikipedia.org/wiki/Dynamic_programming",
           "type": "doc"
         }
-      ]
+      ],
+      "drills": [
+        "house-robber-dp"
+      ],
+      "reviewQuestions": [
+        "rq-dp-1d-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "dp-2d",
@@ -3736,7 +4316,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely \u2014 once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
+      "mentalModel": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely — once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out.",
+      "drills": [
+        "grid-min-path-dp"
+      ],
+      "reviewQuestions": [
+        "rq-dp-2d-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "greedy",
@@ -3764,7 +4351,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A greedy algorithm always picks the choice that looks best right now. It only gives the right answer when the problem has a structure (an exchange argument) that proves local choices add up correctly. When they do not, greedy quietly returns wrong answers."
+      "mentalModel": "A greedy algorithm always picks the choice that looks best right now. It only gives the right answer when the problem has a structure (an exchange argument) that proves local choices add up correctly. When they do not, greedy quietly returns wrong answers.",
+      "drills": [
+        "activity-selection-greedy"
+      ],
+      "reviewQuestions": [
+        "rq-greedy-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "intervals",
@@ -3790,7 +4384,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Interval problems almost always start by sorting \u2014 usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
+      "mentalModel": "Interval problems almost always start by sorting — usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation.",
+      "drills": [
+        "merge-intervals"
+      ],
+      "reviewQuestions": [
+        "rq-intervals-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "math-geometry",
@@ -3814,7 +4415,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem \u2014 the formula is a quick lookup away."
+      "mentalModel": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem — the formula is a quick lookup away.",
+      "drills": [
+        "gcd-modular"
+      ],
+      "reviewQuestions": [
+        "rq-math-geometry-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "bit-manipulation",
@@ -3838,7 +4446,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero."
+      "mentalModel": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero.",
+      "drills": [
+        "single-number-xor"
+      ],
+      "reviewQuestions": [
+        "rq-bit-manipulation-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "leadership-and-influence",
@@ -3867,7 +4482,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks \u2014 not the meeting where they nodded along."
+      "mentalModel": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks — not the meeting where they nodded along.",
+      "drills": [
+        "star-leadership"
+      ],
+      "reviewQuestions": [
+        "rq-leadership-and-influence-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "conflict-resolution",
@@ -3896,7 +4518,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Conflict means information surfaced \u2014 two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
+      "mentalModel": "Conflict means information surfaced — two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning.",
+      "drills": [
+        "star-conflict"
+      ],
+      "reviewQuestions": [
+        "rq-conflict-resolution-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "problem-solving-and-decision-making",
@@ -3925,7 +4554,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Decisions are bets you make with incomplete information. Judge them by the reasoning at the time, not the outcome. Good decisions name in advance what evidence would tell you you are wrong."
+      "mentalModel": "Decisions are bets you make with incomplete information. Judge them by the reasoning at the time, not the outcome. Good decisions name in advance what evidence would tell you you are wrong.",
+      "drills": [
+        "star-tough-decision"
+      ],
+      "reviewQuestions": [
+        "rq-problem-solving-and-decision-making-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "teamwork-and-collaboration",
@@ -3954,7 +4590,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations \u2014 fix those before worrying about chemistry."
+      "mentalModel": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations — fix those before worrying about chemistry.",
+      "drills": [
+        "star-cross-team"
+      ],
+      "reviewQuestions": [
+        "rq-teamwork-and-collaboration-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "failure-and-learning",
@@ -3978,7 +4621,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson."
+      "mentalModel": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson.",
+      "drills": [
+        "star-failure"
+      ],
+      "reviewQuestions": [
+        "rq-failure-and-learning-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "communication",
@@ -4007,7 +4657,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Good communication is audience-first: after listening, the other person's next decision should be easier. Be specific, not sophisticated. One sharp analogy beats five vague ones."
+      "mentalModel": "Good communication is audience-first: after listening, the other person's next decision should be easier. Be specific, not sophisticated. One sharp analogy beats five vague ones.",
+      "drills": [
+        "star-communication"
+      ],
+      "reviewQuestions": [
+        "rq-communication-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "time-management-and-prioritization",
@@ -4036,7 +4693,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized \u2014 you have just written a wish list."
+      "mentalModel": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized — you have just written a wish list.",
+      "drills": [
+        "star-prioritization"
+      ],
+      "reviewQuestions": [
+        "rq-time-management-and-prioritization-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "innovation-and-creativity",
@@ -4065,7 +4729,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake \u2014 it is finding the assumption you can credibly weaken."
+      "mentalModel": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake — it is finding the assumption you can credibly weaken.",
+      "drills": [
+        "star-innovation"
+      ],
+      "reviewQuestions": [
+        "rq-innovation-and-creativity-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "customer-obsession",
@@ -4089,7 +4760,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof \u2014 go check whether it generalizes."
+      "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes.",
+      "drills": [
+        "star-customer-feedback"
+      ],
+      "reviewQuestions": [
+        "rq-customer-obsession-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "ownership-and-accountability",
@@ -4113,7 +4791,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to."
+      "mentalModel": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to.",
+      "drills": [
+        "star-ownership"
+      ],
+      "reviewQuestions": [
+        "rq-ownership-and-accountability-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "positioning",
@@ -4132,12 +4817,19 @@
       "description": "Naming the problem, the audience, and the alternative you beat.",
       "resources": [
         {
-          "title": "April Dunford \u2014 Positioning",
+          "title": "April Dunford — Positioning",
           "url": "https://www.aprildunford.com/post/the-perils-of-positioning",
           "type": "article"
         }
       ],
-      "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description \u2014 not positioning."
+      "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning.",
+      "drills": [
+        "draft-positioning-statement"
+      ],
+      "reviewQuestions": [
+        "rq-positioning-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "landing-pages",
@@ -4159,17 +4851,24 @@
       "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
       "resources": [
         {
-          "title": "Julian Shapiro \u2014 Marketing & landing pages",
+          "title": "Julian Shapiro — Marketing & landing pages",
           "url": "https://www.julian.com/guide/marketing/landing-pages",
           "type": "doc"
         },
         {
-          "title": "Marketing Examples \u2014 Landing page teardowns",
+          "title": "Marketing Examples — Landing page teardowns",
           "url": "https://marketingexamples.com/landing-page",
           "type": "doc"
         }
       ],
-      "mentalModel": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them."
+      "mentalModel": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them.",
+      "drills": [
+        "critique-landing-page"
+      ],
+      "reviewQuestions": [
+        "rq-landing-pages-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "seo",
@@ -4197,7 +4896,14 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient \u2014 the real fight is content depth and inbound links."
+      "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links.",
+      "drills": [
+        "audit-seo-onpage"
+      ],
+      "reviewQuestions": [
+        "rq-seo-core"
+      ],
+      "artifacts": []
     },
     {
       "id": "product-analytics",
@@ -4213,15 +4919,1306 @@
       "related": [
         "landing-pages"
       ],
-      "description": "Activation, retention, funnels \u2014 measuring whether the product works.",
+      "description": "Activation, retention, funnels — measuring whether the product works.",
       "resources": [
         {
-          "title": "PostHog \u2014 Product analytics docs",
+          "title": "PostHog — Product analytics docs",
           "url": "https://posthog.com/docs/product-analytics",
           "type": "doc"
         }
       ],
-      "mentalModel": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong."
+      "mentalModel": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong.",
+      "drills": [
+        "define-north-star-metric"
+      ],
+      "reviewQuestions": [
+        "rq-product-analytics-core"
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "vectors-and-spaces",
+      "name": "Vectors & Vector Spaces",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d"
+      ],
+      "difficulty": "intro",
+      "priority": 5,
+      "prerequisites": [],
+      "related": [
+        "matrices-and-transformations",
+        "ml-math",
+        "derivatives-and-gradients"
+      ],
+      "description": "Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.",
+      "mentalModel": "A vector is a point and an arrow. The dot product measures alignment (how much one vector projects onto another); orthogonality means zero projection. Most ML objects — embeddings, weights, activations — are vectors living in some space.",
+      "commonMistakes": [
+        "Confusing dot product with element-wise multiplication",
+        "Treating vectors as scalars when adding dimensions",
+        "Forgetting that dot product is zero for perpendicular vectors"
+      ],
+      "realWorldUsage": "Embedding similarity, cosine distance, attention scores, gradient directions.",
+      "drills": [
+        "compute-dot-product"
+      ],
+      "reviewQuestions": [
+        "rq-dot-product-geometry"
+      ],
+      "resources": [
+        {
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/topics/linear-algebra",
+          "type": "video"
+        }
+      ],
+      "artifacts": [
+        "visualize-projections"
+      ]
+    },
+    {
+      "id": "matrices-and-transformations",
+      "name": "Matrices & Linear Transformations",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d"
+      ],
+      "difficulty": "intro",
+      "priority": 5,
+      "prerequisites": [
+        "vectors-and-spaces"
+      ],
+      "related": [
+        "eigenvalues-decomposition",
+        "regression-basics",
+        "ml-math"
+      ],
+      "description": "Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.",
+      "mentalModel": "A matrix is a machine that takes vectors in and pushes vectors out. Columns tell you where the basis vectors land. Matrix multiply chains machines — output of one feeds the next.",
+      "commonMistakes": [
+        "Multiplying matrices in the wrong order (not commutative)",
+        "Confusing rows vs columns when reading a transformation",
+        "Assuming every square matrix is invertible"
+      ],
+      "realWorldUsage": "Neural network layers, image transforms, PCA, solving linear systems.",
+      "drills": [
+        "multiply-2x2-matrix"
+      ],
+      "reviewQuestions": [
+        "rq-matrix-as-transformation"
+      ],
+      "resources": [
+        {
+          "title": "MIT 18.06 Linear Algebra (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/",
+          "type": "course"
+        }
+      ],
+      "artifacts": [
+        "impl-matrix-multiply",
+        "impl-ols-from-scratch"
+      ]
+    },
+    {
+      "id": "eigenvalues-decomposition",
+      "name": "Eigenvalues & Matrix Decomposition",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "matrices-and-transformations"
+      ],
+      "related": [
+        "regression-basics",
+        "ml-embeddings"
+      ],
+      "description": "Eigenvectors as directions preserved by a transformation; eigenvalues as stretch factors; SVD as the universal factorization.",
+      "mentalModel": "Most matrices scramble space, but eigenvectors are the special directions that only get stretched, not rotated. SVD finds the best low-rank approximation of any matrix — the backbone of PCA and many compression tricks.",
+      "commonMistakes": [
+        "Thinking every matrix has real eigenvalues",
+        "Confusing eigenvectors of A with eigenvectors of A^T",
+        "Using PCA without centering the data first"
+      ],
+      "realWorldUsage": "PCA for dimensionality reduction, PageRank, spectral clustering, low-rank embeddings.",
+      "drills": [
+        "interpret-eigenvalue"
+      ],
+      "reviewQuestions": [
+        "rq-eigenvalue-intuition"
+      ],
+      "resources": [
+        {
+          "title": "Computational Linear Algebra (fast.ai)",
+          "url": "https://github.com/fastai/numerical-linear-algebra",
+          "type": "course"
+        }
+      ],
+      "artifacts": [
+        "impl-pca-from-scratch"
+      ]
+    },
+    {
+      "id": "probability-fundamentals",
+      "name": "Probability Fundamentals",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "intro",
+      "priority": 5,
+      "prerequisites": [],
+      "related": [
+        "random-variables",
+        "classical-distributions",
+        "hypothesis-testing",
+        "ml-math"
+      ],
+      "description": "Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.",
+      "mentalModel": "Probability is a bookkeeping system for uncertainty. Conditional probability restricts the sample space; Bayes flips cause and effect — from 'how likely is the evidence given the hypothesis' to 'how likely is the hypothesis given the evidence'.",
+      "commonMistakes": [
+        "Treating independent events as mutually exclusive",
+        "Confusing P(A|B) with P(B|A) (the prosecutor's fallacy)",
+        "Adding probabilities of overlapping events without inclusion-exclusion"
+      ],
+      "realWorldUsage": "A/B test analysis, spam filtering, medical diagnosis, model calibration.",
+      "drills": [
+        "conditional-probability-bayes",
+        "independence-inclusion-exclusion"
+      ],
+      "reviewQuestions": [
+        "rq-bayes-rule",
+        "rq-independence-vs-exclusive"
+      ],
+      "resources": [
+        {
+          "title": "Khan Academy — Probability",
+          "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+          "type": "course"
+        },
+        {
+          "title": "MIT 6.041SC — Introduction to Probability",
+          "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+          "type": "course"
+        },
+        {
+          "title": "Seeing Theory — Basic Probability",
+          "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+          "type": "article"
+        }
+      ],
+      "artifacts": [
+        "simulate-random-processes",
+        "math-weekly-writeup"
+      ]
+    },
+    {
+      "id": "random-variables",
+      "name": "Random Variables & Distributions",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "probability-fundamentals"
+      ],
+      "related": [
+        "descriptive-statistics",
+        "estimation-confidence",
+        "hypothesis-testing"
+      ],
+      "description": "Discrete and continuous distributions, expectation, variance, and the law of large numbers.",
+      "mentalModel": "A random variable is a function from outcomes to numbers. Expectation is the long-run average; variance measures spread. The CLT says sums of many independent pieces look Gaussian — which is why normal distributions are everywhere.",
+      "commonMistakes": [
+        "Confusing the PDF value with a probability (for continuous RVs)",
+        "Assuming small samples look like their population distribution",
+        "Using variance when you mean standard deviation in an explanation"
+      ],
+      "realWorldUsage": "Latency modeling, error bars, Monte Carlo simulation, loss function design.",
+      "drills": [
+        "compute-expectation-variance",
+        "normal-tail-probability"
+      ],
+      "reviewQuestions": [
+        "rq-expectation-vs-sample-mean",
+        "rq-pdf-not-probability"
+      ],
+      "resources": [
+        {
+          "title": "MIT 6.041 Probabilistic Systems Analysis",
+          "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+          "type": "course"
+        },
+        {
+          "title": "StatQuest — Probability vs Likelihood",
+          "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
+          "type": "video"
+        }
+      ],
+      "artifacts": [
+        "simulate-random-processes"
+      ]
+    },
+    {
+      "id": "descriptive-statistics",
+      "name": "Descriptive Statistics",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "intro",
+      "priority": 4,
+      "prerequisites": [],
+      "related": [
+        "random-variables",
+        "regression-basics",
+        "estimation-confidence"
+      ],
+      "description": "Summarizing data: mean, median, variance, correlation, and when each summary lies.",
+      "mentalModel": "Descriptive stats compress a dataset into a few numbers you can reason about. Mean chases outliers; median resists them. Correlation measures linear co-movement, not causation — and breaks under nonlinearity.",
+      "commonMistakes": [
+        "Using mean on heavy-tailed latency data",
+        "Treating correlation as causation",
+        "Reporting precision without sample size"
+      ],
+      "realWorldUsage": "Dashboards, experiment readouts, data profiling before modeling.",
+      "drills": [
+        "summarize-dataset-stats",
+        "correlation-pitfalls"
+      ],
+      "reviewQuestions": [
+        "rq-mean-vs-median",
+        "rq-correlation-not-causation"
+      ],
+      "resources": [
+        {
+          "title": "Khan Academy — Statistics",
+          "url": "https://www.khanacademy.org/math/statistics-probability",
+          "type": "course"
+        },
+        {
+          "title": "Seeing Theory — Descriptive Statistics",
+          "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+          "type": "article"
+        }
+      ],
+      "artifacts": [
+        "impl-descriptive-stats"
+      ]
+    },
+    {
+      "id": "estimation-confidence",
+      "name": "Estimation & Confidence Intervals",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "random-variables",
+        "descriptive-statistics"
+      ],
+      "related": [
+        "hypothesis-testing",
+        "regression-basics"
+      ],
+      "description": "Point estimates, standard error, confidence intervals, and what '95% confident' actually means.",
+      "mentalModel": "A confidence interval is a procedure, not a probability statement about one interval. If you repeated the experiment many times, 95% of the intervals you'd construct would contain the true parameter. Wider interval = more uncertainty or less data.",
+      "commonMistakes": [
+        "Saying 'there is a 95% chance the true value is in this interval'",
+        "Using the normal approximation with tiny samples",
+        "Ignoring that CI width grows with desired confidence level"
+      ],
+      "realWorldUsage": "A/B test reporting, polling margins of error, model metric uncertainty.",
+      "drills": [
+        "construct-confidence-interval"
+      ],
+      "reviewQuestions": [
+        "rq-confidence-interval-meaning"
+      ],
+      "resources": [
+        {
+          "title": "MIT 18.650 Statistics for Applications",
+          "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
+          "type": "course"
+        }
+      ],
+      "artifacts": [
+        "ab-test-analysis-report"
+      ]
+    },
+    {
+      "id": "hypothesis-testing",
+      "name": "Hypothesis Testing",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "estimation-confidence",
+        "probability-fundamentals"
+      ],
+      "related": [
+        "regression-basics",
+        "llm-evals"
+      ],
+      "description": "Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.",
+      "mentalModel": "Hypothesis testing asks: 'how surprising is this data if nothing real changed?' A p-value is not the probability the null is true — it's the probability of seeing data this extreme under the null. Low p → reject the null, but 'not significant' is not proof of no effect.",
+      "commonMistakes": [
+        "Treating p < 0.05 as proof the effect is real",
+        "Running many tests without correction (p-hacking)",
+        "Confusing statistical significance with practical significance"
+      ],
+      "realWorldUsage": "Experiment analysis, clinical trials, model comparison gates.",
+      "drills": [
+        "interpret-p-value",
+        "type-errors-power"
+      ],
+      "reviewQuestions": [
+        "rq-p-value-misread",
+        "rq-type-i-vs-type-ii"
+      ],
+      "resources": [
+        {
+          "title": "Seeing Theory — Hypothesis Testing",
+          "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+          "type": "article"
+        },
+        {
+          "title": "StatQuest — p-values",
+          "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
+          "type": "video"
+        }
+      ],
+      "artifacts": [
+        "ab-test-analysis-report",
+        "debunk-fake-trading-signal",
+        "momentum-backtest-benchmark"
+      ]
+    },
+    {
+      "id": "regression-basics",
+      "name": "Linear Regression",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "matrices-and-transformations",
+        "descriptive-statistics"
+      ],
+      "related": [
+        "derivatives-and-gradients",
+        "ml-gradient-descent",
+        "estimation-confidence"
+      ],
+      "description": "Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.",
+      "mentalModel": "Linear regression finds the best linear predictor — geometrically, it projects the target vector onto the column space of your features. Least squares minimizes squared error, which is why outliers pull the line hard.",
+      "commonMistakes": [
+        "Extrapolating far outside the training range",
+        "Treating high R² as proof of causation",
+        "Ignoring multicollinearity among features"
+      ],
+      "realWorldUsage": "Forecasting, feature importance, baseline models before deep learning.",
+      "drills": [
+        "fit-simple-regression"
+      ],
+      "reviewQuestions": [
+        "rq-regression-as-projection"
+      ],
+      "resources": [
+        {
+          "title": "An Introduction to Statistical Learning",
+          "url": "https://www.statlearning.com/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": [
+        "impl-ols-from-scratch"
+      ]
+    },
+    {
+      "id": "derivatives-and-gradients",
+      "name": "Derivatives & Gradients",
+      "tags": [
+        "mathematics",
+        "calculus"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "vectors-and-spaces"
+      ],
+      "related": [
+        "multivariable-optimization",
+        "ml-gradient-descent",
+        "ml-backprop"
+      ],
+      "description": "Partial derivatives, the gradient vector, and reading a loss surface for descent direction.",
+      "mentalModel": "The gradient points uphill steepest. To minimize a loss, walk opposite the gradient. Each partial derivative tells you how sensitive the output is to one input — the chain rule chains these sensitivities through composed functions.",
+      "commonMistakes": [
+        "Confusing gradient with the function value",
+        "Forgetting to zero-center data before interpreting partials",
+        "Using a fixed step size on a badly scaled surface"
+      ],
+      "realWorldUsage": "Training neural nets, tuning hyperparameters, sensitivity analysis.",
+      "drills": [
+        "compute-gradient-2d"
+      ],
+      "reviewQuestions": [
+        "rq-gradient-descent-direction"
+      ],
+      "resources": [
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "multivariable-optimization",
+      "name": "Multivariable Optimization",
+      "tags": [
+        "mathematics",
+        "calculus"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d"
+      ],
+      "difficulty": "advanced",
+      "priority": 3,
+      "prerequisites": [
+        "derivatives-and-gradients",
+        "matrices-and-transformations"
+      ],
+      "related": [
+        "ml-gradient-descent",
+        "ml-adamw",
+        "regression-basics"
+      ],
+      "description": "Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.",
+      "mentalModel": "Convex functions have one bowl-shaped minimum — gradient descent cannot get stuck. Most neural loss surfaces are non-convex but empirically tractable. Constraints (Lagrange multipliers) turn 'find the best point' into 'find the best point on this boundary'.",
+      "commonMistakes": [
+        "Assuming every critical point is a minimum",
+        "Ignoring learning rate when the Hessian is ill-conditioned",
+        "Treating SGD convergence theory as guaranteeing global minima"
+      ],
+      "realWorldUsage": "Hyperparameter search, constrained resource allocation, training dynamics analysis.",
+      "reviewQuestions": [
+        "rq-convex-vs-nonconvex"
+      ],
+      "resources": [
+        {
+          "title": "Convex Optimization (Boyd & Vandenberghe)",
+          "url": "https://web.stanford.edu/~boyd/cvxbook/",
+          "type": "doc"
+        }
+      ],
+      "drills": [
+        "hessian-learning-rate"
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "information-entropy",
+      "name": "Information & Entropy",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ],
+      "difficulty": "advanced",
+      "priority": 3,
+      "prerequisites": [
+        "probability-fundamentals",
+        "random-variables"
+      ],
+      "related": [
+        "ml-softmax-xent",
+        "ml-sampling",
+        "embeddings"
+      ],
+      "description": "Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.",
+      "mentalModel": "Entropy measures average surprise of a distribution. Cross-entropy compares your predicted distribution to the true one — it's the natural classification loss. KL divergence is asymmetric: how many extra nats you pay when you use Q instead of P.",
+      "commonMistakes": [
+        "Treating KL as a metric (it's not symmetric)",
+        "Using log base inconsistently (bits vs nats)",
+        "Confusing entropy of data with entropy of a model"
+      ],
+      "realWorldUsage": "Cross-entropy loss, language model training, variational inference, compression.",
+      "drills": [
+        "compute-cross-entropy-bits"
+      ],
+      "reviewQuestions": [
+        "rq-cross-entropy-loss"
+      ],
+      "resources": [
+        {
+          "title": "Information Theory (MacKay)",
+          "url": "https://www.inference.org.uk/itprnn/book.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "classical-distributions",
+      "name": "Classical Distributions",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "roadmaps": [
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "probability-fundamentals",
+        "random-variables"
+      ],
+      "related": [
+        "sampling-and-clt",
+        "maximum-likelihood",
+        "ml-sampling"
+      ],
+      "description": "Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.",
+      "mentalModel": "Distributions are reusable uncertainty templates. Bernoulli/Binomial for yes/no counts; Poisson for rare events in fixed windows; Normal for sums of many small pieces (CLT); Exponential for waiting times between events.",
+      "commonMistakes": [
+        "Using a Normal model on tiny counts or heavy tails",
+        "Confusing Poisson rate λ with probability",
+        "Applying Binomial when trials are not independent"
+      ],
+      "realWorldUsage": "Queue depth modeling, click-through rates, error counts, latency approximations.",
+      "drills": [
+        "match-distribution-scenario"
+      ],
+      "reviewQuestions": [
+        "rq-poisson-vs-binomial",
+        "rq-when-normal-approximation"
+      ],
+      "resources": [
+        {
+          "title": "Seeing Theory — Probability Distributions",
+          "url": "https://seeing-theory.brown.edu/distributions/index.html",
+          "type": "article"
+        },
+        {
+          "title": "Khan Academy — Random variables & distributions",
+          "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
+          "type": "course"
+        },
+        {
+          "title": "MIT 18.05 — Probability & Statistics (Spring 2022)",
+          "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+          "type": "course"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "sampling-and-clt",
+      "name": "Sampling & the Central Limit Theorem",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "random-variables",
+        "descriptive-statistics"
+      ],
+      "related": [
+        "estimation-confidence",
+        "classical-distributions",
+        "ab-testing-engineering"
+      ],
+      "description": "Sampling distributions, standard error of the mean, and why averages become Normal as n grows.",
+      "mentalModel": "Your data is one draw from a bigger game. The CLT says sample means from many independent pieces look Normal even when the underlying data is not — which is why confidence intervals and z-tests work on proportions and averages.",
+      "commonMistakes": [
+        "Applying CLT with n=5 and calling it rigorous",
+        "Treating the sample as the population",
+        "Ignoring dependence across samples (e.g. time-series)"
+      ],
+      "realWorldUsage": "Poll margins of error, experiment power calculations, simulation validation.",
+      "drills": [
+        "clt-sample-size",
+        "standard-error-mean"
+      ],
+      "reviewQuestions": [
+        "rq-clt-why-averages",
+        "rq-standard-error-vs-stddev"
+      ],
+      "resources": [
+        {
+          "title": "Seeing Theory — Central Limit Theorem",
+          "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html",
+          "type": "article"
+        },
+        {
+          "title": "StatQuest — Central Limit Theorem",
+          "url": "https://www.youtube.com/watch?v=YAlJC6Hlv8M",
+          "type": "video"
+        }
+      ],
+      "artifacts": [
+        "debunk-fake-trading-signal"
+      ]
+    },
+    {
+      "id": "ab-testing-engineering",
+      "name": "A/B Testing for Engineers",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "hypothesis-testing",
+        "estimation-confidence",
+        "sampling-and-clt"
+      ],
+      "related": [
+        "search-evals",
+        "llm-evals",
+        "product-analytics",
+        "ml-evaluation"
+      ],
+      "description": "Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.",
+      "mentalModel": "An A/B test is a hypothesis test with a deployment budget. Power asks whether you'd detect a real effect; practical significance asks whether the effect matters; SRM catches broken randomization before you trust the p-value.",
+      "commonMistakes": [
+        "Peeking at results and stopping early when p < 0.05",
+        "Ignoring sample ratio mismatch (SRM)",
+        "Shipping a statistically significant but tiny lift",
+        "Running dozens of metrics without correction"
+      ],
+      "realWorldUsage": "Feature flags, model rollouts, ranking changes, pricing experiments.",
+      "drills": [
+        "design-ab-test-power",
+        "interpret-srm-alert"
+      ],
+      "reviewQuestions": [
+        "rq-peeking-problem",
+        "rq-power-vs-significance"
+      ],
+      "artifacts": [
+        "ab-test-analysis-report"
+      ],
+      "resources": [
+        {
+          "title": "Evan Miller — Sample Size Calculator",
+          "url": "https://www.evanmiller.org/ab-testing/sample-size.html",
+          "type": "doc"
+        },
+        {
+          "title": "Microsoft ExP platform paper",
+          "url": "https://arxiv.org/abs/1803.03218",
+          "type": "paper"
+        },
+        {
+          "title": "Spotify — Experimentation platform & SRM",
+          "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/",
+          "type": "article"
+        }
+      ]
+    },
+    {
+      "id": "bayesian-inference",
+      "name": "Bayesian Inference",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "probability-fundamentals",
+        "random-variables",
+        "estimation-confidence"
+      ],
+      "related": [
+        "probability-fundamentals",
+        "maximum-likelihood",
+        "ml-evaluation"
+      ],
+      "description": "Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.",
+      "mentalModel": "Frequentist stats ask how surprising the data is under a null. Bayesian stats start with a prior belief, observe data, and land on a posterior — a direct distribution over what you care about. Credible intervals are 'where the parameter probably lives' given data and prior.",
+      "commonMistakes": [
+        "Treating the prior as truth instead of a starting opinion",
+        "Confusing credible intervals with confidence intervals",
+        "Using flat priors and expecting magic objectivity"
+      ],
+      "realWorldUsage": "Low-data regimes, adaptive experiments, spam filtering, hierarchical models.",
+      "drills": [
+        "beta-binomial-posterior"
+      ],
+      "reviewQuestions": [
+        "rq-credible-vs-confidence",
+        "rq-when-bayesian-wins"
+      ],
+      "resources": [
+        {
+          "title": "Seeing Theory — Bayesian Inference",
+          "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html",
+          "type": "article"
+        },
+        {
+          "title": "Statistical Rethinking (McElreath) — lectures",
+          "url": "https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U",
+          "type": "video"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "maximum-likelihood",
+      "name": "Maximum Likelihood Estimation",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "random-variables",
+        "classical-distributions",
+        "derivatives-and-gradients"
+      ],
+      "related": [
+        "regression-basics",
+        "ml-gradient-descent",
+        "ml-softmax-xent",
+        "information-entropy"
+      ],
+      "description": "Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.",
+      "mentalModel": "MLE picks the parameter values that maximize the probability of what you actually saw. Log-likelihood turns products into sums — easier to optimize. Minimizing cross-entropy on classification data is MLE under a Bernoulli/categorical model.",
+      "commonMistakes": [
+        "Maximizing likelihood on training data with no regularization (overfitting)",
+        "Forgetting that MLE is a point estimate, not uncertainty",
+        "Mixing up likelihood P(data|θ) with probability of θ"
+      ],
+      "realWorldUsage": "Training classifiers, fitting regression, EM algorithms, calibration.",
+      "drills": [
+        "mle-bernoulli-derivation"
+      ],
+      "reviewQuestions": [
+        "rq-mle-cross-entropy-link",
+        "rq-likelihood-vs-posterior"
+      ],
+      "resources": [
+        {
+          "title": "ISL — Chapter 4: Classification (MLE connection)",
+          "url": "https://www.statlearning.com/",
+          "type": "doc"
+        },
+        {
+          "title": "StatQuest — Maximum Likelihood",
+          "url": "https://www.youtube.com/watch?v=XepXbq9wr90",
+          "type": "video"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "covariance-correlation",
+      "name": "Covariance & Correlation",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d",
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "descriptive-statistics",
+        "random-variables"
+      ],
+      "related": [
+        "regression-basics",
+        "portfolio-risk-metrics",
+        "pca-projection"
+      ],
+      "description": "Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.",
+      "mentalModel": "Covariance is signed co-fluctuation with units. Correlation divides by both standard deviations so scale cancels. Zero correlation means no linear relationship, not independence.",
+      "commonMistakes": [
+        "Treating correlation 0 as unrelated when nonlinear dependence exists",
+        "Computing correlation on price levels instead of returns",
+        "Mixing sample n vs n−1 denominators"
+      ],
+      "realWorldUsage": "Feature selection, portfolio diversification, multicollinearity checks.",
+      "drills": [
+        "compute-covariance-matrix"
+      ],
+      "reviewQuestions": [
+        "rq-covariance-vs-correlation"
+      ],
+      "artifacts": [
+        "impl-descriptive-stats",
+        "quant-risk-dashboard"
+      ],
+      "resources": [
+        {
+          "title": "Seeing Theory — Regression",
+          "url": "https://seeing-theory.brown.edu/regression/index.html",
+          "type": "article"
+        },
+        {
+          "title": "ISL — Statistical Learning",
+          "url": "https://www.statlearning.com/",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "id": "bias-variance-overfitting",
+      "name": "Bias, Variance & Overfitting",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "roadmaps": [
+        "prob-stats-30d",
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "regression-basics",
+        "sampling-and-clt"
+      ],
+      "related": [
+        "maximum-likelihood",
+        "multivariable-optimization",
+        "momentum-backtest"
+      ],
+      "description": "Underfitting vs memorizing noise; why in-sample greatness lies.",
+      "mentalModel": "Bias is systematic error from too-simple a model; variance is sensitivity to which sample you drew. Overfitting is low bias + high variance. The gym is holdout validation, not training R².",
+      "commonMistakes": [
+        "Tuning on the test set",
+        "Chasing training loss without validation",
+        "Equating complex with better"
+      ],
+      "realWorldUsage": "ML training, backtest overfitting, feature discipline.",
+      "drills": [
+        "diagnose-overfit-split"
+      ],
+      "reviewQuestions": [
+        "rq-bias-variance-tradeoff"
+      ],
+      "artifacts": [
+        "debunk-fake-trading-signal"
+      ],
+      "resources": [
+        {
+          "title": "StatQuest — Bias and Variance",
+          "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
+          "type": "video"
+        },
+        {
+          "title": "ISL — Model Assessment",
+          "url": "https://www.statlearning.com/",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "id": "matrix-rank-basis",
+      "name": "Rank, Basis & Subspaces",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "matrices-and-transformations"
+      ],
+      "related": [
+        "pca-projection",
+        "regression-basics",
+        "eigenvalues-decomposition"
+      ],
+      "description": "Column space, rank, independence — why matrices are often low-rank in practice.",
+      "mentalModel": "Rank counts independent directions the matrix reaches. Regression lives in the column space of X; residuals are orthogonal to that subspace.",
+      "commonMistakes": [
+        "Confusing rank with row count",
+        "OLS when X is rank-deficient",
+        "Ignoring near-collinearity"
+      ],
+      "realWorldUsage": "PCA, embeddings, recommender factorizations.",
+      "drills": [
+        "identify-rank-subspace"
+      ],
+      "reviewQuestions": [
+        "rq-rank-vs-dimensions"
+      ],
+      "resources": [
+        {
+          "title": "3Blue1Brown — Span and linear independence",
+          "url": "https://www.3blue1brown.com/lessons/span",
+          "type": "video"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "pca-projection",
+      "name": "PCA & Projection",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "eigenvalues-decomposition",
+        "covariance-correlation",
+        "matrix-rank-basis"
+      ],
+      "related": [
+        "ml-embeddings",
+        "regression-basics"
+      ],
+      "description": "Principal components as variance-maximizing orthogonal directions; projection as subspace approximation.",
+      "mentalModel": "PCA finds an orthogonal basis ordered by variance. Top-k projection is the best k-dimensional summary in squared-error sense. Center first.",
+      "commonMistakes": [
+        "PCA on uncentered data",
+        "Components without domain meaning",
+        "PCA for prediction without care"
+      ],
+      "realWorldUsage": "Dimensionality reduction, visualization, noise filtering.",
+      "drills": [
+        "pca-variance-explained"
+      ],
+      "reviewQuestions": [
+        "rq-pca-as-projection"
+      ],
+      "artifacts": [
+        "impl-pca-from-scratch",
+        "visualize-projections"
+      ],
+      "resources": [
+        {
+          "title": "StatQuest — PCA",
+          "url": "https://www.youtube.com/watch?v=FgakZw6K1QQ",
+          "type": "video"
+        },
+        {
+          "title": "ISL — Principal Components",
+          "url": "https://www.statlearning.com/",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "id": "returns-volatility",
+      "name": "Returns & Volatility",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "random-variables",
+        "descriptive-statistics",
+        "sampling-and-clt"
+      ],
+      "related": [
+        "portfolio-risk-metrics",
+        "stationarity-autocorrelation"
+      ],
+      "description": "Simple/log returns, realized volatility, annualization — basic quant units.",
+      "mentalModel": "Prices drift; returns are closer to stable. Vol is return std dev, usually annualized √252. Correlate returns, not prices.",
+      "commonMistakes": [
+        "Regressing price levels",
+        "Wrong annualization factor",
+        "Look-ahead in return alignment"
+      ],
+      "realWorldUsage": "Risk, options intuition, strategy evaluation.",
+      "drills": [
+        "compute-log-returns-vol"
+      ],
+      "reviewQuestions": [
+        "rq-returns-not-prices"
+      ],
+      "artifacts": [
+        "quant-returns-pipeline",
+        "quant-risk-dashboard"
+      ],
+      "resources": [
+        {
+          "title": "Python for Finance (Hilpisch)",
+          "url": "https://github.com/yhilpisch/py4fi2nd",
+          "type": "doc"
+        },
+        {
+          "title": "Hyndman — Forecasting: Principles and Practice",
+          "url": "https://otexts.com/fpp3/",
+          "type": "doc"
+        }
+      ]
+    },
+    {
+      "id": "stationarity-autocorrelation",
+      "name": "Stationarity & Autocorrelation",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "returns-volatility",
+        "covariance-correlation"
+      ],
+      "related": [
+        "random-walks-markov",
+        "momentum-backtest"
+      ],
+      "description": "When series statistics are stable; memory in lags; noise vs signal.",
+      "mentalModel": "Stationarity: distribution doesn't drift. Autocorrelation: how today relates to yesterday. Random-walk returns have ~0 autocorr; momentum must prove structure exists.",
+      "commonMistakes": [
+        "Tests on non-stationary levels",
+        "Trend mistaken for momentum",
+        "Ignoring regime shifts"
+      ],
+      "realWorldUsage": "ARIMA intuition, pairs trading skepticism.",
+      "drills": [
+        "interpret-autocorrelation-plot"
+      ],
+      "reviewQuestions": [
+        "rq-stationarity-why-matters"
+      ],
+      "resources": [
+        {
+          "title": "StatQuest — Stationarity",
+          "url": "https://www.youtube.com/watch?v=1Lh1HlLKV4g",
+          "type": "video"
+        },
+        {
+          "title": "FPP3 — Time series features",
+          "url": "https://otexts.com/fpp3/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "random-walks-markov",
+      "name": "Random Walks & Markov Chains",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": [
+        "probability-fundamentals",
+        "classical-distributions"
+      ],
+      "related": [
+        "returns-volatility",
+        "stationarity-autocorrelation"
+      ],
+      "description": "Markov property, random walks, transition matrices — generative story behind market efficiency intuition.",
+      "mentalModel": "Markov: future depends only on present state. Random walk sums independent steps. If returns are unpredictable, momentum must demonstrate structure, not narrative.",
+      "commonMistakes": [
+        "Markov when volatility clusters",
+        "Trending levels called random walk",
+        "Confusing level walk with return predictability"
+      ],
+      "realWorldUsage": "PageRank, HMMs, backtest skepticism.",
+      "drills": [
+        "simulate-markov-chain"
+      ],
+      "reviewQuestions": [
+        "rq-markov-property"
+      ],
+      "artifacts": [
+        "simulate-random-processes"
+      ],
+      "resources": [
+        {
+          "title": "MIT 6.041SC — Random processes",
+          "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+          "type": "course"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-risk-metrics",
+      "name": "Sharpe, Drawdown & Portfolio Risk",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [
+        "returns-volatility",
+        "covariance-correlation"
+      ],
+      "related": [
+        "momentum-backtest",
+        "ab-testing-engineering"
+      ],
+      "description": "Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.",
+      "mentalModel": "Sharpe = excess return per unit vol. Drawdown = peak-to-trough pain. Correlation matrix shows diversification.",
+      "commonMistakes": [
+        "Sharpe on tiny samples",
+        "Ignoring costs",
+        "Different leverage comparisons"
+      ],
+      "realWorldUsage": "Strategy gates, portfolio dashboards.",
+      "drills": [
+        "compute-sharpe-drawdown"
+      ],
+      "reviewQuestions": [
+        "rq-sharpe-limitations"
+      ],
+      "artifacts": [
+        "quant-risk-dashboard",
+        "momentum-backtest-benchmark"
+      ],
+      "resources": [
+        {
+          "title": "Bailey & López de Prado — Deflated Sharpe",
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "id": "momentum-backtest",
+      "name": "Momentum Backtest Discipline",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "roadmaps": [
+        "math-stack-12w"
+      ],
+      "difficulty": "advanced",
+      "priority": 4,
+      "prerequisites": [
+        "portfolio-risk-metrics",
+        "hypothesis-testing",
+        "bias-variance-overfitting"
+      ],
+      "related": [
+        "ab-testing-engineering",
+        "stationarity-autocorrelation"
+      ],
+      "description": "Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.",
+      "mentalModel": "Backtest = hypothesis on history. Pre-register rule, holdout/walk-forward, benchmark, document costs. In-sample-only edge is curve-fit.",
+      "commonMistakes": [
+        "Optimizing lookback on full history",
+        "Survivorship bias",
+        "No benchmark"
+      ],
+      "realWorldUsage": "Quant research prototyping, BS detection.",
+      "drills": [
+        "design-honest-backtest"
+      ],
+      "reviewQuestions": [
+        "rq-backtest-overfitting"
+      ],
+      "artifacts": [
+        "momentum-backtest-benchmark"
+      ],
+      "resources": [
+        {
+          "title": "QuantConnect — Backtesting overview",
+          "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/overview",
+          "type": "doc"
+        }
+      ]
     }
   ]
 }

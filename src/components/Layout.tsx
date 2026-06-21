@@ -27,11 +27,12 @@ interface NavItem {
 // reviews. Playground = free coding canvas. Progress = mastery + notes.
 // Docs = long-form reference (system design, interview prep, ML case studies).
 const PRIMARY_NAV: NavItem[] = [
-  { to: '/learn', label: 'Learn', icon: Network },
+  { to: '/today', label: 'Today', icon: Network },
+  { to: '/learn', label: 'Learn', icon: BookOpen },
   { to: '/practice', label: 'Practice', icon: Dumbbell },
   { to: '/playground', label: 'Playground', icon: Code2 },
+  { to: '/build', label: 'Build', icon: Code2 },
   { to: '/progress', label: 'Progress', icon: BarChart3 },
-  { to: '/learning', label: 'Docs', icon: BookOpen },
 ];
 
 export default function Layout() {

@@ -21,7 +21,7 @@ import { Sparkline, StackedBar } from '../components/viz';
 import {
   CONCEPT_BY_ID,
   type Drill,
-  DRILLS,
+  EDITORIAL_DRILLS,
   groupForTag,
   REVIEW_QUESTIONS,
   type ReviewQuestion,
@@ -52,7 +52,7 @@ export default function Practice() {
   const dueCount = REVIEW_QUESTIONS.filter(q => isDue(mastery[q.conceptId])).length;
   const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
   const attemptedCount = Object.values(drillState).filter(d => d.status === 'attempted').length;
-  const solvedPct = DRILLS.length ? solvedCount / DRILLS.length : 0;
+  const solvedPct = EDITORIAL_DRILLS.length ? solvedCount / EDITORIAL_DRILLS.length : 0;
   const totalReps = Object.values(drillState).reduce((s, d) => s + (d.attempts ?? 0), 0);
   const sparkline = buildRecentActivity(mastery, 14);
 
@@ -89,7 +89,7 @@ export default function Practice() {
 
       <div className="mt-6 mb-4">
         <TabGroup>
-          <TabButton active={tab === 'drills'} onClick={() => setTab('drills')} label="Drills" count={`${solvedCount}/${DRILLS.length}`} />
+          <TabButton active={tab === 'drills'} onClick={() => setTab('drills')} label="Drills" count={`${solvedCount}/${EDITORIAL_DRILLS.length}`} />
           <TabButton active={tab === 'reviews'} onClick={() => setTab('reviews')} label="Reviews" count={dueCount} />
         </TabGroup>
       </div>
@@ -116,7 +116,7 @@ function PracticeHero({
   dueCount: number;
   sparkline: number[];
 }) {
-  const unsolved = DRILLS.length - solvedCount - attemptedCount;
+  const unsolved = EDITORIAL_DRILLS.length - solvedCount - attemptedCount;
   const activeStreak = sparkline.slice().reverse().findIndex(v => v === 0);
   const streak = activeStreak === -1 ? sparkline.length : activeStreak;
 
@@ -124,7 +124,7 @@ function PracticeHero({
     <Card className="p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid grid-cols-3 gap-6 sm:flex sm:gap-10">
-          <StatNumber label="Solved" value={`${solvedCount}/${DRILLS.length}`} hint={`${attemptedCount} in progress · ${unsolved} untouched`} />
+          <StatNumber label="Solved" value={`${solvedCount}/${EDITORIAL_DRILLS.length}`} hint={`${attemptedCount} in progress · ${unsolved} untouched`} />
           <StatNumber label="Due" value={dueCount} hint={dueCount === 0 ? 'all caught up' : 'concepts ready'} tone={dueCount ? 'amber' : 'default'} />
           <StatNumber label="Streak" value={`${streak}d`} hint={`${totalReps} total reps`} />
         </div>
@@ -170,7 +170,7 @@ function DrillsTab() {
   // Attach primary group + problem ELO + distance to the user's strongest
   // roadmap-context for this concept. Smaller distance = closer to user's edge.
   const withMeta = useMemo(
-    () => DRILLS.map(d => {
+    () => EDITORIAL_DRILLS.map(d => {
       const concept = CONCEPT_BY_ID[d.conceptId];
       const grp = concept?.tags[0];
       const roadmaps = concept?.roadmaps ?? [];
@@ -213,7 +213,7 @@ function DrillsTab() {
         <div className="mb-2 text-xs font-medium text-white/50">Filter by group</div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
           <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>
-            All ({DRILLS.length})
+            All ({EDITORIAL_DRILLS.length})
           </FilterPill>
           {groupsRollup.map(({ group: g, total, solved }) => (
             <FilterPill key={g.id} active={group === g.id} tone={g.color} onClick={() => setGroup(g.id)}>

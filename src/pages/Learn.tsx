@@ -9,7 +9,9 @@ import {
   ROADMAPS,
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
+import { useGateContext } from '../hooks/useGates';
 import { rollupMastery } from '../lib/conceptState';
+import { conceptAccessible } from '../lib/gates';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 
 const HORIZON_LABEL: Record<string, string> = {
@@ -19,35 +21,20 @@ const HORIZON_LABEL: Record<string, string> = {
   '12mo': '12 months',
 };
 
-const ACTIVE_KEY = 'swe-os:active-roadmap';
-
-function loadActive(): string | null {
-  try {
-    return localStorage.getItem(ACTIVE_KEY);
-  } catch {
-    return null;
-  }
-}
-
-function saveActive(id: string) {
-  try {
-    localStorage.setItem(ACTIVE_KEY, id);
-  } catch {
-    /* localStorage unavailable */
-  }
-}
+import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
 
 export default function Learn() {
   const { mastery } = useConceptMastery();
-  const [activeId, setActiveId] = useState<string>(() => loadActive() ?? pickDefaultActive(mastery));
+  const gateCtx = useGateContext();
+  const [activeId, setActiveId] = useState<string>(() => loadActiveRoadmapId() || pickDefaultActive(mastery));
 
   function pick(id: string) {
     setActiveId(id);
-    saveActive(id);
+    saveActiveRoadmapId(id);
   }
 
   const active = ROADMAPS.find(r => r.id === activeId) ?? ROADMAPS[0];
-  const next = pickNextConceptInRoadmap(active, mastery);
+  const next = pickNextConceptInRoadmap(active, mastery, gateCtx);
   const nextDrill = next ? pickDrillForConcept(next.id) : null;
 
   return (
@@ -194,18 +181,22 @@ function pickDefaultActive(mastery: Record<string, MasteryEntry>): string {
   return best;
 }
 
-function pickNextConceptInRoadmap(roadmap: Roadmap, mastery: Record<string, MasteryEntry>) {
+function pickNextConceptInRoadmap(
+  roadmap: Roadmap,
+  mastery: Record<string, MasteryEntry>,
+  gateCtx: ReturnType<typeof useGateContext>,
+) {
   // Prefer the global recommender's pick if it lives in this roadmap;
   // otherwise pick the first not-yet-mastered concept in milestone order.
   const fallbackIds = roadmapConceptIds(roadmap);
   const idSet = new Set(fallbackIds);
-  const global = pickNextConcept(mastery);
+  const global = pickNextConcept(mastery, gateCtx);
   if (global && idSet.has(global.id)) return global;
   for (const cid of fallbackIds) {
     const m = mastery[cid];
     if (!m || (m.confidence ?? 0) < 0.9) {
       const c = CONCEPT_BY_ID[cid];
-      if (c) return c;
+      if (c && conceptAccessible(c, gateCtx)) return c;
     }
   }
   return null;

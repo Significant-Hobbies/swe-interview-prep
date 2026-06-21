@@ -2,6 +2,7 @@ import { ArrowLeft, BookOpen, CheckCircle2, Circle, Dumbbell, Hammer } from 'luc
 import { Link, useParams } from 'react-router-dom';
 
 import { FurtherReading } from '../components/FurtherReading';
+import { RoadmapGraph } from '../components/RoadmapGraph';
 import { Card, color, PageShell, ProgressBar, SectionTitle } from '../components/ui';
 import {
   ARTIFACT_BY_ID,
@@ -14,6 +15,7 @@ import {
 } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
+import { playgroundArtifactUrl } from '../lib/gates';
 
 // Roadmaps that have a companion markdown doc under /learning/:slug.
 const ROADMAP_DEEP_DIVE: Record<string, string> = {
@@ -73,7 +75,19 @@ export default function RoadmapDetail() {
         </div>
         <ProgressBar value={pct} />
         <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
+        <a
+          href={`/share/roadmaps/${roadmap.id}`}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 inline-block text-xs text-sky-400 hover:text-sky-300"
+        >
+          Share public roadmap →
+        </a>
       </Card>
+
+      <div className="mb-6">
+        <RoadmapGraph roadmap={roadmap} mastery={mastery} />
+      </div>
 
       {ROADMAP_DEEP_DIVE[roadmap.id] && (
         <Link
@@ -179,7 +193,7 @@ function MilestoneBlock({
                 const a = ARTIFACT_BY_ID[aid];
                 if (!a) return null;
                 return (
-                  <Link key={aid} to="/playground" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
+                  <Link key={aid} to={playgroundArtifactUrl(aid)} className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
                     <Hammer className="h-4 w-4 shrink-0 text-white" />
                     <span className="truncate">{a.title}</span>
                   </Link>
