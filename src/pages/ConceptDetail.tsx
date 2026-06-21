@@ -35,6 +35,7 @@ import {
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useGates } from '../hooks/useGates';
 import { confidence1to5, deriveConceptStatus } from '../lib/conceptState';
+import { mocksForConcept } from '../lib/mockRecommend';
 import { ConceptNotes } from './partials/ConceptNotes';
 
 const RATINGS: { id: 'again' | 'hard' | 'good' | 'easy'; label: string; tone: string }[] = [
@@ -67,6 +68,7 @@ export default function ConceptDetail() {
   const meta = STATUS_META[status];
   const editorialDrills = editorialDrillsForConcept(concept.id);
   const leetcodeDrills = metadataDrillsForConcept(concept.id);
+  const mockReps = mocksForConcept(concept.id);
   const artifacts = artifactsForConcept(concept.id);
   const questions = reviewQuestionsForConcept(concept.id);
   const gate = gateStatus(concept.id);
@@ -288,6 +290,31 @@ export default function ConceptDetail() {
               <p className="text-sm text-white/40">No drills mapped yet.</p>
             )}
           </section>
+
+          {/* Mock interview reps */}
+          {mockReps.length > 0 && (
+            <section>
+              <SectionTitle>Mock interview reps</SectionTitle>
+              <div className="space-y-2">
+                {mockReps.map(m => (
+                  <Card
+                    key={m.id}
+                    as="link"
+                    to={`/mock?prompt=${m.id}`}
+                    className="flex items-center justify-between gap-3 p-3"
+                  >
+                    <div>
+                      <div className="text-sm font-medium text-white">{m.title}</div>
+                      <div className="text-xs text-white/40">
+                        {m.kind.replace('-', ' ')} · {m.durationMinutes} min
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Artifacts */}
           <section>

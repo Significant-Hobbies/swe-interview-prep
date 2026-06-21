@@ -1,19 +1,26 @@
-import { Check, Clock, Mic, RotateCcw } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Check, Clock, Mic, RotateCcw, Target } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { Button, Card, FilterPill, PageHeader, PageShell } from '../components/ui';
+import { CONCEPT_BY_ID } from '../data/learning-os';
 import { MOCK_PROMPTS, type MockKind } from '../data/mock-prompts';
+import { useActivityLogger } from '../hooks/useActivity';
+import { useConceptMastery } from '../hooks/useConcepts';
 import { COMPANY_BY_ID } from '../lib/companies';
 import { useProfile } from '../hooks/useProfile';
 import { recordSessionActivity } from '../lib/session';
 import { loadAIConfig } from '../hooks/useAI';
 import { aiConfigured } from '../lib/aiClient';
+import { mockRatingFromRubric, recommendMockPrompts } from '../lib/mockRecommend';
 
 const KINDS: MockKind[] = ['technical', 'system-design', 'behavioral'];
 
 export default function MockInterview() {
+  const [searchParams] = useSearchParams();
   const { profile } = useProfile();
+  const { mastery, review } = useConceptMastery();
+  const logActivity = useActivityLogger();
   const defaultKind = profile.targetCompany
     ? (COMPANY_BY_ID[profile.targetCompany]?.mockKindBias ?? 'technical')
     : 'technical';
@@ -24,8 +31,13 @@ export default function MockInterview() {
   const [checked, setChecked] = useState<Set<number>>(new Set());
   const [aiFeedback, setAiFeedback] = useState('');
   const [loadingAi, setLoadingAi] = useState(false);
+  const deepLinked = useRef(false);
 
   const pool = useMemo(() => MOCK_PROMPTS.filter(p => p.kind === kind), [kind]);
+  const recommended = useMemo(
+    () => recommendMockPrompts(profile, mastery, 3).filter(p => p.kind === kind),
+    [profile, mastery, kind],
+  );
   const active = pool.find(p => p.id === activeId) ?? pool[0];
 
   useEffect(() => {
@@ -33,6 +45,28 @@ export default function MockInterview() {
     const t = setInterval(() => setSecondsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, [activeId, secondsLeft]);
+
+  useEffect(() => {
+    if (deepLinked.current) return;
+    const promptId = searchParams.get('prompt');
+    if (!promptId) return;
+    const p = MOCK_PROMPTS.find(x => x.id === promptId);
+    if (!p) return;
+    deepLinked.current = true;
+    setKind(p.kind);
+    setActiveId(promptId);
+    setSecondsLeft(p.durationMinutes * 60);
+    setNotes('');
+    setChecked(new Set());
+    setAiFeedback('');
+    recordSessionActivity('mock_start');
+    void logActivity({
+      kind: 'mock_start',
+      problemId: promptId,
+      conceptIds: p.conceptIds,
+      payload: { kind: p.kind, durationMinutes: p.durationMinutes },
+    });
+  }, [searchParams, logActivity]);
 
   function start(promptId: string) {
     const p = MOCK_PROMPTS.find(x => x.id === promptId);
@@ -43,6 +77,12 @@ export default function MockInterview() {
     setChecked(new Set());
     setAiFeedback('');
     recordSessionActivity('mock_start');
+    void logActivity({
+      kind: 'mock_start',
+      problemId: promptId,
+      conceptIds: p.conceptIds,
+      payload: { kind: p.kind, durationMinutes: p.durationMinutes },
+    });
   }
 
   function toggleRubric(i: number) {
@@ -79,7 +119,22 @@ export default function MockInterview() {
   }
 
   function finish() {
+    if (!active) return;
+    const rating = mockRatingFromRubric(checked.size, active.rubric.length);
     recordSessionActivity('mock_complete');
+    void logActivity({
+      kind: 'mock_complete',
+      problemId: active.id,
+      conceptIds: active.conceptIds,
+      payload: {
+        rubricChecked: checked.size,
+        rubricTotal: active.rubric.length,
+        rating,
+      },
+    });
+    for (const conceptId of active.conceptIds ?? []) {
+      void review(conceptId, rating);
+    }
     setSecondsLeft(0);
   }
 
@@ -105,6 +160,28 @@ export default function MockInterview() {
           </FilterPill>
         ))}
       </div>
+
+      {recommended.length > 0 && secondsLeft === 0 && (
+        <div className="mb-6">
+          <div className="mb-2 flex items-center gap-2 text-xs font-medium text-white/50">
+            <Target className="h-3.5 w-3.5" />
+            Recommended for your gaps
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {recommended.map(p => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => start(p.id)}
+                className="rounded-lg border border-sky-500/25 bg-sky-500/8 px-3 py-2 text-left text-xs text-white hover:border-sky-500/40"
+              >
+                <span className="font-medium">{p.title}</span>
+                <span className="ml-2 font-mono text-white/40">{p.durationMinutes}m</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
         <div className="space-y-2">
@@ -147,6 +224,24 @@ export default function MockInterview() {
             </div>
 
             <p className="mt-4 text-sm leading-relaxed text-white/70">{active.prompt}</p>
+
+            {active.conceptIds && active.conceptIds.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {active.conceptIds.map(cid => {
+                  const c = CONCEPT_BY_ID[cid];
+                  if (!c) return null;
+                  return (
+                    <Link
+                      key={cid}
+                      to={`/concepts/${cid}`}
+                      className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/50 hover:border-white/20 hover:text-white/70"
+                    >
+                      {c.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
 
             <textarea
               value={notes}
@@ -197,7 +292,11 @@ export default function MockInterview() {
 
             {secondsLeft === 0 && notes.trim() && (
               <p className="mt-4 text-xs text-white/40">
-                Self-score: {checked.size}/{active.rubric.length} rubric items ·{' '}
+                Self-score: {checked.size}/{active.rubric.length} rubric items
+                {active.conceptIds?.length
+                  ? ` · mastery nudged for ${active.conceptIds.length} concept${active.conceptIds.length > 1 ? 's' : ''}`
+                  : ''}{' '}
+                ·{' '}
                 <Link to="/practice/all?tab=reviews" className="text-sky-400 hover:text-sky-300">
                   follow up with reviews →
                 </Link>

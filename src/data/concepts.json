@@ -3814,7 +3814,10 @@
       "drills": [
         "two-sum-hashmap",
         "lc-two-sum",
-        "lc-contains-duplicate"
+        "lc-contains-duplicate",
+        "lc-product-of-array-except-self",
+        "lc-group-anagrams",
+        "lc-merge-intervals"
       ],
       "reviewQuestions": [
         "rq-array-hashing-core"
@@ -4042,7 +4045,9 @@
         }
       ],
       "drills": [
-        "level-order-traversal"
+        "level-order-traversal",
+        "lc-invert-binary-tree",
+        "lc-maximum-depth-of-binary-tree"
       ],
       "reviewQuestions": [
         "rq-trees-core"
@@ -4113,7 +4118,9 @@
         }
       ],
       "drills": [
-        "kth-largest-heap"
+        "kth-largest-heap",
+        "lc-top-k-frequent-elements",
+        "lc-kth-largest-element-in-an-array"
       ],
       "reviewQuestions": [
         "rq-heap-core"
@@ -4146,7 +4153,9 @@
       ],
       "mentalModel": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer.",
       "drills": [
-        "subsets-backtracking"
+        "subsets-backtracking",
+        "lc-word-search",
+        "lc-permutations"
       ],
       "reviewQuestions": [
         "rq-backtracking-core"
@@ -4299,7 +4308,8 @@
         "lc-maximum-subarray",
         "lc-climbing-stairs",
         "lc-coin-change",
-        "lc-house-robber"
+        "lc-house-robber",
+        "lc-jump-game"
       ],
       "reviewQuestions": [
         "rq-dp-1d-core"
@@ -4462,7 +4472,8 @@
       ],
       "mentalModel": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero.",
       "drills": [
-        "single-number-xor"
+        "single-number-xor",
+        "lc-single-number"
       ],
       "reviewQuestions": [
         "rq-bit-manipulation-core"

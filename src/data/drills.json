@@ -3830,6 +3830,215 @@
       "leetcodeNumber": 198,
       "source": "leetcode-metadata",
       "testCases": []
+    },
+    {
+      "id": "lc-product-of-array-except-self",
+      "title": "Product of Array Except Self",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #238 — Product of Array Except Self. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/product-of-array-except-self/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, prefix-sum). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/product-of-array-except-self/",
+      "leetcodeNumber": 238,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-group-anagrams",
+      "title": "Group Anagrams",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #49 — Group Anagrams. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/group-anagrams/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, hash-table, string, sorting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/group-anagrams/",
+      "leetcodeNumber": 49,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-top-k-frequent-elements",
+      "title": "Top K Frequent Elements",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #347 — Top K Frequent Elements. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/top-k-frequent-elements/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: heap.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, hash-table, divide-and-conquer, sorting, heap-priority-queue, bucket-sort, counting, quickselect). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "leetcodeNumber": 347,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-invert-binary-tree",
+      "title": "Invert Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #226 — Invert Binary Tree. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/invert-binary-tree/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: trees.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (tree, depth-first-search, breadth-first-search, binary-tree). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/invert-binary-tree/",
+      "leetcodeNumber": 226,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-maximum-depth-of-binary-tree",
+      "title": "Maximum Depth of Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #104 — Maximum Depth of Binary Tree. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: trees.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (tree, depth-first-search, breadth-first-search, binary-tree). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "leetcodeNumber": 104,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-kth-largest-element-in-an-array",
+      "title": "Kth Largest Element in an Array",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #215 — Kth Largest Element in an Array. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/kth-largest-element-in-an-array/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: heap.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, divide-and-conquer, sorting, heap-priority-queue, quickselect). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+      "leetcodeNumber": 215,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-word-search",
+      "title": "Word Search",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #79 — Word Search. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/word-search/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: backtracking.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, string, backtracking, depth-first-search, matrix). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/word-search/",
+      "leetcodeNumber": 79,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-permutations",
+      "title": "Permutations",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #46 — Permutations. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/permutations/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: backtracking.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, backtracking). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/permutations/",
+      "leetcodeNumber": 46,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-jump-game",
+      "title": "Jump Game",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #55 — Jump Game. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/jump-game/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, dynamic-programming, greedy). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/jump-game/",
+      "leetcodeNumber": 55,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-merge-intervals",
+      "title": "Merge Intervals",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #56 — Merge Intervals. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/merge-intervals/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, sorting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/merge-intervals/",
+      "leetcodeNumber": 56,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-single-number",
+      "title": "Single Number",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #136 — Single Number. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/single-number/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: bit manipulation.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, bit-manipulation). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/single-number/",
+      "leetcodeNumber": 136,
+      "source": "leetcode-metadata",
+      "testCases": []
     }
   ]
 }

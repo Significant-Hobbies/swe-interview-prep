@@ -35,6 +35,17 @@ const STARTER_SLUGS = [
   'climbing-stairs',
   'coin-change',
   'house-robber',
+  'product-of-array-except-self',
+  'group-anagrams',
+  'top-k-frequent-elements',
+  'invert-binary-tree',
+  'maximum-depth-of-binary-tree',
+  'kth-largest-element-in-an-array',
+  'word-search',
+  'permutations',
+  'jump-game',
+  'merge-intervals',
+  'single-number',
 ];
 
 const args = process.argv.slice(2);

@@ -8,7 +8,9 @@ export type ActivityKind =
   | 'review_session'
   | 'artifact_ship'
   | 'feynman'
-  | 'session_start';
+  | 'session_start'
+  | 'mock_start'
+  | 'mock_complete';
 
 export async function logActivity(opts: {
   kind: ActivityKind;

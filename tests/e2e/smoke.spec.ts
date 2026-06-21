@@ -114,6 +114,14 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('link', { name: /Two Sum.*LeetCode/i })).toBeVisible();
   });
 
+  test('concept detail links to mock interview rep', async ({ page }) => {
+    await page.goto('/concepts/array-hashing');
+    await expect(page.getByText(/Mock interview reps/i)).toBeVisible();
+    await page.getByRole('link', { name: /Two Sum variants/i }).click();
+    await expect(page).toHaveURL(/\/mock\?prompt=mock-two-sum-variants/);
+    await expect(page.getByText(/Two Sum variants/i).first()).toBeVisible();
+  });
+
   test('legacy URLs redirect into the Learning OS and /build loads Build Lab', async ({ page }) => {
     await page.goto('/concepts');
     await expect(page).toHaveURL(/\/learn\/all$/);
