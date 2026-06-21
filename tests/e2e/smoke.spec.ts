@@ -89,7 +89,10 @@ test.describe('Learning OS smoke', () => {
     });
     await page.goto('/onboarding');
     await expect(page.getByRole('heading', { name: /Pick your primary path/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /AI Search & RAG/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /LLD Practice/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Probability & Statistics/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByText(/Finish setup to unlock navigation/i)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Learn', exact: true })).toHaveCount(0);
   });

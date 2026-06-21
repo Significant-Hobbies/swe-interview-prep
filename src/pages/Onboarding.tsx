@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { ROADMAPS } from '../data/learning-os';
 import { useProfile } from '../hooks/useProfile';
 import {
+  DEFAULT_ONBOARDING_PATH_ID,
+  ONBOARDING_PATH_GROUPS,
+} from '../lib/onboardingPaths';
+import {
   type ExperienceLevel,
   experienceLabel,
   minutesLabel,
@@ -11,33 +15,6 @@ import {
 } from '../lib/profile';
 import { saveActiveRoadmapId } from '../lib/recommend';
 import { STORE_KEYS, saveLocal } from '../lib/userStore';
-
-const PATHS = [
-  {
-    id: 'ai-search-infra-90-day',
-    title: 'AI Search & RAG',
-    subtitle: 'BM25 → vectors → hybrid → evals → production RAG',
-    emoji: '🔍',
-  },
-  {
-    id: 'prob-stats-30d',
-    title: 'Probability & Statistics',
-    subtitle: 'Active math gym — hypothesis testing before evals',
-    emoji: '📊',
-  },
-  {
-    id: 'math-stack-12w',
-    title: 'Math Stack (12 weeks)',
-    subtitle: 'Prob/stats → linear algebra → quant bridge',
-    emoji: '🧮',
-  },
-  {
-    id: 'reset-9-day',
-    title: '9-Day Reset',
-    subtitle: 'Short sprint — ship one BM25 artifact fast',
-    emoji: '⚡',
-  },
-] as const;
 
 const MINUTES = [15, 30, 45, 90] as const;
 const EXPERIENCE: ExperienceLevel[] = ['student', 'mid', 'senior'];
@@ -53,7 +30,7 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const { saveProfile } = useProfile();
   const [step, setStep] = useState(0);
-  const [picked, setPicked] = useState<string>(PATHS[0].id);
+  const [picked, setPicked] = useState<string>(DEFAULT_ONBOARDING_PATH_ID);
   const [minutes, setMinutes] = useState<15 | 30 | 45 | 90>(45);
   const [experience, setExperience] = useState<ExperienceLevel>('mid');
   const [horizon, setHorizon] = useState<string>('');
@@ -67,7 +44,7 @@ export default function Onboarding() {
 
   async function finish() {
     const exists = ROADMAPS.some(r => r.id === picked);
-    const roadmapId = exists ? picked : 'ai-search-infra-90-day';
+    const roadmapId = exists ? picked : DEFAULT_ONBOARDING_PATH_ID;
     saveActiveRoadmapId(roadmapId);
     const horizonDays = horizon ? parseInt(horizon, 10) : null;
     await saveProfile({
@@ -87,7 +64,7 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl flex-col justify-center px-6 py-16">
+    <div className={`mx-auto w-full px-6 py-16 ${step === 0 ? 'max-w-4xl' : 'max-w-3xl'} ${step === 0 ? '' : 'flex min-h-[70vh] flex-col justify-center'}`}>
       <div className="mb-8 flex items-center gap-2">
         {[0, 1, 2].map(s => (
           <div
@@ -103,27 +80,40 @@ export default function Onboarding() {
         <>
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Step 1 · Path</p>
           <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Pick your primary path.</h1>
-          <p className="mt-3 text-sm text-white/50">
-            Drives Today&apos;s session. You can blend more roadmaps later in Settings.
+          <p className="mt-3 max-w-prose text-sm text-white/50">
+            All 14 roadmaps — interview, systems, AI, math. Drives Today&apos;s session; switch anytime on Learn.
           </p>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2">
-            {PATHS.map(p => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setPicked(p.id)}
-                className={`rounded-xl border p-4 text-left transition-all duration-150 ${
-                  picked === p.id
-                    ? 'border-white/30 bg-white/[0.06] ring-1 ring-white/10'
-                    : 'border-white/[0.08] bg-black hover:border-white/15'
-                }`}
-              >
-                <div className="text-lg">{p.emoji}</div>
-                <div className="mt-2 text-sm font-semibold text-white">{p.title}</div>
-                <div className="mt-1 text-xs text-white/50">{p.subtitle}</div>
-              </button>
+
+          <div className="mt-10 space-y-10">
+            {ONBOARDING_PATH_GROUPS.map(group => (
+              <section key={group.id}>
+                <h2 className="text-base font-semibold tracking-tight text-white">{group.title}</h2>
+                <p className="mt-1 max-w-prose text-xs text-white/45">{group.subtitle}</p>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {group.paths.map(p => (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => setPicked(p.id)}
+                      className={`rounded-xl border p-4 text-left transition-all duration-150 ${
+                        picked === p.id
+                          ? 'border-white/30 bg-white/[0.06] ring-1 ring-white/10'
+                          : 'border-white/[0.08] bg-black hover:border-white/15'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="text-lg">{p.emoji}</span>
+                        <span className="font-mono text-[10px] tabular-nums text-white/35">{p.horizon}</span>
+                      </div>
+                      <div className="mt-2 text-sm font-semibold text-white">{p.title}</div>
+                      <div className="mt-1 line-clamp-2 text-xs leading-snug text-white/50">{p.subtitle}</div>
+                    </button>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
+
           <button
             type="button"
             onClick={() => setStep(1)}
