@@ -1,107 +1,87 @@
 # Deploy — swe-interview-prep (Cloudflare Pages)
 
-Production stack: **Vite SPA** on Cloudflare Pages + **Pages Functions** (`functions/api/[[path]].js`) + **Turso** + optional **Email Sending** + **cron digest**.
+Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Turso**. Optional **browser push** for daily digest reminders (no email required).
 
-## Prerequisites
+## Auto-deploy (default)
 
-- Turso database created (`turso db create …`)
-- Google OAuth client (Web) with authorized JavaScript origins including your Pages URL
-- Cloudflare account with Pages project `swe-interview-prep`
-- (Optional) Domain on Cloudflare for email sending
+Pushes to `main` trigger [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml):
 
-## 1. Required secrets (Pages → Settings → Environment variables)
+1. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
+2. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
+3. Smoke `curl` against production
 
-Set these for **Production** (and Preview if you test auth there):
+**GitHub repo secrets** (Settings → Secrets):
 
-| Variable | Purpose |
-|----------|---------|
-| `TURSO_DATABASE_URL` | libSQL connection URL |
-| `TURSO_AUTH_TOKEN` | Turso auth token |
-| `JWT_SECRET` | Signs auth cookies (long random string) |
-| `GOOGLE_CLIENT_ID` | Server-side Google token verify |
-| `VITE_GOOGLE_CLIENT_ID` | Same client id — baked into SPA at build time |
+| Secret | Purpose |
+|--------|---------|
+| `CLOUDFLARE_API_TOKEN` | Wrangler deploy (Pages Edit permission) |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account id |
+| `VITE_GOOGLE_CLIENT_ID` | Baked into SPA at build time |
 
-Build-time only (also set in CI if using GitHub Actions):
-
-```bash
-pnpm validate:env:deploy   # checks required vars before build
-pnpm build
-```
-
-## 2. Optional — daily digest email + browser push
-
-| Variable | Purpose |
-|----------|---------|
-| `DIGEST_FROM_EMAIL` | From address (must be on a domain with Email Sending enabled) |
-| `APP_URL` | Public app URL for links in digest (e.g. `https://swe-interview-prep.pages.dev`) |
-| `VAPID_PUBLIC_KEY` | Web Push public key (server) |
-| `VAPID_PRIVATE_KEY` | Web Push private key (server) |
-| `VITE_VAPID_PUBLIC_KEY` | Same public key — SPA build |
-| `VAPID_SUBJECT` | `mailto:you@yourdomain.com` |
-
-### Email binding
-
-`wrangler.toml` already declares:
-
-```toml
-[[send_email]]
-name = "EMAIL"
-```
-
-Enable sending on your domain:
-
-```bash
-wrangler email sending enable yourdomain.com
-```
-
-Cron trigger (daily 13:00 UTC) is in `wrangler.toml` → `functions/scheduled.js`.
-
-`pnpm validate:env:deploy` **warns** when digest/push vars are missing but does not block deploy.
-
-## 3. Deploy commands
-
-```bash
-# From repo root
-cp .env.example .env.local    # local dev only — never commit
-pnpm install
-pnpm validate:env:deploy
-pnpm deploy                   # build + wrangler pages deploy
-```
-
-Or push to `main` if CI auto-deploys.
-
-### Set secrets via CLI
+**Cloudflare Pages secrets** (runtime — API/auth/DB):
 
 ```bash
 wrangler pages secret put JWT_SECRET --project-name=swe-interview-prep
 wrangler pages secret put TURSO_DATABASE_URL --project-name=swe-interview-prep
 wrangler pages secret put TURSO_AUTH_TOKEN --project-name=swe-interview-prep
-# … repeat for each secret
+wrangler pages secret put GOOGLE_CLIENT_ID --project-name=swe-interview-prep
 ```
 
-## 4. Local dev parity
+Set once in the dashboard or via CLI; they persist across auto-deploys.
+
+### Manual deploy
 
 ```bash
-cp .env.example .env.local   # fill Turso + JWT + Google
-pnpm dev                     # Express :3456 (learning API) + Vite :5173
+pnpm validate:env:deploy   # checks required vars locally
+pnpm deploy              # build + wrangler pages deploy
 ```
 
-Vite proxies `/api/*` → `localhost:3456`. Learning routes mount via `shared/api/local-dev-routes.mjs`.
+## Required env
 
-## 5. Post-deploy smoke
+| Variable | Where | Purpose |
+|----------|-------|---------|
+| `TURSO_DATABASE_URL` | Pages secret | libSQL URL |
+| `TURSO_AUTH_TOKEN` | Pages secret | Turso token |
+| `JWT_SECRET` | Pages secret | Auth cookie signing |
+| `GOOGLE_CLIENT_ID` | Pages secret | Server Google verify |
+| `VITE_GOOGLE_CLIENT_ID` | GitHub secret / local build | Same id in SPA |
 
-1. Open `/learn` — guest mode works without sign-in.
-2. Google sign-in — profile + FSRS reviews persist.
-3. Settings → Import & notify — Anki upload (signed-in).
-4. Settings → enable email digest; cron runs daily (check Workers logs).
-5. Progress → Weekly reality check — includes mock + Feynman stats when signed in.
+Google OAuth client must list your Pages origin (e.g. `https://swe-interview-prep.pages.dev`).
 
-## 6. Content ingest (offline, not runtime)
+## Optional — browser push digest
+
+**VAPID** (Voluntary Application Server Identification) is the key pair that lets your server send Web Push notifications to browsers. The browser subscribes using the **public** key (`VITE_VAPID_PUBLIC_KEY`); the daily cron signs sends with the **private** key. No email or SMS involved — just “reviews due” notifications via `public/sw.js`.
+
+Generate a key pair:
 
 ```bash
-pnpm ingest-leetcode --list     # LeetCode drill stubs → drills.json
-pnpm ingest-library-rqs         # library → review-questions-ingested.json
-pnpm ingest-anki deck.apkg      # CLI preview of Anki parse
+npx --yes web-push generate-vapid-keys
 ```
 
-Commit generated JSON when you want new cards in production.
+| Variable | Where | Purpose |
+|----------|-------|---------|
+| `VAPID_PUBLIC_KEY` | Pages secret | Server push auth |
+| `VAPID_PRIVATE_KEY` | Pages secret | Signs push payloads |
+| `VITE_VAPID_PUBLIC_KEY` | GitHub secret + local build | Browser subscription |
+| `VAPID_SUBJECT` | Pages secret | `mailto:you@example.com` (contact for push service) |
+| `APP_URL` | Pages secret | Links in push body (e.g. `https://swe-interview-prep.pages.dev`) |
+
+Users enable push in **Settings → Import & notify**. Email digest is separate and **not required** — skip `DIGEST_FROM_EMAIL` and the `EMAIL` binding unless you want mail.
+
+Cron: daily 13:00 UTC in `wrangler.toml` → `functions/scheduled.js`.
+
+`pnpm validate:env:deploy` warns if push vars are missing but does not block deploy.
+
+## Local dev
+
+```bash
+cp .env.example .env.local
+pnpm dev    # Express :3456 + Vite :5173
+```
+
+## Post-deploy smoke
+
+1. `/learn` — guest mode
+2. Google sign-in — FSRS persists
+3. Settings → Anki import (signed-in)
+4. Progress → Weekly reality check

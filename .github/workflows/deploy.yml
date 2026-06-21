@@ -5,7 +5,9 @@ on:
     paths:
       - '.github/workflows/deploy.yml'
       - 'api/**'
+      - 'functions/**'
       - 'handlers/**'
+      - 'shared/**'
       - 'index.html'
       - 'package.json'
       - 'playwright.config.ts'
@@ -22,7 +24,9 @@ on:
     paths:
       - '.github/workflows/deploy.yml'
       - 'api/**'
+      - 'functions/**'
       - 'handlers/**'
+      - 'shared/**'
       - 'index.html'
       - 'package.json'
       - 'playwright.config.ts'

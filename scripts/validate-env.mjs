@@ -34,8 +34,7 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-const OPTIONAL_DIGEST = [
-  "DIGEST_FROM_EMAIL",
+const OPTIONAL_PUSH = [
   "APP_URL",
   "VAPID_PUBLIC_KEY",
   "VAPID_PRIVATE_KEY",
@@ -44,12 +43,12 @@ const OPTIONAL_DIGEST = [
 ];
 
 if (mode === "deploy") {
-  const missingOptional = OPTIONAL_DIGEST.filter((name) => {
+  const missingOptional = OPTIONAL_PUSH.filter((name) => {
     const value = process.env[name];
     return typeof value !== "string" || value.trim() === "";
   });
   if (missingOptional.length > 0) {
-    console.warn("Optional digest/push env not set (daily reminders disabled until configured):");
+    console.warn("Optional browser push env not set (digest push disabled until configured):");
     for (const name of missingOptional) {
       console.warn(`- ${name}`);
     }
