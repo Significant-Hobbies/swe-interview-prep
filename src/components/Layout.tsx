@@ -4,14 +4,19 @@ import {
   BookOpen,
   Code2,
   Dumbbell,
+  FolderKanban,
+  Hammer,
   LogIn,
   LogOut,
   Mic,
+  MoreHorizontal,
   Network,
+  NotebookPen,
+  RotateCcw,
   Settings,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
@@ -26,9 +31,7 @@ interface NavItem {
   icon: typeof Network;
 }
 
-// Primary IA. Learn = roadmaps + concept library. Practice = drills + spaced
-// reviews. Playground = free coding canvas. Progress = mastery + notes.
-// Docs = long-form reference (system design, interview prep, ML case studies).
+// Six primary tabs + Docs. Older 9-page IA (Build, Notes, Reviews, Projects) lives under More.
 const PRIMARY_NAV: NavItem[] = [
   { to: '/today', label: 'Today', icon: Network },
   { to: '/learn', label: 'Learn', icon: BookOpen },
@@ -36,39 +39,82 @@ const PRIMARY_NAV: NavItem[] = [
   { to: '/mock', label: 'Mock', icon: Mic },
   { to: '/playground', label: 'Playground', icon: Code2 },
   { to: '/progress', label: 'Progress', icon: BarChart3 },
+  { to: '/learning', label: 'Docs', icon: BookOpen },
 ];
 
+const MORE_NAV: NavItem[] = [
+  { to: '/build', label: 'Build Lab', icon: Hammer },
+  { to: '/practice/all?tab=reviews', label: 'Reviews', icon: RotateCcw },
+  { to: '/progress/all?tab=notes', label: 'Notes', icon: NotebookPen },
+  { to: '/progress/all', label: 'Projects', icon: FolderKanban },
+  { to: '/learn/all', label: 'All concepts', icon: Network },
+];
+
+// Mobile bottom bar — five highest-traffic + overflow menu (matches pre-collapse pattern).
+const MOBILE_PRIMARY: NavItem[] = [
+  { to: '/today', label: 'Today', icon: Network },
+  { to: '/learn', label: 'Learn', icon: BookOpen },
+  { to: '/practice', label: 'Practice', icon: Dumbbell },
+  { to: '/mock', label: 'Mock', icon: Mic },
+  { to: '/progress', label: 'Progress', icon: BarChart3 },
+];
+
+function navActive(pathname: string, to: string) {
+  const base = to.split('?')[0];
+  if (base === '/today') return pathname === '/today' || pathname === '/';
+  if (base === '/learning') return pathname === '/learning' || pathname.startsWith('/learning/');
+  return pathname === base || pathname.startsWith(`${base}/`);
+}
+
 export default function Layout() {
+  const location = useLocation();
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const changelogRef = useRef<HTMLDivElement>(null);
+  const moreDesktopRef = useRef<HTMLDivElement>(null);
+  const moreMobileRef = useRef<HTMLDivElement>(null);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
 
   useEffect(() => {
-    if (!changelogOpen) return;
+    if (!changelogOpen && !moreOpen) return;
     function handleClick(e: MouseEvent) {
-      if (changelogRef.current && !changelogRef.current.contains(e.target as Node)) {
+      const t = e.target as Node;
+      if (changelogOpen && changelogRef.current && !changelogRef.current.contains(t)) {
         setChangelogOpen(false);
+      }
+      if (
+        moreOpen &&
+        !moreDesktopRef.current?.contains(t) &&
+        !moreMobileRef.current?.contains(t)
+      ) {
+        setMoreOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, [changelogOpen]);
+  }, [changelogOpen, moreOpen]);
 
-  // Top-nav: full white on active, dim white on hover. No icons — Vercel-style word marks.
+  useEffect(() => {
+    setMoreOpen(false);
+  }, [location.pathname, location.search]);
+
   const navClass = ({ isActive }: { isActive: boolean }) =>
     `relative inline-flex h-16 items-center px-1 text-sm transition-colors duration-150 ${
-      isActive
-        ? 'text-white'
-        : 'text-white/50 hover:text-white'
+      isActive ? 'text-white' : 'text-white/50 hover:text-white'
     }`;
 
-  // Mobile bottom-bar: text only.
-  const tabClass = ({ isActive }: { isActive: boolean }) =>
-    `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors duration-150 ${
-      isActive ? 'text-white' : 'text-white/40'
+  const tabClass = (to: string) => {
+    const active = navActive(location.pathname, to);
+    return `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors duration-150 ${
+      active ? 'text-white' : 'text-white/40'
     }`;
+  };
+
+  const moreActive = MORE_NAV.some(item => navActive(location.pathname, item.to))
+    || navActive(location.pathname, '/playground')
+    || navActive(location.pathname, '/learning');
 
   return (
     <TooltipProvider delayDuration={250}>
@@ -81,12 +127,44 @@ export default function Layout() {
             </NavLink>
 
             {onboardingDone ? (
-              <div className="relative z-10 hidden flex-1 items-center justify-center gap-6 md:flex">
+              <div className="relative z-10 hidden flex-1 items-center justify-center gap-5 lg:gap-6 md:flex">
                 {PRIMARY_NAV.map(({ to, label }) => (
                   <NavLink key={to} to={to} className={navClass}>
                     <span>{label}</span>
                   </NavLink>
                 ))}
+                <div ref={moreDesktopRef} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setMoreOpen(o => !o)}
+                    className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
+                      moreOpen || moreActive ? 'text-white' : 'text-white/50 hover:text-white'
+                    }`}
+                    aria-expanded={moreOpen}
+                    aria-haspopup="menu"
+                  >
+                    More
+                    <MoreHorizontal className="h-3.5 w-3.5" />
+                  </button>
+                  {moreOpen && (
+                    <div
+                      role="menu"
+                      className="absolute left-1/2 top-full z-50 mt-1 min-w-[11rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
+                    >
+                      {MORE_NAV.map(({ to, label, icon: Icon }) => (
+                        <Link
+                          key={to}
+                          to={to}
+                          role="menuitem"
+                          className="flex items-center gap-2 px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                        >
+                          <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
+                          {label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <p className="hidden flex-1 text-center text-xs text-white/40 md:block">
@@ -134,13 +212,13 @@ export default function Layout() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => setSettingsOpen(true)}
-                    aria-label="AI settings"
+                    aria-label="Settings"
                     className="flex h-9 w-9 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom">AI settings</TooltipContent>
+                <TooltipContent side="bottom">Settings</TooltipContent>
               </Tooltip>
               {user ? (
                 <>
@@ -191,12 +269,52 @@ export default function Layout() {
 
         {onboardingDone && (
           <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
-            {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
-              <NavLink key={to} to={to} className={tabClass}>
+            {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
+              <NavLink key={to} to={to} className={tabClass(to)}>
                 <Icon className="h-5 w-5" />
                 <span>{label}</span>
               </NavLink>
             ))}
+            <div ref={moreMobileRef} className="relative flex flex-1 flex-col">
+              <button
+                type="button"
+                onClick={() => setMoreOpen(o => !o)}
+                className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors ${
+                  moreOpen || moreActive ? 'text-white' : 'text-white/40'
+                }`}
+                aria-expanded={moreOpen}
+                aria-label="More destinations"
+              >
+                <MoreHorizontal className="h-5 w-5" />
+                <span>More</span>
+              </button>
+              {moreOpen && (
+                <div className="absolute bottom-full right-0 mb-2 min-w-[10.5rem] rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
+                  <Link
+                    to="/playground"
+                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
+                  >
+                    <Code2 className="h-3.5 w-3.5 text-white/40" /> Playground
+                  </Link>
+                  <Link
+                    to="/learning"
+                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
+                  >
+                    <BookOpen className="h-3.5 w-3.5 text-white/40" /> Docs
+                  </Link>
+                  {MORE_NAV.map(({ to, label, icon: Icon }) => (
+                    <Link
+                      key={to}
+                      to={to}
+                      className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
+                    >
+                      <Icon className="h-3.5 w-3.5 text-white/40" />
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

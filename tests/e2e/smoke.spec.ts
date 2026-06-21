@@ -101,13 +101,13 @@ test.describe('Learning OS smoke', () => {
 
   test('Settings modal opens', async ({ page }) => {
     await page.goto('/learn');
-    await page.getByRole('button', { name: /AI settings/i }).click();
+    await page.getByRole('button', { name: /^Settings$/i }).click();
     await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
   });
 
   test('Settings import tab shows Anki upload', async ({ page }) => {
     await page.goto('/learn');
-    await page.getByRole('button', { name: /AI settings/i }).click();
+    await page.getByRole('button', { name: /^Settings$/i }).click();
     await page.getByRole('button', { name: /^Import$/i }).click();
     await expect(page.getByText(/Anki import/i)).toBeVisible();
     await expect(page.getByText(/Choose \.apkg or \.txt/i)).toBeVisible();
