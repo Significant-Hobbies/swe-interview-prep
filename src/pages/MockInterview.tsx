@@ -7,7 +7,6 @@ import { CONCEPT_BY_ID } from '../data/learning-os';
 import { MOCK_PROMPTS, type MockKind } from '../data/mock-prompts';
 import { useActivityLogger } from '../hooks/useActivity';
 import { useConceptMastery } from '../hooks/useConcepts';
-import { COMPANY_BY_ID } from '../lib/companies';
 import { useProfile } from '../hooks/useProfile';
 import { recordSessionActivity } from '../lib/session';
 import { loadAIConfig } from '../hooks/useAI';
@@ -21,10 +20,7 @@ export default function MockInterview() {
   const { profile } = useProfile();
   const { mastery, review } = useConceptMastery();
   const logActivity = useActivityLogger();
-  const defaultKind = profile.targetCompany
-    ? (COMPANY_BY_ID[profile.targetCompany]?.mockKindBias ?? 'technical')
-    : 'technical';
-  const [kind, setKind] = useState<MockKind>(defaultKind);
+  const [kind, setKind] = useState<MockKind>('technical');
   const [activeId, setActiveId] = useState<string | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [notes, setNotes] = useState('');

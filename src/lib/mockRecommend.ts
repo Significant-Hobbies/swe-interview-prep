@@ -1,6 +1,5 @@
-import { MOCK_PROMPTS, type MockKind, type MockPrompt } from '../data/mock-prompts';
+import { MOCK_PROMPTS, type MockPrompt } from '../data/mock-prompts';
 import type { MasteryEntry } from '../hooks/useConcepts';
-import { COMPANY_BY_ID } from './companies';
 import type { LearnerProfile } from './profile';
 
 export function mocksForConcept(conceptId: string): MockPrompt[] {
@@ -12,16 +11,11 @@ export function recommendMockPrompts(
   mastery: Record<string, MasteryEntry>,
   limit = 3,
 ): MockPrompt[] {
-  const kindBias: MockKind = profile.targetCompany
-    ? (COMPANY_BY_ID[profile.targetCompany]?.mockKindBias ?? 'technical')
-    : 'technical';
-
   const urgent = profile.interviewHorizonDays != null && profile.interviewHorizonDays <= 21;
 
   const scored = MOCK_PROMPTS.map(prompt => {
     let score = 0;
-    if (prompt.kind === kindBias) score += 3;
-    if (urgent && prompt.kind === 'system-design') score += 1;
+    if (urgent && prompt.kind === 'system-design') score += 2;
     if (urgent && prompt.kind === 'behavioral') score += 1;
 
     for (const conceptId of prompt.conceptIds ?? []) {

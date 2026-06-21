@@ -16,7 +16,7 @@ A curated set of roadmaps and references for learning systems software in 2026. 
 | Your situation | Start here |
 |---|---|
 | "I want a map of all of SWE so I know what the field even contains" | [The SE Landscape (2026)](./swe-landscape.md) |
-| "I want a breadth checklist for interview prep, and where to apply" | [Interview prep](./interview-prep.md) |
+| "I want a breadth checklist for interview prep" | [Interview prep](./interview-prep.md) |
 | "I want the design rounds — LLD + HLD" | [System design](./system-design.md) |
 | "I want to learn how databases *actually work* (internals)" | [Disk-First DB roadmap](./db-roadmap.md) |
 | "I want one mental model that covers V8, JVM, Go runtime, vLLM, Workers" | [Runtime roadmap](./runtime-roadmap.md) |
@@ -31,7 +31,7 @@ The four AI roadmaps are one progressive curriculum at four horizons — not fou
 | Doc | Shape | Good for |
 |---|---|---|
 | [The SE Landscape (2026)](./swe-landscape.md) | broad map | One page per major systems-software domain |
-| [Interview prep](./interview-prep.md) | checklist + reference | Breadth-first topic audit + remote-friendly companies |
+| [Interview prep](./interview-prep.md) | checklist | Breadth-first topic audit — map gaps to roadmaps |
 | [System design](./system-design.md) | catalogue | LLD patterns + HLD components + the canonical "design X" practice problems |
 | [Disk-First Databases & RAM](./db-roadmap.md) | 12-month roadmap | DB internals: storage engines, execution, distributed |
 | [Runtime — what every runtime has to do](./runtime-roadmap.md) | 12-month roadmap | Cross-cutting: V8, JVM, Go, BEAM, vLLM, Workers as one shape |

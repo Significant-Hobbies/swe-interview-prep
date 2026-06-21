@@ -15,7 +15,6 @@ import type { DrillEntry } from '../hooks/useUserStore';
 import { deriveConceptStatus, isDue } from './conceptState';
 import type { GateContext } from './gates';
 import { conceptAccessible } from './gates';
-import { blendRoadmapWeights } from './companies';
 import {
   adjustWeightsForExperience,
   adjustWeightsForHorizon,
@@ -72,9 +71,7 @@ function reachable(
 
 /** Weighted roadmap pick — blends multiple active paths. */
 export function pickWeightedRoadmap(profile: LearnerProfile, mastery: Record<string, MasteryEntry>): Roadmap {
-  const weights = normalizeRoadmapWeights(
-    blendRoadmapWeights(profile.roadmapWeights, profile.targetCompany),
-  );
+  const weights = normalizeRoadmapWeights(profile.roadmapWeights);
   let best: { id: string; score: number } | null = null;
   for (const [rid, w] of Object.entries(weights)) {
     const roadmap = ROADMAP_BY_ID[rid];
@@ -95,9 +92,7 @@ export function pickConceptForSession(
   gateCtx: GateContext | null | undefined,
 ): { roadmap: Roadmap; concept: Concept } | null {
   const skip = new Set(profile.skipConceptIds);
-  const weights = normalizeRoadmapWeights(
-    blendRoadmapWeights(profile.roadmapWeights, profile.targetCompany),
-  );
+  const weights = normalizeRoadmapWeights(profile.roadmapWeights);
 
   // Due concepts across weighted roadmaps first
   const dueCandidates: { concept: Concept; roadmap: Roadmap; score: number }[] = [];

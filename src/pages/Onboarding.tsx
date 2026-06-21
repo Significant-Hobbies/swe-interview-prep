@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { ROADMAPS } from '../data/learning-os';
 import { useProfile } from '../hooks/useProfile';
-import { COMPANY_PRESETS, type CompanyId } from '../lib/companies';
 import {
   type ExperienceLevel,
   experienceLabel,
@@ -58,7 +57,6 @@ export default function Onboarding() {
   const [minutes, setMinutes] = useState<15 | 30 | 45 | 90>(45);
   const [experience, setExperience] = useState<ExperienceLevel>('mid');
   const [horizon, setHorizon] = useState<string>('');
-  const [company, setCompany] = useState<CompanyId | null>(null);
   const [modalities, setModalities] = useState<ModalityWeights>({
     review: 22, drill: 42, build: 24, learn: 12,
   });
@@ -76,7 +74,6 @@ export default function Onboarding() {
       minutesPerDay: minutes,
       experience,
       interviewHorizonDays: Number.isFinite(horizonDays) ? horizonDays : null,
-      targetCompany: company,
       roadmapWeights: { [roadmapId]: 1 },
       modalityWeights: {
         review: modalities.review / 100,
@@ -175,24 +172,6 @@ export default function Onboarding() {
                   }`}
                 >
                   {experienceLabel(e)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <div className="text-xs font-medium text-white/40">Target company (optional)</div>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {COMPANY_PRESETS.filter(c => c.id !== 'general').map(c => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => setCompany(company === c.id ? null : c.id)}
-                  className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
-                    company === c.id ? 'border-white/30 bg-white/[0.06] text-white' : 'border-white/[0.08] text-white/50'
-                  }`}
-                >
-                  {c.label}
                 </button>
               ))}
             </div>

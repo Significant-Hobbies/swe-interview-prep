@@ -1,7 +1,5 @@
 // Learner profile — drives session sizing, roadmap blend, and modality mix.
 
-import type { CompanyId } from './companies';
-
 export type ExperienceLevel = 'student' | 'mid' | 'senior';
 export type ModalityKind = 'review' | 'drill' | 'build' | 'learn';
 
@@ -21,8 +19,6 @@ export interface LearnerProfile {
   roadmapWeights: Record<string, number>;
   modalityWeights: ModalityWeights;
   skipConceptIds: string[];
-  /** Company-specific study bias; null = general. */
-  targetCompany: CompanyId | null;
   /** Daily email digest (reviews due + session ready). */
   digestEmail?: boolean;
   /** Browser push reminders (requires permission + subscription). */
@@ -47,7 +43,6 @@ export const DEFAULT_PROFILE: LearnerProfile = {
   roadmapWeights: { 'ai-search-infra-90-day': 1 },
   modalityWeights: { ...DEFAULT_MODALITY_WEIGHTS },
   skipConceptIds: [],
-  targetCompany: null,
   digestEmail: false,
   pushEnabled: false,
   onboardingVersion: PROFILE_VERSION,

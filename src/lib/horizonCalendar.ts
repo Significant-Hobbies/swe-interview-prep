@@ -6,8 +6,6 @@ import { pickConceptForSession } from './planner';
 import type { ReviewMasteryEntry } from './reviewMastery';
 import { dueReviewQuestions } from './planner';
 import type { DrillEntry } from '../hooks/useUserStore';
-import { blendRoadmapWeights } from './companies';
-
 export type HorizonFocus = 'review' | 'drill' | 'build' | 'learn' | 'mock';
 
 export interface HorizonDay {
@@ -57,18 +55,13 @@ export function buildHorizonCalendar(opts: {
 
   const maxDays = Math.min(opts.maxDays ?? 14, horizon);
   const reviewsDue = dueReviewQuestions(rqMastery, mastery).length;
-  const blendedProfile: LearnerProfile = {
-    ...profile,
-    roadmapWeights: blendRoadmapWeights(profile.roadmapWeights, profile.targetCompany),
-  };
-
   const usedConcepts = new Set<string>();
   const days: HorizonDay[] = [];
 
   for (let i = 0; i < maxDays; i++) {
-    const focus = focusForDay(blendedProfile, i, reviewsDue);
+    const focus = focusForDay(profile, i, reviewsDue);
     const picked = pickConceptForSession(
-      { ...blendedProfile, skipConceptIds: [...blendedProfile.skipConceptIds, ...usedConcepts] },
+      { ...profile, skipConceptIds: [...profile.skipConceptIds, ...usedConcepts] },
       mastery,
       null,
     );
@@ -84,7 +77,7 @@ export function buildHorizonCalendar(opts: {
       note = 'Clear the FSRS queue before it rots.';
     } else if (focus === 'mock') {
       label = 'Mock interview rep';
-      note = COMPANY_MOCK_NOTE(profile.targetCompany);
+      note = 'Timed prompt + rubric checklist.';
     } else if (focus === 'drill' && concept) {
       label = `Drill · ${concept.name}`;
       note = 'Verified test pass required.';
@@ -110,12 +103,4 @@ export function buildHorizonCalendar(opts: {
     });
   }
   return days;
-}
-
-function COMPANY_MOCK_NOTE(company: LearnerProfile['targetCompany']): string {
-  if (!company || company === 'general') return 'Timed prompt + rubric checklist.';
-  const preset = company;
-  if (preset === 'amazon' || preset === 'meta') return 'System design mock — draw + estimate.';
-  if (preset === 'stripe') return 'Behavioral + API design communication.';
-  return 'Technical depth mock — tradeoffs and complexity.';
 }

@@ -1,6 +1,5 @@
 import { ROADMAPS } from '../data/learning-os';
 import { useProfile } from '../hooks/useProfile';
-import { COMPANY_PRESETS, type CompanyId } from '../lib/companies';
 import {
   type ExperienceLevel,
   experienceLabel,
@@ -57,29 +56,6 @@ export function LearningProfileSettings() {
               }`}
             >
               {experienceLabel(e)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-xs font-medium text-slate-400 mb-2">Target company</label>
-        <div className="flex flex-wrap gap-2">
-          {COMPANY_PRESETS.map(c => (
-            <button
-              key={c.id}
-              type="button"
-              title={c.description}
-              onClick={() => void saveProfile({
-                targetCompany: c.id === 'general' ? null : (c.id as CompanyId),
-              })}
-              className={`rounded-md px-3 py-1.5 text-xs transition-colors ${
-                (c.id === 'general' ? !profile.targetCompany : profile.targetCompany === c.id)
-                  ? 'bg-sky-500/15 text-sky-300'
-                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
-              }`}
-            >
-              {c.label}
             </button>
           ))}
         </div>

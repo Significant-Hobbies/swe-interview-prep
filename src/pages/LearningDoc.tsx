@@ -55,8 +55,8 @@ const DOC_META: Record<string, DocMeta> = {
     blurb: 'Design patterns + classic "design X" problems, in one place. The two halves of system design interviews and real engineering.',
   },
   'interview-prep': {
-    title: 'Interview prep — checklist + where to apply',
-    blurb: 'Breadth-first topic checklist for SWE interviews plus a curated index of remote-friendly companies.',
+    title: 'Interview prep — topic checklist',
+    blurb: 'Breadth-first audit of what SWE interviews test — map gaps to in-app roadmaps and drills.',
   },
   'ml-case-studies': {
     title: 'ML system design case studies',

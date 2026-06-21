@@ -238,7 +238,7 @@ Read these once, refer to them often:
 - [Disk-First DB roadmap](./db-roadmap.md) — deep version of the "scaling databases" topic.
 - [Runtime roadmap](./runtime-roadmap.md) — the runtime side of any system.
 - [ML system design case studies](./ml-case-studies.md) — 450 production write-ups when ML is the system.
-- [Interview prep](./interview-prep.md) — where to apply once you can design.
+- [Interview prep](./interview-prep.md) — breadth checklist once you can design.
 
 ## Maintenance notes
 

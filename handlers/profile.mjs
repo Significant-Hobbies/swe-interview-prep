@@ -14,7 +14,6 @@ const DEFAULT = {
   roadmapWeights: { 'ai-search-infra-90-day': 1 },
   modalityWeights: { review: 0.22, drill: 0.42, build: 0.24, learn: 0.12 },
   skipConceptIds: [],
-  targetCompany: null,
   digestEmail: false,
   pushEnabled: false,
   onboardingVersion: 3,

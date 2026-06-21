@@ -14,9 +14,9 @@ describe('mockRecommend', () => {
     expect(hits.some(p => p.id === 'mock-two-sum-variants')).toBe(true);
   });
 
-  it('prioritizes weak concepts and company kind bias', () => {
+  it('prioritizes weak concepts', () => {
     const rec = recommendMockPrompts(
-      { ...DEFAULT_PROFILE, targetCompany: 'google' },
+      DEFAULT_PROFILE,
       { 'array-hashing': { confidence: 0.2 } as any },
       5,
     );
