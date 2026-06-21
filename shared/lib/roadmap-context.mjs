@@ -1,26 +1,14 @@
-import { readFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import roadmapContext from '../data/roadmap-context.json' with { type: 'json' };
 
 import { categoryForConcept } from './category.mjs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-let CONTEXT = null;
-
-function loadContext() {
-  if (!CONTEXT) {
-    const p = join(__dirname, '..', 'data', 'roadmap-context.json');
-    CONTEXT = JSON.parse(readFileSync(p, 'utf8'));
-  }
-  return CONTEXT;
-}
+const CONTEXT = roadmapContext;
 
 export function getRoadmapContext(concept) {
   if (!concept) return null;
-  const data = loadContext();
   const category = categoryForConcept(concept);
-  const base = data.defaultByCategory[category] || data.defaultByCategory.dsa;
-  const override = data.byConceptId[concept.id] || {};
+  const base = CONTEXT.defaultByCategory[category] || CONTEXT.defaultByCategory.dsa;
+  const override = CONTEXT.byConceptId[concept.id] || {};
   return {
     track: override.track || base.track,
     milestone: override.milestone || base.milestone,

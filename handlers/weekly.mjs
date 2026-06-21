@@ -5,19 +5,11 @@ import { decayConfidence } from '../shared/lib/fsrs.mjs';
 import { generate } from '../shared/lib/ai.mjs';
 import { buildWeeklyReport } from '../shared/lib/heuristics.mjs';
 import { randomBytes } from 'crypto';
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-let CONCEPTS = null;
+import conceptsData from '../src/data/concepts.json' with { type: 'json' };
+
+const CONCEPTS = conceptsData.concepts ?? [];
 function loadConcepts() {
-  if (!CONCEPTS) {
-    try {
-      const p = join(__dirname, '..', 'src', 'data', 'concepts.json');
-      CONCEPTS = JSON.parse(readFileSync(p, 'utf8')).concepts;
-    } catch { CONCEPTS = []; }
-  }
   return CONCEPTS;
 }
 

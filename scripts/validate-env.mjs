@@ -1,3 +1,7 @@
+import { loadEnvFiles } from './load-env.mjs';
+
+loadEnvFiles();
+
 const CONTRACTS = {
   build: ["VITE_GOOGLE_CLIENT_ID"],
   runtime: [

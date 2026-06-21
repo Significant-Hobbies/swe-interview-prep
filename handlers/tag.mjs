@@ -2,23 +2,15 @@ import { requireAuth } from '../api/auth/verify.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
 import { tagConcepts } from '../shared/lib/heuristics.mjs';
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import conceptsData from '../src/data/concepts.json' with { type: 'json' };
 
 let initialized = false;
 async function ensureInit() {
   if (!initialized) { await initDatabase(); initialized = true; }
 }
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const conceptsPath = join(__dirname, '..', 'src', 'data', 'concepts.json');
-let CONCEPTS = null;
+const CONCEPTS = conceptsData.concepts ?? [];
 function loadConcepts() {
-  if (!CONCEPTS) {
-    try { CONCEPTS = JSON.parse(readFileSync(conceptsPath, 'utf8')).concepts; }
-    catch { CONCEPTS = []; }
-  }
   return CONCEPTS;
 }
 

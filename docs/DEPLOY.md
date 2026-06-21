@@ -2,51 +2,53 @@
 
 Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Turso**.
 
+## One-command readiness
+
+```bash
+cp .env.example .env.local   # fill once
+pnpm ready                   # env + tests + build + secret audit
+```
+
+Sync runtime secrets to Cloudflare (first time or rotation):
+
+```bash
+pnpm sync:pages-secrets
+```
+
 ## Auto-deploy (default)
 
 Pushes to `main` trigger [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml):
 
-1. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
-2. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
-3. Smoke `curl` against production
+1. `pnpm test`
+2. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
+3. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
+4. Smoke SPA + `/api/learning` Functions
 
-**GitHub repo secrets** (Settings → Secrets):
+**GitHub** (Settings → Secrets and variables):
 
-| Secret | Purpose |
-|--------|---------|
-| `CLOUDFLARE_API_TOKEN` | Wrangler deploy (Pages Edit permission) |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account id |
-| `VITE_GOOGLE_CLIENT_ID` | Baked into SPA at build time |
+| Name | Type | Purpose |
+|------|------|---------|
+| `CLOUDFLARE_API_TOKEN` | Secret | Wrangler deploy (Pages Edit) |
+| `CLOUDFLARE_ACCOUNT_ID` | Variable | From Cloudflare dashboard |
+| `VITE_GOOGLE_CLIENT_ID` | Secret | Baked into SPA at build |
+| `VITE_SAASMAKER_API_KEY` | Secret | Feedback widget (optional) |
 
-**Cloudflare Pages secrets** (runtime — API/auth/DB):
+**Cloudflare Pages secrets** (runtime — set via `pnpm sync:pages-secrets`):
 
-```bash
-wrangler pages secret put JWT_SECRET --project-name=swe-interview-prep
-wrangler pages secret put TURSO_DATABASE_URL --project-name=swe-interview-prep
-wrangler pages secret put TURSO_AUTH_TOKEN --project-name=swe-interview-prep
-wrangler pages secret put GOOGLE_CLIENT_ID --project-name=swe-interview-prep
-```
+| Variable | Purpose |
+|----------|---------|
+| `TURSO_DATABASE_URL` | libSQL URL |
+| `TURSO_AUTH_TOKEN` | Turso token |
+| `JWT_SECRET` | Auth cookie signing |
+| `GOOGLE_CLIENT_ID` | Server Google verify |
 
-Set once in the dashboard or via CLI; they persist across auto-deploys.
+Google OAuth client must list your Pages origin (e.g. `https://swe-interview-prep.pages.dev`).
 
 ### Manual deploy
 
 ```bash
-pnpm validate:env:deploy   # checks required vars locally
-pnpm deploy              # build + wrangler pages deploy
+pnpm deploy
 ```
-
-## Required env
-
-| Variable | Where | Purpose |
-|----------|-------|---------|
-| `TURSO_DATABASE_URL` | Pages secret | libSQL URL |
-| `TURSO_AUTH_TOKEN` | Pages secret | Turso token |
-| `JWT_SECRET` | Pages secret | Auth cookie signing |
-| `GOOGLE_CLIENT_ID` | Pages secret | Server Google verify |
-| `VITE_GOOGLE_CLIENT_ID` | GitHub secret / local build | Same id in SPA |
-
-Google OAuth client must list your Pages origin (e.g. `https://swe-interview-prep.pages.dev`).
 
 ## Local dev
 
