@@ -144,6 +144,11 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   const now = new Date();
   const minutes = Math.round(activity.reduce((s, a) => s + (a.duration_ms || 0), 0) / 60000);
   const sessions = activity.length;
+  const mockStarted = activity.filter(a => a.kind === 'mock_start').length;
+  const mockCompleted = activity.filter(a => a.kind === 'mock_complete').length;
+  const mockRatings = activity
+    .filter(a => a.kind === 'mock_complete' && a.payload?.rating)
+    .map(a => a.payload.rating);
   const grades = feynman.map(f => f.grade).filter(g => g != null);
   const avgGrade = grades.length ? Math.round(grades.reduce((a, b) => a + b, 0) / grades.length) : null;
 
@@ -184,6 +189,7 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   const lines = [];
   lines.push('## Reality Check');
   lines.push(`- ${sessions} sessions · ${minutes} active minutes · ${feynman.length} explain-backs (avg ${avgGrade ?? '—'}/100)`);
+  lines.push(`- Mock interviews: ${mockCompleted} completed (${mockStarted} started)${mockRatings.length ? ` · ratings: ${mockRatings.join(', ')}` : ''}`);
   lines.push(`- Touched ${touchedThisWeek.size} concepts across ${Object.keys(categoryCount).length} categories`);
   lines.push('');
   lines.push("## What's Rotting");
@@ -212,7 +218,9 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   }
   lines.push('');
   lines.push("## Next Week's Bet");
-  if (rotting.length > 0) {
+  if (mockCompleted === 0 && sessions >= 2) {
+    lines.push('- Schedule at least one **timed mock** on the Mock tab — drills alone do not train interview pressure.');
+  } else if (rotting.length > 0) {
     lines.push(`- Rescue the top decayer: **${rotting[0].name}**. One Feynman explain-back will reset its FSRS state.`);
   } else if (avoided.length > 0) {
     lines.push(`- Break the silence on ${avoided[0].toUpperCase()}. Generate today's plan to seed activity.`);
@@ -224,6 +232,13 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
 
   return {
     reportMd: lines.join('\n'),
-    stats: { activityCount: sessions, totalMinutes: minutes, avgGrade, feynmanCount: feynman.length },
+    stats: {
+      activityCount: sessions,
+      totalMinutes: minutes,
+      avgGrade,
+      feynmanCount: feynman.length,
+      mockStarted,
+      mockCompleted,
+    },
   };
 }

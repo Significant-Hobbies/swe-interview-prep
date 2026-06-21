@@ -8,7 +8,14 @@ import MarkdownViewer from './MarkdownViewer';
 
 interface WeeklyData {
   reportMd: string;
-  stats: { activityCount?: number; totalMinutes?: number; avgGrade?: number | null; feynmanCount?: number } | null;
+  stats: {
+    activityCount?: number;
+    totalMinutes?: number;
+    avgGrade?: number | null;
+    feynmanCount?: number;
+    mockStarted?: number;
+    mockCompleted?: number;
+  } | null;
   createdAt?: string;
 }
 
@@ -69,9 +76,10 @@ export function WeeklyReport() {
       {error && <p className="mt-3 text-xs text-rose-400">{error}</p>}
 
       {data?.stats && (
-        <div className="mt-4 grid grid-cols-3 gap-4 border-t border-white/[0.06] pt-4">
+        <div className="mt-4 grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-4 sm:grid-cols-4">
           <Stat label="Sessions" value={data.stats.activityCount ?? 0} />
           <Stat label="Minutes" value={data.stats.totalMinutes ?? 0} />
+          <Stat label="Mocks" value={`${data.stats.mockCompleted ?? 0}/${data.stats.mockStarted ?? 0}`} />
           <Stat label="Feynman" value={data.stats.feynmanCount ?? 0} />
         </div>
       )}

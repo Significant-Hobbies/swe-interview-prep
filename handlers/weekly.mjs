@@ -92,10 +92,19 @@ export default async function handler(req, res) {
 
     const activityCount = activity.rows.length;
     const totalMinutes = Math.round(activity.rows.reduce((s, r) => s + (r.duration_ms || 0), 0) / 60000);
+    const mockStarted = activity.rows.filter(r => r.kind === 'mock_start').length;
+    const mockCompleted = activity.rows.filter(r => r.kind === 'mock_complete').length;
     const grades = feynman.rows.map(f => f.grade).filter(g => g != null);
     const avgGrade = grades.length ? Math.round(grades.reduce((a,b)=>a+b,0)/grades.length) : null;
 
-    const stats = { activityCount, totalMinutes, avgGrade, feynmanCount: feynman.rows.length };
+    const stats = {
+      activityCount,
+      totalMinutes,
+      avgGrade,
+      feynmanCount: feynman.rows.length,
+      mockStarted,
+      mockCompleted,
+    };
 
     const prompt = `Engineer's last 7 days:
 
@@ -103,6 +112,7 @@ Stats:
 - ${activityCount} activity events
 - ${totalMinutes} active minutes
 - ${feynman.rows.length} Feynman explain-backs (avg grade: ${avgGrade ?? 'n/a'})
+- ${mockCompleted} mock interviews completed (${mockStarted} started)
 
 Concept mastery:
 ${conceptStats || '(none yet)'}
@@ -126,6 +136,7 @@ Write the review now.`;
       const activityForHeur = activity.rows.map(r => ({
         ...r,
         concept_ids: r.concept_ids ? JSON.parse(r.concept_ids) : [],
+        payload: r.payload ? JSON.parse(r.payload) : null,
       }));
       const built = buildWeeklyReport({
         activity: activityForHeur,

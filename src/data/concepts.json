@@ -3817,7 +3817,8 @@
         "lc-contains-duplicate",
         "lc-product-of-array-except-self",
         "lc-group-anagrams",
-        "lc-merge-intervals"
+        "lc-merge-intervals",
+        "lc-rotting-oranges"
       ],
       "reviewQuestions": [
         "rq-array-hashing-core"
@@ -3932,7 +3933,9 @@
       "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets.",
       "drills": [
         "valid-parentheses-stack",
-        "lc-valid-parentheses"
+        "lc-valid-parentheses",
+        "lc-daily-temperatures",
+        "lc-car-fleet"
       ],
       "reviewQuestions": [
         "rq-stack-core"
@@ -4047,7 +4050,10 @@
       "drills": [
         "level-order-traversal",
         "lc-invert-binary-tree",
-        "lc-maximum-depth-of-binary-tree"
+        "lc-maximum-depth-of-binary-tree",
+        "lc-lowest-common-ancestor-of-a-binary-search-tree",
+        "lc-serialize-and-deserialize-binary-tree",
+        "lc-subtree-of-another-tree"
       ],
       "reviewQuestions": [
         "rq-trees-core"
@@ -4120,7 +4126,8 @@
       "drills": [
         "kth-largest-heap",
         "lc-top-k-frequent-elements",
-        "lc-kth-largest-element-in-an-array"
+        "lc-kth-largest-element-in-an-array",
+        "lc-task-scheduler"
       ],
       "reviewQuestions": [
         "rq-heap-core"
@@ -4196,7 +4203,8 @@
       ],
       "drills": [
         "number-of-islands",
-        "lc-number-of-islands"
+        "lc-number-of-islands",
+        "lc-course-schedule"
       ],
       "reviewQuestions": [
         "rq-graphs-core"
@@ -4309,7 +4317,8 @@
         "lc-climbing-stairs",
         "lc-coin-change",
         "lc-house-robber",
-        "lc-jump-game"
+        "lc-jump-game",
+        "lc-non-overlapping-intervals"
       ],
       "reviewQuestions": [
         "rq-dp-1d-core"
@@ -4473,7 +4482,9 @@
       "mentalModel": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero.",
       "drills": [
         "single-number-xor",
-        "lc-single-number"
+        "lc-single-number",
+        "lc-sum-of-two-integers",
+        "lc-reverse-bits"
       ],
       "reviewQuestions": [
         "rq-bit-manipulation-core"

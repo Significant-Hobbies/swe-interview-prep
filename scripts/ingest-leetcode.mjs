@@ -46,6 +46,17 @@ const STARTER_SLUGS = [
   'jump-game',
   'merge-intervals',
   'single-number',
+  'lowest-common-ancestor-of-a-binary-search-tree',
+  'serialize-and-deserialize-binary-tree',
+  'course-schedule',
+  'rotting-oranges',
+  'task-scheduler',
+  'subtree-of-another-tree',
+  'daily-temperatures',
+  'car-fleet',
+  'non-overlapping-intervals',
+  'sum-of-two-integers',
+  'reverse-bits',
 ];
 
 const args = process.argv.slice(2);

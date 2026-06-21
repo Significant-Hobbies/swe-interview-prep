@@ -4039,6 +4039,215 @@
       "leetcodeNumber": 136,
       "source": "leetcode-metadata",
       "testCases": []
+    },
+    {
+      "id": "lc-lowest-common-ancestor-of-a-binary-search-tree",
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #235 — Lowest Common Ancestor of a Binary Search Tree. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: trees.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (tree, depth-first-search, binary-search-tree, binary-tree). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "leetcodeNumber": 235,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-serialize-and-deserialize-binary-tree",
+      "title": "Serialize and Deserialize Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "LeetCode #297 — Serialize and Deserialize Binary Tree. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: trees.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (string, tree, depth-first-search, breadth-first-search, design, binary-tree). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+      "leetcodeNumber": 297,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-course-schedule",
+      "title": "Course Schedule",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #207 — Course Schedule. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/course-schedule/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: graphs.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (depth-first-search, breadth-first-search, graph, topological-sort). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/course-schedule/",
+      "leetcodeNumber": 207,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-rotting-oranges",
+      "title": "Rotting Oranges",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #1036 — Rotting Oranges. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/rotting-oranges/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, breadth-first-search, matrix). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/rotting-oranges/",
+      "leetcodeNumber": 1036,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-task-scheduler",
+      "title": "Task Scheduler",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #621 — Task Scheduler. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/task-scheduler/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: heap.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, hash-table, greedy, sorting, heap-priority-queue, counting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/task-scheduler/",
+      "leetcodeNumber": 621,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-subtree-of-another-tree",
+      "title": "Subtree of Another Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #572 — Subtree of Another Tree. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/subtree-of-another-tree/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: trees.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (tree, depth-first-search, string-matching, binary-tree, hash-function). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/subtree-of-another-tree/",
+      "leetcodeNumber": 572,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-daily-temperatures",
+      "title": "Daily Temperatures",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #739 — Daily Temperatures. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/daily-temperatures/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: stack.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, stack, monotonic-stack). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/daily-temperatures/",
+      "leetcodeNumber": 739,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-car-fleet",
+      "title": "Car Fleet",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #883 — Car Fleet. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/car-fleet/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: stack.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, stack, sorting, monotonic-stack). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/car-fleet/",
+      "leetcodeNumber": 883,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-non-overlapping-intervals",
+      "title": "Non-overlapping Intervals",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #435 — Non-overlapping Intervals. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/non-overlapping-intervals/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, dynamic-programming, greedy, sorting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "leetcodeNumber": 435,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-sum-of-two-integers",
+      "title": "Sum of Two Integers",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #371 — Sum of Two Integers. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/sum-of-two-integers/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: bit manipulation.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (math, bit-manipulation). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/sum-of-two-integers/",
+      "leetcodeNumber": 371,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-reverse-bits",
+      "title": "Reverse Bits",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #190 — Reverse Bits. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/reverse-bits/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: bit manipulation.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (divide-and-conquer, bit-manipulation). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/reverse-bits/",
+      "leetcodeNumber": 190,
+      "source": "leetcode-metadata",
+      "testCases": []
     }
   ]
 }

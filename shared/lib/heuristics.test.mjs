@@ -119,4 +119,20 @@ describe('buildWeeklyReport', () => {
     });
     expect(out.reportMd).toMatch(/LLD|HLD|BEHAVIORAL/);
   });
+
+  it('surfaces mock interview activity in stats and report', () => {
+    const out = buildWeeklyReport({
+      activity: [
+        { kind: 'mock_start', duration_ms: 0, concept_ids: ['array-hashing'] },
+        { kind: 'mock_complete', duration_ms: 0, concept_ids: ['array-hashing'], payload: { rating: 'good' } },
+        { kind: 'drill_solve', duration_ms: 120000, concept_ids: ['array-hashing'] },
+      ],
+      mastery: [], feynman: [],
+      concepts: CONCEPTS,
+    });
+    expect(out.stats.mockStarted).toBe(1);
+    expect(out.stats.mockCompleted).toBe(1);
+    expect(out.reportMd).toContain('Mock interviews: 1 completed');
+    expect(out.reportMd).toContain('ratings: good');
+  });
 });

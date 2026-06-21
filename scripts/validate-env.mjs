@@ -40,6 +40,7 @@ const OPTIONAL_DIGEST = [
   "VAPID_PUBLIC_KEY",
   "VAPID_PRIVATE_KEY",
   "VITE_VAPID_PUBLIC_KEY",
+  "VAPID_SUBJECT",
 ];
 
 if (mode === "deploy") {
