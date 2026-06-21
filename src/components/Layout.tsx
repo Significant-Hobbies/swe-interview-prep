@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
+import { STORE_KEYS, loadLocal } from '../lib/userStore';
 import { SaaSMakerChangelog } from './saasmaker-feedback';
 import { DigestBanner } from './DigestBanner';
 import SettingsModal from './SettingsModal';
@@ -42,6 +43,7 @@ export default function Layout() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
   const changelogRef = useRef<HTMLDivElement>(null);
+  const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
 
   useEffect(() => {
     if (!changelogOpen) return;
@@ -71,20 +73,26 @@ export default function Layout() {
   return (
     <TooltipProvider delayDuration={250}>
       <div className="min-h-screen bg-black pb-16 md:pb-0">
-        <nav className="sticky top-0 z-40 border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
+        <nav className="sticky top-0 z-50 isolate border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
-            <NavLink to="/" className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40">
+            <NavLink to="/" className="relative z-10 flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40">
               <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
               <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
             </NavLink>
 
-            <div className="hidden flex-1 items-center justify-center gap-6 md:flex">
-              {PRIMARY_NAV.map(({ to, label }) => (
-                <NavLink key={to} to={to} className={navClass}>
-                  <span>{label}</span>
-                </NavLink>
-              ))}
-            </div>
+            {onboardingDone ? (
+              <div className="relative z-10 hidden flex-1 items-center justify-center gap-6 md:flex">
+                {PRIMARY_NAV.map(({ to, label }) => (
+                  <NavLink key={to} to={to} className={navClass}>
+                    <span>{label}</span>
+                  </NavLink>
+                ))}
+              </div>
+            ) : (
+              <p className="hidden flex-1 text-center text-xs text-white/40 md:block">
+                Finish setup to unlock navigation
+              </p>
+            )}
 
             <div className="flex shrink-0 items-center gap-1">
               <div ref={changelogRef} className="relative">
@@ -181,14 +189,16 @@ export default function Layout() {
 
         <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
-        <div className="fixed bottom-0 left-0 right-0 z-40 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
-          {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
-            <NavLink key={to} to={to} className={tabClass}>
-              <Icon className="h-5 w-5" />
-              <span>{label}</span>
-            </NavLink>
-          ))}
-        </div>
+        {onboardingDone && (
+          <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
+            {PRIMARY_NAV.map(({ to, label, icon: Icon }) => (
+              <NavLink key={to} to={to} className={tabClass}>
+                <Icon className="h-5 w-5" />
+                <span>{label}</span>
+              </NavLink>
+            ))}
+          </div>
+        )}
       </div>
     </TooltipProvider>
   );

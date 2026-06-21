@@ -25,6 +25,8 @@ const tree = (
 
 const mount = () => {
   createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>)
+  // LCP shell sits behind #root (pointer-events: none) — drop once React has painted.
+  requestAnimationFrame(() => document.getElementById('lcp-shell')?.remove())
 }
 
 // Keep #lcp-shell as LCP until the browser is idle — avoids tail runs where

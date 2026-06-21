@@ -87,6 +87,16 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/onboarding');
     await expect(page.getByRole('heading', { name: /Pick your primary path/i })).toBeVisible();
     await expect(page.getByRole('button', { name: /AI Search & RAG/i })).toBeVisible();
+    await expect(page.getByText(/Finish setup to unlock navigation/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Learn', exact: true })).toHaveCount(0);
+  });
+
+  test('primary top nav navigates between tabs', async ({ page }) => {
+    await page.goto('/today');
+    await page.getByRole('link', { name: 'Learn', exact: true }).click();
+    await expect(page).toHaveURL(/\/learn$/);
+    await page.getByRole('link', { name: 'Practice', exact: true }).click();
+    await expect(page).toHaveURL(/\/practice$/);
   });
 
   test('Settings modal opens', async ({ page }) => {
