@@ -1,27 +1,20 @@
-import { Bell, FileUp, Loader2, Mail } from 'lucide-react';
+import { FileUp, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 import { CONCEPTS } from '../data/learning-os';
 import { useAuth } from '../contexts/AuthContext';
 import { useImportedReviews } from '../hooks/useImportedReviews';
-import { useProfile } from '../hooks/useProfile';
 import {
   assignConceptToCards,
   parseAnkiImportFile,
   type AnkiImportResult,
 } from '../lib/ankiImport';
-import { subscribeToPush, subscriptionPayload, unsubscribeFromPush } from '../lib/pushNotifications';
-
-const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC_KEY as string | undefined;
 
 export function ImportAndNotifySettings() {
-  const { user, isGuest } = useAuth();
-  const { profile, saveProfile } = useProfile();
+  const { isGuest } = useAuth();
   const { reviews, importDeck, refresh } = useImportedReviews();
   const [importing, setImporting] = useState(false);
   const [importMsg, setImportMsg] = useState('');
-  const [digestPreview, setDigestPreview] = useState('');
-  const [pushBusy, setPushBusy] = useState(false);
   const [pendingImport, setPendingImport] = useState<AnkiImportResult | null>(null);
   const [bulkConceptId, setBulkConceptId] = useState('');
 
@@ -93,50 +86,6 @@ export function ImportAndNotifySettings() {
       setImportMsg(e instanceof Error ? e.message : 'Import failed');
     } finally {
       setImporting(false);
-    }
-  }
-
-  async function previewDigest() {
-    if (!user) {
-      setDigestPreview('Sign in to preview your digest.');
-      return;
-    }
-    try {
-      const res = await fetch('/api/learning?action=digest-preview', { credentials: 'include' });
-      const data = await res.json();
-      setDigestPreview(data.digest?.headline || 'No digest data yet.');
-    } catch {
-      setDigestPreview('Could not load preview.');
-    }
-  }
-
-  async function togglePush(enabled: boolean) {
-    setPushBusy(true);
-    try {
-      if (enabled) {
-        if (!VAPID_PUBLIC) {
-          setImportMsg('Push not configured (VITE_VAPID_PUBLIC_KEY). Email digest still works.');
-          await saveProfile({ pushEnabled: false });
-          return;
-        }
-        const sub = await subscribeToPush(VAPID_PUBLIC);
-        if (!sub) throw new Error('Permission denied or browser unsupported');
-        await fetch('/api/learning?action=push-subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify(subscriptionPayload(sub)),
-        });
-        await saveProfile({ pushEnabled: true });
-      } else {
-        await unsubscribeFromPush();
-        await saveProfile({ pushEnabled: false });
-      }
-    } catch (e) {
-      setImportMsg(e instanceof Error ? e.message : 'Push setup failed');
-      await saveProfile({ pushEnabled: false });
-    } finally {
-      setPushBusy(false);
     }
   }
 
@@ -231,49 +180,6 @@ export function ImportAndNotifySettings() {
             </div>
           </div>
         )}
-      </section>
-
-      <section>
-        <h3 className="text-xs font-medium text-slate-400 mb-2 flex items-center gap-1.5">
-          <Bell className="h-3.5 w-3.5" /> Daily reminders
-        </h3>
-        <p className="text-xs text-slate-500 mb-3">
-          Morning nudge when reviews are due or your session is ready. No marketing email.
-        </p>
-        <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 text-xs text-slate-300">
-            <input
-              type="checkbox"
-              checked={Boolean(profile.digestEmail)}
-              disabled={!user}
-              onChange={e => void saveProfile({ digestEmail: e.target.checked })}
-              className="rounded border-slate-700"
-            />
-            <Mail className="h-3.5 w-3.5 text-sky-400" />
-            Email digest {user ? `(${user.email})` : '— sign in required'}
-          </label>
-          <label className="flex items-center gap-2 text-xs text-slate-300">
-            <input
-              type="checkbox"
-              checked={Boolean(profile.pushEnabled)}
-              disabled={!user || pushBusy}
-              onChange={e => void togglePush(e.target.checked)}
-              className="rounded border-slate-700"
-            />
-            <Bell className="h-3.5 w-3.5 text-violet-400" />
-            Browser push {pushBusy ? '(setting up…)' : ''}
-          </label>
-        </div>
-        {user && (
-          <button
-            type="button"
-            onClick={() => void previewDigest()}
-            className="mt-2 text-[11px] text-sky-400 hover:text-sky-300"
-          >
-            Preview today&apos;s digest line
-          </button>
-        )}
-        {digestPreview && <p className="mt-1 text-[11px] text-slate-500 italic">{digestPreview}</p>}
       </section>
 
       {importMsg && (

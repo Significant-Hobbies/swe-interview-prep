@@ -92,7 +92,7 @@ export default function SettingsModal({ open, onClose }: Props) {
               tab === 'import' ? 'border-sky-400 text-white' : 'border-transparent text-slate-500 hover:text-slate-300'
             }`}
           >
-            <SettingsIcon className="h-3.5 w-3.5" /> Import &amp; notify
+            <SettingsIcon className="h-3.5 w-3.5" /> Import
           </button>
           <button
             type="button"

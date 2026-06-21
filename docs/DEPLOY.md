@@ -1,6 +1,6 @@
 # Deploy — swe-interview-prep (Cloudflare Pages)
 
-Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Turso**. Optional **browser push** for daily digest reminders (no email required).
+Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Turso**.
 
 ## Auto-deploy (default)
 
@@ -48,30 +48,6 @@ pnpm deploy              # build + wrangler pages deploy
 
 Google OAuth client must list your Pages origin (e.g. `https://swe-interview-prep.pages.dev`).
 
-## Optional — browser push digest
-
-**VAPID** (Voluntary Application Server Identification) is the key pair that lets your server send Web Push notifications to browsers. The browser subscribes using the **public** key (`VITE_VAPID_PUBLIC_KEY`); the daily cron signs sends with the **private** key. No email or SMS involved — just “reviews due” notifications via `public/sw.js`.
-
-Generate a key pair:
-
-```bash
-npx --yes web-push generate-vapid-keys
-```
-
-| Variable | Where | Purpose |
-|----------|-------|---------|
-| `VAPID_PUBLIC_KEY` | Pages secret | Server push auth |
-| `VAPID_PRIVATE_KEY` | Pages secret | Signs push payloads |
-| `VITE_VAPID_PUBLIC_KEY` | GitHub secret + local build | Browser subscription |
-| `VAPID_SUBJECT` | Pages secret | `mailto:you@example.com` (contact for push service) |
-| `APP_URL` | Pages secret | Links in push body (e.g. `https://swe-interview-prep.pages.dev`) |
-
-Users enable push in **Settings → Import & notify**. Email digest is separate and **not required** — skip `DIGEST_FROM_EMAIL` and the `EMAIL` binding unless you want mail.
-
-Cron: daily 13:00 UTC in `wrangler.toml` → `functions/scheduled.js`.
-
-`pnpm validate:env:deploy` warns if push vars are missing but does not block deploy.
-
 ## Local dev
 
 ```bash
@@ -83,5 +59,5 @@ pnpm dev    # Express :3456 + Vite :5173
 
 1. `/learn` — guest mode
 2. Google sign-in — FSRS persists
-3. Settings → Anki import (signed-in)
+3. Settings → Import — Anki upload (signed-in)
 4. Progress → Weekly reality check

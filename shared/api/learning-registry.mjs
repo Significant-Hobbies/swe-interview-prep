@@ -20,8 +20,6 @@ export const AUTH_ACTIONS = [
   'review-mastery',
   'elo',
   'imported-reviews',
-  'push-subscribe',
-  'digest-preview',
 ];
 
 export const LEARNING_ACTIONS = [...new Set([...PUBLIC_ACTIONS, ...AUTH_ACTIONS])].sort();
@@ -44,7 +42,5 @@ export const HANDLER_MODULES = {
   'review-mastery': () => import('../../handlers/review-mastery.mjs'),
   elo: () => import('../../handlers/elo.mjs'),
   'imported-reviews': () => import('../../handlers/imported-reviews.mjs'),
-  'push-subscribe': () => import('../../handlers/push-subscribe.mjs'),
-  'digest-preview': () => import('../../handlers/digest-preview.mjs'),
 };
 
