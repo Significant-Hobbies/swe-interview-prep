@@ -11,6 +11,7 @@ import roadmapsData from './roadmaps.json';
 import {
   isEditorialArtifact,
   isEditorialDrill,
+  isMetadataDrill,
   isSchedulableReviewQuestion,
 } from '../lib/contentQuality';
 
@@ -127,6 +128,10 @@ export interface Drill {
   solutionNotes: string;
   /** Automated checks — editorial drills should include at least one. */
   testCases?: DrillTestCase[];
+  /** External practice link (LeetCode metadata stubs). */
+  externalUrl?: string;
+  leetcodeNumber?: number;
+  source?: 'leetcode-metadata';
 }
 
 export interface Project {
@@ -253,6 +258,9 @@ export const ARTIFACTS: Artifact[] = (artifactsData as any).artifacts;
 export const DRILLS: Drill[] = (drillsData as any).drills;
 /** Curated drills shown in Practice, Today, and recommendations (no bootstrap placeholders). */
 export const EDITORIAL_DRILLS: Drill[] = DRILLS.filter(isEditorialDrill);
+/** LeetCode metadata stubs — external practice links, excluded from planner/recommend. */
+export const METADATA_DRILLS: Drill[] = DRILLS.filter(isMetadataDrill);
+export const PRACTICE_DRILLS: Drill[] = [...EDITORIAL_DRILLS, ...METADATA_DRILLS];
 /** Curated artifacts with real playground templates (no build-* scaffolds). */
 export const EDITORIAL_ARTIFACTS: Artifact[] = ARTIFACTS.filter(isEditorialArtifact);
 export const PROJECTS: Project[] = (projectsData as any).projects;

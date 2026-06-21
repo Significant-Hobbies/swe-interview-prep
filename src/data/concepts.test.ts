@@ -8,6 +8,7 @@ import projectsData from './projects.json';
 import externalResourcesData from './external-resources.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
+import { isMetadataDrill } from '../lib/contentQuality';
 
 const concepts = (conceptsData as any).concepts;
 const tracks = TRACKS;
@@ -152,9 +153,9 @@ describe('cross-file integrity', () => {
     expect(broken).toEqual([]);
   });
 
-  it('every drill has at least one testCase', () => {
+  it('every in-app drill has at least one testCase', () => {
     const missing = drills
-      .filter((d: { id: string; testCases?: unknown[] }) => !d.testCases?.length)
+      .filter((d: { id: string; testCases?: unknown[] }) => !isMetadataDrill(d as any) && !d.testCases?.length)
       .map((d: { id: string }) => d.id);
     expect(missing).toEqual([]);
   });

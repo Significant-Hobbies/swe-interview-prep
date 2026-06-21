@@ -95,6 +95,19 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('heading', { name: /AI Configuration/i })).toBeVisible();
   });
 
+  test('Settings import tab shows Anki upload', async ({ page }) => {
+    await page.goto('/learn');
+    await page.getByRole('button', { name: /AI Settings/i }).click();
+    await page.getByRole('button', { name: /Import & notify/i }).click();
+    await expect(page.getByText(/Anki import/i)).toBeVisible();
+    await expect(page.getByText(/Choose \.apkg or \.txt/i)).toBeVisible();
+  });
+
+  test('Practice all shows LeetCode drill section when stubs exist', async ({ page }) => {
+    await page.goto('/practice/all');
+    await expect(page.getByText(/LeetCode practice/i)).toBeVisible();
+  });
+
   test('legacy URLs redirect into the Learning OS and /build loads Build Lab', async ({ page }) => {
     await page.goto('/concepts');
     await expect(page).toHaveURL(/\/learn\/all$/);

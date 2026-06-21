@@ -21,6 +21,7 @@ import {
   CONCEPT_BY_ID,
   type Drill,
   EDITORIAL_DRILLS,
+  METADATA_DRILLS,
   groupForTag,
   REVIEW_QUESTIONS,
   type ReviewQuestion,
@@ -256,6 +257,32 @@ function DrillsTab() {
           })}
         </div>
       )}
+
+      {METADATA_DRILLS.length > 0 && (
+        <div className="mt-8 border-t border-white/[0.06] pt-6">
+          <div className="mb-2 text-xs font-medium text-white/50">LeetCode practice ({METADATA_DRILLS.length})</div>
+          <p className="mb-3 text-[11px] text-white/40">
+            External problems mapped to concepts — solve on LeetCode, mark solved here when done.
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {METADATA_DRILLS.map(d => {
+              const st = getDrill(d.id);
+              const concept = CONCEPT_BY_ID[d.conceptId];
+              const grp = concept?.tags[0];
+              return (
+                <DrillCard
+                  key={d.id}
+                  drill={d}
+                  state={st}
+                  groupTag={grp}
+                  conceptName={concept?.name}
+                  external
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -265,11 +292,13 @@ function DrillCard({
   state,
   groupTag,
   conceptName,
+  external = false,
 }: {
   drill: Drill;
   state: DrillEntry;
   groupTag?: string;
   conceptName?: string;
+  external?: boolean;
 }) {
   const trk = groupTag ? groupForTag(groupTag) : undefined;
   return (
@@ -279,7 +308,10 @@ function DrillCard({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-white group-hover:text-white">{drill.title}</h3>
+          <h3 className="text-sm font-semibold text-white group-hover:text-white">
+            {drill.title}
+            {external && <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">LeetCode</span>}
+          </h3>
           {conceptName && (
             <div className="mt-0.5 text-[11px] text-white/40">via <span className="text-white/50">{conceptName}</span></div>
           )}

@@ -11,6 +11,7 @@ import reviewQuestionsIngestedData from '../data/review-questions-ingested.json'
 import {
   isEditorialArtifact,
   isEditorialDrill,
+  isMetadataDrill,
   isFormulaicReviewQuestion,
   isIngestedReviewQuestion,
   isSchedulableReviewQuestion,
@@ -24,6 +25,13 @@ describe('content quality bar', () => {
   it('editorial drills are a majority of catalog', () => {
     const editorial = DRILLS.filter(isEditorialDrill);
     expect(editorial.length).toBeGreaterThanOrEqual(80);
+  });
+
+  it('leetcode metadata stubs are excluded from editorial drills', () => {
+    const metadata = DRILLS.filter(isMetadataDrill);
+    expect(metadata.length).toBeGreaterThan(0);
+    expect(metadata.every(d => d.externalUrl?.includes('leetcode.com'))).toBe(true);
+    expect(DRILLS.filter(isEditorialDrill).some(d => isMetadataDrill(d))).toBe(false);
   });
 
   it('spine concepts use editorial drills only', () => {

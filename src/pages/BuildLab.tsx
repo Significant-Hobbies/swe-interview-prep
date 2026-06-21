@@ -17,6 +17,7 @@ import { useActivityLogger } from '../hooks/useActivity';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, useUserElo } from '../hooks/useUserStore';
+import { isMetadataDrill } from '../lib/contentQuality';
 import { runDrillTests } from '../lib/drillRunner';
 import { difficultyToElo } from '../lib/elo';
 import { loadSuspendedRqs, reviewsToSeedForConcept, unsuspendReviewQuestion } from '../lib/reviewMastery';
@@ -241,6 +242,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   }
 
   const concept = CONCEPT_BY_ID[drill.conceptId];
+  const external = isMetadataDrill(drill);
 
   function run() {
     if (drill.testCases?.length && (language === 'typescript' || language === 'javascript')) {
@@ -335,6 +337,16 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           </Badge>
         </div>
         <h1 className="text-2xl font-bold text-white">{drill.title}</h1>
+        {external && drill.externalUrl && (
+          <a
+            href={drill.externalUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm text-sky-400 hover:text-sky-300"
+          >
+            Open on LeetCode <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        )}
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
@@ -372,6 +384,29 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         </div>
 
         <div className="space-y-3">
+          {external ? (
+            <Card className="p-4">
+              <p className="text-sm text-slate-400">
+                This drill links to LeetCode — solve there first, then mark solved here to update mastery.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {drill.externalUrl && (
+                  <a href={drill.externalUrl} target="_blank" rel="noreferrer">
+                    <Button tone="subtle">
+                      <ExternalLink className="h-3.5 w-3.5" /> Solve on LeetCode
+                    </Button>
+                  </a>
+                )}
+                <Button onClick={() => mark('solved')}>
+                  <CheckCircle2 className="h-3.5 w-3.5" /> Mark solved
+                </Button>
+                <Button tone="ghost" onClick={() => mark('attempted')}>
+                  Attempted
+                </Button>
+              </div>
+            </Card>
+          ) : (
+          <>
           <Card className="overflow-hidden">
             <div className="flex items-center justify-between border-b border-slate-800 px-3 py-2">
               <div className="flex gap-1">
@@ -418,6 +453,8 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
               <Hammer className="h-4 w-4" /> Full workspace
             </Link>
           </div>
+          </>
+          )}
         </div>
       </div>
     </PageShell>

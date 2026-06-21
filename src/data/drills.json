@@ -3564,6 +3564,272 @@
           ]
         }
       ]
+    },
+    {
+      "id": "lc-two-sum",
+      "title": "Two Sum",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #1 — Two Sum. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/two-sum/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, hash-table). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/two-sum/",
+      "leetcodeNumber": 1,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-valid-palindrome",
+      "title": "Valid Palindrome",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #125 — Valid Palindrome. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/valid-palindrome/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: two pointers.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (two-pointers, string). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/valid-palindrome/",
+      "leetcodeNumber": 125,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-best-time-to-buy-and-sell-stock",
+      "title": "Best Time to Buy and Sell Stock",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #121 — Best Time to Buy and Sell Stock. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, dynamic-programming). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "leetcodeNumber": 121,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-contains-duplicate",
+      "title": "Contains Duplicate",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #217 — Contains Duplicate. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/contains-duplicate/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: array hashing.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, hash-table, sorting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/contains-duplicate/",
+      "leetcodeNumber": 217,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-maximum-subarray",
+      "title": "Maximum Subarray",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #53 — Maximum Subarray. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/maximum-subarray/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, divide-and-conquer, dynamic-programming). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/maximum-subarray/",
+      "leetcodeNumber": 53,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-3sum",
+      "title": "3Sum",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #15 — 3Sum. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/3sum/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: two pointers.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, two-pointers, sorting). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/3sum/",
+      "leetcodeNumber": 15,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-longest-substring-without-repeating-characters",
+      "title": "Longest Substring Without Repeating Characters",
+      "conceptId": "sliding-window",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #3 — Longest Substring Without Repeating Characters. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: sliding window.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (hash-table, string, sliding-window). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "leetcodeNumber": 3,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-valid-parentheses",
+      "title": "Valid Parentheses",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #20 — Valid Parentheses. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/valid-parentheses/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: stack.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (string, stack). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/valid-parentheses/",
+      "leetcodeNumber": 20,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "conceptId": "linked-list",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #21 — Merge Two Sorted Lists. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/merge-two-sorted-lists/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: linked list.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (linked-list, recursion). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "leetcodeNumber": 21,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-binary-search",
+      "title": "Binary Search",
+      "conceptId": "binary-search",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #792 — Binary Search. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/binary-search/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: binary search.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, binary-search). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/binary-search/",
+      "leetcodeNumber": 792,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-number-of-islands",
+      "title": "Number of Islands",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #200 — Number of Islands. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/number-of-islands/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: graphs.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, depth-first-search, breadth-first-search, union-find, matrix). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/number-of-islands/",
+      "leetcodeNumber": 200,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-climbing-stairs",
+      "title": "Climbing Stairs",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "LeetCode #70 — Climbing Stairs. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/climbing-stairs/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (math, dynamic-programming, memoization). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/climbing-stairs/",
+      "leetcodeNumber": 70,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-coin-change",
+      "title": "Coin Change",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #322 — Coin Change. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/coin-change/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, dynamic-programming, breadth-first-search). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/coin-change/",
+      "leetcodeNumber": 322,
+      "source": "leetcode-metadata",
+      "testCases": []
+    },
+    {
+      "id": "lc-house-robber",
+      "title": "House Robber",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "LeetCode #198 — House Robber. Solve on LeetCode, then implement here if you want it in your drill queue.\n\nhttps://leetcode.com/problems/house-robber/",
+      "expectedOutput": "Pass all LeetCode test cases for this problem.",
+      "hints": [
+        "Pattern hint: dp 1d.",
+        "Start with brute force, then optimize time/space.",
+        "Write down invariants before coding."
+      ],
+      "solutionNotes": "Imported from LeetCode metadata (array, dynamic-programming). Editorial solution not included — solve on site first.",
+      "externalUrl": "https://leetcode.com/problems/house-robber/",
+      "leetcodeNumber": 198,
+      "source": "leetcode-metadata",
+      "testCases": []
     }
   ]
 }

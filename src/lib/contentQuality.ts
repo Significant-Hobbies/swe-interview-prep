@@ -8,7 +8,13 @@ const GENERIC_DRILL_MARKERS = [
 
 const GENERIC_ARTIFACT_CRITERIA = 'Demonstrates the core mechanism from the mental model';
 
+/** LeetCode metadata stubs — external practice, not in-app automated drills. */
+export function isMetadataDrill(drill: Drill): boolean {
+  return drill.id.startsWith('lc-') || (drill as Drill & { source?: string }).source === 'leetcode-metadata';
+}
+
 export function isEditorialDrill(drill: Drill): boolean {
+  if (isMetadataDrill(drill)) return false;
   if (drill.id.startsWith('drill-')) return false;
   if (GENERIC_DRILL_MARKERS.every(m => drill.prompt.includes(m))) return false;
   return true;
