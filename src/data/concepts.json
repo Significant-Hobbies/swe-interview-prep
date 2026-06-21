@@ -3812,7 +3812,9 @@
         }
       ],
       "drills": [
-        "two-sum-hashmap"
+        "two-sum-hashmap",
+        "lc-two-sum",
+        "lc-contains-duplicate"
       ],
       "reviewQuestions": [
         "rq-array-hashing-core"
@@ -3852,7 +3854,9 @@
         }
       ],
       "drills": [
-        "valid-palindrome-two-pointers"
+        "valid-palindrome-two-pointers",
+        "lc-valid-palindrome",
+        "lc-3sum"
       ],
       "reviewQuestions": [
         "rq-two-pointers-core"
@@ -3890,7 +3894,8 @@
         }
       ],
       "drills": [
-        "longest-substring-sliding-window"
+        "longest-substring-sliding-window",
+        "lc-longest-substring-without-repeating-characters"
       ],
       "reviewQuestions": [
         "rq-sliding-window-core"
@@ -3923,7 +3928,8 @@
       ],
       "mentalModel": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets.",
       "drills": [
-        "valid-parentheses-stack"
+        "valid-parentheses-stack",
+        "lc-valid-parentheses"
       ],
       "reviewQuestions": [
         "rq-stack-core"
@@ -3961,7 +3967,8 @@
         }
       ],
       "drills": [
-        "search-rotated-array"
+        "search-rotated-array",
+        "lc-binary-search"
       ],
       "reviewQuestions": [
         "rq-binary-search-core"
@@ -3994,7 +4001,8 @@
       ],
       "mentalModel": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place.",
       "drills": [
-        "reverse-linked-list"
+        "reverse-linked-list",
+        "lc-merge-two-sorted-lists"
       ],
       "reviewQuestions": [
         "rq-linked-list-core"
@@ -4178,7 +4186,8 @@
         }
       ],
       "drills": [
-        "number-of-islands"
+        "number-of-islands",
+        "lc-number-of-islands"
       ],
       "reviewQuestions": [
         "rq-graphs-core"
@@ -4285,7 +4294,12 @@
         }
       ],
       "drills": [
-        "house-robber-dp"
+        "house-robber-dp",
+        "lc-best-time-to-buy-and-sell-stock",
+        "lc-maximum-subarray",
+        "lc-climbing-stairs",
+        "lc-coin-change",
+        "lc-house-robber"
       ],
       "reviewQuestions": [
         "rq-dp-1d-core"

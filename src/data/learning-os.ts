@@ -325,6 +325,14 @@ export function drillsForConcept(conceptId: string): Drill[] {
   return DRILLS.filter(d => d.conceptId === conceptId);
 }
 
+export function editorialDrillsForConcept(conceptId: string): Drill[] {
+  return EDITORIAL_DRILLS.filter(d => d.conceptId === conceptId);
+}
+
+export function metadataDrillsForConcept(conceptId: string): Drill[] {
+  return METADATA_DRILLS.filter(d => d.conceptId === conceptId);
+}
+
 export function reviewQuestionsForConcept(conceptId: string): ReviewQuestion[] {
   return REVIEW_QUESTIONS.filter(q => q.conceptId === conceptId);
 }

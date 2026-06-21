@@ -6,6 +6,7 @@
  *   pnpm ingest-leetcode --dry-run two-sum
  *   pnpm ingest-leetcode --list   # curated starter set
  */
+import { spawnSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -74,6 +75,7 @@ if (!dryRun && added > 0) {
   drillsFile.drills = drills;
   writeFileSync(DRILLS_PATH, JSON.stringify(drillsFile, null, 2) + '\n');
   console.log(`Wrote ${DRILLS_PATH}`);
+  spawnSync('node', ['scripts/link-leetcode-drills.mjs'], { cwd: ROOT, stdio: 'inherit' });
 } else if (dryRun) {
   console.log('Dry run — drills.json unchanged');
 }

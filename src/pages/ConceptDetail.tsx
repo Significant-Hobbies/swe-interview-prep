@@ -26,7 +26,8 @@ import {
 import {
   artifactsForConcept,
   CONCEPT_BY_ID,
-  drillsForConcept,
+  editorialDrillsForConcept,
+  metadataDrillsForConcept,
   groupForTag,
   PROJECT_BY_ID,
   reviewQuestionsForConcept,
@@ -64,7 +65,8 @@ export default function ConceptDetail() {
   const m = mastery[concept.id];
   const status = deriveConceptStatus(m);
   const meta = STATUS_META[status];
-  const drills = drillsForConcept(concept.id);
+  const editorialDrills = editorialDrillsForConcept(concept.id);
+  const leetcodeDrills = metadataDrillsForConcept(concept.id);
   const artifacts = artifactsForConcept(concept.id);
   const questions = reviewQuestionsForConcept(concept.id);
   const gate = gateStatus(concept.id);
@@ -247,17 +249,40 @@ export default function ConceptDetail() {
           {/* Drills */}
           <section>
             <SectionTitle>Drills</SectionTitle>
-            {drills.length ? (
-              <div className="space-y-2">
-                {drills.map(d => (
-                  <Card key={d.id} as="link" to={`/drills/${d.id}`} className="flex items-center justify-between gap-3 p-3">
-                    <div>
-                      <div className="text-sm font-medium text-white">{d.title}</div>
-                      <div className="text-xs text-white/40">{d.type} · {d.difficulty}</div>
+            {editorialDrills.length || leetcodeDrills.length ? (
+              <div className="space-y-4">
+                {editorialDrills.length > 0 && (
+                  <div className="space-y-2">
+                    {editorialDrills.map(d => (
+                      <Card key={d.id} as="link" to={`/drills/${d.id}`} className="flex items-center justify-between gap-3 p-3">
+                        <div>
+                          <div className="text-sm font-medium text-white">{d.title}</div>
+                          <div className="text-xs text-white/40">{d.type} · {d.difficulty}</div>
+                        </div>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
+                      </Card>
+                    ))}
+                  </div>
+                )}
+                {leetcodeDrills.length > 0 && (
+                  <div>
+                    <p className="mb-2 text-[11px] text-white/40">LeetCode practice</p>
+                    <div className="space-y-2">
+                      {leetcodeDrills.map(d => (
+                        <Card key={d.id} as="link" to={`/drills/${d.id}`} className="flex items-center justify-between gap-3 p-3">
+                          <div>
+                            <div className="text-sm font-medium text-white">
+                              {d.title}
+                              <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">LeetCode</span>
+                            </div>
+                            <div className="text-xs text-white/40">{d.difficulty} · external</div>
+                          </div>
+                          <ExternalLink className="h-4 w-4 shrink-0 text-sky-400/60" />
+                        </Card>
+                      ))}
                     </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
-                  </Card>
-                ))}
+                  </div>
+                )}
               </div>
             ) : (
               <p className="text-sm text-white/40">No drills mapped yet.</p>

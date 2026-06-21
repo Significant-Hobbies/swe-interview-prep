@@ -16,6 +16,7 @@
     "ingest-library-rqs": "node scripts/ingest-library-rqs.mjs",
     "ingest-anki": "node scripts/ingest-anki.mjs",
     "ingest-leetcode": "node scripts/ingest-leetcode.mjs",
+    "link-leetcode-drills": "node scripts/link-leetcode-drills.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",

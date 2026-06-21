@@ -15,7 +15,7 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/today$/);
     await expect(
-      page.getByText(/^Today$/).or(page.getByText(/You're caught up|min session/i)),
+      page.getByText(/min session|You're caught up/i).first(),
     ).toBeVisible();
   });
 
@@ -85,19 +85,19 @@ test.describe('Learning OS smoke', () => {
       localStorage.removeItem('swe-os:onboarding-v1');
     });
     await page.goto('/onboarding');
-    await expect(page.getByText(/Pick your path/i)).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Pick your primary path/i })).toBeVisible();
     await expect(page.getByRole('button', { name: /AI Search & RAG/i })).toBeVisible();
   });
 
   test('Settings modal opens', async ({ page }) => {
     await page.goto('/learn');
-    await page.getByRole('button', { name: /AI Settings/i }).click();
-    await expect(page.getByRole('heading', { name: /AI Configuration/i })).toBeVisible();
+    await page.getByRole('button', { name: /AI settings/i }).click();
+    await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
   });
 
   test('Settings import tab shows Anki upload', async ({ page }) => {
     await page.goto('/learn');
-    await page.getByRole('button', { name: /AI Settings/i }).click();
+    await page.getByRole('button', { name: /AI settings/i }).click();
     await page.getByRole('button', { name: /Import & notify/i }).click();
     await expect(page.getByText(/Anki import/i)).toBeVisible();
     await expect(page.getByText(/Choose \.apkg or \.txt/i)).toBeVisible();
@@ -106,6 +106,12 @@ test.describe('Learning OS smoke', () => {
   test('Practice all shows LeetCode drill section when stubs exist', async ({ page }) => {
     await page.goto('/practice/all');
     await expect(page.getByText(/LeetCode practice/i)).toBeVisible();
+  });
+
+  test('concept detail shows LeetCode drill for array-hashing', async ({ page }) => {
+    await page.goto('/concepts/array-hashing');
+    await expect(page.getByText(/LeetCode practice/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: /Two Sum.*LeetCode/i })).toBeVisible();
   });
 
   test('legacy URLs redirect into the Learning OS and /build loads Build Lab', async ({ page }) => {
@@ -137,7 +143,7 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/playground?artifact=simulate-random-processes');
     await expect(page).toHaveURL(/artifact=simulate-random-processes/);
     await expect(page.locator('.monaco-editor').first()).toBeVisible({ timeout: 15000 });
-    await expect(page.locator('.monaco-editor').first()).toContainText(/simulateCoinFlips/);
+    await expect(page.locator('.monaco-editor').first()).toContainText(/coinFlips/);
   });
 
   test('gated concept shows proof-based unlock banner', async ({ page }) => {

@@ -23,9 +23,9 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['iPhone 13'] } },
   ],
   webServer: {
-    command: 'pnpm exec vite --port 5199 --strictPort',
+    command: 'node scripts/dev-e2e-server.mjs',
     url: 'http://localhost:5199',
-    reuseExistingServer: false,
-    timeout: 60_000,
+    reuseExistingServer: !ci,
+    timeout: 90_000,
   },
 });
