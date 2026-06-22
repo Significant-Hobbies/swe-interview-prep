@@ -3,9 +3,17 @@
     "source": [
       "Developer-Y/cs-video-courses",
       "Developer-Y/Scalable-Software-Architecture",
-      "Developer-Y/technical-interviews"
+      "Developer-Y/technical-interviews",
+      "prakhar1989/awesome-courses",
+      "theanalyst/awesome-distributed-systems",
+      "pingcap/awesome-database-learning",
+      "keon/awesome-nlp",
+      "jwasham/coding-interview-university",
+      "ossu/computer-science",
+      "mlabonne/llm-course"
     ],
-    "generated_by": "scripts/harvest-developer-y.mjs",
+    "curated": "src/data/curated-external-resources.json",
+    "generated_by": "scripts/harvest-external-resources.mjs",
     "cap_per_tag": 20
   },
   "byTag": {
@@ -41,18 +49,6 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Spring 2024",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp24/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Spring 2023",
-        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "6.034 Artificial Intelligence, MIT OCW",
         "url": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/lecture-videos/",
         "kind": "course",
@@ -83,12 +79,6 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLDPnGbm0sUmpzvcGvktbz446SLdFbfZVU",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "CS 4804: Introduction to Artificial Intelligence, Fall 2016",
         "url": "https://www.youtube.com/playlist?list=PLUenpfvlyoa1iiSbGy9BBewgiXjzxVgBd",
         "kind": "video",
@@ -107,38 +97,44 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Spring 2023",
-        "url": "https://www.fau.tv/course/id/3386",
+        "title": "Artificial Intelligence - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105077/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Fall 2022",
-        "url": "https://www.fau.tv/course/id/3180",
+        "title": "Artificial Intelligence - IIT Madras",
+        "url": "https://nptel.ac.in/courses/106106126/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Spring 2021",
-        "url": "https://www.fau.tv/course/id/2095",
+        "title": "Artificial Intelligence(Prof.P.Dasgupta) - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105079/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Fall 2020",
-        "url": "https://www.fau.tv/course/id/1690",
-        "kind": "link",
+        "title": "MOOC - Intro to Artificial Intelligence - Udacity",
+        "url": "https://www.youtube.com/playlist?list=PLAwxTw4SYaPlqMkzr4xyuD6cXTIgPuzgn",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Fall 2018",
-        "url": "https://www.fau.tv/course/id/713",
-        "kind": "link",
+        "title": "MOOC - Artificial Intelligence for Robotics - Udacity",
+        "url": "https://www.youtube.com/playlist?list=PLAwxTw4SYaPkCSYXw6-a_aAoXVKLDwnHK",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Spring 2018",
-        "url": "https://www.fau.tv/course/id/657",
+        "title": "Graduate Course in Artificial Intelligence, Autumn 2012 - University of Washington",
+        "url": "https://www.youtube.com/playlist?list=PLbQ3Aya0VERDoDdbMogU9EASJGWris9qG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Agent-Based Systems 2015/16- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2015/abs.htm",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -187,21 +183,9 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Spring 2025",
-        "url": "https://sp25.cs161.org/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "6.875 - Cryptography - Fall 2021 - MIT",
         "url": "https://mit6875.github.io/fall2021.html",
         "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Spring 2018",
-        "url": "https://www.youtube.com/playlist?list=PL6ogFv-ieghe8MOIcpD6UDtdK-UMHG8oH",
-        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -211,21 +195,9 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Videos",
-        "url": "https://courses.cs.washington.edu/courses/csep590a/11wi/video/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "CS461/ECE422 - Computer Security - University of Illinois at Urbana-Champaign",
         "url": "https://courses.engr.illinois.edu/cs461/sp2016/",
         "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Videos",
-        "url": "https://recordings.engineering.illinois.edu:8443/ess/portal/section/8a560718-345a-417a-b665-6bd375a71ee2",
-        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -263,15 +235,33 @@
         "url": "https://nptel.ac.in/courses/106107155/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Cryptography and Network Security - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105031/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "18-636 Browser Security, Stanford",
+        "url": "https://courseware.stanford.edu/pg/courses/334553/18636-spring-2013",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Internet Security - Weaknesses and Targets (WT 2015/16)",
+        "url": "https://www.tele-task.de/archive/series/overview/1084/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "WT 2012/13",
+        "url": "https://www.tele-task.de/archive/series/overview/921/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
       }
     ],
     "backend": [
-      {
-        "title": "Watch Lectures",
-        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
       {
         "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
         "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150",
@@ -333,15 +323,9 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2024",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
-        "kind": "course",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -357,33 +341,45 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Fall 2023",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2022",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
         "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2024",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnnfpqfSzQVbj4JWPAn1ByiF",
+        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2023",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnl0SZ2zsgyVjU9NDD_Rn-re",
+        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
+        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
         "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
+        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2020 - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4414 - Operating Systems, University of Virginia (rust-class)",
+        "url": "http://rust-class.org/pages/classes.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4414 Operating Systems, Fall 2018 - University of Virginia",
+        "url": "https://www.cs.virginia.edu/~cr4bd/4414/F2018/schedule.html",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
@@ -402,6 +398,18 @@
       }
     ],
     "databases": [
+      {
+        "title": "CMU 15-445 — Introduction to Database Systems",
+        "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-721 — Advanced Database Systems",
+        "url": "https://15721.courses.cs.cmu.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      },
       {
         "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
         "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/",
@@ -469,61 +477,183 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "15-445 - Introduction to Database Systems, CMU",
-        "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+        "title": "15-721 - Advanced Database Systems, CMU",
+        "url": "http://15721.courses.cs.cmu.edu/spring2024",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2017",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
+        "title": "CS122 - Relational Database System Implementation, Winter 2014-2015 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs122/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 186 - Database Systems, UC Berkeley, Spring 2015",
+        "url": "http://www.infocobuild.com/education/audio-video-courses/computer-science/cs186-spring2015-berkeley.html",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 6530 - Graduate-level Database Systems, Fall 2016, University of Utah",
+        "url": "https://www.cs.utah.edu/~lifeifei/cs6530/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCqwHUcieMrytP453Ep0y6eI",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2018",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
+        "title": "6.830/6.814 - Database Systems Fall 2014",
+        "url": "https://www.youtube.com/playlist?list=PLfciLKR3SgqOxCy1TIXXyfTqKzX2enDjK",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2019",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2021",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2022",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2023",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjbj8BMuIrRcacnQh20hmY9g&si=R7F_J9zbXsG07PjR",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2024",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq&si=H-wfgjoLz6ifhZqS",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2025",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&si=KKXgy16Zm20utGyH",
-        "kind": "video",
+        "title": "Informatics 1 - Data & Analysis 2014/15- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/da.htm",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
+    "distributed-systems": [
+      {
+        "title": "MIT 6.824 — Distributed Systems",
+        "url": "https://pdos.csail.mit.edu/6.824/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-440 — Distributed Systems",
+        "url": "https://www.cs.cmu.edu/~15-440/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "The System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Seattle Conference on Scalability: YouTube Scalability",
+        "url": "https://www.youtube.com/watch?v=w5WVu624fY8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "How to answer design question: How do you design a twitter?",
+        "url": "https://www.youtube.com/watch?v=gX8S7b8UYl8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Operations at Twitter: Scaling Beyond 100 Million Users",
+        "url": "https://www.youtube.com/watch?v=z8LU0Cj6BOU",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "How We've Scaled Dropbox",
+        "url": "https://www.youtube.com/watch?v=PE4gwstWhmc",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Keynote: Twitter's search architecture",
+        "url": "https://www.youtube.com/watch?v=AguWva8P_DI",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Marco Cecconi - \"The Architecture of StackOverflow\"",
+        "url": "https://www.youtube.com/watch?v=t6kM2EM6so4",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scalability at YouTube",
+        "url": "https://www.youtube.com/watch?v=G-lGCC4KKok",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Lessons of Scale at Facebook",
+        "url": "https://www.youtube.com/watch?v=QCHiNEw73AU",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scale at Facebook",
+        "url": "https://www.infoq.com/presentations/Scale-at-Facebook",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Flight Lightning - Scaling Twitter core infrastructure",
+        "url": "https://www.youtube.com/watch?v=6OvrFkLSoZ0",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scaling Instagram with Mike Krieger",
+        "url": "https://www.youtube.com/watch?v=oNA2C1vC8FQ",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "GOTO 2014 • Scaling Pinterest • Marty Weiner",
+        "url": "https://www.youtube.com/watch?v=jQNCuD_hxdQ",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "InfoQ link",
+        "url": "https://www.infoq.com/presentations/Pinterest",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Real-Time Delivery Architecture at Twitter",
+        "url": "https://www.youtube.com/watch?v=J5auCY4ajK8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "OSCON 2014: How Instagram.com Works; Pete Hunt",
+        "url": "https://www.youtube.com/watch?v=VkTCL6Nqm6Y",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scaling the Data Infrastructure at Instagram",
+        "url": "https://www.youtube.com/watch?v=1sPgogJlKWM",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "O'Reilly MySQL CE 2011: Jeremy Cole, \"Big and Small Data at @Twitter\"",
+        "url": "https://www.youtube.com/watch?v=5cKTP36HVgI",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      }
+    ],
     "dsa": [
+      {
+        "title": "MIT 6.006 — Introduction to Algorithms",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Princeton COS 226 — Algorithms",
+        "url": "https://www.cs.princeton.edu/courses/archive/fall22/cos226/",
+        "kind": "course",
+        "source": "curated"
+      },
       {
         "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/",
@@ -597,12 +727,6 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Lectures",
-        "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoiHeO17FlLADJ38Kb3EiPU",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "Homework Walkthroughs",
         "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoVyQCIUDHiXnL-zdFD_ixk",
         "kind": "video",
@@ -617,12 +741,6 @@
       {
         "title": "COP 3530 Data Structures and Algorithms, Prof Sahni, UFL",
         "url": "http://www.cise.ufl.edu/~sahni/cop3530/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Videos",
-        "url": "http://www.cise.ufl.edu/academics/courses/preview/cop3530sahni/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
@@ -643,6 +761,342 @@
         "url": "https://www.youtube.com/playlist?list=PLsPlf0OhSLIqfpyxmomKcIcrht5K3IUOr",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "embeddings": [
+      {
+        "title": "DPR (Dense Passage Retrieval)",
+        "url": "https://arxiv.org/abs/2004.04906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERT",
+        "url": "https://arxiv.org/abs/2004.12832",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERTv2",
+        "url": "https://arxiv.org/abs/2112.01488",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "E5-Mistral",
+        "url": "https://arxiv.org/abs/2401.00368",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BGE-M3",
+        "url": "https://arxiv.org/abs/2402.03216",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Nomic Embed",
+        "url": "https://arxiv.org/abs/2402.01613",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Matryoshka Representation Learning",
+        "url": "https://arxiv.org/abs/2205.13147",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "GritLM",
+        "url": "https://arxiv.org/abs/2402.09906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "RAG (Retrieval-Augmented Generation)",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Gemini Embedding",
+        "url": "https://arxiv.org/abs/2503.07891",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Qwen3-Embedding",
+        "url": "https://arxiv.org/abs/2506.05176",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Rank1",
+        "url": "https://arxiv.org/abs/2502.18418",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ReasonEmbed",
+        "url": "https://arxiv.org/abs/2510.08252",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERT-Att",
+        "url": "https://arxiv.org/abs/2603.25248",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMTEB",
+        "url": "https://arxiv.org/abs/2502.13595",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      }
+    ],
+    "evals": [
+      {
+        "title": "GLUE",
+        "url": "https://gluebenchmark.com/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "SuperGLUE",
+        "url": "https://super.gluebenchmark.com/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XTREME",
+        "url": "https://sites.research.google/xtreme",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XGLUE",
+        "url": "https://microsoft.github.io/XGLUE/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XNLI",
+        "url": "https://github.com/facebookresearch/XNLI",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "FLORES-200",
+        "url": "https://github.com/facebookresearch/flores",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MTEB",
+        "url": "https://github.com/embeddings-benchmark/mteb",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BEIR",
+        "url": "https://github.com/beir-cellar/beir",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "HELM",
+        "url": "https://crfm.stanford.edu/helm/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BIG-bench",
+        "url": "https://github.com/google/BIG-bench",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU",
+        "url": "https://github.com/hendrycks/test",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU-Pro",
+        "url": "https://arxiv.org/abs/2406.01574",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "GPQA",
+        "url": "https://arxiv.org/abs/2311.12022",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "REFUTE",
+        "url": "https://huggingface.co/datasets/BGPT-OFFICIAL/refute",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "IFEval",
+        "url": "https://arxiv.org/abs/2311.07911",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Chatbot Arena (LMSYS)",
+        "url": "https://lmarena.ai/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "LiveBench",
+        "url": "https://livebench.ai/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "LM Evaluation Harness",
+        "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU-ProX",
+        "url": "https://arxiv.org/abs/2503.10497",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MultiChallenge",
+        "url": "https://arxiv.org/abs/2501.17399",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      }
+    ],
+    "evaluation": [
+      {
+        "title": "GLUE",
+        "url": "https://gluebenchmark.com/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "SuperGLUE",
+        "url": "https://super.gluebenchmark.com/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XTREME",
+        "url": "https://sites.research.google/xtreme",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XGLUE",
+        "url": "https://microsoft.github.io/XGLUE/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "XNLI",
+        "url": "https://github.com/facebookresearch/XNLI",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "FLORES-200",
+        "url": "https://github.com/facebookresearch/flores",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MTEB",
+        "url": "https://github.com/embeddings-benchmark/mteb",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BEIR",
+        "url": "https://github.com/beir-cellar/beir",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "HELM",
+        "url": "https://crfm.stanford.edu/helm/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BIG-bench",
+        "url": "https://github.com/google/BIG-bench",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU",
+        "url": "https://github.com/hendrycks/test",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU-Pro",
+        "url": "https://arxiv.org/abs/2406.01574",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "GPQA",
+        "url": "https://arxiv.org/abs/2311.12022",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "REFUTE",
+        "url": "https://huggingface.co/datasets/BGPT-OFFICIAL/refute",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "IFEval",
+        "url": "https://arxiv.org/abs/2311.07911",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Chatbot Arena (LMSYS)",
+        "url": "https://lmarena.ai/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "LiveBench",
+        "url": "https://livebench.ai/",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "LM Evaluation Harness",
+        "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMLU-ProX",
+        "url": "https://arxiv.org/abs/2503.10497",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MultiChallenge",
+        "url": "https://arxiv.org/abs/2501.17399",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
       }
     ],
     "foundations": [
@@ -793,12 +1247,6 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Videos",
-        "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_video",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "Slides",
         "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_foils",
         "kind": "link",
@@ -808,12 +1256,6 @@
         "title": "Audio/Video Recordings and Podcasts of Professor Raj Jain's Lectures - Washington University in St. Louis",
         "url": "http://www.cse.wustl.edu/~jain/videos.htm",
         "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube",
-        "url": "https://www.youtube.com/user/ProfRajJain/playlists",
-        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -829,20 +1271,8 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Videos",
-        "url": "https://courses.cs.washington.edu/courses/csep561/13au/video/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "CSEP 561 – Network Systems, Autumn 2008 - University of Washington",
         "url": "https://courses.cs.washington.edu/courses/csep561/08au/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Videos",
-        "url": "https://courses.cs.washington.edu/courses/csep561/08au/lectures/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
@@ -887,6 +1317,1208 @@
         "url": "https://www.youtube.com/playlist?list=PLIygTcviGPKAaY0VGGjQ2whITq23AOjaR",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Columbia COMS W4119 Computer Networks fall 2004, by Vishal Misra",
+        "url": "https://www.youtube.com/playlist?list=PLIygTcviGPKCh6XgTHofe6zPK_LQ_nVW3",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Columbia ELEN E4710 An Introduction to Network Engineering fall 2004, by Dan Rubenstein",
+        "url": "https://www.cs.columbia.edu/~danr/courses/4710/Fall04/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Data Communication - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105082/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Error Correcting Codes - IISC Bangalore",
+        "url": "https://nptel.ac.in/courses/117108044/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "language-modeling": [
+      {
+        "title": "IndoBERT (IndoNLU)",
+        "url": "https://github.com/indobenchmark/indonlu",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "IndoBERT (IndoLEM)",
+        "url": "https://github.com/indolem/indolem",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "NusaCrowd / Cendol",
+        "url": "https://github.com/IndoNLP/nusa-crowd",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Sailor",
+        "url": "https://github.com/sail-sg/sailor-llm",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "SEA-LION",
+        "url": "https://github.com/aisingapore/sealion",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ParsBERT",
+        "url": "https://github.com/hooshvare/parsbert",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "PersianMind",
+        "url": "https://huggingface.co/universitytehran/PersianMind-v1.0",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Dorna",
+        "url": "https://huggingface.co/PartAI/Dorna-Llama3-8B-Instruct",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BERTimbau",
+        "url": "https://github.com/neuralmind-ai/portuguese-bert",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Sabiá",
+        "url": "https://huggingface.co/maritaca-ai",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Albertina",
+        "url": "https://huggingface.co/PORTULAN",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "WangchanBERTa",
+        "url": "https://github.com/vistec-AI/thai2transformers",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Typhoon",
+        "url": "https://huggingface.co/scb10x",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "OpenThaiGPT",
+        "url": "https://huggingface.co/openthaigpt",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "LLM Engineer's Handbook",
+        "url": "https://packt.link/a/9781836200079",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "DeepWiki",
+        "url": "https://deepwiki.com/mlabonne/llm-course/",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "LLM AutoEval",
+        "url": "https://github.com/mlabonne/llm-autoeval",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/2024-07-29_Finetune_Llama31.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/2024-04-19_Fine_tune_Llama_3_with_ORPO.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/Fine_tune_Mistral_7b_with_DPO.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      }
+    ],
+    "low-level-design": [
+      {
+        "title": "ECE 462 Object-Oriented Programming using C++ and Java - Purdue",
+        "url": "https://engineering.purdue.edu/OOSD/F2008/F2008.html",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object-oriented Program Design and Software Engineering - Aduni",
+        "url": "http://aduni.org/courses/java/index.php?view=cw",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "OOSE - Object-Oriented Software Engineering, Dr. Tim Lethbridge",
+        "url": "https://www.youtube.com/playlist?list=PL6iDJCG2nkhfNlig8NY5ePPfGvtQX6yLa",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object Oriented Systems Analysis and Design (Systems Analysis and Design in a Changing World)",
+        "url": "https://www.youtube.com/playlist?list=PL6XklZATqYx9dj72MKG6wLYjljeB2odra",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 251 - Intermediate Software Design (C++ version) - Vanderbilt University",
+        "url": "https://www.youtube.com/playlist?list=PLZ9NgFYEMxp4ZsvD10uXmClGnukcu3Uff",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "OOSE - Software Dev Using UML and Java",
+        "url": "https://www.youtube.com/playlist?list=PLJ9pm_Rc9HesnkwKlal_buSIHA-jTZMpO",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Object-Oriented Analysis and Design - IIT Kharagpur",
+        "url": "https://nptel.ac.in/courses/106105153/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS3 - Design in Computing - Richard Buckland UNSW",
+        "url": "https://www.youtube.com/playlist?list=PL0C5D85DBA20E685C",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Informatics 1 - Object-Oriented Programming 2014/15- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/inf1op.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Software Engineering with Objects and Components 2015/16- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2015/seoc.htm",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "COMP1531 - Software Engineering Fundamentals - UNSW (2025)",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1531/25T2/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Video Playlist",
+        "url": "https://www.youtube.com/playlist?list=PLxmsQaZsRXBRsn6Vk1RFo6hOlioMMdQBL",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Science 169- Software Engineering - Spring 2015 - UCBerkeley",
+        "url": "https://youtube.com/playlist?list=PLVEFwJhglgHJQEQ6RjMMjcclix94gp1k2",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Science 169- Software Engineering - Fall 2019 - UCBerkeley",
+        "url": "https://www.youtube.com/playlist?list=PLkFD6_40KJIxCKgzL0uysjsAtfY3JawLS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 5150 - Software Engineering, Fall 2014 - Cornell University",
+        "url": "http://www.cs.cornell.edu/courses/cs5150/2014fa/materials.html",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Introduction to Service Design and Engineering - University of Trento, Italy",
+        "url": "https://www.youtube.com/playlist?list=PLBdajHWwi0JCn87QuFT3e58mekU0-6WUT",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 164 Software Engineering - Harvard",
+        "url": "https://www.youtube.com/watch?v=3zdfCR6c8vw&list=PLuhjguFxSeVLvKvWwTUIpVwXdLtZPX1ZS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "System Analysis and Design - IISC Bangalore",
+        "url": "https://nptel.ac.in/courses/106108102/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Software Engineering - IIT Bombay",
+        "url": "https://nptel.ac.in/courses/106101061/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Dependable Systems (SS 2014)- HPI University of Potsdam",
+        "url": "https://www.tele-task.de/series/1005/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "mathematics": [
+      {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "ISL — Statistical Learning (free)",
+        "url": "https://www.statlearning.com/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.041SC — Probability",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Computational Linear Algebra (fast.ai)",
+        "url": "https://github.com/fastai/numerical-linear-algebra",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Basic Probability",
+        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Probability vs Likelihood",
+        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Statistics",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Descriptive Statistics",
+        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 18.650 Statistics for Applications",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Hypothesis Testing",
+        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — p-values",
+        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Convex Optimization (Boyd & Vandenberghe)",
+        "url": "https://web.stanford.edu/~boyd/cvxbook/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Information Theory (MacKay)",
+        "url": "https://www.inference.org.uk/itprnn/book.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Probability Distributions",
+        "url": "https://seeing-theory.brown.edu/distributions/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Random variables & distributions",
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 18.05 — Probability & Statistics (Spring 2022)",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+        "kind": "course",
+        "source": "concept-curated"
+      }
+    ],
+    "probability": [
+      {
+        "title": "Seeing Theory — Interactive probability (Brown)",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.041SC — Probabilistic Systems Analysis",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Khan Academy — Probability library",
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.05 — Introduction to Probability and Statistics",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Probability fundamentals playlist",
+        "url": "https://www.youtube.com/playlist?list=PLblh5FoqfyRmvlK1H-Yj7CtJ9OONaXq0T",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Basic Probability",
+        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Probability vs Likelihood",
+        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Information Theory (MacKay)",
+        "url": "https://www.inference.org.uk/itprnn/book.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Probability Distributions",
+        "url": "https://seeing-theory.brown.edu/distributions/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Random variables & distributions",
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Blitzstein — Introduction to Probability (Harvard)",
+        "url": "https://projects.iq.harvard.edu/stat110/home",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "MIT 6.041 Probabilistic Systems Analysis",
+        "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pishro-Nik — Introduction to Probability",
+        "url": "https://www.probabilitycourse.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Harvard Stat 110 lectures (YouTube)",
+        "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg",
+        "kind": "video",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Random variables — MIT OCW",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Conditional probability interactive",
+        "url": "https://setosa.io/ev/conditional-probability/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Maths courses all topics covered - Khan Academy",
+        "url": "https://www.khanacademy.org/math/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "18.01 Single Variable Calculus, Fall 2006 - MIT OCW",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "18.02 Multivariable Calculus, Fall 2007 - MIT OCW",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-02-multivariable-calculus-fall-2007/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "18.03 Differential Equations, Spring 2010 - MIT OCW",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "quant": [
+      {
+        "title": "Python for Finance (Hilpisch) — notebooks",
+        "url": "https://github.com/yhilpisch/py4fi2nd",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Forecasting: Principles and Practice (Hyndman)",
+        "url": "https://otexts.com/fpp3/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551",
+        "kind": "paper",
+        "source": "curated"
+      },
+      {
+        "title": "QuantConnect — Backtesting docs",
+        "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/overview",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Evan Miller — A/B testing statistics",
+        "url": "https://www.evanmiller.org/ab-testing/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Stationarity",
+        "url": "https://www.youtube.com/watch?v=1Lh1HlLKV4g",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 6.041SC — Random processes",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "QuantStart — Beginners",
+        "url": "https://www.quantstart.com/articles/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Ernest Chan — Algorithmic Trading overview",
+        "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "QuantConnect Learn",
+        "url": "https://www.quantconnect.com/learning/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "CFA Institute — Quantitative methods",
+        "url": "https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/quantitative-methods",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Python for Finance (Yves Hilpisch)",
+        "url": "https://www.oreilly.com/library/view/python-for-finance/9781492024330/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Epchan — Quantitative Trading blog",
+        "url": "https://epchan.blogspot.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Alpha Architect — Research posts",
+        "url": "https://alphaarchitect.com/blog/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "SSRN — Quantitative finance papers",
+        "url": "https://www.ssrn.com/index.cfm/en/janda/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "NBER — Asset pricing",
+        "url": "https://www.nber.org/research/data/asset-pricing",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Portfolio Visualizer",
+        "url": "https://www.portfoliovisualizer.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Quantpedia — Strategy summaries",
+        "url": "https://quantpedia.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ],
+    "rag": [
+      {
+        "title": "DPR (Dense Passage Retrieval)",
+        "url": "https://arxiv.org/abs/2004.04906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERT",
+        "url": "https://arxiv.org/abs/2004.12832",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERTv2",
+        "url": "https://arxiv.org/abs/2112.01488",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "E5-Mistral",
+        "url": "https://arxiv.org/abs/2401.00368",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "BGE-M3",
+        "url": "https://arxiv.org/abs/2402.03216",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Nomic Embed",
+        "url": "https://arxiv.org/abs/2402.01613",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Matryoshka Representation Learning",
+        "url": "https://arxiv.org/abs/2205.13147",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "GritLM",
+        "url": "https://arxiv.org/abs/2402.09906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "RAG (Retrieval-Augmented Generation)",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Gemini Embedding",
+        "url": "https://arxiv.org/abs/2503.07891",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Qwen3-Embedding",
+        "url": "https://arxiv.org/abs/2506.05176",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "Rank1",
+        "url": "https://arxiv.org/abs/2502.18418",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ReasonEmbed",
+        "url": "https://arxiv.org/abs/2510.08252",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERT-Att",
+        "url": "https://arxiv.org/abs/2603.25248",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "MMTEB",
+        "url": "https://arxiv.org/abs/2502.13595",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      }
+    ],
+    "runtime": [
+      {
+        "title": "MIT 6.1810 — Operating Systems",
+        "url": "https://pdos.csail.mit.edu/6.1810/2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-213 — Introduction to Computer Systems",
+        "url": "https://www.cs.cmu.edu/~213/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Computer Systems: A programmer's Perspective",
+        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 3650 - Computer Systems - Fall 2020 - Nat Tuck - NEU",
+        "url": "https://web.archive.org/web/20210423030302/https://ntuck-neu.site/2020-09/cs3650/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLtg_A_3rzLAtBuwQp6mA3WveYw9Q7GzIZ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 4400 – Computer Systems Fall 2016 - UoUtah",
+        "url": "https://www.eng.utah.edu/~cs4400/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Systems - Aduni",
+        "url": "http://aduni.org/courses/systems/index.php?view=cw",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS110: Principles of Computer Systems - Stanford",
+        "url": "https://web.stanford.edu/class/archive/cs/cs110/cs110.1202/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Gatech CS6200 Intro to OS",
+        "url": "https://www.youtube.com/playlist?list=PLTsf9UeqkReZbK7xqIYn_mXmsQZIb011T",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "APS 105 - Computer Fundamentals - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnm3ycdZKCg5Ex6DeuJhEWaG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 344 - Operating Systems - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnntWWNJ64E7wC4KhsEwHWxB",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2024 Section 2",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlW3S8i4gSV9I_8qGX8xwtr",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
+        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
+        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2020 - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      }
+    ],
+    "scalability": [
+      {
+        "title": "Seattle Conference on Scalability: YouTube Scalability",
+        "url": "https://www.youtube.com/watch?v=w5WVu624fY8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "How to answer design question: How do you design a twitter?",
+        "url": "https://www.youtube.com/watch?v=gX8S7b8UYl8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Operations at Twitter: Scaling Beyond 100 Million Users",
+        "url": "https://www.youtube.com/watch?v=z8LU0Cj6BOU",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "How We've Scaled Dropbox",
+        "url": "https://www.youtube.com/watch?v=PE4gwstWhmc",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Keynote: Twitter's search architecture",
+        "url": "https://www.youtube.com/watch?v=AguWva8P_DI",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Marco Cecconi - \"The Architecture of StackOverflow\"",
+        "url": "https://www.youtube.com/watch?v=t6kM2EM6so4",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scalability at YouTube",
+        "url": "https://www.youtube.com/watch?v=G-lGCC4KKok",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Lessons of Scale at Facebook",
+        "url": "https://www.youtube.com/watch?v=QCHiNEw73AU",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scale at Facebook",
+        "url": "https://www.infoq.com/presentations/Scale-at-Facebook",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Flight Lightning - Scaling Twitter core infrastructure",
+        "url": "https://www.youtube.com/watch?v=6OvrFkLSoZ0",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scaling Instagram with Mike Krieger",
+        "url": "https://www.youtube.com/watch?v=oNA2C1vC8FQ",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "GOTO 2014 • Scaling Pinterest • Marty Weiner",
+        "url": "https://www.youtube.com/watch?v=jQNCuD_hxdQ",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "InfoQ link",
+        "url": "https://www.infoq.com/presentations/Pinterest",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Real-Time Delivery Architecture at Twitter",
+        "url": "https://www.youtube.com/watch?v=J5auCY4ajK8",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "OSCON 2014: How Instagram.com Works; Pete Hunt",
+        "url": "https://www.youtube.com/watch?v=VkTCL6Nqm6Y",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Scaling the Data Infrastructure at Instagram",
+        "url": "https://www.youtube.com/watch?v=1sPgogJlKWM",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "O'Reilly MySQL CE 2011: Jeremy Cole, \"Big and Small Data at @Twitter\"",
+        "url": "https://www.youtube.com/watch?v=5cKTP36HVgI",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "O'Reilly Webcast: How Pinterest Architected and Built Their Sharded MySQL Datastore",
+        "url": "https://www.youtube.com/watch?v=aFJm1YlRr5Q",
+        "kind": "video",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Timelines at Scale (Twitter)",
+        "url": "https://www.infoq.com/presentations/Twitter-Timeline-Scalability",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      },
+      {
+        "title": "Architecture at Scale at ESPN",
+        "url": "https://www.infoq.com/presentations/Architecture-Scale-ESPN",
+        "kind": "link",
+        "source": "Developer-Y/Scalable-Software-Architecture"
+      }
+    ],
+    "search-ir": [
+      {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — The term vocabulary & postings lists",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Scoring & term weighting",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Practical BM25 (Elastic blog)",
+        "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Evaluation in IR",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "BEIR: Heterogeneous IR Benchmark",
+        "url": "https://github.com/beir-cellar/beir",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Sentence-Transformers — Cross-Encoders",
+        "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Query expansion",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Introduction to Information Retrieval (Manning et al.)",
+        "url": "https://nlp.stanford.edu/IR-book/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pinecone — Learn vector search",
+        "url": "https://www.pinecone.io/learn/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Elastic — BM25 similarity",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Lucene scoring",
+        "url": "https://lucene.apache.org/core/core_9_0_0/core/org/apache/lucene/search/similarities/BM25Similarity.html",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pyserini",
+        "url": "https://github.com/castorini/pyserini",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Tantivy — Rust search",
+        "url": "https://github.com/quickwit-oss/tantivy",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "OpenSearch k-NN",
+        "url": "https://opensearch.org/docs/latest/search-plugins/knn/index/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "DPR (Dense Passage Retrieval)",
+        "url": "https://arxiv.org/abs/2004.04906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      }
+    ],
+    "statistics": [
+      {
+        "title": "Seeing Theory — Statistics & inference (Brown)",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "An Introduction to Statistical Learning (free book + videos)",
+        "url": "https://www.statlearning.com/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.650 — Statistics for Applications",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Khan Academy — Statistics & probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Statistics & ML explainers (channel)",
+        "url": "https://www.youtube.com/@statquest",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Evan Miller — A/B test sample size & significance",
+        "url": "https://www.evanmiller.org/ab-testing/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Statistical Rethinking (McElreath) — lecture playlist",
+        "url": "https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Descriptive Statistics",
+        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Hypothesis Testing",
+        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — p-values",
+        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Central Limit Theorem",
+        "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Central Limit Theorem",
+        "url": "https://www.youtube.com/watch?v=YAlJC6Hlv8M",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Evan Miller — Sample Size Calculator",
+        "url": "https://www.evanmiller.org/ab-testing/sample-size.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Spotify — Experimentation platform & SRM",
+        "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Bayesian Inference",
+        "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Maximum Likelihood",
+        "url": "https://www.youtube.com/watch?v=XepXbq9wr90",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Regression",
+        "url": "https://seeing-theory.brown.edu/regression/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Bias and Variance",
+        "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Inference",
+        "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html",
+        "kind": "link",
+        "source": "curated-pad"
       }
     ],
     "storage-engines": [
@@ -963,60 +2595,66 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2017",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
+        "title": "15-721 - Advanced Database Systems, CMU",
+        "url": "http://15721.courses.cs.cmu.edu/spring2024",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS122 - Relational Database System Implementation, Winter 2014-2015 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs122/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 186 - Database Systems, UC Berkeley, Spring 2015",
+        "url": "http://www.infocobuild.com/education/audio-video-courses/computer-science/cs186-spring2015-berkeley.html",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 6530 - Graduate-level Database Systems, Fall 2016, University of Utah",
+        "url": "https://www.cs.utah.edu/~lifeifei/cs6530/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCqwHUcieMrytP453Ep0y6eI",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2018",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
+        "title": "6.830/6.814 - Database Systems Fall 2014",
+        "url": "https://www.youtube.com/playlist?list=PLfciLKR3SgqOxCy1TIXXyfTqKzX2enDjK",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2019",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
-        "kind": "video",
+        "title": "Informatics 1 - Data & Analysis 2014/15- University of Edinburgh",
+        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/da.htm",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "YouTube-2021",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2022",
-        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2023",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjbj8BMuIrRcacnQh20hmY9g&si=R7F_J9zbXsG07PjR",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2024",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq&si=H-wfgjoLz6ifhZqS",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2025",
-        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&si=KKXgy16Zm20utGyH",
-        "kind": "video",
+        "title": "Database Management Systems, Aduni",
+        "url": "http://aduni.org/courses/databases/index.php?view=cw",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
     "system-design": [
       {
-        "title": "Watch Lectures",
-        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
+        "title": "The System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.824 — Distributed Systems",
+        "url": "https://pdos.csail.mit.edu/6.824/",
+        "kind": "course",
+        "source": "curated"
       },
       {
         "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
@@ -1079,15 +2717,9 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2024",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
-        "kind": "course",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -1103,32 +2735,32 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Fall 2023",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2022",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
         "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2024",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnnfpqfSzQVbj4JWPAn1ByiF",
+        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Winter 2023",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnl0SZ2zsgyVjU9NDD_Rn-re",
+        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
+        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
+        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "Fall 2020 - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -1183,66 +2815,6 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Notes-2020",
-        "url": "http://www.yisongyue.com/courses/cs155/2020_winter/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2020",
-        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi67hPzb9zJXH1cbeN7LKNiD",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Notes-2019",
-        "url": "http://www.yisongyue.com/courses/cs155/2019_winter/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2019",
-        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi7r2trKGgwaedY17MADTay4",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Notes-2018",
-        "url": "http://www.yisongyue.com/courses/cs155/2018_winter/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2018",
-        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi644ypoxzP1frkPYVHdjDJU",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Notes-2017",
-        "url": "http://www.yisongyue.com/courses/cs155/2017_winter/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2017",
-        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi6BfMrltePqMAHdl5W33-bC",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Notes-2016",
-        "url": "http://www.yisongyue.com/courses/cs155/2016_winter/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube-2016",
-        "url": "https://www.youtube.com/playlist?list=PL5HdMttxBY0BVTP9y7qQtzTgmcjQ3P0mb",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
         "title": "CS 156 - Learning from Data, Caltech",
         "url": "https://work.caltech.edu/lectures.html",
         "kind": "link",
@@ -1252,12 +2824,6 @@
         "title": "10-601 - Introduction to Machine Learning (MS) - Tom Mitchell - 2015, CMU",
         "url": "http://www.cs.cmu.edu/~ninamf/courses/601sp15/lectures.shtml",
         "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLAJ0alZrN8rD63LD0FkzKFiFgkOmEtltQ",
-        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -1271,678 +2837,298 @@
         "url": "http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
-      }
-    ],
-    "probability": [
-      {
-        "title": "Seeing Theory — Interactive probability (Brown)",
-        "url": "https://seeing-theory.brown.edu/",
-        "kind": "link",
-        "source": "curated"
       },
       {
-        "title": "MIT 6.041SC — Probabilistic Systems Analysis",
-        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "Khan Academy — Probability library",
-        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "MIT 18.05 — Introduction to Probability and Statistics",
-        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "StatQuest — Probability fundamentals playlist",
-        "url": "https://www.youtube.com/playlist?list=PLblh5FoqfyRmvlK1H-Yj7CtJ9OONaXq0T",
+        "title": "Spring 2015 by Alex Smola",
+        "url": "https://www.youtube.com/playlist?list=PLZSO_6-bSqHTTV7w9u7grTXBHMH-mw3qn",
         "kind": "video",
-        "source": "curated"
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Seeing Theory — Basic Probability",
-        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — Probability vs Likelihood",
-        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Information Theory (MacKay)",
-        "url": "https://www.inference.org.uk/itprnn/book.html",
-        "type": "doc",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Probability Distributions",
-        "url": "https://seeing-theory.brown.edu/distributions/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Khan Academy — Random variables & distributions",
-        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Blitzstein — Introduction to Probability (Harvard)",
-        "url": "https://projects.iq.harvard.edu/stat110/home",
-        "type": "course",
-        "source": "curated-pad"
-      },
-      {
-        "title": "MIT 6.041 Probabilistic Systems Analysis",
-        "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/",
-        "type": "course",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Pishro-Nik — Introduction to Probability",
-        "url": "https://www.probabilitycourse.com/",
-        "type": "book",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Harvard Stat 110 lectures (YouTube)",
-        "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg",
-        "type": "video",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Random variables — MIT OCW",
-        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/",
-        "type": "course",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Conditional probability interactive",
-        "url": "https://setosa.io/ev/conditional-probability/",
-        "type": "interactive",
-        "source": "curated-pad"
-      }
-    ],
-    "statistics": [
-      {
-        "title": "Seeing Theory — Statistics & inference (Brown)",
-        "url": "https://seeing-theory.brown.edu/",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "An Introduction to Statistical Learning (free book + videos)",
-        "url": "https://www.statlearning.com/",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "MIT 18.650 — Statistics for Applications",
-        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "Khan Academy — Statistics & probability",
-        "url": "https://www.khanacademy.org/math/statistics-probability",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "StatQuest — Statistics & ML explainers (channel)",
-        "url": "https://www.youtube.com/@statquest",
+        "title": "Fall 2020 by Ziv Bar-Joseph, Eric Xing",
+        "url": "https://www.youtube.com/playlist?list=PLsWN0V-b507g7dbQTUvFkKZEqdHR5Fh4P",
         "kind": "video",
-        "source": "curated"
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Evan Miller — A/B test sample size & significance",
-        "url": "https://www.evanmiller.org/ab-testing/",
+        "title": "10 - 301/601 - Introduction to Machine Learning - Fall 2023 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d5bf275d-ff88-4bf6-a865-b065010f55c2%22",
         "kind": "link",
-        "source": "curated"
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Statistical Rethinking (McElreath) — lecture playlist",
-        "url": "https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U",
+        "title": "6.036 - Machine Learning, Broderick - MIT Fall 2020",
+        "url": "https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV",
         "kind": "video",
-        "source": "curated"
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Seeing Theory — Descriptive Statistics",
-        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Hypothesis Testing",
-        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — p-values",
-        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Central Limit Theorem",
-        "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — Central Limit Theorem",
-        "url": "https://www.youtube.com/watch?v=YAlJC6Hlv8M",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Evan Miller — Sample Size Calculator",
-        "url": "https://www.evanmiller.org/ab-testing/sample-size.html",
-        "type": "doc",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Microsoft ExP platform paper",
-        "url": "https://arxiv.org/abs/1803.03218",
-        "type": "paper",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Spotify — Experimentation platform & SRM",
-        "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Bayesian Inference",
-        "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — Maximum Likelihood",
-        "url": "https://www.youtube.com/watch?v=XepXbq9wr90",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Regression",
-        "url": "https://seeing-theory.brown.edu/regression/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — Bias and Variance",
-        "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Inference",
-        "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html",
-        "type": "interactive",
-        "source": "curated-pad"
-      }
-    ],
-    "quant": [
-      {
-        "title": "Python for Finance (Hilpisch) — notebooks",
-        "url": "https://github.com/yhilpisch/py4fi2nd",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "Forecasting: Principles and Practice (Hyndman)",
-        "url": "https://otexts.com/fpp3/",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
-        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551",
-        "kind": "paper",
-        "source": "curated"
-      },
-      {
-        "title": "QuantConnect — Backtesting docs",
-        "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/overview",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "Evan Miller — A/B testing statistics",
-        "url": "https://www.evanmiller.org/ab-testing/",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "StatQuest — Stationarity",
-        "url": "https://www.youtube.com/watch?v=1Lh1HlLKV4g",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "MIT 6.041SC — Random processes",
-        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "QuantStart — Beginners",
-        "url": "https://www.quantstart.com/articles/",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Ernest Chan — Algorithmic Trading overview",
-        "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146",
-        "type": "book",
-        "source": "curated-pad"
-      },
-      {
-        "title": "QuantConnect Learn",
-        "url": "https://www.quantconnect.com/learning/",
-        "type": "course",
-        "source": "curated-pad"
-      },
-      {
-        "title": "CFA Institute — Quantitative methods",
-        "url": "https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/quantitative-methods",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Python for Finance (Yves Hilpisch)",
-        "url": "https://www.oreilly.com/library/view/python-for-finance/9781492024330/",
-        "type": "book",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Epchan — Quantitative Trading blog",
-        "url": "https://epchan.blogspot.com/",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Alpha Architect — Research posts",
-        "url": "https://alphaarchitect.com/blog/",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "SSRN — Quantitative finance papers",
-        "url": "https://www.ssrn.com/index.cfm/en/janda/",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "NBER — Asset pricing",
-        "url": "https://www.nber.org/research/data/asset-pricing",
-        "type": "article",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Portfolio Visualizer",
-        "url": "https://www.portfoliovisualizer.com/",
-        "type": "tool",
-        "source": "curated-pad"
-      },
-      {
-        "title": "Quantpedia — Strategy summaries",
-        "url": "https://quantpedia.com/",
-        "type": "article",
-        "source": "curated-pad"
-      }
-    ],
-    "mathematics": [
-      {
-        "title": "3Blue1Brown — Essence of Linear Algebra",
-        "url": "https://www.3blue1brown.com/topics/linear-algebra",
+        "title": "Mediterranean Machine Learning summer school 2024",
+        "url": "https://www.youtube.com/playlist?list=PLF-wkqRv4u1bV4Zd1UepYfyZXkv6Bz6ra",
         "kind": "video",
-        "source": "curated"
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Seeing Theory — Probability & statistics visualized",
-        "url": "https://seeing-theory.brown.edu/",
-        "kind": "link",
-        "source": "curated"
+        "title": "LxMLS Lisbon Machine Learning School 2024",
+        "url": "https://www.youtube.com/playlist?list=PLQl_xdhSmQeh4eRfAwETbtJJLPKcDLrzw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "MIT 18.06SC — Linear Algebra (Strang)",
-        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/",
-        "kind": "course",
-        "source": "curated"
+        "title": "Applied Machine Learning (Cornell Tech CS 5787, Fall 2020)",
+        "url": "https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "ISL — Statistical Learning (free)",
-        "url": "https://www.statlearning.com/",
-        "kind": "link",
-        "source": "curated"
-      },
-      {
-        "title": "MIT 6.041SC — Probability",
-        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
-        "kind": "course",
-        "source": "curated"
-      },
-      {
-        "title": "Computational Linear Algebra (fast.ai)",
-        "url": "https://github.com/fastai/numerical-linear-algebra",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Khan Academy — Probability",
-        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Basic Probability",
-        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — Probability vs Likelihood",
-        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Khan Academy — Statistics",
-        "url": "https://www.khanacademy.org/math/statistics-probability",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Descriptive Statistics",
-        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "MIT 18.650 Statistics for Applications",
-        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Hypothesis Testing",
-        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "StatQuest — p-values",
-        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
-        "type": "video",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Neural Networks: Zero to Hero (Karpathy)",
-        "url": "https://karpathy.ai/zero-to-hero.html",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Convex Optimization (Boyd & Vandenberghe)",
-        "url": "https://web.stanford.edu/~boyd/cvxbook/",
-        "type": "doc",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Information Theory (MacKay)",
-        "url": "https://www.inference.org.uk/itprnn/book.html",
-        "type": "doc",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Seeing Theory — Probability Distributions",
-        "url": "https://seeing-theory.brown.edu/distributions/index.html",
-        "type": "article",
-        "source": "concept-curated"
-      },
-      {
-        "title": "Khan Academy — Random variables & distributions",
-        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
-        "type": "course",
-        "source": "concept-curated"
-      },
-      {
-        "title": "MIT 18.05 — Probability & Statistics (Spring 2022)",
-        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
-        "type": "course",
-        "source": "concept-curated"
+        "title": "Stanford CS229: Machine Learning Course | Summer 2019 (Anand Avati)",
+        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
       }
     ],
-    "search-ir": [
+    "transformers": [
       {
-        "title": "Stanford IR Book — Tokenization",
-        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "IndoBERT (IndoNLU)",
+        "url": "https://github.com/indobenchmark/indonlu",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Let's build the GPT Tokenizer (Karpathy)",
-        "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
-        "type": "video",
-        "source": "concept-curated"
+        "title": "IndoBERT (IndoLEM)",
+        "url": "https://github.com/indolem/indolem",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Stanford IR Book — The term vocabulary & postings lists",
-        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "NusaCrowd / Cendol",
+        "url": "https://github.com/IndoNLP/nusa-crowd",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Stanford IR Book — Scoring & term weighting",
-        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "Sailor",
+        "url": "https://github.com/sail-sg/sailor-llm",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Okapi BM25 (Wikipedia)",
-        "url": "https://en.wikipedia.org/wiki/Okapi_BM25",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "SEA-LION",
+        "url": "https://github.com/aisingapore/sealion",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Practical BM25 (Elastic blog)",
-        "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables",
-        "type": "article",
-        "source": "concept-curated"
+        "title": "ParsBERT",
+        "url": "https://github.com/hooshvare/parsbert",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Stanford IR Book — Evaluation in IR",
-        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "PersianMind",
+        "url": "https://huggingface.co/universitytehran/PersianMind-v1.0",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "BEIR: Heterogeneous IR Benchmark",
-        "url": "https://github.com/beir-cellar/beir",
-        "type": "article",
-        "source": "concept-curated"
+        "title": "Dorna",
+        "url": "https://huggingface.co/PartAI/Dorna-Llama3-8B-Instruct",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Reciprocal Rank Fusion (Cormack et al.)",
-        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
-        "type": "paper",
-        "source": "concept-curated"
+        "title": "BERTimbau",
+        "url": "https://github.com/neuralmind-ai/portuguese-bert",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Sentence-Transformers — Cross-Encoders",
-        "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "Sabiá",
+        "url": "https://huggingface.co/maritaca-ai",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Stanford IR Book — Query expansion",
-        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
-        "type": "doc",
-        "source": "concept-curated"
+        "title": "Albertina",
+        "url": "https://huggingface.co/PORTULAN",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer",
-        "type": "article",
-        "source": "concept-curated"
+        "title": "WangchanBERTa",
+        "url": "https://github.com/vistec-AI/thai2transformers",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Introduction to Information Retrieval (Manning et al.)",
-        "url": "https://nlp.stanford.edu/IR-book/",
-        "type": "book",
-        "source": "curated-pad"
+        "title": "Typhoon",
+        "url": "https://huggingface.co/scb10x",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Pinecone — Learn vector search",
-        "url": "https://www.pinecone.io/learn/",
-        "type": "article",
-        "source": "curated-pad"
+        "title": "OpenThaiGPT",
+        "url": "https://huggingface.co/openthaigpt",
+        "kind": "link",
+        "source": "keon/awesome-nlp"
       },
       {
-        "title": "Elastic — BM25 similarity",
-        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html",
-        "type": "docs",
-        "source": "curated-pad"
+        "title": "LLM Engineer's Handbook",
+        "url": "https://packt.link/a/9781836200079",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
       },
       {
-        "title": "Lucene scoring",
-        "url": "https://lucene.apache.org/core/core_9_0_0/core/org/apache/lucene/search/similarities/BM25Similarity.html",
-        "type": "docs",
-        "source": "curated-pad"
+        "title": "DeepWiki",
+        "url": "https://deepwiki.com/mlabonne/llm-course/",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
       },
       {
-        "title": "Pyserini",
-        "url": "https://github.com/castorini/pyserini",
-        "type": "tool",
-        "source": "curated-pad"
+        "title": "LLM AutoEval",
+        "url": "https://github.com/mlabonne/llm-autoeval",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
       },
       {
-        "title": "Tantivy — Rust search",
-        "url": "https://github.com/quickwit-oss/tantivy",
-        "type": "tool",
-        "source": "curated-pad"
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/2024-07-29_Finetune_Llama31.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
       },
       {
-        "title": "OpenSearch k-NN",
-        "url": "https://opensearch.org/docs/latest/search-plugins/knn/index/",
-        "type": "docs",
-        "source": "curated-pad"
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/2024-04-19_Fine_tune_Llama_3_with_ORPO.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
+      },
+      {
+        "title": "Article",
+        "url": "https://mlabonne.github.io/blog/posts/Fine_tune_Mistral_7b_with_DPO.html",
+        "kind": "link",
+        "source": "mlabonne/llm-course"
       }
     ],
     "vector-db": [
       {
         "title": "MTEB: Massive Text Embedding Benchmark",
         "url": "https://huggingface.co/spaces/mteb/leaderboard",
-        "type": "article",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Pinecone — Vector similarity explained",
         "url": "https://www.pinecone.io/learn/vector-similarity/",
-        "type": "article",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Nearest neighbor search (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Nearest_neighbor_search",
-        "type": "doc",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "FAISS — Getting started",
         "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started",
-        "type": "doc",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
         "url": "https://arxiv.org/abs/1603.09320",
-        "type": "paper",
+        "kind": "paper",
         "source": "concept-curated"
       },
       {
         "title": "Pinecone — IVF index",
         "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/",
-        "type": "article",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
         "url": "https://ieeexplore.ieee.org/document/5432202",
-        "type": "paper",
+        "kind": "paper",
         "source": "concept-curated"
       },
       {
         "title": "Pinecone — Filtering with metadata",
         "url": "https://www.pinecone.io/learn/vector-search-filtering/",
-        "type": "doc",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Weaviate — Filtered ANN search",
         "url": "https://weaviate.io/blog/speed-up-filtered-vector-search",
-        "type": "doc",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "ANN-Benchmarks",
         "url": "https://ann-benchmarks.com/",
-        "type": "article",
+        "kind": "link",
         "source": "concept-curated"
       },
       {
         "title": "Faiss wiki",
         "url": "https://github.com/facebookresearch/faiss/wiki",
-        "type": "docs",
+        "kind": "link",
         "source": "curated-pad"
       },
       {
         "title": "Product quantization paper",
         "url": "https://arxiv.org/abs/1011.3589",
-        "type": "paper",
+        "kind": "paper",
         "source": "curated-pad"
       },
       {
         "title": "Milvus docs",
         "url": "https://milvus.io/docs",
-        "type": "docs",
+        "kind": "link",
         "source": "curated-pad"
       },
       {
         "title": "Weaviate vector index guide",
         "url": "https://weaviate.io/developers/weaviate/concepts/vector-index",
-        "type": "docs",
+        "kind": "link",
         "source": "curated-pad"
       },
       {
         "title": "Qdrant — HNSW configuration",
         "url": "https://qdrant.tech/documentation/concepts/indexing/",
-        "type": "docs",
+        "kind": "link",
         "source": "curated-pad"
       },
       {
         "title": "Chroma docs",
         "url": "https://docs.trychroma.com/",
-        "type": "docs",
+        "kind": "link",
         "source": "curated-pad"
       },
       {
         "title": "pgvector",
         "url": "https://github.com/pgvector/pgvector",
-        "type": "tool",
+        "kind": "link",
         "source": "curated-pad"
+      },
+      {
+        "title": "DPR (Dense Passage Retrieval)",
+        "url": "https://arxiv.org/abs/2004.04906",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERT",
+        "url": "https://arxiv.org/abs/2004.12832",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "ColBERTv2",
+        "url": "https://arxiv.org/abs/2112.01488",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
       }
     ]
   }

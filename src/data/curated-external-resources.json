@@ -1,0 +1,789 @@
+{
+  "_meta": {
+    "description": "Pinned resources — prepended on every harvest, never dropped."
+  },
+  "byTag": {
+    "distributed-systems": [
+      {
+        "title": "MIT 6.824 — Distributed Systems",
+        "url": "https://pdos.csail.mit.edu/6.824/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-440 — Distributed Systems",
+        "url": "https://www.cs.cmu.edu/~15-440/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "The System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "curated"
+      }
+    ],
+    "runtime": [
+      {
+        "title": "MIT 6.1810 — Operating Systems",
+        "url": "https://pdos.csail.mit.edu/6.1810/2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-213 — Introduction to Computer Systems",
+        "url": "https://www.cs.cmu.edu/~213/",
+        "kind": "course",
+        "source": "curated"
+      }
+    ],
+    "system-design": [
+      {
+        "title": "The System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.824 — Distributed Systems",
+        "url": "https://pdos.csail.mit.edu/6.824/",
+        "kind": "course",
+        "source": "curated"
+      }
+    ],
+    "dsa": [
+      {
+        "title": "MIT 6.006 — Introduction to Algorithms",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Princeton COS 226 — Algorithms",
+        "url": "https://www.cs.princeton.edu/courses/archive/fall22/cos226/",
+        "kind": "course",
+        "source": "curated"
+      }
+    ],
+    "databases": [
+      {
+        "title": "CMU 15-445 — Introduction to Database Systems",
+        "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CMU 15-721 — Advanced Database Systems",
+        "url": "https://15721.courses.cs.cmu.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      }
+    ],
+    "ai-systems": [
+      {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Spring 2025 — Interactive lectures",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/",
+        "kind": "course",
+        "source": "curated"
+      }
+    ],
+    "training": [
+      {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Assignment 1 — Basics (tokenizer, transformer, train)",
+        "url": "https://github.com/stanford-cs336/assignment1-basics/tree/main",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Assignment 2 — Systems (Triton, distributed training)",
+        "url": "https://github.com/stanford-cs336/assignment2-systems/tree/main",
+        "kind": "link",
+        "source": "curated"
+      }
+    ],
+    "probability": [
+      {
+        "title": "Seeing Theory — Interactive probability (Brown)",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.041SC — Probabilistic Systems Analysis",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Khan Academy — Probability library",
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.05 — Introduction to Probability and Statistics",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Probability fundamentals playlist",
+        "url": "https://www.youtube.com/playlist?list=PLblh5FoqfyRmvlK1H-Yj7CtJ9OONaXq0T",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Basic Probability",
+        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Probability vs Likelihood",
+        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Information Theory (MacKay)",
+        "url": "https://www.inference.org.uk/itprnn/book.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Probability Distributions",
+        "url": "https://seeing-theory.brown.edu/distributions/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Random variables & distributions",
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Blitzstein — Introduction to Probability (Harvard)",
+        "url": "https://projects.iq.harvard.edu/stat110/home",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "MIT 6.041 Probabilistic Systems Analysis",
+        "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pishro-Nik — Introduction to Probability",
+        "url": "https://www.probabilitycourse.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Harvard Stat 110 lectures (YouTube)",
+        "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg",
+        "kind": "video",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Random variables — MIT OCW",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Conditional probability interactive",
+        "url": "https://setosa.io/ev/conditional-probability/",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ],
+    "statistics": [
+      {
+        "title": "Seeing Theory — Statistics & inference (Brown)",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "An Introduction to Statistical Learning (free book + videos)",
+        "url": "https://www.statlearning.com/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.650 — Statistics for Applications",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Khan Academy — Statistics & probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Statistics & ML explainers (channel)",
+        "url": "https://www.youtube.com/@statquest",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Evan Miller — A/B test sample size & significance",
+        "url": "https://www.evanmiller.org/ab-testing/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Statistical Rethinking (McElreath) — lecture playlist",
+        "url": "https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Descriptive Statistics",
+        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Hypothesis Testing",
+        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — p-values",
+        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Central Limit Theorem",
+        "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Central Limit Theorem",
+        "url": "https://www.youtube.com/watch?v=YAlJC6Hlv8M",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Evan Miller — Sample Size Calculator",
+        "url": "https://www.evanmiller.org/ab-testing/sample-size.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Spotify — Experimentation platform & SRM",
+        "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Bayesian Inference",
+        "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Maximum Likelihood",
+        "url": "https://www.youtube.com/watch?v=XepXbq9wr90",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Regression",
+        "url": "https://seeing-theory.brown.edu/regression/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Bias and Variance",
+        "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Inference",
+        "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ],
+    "quant": [
+      {
+        "title": "Python for Finance (Hilpisch) — notebooks",
+        "url": "https://github.com/yhilpisch/py4fi2nd",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Forecasting: Principles and Practice (Hyndman)",
+        "url": "https://otexts.com/fpp3/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551",
+        "kind": "paper",
+        "source": "curated"
+      },
+      {
+        "title": "QuantConnect — Backtesting docs",
+        "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/overview",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "Evan Miller — A/B testing statistics",
+        "url": "https://www.evanmiller.org/ab-testing/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "StatQuest — Stationarity",
+        "url": "https://www.youtube.com/watch?v=1Lh1HlLKV4g",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 6.041SC — Random processes",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "QuantStart — Beginners",
+        "url": "https://www.quantstart.com/articles/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Ernest Chan — Algorithmic Trading overview",
+        "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "QuantConnect Learn",
+        "url": "https://www.quantconnect.com/learning/",
+        "kind": "course",
+        "source": "curated-pad"
+      },
+      {
+        "title": "CFA Institute — Quantitative methods",
+        "url": "https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/quantitative-methods",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Python for Finance (Yves Hilpisch)",
+        "url": "https://www.oreilly.com/library/view/python-for-finance/9781492024330/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Epchan — Quantitative Trading blog",
+        "url": "https://epchan.blogspot.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Alpha Architect — Research posts",
+        "url": "https://alphaarchitect.com/blog/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "SSRN — Quantitative finance papers",
+        "url": "https://www.ssrn.com/index.cfm/en/janda/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "NBER — Asset pricing",
+        "url": "https://www.nber.org/research/data/asset-pricing",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Portfolio Visualizer",
+        "url": "https://www.portfoliovisualizer.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Quantpedia — Strategy summaries",
+        "url": "https://quantpedia.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ],
+    "mathematics": [
+      {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra",
+        "kind": "video",
+        "source": "curated"
+      },
+      {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "ISL — Statistical Learning (free)",
+        "url": "https://www.statlearning.com/",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "MIT 6.041SC — Probability",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "Computational Linear Algebra (fast.ai)",
+        "url": "https://github.com/fastai/numerical-linear-algebra",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Basic Probability",
+        "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — Probability vs Likelihood",
+        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Statistics",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Descriptive Statistics",
+        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 18.650 Statistics for Applications",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Hypothesis Testing",
+        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "StatQuest — p-values",
+        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Convex Optimization (Boyd & Vandenberghe)",
+        "url": "https://web.stanford.edu/~boyd/cvxbook/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Information Theory (MacKay)",
+        "url": "https://www.inference.org.uk/itprnn/book.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Seeing Theory — Probability Distributions",
+        "url": "https://seeing-theory.brown.edu/distributions/index.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Khan Academy — Random variables & distributions",
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library",
+        "kind": "course",
+        "source": "concept-curated"
+      },
+      {
+        "title": "MIT 18.05 — Probability & Statistics (Spring 2022)",
+        "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+        "kind": "course",
+        "source": "concept-curated"
+      }
+    ],
+    "search-ir": [
+      {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+        "kind": "video",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — The term vocabulary & postings lists",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Scoring & term weighting",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Practical BM25 (Elastic blog)",
+        "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Evaluation in IR",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "BEIR: Heterogeneous IR Benchmark",
+        "url": "https://github.com/beir-cellar/beir",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Sentence-Transformers — Cross-Encoders",
+        "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Stanford IR Book — Query expansion",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Introduction to Information Retrieval (Manning et al.)",
+        "url": "https://nlp.stanford.edu/IR-book/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pinecone — Learn vector search",
+        "url": "https://www.pinecone.io/learn/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Elastic — BM25 similarity",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Lucene scoring",
+        "url": "https://lucene.apache.org/core/core_9_0_0/core/org/apache/lucene/search/similarities/BM25Similarity.html",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Pyserini",
+        "url": "https://github.com/castorini/pyserini",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Tantivy — Rust search",
+        "url": "https://github.com/quickwit-oss/tantivy",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "OpenSearch k-NN",
+        "url": "https://opensearch.org/docs/latest/search-plugins/knn/index/",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ],
+    "vector-db": [
+      {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Pinecone — Vector similarity explained",
+        "url": "https://www.pinecone.io/learn/vector-similarity/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Nearest neighbor search (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Nearest_neighbor_search",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "FAISS — Getting started",
+        "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Pinecone — IVF index",
+        "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
+        "url": "https://ieeexplore.ieee.org/document/5432202",
+        "kind": "paper",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Pinecone — Filtering with metadata",
+        "url": "https://www.pinecone.io/learn/vector-search-filtering/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Weaviate — Filtered ANN search",
+        "url": "https://weaviate.io/blog/speed-up-filtered-vector-search",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "ANN-Benchmarks",
+        "url": "https://ann-benchmarks.com/",
+        "kind": "link",
+        "source": "concept-curated"
+      },
+      {
+        "title": "Faiss wiki",
+        "url": "https://github.com/facebookresearch/faiss/wiki",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Product quantization paper",
+        "url": "https://arxiv.org/abs/1011.3589",
+        "kind": "paper",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Milvus docs",
+        "url": "https://milvus.io/docs",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Weaviate vector index guide",
+        "url": "https://weaviate.io/developers/weaviate/concepts/vector-index",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Qdrant — HNSW configuration",
+        "url": "https://qdrant.tech/documentation/concepts/indexing/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "Chroma docs",
+        "url": "https://docs.trychroma.com/",
+        "kind": "link",
+        "source": "curated-pad"
+      },
+      {
+        "title": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "kind": "link",
+        "source": "curated-pad"
+      }
+    ]
+  }
+}

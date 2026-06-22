@@ -375,7 +375,8 @@ export function roadmapConceptIds(roadmap: Roadmap): string[] {
 
 // --- External resources (harvested from curated public lists) --------------
 // Source repos preserved in `_meta.source` for attribution. Re-run
-// `node scripts/harvest-developer-y.mjs` to refresh.
+// `pnpm sync:external-resources` to refresh (curated pins in
+// `src/data/curated-external-resources.json` are always kept).
 
 export interface ExternalResource {
   title: string;
