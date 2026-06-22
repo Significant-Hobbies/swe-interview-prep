@@ -826,6 +826,14 @@
       "answer": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time."
     },
     {
+      "id": "rq-ml-rl-alignment-core",
+      "conceptId": "ml-rl-alignment",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Explain GRPO-style RL alignment in your own words. Why use group-relative advantages and importance sampling?",
+      "answer": "The LM is a policy: sample several completions per prompt, score them, and push token probabilities toward better ones. Group-relative advantages (reward minus group mean, scaled by std) tell the model which completion beat its siblings on the same query. Importance sampling corrects for reusing rollouts from an older policy when training off-policy, and clipping keeps updates stable."
+    },
+    {
       "id": "rq-ml-data-engineering-core",
       "conceptId": "ml-data-engineering",
       "type": "explain",

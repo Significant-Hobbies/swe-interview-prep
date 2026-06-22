@@ -1361,6 +1361,11 @@
       "description": "Vectors, matrices, dot products, matmul, shapes.",
       "resources": [
         {
+          "title": "Math Notes for ML (Alisa Wuffles)",
+          "url": "https://alisawuffles.notion.site/math-notes",
+          "type": "course"
+        },
+        {
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
@@ -1633,6 +1638,11 @@
       ],
       "description": "Next-token prediction, context windows, perplexity.",
       "resources": [
+        {
+          "title": "Alisa's Book of LLMs (Alisa Wuffles)",
+          "url": "https://alisawuffles.notion.site/alisa-s-book-of-llms",
+          "type": "course"
+        },
         {
           "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
           "url": "https://cs336.stanford.edu/spring2025/",
@@ -2057,7 +2067,8 @@
         "ml-training"
       ],
       "related": [
-        "ml-data-engineering"
+        "ml-data-engineering",
+        "ml-rl-alignment"
       ],
       "description": "Frozen base, low-rank adapters, rank/alpha.",
       "resources": [
@@ -2093,6 +2104,63 @@
       ],
       "reviewQuestions": [
         "rq-ml-lora-core"
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "ml-rl-alignment",
+      "name": "RL Alignment (GRPO & Policy Gradient)",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "roadmaps": [
+        "swe-landscape"
+      ],
+      "difficulty": "advanced",
+      "priority": 2,
+      "prerequisites": [
+        "ml-lora",
+        "ml-sampling"
+      ],
+      "related": [
+        "ml-evaluation",
+        "ml-training"
+      ],
+      "description": "Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.",
+      "resources": [
+        {
+          "title": "Lightweight GRPO & RL intro (Murali)",
+          "url": "https://gitlostmurali.com/blog/grpo-intro/",
+          "type": "article"
+        },
+        {
+          "title": "Policy Gradient for LMs — RL101 notes (Hamish Ivison)",
+          "url": "https://ivison.id.au/2026/02/09/policy-gradient.html",
+          "type": "article"
+        },
+        {
+          "title": "Stanford CS336 — L15 Alignment: SFT & RLHF (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/61eddac004df975466cff0329b615f2d24230069/nonexecutable/2025%20Lecture%2015%20-%20RLHF%20Alignment.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "CS336 Assignment 5 — Alignment & reasoning RL",
+          "url": "https://github.com/stanford-cs336/assignment5-alignment",
+          "type": "doc"
+        },
+        {
+          "title": "Lilian Weng — Policy Gradient Algorithms",
+          "url": "https://lilianweng.github.io/posts/2018-04-08-policy-gradient/",
+          "type": "article"
+        }
+      ],
+      "mentalModel": "Post-training RL treats the LM as a policy: sample completions, score them with a reward model, then nudge token probabilities toward high-reward outputs. GRPO compares completions within a group (relative advantages) and reuses rollouts with importance sampling + clipping so training stays stable off-policy.",
+      "drills": [
+        "ml-grpo-group-advantage"
+      ],
+      "reviewQuestions": [
+        "rq-ml-rl-alignment-core"
       ],
       "artifacts": []
     },

@@ -58,7 +58,12 @@ function buildPack(concept) {
   const seen = new Set();
 
   function take(slot, link) {
-    if (pack[slot] || seen.has(link.url)) return;
+    if (seen.has(link.url)) return;
+    if (pack[slot]) {
+      pack.more.push(link);
+      seen.add(link.url);
+      return;
+    }
     pack[slot] = link;
     seen.add(link.url);
   }
@@ -85,7 +90,13 @@ function buildPack(concept) {
     pack.problem = { drillId, title: drillById[drillId].title };
   }
 
-  pack.more = (pack.more ?? []).filter(l => !seen.has(l.url));
+  const slotUrls = new Set(['video', 'paper', 'blog', 'book'].map(s => pack[s]?.url).filter(Boolean));
+  const moreSeen = new Set();
+  pack.more = (pack.more ?? []).filter(l => {
+    if (slotUrls.has(l.url) || moreSeen.has(l.url)) return false;
+    moreSeen.add(l.url);
+    return true;
+  });
   return pack;
 }
 

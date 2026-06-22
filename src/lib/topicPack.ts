@@ -90,15 +90,24 @@ export function buildTopicPack(concept: Concept, extraLinks: PackLink[] = []): T
 
   const seen = new Set<string>();
   function take(slot: PackMediaSlot, link: PackLink) {
-    if (pack[slot] || seen.has(link.url)) return;
+    if (seen.has(link.url)) return;
+    if (pack[slot]) {
+      pack.more.push(link);
+      seen.add(link.url);
+      return;
+    }
     pack[slot] = link;
     seen.add(link.url);
   }
 
   for (const r of concept.resources ?? []) {
+    const link = { title: r.title, url: r.url };
     const slot = classifyResource(r);
-    if (slot) take(slot, { title: r.title, url: r.url });
-    else pack.more.push({ title: r.title, url: r.url });
+    if (slot) take(slot, link);
+    else if (!seen.has(link.url)) {
+      pack.more.push(link);
+      seen.add(link.url);
+    }
   }
 
   for (const link of extraLinks) {
@@ -116,7 +125,13 @@ export function buildTopicPack(concept: Concept, extraLinks: PackLink[] = []): T
     pack.problem = { drillId, title: drill?.title ?? drillId };
   }
 
-  pack.more = pack.more.filter(l => !seen.has(l.url));
+  const slotUrls = new Set(PACK_SLOT_ORDER.map(s => pack[s]?.url).filter(Boolean));
+  const moreSeen = new Set<string>();
+  pack.more = pack.more.filter(l => {
+    if (slotUrls.has(l.url) || moreSeen.has(l.url)) return false;
+    moreSeen.add(l.url);
+    return true;
+  });
   return pack;
 }
 

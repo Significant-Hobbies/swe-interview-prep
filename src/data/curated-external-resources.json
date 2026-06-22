@@ -151,6 +151,24 @@
     ],
     "ai-systems": [
       {
+        "title": "Alisa's Book of LLMs (Alisa Wuffles)",
+        "url": "https://alisawuffles.notion.site/alisa-s-book-of-llms",
+        "kind": "course",
+        "source": "Alisa Wuffles"
+      },
+      {
+        "title": "Lightweight GRPO & RL intro (Murali)",
+        "url": "https://gitlostmurali.com/blog/grpo-intro/",
+        "kind": "link",
+        "source": "Murali — gitlostmurali.com"
+      },
+      {
+        "title": "Policy Gradient for LMs — RL101 notes (Hamish Ivison)",
+        "url": "https://ivison.id.au/2026/02/09/policy-gradient.html",
+        "kind": "link",
+        "source": "Hamish Ivison"
+      },
+      {
         "title": "dev_learning › awesome-ai-ml-resources",
         "url": "https://github.com/armankhondker/awesome-ai-ml-resources",
         "kind": "link",
@@ -183,7 +201,27 @@
         "source": "dev_learning"
       }
     ],
+    "language-modeling": [
+      {
+        "title": "Alisa's Book of LLMs (Alisa Wuffles)",
+        "url": "https://alisawuffles.notion.site/alisa-s-book-of-llms",
+        "kind": "course",
+        "source": "Alisa Wuffles"
+      }
+    ],
     "training": [
+      {
+        "title": "Lightweight GRPO & RL intro (Murali)",
+        "url": "https://gitlostmurali.com/blog/grpo-intro/",
+        "kind": "link",
+        "source": "Murali — gitlostmurali.com"
+      },
+      {
+        "title": "Policy Gradient for LMs — RL101 notes (Hamish Ivison)",
+        "url": "https://ivison.id.au/2026/02/09/policy-gradient.html",
+        "kind": "link",
+        "source": "Hamish Ivison"
+      },
       {
         "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
         "url": "https://cs336.stanford.edu/spring2025/",
@@ -534,6 +572,12 @@
       }
     ],
     "mathematics": [
+      {
+        "title": "Math Notes for ML (Alisa Wuffles)",
+        "url": "https://alisawuffles.notion.site/math-notes",
+        "kind": "course",
+        "source": "Alisa Wuffles"
+      },
       {
         "title": "3Blue1Brown — Essence of Linear Algebra",
         "url": "https://www.3blue1brown.com/topics/linear-algebra",

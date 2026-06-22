@@ -5,6 +5,7 @@ import conceptPacksData from '../data/concept-packs.json';
 import { CONCEPT_BY_ID, type Concept } from '../data/learning-os';
 import type { TopicPack } from './topicPack';
 import {
+  buildTopicPack,
   classifyResource,
   packCompleteness,
   writePromptForConcept,
@@ -29,6 +30,25 @@ describe('topicPack', () => {
       url: 'https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html',
       type: 'doc',
     })).toBe('book');
+  });
+
+  it('overflows duplicate media slots into more', () => {
+    const pack = buildTopicPack({
+      id: 'test',
+      name: 'Test',
+      tags: [],
+      difficulty: 'intro',
+      priority: 1,
+      prerequisites: [],
+      related: [],
+      description: 'x',
+      resources: [
+        { title: 'Blog A', url: 'https://example.com/a', type: 'article' },
+        { title: 'Blog B', url: 'https://example.com/b', type: 'article' },
+      ],
+    } as Concept);
+    expect(pack.blog?.url).toBe('https://example.com/a');
+    expect(pack.more.map(l => l.url)).toContain('https://example.com/b');
   });
 
   it('builds write prompt from mental model', () => {

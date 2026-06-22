@@ -45,7 +45,7 @@ The concept prereq graph mirrors the build order — you cannot meaningfully rev
 | 6     | Data engineering for style     | `ml-data-engineering` |
 | 7     | Browser systems                | `ml-browser-runtime` |
 | 8     | WebGPU acceleration            | `ml-webgpu` |
-| 9     | Evaluation & safety            | `ml-evaluation` |
+| 9     | Evaluation & safety            | `ml-evaluation`, `ml-rl-alignment` |
 
 ---
 
@@ -83,7 +83,7 @@ Covers: `ml-browser-runtime`.
 ### Weeks 11–12 — WebGPU prototype
 Build: WebGPU matmul, CPU/WebGPU parity tests, linear-forward acceleration.
 **Milestone:** one WebGPU kernel is correct and measurably faster than WASM.
-Covers: `ml-webgpu`, `ml-evaluation`.
+Covers: `ml-webgpu`, `ml-evaluation`, `ml-rl-alignment`.
 
 ---
 

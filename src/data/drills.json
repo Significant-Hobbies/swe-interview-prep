@@ -2502,6 +2502,29 @@
       ]
     },
     {
+      "id": "ml-grpo-group-advantage",
+      "title": "GRPO group-relative advantage",
+      "conceptId": "ml-rl-alignment",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Four completions with rewards [1.0, 0.5, 0.8, 0.3]. Mean μ=0.65, population std σ≈0.269. What is the normalized advantage for the top completion (1.0)?",
+      "expectedOutput": "(1.0 − 0.65) / 0.269 ≈ 1.30 — GRPO upweights this rollout relative to the group.",
+      "hints": [
+        "Advantage = (reward − mean) / std across the group.",
+        "Same prompt, multiple sampled completions — compare relatively, not absolutely."
+      ],
+      "solutionNotes": "GRPO normalizes rewards within a group so the policy learns which completion beat its siblings on the same query.",
+      "testCases": [
+        {
+          "setup": "function grpoAdv(r,mu,s){return (r-mu)/s;}",
+          "run": "console.log(grpoAdv(1.0,0.65,0.269).toFixed(2));",
+          "expect": [
+            "1.30"
+          ]
+        }
+      ]
+    },
+    {
       "id": "ml-lora-param-count",
       "title": "LoRA parameter count",
       "conceptId": "ml-lora",

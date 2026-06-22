@@ -72,6 +72,8 @@ need the serving lens.
 - [Anthropic — Transformer Circuits (interpretability)](https://transformer-circuits.pub/)
 - [How to Scale Your Model (JAX ML scaling book)](https://jax-ml.github.io/scaling-book/) · [HuggingFace — Ultra-Scale Playbook (2025)](https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook) — pretraining + parallelism recipes
 - [Sebastian Raschka — LLMs from scratch (repo)](https://github.com/rasbt/LLMs-from-scratch)
+- **Post-training RL** — [Murali — Lightweight GRPO & RL intro](https://gitlostmurali.com/blog/grpo-intro/) · [Hamish Ivison — Policy Gradient for LMs (RL101)](https://ivison.id.au/2026/02/09/policy-gradient.html) · [Lilian Weng — Policy Gradient Algorithms](https://lilianweng.github.io/posts/2018-04-08-policy-gradient/)
+- **Curated primers** — [Alisa Wuffles — Book of LLMs](https://alisawuffles.notion.site/alisa-s-book-of-llms) · [Math Notes for ML](https://alisawuffles.notion.site/math-notes)
 
 ## 2. Databases and storage engines
 
