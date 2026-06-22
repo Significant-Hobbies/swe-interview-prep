@@ -531,6 +531,15 @@
       "snippet": "…linked list. I'll mention three here: Worst solution:<br> Two pointers where one points to the head and one points to the last node. Each time you advance the last pointer by one and check whether the distance between head pointer to the moved pointer is big…"
     }
   ],
+  "sliding-window": [
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-data-structures-deque-readme-md",
+      "title": "Deque",
+      "snippet": "…right tool when you need **O(1) access at both ends**: - **Sliding window maximum/minimum** — maintain candidates in a monotonic deque so each element is pushed and popped at most once (overall O(n)). - **Browser history** — navigate backward (`removeFront`…"
+    }
+  ],
   "stack": [
     {
       "repoId": "javascript-questions",
