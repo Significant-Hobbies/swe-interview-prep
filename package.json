@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs && node scripts/ingest-library-rqs.mjs",
     "build-concept-index": "node scripts/build-concept-index.mjs",
+    "sync:concept-packs": "node scripts/generate-concept-packs.mjs",
     "ingest-library-rqs": "node scripts/ingest-library-rqs.mjs",
     "ingest-anki": "node scripts/ingest-anki.mjs",
     "ingest-leetcode": "node scripts/ingest-leetcode.mjs",

@@ -1,0 +1,3383 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-22",
+  "_meta": {
+    "slots": [
+      "video",
+      "paper",
+      "blog",
+      "book",
+      "problem",
+      "write"
+    ],
+    "stats": {
+      "video": 128,
+      "paper": 45,
+      "blog": 150,
+      "book": 139,
+      "problem": 151,
+      "write": 151,
+      "full": 36
+    }
+  },
+  "packs": {
+    "tokenization": {
+      "write": {
+        "prompt": "Explain \"Tokenization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Tokenization decides what counts as a 'word' for search"
+      },
+      "more": [],
+      "book": {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "build-tokenizer",
+        "title": "Build a search tokenizer"
+      }
+    },
+    "inverted-index": {
+      "write": {
+        "prompt": "Explain \"Inverted Index\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings)"
+      },
+      "more": [],
+      "book": {
+        "title": "Stanford IR Book — The term vocabulary & postings lists",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "build-inverted-index",
+        "title": "Build an inverted index"
+      }
+    },
+    "tf-idf": {
+      "write": {
+        "prompt": "Explain \"TF-IDF\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: TF-IDF says a term matters more when it appears often in a document (TF) but is rare across the corpus (IDF)"
+      },
+      "more": [],
+      "book": {
+        "title": "Stanford IR Book — Scoring & term weighting",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "calculate-tfidf",
+        "title": "Calculate a TF-IDF score by hand"
+      }
+    },
+    "bm25": {
+      "write": {
+        "prompt": "Explain \"BM25\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter)"
+      },
+      "more": [],
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "book": {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "calculate-bm25-score",
+        "title": "Calculate a BM25 score by hand"
+      }
+    },
+    "ranking-metrics": {
+      "write": {
+        "prompt": "Explain \"Ranking Metrics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Precision/recall measure set quality; MRR rewards getting one right answer near the top; nDCG rewards graded relevance discounted by rank"
+      },
+      "more": [],
+      "book": {
+        "title": "Stanford IR Book — Evaluation in IR",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "compute-precision-recall",
+        "title": "Compute precision and recall by hand"
+      }
+    },
+    "search-evals": {
+      "write": {
+        "prompt": "Explain \"Search Evals\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: You cannot improve retrieval you cannot measure"
+      },
+      "more": [],
+      "blog": {
+        "title": "BEIR: Heterogeneous IR Benchmark",
+        "url": "https://github.com/beir-cellar/beir"
+      },
+      "book": {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "build-search-eval-harness",
+        "title": "Build a search eval harness"
+      }
+    },
+    "hybrid-search": {
+      "write": {
+        "prompt": "Explain \"Hybrid Search\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Lexical search nails exact terms and rare tokens; vector search captures meaning"
+      },
+      "more": [],
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "blog": {
+        "title": "Elasticsearch — Hybrid search",
+        "url": "https://www.elastic.co/search-labs/blog/hybrid-search-elasticsearch"
+      },
+      "book": {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "problem": {
+        "drillId": "implement-rrf",
+        "title": "Implement reciprocal rank fusion"
+      }
+    },
+    "reranking": {
+      "write": {
+        "prompt": "Explain \"Reranking\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Retrieval is recall-oriented and cheap; reranking is precision-oriented and expensive"
+      },
+      "more": [],
+      "book": {
+        "title": "Sentence-Transformers — Cross-Encoders",
+        "url": "https://www.sbert.net/examples/applications/cross-encoder/README.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "cross-encoder-rerank",
+        "title": "Cross-encoder rerank top-k"
+      }
+    },
+    "query-rewriting": {
+      "write": {
+        "prompt": "Explain \"Query Rewriting\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent"
+      },
+      "more": [],
+      "book": {
+        "title": "Stanford IR Book — Query expansion",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "Okapi BM25 (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "spell-correct-query",
+        "title": "Spell-correct a search query"
+      }
+    },
+    "search-discovery": {
+      "write": {
+        "prompt": "Explain \"Search Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "book": {
+        "title": "Stanford IR Book — Tokenization",
+        "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
+      },
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "paper": {
+        "title": "Reciprocal Rank Fusion (Cormack et al.)",
+        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+      },
+      "problem": {
+        "drillId": "browse-vs-search-metrics",
+        "title": "Browse vs search metrics"
+      }
+    },
+    "embeddings": {
+      "write": {
+        "prompt": "Explain \"Embeddings\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An embedding model projects content into a space where 'close' means 'semantically similar'"
+      },
+      "more": [],
+      "blog": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "book": {
+        "title": "FAISS — Getting started",
+        "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "embed-and-search",
+        "title": "Embed a corpus and search it"
+      }
+    },
+    "vector-similarity": {
+      "write": {
+        "prompt": "Explain \"Vector Similarity\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Cosine measures angle (direction), dot product measures angle and magnitude, L2 measures straight-line distance"
+      },
+      "more": [],
+      "blog": {
+        "title": "Pinecone — Vector similarity explained",
+        "url": "https://www.pinecone.io/learn/vector-similarity/"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "implement-similarity-metrics",
+        "title": "Implement similarity metrics"
+      }
+    },
+    "topk-vector-search": {
+      "write": {
+        "prompt": "Explain \"Top-k Vector Search\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Top-k is a bounded selection problem: maintain a size-k min-heap of best candidates while scanning"
+      },
+      "more": [],
+      "blog": {
+        "title": "Nearest neighbor search (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Nearest_neighbor_search"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "implement-topk-heap",
+        "title": "Top-k with a bounded heap"
+      }
+    },
+    "brute-force-vector-db": {
+      "write": {
+        "prompt": "Explain \"Brute-Force Vector DB\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Brute force computes the metric against every stored vector"
+      },
+      "more": [],
+      "book": {
+        "title": "FAISS — Getting started",
+        "url": "https://github.com/facebookresearch/faiss/wiki/Getting-started"
+      },
+      "blog": {
+        "title": "Pinecone — Vector similarity explained",
+        "url": "https://www.pinecone.io/learn/vector-similarity/"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "build-brute-force-index",
+        "title": "Build a brute-force vector index"
+      }
+    },
+    "hnsw": {
+      "write": {
+        "prompt": "Explain \"HNSW\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search"
+      },
+      "more": [],
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "blog": {
+        "title": "Pinecone — Vector similarity explained",
+        "url": "https://www.pinecone.io/learn/vector-similarity/"
+      },
+      "problem": {
+        "drillId": "explain-hnsw-layers",
+        "title": "Explain HNSW search on paper"
+      }
+    },
+    "ivf": {
+      "write": {
+        "prompt": "Explain \"IVF (Inverted File)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: IVF partitions the space into Voronoi cells via k-means"
+      },
+      "more": [],
+      "blog": {
+        "title": "Pinecone — IVF index",
+        "url": "https://www.pinecone.io/learn/series/faiss/vector-indexes/"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "ivf-nprobe-recall",
+        "title": "IVF nprobe vs recall"
+      }
+    },
+    "product-quantization": {
+      "write": {
+        "prompt": "Explain \"Product Quantization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook"
+      },
+      "more": [],
+      "paper": {
+        "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
+        "url": "https://ieeexplore.ieee.org/document/5432202"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "blog": {
+        "title": "Pinecone — Vector similarity explained",
+        "url": "https://www.pinecone.io/learn/vector-similarity/"
+      },
+      "problem": {
+        "drillId": "pq-codebook-size",
+        "title": "PQ codebook footprint"
+      }
+    },
+    "metadata-filtering": {
+      "write": {
+        "prompt": "Explain \"Metadata Filtering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Real queries are 'nearest vectors WHERE tenant=X AND date>Y'"
+      },
+      "more": [],
+      "blog": {
+        "title": "Pinecone — Filtering with metadata",
+        "url": "https://www.pinecone.io/learn/vector-search-filtering/"
+      },
+      "book": {
+        "title": "Weaviate — Filtered ANN search",
+        "url": "https://weaviate.io/blog/speed-up-filtered-vector-search"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "implement-metadata-filter",
+        "title": "Add metadata filtering to vector search"
+      }
+    },
+    "recall-latency-tradeoffs": {
+      "write": {
+        "prompt": "Explain \"Recall / Latency Tradeoffs\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Every ANN knob trades recall for speed/memory"
+      },
+      "more": [],
+      "blog": {
+        "title": "ANN-Benchmarks",
+        "url": "https://ann-benchmarks.com/"
+      },
+      "book": {
+        "title": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://huggingface.co/spaces/mteb/leaderboard"
+      },
+      "paper": {
+        "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+        "url": "https://arxiv.org/abs/1603.09320"
+      },
+      "problem": {
+        "drillId": "read-recall-latency-curve",
+        "title": "Read a recall–latency curve"
+      }
+    },
+    "rag": {
+      "write": {
+        "prompt": "Explain \"RAG\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: RAG = retrieve relevant chunks, pack them into the prompt, then generate"
+      },
+      "more": [],
+      "paper": {
+        "title": "Retrieval-Augmented Generation (Lewis et al.)",
+        "url": "https://arxiv.org/abs/2005.11401"
+      },
+      "blog": {
+        "title": "Lilian Weng — Retrieval-Augmented Generation",
+        "url": "https://lilianweng.github.io/posts/2020-10-29-retrieval-augmented/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "build-rag-pipeline",
+        "title": "Build a minimal RAG pipeline"
+      }
+    },
+    "chunking": {
+      "write": {
+        "prompt": "Explain \"Chunking\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A chunk is the atomic unit of retrieval — too big and embeddings blur, too small and context is lost"
+      },
+      "more": [],
+      "blog": {
+        "title": "Pinecone — Chunking strategies",
+        "url": "https://www.pinecone.io/learn/chunking-strategies/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "build-chunker",
+        "title": "Build a structure-aware chunker"
+      }
+    },
+    "context-packing": {
+      "write": {
+        "prompt": "Explain \"Context Packing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Context is a budget"
+      },
+      "more": [],
+      "paper": {
+        "title": "Lost in the Middle (Liu et al.)",
+        "url": "https://arxiv.org/abs/2307.03172"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "pack-context-budget",
+        "title": "Pack chunks into context budget"
+      }
+    },
+    "structured-outputs": {
+      "write": {
+        "prompt": "Explain \"Structured Outputs\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Free text is unparseable glue between systems"
+      },
+      "more": [],
+      "blog": {
+        "title": "OpenAI — Structured Outputs",
+        "url": "https://platform.openai.com/docs/guides/structured-outputs"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "structured-extraction",
+        "title": "Schema-constrained extraction"
+      }
+    },
+    "tool-calling": {
+      "write": {
+        "prompt": "Explain \"Tool Calling\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context"
+      },
+      "more": [],
+      "blog": {
+        "title": "Anthropic — Tool use",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "build-tool-loop",
+        "title": "Build a tool-calling loop"
+      }
+    },
+    "agent-loops": {
+      "write": {
+        "prompt": "Explain \"Agent Loops\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An agent is a loop: the model proposes an action, a tool executes it, the observation re-enters context, repeat until done"
+      },
+      "more": [],
+      "blog": {
+        "title": "Building Effective Agents (Anthropic)",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "agent-step-limit",
+        "title": "Cap agent tool loop"
+      }
+    },
+    "model-routing": {
+      "write": {
+        "prompt": "Explain \"Model Routing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Not every request needs the frontier model"
+      },
+      "more": [],
+      "blog": {
+        "title": "Building Effective Agents (Anthropic)",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      "paper": {
+        "title": "Training Compute-Optimal LLMs (Chinchilla)",
+        "url": "https://arxiv.org/abs/2203.15556"
+      },
+      "book": {
+        "title": "How to Scale Your Model (JAX ML scaling book)",
+        "url": "https://jax-ml.github.io/scaling-book/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "route-by-query-cost",
+        "title": "Route by cost and difficulty"
+      }
+    },
+    "prompt-versioning": {
+      "write": {
+        "prompt": "Explain \"Prompt & Version Logging\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals"
+      },
+      "more": [],
+      "book": {
+        "title": "PostHog — LLM analytics",
+        "url": "https://posthog.com/docs/ai-engineering"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "prompt-version-diff",
+        "title": "Diff two prompt versions"
+      }
+    },
+    "llm-evals": {
+      "write": {
+        "prompt": "Explain \"LLM Evals\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Evals are unit tests for non-deterministic systems"
+      },
+      "more": [],
+      "blog": {
+        "title": "Your AI product needs evals (Hamel Husain)",
+        "url": "https://hamel.dev/blog/posts/evals/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "build-llm-eval",
+        "title": "Build an LLM eval"
+      }
+    },
+    "ml-math": {
+      "write": {
+        "prompt": "Explain \"ML Math Foundations\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty"
+      },
+      "more": [],
+      "book": {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html"
+      },
+      "video": {
+        "title": "Essence of Linear Algebra (3Blue1Brown)",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "problem": {
+        "drillId": "ml-dot-matmul-shapes",
+        "title": "Dot product and matmul shapes"
+      }
+    },
+    "ml-gradient-descent": {
+      "write": {
+        "prompt": "Explain \"Gradient Descent\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Gradient descent is repeated tiny adjustments"
+      },
+      "more": [],
+      "book": {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html"
+      },
+      "video": {
+        "title": "Gradient descent, how neural networks learn (3Blue1Brown)",
+        "url": "https://www.3blue1brown.com/lessons/gradient-descent"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "problem": {
+        "drillId": "ml-sgd-step-quadratic",
+        "title": "One SGD step on a quadratic"
+      }
+    },
+    "ml-backprop": {
+      "write": {
+        "prompt": "Explain \"Backpropagation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus"
+      },
+      "more": [],
+      "book": {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html"
+      },
+      "video": {
+        "title": "micrograd — backprop from scratch (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=VMj-3S1tku0"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "problem": {
+        "drillId": "ml-chain-rule-gate",
+        "title": "Chain rule on a tiny graph"
+      }
+    },
+    "ml-softmax-xent": {
+      "write": {
+        "prompt": "Explain \"Softmax & Cross-Entropy\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Softmax turns raw scores (logits) into probabilities that sum to 1"
+      },
+      "more": [],
+      "book": {
+        "title": "CS231n — Softmax & cross-entropy loss",
+        "url": "https://cs231n.github.io/optimization-2/"
+      },
+      "blog": {
+        "title": "Softmax function (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Softmax_function"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-softmax-cross-entropy",
+        "title": "Softmax and cross-entropy loss"
+      }
+    },
+    "ml-adamw": {
+      "write": {
+        "prompt": "Explain \"AdamW Optimizer\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: AdamW is the standard optimizer for training transformers"
+      },
+      "more": [],
+      "paper": {
+        "title": "Decoupled Weight Decay Regularization (Loshchilov & Hutter)",
+        "url": "https://arxiv.org/abs/1711.05101"
+      },
+      "book": {
+        "title": "CS231n — Adam, learning-rate schedules",
+        "url": "https://cs231n.github.io/optimization-2/"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-adamw-weight-decay",
+        "title": "AdamW vs L2-on-gradient"
+      }
+    },
+    "ml-tokenization": {
+      "write": {
+        "prompt": "Explain \"Tokenization (LLM)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word"
+      },
+      "more": [],
+      "video": {
+        "title": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
+      },
+      "blog": {
+        "title": "The Illustrated GPT-2 — BPE tokenization",
+        "url": "https://jalammar.github.io/illustrated-gpt2/"
+      },
+      "book": {
+        "title": "HuggingFace — Tokenizers",
+        "url": "https://huggingface.co/docs/tokenizers/index"
+      },
+      "problem": {
+        "drillId": "ml-bpe-merge-step",
+        "title": "One BPE merge step"
+      }
+    },
+    "ml-language-modeling": {
+      "write": {
+        "prompt": "Explain \"Language Modeling\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A language model does one thing: predict the next token given the ones before it"
+      },
+      "more": [],
+      "book": {
+        "title": "Neural Networks: Zero to Hero (Karpathy)",
+        "url": "https://karpathy.ai/zero-to-hero.html"
+      },
+      "blog": {
+        "title": "The Illustrated GPT-2 — language modeling objective",
+        "url": "https://jalammar.github.io/illustrated-gpt2/"
+      },
+      "video": {
+        "title": "Let's build GPT from scratch (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY"
+      },
+      "problem": {
+        "drillId": "ml-perplexity-from-nll",
+        "title": "Perplexity from average NLL"
+      }
+    },
+    "ml-sampling": {
+      "write": {
+        "prompt": "Explain \"Sampling & Decoding\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: After the model outputs a probability for each next token, you have to pick one"
+      },
+      "more": [],
+      "paper": {
+        "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
+        "url": "https://arxiv.org/abs/1904.09751"
+      },
+      "blog": {
+        "title": "The Illustrated GPT-2 — output sampling",
+        "url": "https://jalammar.github.io/illustrated-gpt2/"
+      },
+      "book": {
+        "title": "HuggingFace — Generation strategies",
+        "url": "https://huggingface.co/docs/transformers/en/generation_strategies"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-temperature-sampling",
+        "title": "Temperature scaling logits"
+      }
+    },
+    "ml-embeddings": {
+      "write": {
+        "prompt": "Explain \"Embeddings (Transformer)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space"
+      },
+      "more": [],
+      "blog": {
+        "title": "The Illustrated GPT-2 — token & position embeddings",
+        "url": "https://jalammar.github.io/illustrated-gpt2/"
+      },
+      "paper": {
+        "title": "CS224n — Self-Attention & Transformers (Stanford)",
+        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-sinusoidal-position",
+        "title": "Sinusoidal position encoding"
+      }
+    },
+    "ml-self-attention": {
+      "write": {
+        "prompt": "Explain \"Self-Attention\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Self-attention lets every token look at every other token and pull in what is relevant"
+      },
+      "more": [],
+      "paper": {
+        "title": "CS224n — Self-Attention & Transformers (Stanford)",
+        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
+      },
+      "blog": {
+        "title": "The Illustrated Transformer",
+        "url": "https://jalammar.github.io/illustrated-transformer/"
+      },
+      "video": {
+        "title": "Attention in transformers, visually (3Blue1Brown)",
+        "url": "https://www.3blue1brown.com/lessons/attention"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "problem": {
+        "drillId": "ml-scaled-dot-attention",
+        "title": "Scaled dot-product attention weights"
+      }
+    },
+    "ml-multi-head": {
+      "write": {
+        "prompt": "Explain \"Multi-Head Attention\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Attention lets each token in a sentence look at every other token and weight how relevant each one is"
+      },
+      "more": [],
+      "paper": {
+        "title": "CS224n — Self-Attention & Transformers (Stanford)",
+        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
+      },
+      "blog": {
+        "title": "The Illustrated Transformer",
+        "url": "https://jalammar.github.io/illustrated-transformer/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-multi-head-split",
+        "title": "Split embedding across heads"
+      }
+    },
+    "ml-transformer-block": {
+      "write": {
+        "prompt": "Explain \"Transformer Block\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm"
+      },
+      "more": [],
+      "paper": {
+        "title": "CS224n — Self-Attention & Transformers (Stanford)",
+        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
+      },
+      "blog": {
+        "title": "The Illustrated Transformer",
+        "url": "https://jalammar.github.io/illustrated-transformer/"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-pre-norm-residual",
+        "title": "Pre-LayerNorm residual block"
+      }
+    },
+    "ml-training": {
+      "write": {
+        "prompt": "Explain \"Training & Debugging\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data"
+      },
+      "more": [],
+      "blog": {
+        "title": "A Recipe for Training Neural Networks (Karpathy)",
+        "url": "https://karpathy.github.io/2019/04/25/recipe/"
+      },
+      "video": {
+        "title": "Let's reproduce GPT-2 (124M) — Karpathy",
+        "url": "https://www.youtube.com/watch?v=l8pRSuU81PU"
+      },
+      "book": {
+        "title": "How to Scale Your Model (JAX ML scaling book)",
+        "url": "https://jax-ml.github.io/scaling-book/"
+      },
+      "problem": {
+        "drillId": "ml-overfit-sanity-check",
+        "title": "Overfit a single batch sanity check"
+      }
+    },
+    "ml-checkpointing": {
+      "write": {
+        "prompt": "Explain \"Checkpointing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A checkpoint saves the weights and optimizer state so you can resume after a crash"
+      },
+      "more": [],
+      "blog": {
+        "title": "Saving & loading models (PyTorch)",
+        "url": "https://pytorch.org/tutorials/beginner/saving_loading_models.html"
+      },
+      "book": {
+        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-checkpoint-resume",
+        "title": "Checkpoint must include optimizer state"
+      }
+    },
+    "ml-lora": {
+      "write": {
+        "prompt": "Explain \"LoRA & PEFT\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights"
+      },
+      "more": [],
+      "paper": {
+        "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
+        "url": "https://arxiv.org/abs/2106.09685"
+      },
+      "blog": {
+        "title": "HuggingFace PEFT — LoRA guide",
+        "url": "https://huggingface.co/docs/peft/en/conceptual_guides/lora"
+      },
+      "book": {
+        "title": "How to Scale Your Model (JAX ML scaling book)",
+        "url": "https://jax-ml.github.io/scaling-book/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-lora-param-count",
+        "title": "LoRA parameter count"
+      }
+    },
+    "ml-data-engineering": {
+      "write": {
+        "prompt": "Explain \"Style Data Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: In ML, the dataset is the product"
+      },
+      "more": [],
+      "blog": {
+        "title": "Eugene Yan — Data Flywheels for LLM Applications",
+        "url": "https://eugeneyan.com/writing/llm-patterns/"
+      },
+      "book": {
+        "title": "Made With ML — Data engineering",
+        "url": "https://madewithml.com/courses/mlops/data-stack/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-token-budget-estimate",
+        "title": "Estimate training token budget"
+      }
+    },
+    "ml-browser-runtime": {
+      "write": {
+        "prompt": "Explain \"Browser ML Runtime\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow"
+      },
+      "more": [],
+      "book": {
+        "title": "Transformers.js (Hugging Face)",
+        "url": "https://huggingface.co/docs/transformers.js/index"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-wasm-linear-memory",
+        "title": "WASM linear memory growth"
+      }
+    },
+    "ml-webgpu": {
+      "write": {
+        "prompt": "Explain \"WebGPU Compute\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser"
+      },
+      "more": [],
+      "book": {
+        "title": "WebGPU API (MDN)",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
+      },
+      "blog": {
+        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
+        "url": "https://cs50.harvard.edu/ai/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-webgpu-buffer-alignment",
+        "title": "WebGPU buffer upload size"
+      }
+    },
+    "ml-evaluation": {
+      "write": {
+        "prompt": "Explain \"Model Evaluation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Offline eval (on a held-out test set) tells you the model got better"
+      },
+      "more": [],
+      "blog": {
+        "title": "Eugene Yan — Evaluation & Hallucination",
+        "url": "https://eugeneyan.com/writing/evals/"
+      },
+      "book": {
+        "title": "Hamel Husain — Your AI Product Needs Evals",
+        "url": "https://hamel.dev/blog/posts/evals/"
+      },
+      "video": {
+        "title": "Spring 2023",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
+      },
+      "problem": {
+        "drillId": "ml-eval-perplexity-vs-acc",
+        "title": "Perplexity vs classification accuracy"
+      }
+    },
+    "http-lifecycle": {
+      "write": {
+        "prompt": "Explain \"HTTP Lifecycle\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An HTTP request is a journey: resolve DNS, open a TCP connection, negotiate TLS, send the request, the server routes and responds, the connection is reused or closed"
+      },
+      "more": [],
+      "book": {
+        "title": "MDN — An overview of HTTP",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "http-idempotent-retry",
+        "title": "Idempotent POST retry"
+      }
+    },
+    "api-keys": {
+      "write": {
+        "prompt": "Explain \"API Keys\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An API key identifies a machine caller"
+      },
+      "more": [],
+      "book": {
+        "title": "OWASP — API Security Top 10 (Broken Auth)",
+        "url": "https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/"
+      },
+      "blog": {
+        "title": "Stripe — API key best practices",
+        "url": "https://docs.stripe.com/keys"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "problem": {
+        "drillId": "hash-api-key",
+        "title": "Hash and prefix API keys"
+      }
+    },
+    "rate-limiting": {
+      "write": {
+        "prompt": "Explain \"Rate Limiting\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Rate limiting protects a shared resource from any one caller"
+      },
+      "more": [],
+      "book": {
+        "title": "429 Too Many Requests (MDN)",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "implement-token-bucket",
+        "title": "Implement a token-bucket rate limiter"
+      }
+    },
+    "idempotency": {
+      "write": {
+        "prompt": "Explain \"Idempotency\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Networks make retries inevitable, and retrying a POST can charge a card twice"
+      },
+      "more": [],
+      "blog": {
+        "title": "Stripe — Designing robust APIs with idempotency",
+        "url": "https://stripe.com/blog/idempotency"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "implement-idempotency-key",
+        "title": "Implement idempotency keys"
+      }
+    },
+    "retries-dlq": {
+      "write": {
+        "prompt": "Explain \"Retries & DLQ\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable"
+      },
+      "more": [],
+      "blog": {
+        "title": "Timeouts, retries and backoff with jitter (AWS)",
+        "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "implement-backoff-jitter",
+        "title": "Implement backoff with jitter"
+      }
+    },
+    "webhooks": {
+      "write": {
+        "prompt": "Explain \"Webhooks\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A webhook is the provider calling your server when something happens, instead of your server polling them"
+      },
+      "more": [],
+      "blog": {
+        "title": "Stripe — Webhooks",
+        "url": "https://docs.stripe.com/webhooks"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "webhook-signature-verify",
+        "title": "Verify webhook HMAC"
+      }
+    },
+    "background-jobs": {
+      "write": {
+        "prompt": "Explain \"Background Jobs\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Background jobs move slow work off the request so the user gets a fast response"
+      },
+      "more": [],
+      "book": {
+        "title": "Sidekiq — The Job lifecycle",
+        "url": "https://github.com/sidekiq/sidekiq/wiki/Best-Practices"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "job-at-least-once",
+        "title": "At-least-once job delivery"
+      }
+    },
+    "caching": {
+      "write": {
+        "prompt": "Explain \"Caching\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A cache trades memory and staleness for speed"
+      },
+      "more": [],
+      "blog": {
+        "title": "HTTP caching (MDN)",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "cache-stampede",
+        "title": "Cache stampede"
+      }
+    },
+    "message-queues": {
+      "write": {
+        "prompt": "Explain \"Message Queues\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message"
+      },
+      "more": [],
+      "blog": {
+        "title": "Message queue (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Message_queue"
+      },
+      "book": {
+        "title": "Apache Kafka documentation",
+        "url": "https://kafka.apache.org/documentation/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "problem": {
+        "drillId": "queue-backpressure",
+        "title": "Queue backpressure"
+      }
+    },
+    "monitoring-analytics": {
+      "write": {
+        "prompt": "Explain \"Observability\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The three pillars answer different questions: metrics say something is wrong, traces say where, logs say why"
+      },
+      "more": [],
+      "book": {
+        "title": "Monitoring Distributed Systems (Google SRE Book)",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "slo-error-budget",
+        "title": "SLO error budget"
+      }
+    },
+    "api-design": {
+      "write": {
+        "prompt": "Explain \"API Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An API is a contract you cannot easily change"
+      },
+      "more": [],
+      "book": {
+        "title": "API design guide (Google Cloud)",
+        "url": "https://cloud.google.com/apis/design"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-paginated-api",
+        "title": "Design cursor pagination"
+      }
+    },
+    "auth-systems": {
+      "write": {
+        "prompt": "Explain \"Auth Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Authentication proves who you are; authorization decides what you may do"
+      },
+      "more": [],
+      "book": {
+        "title": "OAuth 2.0",
+        "url": "https://oauth.net/2/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "jwt-vs-session-revoke",
+        "title": "JWT revocation tradeoff"
+      }
+    },
+    "ecommerce-payments": {
+      "write": {
+        "prompt": "Explain \"Payments\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting"
+      },
+      "more": [],
+      "blog": {
+        "title": "Stripe Payments documentation",
+        "url": "https://docs.stripe.com/payments"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "payment-idempotency",
+        "title": "Idempotent charge"
+      }
+    },
+    "b-tree": {
+      "write": {
+        "prompt": "Explain \"B-Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A B-tree is a wide, shallow tree sized to disk pages: each node holds many keys so the tree stays ~3-4 levels deep even for billions of rows"
+      },
+      "more": [],
+      "paper": {
+        "title": "CMU 15-445 — Tree indexes",
+        "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "book": {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/"
+      },
+      "problem": {
+        "drillId": "b-tree-split",
+        "title": "B-tree page split"
+      }
+    },
+    "lsm-tree": {
+      "write": {
+        "prompt": "Explain \"LSM Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An LSM tree turns random writes into sequential ones: buffer writes in an in-memory memtable, flush to immutable sorted files (SSTables), and merge them in the background"
+      },
+      "more": [],
+      "book": {
+        "title": "RocksDB Wiki — LSM overview",
+        "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "build-memtable-sstable",
+        "title": "Build a memtable + SSTable flush"
+      }
+    },
+    "wal": {
+      "write": {
+        "prompt": "Explain \"Write-Ahead Log\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The WAL is the database's promise: write the change to an append-only log and fsync it before touching the real data structure"
+      },
+      "more": [],
+      "book": {
+        "title": "PostgreSQL — Write-Ahead Logging",
+        "url": "https://www.postgresql.org/docs/current/wal-intro.html"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "build-wal",
+        "title": "Build a write-ahead log"
+      }
+    },
+    "compaction": {
+      "write": {
+        "prompt": "Explain \"Compaction\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An LSM tree keeps producing sorted files; without compaction reads get slower and deleted data lingers"
+      },
+      "more": [],
+      "book": {
+        "title": "RocksDB Compaction",
+        "url": "https://github.com/facebook/rocksdb/wiki/Compaction"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "lsm-compaction-levels",
+        "title": "LSM compaction levels"
+      }
+    },
+    "object-storage": {
+      "write": {
+        "prompt": "Explain \"Object Storage\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Object storage (S3/R2) is infinite, cheap, durable bytes — but with ~tens-of-ms latency and no in-place edits"
+      },
+      "more": [],
+      "blog": {
+        "title": "Turbopuffer — Architecture",
+        "url": "https://turbopuffer.com/architecture"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "book": {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/"
+      },
+      "problem": {
+        "drillId": "object-key-layout",
+        "title": "Object key layout"
+      }
+    },
+    "columnar-storage": {
+      "write": {
+        "prompt": "Explain \"Columnar Storage\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A column store groups data by column instead of by row"
+      },
+      "more": [],
+      "book": {
+        "title": "Apache Parquet — File format",
+        "url": "https://parquet.apache.org/docs/file-format/"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "columnar-vs-row",
+        "title": "Columnar vs row store"
+      }
+    },
+    "secondary-index": {
+      "write": {
+        "prompt": "Explain \"Secondary Indexes\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match"
+      },
+      "more": [],
+      "blog": {
+        "title": "Database index (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Database_index"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "book": {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/"
+      },
+      "problem": {
+        "drillId": "secondary-index-write",
+        "title": "Secondary index write cost"
+      }
+    },
+    "storage-retrieval": {
+      "write": {
+        "prompt": "Explain \"Storage Engines\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A storage engine is the layer that actually puts bytes on disk and finds them again"
+      },
+      "more": [],
+      "book": {
+        "title": "Designing Data-Intensive Applications",
+        "url": "https://dataintensive.net/"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "storage-vs-retrieval",
+        "title": "Storage vs retrieval API"
+      }
+    },
+    "sharding": {
+      "write": {
+        "prompt": "Explain \"Sharding\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Sharding splits one dataset across many machines so it scales past a single box"
+      },
+      "more": [],
+      "book": {
+        "title": "Designing Data-Intensive Applications",
+        "url": "https://dataintensive.net/"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "shard-key-choice",
+        "title": "Pick a shard key"
+      }
+    },
+    "replication": {
+      "write": {
+        "prompt": "Explain \"Replication\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Replication keeps copies of data on multiple nodes for durability and read scaling"
+      },
+      "more": [],
+      "book": {
+        "title": "Designing Data-Intensive Applications",
+        "url": "https://dataintensive.net/"
+      },
+      "blog": {
+        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
+        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "problem": {
+        "drillId": "replication-lag-read",
+        "title": "Read-your-writes under lag"
+      }
+    },
+    "cap-theorem": {
+      "write": {
+        "prompt": "Explain \"CAP & Consistency Models\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data)"
+      },
+      "more": [],
+      "blog": {
+        "title": "CAP theorem (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/CAP_theorem"
+      },
+      "video": {
+        "title": "Lectures - YouTube",
+        "url": "https://www.youtube.com/playlist?list=PLstRzn3gXZMdXqAiVJ1NN2CoyXHqma7pQ"
+      },
+      "book": {
+        "title": "CS121 - Introduction to Relational Database Systems, Fall 2016 - Caltech",
+        "url": "http://users.cms.caltech.edu/~donnie/cs121/"
+      },
+      "problem": {
+        "drillId": "cap-partition-choice",
+        "title": "CAP under partition"
+      }
+    },
+    "object-modeling": {
+      "write": {
+        "prompt": "Explain \"Object Modeling\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Design Patterns",
+        "url": "https://refactoring.guru/design-patterns"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-parking-lot",
+        "title": "Design a parking lot"
+      }
+    },
+    "state-management": {
+      "write": {
+        "prompt": "Explain \"State Machines\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A state machine is a fixed set of states plus the rules for moving between them"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — State",
+        "url": "https://refactoring.guru/design-patterns/state"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-vending-machine",
+        "title": "Design a vending machine"
+      }
+    },
+    "strategy-pattern": {
+      "write": {
+        "prompt": "Explain \"Strategy Pattern\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Strategy",
+        "url": "https://refactoring.guru/design-patterns/strategy"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-pricing-strategies",
+        "title": "Pluggable pricing strategies"
+      }
+    },
+    "observer-pattern": {
+      "write": {
+        "prompt": "Explain \"Observer Pattern\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The observer pattern decouples who emits an event from who listens"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Observer",
+        "url": "https://refactoring.guru/design-patterns/observer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-pub-sub-bus",
+        "title": "In-process pub/sub bus"
+      }
+    },
+    "factory-creational": {
+      "write": {
+        "prompt": "Explain \"Factory & Creational\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Factory Method",
+        "url": "https://refactoring.guru/design-patterns/factory-method"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-notification-factory",
+        "title": "Notification factory"
+      }
+    },
+    "decorator-structural": {
+      "write": {
+        "prompt": "Explain \"Decorator & Structural\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Decorator",
+        "url": "https://refactoring.guru/design-patterns/decorator"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-coffee-decorator",
+        "title": "Coffee-shop order decorator"
+      }
+    },
+    "concurrency-design": {
+      "write": {
+        "prompt": "Explain \"Concurrency Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Concurrency bugs are usually not \"add more locks"
+      },
+      "more": [],
+      "blog": {
+        "title": "Concurrency (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Concurrency_(computer_science)"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-bank-account-locking",
+        "title": "Concurrent bank transfers"
+      }
+    },
+    "command-chain": {
+      "write": {
+        "prompt": "Explain \"Command & Chain\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The command pattern turns an action into a small object you can store, queue, log, or reverse"
+      },
+      "more": [],
+      "book": {
+        "title": "Refactoring Guru — Command",
+        "url": "https://refactoring.guru/design-patterns/command"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-undo-redo",
+        "title": "Undo / redo stack"
+      }
+    },
+    "booking-inventory": {
+      "write": {
+        "prompt": "Explain \"Booking & Inventory\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Booking systems are about \"holds\" — a reservation is itself a write that blocks other people"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-hotel-booking",
+        "title": "Hotel booking system"
+      }
+    },
+    "game-design": {
+      "write": {
+        "prompt": "Explain \"Game/Simulation Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Realtime game servers run a tight loop over a shared world state"
+      },
+      "more": [],
+      "book": {
+        "title": "Hugo Lin — Designing a tic-tac-toe / chess engine",
+        "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-online-game-server",
+        "title": "Realtime game server"
+      }
+    },
+    "load-balancing": {
+      "write": {
+        "prompt": "Explain \"Load Balancing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A load balancer is the seam between \"one address\" and \"many servers\""
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-load-balancer",
+        "title": "L7 load balancer"
+      }
+    },
+    "consistent-hashing": {
+      "write": {
+        "prompt": "Explain \"Consistent Hashing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them)"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-consistent-hashing",
+        "title": "Consistent-hash key router"
+      }
+    },
+    "consensus": {
+      "write": {
+        "prompt": "Explain \"Consensus\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Consensus is how a cluster agrees on one value despite crashes and network delays"
+      },
+      "more": [],
+      "book": {
+        "title": "The Raft Consensus Algorithm",
+        "url": "https://raft.github.io/"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "blog": {
+        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
+        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+      },
+      "problem": {
+        "drillId": "design-leader-election",
+        "title": "Leader election walkthrough"
+      }
+    },
+    "distributed-infra": {
+      "write": {
+        "prompt": "Explain \"Distributed Infra\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Distributed systems multiply the ways things can fail"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-rate-limiter",
+        "title": "Distributed rate limiter"
+      }
+    },
+    "messaging-realtime": {
+      "write": {
+        "prompt": "Explain \"Real-time Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Realtime messaging is long-lived connections plus a message fan-out problem"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-chat-system",
+        "title": "Realtime chat system"
+      }
+    },
+    "social-media": {
+      "write": {
+        "prompt": "Explain \"Feed Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read)"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-news-feed",
+        "title": "News feed (Twitter-style)"
+      }
+    },
+    "streaming-media": {
+      "write": {
+        "prompt": "Explain \"Streaming Media\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Video streaming is CDN plus adaptive bitrate (HLS or DASH)"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-video-streaming",
+        "title": "Video streaming (Netflix-style)"
+      }
+    },
+    "location-transport": {
+      "write": {
+        "prompt": "Explain \"Geo Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-ride-sharing",
+        "title": "Ride-sharing dispatch"
+      }
+    },
+    "collaboration-productivity": {
+      "write": {
+        "prompt": "Explain \"Collaboration Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-collaborative-editor",
+        "title": "Collaborative doc editor"
+      }
+    },
+    "search-platform-design": {
+      "write": {
+        "prompt": "Explain \"Search Platform Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A search platform splits into an ingestion/indexing path (durable, batchy, write-optimized) and a query path (low-latency, cacheable, read-optimized)"
+      },
+      "more": [],
+      "blog": {
+        "title": "System Design Primer",
+        "url": "https://github.com/donnemartin/system-design-primer"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-search-platform",
+        "title": "Search platform end-to-end"
+      }
+    },
+    "rag-system-design": {
+      "write": {
+        "prompt": "Explain \"RAG System Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate), bound by an eval harness that gates every change"
+      },
+      "more": [],
+      "blog": {
+        "title": "Building Effective Agents (Anthropic)",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      "video": {
+        "title": "Watch Lectures",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
+      },
+      "book": {
+        "title": "CS361 - COMPUTER SYSTEMS - UIC",
+        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+      },
+      "problem": {
+        "drillId": "design-rag-system",
+        "title": "Production RAG pipeline"
+      }
+    },
+    "array-hashing": {
+      "write": {
+        "prompt": "Explain \"Arrays & Hashing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A hash map trades memory for time: it turns an O(n) scan for \"have I seen this"
+      },
+      "more": [],
+      "blog": {
+        "title": "Hash table (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Hash_table"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "two-sum-hashmap",
+        "title": "Two Sum with a hash map"
+      }
+    },
+    "two-pointers": {
+      "write": {
+        "prompt": "Explain \"Two Pointers\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property"
+      },
+      "more": [],
+      "book": {
+        "title": "NeetCode Roadmap",
+        "url": "https://neetcode.io/roadmap"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "valid-palindrome-two-pointers",
+        "title": "Valid palindrome with two pointers"
+      }
+    },
+    "sliding-window": {
+      "write": {
+        "prompt": "Explain \"Sliding Window\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves"
+      },
+      "more": [],
+      "book": {
+        "title": "NeetCode Roadmap",
+        "url": "https://neetcode.io/roadmap"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "longest-substring-sliding-window",
+        "title": "Longest substring without repeats"
+      }
+    },
+    "stack": {
+      "write": {
+        "prompt": "Explain \"Stack\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A stack is last-in-first-out: the last thing you pushed is the first thing you pop"
+      },
+      "more": [],
+      "blog": {
+        "title": "Stack (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Stack_(abstract_data_type)"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "valid-parentheses-stack",
+        "title": "Valid parentheses with a stack"
+      }
+    },
+    "binary-search": {
+      "write": {
+        "prompt": "Explain \"Binary Search\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Binary search is not about sorted arrays — it is about a monotonic predicate"
+      },
+      "more": [],
+      "blog": {
+        "title": "Binary search algorithm (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Binary_search_algorithm"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "search-rotated-array",
+        "title": "Search in a rotated sorted array"
+      }
+    },
+    "linked-list": {
+      "write": {
+        "prompt": "Explain \"Linked List\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer"
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Linked List",
+        "url": "https://visualgo.net/en/list"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "reverse-linked-list",
+        "title": "Reverse a linked list in place"
+      }
+    },
+    "trees": {
+      "write": {
+        "prompt": "Explain \"Trees\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A tree is recursion made concrete: almost every tree problem is \"solve it for the children, then combine\""
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Binary Search Tree",
+        "url": "https://visualgo.net/en/bst"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "level-order-traversal",
+        "title": "Binary tree level-order traversal"
+      }
+    },
+    "tries": {
+      "write": {
+        "prompt": "Explain \"Trie\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A trie stores strings in a tree where each path from the root spells out a prefix"
+      },
+      "more": [],
+      "blog": {
+        "title": "Trie (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Trie"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "trie-prefix-search",
+        "title": "Trie prefix membership"
+      }
+    },
+    "heap": {
+      "write": {
+        "prompt": "Explain \"Heap / Priority Queue\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A heap gives you the min or max in O(1) and re-balances in O(log n)"
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Binary Heap",
+        "url": "https://visualgo.net/en/heap"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "kth-largest-heap",
+        "title": "Kth largest element with a heap"
+      }
+    },
+    "backtracking": {
+      "write": {
+        "prompt": "Explain \"Backtracking\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Backtracking is \"try a choice, recurse, undo if it does not work, try the next one"
+      },
+      "more": [],
+      "blog": {
+        "title": "Backtracking (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Backtracking"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "subsets-backtracking",
+        "title": "Generate all subsets"
+      }
+    },
+    "graphs": {
+      "write": {
+        "prompt": "Explain \"Graphs\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find)"
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Graph Traversal",
+        "url": "https://visualgo.net/en/dfsbfs"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "number-of-islands",
+        "title": "Number of islands"
+      }
+    },
+    "shortest-path": {
+      "write": {
+        "prompt": "Explain \"Shortest Path\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal"
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Single-Source Shortest Paths",
+        "url": "https://visualgo.net/en/sssp"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "dijkstra-shortest-path",
+        "title": "Dijkstra shortest path"
+      }
+    },
+    "union-find": {
+      "write": {
+        "prompt": "Explain \"Union-Find\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id"
+      },
+      "more": [],
+      "book": {
+        "title": "VisuAlgo — Union-Find Disjoint Sets",
+        "url": "https://visualgo.net/en/ufds"
+      },
+      "blog": {
+        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
+        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "problem": {
+        "drillId": "union-find-connected-components",
+        "title": "Union-find component count"
+      }
+    },
+    "dp-1d": {
+      "write": {
+        "prompt": "Explain \"1D DP\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Dynamic programming is recursion with the repeated work cached"
+      },
+      "more": [],
+      "blog": {
+        "title": "Dynamic programming (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Dynamic_programming"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "house-robber-dp",
+        "title": "House robber (1D DP)"
+      }
+    },
+    "dp-2d": {
+      "write": {
+        "prompt": "Explain \"2D DP\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: 2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left)"
+      },
+      "more": [],
+      "blog": {
+        "title": "Dynamic programming (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Dynamic_programming"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "grid-min-path-dp",
+        "title": "Minimum path sum in a grid"
+      }
+    },
+    "greedy": {
+      "write": {
+        "prompt": "Explain \"Greedy\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A greedy algorithm always picks the choice that looks best right now"
+      },
+      "more": [],
+      "blog": {
+        "title": "Greedy algorithm (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Greedy_algorithm"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "activity-selection-greedy",
+        "title": "Activity selection greedy"
+      }
+    },
+    "intervals": {
+      "write": {
+        "prompt": "Explain \"Intervals\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Interval problems almost always start by sorting — usually by start time, sometimes by end"
+      },
+      "more": [],
+      "blog": {
+        "title": "Interval scheduling (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Interval_scheduling"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "merge-intervals",
+        "title": "Merge overlapping intervals"
+      }
+    },
+    "math-geometry": {
+      "write": {
+        "prompt": "Explain \"Math & Geometry\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection)"
+      },
+      "more": [],
+      "blog": {
+        "title": "Computational geometry (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Computational_geometry"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "gcd-modular",
+        "title": "GCD and modulo arithmetic"
+      }
+    },
+    "bit-manipulation": {
+      "write": {
+        "prompt": "Explain \"Bit Manipulation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND"
+      },
+      "more": [],
+      "blog": {
+        "title": "Bitwise operation (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Bitwise_operation"
+      },
+      "video": {
+        "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
+        "url": "https://www.youtube.com/watch?v=0qF7tPSQdCg"
+      },
+      "book": {
+        "title": "6.006 - Introduction to Algorithms, MIT OCW",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/video_galleries/lecture-videos/"
+      },
+      "problem": {
+        "drillId": "single-number-xor",
+        "title": "Find the single number (XOR)"
+      }
+    },
+    "leadership-and-influence": {
+      "write": {
+        "prompt": "Explain \"Leadership\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Leadership without authority is getting people aligned on an outcome when you cannot order them to do it"
+      },
+      "more": [],
+      "blog": {
+        "title": "Leadership (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Leadership"
+      },
+      "problem": {
+        "drillId": "star-leadership",
+        "title": "STAR: leadership story"
+      }
+    },
+    "conflict-resolution": {
+      "write": {
+        "prompt": "Explain \"Conflict Resolution\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Conflict means information surfaced — two people disagree about something that was probably already there"
+      },
+      "more": [],
+      "blog": {
+        "title": "Conflict resolution (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Conflict_resolution"
+      },
+      "problem": {
+        "drillId": "star-conflict",
+        "title": "STAR: peer conflict"
+      }
+    },
+    "problem-solving-and-decision-making": {
+      "write": {
+        "prompt": "Explain \"Decision Making\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Decisions are bets you make with incomplete information"
+      },
+      "more": [],
+      "blog": {
+        "title": "Decision-making (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Decision-making"
+      },
+      "problem": {
+        "drillId": "star-tough-decision",
+        "title": "STAR: tough decision"
+      }
+    },
+    "teamwork-and-collaboration": {
+      "write": {
+        "prompt": "Explain \"Collaboration\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Collaboration means making the other person's job easier than they were expecting"
+      },
+      "more": [],
+      "blog": {
+        "title": "Teamwork (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Teamwork"
+      },
+      "problem": {
+        "drillId": "star-cross-team",
+        "title": "STAR: cross-team collab"
+      }
+    },
+    "failure-and-learning": {
+      "write": {
+        "prompt": "Explain \"Failure & Learning\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A real failure cost something you cannot get back"
+      },
+      "more": [],
+      "blog": {
+        "title": "STAR interview method (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
+      },
+      "problem": {
+        "drillId": "star-failure",
+        "title": "STAR: a real failure"
+      }
+    },
+    "communication": {
+      "write": {
+        "prompt": "Explain \"Communication\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Good communication is audience-first: after listening, the other person's next decision should be easier"
+      },
+      "more": [],
+      "blog": {
+        "title": "Communication (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Communication"
+      },
+      "problem": {
+        "drillId": "star-communication",
+        "title": "STAR: explaining to a non-expert"
+      }
+    },
+    "time-management-and-prioritization": {
+      "write": {
+        "prompt": "Explain \"Prioritization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Prioritization is saying no to good things, not bad ones"
+      },
+      "more": [],
+      "blog": {
+        "title": "Time management (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Time_management"
+      },
+      "problem": {
+        "drillId": "star-prioritization",
+        "title": "STAR: ruthless prioritization"
+      }
+    },
+    "innovation-and-creativity": {
+      "write": {
+        "prompt": "Explain \"Innovation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted"
+      },
+      "more": [],
+      "blog": {
+        "title": "Creativity (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Creativity"
+      },
+      "problem": {
+        "drillId": "star-innovation",
+        "title": "STAR: an unconventional idea"
+      }
+    },
+    "customer-obsession": {
+      "write": {
+        "prompt": "Explain \"Customer Obsession\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Customer obsession is not saying yes to whatever they ask"
+      },
+      "more": [],
+      "blog": {
+        "title": "STAR interview method (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
+      },
+      "problem": {
+        "drillId": "star-customer-feedback",
+        "title": "STAR: acting on customer feedback"
+      }
+    },
+    "ownership-and-accountability": {
+      "write": {
+        "prompt": "Explain \"Ownership\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Ownership means closing the loop, not playing the hero"
+      },
+      "more": [],
+      "blog": {
+        "title": "STAR interview method (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
+      },
+      "problem": {
+        "drillId": "star-ownership",
+        "title": "STAR: end-to-end ownership"
+      }
+    },
+    "positioning": {
+      "write": {
+        "prompt": "Explain \"Positioning\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Positioning answers two questions: \"for whom\" and \"compared to what alternative"
+      },
+      "more": [],
+      "blog": {
+        "title": "April Dunford — Positioning",
+        "url": "https://www.aprildunford.com/post/the-perils-of-positioning"
+      },
+      "problem": {
+        "drillId": "draft-positioning-statement",
+        "title": "Draft a product positioning statement"
+      }
+    },
+    "landing-pages": {
+      "write": {
+        "prompt": "Explain \"Landing Pages\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A landing page has one job: get the right visitor to take one action"
+      },
+      "more": [],
+      "blog": {
+        "title": "Julian Shapiro — Marketing & landing pages",
+        "url": "https://www.julian.com/guide/marketing/landing-pages"
+      },
+      "book": {
+        "title": "Marketing Examples — Landing page teardowns",
+        "url": "https://marketingexamples.com/landing-page"
+      },
+      "problem": {
+        "drillId": "critique-landing-page",
+        "title": "Critique a real landing page"
+      }
+    },
+    "seo": {
+      "write": {
+        "prompt": "Explain \"SEO\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links"
+      },
+      "more": [],
+      "blog": {
+        "title": "SEO Starter Guide (Google Search Central)",
+        "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+      },
+      "problem": {
+        "drillId": "audit-seo-onpage",
+        "title": "On-page SEO audit"
+      }
+    },
+    "product-analytics": {
+      "write": {
+        "prompt": "Explain \"Product Analytics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on"
+      },
+      "more": [],
+      "book": {
+        "title": "PostHog — Product analytics docs",
+        "url": "https://posthog.com/docs/product-analytics"
+      },
+      "problem": {
+        "drillId": "define-north-star-metric",
+        "title": "Define a north-star metric"
+      }
+    },
+    "vectors-and-spaces": {
+      "write": {
+        "prompt": "Explain \"Vectors & Vector Spaces\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A vector is a point and an arrow"
+      },
+      "more": [],
+      "video": {
+        "title": "Essence of Linear Algebra (3Blue1Brown)",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "problem": {
+        "drillId": "compute-dot-product",
+        "title": "Compute a dot product and angle"
+      }
+    },
+    "matrices-and-transformations": {
+      "write": {
+        "prompt": "Explain \"Matrices & Linear Transformations\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A matrix is a machine that takes vectors in and pushes vectors out"
+      },
+      "more": [],
+      "book": {
+        "title": "MIT 18.06 Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "multiply-2x2-matrix",
+        "title": "Multiply 2×2 matrices by hand"
+      }
+    },
+    "eigenvalues-decomposition": {
+      "write": {
+        "prompt": "Explain \"Eigenvalues & Matrix Decomposition\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Most matrices scramble space, but eigenvectors are the special directions that only get stretched, not rotated"
+      },
+      "more": [],
+      "book": {
+        "title": "Computational Linear Algebra (fast.ai)",
+        "url": "https://github.com/fastai/numerical-linear-algebra"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "interpret-eigenvalue",
+        "title": "Interpret an eigenvalue"
+      }
+    },
+    "probability-fundamentals": {
+      "write": {
+        "prompt": "Explain \"Probability Fundamentals\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Probability is a bookkeeping system for uncertainty"
+      },
+      "more": [],
+      "book": {
+        "title": "Khan Academy — Probability",
+        "url": "https://www.khanacademy.org/math/statistics-probability/probability-library"
+      },
+      "blog": {
+        "title": "Seeing Theory — Basic Probability",
+        "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "problem": {
+        "drillId": "conditional-probability-bayes",
+        "title": "Apply Bayes' rule"
+      }
+    },
+    "random-variables": {
+      "write": {
+        "prompt": "Explain \"Random Variables & Distributions\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A random variable is a function from outcomes to numbers"
+      },
+      "more": [],
+      "book": {
+        "title": "MIT 6.041 Probabilistic Systems Analysis",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
+      },
+      "video": {
+        "title": "StatQuest — Probability vs Likelihood",
+        "url": "https://www.youtube.com/watch?v=pYx9wEc34tY"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "compute-expectation-variance",
+        "title": "Expectation and variance of a discrete RV"
+      }
+    },
+    "descriptive-statistics": {
+      "write": {
+        "prompt": "Explain \"Descriptive Statistics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Descriptive stats compress a dataset into a few numbers you can reason about"
+      },
+      "more": [],
+      "book": {
+        "title": "Khan Academy — Statistics",
+        "url": "https://www.khanacademy.org/math/statistics-probability"
+      },
+      "blog": {
+        "title": "Seeing Theory — Descriptive Statistics",
+        "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "summarize-dataset-stats",
+        "title": "Summarize a small dataset"
+      }
+    },
+    "estimation-confidence": {
+      "write": {
+        "prompt": "Explain \"Estimation & Confidence Intervals\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A confidence interval is a procedure, not a probability statement about one interval"
+      },
+      "more": [],
+      "book": {
+        "title": "MIT 18.650 Statistics for Applications",
+        "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "construct-confidence-interval",
+        "title": "Construct a 95% confidence interval"
+      }
+    },
+    "hypothesis-testing": {
+      "write": {
+        "prompt": "Explain \"Hypothesis Testing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Hypothesis testing asks: 'how surprising is this data if nothing real changed"
+      },
+      "more": [],
+      "blog": {
+        "title": "Seeing Theory — Hypothesis Testing",
+        "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html"
+      },
+      "video": {
+        "title": "StatQuest — p-values",
+        "url": "https://www.youtube.com/watch?v=vemZtHjaqKA"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "interpret-p-value",
+        "title": "Interpret a p-value correctly"
+      }
+    },
+    "regression-basics": {
+      "write": {
+        "prompt": "Explain \"Linear Regression\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Linear regression finds the best linear predictor — geometrically, it projects the target vector onto the column space of your features"
+      },
+      "more": [],
+      "book": {
+        "title": "An Introduction to Statistical Learning",
+        "url": "https://www.statlearning.com/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "fit-simple-regression",
+        "title": "Fit a simple linear regression"
+      }
+    },
+    "derivatives-and-gradients": {
+      "write": {
+        "prompt": "Explain \"Derivatives & Gradients\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The gradient points uphill steepest"
+      },
+      "more": [],
+      "book": {
+        "title": "CS231n — Optimization (gradients & backprop)",
+        "url": "https://cs231n.github.io/optimization-2/"
+      },
+      "video": {
+        "title": "Essence of Calculus (3Blue1Brown)",
+        "url": "https://www.3blue1brown.com/topics/calculus"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "compute-gradient-2d",
+        "title": "Compute a 2D gradient"
+      }
+    },
+    "multivariable-optimization": {
+      "write": {
+        "prompt": "Explain \"Multivariable Optimization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Convex functions have one bowl-shaped minimum — gradient descent cannot get stuck"
+      },
+      "more": [],
+      "book": {
+        "title": "Convex Optimization (Boyd & Vandenberghe)",
+        "url": "https://web.stanford.edu/~boyd/cvxbook/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "hessian-learning-rate",
+        "title": "Condition number and learning rate"
+      }
+    },
+    "information-entropy": {
+      "write": {
+        "prompt": "Explain \"Information & Entropy\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Entropy measures average surprise of a distribution"
+      },
+      "more": [],
+      "book": {
+        "title": "Information Theory (MacKay)",
+        "url": "https://www.inference.org.uk/itprnn/book.html"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "compute-cross-entropy-bits",
+        "title": "Compute cross-entropy in bits"
+      }
+    },
+    "classical-distributions": {
+      "write": {
+        "prompt": "Explain \"Classical Distributions\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Distributions are reusable uncertainty templates"
+      },
+      "more": [],
+      "blog": {
+        "title": "Seeing Theory — Probability Distributions",
+        "url": "https://seeing-theory.brown.edu/distributions/index.html"
+      },
+      "book": {
+        "title": "Khan Academy — Random variables & distributions",
+        "url": "https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "problem": {
+        "drillId": "match-distribution-scenario",
+        "title": "Match distribution to scenario"
+      }
+    },
+    "sampling-and-clt": {
+      "write": {
+        "prompt": "Explain \"Sampling & the Central Limit Theorem\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Your data is one draw from a bigger game"
+      },
+      "more": [],
+      "blog": {
+        "title": "Seeing Theory — Central Limit Theorem",
+        "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html"
+      },
+      "video": {
+        "title": "StatQuest — Central Limit Theorem",
+        "url": "https://www.youtube.com/watch?v=YAlJC6Hlv8M"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "clt-sample-size",
+        "title": "CLT and required sample size"
+      }
+    },
+    "ab-testing-engineering": {
+      "write": {
+        "prompt": "Explain \"A/B Testing for Engineers\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An A/B test is a hypothesis test with a deployment budget"
+      },
+      "more": [],
+      "book": {
+        "title": "Evan Miller — Sample Size Calculator",
+        "url": "https://www.evanmiller.org/ab-testing/sample-size.html"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "blog": {
+        "title": "Spotify — Experimentation platform & SRM",
+        "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "problem": {
+        "drillId": "design-ab-test-power",
+        "title": "Design an A/B test with power"
+      }
+    },
+    "bayesian-inference": {
+      "write": {
+        "prompt": "Explain \"Bayesian Inference\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Frequentist stats ask how surprising the data is under a null"
+      },
+      "more": [],
+      "blog": {
+        "title": "Seeing Theory — Bayesian Inference",
+        "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html"
+      },
+      "video": {
+        "title": "Statistical Rethinking (McElreath) — lectures",
+        "url": "https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "beta-binomial-posterior",
+        "title": "Beta-Binomial posterior update"
+      }
+    },
+    "maximum-likelihood": {
+      "write": {
+        "prompt": "Explain \"Maximum Likelihood Estimation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: MLE picks the parameter values that maximize the probability of what you actually saw"
+      },
+      "more": [],
+      "book": {
+        "title": "ISL — Chapter 4: Classification (MLE connection)",
+        "url": "https://www.statlearning.com/"
+      },
+      "video": {
+        "title": "StatQuest — Maximum Likelihood",
+        "url": "https://www.youtube.com/watch?v=XepXbq9wr90"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "mle-bernoulli-derivation",
+        "title": "MLE for Bernoulli trials"
+      }
+    },
+    "covariance-correlation": {
+      "write": {
+        "prompt": "Explain \"Covariance & Correlation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Covariance is signed co-fluctuation with units"
+      },
+      "more": [],
+      "blog": {
+        "title": "Seeing Theory — Regression",
+        "url": "https://seeing-theory.brown.edu/regression/index.html"
+      },
+      "book": {
+        "title": "ISL — Statistical Learning",
+        "url": "https://www.statlearning.com/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "compute-covariance-matrix",
+        "title": "Compute covariance and correlation matrix"
+      }
+    },
+    "bias-variance-overfitting": {
+      "write": {
+        "prompt": "Explain \"Bias, Variance & Overfitting\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Bias is systematic error from too-simple a model; variance is sensitivity to which sample you drew"
+      },
+      "more": [],
+      "video": {
+        "title": "StatQuest — Bias and Variance",
+        "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA"
+      },
+      "book": {
+        "title": "ISL — Model Assessment",
+        "url": "https://www.statlearning.com/"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Microsoft ExP platform paper",
+        "url": "https://arxiv.org/abs/1803.03218"
+      },
+      "problem": {
+        "drillId": "diagnose-overfit-split",
+        "title": "Diagnose overfit with a train/holdout split"
+      }
+    },
+    "matrix-rank-basis": {
+      "write": {
+        "prompt": "Explain \"Rank, Basis & Subspaces\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Rank counts independent directions the matrix reaches"
+      },
+      "more": [],
+      "video": {
+        "title": "3Blue1Brown — Span and linear independence",
+        "url": "https://www.3blue1brown.com/lessons/span"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "problem": {
+        "drillId": "identify-rank-subspace",
+        "title": "Identify rank and column space"
+      }
+    },
+    "pca-projection": {
+      "write": {
+        "prompt": "Explain \"PCA & Projection\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: PCA finds an orthogonal basis ordered by variance"
+      },
+      "more": [],
+      "video": {
+        "title": "StatQuest — PCA",
+        "url": "https://www.youtube.com/watch?v=FgakZw6K1QQ"
+      },
+      "book": {
+        "title": "ISL — Principal Components",
+        "url": "https://www.statlearning.com/"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "problem": {
+        "drillId": "pca-variance-explained",
+        "title": "PCA variance explained"
+      }
+    },
+    "returns-volatility": {
+      "write": {
+        "prompt": "Explain \"Returns & Volatility\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Prices drift; returns are closer to stable"
+      },
+      "more": [],
+      "book": {
+        "title": "Python for Finance (Hilpisch)",
+        "url": "https://github.com/yhilpisch/py4fi2nd"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"
+      },
+      "problem": {
+        "drillId": "compute-log-returns-vol",
+        "title": "Log returns and annualized volatility"
+      }
+    },
+    "stationarity-autocorrelation": {
+      "write": {
+        "prompt": "Explain \"Stationarity & Autocorrelation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Stationarity: distribution doesn't drift"
+      },
+      "more": [],
+      "video": {
+        "title": "StatQuest — Stationarity",
+        "url": "https://www.youtube.com/watch?v=1Lh1HlLKV4g"
+      },
+      "book": {
+        "title": "FPP3 — Time series features",
+        "url": "https://otexts.com/fpp3/"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"
+      },
+      "problem": {
+        "drillId": "interpret-autocorrelation-plot",
+        "title": "Interpret an ACF plot"
+      }
+    },
+    "random-walks-markov": {
+      "write": {
+        "prompt": "Explain \"Random Walks & Markov Chains\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Markov: future depends only on present state"
+      },
+      "more": [],
+      "book": {
+        "title": "MIT 6.041SC — Random processes",
+        "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"
+      },
+      "problem": {
+        "drillId": "simulate-markov-chain",
+        "title": "Simulate a two-state Markov chain"
+      }
+    },
+    "portfolio-risk-metrics": {
+      "write": {
+        "prompt": "Explain \"Sharpe, Drawdown & Portfolio Risk\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Sharpe = excess return per unit vol"
+      },
+      "more": [],
+      "paper": {
+        "title": "Bailey & López de Prado — Deflated Sharpe",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "book": {
+        "title": "MIT 18.06SC — Linear Algebra (Strang)",
+        "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
+      },
+      "problem": {
+        "drillId": "compute-sharpe-drawdown",
+        "title": "Sharpe ratio and max drawdown"
+      }
+    },
+    "momentum-backtest": {
+      "write": {
+        "prompt": "Explain \"Momentum Backtest Discipline\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Backtest = hypothesis on history"
+      },
+      "more": [],
+      "book": {
+        "title": "QuantConnect — Backtesting overview",
+        "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/overview"
+      },
+      "video": {
+        "title": "3Blue1Brown — Essence of Linear Algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      },
+      "blog": {
+        "title": "Seeing Theory — Probability & statistics visualized",
+        "url": "https://seeing-theory.brown.edu/"
+      },
+      "paper": {
+        "title": "Bailey & López de Prado — Deflated Sharpe Ratio",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"
+      },
+      "problem": {
+        "drillId": "design-honest-backtest",
+        "title": "Design an honest momentum backtest"
+      }
+    }
+  }
+}

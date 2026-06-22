@@ -1,9 +1,7 @@
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpen,
   Check,
-  Copy,
   ExternalLink,
   Lightbulb,
   Lock,
@@ -13,6 +11,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { FurtherReading } from '../components/FurtherReading';
+import TopicPackView from '../components/TopicPackView';
 import {
   Badge,
   Button,
@@ -31,6 +30,7 @@ import {
   groupForTag,
   PROJECT_BY_ID,
   reviewQuestionsForConcept,
+  topicPackForConcept,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useGates } from '../hooks/useGates';
@@ -72,6 +72,7 @@ export default function ConceptDetail() {
   const artifacts = artifactsForConcept(concept.id);
   const questions = reviewQuestionsForConcept(concept.id);
   const gate = gateStatus(concept.id);
+  const topicPack = topicPackForConcept(concept);
 
   async function copyAiPrompt() {
     try {
@@ -192,39 +193,7 @@ export default function ConceptDetail() {
             )}
           </section>
 
-          {/* Learn it — curated external sources are the primary content */}
-          <section>
-            <SectionTitle>Learn it</SectionTitle>
-            <p className="mb-3 max-w-prose text-xs text-white/45">
-              Canonical external sources — read one path through the material; use alternatives when several are listed.
-            </p>
-            {concept.resources && concept.resources.length > 0 ? (
-              <div className="space-y-2">
-                {concept.resources.map(res => (
-                  <a
-                    key={res.url}
-                    href={res.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] p-3 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.02]"
-                  >
-                    <BookOpen className="h-4 w-4 shrink-0 text-white" />
-                    <div className="min-w-0 flex-1">
-                      <div className="text-sm font-medium text-white">{res.title}</div>
-                      <div className="text-xs text-white/40">{res.type}</div>
-                    </div>
-                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-white/40" />
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <Card className="p-4">
-                <p className="text-sm text-white/50">
-                  No curated source yet for this concept. Add the link you trust in your notes below.
-                </p>
-              </Card>
-            )}
-          </section>
+          <TopicPackView concept={concept} pack={topicPack} />
 
           {/* Common mistakes */}
           {concept.commonMistakes && concept.commonMistakes.length > 0 && (
