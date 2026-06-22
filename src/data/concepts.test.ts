@@ -303,4 +303,18 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
       expect((ext.byTag[tag] ?? []).length, tag).toBeGreaterThanOrEqual(15);
     }
   });
+
+  it('foundational ML concepts list multiple canonical sources', () => {
+    const multiSource = [
+      'ml-self-attention',
+      'ml-gradient-descent',
+      'ml-backprop',
+      'ml-training',
+      'derivatives-and-gradients',
+    ];
+    for (const id of multiSource) {
+      const c = concepts.find((x: { id: string }) => x.id === id);
+      expect(c?.resources?.length ?? 0, id).toBeGreaterThanOrEqual(2);
+    }
+  });
 });

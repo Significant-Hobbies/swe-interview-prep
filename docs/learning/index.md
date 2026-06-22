@@ -6,6 +6,7 @@ A curated set of roadmaps and references for learning systems software in 2026. 
 
 - **Mechanism-first.** Understand how things work, not just how to use them.
 - **Lean on the canonical source.** If Karpathy already explained attention, link to Karpathy. Don't paraphrase.
+- **Offer alternatives when quality diverges.** CS224n PDF + Illustrated Transformer + Annotated Transformer for attention; CS231n + Karpathy for optimization; JAX scaling book + HF playbook for training at scale — pick one path, not the only path.
 - **No learning without an artifact.** Every roadmap ends in something shipped — code, a benchmark, or a written explainer.
 - **Honest scope.** Every doc states up front what it covers and what it doesn't.
 - **Don't read passively.** If you can't explain a concept to a duck in three sentences, you don't know it yet.

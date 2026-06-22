@@ -358,6 +358,16 @@
           "title": "Reciprocal Rank Fusion (Cormack et al.)",
           "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
           "type": "paper"
+        },
+        {
+          "title": "Elasticsearch — Hybrid search",
+          "url": "https://www.elastic.co/search-labs/blog/hybrid-search-elasticsearch",
+          "type": "article"
+        },
+        {
+          "title": "Pinecone — Hybrid search overview",
+          "url": "https://www.pinecone.io/learn/hybrid-search/",
+          "type": "article"
         }
       ]
     },
@@ -945,6 +955,21 @@
           "title": "Retrieval-Augmented Generation (Lewis et al.)",
           "url": "https://arxiv.org/abs/2005.11401",
           "type": "paper"
+        },
+        {
+          "title": "Lilian Weng — Retrieval-Augmented Generation",
+          "url": "https://lilianweng.github.io/posts/2020-10-29-retrieval-augmented/",
+          "type": "article"
+        },
+        {
+          "title": "LangChain — RAG from scratch",
+          "url": "https://python.langchain.com/docs/tutorials/rag/",
+          "type": "doc"
+        },
+        {
+          "title": "Pinecone — RAG guide",
+          "url": "https://www.pinecone.io/learn/retrieval-augmented-generation/",
+          "type": "article"
         }
       ]
     },
@@ -1211,6 +1236,16 @@
           "title": "Building Effective Agents (Anthropic)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
+        },
+        {
+          "title": "Training Compute-Optimal LLMs (Chinchilla)",
+          "url": "https://arxiv.org/abs/2203.15556",
+          "type": "paper"
+        },
+        {
+          "title": "How to Scale Your Model (JAX ML scaling book)",
+          "url": "https://jax-ml.github.io/scaling-book/",
+          "type": "course"
         }
       ],
       "drills": [
@@ -1329,6 +1364,16 @@
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
+        },
+        {
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/topics/linear-algebra",
+          "type": "video"
+        },
+        {
+          "title": "CS231n — Linear algebra & calculus prerequisites",
+          "url": "https://cs231n.github.io/optimization-1/",
+          "type": "course"
         }
       ],
       "mentalModel": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question.",
@@ -1362,6 +1407,16 @@
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
+        },
+        {
+          "title": "CS231n — Optimization (gradient descent, SGD)",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
+          "title": "Gradient descent, how neural networks learn (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/lessons/gradient-descent",
+          "type": "video"
         }
       ],
       "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls.",
@@ -1395,6 +1450,16 @@
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
+        },
+        {
+          "title": "CS231n — Backpropagation & computational graphs",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
+          "title": "micrograd — backprop from scratch (Karpathy)",
+          "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+          "type": "video"
         }
       ],
       "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them.",
@@ -1424,6 +1489,16 @@
       ],
       "description": "Logits to probabilities, negative log-likelihood loss.",
       "resources": [
+        {
+          "title": "CS231n — Softmax & cross-entropy loss",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
+        },
         {
           "title": "Softmax function (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Softmax_function",
@@ -1466,6 +1541,16 @@
           "title": "Decoupled Weight Decay Regularization (Loshchilov & Hutter)",
           "url": "https://arxiv.org/abs/1711.05101",
           "type": "paper"
+        },
+        {
+          "title": "CS231n — Adam, learning-rate schedules",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
         }
       ],
       "mentalModel": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch.",
@@ -1498,6 +1583,16 @@
           "title": "Let's build the GPT Tokenizer (Karpathy)",
           "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
           "type": "video"
+        },
+        {
+          "title": "The Illustrated GPT-2 — BPE tokenization",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "HuggingFace — Tokenizers",
+          "url": "https://huggingface.co/docs/tokenizers/index",
+          "type": "doc"
         }
       ],
       "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other.",
@@ -1532,6 +1627,16 @@
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
+        },
+        {
+          "title": "The Illustrated GPT-2 — language modeling objective",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "Let's build GPT from scratch (Karpathy)",
+          "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+          "type": "video"
         }
       ],
       "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective.",
@@ -1567,6 +1672,16 @@
           "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
           "url": "https://arxiv.org/abs/1904.09751",
           "type": "paper"
+        },
+        {
+          "title": "The Illustrated GPT-2 — output sampling",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "HuggingFace — Generation strategies",
+          "url": "https://huggingface.co/docs/transformers/en/generation_strategies",
+          "type": "doc"
         }
       ],
       "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate.",
@@ -1598,9 +1713,19 @@
       "description": "Token & position embeddings, tied weights.",
       "resources": [
         {
-          "title": "Word embedding (Wikipedia)",
-          "url": "https://en.wikipedia.org/wiki/Word_embedding",
-          "type": "doc"
+          "title": "The Illustrated GPT-2 — token & position embeddings",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "The Illustrated Transformer",
+          "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        },
+        {
+          "title": "CS224n — Self-Attention & Transformers (Stanford)",
+          "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
+          "type": "paper"
         }
       ],
       "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from.",
@@ -1639,9 +1764,29 @@
       ],
       "resources": [
         {
+          "title": "CS224n — Self-Attention & Transformers (Stanford)",
+          "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
+          "type": "paper"
+        },
+        {
           "title": "The Illustrated Transformer",
           "url": "https://jalammar.github.io/illustrated-transformer/",
           "type": "article"
+        },
+        {
+          "title": "The Annotated Transformer",
+          "url": "https://nlp.seas.harvard.edu/annotated-transformer/",
+          "type": "article"
+        },
+        {
+          "title": "Attention in transformers, visually (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/lessons/attention",
+          "type": "video"
+        },
+        {
+          "title": "Attention Is All You Need (Vaswani et al.)",
+          "url": "https://arxiv.org/abs/1706.03762",
+          "type": "paper"
         }
       ],
       "drills": [
@@ -1671,8 +1816,18 @@
       "description": "Parallel heads, head_dim split, output projection.",
       "resources": [
         {
+          "title": "CS224n — Self-Attention & Transformers (Stanford)",
+          "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
+          "type": "paper"
+        },
+        {
           "title": "The Illustrated Transformer",
           "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        },
+        {
+          "title": "The Annotated Transformer",
+          "url": "https://nlp.seas.harvard.edu/annotated-transformer/",
           "type": "article"
         }
       ],
@@ -1713,8 +1868,23 @@
       ],
       "resources": [
         {
+          "title": "CS224n — Self-Attention & Transformers (Stanford)",
+          "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
+          "type": "paper"
+        },
+        {
           "title": "The Illustrated Transformer",
           "url": "https://jalammar.github.io/illustrated-transformer/",
+          "type": "article"
+        },
+        {
+          "title": "The Illustrated GPT-2 — transformer block stack",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "The Annotated Transformer",
+          "url": "https://nlp.seas.harvard.edu/annotated-transformer/",
           "type": "article"
         }
       ],
@@ -1749,6 +1919,21 @@
           "title": "A Recipe for Training Neural Networks (Karpathy)",
           "url": "https://karpathy.github.io/2019/04/25/recipe/",
           "type": "article"
+        },
+        {
+          "title": "The Illustrated GPT-2 — training a language model",
+          "url": "https://jalammar.github.io/illustrated-gpt2/",
+          "type": "article"
+        },
+        {
+          "title": "Let's reproduce GPT-2 (124M) — Karpathy",
+          "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
+          "type": "video"
+        },
+        {
+          "title": "How to Scale Your Model (JAX ML scaling book)",
+          "url": "https://jax-ml.github.io/scaling-book/",
+          "type": "course"
         }
       ],
       "mentalModel": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model.",
@@ -1815,6 +2000,16 @@
           "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
           "url": "https://arxiv.org/abs/2106.09685",
           "type": "paper"
+        },
+        {
+          "title": "HuggingFace PEFT — LoRA guide",
+          "url": "https://huggingface.co/docs/peft/en/conceptual_guides/lora",
+          "type": "doc"
+        },
+        {
+          "title": "How to Scale Your Model (JAX ML scaling book)",
+          "url": "https://jax-ml.github.io/scaling-book/",
+          "type": "course"
         }
       ],
       "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time.",
@@ -5451,9 +5646,19 @@
       ],
       "resources": [
         {
+          "title": "CS231n — Optimization (gradients & backprop)",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
           "type": "course"
+        },
+        {
+          "title": "Essence of Calculus (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/topics/calculus",
+          "type": "video"
         }
       ],
       "artifacts": []
@@ -5495,6 +5700,16 @@
           "title": "Convex Optimization (Boyd & Vandenberghe)",
           "url": "https://web.stanford.edu/~boyd/cvxbook/",
           "type": "doc"
+        },
+        {
+          "title": "CS231n — Optimization (SGD, momentum, adaptive methods)",
+          "url": "https://cs231n.github.io/optimization-2/",
+          "type": "course"
+        },
+        {
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html",
+          "type": "course"
         }
       ],
       "drills": [

@@ -60,16 +60,16 @@ need the serving lens.
 - [Karpathy — Intro to LLMs (1hr, no code)](https://www.youtube.com/watch?v=zjkBMFhNj_g) ★ best non-code mental model
 - [Karpathy — Let's build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY) · [nanoGPT](https://github.com/karpathy/nanoGPT) · [Zero to Hero playlist](https://karpathy.ai/zero-to-hero.html)
 - [Karpathy — Let's build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE) — BPE is the source of half of LLM weirdness
-- [Karpathy — Let's reproduce GPT-2 (124M)](https://www.youtube.com/watch?v=l8pRSuU81PU) — 4hr end-to-end pretraining + perf engineering
+- [Karpathy — Let's reproduce GPT-2 (124M)](https://www.youtube.com/watch?v=l8pRSuU81PU) — 4hr end-to-end pretraining + perf engineering · [CS231n — Optimization (backprop, SGD, Adam)](https://cs231n.github.io/optimization-2/)
 - [3Blue1Brown — Attention, visually explained](https://www.3blue1brown.com/lessons/attention)
-- [The Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/) · [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [CS224n — Self-Attention & Transformers (Stanford PDF)](https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf) · [The Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/) · [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) · [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/)
 - [Attention Is All You Need (2017)](https://arxiv.org/abs/1706.03762) · [LLaMA paper](https://arxiv.org/abs/2302.13971) · [Chinchilla](https://arxiv.org/abs/2203.15556)
 - [Lilian Weng — The Transformer Family v2.0](https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/) · [Why we think (2025)](https://lilianweng.github.io/posts/2025-05-01-thinking/) · [Extrinsic hallucinations (2024)](https://lilianweng.github.io/posts/2024-07-07-hallucination/)
 - [Mamba](https://arxiv.org/abs/2312.00752) · [Mamba-2 / SSD duality](https://arxiv.org/abs/2405.21060)
 - [vLLM PagedAttention](https://arxiv.org/abs/2309.06180) · [Sarathi-Serve (OSDI 2024)](https://www.usenix.org/conference/osdi24/presentation/agrawal) · [SGLang](https://arxiv.org/abs/2312.07104)
 - [FlashAttention](https://arxiv.org/abs/2205.14135) · [Tri Dao's posts](https://tridao.me/) · [llama.cpp](https://github.com/ggerganov/llama.cpp) · [llm.c](https://github.com/karpathy/llm.c)
 - [Anthropic — Transformer Circuits (interpretability)](https://transformer-circuits.pub/)
-- [HuggingFace — Ultra-Scale Playbook (2025)](https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook) — real pretraining + parallelism recipes
+- [How to Scale Your Model (JAX ML scaling book)](https://jax-ml.github.io/scaling-book/) · [HuggingFace — Ultra-Scale Playbook (2025)](https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook) — pretraining + parallelism recipes
 - [Sebastian Raschka — LLMs from scratch (repo)](https://github.com/rasbt/LLMs-from-scratch)
 
 ## 2. Databases and storage engines

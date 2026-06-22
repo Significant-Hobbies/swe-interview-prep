@@ -195,6 +195,9 @@ export default function ConceptDetail() {
           {/* Learn it — curated external sources are the primary content */}
           <section>
             <SectionTitle>Learn it</SectionTitle>
+            <p className="mb-3 max-w-prose text-xs text-white/45">
+              Canonical external sources — read one path through the material; use alternatives when several are listed.
+            </p>
             {concept.resources && concept.resources.length > 0 ? (
               <div className="space-y-2">
                 {concept.resources.map(res => (
