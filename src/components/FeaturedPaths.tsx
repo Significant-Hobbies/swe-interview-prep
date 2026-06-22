@@ -24,14 +24,14 @@ export default function FeaturedPaths({
   variant = 'pick',
 }: FeaturedPathsProps) {
   return (
-    <section aria-label="Interview and systems paths">
+    <section aria-label="Interview quick picks">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            Interview & systems
+            Quick interview picks
           </h2>
           <p className="mt-1 max-w-prose text-xs text-white/45">
-            LLD, HLD, DSA, DB, runtime, OS — one tap to open the path.
+            Shortcut tiles for LLD, HLD, DSA, DB, runtime, OS — not the full catalog.
           </p>
         </div>
         <Link

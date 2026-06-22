@@ -81,7 +81,7 @@ export default function Onboarding() {
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Step 1 · Path</p>
           <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Pick your primary path.</h1>
           <p className="mt-3 max-w-prose text-sm text-white/50">
-            All 14 roadmaps — interview, systems, AI, math. Drives Today&apos;s session; switch anytime on Learn.
+            Optional — sizes Today&apos;s session to your schedule and picks a default roadmap. The full catalog stays open at Explore without finishing this.
           </p>
 
           <div className="mt-10 space-y-10">
@@ -114,13 +114,22 @@ export default function Onboarding() {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() => setStep(1)}
-            className="mt-10 w-full rounded-full bg-white py-3 text-sm font-semibold text-black hover:bg-white/90 sm:w-auto sm:px-12"
-          >
-            Continue
-          </button>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              onClick={() => setStep(1)}
+              className="w-full rounded-full bg-white py-3 text-sm font-semibold text-black hover:bg-white/90 sm:w-auto sm:px-12"
+            >
+              Continue
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/explore', { replace: true })}
+              className="w-full rounded-full border border-white/15 py-3 text-sm text-white/65 transition-colors hover:border-white/30 hover:text-white sm:w-auto sm:px-8"
+            >
+              Skip — explore the catalog
+            </button>
+          </div>
         </>
       )}
 

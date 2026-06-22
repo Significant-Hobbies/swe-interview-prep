@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import BrowseLinks from '../components/BrowseLinks';
 import FeaturedPaths from '../components/FeaturedPaths';
+import PathDoor from '../components/PathDoor';
+import PlaygroundHero from '../components/PlaygroundHero';
 import {
   CONCEPT_BY_ID,
   type Roadmap,
@@ -46,20 +48,30 @@ export default function Learn() {
         <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
 
         <div className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-          Roadmaps
+          Learn
         </div>
 
         <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Pick a path.
+          Set your active path.
         </h1>
         <p className="mt-4 max-w-prose text-sm text-white/50 sm:text-base">
-          The active one drives "what's next". You can switch any time — progress is per-roadmap and persists.
+          Today&apos;s session follows the active roadmap. Start with four macro doors, quick interview picks, or all 14 roadmaps below.
         </p>
+        <Link
+          to="/explore"
+          className="mt-4 inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+        >
+          Explore full catalog <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
+
+      <PathDoor activeRoadmapId={active.id} className="mt-10" />
 
       <div className="mt-10">
         <FeaturedPaths activeRoadmapId={active.id} onPick={pick} />
       </div>
+
+      <PlaygroundHero className="mt-10" compact />
 
       <BrowseLinks className="mt-12" />
 

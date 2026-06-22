@@ -80,7 +80,7 @@ export interface Concept {
   drills?: string[];
   reviewQuestions?: string[];
   resources?: Resource[];
-  /** Optional explicit six-slot pack; otherwise derived from resources + drills. */
+  /** Optional explicit learn-your-way pack; otherwise derived from resources + drills. */
   learningPack?: TopicPack;
 }
 
@@ -282,13 +282,13 @@ export const REVIEW_QUESTIONS: ReviewQuestion[] = [
 export const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map(t => [t.id, t]));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(CONCEPTS.map(c => [c.id, c]));
 
-const GENERATED_PACKS: Record<string, TopicPack> =
+export const CONCEPT_PACKS: Record<string, TopicPack> =
   (conceptPacksData as { packs?: Record<string, TopicPack> }).packs ?? {};
 
-/** Six-slot learn-your-way pack for a concept (generated + optional overrides). */
+/** Optional learn-your-way pack for a concept (generated + overrides). */
 export function topicPackForConcept(concept: Concept): TopicPack {
   if (concept.learningPack) return concept.learningPack;
-  return GENERATED_PACKS[concept.id] ?? buildTopicPack(concept);
+  return CONCEPT_PACKS[concept.id] ?? buildTopicPack(concept);
 }
 export const ROADMAP_BY_ID: Record<string, Roadmap> = Object.fromEntries(ROADMAPS.map(r => [r.id, r]));
 export const ARTIFACT_BY_ID: Record<string, Artifact> = Object.fromEntries(ARTIFACTS.map(a => [a.id, a]));

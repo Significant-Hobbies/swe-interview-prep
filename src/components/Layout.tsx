@@ -34,6 +34,7 @@ interface NavItem {
 }
 
 const BROWSE_ICONS: Record<string, LucideIcon> = {
+  explore: LayoutGrid,
   concepts: Network,
   drills: Dumbbell,
   reviews: RotateCcw,
@@ -88,6 +89,7 @@ export default function Layout() {
   const browseDesktopRef = useRef<HTMLDivElement>(null);
   const browseMobileRef = useRef<HTMLDivElement>(null);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
+  const showSetupHint = !onboardingDone && location.pathname !== '/onboarding';
 
   useEffect(() => {
     if (!changelogOpen && !browseOpen) return;
@@ -136,51 +138,45 @@ export default function Layout() {
               <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
             </NavLink>
 
-            {onboardingDone ? (
-              <div className="relative z-10 hidden flex-1 items-center justify-center gap-5 lg:gap-6 md:flex">
-                {PRIMARY_NAV.map(({ to, label }) => (
-                  <NavLink key={to} to={to} className={navClass}>
-                    <span>{label}</span>
-                  </NavLink>
-                ))}
-                <div ref={browseDesktopRef} className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setBrowseOpen(o => !o)}
-                    className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
-                      browseOpen || browseActive ? 'text-white' : 'text-white/50 hover:text-white'
-                    }`}
-                    aria-expanded={browseOpen}
-                    aria-haspopup="menu"
+            <div className="relative z-10 hidden flex-1 items-center justify-center gap-5 lg:gap-6 md:flex">
+              {PRIMARY_NAV.map(({ to, label }) => (
+                <NavLink key={to} to={to} className={navClass}>
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+              <div ref={browseDesktopRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setBrowseOpen(o => !o)}
+                  className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
+                    browseOpen || browseActive ? 'text-white' : 'text-white/50 hover:text-white'
+                  }`}
+                  aria-expanded={browseOpen}
+                  aria-haspopup="menu"
+                >
+                  Browse
+                  <LayoutGrid className="h-3.5 w-3.5" />
+                </button>
+                {browseOpen && (
+                  <div
+                    role="menu"
+                    className="absolute left-1/2 top-full z-50 mt-1 min-w-[12rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
                   >
-                    Browse
-                    <LayoutGrid className="h-3.5 w-3.5" />
-                  </button>
-                  {browseOpen && (
-                    <div
-                      role="menu"
-                      className="absolute left-1/2 top-full z-50 mt-1 min-w-[12rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
-                    >
-                      {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
-                        <Link
-                          key={to}
-                          to={to}
-                          role="menuitem"
-                          className="flex items-center gap-2 px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
-                        >
-                          <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
-                          {label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                    {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
+                      <Link
+                        key={to}
+                        to={to}
+                        role="menuitem"
+                        className="flex items-center gap-2 px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
+                        {label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-            ) : (
-              <p className="hidden flex-1 text-center text-xs text-white/40 md:block">
-                Finish setup to unlock navigation
-              </p>
-            )}
+            </div>
 
             <div className="flex shrink-0 items-center gap-1">
               <div ref={changelogRef} className="relative">
@@ -271,14 +267,31 @@ export default function Layout() {
 
         <DigestBanner />
 
+        {showSetupHint && (
+          <div className="border-b border-white/[0.06] bg-white/[0.02]">
+            <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-2 md:px-6">
+              <p className="text-xs text-white/55">
+                Optional: personalize Today&apos;s session mix and active path.
+              </p>
+              <div className="flex items-center gap-4 font-mono text-[11px]">
+                <Link to="/explore" className="text-white/45 transition-colors hover:text-white/70">
+                  Explore catalog
+                </Link>
+                <Link to="/onboarding" className="text-white/70 transition-colors hover:text-white">
+                  Quick setup →
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
         <main>
           <Outlet />
         </main>
 
         <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
-        {onboardingDone && (
-          <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
             {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
               <NavLink key={to} to={to} className={tabClass(to)}>
                 <Icon className="h-5 w-5" />
@@ -314,7 +327,6 @@ export default function Layout() {
               )}
             </div>
           </div>
-        )}
       </div>
     </TooltipProvider>
   );

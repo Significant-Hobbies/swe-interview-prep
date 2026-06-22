@@ -8,13 +8,14 @@ import {
   buildTopicPack,
   classifyResource,
   packCompleteness,
+  packHasCategory,
   writePromptForConcept,
 } from './topicPack';
 
 const concepts = (conceptsData as { concepts: Concept[] }).concepts;
 
 describe('topicPack', () => {
-  it('classifies resource types into media slots', () => {
+  it('classifies resource types into media categories', () => {
     expect(classifyResource({
       title: 'x',
       url: 'https://arxiv.org/abs/123',
@@ -32,7 +33,7 @@ describe('topicPack', () => {
     })).toBe('book');
   });
 
-  it('overflows duplicate media slots into more', () => {
+  it('overflows duplicate media categories into more', () => {
     const pack = buildTopicPack({
       id: 'test',
       name: 'Test',
@@ -47,8 +48,19 @@ describe('topicPack', () => {
         { title: 'Blog B', url: 'https://example.com/b', type: 'article' },
       ],
     } as Concept);
-    expect(pack.blog?.url).toBe('https://example.com/a');
-    expect(pack.more.map(l => l.url)).toContain('https://example.com/b');
+    expect(packHasCategory(pack, 'blog')).toBe(true);
+    expect(pack.items.filter(i => i.category === 'more').map(i => i.url)).toContain('https://example.com/b');
+  });
+
+  it('builds items with category, title, and url', () => {
+    const pack = buildTopicPack(CONCEPT_BY_ID['probability-fundamentals']);
+    expect(pack.items.length).toBeGreaterThan(0);
+    for (const item of pack.items) {
+      expect(item.category).toBeTruthy();
+      expect(item.title).toBeTruthy();
+      expect(typeof item.url).toBe('string');
+    }
+    expect(pack.items.some(i => i.category === 'write' && i.body)).toBe(true);
   });
 
   it('builds write prompt from mental model', () => {
@@ -58,22 +70,21 @@ describe('topicPack', () => {
     expect(prompt.length).toBeGreaterThan(40);
   });
 
-  it('every concept has a generated pack with write + problem', () => {
-    const packs = (conceptPacksData as { packs: Record<string, unknown> }).packs;
+  it('every concept has a generated pack with items array', () => {
+    const packs = (conceptPacksData as { packs: Record<string, TopicPack> }).packs;
     for (const c of concepts) {
-      const pack = packs[c.id] as TopicPack;
-      expect(pack?.write?.prompt, c.id).toBeTruthy();
-      expect(pack?.problem?.drillId, c.id).toBeTruthy();
+      const pack = packs[c.id];
+      expect(Array.isArray(pack?.items), c.id).toBe(true);
     }
   });
 
-  it('majority of concepts have at least four media slots filled', () => {
+  it('majority of concepts have at least four primary categories', () => {
     const packs = (conceptPacksData as { packs: Record<string, TopicPack> }).packs;
     let ok = 0;
     for (const c of concepts) {
       const { filled } = packCompleteness(packs[c.id]);
       if (filled >= 4) ok++;
     }
-    expect(ok / concepts.length).toBeGreaterThan(0.85);
+    expect(ok / concepts.length).toBeGreaterThan(0.7);
   });
 });

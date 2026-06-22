@@ -15,6 +15,7 @@ const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
+const Explore = lazy(() => import('./pages/Explore'));
 const Practice = lazy(() => import('./pages/Practice'));
 const PracticeAll = lazy(() => import('./pages/PracticeAll'));
 const Playground = lazy(() => import('./pages/Playground'));
@@ -37,9 +38,7 @@ function removeLcpShell() {
 function OnboardingGate({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const done = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
-  if (!done && location.pathname !== '/onboarding') {
-    return <Navigate to="/onboarding" replace />;
-  }
+  // Onboarding is optional — only redirect away once already completed.
   if (done && location.pathname === '/onboarding') {
     return <Navigate to="/today" replace />;
   }
@@ -56,6 +55,7 @@ function AppRoutes() {
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="learn" element={<Learn />} />
         <Route path="learn/all" element={<LearnAll />} />
+        <Route path="explore" element={<Explore />} />
         <Route path="learn/:id" element={<ConceptDetail />} />
         <Route path="practice" element={<Practice />} />
         <Route path="practice/all" element={<PracticeAll />} />

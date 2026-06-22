@@ -2,6 +2,8 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+import PathDoor from '../components/PathDoor';
+import PlaygroundHero from '../components/PlaygroundHero';
 import { Button } from '../components/ui';
 import { SessionPlanView } from '../components/SessionPlanView';
 import { HorizonCalendar } from '../components/HorizonCalendar';
@@ -17,6 +19,7 @@ import {
   sessionProgress,
   todayActivityKinds,
 } from '../lib/session';
+import { loadActiveRoadmapId } from '../lib/recommend';
 
 export default function Today() {
   const { profile } = useProfile();
@@ -37,14 +40,20 @@ export default function Today() {
   const progress = enrichedPlan ? sessionProgress(enrichedPlan.blocks) : null;
   const streak = computeSessionStreak();
 
+  const activeRoadmapId = loadActiveRoadmapId();
+
   if (!enrichedPlan) {
     return (
       <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
         <h1 className="text-4xl font-bold text-white">You&apos;re caught up.</h1>
-        <p className="mt-4 text-white/50">Browse roadmaps or drills to push further.</p>
-        <Link to="/learn" className="mt-8 inline-flex items-center gap-2 text-sm text-white">
-          Browse roadmaps <ArrowRight className="h-4 w-4" />
-        </Link>
+        <p className="mt-4 text-white/50">Pick a path or explore the full catalog — nothing is gated.</p>
+        <PathDoor activeRoadmapId={activeRoadmapId} className="mt-10" />
+        <PlaygroundHero className="mt-10" compact />
+        <nav className="mt-10 flex flex-wrap gap-6 font-mono text-sm text-white/50">
+          <Link to="/explore" className="hover:text-white">Explore everything</Link>
+          <Link to="/learn" className="hover:text-white">Switch roadmap</Link>
+          <Link to="/practice/all" className="hover:text-white">All drills</Link>
+        </nav>
       </div>
     );
   }
@@ -92,7 +101,10 @@ export default function Today() {
 
       <SessionPlanView plan={enrichedPlan} />
 
-      <nav className="mt-16 flex flex-wrap gap-6 font-mono text-sm text-white/50">
+      <PlaygroundHero className="mt-12" compact />
+
+      <nav className="mt-10 flex flex-wrap gap-6 font-mono text-sm text-white/50">
+        <Link to="/explore" className="hover:text-white">Explore catalog</Link>
         <Link to="/learn" className="hover:text-white">Switch roadmap</Link>
         <Link to={`/roadmaps/${enrichedPlan.roadmap.id}`} className="hover:text-white">View graph</Link>
         <Link to="/mock" className="hover:text-white">Mock interview</Link>

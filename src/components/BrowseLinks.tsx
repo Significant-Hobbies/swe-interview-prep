@@ -5,6 +5,7 @@ import {
   Dumbbell,
   FolderKanban,
   Hammer,
+  LayoutGrid,
   Mic,
   Network,
   NotebookPen,
@@ -23,6 +24,7 @@ import {
 import { BROWSE_DESTINATIONS, type BrowseDestination } from '../lib/browseLinks';
 
 const ICONS: Record<string, LucideIcon> = {
+  explore: LayoutGrid,
   concepts: Network,
   drills: Dumbbell,
   reviews: RotateCcw,
@@ -41,6 +43,8 @@ function countFor(id: string): string | null {
       return `${CONCEPTS.length} concepts · ${TRACKS.length} tracks`;
     case 'drills':
       return `${EDITORIAL_DRILLS.length} editorial · ${PRACTICE_DRILLS.length} total`;
+    case 'explore':
+      return `${ROADMAPS.length} roadmaps · open catalog`;
     case 'docs':
       return `${ROADMAPS.length} companion roadmaps`;
     default:

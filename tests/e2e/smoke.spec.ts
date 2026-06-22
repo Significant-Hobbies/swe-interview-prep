@@ -21,8 +21,8 @@ test.describe('Learning OS smoke', () => {
 
   test('Learn page shows roadmaps + concepts', async ({ page }) => {
     await page.goto('/learn');
-    await expect(page.getByRole('heading', { name: 'Pick a path.', exact: true })).toBeVisible();
-    await expect(page.getByRole('region', { name: 'Interview and systems paths' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Set your active path.', exact: true })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Interview quick picks' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
     await expect(page.getByRole('region', { name: 'Browse catalog' })).toBeVisible();
@@ -83,7 +83,7 @@ test.describe('Learning OS smoke', () => {
     await context.close();
   });
 
-  test('onboarding path picker shows role options', async ({ context, page }) => {
+  test('onboarding is optional and catalog stays browsable', async ({ context, page }) => {
     await context.addInitScript(() => {
       localStorage.removeItem('swe-os:onboarding-v1');
     });
@@ -93,8 +93,21 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('button', { name: /LLD Practice/i })).toBeVisible();
     await expect(page.getByRole('button', { name: /Probability & Statistics/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
-    await expect(page.getByText(/Finish setup to unlock navigation/i)).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Learn', exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /Skip — explore the catalog/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Learn', exact: true })).toBeVisible();
+    await page.getByRole('link', { name: 'Learn', exact: true }).click();
+    await expect(page).toHaveURL(/\/learn$/);
+    await expect(page.getByRole('region', { name: 'Learning paths' })).toBeVisible();
+  });
+
+  test('Explore page lists all roadmap groups', async ({ page }) => {
+    await page.goto('/explore');
+    await expect(page.getByRole('heading', { name: /Explore everything/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Systems internals', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'AI & retrieval', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Mathematics', exact: true })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Playground' })).toBeVisible();
   });
 
   test('primary top nav navigates between tabs', async ({ page }) => {
