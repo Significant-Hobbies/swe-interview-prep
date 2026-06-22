@@ -1580,6 +1580,16 @@
       "description": "Byte-level, char-level, BPE, vocab design.",
       "resources": [
         {
+          "title": "Stanford CS336 — L1 Overview & tokenization (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025/",
+          "type": "course"
+        },
+        {
+          "title": "CS336 Assignment 1 — Build a tokenizer from scratch",
+          "url": "https://github.com/stanford-cs336/assignment1-basics/tree/main",
+          "type": "doc"
+        },
+        {
           "title": "Let's build the GPT Tokenizer (Karpathy)",
           "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
           "type": "video"
@@ -1623,6 +1633,11 @@
       ],
       "description": "Next-token prediction, context windows, perplexity.",
       "resources": [
+        {
+          "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025/",
+          "type": "course"
+        },
         {
           "title": "Neural Networks: Zero to Hero (Karpathy)",
           "url": "https://karpathy.ai/zero-to-hero.html",
@@ -1669,6 +1684,11 @@
       "description": "Temperature, top-k, greedy decoding.",
       "resources": [
         {
+          "title": "Stanford CS336 — L10 Inference (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_10.json",
+          "type": "course"
+        },
+        {
           "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
           "url": "https://arxiv.org/abs/1904.09751",
           "type": "paper"
@@ -1712,6 +1732,11 @@
       ],
       "description": "Token & position embeddings, tied weights.",
       "resources": [
+        {
+          "title": "Stanford CS336 — L3 Architectures & hyperparameters (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/e9cb2488fdb53ea37f0e38924ec3a1701925cef3/nonexecutable/2025%20Lecture%203%20-%20architecture.pdf",
+          "type": "paper"
+        },
         {
           "title": "The Illustrated GPT-2 — token & position embeddings",
           "url": "https://jalammar.github.io/illustrated-gpt2/",
@@ -1763,6 +1788,11 @@
         "Confusing the query/key/value roles"
       ],
       "resources": [
+        {
+          "title": "Stanford CS336 — L6 Kernels & Triton (FlashAttention2)",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_06.json",
+          "type": "course"
+        },
         {
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
@@ -1816,6 +1846,11 @@
       "description": "Parallel heads, head_dim split, output projection.",
       "resources": [
         {
+          "title": "Stanford CS336 — L3 Architectures & hyperparameters (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/e9cb2488fdb53ea37f0e38924ec3a1701925cef3/nonexecutable/2025%20Lecture%203%20-%20architecture.pdf",
+          "type": "paper"
+        },
+        {
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
           "type": "paper"
@@ -1868,6 +1903,16 @@
       ],
       "resources": [
         {
+          "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025/",
+          "type": "course"
+        },
+        {
+          "title": "CS336 Assignment 1 — Build a transformer block from scratch",
+          "url": "https://github.com/stanford-cs336/assignment1-basics/tree/main",
+          "type": "doc"
+        },
+        {
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf",
           "type": "paper"
@@ -1916,6 +1961,16 @@
       "description": "Init, NaNs, overfit tests, gradient checks.",
       "resources": [
         {
+          "title": "Stanford CS336 — L2 PyTorch & resource accounting (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_02.json",
+          "type": "course"
+        },
+        {
+          "title": "CS336 Assignment 2 — Systems (profile, Triton, distributed training)",
+          "url": "https://github.com/stanford-cs336/assignment2-systems/tree/main",
+          "type": "doc"
+        },
+        {
           "title": "A Recipe for Training Neural Networks (Karpathy)",
           "url": "https://karpathy.github.io/2019/04/25/recipe/",
           "type": "article"
@@ -1929,6 +1984,11 @@
           "title": "Let's reproduce GPT-2 (124M) — Karpathy",
           "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
           "type": "video"
+        },
+        {
+          "title": "Stanford CS336 — L9–11 Scaling laws (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/assignment3-scaling/tree/main",
+          "type": "doc"
         },
         {
           "title": "How to Scale Your Model (JAX ML scaling book)",
@@ -1964,6 +2024,11 @@
       "description": "Weights + optimizer state, resume, dataset manifests.",
       "resources": [
         {
+          "title": "CS336 Assignment 2 — Distributed training & checkpointing",
+          "url": "https://github.com/stanford-cs336/assignment2-systems/tree/main",
+          "type": "doc"
+        },
+        {
           "title": "Saving & loading models (PyTorch)",
           "url": "https://pytorch.org/tutorials/beginner/saving_loading_models.html",
           "type": "doc"
@@ -1996,6 +2061,16 @@
       ],
       "description": "Frozen base, low-rank adapters, rank/alpha.",
       "resources": [
+        {
+          "title": "Stanford CS336 — L15 Alignment: SFT & RLHF (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/61eddac004df975466cff0329b615f2d24230069/nonexecutable/2025%20Lecture%2015%20-%20RLHF%20Alignment.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "CS336 Assignment 5 — Alignment & reasoning RL",
+          "url": "https://github.com/stanford-cs336/assignment5-alignment",
+          "type": "doc"
+        },
         {
           "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
           "url": "https://arxiv.org/abs/2106.09685",
@@ -2039,6 +2114,16 @@
       ],
       "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
       "resources": [
+        {
+          "title": "Stanford CS336 — L13–14 Data pipeline (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025/",
+          "type": "course"
+        },
+        {
+          "title": "CS336 Assignment 4 — Common Crawl → pretraining data",
+          "url": "https://github.com/stanford-cs336/assignment4-data/tree/main",
+          "type": "doc"
+        },
         {
           "title": "Eugene Yan — Data Flywheels for LLM Applications",
           "url": "https://eugeneyan.com/writing/llm-patterns/",
@@ -2114,6 +2199,11 @@
       "description": "WGSL, compute kernels, matmul, CPU parity.",
       "resources": [
         {
+          "title": "Stanford CS336 — L5 GPUs & memory hierarchy (Spring 2025)",
+          "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/main/nonexecutable/2025%20Lecture%205%20-%20GPUs.pdf",
+          "type": "paper"
+        },
+        {
           "title": "WebGPU API (MDN)",
           "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API",
           "type": "doc"
@@ -2147,6 +2237,11 @@
       ],
       "description": "Held-out loss, baselines, hallucination, leakage.",
       "resources": [
+        {
+          "title": "Stanford CS336 — L12 Evaluation (Spring 2025)",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_12.json",
+          "type": "course"
+        },
         {
           "title": "Eugene Yan — Evaluation & Hallucination",
           "url": "https://eugeneyan.com/writing/evals/",

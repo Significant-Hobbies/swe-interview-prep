@@ -11,6 +11,18 @@
   "byTag": {
     "ai-systems": [
       {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Spring 2025 — Interactive lectures",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
         "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
         "url": "https://cs50.harvard.edu/ai/",
         "kind": "link",
@@ -1122,6 +1134,24 @@
       }
     ],
     "training": [
+      {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/",
+        "kind": "course",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Assignment 1 — Basics (tokenizer, transformer, train)",
+        "url": "https://github.com/stanford-cs336/assignment1-basics/tree/main",
+        "kind": "link",
+        "source": "curated"
+      },
+      {
+        "title": "CS336 Assignment 2 — Systems (Triton, distributed training)",
+        "url": "https://github.com/stanford-cs336/assignment2-systems/tree/main",
+        "kind": "link",
+        "source": "curated"
+      },
       {
         "title": "Introduction to Machine Learning for Coders",
         "url": "https://course18.fast.ai/ml",

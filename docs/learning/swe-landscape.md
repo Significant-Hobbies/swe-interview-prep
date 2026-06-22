@@ -57,6 +57,7 @@ need the serving lens.
 
 ### Further reading
 
+- [Stanford CS336 — Language Modeling from Scratch (Spring 2025)](https://cs336.stanford.edu/spring2025/) ★ build tokenizer → transformer → GPU kernels → scaling laws → data → alignment, end-to-end · [lectures](https://cs336.stanford.edu/spring2025-lectures/) · [assignments](https://github.com/stanford-cs336/assignment1-basics/tree/main)
 - [Karpathy — Intro to LLMs (1hr, no code)](https://www.youtube.com/watch?v=zjkBMFhNj_g) ★ best non-code mental model
 - [Karpathy — Let's build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY) · [nanoGPT](https://github.com/karpathy/nanoGPT) · [Zero to Hero playlist](https://karpathy.ai/zero-to-hero.html)
 - [Karpathy — Let's build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE) — BPE is the source of half of LLM weirdness
@@ -464,7 +465,7 @@ Heavier reads — books and full courses. Don't block the map on these.
 - [MIT 6.1810](https://pdos.csail.mit.edu/6.1810/2025/) (OS)
 - [Stanford CS143](https://web.stanford.edu/class/cs143/) (compilers)
 - [Stanford CS144](https://cs144.github.io/) (networking)
-- [Stanford CS336](https://stanford-cs336.github.io/spring2024/) (LLMs from scratch)
+- [Stanford CS336](https://cs336.stanford.edu/spring2025/) (LLMs from scratch — Spring 2025)
 
 ---
 

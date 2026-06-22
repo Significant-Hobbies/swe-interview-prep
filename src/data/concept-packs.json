@@ -12,12 +12,12 @@
     ],
     "stats": {
       "video": 128,
-      "paper": 45,
+      "paper": 46,
       "blog": 150,
       "book": 139,
       "problem": 151,
       "write": 151,
-      "full": 36
+      "full": 37
     }
   },
   "packs": {
@@ -493,8 +493,8 @@
         "url": "https://lilianweng.github.io/posts/2020-10-29-retrieval-augmented/"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -515,8 +515,8 @@
         "url": "https://www.pinecone.io/learn/chunking-strategies/"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -536,13 +536,13 @@
         "title": "Lost in the Middle (Liu et al.)",
         "url": "https://arxiv.org/abs/2307.03172"
       },
+      "book": {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
+      },
       "blog": {
         "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
         "url": "https://cs50.harvard.edu/ai/"
-      },
-      "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
       },
       "video": {
         "title": "Spring 2023",
@@ -563,8 +563,8 @@
         "url": "https://platform.openai.com/docs/guides/structured-outputs"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -585,8 +585,8 @@
         "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -607,8 +607,8 @@
         "url": "https://www.anthropic.com/engineering/building-effective-agents"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -677,8 +677,8 @@
         "url": "https://hamel.dev/blog/posts/evals/"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -808,6 +808,10 @@
         "prompt": "Explain \"Tokenization (LLM)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L1 Overview & tokenization (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
+      },
       "video": {
         "title": "Let's build the GPT Tokenizer (Karpathy)",
         "url": "https://www.youtube.com/watch?v=zduSFxRajkE"
@@ -815,10 +819,6 @@
       "blog": {
         "title": "The Illustrated GPT-2 — BPE tokenization",
         "url": "https://jalammar.github.io/illustrated-gpt2/"
-      },
-      "book": {
-        "title": "HuggingFace — Tokenizers",
-        "url": "https://huggingface.co/docs/tokenizers/index"
       },
       "problem": {
         "drillId": "ml-bpe-merge-step",
@@ -831,8 +831,8 @@
       },
       "more": [],
       "book": {
-        "title": "Neural Networks: Zero to Hero (Karpathy)",
-        "url": "https://karpathy.ai/zero-to-hero.html"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "blog": {
         "title": "The Illustrated GPT-2 — language modeling objective",
@@ -852,6 +852,10 @@
         "prompt": "Explain \"Sampling & Decoding\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: After the model outputs a probability for each next token, you have to pick one"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L10 Inference (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_10.json"
+      },
       "paper": {
         "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
         "url": "https://arxiv.org/abs/1904.09751"
@@ -859,10 +863,6 @@
       "blog": {
         "title": "The Illustrated GPT-2 — output sampling",
         "url": "https://jalammar.github.io/illustrated-gpt2/"
-      },
-      "book": {
-        "title": "HuggingFace — Generation strategies",
-        "url": "https://huggingface.co/docs/transformers/en/generation_strategies"
       },
       "video": {
         "title": "Spring 2023",
@@ -878,17 +878,17 @@
         "prompt": "Explain \"Embeddings (Transformer)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space"
       },
       "more": [],
+      "paper": {
+        "title": "Stanford CS336 — L3 Architectures & hyperparameters (Spring 2025)",
+        "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/e9cb2488fdb53ea37f0e38924ec3a1701925cef3/nonexecutable/2025%20Lecture%203%20-%20architecture.pdf"
+      },
       "blog": {
         "title": "The Illustrated GPT-2 — token & position embeddings",
         "url": "https://jalammar.github.io/illustrated-gpt2/"
       },
-      "paper": {
-        "title": "CS224n — Self-Attention & Transformers (Stanford)",
-        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
-      },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -904,6 +904,10 @@
         "prompt": "Explain \"Self-Attention\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Self-attention lets every token look at every other token and pull in what is relevant"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L6 Kernels & Triton (FlashAttention2)",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_06.json"
+      },
       "paper": {
         "title": "CS224n — Self-Attention & Transformers (Stanford)",
         "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
@@ -916,10 +920,6 @@
         "title": "Attention in transformers, visually (3Blue1Brown)",
         "url": "https://www.3blue1brown.com/lessons/attention"
       },
-      "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
-      },
       "problem": {
         "drillId": "ml-scaled-dot-attention",
         "title": "Scaled dot-product attention weights"
@@ -931,16 +931,16 @@
       },
       "more": [],
       "paper": {
-        "title": "CS224n — Self-Attention & Transformers (Stanford)",
-        "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
+        "title": "Stanford CS336 — L3 Architectures & hyperparameters (Spring 2025)",
+        "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/e9cb2488fdb53ea37f0e38924ec3a1701925cef3/nonexecutable/2025%20Lecture%203%20-%20architecture.pdf"
       },
       "blog": {
         "title": "The Illustrated Transformer",
         "url": "https://jalammar.github.io/illustrated-transformer/"
       },
       "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
         "title": "Spring 2023",
@@ -956,6 +956,10 @@
         "prompt": "Explain \"Transformer Block\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
+      },
       "paper": {
         "title": "CS224n — Self-Attention & Transformers (Stanford)",
         "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
@@ -963,10 +967,6 @@
       "blog": {
         "title": "The Illustrated Transformer",
         "url": "https://jalammar.github.io/illustrated-transformer/"
-      },
-      "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
       },
       "video": {
         "title": "Spring 2023",
@@ -982,6 +982,10 @@
         "prompt": "Explain \"Training & Debugging\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L2 PyTorch & resource accounting (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_02.json"
+      },
       "blog": {
         "title": "A Recipe for Training Neural Networks (Karpathy)",
         "url": "https://karpathy.github.io/2019/04/25/recipe/"
@@ -989,10 +993,6 @@
       "video": {
         "title": "Let's reproduce GPT-2 (124M) — Karpathy",
         "url": "https://www.youtube.com/watch?v=l8pRSuU81PU"
-      },
-      "book": {
-        "title": "How to Scale Your Model (JAX ML scaling book)",
-        "url": "https://jax-ml.github.io/scaling-book/"
       },
       "problem": {
         "drillId": "ml-overfit-sanity-check",
@@ -1004,13 +1004,13 @@
         "prompt": "Explain \"Checkpointing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A checkpoint saves the weights and optimizer state so you can resume after a crash"
       },
       "more": [],
+      "book": {
+        "title": "CS336 Assignment 2 — Distributed training & checkpointing",
+        "url": "https://github.com/stanford-cs336/assignment2-systems/tree/main"
+      },
       "blog": {
         "title": "Saving & loading models (PyTorch)",
         "url": "https://pytorch.org/tutorials/beginner/saving_loading_models.html"
-      },
-      "book": {
-        "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
-        "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/"
       },
       "video": {
         "title": "Spring 2023",
@@ -1027,16 +1027,16 @@
       },
       "more": [],
       "paper": {
-        "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
-        "url": "https://arxiv.org/abs/2106.09685"
+        "title": "Stanford CS336 — L15 Alignment: SFT & RLHF (Spring 2025)",
+        "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/61eddac004df975466cff0329b615f2d24230069/nonexecutable/2025%20Lecture%2015%20-%20RLHF%20Alignment.pdf"
+      },
+      "book": {
+        "title": "CS336 Assignment 5 — Alignment & reasoning RL",
+        "url": "https://github.com/stanford-cs336/assignment5-alignment"
       },
       "blog": {
         "title": "HuggingFace PEFT — LoRA guide",
         "url": "https://huggingface.co/docs/peft/en/conceptual_guides/lora"
-      },
-      "book": {
-        "title": "How to Scale Your Model (JAX ML scaling book)",
-        "url": "https://jax-ml.github.io/scaling-book/"
       },
       "video": {
         "title": "Spring 2023",
@@ -1052,13 +1052,13 @@
         "prompt": "Explain \"Style Data Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: In ML, the dataset is the product"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L13–14 Data pipeline (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025/"
+      },
       "blog": {
         "title": "Eugene Yan — Data Flywheels for LLM Applications",
         "url": "https://eugeneyan.com/writing/llm-patterns/"
-      },
-      "book": {
-        "title": "Made With ML — Data engineering",
-        "url": "https://madewithml.com/courses/mlops/data-stack/"
       },
       "video": {
         "title": "Spring 2023",
@@ -1096,6 +1096,10 @@
         "prompt": "Explain \"WebGPU Compute\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser"
       },
       "more": [],
+      "paper": {
+        "title": "Stanford CS336 — L5 GPUs & memory hierarchy (Spring 2025)",
+        "url": "https://github.com/stanford-cs336/spring2025-lectures/blob/main/nonexecutable/2025%20Lecture%205%20-%20GPUs.pdf"
+      },
       "book": {
         "title": "WebGPU API (MDN)",
         "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
@@ -1118,13 +1122,13 @@
         "prompt": "Explain \"Model Evaluation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Offline eval (on a held-out test set) tells you the model got better"
       },
       "more": [],
+      "book": {
+        "title": "Stanford CS336 — L12 Evaluation (Spring 2025)",
+        "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_12.json"
+      },
       "blog": {
         "title": "Eugene Yan — Evaluation & Hallucination",
         "url": "https://eugeneyan.com/writing/evals/"
-      },
-      "book": {
-        "title": "Hamel Husain — Your AI Product Needs Evals",
-        "url": "https://hamel.dev/blog/posts/evals/"
       },
       "video": {
         "title": "Spring 2023",
