@@ -12,7 +12,7 @@
     ],
     "stats": {
       "video": 128,
-      "paper": 49,
+      "paper": 59,
       "blog": 150,
       "book": 128,
       "problem": 151,
@@ -453,8 +453,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "build-rag-pipeline",
@@ -475,8 +475,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "paper": {
         "title": "DPR (Dense Passage Retrieval)",
@@ -496,17 +496,17 @@
         "title": "Lost in the Middle (Liu et al.)",
         "url": "https://arxiv.org/abs/2307.03172"
       },
+      "blog": {
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
+      },
       "book": {
         "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
         "url": "https://cs336.stanford.edu/spring2025/"
       },
-      "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
-      },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "pack-context-budget",
@@ -527,8 +527,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "structured-extraction",
@@ -549,8 +549,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "build-tool-loop",
@@ -571,8 +571,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "agent-step-limit",
@@ -597,8 +597,8 @@
         "url": "https://jax-ml.github.io/scaling-book/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "route-by-query-cost",
@@ -615,12 +615,12 @@
         "url": "https://posthog.com/docs/ai-engineering"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "prompt-version-diff",
@@ -641,8 +641,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "paper": {
         "title": "MMLU-Pro",
@@ -667,8 +667,8 @@
         "url": "https://www.3blue1brown.com/topics/linear-algebra"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "problem": {
         "drillId": "ml-dot-matmul-shapes",
@@ -689,8 +689,8 @@
         "url": "https://www.3blue1brown.com/lessons/gradient-descent"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "problem": {
         "drillId": "ml-sgd-step-quadratic",
@@ -711,8 +711,8 @@
         "url": "https://www.youtube.com/watch?v=VMj-3S1tku0"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "problem": {
         "drillId": "ml-chain-rule-gate",
@@ -733,8 +733,8 @@
         "url": "https://en.wikipedia.org/wiki/Softmax_function"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-softmax-cross-entropy",
@@ -755,12 +755,12 @@
         "url": "https://cs231n.github.io/optimization-2/"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-adamw-weight-decay",
@@ -829,8 +829,8 @@
         "url": "https://jalammar.github.io/illustrated-gpt2/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-temperature-sampling",
@@ -855,8 +855,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-sinusoidal-position",
@@ -907,8 +907,8 @@
         "url": "https://cs336.stanford.edu/spring2025/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-multi-head-split",
@@ -933,8 +933,8 @@
         "url": "https://jalammar.github.io/illustrated-transformer/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-pre-norm-residual",
@@ -977,8 +977,8 @@
         "url": "https://pytorch.org/tutorials/beginner/saving_loading_models.html"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-checkpoint-resume",
@@ -1003,8 +1003,8 @@
         "url": "https://huggingface.co/docs/peft/en/conceptual_guides/lora"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-lora-param-count",
@@ -1025,8 +1025,8 @@
         "url": "https://eugeneyan.com/writing/llm-patterns/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-token-budget-estimate",
@@ -1043,12 +1043,12 @@
         "url": "https://huggingface.co/docs/transformers.js/index"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-wasm-linear-memory",
@@ -1069,12 +1069,12 @@
         "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
       },
       "blog": {
-        "title": "CS50 - Introduction to Artificial Intelligence with Python (and Machine Learning), Harvard OCW",
-        "url": "https://cs50.harvard.edu/ai/"
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "problem": {
         "drillId": "ml-webgpu-buffer-alignment",
@@ -1095,8 +1095,8 @@
         "url": "https://eugeneyan.com/writing/evals/"
       },
       "video": {
-        "title": "CS221: Artificial Intelligence: Principles and Techniques - Autumn 2019 - Stanford University",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz"
       },
       "paper": {
         "title": "MMLU-Pro",
@@ -1117,12 +1117,12 @@
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "http-idempotent-retry",
@@ -1143,8 +1143,8 @@
         "url": "https://docs.stripe.com/keys"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "hash-api-key",
@@ -1161,12 +1161,12 @@
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "implement-token-bucket",
@@ -1182,13 +1182,13 @@
         "title": "Stripe — Designing robust APIs with idempotency",
         "url": "https://stripe.com/blog/idempotency"
       },
-      "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
-      },
       "book": {
-        "title": "CS361 - COMPUTER SYSTEMS - UIC",
-        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/"
+      },
+      "video": {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "implement-idempotency-key",
@@ -1204,13 +1204,13 @@
         "title": "Timeouts, retries and backoff with jitter (AWS)",
         "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
       },
-      "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
-      },
       "book": {
-        "title": "CS361 - COMPUTER SYSTEMS - UIC",
-        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/"
+      },
+      "video": {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "implement-backoff-jitter",
@@ -1226,13 +1226,13 @@
         "title": "Stripe — Webhooks",
         "url": "https://docs.stripe.com/webhooks"
       },
-      "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
-      },
       "book": {
-        "title": "CS361 - COMPUTER SYSTEMS - UIC",
-        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/"
+      },
+      "video": {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "webhook-signature-verify",
@@ -1249,12 +1249,12 @@
         "url": "https://github.com/sidekiq/sidekiq/wiki/Best-Practices"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "job-at-least-once",
@@ -1270,13 +1270,13 @@
         "title": "HTTP caching (MDN)",
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
       },
-      "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
-      },
       "book": {
-        "title": "CS361 - COMPUTER SYSTEMS - UIC",
-        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/"
+      },
+      "video": {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "cache-stampede",
@@ -1297,8 +1297,8 @@
         "url": "https://kafka.apache.org/documentation/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "queue-backpressure",
@@ -1315,12 +1315,12 @@
         "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "slo-error-budget",
@@ -1337,12 +1337,12 @@
         "url": "https://cloud.google.com/apis/design"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-paginated-api",
@@ -1359,12 +1359,12 @@
         "url": "https://oauth.net/2/"
       },
       "blog": {
-        "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150"
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "jwt-vs-session-revoke",
@@ -1380,13 +1380,13 @@
         "title": "Stripe Payments documentation",
         "url": "https://docs.stripe.com/payments"
       },
-      "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
-      },
       "book": {
-        "title": "CS361 - COMPUTER SYSTEMS - UIC",
-        "url": "https://www.cs.uic.edu/~ckanich/cs361/f20/"
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/"
+      },
+      "video": {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "payment-idempotency",
@@ -1402,13 +1402,13 @@
         "title": "CMU 15-445 — Tree indexes",
         "url": "https://15445.courses.cs.cmu.edu/fall2023/notes/08-trees.pdf"
       },
+      "blog": {
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
+      },
       "book": {
         "title": "CMU 15-445 — Introduction to Database Systems",
         "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-      },
-      "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1429,8 +1429,8 @@
         "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1451,8 +1451,8 @@
         "url": "https://www.postgresql.org/docs/current/wal-intro.html"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1473,8 +1473,8 @@
         "url": "https://github.com/facebook/rocksdb/wiki/Compaction"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1517,8 +1517,8 @@
         "url": "https://parquet.apache.org/docs/file-format/"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1561,8 +1561,8 @@
         "url": "https://dataintensive.net/"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1583,8 +1583,8 @@
         "url": "https://dataintensive.net/"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1605,8 +1605,8 @@
         "url": "https://dataintensive.net/"
       },
       "blog": {
-        "title": "CMPSC 431W Database Management Systems, Fall 2015 - Penn State University",
-        "url": "http://www.cse.psu.edu/~wul2/cmpsc431w/"
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology"
       },
       "video": {
         "title": "Lectures - YouTube",
@@ -1649,12 +1649,12 @@
         "url": "https://refactoring.guru/design-patterns"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-parking-lot",
@@ -1671,12 +1671,12 @@
         "url": "https://refactoring.guru/design-patterns/state"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-vending-machine",
@@ -1693,12 +1693,12 @@
         "url": "https://refactoring.guru/design-patterns/strategy"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-pricing-strategies",
@@ -1715,12 +1715,12 @@
         "url": "https://refactoring.guru/design-patterns/observer"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-pub-sub-bus",
@@ -1737,12 +1737,12 @@
         "url": "https://refactoring.guru/design-patterns/factory-method"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-notification-factory",
@@ -1759,12 +1759,12 @@
         "url": "https://refactoring.guru/design-patterns/decorator"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-coffee-decorator",
@@ -1785,8 +1785,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-bank-account-locking",
@@ -1803,12 +1803,12 @@
         "url": "https://refactoring.guru/design-patterns/command"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-undo-redo",
@@ -1829,8 +1829,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-hotel-booking",
@@ -1847,12 +1847,12 @@
         "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-online-game-server",
@@ -1873,8 +1873,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-load-balancer",
@@ -1895,8 +1895,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-consistent-hashing",
@@ -1913,12 +1913,12 @@
         "url": "https://raft.github.io/"
       },
       "blog": {
-        "title": "The System Design Primer",
-        "url": "https://github.com/donnemartin/system-design-primer"
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-leader-election",
@@ -1939,8 +1939,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-rate-limiter",
@@ -1961,8 +1961,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-chat-system",
@@ -1983,8 +1983,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-news-feed",
@@ -2005,8 +2005,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-video-streaming",
@@ -2027,8 +2027,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-ride-sharing",
@@ -2049,8 +2049,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-collaborative-editor",
@@ -2071,8 +2071,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-search-platform",
@@ -2093,8 +2093,8 @@
         "url": "https://pdos.csail.mit.edu/6.824/"
       },
       "video": {
-        "title": "Computer Systems: A programmer's Perspective",
-        "url": "https://www.youtube.com/playlist?list=PLyboo2CCDSWnhzzzzDQ3OBPrRiIjl-aIE"
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb"
       },
       "problem": {
         "drillId": "design-rag-system",
@@ -2133,8 +2133,8 @@
         "url": "https://neetcode.io/roadmap"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2155,8 +2155,8 @@
         "url": "https://neetcode.io/roadmap"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2221,8 +2221,8 @@
         "url": "https://visualgo.net/en/list"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2243,8 +2243,8 @@
         "url": "https://visualgo.net/en/bst"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2287,8 +2287,8 @@
         "url": "https://visualgo.net/en/heap"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2331,8 +2331,8 @@
         "url": "https://visualgo.net/en/dfsbfs"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2353,8 +2353,8 @@
         "url": "https://visualgo.net/en/sssp"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2375,8 +2375,8 @@
         "url": "https://visualgo.net/en/ufds"
       },
       "blog": {
-        "title": "ECS 36C - Data Structures and Algorithms (C++) - Spring 2020 - Joël Porquet-Lupine - UC Davis",
-        "url": "https://lupteach.gitlab.io/courses/ucd-ecs36c/online/"
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md"
       },
       "video": {
         "title": "Graph Algorithms - Robert Sedgewick - Princeton University",
@@ -2528,6 +2528,10 @@
         "title": "Leadership (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Leadership"
       },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
+      },
       "problem": {
         "drillId": "star-leadership",
         "title": "STAR: leadership story"
@@ -2541,6 +2545,10 @@
       "blog": {
         "title": "Conflict resolution (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Conflict_resolution"
+      },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
       },
       "problem": {
         "drillId": "star-conflict",
@@ -2556,6 +2564,10 @@
         "title": "Decision-making (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Decision-making"
       },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
+      },
       "problem": {
         "drillId": "star-tough-decision",
         "title": "STAR: tough decision"
@@ -2569,6 +2581,10 @@
       "blog": {
         "title": "Teamwork (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Teamwork"
+      },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
       },
       "problem": {
         "drillId": "star-cross-team",
@@ -2584,6 +2600,10 @@
         "title": "STAR interview method (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
       },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
+      },
       "problem": {
         "drillId": "star-failure",
         "title": "STAR: a real failure"
@@ -2597,6 +2617,10 @@
       "blog": {
         "title": "Communication (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Communication"
+      },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
       },
       "problem": {
         "drillId": "star-communication",
@@ -2612,6 +2636,10 @@
         "title": "Time management (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Time_management"
       },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
+      },
       "problem": {
         "drillId": "star-prioritization",
         "title": "STAR: ruthless prioritization"
@@ -2625,6 +2653,10 @@
       "blog": {
         "title": "Creativity (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Creativity"
+      },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
       },
       "problem": {
         "drillId": "star-innovation",
@@ -2640,6 +2672,10 @@
         "title": "STAR interview method (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
       },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
+      },
       "problem": {
         "drillId": "star-customer-feedback",
         "title": "STAR: acting on customer feedback"
@@ -2653,6 +2689,10 @@
       "blog": {
         "title": "STAR interview method (Wikipedia)",
         "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result"
+      },
+      "paper": {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf"
       },
       "problem": {
         "drillId": "star-ownership",

@@ -39,6 +39,24 @@
     ],
     "system-design": [
       {
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › ByteByteGo system-design-101",
+        "url": "https://github.com/ByteByteGoHq/system-design-101",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › ML system design case studies",
+        "url": "https://github.com/Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
         "title": "The System Design Primer",
         "url": "https://github.com/donnemartin/system-design-primer",
         "kind": "link",
@@ -52,6 +70,12 @@
       }
     ],
     "dsa": [
+      {
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md",
+        "kind": "link",
+        "source": "dev_learning"
+      },
       {
         "title": "MIT 6.006 — Introduction to Algorithms",
         "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
@@ -67,6 +91,18 @@
     ],
     "databases": [
       {
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › database notes",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/tree/main/databases",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
         "title": "CMU 15-445 — Introduction to Database Systems",
         "url": "https://15445.courses.cs.cmu.edu/fall2025/",
         "kind": "course",
@@ -79,7 +115,47 @@
         "source": "curated"
       }
     ],
+    "low-level-design": [
+      {
+        "title": "dev_learning › awesome-low-level-design",
+        "url": "https://github.com/ashishps1/awesome-low-level-design",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › grokking-oop",
+        "url": "https://github.com/tssovi/grokking-the-object-oriented-design-interview",
+        "kind": "link",
+        "source": "dev_learning"
+      }
+    ],
+    "foundations": [
+      {
+        "title": "dev_learning — personal learning hoard",
+        "url": "https://github.com/sarthakagrawal927/dev_learning",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › my-cs-degree",
+        "url": "https://github.com/logancyang/my-cs-degree",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › apex technical excellence roadmap",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/apex.md",
+        "kind": "link",
+        "source": "dev_learning"
+      }
+    ],
     "ai-systems": [
+      {
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources",
+        "kind": "link",
+        "source": "dev_learning"
+      },
       {
         "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
         "url": "https://cs336.stanford.edu/spring2025/",
@@ -91,6 +167,20 @@
         "url": "https://cs336.stanford.edu/spring2025-lectures/",
         "kind": "course",
         "source": "curated"
+      }
+    ],
+    "backend": [
+      {
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › devops-exercises",
+        "url": "https://github.com/bregman-arie/devops-exercises",
+        "kind": "link",
+        "source": "dev_learning"
       }
     ],
     "training": [

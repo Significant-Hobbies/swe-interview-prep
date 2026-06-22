@@ -10,7 +10,22 @@
       "keon/awesome-nlp",
       "jwasham/coding-interview-university",
       "ossu/computer-science",
-      "mlabonne/llm-course"
+      "mlabonne/llm-course",
+      "logancyang/my-cs-degree",
+      "ashishps1/awesome-low-level-design",
+      "ashishps1/awesome-system-design-resources",
+      "armankhondker/awesome-ai-ml-resources",
+      "InterviewReady/system-design-resources",
+      "karanpratapsingh/system-design",
+      "ByteByteGoHq/system-design-101",
+      "Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+      "yingjunwu/DBMS-Indexology",
+      "arpitbbhayani/system-design-questions",
+      "Olshansk/interview",
+      "MichaelCade/90DaysOfDevOps",
+      "bregman-arie/devops-exercises",
+      "sarthakagrawal927/dev_learning",
+      "sarthakagrawal927/dev_learning#submodules"
     ],
     "curated": "src/data/curated-external-resources.json",
     "generated_by": "scripts/harvest-external-resources.mjs",
@@ -18,6 +33,12 @@
   },
   "byTag": {
     "ai-systems": [
+      {
+        "title": "dev_learning › awesome-ai-ml-resources",
+        "url": "https://github.com/armankhondker/awesome-ai-ml-resources",
+        "kind": "link",
+        "source": "dev_learning"
+      },
       {
         "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
         "url": "https://cs336.stanford.edu/spring2025/",
@@ -46,6 +67,18 @@
         "title": "CS 188 - Introduction to Artificial Intelligence, UC Berkeley - Spring 2025, by John Canny, Oliver Grillmeyer",
         "url": "https://inst.eecs.berkeley.edu/~cs188/sp25/",
         "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "sp24",
+        "url": "https://inst.eecs.berkeley.edu/~cs188/sp24/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLp8QV47qJEg7WWVg_5eOECzVPpy23UjJz",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -79,6 +112,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLDPnGbm0sUmpzvcGvktbz446SLdFbfZVU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "CS 4804: Introduction to Artificial Intelligence, Fall 2016",
         "url": "https://www.youtube.com/playlist?list=PLUenpfvlyoa1iiSbGy9BBewgiXjzxVgBd",
         "kind": "video",
@@ -97,44 +136,20 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Artificial Intelligence - IIT Kharagpur",
-        "url": "https://nptel.ac.in/courses/106105077/",
+        "title": "3386",
+        "url": "https://www.fau.tv/course/id/3386",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Artificial Intelligence - IIT Madras",
-        "url": "https://nptel.ac.in/courses/106106126/",
+        "title": "3180",
+        "url": "https://www.fau.tv/course/id/3180",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Artificial Intelligence(Prof.P.Dasgupta) - IIT Kharagpur",
-        "url": "https://nptel.ac.in/courses/106105079/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "MOOC - Intro to Artificial Intelligence - Udacity",
-        "url": "https://www.youtube.com/playlist?list=PLAwxTw4SYaPlqMkzr4xyuD6cXTIgPuzgn",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "MOOC - Artificial Intelligence for Robotics - Udacity",
-        "url": "https://www.youtube.com/playlist?list=PLAwxTw4SYaPkCSYXw6-a_aAoXVKLDwnHK",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Graduate Course in Artificial Intelligence, Autumn 2012 - University of Washington",
-        "url": "https://www.youtube.com/playlist?list=PLbQ3Aya0VERDoDdbMogU9EASJGWris9qG",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Agent-Based Systems 2015/16- University of Edinburgh",
-        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2015/abs.htm",
+        "title": "2095",
+        "url": "https://www.fau.tv/course/id/2095",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -149,7 +164,7 @@
       {
         "title": "6.1600 Foundations of Computer Security - MIT Fall 2023",
         "url": "https://61600.csail.mit.edu/2023/",
-        "kind": "link",
+        "kind": "course",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -183,9 +198,21 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "sp25.cs161.org",
+        "url": "https://sp25.cs161.org/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "6.875 - Cryptography - Fall 2021 - MIT",
         "url": "https://mit6875.github.io/fall2021.html",
         "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PL6ogFv-ieghe8MOIcpD6UDtdK-UMHG8oH",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -195,9 +222,21 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "[Videos]",
+        "url": "https://courses.cs.washington.edu/courses/csep590a/11wi/video/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "CS461/ECE422 - Computer Security - University of Illinois at Urbana-Champaign",
         "url": "https://courses.engr.illinois.edu/cs461/sp2016/",
         "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "8a560718 345a 417a b665 6bd375a71ee2",
+        "url": "https://recordings.engineering.illinois.edu:8443/ess/portal/section/8a560718-345a-417a-b665-6bd375a71ee2",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -235,33 +274,33 @@
         "url": "https://nptel.ac.in/courses/106107155/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Cryptography and Network Security - IIT Kharagpur",
-        "url": "https://nptel.ac.in/courses/106105031/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "18-636 Browser Security, Stanford",
-        "url": "https://courseware.stanford.edu/pg/courses/334553/18636-spring-2013",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Internet Security - Weaknesses and Targets (WT 2015/16)",
-        "url": "https://www.tele-task.de/archive/series/overview/1084/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "WT 2012/13",
-        "url": "https://www.tele-task.de/archive/series/overview/921/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
       }
     ],
     "backend": [
+      {
+        "title": "dev_learning › 90DaysOfDevOps",
+        "url": "https://github.com/MichaelCade/90DaysOfDevOps",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › devops-exercises",
+        "url": "https://github.com/bregman-arie/devops-exercises",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
       {
         "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
         "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22&maxResults=150",
@@ -323,6 +362,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
         "kind": "link",
@@ -341,45 +386,15 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
         "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
-        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
-        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2020 - YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 4414 - Operating Systems, University of Virginia (rust-class)",
-        "url": "http://rust-class.org/pages/classes.html",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 4414 Operating Systems, Fall 2018 - University of Virginia",
-        "url": "https://www.cs.virginia.edu/~cr4bd/4414/F2018/schedule.html",
-        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
@@ -395,9 +410,251 @@
         "url": "https://www.interviewbit.com/mock-interview/",
         "kind": "link",
         "source": "Developer-Y/technical-interviews"
+      },
+      {
+        "title": "archive.is",
+        "url": "http://archive.is/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Wayback Machine",
+        "url": "https://archive.org/web/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "![Star History Chart",
+        "url": "https://api.star-history.com/svg?repos=olshansk/interview&type=Date",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Introduction to Algorithms: A Creative Approach",
+        "url": "https://www.amazon.com/Introduction-Algorithms-Creative-Udi-Manber/dp/0201120372",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Introduction to Algorithms",
+        "url": "https://mitpress.mit.edu/books/introduction-algorithms",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Algorithms",
+        "url": "http://algs4.cs.princeton.edu/home/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Competitive Programming",
+        "url": "https://cpbook.net/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "E-Maxx Algorithms",
+        "url": "https://e-maxx-eng.appspot.com/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "[Original [RU]]",
+        "url": "https://e-maxx.ru/algo/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "vhf/free-programming-books",
+        "url": "https://github.com/vhf/free-programming-books",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "it-ebooks.info",
+        "url": "http://it-ebooks.info/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Algorithms",
+        "url": "http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf",
+        "kind": "paper",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "LeetCode",
+        "url": "https://leetcode.com/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "labuladong/fucking-algorithm",
+        "url": "https://github.com/labuladong/fucking-algorithm/tree/english",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "InterviewBit",
+        "url": "https://www.interviewbit.com/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Codility",
+        "url": "https://codility.com/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "Intervue.io",
+        "url": "https://intervue.io/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      },
+      {
+        "title": "HackerRank",
+        "url": "https://www.hackerrank.com/",
+        "kind": "link",
+        "source": "Olshansk/interview"
+      }
+    ],
+    "caching": [
+      {
+        "title": "Caching 101",
+        "url": "https://algomaster.io/learn/system-design/what-is-caching",
+        "kind": "link",
+        "source": "ashishps1/awesome-system-design-resources"
+      },
+      {
+        "title": "Caching Strategies",
+        "url": "https://algomaster.io/learn/system-design/caching-strategies",
+        "kind": "link",
+        "source": "ashishps1/awesome-system-design-resources"
+      },
+      {
+        "title": "Cache Eviction Policies",
+        "url": "https://blog.algomaster.io/p/7-cache-eviction-strategies",
+        "kind": "link",
+        "source": "ashishps1/awesome-system-design-resources"
+      },
+      {
+        "title": "Distributed Caching",
+        "url": "https://blog.algomaster.io/p/distributed-caching",
+        "kind": "link",
+        "source": "ashishps1/awesome-system-design-resources"
+      },
+      {
+        "title": "Content Delivery Network (CDN)",
+        "url": "https://algomaster.io/learn/system-design/content-delivery-network-cdn",
+        "kind": "link",
+        "source": "ashishps1/awesome-system-design-resources"
+      },
+      {
+        "title": "Transcoding Videos at Scale",
+        "url": "https://www.egnyte.com/blog/post/transcoding-how-we-serve-videos-at-scale",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Facebook Video Broadcasting",
+        "url": "https://engineering.fb.com/ios/under-the-hood-broadcasting-live-video-to-millions/",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Netflix Video Encoding at Scale",
+        "url": "https://netflixtechblog.com/high-quality-video-encoding-at-scale-d159db052746",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Netflix Shot based encoding",
+        "url": "https://netflixtechblog.com/optimized-shot-based-encodes-now-streaming-4b9464204830",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Facebook Cluster Management",
+        "url": "https://engineering.fb.com/data-center-engineering/twine/",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Google Autopilot - Autoscaling",
+        "url": "https://dl.acm.org/doi/pdf/10.1145/3342195.3387524",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Netflix Workflow Orchestration",
+        "url": "https://netflixtechblog.com/netflix-conductor-a-microservices-orchestrator-2e8d4771bf40",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Opensource Workflow Management",
+        "url": "https://github.com/spotify/luigi",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Meta Hardware Management",
+        "url": "https://engineering.fb.com/2020/12/09/data-center-engineering/how-facebook-keeps-its-large-scale-infrastructure-hardware-up-and-running/",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Meta Capacity Assignment",
+        "url": "https://engineering.fb.com/2022/09/06/data-center-engineering/viewing-the-world-as-a-computer-global-capacity-management/",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Amazon EC2",
+        "url": "https://www.allthingsdistributed.com/2015/07/under-the-hood-of-the-amazon-ec2-container-service.html",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "What is a message queue",
+        "url": "https://www.cloudamqp.com/blog/what-is-message-queuing.html",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "AirBnb Idempotency",
+        "url": "https://medium.com/airbnb-engineering/avoiding-double-payments-in-a-distributed-payments-system-2981f6b070bb",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "Meta Async Task Computing",
+        "url": "https://engineering.fb.com/2023/01/31/production-engineering/meta-asynchronous-computing/",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
+      },
+      {
+        "title": "DB as queue Antipattern",
+        "url": "https://en.wikipedia.org/wiki/Database-as-IPC",
+        "kind": "link",
+        "source": "InterviewReady/system-design-resources"
       }
     ],
     "databases": [
+      {
+        "title": "dev_learning › DBMS-Indexology",
+        "url": "https://github.com/yingjunwu/DBMS-Indexology",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › database notes",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/tree/main/databases",
+        "kind": "link",
+        "source": "dev_learning"
+      },
       {
         "title": "CMU 15-445 — Introduction to Database Systems",
         "url": "https://15445.courses.cs.cmu.edu/fall2025/",
@@ -477,45 +734,33 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "15-721 - Advanced Database Systems, CMU",
-        "url": "http://15721.courses.cs.cmu.edu/spring2024",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS122 - Relational Database System Implementation, Winter 2014-2015 - Caltech",
-        "url": "http://users.cms.caltech.edu/~donnie/cs122/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 186 - Database Systems, UC Berkeley, Spring 2015",
-        "url": "http://www.infocobuild.com/education/audio-video-courses/computer-science/cs186-spring2015-berkeley.html",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 6530 - Graduate-level Database Systems, Fall 2016, University of Utah",
-        "url": "https://www.cs.utah.edu/~lifeifei/cs6530/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Lectures - YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCqwHUcieMrytP453Ep0y6eI",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "6.830/6.814 - Database Systems Fall 2014",
-        "url": "https://www.youtube.com/playlist?list=PLfciLKR3SgqOxCy1TIXXyfTqKzX2enDjK",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Informatics 1 - Data & Analysis 2014/15- University of Edinburgh",
-        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/da.htm",
-        "kind": "link",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
@@ -643,6 +888,12 @@
     ],
     "dsa": [
       {
+        "title": "dev_learning › assorted algorithms & DSA list",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/assorted_list.md",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
         "title": "MIT 6.006 — Introduction to Algorithms",
         "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
         "kind": "course",
@@ -727,6 +978,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoiHeO17FlLADJ38Kb3EiPU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "Homework Walkthroughs",
         "url": "https://www.youtube.com/playlist?list=PLZBCR-EGqNpoVyQCIUDHiXnL-zdFD_ixk",
         "kind": "video",
@@ -745,21 +1002,9 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "CS225 - Data Structures - University of Illinois at Urbana-Champaign",
-        "url": "https://cs.illinois.edu/courses/profile/CS225",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Video lectures",
-        "url": "https://www.youtube.com/playlist?list=PLRdSp8jtJxBqG3KNQPKKB-0Z2hh9omoDo",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS2 - Data Structures and Algorithms Sim-Mautner - UNSW",
-        "url": "https://www.youtube.com/playlist?list=PLsPlf0OhSLIqfpyxmomKcIcrht5K3IUOr",
-        "kind": "video",
+        "title": "cop3530sahni",
+        "url": "http://www.cise.ufl.edu/academics/courses/preview/cop3530sahni/",
+        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
@@ -783,9 +1028,21 @@
         "source": "keon/awesome-nlp"
       },
       {
+        "title": "2212.03533",
+        "url": "https://arxiv.org/abs/2212.03533",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
         "title": "E5-Mistral",
         "url": "https://arxiv.org/abs/2401.00368",
         "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "FlagEmbedding",
+        "url": "https://github.com/FlagOpen/FlagEmbedding",
+        "kind": "link",
         "source": "keon/awesome-nlp"
       },
       {
@@ -1101,6 +1358,24 @@
     ],
     "foundations": [
       {
+        "title": "dev_learning — personal learning hoard",
+        "url": "https://github.com/sarthakagrawal927/dev_learning",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › my-cs-degree",
+        "url": "https://github.com/logancyang/my-cs-degree",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › apex technical excellence roadmap",
+        "url": "https://github.com/sarthakagrawal927/dev_learning/blob/main/apex.md",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
         "title": "ECE 462 Object-Oriented Programming using C++ and Java - Purdue",
         "url": "https://engineering.purdue.edu/OOSD/F2008/F2008.html",
         "kind": "link",
@@ -1201,24 +1476,6 @@
         "url": "https://www.youtube.com/watch?v=3zdfCR6c8vw&list=PLuhjguFxSeVLvKvWwTUIpVwXdLtZPX1ZS",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "System Analysis and Design - IISC Bangalore",
-        "url": "https://nptel.ac.in/courses/106108102/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Software Engineering - IIT Bombay",
-        "url": "https://nptel.ac.in/courses/106101061/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Dependable Systems (SS 2014)- HPI University of Potsdam",
-        "url": "https://www.tele-task.de/series/1005/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
       }
     ],
     "http": [
@@ -1247,6 +1504,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "video index.html",
+        "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_video",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "Slides",
         "url": "https://www.ecse.rpi.edu/Homepages/koushik/shivkuma-teaching/video_index.html#ccn_foils",
         "kind": "link",
@@ -1256,6 +1519,12 @@
         "title": "Audio/Video Recordings and Podcasts of Professor Raj Jain's Lectures - Washington University in St. Louis",
         "url": "http://www.cse.wustl.edu/~jain/videos.htm",
         "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlists",
+        "url": "https://www.youtube.com/user/ProfRajJain/playlists",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
@@ -1271,8 +1540,20 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "[Videos]",
+        "url": "https://courses.cs.washington.edu/courses/csep561/13au/video/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "CSEP 561 – Network Systems, Autumn 2008 - University of Washington",
         "url": "https://courses.cs.washington.edu/courses/csep561/08au/",
+        "kind": "link",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "[Videos]",
+        "url": "https://courses.cs.washington.edu/courses/csep561/08au/lectures/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       },
@@ -1316,30 +1597,6 @@
         "title": "Columbia ELEN E4703 Wireless Communications spring 2006, by Angel Lozano",
         "url": "https://www.youtube.com/playlist?list=PLIygTcviGPKAaY0VGGjQ2whITq23AOjaR",
         "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Columbia COMS W4119 Computer Networks fall 2004, by Vishal Misra",
-        "url": "https://www.youtube.com/playlist?list=PLIygTcviGPKCh6XgTHofe6zPK_LQ_nVW3",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Columbia ELEN E4710 An Introduction to Network Engineering fall 2004, by Dan Rubenstein",
-        "url": "https://www.cs.columbia.edu/~danr/courses/4710/Fall04/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Data Communication - IIT Kharagpur",
-        "url": "https://nptel.ac.in/courses/106105082/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Error Correcting Codes - IISC Bangalore",
-        "url": "https://nptel.ac.in/courses/117108044/",
-        "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
@@ -1467,6 +1724,18 @@
     ],
     "low-level-design": [
       {
+        "title": "dev_learning › awesome-low-level-design",
+        "url": "https://github.com/ashishps1/awesome-low-level-design",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › grokking-oop",
+        "url": "https://github.com/tssovi/grokking-the-object-oriented-design-interview",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
         "title": "ECE 462 Object-Oriented Programming using C++ and Java - Purdue",
         "url": "https://engineering.purdue.edu/OOSD/F2008/F2008.html",
         "kind": "link",
@@ -1571,18 +1840,6 @@
       {
         "title": "System Analysis and Design - IISC Bangalore",
         "url": "https://nptel.ac.in/courses/106108102/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Software Engineering - IIT Bombay",
-        "url": "https://nptel.ac.in/courses/106101061/",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Dependable Systems (SS 2014)- HPI University of Potsdam",
-        "url": "https://www.tele-task.de/series/1005/",
         "kind": "link",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -1961,9 +2218,21 @@
         "source": "keon/awesome-nlp"
       },
       {
+        "title": "2212.03533",
+        "url": "https://arxiv.org/abs/2212.03533",
+        "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
         "title": "E5-Mistral",
         "url": "https://arxiv.org/abs/2401.00368",
         "kind": "paper",
+        "source": "keon/awesome-nlp"
+      },
+      {
+        "title": "FlagEmbedding",
+        "url": "https://github.com/FlagOpen/FlagEmbedding",
+        "kind": "link",
         "source": "keon/awesome-nlp"
       },
       {
@@ -2033,6 +2302,86 @@
         "source": "keon/awesome-nlp"
       }
     ],
+    "rate-limiting": [
+      {
+        "title": "12) Some compression algorithm",
+        "url": "https://github.com/klauspost/compress",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "More",
+        "url": "http://blog.notdot.net/tag/damn-cool-algorithms",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "Rust100k.html",
+        "url": "https://matklad.github.io/2021/09/05/Rust100k.html",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "eytzinger",
+        "url": "https://algorithmica.org/en/eytzinger",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "role of algorithms.html",
+        "url": "https://matklad.github.io/2023/08/13/role-of-algorithms.html",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "one billion row challenge",
+        "url": "https://www.morling.dev/blog/one-billion-row-challenge/",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "item",
+        "url": "https://news.ycombinator.com/item?id=39700809",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "item",
+        "url": "https://news.ycombinator.com/item?id=40660761",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "Galactic algorithm",
+        "url": "https://en.wikipedia.org/wiki/Galactic_algorithm",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "succinct",
+        "url": "https://blog.startifact.com/posts/succinct/",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "what is a succinct rank data structure how does it work",
+        "url": "https://stackoverflow.com/questions/72580828/what-is-a-succinct-rank-data-structure-how-does-it-work",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "innodb",
+        "url": "https://blog.jcole.us/innodb/",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      },
+      {
+        "title": "how postgres stores data on disk",
+        "url": "https://drew.silcock.dev/blog/how-postgres-stores-data-on-disk/",
+        "kind": "link",
+        "source": "sarthakagrawal927/dev_learning"
+      }
+    ],
     "runtime": [
       {
         "title": "MIT 6.1810 — Operating Systems",
@@ -2045,6 +2394,18 @@
         "url": "https://www.cs.cmu.edu/~213/",
         "kind": "course",
         "source": "curated"
+      },
+      {
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
       },
       {
         "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
@@ -2107,6 +2468,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
         "kind": "link",
@@ -2125,32 +2492,14 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnngd9q965kViUzPqylDQ37M",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
-        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
-        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2020 - YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnn-uwJeiOeWJctHC3MCORw9",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -2595,55 +2944,73 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "15-721 - Advanced Database Systems, CMU",
-        "url": "http://15721.courses.cs.cmu.edu/spring2024",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS122 - Relational Database System Implementation, Winter 2014-2015 - Caltech",
-        "url": "http://users.cms.caltech.edu/~donnie/cs122/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 186 - Database Systems, UC Berkeley, Spring 2015",
-        "url": "http://www.infocobuild.com/education/audio-video-courses/computer-science/cs186-spring2015-berkeley.html",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 6530 - Graduate-level Database Systems, Fall 2016, University of Utah",
-        "url": "https://www.cs.utah.edu/~lifeifei/cs6530/",
-        "kind": "course",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Lectures - YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLbuogVdPnkCqwHUcieMrytP453Ep0y6eI",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "6.830/6.814 - Database Systems Fall 2014",
-        "url": "https://www.youtube.com/playlist?list=PLfciLKR3SgqOxCy1TIXXyfTqKzX2enDjK",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Informatics 1 - Data & Analysis 2014/15- University of Edinburgh",
-        "url": "http://groups.inf.ed.ac.uk/vision/VIDEO/2014/da.htm",
-        "kind": "link",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       },
       {
-        "title": "Database Management Systems, Aduni",
-        "url": "http://aduni.org/courses/databases/index.php?view=cw",
-        "kind": "link",
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjZaHA6QcxDfJ0SIWBzQFKEG",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjbj8BMuIrRcacnQh20hmY9g&si=R7F_J9zbXsG07PjR",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq&si=H-wfgjoLz6ifhZqS",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&si=KKXgy16Zm20utGyH",
+        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
     ],
     "system-design": [
+      {
+        "title": "dev_learning › system-design-resources",
+        "url": "https://github.com/InterviewReady/system-design-resources",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › ByteByteGo system-design-101",
+        "url": "https://github.com/ByteByteGoHq/system-design-101",
+        "kind": "link",
+        "source": "dev_learning"
+      },
+      {
+        "title": "dev_learning › ML system design case studies",
+        "url": "https://github.com/Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+        "kind": "link",
+        "source": "dev_learning"
+      },
       {
         "title": "The System Design Primer",
         "url": "https://github.com/donnemartin/system-design-primer",
@@ -2655,6 +3022,18 @@
         "url": "https://pdos.csail.mit.edu/6.824/",
         "kind": "course",
         "source": "curated"
+      },
+      {
+        "title": "25T2",
+        "url": "https://cgi.cse.unsw.edu.au/~cs1521/25T2/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLUsPZdCcmwELH7BDprCzDSN40futwJGYb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
       },
       {
         "title": "15-213 Introduction to Computer Systems, Fall 2015 - CMU",
@@ -2717,6 +3096,12 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnma-0Z_0DZ3nkWKpZN7HGbw",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "ECS 150 - Operating Systems and Systems Programming - Fall 2020 - Joël Porquet-Lupine - UC Davis",
         "url": "https://lupteach.gitlab.io/courses/ucd-ecs150/online/",
         "kind": "link",
@@ -2725,42 +3110,6 @@
       {
         "title": "ECE 344 - Operating Systems - Fall 2024 - Jon Eyolfson - University of Toronto",
         "url": "https://www.youtube.com/playlist?list=PLunILarQwxnntWWNJ64E7wC4KhsEwHWxB",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2024 Section 2",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlW3S8i4gSV9I_8qGX8xwtr",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "ECE 353 - Systems Software - Winter 2025 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlUsOvAOhMs9yCHnH0Vs9w2",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "ECE 454 - Computer Systems Programming - Fall 2024 - Jon Eyolfson - University of Toronto",
-        "url": "https://www.youtube.com/playlist?list=PLunILarQwxnlzwF1oYp2CJc1rFNldOisZ",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS124 Operating Systems - California Institute of Technology, Fall 2018 - Youtube",
-        "url": "https://www.youtube.com/playlist?list=PL3swII2vlVoVbav6FV98pidq6BsTN4u56",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "CS 162 Operating Systems and Systems Programming, Spring 2015 - University of California, Berkeley",
-        "url": "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c?sort=titleSorter",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2020 - YouTube",
-        "url": "https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC",
         "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
@@ -2815,6 +3164,66 @@
         "source": "Developer-Y/cs-video-courses"
       },
       {
+        "title": "2020 winter",
+        "url": "http://www.yisongyue.com/courses/cs155/2020_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi67hPzb9zJXH1cbeN7LKNiD",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "2019 winter",
+        "url": "http://www.yisongyue.com/courses/cs155/2019_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi7r2trKGgwaedY17MADTay4",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "2018 winter",
+        "url": "http://www.yisongyue.com/courses/cs155/2018_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi644ypoxzP1frkPYVHdjDJU",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "2017 winter",
+        "url": "http://www.yisongyue.com/courses/cs155/2017_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLuz4CTPOUNi6BfMrltePqMAHdl5W33-bC",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "2016 winter",
+        "url": "http://www.yisongyue.com/courses/cs155/2016_winter/",
+        "kind": "course",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
+        "title": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PL5HdMttxBY0BVTP9y7qQtzTgmcjQ3P0mb",
+        "kind": "video",
+        "source": "Developer-Y/cs-video-courses"
+      },
+      {
         "title": "CS 156 - Learning from Data, Caltech",
         "url": "https://work.caltech.edu/lectures.html",
         "kind": "link",
@@ -2824,66 +3233,6 @@
         "title": "10-601 - Introduction to Machine Learning (MS) - Tom Mitchell - 2015, CMU",
         "url": "http://www.cs.cmu.edu/~ninamf/courses/601sp15/lectures.shtml",
         "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "10-601 Machine Learning | CMU | Fall 2017",
-        "url": "https://www.youtube.com/playlist?list=PL7k0r4t5c10-g7CWCnHfZOAxLaiNinChk",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "10-701 - Introduction to Machine Learning (PhD) - Tom Mitchell, Spring 2011, CMU",
-        "url": "http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Spring 2015 by Alex Smola",
-        "url": "https://www.youtube.com/playlist?list=PLZSO_6-bSqHTTV7w9u7grTXBHMH-mw3qn",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Fall 2020 by Ziv Bar-Joseph, Eric Xing",
-        "url": "https://www.youtube.com/playlist?list=PLsWN0V-b507g7dbQTUvFkKZEqdHR5Fh4P",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "10 - 301/601 - Introduction to Machine Learning - Fall 2023 - CMU",
-        "url": "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d5bf275d-ff88-4bf6-a865-b065010f55c2%22",
-        "kind": "link",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "6.036 - Machine Learning, Broderick - MIT Fall 2020",
-        "url": "https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Mediterranean Machine Learning summer school 2024",
-        "url": "https://www.youtube.com/playlist?list=PLF-wkqRv4u1bV4Zd1UepYfyZXkv6Bz6ra",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "LxMLS Lisbon Machine Learning School 2024",
-        "url": "https://www.youtube.com/playlist?list=PLQl_xdhSmQeh4eRfAwETbtJJLPKcDLrzw",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Applied Machine Learning (Cornell Tech CS 5787, Fall 2020)",
-        "url": "https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83",
-        "kind": "video",
-        "source": "Developer-Y/cs-video-courses"
-      },
-      {
-        "title": "Stanford CS229: Machine Learning Course | Summer 2019 (Anand Avati)",
-        "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh",
-        "kind": "video",
         "source": "Developer-Y/cs-video-courses"
       }
     ],

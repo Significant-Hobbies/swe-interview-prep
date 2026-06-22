@@ -161,9 +161,165 @@ const SOURCES = [
     file: 'llm-course.md',
     wholeFileTags: ['ai-systems', 'language-modeling', 'transformers', 'training'],
   },
+  // --- sarthakagrawal927/dev_learning submodule hoard ---
+  {
+    repo: 'logancyang/my-cs-degree',
+    file: 'my-cs-degree.md',
+    sectionToTags: {
+      'general knowledge courses': ['foundations', 'dsa', 'mathematics'],
+      'project courses': ['foundations', 'ai-systems'],
+    },
+  },
+  {
+    repo: 'ashishps1/awesome-low-level-design',
+    file: 'awesome-lld.md',
+    sectionToTags: {
+      'oop fundamentals': ['low-level-design'],
+      'class relationships': ['low-level-design'],
+      'design principles': ['low-level-design'],
+      'design patterns': ['low-level-design'],
+      'concurrency and multi-threading concepts': ['low-level-design', 'backend'],
+      'low level design interview problems': ['low-level-design'],
+    },
+  },
+  {
+    repo: 'ashishps1/awesome-system-design-resources',
+    file: 'awesome-sd-res.md',
+    sectionToTags: {
+      'core concepts': ['system-design'],
+      'networking fundamentals': ['http', 'system-design'],
+      'database fundamentals': ['databases', 'system-design'],
+      'caching fundamentals': ['caching', 'system-design'],
+      'distributed system and microservices': ['distributed-systems', 'system-design'],
+      'system design interview problems': ['system-design'],
+    },
+  },
+  {
+    repo: 'armankhondker/awesome-ai-ml-resources',
+    file: 'awesome-ai-ml.md',
+    sectionToTags: {
+      'courses': ['ai-systems', 'training'],
+      'books': ['ai-systems'],
+      'ai/ml roadmap': ['ai-systems', 'training'],
+      'ai/ml key concepts': ['ai-systems'],
+      'ai/ml building blocks': ['ai-systems', 'training'],
+    },
+  },
+  {
+    repo: 'InterviewReady/system-design-resources',
+    file: 'ir-sd.md',
+    wholeFileTags: ['system-design', 'distributed-systems', 'caching'],
+  },
+  {
+    repo: 'karanpratapsingh/system-design',
+    file: 'karan-sd.md',
+    wholeFileTags: ['system-design'],
+  },
+  {
+    repo: 'ByteByteGoHq/system-design-101',
+    file: 'bytebytego-sd.md',
+    wholeFileTags: ['system-design'],
+  },
+  {
+    repo: 'Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies',
+    file: 'ml-sd-cases.md',
+    sectionToTags: {
+      'real-world ml systems': ['system-design', 'ai-systems'],
+    },
+  },
+  {
+    repo: 'yingjunwu/DBMS-Indexology',
+    file: 'dbms-indexology.md',
+    wholeFileTags: ['databases', 'storage-engines'],
+  },
+  {
+    repo: 'arpitbbhayani/system-design-questions',
+    file: 'sd-questions.md',
+    wholeFileTags: ['system-design'],
+  },
+  {
+    repo: 'Olshansk/interview',
+    file: 'interview-help.md',
+    wholeFileTags: ['dsa', 'behavioral', 'system-design'],
+  },
+  {
+    repo: 'MichaelCade/90DaysOfDevOps',
+    file: '90days-devops.md',
+    wholeFileTags: ['backend', 'system-design'],
+  },
+  {
+    repo: 'bregman-arie/devops-exercises',
+    file: 'devops-exercises.md',
+    wholeFileTags: ['backend', 'system-design'],
+  },
 ];
 
+/** Multi-file sources (personal hoards, notes repos). */
+const MULTI_FILE_SOURCES = [
+  {
+    repo: 'sarthakagrawal927/dev_learning',
+    files: [
+      {
+        path: 'assorted_list.md',
+        wholeFileTags: ['dsa', 'system-design', 'databases', 'storage-engines', 'rate-limiting'],
+      },
+      {
+        path: 'databases/readme.md',
+        wholeFileTags: ['databases', 'storage-engines'],
+      },
+      {
+        path: 'apex.md',
+        sectionToTags: {
+          courses: ['foundations', 'ai-systems', 'training', 'system-design', 'distributed-systems', 'runtime', 'dsa'],
+          'mathematics & algorithms': ['dsa', 'mathematics'],
+          'systems & architecture': ['system-design', 'distributed-systems', 'databases', 'storage-engines', 'backend'],
+          'operating systems': ['runtime', 'backend'],
+          'computer networks': ['http', 'backend'],
+          'concurrency & parallelism': ['backend', 'distributed-systems'],
+          'high-performance databases': ['databases', 'storage-engines'],
+          'scalability & load management': ['scalability', 'system-design'],
+          'observability & reliability': ['observability', 'backend'],
+          'security best practices': ['auth', 'backend'],
+          'cloud infrastructure': ['backend', 'system-design'],
+          'performance engineering': ['runtime', 'backend', 'scalability'],
+          'ai for personalization & rag systems': ['rag', 'ai-systems', 'llm-apps'],
+          'microservices architecture': ['system-design', 'backend'],
+        },
+      },
+    ],
+  },
+];
+
+/** dev_learning .gitmodules path → tags (hiring/company lists intentionally skipped). */
+const GITMODULE_TAGS = {
+  'resources/my-cs-degree': ['foundations'],
+  'resources/system-design-resources': ['system-design'],
+  'resources/system-design': ['system-design'],
+  'resources/system-design-101': ['system-design'],
+  'resources/system-design-q': ['system-design', 'distributed-systems'],
+  'resources/awesome-ai-ml-resources': ['ai-systems', 'training'],
+  'resources/low-level-design': ['low-level-design'],
+  'resources/ml-system-design-case-studies': ['system-design', 'ai-systems'],
+  'resources/interview_help': ['dsa', 'behavioral', 'system-design'],
+  'resources/90DaysOfDevOps': ['backend', 'system-design'],
+  'resources/university': ['foundations'],
+  'resources/Resources-for-Beginner-Bug-Bounty-Hunters': ['auth'],
+  'databases/DBMS-Indexology': ['databases', 'storage-engines'],
+  'questionnaires/system-design': ['system-design'],
+  'questionnaires/grokking-oop': ['low-level-design'],
+  'questionnaires/devops-exercises': ['backend', 'system-design'],
+  'questionnaires/Back-End-Developer-Interview-Questions': ['backend'],
+  'questionnaires/javascript-interview-questions': ['foundations'],
+  'questionnaires/reactjs-interview-questions': ['foundations'],
+  'questionnaires/frontend-end-interview-handbook': ['foundations'],
+  'questionnaires/js-advanced': ['foundations'],
+  'questionnaires/test-your-sysadmin-skills': ['backend', 'runtime'],
+  'questionnaires/Security_Engineer_Interview_Questions': ['auth'],
+};
+
 const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+const INLINE_URL_RE = /([^\n(]{4,100}?)\s*\((https?:\/\/[^)]+)\)/g;
+const BARE_URL_RE = /(?:^|\s)(https?:\/\/[^\s)]+)/g;
 const HEADING_RE = /^(#{2,4})\s+(.+?)\s*$/;
 const LOW_SIGNAL_TITLE =
   /^(youtube|videos?|lectures?|watch lectures|notes?(-\d{4})?|readme|home|website|link|here|click here|table of contents|contents|introduction|related|misc|legend)$/i;
@@ -173,9 +329,27 @@ function classify(url) {
   const u = url.toLowerCase();
   if (u.includes('youtube.com') || u.includes('youtu.be')) return 'video';
   if (u.includes('coursera.org') || u.includes('edx.org') || u.includes('udacity.com')) return 'course';
-  if (u.includes('ocw.mit.edu') || u.includes('see.stanford.edu') || /\bcs\d{3,4}\b/.test(u)) return 'course';
+  if (
+    u.includes('ocw.mit.edu') ||
+    u.includes('csail.mit.edu') ||
+    u.includes('see.stanford.edu') ||
+    /\bcs\d{3,4}\b/.test(u)
+  ) {
+    return 'course';
+  }
   if (u.includes('arxiv.org') || u.endsWith('.pdf')) return 'paper';
   return 'link';
+}
+
+function titleFromUrl(url) {
+  try {
+    const { hostname, pathname } = new URL(url);
+    const slug = pathname.replace(/\/$/, '').split('/').filter(Boolean).pop() ?? '';
+    const base = slug ? slug.replace(/[-_]/g, ' ') : hostname.replace(/^www\./, '');
+    return base.slice(0, 80) || url;
+  } catch {
+    return url;
+  }
 }
 
 function normalizeHeading(h) {
@@ -186,11 +360,12 @@ function normalizeHeading(h) {
     .toLowerCase();
 }
 
-function readSource({ repo, file }) {
-  const path = resolve(TMP, file);
+function readSource({ repo, file }, repoPath = 'README.md') {
+  const cacheKey = `${repo.replace('/', '__')}__${repoPath.replace(/\//g, '__')}`;
+  const path = resolve(TMP, file ?? `${cacheKey}.md`);
   if (existsSync(path)) return readFileSync(path, 'utf8');
   mkdirSync(TMP, { recursive: true });
-  const buf = execSync(`gh api repos/${repo}/contents/README.md -q .content`, { encoding: 'utf8' });
+  const buf = execSync(`gh api repos/${repo}/contents/${repoPath} -q .content`, { encoding: 'utf8' });
   const md = Buffer.from(buf, 'base64').toString('utf8');
   writeFileSync(path, md);
   return md;
@@ -223,23 +398,94 @@ function keepLink(title) {
   return true;
 }
 
+function pushLink(links, seen, title, url) {
+  const cleanUrl = url.replace(/[.,;)]+$/, '');
+  if (!cleanUrl.startsWith('http')) return;
+  if (cleanUrl.includes('badge') || cleanUrl.includes('shields.io') || cleanUrl.includes('camo.githubusercontent.com')) {
+    return;
+  }
+  if (seen.has(cleanUrl)) return;
+  let cleanTitle = title.trim().replace(/\s+/g, ' ').replace(/^[-*]\s*/, '');
+  if (!keepLink(cleanTitle)) cleanTitle = titleFromUrl(cleanUrl);
+  if (!keepLink(cleanTitle)) return;
+  seen.add(cleanUrl);
+  links.push({ title: cleanTitle, url: cleanUrl, kind: classify(cleanUrl) });
+}
+
 function extractLinks(body) {
   const links = [];
   const seen = new Set();
-  for (const line of body) {
+  const lines = Array.isArray(body) ? body : body.split(/\r?\n/);
+  for (const line of lines) {
     let m;
     LINK_RE.lastIndex = 0;
     while ((m = LINK_RE.exec(line)) !== null) {
-      const title = m[1].trim().replace(/\s+/g, ' ');
-      const url = m[2].replace(/[.,;)]+$/, '');
-      if (!keepLink(title)) continue;
-      if (seen.has(url)) continue;
-      if (url.startsWith('#') || url.includes('badge') || url.includes('shields.io')) continue;
-      seen.add(url);
-      links.push({ title, url, kind: classify(url) });
+      pushLink(links, seen, m[1], m[2]);
+    }
+    INLINE_URL_RE.lastIndex = 0;
+    while ((m = INLINE_URL_RE.exec(line)) !== null) {
+      pushLink(links, seen, m[1], m[2]);
+    }
+    if (!line.includes('](')) {
+      BARE_URL_RE.lastIndex = 0;
+      while ((m = BARE_URL_RE.exec(line)) !== null) {
+        pushLink(links, seen, titleFromUrl(m[1]), m[1]);
+      }
     }
   }
   return links;
+}
+
+function parseGitmodules(md) {
+  /** @type {{path:string,url:string}[]} */
+  const entries = [];
+  let current = {};
+  for (const line of md.split(/\r?\n/)) {
+    if (line.startsWith('[submodule')) {
+      if (current.path && current.url) entries.push(current);
+      current = {};
+    } else if (line.startsWith('path = ')) current.path = line.slice(7).trim();
+    else if (line.startsWith('url = ')) {
+      let url = line.slice(6).trim();
+      if (url.endsWith('.git')) url = url.slice(0, -4);
+      current.url = url;
+    }
+  }
+  if (current.path && current.url) entries.push(current);
+  return entries;
+}
+
+function harvestDevLearningSubmodules(harvested, seenUrls) {
+  const md = readSource({ repo: 'sarthakagrawal927/dev_learning', file: 'dev-learning-gitmodules.txt' }, '.gitmodules');
+  const hoardRoot = {
+    title: 'dev_learning — personal learning hoard',
+    url: 'https://github.com/sarthakagrawal927/dev_learning',
+    kind: 'link',
+    source: 'sarthakagrawal927/dev_learning',
+  };
+  for (const tag of ['foundations', 'system-design']) {
+    if (!seenUrls.has(hoardRoot.url)) {
+      seenUrls.add(hoardRoot.url);
+      (harvested[tag] ??= []).push(hoardRoot);
+    }
+  }
+
+  for (const { path: subPath, url } of parseGitmodules(md)) {
+    const tags = GITMODULE_TAGS[subPath];
+    if (!tags) continue;
+    const name = subPath.split('/').pop()?.replace(/-/g, ' ') ?? subPath;
+    const link = {
+      title: `dev_learning › ${name}`,
+      url,
+      kind: 'link',
+      source: 'sarthakagrawal927/dev_learning#submodule',
+    };
+    if (seenUrls.has(url)) continue;
+    seenUrls.add(url);
+    for (const tag of tags) {
+      (harvested[tag] ??= []).push(link);
+    }
+  }
 }
 
 function tagsForHeading(heading, sectionToTags) {
@@ -273,34 +519,46 @@ function main() {
   const harvested = {};
   const seenUrls = new Set();
 
-  for (const src of SOURCES) {
-    const md = readSource(src);
-    if (src.wholeFileTags) {
-      const links = extractLinks(md.split(/\r?\n/));
-      for (const link of links) {
+  function ingestMarkdown(md, src, { wholeFileTags, sectionToTags }) {
+    if (wholeFileTags) {
+      for (const link of extractLinks(md)) {
         if (seenUrls.has(link.url)) continue;
         seenUrls.add(link.url);
-        for (const tag of src.wholeFileTags) {
-          (harvested[tag] ??= []).push({ ...link, source: src.repo });
+        for (const tag of wholeFileTags) {
+          (harvested[tag] ??= []).push({ ...link, source: src });
         }
       }
-      continue;
+      return;
     }
-
-    const sections = parseSections(md);
-    for (const sec of sections) {
-      const tags = tagsForHeading(sec.heading, src.sectionToTags);
+    for (const sec of parseSections(md)) {
+      const tags = tagsForHeading(sec.heading, sectionToTags);
       if (!tags) continue;
-      const links = extractLinks(sec.body);
-      for (const link of links) {
+      for (const link of extractLinks(sec.body)) {
         if (seenUrls.has(link.url)) continue;
         seenUrls.add(link.url);
         for (const tag of tags) {
-          (harvested[tag] ??= []).push({ ...link, source: src.repo });
+          (harvested[tag] ??= []).push({ ...link, source: src });
         }
       }
     }
   }
+
+  for (const src of SOURCES) {
+    const md = readSource(src);
+    ingestMarkdown(md, src.repo, src);
+  }
+
+  for (const mfs of MULTI_FILE_SOURCES) {
+    for (const file of mfs.files) {
+      const md = readSource(
+        { repo: mfs.repo, file: `dev-learning__${file.path.replace(/\//g, '__')}.md` },
+        file.path,
+      );
+      ingestMarkdown(md, mfs.repo, file);
+    }
+  }
+
+  harvestDevLearningSubmodules(harvested, seenUrls);
 
   const curated = loadCurated();
   const allTags = new Set([...Object.keys(harvested), ...Object.keys(curated)]);
@@ -320,7 +578,11 @@ function main() {
 
   const payload = {
     _meta: {
-      source: SOURCES.map(s => s.repo),
+      source: [
+        ...SOURCES.map(s => s.repo),
+        ...MULTI_FILE_SOURCES.map(s => s.repo),
+        'sarthakagrawal927/dev_learning#submodules',
+      ],
       curated: 'src/data/curated-external-resources.json',
       generated_by: 'scripts/harvest-external-resources.mjs',
       cap_per_tag: PER_TAG_CAP,
