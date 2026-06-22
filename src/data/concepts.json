@@ -5617,7 +5617,7 @@
         },
         {
           "title": "Seeing Theory — Descriptive Statistics",
-          "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html",
+          "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
           "type": "article"
         }
       ],
@@ -5711,7 +5711,7 @@
       "resources": [
         {
           "title": "Seeing Theory — Hypothesis Testing",
-          "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html",
+          "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html",
           "type": "article"
         },
         {
@@ -5964,7 +5964,7 @@
       "resources": [
         {
           "title": "Seeing Theory — Probability Distributions",
-          "url": "https://seeing-theory.brown.edu/distributions/index.html",
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html",
           "type": "article"
         },
         {
@@ -6020,7 +6020,7 @@
       "resources": [
         {
           "title": "Seeing Theory — Central Limit Theorem",
-          "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html",
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html",
           "type": "article"
         },
         {
@@ -6240,7 +6240,7 @@
       "resources": [
         {
           "title": "Seeing Theory — Regression",
-          "url": "https://seeing-theory.brown.edu/regression/index.html",
+          "url": "https://seeing-theory.brown.edu/regression-analysis/index.html",
           "type": "article"
         },
         {

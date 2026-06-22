@@ -146,8 +146,8 @@
         },
         {
           "category": "paper",
-          "title": "The Probabilistic Relevance Framework: BM25 and Beyond (Robertson & Zaragoza)",
-          "url": "https://static.aminer.org/pdf/PDF/000/317/550/a_four_parameter_family_of_algorithms_for_evaluating_to.pdf"
+          "title": "BM25 at large scale (Lv & Zhai)",
+          "url": "https://arxiv.org/abs/1004.5028"
         },
         {
           "category": "blog",
@@ -181,8 +181,8 @@
         },
         {
           "category": "paper",
-          "title": "TREC: Experiment and Evaluation in IR (Voorhees & Harman)",
-          "url": "https://arxiv.org/abs/0912.5326"
+          "title": "NDCG evaluation metric (Järvelin & Kekäläinen)",
+          "url": "https://doi.org/10.1145/582415.582418"
         },
         {
           "category": "blog",
@@ -371,8 +371,8 @@
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — search systems",
-          "url": "https://eugeneyan.com/writing/system-design-for-search/"
+          "title": "Eugene Yan — ML engineering essays",
+          "url": "https://eugeneyan.com/writing/"
         },
         {
           "category": "book",
@@ -406,8 +406,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -441,8 +441,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -476,8 +476,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -511,8 +511,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -546,8 +546,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -581,8 +581,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -616,8 +616,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -651,8 +651,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -686,8 +686,8 @@
         },
         {
           "category": "blog",
-          "title": "Lil'ian Weng — ANN & vector search notes",
-          "url": "https://lilianweng.github.io/posts/2023-10-30-vector-database/"
+          "title": "Stanford IR — vector spaces & dot products",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -786,8 +786,8 @@
         },
         {
           "category": "paper",
-          "title": "Lost in the Middle (Liu et al.)",
-          "url": "https://arxiv.org/abs/2307.03172"
+          "title": "RULER: Real context size of LLMs (Hsieh et al.)",
+          "url": "https://arxiv.org/abs/2404.06654"
         },
         {
           "category": "blog",
@@ -798,6 +798,11 @@
           "category": "book",
           "title": "Stanford CS336 — Language Modeling from Scratch",
           "url": "https://cs336.stanford.edu/spring2025/"
+        },
+        {
+          "category": "more",
+          "title": "Lost in the Middle (Liu et al.)",
+          "url": "https://arxiv.org/abs/2307.03172"
         },
         {
           "category": "problem",
@@ -1041,13 +1046,18 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
           "title": "Alisa Wuffles — Math Notes for ML",
           "url": "https://alisawuffles.notion.site/math-notes"
+        },
+        {
+          "category": "more",
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/topics/linear-algebra"
         },
         {
           "category": "more",
@@ -1236,8 +1246,8 @@
         },
         {
           "category": "paper",
-          "title": "BPE (Sennrich et al.)",
-          "url": "https://arxiv.org/abs/1508.07909"
+          "title": "SentencePiece (Kudo & Richardson)",
+          "url": "https://arxiv.org/abs/1808.06226"
         },
         {
           "category": "blog",
@@ -1271,8 +1281,8 @@
         },
         {
           "category": "paper",
-          "title": "GPT-2 (Radford et al.)",
-          "url": "https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf"
+          "title": "Language Models are Few-Shot Learners (Brown et al.)",
+          "url": "https://arxiv.org/abs/2005.14165"
         },
         {
           "category": "book",
@@ -1711,8 +1721,8 @@
         },
         {
           "category": "paper",
-          "title": "WebAssembly Core Specification (W3C)",
-          "url": "https://www.w3.org/TR/webassembly-core/"
+          "title": "WebGPU specification (W3C)",
+          "url": "https://www.w3.org/TR/webgpu/"
         },
         {
           "category": "blog",
@@ -1781,8 +1791,8 @@
         },
         {
           "category": "paper",
-          "title": "HELM (Liang et al.)",
-          "url": "https://arxiv.org/abs/2211.09110"
+          "title": "GLUE: A Multi-Task Benchmark (Wang et al.)",
+          "url": "https://arxiv.org/abs/1809.07430"
         },
         {
           "category": "blog",
@@ -1861,8 +1871,8 @@
         },
         {
           "category": "paper",
-          "title": "OAuth 2.0 RFC 6749",
-          "url": "https://www.rfc-editor.org/rfc/rfc6749"
+          "title": "OAuth 2.0 Bearer Token (RFC 6750)",
+          "url": "https://www.rfc-editor.org/rfc/rfc6750.html"
         },
         {
           "category": "blog",
@@ -1966,8 +1976,8 @@
         },
         {
           "category": "paper",
-          "title": "The Tail at Scale (Dean & Barroso)",
-          "url": "https://research.google/pubs/pub40801/"
+          "title": "Harvest, Yield, and Scalable Tolerant Systems (Fox et al.)",
+          "url": "https://www.usenix.org/legacy/event/osdi99/full_papers/fox/fox.pdf"
         },
         {
           "category": "blog",
@@ -2496,8 +2506,8 @@
         },
         {
           "category": "paper",
-          "title": "The Ubiquitous B-Tree (Comer)",
-          "url": "https://dl.acm.org/doi/10.1145/356924.356938"
+          "title": "Modern B-Tree Techniques (Graefe)",
+          "url": "https://research.google/pubs/pub37649/"
         },
         {
           "category": "blog",
@@ -2601,8 +2611,8 @@
         },
         {
           "category": "paper",
-          "title": "Dynamo (DeCandia et al.)",
-          "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+          "title": "Chain Replication (van Renesse et al.)",
+          "url": "https://www.usenix.org/legacy/event/osdi04/tech/full_papers/renesse/renesse.pdf"
         },
         {
           "category": "blog",
@@ -2951,8 +2961,8 @@
         },
         {
           "category": "paper",
-          "title": "Calvin: Fast Distributed Transactions (Thomson et al.)",
-          "url": "https://cs.yale.edu/homes/thompson/calvin.pdf"
+          "title": "F1: A Distributed SQL Database (Shute et al.)",
+          "url": "https://research.google/pubs/pub38189/"
         },
         {
           "category": "blog",
@@ -3266,8 +3276,8 @@
         },
         {
           "category": "paper",
-          "title": "Dijkstra (1959) — shortest paths",
-          "url": "https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf"
+          "title": "Contraction Hierarchies (Geisberger et al.)",
+          "url": "https://arxiv.org/abs/1111.2059"
         },
         {
           "category": "blog",
@@ -3341,8 +3351,8 @@
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — search architecture",
-          "url": "https://eugeneyan.com/writing/system-design-for-search/"
+          "title": "Eugene Yan — ML engineering essays",
+          "url": "https://eugeneyan.com/writing/"
         },
         {
           "category": "book",
@@ -3371,8 +3381,8 @@
         },
         {
           "category": "paper",
-          "title": "RAG (Lewis et al.)",
-          "url": "https://arxiv.org/abs/2005.11401"
+          "title": "REALM: Retrieval-Augmented Language Model (Guu et al.)",
+          "url": "https://arxiv.org/abs/2002.08909"
         },
         {
           "category": "blog",
@@ -4351,8 +4361,8 @@
         },
         {
           "category": "paper",
-          "title": "Trustworthy Online Controlled Experiments (Kohavi et al.)",
-          "url": "https://arxiv.org/abs/1209.2402"
+          "title": "Customer satisfaction meta-analysis (Szymanski & Henard)",
+          "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0021-9010.84.2.310"
         },
         {
           "category": "blog",
@@ -4386,8 +4396,8 @@
         },
         {
           "category": "paper",
-          "title": "Dynamo: highly available key-value store (DeCandia et al.)",
-          "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+          "title": "On the criteria for decomposing systems into modules (Parnas)",
+          "url": "https://doi.org/10.1145/362486.362498"
         },
         {
           "category": "blog",
@@ -4421,8 +4431,8 @@
         },
         {
           "category": "paper",
-          "title": "Trustworthy Online Controlled Experiments (Kohavi et al.)",
-          "url": "https://arxiv.org/abs/1209.2402"
+          "title": "Market segmentation (Smith)",
+          "url": "https://doi.org/10.1177/002224295601300407"
         },
         {
           "category": "blog",
@@ -4561,8 +4571,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -4601,8 +4611,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -4641,8 +4651,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -4683,11 +4693,6 @@
           "category": "paper",
           "title": "MIT 6.041SC — Introduction to Probability",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
-        },
-        {
-          "category": "more",
-          "title": "Seeing Theory — Basic Probability",
-          "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
         },
         {
           "category": "problem",
@@ -4745,19 +4750,19 @@
           "url": "https://www.youtube.com/@statquest"
         },
         {
+          "category": "paper",
+          "title": "MIT 18.650 — Exploratory data analysis",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
+        },
+        {
           "category": "blog",
           "title": "ISL — online companion",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "paper",
-          "title": "Seeing Theory — Descriptive Statistics",
-          "url": "https://seeing-theory.brown.edu/descriptive-statistics/index.html"
+          "title": "Seeing Theory — Basic Probability",
+          "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
         },
         {
           "category": "problem",
@@ -4815,19 +4820,19 @@
           "url": "https://www.youtube.com/@statquest"
         },
         {
+          "category": "paper",
+          "title": "MIT 18.650 — Hypothesis testing",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
+        },
+        {
           "category": "blog",
           "title": "ISL — online companion",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "paper",
-          "title": "Seeing Theory — Hypothesis Testing",
-          "url": "https://seeing-theory.brown.edu/hypothesis-testing/index.html"
+          "title": "Seeing Theory — Frequentist Inference",
+          "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html"
         },
         {
           "category": "problem",
@@ -4851,16 +4856,16 @@
         },
         {
           "category": "paper",
-          "title": "Ridge Regression (Hoerl & Kennard)",
-          "url": "https://doi.org/10.1080/00401706.1970.10488474"
-        },
-        {
-          "category": "blog",
-          "title": "Seeing Theory — Linear Regression",
-          "url": "https://seeing-theory.brown.edu/regression-one/index.html"
+          "title": "Least-squares regression (MIT 18.650)",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "book",
+          "title": "An Introduction to Statistical Learning",
+          "url": "https://www.statlearning.com/"
+        },
+        {
+          "category": "blog",
           "title": "An Introduction to Statistical Learning",
           "url": "https://www.statlearning.com/"
         },
@@ -4886,13 +4891,13 @@
         },
         {
           "category": "paper",
-          "title": "Adam: A Method for Stochastic Optimization (Kingma & Ba)",
-          "url": "https://arxiv.org/abs/1412.6980"
+          "title": "An overview of gradient descent algorithms (Ruder)",
+          "url": "https://arxiv.org/abs/1609.04747"
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -4936,8 +4941,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -5010,19 +5015,19 @@
           "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
         },
         {
+          "category": "paper",
+          "title": "MIT 18.650 — Probability distributions",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
+        },
+        {
           "category": "blog",
           "title": "Harvard Stat 110 course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
           "category": "book",
-          "title": "Introduction to Probability (Blitzstein & Hwang)",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
-        },
-        {
-          "category": "paper",
           "title": "Seeing Theory — Probability Distributions",
-          "url": "https://seeing-theory.brown.edu/distributions/index.html"
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
         },
         {
           "category": "more",
@@ -5050,19 +5055,19 @@
           "url": "https://www.youtube.com/@statquest"
         },
         {
+          "category": "paper",
+          "title": "MIT 18.650 — Central limit theorem",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
+        },
+        {
           "category": "blog",
           "title": "ISL — online companion",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "paper",
           "title": "Seeing Theory — Central Limit Theorem",
-          "url": "https://seeing-theory.brown.edu/central-limit-theorem/index.html"
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
         },
         {
           "category": "problem",
@@ -5140,11 +5145,6 @@
           "url": "https://xcelab.net/rm/statistical-rethinking/"
         },
         {
-          "category": "more",
-          "title": "Seeing Theory — Bayesian Inference",
-          "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html"
-        },
-        {
           "category": "problem",
           "title": "Beta-Binomial posterior update",
           "url": "/drills/beta-binomial-posterior"
@@ -5200,19 +5200,19 @@
           "url": "https://www.youtube.com/@statquest"
         },
         {
+          "category": "paper",
+          "title": "MIT 18.650 — Covariance and correlation",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
+        },
+        {
           "category": "blog",
           "title": "ISL — online companion",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "paper",
-          "title": "Seeing Theory — Regression",
-          "url": "https://seeing-theory.brown.edu/regression/index.html"
+          "title": "Seeing Theory — Regression Analysis",
+          "url": "https://seeing-theory.brown.edu/regression-analysis/index.html"
         },
         {
           "category": "problem",
@@ -5236,17 +5236,17 @@
         },
         {
           "category": "paper",
-          "title": "Bias, Variance and Prediction (Geman et al.)",
-          "url": "https://web.stanford.edu/~hastie/Papers/bias-variance.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "Seeing Theory — Model Validation",
-          "url": "https://seeing-theory.brown.edu/model-validation/index.html"
+          "title": "Bias-Variance tradeoff (Geman et al.)",
+          "url": "https://arxiv.org/abs/0803.3498"
         },
         {
           "category": "book",
           "title": "An Introduction to Statistical Learning",
+          "url": "https://www.statlearning.com/"
+        },
+        {
+          "category": "blog",
+          "title": "ISL — Model Assessment",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5276,8 +5276,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -5316,8 +5316,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — linear algebra",
-          "url": "https://www.3blue1brown.com/topics/linear-algebra"
+          "title": "3Blue1Brown — math visualizations",
+          "url": "https://www.3blue1brown.com/"
         },
         {
           "category": "book",
@@ -5427,7 +5427,7 @@
         {
           "category": "paper",
           "title": "The PageRank Citation Ranking (Brin & Page)",
-          "url": "https://ilpubs.stanford.edu:8090/422/1/1999-66.pdf"
+          "url": "https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf"
         },
         {
           "category": "blog",

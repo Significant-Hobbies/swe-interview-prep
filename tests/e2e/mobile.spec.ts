@@ -22,7 +22,7 @@ test.describe('Learning OS mobile (390px)', () => {
 
   test('Learn renders with no horizontal scroll', async ({ page }) => {
     await page.goto('/learn');
-    await expect(page.getByRole('heading', { name: 'Pick a path.', exact: true })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('heading', { name: 'Set your active path.', exact: true })).toBeVisible({ timeout: 10000 });
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -38,9 +38,12 @@ test.describe('Learning OS mobile (390px)', () => {
     await expect(page.getByText('This week')).toBeVisible();
   });
 
-  test('bottom tab bar reaches Playground and Progress', async ({ page }) => {
+  test('bottom bar reaches Mock and Browse opens Playground', async ({ page }) => {
     await page.goto('/learn');
     const bottomNav = page.locator('div.fixed.bottom-0');
+    await bottomNav.getByRole('link', { name: 'Mock' }).click();
+    await expect(page).toHaveURL(/mock/);
+    await bottomNav.getByRole('button', { name: 'Browse catalog' }).click();
     await bottomNav.getByRole('link', { name: 'Playground' }).click();
     await expect(page).toHaveURL(/playground/);
     await bottomNav.getByRole('link', { name: 'Progress' }).click();

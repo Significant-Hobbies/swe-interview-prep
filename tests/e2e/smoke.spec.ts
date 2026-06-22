@@ -71,7 +71,7 @@ test.describe('Learning OS smoke', () => {
   test('Roadmap detail shows visual graph', async ({ page }) => {
     await page.goto('/roadmaps/prob-stats-30d');
     await expect(page.getByRole('heading', { name: /Probability & Statistics/i })).toBeVisible();
-    await expect(page.locator('svg').first()).toBeVisible();
+    await expect(page.getByRole('img', { name: /roadmap graph/i })).toBeVisible();
   });
 
   test('public share roadmap works without sign-in', async ({ browser }) => {
