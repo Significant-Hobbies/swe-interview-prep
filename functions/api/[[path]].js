@@ -1,6 +1,7 @@
 import { createClient } from "@libsql/client/web";
 
 import { dispatchLearningAction } from "../../shared/api/worker-learning.mjs";
+import { withTiming } from "../_lib/timing.js";
 
 const AUTH_COOKIE_NAME = "dsa_prep_auth";
 const AUTH_COOKIE_MAX_AGE = 30 * 24 * 60 * 60;
@@ -415,7 +416,7 @@ async function handleLearning(request, env) {
   return dispatchLearningAction({ request, client, user, json });
 }
 
-export async function onRequest({ request, env, params }) {
+export const onRequest = withTiming(async ({ request, env, params }) => {
   const path = (params.path || []).join("/");
   try {
     // NOTE: each handler is `await`ed so a rejected promise is caught here —
@@ -438,4 +439,4 @@ export async function onRequest({ request, env, params }) {
       { status: 500 },
     );
   }
-}
+});
