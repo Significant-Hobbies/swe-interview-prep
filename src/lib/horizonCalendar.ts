@@ -24,11 +24,7 @@ function dateStr(offset: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-function focusForDay(
-  profile: LearnerProfile,
-  dayOffset: number,
-  reviewsDue: number,
-): HorizonFocus {
+function focusForDay(profile: LearnerProfile, dayOffset: number, reviewsDue: number): HorizonFocus {
   const horizon = profile.interviewHorizonDays ?? 60;
   const w = normalizeModalityWeights(profile.modalityWeights);
   if (reviewsDue > 5 && dayOffset % 3 === 0) return 'review';
@@ -63,7 +59,7 @@ export function buildHorizonCalendar(opts: {
     const picked = pickConceptForSession(
       { ...profile, skipConceptIds: [...profile.skipConceptIds, ...usedConcepts] },
       mastery,
-      null,
+      null
     );
     const concept = picked?.concept ?? null;
     if (concept) usedConcepts.add(concept.id);

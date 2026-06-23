@@ -70,7 +70,7 @@ const S_TIER_PINECONE = /pinecone\.io\/learn\/hnsw/i;
 
 export function isSTierSource(title: string, url: string, slot?: MediaSlot): boolean {
   const hay = `${title} ${url}`;
-  if (BLOCKED.some(re => re.test(url) || re.test(title))) return false;
+  if (BLOCKED.some((re) => re.test(url) || re.test(title))) return false;
   if (S_TIER_PINECONE.test(url)) return true;
 
   if (slot === 'paper' || !slot) {
@@ -104,9 +104,10 @@ export interface PackTierItem {
   url: string;
 }
 
-export function assertSTierPackItems(
-  packs: Record<string, { items?: PackTierItem[] }>,
-): { ok: boolean; violations: { conceptId: string; category: string; title: string; url: string }[] } {
+export function assertSTierPackItems(packs: Record<string, { items?: PackTierItem[] }>): {
+  ok: boolean;
+  violations: { conceptId: string; category: string; title: string; url: string }[];
+} {
   const violations: { conceptId: string; category: string; title: string; url: string }[] = [];
   const media = new Set(['video', 'paper', 'blog', 'book']);
 
@@ -130,8 +131,11 @@ export function assertSTierPackItems(
 
 /** @deprecated Use assertSTierPackItems */
 export function assertSTierPackSlots(
-  packs: Record<string, Record<string, { title?: string; url?: string } | undefined>>,
-): { ok: boolean; violations: { conceptId: string; slot: MediaSlot; title: string; url: string }[] } {
+  packs: Record<string, Record<string, { title?: string; url?: string } | undefined>>
+): {
+  ok: boolean;
+  violations: { conceptId: string; slot: MediaSlot; title: string; url: string }[];
+} {
   const violations: { conceptId: string; slot: MediaSlot; title: string; url: string }[] = [];
   for (const [conceptId, pack] of Object.entries(packs)) {
     for (const slot of ['video', 'paper', 'blog', 'book'] as MediaSlot[]) {

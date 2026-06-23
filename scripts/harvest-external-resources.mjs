@@ -134,7 +134,11 @@ const SOURCES = [
     repo: 'jwasham/coding-interview-university',
     file: 'coding-interview-university.md',
     sectionToTags: {
-      'system design, scalability, data handling': ['system-design', 'distributed-systems', 'scalability'],
+      'system design, scalability, data handling': [
+        'system-design',
+        'distributed-systems',
+        'scalability',
+      ],
       'coding question practice': ['dsa'],
       'algorithmic complexity / big-o / asymptotic analysis': ['dsa'],
       'data structures': ['dsa'],
@@ -198,8 +202,8 @@ const SOURCES = [
     repo: 'armankhondker/awesome-ai-ml-resources',
     file: 'awesome-ai-ml.md',
     sectionToTags: {
-      'courses': ['ai-systems', 'training'],
-      'books': ['ai-systems'],
+      courses: ['ai-systems', 'training'],
+      books: ['ai-systems'],
       'ai/ml roadmap': ['ai-systems', 'training'],
       'ai/ml key concepts': ['ai-systems'],
       'ai/ml building blocks': ['ai-systems', 'training'],
@@ -270,9 +274,23 @@ const MULTI_FILE_SOURCES = [
       {
         path: 'apex.md',
         sectionToTags: {
-          courses: ['foundations', 'ai-systems', 'training', 'system-design', 'distributed-systems', 'runtime', 'dsa'],
+          courses: [
+            'foundations',
+            'ai-systems',
+            'training',
+            'system-design',
+            'distributed-systems',
+            'runtime',
+            'dsa',
+          ],
           'mathematics & algorithms': ['dsa', 'mathematics'],
-          'systems & architecture': ['system-design', 'distributed-systems', 'databases', 'storage-engines', 'backend'],
+          'systems & architecture': [
+            'system-design',
+            'distributed-systems',
+            'databases',
+            'storage-engines',
+            'backend',
+          ],
           'operating systems': ['runtime', 'backend'],
           'computer networks': ['http', 'backend'],
           'concurrency & parallelism': ['backend', 'distributed-systems'],
@@ -328,7 +346,8 @@ const SEMESTER_TITLE = /^(spring|fall|winter|summer)\s+20\d{2}$/i;
 function classify(url) {
   const u = url.toLowerCase();
   if (u.includes('youtube.com') || u.includes('youtu.be')) return 'video';
-  if (u.includes('coursera.org') || u.includes('edx.org') || u.includes('udacity.com')) return 'course';
+  if (u.includes('coursera.org') || u.includes('edx.org') || u.includes('udacity.com'))
+    return 'course';
   if (
     u.includes('ocw.mit.edu') ||
     u.includes('csail.mit.edu') ||
@@ -365,7 +384,9 @@ function readSource({ repo, file }, repoPath = 'README.md') {
   const path = resolve(TMP, file ?? `${cacheKey}.md`);
   if (existsSync(path)) return readFileSync(path, 'utf8');
   mkdirSync(TMP, { recursive: true });
-  const buf = execSync(`gh api repos/${repo}/contents/${repoPath} -q .content`, { encoding: 'utf8' });
+  const buf = execSync(`gh api repos/${repo}/contents/${repoPath} -q .content`, {
+    encoding: 'utf8',
+  });
   const md = Buffer.from(buf, 'base64').toString('utf8');
   writeFileSync(path, md);
   return md;
@@ -401,11 +422,18 @@ function keepLink(title) {
 function pushLink(links, seen, title, url) {
   const cleanUrl = url.replace(/[.,;)]+$/, '');
   if (!cleanUrl.startsWith('http')) return;
-  if (cleanUrl.includes('badge') || cleanUrl.includes('shields.io') || cleanUrl.includes('camo.githubusercontent.com')) {
+  if (
+    cleanUrl.includes('badge') ||
+    cleanUrl.includes('shields.io') ||
+    cleanUrl.includes('camo.githubusercontent.com')
+  ) {
     return;
   }
   if (seen.has(cleanUrl)) return;
-  let cleanTitle = title.trim().replace(/\s+/g, ' ').replace(/^[-*]\s*/, '');
+  let cleanTitle = title
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/^[-*]\s*/, '');
   if (!keepLink(cleanTitle)) cleanTitle = titleFromUrl(cleanUrl);
   if (!keepLink(cleanTitle)) return;
   seen.add(cleanUrl);
@@ -456,7 +484,10 @@ function parseGitmodules(md) {
 }
 
 function harvestDevLearningSubmodules(harvested, seenUrls) {
-  const md = readSource({ repo: 'sarthakagrawal927/dev_learning', file: 'dev-learning-gitmodules.txt' }, '.gitmodules');
+  const md = readSource(
+    { repo: 'sarthakagrawal927/dev_learning', file: 'dev-learning-gitmodules.txt' },
+    '.gitmodules'
+  );
   const hoardRoot = {
     title: 'dev_learning — personal learning hoard',
     url: 'https://github.com/sarthakagrawal927/dev_learning',
@@ -504,7 +535,7 @@ function loadCurated() {
   /** @type {Record<string, {title:string,url:string,kind:string,source:string}[]>} */
   const byTag = {};
   for (const [tag, items] of Object.entries(raw.byTag ?? {})) {
-    byTag[tag] = items.map(r => ({
+    byTag[tag] = items.map((r) => ({
       title: r.title,
       url: r.url,
       kind: r.kind ?? classify(r.url),
@@ -552,7 +583,7 @@ function main() {
     for (const file of mfs.files) {
       const md = readSource(
         { repo: mfs.repo, file: `dev-learning__${file.path.replace(/\//g, '__')}.md` },
-        file.path,
+        file.path
       );
       ingestMarkdown(md, mfs.repo, file);
     }
@@ -579,8 +610,8 @@ function main() {
   const payload = {
     _meta: {
       source: [
-        ...SOURCES.map(s => s.repo),
-        ...MULTI_FILE_SOURCES.map(s => s.repo),
+        ...SOURCES.map((s) => s.repo),
+        ...MULTI_FILE_SOURCES.map((s) => s.repo),
         'sarthakagrawal927/dev_learning#submodules',
       ],
       curated: 'src/data/curated-external-resources.json',

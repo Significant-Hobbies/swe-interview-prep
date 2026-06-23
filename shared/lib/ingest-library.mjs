@@ -58,12 +58,7 @@ export function ingestedReviewId(repoId, sectionId) {
  * @param {number} [opts.maxPerConcept]
  */
 export function buildIngestedReviewQuestions(opts) {
-  const {
-    conceptIndex,
-    repoContent,
-    existingIds = new Set(),
-    maxPerConcept = 3,
-  } = opts;
+  const { conceptIndex, repoContent, existingIds = new Set(), maxPerConcept = 3 } = opts;
 
   const byId = new Map();
   const sectionCache = new Map();
@@ -77,7 +72,7 @@ export function buildIngestedReviewQuestions(opts) {
       return null;
     }
     const flat = flattenSections(content.sections || []);
-    const hit = flat.find(s => s.id === sectionId) || null;
+    const hit = flat.find((s) => s.id === sectionId) || null;
     sectionCache.set(key, hit);
     return hit;
   }

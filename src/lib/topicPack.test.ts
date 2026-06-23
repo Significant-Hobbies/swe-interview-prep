@@ -16,21 +16,27 @@ const concepts = (conceptsData as { concepts: Concept[] }).concepts;
 
 describe('topicPack', () => {
   it('classifies resource types into media categories', () => {
-    expect(classifyResource({
-      title: 'x',
-      url: 'https://arxiv.org/abs/123',
-      type: 'paper',
-    })).toBe('paper');
-    expect(classifyResource({
-      title: 'x',
-      url: 'https://www.youtube.com/watch?v=abc',
-      type: 'video',
-    })).toBe('video');
-    expect(classifyResource({
-      title: 'x',
-      url: 'https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html',
-      type: 'doc',
-    })).toBe('book');
+    expect(
+      classifyResource({
+        title: 'x',
+        url: 'https://arxiv.org/abs/123',
+        type: 'paper',
+      })
+    ).toBe('paper');
+    expect(
+      classifyResource({
+        title: 'x',
+        url: 'https://www.youtube.com/watch?v=abc',
+        type: 'video',
+      })
+    ).toBe('video');
+    expect(
+      classifyResource({
+        title: 'x',
+        url: 'https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html',
+        type: 'doc',
+      })
+    ).toBe('book');
   });
 
   it('overflows duplicate media categories into more', () => {
@@ -49,7 +55,9 @@ describe('topicPack', () => {
       ],
     } as Concept);
     expect(packHasCategory(pack, 'blog')).toBe(true);
-    expect(pack.items.filter(i => i.category === 'more').map(i => i.url)).toContain('https://example.com/b');
+    expect(pack.items.filter((i) => i.category === 'more').map((i) => i.url)).toContain(
+      'https://example.com/b'
+    );
   });
 
   it('builds items with category, title, and url', () => {
@@ -60,7 +68,7 @@ describe('topicPack', () => {
       expect(item.title).toBeTruthy();
       expect(typeof item.url).toBe('string');
     }
-    expect(pack.items.some(i => i.category === 'write' && i.body)).toBe(true);
+    expect(pack.items.some((i) => i.category === 'write' && i.body)).toBe(true);
   });
 
   it('builds write prompt from mental model', () => {

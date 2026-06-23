@@ -1,4 +1,4 @@
-import { useCallback, useEffect,useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface SpeechRecognitionResult {
   transcript: string;
@@ -26,9 +26,10 @@ export function useSpeechRecognition(): SpeechRecognitionResult {
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
 
-  const SpeechRecognition = typeof window !== 'undefined'
-    ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-    : null;
+  const SpeechRecognition =
+    typeof window !== 'undefined'
+      ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      : null;
 
   const isSupported = !!SpeechRecognition;
 
@@ -59,7 +60,7 @@ export function useSpeechRecognition(): SpeechRecognitionResult {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const result = event.results[i][0].transcript;
         if ((event.results[i] as any).isFinal) {
-          finalTranscript += result + ' ';
+          finalTranscript += `${result} `;
         } else {
           interim = result;
         }
@@ -77,7 +78,11 @@ export function useSpeechRecognition(): SpeechRecognitionResult {
     recognition.onend = () => {
       // Auto-restart if we're still supposed to be listening
       if (isListening) {
-        try { recognition.start(); } catch { /* already started */ }
+        try {
+          recognition.start();
+        } catch {
+          /* already started */
+        }
       } else {
         setIsListening(false);
       }

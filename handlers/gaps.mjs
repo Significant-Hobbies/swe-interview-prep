@@ -22,16 +22,18 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { aiConfig, profile, catalog } = req.body || {};
-  const hasAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+  const hasAI = aiConfig?.endpointUrl && aiConfig.apiKey && aiConfig.model;
   if (!hasAI) {
-    return res.status(400).json({ error: 'Configure an AI provider in Settings to use the Gap Analyzer.' });
+    return res
+      .status(400)
+      .json({ error: 'Configure an AI provider in Settings to use the Gap Analyzer.' });
   }
 
   const prompt = `Concept catalog (id: name [track]):
-${(catalog?.concepts || []).map(c => `${c.id}: ${c.name} [${c.track}]`).join('\n')}
+${(catalog?.concepts || []).map((c) => `${c.id}: ${c.name} [${c.track}]`).join('\n')}
 
 Artifact catalog (id: title):
-${(catalog?.artifacts || []).map(a => `${a.id}: ${a.title}`).join('\n')}
+${(catalog?.artifacts || []).map((a) => `${a.id}: ${a.title}`).join('\n')}
 
 Learner profile:
 ${JSON.stringify(profile || {}, null, 2)}

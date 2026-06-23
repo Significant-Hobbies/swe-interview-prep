@@ -1,7 +1,11 @@
-import { BookOpen, ChevronDown, ChevronRight, ExternalLink,Loader2 } from 'lucide-react';
-import { useEffect,useState } from 'react';
+import { BookOpen, ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-import { type LibrarySection,loadSectionContent, useAmbientSections } from '../hooks/useAmbientLibrary';
+import {
+  type LibrarySection,
+  loadSectionContent,
+  useAmbientSections,
+} from '../hooks/useAmbientLibrary';
 import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
@@ -34,7 +38,7 @@ export default function AmbientLibrary({ conceptIds }: Props) {
             No matching library sections yet for: {conceptIds.join(', ')}
           </div>
         ) : (
-          sections.map(s => <SectionRow key={`${s.repoId}/${s.sectionId}`} section={s} />)
+          sections.map((s) => <SectionRow key={`${s.repoId}/${s.sectionId}`} section={s} />)
         )}
       </div>
     </div>
@@ -62,7 +66,11 @@ function SectionRow({ section }: { section: LibrarySection }) {
         onClick={() => setOpen(!open)}
         className="flex w-full items-start gap-2 px-2.5 py-2 text-left transition-colors hover:bg-slate-900/80"
       >
-        {open ? <ChevronDown className="mt-0.5 h-3 w-3 flex-shrink-0 text-slate-500" /> : <ChevronRight className="mt-0.5 h-3 w-3 flex-shrink-0 text-slate-500" />}
+        {open ? (
+          <ChevronDown className="mt-0.5 h-3 w-3 flex-shrink-0 text-slate-500" />
+        ) : (
+          <ChevronRight className="mt-0.5 h-3 w-3 flex-shrink-0 text-slate-500" />
+        )}
         <div className="min-w-0 flex-1">
           <div className="truncate text-xs font-medium text-slate-200">{section.title}</div>
           <div className="mt-0.5 flex items-center gap-1.5 text-[10px] text-slate-500">

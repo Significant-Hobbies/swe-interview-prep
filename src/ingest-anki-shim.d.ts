@@ -3,7 +3,7 @@ declare module '../../shared/lib/ingest-anki.mjs' {
 
   export function parseAnkiExport(
     text: string,
-    opts?: { deckName?: string; concepts?: { id: string; name: string }[] },
+    opts?: { deckName?: string; concepts?: { id: string; name: string }[] }
   ): {
     deckName: string;
     format: string;
@@ -14,7 +14,7 @@ declare module '../../shared/lib/ingest-anki.mjs' {
   export function parseApkgBytes(
     bytes: Uint8Array,
     SQL: unknown,
-    opts?: { deckName?: string; concepts?: { id: string; name: string }[] },
+    opts?: { deckName?: string; concepts?: { id: string; name: string }[] }
   ): {
     deckName: string;
     format: string;
@@ -24,7 +24,7 @@ declare module '../../shared/lib/ingest-anki.mjs' {
 
   export function toReviewQuestions(
     parsed: { cards?: unknown[] },
-    opts?: { requireConcept?: boolean },
+    opts?: { requireConcept?: boolean }
   ): ReviewQuestion[];
 }
 

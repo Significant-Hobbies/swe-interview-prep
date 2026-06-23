@@ -37,21 +37,24 @@ export function buildDigestMessage({
     ? lines.join(' · ')
     : `Your ${sessionMinutes}-minute session is ready`;
 
-  const subject = dueReviews > 0
-    ? `Loop: ${dueReviews} review${dueReviews > 1 ? 's' : ''} due today`
-    : 'Loop: your study session is ready';
+  const subject =
+    dueReviews > 0
+      ? `Loop: ${dueReviews} review${dueReviews > 1 ? 's' : ''} due today`
+      : 'Loop: your study session is ready';
 
   const text = [
     `Hi ${name || 'there'},`,
     '',
-    headline + '.',
+    `${headline}.`,
     '',
     `Open Today: ${appUrl}/today`,
     dueReviews > 0 ? `Reviews: ${appUrl}/practice/all?tab=reviews` : null,
     '',
     'Retrieval beats re-reading.',
     '— Loop',
-  ].filter(Boolean).join('\n');
+  ]
+    .filter(Boolean)
+    .join('\n');
 
   const html = `
 <p>Hi ${escapeHtml(name || 'there')},</p>

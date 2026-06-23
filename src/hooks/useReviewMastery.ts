@@ -3,10 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import type { MasteryRating } from '../lib/fsrs';
 import { loadLocal, saveLocal, STORE_KEYS } from '../lib/userStore';
-import {
-  type ReviewMasteryEntry,
-  reviewQuestion,
-} from '../lib/reviewMastery';
+import { type ReviewMasteryEntry, reviewQuestion } from '../lib/reviewMastery';
 
 function loadGuest(): Record<string, ReviewMasteryEntry> {
   return loadLocal(STORE_KEYS.reviewMastery, {});
@@ -49,38 +46,41 @@ export function useReviewMastery() {
     void fetchMastery();
   }, [fetchMastery]);
 
-  const review = useCallback(async (questionId: string, rating: MasteryRating) => {
-    if (user) {
-      try {
-        const res = await fetch('/api/learning?action=review-mastery', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ questionId, rating }),
-        });
-        if (!res.ok) return;
-        const data = await res.json();
-        if (data.mastery) {
-          setMastery(prev => {
-            const next = { ...prev, [questionId]: data.mastery };
-            saveGuest(next);
-            return next;
+  const review = useCallback(
+    async (questionId: string, rating: MasteryRating) => {
+      if (user) {
+        try {
+          const res = await fetch('/api/learning?action=review-mastery', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ questionId, rating }),
           });
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data.mastery) {
+            setMastery((prev) => {
+              const next = { ...prev, [questionId]: data.mastery };
+              saveGuest(next);
+              return next;
+            });
+          }
+          return;
+        } catch {
+          /* fall through */
         }
-        return;
-      } catch {
-        /* fall through */
       }
-    }
-    setMastery(prev => {
-      const next = {
-        ...prev,
-        [questionId]: reviewQuestion(prev[questionId], rating),
-      };
-      saveGuest(next);
-      return next;
-    });
-  }, [user]);
+      setMastery((prev) => {
+        const next = {
+          ...prev,
+          [questionId]: reviewQuestion(prev[questionId], rating),
+        };
+        saveGuest(next);
+        return next;
+      });
+    },
+    [user]
+  );
 
   return { mastery, loading, review, refresh: fetchMastery };
 }

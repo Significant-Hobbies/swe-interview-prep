@@ -7,52 +7,28 @@
       "horizon": "9d",
       "goal": "Rebuild learning momentum by taking one concept all the way to a shipped artifact.",
       "description": "A short sprint to break inertia. End the nine days with one real artifact — a working BM25 search — and the loop muscle memory restored.",
-      "tracks": [
-        "search-ir"
-      ],
+      "tracks": ["search-ir"],
       "milestones": [
         {
           "title": "Days 1-3 — Retrieval foundations",
           "goal": "Understand how lexical search ranks documents.",
-          "concepts": [
-            "tokenization",
-            "inverted-index",
-            "tf-idf",
-            "bm25"
-          ],
-          "drills": [
-            "build-tokenizer",
-            "calculate-bm25-score"
-          ],
+          "concepts": ["tokenization", "inverted-index", "tf-idf", "bm25"],
+          "drills": ["build-tokenizer", "calculate-bm25-score"],
           "artifacts": []
         },
         {
           "title": "Days 4-6 — Build",
           "goal": "Implement a working BM25 ranker on a real index.",
-          "concepts": [
-            "bm25",
-            "inverted-index"
-          ],
-          "drills": [
-            "build-inverted-index",
-            "implement-bm25-ranker"
-          ],
-          "artifacts": [
-            "implement-bm25-highsignal"
-          ]
+          "concepts": ["bm25", "inverted-index"],
+          "drills": ["build-inverted-index", "implement-bm25-ranker"],
+          "artifacts": ["implement-bm25-highsignal"]
         },
         {
           "title": "Days 7-9 — Ship and review",
           "goal": "Finish the artifact, write it up, and schedule reviews.",
-          "concepts": [
-            "search-evals"
-          ],
-          "drills": [
-            "build-search-eval-harness"
-          ],
-          "artifacts": [
-            "search-eval-harness"
-          ]
+          "concepts": ["search-evals"],
+          "drills": ["build-search-eval-harness"],
+          "artifacts": ["search-eval-harness"]
         }
       ]
     },
@@ -62,42 +38,21 @@
       "horizon": "30d",
       "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
       "description": "Four weeks that take you from tokenization to a working hybrid retriever evaluated against a frozen query set.",
-      "tracks": [
-        "search-ir",
-        "vector-db"
-      ],
+      "tracks": ["search-ir", "vector-db"],
       "milestones": [
         {
           "title": "Week 1 — Lexical retrieval",
           "goal": "Tokenization, inverted index, BM25.",
-          "concepts": [
-            "tokenization",
-            "inverted-index",
-            "tf-idf",
-            "bm25"
-          ],
-          "drills": [
-            "build-tokenizer",
-            "build-inverted-index",
-            "implement-bm25-ranker"
-          ],
-          "artifacts": [
-            "implement-bm25-highsignal"
-          ]
+          "concepts": ["tokenization", "inverted-index", "tf-idf", "bm25"],
+          "drills": ["build-tokenizer", "build-inverted-index", "implement-bm25-ranker"],
+          "artifacts": ["implement-bm25-highsignal"]
         },
         {
           "title": "Week 2 — Evaluation",
           "goal": "Make retrieval quality measurable.",
-          "concepts": [
-            "ranking-metrics",
-            "search-evals"
-          ],
-          "drills": [
-            "build-search-eval-harness"
-          ],
-          "artifacts": [
-            "search-eval-harness"
-          ]
+          "concepts": ["ranking-metrics", "search-evals"],
+          "drills": ["build-search-eval-harness"],
+          "artifacts": ["search-eval-harness"]
         },
         {
           "title": "Week 3 — Vector retrieval",
@@ -108,27 +63,15 @@
             "brute-force-vector-db",
             "metadata-filtering"
           ],
-          "drills": [
-            "embed-and-search",
-            "build-brute-force-index"
-          ],
-          "artifacts": [
-            "tiny-vector-db-brute-force"
-          ]
+          "drills": ["embed-and-search", "build-brute-force-index"],
+          "artifacts": ["tiny-vector-db-brute-force"]
         },
         {
           "title": "Week 4 — Hybrid search",
           "goal": "Fuse lexical and vector retrieval and prove it wins.",
-          "concepts": [
-            "hybrid-search",
-            "reranking"
-          ],
-          "drills": [
-            "implement-rrf"
-          ],
-          "artifacts": [
-            "hybrid-search-v0"
-          ]
+          "concepts": ["hybrid-search", "reranking"],
+          "drills": ["implement-rrf"],
+          "artifacts": ["hybrid-search-v0"]
         }
       ]
     },
@@ -138,33 +81,14 @@
       "horizon": "90d",
       "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
       "description": "The core roadmap. Three months that move from retrieval basics to ANN, RAG, and the storage foundations behind systems like Turbopuffer.",
-      "tracks": [
-        "search-ir",
-        "vector-db",
-        "ai-systems",
-        "databases"
-      ],
+      "tracks": ["search-ir", "vector-db", "ai-systems", "databases"],
       "milestones": [
         {
           "title": "Month 1 — Retrieval and evaluation",
           "goal": "Lexical + vector retrieval, hybrid search, evals.",
-          "concepts": [
-            "inverted-index",
-            "bm25",
-            "embeddings",
-            "hybrid-search",
-            "search-evals"
-          ],
-          "drills": [
-            "implement-bm25-ranker",
-            "implement-rrf",
-            "build-search-eval-harness"
-          ],
-          "artifacts": [
-            "implement-bm25-highsignal",
-            "hybrid-search-v0",
-            "search-eval-harness"
-          ]
+          "concepts": ["inverted-index", "bm25", "embeddings", "hybrid-search", "search-evals"],
+          "drills": ["implement-bm25-ranker", "implement-rrf", "build-search-eval-harness"],
+          "artifacts": ["implement-bm25-highsignal", "hybrid-search-v0", "search-eval-harness"]
         },
         {
           "title": "Month 2 — Vector databases and ANN",
@@ -176,11 +100,7 @@
             "metadata-filtering",
             "recall-latency-tradeoffs"
           ],
-          "drills": [
-            "build-brute-force-index",
-            "implement-metadata-filter",
-            "explain-hnsw-layers"
-          ],
+          "drills": ["build-brute-force-index", "implement-metadata-filter", "explain-hnsw-layers"],
           "artifacts": [
             "tiny-vector-db-brute-force",
             "vector-metadata-filter",
@@ -199,18 +119,8 @@
             "lsm-tree",
             "object-storage"
           ],
-          "drills": [
-            "build-rag-pipeline",
-            "build-chunker",
-            "build-wal",
-            "build-memtable-sstable"
-          ],
-          "artifacts": [
-            "rag-pipeline-v0",
-            "llm-eval-harness",
-            "toy-wal",
-            "object-storage-index"
-          ]
+          "drills": ["build-rag-pipeline", "build-chunker", "build-wal", "build-memtable-sstable"],
+          "artifacts": ["rag-pipeline-v0", "llm-eval-harness", "toy-wal", "object-storage-index"]
         }
       ]
     },
@@ -220,31 +130,14 @@
       "horizon": "12mo",
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
       "description": "The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.",
-      "tracks": [
-        "search-ir",
-        "vector-db",
-        "ai-systems",
-        "backend",
-        "databases",
-        "system-design"
-      ],
+      "tracks": ["search-ir", "vector-db", "ai-systems", "backend", "databases", "system-design"],
       "milestones": [
         {
           "title": "Q1 — Retrieval and vector foundations",
           "goal": "Complete the 90-day AI search/infra roadmap.",
-          "concepts": [
-            "bm25",
-            "hybrid-search",
-            "hnsw",
-            "metadata-filtering",
-            "rag"
-          ],
+          "concepts": ["bm25", "hybrid-search", "hnsw", "metadata-filtering", "rag"],
           "drills": [],
-          "artifacts": [
-            "hybrid-search-v0",
-            "tiny-vector-db-brute-force",
-            "rag-pipeline-v0"
-          ]
+          "artifacts": ["hybrid-search-v0", "tiny-vector-db-brute-force", "rag-pipeline-v0"]
         },
         {
           "title": "Q2 — Production backend depth",
@@ -262,12 +155,7 @@
             "implement-idempotency-key",
             "implement-backoff-jitter"
           ],
-          "artifacts": [
-            "api-key-system",
-            "rate-limiter",
-            "job-queue-retries",
-            "structured-logging"
-          ]
+          "artifacts": ["api-key-system", "rate-limiter", "job-queue-retries", "structured-logging"]
         },
         {
           "title": "Q3 — Storage systems",
@@ -280,15 +168,8 @@
             "object-storage",
             "columnar-storage"
           ],
-          "drills": [
-            "build-wal",
-            "build-memtable-sstable"
-          ],
-          "artifacts": [
-            "toy-wal",
-            "toy-lsm",
-            "object-storage-index"
-          ]
+          "drills": ["build-wal", "build-memtable-sstable"],
+          "artifacts": ["toy-wal", "toy-lsm", "object-storage-index"]
         },
         {
           "title": "Q4 — System design and synthesis",
@@ -299,15 +180,8 @@
             "model-routing",
             "agent-loops"
           ],
-          "drills": [
-            "build-tool-loop",
-            "build-llm-eval"
-          ],
-          "artifacts": [
-            "search-platform-design-doc",
-            "rag-system-design-doc",
-            "model-router"
-          ]
+          "drills": ["build-tool-loop", "build-llm-eval"],
+          "artifacts": ["search-platform-design-doc", "rag-system-design-doc", "model-router"]
         }
       ]
     },
@@ -317,83 +191,54 @@
       "horizon": "12mo",
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
       "description": "Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.",
-      "tracks": [
-        "databases",
-        "system-design"
-      ],
+      "tracks": ["databases", "system-design"],
       "milestones": [
         {
           "title": "Phase 0-1 — Thesis + hardware",
           "goal": "Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.",
-          "concepts": [
-            "storage-retrieval"
-          ],
+          "concepts": ["storage-retrieval"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 2 — Disk-oriented storage engines",
           "goal": "Pages, B+trees, WAL, buffer pools, recovery.",
-          "concepts": [
-            "b-tree",
-            "wal",
-            "storage-retrieval"
-          ],
+          "concepts": ["b-tree", "wal", "storage-retrieval"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 3 — LSM and SSD-first design",
           "goal": "Memtables, SSTables, Bloom filters, compaction, read/write/space amplification.",
-          "concepts": [
-            "lsm-tree",
-            "compaction"
-          ],
+          "concepts": ["lsm-tree", "compaction"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 4-5 — Columnar execution + ClickHouse",
           "goal": "Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.",
-          "concepts": [
-            "columnar-storage",
-            "secondary-index"
-          ],
+          "concepts": ["columnar-storage", "secondary-index"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 6 — Cloud warehouses",
           "goal": "Storage/compute separation, shuffle, slots/warehouses, result caching.",
-          "concepts": [
-            "object-storage",
-            "sharding"
-          ],
+          "concepts": ["object-storage", "sharding"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 7 — Search + vector DBs",
           "goal": "Inverted indexes, BM25, HNSW, IVF, PQ, DiskANN, recall/latency/memory tradeoff.",
-          "concepts": [
-            "inverted-index",
-            "bm25",
-            "hnsw",
-            "ivf",
-            "recall-latency-tradeoffs"
-          ],
+          "concepts": ["inverted-index", "bm25", "hnsw", "ivf", "recall-latency-tradeoffs"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 8 — Distributed correctness",
           "goal": "Replication, Raft/Paxos, MVCC across nodes, 2PC, serializability.",
-          "concepts": [
-            "replication",
-            "consensus",
-            "cap-theorem",
-            "distributed-infra"
-          ],
+          "concepts": ["replication", "consensus", "cap-theorem", "distributed-infra"],
           "drills": [],
           "artifacts": []
         },
@@ -412,19 +257,12 @@
       "horizon": "12mo",
       "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
       "description": "Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.",
-      "tracks": [
-        "system-design",
-        "ai-systems",
-        "backend"
-      ],
+      "tracks": ["system-design", "ai-systems", "backend"],
       "milestones": [
         {
           "title": "Phase 0-1 — Five-job model + execution",
           "goal": "Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimising JIT, deopt.",
-          "concepts": [
-            "state-management",
-            "strategy-pattern"
-          ],
+          "concepts": ["state-management", "strategy-pattern"],
           "drills": [],
           "artifacts": []
         },
@@ -438,27 +276,21 @@
         {
           "title": "Phase 3 — Scheduling",
           "goal": "Cooperative vs preemptive, async runtimes, fibers, work-stealing, goroutine + BEAM schedulers.",
-          "concepts": [
-            "concurrency-design"
-          ],
+          "concepts": ["concurrency-design"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 4 — Isolation",
           "goal": "Process, thread, V8 isolate, Wasm sandbox, Firecracker, gVisor.",
-          "concepts": [
-            "distributed-infra"
-          ],
+          "concepts": ["distributed-infra"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 5 — Observability & control",
           "goal": "Sampling profilers, JFR, async-profiler, Go pprof, eBPF runtime hooks.",
-          "concepts": [
-            "monitoring-analytics"
-          ],
+          "concepts": ["monitoring-analytics"],
           "drills": [],
           "artifacts": []
         },
@@ -472,19 +304,14 @@
         {
           "title": "Phase 7 — AI inference runtimes",
           "goal": "vLLM PagedAttention, SGLang RadixAttention, llama.cpp, TensorRT-LLM, continuous batching.",
-          "concepts": [
-            "model-routing"
-          ],
+          "concepts": ["model-routing"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Phase 8 — Edge & serverless runtimes",
           "goal": "Workers, Deno, Bun, wasmtime, Firecracker — cold start, isolate startup, multi-tenant scheduling.",
-          "concepts": [
-            "distributed-infra",
-            "load-balancing"
-          ],
+          "concepts": ["distributed-infra", "load-balancing"],
           "drills": [],
           "artifacts": []
         },
@@ -503,12 +330,7 @@
       "horizon": "12mo",
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "description": "Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.",
-      "tracks": [
-        "system-design",
-        "databases",
-        "ai-systems",
-        "backend"
-      ],
+      "tracks": ["system-design", "databases", "ai-systems", "backend"],
       "milestones": [
         {
           "title": "LLMs and inference engines",
@@ -526,95 +348,63 @@
         {
           "title": "Databases and storage engines",
           "goal": "B-trees, LSM, WAL, MVCC, columnar — see the dedicated DB roadmap.",
-          "concepts": [
-            "b-tree",
-            "lsm-tree",
-            "wal",
-            "columnar-storage"
-          ],
+          "concepts": ["b-tree", "lsm-tree", "wal", "columnar-storage"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Streaming and event systems",
           "goal": "Append-only logs, partitions, watermarks, stateful stream processing.",
-          "concepts": [
-            "message-queues",
-            "messaging-realtime",
-            "retries-dlq"
-          ],
+          "concepts": ["message-queues", "messaging-realtime", "retries-dlq"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Game engines and real-time graphics",
           "goal": "Fixed-step loops, ECS, render pipelines, GPU command buffers.",
-          "concepts": [
-            "game-design",
-            "concurrency-design"
-          ],
+          "concepts": ["game-design", "concurrency-design"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Containers and orchestration",
           "goal": "Linux namespaces, cgroups, OCI runtimes, Kubernetes scheduling.",
-          "concepts": [
-            "distributed-infra",
-            "load-balancing"
-          ],
+          "concepts": ["distributed-infra", "load-balancing"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Browsers (Chromium, Firefox, Servo)",
           "goal": "Parser, layout, JS engine, compositor, sandboxing, WebAssembly.",
-          "concepts": [
-            "ml-browser-runtime",
-            "ml-webgpu"
-          ],
+          "concepts": ["ml-browser-runtime", "ml-webgpu"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Compilers and language runtimes",
           "goal": "Lexer → parser → AST → IR → optimization → codegen; GC, JIT.",
-          "concepts": [
-            "state-management",
-            "strategy-pattern"
-          ],
+          "concepts": ["state-management", "strategy-pattern"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Operating systems and kernels",
           "goal": "Processes, virtual memory, schedulers, file systems, syscalls.",
-          "concepts": [
-            "concurrency-design"
-          ],
+          "concepts": ["concurrency-design"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Networking and protocols",
           "goal": "TCP/IP, TLS, HTTP/2 and HTTP/3, QUIC, BGP.",
-          "concepts": [
-            "http-lifecycle",
-            "load-balancing"
-          ],
+          "concepts": ["http-lifecycle", "load-balancing"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Distributed systems",
           "goal": "Consensus, replication, 2PC, gossip, vector clocks.",
-          "concepts": [
-            "consensus",
-            "cap-theorem",
-            "distributed-infra",
-            "sharding",
-            "replication"
-          ],
+          "concepts": ["consensus", "cap-theorem", "distributed-infra", "sharding", "replication"],
           "drills": [],
           "artifacts": []
         },
@@ -628,9 +418,7 @@
         {
           "title": "Cryptography (applied)",
           "goal": "Primitives, signatures, AEAD, TLS, MLS, ZKPs.",
-          "concepts": [
-            "auth-systems"
-          ],
+          "concepts": ["auth-systems"],
           "drills": [],
           "artifacts": []
         }
@@ -642,9 +430,7 @@
       "horizon": "30d",
       "goal": "Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.",
       "description": "A 30-day sprint through the canonical low-level-design problems. Patterns first, then applied \"design X\" exercises. End able to walk through a parking lot, ticketing system, or game design with implementation and tradeoff notes.",
-      "tracks": [
-        "system-design"
-      ],
+      "tracks": ["system-design"],
       "milestones": [
         {
           "title": "Days 1-7 — Modelling foundations",
@@ -666,26 +452,14 @@
         {
           "title": "Days 8-18 — Patterns in practice",
           "goal": "The handful of patterns that earn their weight in real interviews.",
-          "concepts": [
-            "observer-pattern",
-            "decorator-structural",
-            "command-chain"
-          ],
-          "drills": [
-            "design-pub-sub-bus",
-            "design-coffee-decorator",
-            "design-undo-redo"
-          ],
+          "concepts": ["observer-pattern", "decorator-structural", "command-chain"],
+          "drills": ["design-pub-sub-bus", "design-coffee-decorator", "design-undo-redo"],
           "artifacts": []
         },
         {
           "title": "Days 19-30 — Applied designs",
           "goal": "Take the patterns into full design problems with concurrency and inventory edge cases.",
-          "concepts": [
-            "concurrency-design",
-            "booking-inventory",
-            "game-design"
-          ],
+          "concepts": ["concurrency-design", "booking-inventory", "game-design"],
           "drills": [
             "design-bank-account-locking",
             "design-hotel-booking",
@@ -701,36 +475,20 @@
       "horizon": "30d",
       "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
       "description": "A 30-day sprint through high-level system design. Primitives first (load balancing, consistent hashing, consensus), then full-stack \"design X\" cases. End comfortable scoping requirements, capacity, storage choice, queue boundaries, and failure modes.",
-      "tracks": [
-        "system-design"
-      ],
+      "tracks": ["system-design"],
       "milestones": [
         {
           "title": "Days 1-7 — Primitives",
           "goal": "The building blocks every HLD answer relies on.",
-          "concepts": [
-            "load-balancing",
-            "consistent-hashing",
-            "consensus"
-          ],
-          "drills": [
-            "design-load-balancer",
-            "design-consistent-hashing",
-            "design-leader-election"
-          ],
+          "concepts": ["load-balancing", "consistent-hashing", "consensus"],
+          "drills": ["design-load-balancer", "design-consistent-hashing", "design-leader-election"],
           "artifacts": []
         },
         {
           "title": "Days 8-14 — Distributed components",
           "goal": "Storage, infra, messaging — what sits behind the LB.",
-          "concepts": [
-            "distributed-infra",
-            "messaging-realtime"
-          ],
-          "drills": [
-            "design-rate-limiter",
-            "design-chat-system"
-          ],
+          "concepts": ["distributed-infra", "messaging-realtime"],
+          "drills": ["design-rate-limiter", "design-chat-system"],
           "artifacts": []
         },
         {
@@ -762,19 +520,12 @@
       "horizon": "30d",
       "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
       "description": "A 30-day algorithmic sprint covering the NeetCode roadmap surface area. End able to recognise the pattern from problem shape, implement cleanly, and reason about complexity without slipping.",
-      "tracks": [
-        "dsa"
-      ],
+      "tracks": ["dsa"],
       "milestones": [
         {
           "title": "Days 1-5 — Arrays & strings",
           "goal": "The pattern recognition that unlocks 30%+ of interview problems.",
-          "concepts": [
-            "array-hashing",
-            "two-pointers",
-            "sliding-window",
-            "intervals"
-          ],
+          "concepts": ["array-hashing", "two-pointers", "sliding-window", "intervals"],
           "drills": [
             "two-sum-hashmap",
             "valid-palindrome-two-pointers",
@@ -785,65 +536,36 @@
         {
           "title": "Days 6-10 — Linear structures",
           "goal": "Stack, linked list, math/geometry — the bread-and-butter scaffolds.",
-          "concepts": [
-            "stack",
-            "linked-list",
-            "math-geometry"
-          ],
+          "concepts": ["stack", "linked-list", "math-geometry"],
           "drills": [],
           "artifacts": []
         },
         {
           "title": "Days 11-16 — Trees & heaps",
           "goal": "Recursive thinking and priority-queue patterns.",
-          "concepts": [
-            "trees",
-            "tries",
-            "heap"
-          ],
-          "drills": [
-            "level-order-traversal",
-            "kth-largest-heap"
-          ],
+          "concepts": ["trees", "tries", "heap"],
+          "drills": ["level-order-traversal", "kth-largest-heap"],
           "artifacts": []
         },
         {
           "title": "Days 17-21 — Search & greedy",
           "goal": "Two of the highest-leverage problem-solving frames.",
-          "concepts": [
-            "binary-search",
-            "greedy"
-          ],
-          "drills": [
-            "search-rotated-array"
-          ],
+          "concepts": ["binary-search", "greedy"],
+          "drills": ["search-rotated-array"],
           "artifacts": []
         },
         {
           "title": "Days 22-27 — Graphs",
           "goal": "Traversal, shortest-path, union-find, backtracking — the harder half of any interview.",
-          "concepts": [
-            "graphs",
-            "backtracking",
-            "shortest-path",
-            "union-find"
-          ],
-          "drills": [
-            "number-of-islands"
-          ],
+          "concepts": ["graphs", "backtracking", "shortest-path", "union-find"],
+          "drills": ["number-of-islands"],
           "artifacts": []
         },
         {
           "title": "Days 28-30 — DP & bit tricks",
           "goal": "The \"hardest\" categories — 1D/2D DP and bit manipulation.",
-          "concepts": [
-            "dp-1d",
-            "dp-2d",
-            "bit-manipulation"
-          ],
-          "drills": [
-            "house-robber-dp"
-          ],
+          "concepts": ["dp-1d", "dp-2d", "bit-manipulation"],
+          "drills": ["house-robber-dp"],
           "artifacts": []
         }
       ]
@@ -854,9 +576,7 @@
       "horizon": "30d",
       "goal": "Raise your per-roadmap ELO by climbing from linear algebra through statistics to calculus — each week unlocks harder drills at your edge.",
       "description": "Like chess ratings: you start near 1500, solve drills matched to your level, and harder problems appear as you improve. Four weeks through the foundations that underpin ML, search evals, and systems reasoning.",
-      "tracks": [
-        "mathematics"
-      ],
+      "tracks": ["mathematics"],
       "milestones": [
         {
           "title": "Week 1 — Linear algebra",
@@ -866,21 +586,13 @@
             "matrices-and-transformations",
             "eigenvalues-decomposition"
           ],
-          "drills": [
-            "compute-dot-product",
-            "multiply-2x2-matrix",
-            "interpret-eigenvalue"
-          ],
+          "drills": ["compute-dot-product", "multiply-2x2-matrix", "interpret-eigenvalue"],
           "artifacts": []
         },
         {
           "title": "Week 2 — Probability & description",
           "goal": "Uncertainty bookkeeping and summarizing data without lying.",
-          "concepts": [
-            "probability-fundamentals",
-            "random-variables",
-            "descriptive-statistics"
-          ],
+          "concepts": ["probability-fundamentals", "random-variables", "descriptive-statistics"],
           "drills": [
             "conditional-probability-bayes",
             "compute-expectation-variance",
@@ -891,16 +603,8 @@
         {
           "title": "Week 3 — Inference",
           "goal": "Confidence intervals and hypothesis tests — the math behind A/B readouts.",
-          "concepts": [
-            "estimation-confidence",
-            "hypothesis-testing",
-            "regression-basics"
-          ],
-          "drills": [
-            "construct-confidence-interval",
-            "interpret-p-value",
-            "fit-simple-regression"
-          ],
+          "concepts": ["estimation-confidence", "hypothesis-testing", "regression-basics"],
+          "drills": ["construct-confidence-interval", "interpret-p-value", "fit-simple-regression"],
           "artifacts": []
         },
         {
@@ -911,9 +615,7 @@
             "multivariable-optimization",
             "information-entropy"
           ],
-          "drills": [
-            "compute-gradient-2d"
-          ],
+          "drills": ["compute-gradient-2d"],
           "artifacts": []
         }
       ]
@@ -924,28 +626,19 @@
       "horizon": "30d",
       "goal": "Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.",
       "description": "Daily (5d/wk): 45m concepts (canonical externals) + 45m problems + 15m notes. Every week ships code or a writeup. External-heavy (Seeing Theory, MIT OCW, StatQuest, ISL). Not aesthetic math — the gym is solving, simulating, checking assumptions.",
-      "tracks": [
-        "mathematics"
-      ],
+      "tracks": ["mathematics"],
       "milestones": [
         {
           "title": "Week 1 — Probability",
           "goal": "Conditional probability, distributions, expectation — the language of uncertainty.",
-          "concepts": [
-            "probability-fundamentals",
-            "random-variables",
-            "classical-distributions"
-          ],
+          "concepts": ["probability-fundamentals", "random-variables", "classical-distributions"],
           "drills": [
             "conditional-probability-bayes",
             "independence-inclusion-exclusion",
             "compute-expectation-variance",
             "match-distribution-scenario"
           ],
-          "artifacts": [
-            "simulate-random-processes",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["simulate-random-processes", "math-weekly-writeup"]
         },
         {
           "title": "Week 2 — Summaries & sampling",
@@ -963,10 +656,7 @@
             "clt-sample-size",
             "construct-confidence-interval"
           ],
-          "artifacts": [
-            "impl-descriptive-stats",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["impl-descriptive-stats", "math-weekly-writeup"]
         },
         {
           "title": "Week 3 — Inference & experiments",
@@ -984,29 +674,19 @@
             "interpret-srm-alert",
             "fit-simple-regression"
           ],
-          "artifacts": [
-            "ab-test-analysis-report",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["ab-test-analysis-report", "math-weekly-writeup"]
         },
         {
           "title": "Week 4 — Bayesian & likelihood",
           "goal": "Posterior thinking and MLE — the bridge to ML loss functions.",
-          "concepts": [
-            "bayesian-inference",
-            "maximum-likelihood",
-            "information-entropy"
-          ],
+          "concepts": ["bayesian-inference", "maximum-likelihood", "information-entropy"],
           "drills": [
             "beta-binomial-posterior",
             "mle-bernoulli-derivation",
             "compute-cross-entropy-bits",
             "diagnose-overfit-split"
           ],
-          "artifacts": [
-            "debunk-fake-trading-signal",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["debunk-fake-trading-signal", "math-weekly-writeup"]
         }
       ]
     },
@@ -1016,9 +696,7 @@
       "horizon": "12mo",
       "goal": "Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.",
       "description": "5 days/week: 90m math + 30m implementation. Weeks 1–4 probability & statistics (simulate, implement stats, debunk fake signals). Weeks 5–8 linear algebra (matmul, OLS, PCA from scratch). Weeks 9–12 quant bridge (returns, vol, Sharpe, drawdown, momentum backtest vs SPY/QQQ). One public note per week. No artifact = no learning.",
-      "tracks": [
-        "mathematics"
-      ],
+      "tracks": ["mathematics"],
       "milestones": [
         {
           "title": "Week 1 — Probability gym",
@@ -1033,44 +711,25 @@
             "independence-inclusion-exclusion",
             "match-distribution-scenario"
           ],
-          "artifacts": [
-            "simulate-random-processes",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["simulate-random-processes", "math-weekly-writeup"]
         },
         {
           "title": "Week 2 — Expectation & summaries",
           "goal": "RVs, expectation, variance — implement descriptive stats from scratch.",
-          "concepts": [
-            "random-variables",
-            "descriptive-statistics",
-            "covariance-correlation"
-          ],
+          "concepts": ["random-variables", "descriptive-statistics", "covariance-correlation"],
           "drills": [
             "compute-expectation-variance",
             "summarize-dataset-stats",
             "compute-covariance-matrix"
           ],
-          "artifacts": [
-            "impl-descriptive-stats",
-            "math-weekly-writeup"
-          ]
+          "artifacts": ["impl-descriptive-stats", "math-weekly-writeup"]
         },
         {
           "title": "Week 3 — Sampling & CI",
           "goal": "CLT, standard error, confidence intervals.",
-          "concepts": [
-            "sampling-and-clt",
-            "estimation-confidence"
-          ],
-          "drills": [
-            "clt-sample-size",
-            "standard-error-mean",
-            "construct-confidence-interval"
-          ],
-          "artifacts": [
-            "math-weekly-writeup"
-          ]
+          "concepts": ["sampling-and-clt", "estimation-confidence"],
+          "drills": ["clt-sample-size", "standard-error-mean", "construct-confidence-interval"],
+          "artifacts": ["math-weekly-writeup"]
         },
         {
           "title": "Week 4 — Inference & overfitting",
@@ -1096,52 +755,23 @@
         {
           "title": "Week 5 — Vectors & matrices",
           "goal": "Dot products, matmul, transforms — implement multiplication.",
-          "concepts": [
-            "vectors-and-spaces",
-            "matrices-and-transformations",
-            "matrix-rank-basis"
-          ],
-          "drills": [
-            "compute-dot-product",
-            "multiply-2x2-matrix",
-            "identify-rank-subspace"
-          ],
-          "artifacts": [
-            "impl-matrix-multiply",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["vectors-and-spaces", "matrices-and-transformations", "matrix-rank-basis"],
+          "drills": ["compute-dot-product", "multiply-2x2-matrix", "identify-rank-subspace"],
+          "artifacts": ["impl-matrix-multiply", "math-weekly-writeup"]
         },
         {
           "title": "Week 6 — Eigen & regression geometry",
           "goal": "Eigenvalues, least squares as projection — OLS from scratch.",
-          "concepts": [
-            "eigenvalues-decomposition",
-            "regression-basics"
-          ],
-          "drills": [
-            "interpret-eigenvalue",
-            "fit-simple-regression"
-          ],
-          "artifacts": [
-            "impl-ols-from-scratch",
-            "visualize-projections",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["eigenvalues-decomposition", "regression-basics"],
+          "drills": ["interpret-eigenvalue", "fit-simple-regression"],
+          "artifacts": ["impl-ols-from-scratch", "visualize-projections", "math-weekly-writeup"]
         },
         {
           "title": "Week 7 — PCA",
           "goal": "Covariance eigenstructure — PCA without libraries.",
-          "concepts": [
-            "pca-projection",
-            "covariance-correlation"
-          ],
-          "drills": [
-            "pca-variance-explained"
-          ],
-          "artifacts": [
-            "impl-pca-from-scratch",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["pca-projection", "covariance-correlation"],
+          "drills": ["pca-variance-explained"],
+          "artifacts": ["impl-pca-from-scratch", "math-weekly-writeup"]
         },
         {
           "title": "Week 8 — Optimization bridge",
@@ -1151,73 +781,36 @@
             "multivariable-optimization",
             "maximum-likelihood"
           ],
-          "drills": [
-            "compute-gradient-2d",
-            "mle-bernoulli-derivation"
-          ],
-          "artifacts": [
-            "math-weekly-writeup"
-          ]
+          "drills": ["compute-gradient-2d", "mle-bernoulli-derivation"],
+          "artifacts": ["math-weekly-writeup"]
         },
         {
           "title": "Week 9 — Returns pipeline",
           "goal": "Ingest prices, compute daily returns — no look-ahead.",
-          "concepts": [
-            "returns-volatility"
-          ],
-          "drills": [
-            "compute-log-returns-vol"
-          ],
-          "artifacts": [
-            "quant-returns-pipeline",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["returns-volatility"],
+          "drills": ["compute-log-returns-vol"],
+          "artifacts": ["quant-returns-pipeline", "math-weekly-writeup"]
         },
         {
           "title": "Week 10 — Risk metrics",
           "goal": "Volatility, Sharpe, drawdown, correlation matrix.",
-          "concepts": [
-            "portfolio-risk-metrics",
-            "stationarity-autocorrelation"
-          ],
-          "drills": [
-            "compute-sharpe-drawdown",
-            "interpret-autocorrelation-plot"
-          ],
-          "artifacts": [
-            "quant-risk-dashboard",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["portfolio-risk-metrics", "stationarity-autocorrelation"],
+          "drills": ["compute-sharpe-drawdown", "interpret-autocorrelation-plot"],
+          "artifacts": ["quant-risk-dashboard", "math-weekly-writeup"]
         },
         {
           "title": "Week 11 — Stochastic intuition",
           "goal": "Random walks, Markov, stationarity — noise vs signal.",
-          "concepts": [
-            "random-walks-markov",
-            "bayesian-inference"
-          ],
-          "drills": [
-            "simulate-markov-chain",
-            "beta-binomial-posterior"
-          ],
-          "artifacts": [
-            "math-weekly-writeup"
-          ]
+          "concepts": ["random-walks-markov", "bayesian-inference"],
+          "drills": ["simulate-markov-chain", "beta-binomial-posterior"],
+          "artifacts": ["math-weekly-writeup"]
         },
         {
           "title": "Week 12 — Backtest discipline",
           "goal": "Simple momentum vs SPY/QQQ with honest limitations.",
-          "concepts": [
-            "momentum-backtest",
-            "information-entropy"
-          ],
-          "drills": [
-            "design-honest-backtest"
-          ],
-          "artifacts": [
-            "momentum-backtest-benchmark",
-            "math-weekly-writeup"
-          ]
+          "concepts": ["momentum-backtest", "information-entropy"],
+          "drills": ["design-honest-backtest"],
+          "artifacts": ["momentum-backtest-benchmark", "math-weekly-writeup"]
         }
       ]
     },
@@ -1227,9 +820,7 @@
       "horizon": "30d",
       "goal": "Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware \"what I would do differently\".",
       "description": "A 30-day pass through behavioural interview frames. Two stories per dimension, each with situation, action, result, and a learned lesson. End able to map an unfamiliar question to a relevant story in under 10 seconds.",
-      "tracks": [
-        "product"
-      ],
+      "tracks": ["product"],
       "milestones": [
         {
           "title": "Days 1-10 — Self & ownership",
@@ -1251,16 +842,8 @@
         {
           "title": "Days 11-20 — Working with people",
           "goal": "Teamwork, conflict, communication.",
-          "concepts": [
-            "teamwork-and-collaboration",
-            "conflict-resolution",
-            "communication"
-          ],
-          "drills": [
-            "star-cross-team",
-            "star-conflict",
-            "star-communication"
-          ],
+          "concepts": ["teamwork-and-collaboration", "conflict-resolution", "communication"],
+          "drills": ["star-cross-team", "star-conflict", "star-communication"],
           "artifacts": []
         },
         {
@@ -1271,11 +854,7 @@
             "failure-and-learning",
             "time-management-and-prioritization"
           ],
-          "drills": [
-            "star-tough-decision",
-            "star-failure",
-            "star-prioritization"
-          ],
+          "drills": ["star-tough-decision", "star-failure", "star-prioritization"],
           "artifacts": []
         }
       ]

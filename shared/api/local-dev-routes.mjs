@@ -1,6 +1,6 @@
-import { existsSync, readFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '../..');
@@ -16,10 +16,7 @@ export function loadEnvLocal() {
     if (eq === -1) continue;
     const key = trimmed.slice(0, eq).trim();
     let val = trimmed.slice(eq + 1).trim();
-    if (
-      (val.startsWith('"') && val.endsWith('"'))
-      || (val.startsWith("'") && val.endsWith("'"))
-    ) {
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
     }
     if (process.env[key] === undefined) process.env[key] = val;
@@ -38,7 +35,13 @@ async function runHandler(loader, req, res) {
  */
 export function mountAppRoutes(api) {
   api.all('/learning', (req, res) => runHandler(() => import('../../api/learning.mjs'), req, res));
-  api.post('/auth/google', (req, res) => runHandler(() => import('../../api/auth/google.mjs'), req, res));
-  api.get('/auth/verify', (req, res) => runHandler(() => import('../../api/auth/verify.mjs'), req, res));
-  api.post('/auth/logout', (req, res) => runHandler(() => import('../../api/auth/logout.mjs'), req, res));
+  api.post('/auth/google', (req, res) =>
+    runHandler(() => import('../../api/auth/google.mjs'), req, res)
+  );
+  api.get('/auth/verify', (req, res) =>
+    runHandler(() => import('../../api/auth/verify.mjs'), req, res)
+  );
+  api.post('/auth/logout', (req, res) =>
+    runHandler(() => import('../../api/auth/logout.mjs'), req, res)
+  );
 }

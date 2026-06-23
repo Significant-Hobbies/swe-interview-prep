@@ -1,6 +1,6 @@
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 /** Load extracted app CSS without blocking first paint — index.html carries the LCP shell. */
 function deferAppCss() {
@@ -15,22 +15,22 @@ function deferAppCss() {
           [
             '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">',
             '<noscript><link rel="stylesheet" href="$1"></noscript>',
-          ].join('\n    '),
-        )
+          ].join('\n    ')
+        );
         const jsTag = out.match(
-          /<script type="module" crossorigin src="(\/assets\/index-[^"]+\.js)"><\/script>/,
-        )
+          /<script type="module" crossorigin src="(\/assets\/index-[^"]+\.js)"><\/script>/
+        );
         if (jsTag) {
-          out = out.replace(jsTag[0], '')
+          out = out.replace(jsTag[0], '');
           out = out.replace(
             /<\/body>/,
-            `    <script type="module" crossorigin src="${jsTag[1]}"></script>\n  </body>`,
-          )
+            `    <script type="module" crossorigin src="${jsTag[1]}"></script>\n  </body>`
+          );
         }
-        return out
+        return out;
       },
     },
-  }
+  };
 }
 
 export default defineConfig({
@@ -62,4 +62,4 @@ export default defineConfig({
     globals: true,
     include: ['src/**/*.test.{ts,tsx}', 'shared/**/*.test.{mjs,js}', 'handlers/**/*.test.{mjs,js}'],
   },
-})
+});

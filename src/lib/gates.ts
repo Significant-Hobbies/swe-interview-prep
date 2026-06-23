@@ -93,12 +93,12 @@ const GATE_RULES: GateRule[] = [
   },
 ];
 
-const GATE_BY_CONCEPT = Object.fromEntries(GATE_RULES.map(r => [r.conceptId, r]));
+const GATE_BY_CONCEPT = Object.fromEntries(GATE_RULES.map((r) => [r.conceptId, r]));
 
 function drillSolved(ctx: GateContext, conceptId: string): boolean {
-  const editorial = DRILLS.filter(d => d.conceptId === conceptId && isEditorialDrill(d));
+  const editorial = DRILLS.filter((d) => d.conceptId === conceptId && isEditorialDrill(d));
   if (!editorial.length) return false;
-  return editorial.some(d => ctx.drills[d.id]?.status === 'solved');
+  return editorial.some((d) => ctx.drills[d.id]?.status === 'solved');
 }
 
 function artifactOk(ctx: GateContext, artifactId: string, minStatus: ArtifactMinStatus): boolean {
@@ -154,7 +154,8 @@ function parentBlock(conceptId: string, ctx: GateContext): GateStatus | null {
   if (!parent.blocked) return null;
   return {
     blocked: true,
-    reason: 'Search evals unlocks first — prove hypothesis-testing with a drill or shipped artifact.',
+    reason:
+      'Search evals unlocks first — prove hypothesis-testing with a drill or shipped artifact.',
     requirements: parent.requirements,
   };
 }
@@ -166,8 +167,8 @@ export function gateStatus(conceptId: string, ctx: GateContext): GateStatus {
   const rule = GATE_BY_CONCEPT[conceptId];
   if (!rule) return { blocked: false, reason: '', requirements: [] };
 
-  const requirements = rule.anyOf.map(r => evalReq(r, ctx));
-  const blocked = !requirements.some(r => r.met);
+  const requirements = rule.anyOf.map((r) => evalReq(r, ctx));
+  const blocked = !requirements.some((r) => r.met);
   const reason = blocked
     ? `Complete one unlock path for ${CONCEPT_BY_ID[conceptId]?.name ?? conceptId}.`
     : '';
@@ -181,7 +182,7 @@ export function conceptAccessible(concept: Concept, ctx: GateContext): boolean {
 }
 
 function prereqsMetForGate(concept: Concept, ctx: GateContext): boolean {
-  return concept.prerequisites.every(p => (ctx.mastery[p]?.confidence ?? 0) >= 0.4);
+  return concept.prerequisites.every((p) => (ctx.mastery[p]?.confidence ?? 0) >= 0.4);
 }
 
 export function playgroundArtifactUrl(artifactId: string): string {

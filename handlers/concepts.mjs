@@ -2,11 +2,14 @@ import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
 import { reviewConcept, decayConfidence } from '../shared/lib/fsrs.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 async function getMastery(db, userId, conceptId) {
@@ -37,9 +40,19 @@ async function upsertMastery(db, userId, conceptId, row) {
         confidence = excluded.confidence,
         updated_at = datetime('now')`,
     args: [
-      randomBytes(16).toString('hex'), userId, conceptId,
-      row.stability, row.difficulty, row.elapsed_days, row.scheduled_days,
-      row.reps, row.lapses, row.state, row.last_review, row.due, row.confidence,
+      randomBytes(16).toString('hex'),
+      userId,
+      conceptId,
+      row.stability,
+      row.difficulty,
+      row.elapsed_days,
+      row.scheduled_days,
+      row.reps,
+      row.lapses,
+      row.state,
+      row.last_review,
+      row.due,
+      row.confidence,
     ],
   });
 }
@@ -92,7 +105,10 @@ export default async function handler(req, res) {
       const prev = await getMastery(db, user.id, u.conceptId);
       const next = reviewConcept(prev, u.rating);
       await upsertMastery(db, user.id, u.conceptId, next);
-      results.push({ conceptId: u.conceptId, mastery: { ...next, confidence: decayConfidence(next) } });
+      results.push({
+        conceptId: u.conceptId,
+        mastery: { ...next, confidence: decayConfidence(next) },
+      });
     }
     return res.status(200).json({ results });
   }

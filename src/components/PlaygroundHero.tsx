@@ -17,7 +17,9 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
           <Code2 className="h-5 w-5 shrink-0 text-sky-400" />
           <div>
             <span className="text-sm font-semibold text-white">Playground</span>
-            <p className="text-[11px] text-white/45">No learning without an artifact — build here.</p>
+            <p className="text-[11px] text-white/45">
+              No learning without an artifact — build here.
+            </p>
           </div>
         </div>
         <ArrowRight className="h-4 w-4 shrink-0 text-white/40 transition-transform group-hover:translate-x-0.5 group-hover:text-white/70" />
@@ -40,8 +42,8 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
             Ship artifacts in the Playground.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-white/55">
-            Monaco, Excalidraw, Socratic AI, and Feynman grading — every concept maps to something you build.
-            Start blank or load a scaffold from any roadmap.
+            Monaco, Excalidraw, Socratic AI, and Feynman grading — every concept maps to something
+            you build. Start blank or load a scaffold from any roadmap.
           </p>
         </div>
         <div className="flex shrink-0 flex-col gap-2 sm:items-end">

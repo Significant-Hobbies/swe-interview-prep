@@ -22,7 +22,7 @@ export const DropdownMenuContent = forwardRef<
       className={cn(
         'z-50 min-w-[10rem] overflow-hidden rounded-md border border-slate-800 bg-slate-950 p-1 text-sm text-slate-200 shadow-xl ' +
           'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-        className,
+        className
       )}
       {...props}
     />
@@ -39,7 +39,7 @@ export const DropdownMenuItem = forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center gap-2 rounded px-2 py-1.5 text-sm outline-none ' +
         'focus:bg-slate-900 focus:text-slate-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-40',
-      className,
+      className
     )}
     {...props}
   />
@@ -56,7 +56,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center rounded py-1.5 pl-8 pr-2 text-sm outline-none ' +
         'focus:bg-slate-900 focus:text-slate-50',
-      className,
+      className
     )}
     {...props}
   >

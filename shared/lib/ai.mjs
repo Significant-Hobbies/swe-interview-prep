@@ -5,12 +5,22 @@ import { generateText } from 'ai';
  * Server-side AI text generation using user-provided or env-default config.
  * Returns string. Throws on failure.
  */
-export async function generate({ endpointUrl, apiKey, model, system, prompt, messages, maxTokens = 1500 }) {
+export async function generate({
+  endpointUrl,
+  apiKey,
+  model,
+  system,
+  prompt,
+  messages,
+  maxTokens = 1500,
+}) {
   const eu = endpointUrl || process.env.AI_ENDPOINT_URL;
   const key = apiKey || process.env.AI_API_KEY;
   const m = model || process.env.AI_MODEL;
   if (!eu || !key || !m) {
-    throw new Error('AI config missing: endpointUrl/apiKey/model required (or AI_ENDPOINT_URL/AI_API_KEY/AI_MODEL env vars)');
+    throw new Error(
+      'AI config missing: endpointUrl/apiKey/model required (or AI_ENDPOINT_URL/AI_API_KEY/AI_MODEL env vars)'
+    );
   }
   const provider = createOpenAICompatible({
     baseURL: eu,
@@ -29,7 +39,9 @@ export async function generate({ endpointUrl, apiKey, model, system, prompt, mes
   } catch (e) {
     // Surface upstream API error body when present
     const upstream = e?.responseBody || e?.data?.error?.message || e?.cause?.message;
-    const msg = upstream ? `${e.message} — ${typeof upstream === 'string' ? upstream.slice(0, 400) : JSON.stringify(upstream).slice(0, 400)}` : e.message;
+    const msg = upstream
+      ? `${e.message} — ${typeof upstream === 'string' ? upstream.slice(0, 400) : JSON.stringify(upstream).slice(0, 400)}`
+      : e.message;
     const wrapped = new Error(msg);
     wrapped.cause = e;
     throw wrapped;
@@ -57,7 +69,7 @@ export function parseJSON(text) {
   try {
     return JSON.parse(t);
   } catch (e) {
-    const start = t.search(/[{\[]/);
+    const start = t.search(/[{[]/);
     if (start === -1) throw e;
     const open = t[start];
     const close = open === '{' ? '}' : ']';
@@ -72,7 +84,10 @@ export function parseJSON(text) {
         else if (ch === '"') inStr = false;
         continue;
       }
-      if (ch === '"') { inStr = true; continue; }
+      if (ch === '"') {
+        inStr = true;
+        continue;
+      }
       if (ch === open) depth++;
       else if (ch === close) {
         depth--;

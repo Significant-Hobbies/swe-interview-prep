@@ -3,9 +3,9 @@
  * Remove bootstrap drill-* placeholders and build-* scaffold artifacts.
  * Keeps editorial drills like build-tokenizer and hand-authored artifacts.
  */
-import { readFileSync, writeFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -17,13 +17,13 @@ const GENERIC_ARTIFACT_CRITERIA = 'Demonstrates the core mechanism from the ment
 
 function isBootstrapDrill(d) {
   if (d.id.startsWith('drill-')) return true;
-  return GENERIC_DRILL_MARKERS.every(m => d.prompt?.includes(m));
+  return GENERIC_DRILL_MARKERS.every((m) => d.prompt?.includes(m));
 }
 
 function isBootstrapArtifact(a) {
   if (a.id.startsWith('build-')) return true;
   const criteria = a.successCriteria ?? [];
-  if (criteria.some(c => c.includes(GENERIC_ARTIFACT_CRITERIA))) return true;
+  if (criteria.some((c) => c.includes(GENERIC_ARTIFACT_CRITERIA))) return true;
   return false;
 }
 
@@ -87,11 +87,11 @@ const roadmapsFile = JSON.parse(readFileSync(roadmapsPath, 'utf8'));
 const beforeDrills = drillsFile.drills.length;
 const beforeArtifacts = artifactsFile.artifacts.length;
 
-drillsFile.drills = drillsFile.drills.filter(d => !isBootstrapDrill(d));
-artifactsFile.artifacts = artifactsFile.artifacts.filter(a => !isBootstrapArtifact(a));
+drillsFile.drills = drillsFile.drills.filter((d) => !isBootstrapDrill(d));
+artifactsFile.artifacts = artifactsFile.artifacts.filter((a) => !isBootstrapArtifact(a));
 
-const validDrillIds = new Set(drillsFile.drills.map(d => d.id));
-const validArtifactIds = new Set(artifactsFile.artifacts.map(a => a.id));
+const validDrillIds = new Set(drillsFile.drills.map((d) => d.id));
+const validArtifactIds = new Set(artifactsFile.artifacts.map((a) => a.id));
 
 for (const c of conceptsFile.concepts) {
   c.drills = cleanDrillIds(c.drills, validDrillIds);
@@ -100,7 +100,7 @@ for (const c of conceptsFile.concepts) {
 
 for (const r of roadmapsFile.roadmaps) {
   for (const m of r.milestones) {
-    m.drills = (m.drills ?? []).filter(id => validDrillIds.has(id) && !id.startsWith('drill-'));
+    m.drills = (m.drills ?? []).filter((id) => validDrillIds.has(id) && !id.startsWith('drill-'));
     const arts = [];
     const seen = new Set();
     for (const id of m.artifacts ?? []) {
@@ -123,9 +123,15 @@ writeFileSync(artifactsPath, `${JSON.stringify(artifactsFile, null, 2)}\n`);
 writeFileSync(conceptsPath, `${JSON.stringify(conceptsFile, null, 2)}\n`);
 writeFileSync(roadmapsPath, `${JSON.stringify(roadmapsFile, null, 2)}\n`);
 
-console.log(JSON.stringify({
-  drillsRemoved: beforeDrills - drillsFile.drills.length,
-  drillsRemaining: drillsFile.drills.length,
-  artifactsRemoved: beforeArtifacts - artifactsFile.artifacts.length,
-  artifactsRemaining: artifactsFile.artifacts.length,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      drillsRemoved: beforeDrills - drillsFile.drills.length,
+      drillsRemaining: drillsFile.drills.length,
+      artifactsRemoved: beforeArtifacts - artifactsFile.artifacts.length,
+      artifactsRemaining: artifactsFile.artifacts.length,
+    },
+    null,
+    2
+  )
+);

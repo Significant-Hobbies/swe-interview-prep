@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import type { ReviewQuestion } from '../data/learning-os';
 import { useAuth } from '../contexts/AuthContext';
-import { loadLocal, saveLocal, STORE_KEYS } from '../lib/userStore';
+import { loadLocal, saveLocal } from '../lib/userStore';
 
 const GUEST_KEY = 'swe-os:imported-reviews';
 
@@ -50,7 +50,7 @@ export function useImportedReviews() {
     async (deckName: string, cards: ReviewQuestion[]) => {
       if (!user) {
         const merged = [...loadGuest()];
-        const seen = new Set(merged.map(c => c.id));
+        const seen = new Set(merged.map((c) => c.id));
         for (const c of cards) {
           if (!seen.has(c.id)) merged.push(c);
         }
@@ -83,7 +83,7 @@ export function useImportedReviews() {
       saveGuest(reviews);
       return { imported, skipped };
     },
-    [user],
+    [user]
   );
 
   return { reviews, loading, refresh, importDeck };

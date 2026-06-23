@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import artifactsData from '../data/artifacts.json';
@@ -30,19 +30,26 @@ describe('content quality bar', () => {
   it('leetcode metadata stubs are excluded from editorial drills', () => {
     const metadata = DRILLS.filter(isMetadataDrill);
     expect(metadata.length).toBeGreaterThan(0);
-    expect(metadata.every(d => d.externalUrl?.includes('leetcode.com'))).toBe(true);
-    expect(DRILLS.filter(isEditorialDrill).some(d => isMetadataDrill(d))).toBe(false);
+    expect(metadata.every((d) => d.externalUrl?.includes('leetcode.com'))).toBe(true);
+    expect(DRILLS.filter(isEditorialDrill).some((d) => isMetadataDrill(d))).toBe(false);
   });
 
   it('spine concepts use editorial drills only', () => {
     const spine = [
-      'tokenization', 'bm25', 'hybrid-search', 'search-evals', 'hnsw', 'rag',
-      'hypothesis-testing', 'probability-fundamentals', 'returns-volatility',
+      'tokenization',
+      'bm25',
+      'hybrid-search',
+      'search-evals',
+      'hnsw',
+      'rag',
+      'hypothesis-testing',
+      'probability-fundamentals',
+      'returns-volatility',
     ];
     for (const id of spine) {
       const c = concepts.find((x: { id: string }) => x.id === id);
       const drillIds: string[] = c?.drills ?? [];
-      const bad = drillIds.filter(did => {
+      const bad = drillIds.filter((did) => {
         const d = drillsData.drills.find((x: { id: string }) => x.id === did) as Drill | undefined;
         return d && !isEditorialDrill(d);
       });
@@ -57,7 +64,7 @@ describe('content quality bar', () => {
 
   it('formulaic review questions are quarantined from spine', () => {
     const formulaic = reviewQuestionsData.reviewQuestions.filter((q: { id: string }) =>
-      isFormulaicReviewQuestion(q.id),
+      isFormulaicReviewQuestion(q.id)
     );
     expect(formulaic.length).toBeGreaterThan(0);
     const spineRqs = concepts
@@ -83,9 +90,11 @@ describe('content quality bar', () => {
       'impl-ols-from-scratch',
     ];
     for (const id of spineArtifacts) {
-      const block = src.match(new RegExp(`artifactId: '${id}'[\\s\\S]*?code: \\\`([\\s\\S]*?)\\\``));
+      const block = src.match(
+        new RegExp(`artifactId: '${id}'[\\s\\S]*?code: \\\`([\\s\\S]*?)\\\``)
+      );
       expect(block, id).toBeTruthy();
-      expect(isStubPlaygroundCode(block![1]), id).toBe(false);
+      expect(isStubPlaygroundCode(block?.[1]), id).toBe(false);
     }
   });
 });

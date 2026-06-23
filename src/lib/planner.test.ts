@@ -36,9 +36,9 @@ describe('buildSessionPlan', () => {
       getElo: () => DEFAULT_USER_ELO,
     });
     expect(plan).not.toBeNull();
-    expect(plan!.totalMinutes).toBe(45);
-    expect(plan!.blocks.length).toBeGreaterThan(0);
-    const blockMinutes = plan!.blocks.reduce((s, b) => s + b.minutes, 0);
+    expect(plan?.totalMinutes).toBe(45);
+    expect(plan?.blocks.length).toBeGreaterThan(0);
+    const blockMinutes = plan?.blocks.reduce((s, b) => s + b.minutes, 0);
     expect(blockMinutes).toBeGreaterThan(0);
     expect(blockMinutes).toBeLessThanOrEqual(50);
   });

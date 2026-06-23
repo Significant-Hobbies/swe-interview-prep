@@ -3,9 +3,9 @@
  * Fill learning-loop gaps: every concept gets drill + RQ;
  * roadmap milestone concepts get a scaffold artifact when missing.
  */
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = path.join(__dirname, '../src/data');
@@ -28,14 +28,14 @@ const drills = drillsData.drills;
 const reviewQuestions = rqsData.reviewQuestions;
 const artifacts = artifactsData.artifacts;
 
-const conceptById = Object.fromEntries(concepts.map(c => [c.id, c]));
-const drillIds = new Set(drills.map(d => d.id));
-const rqIds = new Set(reviewQuestions.map(q => q.id));
-const artifactIds = new Set(artifacts.map(a => a.id));
+const _conceptById = Object.fromEntries(concepts.map((c) => [c.id, c]));
+const drillIds = new Set(drills.map((d) => d.id));
+const rqIds = new Set(reviewQuestions.map((q) => q.id));
+const artifactIds = new Set(artifacts.map((a) => a.id));
 
-const drilledConcepts = new Set(drills.map(d => d.conceptId));
-const rqConcepts = new Set(reviewQuestions.map(q => q.conceptId));
-const artifactConcepts = new Set(artifacts.flatMap(a => a.concepts));
+const drilledConcepts = new Set(drills.map((d) => d.conceptId));
+const rqConcepts = new Set(reviewQuestions.map((q) => q.conceptId));
+const artifactConcepts = new Set(artifacts.flatMap((a) => a.concepts));
 
 const milestoneConcepts = new Set();
 for (const r of roadmapsData.roadmaps) {
@@ -94,12 +94,16 @@ for (const concept of concepts) {
           concept.mentalModel ? `Mental model: ${concept.mentalModel}` : '',
           '',
           'Task: Implement the core mechanism in TypeScript (or pseudocode with tests). Start from the smallest example that exercises the idea.',
-        ].filter(Boolean).join('\n'),
-        expectedOutput: 'Runnable code or a worked derivation that demonstrates the mechanism — not a summary.',
+        ]
+          .filter(Boolean)
+          .join('\n'),
+        expectedOutput:
+          'Runnable code or a worked derivation that demonstrates the mechanism — not a summary.',
         hints: mistakes.length
-          ? mistakes.map(m => `Avoid: ${m}`)
+          ? mistakes.map((m) => `Avoid: ${m}`)
           : ['Re-read the mental model.', 'Write the invariant before the code.'],
-        solutionNotes: concept.realWorldUsage || concept.mentalModel?.slice(0, 200) || concept.description,
+        solutionNotes:
+          concept.realWorldUsage || concept.mentalModel?.slice(0, 200) || concept.description,
       });
       drillIds.add(id);
       drilledConcepts.add(concept.id);
@@ -127,8 +131,7 @@ for (const concept of concepts) {
     }
   }
 
-  const hasArtifact =
-    (concept.artifacts?.length ?? 0) > 0 || artifactConcepts.has(concept.id);
+  const hasArtifact = (concept.artifacts?.length ?? 0) > 0 || artifactConcepts.has(concept.id);
 
   if (milestoneConcepts.has(concept.id) && !hasArtifact) {
     const id = `build-${concept.id}`;
@@ -173,7 +176,9 @@ for (const a of artifacts) {
 }
 
 for (const concept of concepts) {
-  concept.drills = [...new Set([...(concept.drills || []), ...(drillsByConcept[concept.id] || [])])];
+  concept.drills = [
+    ...new Set([...(concept.drills || []), ...(drillsByConcept[concept.id] || [])]),
+  ];
   concept.reviewQuestions = [
     ...new Set([...(concept.reviewQuestions || []), ...(rqsByConcept[concept.id] || [])]),
   ];
@@ -192,14 +197,20 @@ save('review-questions.json', rqsData);
 save('artifacts.json', artifactsData);
 save('concepts.json', conceptsData);
 
-console.log(JSON.stringify({
-  addedDrills,
-  addedRqs,
-  addedArtifacts,
-  totals: {
-    drills: drills.length,
-    reviewQuestions: reviewQuestions.length,
-    artifacts: artifacts.length,
-    concepts: concepts.length,
-  },
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      addedDrills,
+      addedRqs,
+      addedArtifacts,
+      totals: {
+        drills: drills.length,
+        reviewQuestions: reviewQuestions.length,
+        artifacts: artifacts.length,
+        concepts: concepts.length,
+      },
+    },
+    null,
+    2
+  )
+);

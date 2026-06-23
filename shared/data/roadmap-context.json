@@ -22,11 +22,7 @@
         "Explain the tradeoff behind each class/interface boundary.",
         "Prove one mutation or interaction path with a tiny test."
       ],
-      "artifacts": [
-        "Class/state sketch",
-        "Runnable implementation snippet",
-        "Design tradeoff note"
-      ]
+      "artifacts": ["Class/state sketch", "Runnable implementation snippet", "Design tradeoff note"]
     },
     "hld": {
       "track": "Infra",
@@ -36,11 +32,7 @@
         "Choose storage, cache, queue, and deploy boundaries deliberately.",
         "Describe how you would observe and roll back the design in production."
       ],
-      "artifacts": [
-        "Architecture sketch",
-        "Capacity or query estimate",
-        "Failure-mode checklist"
-      ]
+      "artifacts": ["Architecture sketch", "Capacity or query estimate", "Failure-mode checklist"]
     },
     "behavioral": {
       "track": "Runtime",
@@ -50,11 +42,7 @@
         "Name the tradeoff you made and what you would do differently.",
         "Practice one skeptical follow-up answer."
       ],
-      "artifacts": [
-        "STAR story draft",
-        "Follow-up answer",
-        "Evidence or metric from the story"
-      ]
+      "artifacts": ["STAR story draft", "Follow-up answer", "Evidence or metric from the story"]
     },
     "ml": {
       "track": "TinyGPT",
@@ -64,11 +52,7 @@
         "Explain the forward path and the failure mode without notes.",
         "Produce an overfit, eval, or checkpoint proof where relevant."
       ],
-      "artifacts": [
-        "Reference implementation",
-        "Test/eval output",
-        "Shape or loss note"
-      ]
+      "artifacts": ["Reference implementation", "Test/eval output", "Shape or loss note"]
     }
   },
   "byConceptId": {

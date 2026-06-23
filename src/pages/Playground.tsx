@@ -1,6 +1,22 @@
-import { AlertTriangle, BookOpen, Brain, Check, Clock, Code2, Copy, Eye, FileText, Focus, GripVertical, Loader2, Pencil, PenTool, Play, Share2 } from 'lucide-react';
+import {
+  AlertTriangle,
+  BookOpen,
+  Brain,
+  Check,
+  Code2,
+  Copy,
+  Eye,
+  FileText,
+  Focus,
+  GripVertical,
+  Loader2,
+  Pencil,
+  PenTool,
+  Play,
+  Share2,
+} from 'lucide-react';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
-import { useCallback, useEffect,useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Group as PanelGroup, Panel, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { useSearchParams } from 'react-router-dom';
 
@@ -42,7 +58,9 @@ function loadPanels(): Set<PanelId> {
   try {
     const saved = localStorage.getItem(PANELS_KEY);
     if (saved) return new Set(JSON.parse(saved));
-  } catch { /* invalid JSON */ }
+  } catch {
+    /* invalid JSON */
+  }
   return new Set(['code', 'companion']);
 }
 
@@ -59,7 +77,8 @@ export default function Playground() {
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const problemTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const editorRef = useRef<any>(null);
-  const { execute, output, errors, isRunning, execTimeMs, errorLine, goBackend } = useCodeExecution();
+  const { execute, output, errors, isRunning, execTimeMs, errorLine, goBackend } =
+    useCodeExecution();
   const [copied, setCopied] = useState(false);
   const [shared_, setShared] = useState(false);
   const [hasRun, setHasRun] = useState(false);
@@ -81,9 +100,15 @@ export default function Playground() {
 
   // Focus mode suppresses AI-assist surfaces: Socratic Companion panel and
   // the periodic auto-tagger. Forced-production tools (Feynman Gate) stay on.
-  useTagger(code, language, problem, (tags) => {
-    setTaggedConcepts(tags.map(t => t.concept_id));
-  }, !focusMode);
+  useTagger(
+    code,
+    language,
+    problem,
+    (tags) => {
+      setTaggedConcepts(tags.map((t) => t.concept_id));
+    },
+    !focusMode
+  );
 
   // Hydrate from query params (artifact templates, concept deep-links, prompts)
   useEffect(() => {
@@ -102,7 +127,7 @@ export default function Playground() {
         localStorage.setItem(STORAGE_KEY, template.code);
         localStorage.setItem(PROBLEM_KEY, template.problem);
         localStorage.setItem(LANG_KEY, template.language);
-        setVisiblePanels(prev => {
+        setVisiblePanels((prev) => {
           const next = new Set(prev);
           next.add('problem');
           localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
@@ -120,11 +145,14 @@ export default function Playground() {
       const newProblem = [
         promptText || '',
         concept ? `\n\n**Concept:** ${concept.name}\n${concept.description}` : '',
-      ].filter(Boolean).join('').trim();
+      ]
+        .filter(Boolean)
+        .join('')
+        .trim();
       if (newProblem && !artifactId) {
         setProblem(newProblem);
         localStorage.setItem(PROBLEM_KEY, newProblem);
-        setVisiblePanels(prev => {
+        setVisiblePanels((prev) => {
           const next = new Set(prev);
           next.add('problem');
           localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
@@ -136,16 +164,16 @@ export default function Playground() {
 
     setSearchParams({}, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setSearchParams, setArtifact, searchParams.get, getArtifact]);
 
   const togglePanel = (id: PanelId) => {
     // In compact mode the toggle row is a single-select tab switcher.
     if (isCompact) {
       setActivePanel(id);
-      setVisiblePanels(prev => (prev.has(id) ? prev : new Set([...prev, id])));
+      setVisiblePanels((prev) => (prev.has(id) ? prev : new Set([...prev, id])));
       return;
     }
-    setVisiblePanels(prev => {
+    setVisiblePanels((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
         if (next.size <= 1) return prev; // keep at least one
@@ -209,7 +237,8 @@ export default function Playground() {
     setTimeout(() => setShared(false), 2000);
   };
 
-  const formatTime = (ms: number) => ms < 1 ? '<1ms' : ms < 1000 ? `${ms.toFixed(1)}ms` : `${(ms / 1000).toFixed(2)}s`;
+  const formatTime = (ms: number) =>
+    ms < 1 ? '<1ms' : ms < 1000 ? `${ms.toFixed(1)}ms` : `${(ms / 1000).toFixed(2)}s`;
 
   const panelBtn = (_id: PanelId, active: boolean) =>
     `relative flex shrink-0 items-center gap-1.5 px-2 py-1.5 text-xs font-medium transition-colors duration-150 after:absolute after:inset-x-1 after:-bottom-px after:h-px after:transition-colors ${
@@ -219,8 +248,7 @@ export default function Playground() {
     }`;
 
   // In compact mode the toggle row is a tab switcher, so "active" = the shown panel.
-  const isPanelActive = (id: PanelId) =>
-    isCompact ? activePanel === id : visiblePanels.has(id);
+  const isPanelActive = (id: PanelId) => (isCompact ? activePanel === id : visiblePanels.has(id));
 
   const langBtn = (active: boolean) =>
     `px-2 py-1 rounded text-xs font-medium transition-colors duration-150 ${
@@ -233,8 +261,8 @@ export default function Playground() {
   // fall back to code so the editor stays visible.
   const allVisiblePanels = useMemo(() => {
     const filtered = (['problem', 'code', 'diagram', 'companion', 'library'] as PanelId[])
-      .filter(id => visiblePanels.has(id))
-      .filter(id => !(focusMode && id === 'companion'));
+      .filter((id) => visiblePanels.has(id))
+      .filter((id) => !(focusMode && id === 'companion'));
     return filtered.length > 0 ? filtered : (['code'] as PanelId[]);
   }, [visiblePanels, focusMode]);
   // In compact mode show a single panel; fall back to the first visible one if
@@ -250,31 +278,49 @@ export default function Playground() {
       <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] bg-black/95 px-3 py-2 sm:px-4 sm:py-2.5">
         <div className="flex min-w-0 items-center gap-3">
           {artifactTitle && (
-            <span className="hidden max-w-[12rem] truncate text-xs font-medium text-white/60 sm:inline" title={artifactTitle}>
+            <span
+              className="hidden max-w-[12rem] truncate text-xs font-medium text-white/60 sm:inline"
+              title={artifactTitle}
+            >
               {artifactTitle}
             </span>
           )}
           {/* Panel toggles — underline indicator on active, no chip bg */}
           <div className="flex items-center gap-3 overflow-x-auto border-b border-transparent">
-            <button onClick={() => togglePanel('problem')} className={panelBtn('problem', isPanelActive('problem'))}>
+            <button
+              onClick={() => togglePanel('problem')}
+              className={panelBtn('problem', isPanelActive('problem'))}
+            >
               <FileText className="h-3.5 w-3.5" />
               Problem
             </button>
-            <button onClick={() => togglePanel('code')} className={panelBtn('code', isPanelActive('code'))}>
+            <button
+              onClick={() => togglePanel('code')}
+              className={panelBtn('code', isPanelActive('code'))}
+            >
               <Code2 className="h-3.5 w-3.5" />
               Code
             </button>
-            <button onClick={() => togglePanel('diagram')} className={panelBtn('diagram', isPanelActive('diagram'))}>
+            <button
+              onClick={() => togglePanel('diagram')}
+              className={panelBtn('diagram', isPanelActive('diagram'))}
+            >
               <PenTool className="h-3.5 w-3.5" />
               Draw
             </button>
             {!focusMode && (
-              <button onClick={() => togglePanel('companion')} className={panelBtn('companion', isPanelActive('companion'))}>
+              <button
+                onClick={() => togglePanel('companion')}
+                className={panelBtn('companion', isPanelActive('companion'))}
+              >
                 <Brain className="h-3.5 w-3.5" />
                 Companion
               </button>
             )}
-            <button onClick={() => togglePanel('library')} className={panelBtn('library', isPanelActive('library'))}>
+            <button
+              onClick={() => togglePanel('library')}
+              className={panelBtn('library', isPanelActive('library'))}
+            >
               <BookOpen className="h-3.5 w-3.5" />
               Library
             </button>
@@ -284,9 +330,24 @@ export default function Playground() {
             <>
               <div className="h-4 w-px bg-white/5" />
               <div className="flex items-center gap-1 rounded-md border border-white/[0.08] p-0.5">
-                <button onClick={() => handleLanguageChange('javascript')} className={langBtn(language === 'javascript')}>JS</button>
-                <button onClick={() => handleLanguageChange('typescript')} className={langBtn(language === 'typescript')}>TS</button>
-                <button onClick={() => handleLanguageChange('go')} className={langBtn(language === 'go')}>Go</button>
+                <button
+                  onClick={() => handleLanguageChange('javascript')}
+                  className={langBtn(language === 'javascript')}
+                >
+                  JS
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('typescript')}
+                  className={langBtn(language === 'typescript')}
+                >
+                  TS
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('go')}
+                  className={langBtn(language === 'go')}
+                >
+                  Go
+                </button>
               </div>
             </>
           )}
@@ -299,9 +360,11 @@ export default function Playground() {
                 ? 'text-white hover:text-white'
                 : 'text-white/50 hover:bg-white/[0.04] hover:text-white/80'
             }`}
-            title={focusMode
-              ? 'Focus mode on — Companion + auto-tag suppressed. Click to disable.'
-              : 'Focus mode — train without AI assist (Companion + auto-tag off). Click to enable.'}
+            title={
+              focusMode
+                ? 'Focus mode on — Companion + auto-tag suppressed. Click to disable.'
+                : 'Focus mode — train without AI assist (Companion + auto-tag off). Click to enable.'
+            }
           >
             <Focus className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Focus</span>
@@ -321,7 +384,11 @@ export default function Playground() {
             onClick={handleShare}
             className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-white/50 transition-colors duration-150 hover:bg-white/[0.04] hover:text-white/80"
           >
-            {shared_ ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Share2 className="h-3.5 w-3.5" />}
+            {shared_ ? (
+              <Check className="h-3.5 w-3.5 text-emerald-400" />
+            ) : (
+              <Share2 className="h-3.5 w-3.5" />
+            )}
             <span className="hidden sm:inline">{shared_ ? 'Copied' : 'Share'}</span>
           </button>
           {visiblePanels.has('code') && (
@@ -393,7 +460,9 @@ export default function Playground() {
                     code={code}
                     language={language}
                     onChange={handleCodeChange}
-                    onMount={(editor) => { editorRef.current = editor; }}
+                    onMount={(editor) => {
+                      editorRef.current = editor;
+                    }}
                     onValidate={handleValidation}
                     onRun={handleRun}
                     errorLine={errorLine}
@@ -409,22 +478,30 @@ export default function Playground() {
                         <button
                           onClick={() => setBottomTab('output')}
                           className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
-                            bottomTab === 'output' ? 'bg-white/5 text-white/80' : 'text-white/40 hover:text-white/70'
+                            bottomTab === 'output'
+                              ? 'bg-white/5 text-white/80'
+                              : 'text-white/40 hover:text-white/70'
                           }`}
                         >
                           Output
                           {hasRun && execTimeMs > 0 && (
-                            <span className="ml-1.5 text-white/40">
-                              {formatTime(execTimeMs)}
-                            </span>
+                            <span className="ml-1.5 text-white/40">{formatTime(execTimeMs)}</span>
                           )}
                           {hasRun && language === 'go' && (
-                            <span className={`ml-1.5 rounded px-1 text-[10px] font-bold ${
-                              goBackend === 'wasm' ? 'bg-green-500/20 text-green-400' :
-                              goBackend === 'wasm-loading' ? 'bg-blue-500/20 text-blue-400' :
-                              'bg-white/10 text-white'
-                            }`}>
-                              {goBackend === 'wasm' ? 'LOCAL' : goBackend === 'wasm-loading' ? 'API (loading WASM...)' : 'API'}
+                            <span
+                              className={`ml-1.5 rounded px-1 text-[10px] font-bold ${
+                                goBackend === 'wasm'
+                                  ? 'bg-green-500/20 text-green-400'
+                                  : goBackend === 'wasm-loading'
+                                    ? 'bg-blue-500/20 text-blue-400'
+                                    : 'bg-white/10 text-white'
+                              }`}
+                            >
+                              {goBackend === 'wasm'
+                                ? 'LOCAL'
+                                : goBackend === 'wasm-loading'
+                                  ? 'API (loading WASM...)'
+                                  : 'API'}
                             </span>
                           )}
                         </button>
@@ -433,14 +510,20 @@ export default function Playground() {
                           className={`flex items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
                             bottomTab === 'problems'
                               ? 'bg-white/5 text-white/80'
-                              : markers.length > 0 ? 'text-yellow-400 hover:text-yellow-300' : 'text-white/40 hover:text-white/70'
+                              : markers.length > 0
+                                ? 'text-yellow-400 hover:text-yellow-300'
+                                : 'text-white/40 hover:text-white/70'
                           }`}
                         >
                           Problems
                           {markers.length > 0 && (
-                            <span className={`rounded-full px-1.5 text-[10px] font-bold ${
-                              bottomTab === 'problems' ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-500/20 text-yellow-400'
-                            }`}>
+                            <span
+                              className={`rounded-full px-1.5 text-[10px] font-bold ${
+                                bottomTab === 'problems'
+                                  ? 'bg-yellow-500/20 text-yellow-300'
+                                  : 'bg-yellow-500/20 text-yellow-400'
+                              }`}
+                            >
                               {markers.length}
                             </span>
                           )}
@@ -451,7 +534,11 @@ export default function Playground() {
                           onClick={handleCopy}
                           className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
                         >
-                          {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
+                          {copied ? (
+                            <Check className="h-3 w-3 text-green-400" />
+                          ) : (
+                            <Copy className="h-3 w-3" />
+                          )}
                           {copied ? 'Copied' : 'Copy'}
                         </button>
                       )}
@@ -491,13 +578,18 @@ export default function Playground() {
                                 className="flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/5 px-3 py-2 cursor-pointer hover:bg-yellow-500/10 transition-colors"
                                 onClick={() => {
                                   editorRef.current?.revealLineInCenter(m.startLineNumber);
-                                  editorRef.current?.setPosition({ lineNumber: m.startLineNumber, column: m.startColumn });
+                                  editorRef.current?.setPosition({
+                                    lineNumber: m.startLineNumber,
+                                    column: m.startColumn,
+                                  });
                                   editorRef.current?.focus();
                                 }}
                               >
                                 <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 text-yellow-400 mt-0.5" />
                                 <div className="text-xs">
-                                  <span className="text-yellow-500 font-mono">Ln {m.startLineNumber}, Col {m.startColumn}</span>
+                                  <span className="text-yellow-500 font-mono">
+                                    Ln {m.startLineNumber}, Col {m.startColumn}
+                                  </span>
                                   <span className="text-white/50 ml-2">{m.message}</span>
                                 </div>
                               </div>
@@ -510,15 +602,9 @@ export default function Playground() {
                 </Panel>
               </PanelGroup>
             )}
-            {id === 'diagram' && (
-              <DiagramEditor problemId="playground" />
-            )}
-            {id === 'companion' && (
-              <CompanionPanel context={{ code, language, problem }} />
-            )}
-            {id === 'library' && (
-              <AmbientLibrary conceptIds={taggedConcepts} />
-            )}
+            {id === 'diagram' && <DiagramEditor problemId="playground" />}
+            {id === 'companion' && <CompanionPanel context={{ code, language, problem }} />}
+            {id === 'library' && <AmbientLibrary conceptIds={taggedConcepts} />}
           </PanelWrapper>
         ))}
       </PanelGroup>
@@ -537,8 +623,18 @@ export default function Playground() {
 }
 
 /** Wraps a panel with an optional resize handle before it */
-function PanelWrapper({ id, index, total, defaultSize, children }: {
-  id: string; index: number; total: number; defaultSize: number; children: React.ReactNode;
+function PanelWrapper({
+  id,
+  index,
+  total,
+  defaultSize,
+  children,
+}: {
+  id: string;
+  index: number;
+  total: number;
+  defaultSize: number;
+  children: React.ReactNode;
 }) {
   return (
     <>

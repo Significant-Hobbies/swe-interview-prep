@@ -21,20 +21,92 @@ interface ColorSet {
 export const COLORS: Record<string, ColorSet> = {
   // Slate is the chrome default; everything that used to be "purple" or "gray"
   // for ornament now lands here.
-  slate: { text: 'text-slate-300', bg: 'bg-slate-800/40', border: 'border-slate-800', solid: 'bg-slate-500', ring: 'ring-slate-500/40' },
-  sky: { text: 'text-sky-300', bg: 'bg-sky-500/10', border: 'border-sky-500/30', solid: 'bg-sky-500', ring: 'ring-sky-500/40' },
-  emerald: { text: 'text-emerald-300', bg: 'bg-emerald-500/10', border: 'border-emerald-700/60', solid: 'bg-emerald-500', ring: 'ring-emerald-500/40' },
-  amber: { text: 'text-amber-300', bg: 'bg-amber-500/10', border: 'border-amber-700/60', solid: 'bg-amber-500', ring: 'ring-amber-500/40' },
-  rose: { text: 'text-rose-300', bg: 'bg-rose-500/10', border: 'border-rose-700/60', solid: 'bg-rose-500', ring: 'ring-rose-500/40' },
+  slate: {
+    text: 'text-slate-300',
+    bg: 'bg-slate-800/40',
+    border: 'border-slate-800',
+    solid: 'bg-slate-500',
+    ring: 'ring-slate-500/40',
+  },
+  sky: {
+    text: 'text-sky-300',
+    bg: 'bg-sky-500/10',
+    border: 'border-sky-500/30',
+    solid: 'bg-sky-500',
+    ring: 'ring-sky-500/40',
+  },
+  emerald: {
+    text: 'text-emerald-300',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-700/60',
+    solid: 'bg-emerald-500',
+    ring: 'ring-emerald-500/40',
+  },
+  amber: {
+    text: 'text-amber-300',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-700/60',
+    solid: 'bg-amber-500',
+    ring: 'ring-amber-500/40',
+  },
+  rose: {
+    text: 'text-rose-300',
+    bg: 'bg-rose-500/10',
+    border: 'border-rose-700/60',
+    solid: 'bg-rose-500',
+    ring: 'ring-rose-500/40',
+  },
   // Track / viz colors — used inside viz.tsx, not in chrome.
-  purple: { text: 'text-violet-300', bg: 'bg-violet-500/10', border: 'border-violet-700/60', solid: 'bg-violet-500', ring: 'ring-violet-500/40' },
-  fuchsia: { text: 'text-sky-300', bg: 'bg-sky-500/10', border: 'border-fuchsia-700/60', solid: 'bg-fuchsia-500', ring: 'ring-fuchsia-500/40' },
-  cyan: { text: 'text-cyan-300', bg: 'bg-cyan-500/10', border: 'border-cyan-700/60', solid: 'bg-cyan-500', ring: 'ring-cyan-500/40' },
-  orange: { text: 'text-orange-300', bg: 'bg-orange-500/10', border: 'border-orange-700/60', solid: 'bg-orange-500', ring: 'ring-orange-500/40' },
-  blue: { text: 'text-blue-300', bg: 'bg-blue-500/10', border: 'border-blue-700/60', solid: 'bg-blue-500', ring: 'ring-blue-500/40' },
-  indigo: { text: 'text-indigo-300', bg: 'bg-indigo-500/10', border: 'border-indigo-700/60', solid: 'bg-indigo-500', ring: 'ring-indigo-500/40' },
+  purple: {
+    text: 'text-violet-300',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-700/60',
+    solid: 'bg-violet-500',
+    ring: 'ring-violet-500/40',
+  },
+  fuchsia: {
+    text: 'text-sky-300',
+    bg: 'bg-sky-500/10',
+    border: 'border-fuchsia-700/60',
+    solid: 'bg-fuchsia-500',
+    ring: 'ring-fuchsia-500/40',
+  },
+  cyan: {
+    text: 'text-cyan-300',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-700/60',
+    solid: 'bg-cyan-500',
+    ring: 'ring-cyan-500/40',
+  },
+  orange: {
+    text: 'text-orange-300',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-700/60',
+    solid: 'bg-orange-500',
+    ring: 'ring-orange-500/40',
+  },
+  blue: {
+    text: 'text-blue-300',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-700/60',
+    solid: 'bg-blue-500',
+    ring: 'ring-blue-500/40',
+  },
+  indigo: {
+    text: 'text-indigo-300',
+    bg: 'bg-indigo-500/10',
+    border: 'border-indigo-700/60',
+    solid: 'bg-indigo-500',
+    ring: 'ring-indigo-500/40',
+  },
   // Back-compat alias — old code that asked for `gray` now gets slate.
-  gray: { text: 'text-slate-300', bg: 'bg-slate-800/40', border: 'border-slate-800', solid: 'bg-slate-500', ring: 'ring-slate-500/40' },
+  gray: {
+    text: 'text-slate-300',
+    bg: 'bg-slate-800/40',
+    border: 'border-slate-800',
+    solid: 'bg-slate-500',
+    ring: 'ring-slate-500/40',
+  },
 };
 
 export function color(name: string): ColorSet {
@@ -81,7 +153,9 @@ export function PageHeader({
     <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         {eyebrow && (
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{eyebrow}</div>
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            {eyebrow}
+          </div>
         )}
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h1>
         {subtitle && <p className="mt-3 max-w-2xl text-sm text-white/60">{subtitle}</p>}
@@ -107,14 +181,20 @@ export function Card({
   const base = `rounded-xl border border-white/[0.08] bg-white/[0.02] ${className}`;
   if (as === 'link' && to) {
     return (
-      <Link to={to} className={`${base} block transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}>
+      <Link
+        to={to}
+        className={`${base} block transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}
+      >
         {children}
       </Link>
     );
   }
   if (as === 'button') {
     return (
-      <button onClick={onClick} className={`${base} text-left transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}>
+      <button
+        onClick={onClick}
+        className={`${base} text-left transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]`}
+      >
         {children}
       </button>
     );
@@ -122,7 +202,13 @@ export function Card({
   return <div className={base}>{children}</div>;
 }
 
-export function Badge({ children, tone = 'default' }: { children: React.ReactNode; tone?: string }) {
+export function Badge({
+  children,
+  tone = 'default',
+}: {
+  children: React.ReactNode;
+  tone?: string;
+}) {
   // Single quiet chip. White-on-black with subtle tone shifts for semantics.
   const TONE_TEXT: Record<string, string> = {
     default: 'text-white/70 border-white/15',
@@ -141,13 +227,24 @@ export function Badge({ children, tone = 'default' }: { children: React.ReactNod
   };
   const cls = TONE_TEXT[tone] ?? TONE_TEXT.default;
   return (
-    <span className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 font-mono text-[10px] ${cls}`}>
+    <span
+      className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 font-mono text-[10px] ${cls}`}
+    >
       {children}
     </span>
   );
 }
 
-export function StatTile({ label, value, hint }: { label: string; value: React.ReactNode; hint?: string; tone?: string }) {
+export function StatTile({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: React.ReactNode;
+  hint?: string;
+  tone?: string;
+}) {
   return (
     <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3">
       <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
@@ -174,12 +271,23 @@ export function ProgressBar({ value, tone = 'sky' }: { value: number; tone?: str
   const fill = TONE_BAR[tone] ?? TONE_BAR.sky;
   return (
     <div className="h-px w-full overflow-hidden bg-white/10">
-      <div className={`h-full transition-[width] duration-500 ${fill}`} style={{ width: `${pct}%` }} />
+      <div
+        className={`h-full transition-[width] duration-500 ${fill}`}
+        style={{ width: `${pct}%` }}
+      />
     </div>
   );
 }
 
-export function EmptyState({ icon, title, hint }: { icon?: React.ReactNode; title: string; hint?: string }) {
+export function EmptyState({
+  icon,
+  title,
+  hint,
+}: {
+  icon?: React.ReactNode;
+  title: string;
+  hint?: string;
+}) {
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 px-6 py-12 text-center">
       {icon && <div className="mb-3 text-white/30">{icon}</div>}
@@ -189,10 +297,18 @@ export function EmptyState({ icon, title, hint }: { icon?: React.ReactNode; titl
   );
 }
 
-export function SectionTitle({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
+export function SectionTitle({
+  children,
+  action,
+}: {
+  children: React.ReactNode;
+  action?: React.ReactNode;
+}) {
   return (
     <div className="mb-4 flex items-center justify-between">
-      <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{children}</h2>
+      <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        {children}
+      </h2>
       {action}
     </div>
   );
@@ -233,9 +349,18 @@ export function Button({
 
 // --- Tabs & collapsible panels (Learn / Practice / Progress) ---------------
 
-export function TabGroup({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+export function TabGroup({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={`flex items-center gap-6 border-b border-white/[0.08] ${className}`} role="tablist">
+    <div
+      className={`flex items-center gap-6 border-b border-white/[0.08] ${className}`}
+      role="tablist"
+    >
       {children}
     </div>
   );
@@ -261,9 +386,7 @@ export function TabButton({
       aria-selected={active}
       onClick={onClick}
       className={`-mb-px inline-flex items-center gap-1.5 border-b-2 px-0.5 py-3 text-sm transition-colors duration-150 focus-visible:outline-none ${
-        active
-          ? 'border-white text-white'
-          : 'border-transparent text-white/40 hover:text-white'
+        active ? 'border-white text-white' : 'border-transparent text-white/40 hover:text-white'
       }`}
     >
       {children ?? (
@@ -342,14 +465,18 @@ export function SessionStatBar({
 }) {
   return (
     <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-3">
-      {items.map(item => (
+      {items.map((item) => (
         <div
           key={item.label}
           className="rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2 sm:min-w-[120px]"
         >
-          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{item.label}</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            {item.label}
+          </div>
           <div className="mt-1 text-lg font-semibold tabular-nums text-white">{item.value}</div>
-          {item.hint && <div className="mt-0.5 font-mono text-[10px] text-white/40">{item.hint}</div>}
+          {item.hint && (
+            <div className="mt-0.5 font-mono text-[10px] text-white/40">{item.hint}</div>
+          )}
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { useCallback,useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import type { LibraryManifest, ParsedRepo, RepoManifestEntry } from '../adapters/types';
 import manifestData from '../data/library/manifest.json';
@@ -12,10 +12,10 @@ const contentCache: Record<string, ParsedRepo> = {};
 const emptyContent: ParsedRepo = { sections: [], exercises: [], totalItems: 0 };
 
 function enrichExercises(repoId: string, data: ParsedRepo): ParsedRepo {
-  const repoMeta = manifest.repos.find(r => r.id === repoId);
+  const repoMeta = manifest.repos.find((r) => r.id === repoId);
   const baseTags = repoMeta?.tags || [];
 
-  const existing = (data.exercises || []).map(exercise => {
+  const existing = (data.exercises || []).map((exercise) => {
     if (exercise.qualityScore !== undefined && exercise.qualityTier) return exercise;
     const quality = scoreExerciseQuality(exercise);
     return {
@@ -26,7 +26,7 @@ function enrichExercises(repoId: string, data: ParsedRepo): ParsedRepo {
     };
   });
 
-  const highQualityExisting = existing.filter(e => (e.qualityScore || 0) >= 72).length;
+  const highQualityExisting = existing.filter((e) => (e.qualityScore || 0) >= 72).length;
   const hasStrongCoverage =
     existing.length >= 30 && highQualityExisting / Math.max(existing.length, 1) >= 0.55;
 
@@ -67,41 +67,51 @@ export function useLibrary() {
   const search = useCallback((query: string): RepoManifestEntry[] => {
     if (!query) return repos;
     const q = query.toLowerCase();
-    return repos.filter(r =>
-      r.name.toLowerCase().includes(q) ||
-      r.description.toLowerCase().includes(q) ||
-      r.tags.some(t => t.toLowerCase().includes(q))
+    return repos.filter(
+      (r) =>
+        r.name.toLowerCase().includes(q) ||
+        r.description.toLowerCase().includes(q) ||
+        r.tags.some((t) => t.toLowerCase().includes(q))
     );
-  }, [repos]);
+  }, []);
 
   const getRepo = useCallback((id: string): RepoManifestEntry | null => {
-    return repos.find(r => r.id === id) || null;
-  }, [repos]);
+    return repos.find((r) => r.id === id) || null;
+  }, []);
 
   return { repos, search, getRepo, generatedAt: manifest.generatedAt };
 }
 
 export function useRepoContent(repoId: string) {
-  const [content, setContent] = useState<ParsedRepo>(
-    contentCache[repoId] || emptyContent
-  );
+  const [content, setContent] = useState<ParsedRepo>(contentCache[repoId] || emptyContent);
   const [loading, setLoading] = useState<boolean>(!!repoId && !contentCache[repoId]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!repoId) { setLoading(false); return; }
+    if (!repoId) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     setLoading(true);
     setError(null);
     loadRepoContent(repoId)
-      .then(data => {
-        if (!cancelled) { setContent(data); setLoading(false); }
+      .then((data) => {
+        if (!cancelled) {
+          setContent(data);
+          setLoading(false);
+        }
         return undefined;
       })
       .catch(() => {
-        if (!cancelled) { setError('Failed to load content.'); setLoading(false); }
+        if (!cancelled) {
+          setError('Failed to load content.');
+          setLoading(false);
+        }
       });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [repoId]);
 
   return { content, loading, error };

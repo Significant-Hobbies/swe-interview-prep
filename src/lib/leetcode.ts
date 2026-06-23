@@ -7,21 +7,36 @@ export const CORS_PROXIES = [
 ];
 
 export const TAG_TO_PATTERN: Record<string, string> = {
-  'array': 'array-hashing', 'hash-table': 'array-hashing', 'string': 'array-hashing',
-  'two-pointers': 'two-pointers', 'three-sum': 'two-pointers',
+  array: 'array-hashing',
+  'hash-table': 'array-hashing',
+  string: 'array-hashing',
+  'two-pointers': 'two-pointers',
+  'three-sum': 'two-pointers',
   'sliding-window': 'sliding-window',
-  'stack': 'stack', 'monotonic-stack': 'stack',
+  stack: 'stack',
+  'monotonic-stack': 'stack',
   'binary-search': 'binary-search',
   'linked-list': 'linked-list',
-  'tree': 'trees', 'binary-tree': 'trees', 'binary-search-tree': 'trees', 'depth-first-search': 'trees', 'breadth-first-search': 'trees',
-  'trie': 'tries',
+  tree: 'trees',
+  'binary-tree': 'trees',
+  'binary-search-tree': 'trees',
+  'depth-first-search': 'trees',
+  'breadth-first-search': 'trees',
+  trie: 'tries',
   'heap-priority-queue': 'heap',
-  'backtracking': 'backtracking',
-  'graph': 'graphs', 'topological-sort': 'graphs', 'shortest-path': 'graphs', 'union-find': 'graphs',
+  backtracking: 'backtracking',
+  graph: 'graphs',
+  'topological-sort': 'graphs',
+  'shortest-path': 'graphs',
+  'union-find': 'graphs',
   'dynamic-programming': 'dp-1d',
-  'greedy': 'greedy',
-  'interval': 'intervals', 'merge-intervals': 'intervals', 'line-sweep': 'intervals',
-  'math': 'math-geometry', 'geometry': 'math-geometry', 'matrix': 'math-geometry',
+  greedy: 'greedy',
+  interval: 'intervals',
+  'merge-intervals': 'intervals',
+  'line-sweep': 'intervals',
+  math: 'math-geometry',
+  geometry: 'math-geometry',
+  matrix: 'math-geometry',
   'bit-manipulation': 'bit-manipulation',
 };
 
@@ -29,25 +44,57 @@ export function stripHtml(html: string): string {
   return html
     .replace(/<pre[^>]*>/gi, '\n```\n')
     .replace(/<\/pre>/gi, '\n```\n')
-    .replace(/<code>/gi, '`').replace(/<\/code>/gi, '`')
-    .replace(/<strong>/gi, '**').replace(/<\/strong>/gi, '**')
-    .replace(/<em>/gi, '*').replace(/<\/em>/gi, '*')
+    .replace(/<code>/gi, '`')
+    .replace(/<\/code>/gi, '`')
+    .replace(/<strong>/gi, '**')
+    .replace(/<\/strong>/gi, '**')
+    .replace(/<em>/gi, '*')
+    .replace(/<\/em>/gi, '*')
     .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<li>/gi, '- ').replace(/<\/li>/gi, '\n')
-    .replace(/<p>/gi, '\n').replace(/<\/p>/gi, '\n')
+    .replace(/<li>/gi, '- ')
+    .replace(/<\/li>/gi, '\n')
+    .replace(/<p>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
     .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
 export function detectPattern(tags: string[]): string {
   if (!tags || tags.length === 0) return 'array-hashing';
-  const priority = ['trie', 'heap-priority-queue', 'backtracking', 'graph', 'topological-sort', 'union-find',
-    'sliding-window', 'binary-search', 'linked-list', 'tree', 'binary-tree', 'binary-search-tree',
-    'dynamic-programming', 'stack', 'monotonic-stack', 'two-pointers', 'greedy',
-    'bit-manipulation', 'interval', 'merge-intervals', 'math', 'geometry',
-    'hash-table', 'array', 'string'];
+  const priority = [
+    'trie',
+    'heap-priority-queue',
+    'backtracking',
+    'graph',
+    'topological-sort',
+    'union-find',
+    'sliding-window',
+    'binary-search',
+    'linked-list',
+    'tree',
+    'binary-tree',
+    'binary-search-tree',
+    'dynamic-programming',
+    'stack',
+    'monotonic-stack',
+    'two-pointers',
+    'greedy',
+    'bit-manipulation',
+    'interval',
+    'merge-intervals',
+    'math',
+    'geometry',
+    'hash-table',
+    'array',
+    'string',
+  ];
   for (const tag of priority) {
     if (tags.includes(tag) && TAG_TO_PATTERN[tag]) return TAG_TO_PATTERN[tag];
   }
@@ -65,21 +112,27 @@ export function parseTestCasesFromDescription(desc: string, _funcName: string) {
         const inputRaw = inputMatch[1].trim();
         const outputRaw = outputMatch[1].trim();
         const argParts = inputRaw.split(/,\s*(?=\w+\s*=)/);
-        const args = argParts.map(part => {
+        const args = argParts.map((part) => {
           const valMatch = part.match(/=\s*(.+)/);
           if (!valMatch) return part.trim();
           const val = valMatch[1].trim();
-          try { return JSON.parse(val); } catch { /* not JSON */ }
+          try {
+            return JSON.parse(val);
+          } catch {
+            /* not JSON */
+          }
           if (/^".*"$/.test(val) || /^'.*'$/.test(val)) return val.slice(1, -1);
-          if (!isNaN(Number(val))) return Number(val);
+          if (!Number.isNaN(Number(val))) return Number(val);
           if (val === 'true') return true;
           if (val === 'false') return false;
           return val;
         });
 
         let expected: any;
-        try { expected = JSON.parse(outputRaw); } catch {
-          if (!isNaN(Number(outputRaw))) expected = Number(outputRaw);
+        try {
+          expected = JSON.parse(outputRaw);
+        } catch {
+          if (!Number.isNaN(Number(outputRaw))) expected = Number(outputRaw);
           else if (outputRaw === 'true') expected = true;
           else if (outputRaw === 'false') expected = false;
           else expected = outputRaw;
@@ -90,7 +143,9 @@ export function parseTestCasesFromDescription(desc: string, _funcName: string) {
           expected,
           description: `Example ${tests.length + 1}`,
         });
-      } catch { /* skip malformed */ }
+      } catch {
+        /* skip malformed */
+      }
     }
   }
   return tests;
@@ -108,14 +163,24 @@ export function generateSteps(title: string, difficulty: string, _description: s
       hint: `What is the simplest way to solve this, even if slow?`,
       approach: `Think about the most straightforward solution. Consider nested loops or trying all possibilities.`,
       code: `// TODO: Write your brute force solution here`,
-      complexity: difficulty === 'Easy' ? 'Time: O(n^2), Space: O(1)' : difficulty === 'Medium' ? 'Time: O(n^2), Space: O(n)' : 'Time: O(2^n), Space: O(n)',
+      complexity:
+        difficulty === 'Easy'
+          ? 'Time: O(n^2), Space: O(1)'
+          : difficulty === 'Medium'
+            ? 'Time: O(n^2), Space: O(n)'
+            : 'Time: O(2^n), Space: O(n)',
     },
     {
       title: 'Optimal Approach',
       hint: `Can you use a specific data structure or technique to improve the time complexity?`,
       approach: `Look for patterns: can a hash map, two pointers, sorting, or dynamic programming help reduce complexity?`,
       code: `// TODO: Write your optimal solution here`,
-      complexity: difficulty === 'Easy' ? 'Time: O(n), Space: O(n)' : difficulty === 'Medium' ? 'Time: O(n log n), Space: O(n)' : 'Time: O(n^2), Space: O(n)',
+      complexity:
+        difficulty === 'Easy'
+          ? 'Time: O(n), Space: O(n)'
+          : difficulty === 'Medium'
+            ? 'Time: O(n log n), Space: O(n)'
+            : 'Time: O(n^2), Space: O(n)',
     },
   ];
 }
@@ -163,12 +228,16 @@ export async function fetchLeetCodeProblem(slug: string): Promise<any> {
       if (!res.ok) continue;
       const data = await res.json();
       if (data?.data?.question) return data;
-    } catch { /* try next proxy */ }
+    } catch {
+      /* try next proxy */
+    }
   }
   throw new Error('Could not fetch from LeetCode. All proxies failed.');
 }
 
-export function parseSimilarQuestions(raw: string | null | undefined): { title: string; titleSlug: string; difficulty: string }[] {
+export function parseSimilarQuestions(
+  raw: string | null | undefined
+): { title: string; titleSlug: string; difficulty: string }[] {
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
@@ -191,13 +260,15 @@ export function buildProblemFromLeetCode(q: any, slug: string, patternName: stri
   const starterCode = jsSnippet?.code || `function solution() {\n  // Your code here\n}`;
 
   const fnMatch = starterCode.match(/(?:var|const|let)?\s*(\w+)\s*=\s*function|function\s+(\w+)/);
-  const funcName = fnMatch ? (fnMatch[1] || fnMatch[2]) : 'solution';
+  const funcName = fnMatch ? fnMatch[1] || fnMatch[2] : 'solution';
 
   const testCases = parseTestCasesFromDescription(description, funcName);
   const steps = generateSteps(title, difficulty, description);
   const id = `custom-${slug}`;
-  const ankiCards = generateAnkiCards(title, patternName || patternId, difficulty)
-    .map((c, i) => ({ ...c, id: `${id}-card-${i}` }));
+  const ankiCards = generateAnkiCards(title, patternName || patternId, difficulty).map((c, i) => ({
+    ...c,
+    id: `${id}-card-${i}`,
+  }));
 
   const similarQuestions = parseSimilarQuestions(q.similarQuestions);
 
@@ -207,7 +278,7 @@ export function buildProblemFromLeetCode(q: any, slug: string, patternName: stri
     difficulty,
     pattern: patternId,
     leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
-    leetcodeNumber: parseInt(q.questionId) || 0,
+    leetcodeNumber: parseInt(q.questionId, 10) || 0,
     description,
     starterCode,
     steps,

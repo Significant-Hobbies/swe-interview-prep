@@ -19,11 +19,10 @@ export default function Privacy() {
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">AI provider config</h2>
       <p className="mt-2">
-        Your AI <code className="rounded bg-slate-800 px-1 text-blue-300">endpointUrl</code> + key + model are stored
-        locally in the browser&apos;s storage. The server has fallback envs for
-        development but doesn&apos;t persist your API key. Each AI call goes
-        directly to your configured endpoint &mdash; we proxy without
-        retaining the request body.
+        Your AI <code className="rounded bg-slate-800 px-1 text-blue-300">endpointUrl</code> + key +
+        model are stored locally in the browser&apos;s storage. The server has fallback envs for
+        development but doesn&apos;t persist your API key. Each AI call goes directly to your
+        configured endpoint &mdash; we proxy without retaining the request body.
       </p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">What we don&apos;t</h2>
@@ -34,8 +33,8 @@ export default function Privacy() {
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">Deletion</h2>
       <p className="mt-2">
-        Sign out and clear browser storage to wipe local state. Email the
-        maintainer to delete your server-side FSRS state and notes.
+        Sign out and clear browser storage to wipe local state. Email the maintainer to delete your
+        server-side FSRS state and notes.
       </p>
     </main>
   );

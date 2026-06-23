@@ -1526,11 +1526,14 @@ function backtest(bars: Bar[], benchmark: Bar[]) {
 
 const bars: Bar[] = Array.from({ length: 24 }, (_, i) => ({ date: String(i), close: 100 + i * 0.5 + (i % 3) }));
 console.log(backtest(bars, bars));`,
-  }];
+  },
+];
 
-const BY_ID = Object.fromEntries(TEMPLATES.map(t => [t.artifactId, t]));
+const BY_ID = Object.fromEntries(TEMPLATES.map((t) => [t.artifactId, t]));
 
-export function getPlaygroundTemplate(artifactId: string | null | undefined): PlaygroundTemplate | null {
+export function getPlaygroundTemplate(
+  artifactId: string | null | undefined
+): PlaygroundTemplate | null {
   if (!artifactId) return null;
   return BY_ID[artifactId] ?? null;
 }
@@ -1552,9 +1555,10 @@ const MATH_ARTIFACT_PREFIXES = [
 ];
 
 export function listMathPlaygroundTemplates(): PlaygroundTemplate[] {
-  return TEMPLATES.filter(t =>
-    MATH_ARTIFACT_PREFIXES.some(p => t.artifactId.startsWith(p))
-    || t.artifactId.includes('ols')
-    || t.artifactId.includes('pca'),
+  return TEMPLATES.filter(
+    (t) =>
+      MATH_ARTIFACT_PREFIXES.some((p) => t.artifactId.startsWith(p)) ||
+      t.artifactId.includes('ols') ||
+      t.artifactId.includes('pca')
   );
 }

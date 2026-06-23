@@ -21,7 +21,7 @@ describe('ingest-leetcode', () => {
         difficulty: 'Easy',
         topicTags: [{ slug: 'array' }, { slug: 'hash-table' }],
       },
-      'two-sum',
+      'two-sum'
     );
     expect(stub.id).toBe(slugToDrillId('two-sum'));
     expect(stub.conceptId).toBe('array-hashing');
@@ -31,7 +31,12 @@ describe('ingest-leetcode', () => {
 
   it('mergeDrillStubs skips existing ids', () => {
     const existing = [{ id: 'lc-two-sum', title: 'Old' }];
-    const stubs = [buildDrillStub({ questionId: '1', title: 'Two Sum', difficulty: 'Easy', topicTags: [] }, 'two-sum')];
+    const stubs = [
+      buildDrillStub(
+        { questionId: '1', title: 'Two Sum', difficulty: 'Easy', topicTags: [] },
+        'two-sum'
+      ),
+    ];
     const { added, skipped } = mergeDrillStubs(existing, stubs);
     expect(added).toBe(0);
     expect(skipped).toBe(1);

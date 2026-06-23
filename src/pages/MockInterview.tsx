@@ -29,16 +29,16 @@ export default function MockInterview() {
   const [loadingAi, setLoadingAi] = useState(false);
   const deepLinked = useRef(false);
 
-  const pool = useMemo(() => MOCK_PROMPTS.filter(p => p.kind === kind), [kind]);
+  const pool = useMemo(() => MOCK_PROMPTS.filter((p) => p.kind === kind), [kind]);
   const recommended = useMemo(
-    () => recommendMockPrompts(profile, mastery, 3).filter(p => p.kind === kind),
-    [profile, mastery, kind],
+    () => recommendMockPrompts(profile, mastery, 3).filter((p) => p.kind === kind),
+    [profile, mastery, kind]
   );
-  const active = pool.find(p => p.id === activeId) ?? pool[0];
+  const active = pool.find((p) => p.id === activeId) ?? pool[0];
 
   useEffect(() => {
     if (!activeId || secondsLeft <= 0) return;
-    const t = setInterval(() => setSecondsLeft(s => Math.max(0, s - 1)), 1000);
+    const t = setInterval(() => setSecondsLeft((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, [activeId, secondsLeft]);
 
@@ -46,7 +46,7 @@ export default function MockInterview() {
     if (deepLinked.current) return;
     const promptId = searchParams.get('prompt');
     if (!promptId) return;
-    const p = MOCK_PROMPTS.find(x => x.id === promptId);
+    const p = MOCK_PROMPTS.find((x) => x.id === promptId);
     if (!p) return;
     deepLinked.current = true;
     setKind(p.kind);
@@ -65,7 +65,7 @@ export default function MockInterview() {
   }, [searchParams, logActivity]);
 
   function start(promptId: string) {
-    const p = MOCK_PROMPTS.find(x => x.id === promptId);
+    const p = MOCK_PROMPTS.find((x) => x.id === promptId);
     if (!p) return;
     setActiveId(promptId);
     setSecondsLeft(p.durationMinutes * 60);
@@ -82,7 +82,7 @@ export default function MockInterview() {
   }
 
   function toggleRubric(i: number) {
-    setChecked(prev => {
+    setChecked((prev) => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
       else next.add(i);
@@ -106,7 +106,9 @@ export default function MockInterview() {
       });
       if (!res.ok) throw new Error('AI feedback failed');
       const data = await res.json();
-      setAiFeedback([data.verdict, ...(data.missing || []).map((m: string) => `· ${m}`)].join('\n'));
+      setAiFeedback(
+        [data.verdict, ...(data.missing || []).map((m: string) => `· ${m}`)].join('\n')
+      );
     } catch {
       setAiFeedback('AI feedback unavailable — use the rubric checklist.');
     } finally {
@@ -150,7 +152,7 @@ export default function MockInterview() {
       />
 
       <div className="mb-4 flex flex-wrap gap-2">
-        {KINDS.map(k => (
+        {KINDS.map((k) => (
           <FilterPill key={k} active={kind === k} onClick={() => setKind(k)}>
             {k.replace('-', ' ')}
           </FilterPill>
@@ -164,7 +166,7 @@ export default function MockInterview() {
             Recommended for your gaps
           </div>
           <div className="flex flex-wrap gap-2">
-            {recommended.map(p => (
+            {recommended.map((p) => (
               <button
                 key={p.id}
                 type="button"
@@ -181,7 +183,7 @@ export default function MockInterview() {
 
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
         <div className="space-y-2">
-          {pool.map(p => (
+          {pool.map((p) => (
             <button
               key={p.id}
               type="button"
@@ -193,7 +195,9 @@ export default function MockInterview() {
               }`}
             >
               <div className="text-sm font-medium text-white">{p.title}</div>
-              <div className="mt-1 font-mono text-[10px] text-white/40">{p.durationMinutes} min</div>
+              <div className="mt-1 font-mono text-[10px] text-white/40">
+                {p.durationMinutes} min
+              </div>
             </button>
           ))}
         </div>
@@ -206,9 +210,13 @@ export default function MockInterview() {
                 <span className="text-sm font-semibold text-white">{active.title}</span>
               </div>
               {secondsLeft > 0 ? (
-                <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-sm ${
-                  secondsLeft < 120 ? 'border-rose-500/30 text-rose-300' : 'border-white/15 text-white/70'
-                }`}>
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-sm ${
+                    secondsLeft < 120
+                      ? 'border-rose-500/30 text-rose-300'
+                      : 'border-white/15 text-white/70'
+                  }`}
+                >
                   <Clock className="h-3.5 w-3.5" />
                   {mm}:{ss.toString().padStart(2, '0')}
                 </span>
@@ -223,7 +231,7 @@ export default function MockInterview() {
 
             {active.conceptIds && active.conceptIds.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {active.conceptIds.map(cid => {
+                {active.conceptIds.map((cid) => {
                   const c = CONCEPT_BY_ID[cid];
                   if (!c) return null;
                   return (
@@ -241,7 +249,7 @@ export default function MockInterview() {
 
             <textarea
               value={notes}
-              onChange={e => setNotes(e.target.value)}
+              onChange={(e) => setNotes(e.target.value)}
               placeholder="Type your answer as you would speak it…"
               rows={8}
               className="mt-4 w-full resize-y rounded-md border border-white/[0.08] bg-black p-3 text-sm text-white placeholder:text-white/40 focus:border-white/25 focus:outline-none"
@@ -270,9 +278,7 @@ export default function MockInterview() {
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
-              {secondsLeft > 0 && (
-                <Button onClick={finish}>Finish early</Button>
-              )}
+              {secondsLeft > 0 && <Button onClick={finish}>Finish early</Button>}
               {aiConfigured() && notes.trim().length > 40 && (
                 <Button tone="ghost" onClick={() => void requestAiFeedback()} disabled={loadingAi}>
                   {loadingAi ? 'Grading…' : 'AI feedback'}

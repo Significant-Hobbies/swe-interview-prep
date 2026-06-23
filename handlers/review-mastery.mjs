@@ -2,11 +2,14 @@ import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
 import { reviewConcept } from '../shared/lib/fsrs.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 async function getRow(db, userId, questionId) {
@@ -34,9 +37,18 @@ async function upsert(db, userId, questionId, row) {
         due = excluded.due,
         updated_at = datetime('now')`,
     args: [
-      randomBytes(16).toString('hex'), userId, questionId,
-      row.stability, row.difficulty, row.elapsed_days, row.scheduled_days,
-      row.reps, row.lapses, row.state, row.last_review, row.due,
+      randomBytes(16).toString('hex'),
+      userId,
+      questionId,
+      row.stability,
+      row.difficulty,
+      row.elapsed_days,
+      row.scheduled_days,
+      row.reps,
+      row.lapses,
+      row.state,
+      row.last_review,
+      row.due,
     ],
   });
 }
@@ -74,7 +86,8 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     const { questionId, rating } = req.body || {};
-    if (!questionId || !rating) return res.status(400).json({ error: 'questionId, rating required' });
+    if (!questionId || !rating)
+      return res.status(400).json({ error: 'questionId, rating required' });
     const prev = await getRow(db, user.id, questionId);
     const next = reviewConcept(prev, rating);
     await upsert(db, user.id, questionId, next);

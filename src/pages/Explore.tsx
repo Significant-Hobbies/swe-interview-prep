@@ -5,13 +5,7 @@ import BrowseLinks from '../components/BrowseLinks';
 import CanonicalPrimers from '../components/CanonicalPrimers';
 import PathDoor from '../components/PathDoor';
 import PlaygroundHero from '../components/PlaygroundHero';
-import {
-  CONCEPTS,
-  CONCEPT_PACKS,
-  EDITORIAL_DRILLS,
-  ROADMAPS,
-  TRACKS,
-} from '../data/learning-os';
+import { CONCEPTS, CONCEPT_PACKS, EDITORIAL_DRILLS, ROADMAPS, TRACKS } from '../data/learning-os';
 import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
 import { catalogPackStats, PACK_SLOT_LABEL, PACK_SLOTS } from '../lib/packStats';
 import { ROADMAP_GROUPS, roadmapsInGroup } from '../lib/roadmapGroups';
@@ -70,7 +64,8 @@ export default function Explore() {
           S-tier topic packs
         </h2>
         <p className="mt-1 max-w-prose text-xs text-white/45">
-          Each concept pack is an array of resources — category, title, url. Filled external links are industry-canonical only.
+          Each concept pack is an array of resources — category, title, url. Filled external links
+          are industry-canonical only.
         </p>
         <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-4">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -78,15 +73,17 @@ export default function Explore() {
               {packStats.averageItems.toFixed(1)}
               <span className="text-base font-normal text-white/40"> avg items / concept</span>
             </span>
-            <Link to="/learn/all" className="font-mono text-[11px] text-white/40 hover:text-white/65">
+            <Link
+              to="/learn/all"
+              className="font-mono text-[11px] text-white/40 hover:text-white/65"
+            >
               Browse all concepts →
             </Link>
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] text-white/35">
-            {PACK_SLOTS.map(slot => (
+            {PACK_SLOTS.map((slot) => (
               <span key={slot}>
-                {PACK_SLOT_LABEL[slot]}:{' '}
-                {packStats.bySlot[slot]}
+                {PACK_SLOT_LABEL[slot]}: {packStats.bySlot[slot]}
               </span>
             ))}
           </div>
@@ -96,7 +93,7 @@ export default function Explore() {
       <CanonicalPrimers className="mt-12" limit={6} />
 
       <section className="mt-14 space-y-12">
-        {ROADMAP_GROUPS.map(group => {
+        {ROADMAP_GROUPS.map((group) => {
           const roadmaps = roadmapsInGroup(group);
           return (
             <div key={group.id} id={group.id} className="scroll-mt-24">
@@ -105,7 +102,7 @@ export default function Explore() {
                 <p className="mt-1 max-w-prose text-xs text-white/45">{group.subtitle}</p>
               </div>
               <div className="grid gap-px overflow-hidden rounded-xl bg-white/10">
-                {roadmaps.map(r => (
+                {roadmaps.map((r) => (
                   <div
                     key={r.id}
                     className="flex flex-col gap-3 bg-black px-5 py-4 sm:flex-row sm:items-center sm:justify-between"

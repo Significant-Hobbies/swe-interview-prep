@@ -23,7 +23,6 @@ import {
   EDITORIAL_DRILLS,
   METADATA_DRILLS,
   groupForTag,
-  REVIEW_QUESTIONS,
   type ReviewQuestion,
   sortedTracks,
 } from '../data/learning-os';
@@ -59,8 +58,8 @@ export default function Practice() {
   const { reviews: importedReviews } = useImportedReviews();
 
   const dueCount = dueReviewQuestions(rqMastery, mastery, importedReviews).length;
-  const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
-  const attemptedCount = Object.values(drillState).filter(d => d.status === 'attempted').length;
+  const solvedCount = Object.values(drillState).filter((d) => d.status === 'solved').length;
+  const attemptedCount = Object.values(drillState).filter((d) => d.status === 'attempted').length;
   const totalReps = Object.values(drillState).reduce((s, d) => s + (d.attempts ?? 0), 0);
   const sparkline = buildRecentActivity(mastery, 14);
 
@@ -96,8 +95,18 @@ export default function Practice() {
 
       <div className="mt-6 mb-4">
         <TabGroup>
-          <TabButton active={tab === 'drills'} onClick={() => setTab('drills')} label="Drills" count={`${solvedCount}/${EDITORIAL_DRILLS.length}`} />
-          <TabButton active={tab === 'reviews'} onClick={() => setTab('reviews')} label="Reviews" count={dueCount} />
+          <TabButton
+            active={tab === 'drills'}
+            onClick={() => setTab('drills')}
+            label="Drills"
+            count={`${solvedCount}/${EDITORIAL_DRILLS.length}`}
+          />
+          <TabButton
+            active={tab === 'reviews'}
+            onClick={() => setTab('reviews')}
+            label="Reviews"
+            count={dueCount}
+          />
         </TabGroup>
       </div>
 
@@ -122,15 +131,24 @@ function PracticeHero({
   sparkline: number[];
 }) {
   const unsolved = EDITORIAL_DRILLS.length - solvedCount - attemptedCount;
-  const activeStreak = sparkline.slice().reverse().findIndex(v => v === 0);
+  const activeStreak = sparkline.slice().reverse().indexOf(0);
   const streak = activeStreak === -1 ? sparkline.length : activeStreak;
 
   return (
     <Card className="p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid grid-cols-3 gap-6 sm:flex sm:gap-10">
-          <StatNumber label="Solved" value={`${solvedCount}/${EDITORIAL_DRILLS.length}`} hint={`${attemptedCount} in progress · ${unsolved} untouched`} />
-          <StatNumber label="Due" value={dueCount} hint={dueCount === 0 ? 'all caught up' : 'concepts ready'} tone={dueCount ? 'amber' : 'default'} />
+          <StatNumber
+            label="Solved"
+            value={`${solvedCount}/${EDITORIAL_DRILLS.length}`}
+            hint={`${attemptedCount} in progress · ${unsolved} untouched`}
+          />
+          <StatNumber
+            label="Due"
+            value={dueCount}
+            hint={dueCount === 0 ? 'all caught up' : 'concepts ready'}
+            tone={dueCount ? 'amber' : 'default'}
+          />
           <StatNumber label="Streak" value={`${streak}d`} hint={`${totalReps} total reps`} />
         </div>
         <div className="flex items-center justify-end gap-2 text-right">
@@ -153,11 +171,23 @@ function PracticeHero({
   );
 }
 
-function StatNumber({ label, value, hint, tone }: { label: string; value: React.ReactNode; hint?: string; tone?: 'default' | 'amber' }) {
+function StatNumber({
+  label,
+  value,
+  hint,
+  tone,
+}: {
+  label: string;
+  value: React.ReactNode;
+  hint?: string;
+  tone?: 'default' | 'amber';
+}) {
   return (
     <div>
       <div className="text-xs font-medium text-white/50">{label}</div>
-      <div className={`mt-1 text-2xl font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-white'}`}>
+      <div
+        className={`mt-1 text-2xl font-semibold tabular-nums ${tone === 'amber' ? 'text-amber-300' : 'text-white'}`}
+      >
         {value}
       </div>
       {hint && <div className="mt-0.5 text-xs text-white/40">{hint}</div>}
@@ -175,41 +205,47 @@ function DrillsTab() {
   // Attach primary group + problem ELO + distance to the user's strongest
   // roadmap-context for this concept. Smaller distance = closer to user's edge.
   const withMeta = useMemo(
-    () => EDITORIAL_DRILLS.map(d => {
-      const concept = CONCEPT_BY_ID[d.conceptId];
-      const grp = concept?.tags[0];
-      const roadmaps = concept?.roadmaps ?? [];
-      const problemElo = difficultyToElo(d.difficulty);
-      const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : DEFAULT_USER_ELO;
-      const distance = Math.abs(problemElo - userElo);
-      return { drill: d, group: grp, problemElo, userElo, distance };
-    }),
-    [getElo],
+    () =>
+      EDITORIAL_DRILLS.map((d) => {
+        const concept = CONCEPT_BY_ID[d.conceptId];
+        const grp = concept?.tags[0];
+        const roadmaps = concept?.roadmaps ?? [];
+        const problemElo = difficultyToElo(d.difficulty);
+        const userElo = roadmaps.length ? Math.max(...roadmaps.map(getElo)) : DEFAULT_USER_ELO;
+        const distance = Math.abs(problemElo - userElo);
+        return { drill: d, group: grp, problemElo, userElo, distance };
+      }),
+    [getElo]
   );
 
   const groupsRollup = useMemo(() => {
     return sortedTracks()
-      .map(t => {
-        const drills = withMeta.filter(x => x.group === t.id).map(x => x.drill);
+      .map((t) => {
+        const drills = withMeta.filter((x) => x.group === t.id).map((x) => x.drill);
         if (!drills.length) return null;
-        const solved = drills.filter(d => drillState[d.id]?.status === 'solved').length;
+        const solved = drills.filter((d) => drillState[d.id]?.status === 'solved').length;
         return { group: t, total: drills.length, solved };
       })
-      .filter(Boolean) as { group: ReturnType<typeof sortedTracks>[number]; total: number; solved: number }[];
+      .filter(Boolean) as {
+      group: ReturnType<typeof sortedTracks>[number];
+      total: number;
+      solved: number;
+    }[];
   }, [drillState, withMeta]);
 
   // Filter, then sort by proximity to user ELO so the "edge" drills bubble up.
   const filtered = useMemo(() => {
-    const base = group === 'all' ? withMeta : withMeta.filter(x => x.group === group);
+    const base = group === 'all' ? withMeta : withMeta.filter((x) => x.group === group);
     return [...base].sort((a, b) => a.distance - b.distance);
   }, [withMeta, group]);
 
   // Recommended: closest unsolved drills to the user's current ELO.
   const recommended = useMemo(
-    () => filtered
-      .filter(x => (drillState[x.drill.id]?.status ?? 'unsolved') !== 'solved')
-      .slice(0, 3),
-    [filtered, drillState],
+    () =>
+      filtered
+        .filter((x) => (drillState[x.drill.id]?.status ?? 'unsolved') !== 'solved')
+        .slice(0, 3),
+    [filtered, drillState]
   );
 
   return (
@@ -221,7 +257,12 @@ function DrillsTab() {
             All ({EDITORIAL_DRILLS.length})
           </FilterPill>
           {groupsRollup.map(({ group: g, total, solved }) => (
-            <FilterPill key={g.id} active={group === g.id} tone={g.color} onClick={() => setGroup(g.id)}>
+            <FilterPill
+              key={g.id}
+              active={group === g.id}
+              tone={g.color}
+              onClick={() => setGroup(g.id)}
+            >
               {g.short} ({solved}/{total})
             </FilterPill>
           ))}
@@ -232,15 +273,21 @@ function DrillsTab() {
         <div className="mb-6">
           <div className="mb-2 flex items-center gap-2">
             <Target className="h-3.5 w-3.5 text-white" />
-            <span className="text-xs font-medium text-white">
-              Recommended for your level
-            </span>
+            <span className="text-xs font-medium text-white">Recommended for your level</span>
           </div>
           <div className="grid gap-2 sm:grid-cols-3">
             {recommended.map(({ drill: d, group: gid }) => {
               const st = getDrill(d.id);
               const concept = CONCEPT_BY_ID[d.conceptId];
-              return <DrillCard key={d.id} drill={d} state={st} groupTag={gid} conceptName={concept?.name} />;
+              return (
+                <DrillCard
+                  key={d.id}
+                  drill={d}
+                  state={st}
+                  groupTag={gid}
+                  conceptName={concept?.name}
+                />
+              );
             })}
           </div>
         </div>
@@ -253,19 +300,29 @@ function DrillsTab() {
           {filtered.map(({ drill: d, group: gid }) => {
             const st = getDrill(d.id);
             const concept = CONCEPT_BY_ID[d.conceptId];
-            return <DrillCard key={d.id} drill={d} state={st} groupTag={gid} conceptName={concept?.name} />;
+            return (
+              <DrillCard
+                key={d.id}
+                drill={d}
+                state={st}
+                groupTag={gid}
+                conceptName={concept?.name}
+              />
+            );
           })}
         </div>
       )}
 
       {METADATA_DRILLS.length > 0 && (
         <div className="mt-8 border-t border-white/[0.06] pt-6">
-          <div className="mb-2 text-xs font-medium text-white/50">LeetCode practice ({METADATA_DRILLS.length})</div>
+          <div className="mb-2 text-xs font-medium text-white/50">
+            LeetCode practice ({METADATA_DRILLS.length})
+          </div>
           <p className="mb-3 text-[11px] text-white/40">
             External problems mapped to concepts — solve on LeetCode, mark solved here when done.
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
-            {METADATA_DRILLS.map(d => {
+            {METADATA_DRILLS.map((d) => {
               const st = getDrill(d.id);
               const concept = CONCEPT_BY_ID[d.conceptId];
               const grp = concept?.tags[0];
@@ -310,10 +367,14 @@ function DrillCard({
         <div className="min-w-0">
           <h3 className="text-sm font-semibold text-white group-hover:text-white">
             {drill.title}
-            {external && <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">LeetCode</span>}
+            {external && (
+              <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">LeetCode</span>
+            )}
           </h3>
           {conceptName && (
-            <div className="mt-0.5 text-[11px] text-white/40">via <span className="text-white/50">{conceptName}</span></div>
+            <div className="mt-0.5 text-[11px] text-white/40">
+              via <span className="text-white/50">{conceptName}</span>
+            </div>
           )}
         </div>
         <ArrowRight className="h-4 w-4 shrink-0 text-white/30 group-hover:text-white/50" />
@@ -323,7 +384,11 @@ function DrillCard({
         {trk && <Badge tone={trk.color}>{trk.short}</Badge>}
         <Badge tone={DIFFICULTY_COLOR[drill.difficulty]}>{drill.difficulty}</Badge>
         <Badge tone={DRILL_STATUS_TONE[state.status]}>{state.status}</Badge>
-        {state.attempts > 0 && <span className="text-white/40">· {state.attempts} attempt{state.attempts > 1 ? 's' : ''}</span>}
+        {state.attempts > 0 && (
+          <span className="text-white/40">
+            · {state.attempts} attempt{state.attempts > 1 ? 's' : ''}
+          </span>
+        )}
       </div>
     </Link>
   );
@@ -346,14 +411,16 @@ function ReviewSession() {
 
   const { queue, mode } = useMemo(() => {
     const pool = reviewQuestionPool(importedReviews);
-    const due = dueReviewQuestions(rqMastery, mastery, importedReviews).filter(q => !done.has(q.id));
+    const due = dueReviewQuestions(rqMastery, mastery, importedReviews).filter(
+      (q) => !done.has(q.id)
+    );
     if (due.length) return { queue: due, mode: 'due' as const };
-    const practice = pool.filter(q => {
+    const practice = pool.filter((q) => {
       if (done.has(q.id)) return false;
       return rqMastery[q.id] || mastery[q.conceptId];
     });
     if (practice.length) return { queue: practice, mode: 'practice' as const };
-    const starter = pool.filter(q => !done.has(q.id));
+    const starter = pool.filter((q) => !done.has(q.id));
     return { queue: starter, mode: 'new' as const };
   }, [mastery, rqMastery, importedReviews, done]);
 
@@ -364,9 +431,13 @@ function ReviewSession() {
     if (!current) return;
     void reviewRq(current.id, rating);
     void reviewConcept(current.conceptId, rating);
-    void logActivity({ kind: 'review_session', conceptIds: [current.conceptId], problemId: current.id });
+    void logActivity({
+      kind: 'review_session',
+      conceptIds: [current.conceptId],
+      problemId: current.id,
+    });
     recordSessionActivity('review_session');
-    setDone(prev => new Set(prev).add(current.id));
+    setDone((prev) => new Set(prev).add(current.id));
     setRevealed(false);
     setAnswer('');
     setCritique(null);
@@ -414,7 +485,11 @@ function ReviewSession() {
       <SessionStatBar
         items={[
           { label: 'Reviewed', value: done.size, hint: 'this session' },
-          { label: 'In queue', value: queue.length, hint: mode === 'due' ? 'due now' : 'practice mode' },
+          {
+            label: 'In queue',
+            value: queue.length,
+            hint: mode === 'due' ? 'due now' : 'practice mode',
+          },
         ]}
       />
 
@@ -427,7 +502,10 @@ function ReviewSession() {
             {mode === 'practice' && <Badge tone="gray">practice</Badge>}
             {leech && <Badge tone="rose">leech</Badge>}
           </div>
-          <Link to={`/concepts/${current.conceptId}`} className="text-xs text-white/40 hover:text-white/70">
+          <Link
+            to={`/concepts/${current.conceptId}`}
+            className="text-xs text-white/40 hover:text-white/70"
+          >
             {CONCEPT_BY_ID[current.conceptId]?.name}
           </Link>
         </div>
@@ -435,7 +513,7 @@ function ReviewSession() {
           <div className="mb-3 flex flex-wrap gap-2">
             {pickDrillForConcept(current.conceptId) && (
               <Link
-                to={`/drills/${pickDrillForConcept(current.conceptId)!.id}`}
+                to={`/drills/${pickDrillForConcept(current.conceptId)?.id}`}
                 className="inline-flex items-center gap-1 rounded-full border border-rose-500/30 bg-rose-500/10 px-3 py-1 text-xs text-rose-200 hover:border-rose-500/50"
               >
                 <Target className="h-3 w-3" /> Drill first — then retry card
@@ -445,7 +523,7 @@ function ReviewSession() {
               type="button"
               onClick={() => {
                 suspendReviewQuestion(current.id);
-                setDone(prev => new Set(prev).add(current.id));
+                setDone((prev) => new Set(prev).add(current.id));
                 setRevealed(false);
                 setAnswer('');
               }}
@@ -459,7 +537,7 @@ function ReviewSession() {
 
         <textarea
           value={answer}
-          onChange={e => setAnswer(e.target.value)}
+          onChange={(e) => setAnswer(e.target.value)}
           placeholder="Write your answer from memory…"
           rows={5}
           disabled={revealed}
@@ -494,7 +572,9 @@ function ReviewSession() {
                   critique={critique}
                   critiquing={critiquing}
                   critiqueError={critiqueError}
-                  onCritique={() => (aiConfigured() ? void runAiCritique() : runHeuristicCritique())}
+                  onCritique={() =>
+                    aiConfigured() ? void runAiCritique() : runHeuristicCritique()
+                  }
                   showTrigger={!critique && !answer.trim()}
                 />
               </>

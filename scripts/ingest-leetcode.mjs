@@ -6,10 +6,10 @@
  *   pnpm ingest-leetcode --dry-run two-sum
  *   pnpm ingest-leetcode --list   # curated starter set
  */
-import { spawnSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { spawnSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   buildDrillStub,
   fetchLeetCodeQuestion,
@@ -62,9 +62,7 @@ const STARTER_SLUGS = [
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const useList = args.includes('--list');
-const slugs = useList
-  ? STARTER_SLUGS
-  : args.filter(a => !a.startsWith('--'));
+const slugs = useList ? STARTER_SLUGS : args.filter((a) => !a.startsWith('--'));
 
 if (!slugs.length) {
   console.error('Usage: node scripts/ingest-leetcode.mjs [--dry-run] [--list] <slug>…');
@@ -95,7 +93,7 @@ if (errors.length) console.log(`Errors: ${errors.length}`);
 
 if (!dryRun && added > 0) {
   drillsFile.drills = drills;
-  writeFileSync(DRILLS_PATH, JSON.stringify(drillsFile, null, 2) + '\n');
+  writeFileSync(DRILLS_PATH, `${JSON.stringify(drillsFile, null, 2)}\n`);
   console.log(`Wrote ${DRILLS_PATH}`);
   spawnSync('node', ['scripts/link-leetcode-drills.mjs'], { cwd: ROOT, stdio: 'inherit' });
 } else if (dryRun) {

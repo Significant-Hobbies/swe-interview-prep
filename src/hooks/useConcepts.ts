@@ -19,9 +19,9 @@ export interface MasteryEntry {
   confidence: number;
 }
 
-export const ALL_CONCEPTS: Concept[] = CONCEPTS.map(c => ({ ...c, prereqs: c.prerequisites }));
+export const ALL_CONCEPTS: Concept[] = CONCEPTS.map((c) => ({ ...c, prereqs: c.prerequisites }));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(
-  ALL_CONCEPTS.map(c => [c.id, c]),
+  ALL_CONCEPTS.map((c) => [c.id, c])
 );
 
 function rowToEntry(row: MasteryRow): MasteryEntry {
@@ -65,7 +65,7 @@ function saveGuestMastery(mastery: Record<string, MasteryEntry>): void {
 export function useConceptMastery() {
   const { user } = useAuth();
   const [mastery, setMastery] = useState<Record<string, MasteryEntry>>(() =>
-    user ? {} : loadGuestMastery(),
+    user ? {} : loadGuestMastery()
   );
   const [loading, setLoading] = useState(false);
 
@@ -97,40 +97,43 @@ export function useConceptMastery() {
     fetchMastery();
   }, [fetchMastery]);
 
-  const review = useCallback(async (conceptId: string, rating: MasteryRating) => {
-    if (user) {
-      try {
-        const res = await fetch('/api/learning?action=concepts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ conceptId, rating }),
-        });
-        if (!res.ok) return;
-        const data = await res.json();
-        if (data.mastery) {
-          setMastery(prev => {
-            const next = {
-              ...prev,
-              [conceptId]: { ...data.mastery, confidence: data.mastery.confidence },
-            };
-            saveGuestMastery(next);
-            return next;
+  const review = useCallback(
+    async (conceptId: string, rating: MasteryRating) => {
+      if (user) {
+        try {
+          const res = await fetch('/api/learning?action=concepts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ conceptId, rating }),
           });
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data.mastery) {
+            setMastery((prev) => {
+              const next = {
+                ...prev,
+                [conceptId]: { ...data.mastery, confidence: data.mastery.confidence },
+              };
+              saveGuestMastery(next);
+              return next;
+            });
+          }
+        } catch {
+          // fall through to local
         }
-      } catch {
-        // fall through to local
+        return;
       }
-      return;
-    }
 
-    setMastery(prev => {
-      const row = reviewConcept(prev[conceptId] ? entryToRow(prev[conceptId]) : null, rating);
-      const next = { ...prev, [conceptId]: rowToEntry(row) };
-      saveGuestMastery(next);
-      return next;
-    });
-  }, [user]);
+      setMastery((prev) => {
+        const row = reviewConcept(prev[conceptId] ? entryToRow(prev[conceptId]) : null, rating);
+        const next = { ...prev, [conceptId]: rowToEntry(row) };
+        saveGuestMastery(next);
+        return next;
+      });
+    },
+    [user]
+  );
 
   return { mastery, loading, refresh: fetchMastery, review };
 }

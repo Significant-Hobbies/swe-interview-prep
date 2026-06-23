@@ -12,7 +12,9 @@ export default function PublicRoadmap() {
     return (
       <div className="mx-auto max-w-3xl px-6 py-20 text-center">
         <p className="text-white/50">Roadmap not found.</p>
-        <Link to="/" className="mt-4 inline-block text-sm text-white">Home</Link>
+        <Link to="/" className="mt-4 inline-block text-sm text-white">
+          Home
+        </Link>
       </div>
     );
   }
@@ -22,12 +24,16 @@ export default function PublicRoadmap() {
       <header className="border-b border-white/[0.08] px-6 py-4">
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <span className="font-bold">SWE Prep</span>
-          <Link to="/" className="text-sm text-white/60 hover:text-white">Sign in to track progress</Link>
+          <Link to="/" className="text-sm text-white/60 hover:text-white">
+            Sign in to track progress
+          </Link>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-12">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">Learning path</p>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">
+          Learning path
+        </p>
         <h1 className="mt-2 text-3xl font-bold">{roadmap.title}</h1>
         <p className="mt-3 max-w-2xl text-sm text-white/60">{roadmap.description}</p>
         <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>

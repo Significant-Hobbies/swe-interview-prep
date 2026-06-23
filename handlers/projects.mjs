@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 import { requireAuth } from '../api/auth/verify.mjs';
 import { getDb } from '../shared/db/client.mjs';
@@ -6,7 +6,10 @@ import { initDatabase } from '../shared/db/schema.mjs';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 export default async function handler(req, res) {
@@ -44,8 +47,11 @@ export default async function handler(req, res) {
               milestones_json = excluded.milestones_json,
               updated_at = datetime('now')`,
       args: [
-        randomBytes(16).toString('hex'), user.id, projectId,
-        status || 'planned', nextAction || null,
+        randomBytes(16).toString('hex'),
+        user.id,
+        projectId,
+        status || 'planned',
+        nextAction || null,
         milestones ? JSON.stringify(milestones) : null,
       ],
     });

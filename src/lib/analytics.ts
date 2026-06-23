@@ -13,9 +13,9 @@
  * once by `installBrowserMonitoring()` (see `foundry-monitoring.ts`).
  */
 
-import posthog from "posthog-js";
+import posthog from 'posthog-js';
 
-const PROJECT = "swe-interview-prep" as const;
+const PROJECT = 'swe-interview-prep' as const;
 
 /**
  * The product-specific action behind a `core_action` event.
@@ -24,10 +24,7 @@ const PROJECT = "swe-interview-prep" as const;
  *  - `code_run`            — code was executed in the playground.
  *  - `explanation_graded`  — a Feynman-gate explanation was graded.
  */
-export type CoreAction =
-  | "concept_reviewed"
-  | "code_run"
-  | "explanation_graded";
+export type CoreAction = 'concept_reviewed' | 'code_run' | 'explanation_graded';
 
 /**
  * The fixed taxonomy. Do NOT add events here — the whole point is that all
@@ -55,16 +52,16 @@ export function trackEvent(event: string, properties: Record<string, unknown> = 
 
 function emit<K extends keyof AnalyticsEventMap>(
   event: K,
-  props: Omit<AnalyticsEventMap[K], "project_id">,
+  props: Omit<AnalyticsEventMap[K], 'project_id'>
 ): void {
   trackEvent(event, props);
 }
 
-const ACTIVATED_KEY = "swe-interview-prep:activated";
+const ACTIVATED_KEY = 'swe-interview-prep:activated';
 
 /** Fire once, on the first session after an account is created. */
 export function trackSignup(): void {
-  emit("signup", {});
+  emit('signup', {});
 }
 
 /**
@@ -75,21 +72,21 @@ export function trackSignup(): void {
 export function trackActivated(): void {
   try {
     if (localStorage.getItem(ACTIVATED_KEY)) return;
-    localStorage.setItem(ACTIVATED_KEY, "1");
+    localStorage.setItem(ACTIVATED_KEY, '1');
   } catch {
     // localStorage unavailable (private mode) — fall through and still emit.
   }
-  emit("activated", {});
+  emit('activated', {});
 }
 
 /** Fire on each completion of a core product action. */
 export function trackCoreAction(action: CoreAction): void {
   // The first core action is also the activation milestone.
   trackActivated();
-  emit("core_action", { action });
+  emit('core_action', { action });
 }
 
 /** Fire on session start for a user who has prior activity. */
 export function trackReturned(): void {
-  emit("returned", {});
+  emit('returned', {});
 }

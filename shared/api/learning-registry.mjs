@@ -43,4 +43,3 @@ export const HANDLER_MODULES = {
   elo: () => import('../../handlers/elo.mjs'),
   'imported-reviews': () => import('../../handlers/imported-reviews.mjs'),
 };
-

@@ -1,7 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-
-
 interface Props {
   children: ReactNode;
   /** Where this boundary sits — used for monitoring + copy. */
@@ -32,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
       m.captureError(error, {
         scope: this.props.scope ?? 'root',
         componentStack: info.componentStack ?? undefined,
-      }),
+      })
     );
   }
 
@@ -48,8 +46,8 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="max-w-md text-center">
           <h2 className="mb-3 text-xl font-bold text-white">Something went wrong</h2>
           <p className="mb-6 text-sm text-slate-400">
-            An unexpected error occurred. Your progress is saved locally — try
-            again, and if it keeps happening, reload the page.
+            An unexpected error occurred. Your progress is saved locally — try again, and if it
+            keeps happening, reload the page.
           </p>
           <div className="flex justify-center gap-3">
             <button

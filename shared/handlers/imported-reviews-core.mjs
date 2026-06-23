@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 export async function listImportedReviews(db, userId) {
   const r = await db.execute({
@@ -6,7 +6,7 @@ export async function listImportedReviews(db, userId) {
           FROM user_imported_reviews WHERE user_id = ? ORDER BY created_at DESC`,
     args: [userId],
   });
-  return r.rows.map(row => ({
+  return r.rows.map((row) => ({
     id: row.id,
     externalId: row.external_id,
     deckName: row.deck_name,

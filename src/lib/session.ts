@@ -26,9 +26,9 @@ function saveSessions(logs: DailySessionLog[]): void {
 export function recordSessionActivity(kind: string): void {
   const date = todayStr();
   const logs = loadSessions();
-  const row = logs.find(l => l.date === date) ?? { date, kinds: [], completed: false };
+  const row = logs.find((l) => l.date === date) ?? { date, kinds: [], completed: false };
   if (!row.kinds.includes(kind)) row.kinds.push(kind);
-  const next = logs.filter(l => l.date !== date);
+  const next = logs.filter((l) => l.date !== date);
   next.push(row);
   saveSessions(next);
 }
@@ -36,16 +36,16 @@ export function recordSessionActivity(kind: string): void {
 export function markSessionComplete(): void {
   const date = todayStr();
   const logs = loadSessions();
-  const row = logs.find(l => l.date === date) ?? { date, kinds: [], completed: false };
+  const row = logs.find((l) => l.date === date) ?? { date, kinds: [], completed: false };
   row.completed = true;
-  const next = logs.filter(l => l.date !== date);
+  const next = logs.filter((l) => l.date !== date);
   next.push(row);
   saveSessions(next);
 }
 
 export function computeSessionStreak(): number {
   const logs = loadSessions();
-  const byDate = new Map(logs.map(l => [l.date, l]));
+  const byDate = new Map(logs.map((l) => [l.date, l]));
   let streak = 0;
   const d = new Date();
   for (let i = 0; i < 60; i++) {
@@ -63,9 +63,9 @@ export function enrichBlocksWithProgress(
   plan: SessionPlan,
   drillState: Record<string, DrillEntry>,
   artifacts: Record<string, ArtifactEntry>,
-  todayKinds: string[],
+  todayKinds: string[]
 ): SessionBlock[] {
-  return plan.blocks.map(block => {
+  return plan.blocks.map((block) => {
     let done = false;
     if (block.kind === 'drill' && plan.drill) {
       done = drillState[plan.drill.id]?.status === 'solved';
@@ -81,13 +81,17 @@ export function enrichBlocksWithProgress(
   });
 }
 
-export function sessionProgress(blocks: SessionBlock[]): { done: number; total: number; pct: number } {
+export function sessionProgress(blocks: SessionBlock[]): {
+  done: number;
+  total: number;
+  pct: number;
+} {
   const total = blocks.length;
-  const done = blocks.filter(b => b.done).length;
+  const done = blocks.filter((b) => b.done).length;
   return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
 }
 
 export function todayActivityKinds(): string[] {
-  const row = loadSessions().find(l => l.date === todayStr());
+  const row = loadSessions().find((l) => l.date === todayStr());
   return row?.kinds ?? [];
 }

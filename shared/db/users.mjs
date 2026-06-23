@@ -1,5 +1,5 @@
 import { getDb } from './client.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 export async function findOrCreateUser({ googleId, email, name, picture }) {
   const db = getDb();

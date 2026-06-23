@@ -51,10 +51,7 @@
       "difficulty": "core",
       "prompt": "Given term counts per document and document frequencies, compute the TF-IDF weight of a term in a document. Use dampened TF (1 + log tf) and IDF = log(N / df).",
       "expectedOutput": "A single numeric weight, higher for frequent-here-but-rare-overall terms.",
-      "hints": [
-        "IDF rewards rarity across the corpus.",
-        "Dampen raw term frequency."
-      ],
+      "hints": ["IDF rewards rarity across the corpus.", "Dampen raw term frequency."],
       "solutionNotes": "TF-IDF ignores document length — that is exactly what BM25 fixes.",
       "testCases": [
         {
@@ -81,10 +78,7 @@
         {
           "setup": "function bm25(tf, df, N, dl, avgdl, k1 = 1.2, b = 0.75) {\n  const idf = Math.log((N - df + 0.5) / (df + 0.5) + 1);\n  const denom = tf + k1 * (1 - b + b * dl / avgdl);\n  return idf * (tf * (k1 + 1)) / denom;\n}",
           "run": "const s1 = bm25(1, 5, 100, 100, 100);\nconst s10 = bm25(10, 5, 100, 100, 100);\nconsole.log(s10 < s1 * 3 ? 'saturates' : 'linear', s1.toFixed(2));",
-          "expect": [
-            "saturates",
-            "2.91"
-          ]
+          "expect": ["saturates", "2.91"]
         }
       ]
     },
@@ -126,10 +120,7 @@
         {
           "setup": "function precisionRecall(retrieved, relevant) {\n  const rel = new Set(relevant);\n  const hits = retrieved.filter(id => rel.has(id)).length;\n  const p = hits / retrieved.length;\n  const r = hits / relevant.length;\n  return { p, r };\n}",
           "run": "const { p, r } = precisionRecall([1,4,2,9], [2,4,7]); console.log(p.toFixed(2), r.toFixed(2));",
-          "expect": [
-            "0.50",
-            "0.67"
-          ]
+          "expect": ["0.50", "0.67"]
         }
       ]
     },
@@ -150,10 +141,7 @@
         {
           "setup": "function recallAtK(retrieved, relevant, k) {\n  const rel = new Set(relevant);\n  const hits = retrieved.slice(0, k).filter(id => rel.has(id)).length;\n  return hits / relevant.length;\n}\nfunction mrr(queries) {\n  let sum = 0;\n  for (const { retrieved, relevant } of queries) {\n    const rel = new Set(relevant);\n    const rank = retrieved.findIndex(id => rel.has(id));\n    sum += rank === -1 ? 0 : 1 / (rank + 1);\n  }\n  return sum / queries.length;\n}\nfunction ndcgAtK(retrieved, relevant, k) {\n  const rel = new Set(relevant);\n  let dcg = 0;\n  for (let i = 0; i < Math.min(k, retrieved.length); i++) {\n    if (rel.has(retrieved[i])) dcg += 1 / Math.log2(i + 2);\n  }\n  let idcg = 0;\n  for (let i = 0; i < Math.min(k, relevant.length); i++) idcg += 1 / Math.log2(i + 2);\n  return idcg === 0 ? 0 : dcg / idcg;\n}\nfunction evalRetriever(retriever, queries, k) {\n  const r = queries.map(q => recallAtK(retriever(q.q, k), q.rel, k));\n  const m = mrr(queries.map(q => ({ retrieved: retriever(q.q, k), relevant: q.rel })));\n  const n = queries.map(q => ndcgAtK(retriever(q.q, k), q.rel, k));\n  return { recall: r.reduce((a, b) => a + b, 0) / r.length, mrr: m, ndcg: n.reduce((a, b) => a + b, 0) / n.length };\n}",
           "run": "const retriever = q => q === 'a' ? [1,2,3] : [2,1];\nconst qs = [{ q: 'a', rel: [1,3] }, { q: 'b', rel: [2] }];\nconst m = evalRetriever(retriever, qs, 3);\nconsole.log(m.recall.toFixed(2), m.mrr.toFixed(2));",
-          "expect": [
-            "1.00",
-            "1.00"
-          ]
+          "expect": ["1.00", "1.00"]
         }
       ]
     },
@@ -186,10 +174,7 @@
       "difficulty": "core",
       "prompt": "Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.",
       "expectedOutput": "Semantically relevant documents for a query that shares no exact keywords.",
-      "hints": [
-        "Normalize vectors before cosine.",
-        "Use the same model for corpus and query."
-      ],
+      "hints": ["Normalize vectors before cosine.", "Use the same model for corpus and query."],
       "solutionNotes": "This is the vector leg of hybrid search.",
       "testCases": [
         {
@@ -207,10 +192,7 @@
       "difficulty": "core",
       "prompt": "Implement cosine similarity, dot product, and L2 distance. Show that on normalized vectors, cosine and dot product produce the same ranking.",
       "expectedOutput": "Three functions; a demonstration that normalized cosine == dot ranking.",
-      "hints": [
-        "Cosine = dot / (‖a‖·‖b‖).",
-        "On unit vectors L2² = 2 − 2·cosine."
-      ],
+      "hints": ["Cosine = dot / (‖a‖·‖b‖).", "On unit vectors L2² = 2 − 2·cosine."],
       "solutionNotes": "The metric must match what the embedding model was trained for.",
       "testCases": [
         {
@@ -249,10 +231,7 @@
       "difficulty": "core",
       "prompt": "Build an index that stores vectors and answers top-k queries by scanning every vector. Benchmark latency as the vector count grows.",
       "expectedOutput": "Exact top-k results; a latency-vs-n table.",
-      "hints": [
-        "Batch the scan as a matrix multiply.",
-        "This is your recall=1.0 baseline."
-      ],
+      "hints": ["Batch the scan as a matrix multiply.", "This is your recall=1.0 baseline."],
       "solutionNotes": "Every ANN index is measured against this for recall.",
       "testCases": [
         {
@@ -321,10 +300,7 @@
         {
           "setup": "function ragAnswer(chunks, query, budget) {\n  const scored = chunks.map(c => ({ ...c, s: c.text.includes(query) ? 1 : c.vec.reduce((s, v, i) => s + v * query[i], 0) }));\n  scored.sort((a, b) => b.s - a.s);\n  const picked = [];\n  let used = 0;\n  for (const c of scored) {\n    if (used + c.tokens <= budget) { picked.push(c.id); used += c.tokens; }\n  }\n  return { answer: picked.join('+'), sources: picked };\n}",
           "run": "const chunks = [\n  { id: 'c1', text: 'payment API', tokens: 100, vec: [1,0] },\n  { id: 'c2', text: 'other', tokens: 200, vec: [0,1] },\n  { id: 'c3', text: 'payment docs', tokens: 150, vec: [0.9,0.1] },\n];\nconst r = ragAnswer(chunks, [1,0], 300);\nconsole.log(r.sources.length >= 2 ? 'grounded' : 'weak', r.sources[0]);",
-          "expect": [
-            "grounded",
-            "c1"
-          ]
+          "expect": ["grounded", "c1"]
         }
       ]
     },
@@ -345,10 +321,7 @@
         {
           "setup": "function chunkDoc(paragraphs, target, overlap) {\n  const chunks = [];\n  let buf = [];\n  let size = 0;\n  for (const p of paragraphs) {\n    const len = p.length;\n    if (size + len > target && buf.length) {\n      chunks.push(buf.join('\\n'));\n      const tail = buf.join(' ').slice(-overlap);\n      buf = tail ? [tail, p] : [p];\n      size = buf.join(' ').length;\n    } else {\n      buf.push(p);\n      size += len;\n    }\n  }\n  if (buf.length) chunks.push(buf.join('\\n'));\n  return chunks;\n}",
           "run": "const paras = ['# Intro', 'Para one text.', 'Para two text.', '## Details', 'More content here.'];\nconst c = chunkDoc(paras, 30, 5);\nconsole.log(c.length >= 2 ? 'chunked' : 'fail', c[0].includes('Intro') ? 'struct' : 'flat');",
-          "expect": [
-            "chunked",
-            "struct"
-          ]
+          "expect": ["chunked", "struct"]
         }
       ]
     },
@@ -369,10 +342,7 @@
         {
           "setup": "function extractInvoice(text) {\n  const schema = { vendor: 'string', amount: 'number', date: 'string' };\n  const m = text.match(/(.+) billed \\$(\\d+\\.\\d+) on (\\d{4}-\\d{2}-\\d{2})/);\n  if (!m) return { ok: false };\n  const out = { vendor: m[1].trim(), amount: parseFloat(m[2]), date: m[3] };\n  const valid = typeof out.vendor === 'string' && typeof out.amount === 'number' && out.date.length === 10;\n  return valid ? { ok: true, data: out } : { ok: false };\n}",
           "run": "const r = extractInvoice('Acme Corp billed $42.50 on 2024-06-01');\nconsole.log(r.ok, r.data.amount);",
-          "expect": [
-            "true",
-            "42.5"
-          ]
+          "expect": ["true", "42.5"]
         }
       ]
     },
@@ -384,19 +354,13 @@
       "difficulty": "core",
       "prompt": "Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a tool call, you execute it, feed the result back, repeat until done.",
       "expectedOutput": "A task solved across multiple tool calls.",
-      "hints": [
-        "Tool descriptions must be precise.",
-        "Handle failed tool calls explicitly."
-      ],
+      "hints": ["Tool descriptions must be precise.", "Handle failed tool calls explicitly."],
       "solutionNotes": "Add a step limit so the loop cannot run away.",
       "testCases": [
         {
           "setup": "function toolLoop(task, tools, maxSteps) {\n  const log = [];\n  let state = task;\n  for (let i = 0; i < maxSteps; i++) {\n    if (state.startsWith('search:')) {\n      const q = state.slice(7);\n      state = tools.search(q);\n      log.push('search');\n    } else if (state.startsWith('calc:')) {\n      state = String(tools.calc(state.slice(5)));\n      log.push('calc');\n    } else break;\n  }\n  return { result: state, steps: log.length };\n}",
           "run": "const tools = { search: q => 'calc:2+2', calc: expr => eval(expr) };\nconst r = toolLoop('search:query', tools, 5);\nconsole.log(r.result, r.steps);",
-          "expect": [
-            "4",
-            "2"
-          ]
+          "expect": ["4", "2"]
         }
       ]
     },
@@ -438,11 +402,7 @@
         {
           "setup": "function TokenBucket(capacity, refillPerSec) {\n  let tokens = capacity;\n  let last = Date.now();\n  return {\n    allow() {\n      const now = Date.now();\n      const elapsed = (now - last) / 1000;\n      tokens = Math.min(capacity, tokens + elapsed * refillPerSec);\n      last = now;\n      if (tokens >= 1) { tokens -= 1; return { ok: true, retryAfter: 0 }; }\n      return { ok: false, retryAfter: Math.ceil((1 - tokens) / refillPerSec) };\n    },\n  };\n}",
           "run": "const b = TokenBucket(2, 1);\nconsole.log(b.allow().ok, b.allow().ok, b.allow().ok);",
-          "expect": [
-            "true",
-            "true",
-            "false"
-          ]
+          "expect": ["true", "true", "false"]
         }
       ]
     },
@@ -463,11 +423,7 @@
         {
           "setup": "function idempotentStore() {\n  const map = new Map();\n  return {\n    execute(key, fn) {\n      if (map.has(key)) return { duplicate: true, result: map.get(key) };\n      const result = fn();\n      map.set(key, result);\n      return { duplicate: false, result };\n    },\n  };\n}",
           "run": "let calls = 0;\nconst store = idempotentStore();\nconst r1 = store.execute('k1', () => { calls++; return 42; });\nconst r2 = store.execute('k1', () => { calls++; return 99; });\nconsole.log(calls, r2.result, r2.duplicate);",
-          "expect": [
-            "1",
-            "42",
-            "true"
-          ]
+          "expect": ["1", "42", "true"]
         }
       ]
     },
@@ -488,11 +444,7 @@
         {
           "setup": "function backoffDelays(attempt, base, max) {\n  const cap = Math.min(base * Math.pow(2, attempt), max);\n  return Math.floor(Math.random() * cap);\n}\nfunction retryWithDlq(fn, maxAttempts, dlq) {\n  for (let i = 0; i < maxAttempts; i++) {\n    try { return fn(); } catch (e) { if (i === maxAttempts - 1) { dlq.push(e.message); throw e; } }\n  }\n}",
           "run": "const d0 = backoffDelays(0, 100, 1000);\nconst d3 = backoffDelays(3, 100, 1000);\nconst dlq = [];\ntry { retryWithDlq(() => { throw new Error('poison'); }, 3, dlq); } catch {}\nconsole.log(d0 < 100, d3 <= 800, dlq.length);",
-          "expect": [
-            "true",
-            "true",
-            "1"
-          ]
+          "expect": ["true", "true", "1"]
         }
       ]
     },
@@ -513,10 +465,7 @@
         {
           "setup": "function lsm() {\n  let mem = new Map();\n  const sst = [];\n  return {\n    put(k, v) { mem.set(k, v); },\n    del(k) { mem.set(k, null); },\n    flush() { const sorted = [...mem.entries()].sort((a, b) => a[0].localeCompare(b[0])); sst.unshift(sorted); mem = new Map(); },\n    get(k) {\n      if (mem.has(k)) return mem.get(k);\n      for (const file of sst) {\n        const hit = file.find(([key]) => key === k);\n        if (hit) return hit[1];\n      }\n      return undefined;\n    },\n  };\n}",
           "run": "const db = lsm();\ndb.put('a', 1); db.flush(); db.put('a', 2);\nconsole.log(db.get('a'), db.get('b') === undefined ? 'miss' : 'hit');",
-          "expect": [
-            "2",
-            "miss"
-          ]
+          "expect": ["2", "miss"]
         }
       ]
     },
@@ -738,10 +687,7 @@
       "difficulty": "intro",
       "prompt": "Draw the state machine for a vending machine: Idle → Coin → Selecting → Dispense → Idle, plus refund / out-of-stock branches. List every transition trigger.",
       "expectedOutput": "A state diagram with 5-7 states, transitions labeled by input event.",
-      "hints": [
-        "What does pressing a button do in each state?",
-        "Where does coin-return live?"
-      ],
+      "hints": ["What does pressing a button do in each state?", "Where does coin-return live?"],
       "solutionNotes": "States hold behavior; transitions hold guards. Keep illegal transitions impossible.",
       "testCases": [
         {
@@ -885,10 +831,7 @@
       "difficulty": "core",
       "prompt": "Design a hotel-room booking system: search availability for a date range, hold a room during checkout, finalize the reservation. Address concurrent bookers fighting for the last room.",
       "expectedOutput": "Inventory model + hold/confirm flow + the consistency strategy (optimistic vs pessimistic).",
-      "hints": [
-        "A hold is itself a write — model it.",
-        "Expire holds aggressively (5-10 min)."
-      ],
+      "hints": ["A hold is itself a write — model it.", "Expire holds aggressively (5-10 min)."],
       "solutionNotes": "Overbooking is a business decision, not just a race condition.",
       "testCases": [
         {
@@ -1179,10 +1122,7 @@
       "difficulty": "intro",
       "prompt": "Write a STAR about resolving a disagreement with a peer. Show the other person’s reasoning fairly; describe how you de-escalated.",
       "expectedOutput": "A 250-350 word story where the other person is not the villain.",
-      "hints": [
-        "Steelman the counter-position.",
-        "End with what you would do differently."
-      ],
+      "hints": ["Steelman the counter-position.", "End with what you would do differently."],
       "solutionNotes": "Hiring bars reject the \"I was right, they were wrong\" arc.",
       "testCases": [
         {
@@ -1368,10 +1308,7 @@
       "difficulty": "intro",
       "prompt": "Write a 2-sentence positioning statement for a product you use, using the form: \"For [target] who [need], [product] is the [category] that [unique benefit]. Unlike [competitor], it [differentiator].\" Then write a worse version and explain why yours is sharper.",
       "expectedOutput": "Two positioning statements (good + worse) + a one-line critique of the worse one.",
-      "hints": [
-        "Specific target > broad target.",
-        "The differentiator must be testable."
-      ],
+      "hints": ["Specific target > broad target.", "The differentiator must be testable."],
       "solutionNotes": "A statement that fits 3 competitors is not positioning.",
       "testCases": [
         {
@@ -1461,12 +1398,7 @@
         {
           "setup": "function dot(a, b) { return a.reduce((s, x, i) => s + x * b[i], 0); }\nfunction norm(a) { return Math.sqrt(dot(a, a)); }\nfunction cosAngle(a, b) { return dot(a, b) / (norm(a) * norm(b)); }",
           "run": "const u = [3,4], v = [1,2];\nconsole.log(dot(u,v), norm(u).toFixed(0), cosAngle(u,v).toFixed(2), dot(u,v) === 0 ? 'orth' : 'not');",
-          "expect": [
-            "11",
-            "5",
-            "0.98",
-            "not"
-          ]
+          "expect": ["11", "5", "0.98", "not"]
         }
       ]
     },
@@ -1478,19 +1410,13 @@
       "difficulty": "intro",
       "prompt": "Compute AB where A = [[1, 2], [0, 1]] and B = [[1, 0], [3, 1]]. Then apply A to vector x = [1, 1] and B to the result — does AB·x equal A·(B·x)?",
       "expectedOutput": "AB = [[7, 2], [3, 1]]; AB·x = [9, 4] = A·(B·x). Matrix multiplication is composition.",
-      "hints": [
-        "Row × column for each entry.",
-        "Order matters: AB ≠ BA in general."
-      ],
+      "hints": ["Row × column for each entry.", "Order matters: AB ≠ BA in general."],
       "solutionNotes": "The columns of AB are A applied to the columns of B — that's the transformation picture.",
       "testCases": [
         {
           "setup": "function matmul(A, B) {\n  const m = A.length, n = B[0].length, k = B.length;\n  const C = Array.from({ length: m }, () => Array(n).fill(0));\n  for (let i = 0; i < m; i++)\n    for (let j = 0; j < n; j++)\n      for (let t = 0; t < k; t++) C[i][j] += A[i][t] * B[t][j];\n  return C;\n}\nfunction apply(M, x) { return [M[0][0]*x[0]+M[0][1]*x[1], M[1][0]*x[0]+M[1][1]*x[1]]; }",
           "run": "const A = [[1,2],[0,1]], B = [[1,0],[3,1]], x = [1,1];\nconst AB = matmul(A,B);\nconsole.log(JSON.stringify(AB), JSON.stringify(apply(AB,x)));",
-          "expect": [
-            "[[7,2],[3,1]]",
-            "[9,4]"
-          ]
+          "expect": ["[[7,2],[3,1]]", "[9,4]"]
         }
       ]
     },
@@ -1511,10 +1437,7 @@
         {
           "setup": "function applyA(x) { return [2*x[0]+x[1], x[0]+2*x[1]]; }\nfunction eigenvalue2x2Symmetric(a, b, c) { return [(a+c+Math.sqrt((a-c)**2+4*b*b))/2, (a+c-Math.sqrt((a-c)**2+4*b*b))/2]; }",
           "run": "const v = [1,1];\nconst Av = applyA(v);\nconst ev = eigenvalue2x2Symmetric(2,1,2);\nconsole.log(Av[0]/v[0] === 3 ? 'stretch' : 'rotate', ev[1]);",
-          "expect": [
-            "stretch",
-            "1"
-          ]
+          "expect": ["stretch", "1"]
         }
       ]
     },
@@ -1526,10 +1449,7 @@
       "difficulty": "intro",
       "prompt": "A test has 99% sensitivity and 95% specificity. Disease prevalence is 1%. A patient tests positive. Using Bayes' rule, compute P(disease | positive) to 2 decimal places.",
       "expectedOutput": "≈ 0.17 (17%). Most positives are false alarms when the base rate is low.",
-      "hints": [
-        "P(D|+) = P(+|D)·P(D) / P(+).",
-        "P(+) = P(+|D)·P(D) + P(+|¬D)·P(¬D)."
-      ],
+      "hints": ["P(D|+) = P(+|D)·P(D) / P(+).", "P(+) = P(+|D)·P(D) + P(+|¬D)·P(¬D)."],
       "solutionNotes": "Low base rates make naive test interpretation dangerous — always condition on prevalence.",
       "testCases": [
         {
@@ -1547,19 +1467,13 @@
       "difficulty": "core",
       "prompt": "X takes values {0, 1, 2} with probabilities {0.2, 0.5, 0.3}. Compute E[X] and Var(X) = E[X²] − (E[X])².",
       "expectedOutput": "E[X] = 1.1, E[X²] = 1.5, Var(X) = 0.29.",
-      "hints": [
-        "E[X] = Σ x·P(X=x).",
-        "Compute E[X²] before subtracting the squared mean."
-      ],
+      "hints": ["E[X] = Σ x·P(X=x).", "Compute E[X²] before subtracting the squared mean."],
       "solutionNotes": "Variance measures spread around the mean, not around zero.",
       "testCases": [
         {
           "setup": "function evVar(xs, ps) {\n  const ex = xs.reduce((s, x, i) => s + x * ps[i], 0);\n  const ex2 = xs.reduce((s, x, i) => s + x * x * ps[i], 0);\n  return { ex, var: ex2 - ex * ex };\n}",
           "run": "const r = evVar([0,1,2], [0.2,0.5,0.3]);\nconsole.log(r.ex.toFixed(1), r.var.toFixed(2));",
-          "expect": [
-            "1.1",
-            "0.49"
-          ]
+          "expect": ["1.1", "0.49"]
         }
       ]
     },
@@ -1571,19 +1485,13 @@
       "difficulty": "intro",
       "prompt": "Latency samples (ms): 12, 14, 15, 16, 200. Compute mean, median, and sample standard deviation. Which summary is misleading for SLA reporting and why?",
       "expectedOutput": "Mean ≈ 51.4 (pulled by outlier), median = 15 (robust), std dev is large. Report median + p95 for SLAs, not mean.",
-      "hints": [
-        "Sort for median.",
-        "One outlier dominates the mean."
-      ],
+      "hints": ["Sort for median.", "One outlier dominates the mean."],
       "solutionNotes": "Heavy tails are normal in systems data — mean is often the wrong headline number.",
       "testCases": [
         {
           "setup": "function stats(xs) {\n  const sorted = [...xs].sort((a, b) => a - b);\n  const mean = xs.reduce((a, b) => a + b, 0) / xs.length;\n  const mid = Math.floor(sorted.length / 2);\n  const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;\n  const sd = Math.sqrt(xs.reduce((s, x) => s + (x - mean) ** 2, 0) / (xs.length - 1));\n  return { mean, median, sd };\n}",
           "run": "const s = stats([12,14,15,16,200]);\nconsole.log(s.median, s.mean > 40 ? 'mean-misleading' : 'ok');",
-          "expect": [
-            "15",
-            "mean-misleading"
-          ]
+          "expect": ["15", "mean-misleading"]
         }
       ]
     },
@@ -1595,18 +1503,13 @@
       "difficulty": "core",
       "prompt": "n = 100 coin flips, 55 heads. Assuming a normal approximation, construct a 95% CI for the true heads probability p. (Use z = 1.96.)",
       "expectedOutput": "p̂ = 0.55, SE ≈ 0.0498, CI ≈ [0.452, 0.648].",
-      "hints": [
-        "SE = √(p̂(1−p̂)/n).",
-        "CI = p̂ ± z·SE."
-      ],
+      "hints": ["SE = √(p̂(1−p̂)/n).", "CI = p̂ ± z·SE."],
       "solutionNotes": "The interval width shrinks as 1/√n — quadruple the data to halve the error bar.",
       "testCases": [
         {
           "setup": "function ci95(phat,n,z=1.96){const se=Math.sqrt(phat*(1-phat)/n);return [phat-z*se,phat+z*se].map(x=>+x.toFixed(3));}",
           "run": "console.log(JSON.stringify(ci95(0.55,100)));",
-          "expect": [
-            "[0.452,0.648]"
-          ]
+          "expect": ["[0.452,0.648]"]
         }
       ]
     },
@@ -1627,10 +1530,7 @@
         {
           "setup": "function shouldShip(p,alpha,absLift,minLift){return p<alpha && absLift>=minLift;}",
           "run": "console.log(shouldShip(0.03,0.05,0.001,0.005), shouldShip(0.03,0.05,0.01,0.005));",
-          "expect": [
-            "false",
-            "true"
-          ]
+          "expect": ["false", "true"]
         }
       ]
     },
@@ -1642,19 +1542,13 @@
       "difficulty": "core",
       "prompt": "Points: (1, 2), (2, 3), (3, 5). Fit y = a + bx by least squares. Compute a, b, and the predicted ŷ at x = 4.",
       "expectedOutput": "b ≈ 1.5, a ≈ 0.17, ŷ(4) ≈ 6.17. (Exact: b = 3/2, a = 1/6.)",
-      "hints": [
-        "b = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)².",
-        "a = ȳ − b·x̄."
-      ],
+      "hints": ["b = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)².", "a = ȳ − b·x̄."],
       "solutionNotes": "With only 3 points the fit is exact in spirit; with noise, residuals matter.",
       "testCases": [
         {
           "setup": "function ols(points) {\n  const n = points.length;\n  const mx = points.reduce((s, p) => s + p[0], 0) / n;\n  const my = points.reduce((s, p) => s + p[1], 0) / n;\n  let num = 0, den = 0;\n  for (const [x, y] of points) { num += (x - mx) * (y - my); den += (x - mx) ** 2; }\n  const b = num / den;\n  const a = my - b * mx;\n  return { a, b, predict: x => a + b * x };\n}",
           "run": "const m = ols([[1,2],[2,3],[3,5]]);\nconsole.log(m.b.toFixed(1), m.predict(4).toFixed(2));",
-          "expect": [
-            "1.5",
-            "6.33"
-          ]
+          "expect": ["1.5", "6.33"]
         }
       ]
     },
@@ -1675,11 +1569,7 @@
         {
           "setup": "function grad(x,y){return [2*x+3*y,3*x+2*y];} function norm(v){return Math.sqrt(v[0]*v[0]+v[1]*v[1]);}",
           "run": "const g=grad(1,2);console.log(g[0],g[1],norm(g).toFixed(3));",
-          "expect": [
-            "8",
-            "7",
-            "10.630"
-          ]
+          "expect": ["8", "7", "10.630"]
         }
       ]
     },
@@ -1691,20 +1581,13 @@
       "difficulty": "intro",
       "prompt": "P(A)=0.4, P(B)=0.5, P(A∩B)=0.2. Are A and B independent? Compute P(A∪B). If they were mutually exclusive, what would P(A∪B) be instead?",
       "expectedOutput": "P(A)P(B)=0.2=P(A∩B) → independent. P(A∪B)=0.4+0.5−0.2=0.7. Mutually exclusive would give 0.9 — conflating the two is a common bug.",
-      "hints": [
-        "Independent ⟺ P(A∩B)=P(A)P(B).",
-        "Union: P(A)+P(B)−P(A∩B)."
-      ],
+      "hints": ["Independent ⟺ P(A∩B)=P(A)P(B).", "Union: P(A)+P(B)−P(A∩B)."],
       "solutionNotes": "Mutually exclusive implies P(A∩B)=0, which is much stronger than independence.",
       "testCases": [
         {
           "setup": "function indep(pA, pB, pAB) { return Math.abs(pA * pB - pAB) < 1e-9; }\nfunction union(pA, pB, pAB) { return pA + pB - pAB; }",
           "run": "console.log(indep(0.4,0.5,0.2), union(0.4,0.5,0.2).toFixed(1), union(0.4,0.5,0).toFixed(1));",
-          "expect": [
-            "true",
-            "0.7",
-            "0.9"
-          ]
+          "expect": ["true", "0.7", "0.9"]
         }
       ]
     },
@@ -1716,20 +1599,13 @@
       "difficulty": "core",
       "prompt": "Latency is Normal(μ=100ms, σ=20ms). Approximate P(X > 140ms) using the z-score and a standard normal table (Φ(2) ≈ 0.977). What fraction is within 1σ of the mean?",
       "expectedOutput": "z=(140−100)/20=2; P(X>140)≈1−0.977=0.023. Within 1σ: ≈68%.",
-      "hints": [
-        "z = (x−μ)/σ.",
-        "Tail probability is 1−Φ(z) for upper tail."
-      ],
+      "hints": ["z = (x−μ)/σ.", "Tail probability is 1−Φ(z) for upper tail."],
       "solutionNotes": "The 68–95–99.7 rule is the CLT's everyday face.",
       "testCases": [
         {
           "setup": "function zScore(x, mu, sigma) { return (x - mu) / sigma; }\nfunction upperTail(z) { return 1 - 0.5 * (1 + erf(z / Math.SQRT2)); }\nfunction erf(x) {\n  const sign = x < 0 ? -1 : 1;\n  x = Math.abs(x);\n  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;\n  const t = 1/(1+p*x);\n  const y = 1-((((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x);\n  return sign*y;\n}",
           "run": "const z = zScore(140, 100, 20);\nconsole.log(z.toFixed(0), upperTail(z).toFixed(3), '0.68');",
-          "expect": [
-            "2",
-            "0.023",
-            "0.68"
-          ]
+          "expect": ["2", "0.023", "0.68"]
         }
       ]
     },
@@ -1750,11 +1626,7 @@
         {
           "setup": "function explainsCausation(r) { return false; }\nfunction lurkingVariable() { return 'temperature'; }\nfunction usefulForEngineers(r) { return Math.abs(r) > 0.5 ? 'screening' : 'weak'; }",
           "run": "console.log(explainsCausation(0.9), lurkingVariable(), usefulForEngineers(0.9));",
-          "expect": [
-            "false",
-            "temperature",
-            "screening"
-          ]
+          "expect": ["false", "temperature", "screening"]
         }
       ]
     },
@@ -1775,9 +1647,7 @@
         {
           "setup": "function errorType(h0True,rejected){if(h0True&&rejected)return \"I\";if(!h0True&&!rejected)return \"II\";return \"ok\";}",
           "run": "console.log(errorType(false,false));",
-          "expect": [
-            "II"
-          ]
+          "expect": ["II"]
         }
       ]
     },
@@ -1798,12 +1668,7 @@
         {
           "setup": "function match(scenario) {\n  const map = { coinflips: 'binomial', crashes: 'poisson', wait: 'exponential', avgLatency: 'normal' };\n  return map[scenario];\n}",
           "run": "console.log(match('coinflips'), match('crashes'), match('wait'), match('avgLatency'));",
-          "expect": [
-            "binomial",
-            "poisson",
-            "exponential",
-            "normal"
-          ]
+          "expect": ["binomial", "poisson", "exponential", "normal"]
         }
       ]
     },
@@ -1824,9 +1689,7 @@
         {
           "setup": "function nPerArm(p,delta){return Math.ceil(16*p*(1-p)/(delta*delta));}",
           "run": "console.log(nPerArm(0.05,0.01));",
-          "expect": [
-            "7600"
-          ]
+          "expect": ["7600"]
         }
       ]
     },
@@ -1838,19 +1701,13 @@
       "difficulty": "core",
       "prompt": "n=100 samples, sample mean x̄=50, sample SD s=10. Compute SE = s/√n and a 95% CI for the population mean (use z=1.96). Why is SE smaller than s?",
       "expectedOutput": "SE=10/10=1; CI≈[48.04, 51.96]. SE describes uncertainty of the mean; s describes spread of individual points.",
-      "hints": [
-        "SE = s/√n.",
-        "CI = x̄ ± z·SE."
-      ],
+      "hints": ["SE = s/√n.", "CI = x̄ ± z·SE."],
       "solutionNotes": "Report SE when talking about estimates; SD when talking about individuals.",
       "testCases": [
         {
           "setup": "function seMean(s,n){return s/Math.sqrt(n);} function ci(xbar,se,z=1.96){return [xbar-z*se,xbar+z*se].map(v=>+v.toFixed(2));}",
           "run": "const se=seMean(10,100);console.log(se.toFixed(1),JSON.stringify(ci(50,se)));",
-          "expect": [
-            "1.0",
-            "[48.04,51.96]"
-          ]
+          "expect": ["1.0", "[48.04,51.96]"]
         }
       ]
     },
@@ -1913,10 +1770,7 @@
         {
           "setup": "function betaPosterior(a, b, successes, trials) {\n  const alpha = a + successes, beta = b + trials - successes;\n  const mean = alpha / (alpha + beta);\n  const se = Math.sqrt((alpha * beta) / ((alpha + beta) ** 2 * (alpha + beta + 1)));\n  return { mean, lo: mean - 1.96 * se, hi: mean + 1.96 * se };\n}",
           "run": "const p = betaPosterior(1, 1, 8, 100);\nconsole.log(p.mean.toFixed(3), p.lo.toFixed(2));",
-          "expect": [
-            "0.088",
-            "0.03"
-          ]
+          "expect": ["0.088", "0.03"]
         }
       ]
     },
@@ -1928,10 +1782,7 @@
       "difficulty": "advanced",
       "prompt": "n=100 Bernoulli trials, 55 successes. Write the likelihood L(p)=p^55(1−p)^45, take log, differentiate, and solve for p̂. Why is this the same as the sample proportion?",
       "expectedOutput": "p̂=55/100=0.55. Log-likelihood derivative gives successes/n — MLE equals the intuitive estimator here.",
-      "hints": [
-        "log L = 55 log p + 45 log(1−p) + const.",
-        "Set d/dp = 0."
-      ],
+      "hints": ["log L = 55 log p + 45 log(1−p) + const.", "Set d/dp = 0."],
       "solutionNotes": "Cross-entropy minimization on {0,1} labels is the same story with more dimensions.",
       "testCases": [
         {
@@ -1949,19 +1800,13 @@
       "difficulty": "advanced",
       "prompt": "True distribution P=(0.5, 0.5); model Q=(0.9, 0.1). Compute H(P) and cross-entropy H(P,Q) in bits (log base 2). Which term dominates?",
       "expectedOutput": "H(P)=1 bit. H(P,Q)=−0.5 log₂0.9−0.5 log₂0.1≈0.47+1.66≈2.13 bits. The Q=0.1 on the true class (prob 0.5) dominates — being confidently wrong is expensive.",
-      "hints": [
-        "H(P)=−Σ p log₂ p.",
-        "Cross-entropy uses Q as the model distribution."
-      ],
+      "hints": ["H(P)=−Σ p log₂ p.", "Cross-entropy uses Q as the model distribution."],
       "solutionNotes": "This is why softmax+cross-entropy punishes confident wrong answers harshly.",
       "testCases": [
         {
           "setup": "function entropy(P) { return -P.reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0); }\nfunction crossEntropy(P, Q) { return -P.reduce((s, p, i) => s + (p > 0 ? p * Math.log2(Q[i]) : 0), 0); }",
           "run": "const P = [0.5, 0.5], Q = [0.9, 0.1];\nconsole.log(entropy(P).toFixed(2), crossEntropy(P, Q).toFixed(2));",
-          "expect": [
-            "1.00",
-            "1.74"
-          ]
+          "expect": ["1.00", "1.74"]
         }
       ]
     },
@@ -1973,19 +1818,13 @@
       "difficulty": "core",
       "prompt": "Given 3 aligned series (n=20 each), compute the 3×3 sample covariance matrix and correlation matrix by hand or in code (loops only). Verify diagonal covariances equal variances and corr diagonal = 1.",
       "expectedOutput": "Symmetric matrices; corr[i,j] = cov[i,j]/(σ_i σ_j).",
-      "hints": [
-        "Center each series first for covariance.",
-        "Correlation is scale-free."
-      ],
+      "hints": ["Center each series first for covariance.", "Correlation is scale-free."],
       "solutionNotes": "On returns, not prices — state which you used.",
       "testCases": [
         {
           "setup": "function covariance(a, b) {\n  const na = a.length;\n  const ma = a.reduce((s, x) => s + x, 0) / na;\n  const mb = b.reduce((s, x) => s + x, 0) / na;\n  let c = 0;\n  for (let i = 0; i < na; i++) c += (a[i] - ma) * (b[i] - mb);\n  return c / (na - 1);\n}\nfunction corr(a, b) { return covariance(a, b) / (Math.sqrt(covariance(a,a)) * Math.sqrt(covariance(b,b))); }",
           "run": "const x = [1,2,3,4,5], y = [2,4,5,4,5];\nconsole.log(covariance(x,x).toFixed(1), corr(x,y).toFixed(2));",
-          "expect": [
-            "2.5",
-            "0.77"
-          ]
+          "expect": ["2.5", "0.77"]
         }
       ]
     },
@@ -1997,10 +1836,7 @@
       "difficulty": "core",
       "prompt": "Fit a degree-1 vs degree-5 polynomial to 30 noisy points (50/50 split). Report train vs holdout MSE for both. Which overfits and how do you know?",
       "expectedOutput": "Degree-5 lower train MSE, worse holdout MSE — classic overfit signature.",
-      "hints": [
-        "Same random split for both models.",
-        "MSE on holdout is the honest score."
-      ],
+      "hints": ["Same random split for both models.", "MSE on holdout is the honest score."],
       "solutionNotes": "This is the adult version of 'great backtest, no holdout'.",
       "testCases": [
         {
@@ -2018,19 +1854,13 @@
       "difficulty": "core",
       "prompt": "A = [[1,2,3],[2,4,6],[1,1,0]]. What is rank(A)? Describe the column space in one sentence. Can you solve Ax=b for b=(3,6,2)?",
       "expectedOutput": "rank=2 (row2=2×row1). Column space is span{(1,2,1),(2,4,1)}. Ax=b consistent — b is in column space.",
-      "hints": [
-        "Row reduction reveals pivot columns.",
-        "b must be a linear combo of columns."
-      ],
+      "hints": ["Row reduction reveals pivot columns.", "b must be a linear combo of columns."],
       "solutionNotes": "Rank-deficient X in OLS needs regularization or constraint.",
       "testCases": [
         {
           "setup": "function rank2x3(A) {\n  return (A[1][0] === 2*A[0][0] && A[1][1] === 2*A[0][1] && A[1][2] === 2*A[0][2]) ? 1 : 2;\n}\nfunction consistent(A, b) {\n  return b[1] === 2*b[0] || rank2x3(A) >= 2;\n}",
           "run": "const A=[[1,2,3],[2,4,6],[1,1,0]], b=[3,6,2];\nconsole.log(rank2x3(A), consistent(A,b) ? 'yes' : 'no');",
-          "expect": [
-            "1",
-            "yes"
-          ]
+          "expect": ["1", "yes"]
         }
       ]
     },
@@ -2042,19 +1872,13 @@
       "difficulty": "advanced",
       "prompt": "2D data with cov matrix [[4,3],[3,9]]. Eigenvalues are 10 and 3. What fraction of variance do the top 1 and top 2 components explain? Why center before PCA?",
       "expectedOutput": "PC1: 10/13≈77%; both: 100%. Centering removes the mean offset so variance is spread, not dominated by the origin.",
-      "hints": [
-        "Variance explained = λ_i / Σλ.",
-        "Uncentered PCA chases the mean."
-      ],
+      "hints": ["Variance explained = λ_i / Σλ.", "Uncentered PCA chases the mean."],
       "solutionNotes": "Connect to impl-pca-from-scratch artifact.",
       "testCases": [
         {
           "setup": "function varianceExplained(eigs, k) {\n  const total = eigs.reduce((a,b)=>a+b,0);\n  return eigs.slice(0,k).reduce((a,b)=>a+b,0)/total;\n}",
           "run": "console.log(varianceExplained([10,3],1).toFixed(2), varianceExplained([10,3],2).toFixed(2));",
-          "expect": [
-            "0.77",
-            "1.00"
-          ]
+          "expect": ["0.77", "1.00"]
         }
       ]
     },
@@ -2066,19 +1890,13 @@
       "difficulty": "core",
       "prompt": "From 5 consecutive adjusted closes, compute log returns r_t = ln(P_t/P_{t-1}). Estimate daily σ and annualize with √252. Show one line of code or formula per step.",
       "expectedOutput": "4 log returns; σ_daily; σ_annual = σ_daily×√252.",
-      "hints": [
-        "Align returns to t, not t-1 price.",
-        "Use sample std dev on returns."
-      ],
+      "hints": ["Align returns to t, not t-1 price.", "Use sample std dev on returns."],
       "solutionNotes": "Feed quant-returns-pipeline artifact with real data next.",
       "testCases": [
         {
           "setup": "function logReturns(prices) {\n  const r = [];\n  for (let i = 1; i < prices.length; i++) r.push(Math.log(prices[i] / prices[i-1]));\n  return r;\n}\nfunction annualizeVol(dailyReturns) {\n  const mean = dailyReturns.reduce((a,b)=>a+b,0)/dailyReturns.length;\n  const var_ = dailyReturns.reduce((s,x)=>s+(x-mean)**2,0)/(dailyReturns.length-1);\n  return Math.sqrt(var_) * Math.sqrt(252);\n}",
           "run": "const prices = [100, 102, 101, 105, 104];\nconst r = logReturns(prices);\nconsole.log(r.length, annualizeVol(r).toFixed(2).length >= 4 ? 'annualized' : 'bad');",
-          "expect": [
-            "4",
-            "annualized"
-          ]
+          "expect": ["4", "annualized"]
         }
       ]
     },
@@ -2099,10 +1917,7 @@
         {
           "setup": "function interpretAcf(series, lag1) {\n  if (series === 'returns') return lag1 < 0.1 ? 'little-memory' : 'memory';\n  return lag1 > 0.9 ? 'non-stationary-levels' : 'stationary';\n}",
           "run": "console.log(interpretAcf('returns', 0.02), interpretAcf('prices', 0.98));",
-          "expect": [
-            "little-memory",
-            "non-stationary-levels"
-          ]
+          "expect": ["little-memory", "non-stationary-levels"]
         }
       ]
     },
@@ -2114,19 +1929,13 @@
       "difficulty": "core",
       "prompt": "Transition matrix P=[[0.9,0.1],[0.2,0.8]] on states {0,1}. Simulate 1000 steps from state 0. Estimate stationary proportion of time in state 1.",
       "expectedOutput": "≈1/3 time in state 1 (solve πP=π → π=(2/3,1/3)). Simulation should be close.",
-      "hints": [
-        "Each step: sample next state from P[current].",
-        "Stationary π solves πP=π."
-      ],
+      "hints": ["Each step: sample next state from P[current].", "Stationary π solves πP=π."],
       "solutionNotes": "Random walk is a special Markov chain on ℤ.",
       "testCases": [
         {
           "setup": "function stationary(P) {\n  const p01 = P[0][1], p10 = P[1][0];\n  const pi0 = p10 / (p01 + p10);\n  return [pi0, 1 - pi0];\n}\nfunction simulate(P, steps, seed = 0) {\n  let s = 0, c1 = 0;\n  for (let i = 0; i < steps; i++) {\n    const r = ((seed + i) * 9301 + 49297) % 233280 / 233280;\n    s = r < P[s][1] ? 1 - s : s;\n    if (s === 1) c1++;\n  }\n  return c1 / steps;\n}",
           "run": "const P = [[0.9,0.1],[0.2,0.8]];\nconst pi = stationary(P);\nconsole.log(pi[1].toFixed(2), simulate(P, 1000).toFixed(1).length >= 3 ? 'ok' : 'bad');",
-          "expect": [
-            "0.33",
-            "ok"
-          ]
+          "expect": ["0.33", "ok"]
         }
       ]
     },
@@ -2138,19 +1947,13 @@
       "difficulty": "core",
       "prompt": "Given 252 daily returns with mean 0.04%/day and σ=1%/day (rf=0), compute annualized Sharpe. Equity curve peaks at 1.20 then troughs at 0.95 — max drawdown?",
       "expectedOutput": "Sharpe ≈ (0.0004×252)/(0.01×√252) ≈ 0.63. Max DD = (0.95−1.20)/1.20 ≈ −20.8%.",
-      "hints": [
-        "Annualize mean×252, vol×√252.",
-        "Drawdown from running peak."
-      ],
+      "hints": ["Annualize mean×252, vol×√252.", "Drawdown from running peak."],
       "solutionNotes": "Report both return and pain — humans feel drawdown.",
       "testCases": [
         {
           "setup": "function annSharpe(mean,sigma,rf=0){return (mean*252-rf)/(sigma*Math.sqrt(252));} function maxDD(peak,trough){return (trough-peak)/peak;}",
           "run": "console.log(annSharpe(0.0004,0.01).toFixed(2), maxDD(1.2,0.95).toFixed(3));",
-          "expect": [
-            "0.63",
-            "-0.208"
-          ]
+          "expect": ["0.63", "-0.208"]
         }
       ]
     },
@@ -2183,19 +1986,13 @@
       "difficulty": "intro",
       "prompt": "Vectors a=[1,2,3], b=[4,5,6]. Compute dot(a,b). Matrices A (2×3) and B (3×2): is A·B valid? What is the output shape?",
       "expectedOutput": "dot=32; A·B is 2×2.",
-      "hints": [
-        "Dot = sum of elementwise products.",
-        "Inner dimensions must match for matmul."
-      ],
+      "hints": ["Dot = sum of elementwise products.", "Inner dimensions must match for matmul."],
       "solutionNotes": "Shape errors are the #1 silent bug in ML code.",
       "testCases": [
         {
           "setup": "function dot(a,b){return a.reduce((s,x,i)=>s+x*b[i],0);} function matmulShape(a,b){return [a.length,b[0].length];}",
           "run": "console.log(dot([1,2,3],[4,5,6]), JSON.stringify(matmulShape([[1,2,3],[4,5,6]],[[1,2],[3,4],[5,6]])));",
-          "expect": [
-            "32",
-            "[2,2]"
-          ]
+          "expect": ["32", "[2,2]"]
         }
       ]
     },
@@ -2207,18 +2004,13 @@
       "difficulty": "core",
       "prompt": "Loss L(w)=(w−3)². At w=0 with lr=0.1, compute gradient and one gradient-descent update.",
       "expectedOutput": "∇L=−6, w₁=0.6.",
-      "hints": [
-        "d/dw (w−3)² = 2(w−3).",
-        "w ← w − lr·∇L."
-      ],
+      "hints": ["d/dw (w−3)² = 2(w−3).", "w ← w − lr·∇L."],
       "solutionNotes": "Quadratic is the sanity check for any optimizer.",
       "testCases": [
         {
           "setup": "function step(w,lr){const g=2*(w-3);return w-lr*g;}",
           "run": "console.log(step(0,0.1).toFixed(1));",
-          "expect": [
-            "0.6"
-          ]
+          "expect": ["0.6"]
         }
       ]
     },
@@ -2230,18 +2022,13 @@
       "difficulty": "core",
       "prompt": "y = (2x+1)³. Compute dy/dx at x=1 via chain rule (u=2x+1, y=u³).",
       "expectedOutput": "dy/dx = 6(2x+1)² → 54 at x=1.",
-      "hints": [
-        "dy/dx = dy/du · du/dx.",
-        "du/dx = 2."
-      ],
+      "hints": ["dy/dx = dy/du · du/dx.", "du/dx = 2."],
       "solutionNotes": "Backprop is automated chain rule on the compute graph.",
       "testCases": [
         {
           "setup": "function dydx(x){const u=2*x+1;return 3*u*u*2;}",
           "run": "console.log(dydx(1));",
-          "expect": [
-            "54"
-          ]
+          "expect": ["54"]
         }
       ]
     },
@@ -2253,19 +2040,13 @@
       "difficulty": "core",
       "prompt": "Logits [2,1,0.1], true class index 0. Compute softmax probabilities and −log p(true).",
       "expectedOutput": "p≈[0.659,0.242,0.099], loss≈0.417.",
-      "hints": [
-        "Subtract max logit before exp for stability.",
-        "Loss = −log p(correct)."
-      ],
+      "hints": ["Subtract max logit before exp for stability.", "Loss = −log p(correct)."],
       "solutionNotes": "Log-sum-exp trick prevents overflow.",
       "testCases": [
         {
           "setup": "function softmax(xs){const m=Math.max(...xs);const ex=xs.map(x=>Math.exp(x-m));const s=ex.reduce((a,b)=>a+b,0);return ex.map(e=>e/s);}\nfunction xent(logits,y){const p=softmax(logits);return -Math.log(p[y]);}",
           "run": "const p=softmax([2,1,0.1]);console.log(p[0].toFixed(3),xent([2,1,0.1],0).toFixed(3));",
-          "expect": [
-            "0.659",
-            "0.417"
-          ]
+          "expect": ["0.659", "0.417"]
         }
       ]
     },
@@ -2286,10 +2067,7 @@
         {
           "setup": "function l2Step(w,g,lr,d){return w-lr*(g+d*w);} function adamwStep(w,g,lr,d){return (w-lr*g)*(1-lr*d);}",
           "run": "console.log(l2Step(2,0.5,0.1,0.01).toFixed(2), adamwStep(2,0.5,0.1,0.01).toFixed(2));",
-          "expect": [
-            "1.95",
-            "1.95"
-          ]
+          "expect": ["1.95", "1.95"]
         }
       ]
     },
@@ -2301,10 +2079,7 @@
       "difficulty": "intro",
       "prompt": "Corpus tokenized as [l,o,w,e,r,l,o,w,e,s,t]. Count adjacent pairs; merge the most frequent pair once. What is the new sequence?",
       "expectedOutput": "lo appears twice → merge lo → [lo,w,e,r,lo,w,e,s,t].",
-      "hints": [
-        "Count bigram frequencies.",
-        "Merge highest-count pair into one token."
-      ],
+      "hints": ["Count bigram frequencies.", "Merge highest-count pair into one token."],
       "solutionNotes": "BPE grows vocab by merging, not splitting.",
       "testCases": [
         {
@@ -2322,18 +2097,13 @@
       "difficulty": "core",
       "prompt": "Average negative log-likelihood per token = 2.3 nats. Compute perplexity = exp(NLL).",
       "expectedOutput": "PPX ≈ e^2.3 ≈ 9.97.",
-      "hints": [
-        "Perplexity is exp of average NLL.",
-        "Lower is better."
-      ],
+      "hints": ["Perplexity is exp of average NLL.", "Lower is better."],
       "solutionNotes": "PPX 10 ≈ uniform over ~10 tokens on average.",
       "testCases": [
         {
           "setup": "function perplexity(avgNll){return Math.exp(avgNll);}",
           "run": "console.log(perplexity(2.3).toFixed(2));",
-          "expect": [
-            "9.97"
-          ]
+          "expect": ["9.97"]
         }
       ]
     },
@@ -2345,18 +2115,13 @@
       "difficulty": "core",
       "prompt": "Logits [2,1,0]. Apply temperature T=2 and T=0.5 before softmax. Which T makes the distribution sharper?",
       "expectedOutput": "T<1 sharpens (more greedy); T>1 flattens.",
-      "hints": [
-        "Divide logits by T before softmax.",
-        "T→0 approaches argmax."
-      ],
+      "hints": ["Divide logits by T before softmax.", "T→0 approaches argmax."],
       "solutionNotes": "Temperature trades diversity vs determinism.",
       "testCases": [
         {
           "setup": "function softmax(xs){const m=Math.max(...xs);const ex=xs.map(x=>Math.exp(x-m));const s=ex.reduce((a,b)=>a+b,0);return ex.map(e=>e/s);}\nfunction scaled(T,xs){return softmax(xs.map(x=>x/T));}",
           "run": "const hot=scaled(0.5,[2,1,0]);console.log(hot[0].toFixed(2));",
-          "expect": [
-            "0.76"
-          ]
+          "expect": ["0.76"]
         }
       ]
     },
@@ -2377,9 +2142,7 @@
         {
           "setup": "function pe(pos,i,d){return Math.sin(pos/Math.pow(10000,2*i/d));}",
           "run": "console.log(pe(1,0,4).toFixed(3));",
-          "expect": [
-            "0.841"
-          ]
+          "expect": ["0.841"]
         }
       ]
     },
@@ -2391,19 +2154,13 @@
       "difficulty": "advanced",
       "prompt": "Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.",
       "expectedOutput": "Uniform weights 0.5/0.5 → output [2,3].",
-      "hints": [
-        "Scale before softmax.",
-        "Apply weights to values."
-      ],
+      "hints": ["Scale before softmax.", "Apply weights to values."],
       "solutionNotes": "Scaling stops dot products from saturating softmax.",
       "testCases": [
         {
           "setup": "function attnRow(q,k,v,dk){const scores=k.map(ki=>q.reduce((s,qj,j)=>s+qj*ki[j],0)/Math.sqrt(dk));const m=Math.max(...scores);const ex=scores.map(s=>Math.exp(s-m));const w=ex.map(e=>e/ex.reduce((a,b)=>a+b,0));return w.map((wi,i)=>wi*v[i].reduce((s,vj,j)=>s+wj*vj,0));}",
           "run": "const o=attnRow([1,0],[[1,0],[0,1]],[[1,2],[3,4]],2);console.log(o[0].toFixed(1),o[1].toFixed(1));",
-          "expect": [
-            "2.0",
-            "3.0"
-          ]
+          "expect": ["2.0", "3.0"]
         }
       ]
     },
@@ -2415,18 +2172,13 @@
       "difficulty": "advanced",
       "prompt": "d_model=512, h=8. What is head_dim? If you project Q to 512 dims total, how many dims per head?",
       "expectedOutput": "head_dim = 512/8 = 64.",
-      "hints": [
-        "head_dim = d_model / num_heads.",
-        "Each head runs attention in its own subspace."
-      ],
+      "hints": ["head_dim = d_model / num_heads.", "Each head runs attention in its own subspace."],
       "solutionNotes": "Multi-head = parallel attention at smaller width.",
       "testCases": [
         {
           "setup": "function headDim(d,h){return d/h;}",
           "run": "console.log(headDim(512,8));",
-          "expect": [
-            "64"
-          ]
+          "expect": ["64"]
         }
       ]
     },
@@ -2438,18 +2190,13 @@
       "difficulty": "advanced",
       "prompt": "x=[1,2], sublayer(x)=x+[0.1,−0.1]. Write pre-norm update: x + sublayer(LayerNorm(x)). If LayerNorm is identity here, new x?",
       "expectedOutput": "[1.1,1.9] — residual preserves a gradient highway.",
-      "hints": [
-        "Pre-norm: normalize before sublayer.",
-        "Output = x + f(norm(x))."
-      ],
+      "hints": ["Pre-norm: normalize before sublayer.", "Output = x + f(norm(x))."],
       "solutionNotes": "Pre-LN trains deeper stacks more reliably than post-LN.",
       "testCases": [
         {
           "setup": "function preNorm(x,delta){return x.map((xi,i)=>xi+delta[i]);}",
           "run": "console.log(JSON.stringify(preNorm([1,2],[0.1,-0.1])));",
-          "expect": [
-            "[1.1,1.9]"
-          ]
+          "expect": ["[1.1,1.9]"]
         }
       ]
     },
@@ -2470,10 +2217,7 @@
         {
           "setup": "function sanityCheck(trainAcc, valAcc, threshold = 0.15) {\n  return trainAcc - valAcc > threshold ? 'overfit' : 'ok';\n}",
           "run": "console.log(sanityCheck(0.99, 0.7), sanityCheck(0.85, 0.82));",
-          "expect": [
-            "overfit",
-            "ok"
-          ]
+          "expect": ["overfit", "ok"]
         }
       ]
     },
@@ -2494,10 +2238,7 @@
         {
           "setup": "function checkpoint(state) { return JSON.parse(JSON.stringify(state)); }\nfunction resume(ckpt) { return { ...ckpt, step: ckpt.step, weights: [...ckpt.weights] }; }",
           "run": "const s = { step: 10, weights: [1,2,3] };\nconst c = checkpoint(s);\ns.weights[0] = 99;\nconst r = resume(c);\nconsole.log(r.step, r.weights[0]);",
-          "expect": [
-            "10",
-            "1"
-          ]
+          "expect": ["10", "1"]
         }
       ]
     },
@@ -2518,9 +2259,7 @@
         {
           "setup": "function grpoAdv(r,mu,s){return (r-mu)/s;}",
           "run": "console.log(grpoAdv(1.0,0.65,0.269).toFixed(2));",
-          "expect": [
-            "1.30"
-          ]
+          "expect": ["1.30"]
         }
       ]
     },
@@ -2532,18 +2271,13 @@
       "difficulty": "core",
       "prompt": "W is 4096×4096 (frozen). LoRA rank r=8. How many trainable params in A (4096×r) and B (r×4096)?",
       "expectedOutput": "4096·8 + 8·4096 = 65,536 trainable vs 16M full matrix.",
-      "hints": [
-        "Train A and B only; W stays fixed.",
-        "Params = d·r + r·d."
-      ],
+      "hints": ["Train A and B only; W stays fixed.", "Params = d·r + r·d."],
       "solutionNotes": "LoRA trades expressivity for a tiny trainable footprint.",
       "testCases": [
         {
           "setup": "function loraParams(d,r){return 2*d*r;}",
           "run": "console.log(loraParams(4096,8));",
-          "expect": [
-            "65536"
-          ]
+          "expect": ["65536"]
         }
       ]
     },
@@ -2564,9 +2298,7 @@
         {
           "setup": "function corpusTokens(docs,tok,ep){return docs*tok*ep;}",
           "run": "console.log(corpusTokens(1e6,800,3));",
-          "expect": [
-            "2400000000"
-          ]
+          "expect": ["2400000000"]
         }
       ]
     },
@@ -2578,19 +2310,13 @@
       "difficulty": "core",
       "prompt": "Page limit ~2–4GB WASM memory. Model weights 1.5B params float16 ≈ 3GB. Can you load weights + activations in one page tab without sharding?",
       "expectedOutput": "No headroom — need quantization, offloading, or worker sharding.",
-      "hints": [
-        "2 bytes/param for fp16.",
-        "Activations and KV cache add on top."
-      ],
+      "hints": ["2 bytes/param for fp16.", "Activations and KV cache add on top."],
       "solutionNotes": "Browser inference is a memory-budget puzzle first.",
       "testCases": [
         {
           "setup": "function wasmPages(bytes) { return Math.ceil(bytes / 65536); }\nfunction linearBytes(nFloat32) { return nFloat32 * 4; }",
           "run": "console.log(linearBytes(1024), wasmPages(linearBytes(1024)));",
-          "expect": [
-            "4096",
-            "1"
-          ]
+          "expect": ["4096", "1"]
         }
       ]
     },
@@ -2602,18 +2328,13 @@
       "difficulty": "core",
       "prompt": "Tensor 1024×1024 float32. Byte size? If maxStorageBufferBindingSize is 128MB, does one buffer hold the tensor?",
       "expectedOutput": "4MB — fits easily; watch alignment and copy queue staging.",
-      "hints": [
-        "4 bytes per f32.",
-        "Check device limits for large models."
-      ],
+      "hints": ["4 bytes per f32.", "Check device limits for large models."],
       "solutionNotes": "GPU inference fails on limits, not just FLOPs.",
       "testCases": [
         {
           "setup": "function bytes(rows,cols){return rows*cols*4;}",
           "run": "console.log(bytes(1024,1024));",
-          "expect": [
-            "4194304"
-          ]
+          "expect": ["4194304"]
         }
       ]
     },
@@ -2625,19 +2346,13 @@
       "difficulty": "core",
       "prompt": "LM benchmark: PPX dropped 5% but exact-match QA accuracy flat. What does that imply about the eval?",
       "expectedOutput": "LM loss improved token distribution but task metric insensitive or needs few-shot/prompt — check task-specific eval.",
-      "hints": [
-        "PPX measures generative calibration.",
-        "Downstream tasks need their own harness."
-      ],
+      "hints": ["PPX measures generative calibration.", "Downstream tasks need their own harness."],
       "solutionNotes": "One number rarely captures LM quality.",
       "testCases": [
         {
           "setup": "function pickMetric(task) {\n  return task === 'lm' ? 'perplexity' : 'accuracy';\n}",
           "run": "console.log(pickMetric('lm'), pickMetric('classify'));",
-          "expect": [
-            "perplexity",
-            "accuracy"
-          ]
+          "expect": ["perplexity", "accuracy"]
         }
       ]
     },
@@ -2649,19 +2364,13 @@
       "difficulty": "intro",
       "prompt": "Implement isValid(s) for brackets ()[]{} using a stack.",
       "expectedOutput": "isValid(\"()[]{}\") true; isValid(\"(]\") false.",
-      "hints": [
-        "Push opens; pop must match close.",
-        "Stack empty at end."
-      ],
+      "hints": ["Push opens; pop must match close.", "Stack empty at end."],
       "solutionNotes": "Classic LIFO — O(n) time.",
       "testCases": [
         {
           "setup": "function isValid(s){const st=[];const m={')':'(','}':'{',']':'['};for(const c of s){if('({['.includes(c))st.push(c);else{if(st.pop()!==m[c])return false;}}return st.length===0;}",
           "run": "console.log(isValid(\"()[]{}\"), isValid(\"(]\"));",
-          "expect": [
-            "true",
-            "false"
-          ]
+          "expect": ["true", "false"]
         }
       ]
     },
@@ -2673,18 +2382,13 @@
       "difficulty": "intro",
       "prompt": "Reverse singly linked list 1→2→3→null iteratively. Return new head.",
       "expectedOutput": "3→2→1→null.",
-      "hints": [
-        "Keep prev, curr, next pointers.",
-        "Dummy head simplifies inserts elsewhere."
-      ],
+      "hints": ["Keep prev, curr, next pointers.", "Dummy head simplifies inserts elsewhere."],
       "solutionNotes": "In-place reversal is a fast/slow-list interview staple.",
       "testCases": [
         {
           "setup": "function toArr(head){const a=[];while(head){a.push(head.v);head=head.n;}return a;}\nfunction fromArr(a){let h=null;for(let i=a.length-1;i>=0;i--)h={v:a[i],n:h};return h;}\nfunction reverse(head){let p=null,c=head;while(c){const n=c.n;c.n=p;p=c;c=n;}return p;}",
           "run": "console.log(JSON.stringify(toArr(reverse(fromArr([1,2,3])))));",
-          "expect": [
-            "[3,2,1]"
-          ]
+          "expect": ["[3,2,1]"]
         }
       ]
     },
@@ -2696,20 +2400,13 @@
       "difficulty": "core",
       "prompt": "Insert [\"app\",\"apt\",\"bat\"]. Implement startsWith(\"ap\") and search(\"apt\").",
       "expectedOutput": "startsWith true; search true; search(\"ba\") true prefix but search(\"ban\") false.",
-      "hints": [
-        "Each node maps char → child.",
-        "End-of-word flag for complete keys."
-      ],
+      "hints": ["Each node maps char → child.", "End-of-word flag for complete keys."],
       "solutionNotes": "Prefix queries are why tries beat hash maps.",
       "testCases": [
         {
           "setup": "function make(){const r={};return{ins(w){let n=r;for(const c of w){n[c]=n[c]||{};n=n[c];}n.$=1;},sw(p){let n=r;for(const c of p){if(!n[c])return false;n=n[c];}return true;},sr(w){let n=r;for(const c of w){if(!n[c])return false;n=n[c];}return !!n.$;}};}",
           "run": "const t=make();[\"app\",\"apt\",\"bat\"].forEach(w=>t.ins(w));console.log(t.sw(\"ap\"),t.sr(\"apt\"),t.sr(\"ban\"));",
-          "expect": [
-            "true",
-            "true",
-            "false"
-          ]
+          "expect": ["true", "true", "false"]
         }
       ]
     },
@@ -2721,18 +2418,13 @@
       "difficulty": "core",
       "prompt": "Return all subsets of [1,2]. Use backtracking with include/exclude choice per index.",
       "expectedOutput": "[[],[1],[2],[1,2]] (order may vary).",
-      "hints": [
-        "Push current path at each leaf.",
-        "Undo (pop) after exploring."
-      ],
+      "hints": ["Push current path at each leaf.", "Undo (pop) after exploring."],
       "solutionNotes": "Subset template generalizes to combinations/permutations.",
       "testCases": [
         {
           "setup": "function subsets(nums){const out=[],path=[];function dfs(i){if(i===nums.length){out.push([...path]);return;}dfs(i+1);path.push(nums[i]);dfs(i+1);path.pop();}dfs(0);return out.sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));}",
           "run": "console.log(JSON.stringify(subsets([1,2])));",
-          "expect": [
-            "[[],[1],[2],[1,2]]"
-          ]
+          "expect": ["[[],[1],[2],[1,2]]"]
         }
       ]
     },
@@ -2744,18 +2436,13 @@
       "difficulty": "advanced",
       "prompt": "Weighted graph: 0—1—2 with weights 1 and 4, and 0—2 weight 10. Shortest 0→2?",
       "expectedOutput": "Cost 5 via node 1.",
-      "hints": [
-        "Min-heap on tentative distance.",
-        "Skip stale heap entries."
-      ],
+      "hints": ["Min-heap on tentative distance.", "Skip stale heap entries."],
       "solutionNotes": "Non-negative weights required.",
       "testCases": [
         {
           "setup": "function dijkstra(g,s,t){const dist=new Map([[s,0]]);const pq=[[0,s]];while(pq.length){pq.sort((a,b)=>a[0]-b[0]);const[d,u]=pq.shift();if(u===t)return d;if(d>dist.get(u))continue;for(const[e,w]of g[u]||[]){const nd=d+w;if(nd<(dist.get(e)??Infinity)){dist.set(e,nd);pq.push([nd,e]);}}}return -1;}",
           "run": "const g={0:[[1,1],[2,10]],1:[[2,4]]};console.log(dijkstra(g,0,2));",
-          "expect": [
-            "5"
-          ]
+          "expect": ["5"]
         }
       ]
     },
@@ -2767,18 +2454,13 @@
       "difficulty": "core",
       "prompt": "n=5, edges [[0,1],[1,2],[3,4]]. How many connected components after unions?",
       "expectedOutput": "2 components.",
-      "hints": [
-        "Union by rank/path compression.",
-        "Count distinct roots."
-      ],
+      "hints": ["Union by rank/path compression.", "Count distinct roots."],
       "solutionNotes": "Union-find is O(α(n)) amortized per op.",
       "testCases": [
         {
           "setup": "function countComp(n,edges){const p=Array.from({length:n},(_,i)=>i);function find(x){return p[x]===x?x:(p[x]=find(p[x]));}function uni(a,b){a=find(a);b=find(b);if(a!==b)p[b]=a;}edges.forEach(([a,b])=>uni(a,b));return new Set(p.map(find)).size;}",
           "run": "console.log(countComp(5,[[0,1],[1,2],[3,4]]));",
-          "expect": [
-            "2"
-          ]
+          "expect": ["2"]
         }
       ]
     },
@@ -2790,18 +2472,13 @@
       "difficulty": "core",
       "prompt": "Grid [[1,3,1],[1,5,1],[4,2,1]]. Min path sum top-left to bottom-right moving only right/down?",
       "expectedOutput": "7 via 1→3→1→1→1.",
-      "hints": [
-        "dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1]).",
-        "Can roll to 1D array."
-      ],
+      "hints": ["dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1]).", "Can roll to 1D array."],
       "solutionNotes": "2D DP pattern: carry best-so-far into each cell.",
       "testCases": [
         {
           "setup": "function minPath(g){const r=g.length,c=g[0].length;const dp=Array.from({length:r},()=>Array(c).fill(0));dp[0][0]=g[0][0];for(let i=1;i<c;i++)dp[0][i]=dp[0][i-1]+g[0][i];for(let i=1;i<r;i++)dp[i][0]=dp[i-1][0]+g[i][0];for(let i=1;i<r;i++)for(let j=1;j<c;j++)dp[i][j]=g[i][j]+Math.min(dp[i-1][j],dp[i][j-1]);return dp[r-1][c-1];}",
           "run": "console.log(minPath([[1,3,1],[1,5,1],[4,2,1]]));",
-          "expect": [
-            "7"
-          ]
+          "expect": ["7"]
         }
       ]
     },
@@ -2813,18 +2490,13 @@
       "difficulty": "core",
       "prompt": "Activities by end time: [1,4],[3,5],[0,6],[5,7],[8,9],[5,9]. Max non-overlapping count?",
       "expectedOutput": "4 activities.",
-      "hints": [
-        "Sort by finish time.",
-        "Take next compatible activity greedily."
-      ],
+      "hints": ["Sort by finish time.", "Take next compatible activity greedily."],
       "solutionNotes": "Greedy works when matroid structure holds.",
       "testCases": [
         {
           "setup": "function maxActs(a){a.sort((x,y)=>x[1]-y[1]);let end=-1,c=0;for(const[s,e]of a){if(s>=end){c++;end=e;}}return c;}",
           "run": "console.log(maxActs([[1,4],[3,5],[0,6],[5,7],[8,9],[5,9]]));",
-          "expect": [
-            "4"
-          ]
+          "expect": ["4"]
         }
       ]
     },
@@ -2836,18 +2508,13 @@
       "difficulty": "core",
       "prompt": "Merge [[1,3],[2,6],[8,10],[15,18]] → ?",
       "expectedOutput": "[[1,6],[8,10],[15,18]].",
-      "hints": [
-        "Sort by start.",
-        "Extend current if overlap."
-      ],
+      "hints": ["Sort by start.", "Extend current if overlap."],
       "solutionNotes": "Sort + sweep is the interval workhorse.",
       "testCases": [
         {
           "setup": "function merge(iv){if(!iv.length)return[];iv.sort((a,b)=>a[0]-b[0]);const out=[iv[0]];for(let i=1;i<iv.length;i++){const last=out[out.length-1];if(iv[i][0]<=last[1])last[1]=Math.max(last[1],iv[i][1]);else out.push(iv[i]);}return out;}",
           "run": "console.log(JSON.stringify(merge([[1,3],[2,6],[8,10],[15,18]])));",
-          "expect": [
-            "[[1,6],[8,10],[15,18]]"
-          ]
+          "expect": ["[[1,6],[8,10],[15,18]]"]
         }
       ]
     },
@@ -2859,19 +2526,13 @@
       "difficulty": "core",
       "prompt": "gcd(48,18)? What is (7^10) mod 13 via repeated squaring?",
       "expectedOutput": "gcd=6; 7^10 mod 13 = 4.",
-      "hints": [
-        "Euclidean gcd.",
-        "Binary exponentiation reduces mod each step."
-      ],
+      "hints": ["Euclidean gcd.", "Binary exponentiation reduces mod each step."],
       "solutionNotes": "Modular exp shows up in hashing and crypto drills.",
       "testCases": [
         {
           "setup": "function gcd(a,b){while(b){[a,b]=[b,a%b];}return a;}\nfunction modPow(b,e,m){let r=1;b%=m;while(e){if(e&1)r=r*b%m;b=b*b%m;e>>=1;}return r;}",
           "run": "console.log(gcd(48,18), modPow(7,10,13));",
-          "expect": [
-            "6",
-            "4"
-          ]
+          "expect": ["6", "4"]
         }
       ]
     },
@@ -2883,18 +2544,13 @@
       "difficulty": "intro",
       "prompt": "Every element appears twice except one. Find it in O(n) time, O(1) space.",
       "expectedOutput": "xor all → 5 for [4,1,2,1,4].",
-      "hints": [
-        "a^a=0, a^0=a.",
-        "XOR is commutative — order does not matter."
-      ],
+      "hints": ["a^a=0, a^0=a.", "XOR is commutative — order does not matter."],
       "solutionNotes": "Bitmask/XOR tricks are fast interview wins.",
       "testCases": [
         {
           "setup": "function single(nums){return nums.reduce((a,b)=>a^b,0);}",
           "run": "console.log(single([4,1,2,1,4]));",
-          "expect": [
-            "5"
-          ]
+          "expect": ["5"]
         }
       ]
     },
@@ -2906,10 +2562,7 @@
       "difficulty": "core",
       "prompt": "Retrieve top-5 by BM25, then rerank with scores [0.9,0.2,0.8,0.1,0.7] for query \"payment API\". Return new order.",
       "expectedOutput": "Doc0, Doc2, Doc4, Doc1, Doc3.",
-      "hints": [
-        "Reranker sees query+doc jointly.",
-        "Only score the small candidate set."
-      ],
+      "hints": ["Reranker sees query+doc jointly.", "Only score the small candidate set."],
       "solutionNotes": "Retrieve wide, rerank narrow.",
       "testCases": [
         {
@@ -2927,10 +2580,7 @@
       "difficulty": "core",
       "prompt": "Query \"javascrpt react hooks\" → suggest correction using edit distance ≤2 against vocab [\"javascript\",\"react\",\"hooks\",\"python\"].",
       "expectedOutput": "javascript react hooks.",
-      "hints": [
-        "Rewrite before retrieval.",
-        "Keep original as fallback."
-      ],
+      "hints": ["Rewrite before retrieval.", "Keep original as fallback."],
       "solutionNotes": "Query understanding is cheap recall insurance.",
       "testCases": [
         {
@@ -2948,19 +2598,13 @@
       "difficulty": "core",
       "prompt": "Discovery feed: which metric — CTR, dwell time, or nDCG@10? Pick one for homepage browse, one for keyword search, justify in one line each.",
       "expectedOutput": "Browse: dwell/engagement; search: nDCG/precision@k.",
-      "hints": [
-        "Discovery has weak intent.",
-        "Keyword search has explicit relevance labels."
-      ],
+      "hints": ["Discovery has weak intent.", "Keyword search has explicit relevance labels."],
       "solutionNotes": "Do not grade browse like search.",
       "testCases": [
         {
           "setup": "function pickMetric(surface) {\n  return surface === 'browse' ? 'dwell' : 'ndcg';\n}",
           "run": "console.log(pickMetric('browse'), pickMetric('search'));",
-          "expect": [
-            "dwell",
-            "ndcg"
-          ]
+          "expect": ["dwell", "ndcg"]
         }
       ]
     },
@@ -2972,9 +2616,7 @@
       "difficulty": "advanced",
       "prompt": "100k vectors, 1000 centroids, nprobe=1 recalls 70%, nprobe=8 recalls 92%. Latency 2ms→9ms. Pick nprobe for prod if SLA is 5ms and recall target 85%.",
       "expectedOutput": "nprobe=8 exceeds recall but misses SLA; try nprobe=4 and measure curve.",
-      "hints": [
-        "More cells scanned → higher recall, higher latency."
-      ],
+      "hints": ["More cells scanned → higher recall, higher latency."],
       "solutionNotes": "IVF is a knob, not a constant.",
       "testCases": [
         {
@@ -2992,19 +2634,13 @@
       "difficulty": "advanced",
       "prompt": "1536-d vector, m=48 subspaces, 256 centroids per subspace, 1 byte code/subspace. Bytes per vector vs raw float32?",
       "expectedOutput": "48 bytes vs 6144 bytes (~128× compression).",
-      "hints": [
-        "Each subspace stores an index 0–255.",
-        "Distance is approximate."
-      ],
+      "hints": ["Each subspace stores an index 0–255.", "Distance is approximate."],
       "solutionNotes": "PQ trades accuracy for RAM.",
       "testCases": [
         {
           "setup": "function pqBytes(d, m, codebook = 256) {\n  return m * (Math.log2(codebook) / 8 >= 1 ? 1 : 1);\n}\nfunction rawFloat32Bytes(d) { return d * 4; }",
           "run": "console.log(pqBytes(1536, 48), rawFloat32Bytes(1536));",
-          "expect": [
-            "48",
-            "6144"
-          ]
+          "expect": ["48", "6144"]
         }
       ]
     },
@@ -3016,19 +2652,13 @@
       "difficulty": "advanced",
       "prompt": "ANN curve: 95% recall @ 8ms, 99% @ 25ms, brute force 100% @ 200ms. Which point do you ship for interactive search?",
       "expectedOutput": "95%/8ms if UX budget ~10ms; document regression vs brute force.",
-      "hints": [
-        "Plot recall on Y, latency on X.",
-        "Brute force anchors truth."
-      ],
+      "hints": ["Plot recall on Y, latency on X.", "Brute force anchors truth."],
       "solutionNotes": "Pick an operating point, not a single number.",
       "testCases": [
         {
           "setup": "function pickOperatingPoint(points, maxLatencyMs) {\n  const ok = points.filter(p => p.latency <= maxLatencyMs);\n  return ok.sort((a, b) => b.recall - a.recall)[0];\n}",
           "run": "const pts = [{ recall: 0.95, latency: 8 }, { recall: 0.99, latency: 25 }];\nconst p = pickOperatingPoint(pts, 10);\nconsole.log((p.recall*100).toFixed(0), p.latency);",
-          "expect": [
-            "95",
-            "8"
-          ]
+          "expect": ["95", "8"]
         }
       ]
     },
@@ -3040,10 +2670,7 @@
       "difficulty": "core",
       "prompt": "Budget 800 tokens. Chunks A=300,B=400,C=250 relevance [0.9,0.85,0.7]. Greedy pack by relevance until full. Which included?",
       "expectedOutput": "A+B=700; C does not fit entirely — include partial or skip per policy.",
-      "hints": [
-        "Sort by relevance.",
-        "Leave room for instructions."
-      ],
+      "hints": ["Sort by relevance.", "Leave room for instructions."],
       "solutionNotes": "Packing is knapsack with token weights.",
       "testCases": [
         {
@@ -3061,10 +2688,7 @@
       "difficulty": "core",
       "prompt": "Agent calls tools in a loop. Max 5 steps, same tool 2× in a row triggers stop. Steps: search, search, calc, search, search, calc. When stop?",
       "expectedOutput": "Stop at step 3 (duplicate search) or step 5 by max steps — implement both guards.",
-      "hints": [
-        "Infinite loops burn tokens.",
-        "Log each tool call."
-      ],
+      "hints": ["Infinite loops burn tokens.", "Log each tool call."],
       "solutionNotes": "Agents need budgets like any service.",
       "testCases": [
         {
@@ -3082,19 +2706,13 @@
       "difficulty": "core",
       "prompt": "Classify queries: \"2+2\" → small model; \"design payment system\" → large model. Write a 2-rule router on length and keyword \"design\".",
       "expectedOutput": "Rule-based router with fallback to large on low confidence.",
-      "hints": [
-        "Cheap path for easy queries.",
-        "Escalate on failure."
-      ],
+      "hints": ["Cheap path for easy queries.", "Escalate on failure."],
       "solutionNotes": "Routing is a product lever, not just ML.",
       "testCases": [
         {
           "setup": "function routeQuery(q) {\n  if (q.length < 10 && !q.includes('design')) return 'small';\n  return 'large';\n}",
           "run": "console.log(routeQuery('2+2'), routeQuery('design payment system'));",
-          "expect": [
-            "small",
-            "large"
-          ]
+          "expect": ["small", "large"]
         }
       ]
     },
@@ -3106,19 +2724,13 @@
       "difficulty": "core",
       "prompt": "v1 and v2 prompts differ by one instruction. Name what you must re-run before shipping v2.",
       "expectedOutput": "Frozen eval set on both versions; compare pass rate delta.",
-      "hints": [
-        "Prompts are code — version them.",
-        "Never ship without eval diff."
-      ],
+      "hints": ["Prompts are code — version them.", "Never ship without eval diff."],
       "solutionNotes": "Regression gates for prompts.",
       "testCases": [
         {
           "setup": "function shipChecklist() {\n  return ['frozen-eval-set', 'compare-pass-rate', 'regression-gate'];\n}",
           "run": "const c = shipChecklist();\nconsole.log(c.length >= 3 ? 'eval-first' : 'risky', c[0]);",
-          "expect": [
-            "eval-first",
-            "frozen-eval-set"
-          ]
+          "expect": ["eval-first", "frozen-eval-set"]
         }
       ]
     },
@@ -3130,20 +2742,13 @@
       "difficulty": "core",
       "prompt": "POST returns 503 after 30s. Client retries. Safe without Idempotency-Key? When is 409 vs 200 on duplicate?",
       "expectedOutput": "Unsafe without key; Idempotency-Key makes retry safe; duplicate returns cached 200.",
-      "hints": [
-        "503 may mean server processed request.",
-        "GET is safe; POST is not."
-      ],
+      "hints": ["503 may mean server processed request.", "GET is safe; POST is not."],
       "solutionNotes": "Retries require idempotency design.",
       "testCases": [
         {
           "setup": "function postRetrySafe(hasIdempotencyKey) { return hasIdempotencyKey ? 'safe' : 'unsafe'; }\nfunction duplicateResponse() { return 200; }",
           "run": "console.log(postRetrySafe(false), postRetrySafe(true), duplicateResponse());",
-          "expect": [
-            "unsafe",
-            "safe",
-            "200"
-          ]
+          "expect": ["unsafe", "safe", "200"]
         }
       ]
     },
@@ -3155,19 +2760,13 @@
       "difficulty": "core",
       "prompt": "Generate key sk_live_abc123, store SHA-256 hash only, show prefix sk_live for support lookup. Why never store plaintext?",
       "expectedOutput": "Leak of DB does not expose usable secrets.",
-      "hints": [
-        "Prefix helps support find row.",
-        "Rotate on compromise."
-      ],
+      "hints": ["Prefix helps support find row.", "Rotate on compromise."],
       "solutionNotes": "Treat keys like passwords.",
       "testCases": [
         {
           "setup": "function storeKey(plaintext) {\n  return { prefix: plaintext.slice(0, 8), hash: 'sha256:' + plaintext.length };\n}",
           "run": "const s = storeKey('sk_live_abc123');\nconsole.log(s.prefix, s.hash.startsWith('sha256:') ? 'hashed' : 'plain');",
-          "expect": [
-            "sk_live_",
-            "hashed"
-          ]
+          "expect": ["sk_live_", "hashed"]
         }
       ]
     },
@@ -3179,19 +2778,13 @@
       "difficulty": "core",
       "prompt": "Body b, secret s, header HMAC-SHA256(s,b). Constant-time compare. Why reject if timestamp >5m old?",
       "expectedOutput": "Prevents replay; timing-safe compare prevents forgery leaks.",
-      "hints": [
-        "Sign raw body bytes.",
-        "Include timestamp in signed payload."
-      ],
+      "hints": ["Sign raw body bytes.", "Include timestamp in signed payload."],
       "solutionNotes": "Webhooks are unsigned HTTP unless you verify.",
       "testCases": [
         {
           "setup": "function verify(ts, now, maxSkewSec = 300) {\n  return Math.abs(now - ts) <= maxSkewSec ? 'ok' : 'replay';\n}",
           "run": "console.log(verify(1000, 1100), verify(1000, 2000));",
-          "expect": [
-            "ok",
-            "replay"
-          ]
+          "expect": ["ok", "replay"]
         }
       ]
     },
@@ -3203,19 +2796,13 @@
       "difficulty": "core",
       "prompt": "Worker crashes after processing but before ACK. What happens on redelivery? How make handler safe?",
       "expectedOutput": "Duplicate delivery; handler must be idempotent or use dedupe keys.",
-      "hints": [
-        "ACK after side effects = loss risk.",
-        "ACK before = duplicate risk."
-      ],
+      "hints": ["ACK after side effects = loss risk.", "ACK before = duplicate risk."],
       "solutionNotes": "Pick your poison; design for duplicates.",
       "testCases": [
         {
           "setup": "function redeliverySafe(handler) {\n  return handler.idempotent || handler.dedupe ? 'safe' : 'duplicate-risk';\n}",
           "run": "console.log(redeliverySafe({ idempotent: true }), redeliverySafe({}));",
-          "expect": [
-            "safe",
-            "duplicate-risk"
-          ]
+          "expect": ["safe", "duplicate-risk"]
         }
       ]
     },
@@ -3227,19 +2814,13 @@
       "difficulty": "core",
       "prompt": "Hot key expires, 1000 requests miss together. Name two mitigations.",
       "expectedOutput": "Probabilistic early expiry, request coalescing/singleflight, mutex per key.",
-      "hints": [
-        "TTL jitter spreads expiry.",
-        "One backend fetch serves many waiters."
-      ],
+      "hints": ["TTL jitter spreads expiry.", "One backend fetch serves many waiters."],
       "solutionNotes": "Hot keys need hot-key strategy.",
       "testCases": [
         {
           "setup": "function mitigations() { return ['ttl-jitter', 'singleflight']; }",
           "run": "const m = mitigations();\nconsole.log(m.length, m[1]);",
-          "expect": [
-            "2",
-            "singleflight"
-          ]
+          "expect": ["2", "singleflight"]
         }
       ]
     },
@@ -3251,19 +2832,13 @@
       "difficulty": "core",
       "prompt": "Producer 10k msg/s, consumer 2k msg/s. Queue depth grows 8k/s. When shed load — at depth 50k or consumer lag 60s?",
       "expectedOutput": "Alert on lag and depth; shed at SLA breach; scale consumers or throttle producer.",
-      "hints": [
-        "Queues are buffers, not infinite.",
-        "Dead-letter poison messages."
-      ],
+      "hints": ["Queues are buffers, not infinite.", "Dead-letter poison messages."],
       "solutionNotes": "Backpressure is a feature.",
       "testCases": [
         {
           "setup": "function shouldShed(depth, maxDepth, lagSec, maxLag) {\n  return depth > maxDepth || lagSec > maxLag ? 'shed' : 'accept';\n}",
           "run": "console.log(shouldShed(60000, 50000, 30, 60), shouldShed(60000, 50000, 70, 60));",
-          "expect": [
-            "shed",
-            "shed"
-          ]
+          "expect": ["shed", "shed"]
         }
       ]
     },
@@ -3275,19 +2850,13 @@
       "difficulty": "core",
       "prompt": "99.9% monthly SLO. How many minutes downtime allowed in 30 days? Burn 50% budget in 2 days — ship or freeze?",
       "expectedOutput": "~43 min/month; freeze risky releases.",
-      "hints": [
-        "Budget = 1 − SLO over window.",
-        "Fast burn → stop deploying."
-      ],
+      "hints": ["Budget = 1 − SLO over window.", "Fast burn → stop deploying."],
       "solutionNotes": "SLOs turn ops into math.",
       "testCases": [
         {
           "setup": "function monthlyMinutes(slo, days = 30) {\n  return ((1 - slo) * days * 24 * 60);\n}\nfunction burnPolicy(pctBurned, daysElapsed, daysTotal) {\n  const rate = pctBurned / daysElapsed;\n  return rate > 0.5 / daysTotal ? 'freeze' : 'ship';\n}",
           "run": "console.log(monthlyMinutes(0.999).toFixed(0), burnPolicy(0.5, 2, 30));",
-          "expect": [
-            "43",
-            "freeze"
-          ]
+          "expect": ["43", "freeze"]
         }
       ]
     },
@@ -3299,10 +2868,7 @@
       "difficulty": "core",
       "prompt": "List endpoint returns 10M rows. Why offset pagination fails? Sketch cursor on (created_at, id).",
       "expectedOutput": "Offset scans skip rows; cursor is stable under inserts.",
-      "hints": [
-        "Opaque cursor encodes position.",
-        "Consistent sort key required."
-      ],
+      "hints": ["Opaque cursor encodes position.", "Consistent sort key required."],
       "solutionNotes": "Pagination is API design 101.",
       "testCases": [
         {
@@ -3320,10 +2886,7 @@
       "difficulty": "core",
       "prompt": "User logs out. Session store vs JWT blacklist vs short TTL+refresh — pick one for banking app, justify.",
       "expectedOutput": "Short-lived JWT + refresh rotation or server session for instant revoke.",
-      "hints": [
-        "Stateless JWT cannot revoke without blocklist.",
-        "Sessions need store."
-      ],
+      "hints": ["Stateless JWT cannot revoke without blocklist.", "Sessions need store."],
       "solutionNotes": "Auth is a revocation requirement problem.",
       "testCases": [
         {
@@ -3341,19 +2904,13 @@
       "difficulty": "core",
       "prompt": "Double-click Pay sends two POST /charge with same Idempotency-Key. How many charges?",
       "expectedOutput": "One charge; second returns same receipt.",
-      "hints": [
-        "Store key → result mapping 24h.",
-        "Network retries are normal."
-      ],
+      "hints": ["Store key → result mapping 24h.", "Network retries are normal."],
       "solutionNotes": "Payments without idempotency are bugs waiting to happen.",
       "testCases": [
         {
           "setup": "function chargeCount(sameKey) { return sameKey ? 1 : 2; }",
           "run": "console.log(chargeCount(true), chargeCount(false));",
-          "expect": [
-            "1",
-            "2"
-          ]
+          "expect": ["1", "2"]
         }
       ]
     },
@@ -3365,19 +2922,13 @@
       "difficulty": "core",
       "prompt": "Page holds 4 keys, insert 5th triggers split. After split how many keys in each page (order 5)?",
       "expectedOutput": "2 keys in left, 2 in right, median promoted.",
-      "hints": [
-        "Split keeps tree balanced.",
-        "Fanout controls height."
-      ],
+      "hints": ["Split keeps tree balanced.", "Fanout controls height."],
       "solutionNotes": "B-trees optimize disk reads.",
       "testCases": [
         {
           "setup": "function btreeSplitAfterInsert(order, keysBefore) {\n  const mid = Math.floor(order / 2);\n  return { left: mid, right: order - mid - 1 };\n}",
           "run": "const s = btreeSplitAfterInsert(5, 4);\nconsole.log(s.left, s.right);",
-          "expect": [
-            "2",
-            "2"
-          ]
+          "expect": ["2", "2"]
         }
       ]
     },
@@ -3389,19 +2940,13 @@
       "difficulty": "advanced",
       "prompt": "L0 has 4 SSTables, threshold 4 triggers compaction to L1. Why not compact every write?",
       "expectedOutput": "Compaction is expensive; batching amortizes I/O; reads use bloom + levels.",
-      "hints": [
-        "L0 may overlap key ranges.",
-        "Tiered compaction trades write amp for read amp."
-      ],
+      "hints": ["L0 may overlap key ranges.", "Tiered compaction trades write amp for read amp."],
       "solutionNotes": "LSM is write-optimized with background tax.",
       "testCases": [
         {
           "setup": "function shouldCompact(l0Files, threshold) { return l0Files >= threshold ? 'compact' : 'wait'; }",
           "run": "console.log(shouldCompact(4, 4), shouldCompact(2, 4));",
-          "expect": [
-            "compact",
-            "wait"
-          ]
+          "expect": ["compact", "wait"]
         }
       ]
     },
@@ -3413,19 +2958,13 @@
       "difficulty": "core",
       "prompt": "Keys userId/timestamp/uuid vs flat uuid. Name one hot-partition risk and one listing benefit.",
       "expectedOutput": "Prefix listing per user; hot prefix if time-ordered without sharding.",
-      "hints": [
-        "S3 listing is prefix-based.",
-        "Shard prefixes for hot tenants."
-      ],
+      "hints": ["S3 listing is prefix-based.", "Shard prefixes for hot tenants."],
       "solutionNotes": "Key design is query design in object stores.",
       "testCases": [
         {
           "setup": "function hotPartitionRisk(layout) { return layout === 'time-prefix' ? 'hot-prefix' : 'spread'; }\nfunction listingBenefit(layout) { return layout.includes('user') ? 'prefix-list' : 'none'; }",
           "run": "console.log(hotPartitionRisk('time-prefix'), listingBenefit('userId/uuid'));",
-          "expect": [
-            "hot-prefix",
-            "prefix-list"
-          ]
+          "expect": ["hot-prefix", "prefix-list"]
         }
       ]
     },
@@ -3437,10 +2976,7 @@
       "difficulty": "core",
       "prompt": "Analytics query: SELECT avg(price) FROM sales WHERE date>2024. Which store wins and why?",
       "expectedOutput": "Columnar — reads only price+date columns, better compression.",
-      "hints": [
-        "Row store reads whole records.",
-        "Columnar skips untouched fields."
-      ],
+      "hints": ["Row store reads whole records.", "Columnar skips untouched fields."],
       "solutionNotes": "Workload shape picks the engine.",
       "testCases": [
         {
@@ -3458,10 +2994,7 @@
       "difficulty": "core",
       "prompt": "Table with 3 secondary indexes. One INSERT touches how many index structures?",
       "expectedOutput": "Primary + 3 secondaries = 4 writes (plus WAL).",
-      "hints": [
-        "Each index is another B-tree insert.",
-        "Indexes speed reads, tax writes."
-      ],
+      "hints": ["Each index is another B-tree insert.", "Indexes speed reads, tax writes."],
       "solutionNotes": "Index count is a write-amplification knob.",
       "testCases": [
         {
@@ -3479,19 +3012,13 @@
       "difficulty": "core",
       "prompt": "Design blob store: PUT by id vs GET by tag. Which needs secondary index? Which is O(1) lookup?",
       "expectedOutput": "PUT/GET by id is primary key O(1); tag search needs inverted/secondary index.",
-      "hints": [
-        "Object id is content-addressed or assigned.",
-        "Retrieval patterns drive indexes."
-      ],
+      "hints": ["Object id is content-addressed or assigned.", "Retrieval patterns drive indexes."],
       "solutionNotes": "Separate write path from query path.",
       "testCases": [
         {
           "setup": "function lookupById() { return 'O(1)'; }\nfunction lookupByTag() { return 'secondary-index'; }",
           "run": "console.log(lookupById(), lookupByTag());",
-          "expect": [
-            "O(1)",
-            "secondary-index"
-          ]
+          "expect": ["O(1)", "secondary-index"]
         }
       ]
     },
@@ -3503,19 +3030,13 @@
       "difficulty": "advanced",
       "prompt": "Multi-tenant SaaS: shard by tenant_id vs user_id vs hash(id). Which avoids hot tenant and cross-shard admin queries?",
       "expectedOutput": "tenant_id co-locates tenant data; hash spreads load; user_id splits tenant across shards.",
-      "hints": [
-        "Hot tenant needs sub-sharding.",
-        "Cross-shard queries are expensive."
-      ],
+      "hints": ["Hot tenant needs sub-sharding.", "Cross-shard queries are expensive."],
       "solutionNotes": "Shard key is the hardest migration.",
       "testCases": [
         {
           "setup": "function shardChoice(goal) {\n  const map = { tenantLocality: 'tenant_id', loadSpread: 'hash(id)', crossShardAdmin: 'tenant_id' };\n  return map[goal];\n}",
           "run": "console.log(shardChoice('tenantLocality'), shardChoice('loadSpread'));",
-          "expect": [
-            "tenant_id",
-            "hash(id)"
-          ]
+          "expect": ["tenant_id", "hash(id)"]
         }
       ]
     },
@@ -3527,10 +3048,7 @@
       "difficulty": "core",
       "prompt": "Write to primary, read replica 200ms later, lag 500ms. User sees stale read. Two fixes?",
       "expectedOutput": "Read-after-write from primary; session stickiness; sync quorum for critical reads.",
-      "hints": [
-        "Async replication = eventual consistency.",
-        "Route recent keys to leader."
-      ],
+      "hints": ["Async replication = eventual consistency.", "Route recent keys to leader."],
       "solutionNotes": "Replicas are not interchangeable without thought.",
       "testCases": [
         {
@@ -3548,19 +3066,13 @@
       "difficulty": "core",
       "prompt": "Network split isolates two DB nodes. Choose CP or AP for payment ledger vs social likes feed.",
       "expectedOutput": "Ledger: CP (reject writes); likes: AP (allow divergence + merge).",
-      "hints": [
-        "Partition forces C vs A tradeoff.",
-        "PACELC extends for normal case."
-      ],
+      "hints": ["Partition forces C vs A tradeoff.", "PACELC extends for normal case."],
       "solutionNotes": "CAP is about partition behavior, not everyday latency.",
       "testCases": [
         {
           "setup": "function capChoice(system) {\n  return system === 'ledger' ? 'CP' : 'AP';\n}",
           "run": "console.log(capChoice('ledger'), capChoice('likes'));",
-          "expect": [
-            "CP",
-            "AP"
-          ]
+          "expect": ["CP", "AP"]
         }
       ]
     },
@@ -3572,19 +3084,13 @@
       "difficulty": "advanced",
       "prompt": "Loss Hessian eigenvalues 1 and 100. Why one global lr=0.1 struggles? What helps?",
       "expectedOutput": "Ill-conditioned — oscillates along high-curvature dir; use Adam/normalization/smaller lr.",
-      "hints": [
-        "Curvature varies by direction.",
-        "Adaptive per-parameter methods help."
-      ],
+      "hints": ["Curvature varies by direction.", "Adaptive per-parameter methods help."],
       "solutionNotes": "SGD struggles when bowl is elongated.",
       "testCases": [
         {
           "setup": "function globalLrStruggle(eigs) {\n  const ratio = Math.max(...eigs) / Math.min(...eigs);\n  return ratio > 10 ? 'ill-conditioned' : 'ok';\n}\nfunction remedy() { return 'adam'; }",
           "run": "console.log(globalLrStruggle([1, 100]), remedy());",
-          "expect": [
-            "ill-conditioned",
-            "adam"
-          ]
+          "expect": ["ill-conditioned", "adam"]
         }
       ]
     },

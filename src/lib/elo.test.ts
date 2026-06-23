@@ -1,12 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  DEFAULT_USER_ELO,
-  difficultyToElo,
-  expectedScore,
-  kFactor,
-  updatePlayerElo,
-} from './elo';
+import { DEFAULT_USER_ELO, difficultyToElo, expectedScore, kFactor, updatePlayerElo } from './elo';
 
 describe('elo', () => {
   it('maps difficulty to static problem ratings', () => {

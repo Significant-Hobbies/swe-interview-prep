@@ -77,7 +77,9 @@ export function DigestBanner() {
     <div className="border-b border-white/[0.06] bg-gradient-to-r from-sky-500/8 via-transparent to-violet-500/8">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-4 py-2 md:px-6">
         <div className="flex min-w-0 items-center gap-2 text-xs text-white/70">
-          <Bell className={`h-3.5 w-3.5 shrink-0 ${primary.accent ? 'text-amber-300' : 'text-sky-400'}`} />
+          <Bell
+            className={`h-3.5 w-3.5 shrink-0 ${primary.accent ? 'text-amber-300' : 'text-sky-400'}`}
+          />
           <span className="truncate">{primary.text}</span>
         </div>
         <Link

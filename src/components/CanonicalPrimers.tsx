@@ -56,12 +56,13 @@ export default function CanonicalPrimers({ className = '', limit }: CanonicalPri
           Canonical voices
         </h2>
         <p className="mt-1 max-w-prose text-xs text-white/45">
-          S-tier voices only — Stanford, Karpathy, Kleppmann, Manning, attributed curators. Each links into an optional concept pack.
+          S-tier voices only — Stanford, Karpathy, Kleppmann, Manning, attributed curators. Each
+          links into an optional concept pack.
         </p>
       </div>
 
       <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map(p => (
+        {items.map((p) => (
           <Link
             key={`${p.author}-${p.title}`}
             to={p.href}

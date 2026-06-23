@@ -114,12 +114,8 @@ export default function StudyStats() {
           >
             <Icon className={`h-4 w-4 ${t.tint}`} />
             <div className="min-w-0">
-              <div className="text-[10px] text-slate-500">
-                {t.label}
-              </div>
-              <div className="text-base font-semibold text-slate-100 tabular-nums">
-                {t.value}
-              </div>
+              <div className="text-[10px] text-slate-500">{t.label}</div>
+              <div className="text-base font-semibold text-slate-100 tabular-nums">{t.value}</div>
             </div>
           </div>
         );

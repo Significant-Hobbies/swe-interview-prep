@@ -1,6 +1,6 @@
 import { getDb } from '../shared/db/client.mjs';
 import { requireAuth } from './auth/verify.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 export default async function handler(req, res) {
   const user = await requireAuth(req, res);

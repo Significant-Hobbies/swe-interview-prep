@@ -1,8 +1,8 @@
-import { Loader2,Send, Sparkles, Square, Trash2 } from 'lucide-react';
+import { Loader2, Send, Sparkles, Square, Trash2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 import { loadAIConfig } from '../hooks/useAI';
-import { type CompanionContext,useCompanion } from '../hooks/useCompanion';
+import { type CompanionContext, useCompanion } from '../hooks/useCompanion';
 import MarkdownViewer from './MarkdownViewer';
 
 interface Props {
@@ -16,7 +16,7 @@ export default function CompanionPanel({ context }: Props) {
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages]);
+  }, []);
 
   const handleSend = () => {
     if (!input.trim() || isStreaming) return;
@@ -61,7 +61,8 @@ export default function CompanionPanel({ context }: Props) {
               Socratic partner. Sees your code. Asks tough questions, never writes solutions.
             </p>
             <p className="mt-3 text-slate-600">
-              Try: <span className="text-slate-500">"why mutex here?"</span> or <span className="text-slate-500">"tradeoffs of this approach?"</span>
+              Try: <span className="text-slate-500">"why mutex here?"</span> or{' '}
+              <span className="text-slate-500">"tradeoffs of this approach?"</span>
             </p>
           </div>
         ) : (
@@ -75,7 +76,9 @@ export default function CompanionPanel({ context }: Props) {
               }`}
             >
               {m.role === 'assistant' ? (
-                <MarkdownViewer content={m.content || (isStreaming && i === messages.length - 1 ? '...' : '')} />
+                <MarkdownViewer
+                  content={m.content || (isStreaming && i === messages.length - 1 ? '...' : '')}
+                />
               ) : (
                 <div className="whitespace-pre-wrap">{m.content}</div>
               )}
@@ -93,7 +96,7 @@ export default function CompanionPanel({ context }: Props) {
         <div className="relative">
           <textarea
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKey}
             placeholder="Ask anything… (⌘↵ send)"
             rows={2}
@@ -104,7 +107,13 @@ export default function CompanionPanel({ context }: Props) {
             disabled={!input.trim() && !isStreaming}
             className="absolute bottom-2 right-2 rounded p-1 text-slate-400 transition-colors hover:bg-slate-800 hover:text-sky-400 disabled:opacity-30"
           >
-            {isStreaming ? <Square className="h-4 w-4" /> : input ? <Send className="h-4 w-4" /> : <Loader2 className={`h-4 w-4 ${isStreaming ? 'animate-spin' : ''}`} />}
+            {isStreaming ? (
+              <Square className="h-4 w-4" />
+            ) : input ? (
+              <Send className="h-4 w-4" />
+            ) : (
+              <Loader2 className={`h-4 w-4 ${isStreaming ? 'animate-spin' : ''}`} />
+            )}
           </button>
         </div>
       </div>

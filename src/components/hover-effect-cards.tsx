@@ -27,7 +27,13 @@ export function HoverEffectCards({
   const layoutId = useId();
 
   return (
-    <div className={cn('grid grid-cols-1 gap-3 sm:grid-cols-2', columns ?? 'lg:grid-cols-3', className)}>
+    <div
+      className={cn(
+        'grid grid-cols-1 gap-3 sm:grid-cols-2',
+        columns ?? 'lg:grid-cols-3',
+        className
+      )}
+    >
       {items.map((item, idx) => (
         <Link
           key={item.to}

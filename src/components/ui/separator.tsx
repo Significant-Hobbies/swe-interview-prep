@@ -14,7 +14,7 @@ export const Separator = forwardRef<
     className={cn(
       'shrink-0 bg-slate-800',
       orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
-      className,
+      className
     )}
     {...props}
   />

@@ -23,7 +23,7 @@ export function ImportAndNotifySettings() {
     if (!allCards.length) {
       setImportMsg(
         `Parsed ${parsed.stats.totalNotes} notes (${parsed.format}) — none ready to import. ` +
-          'Tag notes in Anki (e.g. bm25) or assign a concept below.',
+          'Tag notes in Anki (e.g. bm25) or assign a concept below.'
       );
       return;
     }
@@ -34,7 +34,9 @@ export function ImportAndNotifySettings() {
         (parsed.stats.unmapped > extraCards.length
           ? ` · ${parsed.stats.unmapped - extraCards.length} still unassigned`
           : '') +
-        (parsed.skipped || result.skipped ? ` · ${(parsed.skipped || 0) + (result.skipped || 0)} skipped` : ''),
+        (parsed.skipped || result.skipped
+          ? ` · ${(parsed.skipped || 0) + (result.skipped || 0)} skipped`
+          : '')
     );
     setPendingImport(null);
     setBulkConceptId('');
@@ -52,11 +54,11 @@ export function ImportAndNotifySettings() {
         setPendingImport(parsed);
         if (parsed.cards.length) {
           setImportMsg(
-            `${parsed.stats.mapped} cards matched concepts · ${parsed.unmappedCards.length} need assignment before import.`,
+            `${parsed.stats.mapped} cards matched concepts · ${parsed.unmappedCards.length} need assignment before import.`
           );
         } else {
           setImportMsg(
-            `${parsed.unmappedCards.length} cards parsed (${parsed.format}) — pick a concept to import them.`,
+            `${parsed.unmappedCards.length} cards parsed (${parsed.format}) — pick a concept to import them.`
           );
         }
         return;
@@ -89,7 +91,7 @@ export function ImportAndNotifySettings() {
     }
   }
 
-  const deckCount = new Set(reviews.map(r => r.ankiRef?.deckName || 'imported')).size;
+  const deckCount = new Set(reviews.map((r) => r.ankiRef?.deckName || 'imported')).size;
 
   return (
     <div className="space-y-6">
@@ -98,23 +100,29 @@ export function ImportAndNotifySettings() {
           <FileUp className="h-3.5 w-3.5" /> Anki import
         </h3>
         <p className="text-xs text-slate-500 mb-3">
-          Upload a full <code className="text-slate-400">.apkg</code> deck or a plain-text export (.txt).
-          Tag notes with concept ids (e.g. <code className="text-slate-400">bm25</code>) in Anki so cards
-          map into your FSRS queue.
+          Upload a full <code className="text-slate-400">.apkg</code> deck or a plain-text export
+          (.txt). Tag notes with concept ids (e.g. <code className="text-slate-400">bm25</code>) in
+          Anki so cards map into your FSRS queue.
         </p>
         <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-300 hover:border-slate-700">
-          {importing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <FileUp className="h-3.5 w-3.5" />}
+          {importing ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <FileUp className="h-3.5 w-3.5" />
+          )}
           {importing ? 'Parsing deck…' : 'Choose .apkg or .txt'}
           <input
             type="file"
             accept=".apkg,.txt,.csv,application/octet-stream,text/plain"
             className="hidden"
             disabled={importing}
-            onChange={e => void onAnkiFile(e.target.files?.[0] ?? null)}
+            onChange={(e) => void onAnkiFile(e.target.files?.[0] ?? null)}
           />
         </label>
         {isGuest && (
-          <p className="mt-2 text-[11px] text-amber-400/90">Guest: cards stay on this device. Sign in to sync.</p>
+          <p className="mt-2 text-[11px] text-amber-400/90">
+            Guest: cards stay on this device. Sign in to sync.
+          </p>
         )}
         {reviews.length > 0 && (
           <p className="mt-2 text-[11px] text-slate-500">
@@ -124,11 +132,12 @@ export function ImportAndNotifySettings() {
         {pendingImport && pendingImport.unmappedCards.length > 0 && (
           <div className="mt-3 rounded-md border border-amber-900/50 bg-amber-950/20 p-3 space-y-2">
             <p className="text-[11px] text-amber-200/90">
-              {pendingImport.unmappedCards.length} card{pendingImport.unmappedCards.length > 1 ? 's' : ''}{' '}
-              without concept tags — assign one concept to import them all:
+              {pendingImport.unmappedCards.length} card
+              {pendingImport.unmappedCards.length > 1 ? 's' : ''} without concept tags — assign one
+              concept to import them all:
             </p>
             <ul className="text-[10px] text-slate-500 space-y-0.5 max-h-24 overflow-y-auto">
-              {pendingImport.unmappedCards.slice(0, 5).map(c => (
+              {pendingImport.unmappedCards.slice(0, 5).map((c) => (
                 <li key={c.id} className="truncate">
                   {c.question.slice(0, 80)}
                   {c.question.length > 80 ? '…' : ''}
@@ -140,11 +149,11 @@ export function ImportAndNotifySettings() {
             </ul>
             <select
               value={bulkConceptId}
-              onChange={e => setBulkConceptId(e.target.value)}
+              onChange={(e) => setBulkConceptId(e.target.value)}
               className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300"
             >
               <option value="">Select concept…</option>
-              {CONCEPTS.map(c => (
+              {CONCEPTS.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name} ({c.id})
                 </option>

@@ -17,21 +17,32 @@ const GAP_Y = 56;
 
 /** roadmap.sh-style node graph — milestones as columns, concepts as checkable nodes. */
 export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
-  const columns = roadmap.milestones.map((m, col) =>
-    m.concepts.map((cid, row) => ({ cid, col, row, milestone: m.title })),
-  ).flat();
+  const columns = roadmap.milestones.flatMap((m, col) =>
+    m.concepts.map((cid, row) => ({ cid, col, row, milestone: m.title }))
+  );
 
-  const maxRows = Math.max(...roadmap.milestones.map(m => m.concepts.length), 1);
+  const maxRows = Math.max(...roadmap.milestones.map((m) => m.concepts.length), 1);
   const width = roadmap.milestones.length * (NODE_W + GAP_X) + GAP_X;
   const height = maxRows * (NODE_H + GAP_Y) + GAP_Y + 32;
 
   return (
     <div className="overflow-x-auto rounded-xl border border-white/[0.08] bg-black/40 p-4">
-      <svg viewBox={`0 0 ${width} ${height}`} className="min-w-[640px] w-full" role="img" aria-label={`${roadmap.title} roadmap graph`}>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="min-w-[640px] w-full"
+        role="img"
+        aria-label={`${roadmap.title} roadmap graph`}
+      >
         {roadmap.milestones.map((m, col) => {
           const x = GAP_X + col * (NODE_W + GAP_X) + NODE_W / 2;
           return (
-            <text key={m.title} x={x} y={18} textAnchor="middle" className="fill-white/40 text-[10px] font-medium">
+            <text
+              key={m.title}
+              x={x}
+              y={18}
+              textAnchor="middle"
+              className="fill-white/40 text-[10px] font-medium"
+            >
               {m.title.length > 22 ? `${m.title.slice(0, 20)}…` : m.title}
             </text>
           );
@@ -39,7 +50,7 @@ export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
 
         {columns.flatMap(({ cid, col, row }) => {
           if (col === 0) return [];
-          const prevCol = columns.filter(n => n.col === col - 1);
+          const prevCol = columns.filter((n) => n.col === col - 1);
           const target = prevCol[Math.min(row, prevCol.length - 1)];
           if (!target) return [];
           const x1 = GAP_X + (col - 1) * (NODE_W + GAP_X) + NODE_W;
@@ -47,7 +58,15 @@ export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
           const x2 = GAP_X + col * (NODE_W + GAP_X);
           const y2 = 36 + row * (NODE_H + GAP_Y) + NODE_H / 2;
           return [
-            <line key={`edge-${cid}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(255,255,255,0.12)" strokeWidth={1.5} />,
+            <line
+              key={`edge-${cid}`}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="rgba(255,255,255,0.12)"
+              strokeWidth={1.5}
+            />,
           ];
         })}
 
@@ -59,12 +78,29 @@ export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
           const y = 36 + row * (NODE_H + GAP_Y);
           const done = status === 'mastered';
           const active = status !== 'not-started' && !done;
-          const fill = done ? 'rgba(16,185,129,0.15)' : active ? 'rgba(56,189,248,0.1)' : 'rgba(255,255,255,0.03)';
-          const stroke = done ? 'rgba(16,185,129,0.5)' : active ? 'rgba(56,189,248,0.4)' : 'rgba(255,255,255,0.1)';
+          const fill = done
+            ? 'rgba(16,185,129,0.15)'
+            : active
+              ? 'rgba(56,189,248,0.1)'
+              : 'rgba(255,255,255,0.03)';
+          const stroke = done
+            ? 'rgba(16,185,129,0.5)'
+            : active
+              ? 'rgba(56,189,248,0.4)'
+              : 'rgba(255,255,255,0.1)';
 
           return (
             <g key={cid}>
-              <rect x={x} y={y} width={NODE_W} height={NODE_H} rx={8} fill={fill} stroke={stroke} strokeWidth={1} />
+              <rect
+                x={x}
+                y={y}
+                width={NODE_W}
+                height={NODE_H}
+                rx={8}
+                fill={fill}
+                stroke={stroke}
+                strokeWidth={1}
+              />
               <foreignObject x={x} y={y} width={NODE_W} height={NODE_H}>
                 <Link
                   to={`/concepts/${cid}`}

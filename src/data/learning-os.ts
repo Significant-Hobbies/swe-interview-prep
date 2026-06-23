@@ -41,7 +41,14 @@ export type ConceptStatus =
 
 export type ArtifactStatus = 'todo' | 'building' | 'shipped';
 export type DrillStatus = 'unsolved' | 'attempted' | 'solved';
-export type ProjectStatus = 'planned' | 'active' | 'guided' | 'AI-managed' | 'paused' | 'done' | 'archived';
+export type ProjectStatus =
+  | 'planned'
+  | 'active'
+  | 'guided'
+  | 'AI-managed'
+  | 'paused'
+  | 'done'
+  | 'archived';
 
 export interface Track {
   id: TrackId;
@@ -169,7 +176,8 @@ export const TRACKS: Track[] = [
     id: 'search-ir',
     title: 'Search & IR',
     short: 'Search',
-    description: 'Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.',
+    description:
+      'Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.',
     icon: 'Search',
     color: 'purple',
     order: 1,
@@ -179,7 +187,8 @@ export const TRACKS: Track[] = [
     id: 'mathematics',
     title: 'Mathematics',
     short: 'Math',
-    description: 'Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.',
+    description:
+      'Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.',
     icon: 'Sigma',
     color: 'indigo',
     order: 2,
@@ -189,7 +198,8 @@ export const TRACKS: Track[] = [
     id: 'vector-db',
     title: 'Vector DB & ANN',
     short: 'Vectors',
-    description: 'Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.',
+    description:
+      'Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.',
     icon: 'Boxes',
     color: 'fuchsia',
     order: 3,
@@ -199,7 +209,8 @@ export const TRACKS: Track[] = [
     id: 'ai-systems',
     title: 'AI Systems',
     short: 'AI',
-    description: 'Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.',
+    description:
+      'Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.',
     icon: 'Sparkles',
     color: 'cyan',
     order: 4,
@@ -209,7 +220,8 @@ export const TRACKS: Track[] = [
     id: 'backend',
     title: 'Backend',
     short: 'Backend',
-    description: 'Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.',
+    description:
+      'Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.',
     icon: 'Server',
     color: 'emerald',
     order: 5,
@@ -219,7 +231,8 @@ export const TRACKS: Track[] = [
     id: 'databases',
     title: 'Databases & Storage',
     short: 'Storage',
-    description: 'Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.',
+    description:
+      'Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.',
     icon: 'Database',
     color: 'amber',
     order: 6,
@@ -229,7 +242,8 @@ export const TRACKS: Track[] = [
     id: 'system-design',
     title: 'System Design',
     short: 'Design',
-    description: 'Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.',
+    description:
+      'Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.',
     icon: 'Network',
     color: 'orange',
     order: 7,
@@ -239,7 +253,8 @@ export const TRACKS: Track[] = [
     id: 'dsa',
     title: 'DSA & Implementation',
     short: 'DSA',
-    description: 'Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.',
+    description:
+      'Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.',
     icon: 'Binary',
     color: 'blue',
     order: 8,
@@ -249,7 +264,8 @@ export const TRACKS: Track[] = [
     id: 'product',
     title: 'Product & Distribution',
     short: 'Product',
-    description: 'Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.',
+    description:
+      'Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.',
     icon: 'Rocket',
     color: 'rose',
     order: 9,
@@ -268,9 +284,9 @@ export const PRACTICE_DRILLS: Drill[] = [...EDITORIAL_DRILLS, ...METADATA_DRILLS
 /** Curated artifacts with real playground templates (no build-* scaffolds). */
 export const EDITORIAL_ARTIFACTS: Artifact[] = ARTIFACTS.filter(isEditorialArtifact);
 export const PROJECTS: Project[] = (projectsData as any).projects;
-const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (reviewQuestionsData as any).reviewQuestions.map(
-  (q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }),
-);
+const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (
+  reviewQuestionsData as any
+).reviewQuestions.map((q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }));
 const INGESTED_REVIEW_QUESTIONS: ReviewQuestion[] = (
   (reviewQuestionsIngestedData as any).reviewQuestions ?? []
 ).filter(isSchedulableReviewQuestion);
@@ -279,8 +295,10 @@ export const REVIEW_QUESTIONS: ReviewQuestion[] = [
   ...INGESTED_REVIEW_QUESTIONS,
 ];
 
-export const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map(t => [t.id, t]));
-export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(CONCEPTS.map(c => [c.id, c]));
+export const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
+export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(
+  CONCEPTS.map((c) => [c.id, c])
+);
 
 export const CONCEPT_PACKS: Record<string, TopicPack> =
   (conceptPacksData as { packs?: Record<string, TopicPack> }).packs ?? {};
@@ -290,12 +308,18 @@ export function topicPackForConcept(concept: Concept): TopicPack {
   if (concept.learningPack) return concept.learningPack;
   return CONCEPT_PACKS[concept.id] ?? buildTopicPack(concept);
 }
-export const ROADMAP_BY_ID: Record<string, Roadmap> = Object.fromEntries(ROADMAPS.map(r => [r.id, r]));
-export const ARTIFACT_BY_ID: Record<string, Artifact> = Object.fromEntries(ARTIFACTS.map(a => [a.id, a]));
-export const DRILL_BY_ID: Record<string, Drill> = Object.fromEntries(DRILLS.map(d => [d.id, d]));
-export const PROJECT_BY_ID: Record<string, Project> = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
+export const ROADMAP_BY_ID: Record<string, Roadmap> = Object.fromEntries(
+  ROADMAPS.map((r) => [r.id, r])
+);
+export const ARTIFACT_BY_ID: Record<string, Artifact> = Object.fromEntries(
+  ARTIFACTS.map((a) => [a.id, a])
+);
+export const DRILL_BY_ID: Record<string, Drill> = Object.fromEntries(DRILLS.map((d) => [d.id, d]));
+export const PROJECT_BY_ID: Record<string, Project> = Object.fromEntries(
+  PROJECTS.map((p) => [p.id, p])
+);
 export const REVIEW_QUESTION_BY_ID: Record<string, ReviewQuestion> = Object.fromEntries(
-  REVIEW_QUESTIONS.map(q => [q.id, q]),
+  REVIEW_QUESTIONS.map((q) => [q.id, q])
 );
 
 // --- Tag-first taxonomy ----------------------------------------------------
@@ -304,7 +328,7 @@ export const REVIEW_QUESTION_BY_ID: Record<string, ReviewQuestion> = Object.from
 // group IDs (used by Roadmap.tracks and Project.tracks).
 
 /** Tags that the UI knows about — gives them a color + icon + title. */
-export const KNOWN_GROUP_TAGS: TrackId[] = TRACKS.map(t => t.id as TrackId);
+export const KNOWN_GROUP_TAGS: TrackId[] = TRACKS.map((t) => t.id as TrackId);
 
 /** Display metadata for a tag, if the UI knows about it. */
 export function groupForTag(tag: string): Track | undefined {
@@ -326,40 +350,40 @@ export function primaryGroup(concept: Concept): Track | undefined {
 
 /** Every concept tagged with this tag (group tag or otherwise). */
 export function conceptsByTag(tag: string): Concept[] {
-  return CONCEPTS.filter(c => c.tags.includes(tag));
+  return CONCEPTS.filter((c) => c.tags.includes(tag));
 }
 
 /** Every concept in a roadmap, by id. */
 export function conceptsInRoadmap(roadmapId: string): Concept[] {
-  return CONCEPTS.filter(c => c.roadmaps.includes(roadmapId));
+  return CONCEPTS.filter((c) => c.roadmaps.includes(roadmapId));
 }
 
 export function drillsForConcept(conceptId: string): Drill[] {
-  return DRILLS.filter(d => d.conceptId === conceptId);
+  return DRILLS.filter((d) => d.conceptId === conceptId);
 }
 
 export function editorialDrillsForConcept(conceptId: string): Drill[] {
-  return EDITORIAL_DRILLS.filter(d => d.conceptId === conceptId);
+  return EDITORIAL_DRILLS.filter((d) => d.conceptId === conceptId);
 }
 
 export function metadataDrillsForConcept(conceptId: string): Drill[] {
-  return METADATA_DRILLS.filter(d => d.conceptId === conceptId);
+  return METADATA_DRILLS.filter((d) => d.conceptId === conceptId);
 }
 
 export function reviewQuestionsForConcept(conceptId: string): ReviewQuestion[] {
-  return REVIEW_QUESTIONS.filter(q => q.conceptId === conceptId);
+  return REVIEW_QUESTIONS.filter((q) => q.conceptId === conceptId);
 }
 
 export function artifactsForConcept(conceptId: string): Artifact[] {
-  return ARTIFACTS.filter(a => a.concepts.includes(conceptId));
+  return ARTIFACTS.filter((a) => a.concepts.includes(conceptId));
 }
 
 export function artifactsForProject(projectId: string): Artifact[] {
-  return ARTIFACTS.filter(a => a.projects.includes(projectId));
+  return ARTIFACTS.filter((a) => a.projects.includes(projectId));
 }
 
 export function conceptsForProject(projectId: string): Concept[] {
-  return CONCEPTS.filter(c => (c.projectApplications || []).includes(projectId));
+  return CONCEPTS.filter((c) => (c.projectApplications || []).includes(projectId));
 }
 
 export function sortedTracks(): Track[] {
@@ -413,7 +437,7 @@ function normalizeExternalResources(raw: {
 }): ExternalResourcesFile {
   const byTag: Record<string, ExternalResource[]> = {};
   for (const [tag, items] of Object.entries(raw.byTag)) {
-    byTag[tag] = items.map(r => ({
+    byTag[tag] = items.map((r) => ({
       title: r.title,
       url: r.url,
       source: r.source,
@@ -427,7 +451,7 @@ export const EXTERNAL_RESOURCES = normalizeExternalResources(
   externalResourcesData as {
     _meta: ExternalResourcesFile['_meta'];
     byTag: Record<string, RawExternalResource[]>;
-  },
+  }
 );
 
 /** Resources for a single tag, in curated order. */

@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -46,13 +46,21 @@ export default function Today() {
     return (
       <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
         <h1 className="text-4xl font-bold text-white">You&apos;re caught up.</h1>
-        <p className="mt-4 text-white/50">Pick a path or explore the full catalog — nothing is gated.</p>
+        <p className="mt-4 text-white/50">
+          Pick a path or explore the full catalog — nothing is gated.
+        </p>
         <PathDoor activeRoadmapId={activeRoadmapId} className="mt-10" />
         <PlaygroundHero className="mt-10" compact />
         <nav className="mt-10 flex flex-wrap gap-6 font-mono text-sm text-white/50">
-          <Link to="/explore" className="hover:text-white">Explore everything</Link>
-          <Link to="/learn" className="hover:text-white">Switch roadmap</Link>
-          <Link to="/practice/all" className="hover:text-white">All drills</Link>
+          <Link to="/explore" className="hover:text-white">
+            Explore everything
+          </Link>
+          <Link to="/learn" className="hover:text-white">
+            Switch roadmap
+          </Link>
+          <Link to="/practice/all" className="hover:text-white">
+            All drills
+          </Link>
         </nav>
       </div>
     );
@@ -74,7 +82,9 @@ export default function Today() {
           <div className="flex-1 min-w-[140px]">
             <div className="flex items-center justify-between text-[11px] text-white/50">
               <span>Session progress</span>
-              <span className="font-mono">{progress.done}/{progress.total}</span>
+              <span className="font-mono">
+                {progress.done}/{progress.total}
+              </span>
             </div>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
               <div
@@ -88,11 +98,7 @@ export default function Today() {
               <CheckCircle2 className="h-3.5 w-3.5" /> Complete
             </span>
           ) : (
-            <Button
-              tone="ghost"
-              onClick={() => markSessionComplete()}
-              className="text-xs"
-            >
+            <Button tone="ghost" onClick={() => markSessionComplete()} className="text-xs">
               Mark done for today
             </Button>
           )}
@@ -104,10 +110,18 @@ export default function Today() {
       <PlaygroundHero className="mt-12" compact />
 
       <nav className="mt-10 flex flex-wrap gap-6 font-mono text-sm text-white/50">
-        <Link to="/explore" className="hover:text-white">Explore catalog</Link>
-        <Link to="/learn" className="hover:text-white">Switch roadmap</Link>
-        <Link to={`/roadmaps/${enrichedPlan.roadmap.id}`} className="hover:text-white">View graph</Link>
-        <Link to="/mock" className="hover:text-white">Mock interview</Link>
+        <Link to="/explore" className="hover:text-white">
+          Explore catalog
+        </Link>
+        <Link to="/learn" className="hover:text-white">
+          Switch roadmap
+        </Link>
+        <Link to={`/roadmaps/${enrichedPlan.roadmap.id}`} className="hover:text-white">
+          View graph
+        </Link>
+        <Link to="/mock" className="hover:text-white">
+          Mock interview
+        </Link>
         <Link to="/practice/all?tab=reviews" className="hover:text-white">
           Reviews{enrichedPlan.reviewsDue > 0 && ` · ${enrichedPlan.reviewsDue} due`}
         </Link>

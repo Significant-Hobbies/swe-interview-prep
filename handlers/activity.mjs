@@ -1,11 +1,14 @@
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 export default async function handler(req, res) {
@@ -22,7 +25,10 @@ export default async function handler(req, res) {
       sql: `INSERT INTO activity_log (id, user_id, kind, problem_id, concept_ids, duration_ms, payload)
             VALUES (?, ?, ?, ?, ?, ?, ?)`,
       args: [
-        id, user.id, kind, problemId || null,
+        id,
+        user.id,
+        kind,
+        problemId || null,
         conceptIds ? JSON.stringify(conceptIds) : null,
         durationMs || 0,
         payload ? JSON.stringify(payload) : null,
@@ -39,8 +45,10 @@ export default async function handler(req, res) {
             FROM activity_log WHERE user_id = ? AND created_at >= ? ORDER BY created_at DESC LIMIT 500`,
       args: [user.id, since],
     });
-    const rows = result.rows.map(r => ({
-      id: r.id, kind: r.kind, problemId: r.problem_id,
+    const rows = result.rows.map((r) => ({
+      id: r.id,
+      kind: r.kind,
+      problemId: r.problem_id,
       conceptIds: r.concept_ids ? JSON.parse(r.concept_ids) : [],
       durationMs: r.duration_ms,
       payload: r.payload ? JSON.parse(r.payload) : null,

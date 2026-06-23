@@ -17,7 +17,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'BM25 vs vector ranking',
     durationMinutes: 25,
-    prompt: 'Explain when you would use BM25 vs dense retrieval in a production RAG system. Cover failure modes, hybrid patterns, and how you would evaluate.',
+    prompt:
+      'Explain when you would use BM25 vs dense retrieval in a production RAG system. Cover failure modes, hybrid patterns, and how you would evaluate.',
     rubric: [
       'Names lexical vs semantic failure modes',
       'Describes hybrid fusion (RRF or weighted)',
@@ -31,7 +32,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'RAG pipeline debug',
     durationMinutes: 30,
-    prompt: 'Users report RAG answers are confident but wrong. Walk through your debugging checklist from retrieval through generation.',
+    prompt:
+      'Users report RAG answers are confident but wrong. Walk through your debugging checklist from retrieval through generation.',
     rubric: [
       'Checks chunking and citation grounding',
       'Inspects retrieval recall on failing queries',
@@ -45,7 +47,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'system-design',
     title: 'Design a URL shortener',
     durationMinutes: 45,
-    prompt: 'Design bit.ly at 10M writes/day. Cover API, storage, ID generation, redirects, analytics, and hot-key risks.',
+    prompt:
+      'Design bit.ly at 10M writes/day. Cover API, storage, ID generation, redirects, analytics, and hot-key risks.',
     rubric: [
       'Estimates QPS and storage',
       'Picks ID strategy (hash vs counter) with collision handling',
@@ -58,7 +61,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'system-design',
     title: 'Distributed rate limiter',
     durationMinutes: 40,
-    prompt: 'Design a global rate limiter for an API gateway. Compare token bucket vs sliding window. How do you enforce per-user limits across regions?',
+    prompt:
+      'Design a global rate limiter for an API gateway. Compare token bucket vs sliding window. How do you enforce per-user limits across regions?',
     rubric: [
       'Compares algorithms with tradeoffs',
       'Handles distributed consistency (Redis, drift)',
@@ -72,7 +76,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'behavioral',
     title: 'Disagreement with a senior engineer',
     durationMinutes: 15,
-    prompt: 'Tell me about a time you disagreed with a senior engineer on a technical decision. What was the situation, what did you do, and what was the outcome?',
+    prompt:
+      'Tell me about a time you disagreed with a senior engineer on a technical decision. What was the situation, what did you do, and what was the outcome?',
     rubric: [
       'STAR structure (situation, task, action, result)',
       'Shows respect + data, not ego',
@@ -85,7 +90,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'behavioral',
     title: 'Production incident ownership',
     durationMinutes: 15,
-    prompt: 'Describe a production incident you caused or owned. How did you detect it, mitigate, communicate, and prevent recurrence?',
+    prompt:
+      'Describe a production incident you caused or owned. How did you detect it, mitigate, communicate, and prevent recurrence?',
     rubric: [
       'Clear timeline and blast radius',
       'Ownership without blame-shifting',
@@ -98,7 +104,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'Implement LRU cache',
     durationMinutes: 35,
-    prompt: 'Implement an LRU cache with O(1) get and put. Explain your data structures, complexity, and how you would test it.',
+    prompt:
+      'Implement an LRU cache with O(1) get and put. Explain your data structures, complexity, and how you would test it.',
     rubric: [
       'Hash map + doubly-linked list (or ordered structure)',
       'O(1) get/put with correct eviction',
@@ -112,7 +119,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'Two Sum variants',
     durationMinutes: 25,
-    prompt: 'Solve Two Sum, then extend: what if the array is sorted? What if you need all pairs? What if inputs do not fit in memory?',
+    prompt:
+      'Solve Two Sum, then extend: what if the array is sorted? What if you need all pairs? What if inputs do not fit in memory?',
     rubric: [
       'Hash map O(n) baseline',
       'Two-pointer variant for sorted input',
@@ -126,7 +134,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'system-design',
     title: 'Design WhatsApp / chat',
     durationMinutes: 45,
-    prompt: 'Design a real-time chat at 50M DAU. Cover message delivery, ordering, groups, presence, and push notifications.',
+    prompt:
+      'Design a real-time chat at 50M DAU. Cover message delivery, ordering, groups, presence, and push notifications.',
     rubric: [
       'WebSocket/long-poll + message queue',
       'Per-chat ordering and idempotency',
@@ -139,7 +148,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'system-design',
     title: 'Design a news feed',
     durationMinutes: 45,
-    prompt: 'Design Instagram/Twitter home feed for 100M users. Fan-out on write vs read, ranking, and cold-start users.',
+    prompt:
+      'Design Instagram/Twitter home feed for 100M users. Fan-out on write vs read, ranking, and cold-start users.',
     rubric: [
       'Compare fan-out strategies with tradeoffs',
       'Feed ranking pipeline (retrieve → rank → filter)',
@@ -152,7 +162,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'behavioral',
     title: 'Leading without authority',
     durationMinutes: 15,
-    prompt: 'Tell me about a time you drove a cross-team technical initiative without formal authority.',
+    prompt:
+      'Tell me about a time you drove a cross-team technical initiative without formal authority.',
     rubric: [
       'STAR with measurable outcome',
       'Shows influence via data and prototypes',
@@ -165,7 +176,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'Design a RAG eval suite',
     durationMinutes: 30,
-    prompt: 'You own evals for a production RAG system. What metrics, datasets, and gates do you put in CI vs weekly offline runs?',
+    prompt:
+      'You own evals for a production RAG system. What metrics, datasets, and gates do you put in CI vs weekly offline runs?',
     rubric: [
       'Retrieval metrics (recall@k, MRR) separate from generation',
       'Golden set curation and regression detection',
@@ -179,7 +191,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'Sliding window maximum',
     durationMinutes: 25,
-    prompt: 'Given an array and window size k, return the max in each window. Explain deque vs heap approaches and complexity.',
+    prompt:
+      'Given an array and window size k, return the max in each window. Explain deque vs heap approaches and complexity.',
     rubric: [
       'Monotonic deque O(n) approach',
       'Handles window edges correctly',
@@ -193,7 +206,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'Grid BFS / islands',
     durationMinutes: 30,
-    prompt: 'Solve number of islands on a 2D grid, then extend: what if the grid does not fit in memory?',
+    prompt:
+      'Solve number of islands on a 2D grid, then extend: what if the grid does not fit in memory?',
     rubric: [
       'BFS/DFS with visited marking',
       'O(rows × cols) time and space',
@@ -207,7 +221,8 @@ export const MOCK_PROMPTS: MockPrompt[] = [
     kind: 'technical',
     title: 'DP: House Robber line',
     durationMinutes: 25,
-    prompt: 'Explain House Robber I and II. Write the recurrence, base cases, and how you optimize space.',
+    prompt:
+      'Explain House Robber I and II. Write the recurrence, base cases, and how you optimize space.',
     rubric: [
       'Linear DP with take/skip recurrence',
       'O(n) time, O(1) space after rolling',

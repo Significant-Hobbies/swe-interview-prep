@@ -1,6 +1,6 @@
-import { readFileSync, existsSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, existsSync } from 'node:fs';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import initSqlJs from 'sql.js';
 import { describe, expect, it } from 'vitest';
 import { buildMinimalApkg } from './ingest-anki-fixture.mjs';

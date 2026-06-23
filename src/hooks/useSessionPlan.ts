@@ -18,15 +18,16 @@ export function useSessionPlan(): SessionPlan | null {
   const { getElo } = useUserElo();
 
   return useMemo(
-    () => buildSessionPlan({
-      profile,
-      mastery,
-      rqMastery,
-      gateCtx,
-      drillState,
-      getElo,
-      extraReviewQuestions: importedReviews,
-    }),
-    [profile, mastery, rqMastery, gateCtx, drillState, getElo, importedReviews],
+    () =>
+      buildSessionPlan({
+        profile,
+        mastery,
+        rqMastery,
+        gateCtx,
+        drillState,
+        getElo,
+        extraReviewQuestions: importedReviews,
+      }),
+    [profile, mastery, rqMastery, gateCtx, drillState, getElo, importedReviews]
   );
 }

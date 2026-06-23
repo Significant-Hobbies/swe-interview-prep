@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
-import {
-  DEFAULT_PROFILE,
-  type LearnerProfile,
-  PROFILE_VERSION,
-} from '../lib/profile';
+import { DEFAULT_PROFILE, type LearnerProfile, PROFILE_VERSION } from '../lib/profile';
 import { loadLocal, saveLocal, STORE_KEYS } from '../lib/userStore';
 import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
 
@@ -44,8 +40,7 @@ export function useProfile() {
       const merged = { ...DEFAULT_PROFILE, ...data.profile };
       setProfile(merged);
       saveGuestProfile(merged);
-      const topRoadmap = Object.entries(merged.roadmapWeights)
-        .sort((a, b) => b[1] - a[1])[0]?.[0];
+      const topRoadmap = Object.entries(merged.roadmapWeights).sort((a, b) => b[1] - a[1])[0]?.[0];
       if (topRoadmap) saveActiveRoadmapId(topRoadmap);
     } catch {
       setProfile(loadGuestProfile());
@@ -58,33 +53,35 @@ export function useProfile() {
     void fetchProfile();
   }, [fetchProfile]);
 
-  const saveProfile = useCallback(async (next: Partial<LearnerProfile>) => {
-    const merged: LearnerProfile = {
-      ...profile,
-      ...next,
-      onboardingVersion: PROFILE_VERSION,
-      updatedAt: new Date().toISOString(),
-    };
-    setProfile(merged);
-    saveGuestProfile(merged);
-    const topRoadmap = Object.entries(merged.roadmapWeights)
-      .sort((a, b) => b[1] - a[1])[0]?.[0];
-    if (topRoadmap) saveActiveRoadmapId(topRoadmap);
+  const saveProfile = useCallback(
+    async (next: Partial<LearnerProfile>) => {
+      const merged: LearnerProfile = {
+        ...profile,
+        ...next,
+        onboardingVersion: PROFILE_VERSION,
+        updatedAt: new Date().toISOString(),
+      };
+      setProfile(merged);
+      saveGuestProfile(merged);
+      const topRoadmap = Object.entries(merged.roadmapWeights).sort((a, b) => b[1] - a[1])[0]?.[0];
+      if (topRoadmap) saveActiveRoadmapId(topRoadmap);
 
-    if (user) {
-      try {
-        await fetch('/api/learning?action=profile', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ profile: merged }),
-        });
-      } catch {
-        /* local wins */
+      if (user) {
+        try {
+          await fetch('/api/learning?action=profile', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ profile: merged }),
+          });
+        } catch {
+          /* local wins */
+        }
       }
-    }
-    return merged;
-  }, [profile, user]);
+      return merged;
+    },
+    [profile, user]
+  );
 
   return { profile, loading, saveProfile, refresh: fetchProfile };
 }

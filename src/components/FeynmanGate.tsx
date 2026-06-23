@@ -1,4 +1,4 @@
-import { Brain, Loader2,X } from 'lucide-react';
+import { Brain, Loader2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { REVIEW_QUESTIONS } from '../data/learning-os';
@@ -27,7 +27,15 @@ interface GradeResult {
   ratings: { concept_id: string; rating: string }[];
 }
 
-export default function FeynmanGate({ open, onClose, code, language, problem, conceptIds, problemId }: Props) {
+export default function FeynmanGate({
+  open,
+  onClose,
+  code,
+  language,
+  problem,
+  conceptIds,
+  problemId,
+}: Props) {
   const { review: reviewRq } = useReviewMastery();
   const [explanation, setExplanation] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -36,7 +44,9 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
 
   function scheduleReviewsForGaps(gapConceptIds: string[], rating: MasteryRating) {
     for (const cid of gapConceptIds) {
-      for (const q of REVIEW_QUESTIONS.filter(rq => rq.conceptId === cid && rq.source !== 'library')) {
+      for (const q of REVIEW_QUESTIONS.filter(
+        (rq) => rq.conceptId === cid && rq.source !== 'library'
+      )) {
         void reviewRq(q.id, rating);
       }
     }
@@ -72,7 +82,13 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({
-          explanation, code, language, problem, problemId, conceptIds, aiConfig: config,
+          explanation,
+          code,
+          language,
+          problem,
+          problemId,
+          conceptIds,
+          aiConfig: config,
         }),
       });
       if (!res.ok) throw new Error(`Grade failed: ${res.status}`);
@@ -107,7 +123,8 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({
             kind: 'feynman',
-            problemId, conceptIds,
+            problemId,
+            conceptIds,
             payload: { grade: data.grade, gaps: data.gaps },
           }),
         }).catch(() => {});
@@ -148,22 +165,18 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
         {!result ? (
           <div className="p-5 space-y-4">
             <p className="text-sm text-slate-400 leading-relaxed">
-              Explain in plain English what you just built — the core idea, the tradeoffs, complexity.
-              No code. Pretend you're teaching a junior.
+              Explain in plain English what you just built — the core idea, the tradeoffs,
+              complexity. No code. Pretend you're teaching a junior.
             </p>
             <textarea
-              autoFocus
               value={explanation}
-              onChange={e => setExplanation(e.target.value)}
+              onChange={(e) => setExplanation(e.target.value)}
               placeholder="The approach is… The key insight is… Time complexity is… Edge cases I handle…"
               rows={10}
               className="w-full resize-none rounded-md border border-slate-800 bg-slate-900 p-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40"
             />
             <div className="flex items-center justify-between">
-              <button
-                onClick={skip}
-                className="text-xs text-slate-500 hover:text-slate-300"
-              >
+              <button onClick={skip} className="text-xs text-slate-500 hover:text-slate-300">
                 Skip (logged)
               </button>
               <button
@@ -171,7 +184,11 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
                 disabled={submitting}
                 className="flex items-center gap-2 rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-400 disabled:opacity-50"
               >
-                {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Brain className="h-4 w-4" />}
+                {submitting ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Brain className="h-4 w-4" />
+                )}
                 Grade me
               </button>
             </div>
@@ -179,11 +196,19 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
         ) : (
           <div className="p-5 space-y-4">
             <div className="flex items-baseline gap-3">
-              <span className={`text-4xl font-bold ${
-                result.grade >= 90 ? 'text-green-400' :
-                result.grade >= 70 ? 'text-yellow-400' :
-                result.grade >= 50 ? 'text-orange-400' : 'text-red-400'
-              }`}>{result.grade}</span>
+              <span
+                className={`text-4xl font-bold ${
+                  result.grade >= 90
+                    ? 'text-green-400'
+                    : result.grade >= 70
+                      ? 'text-yellow-400'
+                      : result.grade >= 50
+                        ? 'text-orange-400'
+                        : 'text-red-400'
+                }`}
+              >
+                {result.grade}
+              </span>
               <span className="text-xs text-slate-500">/ 100</span>
             </div>
             <div className="rounded-md border border-slate-800 bg-slate-900/50 p-3 text-sm text-slate-200">
@@ -194,7 +219,10 @@ export default function FeynmanGate({ open, onClose, code, language, problem, co
                 <h3 className="mb-2 text-xs font-medium text-slate-500">Gaps</h3>
                 <ul className="space-y-1.5">
                   {result.gaps.map((g, i) => (
-                    <li key={i} className="rounded-md border border-orange-900/30 bg-orange-950/20 px-3 py-2 text-xs">
+                    <li
+                      key={i}
+                      className="rounded-md border border-orange-900/30 bg-orange-950/20 px-3 py-2 text-xs"
+                    >
                       <span className="font-mono text-orange-400">{g.concept_id}</span>
                       <span className="ml-2 text-slate-300">{g.weakness}</span>
                     </li>

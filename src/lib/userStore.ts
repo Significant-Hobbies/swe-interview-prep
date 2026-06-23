@@ -24,7 +24,7 @@ export function saveLocal(key: string, value: unknown): void {
  */
 export function mergeRecords<T>(
   local: Record<string, T>,
-  remote: Record<string, T>,
+  remote: Record<string, T>
 ): Record<string, T> {
   return { ...local, ...remote };
 }

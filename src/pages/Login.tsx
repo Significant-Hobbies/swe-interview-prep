@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 const SaaSMakerTestimonials = lazy(() =>
   import('../components/saasmaker-feedback').then((m) => ({
     default: m.SaaSMakerTestimonials,
-  })),
+  }))
 );
 
 const PRINCIPLES = [
@@ -25,15 +25,39 @@ const PRINCIPLES = [
 ];
 
 const SURFACES = [
-  { tag: '01', title: 'Today', body: 'One plan: concept → drill → artifact → review. Like roadmap.sh, but you ship code.' },
-  { tag: '02', title: 'Practice', body: '158 editorial drills with verified tests on the spine. FSRS keeps it sticky.' },
-  { tag: '03', title: 'Playground', body: 'Monaco + Excalidraw + Socratic AI + a Feynman gate. Build the artifact; explain it back.' },
+  {
+    tag: '01',
+    title: 'Today',
+    body: 'One plan: concept → drill → artifact → review. Like roadmap.sh, but you ship code.',
+  },
+  {
+    tag: '02',
+    title: 'Practice',
+    body: '158 editorial drills with verified tests on the spine. FSRS keeps it sticky.',
+  },
+  {
+    tag: '03',
+    title: 'Playground',
+    body: 'Monaco + Excalidraw + Socratic AI + a Feynman gate. Build the artifact; explain it back.',
+  },
 ];
 
 const STEPS = [
-  { tag: '01', title: 'Pick a path', body: 'Onboarding picks your roadmap. Today always shows the next checkbox.' },
-  { tag: '02', title: 'Drill, then build', body: 'Solve focused drills, then ship the artifact in the Playground. Not learned until it exists.' },
-  { tag: '03', title: 'Review and compound', body: 'FSRS spaced repetition keeps it sticky. Progress is whether learning is compounding.' },
+  {
+    tag: '01',
+    title: 'Pick a path',
+    body: 'Onboarding picks your roadmap. Today always shows the next checkbox.',
+  },
+  {
+    tag: '02',
+    title: 'Drill, then build',
+    body: 'Solve focused drills, then ship the artifact in the Playground. Not learned until it exists.',
+  },
+  {
+    tag: '03',
+    title: 'Review and compound',
+    body: 'FSRS spaced repetition keeps it sticky. Progress is whether learning is compounding.',
+  },
 ];
 
 export default function Login() {
@@ -79,11 +103,14 @@ export default function Login() {
             A learning OS for systems software
           </div>
           <h1 className="text-balance text-5xl font-bold tracking-tight text-white sm:text-7xl lg:text-8xl">
-            Learn deeply.<br />
+            Learn deeply.
+            <br />
             <span className="text-white/40">Practice with intent.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-pretty text-base leading-relaxed text-white/60 sm:text-lg">
-            Concept → Drill → Build → Review → Apply. A focused loop for engineers who want to actually <em className="not-italic text-white">understand</em> the systems they work on — databases, search, vector indexes, runtimes, AI inference.
+            Concept → Drill → Build → Review → Apply. A focused loop for engineers who want to
+            actually <em className="not-italic text-white">understand</em> the systems they work on
+            — databases, search, vector indexes, runtimes, AI inference.
           </p>
           <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
             <button
@@ -99,9 +126,7 @@ export default function Login() {
             >
               Sign in with Google
             </button>
-            <span className="font-mono text-xs text-white/40">
-              No sign-up needed to start.
-            </span>
+            <span className="font-mono text-xs text-white/40">No sign-up needed to start.</span>
           </div>
           {import.meta.env.DEV && debugInfo && (
             <p className="mt-6 font-mono text-xs text-white/30">{debugInfo}</p>
@@ -134,7 +159,7 @@ export default function Login() {
             Three surfaces, one loop
           </div>
           <div className="grid gap-12 md:grid-cols-3">
-            {SURFACES.map(s => (
+            {SURFACES.map((s) => (
               <div key={s.title}>
                 <div className="mb-3 font-mono text-xs text-white/30">{s.tag}</div>
                 <h3 className="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
@@ -152,7 +177,7 @@ export default function Login() {
             How a session looks
           </div>
           <ol className="grid gap-12 md:grid-cols-3">
-            {STEPS.map(s => (
+            {STEPS.map((s) => (
               <li key={s.title}>
                 <div className="mb-3 font-mono text-xs text-white/30">{s.tag}</div>
                 <h3 className="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
@@ -205,9 +230,13 @@ export default function Login() {
       <footer className="border-t border-white/[0.08] py-10 text-center">
         <p className="font-mono text-xs text-white/40">
           © {new Date().getFullYear()} SWE Prep ·{' '}
-          <a href="/privacy" className="text-white/60 hover:text-white">Privacy</a>{' '}
+          <a href="/privacy" className="text-white/60 hover:text-white">
+            Privacy
+          </a>{' '}
           ·{' '}
-          <a href="/about" className="text-white/60 hover:text-white">About</a>
+          <a href="/about" className="text-white/60 hover:text-white">
+            About
+          </a>
         </p>
       </footer>
     </div>

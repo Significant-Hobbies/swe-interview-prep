@@ -42,11 +42,11 @@ const EMOJI: Record<string, string> = {
 
 export const DEFAULT_ONBOARDING_PATH_ID = 'ai-search-infra-90-day';
 
-export const ONBOARDING_PATH_GROUPS: OnboardingPathGroup[] = ROADMAP_GROUPS.map(group => ({
+export const ONBOARDING_PATH_GROUPS: OnboardingPathGroup[] = ROADMAP_GROUPS.map((group) => ({
   id: group.id,
   title: group.title,
   subtitle: group.subtitle,
-  paths: group.roadmapIds.map(id => {
+  paths: group.roadmapIds.map((id) => {
     const roadmap = ROADMAP_BY_ID[id];
     return {
       id,
@@ -58,4 +58,4 @@ export const ONBOARDING_PATH_GROUPS: OnboardingPathGroup[] = ROADMAP_GROUPS.map(
   }),
 }));
 
-export const ONBOARDING_PATHS: OnboardingPath[] = ONBOARDING_PATH_GROUPS.flatMap(g => g.paths);
+export const ONBOARDING_PATHS: OnboardingPath[] = ONBOARDING_PATH_GROUPS.flatMap((g) => g.paths);

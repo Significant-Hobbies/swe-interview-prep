@@ -1,4 +1,4 @@
-import { HANDLER_MODULES, LEARNING_ACTIONS, PUBLIC_ACTIONS } from './learning-registry.mjs';
+import { HANDLER_MODULES, LEARNING_ACTIONS } from './learning-registry.mjs';
 import { runExpressHandler } from './express-bridge.mjs';
 
 const PUBLIC_NO_AUTH = new Set(['gaps', 'critique', 'understanding', 'tag']);
@@ -10,7 +10,7 @@ export async function dispatchLearningAction(ctx) {
   if (!action || !LEARNING_ACTIONS.includes(action)) {
     return json(
       { error: `Unknown action. Expected one of: ${LEARNING_ACTIONS.join(', ')}` },
-      { status: 400 },
+      { status: 400 }
     );
   }
 

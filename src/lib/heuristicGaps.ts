@@ -4,7 +4,6 @@ import {
   type Artifact,
   CONCEPT_BY_ID,
   EDITORIAL_ARTIFACTS,
-  type Concept,
   conceptsByTag,
   sortedTracks,
 } from '../data/learning-os';
@@ -22,8 +21,8 @@ export interface GapAnalysis {
 
 export function analyzeGapsHeuristic(mastery: Record<string, MasteryEntry>): GapAnalysis {
   const weak = weakConcepts(mastery, 8);
-  const groups = sortedTracks().map(t => {
-    const ids = conceptsByTag(t.id).map(c => c.id);
+  const groups = sortedTracks().map((t) => {
+    const ids = conceptsByTag(t.id).map((c) => c.id);
     const roll = rollupMastery(ids, mastery);
     return {
       id: t.id,
@@ -35,16 +34,14 @@ export function analyzeGapsHeuristic(mastery: Record<string, MasteryEntry>): Gap
     };
   });
 
-  const weakAreas = weak.slice(0, 5).map(c => {
+  const weakAreas = weak.slice(0, 5).map((c) => {
     const conf = Math.round((mastery[c.id]?.confidence ?? 0) * 100);
     return `${c.name} (${conf}%)`;
   });
 
-  const neglected = groups
-    .filter(g => g.untouched > g.total * 0.7)
-    .map(g => g.short);
+  const neglected = groups.filter((g) => g.untouched > g.total * 0.7).map((g) => g.short);
 
-  const nextConcepts = weak.slice(0, 5).map(c => {
+  const nextConcepts = weak.slice(0, 5).map((c) => {
     const conf = mastery[c.id]?.confidence ?? 0;
     const lapses = mastery[c.id]?.lapses ?? 0;
     let why = 'Low confidence — needs another rep.';
@@ -70,7 +67,9 @@ export function analyzeGapsHeuristic(mastery: Record<string, MasteryEntry>): Gap
 
   const summaryParts: string[] = [];
   if (weak.length) {
-    summaryParts.push(`Weakest link: ${weak[0].name} at ${Math.round((mastery[weak[0].id]?.confidence ?? 0) * 100)}% confidence.`);
+    summaryParts.push(
+      `Weakest link: ${weak[0].name} at ${Math.round((mastery[weak[0].id]?.confidence ?? 0) * 100)}% confidence.`
+    );
   } else {
     summaryParts.push('No critical weak spots — push edge concepts or ship an artifact.');
   }

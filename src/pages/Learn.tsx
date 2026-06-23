@@ -6,12 +6,7 @@ import BrowseLinks from '../components/BrowseLinks';
 import FeaturedPaths from '../components/FeaturedPaths';
 import PathDoor from '../components/PathDoor';
 import PlaygroundHero from '../components/PlaygroundHero';
-import {
-  CONCEPT_BY_ID,
-  type Roadmap,
-  roadmapConceptIds,
-  ROADMAPS,
-} from '../data/learning-os';
+import { CONCEPT_BY_ID, type Roadmap, roadmapConceptIds, ROADMAPS } from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useGateContext } from '../hooks/useGates';
 import { rollupMastery } from '../lib/conceptState';
@@ -31,14 +26,16 @@ import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
 export default function Learn() {
   const { mastery } = useConceptMastery();
   const gateCtx = useGateContext();
-  const [activeId, setActiveId] = useState<string>(() => loadActiveRoadmapId() || pickDefaultActive(mastery));
+  const [activeId, setActiveId] = useState<string>(
+    () => loadActiveRoadmapId() || pickDefaultActive(mastery)
+  );
 
   function pick(id: string) {
     setActiveId(id);
     saveActiveRoadmapId(id);
   }
 
-  const active = ROADMAPS.find(r => r.id === activeId) ?? ROADMAPS[0];
+  const active = ROADMAPS.find((r) => r.id === activeId) ?? ROADMAPS[0];
   const next = pickNextConceptInRoadmap(active, mastery, gateCtx);
   const nextDrill = next ? pickDrillForConcept(next.id) : null;
 
@@ -55,7 +52,8 @@ export default function Learn() {
           Set your active path.
         </h1>
         <p className="mt-4 max-w-prose text-sm text-white/50 sm:text-base">
-          Today&apos;s session follows the active roadmap. Start with four macro doors, quick interview picks, or all 14 roadmaps below.
+          Today&apos;s session follows the active roadmap. Start with four macro doors, quick
+          interview picks, or all 14 roadmaps below.
         </p>
         <Link
           to="/explore"
@@ -76,7 +74,7 @@ export default function Learn() {
       <BrowseLinks className="mt-12" />
 
       <section className="mt-14 space-y-10">
-        {ROADMAP_GROUPS.map(group => {
+        {ROADMAP_GROUPS.map((group) => {
           const roadmaps = roadmapsInGroup(group);
           if (!roadmaps.length) return null;
           return (
@@ -126,10 +124,15 @@ export default function Learn() {
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
           </div>
-          <p className="mt-3 max-w-prose text-sm leading-relaxed text-white/60">{next.description}</p>
+          <p className="mt-3 max-w-prose text-sm leading-relaxed text-white/60">
+            {next.description}
+          </p>
           {nextDrill && (
             <p className="mt-3 font-mono text-xs text-white/40">
-              Pair with drill: <Link to={`/drills/${nextDrill.id}`} className="text-white/70 hover:text-white">{nextDrill.title}</Link>
+              Pair with drill:{' '}
+              <Link to={`/drills/${nextDrill.id}`} className="text-white/70 hover:text-white">
+                {nextDrill.title}
+              </Link>
             </p>
           )}
         </section>
@@ -157,7 +160,7 @@ function RoadmapList({
 }) {
   return (
     <div className="grid gap-px overflow-hidden rounded-xl bg-white/10">
-      {roadmaps.map(r => (
+      {roadmaps.map((r) => (
         <RoadmapRow
           key={r.id}
           roadmap={r}
@@ -197,7 +200,9 @@ function RoadmapRow({
       <div className="flex items-baseline justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-baseline gap-3">
-            <h3 className={`truncate text-lg font-semibold tracking-tight ${active ? 'text-white' : 'text-white/80'}`}>
+            <h3
+              className={`truncate text-lg font-semibold tracking-tight ${active ? 'text-white' : 'text-white/80'}`}
+            >
               {roadmap.title}
             </h3>
             {active && (
@@ -223,7 +228,9 @@ function RoadmapRow({
 
       <div className="flex items-baseline justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
         <span>{roadmap.milestones.length} milestones</span>
-        <span className="tabular-nums">{roll.mastered}/{ids.length} mastered</span>
+        <span className="tabular-nums">
+          {roll.mastered}/{ids.length} mastered
+        </span>
       </div>
     </button>
   );
@@ -248,7 +255,7 @@ function pickDefaultActive(mastery: Record<string, MasteryEntry>): string {
 function pickNextConceptInRoadmap(
   roadmap: Roadmap,
   mastery: Record<string, MasteryEntry>,
-  gateCtx: ReturnType<typeof useGateContext>,
+  gateCtx: ReturnType<typeof useGateContext>
 ) {
   // Prefer the global recommender's pick if it lives in this roadmap;
   // otherwise pick the first not-yet-mastered concept in milestone order.

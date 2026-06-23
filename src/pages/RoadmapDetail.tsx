@@ -20,7 +20,7 @@ import { playgroundArtifactUrl } from '../lib/gates';
 // Roadmaps that have a companion markdown doc under /learning/:slug.
 const ROADMAP_DEEP_DIVE: Record<string, string> = {
   'db-disk-first': 'db-roadmap',
-  'runtime': 'runtime-roadmap',
+  runtime: 'runtime-roadmap',
   'swe-landscape': 'swe-landscape',
 };
 
@@ -34,7 +34,9 @@ export default function RoadmapDetail() {
       <PageShell>
         <Card className="p-8 text-center">
           <p className="text-sm text-white/50">Roadmap not found.</p>
-          <Link to="/learn" className="mt-2 inline-block text-sm text-white">← Back to roadmaps</Link>
+          <Link to="/learn" className="mt-2 inline-block text-sm text-white">
+            ← Back to roadmaps
+          </Link>
         </Card>
       </PageShell>
     );
@@ -46,7 +48,10 @@ export default function RoadmapDetail() {
 
   return (
     <PageShell>
-      <Link to="/learn" className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70">
+      <Link
+        to="/learn"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
+      >
         <ArrowLeft className="h-3.5 w-3.5" /> Roadmaps
       </Link>
 
@@ -71,7 +76,9 @@ export default function RoadmapDetail() {
       <Card className="mb-6 p-4">
         <div className="mb-1.5 flex items-center justify-between text-sm">
           <span className="font-medium text-white/80">Overall progress</span>
-          <span className="text-white/40">{roll.mastered}/{ids.length} concepts mastered</span>
+          <span className="text-white/40">
+            {roll.mastered}/{ids.length} concepts mastered
+          </span>
         </div>
         <ProgressBar value={pct} />
         <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
@@ -99,7 +106,8 @@ export default function RoadmapDetail() {
             <div>
               <div className="text-sm font-semibold text-white">Read the deep-dive doc</div>
               <div className="text-xs text-white/40">
-                Full mechanism-first writeup with every external source — papers, blog series, talks.
+                Full mechanism-first writeup with every external source — papers, blog series,
+                talks.
               </div>
             </div>
           </div>
@@ -148,16 +156,22 @@ function MilestoneBlock({
         <div>
           <SectionTitle>Concepts</SectionTitle>
           <div className="space-y-1.5">
-            {milestone.concepts.map(cid => {
+            {milestone.concepts.map((cid) => {
               const c = CONCEPT_BY_ID[cid];
               if (!c) return null;
               const status = deriveConceptStatus(mastery[cid]);
               const done = status === 'mastered';
               return (
-                <Link key={cid} to={`/concepts/${cid}`} className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
-                  {done
-                    ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
-                    : <Circle className="h-4 w-4 shrink-0 text-white/40" />}
+                <Link
+                  key={cid}
+                  to={`/concepts/${cid}`}
+                  className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+                >
+                  {done ? (
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                  ) : (
+                    <Circle className="h-4 w-4 shrink-0 text-white/40" />
+                  )}
                   <span className="truncate">{c.name}</span>
                 </Link>
               );
@@ -169,11 +183,15 @@ function MilestoneBlock({
           <SectionTitle>Drills</SectionTitle>
           {milestone.drills.length ? (
             <div className="space-y-1.5">
-              {milestone.drills.map(did => {
+              {milestone.drills.map((did) => {
                 const d = DRILL_BY_ID[did];
                 if (!d) return null;
                 return (
-                  <Link key={did} to={`/drills/${did}`} className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
+                  <Link
+                    key={did}
+                    to={`/drills/${did}`}
+                    className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+                  >
                     <Dumbbell className="h-4 w-4 shrink-0 text-amber-400" />
                     <span className="truncate">{d.title}</span>
                   </Link>
@@ -189,11 +207,15 @@ function MilestoneBlock({
           <SectionTitle>Artifacts</SectionTitle>
           {milestone.artifacts.length ? (
             <div className="space-y-1.5">
-              {milestone.artifacts.map(aid => {
+              {milestone.artifacts.map((aid) => {
                 const a = ARTIFACT_BY_ID[aid];
                 if (!a) return null;
                 return (
-                  <Link key={aid} to={playgroundArtifactUrl(aid)} className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
+                  <Link
+                    key={aid}
+                    to={playgroundArtifactUrl(aid)}
+                    className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+                  >
                     <Hammer className="h-4 w-4 shrink-0 text-white" />
                     <span className="truncate">{a.title}</span>
                   </Link>

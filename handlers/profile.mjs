@@ -4,7 +4,10 @@ import { requireAuth } from '../api/auth/verify.mjs';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 const DEFAULT = {

@@ -14,13 +14,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import {
-  CONCEPTS,
-  EDITORIAL_DRILLS,
-  PRACTICE_DRILLS,
-  ROADMAPS,
-  TRACKS,
-} from '../data/learning-os';
+import { CONCEPTS, EDITORIAL_DRILLS, PRACTICE_DRILLS, ROADMAPS, TRACKS } from '../data/learning-os';
 import { BROWSE_DESTINATIONS, type BrowseDestination } from '../lib/browseLinks';
 
 const ICONS: Record<string, LucideIcon> = {
@@ -59,21 +53,19 @@ interface BrowseLinksProps {
 }
 
 export default function BrowseLinks({ omit = [], className = '' }: BrowseLinksProps) {
-  const links = BROWSE_DESTINATIONS.filter(d => !omit.includes(d.id));
+  const links = BROWSE_DESTINATIONS.filter((d) => !omit.includes(d.id));
 
   return (
     <section aria-label="Browse catalog" className={className}>
       <div>
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-          Browse
-        </h2>
+        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Browse</h2>
         <p className="mt-1 max-w-prose text-xs text-white/45">
           Concepts, drills, docs, notes — jump anywhere without picking a path first.
         </p>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-3">
-        {links.map(dest => (
+        {links.map((dest) => (
           <BrowseCard key={dest.id} dest={dest} />
         ))}
       </div>
@@ -95,9 +87,7 @@ function BrowseCard({ dest }: { dest: BrowseDestination }) {
         <div className="min-w-0">
           <span className="text-sm font-semibold tracking-tight text-white">{dest.label}</span>
           <p className="mt-0.5 text-[11px] leading-snug text-white/45">{dest.blurb}</p>
-          {count && (
-            <p className="mt-1 font-mono text-[10px] text-white/30">{count}</p>
-          )}
+          {count && <p className="mt-1 font-mono text-[10px] text-white/30">{count}</p>}
         </div>
       </div>
     </Link>

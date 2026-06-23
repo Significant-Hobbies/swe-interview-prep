@@ -22,7 +22,7 @@ function extractToken(req) {
   const cookieToken = readAuthCookie(req);
   if (cookieToken) return cookieToken;
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
+  if (authHeader?.startsWith('Bearer ')) {
     return authHeader.slice(7);
   }
   return null;
@@ -38,7 +38,7 @@ export async function requireAuth(req, res) {
 
   const decoded = verifyToken(token);
 
-  if (!decoded || !decoded.userId) {
+  if (!decoded?.userId) {
     res.status(401).json({ error: 'Invalid token' });
     return null;
   }

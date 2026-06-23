@@ -17,7 +17,13 @@ const MIN_CODE_LEN = 80;
  * Triggers when code stabilizes (no edits for 5min) AND length > MIN_CODE_LEN.
  * Pass enabled=false (e.g. from focus mode) to suppress all tagging and AI calls.
  */
-export function useTagger(code: string, language: string, problem: string, onTagged?: (tags: TagResult[]) => void, enabled: boolean = true) {
+export function useTagger(
+  code: string,
+  language: string,
+  problem: string,
+  onTagged?: (tags: TagResult[]) => void,
+  enabled: boolean = true
+) {
   const lastTaggedRef = useRef<string>('');
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -46,7 +52,7 @@ export function useTagger(code: string, language: string, problem: string, onTag
         if (tags.length === 0) return;
 
         // Map depth → rating: surface=hard, working=good, deep=easy
-        const updates = tags.map(t => ({
+        const updates = tags.map((t) => ({
           conceptId: t.concept_id,
           rating: t.depth === 'deep' ? 'easy' : t.depth === 'working' ? 'good' : 'hard',
         }));
@@ -60,7 +66,7 @@ export function useTagger(code: string, language: string, problem: string, onTag
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
           body: JSON.stringify({
             kind: 'auto_tag',
-            conceptIds: tags.map(t => t.concept_id),
+            conceptIds: tags.map((t) => t.concept_id),
             payload: { tags },
           }),
         });
@@ -70,6 +76,8 @@ export function useTagger(code: string, language: string, problem: string, onTag
       }
     }, IDLE_MS);
 
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [code, language, problem, onTagged, enabled]);
 }

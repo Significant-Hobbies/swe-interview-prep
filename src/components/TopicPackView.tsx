@@ -42,10 +42,10 @@ interface TopicPackViewProps {
 export default function TopicPackView({ concept, pack }: TopicPackViewProps) {
   const [copied, setCopied] = useState(false);
   const { filled, total, missing } = packCompleteness(pack);
-  const primaryItems = pack.items.filter(i => i.category !== 'more');
-  const moreItems = pack.items.filter(i => i.category === 'more');
+  const primaryItems = pack.items.filter((i) => i.category !== 'more');
+  const moreItems = pack.items.filter((i) => i.category === 'more');
   const grouped = Object.fromEntries(
-    PRIMARY_ORDER.map(category => [category, primaryItems.filter(i => i.category === category)]),
+    PRIMARY_ORDER.map((category) => [category, primaryItems.filter((i) => i.category === category)])
   ) as Record<PackCategory, PackItem[]>;
 
   async function copyWritePrompt(text: string) {
@@ -76,7 +76,7 @@ export default function TopicPackView({ concept, pack }: TopicPackViewProps) {
       </div>
 
       <div className="space-y-4">
-        {PRIMARY_ORDER.map(category => {
+        {PRIMARY_ORDER.map((category) => {
           const items = grouped[category];
           if (!items.length) return null;
           return (
@@ -85,7 +85,7 @@ export default function TopicPackView({ concept, pack }: TopicPackViewProps) {
                 {PACK_CATEGORY_LABEL[category]}
               </h3>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map(item => (
+                {items.map((item) => (
                   <PackItemCard
                     key={`${item.category}-${item.url || item.title}`}
                     item={item}
@@ -106,7 +106,7 @@ export default function TopicPackView({ concept, pack }: TopicPackViewProps) {
             {PACK_CATEGORY_LABEL.more} ({moreItems.length})
           </summary>
           <ul className="mt-3 space-y-2">
-            {moreItems.map(item => (
+            {moreItems.map((item) => (
               <li key={item.url}>
                 <a
                   href={item.url}
@@ -128,9 +128,7 @@ export default function TopicPackView({ concept, pack }: TopicPackViewProps) {
       )}
 
       {missing.length > 0 && (
-        <p className="mt-3 text-[11px] text-white/35">
-          Not curated yet: {missing.join(' · ')}
-        </p>
+        <p className="mt-3 text-[11px] text-white/35">Not curated yet: {missing.join(' · ')}</p>
       )}
     </section>
   );
@@ -188,7 +186,9 @@ function PackItemCard({
           <Icon className="h-4 w-4 shrink-0 text-white/45 group-hover:text-white/70" />
           <span className="text-xs font-medium text-white/50">{PACK_CATEGORY_LABEL.problem}</span>
         </div>
-        <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-white">{item.title}</p>
+        <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-white">
+          {item.title}
+        </p>
       </Link>
     );
   }
@@ -198,9 +198,13 @@ function PackItemCard({
       <div className="flex flex-col rounded-xl border border-white/[0.08] bg-white/[0.02] px-3.5 py-3">
         <div className="flex items-center gap-2">
           <Icon className="h-4 w-4 shrink-0 text-white/45" />
-          <span className="text-xs font-medium text-white/50">{PACK_CATEGORY_LABEL[item.category]}</span>
+          <span className="text-xs font-medium text-white/50">
+            {PACK_CATEGORY_LABEL[item.category]}
+          </span>
         </div>
-        <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-white">{item.title}</p>
+        <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-white">
+          {item.title}
+        </p>
       </div>
     );
   }
@@ -214,7 +218,9 @@ function PackItemCard({
     >
       <div className="flex items-center gap-2">
         <Icon className="h-4 w-4 shrink-0 text-white/45 group-hover:text-white/70" />
-        <span className="text-xs font-medium text-white/50">{PACK_CATEGORY_LABEL[item.category]}</span>
+        <span className="text-xs font-medium text-white/50">
+          {PACK_CATEGORY_LABEL[item.category]}
+        </span>
       </div>
       <p className="mt-2 line-clamp-2 text-sm font-medium leading-snug text-white">{item.title}</p>
       <ExternalLink className="mt-2 h-3 w-3 text-white/30 group-hover:text-white/50" />

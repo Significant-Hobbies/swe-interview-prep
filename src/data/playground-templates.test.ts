@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import artifactsData from './artifacts.json';
@@ -9,8 +9,8 @@ const artifacts = (artifactsData as { artifacts: { id: string }[] }).artifacts;
 
 describe('playground templates', () => {
   it('covers every artifact with a template', () => {
-    const missing = artifacts.filter(a => !getPlaygroundTemplate(a.id));
-    expect(missing.map(a => a.id)).toEqual([]);
+    const missing = artifacts.filter((a) => !getPlaygroundTemplate(a.id));
+    expect(missing.map((a) => a.id)).toEqual([]);
   });
 
   it('returns null for unknown artifact ids', () => {
@@ -28,12 +28,12 @@ describe('playground templates', () => {
   it('lists math templates as a non-empty subset', () => {
     const math = listMathPlaygroundTemplates();
     expect(math.length).toBeGreaterThan(0);
-    expect(math.every(t => t.artifactId && t.title)).toBe(true);
+    expect(math.every((t) => t.artifactId && t.title)).toBe(true);
   });
 
   it('artifact ids in templates are unique', () => {
     const src = readFileSync(resolve(__dirname, 'playground-templates.ts'), 'utf8');
-    const ids = [...src.matchAll(/artifactId: '([^']+)'/g)].map(m => m[1]);
+    const ids = [...src.matchAll(/artifactId: '([^']+)'/g)].map((m) => m[1]);
     expect(new Set(ids).size).toBe(ids.length);
   });
 });
