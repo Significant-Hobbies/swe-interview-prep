@@ -18,7 +18,7 @@ export function packSlotFilled(pack: TopicPack | undefined, slot: PackSlot): boo
 }
 
 export function packFilledCount(pack: TopicPack | undefined): number {
-  return PACK_SLOTS.filter(s => packSlotFilled(pack, s)).length;
+  return PACK_SLOTS.filter((s) => packSlotFilled(pack, s)).length;
 }
 
 export function packIsFull(pack: TopicPack | undefined): boolean {
@@ -39,8 +39,11 @@ export interface PackCatalogStats {
 }
 
 export function catalogPackStats(packs: Record<string, TopicPack>): PackCatalogStats {
-  const bySlot = Object.fromEntries(PACK_SLOTS.map(s => [s, 0])) as Record<PackSlot, number>;
-  const byCategory = Object.fromEntries(PACK_CATEGORIES.map(c => [c, 0])) as Record<PackCategory, number>;
+  const bySlot = Object.fromEntries(PACK_SLOTS.map((s) => [s, 0])) as Record<PackSlot, number>;
+  const byCategory = Object.fromEntries(PACK_CATEGORIES.map((c) => [c, 0])) as Record<
+    PackCategory,
+    number
+  >;
   let full = 0;
   let filledSum = 0;
   let itemSum = 0;

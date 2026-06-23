@@ -42,15 +42,15 @@ describe('mergeNotes', () => {
   it('keeps notes unique to either side', () => {
     const merged = mergeNotes(
       [{ id: 'l', updatedAt: '2026-01-01' }],
-      [{ id: 'r', updatedAt: '2026-01-02' }],
+      [{ id: 'r', updatedAt: '2026-01-02' }]
     );
-    expect(merged.map(n => n.id).sort()).toEqual(['l', 'r']);
+    expect(merged.map((n) => n.id).sort()).toEqual(['l', 'r']);
   });
 
   it('keeps the newer note on an id conflict', () => {
     const merged = mergeNotes(
       [{ id: 'x', updatedAt: '2026-01-01' }],
-      [{ id: 'x', updatedAt: '2026-06-01' }],
+      [{ id: 'x', updatedAt: '2026-06-01' }]
     );
     expect(merged).toHaveLength(1);
     expect(merged[0].updatedAt).toBe('2026-06-01');
@@ -59,7 +59,7 @@ describe('mergeNotes', () => {
   it('sorts results newest first', () => {
     const merged = mergeNotes(
       [{ id: 'old', updatedAt: '2026-01-01' }],
-      [{ id: 'new', updatedAt: '2026-12-01' }],
+      [{ id: 'new', updatedAt: '2026-12-01' }]
     );
     expect(merged[0].id).toBe('new');
   });

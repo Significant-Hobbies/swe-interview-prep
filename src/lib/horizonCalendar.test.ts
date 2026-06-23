@@ -5,12 +5,14 @@ import { buildHorizonCalendar } from './horizonCalendar';
 
 describe('buildHorizonCalendar', () => {
   it('returns empty without horizon', () => {
-    expect(buildHorizonCalendar({
-      profile: DEFAULT_PROFILE,
-      mastery: {},
-      rqMastery: {},
-      drillState: {},
-    })).toEqual([]);
+    expect(
+      buildHorizonCalendar({
+        profile: DEFAULT_PROFILE,
+        mastery: {},
+        rqMastery: {},
+        drillState: {},
+      })
+    ).toEqual([]);
   });
 
   it('builds days when horizon set', () => {

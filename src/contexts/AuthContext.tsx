@@ -1,4 +1,4 @@
-import { createContext, useCallback,useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 type AuthFailureStage = 'signin' | 'signup' | 'callback' | 'session' | 'unknown';
 
@@ -229,7 +229,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       client_id: clientId,
       callback: (response: any) => {
         if (response.credential) {
-          login(response.credential).catch(err => {
+          login(response.credential).catch((err) => {
             console.error('Login failed:', err);
             reportAuthFailure({
               provider: 'google',
@@ -291,7 +291,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token: null, isGuest, loading, signInWithGoogle, signOut, continueAsGuest }}>
+    <AuthContext.Provider
+      value={{ user, token: null, isGuest, loading, signInWithGoogle, signOut, continueAsGuest }}
+    >
       {children}
     </AuthContext.Provider>
   );

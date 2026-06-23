@@ -26,8 +26,8 @@ export function WeeklyReport() {
 
   useEffect(() => {
     void fetch('/api/learning?action=weekly', { credentials: 'include' })
-      .then(r => r.json())
-      .then(d => setData(d.review))
+      .then((r) => r.json())
+      .then((d) => setData(d.review))
       .catch(() => {});
   }, []);
 
@@ -79,7 +79,10 @@ export function WeeklyReport() {
         <div className="mt-4 grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-4 sm:grid-cols-4">
           <Stat label="Sessions" value={data.stats.activityCount ?? 0} />
           <Stat label="Minutes" value={data.stats.totalMinutes ?? 0} />
-          <Stat label="Mocks" value={`${data.stats.mockCompleted ?? 0}/${data.stats.mockStarted ?? 0}`} />
+          <Stat
+            label="Mocks"
+            value={`${data.stats.mockCompleted ?? 0}/${data.stats.mockStarted ?? 0}`}
+          />
           <Stat label="Feynman" value={data.stats.feynmanCount ?? 0} />
         </div>
       )}

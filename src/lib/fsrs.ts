@@ -1,6 +1,18 @@
-import { type Card, createEmptyCard, fsrs, generatorParameters, type Grade, Rating, type State } from 'ts-fsrs';
+import {
+  type Card,
+  createEmptyCard,
+  fsrs,
+  generatorParameters,
+  type Grade,
+  Rating,
+  type State,
+} from 'ts-fsrs';
 
-const params = generatorParameters({ enable_fuzz: false, request_retention: 0.9, maximum_interval: 365 });
+const params = generatorParameters({
+  enable_fuzz: false,
+  request_retention: 0.9,
+  maximum_interval: 365,
+});
 const scheduler = fsrs(params);
 
 export type MasteryRow = {
@@ -58,14 +70,18 @@ function cardToRow(card: Card): MasteryRow {
   };
 }
 
-export function reviewConcept(prev: MasteryRow | null, rating: MasteryRating, now = new Date()): MasteryRow {
+export function reviewConcept(
+  prev: MasteryRow | null,
+  rating: MasteryRating,
+  now = new Date()
+): MasteryRow {
   const card = prev ? rowToCard(prev) : createEmptyCard(now);
   const result = scheduler.next(card, now, RATING_MAP[rating] as Grade);
   return cardToRow(result.card);
 }
 
 export function isDue(row: MasteryRow | null, now = new Date()): boolean {
-  if (!row || !row.due) return true;
+  if (!row?.due) return true;
   return new Date(row.due) <= now;
 }
 
@@ -73,5 +89,5 @@ export function decayConfidence(row: MasteryRow, now = new Date()): number {
   if (!row.last_review || !row.stability) return 0;
   const elapsed = (now.getTime() - new Date(row.last_review).getTime()) / 86400000;
   // FSRS retrievability formula approximation: R = (1 + elapsed / (9 * S))^-1
-  return Math.max(0, Math.min(1, Math.pow(1 + elapsed / (9 * row.stability), -1)));
+  return Math.max(0, Math.min(1, (1 + elapsed / (9 * row.stability)) ** -1));
 }

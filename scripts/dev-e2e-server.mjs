@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** Start local API (:3456) + Vite (:5199) for Playwright e2e. */
-import { spawn, spawnSync } from 'child_process';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { spawn, spawnSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -22,7 +22,7 @@ function run(cmd, args, opts = {}) {
     shell: process.platform === 'win32',
     env: { ...e2eEnv, ...opts.env },
   });
-  child.on('exit', code => {
+  child.on('exit', (code) => {
     if (code && code !== 0) process.exit(code);
   });
   return child;

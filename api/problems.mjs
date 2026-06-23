@@ -1,6 +1,6 @@
 import { getDb } from '../shared/db/client.mjs';
 import { requireAuth } from './auth/verify.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 export default async function handler(req, res) {
   const user = await requireAuth(req, res);
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       args: [user.id],
     });
 
-    const problems = result.rows.map(row => ({
+    const problems = result.rows.map((row) => ({
       problemId: row.problem_id,
       problemData: JSON.parse(row.problem_data),
     }));

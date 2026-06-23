@@ -3,17 +3,17 @@ import type { MasteryEntry } from '../hooks/useConcepts';
 import type { LearnerProfile } from './profile';
 
 export function mocksForConcept(conceptId: string): MockPrompt[] {
-  return MOCK_PROMPTS.filter(p => p.conceptIds?.includes(conceptId));
+  return MOCK_PROMPTS.filter((p) => p.conceptIds?.includes(conceptId));
 }
 
 export function recommendMockPrompts(
   profile: LearnerProfile,
   mastery: Record<string, MasteryEntry>,
-  limit = 3,
+  limit = 3
 ): MockPrompt[] {
   const urgent = profile.interviewHorizonDays != null && profile.interviewHorizonDays <= 21;
 
-  const scored = MOCK_PROMPTS.map(prompt => {
+  const scored = MOCK_PROMPTS.map((prompt) => {
     let score = 0;
     if (urgent && prompt.kind === 'system-design') score += 2;
     if (urgent && prompt.kind === 'behavioral') score += 1;
@@ -29,14 +29,17 @@ export function recommendMockPrompts(
   });
 
   return scored
-    .filter(x => x.score > 0)
+    .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score || a.prompt.title.localeCompare(b.prompt.title))
     .slice(0, limit)
-    .map(x => x.prompt);
+    .map((x) => x.prompt);
 }
 
 /** FSRS rating from rubric self-check coverage. */
-export function mockRatingFromRubric(checked: number, total: number): 'again' | 'hard' | 'good' | 'easy' {
+export function mockRatingFromRubric(
+  checked: number,
+  total: number
+): 'again' | 'hard' | 'good' | 'easy' {
   if (total <= 0) return 'good';
   const ratio = checked / total;
   if (ratio >= 0.9) return 'easy';

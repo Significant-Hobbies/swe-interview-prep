@@ -36,9 +36,11 @@ export function RetentionDashboard() {
             <AlertTriangle className="h-3.5 w-3.5" /> Rotting
           </div>
           <ul className="space-y-1.5">
-            {snap.rotting.map(r => (
+            {snap.rotting.map((r) => (
               <li key={r.id} className="flex items-center justify-between text-xs">
-                <Link to={`/concepts/${r.id}`} className="text-white/70 hover:text-white">{r.name}</Link>
+                <Link to={`/concepts/${r.id}`} className="text-white/70 hover:text-white">
+                  {r.name}
+                </Link>
                 <span className="font-mono text-white/40">{Math.round(r.confidence * 100)}%</span>
               </li>
             ))}
@@ -52,10 +54,12 @@ export function RetentionDashboard() {
             <Target className="h-3.5 w-3.5" /> Strong
           </div>
           <ul className="space-y-1.5">
-            {snap.strong.map(s => (
+            {snap.strong.map((s) => (
               <li key={s.id} className="flex items-center justify-between text-xs">
                 <span className="text-white/60">{s.name}</span>
-                <span className="font-mono text-white/40">{Math.round(s.confidence * 100)}% · {s.reps}r</span>
+                <span className="font-mono text-white/40">
+                  {Math.round(s.confidence * 100)}% · {s.reps}r
+                </span>
               </li>
             ))}
           </ul>

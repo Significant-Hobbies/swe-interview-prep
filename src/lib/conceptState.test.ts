@@ -61,13 +61,10 @@ describe('confidence helpers', () => {
 
 describe('rollupMastery', () => {
   it('aggregates statuses across concept ids', () => {
-    const roll = rollupMastery(
-      ['a', 'b', 'c'],
-      {
-        a: entry({ confidence: 0.9, reps: 3 }),
-        b: entry({ confidence: 0.4, reps: 1 }),
-      },
-    );
+    const roll = rollupMastery(['a', 'b', 'c'], {
+      a: entry({ confidence: 0.9, reps: 3 }),
+      b: entry({ confidence: 0.4, reps: 1 }),
+    });
     expect(roll.total).toBe(3);
     expect(roll.mastered).toBe(1);
     expect(roll.untouched).toBe(1);

@@ -1,6 +1,10 @@
 import { fsrs, generatorParameters, Rating, createEmptyCard } from 'ts-fsrs';
 
-const params = generatorParameters({ enable_fuzz: false, request_retention: 0.9, maximum_interval: 365 });
+const params = generatorParameters({
+  enable_fuzz: false,
+  request_retention: 0.9,
+  maximum_interval: 365,
+});
 const scheduler = fsrs(params);
 
 const RATING_MAP = {
@@ -11,7 +15,7 @@ const RATING_MAP = {
 };
 
 function rowToCard(row) {
-  if (!row || !row.last_review) return createEmptyCard(new Date());
+  if (!row?.last_review) return createEmptyCard(new Date());
   return {
     due: row.due ? new Date(row.due) : new Date(),
     stability: row.stability ?? 0,
@@ -49,7 +53,7 @@ export function reviewConcept(prev, rating, now = new Date()) {
 }
 
 export function decayConfidence(row, now = new Date()) {
-  if (!row || !row.last_review || !row.stability) return 0;
+  if (!row?.last_review || !row.stability) return 0;
   const elapsed = (now.getTime() - new Date(row.last_review).getTime()) / 86400000;
-  return Math.max(0, Math.min(1, Math.pow(1 + elapsed / (9 * row.stability), -1)));
+  return Math.max(0, Math.min(1, (1 + elapsed / (9 * row.stability)) ** -1));
 }

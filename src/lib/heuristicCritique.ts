@@ -10,21 +10,25 @@ export interface Critique {
 
 function tokenize(s: string): Set<string> {
   return new Set(
-    s.toLowerCase()
+    s
+      .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, ' ')
       .split(/\s+/)
-      .filter(w => w.length > 3),
+      .filter((w) => w.length > 3)
   );
 }
 
 function keyPhrases(expected: string): string[] {
-  const sentences = expected.split(/[.!?]+/).map(s => s.trim()).filter(Boolean);
+  const sentences = expected
+    .split(/[.!?]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
   const phrases: string[] = [];
   for (const sent of sentences) {
-    const words = sent.split(/\s+/).filter(w => w.length > 3);
+    const words = sent.split(/\s+/).filter((w) => w.length > 3);
     if (words.length >= 3) phrases.push(words.slice(0, 6).join(' ').toLowerCase());
     const nums = sent.match(/\b\d+[%ms]?\b/g);
-    if (nums) phrases.push(...nums.map(n => n.toLowerCase()));
+    if (nums) phrases.push(...nums.map((n) => n.toLowerCase()));
   }
   return [...new Set(phrases)].slice(0, 12);
 }
@@ -32,7 +36,7 @@ function keyPhrases(expected: string): string[] {
 export function critiqueAnswerHeuristic(
   question: string,
   answer: string,
-  expected: string,
+  expected: string
 ): Critique {
   const a = answer.trim();
   if (a.length < 12) {
@@ -53,7 +57,7 @@ export function critiqueAnswerHeuristic(
   const missing: string[] = [];
   for (const p of phrases) {
     const pTokens = p.split(/\s+/);
-    const hit = pTokens.every(t => answerTokens.has(t) || a.toLowerCase().includes(t));
+    const hit = pTokens.every((t) => answerTokens.has(t) || a.toLowerCase().includes(t));
     if (hit) phraseHits++;
     else if (missing.length < 4) missing.push(p.slice(0, 80));
   }

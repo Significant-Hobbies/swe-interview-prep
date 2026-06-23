@@ -44,26 +44,31 @@ function useRecordStore<T>(config: RecordStoreConfig<T>) {
     }
   }, [user, action, field, localKey]);
 
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    void load();
+  }, [load]);
 
-  const set = useCallback((id: string, entry: T) => {
-    setData(prev => {
-      const next = { ...prev, [id]: entry };
-      saveLocal(localKey, next);
-      return next;
-    });
-    if (!user) return;
-    // Debounce DB writes per id so rapid edits collapse into one request.
-    if (timers.current[id]) clearTimeout(timers.current[id]);
-    timers.current[id] = setTimeout(() => {
-      void fetch(`/api/learning?action=${action}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(toPayload(id, entry)),
-      }).catch(() => {});
-    }, 500);
-  }, [user, action, localKey, toPayload]);
+  const set = useCallback(
+    (id: string, entry: T) => {
+      setData((prev) => {
+        const next = { ...prev, [id]: entry };
+        saveLocal(localKey, next);
+        return next;
+      });
+      if (!user) return;
+      // Debounce DB writes per id so rapid edits collapse into one request.
+      if (timers.current[id]) clearTimeout(timers.current[id]);
+      timers.current[id] = setTimeout(() => {
+        void fetch(`/api/learning?action=${action}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(toPayload(id, entry)),
+        }).catch(() => {});
+      }, 500);
+    },
+    [user, action, localKey, toPayload]
+  );
 
   return { data, set };
 }
@@ -80,7 +85,13 @@ export interface ArtifactEntry {
   criteria: number[];
 }
 
-export const EMPTY_ARTIFACT: ArtifactEntry = { status: 'todo', url: '', path: '', notes: '', criteria: [] };
+export const EMPTY_ARTIFACT: ArtifactEntry = {
+  status: 'todo',
+  url: '',
+  path: '',
+  notes: '',
+  criteria: [],
+};
 
 const ARTIFACT_CONFIG: RecordStoreConfig<ArtifactEntry> = {
   localKey: STORE_KEYS.artifacts,
@@ -122,7 +133,8 @@ export function useDrillStore() {
   return {
     drills: data,
     getDrill: (id: string): DrillEntry => data[id] || EMPTY_DRILL,
-    setDrill: (id: string, entry: DrillEntry) => set(id, { ...entry, attempts: (data[id]?.attempts || 0) + 1 }),
+    setDrill: (id: string, entry: DrillEntry) =>
+      set(id, { ...entry, attempts: (data[id]?.attempts || 0) + 1 }),
   };
 }
 
@@ -187,46 +199,57 @@ export function useLearningNotes() {
     }
   }, [user]);
 
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    void load();
+  }, [load]);
 
-  const saveNote = useCallback((note: Partial<LearningNote> & { scope: LearningNote['scope']; body: string }) => {
-    const full: LearningNote = {
-      id: note.id || newId(),
-      scope: note.scope,
-      refId: note.refId || '',
-      title: note.title || '',
-      body: note.body,
-      updatedAt: new Date().toISOString(),
-    };
-    setNotes(prev => {
-      const next = mergeNotes(prev.filter(n => n.id !== full.id), [full]);
-      saveLocal(STORE_KEYS.notes, next);
-      return next;
-    });
-    if (user) {
-      void fetch('/api/learning?action=notes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(full),
-      }).catch(() => {});
-    }
-    return full;
-  }, [user]);
+  const saveNote = useCallback(
+    (note: Partial<LearningNote> & { scope: LearningNote['scope']; body: string }) => {
+      const full: LearningNote = {
+        id: note.id || newId(),
+        scope: note.scope,
+        refId: note.refId || '',
+        title: note.title || '',
+        body: note.body,
+        updatedAt: new Date().toISOString(),
+      };
+      setNotes((prev) => {
+        const next = mergeNotes(
+          prev.filter((n) => n.id !== full.id),
+          [full]
+        );
+        saveLocal(STORE_KEYS.notes, next);
+        return next;
+      });
+      if (user) {
+        void fetch('/api/learning?action=notes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(full),
+        }).catch(() => {});
+      }
+      return full;
+    },
+    [user]
+  );
 
-  const deleteNote = useCallback((id: string) => {
-    setNotes(prev => {
-      const next = prev.filter(n => n.id !== id);
-      saveLocal(STORE_KEYS.notes, next);
-      return next;
-    });
-    if (user) {
-      void fetch(`/api/learning?action=notes&id=${encodeURIComponent(id)}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      }).catch(() => {});
-    }
-  }, [user]);
+  const deleteNote = useCallback(
+    (id: string) => {
+      setNotes((prev) => {
+        const next = prev.filter((n) => n.id !== id);
+        saveLocal(STORE_KEYS.notes, next);
+        return next;
+      });
+      if (user) {
+        void fetch(`/api/learning?action=notes&id=${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        }).catch(() => {});
+      }
+    },
+    [user]
+  );
 
   return { notes, saveNote, deleteNote };
 }
@@ -250,13 +273,13 @@ const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function useFocusMode() {
   const [state, setState] = useState<FocusModeState>(() =>
-    loadLocal<FocusModeState>(STORE_KEYS.focusMode, EMPTY_FOCUS),
+    loadLocal<FocusModeState>(STORE_KEYS.focusMode, EMPTY_FOCUS)
   );
 
   const setEnabled = useCallback((next: boolean) => {
-    setState(prev => {
+    setState((prev) => {
       const now = Date.now();
-      const sessions = prev.sessions.filter(t => now - t < NINETY_DAYS_MS);
+      const sessions = prev.sessions.filter((t) => now - t < NINETY_DAYS_MS);
       // Log a session only on the off → on transition.
       if (next && !prev.enabled) sessions.push(now);
       const updated = { enabled: next, sessions };
@@ -269,8 +292,8 @@ export function useFocusMode() {
   // consumer's read site rather than during this hook's render. The count
   // is naturally bounded by the 7-day window in the filter.
   const sessionsThisWeek = useCallback(
-    () => state.sessions.filter(t => Date.now() - t < SEVEN_DAYS_MS).length,
-    [state.sessions],
+    () => state.sessions.filter((t) => Date.now() - t < SEVEN_DAYS_MS).length,
+    [state.sessions]
   );
 
   return { enabled: state.enabled, setEnabled, sessionsThisWeek };
@@ -320,10 +343,10 @@ export function useUserElo() {
 
   useEffect(() => {
     fetch('/api/learning?action=elo', { credentials: 'include' })
-      .then(r => r.json())
-      .then(data => {
+      .then((r) => r.json())
+      .then((data) => {
         if (data.state?.v === 2) {
-          setState(prev => {
+          setState((prev) => {
             const merged = {
               elo: { ...prev.elo, ...data.state.elo },
               solves: { ...prev.solves, ...data.state.solves },
@@ -339,13 +362,13 @@ export function useUserElo() {
 
   const getElo = useCallback(
     (roadmapId: string): number => state.elo[roadmapId] ?? DEFAULT_USER_ELO,
-    [state.elo],
+    [state.elo]
   );
 
   /** Record a drill result against every roadmap the concept belongs to. */
   const recordResult = useCallback((roadmapIds: string[], problemElo: number, score: number) => {
     if (!roadmapIds.length) return;
-    setState(prev => {
+    setState((prev) => {
       const elo = { ...prev.elo };
       const solves = { ...prev.solves };
       for (const rid of roadmapIds) {

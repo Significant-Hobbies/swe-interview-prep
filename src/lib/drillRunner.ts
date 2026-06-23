@@ -23,7 +23,7 @@ function normalize(s: string): string {
 export function runDrillTests(
   userCode: string,
   tests: DrillTestCase[],
-  _language: 'typescript' | 'javascript' = 'typescript',
+  _language: 'typescript' | 'javascript' = 'typescript'
 ): DrillTestResult {
   const logs: string[] = [];
   const fakeConsole = {
@@ -40,17 +40,22 @@ export function runDrillTests(
       fn(fakeConsole);
       const out = normalize(logs.join('\n'));
       const expected = Array.isArray(t.expect) ? t.expect : [t.expect];
-      const ok = expected.every(e => out.includes(e));
+      const ok = expected.every((e) => out.includes(e));
       if (!ok) {
         return {
           passed: false,
           output: out,
           errors: '',
-          message: `Test ${i + 1} failed: expected output containing ${expected.map(e => JSON.stringify(e)).join(' and ')}, got ${JSON.stringify(out)}`,
+          message: `Test ${i + 1} failed: expected output containing ${expected.map((e) => JSON.stringify(e)).join(' and ')}, got ${JSON.stringify(out)}`,
         };
       }
     }
-    return { passed: true, output: normalize(logs.join('\n')), errors: '', message: 'All tests passed.' };
+    return {
+      passed: true,
+      output: normalize(logs.join('\n')),
+      errors: '',
+      message: 'All tests passed.',
+    };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return { passed: false, output: normalize(logs.join('\n')), errors: msg, message: msg };

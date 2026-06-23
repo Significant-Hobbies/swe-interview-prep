@@ -7,9 +7,9 @@
  *
  * Run: pnpm sync:concept-packs
  */
-import { readFileSync, writeFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { isSTierSource } from './source-tier.mjs';
 import { sTierSlotsForConcept } from './s-tier-catalog.mjs';
@@ -18,7 +18,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const concepts = JSON.parse(readFileSync(join(root, 'src/data/concepts.json'), 'utf8')).concepts;
 const drills = JSON.parse(readFileSync(join(root, 'src/data/drills.json'), 'utf8')).drills;
 
-const drillById = Object.fromEntries(drills.map(d => [d.id, d]));
+const drillById = Object.fromEntries(drills.map((d) => [d.id, d]));
 const MEDIA_SLOTS = ['video', 'paper', 'blog', 'book'];
 const MORE_CAP = 3;
 
@@ -71,19 +71,19 @@ function buildPack(concept) {
       }
     }
     if (
-      !placed
-      && moreCount < MORE_CAP
-      && ![...MEDIA_SLOTS].some(s => items.some(i => i.category === s && i.url === r.url))
+      !placed &&
+      moreCount < MORE_CAP &&
+      ![...MEDIA_SLOTS].some((s) => items.some((i) => i.category === s && i.url === r.url))
     ) {
       add('more', r.title, r.url);
     }
   }
 
   const primaryUrls = new Set(
-    items.filter(i => MEDIA_SLOTS.includes(i.category)).map(i => i.url),
+    items.filter((i) => MEDIA_SLOTS.includes(i.category)).map((i) => i.url)
   );
   const pack = {
-    items: items.filter(i => i.category !== 'more' || !primaryUrls.has(i.url)),
+    items: items.filter((i) => i.category !== 'more' || !primaryUrls.has(i.url)),
   };
 
   const drillId = concept.drills?.[0];
@@ -146,6 +146,6 @@ console.log('Wrote concept-packs.json (items schema)', stats);
 
 if (violations.length) {
   console.error('S-tier violations:', violations.length);
-  violations.slice(0, 20).forEach(v => console.error(`  ${v.id} ${v.category}: ${v.title}`));
+  violations.slice(0, 20).forEach((v) => console.error(`  ${v.id} ${v.category}: ${v.title}`));
   process.exitCode = 1;
 }

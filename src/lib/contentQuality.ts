@@ -10,20 +10,24 @@ const GENERIC_ARTIFACT_CRITERIA = 'Demonstrates the core mechanism from the ment
 
 /** LeetCode metadata stubs — external practice, not in-app automated drills. */
 export function isMetadataDrill(drill: Drill): boolean {
-  return drill.id.startsWith('lc-') || (drill as Drill & { source?: string }).source === 'leetcode-metadata';
+  return (
+    drill.id.startsWith('lc-') ||
+    (drill as Drill & { source?: string }).source === 'leetcode-metadata'
+  );
 }
 
 export function isEditorialDrill(drill: Drill): boolean {
   if (isMetadataDrill(drill)) return false;
   if (drill.id.startsWith('drill-')) return false;
-  if (GENERIC_DRILL_MARKERS.every(m => drill.prompt.includes(m))) return false;
+  if (GENERIC_DRILL_MARKERS.every((m) => drill.prompt.includes(m))) return false;
   return true;
 }
 
 export function isEditorialArtifact(artifact: Artifact): boolean {
   if (artifact.id.startsWith('build-')) return false;
-  const generic = artifact.successCriteria?.every(c => !c.includes(GENERIC_ARTIFACT_CRITERIA));
-  if (!generic && artifact.successCriteria?.some(c => c.includes(GENERIC_ARTIFACT_CRITERIA))) return false;
+  const generic = artifact.successCriteria?.every((c) => !c.includes(GENERIC_ARTIFACT_CRITERIA));
+  if (!generic && artifact.successCriteria?.some((c) => c.includes(GENERIC_ARTIFACT_CRITERIA)))
+    return false;
   return true;
 }
 

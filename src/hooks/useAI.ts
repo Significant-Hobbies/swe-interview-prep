@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef,useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { getAuthToken, useAuth } from '../contexts/AuthContext';
 import { API_URL } from '../lib/api-url';
 
 export interface AIConfig {
@@ -66,21 +66,27 @@ You have context about the problem they're solving and their current code.`;
 // Maps frontend local provider names to server-side tool names
 const LOCAL_TOOL_MAP: Record<string, string> = {
   'claude-code': 'claude',
-  'codex': 'codex',
+  codex: 'codex',
   'gemini-cli': 'gemini',
 };
 
-async function streamLocalAI(_config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
+async function streamLocalAI(
+  _config: AIConfig,
+  messages: AIMessage[],
+  systemContext: string,
+  onChunk: (text: string) => void,
+  signal: AbortSignal
+) {
   const tool = LOCAL_TOOL_MAP[_config.model] || LOCAL_TOOL_MAP['claude-code'] || 'claude';
   const token = getAuthToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = `Bearer ${token}`;
+  if (token) headers.Authorization = `Bearer ${token}`;
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
-      systemPrompt: SYSTEM_PROMPT + '\n\n' + systemContext,
+      systemPrompt: `${SYSTEM_PROMPT}\n\n${systemContext}`,
       tool,
     }),
     signal,
@@ -91,7 +97,7 @@ async function streamLocalAI(_config: AIConfig, messages: AIMessage[], systemCon
     throw new Error(`Local AI server error: ${res.status} - ${err}`);
   }
 
-  const reader = res.body!.getReader();
+  const reader = res.body?.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
 
@@ -115,7 +121,13 @@ async function streamLocalAI(_config: AIConfig, messages: AIMessage[], systemCon
   }
 }
 
-async function streamRemoteAI(config: AIConfig, messages: AIMessage[], systemContext: string, onChunk: (text: string) => void, signal: AbortSignal) {
+async function streamRemoteAI(
+  config: AIConfig,
+  messages: AIMessage[],
+  systemContext: string,
+  onChunk: (text: string) => void,
+  signal: AbortSignal
+) {
   const res = await fetch('/api/ai/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -124,7 +136,7 @@ async function streamRemoteAI(config: AIConfig, messages: AIMessage[], systemCon
       apiKey: config.apiKey,
       model: config.model,
       messages,
-      systemPrompt: SYSTEM_PROMPT + '\n\n' + systemContext,
+      systemPrompt: `${SYSTEM_PROMPT}\n\n${systemContext}`,
     }),
     signal,
   });
@@ -134,7 +146,7 @@ async function streamRemoteAI(config: AIConfig, messages: AIMessage[], systemCon
     throw new Error(`AI API error: ${res.status} - ${err}`);
   }
 
-  const reader = res.body!.getReader();
+  const reader = res.body?.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
 
@@ -192,16 +204,16 @@ export function useAI(problemId?: string) {
       if (!token) return;
 
       fetch(`${API_URL}/api/chats?problemId=${problemId}`, {
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.messages && Array.isArray(data.messages)) {
             setMessages(data.messages as AIMessage[]);
           }
           return undefined;
         })
-        .catch(err => console.error('Failed to load chats:', err));
+        .catch((err) => console.error('Failed to load chats:', err));
     } else {
       // Guest: load from localStorage
       const all = loadLocalChats();
@@ -211,75 +223,82 @@ export function useAI(problemId?: string) {
     }
   }, [user, problemId]);
 
-  const persistMessages = useCallback((msgs: AIMessage[]) => {
-    if (!problemId) return;
-    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-    saveTimerRef.current = setTimeout(() => {
-      if (user) {
-        // Signed in: save to backend API
-        const token = getAuthToken();
-        if (!token) return;
+  const persistMessages = useCallback(
+    (msgs: AIMessage[]) => {
+      if (!problemId) return;
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      saveTimerRef.current = setTimeout(() => {
+        if (user) {
+          // Signed in: save to backend API
+          const token = getAuthToken();
+          if (!token) return;
 
-        fetch(`${API_URL}/api/chats`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ problemId, messages: msgs }),
-        }).catch(err => console.error('Failed to save chats:', err));
-      } else {
-        // Guest: save to localStorage
-        const all = loadLocalChats();
-        all[problemId] = msgs;
-        saveLocalChats(all);
+          fetch(`${API_URL}/api/chats`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ problemId, messages: msgs }),
+          }).catch((err) => console.error('Failed to save chats:', err));
+        } else {
+          // Guest: save to localStorage
+          const all = loadLocalChats();
+          all[problemId] = msgs;
+          saveLocalChats(all);
+        }
+      }, 300);
+    },
+    [user, problemId]
+  );
+
+  const ask = useCallback(
+    async (userMessage: string, config: AIConfig, systemContext: string, signal?: AbortSignal) => {
+      setError(null);
+      const newMessages: AIMessage[] = [...messages, { role: 'user', content: userMessage }];
+      setMessages(newMessages);
+      setIsStreaming(true);
+
+      let fullResponse = '';
+      setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
+
+      const onChunk = (text: string) => {
+        fullResponse += text;
+        setMessages((prev) => [...prev.slice(0, -1), { role: 'assistant', content: fullResponse }]);
+      };
+
+      try {
+        const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
+        const streamFn = isLocal ? streamLocalAI : streamRemoteAI;
+
+        await streamFn(
+          config,
+          newMessages,
+          systemContext,
+          onChunk,
+          signal || new AbortController().signal
+        );
+
+        // Persist after streaming completes
+        const finalMessages: AIMessage[] = [
+          ...newMessages,
+          { role: 'assistant', content: fullResponse },
+        ];
+        persistMessages(finalMessages);
+      } catch (e: any) {
+        if (e.name !== 'AbortError') {
+          setError(e.message);
+        }
+        // Still persist the user message + partial response
+        if (fullResponse) {
+          persistMessages([...newMessages, { role: 'assistant', content: fullResponse }]);
+        }
+      } finally {
+        setIsStreaming(false);
       }
-    }, 300);
-  }, [user, problemId]);
-
-  const ask = useCallback(async (
-    userMessage: string,
-    config: AIConfig,
-    systemContext: string,
-    signal?: AbortSignal,
-  ) => {
-    setError(null);
-    const newMessages: AIMessage[] = [...messages, { role: 'user', content: userMessage }];
-    setMessages(newMessages);
-    setIsStreaming(true);
-
-    let fullResponse = '';
-    setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
-
-    const onChunk = (text: string) => {
-      fullResponse += text;
-      setMessages(prev => [
-        ...prev.slice(0, -1),
-        { role: 'assistant', content: fullResponse },
-      ]);
-    };
-
-    try {
-      const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
-      const streamFn = isLocal ? streamLocalAI : streamRemoteAI;
-
-      await streamFn(config, newMessages, systemContext, onChunk, signal || new AbortController().signal);
-
-      // Persist after streaming completes
-      const finalMessages: AIMessage[] = [...newMessages, { role: 'assistant', content: fullResponse }];
-      persistMessages(finalMessages);
-    } catch (e: any) {
-      if (e.name !== 'AbortError') {
-        setError(e.message);
-      }
-      // Still persist the user message + partial response
-      if (fullResponse) {
-        persistMessages([...newMessages, { role: 'assistant', content: fullResponse }]);
-      }
-    } finally {
-      setIsStreaming(false);
-    }
-  }, [messages, persistMessages]);
+    },
+    [messages, persistMessages]
+  );
 
   const clearMessages = useCallback(() => {
     setMessages([]);
@@ -291,8 +310,8 @@ export function useAI(problemId?: string) {
 
       fetch(`${API_URL}/api/chats?problemId=${problemId}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` },
-      }).catch(err => console.error('Failed to delete chats:', err));
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch((err) => console.error('Failed to delete chats:', err));
     } else {
       const all = loadLocalChats();
       delete all[problemId];

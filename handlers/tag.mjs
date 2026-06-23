@@ -6,7 +6,10 @@ import conceptsData from '../src/data/concepts.json' with { type: 'json' };
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 const CONCEPTS = conceptsData.concepts ?? [];
@@ -39,7 +42,7 @@ export default async function handler(req, res) {
   if (!code || code.length < 30) return res.status(200).json({ concepts: [] });
 
   const concepts = loadConcepts();
-  const conceptList = concepts.map(c => `${c.id}: ${c.name}`).join('\n');
+  const conceptList = concepts.map((c) => `${c.id}: ${c.name}`).join('\n');
 
   const prompt = `Concept catalog:
 ${conceptList}
@@ -54,7 +57,7 @@ ${code.slice(0, 4000)}
 
 Tag now. JSON only.`;
 
-  const useAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+  const useAI = aiConfig?.endpointUrl && aiConfig.apiKey && aiConfig.model;
   if (useAI) {
     try {
       const text = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 600 });

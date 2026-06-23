@@ -66,7 +66,9 @@ describe('concept taxonomy', () => {
 
   it('prereq DAG has no cycles', () => {
     const map = Object.fromEntries(concepts.map((c: any) => [c.id, c.prerequisites]));
-    const WHITE = 0, GRAY = 1, BLACK = 2;
+    const WHITE = 0,
+      GRAY = 1,
+      BLACK = 2;
     const color: Record<string, number> = {};
     for (const id of conceptIds) color[id as string] = WHITE;
     const cycles: string[] = [];
@@ -112,26 +114,87 @@ describe('concept taxonomy', () => {
 
   it('preserves all 79 legacy concept ids', () => {
     const legacy = [
-      'array-hashing', 'two-pointers', 'sliding-window', 'stack', 'binary-search',
-      'linked-list', 'trees', 'tries', 'heap', 'backtracking', 'graphs', 'shortest-path',
-      'union-find', 'dp-1d', 'dp-2d', 'greedy', 'intervals', 'math-geometry', 'bit-manipulation',
-      'object-modeling', 'state-management', 'strategy-pattern', 'observer-pattern',
-      'factory-creational', 'decorator-structural', 'concurrency-design', 'command-chain',
-      'booking-inventory', 'game-design', 'load-balancing', 'caching', 'consistent-hashing',
-      'sharding', 'replication', 'consensus', 'cap-theorem', 'message-queues', 'rate-limiting',
-      'storage-retrieval', 'search-discovery', 'social-media', 'messaging-realtime',
-      'streaming-media', 'distributed-infra', 'location-transport', 'ecommerce-payments',
-      'collaboration-productivity', 'monitoring-analytics', 'api-design', 'auth-systems',
-      'ml-math', 'ml-gradient-descent', 'ml-backprop', 'ml-softmax-xent', 'ml-adamw',
-      'ml-tokenization', 'ml-language-modeling', 'ml-sampling', 'ml-embeddings',
-      'ml-self-attention', 'ml-multi-head', 'ml-transformer-block', 'ml-training',
-      'ml-checkpointing', 'ml-lora', 'ml-data-engineering', 'ml-browser-runtime',
-      'ml-webgpu', 'ml-evaluation', 'leadership-and-influence', 'conflict-resolution',
-      'problem-solving-and-decision-making', 'teamwork-and-collaboration',
-      'failure-and-learning', 'communication', 'time-management-and-prioritization',
-      'innovation-and-creativity', 'customer-obsession', 'ownership-and-accountability',
+      'array-hashing',
+      'two-pointers',
+      'sliding-window',
+      'stack',
+      'binary-search',
+      'linked-list',
+      'trees',
+      'tries',
+      'heap',
+      'backtracking',
+      'graphs',
+      'shortest-path',
+      'union-find',
+      'dp-1d',
+      'dp-2d',
+      'greedy',
+      'intervals',
+      'math-geometry',
+      'bit-manipulation',
+      'object-modeling',
+      'state-management',
+      'strategy-pattern',
+      'observer-pattern',
+      'factory-creational',
+      'decorator-structural',
+      'concurrency-design',
+      'command-chain',
+      'booking-inventory',
+      'game-design',
+      'load-balancing',
+      'caching',
+      'consistent-hashing',
+      'sharding',
+      'replication',
+      'consensus',
+      'cap-theorem',
+      'message-queues',
+      'rate-limiting',
+      'storage-retrieval',
+      'search-discovery',
+      'social-media',
+      'messaging-realtime',
+      'streaming-media',
+      'distributed-infra',
+      'location-transport',
+      'ecommerce-payments',
+      'collaboration-productivity',
+      'monitoring-analytics',
+      'api-design',
+      'auth-systems',
+      'ml-math',
+      'ml-gradient-descent',
+      'ml-backprop',
+      'ml-softmax-xent',
+      'ml-adamw',
+      'ml-tokenization',
+      'ml-language-modeling',
+      'ml-sampling',
+      'ml-embeddings',
+      'ml-self-attention',
+      'ml-multi-head',
+      'ml-transformer-block',
+      'ml-training',
+      'ml-checkpointing',
+      'ml-lora',
+      'ml-data-engineering',
+      'ml-browser-runtime',
+      'ml-webgpu',
+      'ml-evaluation',
+      'leadership-and-influence',
+      'conflict-resolution',
+      'problem-solving-and-decision-making',
+      'teamwork-and-collaboration',
+      'failure-and-learning',
+      'communication',
+      'time-management-and-prioritization',
+      'innovation-and-creativity',
+      'customer-obsession',
+      'ownership-and-accountability',
     ];
-    const missing = legacy.filter(id => !conceptIds.has(id));
+    const missing = legacy.filter((id) => !conceptIds.has(id));
     expect(missing).toEqual([]);
   });
 });
@@ -140,10 +203,13 @@ describe('cross-file integrity', () => {
   it('concept references resolve to artifacts/drills/review-questions', () => {
     const broken: string[] = [];
     for (const c of concepts) {
-      for (const a of c.artifacts || []) if (!artifactIds.has(a)) broken.push(`${c.id} artifact→${a}`);
+      for (const a of c.artifacts || [])
+        if (!artifactIds.has(a)) broken.push(`${c.id} artifact→${a}`);
       for (const d of c.drills || []) if (!drillIds.has(d)) broken.push(`${c.id} drill→${d}`);
-      for (const q of c.reviewQuestions || []) if (!reviewQuestionIds.has(q)) broken.push(`${c.id} rq→${q}`);
-      for (const p of c.projectApplications || []) if (!projectIds.has(p)) broken.push(`${c.id} project→${p}`);
+      for (const q of c.reviewQuestions || [])
+        if (!reviewQuestionIds.has(q)) broken.push(`${c.id} rq→${q}`);
+      for (const p of c.projectApplications || [])
+        if (!projectIds.has(p)) broken.push(`${c.id} project→${p}`);
     }
     expect(broken).toEqual([]);
   });
@@ -155,7 +221,10 @@ describe('cross-file integrity', () => {
 
   it('every in-app drill has at least one testCase', () => {
     const missing = drills
-      .filter((d: { id: string; testCases?: unknown[] }) => !isMetadataDrill(d as any) && !d.testCases?.length)
+      .filter(
+        (d: { id: string; testCases?: unknown[] }) =>
+          !isMetadataDrill(d as any) && !d.testCases?.length
+      )
       .map((d: { id: string }) => d.id);
     expect(missing).toEqual([]);
   });
@@ -163,21 +232,23 @@ describe('cross-file integrity', () => {
   it('concepts link at least one catalog drill when drills exist for conceptId', () => {
     const byConcept = Object.groupBy(
       drills as { id: string; conceptId: string }[],
-      d => d.conceptId,
+      (d) => d.conceptId
     );
     const unlinked = concepts
       .filter((c: { id: string; drills?: string[] }) => {
         const catalog = byConcept[c.id] ?? [];
         if (!catalog.length) return false;
         const linked = new Set(c.drills ?? []);
-        return !catalog.some(d => linked.has(d.id));
+        return !catalog.some((d) => linked.has(d.id));
       })
       .map((c: { id: string }) => c.id);
     expect(unlinked).toEqual([]);
   });
 
   it('review questions reference existing concepts', () => {
-    const broken = reviewQuestions.filter((q: any) => !conceptIds.has(q.conceptId)).map((q: any) => q.id);
+    const broken = reviewQuestions
+      .filter((q: any) => !conceptIds.has(q.conceptId))
+      .map((q: any) => q.id);
     expect(broken).toEqual([]);
   });
 
@@ -206,8 +277,17 @@ describe('cross-file integrity', () => {
 
 describe('learning loop coverage (roadmap.sh parity bar)', () => {
   const spine = [
-    'tokenization', 'bm25', 'ranking-metrics', 'search-evals', 'hybrid-search', 'hnsw', 'rag',
-    'hypothesis-testing', 'probability-fundamentals', 'returns-volatility', 'momentum-backtest',
+    'tokenization',
+    'bm25',
+    'ranking-metrics',
+    'search-evals',
+    'hybrid-search',
+    'hnsw',
+    'rag',
+    'hypothesis-testing',
+    'probability-fundamentals',
+    'returns-volatility',
+    'momentum-backtest',
   ];
 
   it('spine concepts have editorial drills linked', () => {
@@ -225,7 +305,7 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
   });
 
   it('spine concepts have editorial artifacts linked', () => {
-    const missing = spine.filter(id => {
+    const missing = spine.filter((id) => {
       const c = concepts.find((x: { id: string }) => x.id === id);
       return !(c?.artifacts ?? []).some((aid: string) => !aid.startsWith('build-'));
     });
@@ -233,18 +313,21 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
   });
 
   it('every concept has at least one review question', () => {
-    const missing = concepts.filter((c: { reviewQuestions?: string[] }) => !(c.reviewQuestions?.length));
+    const missing = concepts.filter(
+      (c: { reviewQuestions?: string[] }) => !c.reviewQuestions?.length
+    );
     expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
   });
 
   it('ml-* concepts have editorial drills linked', () => {
     const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
     const ml = concepts.filter((c: { id: string }) => c.id.startsWith('ml-'));
-    const missing = ml.filter((c: { drills?: string[] }) =>
-      !(c.drills ?? []).some((did: string) => {
-        const d = drillById[did];
-        return d && !did.startsWith('drill-');
-      }),
+    const missing = ml.filter(
+      (c: { drills?: string[] }) =>
+        !(c.drills ?? []).some((did: string) => {
+          const d = drillById[did];
+          return d && !did.startsWith('drill-');
+        })
     );
     expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
   });
@@ -258,15 +341,16 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
   it('every concept has a drill or review question for practice', () => {
     const missing = concepts.filter(
       (c: { drills?: string[]; reviewQuestions?: string[] }) =>
-        !(c.drills?.length) && !(c.reviewQuestions?.length),
+        !c.drills?.length && !c.reviewQuestions?.length
     );
     expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
   });
 
   it('every concept has at least one editorial drill linked', () => {
     const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
-    const missing = concepts.filter((c: { id: string; drills?: string[] }) =>
-      !(c.drills ?? []).some((did: string) => drillById[did] && !did.startsWith('drill-')),
+    const missing = concepts.filter(
+      (c: { id: string; drills?: string[] }) =>
+        !(c.drills ?? []).some((did: string) => drillById[did] && !did.startsWith('drill-'))
     );
     expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
   });
@@ -274,23 +358,28 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
   it('dsa track concepts have editorial drills linked', () => {
     const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
     const track = concepts.filter((c: { tags: string[] }) => c.tags.includes('dsa'));
-    const missing = track.filter((c: { drills?: string[] }) =>
-      !(c.drills ?? []).some((did: string) => {
-        const d = drillById[did];
-        return d && !did.startsWith('drill-');
-      }),
+    const missing = track.filter(
+      (c: { drills?: string[] }) =>
+        !(c.drills ?? []).some((did: string) => {
+          const d = drillById[did];
+          return d && !did.startsWith('drill-');
+        })
     );
     expect(missing.map((c: { id: string }) => c.id)).toEqual([]);
   });
 
   it('dsa and product tracks have editorial drills on priority concepts', () => {
     const priority = [
-      'array-hashing', 'two-pointers', 'graphs',
-      'leadership-and-influence', 'conflict-resolution',
-      'rate-limiting', 'idempotency',
+      'array-hashing',
+      'two-pointers',
+      'graphs',
+      'leadership-and-influence',
+      'conflict-resolution',
+      'rate-limiting',
+      'idempotency',
     ];
     const drillById = Object.fromEntries(drills.map((d: { id: string }) => [d.id, d]));
-    const missing = priority.filter(id => {
+    const missing = priority.filter((id) => {
       const c = concepts.find((x: { id: string }) => x.id === id);
       return !(c?.drills ?? []).some((did: string) => drillById[did] && !did.startsWith('drill-'));
     });
@@ -299,7 +388,14 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
 
   it('priority external tags have at least 15 curated links', () => {
     const ext = externalResourcesData as { byTag: Record<string, unknown[]> };
-    for (const tag of ['mathematics', 'probability', 'statistics', 'quant', 'search-ir', 'vector-db']) {
+    for (const tag of [
+      'mathematics',
+      'probability',
+      'statistics',
+      'quant',
+      'search-ir',
+      'vector-db',
+    ]) {
       expect((ext.byTag[tag] ?? []).length, tag).toBeGreaterThanOrEqual(15);
     }
   });

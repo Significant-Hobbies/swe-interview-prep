@@ -35,11 +35,16 @@ describe('parseJSON', () => {
   });
 
   it('extracts JSON from surrounding prose', () => {
-    expect(parseJSON('Sure! Here is the result:\n{"a":1, "b":2}\nLet me know.')).toEqual({ a: 1, b: 2 });
+    expect(parseJSON('Sure! Here is the result:\n{"a":1, "b":2}\nLet me know.')).toEqual({
+      a: 1,
+      b: 2,
+    });
   });
 
   it('extracts balanced object with strings containing braces', () => {
-    expect(parseJSON('preamble {"msg": "hello { world }"} trailing')).toEqual({ msg: 'hello { world }' });
+    expect(parseJSON('preamble {"msg": "hello { world }"} trailing')).toEqual({
+      msg: 'hello { world }',
+    });
   });
 
   it('extracts JSON array from prose', () => {

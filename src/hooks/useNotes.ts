@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef,useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { getAuthToken,useAuth } from '../contexts/AuthContext';
+import { getAuthToken, useAuth } from '../contexts/AuthContext';
 import { API_URL } from '../lib/api-url';
 
 const LOCAL_NOTES_KEY = 'dsa-prep-notes';
@@ -33,14 +33,14 @@ export function useNotes(problemId: string | undefined) {
       if (!token) return;
 
       fetch(`${API_URL}/api/notes?problemId=${problemId}`, {
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           setNotes(data.notes || '');
           return undefined;
         })
-        .catch(err => console.error('Failed to load notes:', err));
+        .catch((err) => console.error('Failed to load notes:', err));
     } else {
       // Guest: load from localStorage
       const all = loadLocalNotes();
@@ -48,33 +48,36 @@ export function useNotes(problemId: string | undefined) {
     }
   }, [user, problemId]);
 
-  const saveNotes = useCallback((value: string) => {
-    setNotes(value);
-    if (!problemId) return;
+  const saveNotes = useCallback(
+    (value: string) => {
+      setNotes(value);
+      if (!problemId) return;
 
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      if (user) {
-        // Signed in: save to backend API
-        const token = getAuthToken();
-        if (!token) return;
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        if (user) {
+          // Signed in: save to backend API
+          const token = getAuthToken();
+          if (!token) return;
 
-        fetch(`${API_URL}/api/notes`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ problemId, notes: value }),
-        }).catch(err => console.error('Failed to save notes:', err));
-      } else {
-        // Guest: save to localStorage
-        const all = loadLocalNotes();
-        all[problemId] = value;
-        saveLocalNotes(all);
-      }
-    }, 500);
-  }, [user, problemId]);
+          fetch(`${API_URL}/api/notes`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ problemId, notes: value }),
+          }).catch((err) => console.error('Failed to save notes:', err));
+        } else {
+          // Guest: save to localStorage
+          const all = loadLocalNotes();
+          all[problemId] = value;
+          saveLocalNotes(all);
+        }
+      }, 500);
+    },
+    [user, problemId]
+  );
 
   return { notes, saveNotes };
 }

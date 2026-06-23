@@ -3,9 +3,9 @@
  * Build src/data/library/concept-index.json by string-matching concepts
  * against library section titles + content. Top 3 sections per concept.
  */
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -24,8 +24,8 @@ const KEYWORDS = {
   'sliding-window': ['sliding window'],
   'binary-search': ['binary search'],
   'linked-list': ['linked list'],
-  'tries': ['trie', 'prefix tree'],
-  'heap': ['heap', 'priority queue'],
+  tries: ['trie', 'prefix tree'],
+  heap: ['heap', 'priority queue'],
   'union-find': ['union find', 'disjoint set'],
   'dp-1d': ['dynamic programming', 'memoization'],
   'dp-2d': ['dynamic programming', 'knapsack', 'edit distance'],
@@ -33,14 +33,14 @@ const KEYWORDS = {
   'load-balancing': ['load balancer', 'load balancing'],
   'consistent-hashing': ['consistent hashing', 'consistent hash'],
   'cap-theorem': ['cap theorem', 'consistency model', 'pacelc'],
-  'consensus': ['raft', 'paxos', 'consensus'],
+  consensus: ['raft', 'paxos', 'consensus'],
   'message-queues': ['message queue', 'kafka', 'rabbitmq'],
   'rate-limiting': ['rate limit', 'throttling', 'token bucket'],
   'storage-retrieval': ['lsm', 'b-tree', 'storage engine', 'wal'],
   'search-discovery': ['inverted index', 'search', 'autocomplete'],
-  'replication': ['replication', 'leader follower', 'multi-leader'],
-  'sharding': ['sharding', 'partition'],
-  'caching': ['cache', 'caching', 'eviction'],
+  replication: ['replication', 'leader follower', 'multi-leader'],
+  sharding: ['sharding', 'partition'],
+  caching: ['cache', 'caching', 'eviction'],
   'streaming-media': ['cdn', 'video stream', 'transcoding'],
   'social-media': ['feed', 'timeline', 'fan-out'],
   'messaging-realtime': ['websocket', 'real-time', 'chat system'],
@@ -60,8 +60,11 @@ const KEYWORDS = {
 
 function tokens(name, id) {
   const extra = KEYWORDS[id] || [];
-  const base = name.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
-  return [base, ...extra.map(k => k.toLowerCase())];
+  const base = name
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]/g, '')
+    .trim();
+  return [base, ...extra.map((k) => k.toLowerCase())];
 }
 
 function score(text, queries) {
@@ -86,7 +89,7 @@ function makeSnippet(content, query) {
   const idx = lower.indexOf(query.toLowerCase());
   const start = Math.max(0, idx - 60);
   const end = Math.min(content.length, idx + 200);
-  return (start > 0 ? '…' : '') + content.slice(start, end).replace(/\s+/g, ' ').trim() + '…';
+  return `${(start > 0 ? '…' : '') + content.slice(start, end).replace(/\s+/g, ' ').trim()}…`;
 }
 
 const concepts = loadJSON(CONCEPTS_PATH).concepts;
@@ -124,7 +127,7 @@ for (const concept of concepts) {
   }
 
   candidates.sort((a, b) => b.score - a.score);
-  const top = candidates.slice(0, 3).map(c => ({
+  const top = candidates.slice(0, 3).map((c) => ({
     repoId: c.repoId,
     repoName: c.repoName,
     sectionId: c.sectionId,

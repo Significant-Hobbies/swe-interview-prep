@@ -1,10 +1,10 @@
 import '@excalidraw/excalidraw/index.css';
 
 import { Loader2 } from 'lucide-react';
-import { lazy, Suspense,useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 
 const Excalidraw = lazy(() =>
-  import('@excalidraw/excalidraw').then(mod => ({ default: mod.Excalidraw }))
+  import('@excalidraw/excalidraw').then((mod) => ({ default: mod.Excalidraw }))
 );
 
 const STORAGE_PREFIX = 'diagram-';
@@ -21,11 +21,20 @@ function loadDiagram(problemId: string) {
 function saveDiagram(problemId: string, elements: readonly any[], appState: any) {
   localStorage.setItem(
     STORAGE_PREFIX + problemId,
-    JSON.stringify({ elements, appState: { zoom: appState.zoom, scrollX: appState.scrollX, scrollY: appState.scrollY } })
+    JSON.stringify({
+      elements,
+      appState: { zoom: appState.zoom, scrollX: appState.scrollX, scrollY: appState.scrollY },
+    })
   );
 }
 
-export default function DiagramEditor({ problemId, onElementsChange }: { problemId: string; onElementsChange?: (elements: any[]) => void }) {
+export default function DiagramEditor({
+  problemId,
+  onElementsChange,
+}: {
+  problemId: string;
+  onElementsChange?: (elements: any[]) => void;
+}) {
   const [initialData, setInitialData] = useState<any>(undefined);
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -63,11 +72,7 @@ export default function DiagramEditor({ problemId, onElementsChange }: { problem
           </div>
         }
       >
-        <Excalidraw
-          initialData={initialData}
-          onChange={handleChange}
-          theme="dark"
-        />
+        <Excalidraw initialData={initialData} onChange={handleChange} theme="dark" />
       </Suspense>
     </div>
   );

@@ -16,6 +16,6 @@ export function useActivityLogger() {
       if (!user) return Promise.resolve();
       return logActivity(opts);
     },
-    [user],
+    [user]
   );
 }

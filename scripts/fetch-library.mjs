@@ -1,8 +1,16 @@
-import { execSync } from 'child_process';
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, rmSync, existsSync } from 'fs';
-import { join, relative, posix } from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { execSync } from 'node:child_process';
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  readdirSync,
+  statSync,
+  rmSync,
+  existsSync,
+} from 'node:fs';
+import { join, relative, posix } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,20 +23,26 @@ const TEMP_DIR = join(__dirname, '..', '.tmp-library');
 
 // Files whose names signal non-content (PR guidelines, licenses, translations).
 // Match on the bare filename; case-insensitive.
-const NOISE_FILE_RE = /^(contributing|code[_-]?of[_-]?conduct|license|licence|changelog|security|funding|backers|sponsors|governance|maintainers|codeowners|support|pull_request_template|issue_template|acknowledgements|authors)(\.md|\.rst|\.txt)?$/i;
+const NOISE_FILE_RE =
+  /^(contributing|code[_-]?of[_-]?conduct|license|licence|changelog|security|funding|backers|sponsors|governance|maintainers|codeowners|support|pull_request_template|issue_template|acknowledgements|authors)(\.md|\.rst|\.txt)?$/i;
 
 // Translation suffixes on README/overview files — keep only the canonical one.
 const TRANSLATED_README_RE = /^readme[-_][a-z]{2}([-_][a-z]{2})?\.(md|rst)$/i;
 
 // Directories to skip entirely.
-const NOISE_DIR_RE = /^(\.|node_modules|\.github|translations?|i18n|locales?|\.vscode|\.idea|test|tests|__tests__|spec|specs|dist|build|out|target|coverage|\.cache)$/i;
+const NOISE_DIR_RE =
+  /^(\.|node_modules|\.github|translations?|i18n|locales?|\.vscode|\.idea|test|tests|__tests__|spec|specs|dist|build|out|target|coverage|\.cache)$/i;
 
 function getAllFiles(dir, base = dir) {
   const results = [];
   for (const entry of readdirSync(dir)) {
     const fullPath = join(dir, entry);
     let stat;
-    try { stat = statSync(fullPath); } catch { continue; }
+    try {
+      stat = statSync(fullPath);
+    } catch {
+      continue;
+    }
 
     if (stat.isDirectory()) {
       if (NOISE_DIR_RE.test(entry)) continue;
@@ -51,8 +65,72 @@ function getAllFiles(dir, base = dir) {
 
 // ---- Title humanization -----------------------------------------------------
 
-const SMALL_WORDS = new Set(['a','an','and','as','at','but','by','for','in','of','on','or','the','to','vs','via','with']);
-const ACRONYMS = new Set(['api','css','html','js','ts','sql','cpp','oop','ui','ux','io','http','https','jwt','cdn','dns','tcp','udp','ip','ssl','tls','aws','gcp','url','uri','json','xml','yaml','rest','graphql','lld','hld','ci','cd','orm','mvc','mvvm','ssr','csr','crud','cli','sdk','dsa','uml','faq']);
+const SMALL_WORDS = new Set([
+  'a',
+  'an',
+  'and',
+  'as',
+  'at',
+  'but',
+  'by',
+  'for',
+  'in',
+  'of',
+  'on',
+  'or',
+  'the',
+  'to',
+  'vs',
+  'via',
+  'with',
+]);
+const ACRONYMS = new Set([
+  'api',
+  'css',
+  'html',
+  'js',
+  'ts',
+  'sql',
+  'cpp',
+  'oop',
+  'ui',
+  'ux',
+  'io',
+  'http',
+  'https',
+  'jwt',
+  'cdn',
+  'dns',
+  'tcp',
+  'udp',
+  'ip',
+  'ssl',
+  'tls',
+  'aws',
+  'gcp',
+  'url',
+  'uri',
+  'json',
+  'xml',
+  'yaml',
+  'rest',
+  'graphql',
+  'lld',
+  'hld',
+  'ci',
+  'cd',
+  'orm',
+  'mvc',
+  'mvvm',
+  'ssr',
+  'csr',
+  'crud',
+  'cli',
+  'sdk',
+  'dsa',
+  'uml',
+  'faq',
+]);
 
 function titleCaseWord(word, isFirst) {
   const lower = word.toLowerCase();
@@ -81,7 +159,10 @@ function humanizeTitle(raw) {
 }
 
 function slugify(text) {
-  return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return String(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 // ---- Image URL rewriting ----------------------------------------------------
@@ -97,7 +178,7 @@ function resolveRelativeUrl(url, filePath, rawBase) {
   // Already absolute, data URI, or anchor — leave alone
   if (/^(https?:|data:|mailto:|#)/i.test(url)) return url;
   // Strip leading ./
-  let rel = url.replace(/^\.\//, '');
+  const rel = url.replace(/^\.\//, '');
   const fileDir = filePath.includes('/') ? posix.dirname(filePath) : '';
   const joined = rel.startsWith('/')
     ? posix.normalize(rel.slice(1))
@@ -113,14 +194,17 @@ function rewriteRelativeUrls(content, filePath, rawBase) {
     return `${open}${resolveRelativeUrl(url, filePath, rawBase)}${title || ''}${close}`;
   });
   // Markdown links [text](path) — only rewrite obvious image paths and local docs
-  out = out.replace(/(\[[^\]]+\]\()([^)\s]+)(\s+"[^"]*")?(\))/g, (full, open, url, title, close) => {
-    if (/^(!|https?:|data:|mailto:|#)/i.test(url)) return full;
-    // Only rewrite if it's an image or a non-.md asset reference
-    if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(url)) {
-      return `${open}${resolveRelativeUrl(url, filePath, rawBase)}${title || ''}${close}`;
+  out = out.replace(
+    /(\[[^\]]+\]\()([^)\s]+)(\s+"[^"]*")?(\))/g,
+    (full, open, url, title, close) => {
+      if (/^(!|https?:|data:|mailto:|#)/i.test(url)) return full;
+      // Only rewrite if it's an image or a non-.md asset reference
+      if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(url)) {
+        return `${open}${resolveRelativeUrl(url, filePath, rawBase)}${title || ''}${close}`;
+      }
+      return full;
     }
-    return full;
-  });
+  );
   // HTML <img src="...">
   out = out.replace(/<img\b([^>]*?)\bsrc=["']([^"']+)["']([^>]*)>/gi, (full, pre, src, post) => {
     if (/^(https?:|data:)/i.test(src)) return full;
@@ -219,7 +303,7 @@ const LARGE_FILE_THRESHOLD = 20000; // 20KB
 
 function buildSectionTree(files, rawBase) {
   const mdFiles = files
-    .filter(f => f.path.endsWith('.md') || f.path.endsWith('.rst'))
+    .filter((f) => f.path.endsWith('.md') || f.path.endsWith('.rst'))
     .sort((a, b) => a.path.localeCompare(b.path));
 
   const root = [];
@@ -231,7 +315,9 @@ function buildSectionTree(files, rawBase) {
     const baseName = fileName.replace(/\.(md|rst)$/, '');
     const sectionId = slugify(file.path);
     const sectionTitle = /^readme$/i.test(baseName)
-      ? (parts.length > 1 ? humanizeTitle(parts[parts.length - 2]) : 'Overview')
+      ? parts.length > 1
+        ? humanizeTitle(parts[parts.length - 2])
+        : 'Overview'
       : humanizeTitle(baseName);
 
     const rewrittenContent = rewriteRelativeUrls(file.content, file.path, rawBase);
@@ -289,7 +375,7 @@ function buildSectionTree(files, rawBase) {
 // Collapse nodes that have a single child and no own content — promote the child
 // up one level with a combined title (so navigation still makes sense).
 function collapseSingletons(sections) {
-  return sections.map(section => {
+  return sections.map((section) => {
     let current = { ...section };
     if (current.children && current.children.length > 0) {
       current.children = collapseSingletons(current.children);
@@ -313,11 +399,12 @@ function collapseSingletons(sections) {
 }
 
 // Reorder sections: Overview first, noise-y ones (if any slipped through) last.
-const TRAILING_TITLE_RE = /^(appendix|glossary|references?|further reading|credits|authors|backers|sponsors|changelog|license)/i;
+const TRAILING_TITLE_RE =
+  /^(appendix|glossary|references?|further reading|credits|authors|backers|sponsors|changelog|license)/i;
 
 function orderSections(sections) {
-  const overviewIdx = sections.findIndex(
-    s => /^(overview|readme|introduction|getting started)$/i.test(s.title.trim())
+  const overviewIdx = sections.findIndex((s) =>
+    /^(overview|readme|introduction|getting started)$/i.test(s.title.trim())
   );
   const overview = overviewIdx >= 0 ? sections[overviewIdx] : null;
   const rest = overview ? sections.filter((_, i) => i !== overviewIdx) : sections.slice();
@@ -331,9 +418,19 @@ function orderSections(sections) {
 
   // Recurse into children
   const mapped = [
-    ...(overview ? [{ ...overview, children: overview.children ? orderSections(overview.children) : undefined }] : []),
-    ...leading.map(s => ({ ...s, children: s.children ? orderSections(s.children) : undefined })),
-    ...trailing.map(s => ({ ...s, children: s.children ? orderSections(s.children) : undefined })),
+    ...(overview
+      ? [
+          {
+            ...overview,
+            children: overview.children ? orderSections(overview.children) : undefined,
+          },
+        ]
+      : []),
+    ...leading.map((s) => ({ ...s, children: s.children ? orderSections(s.children) : undefined })),
+    ...trailing.map((s) => ({
+      ...s,
+      children: s.children ? orderSections(s.children) : undefined,
+    })),
   ];
   return mapped;
 }
@@ -355,26 +452,26 @@ function countMeaningfulLeaves(sections) {
 
 // Synthesize an "Overview" landing section with a TOC if none exists.
 function ensureOverview(sections, repoMeta) {
-  const hasOverview = sections.some(s => /^overview$/i.test(s.title.trim()));
+  const hasOverview = sections.some((s) => /^overview$/i.test(s.title.trim()));
   if (hasOverview) return sections;
 
   const toc = sections
     .slice(0, 20)
-    .map(s => `- **${s.title}**${s.content ? '' : (s.children?.length ? ` — ${s.children.length} topics` : '')}`)
+    .map(
+      (s) =>
+        `- **${s.title}**${s.content ? '' : s.children?.length ? ` — ${s.children.length} topics` : ''}`
+    )
     .join('\n');
 
   const intro = `# ${repoMeta.name}\n\n${repoMeta.description}\n\n## What's inside\n\n${toc}\n\n_Source: [${repoMeta.source}](${repoMeta.source})_`;
 
-  return [
-    { id: 'synthetic-overview', title: 'Overview', content: intro },
-    ...sections,
-  ];
+  return [{ id: 'synthetic-overview', title: 'Overview', content: intro }, ...sections];
 }
 
 // Classify repo content format for UI badging.
 function classifyFormat(parsed, files) {
   const exerciseCount = parsed.exercises?.length || 0;
-  const sectionContent = (parsed.sections || []).map(s => s.content || '').join('\n');
+  const sectionContent = (parsed.sections || []).map((s) => s.content || '').join('\n');
 
   if (exerciseCount >= 50) return 'qa';
 
@@ -386,7 +483,7 @@ function classifyFormat(parsed, files) {
 
   // Ratio of fenced code blocks
   const codeFences = (sectionContent.match(/```/g) || []).length / 2;
-  if (codeFences >= 40 || (files?.some(f => /\.(java|py|cpp|go|rs|ts|js)$/i.test(f.path)))) {
+  if (codeFences >= 40 || files?.some((f) => /\.(java|py|cpp|go|rs|ts|js)$/i.test(f.path))) {
     return 'code-heavy';
   }
 
@@ -405,7 +502,8 @@ function parseSudheerQA(content, tag) {
     const questionTitle = matches[i][1].trim();
     const startIdx = matches[i].index + matches[i][0].length;
     const endIdx = i + 1 < matches.length ? matches[i + 1].index : content.length;
-    const answerContent = content.slice(startIdx, endIdx)
+    const answerContent = content
+      .slice(startIdx, endIdx)
       .replace(/\*\*\[.*?Back to Top.*?\]\(.*?\)\*\*/g, '')
       .trim();
 
@@ -416,12 +514,16 @@ function parseSudheerQA(content, tag) {
       content: `### ${questionTitle}\n\n${answerContent}`,
     });
 
-    const firstParagraph = answerContent.split('\n\n')[0]?.replace(/^[\s-]+/, '').trim() || answerContent;
+    const firstParagraph =
+      answerContent
+        .split('\n\n')[0]
+        ?.replace(/^[\s-]+/, '')
+        .trim() || answerContent;
     exercises.push({
       id,
       type: 'qa',
       question: questionTitle,
-      answer: firstParagraph.length > 500 ? firstParagraph.slice(0, 500) + '...' : firstParagraph,
+      answer: firstParagraph.length > 500 ? `${firstParagraph.slice(0, 500)}...` : firstParagraph,
       tags: [tag],
     });
   }
@@ -432,14 +534,15 @@ function parseSudheerQA(content, tag) {
 function parseDevopsExercises(files, rawBase) {
   const sections = [];
   const exercises = [];
-  const topicFiles = files.filter(f => f.path.startsWith('topics/') && f.path.endsWith('.md'));
+  const topicFiles = files.filter((f) => f.path.startsWith('topics/') && f.path.endsWith('.md'));
 
   for (const file of topicFiles) {
     const parts = file.path.split('/');
     const topicName = parts[1] || 'general';
     const rewritten = rewriteRelativeUrls(file.content, file.path, rawBase);
 
-    const detailsRegex = /<details>\s*<summary>([\s\S]*?)<\/summary>[\s\S]*?<b>\s*([\s\S]*?)\s*<\/b>\s*<\/details>/gi;
+    const detailsRegex =
+      /<details>\s*<summary>([\s\S]*?)<\/summary>[\s\S]*?<b>\s*([\s\S]*?)\s*<\/b>\s*<\/details>/gi;
     const matches = [...rewritten.matchAll(detailsRegex)];
 
     if (matches.length > 0) {
@@ -457,7 +560,7 @@ function parseDevopsExercises(files, rawBase) {
             id: `devops-${topicName}-${i}`,
             type: 'qa',
             question,
-            answer: answer.length > 500 ? answer.slice(0, 500) + '...' : answer,
+            answer: answer.length > 500 ? `${answer.slice(0, 500)}...` : answer,
             tags: ['devops', topicName],
           });
         }
@@ -465,9 +568,15 @@ function parseDevopsExercises(files, rawBase) {
     }
   }
 
-  const otherFiles = files.filter(f => !f.path.startsWith('topics/') && (f.path.endsWith('.md') || f.path.endsWith('.rst')));
+  const otherFiles = files.filter(
+    (f) => !f.path.startsWith('topics/') && (f.path.endsWith('.md') || f.path.endsWith('.rst'))
+  );
   for (const file of otherFiles) {
-    const title = file.path.replace(/\.(md|rst)$/, '').split('/').pop() || 'Overview';
+    const title =
+      file.path
+        .replace(/\.(md|rst)$/, '')
+        .split('/')
+        .pop() || 'Overview';
     sections.unshift({
       id: slugify(file.path),
       title: /^readme$/i.test(title) ? 'Overview' : humanizeTitle(title),
@@ -521,7 +630,7 @@ async function main() {
 
       let parsed;
       if (repo.adapter === 'javascript-questions' || repo.adapter === 'react-questions') {
-        const readme = files.find(f => f.path === 'README.md');
+        const readme = files.find((f) => f.path === 'README.md');
         const tag = repo.adapter === 'javascript-questions' ? 'javascript' : 'react';
         parsed = readme
           ? parseSudheerQA(rewriteRelativeUrls(readme.content, readme.path, rawBase), tag)
@@ -533,7 +642,11 @@ async function main() {
         const collapsed = collapseSingletons(sections);
         const ordered = orderSections(collapsed);
         const withOverview = ensureOverview(ordered, repo);
-        parsed = { sections: withOverview, exercises: [], totalItems: countMeaningfulLeaves(withOverview) };
+        parsed = {
+          sections: withOverview,
+          exercises: [],
+          totalItems: countMeaningfulLeaves(withOverview),
+        };
       }
 
       // Walk all files from the original clone to detect code-heavy repos
@@ -542,7 +655,11 @@ async function main() {
         for (const entry of readdirSync(dir)) {
           const full = join(dir, entry);
           let s;
-          try { s = statSync(full); } catch { continue; }
+          try {
+            s = statSync(full);
+          } catch {
+            continue;
+          }
           if (s.isDirectory()) {
             if (NOISE_DIR_RE.test(entry)) continue;
             walk(full);
@@ -560,9 +677,12 @@ async function main() {
       }
 
       const format = classifyFormat(parsed, allSourceFiles);
-      const meaningfulCount = repo.adapter === 'javascript-questions' || repo.adapter === 'react-questions' || repo.adapter === 'devops-exercises'
-        ? parsed.sections.length
-        : countMeaningfulLeaves(parsed.sections);
+      const meaningfulCount =
+        repo.adapter === 'javascript-questions' ||
+        repo.adapter === 'react-questions' ||
+        repo.adapter === 'devops-exercises'
+          ? parsed.sections.length
+          : countMeaningfulLeaves(parsed.sections);
 
       const repoOutputDir = join(OUTPUT_DIR, repo.id);
       mkdirSync(repoOutputDir, { recursive: true });
@@ -582,7 +702,9 @@ async function main() {
         lastFetched: new Date().toISOString(),
       });
 
-      console.log(`  -> ${meaningfulCount} sections, ${parsed.exercises.length} exercises, format=${format}\n`);
+      console.log(
+        `  -> ${meaningfulCount} sections, ${parsed.exercises.length} exercises, format=${format}\n`
+      );
     } catch (err) {
       console.error(`  ERROR fetching ${repo.id}: ${err.message}`);
       const prev = previousRepos.get(repo.id);

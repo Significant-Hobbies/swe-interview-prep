@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { requireAuth } from './auth/verify.mjs';
 
 const CLI_TOOLS = {
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
   }
 
   let prompt = messages
-    .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
+    .map((m) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
     .join('\n\n');
 
   if (cliTool.embedSystemPrompt && systemPrompt) {
@@ -131,7 +131,7 @@ export default async function handler(req, res) {
         const trimmed = line.trim();
         if (trimmed && !trimmed.startsWith('{') && !trimmed.startsWith('[')) {
           textSent = true;
-          res.write(`data: ${JSON.stringify({ text: trimmed + '\n' })}\n\n`);
+          res.write(`data: ${JSON.stringify({ text: `${trimmed}\n` })}\n\n`);
         }
       }
     }
@@ -166,7 +166,9 @@ export default async function handler(req, res) {
 
   proc.on('error', (err) => {
     console.error(`[${providerName} spawn error]`, err.message);
-    res.write(`data: ${JSON.stringify({ error: `Failed to start ${providerName} CLI. Is it installed?` })}\n\n`);
+    res.write(
+      `data: ${JSON.stringify({ error: `Failed to start ${providerName} CLI. Is it installed?` })}\n\n`
+    );
     res.write('data: [DONE]\n\n');
     res.end();
   });

@@ -1,5 +1,5 @@
-import { CheckCircle2, ChevronRight, RotateCcw, Shuffle,XCircle } from 'lucide-react';
-import { useMemo,useState } from 'react';
+import { CheckCircle2, ChevronRight, RotateCcw, Shuffle, XCircle } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
 import type { Exercise } from '../adapters/types';
 import { scoreExerciseQuality } from '../lib/questionQuality';
@@ -28,7 +28,7 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
   const [score, setScore] = useState({ correct: 0, total: 0 });
 
   const scoredExercises = useMemo(() => {
-    return exercises.map(exercise => {
+    return exercises.map((exercise) => {
       if (exercise.qualityScore !== undefined && exercise.qualityTier) return exercise;
       const quality = scoreExerciseQuality(exercise);
       return {
@@ -42,17 +42,18 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
-    exercises.forEach(e => e.tags.forEach(t => tags.add(t)));
+    exercises.forEach((e) => e.tags.forEach((t) => tags.add(t)));
     return Array.from(tags).sort();
   }, [exercises]);
 
   const filtered = useMemo(() => {
-    let list = tagFilter === 'all'
-      ? scoredExercises
-      : scoredExercises.filter(e => e.tags.includes(tagFilter));
+    let list =
+      tagFilter === 'all'
+        ? scoredExercises
+        : scoredExercises.filter((e) => e.tags.includes(tagFilter));
 
     if (qualityFilter === 'high') {
-      list = list.filter(e => (e.qualityScore || 0) >= 72 || e.qualityTier === 'high');
+      list = list.filter((e) => (e.qualityScore || 0) >= 72 || e.qualityTier === 'high');
     }
 
     const ordered = [...list].sort((a, b) => (b.qualityScore || 0) - (a.qualityScore || 0));
@@ -65,7 +66,9 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <p className="text-slate-400 mb-4">
-          {exercises.length === 0 ? 'No exercises available for this repo yet.' : 'No exercises match your filter.'}
+          {exercises.length === 0
+            ? 'No exercises available for this repo yet.'
+            : 'No exercises match your filter.'}
         </p>
       </div>
     );
@@ -74,14 +77,14 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
   const handleNext = () => {
     setRevealed(false);
     setSelectedOption(null);
-    setIndex(i => (i + 1) % filtered.length);
+    setIndex((i) => (i + 1) % filtered.length);
   };
 
   const handleMCQSelect = (optionIdx: number) => {
     if (selectedOption !== null) return;
     setSelectedOption(optionIdx);
     const isCorrect = current.options && current.options[optionIdx] === current.answer;
-    setScore(s => ({
+    setScore((s) => ({
       correct: s.correct + (isCorrect ? 1 : 0),
       total: s.total + 1,
     }));
@@ -104,7 +107,10 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
         <div className="flex items-center gap-2">
           <div className="flex items-center rounded-lg border border-slate-700 bg-slate-900 p-0.5">
             <button
-              onClick={() => { setQualityFilter('high'); setIndex(0); }}
+              onClick={() => {
+                setQualityFilter('high');
+                setIndex(0);
+              }}
               className={`rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 qualityFilter === 'high'
                   ? 'bg-emerald-500/20 text-emerald-400'
@@ -114,7 +120,10 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
               High signal
             </button>
             <button
-              onClick={() => { setQualityFilter('all'); setIndex(0); }}
+              onClick={() => {
+                setQualityFilter('all');
+                setIndex(0);
+              }}
               className={`rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 qualityFilter === 'all'
                   ? 'bg-emerald-500/20 text-emerald-400'
@@ -128,22 +137,37 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
           {allTags.length > 1 && (
             <select
               value={tagFilter}
-              onChange={e => { setTagFilter(e.target.value); setIndex(0); }}
+              onChange={(e) => {
+                setTagFilter(e.target.value);
+                setIndex(0);
+              }}
               className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs text-slate-300"
             >
               <option value="all">All tags</option>
-              {allTags.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+              {allTags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
             </select>
           )}
           <button
-            onClick={() => { setShuffled(!shuffled); setIndex(0); }}
+            onClick={() => {
+              setShuffled(!shuffled);
+              setIndex(0);
+            }}
             className={`rounded-lg p-2 transition-colors ${shuffled ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-400 hover:text-slate-200'}`}
             title="Shuffle"
           >
             <Shuffle className="h-4 w-4" />
           </button>
           <button
-            onClick={() => { setIndex(0); setScore({ correct: 0, total: 0 }); setRevealed(false); setSelectedOption(null); }}
+            onClick={() => {
+              setIndex(0);
+              setScore({ correct: 0, total: 0 });
+              setRevealed(false);
+              setSelectedOption(null);
+            }}
             className="rounded-lg bg-slate-800 p-2 text-slate-400 hover:text-slate-200 transition-colors"
             title="Reset"
           >
@@ -158,22 +182,28 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
         <div className="mb-6">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {current.difficulty && (
-              <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
-                current.difficulty === 'easy' ? 'bg-green-500/10 text-green-400' :
-                current.difficulty === 'medium' ? 'bg-yellow-500/10 text-yellow-400' :
-                'bg-red-500/10 text-red-400'
-              }`}>
+              <span
+                className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
+                  current.difficulty === 'easy'
+                    ? 'bg-green-500/10 text-green-400'
+                    : current.difficulty === 'medium'
+                      ? 'bg-yellow-500/10 text-yellow-400'
+                      : 'bg-red-500/10 text-red-400'
+                }`}
+              >
                 {current.difficulty}
               </span>
             )}
             {current.qualityScore !== undefined && (
-              <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
-                current.qualityTier === 'high'
-                  ? 'bg-emerald-500/10 text-emerald-400'
-                  : current.qualityTier === 'medium'
-                  ? 'bg-sky-500/10 text-sky-400'
-                  : 'bg-slate-700/60 text-slate-400'
-              }`}>
+              <span
+                className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
+                  current.qualityTier === 'high'
+                    ? 'bg-emerald-500/10 text-emerald-400'
+                    : current.qualityTier === 'medium'
+                      ? 'bg-sky-500/10 text-sky-400'
+                      : 'bg-slate-700/60 text-slate-400'
+                }`}
+              >
                 Quality {current.qualityScore}
               </span>
             )}
@@ -198,15 +228,17 @@ export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerPr
                     showResult && isCorrect
                       ? 'border-green-500/50 bg-green-500/10 text-green-300'
                       : showResult && isSelected && !isCorrect
-                      ? 'border-red-500/50 bg-red-500/10 text-red-300'
-                      : isSelected
-                      ? 'border-blue-500/50 bg-blue-500/10 text-blue-300'
-                      : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'
+                        ? 'border-red-500/50 bg-red-500/10 text-red-300'
+                        : isSelected
+                          ? 'border-blue-500/50 bg-blue-500/10 text-blue-300'
+                          : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'
                   }`}
                 >
                   <span className="flex items-center gap-2">
                     {showResult && isCorrect && <CheckCircle2 className="h-4 w-4 text-green-400" />}
-                    {showResult && isSelected && !isCorrect && <XCircle className="h-4 w-4 text-red-400" />}
+                    {showResult && isSelected && !isCorrect && (
+                      <XCircle className="h-4 w-4 text-red-400" />
+                    )}
                     {opt}
                   </span>
                 </button>

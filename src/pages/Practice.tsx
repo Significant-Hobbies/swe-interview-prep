@@ -24,13 +24,13 @@ export default function Practice() {
   const todayConcept = session?.concept.id;
 
   const dueCount = dueReviewQuestions(rqMastery, mastery).length;
-  const solvedCount = Object.values(drillState).filter(d => d.status === 'solved').length;
+  const solvedCount = Object.values(drillState).filter((d) => d.status === 'solved').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 14), [mastery]);
   const streak = computeSessionStreak();
 
   const nextDrill = useMemo(
     () => pickPracticeDrill(drillState, getElo, todayConcept, profile.experience),
-    [drillState, getElo, todayConcept, profile.experience],
+    [drillState, getElo, todayConcept, profile.experience]
   );
 
   return (
@@ -43,7 +43,12 @@ export default function Practice() {
         </div>
         <div className="grid grid-cols-3 gap-8">
           <Stat label="Solved" value={solvedCount} sub={`of ${EDITORIAL_DRILLS.length}`} />
-          <Stat label="Due" value={dueCount} sub={dueCount ? 'reviews' : 'caught up'} accent={dueCount > 0} />
+          <Stat
+            label="Due"
+            value={dueCount}
+            sub={dueCount ? 'reviews' : 'caught up'}
+            accent={dueCount > 0}
+          />
           <Stat label="Streak" value={`${streak}d`} sub="active" />
         </div>
         <div className="mt-8">
@@ -64,7 +69,8 @@ function NextDrillHero({ drill }: { drill: Drill }) {
       <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-        Next drill {grp && <span className="text-white/30">· {grp.short}</span>} <span className="text-white/30">· {drill.difficulty}</span>
+        Next drill {grp && <span className="text-white/30">· {grp.short}</span>}{' '}
+        <span className="text-white/30">· {drill.difficulty}</span>
       </div>
 
       <h1 className="text-balance text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
@@ -97,7 +103,9 @@ function NextDrillHero({ drill }: { drill: Drill }) {
 function AllCaughtUp() {
   return (
     <div>
-      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Next drill</div>
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        Next drill
+      </div>
       <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl">All solved.</h1>
       <p className="mt-6 max-w-prose text-base text-white/60 sm:text-lg">
         Browse drills by group to revisit any.
@@ -112,11 +120,23 @@ function AllCaughtUp() {
   );
 }
 
-function Stat({ label, value, sub, accent }: { label: string; value: React.ReactNode; sub?: string; accent?: boolean }) {
+function Stat({
+  label,
+  value,
+  sub,
+  accent,
+}: {
+  label: string;
+  value: React.ReactNode;
+  sub?: string;
+  accent?: boolean;
+}) {
   return (
     <div>
       <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
-      <div className={`mt-2 text-4xl font-semibold tabular-nums tracking-tight ${accent ? 'text-amber-200' : 'text-white'}`}>
+      <div
+        className={`mt-2 text-4xl font-semibold tabular-nums tracking-tight ${accent ? 'text-amber-200' : 'text-white'}`}
+      >
         {value}
       </div>
       {sub && <div className="mt-1 font-mono text-xs text-white/40">{sub}</div>}
@@ -138,5 +158,3 @@ function buildRecentActivity(mastery: Record<string, MasteryEntry>, days: number
   }
   return buckets;
 }
-
-

@@ -1,9 +1,29 @@
-import { ArrowLeft, Check, CheckCircle2, Circle, ExternalLink, Hammer, Lightbulb, Play, Sparkles } from 'lucide-react';
+import {
+  ArrowLeft,
+  Check,
+  CheckCircle2,
+  Circle,
+  ExternalLink,
+  Hammer,
+  Lightbulb,
+  Play,
+  Sparkles,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import CodeEditor from '../components/CodeEditor';
-import { Badge, Button, Card, color, DIFFICULTY_COLOR, EmptyState, PageHeader, PageShell, SectionTitle } from '../components/ui';
+import {
+  Badge,
+  Button,
+  Card,
+  color,
+  DIFFICULTY_COLOR,
+  EmptyState,
+  PageHeader,
+  PageShell,
+  SectionTitle,
+} from '../components/ui';
 import {
   type Artifact,
   EDITORIAL_ARTIFACTS,
@@ -16,16 +36,28 @@ import { useCodeExecution } from '../hooks/useCodeExecution';
 import { useActivityLogger } from '../hooks/useActivity';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useReviewMastery } from '../hooks/useReviewMastery';
-import { type ArtifactEntry, type DrillEntry, useArtifactStore, useDrillStore, useUserElo } from '../hooks/useUserStore';
+import {
+  type ArtifactEntry,
+  type DrillEntry,
+  useArtifactStore,
+  useDrillStore,
+  useUserElo,
+} from '../hooks/useUserStore';
 import { isMetadataDrill } from '../lib/contentQuality';
 import { runDrillTests } from '../lib/drillRunner';
 import { difficultyToElo } from '../lib/elo';
-import { loadSuspendedRqs, reviewsToSeedForConcept, unsuspendReviewQuestion } from '../lib/reviewMastery';
+import {
+  loadSuspendedRqs,
+  reviewsToSeedForConcept,
+  unsuspendReviewQuestion,
+} from '../lib/reviewMastery';
 import { recordSessionActivity } from '../lib/session';
 import { playgroundArtifactUrl } from '../lib/gates';
 import type { Language } from '../types';
 
-export function resolveBuildLabView(id?: string): 'artifact-board' | 'drill-workspace' | 'not-found' {
+export function resolveBuildLabView(
+  id?: string
+): 'artifact-board' | 'drill-workspace' | 'not-found' {
   if (!id) return 'artifact-board';
   if (DRILL_BY_ID[id]) return 'drill-workspace';
   return 'not-found';
@@ -68,15 +100,18 @@ function ArtifactBoard() {
         title="Build Lab"
         subtitle="No learning without an artifact. Move each one from idea to shipped — code, benchmark, or design doc. Shipping nudges its concepts toward mastered."
         actions={
-          <Link to="/playground" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800">
+          <Link
+            to="/playground"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800"
+          >
             <Hammer className="h-4 w-4" /> Open workspace
           </Link>
         }
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        {COLUMNS.map(col => {
-          const items = EDITORIAL_ARTIFACTS.filter(a => getArtifact(a.id).status === col.status);
+        {COLUMNS.map((col) => {
+          const items = EDITORIAL_ARTIFACTS.filter((a) => getArtifact(a.id).status === col.status);
           return (
             <div key={col.status}>
               <div className="mb-2 flex items-center gap-2">
@@ -85,14 +120,14 @@ function ArtifactBoard() {
                 <span className="text-xs text-slate-500">{items.length}</span>
               </div>
               <div className="space-y-2">
-                {items.map(a => (
+                {items.map((a) => (
                   <ArtifactCard
                     key={a.id}
                     artifact={a}
                     entry={getArtifact(a.id)}
                     open={openId === a.id}
                     onToggle={() => setOpenId(openId === a.id ? null : a.id)}
-                    onChange={next => handleChange(a, getArtifact(a.id), next)}
+                    onChange={(next) => handleChange(a, getArtifact(a.id), next)}
                   />
                 ))}
                 {items.length === 0 && (
@@ -124,7 +159,10 @@ function ArtifactCard({
 }) {
   function toggleCriterion(i: number) {
     const has = entry.criteria.includes(i);
-    onChange({ ...entry, criteria: has ? entry.criteria.filter(x => x !== i) : [...entry.criteria, i] });
+    onChange({
+      ...entry,
+      criteria: has ? entry.criteria.filter((x) => x !== i) : [...entry.criteria, i],
+    });
   }
 
   const doneCount = entry.criteria.length;
@@ -148,11 +186,19 @@ function ArtifactCard({
             <div className="mb-1 text-[11px] font-medium text-slate-500">Success criteria</div>
             <div className="space-y-1">
               {artifact.successCriteria.map((c, i) => (
-                <button key={i} onClick={() => toggleCriterion(i)} className="flex w-full items-start gap-2 text-left text-xs text-slate-300">
-                  {entry.criteria.includes(i)
-                    ? <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                    : <Circle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />}
-                  <span className={entry.criteria.includes(i) ? 'text-slate-500 line-through' : ''}>{c}</span>
+                <button
+                  key={i}
+                  onClick={() => toggleCriterion(i)}
+                  className="flex w-full items-start gap-2 text-left text-xs text-slate-300"
+                >
+                  {entry.criteria.includes(i) ? (
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                  ) : (
+                    <Circle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
+                  )}
+                  <span className={entry.criteria.includes(i) ? 'text-slate-500 line-through' : ''}>
+                    {c}
+                  </span>
                 </button>
               ))}
             </div>
@@ -160,13 +206,13 @@ function ArtifactCard({
 
           <input
             value={entry.url}
-            onChange={e => onChange({ ...entry, url: e.target.value })}
+            onChange={(e) => onChange({ ...entry, url: e.target.value })}
             placeholder="Link to commit / PR / demo / notes"
             className="w-full rounded-md border border-slate-800 bg-slate-950 px-2 py-1.5 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500/50 focus:outline-none"
           />
 
           <div className="flex flex-wrap gap-1.5">
-            {COLUMNS.map(col => (
+            {COLUMNS.map((col) => (
               <Button
                 key={col.status}
                 tone={entry.status === col.status ? 'primary' : 'ghost'}
@@ -179,7 +225,7 @@ function ArtifactCard({
           </div>
 
           <div className="flex flex-wrap gap-1.5">
-            {artifact.concepts.map(cid => (
+            {artifact.concepts.map((cid) => (
               <Link
                 key={cid}
                 to={`/concepts/${cid}`}
@@ -198,7 +244,12 @@ function ArtifactCard({
           </Link>
 
           {entry.url && (
-            <a href={entry.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-sky-400">
+            <a
+              href={entry.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-sky-400"
+            >
               Open artifact <ExternalLink className="h-3 w-3" />
             </a>
           )}
@@ -258,7 +309,11 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   }
 
   function mark(status: DrillEntry['status']) {
-    if (status === 'solved' && drill.testCases?.length && (language === 'typescript' || language === 'javascript')) {
+    if (
+      status === 'solved' &&
+      drill.testCases?.length &&
+      (language === 'typescript' || language === 'javascript')
+    ) {
       const result = runDrillTests(code, drill.testCases, language);
       setTestMessage(result.message);
       if (!result.passed) return;
@@ -267,24 +322,24 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Solving a drill closes the loop — it nudges the concept toward mastery.
     if (status === 'solved') {
-      void review(drill!.conceptId, 'good');
+      void review(drill?.conceptId, 'good');
       void logActivity({
         kind: 'drill_solve',
-        conceptIds: [drill!.conceptId],
+        conceptIds: [drill?.conceptId],
         problemId: drillId,
-        payload: { difficulty: drill!.difficulty },
+        payload: { difficulty: drill?.difficulty },
       });
       recordSessionActivity('drill_solve');
-      for (const seed of reviewsToSeedForConcept(drill!.conceptId, REVIEW_QUESTIONS, rqMastery)) {
+      for (const seed of reviewsToSeedForConcept(drill?.conceptId, REVIEW_QUESTIONS, rqMastery)) {
         void reviewRq(seed.questionId, seed.rating);
       }
-      for (const q of REVIEW_QUESTIONS.filter(rq => rq.conceptId === drill!.conceptId)) {
+      for (const q of REVIEW_QUESTIONS.filter((rq) => rq.conceptId === drill?.conceptId)) {
         if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
       }
     } else if (status === 'attempted') {
       void logActivity({
         kind: 'drill_fail',
-        conceptIds: [drill!.conceptId],
+        conceptIds: [drill?.conceptId],
         problemId: drillId,
         payload: { attempts: entry.attempts + 1 },
       });
@@ -294,17 +349,17 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     // v1 only counts the success signal; an explicit "couldn't solve" path
     // would be needed to push ELO down.
     if (status === 'solved' && !wasSolved && concept) {
-      recordResult(concept.roadmaps, difficultyToElo(drill!.difficulty), 1);
+      recordResult(concept.roadmaps, difficultyToElo(drill?.difficulty), 1);
     }
   }
 
   function markGiveUp() {
     if (!concept) return;
     setDrill(drillId, { status: 'attempted', lastCode: code, attempts: entry.attempts + 1 });
-    recordResult(concept.roadmaps, difficultyToElo(drill!.difficulty), 0);
+    recordResult(concept.roadmaps, difficultyToElo(drill?.difficulty), 0);
     void logActivity({
       kind: 'drill_fail',
-      conceptIds: [drill!.conceptId],
+      conceptIds: [drill?.conceptId],
       problemId: drillId,
       payload: { attempts: entry.attempts + 1, gaveUp: true },
     });
@@ -319,7 +374,10 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
   return (
     <PageShell wide>
-      <Link to="/practice" className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300">
+      <Link
+        to="/practice"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300"
+      >
         <ArrowLeft className="h-3.5 w-3.5" /> Drills
       </Link>
 
@@ -332,8 +390,17 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
               <Badge tone="purple">{concept.name}</Badge>
             </Link>
           )}
-          <Badge tone={entry.status === 'solved' ? 'emerald' : entry.status === 'attempted' ? 'amber' : 'gray'}>
-            {entry.status}{entry.attempts > 0 ? ` · ${entry.attempts} attempts` : ''}
+          <Badge
+            tone={
+              entry.status === 'solved'
+                ? 'emerald'
+                : entry.status === 'attempted'
+                  ? 'amber'
+                  : 'gray'
+            }
+          >
+            {entry.status}
+            {entry.attempts > 0 ? ` · ${entry.attempts} attempts` : ''}
           </Badge>
         </div>
         <h1 className="text-2xl font-bold text-white">{drill.title}</h1>
@@ -361,8 +428,12 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           </Card>
 
           <Card className="p-4">
-            <button onClick={() => setShowHints(s => !s)} className="flex w-full items-center gap-1.5 text-sm font-semibold text-amber-300">
-              <Lightbulb className="h-4 w-4" /> {showHints ? 'Hide' : 'Show'} hints ({drill.hints.length})
+            <button
+              onClick={() => setShowHints((s) => !s)}
+              className="flex w-full items-center gap-1.5 text-sm font-semibold text-amber-300"
+            >
+              <Lightbulb className="h-4 w-4" /> {showHints ? 'Hide' : 'Show'} hints (
+              {drill.hints.length})
             </button>
             {showHints && (
               <ul className="mt-2 space-y-1.5">
@@ -376,10 +447,15 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           </Card>
 
           <Card className="p-4">
-            <button onClick={() => setShowSolution(s => !s)} className="flex items-center gap-1.5 text-sm font-semibold text-cyan-300">
+            <button
+              onClick={() => setShowSolution((s) => !s)}
+              className="flex items-center gap-1.5 text-sm font-semibold text-cyan-300"
+            >
               <Sparkles className="h-4 w-4" /> {showSolution ? 'Hide' : 'Show'} solution notes
             </button>
-            {showSolution && <p className="mt-2 text-xs leading-relaxed text-slate-400">{drill.solutionNotes}</p>}
+            {showSolution && (
+              <p className="mt-2 text-xs leading-relaxed text-slate-400">{drill.solutionNotes}</p>
+            )}
           </Card>
         </div>
 
@@ -387,7 +463,8 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           {external ? (
             <Card className="p-4">
               <p className="text-sm text-slate-400">
-                This drill links to LeetCode — solve there first, then mark solved here to update mastery.
+                This drill links to LeetCode — solve there first, then mark solved here to update
+                mastery.
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {drill.externalUrl && (
@@ -406,54 +483,70 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
               </div>
             </Card>
           ) : (
-          <>
-          <Card className="overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-800 px-3 py-2">
-              <div className="flex gap-1">
-                {LANGUAGES.map(l => (
-                  <button
-                    key={l}
-                    onClick={() => switchLanguage(l)}
-                    className={`rounded px-2 py-0.5 text-xs font-medium ${language === l ? 'bg-sky-500/15 text-sky-300' : 'text-slate-500 hover:text-slate-300'}`}
+            <>
+              <Card className="overflow-hidden">
+                <div className="flex items-center justify-between border-b border-slate-800 px-3 py-2">
+                  <div className="flex gap-1">
+                    {LANGUAGES.map((l) => (
+                      <button
+                        key={l}
+                        onClick={() => switchLanguage(l)}
+                        className={`rounded px-2 py-0.5 text-xs font-medium ${language === l ? 'bg-sky-500/15 text-sky-300' : 'text-slate-500 hover:text-slate-300'}`}
+                      >
+                        {l}
+                      </button>
+                    ))}
+                  </div>
+                  <Button tone="subtle" onClick={run} disabled={isRunning}>
+                    <Play className="h-3.5 w-3.5" /> {isRunning ? 'Running…' : 'Run'}
+                  </Button>
+                </div>
+                <div className="h-[320px]">
+                  <CodeEditor
+                    code={code}
+                    language={language}
+                    onChange={(v) => setCode(v || '')}
+                    onRun={run}
+                  />
+                </div>
+              </Card>
+
+              <Card className="p-3">
+                <div className="text-[11px] font-medium text-slate-500">Output</div>
+                {testMessage && (
+                  <p
+                    className={`mt-1 text-xs ${testMessage.includes('passed') ? 'text-emerald-400' : 'text-amber-300'}`}
                   >
-                    {l}
-                  </button>
-                ))}
+                    {testMessage}
+                  </p>
+                )}
+                <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-slate-300">
+                  {errors ? (
+                    <span className="text-rose-400">{errors}</span>
+                  ) : (
+                    output || <span className="text-slate-500">Run your code to see output.</span>
+                  )}
+                </pre>
+              </Card>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <Button tone="ghost" onClick={() => mark('attempted')}>
+                  Save attempt
+                </Button>
+                <Button tone="ghost" onClick={markGiveUp}>
+                  Couldn&apos;t solve
+                </Button>
+                <Button onClick={() => mark('solved')}>
+                  <Check className="h-4 w-4" /> Mark solved
+                </Button>
+                <Link
+                  to="/playground"
+                  className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800"
+                >
+                  <Hammer className="h-4 w-4" /> Full workspace
+                </Link>
               </div>
-              <Button tone="subtle" onClick={run} disabled={isRunning}>
-                <Play className="h-3.5 w-3.5" /> {isRunning ? 'Running…' : 'Run'}
-              </Button>
-            </div>
-            <div className="h-[320px]">
-              <CodeEditor code={code} language={language} onChange={v => setCode(v || '')} onRun={run} />
-            </div>
-          </Card>
-
-          <Card className="p-3">
-            <div className="text-[11px] font-medium text-slate-500">Output</div>
-            {testMessage && (
-              <p className={`mt-1 text-xs ${testMessage.includes('passed') ? 'text-emerald-400' : 'text-amber-300'}`}>
-                {testMessage}
-              </p>
-            )}
-            <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-xs text-slate-300">
-              {errors
-                ? <span className="text-rose-400">{errors}</span>
-                : output || <span className="text-slate-500">Run your code to see output.</span>}
-            </pre>
-          </Card>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <Button tone="ghost" onClick={() => mark('attempted')}>Save attempt</Button>
-            <Button tone="ghost" onClick={markGiveUp}>Couldn&apos;t solve</Button>
-            <Button onClick={() => mark('solved')}>
-              <Check className="h-4 w-4" /> Mark solved
-            </Button>
-            <Link to="/playground" className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800">
-              <Hammer className="h-4 w-4" /> Full workspace
-            </Link>
-          </div>
-          </>
+            </>
           )}
         </div>
       </div>

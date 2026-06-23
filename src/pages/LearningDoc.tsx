@@ -18,9 +18,9 @@ const docModules = import.meta.glob('../../docs/learning/*.md', {
 // Index by slug (filename without extension) → raw markdown content.
 const docs: Record<string, string> = Object.fromEntries(
   Object.entries(docModules).map(([path, content]) => {
-    const slug = path.split('/').pop()!.replace(/\.md$/, '');
+    const slug = path.split('/').pop()?.replace(/\.md$/, '');
     return [slug, content];
-  }),
+  })
 );
 
 const DEFAULT_SLUG = 'index';
@@ -53,11 +53,13 @@ const DOC_META: Record<string, DocMeta> = {
   },
   'system-design': {
     title: 'System design — LLD + HLD',
-    blurb: 'Design patterns + classic "design X" problems, in one place. The two halves of system design interviews and real engineering.',
+    blurb:
+      'Design patterns + classic "design X" problems, in one place. The two halves of system design interviews and real engineering.',
   },
   'interview-prep': {
     title: 'Interview prep — topic checklist',
-    blurb: 'Breadth-first audit of what SWE interviews test — map gaps to in-app roadmaps and drills.',
+    blurb:
+      'Breadth-first audit of what SWE interviews test — map gaps to in-app roadmaps and drills.',
   },
   'ml-case-studies': {
     title: 'ML system design case studies',
@@ -93,14 +95,18 @@ export default function LearningDoc() {
         </Link>
         <Card className="p-8 text-center">
           <p className="text-sm text-slate-400">Document not found.</p>
-          <p className="mt-1 text-xs text-slate-500">Looked for slug: <code>{activeSlug}</code></p>
+          <p className="mt-1 text-xs text-slate-500">
+            Looked for slug: <code>{activeSlug}</code>
+          </p>
         </Card>
       </PageShell>
     );
   }
 
   const content = rewriteIntraDocLinks(raw);
-  const allDocs = Object.keys(docs).filter(s => s !== activeSlug).sort();
+  const allDocs = Object.keys(docs)
+    .filter((s) => s !== activeSlug)
+    .sort();
 
   return (
     <PageShell>
@@ -119,7 +125,9 @@ export default function LearningDoc() {
             <Hammer className="h-4 w-4 text-sky-400" />
             <div>
               <div className="text-sm font-medium text-white">Companion roadmap in /learn</div>
-              <div className="text-xs text-slate-500">Track your progress through this material with FSRS.</div>
+              <div className="text-xs text-slate-500">
+                Track your progress through this material with FSRS.
+              </div>
             </div>
           </div>
           <Link
@@ -154,7 +162,7 @@ export default function LearningDoc() {
         <div className="mt-8">
           <SectionTitle>Other docs in the Learning OS</SectionTitle>
           <div className="grid gap-3 sm:grid-cols-2">
-            {allDocs.map(s => {
+            {allDocs.map((s) => {
               const m = DOC_META[s];
               const title = m?.title ?? s;
               const blurb = m?.blurb;

@@ -61,13 +61,14 @@ const S_TIER_CANON_VIDEO =
 const S_TIER_CANON_PAPER_EXT =
   /\.pdf(\?|#|$)|d4mucfpksywv\.cloudfront\.net|wisdom\.weizmann\.ac\.il|akamai\.com\/.*\.pdf|raft\.github\.io/i;
 
-const S_TIER_YOUTUBE = /(3blue1brown|stanfordonline|MITOpenCourseWare|AndrejKarpathy|Karpathy|statquest|harvard|LexFridman|Stanford|CS224N|MartyCagan|svpg)/i;
+const S_TIER_YOUTUBE =
+  /(3blue1brown|stanfordonline|MITOpenCourseWare|AndrejKarpathy|Karpathy|statquest|harvard|LexFridman|Stanford|CS224N|MartyCagan|svpg)/i;
 
 const S_TIER_PINECONE = /pinecone\.io\/learn\/hnsw/i;
 
 export function isSTierSource(title, url, slot) {
   const hay = `${title} ${url}`;
-  if (BLOCKED.some(re => re.test(url) || re.test(title))) return false;
+  if (BLOCKED.some((re) => re.test(url) || re.test(title))) return false;
   if (S_TIER_PINECONE.test(url)) return true;
 
   if (slot === 'paper' || !slot) {

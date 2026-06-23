@@ -18,7 +18,7 @@ export function difficultyToElo(difficulty: Difficulty): number {
 }
 
 export function expectedScore(playerElo: number, problemElo: number): number {
-  return 1 / (1 + Math.pow(10, (problemElo - playerElo) / 400));
+  return 1 / (1 + 10 ** ((problemElo - playerElo) / 400));
 }
 
 // Higher K during the provisional window (first ~10 solves per track) for
@@ -35,7 +35,7 @@ export function updatePlayerElo(
   playerElo: number,
   problemElo: number,
   score: number,
-  solveCount: number,
+  solveCount: number
 ): number {
   const expected = expectedScore(playerElo, problemElo);
   const k = kFactor(solveCount);

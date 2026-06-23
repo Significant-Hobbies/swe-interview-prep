@@ -2,7 +2,17 @@ import { ArrowLeft, ArrowRight, Hammer, Search, Target } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Badge, CollapsiblePanel, color, DIFFICULTY_COLOR, EmptyState, FilterPill, PageHeader, PageShell, STATUS_META } from '../components/ui';
+import {
+  Badge,
+  CollapsiblePanel,
+  color,
+  DIFFICULTY_COLOR,
+  EmptyState,
+  FilterPill,
+  PageHeader,
+  PageShell,
+  STATUS_META,
+} from '../components/ui';
 import {
   ConceptChain,
   type DonutSegment,
@@ -90,9 +100,12 @@ export default function Learn() {
       </section>
 
       <section className="mt-8">
-        <SectionHeader title="Tracks" subtitle="Each track is a learning lane. Dots = concepts coloured by status." />
+        <SectionHeader
+          title="Tracks"
+          subtitle="Each track is a learning lane. Dots = concepts coloured by status."
+        />
         <div className="space-y-3">
-          {sortedTracks().map(t => (
+          {sortedTracks().map((t) => (
             <TrackLane key={t.id} trackId={t.id} mastery={mastery} />
           ))}
         </div>
@@ -148,19 +161,34 @@ function ActivePathHero({
           <span>{roadmap.tracks.length} tracks</span>
         </div>
         <div className="flex items-baseline justify-between gap-4">
-          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">{roadmap.title}</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {roadmap.title}
+          </h2>
           <div className="shrink-0 text-right">
-            <div className="text-2xl font-semibold tabular-nums text-white">{Math.round(pct * 100)}%</div>
-            <div className="text-xs text-white/40">{roll.mastered} of {ids.length} mastered</div>
+            <div className="text-2xl font-semibold tabular-nums text-white">
+              {Math.round(pct * 100)}%
+            </div>
+            <div className="text-xs text-white/40">
+              {roll.mastered} of {ids.length} mastered
+            </div>
           </div>
         </div>
         <p className="mt-2 line-clamp-2 max-w-2xl text-sm text-white/50">{roadmap.goal}</p>
         <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/5">
-          <div className="h-full rounded-full bg-white transition-[width] duration-300" style={{ width: `${pct * 100}%` }} />
+          <div
+            className="h-full rounded-full bg-white transition-[width] duration-300"
+            style={{ width: `${pct * 100}%` }}
+          />
         </div>
         {activeMilestone && (
           <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/50">
-            <span><span className="text-white/80">Milestone {pickActiveMilestoneIdx(roadmap, mastery) + 1} of {roadmap.milestones.length}</span> · {activeMilestone.title.split(' — ')[0]}</span>
+            <span>
+              <span className="text-white/80">
+                Milestone {pickActiveMilestoneIdx(roadmap, mastery) + 1} of{' '}
+                {roadmap.milestones.length}
+              </span>{' '}
+              · {activeMilestone.title.split(' — ')[0]}
+            </span>
             <span className="text-white/30">·</span>
             <span>{ids.length - roll.untouched} started</span>
             <span className="text-white/30">·</span>
@@ -179,14 +207,18 @@ function ActivePathHero({
             <div className="mb-1 flex items-center gap-1.5 text-xs font-medium text-white">
               <Target className="h-3.5 w-3.5" /> Up next
             </div>
-            <Link to={`/concepts/${nextConcept.id}`} className="group inline-flex items-center gap-1 text-lg font-semibold text-white transition-colors hover:text-white">
+            <Link
+              to={`/concepts/${nextConcept.id}`}
+              className="group inline-flex items-center gap-1 text-lg font-semibold text-white transition-colors hover:text-white"
+            >
               {nextConcept.name}
               <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
             </Link>
             <p className="mt-0.5 line-clamp-1 text-sm text-white/50">{nextConcept.description}</p>
             {nextDrillTitle && (
               <div className="mt-2 flex items-center gap-1.5 text-xs text-white/50">
-                <Hammer className="h-3 w-3 text-white/40" /> Pair with drill: <span className="text-white/80">{nextDrillTitle}</span>
+                <Hammer className="h-3 w-3 text-white/40" /> Pair with drill:{' '}
+                <span className="text-white/80">{nextDrillTitle}</span>
               </div>
             )}
           </div>
@@ -195,8 +227,12 @@ function ActivePathHero({
             <div className="hidden bg-white/[0.02] p-5 sm:block sm:p-6">
               <div className="mb-2 text-xs font-medium text-white/50">After that</div>
               <div className="space-y-1.5">
-                {upNext.slice(1, 4).map(c => (
-                  <Link key={c.id} to={`/concepts/${c.id}`} className="block truncate text-sm text-white/50 transition-colors hover:text-white/80">
+                {upNext.slice(1, 4).map((c) => (
+                  <Link
+                    key={c.id}
+                    to={`/concepts/${c.id}`}
+                    className="block truncate text-sm text-white/50 transition-colors hover:text-white/80"
+                  >
                     · {c.name}
                   </Link>
                 ))}
@@ -211,7 +247,13 @@ function ActivePathHero({
 
 // --- Weak areas panel -------------------------------------------------------
 
-function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryEntry>; loading: boolean }) {
+function WeakAreasPanel({
+  mastery,
+  loading,
+}: {
+  mastery: Record<string, MasteryEntry>;
+  loading: boolean;
+}) {
   const weak = weakConcepts(mastery, 4);
   const hasAnyMastery = Object.keys(mastery).length > 0;
 
@@ -224,7 +266,10 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
       {loading && !hasAnyMastery ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-xl border border-white/[0.08] bg-white/[0.02]" />
+            <div
+              key={i}
+              className="h-32 animate-pulse rounded-xl border border-white/[0.08] bg-white/[0.02]"
+            />
           ))}
         </div>
       ) : weak.length === 0 ? (
@@ -238,7 +283,7 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
         />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {weak.map(c => {
+          {weak.map((c) => {
             const m = mastery[c.id];
             const drill = pickDrillForConcept(c.id);
             const trk = primaryGroup(c);
@@ -300,8 +345,8 @@ function WeakAreasPanel({ mastery, loading }: { mastery: Record<string, MasteryE
 
 function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
   const tracks = sortedTracks();
-  const segments: DonutSegment[] = tracks.map(t => {
-    const ids = conceptsByTag(t.id).map(c => c.id);
+  const segments: DonutSegment[] = tracks.map((t) => {
+    const ids = conceptsByTag(t.id).map((c) => c.id);
     const roll = rollupMastery(ids, mastery);
     return {
       id: t.id,
@@ -318,11 +363,13 @@ function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
       <div className="flex flex-col items-center gap-3">
         <MasteryDonut segments={segments} size={180} thickness={16} />
         <ul className="grid w-full grid-cols-2 gap-x-3 gap-y-1 text-xs">
-          {segments.map(s => (
+          {segments.map((s) => (
             <li key={s.id} className="flex items-center gap-1.5 truncate">
               <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${color(s.tone).solid}`} />
               <span className="truncate text-white/70">{s.label}</span>
-              <span className="ml-auto tabular-nums text-white/40">{s.mastered}/{s.total}</span>
+              <span className="ml-auto tabular-nums text-white/40">
+                {s.mastered}/{s.total}
+              </span>
             </li>
           ))}
         </ul>
@@ -333,12 +380,18 @@ function MasteryPanel({ mastery }: { mastery: Record<string, MasteryEntry> }) {
 
 // --- Roadmap picker --------------------------------------------------------
 
-function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Record<string, MasteryEntry> }) {
+function RoadmapPicker({
+  activeId,
+  mastery,
+}: {
+  activeId: string;
+  mastery: Record<string, MasteryEntry>;
+}) {
   return (
     <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5">
       <div className="mb-3 text-xs font-medium text-white/50">All roadmaps</div>
       <div className="grid gap-2 sm:grid-cols-2">
-        {ROADMAPS.map(r => {
+        {ROADMAPS.map((r) => {
           const ids = roadmapConceptIds(r);
           const roll = rollupMastery(ids, mastery);
           const pct = ids.length ? roll.mastered / ids.length : 0;
@@ -359,11 +412,16 @@ function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Recor
               </div>
               <h3 className="truncate text-sm font-semibold text-white">{r.title}</h3>
               <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/5">
-                <div className={`h-full rounded-full ${isActive ? 'bg-white' : 'bg-emerald-500'}`} style={{ width: `${pct * 100}%` }} />
+                <div
+                  className={`h-full rounded-full ${isActive ? 'bg-white' : 'bg-emerald-500'}`}
+                  style={{ width: `${pct * 100}%` }}
+                />
               </div>
               <div className="mt-1 flex items-center justify-between text-xs text-white/40">
                 <span>{r.milestones.length} milestones</span>
-                <span className="tabular-nums">{roll.mastered}/{ids.length}</span>
+                <span className="tabular-nums">
+                  {roll.mastered}/{ids.length}
+                </span>
               </div>
             </Link>
           );
@@ -375,12 +433,21 @@ function RoadmapPicker({ activeId, mastery }: { activeId: string; mastery: Recor
 
 // --- Track lane ------------------------------------------------------------
 
-function TrackLane({ trackId, mastery }: { trackId: string; mastery: Record<string, MasteryEntry> }) {
+function TrackLane({
+  trackId,
+  mastery,
+}: {
+  trackId: string;
+  mastery: Record<string, MasteryEntry>;
+}) {
   const track = groupForTag(trackId);
   if (!track) return null;
   const concepts = [...conceptsByTag(trackId)].sort((a, b) => b.priority - a.priority);
-  const roll = rollupMastery(concepts.map(c => c.id), mastery);
-  const nodes = concepts.map(c => ({
+  const roll = rollupMastery(
+    concepts.map((c) => c.id),
+    mastery
+  );
+  const nodes = concepts.map((c) => ({
     id: c.id,
     name: c.name,
     tone: STATUS_TONE[deriveConceptStatus(mastery[c.id])],
@@ -407,7 +474,9 @@ function TrackLane({ trackId, mastery }: { trackId: string; mastery: Record<stri
           <p className="line-clamp-1 text-[11px] text-white/40">{track.description}</p>
         </div>
         <div className="shrink-0 text-right text-[11px] text-white/40">
-          <div className="font-mono text-white/70">{roll.mastered}/{concepts.length}</div>
+          <div className="font-mono text-white/70">
+            {roll.mastered}/{concepts.length}
+          </div>
           <div className="text-[10px]">mastered</div>
         </div>
       </div>
@@ -436,13 +505,14 @@ function ConceptBrowser({
   const tracks = sortedTracks();
   const q = query.trim().toLowerCase();
 
-  const filtered = ALL_CONCEPTS.filter(c => {
+  const filtered = ALL_CONCEPTS.filter((c) => {
     if (group !== 'all' && !c.tags.includes(group)) return false;
     const st = deriveConceptStatus(mastery[c.id]);
     if (status === 'untouched' && st !== 'not-started') return false;
     if (status === 'mastered' && st !== 'mastered') return false;
     if (status === 'active' && (st === 'not-started' || st === 'mastered')) return false;
-    if (q && !`${c.name} ${c.description} ${c.tags.join(' ')}`.toLowerCase().includes(q)) return false;
+    if (q && !`${c.name} ${c.description} ${c.tags.join(' ')}`.toLowerCase().includes(q))
+      return false;
     return true;
   });
 
@@ -451,28 +521,35 @@ function ConceptBrowser({
       title="Browse all concepts"
       subtitle="Search, filter, deep-link."
       open={open}
-      onToggle={() => setOpen(v => !v)}
+      onToggle={() => setOpen((v) => !v)}
     >
       <div className="mb-4 flex flex-col gap-2">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
           <input
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Search concepts…"
             className="w-full rounded-lg border border-white/[0.08] bg-black py-2 pl-9 pr-3 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
         </div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
-          <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>All</FilterPill>
-          {tracks.map(t => (
-            <FilterPill key={t.id} active={group === t.id} tone={t.color} onClick={() => setGroup(t.id)}>
+          <FilterPill active={group === 'all'} onClick={() => setGroup('all')}>
+            All
+          </FilterPill>
+          {tracks.map((t) => (
+            <FilterPill
+              key={t.id}
+              active={group === t.id}
+              tone={t.color}
+              onClick={() => setGroup(t.id)}
+            >
               {t.title}
             </FilterPill>
           ))}
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {(['all', 'untouched', 'active', 'mastered'] as StatusFilter[]).map(s => (
+          {(['all', 'untouched', 'active', 'mastered'] as StatusFilter[]).map((s) => (
             <FilterPill key={s} active={status === s} onClick={() => setStatus(s)}>
               {s === 'all' ? 'Any status' : s[0].toUpperCase() + s.slice(1)}
             </FilterPill>
@@ -484,7 +561,7 @@ function ConceptBrowser({
         <EmptyState title="No concepts match" hint="Clear the search or filters." />
       ) : (
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map(c => (
+          {filtered.map((c) => (
             <ConceptCard
               key={c.id}
               concept={c}
@@ -526,9 +603,17 @@ function ConceptCard({
         <Badge tone={DIFFICULTY_COLOR[concept.difficulty]}>{concept.difficulty}</Badge>
         {gated && <Badge tone="amber">Gated</Badge>}
         {trk && <span className="text-white/40">{trk.short}</span>}
-        {drills > 0 && <span className="text-white/40">· {drills} drill{drills > 1 ? 's' : ''}</span>}
+        {drills > 0 && (
+          <span className="text-white/40">
+            · {drills} drill{drills > 1 ? 's' : ''}
+          </span>
+        )}
         {mastery && <span className="text-white/40">· {confidencePct(mastery)}%</span>}
-        {sparse && <span className="text-white/30" title="Links-first concept (no mental model authored)">·</span>}
+        {sparse && (
+          <span className="text-white/30" title="Links-first concept (no mental model authored)">
+            ·
+          </span>
+        )}
       </div>
     </Link>
   );
@@ -546,7 +631,7 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle: string })
 // --- Heuristics ------------------------------------------------------------
 
 function pickActiveRoadmap(mastery: Record<string, MasteryEntry>): Roadmap {
-  let best = ROADMAPS.find(r => r.id === PRIMARY_ROADMAP_ID) || ROADMAPS[0];
+  let best = ROADMAPS.find((r) => r.id === PRIMARY_ROADMAP_ID) || ROADMAPS[0];
   let bestScore = -1;
   for (const r of ROADMAPS) {
     const ids = roadmapConceptIds(r);
@@ -576,19 +661,19 @@ function pickActiveMilestoneIdx(roadmap: Roadmap, mastery: Record<string, Master
 function pickUpNextChain(
   mastery: Record<string, MasteryEntry>,
   limit: number,
-  gateCtx: ReturnType<typeof useGateContext>,
+  gateCtx: ReturnType<typeof useGateContext>
 ): Concept[] {
   const first = pickNextConcept(mastery, gateCtx);
   const chain: Concept[] = [];
   if (first) chain.push(first);
-  const seen = new Set(chain.map(c => c.id));
+  const seen = new Set(chain.map((c) => c.id));
   for (const c of ALL_CONCEPTS) {
     if (chain.length >= limit) break;
     if (seen.has(c.id)) continue;
     const status = deriveConceptStatus(mastery[c.id]);
     if (status === 'mastered') continue;
     if (!conceptAccessible(c, gateCtx)) continue;
-    const ok = c.prerequisites.every(p => {
+    const ok = c.prerequisites.every((p) => {
       const conf = mastery[p]?.confidence ?? 0;
       return conf >= 0.4 || !CONCEPT_BY_ID[p];
     });

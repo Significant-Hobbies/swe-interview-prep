@@ -4,11 +4,10 @@ import { buildDigestMessage, countDueFromMastery, digestEnabled } from './digest
 describe('digest', () => {
   it('countDueFromMastery counts past-due rows', () => {
     const now = new Date('2026-06-21T12:00:00Z');
-    const n = countDueFromMastery([
-      { due: '2026-06-20T00:00:00Z' },
-      { due: '2026-06-22T00:00:00Z' },
-      { due: null },
-    ], now);
+    const n = countDueFromMastery(
+      [{ due: '2026-06-20T00:00:00Z' }, { due: '2026-06-22T00:00:00Z' }, { due: null }],
+      now
+    );
     expect(n).toBe(2);
   });
 

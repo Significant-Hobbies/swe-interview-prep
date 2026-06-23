@@ -57,7 +57,9 @@ export default function ConceptDetail() {
       <PageShell>
         <Card className="p-8 text-center">
           <p className="text-sm text-white/50">Concept not found.</p>
-          <Link to="/learn" className="mt-2 inline-block text-sm text-white">← Back to concepts</Link>
+          <Link to="/learn" className="mt-2 inline-block text-sm text-white">
+            ← Back to concepts
+          </Link>
         </Card>
       </PageShell>
     );
@@ -86,7 +88,10 @@ export default function ConceptDetail() {
 
   return (
     <PageShell>
-      <Link to="/learn" className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70">
+      <Link
+        to="/learn"
+        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
+      >
         <ArrowLeft className="h-3.5 w-3.5" /> Concepts
       </Link>
 
@@ -94,17 +99,28 @@ export default function ConceptDetail() {
       <div className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight text-white">{concept.name}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-white/50">
-          {concept.tags.map(tag => {
+          {concept.tags.map((tag) => {
             const grp = groupForTag(tag);
             return (
-              <span key={tag} className="inline-flex items-center gap-1.5 rounded-md border border-white/15/70 px-1.5 py-0.5">
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1.5 rounded-md border border-white/15/70 px-1.5 py-0.5"
+              >
                 {grp && <span className={`h-1.5 w-1.5 rounded-full ${color(grp.color).solid}`} />}
                 {grp ? grp.short : tag}
               </span>
             );
           })}
           <span className="text-white/30">·</span>
-          <Badge tone={DIFFICULTY_COLOR[concept.difficulty] === 'emerald' ? 'success' : DIFFICULTY_COLOR[concept.difficulty] === 'amber' ? 'warning' : 'danger'}>
+          <Badge
+            tone={
+              DIFFICULTY_COLOR[concept.difficulty] === 'emerald'
+                ? 'success'
+                : DIFFICULTY_COLOR[concept.difficulty] === 'amber'
+                  ? 'warning'
+                  : 'danger'
+            }
+          >
             {concept.difficulty}
           </Badge>
           <span className="text-white/30">·</span>
@@ -118,18 +134,26 @@ export default function ConceptDetail() {
           <div className="flex items-start gap-3">
             <Lock className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium text-amber-200">Gated — complete one unlock path</div>
+              <div className="text-sm font-medium text-amber-200">
+                Gated — complete one unlock path
+              </div>
               <p className="mt-1 text-xs text-white/50">{gate.reason}</p>
               <ul className="mt-3 space-y-1.5">
                 {gate.requirements.map((req, i) => (
                   <li key={i} className="flex items-center gap-2 text-xs">
-                    {req.met
-                      ? <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                      : <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-white/20" />}
-                    {req.href && !req.met ? (
-                      <Link to={req.href} className="text-sky-300 hover:text-sky-200">{req.label}</Link>
+                    {req.met ? (
+                      <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
                     ) : (
-                      <span className={req.met ? 'text-white/40 line-through' : 'text-white/70'}>{req.label}</span>
+                      <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-white/20" />
+                    )}
+                    {req.href && !req.met ? (
+                      <Link to={req.href} className="text-sky-300 hover:text-sky-200">
+                        {req.label}
+                      </Link>
+                    ) : (
+                      <span className={req.met ? 'text-white/40 line-through' : 'text-white/70'}>
+                        {req.label}
+                      </span>
                     )}
                   </li>
                 ))}
@@ -144,15 +168,20 @@ export default function ConceptDetail() {
         <div>
           <div className="text-xs font-medium text-white/40">Your confidence</div>
           <div className="mt-1 flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map(n => (
-              <span key={n} className={`h-2.5 w-6 rounded-sm ${n <= confidence1to5(m) ? color(meta.color).solid : 'bg-white/5'}`} />
+            {[1, 2, 3, 4, 5].map((n) => (
+              <span
+                key={n}
+                className={`h-2.5 w-6 rounded-sm ${n <= confidence1to5(m) ? color(meta.color).solid : 'bg-white/5'}`}
+              />
             ))}
-            <span className="ml-2 text-xs text-white/40">{m ? `${confidence1to5(m)}/5` : 'untouched'}</span>
+            <span className="ml-2 text-xs text-white/40">
+              {m ? `${confidence1to5(m)}/5` : 'untouched'}
+            </span>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="mr-1 text-xs text-white/40">Log a self-review:</span>
-          {RATINGS.map(r => (
+          {RATINGS.map((r) => (
             <button
               key={r.id}
               onClick={() => review(concept.id, r.id)}
@@ -171,7 +200,11 @@ export default function ConceptDetail() {
             <SectionTitle
               action={
                 <Button tone="ghost" onClick={() => void copyAiPrompt()}>
-                  {copied ? <Check className="h-3.5 w-3.5" /> : <Sparkles className="h-3.5 w-3.5" />}
+                  {copied ? (
+                    <Check className="h-3.5 w-3.5" />
+                  ) : (
+                    <Sparkles className="h-3.5 w-3.5" />
+                  )}
                   {copied ? 'Copied' : 'AI expand'}
                 </Button>
               }
@@ -186,8 +219,8 @@ export default function ConceptDetail() {
               <Card className="flex items-start gap-3 p-4">
                 <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
                 <p className="text-sm text-white/50">
-                  No mental model written yet. Use <span className="text-white">AI expand</span> to draft one,
-                  then edit it in your notes — the rule is AI drafts, you approve.
+                  No mental model written yet. Use <span className="text-white">AI expand</span> to
+                  draft one, then edit it in your notes — the rule is AI drafts, you approve.
                 </p>
               </Card>
             )}
@@ -216,7 +249,9 @@ export default function ConceptDetail() {
           {concept.realWorldUsage && (
             <section>
               <SectionTitle>Real-world systems</SectionTitle>
-              <Card className="p-4"><p className="text-sm text-white/70">{concept.realWorldUsage}</p></Card>
+              <Card className="p-4">
+                <p className="text-sm text-white/70">{concept.realWorldUsage}</p>
+              </Card>
             </section>
           )}
 
@@ -227,11 +262,18 @@ export default function ConceptDetail() {
               <div className="space-y-4">
                 {editorialDrills.length > 0 && (
                   <div className="space-y-2">
-                    {editorialDrills.map(d => (
-                      <Card key={d.id} as="link" to={`/drills/${d.id}`} className="flex items-center justify-between gap-3 p-3">
+                    {editorialDrills.map((d) => (
+                      <Card
+                        key={d.id}
+                        as="link"
+                        to={`/drills/${d.id}`}
+                        className="flex items-center justify-between gap-3 p-3"
+                      >
                         <div>
                           <div className="text-sm font-medium text-white">{d.title}</div>
-                          <div className="text-xs text-white/40">{d.type} · {d.difficulty}</div>
+                          <div className="text-xs text-white/40">
+                            {d.type} · {d.difficulty}
+                          </div>
                         </div>
                         <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
                       </Card>
@@ -242,12 +284,19 @@ export default function ConceptDetail() {
                   <div>
                     <p className="mb-2 text-[11px] text-white/40">LeetCode practice</p>
                     <div className="space-y-2">
-                      {leetcodeDrills.map(d => (
-                        <Card key={d.id} as="link" to={`/drills/${d.id}`} className="flex items-center justify-between gap-3 p-3">
+                      {leetcodeDrills.map((d) => (
+                        <Card
+                          key={d.id}
+                          as="link"
+                          to={`/drills/${d.id}`}
+                          className="flex items-center justify-between gap-3 p-3"
+                        >
                           <div>
                             <div className="text-sm font-medium text-white">
                               {d.title}
-                              <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">LeetCode</span>
+                              <span className="ml-1.5 text-[10px] font-normal text-sky-400/80">
+                                LeetCode
+                              </span>
                             </div>
                             <div className="text-xs text-white/40">{d.difficulty} · external</div>
                           </div>
@@ -268,7 +317,7 @@ export default function ConceptDetail() {
             <section>
               <SectionTitle>Mock interview reps</SectionTitle>
               <div className="space-y-2">
-                {mockReps.map(m => (
+                {mockReps.map((m) => (
                   <Card
                     key={m.id}
                     as="link"
@@ -293,8 +342,13 @@ export default function ConceptDetail() {
             <SectionTitle>Artifacts to build</SectionTitle>
             {artifacts.length ? (
               <div className="space-y-2">
-                {artifacts.map(a => (
-                  <Card key={a.id} as="link" to={`/playground?artifact=${a.id}`} className="flex items-center justify-between gap-3 p-3">
+                {artifacts.map((a) => (
+                  <Card
+                    key={a.id}
+                    as="link"
+                    to={`/playground?artifact=${a.id}`}
+                    className="flex items-center justify-between gap-3 p-3"
+                  >
                     <div>
                       <div className="text-sm font-medium text-white">{a.title}</div>
                       <div className="text-xs text-white/40">{a.type}</div>
@@ -313,7 +367,9 @@ export default function ConceptDetail() {
             <section>
               <SectionTitle>Review questions</SectionTitle>
               <div className="space-y-2">
-                {questions.map(q => <ReviewQA key={q.id} question={q.question} answer={q.answer} />)}
+                {questions.map((q) => (
+                  <ReviewQA key={q.id} question={q.question} answer={q.answer} />
+                ))}
               </div>
             </section>
           )}
@@ -330,13 +386,15 @@ export default function ConceptDetail() {
           {concept.prerequisites.length > 0 && (
             <SidebarList title="Prerequisites" ids={concept.prerequisites} />
           )}
-          {concept.related.length > 0 && <SidebarList title="Related concepts" ids={concept.related} />}
+          {concept.related.length > 0 && (
+            <SidebarList title="Related concepts" ids={concept.related} />
+          )}
 
           {concept.projectApplications && concept.projectApplications.length > 0 && (
             <div>
               <SectionTitle>Project applications</SectionTitle>
               <div className="space-y-2">
-                {concept.projectApplications.map(p => {
+                {concept.projectApplications.map((p) => {
                   const proj = PROJECT_BY_ID[p];
                   return (
                     <Card key={p} as="link" to={`/projects/${p}`} className="p-3">
@@ -361,7 +419,7 @@ function SidebarList({ title, ids }: { title: string; ids: string[] }) {
     <div>
       <SectionTitle>{title}</SectionTitle>
       <div className="flex flex-wrap gap-1.5">
-        {ids.map(cid => {
+        {ids.map((cid) => {
           const c = CONCEPT_BY_ID[cid];
           if (!c) return null;
           return (
@@ -382,7 +440,7 @@ function SidebarList({ title, ids }: { title: string; ids: string[] }) {
 function ReviewQA({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <Card as="button" onClick={() => setOpen(o => !o)} className="w-full p-3">
+    <Card as="button" onClick={() => setOpen((o) => !o)} className="w-full p-3">
       <div className="text-sm font-medium text-white/80">{question}</div>
       {open ? (
         <div className="mt-2 text-sm text-white/50">{answer}</div>
@@ -393,7 +451,11 @@ function ReviewQA({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-function buildExpanderPrompt(concept: { name: string; tags: string[]; description: string }): string {
+function buildExpanderPrompt(concept: {
+  name: string;
+  tags: string[];
+  description: string;
+}): string {
   const primary = concept.tags[0] ?? '';
   return [
     `You are helping me learn the concept "${concept.name}" (tags: ${concept.tags.join(', ')}; primary group: ${primary}).`,

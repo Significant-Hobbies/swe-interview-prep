@@ -1,6 +1,6 @@
-import { describe, expect,it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { decayConfidence, isDue, type MasteryRow,reviewConcept } from './fsrs';
+import { decayConfidence, isDue, type MasteryRow, reviewConcept } from './fsrs';
 
 describe('fsrs', () => {
   describe('reviewConcept', () => {
@@ -55,11 +55,15 @@ describe('fsrs', () => {
     });
 
     it('returns true when due is in past', () => {
-      expect(isDue({ due: new Date(Date.now() - 86400000).toISOString() } as MasteryRow)).toBe(true);
+      expect(isDue({ due: new Date(Date.now() - 86400000).toISOString() } as MasteryRow)).toBe(
+        true
+      );
     });
 
     it('returns false when due is in future', () => {
-      expect(isDue({ due: new Date(Date.now() + 86400000).toISOString() } as MasteryRow)).toBe(false);
+      expect(isDue({ due: new Date(Date.now() + 86400000).toISOString() } as MasteryRow)).toBe(
+        false
+      );
     });
   });
 
@@ -70,8 +74,13 @@ describe('fsrs', () => {
 
     it('decays toward 0 as time passes', () => {
       const row: MasteryRow = {
-        stability: 1, difficulty: 5, elapsed_days: 0, scheduled_days: 0,
-        reps: 1, lapses: 0, state: 1,
+        stability: 1,
+        difficulty: 5,
+        elapsed_days: 0,
+        scheduled_days: 0,
+        reps: 1,
+        lapses: 0,
+        state: 1,
         last_review: new Date(Date.now() - 30 * 86400000).toISOString(),
         due: new Date().toISOString(),
         confidence: 1,
@@ -81,8 +90,13 @@ describe('fsrs', () => {
 
     it('stays high right after review', () => {
       const row: MasteryRow = {
-        stability: 30, difficulty: 5, elapsed_days: 0, scheduled_days: 0,
-        reps: 5, lapses: 0, state: 1,
+        stability: 30,
+        difficulty: 5,
+        elapsed_days: 0,
+        scheduled_days: 0,
+        reps: 5,
+        lapses: 0,
+        state: 1,
         last_review: new Date().toISOString(),
         due: new Date().toISOString(),
         confidence: 1,

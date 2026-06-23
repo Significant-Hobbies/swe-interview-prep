@@ -1,9 +1,9 @@
-import { createClient } from "@libsql/client/web";
+import { createClient } from '@libsql/client/web';
 
-import { dispatchLearningAction } from "../../shared/api/worker-learning.mjs";
-import { withTiming } from "../_lib/timing.js";
+import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { withTiming } from '../_lib/timing.js';
 
-const AUTH_COOKIE_NAME = "dsa_prep_auth";
+const AUTH_COOKIE_NAME = 'dsa_prep_auth';
 const AUTH_COOKIE_MAX_AGE = 30 * 24 * 60 * 60;
 
 let db;
@@ -11,7 +11,7 @@ let db;
 function getDb(env) {
   if (!db) {
     if (!env.TURSO_DATABASE_URL || !env.TURSO_AUTH_TOKEN) {
-      throw new Error("Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN");
+      throw new Error('Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN');
     }
     db = createClient({
       url: env.TURSO_DATABASE_URL,
@@ -143,7 +143,9 @@ async function initDatabase(env) {
       UNIQUE(user_id, question_id)
     )
   `);
-  await client.execute(`CREATE INDEX IF NOT EXISTS idx_rqm_user_due ON review_question_mastery(user_id, due)`);
+  await client.execute(
+    `CREATE INDEX IF NOT EXISTS idx_rqm_user_due ON review_question_mastery(user_id, due)`
+  );
   await client.execute(`
     CREATE TABLE IF NOT EXISTS user_elo_state (
       user_id TEXT PRIMARY KEY, state_json TEXT NOT NULL,
@@ -173,52 +175,56 @@ async function initDatabase(env) {
 
 function json(data, init = {}) {
   const headers = new Headers(init.headers);
-  headers.set("content-type", "application/json; charset=utf-8");
+  headers.set('content-type', 'application/json; charset=utf-8');
   return new Response(JSON.stringify(data), { ...init, headers });
 }
 
 function base64UrlEncode(input) {
   const bytes = input instanceof Uint8Array ? input : new TextEncoder().encode(input);
-  let binary = "";
+  let binary = '';
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 }
 
 function base64UrlDecode(input) {
-  const normalized = input.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
+  const normalized = input.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
   const binary = atob(padded);
   return Uint8Array.from(binary, (char) => char.charCodeAt(0));
 }
 
 async function hmacKey(secret) {
   return crypto.subtle.importKey(
-    "raw",
+    'raw',
     new TextEncoder().encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
+    { name: 'HMAC', hash: 'SHA-256' },
     false,
-    ["sign", "verify"],
+    ['sign', 'verify']
   );
 }
 
 async function signJwt(payload, secret) {
   const now = Math.floor(Date.now() / 1000);
-  const header = { alg: "HS256", typ: "JWT" };
+  const header = { alg: 'HS256', typ: 'JWT' };
   const body = { ...payload, iat: now, exp: now + AUTH_COOKIE_MAX_AGE };
   const unsigned = `${base64UrlEncode(JSON.stringify(header))}.${base64UrlEncode(JSON.stringify(body))}`;
-  const signature = await crypto.subtle.sign("HMAC", await hmacKey(secret), new TextEncoder().encode(unsigned));
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    await hmacKey(secret),
+    new TextEncoder().encode(unsigned)
+  );
   return `${unsigned}.${base64UrlEncode(new Uint8Array(signature))}`;
 }
 
 async function verifyJwt(token, secret) {
-  const [header, payload, signature] = token.split(".");
+  const [header, payload, signature] = token.split('.');
   if (!header || !payload || !signature) return null;
   const unsigned = `${header}.${payload}`;
   const ok = await crypto.subtle.verify(
-    "HMAC",
+    'HMAC',
     await hmacKey(secret),
     base64UrlDecode(signature),
-    new TextEncoder().encode(unsigned),
+    new TextEncoder().encode(unsigned)
   );
   if (!ok) return null;
   const parsed = JSON.parse(new TextDecoder().decode(base64UrlDecode(payload)));
@@ -227,12 +233,14 @@ async function verifyJwt(token, secret) {
 }
 
 function readCookie(request, name) {
-  const cookie = request.headers.get("cookie") || "";
-  return cookie
-    .split(";")
-    .map((part) => part.trim())
-    .find((part) => part.startsWith(`${name}=`))
-    ?.slice(name.length + 1) || null;
+  const cookie = request.headers.get('cookie') || '';
+  return (
+    cookie
+      .split(';')
+      .map((part) => part.trim())
+      .find((part) => part.startsWith(`${name}=`))
+      ?.slice(name.length + 1) || null
+  );
 }
 
 function authCookie(token) {
@@ -246,12 +254,12 @@ function clearAuthCookie() {
 async function currentUser(request, env) {
   const token =
     readCookie(request, AUTH_COOKIE_NAME) ||
-    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+    request.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
   if (!token) return null;
   const decoded = await verifyJwt(token, env.JWT_SECRET);
   if (!decoded?.userId) return null;
   const result = await getDb(env).execute({
-    sql: "SELECT * FROM users WHERE id = ?",
+    sql: 'SELECT * FROM users WHERE id = ?',
     args: [decoded.userId],
   });
   const row = result.rows[0];
@@ -269,7 +277,7 @@ async function currentUser(request, env) {
 async function findOrCreateUser(env, profile) {
   const client = getDb(env);
   const existing = await client.execute({
-    sql: "SELECT * FROM users WHERE google_id = ?",
+    sql: 'SELECT * FROM users WHERE google_id = ?',
     args: [profile.googleId],
   });
   if (existing.rows.length > 0) {
@@ -285,26 +293,28 @@ async function findOrCreateUser(env, profile) {
   }
   const id = crypto.randomUUID();
   await client.execute({
-    sql: "INSERT INTO users (id, google_id, email, name, picture) VALUES (?, ?, ?, ?, ?)",
+    sql: 'INSERT INTO users (id, google_id, email, name, picture) VALUES (?, ?, ?, ?, ?)',
     args: [id, profile.googleId, profile.email, profile.name, profile.picture || null],
   });
   return { id, ...profile, createdAt: new Date().toISOString() };
 }
 
 async function handleGoogle(request, env) {
-  if (request.method !== "POST") return json({ error: "Method not allowed" }, { status: 405 });
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
   if (!env.JWT_SECRET || !env.GOOGLE_CLIENT_ID) {
-    return json({ error: "Authentication is not configured" }, { status: 500 });
+    return json({ error: 'Authentication is not configured' }, { status: 500 });
   }
   await initDatabase(env);
   const { credential } = await request.json();
-  if (!credential) return json({ error: "credential required" }, { status: 400 });
+  if (!credential) return json({ error: 'credential required' }, { status: 400 });
 
-  const tokenInfo = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`);
-  if (!tokenInfo.ok) return json({ error: "Authentication failed" }, { status: 401 });
+  const tokenInfo = await fetch(
+    `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`
+  );
+  if (!tokenInfo.ok) return json({ error: 'Authentication failed' }, { status: 401 });
   const payload = await tokenInfo.json();
   if (payload.aud !== env.GOOGLE_CLIENT_ID || !payload.sub || !payload.email) {
-    return json({ error: "Authentication failed" }, { status: 401 });
+    return json({ error: 'Authentication failed' }, { status: 401 });
   }
 
   const user = await findOrCreateUser(env, {
@@ -315,48 +325,45 @@ async function handleGoogle(request, env) {
   });
   const token = await signJwt(
     { userId: user.id, email: user.email, name: user.name, picture: user.picture },
-    env.JWT_SECRET,
+    env.JWT_SECRET
   );
-  return json(
-    { user, token },
-    { headers: { "set-cookie": authCookie(token) } },
-  );
+  return json({ user, token }, { headers: { 'set-cookie': authCookie(token) } });
 }
 
 async function handleVerify(request, env) {
-  if (request.method !== "GET") return json({ error: "Method not allowed" }, { status: 405 });
+  if (request.method !== 'GET') return json({ error: 'Method not allowed' }, { status: 405 });
   const token =
     readCookie(request, AUTH_COOKIE_NAME) ||
-    request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-  if (!token) return json({ error: "Unauthorized" }, { status: 401 });
-  if (!env.JWT_SECRET) return json({ error: "Authentication is not configured" }, { status: 500 });
+    request.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+  if (!token) return json({ error: 'Unauthorized' }, { status: 401 });
+  if (!env.JWT_SECRET) return json({ error: 'Authentication is not configured' }, { status: 500 });
   await initDatabase(env);
   const user = await currentUser(request, env);
-  if (!user) return json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   return json({ user });
 }
 
 async function handleLogout(request) {
-  if (request.method !== "POST") return json({ error: "Method not allowed" }, { status: 405 });
-  return json({ ok: true }, { headers: { "set-cookie": clearAuthCookie() } });
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
+  return json({ ok: true }, { headers: { 'set-cookie': clearAuthCookie() } });
 }
 
 async function handleProgress(request, env) {
   await initDatabase(env);
   const user = await currentUser(request, env);
-  if (!user) return json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const client = getDb(env);
-  if (request.method === "GET") {
+  if (request.method === 'GET') {
     const result = await client.execute({
-      sql: "SELECT * FROM user_progress WHERE user_id = ?",
+      sql: 'SELECT * FROM user_progress WHERE user_id = ?',
       args: [user.id],
     });
     const progress = {};
     for (const row of result.rows) {
       progress[row.problem_id] = {
-        status: row.status || "unseen",
+        status: row.status || 'unseen',
         code: row.code || undefined,
-        language: row.language || "typescript",
+        language: row.language || 'typescript',
         bookmarked: Boolean(row.bookmarked),
         lastAttempted: row.last_attempted || undefined,
         ease: row.ease ?? 2.5,
@@ -368,9 +375,9 @@ async function handleProgress(request, env) {
     }
     return json({ progress });
   }
-  if (request.method === "PUT") {
+  if (request.method === 'PUT') {
     const { problemId, data } = await request.json();
-    if (!problemId || !data) return json({ error: "problemId and data required" }, { status: 400 });
+    if (!problemId || !data) return json({ error: 'problemId and data required' }, { status: 400 });
     await client.execute({
       sql: `INSERT INTO user_progress (
         id, user_id, problem_id, status, code, language, bookmarked, last_attempted,
@@ -392,9 +399,9 @@ async function handleProgress(request, env) {
         crypto.randomUUID(),
         user.id,
         problemId,
-        data.status || "unseen",
+        data.status || 'unseen',
         data.code || null,
-        data.language || "typescript",
+        data.language || 'typescript',
         data.bookmarked ? 1 : 0,
         data.lastAttempted || null,
         data.ease ?? 2.5,
@@ -406,7 +413,7 @@ async function handleProgress(request, env) {
     });
     return json({ success: true });
   }
-  return json({ error: "Method not allowed" }, { status: 405 });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }
 
 async function handleLearning(request, env) {
@@ -417,26 +424,23 @@ async function handleLearning(request, env) {
 }
 
 export const onRequest = withTiming(async ({ request, env, params }) => {
-  const path = (params.path || []).join("/");
+  const path = (params.path || []).join('/');
   try {
     // NOTE: each handler is `await`ed so a rejected promise is caught here —
     // returning the promise bare would let the rejection escape this try/catch.
-    if (path === "auth/google") return await handleGoogle(request, env);
-    if (path === "auth/logout") return await handleLogout(request);
-    if (path === "auth/verify") return await handleVerify(request, env);
-    if (path === "progress") return await handleProgress(request, env);
-    if (path === "learning") return await handleLearning(request, env);
-    return json({ error: "API route not found" }, { status: 404 });
+    if (path === 'auth/google') return await handleGoogle(request, env);
+    if (path === 'auth/logout') return await handleLogout(request);
+    if (path === 'auth/verify') return await handleVerify(request, env);
+    if (path === 'progress') return await handleProgress(request, env);
+    if (path === 'learning') return await handleLearning(request, env);
+    return json({ error: 'API route not found' }, { status: 404 });
   } catch (error) {
-    console.error("Pages API route failed", path, error);
+    console.error('Pages API route failed', path, error);
     // Malformed JSON bodies surface as a SyntaxError — that's a client error.
     if (error instanceof SyntaxError) {
-      return json({ error: "Invalid request body" }, { status: 400 });
+      return json({ error: 'Invalid request body' }, { status: 400 });
     }
     // Never leak the raw error message to the client.
-    return json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 },
-    );
+    return json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 });

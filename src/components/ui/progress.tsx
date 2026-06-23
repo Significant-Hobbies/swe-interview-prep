@@ -40,6 +40,6 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         />
       </div>
     );
-  },
+  }
 );
 Progress.displayName = 'Progress';

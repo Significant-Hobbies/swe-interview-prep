@@ -22,10 +22,12 @@ test.describe('Learning OS mobile (390px)', () => {
 
   test('Learn renders with no horizontal scroll', async ({ page }) => {
     await page.goto('/learn');
-    await expect(page.getByRole('heading', { name: 'Set your active path.', exact: true })).toBeVisible({ timeout: 10000 });
+    await expect(
+      page.getByRole('heading', { name: 'Set your active path.', exact: true })
+    ).toBeVisible({ timeout: 10000 });
 
     const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
     );
     expect(overflow).toBe(false);
   });
@@ -54,7 +56,7 @@ test.describe('Learning OS mobile (390px)', () => {
     await page.goto('/practice');
     await page.getByText('This week').waitFor({ state: 'visible' });
     const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
     );
     expect(overflow).toBe(false);
   });

@@ -67,7 +67,7 @@ Rules:
 
 function truncate(s, n) {
   s = String(s || '');
-  return s.length > n ? s.slice(0, n) + '\n…[truncated]' : s;
+  return s.length > n ? `${s.slice(0, n)}\n…[truncated]` : s;
 }
 
 export default async function handler(req, res) {
@@ -75,7 +75,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
   const { op, docTitle, docContent, questions, answers, explanation, aiConfig } = req.body || {};
-  if (!op) return res.status(400).json({ error: 'op required: quiz | grade-quiz | grade-explanation' });
+  if (!op)
+    return res.status(400).json({ error: 'op required: quiz | grade-quiz | grade-explanation' });
   if (!docContent) return res.status(400).json({ error: 'docContent required' });
 
   const docExcerpt = truncate(docContent, 8000);
@@ -90,7 +91,9 @@ export default async function handler(req, res) {
       maxTokens = 900;
     } else if (op === 'grade-quiz') {
       if (!Array.isArray(questions) || !Array.isArray(answers)) {
-        return res.status(400).json({ error: 'questions and answers arrays required for grade-quiz' });
+        return res
+          .status(400)
+          .json({ error: 'questions and answers arrays required for grade-quiz' });
       }
       const qa = questions
         .map((q, i) => `Q${i + 1}: ${q}\nA${i + 1}: ${truncate(answers[i] || '(blank)', 1500)}`)
@@ -116,6 +119,6 @@ export default async function handler(req, res) {
     }
     return res.status(200).json(parsed);
   } catch (e) {
-    return res.status(500).json({ error: 'AI call failed: ' + e.message });
+    return res.status(500).json({ error: `AI call failed: ${e.message}` });
   }
 }

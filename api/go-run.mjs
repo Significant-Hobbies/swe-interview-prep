@@ -12,7 +12,7 @@ const MAX_OUTPUT_BYTES = 64 * 1024;
 
 function truncate(text) {
   if (typeof text !== 'string' || text.length <= MAX_OUTPUT_BYTES) return text;
-  return text.slice(0, MAX_OUTPUT_BYTES) + '\n…[output truncated]';
+  return `${text.slice(0, MAX_OUTPUT_BYTES)}\n…[output truncated]`;
 }
 
 export default async function handler(req, res) {
@@ -51,18 +51,16 @@ export default async function handler(req, res) {
     }
 
     if (data.Events) {
-      output = data.Events
-        .filter(e => e.Kind === 'stdout')
-        .map(e => e.Message)
+      output = data.Events.filter((e) => e.Kind === 'stdout')
+        .map((e) => e.Message)
         .join('');
 
-      const stderr = data.Events
-        .filter(e => e.Kind === 'stderr')
-        .map(e => e.Message)
+      const stderr = data.Events.filter((e) => e.Kind === 'stderr')
+        .map((e) => e.Message)
         .join('');
 
       if (stderr) {
-        errors = errors ? errors + '\n' + stderr : stderr;
+        errors = errors ? `${errors}\n${stderr}` : stderr;
       }
     }
 
@@ -73,7 +71,7 @@ export default async function handler(req, res) {
         error: `Execution timed out (${REMOTE_COMPILE_TIMEOUT_MS / 1000}s limit) — your code may contain an infinite loop.`,
       });
     }
-    res.status(500).json({ error: 'Failed to compile: ' + err.message });
+    res.status(500).json({ error: `Failed to compile: ${err.message}` });
   } finally {
     clearTimeout(timer);
   }

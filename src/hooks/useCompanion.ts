@@ -1,4 +1,4 @@
-import { useCallback, useRef,useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { getAuthToken } from '../contexts/AuthContext';
 import { type AIConfig, IS_LOCAL, LOCAL_PROVIDERS } from './useAI';
@@ -32,21 +32,27 @@ You see their current code, language, and (optional) problem statement on every 
 
 const LOCAL_TOOL_MAP: Record<string, string> = {
   'claude-code': 'claude',
-  'codex': 'codex',
+  codex: 'codex',
   'gemini-cli': 'gemini',
 };
 
-async function streamLocal(config: AIConfig, messages: CompanionMessage[], systemContext: string, onChunk: (t: string) => void, signal: AbortSignal) {
+async function streamLocal(
+  config: AIConfig,
+  messages: CompanionMessage[],
+  systemContext: string,
+  onChunk: (t: string) => void,
+  signal: AbortSignal
+) {
   const tool = LOCAL_TOOL_MAP[config.model] || 'claude';
   const token = getAuthToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = `Bearer ${token}`;
+  if (token) headers.Authorization = `Bearer ${token}`;
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
-      systemPrompt: SYSTEM + '\n\n' + systemContext,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+      systemPrompt: `${SYSTEM}\n\n${systemContext}`,
       tool,
     }),
     signal,
@@ -55,7 +61,13 @@ async function streamLocal(config: AIConfig, messages: CompanionMessage[], syste
   await pumpSSE(res, onChunk);
 }
 
-async function streamRemote(config: AIConfig, messages: CompanionMessage[], systemContext: string, onChunk: (t: string) => void, signal: AbortSignal) {
+async function streamRemote(
+  config: AIConfig,
+  messages: CompanionMessage[],
+  systemContext: string,
+  onChunk: (t: string) => void,
+  signal: AbortSignal
+) {
   const res = await fetch('/api/ai/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -63,8 +75,8 @@ async function streamRemote(config: AIConfig, messages: CompanionMessage[], syst
       endpointUrl: config.endpointUrl,
       apiKey: config.apiKey,
       model: config.model,
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
-      systemPrompt: SYSTEM + '\n\n' + systemContext,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+      systemPrompt: `${SYSTEM}\n\n${systemContext}`,
     }),
     signal,
   });
@@ -73,7 +85,7 @@ async function streamRemote(config: AIConfig, messages: CompanionMessage[], syst
 }
 
 async function pumpSSE(res: Response, onChunk: (t: string) => void) {
-  const reader = res.body!.getReader();
+  const reader = res.body?.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
   while (true) {
@@ -99,8 +111,11 @@ async function pumpSSE(res: Response, onChunk: (t: string) => void) {
 const STORAGE_KEY = 'companion-thread';
 
 function loadThread(): CompanionMessage[] {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch {
+    return [];
+  }
 }
 
 export function useCompanion() {
@@ -113,21 +128,29 @@ export function useCompanion() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next.slice(-40)));
   }, []);
 
-  const ask = useCallback(async (userMessage: string, config: AIConfig, ctx: CompanionContext) => {
-    setError(null);
-    const userMsg: CompanionMessage = { role: 'user', content: userMessage, ts: Date.now() };
-    const next = [...messages, userMsg, { role: 'assistant' as const, content: '', ts: Date.now() }];
-    setMessages(next);
-    setIsStreaming(true);
+  const ask = useCallback(
+    async (userMessage: string, config: AIConfig, ctx: CompanionContext) => {
+      setError(null);
+      const userMsg: CompanionMessage = { role: 'user', content: userMessage, ts: Date.now() };
+      const next = [
+        ...messages,
+        userMsg,
+        { role: 'assistant' as const, content: '', ts: Date.now() },
+      ];
+      setMessages(next);
+      setIsStreaming(true);
 
-    let buf = '';
-    const onChunk = (t: string) => {
-      buf += t;
-      setMessages(prev => [...prev.slice(0, -1), { role: 'assistant', content: buf, ts: Date.now() }]);
-    };
+      let buf = '';
+      const onChunk = (t: string) => {
+        buf += t;
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          { role: 'assistant', content: buf, ts: Date.now() },
+        ]);
+      };
 
-    abortRef.current = new AbortController();
-    const systemContext = `Current language: ${ctx.language}
+      abortRef.current = new AbortController();
+      const systemContext = `Current language: ${ctx.language}
 Current problem (may be empty):
 ${ctx.problem || '(none)'}
 
@@ -136,32 +159,38 @@ Current code:
 ${ctx.code.slice(0, 6000)}
 \`\`\``;
 
-    try {
-      const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
-      const fn = isLocal ? streamLocal : streamRemote;
-      await fn(config, [...messages, userMsg], systemContext, onChunk, abortRef.current.signal);
-      const finalMsgs: CompanionMessage[] = [...messages, userMsg, { role: 'assistant', content: buf, ts: Date.now() }];
-      persist(finalMsgs);
+      try {
+        const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
+        const fn = isLocal ? streamLocal : streamRemote;
+        await fn(config, [...messages, userMsg], systemContext, onChunk, abortRef.current.signal);
+        const finalMsgs: CompanionMessage[] = [
+          ...messages,
+          userMsg,
+          { role: 'assistant', content: buf, ts: Date.now() },
+        ];
+        persist(finalMsgs);
 
-      // Fire-and-forget activity log
-      const token = getAuthToken();
-      if (token) {
-        fetch('/api/learning?action=activity', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({
-            kind: 'companion_turn',
-            payload: { language: ctx.language, codeLen: ctx.code.length, replyLen: buf.length },
-          }),
-        }).catch(() => {});
+        // Fire-and-forget activity log
+        const token = getAuthToken();
+        if (token) {
+          fetch('/api/learning?action=activity', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({
+              kind: 'companion_turn',
+              payload: { language: ctx.language, codeLen: ctx.code.length, replyLen: buf.length },
+            }),
+          }).catch(() => {});
+        }
+      } catch (e: any) {
+        if (e.name !== 'AbortError') setError(e.message);
+      } finally {
+        setIsStreaming(false);
+        abortRef.current = null;
       }
-    } catch (e: any) {
-      if (e.name !== 'AbortError') setError(e.message);
-    } finally {
-      setIsStreaming(false);
-      abortRef.current = null;
-    }
-  }, [messages, persist]);
+    },
+    [messages, persist]
+  );
 
   const stop = useCallback(() => {
     abortRef.current?.abort();

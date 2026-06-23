@@ -43,7 +43,7 @@ export default function FeaturedPaths({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-        {FEATURED_ROADMAP_PICKS.map(pick => {
+        {FEATURED_ROADMAP_PICKS.map((pick) => {
           const roadmap = ROADMAP_BY_ID[pick.id];
           if (!roadmap) return null;
           const active = activeRoadmapId === pick.id;
@@ -58,7 +58,9 @@ export default function FeaturedPaths({
           const body = (
             <>
               <div className="flex items-start justify-between gap-2">
-                <span className="text-base font-semibold tracking-tight text-white">{pick.label}</span>
+                <span className="text-base font-semibold tracking-tight text-white">
+                  {pick.label}
+                </span>
                 <span className="font-mono text-[10px] tabular-nums text-white/35">{horizon}</span>
               </div>
               <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-white/45">
@@ -69,7 +71,11 @@ export default function FeaturedPaths({
 
           if (variant === 'link') {
             return (
-              <Link key={pick.id} to={`/roadmaps/${pick.id}`} className={`${shellClass} px-3.5 py-3`}>
+              <Link
+                key={pick.id}
+                to={`/roadmaps/${pick.id}`}
+                className={`${shellClass} px-3.5 py-3`}
+              >
                 {body}
                 {pick.docSlug && (
                   <span className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-white/35">

@@ -2,7 +2,13 @@ import { describe, expect, it } from 'vitest';
 
 import { CONCEPT_PACKS, CONCEPTS } from '../data/learning-os';
 import type { TopicPack } from './topicPack';
-import { catalogPackStats, packFilledCount, packIsFull, packItemCount, packSlotFilled } from './packStats';
+import {
+  catalogPackStats,
+  packFilledCount,
+  packIsFull,
+  packItemCount,
+  packSlotFilled,
+} from './packStats';
 
 describe('packStats', () => {
   const full: TopicPack = {

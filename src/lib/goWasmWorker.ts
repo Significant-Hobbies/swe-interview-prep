@@ -62,9 +62,7 @@ function installMemoryCap() {
     const current = this.buffer.byteLength / 65536;
     if (current + delta > MAX_WASM_PAGES) {
       throw new RangeError(
-        `memory limit exceeded: program tried to use more than ${
-          (MAX_WASM_PAGES * 64) / 1024
-        } MiB`,
+        `memory limit exceeded: program tried to use more than ${(MAX_WASM_PAGES * 64) / 1024} MiB`
       );
     }
     return originalGrow.call(this, delta);
@@ -89,18 +87,14 @@ async function ensureLoaded(wasmExecUrl: string, wasmUrl: string): Promise<void>
     if (!response.ok) {
       throw new Error(`failed to fetch Go WASM module (${response.status})`);
     }
-    const { instance } = await WebAssembly.instantiateStreaming(
-      response,
-      go.importObject,
-    );
+    const { instance } = await WebAssembly.instantiateStreaming(response, go.importObject);
     go.run(instance); // starts main(), which sets self.__goRunCode
 
     // Wait (briefly) for the Go runtime to publish its entry point.
     await new Promise<void>((resolve, reject) => {
       const started = Date.now();
       const check = () => {
-        const fn = (self as unknown as { __goRunCode?: typeof goRunReady })
-          .__goRunCode;
+        const fn = (self as unknown as { __goRunCode?: typeof goRunReady }).__goRunCode;
         if (fn) {
           goRunReady = fn;
           resolve();
@@ -119,7 +113,7 @@ async function ensureLoaded(wasmExecUrl: string, wasmUrl: string): Promise<void>
 
 self.onmessage = async (event: MessageEvent<RunMessage>) => {
   const msg = event.data;
-  if (!msg || msg.type !== 'run') return;
+  if (msg?.type !== 'run') return;
   const { id, code, wasmExecUrl, wasmUrl } = msg;
 
   try {

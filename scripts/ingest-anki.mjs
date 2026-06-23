@@ -5,9 +5,9 @@
  *   node scripts/ingest-anki.mjs deck.apkg
  *   node scripts/ingest-anki.mjs deck.txt
  */
-import { readFileSync } from 'fs';
-import { basename, join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync } from 'node:fs';
+import { basename, join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import initSqlJs from 'sql.js';
 import { parseAnkiExport, parseApkgBytes, toReviewQuestions } from '../shared/lib/ingest-anki.mjs';
 
@@ -19,7 +19,7 @@ if (!inputPath) {
 }
 
 const concepts = JSON.parse(
-  readFileSync(join(__dirname, '..', 'src/data/concepts.json'), 'utf8'),
+  readFileSync(join(__dirname, '..', 'src/data/concepts.json'), 'utf8')
 ).concepts;
 
 const deckName = basename(inputPath).replace(/\.(apkg|txt|csv)$/i, '');
@@ -37,10 +37,16 @@ if (lower.endsWith('.apkg')) {
 
 const cards = toReviewQuestions(parsed, { requireConcept: false });
 
-console.log(JSON.stringify({
-  deckName: parsed.deckName,
-  format: parsed.format,
-  stats: parsed.stats,
-  count: cards.length,
-  cards,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      deckName: parsed.deckName,
+      format: parsed.format,
+      stats: parsed.stats,
+      count: cards.length,
+      cards,
+    },
+    null,
+    2
+  )
+);

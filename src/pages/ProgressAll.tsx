@@ -2,7 +2,19 @@ import { ArrowLeft, Hammer, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Badge, Button, Card, color, EmptyState, PageHeader, PageShell, ProgressBar, SectionTitle, TabButton, TabGroup } from '../components/ui';
+import {
+  Badge,
+  Button,
+  Card,
+  color,
+  EmptyState,
+  PageHeader,
+  PageShell,
+  ProgressBar,
+  SectionTitle,
+  TabButton,
+  TabGroup,
+} from '../components/ui';
 import {
   EDITORIAL_ARTIFACTS,
   CONCEPT_BY_ID,
@@ -15,7 +27,14 @@ import {
   sortedTracks,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, useConceptMastery } from '../hooks/useConcepts';
-import { type LearningNote, useArtifactStore, useDrillStore, useFocusMode, useLearningNotes, useUserElo } from '../hooks/useUserStore';
+import {
+  type LearningNote,
+  useArtifactStore,
+  useDrillStore,
+  useFocusMode,
+  useLearningNotes,
+  useUserElo,
+} from '../hooks/useUserStore';
 import { rollupMastery } from '../lib/conceptState';
 
 type Section = 'overview' | 'notes';
@@ -46,8 +65,16 @@ export default function Progress() {
         subtitle="Mastery rollups, artifact pipeline, and learning notes."
         actions={
           <TabGroup>
-            <TabButton active={section === 'overview'} onClick={() => setSection('overview')} label="Overview" />
-            <TabButton active={section === 'notes'} onClick={() => setSection('notes')} label="Notes" />
+            <TabButton
+              active={section === 'overview'}
+              onClick={() => setSection('overview')}
+              label="Overview"
+            />
+            <TabButton
+              active={section === 'notes'}
+              onClick={() => setSection('notes')}
+              label="Notes"
+            />
           </TabGroup>
         }
       />
@@ -65,11 +92,14 @@ function Overview() {
   const focusSessions = sessionsThisWeek();
   const { getElo } = useUserElo();
 
-  const overall = rollupMastery(ALL_CONCEPTS.map(c => c.id), mastery);
+  const overall = rollupMastery(
+    ALL_CONCEPTS.map((c) => c.id),
+    mastery
+  );
   const started = overall.total - overall.untouched;
-  const shipped = Object.values(artifacts).filter(a => a.status === 'shipped').length;
-  const building = Object.values(artifacts).filter(a => a.status === 'building').length;
-  const drillsSolved = Object.values(drills).filter(d => d.status === 'solved').length;
+  const shipped = Object.values(artifacts).filter((a) => a.status === 'shipped').length;
+  const building = Object.values(artifacts).filter((a) => a.status === 'building').length;
+  const drillsSolved = Object.values(drills).filter((d) => d.status === 'solved').length;
 
   return (
     <>
@@ -87,8 +117,8 @@ function Overview() {
       <section className="mb-10">
         <SectionTitle>Mastery by group</SectionTitle>
         <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] divide-y divide-white/[0.08]">
-          {sortedTracks().map(t => {
-            const ids = conceptsByTag(t.id).map(c => c.id);
+          {sortedTracks().map((t) => {
+            const ids = conceptsByTag(t.id).map((c) => c.id);
             const roll = rollupMastery(ids, mastery);
             const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
             return (
@@ -110,8 +140,8 @@ function Overview() {
       <section className="mb-10">
         <SectionTitle>ELO by roadmap</SectionTitle>
         <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] divide-y divide-white/[0.08]">
-          {ROADMAPS.map(r => {
-            const ids = conceptsInRoadmap(r.id).map(c => c.id);
+          {ROADMAPS.map((r) => {
+            const ids = conceptsInRoadmap(r.id).map((c) => c.id);
             if (!ids.length) return null;
             const roll = rollupMastery(ids, mastery);
             const elo = getElo(r.id);
@@ -123,7 +153,10 @@ function Overview() {
                 <span className="w-16 shrink-0 text-right text-xs tabular-nums text-white/50">
                   {roll.mastered}/{ids.length}
                 </span>
-                <span className="w-16 shrink-0 text-right font-mono text-xs text-white/40" title="Adaptive ELO for drills solved within this roadmap">
+                <span
+                  className="w-16 shrink-0 text-right font-mono text-xs text-white/40"
+                  title="Adaptive ELO for drills solved within this roadmap"
+                >
                   {elo}
                 </span>
               </div>
@@ -135,10 +168,17 @@ function Overview() {
       <section>
         <SectionTitle>Artifact pipeline</SectionTitle>
         <div className="rounded-xl border border-white/[0.08] bg-white/[0.02]">
-          {(['shipped', 'building', 'todo'] as const).map(status => {
-            const items = EDITORIAL_ARTIFACTS.filter(a => (artifacts[a.id]?.status || 'todo') === status);
+          {(['shipped', 'building', 'todo'] as const).map((status) => {
+            const items = EDITORIAL_ARTIFACTS.filter(
+              (a) => (artifacts[a.id]?.status || 'todo') === status
+            );
             if (!items.length) return null;
-            const dot = status === 'shipped' ? 'bg-emerald-300' : status === 'building' ? 'bg-amber-300' : 'bg-white/30';
+            const dot =
+              status === 'shipped'
+                ? 'bg-emerald-300'
+                : status === 'building'
+                  ? 'bg-amber-300'
+                  : 'bg-white/30';
             return (
               <div key={status} className="border-b border-white/[0.08] last:border-b-0 px-4 py-3">
                 <div className="mb-2 flex items-center gap-2 text-xs font-medium capitalize text-white/70">
@@ -147,7 +187,7 @@ function Overview() {
                   <span className="text-white/40">· {items.length}</span>
                 </div>
                 <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map(a => (
+                  {items.map((a) => (
                     <li key={a.id} className="truncate text-sm text-white/50">
                       <Hammer className="mr-1.5 inline h-3 w-3 text-white/30" />
                       {a.title}
@@ -163,7 +203,15 @@ function Overview() {
   );
 }
 
-function ProgressStat({ label, value, sub }: { label: string; value: React.ReactNode; sub?: string }) {
+function ProgressStat({
+  label,
+  value,
+  sub,
+}: {
+  label: string;
+  value: React.ReactNode;
+  sub?: string;
+}) {
   return (
     <div>
       <div className="text-xs font-medium text-white/50">{label}</div>
@@ -191,33 +239,39 @@ function NotesPanel() {
 
   const sorted = useMemo(
     () => [...notes].sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || '')),
-    [notes],
+    [notes]
   );
 
   return (
     <div>
       <div className="mb-4 flex justify-end">
-        <Button onClick={() => setComposing(c => !c)}><Plus className="h-4 w-4" /> New note</Button>
+        <Button onClick={() => setComposing((c) => !c)}>
+          <Plus className="h-4 w-4" /> New note
+        </Button>
       </div>
 
       {composing && (
         <Card className="mb-4 p-3">
           <input
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Title (optional)"
             className="mb-2 w-full rounded-md border border-white/[0.08] bg-black px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
           <textarea
             value={body}
-            onChange={e => setBody(e.target.value)}
+            onChange={(e) => setBody(e.target.value)}
             placeholder="Write…"
             rows={4}
             className="w-full resize-y rounded-md border border-white/[0.08] bg-black px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none"
           />
           <div className="mt-2 flex justify-end gap-2">
-            <Button tone="ghost" onClick={() => setComposing(false)}>Cancel</Button>
-            <Button onClick={create} disabled={!body.trim()}>Save</Button>
+            <Button tone="ghost" onClick={() => setComposing(false)}>
+              Cancel
+            </Button>
+            <Button onClick={create} disabled={!body.trim()}>
+              Save
+            </Button>
           </div>
         </Card>
       )}
@@ -226,7 +280,7 @@ function NotesPanel() {
         <EmptyState title="No notes yet" hint="Notes written on concepts also show up here." />
       ) : (
         <div className="space-y-2">
-          {sorted.map(n => (
+          {sorted.map((n) => (
             <NoteRow key={n.id} note={n} onDelete={() => deleteNote(n.id)} />
           ))}
         </div>
@@ -243,14 +297,22 @@ function NoteRow({ note, onDelete }: { note: LearningNote; onDelete: () => void 
         <div className="mb-1 flex items-center gap-2">
           <Badge tone={note.scope === 'free' ? 'default' : 'info'}>{note.scope}</Badge>
           {link && (
-            <Link to={link.to} className="text-xs text-white hover:underline">{link.label}</Link>
+            <Link to={link.to} className="text-xs text-white hover:underline">
+              {link.label}
+            </Link>
           )}
-          <span className="text-[11px] text-white/40">{new Date(note.updatedAt).toLocaleDateString()}</span>
+          <span className="text-[11px] text-white/40">
+            {new Date(note.updatedAt).toLocaleDateString()}
+          </span>
         </div>
         {note.title && <div className="text-sm font-semibold text-white">{note.title}</div>}
         <p className="whitespace-pre-wrap text-sm text-white/70">{note.body}</p>
       </div>
-      <button onClick={onDelete} aria-label="Delete note" className="shrink-0 text-white/40 hover:text-rose-400">
+      <button
+        onClick={onDelete}
+        aria-label="Delete note"
+        className="shrink-0 text-white/40 hover:text-rose-400"
+      >
         <Trash2 className="h-4 w-4" />
       </button>
     </Card>

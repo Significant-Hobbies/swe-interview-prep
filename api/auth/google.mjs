@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
     const payload = ticket.getPayload();
 
-    if (!payload || !payload.sub || !payload.email) {
+    if (!payload?.sub || !payload.email) {
       return res.status(400).json({ error: 'Invalid token payload' });
     }
 

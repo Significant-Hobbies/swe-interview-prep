@@ -5,7 +5,7 @@
 export function extractDiagramText(elements: any[]): string {
   if (!elements || elements.length === 0) return '';
 
-  const visible = elements.filter(e => !e.isDeleted);
+  const visible = elements.filter((e) => !e.isDeleted);
   if (visible.length === 0) return '';
 
   const byId = new Map<string, any>();
@@ -69,7 +69,7 @@ export function extractDiagramText(elements: any[]): string {
     return '';
   }
 
-  const parts: string[] = ['## User\'s Architecture Diagram'];
+  const parts: string[] = ["## User's Architecture Diagram"];
 
   if (shapes.length > 0) {
     parts.push('Components:');

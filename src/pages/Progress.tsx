@@ -14,9 +14,12 @@ export default function Progress() {
   const { artifacts } = useArtifactStore();
   const { drills } = useDrillStore();
 
-  const overall = rollupMastery(ALL_CONCEPTS.map(c => c.id), mastery);
-  const drillsSolved = Object.values(drills).filter(d => d.status === 'solved').length;
-  const shipped = Object.values(artifacts).filter(a => a.status === 'shipped').length;
+  const overall = rollupMastery(
+    ALL_CONCEPTS.map((c) => c.id),
+    mastery
+  );
+  const drillsSolved = Object.values(drills).filter((d) => d.status === 'solved').length;
+  const shipped = Object.values(artifacts).filter((a) => a.status === 'shipped').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 30), [mastery]);
   const pct = overall.total ? (overall.mastered / overall.total) * 100 : 0;
 
@@ -33,9 +36,7 @@ export default function Progress() {
           <span className="text-[110px] font-bold leading-none tracking-tighter tabular-nums text-white sm:text-[140px] lg:text-[160px]">
             {overall.mastered}
           </span>
-          <span className="font-mono text-3xl text-white/30 sm:text-4xl">
-            / {overall.total}
-          </span>
+          <span className="font-mono text-3xl text-white/30 sm:text-4xl">/ {overall.total}</span>
         </div>
 
         <div className="mt-2 font-mono text-xs text-white/50">

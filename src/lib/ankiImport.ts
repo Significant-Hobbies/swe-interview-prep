@@ -30,9 +30,9 @@ export interface AnkiImportResult {
 /** Turn parser stubs into schedulable review questions after manual concept assignment. */
 export function assignConceptToCards(
   unmapped: AnkiUnmappedCard[],
-  conceptId: string,
+  conceptId: string
 ): ReviewQuestion[] {
-  return unmapped.map(c => ({
+  return unmapped.map((c) => ({
     id: c.id,
     conceptId,
     type: 'recall' as const,
@@ -66,11 +66,9 @@ function isTextExport(file: File) {
 }
 
 export async function parseAnkiImportFile(file: File): Promise<AnkiImportResult> {
-  const {
-    parseAnkiExport,
-    parseApkgBytes,
-    toReviewQuestions,
-  } = await import('../../shared/lib/ingest-anki.mjs');
+  const { parseAnkiExport, parseApkgBytes, toReviewQuestions } = await import(
+    '../../shared/lib/ingest-anki.mjs'
+  );
 
   const deckFallback = file.name.replace(/\.(apkg|txt|csv)$/i, '') || 'imported';
   const concepts = CONCEPTS;
@@ -89,21 +87,23 @@ export async function parseAnkiImportFile(file: File): Promise<AnkiImportResult>
   const cards = toReviewQuestions(parsed, { requireConcept: true });
   const unmappedCards = (parsed.cards || [])
     .filter((c: { conceptId?: string | null }) => !c.conceptId)
-    .map((c: {
-      id: string;
-      question: string;
-      answer: string;
-      tags?: string[];
-      externalId: string;
-      deckName: string;
-    }) => ({
-      id: c.id,
-      question: c.question,
-      answer: c.answer,
-      tags: c.tags || [],
-      externalId: c.externalId,
-      deckName: c.deckName,
-    }));
+    .map(
+      (c: {
+        id: string;
+        question: string;
+        answer: string;
+        tags?: string[];
+        externalId: string;
+        deckName: string;
+      }) => ({
+        id: c.id,
+        question: c.question,
+        answer: c.answer,
+        tags: c.tags || [],
+        externalId: c.externalId,
+        deckName: c.deckName,
+      })
+    );
   const stats = parsed.stats ?? {
     totalNotes: parsed.cards?.length ?? 0,
     importable: parsed.cards?.length ?? 0,

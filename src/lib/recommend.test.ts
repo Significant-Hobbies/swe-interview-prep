@@ -36,8 +36,12 @@ describe('prereqsMet', () => {
   it('requires 40% confidence on every prerequisite', () => {
     const c = CONCEPT_BY_ID['search-evals'];
     expect(c).toBeDefined();
-    expect(prereqsMet(c!, { 'ranking-metrics': mastery(0.5), 'hypothesis-testing': mastery(0.3) })).toBe(false);
-    expect(prereqsMet(c!, { 'ranking-metrics': mastery(0.5), 'hypothesis-testing': mastery(0.5) })).toBe(true);
+    expect(
+      prereqsMet(c!, { 'ranking-metrics': mastery(0.5), 'hypothesis-testing': mastery(0.3) })
+    ).toBe(false);
+    expect(
+      prereqsMet(c!, { 'ranking-metrics': mastery(0.5), 'hypothesis-testing': mastery(0.5) })
+    ).toBe(true);
   });
 });
 
@@ -88,7 +92,7 @@ describe('dashboard helpers', () => {
   it('dueConcepts returns concepts with past due dates', () => {
     const past = new Date(Date.now() - 1000).toISOString();
     const m = { tokenization: mastery(0.4, past, 1) };
-    expect(dueConcepts(m).map(c => c.id)).toContain('tokenization');
+    expect(dueConcepts(m).map((c) => c.id)).toContain('tokenization');
   });
 
   it('weakConcepts returns low-confidence started concepts', () => {
@@ -96,7 +100,7 @@ describe('dashboard helpers', () => {
       bm25: mastery(0.2, undefined, 1),
       tokenization: mastery(0.9, undefined, 3),
     };
-    expect(weakConcepts(m, 3).map(c => c.id)).toEqual(['bm25']);
+    expect(weakConcepts(m, 3).map((c) => c.id)).toEqual(['bm25']);
   });
 
   it('pickDrillForConcept returns first mapped drill', () => {

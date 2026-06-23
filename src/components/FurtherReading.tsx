@@ -1,9 +1,6 @@
 import { BookOpen, ExternalLink, FileText, Link2, PlayCircle } from 'lucide-react';
 
-import {
-  type ExternalResource,
-  externalResourcesForTags,
-} from '../data/learning-os';
+import { type ExternalResource, externalResourcesForTags } from '../data/learning-os';
 
 const KIND_ICON: Record<ExternalResource['kind'], typeof PlayCircle> = {
   video: PlayCircle,
@@ -44,7 +41,7 @@ export function FurtherReading({ tags, limit = 12, eyebrow }: Props) {
       </div>
 
       <ul className="divide-y divide-white/[0.06] overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
-        {resources.map(r => {
+        {resources.map((r) => {
           const Icon = KIND_ICON[r.kind] ?? Link2;
           return (
             <li key={r.url}>

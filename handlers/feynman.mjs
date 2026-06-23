@@ -2,11 +2,14 @@ import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 const SYSTEM = `You grade a software engineer's plain-English explanation of code they just wrote.
@@ -66,7 +69,7 @@ Grade now. Return JSON only.`;
     }
     if (parsed.grade != null) parsed.grade = Number(parsed.grade);
   } catch (e) {
-    return res.status(500).json({ error: 'AI grading failed: ' + e.message });
+    return res.status(500).json({ error: `AI grading failed: ${e.message}` });
   }
 
   const id = randomBytes(16).toString('hex');
@@ -74,7 +77,9 @@ Grade now. Return JSON only.`;
     sql: `INSERT INTO feynman_logs (id, user_id, problem_id, concept_ids, explanation, grade, gaps_json, feedback)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
-      id, user.id, problemId || null,
+      id,
+      user.id,
+      problemId || null,
       conceptIds ? JSON.stringify(conceptIds) : null,
       explanation,
       parsed.grade ?? null,

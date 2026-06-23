@@ -53,9 +53,19 @@ export function Ring({
   const offset = c * (1 - pct);
   const color = hex(tone);
   return (
-    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
+    <div
+      className="relative inline-flex items-center justify-center"
+      style={{ width: size, height: size }}
+    >
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} stroke={SVG_TRACK} strokeWidth={stroke} fill="none" />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          stroke={SVG_TRACK}
+          strokeWidth={stroke}
+          fill="none"
+        />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -109,23 +119,30 @@ export function MasteryDonut({
   // Build segment arcs in a single reduce so the running cursor stays inside
   // the accumulator (React Compiler dislikes `let` reassignment in render).
   const startAngle = -Math.PI / 2; // 12 o'clock
-  const arcs = segments.reduce<Array<DonutSegment & { start: number; end: number; filledStart: number; filledEnd: number; span: number }>>(
-    (acc, seg) => {
-      const cursor = acc.length ? acc[acc.length - 1].end : startAngle;
-      const span = (seg.total / totalAll) * Math.PI * 2;
-      const filledSpan = seg.total ? (seg.mastered / seg.total) * span : 0;
-      acc.push({
-        ...seg,
-        start: cursor,
-        end: cursor + span,
-        filledStart: cursor,
-        filledEnd: cursor + filledSpan,
-        span,
-      });
-      return acc;
-    },
-    [],
-  );
+  const arcs = segments.reduce<
+    Array<
+      DonutSegment & {
+        start: number;
+        end: number;
+        filledStart: number;
+        filledEnd: number;
+        span: number;
+      }
+    >
+  >((acc, seg) => {
+    const cursor = acc.length ? acc[acc.length - 1].end : startAngle;
+    const span = (seg.total / totalAll) * Math.PI * 2;
+    const filledSpan = seg.total ? (seg.mastered / seg.total) * span : 0;
+    acc.push({
+      ...seg,
+      start: cursor,
+      end: cursor + span,
+      filledStart: cursor,
+      filledEnd: cursor + filledSpan,
+      span,
+    });
+    return acc;
+  }, []);
 
   function arcPath(start: number, end: number) {
     if (end - start < 1e-4) return '';
@@ -140,7 +157,7 @@ export function MasteryDonut({
   return (
     <svg width={size} height={size}>
       {/* Track background slices */}
-      {arcs.map(a => (
+      {arcs.map((a) => (
         <path
           key={`bg-${a.id}`}
           d={arcPath(a.start + 0.01, a.end - 0.01)}
@@ -151,7 +168,7 @@ export function MasteryDonut({
         />
       ))}
       {/* Filled (mastered) portion per track */}
-      {arcs.map(a => (
+      {arcs.map((a) => (
         <path
           key={`fg-${a.id}`}
           d={arcPath(a.filledStart + 0.01, a.filledEnd - 0.005)}
@@ -162,7 +179,14 @@ export function MasteryDonut({
         />
       ))}
       {/* Center text */}
-      <text x={cx} y={cy - 4} textAnchor="middle" className="fill-slate-50" fontSize="26" fontWeight="600">
+      <text
+        x={cx}
+        y={cy - 4}
+        textAnchor="middle"
+        className="fill-slate-50"
+        fontSize="26"
+        fontWeight="600"
+      >
         {overallPct}%
       </text>
       <text x={cx} y={cy + 16} textAnchor="middle" fill={SVG_MUTED} fontSize="11" fontWeight="500">
@@ -278,11 +302,14 @@ export function MilestoneTimeline({ steps }: { steps: TimelineStep[] }) {
       {/* connecting line */}
       <div className="absolute left-3 top-3 bottom-3 w-px bg-slate-800 sm:left-0 sm:right-0 sm:top-3 sm:bottom-auto sm:h-px sm:w-auto sm:bg-slate-800" />
       <ol className="relative flex flex-col gap-4 sm:flex-row sm:gap-3">
-        {steps.map(step => {
+        {steps.map((step) => {
           const filled = step.pct >= 1;
           const started = step.pct > 0;
           return (
-            <li key={step.id} className="flex items-start gap-3 sm:flex-1 sm:flex-col sm:items-stretch">
+            <li
+              key={step.id}
+              className="flex items-start gap-3 sm:flex-1 sm:flex-col sm:items-stretch"
+            >
               <span
                 className="relative z-10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-150 sm:mx-auto sm:mt-0"
                 style={{
@@ -292,18 +319,31 @@ export function MilestoneTimeline({ steps }: { steps: TimelineStep[] }) {
               >
                 {filled ? (
                   <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6.5L5 9L10 3.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M2 6.5L5 9L10 3.5"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 ) : (
-                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: started ? hex(step.tone) : SVG_MUTED }} />
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: started ? hex(step.tone) : SVG_MUTED }}
+                  />
                 )}
               </span>
               <div className="min-w-0 sm:mt-2 sm:text-center">
-                <div className={`text-sm font-semibold ${step.active ? 'text-slate-50' : 'text-slate-300'}`}>
+                <div
+                  className={`text-sm font-semibold ${step.active ? 'text-slate-50' : 'text-slate-300'}`}
+                >
                   {step.title}
                 </div>
                 <div className="text-xs text-slate-400">{step.sublabel}</div>
-                <div className="mt-1 text-xs text-slate-500">{Math.round(step.pct * 100)}% mastered</div>
+                <div className="mt-1 text-xs text-slate-500">
+                  {Math.round(step.pct * 100)}% mastered
+                </div>
               </div>
             </li>
           );
@@ -330,7 +370,14 @@ export function Sparkline({
   if (!values.length) {
     return (
       <svg width={width} height={height}>
-        <line x1={0} y1={height / 2} x2={width} y2={height / 2} stroke={SVG_TRACK} strokeWidth={1} />
+        <line
+          x1={0}
+          y1={height / 2}
+          x2={width}
+          y2={height / 2}
+          stroke={SVG_TRACK}
+          strokeWidth={1}
+        />
       </svg>
     );
   }
@@ -342,7 +389,14 @@ export function Sparkline({
   const color = hex(tone);
   return (
     <svg width={width} height={height}>
-      <polyline points={points} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline
+        points={points}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       {/* Last-point dot */}
       <circle
         cx={(values.length - 1) * step}

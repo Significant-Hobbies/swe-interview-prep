@@ -37,7 +37,10 @@ export function ingestedAnkiId(deckSlug, noteKey) {
 }
 
 function slugDeck(name) {
-  return (name || 'deck').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+  return (name || 'deck')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .slice(0, 40);
 }
 
 function simpleHash(str) {
@@ -54,8 +57,12 @@ function isSqlite(bytes) {
 
 function isZstd(bytes) {
   if (!bytes || bytes.length < 4) return false;
-  return bytes[0] === ZSTD_MAGIC[0] && bytes[1] === ZSTD_MAGIC[1]
-    && bytes[2] === ZSTD_MAGIC[2] && bytes[3] === ZSTD_MAGIC[3];
+  return (
+    bytes[0] === ZSTD_MAGIC[0] &&
+    bytes[1] === ZSTD_MAGIC[1] &&
+    bytes[2] === ZSTD_MAGIC[2] &&
+    bytes[3] === ZSTD_MAGIC[3]
+  );
 }
 
 /** Decompress zstd-wrapped collection blobs (Anki 23.10+). */
@@ -66,14 +73,16 @@ export function decompressCollection(bytes) {
     if (isSqlite(out)) return out;
     throw new Error('Decompressed collection is not SQLite — update Anki or use plain-text export');
   }
-  throw new Error('Unknown collection format — try re-exporting the deck or use Notes in plain text (.txt)');
+  throw new Error(
+    'Unknown collection format — try re-exporting the deck or use Notes in plain text (.txt)'
+  );
 }
 
 function collectionEntry(zipEntries) {
   const names = Object.keys(zipEntries);
   const prefer = ['collection.anki21', 'collection.anki2', 'collection.anki21b'];
   for (const p of prefer) {
-    const hit = names.find(n => n.endsWith(p) || n === p);
+    const hit = names.find((n) => n.endsWith(p) || n === p);
     if (hit) return { name: hit, bytes: zipEntries[hit] };
   }
   return null;
@@ -119,9 +128,7 @@ function fieldsFromNote(flds, model) {
   return { front, back };
 }
 
-function buildCard({
-  noteId, front, back, tagList, deckName, concepts, mapConcept,
-}) {
+function buildCard({ noteId, front, back, tagList, deckName, concepts, mapConcept }) {
   if (!front || back.length < MIN_ANSWER_CHARS) return null;
 
   const conceptId = mapConcept
@@ -171,7 +178,10 @@ export function parseApkgBytes(bytes, SQL, opts = {}) {
       const [noteId, mid, flds, tags, did] = row;
       const model = modelForId(models, mid);
       const { front, back } = fieldsFromNote(flds, model);
-      const tagList = String(tags || '').trim().split(/\s+/).filter(Boolean);
+      const tagList = String(tags || '')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
       const deckName = deckNameForId(decks, did) || defaultDeck;
 
       const card = buildCard({
@@ -197,7 +207,7 @@ export function parseApkgBytes(bytes, SQL, opts = {}) {
     stats: {
       totalNotes: notesRes[0]?.values.length ?? 0,
       importable: cards.length,
-      unmapped: cards.filter(c => !c.conceptId).length,
+      unmapped: cards.filter((c) => !c.conceptId).length,
     },
   };
 }
@@ -239,7 +249,7 @@ export function parseAnkiHeader(text) {
     start = i + 1;
   }
 
-  return { directives, dataLines: lines.slice(start).filter(l => l.trim()) };
+  return { directives, dataLines: lines.slice(start).filter((l) => l.trim()) };
 }
 
 export function parseAnkiExport(text, opts = {}) {
@@ -297,7 +307,7 @@ export function parseAnkiExport(text, opts = {}) {
     stats: {
       totalNotes: dataLines.length,
       importable: cards.length,
-      unmapped: cards.filter(c => !c.conceptId).length,
+      unmapped: cards.filter((c) => !c.conceptId).length,
     },
   };
 }
@@ -306,19 +316,19 @@ export function mapConceptFromTags(tagList, concepts, deckName = null) {
   for (const tag of tagList) {
     const lower = tag.toLowerCase();
     const hit = concepts.find(
-      c => c.id === lower || c.id === tag || c.name.toLowerCase() === lower,
+      (c) => c.id === lower || c.id === tag || c.name.toLowerCase() === lower
     );
     if (hit) return hit.id;
   }
   for (const tag of tagList) {
     const lower = tag.toLowerCase().replace(/[^a-z0-9-]/g, '');
-    const hit = concepts.find(c => lower.includes(c.id) || c.id.includes(lower));
+    const hit = concepts.find((c) => lower.includes(c.id) || c.id.includes(lower));
     if (hit) return hit.id;
   }
   if (deckName) {
     const slug = slugDeck(deckName).replace(/-/g, ' ');
     const hit = concepts.find(
-      c => slug.includes(c.id) || c.name.toLowerCase().includes(slug.slice(0, 12)),
+      (c) => slug.includes(c.id) || c.name.toLowerCase().includes(slug.slice(0, 12))
     );
     if (hit) return hit.id;
   }
@@ -327,8 +337,8 @@ export function mapConceptFromTags(tagList, concepts, deckName = null) {
 
 export function toReviewQuestions(parsed, { requireConcept = true } = {}) {
   return (parsed.cards || [])
-    .filter(c => !requireConcept || c.conceptId)
-    .map(c => ({
+    .filter((c) => !requireConcept || c.conceptId)
+    .map((c) => ({
       id: c.id,
       conceptId: c.conceptId,
       type: c.type || 'recall',
@@ -339,4 +349,3 @@ export function toReviewQuestions(parsed, { requireConcept = true } = {}) {
       ankiRef: { deckName: c.deckName, externalId: c.externalId, tags: c.tags },
     }));
 }
-

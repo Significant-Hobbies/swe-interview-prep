@@ -6,7 +6,9 @@ import { assertSTierPackItems, isSTierSource } from './sourceTier';
 describe('sourceTier', () => {
   it('rejects Wikipedia and Refactoring Guru', () => {
     expect(isSTierSource('BM25', 'https://en.wikipedia.org/wiki/Okapi_BM25', 'blog')).toBe(false);
-    expect(isSTierSource('Strategy', 'https://refactoring.guru/design-patterns/strategy', 'paper')).toBe(false);
+    expect(
+      isSTierSource('Strategy', 'https://refactoring.guru/design-patterns/strategy', 'paper')
+    ).toBe(false);
   });
 
   it('accepts canonical university and research sources', () => {

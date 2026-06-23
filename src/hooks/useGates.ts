@@ -15,7 +15,10 @@ export function useGateContext(): GateContext {
   const { artifacts } = useArtifactStore();
   const { drills } = useDrillStore();
   const { getElo } = useUserElo();
-  return useMemo(() => ({ mastery, getElo, artifacts, drills }), [mastery, getElo, artifacts, drills]);
+  return useMemo(
+    () => ({ mastery, getElo, artifacts, drills }),
+    [mastery, getElo, artifacts, drills]
+  );
 }
 
 export function useGates() {

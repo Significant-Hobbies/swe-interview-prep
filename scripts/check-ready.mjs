@@ -2,7 +2,7 @@
 /**
  * Pre-flight: local env, unit tests, production build, optional Pages secret audit.
  */
-import { spawnSync } from 'child_process';
+import { spawnSync } from 'node:child_process';
 import { loadEnvFiles } from './load-env.mjs';
 
 loadEnvFiles();
@@ -27,12 +27,12 @@ console.log('\n── 4/4 Cloudflare Pages secrets (optional) ──');
 const audit = spawnSync(
   'pnpm',
   ['exec', 'wrangler', 'pages', 'secret', 'list', '--project-name=swe-interview-prep'],
-  { cwd: ROOT, env: process.env, encoding: 'utf8' },
+  { cwd: ROOT, env: process.env, encoding: 'utf8' }
 );
 if (audit.status === 0) {
   const required = ['GOOGLE_CLIENT_ID', 'JWT_SECRET', 'TURSO_AUTH_TOKEN', 'TURSO_DATABASE_URL'];
-  const present = required.filter(name => audit.stdout.includes(`- ${name}:`));
-  const missing = required.filter(name => !present.includes(name));
+  const present = required.filter((name) => audit.stdout.includes(`- ${name}:`));
+  const missing = required.filter((name) => !present.includes(name));
   if (missing.length) {
     console.warn('Missing Pages secrets:', missing.join(', '));
     console.warn('Run: node scripts/sync-pages-secrets.mjs');

@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 import { requireAuth } from '../api/auth/verify.mjs';
 import { getDb } from '../shared/db/client.mjs';
@@ -6,7 +6,10 @@ import { initDatabase } from '../shared/db/schema.mjs';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 export default async function handler(req, res) {
@@ -48,15 +51,23 @@ export default async function handler(req, res) {
               last_attempt = excluded.last_attempt,
               updated_at = datetime('now')`,
       args: [
-        randomBytes(16).toString('hex'), user.id, drillId,
-        status || 'attempted', lastCode || null, now,
+        randomBytes(16).toString('hex'),
+        user.id,
+        drillId,
+        status || 'attempted',
+        lastCode || null,
+        now,
       ],
     });
     // Mirror the attempt into the activity log for personalization.
     await db.execute({
       sql: `INSERT INTO activity_log (id, user_id, kind, payload)
             VALUES (?, ?, 'drill', ?)`,
-      args: [randomBytes(16).toString('hex'), user.id, JSON.stringify({ drillId, status: status || 'attempted' })],
+      args: [
+        randomBytes(16).toString('hex'),
+        user.id,
+        JSON.stringify({ drillId, status: status || 'attempted' }),
+      ],
     });
     return res.status(200).json({ ok: true });
   }

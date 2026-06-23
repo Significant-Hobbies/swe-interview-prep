@@ -4,13 +4,73 @@
   "files": {
     "ignoreUnknown": true,
     "includes": [
-      "**", "!**/.next", "!**/.open-next", "!**/.wrangler", "!**/out", "!**/dist", "!**/build",
-      "!**/node_modules", "!**/.astro", "!**/vite-env.d.ts", "!**/cloudflare-env.d.ts",
-      "!**/pnpm-lock.yaml", "!**/package-lock.json", "!**/tsconfig.tsbuildinfo", "!**/public/wasm/**"
+      "**",
+      "!**/.next",
+      "!**/.open-next",
+      "!**/.wrangler",
+      "!**/out",
+      "!**/dist",
+      "!**/build",
+      "!**/node_modules",
+      "!**/.astro",
+      "!**/vite-env.d.ts",
+      "!**/cloudflare-env.d.ts",
+      "!**/pnpm-lock.yaml",
+      "!**/package-lock.json",
+      "!**/tsconfig.tsbuildinfo",
+      "!**/public/wasm",
+      "!**/*.css"
     ]
   },
-  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 100, "lineEnding": "lf" },
-  "javascript": { "formatter": { "quoteStyle": "single", "semicolons": "always", "trailingCommas": "es5", "jsxQuoteStyle": "double" } },
-  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5",
+      "jsxQuoteStyle": "double"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useButtonType": "off",
+        "useValidAnchor": "off",
+        "noLabelWithoutControl": "off",
+        "noAmbiguousAnchorText": "off",
+        "useKeyWithClickEvents": "off",
+        "noStaticElementInteractions": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noAssignInExpressions": "off",
+        "useIterableCallbackReturn": "off",
+        "noImplicitAnyLet": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useTemplate": "off",
+        "useNodejsImportProtocol": "off"
+      },
+      "complexity": {
+        "useOptionalChain": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "noUnusedFunctionParameters": "warn",
+        "useExhaustiveDependencies": "off"
+      }
+    }
+  },
   "assist": { "enabled": true, "actions": { "source": { "organizeImports": "off" } } }
 }

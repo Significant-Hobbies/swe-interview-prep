@@ -38,11 +38,31 @@ export const TAG_TO_PATTERN = {
 };
 
 const TAG_PRIORITY = [
-  'trie', 'heap-priority-queue', 'backtracking', 'graph', 'topological-sort', 'union-find',
-  'sliding-window', 'binary-search', 'linked-list', 'tree', 'binary-tree', 'binary-search-tree',
-  'dynamic-programming', 'stack', 'monotonic-stack', 'two-pointers', 'greedy',
-  'bit-manipulation', 'interval', 'merge-intervals', 'math', 'geometry',
-  'hash-table', 'array', 'string',
+  'trie',
+  'heap-priority-queue',
+  'backtracking',
+  'graph',
+  'topological-sort',
+  'union-find',
+  'sliding-window',
+  'binary-search',
+  'linked-list',
+  'tree',
+  'binary-tree',
+  'binary-search-tree',
+  'dynamic-programming',
+  'stack',
+  'monotonic-stack',
+  'two-pointers',
+  'greedy',
+  'bit-manipulation',
+  'interval',
+  'merge-intervals',
+  'math',
+  'geometry',
+  'hash-table',
+  'array',
+  'string',
 ];
 
 export function detectConceptId(tags) {
@@ -61,11 +81,14 @@ export function difficultyToDrill(difficulty) {
 }
 
 export function slugToDrillId(slug) {
-  return `lc-${slug.replace(/[^a-z0-9-]+/gi, '-').replace(/^-|-$/g, '').slice(0, 60)}`;
+  return `lc-${slug
+    .replace(/[^a-z0-9-]+/gi, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 60)}`;
 }
 
 export function buildDrillStub(question, slug) {
-  const tags = question.topicTags?.map(t => t.slug) || [];
+  const tags = question.topicTags?.map((t) => t.slug) || [];
   const conceptId = detectConceptId(tags);
   const title = question.title || slug;
   const difficulty = difficultyToDrill(question.difficulty);
@@ -78,7 +101,7 @@ export function buildDrillStub(question, slug) {
     conceptId,
     type: 'coding-problem',
     difficulty,
-    prompt: `LeetCode #${leetcodeNumber || '?' } — ${title}. Solve on LeetCode, then implement here if you want it in your drill queue.\n\n${leetcodeUrl}`,
+    prompt: `LeetCode #${leetcodeNumber || '?'} — ${title}. Solve on LeetCode, then implement here if you want it in your drill queue.\n\n${leetcodeUrl}`,
     expectedOutput: 'Pass all LeetCode test cases for this problem.',
     hints: [
       `Pattern hint: ${conceptId.replace(/-/g, ' ')}.`,
@@ -121,7 +144,7 @@ export async function fetchLeetCodeQuestion(slug) {
 }
 
 export function mergeDrillStubs(existingDrills, stubs, { dryRun = false } = {}) {
-  const byId = new Map(existingDrills.map(d => [d.id, d]));
+  const byId = new Map(existingDrills.map((d) => [d.id, d]));
   let added = 0;
   let skipped = 0;
 

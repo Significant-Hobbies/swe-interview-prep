@@ -2,10 +2,18 @@ import drillsData from '../data/drills.json';
 import type { Concept, Resource } from '../data/learning-os';
 
 const DRILL_BY_ID = Object.fromEntries(
-  ((drillsData as { drills: { id: string; title: string }[] }).drills ?? []).map(d => [d.id, d]),
+  ((drillsData as { drills: { id: string; title: string }[] }).drills ?? []).map((d) => [d.id, d])
 );
 
-export const PACK_CATEGORIES = ['video', 'paper', 'blog', 'book', 'problem', 'write', 'more'] as const;
+export const PACK_CATEGORIES = [
+  'video',
+  'paper',
+  'blog',
+  'book',
+  'problem',
+  'write',
+  'more',
+] as const;
 export type PackCategory = (typeof PACK_CATEGORIES)[number];
 
 export type PackMediaSlot = Extract<PackCategory, 'video' | 'paper' | 'blog' | 'book'>;
@@ -77,7 +85,11 @@ export function classifyLooseUrl(title: string, url: string, kind?: string): Pac
   return classifyResource({
     title,
     url,
-    type: (kind === 'video' || kind === 'course' || kind === 'paper' || kind === 'article' || kind === 'doc'
+    type: (kind === 'video' ||
+    kind === 'course' ||
+    kind === 'paper' ||
+    kind === 'article' ||
+    kind === 'doc'
       ? kind
       : 'doc') as Resource['type'],
   });
@@ -97,11 +109,11 @@ export function packItemText(item: PackItem): string {
 }
 
 export function packItemsForCategory(pack: TopicPack, category: PackCategory): PackItem[] {
-  return pack.items.filter(i => i.category === category);
+  return pack.items.filter((i) => i.category === category);
 }
 
 export function packHasCategory(pack: TopicPack | undefined, category: PackCategory): boolean {
-  return Boolean(pack?.items.some(i => i.category === category));
+  return Boolean(pack?.items.some((i) => i.category === category));
 }
 
 export function buildTopicPack(concept: Concept, extraLinks: PackLink[] = []): TopicPack {
@@ -159,7 +171,11 @@ export function buildTopicPack(concept: Concept, extraLinks: PackLink[] = []): T
   return { items };
 }
 
-export function packCompleteness(pack: TopicPack): { filled: number; total: number; missing: string[] } {
+export function packCompleteness(pack: TopicPack): {
+  filled: number;
+  total: number;
+  missing: string[];
+} {
   const missing: string[] = [];
   let filled = 0;
   const total = PRIMARY_CATEGORIES.length;

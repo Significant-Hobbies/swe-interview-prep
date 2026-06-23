@@ -10,7 +10,10 @@ interface ExtractOptions {
   minScore?: number;
 }
 
-function flattenSections(sections: Section[], parentTitle = ''): Array<{
+function flattenSections(
+  sections: Section[],
+  parentTitle = ''
+): Array<{
   title: string;
   content: string;
   path: string;
@@ -52,12 +55,12 @@ function firstGoodParagraph(raw: string): string {
   const withoutCode = raw.replace(/```[\s\S]*?```/g, '\n');
   const paragraphs = withoutCode
     .split(/\n{2,}/)
-    .map(p => stripMarkdown(p))
+    .map((p) => stripMarkdown(p))
     .filter(Boolean)
-    .filter(p => p.length >= 40);
+    .filter((p) => p.length >= 40);
 
   const cleaned = paragraphs.filter(
-    p => !/(back to top|table of contents|contributing|license)/i.test(p)
+    (p) => !/(back to top|table of contents|contributing|license)/i.test(p)
   );
 
   if (cleaned.length === 0) {
@@ -115,8 +118,8 @@ function inferDifficulty(text: string): Exercise['difficulty'] {
   const lower = text.toLowerCase();
   const hardHints = ['distributed', 'consensus', 'scalability', 'eventual consistency', 'advanced'];
   const mediumHints = ['tradeoff', 'pattern', 'architecture', 'lifecycle', 'optimization'];
-  if (hardHints.some(h => lower.includes(h))) return 'hard';
-  if (mediumHints.some(h => lower.includes(h))) return 'medium';
+  if (hardHints.some((h) => lower.includes(h))) return 'hard';
+  if (mediumHints.some((h) => lower.includes(h))) return 'medium';
   return 'easy';
 }
 
@@ -150,7 +153,10 @@ export function deriveExercisesFromSections(
     if (!answer || answer.length < 60) continue;
 
     const exercise: Exercise = {
-      id: `auto-${entry.path.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+      id: `auto-${entry.path
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')}`,
       type: 'qa',
       question: toQuestion(entry.title, answer),
       answer,

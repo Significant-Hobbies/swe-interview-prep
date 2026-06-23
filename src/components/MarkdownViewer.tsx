@@ -82,7 +82,9 @@ export default function MarkdownViewer({ content, sourceBaseUrl }: MarkdownViewe
           ),
           thead: ({ children }) => <thead className="bg-slate-900">{children}</thead>,
           th: ({ children }) => (
-            <th className="border-b border-slate-700 px-4 py-3 text-left text-slate-200">{children}</th>
+            <th className="border-b border-slate-700 px-4 py-3 text-left text-slate-200">
+              {children}
+            </th>
           ),
           td: ({ children }) => (
             <td className="border-b border-slate-800 px-4 py-3 text-slate-300">{children}</td>

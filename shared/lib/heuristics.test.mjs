@@ -25,8 +25,20 @@ describe('pickDailyConcept', () => {
 
   it('picks lowest-confidence concept', () => {
     const masteryRows = [
-      { concept_id: 'a', stability: 100, last_review: new Date().toISOString(), reps: 5, lapses: 0 },
-      { concept_id: 'c', stability: 1, last_review: new Date(Date.now() - 30 * 86400000).toISOString(), reps: 1, lapses: 2 },
+      {
+        concept_id: 'a',
+        stability: 100,
+        last_review: new Date().toISOString(),
+        reps: 5,
+        lapses: 0,
+      },
+      {
+        concept_id: 'c',
+        stability: 1,
+        last_review: new Date(Date.now() - 30 * 86400000).toISOString(),
+        reps: 1,
+        lapses: 2,
+      },
     ];
     const plan = pickDailyConcept(CONCEPTS, masteryRows);
     expect(plan.concept_id).toBe('c'); // c is rotting hardest
@@ -34,7 +46,13 @@ describe('pickDailyConcept', () => {
 
   it('respects prereqs (does not pick b if a has 0 confidence)', () => {
     const masteryRows = [
-      { concept_id: 'a', stability: 0.01, last_review: new Date(Date.now() - 100 * 86400000).toISOString(), reps: 1, lapses: 5 },
+      {
+        concept_id: 'a',
+        stability: 0.01,
+        last_review: new Date(Date.now() - 100 * 86400000).toISOString(),
+        reps: 1,
+        lapses: 5,
+      },
     ];
     const plan = pickDailyConcept(CONCEPTS, masteryRows);
     // b prereq a is failed (conf < 0.4), so b is excluded; a or c picked
@@ -54,14 +72,14 @@ describe('tagConcepts', () => {
       const set = new Set([1,2,3]);
     `;
     const tags = tagConcepts(code, 'js');
-    const ids = tags.map(t => t.concept_id);
+    const ids = tags.map((t) => t.concept_id);
     expect(ids).toContain('array-hashing');
   });
 
   it('detects sliding window', () => {
     const code = `// sliding window approach\nlet left = 0, right = 0;\nwhile (right < n) { right++; }`;
     const tags = tagConcepts(code, 'js');
-    expect(tags.map(t => t.concept_id)).toContain('sliding-window');
+    expect(tags.map((t) => t.concept_id)).toContain('sliding-window');
   });
 
   it('detects multiple concepts ranked by frequency', () => {
@@ -81,7 +99,7 @@ describe('tagConcepts', () => {
   it('depth scales with match count', () => {
     const codeDeep = 'cache cache cache cache LRU LRU eviction TTL';
     const tags = tagConcepts(codeDeep, 'js');
-    const cacheTag = tags.find(t => t.concept_id === 'caching');
+    const cacheTag = tags.find((t) => t.concept_id === 'caching');
     expect(cacheTag.depth).toBe('deep');
   });
 });
@@ -90,7 +108,15 @@ describe('buildWeeklyReport', () => {
   it('produces a report with required sections', () => {
     const out = buildWeeklyReport({
       activity: [{ duration_ms: 600000, concept_ids: ['a'] }],
-      mastery: [{ concept_id: 'a', stability: 5, reps: 3, lapses: 0, last_review: new Date().toISOString() }],
+      mastery: [
+        {
+          concept_id: 'a',
+          stability: 5,
+          reps: 3,
+          lapses: 0,
+          last_review: new Date().toISOString(),
+        },
+      ],
       feynman: [{ grade: 75 }],
       concepts: CONCEPTS,
     });
@@ -114,7 +140,8 @@ describe('buildWeeklyReport', () => {
   it('flags avoided categories', () => {
     const out = buildWeeklyReport({
       activity: [{ duration_ms: 0, concept_ids: ['a'] }],
-      mastery: [], feynman: [],
+      mastery: [],
+      feynman: [],
       concepts: CONCEPTS,
     });
     expect(out.reportMd).toMatch(/LLD|HLD|BEHAVIORAL/);
@@ -124,10 +151,16 @@ describe('buildWeeklyReport', () => {
     const out = buildWeeklyReport({
       activity: [
         { kind: 'mock_start', duration_ms: 0, concept_ids: ['array-hashing'] },
-        { kind: 'mock_complete', duration_ms: 0, concept_ids: ['array-hashing'], payload: { rating: 'good' } },
+        {
+          kind: 'mock_complete',
+          duration_ms: 0,
+          concept_ids: ['array-hashing'],
+          payload: { rating: 'good' },
+        },
         { kind: 'drill_solve', duration_ms: 120000, concept_ids: ['array-hashing'] },
       ],
-      mastery: [], feynman: [],
+      mastery: [],
+      feynman: [],
       concepts: CONCEPTS,
     });
     expect(out.stats.mockStarted).toBe(1);

@@ -4,7 +4,7 @@ import { requireAuth } from '../api/auth/verify.mjs';
 import { decayConfidence } from '../shared/lib/fsrs.mjs';
 import { generate } from '../shared/lib/ai.mjs';
 import { buildWeeklyReport } from '../shared/lib/heuristics.mjs';
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 import conceptsData from '../src/data/concepts.json' with { type: 'json' };
 
@@ -15,7 +15,10 @@ function loadConcepts() {
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 const SYSTEM = `You are a brutal engineering coach. Write a weekly review for the engineer using the data below.
@@ -49,11 +52,13 @@ export default async function handler(req, res) {
       args: [user.id],
     });
     if (r.rows.length === 0) return res.status(200).json({ review: null });
-    return res.status(200).json({ review: {
-      reportMd: r.rows[0].report_md,
-      stats: r.rows[0].stats_json ? JSON.parse(r.rows[0].stats_json) : null,
-      createdAt: r.rows[0].created_at,
-    }});
+    return res.status(200).json({
+      review: {
+        reportMd: r.rows[0].report_md,
+        stats: r.rows[0].stats_json ? JSON.parse(r.rows[0].stats_json) : null,
+        createdAt: r.rows[0].created_at,
+      },
+    });
   }
 
   if (req.method === 'POST') {
@@ -77,17 +82,23 @@ export default async function handler(req, res) {
     });
 
     const now = new Date();
-    const conceptStats = mastery.rows.map(m => {
-      const conf = decayConfidence(m, now);
-      return `${m.concept_id}: conf=${conf.toFixed(2)} reps=${m.reps} lapses=${m.lapses} last=${m.last_review?.slice(0,10) || 'never'}`;
-    }).join('\n');
+    const conceptStats = mastery.rows
+      .map((m) => {
+        const conf = decayConfidence(m, now);
+        return `${m.concept_id}: conf=${conf.toFixed(2)} reps=${m.reps} lapses=${m.lapses} last=${m.last_review?.slice(0, 10) || 'never'}`;
+      })
+      .join('\n');
 
     const activityCount = activity.rows.length;
-    const totalMinutes = Math.round(activity.rows.reduce((s, r) => s + (r.duration_ms || 0), 0) / 60000);
-    const mockStarted = activity.rows.filter(r => r.kind === 'mock_start').length;
-    const mockCompleted = activity.rows.filter(r => r.kind === 'mock_complete').length;
-    const grades = feynman.rows.map(f => f.grade).filter(g => g != null);
-    const avgGrade = grades.length ? Math.round(grades.reduce((a,b)=>a+b,0)/grades.length) : null;
+    const totalMinutes = Math.round(
+      activity.rows.reduce((s, r) => s + (r.duration_ms || 0), 0) / 60000
+    );
+    const mockStarted = activity.rows.filter((r) => r.kind === 'mock_start').length;
+    const mockCompleted = activity.rows.filter((r) => r.kind === 'mock_complete').length;
+    const grades = feynman.rows.map((f) => f.grade).filter((g) => g != null);
+    const avgGrade = grades.length
+      ? Math.round(grades.reduce((a, b) => a + b, 0) / grades.length)
+      : null;
 
     const stats = {
       activityCount,
@@ -110,13 +121,18 @@ Concept mastery:
 ${conceptStats || '(none yet)'}
 
 Recent activity sample:
-${activity.rows.slice(0, 30).map(r => `${r.created_at}: ${r.kind} concepts=${r.concept_ids || '[]'}`).join('\n') || '(empty)'}
+${
+  activity.rows
+    .slice(0, 30)
+    .map((r) => `${r.created_at}: ${r.kind} concepts=${r.concept_ids || '[]'}`)
+    .join('\n') || '(empty)'
+}
 
 Write the review now.`;
 
     let report;
     let finalStats = stats;
-    const useAI = aiConfig && aiConfig.endpointUrl && aiConfig.apiKey && aiConfig.model;
+    const useAI = aiConfig?.endpointUrl && aiConfig.apiKey && aiConfig.model;
     if (useAI) {
       try {
         report = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 1500 });
@@ -125,7 +141,7 @@ Write the review now.`;
       }
     }
     if (!report) {
-      const activityForHeur = activity.rows.map(r => ({
+      const activityForHeur = activity.rows.map((r) => ({
         ...r,
         concept_ids: r.concept_ids ? JSON.parse(r.concept_ids) : [],
         payload: r.payload ? JSON.parse(r.payload) : null,
@@ -150,7 +166,9 @@ Write the review now.`;
       args: [id, user.id, ws, report, JSON.stringify(finalStats)],
     });
 
-    return res.status(200).json({ review: { reportMd: report, stats: finalStats, createdAt: new Date().toISOString() } });
+    return res.status(200).json({
+      review: { reportMd: report, stats: finalStats, createdAt: new Date().toISOString() },
+    });
   }
 
   return res.status(405).json({ error: 'Method not allowed' });

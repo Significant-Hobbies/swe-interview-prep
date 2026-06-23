@@ -1,12 +1,15 @@
 import type { ParsedRepo, RepoAdapter, RepoFile, Section } from './types';
 
 function slugify(text: string): string {
-  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 function buildSectionTree(files: RepoFile[]): Section[] {
   const mdFiles = files
-    .filter(f => f.path.endsWith('.md') || f.path.endsWith('.rst'))
+    .filter((f) => f.path.endsWith('.md') || f.path.endsWith('.rst'))
     .sort((a, b) => a.path.localeCompare(b.path));
 
   const root: Section[] = [];

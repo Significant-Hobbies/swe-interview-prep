@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { MasteryEntry } from '../hooks/useConcepts';
-import type { ArtifactEntry, DrillEntry } from '../hooks/useUserStore';
+import type { ArtifactEntry } from '../hooks/useUserStore';
 import { DRILLS } from '../data/learning-os';
 import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import { isEditorialDrill } from './contentQuality';
@@ -45,18 +45,24 @@ describe('gateStatus (proof-based)', () => {
   });
 
   it('opens search-evals when hypothesis-testing drill solved', () => {
-    const status = gateStatus('search-evals', ctx({
-      drills: { 'interpret-p-value': { status: 'solved', lastCode: '', attempts: 1 } },
-    }));
+    const status = gateStatus(
+      'search-evals',
+      ctx({
+        drills: { 'interpret-p-value': { status: 'solved', lastCode: '', attempts: 1 } },
+      })
+    );
     expect(status.blocked).toBe(false);
   });
 
   it('opens search-evals via math artifact building', () => {
-    const status = gateStatus('search-evals', ctx({
-      artifacts: {
-        'ab-test-analysis-report': { ...emptyArtifact, status: 'building' },
-      },
-    }));
+    const status = gateStatus(
+      'search-evals',
+      ctx({
+        artifacts: {
+          'ab-test-analysis-report': { ...emptyArtifact, status: 'building' },
+        },
+      })
+    );
     expect(status.blocked).toBe(false);
   });
 
@@ -81,18 +87,19 @@ describe('gateStatus (proof-based)', () => {
 describe('gate drill verification', () => {
   it('every gate unlock concept has an editorial drill with testCases', () => {
     for (const conceptId of GATE_DRILL_CONCEPTS) {
-      const editorial = DRILLS.filter(d => d.conceptId === conceptId && isEditorialDrill(d));
-      const verified = editorial.filter(d => d.testCases?.length);
+      const editorial = DRILLS.filter((d) => d.conceptId === conceptId && isEditorialDrill(d));
+      const verified = editorial.filter((d) => d.testCases?.length);
       expect(verified.length, conceptId).toBeGreaterThan(0);
     }
   });
 
   it('every editorial coding-problem and implementation-task drill has testCases', () => {
     const missing = DRILLS.filter(
-      d => isEditorialDrill(d)
-        && (d.type === 'coding-problem' || d.type === 'implementation-task')
-        && !d.testCases?.length,
-    ).map(d => d.id);
+      (d) =>
+        isEditorialDrill(d) &&
+        (d.type === 'coding-problem' || d.type === 'implementation-task') &&
+        !d.testCases?.length
+    ).map((d) => d.id);
     expect(missing).toEqual([]);
   });
 });
@@ -101,11 +108,16 @@ describe('conceptAccessible', () => {
   it('requires prerequisites and proof gates', () => {
     const searchEvals = CONCEPT_BY_ID['search-evals'];
     expect(searchEvals).toBeDefined();
-    expect(conceptAccessible(searchEvals!, ctx({
-      mastery: {
-        'ranking-metrics': mastery(0.5),
-        'hypothesis-testing': mastery(0.9),
-      },
-    }))).toBe(false);
+    expect(
+      conceptAccessible(
+        searchEvals!,
+        ctx({
+          mastery: {
+            'ranking-metrics': mastery(0.5),
+            'hypothesis-testing': mastery(0.9),
+          },
+        })
+      )
+    ).toBe(false);
   });
 });

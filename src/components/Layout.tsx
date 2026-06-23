@@ -57,7 +57,7 @@ const PRIMARY_NAV: NavItem[] = [
   { to: '/learning', label: 'Docs', icon: BookOpen },
 ];
 
-const BROWSE_NAV: NavItem[] = BROWSE_DESTINATIONS.map(d => ({
+const BROWSE_NAV: NavItem[] = BROWSE_DESTINATIONS.map((d) => ({
   to: d.to,
   label: d.label,
   icon: BROWSE_ICONS[d.id] ?? LayoutGrid,
@@ -112,7 +112,7 @@ export default function Layout() {
 
   useEffect(() => {
     setBrowseOpen(false);
-  }, [location.pathname, location.search]);
+  }, []);
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
     `relative inline-flex h-16 items-center px-1 text-sm transition-colors duration-150 ${
@@ -126,14 +126,17 @@ export default function Layout() {
     }`;
   };
 
-  const browseActive = BROWSE_NAV.some(item => navActive(location.pathname, item.to));
+  const browseActive = BROWSE_NAV.some((item) => navActive(location.pathname, item.to));
 
   return (
     <TooltipProvider delayDuration={250}>
       <div className="min-h-screen bg-black pb-16 md:pb-0">
         <nav className="sticky top-0 z-50 isolate border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
-            <NavLink to="/" className="relative z-10 flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40">
+            <NavLink
+              to="/"
+              className="relative z-10 flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
+            >
               <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
               <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
             </NavLink>
@@ -147,7 +150,7 @@ export default function Layout() {
               <div ref={browseDesktopRef} className="relative">
                 <button
                   type="button"
-                  onClick={() => setBrowseOpen(o => !o)}
+                  onClick={() => setBrowseOpen((o) => !o)}
                   className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
                     browseOpen || browseActive ? 'text-white' : 'text-white/50 hover:text-white'
                   }`}
@@ -183,7 +186,7 @@ export default function Layout() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button
-                      onClick={() => setChangelogOpen(o => !o)}
+                      onClick={() => setChangelogOpen((o) => !o)}
                       aria-label="Updates"
                       className={`flex h-9 w-9 items-center justify-center rounded-md transition-colors duration-150 ${
                         changelogOpen
@@ -292,41 +295,41 @@ export default function Layout() {
         <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
         <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
-            {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
-              <NavLink key={to} to={to} className={tabClass(to)}>
-                <Icon className="h-5 w-5" />
-                <span>{label}</span>
-              </NavLink>
-            ))}
-            <div ref={browseMobileRef} className="relative flex flex-1 flex-col">
-              <button
-                type="button"
-                onClick={() => setBrowseOpen(o => !o)}
-                className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors ${
-                  browseOpen || browseActive ? 'text-white' : 'text-white/40'
-                }`}
-                aria-expanded={browseOpen}
-                aria-label="Browse catalog"
-              >
-                <LayoutGrid className="h-5 w-5" />
-                <span>Browse</span>
-              </button>
-              {browseOpen && (
-                <div className="absolute bottom-full right-0 mb-2 max-h-[70vh] min-w-[11rem] overflow-y-auto rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
-                  {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
-                    <Link
-                      key={to}
-                      to={to}
-                      className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
-                    >
-                      <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
-                      {label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+          {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
+            <NavLink key={to} to={to} className={tabClass(to)}>
+              <Icon className="h-5 w-5" />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+          <div ref={browseMobileRef} className="relative flex flex-1 flex-col">
+            <button
+              type="button"
+              onClick={() => setBrowseOpen((o) => !o)}
+              className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors ${
+                browseOpen || browseActive ? 'text-white' : 'text-white/40'
+              }`}
+              aria-expanded={browseOpen}
+              aria-label="Browse catalog"
+            >
+              <LayoutGrid className="h-5 w-5" />
+              <span>Browse</span>
+            </button>
+            {browseOpen && (
+              <div className="absolute bottom-full right-0 mb-2 max-h-[70vh] min-w-[11rem] overflow-y-auto rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
+                {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
+                  >
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
+        </div>
       </div>
     </TooltipProvider>
   );

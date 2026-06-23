@@ -28,7 +28,7 @@ export const TabsTrigger = forwardRef<
         'transition-colors duration-150 hover:text-slate-200 ' +
         'data-[state=active]:border-sky-400 data-[state=active]:text-slate-50 ' +
         'focus-visible:outline-none focus-visible:text-slate-100',
-      className,
+      className
     )}
     {...props}
   />
@@ -44,7 +44,7 @@ export const TabsContent = forwardRef<
     className={cn(
       'mt-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 ' +
         'focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-md',
-      className,
+      className
     )}
     {...props}
   />

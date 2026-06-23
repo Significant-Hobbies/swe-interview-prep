@@ -3,7 +3,7 @@ import * as parserBabel from 'prettier/plugins/babel';
 import * as parserEstree from 'prettier/plugins/estree';
 import * as parserTS from 'prettier/plugins/typescript';
 import * as prettier from 'prettier/standalone';
-import { useCallback, useEffect,useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import type { Language } from '../types';
 
@@ -70,31 +70,34 @@ export default function CodeEditor({
     runRef.current?.();
   }, [handleFormat]);
 
-  const handleMount = useCallback((editor: any) => {
-    editorRef.current = editor;
-    const monaco = (window as any).monaco;
-    if (monaco) {
-      editor.addAction({
-        id: 'run-code',
-        label: 'Run Code',
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
-        run: () => runRef.current?.(),
-      });
-      editor.addAction({
-        id: 'format-code',
-        label: 'Format Code',
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF],
-        run: () => handleFormat(),
-      });
-      editor.addAction({
-        id: 'save-format-run',
-        label: 'Format & Run',
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
-        run: () => handleSave(),
-      });
-    }
-    onMount?.(editor);
-  }, [onMount, handleFormat, handleSave]);
+  const handleMount = useCallback(
+    (editor: any) => {
+      editorRef.current = editor;
+      const monaco = (window as any).monaco;
+      if (monaco) {
+        editor.addAction({
+          id: 'run-code',
+          label: 'Run Code',
+          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+          run: () => runRef.current?.(),
+        });
+        editor.addAction({
+          id: 'format-code',
+          label: 'Format Code',
+          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF],
+          run: () => handleFormat(),
+        });
+        editor.addAction({
+          id: 'save-format-run',
+          label: 'Format & Run',
+          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+          run: () => handleSave(),
+        });
+      }
+      onMount?.(editor);
+    },
+    [onMount, handleFormat, handleSave]
+  );
 
   // Expose format on the editor instance for toolbar buttons
   useEffect(() => {

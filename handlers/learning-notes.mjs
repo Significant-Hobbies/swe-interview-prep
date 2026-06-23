@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 
 import { requireAuth } from '../api/auth/verify.mjs';
 import { getDb } from '../shared/db/client.mjs';
@@ -6,7 +6,10 @@ import { initDatabase } from '../shared/db/schema.mjs';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 function toNote(row) {
@@ -30,8 +33,14 @@ export default async function handler(req, res) {
     const { scope, refId } = req.query || {};
     let sql = 'SELECT * FROM user_learning_notes WHERE user_id = ?';
     const args = [user.id];
-    if (scope) { sql += ' AND scope = ?'; args.push(scope); }
-    if (refId) { sql += ' AND ref_id = ?'; args.push(refId); }
+    if (scope) {
+      sql += ' AND scope = ?';
+      args.push(scope);
+    }
+    if (refId) {
+      sql += ' AND ref_id = ?';
+      args.push(refId);
+    }
     sql += ' ORDER BY updated_at DESC';
     const r = await db.execute({ sql, args });
     return res.status(200).json({ notes: r.rows.map(toNote) });

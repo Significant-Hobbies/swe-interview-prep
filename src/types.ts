@@ -13,14 +13,46 @@ export interface CategoryConfig {
 }
 
 export const CATEGORIES: CategoryConfig[] = [
-  { id: 'dsa', name: 'DSA', icon: 'Code2', description: 'Data Structures & Algorithms', color: 'blue', hasCodeEditor: true, hasTestCases: true },
-  { id: 'lld', name: 'LLD', icon: 'Boxes', description: 'Low-Level Design / OOP', color: 'purple', hasCodeEditor: true, hasTestCases: false },
-  { id: 'hld', name: 'HLD', icon: 'Network', description: 'System Design', color: 'orange', hasCodeEditor: false, hasTestCases: false },
-  { id: 'behavioral', name: 'Behavioral', icon: 'Users', description: 'Behavioral Interviews', color: 'green', hasCodeEditor: false, hasTestCases: false },
+  {
+    id: 'dsa',
+    name: 'DSA',
+    icon: 'Code2',
+    description: 'Data Structures & Algorithms',
+    color: 'blue',
+    hasCodeEditor: true,
+    hasTestCases: true,
+  },
+  {
+    id: 'lld',
+    name: 'LLD',
+    icon: 'Boxes',
+    description: 'Low-Level Design / OOP',
+    color: 'purple',
+    hasCodeEditor: true,
+    hasTestCases: false,
+  },
+  {
+    id: 'hld',
+    name: 'HLD',
+    icon: 'Network',
+    description: 'System Design',
+    color: 'orange',
+    hasCodeEditor: false,
+    hasTestCases: false,
+  },
+  {
+    id: 'behavioral',
+    name: 'Behavioral',
+    icon: 'Users',
+    description: 'Behavioral Interviews',
+    color: 'green',
+    hasCodeEditor: false,
+    hasTestCases: false,
+  },
 ];
 
 export function getCategoryConfig(id: InterviewCategory): CategoryConfig {
-  return CATEGORIES.find(c => c.id === id)!;
+  return CATEGORIES.find((c) => c.id === id)!;
 }
 
 // ─── Core Types ─────────────────────────────────────────────────────────────

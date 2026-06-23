@@ -1,11 +1,4 @@
-import {
-  ArrowRight,
-  BookOpen,
-  Clock,
-  Hammer,
-  RotateCcw,
-  Target,
-} from 'lucide-react';
+import { ArrowRight, BookOpen, Clock, Hammer, RotateCcw, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import type { SessionPlan } from '../lib/planner';
@@ -66,14 +59,18 @@ export function SessionPlanView({ plan, showRationale = true }: Props) {
                   <span className="text-sm font-medium text-white">{block.title}</span>
                   <span className="font-mono text-[10px] text-white/40">{block.minutes}m</span>
                 </div>
-                {block.subtitle && (
-                  <p className="mt-1 text-xs text-white/45">{block.subtitle}</p>
-                )}
+                {block.subtitle && <p className="mt-1 text-xs text-white/45">{block.subtitle}</p>}
                 <Link
                   to={block.href}
                   className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-sm font-medium text-white transition-all duration-150 hover:border-white/30 hover:bg-white/5"
                 >
-                  {block.kind === 'review' ? 'Start reviews' : block.kind === 'learn' ? 'Open concept' : block.kind === 'drill' ? 'Solve drill' : 'Open Playground'}
+                  {block.kind === 'review'
+                    ? 'Start reviews'
+                    : block.kind === 'learn'
+                      ? 'Open concept'
+                      : block.kind === 'drill'
+                        ? 'Solve drill'
+                        : 'Open Playground'}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </Link>
               </div>

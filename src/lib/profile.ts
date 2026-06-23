@@ -69,7 +69,7 @@ export function normalizeRoadmapWeights(weights: Record<string, number>): Record
 /** Boost drill/review when interview is soon. */
 export function adjustWeightsForHorizon(
   weights: ModalityWeights,
-  horizonDays: number | null,
+  horizonDays: number | null
 ): ModalityWeights {
   if (horizonDays == null || horizonDays > 60) return weights;
   const urgency = horizonDays <= 14 ? 1.35 : horizonDays <= 30 ? 1.2 : 1.1;
@@ -86,7 +86,13 @@ export function experienceLabel(e: ExperienceLevel): string {
 }
 
 export function minutesLabel(m: number): string {
-  return m === 15 ? '15 min · quick rep' : m === 30 ? '30 min · focused' : m === 90 ? '90 min · deep' : '45 min · standard';
+  return m === 15
+    ? '15 min · quick rep'
+    : m === 30
+      ? '30 min · focused'
+      : m === 90
+        ? '90 min · deep'
+        : '45 min · standard';
 }
 
 /** ELO offset so drill picker matches experience level. */
@@ -99,7 +105,7 @@ export function experienceEloOffset(e: ExperienceLevel): number {
 /** Shift modality mix toward learn for students, drill for seniors. */
 export function adjustWeightsForExperience(
   weights: ModalityWeights,
-  experience: ExperienceLevel,
+  experience: ExperienceLevel
 ): ModalityWeights {
   if (experience === 'student') {
     return normalizeModalityWeights({

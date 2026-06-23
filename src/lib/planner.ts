@@ -63,22 +63,25 @@ function reachable(
   c: Concept,
   mastery: Record<string, MasteryEntry>,
   gateCtx: GateContext | null | undefined,
-  skipIds: Set<string>,
+  skipIds: Set<string>
 ): boolean {
   if (skipIds.has(c.id)) return false;
   return prereqsMet(c, mastery) && (!gateCtx || conceptAccessible(c, gateCtx));
 }
 
 /** Weighted roadmap pick — blends multiple active paths. */
-export function pickWeightedRoadmap(profile: LearnerProfile, mastery: Record<string, MasteryEntry>): Roadmap {
+export function pickWeightedRoadmap(
+  profile: LearnerProfile,
+  mastery: Record<string, MasteryEntry>
+): Roadmap {
   const weights = normalizeRoadmapWeights(profile.roadmapWeights);
   let best: { id: string; score: number } | null = null;
   for (const [rid, w] of Object.entries(weights)) {
     const roadmap = ROADMAP_BY_ID[rid];
     if (!roadmap) continue;
-    const ids = new Set(roadmap.milestones.flatMap(m => m.concepts));
+    const ids = new Set(roadmap.milestones.flatMap((m) => m.concepts));
     const open = ALL_CONCEPTS.filter(
-      c => ids.has(c.id) && deriveConceptStatus(mastery[c.id]) !== 'mastered',
+      (c) => ids.has(c.id) && deriveConceptStatus(mastery[c.id]) !== 'mastered'
     ).length;
     const score = w * (1 + open * 0.02);
     if (!best || score > best.score) best = { id: rid, score };
@@ -89,7 +92,7 @@ export function pickWeightedRoadmap(profile: LearnerProfile, mastery: Record<str
 export function pickConceptForSession(
   profile: LearnerProfile,
   mastery: Record<string, MasteryEntry>,
-  gateCtx: GateContext | null | undefined,
+  gateCtx: GateContext | null | undefined
 ): { roadmap: Roadmap; concept: Concept } | null {
   const skip = new Set(profile.skipConceptIds);
   const weights = normalizeRoadmapWeights(profile.roadmapWeights);
@@ -99,7 +102,7 @@ export function pickConceptForSession(
   for (const [rid, w] of Object.entries(weights)) {
     const roadmap = ROADMAP_BY_ID[rid];
     if (!roadmap) continue;
-    const idSet = new Set(roadmap.milestones.flatMap(m => m.concepts));
+    const idSet = new Set(roadmap.milestones.flatMap((m) => m.concepts));
     for (const c of ALL_CONCEPTS) {
       if (!idSet.has(c.id) || skip.has(c.id)) continue;
       if (!isDue(mastery[c.id]) || !reachable(c, mastery, gateCtx, skip)) continue;
@@ -134,15 +137,15 @@ export function pickConceptForSession(
 
 function pickFailedDrillConcept(
   drillState: Record<string, DrillEntry>,
-  mastery: Record<string, MasteryEntry>,
+  _mastery: Record<string, MasteryEntry>
 ): Concept | null {
-  const failed = EDITORIAL_DRILLS.filter(d => {
+  const failed = EDITORIAL_DRILLS.filter((d) => {
     const st = drillState[d.id];
     return st && st.attempts >= 2 && st.status !== 'solved';
   });
   if (!failed.length) return null;
   failed.sort((a, b) => (drillState[b.id]?.attempts ?? 0) - (drillState[a.id]?.attempts ?? 0));
-  return ALL_CONCEPTS.find(c => c.id === failed[0].conceptId) ?? null;
+  return ALL_CONCEPTS.find((c) => c.id === failed[0].conceptId) ?? null;
 }
 
 export function reviewQuestionPool(extra: ReviewQuestion[] = []): ReviewQuestion[] {
@@ -152,9 +155,9 @@ export function reviewQuestionPool(extra: ReviewQuestion[] = []): ReviewQuestion
 export function dueReviewQuestions(
   rqMastery: Record<string, ReviewMasteryEntry>,
   conceptMastery: Record<string, MasteryEntry>,
-  extra: ReviewQuestion[] = [],
+  extra: ReviewQuestion[] = []
 ): ReviewQuestion[] {
-  const due = reviewQuestionPool(extra).filter(q => {
+  const due = reviewQuestionPool(extra).filter((q) => {
     if (!isSchedulableReviewQuestion(q)) return false;
     const rq = rqMastery[q.id];
     if (rq) return isReviewDue(rq);
@@ -177,9 +180,9 @@ export function buildSessionPlan(opts: {
   const weights = adjustWeightsForHorizon(
     adjustWeightsForExperience(
       normalizeModalityWeights(profile.modalityWeights),
-      profile.experience,
+      profile.experience
     ),
-    profile.interviewHorizonDays,
+    profile.interviewHorizonDays
   );
 
   let reviewMin = Math.round(totalMinutes * weights.review);

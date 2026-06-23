@@ -68,7 +68,7 @@ function gradeColor(n: number): string {
 function applyDocMastery(
   docSlug: string | undefined,
   grade: number,
-  review: (id: string, rating: 'again' | 'hard' | 'good' | 'easy') => void,
+  review: (id: string, rating: 'again' | 'hard' | 'good' | 'easy') => void
 ) {
   const concepts = docSlug ? conceptsForDoc(docSlug) : [];
   if (!concepts.length) return;
@@ -88,8 +88,8 @@ export default function UnderstandingCheck({ docTitle, docContent, docSlug }: Pr
         <h2 className="text-base font-semibold text-white">Test your understanding</h2>
       </div>
       <p className="mb-4 max-w-2xl text-sm text-slate-400">
-        Verify you got the doc — grades update concept mastery (FSRS).
-        Quiz mode needs AI; explain-back works heuristically without AI.
+        Verify you got the doc — grades update concept mastery (FSRS). Quiz mode needs AI;
+        explain-back works heuristically without AI.
       </p>
 
       {mode === null && (
@@ -102,8 +102,7 @@ export default function UnderstandingCheck({ docTitle, docContent, docSlug }: Pr
             <div>
               <div className="text-sm font-semibold text-white">Quiz me</div>
               <div className="mt-0.5 text-xs text-slate-400">
-                AI asks 5 open-ended questions about this doc. You type
-                answers. AI grades each.
+                AI asks 5 open-ended questions about this doc. You type answers. AI grades each.
               </div>
             </div>
           </button>
@@ -115,8 +114,8 @@ export default function UnderstandingCheck({ docTitle, docContent, docSlug }: Pr
             <div>
               <div className="text-sm font-semibold text-white">Explain back</div>
               <div className="mt-0.5 text-xs text-slate-400">
-                Write the doc's thesis in your own words, as if teaching a
-                peer. AI grades + lists what you missed.
+                Write the doc's thesis in your own words, as if teaching a peer. AI grades + lists
+                what you missed.
               </div>
             </div>
           </button>
@@ -189,8 +188,10 @@ function QuizFlow({
 
   const submit = async () => {
     if (!questions) return;
-    if (answers.some(a => a.trim().length < 5)) {
-      setError('Write at least a sentence for each question (or skip the question with a single word like "skip" — be honest).');
+    if (answers.some((a) => a.trim().length < 5)) {
+      setError(
+        'Write at least a sentence for each question (or skip the question with a single word like "skip" — be honest).'
+      );
       return;
     }
     setLoading(true);
@@ -200,7 +201,7 @@ function QuizFlow({
         op: 'grade-quiz',
         docTitle,
         docContent,
-        questions: questions.map(q => q.q),
+        questions: questions.map((q) => q.q),
         answers,
         aiConfig: loadAIConfig(),
       });
@@ -241,7 +242,9 @@ function QuizFlow({
         >
           <X className="h-3 w-3" /> Cancel
         </button>
-        {error && <div className="rounded-md bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{error}</div>}
+        {error && (
+          <div className="rounded-md bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{error}</div>
+        )}
       </div>
     );
   }
@@ -251,7 +254,9 @@ function QuizFlow({
       <div className="space-y-4">
         <Card className="p-4">
           <div className="mb-2 flex items-baseline gap-3">
-            <span className={`text-4xl font-bold ${gradeColor(result.overall)}`}>{result.overall}</span>
+            <span className={`text-4xl font-bold ${gradeColor(result.overall)}`}>
+              {result.overall}
+            </span>
             <span className="text-xs text-slate-500">/ 100 overall</span>
           </div>
           <p className="text-sm text-slate-300">{result.summary}</p>
@@ -264,10 +269,14 @@ function QuizFlow({
               <div key={i} className="rounded-lg border border-slate-800 bg-slate-900/40 p-3">
                 <div className="mb-1 flex items-baseline justify-between gap-3">
                   <div className="text-sm font-medium text-slate-200">{pq.q}</div>
-                  <span className={`shrink-0 font-mono text-xs ${gradeColor(pq.grade)}`}>{pq.grade}/100</span>
+                  <span className={`shrink-0 font-mono text-xs ${gradeColor(pq.grade)}`}>
+                    {pq.grade}/100
+                  </span>
                 </div>
                 <details className="mt-1 text-xs">
-                  <summary className="cursor-pointer text-slate-500 hover:text-slate-300">Your answer</summary>
+                  <summary className="cursor-pointer text-slate-500 hover:text-slate-300">
+                    Your answer
+                  </summary>
                   <div className="mt-1 rounded bg-slate-950 px-2 py-1.5 text-slate-400">{pq.a}</div>
                 </details>
                 <div className="mt-2 text-xs text-slate-300">{pq.feedback}</div>
@@ -315,7 +324,7 @@ function QuizFlow({
           {q.hint && <div className="mb-2 text-[11px] italic text-slate-500">Hint: {q.hint}</div>}
           <textarea
             value={answers[i] || ''}
-            onChange={e => {
+            onChange={(e) => {
               const next = [...answers];
               next[i] = e.target.value;
               setAnswers(next);
@@ -390,7 +399,7 @@ function ExplainFlow({
         const h = critiqueAnswerHeuristic(
           `Explain the thesis of: ${docTitle}`,
           explanation,
-          docContent.slice(0, 2500),
+          docContent.slice(0, 2500)
         );
         const data: ExplanationGrade = {
           grade: h.score,
@@ -469,13 +478,12 @@ function ExplainFlow({
   return (
     <div className="space-y-3">
       <p className="text-xs text-slate-500">
-        Pretend you're teaching the doc's thesis to a smart peer. Reference
-        the actual sources (papers, blogs, talks) where they apply.
+        Pretend you're teaching the doc's thesis to a smart peer. Reference the actual sources
+        (papers, blogs, talks) where they apply.
       </p>
       <textarea
-        autoFocus
         value={explanation}
-        onChange={e => setExplanation(e.target.value)}
+        onChange={(e) => setExplanation(e.target.value)}
         placeholder="The thesis of this doc is… The key mechanism is… The canonical source for this is…"
         rows={10}
         className="w-full resize-y rounded-md border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 placeholder-slate-500 focus:border-sky-500/50 focus:outline-none"

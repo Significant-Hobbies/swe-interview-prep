@@ -7,21 +7,23 @@ test.beforeEach(async ({ context, page }) => {
     localStorage.setItem('swe-os:onboarding-v1', JSON.stringify({ done: true }));
   });
   // SaaSMaker feedback widget overlays bottom-right and intercepts clicks.
-  await page.addStyleTag({ content: '[data-saasmaker-widget]{display:none!important}' }).catch(() => {});
+  await page
+    .addStyleTag({ content: '[data-saasmaker-widget]{display:none!important}' })
+    .catch(() => {});
 });
 
 test.describe('Learning OS smoke', () => {
   test('root redirects to /today and shows today plan', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/today$/);
-    await expect(
-      page.getByText(/min session|You're caught up/i).first(),
-    ).toBeVisible();
+    await expect(page.getByText(/min session|You're caught up/i).first()).toBeVisible();
   });
 
   test('Learn page shows roadmaps + concepts', async ({ page }) => {
     await page.goto('/learn');
-    await expect(page.getByRole('heading', { name: 'Set your active path.', exact: true })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Set your active path.', exact: true })
+    ).toBeVisible();
     await expect(page.getByRole('region', { name: 'Interview quick picks' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
@@ -38,7 +40,7 @@ test.describe('Learning OS smoke', () => {
   test('Practice → Reviews view on drill browser', async ({ page }) => {
     await page.goto('/practice/all?tab=reviews');
     await expect(
-      page.getByText(/No reviews yet|How well did you recall it|Reveal answer/i),
+      page.getByText(/No reviews yet|How well did you recall it|Reveal answer/i)
     ).toBeVisible();
   });
 
@@ -104,7 +106,9 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/explore');
     await expect(page.getByRole('heading', { name: /Explore everything/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Systems internals', exact: true })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Systems internals', exact: true })
+    ).toBeVisible();
     await expect(page.getByRole('heading', { name: 'AI & retrieval', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Mathematics', exact: true })).toBeVisible();
     await expect(page.getByRole('region', { name: 'Playground' })).toBeVisible();
@@ -171,7 +175,10 @@ test.describe('Learning OS smoke', () => {
 
   test('core loop: concept detail links to a drill', async ({ page }) => {
     await page.goto('/concepts/bm25');
-    await page.getByRole('link', { name: /Calculate a BM25 score/i }).first().click();
+    await page
+      .getByRole('link', { name: /Calculate a BM25 score/i })
+      .first()
+      .click();
     await expect(page).toHaveURL(/\/drills\//);
     await expect(page.getByRole('button', { name: /Mark solved/i })).toBeVisible();
   });

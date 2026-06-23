@@ -24,7 +24,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
   }
 
   const prereqsMet = (c) =>
-    (c.prereqs || []).every(p => {
+    (c.prereqs || []).every((p) => {
       const m = masteryMap[p];
       // Prereq met if confidence >= 0.4 OR if prereq itself has no mastery yet
       // (don't gate behind untouched chains)
@@ -34,7 +34,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
   // Score each concept. Lower is "more urgent".
   const scored = concepts
     .filter(prereqsMet)
-    .map(c => {
+    .map((c) => {
       const m = masteryMap[c.id];
       const conf = m?.confidence ?? null;
       // untouched = 0.5 (medium urgency); rotting = low confidence (high urgency)
@@ -48,9 +48,10 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
   const pick = scored[0];
   const c = pick.concept;
   const conf = pick.conf;
-  const day = dayOfYear instanceof Date
-    ? Math.floor((dayOfYear - new Date(dayOfYear.getFullYear(), 0, 0)) / 86400000)
-    : dayOfYear;
+  const day =
+    dayOfYear instanceof Date
+      ? Math.floor((dayOfYear - new Date(dayOfYear.getFullYear(), 0, 0)) / 86400000)
+      : dayOfYear;
   const taskType = TASK_TYPES[day % TASK_TYPES.length];
 
   const proofContract = roadmapPromptSuffix(c);
@@ -61,49 +62,61 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
     explain: `Open Companion. Have it grill you on ${c.name} — tradeoffs, complexity, when NOT to use it.${proofContract}`,
   };
 
-  const headline = conf === null
-    ? `Untouched: ${c.name}. Time to build a baseline.`
-    : conf < 0.3
-      ? `Rotting fast: ${c.name} (${Math.round(conf * 100)}%). Reset before it's gone.`
-      : conf < 0.6
-        ? `Refresh: ${c.name} (${Math.round(conf * 100)}%). One more rep keeps it sticky.`
-        : `Push: ${c.name}. Already strong — go for the harder application.`;
+  const headline =
+    conf === null
+      ? `Untouched: ${c.name}. Time to build a baseline.`
+      : conf < 0.3
+        ? `Rotting fast: ${c.name} (${Math.round(conf * 100)}%). Reset before it's gone.`
+        : conf < 0.6
+          ? `Refresh: ${c.name} (${Math.round(conf * 100)}%). One more rep keeps it sticky.`
+          : `Push: ${c.name}. Already strong — go for the harder application.`;
 
   const minutes = taskType === 'build' ? 30 : taskType === 'read' ? 20 : 15;
 
-  return enrichPlanWithRoadmap({
-    headline,
-    concept_id: c.id,
-    concept_name: c.name,
-    task_type: taskType,
-    task_prompt: prompts[taskType],
-    minutes,
-    rationale: conf === null
-      ? `${categoryForConcept(c).toUpperCase()} concept, prereqs satisfied, no prior reps logged.`
-      : `Decayed to ${Math.round(conf * 100)}% confidence — highest-leverage gap among ${concepts.length} tracked concepts.`,
-    generator: 'heuristic',
-  }, c);
+  return enrichPlanWithRoadmap(
+    {
+      headline,
+      concept_id: c.id,
+      concept_name: c.name,
+      task_type: taskType,
+      task_prompt: prompts[taskType],
+      minutes,
+      rationale:
+        conf === null
+          ? `${categoryForConcept(c).toUpperCase()} concept, prereqs satisfied, no prior reps logged.`
+          : `Decayed to ${Math.round(conf * 100)}% confidence — highest-leverage gap among ${concepts.length} tracked concepts.`,
+      generator: 'heuristic',
+    },
+    c
+  );
 }
 
 const CONCEPT_KEYWORDS = {
-  'array-hashing': [/\b(map|hashmap|hashtable|set|hashset|frequency|counter)\b/i, /\bnew\s+(map|set)\b/i],
+  'array-hashing': [
+    /\b(map|hashmap|hashtable|set|hashset|frequency|counter)\b/i,
+    /\bnew\s+(map|set)\b/i,
+  ],
   'two-pointers': [/\b(left|right)\s*=/i, /two[\s-]?pointer/i],
   'sliding-window': [/sliding[\s-]?window/i, /\bwindow\b/i],
-  'stack': [/\bstack\b/i, /\.push\(.*\)\s*\.pop/i, /monotonic/i],
+  stack: [/\bstack\b/i, /\.push\(.*\)\s*\.pop/i, /monotonic/i],
   'binary-search': [/binary[\s-]?search/i, /\b(low|high)\s*=/i, /\bmid\s*=/i],
   'linked-list': [/linkedlist/i, /\.next\b/i, /listnode/i],
-  'trees': [/\btree\b/i, /\b(left|right)\s*:/i, /treenode/i, /\bdfs\b/i, /\bbfs\b/i],
-  'tries': [/\btrie\b/i, /prefix[\s-]?tree/i],
-  'heap': [/\bheap\b/i, /priorityqueue/i, /minheap|maxheap/i],
-  'backtracking': [/backtrack/i, /\brecurse\b/i],
-  'graphs': [/\bgraph\b/i, /adjacency/i, /\bedges?\b/i, /\bnodes?\b/i],
+  trees: [/\btree\b/i, /\b(left|right)\s*:/i, /treenode/i, /\bdfs\b/i, /\bbfs\b/i],
+  tries: [/\btrie\b/i, /prefix[\s-]?tree/i],
+  heap: [/\bheap\b/i, /priorityqueue/i, /minheap|maxheap/i],
+  backtracking: [/backtrack/i, /\brecurse\b/i],
+  graphs: [/\bgraph\b/i, /adjacency/i, /\bedges?\b/i, /\bnodes?\b/i],
   'dp-1d': [/dp\[/i, /memo\[/i, /memoiz/i, /dynamic programming/i],
   'dp-2d': [/dp\[\w+\]\[\w+\]/i, /grid.*dp/i],
-  'greedy': [/\bgreedy\b/i],
-  'intervals': [/intervals?/i, /merge.*interval/i, /sweep/i],
+  greedy: [/\bgreedy\b/i],
+  intervals: [/intervals?/i, /merge.*interval/i, /sweep/i],
   'bit-manipulation': [/\bbitwise\b/i, /\b(<<|>>|\^|&|\|)\b/, /bitcount/i],
-  'concurrency-design': [/\b(mutex|lock|semaphore|thread|goroutine|sync\.)\b/i, /\bawait\b/i, /\bchannel\b/i],
-  'caching': [/\bcache\b/i, /\bttl\b/i, /lru/i, /lfu/i],
+  'concurrency-design': [
+    /\b(mutex|lock|semaphore|thread|goroutine|sync\.)\b/i,
+    /\bawait\b/i,
+    /\bchannel\b/i,
+  ],
+  caching: [/\bcache\b/i, /\bttl\b/i, /lru/i, /lfu/i],
   'rate-limiting': [/rate[\s-]?limit/i, /token[\s-]?bucket/i, /leaky[\s-]?bucket/i],
   'state-management': [/state[\s-]?machine/i, /\b(transition|state)\s*:/i],
   'observer-pattern': [/\b(observer|subscribe|publish|emit|on\(|off\()\b/i, /pub[\s-]?sub/i],
@@ -118,14 +131,15 @@ const CONCEPT_KEYWORDS = {
  * Tag concepts in code via regex match. Returns array of {concept_id, evidence, depth}.
  * "depth" inferred from match count: 1=surface, 2-3=working, 4+=deep.
  */
-export function tagConcepts(code, language = '', maxResults = 5) {
+export function tagConcepts(code, _language = '', maxResults = 5) {
   if (!code || code.length < 30) return [];
   const hits = [];
   for (const [conceptId, patterns] of Object.entries(CONCEPT_KEYWORDS)) {
     let count = 0;
     let evidence = '';
     for (const re of patterns) {
-      const matches = code.match(new RegExp(re.source, re.flags + (re.flags.includes('g') ? '' : 'g'))) || [];
+      const matches =
+        code.match(new RegExp(re.source, re.flags + (re.flags.includes('g') ? '' : 'g'))) || [];
       if (matches.length > 0 && !evidence) evidence = matches[0].slice(0, 60);
       count += matches.length;
     }
@@ -134,7 +148,10 @@ export function tagConcepts(code, language = '', maxResults = 5) {
       hits.push({ concept_id: conceptId, evidence, depth, count });
     }
   }
-  return hits.sort((a, b) => b.count - a.count).slice(0, maxResults).map(({ count, ...h }) => h);
+  return hits
+    .sort((a, b) => b.count - a.count)
+    .slice(0, maxResults)
+    .map(({ count, ...h }) => h);
 }
 
 /**
@@ -144,16 +161,18 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   const now = new Date();
   const minutes = Math.round(activity.reduce((s, a) => s + (a.duration_ms || 0), 0) / 60000);
   const sessions = activity.length;
-  const mockStarted = activity.filter(a => a.kind === 'mock_start').length;
-  const mockCompleted = activity.filter(a => a.kind === 'mock_complete').length;
+  const mockStarted = activity.filter((a) => a.kind === 'mock_start').length;
+  const mockCompleted = activity.filter((a) => a.kind === 'mock_complete').length;
   const mockRatings = activity
-    .filter(a => a.kind === 'mock_complete' && a.payload?.rating)
-    .map(a => a.payload.rating);
-  const grades = feynman.map(f => f.grade).filter(g => g != null);
-  const avgGrade = grades.length ? Math.round(grades.reduce((a, b) => a + b, 0) / grades.length) : null;
+    .filter((a) => a.kind === 'mock_complete' && a.payload?.rating)
+    .map((a) => a.payload.rating);
+  const grades = feynman.map((f) => f.grade).filter((g) => g != null);
+  const avgGrade = grades.length
+    ? Math.round(grades.reduce((a, b) => a + b, 0) / grades.length)
+    : null;
 
-  const conceptIndex = Object.fromEntries(concepts.map(c => [c.id, c]));
-  const masteryEnriched = mastery.map(m => ({
+  const conceptIndex = Object.fromEntries(concepts.map((c) => [c.id, c]));
+  const masteryEnriched = mastery.map((m) => ({
     ...m,
     confidence: decayConfidence(m, now),
     name: conceptIndex[m.concept_id]?.name || m.concept_id,
@@ -161,12 +180,12 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   }));
 
   const rotting = masteryEnriched
-    .filter(m => m.confidence > 0 && m.confidence < 0.5)
+    .filter((m) => m.confidence > 0 && m.confidence < 0.5)
     .sort((a, b) => a.confidence - b.confidence)
     .slice(0, 5);
 
   const strong = masteryEnriched
-    .filter(m => m.confidence >= 0.85)
+    .filter((m) => m.confidence >= 0.85)
     .sort((a, b) => b.confidence - a.confidence)
     .slice(0, 5);
 
@@ -184,20 +203,30 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
     const cat = categoryForConcept(c);
     categoryCount[cat] = (categoryCount[cat] || 0) + 1;
   }
-  const avoided = ['dsa', 'lld', 'hld', 'behavioral'].filter(c => !categoryCount[c]);
+  const avoided = ['dsa', 'lld', 'hld', 'behavioral'].filter((c) => !categoryCount[c]);
 
   const lines = [];
   lines.push('## Reality Check');
-  lines.push(`- ${sessions} sessions · ${minutes} active minutes · ${feynman.length} explain-backs (avg ${avgGrade ?? '—'}/100)`);
-  lines.push(`- Mock interviews: ${mockCompleted} completed (${mockStarted} started)${mockRatings.length ? ` · ratings: ${mockRatings.join(', ')}` : ''}`);
-  lines.push(`- Touched ${touchedThisWeek.size} concepts across ${Object.keys(categoryCount).length} categories`);
+  lines.push(
+    `- ${sessions} sessions · ${minutes} active minutes · ${feynman.length} explain-backs (avg ${avgGrade ?? '—'}/100)`
+  );
+  lines.push(
+    `- Mock interviews: ${mockCompleted} completed (${mockStarted} started)${mockRatings.length ? ` · ratings: ${mockRatings.join(', ')}` : ''}`
+  );
+  lines.push(
+    `- Touched ${touchedThisWeek.size} concepts across ${Object.keys(categoryCount).length} categories`
+  );
   lines.push('');
   lines.push("## What's Rotting");
   if (rotting.length === 0) {
-    lines.push('- Nothing actively rotting. Either you reviewed well or you barely touched anything.');
+    lines.push(
+      '- Nothing actively rotting. Either you reviewed well or you barely touched anything.'
+    );
   } else {
     for (const r of rotting) {
-      lines.push(`- **${r.name}** (${r.category}) — ${Math.round(r.confidence * 100)}% confidence, ${r.lapses} lapses`);
+      lines.push(
+        `- **${r.name}** (${r.category}) — ${Math.round(r.confidence * 100)}% confidence, ${r.lapses} lapses`
+      );
     }
   }
   lines.push('');
@@ -219,13 +248,21 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   lines.push('');
   lines.push("## Next Week's Bet");
   if (mockCompleted === 0 && sessions >= 2) {
-    lines.push('- Schedule at least one **timed mock** on the Mock tab — drills alone do not train interview pressure.');
+    lines.push(
+      '- Schedule at least one **timed mock** on the Mock tab — drills alone do not train interview pressure.'
+    );
   } else if (rotting.length > 0) {
-    lines.push(`- Rescue the top decayer: **${rotting[0].name}**. One Feynman explain-back will reset its FSRS state.`);
+    lines.push(
+      `- Rescue the top decayer: **${rotting[0].name}**. One Feynman explain-back will reset its FSRS state.`
+    );
   } else if (avoided.length > 0) {
-    lines.push(`- Break the silence on ${avoided[0].toUpperCase()}. Generate today's plan to seed activity.`);
+    lines.push(
+      `- Break the silence on ${avoided[0].toUpperCase()}. Generate today's plan to seed activity.`
+    );
   } else {
-    lines.push('- You\'re balanced. Push for a deep concept (heap, dp-2d, consensus) instead of surface reps.');
+    lines.push(
+      "- You're balanced. Push for a deep concept (heap, dp-2d, consensus) instead of surface reps."
+    );
   }
   lines.push('');
   lines.push('_Generated heuristically (no AI). Configure AI in Settings for deeper synthesis._');

@@ -45,7 +45,7 @@ const MAX_OUTPUT_CHARS = 64 * 1024;
 
 function truncateOutput(text: string): string {
   if (!text || text.length <= MAX_OUTPUT_CHARS) return text;
-  return text.slice(0, MAX_OUTPUT_CHARS) + '\n…[output truncated]';
+  return `${text.slice(0, MAX_OUTPUT_CHARS)}\n…[output truncated]`;
 }
 
 let wasmReady = false;
@@ -68,7 +68,7 @@ async function executeViaAPI(code: string): Promise<GoResult> {
   try {
     const token = getAuthToken();
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (token) headers.Authorization = `Bearer ${token}`;
     const res = await fetch('/api/go-run', {
       method: 'POST',
       headers,
@@ -90,7 +90,7 @@ async function executeViaAPI(code: string): Promise<GoResult> {
   } catch (e: any) {
     return {
       output: '',
-      errors: 'Go runner unavailable: ' + (e?.message ?? String(e)),
+      errors: `Go runner unavailable: ${e?.message ?? String(e)}`,
       execTimeMs: performance.now() - t0,
       errorLine: null,
       backend: 'api',
@@ -128,10 +128,7 @@ function killWorker() {
  * larger load budget since it also has to fetch + instantiate the module;
  * normal runs use the strict execution ceiling.
  */
-function executeViaWASM(
-  code: string,
-  timeoutMs: number = WASM_EXEC_TIMEOUT_MS,
-): Promise<GoResult> {
+function executeViaWASM(code: string, timeoutMs: number = WASM_EXEC_TIMEOUT_MS): Promise<GoResult> {
   return new Promise<GoResult>((resolve) => {
     const t0 = performance.now();
     const id = ++runId;
@@ -149,9 +146,7 @@ function executeViaWASM(
       const apiResult = await executeViaAPI(code);
       resolve({
         ...apiResult,
-        errors: apiResult.errors
-          ? `${note}\n${apiResult.errors}`
-          : note || apiResult.errors,
+        errors: apiResult.errors ? `${note}\n${apiResult.errors}` : note || apiResult.errors,
       });
     };
 
@@ -244,10 +239,7 @@ export function startWASMLoading(): void {
     try {
       // A trivial program forces the worker to load + instantiate the module.
       // The warm-up gets the larger load budget (it has to fetch the .wasm).
-      const warmup = await executeViaWASM(
-        'package main\nfunc main() {}',
-        WASM_LOAD_TIMEOUT_MS,
-      );
+      const warmup = await executeViaWASM('package main\nfunc main() {}', WASM_LOAD_TIMEOUT_MS);
 
       if (warmup.backend === 'wasm' && !warmup.errors) {
         wasmReady = true;

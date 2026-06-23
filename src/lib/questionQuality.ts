@@ -78,7 +78,7 @@ export function scoreExerciseQuality(exercise: Exercise): QuestionQuality {
 
   if (exercise.type === 'mcq') {
     const options = exercise.options || [];
-    const uniqueOptions = new Set(options.map(o => o.trim().toLowerCase()));
+    const uniqueOptions = new Set(options.map((o) => o.trim().toLowerCase()));
     if (options.length >= 3 && options.length <= 5) {
       score += 8;
       signals.push('mcq-option-count-good');

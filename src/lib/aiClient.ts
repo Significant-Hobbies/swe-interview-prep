@@ -46,12 +46,16 @@ export function analyzeGaps(profile: Record<string, unknown>): Promise<GapAnalys
   return postAI<GapAnalysis>('gaps', {
     profile,
     catalog: {
-      concepts: ALL_CONCEPTS.map(c => ({ id: c.id, name: c.name, tags: c.tags })),
-      artifacts: ARTIFACTS.map(a => ({ id: a.id, title: a.title })),
+      concepts: ALL_CONCEPTS.map((c) => ({ id: c.id, name: c.name, tags: c.tags })),
+      artifacts: ARTIFACTS.map((a) => ({ id: a.id, title: a.title })),
     },
   });
 }
 
-export function critiqueAnswer(question: string, answer: string, expected: string): Promise<Critique> {
+export function critiqueAnswer(
+  question: string,
+  answer: string,
+  expected: string
+): Promise<Critique> {
   return postAI<Critique>('critique', { question, answer, expected });
 }

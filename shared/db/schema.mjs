@@ -85,7 +85,9 @@ export async function initDatabase() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
   `);
-  await db.execute(`CREATE INDEX IF NOT EXISTS idx_activity_user_time ON activity_log(user_id, created_at DESC)`);
+  await db.execute(
+    `CREATE INDEX IF NOT EXISTS idx_activity_user_time ON activity_log(user_id, created_at DESC)`
+  );
 
   // Per-user per-concept FSRS state.
   await db.execute(`
@@ -108,7 +110,9 @@ export async function initDatabase() {
       UNIQUE(user_id, concept_id)
     )
   `);
-  await db.execute(`CREATE INDEX IF NOT EXISTS idx_mastery_user_due ON concept_mastery(user_id, due)`);
+  await db.execute(
+    `CREATE INDEX IF NOT EXISTS idx_mastery_user_due ON concept_mastery(user_id, due)`
+  );
 
   // Legacy — superseded by client-side planner (src/lib/planner.ts). Kept for existing DBs.
   await db.execute(`
@@ -214,7 +218,9 @@ export async function initDatabase() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
   `);
-  await db.execute(`CREATE INDEX IF NOT EXISTS idx_lnotes_user_scope ON user_learning_notes(user_id, scope, ref_id)`);
+  await db.execute(
+    `CREATE INDEX IF NOT EXISTS idx_lnotes_user_scope ON user_learning_notes(user_id, scope, ref_id)`
+  );
 
   // Learner profile — time budget, roadmap blend, modality mix, skips.
   await db.execute(`
@@ -246,7 +252,9 @@ export async function initDatabase() {
       UNIQUE(user_id, question_id)
     )
   `);
-  await db.execute(`CREATE INDEX IF NOT EXISTS idx_rqm_user_due ON review_question_mastery(user_id, due)`);
+  await db.execute(
+    `CREATE INDEX IF NOT EXISTS idx_rqm_user_due ON review_question_mastery(user_id, due)`
+  );
 
   // Per-roadmap ELO — synced from client for cross-device calibration.
   await db.execute(`
@@ -274,7 +282,9 @@ export async function initDatabase() {
       UNIQUE(user_id, external_id)
     )
   `);
-  await db.execute(`CREATE INDEX IF NOT EXISTS idx_imported_reviews_user ON user_imported_reviews(user_id)`);
+  await db.execute(
+    `CREATE INDEX IF NOT EXISTS idx_imported_reviews_user ON user_imported_reviews(user_id)`
+  );
 
   // Web Push subscriptions for digest reminders.
   await db.execute(`

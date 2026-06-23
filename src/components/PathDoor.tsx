@@ -21,7 +21,7 @@ interface PathDoorProps {
 export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorProps) {
   const navigate = useNavigate();
   const activeGroupId = activeRoadmapId
-    ? ROADMAP_GROUPS.find(g => g.roadmapIds.includes(activeRoadmapId))?.id
+    ? ROADMAP_GROUPS.find((g) => g.roadmapIds.includes(activeRoadmapId))?.id
     : undefined;
 
   return (
@@ -32,7 +32,8 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
             Start here
           </h2>
           <p className="mt-1 max-w-prose text-xs text-white/45">
-            Four doors — interview, systems, AI, math. Pick one for Today&apos;s weekly focus, or browse everything below.
+            Four doors — interview, systems, AI, math. Pick one for Today&apos;s weekly focus, or
+            browse everything below.
           </p>
         </div>
         <Link
@@ -44,7 +45,7 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
       </div>
 
       <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        {ROADMAP_GROUPS.map(group => {
+        {ROADMAP_GROUPS.map((group) => {
           const defaultId = group.roadmapIds[0];
           const defaultRoadmap = ROADMAP_BY_ID[defaultId];
           const active = activeGroupId === group.id;
@@ -59,10 +60,7 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
                   : 'border-white/[0.08] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.04]'
               }`}
             >
-              <Link
-                to={`/explore#${group.id}`}
-                className="flex flex-1 flex-col px-3.5 py-3"
-              >
+              <Link to={`/explore#${group.id}`} className="flex flex-1 flex-col px-3.5 py-3">
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-lg" aria-hidden>
                     {GROUP_EMOJI[group.id] ?? '📍'}

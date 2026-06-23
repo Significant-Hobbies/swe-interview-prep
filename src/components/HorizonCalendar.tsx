@@ -65,9 +65,7 @@ export function HorizonCalendar() {
                 {i === 0 ? 'Today' : `+${day.dayOffset}d`}
               </div>
               <div className="min-w-0 flex-1">
-                <div className={`text-sm font-medium ${FOCUS_ACCENT[day.focus]}`}>
-                  {day.label}
-                </div>
+                <div className={`text-sm font-medium ${FOCUS_ACCENT[day.focus]}`}>{day.label}</div>
                 <div className="text-[11px] text-white/40">{day.note}</div>
               </div>
               <div className="shrink-0 font-mono text-[10px] text-white/30">{day.minutes}m</div>

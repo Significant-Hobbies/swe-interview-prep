@@ -4,7 +4,10 @@ import { requireAuth } from '../api/auth/verify.mjs';
 
 let initialized = false;
 async function ensureInit() {
-  if (!initialized) { await initDatabase(); initialized = true; }
+  if (!initialized) {
+    await initDatabase();
+    initialized = true;
+  }
 }
 
 const EMPTY = { elo: {}, solves: {}, v: 2 };
@@ -26,7 +29,8 @@ export default async function handler(req, res) {
 
   if (req.method === 'PUT') {
     const { state } = req.body || {};
-    if (!state || typeof state !== 'object') return res.status(400).json({ error: 'state required' });
+    if (!state || typeof state !== 'object')
+      return res.status(400).json({ error: 'state required' });
     await db.execute({
       sql: `INSERT INTO user_elo_state (user_id, state_json, updated_at) VALUES (?, ?, datetime('now'))
             ON CONFLICT(user_id) DO UPDATE SET state_json = excluded.state_json, updated_at = datetime('now')`,

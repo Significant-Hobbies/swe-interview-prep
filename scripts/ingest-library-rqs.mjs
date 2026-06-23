@@ -6,9 +6,9 @@
  * Run after fetch-library / build-concept-index:
  *   pnpm ingest-library-rqs
  */
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { buildIngestedReviewQuestions } from '../shared/lib/ingest-library.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -31,7 +31,7 @@ if (!existsSync(INDEX_PATH)) {
 const conceptIndex = loadJSON(INDEX_PATH);
 const manifest = loadJSON(MANIFEST_PATH);
 const editorial = loadJSON(EDITORIAL_PATH).reviewQuestions || [];
-const existingIds = new Set(editorial.map(q => q.id));
+const existingIds = new Set(editorial.map((q) => q.id));
 
 const repoContent = {};
 for (const repo of manifest.repos || []) {
@@ -52,6 +52,6 @@ const payload = {
   reviewQuestions,
 };
 
-writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2) + '\n');
+writeFileSync(OUT_PATH, `${JSON.stringify(payload, null, 2)}\n`);
 console.log(`Wrote ${OUT_PATH}`);
 console.log(`Ingested review questions: ${reviewQuestions.length}`);

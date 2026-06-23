@@ -1,9 +1,9 @@
-import { useCallback,useState } from 'react';
+import { useCallback, useState } from 'react';
 import { transform } from 'sucrase';
 
 import { trackCoreAction } from '../lib/analytics';
 import { executeGo, type GoBackend } from '../lib/goExecutor';
-import type { Language,TestCase } from '../types';
+import type { Language, TestCase } from '../types';
 
 export interface TestResult extends TestCase {
   actual: unknown;
@@ -37,46 +37,63 @@ export function useCodeExecution() {
   const [errorLine, setErrorLine] = useState<number | null>(null);
   const [goBackend, setGoBackend] = useState<GoBackend>('api');
 
-  const execute = useCallback((code: string, testCases: TestCase[], language: Language = 'typescript'): Promise<ExecuteResult> => {
-    setIsRunning(true);
-    setOutput('');
-    setErrors(null);
-    setTestResults([]);
-    // Owner-facing analytics: code was run in the playground (a core action).
-    trackCoreAction('code_run');
+  const execute = useCallback(
+    (
+      code: string,
+      testCases: TestCase[],
+      language: Language = 'typescript'
+    ): Promise<ExecuteResult> => {
+      setIsRunning(true);
+      setOutput('');
+      setErrors(null);
+      setTestResults([]);
+      // Owner-facing analytics: code was run in the playground (a core action).
+      trackCoreAction('code_run');
 
-    if (language === 'go') {
-      return executeGo(code).then((result) => {
-        setOutput(result.output);
-        setErrors(result.errors);
-        setTestResults([]);
-        setExecTimeMs(result.execTimeMs);
-        setErrorLine(result.errorLine);
-        setGoBackend(result.backend);
-        setIsRunning(false);
-        return { output: result.output, errors: result.errors, testResults: [], execTimeMs: result.execTimeMs, errorLine: result.errorLine };
-      });
-    }
-
-    let jsCode = code;
-    if (language === 'typescript') {
-      const { code: transpiled, error } = transpileTS(code);
-      if (error) {
-        setErrors('TypeScript Error: ' + error);
-        setErrorLine(null);
-        setIsRunning(false);
-        return Promise.resolve({ output: '', errors: 'TypeScript Error: ' + error, testResults: [], execTimeMs: 0, errorLine: null });
+      if (language === 'go') {
+        return executeGo(code).then((result) => {
+          setOutput(result.output);
+          setErrors(result.errors);
+          setTestResults([]);
+          setExecTimeMs(result.execTimeMs);
+          setErrorLine(result.errorLine);
+          setGoBackend(result.backend);
+          setIsRunning(false);
+          return {
+            output: result.output,
+            errors: result.errors,
+            testResults: [],
+            execTimeMs: result.execTimeMs,
+            errorLine: result.errorLine,
+          };
+        });
       }
-      jsCode = transpiled!;
-    }
 
-    return new Promise((resolve) => {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.sandbox.add('allow-scripts');
+      let jsCode = code;
+      if (language === 'typescript') {
+        const { code: transpiled, error } = transpileTS(code);
+        if (error) {
+          setErrors(`TypeScript Error: ${error}`);
+          setErrorLine(null);
+          setIsRunning(false);
+          return Promise.resolve({
+            output: '',
+            errors: `TypeScript Error: ${error}`,
+            testResults: [],
+            execTimeMs: 0,
+            errorLine: null,
+          });
+        }
+        jsCode = transpiled!;
+      }
 
-      const testCasesJSON = JSON.stringify(testCases || []);
-      const funcMatchRegex = `
+      return new Promise((resolve) => {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.sandbox.add('allow-scripts');
+
+        const testCasesJSON = JSON.stringify(testCases || []);
+        const funcMatchRegex = `
         const funcMatches = userCode.match(/function\\s+(\\w+)/g);
         let funcName = null;
         if (funcMatches) {
@@ -89,7 +106,7 @@ export function useCodeExecution() {
         }
       `;
 
-      const html = `<!DOCTYPE html><html><body><script>
+        const html = `<!DOCTYPE html><html><body><script>
         const logs = [];
         console.log = function() {
           const args = Array.from(arguments);
@@ -137,36 +154,56 @@ export function useCodeExecution() {
         }
       </script></body></html>`;
 
-      // eslint-disable-next-line prefer-const
-      let timeout: ReturnType<typeof setTimeout>;
-      const handler = (event: MessageEvent) => {
-        if (event.data?.type === 'exec-result') {
-          clearTimeout(timeout);
+        // eslint-disable-next-line prefer-const
+        let timeout: ReturnType<typeof setTimeout>;
+        const handler = (event: MessageEvent) => {
+          if (event.data?.type === 'exec-result') {
+            clearTimeout(timeout);
+            window.removeEventListener('message', handler);
+            document.body.removeChild(iframe);
+            const {
+              output: out,
+              errors: err,
+              testResults: results,
+              execTimeMs: time,
+              errorLine: eLine,
+            } = event.data;
+            setOutput(out || '');
+            setErrors(err);
+            setTestResults(results || []);
+            setExecTimeMs(time || 0);
+            setErrorLine(eLine || null);
+            setIsRunning(false);
+            resolve({
+              output: out,
+              errors: err,
+              testResults: results,
+              execTimeMs: time || 0,
+              errorLine: eLine || null,
+            });
+          }
+        };
+        window.addEventListener('message', handler);
+        timeout = setTimeout(() => {
           window.removeEventListener('message', handler);
-          document.body.removeChild(iframe);
-          const { output: out, errors: err, testResults: results, execTimeMs: time, errorLine: eLine } = event.data;
-          setOutput(out || '');
-          setErrors(err);
-          setTestResults(results || []);
-          setExecTimeMs(time || 0);
-          setErrorLine(eLine || null);
+          if (iframe.parentNode) document.body.removeChild(iframe);
+          setErrors('Execution timed out (5s limit)');
+          setErrorLine(null);
           setIsRunning(false);
-          resolve({ output: out, errors: err, testResults: results, execTimeMs: time || 0, errorLine: eLine || null });
-        }
-      };
-      window.addEventListener('message', handler);
-      timeout = setTimeout(() => {
-        window.removeEventListener('message', handler);
-        if (iframe.parentNode) document.body.removeChild(iframe);
-        setErrors('Execution timed out (5s limit)');
-        setErrorLine(null);
-        setIsRunning(false);
-        resolve({ output: '', errors: 'Execution timed out (5s limit)', testResults: [], execTimeMs: 5000, errorLine: null });
-      }, 5000);
-      document.body.appendChild(iframe);
-      iframe.srcdoc = html;
-    });
-  }, []);
+          resolve({
+            output: '',
+            errors: 'Execution timed out (5s limit)',
+            testResults: [],
+            execTimeMs: 5000,
+            errorLine: null,
+          });
+        }, 5000);
+        document.body.appendChild(iframe);
+        iframe.srcdoc = html;
+      });
+    },
+    []
+  );
 
   const clearOutput = useCallback(() => {
     setOutput('');
@@ -174,5 +211,15 @@ export function useCodeExecution() {
     setTestResults([]);
   }, []);
 
-  return { execute, output, errors, testResults, isRunning, execTimeMs, errorLine, goBackend, clearOutput };
+  return {
+    execute,
+    output,
+    errors,
+    testResults,
+    isRunning,
+    execTimeMs,
+    errorLine,
+    goBackend,
+    clearOutput,
+  };
 }

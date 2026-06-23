@@ -6,11 +6,7 @@
       "source": "https://github.com/sudheerj/javascript-interview-questions",
       "sourceBaseUrl": "https://raw.githubusercontent.com/sudheerj/javascript-interview-questions/HEAD",
       "description": "478+ JavaScript interview questions with answers",
-      "tags": [
-        "javascript",
-        "interview",
-        "frontend"
-      ],
+      "tags": ["javascript", "interview", "frontend"],
       "icon": "FileCode2",
       "format": "qa",
       "sectionCount": 478,
@@ -23,11 +19,7 @@
       "source": "https://github.com/sudheerj/reactjs-interview-questions",
       "sourceBaseUrl": "https://raw.githubusercontent.com/sudheerj/reactjs-interview-questions/HEAD",
       "description": "318+ React interview questions with answers",
-      "tags": [
-        "react",
-        "interview",
-        "frontend"
-      ],
+      "tags": ["react", "interview", "frontend"],
       "icon": "Atom",
       "format": "qa",
       "sectionCount": 406,
@@ -40,13 +32,7 @@
       "source": "https://github.com/yangshun/front-end-interview-handbook",
       "sourceBaseUrl": "https://raw.githubusercontent.com/yangshun/front-end-interview-handbook/HEAD",
       "description": "Structured frontend interview preparation guide",
-      "tags": [
-        "frontend",
-        "interview",
-        "html",
-        "css",
-        "javascript"
-      ],
+      "tags": ["frontend", "interview", "html", "css", "javascript"],
       "icon": "Layout",
       "format": "code-heavy",
       "sectionCount": 55,
@@ -59,11 +45,7 @@
       "source": "https://github.com/karanpratapsingh/system-design",
       "sourceBaseUrl": "https://raw.githubusercontent.com/karanpratapsingh/system-design/HEAD",
       "description": "System design fundamentals and case studies",
-      "tags": [
-        "system-design",
-        "architecture",
-        "distributed-systems"
-      ],
+      "tags": ["system-design", "architecture", "distributed-systems"],
       "icon": "Network",
       "format": "long-form",
       "sectionCount": 241,
@@ -76,11 +58,7 @@
       "source": "https://github.com/ByteByteGoHq/system-design-101",
       "sourceBaseUrl": "https://raw.githubusercontent.com/ByteByteGoHq/system-design-101/HEAD",
       "description": "Visual system design explanations by ByteByteGo",
-      "tags": [
-        "system-design",
-        "bytebytego",
-        "visual"
-      ],
+      "tags": ["system-design", "bytebytego", "visual"],
       "icon": "Image",
       "format": "code-heavy",
       "sectionCount": 416,
@@ -93,11 +71,7 @@
       "source": "https://github.com/ashishps1/awesome-low-level-design",
       "sourceBaseUrl": "https://raw.githubusercontent.com/ashishps1/awesome-low-level-design/HEAD",
       "description": "40+ LLD problems with design patterns",
-      "tags": [
-        "lld",
-        "oop",
-        "design-patterns"
-      ],
+      "tags": ["lld", "oop", "design-patterns"],
       "icon": "Boxes",
       "format": "code-heavy",
       "sectionCount": 262,
@@ -110,11 +84,7 @@
       "source": "https://github.com/tssovi/grokking-the-object-oriented-design-interview",
       "sourceBaseUrl": "https://raw.githubusercontent.com/tssovi/grokking-the-object-oriented-design-interview/HEAD",
       "description": "Object-oriented design interview problems",
-      "tags": [
-        "oop",
-        "design",
-        "uml"
-      ],
+      "tags": ["oop", "design", "uml"],
       "icon": "Boxes",
       "format": "code-heavy",
       "sectionCount": 63,
@@ -127,13 +97,7 @@
       "source": "https://github.com/bregman-arie/devops-exercises",
       "sourceBaseUrl": "https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD",
       "description": "2600+ DevOps exercises covering all major topics",
-      "tags": [
-        "devops",
-        "linux",
-        "docker",
-        "kubernetes",
-        "cloud"
-      ],
+      "tags": ["devops", "linux", "docker", "kubernetes", "cloud"],
       "icon": "Terminal",
       "format": "qa",
       "sectionCount": 49,
@@ -146,12 +110,7 @@
       "source": "https://github.com/ByteByteGoHq/coding-interview-patterns",
       "sourceBaseUrl": "https://raw.githubusercontent.com/ByteByteGoHq/coding-interview-patterns/HEAD",
       "description": "101 coding problems by ByteByteGo in 6 languages",
-      "tags": [
-        "algorithms",
-        "bytebytego",
-        "coding",
-        "patterns"
-      ],
+      "tags": ["algorithms", "bytebytego", "coding", "patterns"],
       "icon": "Code2",
       "format": "code-heavy",
       "sectionCount": 1,
@@ -164,12 +123,7 @@
       "source": "https://github.com/ByteByteGoHq/ood-interview",
       "sourceBaseUrl": "https://raw.githubusercontent.com/ByteByteGoHq/ood-interview/HEAD",
       "description": "11 OOP design projects with runnable Java code",
-      "tags": [
-        "oop",
-        "java",
-        "bytebytego",
-        "design"
-      ],
+      "tags": ["oop", "java", "bytebytego", "design"],
       "icon": "Braces",
       "format": "code-heavy",
       "sectionCount": 13,
@@ -182,11 +136,7 @@
       "source": "https://github.com/donnemartin/system-design-primer",
       "sourceBaseUrl": "https://raw.githubusercontent.com/donnemartin/system-design-primer/HEAD",
       "description": "Learn large-scale system design with Anki flashcards",
-      "tags": [
-        "system-design",
-        "scalability",
-        "architecture"
-      ],
+      "tags": ["system-design", "scalability", "architecture"],
       "icon": "Server",
       "format": "code-heavy",
       "sectionCount": 73,
@@ -199,11 +149,7 @@
       "source": "https://github.com/trekhleb/javascript-algorithms",
       "sourceBaseUrl": "https://raw.githubusercontent.com/trekhleb/javascript-algorithms/HEAD",
       "description": "Algorithms and data structures in JavaScript",
-      "tags": [
-        "algorithms",
-        "data-structures",
-        "javascript"
-      ],
+      "tags": ["algorithms", "data-structures", "javascript"],
       "icon": "Binary",
       "format": "visual",
       "sectionCount": 321,

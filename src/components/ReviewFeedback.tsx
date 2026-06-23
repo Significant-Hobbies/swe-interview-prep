@@ -21,7 +21,7 @@ export function ReviewRatingButtons({
     <div>
       <div className="mb-2 text-xs text-slate-500">How well did you recall it?</div>
       <div className={`grid gap-2 ${compact ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-4'}`}>
-        {FSRS_RATINGS.map(r => (
+        {FSRS_RATINGS.map((r) => (
           <button
             key={r.id}
             type="button"
@@ -59,7 +59,9 @@ export function AnswerCritiquePanel({
             <Sparkles className="h-3.5 w-3.5" /> {critiquing ? 'Grading…' : 'AI critique my answer'}
           </Button>
           {!aiConfigured() && (
-            <p className="mt-1.5 text-xs text-slate-500">Add an AI provider in Settings to enable the critic.</p>
+            <p className="mt-1.5 text-xs text-slate-500">
+              Add an AI provider in Settings to enable the critic.
+            </p>
           )}
         </>
       )}
@@ -100,7 +102,9 @@ function CritiqueDetails({ critique }: { critique: Critique }) {
           <div className="text-[11px] font-medium text-slate-500">Follow-ups</div>
           <ul className="mt-1 space-y-1">
             {critique.followUps.map((f, i) => (
-              <li key={i} className="text-xs text-slate-400">{f}</li>
+              <li key={i} className="text-xs text-slate-400">
+                {f}
+              </li>
             ))}
           </ul>
         </div>

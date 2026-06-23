@@ -17,7 +17,7 @@ export interface ReviewMasteryEntry {
 }
 
 export function isReviewDue(m: ReviewMasteryEntry | undefined, now = new Date()): boolean {
-  if (!m || !m.due) return false;
+  if (!m?.due) return false;
   return new Date(m.due).getTime() <= now.getTime();
 }
 
@@ -54,7 +54,7 @@ function rowToEntry(row: MasteryRow): ReviewMasteryEntry {
 
 export function reviewQuestion(
   prev: ReviewMasteryEntry | undefined,
-  rating: MasteryRating,
+  rating: MasteryRating
 ): ReviewMasteryEntry {
   return rowToEntry(reviewConcept(entryToRow(prev), rating));
 }
@@ -84,11 +84,11 @@ export function isSuspended(questionId: string): boolean {
 export function sortReviewQueue(
   questions: ReviewQuestion[],
   rqMastery: Record<string, ReviewMasteryEntry>,
-  conceptMastery: Record<string, MasteryEntry>,
+  conceptMastery: Record<string, MasteryEntry>
 ): ReviewQuestion[] {
   const suspended = loadSuspendedRqs();
-  const pool = questions.filter(q => !suspended.has(q.id));
-  const scored = pool.map(q => {
+  const pool = questions.filter((q) => !suspended.has(q.id));
+  const scored = pool.map((q) => {
     const conf = conceptMastery[q.conceptId]?.confidence ?? 0.5;
     const rqUrgency = rqMastery[q.id]?.lapses ? (rqMastery[q.id].lapses ?? 0) * 0.1 : 0;
     return { q, urgency: 1 - conf + rqUrgency, conceptId: q.conceptId };
@@ -99,7 +99,7 @@ export function sortReviewQueue(
   const remaining = [...scored];
   let lastConcept = '';
   while (remaining.length) {
-    let idx = remaining.findIndex(s => s.conceptId !== lastConcept);
+    let idx = remaining.findIndex((s) => s.conceptId !== lastConcept);
     if (idx < 0) idx = 0;
     const pick = remaining.splice(idx, 1)[0];
     result.push(pick.q);
@@ -113,15 +113,15 @@ export function reviewsToSeedForConcept(
   conceptId: string,
   allQuestions: ReviewQuestion[],
   rqMastery: Record<string, ReviewMasteryEntry>,
-  rating: MasteryRating = 'hard',
+  rating: MasteryRating = 'hard'
 ): { questionId: string; rating: MasteryRating }[] {
   return allQuestions
     .filter(
-      q =>
-        q.conceptId === conceptId
-        && !rqMastery[q.id]
-        && q.source !== 'library'
-        && q.source !== 'anki',
+      (q) =>
+        q.conceptId === conceptId &&
+        !rqMastery[q.id] &&
+        q.source !== 'library' &&
+        q.source !== 'anki'
     )
-    .map(q => ({ questionId: q.id, rating }));
+    .map((q) => ({ questionId: q.id, rating }));
 }

@@ -3,7 +3,7 @@ import type { ConceptStatus } from '../data/learning-os';
 import type { MasteryEntry } from '../hooks/useConcepts';
 
 export function isDue(m: MasteryEntry | undefined, now: Date = new Date()): boolean {
-  if (!m || !m.due) return false;
+  if (!m?.due) return false;
   return new Date(m.due).getTime() <= now.getTime();
 }
 
@@ -11,7 +11,10 @@ export function isDue(m: MasteryEntry | undefined, now: Date = new Date()): bool
  * Map FSRS mastery onto the PRD's concept lifecycle. Without an entry a concept
  * is untouched; with one, confidence and review-due drive the status.
  */
-export function deriveConceptStatus(m: MasteryEntry | undefined, now: Date = new Date()): ConceptStatus {
+export function deriveConceptStatus(
+  m: MasteryEntry | undefined,
+  now: Date = new Date()
+): ConceptStatus {
   if (!m) return 'not-started';
   const conf = m.confidence ?? 0;
   if (conf >= 0.85 && (m.reps ?? 0) >= 2) return 'mastered';
@@ -22,7 +25,7 @@ export function deriveConceptStatus(m: MasteryEntry | undefined, now: Date = new
 
 /** Confidence as a 0-100 percentage for display. */
 export function confidencePct(m: MasteryEntry | undefined): number {
-  return Math.round(((m?.confidence ?? 0)) * 100);
+  return Math.round((m?.confidence ?? 0) * 100);
 }
 
 /** Confidence on the PRD's 1-5 scale. */
@@ -44,7 +47,7 @@ export interface MasteryRollup {
 export function rollupMastery(
   conceptIds: string[],
   mastery: Record<string, MasteryEntry>,
-  now: Date = new Date(),
+  now: Date = new Date()
 ): MasteryRollup {
   const r: MasteryRollup = {
     total: conceptIds.length,
