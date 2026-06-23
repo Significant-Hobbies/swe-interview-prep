@@ -40,3 +40,5 @@ jobs:
         run: pnpm build
         env:
           VITE_GOOGLE_CLIENT_ID: ci-placeholder.apps.googleusercontent.com
+      - name: Check bundle size
+        run: pnpm run size
