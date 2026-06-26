@@ -44,6 +44,7 @@ describe('topicPack', () => {
       id: 'test',
       name: 'Test',
       tags: [],
+      roadmaps: [],
       difficulty: 'intro',
       priority: 1,
       prerequisites: [],

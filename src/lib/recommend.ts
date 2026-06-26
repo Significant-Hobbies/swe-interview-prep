@@ -24,7 +24,10 @@ export { EDITORIAL_DRILLS, EDITORIAL_ARTIFACTS };
 export const EDITORIAL_ARTIFACT_IDS = new Set(EDITORIAL_ARTIFACTS.map((a) => a.id));
 
 /** A concept is unblocked when every prerequisite has at least minimal confidence. */
-export function prereqsMet(concept: Concept, mastery: Record<string, MasteryEntry>): boolean {
+export function prereqsMet(
+  concept: { prerequisites: string[] },
+  mastery: Record<string, MasteryEntry>
+): boolean {
   return concept.prerequisites.every((p) => (mastery[p]?.confidence ?? 0) >= PREREQ_THRESHOLD);
 }
 

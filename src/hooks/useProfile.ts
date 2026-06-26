@@ -37,7 +37,7 @@ export function useProfile() {
         return;
       }
       const data = await res.json();
-      const merged = { ...DEFAULT_PROFILE, ...data.profile };
+      const merged: LearnerProfile = { ...DEFAULT_PROFILE, ...data.profile };
       setProfile(merged);
       saveGuestProfile(merged);
       const topRoadmap = Object.entries(merged.roadmapWeights).sort((a, b) => b[1] - a[1])[0]?.[0];

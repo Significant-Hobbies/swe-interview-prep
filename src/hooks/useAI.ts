@@ -98,6 +98,7 @@ async function streamLocalAI(
   }
 
   const reader = res.body?.getReader();
+  if (!reader) throw new Error('AI response had no readable body');
   const decoder = new TextDecoder();
   let buffer = '';
 
@@ -147,6 +148,7 @@ async function streamRemoteAI(
   }
 
   const reader = res.body?.getReader();
+  if (!reader) throw new Error('AI response had no readable body');
   const decoder = new TextDecoder();
   let buffer = '';
 

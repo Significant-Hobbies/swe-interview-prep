@@ -78,7 +78,7 @@ describe('content quality bar', () => {
     const ingested = reviewQuestionsIngestedData.reviewQuestions ?? [];
     expect(ingested.length).toBeGreaterThan(0);
     expect(ingested.every((q: { id: string }) => isIngestedReviewQuestion(q.id))).toBe(true);
-    expect(ingested.every((q: ReviewQuestion) => isSchedulableReviewQuestion(q))).toBe(true);
+    expect((ingested as ReviewQuestion[]).every((q) => isSchedulableReviewQuestion(q))).toBe(true);
   });
 
   it('spine playground templates are not stubs', () => {
@@ -94,7 +94,7 @@ describe('content quality bar', () => {
         new RegExp(`artifactId: '${id}'[\\s\\S]*?code: \\\`([\\s\\S]*?)\\\``)
       );
       expect(block, id).toBeTruthy();
-      expect(isStubPlaygroundCode(block?.[1]), id).toBe(false);
+      expect(isStubPlaygroundCode(block?.[1] ?? ''), id).toBe(false);
     }
   });
 });

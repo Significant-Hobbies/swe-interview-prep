@@ -42,7 +42,8 @@ export default function ProjectDetail() {
     );
   }
 
-  const state = getProject(project.id) || {
+  const projectId = project.id;
+  const state = getProject(projectId) || {
     status: project.status,
     nextAction: project.nextAction,
     milestones: {},
@@ -51,7 +52,7 @@ export default function ProjectDetail() {
   const artifacts = artifactsForProject(project.id);
 
   function update(patch: Partial<typeof state>) {
-    setProject(project?.id, { ...state, ...patch });
+    setProject(projectId, { ...state, ...patch });
   }
 
   function toggleMilestone(m: string) {

@@ -86,6 +86,7 @@ async function streamRemote(
 
 async function pumpSSE(res: Response, onChunk: (t: string) => void) {
   const reader = res.body?.getReader();
+  if (!reader) throw new Error('AI response had no readable body');
   const decoder = new TextDecoder();
   let buffer = '';
   while (true) {

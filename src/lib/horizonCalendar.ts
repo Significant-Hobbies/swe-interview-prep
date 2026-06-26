@@ -1,5 +1,6 @@
 // Day-by-day study calendar from interview horizon — pure heuristics.
-import type { Concept, MasteryEntry } from '../hooks/useConcepts';
+import type { Concept } from '../data/learning-os';
+import type { MasteryEntry } from '../hooks/useConcepts';
 import type { LearnerProfile } from './profile';
 import { normalizeModalityWeights } from './profile';
 import { pickConceptForSession } from './planner';

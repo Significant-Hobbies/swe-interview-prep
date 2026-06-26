@@ -65,10 +65,35 @@ function isTextExport(file: File) {
   return n.endsWith('.txt') || n.endsWith('.csv');
 }
 
+interface ParsedAnkiCard {
+  id: string;
+  conceptId?: string | null;
+  question: string;
+  answer: string;
+  tags?: string[];
+  externalId: string;
+  deckName: string;
+}
+
+interface ParsedAnki {
+  cards?: ParsedAnkiCard[];
+  stats?: AnkiImportResult['stats'];
+  deckName: string;
+  format?: AnkiImportResult['format'];
+}
+
+type AnkiParseOpts = { concepts?: unknown; deckName?: string };
+
+// shared/lib/ingest-anki.mjs is an untyped JS module — declare the surface we use.
+interface IngestAnkiModule {
+  parseAnkiExport: (text: string, opts?: AnkiParseOpts) => ParsedAnki;
+  parseApkgBytes: (bytes: Uint8Array, SQL: unknown, opts?: AnkiParseOpts) => ParsedAnki;
+  toReviewQuestions: (parsed: ParsedAnki, opts?: { requireConcept?: boolean }) => ReviewQuestion[];
+}
+
 export async function parseAnkiImportFile(file: File): Promise<AnkiImportResult> {
-  const { parseAnkiExport, parseApkgBytes, toReviewQuestions } = await import(
-    '../../shared/lib/ingest-anki.mjs'
-  );
+  const { parseAnkiExport, parseApkgBytes, toReviewQuestions } =
+    (await import('../../shared/lib/ingest-anki.mjs')) as unknown as IngestAnkiModule;
 
   const deckFallback = file.name.replace(/\.(apkg|txt|csv)$/i, '') || 'imported';
   const concepts = CONCEPTS;
