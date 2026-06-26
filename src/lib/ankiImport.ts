@@ -92,8 +92,9 @@ interface IngestAnkiModule {
 }
 
 export async function parseAnkiImportFile(file: File): Promise<AnkiImportResult> {
-  const { parseAnkiExport, parseApkgBytes, toReviewQuestions } =
-    (await import('../../shared/lib/ingest-anki.mjs')) as unknown as IngestAnkiModule;
+  const { parseAnkiExport, parseApkgBytes, toReviewQuestions } = (await import(
+    '../../shared/lib/ingest-anki.mjs'
+  )) as unknown as IngestAnkiModule;
 
   const deckFallback = file.name.replace(/\.(apkg|txt|csv)$/i, '') || 'imported';
   const concepts = CONCEPTS;
