@@ -19,6 +19,8 @@
       "!**/package-lock.json",
       "!**/tsconfig.tsbuildinfo",
       "!**/public/wasm",
+      "!**/server",
+      "!**/src/data/library/**/content.json",
       "!**/*.css"
     ]
   },
@@ -40,7 +42,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "a11y": {
         "noSvgWithoutTitle": "off",
         "useButtonType": "off",

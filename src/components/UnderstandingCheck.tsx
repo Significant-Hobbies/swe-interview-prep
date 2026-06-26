@@ -150,7 +150,6 @@ export default function UnderstandingCheck({ docTitle, docContent, docSlug }: Pr
 function QuizFlow({
   docTitle,
   docContent,
-  docSlug,
   onReset,
   onGraded,
 }: {

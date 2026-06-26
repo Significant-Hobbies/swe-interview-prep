@@ -624,9 +624,7 @@ export default function Playground() {
 
 /** Wraps a panel with an optional resize handle before it */
 function PanelWrapper({
-  id,
   index,
-  total,
   defaultSize,
   children,
 }: {

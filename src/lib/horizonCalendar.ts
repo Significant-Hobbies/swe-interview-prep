@@ -45,7 +45,7 @@ export function buildHorizonCalendar(opts: {
   drillState: Record<string, DrillEntry>;
   maxDays?: number;
 }): HorizonDay[] {
-  const { profile, mastery, rqMastery, drillState } = opts;
+  const { profile, mastery, rqMastery } = opts;
   const horizon = profile.interviewHorizonDays;
   if (horizon == null || horizon < 1) return [];
 

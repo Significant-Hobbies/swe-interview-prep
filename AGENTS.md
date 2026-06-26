@@ -70,7 +70,7 @@ pnpm server         # ensure submodule deps, then Express AI server only
 pnpm build          # vite build → dist/
 pnpm test           # vitest run
 pnpm test:e2e       # playwright test
-pnpm lint           # ESLint
+pnpm lint           # Biome (check)
 ```
 
 ## Architecture notes

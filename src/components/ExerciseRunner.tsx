@@ -18,7 +18,7 @@ function shuffleArray<T>(arr: T[]): T[] {
   return shuffled;
 }
 
-export default function ExerciseRunner({ exercises, repoName }: ExerciseRunnerProps) {
+export default function ExerciseRunner({ exercises }: ExerciseRunnerProps) {
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
