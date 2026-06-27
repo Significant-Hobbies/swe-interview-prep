@@ -16,7 +16,7 @@ const GUEST_KEY = 'dsa-prep-guest';
 const PROFILE_KEY = 'dsa-prep-profile';
 // Legacy key (used to store the JWT in localStorage). Purged on load.
 const LEGACY_KEY = 'dsa-prep-auth';
-// Same-origin in dev (Vite proxies /api → :3456) and in prod (Vercel).
+// Same-origin in dev (the Vite AI bridge mounts /api in-process) and in prod.
 // Empty base means cookies attach automatically.
 const API_URL = '';
 

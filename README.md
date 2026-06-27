@@ -54,8 +54,8 @@ graph TB
         O --> Q[CategoryContext]
     end
 
-    subgraph "Local Dev Server - Express"
-        R[Local AI API :3456] --> S[claude CLI]
+    subgraph "Dev AI bridge - in-process (Vite plugin)"
+        R[/api/chat] --> S[claude CLI]
         R --> T[codex CLI]
         R --> U[gemini CLI]
     end
@@ -96,7 +96,7 @@ graph TB
 **Key Components:**
 
 - **Frontend**: React 19 SPA with TailwindCSS, Monaco Editor for code, Excalidraw for diagrams
-- **Local Dev Server**: Express local AI server on `:3456` for CLI tools (claude, codex, gemini) to avoid API keys during development
+- **Dev AI bridge**: in-process Vite plugin (`vite-plugin-local-ai.js`) streams the claude/codex/gemini CLIs at `/api/chat` so local dev needs no API keys; ships nothing to prod
 - **Backend**: Cloudflare Pages Functions handle auth, progress, notes, spaced repetition, and AI endpoints
 - **Database**: Turso/libSQL stores problems, user progress, notes, and spaced repetition schedules
 - **Auth**: Google One Tap posts credentials to `/api/auth/google`; the server issues an httpOnly JWT cookie
@@ -151,7 +151,7 @@ graph TB
    pnpm dev
    ```
 
-   Opens at `http://localhost:5173` (frontend) and `http://localhost:3456` (local AI server). The first run installs the `server/` submodule dependencies.
+   Opens at `http://localhost:5173`. The dev AI bridge runs in-process (no separate server); `/api/chat` streams your logged-in claude/codex/gemini CLIs.
 
 ### Production Build
 

@@ -4,10 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "pnpm server:ensure && pnpm --dir server start & vite",
+    "dev": "vite",
     "dev:frontend": "vite",
-    "server": "pnpm server:ensure && pnpm --dir server start",
-    "server:ensure": "npm --prefix server ci --ignore-scripts",
     "build": "node scripts/validate-env.mjs build && vite build",
     "lint": "biome check .",
     "preview": "vite preview",

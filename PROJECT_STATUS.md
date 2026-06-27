@@ -17,7 +17,7 @@ Out of scope: ATS/job-application features, Vercel/serverless migration, and new
 | Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) |
 | Database | Turso (libSQL) — problems, progress, notes, spaced repetition |
 | Auth | Google One Tap → JWT httpOnly cookie |
-| AI | Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek; local-ai bridge in dev |
+| AI | Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek; in-process Vite dev AI bridge (CLI, no keys) |
 | SRS | ts-fsrs (SM-2-style scheduling) |
 | Analytics | PostHog (local `posthog-js` wrapper) |
 | Deploy | Cloudflare Pages (`swe-interview-prep`) + Functions |
@@ -32,7 +32,7 @@ React SPA (Vite)
     │
     ├── Monaco + Go WASM code execution (R2 asset)
     ├── Excalidraw diagrams
-    ├── AI hints (useAI) ──► Cloudflare Functions /api/chat OR local-ai :3456 in dev
+    ├── AI hints (useAI) ──► Cloudflare Functions /api/chat (prod) OR in-process Vite dev bridge
     ├── Progress + SRS hooks ──► Turso via Functions
     └── Google One Tap ──► /api/auth/google ──► JWT cookie
 
@@ -40,7 +40,7 @@ Turso tables: problems, user_progress, notes, spaced_repetition, chats
 External: LeetCode API (import), multi-provider LLM APIs
 ```
 
-**Dev bridge:** Express `local-ai` on port 3456 proxies claude/codex/gemini CLIs so developers avoid API keys during local iteration (Vite proxy `/api` → localhost:3456 optional).
+**Dev bridge:** `vite-plugin-local-ai.js` — a dev-only Vite plugin (`apply: 'serve'`) that mounts `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory stubs for chats/progress/notes/auth. Runs in-process with Vite (no separate server, no proxy hop), ships nothing to prod. `codex` runs read-only/ephemeral on `codex login` — no API keys for local iteration. Replaced the former `local-ai` git submodule (2026-06-27).
 
 **Security posture (post-audit):** `/api/chat` and `/api/go-run` require auth; JWT secret has no production fallback; Google API key moved to header; progress syncs to Turso for authenticated users (localStorage offline fallback retained).
 
@@ -50,9 +50,9 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Database | Turso — connection via Pages Functions env |
 | Auth | Google OAuth; set callback URLs for localhost and production Pages domain |
 | R2 | `swe-interview-prep-assets` — Go WASM binary |
-| AI keys | Provider keys in Pages env; dev uses `local-ai` submodule on :3456 |
+| AI keys | Provider keys in Pages env; dev uses in-process Vite AI bridge (CLI, no keys) |
 | Deploy | Push to `main` (CI) or manual Pages deploy |
-| Local full stack | `pnpm dev` + optional `cd server && npm start` for local-ai |
+| Local full stack | `pnpm dev` (Vite + in-process AI bridge) |
 | Security | Never commit `.env.local`; parameterized SQL throughout |
 
 ## Timeline

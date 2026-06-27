@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { localAi } from './vite-plugin-local-ai.js';
 
 /** Load extracted app CSS without blocking first paint — index.html carries the LCP shell. */
 function deferAppCss() {
@@ -34,13 +35,10 @@ function deferAppCss() {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), deferAppCss()],
+  plugins: [react(), tailwindcss(), deferAppCss(), localAi()],
   assetsInclude: ['**/*.wasm'],
   server: {
     fs: { allow: ['..'] },
-    proxy: {
-      '/api': 'http://localhost:3456',
-    },
   },
   css: {
     transformer: 'lightningcss',

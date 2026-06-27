@@ -128,8 +128,6 @@ Package scripts:
 - `lint`
 - `prepare`
 - `preview`
-- `server`
-- `server:ensure`
 - `start`
 - `test`
 - `test:e2e`

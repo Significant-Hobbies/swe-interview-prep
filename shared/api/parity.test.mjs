@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -22,12 +22,12 @@ describe('learning API parity', () => {
     expect(src).not.toContain('async function handleFeynman');
   });
 
-  it('local dev server mounts learning routes', () => {
-    const serverEntry = join(ROOT, 'server/index.mjs');
-    if (!existsSync(serverEntry)) return; // submodule optional in CI
-    const src = readFileSync(serverEntry, 'utf8');
-    expect(src).toContain('mountAppRoutes');
-    expect(src).toContain('local-dev-routes.mjs');
+  it('dev AI bridge serves the chat route and is dev-only', () => {
+    // The former local-ai submodule was replaced by an in-process Vite dev plugin.
+    const bridge = readFileSync(join(ROOT, 'vite-plugin-local-ai.js'), 'utf8');
+    expect(bridge).toContain("path === '/chat'");
+    expect(bridge).toContain("apply: 'serve'"); // dev-only, never ships to prod
+    expect(readFileSync(join(ROOT, 'vite.config.js'), 'utf8')).toContain('localAi()');
   });
 
   it('local learning.mjs uses registry', () => {

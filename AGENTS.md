@@ -54,19 +54,17 @@ api/                    # Legacy local handlers (.mjs) — kept for local dev
   chat.mjs chats.mjs notes.mjs problems.mjs progress.mjs go-run.mjs
 functions/api/          # Cloudflare Pages Functions (production)
   [[path]].js           # Single catch-all routes /api/* to the same handler logic
-shared/                 # Shared between api/, functions/, and server/
+shared/                 # Shared between api/ and functions/
   db/                   # Schema, client, users
   lib/                  # AI helpers, FSRS (server), heuristics
-server/                 # Local Express AI proxy (git submodule) — port 3456
-  index.mjs             # Proxies claude/codex/gemini CLI calls
+vite-plugin-local-ai.js # Dev-only AI bridge (replaces former local-ai submodule)
 public/wasm/            # Go WASM interpreter (go-interp.wasm, wasm_exec.js)
 ```
 
 ## Key commands
 ```bash
-pnpm dev            # Express AI server (:3456) + Vite (:5173) concurrently
-pnpm dev:frontend   # Vite only
-pnpm server         # ensure submodule deps, then Express AI server only
+pnpm dev            # Vite (:5173) — AI bridge runs in-process (no separate server)
+pnpm dev:frontend   # alias for pnpm dev
 pnpm build          # vite build → dist/
 pnpm test           # vitest run
 pnpm test:e2e       # playwright test
@@ -84,9 +82,8 @@ pnpm lint           # Biome (check)
 - **Auto-tagging**: after 5 minutes of stable code, `useTagger` POSTs to `/api/tag`. AI returns concept tags with depth (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
 - **Feynman Gate**: user explains code in plain English → AI grades 0-100 + returns gaps → updates per-concept mastery. Gaps trigger `again`/`hard` FSRS ratings.
 - **Go execution**: WASM-based Go runner in `public/wasm/`. `/api/go-run.mjs` handles execution.
-- **`server/` is a git submodule** — local Express AI proxy. Clone with `git submodule update --init`.
-- **Local server dependencies**: `pnpm dev` and `pnpm server` run `npm --prefix server ci --ignore-scripts` before starting the submodule server.
-- **DB auto-init**: schema tables created on server startup — no migration runner needed.
+- **Dev AI bridge**: `vite-plugin-local-ai.js` is a dev-only Vite plugin (`apply: 'serve'`) that mounts `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory dev stubs for `/api/chats`, `/api/progress`, `/api/notes`, `/api/auth/*`. Replaced the old `local-ai` git submodule, so there's no separate server process or proxy hop — it boots/dies with Vite and ships nothing to prod (prod uses `functions/api/[[path]].js`). `codex` runs read-only/ephemeral and rides `codex login` (no API key); pick a local provider in Settings → AI (dev only).
+- **DB auto-init**: schema tables created on first server start (prod functions) — no migration runner needed.
 - **AI is multi-provider**: client passes `aiConfig: {endpointUrl, apiKey, model}` to any API endpoint; server falls back to `AI_ENDPOINT_URL`/`AI_API_KEY`/`AI_MODEL` env vars.
 - **Guest mode**: artifacts, drills, projects, and notes persist to localStorage. Concept mastery (FSRS reviews) is DB-backed and needs Google sign-in; signing in merges localStorage state into the DB.
 

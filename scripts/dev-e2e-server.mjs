@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-/** Start local API (:3456) + Vite (:5199) for Playwright e2e. */
-import { spawn, spawnSync } from 'node:child_process';
+/** Start Vite (:5199) for Playwright e2e. The AI bridge runs in-process via
+ *  vite-plugin-local-ai.js — no separate API server to launch. */
+import { spawn } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-
-spawnSync('pnpm', ['server:ensure'], { cwd: ROOT, stdio: 'inherit' });
 
 const e2eEnv = {
   ...process.env,
@@ -28,11 +27,9 @@ function run(cmd, args, opts = {}) {
   return child;
 }
 
-const api = run('node', ['index.mjs'], { cwd: join(ROOT, 'server') });
 const vite = run('pnpm', ['exec', 'vite', '--port', '5199', '--strictPort']);
 
 function shutdown() {
-  api.kill('SIGTERM');
   vite.kill('SIGTERM');
   process.exit(0);
 }

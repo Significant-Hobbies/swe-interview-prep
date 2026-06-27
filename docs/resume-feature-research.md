@@ -472,7 +472,7 @@ The app already uses:
 - `@ai-sdk/anthropic` -- Claude integration via Vercel AI SDK
 - `ai` (v6) -- Core AI SDK with `generateObject` support
 - React 19 + TypeScript + Vite
-- Server proxy at `/server/index.mjs` for AI calls
+- In-process Vite dev AI bridge (`vite-plugin-local-ai.js`) for local CLI calls
 - localStorage for progress tracking
 - Supabase for auth (Google OAuth + guest mode)
 

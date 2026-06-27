@@ -54,7 +54,7 @@ pnpm deploy
 
 ```bash
 cp .env.example .env.local
-pnpm dev    # Express :3456 + Vite :5173
+pnpm dev    # Vite :5173 (AI bridge runs in-process — no separate server)
 ```
 
 ## Post-deploy smoke
