@@ -10,7 +10,10 @@ import { tmpdir } from 'node:os';
 // proxy hop, and ships nothing to production (prod uses functions/api/[[path]].js).
 //
 // Routes (all under /api):
-//   POST /chat                       stream a CLI tool over SSE (claude|codex|gemini)
+//   POST /chat                       stream a CLI tool over SSE (claude|codex|gemini).
+//                                    codex only: send `threadId` (null→new session,
+//                                    string→resume) for multi-turn; bridge echoes
+//                                    back `{threadId}` so the client can resume.
 //   GET  /health                     liveness + provider list
 //   GET/PUT  /progress               in-memory dev store (single local user)
 //   GET/POST /notes                  in-memory dev store
@@ -160,20 +163,65 @@ function streamChat(_req, res, body) {
     return { role: m.role, text };
   });
 
-  let prompt = normalized
-    .map((m) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.text}`)
-    .join('\n\n');
-  if (cliTool.embedSystemPrompt && systemPrompt) {
-    prompt = `System instructions: ${systemPrompt}\n\n${prompt}`;
+  // Codex multi-turn sessions (opt-in): when the client sends a `threadId` field,
+  // the conversation lives in a codex thread on disk, so follow-ups resume it
+  // instead of re-flattening the whole history. The caller still sends fresh
+  // context (e.g. current code) each turn — the thread only spares the transcript.
+  // claude/gemini have no equivalent, so they stay on the one-shot path below.
+  const codexSession = providerName === 'codex' && 'threadId' in body;
+  const resuming = codexSession && typeof body.threadId === 'string' && body.threadId.length > 0;
+  const captureThread = codexSession; // echo thread.started id back to the client
+
+  let prompt;
+  let args;
+  if (resuming) {
+    // `resume` rejects -s, so sandbox goes via -c. Prompt = fresh context + the
+    // newest user turn only (prior turns already live in the thread), via stdin '-'.
+    const lastUser = [...normalized].reverse().find((m) => m.role === 'user');
+    prompt = `${systemPrompt ? `${systemPrompt}\n\n` : ''}${lastUser ? lastUser.text : ''}`;
+    args = [
+      'exec',
+      'resume',
+      '--json',
+      '--skip-git-repo-check',
+      '-c',
+      'model_reasoning_effort=low',
+      '-c',
+      'sandbox_mode=read-only',
+    ];
+    if (model && model !== 'codex') args.push('--model', model);
+    args.push(body.threadId, '-');
+  } else {
+    prompt = normalized
+      .map((m) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.text}`)
+      .join('\n\n');
+    if (cliTool.embedSystemPrompt && systemPrompt) {
+      prompt = `System instructions: ${systemPrompt}\n\n${prompt}`;
+    }
+    if (codexSession) {
+      // New persistent session: same codex flags as one-shot but WITHOUT
+      // --ephemeral, since ephemeral skips the session file (nothing to resume).
+      args = [
+        'exec',
+        '--json',
+        '--skip-git-repo-check',
+        '-s',
+        'read-only',
+        '-c',
+        'model_reasoning_effort=low',
+      ];
+      if (model && model !== 'codex') args.push('--model', model);
+    } else {
+      args = cliTool.buildArgs(model, systemPrompt);
+      if (cliTool.appendImageArgs && allImagePaths.length)
+        cliTool.appendImageArgs(args, allImagePaths);
+      if (cliTool.inputMode === 'arg') args.push('-p', prompt);
+    }
   }
 
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
-
-  const args = cliTool.buildArgs(model, systemPrompt);
-  if (cliTool.appendImageArgs && allImagePaths.length) cliTool.appendImageArgs(args, allImagePaths);
-  if (cliTool.inputMode === 'arg') args.push('-p', prompt);
 
   const proc = spawn(cliTool.command, args, {
     env: { ...process.env },
@@ -205,6 +253,16 @@ function streamChat(_req, res, body) {
     buffer = lines.pop() || '';
     for (const line of lines) {
       if (!line.trim()) continue;
+      if (captureThread) {
+        try {
+          const j = JSON.parse(line);
+          if (j.type === 'thread.started' && j.thread_id) {
+            res.write(`data: ${JSON.stringify({ threadId: j.thread_id })}\n\n`);
+          }
+        } catch {
+          /* not the thread event */
+        }
+      }
       try {
         cliTool.parseStream(line, emit);
       } catch {

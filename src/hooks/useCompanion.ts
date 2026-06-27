@@ -41,24 +41,30 @@ async function streamLocal(
   messages: CompanionMessage[],
   systemContext: string,
   onChunk: (t: string) => void,
-  signal: AbortSignal
+  signal: AbortSignal,
+  threadId: string | null,
+  onThreadId: (id: string) => void
 ) {
   const tool = LOCAL_TOOL_MAP[config.model] || 'claude';
   const token = getAuthToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (token) headers.Authorization = `Bearer ${token}`;
+  const payload: Record<string, unknown> = {
+    messages: messages.map((m) => ({ role: m.role, content: m.content })),
+    systemPrompt: `${SYSTEM}\n\n${systemContext}`,
+    tool,
+  };
+  // codex multi-turn: presence of `threadId` opts into a resumable session
+  // (null → start one, string → resume it). Other CLIs ignore it.
+  if (tool === 'codex') payload.threadId = threadId;
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      messages: messages.map((m) => ({ role: m.role, content: m.content })),
-      systemPrompt: `${SYSTEM}\n\n${systemContext}`,
-      tool,
-    }),
+    body: JSON.stringify(payload),
     signal,
   });
   if (!res.ok) throw new Error(`Local AI: ${res.status}`);
-  await pumpSSE(res, onChunk);
+  await pumpSSE(res, onChunk, onThreadId);
 }
 
 async function streamRemote(
@@ -84,7 +90,11 @@ async function streamRemote(
   await pumpSSE(res, onChunk);
 }
 
-async function pumpSSE(res: Response, onChunk: (t: string) => void) {
+async function pumpSSE(
+  res: Response,
+  onChunk: (t: string) => void,
+  onThreadId?: (id: string) => void
+) {
   const reader = res.body?.getReader();
   if (!reader) throw new Error('AI response had no readable body');
   const decoder = new TextDecoder();
@@ -100,6 +110,7 @@ async function pumpSSE(res: Response, onChunk: (t: string) => void) {
         try {
           const json = JSON.parse(line.slice(6));
           if (json.text) onChunk(json.text);
+          if (json.threadId) onThreadId?.(json.threadId);
           if (json.error) throw new Error(json.error);
         } catch (e: any) {
           if (e.message && !e.message.includes('JSON')) throw e;
@@ -124,6 +135,10 @@ export function useCompanion() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  // codex thread id for multi-turn resume (in-memory only). On reload it's null,
+  // so the next turn opens a fresh session from the restored transcript — no
+  // dependence on a possibly-gone on-disk codex session.
+  const threadIdRef = useRef<string | null>(null);
 
   const persist = useCallback((next: CompanionMessage[]) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next.slice(-40)));
@@ -162,8 +177,22 @@ ${ctx.code.slice(0, 6000)}
 
       try {
         const isLocal = IS_LOCAL && LOCAL_PROVIDERS.has(config.model);
-        const fn = isLocal ? streamLocal : streamRemote;
-        await fn(config, [...messages, userMsg], systemContext, onChunk, abortRef.current.signal);
+        const convo = [...messages, userMsg];
+        if (isLocal) {
+          await streamLocal(
+            config,
+            convo,
+            systemContext,
+            onChunk,
+            abortRef.current.signal,
+            threadIdRef.current,
+            (id) => {
+              threadIdRef.current = id;
+            }
+          );
+        } else {
+          await streamRemote(config, convo, systemContext, onChunk, abortRef.current.signal);
+        }
         const finalMsgs: CompanionMessage[] = [
           ...messages,
           userMsg,
@@ -199,6 +228,7 @@ ${ctx.code.slice(0, 6000)}
 
   const clear = useCallback(() => {
     setMessages([]);
+    threadIdRef.current = null;
     localStorage.removeItem(STORAGE_KEY);
   }, []);
 
