@@ -37,9 +37,12 @@ function readConfig(): AIConfig {
 
 export function loadAIConfig(): AIConfig {
   const config = readConfig();
-  // If dev mode and config is empty, default to local
+  // If dev mode and config is empty, default to the local codex CLI.
+  // The model MUST be a key in LOCAL_PROVIDERS or the dispatcher falls through
+  // to the remote path (which has no endpoint and fails). 'codex' rides your
+  // `codex login` (Sign in with ChatGPT) — no API key needed.
   if (IS_LOCAL && !config.endpointUrl && !config.apiKey && !config.model) {
-    return { endpointUrl: '', apiKey: '', model: 'claude-code-local' };
+    return { endpointUrl: '', apiKey: '', model: 'codex' };
   }
   return config;
 }

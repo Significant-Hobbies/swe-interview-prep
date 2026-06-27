@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { ImportAndNotifySettings } from './ImportAndNotifySettings';
 import { LearningProfileSettings } from './LearningProfileSettings';
-import { type AIConfig, loadAIConfig, saveAIConfig } from '../hooks/useAI';
+import { type AIConfig, IS_LOCAL, loadAIConfig, saveAIConfig } from '../hooks/useAI';
 
 interface Props {
   open: boolean;
@@ -11,6 +11,14 @@ interface Props {
 }
 
 type Tab = 'profile' | 'import' | 'ai';
+
+// Dev-only: route AI through a locally-authenticated CLI instead of a hosted key.
+// The `key` must match LOCAL_PROVIDERS in useAI.ts or the dispatcher falls back to remote.
+const LOCAL_CLI: { key: string; label: string; hint: string }[] = [
+  { key: 'codex', label: 'Codex', hint: 'codex login (Sign in with ChatGPT)' },
+  { key: 'claude-code', label: 'Claude Code', hint: 'claude' },
+  { key: 'gemini-cli', label: 'Gemini', hint: 'gemini' },
+];
 
 const PRESETS: { label: string; endpointUrl: string }[] = [
   { label: 'OpenAI', endpointUrl: 'https://api.openai.com/v1' },
@@ -131,9 +139,39 @@ export default function SettingsModal({ open, onClose }: Props) {
             <ImportAndNotifySettings />
           ) : (
             <div className="space-y-4">
+              {IS_LOCAL && (
+                <div className="rounded-md border border-emerald-900/60 bg-emerald-950/20 p-3">
+                  <label className="block text-xs font-medium text-emerald-300 mb-1">
+                    Local CLI provider (dev) — no API key
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {LOCAL_CLI.map((p) => (
+                      <button
+                        key={p.key}
+                        type="button"
+                        title={p.hint}
+                        onClick={() => update('model', p.key)}
+                        className={`rounded-md px-2 py-1 text-[11px] transition-colors ${
+                          config.model === p.key
+                            ? 'bg-emerald-500/20 text-emerald-200'
+                            : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                        }`}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-[11px] text-slate-500">
+                    Routes Companion + chat through your logged-in CLI (run{' '}
+                    <code className="text-slate-400">codex login</code> once). Active when a chip is
+                    selected; endpoint/key below are ignored.
+                  </p>
+                </div>
+              )}
+
               <p className="text-xs text-slate-500">
-                BYOK only. Heuristic planning works without AI. Use for Companion, Feynman, and
-                optional polish.
+                Or bring your own hosted key (BYOK). Heuristic planning works without AI. Used for
+                Companion, Feynman, and optional polish.
               </p>
 
               <div>
