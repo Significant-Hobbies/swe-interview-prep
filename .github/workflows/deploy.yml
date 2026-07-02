@@ -1,45 +1,6 @@
 name: Deploy to Cloudflare Pages
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/deploy.yml'
-      - 'api/**'
-      - 'functions/**'
-      - 'handlers/**'
-      - 'shared/**'
-      - 'index.html'
-      - 'package.json'
-      - 'playwright.config.ts'
-      - 'pnpm-lock.yaml'
-      - 'public/**'
-      - 'scripts/**'
-      - 'src/**'
-      - 'tsconfig.json'
-      - 'vite.config.js'
-      - 'vite-env.d.ts'
-      - 'wrangler.toml'
-  pull_request:
-    branches: [main]
-    paths:
-      - '.github/workflows/deploy.yml'
-      - 'api/**'
-      - 'functions/**'
-      - 'handlers/**'
-      - 'shared/**'
-      - 'index.html'
-      - 'package.json'
-      - 'playwright.config.ts'
-      - 'pnpm-lock.yaml'
-      - 'public/**'
-      - 'scripts/**'
-      - 'src/**'
-      - 'tsconfig.json'
-      - 'vite.config.js'
-      - 'vite-env.d.ts'
-      - 'wrangler.toml'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
