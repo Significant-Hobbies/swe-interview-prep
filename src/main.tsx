@@ -54,3 +54,12 @@ if ('requestIdleCallback' in window) {
 } else {
   setTimeout(scheduleVitals, 1);
 }
+
+const scheduleApiTiming = () => {
+  void import('./lib/api-timing').then((m) => m.initApiTiming()).catch(() => {});
+};
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(scheduleApiTiming, { timeout: 3000 });
+} else {
+  setTimeout(scheduleApiTiming, 1);
+}
