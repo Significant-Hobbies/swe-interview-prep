@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 ## Why/What
 
@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Execution path | R2-backed Go WASM interpreter for in-browser code execution |
 | Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (AUDIT.md) |
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
+| Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
 
 ## Products
 
@@ -102,6 +103,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Playground** isolated coding sandbox route.
 - **Progress tracking:** completion rates across DSA, LLD, HLD, and behavioral categories (`useProgress`).
 - **Spaced repetition:** Anki-style review flow with ts-fsrs scheduling (`useSpacedRepetition`, review pages).
+- **Feynman Gate → FSRS progression (default flow):** solving a drill triggers a skippable explain-back nudge; the AI-graded explanation maps onto per-concept FSRS ratings (`feynmanRating`), updates mastery, then surfaces a "next weakest concept" card (BuildLab) so the loop closes: drill → explain → mastery update → next weakest concept. Playground's manual gate also refreshes mastery on grade.
 - **AI assistance:** multi-provider Socratic hints without spoilers (`useAI`); local-ai dev path documented.
 
 ### Auth and API hardening (AUDIT.md 2026-03-29)
@@ -121,7 +123,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 1. **Docs alignment** — bring stale migration and deployment docs into alignment with Cloudflare Pages Functions architecture (remove Vercel references).
 2. **Auth/API verification pass** — run full checklist against current Cloudflare configuration: Google OAuth callbacks, Turso bindings, R2 WASM asset URL, JWT rotation guidance.
 3. **Regression tests** — add focused tests around previously fixed auth/API paths (`requireAuth`, JWT env guard, progress DB sync).
-4. **Coherent study flows** — tighten navigation so DSA, LLD, system design, and behavioral practice feel like one system (shared progress cues, cross-links from dashboard).
+4. **Coherent study flows** — tighten navigation so DSA, LLD, system design, and behavioral practice feel like one system (shared progress cues, cross-links from dashboard). The drill → Feynman Gate → FSRS → next-weakest-concept loop is now wired by default; remaining work is cross-tab progress cues and dashboard cross-links.
 
 ### Deferred
 - Vercel/serverless migration instructions — stale; do not guide new work.

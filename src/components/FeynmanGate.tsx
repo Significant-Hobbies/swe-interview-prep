@@ -6,6 +6,7 @@ import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import { trackCoreAction } from '../lib/analytics';
+import { ratingsFromFeynman } from '../lib/feynmanRating';
 import type { MasteryRating } from '../lib/fsrs';
 import { recordSessionActivity } from '../lib/session';
 import MarkdownViewer from './MarkdownViewer';
@@ -18,6 +19,9 @@ interface Props {
   problem: string;
   conceptIds?: string[];
   problemId?: string;
+  /** Fired after the AI grade is applied to FSRS mastery, so the parent can
+   * refresh mastery state and surface the next-weakest-concept recommendation. */
+  onGraded?: (grade: number) => void;
 }
 
 interface GradeResult {
@@ -35,6 +39,7 @@ export default function FeynmanGate({
   problem,
   conceptIds,
   problemId,
+  onGraded,
 }: Props) {
   const { review: reviewRq } = useReviewMastery();
   const [explanation, setExplanation] = useState('');
@@ -98,25 +103,25 @@ export default function FeynmanGate({
       // Owner-facing analytics: a Feynman-gate explanation was graded.
       trackCoreAction('explanation_graded');
 
-      // Apply ratings to concept mastery
-      if (data.ratings?.length && token) {
+      // Map grade + gaps + AI ratings onto FSRS updates (lib/feynmanRating),
+      // then apply them to concept mastery.
+      const updates = ratingsFromFeynman(data, conceptIds);
+      if (updates.length && token) {
         await fetch('/api/learning?action=concepts', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({
-            updates: data.ratings.map((r: any) => ({ conceptId: r.concept_id, rating: r.rating })),
-          }),
+          body: JSON.stringify({ updates }),
         });
       }
+      // Signal the parent that mastery was updated so it can refresh FSRS
+      // state and surface the next-weakest-concept recommendation.
+      onGraded?.(data.grade);
       recordSessionActivity('feynman');
-      const gapIds = (data.gaps || []).map((g: { concept_id: string }) => g.concept_id);
-      if (gapIds.length) scheduleReviewsForGaps(gapIds, 'again');
-      else if (data.ratings?.length) {
-        const weak = data.ratings
-          .filter((r: { rating: string }) => r.rating === 'again' || r.rating === 'hard')
-          .map((r: { concept_id: string }) => r.concept_id);
-        if (weak.length) scheduleReviewsForGaps(weak, 'hard');
-      }
+      // Weak concepts feed the review queue: butchered → 'again', shaky → 'hard'.
+      const againIds = updates.filter((u) => u.rating === 'again').map((u) => u.conceptId);
+      const hardIds = updates.filter((u) => u.rating === 'hard').map((u) => u.conceptId);
+      if (againIds.length) scheduleReviewsForGaps(againIds, 'again');
+      if (hardIds.length) scheduleReviewsForGaps(hardIds, 'hard');
       if (token) {
         fetch('/api/learning?action=activity', {
           method: 'POST',

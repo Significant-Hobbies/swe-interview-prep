@@ -13,6 +13,8 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import CodeEditor from '../components/CodeEditor';
+import FeynmanGate from '../components/FeynmanGate';
+import FeynmanNudge from '../components/FeynmanNudge';
 import {
   Badge,
   Button,
@@ -32,9 +34,10 @@ import {
   DRILL_BY_ID,
   REVIEW_QUESTIONS,
 } from '../data/learning-os';
+import { useAuth } from '../contexts/AuthContext';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { useActivityLogger } from '../hooks/useActivity';
-import { useConceptMastery } from '../hooks/useConcepts';
+import { useConceptMastery, type MasteryEntry } from '../hooks/useConcepts';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import {
   type ArtifactEntry,
@@ -46,6 +49,7 @@ import {
 import { isMetadataDrill } from '../lib/contentQuality';
 import { runDrillTests } from '../lib/drillRunner';
 import { difficultyToElo } from '../lib/elo';
+import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 import {
   loadSuspendedRqs,
   reviewsToSeedForConcept,
@@ -271,8 +275,9 @@ const LANGUAGES: Language[] = ['typescript', 'go'];
 
 function DrillWorkspace({ drillId }: { drillId: string }) {
   const drill = DRILL_BY_ID[drillId];
+  const { user } = useAuth();
   const { getDrill, setDrill } = useDrillStore();
-  const { review } = useConceptMastery();
+  const { mastery, refresh, review } = useConceptMastery();
   const { mastery: rqMastery, review: reviewRq } = useReviewMastery();
   const logActivity = useActivityLogger();
   const { recordResult } = useUserElo();
@@ -283,6 +288,13 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
   const [language, setLanguage] = useState<Language>('typescript');
   const [code, setCode] = useState(entry.lastCode || STARTER.typescript);
   const [testMessage, setTestMessage] = useState<string | null>(null);
+  // Post-solve Feynman flow: a skippable explain-back nudge that opens the gate.
+  const [showExplainNudge, setShowExplainNudge] = useState(false);
+  const [feynmanOpen, setFeynmanOpen] = useState(false);
+  // After the Feynman Gate grades the explanation and FSRS mastery is updated,
+  // we surface the next-weakest concept so the loop closes: drill → explain →
+  // mastery update → next weakest concept.
+  const [showNext, setShowNext] = useState(false);
 
   if (!drill) {
     return (
@@ -320,8 +332,10 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     }
     const wasSolved = entry.status === 'solved';
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
-    // Solving a drill closes the loop — it nudges the concept toward mastery.
+    // Solving a drill closes the loop — it nudges the concept toward mastery,
+    // then asks for a 30-second explain-back (Feynman Gate) to prove it.
     if (status === 'solved') {
+      setShowExplainNudge(true);
       void review(drill?.conceptId, 'good');
       void logActivity({
         kind: 'drill_solve',
@@ -460,6 +474,23 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         </div>
 
         <div className="space-y-3">
+          {showExplainNudge && (
+            <FeynmanNudge
+              signedIn={!!user}
+              onExplain={() => {
+                setShowExplainNudge(false);
+                setFeynmanOpen(true);
+              }}
+              onSkip={() => {
+                setShowExplainNudge(false);
+                void logActivity({
+                  kind: 'feynman_skip',
+                  conceptIds: [drill.conceptId],
+                  problemId: drillId,
+                });
+              }}
+            />
+          )}
           {external ? (
             <Card className="p-4">
               <p className="text-sm text-slate-400">
@@ -550,6 +581,66 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           )}
         </div>
       </div>
+
+      {showNext && <NextConceptCard mastery={mastery} excludeId={drill.conceptId} />}
+
+      <FeynmanGate
+        open={feynmanOpen}
+        onClose={() => setFeynmanOpen(false)}
+        code={code}
+        language={language}
+        problem={drill.prompt}
+        conceptIds={[drill.conceptId]}
+        problemId={drillId}
+        onGraded={() => {
+          setShowNext(true);
+          void refresh();
+        }}
+      />
     </PageShell>
+  );
+}
+
+/**
+ * Post-Feynman recommendation: surfaces the next-weakest concept based on FSRS
+ * mastery so the drill → explain → mastery loop closes into "what's next".
+ * Excludes the concept just drilled so the user advances to a new target.
+ */
+function NextConceptCard({
+  mastery,
+  excludeId,
+}: {
+  mastery: Record<string, MasteryEntry>;
+  excludeId: string;
+}) {
+  const next = pickNextConcept(mastery);
+  if (!next || next.id === excludeId) return null;
+  const drill = pickDrillForConcept(next.id);
+  return (
+    <Card className="mb-4 p-4">
+      <div className="flex items-center gap-2">
+        <ArrowLeft className="h-4 w-4 rotate-180 text-sky-400" />
+        <h3 className="text-sm font-semibold text-slate-200">Next weakest concept</h3>
+      </div>
+      <p className="mt-1 text-xs text-slate-400">
+        Your mastery was updated. The next concept FSRS says is due:
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Link
+          to={`/concepts/${next.id}`}
+          className="rounded-md bg-slate-800 px-3 py-1.5 text-sm text-slate-200 transition-colors hover:bg-slate-700"
+        >
+          {next.name}
+        </Link>
+        {drill && (
+          <Link
+            to={`/build-lab/${drill.id}`}
+            className="inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-sky-400"
+          >
+            <Hammer className="h-3.5 w-3.5" /> Drill it
+          </Link>
+        )}
+      </div>
+    </Card>
   );
 }

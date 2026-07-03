@@ -28,7 +28,7 @@ import FeynmanGate from '../components/FeynmanGate';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { getPlaygroundTemplate } from '../data/playground-templates';
 import { useCodeExecution } from '../hooks/useCodeExecution';
-import { CONCEPT_BY_ID } from '../hooks/useConcepts';
+import { CONCEPT_BY_ID, useConceptMastery } from '../hooks/useConcepts';
 import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import { useArtifactStore, useFocusMode } from '../hooks/useUserStore';
@@ -90,6 +90,7 @@ export default function Playground() {
   const [artifactTitle, setArtifactTitle] = useState<string | null>(null);
   const { enabled: focusMode, setEnabled: setFocusMode, sessionsThisWeek } = useFocusMode();
   const { getArtifact, setArtifact } = useArtifactStore();
+  const { refresh: refreshMastery } = useConceptMastery();
 
   // The Playground is a multi-panel desktop layout. Below `lg` (covers phones
   // AND iPad portrait) we render a single panel at a time so Monaco/Excalidraw
@@ -617,6 +618,7 @@ export default function Playground() {
         problem={problem}
         conceptIds={taggedConcepts}
         problemId="playground"
+        onGraded={() => void refreshMastery()}
       />
     </div>
   );

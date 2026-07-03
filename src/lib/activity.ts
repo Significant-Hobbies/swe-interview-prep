@@ -8,6 +8,7 @@ export type ActivityKind =
   | 'review_session'
   | 'artifact_ship'
   | 'feynman'
+  | 'feynman_skip'
   | 'session_start'
   | 'mock_start'
   | 'mock_complete';
