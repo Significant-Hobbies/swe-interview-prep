@@ -122,7 +122,6 @@ External: LeetCode API (import), multi-provider LLM APIs
 2. **Auth/API verification pass** — run full checklist against current Cloudflare configuration: Google OAuth callbacks, Turso bindings, R2 WASM asset URL, JWT rotation guidance.
 3. **Regression tests** — add focused tests around previously fixed auth/API paths (`requireAuth`, JWT env guard, progress DB sync).
 4. **Coherent study flows** — tighten navigation so DSA, LLD, system design, and behavioral practice feel like one system (shared progress cues, cross-links from dashboard).
-5. **Remove `server` from tsconfig.json include** — the `server/` directory (former local-ai submodule) no longer exists; `vite-plugin-local-ai.js` replaced it.
 
 ### Deferred
 - Vercel/serverless migration instructions — stale; do not guide new work.
