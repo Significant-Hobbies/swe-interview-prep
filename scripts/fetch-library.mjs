@@ -686,7 +686,7 @@ async function main() {
 
       const repoOutputDir = join(OUTPUT_DIR, repo.id);
       mkdirSync(repoOutputDir, { recursive: true });
-      writeFileSync(join(repoOutputDir, 'content.json'), JSON.stringify(parsed));
+      writeFileSync(join(repoOutputDir, 'content.json'), `${JSON.stringify(parsed, null, 2)}\n`);
 
       manifest.repos.push({
         id: repo.id,
@@ -717,7 +717,7 @@ async function main() {
     }
   }
 
-  writeFileSync(join(OUTPUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
+  writeFileSync(join(OUTPUT_DIR, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   console.log(`\nManifest written with ${manifest.repos.length} repos.`);
 
   rmSync(TEMP_DIR, { recursive: true });

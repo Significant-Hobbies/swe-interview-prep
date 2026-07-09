@@ -140,7 +140,7 @@ for (const concept of concepts) {
   }
 }
 
-writeFileSync(OUT_PATH, JSON.stringify(index, null, 2));
+writeFileSync(OUT_PATH, `${JSON.stringify(index, null, 2)}\n`);
 console.log(`Wrote ${OUT_PATH}`);
 console.log(`Concepts indexed: ${Object.keys(index).length}/${concepts.length}`);
 console.log(`Total section matches: ${totalMatches}`);
