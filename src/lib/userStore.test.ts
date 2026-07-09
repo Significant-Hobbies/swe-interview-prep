@@ -1,10 +1,31 @@
-// @vitest-environment happy-dom
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { loadLocal, mergeNotes, mergeRecords, saveLocal } from './userStore';
 
 describe('userStore local persistence', () => {
-  beforeEach(() => localStorage.clear());
+  const localStorageMock = (() => {
+    let store = new Map<string, string>();
+    return {
+      clear: () => {
+        store = new Map();
+      },
+      getItem: (key: string) => store.get(key) ?? null,
+      removeItem: (key: string) => {
+        store.delete(key);
+      },
+      setItem: (key: string, value: string) => {
+        store.set(key, value);
+      },
+    };
+  })();
+
+  beforeEach(() => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: localStorageMock,
+    });
+    localStorage.clear();
+  });
 
   it('round-trips a value through localStorage', () => {
     saveLocal('k', { a: 1, b: 'x' });
