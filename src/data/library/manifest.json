@@ -11,7 +11,7 @@
       "format": "qa",
       "sectionCount": 478,
       "exerciseCount": 478,
-      "lastFetched": "2026-06-22T11:25:52.300Z"
+      "lastFetched": "2026-07-09T17:18:27.248Z"
     },
     {
       "id": "react-questions",
@@ -24,7 +24,7 @@
       "format": "qa",
       "sectionCount": 406,
       "exerciseCount": 406,
-      "lastFetched": "2026-06-22T11:25:53.186Z"
+      "lastFetched": "2026-07-09T17:18:27.964Z"
     },
     {
       "id": "frontend-handbook",
@@ -37,7 +37,7 @@
       "format": "code-heavy",
       "sectionCount": 55,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:25:54.548Z"
+      "lastFetched": "2026-07-09T17:18:28.869Z"
     },
     {
       "id": "system-design",
@@ -50,7 +50,7 @@
       "format": "long-form",
       "sectionCount": 241,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:25:55.513Z"
+      "lastFetched": "2026-07-09T17:18:29.501Z"
     },
     {
       "id": "system-design-101",
@@ -63,7 +63,7 @@
       "format": "code-heavy",
       "sectionCount": 416,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:25:56.234Z"
+      "lastFetched": "2026-07-09T17:18:29.940Z"
     },
     {
       "id": "low-level-design",
@@ -76,7 +76,7 @@
       "format": "code-heavy",
       "sectionCount": 262,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:25:57.708Z"
+      "lastFetched": "2026-07-09T17:18:30.885Z"
     },
     {
       "id": "grokking-oop",
@@ -89,7 +89,7 @@
       "format": "code-heavy",
       "sectionCount": 63,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:25:58.714Z"
+      "lastFetched": "2026-07-09T17:18:31.503Z"
     },
     {
       "id": "devops-exercises",
@@ -102,7 +102,7 @@
       "format": "qa",
       "sectionCount": 49,
       "exerciseCount": 1888,
-      "lastFetched": "2026-06-22T11:25:59.628Z"
+      "lastFetched": "2026-07-09T17:18:32.241Z"
     },
     {
       "id": "coding-interview-patterns",
@@ -115,7 +115,7 @@
       "format": "code-heavy",
       "sectionCount": 1,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:26:00.206Z"
+      "lastFetched": "2026-07-09T17:18:32.593Z"
     },
     {
       "id": "ood-interview",
@@ -128,7 +128,7 @@
       "format": "code-heavy",
       "sectionCount": 13,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:26:00.720Z"
+      "lastFetched": "2026-07-09T17:18:32.892Z"
     },
     {
       "id": "system-design-primer",
@@ -141,7 +141,7 @@
       "format": "code-heavy",
       "sectionCount": 73,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:26:01.709Z"
+      "lastFetched": "2026-07-09T17:18:33.763Z"
     },
     {
       "id": "javascript-algorithms",
@@ -154,8 +154,8 @@
       "format": "visual",
       "sectionCount": 321,
       "exerciseCount": 0,
-      "lastFetched": "2026-06-22T11:26:02.833Z"
+      "lastFetched": "2026-07-09T17:18:34.431Z"
     }
   ],
-  "generatedAt": "2026-06-22T11:25:51.435Z"
+  "generatedAt": "2026-07-09T17:18:26.485Z"
 }
