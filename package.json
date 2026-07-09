@@ -9,7 +9,7 @@
     "build": "node scripts/validate-env.mjs build && vite build",
     "lint": "biome check .",
     "preview": "vite preview",
-    "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs && node scripts/ingest-library-rqs.mjs",
+    "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs && node scripts/ingest-library-rqs.mjs && biome format --write src/data/library",
     "build-concept-index": "node scripts/build-concept-index.mjs",
     "sync:external-resources": "node scripts/harvest-external-resources.mjs && node scripts/bootstrap-external-resources.mjs",
     "sync:concept-packs": "node scripts/generate-concept-packs.mjs",
