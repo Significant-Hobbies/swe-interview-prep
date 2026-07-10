@@ -127,7 +127,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ### Closure
 
-- **Finish-and-pause (2026-07-10):** Interview Coder is a stable learning product snapshot. Reopen only for a measurable learner or revenue signal.
+- **Personal-use support (2026-07-10):** Keep Interview Coder available for direct use. No roadmap expansion; accept only maintenance, reliability, or personally requested workflow fixes.
 
 ### Deferred
 - Vercel/serverless migration instructions — stale; do not guide new work.
