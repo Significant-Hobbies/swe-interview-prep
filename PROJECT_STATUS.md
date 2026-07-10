@@ -120,10 +120,14 @@ External: LeetCode API (import), multi-provider LLM APIs
 ## Todo / Planned / Deferred / Blocked
 
 ### Planned
-1. **Docs alignment** — bring stale migration and deployment docs into alignment with Cloudflare Pages Functions architecture (remove Vercel references).
-2. **Auth/API verification pass** — run full checklist against current Cloudflare configuration: Google OAuth callbacks, Turso bindings, R2 WASM asset URL, JWT rotation guidance.
-3. **Regression tests** — add focused tests around previously fixed auth/API paths (`requireAuth`, JWT env guard, progress DB sync).
-4. **Coherent study flows** — tighten navigation so DSA, LLD, system design, and behavioral practice feel like one system (shared progress cues, cross-links from dashboard). The drill → Feynman Gate → FSRS → next-weakest-concept loop is now wired by default; remaining work is cross-tab progress cues and dashboard cross-links.
+1. ~~Docs alignment.~~ **Paused** — Cloudflare Pages architecture is canonical; stale historical references remain non-operational.
+2. ~~Auth/API verification pass.~~ **Paused** after current local typecheck and security baseline.
+3. ~~Regression tests.~~ **Paused** at existing focused coverage.
+4. ~~Coherent study-flow polish.~~ **Paused** with the drill → Feynman Gate → FSRS loop as the retained baseline.
+
+### Closure
+
+- **Finish-and-pause (2026-07-10):** Interview Coder is a stable learning product snapshot. Reopen only for a measurable learner or revenue signal.
 
 ### Deferred
 - Vercel/serverless migration instructions — stale; do not guide new work.
