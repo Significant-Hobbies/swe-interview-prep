@@ -147,6 +147,10 @@ export default function App() {
   const { user, isGuest, loading } = useAuth();
   const location = useLocation();
   const isPublicShare = location.pathname.startsWith('/share/');
+  const isPrivateLearningRoute =
+    location.pathname === '/sources' ||
+    location.pathname.startsWith('/sources/') ||
+    location.pathname.startsWith('/session/');
 
   useEffect(() => {
     try {
@@ -166,7 +170,7 @@ export default function App() {
 
   if (loading) return null;
 
-  if (!user && !isGuest && !isPublicShare) {
+  if (!user && !isGuest && !isPublicShare && !isPrivateLearningRoute) {
     return (
       <Suspense fallback={null}>
         <Login />
