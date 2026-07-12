@@ -30,6 +30,8 @@ const LearningDoc = lazy(() => import('./pages/LearningDoc'));
 const LearningSources = lazy(() => import('./pages/LearningSources'));
 const LearningSourceDetail = lazy(() => import('./pages/LearningSourceDetail'));
 const DailyLearningSession = lazy(() => import('./pages/DailyLearningSession'));
+const Library = lazy(() => import('./pages/Library'));
+const RepoView = lazy(() => import('./pages/RepoView'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
@@ -124,6 +126,22 @@ function AppRoutes() {
             </GoogleRequired>
           }
         />
+        <Route
+          path="library"
+          element={
+            <GoogleRequired>
+              <Library />
+            </GoogleRequired>
+          }
+        />
+        <Route
+          path="library/:repoSlug"
+          element={
+            <GoogleRequired>
+              <RepoView />
+            </GoogleRequired>
+          }
+        />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />
@@ -134,7 +152,6 @@ function AppRoutes() {
         <Route path="review" element={<Navigate to="/practice/all?tab=reviews" replace />} />
         <Route path="projects" element={<Navigate to="/progress/all" replace />} />
         <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
-        <Route path="library/*" element={<Navigate to="/learn" replace />} />
         <Route path="mock" element={<MockInterview />} />
         <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
         <Route path="*" element={<Navigate to="/today" replace />} />
@@ -150,7 +167,9 @@ export default function App() {
   const isPrivateLearningRoute =
     location.pathname === '/sources' ||
     location.pathname.startsWith('/sources/') ||
-    location.pathname.startsWith('/session/');
+    location.pathname.startsWith('/session/') ||
+    location.pathname === '/library' ||
+    location.pathname.startsWith('/library/');
 
   useEffect(() => {
     try {

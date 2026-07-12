@@ -30,6 +30,11 @@ export interface LearningSource {
   canonicalUrl: string;
   itemCount: number;
   syncStatus: 'fresh' | 'stale' | 'pending';
+  roadmap?: {
+    label: string;
+    canonicalUrl: string;
+    modules: string[];
+  };
 }
 
 export interface LearningItem {

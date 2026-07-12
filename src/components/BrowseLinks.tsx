@@ -18,6 +18,7 @@ import { CONCEPTS, EDITORIAL_DRILLS, PRACTICE_DRILLS, ROADMAPS, TRACKS } from '.
 import { BROWSE_DESTINATIONS, type BrowseDestination } from '../lib/browseLinks';
 
 const ICONS: Record<string, LucideIcon> = {
+  library: BookOpen,
   explore: LayoutGrid,
   concepts: Network,
   drills: Dumbbell,
@@ -41,6 +42,8 @@ function countFor(id: string): string | null {
       return `${ROADMAPS.length} roadmaps · open catalog`;
     case 'docs':
       return `${ROADMAPS.length} companion roadmaps`;
+    case 'library':
+      return '12 repositories';
     default:
       return null;
   }

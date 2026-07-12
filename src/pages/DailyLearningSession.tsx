@@ -13,6 +13,13 @@ import { recordSessionActivity } from '../lib/session';
 
 type Phase = 'study' | 'questions' | 'done';
 type SessionRating = 'again' | 'hard' | 'good';
+const SOURCE_PREFIX = {
+  briefing: 'News',
+  project: 'Project',
+  research: 'Research',
+  reader: 'Reader',
+  native: 'Native',
+};
 
 export default function DailyLearningSession() {
   const { date = new Date().toISOString().slice(0, 10), sessionId = '1' } = useParams();
@@ -95,9 +102,19 @@ export default function DailyLearningSession() {
           {selectedSource ? selectedSource.label : 'Learn, recall, schedule.'}
         </h1>
         {selectedSource && (
-          <p className="mt-3 text-sm leading-6 text-white/50">
-            {moduleNames.join(' · ')} · topics are taught in dependency order
-          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm leading-6 text-white/50">
+            <span>{moduleNames.join(' · ')} · topics are taught in dependency order</span>
+            {selectedSource.roadmap && (
+              <a
+                href={selectedSource.roadmap.canonicalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sky-300 hover:text-sky-200"
+              >
+                View {selectedSource.roadmap.modules.length}-module roadmap
+              </a>
+            )}
+          </div>
         )}
         <div className="mt-6 max-w-md">
           <label className="mb-2 block text-xs text-white/40">Choose what you want today</label>
@@ -113,7 +130,7 @@ export default function DailyLearningSession() {
             <option value="">Balanced: High Signal + due learning</option>
             {sources.map((source) => (
               <option key={source.id} value={source.id}>
-                {source.label} · {source.itemCount} items
+                {SOURCE_PREFIX[source.kind]} · {source.label} · {source.itemCount} items
               </option>
             ))}
           </select>

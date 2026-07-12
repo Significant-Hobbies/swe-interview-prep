@@ -33,6 +33,30 @@ describe('unified learning sources', () => {
     }
   });
 
+  it('does not repeat source categories or item tracks', () => {
+    const labels = LEARNING_SOURCES.sources.map((source) => source.label.toLowerCase());
+    expect(new Set(labels).size).toBe(labels.length);
+    for (const item of LEARNING_SOURCES.items) {
+      expect(new Set(item.tracks).size).toBe(item.tracks.length);
+    }
+    expect(LEARNING_SOURCES.sources.find((source) => source.id === 'high-signal')?.label).toBe(
+      'High Signal: Daily Brief'
+    );
+    expect(
+      LEARNING_SOURCES.sources.find((source) => source.id === 'project:high-signal')?.label
+    ).toBe('High Signal: Product Engineering');
+  });
+
+  it('attaches a non-empty roadmap to every project source', () => {
+    const projectSources = LEARNING_SOURCES.sources.filter((source) => source.kind === 'project');
+    expect(projectSources.length).toBe(19);
+    for (const source of projectSources) {
+      expect(source.roadmap?.label).toBeTruthy();
+      expect(source.roadmap?.canonicalUrl).toMatch(/^https:\/\//);
+      expect(source.roadmap?.modules.length).toBeGreaterThan(0);
+    }
+  });
+
   it('only publishes structurally valid fingerprint-bound MCQs', () => {
     const assessments = LEARNING_SOURCES.items.flatMap((item) => item.assessments || []);
     expect(assessments.length).toBeGreaterThan(100);

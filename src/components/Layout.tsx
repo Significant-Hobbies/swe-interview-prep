@@ -34,6 +34,7 @@ interface NavItem {
 }
 
 const BROWSE_ICONS: Record<string, LucideIcon> = {
+  library: BookOpen,
   explore: LayoutGrid,
   concepts: Network,
   drills: Dumbbell,

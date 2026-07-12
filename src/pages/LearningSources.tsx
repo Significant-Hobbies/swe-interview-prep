@@ -1,13 +1,4 @@
-import {
-  BookOpen,
-  CheckCircle2,
-  Clock,
-  ExternalLink,
-  Filter,
-  Newspaper,
-  Search,
-  Zap,
-} from 'lucide-react';
+import { BookOpen, CheckCircle2, Clock, ExternalLink, Newspaper, Search, Zap } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -15,17 +6,16 @@ import {
   LEARNING_SOURCES,
   loadLearningProgress,
   type LearningItem,
-  type LearningSourceKind,
 } from '../data/learning-sources';
 import { useReaderLearning } from '../hooks/useReaderLearning';
 
-const KINDS: Array<{ id: 'all' | LearningSourceKind; label: string }> = [
-  { id: 'all', label: 'Everything' },
-  { id: 'briefing', label: 'Daily news' },
-  { id: 'project', label: 'Projects' },
-  { id: 'research', label: 'Research' },
-  { id: 'reader', label: 'Reader' },
-];
+const SOURCE_PREFIX = {
+  briefing: 'News',
+  project: 'Project',
+  research: 'Research',
+  reader: 'Reader',
+  native: 'Native',
+};
 
 function itemHref(item: LearningItem, sprint = false) {
   return `/sources/${encodeURIComponent(item.id)}${sprint ? '?mode=sprint' : ''}`;
@@ -33,7 +23,6 @@ function itemHref(item: LearningItem, sprint = false) {
 
 export default function LearningSources() {
   const [query, setQuery] = useState('');
-  const [kind, setKind] = useState<'all' | LearningSourceKind>('all');
   const [sourceId, setSourceId] = useState('all');
   const reader = useReaderLearning();
   const progress = loadLearningProgress();
@@ -51,14 +40,13 @@ export default function LearningSources() {
   const items = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     return allItems.filter((item) => {
-      if (kind !== 'all' && item.sourceKind !== kind) return false;
       if (sourceId !== 'all' && item.sourceId !== sourceId) return false;
       if (!normalized) return true;
       return [item.title, item.summary, item.project, item.collection, ...item.tracks]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(normalized));
     });
-  }, [allItems, query, kind, sourceId]);
+  }, [allItems, query, sourceId]);
   const completed = Object.values(progress).filter((entry) => entry.status === 'completed').length;
   const sprintItem = items.find((item) => progress[item.id]?.status !== 'completed') || items[0];
 
@@ -103,7 +91,7 @@ export default function LearningSources() {
             <option value="all">All projects and paths</option>
             {sourceOptions.map((source) => (
               <option key={source.id} value={source.id}>
-                {source.label} · {source.itemCount}
+                {SOURCE_PREFIX[source.kind]} · {source.label} · {source.itemCount}
               </option>
             ))}
           </select>
@@ -115,19 +103,6 @@ export default function LearningSources() {
               <Zap className="h-4 w-4" /> Sprint this source
             </Link>
           )}
-        </div>
-        <div className="mx-auto mt-3 flex max-w-[1400px] min-w-0 items-center gap-2 overflow-x-auto pb-1">
-          <Filter className="h-4 w-4 shrink-0 text-white/30" />
-          {KINDS.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={() => setKind(option.id)}
-              className={`h-9 shrink-0 rounded-md px-3 text-xs font-medium transition-colors ${kind === option.id ? 'bg-white text-black' : 'border border-white/10 text-white/55 hover:border-white/25 hover:text-white'}`}
-            >
-              {option.label}
-            </button>
-          ))}
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-# Interview Coder
+# SWE Interview Prep
 
 A comprehensive interview preparation platform for mastering DSA, Low-Level Design, System Design, and Behavioral interviews.
 
@@ -6,7 +6,7 @@ A comprehensive interview preparation platform for mastering DSA, Low-Level Desi
 
 Technical interview preparation is fragmented across multiple tools: LeetCode for coding, Excalidraw for diagrams, ChatGPT for hints, and Anki for spaced repetition. Switching between tools breaks flow and makes it hard to track progress holistically.
 
-Interview Coder consolidates everything into a single platform with integrated code execution, diagram drawing, AI assistance, and spaced repetition review.
+SWE Interview Prep consolidates everything into a single platform with integrated code execution, diagram drawing, AI assistance, and spaced repetition review.
 
 ## Deployment & External Services
 
@@ -115,8 +115,8 @@ graph TB
 
 1. **Clone and install**
    ```bash
-   git clone https://github.com/yourusername/interview-coder.git
-   cd interview-coder
+   git clone https://github.com/sarthak-fleet/swe-interview-prep.git
+   cd swe-interview-prep
    pnpm install
    ```
 

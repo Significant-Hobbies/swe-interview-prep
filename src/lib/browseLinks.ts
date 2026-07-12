@@ -14,6 +14,12 @@ export const BROWSE_DESTINATIONS: BrowseDestination[] = [
     blurb: 'News, projects, papers, and saved reading',
   },
   {
+    id: 'library',
+    to: '/library',
+    label: 'Repository library',
+    blurb: '12 embedded GitHub learning repositories',
+  },
+  {
     id: 'explore',
     to: '/explore',
     label: 'Explore all',

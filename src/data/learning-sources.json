@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-12T11:47:54.758Z",
+  "generatedAt": "2026-07-12T12:05:32.912Z",
   "sources": [
     {
       "id": "swe-native",
       "kind": "native",
-      "label": "SWE Interview Prep",
+      "label": "SWE Prep: Native Curriculum",
       "description": "Native concepts, roadmaps, drills, builds, and spaced repetition.",
       "canonicalUrl": "/learn",
       "itemCount": 152,
@@ -14,7 +14,7 @@
     {
       "id": "high-signal",
       "kind": "briefing",
-      "label": "High Signal",
+      "label": "High Signal: Daily Brief",
       "description": "Fresh source-backed technology, startup, market, and product briefing.",
       "canonicalUrl": "https://highsignal.app/brief",
       "itemCount": 1,
@@ -27,7 +27,12 @@
       "description": "Learning queue from SaaS Maker",
       "canonicalUrl": "https://github.com/sarthak-fleet/saas-maker/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "SaaS Maker learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/saas-maker/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:free-ai",
@@ -36,7 +41,12 @@
       "description": "Learning queue from Free AI",
       "canonicalUrl": "https://github.com/sarthak-fleet/free-ai/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Free AI learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/free-ai/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:reel-pipeline",
@@ -45,7 +55,12 @@
       "description": "Learning queue from Reel Pipeline",
       "canonicalUrl": "https://github.com/sarthak-fleet/reel-pipeline/blob/main/docs/learning/new-things.md",
       "itemCount": 13,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Reel Pipeline learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/reel-pipeline/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:drank",
@@ -54,7 +69,12 @@
       "description": "Learning queue from dRank",
       "canonicalUrl": "https://github.com/sarthak-fleet/drank/blob/main/docs/learning/new-things.md",
       "itemCount": 7,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "dRank learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/drank/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:codevetter",
@@ -63,7 +83,12 @@
       "description": "Learning queue from CodeVetter",
       "canonicalUrl": "https://github.com/sarthak-fleet/codevetter/blob/main/docs/learning/new-things.md",
       "itemCount": 15,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "CodeVetter learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/codevetter/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:starboard",
@@ -72,16 +97,26 @@
       "description": "Learning queue from Starboard",
       "canonicalUrl": "https://github.com/sarthak-fleet/starboard/blob/main/docs/learning/new-things.md",
       "itemCount": 10,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Starboard learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/starboard/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:high-signal",
       "kind": "project",
-      "label": "High Signal",
-      "description": "Learning queue from High Signal",
+      "label": "High Signal: Product Engineering",
+      "description": "Learning queue from High Signal: Product Engineering",
       "canonicalUrl": "https://github.com/sarthak-fleet/high-signal/blob/main/docs/learning/new-things.md",
       "itemCount": 14,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "High Signal learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/high-signal/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:aliveville",
@@ -90,7 +125,19 @@
       "description": "Learning queue from Aliveville",
       "canonicalUrl": "https://github.com/sarthak-fleet/alive-ville/blob/main/docs/learning/new-things.md",
       "itemCount": 25,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Aliveville roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/alive-ville/blob/main/docs/roadmap.md",
+        "modules": [
+          "Where we are",
+          "What's actually broken (player-facing, observed)",
+          "Two paths forward — pick one when resuming",
+          "What's running / how to resume",
+          "Open follow-ups not in either path",
+          "Honest notes for next-me"
+        ]
+      }
     },
     {
       "id": "project:pace",
@@ -99,7 +146,29 @@
       "description": "Learning queue from Pace",
       "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/learning/new-things.md",
       "itemCount": 11,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Pace roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/roadmap.md",
+        "modules": [
+          "Priority 1: Approval And Safety",
+          "Priority 2: Typed Tool Registry",
+          "Priority 3: Apple App Integrations",
+          "Priority 4: Watch Mode",
+          "Priority 5: Local Intent Classifier",
+          "Priority 6: Tests",
+          "Priority 7: Permission Preflight",
+          "Priority 8: Action Result Center",
+          "Priority 9: Local Memory",
+          "Priority 10: Voice Quality",
+          "Priority 11: MCP Integration Substrate",
+          "Priority 12: Set-of-Mark Click Recovery — SHIP VERDICT PENDING",
+          "Priority 12a: Automation Modules — IMPLEMENTED + WIRED",
+          "Priority 13: Premium Conversational UI",
+          "Priority 14: One-Tap obscura (headless browser) in the MCP catalog",
+          "Deferred (gated, do NOT start blind): UI-TARS / GUI-grounding VLM"
+        ]
+      }
     },
     {
       "id": "project:posttrainllm",
@@ -108,7 +177,22 @@
       "description": "Learning queue from posttrainllm",
       "canonicalUrl": "https://github.com/sarthak-fleet/tinygpt/blob/main/docs/learn.md",
       "itemCount": 25,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "posttrainllm learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/tinygpt/blob/main/docs/learning_roadmap.md",
+        "modules": [
+          "0. Prerequisites",
+          "1. Core ML foundations",
+          "2. Language modeling basics",
+          "3. Transformer internals",
+          "4. Training and debugging",
+          "5. LoRA and adaptation",
+          "6. Browser systems",
+          "7. WebGPU acceleration",
+          "8. Evaluation and alignment"
+        ]
+      }
     },
     {
       "id": "project:significanthobbies",
@@ -117,16 +201,26 @@
       "description": "Learning queue from Significant Hobbies",
       "canonicalUrl": "https://github.com/sarthak-fleet/significanthobbies/blob/main/docs/learning/new-things.md",
       "itemCount": 6,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Significant Hobbies learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/significanthobbies/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:reader",
       "kind": "project",
-      "label": "Reader",
-      "description": "Learning queue from Reader",
+      "label": "Reader: Product Engineering",
+      "description": "Learning queue from Reader: Product Engineering",
       "canonicalUrl": "https://github.com/sarthak-fleet/reader/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Reader learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/reader/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:anime-list",
@@ -135,16 +229,26 @@
       "description": "Learning queue from MAL Explorer",
       "canonicalUrl": "https://github.com/sarthak-fleet/anime-list/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "MAL Explorer learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/anime-list/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:swe-interview-prep",
       "kind": "project",
-      "label": "SWE Interview Prep",
-      "description": "Learning queue from SWE Interview Prep",
+      "label": "SWE Prep: Product Engineering",
+      "description": "Learning queue from SWE Prep: Product Engineering",
       "canonicalUrl": "https://github.com/sarthak-fleet/swe-interview-prep/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "SWE Interview Prep learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/swe-interview-prep/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:email-manager",
@@ -153,7 +257,12 @@
       "description": "Learning queue from Email Manager",
       "canonicalUrl": "https://github.com/sarthak-fleet/email-manager/blob/main/docs/learning/new-things.md",
       "itemCount": 8,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Email Manager learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/email-manager/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:looptv",
@@ -162,7 +271,12 @@
       "description": "Learning queue from LoopTV",
       "canonicalUrl": "https://github.com/sarthak-fleet/looptv/blob/main/docs/learning/new-things.md",
       "itemCount": 7,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "LoopTV learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/looptv/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:rolepatch",
@@ -171,7 +285,12 @@
       "description": "Learning queue from Rolepatch",
       "canonicalUrl": "https://github.com/sarthak-fleet/rolepatch/blob/main/docs/learning/new-things.md",
       "itemCount": 6,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Rolepatch learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/rolepatch/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:karte",
@@ -180,7 +299,12 @@
       "description": "Learning queue from Karte",
       "canonicalUrl": "https://github.com/sarthak-fleet/karte/blob/main/docs/learning/new-things.md",
       "itemCount": 8,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Karte learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/karte/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "project:research-papers",
@@ -189,7 +313,12 @@
       "description": "Learning queue from Research Papers",
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
-      "syncStatus": "fresh"
+      "syncStatus": "fresh",
+      "roadmap": {
+        "label": "Research Papers learning roadmap",
+        "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md",
+        "modules": ["Project learning"]
+      }
     },
     {
       "id": "research:sutskever-carmack-core",
@@ -284,7 +413,7 @@
     {
       "id": "reader",
       "kind": "reader",
-      "label": "Reader",
+      "label": "Reader: Saved Articles",
       "description": "Private saved blogs and articles loaded after Google authentication.",
       "canonicalUrl": "https://reader.sarthakagrawal927.workers.dev",
       "itemCount": 0,
@@ -9679,8 +9808,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "tutorial",
@@ -9719,8 +9847,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "essay",
@@ -9759,8 +9886,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "essay",
@@ -9799,8 +9925,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "tutorial",
@@ -9839,8 +9964,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -9879,8 +10003,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -9919,8 +10042,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -9959,8 +10081,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -9999,8 +10120,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10039,8 +10159,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10079,8 +10198,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10119,8 +10237,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10159,8 +10276,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10199,8 +10315,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10239,8 +10354,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10279,8 +10393,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10319,8 +10432,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10359,8 +10471,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10399,8 +10510,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10439,8 +10549,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10479,8 +10588,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10519,8 +10627,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10559,8 +10666,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "paper",
@@ -10599,8 +10705,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "tutorial",
@@ -10639,8 +10744,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "report",
@@ -10679,8 +10783,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "tutorial",
@@ -10719,8 +10822,7 @@
         "theory",
         "ilya-sutskever",
         "deep-learning-core",
-        "carmack",
-        "foundations"
+        "carmack"
       ],
       "collection": "Sutskever/Carmack Core",
       "format": "tutorial",
@@ -12023,7 +12125,6 @@
       "tracks": [
         "llm-systems",
         "alignment",
-        "alignment",
         "rlhf",
         "instruction tuning",
         "preference optimization"
@@ -12061,7 +12162,6 @@
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
       "tracks": [
         "llm-systems",
-        "alignment",
         "alignment",
         "rlhf",
         "instruction tuning",
@@ -12101,7 +12201,6 @@
       "tracks": [
         "llm-systems",
         "alignment",
-        "alignment",
         "rlhf",
         "instruction tuning",
         "preference optimization"
@@ -12139,7 +12238,6 @@
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
       "tracks": [
         "llm-systems",
-        "alignment",
         "alignment",
         "rlhf",
         "instruction tuning",
@@ -12179,7 +12277,6 @@
       "tracks": [
         "llm-systems",
         "alignment",
-        "alignment",
         "rlhf",
         "instruction tuning",
         "preference optimization"
@@ -12215,14 +12312,7 @@
       "summary": "Popularizes dual-encoder dense retrieval for open-domain QA.",
       "canonicalUrl": "https://arxiv.org/abs/2004.04906",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": [
-        "retrieval",
-        "llm-systems",
-        "retrieval",
-        "rag",
-        "dense retrieval",
-        "question answering"
-      ],
+      "tracks": ["retrieval", "llm-systems", "rag", "dense retrieval", "question answering"],
       "collection": "Retrieval And RAG",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12254,14 +12344,7 @@
       "summary": "Combines parametric generation with non-parametric retrieved memory.",
       "canonicalUrl": "https://arxiv.org/abs/2005.11401",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": [
-        "retrieval",
-        "llm-systems",
-        "retrieval",
-        "rag",
-        "dense retrieval",
-        "question answering"
-      ],
+      "tracks": ["retrieval", "llm-systems", "rag", "dense retrieval", "question answering"],
       "collection": "Retrieval And RAG",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12293,14 +12376,7 @@
       "summary": "Trains language representations with a latent retriever over a knowledge corpus.",
       "canonicalUrl": "https://arxiv.org/abs/2002.08909",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": [
-        "retrieval",
-        "llm-systems",
-        "retrieval",
-        "rag",
-        "dense retrieval",
-        "question answering"
-      ],
+      "tracks": ["retrieval", "llm-systems", "rag", "dense retrieval", "question answering"],
       "collection": "Retrieval And RAG",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12332,14 +12408,7 @@
       "summary": "Shows a practical retrieval design between simple bi-encoders and expensive cross-encoders.",
       "canonicalUrl": "https://arxiv.org/abs/2112.01488",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": [
-        "retrieval",
-        "llm-systems",
-        "retrieval",
-        "rag",
-        "dense retrieval",
-        "question answering"
-      ],
+      "tracks": ["retrieval", "llm-systems", "rag", "dense retrieval", "question answering"],
       "collection": "Retrieval And RAG",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12371,14 +12440,7 @@
       "summary": "Adds reflection tokens so models can decide when to retrieve and critique generations.",
       "canonicalUrl": "https://arxiv.org/abs/2310.11511",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": [
-        "retrieval",
-        "llm-systems",
-        "retrieval",
-        "rag",
-        "dense retrieval",
-        "question answering"
-      ],
+      "tracks": ["retrieval", "llm-systems", "rag", "dense retrieval", "question answering"],
       "collection": "Retrieval And RAG",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12605,7 +12667,7 @@
       "summary": "Connects neural-network regularization to minimum description length and simpler explanations.",
       "canonicalUrl": "https://www.cs.toronto.edu/~hinton/absps/colt93.pdf",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": ["foundations", "theory", "compression", "mdl", "generalization", "theory"],
+      "tracks": ["foundations", "theory", "compression", "mdl", "generalization"],
       "collection": "Compression And Generalization",
       "format": "paper",
       "estimatedMinutes": 35,
@@ -12637,7 +12699,7 @@
       "summary": "A practical entry point for understanding MDL as model selection by compression.",
       "canonicalUrl": "https://arxiv.org/abs/math/0406077",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": ["foundations", "theory", "compression", "mdl", "generalization", "theory"],
+      "tracks": ["foundations", "theory", "compression", "mdl", "generalization"],
       "collection": "Compression And Generalization",
       "format": "tutorial",
       "estimatedMinutes": 20,
@@ -12669,7 +12731,7 @@
       "summary": "Explains why complexity can rise and fall in closed systems, motivating the coffee automaton thought experiment.",
       "canonicalUrl": "https://scottaaronson.blog/?p=762",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": ["foundations", "theory", "compression", "mdl", "generalization", "theory"],
+      "tracks": ["foundations", "theory", "compression", "mdl", "generalization"],
       "collection": "Compression And Generalization",
       "format": "essay",
       "estimatedMinutes": 20,
@@ -12701,7 +12763,7 @@
       "summary": "Formalizes a small model for understanding how apparent complexity can emerge and dissipate.",
       "canonicalUrl": "https://arxiv.org/abs/1405.6903",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": ["foundations", "theory", "compression", "mdl", "generalization", "theory"],
+      "tracks": ["foundations", "theory", "compression", "mdl", "generalization"],
       "collection": "Compression And Generalization",
       "format": "paper",
       "estimatedMinutes": 20,
@@ -12733,7 +12795,7 @@
       "summary": "Separates lossy representation from nuisance detail in a variational autoencoder setting.",
       "canonicalUrl": "https://arxiv.org/abs/1611.02731",
       "repositoryPath": "research-papers/web/src/data/reading-paths.ts",
-      "tracks": ["foundations", "theory", "compression", "mdl", "generalization", "theory"],
+      "tracks": ["foundations", "theory", "compression", "mdl", "generalization"],
       "collection": "Compression And Generalization",
       "format": "paper",
       "estimatedMinutes": 20,

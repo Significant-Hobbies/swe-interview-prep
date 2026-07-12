@@ -64,6 +64,11 @@ const PROJECT_LABELS = {
   karte: 'Karte',
   'research-papers': 'Research Papers',
 };
+const PROJECT_SOURCE_LABELS = {
+  'high-signal': 'High Signal: Product Engineering',
+  reader: 'Reader: Product Engineering',
+  'swe-interview-prep': 'SWE Prep: Product Engineering',
+};
 const POSTTRAIN_PHASES = [
   {
     title: '0. Prerequisites',
@@ -219,6 +224,39 @@ function nativePosttrainItems() {
   );
 }
 
+function projectRoadmap(project, repo, items) {
+  if (project === 'tinygpt') {
+    return {
+      label: 'posttrainllm learning roadmap',
+      canonicalUrl: `${POSTTRAIN_DOCS_BASE}/learning_roadmap.md`,
+      modules: POSTTRAIN_PHASES.map((phase) => phase.title),
+    };
+  }
+
+  const candidates = ['docs/learning_roadmap.md', 'docs/roadmap.md', 'ROADMAP.md', 'docs/learn.md'];
+  const roadmapPath = candidates.find((candidate) =>
+    existsSync(join(FLEET_ROOT, project, candidate))
+  );
+  if (roadmapPath) {
+    const body = readFileSync(join(FLEET_ROOT, project, roadmapPath), 'utf8');
+    const modules = [...body.matchAll(/^##\s+(.+)$/gm)]
+      .map((match) => match[1].replace(/[*`#]/g, '').trim())
+      .filter((title) => title && !/^contents$/i.test(title))
+      .slice(0, 24);
+    return {
+      label: `${PROJECT_LABELS[project] || project} roadmap`,
+      canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/${roadmapPath}`,
+      modules: modules.length > 0 ? modules : ['Project roadmap'],
+    };
+  }
+
+  return {
+    label: `${PROJECT_LABELS[project] || project} learning roadmap`,
+    canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
+    modules: [...new Set(items.map((item) => item.hierarchy?.module).filter(Boolean))],
+  };
+}
+
 function projectItems(project, body, repositoryPath) {
   const publicId = productId(project);
   const label = PROJECT_LABELS[project] || publicId;
@@ -286,20 +324,22 @@ async function projectSources() {
     const learning = await loadProjectLearning(project);
     const repo = project === 'aliveville' ? 'alive-ville' : project;
     const publicId = productId(project);
+    const sourceLabel = PROJECT_SOURCE_LABELS[project] || PROJECT_LABELS[project] || project;
     const next =
       project === 'tinygpt'
         ? nativePosttrainItems()
         : learning
           ? projectItems(project, learning.body, learning.repositoryPath)
           : [];
+    const roadmap = projectRoadmap(project, repo, next);
     items.push(...next);
     sources.push({
       id: `project:${publicId}`,
       kind: 'project',
-      label: PROJECT_LABELS[project] || project,
+      label: sourceLabel,
       description:
         next.length > 0
-          ? `Learning queue from ${PROJECT_LABELS[project] || project}`
+          ? `Learning queue from ${sourceLabel}`
           : `No learning track published yet for ${project}`,
       canonicalUrl:
         project === 'tinygpt'
@@ -307,6 +347,7 @@ async function projectSources() {
           : `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
       itemCount: next.length,
       syncStatus: next.length > 0 ? 'fresh' : 'pending',
+      roadmap,
     });
   }
   return { sources, items };
@@ -353,7 +394,7 @@ function nativeSource() {
   return {
     id: 'swe-native',
     kind: 'native',
-    label: 'SWE Interview Prep',
+    label: 'SWE Prep: Native Curriculum',
     description: 'Native concepts, roadmaps, drills, builds, and spaced repetition.',
     canonicalUrl: '/learn',
     itemCount: concepts.concepts?.length || 0,
@@ -367,7 +408,7 @@ function dailyBrief() {
     source: {
       id: 'high-signal',
       kind: 'briefing',
-      label: 'High Signal',
+      label: 'High Signal: Daily Brief',
       description: 'Fresh source-backed technology, startup, market, and product briefing.',
       canonicalUrl: 'https://highsignal.app/brief',
       itemCount: 1,
@@ -447,20 +488,26 @@ const snapshot = {
     {
       id: 'reader',
       kind: 'reader',
-      label: 'Reader',
+      label: 'Reader: Saved Articles',
       description: 'Private saved blogs and articles loaded after Google authentication.',
       canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
       itemCount: 0,
       syncStatus: 'pending',
     },
   ],
-  items: addDerivedAssessments([brief.item, ...projects.items, ...research.items]),
+  items: addDerivedAssessments([brief.item, ...projects.items, ...research.items]).map((item) => ({
+    ...item,
+    tracks: [...new Set(item.tracks)],
+  })),
 };
 
 if (snapshot.items.some((item) => item.id.includes('knowledge-base')))
   throw new Error('knowledge-base leaked into registry');
 const ids = snapshot.items.map((item) => item.id);
 if (new Set(ids).size !== ids.length) throw new Error('duplicate learning item IDs');
+const sourceLabels = snapshot.sources.map((source) => source.label.toLowerCase());
+if (new Set(sourceLabels).size !== sourceLabels.length)
+  throw new Error('duplicate learning source labels');
 if (existsSync(OUTPUT)) {
   const previous = JSON.parse(readFileSync(OUTPUT, 'utf8'));
   const previousContent = JSON.stringify({ sources: previous.sources, items: previous.items });

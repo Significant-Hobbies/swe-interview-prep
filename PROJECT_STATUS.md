@@ -4,7 +4,7 @@ Last updated: 2026-07-12
 
 ## Why/What
 
-Interview Coder (`swe-interview-prep`) is a single-platform interview prep product covering DSA, low-level design (LLD), system design (HLD), and behavioral practice. It combines Monaco coding, Excalidraw diagramming, multi-provider AI hints, spaced repetition (Anki-style), LeetCode import, progress tracking, and pattern-based learning. Deployed on Cloudflare Pages with Pages Functions backend.
+SWE Interview Prep is a single-platform interview prep and Fleet learning product covering DSA, low-level design (LLD), system design (HLD), behavioral practice, and project learning tracks. It combines Monaco coding, Excalidraw diagramming, multi-provider AI hints, spaced repetition, LeetCode import, progress tracking, and pattern-based learning. Deployed on Cloudflare Pages with Pages Functions backend.
 
 Out of scope: ATS/job-application features, Vercel/serverless migration, and new auth providers until the Cloudflare path is stable.
 
@@ -66,11 +66,11 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (AUDIT.md) |
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
-| Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, research paths, private Reader saves, and High Signal. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
+| Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, project roadmaps, research paths, private Reader saves, High Signal, and 12 embedded GitHub learning repositories. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
 
 ## Products
 
-**Primary routes:** `/` (dashboard) · `/learn` · `/practice` · `/playground` · `/progress` · `/build-lab` · concept/roadmap/project detail pages · `/login`
+**Primary routes:** `/` (dashboard) · `/learn` · `/practice` · `/library` · `/sources` · `/session/:date/:sessionId` · `/playground` · `/progress` · `/build-lab` · concept/roadmap/project detail pages · `/login`
 
 **Primary API (Pages Functions):** `/api/auth/google` · `/api/problems` · `/api/notes` · `/api/chats` · `/api/chat` · `/api/go-run` · progress and spaced-repetition endpoints
 
@@ -100,6 +100,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Unified learning sources:** `/sources` indexes all 19 active Fleet project study queues and research-paper paths without copying canonical source bodies. The source catalog, source detail, and session routes require the configured owner Google account.
 - **Adaptive daily sessions:** `/session/:date/:sessionId` creates a fresh 30-minute session. The owner can choose any populated source or use the balanced High Signal + due-learning plan, run unlimited sessions per day, answer questions at the end, and have recall quality scheduled through the existing FSRS implementation.
 - **Private Reader adapter:** saved Reader articles load at request time through the authenticated server proxy. Article bodies and Reader credentials are never emitted into the static catalog or client bundle.
+- **Repository Library:** `/library` restores 12 embedded GitHub learning repositories with searchable source cards, original section hierarchy, and repository exercises in read/practice modes behind owner authentication.
 - **DSA practice:** Monaco editor, pattern-based problem grouping (sliding window, two pointers, etc.), LeetCode import via API.
 - **LLD / HLD:** Excalidraw integration for architecture diagrams on problem views.
 - **Behavioral / concepts:** Learn and concept-detail routes with structured content paths.
@@ -133,7 +134,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ### Closure
 
-- **Personal-use support (2026-07-10):** Keep Interview Coder available for direct use. No roadmap expansion; accept only maintenance, reliability, or personally requested workflow fixes.
+- **Personal-use support (2026-07-10):** Keep SWE Interview Prep available for direct use. No roadmap expansion; accept only maintenance, reliability, or personally requested workflow fixes.
 
 ### Deferred
 - Vercel/serverless migration instructions — stale; do not guide new work.

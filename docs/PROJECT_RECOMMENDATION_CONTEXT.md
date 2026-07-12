@@ -7,17 +7,17 @@ This file is a CodeVetter Repo Unpacked-inspired audit written for Starboard rec
 ## Project Identity
 
 - Slug: `swe-interview-prep`
-- Registry description: Interview Coder — Software engineering interview prep.
+- Registry description: SWE Interview Prep - software engineering interview preparation.
 - Product grouping: `public-ready`
 - Source path: `swe-interview-prep`
 
 ## Product Context
 
-Interview Coder — Software engineering interview prep.
+SWE Interview Prep - software engineering interview preparation.
 
-Interview Coder is an interview-prep app for DSA, low-level design, system design, and behavioral preparation. It combines a code editor, diagramming, AI hints, spaced repetition, LeetCode import, and progress tracking.
+SWE Interview Prep is an interview-prep app for DSA, low-level design, system design, and behavioral preparation. It combines a code editor, diagramming, AI hints, spaced repetition, LeetCode import, and progress tracking.
 
-Interview Coder A comprehensive interview preparation platform for mastering DSA, Low-Level Design, System Design, and Behavioral interviews. Problem Technical interview preparation is fragmented across multiple tools: LeetCode for coding, Excalidraw for diagrams, ChatGPT for hints, and Anki for spaced repetition. Switching between tools breaks flow and makes it hard to track progress holistically. Interview Coder consolidates everything into a single platform with integrated code execution, diagram drawing, AI assistance, and spaced repetition review. Deployment & External Services Concern Service --------- --------- Hosting Cloudflare Pages swe-interview-prep + Pages Functions backend func
+SWE Interview Prep is a comprehensive preparation platform for mastering DSA, low-level design, system design, and behavioral interviews. Technical interview preparation is fragmented across tools such as LeetCode for coding, Excalidraw for diagrams, ChatGPT for hints, and Anki for spaced repetition. SWE Interview Prep consolidates these workflows into one platform with code execution, diagram drawing, AI assistance, and spaced repetition review. It is hosted on Cloudflare Pages as `swe-interview-prep`, with Pages Functions providing its backend.
 
 ## Feature Map
 
