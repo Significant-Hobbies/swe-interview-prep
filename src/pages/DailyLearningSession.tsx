@@ -166,7 +166,7 @@ export default function DailyLearningSession() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              to={`/session/${date}/${Date.now()}`}
+              to={`/session/${date}/${Date.now()}${sourceId ? `?source=${encodeURIComponent(sourceId)}` : ''}`}
               className="inline-flex h-11 items-center rounded-md bg-white px-5 text-sm font-semibold text-black"
             >
               Start another session
