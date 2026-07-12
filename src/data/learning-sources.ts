@@ -14,6 +14,14 @@ export interface LearningAssessment {
   generator: string;
 }
 
+export interface LearningReviewQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  difficulty: string;
+  type: string;
+}
+
 export interface LearningSource {
   id: string;
   kind: LearningSourceKind;
@@ -42,6 +50,9 @@ export interface LearningItem {
     topicOrder: number;
   };
   learningNotes?: string[];
+  prerequisites?: string[];
+  resources?: Array<{ title: string; url: string; type: string }>;
+  reviewQuestions?: LearningReviewQuestion[];
   format: string;
   estimatedMinutes: number;
   publishedAt?: string;

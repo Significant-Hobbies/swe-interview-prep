@@ -64,47 +64,80 @@ const PROJECT_LABELS = {
   karte: 'Karte',
   'research-papers': 'Research Papers',
 };
-const POSTTRAIN_MODULES = [
+const POSTTRAIN_PHASES = [
   {
-    title: '1. Language model foundations',
-    topics: [
-      'Byte-Pair Encoding (BPE) tokenization',
-      'Next-token language modeling & sampling',
-      'Transformer / scaled-dot-product attention',
-      'Backpropagation & gradient descent',
-      'AdamW optimizer',
+    title: '0. Prerequisites',
+    concepts: [
+      'vectors-and-spaces',
+      'matrices-and-transformations',
+      'probability-fundamentals',
+      'descriptive-statistics',
+      'derivatives-and-gradients',
     ],
   },
   {
-    title: '2. Fast browser training',
-    topics: [
-      'WebAssembly (WASM) + Emscripten',
-      'WASM SIMD + multi-threading',
-      'WebGPU + WGSL',
-      'Tiled / register-blocked matrix multiplication (GPU)',
-      'fp16 / mixed-precision',
-      'Gradient checkpointing (activation recomputation)',
-      'Online softmax',
-      'Flash Attention 2 (FA2)',
-    ],
+    title: '1. Core ML foundations',
+    concepts: ['ml-math', 'ml-gradient-descent', 'ml-backprop', 'ml-softmax-xent', 'ml-adamw'],
   },
   {
-    title: '3. Adaptation and evaluation',
-    topics: [
-      'LoRA (Low-Rank Adaptation)',
-      'Continual learning / online adapter refresh',
-      'Memorization testing (style-adaptation eval)',
-    ],
+    title: '2. Language modeling basics',
+    concepts: ['ml-tokenization', 'ml-language-modeling', 'ml-sampling'],
   },
   {
-    title: '4. Inference and interpretability',
-    topics: [
-      'Speculative decoding (draft + verify)',
-      'Sparse Autoencoder (SAE) / mechanistic interpretability',
-      'Logit lens',
-    ],
+    title: '3. Transformer internals',
+    concepts: ['ml-embeddings', 'ml-self-attention', 'ml-multi-head', 'ml-transformer-block'],
   },
+  { title: '4. Training and debugging', concepts: ['ml-training', 'ml-checkpointing'] },
+  { title: '5. LoRA and adaptation', concepts: ['ml-lora', 'ml-data-engineering'] },
+  { title: '6. Browser systems', concepts: ['ml-browser-runtime'] },
+  { title: '7. WebGPU acceleration', concepts: ['ml-webgpu'] },
+  { title: '8. Evaluation and alignment', concepts: ['ml-evaluation', 'ml-rl-alignment'] },
 ];
+const POSTTRAIN_DOCS_BASE = 'https://github.com/sarthak-fleet/tinygpt/blob/main/docs';
+
+function posttrainDocs(moduleIndex) {
+  const shared = [
+    {
+      title: 'PostTrainLLM guided learning path',
+      url: `${POSTTRAIN_DOCS_BASE}/learn.md`,
+      type: 'guide',
+    },
+    {
+      title: 'PostTrainLLM 9-phase roadmap',
+      url: `${POSTTRAIN_DOCS_BASE}/learning_roadmap.md`,
+      type: 'roadmap',
+    },
+  ];
+  if (moduleIndex <= 4) {
+    shared.push({
+      title: 'Build the model from scratch',
+      url: `${POSTTRAIN_DOCS_BASE}/model_guide.md`,
+      type: 'guide',
+    });
+  }
+  if (moduleIndex === 5) {
+    shared.push({
+      title: 'LoRA implementation guide',
+      url: `${POSTTRAIN_DOCS_BASE}/lora_guide.md`,
+      type: 'guide',
+    });
+  }
+  if (moduleIndex === 6 || moduleIndex === 7) {
+    shared.push({
+      title: 'Browser, WASM, Workers, and WebGPU notes',
+      url: `${POSTTRAIN_DOCS_BASE}/browser_notes.md`,
+      type: 'guide',
+    });
+  }
+  if (moduleIndex >= 4) {
+    shared.push({
+      title: 'PostTrainLLM engineering study guide',
+      url: `${POSTTRAIN_DOCS_BASE}/study_guide.md`,
+      type: 'guide',
+    });
+  }
+  return shared;
+}
 
 function hash(value) {
   return createHash('sha256').update(value).digest('hex').slice(0, 16);
@@ -129,19 +162,61 @@ function productId(project) {
   return project === 'tinygpt' ? 'posttrainllm' : project;
 }
 
-function hierarchyFor(project, title, fallbackOrder) {
+function hierarchyFor(project, fallbackOrder) {
   const track = PROJECT_LABELS[project] || productId(project);
-  if (project !== 'tinygpt') {
-    return { track, module: 'Project learning', moduleOrder: 1, topicOrder: fallbackOrder + 1 };
-  }
-  const moduleIndex = POSTTRAIN_MODULES.findIndex((module) => module.topics.includes(title));
-  const module = POSTTRAIN_MODULES[moduleIndex];
-  return {
-    track,
-    module: module?.title || '5. Further topics',
-    moduleOrder: moduleIndex >= 0 ? moduleIndex + 1 : POSTTRAIN_MODULES.length + 1,
-    topicOrder: module ? module.topics.indexOf(title) + 1 : fallbackOrder + 1,
-  };
+  return { track, module: 'Project learning', moduleOrder: 1, topicOrder: fallbackOrder + 1 };
+}
+
+function nativePosttrainItems() {
+  const concepts = JSON.parse(
+    readFileSync(join(APP_ROOT, 'src', 'data', 'concepts.json'), 'utf8')
+  ).concepts;
+  const reviewQuestions = JSON.parse(
+    readFileSync(join(APP_ROOT, 'src', 'data', 'review-questions.json'), 'utf8')
+  ).reviewQuestions;
+  const conceptById = new Map(concepts.map((concept) => [concept.id, concept]));
+  const reviewById = new Map(reviewQuestions.map((question) => [question.id, question]));
+
+  return POSTTRAIN_PHASES.flatMap((phase, moduleIndex) =>
+    phase.concepts.map((conceptId, topicIndex) => {
+      const concept = conceptById.get(conceptId);
+      if (!concept) throw new Error(`Missing native posttrainllm concept: ${conceptId}`);
+      const questions = (concept.reviewQuestions || [])
+        .map((id) => reviewById.get(id))
+        .filter(Boolean)
+        .map(({ id, question, answer, difficulty, type }) => ({
+          id,
+          question,
+          answer,
+          difficulty,
+          type,
+        }));
+      return {
+        id: `project:posttrainllm:${concept.id}`,
+        sourceId: 'project:posttrainllm',
+        sourceKind: 'project',
+        project: 'posttrainllm',
+        title: concept.name,
+        summary: concept.mentalModel || concept.description,
+        canonicalUrl: `/concepts/${concept.id}`,
+        repositoryPath: 'docs/TINYGPT_LEARNING_PATH.md',
+        tracks: ['posttrainllm', ...concept.tags],
+        hierarchy: {
+          track: 'posttrainllm',
+          module: phase.title,
+          moduleOrder: moduleIndex,
+          topicOrder: topicIndex + 1,
+        },
+        prerequisites: concept.prerequisites || [],
+        resources: [...(concept.resources || []), ...posttrainDocs(moduleIndex)],
+        reviewQuestions: questions,
+        learningNotes: [],
+        format: 'native-concept',
+        estimatedMinutes: 12,
+        fingerprint: hash(JSON.stringify(concept)),
+      };
+    })
+  );
 }
 
 function projectItems(project, body, repositoryPath) {
@@ -170,7 +245,7 @@ function projectItems(project, body, repositoryPath) {
             `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
           repositoryPath,
           tracks: [publicId],
-          hierarchy: hierarchyFor(project, title, topicIndex),
+          hierarchy: hierarchyFor(project, topicIndex),
           learningNotes: gotcha ? [gotcha] : [],
           format: 'project-note',
           estimatedMinutes: 12,
@@ -211,7 +286,12 @@ async function projectSources() {
     const learning = await loadProjectLearning(project);
     const repo = project === 'aliveville' ? 'alive-ville' : project;
     const publicId = productId(project);
-    const next = learning ? projectItems(project, learning.body, learning.repositoryPath) : [];
+    const next =
+      project === 'tinygpt'
+        ? nativePosttrainItems()
+        : learning
+          ? projectItems(project, learning.body, learning.repositoryPath)
+          : [];
     items.push(...next);
     sources.push({
       id: `project:${publicId}`,
@@ -221,7 +301,10 @@ async function projectSources() {
         next.length > 0
           ? `Learning queue from ${PROJECT_LABELS[project] || project}`
           : `No learning track published yet for ${project}`,
-      canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
+      canonicalUrl:
+        project === 'tinygpt'
+          ? `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learn.md`
+          : `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
       itemCount: next.length,
       syncStatus: next.length > 0 ? 'fresh' : 'pending',
     });

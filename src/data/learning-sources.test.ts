@@ -78,9 +78,14 @@ describe('unified learning sources', () => {
     expect(next.items.map((item) => item.id)).not.toEqual(first.items.map((item) => item.id));
     expect(first.items[0].hierarchy).toMatchObject({
       track: 'posttrainllm',
-      module: '1. Language model foundations',
+      module: '0. Prerequisites',
       topicOrder: 1,
     });
+    expect(first.items[0]).toMatchObject({
+      title: 'Vectors & Vector Spaces',
+      format: 'native-concept',
+    });
+    expect(first.items[0].reviewQuestions?.length).toBeGreaterThan(0);
     memory.clear();
   });
 
@@ -118,6 +123,9 @@ describe('unified learning sources', () => {
     expect(LEARNING_SOURCES.items.some((item) => item.id.startsWith('project:posttrainllm:'))).toBe(
       true
     );
+    expect(
+      LEARNING_SOURCES.items.filter((item) => item.sourceId === 'project:posttrainllm').length
+    ).toBe(25);
     expect(
       JSON.stringify({
         sources: LEARNING_SOURCES.sources.map(({ id, label, description }) => ({

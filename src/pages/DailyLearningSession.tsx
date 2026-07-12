@@ -12,6 +12,7 @@ import { useReaderLearning } from '../hooks/useReaderLearning';
 import { recordSessionActivity } from '../lib/session';
 
 type Phase = 'study' | 'questions' | 'done';
+type SessionRating = 'again' | 'hard' | 'good';
 
 export default function DailyLearningSession() {
   const { date = new Date().toISOString().slice(0, 10), sessionId = '1' } = useParams();
@@ -33,22 +34,40 @@ export default function DailyLearningSession() {
   const assessments = plan.items.flatMap((item) =>
     (item.assessments || []).map((assessment) => ({ item, assessment }))
   );
+  const reviewPrompts = plan.items.flatMap((item) =>
+    (item.reviewQuestions || []).map((question) => ({ item, question }))
+  );
   const [phase, setPhase] = useState<Phase>('study');
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [writtenAnswers, setWrittenAnswers] = useState<Record<string, string>>({});
+  const [confidence, setConfidence] = useState<SessionRating | null>(null);
   const [reflection, setReflection] = useState('');
 
   const correct = assessments.filter(
     ({ assessment }) => answers[assessment.id] === assessment.correctIndex
   ).length;
-  const score = assessments.length ? correct / assessments.length : 0;
+  const score = reviewPrompts.length
+    ? confidence === 'good'
+      ? 1
+      : confidence === 'hard'
+        ? 0.5
+        : 0
+    : assessments.length
+      ? correct / assessments.length
+      : 0;
   const selectedSource = sources.find((source) => source.id === sourceId);
   const moduleNames = [
     ...new Set(plan.items.map((item) => item.hierarchy?.module).filter(Boolean)),
   ];
 
   function finish() {
-    const rating =
-      score === 1 && reflection.trim().length >= 30 ? 'good' : score >= 0.5 ? 'hard' : 'again';
+    const rating: SessionRating = reviewPrompts.length
+      ? confidence || 'again'
+      : score === 1 && reflection.trim().length >= 30
+        ? 'good'
+        : score >= 0.5
+          ? 'hard'
+          : 'again';
     for (const item of plan.items) rateLearningItem(item.id, rating);
     recordSessionActivity('external_learning_session');
     setPhase('done');
@@ -136,24 +155,82 @@ export default function DailyLearningSession() {
                 </div>
               </div>
             ))}
-            <label className="block">
-              <span className="text-base font-medium text-white">
-                What will you remember or apply from this session?
-              </span>
-              <textarea
-                value={reflection}
-                onChange={(event) => setReflection(event.target.value)}
-                rows={5}
-                className="mt-4 w-full rounded-md border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white outline-none focus:border-sky-400/50"
-                placeholder="Explain it in your own words…"
-              />
-            </label>
+            {reviewPrompts.map(({ item, question }) => {
+              const response = writtenAnswers[question.id] || '';
+              return (
+                <div key={question.id} className="border-b border-white/10 pb-8">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/35">
+                    {item.title} · existing RQ
+                  </span>
+                  <p className="mt-3 text-base font-medium leading-7 text-white">
+                    {question.question}
+                  </p>
+                  <textarea
+                    value={response}
+                    onChange={(event) =>
+                      setWrittenAnswers((current) => ({
+                        ...current,
+                        [question.id]: event.target.value,
+                      }))
+                    }
+                    rows={4}
+                    className="mt-4 w-full rounded-md border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white outline-none focus:border-sky-400/50"
+                    placeholder="Answer from memory in your own words"
+                  />
+                  {response.trim().length >= 10 && (
+                    <details className="mt-4 rounded-md border border-white/10 p-4 text-sm">
+                      <summary className="cursor-pointer text-sky-300">
+                        Compare with the answer
+                      </summary>
+                      <p className="mt-3 leading-6 text-white/55">{question.answer}</p>
+                    </details>
+                  )}
+                </div>
+              );
+            })}
+            {reviewPrompts.length > 0 ? (
+              <fieldset>
+                <legend className="text-base font-medium text-white">
+                  After comparing, how well did you recall it?
+                </legend>
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  {(['again', 'hard', 'good'] as const).map((rating) => (
+                    <button
+                      key={rating}
+                      type="button"
+                      onClick={() => setConfidence(rating)}
+                      className={`h-11 rounded-md border text-sm capitalize ${confidence === rating ? 'border-sky-400/50 bg-sky-400/10 text-white' : 'border-white/10 text-white/50'}`}
+                    >
+                      {rating}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+            ) : (
+              <label className="block">
+                <span className="text-base font-medium text-white">
+                  What will you remember or apply from this session?
+                </span>
+                <textarea
+                  value={reflection}
+                  onChange={(event) => setReflection(event.target.value)}
+                  rows={5}
+                  className="mt-4 w-full rounded-md border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white outline-none focus:border-sky-400/50"
+                  placeholder="Explain it in your own words…"
+                />
+              </label>
+            )}
           </div>
           <button
             type="button"
             disabled={
-              (assessments.length > 0 && Object.keys(answers).length < assessments.length) ||
-              reflection.trim().length < 10
+              reviewPrompts.length > 0
+                ? !confidence ||
+                  reviewPrompts.some(
+                    ({ question }) => (writtenAnswers[question.id] || '').trim().length < 10
+                  )
+                : (assessments.length > 0 && Object.keys(answers).length < assessments.length) ||
+                  reflection.trim().length < 10
             }
             onClick={finish}
             className="mt-8 h-11 rounded-md bg-sky-400 px-5 text-sm font-semibold text-black disabled:opacity-40"
@@ -231,6 +308,16 @@ function StudyPhase({
                 <p className="mt-1 text-xs leading-5 text-white/45">{note}</p>
               </div>
             ))}
+            {item.resources?.[0] && (
+              <a
+                href={item.resources[0].url}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 text-xs leading-5 text-white/40 hover:text-white/70"
+              >
+                Best explainer: {item.resources[0].title}
+              </a>
+            )}
             <a
               href={item.canonicalUrl}
               target="_blank"
