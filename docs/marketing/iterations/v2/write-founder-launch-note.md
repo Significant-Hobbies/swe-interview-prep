@@ -8,7 +8,9 @@ That's why I built this. It's not another problem-grinding platform. It's a tool
 
 **Here's a quick demo:**
 
-*(Imagine a short, silent GIF here showing the user interacting with the mock interview UI. It would show them talking, the transcript appearing, the AI responding, and the user writing code.)*
+https://swe-interview-prep.pages.dev/mock
+
+Suggested clip: start a mock interview, talk through the first approach, write the first implementation pass, then show the feedback summary and review cards.
 
 **The Problem with LeetCode-Style Practice**
 
@@ -28,6 +30,6 @@ Our platform uses AI to simulate a real interview.
 
 Ready to stop grinding and start interviewing?
 
-Try the mock interview simulator now and let me know what you think. Your feedback is crucial as we build this out.
+Try the mock interview simulator and send me the one thing that felt least like a real interview. That is the feedback I need most right now.
 
-[Link to the app]
+https://swe-interview-prep.pages.dev/mock

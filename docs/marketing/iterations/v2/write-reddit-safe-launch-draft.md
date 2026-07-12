@@ -33,7 +33,9 @@ It integrates the four key parts of interview prep into a single, cohesive exper
 
 4.  **Local-First and Offline:** It's designed to be fast and private. Your data is stored locally, and it works perfectly offline on a plane or commute.
 
-**[Link to the live demo/app]** (I'll need the actual link here)
+Live demo: https://swe-interview-prep.pages.dev/mock
+
+Suggested demo to attach: a short screen recording that starts on `/mock`, configures a 20-minute DSA + behavioral loop, answers one prompt, and ends on the score summary with review cards queued.
 
 ### I'd love your feedback:
 
@@ -45,6 +47,6 @@ This is still a work in progress, and I'd be grateful for your honest feedback. 
 
 ### Disclosure
 
-I'm the solo developer behind this project. It's a passion project born from my own interview prep frustrations. The core features are free to use.
+I'm the solo developer behind this project. It's a small product I'm building from my own interview prep frustrations, and I'm looking for blunt product feedback rather than trying to growth-hack the community.
 
 Thanks for taking a look!
