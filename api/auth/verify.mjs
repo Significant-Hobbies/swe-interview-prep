@@ -3,6 +3,7 @@ import { getUserById } from '../../shared/db/users.mjs';
 import { readAuthCookie } from './cookies.mjs';
 
 const JWT_SECRET = process.env.JWT_SECRET;
+const OWNER_EMAIL = process.env.OWNER_EMAIL?.toLowerCase();
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is required');
 }
@@ -46,6 +47,10 @@ export async function requireAuth(req, res) {
   const user = await getUserById(decoded.userId);
   if (!user) {
     res.status(401).json({ error: 'User not found' });
+    return null;
+  }
+  if (OWNER_EMAIL && user.email?.toLowerCase() !== OWNER_EMAIL) {
+    res.status(403).json({ error: 'Forbidden' });
     return null;
   }
 

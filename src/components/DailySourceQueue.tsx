@@ -16,9 +16,17 @@ export function DailySourceQueue() {
     <section className="mb-10">
       <div className="mb-3 flex items-center justify-between gap-4">
         <h2 className="text-sm font-semibold text-white">Across your learning sources</h2>
-        <Link to="/sources" className="text-xs text-white/40 hover:text-white">
-          Browse all
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            to={`/session/${new Date().toISOString().slice(0, 10)}/${Date.now()}`}
+            className="text-xs font-medium text-sky-300 hover:text-sky-200"
+          >
+            Start 30-minute session
+          </Link>
+          <Link to="/sources" className="text-xs text-white/40 hover:text-white">
+            Browse all
+          </Link>
+        </div>
       </div>
       <div className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-2">
         {briefing && <QueueCard item={briefing} label="Start with the news" icon={Newspaper} />}

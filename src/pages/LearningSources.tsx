@@ -17,6 +17,7 @@ import {
   type LearningItem,
   type LearningSourceKind,
 } from '../data/learning-sources';
+import { useReaderLearning } from '../hooks/useReaderLearning';
 
 const KINDS: Array<{ id: 'all' | LearningSourceKind; label: string }> = [
   { id: 'all', label: 'Everything' },
@@ -34,13 +35,22 @@ export default function LearningSources() {
   const [query, setQuery] = useState('');
   const [kind, setKind] = useState<'all' | LearningSourceKind>('all');
   const [sourceId, setSourceId] = useState('all');
+  const reader = useReaderLearning();
   const progress = loadLearningProgress();
-  const sourceOptions = LEARNING_SOURCES.sources.filter(
+  const allItems = useMemo(() => [...LEARNING_SOURCES.items, ...reader.items], [reader.items]);
+  const allSources = useMemo(
+    () =>
+      LEARNING_SOURCES.sources.map((source) =>
+        source.id === 'reader' && reader.source ? reader.source : source
+      ),
+    [reader.source]
+  );
+  const sourceOptions = allSources.filter(
     (source) => source.itemCount > 0 && source.kind !== 'native'
   );
   const items = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return LEARNING_SOURCES.items.filter((item) => {
+    return allItems.filter((item) => {
       if (kind !== 'all' && item.sourceKind !== kind) return false;
       if (sourceId !== 'all' && item.sourceId !== sourceId) return false;
       if (!normalized) return true;
@@ -48,7 +58,7 @@ export default function LearningSources() {
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(normalized));
     });
-  }, [query, kind, sourceId]);
+  }, [allItems, query, kind, sourceId]);
   const completed = Object.values(progress).filter((entry) => entry.status === 'completed').length;
   const sprintItem = items.find((item) => progress[item.id]?.status !== 'completed') || items[0];
 
@@ -68,7 +78,7 @@ export default function LearningSources() {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 text-center">
-          <Metric value={LEARNING_SOURCES.items.length} label="items" />
+          <Metric value={allItems.length} label="items" />
           <Metric value={sourceOptions.length + 1} label="sources" />
           <Metric value={completed} label="completed" />
         </div>

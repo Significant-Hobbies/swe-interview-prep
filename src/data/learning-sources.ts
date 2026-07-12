@@ -1,4 +1,5 @@
 import snapshotData from './learning-sources.json';
+import { isDue, reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
 
 export type LearningSourceKind = 'native' | 'briefing' | 'project' | 'research' | 'reader';
 
@@ -54,6 +55,8 @@ export interface LearningItemProgress {
   completedAt?: string;
   correctAnswers: number;
   attempts: number;
+  mastery?: MasteryRow;
+  lastRating?: MasteryRating;
 }
 
 export const LEARNING_SOURCES = snapshotData as LearningSourceSnapshot;
@@ -77,10 +80,71 @@ export function saveLearningProgress(progress: Record<string, LearningItemProgre
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
 }
 
+export function rateLearningItem(itemId: string, rating: MasteryRating): LearningItemProgress {
+  const progress = loadLearningProgress();
+  const existing = progress[itemId];
+  const now = new Date();
+  const next: LearningItemProgress = {
+    status: 'completed',
+    startedAt: existing?.startedAt || now.toISOString(),
+    completedAt: now.toISOString(),
+    correctAnswers: existing?.correctAnswers || 0,
+    attempts: (existing?.attempts || 0) + 1,
+    mastery: reviewConcept(existing?.mastery || null, rating, now),
+    lastRating: rating,
+  };
+  progress[itemId] = next;
+  saveLearningProgress(progress);
+  return next;
+}
+
+export function buildDailyLearningSession(
+  date: string,
+  dynamicItems: LearningItem[] = [],
+  sourceId?: string
+): { items: LearningItem[]; studyMinutes: number; reviewMinutes: number; totalMinutes: number } {
+  const progress = loadLearningProgress();
+  const allItems = [...LEARNING_SOURCES.items, ...dynamicItems];
+  const briefing = allItems.find((item) => item.sourceKind === 'briefing');
+  const durable = allItems.filter(
+    (item) => item.sourceKind !== 'briefing' && (!sourceId || item.sourceId === sourceId)
+  );
+  const due = durable.filter(
+    (item) => progress[item.id]?.mastery && isDue(progress[item.id].mastery ?? null)
+  );
+  const unseen = durable.filter((item) => !progress[item.id]);
+  const fallback = durable.filter((item) => !due.includes(item) && !unseen.includes(item));
+  const ordered = [...due, ...unseen, ...fallback];
+  const seed = [...date, ...(sourceId || 'balanced')].reduce(
+    (total, char) => total + char.charCodeAt(0),
+    0
+  );
+  const picked = [] as LearningItem[];
+  if (!sourceId && briefing) picked.push(briefing);
+  const maxStudy = sourceId ? 24 : 15;
+  let used = 0;
+  for (let offset = 0; offset < ordered.length; offset += 1) {
+    const item = ordered[(seed + offset) % ordered.length];
+    if (picked.includes(item)) continue;
+    if (used > 0 && used + item.estimatedMinutes > maxStudy) continue;
+    picked.push(item);
+    used += Math.min(item.estimatedMinutes, maxStudy);
+    if (used >= maxStudy || picked.length >= (sourceId ? 2 : 2)) break;
+  }
+  const studyMinutes = sourceId ? Math.min(24, used) : 10 + Math.min(15, used);
+  return { items: picked, studyMinutes, reviewMinutes: 30 - studyMinutes, totalMinutes: 30 };
+}
+
 export function nextDurableLearningItem(): LearningItem | undefined {
   const progress = loadLearningProgress();
   const durable = LEARNING_SOURCES.items.filter((item) => item.sourceKind !== 'briefing');
-  return durable.find((item) => progress[item.id]?.status !== 'completed') || durable[0];
+  return (
+    durable.find(
+      (item) => progress[item.id]?.mastery && isDue(progress[item.id].mastery ?? null)
+    ) ||
+    durable.find((item) => progress[item.id]?.status !== 'completed') ||
+    durable[0]
+  );
 }
 
 export function todayBriefing(): LearningItem | undefined {

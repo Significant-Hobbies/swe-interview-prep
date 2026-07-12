@@ -9,18 +9,25 @@ import {
   saveLearningProgress,
 } from '../data/learning-sources';
 import { recordSessionActivity } from '../lib/session';
+import { useReaderLearning } from '../hooks/useReaderLearning';
 
 export default function LearningSourceDetail() {
   const { id = '' } = useParams();
   const [searchParams] = useSearchParams();
   const sprint = searchParams.get('mode') === 'sprint';
-  const item = LEARNING_ITEM_BY_ID[id];
+  const reader = useReaderLearning();
+  const allItems = useMemo(() => [...LEARNING_SOURCES.items, ...reader.items], [reader.items]);
+  const item = LEARNING_ITEM_BY_ID[id] || reader.items.find((candidate) => candidate.id === id);
   const assessment = item?.assessments?.[0];
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const initialProgress = useMemo(() => loadLearningProgress()[id], [id]);
   const [completed, setCompleted] = useState(initialProgress?.status === 'completed');
 
+  if (!item && reader.loading)
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-20 text-white/50">Loading learning session…</main>
+    );
   if (!item)
     return (
       <main className="mx-auto max-w-3xl px-6 py-20">
@@ -31,9 +38,7 @@ export default function LearningSourceDetail() {
       </main>
     );
   const correct = assessment && selected === assessment.correctIndex;
-  const sameSource = LEARNING_SOURCES.items.filter(
-    (candidate) => candidate.sourceId === item.sourceId
-  );
+  const sameSource = allItems.filter((candidate) => candidate.sourceId === item.sourceId);
   const itemIndex = sameSource.findIndex((candidate) => candidate.id === item.id);
   const next = sameSource[itemIndex + 1];
 

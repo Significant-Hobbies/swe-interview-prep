@@ -29,6 +29,7 @@ const MockInterview = lazy(() => import('./pages/MockInterview'));
 const LearningDoc = lazy(() => import('./pages/LearningDoc'));
 const LearningSources = lazy(() => import('./pages/LearningSources'));
 const LearningSourceDetail = lazy(() => import('./pages/LearningSourceDetail'));
+const DailyLearningSession = lazy(() => import('./pages/DailyLearningSession'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
@@ -45,6 +46,26 @@ function OnboardingGate({ children }: { children: React.ReactNode }) {
     return <Navigate to="/today" replace />;
   }
   return <>{children}</>;
+}
+
+function GoogleRequired({ children }: { children: React.ReactNode }) {
+  const { user, signInWithGoogle } = useAuth();
+  if (user) return <>{children}</>;
+  return (
+    <main className="mx-auto max-w-xl px-6 py-24 text-center">
+      <h1 className="text-3xl font-bold text-white">Sign in to your learning sources</h1>
+      <p className="mt-4 text-sm leading-6 text-white/50">
+        Project tracks and Reader saves stay behind your Google session.
+      </p>
+      <button
+        type="button"
+        onClick={() => void signInWithGoogle()}
+        className="mt-8 h-11 rounded-md bg-white px-5 text-sm font-semibold text-black hover:bg-white/90"
+      >
+        Continue with Google
+      </button>
+    </main>
+  );
 }
 
 function AppRoutes() {
@@ -71,8 +92,38 @@ function AppRoutes() {
         <Route path="drills/:id" element={<BuildLab />} />
         <Route path="learning" element={<LearningDoc />} />
         <Route path="learning/:slug" element={<LearningDoc />} />
-        <Route path="sources" element={<LearningSources />} />
-        <Route path="sources/:id" element={<LearningSourceDetail />} />
+        <Route
+          path="sources"
+          element={
+            <GoogleRequired>
+              <LearningSources />
+            </GoogleRequired>
+          }
+        />
+        <Route
+          path="sources/:id"
+          element={
+            <GoogleRequired>
+              <LearningSourceDetail />
+            </GoogleRequired>
+          }
+        />
+        <Route
+          path="session/:date"
+          element={
+            <GoogleRequired>
+              <DailyLearningSession />
+            </GoogleRequired>
+          }
+        />
+        <Route
+          path="session/:date/:sessionId"
+          element={
+            <GoogleRequired>
+              <DailyLearningSession />
+            </GoogleRequired>
+          }
+        />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />

@@ -1,6 +1,7 @@
 import { createClient } from '@libsql/client/web';
 
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { buildReaderLearningSnapshot } from '../../shared/lib/reader-learning.mjs';
 import { withTiming } from '../_lib/timing.js';
 
 const AUTH_COOKIE_NAME = 'dsa_prep_auth';
@@ -264,6 +265,9 @@ async function currentUser(request, env) {
   });
   const row = result.rows[0];
   if (!row) return null;
+  if (env.OWNER_EMAIL && String(row.email).toLowerCase() !== env.OWNER_EMAIL.toLowerCase()) {
+    return null;
+  }
   return {
     id: row.id,
     googleId: row.google_id,
@@ -315,6 +319,9 @@ async function handleGoogle(request, env) {
   const payload = await tokenInfo.json();
   if (payload.aud !== env.GOOGLE_CLIENT_ID || !payload.sub || !payload.email) {
     return json({ error: 'Authentication failed' }, { status: 401 });
+  }
+  if (env.OWNER_EMAIL && payload.email.toLowerCase() !== env.OWNER_EMAIL.toLowerCase()) {
+    return json({ error: 'This learning workspace is private' }, { status: 403 });
   }
 
   const user = await findOrCreateUser(env, {
@@ -423,6 +430,23 @@ async function handleLearning(request, env) {
   return dispatchLearningAction({ request, client, user, json });
 }
 
+async function handleReaderLearning(request, env) {
+  if (request.method !== 'GET') return json({ error: 'Method not allowed' }, { status: 405 });
+  await initDatabase(env);
+  const user = await currentUser(request, env);
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
+  if (!env.READER_API_TOKEN) {
+    return json({ error: 'Reader learning source is not configured' }, { status: 503 });
+  }
+  const response = await fetch(
+    env.READER_EXPORT_URL || 'https://reader.sarthakagrawal927.workers.dev/api/data-export',
+    { headers: { Authorization: `Bearer ${env.READER_API_TOKEN}` } }
+  );
+  if (!response.ok) return json({ error: 'Reader export unavailable' }, { status: 502 });
+  const snapshot = buildReaderLearningSnapshot(await response.json());
+  return json(snapshot, { headers: { 'cache-control': 'private, no-store' } });
+}
+
 export const onRequest = withTiming(async ({ request, env, params }) => {
   const path = (params.path || []).join('/');
   try {
@@ -433,6 +457,7 @@ export const onRequest = withTiming(async ({ request, env, params }) => {
     if (path === 'auth/verify') return await handleVerify(request, env);
     if (path === 'progress') return await handleProgress(request, env);
     if (path === 'learning') return await handleLearning(request, env);
+    if (path === 'learning/reader') return await handleReaderLearning(request, env);
     return json({ error: 'API route not found' }, { status: 404 });
   } catch (error) {
     console.error('Pages API route failed', path, error);

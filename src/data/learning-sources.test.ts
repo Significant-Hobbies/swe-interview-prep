@@ -67,7 +67,7 @@ describe('unified learning sources', () => {
     expect(
       LEARNING_SOURCES.sources.find((source) => source.id === 'project:tinygpt')
     ).toMatchObject({
-      label: 'PostTrainLLM / tinygpt',
+      label: 'posttrainllm',
       syncStatus: 'fresh',
     });
     expect(LEARNING_SOURCES.items.some((item) => item.id.startsWith('project:tinygpt:'))).toBe(

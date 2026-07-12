@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-12T10:51:41.882Z",
+  "generatedAt": "2026-07-12T11:00:36.923Z",
   "sources": [
     {
       "id": "swe-native",
@@ -23,8 +23,8 @@
     {
       "id": "project:saas-maker",
       "kind": "project",
-      "label": "saas-maker",
-      "description": "Learning queue from saas-maker",
+      "label": "SaaS Maker",
+      "description": "Learning queue from SaaS Maker",
       "canonicalUrl": "https://github.com/sarthak-fleet/saas-maker/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
       "syncStatus": "fresh"
@@ -32,8 +32,8 @@
     {
       "id": "project:free-ai",
       "kind": "project",
-      "label": "free-ai",
-      "description": "Learning queue from free-ai",
+      "label": "Free AI",
+      "description": "Learning queue from Free AI",
       "canonicalUrl": "https://github.com/sarthak-fleet/free-ai/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
       "syncStatus": "fresh"
@@ -41,8 +41,8 @@
     {
       "id": "project:reel-pipeline",
       "kind": "project",
-      "label": "reel-pipeline",
-      "description": "Learning queue from reel-pipeline",
+      "label": "Reel Pipeline",
+      "description": "Learning queue from Reel Pipeline",
       "canonicalUrl": "https://github.com/sarthak-fleet/reel-pipeline/blob/main/docs/learning/new-things.md",
       "itemCount": 13,
       "syncStatus": "fresh"
@@ -50,8 +50,8 @@
     {
       "id": "project:drank",
       "kind": "project",
-      "label": "drank",
-      "description": "Learning queue from drank",
+      "label": "dRank",
+      "description": "Learning queue from dRank",
       "canonicalUrl": "https://github.com/sarthak-fleet/drank/blob/main/docs/learning/new-things.md",
       "itemCount": 7,
       "syncStatus": "fresh"
@@ -59,8 +59,8 @@
     {
       "id": "project:codevetter",
       "kind": "project",
-      "label": "codevetter",
-      "description": "Learning queue from codevetter",
+      "label": "CodeVetter",
+      "description": "Learning queue from CodeVetter",
       "canonicalUrl": "https://github.com/sarthak-fleet/codevetter/blob/main/docs/learning/new-things.md",
       "itemCount": 15,
       "syncStatus": "fresh"
@@ -68,8 +68,8 @@
     {
       "id": "project:starboard",
       "kind": "project",
-      "label": "starboard",
-      "description": "Learning queue from starboard",
+      "label": "Starboard",
+      "description": "Learning queue from Starboard",
       "canonicalUrl": "https://github.com/sarthak-fleet/starboard/blob/main/docs/learning/new-things.md",
       "itemCount": 10,
       "syncStatus": "fresh"
@@ -77,8 +77,8 @@
     {
       "id": "project:high-signal",
       "kind": "project",
-      "label": "high-signal",
-      "description": "Learning queue from high-signal",
+      "label": "High Signal",
+      "description": "Learning queue from High Signal",
       "canonicalUrl": "https://github.com/sarthak-fleet/high-signal/blob/main/docs/learning/new-things.md",
       "itemCount": 14,
       "syncStatus": "fresh"
@@ -86,8 +86,8 @@
     {
       "id": "project:aliveville",
       "kind": "project",
-      "label": "aliveville",
-      "description": "Learning queue from aliveville",
+      "label": "Aliveville",
+      "description": "Learning queue from Aliveville",
       "canonicalUrl": "https://github.com/sarthak-fleet/alive-ville/blob/main/docs/learning/new-things.md",
       "itemCount": 25,
       "syncStatus": "fresh"
@@ -95,8 +95,8 @@
     {
       "id": "project:pace",
       "kind": "project",
-      "label": "pace",
-      "description": "Learning queue from pace",
+      "label": "Pace",
+      "description": "Learning queue from Pace",
       "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/learning/new-things.md",
       "itemCount": 11,
       "syncStatus": "fresh"
@@ -104,8 +104,8 @@
     {
       "id": "project:tinygpt",
       "kind": "project",
-      "label": "PostTrainLLM / tinygpt",
-      "description": "Learning queue from PostTrainLLM / tinygpt",
+      "label": "posttrainllm",
+      "description": "Learning queue from posttrainllm",
       "canonicalUrl": "https://github.com/sarthak-fleet/tinygpt/blob/main/docs/learning/new-things.md",
       "itemCount": 19,
       "syncStatus": "fresh"
@@ -113,8 +113,8 @@
     {
       "id": "project:significanthobbies",
       "kind": "project",
-      "label": "significanthobbies",
-      "description": "Learning queue from significanthobbies",
+      "label": "Significant Hobbies",
+      "description": "Learning queue from Significant Hobbies",
       "canonicalUrl": "https://github.com/sarthak-fleet/significanthobbies/blob/main/docs/learning/new-things.md",
       "itemCount": 6,
       "syncStatus": "fresh"
@@ -122,8 +122,8 @@
     {
       "id": "project:reader",
       "kind": "project",
-      "label": "reader",
-      "description": "Learning queue from reader",
+      "label": "Reader",
+      "description": "Learning queue from Reader",
       "canonicalUrl": "https://github.com/sarthak-fleet/reader/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
       "syncStatus": "fresh"
@@ -131,8 +131,8 @@
     {
       "id": "project:anime-list",
       "kind": "project",
-      "label": "anime-list",
-      "description": "Learning queue from anime-list",
+      "label": "MAL Explorer",
+      "description": "Learning queue from MAL Explorer",
       "canonicalUrl": "https://github.com/sarthak-fleet/anime-list/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
       "syncStatus": "fresh"
@@ -140,8 +140,8 @@
     {
       "id": "project:swe-interview-prep",
       "kind": "project",
-      "label": "swe-interview-prep",
-      "description": "Learning queue from swe-interview-prep",
+      "label": "SWE Interview Prep",
+      "description": "Learning queue from SWE Interview Prep",
       "canonicalUrl": "https://github.com/sarthak-fleet/swe-interview-prep/blob/main/docs/learning/new-things.md",
       "itemCount": 12,
       "syncStatus": "fresh"
@@ -149,8 +149,8 @@
     {
       "id": "project:email-manager",
       "kind": "project",
-      "label": "email-manager",
-      "description": "Learning queue from email-manager",
+      "label": "Email Manager",
+      "description": "Learning queue from Email Manager",
       "canonicalUrl": "https://github.com/sarthak-fleet/email-manager/blob/main/docs/learning/new-things.md",
       "itemCount": 8,
       "syncStatus": "fresh"
@@ -158,8 +158,8 @@
     {
       "id": "project:looptv",
       "kind": "project",
-      "label": "looptv",
-      "description": "Learning queue from looptv",
+      "label": "LoopTV",
+      "description": "Learning queue from LoopTV",
       "canonicalUrl": "https://github.com/sarthak-fleet/looptv/blob/main/docs/learning/new-things.md",
       "itemCount": 7,
       "syncStatus": "fresh"
@@ -167,8 +167,8 @@
     {
       "id": "project:rolepatch",
       "kind": "project",
-      "label": "rolepatch",
-      "description": "Learning queue from rolepatch",
+      "label": "Rolepatch",
+      "description": "Learning queue from Rolepatch",
       "canonicalUrl": "https://github.com/sarthak-fleet/rolepatch/blob/main/docs/learning/new-things.md",
       "itemCount": 6,
       "syncStatus": "fresh"
@@ -176,8 +176,8 @@
     {
       "id": "project:karte",
       "kind": "project",
-      "label": "karte",
-      "description": "Learning queue from karte",
+      "label": "Karte",
+      "description": "Learning queue from Karte",
       "canonicalUrl": "https://github.com/sarthak-fleet/karte/blob/main/docs/learning/new-things.md",
       "itemCount": 8,
       "syncStatus": "fresh"
@@ -185,8 +185,8 @@
     {
       "id": "project:research-papers",
       "kind": "project",
-      "label": "research-papers",
-      "description": "Learning queue from research-papers",
+      "label": "Research Papers",
+      "description": "Learning queue from Research Papers",
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md",
       "itemCount": 9,
       "syncStatus": "fresh"
@@ -285,7 +285,7 @@
       "id": "reader",
       "kind": "reader",
       "label": "Reader",
-      "description": "Saved blogs and articles. Add a Reader API token to enable nightly sync.",
+      "description": "Private saved blogs and articles loaded after Google authentication.",
       "canonicalUrl": "https://reader.sarthakagrawal927.workers.dev",
       "itemCount": 0,
       "syncStatus": "pending"

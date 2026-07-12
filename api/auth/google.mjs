@@ -6,6 +6,7 @@ import { buildAuthCookie } from './cookies.mjs';
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const JWT_SECRET = process.env.JWT_SECRET;
+const OWNER_EMAIL = process.env.OWNER_EMAIL?.toLowerCase();
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is required');
 }
@@ -48,6 +49,9 @@ export default async function handler(req, res) {
 
     if (!payload?.sub || !payload.email) {
       return res.status(400).json({ error: 'Invalid token payload' });
+    }
+    if (OWNER_EMAIL && payload.email.toLowerCase() !== OWNER_EMAIL) {
+      return res.status(403).json({ error: 'This learning workspace is private' });
     }
 
     const user = await findOrCreateUser({
