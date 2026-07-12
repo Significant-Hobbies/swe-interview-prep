@@ -71,6 +71,8 @@ export function useLibrary() {
       (r) =>
         r.name.toLowerCase().includes(q) ||
         r.description.toLowerCase().includes(q) ||
+        r.bestFor.toLowerCase().includes(q) ||
+        r.whyIncluded.toLowerCase().includes(q) ||
         r.tags.some((t) => t.toLowerCase().includes(q))
     );
   }, []);

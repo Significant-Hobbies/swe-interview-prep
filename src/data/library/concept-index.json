@@ -123,6 +123,15 @@
       "snippet": "### What is the difference between slice and splice Here are the key differences between `slice()` and `splice()` methods in JavaScript arrays: | `slice()`…"
     }
   ],
+  "api-design": [
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-twitter-readme-md",
+      "title": "Twitter",
+      "snippet": "# Design the Twitter timeline and search *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-of-system…"
+    }
+  ],
   "auth-systems": [
     {
       "repoId": "devops-exercises",
@@ -233,18 +242,18 @@
       "snippet": "…bjects are there?</summary><br><b> * Pod * Service * ReplicationController * ReplicaSet * DaemonSet * Namespace * ConfigMap ... </b></details> <details> <summary>What fields are mandatory with any Kubernetes object?</summary><br><b> metadata…"
     },
     {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-scaling-aws-readme-md",
+      "title": "Scaling AWS",
+      "snippet": "…://github.com/donnemartin/system-design-primer#master-slave-replication) mode across multiple availability zones to improve redundancy * Separate out the **Web Servers** from the [**Application Servers**](https://github.com/donnemartin/system-design-primer#app…"
+    },
+    {
       "repoId": "devops-exercises",
       "repoName": "DevOps Exercises",
       "sectionId": "readme-md",
       "title": "Overview",
       "snippet": "…ed through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or software failure…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "…healing where corrupted data replaced by doing peer-to-peer replication</summary><br><b> True </b></details> <details> <summary>True or False? Aurora storage is striped across 20 volumes</summary><br><b> False. 100 volumes. </b></details> <details> <summar…"
     }
   ],
   "object-modeling": [
@@ -370,7 +379,7 @@
       "repoName": "DevOps Exercises",
       "sectionId": "devops-kubernetes",
       "title": "Kubernetes",
-      "snippet": "# Kubernetes <!-- {% raw %} --> What's your goal? * I would like to prepare for CKA certification * See [CKA](CKA.md) page * I would like to learn Kubernetes by practicing both theoritcal and pr…"
+      "snippet": "# Kubernetes <!-- {% raw %} --> What's your goal? * I would like to prepare for CKA certification * See [CKA](https://github.com/bregman-arie/devops-exercises/blob/HEAD/topics/kubernetes/CKA.md)…"
     }
   ],
   "command-chain": [
@@ -412,14 +421,21 @@
       "sectionId": "readme-md",
       "title": "Overview",
       "snippet": "…summary><br><b> </b></details> <details> <summary>Explain \"Consistent Hashing\"</summary><br><b> </b></details> <details> <summary>How would you update each of the services in the following drawing without having app (foo.com) downtime?<br> <img src=\"https://…"
+    },
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-query-cache-readme-md",
+      "title": "Query Cache",
+      "snippet": "…y using `machine = hash(query)`. We'll likely want to use [consistent hashing](https://github.com/donnemartin/system-design-primer#under-development). ## Additional talking points > Additional topics to dive into, depending on the problem scope and time rem…"
     }
   ],
   "consensus": [
     {
       "repoId": "react-questions",
       "repoName": "React Interview Questions",
-      "sectionId": "q-257",
-      "title": "257. How do you use immer library for state updates?",
+      "sectionId": "q-255",
+      "title": "255. How do you use immer library for state updates?",
       "snippet": "### How do you use immer library for state updates? Immer library enforces the immutability of state based on **copy-on-write** mechanism. It uses JavaScript proxy to keep track of updates to immuta…"
     },
     {
@@ -432,9 +448,9 @@
     {
       "repoId": "grokking-oop",
       "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+      "sectionId": "example-codes-airline-management-system-java-readme-md",
+      "title": "Java",
+      "snippet": "# ✈️ Airline Management System (Java) A **Java implementation** of the *Grokking the Object Oriented Design Interview* problem: **Airline Management System**, fully object-oriented and modularized.…"
     }
   ],
   "messaging-realtime": [
@@ -464,8 +480,8 @@
     {
       "repoId": "react-questions",
       "repoName": "React Interview Questions",
-      "sectionId": "q-74",
-      "title": "74. What are the common folder structures for React?",
+      "sectionId": "q-73",
+      "title": "73. What are the common folder structures for React?",
       "snippet": "### What are the common folder structures for React? There are two common practices for React project file structure. 1. **Grouping by features or routes:** One common way to structu…"
     },
     {
@@ -492,11 +508,18 @@
       "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
     },
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
-      "title": "Levenshtein Distance",
-      "snippet": "# Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number…"
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-pastebin-readme-md",
+      "title": "Pastebin",
+      "snippet": "# Design Pastebin.com (or Bit.ly) *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-of-system-design…"
+    },
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-sales-rank-readme-md",
+      "title": "Sales Rank",
+      "snippet": "# Design Amazon's sales rank by category feature *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-o…"
     }
   ],
   "array-hashing": [
@@ -510,9 +533,9 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-hash-table",
+      "sectionId": "src-data-structures-hash-table-readme-md",
       "title": "Hash Table",
-      "snippet": ""
+      "snippet": "# Hash Table _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/hash-table/README.zh-CN.md), [_Русский_](https://github.com/trek…"
     },
     {
       "repoId": "devops-exercises",
@@ -551,8 +574,8 @@
     {
       "repoId": "react-questions",
       "repoName": "React Interview Questions",
-      "sectionId": "q-175",
-      "title": "175. What is the benefit of component stack trace from error boundary?",
+      "sectionId": "q-174",
+      "title": "174. What is the benefit of component stack trace from error boundary?",
       "snippet": "### What is the benefit of component stack trace from error boundary? Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept. Fo…"
     },
     {
@@ -567,16 +590,16 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-search-binary-search",
+      "sectionId": "src-algorithms-search-binary-search-readme-md",
       "title": "Binary Search",
-      "snippet": ""
+      "snippet": "# Binary Search _Read this in other languages:_ [Português brasileiro](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/algorithms/search/binary-search/README.pt-BR.md). [Español](https:…"
     },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-tree-binary-search-tree",
+      "sectionId": "src-data-structures-tree-binary-search-tree-readme-md",
       "title": "Binary Search Tree",
-      "snippet": ""
+      "snippet": "# Binary Search Tree _Read this in other languages:_ [_Português_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/tree/binary-search-tree/README.pt-BR.md) In computer…"
     },
     {
       "repoId": "javascript-algorithms",
@@ -590,16 +613,16 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-doubly-linked-list",
+      "sectionId": "src-data-structures-doubly-linked-list-readme-md",
       "title": "Doubly Linked List",
-      "snippet": ""
+      "snippet": "# Doubly Linked List _Read this in other languages:_ [_Русский_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/doubly-linked-list/README.ru-RU.md), [_简体中文_](https://github.co…"
     },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-linked-list",
+      "sectionId": "src-data-structures-linked-list-readme-md",
       "title": "Linked List",
-      "snippet": ""
+      "snippet": "# Linked List _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/linked-list/README.zh-CN.md), [_Русский_](https://github.com/trekh…"
     },
     {
       "repoId": "low-level-design",
@@ -613,25 +636,39 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-prim-readme-md",
-      "title": "Prim",
-      "snippet": "…spanning forest, which is a union of the minimum spanning trees for its connected components. ![Minimum Spanning Tree](https://upload.wikimedia.org/wikipedia/commons/d/d2/Minimum_spanning_tree.svg) A planar graph and its minimum spanning tree. Each edge is…"
+      "sectionId": "src-algorithms-graph-kruskal-readme-md",
+      "title": "Kruskal",
+      "snippet": "…an edge of the least possible weight that connects any two trees in the forest. It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a connected weighted graph adding increasing cost arcs at each step. This means it finds a subs…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-data-structures-tree-binary-search-tree-readme-md",
+      "title": "Binary Search Tree",
+      "snippet": "…tree/README.pt-BR.md) In computer science, **binary search trees** (BST), sometimes called ordered or sorted binary trees, are a particular type of container: data structures that store \"items\" (such as numbers, names etc.) in memory. They allow fast lookup,…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-experimental-topics-md",
+      "title": "Topics",
+      "snippet": "…: topics title: Topics --- ## Arrays ## Strings - Prefix trees (Tries) - Suffix trees - Suffix arrays - KMP - Rabin-Karp - Boyer-Moore ## Sorting - Bubble sort - Insertion sort - Merge sort - Quick sort - Selection sort - Bucket sort - Radix sort - Counti…"
     }
   ],
   "tries": [
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-data-structures-trie-readme-md",
+      "title": "Trie",
+      "snippet": "# Trie _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/trie/README.zh-CN.md), [_Русский_](https://github.com/trekhleb/javascript…"
+    },
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
       "sectionId": "q-201",
       "title": "201. What is the main difference between Object.values and Object.entries method",
       "snippet": "…t is the main difference between Object.values and Object.entries method The `Object.values()` method's behavior is similar to `Object.entries()` method but it returns an array of values instead [key,value] pairs. ```javascript const object = {…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-trie",
-      "title": "Trie",
-      "snippet": ""
     },
     {
       "repoId": "javascript-questions",
@@ -652,16 +689,16 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-sorting-heap-sort",
+      "sectionId": "src-algorithms-sorting-heap-sort-readme-md",
       "title": "Heap Sort",
-      "snippet": ""
+      "snippet": "# Heap Sort _Read this in other languages:_ [_Português_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/algorithms/sorting/heap-sort/README.pt-BR.md) Heapsort is a comparison-base…"
     },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-heap",
+      "sectionId": "src-data-structures-heap-readme-md",
       "title": "Heap",
-      "snippet": ""
+      "snippet": "# Heap (data-structure) _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/heap/README.zh-CN.md), [_Русский_](https://github.com…"
     }
   ],
   "backtracking": [
@@ -714,25 +751,25 @@
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-dijkstra",
+      "sectionId": "src-algorithms-graph-dijkstra-readme-md",
       "title": "Dijkstra",
-      "snippet": ""
+      "snippet": "…sts in many variants; Dijkstra's original variant found the shortest path between two nodes, but a more common variant fixes a single node as the \"source\" node and finds shortest paths from the source to all other nodes in the graph, producing a shortest-path…"
     },
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "readme-ja-jp-md",
-      "title": "Readme.ja Jp",
-      "snippet": "# JavaScriptアルゴリズムとデータ構造 [![CI](https://github.com/trekhleb/javascript-algorithms/workflows/CI/badge.svg)](https://github.com/trekhleb/javascript-algorithms/actions?query=workflow%3ACI+branch%3Amast…"
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "solutions-system-design-social-graph-readme-md",
+      "title": "Social Graph",
+      "snippet": "…ing use cases * **User** searches for someone and sees the shortest path to the searched person * **Service** has high availability ### Constraints and assumptions #### State assumptions * Traffic is not evenly distributed * Some searches are more popu…"
     }
   ],
   "union-find": [
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-disjoint-set",
+      "sectionId": "src-data-structures-disjoint-set-readme-md",
       "title": "Disjoint Set",
-      "snippet": ""
+      "snippet": "…- The minimalistic (ad hoc) version of a DisjointSet (or a UnionFind) data structure that doesn't have external dependencies and that is easy to copy-paste and use during the coding interview if allowed by the interviewer (since many data structures in JS are…"
     }
   ],
   "dp-1d": [

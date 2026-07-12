@@ -44,6 +44,7 @@ function getCalloutStyle(rawText: string): string {
 }
 
 export default function MarkdownViewer({ content, sourceBaseUrl }: MarkdownViewerProps) {
+  const normalizedContent = content.replace(/<br\s*\/?\s*>/gi, '  \n');
   return (
     <div
       className="prose prose-invert prose-base max-w-none md:max-w-[72ch] md:mx-auto
@@ -126,7 +127,7 @@ export default function MarkdownViewer({ content, sourceBaseUrl }: MarkdownViewe
           ),
         }}
       >
-        {content}
+        {normalizedContent}
       </ReactMarkdown>
     </div>
   );

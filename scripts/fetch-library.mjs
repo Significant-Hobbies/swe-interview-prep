@@ -27,7 +27,7 @@ const NOISE_FILE_RE =
   /^(contributing|code[_-]?of[_-]?conduct|license|licence|changelog|security|funding|backers|sponsors|governance|maintainers|codeowners|support|pull_request_template|issue_template|acknowledgements|authors)(\.md|\.rst|\.txt)?$/i;
 
 // Translation suffixes on README/overview files — keep only the canonical one.
-const TRANSLATED_README_RE = /^readme[-_][a-z]{2}([-_][a-z]{2})?\.(md|rst)$/i;
+const TRANSLATED_README_RE = /^readme(?:[._-][a-z]{2,3})(?:[._-][a-z]{2,4})?\.(md|rst)$/i;
 
 // Directories to skip entirely.
 const NOISE_DIR_RE =
@@ -58,6 +58,26 @@ function getAllFiles(dir, base = dir) {
       } catch {
         // Skip files that can't be read
       }
+    }
+  }
+  return results;
+}
+
+function getRepositoryPaths(dir, base = dir) {
+  const results = [];
+  for (const entry of readdirSync(dir)) {
+    const fullPath = join(dir, entry);
+    let stat;
+    try {
+      stat = statSync(fullPath);
+    } catch {
+      continue;
+    }
+    if (stat.isDirectory()) {
+      if (NOISE_DIR_RE.test(entry)) continue;
+      results.push(...getRepositoryPaths(fullPath, base));
+    } else {
+      results.push(relative(base, fullPath).split(/[\\/]/).join('/'));
     }
   }
   return results;
@@ -186,6 +206,12 @@ function resolveRelativeUrl(url, filePath, rawBase) {
   return `${rawBase}/${joined}`;
 }
 
+function rawToGithubBlobBase(rawBase) {
+  return rawBase
+    .replace('https://raw.githubusercontent.com/', 'https://github.com/')
+    .replace('/HEAD', '/blob/HEAD');
+}
+
 function rewriteRelativeUrls(content, filePath, rawBase) {
   if (!content) return content;
   let out = content;
@@ -198,9 +224,15 @@ function rewriteRelativeUrls(content, filePath, rawBase) {
     /(\[[^\]]+\]\()([^)\s]+)(\s+"[^"]*")?(\))/g,
     (full, open, url, title, close) => {
       if (/^(!|https?:|data:|mailto:|#)/i.test(url)) return full;
-      // Only rewrite if it's an image or a non-.md asset reference
+      // Media needs a raw URL; local documentation should open at its canonical
+      // GitHub source instead of being interpreted as an SPA route.
       if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(url)) {
         return `${open}${resolveRelativeUrl(url, filePath, rawBase)}${title || ''}${close}`;
+      }
+      if (/\.(md|rst|txt)(?:#.*)?$/i.test(url)) {
+        const [path, fragment] = url.split('#', 2);
+        const resolved = resolveRelativeUrl(path, filePath, rawToGithubBlobBase(rawBase));
+        return `${open}${resolved}${fragment ? `#${fragment}` : ''}${title || ''}${close}`;
       }
       return full;
     }
@@ -468,6 +500,50 @@ function ensureOverview(sections, repoMeta) {
   return [{ id: 'synthetic-overview', title: 'Overview', content: intro }, ...sections];
 }
 
+function buildPathCatalog(paths, repo, rawBase) {
+  const catalog = repo.pathCatalog;
+  if (!catalog) return null;
+  const root = catalog.root ? `${catalog.root.replace(/\/$/, '')}/` : '';
+  const extensions = new Set(catalog.extensions.map((extension) => extension.toLowerCase()));
+  const selected = paths.filter((path) => {
+    if (root && !path.startsWith(root)) return false;
+    const extension = path.split('.').pop()?.toLowerCase();
+    return extension && extensions.has(extension);
+  });
+  if (selected.length === 0) return null;
+
+  const groups = new Map();
+  for (const path of selected) {
+    const relativePath = root ? path.slice(root.length) : path;
+    const group = relativePath.includes('/') ? relativePath.split('/')[0] : 'Examples';
+    const entries = groups.get(group) || [];
+    entries.push({ path, relativePath });
+    groups.set(group, entries);
+  }
+
+  const sourceBase = rawToGithubBlobBase(rawBase);
+  const children = [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([group, entries]) => ({
+      id: `source-${slugify(group)}`,
+      title: humanizeTitle(group),
+      content: `# ${humanizeTitle(group)}\n\n${entries
+        .sort((a, b) => a.relativePath.localeCompare(b.relativePath))
+        .map(
+          ({ path, relativePath }) =>
+            `- [${humanizeTitle(posix.basename(relativePath))}](${sourceBase}/${path})`
+        )
+        .join('\n')}`,
+    }));
+
+  return {
+    id: 'source-catalog',
+    title: catalog.label,
+    content: `# ${catalog.label}\n\n${selected.length} source files organized into ${children.length} learning groups.`,
+    children,
+  };
+}
+
 // Classify repo content format for UI badging.
 function classifyFormat(parsed, files) {
   const exerciseCount = parsed.exercises?.length || 0;
@@ -626,6 +702,7 @@ async function main() {
         : repo.source.replace(/\/$/, '');
 
       const files = getAllFiles(repoDir);
+      const repositoryPaths = getRepositoryPaths(repoDir);
       console.log(`  Found ${files.length} content files`);
 
       let parsed;
@@ -642,8 +719,9 @@ async function main() {
         const collapsed = collapseSingletons(sections);
         const ordered = orderSections(collapsed);
         const withOverview = ensureOverview(ordered, repo);
+        const pathCatalog = buildPathCatalog(repositoryPaths, repo, rawBase);
         parsed = {
-          sections: withOverview,
+          sections: pathCatalog ? [...withOverview, pathCatalog] : withOverview,
           exercises: [],
           totalItems: countMeaningfulLeaves(withOverview),
         };
@@ -694,6 +772,8 @@ async function main() {
         source: repo.source,
         sourceBaseUrl: rawBase,
         description: repo.description,
+        bestFor: repo.bestFor,
+        whyIncluded: repo.whyIncluded,
         tags: repo.tags,
         icon: repo.icon,
         format,

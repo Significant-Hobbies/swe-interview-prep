@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-21T08:47:51.016Z",
+  "generatedAt": "2026-07-12T12:29:41.162Z",
   "reviewQuestions": [
     {
       "id": "rq-lib-devops-exercises-certificates-aws-cloud-practitioner-md",
@@ -185,6 +185,20 @@
       }
     },
     {
+      "id": "rq-lib-grokking-oop-example-codes-airline-management-system-java-readme-md",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Grokking OOP Design: Java — explain the core idea in your own words.",
+      "answer": "✈️ Airline Management System (Java) A Java implementation of the Grokking the Object Oriented Design Interview problem: Airline Management System , fully object oriented and modularized.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "grokking-oop",
+        "sectionId": "example-codes-airline-management-system-java-readme-md",
+        "title": "Java"
+      }
+    },
+    {
       "id": "rq-lib-grokking-oop-object-diagram-documentation-md",
       "conceptId": "state-management",
       "type": "explain",
@@ -196,20 +210,6 @@
         "repoId": "grokking-oop",
         "sectionId": "object-diagram-documentation-md",
         "title": "Object Diagram Documentation"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-readme-ja-jp-md",
-      "conceptId": "shortest-path",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Readme.ja Jp — explain the core idea in your own words.",
-      "answer": "JavaScriptアルゴリズムとデータ構造 ![CI](https://github.com/trekhleb/javascript algorithms/actions?",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "readme-ja-jp-md",
-        "title": "Readme.ja Jp"
       }
     },
     {
@@ -283,17 +283,31 @@
       }
     },
     {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-prim-readme-md",
-      "conceptId": "trees",
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-dijkstra-readme-md",
+      "conceptId": "shortest-path",
       "type": "explain",
       "difficulty": "core",
-      "question": "JavaScript Algorithms: Prim — explain the core idea in your own words.",
-      "answer": "Prim's Algorithm In computer science, Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.",
+      "question": "JavaScript Algorithms: Dijkstra — explain the core idea in your own words.",
+      "answer": "Dijkstra's Algorithm Read this in other languages: 한국어 , 日本語 , 简体中文 , 繁體中文 , Українська , Español , Français , Deutsch , עברית Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks.",
       "source": "library",
       "libraryRef": {
         "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-graph-prim-readme-md",
-        "title": "Prim"
+        "sectionId": "src-algorithms-graph-dijkstra-readme-md",
+        "title": "Dijkstra"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-kruskal-readme-md",
+      "conceptId": "trees",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Kruskal — explain the core idea in your own words.",
+      "answer": "Kruskal's Algorithm Read this in other languages: 한국어 Kruskal's algorithm is a minimum spanning tree algorithm which finds an edge of the least possible weight that connects any two trees in the forest.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-graph-kruskal-readme-md",
+        "title": "Kruskal"
       }
     },
     {
@@ -308,6 +322,20 @@
         "repoId": "javascript-algorithms",
         "sectionId": "src-algorithms-math-integer-partition-readme-md",
         "title": "Integer Partition"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-search-binary-search-readme-md",
+      "conceptId": "binary-search",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Binary Search — explain the core idea in your own words.",
+      "answer": "Binary Search Read this in other languages: Português brasileiro. Español. In computer science, binary search, also known as half interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-search-binary-search-readme-md",
+        "title": "Binary Search"
       }
     },
     {
@@ -353,8 +381,22 @@
       }
     },
     {
+      "id": "rq-lib-javascript-algorithms-src-algorithms-sorting-heap-sort-readme-md",
+      "conceptId": "heap",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Heap Sort — explain the core idea in your own words.",
+      "answer": "Heap Sort Read this in other languages: Português Heapsort is a comparison based sorting algorithm.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-algorithms-sorting-heap-sort-readme-md",
+        "title": "Heap Sort"
+      }
+    },
+    {
       "id": "rq-lib-javascript-algorithms-src-algorithms-string-levenshtein-distance-readme-md",
-      "conceptId": "streaming-media",
+      "conceptId": "dp-2d",
       "type": "explain",
       "difficulty": "core",
       "question": "JavaScript Algorithms: Levenshtein Distance — explain the core idea in your own words.",
@@ -392,6 +434,118 @@
         "repoId": "javascript-algorithms",
         "sectionId": "src-algorithms-uncategorized-n-queens-readme-md",
         "title": "N Queens"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-deque-readme-md",
+      "conceptId": "sliding-window",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Deque — explain the core idea in your own words.",
+      "answer": "Deque (Double Ended Queue) A deque (pronounced \"deck\", short for double ended queue ) is a linear data structure that generalizes both a stack and a queue.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-deque-readme-md",
+        "title": "Deque"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-disjoint-set-readme-md",
+      "conceptId": "union-find",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Disjoint Set — explain the core idea in your own words.",
+      "answer": "Disjoint Set Read this in other languages: Русский , Português , Українська Disjoint set data structure (also called a union–find data structure or merge–find set) is a data structure that tracks a set of elements partitioned into a number of disjoint (non overlapping) subsets.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-disjoint-set-readme-md",
+        "title": "Disjoint Set"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-doubly-linked-list-readme-md",
+      "conceptId": "linked-list",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Doubly Linked List — explain the core idea in your own words.",
+      "answer": "Doubly Linked List Read this in other languages: Русский , 简体中文 , 日本語 , Português , 한국어 , Español , Українська In computer science, a doubly linked list is a linked data structure that consists of a set of sequentially linked records called nodes.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-doubly-linked-list-readme-md",
+        "title": "Doubly Linked List"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-hash-table-readme-md",
+      "conceptId": "array-hashing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Hash Table — explain the core idea in your own words.",
+      "answer": "Hash Table Read this in other languages: 简体中文 , Русский , 日本語 , Français , Português , 한국어 , Українська In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values .",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-hash-table-readme-md",
+        "title": "Hash Table"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-heap-readme-md",
+      "conceptId": "heap",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Heap — explain the core idea in your own words.",
+      "answer": "Heap (data structure) Read this in other languages: 简体中文 , Русский , 日本語 , Français , Português , Türkçe , 한국어 , Українська In computer science, a heap is a specialized tree based data structure that satisfies the heap property described below.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-heap-readme-md",
+        "title": "Heap"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-linked-list-readme-md",
+      "conceptId": "linked-list",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Linked List — explain the core idea in your own words.",
+      "answer": "Linked List Read this in other languages: 简体中文 , Русский , 日本語 , Português , 한국어 , Español , Türkçe , Українська In computer science, a linked list is a linear collection of data elements, in which linear order is not given by their physical placement in memory.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-linked-list-readme-md",
+        "title": "Linked List"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-tree-binary-search-tree-readme-md",
+      "conceptId": "binary-search",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Binary Search Tree — explain the core idea in your own words.",
+      "answer": "Binary Search Tree Read this in other languages: Português In computer science, binary search trees (BST), sometimes called ordered or sorted binary trees, are a particular type of container: data structures that store \"items\" (such as numbers, names etc.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-tree-binary-search-tree-readme-md",
+        "title": "Binary Search Tree"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-trie-readme-md",
+      "conceptId": "tries",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Trie — explain the core idea in your own words.",
+      "answer": "Trie Read this in other languages: 简体中文 , Русский , Português , Українська , 한국어 In computer science, a trie , also called digital tree and sometimes radix tree or prefix tree (as they can be searched by prefixes), is a kind of search tree—an ordered tree data structure that is used to store a dynamic set or associative array where the keys are usually strings.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-trie-readme-md",
+        "title": "Trie"
       }
     },
     {
@@ -941,45 +1095,143 @@
       }
     },
     {
-      "id": "rq-lib-react-questions-q-175",
+      "id": "rq-lib-react-questions-q-174",
       "conceptId": "stack",
       "type": "explain",
       "difficulty": "intro",
-      "question": "React Interview Questions: 175. What is the benefit of component stack trace from error boundary? — explain the core idea in your own words.",
+      "question": "React Interview Questions: 174. What is the benefit of component stack trace from error boundary? — explain the core idea in your own words.",
       "answer": "What is the benefit of component stack trace from error boundary? Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept.",
       "source": "library",
       "libraryRef": {
         "repoId": "react-questions",
-        "sectionId": "q-175",
-        "title": "175. What is the benefit of component stack trace from error boundary?"
+        "sectionId": "q-174",
+        "title": "174. What is the benefit of component stack trace from error boundary?"
       }
     },
     {
-      "id": "rq-lib-react-questions-q-257",
+      "id": "rq-lib-react-questions-q-255",
       "conceptId": "consensus",
       "type": "explain",
       "difficulty": "core",
-      "question": "React Interview Questions: 257. How do you use immer library for state updates? — explain the core idea in your own words.",
+      "question": "React Interview Questions: 255. How do you use immer library for state updates? — explain the core idea in your own words.",
       "answer": "How do you use immer library for state updates? Immer library enforces the immutability of state based on copy on write mechanism.",
       "source": "library",
       "libraryRef": {
         "repoId": "react-questions",
-        "sectionId": "q-257",
-        "title": "257. How do you use immer library for state updates?"
+        "sectionId": "q-255",
+        "title": "255. How do you use immer library for state updates?"
       }
     },
     {
-      "id": "rq-lib-react-questions-q-74",
+      "id": "rq-lib-react-questions-q-73",
       "conceptId": "social-media",
       "type": "explain",
       "difficulty": "core",
-      "question": "React Interview Questions: 74. What are the common folder structures for React? — explain the core idea in your own words.",
+      "question": "React Interview Questions: 73. What are the common folder structures for React? — explain the core idea in your own words.",
       "answer": "What are the common folder structures for React? There are two common practices for React project file structure.",
       "source": "library",
       "libraryRef": {
         "repoId": "react-questions",
-        "sectionId": "q-74",
-        "title": "74. What are the common folder structures for React?"
+        "sectionId": "q-73",
+        "title": "73. What are the common folder structures for React?"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-pastebin-readme-md",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Pastebin — explain the core idea in your own words.",
+      "answer": "Design Pastebin.com (or Bit.ly) Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-pastebin-readme-md",
+        "title": "Pastebin"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-query-cache-readme-md",
+      "conceptId": "consistent-hashing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Query Cache — explain the core idea in your own words.",
+      "answer": "Design a key value cache to save the results of the most recent web server queries Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-query-cache-readme-md",
+        "title": "Query Cache"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-sales-rank-readme-md",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Sales Rank — explain the core idea in your own words.",
+      "answer": "Design Amazon's sales rank by category feature Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-sales-rank-readme-md",
+        "title": "Sales Rank"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-scaling-aws-readme-md",
+      "conceptId": "replication",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Scaling AWS — explain the core idea in your own words.",
+      "answer": "Design a system that scales to millions of users on AWS Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-scaling-aws-readme-md",
+        "title": "Scaling AWS"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-social-graph-readme-md",
+      "conceptId": "shortest-path",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Social Graph — explain the core idea in your own words.",
+      "answer": "Design the data structures for a social network Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-social-graph-readme-md",
+        "title": "Social Graph"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-primer-solutions-system-design-twitter-readme-md",
+      "conceptId": "api-design",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design Primer: Twitter — explain the core idea in your own words.",
+      "answer": "Design the Twitter timeline and search Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-primer",
+        "sectionId": "solutions-system-design-twitter-readme-md",
+        "title": "Twitter"
+      }
+    },
+    {
+      "id": "rq-lib-tech-interview-handbook-apps-website-experimental-topics-md",
+      "conceptId": "trees",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Tech Interview Handbook: Topics — explain the core idea in your own words.",
+      "answer": "id: topics title: Topics Arrays Strings Prefix trees (Tries) Suffix trees Suffix arrays KMP Rabin Karp Boyer Moore Sorting Bubble sort Insertion sort Merge sort Quick sort Selection sort Bucket sort Radix sort Counting sort Linked Lists Stacks Queues Hash tables Collision resolution algorithms Trees BFS DFS (inorder, postorder, preorder) Height Binary Search Trees Insert node Delete a node Find element in BST Find min, max element in BST Get successor element in tree Check if",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "tech-interview-handbook",
+        "sectionId": "apps-website-experimental-topics-md",
+        "title": "Topics"
       }
     }
   ]

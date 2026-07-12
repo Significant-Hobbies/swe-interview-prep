@@ -44,10 +44,10 @@ function SectionNode({
           if (hasChildren) setExpanded(!expanded);
           if (section.content) onSelect(section);
         }}
-        className={`flex items-center gap-1.5 w-full text-left px-2 py-1.5 rounded-lg text-sm transition-colors ${
+        className={`flex w-full items-center gap-1.5 rounded-md px-2 py-2 text-left text-sm transition-colors ${
           isActive
-            ? 'bg-emerald-500/15 text-emerald-400 font-medium'
-            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+            ? 'bg-sky-500/15 font-medium text-sky-300'
+            : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >

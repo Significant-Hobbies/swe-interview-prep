@@ -49,6 +49,8 @@ export interface RepoManifestEntry {
   source: string;
   sourceBaseUrl?: string;
   description: string;
+  bestFor: string;
+  whyIncluded: string;
   tags: string[];
   icon: string;
   format?: RepoFormat;
