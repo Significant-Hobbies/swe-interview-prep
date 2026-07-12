@@ -138,6 +138,87 @@ async function researchSources() {
   };
 }
 
+async function readerSources() {
+  const exportUrl =
+    process.env.READER_EXPORT_URL || 'https://reader.sarthakagrawal927.workers.dev/api/data-export';
+  const token = process.env.READER_API_TOKEN;
+  if (!token) {
+    return {
+      source: {
+        id: 'reader',
+        kind: 'reader',
+        label: 'Reader',
+        description: 'Saved blogs and articles. Add a Reader API token to enable nightly sync.',
+        canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
+        itemCount: 0,
+        syncStatus: 'pending',
+      },
+      items: [],
+    };
+  }
+
+  const response = await fetch(exportUrl, { headers: { Authorization: `Bearer ${token}` } });
+  if (!response.ok) throw new Error(`Reader export failed with ${response.status}`);
+  const payload = await response.json();
+  const articles = Array.isArray(payload?.tables?.articles) ? payload.tables.articles : [];
+  const items = articles.flatMap((article) => {
+    if (!article?.id || !article?.title || !article?.url) return [];
+    const parsedTags =
+      typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : article.tags;
+    const parsedSummary =
+      typeof article.summary === 'string' ? JSON.parse(article.summary || '{}') : article.summary;
+    const parsedKeyPoints =
+      typeof article.keyPoints === 'string'
+        ? JSON.parse(article.keyPoints || '[]')
+        : article.keyPoints;
+    const summary =
+      parsedSummary?.short ||
+      parsedSummary?.medium ||
+      `${article.siteName || 'Saved article'}${article.byline ? ` by ${article.byline}` : ''}`;
+    const answer = parsedKeyPoints?.[0] || parsedSummary?.short || '';
+    return [
+      {
+        id: `reader:${article.id}`,
+        sourceId: 'reader',
+        sourceKind: 'reader',
+        title: article.title,
+        summary,
+        canonicalUrl: article.url,
+        tracks: Array.isArray(parsedTags) ? parsedTags : [],
+        format: article.type || 'article',
+        estimatedMinutes: article.readingTimeMinutes || 15,
+        publishedAt: article.updatedAt ? new Date(article.updatedAt).toISOString() : undefined,
+        fingerprint: hash(
+          JSON.stringify({
+            id: article.id,
+            url: article.url,
+            title: article.title,
+            summary,
+            parsedTags,
+            parsedKeyPoints,
+            updatedAt: article.updatedAt,
+          })
+        ),
+        ...(answer
+          ? { assessmentSeed: { answer, explanation: parsedSummary?.short || answer } }
+          : {}),
+      },
+    ];
+  });
+  return {
+    source: {
+      id: 'reader',
+      kind: 'reader',
+      label: 'Reader',
+      description: 'Saved blogs and articles.',
+      canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
+      itemCount: items.length,
+      syncStatus: 'fresh',
+    },
+    items,
+  };
+}
+
 function nativeSource() {
   const concepts = JSON.parse(readFileSync(join(APP_ROOT, 'src', 'data', 'concepts.json'), 'utf8'));
   return {
@@ -209,7 +290,9 @@ function addDerivedAssessments(items) {
           question:
             item.sourceKind === 'research'
               ? `What is the recommended focus when studying “${item.title}”?`
-              : `Which statement best describes “${item.title}” in ${item.project}?`,
+              : item.sourceKind === 'reader'
+                ? `Which takeaway belongs to the saved article “${item.title}”?`
+                : `Which statement best describes “${item.title}” in ${item.project}?`,
           options: rotated,
           correctIndex: rotated.indexOf(assessmentSeed.answer),
           explanation: assessmentSeed.explanation || assessmentSeed.answer,
@@ -223,26 +306,13 @@ function addDerivedAssessments(items) {
 
 const projects = projectSources();
 const research = await researchSources();
+const reader = await readerSources();
 const brief = dailyBrief();
 const snapshot = {
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),
-  sources: [
-    nativeSource(),
-    brief.source,
-    ...projects.sources,
-    ...research.sources,
-    {
-      id: 'reader',
-      kind: 'reader',
-      label: 'Reader',
-      description: 'Saved blogs and articles. Live feed adapter is pending.',
-      canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
-      itemCount: 0,
-      syncStatus: 'pending',
-    },
-  ],
-  items: addDerivedAssessments([brief.item, ...projects.items, ...research.items]),
+  sources: [nativeSource(), brief.source, ...projects.sources, ...research.sources, reader.source],
+  items: addDerivedAssessments([brief.item, ...projects.items, ...research.items, ...reader.items]),
 };
 
 if (snapshot.items.some((item) => item.id.includes('knowledge-base')))

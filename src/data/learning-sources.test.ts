@@ -34,7 +34,7 @@ describe('unified learning sources', () => {
     }
   });
 
-  it('keeps Reader visible while its live feed is pending', () => {
+  it('keeps Reader visible even when the local API token is not configured', () => {
     const reader = LEARNING_SOURCES.sources.find((source) => source.id === 'reader');
     expect(reader).toMatchObject({ kind: 'reader', syncStatus: 'pending', itemCount: 0 });
   });

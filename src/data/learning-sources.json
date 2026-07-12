@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-12T10:36:44.034Z",
+  "generatedAt": "2026-07-12T10:41:43.775Z",
   "sources": [
     {
       "id": "swe-native",
@@ -231,7 +231,7 @@
       "id": "reader",
       "kind": "reader",
       "label": "Reader",
-      "description": "Saved blogs and articles. Live feed adapter is pending.",
+      "description": "Saved blogs and articles. Add a Reader API token to enable nightly sync.",
       "canonicalUrl": "https://reader.sarthakagrawal927.workers.dev",
       "itemCount": 0,
       "syncStatus": "pending"

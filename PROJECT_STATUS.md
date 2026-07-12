@@ -122,7 +122,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 ## Todo / Planned / Deferred / Blocked
 
 ### Planned
-1. Add Reader's versioned saved-item export to the unified source registry, then enable its nightly adapter.
+1. Configure the machine-local Reader API token to activate its shipped nightly saved-item adapter.
 2. Persist external learning progress and assessment feedback through the authenticated learning API; local storage is the first usable slice.
 3. ~~Docs alignment.~~ **Paused** — Cloudflare Pages architecture is canonical; stale historical references remain non-operational.
 2. ~~Auth/API verification pass.~~ **Paused** after current local typecheck and security baseline.
