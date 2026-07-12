@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildDailyLearningSession, LEARNING_SOURCES } from './learning-sources';
+import {
+  buildDailyLearningSession,
+  LEARNING_SOURCES,
+  saveLearningProgress,
+} from './learning-sources';
 
 const memory = new Map<string, string>();
 Object.defineProperty(globalThis, 'localStorage', {
@@ -49,13 +53,35 @@ describe('unified learning sources', () => {
   });
 
   it('builds repeatable 30-minute sessions for a chosen source', () => {
+    memory.clear();
     const first = buildDailyLearningSession('2026-07-12:1', [], 'project:posttrainllm');
+    const now = new Date().toISOString();
+    saveLearningProgress(
+      Object.fromEntries(
+        first.items.map((item) => [
+          item.id,
+          {
+            status: 'completed' as const,
+            startedAt: now,
+            completedAt: now,
+            attempts: 1,
+            correctAnswers: 1,
+          },
+        ])
+      )
+    );
     const next = buildDailyLearningSession('2026-07-12:2', [], 'project:posttrainllm');
 
     expect(first.totalMinutes).toBe(30);
     expect(first.items.length).toBeGreaterThan(0);
     expect(first.items.every((item) => item.sourceId === 'project:posttrainllm')).toBe(true);
     expect(next.items.map((item) => item.id)).not.toEqual(first.items.map((item) => item.id));
+    expect(first.items[0].hierarchy).toMatchObject({
+      track: 'posttrainllm',
+      module: '1. Language model foundations',
+      topicOrder: 1,
+    });
+    memory.clear();
   });
 
   it('accounts for every active Fleet project and labels PostTrainLLM', () => {

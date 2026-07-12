@@ -64,6 +64,47 @@ const PROJECT_LABELS = {
   karte: 'Karte',
   'research-papers': 'Research Papers',
 };
+const POSTTRAIN_MODULES = [
+  {
+    title: '1. Language model foundations',
+    topics: [
+      'Byte-Pair Encoding (BPE) tokenization',
+      'Next-token language modeling & sampling',
+      'Transformer / scaled-dot-product attention',
+      'Backpropagation & gradient descent',
+      'AdamW optimizer',
+    ],
+  },
+  {
+    title: '2. Fast browser training',
+    topics: [
+      'WebAssembly (WASM) + Emscripten',
+      'WASM SIMD + multi-threading',
+      'WebGPU + WGSL',
+      'Tiled / register-blocked matrix multiplication (GPU)',
+      'fp16 / mixed-precision',
+      'Gradient checkpointing (activation recomputation)',
+      'Online softmax',
+      'Flash Attention 2 (FA2)',
+    ],
+  },
+  {
+    title: '3. Adaptation and evaluation',
+    topics: [
+      'LoRA (Low-Rank Adaptation)',
+      'Continual learning / online adapter refresh',
+      'Memorization testing (style-adaptation eval)',
+    ],
+  },
+  {
+    title: '4. Inference and interpretability',
+    topics: [
+      'Speculative decoding (draft + verify)',
+      'Sparse Autoencoder (SAE) / mechanistic interpretability',
+      'Logit lens',
+    ],
+  },
+];
 
 function hash(value) {
   return createHash('sha256').update(value).digest('hex').slice(0, 16);
@@ -88,13 +129,28 @@ function productId(project) {
   return project === 'tinygpt' ? 'posttrainllm' : project;
 }
 
+function hierarchyFor(project, title, fallbackOrder) {
+  const track = PROJECT_LABELS[project] || productId(project);
+  if (project !== 'tinygpt') {
+    return { track, module: 'Project learning', moduleOrder: 1, topicOrder: fallbackOrder + 1 };
+  }
+  const moduleIndex = POSTTRAIN_MODULES.findIndex((module) => module.topics.includes(title));
+  const module = POSTTRAIN_MODULES[moduleIndex];
+  return {
+    track,
+    module: module?.title || '5. Further topics',
+    moduleOrder: moduleIndex >= 0 ? moduleIndex + 1 : POSTTRAIN_MODULES.length + 1,
+    topicOrder: module ? module.topics.indexOf(title) + 1 : fallbackOrder + 1,
+  };
+}
+
 function projectItems(project, body, repositoryPath) {
   const publicId = productId(project);
   const label = PROJECT_LABELS[project] || publicId;
   return body
     .split(/^##\s+/m)
     .slice(1)
-    .flatMap((chunk) => {
+    .flatMap((chunk, topicIndex) => {
       const title = chunk.split('\n')[0].trim();
       const what = lineValue(chunk, 'What');
       if (!title || !what) return [];
@@ -114,6 +170,8 @@ function projectItems(project, body, repositoryPath) {
             `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
           repositoryPath,
           tracks: [publicId],
+          hierarchy: hierarchyFor(project, title, topicIndex),
+          learningNotes: gotcha ? [gotcha] : [],
           format: 'project-note',
           estimatedMinutes: 12,
           fingerprint: hash(`${title}\n${what}\n${gotcha}\n${source}`),

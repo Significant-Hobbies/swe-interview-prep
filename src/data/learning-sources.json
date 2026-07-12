@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-12T11:38:03.541Z",
+  "generatedAt": "2026-07-12T11:40:10.318Z",
   "sources": [
     {
       "id": "swe-native",
@@ -315,6 +315,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/containers/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`Sandbox` is declared as both a DO class *and* a containers entry — the DO is the lifecycle handle; the container is the actual process. Two concepts, one class name. (`workers/droid/wrangler.jsonc` lines 19, 28)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ad67def061c66a31",
@@ -346,6 +355,15 @@
       "canonicalUrl": "https://github.com/cloudflare/sandbox",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`containerTimeouts.portReadyTimeoutMS` is set to 240 s — containers take a lot longer to boot than plain DOs; callers must budget for this. (`workers/droid/src/executor.ts:285`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8bc67e105c877ee9",
@@ -377,6 +395,15 @@
       "canonicalUrl": "https://api-docs.deepseek.com/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "Both model identifiers are env-var overridable but the defaults are hard-coded at `workers/droid/src/executor.ts:49-50`; the wrangler.jsonc vars are the prod override path."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3c8155b66a202120",
@@ -408,6 +435,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/saas-maker/blob/main/docs/learning/new-things.md#agents-md-injection-as-prompting",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "Only the first 220 lines of `AGENTS.md` are injected (`sed -n \"1,220p\"`), so anything below that line is invisible to the model. (`workers/droid/src/executor.ts:527`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "61dd8f404a73ab8e",
@@ -439,6 +475,13 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/api/sql-storage/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b670ebf16caeadc2",
@@ -470,6 +513,15 @@
       "canonicalUrl": "https://www.better-auth.com/docs",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "The API worker has no better-auth dependency — it resolves sessions by raw SQL against the shared D1 `session` table, so the two services stay decoupled. (`workers/api/src/middleware/auth.ts:28-48`; no `better-auth` in `workers/api/package.json`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "323691bbccf8f9e1",
@@ -501,6 +553,13 @@
       "canonicalUrl": "https://hono.dev/docs/getting-started/cloudflare-workers",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f340834e314bd50b",
@@ -532,6 +591,13 @@
       "canonicalUrl": "https://developers.cloudflare.com/r2/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d387603055a8f75f",
@@ -563,6 +629,13 @@
       "canonicalUrl": "https://developers.cloudflare.com/d1/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "2cdcadca26c34003",
@@ -594,6 +667,13 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/saas-maker/blob/main/docs/learning/new-things.md#symphony-orchestration-model",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b3286b6e8eec98f4",
@@ -625,6 +705,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "Transport is WebSockets only — `ctx.acceptWebSocket` + `ctx.getWebSockets()` per `workers/droid/src/run-room.ts:118-137`; no SSE path exists."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d8d1695c6499950b",
@@ -656,6 +745,13 @@
       "canonicalUrl": "https://developers.cloudflare.com/browser-rendering/",
       "repositoryPath": "saas-maker/docs/learning/new-things.md",
       "tracks": ["saas-maker"],
+      "hierarchy": {
+        "track": "SaaS Maker",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8011d7eb5a8efd5f",
@@ -687,6 +783,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "DO in-memory state requires explicit cold-start hydration — first call does a full `ctx.storage.list()` bulk load (`health-do.ts:238`); per-key reads on every request are 5-10x more storage ops."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ba2be310a42b1e24",
@@ -718,6 +823,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers-ai/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "Workers AI stream yields `AsyncIterable<unknown>` whose chunks may be raw `Uint8Array`, `ArrayBuffer`, plain strings, `{response}` objects, or `{delta:{content}}` — every other provider passes raw JSON chunks through untouched (`index.ts:1501`), but Workers AI requires a multi-branch translation layer (`index.ts:1469-1494`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1afdc396aa013632",
@@ -749,6 +863,15 @@
       "canonicalUrl": "https://hono.dev/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`@hono/zod-openapi` route registration order matters — registering an OpenAPI route after `app.get()` for the same path silently wins; the `app.doc()` and `app.openapi()` calls must precede or match the same router instance or the spec will diverge from the actual handlers (`index.ts` monolith registers both)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "cd098ba3e7775374",
@@ -780,6 +903,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/free-ai/blob/main/docs/learning/new-things.md#multi-llm-router-scoring-formula",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "Eval weight range `[0.8, 1.2]` is intentional — no single eval score can fully block a healthy model or completely override health/cooldown state (`evaluation-weights.ts:21`). Formula verified at `select-model.ts:114-120`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c2a76e97493dd810",
@@ -811,6 +943,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "The DO `/try-debit` endpoint returns HTTP 200 with `allowed: false` (not 429) — the `503` surfaces only after the caller invokes `buildBudgetExhaustedResponse()` (`neuron-budget.ts:176`). Token-to-Neuron estimates carry a 20% buffer (`neuron-budget.ts:26`, `NEURON_BUFFER = 1.2`); the 500-unit headroom absorbs estimation error, not traffic spikes."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "4222cb17b5c90851",
@@ -842,6 +983,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/kv/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "Dashboard and stats routes still call the DO directly (`client.ts:50-61`, `client.ts:63-74`) — KV holds a debounced health snapshot for external consumers, not a live read path for the gateway itself. KV is also used separately for provider quota caching (`quota.ts:37,45`). Alarm handler at `health-do.ts:301-304`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5b657d2494c32b60",
@@ -873,6 +1023,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/free-ai/blob/main/docs/learning/new-things.md#capability-based-pre-filter-before-scoring",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "GitHub Models advertises vision for `openai/gpt-5`, `o3`, `o4-mini` but the proxy silently rejects `image_url` at runtime — capability metadata is not always trustworthy; an explicit denylist `GITHUB_MODELS_IMAGE_INCOMPATIBLE` overrides it (`select-model.ts:21-40`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "adfc3d9e0790f493",
@@ -904,6 +1063,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "The bucket state is cached in `this.bucketCache` in-memory and also written to `ctx.storage` on every `/consume` call (`ip-rate-limit-do.ts:55-63`); the alarm clears both (`ip-rate-limit-do.ts:87-91`). If the DO cold-starts mid-request the in-memory cache is empty, so the first consume re-reads from storage — correct but adds one extra storage read per cold start."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "679ddd0184ce0fcf",
@@ -935,6 +1103,15 @@
       "canonicalUrl": "https://openrouter.ai/docs/api-reference/limits",
       "repositoryPath": "free-ai/docs/learning/new-things.md",
       "tracks": ["free-ai"],
+      "hierarchy": {
+        "track": "Free AI",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "`OPENROUTER_FREE_DAILY_LIMIT = 50` (`quota.ts:4`) is a hardcoded estimate used as metadata only — the gateway detects total credit exhaustion but cannot query per-model free headroom from the API."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0b1829b36a7243ca",
@@ -966,6 +1143,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/platform/limits/",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "The Worker itself (`src/worker/index.js`) only does synchronous R2 ops and returns immediately; the blocking poll loop (`src/pipeline.js:195-204`) runs in the Node server, not the Worker. If that loop were ever ported into a Worker handler without Durable Objects, the 30 s default would silently kill it mid-poll."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d7136906c59f6b83",
@@ -997,6 +1183,15 @@
       "canonicalUrl": "https://git-scm.com/book/en/v2/Git-Tools-Submodules",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`docs/engine-pins.md:8-9` confirms `openshorts` (`fe87af6`) and `reel-maker` (`92b6268`) are on `heads/main` (floating ref), while MoneyPrinterTurbo is on tagged `v1.2.8` — any `git submodule update --remote` silently advances the two floating engines without a canary."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6e2bcce2af104829",
@@ -1028,6 +1223,15 @@
       "canonicalUrl": "https://ai.google.dev/api/generate-content",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`editor.py:279-370` runs a best-effort sanitizer (`_sanitize_filter_string`) and a zoompan size enforcer before calling FFmpeg, but the filter string still goes straight to `-vf` via `subprocess.run`. A hallucinated unknown filter name (e.g. `colorfix`) crashes FFmpeg with a non-zero exit and raises `CalledProcessError` — no silent fallback to the original clip."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "62c71b70e0e6e710",
@@ -1059,6 +1263,13 @@
       "canonicalUrl": "https://fal.ai/docs",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f6497edf88783d8c",
@@ -1090,6 +1301,13 @@
       "canonicalUrl": "https://elevenlabs.io/docs/api-reference/dubbing",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b283cbd2584186dc",
@@ -1121,6 +1339,15 @@
       "canonicalUrl": "https://github.com/harry0703/MoneyPrinterTurbo",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "The engine is the \"cheap path\" default precisely because the canary can run with locally-generated fixtures — no API quota needed for first verification."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "238c16411fa0c5fe",
@@ -1152,6 +1379,13 @@
       "canonicalUrl": "https://remotion.dev/docs",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "657ba1aabd8eb06b",
@@ -1183,6 +1417,13 @@
       "canonicalUrl": "https://zulko.github.io/moviepy/",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "beda4c80dc2a700c",
@@ -1214,6 +1455,13 @@
       "canonicalUrl": "https://ffmpeg.org/ffmpeg-filters.html",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "228e0efb5e8b206e",
@@ -1245,6 +1493,15 @@
       "canonicalUrl": "https://github.com/JonasLoos/openshorts",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "Adapter deliberately does not invoke UGC/fal/ElevenLabs/autopost — it writes a guarded job spec only to avoid accidental paid-service calls."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "601378602f8bac06",
@@ -1276,6 +1533,13 @@
       "canonicalUrl": "https://developers.cloudflare.com/r2/",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "bde4015c64ee7423",
@@ -1307,6 +1571,13 @@
       "canonicalUrl": "https://ai.google.dev/api/generate-content",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ebaea0b0d6c66c59",
@@ -1338,6 +1609,15 @@
       "canonicalUrl": "https://ai.google.dev/gemini-api/docs/files",
       "repositoryPath": "reel-pipeline/docs/learning/new-things.md",
       "tracks": ["reel-pipeline"],
+      "hierarchy": {
+        "track": "Reel Pipeline",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 13
+      },
+      "learningNotes": [
+        "`editor.py:30-38` polls in a blocking `while True` with a 2 s sleep — there is no timeout guard, so a video stuck in `PROCESSING` state hangs the entire render worker indefinitely."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "eeb0282164bc8f62",
@@ -1369,6 +1649,15 @@
       "canonicalUrl": "https://ahrefs.com/api/",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`functions/api/dr.ts:38` — the CF Pages Function proxies the request specifically to set `User-Agent`, since the browser `fetch()` can't set it on cross-origin requests"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "06ef8a7db7ee43f0",
@@ -1400,6 +1689,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`lib/useTrackedDomains.ts:401-435` — triggers on mount, `visibilitychange`, `window.focus`, and a 3-hour interval — entirely client-side, no server timer"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "73ab31a4f4d32a60",
@@ -1431,6 +1729,15 @@
       "canonicalUrl": "https://ahrefs.com/api/",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`lib/useTrackedDomains.ts:16` — `REFRESH_DELAY_MS = 750` between each domain refresh to stay within Ahrefs free tier limits"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3eb36f4a37eda292",
@@ -1462,6 +1769,15 @@
       "canonicalUrl": "https://nextjs.org/docs/app/building-your-application/deploying/static-exports",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`next.config.ts:4` — `output: 'export'` generates a static site; API routes don't work, so they're replaced by CF Pages Functions in `functions/api/`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c978aa3b555689b5",
@@ -1493,6 +1809,15 @@
       "canonicalUrl": "https://docs.github.com/en/rest/repos/contents",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`app/page.tsx:47-51` — fetches `https://raw.githubusercontent.com/sarthak-fleet/drank/main/data/global-dr.json` for the live leaderboard"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "abd568032c9209d0",
@@ -1524,6 +1849,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/functions/",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`functions/api/dr.ts:1-6` — comment explains it \"replaces the former Next.js /api/dr route\" to bypass CORS and set required headers"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "36b873829e42031f",
@@ -1555,6 +1889,15 @@
       "canonicalUrl": "https://nextjs.org/docs/app/building-your-application/data-fetching",
       "repositoryPath": "drank/docs/learning/new-things.md",
       "tracks": ["drank"],
+      "hierarchy": {
+        "track": "dRank",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`app/page.tsx:103-163` — starts with static import from `@/data/global-sites.json`, then fetches fresh data from GitHub raw in `useEffect`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "060b0c445f28203c",
@@ -1586,6 +1929,15 @@
       "canonicalUrl": "https://v2.tauri.app/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "GUI-launched Tauri apps on macOS don't inherit shell `$PATH` — `claude` and `gemini` binaries are found via a custom `resolve_cli_path()` that walks known install locations. (`apps/desktop/src-tauri/src/commands/review.rs:20`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ebc1dde8fd8ca3cd",
@@ -1617,6 +1969,15 @@
       "canonicalUrl": "https://v2.tauri.app/develop/calling-rust/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "All `invoke()` calls must be wrapped in `isTauriAvailable()` so the React app still renders in a plain browser during `npm run dev`. (`apps/desktop/src/lib/tauri-ipc.ts:40`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "de4006e6db6ae843",
@@ -1648,6 +2009,15 @@
       "canonicalUrl": "https://code.claude.com/docs/en/overview",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "CLI output is prose, not guaranteed JSON — `run_agent_json` uses `extract_json_from_output` to find the JSON block; if none is found the review errors out. (`apps/desktop/src-tauri/src/commands/review.rs:721–740`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5709ae9068003d8d",
@@ -1679,6 +2049,15 @@
       "canonicalUrl": "https://ast-grep.github.io/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`sg` is optional — `resolve_sg_path()` returns `None` if the binary isn't installed and the evidence step silently skips; patterns are defined as inline `AstGrepRule` structs, not YAML rule files. (`apps/desktop/src-tauri/src/commands/evidence_pattern.rs:134–154`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3e228a84d5a66531",
@@ -1710,6 +2089,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/codevetter/blob/main/docs/learning/new-things.md#agent-talks-protocol-inter-session-handoff",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "The `talk` key is stripped from `output_structured` before storage to avoid double-persistence; staleness threshold is 1 hour (`STALENESS_SECS`). (`apps/desktop/src-tauri/src/talk.rs:5–10`, `db/schema.rs:589`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d93f6f3d068886eb",
@@ -1741,6 +2129,15 @@
       "canonicalUrl": "https://doc.rust-lang.org/book/ch10-02-traits.html",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`SessionSourceAdapter` is implemented by `ClaudeCodeAdapter`, `CodexAdapter`, and `CursorAdapter` — each parses a different agent's JSONL/JSON session format. (`apps/desktop/src-tauri/src/commands/session_adapters.rs:43–542`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8c43ffdee66903ff",
@@ -1772,6 +2169,15 @@
       "canonicalUrl": "https://docs.rs/rusqlite/latest/rusqlite/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`bundled` feature adds ~2 MB and noticeably slows cold Rust builds; avoids macOS system-SQLite version mismatch errors. (`apps/desktop/src-tauri/Cargo.toml:15`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5316f7603820f541",
@@ -1803,6 +2209,15 @@
       "canonicalUrl": "https://platform.openai.com/docs/api-reference/chat",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "Provider presets all use a `/v1` base URL — `PROVIDER_PRESETS` maps provider names to `baseUrl` + `model`; the Anthropic preset points at `api.anthropic.com/v1`, which accepts the OpenAI shape. (`apps/desktop/src/lib/review-service.ts:112–128`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "542dff0d2f9d10f7",
@@ -1834,6 +2249,15 @@
       "canonicalUrl": "https://v2.tauri.app/plugin/updater/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "`tauri-action` repackages the `.app` tarball after signing, making the bundled `.sig` stale — the release workflow re-signs the final tarball and uploads `.sig` + `latest.json` explicitly. (`.github/workflows/release.yml:78–103`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "368a7a84aaaa6f22",
@@ -1865,6 +2289,15 @@
       "canonicalUrl": "https://posthog.com/docs/libraries/js",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "The hardcoded `POSTHOG_KEY` and `POSTHOG_HOST` sit in a client-side TS file — the key is public by design (PostHog's browser SDK model), but the project slug is visible in source. (`apps/desktop/src/lib/analytics.ts:25–61`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "7a6f952f6ff460ae",
@@ -1896,6 +2329,15 @@
       "canonicalUrl": "https://dora.dev/guides/dora-metrics/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "Intel derives DORA locally from git tags and revert/hotfix-shaped commits, so the UI labels the numbers as git-derived release health rather than production incident truth. (`apps/desktop/src/pages/Intel.tsx`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d2ae92ab92e343b8",
@@ -1927,6 +2369,15 @@
       "canonicalUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10529246/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "Repo Unpacked's outcome trend only uses stored local reviews, QA runs, procedure gates, and findings; it is a bounded recent-vs-prior signal, not a learned predictor yet. (`apps/desktop/src-tauri/src/commands/unpack.rs`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1acba3eeac1de0df",
@@ -1958,6 +2409,15 @@
       "canonicalUrl": "https://docs.npmjs.com/cli/using-npm/workspaces",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 13
+      },
+      "learningNotes": [
+        "A stale `pnpm-lock.yaml` coexisted with `package-lock.json`; Cloudflare Pages picked up the pnpm lockfile and failed because it was out of sync. (`pnpm-lock.yaml` still exists at repo root alongside `package-lock.json`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6996790a2f9e7342",
@@ -1989,6 +2449,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 14
+      },
+      "learningNotes": [
+        "`root_dir` was set to `apps/desktop` instead of `apps/landing-page` — CF Pages silently built the wrong target; Vite outputs to `out/` not `dist/`, so the destination dir config must match. (`apps/landing-page-astro/wrangler.toml`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ef55d6861c099c09",
@@ -2020,6 +2489,13 @@
       "canonicalUrl": "https://doc.rust-lang.org/book/",
       "repositoryPath": "codevetter/docs/learning/new-things.md",
       "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 15
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a7f44a312ca02019",
@@ -2051,6 +2527,15 @@
       "canonicalUrl": "https://docs.turso.tech/features/ai-and-embeddings",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "Index is dimension-pinned at creation time — inserting a vector of the wrong length throws at insert, not query time; `ensureEmbeddingDimension()` in `migrate.ts` detects drift and drops+recreates the table. Schema pin: `src/db/schema.sql:94` — `embedding F32_BLOB(768)`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ccd83534a081e824",
@@ -2082,6 +2567,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers-ai/models/bge-base-en-v1.5/",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`EMBEDDING_MODEL` and `EMBEDDING_DIM = 768` pinned together in `src/lib/embeddings.ts:13-14`; all three files in the dimension contract must change atomically when switching models (see `agents.md` \"Embedding dimension contract\")."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "732c71671c2c008f",
@@ -2113,6 +2607,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers-ai/configuration/bindings/",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`normalizeEmbeddingDimensions()` (`src/lib/embeddings.ts:166-179`) handles the case where the HTTP gateway returns a vector whose length is a whole multiple of `EMBEDDING_DIM`; it averages adjacent groups of `factor` values to reduce back to 768d. The 1536d→768d case (`factor=2`) is the historically observed corruption window 2026-04-11 → 2026-05-23. The binding path bypasses this entirely."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "65d3cf5b34389776",
@@ -2144,6 +2647,15 @@
       "canonicalUrl": "https://docs.turso.tech/features/ai-and-embeddings#vector-search",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "The index has no predicate pushdown — `vector_top_k('idx_repo_embeddings_vec', vector(?), ?)` at `src/app/api/stars/route.ts:89` returns 500 global candidates across all users; the `WHERE ur.user_id = ?` filtering happens in the outer join at the application layer (line 80 comment confirms this). `VEC_TOP_K=500` is hardcoded at line 45 of the same file."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1055c54f94c271d6",
@@ -2175,6 +2687,15 @@
       "canonicalUrl": "https://opennext.js.org/cloudflare",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "OpenNext 1.19 externalises `@libsql/client` regardless of `transpilePackages` — all three mitigations are required together: `/web` subpath import, `transpilePackages` entry, and `--webpack` build flag (not Turbopack). The incremental cache override is in `open-next.config.ts:12`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "48835169eddcd532",
@@ -2206,6 +2727,15 @@
       "canonicalUrl": "https://authjs.dev/guides/edge-compatibility",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`AUTH_TRUST_HOST=true` via `wrangler.jsonc` vars was unreliable — must be hardcoded as `trustHost: true` in `NextAuth({...})` (confirmed at `src/lib/auth.ts:7`); both `AUTH_URL` and `NEXTAUTH_URL` must be set in wrangler vars."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d39a3da376e65477",
@@ -2237,6 +2767,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/framework-guides/nextjs/",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "Attempted in commit `77951f5` (2026-04-25, \"ci: migrate deploy from CF Workers to CF Pages\"); reverted 3 days later in `0170b8b` (2026-04-28, \"ci: rewrite workflow for Workers deploy (was broken Pages pattern)\"). The `@opennextjs/cloudflare` static-assets incremental cache override used here (`open-next.config.ts:12`) targets the Workers binding API and does not translate cleanly to the Pages build pipeline."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "97c11c0774a73c22",
@@ -2268,6 +2807,15 @@
       "canonicalUrl": "https://dl.acm.org/doi/10.1145/1571941.1572114",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "`rrfFuse()` in `src/lib/search.ts:9` implements this exactly; `k=60` is the paper's canonical default. The two input lists are lexical BM25 ids and semantic ANN ids assembled in `src/app/api/stars/route.ts:40-44`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "21e85e585b141a69",
@@ -2299,6 +2847,13 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/starboard/blob/main/docs/learning/new-things.md#similar-repos-reranking-with-metadata-boosts",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "eade5193e85a2de0",
@@ -2330,6 +2885,13 @@
       "canonicalUrl": "https://orm.drizzle.team/",
       "repositoryPath": "starboard/docs/learning/new-things.md",
       "tracks": ["starboard"],
+      "hierarchy": {
+        "track": "Starboard",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "cf958cf019df575a",
@@ -2361,6 +2923,15 @@
       "canonicalUrl": "https://github.com/urchade/GLiNER",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "lazy-loaded inside `_load_gliner()` wrapped with `@lru_cache` — `extract/entities.py:60-66`; if the `gliner` package is absent the function returns `None` and the whole pipeline silently degrades to gazetteer-only matching rather than crashing"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a45c4f44fba380d2",
@@ -2392,6 +2963,15 @@
       "canonicalUrl": "https://github.com/jackboyla/GLiREL",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`extract/relations.py:8-15` — `extract_relations()` always returns `[]`; GLiREL is not even listed in `pyproject.toml` (confirmed absent), so the stub is the only wiring that exists; hand-curated `relationships.csv` covers all live edges"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b7d24b56e8c91692",
@@ -2423,6 +3003,15 @@
       "canonicalUrl": "https://huggingface.co/ProsusAI/finbert",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`score/sentiment.py:31` hard-slices input to `text[:512]` before passing to the pipeline — the Transformers tokenizer also caps at 512 tokens, but this character slice means long tokens are cut mid-word with no truncation warning surfaced in the output tuple"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0a82bcdb77a0244b",
@@ -2454,6 +3043,13 @@
       "canonicalUrl": "https://github.com/pgvector/pgvector",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "bdd98be958866eff",
@@ -2485,6 +3081,15 @@
       "canonicalUrl": "https://vectorbt.pro/",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`score/backtest.py:3-4` docstring reads \"VectorBT is heavier; for v0 we use the repo's yfinance adapter and hand-roll the math\" — the library is declared in `pyproject.toml:13` (`vectorbt>=0.26.0`) but no import exists anywhere in the codebase; it is installed but dead weight"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b7a526c6d71062c9",
@@ -2516,6 +3121,15 @@
       "canonicalUrl": "https://networkx.org/documentation/stable/reference/algorithms/link_analysis.html",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`graph.py:51-90` — `spillover()` is a hand-rolled BFS with edge-weight × hop-decay scoring; `nx.pagerank` is never called; the topic is graph traversal, not centrality"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "79460bed6e7c7dc8",
@@ -2547,6 +3161,15 @@
       "canonicalUrl": "https://modal.com/docs",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "Modal crons were the original scheduler; fully migrated to GitHub Actions (`.github/workflows/cron-*.yml`); `python/ingest/modal_app.py` is kept only for ad-hoc `modal run` backfills — CPU-bound daily workloads don't justify Modal's cold-start overhead"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "82182128b3fc9e43",
@@ -2578,6 +3201,13 @@
       "canonicalUrl": "https://docs.astral.sh/uv/",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6b3aa11369093eca",
@@ -2609,6 +3239,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/d1/",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "no array types, no pgvector, limited concurrent writes — heavy analytics and vector search deliberately broken out to a separate local Postgres (Lab substrate)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "cdc167c2c4a86d41",
@@ -2640,6 +3279,13 @@
       "canonicalUrl": "https://hono.dev/",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "33482fc4b04d9e04",
@@ -2671,6 +3317,15 @@
       "canonicalUrl": "https://clerk.com/docs",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "Cloudflare Access was shipped first (2026-04-25) and abandoned within one week — CF Access lacks a full session model and user identity storage needed for per-user features; `apps/web/src/lib/require-auth.ts` and `clerk-admin.ts` are the live gates"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5690e6b47badf644",
@@ -2702,6 +3357,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/high-signal/blob/main/docs/learning/new-things.md#two-tier-judge-pattern",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "`scripts/auto-publish-rules.ts:116` — `deterministicVerdict()` encodes editorial policy as tested TypeScript; adding a new kill condition (e.g. the prediction-market-only rule at line 131) requires a code commit + test update, not a config tweak; the AI judge (`auto-publish-drafts.ts`) only runs on `\"hold\"` returns"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "fc6848804a202646",
@@ -2733,6 +3397,15 @@
       "canonicalUrl": "https://pnpm.io/workspaces",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 13
+      },
+      "learningNotes": [
+        "no shared build step across TS and Python — `pnpm install` and `uv sync` are independent; CI runs Vitest and pytest separately"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1faa25acc97b1287",
@@ -2764,6 +3437,15 @@
       "canonicalUrl": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2",
       "repositoryPath": "high-signal/docs/learning/new-things.md",
       "tracks": ["high-signal"],
+      "hierarchy": {
+        "track": "High Signal",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 14
+      },
+      "learningNotes": [
+        "used in `python/lab` via optional `[embeddings]` extra — `uv sync --extra embeddings` triggers a ~90 MB model download on first run; without it the Lab `embed` pass is silently skipped and HNSW indexes are never built, so `/search` returns no semantic results"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c3700ac72133be8e",
@@ -2795,6 +3477,15 @@
       "canonicalUrl": "https://docs.pmnd.rs/react-three-fiber",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "NPC/player positions must be written imperatively to `ref.current.position`, not to React `position` prop — per-frame reconciliation causes visible teleports and wasted budget."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "260e0a02db6efc4f",
@@ -2826,6 +3517,15 @@
       "canonicalUrl": "https://github.com/pmndrs/react-three-rapier",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "NPCs have no Rapier rigid bodies (visual-only), so melee hit detection is manual cone checks against the NPC position registry — not sensor colliders."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8f5f4b426d30f171",
@@ -2857,6 +3557,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "DO constructor re-runs on every request after hibernation; instance-field state is gone — re-hydrate from `ctx.storage.get()` on each entry."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3dc99dfd0c565e52",
@@ -2888,6 +3597,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "Same-account Workers cannot call each other over `workers.dev` URLs — calls hang or return 403. A `wrangler.jsonc` service binding is required; cost ~1 h of debugging if unknown."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "41c8ed810791e6fb",
@@ -2919,6 +3637,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/durable-objects/api/storage-api/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "Writing world JSON on every 4 s tick saturates the DO SQLite write budget; `PERSIST_DEBOUNCE_MS = 5_000` coalesces burst writes."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a3a3c4d08a8649d9",
@@ -2950,6 +3677,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#llm-agent-loop-interval-polling",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "Under model latency the loop naturally self-throttles (missed interval, not stacked call); minimum interval clamped to 250 ms to prevent runaway in tests."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f1a2e819376f1f80",
@@ -2981,6 +3717,15 @@
       "canonicalUrl": "https://platform.openai.com/docs/api-reference/chat",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "Reasoning models (DeepSeek R1) need `LLM_NO_THINK=1` — chain-of-thought tokens break the JSON parser."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "bacc7fbb2b3edab3",
@@ -3012,6 +3757,13 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#structured-json-actions-llm-proposes-engine-validates",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "acbe7bba8c8fbde3",
@@ -3043,6 +3795,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#prompt-format-json-in-reply-without-function-calling-api",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "OpenAI function-calling and structured-output APIs are not universally supported across local-model backends; JSON-in-reply works on all OpenAI-compatible endpoints but requires retry + fallback for malformed output."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "097dfa1d4eb6181e",
@@ -3074,6 +3835,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#deterministic-worldgen-with-seeded-prng",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "Any change to call order shifts the entire town layout; layout assertions in `tests/web3d-worldgen.test.ts` must pass before touching worldgen."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "67e2e49f6238b4a6",
@@ -3105,6 +3875,13 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#canvas-generated-textures-zero-binary-assets",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "2f4badbf414ef59e",
@@ -3136,6 +3913,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/aliveville/blob/main/docs/learning/new-things.md#phaser-retired-but-still-in-package-json",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "Phaser dependency remains in `package.json` and `PROJECT_RECOMMENDATION_CONTEXT.md` as an audit snapshot artifact — it is not used in the active build."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "e82ca001d2e9f56f",
@@ -3167,6 +3953,15 @@
       "canonicalUrl": "https://www.w3.org/TR/webgpu/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 13
+      },
+      "learningNotes": [
+        "naive matmul is memory-bound — tinygpt ships many variants (tiled / blocked / vec4 / cooperative-matrix) because the kernel shape, not the math, sets the speed."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8c6a6c5e12d7134f",
@@ -3198,6 +3993,15 @@
       "canonicalUrl": "https://threejs.org/docs/#manual/en/introduction/How-to-use-WebGPU",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 14
+      },
+      "learningNotes": [
+        "not in tinygpt (compute-only) — this is the one frontier piece with no reference impl to vendor; build fresh."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "38c3a6b2c5129773",
@@ -3229,6 +4033,15 @@
       "canonicalUrl": "https://arxiv.org/abs/2307.08691",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 15
+      },
+      "learningNotes": [
+        "tinygpt implements this directly in WGSL — the tiling + streaming-softmax is the whole trick."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0e960c3e8b379098",
@@ -3260,6 +4073,15 @@
       "canonicalUrl": "https://emscripten.org/docs/porting/pthreads.html",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 16
+      },
+      "learningNotes": [
+        "`SharedArrayBuffer` needs cross-origin isolation (COOP+COEP response headers) or threads won't start; tinygpt also ships a wasm64 (`-sMEMORY64`) build where pointer args/returns surface in JS as `BigInt`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ef0d70c9832e904d",
@@ -3291,6 +4113,15 @@
       "canonicalUrl": "https://github.com/mlc-ai/web-llm",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 17
+      },
+      "learningNotes": [
+        "tinygpt is a tiny char-level GPT, NOT a chat model — reuse its plumbing (device/feature detect, OPFS weight cache, WASM fallback), but the chat model itself comes from WebLLM/transformers.js."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3042e0c9f30a117f",
@@ -3322,6 +4153,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 18
+      },
+      "learningNotes": [
+        "subject to storage quota and wiped by \"clear site data\" — tinygpt requests durable/persistent storage up front (`storage.ts`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1930396498287c29",
@@ -3353,6 +4193,15 @@
       "canonicalUrl": "https://www.w3.org/TR/webnn/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 19
+      },
+      "learningNotes": [
+        "`navigator.ml` can exist while the backend is non-functional — tinygpt ships a numerics-gated probe (one-matmul graph vs hand-computed ref) before trusting it."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3d095d47e5c891c9",
@@ -3384,6 +4233,13 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/WebTransport",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 20
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d0c9fd5a7636721c",
@@ -3415,6 +4271,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 21
+      },
+      "learningNotes": [
+        "TBD — `VideoFrame` holds native/GPU memory and must be `.close()`'d to avoid leaks (verify when implemented)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6212646f262e9305",
@@ -3446,6 +4311,13 @@
       "canonicalUrl": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 22
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6ab894d99a8ff8b8",
@@ -3477,6 +4349,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 23
+      },
+      "learningNotes": [
+        "`SpeechRecognition` is unprefixed in some browsers and `webkitSpeechRecognition` in others, and isn't in our TS lib — read it off `globalThis` with a hand-written type. See `web3d/src/platform/voice.ts`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ee30f9ddd97167f0",
@@ -3508,6 +4389,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 24
+      },
+      "learningNotes": [
+        "the SW is **network-first** (try network, cache fresh, fall back to cache offline) so it never serves stale assets online; API paths are skipped; registered prod-only; scope is `/game/` (the Vite base). See `web3d/public/sw.js`, `web3d/src/main.tsx`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1daf6f248e225abe",
@@ -3539,6 +4429,15 @@
       "canonicalUrl": "https://github.com/pmndrs/xr",
       "repositoryPath": "aliveville/docs/learning/new-things.md",
       "tracks": ["aliveville"],
+      "hierarchy": {
+        "track": "Aliveville",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 25
+      },
+      "learningNotes": [
+        "hand-rolling `renderer.xr` on R3F does NOT pump XR frames — you need the r3f/xr store + `<XR>` wrapper. Outside a session `<XR>` is a passthrough. See `web3d/src/platform/xr.ts`, `web3d/src/scene/GameWorld.tsx`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "235d4df231b455ea",
@@ -3570,6 +4469,15 @@
       "canonicalUrl": "https://developer.apple.com/documentation/foundationmodels",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`SystemLanguageModel.default.availability` must be checked at every call site — FM is absent on non-Apple-Intelligence Macs. Three check points: `AppleFoundationModelsPlannerClient.swift:84` (warmUp guard), `PacePlannerTierStore.swift:174` (first-launch tier resolution), `BuddyPlannerClient.swift:354` (factory `makeFoundationModelsPlannerOrFallback`). Each has a `LocalPlannerClient` fallback; missing the check surfaces as a crash or silent no-op on non-eligible hardware."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "96d6ac3d4016c2c4",
@@ -3601,6 +4509,15 @@
       "canonicalUrl": "https://modelcontextprotocol.io/specification",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "Config is loaded from `~/.config/pace/mcp-servers.json` at call time — missing server names are caught by `PaceToolPreflight` (`PaceToolPreflight.swift`) before approval, not at launch. Catalog installs use atomic temp-file + rename in `PaceMCPCatalogInstaller` to preserve every user-added entry on each install."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a3e114a5c112d002",
@@ -3632,6 +4549,15 @@
       "canonicalUrl": "https://github.com/argmaxinc/WhisperKit",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "WhisperKit is **fully wired** as of the current codebase (`WhisperKitTranscriptionProvider.isRuntimeAvailable = true`, line 32; full streaming session in `WhisperKitTranscriptionProvider.swift:110-223`). The factory (`BuddyTranscriptionProvider.swift:67`) selects it when `TranscriptionProvider=whisperKit` and `isRuntimeAvailable` is true; the Apple Speech fallback only fires when the flag is false. Model must be pre-placed at `~/Documents/huggingface/models/argmaxinc/whisperkit-coreml/<model>/` — `download: false` means a missing model throws immediately rather than fetching silently."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "473276e2b741227a",
@@ -3663,6 +4589,15 @@
       "canonicalUrl": "https://huggingface.co/hexgrad/Kokoro-82M",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "Sidecar endpoint is guarded by `PaceLocalEndpointGuard.resolvedLocalOpenAICompatibleBaseURL` at `LocalServerTTSClient.swift:51` — non-loopback URLs fall back to `localhost:8880`. First synth after boot is 20-30 s while Kokoro's MLX weights load (`LocalServerTTSClient.swift:29-30`); the 60 s timeout accounts for this. Any synthesis failure falls through to `AVSpeechSynthesizer` per-utterance with a 30 s outage memo."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "250c85f1d46f90f6",
@@ -3694,6 +4629,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/learning/new-things.md#loopback-guard-tts-self-capture-prevention",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "The URL-level guard (`PaceLocalEndpointGuard`, `LocalServerTTSClient.swift:51`) ensures audio synthesis only ever calls a loopback address. The audio pipeline exclusion zone (preventing `AVAudioEngine` from capturing `AVSpeechSynthesizer` or sidecar output) is architecturally noted but not yet implemented — it is the remaining open trust surface for self-capture prevention."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "282c86a7d64d0b9e",
@@ -3725,6 +4669,15 @@
       "canonicalUrl": "https://developer.apple.com/documentation/screencapturekit",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "Pace requires macOS 14.2+ (`CompanionScreenCaptureUtility.swift`) for reliable multi-monitor display enumeration. Screen Recording permission must be granted; the app links `WindowPositionManager.swift` to surface the System Settings deep link when the permission is missing."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b367f67fd861469e",
@@ -3756,6 +4709,15 @@
       "canonicalUrl": "https://developer.apple.com/documentation/appkit/nsaccessibility",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`PaceAXTargeter.swift` climbs from `AXUIElementCopyElementAtPosition` up to a pressable role before firing `kAXPressAction`; if no pressable ancestor is found it returns false and `PaceActionExecutor` falls back to CGEvent. AX `set-value` edits are journaled in a session-local mutation log and reversible via `Undo.last` — the mutation log is the trust surface because the AX API itself has no undo primitive."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a782874ac320a637",
@@ -3787,6 +4749,15 @@
       "canonicalUrl": "https://lmstudio.ai/docs/api/openai-api",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "`PaceLocalEndpointGuard.resolvedLocalOpenAICompatibleBaseURL` (`PaceLocalEndpointGuard.swift:23`) validates every planner and VLM URL at construction time — a plist value pointing at a LAN or remote host silently falls back to `localhost:1234` with a printed warning. Two models can be loaded simultaneously via LM Studio Settings → max-loaded-models=2 (planner + VLM) to avoid thrashing."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ee3dbeb8f17a65dd",
@@ -3818,6 +4789,15 @@
       "canonicalUrl": "https://en.wikipedia.org/wiki/Okapi_BM25",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "`PaceLocalRetrieval.swift` uses a BM25-style in-memory scorer across all retrieval sources (history, notes, calendar, files, screen-watch, app-usage) before optional embedding re-ranking via `PaceEmbeddingReranker` (LM Studio `/v1/embeddings`). Vector/SQLite-vec retrieval is queued but not yet live — BM25 is the only ranking path in production."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "923d78589f30c817",
@@ -3849,6 +4829,15 @@
       "canonicalUrl": "https://developer.apple.com/documentation/foundationmodels",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "`PaceFMTurnResponse` (`PaceFMTurnResponse.swift:40`) replaces freeform `[CLICK:x,y]` string tags with integer element IDs (`pointAtElementId`, `clickElementId`). The model picks from the on-screen element list or returns -1; it never writes raw coordinates, eliminating the coordinate hallucination failure mode of the string-tag protocol. Trade-off: `respond(to:generating:)` is non-streaming — the full `spokenText` arrives as one chunk, slightly increasing TTFSW vs the streaming string path."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "677196f4f52334f9",
@@ -3880,6 +4869,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/learning/new-things.md#speculative-planner-race",
       "repositoryPath": "pace/docs/learning/new-things.md",
       "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "`PaceSpeculativePlannerRace.raceSpeculative` (`PaceSpeculativePlannerRace.swift:130`) always returns BOTH planners' complete text (`PaceSpeculativeRaceResult.fullPlannerResponseText`); action parsing in `CompanionManager` exclusively uses the full planner's text regardless of which path won audio (lines 187-194). Supersede window: 500 ms from lite's first token AND fewer than 60 spoken chars — past either threshold the lite winner stands to avoid mid-speech jarring cuts. Gate (`speculativeRaceShouldFire`, `CompanionManager.swift:441`) requires toggle ON + local VLM configured + Apple FM available + intent is `.screenAction` or `.screenDescription`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "46658e887945e268",
@@ -3911,6 +4909,13 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=VMj-3S1tku0",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "1. Language model foundations",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b0066487db2ba6ab",
@@ -3942,6 +4947,13 @@
       "canonicalUrl": "https://github.com/karpathy/makemore",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "1. Language model foundations",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c9644fa8cd9740f7",
@@ -3973,6 +4985,13 @@
       "canonicalUrl": "https://arxiv.org/abs/2012.07805",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "3. Adaptation and evaluation",
+        "moduleOrder": 3,
+        "topicOrder": 3
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6c412764745f8b5a",
@@ -4004,6 +5023,15 @@
       "canonicalUrl": "https://nlp.seas.harvard.edu/annotated-transformer/",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "1. Language model foundations",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "per-thread private `array<f32, 1024>` for the score row at ctx=1024 is 4 KB — Apple WebGPU spills it to global memory."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "544329e8c1c200c9",
@@ -4035,6 +5063,15 @@
       "canonicalUrl": "https://arxiv.org/abs/2307.08691",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "tile sizes `Br = Bc = 16` are hard-coded in `webgpu/attention_fa2.wgsl`; going wider hits register pressure on Apple GPU."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "88a5fae695fe24be",
@@ -4066,6 +5103,13 @@
       "canonicalUrl": "https://arxiv.org/abs/1805.02867",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 7
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f0fd425bdccc0584",
@@ -4097,6 +5141,13 @@
       "canonicalUrl": "https://huggingface.co/learn/nlp-course/chapter6/5",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "1. Language model foundations",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c321e1c507177416",
@@ -4128,6 +5179,15 @@
       "canonicalUrl": "https://emscripten.org/docs/porting/pthreads.html",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "WASM Memory64 (`tinygpt64.wasm`) hits a pthread × `WebAssembly.Memory.grow` race in the browser — the fix is over-allocating `INITIAL_MEMORY=256 MB` so growth never fires during training."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "02127367df104911",
@@ -4159,6 +5219,13 @@
       "canonicalUrl": "https://github.com/WebAssembly/simd/blob/master/proposals/simd/SIMD.md",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 2
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "e10d13fc6661d12c",
@@ -4190,6 +5257,15 @@
       "canonicalUrl": "https://gpuweb.github.io/gpuweb/",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`var<storage, read>` vs `buffer: { type: \"storage\" }` mismatch — Apple WebGPU silently returns wrong data instead of a validation error; caused vec4 matmul to diverge loss to 88.67 in end-to-end training."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "836ed61b1a3dbdb9",
@@ -4221,6 +5297,15 @@
       "canonicalUrl": "https://siboehm.com/articles/22/CUDA-MMM",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "8×8 register blocking beat 4×4 in theory but lost at every measured size — exceeded Apple's per-thread register budget and forced spill."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "72acabfe74d190b1",
@@ -4252,6 +5337,15 @@
       "canonicalUrl": "https://arxiv.org/abs/1710.03740",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "f16-packed weights were 1.7× faster standalone but *slower* when stacked on tiled matmul — tiling had already amortised the global-read savings."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "4c9468f50ecfa048",
@@ -4283,6 +5377,13 @@
       "canonicalUrl": "https://transformer-circuits.pub/2023/monosemantic-features/index.html",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "4. Inference and interpretability",
+        "moduleOrder": 4,
+        "topicOrder": 2
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c43a31ca9da2a4a8",
@@ -4314,6 +5415,13 @@
       "canonicalUrl": "https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "4. Inference and interpretability",
+        "moduleOrder": 4,
+        "topicOrder": 3
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f26dc63a9d0df112",
@@ -4345,6 +5453,13 @@
       "canonicalUrl": "https://arxiv.org/abs/1604.06174",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "2. Fast browser training",
+        "moduleOrder": 2,
+        "topicOrder": 6
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "03ff0a609d3a084f",
@@ -4376,6 +5491,15 @@
       "canonicalUrl": "https://arxiv.org/abs/1711.05101",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "1. Language model foundations",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "browser default LR was `3e-3` (10× too hot vs Python reference `3e-4`); training plateaued at loss ~2.45 and looked like a modelling ceiling."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d3dfe5c68fd5678b",
@@ -4407,6 +5531,13 @@
       "canonicalUrl": "https://arxiv.org/abs/2106.09685",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "3. Adaptation and evaluation",
+        "moduleOrder": 3,
+        "topicOrder": 1
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d593da4fa0bcc1bb",
@@ -4438,6 +5569,15 @@
       "canonicalUrl": "https://arxiv.org/abs/2211.17192",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "4. Inference and interpretability",
+        "moduleOrder": 4,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "on Metal, greedy spec-decode is NOT byte-identical to single-token decode — batched-verify vs single-token attention aren't bit-reproducible across batch shapes, so a near-tie argmax occasionally flips (still a valid greedy decode; verified against the uncached reference). serve speedup is content-dependent (acceptance 2.3 dense → 3.3 structured) and masking-bound under `--grammar`. \"Seed-carry\" (feed the last burst token as the next verify's first) avoids a wasted second target forward."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0c52eb73bee1cfd2",
@@ -4469,6 +5609,13 @@
       "canonicalUrl": "https://docs.trajectory.ai/introduction",
       "repositoryPath": "tinygpt/docs/learning/new-things.md",
       "tracks": ["posttrainllm"],
+      "hierarchy": {
+        "track": "posttrainllm",
+        "module": "3. Adaptation and evaluation",
+        "moduleOrder": 3,
+        "topicOrder": 2
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "49c4a4ec8be273a4",
@@ -4500,6 +5647,15 @@
       "canonicalUrl": "https://www.sqlite.org/json1.html",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "JSON-in-SQLite pattern — parsed/serialized in server actions, not normalized into separate tables; simpler schema but no indexed queries on nested fields"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8145318c6d20b5f9",
@@ -4531,6 +5687,15 @@
       "canonicalUrl": "https://docs.astro.build/en/guides/integrations-guide/",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`package.json:9` — build script includes `node scripts/run-overlay-astro-landing.mjs` — overlays Astro build onto Next.js output; Astro owns `GET /`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "06d8b6b9557e918a",
@@ -4562,6 +5727,15 @@
       "canonicalUrl": "https://en.wikipedia.org/wiki/Personality_test",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`src/lib/personality.ts:70-80` — `buildCategoryCounts` counts non-deduplicated hobby entries across all phases to determine category breakdown, then maps to archetypes"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6596a62b3605e20d",
@@ -4593,6 +5767,15 @@
       "canonicalUrl": "https://dndkit.com/",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "uses `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities` — accessible by default (keyboard reordering), unlike react-beautiful-dnd"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "97d5c08de45e340d",
@@ -4624,6 +5807,15 @@
       "canonicalUrl": "https://github.com/tsayen/dom-to-image",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`html-to-image: 1.11.13` — renders DOM to canvas then to PNG; CORS images can break it, so all assets must be same-origin or CORS-enabled"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c8c467b0b12f9634",
@@ -4655,6 +5847,15 @@
       "canonicalUrl": "https://en.wikipedia.org/wiki/Sequence_analysis",
       "repositoryPath": "significanthobbies/docs/learning/new-things.md",
       "tracks": ["significanthobbies"],
+      "hierarchy": {
+        "track": "Significant Hobbies",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`src/lib/personality.ts:70-80` — category counts built from timeline phases, then mapped to archetype traits — the analysis is only as good as the phase boundaries the user draws"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0175e2e850077cb0",
@@ -4686,6 +5887,15 @@
       "canonicalUrl": "https://opennext.js.org/cloudflare",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "One dual-mode script (`scripts/patch-opennext.mjs`) runs twice per deploy — pre-build aliases `@libsql/isomorphic-ws → web.mjs` in `bundle-server.js`, post-build (`--post`) patches `WeakRef/FinalizationRegistry` references in `handler.mjs` and injects a polyfill into `worker.js`; both passes are wired into `cf:build` (`package.json:13`). A second script `scripts/fix-opennext-deps.mjs` copies `web.mjs/web.cjs` into `.open-next` but is not in the current `cf:build` pipeline — it exists as an alternative fallback."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "cf40bc2e4062aa4b",
@@ -4717,6 +5927,15 @@
       "canonicalUrl": "https://docs.turso.tech",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "Client must be initialised lazily (not at module load time) and listed in `serverExternalPackages` — eager init or bundling breaks the WebSocket transport in the Workers runtime. Confirmed: `next.config.ts:6-11` lists `@libsql/client`, `@libsql/hrana-client`, and `@libsql/isomorphic-ws`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d913aeed95824cde",
@@ -4748,6 +5967,15 @@
       "canonicalUrl": "https://orm.drizzle.team",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "Schema lives entirely in `src/lib/db/schema.ts`; no migration files exist — `drizzle-kit push` diffs the live DB directly. This means rollbacks require manual SQL."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a9f80b77ac136e72",
@@ -4779,6 +6007,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/r2/",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`@aws-sdk` S3 client was replaced with `getCloudflareContext().env.PDFS_BUCKET` at the Paid-plan unlock (commit `6a702be`). `@aws-sdk` is fully absent from `package.json`. Native binding accessed via `src/lib/storage.ts:24`; unavailable on the free plan or in `next dev`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "037f607b435ac545",
@@ -4810,6 +6047,13 @@
       "canonicalUrl": "https://sdk.vercel.ai/docs",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "06977f0960e5c315",
@@ -4841,6 +6085,15 @@
       "canonicalUrl": "https://www.better-auth.com",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "Orphaned NextAuth tables (`account`, `session`, `verificationToken`) remain in `src/lib/db/schema.ts:63-105` with comment \"kept for reference, not used by better-auth\" — safe to drop only after confirming no active rows."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "897697c5f0f815be",
@@ -4872,6 +6125,15 @@
       "canonicalUrl": "https://developer.chrome.com/docs/extensions/reference/api/sidePanel",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "Extension requests are cross-origin to the Workers URL so session cookies can't be shared — auth uses SHA-256-hashed API keys with `rdr_` prefix (`src/lib/api-keys.ts:10-11`). Only the hash is persisted; plaintext is shown once at creation (`src/app/api/keys/route.ts:52`). Extension validates prefix client-side (`packages/chrome-extension/src/side-panel/components/PageHeader.tsx`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "fe6be3588d9c094a",
@@ -4903,6 +6165,13 @@
       "canonicalUrl": "https://github.com/mozilla/readability",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "4a0e7599f836fb8d",
@@ -4934,6 +6203,15 @@
       "canonicalUrl": "https://mozilla.github.io/pdf.js/",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "Worker must be loaded from `/public` (local static asset) — CDN fetch is blocked by the extension's `script-src 'self'` CSP and CF Workers build sandbox"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f0b5ea511613f7b2",
@@ -4965,6 +6243,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/configuration/smart-placement/",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "Enabled via `placement = { mode = \"smart\" }` in `wrangler.toml:10-11` after a psi-swarm audit flagged TTFB >1s as the LCP bottleneck — server components were paying a cross-region RTT to Turso on every request."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5088209cb435910c",
@@ -4996,6 +6283,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/runtime-apis/cache/",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "Used in `src/lib/articles-db.ts:424` to cache article reads at the edge (5 min TTL). Not available in `next dev` — guarded by `globalThis.caches?.default`. Cache must be explicitly busted on article writes (see `lists-db.ts`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "88cf5b70f2c9c964",
@@ -5027,6 +6323,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/",
       "repositoryPath": "reader/docs/learning/new-things.md",
       "tracks": ["reader"],
+      "hierarchy": {
+        "track": "Reader",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "Tried and reverted the same day (2026-04-25 18:19→21:14 IST, commits `434559e`→`6358c03`, ~2h55m) — R2 native binding friction and the Workers OpenNext adapter was more mature. Pages experiment confirmed by `.cf-pages-bundle` in `.gitignore` (commit `e2fe901`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c8d817ded60d3d28",
@@ -5058,6 +6363,15 @@
       "canonicalUrl": "https://docs.jikan.moe/",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`src/api.ts:35` — `await Promise.all([axios.get(url), delay(API_CONFIG.rateLimit)])` runs the 1s delay in parallel with the API call, so you don't pay sequential cost"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "827d809b51beb618",
@@ -5089,6 +6403,15 @@
       "canonicalUrl": "https://myanimelist.net/",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`src/api.ts:90` — requires `score && scored_by && members && favorites && year`; missing any one drops the row entirely"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "543eada5b46d5179",
@@ -5120,6 +6443,15 @@
       "canonicalUrl": "https://docs.turso.tech/sdk/ts/quickstart",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`src/db/client.ts:1` — imports from `@libsql/client/web` specifically; the node client won't bundle in Workers"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "b1c1d4eb561d317e",
@@ -5151,6 +6483,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/configuration/cron-triggers/",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`wrangler.cron.toml:10` — cron runs at `0 3 * * *` (3 AM UTC daily); the same worker entry handles `scheduled` events alongside HTTP routes"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c4de9a648d93b251",
@@ -5182,6 +6523,15 @@
       "canonicalUrl": "https://web.dev/articles/stale-while-revalidate",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`src/store/animeStore.ts:11` — `coldLoadPromise` is shared across all concurrent requests during cold start, so 50 parallel inbound requests share a single Turso scan"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "eb0d1e2688d2a3ca",
@@ -5213,6 +6563,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/runtime-apis/cache/",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`src/worker.ts:240` — uses `https://mal-cache.local/api/search` as cache URL — a fake domain that maps to the Edge Cache API"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "500600feaf069a54",
@@ -5244,6 +6603,15 @@
       "canonicalUrl": "https://github.com/panva/jose",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`src/worker.ts:249` — `createRemoteJWKSet(new URL('https://www.googleapis.com/oauth2/v3/certs'))` fetches Google's public keys dynamically at verification time"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "85d70ff9385093e2",
@@ -5275,6 +6643,15 @@
       "canonicalUrl": "https://www.sqlite.org/lang_upsert.html",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "`src/db/animeData.ts:204` — after batch upsert, queries `WHERE created_at = updated_at` to identify which rows were newly inserted vs updated"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0da55ae7bd4d2cc8",
@@ -5306,6 +6683,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/reference/how-workers-work/",
       "repositoryPath": "anime-list/docs/learning/new-things.md",
       "tracks": ["anime-list"],
+      "hierarchy": {
+        "track": "MAL Explorer",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "`src/filterEngine.ts:2-4` — comment explicitly states \"Pure filter/matching logic with zero file-system or native module dependencies\""
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "908edc5864f56113",
@@ -5337,6 +6723,15 @@
       "canonicalUrl": "https://github.com/open-spaced-repetition/ts-fsrs",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`confidence = Math.min(1, card.stability / 30)` (`src/lib/fsrs.ts:46`) is a display proxy — it saturates at stability ≥ 30, while raw retrievability keeps decaying. The two diverge sharply for high-stability cards that haven't been reviewed recently."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "809e8c60a3d961bc",
@@ -5368,6 +6763,15 @@
       "canonicalUrl": "https://github.com/open-spaced-repetition/awesome-fsrs/wiki/The-Algorithm",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "ts-fsrs 5.3.2 ships FSRS v5+ which uses a trainable decay exponent (`R = (1 + factor·t/S)^-w₂₀`), not the fixed `-1` exponent. The project's `decayConfidence` still uses the v4 approximation — accurate enough for display, but not bitwise-identical to what the scheduler itself computes."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "7c860d432821cd9c",
@@ -5399,6 +6803,15 @@
       "canonicalUrl": "https://go.dev/doc/webassembly",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`executeGo()` (`src/lib/goExecutor.ts:273-283`) calls `executeViaAPI()` on first run; `startWASMLoading()` fires in background fetching from the R2 URL (`src/lib/goExecutor.ts:31`). Once `wasmReady` flips, subsequent runs never hit the API. Module lives at `pub-e88ae7f7cd154093afe81219f42c6597.r2.dev/wasm/go-interp.wasm`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "9ba8798258eb6a44",
@@ -5430,6 +6843,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory/grow",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`installMemoryCap()` (`src/lib/goWasmWorker.ts:54-73`) wraps `WebAssembly.Memory.prototype.grow` with a 4096-page (256 MiB) ceiling. It's idempotent via `proto.__capped` guard and runs before `WebAssembly.instantiateStreaming` (`src/lib/goWasmWorker.ts:80,92`) so the Go runtime's own memory is covered. Overflow throws a `RangeError`, not a tab kill."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "87d7da8232d731af",
@@ -5461,6 +6883,15 @@
       "canonicalUrl": "https://github.com/microsoft/monaco-editor",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`handleFormat()` (`src/components/CodeEditor.tsx:49-65`) branches on `language === 'go'`: Go uses `editor.action.formatDocument` (Monaco built-in), while JS/TS use Prettier (babel + estree + typescript plugins). Prettier has no Go plugin, so there is no unified format path."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "f27122563dffaeb7",
@@ -5492,6 +6923,15 @@
       "canonicalUrl": "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/api/excalidraw-component",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`saveDiagram()` (`src/components/DiagramEditor.tsx:21-25`) persists only `{ zoom, scrollX, scrollY }` from `appState` — deliberately shallow. Restoring full `appState` breaks because it carries ephemeral UI flags (active tool, cursor state, etc.) that conflict with Excalidraw's internal init."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "bb4e3ad047d6e86a",
@@ -5523,6 +6963,15 @@
       "canonicalUrl": "https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "the local dev path (`api/ai/chat.ts:21-34`) uses `createOpenAICompatible` + `streamText` from `@ai-sdk/openai-compatible`. The edge path (`functions/api/[[path]].js:567-584`) bypasses the AI SDK entirely and does a raw `fetch` to the BYOK endpoint — the AI SDK's Node.js modules are not available in the CF Worker runtime. Two different streaming paths for the same feature."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "17911f41d4b56bd6",
@@ -5554,6 +7003,13 @@
       "canonicalUrl": "https://fs.blog/feynman-learning-technique/",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "1323032df400a916",
@@ -5585,6 +7041,13 @@
       "canonicalUrl": "https://en.wikipedia.org/wiki/Socratic_method",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "84c1b73053835c30",
@@ -5616,6 +7079,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/functions/",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 10
+      },
+      "learningNotes": [
+        "line 1 of `functions/api/[[path]].js` imports `@libsql/client/web` (fetch-based HTTP client) rather than `@libsql/client` (Node.js TCP client). The CF Worker runtime has no Node.js TCP stack — using the default import silently fails at runtime, not at build time."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "34a61739a3c55238",
@@ -5647,6 +7119,15 @@
       "canonicalUrl": "https://docs.turso.tech/sdk/ts/reference",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 11
+      },
+      "learningNotes": [
+        "the DB client is lazily initialized once per CF Function invocation via a module-level `let db` singleton (`functions/api/[[path]].js:8-21`). A cold start re-creates the client because CF Workers don't share process state across requests from different isolates."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "01eb885cc7b69e33",
@@ -5678,6 +7159,15 @@
       "canonicalUrl": "https://react.dev/reference/react/lazy",
       "repositoryPath": "swe-interview-prep/docs/learning/new-things.md",
       "tracks": ["swe-interview-prep"],
+      "hierarchy": {
+        "track": "SWE Interview Prep",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "it's not just the 5 tabs — 12 routes total are lazy-loaded (`src/App.tsx:14-24`), including detail pages (ConceptDetail, RoadmapDetail, ProjectDetail, BuildLab) and static pages. Two separate `<Suspense>` boundaries wrap the nav shell and the route outlet (`src/App.tsx:57,67`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "10383c41aec5418f",
@@ -5709,6 +7199,15 @@
       "canonicalUrl": "https://huggingface.co/docs/transformers.js/index",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`src/lib/embeddings.ts` — escaping the onnxruntime-node native binary requires aliasing it out in the Vite build config; the browser only needs the WASM backend"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "2761fb6836a54612",
@@ -5740,6 +7239,15 @@
       "canonicalUrl": "https://onnxruntime.ai/docs/get-started/with-javascript/web.html",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "a too-narrow CSP silently blocks the model fetch with an error that looks like an ONNX crash, not a network error"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ef3b28ecbbe07581",
@@ -5771,6 +7279,15 @@
       "canonicalUrl": "https://huggingface.co/docs/transformers.js/index",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`src/lib/embeddings.ts` uses `{ dtype: \"fp32\" }` explicitly to avoid the quantization accuracy hit"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "d49ff030ac48ba1d",
@@ -5802,6 +7319,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`src/lib/db.ts` opens DB `\"email-search\"` via the `idb` library; `StoredEmail` type includes `embedding: number[] | null` alongside the full body. D1 holds only auth tables"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a90587f482358778",
@@ -5833,6 +7359,15 @@
       "canonicalUrl": "https://orm.drizzle.team/docs/get-started/d1-new",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`src/lib/auth.ts` imports `drizzle-orm/d1` and `drizzleAdapter`; schema tables defined in `src/db/schema.ts`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "c75ceb4698b135c0",
@@ -5864,6 +7399,15 @@
       "canonicalUrl": "https://www.better-auth.com/docs",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`accessType: \"offline\"` and `prompt: \"consent\"` ensure a refresh token is issued; `auth.api.getAccessToken` transparently renews expired tokens"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a5118971f061b80e",
@@ -5895,6 +7439,15 @@
       "canonicalUrl": "https://developers.google.com/identity/protocols/oauth2/web-server#offline",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "the original code did a raw `SELECT accessToken` — tokens silently expired after 1 hour, forcing re-sign-in. The fix lives in `src/lib/get-access-token.ts`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "74c74a2f290c70aa",
@@ -5926,6 +7479,15 @@
       "canonicalUrl": "https://hono.dev/docs/getting-started/cloudflare-workers",
       "repositoryPath": "email-manager/docs/learning/new-things.md",
       "tracks": ["email-manager"],
+      "hierarchy": {
+        "track": "Email Manager",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "`src/worker.ts` handles `/api/*` routing and serves built assets via the `ASSETS` binding; the SPA routes client-side via `react-router-dom`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3c16227208ce6783",
@@ -5957,6 +7519,15 @@
       "canonicalUrl": "https://github.com/yt-dlp/yt-dlp",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "CI region blocks return fewer rows than a warm local cache — `build-catalog.sh` compares new fetch count vs. cached count and keeps the larger file (`scripts/build-catalog.sh:42-52`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "dfe67feee2df93c7",
@@ -5988,6 +7559,15 @@
       "canonicalUrl": "https://developers.google.com/youtube/iframe_api_reference",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "Errors 101/150 (embed disabled by owner) are runtime-only — unpredictable from catalog; `Player.tsx` catches them via `onError` and auto-skips (`src/components/Player.tsx`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "70d6b47b80d63a70",
@@ -6019,6 +7599,15 @@
       "canonicalUrl": "https://huggingface.co/dslim/bert-base-NER",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "NER category UI removed in commit 8203c0b (\"too noisy — v2 will use zero-shot topic classification instead\"); `extract-tags.py` is kept as an offline fallback but CI runs `tag-videos.mjs` instead (`.github/workflows/update-catalog.yml:43`); `torch` and `transformers` survive in `requirements-ner.txt` for local fallback use only, never installed in CI (`update-catalog.yml:34` only installs `yt-dlp`)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "e570b496acd837bf",
@@ -6050,6 +7639,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/looptv/blob/main/docs/learning/new-things.md#llm-tagging-via-free-ai-gateway",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "LLM responses often wrap the JSON array in prose — regex extraction `content.match(/\\[[\\s\\S]*\\]/)` required (`scripts/tag-videos.mjs:72`); array length mismatch vs. batch size triggers retry; batches retry across all models up to `MAX_BATCH_ATTEMPTS = MODELS.length * 2`"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "744e72c947892412",
@@ -6081,6 +7679,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/looptv/blob/main/docs/learning/new-things.md#static-catalog-committed-to-repo",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`process-catalog.mjs` applies a global 10K-view minimum filter and preserves existing tags on re-runs; `extract-tags.py` strips `description` fields after tagging to keep the file size down"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6a97146228b0f0c5",
@@ -6112,6 +7719,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "Workers (OpenNext) → Pages migration in commit `f57d656`; the Workers path added `open-next.config.ts` and OpenNext bindings — `10 files changed, 136 insertions(+), 3026 deletions(-)` — all removed for zero benefit on a 100% client-side app"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a866080e97db246a",
@@ -6143,6 +7759,15 @@
       "canonicalUrl": "https://nextjs.org/docs/app/api-reference/turbopack",
       "repositoryPath": "looptv/docs/learning/new-things.md",
       "tracks": ["looptv"],
+      "hierarchy": {
+        "track": "LoopTV",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`package.json:7` sets `\"build\": \"next build --webpack\"`; Next.js 16 docs confirm Turbopack is the default and `--webpack` is the supported opt-out; AGENTS.md warns \"Turbopack has breaking changes vs webpack\" (no webpack plugins, CSS module ordering differences)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "103681c149b044a2",
@@ -6174,6 +7799,15 @@
       "canonicalUrl": "https://jina.ai/reader",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`src/lib/actions/scrape-action.ts:107-126` — Jina Reader is tried first with `Accept: text/markdown`; if it fails, falls back to full HTML parsing with Readability"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a788e8128ee56fb0",
@@ -6205,6 +7839,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`src/lib/local-storage.ts:22-46` — `getItems`/`setItems` are generic helpers that mirror the DB layer interface, so server actions can swap between DB and localStorage"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5c34deae29076d90",
@@ -6236,6 +7879,15 @@
       "canonicalUrl": "https://sdk.vercel.ai/docs",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`src/lib/ai-cloudflare.ts:50-55` — if user provides `endpointUrl + apiKey`, use that (BYO); otherwise route through free-ai-gateway with `x-gateway-project-id` header"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6ba4c13c2872f419",
@@ -6267,6 +7919,15 @@
       "canonicalUrl": "https://microsoft.github.io/monaco-editor/",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "uses `react-diff-viewer-continued` which wraps Monaco — diff is side-by-side with line highlighting, separate from the CodeMirror editor used for editing"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "bdb4661df64e19e3",
@@ -6298,6 +7959,15 @@
       "canonicalUrl": "https://codemirror.net/",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "uses `@codemirror/lang-markdown` and `@codemirror/theme-one-dark` — two different editors in one app (CodeMirror for editing, Monaco for diff)"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3b69937ba8a7b742",
@@ -6329,6 +7999,15 @@
       "canonicalUrl": "https://www.better-auth.com/",
       "repositoryPath": "rolepatch/docs/learning/new-things.md",
       "tracks": ["rolepatch"],
+      "hierarchy": {
+        "track": "Rolepatch",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "auth route is `api/auth/[...all]` handler — OpenNext transforms the Next.js API route for the Workers runtime"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "8267594fd04b9487",
@@ -6360,6 +8039,15 @@
       "canonicalUrl": "https://sdk.vercel.ai/docs/ai-sdk-core/streaming",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`src/lib/ai-prompts.ts:10-22` — uses `<<<COMPONENTS>>>` marker to separate prose from JSON components; client splits on this literal"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0258ed21e1f23756",
@@ -6391,6 +8079,15 @@
       "canonicalUrl": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "`src/app/api/chat/[slug]/route.ts:397-411` — `searchWithTimeout` races RAG search against a 500ms timeout, falls back to empty string on failure"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a8fe68ae0fbc3ba6",
@@ -6422,6 +8119,15 @@
       "canonicalUrl": "https://en.wikipedia.org/wiki/Intent_classification",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "`src/app/api/chat/[slug]/route.ts:283-341` — `answerFromRecentConversation` handles color/clothing queries with regex against visitor messages before hitting the LLM"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "77b56e9723ee3c20",
@@ -6453,6 +8159,15 @@
       "canonicalUrl": "https://jina.ai/reader",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "`src/lib/scraper.ts:104-112` — falls back to `https://r.jina.ai/http://` endpoint for cleaner text extraction when direct fetch produces poor results"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "fa77090099c48a57",
@@ -6484,6 +8199,15 @@
       "canonicalUrl": "https://developers.cloudflare.com/workers/reference/how-workers-work/",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`src/lib/rate-limit.ts:1-39` — explicitly \"resets on deploy. Not distributed\" — fine for single-worker but won't work across multiple isolates"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "27d45ffcab7a113f",
@@ -6515,6 +8239,15 @@
       "canonicalUrl": "https://react.dev/learn/react-compiler",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`AGENTS.md:75` — \"React Compiler ON — do NOT add manual `useMemo`/`useCallback`; compiler handles memoization\""
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "3ddcdb64b3ceebf4",
@@ -6546,6 +8279,15 @@
       "canonicalUrl": "https://docs.astro.build/en/guides/integrations-guide/",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`package.json:21` — `cf:build` script runs Astro build and `run-overlay-astro-landing.mjs` to overlay the landing page onto the Next.js output"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "a80136b063e49f61",
@@ -6577,6 +8319,15 @@
       "canonicalUrl": "https://www.better-auth.com/docs/adapters/drizzle",
       "repositoryPath": "karte/docs/learning/new-things.md",
       "tracks": ["karte"],
+      "hierarchy": {
+        "track": "Karte",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "`AGENTS.md:85-86` — auth state backed by Cloudflare D1 `linkchat-auth`, requires `BETTER_AUTH_URL` set to deployed origin"
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "2a20b51f48ffa517",
@@ -6608,6 +8359,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#clickhouse-mergetree-order-by-and-mutation-cost",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 1
+      },
+      "learningNotes": [
+        "`papers` is `PARTITION BY toYear(...)` (`clickhouse/init/01_schema.sql:43`), so in-place mutations scan every year-partition — that's why PageRank scores live in a separate `paper_scores_v2` ReplacingMergeTree overlay instead of updating the base table (`pagerank_full.py:103-119`). README lines 301-302 document the reasoning explicitly."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ad6ed4799d57ba5f",
@@ -6639,6 +8399,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#clickhouse-replacingmergetree-final-is-not-optional",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 2
+      },
+      "learningNotes": [
+        "Forgetting `FINAL` caused inflated counts and duplicate rows in production — fixed in the `fix query drift` commit (2026-06-12). Every overlay read in `api.py` and `pagerank_full.py` now uses `FINAL` or an anti-join against `paper_tags FINAL` (`noun_tag_v2.py:91-103`, `mlx_tag_v3.py:186-192`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "5b9619902c207362",
@@ -6670,6 +8439,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#sentence-transformers-inline-storage-in-clickhouse-without-a-vector-db",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 3
+      },
+      "learningNotes": [
+        "A `vector_similarity` (HNSW, cosine) index was added to `paper_embeddings` in `clickhouse/init/01_schema.sql` (experimental in ClickHouse 24.10, GA in 25.8 — requires `allow_experimental_vector_similarity_index = 1`). The query optimizer only uses it when the SELECT distance function matches (`cosineDistance`) and LIMIT ≤ `max_limit_for_vector_search_queries` (default 100). Existing deployments apply `clickhouse/init/04_indexes.sql` + `MATERIALIZE INDEX`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "194bf6ae43e146f8",
@@ -6701,6 +8479,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#mlx-mlx-lm-json-schema-enforcement-over-http",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 4
+      },
+      "learningNotes": [
+        "The MLX HTTP server silently ignores `response_format: json_schema` with `strict: true`; the `_make_tag_fn` for the MLX backend hard-codes `strict_schema=False` and falls back to `json_object` mode (`llm_tag.py:213-217`). The comment on line 214 reads: \"MLX server does not honor strict json_schema; use json_object mode.\" LM Studio and direct `mlx_lm.generate` (used in `mlx_tag_v3.py`) do not have this problem."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "6cf126d70a4ad572",
@@ -6732,6 +8519,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#mlx-grouped-prompting-n-papers-per-llm-call",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 5
+      },
+      "learningNotes": [
+        "`mlx_tag_v3.py` batches 4 papers per call (`GROUP_SIZE = 4`, line 67), building a numbered prompt and regex-extracting the JSON array (`_parse_group_response`, lines 97-130). Skip rate is higher with the 1.5B model vs 3B (`SMALLER_MODEL` comment, line 66: \"30% faster but 3× skip rate\"). Work is flushed every 50 groups so a killed run loses at most one batch (`mlx_tag_v3.py:243-245`)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "ead2eaeb6b2a1af1",
@@ -6763,6 +8559,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#spacy-disabling-the-parser-for-throughput",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 6
+      },
+      "learningNotes": [
+        "`noun_tag_v2.py:120` loads the model with `disable=[\"parser\", \"ner\", \"lemmatizer\"]`; the docstring (lines 1-13) explains the 3-5× speedup claim. The custom `_candidates_pos_only` function (lines 38-84) replaces spaCy's built-in `.noun_chunks` so that no parsed structure is needed at all."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "e3256ff66de9b978",
@@ -6794,6 +8599,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#keybert-evaluated-but-not-in-production-pipeline",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 7
+      },
+      "learningNotes": [
+        "`keybert_tag.py` writes exclusively to Postgres (`UPDATE papers SET keybert_tags_json = %s`, lines 72-78) and never imports `ch_db` — it is a dead branch that was never ported to the ClickHouse `paper_tags` write path despite `keybert>=0.9.0` remaining in `pyproject.toml:15`."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "aa185dc97822e744",
@@ -6825,6 +8639,15 @@
       "canonicalUrl": "https://github.com/sarthak-fleet/research-papers/blob/main/docs/learning/new-things.md#pagerank-two-implementations-different-scopes",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 8
+      },
+      "learningNotes": [
+        "Two live implementations co-exist. `graph.py:104` uses `nx.pagerank()` on a Postgres-loaded within-corpus subgraph and writes back via `UPDATE papers SET pagerank_score = %s` (line 117) — legacy, not called by current CLI. `pagerank_full.py:74-98` builds a `scipy.sparse` CSR transition matrix from 1M+ ClickHouse edges, redistributes dangling-node mass explicitly (line 89: `pr[dangling].sum()`), and writes to `paper_scores_v2` (lines 103-119). bioRxiv/medRxiv papers lacking OpenAlex IDs are excluded from the full-corpus graph (`pagerank_full.py:28-30`: `WHERE length(openalex_id) > 0`) and score as 0."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "34ad6a0cd10fc350",
@@ -6856,6 +8679,15 @@
       "canonicalUrl": "https://docs.astro.build/en/concepts/islands/",
       "repositoryPath": "research-papers/docs/learning/new-things.md",
       "tracks": ["research-papers"],
+      "hierarchy": {
+        "track": "Research Papers",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [
+        "Static exports must be regenerated (`papers export-ch` + `npm run build`) after every ingestion or re-tag run — the dashboard does not auto-refresh. Live endpoints (search, semantic-search, similar) bypass the static files and always read from ClickHouse directly (documented in README \"Refreshing the static JSON exports\" section)."
+      ],
       "format": "project-note",
       "estimatedMinutes": 12,
       "fingerprint": "0dd04a5515594635",

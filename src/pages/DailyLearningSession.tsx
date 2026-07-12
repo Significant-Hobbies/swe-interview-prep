@@ -41,6 +41,10 @@ export default function DailyLearningSession() {
     ({ assessment }) => answers[assessment.id] === assessment.correctIndex
   ).length;
   const score = assessments.length ? correct / assessments.length : 0;
+  const selectedSource = sources.find((source) => source.id === sourceId);
+  const moduleNames = [
+    ...new Set(plan.items.map((item) => item.hierarchy?.module).filter(Boolean)),
+  ];
 
   function finish() {
     const rating =
@@ -69,8 +73,13 @@ export default function DailyLearningSession() {
           Daily learning session
         </span>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Learn, recall, schedule.
+          {selectedSource ? selectedSource.label : 'Learn, recall, schedule.'}
         </h1>
+        {selectedSource && (
+          <p className="mt-3 text-sm leading-6 text-white/50">
+            {moduleNames.join(' · ')} · topics are taught in dependency order
+          </p>
+        )}
         <div className="mt-6 max-w-md">
           <label className="mb-2 block text-xs text-white/40">Choose what you want today</label>
           <select
@@ -200,20 +209,35 @@ function StudyPhase({
         <span className="font-mono text-xs text-white/35">{minutes} minutes</span>
       </div>
       <div className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-2">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <article key={item.id} className="flex min-h-56 flex-col bg-black p-5">
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
-              {item.project || item.collection || item.sourceKind}
+              {item.hierarchy
+                ? `${item.hierarchy.module} · Topic ${item.hierarchy.topicOrder}`
+                : item.project || item.collection || item.sourceKind}
             </span>
-            <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
-            <p className="mt-2 line-clamp-4 text-sm leading-6 text-white/50">{item.summary}</p>
+            <h3 className="mt-4 text-lg font-semibold text-white">
+              {index + 1}. {item.title}
+            </h3>
+            <span className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-sky-200/60">
+              Plain English
+            </span>
+            <p className="mt-1 text-sm leading-6 text-white/65">{item.summary}</p>
+            {item.learningNotes?.map((note) => (
+              <div key={note} className="mt-4 border-l-2 border-amber-300/40 pl-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-200/60">
+                  In the real project
+                </span>
+                <p className="mt-1 text-xs leading-5 text-white/45">{note}</p>
+              </div>
+            ))}
             <a
               href={item.canonicalUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-medium text-sky-300 hover:text-sky-200"
             >
-              Open source <ExternalLink className="h-4 w-4" />
+              Go deeper (optional) <ExternalLink className="h-4 w-4" />
             </a>
           </article>
         ))}
