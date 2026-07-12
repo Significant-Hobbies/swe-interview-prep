@@ -7,6 +7,7 @@ import PlaygroundHero from '../components/PlaygroundHero';
 import { Button } from '../components/ui';
 import { SessionPlanView } from '../components/SessionPlanView';
 import { HorizonCalendar } from '../components/HorizonCalendar';
+import { DailySourceQueue } from '../components/DailySourceQueue';
 import { GapAnalyzer } from './partials/GapAnalyzer';
 import { useProfile } from '../hooks/useProfile';
 import { useSessionPlan } from '../hooks/useSessionPlan';
@@ -104,6 +105,8 @@ export default function Today() {
           )}
         </div>
       )}
+
+      <DailySourceQueue />
 
       <SessionPlanView plan={enrichedPlan} />
 

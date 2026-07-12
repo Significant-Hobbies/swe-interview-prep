@@ -13,6 +13,7 @@
     "build-concept-index": "node scripts/build-concept-index.mjs",
     "sync:external-resources": "node scripts/harvest-external-resources.mjs && node scripts/bootstrap-external-resources.mjs",
     "sync:concept-packs": "node scripts/generate-concept-packs.mjs",
+    "sync:learning-sources": "node --experimental-strip-types scripts/sync-learning-sources.mjs",
     "ingest-library-rqs": "node scripts/ingest-library-rqs.mjs",
     "ingest-anki": "node scripts/ingest-anki.mjs",
     "ingest-leetcode": "node scripts/ingest-leetcode.mjs",

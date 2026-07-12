@@ -27,6 +27,8 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const BuildLab = lazy(() => import('./pages/BuildLab'));
 const MockInterview = lazy(() => import('./pages/MockInterview'));
 const LearningDoc = lazy(() => import('./pages/LearningDoc'));
+const LearningSources = lazy(() => import('./pages/LearningSources'));
+const LearningSourceDetail = lazy(() => import('./pages/LearningSourceDetail'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Login = lazy(() => import('./pages/Login'));
@@ -69,6 +71,8 @@ function AppRoutes() {
         <Route path="drills/:id" element={<BuildLab />} />
         <Route path="learning" element={<LearningDoc />} />
         <Route path="learning/:slug" element={<LearningDoc />} />
+        <Route path="sources" element={<LearningSources />} />
+        <Route path="sources/:id" element={<LearningSourceDetail />} />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />

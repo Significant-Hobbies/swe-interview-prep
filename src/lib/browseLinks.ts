@@ -8,6 +8,12 @@ export interface BrowseDestination {
 
 export const BROWSE_DESTINATIONS: BrowseDestination[] = [
   {
+    id: 'sources',
+    to: '/sources',
+    label: 'Learning sources',
+    blurb: 'News, projects, papers, and saved reading',
+  },
+  {
     id: 'explore',
     to: '/explore',
     label: 'Explore all',
