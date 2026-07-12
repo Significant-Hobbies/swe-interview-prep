@@ -49,12 +49,12 @@ describe('unified learning sources', () => {
   });
 
   it('builds repeatable 30-minute sessions for a chosen source', () => {
-    const first = buildDailyLearningSession('2026-07-12:1', [], 'project:tinygpt');
-    const next = buildDailyLearningSession('2026-07-12:2', [], 'project:tinygpt');
+    const first = buildDailyLearningSession('2026-07-12:1', [], 'project:posttrainllm');
+    const next = buildDailyLearningSession('2026-07-12:2', [], 'project:posttrainllm');
 
     expect(first.totalMinutes).toBe(30);
     expect(first.items.length).toBeGreaterThan(0);
-    expect(first.items.every((item) => item.sourceId === 'project:tinygpt')).toBe(true);
+    expect(first.items.every((item) => item.sourceId === 'project:posttrainllm')).toBe(true);
     expect(next.items.map((item) => item.id)).not.toEqual(first.items.map((item) => item.id));
   });
 
@@ -69,7 +69,7 @@ describe('unified learning sources', () => {
       'high-signal',
       'aliveville',
       'pace',
-      'tinygpt',
+      'posttrainllm',
       'significanthobbies',
       'reader',
       'anime-list',
@@ -84,13 +84,28 @@ describe('unified learning sources', () => {
     for (const project of expected) expect(sourceIds.has(`project:${project}`)).toBe(true);
     expect(sourceIds.has('project:knowledge-base')).toBe(false);
     expect(
-      LEARNING_SOURCES.sources.find((source) => source.id === 'project:tinygpt')
+      LEARNING_SOURCES.sources.find((source) => source.id === 'project:posttrainllm')
     ).toMatchObject({
       label: 'posttrainllm',
       syncStatus: 'fresh',
     });
-    expect(LEARNING_SOURCES.items.some((item) => item.id.startsWith('project:tinygpt:'))).toBe(
+    expect(LEARNING_SOURCES.items.some((item) => item.id.startsWith('project:posttrainllm:'))).toBe(
       true
     );
+    expect(
+      JSON.stringify({
+        sources: LEARNING_SOURCES.sources.map(({ id, label, description }) => ({
+          id,
+          label,
+          description,
+        })),
+        items: LEARNING_SOURCES.items.map(({ id, sourceId, project, tracks }) => ({
+          id,
+          sourceId,
+          project,
+          tracks,
+        })),
+      }).toLowerCase()
+    ).not.toContain('tinygpt');
   });
 });

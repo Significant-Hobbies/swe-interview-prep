@@ -84,7 +84,13 @@ function firstUrl(value) {
   return value.match(/https?:\/\/[^\s—)]+/)?.[0] || '';
 }
 
+function productId(project) {
+  return project === 'tinygpt' ? 'posttrainllm' : project;
+}
+
 function projectItems(project, body, repositoryPath) {
+  const publicId = productId(project);
+  const label = PROJECT_LABELS[project] || publicId;
   return body
     .split(/^##\s+/m)
     .slice(1)
@@ -94,20 +100,20 @@ function projectItems(project, body, repositoryPath) {
       if (!title || !what) return [];
       const gotcha = lineValue(chunk, 'Gotcha \\(from code\\)');
       const source = lineValue(chunk, 'Source');
-      const id = `project:${project}:${slugify(title)}`;
+      const id = `project:${publicId}:${slugify(title)}`;
       return [
         {
           id,
-          sourceId: `project:${project}`,
+          sourceId: `project:${publicId}`,
           sourceKind: 'project',
-          project,
+          project: label,
           title,
           summary: what,
           canonicalUrl:
             firstUrl(source) ||
             `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
           repositoryPath,
-          tracks: project === 'tinygpt' ? ['posttrainllm', 'tinygpt'] : [project],
+          tracks: [publicId],
           format: 'project-note',
           estimatedMinutes: 12,
           fingerprint: hash(`${title}\n${what}\n${gotcha}\n${source}`),
@@ -146,10 +152,11 @@ async function projectSources() {
     if (EXCLUDED_PROJECTS.has(project)) continue;
     const learning = await loadProjectLearning(project);
     const repo = project === 'aliveville' ? 'alive-ville' : project;
+    const publicId = productId(project);
     const next = learning ? projectItems(project, learning.body, learning.repositoryPath) : [];
     items.push(...next);
     sources.push({
-      id: `project:${project}`,
+      id: `project:${publicId}`,
       kind: 'project',
       label: PROJECT_LABELS[project] || project,
       description:
