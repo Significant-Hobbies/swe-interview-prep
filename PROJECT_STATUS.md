@@ -66,7 +66,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (AUDIT.md) |
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
-| Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, research paths, Reader, and High Signal; deterministic MCQs, Daily/Sprint modes, and nightly-sync support. PostTrainLLM/tinygpt uses a remote fallback when its local checkout is stale. |
+| Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, research paths, private Reader saves, and High Signal. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
 
 ## Products
 
@@ -97,7 +97,9 @@ External: LeetCode API (import), multi-provider LLM APIs
 - Husky pre-commit hooks; Biome/ESLint toolchain.
 
 ### Core study surfaces
-- **Unified learning sources:** `/sources` indexes active Fleet project study queues and research-paper paths without copying canonical source bodies. Today includes High Signal plus the next durable item; Sprint mode advances sequentially through one project/path; derived MCQs are bound to source fingerprints.
+- **Unified learning sources:** `/sources` indexes all 19 active Fleet project study queues and research-paper paths without copying canonical source bodies. The source catalog, source detail, and session routes require the configured owner Google account.
+- **Adaptive daily sessions:** `/session/:date/:sessionId` creates a fresh 30-minute session. The owner can choose any populated source or use the balanced High Signal + due-learning plan, run unlimited sessions per day, answer questions at the end, and have recall quality scheduled through the existing FSRS implementation.
+- **Private Reader adapter:** saved Reader articles load at request time through the authenticated server proxy. Article bodies and Reader credentials are never emitted into the static catalog or client bundle.
 - **DSA practice:** Monaco editor, pattern-based problem grouping (sliding window, two pointers, etc.), LeetCode import via API.
 - **LLD / HLD:** Excalidraw integration for architecture diagrams on problem views.
 - **Behavioral / concepts:** Learn and concept-detail routes with structured content paths.
@@ -122,7 +124,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 ## Todo / Planned / Deferred / Blocked
 
 ### Planned
-1. Configure the machine-local Reader API token to activate its shipped nightly saved-item adapter.
+1. Configure the Cloudflare Pages `READER_API_TOKEN` secret to activate the private live Reader adapter.
 2. Persist external learning progress and assessment feedback through the authenticated learning API; local storage is the first usable slice.
 3. ~~Docs alignment.~~ **Paused** — Cloudflare Pages architecture is canonical; stale historical references remain non-operational.
 2. ~~Auth/API verification pass.~~ **Paused** after current local typecheck and security baseline.

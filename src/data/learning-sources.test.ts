@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { LEARNING_SOURCES } from './learning-sources';
+import { buildDailyLearningSession, LEARNING_SOURCES } from './learning-sources';
+
+const memory = new Map<string, string>();
+Object.defineProperty(globalThis, 'localStorage', {
+  value: {
+    getItem: (key: string) => memory.get(key) ?? null,
+    setItem: (key: string, value: string) => memory.set(key, value),
+  },
+});
 
 describe('unified learning sources', () => {
   it('indexes approved source kinds without knowledge-base', () => {
@@ -37,6 +45,17 @@ describe('unified learning sources', () => {
   it('keeps Reader visible even when the local API token is not configured', () => {
     const reader = LEARNING_SOURCES.sources.find((source) => source.id === 'reader');
     expect(reader).toMatchObject({ kind: 'reader', syncStatus: 'pending', itemCount: 0 });
+    expect(LEARNING_SOURCES.items.some((item) => item.sourceKind === 'reader')).toBe(false);
+  });
+
+  it('builds repeatable 30-minute sessions for a chosen source', () => {
+    const first = buildDailyLearningSession('2026-07-12:1', [], 'project:tinygpt');
+    const next = buildDailyLearningSession('2026-07-12:2', [], 'project:tinygpt');
+
+    expect(first.totalMinutes).toBe(30);
+    expect(first.items.length).toBeGreaterThan(0);
+    expect(first.items.every((item) => item.sourceId === 'project:tinygpt')).toBe(true);
+    expect(next.items.map((item) => item.id)).not.toEqual(first.items.map((item) => item.id));
   });
 
   it('accounts for every active Fleet project and labels PostTrainLLM', () => {
