@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 
@@ -62,7 +63,13 @@ const STEPS = [
 
 export default function Login() {
   const { signInWithGoogle, continueAsGuest } = useAuth();
+  const navigate = useNavigate();
   const [debugInfo, setDebugInfo] = useState<string>('');
+
+  const startMockAsGuest = () => {
+    continueAsGuest();
+    navigate('/mock');
+  };
 
   useEffect(() => {
     document.getElementById('lcp-shell')?.remove();
@@ -119,6 +126,13 @@ export default function Login() {
             >
               Start learning
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </button>
+            <button
+              onClick={startMockAsGuest}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/5"
+            >
+              Try a mock interview
+              <ArrowRight className="h-4 w-4" />
             </button>
             <button
               onClick={signInWithGoogle}
@@ -230,13 +244,13 @@ export default function Login() {
       <footer className="border-t border-white/[0.08] py-10 text-center">
         <p className="font-mono text-xs text-white/40">
           © {new Date().getFullYear()} SWE Prep ·{' '}
-          <a href="/privacy" className="text-white/60 hover:text-white">
+          <Link to="/privacy" className="text-white/60 hover:text-white">
             Privacy
-          </a>{' '}
+          </Link>{' '}
           ·{' '}
-          <a href="/about" className="text-white/60 hover:text-white">
+          <Link to="/about" className="text-white/60 hover:text-white">
             About
-          </a>
+          </Link>
         </p>
       </footer>
     </div>
