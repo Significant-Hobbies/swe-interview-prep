@@ -164,6 +164,7 @@ export default function App() {
   const { user, isGuest, loading } = useAuth();
   const location = useLocation();
   const isPublicShare = location.pathname.startsWith('/share/');
+  const isPublicInfoRoute = location.pathname === '/about' || location.pathname === '/privacy';
   const isPrivateLearningRoute =
     location.pathname === '/sources' ||
     location.pathname.startsWith('/sources/') ||
@@ -189,7 +190,7 @@ export default function App() {
 
   if (loading) return null;
 
-  if (!user && !isGuest && !isPublicShare && !isPrivateLearningRoute) {
+  if (!user && !isGuest && !isPublicShare && !isPublicInfoRoute && !isPrivateLearningRoute) {
     return (
       <Suspense fallback={null}>
         <Login />
