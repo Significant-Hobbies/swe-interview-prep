@@ -2,7 +2,7 @@
 
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -22,6 +22,28 @@ const EXCLUDED_PROJECTS = new Set([
   'elves-hq',
   'saas-maker-ci-fix',
 ]);
+const ACTIVE_PROJECTS = [
+  'saas-maker',
+  'free-ai',
+  'reel-pipeline',
+  'drank',
+  'codevetter',
+  'starboard',
+  'high-signal',
+  'aliveville',
+  'pace',
+  'tinygpt',
+  'significanthobbies',
+  'reader',
+  'anime-list',
+  'swe-interview-prep',
+  'email-manager',
+  'looptv',
+  'rolepatch',
+  'karte',
+  'research-papers',
+];
+const PROJECT_LABELS = { tinygpt: 'PostTrainLLM / tinygpt' };
 
 function hash(value) {
   return createHash('sha256').update(value).digest('hex').slice(0, 16);
@@ -42,8 +64,7 @@ function firstUrl(value) {
   return value.match(/https?:\/\/[^\s—)]+/)?.[0] || '';
 }
 
-function projectItems(project, filePath) {
-  const body = readFileSync(filePath, 'utf8');
+function projectItems(project, body, repositoryPath) {
   return body
     .split(/^##\s+/m)
     .slice(1)
@@ -65,8 +86,8 @@ function projectItems(project, filePath) {
           canonicalUrl:
             firstUrl(source) ||
             `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
-          repositoryPath: relative(FLEET_ROOT, filePath),
-          tracks: [project],
+          repositoryPath,
+          tracks: project === 'tinygpt' ? ['posttrainllm', 'tinygpt'] : [project],
           format: 'project-note',
           estimatedMinutes: 12,
           fingerprint: hash(`${title}\n${what}\n${gotcha}\n${source}`),
@@ -76,27 +97,48 @@ function projectItems(project, filePath) {
     });
 }
 
-function projectSources() {
-  if (!existsSync(FLEET_ROOT)) return { sources: [], items: [] };
+async function loadProjectLearning(project) {
+  const learningPath = join(FLEET_ROOT, project, 'docs', 'learning', 'new-things.md');
+  if (existsSync(learningPath)) {
+    return {
+      body: readFileSync(learningPath, 'utf8'),
+      repositoryPath: relative(FLEET_ROOT, learningPath),
+    };
+  }
+  const repo = project === 'aliveville' ? 'alive-ville' : project;
+  const url = `https://raw.githubusercontent.com/sarthak-fleet/${repo}/main/docs/learning/new-things.md`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    return {
+      body: await response.text(),
+      repositoryPath: `${project}/docs/learning/new-things.md`,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function projectSources() {
   const sources = [];
   const items = [];
-  for (const project of readdirSync(FLEET_ROOT).sort()) {
+  for (const project of ACTIVE_PROJECTS) {
     if (EXCLUDED_PROJECTS.has(project)) continue;
-    const projectPath = join(FLEET_ROOT, project);
-    if (!statSync(projectPath).isDirectory()) continue;
-    const learningPath = join(projectPath, 'docs', 'learning', 'new-things.md');
-    if (!existsSync(learningPath)) continue;
-    const next = projectItems(project, learningPath);
-    if (next.length === 0) continue;
+    const learning = await loadProjectLearning(project);
+    const repo = project === 'aliveville' ? 'alive-ville' : project;
+    const next = learning ? projectItems(project, learning.body, learning.repositoryPath) : [];
     items.push(...next);
     sources.push({
       id: `project:${project}`,
       kind: 'project',
-      label: project,
-      description: `Learning queue from ${project}`,
-      canonicalUrl: `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md`,
+      label: PROJECT_LABELS[project] || project,
+      description:
+        next.length > 0
+          ? `Learning queue from ${PROJECT_LABELS[project] || project}`
+          : `No learning track published yet for ${project}`,
+      canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
       itemCount: next.length,
-      syncStatus: 'fresh',
+      syncStatus: next.length > 0 ? 'fresh' : 'pending',
     });
   }
   return { sources, items };
@@ -304,7 +346,7 @@ function addDerivedAssessments(items) {
   });
 }
 
-const projects = projectSources();
+const projects = await projectSources();
 const research = await researchSources();
 const reader = await readerSources();
 const brief = dailyBrief();

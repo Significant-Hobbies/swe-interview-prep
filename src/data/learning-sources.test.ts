@@ -38,4 +38,40 @@ describe('unified learning sources', () => {
     const reader = LEARNING_SOURCES.sources.find((source) => source.id === 'reader');
     expect(reader).toMatchObject({ kind: 'reader', syncStatus: 'pending', itemCount: 0 });
   });
+
+  it('accounts for every active Fleet project and labels PostTrainLLM', () => {
+    const expected = [
+      'saas-maker',
+      'free-ai',
+      'reel-pipeline',
+      'drank',
+      'codevetter',
+      'starboard',
+      'high-signal',
+      'aliveville',
+      'pace',
+      'tinygpt',
+      'significanthobbies',
+      'reader',
+      'anime-list',
+      'swe-interview-prep',
+      'email-manager',
+      'looptv',
+      'rolepatch',
+      'karte',
+      'research-papers',
+    ];
+    const sourceIds = new Set(LEARNING_SOURCES.sources.map((source) => source.id));
+    for (const project of expected) expect(sourceIds.has(`project:${project}`)).toBe(true);
+    expect(sourceIds.has('project:knowledge-base')).toBe(false);
+    expect(
+      LEARNING_SOURCES.sources.find((source) => source.id === 'project:tinygpt')
+    ).toMatchObject({
+      label: 'PostTrainLLM / tinygpt',
+      syncStatus: 'fresh',
+    });
+    expect(LEARNING_SOURCES.items.some((item) => item.id.startsWith('project:tinygpt:'))).toBe(
+      true
+    );
+  });
 });

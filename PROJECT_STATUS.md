@@ -66,7 +66,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (AUDIT.md) |
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
-| Unified learning sources (2026-07-12) | Added reference-only project and research catalogs, High Signal daily entry, deterministic MCQs, Daily/Sprint modes, and nightly-sync support |
+| Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, research paths, Reader, and High Signal; deterministic MCQs, Daily/Sprint modes, and nightly-sync support. PostTrainLLM/tinygpt uses a remote fallback when its local checkout is stale. |
 
 ## Products
 
