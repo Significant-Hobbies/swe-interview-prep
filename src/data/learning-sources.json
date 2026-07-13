@@ -325,7 +325,7 @@
       "kind": "research",
       "label": "Sutskever/Carmack Core",
       "description": "You can trace a compact path from sequence models, convolution, attention, scaling, compression, and algorithmic information theory.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 27,
       "syncStatus": "fresh"
     },
@@ -334,7 +334,7 @@
       "kind": "research",
       "label": "Karpathy LLM Systems",
       "description": "You can explain the mainstream LLM recipe from architecture to scale, chat tuning, and frontier evaluation.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 7,
       "syncStatus": "fresh"
     },
@@ -343,7 +343,7 @@
       "kind": "research",
       "label": "LeCun World Models",
       "description": "You can explain why LeCun emphasizes self-supervised representation learning, prediction, planning, and world models.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 6,
       "syncStatus": "fresh"
     },
@@ -352,7 +352,7 @@
       "kind": "research",
       "label": "Human-Compatible AI Safety",
       "description": "You can connect capability milestones to the safety questions around robustness, uncertainty, and preference inference.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 8,
       "syncStatus": "fresh"
     },
@@ -361,7 +361,7 @@
       "kind": "research",
       "label": "Agentic LLMs",
       "description": "You can explain the basic agent loop and choose when to add tools, memory, search, and skill reuse.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 6,
       "syncStatus": "fresh"
     },
@@ -370,7 +370,7 @@
       "kind": "research",
       "label": "Transformer Foundations",
       "description": "You can trace the dependency chain from alignment-style attention to pretraining and scaling.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 6,
       "syncStatus": "fresh"
     },
@@ -379,7 +379,7 @@
       "kind": "research",
       "label": "Alignment And RLHF",
       "description": "You can separate SFT, reward modeling, RLHF, constitutional feedback, and direct preference objectives.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 5,
       "syncStatus": "fresh"
     },
@@ -388,7 +388,7 @@
       "kind": "research",
       "label": "Retrieval And RAG",
       "description": "You can reason about retrievers, readers, generators, and when citations are evidence versus decoration.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 5,
       "syncStatus": "fresh"
     },
@@ -397,7 +397,7 @@
       "kind": "research",
       "label": "Diffusion And Generative Vision",
       "description": "You can explain why denoising, score matching, and latent spaces made diffusion practical.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 5,
       "syncStatus": "fresh"
     },
@@ -406,7 +406,7 @@
       "kind": "research",
       "label": "Compression And Generalization",
       "description": "You can explain why compression is a useful lens for generalization without overstating it.",
-      "canonicalUrl": "https://research-papers.pages.dev/paths",
+      "canonicalUrl": "https://papers.highsignal.app/paths",
       "itemCount": 5,
       "syncStatus": "fresh"
     },
@@ -415,7 +415,7 @@
       "kind": "reader",
       "label": "Reader: Saved Articles",
       "description": "Private saved blogs and articles loaded after Google authentication.",
-      "canonicalUrl": "https://reader.sarthakagrawal927.workers.dev",
+      "canonicalUrl": "https://read.significanthobbies.com",
       "itemCount": 0,
       "syncStatus": "pending"
     }
