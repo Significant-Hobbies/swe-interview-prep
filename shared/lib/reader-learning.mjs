@@ -18,6 +18,32 @@ function hash(value) {
   return `${(first >>> 0).toString(16).padStart(8, '0')}${(second >>> 0).toString(16).padStart(8, '0')}`;
 }
 
+const SOURCE_ID = 'reader';
+
+function source(itemCount, syncStatus) {
+  return {
+    id: SOURCE_ID,
+    kind: 'reader',
+    label: 'Reader',
+    description: 'Private saved blogs and articles.',
+    canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
+    itemCount,
+    syncStatus,
+  };
+}
+
+function assertReaderExport(payload) {
+  if (
+    !payload ||
+    payload.format !== 'reader-export' ||
+    payload.formatVersion !== 1 ||
+    typeof payload.exportedAt !== 'string' ||
+    !Array.isArray(payload?.tables?.articles)
+  ) {
+    throw new Error('Unsupported Reader export');
+  }
+}
+
 export function buildReaderLearningSnapshot(payload) {
   const articles = Array.isArray(payload?.tables?.articles) ? payload.tables.articles : [];
   const rawItems = articles.flatMap((article) => {
@@ -90,15 +116,39 @@ export function buildReaderLearningSnapshot(payload) {
   });
 
   return {
-    source: {
-      id: 'reader',
-      kind: 'reader',
-      label: 'Reader',
-      description: 'Private saved blogs and articles.',
-      canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
-      itemCount: items.length,
-      syncStatus: 'fresh',
-    },
+    source: source(items.length, 'fresh'),
     items,
   };
+}
+
+export async function syncReaderLearningFeed({
+  fetchImpl,
+  url,
+  token,
+  previousSnapshot,
+  signal = AbortSignal.timeout(10_000),
+}) {
+  try {
+    if (!token) throw new Error('Reader learning source is not configured');
+    const response = await fetchImpl(url, {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      signal,
+    });
+    if (!response.ok) throw new Error(`Reader export returned ${response.status}`);
+    const payload = await response.json();
+    assertReaderExport(payload);
+    return buildReaderLearningSnapshot(payload);
+  } catch (error) {
+    const previousItems = (previousSnapshot?.items || []).filter(
+      (item) => item.sourceId === SOURCE_ID
+    );
+    return {
+      source: source(previousItems.length, 'stale'),
+      items: previousItems,
+      warning: error instanceof Error ? error.message : String(error),
+    };
+  }
 }

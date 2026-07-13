@@ -68,6 +68,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
 | Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, project roadmaps, research paths, private Reader saves, High Signal, and 12 embedded GitHub learning repositories. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
 | High Signal learning feed (2026-07-13) | Replaced the synthetic daily placeholder with a validated `high-signal.learning-brief.v1` adapter. Sync preserves source citations and retains the last good briefing with `stale` status on network/schema failure. External item detail now saves item-scoped takeaways and opens a prefilled Playground artifact prompt. |
+| Reader dynamic-source closure (2026-07-13) | Added a credential-free versioned Reader fixture and wired the production proxy through the tested Bearer-authenticated adapter. Supported exports map deterministically without article bodies; 401/upstream/schema failures retain only last-good Reader items as stale. The final learning flow passed unit, type, build, desktop browser, and explicit 390×844 responsive checks. |
 
 ## Products
 
