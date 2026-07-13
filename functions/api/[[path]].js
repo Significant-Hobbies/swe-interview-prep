@@ -1,7 +1,7 @@
 import { createClient } from '@libsql/client/web';
 
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
-import { buildReaderLearningSnapshot } from '../../shared/lib/reader-learning.mjs';
+import { syncReaderLearningFeed } from '../../shared/lib/reader-learning.mjs';
 import { withTiming } from '../_lib/timing.js';
 
 const AUTH_COOKIE_NAME = 'dsa_prep_auth';
@@ -438,12 +438,12 @@ async function handleReaderLearning(request, env) {
   if (!env.READER_API_TOKEN) {
     return json({ error: 'Reader learning source is not configured' }, { status: 503 });
   }
-  const response = await fetch(
-    env.READER_EXPORT_URL || 'https://reader.sarthakagrawal927.workers.dev/api/data-export',
-    { headers: { Authorization: `Bearer ${env.READER_API_TOKEN}` } }
-  );
-  if (!response.ok) return json({ error: 'Reader export unavailable' }, { status: 502 });
-  const snapshot = buildReaderLearningSnapshot(await response.json());
+  const snapshot = await syncReaderLearningFeed({
+    fetchImpl: fetch,
+    url: env.READER_EXPORT_URL || 'https://reader.sarthakagrawal927.workers.dev/api/data-export',
+    token: env.READER_API_TOKEN,
+  });
+  if (snapshot.warning) return json({ error: 'Reader export unavailable' }, { status: 502 });
   return json(snapshot, { headers: { 'cache-control': 'private, no-store' } });
 }
 

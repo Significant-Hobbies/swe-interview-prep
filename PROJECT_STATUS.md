@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 
 ## Why/What
 
@@ -67,6 +67,8 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
 | Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, project roadmaps, research paths, private Reader saves, High Signal, and 12 embedded GitHub learning repositories. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
+| High Signal learning feed (2026-07-13) | Replaced the synthetic daily placeholder with a validated `high-signal.learning-brief.v1` adapter. Sync preserves source citations and retains the last good briefing with `stale` status on network/schema failure. External item detail now saves item-scoped takeaways and opens a prefilled Playground artifact prompt. |
+| Reader dynamic-source closure (2026-07-13) | Added a credential-free versioned Reader fixture and wired the production proxy through the tested Bearer-authenticated adapter. Supported exports map deterministically without article bodies; 401/upstream/schema failures retain only last-good Reader items as stale. The final learning flow passed unit, type, build, desktop browser, and explicit 390×844 responsive checks. |
 
 ## Products
 
@@ -100,6 +102,8 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Unified learning sources:** `/sources` indexes all 19 active Fleet project study queues and research-paper paths without copying canonical source bodies. The source catalog, source detail, and session routes require the configured owner Google account.
 - **Adaptive daily sessions:** `/session/:date/:sessionId` creates a fresh 30-minute session. The owner can choose any populated source or use the balanced High Signal + due-learning plan, run unlimited sessions per day, answer questions at the end, and have recall quality scheduled through the existing FSRS implementation.
 - **Private Reader adapter:** saved Reader articles load at request time through the authenticated server proxy. Article bodies and Reader credentials are never emitted into the static catalog or client bundle.
+- **High Signal adapter:** the checked-in registry consumes the versioned compact daily feed, rejects unsupported payloads, and fails stale instead of inventing fresh content.
+- **External learning handoff:** project, research, briefing, and Reader items can be studied in sessions, marked for FSRS review, saved into the notes store, and opened as a prefilled Playground exercise without changing native concepts.
 - **Repository Library:** `/library` restores 12 embedded GitHub learning repositories with searchable source cards, original section hierarchy, and repository exercises in read/practice modes behind owner authentication.
 - **DSA practice:** Monaco editor, pattern-based problem grouping (sliding window, two pointers, etc.), LeetCode import via API.
 - **LLD / HLD:** Excalidraw integration for architecture diagrams on problem views.

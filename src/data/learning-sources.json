@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-12T12:05:32.912Z",
+  "generatedAt": "2026-07-13T03:00:55.261Z",
   "sources": [
     {
       "id": "swe-native",
@@ -15,10 +15,10 @@
       "id": "high-signal",
       "kind": "briefing",
       "label": "High Signal: Daily Brief",
-      "description": "Fresh source-backed technology, startup, market, and product briefing.",
+      "description": "Source-backed technology, startup, market, and product briefing.",
       "canonicalUrl": "https://highsignal.app/brief",
       "itemCount": 1,
-      "syncStatus": "fresh"
+      "syncStatus": "stale"
     },
     {
       "id": "project:saas-maker",
@@ -82,7 +82,7 @@
       "label": "CodeVetter",
       "description": "Learning queue from CodeVetter",
       "canonicalUrl": "https://github.com/sarthak-fleet/codevetter/blob/main/docs/learning/new-things.md",
-      "itemCount": 15,
+      "itemCount": 19,
       "syncStatus": "fresh",
       "roadmap": {
         "label": "CodeVetter learning roadmap",
@@ -145,7 +145,7 @@
       "label": "Pace",
       "description": "Learning queue from Pace",
       "canonicalUrl": "https://github.com/sarthak-fleet/pace/blob/main/docs/learning/new-things.md",
-      "itemCount": 11,
+      "itemCount": 13,
       "syncStatus": "fresh",
       "roadmap": {
         "label": "Pace roadmap",
@@ -164,6 +164,7 @@
           "Priority 11: MCP Integration Substrate",
           "Priority 12: Set-of-Mark Click Recovery — SHIP VERDICT PENDING",
           "Priority 12a: Automation Modules — IMPLEMENTED + WIRED",
+          "Priority 12b: Always-On Companion Mode — IN PROGRESS",
           "Priority 13: Premium Conversational UI",
           "Priority 14: One-Tap obscura (headless browser) in the MCP catalog",
           "Deferred (gated, do NOT start blind): UI-TARS / GUI-grounding VLM"
@@ -2517,7 +2518,7 @@
           "question": "Which statement best describes “Outcome calibration” in CodeVetter?",
           "options": [
             "Memory-safe compiled language without a GC; used here for the Tauri backend.",
-            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB.",
+            "workflows triggered by events that a GITHUB_TOKEN created do NOT cascade to other workflows — a documented anti-recursion safeguard; `workflow_dispatch` is the one event that still fires.",
             "Checking whether a confidence score or risk signal matches observed outcomes over time.",
             "Static-site and SSR hosting on Cloudflare's edge network, triggered by git push."
           ],
@@ -2557,8 +2558,8 @@
           "question": "Which statement best describes “npm workspaces (monorepo)” in CodeVetter?",
           "options": [
             "Memory-safe compiled language without a GC; used here for the Tauri backend.",
-            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB.",
-            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently).",
+            "workflows triggered by events that a GITHUB_TOKEN created do NOT cascade to other workflows — a documented anti-recursion safeguard; `workflow_dispatch` is the one event that still fires.",
+            "making a site legible to AI answer engines (GPTBot, ClaudeBot, Perplexity): FAQ blocks, robots rules, structured data.",
             "Node's built-in multi-package monorepo support via `workspaces` in `package.json`."
           ],
           "correctIndex": 3,
@@ -2596,10 +2597,10 @@
           "type": "mcq",
           "question": "Which statement best describes “Cloudflare Pages deployment” in CodeVetter?",
           "options": [
-            "Two paths to the same model — an in-process binding (zero HTTP hop, Workers only) and an HTTP gateway (works in Node/GH Actions too).",
+            "a pseudo-terminal gives a child process a real TTY (colors, resize, interactive prompts); xterm.js renders the byte stream in the webview.",
             "Static-site and SSR hosting on Cloudflare's edge network, triggered by git push.",
-            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB.",
-            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently)."
+            "workflows triggered by events that a GITHUB_TOKEN created do NOT cascade to other workflows — a documented anti-recursion safeguard; `workflow_dispatch` is the one event that still fires.",
+            "making a site legible to AI answer engines (GPTBot, ClaudeBot, Perplexity): FAQ blocks, robots rules, structured data."
           ],
           "correctIndex": 1,
           "explanation": "`root_dir` was set to `apps/desktop` instead of `apps/landing-page` — CF Pages silently built the wrong target; Vite outputs to `out/` not `dist/`, so the destination dir config must match. (`apps/landing-page-astro/wrangler.toml`)",
@@ -2634,14 +2635,174 @@
           "type": "mcq",
           "question": "Which statement best describes “Rust (systems language basics)” in CodeVetter?",
           "options": [
-            "libSQL SQL function for approximate nearest-neighbor search; returns K candidates globally.",
+            "per-repo background tasks that poll GitHub PRs and run the review pipeline on new heads, with per-watcher error recovery and retry.",
             "Memory-safe compiled language without a GC; used here for the Tauri backend.",
-            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently).",
-            "Two paths to the same model — an in-process binding (zero HTTP hop, Workers only) and an HTTP gateway (works in Node/GH Actions too)."
+            "making a site legible to AI answer engines (GPTBot, ClaudeBot, Perplexity): FAQ blocks, robots rules, structured data.",
+            "a pseudo-terminal gives a child process a real TTY (colors, resize, interactive prompts); xterm.js renders the byte stream in the webview."
           ],
           "correctIndex": 1,
           "explanation": "https://doc.rust-lang.org/book/",
           "sourceFingerprint": "a7f44a312ca02019",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:codevetter:github-actions-workflow-chaining-github-token-anti-recursion",
+      "sourceId": "project:codevetter",
+      "sourceKind": "project",
+      "project": "CodeVetter",
+      "title": "GitHub Actions workflow chaining (GITHUB_TOKEN anti-recursion)",
+      "summary": "workflows triggered by events that a GITHUB_TOKEN created do NOT cascade to other workflows — a documented anti-recursion safeguard; `workflow_dispatch` is the one event that still fires.",
+      "canonicalUrl": "https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow",
+      "repositoryPath": "codevetter/docs/learning/new-things.md",
+      "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 16
+      },
+      "learningNotes": [
+        "the comment block at the top of `auto-release.yml` is the canonical explanation; a `tauri.conf.json` version bump on main is the trigger."
+      ],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "66bd2914685eeef8",
+      "assessments": [
+        {
+          "id": "project:codevetter:github-actions-workflow-chaining-github-token-anti-recursion:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “GitHub Actions workflow chaining (GITHUB_TOKEN anti-recursion)” in CodeVetter?",
+          "options": [
+            "per-repo background tasks that poll GitHub PRs and run the review pipeline on new heads, with per-watcher error recovery and retry.",
+            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB.",
+            "workflows triggered by events that a GITHUB_TOKEN created do NOT cascade to other workflows — a documented anti-recursion safeguard; `workflow_dispatch` is the one event that still fires.",
+            "a pseudo-terminal gives a child process a real TTY (colors, resize, interactive prompts); xterm.js renders the byte stream in the webview."
+          ],
+          "correctIndex": 2,
+          "explanation": "the comment block at the top of `auto-release.yml` is the canonical explanation; a `tauri.conf.json` version bump on main is the trigger.",
+          "sourceFingerprint": "66bd2914685eeef8",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:codevetter:geo-ai-crawler-discoverability",
+      "sourceId": "project:codevetter",
+      "sourceKind": "project",
+      "project": "CodeVetter",
+      "title": "GEO — AI-crawler discoverability",
+      "summary": "making a site legible to AI answer engines (GPTBot, ClaudeBot, Perplexity): FAQ blocks, robots rules, structured data.",
+      "canonicalUrl": "https://isitagentready.com",
+      "repositoryPath": "codevetter/docs/learning/new-things.md",
+      "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 17
+      },
+      "learningNotes": [
+        "copy on marketing surfaces IS a review target — the review engine caught the keychain contradiction as a finding. (`apps/landing-page-astro/src/components/FAQ.astro`)"
+      ],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "492f277fd9f1aa2f",
+      "assessments": [
+        {
+          "id": "project:codevetter:geo-ai-crawler-discoverability:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “GEO — AI-crawler discoverability” in CodeVetter?",
+          "options": [
+            "per-repo background tasks that poll GitHub PRs and run the review pipeline on new heads, with per-watcher error recovery and retry.",
+            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB.",
+            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently).",
+            "making a site legible to AI answer engines (GPTBot, ClaudeBot, Perplexity): FAQ blocks, robots rules, structured data."
+          ],
+          "correctIndex": 3,
+          "explanation": "copy on marketing surfaces IS a review target — the review engine caught the keychain contradiction as a finding. (`apps/landing-page-astro/src/components/FAQ.astro`)",
+          "sourceFingerprint": "492f277fd9f1aa2f",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:codevetter:pty-backed-agent-terminals-portable-pty-xterm-js",
+      "sourceId": "project:codevetter",
+      "sourceKind": "project",
+      "project": "CodeVetter",
+      "title": "PTY-backed agent terminals (portable-pty + xterm.js)",
+      "summary": "a pseudo-terminal gives a child process a real TTY (colors, resize, interactive prompts); xterm.js renders the byte stream in the webview.",
+      "canonicalUrl": "https://xtermjs.org/",
+      "repositoryPath": "codevetter/docs/learning/new-things.md",
+      "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 18
+      },
+      "learningNotes": [
+        "agent status is driven by Codex-Warp structured events when present, with conservative terminal-output detection only as fallback; resize must be forwarded to the PTY or full-screen TUIs corrupt. (`commands/agent_terminal.rs`; spec `openspec/specs/agent-panel/`)"
+      ],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "7ade47602e90b047",
+      "assessments": [
+        {
+          "id": "project:codevetter:pty-backed-agent-terminals-portable-pty-xterm-js:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “PTY-backed agent terminals (portable-pty + xterm.js)” in CodeVetter?",
+          "options": [
+            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently).",
+            "Two paths to the same model — an in-process binding (zero HTTP hop, Workers only) and an HTTP gateway (works in Node/GH Actions too).",
+            "a pseudo-terminal gives a child process a real TTY (colors, resize, interactive prompts); xterm.js renders the byte stream in the webview.",
+            "libSQL native column type storing fixed-length float32 vectors; powers `libsql_vector_idx` ANN search without a separate vector DB."
+          ],
+          "correctIndex": 2,
+          "explanation": "agent status is driven by Codex-Warp structured events when present, with conservative terminal-output detection only as fallback; resize must be forwarded to the PTY or full-screen TUIs corrupt. (`commands/agent_terminal.rs`; spec `openspec/specs/agent-panel/`)",
+          "sourceFingerprint": "7ade47602e90b047",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:codevetter:github-pr-polling-watchers-t-rex",
+      "sourceId": "project:codevetter",
+      "sourceKind": "project",
+      "project": "CodeVetter",
+      "title": "GitHub PR polling watchers (T-Rex)",
+      "summary": "per-repo background tasks that poll GitHub PRs and run the review pipeline on new heads, with per-watcher error recovery and retry.",
+      "canonicalUrl": "https://docs.github.com/en/rest/pulls",
+      "repositoryPath": "codevetter/docs/learning/new-things.md",
+      "tracks": ["codevetter"],
+      "hierarchy": {
+        "track": "CodeVetter",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 19
+      },
+      "learningNotes": [
+        "watchers resume from DB rows on app start (`resume_enabled_watchers`); pre-flight validates `gh` auth + token before enabling; base branch is inferred per-PR rather than assumed `main`. (`commands/trex_watcher.rs`)"
+      ],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "607b542cff7f52d6",
+      "assessments": [
+        {
+          "id": "project:codevetter:github-pr-polling-watchers-t-rex:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “GitHub PR polling watchers (T-Rex)” in CodeVetter?",
+          "options": [
+            "per-repo background tasks that poll GitHub PRs and run the review pipeline on new heads, with per-watcher error recovery and retry.",
+            "`@cf/baai/bge-base-en-v1.5` — Cloudflare-hosted 768-dimension sentence embedding model trained with contrastive learning for asymmetric retrieval (queries and passages treated differently).",
+            "Two paths to the same model — an in-process binding (zero HTTP hop, Workers only) and an HTTP gateway (works in Node/GH Actions too).",
+            "libSQL SQL function for approximate nearest-neighbor search; returns K candidates globally."
+          ],
+          "correctIndex": 0,
+          "explanation": "watchers resume from DB rows on app start (`resume_enabled_watchers`); pre-flight validates `gh` auth + token before enabling; base branch is inferred per-PR rather than assumed `main`. (`commands/trex_watcher.rs`)",
+          "sourceFingerprint": "607b542cff7f52d6",
           "generator": "deterministic-source-v1"
         }
       ]
@@ -4685,25 +4846,25 @@
         "topicOrder": 3
       },
       "learningNotes": [
-        "WhisperKit is **fully wired** as of the current codebase (`WhisperKitTranscriptionProvider.isRuntimeAvailable = true`, line 32; full streaming session in `WhisperKitTranscriptionProvider.swift:110-223`). The factory (`BuddyTranscriptionProvider.swift:67`) selects it when `TranscriptionProvider=whisperKit` and `isRuntimeAvailable` is true; the Apple Speech fallback only fires when the flag is false. Model must be pre-placed at `~/Documents/huggingface/models/argmaxinc/whisperkit-coreml/<model>/` — `download: false` means a missing model throws immediately rather than fetching silently."
+        "WhisperKit is **fully wired** as of the current codebase (`WhisperKitTranscriptionProvider.isRuntimeAvailable = true`, line 37; full streaming session in `WhisperKitTranscriptionProvider.swift:56-246`). The factory (`BuddyTranscriptionProvider.swift`) selects it when `TranscriptionProvider=whisperKit` and `isRuntimeAvailable` is true; the Apple Speech fallback only fires when the flag is false. Model must be pre-placed at `~/Documents/huggingface/models/argmaxinc/whisperkit-coreml/<model>/` — `download: false` means a missing model throws immediately rather than fetching silently."
       ],
       "format": "project-note",
       "estimatedMinutes": 12,
-      "fingerprint": "473276e2b741227a",
+      "fingerprint": "10ac1fa93d9032cd",
       "assessments": [
         {
           "id": "project:pace:whisperkit-on-device-streaming-asr:mcq:1",
           "type": "mcq",
           "question": "Which statement best describes “WhisperKit (on-device streaming ASR)” in Pace?",
           "options": [
-            "macOS accessibility tree API — lets apps read UI element roles/labels and synthesize actions (press, set-value) without CGEvent coordinate clicks.",
             "Swift package (Argmax) wrapping OpenAI Whisper large-v3-turbo as CoreML for real-time, privacy-safe transcription on Apple Silicon; ~9x realtime on ANE.",
             "Design constraint that ensures audio output from Pace's own TTS sidecar is never re-captured as microphone input.",
-            "Apple's modern (macOS 13.0+, with enhanced per-display filters on macOS 14.2+) screen-capture framework — replaces `CGWindowListCreateImage`, runs in-process, permission-gated."
+            "Apple's modern (macOS 13.0+, with enhanced per-display filters on macOS 14.2+) screen-capture framework — replaces `CGWindowListCreateImage`, runs in-process, permission-gated.",
+            "macOS accessibility tree API — lets apps read UI element roles/labels and synthesize actions (press, set-value) without CGEvent coordinate clicks."
           ],
-          "correctIndex": 1,
-          "explanation": "WhisperKit is **fully wired** as of the current codebase (`WhisperKitTranscriptionProvider.isRuntimeAvailable = true`, line 32; full streaming session in `WhisperKitTranscriptionProvider.swift:110-223`). The factory (`BuddyTranscriptionProvider.swift:67`) selects it when `TranscriptionProvider=whisperKit` and `isRuntimeAvailable` is true; the Apple Speech fallback only fires when the flag is false. Model must be pre-placed at `~/Documents/huggingface/models/argmaxinc/whisperkit-coreml/<model>/` — `download: false` means a missing model throws immediately rather than fetching silently.",
-          "sourceFingerprint": "473276e2b741227a",
+          "correctIndex": 0,
+          "explanation": "WhisperKit is **fully wired** as of the current codebase (`WhisperKitTranscriptionProvider.isRuntimeAvailable = true`, line 37; full streaming session in `WhisperKitTranscriptionProvider.swift:56-246`). The factory (`BuddyTranscriptionProvider.swift`) selects it when `TranscriptionProvider=whisperKit` and `isRuntimeAvailable` is true; the Apple Speech fallback only fires when the flag is false. Model must be pre-placed at `~/Documents/huggingface/models/argmaxinc/whisperkit-coreml/<model>/` — `download: false` means a missing model throws immediately rather than fetching silently.",
+          "sourceFingerprint": "10ac1fa93d9032cd",
           "generator": "deterministic-source-v1"
         }
       ]
@@ -4779,7 +4940,7 @@
             "Design constraint that ensures audio output from Pace's own TTS sidecar is never re-captured as microphone input.",
             "macOS accessibility tree API — lets apps read UI element roles/labels and synthesize actions (press, set-value) without CGEvent coordinate clicks.",
             "Desktop app that serves local LLMs/VLMs behind an OpenAI-compatible HTTP API on `localhost:1234`; exposes `/v1/chat/completions`, `/v1/embeddings`, `/v1/completions`.",
-            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems."
+            "LM Studio loads a configured model on first request (JIT) rather than at server start, and separately auto-unloads a model after an idle period to free RAM — both save memory but cost latency (a cold-load tax) or correctness (mid-session eviction) if the app doesn't account for them."
           ],
           "correctIndex": 0,
           "explanation": "The URL-level guard (`PaceLocalEndpointGuard`, `LocalServerTTSClient.swift:51`) ensures audio synthesis only ever calls a loopback address. The audio pipeline exclusion zone (preventing `AVAudioEngine` from capturing `AVSpeechSynthesizer` or sidecar output) is architecturally noted but not yet implemented — it is the remaining open trust surface for self-capture prevention.",
@@ -4816,10 +4977,10 @@
           "type": "mcq",
           "question": "Which statement best describes “ScreenCaptureKit” in Pace?",
           "options": [
-            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible.",
+            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems.",
             "Apple's modern (macOS 13.0+, with enhanced per-display filters on macOS 14.2+) screen-capture framework — replaces `CGWindowListCreateImage`, runs in-process, permission-gated.",
             "Desktop app that serves local LLMs/VLMs behind an OpenAI-compatible HTTP API on `localhost:1234`; exposes `/v1/chat/completions`, `/v1/embeddings`, `/v1/completions`.",
-            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems."
+            "LM Studio loads a configured model on first request (JIT) rather than at server start, and separately auto-unloads a model after an idle period to free RAM — both save memory but cost latency (a cold-load tax) or correctness (mid-session eviction) if the app doesn't account for them."
           ],
           "correctIndex": 1,
           "explanation": "Pace requires macOS 14.2+ (`CompanionScreenCaptureUtility.swift`) for reliable multi-monitor display enumeration. Screen Recording permission must be granted; the app links `WindowPositionManager.swift` to surface the System Settings deep link when the permission is missing.",
@@ -4856,10 +5017,10 @@
           "type": "mcq",
           "question": "Which statement best describes “Accessibility API (AX / NSAccessibility)” in Pace?",
           "options": [
-            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream.",
+            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible.",
             "macOS accessibility tree API — lets apps read UI element roles/labels and synthesize actions (press, set-value) without CGEvent coordinate clicks.",
-            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems.",
-            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible."
+            "LM Studio loads a configured model on first request (JIT) rather than at server start, and separately auto-unloads a model after an idle period to free RAM — both save memory but cost latency (a cold-load tax) or correctness (mid-session eviction) if the app doesn't account for them.",
+            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems."
           ],
           "correctIndex": 1,
           "explanation": "`PaceAXTargeter.swift` climbs from `AXUIElementCopyElementAtPosition` up to a pressable role before firing `kAXPressAction`; if no pressable ancestor is found it returns false and `PaceActionExecutor` falls back to CGEvent. AX `set-value` edits are journaled in a session-local mutation log and reversible via `Undo.last` — the mutation log is the trust surface because the AX API itself has no undo primitive.",
@@ -4896,14 +5057,52 @@
           "type": "mcq",
           "question": "Which statement best describes “LM Studio (OpenAI-compatible local server)” in Pace?",
           "options": [
-            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream.",
-            "Storing structured data (phases, completedQuests, earnedBadges) as JSON strings in text columns instead of normalized tables",
+            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible.",
+            "A grammar-level constraint passed to an OpenAI-compatible `/v1/chat/completions` call — `response_format: {\"type\": \"json_schema\", \"json_schema\": {...}}` — that forces the decoder to only emit tokens forming valid JSON matching the given schema, instead of hoping the model's prose happens to contain parseable JSON.",
             "Desktop app that serves local LLMs/VLMs behind an OpenAI-compatible HTTP API on `localhost:1234`; exposes `/v1/chat/completions`, `/v1/embeddings`, `/v1/completions`.",
-            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible."
+            "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems."
           ],
           "correctIndex": 2,
           "explanation": "`PaceLocalEndpointGuard.resolvedLocalOpenAICompatibleBaseURL` (`PaceLocalEndpointGuard.swift:23`) validates every planner and VLM URL at construction time — a plist value pointing at a LAN or remote host silently falls back to `localhost:1234` with a printed warning. Two models can be loaded simultaneously via LM Studio Settings → max-loaded-models=2 (planner + VLM) to avoid thrashing.",
           "sourceFingerprint": "ee3dbeb8f17a65dd",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:pace:lm-studio-jit-loading-idle-unload-keepalive",
+      "sourceId": "project:pace",
+      "sourceKind": "project",
+      "project": "Pace",
+      "title": "LM Studio JIT loading + idle-unload keepalive",
+      "summary": "LM Studio loads a configured model on first request (JIT) rather than at server start, and separately auto-unloads a model after an idle period to free RAM — both save memory but cost latency (a cold-load tax) or correctness (mid-session eviction) if the app doesn't account for them.",
+      "canonicalUrl": "https://lmstudio.ai/docs/api/ttl-and-auto-evict",
+      "repositoryPath": "pace/docs/learning/new-things.md",
+      "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 9
+      },
+      "learningNotes": [],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "8316bd5377314d08",
+      "assessments": [
+        {
+          "id": "project:pace:lm-studio-jit-loading-idle-unload-keepalive:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “LM Studio JIT loading + idle-unload keepalive” in Pace?",
+          "options": [
+            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream.",
+            "LM Studio loads a configured model on first request (JIT) rather than at server start, and separately auto-unloads a model after an idle period to free RAM — both save memory but cost latency (a cold-load tax) or correctness (mid-session eviction) if the app doesn't account for them.",
+            "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible.",
+            "A grammar-level constraint passed to an OpenAI-compatible `/v1/chat/completions` call — `response_format: {\"type\": \"json_schema\", \"json_schema\": {...}}` — that forces the decoder to only emit tokens forming valid JSON matching the given schema, instead of hoping the model's prose happens to contain parseable JSON."
+          ],
+          "correctIndex": 1,
+          "explanation": "https://lmstudio.ai/docs/api/ttl-and-auto-evict",
+          "sourceFingerprint": "8316bd5377314d08",
           "generator": "deterministic-source-v1"
         }
       ]
@@ -4922,7 +5121,7 @@
         "track": "Pace",
         "module": "Project learning",
         "moduleOrder": 1,
-        "topicOrder": 9
+        "topicOrder": 10
       },
       "learningNotes": [
         "`PaceLocalRetrieval.swift` uses a BM25-style in-memory scorer across all retrieval sources (history, notes, calendar, files, screen-watch, app-usage) before optional embedding re-ranking via `PaceEmbeddingReranker` (LM Studio `/v1/embeddings`). Vector/SQLite-vec retrieval is queued but not yet live — BM25 is the only ranking path in production."
@@ -4936,10 +5135,10 @@
           "type": "mcq",
           "question": "Which statement best describes “BM25 (lexical retrieval ranking)” in Pace?",
           "options": [
+            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream.",
             "Storing structured data (phases, completedQuests, earnedBadges) as JSON strings in text columns instead of normalized tables",
-            "Landing page is Astro, main app is Next.js — deployed as an overlay with `run_worker_first` bypass",
             "Probabilistic term-frequency/inverse-document-frequency ranking algorithm (Okapi BM25) — fast, no embeddings needed, interpretable scores; standard baseline for sparse retrieval in RAG systems.",
-            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream."
+            "A grammar-level constraint passed to an OpenAI-compatible `/v1/chat/completions` call — `response_format: {\"type\": \"json_schema\", \"json_schema\": {...}}` — that forces the decoder to only emit tokens forming valid JSON matching the given schema, instead of hoping the model's prose happens to contain parseable JSON."
           ],
           "correctIndex": 2,
           "explanation": "`PaceLocalRetrieval.swift` uses a BM25-style in-memory scorer across all retrieval sources (history, notes, calendar, files, screen-watch, app-usage) before optional embedding re-ranking via `PaceEmbeddingReranker` (LM Studio `/v1/embeddings`). Vector/SQLite-vec retrieval is queued but not yet live — BM25 is the only ranking path in production.",
@@ -4962,7 +5161,7 @@
         "track": "Pace",
         "module": "Project learning",
         "moduleOrder": 1,
-        "topicOrder": 10
+        "topicOrder": 11
       },
       "learningNotes": [
         "`PaceFMTurnResponse` (`PaceFMTurnResponse.swift:40`) replaces freeform `[CLICK:x,y]` string tags with integer element IDs (`pointAtElementId`, `clickElementId`). The model picks from the on-screen element list or returns -1; it never writes raw coordinates, eliminating the coordinate hallucination failure mode of the string-tag protocol. Trade-off: `respond(to:generating:)` is non-streaming — the full `spokenText` arrives as one chunk, slightly increasing TTFSW vs the streaming string path."
@@ -4976,14 +5175,54 @@
           "type": "mcq",
           "question": "Which statement best describes “@Generable typed outputs (constrained decoding via FoundationModels)” in Pace?",
           "options": [
-            "Quiz-based personality scoring that maps to hobby archetypes for recommendations",
+            "Landing page is Astro, main app is Next.js — deployed as an overlay with `run_worker_first` bypass",
             "Swift macro from the FoundationModels framework that generates a grammar-constrained decoder for a `struct` — the model can only produce tokens that form valid JSON matching the schema, so hallucinated field values become structurally impossible.",
-            "Storing structured data (phases, completedQuests, earnedBadges) as JSON strings in text columns instead of normalized tables",
-            "Landing page is Astro, main app is Next.js — deployed as an overlay with `run_worker_first` bypass"
+            "Running a fast \"lite\" planner (Apple FM, no VLM) in parallel with the full VLM-fed planner, letting whichever produces its first token first win the TTS stream.",
+            "Storing structured data (phases, completedQuests, earnedBadges) as JSON strings in text columns instead of normalized tables"
           ],
           "correctIndex": 1,
           "explanation": "`PaceFMTurnResponse` (`PaceFMTurnResponse.swift:40`) replaces freeform `[CLICK:x,y]` string tags with integer element IDs (`pointAtElementId`, `clickElementId`). The model picks from the on-screen element list or returns -1; it never writes raw coordinates, eliminating the coordinate hallucination failure mode of the string-tag protocol. Trade-off: `respond(to:generating:)` is non-streaming — the full `spokenText` arrives as one chunk, slightly increasing TTFSW vs the streaming string path.",
           "sourceFingerprint": "677196f4f52334f9",
+          "generator": "deterministic-source-v1"
+        }
+      ]
+    },
+    {
+      "id": "project:pace:constrained-decoding-structured-outputs-response-format-json-schema",
+      "sourceId": "project:pace",
+      "sourceKind": "project",
+      "project": "Pace",
+      "title": "Constrained decoding / structured outputs (`response_format: json_schema`)",
+      "summary": "A grammar-level constraint passed to an OpenAI-compatible `/v1/chat/completions` call — `response_format: {\"type\": \"json_schema\", \"json_schema\": {...}}` — that forces the decoder to only emit tokens forming valid JSON matching the given schema, instead of hoping the model's prose happens to contain parseable JSON.",
+      "canonicalUrl": "https://platform.openai.com/docs/guides/structured-outputs",
+      "repositoryPath": "pace/docs/learning/new-things.md",
+      "tracks": ["pace"],
+      "hierarchy": {
+        "track": "Pace",
+        "module": "Project learning",
+        "moduleOrder": 1,
+        "topicOrder": 12
+      },
+      "learningNotes": [
+        "`LocalPlannerClient.v10ResponseFormat` (`LocalPlannerClient.swift:96-115`) is the constrained schema used for planner turns. LM Studio's MLX engine does NOT accept every `response_format` value, though — `LocalVLMClient.swift:366-368` documents that the VLM call deliberately sends no `response_format` at all because MLX returns HTTP 400 on `\"type\": \"json_object\"` (it only accepts `\"json_schema\"` with a real schema, or `\"text\"`); the VLM path instead relies on a regex-extract fallback to pull JSON out of unstructured prose. Same runtime, two different constraint strategies depending on what the engine will actually accept."
+      ],
+      "format": "project-note",
+      "estimatedMinutes": 12,
+      "fingerprint": "1d16b9896be313df",
+      "assessments": [
+        {
+          "id": "project:pace:constrained-decoding-structured-outputs-response-format-json-schema:mcq:1",
+          "type": "mcq",
+          "question": "Which statement best describes “Constrained decoding / structured outputs (`response_format: json_schema`)” in Pace?",
+          "options": [
+            "Storing structured data (phases, completedQuests, earnedBadges) as JSON strings in text columns instead of normalized tables",
+            "Landing page is Astro, main app is Next.js — deployed as an overlay with `run_worker_first` bypass",
+            "Quiz-based personality scoring that maps to hobby archetypes for recommendations",
+            "A grammar-level constraint passed to an OpenAI-compatible `/v1/chat/completions` call — `response_format: {\"type\": \"json_schema\", \"json_schema\": {...}}` — that forces the decoder to only emit tokens forming valid JSON matching the given schema, instead of hoping the model's prose happens to contain parseable JSON."
+          ],
+          "correctIndex": 3,
+          "explanation": "`LocalPlannerClient.v10ResponseFormat` (`LocalPlannerClient.swift:96-115`) is the constrained schema used for planner turns. LM Studio's MLX engine does NOT accept every `response_format` value, though — `LocalVLMClient.swift:366-368` documents that the VLM call deliberately sends no `response_format` at all because MLX returns HTTP 400 on `\"type\": \"json_object\"` (it only accepts `\"json_schema\"` with a real schema, or `\"text\"`); the VLM path instead relies on a regex-extract fallback to pull JSON out of unstructured prose. Same runtime, two different constraint strategies depending on what the engine will actually accept.",
+          "sourceFingerprint": "1d16b9896be313df",
           "generator": "deterministic-source-v1"
         }
       ]
@@ -5002,7 +5241,7 @@
         "track": "Pace",
         "module": "Project learning",
         "moduleOrder": 1,
-        "topicOrder": 11
+        "topicOrder": 13
       },
       "learningNotes": [
         "`PaceSpeculativePlannerRace.raceSpeculative` (`PaceSpeculativePlannerRace.swift:130`) always returns BOTH planners' complete text (`PaceSpeculativeRaceResult.fullPlannerResponseText`); action parsing in `CompanionManager` exclusively uses the full planner's text regardless of which path won audio (lines 187-194). Supersede window: 500 ms from lite's first token AND fewer than 60 spoken chars — past either threshold the lite winner stands to avoid mid-speech jarring cuts. Gate (`speculativeRaceShouldFire`, `CompanionManager.swift:441`) requires toggle ON + local VLM configured + Apple FM available + intent is `.screenAction` or `.screenDescription`."
@@ -9821,10 +10060,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “The Annotated Transformer”?",
           "options": [
-            "Focus on what the constitution controls and what still depends on human choices.",
-            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
+            "Read for retrieval gating and answer critique, not just the model-specific implementation.",
+            "Read for the intuition that reconstruction from corruption teaches structure.",
             "Use it to connect equations, modules, and implementation details.",
-            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior."
+            "Read for the quality/latency tradeoff: late interaction often matters in real search products."
           ],
           "correctIndex": 2,
           "explanation": "Executable transformer walkthrough",
@@ -9860,10 +10099,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “The First Law of Complexodynamics”?",
           "options": [
-            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
-            "Focus on negative sampling and why retriever training dominates downstream answer quality.",
+            "Read for the intuition that reconstruction from corruption teaches structure.",
+            "Understand the forward and reverse processes before jumping to modern samplers.",
             "Read as a conceptual lens for later compression and representation readings.",
-            "Focus on what the constitution controls and what still depends on human choices."
+            "Read for retrieval gating and answer critique, not just the model-specific implementation."
           ],
           "correctIndex": 2,
           "explanation": "Complexity intuition",
@@ -9899,9 +10138,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “The Unreasonable Effectiveness of Recurrent Neural Networks”?",
           "options": [
-            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
-            "Focus on negative sampling and why retriever training dominates downstream answer quality.",
-            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
+            "Read for the intuition that reconstruction from corruption teaches structure.",
+            "Understand the forward and reverse processes before jumping to modern samplers.",
+            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
             "Pay attention to the qualitative behavior of learned sequence models."
           ],
           "correctIndex": 3,
@@ -9938,9 +10177,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Understanding LSTM Networks”?",
           "options": [
-            "Focus on negative sampling and why retriever training dominates downstream answer quality.",
-            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
-            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
+            "Understand the forward and reverse processes before jumping to modern samplers.",
+            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
+            "Use this to connect the probabilistic and continuous-time views.",
             "Understand the cell state and gates before reading recurrent regularization work."
           ],
           "correctIndex": 3,
@@ -9977,10 +10216,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Recurrent Neural Network Regularization”?",
           "options": [
-            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
-            "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
+            "Use this to connect the probabilistic and continuous-time views.",
+            "Read for the engineering move: generate in latent space, decode later.",
             "Notice how a small regularization detail changes sequence-model training behavior.",
-            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation."
+            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff."
           ],
           "correctIndex": 2,
           "explanation": "Training recurrent nets",
@@ -10016,9 +10255,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Keeping Neural Networks Simple by Minimizing the Description Length of the Weights”?",
           "options": [
-            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
-            "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
-            "Read for retrieval gating and answer critique, not just the model-specific implementation.",
+            "Use this to connect the probabilistic and continuous-time views.",
+            "Read for the engineering move: generate in latent space, decode later.",
+            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity.",
             "Use it as the bridge from practical regularization to MDL-style thinking."
           ],
           "correctIndex": 3,
@@ -10055,10 +10294,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Pointer Networks”?",
           "options": [
-            "Read for the intuition that reconstruction from corruption teaches structure.",
+            "Use this to get the vocabulary before reading stronger claims about compression and intelligence.",
             "Read for attention as selection rather than only summarization.",
-            "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
-            "Read for retrieval gating and answer critique, not just the model-specific implementation."
+            "Read for the engineering move: generate in latent space, decode later.",
+            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity."
           ],
           "correctIndex": 1,
           "explanation": "Attention as addressing",
@@ -10094,10 +10333,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “ImageNet Classification with Deep Convolutional Neural Networks”?",
           "options": [
-            "Understand the forward and reverse processes before jumping to modern samplers.",
+            "Treat it as intuition-building rather than a formal ML result.",
             "Separate the architecture from the compute, data, and training choices that made it work.",
-            "Read for retrieval gating and answer critique, not just the model-specific implementation.",
-            "Read for the intuition that reconstruction from corruption teaches structure."
+            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity.",
+            "Use this to get the vocabulary before reading stronger claims about compression and intelligence."
           ],
           "correctIndex": 1,
           "explanation": "Deep vision breakthrough",
@@ -10133,9 +10372,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Order Matters: Sequence to Sequence for Sets”?",
           "options": [
-            "Read for the intuition that reconstruction from corruption teaches structure.",
-            "Understand the forward and reverse processes before jumping to modern samplers.",
-            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
+            "Use this to get the vocabulary before reading stronger claims about compression and intelligence.",
+            "Treat it as intuition-building rather than a formal ML result.",
+            "Read after the essay. The value is the formal move from story to measurable complexity.",
             "Read for the mismatch between model order and problem structure."
           ],
           "correctIndex": 3,
@@ -10173,9 +10412,9 @@
           "question": "What is the recommended focus when studying “GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism”?",
           "options": [
             "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
-            "Understand the forward and reverse processes before jumping to modern samplers.",
-            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
-            "Use this to connect the probabilistic and continuous-time views."
+            "Treat it as intuition-building rather than a formal ML result.",
+            "Read after the essay. The value is the formal move from story to measurable complexity.",
+            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?"
           ],
           "correctIndex": 0,
           "explanation": "Training scale",
@@ -10211,9 +10450,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Deep Residual Learning for Image Recognition”?",
           "options": [
-            "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
-            "Use this to connect the probabilistic and continuous-time views.",
-            "Read for the engineering move: generate in latent space, decode later.",
+            "Read after the essay. The value is the formal move from story to measurable complexity.",
+            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?",
+            "Use it to connect equations, modules, and implementation details.",
             "Understand why identity-style paths help gradients and representation reuse."
           ],
           "correctIndex": 3,
@@ -10250,10 +10489,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Multi-Scale Context Aggregation by Dilated Convolutions”?",
           "options": [
-            "Read for the engineering move: generate in latent space, decode later.",
-            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity.",
+            "Use it to connect equations, modules, and implementation details.",
+            "Read as a conceptual lens for later compression and representation readings.",
             "Read for the tradeoff between local detail and broad context in vision models.",
-            "Use this to connect the probabilistic and continuous-time views."
+            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?"
           ],
           "correctIndex": 2,
           "explanation": "Large context without pooling",
@@ -10290,9 +10529,9 @@
           "question": "What is the recommended focus when studying “Neural Message Passing for Quantum Chemistry”?",
           "options": [
             "Use it to understand graph computation as repeated local communication.",
-            "Read for the engineering move: generate in latent space, decode later.",
-            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity.",
-            "Use this to get the vocabulary before reading stronger claims about compression and intelligence."
+            "Use it to connect equations, modules, and implementation details.",
+            "Read as a conceptual lens for later compression and representation readings.",
+            "Pay attention to the qualitative behavior of learned sequence models."
           ],
           "correctIndex": 0,
           "explanation": "Graph neural networks",
@@ -10328,10 +10567,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Attention Is All You Need”?",
           "options": [
-            "Use this to get the vocabulary before reading stronger claims about compression and intelligence.",
-            "Treat it as intuition-building rather than a formal ML result.",
+            "Pay attention to the qualitative behavior of learned sequence models.",
+            "Understand the cell state and gates before reading recurrent regularization work.",
             "Spend time on multi-head attention, positional information, and parallelism.",
-            "Read for the bridge between practical regularization and an information-theoretic preference for simplicity."
+            "Read as a conceptual lens for later compression and representation readings."
           ],
           "correctIndex": 2,
           "explanation": "Transformer architecture",
@@ -10367,9 +10606,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Neural Machine Translation by Jointly Learning to Align and Translate”?",
           "options": [
-            "Use this to get the vocabulary before reading stronger claims about compression and intelligence.",
-            "Treat it as intuition-building rather than a formal ML result.",
-            "Read after the essay. The value is the formal move from story to measurable complexity.",
+            "Pay attention to the qualitative behavior of learned sequence models.",
+            "Understand the cell state and gates before reading recurrent regularization work.",
+            "Notice how a small regularization detail changes sequence-model training behavior.",
             "Read before or after transformers to see what changed and what carried forward."
           ],
           "correctIndex": 3,
@@ -10406,9 +10645,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Identity Mappings in Deep Residual Networks”?",
           "options": [
-            "Treat it as intuition-building rather than a formal ML result.",
-            "Read after the essay. The value is the formal move from story to measurable complexity.",
-            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?",
+            "Understand the cell state and gates before reading recurrent regularization work.",
+            "Notice how a small regularization detail changes sequence-model training behavior.",
+            "Use it as the bridge from practical regularization to MDL-style thinking.",
             "Read after ResNet to understand why the skip path details matter."
           ],
           "correctIndex": 3,
@@ -10446,9 +10685,9 @@
           "question": "What is the recommended focus when studying “A Simple Neural Network Module for Relational Reasoning”?",
           "options": [
             "Track how object representations become inputs to explicit relation computation.",
-            "Read after the essay. The value is the formal move from story to measurable complexity.",
-            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?",
-            "Use it to connect equations, modules, and implementation details."
+            "Notice how a small regularization detail changes sequence-model training behavior.",
+            "Use it as the bridge from practical regularization to MDL-style thinking.",
+            "Read for attention as selection rather than only summarization."
           ],
           "correctIndex": 0,
           "explanation": "Relational module",
@@ -10484,9 +10723,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Variational Lossy Autoencoder”?",
           "options": [
-            "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?",
-            "Use it to connect equations, modules, and implementation details.",
-            "Read as a conceptual lens for later compression and representation readings.",
+            "Use it as the bridge from practical regularization to MDL-style thinking.",
+            "Read for attention as selection rather than only summarization.",
+            "Separate the architecture from the compute, data, and training choices that made it work.",
             "Read for what a representation should keep and discard."
           ],
           "correctIndex": 3,
@@ -10523,10 +10762,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Relational Recurrent Neural Networks”?",
           "options": [
-            "Pay attention to the qualitative behavior of learned sequence models.",
+            "Read for the mismatch between model order and problem structure.",
             "Compare this with plain LSTMs and later attention-based memory.",
-            "Use it to connect equations, modules, and implementation details.",
-            "Read as a conceptual lens for later compression and representation readings."
+            "Read for attention as selection rather than only summarization.",
+            "Separate the architecture from the compute, data, and training choices that made it work."
           ],
           "correctIndex": 1,
           "explanation": "Relational memory",
@@ -10562,10 +10801,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton”?",
           "options": [
-            "Understand the cell state and gates before reading recurrent regularization work.",
+            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
             "Use it as a theory-side complement to representation-learning papers.",
-            "Read as a conceptual lens for later compression and representation readings.",
-            "Pay attention to the qualitative behavior of learned sequence models."
+            "Separate the architecture from the compute, data, and training choices that made it work.",
+            "Read for the mismatch between model order and problem structure."
           ],
           "correctIndex": 1,
           "explanation": "Complexity toy model",
@@ -10601,10 +10840,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Neural Turing Machines”?",
           "options": [
-            "Understand the cell state and gates before reading recurrent regularization work.",
-            "Notice how a small regularization detail changes sequence-model training behavior.",
+            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
+            "Understand why identity-style paths help gradients and representation reuse.",
             "Read for the memory interface and addressing mechanism.",
-            "Pay attention to the qualitative behavior of learned sequence models."
+            "Read for the mismatch between model order and problem structure."
           ],
           "correctIndex": 2,
           "explanation": "External memory",
@@ -10641,9 +10880,9 @@
           "question": "What is the recommended focus when studying “Deep Speech 2: End-to-End Speech Recognition in English and Mandarin”?",
           "options": [
             "Read for the scaling and systems recipe, not only the acoustic model.",
-            "Understand the cell state and gates before reading recurrent regularization work.",
-            "Notice how a small regularization detail changes sequence-model training behavior.",
-            "Use it as the bridge from practical regularization to MDL-style thinking."
+            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
+            "Understand why identity-style paths help gradients and representation reuse.",
+            "Read for the tradeoff between local detail and broad context in vision models."
           ],
           "correctIndex": 0,
           "explanation": "End-to-end scale",
@@ -10679,9 +10918,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Scaling Laws for Neural Language Models”?",
           "options": [
-            "Notice how a small regularization detail changes sequence-model training behavior.",
-            "Use it as the bridge from practical regularization to MDL-style thinking.",
-            "Read for attention as selection rather than only summarization.",
+            "Understand why identity-style paths help gradients and representation reuse.",
+            "Read for the tradeoff between local detail and broad context in vision models.",
+            "Use it to understand graph computation as repeated local communication.",
             "Focus on the compute allocation mindset and its assumptions."
           ],
           "correctIndex": 3,
@@ -10718,9 +10957,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “A Tutorial Introduction to the Minimum Description Length Principle”?",
           "options": [
-            "Use it as the bridge from practical regularization to MDL-style thinking.",
-            "Read for attention as selection rather than only summarization.",
-            "Separate the architecture from the compute, data, and training choices that made it work.",
+            "Read for the tradeoff between local detail and broad context in vision models.",
+            "Use it to understand graph computation as repeated local communication.",
+            "Spend time on multi-head attention, positional information, and parallelism.",
             "Read before making broad claims about compression and intelligence."
           ],
           "correctIndex": 3,
@@ -10758,9 +10997,9 @@
           "question": "What is the recommended focus when studying “Machine Super Intelligence”?",
           "options": [
             "Skim for definitions and assumptions rather than implementation technique.",
-            "Read for attention as selection rather than only summarization.",
-            "Separate the architecture from the compute, data, and training choices that made it work.",
-            "Read for the mismatch between model order and problem structure."
+            "Use it to understand graph computation as repeated local communication.",
+            "Spend time on multi-head attention, positional information, and parallelism.",
+            "Read before or after transformers to see what changed and what carried forward."
           ],
           "correctIndex": 0,
           "explanation": "Intelligence framing",
@@ -10796,10 +11035,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Kolmogorov Complexity and Algorithmic Randomness”?",
           "options": [
-            "Read for the mismatch between model order and problem structure.",
-            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
+            "Read before or after transformers to see what changed and what carried forward.",
+            "Read after ResNet to understand why the skip path details matter.",
             "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading.",
-            "Separate the architecture from the compute, data, and training choices that made it work."
+            "Spend time on multi-head attention, positional information, and parallelism."
           ],
           "correctIndex": 2,
           "explanation": "Algorithmic information theory",
@@ -10835,9 +11074,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “CS231n: Convolutional Neural Networks for Visual Recognition”?",
           "options": [
-            "Read for the mismatch between model order and problem structure.",
-            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
-            "Understand why identity-style paths help gradients and representation reuse.",
+            "Read before or after transformers to see what changed and what carried forward.",
+            "Read after ResNet to understand why the skip path details matter.",
+            "Track how object representations become inputs to explicit relation computation.",
             "Use it to ground the vision papers in implementation and training practice."
           ],
           "correctIndex": 3,
@@ -10874,10 +11113,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Attention Is All You Need”?",
           "options": [
-            "Read for the tradeoff between local detail and broad context in vision models.",
+            "Read for what a representation should keep and discard.",
             "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism.",
-            "Read for the systems bottleneck: scale needs scheduling as much as architecture.",
-            "Understand why identity-style paths help gradients and representation reuse."
+            "Read after ResNet to understand why the skip path details matter.",
+            "Track how object representations become inputs to explicit relation computation."
           ],
           "correctIndex": 1,
           "explanation": "Architecture",
@@ -10913,10 +11152,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Language Models are Unsupervised Multitask Learners”?",
           "options": [
-            "Use it to understand graph computation as repeated local communication.",
+            "Compare this with plain LSTMs and later attention-based memory.",
             "Read for the move from task-specific NLP systems to broad pretrained models.",
-            "Understand why identity-style paths help gradients and representation reuse.",
-            "Read for the tradeoff between local detail and broad context in vision models."
+            "Track how object representations become inputs to explicit relation computation.",
+            "Read for what a representation should keep and discard."
           ],
           "correctIndex": 1,
           "explanation": "Generative pretraining",
@@ -10953,9 +11192,9 @@
           "question": "What is the recommended focus when studying “Language Models are Few-Shot Learners”?",
           "options": [
             "Read the evaluations and limitations, not only the scale headline.",
-            "Read for the tradeoff between local detail and broad context in vision models.",
-            "Use it to understand graph computation as repeated local communication.",
-            "Spend time on multi-head attention, positional information, and parallelism."
+            "Read for what a representation should keep and discard.",
+            "Compare this with plain LSTMs and later attention-based memory.",
+            "Use it as a theory-side complement to representation-learning papers."
           ],
           "correctIndex": 0,
           "explanation": "In-context learning",
@@ -10991,10 +11230,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Training Compute-Optimal Large Language Models”?",
           "options": [
-            "Spend time on multi-head attention, positional information, and parallelism.",
-            "Read before or after transformers to see what changed and what carried forward.",
+            "Use it as a theory-side complement to representation-learning papers.",
+            "Read for the memory interface and addressing mechanism.",
             "Compare this against earlier scaling-law assumptions.",
-            "Use it to understand graph computation as repeated local communication."
+            "Compare this with plain LSTMs and later attention-based memory."
           ],
           "correctIndex": 2,
           "explanation": "Data/compute balance",
@@ -11030,10 +11269,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Training Language Models to Follow Instructions with Human Feedback”?",
           "options": [
-            "Read before or after transformers to see what changed and what carried forward.",
-            "Read after ResNet to understand why the skip path details matter.",
+            "Read for the memory interface and addressing mechanism.",
+            "Read for the scaling and systems recipe, not only the acoustic model.",
             "Separate base-model capability from the preference-trained interface.",
-            "Spend time on multi-head attention, positional information, and parallelism."
+            "Use it as a theory-side complement to representation-learning papers."
           ],
           "correctIndex": 2,
           "explanation": "Chat behavior",
@@ -11069,10 +11308,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “LLaMA: Open and Efficient Foundation Language Models”?",
           "options": [
-            "Read after ResNet to understand why the skip path details matter.",
-            "Track how object representations become inputs to explicit relation computation.",
+            "Read for the scaling and systems recipe, not only the acoustic model.",
+            "Focus on the compute allocation mindset and its assumptions.",
             "Read for the data and efficiency story that shaped the open-weight ecosystem.",
-            "Read before or after transformers to see what changed and what carried forward."
+            "Read for the memory interface and addressing mechanism."
           ],
           "correctIndex": 2,
           "explanation": "Efficient open model",
@@ -11109,9 +11348,9 @@
           "question": "What is the recommended focus when studying “Sparks of Artificial General Intelligence: Early Experiments with GPT-4”?",
           "options": [
             "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation.",
-            "Read after ResNet to understand why the skip path details matter.",
-            "Track how object representations become inputs to explicit relation computation.",
-            "Read for what a representation should keep and discard."
+            "Read for the scaling and systems recipe, not only the acoustic model.",
+            "Focus on the compute allocation mindset and its assumptions.",
+            "Read before making broad claims about compression and intelligence."
           ],
           "correctIndex": 0,
           "explanation": "Capability probing",
@@ -11148,9 +11387,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “A Tutorial on Energy-Based Learning”?",
           "options": [
-            "Track how object representations become inputs to explicit relation computation.",
-            "Read for what a representation should keep and discard.",
-            "Compare this with plain LSTMs and later attention-based memory.",
+            "Focus on the compute allocation mindset and its assumptions.",
+            "Read before making broad claims about compression and intelligence.",
+            "Skim for definitions and assumptions rather than implementation technique.",
             "Read for the scoring view of learning rather than a generative token model."
           ],
           "correctIndex": 3,
@@ -11188,9 +11427,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Learning Deep Representations by Mutual Information Estimation and Maximization”?",
           "options": [
-            "Read for what a representation should keep and discard.",
-            "Compare this with plain LSTMs and later attention-based memory.",
-            "Use it as a theory-side complement to representation-learning papers.",
+            "Read before making broad claims about compression and intelligence.",
+            "Skim for definitions and assumptions rather than implementation technique.",
+            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading.",
             "Compare mutual-information pressure with later non-generative predictive objectives."
           ],
           "correctIndex": 3,
@@ -11228,9 +11467,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “World Models”?",
           "options": [
-            "Compare this with plain LSTMs and later attention-based memory.",
-            "Use it as a theory-side complement to representation-learning papers.",
-            "Read for the memory interface and addressing mechanism.",
+            "Skim for definitions and assumptions rather than implementation technique.",
+            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading.",
+            "Use it to ground the vision papers in implementation and training practice.",
             "Use it to separate representation, dynamics, and controller pieces."
           ],
           "correctIndex": 3,
@@ -11268,10 +11507,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “A Path Towards Autonomous Machine Intelligence”?",
           "options": [
-            "Read for the memory interface and addressing mechanism.",
-            "Read for the scaling and systems recipe, not only the acoustic model.",
+            "Use it to ground the vision papers in implementation and training practice.",
+            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism.",
             "Read for the system decomposition and claims about what current LLMs miss.",
-            "Use it as a theory-side complement to representation-learning papers."
+            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading."
           ],
           "correctIndex": 2,
           "explanation": "Research agenda",
@@ -11308,10 +11547,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture”?",
           "options": [
-            "Read for the scaling and systems recipe, not only the acoustic model.",
-            "Focus on the compute allocation mindset and its assumptions.",
+            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism.",
+            "Read for the move from task-specific NLP systems to broad pretrained models.",
             "Read for prediction in representation space instead of pixel reconstruction.",
-            "Read for the memory interface and addressing mechanism."
+            "Use it to ground the vision papers in implementation and training practice."
           ],
           "correctIndex": 2,
           "explanation": "I-JEPA",
@@ -11348,10 +11587,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Revisiting Feature Prediction for Learning Visual Representations from Video”?",
           "options": [
-            "Focus on the compute allocation mindset and its assumptions.",
-            "Read before making broad claims about compression and intelligence.",
+            "Read for the move from task-specific NLP systems to broad pretrained models.",
+            "Read the evaluations and limitations, not only the scale headline.",
             "Read for what changes when prediction moves from images to temporal visual input.",
-            "Read for the scaling and systems recipe, not only the acoustic model."
+            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism."
           ],
           "correctIndex": 2,
           "explanation": "V-JEPA",
@@ -11390,9 +11629,9 @@
           "question": "What is the recommended focus when studying “Deep Learning”?",
           "options": [
             "Use it to align vocabulary before moving to control, robustness, and alignment papers.",
-            "Focus on the compute allocation mindset and its assumptions.",
-            "Read before making broad claims about compression and intelligence.",
-            "Skim for definitions and assumptions rather than implementation technique."
+            "Read for the move from task-specific NLP systems to broad pretrained models.",
+            "Read the evaluations and limitations, not only the scale headline.",
+            "Compare this against earlier scaling-law assumptions."
           ],
           "correctIndex": 0,
           "explanation": "Capability background",
@@ -11430,10 +11669,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Human-Level Control through Deep Reinforcement Learning”?",
           "options": [
-            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading.",
+            "Separate base-model capability from the preference-trained interface.",
             "Read for the reward-driven control loop and where specification pressure enters.",
-            "Read before making broad claims about compression and intelligence.",
-            "Skim for definitions and assumptions rather than implementation technique."
+            "Read the evaluations and limitations, not only the scale headline.",
+            "Compare this against earlier scaling-law assumptions."
           ],
           "correctIndex": 1,
           "explanation": "Deep RL milestone",
@@ -11472,9 +11711,9 @@
           "question": "What is the recommended focus when studying “Mastering the Game of Go with Deep Neural Networks and Tree Search”?",
           "options": [
             "Read for how learned priors and planning interact.",
-            "Skim for definitions and assumptions rather than implementation technique.",
-            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading.",
-            "Use it to ground the vision papers in implementation and training practice."
+            "Compare this against earlier scaling-law assumptions.",
+            "Separate base-model capability from the preference-trained interface.",
+            "Read for the data and efficiency story that shaped the open-weight ecosystem."
           ],
           "correctIndex": 0,
           "explanation": "Search plus learning",
@@ -11512,10 +11751,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Concrete Problems in AI Safety”?",
           "options": [
-            "Use it to ground the vision papers in implementation and training practice.",
-            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism.",
+            "Read for the data and efficiency story that shaped the open-weight ecosystem.",
+            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation.",
             "Use it as the checklist for translating model capability into deployment risk.",
-            "Use selectively; the list points readers to later sections, not necessarily cover-to-cover reading."
+            "Separate base-model capability from the preference-trained interface."
           ],
           "correctIndex": 2,
           "explanation": "Problem taxonomy",
@@ -11554,9 +11793,9 @@
           "question": "What is the recommended focus when studying “Cooperative Inverse Reinforcement Learning”?",
           "options": [
             "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
-            "Use it to ground the vision papers in implementation and training practice.",
-            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism.",
-            "Read for the move from task-specific NLP systems to broad pretrained models."
+            "Read for the data and efficiency story that shaped the open-weight ecosystem.",
+            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation.",
+            "Read for the scoring view of learning rather than a generative token model."
           ],
           "correctIndex": 0,
           "explanation": "Preference uncertainty",
@@ -11594,10 +11833,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Algorithms for Inverse Reinforcement Learning”?",
           "options": [
-            "Read for the move from task-specific NLP systems to broad pretrained models.",
-            "Read the evaluations and limitations, not only the scale headline.",
+            "Read for the scoring view of learning rather than a generative token model.",
+            "Compare mutual-information pressure with later non-generative predictive objectives.",
             "Read before CIRL if you want the older objective-inference setup.",
-            "Map the architecture to actual inference costs: attention, MLPs, context, and parallelism."
+            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation."
           ],
           "correctIndex": 2,
           "explanation": "Preference inference roots",
@@ -11635,9 +11874,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Intriguing Properties of Neural Networks”?",
           "options": [
-            "Read for the move from task-specific NLP systems to broad pretrained models.",
-            "Read the evaluations and limitations, not only the scale headline.",
-            "Compare this against earlier scaling-law assumptions.",
+            "Read for the scoring view of learning rather than a generative token model.",
+            "Compare mutual-information pressure with later non-generative predictive objectives.",
+            "Use it to separate representation, dynamics, and controller pieces.",
             "Use this as the entry point for robustness concerns in learned systems."
           ],
           "correctIndex": 3,
@@ -11677,9 +11916,9 @@
           "question": "What is the recommended focus when studying “Explaining and Harnessing Adversarial Examples”?",
           "options": [
             "Read after the Szegedy paper to understand one mechanism and one mitigation path.",
-            "Read the evaluations and limitations, not only the scale headline.",
-            "Compare this against earlier scaling-law assumptions.",
-            "Separate base-model capability from the preference-trained interface."
+            "Compare mutual-information pressure with later non-generative predictive objectives.",
+            "Use it to separate representation, dynamics, and controller pieces.",
+            "Read for the system decomposition and claims about what current LLMs miss."
           ],
           "correctIndex": 0,
           "explanation": "Adversarial mechanism",
@@ -11708,10 +11947,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “ReAct: Synergizing Reasoning and Acting in Language Models”?",
           "options": [
-            "Read for the data and efficiency story that shaped the open-weight ecosystem.",
+            "Read for prediction in representation space instead of pixel reconstruction.",
             "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls.",
-            "Compare this against earlier scaling-law assumptions.",
-            "Separate base-model capability from the preference-trained interface."
+            "Use it to separate representation, dynamics, and controller pieces.",
+            "Read for the system decomposition and claims about what current LLMs miss."
           ],
           "correctIndex": 1,
           "explanation": "Reason and act loop",
@@ -11741,9 +11980,9 @@
           "question": "What is the recommended focus when studying “Toolformer: Language Models Can Teach Themselves to Use Tools”?",
           "options": [
             "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
-            "Separate base-model capability from the preference-trained interface.",
-            "Read for the data and efficiency story that shaped the open-weight ecosystem.",
-            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation."
+            "Read for the system decomposition and claims about what current LLMs miss.",
+            "Read for prediction in representation space instead of pixel reconstruction.",
+            "Read for what changes when prediction moves from images to temporal visual input."
           ],
           "correctIndex": 0,
           "explanation": "Tool-use training signal",
@@ -11772,10 +12011,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Tree of Thoughts: Deliberate Problem Solving with Large Language Models”?",
           "options": [
-            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation.",
-            "Read for the scoring view of learning rather than a generative token model.",
+            "Read for what changes when prediction moves from images to temporal visual input.",
+            "Use it to align vocabulary before moving to control, robustness, and alignment papers.",
             "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
-            "Read for the data and efficiency story that shaped the open-weight ecosystem."
+            "Read for prediction in representation space instead of pixel reconstruction."
           ],
           "correctIndex": 2,
           "explanation": "Search over thoughts",
@@ -11804,10 +12043,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Reflexion: Language Agents with Verbal Reinforcement Learning”?",
           "options": [
-            "Compare mutual-information pressure with later non-generative predictive objectives.",
+            "Read for the reward-driven control loop and where specification pressure enters.",
             "Watch the boundary between useful reflection and benchmark-specific retry loops.",
-            "Read critically: it is useful for capability intuition, but not a substitute for controlled evaluation.",
-            "Read for the scoring view of learning rather than a generative token model."
+            "Read for what changes when prediction moves from images to temporal visual input.",
+            "Use it to align vocabulary before moving to control, robustness, and alignment papers."
           ],
           "correctIndex": 1,
           "explanation": "Memory and self-critique",
@@ -11836,10 +12075,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Generative Agents: Interactive Simulacra of Human Behavior”?",
           "options": [
-            "Compare mutual-information pressure with later non-generative predictive objectives.",
-            "Use it to separate representation, dynamics, and controller pieces.",
+            "Read for the reward-driven control loop and where specification pressure enters.",
+            "Read for how learned priors and planning interact.",
             "Read for the memory architecture and scheduling loop, not the demo novelty.",
-            "Read for the scoring view of learning rather than a generative token model."
+            "Use it to align vocabulary before moving to control, robustness, and alignment papers."
           ],
           "correctIndex": 2,
           "explanation": "Long-lived behavior",
@@ -11868,10 +12107,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Voyager: An Open-Ended Embodied Agent with Large Language Models”?",
           "options": [
-            "Read for the system decomposition and claims about what current LLMs miss.",
+            "Use it as the checklist for translating model capability into deployment risk.",
             "Look at how skills are represented and reused. That is the portable idea for product agents.",
-            "Compare mutual-information pressure with later non-generative predictive objectives.",
-            "Use it to separate representation, dynamics, and controller pieces."
+            "Read for the reward-driven control loop and where specification pressure enters.",
+            "Read for how learned priors and planning interact."
           ],
           "correctIndex": 1,
           "explanation": "Skill library",
@@ -11908,9 +12147,9 @@
           "question": "What is the recommended focus when studying “Neural Machine Translation by Jointly Learning to Align and Translate”?",
           "options": [
             "Read this first so transformer attention feels like a generalization rather than a sudden invention.",
-            "Use it to separate representation, dynamics, and controller pieces.",
-            "Read for the system decomposition and claims about what current LLMs miss.",
-            "Read for prediction in representation space instead of pixel reconstruction."
+            "Read for how learned priors and planning interact.",
+            "Use it as the checklist for translating model capability into deployment risk.",
+            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics."
           ],
           "correctIndex": 0,
           "explanation": "Attention before transformers",
@@ -11946,9 +12185,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Pointer Networks”?",
           "options": [
-            "Read for the system decomposition and claims about what current LLMs miss.",
-            "Read for prediction in representation space instead of pixel reconstruction.",
-            "Read for what changes when prediction moves from images to temporal visual input.",
+            "Use it as the checklist for translating model capability into deployment risk.",
+            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
+            "Read before CIRL if you want the older objective-inference setup.",
             "Notice how attention becomes an addressing mechanism, not just a soft summary."
           ],
           "correctIndex": 3,
@@ -11985,9 +12224,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Attention Is All You Need”?",
           "options": [
-            "Read for prediction in representation space instead of pixel reconstruction.",
-            "Read for what changes when prediction moves from images to temporal visual input.",
-            "Use it to align vocabulary before moving to control, robustness, and alignment papers.",
+            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
+            "Read before CIRL if you want the older objective-inference setup.",
+            "Use this as the entry point for robustness concerns in learned systems.",
             "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics."
           ],
           "correctIndex": 3,
@@ -12024,9 +12263,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding”?",
           "options": [
-            "Read for what changes when prediction moves from images to temporal visual input.",
-            "Use it to align vocabulary before moving to control, robustness, and alignment papers.",
-            "Read for the reward-driven control loop and where specification pressure enters.",
+            "Read before CIRL if you want the older objective-inference setup.",
+            "Use this as the entry point for robustness concerns in learned systems.",
+            "Read after the Szegedy paper to understand one mechanism and one mitigation path.",
             "Separate the architecture from the training objective. BERT matters because the objective made transfer routine."
           ],
           "correctIndex": 3,
@@ -12063,10 +12302,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Language Models are Few-Shot Learners”?",
           "options": [
-            "Read for the reward-driven control loop and where specification pressure enters.",
-            "Read for how learned priors and planning interact.",
+            "Read after the Szegedy paper to understand one mechanism and one mitigation path.",
+            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls.",
             "Read the evaluation spread and failure modes, not just the headline few-shot result.",
-            "Use it to align vocabulary before moving to control, robustness, and alignment papers."
+            "Use this as the entry point for robustness concerns in learned systems."
           ],
           "correctIndex": 2,
           "explanation": "In-context learning",
@@ -12102,10 +12341,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Scaling Laws for Neural Language Models”?",
           "options": [
-            "Read for how learned priors and planning interact.",
-            "Use it as the checklist for translating model capability into deployment risk.",
+            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls.",
+            "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
             "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
-            "Read for the reward-driven control loop and where specification pressure enters."
+            "Read after the Szegedy paper to understand one mechanism and one mitigation path."
           ],
           "correctIndex": 2,
           "explanation": "Scaling economics",
@@ -12140,10 +12379,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Fine-Tuning Language Models from Human Preferences”?",
           "options": [
-            "Use it as the checklist for translating model capability into deployment risk.",
-            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
+            "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
+            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
             "Read for the data collection and reward-model loop before later assistant-scale versions.",
-            "Read for how learned priors and planning interact."
+            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls."
           ],
           "correctIndex": 2,
           "explanation": "Preference modeling",
@@ -12179,9 +12418,9 @@
           "question": "What is the recommended focus when studying “Learning to Summarize with Human Feedback”?",
           "options": [
             "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
-            "Use it as the checklist for translating model capability into deployment risk.",
-            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
-            "Read before CIRL if you want the older objective-inference setup."
+            "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
+            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
+            "Watch the boundary between useful reflection and benchmark-specific retry loops."
           ],
           "correctIndex": 0,
           "explanation": "RLHF applied",
@@ -12216,10 +12455,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Training Language Models to Follow Instructions with Human Feedback”?",
           "options": [
-            "Use this as the entry point for robustness concerns in learned systems.",
+            "Read for the memory architecture and scheduling loop, not the demo novelty.",
             "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior.",
-            "Read for uncertainty about objectives, not only inverse reinforcement learning mechanics.",
-            "Read before CIRL if you want the older objective-inference setup."
+            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
+            "Watch the boundary between useful reflection and benchmark-specific retry loops."
           ],
           "correctIndex": 1,
           "explanation": "Assistant RLHF",
@@ -12254,10 +12493,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Constitutional AI: Harmlessness from AI Feedback”?",
           "options": [
-            "Use this as the entry point for robustness concerns in learned systems.",
-            "Read after the Szegedy paper to understand one mechanism and one mitigation path.",
+            "Read for the memory architecture and scheduling loop, not the demo novelty.",
+            "Look at how skills are represented and reused. That is the portable idea for product agents.",
             "Focus on what the constitution controls and what still depends on human choices.",
-            "Read before CIRL if you want the older objective-inference setup."
+            "Watch the boundary between useful reflection and benchmark-specific retry loops."
           ],
           "correctIndex": 2,
           "explanation": "AI feedback",
@@ -12292,10 +12531,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Direct Preference Optimization: Your Language Model is Secretly a Reward Model”?",
           "options": [
-            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls.",
+            "Read this first so transformer attention feels like a generalization rather than a sudden invention.",
             "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
-            "Use this as the entry point for robustness concerns in learned systems.",
-            "Read after the Szegedy paper to understand one mechanism and one mitigation path."
+            "Read for the memory architecture and scheduling loop, not the demo novelty.",
+            "Look at how skills are represented and reused. That is the portable idea for product agents."
           ],
           "correctIndex": 1,
           "explanation": "Preference objective",
@@ -12325,9 +12564,9 @@
           "question": "What is the recommended focus when studying “Dense Passage Retrieval for Open-Domain Question Answering”?",
           "options": [
             "Focus on negative sampling and why retriever training dominates downstream answer quality.",
-            "Read after the Szegedy paper to understand one mechanism and one mitigation path.",
-            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls.",
-            "Focus on how candidate tool calls are generated, filtered, and folded back into training data."
+            "Look at how skills are represented and reused. That is the portable idea for product agents.",
+            "Read this first so transformer attention feels like a generalization rather than a sudden invention.",
+            "Notice how attention becomes an addressing mechanism, not just a soft summary."
           ],
           "correctIndex": 0,
           "explanation": "Dense retriever",
@@ -12356,10 +12595,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks”?",
           "options": [
-            "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
-            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
+            "Notice how attention becomes an addressing mechanism, not just a soft summary.",
+            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics.",
             "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
-            "Read for the control loop. The core idea is less about one prompt format and more about making reasoning observable between tool calls."
+            "Read this first so transformer attention feels like a generalization rather than a sudden invention."
           ],
           "correctIndex": 2,
           "explanation": "Generator with retrieval",
@@ -12389,9 +12628,9 @@
           "question": "What is the recommended focus when studying “REALM: Retrieval-Augmented Language Model Pre-Training”?",
           "options": [
             "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
-            "Focus on how candidate tool calls are generated, filtered, and folded back into training data.",
-            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
-            "Watch the boundary between useful reflection and benchmark-specific retry loops."
+            "Notice how attention becomes an addressing mechanism, not just a soft summary.",
+            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics.",
+            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine."
           ],
           "correctIndex": 0,
           "explanation": "Pretraining with retrieval",
@@ -12421,9 +12660,9 @@
           "question": "What is the recommended focus when studying “ColBERTv2: Efficient and Effective Retrieval via Lightweight Late Interaction”?",
           "options": [
             "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
-            "Compare this with ReAct: ReAct grounds actions in observations, while Tree of Thoughts spends compute on deliberation.",
-            "Watch the boundary between useful reflection and benchmark-specific retry loops.",
-            "Read for the memory architecture and scheduling loop, not the demo novelty."
+            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics.",
+            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine.",
+            "Read the evaluation spread and failure modes, not just the headline few-shot result."
           ],
           "correctIndex": 0,
           "explanation": "Late interaction",
@@ -12452,10 +12691,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection”?",
           "options": [
-            "Look at how skills are represented and reused. That is the portable idea for product agents.",
+            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
             "Read for retrieval gating and answer critique, not just the model-specific implementation.",
-            "Watch the boundary between useful reflection and benchmark-specific retry loops.",
-            "Read for the memory architecture and scheduling loop, not the demo novelty."
+            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine.",
+            "Read the evaluation spread and failure modes, not just the headline few-shot result."
           ],
           "correctIndex": 1,
           "explanation": "Adaptive retrieval",
@@ -12491,10 +12730,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Extracting and Composing Robust Features with Denoising Autoencoders”?",
           "options": [
-            "Look at how skills are represented and reused. That is the portable idea for product agents.",
-            "Read this first so transformer attention feels like a generalization rather than a sudden invention.",
+            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
+            "Read for the data collection and reward-model loop before later assistant-scale versions.",
             "Read for the intuition that reconstruction from corruption teaches structure.",
-            "Read for the memory architecture and scheduling loop, not the demo novelty."
+            "Read the evaluation spread and failure modes, not just the headline few-shot result."
           ],
           "correctIndex": 2,
           "explanation": "Denoising representation",
@@ -12530,10 +12769,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Deep Unsupervised Learning using Nonequilibrium Thermodynamics”?",
           "options": [
-            "Notice how attention becomes an addressing mechanism, not just a soft summary.",
+            "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
             "Understand the forward and reverse processes before jumping to modern samplers.",
-            "Look at how skills are represented and reused. That is the portable idea for product agents.",
-            "Read this first so transformer attention feels like a generalization rather than a sudden invention."
+            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
+            "Read for the data collection and reward-model loop before later assistant-scale versions."
           ],
           "correctIndex": 1,
           "explanation": "Diffusion framing",
@@ -12570,9 +12809,9 @@
           "question": "What is the recommended focus when studying “Denoising Diffusion Probabilistic Models”?",
           "options": [
             "Pay attention to the simplified objective and sample quality versus likelihood tradeoff.",
-            "Read this first so transformer attention feels like a generalization rather than a sudden invention.",
-            "Notice how attention becomes an addressing mechanism, not just a soft summary.",
-            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics."
+            "Read for the data collection and reward-model loop before later assistant-scale versions.",
+            "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
+            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior."
           ],
           "correctIndex": 0,
           "explanation": "DDPM recipe",
@@ -12609,9 +12848,9 @@
           "question": "What is the recommended focus when studying “Score-Based Generative Modeling through Stochastic Differential Equations”?",
           "options": [
             "Use this to connect the probabilistic and continuous-time views.",
-            "Notice how attention becomes an addressing mechanism, not just a soft summary.",
-            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics.",
-            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine."
+            "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
+            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior.",
+            "Focus on what the constitution controls and what still depends on human choices."
           ],
           "correctIndex": 0,
           "explanation": "Score/SDE view",
@@ -12647,9 +12886,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “High-Resolution Image Synthesis with Latent Diffusion Models”?",
           "options": [
-            "Spend time on positional encoding, multi-head attention, and why parallelism changed scaling economics.",
-            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine.",
-            "Read the evaluation spread and failure modes, not just the headline few-shot result.",
+            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior.",
+            "Focus on what the constitution controls and what still depends on human choices.",
+            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
             "Read for the engineering move: generate in latent space, decode later."
           ],
           "correctIndex": 3,
@@ -12679,10 +12918,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Keeping Neural Networks Simple by Minimizing the Description Length of the Weights”?",
           "options": [
-            "Read the evaluation spread and failure modes, not just the headline few-shot result.",
-            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
+            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
+            "Focus on negative sampling and why retriever training dominates downstream answer quality.",
             "Read for the bridge between practical regularization and an information-theoretic preference for simplicity.",
-            "Separate the architecture from the training objective. BERT matters because the objective made transfer routine."
+            "Focus on what the constitution controls and what still depends on human choices."
           ],
           "correctIndex": 2,
           "explanation": "Neural nets and MDL",
@@ -12711,10 +12950,10 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “A Tutorial Introduction to the Minimum Description Length Principle”?",
           "options": [
-            "Read for the data collection and reward-model loop before later assistant-scale versions.",
+            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
             "Use this to get the vocabulary before reading stronger claims about compression and intelligence.",
-            "Read the evaluation spread and failure modes, not just the headline few-shot result.",
-            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset."
+            "Read after PPO-based RLHF so the simplification and tradeoffs are obvious.",
+            "Focus on negative sampling and why retriever training dominates downstream answer quality."
           ],
           "correctIndex": 1,
           "explanation": "MDL grounding",
@@ -12744,9 +12983,9 @@
           "question": "What is the recommended focus when studying “The First Law of Complexodynamics”?",
           "options": [
             "Treat it as intuition-building rather than a formal ML result.",
-            "Focus on the tradeoff curves and assumptions. Later scaling work revises details, but this sets the mindset.",
-            "Read for the data collection and reward-model loop before later assistant-scale versions.",
-            "Track where human preference wins and where reward hacking or evaluation gaps can enter."
+            "Focus on negative sampling and why retriever training dominates downstream answer quality.",
+            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
+            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time."
           ],
           "correctIndex": 0,
           "explanation": "Complexity intuition",
@@ -12775,9 +13014,9 @@
           "type": "mcq",
           "question": "What is the recommended focus when studying “Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton”?",
           "options": [
-            "Read for the data collection and reward-model loop before later assistant-scale versions.",
-            "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
-            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior.",
+            "Read for the split between RAG-sequence and RAG-token and how retrieval changes generation.",
+            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
+            "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
             "Read after the essay. The value is the formal move from story to measurable complexity."
           ],
           "correctIndex": 3,
@@ -12808,9 +13047,9 @@
           "question": "What is the recommended focus when studying “Variational Lossy Autoencoder”?",
           "options": [
             "Use it as a modern ML bridge back to the core question: what should a representation preserve or discard?",
-            "Track where human preference wins and where reward hacking or evaluation gaps can enter.",
-            "Compare model size versus alignment data. Smaller aligned models can beat larger base models on preferred behavior.",
-            "Focus on what the constitution controls and what still depends on human choices."
+            "Look at how retrieval is folded into pretraining rather than bolted on only at inference time.",
+            "Read for the quality/latency tradeoff: late interaction often matters in real search products.",
+            "Read for retrieval gating and answer critique, not just the model-specific implementation."
           ],
           "correctIndex": 0,
           "explanation": "Representation and compression",

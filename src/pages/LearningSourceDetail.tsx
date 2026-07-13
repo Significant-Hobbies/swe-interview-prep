@@ -10,6 +10,7 @@ import {
 } from '../data/learning-sources';
 import { recordSessionActivity } from '../lib/session';
 import { useReaderLearning } from '../hooks/useReaderLearning';
+import { useLearningNotes } from '../hooks/useUserStore';
 
 export default function LearningSourceDetail() {
   const { id = '' } = useParams();
@@ -23,6 +24,8 @@ export default function LearningSourceDetail() {
   const [submitted, setSubmitted] = useState(false);
   const initialProgress = useMemo(() => loadLearningProgress()[id], [id]);
   const [completed, setCompleted] = useState(initialProgress?.status === 'completed');
+  const { notes, saveNote } = useLearningNotes();
+  const [noteDraft, setNoteDraft] = useState('');
 
   if (!item && reader.loading)
     return (
@@ -56,6 +59,16 @@ export default function LearningSourceDetail() {
     recordSessionActivity('external_learning');
     setCompleted(true);
   }
+
+  function saveTakeaway() {
+    const body = noteDraft.trim();
+    if (!body) return;
+    saveNote({ scope: 'project', refId: item.id, title: item.title, body });
+    setNoteDraft('');
+  }
+
+  const itemNotes = notes.filter((note) => note.scope === 'project' && note.refId === item.id);
+  const playgroundPrompt = `Apply this learning item in a small working artifact:\n\n${item.title}\n${item.summary}\n\nSource: ${item.canonicalUrl}`;
 
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-10 md:px-6 md:py-16">
@@ -160,6 +173,36 @@ export default function LearningSourceDetail() {
               </p>
             )}
           </section>
+
+          <section className="mt-12 border-t border-white/10 pt-10">
+            <h2 className="text-xl font-semibold text-white">3. Capture your takeaway</h2>
+            <p className="mt-2 text-sm leading-6 text-white/50">
+              Notes stay attached to this source item and appear in your progress notebook.
+            </p>
+            <textarea
+              value={noteDraft}
+              onChange={(event) => setNoteDraft(event.target.value)}
+              rows={4}
+              className="mt-5 w-full rounded-md border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white outline-none focus:border-sky-400/50"
+              placeholder="What is worth remembering or trying?"
+            />
+            <button
+              type="button"
+              disabled={!noteDraft.trim()}
+              onClick={saveTakeaway}
+              className="mt-3 h-10 rounded-md bg-sky-400 px-4 text-sm font-semibold text-black disabled:opacity-40"
+            >
+              Save takeaway
+            </button>
+            {itemNotes.map((note) => (
+              <p
+                key={note.id}
+                className="mt-4 whitespace-pre-wrap rounded-md border border-white/10 p-4 text-sm leading-6 text-white/60"
+              >
+                {note.body}
+              </p>
+            ))}
+          </section>
         </div>
 
         <aside className="h-fit border-t border-white/10 pt-6 lg:sticky lg:top-24 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
@@ -188,7 +231,7 @@ export default function LearningSourceDetail() {
             </Link>
           ) : (
             <Link
-              to="/playground"
+              to={`/playground?prompt=${encodeURIComponent(playgroundPrompt)}`}
               className="mt-3 flex h-11 w-full items-center justify-center rounded-md border border-white/10 px-4 text-sm text-white/55 hover:text-white"
             >
               Open Playground

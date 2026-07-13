@@ -1,5 +1,7 @@
 # Cognitive Fitness Roadmap — 2026-05-29
 
+**Status:** Historical planning snapshot — superseded by the personal-use closure in `PROJECT_STATUS.md` (2026-07-10). Items below are paused candidates, not active planned work.
+
 ## Frame
 
 Reposition the Learning OS as **cognitive fitness via hard novel problems at the edge of skill in the user's chosen domain (SWE)**. FAANG-pass is a byproduct of the intensity, not the framing. Defensible mechanism per the research is **cognitive reserve** (resilience to later cognitive decline through compounding crystallized intelligence in a complex domain), not raising fluid intelligence — fluid intelligence is mostly fixed after ~25.
@@ -11,9 +13,9 @@ See `src/pages/About.tsx` for the in-product research-basis section.
 - **Focus mode** — toggle in Playground that hides Companion + disables auto-tagger. Counts toggle-on sessions per rolling 7 days (Playground header + Progress tile). Implements the "audit offloaded capacities periodically" design principle (Kosmyna et al. 2025 EEG, Lee et al. 2025 critical-thinking, Dahmani-Bohbot GPS atrophy).
 - **Per-track adaptive ELO** — static problem ratings from `difficulty` (intro=1200, core=1600, advanced=2000); per-track user ELO in `useUserElo`; provisional K=40 for first 10 solves, K=24 after. Practice page reorders drills by proximity to user's ELO + "Recommended for your level" row. Progress tab shows per-track ELO. Implements desirable-difficulty calibration (Bjork) without visible-progress-bar gamification.
 
-## Deferred — ranked by leverage
+## Historical deferred candidates — ranked by leverage
 
-### Near-term (build next, in roughly this order)
+### Former near-term order (paused)
 
 1. **Failure signal for ELO**
    - Today, ELO can only go up — there's no "couldn't solve" path. The system is over-optimistic.

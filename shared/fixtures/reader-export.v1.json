@@ -1,0 +1,47 @@
+{
+  "format": "reader-export",
+  "formatVersion": 1,
+  "exportedAt": "2026-07-13T09:30:00.000Z",
+  "userId": "fixture-user",
+  "counts": {
+    "articles": 3,
+    "boards": 0,
+    "lists": 0
+  },
+  "tables": {
+    "articles": [
+      {
+        "id": "article-retries",
+        "title": "Retry budgets at the edge",
+        "url": "https://example.com/retry-budgets",
+        "content": "Fixture-only private article body that must never enter the snapshot.",
+        "tags": "[\"distributed-systems\",\"reliability\"]",
+        "summary": "{\"short\":\"Retries need bounded budgets and jitter.\"}",
+        "keyPoints": "[\"Budget retries across the full request path.\"]",
+        "updatedAt": "2026-07-12T08:00:00.000Z"
+      },
+      {
+        "id": "article-caches",
+        "title": "Cache invalidation contracts",
+        "url": "https://example.com/cache-contracts",
+        "content": "Second fixture-only body.",
+        "tags": "[\"distributed-systems\"]",
+        "summary": "{\"short\":\"Caches need explicit freshness contracts.\"}",
+        "keyPoints": "[\"Define freshness before choosing a cache policy.\"]",
+        "updatedAt": "2026-07-11T08:00:00.000Z"
+      },
+      {
+        "id": "article-queues",
+        "title": "Backpressure for durable queues",
+        "url": "https://example.com/queue-backpressure",
+        "content": "Third fixture-only body.",
+        "tags": "[\"backend\",\"reliability\"]",
+        "summary": "{\"short\":\"Backpressure protects consumers and dependencies.\"}",
+        "keyPoints": "[\"Bound producer throughput to sustainable consumption.\"]",
+        "updatedAt": "2026-07-10T08:00:00.000Z"
+      }
+    ],
+    "boards": [],
+    "lists": []
+  }
+}
