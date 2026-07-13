@@ -448,9 +448,9 @@
     {
       "repoId": "grokking-oop",
       "repoName": "Grokking OOP Design",
-      "sectionId": "example-codes-airline-management-system-java-readme-md",
-      "title": "Java",
-      "snippet": "# ✈️ Airline Management System (Java) A **Java implementation** of the *Grokking the Object Oriented Design Interview* problem: **Airline Management System**, fully object-oriented and modularized.…"
+      "sectionId": "object-diagram-documentation-md",
+      "title": "Object Diagram Documentation",
+      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
     }
   ],
   "messaging-realtime": [
