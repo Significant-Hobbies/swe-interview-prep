@@ -440,7 +440,7 @@ async function handleReaderLearning(request, env) {
   }
   const snapshot = await syncReaderLearningFeed({
     fetchImpl: fetch,
-    url: env.READER_EXPORT_URL || 'https://reader.sarthakagrawal927.workers.dev/api/data-export',
+    url: env.READER_EXPORT_URL || 'https://read.significanthobbies.com/api/data-export',
     token: env.READER_API_TOKEN,
   });
   if (snapshot.warning) return json({ error: 'Reader export unavailable' }, { status: 502 });

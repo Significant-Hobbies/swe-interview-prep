@@ -33,7 +33,7 @@ It integrates the four key parts of interview prep into a single, cohesive exper
 
 4.  **Local-First and Offline:** It's designed to be fast and private. Your data is stored locally, and it works perfectly offline on a plane or commute.
 
-Live demo: https://swe-interview-prep.pages.dev/mock
+Live demo: https://learn.significanthobbies.com/mock
 
 Suggested demo to attach: a short screen recording that starts on `/mock`, configures a 20-minute DSA + behavioral loop, answers one prompt, and ends on the score summary with review cards queued.
 

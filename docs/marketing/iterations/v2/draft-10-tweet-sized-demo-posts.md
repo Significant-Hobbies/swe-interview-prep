@@ -2,7 +2,7 @@
 
 Related assets: [write-founder-launch-note.md](./write-founder-launch-note.md), [write-reddit-safe-launch-draft.md](./write-reddit-safe-launch-draft.md), [add-screenshot-shot-list.md](./add-screenshot-shot-list.md)
 
-1. LeetCode tells you whether the code passes. Interviews test whether you can clarify, explain, adjust, and recover under pressure. I built a mock interview flow for that loop: https://swe-interview-prep.pages.dev/mock<br>
+1. LeetCode tells you whether the code passes. Interviews test whether you can clarify, explain, adjust, and recover under pressure. I built a mock interview flow for that loop: https://learn.significanthobbies.com/mock<br>
    Screenshot/video: start a `/mock` session and show the round configuration.
 
 2. The most useful prep question is not "can I solve this?" It is "can I explain this while someone is evaluating me?" That is the behavior this mock interview tool is trying to train.<br>
@@ -17,7 +17,7 @@ Related assets: [write-founder-launch-note.md](./write-founder-launch-note.md), 
 5. If you can only practice one thing this week, practice narrating tradeoffs before writing code. Silent problem solving does not transfer cleanly to live interviews.<br>
    Screenshot/video: DSA prompt with notes showing assumptions and complexity.
 
-6. I am building a small tool for candidates who know the material but freeze when the interview becomes interactive. The first version is here: https://swe-interview-prep.pages.dev/mock<br>
+6. I am building a small tool for candidates who know the material but freeze when the interview becomes interactive. The first version is here: https://learn.significanthobbies.com/mock<br>
    Screenshot/video: quick before/after from prompt to score summary.
 
 7. Good mock feedback should be specific enough to change tomorrow's study plan: missed pattern, communication gap, review card, next rep. That is the bar I am aiming for.<br>
@@ -29,5 +29,5 @@ Related assets: [write-founder-launch-note.md](./write-founder-launch-note.md), 
 9. I do not want another problem bank. I want a practice room that asks follow-ups, scores the loop, and tells me what to review next. That is what I am testing.<br>
    Screenshot/video: active mock turn plus feedback panel.
 
-10. Looking for blunt feedback from people prepping for SWE interviews: what part of this mock flow feels least realistic? https://swe-interview-prep.pages.dev/mock<br>
+10. Looking for blunt feedback from people prepping for SWE interviews: what part of this mock flow feels least realistic? https://learn.significanthobbies.com/mock<br>
     Screenshot/video: 20-second product walkthrough ending on feedback summary.

@@ -42,4 +42,4 @@ Related assets: [write-founder-launch-note.md](./write-founder-launch-note.md), 
 
 - **Headline:** I am building a small mock interview readiness tool.
 - **Visual note:** Product URL over a clean screenshot from `/mock`.
-- **CTA:** Try the mock flow and send the one part that feels least like a real interview: https://swe-interview-prep.pages.dev/mock
+- **CTA:** Try the mock flow and send the one part that feels least like a real interview: https://learn.significanthobbies.com/mock

@@ -26,7 +26,7 @@ function source(itemCount, syncStatus) {
     kind: 'reader',
     label: 'Reader',
     description: 'Private saved blogs and articles.',
-    canonicalUrl: 'https://reader.sarthakagrawal927.workers.dev',
+    canonicalUrl: 'https://read.significanthobbies.com',
     itemCount,
     syncStatus,
   };

@@ -8,7 +8,7 @@ That's why I built this. It's not another problem-grinding platform. It's a tool
 
 **Here's a quick demo:**
 
-https://swe-interview-prep.pages.dev/mock
+https://learn.significanthobbies.com/mock
 
 Suggested clip: start a mock interview, talk through the first approach, write the first implementation pass, then show the feedback summary and review cards.
 
@@ -32,4 +32,4 @@ Ready to stop grinding and start interviewing?
 
 Try the mock interview simulator and send me the one thing that felt least like a real interview. That is the feedback I need most right now.
 
-https://swe-interview-prep.pages.dev/mock
+https://learn.significanthobbies.com/mock

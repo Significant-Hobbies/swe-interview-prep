@@ -20,7 +20,7 @@ export function buildDigestMessage({
   dueConcepts = 0,
   sessionMinutes = 45,
   horizonDays = null,
-  appUrl = 'https://swe-interview-prep.pages.dev',
+  appUrl = 'https://learn.significanthobbies.com',
 }) {
   const lines = [];
   if (dueReviews > 0) {

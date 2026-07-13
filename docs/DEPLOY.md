@@ -42,7 +42,7 @@ Pushes to `main` trigger [`.github/workflows/deploy.yml`](../.github/workflows/d
 | `JWT_SECRET` | Auth cookie signing |
 | `GOOGLE_CLIENT_ID` | Server Google verify |
 
-Google OAuth client must list your Pages origin (e.g. `https://swe-interview-prep.pages.dev`).
+Google OAuth client must list your Pages origin (e.g. `https://learn.significanthobbies.com`).
 
 ### Manual deploy
 
