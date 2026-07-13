@@ -27,6 +27,17 @@ interface User {
   picture?: string;
 }
 
+function loadCachedProfile(): User | null {
+  try {
+    const raw = localStorage.getItem(PROFILE_KEY);
+    return raw ? (JSON.parse(raw) as User) : null;
+  } catch (error) {
+    console.error('Failed to load profile from localStorage:', error);
+    localStorage.removeItem(PROFILE_KEY);
+    return null;
+  }
+}
+
 interface AuthContextType {
   user: User | null;
   /** @deprecated Token is now in an httpOnly cookie; this always returns null. */
@@ -55,7 +66,7 @@ declare global {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(loadCachedProfile);
   const [isGuest, setIsGuest] = useState(() => localStorage.getItem(GUEST_KEY) === '1');
   const [loading, setLoading] = useState(true);
   const [googleLoaded, setGoogleLoaded] = useState(false);
@@ -65,21 +76,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // localStorage — it's in an httpOnly cookie.
   useEffect(() => {
     let cancelled = false;
-    let hasCachedProfile = false;
+    const hasCachedProfile = user !== null;
     // Drop any legacy entry that contained the JWT in localStorage.
     if (localStorage.getItem(LEGACY_KEY)) {
       localStorage.removeItem(LEGACY_KEY);
     }
-    try {
-      const raw = localStorage.getItem(PROFILE_KEY);
-      if (raw) {
-        hasCachedProfile = true;
-        setUser(JSON.parse(raw) as User);
-        setIsGuest(false);
-      }
-    } catch (error) {
-      console.error('Failed to load profile from localStorage:', error);
-      localStorage.removeItem(PROFILE_KEY);
+    if (hasCachedProfile) {
+      setIsGuest(false);
     }
 
     if (isGuest || !hasCachedProfile) {

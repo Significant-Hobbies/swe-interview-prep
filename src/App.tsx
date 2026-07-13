@@ -10,6 +10,18 @@ import { loadLocal, STORE_KEYS } from './lib/userStore';
 
 const SEEN_KEY = 'swe-interview-prep:seen';
 
+function RouteLoading() {
+  return (
+    <main className="min-h-screen bg-black px-6 py-20 text-white/50" aria-busy="true">
+      <div className="mx-auto max-w-5xl animate-pulse">
+        <div className="h-3 w-28 bg-white/10" />
+        <div className="mt-5 h-9 w-64 max-w-full bg-white/10" />
+        <div className="mt-10 h-px bg-white/10" />
+      </div>
+    </main>
+  );
+}
+
 const Today = lazy(() => import('./pages/Today'));
 const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
@@ -185,10 +197,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!loading && (user || isGuest)) removeLcpShell();
+    if (!loading || user || isGuest) removeLcpShell();
   }, [loading, user, isGuest]);
 
-  if (loading) return null;
+  if (loading && !user && !isGuest) return <RouteLoading />;
 
   if (!user && !isGuest && !isPublicShare && !isPublicInfoRoute && !isPrivateLearningRoute) {
     return (
@@ -210,7 +222,7 @@ export default function App() {
     <>
       {!isPublicShare && <SaaSMakerFeedback />}
       <ErrorBoundary scope="route">
-        <Suspense fallback={null}>{body}</Suspense>
+        <Suspense fallback={<RouteLoading />}>{body}</Suspense>
       </ErrorBoundary>
     </>
   );

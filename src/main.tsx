@@ -23,19 +23,7 @@ const tree = (
   </ErrorBoundary>
 );
 
-const mount = () => {
-  createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
-  // LCP shell sits behind #root (pointer-events: none) — drop once React has painted.
-  requestAnimationFrame(() => document.getElementById('lcp-shell')?.remove());
-};
-
-// Keep #lcp-shell as LCP until the browser is idle — avoids tail runs where
-// the Login chunk parse becomes the LCP element (~800ms+ p90).
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(mount, { timeout: 2000 });
-} else {
-  setTimeout(mount, 1);
-}
+createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
 
 const scheduleMonitoring = () => {
   void import('./lib/foundry-monitoring').then((m) => m.installBrowserMonitoring());
