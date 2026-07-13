@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { DEFAULT_HIGH_SIGNAL_FEED_URL, syncHighSignalFeed } from './lib/high-signal-learning.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const APP_ROOT = join(HERE, '..');
@@ -402,35 +403,6 @@ function nativeSource() {
   };
 }
 
-function dailyBrief() {
-  const date = new Date().toISOString().slice(0, 10);
-  return {
-    source: {
-      id: 'high-signal',
-      kind: 'briefing',
-      label: 'High Signal: Daily Brief',
-      description: 'Fresh source-backed technology, startup, market, and product briefing.',
-      canonicalUrl: 'https://highsignal.app/brief',
-      itemCount: 1,
-      syncStatus: 'fresh',
-    },
-    item: {
-      id: `briefing:high-signal:${date}`,
-      sourceId: 'high-signal',
-      sourceKind: 'briefing',
-      title: "Today's High Signal brief",
-      summary:
-        "Start with today's source-backed news briefing, then write one takeaway worth remembering.",
-      canonicalUrl: 'https://highsignal.app/brief',
-      tracks: ['news', 'technology', 'startups', 'markets'],
-      format: 'daily-brief',
-      estimatedMinutes: 10,
-      publishedAt: date,
-      fingerprint: hash(`high-signal:${date}`),
-    },
-  };
-}
-
 function addDerivedAssessments(items) {
   return items.map((item, index) => {
     if (!item.assessmentSeed?.answer) return item;
@@ -476,7 +448,13 @@ function addDerivedAssessments(items) {
 
 const projects = await projectSources();
 const research = await researchSources();
-const brief = dailyBrief();
+const previousSnapshot = existsSync(OUTPUT) ? JSON.parse(readFileSync(OUTPUT, 'utf8')) : undefined;
+const brief = await syncHighSignalFeed({
+  fetchImpl: fetch,
+  url: process.env.HIGH_SIGNAL_LEARNING_FEED_URL || DEFAULT_HIGH_SIGNAL_FEED_URL,
+  previousSnapshot,
+});
+if (brief.warning) console.warn(`High Signal learning feed is stale: ${brief.warning}`);
 const snapshot = {
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),
@@ -495,10 +473,12 @@ const snapshot = {
       syncStatus: 'pending',
     },
   ],
-  items: addDerivedAssessments([brief.item, ...projects.items, ...research.items]).map((item) => ({
-    ...item,
-    tracks: [...new Set(item.tracks)],
-  })),
+  items: addDerivedAssessments([...brief.items, ...projects.items, ...research.items]).map(
+    (item) => ({
+      ...item,
+      tracks: [...new Set(item.tracks)],
+    })
+  ),
 };
 
 if (snapshot.items.some((item) => item.id.includes('knowledge-base')))
