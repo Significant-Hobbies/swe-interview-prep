@@ -115,7 +115,7 @@ graph TB
 
 1. **Clone and install**
    ```bash
-   git clone https://github.com/sarthak-fleet/swe-interview-prep.git
+   git clone https://github.com/Significant-Hobbies/swe-interview-prep.git
    cd swe-interview-prep
    pnpm install
    ```

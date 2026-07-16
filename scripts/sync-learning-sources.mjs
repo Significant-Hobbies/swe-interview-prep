@@ -70,6 +70,27 @@ const PROJECT_SOURCE_LABELS = {
   reader: 'Reader: Product Engineering',
   'swe-interview-prep': 'SWE Prep: Product Engineering',
 };
+const PROJECT_REPOSITORIES = {
+  'saas-maker': 'sass-maker/saas-maker',
+  'free-ai': 'sass-maker/free-ai',
+  'reel-pipeline': 'sass-maker/reel-pipeline',
+  drank: 'High-Signal-App/drank',
+  codevetter: 'Codevetter/codevetter',
+  starboard: 'Codevetter/starboard',
+  'high-signal': 'High-Signal-App/high-signal',
+  aliveville: 'sarthakagrawal927/alive-ville',
+  pace: 'HeyPace/pace',
+  tinygpt: 'PostTrainLLM/tinygpt',
+  significanthobbies: 'Significant-Hobbies/significanthobbies',
+  reader: 'Significant-Hobbies/reader',
+  'anime-list': 'Significant-Hobbies/anime-list',
+  'swe-interview-prep': 'Significant-Hobbies/swe-interview-prep',
+  'email-manager': 'sarthakagrawal927/email-manager',
+  looptv: 'Significant-Hobbies/looptv',
+  rolepatch: 'sarthakagrawal927/rolepatch',
+  karte: 'sarthakagrawal927/karte',
+  'research-papers': 'High-Signal-App/research-papers',
+};
 const POSTTRAIN_PHASES = [
   {
     title: '0. Prerequisites',
@@ -99,7 +120,7 @@ const POSTTRAIN_PHASES = [
   { title: '7. WebGPU acceleration', concepts: ['ml-webgpu'] },
   { title: '8. Evaluation and alignment', concepts: ['ml-evaluation', 'ml-rl-alignment'] },
 ];
-const POSTTRAIN_DOCS_BASE = 'https://github.com/sarthak-fleet/tinygpt/blob/main/docs';
+const POSTTRAIN_DOCS_BASE = 'https://github.com/PostTrainLLM/tinygpt/blob/main/docs';
 
 function posttrainDocs(moduleIndex) {
   const shared = [
@@ -168,6 +189,10 @@ function productId(project) {
   return project === 'tinygpt' ? 'posttrainllm' : project;
 }
 
+function githubRepository(project) {
+  return PROJECT_REPOSITORIES[project] || `sarthakagrawal927/${project}`;
+}
+
 function hierarchyFor(project, fallbackOrder) {
   const track = PROJECT_LABELS[project] || productId(project);
   return { track, module: 'Project learning', moduleOrder: 1, topicOrder: fallbackOrder + 1 };
@@ -225,7 +250,7 @@ function nativePosttrainItems() {
   );
 }
 
-function projectRoadmap(project, repo, items) {
+function projectRoadmap(project, repository, items) {
   if (project === 'tinygpt') {
     return {
       label: 'posttrainllm learning roadmap',
@@ -246,14 +271,14 @@ function projectRoadmap(project, repo, items) {
       .slice(0, 24);
     return {
       label: `${PROJECT_LABELS[project] || project} roadmap`,
-      canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/${roadmapPath}`,
+      canonicalUrl: `https://github.com/${repository}/blob/main/${roadmapPath}`,
       modules: modules.length > 0 ? modules : ['Project roadmap'],
     };
   }
 
   return {
     label: `${PROJECT_LABELS[project] || project} learning roadmap`,
-    canonicalUrl: `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
+    canonicalUrl: `https://github.com/${repository}/blob/main/docs/learning/new-things.md`,
     modules: [...new Set(items.map((item) => item.hierarchy?.module).filter(Boolean))],
   };
 }
@@ -281,7 +306,7 @@ function projectItems(project, body, repositoryPath) {
           summary: what,
           canonicalUrl:
             firstUrl(source) ||
-            `https://github.com/sarthak-fleet/${project}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
+            `https://github.com/${githubRepository(project)}/blob/main/docs/learning/new-things.md#${slugify(title)}`,
           repositoryPath,
           tracks: [publicId],
           hierarchy: hierarchyFor(project, topicIndex),
@@ -303,8 +328,8 @@ async function loadProjectLearning(project) {
       repositoryPath: relative(FLEET_ROOT, learningPath),
     };
   }
-  const repo = project === 'aliveville' ? 'alive-ville' : project;
-  const url = `https://raw.githubusercontent.com/sarthak-fleet/${repo}/main/docs/learning/new-things.md`;
+  const repository = githubRepository(project);
+  const url = `https://raw.githubusercontent.com/${repository}/main/docs/learning/new-things.md`;
   try {
     const response = await fetch(url);
     if (!response.ok) return null;
@@ -323,7 +348,7 @@ async function projectSources() {
   for (const project of ACTIVE_PROJECTS) {
     if (EXCLUDED_PROJECTS.has(project)) continue;
     const learning = await loadProjectLearning(project);
-    const repo = project === 'aliveville' ? 'alive-ville' : project;
+    const repository = githubRepository(project);
     const publicId = productId(project);
     const sourceLabel = PROJECT_SOURCE_LABELS[project] || PROJECT_LABELS[project] || project;
     const next =
@@ -332,7 +357,7 @@ async function projectSources() {
         : learning
           ? projectItems(project, learning.body, learning.repositoryPath)
           : [];
-    const roadmap = projectRoadmap(project, repo, next);
+    const roadmap = projectRoadmap(project, repository, next);
     items.push(...next);
     sources.push({
       id: `project:${publicId}`,
@@ -344,8 +369,8 @@ async function projectSources() {
           : `No learning track published yet for ${project}`,
       canonicalUrl:
         project === 'tinygpt'
-          ? `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learn.md`
-          : `https://github.com/sarthak-fleet/${repo}/blob/main/docs/learning/new-things.md`,
+          ? `https://github.com/${repository}/blob/main/docs/learn.md`
+          : `https://github.com/${repository}/blob/main/docs/learning/new-things.md`,
       itemCount: next.length,
       syncStatus: next.length > 0 ? 'fresh' : 'pending',
       roadmap,
