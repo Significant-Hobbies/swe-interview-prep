@@ -447,9 +447,44 @@ async function handleReaderLearning(request, env) {
   return json(snapshot, { headers: { 'cache-control': 'private, no-store' } });
 }
 
+// Fleet agent catalog — static product truth for crawlers (no auth).
+const AGENT_CATALOG = {
+  name: 'SWE Interview Prep',
+  version: '1',
+  url: 'https://learn.significanthobbies.com',
+  llms: 'https://learn.significanthobbies.com/llms.txt',
+  llmsFull: 'https://learn.significanthobbies.com/llms-full.txt',
+  sitemap: 'https://learn.significanthobbies.com/sitemap.xml',
+  robots: 'https://learn.significanthobbies.com/robots.txt',
+  markdown: { suffix: '.md', negotiation: true },
+  surfaces: [
+    {
+      id: 'home',
+      url: 'https://learn.significanthobbies.com/',
+      md: 'https://learn.significanthobbies.com/index.md',
+      kind: 'spa',
+      description: 'Product home',
+    },
+  ],
+  auth: {
+    public: true,
+    notes: 'Auth-walled app routes are not agent-indexed unless listed here.',
+  },
+};
+
 export const onRequest = withTiming(async ({ request, env, params }) => {
   const path = (params.path || []).join('/');
   try {
+    // Agent GEO surface: GET /api/ai (must not fall through to "route not found")
+    if (path === 'ai' && (request.method === 'GET' || request.method === 'HEAD')) {
+      return new Response(`${JSON.stringify(AGENT_CATALOG, null, 2)}\n`, {
+        headers: {
+          'content-type': 'application/json; charset=utf-8',
+          'cache-control': 'public, max-age=300',
+          'access-control-allow-origin': '*',
+        },
+      });
+    }
     // NOTE: each handler is `await`ed so a rejected promise is caught here —
     // returning the promise bare would let the rejection escape this try/catch.
     if (path === 'auth/google') return await handleGoogle(request, env);
