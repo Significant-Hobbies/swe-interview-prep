@@ -1,0 +1,36 @@
+# SWE Interview Prep — full agent brief
+
+SWE learning OS with FSRS spaced repetition, drills, and feedback.
+
+## Index
+
+# SWE Interview Prep
+
+Software engineering learning OS with spaced repetition (FSRS), drills, and feedback.
+
+## Note for agents
+
+Much of the app is authenticated SPA. Public product brief only here.
+
+## Agent entrypoints
+
+- https://learn.significanthobbies.com/llms.txt
+- https://learn.significanthobbies.com/index.md
+
+## Product links
+
+- Home: https://learn.significanthobbies.com/ — Learning app
+
+## Machine surfaces
+
+- https://learn.significanthobbies.com/llms.txt
+- https://learn.significanthobbies.com/llms-full.txt
+- https://learn.significanthobbies.com/api/ai
+- https://learn.significanthobbies.com/index.md
+- https://learn.significanthobbies.com/sitemap.xml
+- https://learn.significanthobbies.com/robots.txt
+
+## Contact / fleet
+
+- Fleet: https://sassmaker.com
+- Agent email for directory verification: sarthakagrawal@agentmail.to
