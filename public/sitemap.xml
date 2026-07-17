@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://learn.significanthobbies.com/</loc></url>
+  <url><loc>https://learn.significanthobbies.com/about</loc></url>
+  <url><loc>https://learn.significanthobbies.com/drills</loc></url>
   <url><loc>https://learn.significanthobbies.com/index.md</loc></url>
+  <url><loc>https://learn.significanthobbies.com/learn</loc></url>
   <url><loc>https://learn.significanthobbies.com/llms.txt</loc></url>
-  <url><loc>https://learn.significanthobbies.com/api/ai</loc></url>
+  <url><loc>https://learn.significanthobbies.com/privacy</loc></url>
+  <url><loc>https://learn.significanthobbies.com/review</loc></url>
+  <url><loc>https://learn.significanthobbies.com/terms</loc></url>
 </urlset>
