@@ -6,7 +6,7 @@ Status: Accepted
 ## Context
 
 The product previously used Supabase PostgreSQL (see
-[`../../archive/migration-supabase-to-turso.md`](../../archive/migration-supabase-to-turso.md)).
+[`migration-supabase-to-turso.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/migration-supabase-to-turso.md)).
 The data model is per-user rows keyed by `user_id` + `problem_id`/`concept_id`
 with no complex joins or cross-user aggregations. The serverless backend
 needed a DB that works cleanly with Cloudflare Pages Functions and the

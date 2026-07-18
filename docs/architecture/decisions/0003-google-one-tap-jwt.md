@@ -8,7 +8,7 @@ Status: Accepted
 The prior auth flow was Supabase OAuth with a Google redirect. For a
 single-user-ish personal product, the redirect dance was heavy and added a
 full-page reload. The 2026-03-29 security audit (see
-[`../../archive/security-audit-2026-03-29.md`](../../archive/security-audit-2026-03-29.md))
+[`security-audit-2026-03-29.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/security-audit-2026-03-29.md))
 also flagged a hardcoded `JWT_SECRET` fallback that had to go.
 
 ## Decision

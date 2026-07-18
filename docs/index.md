@@ -5,29 +5,29 @@ This directory is the canonical, source-of-truth documentation for the
 [Blume](https://useblume.dev) config at the repo root is only a presentation
 and search layer over these same files.
 
-Agent-facing rules live in [`../AGENTS.md`](../AGENTS.md). Current state lives
-in [`../STATUS.md`](../STATUS.md).
+Agent-facing rules live in [`AGENTS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/AGENTS.md). Current state lives
+in [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md).
 
 ## What lives where
 
 | Path | Contents |
 | --- | --- |
-| [`product/`](product/) | What the product is, its surfaces, and competitive context |
-| [`architecture/`](architecture/) | System architecture, request/data flow, and decision records (ADRs) |
-| [`architecture/decisions/`](architecture/decisions/) | Architecture Decision Records — why a choice was made |
-| [`development/`](development/) | Local setup, commands, environment, testing, content pipelines |
-| [`operations/`](operations/) | Deploy, CI, scheduled jobs, and runbooks |
-| [`operations/jobs/`](operations/jobs/) | Scheduled GitHub Actions jobs and their contracts |
-| [`operations/runbooks/`](operations/runbooks/) | Operational procedures (secret rotation, adapter activation) |
-| [`knowledge/`](knowledge/) | Durable learnings and reusable failed approaches |
-| [`learning/`](learning/) | In-product learning roadmaps. **Product content** — loaded by the app at build time via Vite glob; do not move or rename |
-| [`archive/`](archive/) | Historical snapshots (migrations, past audits, old plans, research). Kept for git history and reference; not authoritative |
+| [`product/overview.md`](product/overview.md) | What the product is, its surfaces, and competitive context |
+| [`architecture/overview.md`](architecture/overview.md) | System architecture, request/data flow, and decision records (ADRs) |
+| [`architecture/decisions/README.md`](architecture/decisions/README.md) | Architecture Decision Records — why a choice was made |
+| [`development/commands.md`](development/commands.md) | Local setup, commands, environment, testing, content pipelines |
+| [`operations/ci.md`](operations/ci.md) | Deploy, CI, scheduled jobs, and runbooks |
+| [`operations/jobs/weekly-quality.md`](operations/jobs/weekly-quality.md) | Scheduled GitHub Actions jobs and their contracts |
+| [`operations/runbooks/reader-adapter.md`](operations/runbooks/reader-adapter.md) | Operational procedures (secret rotation, adapter activation) |
+| [`knowledge/failed-approaches.md`](knowledge/failed-approaches.md) | Durable learnings and reusable failed approaches |
+| [`learning/index.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/learning/index.md) | In-product learning roadmaps. **Product content** — loaded by the app at build time via Vite glob; do not move or rename |
+| [`archive/`](https://github.com/Significant-Hobbies/swe-interview-prep/tree/main/docs/archive) | Historical snapshots kept for git history and reference; not authoritative |
 
 ## How to read this
 
 - **New to the repo?** [`product/overview.md`](product/overview.md) → [`architecture/overview.md`](architecture/overview.md) → [`development/setup.md`](development/setup.md).
-- **On-call / deploying?** [`operations/deploy.md`](operations/deploy.md) + the runbooks under [`operations/runbooks/`](operations/runbooks/).
-- **Wondering why something is the way it is?** [`architecture/decisions/`](architecture/decisions/) lists every recorded decision.
+- **On-call / deploying?** [`operations/deploy.md`](operations/deploy.md) + the [runbooks](operations/runbooks/reader-adapter.md).
+- **Wondering why something is the way it is?** [`architecture/decisions/README.md`](architecture/decisions/README.md) lists every recorded decision.
 - **Hitting a known pitfall?** [`knowledge/failed-approaches.md`](knowledge/failed-approaches.md).
 
 ## Maintenance rules
@@ -44,7 +44,7 @@ in [`../STATUS.md`](../STATUS.md).
    reusable failures — not restate the file tree.
 4. When a decision is reversed, add a new ADR that supersedes the old one; do
    not silently edit the old ADR.
-5. Stale docs go to [`archive/`](archive/) (preserving git rename history), not
+5. Stale docs go to the [archive](https://github.com/Significant-Hobbies/swe-interview-prep/tree/main/docs/archive) (preserving git rename history), not
    the trash. Never delete useful history.
 6. Every page states its scope up front. If a page would be empty, do not
    create it.

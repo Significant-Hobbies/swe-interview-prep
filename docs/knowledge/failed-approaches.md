@@ -14,11 +14,11 @@ a single-user-ish product, and a hardcoded `JWT_SECRET` fallback that the
 
 **Replaced by:** Cloudflare Pages + Functions, Turso (libSQL), Google One
 Tap + JWT cookie. See ADRs
-[0001](../architecture/decisions/0001-cloudflare-pages-over-vercel.md),
-[0002](../architecture/decisions/0002-turso-libsql.md),
-[0003](../architecture/decisions/0003-google-one-tap-jwt.md). Full migration
+[0001](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0001-cloudflare-pages-over-vercel.md),
+[0002](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0002-turso-libsql.md),
+[0003](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0003-google-one-tap-jwt.md). Full migration
 notes archived at
-[`../archive/migration-supabase-to-turso.md`](../archive/migration-supabase-to-turso.md).
+[`migration-supabase-to-turso.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/migration-supabase-to-turso.md).
 
 **Do not** guide new work from the old Vercel/Supabase migration notes —
 they are explicitly stale.
@@ -33,7 +33,7 @@ ref to keep in sync — all for a dev-only path.
 
 **Replaced by:** `vite-plugin-local-ai.js` — an in-process Vite plugin that
 boots/dies with Vite and ships nothing to prod. See
-[ADR 0006](../architecture/decisions/0006-dev-ai-bridge-inprocess.md).
+[ADR 0006](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0006-dev-ai-bridge-inprocess.md).
 
 ## Hardcoded `JWT_SECRET` fallback
 

@@ -8,7 +8,7 @@ Status: Accepted
 Interview-prep content is scattered across dozens of GitHub repos. Sending
 users out to browse them breaks the in-app loop. The original design doc is
 archived at
-[`../../archive/plans/2026-02-17-library-embedded-repos-design.md`](../../archive/plans/2026-02-17-library-embedded-repos-design.md).
+[`library-embedded-repos-design.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/plans/2026-02-17-library-embedded-repos-design.md).
 
 ## Decision
 

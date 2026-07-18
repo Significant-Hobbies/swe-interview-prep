@@ -4,12 +4,12 @@ The Reader adapter loads saved Reader articles at request time through the
 authenticated server proxy (`/api/learning/reader`). Article bodies and
 Reader credentials are never emitted into the static catalog or client
 bundle. See
-[`../../architecture/decisions/0007-unified-learning-sources-registry.md`](../../architecture/decisions/0007-unified-learning-sources-registry.md).
+[`0007-unified-learning-sources-registry.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0007-unified-learning-sources-registry.md).
 
 ## Status
 
 **Not yet activated.** Configuring `READER_API_TOKEN` is a planned item in
-[`../../../STATUS.md`](../../../STATUS.md). Until then, the Reader source surfaces
+[`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md). Until then, the Reader source surfaces
 as stale/empty and the last-good items are retained.
 
 ## Steps to activate

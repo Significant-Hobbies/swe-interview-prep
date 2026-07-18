@@ -3,8 +3,8 @@
 This is the canonical documentation tree for the repository. Start at
 [`index.md`](index.md) for a full map of what lives where.
 
-Agent-facing rules: [`../AGENTS.md`](../AGENTS.md). Current state:
-[`../STATUS.md`](../STATUS.md).
+Agent-facing rules: [`AGENTS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/AGENTS.md). Current state:
+[`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md).
 
 ## Note on `docs/learning/`
 

@@ -1,7 +1,7 @@
 # Runbook: Rotate JWT_SECRET
 
 The 2026-03-29 security audit (see
-[`../../archive/security-audit-2026-03-29.md`](../../archive/security-audit-2026-03-29.md))
+[`security-audit-2026-03-29.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/security-audit-2026-03-29.md))
 removed the hardcoded `dev-secret-change-in-production` fallback. Commit
 `26c3eb4` exposed the old fallback in git history, so rotating the production
 secret is a known low-severity follow-up. Rotation is also good hygiene

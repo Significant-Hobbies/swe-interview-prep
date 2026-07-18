@@ -24,4 +24,4 @@ Permissions: `contents: read` only — this job never commits.
   It surfaces drift early. Triage the failing step the same way you would a
   local `pnpm lint`/`test`/`build` failure.
 - If the job is noisy for a known reason, do not disable it — fix the root
-  cause or mark the personal-use closure in [`../../../STATUS.md`](../../../STATUS.md).
+  cause or mark the personal-use closure in [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md).

@@ -17,7 +17,7 @@ pnpm sync:pages-secrets
 
 ## Auto-deploy (default)
 
-Pushes to `main` trigger [`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml). Full CI matrix: [`ci.md`](ci.md).
+Pushes to `main` trigger the [deploy workflow](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/.github/workflows/deploy.yml). Full CI matrix: [`ci.md`](ci.md).
 
 1. `pnpm test`
 2. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)

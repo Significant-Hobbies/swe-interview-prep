@@ -50,7 +50,7 @@ docs/                This documentation tree
 docs/learning/       In-product roadmap markdown (Vite-globbed into the SPA — do not move)
 ```
 
-The full file-by-file map lives in `../AGENTS.md` (agent bootloader). This page
+The full file-by-file map lives in the [agent bootloader](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/AGENTS.md). This page
 intentionally does not restate it.
 
 ## Key subsystems
@@ -66,14 +66,14 @@ intentionally does not restate it.
   `again`/`hard` FSRS ratings.
 - **Socratic AI.** `CompanionPanel.tsx` never gives direct solutions, only
   probes understanding. This is intentional product behavior — see
-  [`decisions/0005-socratic-no-solutions.md`](decisions/0005-socratic-no-solutions.md).
+  [`decisions/0005-socratic-no-solutions.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0005-socratic-no-solutions.md).
 - **Auto-tagging.** After 5 minutes of stable Playground code, `useTagger`
   POSTs to `/api/tag`; AI returns concept tags with depth
   (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
 - **Dev AI bridge.** `vite-plugin-local-ai.js` (`apply: 'serve'`) mounts
   `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory
   stubs. Replaced the old `local-ai` git submodule — see
-  [`decisions/0006-dev-ai-bridge-inprocess.md`](decisions/0006-dev-ai-bridge-inprocess.md).
+  [`decisions/0006-dev-ai-bridge-inprocess.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0006-dev-ai-bridge-inprocess.md).
 - **DB auto-init.** `initDatabase()` creates tables `IF NOT EXISTS` on first
   cold start. No migration runner; additive schema changes only.
 - **Multi-provider AI.** Clients pass `aiConfig: {endpointUrl, apiKey, model}`
@@ -96,5 +96,5 @@ concept/gaps mutations to keep the serverless API surface small.
 ## Related docs
 
 - [`data-flow.md`](data-flow.md) — request lifecycle, guest vs auth, static vs user state
-- [`decisions/`](decisions/) — why each major choice was made
+- [`decisions/README.md`](decisions/README.md) — why each major choice was made
 - [`../operations/deploy.md`](../operations/deploy.md) — how it ships

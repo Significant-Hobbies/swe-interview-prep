@@ -2,7 +2,7 @@
 
 **Product:** [learn.significanthobbies.com](https://learn.significanthobbies.com)
 **Slug:** `swe-interview-prep`
-**Status:** Personal-use, maintenance-only (see [`../../STATUS.md`](../../STATUS.md)).
+**Status:** Personal-use, maintenance-only (see [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)).
 
 ## What it is
 
@@ -55,7 +55,7 @@ multi-provider AI hints, LeetCode import, embedded learning library, personal
 learning sessions.
 
 **Out of scope** (per the 2026-07-10 personal-use closure in
-[`../../STATUS.md`](../../STATUS.md)): ATS/job-application features, paid
+[`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)): ATS/job-application features, paid
 tiers, team workspaces, new backend providers, alternate auth modes, and any
 roadmap expansion beyond maintenance and personally requested workflow fixes.
 

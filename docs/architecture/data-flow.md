@@ -54,7 +54,7 @@ into `src/pages/LearningDoc.tsx`.
    AI SDK. **Dev:** `vite-plugin-local-ai.js` streams the logged-in
    `claude`/`codex`/`gemini` CLI over SSE — no API keys.
 4. The Socratic system prompt forbids direct solutions (see
-   [`decisions/0005-socratic-no-solutions.md`](decisions/0005-socratic-no-solutions.md)).
+   [`decisions/0005-socratic-no-solutions.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0005-socratic-no-solutions.md)).
 
 ## Feynman Gate → FSRS loop
 

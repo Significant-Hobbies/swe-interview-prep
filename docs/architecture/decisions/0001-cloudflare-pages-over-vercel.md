@@ -6,7 +6,7 @@ Status: Accepted
 ## Context
 
 The product started on a Vercel + Supabase stack (see
-[`../../archive/migration-supabase-to-turso.md`](../../archive/migration-supabase-to-turso.md)).
+[`migration-supabase-to-turso.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/migration-supabase-to-turso.md)).
 As the SPA and its serverless backend grew, the operator wanted a single
 hosting provider for both the static frontend and the API, with lower
 operational overhead and no second vendor for edge functions. The fleet
@@ -36,4 +36,4 @@ using `wrangler pages deploy`.
   instead (see `.cfpagesignore`, `docs/operations/deploy.md`).
 - End-to-end CI against live Turso + Cloudflare bindings is
   operator-dependent, not fully automated in repo (known gap, see
-  `../../STATUS.md`).
+  `https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md`).

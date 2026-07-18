@@ -6,12 +6,12 @@ exemplifies it.
 
 ## 2026-07 — Personal-use closure changes the maintenance posture
 
-The 2026-07-10 closure (see [`../../STATUS.md`](../../STATUS.md)) means this
+The 2026-07-10 closure (see [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)) means this
 product is maintenance-only. New work must be either reliability, a
 personally-requested workflow fix, or a doc change. Do not propose roadmap
 expansion. The `plans/2026-05-29-cognitive-fitness-roadmap.md` items are
 paused candidates, not active planned work (archived under
-[`../archive/plans/`](../archive/plans/)).
+[`archive/plans/`](https://github.com/Significant-Hobbies/swe-interview-prep/tree/main/docs/archive/plans)).
 
 ## 2026-06 — A dev-only Vite plugin beats a submodule for dev affordances
 
@@ -19,7 +19,7 @@ Replacing the `local-ai` git submodule with `vite-plugin-local-ai.js`
 (`apply: 'serve'`) removed a second process, a proxy hop, and a submodule
 ref to keep in sync — and it cannot ship to prod because `apply: 'serve'`
 excludes it from `vite build`. See
-[`../architecture/decisions/0006-dev-ai-bridge-inprocess.md`](../architecture/decisions/0006-dev-ai-bridge-inprocess.md).
+[`0006-dev-ai-bridge-inprocess.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0006-dev-ai-bridge-inprocess.md).
 Generalize: for any dev-only affordance, prefer an in-process Vite plugin
 over a sidecar server.
 
@@ -29,7 +29,7 @@ The drill → Feynman Gate → FSRS → "next weakest concept" card loop only wo
 because every stage writes to `concept_mastery` and the dashboard reads from
 the same table. A loop that stores review state separately from the
 recommender will drift. See
-[`../architecture/decisions/0004-fsrs-spaced-repetition.md`](../architecture/decisions/0004-fsrs-spaced-repetition.md).
+[`0004-fsrs-spaced-repetition.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0004-fsrs-spaced-repetition.md).
 
 ## 2026-03 — Serverless schema needs additive-only changes
 
@@ -45,8 +45,8 @@ The learning-sources registry and the embedded library both avoid copying
 canonical source bodies. Copying creates a second source of truth that
 drifts and creates licensing risk. Index by metadata; fetch bodies at
 request time through authenticated proxies. See ADRs
-[0007](../architecture/decisions/0007-unified-learning-sources-registry.md)
-and [0008](../architecture/decisions/0008-embedded-learning-library.md).
+[0007](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0007-unified-learning-sources-registry.md)
+and [0008](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0008-embedded-learning-library.md).
 
 ## 2026-03 — Stale-on-failure is the right default for external feeds
 

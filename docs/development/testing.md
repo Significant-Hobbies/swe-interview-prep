@@ -63,6 +63,6 @@ and PR. The short version: lint → test → build (with a placeholder
 
 - End-to-end CI against live Turso + Cloudflare bindings is
   operator-dependent, not fully automated in repo (see
-  [`../../STATUS.md`](../../STATUS.md)).
+  [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)).
 - Regression coverage is "paused" at the existing focused coverage per the
   personal-use closure.
