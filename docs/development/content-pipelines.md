@@ -36,8 +36,9 @@ pnpm sync:learning-sources
 ```
 
 Runs `scripts/sync-learning-sources.mjs` (uses `--experimental-strip-types`).
-Indexes all 19 active Fleet project study queues, research paths, the High
-Signal feed, and the Reader adapter into `src/data/learning-sources.json`.
+Indexes the active Fleet project study queues (all fleet projects except the
+`EXCLUDED_PROJECTS` set in the script), research paths, the High Signal feed,
+and the Reader adapter into `src/data/learning-sources.json`.
 Reference-only — does not copy source bodies. See
 [`../architecture/decisions/0007-unified-learning-sources-registry.md`](../architecture/decisions/0007-unified-learning-sources-registry.md).
 

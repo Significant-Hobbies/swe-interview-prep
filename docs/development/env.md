@@ -11,7 +11,7 @@ build-time vs runtime and where each is consumed. If it disagrees with
 | --- | --- | --- |
 | `VITE_GOOGLE_CLIENT_ID` | Yes | Google One Tap client ID. The SPA cannot render auth without it. `pnpm build` fails if missing. |
 | `VITE_SAASMAKER_API_KEY` | Optional | SaaS Maker feedback widget. |
-| `VITE_API_URL` | Optional | Override the API base URL. Defaults to `http://localhost:3001` in dev, same-origin (`""`) in prod. |
+| `VITE_API_URL` | Optional | Override the API base URL. `src/lib/api-url.ts` defaults it to `""` (same-origin) when unset — dev and prod alike. (The `.env.example` comment's `http://localhost:3001` default is stale.) |
 
 ## Runtime (Cloudflare Pages Functions, read at request time)
 

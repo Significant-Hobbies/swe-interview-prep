@@ -26,27 +26,34 @@ Review → Apply**.
 artifact the user builds. The Playground (Monaco + Excalidraw + Socratic AI +
 Feynman Gate) is the build/drill workspace.
 
-## The five tabs
+## Primary tabs
+
+The primary nav (`PRIMARY_NAV` in `src/components/Layout.tsx`) has six tabs
+plus a Docs link:
 
 | Tab | Role |
 | --- | --- |
-| Learn | Roadmap journey + concepts across 8 tracks |
+| Today | Home / daily session hub (the index route) |
+| Learn | Roadmap journey + concepts across the tracks |
 | Practice | Drills + spaced-repetition reviews |
-| Playground | Monaco/Excalidraw build surface with Socratic AI companion |
 | Mock | Timed mock interview |
+| Playground | Monaco/Excalidraw build surface with Socratic AI companion |
 | Progress | Mastery rollups + notes |
 
 Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`)
-are reachable from inside the tabs. Legacy routes (`/today`, `/dashboard`,
-`/roadmaps`, `/concepts`, `/drills`, `/reviews`, `/build`, `/projects`,
-`/notes`, `/vibe-learning`) redirect into the five tabs so external links keep
-working — see `src/App.tsx`.
+are reachable from inside the tabs. `/today` and `/build` (BuildLab) are real
+pages. Legacy routes redirect so external links keep working: `/dashboard` →
+`/today`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
+`/practice`; `/reviews`, `/review` → `/practice/all?tab=reviews`; `/projects`
+→ `/progress/all`; `/notes` → `/progress/all?tab=notes`; `/vibe-learning` →
+`/playground`. See `src/App.tsx`.
 
 ## Tracks
 
-Eight learning tracks: `search-ir`, `vector-db`, `ai-systems`, `backend`,
-`databases`, `system-design`, `dsa`, `product`. Concept content is static JSON
-in `src/data/concepts.json` (~125 concepts).
+Nine learning tracks (`TRACKS` in `src/data/learning-os.ts`): `search-ir`,
+`mathematics`, `vector-db`, `ai-systems`, `backend`, `databases`,
+`system-design`, `dsa`, `product`. Concept content is static JSON in
+`src/data/concepts.json` (152 concepts).
 
 ## Scope
 

@@ -9,54 +9,69 @@ disagrees with code, code wins.
 
 | Route | Surface |
 | --- | --- |
-| `/` | Dashboard / study hub |
-| `/learn` | Roadmap journey + concepts (8 tracks) |
-| `/practice` | Drills + spaced-repetition reviews |
+| `/` | Redirects to `/today` |
+| `/today` | Home / daily session hub |
+| `/learn`, `/learn/all` | Roadmap journey + concepts (9 tracks) |
+| `/explore` | Concept/roadmap explorer |
+| `/practice`, `/practice/all` | Drills + spaced-repetition reviews |
 | `/playground` | Monaco + Excalidraw build sandbox |
 | `/mock` | Timed mock interview |
-| `/progress` | Mastery rollups + notes |
-| `/build-lab` | Hands-on build exercises |
-| `/library` | Embedded GitHub learning-library reader (owner-only) |
-| `/sources` | Unified learning-sources index (owner-only) |
-| `/session/:date/:sessionId` | Adaptive 30-minute learning session (owner-only) |
-| `/learning/:slug` | In-product learning roadmap markdown (served from `docs/learning/`) |
-| `/concepts/:id` | Concept detail |
+| `/progress`, `/progress/all` | Mastery rollups + notes |
+| `/build`, `/drills/:id` | BuildLab (hands-on build/drill workspace) |
+| `/library`, `/library/:repoSlug` | Embedded GitHub learning-library reader (owner-only) |
+| `/sources`, `/sources/:id` | Unified learning-sources index (owner-only) |
+| `/session/:date`, `/session/:date/:sessionId` | Adaptive learning session (owner-only) |
+| `/learning`, `/learning/:slug` | In-product learning roadmap markdown (served from `docs/learning/`) |
+| `/concepts/:id`, `/learn/:id` | Concept detail |
 | `/roadmaps/:id` | Roadmap detail |
 | `/projects/:id` | Project detail |
-| `/drills/:id` | Drill detail |
-| `/login`, `/about`, `/privacy` | Static |
+| `/share/roadmaps/:id` | Public shared roadmap |
+| `/onboarding`, `/about`, `/privacy` | Static |
+
+There is no `/login` or `/build-lab` route.
 
 ### Legacy redirects
 
-`/today`, `/dashboard`, `/roadmaps`, `/concepts` → `/learn`; `/drills`,
-`/reviews`, `/review` → `/practice`; `/build`, `/vibe-learning` →
-`/playground`; `/projects`, `/notes` → `/progress`. Listed in `src/App.tsx`.
+Listed in `src/App.tsx`: `/dashboard` → `/today`; `/roadmaps` → `/learn`;
+`/concepts` → `/learn/all`; `/drills` → `/practice`; `/reviews`, `/review` →
+`/practice/all?tab=reviews`; `/projects` → `/progress/all`; `/notes` →
+`/progress/all?tab=notes`; `/vibe-learning` → `/playground`. Unknown paths
+(`*`) fall back to `/today`.
 
-## API surface (Pages Functions)
+## API surface
 
-All `/api/*` routes are served in production by `functions/api/[[path]].js`,
-which routes to the handlers in `handlers/` and `api/`. Local dev uses the
-in-process Vite AI bridge for `/api/chat` plus in-memory stubs (see
-[`../development/setup.md`](../development/setup.md)).
+### Production (Pages Functions)
+
+The production Pages Function `functions/api/[[path]].js` serves only this
+route set (anything else returns `404 API route not found`):
 
 | Endpoint | Purpose | Auth |
 | --- | --- | --- |
 | `POST /api/auth/google` | Verify Google credential, issue httpOnly JWT cookie | — |
+| `POST /api/auth/logout` | Clear the auth cookie | — |
 | `GET /api/auth/verify` | Verify JWT | JWT |
-| `POST /api/chat` | Streaming multi-provider AI hints (Socratic) | Required |
-| `GET/POST/DELETE /api/chats` | Per-problem chat history | JWT |
-| `GET/POST /api/notes` | Per-problem notes | JWT |
-| `GET/POST /api/problems` | Imported (LeetCode) problems | JWT |
 | `GET /api/progress` | Progress rollups | JWT |
-| `GET/POST /api/learning` | Multi-action: `artifacts`, `drills`, `projects`, `notes`, `concepts`, `gaps` | JWT (owner-only for some actions) |
-| `POST /api/go-run` | Go WASM code execution proxy | Required |
-| `POST /api/tag` | AI auto-tagging of stable Playground code | JWT |
+| `GET/POST /api/learning?action=…` | Consolidated learning API (see actions below) | JWT for auth actions |
+| `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
 | `GET /api/ai` | Public agent catalog (JSON) | — |
-| `/api/learning/reader` | Private Reader adapter proxy | Owner |
 
-The `/api/learning?action=…` consolidation keeps the serverless API surface
-small. Actions: `artifacts`, `drills`, `projects`, `notes`, `concepts`,
-`gaps`, plus the owner-only learning-source and session actions.
+`/api/learning?action=…` actions (`shared/api/learning-registry.mjs`):
+public (no Turso auth) `gaps`, `critique`, `understanding`, `tag`;
+auth-required `activity`, `concepts`, `feynman`, `weekly`, `artifacts`,
+`drills`, `projects`, `notes`, `profile`, `review-mastery`, `elo`,
+`imported-reviews`.
+
+### Dev / legacy handlers (`api/*.mjs`)
+
+The Vercel-style `api/*.mjs` handlers (`chat`, `chats`, `notes`, `problems`,
+`go-run`, `progress`, `learning`, `auth/*`) are **not** deployed by the
+Cloudflare Pages Function. They exist for local-dev parity; in dev the Vite
+bridge (`vite-plugin-local-ai.js`) serves `/api/chat`, `/api/chats`,
+`/api/notes`, `/api/progress`, `/api/auth/*` and `/api/health` as stubs. The
+client still calls `/api/chat`, `/api/go-run`, and `/api/ai/chat`; in
+production those paths are not backed by the Pages Function (Go still runs
+because it falls back to the client-side WASM interpreter). See
+[`../development/setup.md`](../development/setup.md).
 
 ## Machine / agent surfaces
 

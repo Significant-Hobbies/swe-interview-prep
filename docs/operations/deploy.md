@@ -15,14 +15,21 @@ Sync runtime secrets to Cloudflare (first time or rotation):
 pnpm sync:pages-secrets
 ```
 
-## Auto-deploy (default)
+## Deploy workflow (manual)
 
-Pushes to `main` trigger [`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml). Full CI matrix: [`ci.md`](ci.md).
+Deploys are **manual**. [`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml)
+is triggered only by `workflow_dispatch` — there is no push-to-`main` trigger.
+Pushes to `main` run `ci.yml` (tests/lint/build) and, on doc changes,
+`docs.yml`, but do not deploy. Full CI matrix: [`ci.md`](ci.md).
+
+When dispatched, `deploy.yml`:
 
 1. `pnpm test`
-2. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
-3. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
-4. Smoke SPA + `/api/learning` Functions
+2. `pnpm validate:env:build` + `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
+3. `rm -rf dist/wasm` (the 38 MB Go WASM binary is R2-hosted, not shipped to Pages)
+4. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
+5. Smokes SPA + `/api/learning?action=gaps` only on `push` events — since the
+   workflow is dispatch-only, that smoke step does not run.
 
 **GitHub** (Settings → Secrets and variables):
 

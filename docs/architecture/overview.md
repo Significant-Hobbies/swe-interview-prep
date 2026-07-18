@@ -1,18 +1,20 @@
 # Architecture Overview
 
 A React 19 SPA served as static files by Cloudflare Pages, with a Pages
-Functions backend (`functions/api/[[path]].js`) that talks to Turso (libSQL)
-and proxies to multi-provider LLMs. The same handler logic runs locally through
-a Vite plugin so dev needs no separate server.
+Functions backend (`functions/api/[[path]].js`) that talks to Turso (libSQL).
+In production the Pages Function serves a small route set (`auth/*`,
+`progress`, `learning`, `learning/reader`, `ai`); AI generation runs through
+the Vercel AI SDK against a BYO OpenAI-compatible endpoint. The legacy
+`api/*.mjs` handlers run only under the local Vite dev bridge.
 
 ```
 React SPA (Vite build → dist/)
     │
-    ├── Monaco + Go WASM code execution (R2-hosted binary)
+    ├── Monaco + Go code execution (client-side WASM from R2, API-proxy fallback)
     ├── Excalidraw diagrams
-    ├── Socratic AI (useAI) ──► /api/chat ──► Pages Functions ──► LLM providers
+    ├── Socratic AI (useAI) ──► /api/chat (dev bridge) / OpenAI-compatible endpoint
     ├── Progress + FSRS hooks ──► /api/learning, /api/progress ──► Turso
-    ├── Learning library + sources ──► owner-only handlers ──► Turso + remote repos
+    ├── Learning library + sources ──► owner-only /api/learning actions ──► Turso + remote repos
     └── Google One Tap ──► /api/auth/google ──► httpOnly JWT cookie
 
 Local dev: vite-plugin-local-ai.js mounts /api/chat (streams claude/codex/gemini
@@ -24,16 +26,16 @@ to prod.
 
 | Layer | Choice | Notes |
 | --- | --- | --- |
-| Frontend | React 19 SPA, Vite 8, React Router v7, Tailwind v4 | TypeScript (strict: false) |
+| Frontend | React 19 SPA, Vite 8, React Router v7, Tailwind v4 | TypeScript (strict: true) |
 | Editor / viz | Monaco, Excalidraw, hand-rolled SVG primitives in `src/components/viz.tsx` | No chart-lib dep |
-| Code execution | Go WASM interpreter hosted on R2 (`swe-interview-prep-assets`) | `/api/go-run` proxies; auth required |
-| Backend | Cloudflare Pages Functions, single catch-all `functions/api/[[path]].js` | Routes to `handlers/` + `shared/` |
+| Code execution | Hybrid Go executor: first run proxies `/api/go-run` → go.dev; a WASM interpreter (`go-interp.wasm`, R2-hosted) then loads in a Web Worker and takes over. TypeScript runs in-browser (sucrase). | `/api/go-run` requires auth (dev/legacy only — not deployed by the prod Pages Function) |
+| Backend | Cloudflare Pages Functions, single catch-all `functions/api/[[path]].js` | Prod routes: `auth/*`, `progress`, `learning`, `learning/reader`, `ai`. `learning` dispatches to `handlers/` via `shared/` |
 | DB | Turso (libSQL via `@libsql/client`) | Schema auto-init on first cold start; no migration runner |
 | Auth | Google One Tap → JWT httpOnly cookie | No OAuth redirect flow |
-| AI | Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek; multi-provider per request | Dev uses in-process CLI bridge, no keys |
+| AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint (`aiConfig` per request or `AI_*` env) | Dev uses in-process CLI bridge (claude/codex/gemini), no keys |
 | Spaced repetition | `ts-fsrs` (client + server wrappers) | Per-user per-concept state in `concept_mastery` |
 | Analytics | PostHog (`src/lib/analytics.ts`) | Local wrapper |
-| Deploy | Cloudflare Pages + Functions; GitHub Actions on push to `main` | See [`../operations/deploy.md`](../operations/deploy.md) |
+| Deploy | Cloudflare Pages + Functions; GitHub Actions `deploy.yml` (manual `workflow_dispatch`) | See [`../operations/deploy.md`](../operations/deploy.md) |
 | Package manager | pnpm | |
 
 ## Source layout (high level)
@@ -67,8 +69,9 @@ intentionally does not restate it.
 - **Socratic AI.** `CompanionPanel.tsx` never gives direct solutions, only
   probes understanding. This is intentional product behavior — see
   [`decisions/0005-socratic-no-solutions.md`](decisions/0005-socratic-no-solutions.md).
-- **Auto-tagging.** After 5 minutes of stable Playground code, `useTagger`
-  POSTs to `/api/tag`; AI returns concept tags with depth
+- **Auto-tagging.** After 5 minutes of idle-but-stable Playground code
+  (`IDLE_MS` in `src/hooks/useTagger.ts`), `useTagger` POSTs to
+  `/api/learning?action=tag`; AI returns concept tags with depth
   (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
 - **Dev AI bridge.** `vite-plugin-local-ai.js` (`apply: 'serve'`) mounts
   `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory
@@ -76,9 +79,11 @@ intentionally does not restate it.
   [`decisions/0006-dev-ai-bridge-inprocess.md`](decisions/0006-dev-ai-bridge-inprocess.md).
 - **DB auto-init.** `initDatabase()` creates tables `IF NOT EXISTS` on first
   cold start. No migration runner; additive schema changes only.
-- **Multi-provider AI.** Clients pass `aiConfig: {endpointUrl, apiKey, model}`
-  to any AI endpoint; the server falls back to `AI_ENDPOINT_URL` /
-  `AI_API_KEY` / `AI_MODEL` env vars.
+- **BYO AI endpoint.** Clients pass `aiConfig: {endpointUrl, apiKey, model}`
+  to any OpenAI-compatible endpoint; the server (`shared/lib/ai.mjs`, using
+  `@ai-sdk/openai-compatible`) falls back to `AI_ENDPOINT_URL` / `AI_API_KEY`
+  / `AI_MODEL` env vars. There are no native per-vendor SDK adapters; "multi
+  provider" means any OpenAI-compatible gateway.
 
 ## Database tables
 
@@ -90,8 +95,12 @@ Schema source of truth: `shared/db/schema.mjs` (and the parallel init in
 `review_question_mastery`, `user_elo_state`, `user_imported_reviews`,
 `user_push_subscriptions`.
 
-The `/api/learning?action=…` endpoint consolidates artifact/drill/project/note/
-concept/gaps mutations to keep the serverless API surface small.
+The `/api/learning?action=…` endpoint consolidates every learning mutation to
+keep the serverless API surface small. Action registry:
+`shared/api/learning-registry.mjs` — public (no Turso auth): `gaps`, `critique`,
+`understanding`, `tag`; auth-required: `activity`, `concepts`, `feynman`,
+`weekly`, `artifacts`, `drills`, `projects`, `notes`, `profile`,
+`review-mastery`, `elo`, `imported-reviews`.
 
 ## Related docs
 

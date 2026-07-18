@@ -71,5 +71,5 @@ Novel tech used in this project, ordered from most unfamiliar to most familiar.
 ## React 19 lazy + Suspense for route-level code splitting
 - What: Every route component is loaded via `React.lazy` with `<Suspense>` boundaries in `App.tsx`, deferring bundle parsing until the route is first visited.
 - Why here: TBD
-- Gotcha (from code): it's not just the 5 tabs — 12 routes total are lazy-loaded (`src/App.tsx:14-24`), including detail pages (ConceptDetail, RoadmapDetail, ProjectDetail, BuildLab) and static pages. Two separate `<Suspense>` boundaries wrap the nav shell and the route outlet (`src/App.tsx:57,67`).
+- Gotcha (from code): it's not just the six primary tabs — 25 page components are lazy-loaded (`src/App.tsx`, the `const … = lazy(…)` block), including detail pages (ConceptDetail, RoadmapDetail, ProjectDetail, BuildLab) and static pages. Two separate `<Suspense>` boundaries wrap the nav shell and the route outlet (`src/App.tsx:207,225`).
 - Source: https://react.dev/reference/react/lazy
