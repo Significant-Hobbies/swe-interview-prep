@@ -16,16 +16,23 @@ import {
   Settings,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { BROWSE_DESTINATIONS } from '../lib/browseLinks';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
 import { SaaSMakerChangelog } from './saasmaker-feedback';
-import { DigestBanner } from './DigestBanner';
-import SettingsModal from './SettingsModal';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+
+// Lazy-loaded: DigestBanner pulls in learning-os.ts (722 KB / 179 KB gzip of
+// JSON data) via useConcepts/planner. SettingsModal imports
+// ImportAndNotifySettings + LearningProfileSettings which also read learning-os.
+// Deferring both keeps the data chunk off the initial page load.
+const DigestBanner = lazy(() =>
+  import('./DigestBanner').then((m) => ({ default: m.DigestBanner }))
+);
+const SettingsModal = lazy(() => import('./SettingsModal'));
 
 interface NavItem {
   to: string;
@@ -269,7 +276,9 @@ export default function Layout() {
           </div>
         </nav>
 
-        <DigestBanner />
+        <Suspense fallback={null}>
+          <DigestBanner />
+        </Suspense>
 
         {showSetupHint && (
           <div className="border-b border-white/[0.06] bg-white/[0.02]">
@@ -293,7 +302,9 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+        <Suspense fallback={null}>
+          <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+        </Suspense>
 
         <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
           {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
