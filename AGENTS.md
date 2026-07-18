@@ -1,91 +1,130 @@
-# agents.md — swe-interview-prep (Loop)
+# agents.md — swe-interview-prep
+
+Agent bootloader. Read this first, then follow the links for depth.
 
 ## Shared Fleet Standard
 
-Also read and follow the shared fleet-level agent standard at `../AGENTS.md`. Treat this repository as owned product code: protect production stability, keep changes scoped, verify work, and record durable follow-up tasks when something remains incomplete or blocked.
+Also read and follow the shared fleet-level agent standard at `../AGENTS.md`.
+Treat this repository as owned product code: protect production stability,
+keep changes scoped, verify work, and record durable follow-up tasks when
+something remains incomplete or blocked.
 
 ## Purpose
-Personal SWE Learning OS — a 5-tab command center (Learn, Practice, Playground, Mock, Progress) that drives the loop Concept → Drill → Build → Review → Apply across 8 tracks (search-ir, vector-db, ai-systems, backend, databases, system-design, dsa, product). FSRS spaced repetition tracks concept mastery; the Playground (Monaco + Excalidraw + Socratic AI + Feynman Gate) is the build/drill workspace. Detail pages (concept, roadmap, project, drill) are reachable from inside the five tabs.
 
-## Stack
-- Framework: React 19 SPA (React Router v7), Vite 8
-- Language: TypeScript (strict: false)
-- Styling: Tailwind CSS v4
-- DB: Turso (libSQL via `@libsql/client`) — schema auto-initialized on first server start
-- Auth: Google One Tap + JWT (no OAuth redirect flow)
-- Testing: Vitest (unit), Playwright (e2e in `tests/e2e/`)
-- Deploy: Cloudflare Pages (frontend: `vite build → dist/`; backend: Pages Functions in `functions/api/[[path]].js`)
-- Package manager: pnpm
+Personal SWE Learning OS — a 5-tab command center (Learn, Practice,
+Playground, Mock, Progress) driving Concept → Drill → Build → Review →
+Apply across 8 tracks. FSRS spaced repetition tracks concept mastery; the
+Playground (Monaco + Excalidraw + Socratic AI + Feynman Gate) is the
+build/drill workspace. **Maintenance-only since 2026-07-10** — see
+[`STATUS.md`](STATUS.md).
 
-## Repo structure
-```
-src/                    # React SPA
-  App.tsx               # React Router routes — 5 primary tabs + detail pages + legacy redirects
-  pages/                # Learn, Practice, Playground, MockInterview, Progress (5 tabs)
-                        # ConceptDetail, RoadmapDetail, ProjectDetail, BuildLab (detail/sub pages)
-                        # About, Privacy, Login (static)
-  components/
-    viz.tsx             # SVG primitives: Ring, MasteryDonut, StackedBar,
-                        # ConceptChain, MilestoneTimeline, Sparkline
-    ui.tsx              # Shared UI kit (PageShell, Card, Badge, color tokens…)
-    Layout.tsx          # 5-tab nav shell (desktop top nav + mobile bottom bar — all 5 fit)
-    CodeEditor.tsx      # Monaco editor wrapper
-    DiagramEditor.tsx   # Excalidraw wrapper
-    CompanionPanel.tsx  # Socratic AI (never gives solutions, only probes)
-    FeynmanGate.tsx     # Explain-back modal → AI grades 0-100 → mastery update
-  hooks/                # All stateful logic (components are thin)
-    useUserStore.ts     # Hybrid localStorage+DB stores (artifacts/drills/projects/notes)
-  data/
-    learning-os.ts      # Typed loaders for all static content below
-    concepts.json       # ~125 concepts across 8 tracks
-    tracks.json roadmaps.json artifacts.json drills.json
-    projects.json review-questions.json
-    problems.json lld-/hld-/behavioral-problems.json  # back Playground + Mock
-  lib/
-    fsrs.ts             # Client FSRS wrapper (ts-fsrs)
-    userStore.ts        # Pure localStorage+merge helpers (unit-tested)
-    conceptState.ts     # Derives concept status/confidence from FSRS mastery
-    recommend.ts        # "What should I do next?" dashboard logic
-api/                    # Legacy local handlers (.mjs) — kept for local dev
-  _lib/                 # Shared: DB client, schema, AI helpers
-  ai/                   # chat.ts (streaming proxy), models.ts
-  auth/                 # Google JWT verify, token issue
-  learning.mjs          # Multi-action endpoint (artifacts/drills/projects/notes/concepts)
-  chat.mjs chats.mjs notes.mjs problems.mjs progress.mjs go-run.mjs
-functions/api/          # Cloudflare Pages Functions (production)
-  [[path]].js           # Single catch-all routes /api/* to the same handler logic
-shared/                 # Shared between api/ and functions/
-  db/                   # Schema, client, users
-  lib/                  # AI helpers, FSRS (server), heuristics
-vite-plugin-local-ai.js # Dev-only AI bridge (replaces former local-ai submodule)
-public/wasm/            # Go WASM interpreter (go-interp.wasm, wasm_exec.js)
-```
+Full product context: [`docs/product/overview.md`](docs/product/overview.md).
+
+## Stack (one line)
+
+React 19 SPA (Vite 8, React Router v7, Tailwind v4) + Cloudflare Pages
+Functions (`functions/api/[[path]].js`) + Turso (libSQL) + Google One Tap
+JWT + `ts-fsrs` spaced repetition. pnpm. TypeScript (strict: false).
+
+Full architecture: [`docs/architecture/overview.md`](docs/architecture/overview.md).
 
 ## Key commands
+
 ```bash
-pnpm dev            # Vite (:5173) — AI bridge runs in-process (no separate server)
-pnpm dev:frontend   # alias for pnpm dev
-pnpm build          # vite build → dist/
+pnpm dev            # Vite :5173 — AI bridge runs in-process (no separate server)
+pnpm build          # validate env + vite build → dist/
 pnpm test           # vitest run
 pnpm test:e2e       # playwright test
-pnpm lint           # Biome (check)
+pnpm lint           # biome check .
+pnpm typecheck      # tsc --noEmit
+pnpm ready          # env + tests + build + secret audit (pre-deploy gate)
+pnpm docs:validate  # validate the docs/ tree (no install required)
 ```
 
-## Architecture notes
-- **5-tab Learning OS**: Learn (roadmap journey + concepts), Practice (drills + reviews), Playground (Monaco/Excalidraw build surface), Mock (timed interview), Progress (mastery rollups + notes). Core principle — "no learning without an artifact": every concept maps to drills + an artifact you build. Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`) are reachable from inside the tabs.
-- **Legacy redirects**: `/today`, `/dashboard`, `/roadmaps`, `/concepts` → `/learn`; `/drills`, `/reviews`, `/review` → `/practice`; `/build`, `/vibe-learning` → `/playground`; `/projects`, `/notes` → `/progress`. Listed in `src/App.tsx` so external links keep working.
-- **Visualization layer**: `src/components/viz.tsx` exposes hand-rolled SVG primitives (no chart-lib dep): Ring, MasteryDonut, StackedBar, ConceptChain, MilestoneTimeline, Sparkline. Palette matches Tailwind `*-500` swatches; reused by Learn / Practice / Progress.
-- **Static content vs user state**: concepts/roadmaps/drills/artifacts/projects/review-questions are static JSON in `src/data/` (loaded via `learning-os.ts`); mutable user state is hybrid — localStorage for guests, Turso DB for signed-in users (`useUserStore`).
-- **DB**: `concept_mastery` (FSRS) + `user_artifacts` / `user_drills` / `user_projects` / `user_learning_notes`. API actions consolidated under `/api/learning?action=…` (`artifacts`, `drills`, `projects`, `notes`) to keep the serverless API surface small.
-- **FSRS spaced repetition** (`ts-fsrs`): per-user per-concept state in `concept_mastery` DB table. Confidence formula: `(1 + elapsed/(9×stability))^-1`. Mastery decays over time.
-- **Socratic AI**: `CompanionPanel.tsx` — never gives direct solutions, only probes understanding. This is intentional behavior — do not change it.
-- **Auto-tagging**: after 5 minutes of stable code, `useTagger` POSTs to `/api/tag`. AI returns concept tags with depth (surface/working/deep) → mapped to FSRS ratings → bulk concept update.
-- **Feynman Gate**: user explains code in plain English → AI grades 0-100 + returns gaps → updates per-concept mastery. Gaps trigger `again`/`hard` FSRS ratings.
-- **Go execution**: WASM-based Go runner in `public/wasm/`. `/api/go-run.mjs` handles execution.
-- **Dev AI bridge**: `vite-plugin-local-ai.js` is a dev-only Vite plugin (`apply: 'serve'`) that mounts `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory dev stubs for `/api/chats`, `/api/progress`, `/api/notes`, `/api/auth/*`. Replaced the old `local-ai` git submodule, so there's no separate server process or proxy hop — it boots/dies with Vite and ships nothing to prod (prod uses `functions/api/[[path]].js`). `codex` runs read-only/ephemeral and rides `codex login` (no API key); pick a local provider in Settings → AI (dev only).
-- **DB auto-init**: schema tables created on first server start (prod functions) — no migration runner needed.
-- **AI is multi-provider**: client passes `aiConfig: {endpointUrl, apiKey, model}` to any API endpoint; server falls back to `AI_ENDPOINT_URL`/`AI_API_KEY`/`AI_MODEL` env vars.
-- **Guest mode**: artifacts, drills, projects, and notes persist to localStorage. Concept mastery (FSRS reviews) is DB-backed and needs Google sign-in; signing in merges localStorage state into the DB.
+Full command reference: [`docs/development/commands.md`](docs/development/commands.md).
+
+## Critical constraints (do not violate)
+
+- **Socratic AI never gives direct solutions.** `CompanionPanel.tsx` and the
+  `/api/chat` system prompt only probe understanding. This is intentional —
+  see [ADR 0005](docs/architecture/decisions/0005-socratic-no-solutions.md).
+- **`docs/learning/*.md` is product content.** `src/pages/LearningDoc.tsx`
+  Vite-globs it at build time and serves it at `/learning/:slug`. Do not
+  move, rename, or delete those files — in-app routes depend on the slugs.
+- **DB schema changes are additive only.** No migration runner; `initDatabase()`
+  runs `CREATE TABLE IF NOT EXISTS` on first cold start. Source of truth:
+  `shared/db/schema.mjs`, mirrored by hand in `functions/api/[[path]].js`.
+- **Never commit secrets.** `.env.local` is gitignored (`*.local`). The
+  Husky `pre-push` hook scans tracked files for common secret patterns.
+- **Generated content under `src/data/library/` is not hand-edited.** Change
+  `scripts/library.config.json` and re-run `pnpm fetch-library`.
+- **`JWT_SECRET` has no fallback.** The audit removed
+  `dev-secret-change-in-production`. Rotation runbook:
+  [`docs/operations/runbooks/rotate-jwt-secret.md`](docs/operations/runbooks/rotate-jwt-secret.md).
+- **Do not push, deploy, or open PRs without explicit user instruction.**
+  Make changes locally and leave them for human review.
+
+## Documentation navigation
+
+The canonical documentation tree is [`docs/`](docs/). Start at
+[`docs/index.md`](docs/index.md).
+
+| Need | Read |
+| --- | --- |
+| What the product is | [`docs/product/overview.md`](docs/product/overview.md) |
+| Routes + API surface | [`docs/product/surfaces.md`](docs/product/surfaces.md) |
+| How it's built | [`docs/architecture/overview.md`](docs/architecture/overview.md) |
+| Request / data flow | [`docs/architecture/data-flow.md`](docs/architecture/data-flow.md) |
+| Why a choice was made | [`docs/architecture/decisions/`](docs/architecture/decisions/) |
+| Local setup | [`docs/development/setup.md`](docs/development/setup.md) |
+| Env vars | [`docs/development/env.md`](docs/development/env.md) |
+| Content pipelines | [`docs/development/content-pipelines.md`](docs/development/content-pipelines.md) |
+| Deploy | [`docs/operations/deploy.md`](docs/operations/deploy.md) |
+| CI + scheduled jobs | [`docs/operations/ci.md`](docs/operations/ci.md), [`docs/operations/jobs/`](docs/operations/jobs/) |
+| Runbooks | [`docs/operations/runbooks/`](docs/operations/runbooks/) |
+| Durable learnings | [`docs/knowledge/learnings.md`](docs/knowledge/learnings.md) |
+| Failed approaches (don't retry) | [`docs/knowledge/failed-approaches.md`](docs/knowledge/failed-approaches.md) |
+| Historical snapshots | [`docs/archive/`](docs/archive/) |
+
+## Documentation maintenance rules
+
+1. **Markdown in `docs/` is the source of truth.** If a fact is canonical
+   there, do not also keep the canonical copy in the README, here, or in
+   code comments — link instead.
+2. **Code and executable config remain authoritative** for implementation
+   details and schedules (CI workflows, `package.json` scripts,
+   `wrangler.toml`, `vite.config.js`). Docs describe *why* and *how to
+   operate*; code describes *what runs*.
+3. **Do not duplicate facts easily discoverable from code.** A doc explains
+   non-obvious constraints, operational procedures, decisions, and reusable
+   failures — not the file tree.
+4. **ADRs are append-only.** When a decision is reversed, add a new ADR
+   that supersedes the old one; do not silently edit the old ADR.
+5. **Stale docs go to `docs/archive/`** (preserving git rename history), not
+   the trash. Never delete useful history.
+6. **No empty placeholder docs.** If a page would be empty, do not create it.
+7. **Run `pnpm docs:validate` before committing doc changes.** CI enforces
+   it on every PR.
+8. **Blume is only the presentation layer.** `blume.config.ts` renders
+   `docs/`; it is not a source of truth. Generated Blume files (`.blume/`,
+   `dist-docs/`) are gitignored.
+
+## Repo structure (high level)
+
+```
+src/                 React SPA (pages, components, hooks, data, lib, adapters)
+api/                 Legacy local handlers (.mjs) — kept for local dev parity
+handlers/            Action handlers shared by api/ and functions/
+functions/api/       Cloudflare Pages Functions (production catch-all)
+shared/              Code shared between api/ and functions/ (db, lib, fixtures)
+scripts/             Content pipelines + env validation + deploy helpers
+public/              Static assets + agent surfaces (llms.txt, index.md, sitemap)
+docs/                Canonical documentation tree (this is the source of truth)
+docs/learning/       In-product roadmap markdown (Vite-globbed — do not move)
+```
+
+The detailed component map lives in the codebase; this bootloader
+intentionally does not restate it.
 
 <!-- FLEET-GUIDANCE:START -->
 
@@ -109,3 +148,6 @@ pnpm lint           # Biome (check)
 <!-- FLEET-GUIDANCE:END -->
 
 ## Active context
+
+See [`STATUS.md`](STATUS.md) for the current objective, active work, blockers,
+and next steps.

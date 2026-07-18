@@ -63,7 +63,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Core study surfaces | DSA practice (Monaco), LLD/HLD (Excalidraw), behavioral/concept routes, Build Lab, Playground |
 | Learning loops | Progress tracking across categories; ts-fsrs spaced repetition; multi-provider AI hints |
 | Execution path | R2-backed Go WASM interpreter for in-browser code execution |
-| Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (AUDIT.md) |
+| Security hardening (2026-03-29) | Auth middleware on chat/go-run; JWT env guard; Turso progress sync; Google API key header fix (see `docs/archive/security-audit-2026-03-29.md`) |
 | Ops polish (2026-06-20) | `.env.example`, Husky pre-commit, PostHog integration, README architecture docs |
 | Feynman Gate → FSRS progression (2026-06-29) | Wired the explain-back gate into the default drill loop: drill → explain → mastery update → next weakest concept |
 | Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, project roadmaps, research paths, private Reader saves, High Signal, and 12 embedded GitHub learning repositories. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
@@ -115,7 +115,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Feynman Gate → FSRS progression (default flow):** solving a drill triggers a skippable explain-back nudge; the AI-graded explanation maps onto per-concept FSRS ratings (`feynmanRating`), updates mastery, then surfaces a "next weakest concept" card (BuildLab) so the loop closes: drill → explain → mastery update → next weakest concept. Playground's manual gate also refreshes mastery on grade.
 - **AI assistance:** multi-provider Socratic hints without spoilers (`useAI`); local-ai dev path documented.
 
-### Auth and API hardening (AUDIT.md 2026-03-29)
+### Auth and API hardening (2026-03-29 audit, archived at `docs/archive/security-audit-2026-03-29.md`)
 - Auth middleware on `/api/chat.mjs` and `/api/go-run.mjs` (401 for unauthenticated).
 - JWT `dev-secret-change-in-production` fallback removed — env required in prod.
 - Authenticated user progress and SRS data sync to Turso (debounced); localStorage retained as offline fallback.
@@ -124,17 +124,20 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ### Documentation
 - README architecture diagram (Mermaid) and run steps for Cloudflare + Turso setup.
-- AUDIT.md tracks resolved critical/high/medium findings.
+- Canonical documentation tree at `docs/` (see `docs/index.md`); ADRs at
+  `docs/architecture/decisions/`; the 2026-03-29 audit is archived at
+  `docs/archive/security-audit-2026-03-29.md`.
 
 ## Todo / Planned / Deferred / Blocked
+
+**Current objective, active work, blockers, unresolved questions, and next
+steps live in [`STATUS.md`](STATUS.md)** — the single source of truth for
+volatile status. The items below are retained as a fleet-format summary;
+defer to STATUS.md if they disagree.
 
 ### Planned
 1. Configure the Cloudflare Pages `READER_API_TOKEN` secret to activate the private live Reader adapter.
 2. Persist external learning progress and assessment feedback through the authenticated learning API; local storage is the first usable slice.
-3. ~~Docs alignment.~~ **Paused** — Cloudflare Pages architecture is canonical; stale historical references remain non-operational.
-2. ~~Auth/API verification pass.~~ **Paused** after current local typecheck and security baseline.
-3. ~~Regression tests.~~ **Paused** at existing focused coverage.
-4. ~~Coherent study-flow polish.~~ **Paused** with the drill → Feynman Gate → FSRS loop as the retained baseline.
 
 ### Closure
 
@@ -147,6 +150,5 @@ External: LeetCode API (import), multi-provider LLM APIs
 - Paid tiers or team workspaces.
 
 ### Blocked / Known gaps
-- Some README/migration docs may still reference pre-Pages architecture — alignment pass needed.
-- Low-severity audit items open: submodule `node_modules` verification; consider JWT_SECRET rotation after fallback removal (commit history exposure).
+- Low-severity audit items open: submodule `node_modules` verification; consider JWT_SECRET rotation after fallback removal (commit history exposure) — runbook at `docs/operations/runbooks/rotate-jwt-secret.md`.
 - End-to-end CI against live Turso + Cloudflare bindings is operator-dependent, not fully automated in repo.

@@ -17,7 +17,7 @@ pnpm sync:pages-secrets
 
 ## Auto-deploy (default)
 
-Pushes to `main` trigger [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml):
+Pushes to `main` trigger [`.github/workflows/deploy.yml`](../../.github/workflows/deploy.yml). Full CI matrix: [`ci.md`](ci.md).
 
 1. `pnpm test`
 2. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
@@ -56,6 +56,8 @@ pnpm deploy
 cp .env.example .env.local
 pnpm dev    # Vite :5173 (AI bridge runs in-process — no separate server)
 ```
+
+See [`../development/setup.md`](../development/setup.md) for full local setup.
 
 ## Post-deploy smoke
 

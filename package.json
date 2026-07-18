@@ -34,7 +34,11 @@
     "format:check": "biome format .",
     "check": "biome check .",
     "size": "size-limit",
-    "size:check": "size-limit --json"
+    "size:check": "size-limit --json",
+    "docs:validate": "node scripts/validate-docs.mjs",
+    "docs:build": "blume build --output static --base /docs",
+    "docs:preview": "blume preview",
+    "docs:check": "blume check"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "2.0.41",
