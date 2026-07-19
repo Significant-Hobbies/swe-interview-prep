@@ -14,7 +14,9 @@ Runs on ubuntu-latest, Node 22, pnpm (from `package.json` `packageManager`).
 
 `--ignore-scripts` skips postinstall scripts; the build is what matters in CI.
 
-## `deploy.yml` — manual (`workflow_dispatch`) and on push to `main`
+## `deploy.yml` — manual only (`workflow_dispatch`)
+
+Triggered only by `workflow_dispatch`; there is no push or PR trigger.
 
 1. `pnpm test`
 2. `pnpm validate:env:build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
@@ -23,9 +25,10 @@ Runs on ubuntu-latest, Node 22, pnpm (from `package.json` `packageManager`).
    (see `.cfpagesignore`).
 5. `wrangler pages deploy dist/ --project-name=swe-interview-prep` via
    `cloudflare/wrangler-action@v3`.
-6. On push: smoke `https://learn.significanthobbies.com` and
-   `/api/learning?action=gaps` (expects 401/405/200).
-7. On PR: comment the preview URL.
+6. The workflow has `push`- and `pull_request`-gated steps (smoke
+   `/api/learning?action=gaps` expecting 401/405/200; comment a preview URL),
+   but because the workflow is dispatch-only, neither event fires — these
+   steps are effectively inert.
 
 Required GitHub secrets/variables: `CLOUDFLARE_API_TOKEN`,
 `CLOUDFLARE_ACCOUNT_ID`, `VITE_GOOGLE_CLIENT_ID`, optional

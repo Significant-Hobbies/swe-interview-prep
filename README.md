@@ -20,17 +20,17 @@ SWE Interview Prep consolidates everything into a single platform with integrate
 | Auth | Google One Tap (JWT cookie) |
 | File storage | Cloudflare R2 (`swe-interview-prep-assets`) — hosts the Go WASM interpreter |
 | Analytics | PostHog (via `local posthog-js wrapper`) |
-| AI | Multi-provider via Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek |
-| CI/CD | GitHub Actions — auto-deploy on push to `main` |
+| AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO OpenAI-compatible endpoint (per-request `aiConfig` or `AI_*` env). Dev bridge streams local claude/codex/gemini CLIs. |
+| CI/CD | GitHub Actions — `ci.yml` on push/PR; `deploy.yml` is manual (`workflow_dispatch`) |
 
 ## Features
 
-- **Interactive Code Editor** - Write and run TypeScript code with Monaco Editor (VS Code engine)
+- **Interactive Code Editor** - Write and run TypeScript (transpiled and executed in-browser via sucrase) or Go (client-side WASM interpreter, with an `/api/go-run` → go.dev fallback) in Monaco Editor (VS Code engine)
 - **Visual Design Tool** - Draw system architecture diagrams with Excalidraw integration
-- **Multi-Provider AI Hints** - Get Socratic guidance without spoilers from OpenAI, Anthropic, Google Gemini, DeepSeek, or local AI tools
-- **Spaced Repetition System** - Review concepts using Anki-style flashcards with SM-2 algorithm
+- **BYO-Endpoint AI Hints** - Get Socratic guidance without spoilers through any OpenAI-compatible endpoint (dev: local claude/codex/gemini CLIs)
+- **Spaced Repetition System** - Concept mastery via FSRS (`ts-fsrs`); Anki decks can be imported
 - **LeetCode Import** - Fetch problems directly via LeetCode API
-- **Progress Tracking** - Monitor completion rates across DSA, LLD, HLD, and Behavioral categories
+- **Progress Tracking** - Monitor mastery across the nine learning tracks
 - **Pattern-Based Learning** - Group problems by algorithmic patterns (sliding window, two pointers, etc.)
 
 ## Architecture
@@ -50,7 +50,7 @@ graph TB
 
         J[Hooks Layer] --> K[useAI]
         J --> L[useCodeExecution]
-        J --> M[useSpacedRepetition]
+        J --> M[useConcepts / FSRS]
         J --> N[useProgress]
 
         O[Contexts] --> P[AuthContext]
@@ -64,10 +64,10 @@ graph TB
     end
 
     subgraph "Cloudflare Pages Functions + Turso"
-        V[Turso libSQL] --> W[problems]
-        V --> X[progress]
-        V --> Y[notes]
-        V --> Z[spaced_repetition]
+        V[Turso libSQL] --> W[user_imported_problems]
+        V --> X[user_progress]
+        V --> Y[user_learning_notes]
+        V --> Z[concept_mastery FSRS]
         AA[Google One Tap] --> AB[JWT Cookie]
     end
 
@@ -100,8 +100,8 @@ graph TB
 
 - **Frontend**: React 19 SPA with TailwindCSS, Monaco Editor for code, Excalidraw for diagrams
 - **Dev AI bridge**: in-process Vite plugin (`vite-plugin-local-ai.js`) streams the claude/codex/gemini CLIs at `/api/chat` so local dev needs no API keys; ships nothing to prod
-- **Backend**: Cloudflare Pages Functions handle auth, progress, notes, spaced repetition, and AI endpoints
-- **Database**: Turso/libSQL stores problems, user progress, notes, and spaced repetition schedules
+- **Backend**: The production Cloudflare Pages Function (`functions/api/[[path]].js`) serves auth, `/api/progress`, the consolidated `/api/learning?action=…` surface, the Reader adapter, and the `/api/ai` catalog. AI generation uses an OpenAI-compatible endpoint; `/api/chat` and `/api/go-run` are dev/legacy handlers not deployed by the Pages Function
+- **Database**: Turso/libSQL stores user progress, notes, FSRS concept mastery (`concept_mastery`), and imported problems
 - **Auth**: Google One Tap posts credentials to `/api/auth/google`; the server issues an httpOnly JWT cookie
 - **External Integrations**: LeetCode API for problem import, multiple AI providers for hints
 
@@ -109,7 +109,7 @@ graph TB
 
 ### Prerequisites
 
-- Node.js 22+
+- Node.js: `.nvmrc` pins `20.18.0`; CI/deploy run on Node 22 (either works, 20.18.0 is the floor)
 - pnpm
 - Cloudflare account for production deploys
 - Turso database for production runtime data
@@ -169,7 +169,7 @@ Production deploys through Cloudflare Pages:
 pnpm deploy
 ```
 
-The deploy path validates env, builds `dist/`, and runs `wrangler pages deploy dist/ --project-name=swe-interview-prep`. GitHub Actions also validates Cloudflare Pages runtime secret names before deploying.
+The deploy path validates env, builds `dist/`, and runs `wrangler pages deploy dist/ --project-name=swe-interview-prep`. Deploys are manual: the `deploy.yml` GitHub Action is `workflow_dispatch`-only (no push-to-`main` auto-deploy). `pnpm ready` / `validate:env:deploy` gate the deploy on env + tests + build.
 
 ---
 

@@ -49,10 +49,12 @@ into `src/pages/LearningDoc.tsx`.
 
 1. Client calls `useAI` with `aiConfig: {endpointUrl, apiKey, model}` (or
    omits it to use server env fallbacks).
-2. `POST /api/chat` (auth required) streams the request.
-3. **Prod:** Pages Function forwards to the configured provider via the Vercel
-   AI SDK. **Dev:** `vite-plugin-local-ai.js` streams the logged-in
-   `claude`/`codex`/`gemini` CLI over SSE — no API keys.
+2. `POST /api/chat` streams the request.
+3. **Dev:** `vite-plugin-local-ai.js` streams the logged-in
+   `claude`/`codex`/`gemini` CLI over SSE — no API keys. **Server generation**
+   (via `shared/lib/ai.mjs`) uses the Vercel AI SDK's OpenAI-compatible
+   provider against the BYO `endpointUrl`/`AI_ENDPOINT_URL`. Note: `/api/chat`
+   is not one of the routes the production Pages Function serves.
 4. The Socratic system prompt forbids direct solutions (see
    [`decisions/0005-socratic-no-solutions.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0005-socratic-no-solutions.md)).
 
@@ -69,10 +71,20 @@ into `src/pages/LearningDoc.tsx`.
 
 ## Go execution flow
 
-1. Client compiles Go in the browser via the WASM interpreter in
-   `public/wasm/` (binary hosted on R2 in prod, see `.cfpagesignore`).
-2. `/api/go-run` (auth required) proxies to go.dev for execution.
-3. Result streams back to the Monaco panel.
+Hybrid, source of truth `src/lib/goExecutor.ts`:
+
+1. **First run:** client POSTs to `/api/go-run`, which proxies to
+   `https://go.dev/_/compile` (the Go Playground). Auth is required by the
+   handler (`api/go-run.mjs`). Note: this route is served by the local dev
+   `api/*.mjs` handlers, not by the production Pages Function.
+2. **Background:** `startWASMLoading()` fetches a Go WASM interpreter
+   (`go-interp.wasm` + `wasm_exec.js`) from R2 and instantiates it inside a
+   Web Worker. The 38 MB binary is R2-hosted, not shipped to Pages (see
+   `.cfpagesignore` and `deploy.yml`'s `rm -rf dist/wasm`).
+3. **Once loaded:** subsequent runs execute locally in the WASM worker with a
+   hard timeout + memory cap; the API path is only a fallback.
+4. Result renders in the Monaco panel. (TypeScript is transpiled and run
+   in-browser via sucrase — no server round-trip.)
 
 ## DB initialization
 

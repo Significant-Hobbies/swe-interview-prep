@@ -35,7 +35,7 @@ pnpm format        # biome format --write .
 pnpm typecheck     # tsc --noEmit
 ```
 
-Biome config: `biome.json`. TypeScript is `strict: false` (see `tsconfig.json`).
+Biome config: `biome.json`. TypeScript is `strict: true` (see `tsconfig.json`).
 
 ## Bundle size
 

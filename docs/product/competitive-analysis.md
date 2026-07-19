@@ -471,7 +471,7 @@ Based on the competitive analysis, these are the highest-impact features we can 
 
 **Our Advantage**: We already have AnkiCards built into every Problem, with a ReviewData system tracking ease factor, interval, repetitions, and last review date. This is production-ready and covers DSA, LLD, HLD, and Behavioral.
 
-**Implementation**: Our existing SM-2 algorithm implementation just needs UI polish and a daily review dashboard. Add MCQ quizzes (already built) alongside flashcard review for active recall.
+**Implementation**: Our existing FSRS (`ts-fsrs`) spaced-repetition implementation just needs UI polish and a daily review dashboard. Add MCQ quizzes (already built) alongside flashcard review for active recall.
 
 **Impact**: HIGH. This is the single biggest differentiator. "LeetCode helps you solve problems. We help you remember them."
 
@@ -589,7 +589,7 @@ Based on the competitive analysis, these are the highest-impact features we can 
 
 ### Primary Differentiator: "The Interview Prep Tool That Helps You Remember"
 
-Our core thesis is that **retention is the #1 unsolved problem** in interview preparation. Users solve hundreds of problems and forget them. Our integrated spaced repetition system, powered by SM-2 with Anki-style flashcards and MCQ quizzes across all four interview categories, is something no competitor offers. This should be our headline feature and primary marketing message.
+Our core thesis is that **retention is the #1 unsolved problem** in interview preparation. Users solve hundreds of problems and forget them. Our integrated spaced repetition system, powered by FSRS (`ts-fsrs`) with Anki import and MCQ quizzes across all four interview categories, is something no competitor offers. This should be our headline feature and primary marketing message.
 
 ### Secondary Differentiator: "AI Tutor, Not AI Cheat Sheet"
 

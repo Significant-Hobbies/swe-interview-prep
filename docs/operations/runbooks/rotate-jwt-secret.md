@@ -30,7 +30,7 @@ all per-user state persist; only the cookie is invalidated.
    ```bash
    pnpm deploy
    ```
-   (or push to `main` and let the deploy workflow handle it).
+   (or run the `deploy.yml` GitHub Action manually via `workflow_dispatch`).
 4. Smoke: open the site in a fresh browser → Google One Tap → sign in →
    confirm `/api/learning` returns 200 (not 401).
 

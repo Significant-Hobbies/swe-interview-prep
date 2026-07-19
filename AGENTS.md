@@ -11,12 +11,12 @@ something remains incomplete or blocked.
 
 ## Purpose
 
-Personal SWE Learning OS — a 5-tab command center (Learn, Practice,
-Playground, Mock, Progress) driving Concept → Drill → Build → Review →
-Apply across 8 tracks. FSRS spaced repetition tracks concept mastery; the
-Playground (Monaco + Excalidraw + Socratic AI + Feynman Gate) is the
-build/drill workspace. **Maintenance-only since 2026-07-10** — see
-[`STATUS.md`](STATUS.md).
+Personal SWE Learning OS — a command center with six primary tabs (Today,
+Learn, Practice, Mock, Playground, Progress) plus Docs, driving Concept →
+Drill → Build → Review → Apply across nine tracks. FSRS spaced repetition
+tracks concept mastery; the Playground (Monaco + Excalidraw + Socratic AI +
+Feynman Gate) is the build/drill workspace. **Maintenance-only since
+2026-07-10** — see [`STATUS.md`](STATUS.md).
 
 Full product context: [`docs/product/overview.md`](docs/product/overview.md).
 
@@ -24,7 +24,7 @@ Full product context: [`docs/product/overview.md`](docs/product/overview.md).
 
 React 19 SPA (Vite 8, React Router v7, Tailwind v4) + Cloudflare Pages
 Functions (`functions/api/[[path]].js`) + Turso (libSQL) + Google One Tap
-JWT + `ts-fsrs` spaced repetition. pnpm. TypeScript (strict: false).
+JWT + `ts-fsrs` spaced repetition. pnpm. TypeScript (strict: true).
 
 Full architecture: [`docs/architecture/overview.md`](docs/architecture/overview.md).
 

@@ -13,15 +13,15 @@ Out of scope: ATS/job-application features, Vercel/serverless migration, and new
 | Layer | Choice |
 |-------|--------|
 | Frontend | React 19, Vite, React Router, Tailwind CSS |
-| Editor / viz | Monaco Editor, Excalidraw, Go WASM interpreter (R2-hosted) |
-| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) |
-| Database | Turso (libSQL) — problems, progress, notes, spaced repetition |
+| Editor / viz | Monaco Editor, Excalidraw; TypeScript runs in-browser (sucrase); Go via client-side WASM interpreter (R2-hosted) with `/api/go-run`→go.dev fallback |
+| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `ai` |
+| Database | Turso (libSQL) — user progress, notes, FSRS concept mastery, imported problems |
 | Auth | Google One Tap → JWT httpOnly cookie |
-| AI | Vercel AI SDK — Anthropic, Google Gemini, OpenAI/DeepSeek; in-process Vite dev AI bridge (CLI, no keys) |
-| SRS | ts-fsrs (SM-2-style scheduling) |
+| AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint; in-process Vite dev AI bridge (claude/codex/gemini CLIs, no keys) |
+| SRS | ts-fsrs (FSRS algorithm — not SM-2) |
 | Analytics | PostHog (local `posthog-js` wrapper) |
 | Deploy | Cloudflare Pages (`swe-interview-prep`) + Functions |
-| CI | GitHub Actions — auto-deploy on push to `main` |
+| CI | GitHub Actions — `ci.yml` on push/PR; `deploy.yml` manual (`workflow_dispatch`) |
 
 **Local dev:** `pnpm install && cp .env.example .env.local && pnpm dev`
 
@@ -32,17 +32,17 @@ React SPA (Vite)
     │
     ├── Monaco + Go WASM code execution (R2 asset)
     ├── Excalidraw diagrams
-    ├── AI hints (useAI) ──► Cloudflare Functions /api/chat (prod) OR in-process Vite dev bridge
-    ├── Progress + SRS hooks ──► Turso via Functions
+    ├── AI hints (useAI) ──► OpenAI-compatible endpoint (server) OR in-process Vite dev bridge (/api/chat not served by prod Function)
+    ├── Progress + FSRS hooks ──► Turso via Functions (/api/progress, /api/learning)
     └── Google One Tap ──► /api/auth/google ──► JWT cookie
 
-Turso tables: problems, user_progress, notes, spaced_repetition, chats
+Turso tables (19): users, user_progress, user_notes, user_chats, user_imported_problems, concept_mastery, activity_log, … (source: shared/db/schema.mjs)
 External: LeetCode API (import), multi-provider LLM APIs
 ```
 
 **Dev bridge:** `vite-plugin-local-ai.js` — a dev-only Vite plugin (`apply: 'serve'`) that mounts `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory stubs for chats/progress/notes/auth. Runs in-process with Vite (no separate server, no proxy hop), ships nothing to prod. `codex` runs read-only/ephemeral on `codex login` — no API keys for local iteration. Replaced the former `local-ai` git submodule (2026-06-27).
 
-**Security posture (post-audit):** `/api/chat` and `/api/go-run` require auth; JWT secret has no production fallback; Google API key moved to header; progress syncs to Turso for authenticated users (localStorage offline fallback retained).
+**Security posture (post-audit):** the `/api/go-run` handler requires auth (`requireAuth`); JWT secret has no production fallback (throws if unset); progress syncs to Turso for authenticated users (localStorage offline fallback retained). Note: the legacy `api/chat.mjs`/`api/go-run.mjs` handlers are dev-only and are not deployed by the prod Pages Function.
 
 | Concern | Detail |
 |---------|--------|
@@ -51,7 +51,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Auth | Google OAuth; set callback URLs for localhost and production Pages domain |
 | R2 | `swe-interview-prep-assets` — Go WASM binary |
 | AI keys | Provider keys in Pages env; dev uses in-process Vite AI bridge (CLI, no keys) |
-| Deploy | Push to `main` (CI) or manual Pages deploy |
+| Deploy | Manual: `deploy.yml` (`workflow_dispatch`) or `pnpm deploy` (no push-to-`main` auto-deploy) |
 | Local full stack | `pnpm dev` (Vite + in-process AI bridge) |
 | Security | Never commit `.env.local`; parameterized SQL throughout |
 
@@ -72,9 +72,9 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ## Products
 
-**Primary routes:** `/` (dashboard) · `/learn` · `/practice` · `/library` · `/sources` · `/session/:date/:sessionId` · `/playground` · `/progress` · `/build-lab` · concept/roadmap/project detail pages · `/login`
+**Primary routes:** `/today` (`/` redirects here) · `/learn` · `/practice` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. (No `/build-lab` or `/login` route.)
 
-**Primary API (Pages Functions):** `/api/auth/google` · `/api/problems` · `/api/notes` · `/api/chats` · `/api/chat` · `/api/go-run` · progress and spaced-repetition endpoints
+**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai`. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
 
 | Surface | Role |
 |---------|------|

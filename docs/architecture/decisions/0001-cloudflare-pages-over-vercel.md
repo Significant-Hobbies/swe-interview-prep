@@ -16,8 +16,8 @@ standard had also consolidated on Cloudflare.
 
 Host the frontend as a Cloudflare Pages static site (`vite build → dist/`)
 and the backend as Pages Functions in a single catch-all
-(`functions/api/[[path]].js`). Deploy on push to `main` via GitHub Actions
-using `wrangler pages deploy`.
+(`functions/api/[[path]].js`). Deploy via GitHub Actions
+(`deploy.yml`, manual `workflow_dispatch`) using `wrangler pages deploy`.
 
 ## Alternatives considered
 
