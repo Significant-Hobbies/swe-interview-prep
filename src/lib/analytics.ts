@@ -13,7 +13,14 @@
  * once by `installBrowserMonitoring()` (see `foundry-monitoring.ts`).
  */
 
-import posthog from 'posthog-js';
+// Dynamic import — keeps posthog-js (183 KB / 61 KB gzip) out of the initial
+// bundle. The first track* call triggers the import; foundry-monitoring.ts
+// (loaded via requestIdleCallback) shares the same chunk and calls posthog.init.
+let posthogPromise: Promise<typeof import('posthog-js')> | null = null;
+function getPosthog() {
+  if (!posthogPromise) posthogPromise = import('posthog-js');
+  return posthogPromise;
+}
 
 const PROJECT = 'swe-interview-prep' as const;
 
@@ -43,11 +50,15 @@ interface AnalyticsEventMap {
 }
 
 export function trackEvent(event: string, properties: Record<string, unknown> = {}): void {
-  try {
-    posthog.capture(event, { project_id: PROJECT, ...properties });
-  } catch {
-    // Analytics must NEVER break a user flow. Swallow and move on.
-  }
+  getPosthog()
+    .then(({ default: posthog }) => {
+      try {
+        posthog.capture(event, { project_id: PROJECT, ...properties });
+      } catch {
+        // Analytics must NEVER break a user flow. Swallow and move on.
+      }
+    })
+    .catch(() => {});
 }
 
 function emit<K extends keyof AnalyticsEventMap>(

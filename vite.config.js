@@ -12,7 +12,7 @@ function deferAppCss() {
       order: 'post',
       handler(html) {
         let out = html.replace(
-          /<link rel="stylesheet" crossorigin href="(\/assets\/index-[^"]+\.css)">/,
+          /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
           [
             '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">',
             '<noscript><link rel="stylesheet" href="$1"></noscript>',
@@ -47,13 +47,30 @@ export default defineConfig({
     },
   },
   build: {
-    modulePreload: false,
+    modulePreload: { polyfill: false },
     // Initial bundle is ~430 KB. The chunks Vite warns about are all lazy:
     // Mermaid core, useCodeExecution (Go WASM runtime), and per-repo library
     // content.json files behind AmbientLibrary clicks. Bump to silence the
     // false positive rather than chasing unsplitable third-party blobs.
     chunkSizeWarningLimit: 2000,
     cssMinify: 'lightningcss',
+    rollupOptions: {
+      output: {
+        // Split stable vendor code into its own chunk so app-code changes
+        // don't invalidate the browser cache for React/router/lucide.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          if (
+            id.includes('/react-router') ||
+            id.includes('/react-dom') ||
+            id.match(/[\\/]react[\\/]index|react[\\/]cjs/)
+          ) {
+            return 'vendor-react';
+          }
+          if (id.includes('/lucide-react')) return 'vendor-lucide';
+        },
+      },
+    },
   },
   test: {
     environment: 'happy-dom',

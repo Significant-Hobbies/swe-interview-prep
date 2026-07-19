@@ -38,3 +38,13 @@ playwright/.cache/
 .fallow/
 cache.bin
 .tmp/
+
+# Blume docs site (presentation layer only — committed Markdown is source of truth)
+.blume/
+.blume-verify/
+dist-docs/
+
+# Local agent logs / scratch
+*.agent.log
+.devin/
+

@@ -25,6 +25,15 @@ const tree = (
 
 createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
 
+// Remove LCP shell after first paint so the shell h1 registers as the LCP
+// element, not the later React-rendered h1. Double rAF guarantees the browser
+// paints at least one frame with the shell visible before removal.
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    document.getElementById('lcp-shell')?.remove();
+  });
+});
+
 const scheduleMonitoring = () => {
   void import('./lib/foundry-monitoring').then((m) => m.installBrowserMonitoring());
 };

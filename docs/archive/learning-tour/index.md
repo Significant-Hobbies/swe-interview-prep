@@ -12,9 +12,9 @@ thread. Within each track, every project entry is one section: a one-line
 reference docs (decisions, lessons, retros, external references). Nothing is
 re-explained here that already has a home elsewhere.
 
-The existing `TINYGPT_LEARNING_PATH.md` in this `docs/` directory covers the
-ML-from-scratch curriculum in depth and integrates with the FSRS deck. This
-tour is the wider map that puts TinyGPT in context alongside the rest of the
+The archived `TINYGPT_LEARNING_PATH.md` (now at `../research/TINYGPT_LEARNING_PATH.md`)
+covers the ML-from-scratch curriculum in depth and integrates with the FSRS deck.
+This tour is the wider map that puts TinyGPT in context alongside the rest of the
 fleet.
 
 ## Tracks

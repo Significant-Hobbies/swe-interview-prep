@@ -34,7 +34,11 @@
     "format:check": "biome format .",
     "check": "biome check .",
     "size": "size-limit",
-    "size:check": "size-limit --json"
+    "size:check": "size-limit --json",
+    "docs:validate": "node scripts/validate-docs.mjs",
+    "docs:build": "blume build --output static --base /docs",
+    "docs:preview": "blume preview",
+    "docs:check": "blume check"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "2.0.41",
@@ -79,6 +83,8 @@
     "@biomejs/biome": "2.5.0",
     "@playwright/test": "1.59.1",
     "@size-limit/file": "^11.2.0",
+    "astro": "5.18.2",
+    "blume": "1.0.4",
     "@tailwindcss/vite": "4.2.4",
     "@types/lz-string": "1.5.0",
     "@types/react": "19",
