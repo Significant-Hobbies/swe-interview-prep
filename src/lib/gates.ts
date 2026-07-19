@@ -12,7 +12,7 @@ export interface GateContext {
   drills: Record<string, DrillEntry>;
 }
 
-export interface GateRequirement {
+interface GateRequirement {
   label: string;
   href?: string;
   met: boolean;

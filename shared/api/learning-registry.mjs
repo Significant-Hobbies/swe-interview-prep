@@ -4,10 +4,10 @@
  */
 
 /** BYOK / heuristic — no Turso auth required. */
-export const PUBLIC_ACTIONS = ['gaps', 'critique', 'understanding', 'tag'];
+const PUBLIC_ACTIONS = ['gaps', 'critique', 'understanding', 'tag'];
 
 /** Signed-in user required. */
-export const AUTH_ACTIONS = [
+const AUTH_ACTIONS = [
   'activity',
   'concepts',
   'feynman',

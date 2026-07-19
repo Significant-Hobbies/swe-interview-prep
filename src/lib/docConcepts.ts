@@ -1,6 +1,6 @@
 // Map learning docs → concept ids for FSRS updates after comprehension checks.
 
-export const DOC_CONCEPT_MAP: Record<string, string[]> = {
+const DOC_CONCEPT_MAP: Record<string, string[]> = {
   index: [],
   'db-roadmap': ['b-tree', 'wal'],
   'runtime-roadmap': [],

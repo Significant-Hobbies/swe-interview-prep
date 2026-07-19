@@ -1,5 +1,3 @@
-import { randomBytes } from 'node:crypto';
-
 export async function listImportedReviews(db, userId) {
   const r = await db.execute({
     sql: `SELECT id, external_id, deck_name, concept_id, question, answer, tags, created_at
@@ -78,8 +76,4 @@ export async function deleteImportedDeck(db, userId, deckName) {
     args: [userId, deckName],
   });
   return { deleted: r.rowsAffected ?? 0 };
-}
-
-export function newRowId() {
-  return randomBytes(16).toString('hex');
 }

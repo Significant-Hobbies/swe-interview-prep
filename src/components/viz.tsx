@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 // Hex matches Tailwind's *-500 swatch so SVG ↔ utility-class palettes line up.
 // Track colors stay (8 hues distinguish 8 tracks inside viz); chrome is slate.
-export const PALETTE: Record<string, string> = {
+const PALETTE: Record<string, string> = {
   // Single chrome accent.
   sky: '#0ea5e9',
   // Track palette (functional).
@@ -25,67 +25,8 @@ export const PALETTE: Record<string, string> = {
 const SVG_TRACK = '#1e293b'; // slate-800
 const SVG_MUTED = '#64748b'; // slate-500
 
-export function hex(name: string): string {
+function hex(name: string): string {
   return PALETTE[name] || PALETTE.gray;
-}
-
-// --- Ring ------------------------------------------------------------------
-// Single radial progress ring with an optional label inside.
-
-export function Ring({
-  value,
-  size = 64,
-  stroke = 6,
-  tone = 'purple',
-  label,
-  sublabel,
-}: {
-  value: number; // 0..1
-  size?: number;
-  stroke?: number;
-  tone?: string;
-  label?: string;
-  sublabel?: string;
-}) {
-  const r = (size - stroke) / 2;
-  const c = 2 * Math.PI * r;
-  const pct = Math.max(0, Math.min(1, value));
-  const offset = c * (1 - pct);
-  const color = hex(tone);
-  return (
-    <div
-      className="relative inline-flex items-center justify-center"
-      style={{ width: size, height: size }}
-    >
-      <svg width={size} height={size} className="-rotate-90">
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          stroke={SVG_TRACK}
-          strokeWidth={stroke}
-          fill="none"
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          stroke={color}
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          strokeDasharray={c}
-          strokeDashoffset={offset}
-          fill="none"
-        />
-      </svg>
-      {(label || sublabel) && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center leading-tight">
-          {label && <span className="text-sm font-semibold text-slate-50">{label}</span>}
-          {sublabel && <span className="text-[10px] font-medium text-slate-400">{sublabel}</span>}
-        </div>
-      )}
-    </div>
-  );
 }
 
 // --- Mastery donut ---------------------------------------------------------

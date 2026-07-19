@@ -17,7 +17,7 @@ import {
   isSchedulableReviewQuestion,
 } from '../lib/contentQuality';
 
-export type TrackId =
+type TrackId =
   | 'search-ir'
   | 'mathematics'
   | 'vector-db'
@@ -121,7 +121,7 @@ export interface Artifact {
   deliverables: string[];
 }
 
-export interface DrillTestCase {
+interface DrillTestCase {
   setup?: string;
   run: string;
   expect: string | string[];
@@ -283,7 +283,7 @@ export const METADATA_DRILLS: Drill[] = DRILLS.filter(isMetadataDrill);
 export const PRACTICE_DRILLS: Drill[] = [...EDITORIAL_DRILLS, ...METADATA_DRILLS];
 /** Curated artifacts with real playground templates (no build-* scaffolds). */
 export const EDITORIAL_ARTIFACTS: Artifact[] = ARTIFACTS.filter(isEditorialArtifact);
-export const PROJECTS: Project[] = (projectsData as any).projects;
+const PROJECTS: Project[] = (projectsData as any).projects;
 const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (
   reviewQuestionsData as any
 ).reviewQuestions.map((q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }));
@@ -295,7 +295,7 @@ export const REVIEW_QUESTIONS: ReviewQuestion[] = [
   ...INGESTED_REVIEW_QUESTIONS,
 ];
 
-export const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
+const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(
   CONCEPTS.map((c) => [c.id, c])
 );
@@ -318,17 +318,11 @@ export const DRILL_BY_ID: Record<string, Drill> = Object.fromEntries(DRILLS.map(
 export const PROJECT_BY_ID: Record<string, Project> = Object.fromEntries(
   PROJECTS.map((p) => [p.id, p])
 );
-export const REVIEW_QUESTION_BY_ID: Record<string, ReviewQuestion> = Object.fromEntries(
-  REVIEW_QUESTIONS.map((q) => [q.id, q])
-);
 
 // --- Tag-first taxonomy ----------------------------------------------------
 // Concepts have tags[] + roadmaps[]. The known "tracks" are just top-level
 // tags with display metadata; TrackId remains as the type for those known
 // group IDs (used by Roadmap.tracks and Project.tracks).
-
-/** Tags that the UI knows about — gives them a color + icon + title. */
-export const KNOWN_GROUP_TAGS: TrackId[] = TRACKS.map((t) => t.id as TrackId);
 
 /** Display metadata for a tag, if the UI knows about it. */
 export function groupForTag(tag: string): Track | undefined {
@@ -447,7 +441,7 @@ function normalizeExternalResources(raw: {
   return { _meta: raw._meta, byTag };
 }
 
-export const EXTERNAL_RESOURCES = normalizeExternalResources(
+const EXTERNAL_RESOURCES = normalizeExternalResources(
   externalResourcesData as {
     _meta: ExternalResourcesFile['_meta'];
     byTag: Record<string, RawExternalResource[]>;
@@ -455,7 +449,7 @@ export const EXTERNAL_RESOURCES = normalizeExternalResources(
 );
 
 /** Resources for a single tag, in curated order. */
-export function externalResourcesForTag(tag: string): ExternalResource[] {
+function externalResourcesForTag(tag: string): ExternalResource[] {
   return EXTERNAL_RESOURCES.byTag[tag] ?? [];
 }
 
@@ -474,9 +468,4 @@ export function externalResourcesForTags(tags: string[]): ExternalResource[] {
     }
   }
   return out;
-}
-
-/** Every tag that has at least one curated external resource. */
-export function tagsWithExternalResources(): string[] {
-  return Object.keys(EXTERNAL_RESOURCES.byTag).sort();
 }

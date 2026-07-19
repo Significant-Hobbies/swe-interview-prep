@@ -14,7 +14,7 @@ function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
 
-export function getQualityTier(score: number): QuestionQuality['tier'] {
+function getQualityTier(score: number): QuestionQuality['tier'] {
   if (score >= 75) return 'high';
   if (score >= 55) return 'medium';
   return 'low';

@@ -231,7 +231,7 @@ function executeViaWASM(code: string, timeoutMs: number = WASM_EXEC_TIMEOUT_MS):
  * the worker. The worker fetches + instantiates the module once; if that fails
  * we stay on the API backend.
  */
-export function startWASMLoading(): void {
+function startWASMLoading(): void {
   if (wasmReady || wasmLoading || workerLoadFailed) return;
   wasmLoading = true;
 
@@ -273,11 +273,4 @@ export async function executeGo(code: string): Promise<GoResult> {
   }
 
   return executeViaAPI(code);
-}
-
-/** Get the current backend status */
-export function getGoBackendStatus(): GoBackend {
-  if (wasmReady) return 'wasm';
-  if (wasmLoading) return 'wasm-loading';
-  return 'api';
 }

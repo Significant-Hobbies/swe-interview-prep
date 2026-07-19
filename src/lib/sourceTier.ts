@@ -128,23 +128,3 @@ export function assertSTierPackItems(packs: Record<string, { items?: PackTierIte
   }
   return { ok: violations.length === 0, violations };
 }
-
-/** @deprecated Use assertSTierPackItems */
-export function assertSTierPackSlots(
-  packs: Record<string, Record<string, { title?: string; url?: string } | undefined>>
-): {
-  ok: boolean;
-  violations: { conceptId: string; slot: MediaSlot; title: string; url: string }[];
-} {
-  const violations: { conceptId: string; slot: MediaSlot; title: string; url: string }[] = [];
-  for (const [conceptId, pack] of Object.entries(packs)) {
-    for (const slot of ['video', 'paper', 'blog', 'book'] as MediaSlot[]) {
-      const link = pack[slot] as { title?: string; url?: string } | undefined;
-      if (!link?.url) continue;
-      if (!isSTierSource(link.title ?? '', link.url, slot)) {
-        violations.push({ conceptId, slot, title: link.title ?? '', url: link.url });
-      }
-    }
-  }
-  return { ok: violations.length === 0, violations };
-}

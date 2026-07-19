@@ -18,7 +18,7 @@ interface CodeEditorProps {
   errorLine?: number | null;
 }
 
-export function formatCode(code: string, language: Language): Promise<string> {
+function formatCode(code: string, language: Language): Promise<string> {
   return prettier.format(code, {
     parser: language === 'typescript' ? 'typescript' : 'babel',
     plugins: [parserBabel, parserEstree, parserTS],

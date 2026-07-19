@@ -8,7 +8,6 @@ import {
   REVIEW_QUESTIONS,
   type ReviewQuestion,
   type Roadmap,
-  ROADMAP_BY_ID,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type Concept, type MasteryEntry } from '../hooks/useConcepts';
 import type { DrillEntry } from '../hooks/useUserStore';
@@ -20,8 +19,7 @@ import { type ExperienceLevel, experienceEloOffset } from './profile';
 const PREREQ_THRESHOLD = 0.4;
 const ACTIVE_ROADMAP_KEY = 'swe-os:active-roadmap';
 
-export { EDITORIAL_DRILLS, EDITORIAL_ARTIFACTS };
-export const EDITORIAL_ARTIFACT_IDS = new Set(EDITORIAL_ARTIFACTS.map((a) => a.id));
+const EDITORIAL_ARTIFACT_IDS = new Set(EDITORIAL_ARTIFACTS.map((a) => a.id));
 
 /** A concept is unblocked when every prerequisite has at least minimal confidence. */
 export function prereqsMet(
@@ -112,42 +110,6 @@ export function pickEditorialArtifactForConcept(conceptId: string): Artifact | n
     if (EDITORIAL_ARTIFACT_IDS.has(aid)) return ARTIFACT_BY_ID[aid] ?? null;
   }
   return null;
-}
-
-export interface TodayPlan {
-  roadmap: Roadmap;
-  concept: Concept;
-  drill: Drill | null;
-  artifact: Artifact | null;
-  reviewsDue: number;
-  reviewHref: string;
-}
-
-/** Single daily plan — concept → editorial drill → editorial artifact → reviews. */
-export function pickTodayPlan(
-  mastery: Record<string, MasteryEntry>,
-  gateCtx?: GateContext | null,
-  roadmapId?: string
-): TodayPlan | null {
-  const rid = roadmapId ?? loadActiveRoadmapId();
-  const roadmap = ROADMAP_BY_ID[rid] ?? ROADMAP_BY_ID['ai-search-infra-90-day'];
-  if (!roadmap) return null;
-
-  const concept = pickNextConceptInRoadmap(roadmap, mastery, gateCtx);
-  if (!concept) return null;
-
-  const reviewsDue = REVIEW_QUESTIONS.filter(
-    (q) => isSchedulableReviewQuestion(q) && isDue(mastery[q.conceptId])
-  ).length;
-
-  return {
-    roadmap,
-    concept,
-    drill: pickDrillForConcept(concept.id),
-    artifact: pickEditorialArtifactForConcept(concept.id),
-    reviewsDue,
-    reviewHref: reviewsDue > 0 ? '/practice/all?tab=reviews' : '/practice/all?tab=reviews',
-  };
 }
 
 /** Concepts whose spaced-repetition review is due. */

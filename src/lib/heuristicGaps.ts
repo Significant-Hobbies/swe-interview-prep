@@ -1,8 +1,6 @@
 // Deterministic gap analysis — no LLM. Powers Gap Analyzer by default.
 import {
-  ARTIFACT_BY_ID,
   type Artifact,
-  CONCEPT_BY_ID,
   EDITORIAL_ARTIFACTS,
   conceptsByTag,
   sortedTracks,
@@ -89,12 +87,4 @@ export function analyzeGapsHeuristic(mastery: Record<string, MasteryEntry>): Gap
     },
     generator: 'heuristic',
   };
-}
-
-export function conceptName(id: string): string {
-  return CONCEPT_BY_ID[id]?.name ?? id;
-}
-
-export function artifactTitle(id: string): string {
-  return ARTIFACT_BY_ID[id]?.title ?? id;
 }
