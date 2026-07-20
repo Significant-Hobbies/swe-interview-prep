@@ -18,7 +18,7 @@ interface ColorSet {
   ring: string;
 }
 
-export const COLORS: Record<string, ColorSet> = {
+const COLORS: Record<string, ColorSet> = {
   // Slate is the chrome default; everything that used to be "purple" or "gray"
   // for ornament now lands here.
   slate: {
@@ -232,25 +232,6 @@ export function Badge({
     >
       {children}
     </span>
-  );
-}
-
-export function StatTile({
-  label,
-  value,
-  hint,
-}: {
-  label: string;
-  value: React.ReactNode;
-  hint?: string;
-  tone?: string;
-}) {
-  return (
-    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
-      <div className="mt-2 text-2xl font-semibold tabular-nums text-white">{value}</div>
-      {hint && <div className="mt-0.5 font-mono text-xs text-white/40">{hint}</div>}
-    </div>
   );
 }
 

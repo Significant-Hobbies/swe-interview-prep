@@ -70,7 +70,7 @@ function reachable(
 }
 
 /** Weighted roadmap pick — blends multiple active paths. */
-export function pickWeightedRoadmap(
+function pickWeightedRoadmap(
   profile: LearnerProfile,
   mastery: Record<string, MasteryEntry>
 ): Roadmap {

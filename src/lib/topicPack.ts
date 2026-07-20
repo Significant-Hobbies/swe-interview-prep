@@ -36,8 +36,6 @@ export interface PackLink {
   url: string;
 }
 
-export const PACK_SLOT_ORDER: PackMediaSlot[] = ['video', 'paper', 'blog', 'book'];
-
 export const PACK_CATEGORY_LABEL: Record<PackCategory, string> = {
   video: 'Video',
   paper: 'Paper',
@@ -47,9 +45,6 @@ export const PACK_CATEGORY_LABEL: Record<PackCategory, string> = {
   write: 'Write',
   more: 'Also worth reading',
 };
-
-/** @deprecated Use PACK_CATEGORY_LABEL */
-export const PACK_SLOT_LABEL = PACK_CATEGORY_LABEL;
 
 const BOOK_HINT =
   /book|ostep|dataintensive|cvxbook|ir-book|craftinginterpreters|db-book|sre\.google\/books|use-the-index|mitpress\.mit\.edu|deeplearningbook|statlearning|inference\.org\.uk\/itprnn|oreilly\.com\/library|jeffe\.cs\.illinois\.edu\/teaching\/algorithms/i;
@@ -81,7 +76,7 @@ export function classifyResource(r: Resource): PackMediaSlot | null {
   return null;
 }
 
-export function classifyLooseUrl(title: string, url: string, kind?: string): PackMediaSlot | null {
+function classifyLooseUrl(title: string, url: string, kind?: string): PackMediaSlot | null {
   return classifyResource({
     title,
     url,
@@ -106,10 +101,6 @@ function packItem(category: PackCategory, title: string, url: string, body?: str
 
 export function packItemText(item: PackItem): string {
   return item.body ?? item.title;
-}
-
-export function packItemsForCategory(pack: TopicPack, category: PackCategory): PackItem[] {
-  return pack.items.filter((i) => i.category === category);
 }
 
 export function packHasCategory(pack: TopicPack | undefined, category: PackCategory): boolean {

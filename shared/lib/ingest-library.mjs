@@ -20,7 +20,7 @@ export function stripHtml(raw) {
     .trim();
 }
 
-export function flattenSections(sections, out = []) {
+function flattenSections(sections, out = []) {
   for (const s of sections || []) {
     out.push(s);
     if (s.children?.length) flattenSections(s.children, out);

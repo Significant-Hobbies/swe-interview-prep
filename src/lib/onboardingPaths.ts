@@ -1,7 +1,7 @@
 import { ROADMAP_BY_ID } from '../data/learning-os';
 import { ROADMAP_GROUPS } from './roadmapGroups';
 
-export interface OnboardingPath {
+interface OnboardingPath {
   id: string;
   title: string;
   subtitle: string;
@@ -57,5 +57,3 @@ export const ONBOARDING_PATH_GROUPS: OnboardingPathGroup[] = ROADMAP_GROUPS.map(
     };
   }),
 }));
-
-export const ONBOARDING_PATHS: OnboardingPath[] = ONBOARDING_PATH_GROUPS.flatMap((g) => g.paths);

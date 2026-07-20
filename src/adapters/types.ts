@@ -1,8 +1,3 @@
-export interface RepoFile {
-  path: string;
-  content: string;
-}
-
 export interface Section {
   id: string;
   title: string;
@@ -31,17 +26,7 @@ export interface ParsedRepo {
   totalItems: number;
 }
 
-export interface RepoAdapter {
-  id: string;
-  name: string;
-  source: string;
-  description: string;
-  tags: string[];
-  icon: string;
-  parseContent(files: RepoFile[]): ParsedRepo;
-}
-
-export type RepoFormat = 'qa' | 'visual' | 'long-form' | 'code-heavy';
+type RepoFormat = 'qa' | 'visual' | 'long-form' | 'code-heavy';
 
 export interface RepoManifestEntry {
   id: string;

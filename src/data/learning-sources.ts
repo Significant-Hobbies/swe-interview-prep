@@ -1,9 +1,9 @@
 import snapshotData from './learning-sources.json';
 import { isDue, reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
 
-export type LearningSourceKind = 'native' | 'briefing' | 'project' | 'research' | 'reader';
+type LearningSourceKind = 'native' | 'briefing' | 'project' | 'research' | 'reader';
 
-export interface LearningAssessment {
+interface LearningAssessment {
   id: string;
   type: 'mcq';
   question: string;
@@ -14,7 +14,7 @@ export interface LearningAssessment {
   generator: string;
 }
 
-export interface LearningReviewQuestion {
+interface LearningReviewQuestion {
   id: string;
   question: string;
   answer: string;

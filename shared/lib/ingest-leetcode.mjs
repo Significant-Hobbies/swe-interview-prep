@@ -3,7 +3,7 @@
  * Maps topic tags via the same priority rules as src/lib/leetcode.ts.
  */
 
-export const TAG_TO_PATTERN = {
+const TAG_TO_PATTERN = {
   array: 'array-hashing',
   'hash-table': 'array-hashing',
   string: 'array-hashing',
@@ -73,7 +73,7 @@ export function detectConceptId(tags) {
   return 'array-hashing';
 }
 
-export function difficultyToDrill(difficulty) {
+function difficultyToDrill(difficulty) {
   const d = String(difficulty || '').toLowerCase();
   if (d === 'easy') return 'intro';
   if (d === 'hard') return 'advanced';

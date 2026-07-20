@@ -76,10 +76,6 @@ export function unsuspendReviewQuestion(questionId: string): void {
   saveLocal(SUSPEND_KEY, [...s]);
 }
 
-export function isSuspended(questionId: string): boolean {
-  return loadSuspendedRqs().has(questionId);
-}
-
 /** Interleave by concept — avoid back-to-back same concept; weakest confidence first. */
 export function sortReviewQueue(
   questions: ReviewQuestion[],

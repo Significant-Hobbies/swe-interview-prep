@@ -4,7 +4,7 @@ import { categoryForConcept } from './category.mjs';
 
 const CONTEXT = roadmapContext;
 
-export function getRoadmapContext(concept) {
+function getRoadmapContext(concept) {
   if (!concept) return null;
   const category = categoryForConcept(concept);
   const base = CONTEXT.defaultByCategory[category] || CONTEXT.defaultByCategory.dsa;

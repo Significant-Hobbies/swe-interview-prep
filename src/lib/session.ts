@@ -5,7 +5,7 @@ import { loadLocal, saveLocal } from './userStore';
 
 const SESSION_KEY = 'swe-os:daily-sessions';
 
-export interface DailySessionLog {
+interface DailySessionLog {
   date: string;
   kinds: string[];
   completed: boolean;

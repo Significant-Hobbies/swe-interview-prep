@@ -85,7 +85,7 @@ export interface ArtifactEntry {
   criteria: number[];
 }
 
-export const EMPTY_ARTIFACT: ArtifactEntry = {
+const EMPTY_ARTIFACT: ArtifactEntry = {
   status: 'todo',
   url: '',
   path: '',
@@ -119,7 +119,7 @@ export interface DrillEntry {
   attempts: number;
 }
 
-export const EMPTY_DRILL: DrillEntry = { status: 'unsolved', lastCode: '', attempts: 0 };
+const EMPTY_DRILL: DrillEntry = { status: 'unsolved', lastCode: '', attempts: 0 };
 
 const DRILL_CONFIG: RecordStoreConfig<DrillEntry> = {
   localKey: STORE_KEYS.drills,

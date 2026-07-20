@@ -17,7 +17,7 @@ export interface ConceptRatingUpdate {
 
 const VALID_RATINGS: readonly MasteryRating[] = ['again', 'hard', 'good', 'easy'];
 
-export function isMasteryRating(value: string): value is MasteryRating {
+function isMasteryRating(value: string): value is MasteryRating {
   return (VALID_RATINGS as readonly string[]).includes(value);
 }
 

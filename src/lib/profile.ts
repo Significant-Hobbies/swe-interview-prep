@@ -1,8 +1,6 @@
 // Learner profile — drives session sizing, roadmap blend, and modality mix.
 
 export type ExperienceLevel = 'student' | 'mid' | 'senior';
-export type ModalityKind = 'review' | 'drill' | 'build' | 'learn';
-
 export interface ModalityWeights {
   review: number;
   drill: number;
@@ -29,7 +27,7 @@ export interface LearnerProfile {
 
 export const PROFILE_VERSION = 3;
 
-export const DEFAULT_MODALITY_WEIGHTS: ModalityWeights = {
+const DEFAULT_MODALITY_WEIGHTS: ModalityWeights = {
   review: 0.22,
   drill: 0.42,
   build: 0.24,

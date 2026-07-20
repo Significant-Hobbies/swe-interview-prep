@@ -39,7 +39,7 @@ export function isIngestedReviewQuestion(id: string): boolean {
   return id.startsWith('rq-lib-');
 }
 
-export function isAnkiReviewQuestion(id: string): boolean {
+function isAnkiReviewQuestion(id: string): boolean {
   return id.startsWith('rq-anki-');
 }
 
