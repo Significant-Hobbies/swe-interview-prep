@@ -1,14 +1,8 @@
 import { ArrowRight } from 'lucide-react';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
-
-const SaaSMakerTestimonials = lazy(() =>
-  import('../components/saasmaker-feedback').then((m) => ({
-    default: m.SaaSMakerTestimonials,
-  }))
-);
 
 const PRINCIPLES = [
   {
@@ -199,18 +193,6 @@ export default function Login() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Social proof */}
-      <section className="border-t border-white/[0.08]">
-        <div className="mx-auto w-full max-w-3xl px-6 py-20">
-          <div className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            What users say
-          </div>
-          <Suspense fallback={null}>
-            <SaaSMakerTestimonials />
-          </Suspense>
         </div>
       </section>
 

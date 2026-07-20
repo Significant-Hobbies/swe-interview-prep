@@ -1,6 +1,5 @@
 import {
   BarChart3,
-  Bell,
   BookOpen,
   Code2,
   Dumbbell,
@@ -22,7 +21,6 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { BROWSE_DESTINATIONS } from '../lib/browseLinks';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
-import { SaaSMakerChangelog } from './saasmaker-feedback';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 // Lazy-loaded: DigestBanner pulls in learning-os.ts (722 KB / 179 KB gzip of
@@ -91,21 +89,16 @@ export default function Layout() {
   const location = useLocation();
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [changelogOpen, setChangelogOpen] = useState(false);
   const [browseOpen, setBrowseOpen] = useState(false);
-  const changelogRef = useRef<HTMLDivElement>(null);
   const browseDesktopRef = useRef<HTMLDivElement>(null);
   const browseMobileRef = useRef<HTMLDivElement>(null);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
   const showSetupHint = !onboardingDone && location.pathname !== '/onboarding';
 
   useEffect(() => {
-    if (!changelogOpen && !browseOpen) return;
+    if (!browseOpen) return;
     function handleClick(e: MouseEvent) {
       const t = e.target as Node;
-      if (changelogOpen && changelogRef.current && !changelogRef.current.contains(t)) {
-        setChangelogOpen(false);
-      }
       if (
         browseOpen &&
         !browseDesktopRef.current?.contains(t) &&
@@ -116,7 +109,7 @@ export default function Layout() {
     }
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, [changelogOpen, browseOpen]);
+  }, [browseOpen]);
 
   useEffect(() => {
     setBrowseOpen(false);
@@ -190,41 +183,6 @@ export default function Layout() {
             </div>
 
             <div className="flex shrink-0 items-center gap-1">
-              <div ref={changelogRef} className="relative">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={() => setChangelogOpen((o) => !o)}
-                      aria-label="Updates"
-                      className={`flex h-9 w-9 items-center justify-center rounded-md transition-colors duration-150 ${
-                        changelogOpen
-                          ? 'bg-white/10 text-white'
-                          : 'text-white/50 hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <Bell className="h-4 w-4" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom">Updates</TooltipContent>
-                </Tooltip>
-                {changelogOpen && (
-                  <div className="absolute right-0 top-full mt-2 max-h-[70vh] w-96 overflow-y-auto rounded-xl border border-white/10 bg-black shadow-2xl shadow-black/50">
-                    <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                      <span className="text-sm font-semibold text-white">Updates</span>
-                      <button
-                        onClick={() => setChangelogOpen(false)}
-                        aria-label="Close"
-                        className="text-xs text-white/40 hover:text-white"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <div className="p-4">
-                      <SaaSMakerChangelog />
-                    </div>
-                  </div>
-                )}
-              </div>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
