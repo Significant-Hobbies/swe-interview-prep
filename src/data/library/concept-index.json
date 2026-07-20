@@ -786,6 +786,13 @@
       "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
       "title": "Jump Game",
       "snippet": "# Jump Game ## The Problem Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at…"
+    },
+    {
+      "repoId": "react-questions",
+      "repoName": "React Interview Questions",
+      "sectionId": "q-322",
+      "title": "322. What is the React Compiler (React Forget)?",
+      "snippet": "### What is the React Compiler (React Forget)? The **React Compiler** (formerly known as React Forget) automatically optimizes your components by adding memoization where needed - eliminating the ne…"
     }
   ],
   "dp-2d": [
@@ -883,6 +890,13 @@
     }
   ],
   "seo": [
+    {
+      "repoId": "react-questions",
+      "repoName": "React Interview Questions",
+      "sectionId": "q-321",
+      "title": "321. What is the useOptimistic hook?",
+      "snippet": "### What is the useOptimistic hook? `useOptimistic` enables optimistic UI updates - showing changes immediately before server confirmation. #### Basic Usage ```jsx import { useOptimistic } from 'react…"
+    },
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
