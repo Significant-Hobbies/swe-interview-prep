@@ -111,7 +111,7 @@
       "type": "implement",
       "difficulty": "core",
       "question": "How do you return top-k without sorting all n scores?",
-      "answer": "Maintain a size-k min-heap. For each score, if the heap has fewer than k items push it; otherwise if it beats the heap root, replace the root. This is O(n log k) time and O(k) space."
+      "answer": "Keep a size-k heap ordered so its root is the current worst survivor — a min-heap when higher score wins, a max-heap when lower distance wins. Push until the heap holds k, then replace the root whenever a candidate beats it. O(n log k) time, O(k) space, and no full sort."
     },
     {
       "id": "rq-bruteforce-baseline",
@@ -127,7 +127,7 @@
       "type": "explain",
       "difficulty": "advanced",
       "question": "What do the layers in an HNSW graph do?",
-      "answer": "Upper layers are sparse with long-range links for fast coarse navigation; lower layers are dense for fine-grained search. A query takes long hops up top, then descends to refine — turning O(n) scan into O(log n) traversal."
+      "answer": "Upper layers are sparse with long-range links for fast coarse navigation; lower layers are dense for fine-grained search. A query takes long hops up top, then descends to refine, so it visits a small fraction of the graph rather than scanning all n. The paper measures polylogarithmic scaling; it is not a proven worst-case bound."
     },
     {
       "id": "rq-hnsw-recall-tradeoff",
@@ -151,7 +151,7 @@
       "type": "explain",
       "difficulty": "advanced",
       "question": "How does product quantization shrink vector memory?",
-      "answer": "It splits each vector into m sub-vectors and replaces each with the 1-byte id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) becomes a few bytes, at the cost of approximate distances."
+      "answer": "It splits each vector into m sub-vectors and replaces each with the 1-byte id of its nearest centroid in a per-sub-space codebook, so the code is m bytes regardless of the original width. A 1536-d float32 vector (6 KB) becomes about 48-192 bytes at typical m, at the cost of approximate distances."
     },
     {
       "id": "rq-pre-vs-post-filter",
@@ -686,144 +686,144 @@
       "conceptId": "query-rewriting",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Query Rewriting in your own words. What problem does it solve and where is it used?",
-      "answer": "Query rewriting cleans up what the user typed before you look it up in the index: fix spelling, expand synonyms, drop stop words, classify intent. Doing this once up front is what makes the rest of the pipeline work — never trust the raw query."
+      "question": "Synonym expansion improves recall but precision drops. What is the mechanism, and what is the usual mitigation?",
+      "answer": "Every added term matches more documents, including ones where the synonym carries a different sense, and it dilutes the scoring weight of the term the user actually typed. Mitigation is to expand at retrieval only, keep the original terms weighted higher, and let a reranker restore precision."
     },
     {
       "id": "rq-search-discovery-core",
       "conceptId": "search-discovery",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Search Systems in your own words. What problem does it solve and where is it used?",
-      "answer": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way."
+      "question": "Why can recall lost in candidate generation never be recovered by a better ranker?",
+      "answer": "The ranker only reorders what the first stage returned. A document the retrieval step never produced has no score to improve. That is why cheap first-stage recall is tuned separately from precision, and why hybrid retrieval unions lexical and vector candidates before reranking."
     },
     {
       "id": "rq-prompt-versioning-core",
       "conceptId": "prompt-versioning",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Prompt & Version Logging in your own words. What problem does it solve and where is it used?",
-      "answer": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at."
+      "question": "Quality dropped last Tuesday. What must have been logged for you to find the cause?",
+      "answer": "The prompt version and the model version stamped on every request, alongside the rendered input and the output. Prompt text alone is not enough — a provider-side model update changes behaviour with no diff on your side, so both identifiers have to be attached to each logged call."
     },
     {
       "id": "rq-ml-math-core",
       "conceptId": "ml-math",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain ML Math Foundations in your own words. What problem does it solve and where is it used?",
-      "answer": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question."
+      "question": "A matmul fails with a shape error. What does reading the shapes tell you about what the layer is actually doing?",
+      "answer": "(n, d) @ (d, k) contracts over d and leaves (n, k): n items in, k features out, d is what must agree. The contracted dimension is the one being summed over, so a shape error names exactly which two things you assumed lived in the same space and do not."
     },
     {
       "id": "rq-ml-gradient-descent-core",
       "conceptId": "ml-gradient-descent",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Gradient Descent in your own words. What problem does it solve and where is it used?",
-      "answer": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls."
+      "question": "Loss goes down for a while, then spikes to NaN. What does that pattern point at first?",
+      "answer": "A step too large for the local curvature: the update overshoots, the next gradient is larger, and it diverges within a few steps. Lower the learning rate, add warmup, or clip gradient norm. Exploding activations from a bad init or a missing normalisation give the same signature."
     },
     {
       "id": "rq-ml-backprop-core",
       "conceptId": "ml-backprop",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Backpropagation in your own words. What problem does it solve and where is it used?",
-      "answer": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them."
+      "question": "Why does the backward pass need values cached from the forward pass, and what does that cost?",
+      "answer": "Local derivatives depend on the inputs — d(xW)/dW needs x, and d(relu)/dx needs the sign of x. So activations are held in memory until their gradient is consumed. That is why activation memory scales with depth times batch size, and why gradient checkpointing recomputes instead of storing."
     },
     {
       "id": "rq-ml-softmax-xent-core",
       "conceptId": "ml-softmax-xent",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Softmax & Cross-Entropy in your own words. What problem does it solve and where is it used?",
-      "answer": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with."
+      "question": "Why are softmax and cross-entropy implemented as one fused op rather than two?",
+      "answer": "Composed, the gradient collapses to (p - y) — one subtraction. Kept separate you compute exp then a log of it, which overflows for large logits and loses precision for small ones. Fusing also enables the log-sum-exp trick of subtracting the max logit."
     },
     {
       "id": "rq-ml-adamw-core",
       "conceptId": "ml-adamw",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain AdamW Optimizer in your own words. What problem does it solve and where is it used?",
-      "answer": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch."
+      "question": "What does the W in AdamW change, and why did plain Adam plus L2 not do the same thing?",
+      "answer": "L2 adds the penalty to the gradient, so Adam's per-parameter scaling divides it by the same running second moment — parameters with large gradients get decayed less. AdamW subtracts the decay from the weights directly after the step, making it uniform and decoupled from the adaptive scale."
     },
     {
       "id": "rq-ml-tokenization-core",
       "conceptId": "ml-tokenization",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Tokenization (LLM) in your own words. What problem does it solve and where is it used?",
-      "answer": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other."
+      "question": "Why can you not swap a model's tokenizer for a better one without retraining?",
+      "answer": "Token ids are the model's input vocabulary — each row of the embedding matrix was learned for one specific id. A different tokenizer maps text to different ids, so every embedding lookup returns a vector trained for another token. The tokenizer and the embedding table are one artifact."
     },
     {
       "id": "rq-ml-language-modeling-core",
       "conceptId": "ml-language-modeling",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Language Modeling in your own words. What problem does it solve and where is it used?",
-      "answer": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective."
+      "question": "What does perplexity actually measure, and why can two models' perplexities be incomparable?",
+      "answer": "It is the exponential of the mean negative log-likelihood per token — roughly, how many equally likely options the model was choosing between. It is per token, so a different tokenizer changes the token count and the number, even on identical text. Compare only within the same tokenizer and eval set."
     },
     {
       "id": "rq-ml-sampling-core",
       "conceptId": "ml-sampling",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Sampling & Decoding in your own words. What problem does it solve and where is it used?",
-      "answer": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate."
+      "question": "Top-k and top-p both truncate the distribution. When does the difference matter?",
+      "answer": "Top-k always keeps k candidates, so on a confident step it admits k-1 junk tokens, and on a genuinely ambiguous one it cuts good options. Top-p keeps the smallest set summing to p, so the candidate count adapts to how peaked the distribution is."
     },
     {
       "id": "rq-ml-embeddings-core",
       "conceptId": "ml-embeddings",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Embeddings (Transformer) in your own words. What problem does it solve and where is it used?",
-      "answer": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from."
+      "question": "A transformer's attention is permutation-invariant. What does that force the embedding layer to do?",
+      "answer": "Add position information, because attention alone sees a set, not a sequence — shuffle the tokens and the output shuffles with them. Position gets injected as a learned or sinusoidal embedding added to the token embedding, or as a rotation applied to Q and K (RoPE)."
     },
     {
       "id": "rq-ml-self-attention-core",
       "conceptId": "ml-self-attention",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Self-Attention and name one common mistake: \"Forgetting the 1/sqrt(d_k) scaling, which destabilizes the softmax…\"",
-      "answer": "Self-attention lets every token look at every other token and pull in what is relevant. Each token emits a query, a key, and a value; the query-key dot products (scaled, softmaxed) become weights over the values. Causal masking blocks a token from seeing the future."
+      "question": "Why divide the query-key dot product by sqrt(d_k)?",
+      "answer": "With unit-variance q and k, the dot product over d_k dimensions has variance d_k, so scores grow with head width. Large scores drive softmax to one-hot, where its gradient is near zero. Dividing by sqrt(d_k) restores unit variance and keeps the softmax in a trainable range."
     },
     {
       "id": "rq-ml-multi-head-core",
       "conceptId": "ml-multi-head",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Multi-Head Attention in your own words. What problem does it solve and where is it used?",
-      "answer": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position)."
+      "question": "Multi-head attention splits d_model into h heads rather than running h full-width attentions. What does that buy?",
+      "answer": "Cost parity. Each head works in d_model/h dimensions, so h heads together cost about the same FLOPs and parameters as one full-width head, while giving h independent attention patterns. The output projection then mixes the concatenated heads back into d_model."
     },
     {
       "id": "rq-ml-transformer-block-core",
       "conceptId": "ml-transformer-block",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "advanced",
-      "question": "Explain Transformer Block and name one common mistake: \"Dropping residual connections and watching deep models fail to train…\"",
-      "answer": "A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably."
+      "question": "Pre-LayerNorm versus post-LayerNorm — why did deep stacks move to pre-norm?",
+      "answer": "Pre-norm keeps a clean, unnormalised residual path from input to output, so gradients reach early layers directly and deep stacks train without a warmup schedule. Post-norm normalises after the residual add, attenuating that path and making very deep models unstable to start."
     },
     {
       "id": "rq-ml-training-core",
       "conceptId": "ml-training",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Training & Debugging in your own words. What problem does it solve and where is it used?",
-      "answer": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model."
+      "question": "What is the single fastest sanity check that your training loop is wired correctly?",
+      "answer": "Overfit one tiny batch. A correct model plus loss plus optimizer can drive loss on 8 examples to near zero in a few hundred steps. If it cannot, the bug is in the code — detached graph, wrong loss reduction, shuffled labels — not in the data or the hyperparameters."
     },
     {
       "id": "rq-ml-checkpointing-core",
       "conceptId": "ml-checkpointing",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Checkpointing in your own words. What problem does it solve and where is it used?",
-      "answer": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately."
+      "question": "Why is saving only the weights not enough to resume training?",
+      "answer": "The optimizer carries state — Adam's first and second moment estimates, the LR-schedule step count, the gradient scaler, and the data-loader position. Restarting without it resets the moments to zero, so the first steps after resume are effectively unwarmed and the loss spikes."
     },
     {
       "id": "rq-ml-lora-core",
       "conceptId": "ml-lora",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain LoRA & PEFT in your own words. What problem does it solve and where is it used?",
-      "answer": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time."
+      "question": "What do rank r and alpha each control in LoRA, and what does r actually limit?",
+      "answer": "The update is B@A with inner dimension r, scaled by alpha/r. r caps the rank of the weight change — how many independent directions the adapter can move — so too small a rank underfits genuinely new capability. alpha only rescales, letting you change r without re-tuning the learning rate."
     },
     {
       "id": "rq-ml-rl-alignment-core",
@@ -838,1218 +838,1218 @@
       "conceptId": "ml-data-engineering",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Style Data Engineering in your own words. What problem does it solve and where is it used?",
-      "answer": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does."
+      "question": "Why does near-duplicate removal matter more than exact deduplication for a training corpus?",
+      "answer": "Exact matches are rare after crawling; boilerplate, mirrors, and templated pages differ by a few characters yet teach the same tokens repeatedly. Left in, they inflate memorisation and can leak into eval sets. Near-dup detection (MinHash/SimHash over shingles) is what actually finds them."
     },
     {
       "id": "rq-ml-browser-runtime-core",
       "conceptId": "ml-browser-runtime",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Browser ML Runtime in your own words. What problem does it solve and where is it used?",
-      "answer": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback."
+      "question": "Why does the main thread have to be kept out of browser inference, and what does that force into the design?",
+      "answer": "A forward pass blocks the event loop, so the page freezes mid-generation. The model runs in a Web Worker, which means weights and tensors cross a postMessage boundary — hence transferable ArrayBuffers, OPFS for caching the weights between sessions, and a streaming token protocol back to the UI."
     },
     {
       "id": "rq-ml-webgpu-core",
       "conceptId": "ml-webgpu",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain WebGPU Compute in your own words. What problem does it solve and where is it used?",
-      "answer": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself."
+      "question": "Your WebGPU matmul is far slower than expected. What are the two usual causes, and neither is the arithmetic?",
+      "answer": "Transfer and compilation. Every CPU-GPU copy and every mapAsync readback stalls the pipeline, so per-op round trips destroy the win — keep tensors resident on device. And shader compilation happens at pipeline creation, so the first dispatch pays a cost that must be warmed up, not measured."
     },
     {
       "id": "rq-ml-evaluation-core",
       "conceptId": "ml-evaluation",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Model Evaluation in your own words. What problem does it solve and where is it used?",
-      "answer": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough."
+      "question": "Held-out loss improved but the A/B test was flat. Name two explanations that are not \"the metric is wrong\".",
+      "answer": "The offline set no longer matches live traffic, so you improved on a distribution users do not send. Or the gain is real but not on the axis the product is bottlenecked by — better on average while the failure cases that drive abandonment are unchanged. Test-set leakage is the third suspect."
     },
     {
       "id": "rq-webhooks-core",
       "conceptId": "webhooks",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Webhooks in your own words. What problem does it solve and where is it used?",
-      "answer": "A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once."
+      "question": "Why must a webhook receiver return 200 before doing the work, and what does that force on you?",
+      "answer": "Providers time out fast and retry on non-2xx, so slow processing produces duplicate deliveries and, eventually, disabled endpoints. Acknowledge then enqueue. That makes the handler asynchronous, so the receiver must be idempotent on the event id and must surface failures itself — the provider will not."
     },
     {
       "id": "rq-background-jobs-core",
       "conceptId": "background-jobs",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Background Jobs in your own words. What problem does it solve and where is it used?",
-      "answer": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?)."
+      "question": "A job worker dies mid-task. Why does at-least-once delivery follow, and what does that force on the job?",
+      "answer": "The queue cannot tell a crashed worker from a slow one, so it redelivers when the visibility timeout expires. That means every job must be idempotent — keyed on a natural id so a repeat is a no-op — because exactly-once delivery does not exist, only exactly-once effect."
     },
     {
       "id": "rq-ecommerce-payments-core",
       "conceptId": "ecommerce-payments",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Payments in your own words. What problem does it solve and where is it used?",
-      "answer": "Payment systems are several systems agreeing about money: the card network, the processor, your database, and accounting. Treat every state change like a ledger entry, use idempotency keys on every request, and reconcile against the processor daily."
+      "question": "The charge succeeded at the processor but your service crashed before writing the row. What mechanism recovers this, and why is a retry not enough?",
+      "answer": "Daily reconciliation against the processor's ledger — you cannot know from your own data that money moved. A retry with the same idempotency key is what stops a second charge, but only reconciliation finds the state you never recorded. Money truth lives at the processor; your database is a replica."
     },
     {
       "id": "rq-columnar-storage-core",
       "conceptId": "columnar-storage",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Columnar Storage in your own words. What problem does it solve and where is it used?",
-      "answer": "A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics."
+      "question": "Why does a column store compress so much better than a row store on the same data?",
+      "answer": "A column holds values of one type from one domain, so runs repeat: run-length, dictionary, and delta encoding all become effective. A row interleaves an int, a timestamp, and a string, so there is little local redundancy to exploit. Better compression also means fewer bytes read per scan."
     },
     {
       "id": "rq-secondary-index-core",
       "conceptId": "secondary-index",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Secondary Indexes in your own words. What problem does it solve and where is it used?",
-      "answer": "A secondary index is an extra sorted lookup that maps a non-primary-key value (like email) back to the rows that match. Reads on that value get fast; writes get a little slower because the index also has to update. Every index is a tradeoff — only add the ones queries actually need."
+      "question": "What is a covering index, and how does it change the cost of a query?",
+      "answer": "An index that already contains every column the query needs, so the engine answers from the index alone and skips the lookup back into the base table. That removes one random read per matching row — often the dominant cost. The price is a wider index and more write amplification."
     },
     {
       "id": "rq-storage-retrieval-core",
       "conceptId": "storage-retrieval",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "advanced",
-      "question": "Explain Storage Engines and name one common mistake: \"Picking an engine without knowing the read/write ratio of the workload…\"",
-      "answer": "A storage engine is the layer that actually puts bytes on disk and finds them again. The defining choice is the write path: B-trees update pages in place (read-optimized), LSM trees append and merge (write-optimized). Everything else — WAL, indexes, caching — serves durability and lookup speed."
+      "question": "B-tree versus LSM: which one has read amplification and which has write amplification, and where does each come from?",
+      "answer": "B-trees write-amplify: a one-row update rewrites a whole page, plus the WAL. LSM trees read-amplify: a key may live in the memtable or any level, so a lookup probes several files (bloom filters cut this). LSM then pays its own write amplification later, during compaction."
     },
     {
       "id": "rq-sharding-core",
       "conceptId": "sharding",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Sharding and name one common mistake: \"A shard key that creates a hot shard (e.g. sharding by date)…\"",
-      "answer": "Sharding splits one dataset across many machines so it scales past a single box. The shard key is the whole game: hash keys spread load evenly but kill range scans; range keys keep scans but invite hot spots. Re-sharding later is painful, so choose deliberately."
+      "question": "Why is changing the shard key later so much harder than choosing a different index?",
+      "answer": "The shard key decides physical placement, so changing it means moving essentially every row across nodes while serving traffic, usually via dual-writes and a backfill with a cutover. An index is local to a node and can be built in the background."
     },
     {
       "id": "rq-replication-core",
       "conceptId": "replication",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Replication and name one common mistake: \"Reading from a follower and seeing stale data (\"read your own writes\" violation)…\"",
-      "answer": "Replication keeps copies of data on multiple nodes for durability and read scaling. Single-leader is simple but the leader is a write bottleneck; multi-leader and leaderless trade simplicity for availability. The core tension is replication lag — followers are always slightly behind."
+      "question": "A user updates their profile and the next page shows the old value. Name the guarantee that is missing and two ways to provide it.",
+      "answer": "Read-your-writes (read-after-write) consistency. Provide it by routing that user's reads to the leader for a short window after their write, or by having the client carry the log position of its write and requiring the replica to have caught up to it before serving."
     },
     {
       "id": "rq-cap-theorem-core",
       "conceptId": "cap-theorem",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain CAP & Consistency Models and name one common mistake: \"Thinking you \"pick 2 of 3\" at all times — the choice only applies during a parti…\"",
-      "answer": "During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency."
+      "question": "What does PACELC add that CAP leaves out, and why does it describe real systems better?",
+      "answer": "The else branch: when there is no partition, you still trade Latency against Consistency. Partitions are rare, so CAP describes a small fraction of a system's life. Every synchronous-quorum write pays latency for consistency on a perfectly healthy day — that is the choice you actually live with."
     },
     {
       "id": "rq-object-modeling-core",
       "conceptId": "object-modeling",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Object Modeling in your own words. What problem does it solve and where is it used?",
-      "answer": "Object modeling is finding the small set of \"things\" the system has (usually 4-7) and the actions that happen between them. Prefer composition (this has-a) over inheritance (this is-a). A good model makes the next requirement easy to add."
+      "question": "When does \"is-a\" inheritance actively hurt, and what is the tell?",
+      "answer": "When behaviour varies along more than one axis — inheritance fixes the variation at compile time and you end up with one class per combination. The tell: a subclass overrides a method to do nothing. That means the is-a claim is false and you wanted composition."
     },
     {
       "id": "rq-state-management-core",
       "conceptId": "state-management",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain State Machines in your own words. What problem does it solve and where is it used?",
-      "answer": "A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many \"if status == X and Y\" checks, you are simulating a state machine the hard way."
+      "question": "Your code is full of `if (paid && !refunded && shippedAt == null)`. What does converting to a state machine actually buy you?",
+      "answer": "The legal transitions move into one table, so an illegal move is rejected in one place instead of every caller remembering the right conjunction. Adding a state becomes one row plus its edges, not a grep across the codebase."
     },
     {
       "id": "rq-strategy-pattern-core",
       "conceptId": "strategy-pattern",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Strategy Pattern in your own words. What problem does it solve and where is it used?",
-      "answer": "The strategy pattern lets you swap an algorithm at runtime by hiding it behind a common interface. The caller does not know (or care) which version is used. Reach for it when \"the same operation has many implementations\" — pricing rules, sort orders, routing strategies."
+      "question": "Strategy pattern versus a switch statement — what concretely changes?",
+      "answer": "A switch keeps every variant in the caller, so adding one edits shared code and the caller depends on all of them. Strategy puts each behind an interface, so a variant is a new file and the choice can come from config, tenant, or experiment at runtime. You pay in indirection."
     },
     {
       "id": "rq-observer-pattern-core",
       "conceptId": "observer-pattern",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Observer Pattern in your own words. What problem does it solve and where is it used?",
-      "answer": "The observer pattern decouples who emits an event from who listens. Publishers fire events, subscribers register handlers, and the event bus is the registry that connects them. The tradeoff: flows are no longer visible in a single call stack, so debugging gets harder."
+      "question": "What debugging capability do you lose when direct calls become pub/sub, and how do you get it back?",
+      "answer": "The call stack stops explaining why something ran — the publisher does not know its subscribers. You recover it with a correlation id carried on every event, an ordered event log, and tracing spans linking each publish to each handler."
     },
     {
       "id": "rq-factory-creational-core",
       "conceptId": "factory-creational",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Factory & Creational in your own words. What problem does it solve and where is it used?",
-      "answer": "Creational patterns (Factory, Builder, Singleton) hide how an object is constructed so callers do not pin themselves to a specific concrete class. They earn their keep when you add the 4th variant without callers needing to change."
+      "question": "What is the concrete signal that a factory earns its keep rather than just adding a layer?",
+      "answer": "Adding the fourth variant requires no change at any call site. If every new type still forces callers to edit, the factory only relocated the switch. Singleton is the odd one out — it mostly hides global state and makes tests order-dependent."
     },
     {
       "id": "rq-decorator-structural-core",
       "conceptId": "decorator-structural",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Decorator & Structural in your own words. What problem does it solve and where is it used?",
-      "answer": "The decorator pattern wraps an object in another object with the same interface, adding behavior without subclassing. It shines when feature combinations explode — instead of one class per combination, you stack small decorators."
+      "question": "Why does decoration beat subclassing when features combine, and what does it cost?",
+      "answer": "Subclassing needs a class per combination — n features means up to 2^n classes. Decorators wrap at runtime so n small classes compose freely. The costs: order becomes semantic (retry-around-cache differs from cache-around-retry) and stack traces get deep."
     },
     {
       "id": "rq-concurrency-design-core",
       "conceptId": "concurrency-design",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Concurrency Design in your own words. What problem does it solve and where is it used?",
-      "answer": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design."
+      "question": "Two threads deadlock. What is the discipline that prevents it, and why is adding a lock usually the wrong fix?",
+      "answer": "A global lock ordering: every path acquires locks in the same sequence, so no cycle can form. Adding locks adds edges to that graph and more chances for a cycle. The cheaper fixes are usually structural — one writer, or one database transaction doing the whole update."
     },
     {
       "id": "rq-command-chain-core",
       "conceptId": "command-chain",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Command & Chain in your own words. What problem does it solve and where is it used?",
-      "answer": "The command pattern turns an action into a small object you can store, queue, log, or reverse. Pair it with two stacks for undo/redo, with a queue for background jobs, or with a chain for middleware-style processing."
+      "question": "What must a command object carry to support undo, and where does undo stop working?",
+      "answer": "Enough to invert itself: the inverse operation plus whatever state it overwrote, or a snapshot. It stops working once the effect has left the system — email sent, payment captured, webhook delivered. Those need a compensating action, not an undo."
     },
     {
       "id": "rq-booking-inventory-core",
       "conceptId": "booking-inventory",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "advanced",
-      "question": "Explain Booking & Inventory in your own words. What problem does it solve and where is it used?",
-      "answer": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen."
+      "question": "When should a booking flow take a pessimistic lock instead of an optimistic version check?",
+      "answer": "When collisions are frequent and a retry is expensive or user-visible — one seat, many simultaneous bidders. Optimistic wins when conflicts are rare because it costs nothing on the happy path. Decide from the measured collision rate, not intuition."
     },
     {
       "id": "rq-game-design-core",
       "conceptId": "game-design",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Game/Simulation Design in your own words. What problem does it solve and where is it used?",
-      "answer": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees."
+      "question": "Client-side prediction hides latency. What does the client have to keep in order to correct itself?",
+      "answer": "A buffer of unacknowledged inputs with sequence numbers. When the server's authoritative state arrives it is behind, so the client rewinds to it and replays every input newer than the acknowledged one. Without that buffer, reconciliation snaps the player backwards visibly."
     },
     {
       "id": "rq-load-balancing-core",
       "conceptId": "load-balancing",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Load Balancing and name one common mistake: \"Treating the load balancer as a single point of failure with no redundancy…\"",
-      "answer": "A load balancer is the seam between \"one address\" and \"many servers\". L4 routes by IP/port (fast, dumb); L7 routes by request content (slower, smart). Health checks and the balancing algorithm (round-robin, least-connections, consistent hashing) decide who gets each request."
+      "question": "Round-robin is distributing requests evenly but tail latency is bad. What is the likely cause and the fix?",
+      "answer": "Requests are not equal cost, so one server queues behind a slow request while others idle. Least-outstanding-requests routes on observed load rather than turn order; power-of-two-choices gets most of that benefit without any global state."
     },
     {
       "id": "rq-consistent-hashing-core",
       "conceptId": "consistent-hashing",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Consistent Hashing in your own words. What problem does it solve and where is it used?",
-      "answer": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly."
+      "question": "The ring already limits key movement to about 1/N. So why are virtual nodes needed?",
+      "answer": "One point per server divides the ring unevenly by chance, so some servers own far larger arcs. Many positions per server averages the arcs out, and it spreads a departing server's keys across all survivors instead of dumping them on its single successor."
     },
     {
       "id": "rq-consensus-core",
       "conceptId": "consensus",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Consensus and name one common mistake: \"Assuming consensus survives a network partition without a majority…\"",
-      "answer": "Consensus is how a cluster agrees on one value despite crashes and network delays. Raft makes it understandable: elect a leader, replicate an append-only log, and a write commits once a majority (quorum) has it. A majority guarantees any two quorums overlap."
+      "question": "Why does a majority quorum give consensus its safety property?",
+      "answer": "Any two majorities of the same cluster must share at least one node, so a newly elected leader's quorum necessarily contains a node that saw the previous leader's committed entries. That overlap is what makes committed data impossible to lose — and why an even-sized cluster buys no extra fault tolerance."
     },
     {
       "id": "rq-distributed-infra-core",
       "conceptId": "distributed-infra",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Distributed Infra in your own words. What problem does it solve and where is it used?",
-      "answer": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second."
+      "question": "A remote call times out. What do you actually know about whether it executed?",
+      "answer": "Nothing. The request may never have arrived, may have executed and had its reply lost, or may still be running. That ambiguity is why retries need idempotency keys, why fencing tokens exist, and why a timeout must be paired with a way to discover the real outcome later."
     },
     {
       "id": "rq-messaging-realtime-core",
       "conceptId": "messaging-realtime",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Real-time Systems in your own words. What problem does it solve and where is it used?",
-      "answer": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice."
+      "question": "Why do WebSockets constrain your load balancer in ways HTTP requests do not?",
+      "answer": "The connection is long-lived and pinned to one server, so the balancer cannot rebalance mid-connection and a deploy drops every socket it holds. Server-side state means fan-out needs a cross-node bus (Redis pub/sub, a broker) because the recipient is rarely on the node that received the message."
     },
     {
       "id": "rq-social-media-core",
       "conceptId": "social-media",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Feed Systems in your own words. What problem does it solve and where is it used?",
-      "answer": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail."
+      "question": "Describe the hybrid feed strategy and say exactly where the merge happens.",
+      "answer": "Fan out on write for ordinary accounts; skip fan-out above a follower threshold. At read time the precomputed timeline is merged with a live pull of the few high-fanout accounts the user follows — a small k-way merge by timestamp, done per request."
     },
     {
       "id": "rq-streaming-media-core",
       "conceptId": "streaming-media",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Streaming Media in your own words. What problem does it solve and where is it used?",
-      "answer": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo."
+      "question": "What does adaptive bitrate demand of the encoding pipeline?",
+      "answer": "The same content encoded at several bitrates and cut into short segments (2-10s) whose boundaries align across every rendition, on keyframes. That alignment is what lets the player switch quality between segments without a stall or a visible seek."
     },
     {
       "id": "rq-location-transport-core",
       "conceptId": "location-transport",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Geo Systems in your own words. What problem does it solve and where is it used?",
-      "answer": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters."
+      "question": "Why can a geohash prefix search miss the true nearest neighbour?",
+      "answer": "Geohash is a space-filling curve, so two points metres apart can sit either side of a cell boundary and share no prefix. Correct nearest-neighbour search must also scan the eight adjacent cells, or use S2 / a quadtree that handles boundaries explicitly."
     },
     {
       "id": "rq-collaboration-productivity-core",
       "conceptId": "collaboration-productivity",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "advanced",
-      "question": "Explain Collaboration Systems in your own words. What problem does it solve and where is it used?",
-      "answer": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs."
+      "question": "What must be true of the server for OT to be correct, and why do CRDTs not need it?",
+      "answer": "OT needs a central authority to order concurrent operations and transform each against those already applied; correctness rests on transformation functions that are famously hard to get right. A CRDT puts merge into the data type, so any delivery order converges — paid for with metadata that grows with edit history."
     },
     {
       "id": "rq-array-hashing-core",
       "conceptId": "array-hashing",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Arrays & Hashing and name one common mistake: \"Reaching for nested loops before asking \"what would a hash map key on?\"…\"",
-      "answer": "A hash map trades memory for time: it turns an O(n) scan for \"have I seen this?\" into an O(1) lookup. Most array problems that feel quadratic collapse to linear once you ask what you would store in a map keyed by value, complement, or frequency."
+      "question": "You need to know whether any two numbers in an array sum to a target. What do you key the hash map on, and what does that buy you?",
+      "answer": "Key on values already seen. For each x, look up target - x; if it is there you have the pair. The map answers \"have I seen the complement?\" in O(1), collapsing the nested loop into one pass — paid for with O(n) memory."
     },
     {
       "id": "rq-two-pointers-core",
       "conceptId": "two-pointers",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Two Pointers and name one common mistake: \"Using two pointers on unsorted data when the technique needs order…\"",
-      "answer": "Two pointers replace a nested loop with a single pass by exploiting structure — usually a sorted array or a sequence with a monotonic property. The pointers move toward or away from each other based on a comparison, so each element is visited once."
+      "question": "On a sorted array, why can a two-pointer scan discard many candidate pairs at once instead of one at a time?",
+      "answer": "The comparison is decisive. If a[lo] + a[hi] is too small, a[hi] was the largest possible partner for a[lo], so no pair using a[lo] can ever work and lo advances — eliminating a whole row of pairs. Sortedness is what makes that elimination sound."
     },
     {
       "id": "rq-sliding-window-core",
       "conceptId": "sliding-window",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Sliding Window and name one common mistake: \"Recomputing the aggregate from scratch instead of updating incrementally…\"",
-      "answer": "A sliding window maintains a contiguous range and an aggregate (sum, count, max) as it moves. Expand the right edge to include elements; shrink the left edge when a constraint breaks. Each element enters and leaves the window at most once — O(n)."
+      "question": "Why must the shrink step be a `while` loop rather than an `if`?",
+      "answer": "One expansion can break the constraint by more than one element, so the left edge may need to move several times before the invariant holds again. An `if` shrinks once, leaves the window invalid, and every answer computed after that reads a broken state."
     },
     {
       "id": "rq-stack-core",
       "conceptId": "stack",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Stack in your own words. What problem does it solve and where is it used?",
-      "answer": "A stack is last-in-first-out: the last thing you pushed is the first thing you pop. Reach for one when the natural question is \"what was the most recent unfinished thing?\" — parsing, recursion, undo, matching brackets."
+      "question": "In a monotonic stack, what does the stack hold at any moment, and what does a pop mean?",
+      "answer": "It holds items whose answer is still unknown, kept in sorted order by value. Pushing a new element pops everyone it beats — and the new element is precisely their answer (next greater or next smaller). Each index is pushed and popped once, so the scan is O(n)."
     },
     {
       "id": "rq-binary-search-core",
       "conceptId": "binary-search",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Binary Search and name one common mistake: \"Infinite loops from a wrong mid update or loop condition…\"",
-      "answer": "Binary search is not about sorted arrays — it is about a monotonic predicate. If you can phrase the answer as \"the smallest x for which condition(x) is true\", you can binary-search the answer space, halving it each step."
+      "question": "What property must hold before you can binary-search the answer space, and how do you check it?",
+      "answer": "The predicate must be monotonic in x — false...false then true...true, or the reverse. Test it by asking whether condition(x) implies condition(x+1). Without monotonicity, halving throws away a region that could still contain the answer."
     },
     {
       "id": "rq-linked-list-core",
       "conceptId": "linked-list",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Linked List in your own words. What problem does it solve and where is it used?",
-      "answer": "A linked list trades fast random access for fast inserts and deletes wherever you already have a pointer. The classic moves: a dummy head to simplify edge cases, two pointers (fast and slow), and reversing in place."
+      "question": "What does a fast/slow pointer pair give you that a single pointer cannot?",
+      "answer": "A ratio. Slow moves one node, fast moves two, so when fast reaches the end slow sits at the midpoint. If there is a cycle, fast must eventually lap slow, so they meet. Midpoint and cycle detection in one pass with O(1) extra memory."
     },
     {
       "id": "rq-trees-core",
       "conceptId": "trees",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Trees and name one common mistake: \"Forgetting the null/empty base case…\"",
-      "answer": "A tree is recursion made concrete: almost every tree problem is \"solve it for the children, then combine\". DFS (pre/in/post-order) is a recursion or an explicit stack; BFS is a queue, level by level. Pick the traversal that matches what you need to combine."
+      "question": "In a recursive tree solution, why separate \"the answer\" from \"the value returned to the parent\"?",
+      "answer": "They are often different quantities. In max-path-sum the parent can only extend one branch, so you return the best single-branch value while a global variable records the best split-at-this-node value. Conflating them lets paths fork twice and gives wrong answers."
     },
     {
       "id": "rq-tries-core",
       "conceptId": "tries",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Trie in your own words. What problem does it solve and where is it used?",
-      "answer": "A trie stores strings in a tree where each path from the root spells out a prefix. It makes prefix queries (autocomplete, IP routing) take time proportional to the length of the prefix, not the size of the dataset."
+      "question": "Why does trie prefix lookup cost the same whether you stored a thousand words or a million?",
+      "answer": "Lookup walks one node per prefix character, so the cost is O(len(prefix)); branching happens inside a node, not across the dataset. The price is memory — roughly one node per distinct prefix, which is why a sorted array plus binary search is often smaller."
     },
     {
       "id": "rq-heap-core",
       "conceptId": "heap",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Heap / Priority Queue and name one common mistake: \"Sorting the whole input when a size-k heap suffices…\"",
-      "answer": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything."
+      "question": "A size-k heap is O(n log k) and sorting is O(n log n). When is sorting still the better choice?",
+      "answer": "When k approaches n (the log terms converge and the heap adds overhead), when you need the full ordering anyway, or when n is small enough that constant factors and code simplicity dominate. The heap wins when k is tiny relative to n."
     },
     {
       "id": "rq-backtracking-core",
       "conceptId": "backtracking",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Backtracking in your own words. What problem does it solve and where is it used?",
-      "answer": "Backtracking is \"try a choice, recurse, undo if it does not work, try the next one.\" It explores all possibilities, but you cut whole branches by stopping early when you can prove they will never reach a valid answer."
+      "question": "What exactly has to be undone after a recursive call returns, and what breaks if you forget?",
+      "answer": "Every mutation made before recursing: the partial candidate, visited marks, and any running aggregate. Forgetting leaks state into sibling branches, so later branches explore from a corrupted prefix and emit duplicates or silently skip valid answers."
     },
     {
       "id": "rq-graphs-core",
       "conceptId": "graphs",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain Graphs and name one common mistake: \"No visited set — revisiting nodes and looping forever…\"",
-      "answer": "Most graph problems are one of a few templates: reachability/components (DFS/BFS), shortest path (BFS for unweighted, Dijkstra for weighted), ordering (topological sort), or connectivity (union-find). The skill is recognizing the template and modeling the input as nodes and edges."
+      "question": "In BFS, do you mark a node visited when you enqueue it or when you dequeue it — and why does it matter?",
+      "answer": "On enqueue. Marking on dequeue lets the same node be pushed once per incoming edge before it is ever processed, so the queue grows to O(E) duplicates and the same node is expanded repeatedly. Correctness survives, performance does not."
     },
     {
       "id": "rq-shortest-path-core",
       "conceptId": "shortest-path",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "advanced",
-      "question": "Explain Shortest Path in your own words. What problem does it solve and where is it used?",
-      "answer": "Pick the algorithm by the graph: BFS for unweighted, Dijkstra when weights are non-negative, Bellman-Ford if weights can be negative, A* when you have a heuristic estimating distance to the goal. Using the wrong one gives wrong answers or wasted time."
+      "question": "Why does Dijkstra give wrong answers on negative edges when Bellman-Ford does not?",
+      "answer": "Dijkstra finalizes a node the moment it is popped, betting that no later path can be shorter — a negative edge can make one shorter afterwards. Bellman-Ford never finalizes: it relaxes every edge V-1 times, so a late improvement still propagates through the graph."
     },
     {
       "id": "rq-union-find-core",
       "conceptId": "union-find",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Union-Find in your own words. What problem does it solve and where is it used?",
-      "answer": "Union-Find tracks which items are in the same group with two operations: union(a, b) merges two groups, find(a) returns the group id. With path compression and union by rank, both run in essentially constant time. Use it whenever the question is \"are these two in the same group?\""
+      "question": "What do path compression and union by rank each contribute, and why is one alone not enough?",
+      "answer": "Union by rank keeps trees shallow by hanging the smaller tree under the larger; path compression flattens the whole path to the root on every find. Either optimization alone gives O(log n) amortized; together they give inverse-Ackermann, effectively constant."
     },
     {
       "id": "rq-dp-1d-core",
       "conceptId": "dp-1d",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain 1D DP and name one common mistake: \"Starting to code before clearly defining what dp[i] represents…\"",
-      "answer": "Dynamic programming is recursion with the repeated work cached. Define the state (what does dp[i] mean?), the recurrence (how does dp[i] build on earlier states?), and the base case. 1D DP means the state is a single index along a sequence."
+      "question": "The recurrence looks right but the answers are wrong. What is the first thing to check about iteration order?",
+      "answer": "That every state the recurrence reads is already computed. dp[i] depending on dp[i-1] needs ascending order; dp[i] depending on dp[i+1] needs descending. The rolled 1D knapsack iterates capacity backwards for exactly this reason — forwards lets one item be used twice."
     },
     {
       "id": "rq-dp-2d-core",
       "conceptId": "dp-2d",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain 2D DP in your own words. What problem does it solve and where is it used?",
-      "answer": "2D dynamic programming fills a table where each cell depends on a few neighbors (often the ones above and to the left). The hard part is naming the state precisely — once dp[i][j] has a clear one-sentence meaning, the recurrence usually falls out."
+      "question": "In edit distance, state precisely what dp[i][j] means and what the three predecessor cells correspond to.",
+      "answer": "dp[i][j] is the minimum number of edits turning the first i characters of A into the first j of B. dp[i-1][j] is a delete, dp[i][j-1] is an insert, dp[i-1][j-1] is a replace (free when the characters match). Naming the state exactly is what makes the transitions fall out."
     },
     {
       "id": "rq-greedy-core",
       "conceptId": "greedy",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Greedy in your own words. What problem does it solve and where is it used?",
-      "answer": "A greedy algorithm always picks the choice that looks best right now. It only gives the right answer when the problem has a structure (an exchange argument) that proves local choices add up correctly. When they do not, greedy quietly returns wrong answers."
+      "question": "What is an exchange argument, and why does a greedy algorithm need one?",
+      "answer": "You show any optimal solution can be rewritten into the greedy one without getting worse — swap the optimum's first differing choice for greedy's and argue it is no worse. Without that proof greedy has no reason to be correct, and it fails silently rather than loudly."
     },
     {
       "id": "rq-intervals-core",
       "conceptId": "intervals",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Intervals in your own words. What problem does it solve and where is it used?",
-      "answer": "Interval problems almost always start by sorting — usually by start time, sometimes by end. After sorting, a single pass with a couple of running variables (last end, current count) handles merge, overlap, scheduling, and room allocation."
+      "question": "Merging overlapping intervals sorts by start time; picking the most non-overlapping intervals sorts by end time. Why the difference?",
+      "answer": "Merging processes intervals in the order they open, so any overlap is with the block currently being built. Scheduling wants the resource freed as early as possible, and the interval ending soonest leaves the most room for everything after it — that is the exchange argument."
     },
     {
       "id": "rq-math-geometry-core",
       "conceptId": "math-geometry",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Math & Geometry in your own words. What problem does it solve and where is it used?",
-      "answer": "Interviews use math sparingly: gcd/lcm, modular arithmetic, primes, combinatorics, and basic geometry (cross product, line intersection). Recognize the shape of the problem — the formula is a quick lookup away."
+      "question": "What does the sign of the 2D cross product tell you, and which problems does that single test solve?",
+      "answer": "For vectors AB and AC the sign says whether C lies left of, right of, or on line AB (counter-clockwise, clockwise, collinear). That one test drives orientation, segment-intersection, and convex-hull construction — with no trigonometry and no division."
     },
     {
       "id": "rq-bit-manipulation-core",
       "conceptId": "bit-manipulation",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Bit Manipulation in your own words. What problem does it solve and where is it used?",
-      "answer": "Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicates, and checking power-of-2 is a single AND. Two tricks worth memorizing: n & (n-1) clears the lowest set bit, and XOR-ing equal values gives zero."
+      "question": "Why does `n & (n - 1)` clear the lowest set bit, and what two things does that give you?",
+      "answer": "n-1 flips the lowest set bit to 0 and sets every bit below it to 1; the AND keeps the higher bits and zeroes that whole tail. Looping on it counts set bits in as many iterations as there are bits set, and `n & (n-1) == 0` tests for a power of two."
     },
     {
       "id": "rq-leadership-and-influence-core",
       "conceptId": "leadership-and-influence",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Leadership in your own words. What problem does it solve and where is it used?",
-      "answer": "Leadership without authority is getting people aligned on an outcome when you cannot order them to do it. The real signal is sustained behavior change in others over weeks — not the meeting where they nodded along."
+      "question": "The room agreed and nothing changed two weeks later. What is the actual evidence that you influenced anyone?",
+      "answer": "Changed defaults, not nods. Someone reprioritised their sprint, wrote the doc, or made your argument in a room you were not in. Agreement in a meeting is free; if no behaviour or artefact moved, you got politeness."
     },
     {
       "id": "rq-conflict-resolution-core",
       "conceptId": "conflict-resolution",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Conflict Resolution in your own words. What problem does it solve and where is it used?",
-      "answer": "Conflict means information surfaced — two people disagree about something that was probably already there. Resolution is naming the disagreement clearly, finding the shared goal underneath, and choosing a path forward. It is not the same as winning."
+      "question": "How do you tell a disagreement about facts from a disagreement about priorities, and why does it matter?",
+      "answer": "Ask each side what evidence would change their mind. If an answer exists it is factual — go get the data. If nobody can name any, it is a priorities conflict and more data will not settle it: escalate to whoever owns the tradeoff or run a reversible experiment."
     },
     {
       "id": "rq-problem-solving-and-decision-making-core",
       "conceptId": "problem-solving-and-decision-making",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Decision Making in your own words. What problem does it solve and where is it used?",
-      "answer": "Decisions are bets you make with incomplete information. Judge them by the reasoning at the time, not the outcome. Good decisions name in advance what evidence would tell you you are wrong."
+      "question": "What separates a bad decision from a bad outcome, and what do you have to write down to tell them apart later?",
+      "answer": "Outcomes are noisy; the decision is the reasoning available at the time. Record the options considered, the assumption the choice rests on, and the observation that would falsify it. Without that, hindsight rewrites every unlucky bet as a mistake."
     },
     {
       "id": "rq-teamwork-and-collaboration-core",
       "conceptId": "teamwork-and-collaboration",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Collaboration in your own words. What problem does it solve and where is it used?",
-      "answer": "Collaboration means making the other person's job easier than they were expecting. Most cross-team friction is really unclear ownership and unspoken expectations — fix those before worrying about chemistry."
+      "question": "Cross-team friction gets blamed on personalities. What is usually the real cause, and what is the concrete fix?",
+      "answer": "Unclear ownership and unstated expectations — each side assuming the other holds a boundary. The fix is written down: who owns each interface, what response time the other side can rely on, and what happens when it slips. Chemistry rarely survives an undefined boundary."
     },
     {
       "id": "rq-failure-and-learning-core",
       "conceptId": "failure-and-learning",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Failure & Learning in your own words. What problem does it solve and where is it used?",
-      "answer": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson."
+      "question": "What makes a post-mortem blameless in practice rather than just in name?",
+      "answer": "Asking how the system made the mistake look reasonable at the time — what signal was missing, what the tooling permitted. Naming a person ends the investigation early and teaches everyone to hide the next incident. Actions must land on systems and defaults, with an owner and a date."
     },
     {
       "id": "rq-communication-core",
       "conceptId": "communication",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Communication in your own words. What problem does it solve and where is it used?",
-      "answer": "Good communication is audience-first: after listening, the other person's next decision should be easier. Be specific, not sophisticated. One sharp analogy beats five vague ones."
+      "question": "What is the concrete test for whether an explanation landed?",
+      "answer": "The listener can make their next decision without a follow-up question, or can restate the tradeoff in their own words. Not whether they nodded. Optimising to sound rigorous instead of passing that test is optimising the wrong thing."
     },
     {
       "id": "rq-time-management-and-prioritization-core",
       "conceptId": "time-management-and-prioritization",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Prioritization in your own words. What problem does it solve and where is it used?",
-      "answer": "Prioritization is saying no to good things, not bad ones. If you cannot list what you are NOT doing this week, you have not actually prioritized — you have just written a wish list."
+      "question": "How can you tell a real prioritisation from an ordered wish list?",
+      "answer": "A real one names what is being dropped and who was told. If everything is still \"in progress\" and nothing carries an explicit not-now, you sequenced items rather than prioritising, and the cut will happen implicitly through whatever slips."
     },
     {
       "id": "rq-innovation-and-creativity-core",
       "conceptId": "innovation-and-creativity",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Innovation in your own words. What problem does it solve and where is it used?",
-      "answer": "Most real innovation comes from refusing to accept a tradeoff that everyone else is taking for granted. The signal is not novelty for its own sake — it is finding the assumption you can credibly weaken."
+      "question": "\"Refuse a tradeoff everyone accepts\" is the pitch. How do you tell a real one from wishful thinking?",
+      "answer": "A real one names the constraint that forced the tradeoff and what changed to weaken it — cheaper hardware, a new algorithm, a new distribution channel. With no identified constraint that actually moved, you are declaring the tradeoff away, not beating it."
     },
     {
       "id": "rq-customer-obsession-core",
       "conceptId": "customer-obsession",
       "type": "explain",
       "difficulty": "intro",
-      "question": "Explain Customer Obsession in your own words. What problem does it solve and where is it used?",
-      "answer": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes."
+      "question": "A customer asks for a specific feature. What do you establish before building it?",
+      "answer": "The problem behind the request — what were they trying to do when they hit the wall — and whether it generalises beyond this one account. A single complaint is a hypothesis. Building the literal ask usually ships their workaround rather than fixing their problem."
     },
     {
       "id": "rq-ownership-and-accountability-core",
       "conceptId": "ownership-and-accountability",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "intro",
-      "question": "Explain Ownership in your own words. What problem does it solve and where is it used?",
-      "answer": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to."
+      "question": "Where is the line between ownership and heroics?",
+      "answer": "Ownership closes the loop and leaves the system better: the fix, a guardrail so it cannot recur, and a handoff so the next person does not need you. Heroics fix it silently at 2am and leave the same hole. The test is whether anyone else could handle it next time."
     },
     {
       "id": "rq-positioning-core",
       "conceptId": "positioning",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Positioning in your own words. What problem does it solve and where is it used?",
-      "answer": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning."
+      "question": "Your positioning statement is completely true. Why might it still be worthless?",
+      "answer": "Because it excludes nobody. A position is defined by the alternative you beat and the buyer you are explicitly not for. If three competitors could swap their logo in and the sentence stays true, you wrote a category description."
     },
     {
       "id": "rq-landing-pages-core",
       "conceptId": "landing-pages",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain Landing Pages in your own words. What problem does it solve and where is it used?",
-      "answer": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them."
+      "question": "Traffic is high, conversion is low, and the copy is accurate. What do you check first?",
+      "answer": "Message-to-intent match: what the visitor searched or clicked versus what the hero promises. Accurate but generic copy loses to a headline naming the visitor's situation. Second, count the primary calls to action — more than one splits the decision and both lose."
     },
     {
       "id": "rq-seo-core",
       "conceptId": "seo",
       "type": "explain",
       "difficulty": "core",
-      "question": "Explain SEO in your own words. What problem does it solve and where is it used?",
-      "answer": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links."
+      "question": "Every on-page basic is correct and the page still does not rank. What is the usual reason?",
+      "answer": "On-page is a qualifier, not a ranker. Either competing results have more depth and more credible inbound links for that query, or the page misreads intent — informational content served to a transactional search. Neither is fixed by more tags."
     },
     {
       "id": "rq-product-analytics-core",
       "conceptId": "product-analytics",
-      "type": "explain",
+      "type": "compare",
       "difficulty": "core",
-      "question": "Explain Product Analytics in your own words. What problem does it solve and where is it used?",
-      "answer": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong."
+      "question": "What makes a metric a guardrail rather than an input metric, and why must the tree have one?",
+      "answer": "An input metric is something you are trying to move; a guardrail is something you must not break while moving it. Without one, every north-star gain can be bought with a hidden cost — engagement up while retention or latency quietly degrades."
     },
     {
       "id": "rq-operating-system-mechanics",
       "conceptId": "operating-system-mechanics",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Operating System Mechanics?",
-      "answer": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
+      "question": "What does virtual memory actually buy beyond \"more memory than you have\"?",
+      "answer": "Isolation and indirection. Each process gets its own address space, so a bad pointer cannot reach another process; and because the mapping is per-page, the kernel can share read-only pages, copy-on-write a fork, map a file, and relocate physical memory without the program knowing.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-network-protocol-engineering",
       "conceptId": "network-protocol-engineering",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Network Protocol Engineering?",
-      "answer": "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
+      "question": "A TCP connection is \"reliable\". Name two failures it does not protect you from.",
+      "answer": "A dead peer — with no data flowing, a host that vanished looks identical to an idle one until a write eventually times out, which is why applications need their own heartbeats. And duplicate application-level effects: TCP delivers bytes once, but your retry after a timeout can still submit the same request twice.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-compute-memory-storage-hierarchy",
       "conceptId": "compute-memory-storage-hierarchy",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Compute, Memory & Storage Hierarchy?",
-      "answer": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
+      "question": "Two loops do the same arithmetic on the same array and one is many times slower. What is the usual cause?",
+      "answer": "Access pattern versus cache line. A sequential walk brings in 64 bytes and uses all of them, and the prefetcher stays ahead; a strided or pointer-chasing walk uses one value per line and defeats prefetch. The FLOPs are identical — the memory traffic is not.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-runtime-performance-engineering",
       "conceptId": "runtime-performance-engineering",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Runtime & Performance Engineering?",
-      "answer": "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
+      "question": "Mean latency improved after your change and p99 got worse. What class of cause should you suspect?",
+      "answer": "Something that batches or defers work: a larger buffer, a bigger GC heap, a coarser lock. Average throughput rises because the amortised cost falls, but the occasional flush, collection, or convoy lands entirely on one request. Tail latency is about the variance you introduced, not the mean.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-security-isolation-boundaries",
       "conceptId": "security-isolation-boundaries",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Security & Isolation Boundaries?",
-      "answer": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+      "question": "What does \"fail closed\" mean at a trust boundary, and why is it a design decision rather than an implementation detail?",
+      "answer": "When the check cannot complete — the auth service is down, the policy will not parse — the request is denied rather than allowed. It is a design decision because failing closed converts a security failure into an availability failure, and that tradeoff must be chosen deliberately per boundary.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-cloud-infrastructure",
       "conceptId": "cloud-infrastructure",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Cloud Infrastructure?",
-      "answer": "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
+      "question": "What is a failure domain, and why does multi-AZ buy something multi-instance does not?",
+      "answer": "A failure domain is the blast radius of one correlated failure — a host, a rack, a power zone, a region, a control plane. Three instances in one AZ share the AZ's fate, so they are one domain wearing three hats. Spreading across AZs is what makes the failures independent.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-containers-kubernetes",
       "conceptId": "containers-kubernetes",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Containers & Kubernetes?",
-      "answer": "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
+      "question": "Kubernetes is described as a reconciliation system. What does that actually change about how it behaves?",
+      "answer": "There is no imperative apply-then-done. A controller repeatedly compares declared state to observed state and takes one corrective step, forever. So it is self-healing and order-independent, but a change can silently never converge, and the honest debugging question is which controller is failing to reconcile.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-cicd-developer-environments",
       "conceptId": "cicd-developer-environments",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing CI/CD & Developer Environments?",
-      "answer": "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
+      "question": "Why must promotion move the same artifact rather than rebuild per environment?",
+      "answer": "A rebuild can differ — dependency resolution, base image, build-time config — so the thing you tested in staging is not the thing that reaches production. Build once, tag it, and inject environment differences as configuration at deploy time, so the tested bytes are the shipped bytes.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-platform-scheduling-orchestration",
       "conceptId": "platform-scheduling-orchestration",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Scheduling & Orchestration?",
-      "answer": "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
+      "question": "What does preemption solve that priority queues alone do not?",
+      "answer": "Priority decides who gets the next free slot; it does nothing when every slot is already held by long-running low-priority work. Preemption reclaims a running slot, which is what bounds the wait for high-priority work — at the cost that evicted jobs must be checkpointable or safely restartable.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-reliability-fault-tolerance",
       "conceptId": "reliability-fault-tolerance",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Reliability & Fault Tolerance?",
-      "answer": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+      "question": "What is an error budget for, and what should happen when it is exhausted?",
+      "answer": "It converts an SLO into a spending limit: 99.9% availability means 0.1% is allowed to be spent on releases and risk. When it runs out the policy is to stop shipping features and spend on reliability. Without that consequence the SLO is a dashboard number, not a control.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-opentelemetry-observability",
       "conceptId": "opentelemetry-observability",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Observability & OpenTelemetry?",
-      "answer": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
+      "question": "You have metrics and logs. What does a trace add that neither gives you?",
+      "answer": "Causal structure across services for one request. Metrics aggregate away the individual, and logs are per-service lines with no parentage, so neither can tell you which downstream call consumed the latency in this slow request. That requires propagated context and parent-child spans.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-sandbox-execution-environments",
       "conceptId": "sandbox-execution-environments",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Sandboxes & Execution Environments?",
-      "answer": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+      "question": "Rank containers, microVMs, and V8 isolates on isolation strength versus startup cost, and say what drives the difference.",
+      "answer": "Isolates start in about a millisecond and share one process, so a runtime escape is total; containers share the host kernel, so the syscall surface is the boundary; microVMs bring their own kernel behind a hypervisor and cost tens to hundreds of milliseconds. Density and isolation trade directly against each other.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-infrastructure-automation",
       "conceptId": "infrastructure-automation",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Infrastructure Automation?",
-      "answer": "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
+      "question": "What is drift, and why does a declarative tool need a plan step rather than just applying?",
+      "answer": "Drift is reality diverging from the declared state — a manual console change, an autoscaler, a deleted resource. The plan is the diff against observed state, which is the only place a destructive action (replace, delete) becomes visible before it happens. Applying blind converts drift into an outage.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-event-streaming-kafka",
       "conceptId": "event-streaming-kafka",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Event Streaming & Kafka?",
-      "answer": "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
+      "question": "Kafka guarantees ordering per partition. What does that force on your partition key choice?",
+      "answer": "Anything that must be processed in order has to share a key so it lands in one partition — usually the entity id. That makes ordering and parallelism directly opposed: a coarse key serialises unrelated work, a fine key lets two events for the same entity be handled out of order.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-distributed-workflows-temporal",
       "conceptId": "distributed-workflows-temporal",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Distributed Workflows & Temporal?",
-      "answer": "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
+      "question": "Durable execution replays workflow code after a crash. What does that require of the code you write?",
+      "answer": "Determinism. Replay re-executes the function against the recorded history, so the same decisions must be reached — no wall-clock reads, no random, no direct I/O, and no branching on data that could change. Anything non-deterministic goes in an activity, whose result is recorded once and replayed from history.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-distributed-failure-recovery",
       "conceptId": "distributed-failure-recovery",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Distributed Failure Recovery?",
-      "answer": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+      "question": "What is a fencing token, and which failure does it stop that a lease timeout alone does not?",
+      "answer": "A monotonically increasing number issued with a lock; the storage layer rejects any write carrying a token older than the highest it has seen. It stops the paused-then-resumed holder: a process that stalled past its lease expiry, lost the lock, then woke up and wrote as if it still held it.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-transaction-processing",
       "conceptId": "transaction-processing",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Transaction Processing?",
-      "answer": "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
+      "question": "Snapshot isolation prevents dirty and non-repeatable reads but is not serializable. What anomaly survives, and what fixes it?",
+      "answer": "Write skew: two transactions read an overlapping set, each checks an invariant that still holds, and each writes a disjoint row — together breaking the invariant (both doctors go off call). Fixes are SELECT FOR UPDATE on the read set, a materialized conflict row, or serializable snapshot isolation.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-query-execution-optimization",
       "conceptId": "query-execution-optimization",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Query Execution & Optimization?",
-      "answer": "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
+      "question": "The plan looks reasonable but the query is slow. What estimate is usually wrong, and why does it compound?",
+      "answer": "Cardinality — the row count coming out of a join or filter. Correlated predicates break the independence assumption and errors multiply along the join tree, so an off-by-10 at the bottom becomes off-by-1000 at the top, and the optimizer picks a nested loop where it needed a hash join.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-warehouses-lakehouses",
       "conceptId": "warehouses-lakehouses",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Data Warehouses & Lakehouses?",
-      "answer": "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
+      "question": "What does an open table format (Iceberg, Delta) add on top of Parquet files in object storage?",
+      "answer": "A metadata layer listing which files make up the table at each snapshot. That gives atomic commits, time travel, and schema evolution over a store with no rename or multi-object transaction — and it lets the engine prune files by statistics instead of listing a prefix.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-ml-pretraining",
       "conceptId": "ml-pretraining",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Model Pre-training?",
-      "answer": "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
+      "question": "You have a fixed compute budget. What do scaling laws tell you about splitting it between model size and tokens?",
+      "answer": "There is an optimum: for a given FLOP budget, parameters and training tokens should grow together rather than pouring everything into size. Chinchilla showed the previous generation was badly undertrained. If the model will be served heavily, deliberately overshoot on tokens — inference cost tracks parameters, not tokens.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-model-quantization",
       "conceptId": "model-quantization",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Model Quantization?",
-      "answer": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
+      "question": "You quantized to int4 and memory dropped but throughput did not. What went wrong?",
+      "answer": "The format has no matching kernel, so weights are dequantized back to fp16 before every matmul. The memory win is real; the compute win only arrives when the hardware has native support for the format and the layout matches what the kernel expects.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-open-weight-models",
       "conceptId": "open-weight-models",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Open-Weight Models?",
-      "answer": "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
+      "question": "\"Open weights\" is not \"open source\". Name what you still do not get, and the one packaging detail that breaks deployments quietly.",
+      "answer": "You get inspectable parameters, not the training data, the training code, or unrestricted rights — many licenses cap commercial use or restrict fields. The quiet breaker is the chat template: apply the wrong prompt format and quality collapses in a way that looks like a bad model rather than a config error.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-inference-engines",
       "conceptId": "inference-engines",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing vLLM & Inference Engines?",
-      "answer": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
+      "question": "Prefill and decode have very different hardware profiles. Name each and say why it drives the scheduler's design.",
+      "answer": "Prefill processes the whole prompt at once and is compute-bound; decode emits one token per step per sequence and is memory-bandwidth-bound. Batching only helps decode, so the scheduler must interleave the two — chunking long prefills so they do not stall every decoding request behind them.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-continuous-batching",
       "conceptId": "continuous-batching",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Continuous Batching?",
-      "answer": "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
+      "question": "What does continuous batching change relative to static batching, and where does the throughput actually come from?",
+      "answer": "Static batching holds every slot until the slowest sequence finishes, so short requests idle the GPU waiting. Continuous batching re-forms the batch each decoding step and admits a queued request into the freed slot immediately. The gain is eliminated bubble time, not faster kernels.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-kv-cache-paged-attention",
       "conceptId": "kv-cache-paged-attention",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing KV Caching & PagedAttention?",
-      "answer": "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
+      "question": "What fragmentation problem does PagedAttention solve, and what capability falls out of it for free?",
+      "answer": "Contiguous per-request KV allocation must reserve for the maximum possible length, so most of the reservation is never used and cannot be lent out. Paging into fixed blocks with a block table removes that waste — and because blocks are shared by reference, identical prompt prefixes cost one copy.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-flashattention-kernels",
       "conceptId": "flashattention-kernels",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing FlashAttention & Attention Kernels?",
-      "answer": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
+      "question": "FlashAttention computes exact attention yet is much faster. Where does the speed come from if the arithmetic is unchanged?",
+      "answer": "From not writing the N-by-N attention matrix to HBM. It tiles Q, K, V into SRAM and fuses matmul, softmax, and the value multiply into one pass, using online (streaming) softmax so no tile needs the global max in advance. Attention is bandwidth-bound, so removing the traffic is the win.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-speculative-decoding",
       "conceptId": "speculative-decoding",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Speculative Decoding?",
-      "answer": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
+      "question": "Speculative decoding runs two models yet is faster, and the output distribution is unchanged. Explain both claims.",
+      "answer": "The target model verifies k drafted tokens in a single forward pass, and decode is bandwidth-bound, so verifying k costs roughly what one token cost. Correctness comes from the rejection-sampling step: accept each draft token with probability p_target/p_draft and resample from the corrected residual otherwise.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-gpu-utilization",
       "conceptId": "gpu-utilization",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing GPU Utilization?",
-      "answer": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
+      "question": "nvidia-smi reports 100% utilization but throughput is poor. Why is that number misleading, and what do you measure instead?",
+      "answer": "It reports the fraction of time at least one kernel was resident — not whether the SMs or the memory bus were doing useful work. Measure achieved occupancy, memory-bandwidth utilisation, and the arithmetic intensity of the hot kernels to tell compute-bound from memory-bound from launch-bound.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-inference-cost-latency",
       "conceptId": "inference-cost-latency",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Inference Cost & Latency Optimization?",
-      "answer": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
+      "question": "Why do TTFT and inter-token latency pull the scheduler in opposite directions?",
+      "answer": "Time to first token needs prompts admitted and prefilled promptly; inter-token latency needs the decode batch left undisturbed, because every admitted prefill steals a step from every sequence already generating. Larger batches raise throughput and worsen both. You pick a point on the frontier, not all three.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-local-on-device-inference",
       "conceptId": "local-on-device-inference",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Local & On-device Inference?",
-      "answer": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+      "question": "A model fits in device RAM and still runs badly on a phone. What is the constraint you overlooked?",
+      "answer": "Sustained power and thermals. Mobile silicon boosts briefly then throttles, so the benchmark you measured cold is not the steady state. Memory bandwidth is the other one — decode is bandwidth-bound, and a phone has a fraction of a GPU's, so quantization buys speed as much as it buys space.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-inference-hardware",
       "conceptId": "inference-hardware",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Inference Hardware?",
-      "answer": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
+      "question": "For single-stream LLM decoding, which hardware number predicts speed best, and why is it not peak TFLOPs?",
+      "answer": "Memory bandwidth. Each token reads the whole weight set once, doing about two FLOPs per byte fetched, so the matrix engines are starved and the roofline lands in the bandwidth-bound region. Peak TFLOPs starts to matter only when batching pushes arithmetic intensity up.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-agent-memory-context",
       "conceptId": "agent-memory-context",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Agent Memory & Context Management?",
-      "answer": "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
+      "question": "Why is summarising old turns into the prompt not the same as giving an agent memory?",
+      "answer": "A summary is lossy and irreversible: once compacted you cannot recover the detail a later step needs, and errors in the summary become facts. Real memory keeps the raw event history addressable, stores durable facts retrievably with provenance and expiry, and treats the prompt as a working set fetched from those.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-mcp-integrations",
       "conceptId": "mcp-integrations",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing MCP & Integrations?",
-      "answer": "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
+      "question": "MCP standardises how a host discovers and calls tools. Name what it deliberately does not give you.",
+      "answer": "Trust. The protocol carries capability descriptions and results; it does not authenticate the user to the downstream system, authorize the specific action, validate arguments, or decide what needs human approval. A tool description is attacker-controlled text, so a connected server is untrusted input, not a trusted extension.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-multi-agent-coordination",
       "conceptId": "multi-agent-coordination",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Multi-agent Coordination?",
-      "answer": "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
+      "question": "When does splitting work across agents make results worse rather than better?",
+      "answer": "When subtasks share state or the result cannot be verified independently. Each handoff re-serialises context through natural language, losing detail and adding a chance to misinterpret, and errors compound with no arbiter. Multiple agents pay off only for cleanly separable work with a checkable output.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-durable-agent-execution",
       "conceptId": "durable-agent-execution",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Durable Agent Execution?",
-      "answer": "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
+      "question": "An agent crashes after calling a payment API but before recording the result. What makes recovery safe?",
+      "answer": "A side-effect identity assigned before the call — an idempotency key persisted with the intent — so on resume the same key either replays the recorded outcome or is rejected as a duplicate by the provider. Recording after the fact cannot work: the crash window is exactly where the ambiguity lives.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-agent-permissions-sandboxing",
       "conceptId": "agent-permissions-sandboxing",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Agent Permissions & Sandboxing?",
-      "answer": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+      "question": "Why is an agent treated as an untrusted principal even when the user is trusted?",
+      "answer": "Because its instructions come partly from data it reads — a web page, an issue, a tool description — so any content it touches can attempt to steer it. The user's trust does not transfer to the text. Hence scoped short-lived capabilities, no ambient secrets, and approval gates on irreversible effects.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-browser-computer-use-agents",
       "conceptId": "browser-computer-use-agents",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Browser & Computer-use Agents?",
-      "answer": "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
+      "question": "Screenshot-plus-coordinates versus the accessibility tree: what does each get right and wrong?",
+      "answer": "Pixels work on anything, including canvas and native apps, but grounding is brittle to layout shifts, scroll position, and resolution. The accessibility tree gives stable named elements and is cheap to read, but is missing or wrong on custom widgets. Robust agents use the tree first and fall back to vision.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-agent-communication-interfaces",
       "conceptId": "agent-communication-interfaces",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Agent Communication & Interfaces?",
-      "answer": "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
+      "question": "Why do agent-to-agent messages need typed status and provenance rather than prose?",
+      "answer": "A receiver cannot branch on prose: \"mostly done\" has no failure path, and there is no way to tell an observation from an inference. Typed identity, intent, status, result, and error make retries, timeouts, and escalation mechanical — and provenance lets a reviewer check the claim against its source.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-long-running-scheduled-agents",
       "conceptId": "long-running-scheduled-agents",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Long-running & Scheduled Agents?",
-      "answer": "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
+      "question": "What does a lease give a scheduled agent that a cron entry alone does not?",
+      "answer": "Mutual exclusion under failure. Cron fires on every instance and again on the next tick, so a slow or crashed run overlaps itself. A lease with a heartbeat lets exactly one worker hold the job, makes a dead holder's expiry detectable, and gives cancellation and deadlines something to act on.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-coding-agent-benchmarks",
       "conceptId": "coding-agent-benchmarks",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Coding-agent Benchmarks?",
-      "answer": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+      "question": "A model scores well on a public coding benchmark. Name the two threats to that score's validity.",
+      "answer": "Contamination — the repository, the issue text, and often the fix are in the pretraining data, so recall is scored as reasoning. And environment fragility: flaky tests, network-dependent setup, and patches that pass the graded test while breaking behaviour the test does not cover.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-tool-use-evaluations",
       "conceptId": "tool-use-evaluations",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Tool-use Evaluations?",
-      "answer": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+      "question": "Why does grading only the final answer under-measure a tool-using agent?",
+      "answer": "It cannot distinguish a correct answer reached correctly from one reached after ten wasted calls, a destructive side effect, or a lucky guess with a broken tool. The trajectory carries the signal you act on: tool choice, argument validity, recovery from errors, and the verified end state.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-ai-regression-testing",
       "conceptId": "ai-regression-testing",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing AI Regression Testing?",
-      "answer": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+      "question": "How do you set a release gate on a stochastic system without either blocking every release or catching nothing?",
+      "answer": "Run each frozen case n times and gate on a confidence interval around the aggregate, not a single run's exact output. Version the grader alongside the cases so a rubric change is a visible diff, and set the threshold from the observed run-to-run variance rather than picking a round number.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-hallucination-failure-detection",
       "conceptId": "hallucination-failure-detection",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Hallucination & Failure Detection?",
-      "answer": "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
+      "question": "Name two mechanically different ways to detect a probable hallucination, and what each one misses.",
+      "answer": "Consistency sampling: generate several times and measure disagreement — cheap, but a confidently wrong model agrees with itself. Grounding checks: require each claim to map to a retrieved span — strong for factual claims, but useless where no evidence was retrievable and blind to reasoning errors.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-agent-observability",
       "conceptId": "agent-observability",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Agent Observability?",
-      "answer": "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
+      "question": "What identifier makes agent traces useful, and what breaks without it?",
+      "answer": "A run id propagated to every step, model call, and tool invocation, with each step carrying its parent. Without it you have a pile of independent LLM calls and no way to reconstruct why the agent did something, attribute cost to an outcome, or find the step where a run went wrong.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-tracing-replay",
       "conceptId": "tracing-replay",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Tracing & Replay?",
-      "answer": "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
+      "question": "What must be captured for an agent run to be replayable, and which dependency is usually missed?",
+      "answer": "Prompt version, model version and sampling parameters, the full context sent, every tool result, and each state transition. The usually-missed one is tool output: replaying against a live API returns different data, so the run diverges and you are debugging a new run, not the one that failed.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-evidence-backed-verification",
       "conceptId": "evidence-backed-verification",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Evidence-backed Verification?",
-      "answer": "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
+      "question": "What separates evidence from an assertion when an agent reports \"the tests pass\"?",
+      "answer": "Evidence is independently checkable without trusting the agent: the command run, its exit code, the captured output, the diff applied. \"Tests pass\" is a claim the model generated, which it can produce whether or not it ran anything. Each acceptance criterion needs an artifact a reviewer can re-inspect.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-human-review-systems",
       "conceptId": "human-review-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Human Review Systems?",
-      "answer": "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
+      "question": "Review capacity is finite. What decides which cases reach a human, and what do you measure about the reviewers themselves?",
+      "answer": "Route by expected cost of being wrong — model uncertainty times blast radius — not by a flat sample rate. Measure inter-reviewer agreement: if two reviewers disagree on the same case, the rubric is ambiguous and their labels cannot be trusted as ground truth for evals.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-quality-cost-latency-measurement",
       "conceptId": "quality-cost-latency-measurement",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Quality, Cost & Latency Measurement?",
-      "answer": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+      "question": "Why is \"config A is better than config B\" usually an unanswerable question?",
+      "answer": "Because it is multi-objective. A can win on quality while losing on p95 latency and cost per request, and the ranking flips with traffic mix. The honest output is a Pareto frontier measured on one representative workload, plus an explicit statement of the budget that picks a point on it.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-code-review-systems",
       "conceptId": "code-review-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Code Review Systems?",
-      "answer": "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
+      "question": "What makes a review comment actionable rather than noise?",
+      "answer": "It names the behaviour that changes, the condition that triggers it, and a concrete remediation — not a preference. Style belongs to the formatter and the linter; spending reviewer attention there crowds out the correctness and blast-radius questions only a human reading the intent can raise.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-static-dynamic-analysis",
       "conceptId": "static-dynamic-analysis",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Static & Dynamic Analysis?",
-      "answer": "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
+      "question": "Static analysis has false positives and dynamic analysis has false negatives. Explain why each is structural, not a tool defect.",
+      "answer": "Static analysis over-approximates the set of possible executions, so it flags paths that can never actually run. Dynamic analysis observes only the executions you triggered, so any bug on an unexercised path is invisible. Neither is fixable by a better tool — it follows from what each one reasons about.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-testing-infrastructure",
       "conceptId": "testing-infrastructure",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Testing Infrastructure?",
-      "answer": "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
+      "question": "Why is a flaky test worse than a failing one?",
+      "answer": "A failing test carries information and blocks the bad change. A flaky one trains everyone to re-run until green, which is the same as deleting every test in the suite from a signal standpoint. That is why flakes get quarantined and fixed as defects rather than retried.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-codebase-graphs",
       "conceptId": "codebase-graphs",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Codebase Graphs?",
-      "answer": "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
+      "question": "Why is stable symbol identity the hard part of a codebase graph, rather than parsing?",
+      "answer": "Edges are only useful if the same symbol keeps the same identity across commits, files, and languages — otherwise a rename looks like a delete plus an add and every historical edge breaks. Parsing gives you a syntax tree; resolving that tree to durable, cross-repository identifiers is the work.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-dependency-blast-radius",
       "conceptId": "dependency-blast-radius",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Dependency & Blast-radius Analysis?",
-      "answer": "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
+      "question": "Why is the static dependency graph an upper bound on blast radius, and what narrows it?",
+      "answer": "It lists everything that could be affected, including dead code and paths never executed in production. Runtime evidence — traces, coverage, actual callers — narrows it to what is really reachable, and public-contract boundaries tell you where a change is observable versus internal.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-ide-cli-tooling",
       "conceptId": "ide-cli-tooling",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing IDE & CLI Tooling?",
-      "answer": "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
+      "question": "What does the language-server architecture decouple, and what problem does that solve?",
+      "answer": "Language intelligence from the editor. Before it, n languages times m editors meant n*m integrations; a shared JSON-RPC protocol makes it n+m. The cost is that everything crosses a process boundary, so incremental sync and cancellation matter more than raw analysis speed.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-coding-agent-systems",
       "conceptId": "coding-agent-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Coding Agent Systems?",
-      "answer": "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
+      "question": "What makes an edit reversible in a coding agent, and why does that matter more than edit quality?",
+      "answer": "Working in a branch or worktree with every change expressed as a diff, so any step can be inspected and dropped. It matters more because a wrong-but-reverted edit costs a retry, while an unreviewable pile of in-place mutations costs the human the whole diff — the handoff, not the model, is the bottleneck.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-repository-intelligence",
       "conceptId": "repository-intelligence",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Repository Intelligence?",
-      "answer": "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
+      "question": "Why is embedding-based semantic search insufficient on its own for repository questions?",
+      "answer": "Embeddings find text that reads similarly; most repository questions are structural — who calls this, what breaks if I change it, why was this written. Those need the symbol graph and the history. The two are complementary: retrieval finds candidates, the graph proves the relationship.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-software-supply-chain-health",
       "conceptId": "software-supply-chain-health",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Software Supply-chain Health?",
-      "answer": "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
+      "question": "An SBOM and a provenance attestation answer different questions. What are they?",
+      "answer": "The SBOM answers what is inside the artifact — the dependency inventory you scan for vulnerabilities. Provenance answers how the artifact was produced: which source commit, which builder, which inputs. You need both, because a correct ingredient list says nothing about who did the cooking.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-automated-debugging-remediation",
       "conceptId": "automated-debugging-remediation",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Automated Debugging & Remediation?",
-      "answer": "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
+      "question": "Why must reproduction come before hypothesis generation in an automated repair loop?",
+      "answer": "Without a failing case you cannot tell a fix from a coincidence — the loop has no oracle and will happily produce patches that satisfy the model's story. A deterministic reproducer also lets delta debugging shrink the input, which narrows the causal surface far faster than reasoning about the whole program.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-web-mobile-engineering",
       "conceptId": "web-mobile-engineering",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Web & Mobile Engineering?",
-      "answer": "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
+      "question": "Why does backgrounding matter more on mobile than on web, and what does it force into the architecture?",
+      "answer": "The OS can suspend or kill a backgrounded app at any moment with no warning and no unload hook. So in-memory state is not durable, timers stop, and sockets die. Anything the user would notice losing must be persisted at each step, and reconnect-and-resync has to be a normal path, not an error path.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-ux-interface-design",
       "conceptId": "ux-interface-design",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing UX & Interface Design?",
-      "answer": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
+      "question": "Which interaction states are routinely missing from a design, and why do they cause the most support load?",
+      "answer": "Empty, loading, partial, error, and offline. Designs get built around the populated happy path, so those states are invented by whoever implements them — inconsistently. They are also the states a user is in exactly when they are already stuck, which is when an unclear screen becomes a support ticket.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-real-time-application-engineering",
       "conceptId": "real-time-application-engineering",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Real-time Application Engineering?",
-      "answer": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
+      "question": "Optimistic UI applies the change locally before the server confirms. What has to be designed for that not to corrupt state?",
+      "answer": "A rollback path and an ordering rule. Each local mutation is held pending with an id; the server response either confirms or reverses it, and concurrent remote updates must be reconciled against the pending set rather than blindly overwriting. Without that, a rejected write leaves the UI showing something that never happened.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-interactive-2d-3d-systems",
       "conceptId": "interactive-2d-3d-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing 2D/3D Interactive Systems?",
-      "answer": "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
+      "question": "Why is simulation usually stepped at a fixed timestep while rendering runs as fast as it can?",
+      "answer": "Physics integrated with a variable dt is not reproducible and blows up at frame spikes; a fixed step makes it deterministic. Rendering then interpolates between the last two simulation states to match the display's refresh, which is why the loop accumulates time and runs zero or more fixed steps per frame.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-multimodal-models",
       "conceptId": "multimodal-models",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Multimodal Models?",
-      "answer": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
+      "question": "What does a projector do in a vision-language model, and why is aligned data the bottleneck?",
+      "answer": "It maps the vision encoder's output into the language model's token embedding space so images arrive as pseudo-tokens. The bottleneck is paired data: the alignment is learned from image-text pairs, and their coverage and caption quality decide what the model can actually refer to, not the encoder's strength.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-vision-models",
       "conceptId": "vision-models",
-      "type": "design",
+      "type": "compare",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Vision Models?",
-      "answer": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
+      "question": "Why do CNNs still often beat vision transformers on small datasets?",
+      "answer": "Convolutions build in locality and translation equivariance, so the model starts with a correct prior about images. A ViT has to learn that from data, which is why it needs large-scale pretraining or heavy augmentation to catch up — and why it overtakes the CNN once that data exists.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-pose-motion-tracking",
       "conceptId": "pose-motion-tracking",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Pose & Motion Tracking?",
-      "answer": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
+      "question": "Per-frame landmark detection is accurate but the skeleton jitters. What is happening and what is the tradeoff in fixing it?",
+      "answer": "Independent per-frame estimates carry independent noise, so the output jitters even when each frame is close. Temporal filtering or a motion prior smooths it — at the cost of lag: the more smoothing, the later the tracker follows a genuine fast movement. That is the latency-versus-stability knob.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-voice-audio-systems",
       "conceptId": "voice-audio-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Voice & Audio Systems?",
-      "answer": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
+      "question": "What is endpointing, and why does it dominate perceived latency in a voice agent?",
+      "answer": "Deciding the user has finished speaking. Every stage after it is measurable, but the endpointer's silence threshold is dead time added to every turn — set it short and you interrupt people mid-sentence, long and the agent feels slow. It is the one latency component you cannot optimise away with faster models.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-image-video-generation",
       "conceptId": "image-video-generation",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Image & Video Generation?",
-      "answer": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
+      "question": "Why is temporal consistency harder in video generation than image quality?",
+      "answer": "Each frame is individually plausible while the sequence is not — identity, lighting, and geometry drift because nothing ties frame t to frame t-1. Fixing it means conditioning across frames (3D attention, latent propagation), which raises cost superlinearly with length, and human eyes detect flicker far below the threshold for spatial artefacts.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-robotics-systems",
       "conceptId": "robotics-systems",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Robotics Systems?",
-      "answer": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
+      "question": "What is the sim-to-real gap, and what is the standard way of closing it?",
+      "answer": "A policy trained in simulation fails on hardware because contact dynamics, friction, sensor noise, and latency are all approximated. Domain randomisation is the standard answer: randomise those parameters during training so the policy must be robust across them rather than fitted to one wrong physics model.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-spatial-interfaces",
       "conceptId": "spatial-interfaces",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Spatial Interfaces?",
-      "answer": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
+      "question": "An anchor drifts, so placed content slowly slides off the real surface. What causes it and what does the UI owe the user?",
+      "answer": "Tracking accumulates error, and relocalisation corrects it in a jump when a known feature is re-observed. The interface owes visible tracking confidence, content that re-anchors to a recognised plane instead of a raw pose, and a recovery path when the anchor is lost rather than silently misplaced content.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "rq-human-computer-interaction",
       "conceptId": "human-computer-interaction",
-      "type": "design",
+      "type": "explain",
       "difficulty": "core",
-      "question": "What mechanism and trade-off should an engineer explain when designing Human-Computer Interaction?",
-      "answer": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
+      "question": "What does Fitts's law predict, and what design rule follows from it?",
+      "answer": "Time to hit a target grows with distance and shrinks with target size, logarithmically. So make frequent targets large and close to where the cursor or thumb already is — and note that screen edges are effectively infinite in size, which is why edge and corner placement is disproportionately fast.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
     }

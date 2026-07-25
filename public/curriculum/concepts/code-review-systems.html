@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Code Review Systems</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Google Engineering Practices — Code Review to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Google Engineering Practices — Code Review, Modern Code Review: A Case Study at Google (ICSE-SEIP 2018), Software Engineering at Google — Ch. 9: Code Review to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Code Review Systems with Static &amp; Dynamic Analysis. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Code Review Systems and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://google.github.io/eng-practices/review/" rel="noreferrer">Google Engineering Practices — Code Review</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://google.github.io/eng-practices/review/" rel="noreferrer">Google Engineering Practices — Code Review</a> <span class="muted">(doc)</span></li><li><a href="https://research.google/pubs/modern-code-review-a-case-study-at-google/" rel="noreferrer">Modern Code Review: A Case Study at Google (ICSE-SEIP 2018)</a> <span class="muted">(paper)</span></li><li><a href="https://abseil.io/resources/swe-book/html/ch09.html" rel="noreferrer">Software Engineering at Google — Ch. 9: Code Review</a> <span class="muted">(doc)</span></li><li><a href="https://abseil.io/resources/swe-book/html/ch19.html" rel="noreferrer">Software Engineering at Google — Ch. 19: Critique, Google&#39;s Code Review Tool</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with changeIntent, riskFinding, actionableEvidence plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-code-review-systems">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Code Review Systems?</li></ul>
+      <h3>Review prompts</h3><ul><li>What makes a review comment actionable rather than noise?</li></ul>
     </section>
 
     <section>

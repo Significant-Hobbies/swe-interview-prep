@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ROADMAPS } from '../data/learning-os';
+import { ROADMAPS, sortedTracks } from '../data/learning-os';
 import { useProfile } from '../hooks/useProfile';
 import { DEFAULT_ONBOARDING_PATH_ID, ONBOARDING_PATH_GROUPS } from '../lib/onboardingPaths';
 import {
@@ -10,11 +10,11 @@ import {
   minutesLabel,
   type ModalityWeights,
 } from '../lib/profile';
-import { saveActiveRoadmapId } from '../lib/recommend';
 import { STORE_KEYS, saveLocal } from '../lib/userStore';
 
 const MINUTES = [15, 30, 45, 90] as const;
 const EXPERIENCE: ExperienceLevel[] = ['student', 'mid', 'senior'];
+const TRACKS = sortedTracks();
 
 const MODALITY_LABELS: { key: keyof ModalityWeights; label: string; hint: string }[] = [
   { key: 'review', label: 'Reviews', hint: 'Spaced recall' },
@@ -31,6 +31,9 @@ export default function Onboarding() {
   const [minutes, setMinutes] = useState<15 | 30 | 45 | 90>(45);
   const [experience, setExperience] = useState<ExperienceLevel>('mid');
   const [horizon, setHorizon] = useState<string>('');
+  // Empty = every track. Nothing is preselected so skipping the step keeps the
+  // full catalogue rather than silently narrowing it.
+  const [trackIds, setTrackIds] = useState<string[]>([]);
   const [modalities, setModalities] = useState<ModalityWeights>({
     review: 22,
     drill: 42,
@@ -42,16 +45,20 @@ export default function Onboarding() {
     setModalities((prev) => ({ ...prev, [key]: val }));
   }
 
+  function toggleTrack(id: string) {
+    setTrackIds((prev) => (prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]));
+  }
+
   async function finish() {
     const exists = ROADMAPS.some((r) => r.id === picked);
     const roadmapId = exists ? picked : DEFAULT_ONBOARDING_PATH_ID;
-    saveActiveRoadmapId(roadmapId);
     const horizonDays = horizon ? parseInt(horizon, 10) : null;
     await saveProfile({
       minutesPerDay: minutes,
       experience,
       interviewHorizonDays: Number.isFinite(horizonDays) ? horizonDays : null,
       roadmapWeights: { [roadmapId]: 1 },
+      trackIds,
       modalityWeights: {
         review: modalities.review / 100,
         drill: modalities.drill / 100,
@@ -192,6 +199,30 @@ export default function Onboarding() {
                   }`}
                 >
                   {experienceLabel(e)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <div className="text-xs font-medium text-white/40">
+              Tracks you care about{' '}
+              <span className="text-white/25">(optional — none selected means all)</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {TRACKS.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  aria-pressed={trackIds.includes(t.id)}
+                  onClick={() => toggleTrack(t.id)}
+                  className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+                    trackIds.includes(t.id)
+                      ? 'border-white/30 bg-white/[0.06] text-white'
+                      : 'border-white/[0.08] text-white/60 hover:border-white/15'
+                  }`}
+                >
+                  {t.title}
                 </button>
               ))}
             </div>

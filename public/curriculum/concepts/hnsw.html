@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.</p>
+      <p>HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers, so it touches a small neighbourhood instead of the whole set. Malkov &amp; Yashunin report polylogarithmic search cost empirically — it is a measured scaling, not a proven bound.</p>
     </section>
 
     <section>

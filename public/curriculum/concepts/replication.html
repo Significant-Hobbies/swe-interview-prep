@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Replication</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Designing Data-Intensive Applications to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Designing Data-Intensive Applications, In Search of an Understandable Consensus Algorithm (Raft, extended), Chain Replication for Supporting High Throughput and Availability (OSDI 04) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Replication with CAP &amp; Consistency Models, Consensus. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Read-your-writes under lag and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
+
 
     <section><h2>Common mistakes</h2><ul><li>Reading from a follower and seeing stale data (&quot;read your own writes&quot; violation)</li><li>Assuming failover is instant and lossless</li><li>Ignoring replication lag in capacity and correctness planning</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://dataintensive.net/" rel="noreferrer">Designing Data-Intensive Applications</a> <span class="muted">(course)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://dataintensive.net/" rel="noreferrer">Designing Data-Intensive Applications</a> <span class="muted">(course)</span></li><li><a href="https://raft.github.io/raft.pdf" rel="noreferrer">In Search of an Understandable Consensus Algorithm (Raft, extended)</a> <span class="muted">(paper)</span></li><li><a href="https://www.usenix.org/conference/osdi-04/chain-replication-supporting-high-throughput-and-availability" rel="noreferrer">Chain Replication for Supporting High Throughput and Availability (OSDI 04)</a> <span class="muted">(paper)</span></li><li><a href="https://www.postgresql.org/docs/current/high-availability.html" rel="noreferrer">PostgreSQL — High Availability, Load Balancing, and Replication</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Read-after-write from primary; session stickiness; sync quorum for critical reads.</p>
           <a href="/drills/replication-lag-read">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Replication and name one common mistake: &quot;Reading from a follower and seeing stale data (&quot;read your own writes&quot; violation)…&quot;</li></ul>
+      <h3>Review prompts</h3><ul><li>A user updates their profile and the next page shows the old value. Name the guarantee that is missing and two ways to provide it.</li></ul>
     </section>
 
     <section>
@@ -108,7 +108,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li></ul>
     </section>
   </article>
     </main>

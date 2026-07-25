@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Testing Infrastructure</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Bazel Test Encyclopedia to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Bazel Test Encyclopedia, John Hughes — Testing the Hard Stuff and Staying Sane, Flaky Tests at Google and How We Mitigate Them to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Testing Infrastructure with Static &amp; Dynamic Analysis, Codebase Graphs. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Testing Infrastructure and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://bazel.build/reference/test-encyclopedia" rel="noreferrer">Bazel Test Encyclopedia</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://bazel.build/reference/test-encyclopedia" rel="noreferrer">Bazel Test Encyclopedia</a> <span class="muted">(doc)</span></li><li><a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q" rel="noreferrer">John Hughes — Testing the Hard Stuff and Staying Sane</a> <span class="muted">(video)</span></li><li><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html" rel="noreferrer">Flaky Tests at Google and How We Mitigate Them</a> <span class="muted">(article)</span></li><li><a href="https://llvm.org/docs/LibFuzzer.html" rel="noreferrer">libFuzzer — coverage-guided fuzz testing (LLVM)</a> <span class="muted">(doc)</span></li><li><a href="https://abseil.io/resources/swe-book/html/ch14.html" rel="noreferrer">Software Engineering at Google — Ch. 14: Larger Testing</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with testBoundary, hermeticEnvironment, failureDiagnostics plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-testing-infrastructure">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Testing Infrastructure?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is a flaky test worse than a failing one?</li></ul>
     </section>
 
     <section>

@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Agent Memory &amp; Context Management</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Anthropic — Building Effective Agents to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Anthropic — Building Effective Agents, MemGPT: Towards LLMs as Operating Systems, Generative Agents: Interactive Simulacra of Human Behavior to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Agent Memory &amp; Context Management with Agent Loops, MCP &amp; Integrations. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Agent Memory &amp; Context Management and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://www.anthropic.com/engineering/building-effective-agents" rel="noreferrer">Anthropic — Building Effective Agents</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://www.anthropic.com/engineering/building-effective-agents" rel="noreferrer">Anthropic — Building Effective Agents</a> <span class="muted">(doc)</span></li><li><a href="https://arxiv.org/abs/2310.08560" rel="noreferrer">MemGPT: Towards LLMs as Operating Systems</a> <span class="muted">(paper)</span></li><li><a href="https://arxiv.org/abs/2304.03442" rel="noreferrer">Generative Agents: Interactive Simulacra of Human Behavior</a> <span class="muted">(paper)</span></li><li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" rel="noreferrer">Effective context engineering for AI agents (Anthropic)</a> <span class="muted">(article)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with memoryLayers, retrievalPolicy, provenance plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-agent-memory-context">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Agent Memory &amp; Context Management?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is summarising old turns into the prompt not the same as giving an agent memory?</li></ul>
     </section>
 
     <section>

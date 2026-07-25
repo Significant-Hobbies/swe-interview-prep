@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Real-time Systems</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, RFC 6455 — The WebSocket Protocol, MDN — The WebSocket API to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Real-time Systems with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Realtime chat system and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://www.rfc-editor.org/rfc/rfc6455" rel="noreferrer">RFC 6455 — The WebSocket Protocol</a> <span class="muted">(paper)</span></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" rel="noreferrer">MDN — The WebSocket API</a> <span class="muted">(doc)</span></li><li><a href="https://elixir-lang.org/blog/2020/10/08/real-time-communication-at-scale-with-elixir-at-discord/" rel="noreferrer">Real-time communication at scale with Elixir at Discord</a> <span class="muted">(article)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Connection layer + message storage + the fan-out strategy for a 10k-member channel.</p>
           <a href="/drills/design-chat-system">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Real-time Systems in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why do WebSockets constrain your load balancer in ways HTTP requests do not?</li></ul>
     </section>
 
     <section>

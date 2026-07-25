@@ -1,6 +1,6 @@
 import { ArrowLeft, BookOpen, Dumbbell, ExternalLink, Menu, Search, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 import type { Section } from '../adapters/types';
 import ExerciseRunner from '../components/ExerciseRunner';
@@ -20,6 +20,16 @@ function firstReadableSection(sections: Section[]): Section | null {
   return null;
 }
 
+/** Depth-first lookup so a `?section=` deep link can reach a nested heading. */
+function findSection(sections: Section[], sectionId: string): Section | null {
+  for (const section of sections) {
+    if (section.id === sectionId) return section;
+    const child = section.children ? findSection(section.children, sectionId) : null;
+    if (child) return child;
+  }
+  return null;
+}
+
 function filterSections(sections: Section[], query: string): Section[] {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return sections;
@@ -34,6 +44,8 @@ function filterSections(sections: Section[], query: string): Section[] {
 
 export default function RepoView() {
   const { repoSlug = '' } = useParams();
+  const [searchParams] = useSearchParams();
+  const deepLinkedSectionId = searchParams.get('section');
   const { getRepo } = useLibrary();
   const repo = getRepo(repoSlug);
   const { content, loading, error } = useRepoContent(repoSlug);
@@ -52,8 +64,14 @@ export default function RepoView() {
   }, [repoSlug]);
 
   useEffect(() => {
-    if (!loading && !active) setActive(firstReadableSection(content.sections));
-  }, [active, content.sections, loading]);
+    if (loading || active) return;
+    // `?section=` lets the concept page (and Ambient Library) link straight at
+    // a heading instead of dumping the reader on the repo's first page.
+    const deepLinked = deepLinkedSectionId
+      ? findSection(content.sections, deepLinkedSectionId)
+      : null;
+    setActive(deepLinked ?? firstReadableSection(content.sections));
+  }, [active, content.sections, loading, deepLinkedSectionId]);
 
   if (!repo) {
     return (

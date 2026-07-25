@@ -53,12 +53,12 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Discovery search is for &quot;I do not know what I want yet&quot; — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way.</p>
+      <p>A search system is a pipeline, not a scoring function: analyze -&gt; inverted index -&gt; cheap candidate retrieval -&gt; expensive reranking -&gt; serve. The first stage decides what the good ranker is ever allowed to see, so recall lost there cannot be recovered later. Autocomplete is a separate prefix index with its own latency budget, not a query against the main index.</p>
     </section>
 
     <section>
       <h2>How to study Search Systems</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, Stanford IR Book — A first take at building an inverted index, Stanford IR Book — Wildcard queries (permuterm / k-gram indexes) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Search Systems with BM25, Hybrid Search. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Browse vs search metrics and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html" rel="noreferrer">Stanford IR Book — A first take at building an inverted index</a> <span class="muted">(doc)</span></li><li><a href="https://nlp.stanford.edu/IR-book/html/htmledition/wildcard-queries-1.html" rel="noreferrer">Stanford IR Book — Wildcard queries (permuterm / k-gram indexes)</a> <span class="muted">(doc)</span></li><li><a href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/search-as-you-type" rel="noreferrer">Elasticsearch — search_as_you_type field</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Browse: dwell/engagement; search: nDCG/precision@k.</p>
           <a href="/drills/browse-vs-search-metrics">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Search Systems in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why can recall lost in candidate generation never be recovered by a better ranker?</li></ul>
     </section>
 
     <section>

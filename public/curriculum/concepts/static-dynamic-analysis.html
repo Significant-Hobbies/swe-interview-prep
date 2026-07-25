@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Static &amp; Dynamic Analysis</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use CodeQL Documentation to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use CodeQL Documentation, Lessons from Building Static Analysis Tools at Google (CACM 2018), Easy Abstract Interpretation with SPARTA (Strange Loop 2019) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Static &amp; Dynamic Analysis with Code Review Systems, Testing Infrastructure. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Static &amp; Dynamic Analysis and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://codeql.github.com/docs/" rel="noreferrer">CodeQL Documentation</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://codeql.github.com/docs/" rel="noreferrer">CodeQL Documentation</a> <span class="muted">(doc)</span></li><li><a href="https://research.google/pubs/lessons-from-building-static-analysis-tools-at-google/" rel="noreferrer">Lessons from Building Static Analysis Tools at Google (CACM 2018)</a> <span class="muted">(paper)</span></li><li><a href="https://www.youtube.com/watch?v=_fA7vkVJhF8" rel="noreferrer">Easy Abstract Interpretation with SPARTA (Strange Loop 2019)</a> <span class="muted">(video)</span></li><li><a href="https://abseil.io/resources/swe-book/html/ch20.html" rel="noreferrer">Software Engineering at Google — Ch. 20: Static Analysis</a> <span class="muted">(doc)</span></li><li><a href="https://clang.llvm.org/docs/AddressSanitizer.html" rel="noreferrer">AddressSanitizer (Clang docs) — dynamic analysis</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with programModel, analysisRule, runtimeEvidence plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-static-dynamic-analysis">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Static &amp; Dynamic Analysis?</li></ul>
+      <h3>Review prompts</h3><ul><li>Static analysis has false positives and dynamic analysis has false negatives. Explain why each is structural, not a tool defect.</li></ul>
     </section>
 
     <section>

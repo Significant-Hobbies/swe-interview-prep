@@ -86,7 +86,16 @@ async function streamRemote(
     }),
     signal,
   });
-  if (!res.ok) throw new Error(`AI: ${res.status}`);
+  if (!res.ok) {
+    // The route answers 503 + a JSON `error` when no BYOK config and no
+    // deployment credentials exist. Show that instead of a bare status code.
+    const detail = await res
+      .clone()
+      .json()
+      .then((body) => body?.error)
+      .catch(() => null);
+    throw new Error(detail || `AI request failed (${res.status})`);
+  }
   await pumpSSE(res, onChunk);
 }
 

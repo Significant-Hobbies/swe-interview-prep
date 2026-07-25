@@ -46,8 +46,16 @@ import {
   useDrillStore,
   useUserElo,
 } from '../hooks/useUserStore';
-import { isMetadataDrill } from '../lib/contentQuality';
+import {
+  DRILL_VERIFICATION_HINT,
+  DRILL_VERIFICATION_LABEL,
+  type DrillVerification,
+  drillVerification,
+  isMetadataDrill,
+} from '../lib/contentQuality';
+import { GO_RUNTIME_AVAILABLE } from '../lib/capabilities';
 import { runDrillTests } from '../lib/drillRunner';
+import type { MasteryRating } from '../lib/fsrs';
 import { difficultyToElo } from '../lib/elo';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 import {
@@ -83,16 +91,28 @@ const COLUMNS: { status: ArtifactStatus; label: string; tone: string }[] = [
   { status: 'shipped', label: 'Shipped', tone: 'emerald' },
 ];
 
+export function shouldCreditArtifact(
+  successCriteriaCount: number,
+  prev: ArtifactEntry,
+  next: ArtifactEntry
+): boolean {
+  const isEvidenced = (entry: ArtifactEntry) =>
+    entry.criteria.length >= successCriteriaCount && entry.url.trim().length > 0;
+  return next.status === 'shipped' && isEvidenced(next) && !isEvidenced(prev);
+}
+
 function ArtifactBoard() {
   const { getArtifact, setArtifact } = useArtifactStore();
   const { review } = useConceptMastery();
   const [openId, setOpenId] = useState<string | null>(null);
 
-  // Shipping an artifact closes the loop: it nudges every linked concept's
-  // mastery upward, since a completed artifact is proof of learning.
+  // Shipping an artifact nudges every linked concept's mastery upward — but
+  // only when there is something to point at. Dragging a card into "Shipped"
+  // is not evidence, so the FSRS write is gated on every success criterion
+  // being checked off AND an artifact link being present.
   function handleChange(artifact: Artifact, prev: ArtifactEntry, next: ArtifactEntry) {
     setArtifact(artifact.id, next);
-    if (next.status === 'shipped' && prev.status !== 'shipped') {
+    if (shouldCreditArtifact(artifact.successCriteria.length, prev, next)) {
       for (const cid of artifact.concepts) void review(cid, 'good');
     }
   }
@@ -271,7 +291,22 @@ const STARTER: Record<Language, string> = {
   go: 'package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("hello")\n}\n',
 };
 
-const LANGUAGES: Language[] = ['typescript', 'go'];
+const LANGUAGES: Language[] = GO_RUNTIME_AVAILABLE ? ['typescript', 'go'] : ['typescript'];
+
+/**
+ * FSRS rating for a solve, derived from the objective outcome rather than
+ * hardcoded to 'good'. An unverified claim is worth strictly less than a
+ * passing test, and needing several attempts is worth less than a first pass.
+ */
+export function ratingForSolve(
+  verification: DrillVerification,
+  attemptsBefore: number
+): MasteryRating {
+  if (verification === 'self-reported') return 'hard';
+  if (verification === 'outline-check') return attemptsBefore >= 3 ? 'hard' : 'good';
+  if (attemptsBefore === 0) return 'easy';
+  return attemptsBefore <= 2 ? 'good' : 'hard';
+}
 
 function DrillWorkspace({ drillId }: { drillId: string }) {
   const drill = DRILL_BY_ID[drillId];
@@ -306,6 +341,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
 
   const concept = CONCEPT_BY_ID[drill.conceptId];
   const external = isMetadataDrill(drill);
+  const verification = drillVerification(drill);
 
   function run() {
     if (drill.testCases?.length && (language === 'typescript' || language === 'javascript')) {
@@ -336,7 +372,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     // then asks for a 30-second explain-back (Feynman Gate) to prove it.
     if (status === 'solved') {
       setShowExplainNudge(true);
-      void review(drill?.conceptId, 'good');
+      void review(drill?.conceptId, ratingForSolve(verification, entry.attempts));
       void logActivity({
         kind: 'drill_solve',
         conceptIds: [drill?.conceptId],
@@ -371,6 +407,8 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     if (!concept) return;
     setDrill(drillId, { status: 'attempted', lastCode: code, attempts: entry.attempts + 1 });
     recordResult(concept.roadmaps, difficultyToElo(drill?.difficulty), 0);
+    // An explicit "couldn't solve" is the clearest objective signal there is.
+    void review(drill?.conceptId, 'again');
     void logActivity({
       kind: 'drill_fail',
       conceptIds: [drill?.conceptId],
@@ -415,6 +453,9 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           >
             {entry.status}
             {entry.attempts > 0 ? ` · ${entry.attempts} attempts` : ''}
+          </Badge>
+          <Badge tone={verification === 'automated' ? 'sky' : 'amber'}>
+            {DRILL_VERIFICATION_LABEL[verification]}
           </Badge>
         </div>
         <h1 className="text-2xl font-bold text-white">{drill.title}</h1>
@@ -497,6 +538,9 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
                 This drill links to LeetCode — solve there first, then mark solved here to update
                 mastery.
               </p>
+              <p className="mt-2 text-xs text-amber-200/80">
+                {DRILL_VERIFICATION_HINT['self-reported']}
+              </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {drill.externalUrl && (
                   <a href={drill.externalUrl} target="_blank" rel="noreferrer">
@@ -540,6 +584,15 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
                     onRun={run}
                   />
                 </div>
+              </Card>
+
+              <Card className="p-3">
+                <div className="text-[11px] font-medium text-slate-500">
+                  How this is graded · {DRILL_VERIFICATION_LABEL[verification]}
+                </div>
+                <p className="mt-1 text-xs text-slate-400">
+                  {DRILL_VERIFICATION_HINT[verification]}
+                </p>
               </Card>
 
               <Card className="p-3">

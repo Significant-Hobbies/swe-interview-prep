@@ -10,7 +10,6 @@ const BLOCKED = [
   /hookdeck\.com/i,
   /amplitude\.com/i,
   /ahrefs\.com/i,
-  /cp-algorithms\.com/i,
   /json-schema\.org/i,
   /ann-benchmarks\.com/i,
   /blogspot\.com/i,
@@ -32,7 +31,6 @@ const BLOCKED = [
   /stripe\.com\/docs/i,
   /cloud\.google\.com\/apis\/design/i,
   /pytorch\.org\/tutorials/i,
-  /github\.com\/google\/leveldb\/blob/i,
   /github\.com\/facebookresearch\/faiss\/wiki/i,
   /aprildunford\.com/i,
   /oreilly\.com\/library\/view\/head-first/i,
@@ -62,14 +60,93 @@ const S_TIER_CANON_PAPER_EXT =
   /\.pdf(\?|#|$)|d4mucfpksywv\.cloudfront\.net|wisdom\.weizmann\.ac\.il|akamai\.com\/.*\.pdf|raft\.github\.io/i;
 
 const S_TIER_YOUTUBE =
-  /(3blue1brown|stanfordonline|MITOpenCourseWare|AndrejKarpathy|Karpathy|statquest|harvard|LexFridman|Stanford|CS224N|MartyCagan|svpg)/i;
+  /(3blue1brown|stanfordonline|MITOpenCourseWare|AndrejKarpathy|Karpathy|statquest|harvard|LexFridman|Stanford|CS224N|MartyCagan|svpg|Strange Loop|John Hughes|USENIX)/i;
 
 const S_TIER_PINECONE = /pinecone\.io\/learn\/hnsw/i;
+
+// First-party specifications, project documentation, and established
+// engineering/research publications. These hosts are deliberately explicit:
+// the pack generator is a curation gate, not a general web reputation score.
+const S_TIER_PRIMARY_HOSTS = new Set([
+  'abseil.io',
+  'blog.burntsushi.net',
+  'chance.dartmouth.edu',
+  'citeseerx.ist.psu.edu',
+  'clang.llvm.org',
+  'clig.dev',
+  'developer.apple.com',
+  'developer.hashicorp.com',
+  'developer.mozilla.org',
+  'developers.google.com',
+  'dblp.org',
+  'debuggingbook.org',
+  'docs.sigstore.dev',
+  'dora.dev',
+  'elastic.co',
+  'elixir-lang.org',
+  'envoyproxy.io',
+  'gafferongames.com',
+  'gameprogrammingpatterns.com',
+  'glean.software',
+  'h3geo.org',
+  'hamel.dev',
+  'hbr.org',
+  'hbs.edu',
+  'how.complexsystems.fail',
+  'kubernetes.io',
+  'learnopengl.com',
+  'llvm.org',
+  'lmsys.org',
+  'lucene.apache.org',
+  'martin.kleppmann.com',
+  'martinfowler.com',
+  'microsoft.github.io',
+  'nature.com',
+  'netflixtechblog.com',
+  'notion.com',
+  'openconnect.netflix.com',
+  'openintro-ims.netlify.app',
+  'pair.withgoogle.com',
+  'postgresql.org',
+  'producttalk.org',
+  'program-repair.org',
+  'redis.io',
+  'research.google',
+  'research.swtch.com',
+  'ruder.io',
+  's2geometry.io',
+  'setosa.io',
+  'shopify.engineering',
+  'simon.peytonjones.org',
+  'sourcegraph.com',
+  'sqlite.org',
+  'statecharts.dev',
+  'stately.ai',
+  'svn.apache.org',
+  'swtch.com',
+  'testing.googleblog.com',
+  'tree-sitter.github.io',
+  'usaco.guide',
+  'vitess.io',
+  'webgpufundamentals.org',
+  'anthropic.com',
+  'cp-algorithms.com',
+]);
+
+const S_TIER_PRIMARY_PATH =
+  /github\.com\/(?:EleutherAI\/lm-evaluation-harness|google\/leveldb\/blob\/main\/doc\/impl\.md)|github\.blog\/(?:engineering|open-source)\//i;
 
 export function isSTierSource(title, url, slot) {
   const hay = `${title} ${url}`;
   if (BLOCKED.some((re) => re.test(url) || re.test(title))) return false;
   if (S_TIER_PINECONE.test(url)) return true;
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, '');
+    if (S_TIER_PRIMARY_HOSTS.has(hostname)) return true;
+  } catch {
+    return false;
+  }
+  if (S_TIER_PRIMARY_PATH.test(url)) return true;
 
   if (slot === 'paper' || !slot) {
     if (S_TIER_RESEARCH.test(url)) return true;

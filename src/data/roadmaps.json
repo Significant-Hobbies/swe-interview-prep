@@ -10,6 +10,20 @@
       "tracks": ["search-ir"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "probability-fundamentals",
+            "random-variables",
+            "ranking-metrics",
+            "estimation-confidence",
+            "hypothesis-testing"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Days 1-3 — Retrieval foundations",
           "goal": "Understand how lexical search ranks documents.",
           "concepts": ["tokenization", "inverted-index", "tf-idf", "bm25"],
@@ -40,6 +54,20 @@
       "description": "Four weeks that take you from tokenization to a working hybrid retriever evaluated against a frozen query set.",
       "tracks": ["search-ir", "vector-db"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "probability-fundamentals",
+            "random-variables",
+            "topk-vector-search",
+            "estimation-confidence",
+            "hypothesis-testing"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Week 1 — Lexical retrieval",
           "goal": "Tokenization, inverted index, BM25.",
@@ -83,6 +111,25 @@
       "description": "The core roadmap. Three months that move from retrieval basics to ANN, RAG, and the storage foundations behind systems like Turbopuffer.",
       "tracks": ["search-ir", "vector-db", "ai-systems", "databases"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "probability-fundamentals",
+            "random-variables",
+            "ranking-metrics",
+            "structured-outputs",
+            "tf-idf",
+            "tokenization",
+            "vector-similarity",
+            "estimation-confidence",
+            "hypothesis-testing",
+            "topk-vector-search"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Month 1 — Retrieval and evaluation",
           "goal": "Lexical + vector retrieval, hybrid search, evals.",
@@ -132,6 +179,24 @@
       "description": "The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.",
       "tracks": ["search-ir", "vector-db", "ai-systems", "backend", "databases", "system-design"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "embeddings",
+            "http-lifecycle",
+            "structured-outputs",
+            "tokenization",
+            "tool-calling",
+            "vector-similarity",
+            "inverted-index",
+            "tf-idf",
+            "topk-vector-search",
+            "brute-force-vector-db"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Q1 — Retrieval and vector foundations",
           "goal": "Complete the 90-day AI search/infra roadmap.",
@@ -193,6 +258,22 @@
       "description": "Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.",
       "tracks": ["databases", "system-design"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "embeddings",
+            "load-balancing",
+            "tf-idf",
+            "tokenization",
+            "vector-similarity",
+            "consistent-hashing",
+            "topk-vector-search",
+            "brute-force-vector-db"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Phase 0-1 — Thesis + hardware",
           "goal": "Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.",
@@ -259,6 +340,13 @@
       "description": "Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.",
       "tracks": ["system-design", "ai-systems", "backend"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["object-modeling", "replication", "structured-outputs", "consensus"],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Phase 0-1 — Five-job model + execution",
           "goal": "Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimising JIT, deopt.",
@@ -333,6 +421,33 @@
       "tracks": ["system-design", "databases", "ai-systems", "backend"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "api-design",
+            "consistent-hashing",
+            "descriptive-statistics",
+            "embeddings",
+            "idempotency",
+            "ml-multi-head",
+            "ml-tokenization",
+            "ml-training",
+            "object-modeling",
+            "probability-fundamentals",
+            "structured-outputs",
+            "ml-checkpointing",
+            "ml-math",
+            "ml-softmax-xent",
+            "ml-gradient-descent",
+            "ml-language-modeling",
+            "ml-backprop",
+            "ml-embeddings",
+            "ml-adamw"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "LLMs and inference engines",
           "goal": "Transformers end-to-end, KV cache, paged attention, quantization.",
           "concepts": [
@@ -340,7 +455,8 @@
             "ml-transformer-block",
             "ml-sampling",
             "rag",
-            "model-routing"
+            "model-routing",
+            "ml-rl-alignment"
           ],
           "drills": [],
           "artifacts": []
@@ -477,6 +593,28 @@
       "description": "A 30-day sprint through high-level system design. Primitives first (load balancing, consistent hashing, consensus), then full-stack \"design X\" cases. End comfortable scoping requirements, capacity, storage choice, queue boundaries, and failure modes.",
       "tracks": ["system-design"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "embeddings",
+            "http-lifecycle",
+            "message-queues",
+            "object-storage",
+            "rag",
+            "replication",
+            "sharding",
+            "tokenization",
+            "vector-similarity",
+            "caching",
+            "inverted-index",
+            "tf-idf",
+            "bm25",
+            "hybrid-search"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Days 1-7 — Primitives",
           "goal": "The building blocks every HLD answer relies on.",
@@ -628,6 +766,17 @@
       "description": "Daily (5d/wk): 45m concepts (canonical externals) + 45m problems + 15m notes. Every week ships code or a writeup. External-heavy (Seeing Theory, MIT OCW, StatQuest, ISL). Not aesthetic math — the gym is solving, simulating, checking assumptions.",
       "tracks": ["mathematics"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "vectors-and-spaces",
+            "derivatives-and-gradients",
+            "matrices-and-transformations"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Week 1 — Probability",
           "goal": "Conditional probability, distributions, expectation — the language of uncertainty.",
@@ -868,6 +1017,13 @@
       "tracks": ["systems-foundations"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["object-modeling"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": ["operating-system-mechanics", "compute-memory-storage-hierarchy"],
@@ -905,6 +1061,13 @@
       "description": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
       "tracks": ["infrastructure-platforms"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["http-lifecycle", "idempotency", "message-queues"],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
@@ -966,6 +1129,13 @@
       "tracks": ["distributed-systems"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["http-lifecycle", "load-balancing", "consistent-hashing"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": ["consensus", "replication", "sharding", "cap-theorem"],
@@ -1015,6 +1185,18 @@
       "description": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
       "tracks": ["ai-systems"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "ml-sampling",
+            "probability-fundamentals",
+            "vision-models"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
@@ -1096,6 +1278,30 @@
       "tracks": ["inference-serving"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "ml-tokenization",
+            "probability-fundamentals",
+            "structured-outputs",
+            "ml-math",
+            "ml-softmax-xent",
+            "ml-gradient-descent",
+            "ml-language-modeling",
+            "ml-backprop",
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-adamw",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-training",
+            "ml-checkpointing"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
@@ -1158,6 +1364,13 @@
       "tracks": ["agent-systems"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["structured-outputs"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": ["tool-calling", "agent-loops", "agent-memory-context", "mcp-integrations"],
@@ -1210,6 +1423,31 @@
       "description": "Build an evidence-backed evaluation and observability system for models, tools, and agents. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
       "tracks": ["ai-reliability"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "ml-tokenization",
+            "probability-fundamentals",
+            "structured-outputs",
+            "ml-math",
+            "ml-softmax-xent",
+            "ml-gradient-descent",
+            "ml-language-modeling",
+            "ml-sampling",
+            "ml-backprop",
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-adamw",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-training",
+            "ml-lora"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
@@ -1327,6 +1565,13 @@
       "tracks": ["application-engineering", "backend", "product"],
       "milestones": [
         {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": ["http-lifecycle", "message-queues", "object-modeling", "state-management"],
+          "drills": [],
+          "artifacts": []
+        },
+        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": ["api-design", "web-mobile-engineering", "ux-interface-design"],
@@ -1377,6 +1622,31 @@
       "description": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
       "tracks": ["multimodal-spatial", "inference-serving"],
       "milestones": [
+        {
+          "title": "Prerequisites — unlock the rest of this path",
+          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "concepts": [
+            "descriptive-statistics",
+            "inference-engines",
+            "ml-tokenization",
+            "probability-fundamentals",
+            "ml-math",
+            "ml-softmax-xent",
+            "ml-gradient-descent",
+            "ml-language-modeling",
+            "ml-backprop",
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-adamw",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-training",
+            "ml-checkpointing",
+            "ml-browser-runtime"
+          ],
+          "drills": [],
+          "artifacts": []
+        },
         {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",

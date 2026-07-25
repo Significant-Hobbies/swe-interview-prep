@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Distributed Infra</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, Kubernetes — Cluster components, Consul — Service discovery explained to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Distributed Infra with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Distributed rate limiter and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://kubernetes.io/docs/concepts/overview/components/" rel="noreferrer">Kubernetes — Cluster components</a> <span class="muted">(doc)</span></li><li><a href="https://developer.hashicorp.com/consul/docs/concepts/service-discovery" rel="noreferrer">Consul — Service discovery explained</a> <span class="muted">(doc)</span></li><li><a href="https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/" rel="noreferrer">Large-scale cluster management at Google with Borg (EuroSys 2015)</a> <span class="muted">(paper)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Algorithm choice + storage backend (Redis?) + how you handle a Redis outage.</p>
           <a href="/drills/design-rate-limiter">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Distributed Infra in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>A remote call times out. What do you actually know about whether it executed?</li></ul>
     </section>
 
     <section>

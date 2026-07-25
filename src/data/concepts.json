@@ -5,7 +5,14 @@
       "id": "tokenization",
       "name": "Tokenization",
       "tags": ["search-ir", "tokenization"],
-      "roadmaps": ["reset-9-day", "retrieval-30-day"],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -39,7 +46,14 @@
       "id": "inverted-index",
       "name": "Inverted Index",
       "tags": ["search-ir", "indexing"],
-      "roadmaps": ["reset-9-day", "retrieval-30-day", "ai-search-infra-90-day", "db-disk-first"],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "db-disk-first",
+        "ai-infra-12-month",
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["tokenization"],
@@ -68,7 +82,14 @@
       "id": "tf-idf",
       "name": "TF-IDF",
       "tags": ["search-ir", "ranking"],
-      "roadmaps": ["reset-9-day", "retrieval-30-day"],
+      "roadmaps": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["inverted-index"],
@@ -100,7 +121,8 @@
         "retrieval-30-day",
         "ai-search-infra-90-day",
         "ai-infra-12-month",
-        "db-disk-first"
+        "db-disk-first",
+        "hld-practice"
       ],
       "difficulty": "core",
       "priority": 5,
@@ -141,7 +163,7 @@
       "id": "ranking-metrics",
       "name": "Ranking Metrics",
       "tags": ["search-ir", "evaluation"],
-      "roadmaps": ["retrieval-30-day"],
+      "roadmaps": ["retrieval-30-day", "reset-9-day", "ai-search-infra-90-day"],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["bm25"],
@@ -198,7 +220,12 @@
       "id": "hybrid-search",
       "name": "Hybrid Search",
       "tags": ["search-ir", "hybrid"],
-      "roadmaps": ["retrieval-30-day", "ai-search-infra-90-day", "ai-infra-12-month"],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "hld-practice"
+      ],
       "difficulty": "advanced",
       "priority": 5,
       "prerequisites": ["bm25", "vector-similarity"],
@@ -299,9 +326,24 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Stanford IR Book — A first take at building an inverted index",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
+          "type": "doc"
+        },
+        {
+          "title": "Stanford IR Book — Wildcard queries (permuterm / k-gram indexes)",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/wildcard-queries-1.html",
+          "type": "doc"
+        },
+        {
+          "title": "Elasticsearch — search_as_you_type field",
+          "url": "https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/search-as-you-type",
+          "type": "doc"
         }
       ],
-      "mentalModel": "Discovery search is for \"I do not know what I want yet\" — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way.",
+      "mentalModel": "A search system is a pipeline, not a scoring function: analyze -> inverted index -> cheap candidate retrieval -> expensive reranking -> serve. The first stage decides what the good ranker is ever allowed to see, so recall lost there cannot be recovered later. Autocomplete is a separate prefix index with its own latency budget, not a query against the main index.",
       "drills": ["browse-vs-search-metrics"],
       "reviewQuestions": ["rq-search-discovery-core"],
       "artifacts": ["search-platform-design-doc"]
@@ -310,7 +352,14 @@
       "id": "embeddings",
       "name": "Embeddings",
       "tags": ["vector-db", "embeddings"],
-      "roadmaps": ["retrieval-30-day", "ai-search-infra-90-day"],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape",
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -339,7 +388,13 @@
       "id": "vector-similarity",
       "name": "Vector Similarity",
       "tags": ["vector-db", "similarity"],
-      "roadmaps": ["retrieval-30-day"],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["embeddings"],
@@ -367,13 +422,18 @@
       "id": "topk-vector-search",
       "name": "Top-k Vector Search",
       "tags": ["vector-db", "ann"],
-      "roadmaps": [],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["vector-similarity"],
       "related": ["brute-force-vector-db", "hnsw"],
       "description": "Returning the k nearest vectors to a query, exact or approximate.",
-      "mentalModel": "Top-k is a bounded selection problem: maintain a size-k min-heap of best candidates while scanning. Exact search scans everything; ANN scans a clever subset.",
+      "mentalModel": "Top-k is a bounded selection problem: keep a size-k heap whose root is the current worst survivor and evict that root when something better arrives. Ranking by similarity (higher is better) the root is the smallest, so it is a min-heap; ranking by distance (lower is better) the root is the largest, so it is a max-heap. Exact search scans everything; ANN scans a clever subset.",
       "commonMistakes": [
         "Sorting all scores instead of using a k-sized heap",
         "Confusing recall@k (quality) with k (result count)"
@@ -393,7 +453,12 @@
       "id": "brute-force-vector-db",
       "name": "Brute-Force Vector DB",
       "tags": ["vector-db", "ann"],
-      "roadmaps": ["retrieval-30-day", "ai-search-infra-90-day"],
+      "roadmaps": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["vector-similarity", "topk-vector-search"],
@@ -428,7 +493,7 @@
       "prerequisites": ["brute-force-vector-db"],
       "related": ["ivf", "recall-latency-tradeoffs"],
       "description": "Hierarchical Navigable Small World graphs — the dominant ANN index.",
-      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.",
+      "mentalModel": "HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers, so it touches a small neighbourhood instead of the whole set. Malkov & Yashunin report polylogarithmic search cost empirically — it is a measured scaling, not a proven bound.",
       "commonMistakes": [
         "Tuning efSearch/efConstruction blindly without a recall curve",
         "Ignoring that HNSW is memory-hungry and hard to update/delete",
@@ -484,7 +549,7 @@
       "prerequisites": ["ivf"],
       "related": ["recall-latency-tradeoffs"],
       "description": "Compress vectors into sub-space codebooks for tiny memory footprint.",
-      "mentalModel": "PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) shrinks to a handful of bytes, at the cost of approximate distances.",
+      "mentalModel": "PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook. With 8-bit codes that is one byte per sub-vector: a 1536-d float32 vector (6 KB) becomes roughly 48-192 bytes depending on m — a 30-100x cut, paid for with approximate distances.",
       "commonMistakes": [
         "Using PQ without IVF and losing the speedup",
         "Too-aggressive compression that destroys recall"
@@ -566,7 +631,7 @@
       "id": "rag",
       "name": "RAG",
       "tags": ["ai-systems", "rag"],
-      "roadmaps": ["ai-search-infra-90-day", "ai-infra-12-month", "swe-landscape"],
+      "roadmaps": ["ai-search-infra-90-day", "ai-infra-12-month", "swe-landscape", "hld-practice"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["embeddings"],
@@ -591,8 +656,8 @@
           "type": "paper"
         },
         {
-          "title": "Lilian Weng — Retrieval-Augmented Generation",
-          "url": "https://lilianweng.github.io/posts/2020-10-29-retrieval-augmented/",
+          "title": "Lilian Weng — How to Build an Open-Domain Question Answering System?",
+          "url": "https://lilianweng.github.io/posts/2020-10-29-odqa/",
           "type": "article"
         },
         {
@@ -666,7 +731,15 @@
       "id": "structured-outputs",
       "name": "Structured Outputs",
       "tags": ["ai-systems", "llm-apps"],
-      "roadmaps": [],
+      "roadmaps": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape",
+        "inference-serving-12w",
+        "agent-systems-12w",
+        "ai-reliability-12w"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -695,7 +768,7 @@
       "id": "tool-calling",
       "name": "Tool Calling",
       "tags": ["agent-systems", "ai-systems", "agents"],
-      "roadmaps": ["agent-systems-12w"],
+      "roadmaps": ["agent-systems-12w", "ai-infra-12-month"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["structured-outputs"],
@@ -744,6 +817,21 @@
           "title": "Building Effective Agents (Anthropic)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
+        },
+        {
+          "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+          "url": "https://arxiv.org/abs/2210.03629",
+          "type": "paper"
+        },
+        {
+          "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+          "url": "https://arxiv.org/abs/2303.11366",
+          "type": "paper"
+        },
+        {
+          "title": "LLM Powered Autonomous Agents (Lilian Weng)",
+          "url": "https://lilianweng.github.io/posts/2023-06-23-agent/",
+          "type": "article"
         }
       ],
       "drills": ["agent-step-limit"],
@@ -775,14 +863,19 @@
           "type": "article"
         },
         {
-          "title": "Training Compute-Optimal LLMs (Chinchilla)",
-          "url": "https://arxiv.org/abs/2203.15556",
+          "title": "FrugalGPT: Using LLMs While Reducing Cost and Improving Performance (Chen et al.)",
+          "url": "https://arxiv.org/abs/2305.05176",
           "type": "paper"
         },
         {
           "title": "How to Scale Your Model (JAX ML scaling book)",
           "url": "https://jax-ml.github.io/scaling-book/",
           "type": "course"
+        },
+        {
+          "title": "RouteLLM: Learning to Route LLMs with Preference Data",
+          "url": "https://arxiv.org/abs/2406.18665",
+          "type": "paper"
         }
       ],
       "drills": ["route-by-query-cost"]
@@ -842,6 +935,26 @@
           "title": "Your AI product needs evals (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/evals/",
           "type": "article"
+        },
+        {
+          "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+          "url": "https://arxiv.org/abs/2306.05685",
+          "type": "paper"
+        },
+        {
+          "title": "HELM — Holistic Evaluation of Language Models (Stanford CRFM)",
+          "url": "https://crfm.stanford.edu/helm/",
+          "type": "doc"
+        },
+        {
+          "title": "EleutherAI — lm-evaluation-harness",
+          "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+          "type": "doc"
+        },
+        {
+          "title": "Using LLM-as-a-Judge for evaluation (Hamel Husain)",
+          "url": "https://hamel.dev/blog/posts/llm-judge/",
+          "type": "article"
         }
       ]
     },
@@ -849,7 +962,13 @@
       "id": "ml-math",
       "name": "ML Math Foundations",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": ["probability-fundamentals", "descriptive-statistics"],
@@ -892,7 +1011,13 @@
       "id": "ml-gradient-descent",
       "name": "Gradient Descent",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-math"],
@@ -924,7 +1049,13 @@
       "id": "ml-backprop",
       "name": "Backpropagation",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-gradient-descent"],
@@ -956,7 +1087,13 @@
       "id": "ml-softmax-xent",
       "name": "Softmax & Cross-Entropy",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-math"],
@@ -964,8 +1101,8 @@
       "description": "Logits to probabilities, negative log-likelihood loss.",
       "resources": [
         {
-          "title": "CS231n — Softmax & cross-entropy loss",
-          "url": "https://cs231n.github.io/optimization-2/",
+          "title": "CS231n — Linear Classification: SVM vs Softmax, cross-entropy loss",
+          "url": "https://cs231n.github.io/linear-classify/",
           "type": "course"
         },
         {
@@ -993,7 +1130,13 @@
       "id": "ml-adamw",
       "name": "AdamW Optimizer",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-backprop"],
@@ -1006,8 +1149,8 @@
           "type": "paper"
         },
         {
-          "title": "CS231n — Adam, learning-rate schedules",
-          "url": "https://cs231n.github.io/optimization-2/",
+          "title": "CS231n — Neural Networks 3: Adam and learning-rate schedules",
+          "url": "https://cs231n.github.io/neural-networks-3/",
           "type": "course"
         },
         {
@@ -1025,7 +1168,13 @@
       "id": "ml-tokenization",
       "name": "Tokenization (LLM)",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -1054,7 +1203,7 @@
         },
         {
           "title": "HuggingFace — Tokenizers",
-          "url": "https://huggingface.co/docs/tokenizers/index",
+          "url": "https://huggingface.co/docs/tokenizers/main/en/index",
           "type": "doc"
         }
       ],
@@ -1067,7 +1216,13 @@
       "id": "ml-language-modeling",
       "name": "Language Modeling",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-tokenization", "ml-softmax-xent"],
@@ -1109,7 +1264,7 @@
       "id": "ml-sampling",
       "name": "Sampling & Decoding",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": ["swe-landscape"],
+      "roadmaps": ["swe-landscape", "ai-models-training-12w", "ai-reliability-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-language-modeling"],
@@ -1146,7 +1301,13 @@
       "id": "ml-embeddings",
       "name": "Embeddings (Transformer)",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-language-modeling"],
@@ -1183,7 +1344,13 @@
       "id": "ml-self-attention",
       "name": "Self-Attention",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["swe-landscape", "ai-models-training-12w"],
+      "roadmaps": [
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-embeddings"],
@@ -1235,7 +1402,13 @@
       "id": "ml-multi-head",
       "name": "Multi-Head Attention",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-self-attention"],
@@ -1272,7 +1445,13 @@
       "id": "ml-transformer-block",
       "name": "Transformer Block",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["swe-landscape", "ai-models-training-12w"],
+      "roadmaps": [
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-multi-head", "ml-adamw"],
@@ -1324,7 +1503,13 @@
       "id": "ml-training",
       "name": "Training & Debugging",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-transformer-block"],
@@ -1376,7 +1561,12 @@
       "id": "ml-checkpointing",
       "name": "Checkpointing",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-training"],
@@ -1403,7 +1593,7 @@
       "id": "ml-lora",
       "name": "LoRA & PEFT",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": ["ai-models-training-12w", "ai-reliability-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-training"],
@@ -1485,7 +1675,7 @@
     },
     {
       "id": "ml-data-engineering",
-      "name": "Style Data Engineering",
+      "name": "Training Data Engineering",
       "tags": ["ai-systems", "training"],
       "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
@@ -1505,14 +1695,19 @@
           "type": "doc"
         },
         {
-          "title": "Eugene Yan — Data Flywheels for LLM Applications",
-          "url": "https://eugeneyan.com/writing/llm-patterns/",
+          "title": "Rules of Machine Learning: Best Practices for ML Engineering (Google)",
+          "url": "https://developers.google.com/machine-learning/guides/rules-of-ml",
           "type": "doc"
         },
         {
           "title": "Made With ML — Data engineering",
           "url": "https://madewithml.com/courses/mlops/data-stack/",
           "type": "doc"
+        },
+        {
+          "title": "Hidden Technical Debt in Machine Learning Systems (NeurIPS 2015)",
+          "url": "https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+          "type": "paper"
         }
       ],
       "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does.",
@@ -1524,7 +1719,7 @@
       "id": "ml-browser-runtime",
       "name": "Browser ML Runtime",
       "tags": ["inference-serving", "ai-systems", "runtime"],
-      "roadmaps": ["swe-landscape", "inference-serving-12w"],
+      "roadmaps": ["swe-landscape", "inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-checkpointing"],
@@ -1605,7 +1800,14 @@
       "id": "http-lifecycle",
       "name": "HTTP Lifecycle",
       "tags": ["backend", "http"],
-      "roadmaps": ["swe-landscape"],
+      "roadmaps": [
+        "swe-landscape",
+        "ai-infra-12-month",
+        "hld-practice",
+        "infrastructure-platforms-12w",
+        "distributed-systems-12w",
+        "application-engineering-12w"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -1696,7 +1898,7 @@
       "id": "idempotency",
       "name": "Idempotency",
       "tags": ["backend", "idempotency"],
-      "roadmaps": ["ai-infra-12-month"],
+      "roadmaps": ["ai-infra-12-month", "swe-landscape", "infrastructure-platforms-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["http-lifecycle"],
@@ -1804,7 +2006,7 @@
       "id": "caching",
       "name": "Caching",
       "tags": ["distributed-systems", "backend", "caching"],
-      "roadmaps": ["distributed-systems-12w"],
+      "roadmaps": ["distributed-systems-12w", "hld-practice"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["http-lifecycle"],
@@ -1832,7 +2034,13 @@
       "id": "message-queues",
       "name": "Message Queues",
       "tags": ["distributed-systems", "backend", "queues"],
-      "roadmaps": ["swe-landscape", "distributed-systems-12w"],
+      "roadmaps": [
+        "swe-landscape",
+        "distributed-systems-12w",
+        "hld-practice",
+        "infrastructure-platforms-12w",
+        "application-engineering-12w"
+      ],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -1895,7 +2103,7 @@
       "id": "api-design",
       "name": "API Design",
       "tags": ["backend", "api-design"],
-      "roadmaps": ["ai-infra-12-month", "application-engineering-12w"],
+      "roadmaps": ["ai-infra-12-month", "application-engineering-12w", "swe-landscape"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["http-lifecycle"],
@@ -2094,7 +2302,7 @@
       "id": "object-storage",
       "name": "Object Storage",
       "tags": ["databases", "object-storage"],
-      "roadmaps": ["ai-search-infra-90-day", "ai-infra-12-month", "db-disk-first"],
+      "roadmaps": ["ai-search-infra-90-day", "ai-infra-12-month", "db-disk-first", "hld-practice"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -2184,6 +2392,21 @@
           "title": "Designing Data-Intensive Applications",
           "url": "https://dataintensive.net/",
           "type": "course"
+        },
+        {
+          "title": "The Log-Structured Merge-Tree (O'Neil et al.)",
+          "url": "https://www.cs.umb.edu/~poneil/lsmtree.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "LevelDB — implementation notes",
+          "url": "https://github.com/google/leveldb/blob/main/doc/impl.md",
+          "type": "doc"
+        },
+        {
+          "title": "SQLite — Write-Ahead Logging",
+          "url": "https://www.sqlite.org/wal.html",
+          "type": "doc"
         }
       ],
       "drills": ["storage-vs-retrieval"],
@@ -2194,7 +2417,7 @@
       "id": "sharding",
       "name": "Sharding",
       "tags": ["distributed-systems", "databases", "partitioning"],
-      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w"],
+      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w", "hld-practice"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["consistent-hashing"],
@@ -2211,6 +2434,21 @@
           "title": "Designing Data-Intensive Applications",
           "url": "https://dataintensive.net/",
           "type": "course"
+        },
+        {
+          "title": "Notion — Herding elephants: sharding Postgres",
+          "url": "https://www.notion.com/blog/sharding-postgres-at-notion",
+          "type": "article"
+        },
+        {
+          "title": "Vitess — Sharding",
+          "url": "https://vitess.io/docs/22.0/reference/features/sharding/",
+          "type": "doc"
+        },
+        {
+          "title": "Spanner: Google's Globally-Distributed Database",
+          "url": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+          "type": "paper"
         }
       ],
       "drills": ["shard-key-choice"],
@@ -2221,7 +2459,13 @@
       "id": "replication",
       "name": "Replication",
       "tags": ["distributed-systems", "databases", "replication"],
-      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w"],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape",
+        "distributed-systems-12w",
+        "runtime",
+        "hld-practice"
+      ],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [],
@@ -2238,6 +2482,21 @@
           "title": "Designing Data-Intensive Applications",
           "url": "https://dataintensive.net/",
           "type": "course"
+        },
+        {
+          "title": "In Search of an Understandable Consensus Algorithm (Raft, extended)",
+          "url": "https://raft.github.io/raft.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "Chain Replication for Supporting High Throughput and Availability (OSDI 04)",
+          "url": "https://www.usenix.org/conference/osdi-04/chain-replication-supporting-high-throughput-and-availability",
+          "type": "paper"
+        },
+        {
+          "title": "PostgreSQL — High Availability, Load Balancing, and Replication",
+          "url": "https://www.postgresql.org/docs/current/high-availability.html",
+          "type": "doc"
         }
       ],
       "drills": ["replication-lag-read"],
@@ -2275,7 +2534,13 @@
       "id": "object-modeling",
       "name": "Object Modeling",
       "tags": ["system-design", "low-level-design"],
-      "roadmaps": ["lld-practice"],
+      "roadmaps": [
+        "lld-practice",
+        "runtime",
+        "swe-landscape",
+        "systems-foundations-12w",
+        "application-engineering-12w"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -2297,7 +2562,7 @@
       "id": "state-management",
       "name": "State Machines",
       "tags": ["system-design", "low-level-design"],
-      "roadmaps": ["runtime", "swe-landscape", "lld-practice"],
+      "roadmaps": ["runtime", "swe-landscape", "lld-practice", "application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["object-modeling"],
@@ -2307,6 +2572,21 @@
         {
           "title": "Refactoring Guru — State",
           "url": "https://refactoring.guru/design-patterns/state",
+          "type": "doc"
+        },
+        {
+          "title": "Welcome to the world of Statecharts",
+          "url": "https://statecharts.dev/",
+          "type": "doc"
+        },
+        {
+          "title": "Statecharts: A Visual Formalism for Complex Systems (Harel, 1987)",
+          "url": "https://dubroy.com/refs/Statecharts_a_visual_formalism_for_complex_systems.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "State machines and statecharts (Stately / XState docs)",
+          "url": "https://stately.ai/docs/state-machines-and-statecharts",
           "type": "doc"
         }
       ],
@@ -2462,6 +2742,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Shopify — Scaling inventory reservations",
+          "url": "https://shopify.engineering/scaling-inventory-reservations",
+          "type": "article"
+        },
+        {
+          "title": "Optimistic Offline Lock (Fowler, PoEAA catalog)",
+          "url": "https://martinfowler.com/eaaCatalog/optimisticOfflineLock.html",
+          "type": "doc"
+        },
+        {
+          "title": "PostgreSQL — Explicit Locking (SELECT FOR UPDATE)",
+          "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+          "type": "doc"
         }
       ],
       "mentalModel": "Booking systems are about \"holds\" — a reservation is itself a write that blocks other people. Pick aggressive hold expirations, treat overbooking as a business policy (not a bug), and choose optimistic vs pessimistic locking based on how often collisions actually happen.",
@@ -2481,8 +2776,8 @@
       "description": "Turn engines, board state, rules.",
       "resources": [
         {
-          "title": "Hugo Lin — Designing a tic-tac-toe / chess engine",
-          "url": "https://www.geeksforgeeks.org/design-tic-tac-toe-leetcode/",
+          "title": "Game Programming Patterns — State (Nystrom)",
+          "url": "https://gameprogrammingpatterns.com/state.html",
           "type": "doc"
         },
         {
@@ -2500,7 +2795,13 @@
       "id": "load-balancing",
       "name": "Load Balancing",
       "tags": ["system-design", "scalability"],
-      "roadmaps": ["runtime", "swe-landscape", "hld-practice"],
+      "roadmaps": [
+        "runtime",
+        "swe-landscape",
+        "hld-practice",
+        "db-disk-first",
+        "distributed-systems-12w"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": [],
@@ -2517,6 +2818,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Google SRE Book — Load Balancing at the Frontend",
+          "url": "https://sre.google/sre-book/load-balancing-frontend/",
+          "type": "doc"
+        },
+        {
+          "title": "Google SRE Book — Load Balancing in the Datacenter",
+          "url": "https://sre.google/sre-book/load-balancing-datacenter/",
+          "type": "doc"
+        },
+        {
+          "title": "Envoy — Load balancing overview",
+          "url": "https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/load_balancing/overview",
+          "type": "doc"
         }
       ],
       "drills": ["design-load-balancer"],
@@ -2527,7 +2843,7 @@
       "id": "consistent-hashing",
       "name": "Consistent Hashing",
       "tags": ["system-design", "scalability"],
-      "roadmaps": ["hld-practice"],
+      "roadmaps": ["hld-practice", "db-disk-first", "swe-landscape", "distributed-systems-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["load-balancing"],
@@ -2538,6 +2854,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Consistent Hashing and Random Trees (Karger et al., STOC 1997)",
+          "url": "https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "Consistent Hashing with Bounded Loads (Google Research)",
+          "url": "https://research.google/blog/consistent-hashing-with-bounded-loads/",
+          "type": "article"
+        },
+        {
+          "title": "Dynamo: Amazon's Highly Available Key-value Store (SOSP 2007)",
+          "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf",
+          "type": "paper"
         }
       ],
       "mentalModel": "Consistent hashing maps both servers and keys onto a ring so that when you add or remove a server, only about 1/N of the keys move (instead of nearly all of them). Use \"virtual nodes\" — multiple ring positions per server — to spread load evenly.",
@@ -2549,7 +2880,13 @@
       "id": "consensus",
       "name": "Consensus",
       "tags": ["distributed-systems", "system-design"],
-      "roadmaps": ["db-disk-first", "swe-landscape", "hld-practice", "distributed-systems-12w"],
+      "roadmaps": [
+        "db-disk-first",
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w",
+        "runtime"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["replication"],
@@ -2593,6 +2930,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Kubernetes — Cluster components",
+          "url": "https://kubernetes.io/docs/concepts/overview/components/",
+          "type": "doc"
+        },
+        {
+          "title": "Consul — Service discovery explained",
+          "url": "https://developer.hashicorp.com/consul/docs/concepts/service-discovery",
+          "type": "doc"
+        },
+        {
+          "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
+          "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+          "type": "paper"
         }
       ],
       "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second.",
@@ -2620,6 +2972,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "RFC 6455 — The WebSocket Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc6455",
+          "type": "paper"
+        },
+        {
+          "title": "MDN — The WebSocket API",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+          "type": "doc"
+        },
+        {
+          "title": "Real-time communication at scale with Elixir at Discord",
+          "url": "https://elixir-lang.org/blog/2020/10/08/real-time-communication-at-scale-with-elixir-at-discord/",
+          "type": "article"
         }
       ],
       "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice.",
@@ -2642,6 +3009,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Feeding Frenzy: Selectively Materializing Users' Event Feeds (SIGMOD 2010)",
+          "url": "https://jeffterrace.com/docs/feeding-frenzy-sigmod10-web.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "Meta Engineering — News Feed ranking",
+          "url": "https://engineering.fb.com/2021/01/26/ml-applications/news-feed-ranking/",
+          "type": "article"
+        },
+        {
+          "title": "TAO: Facebook's Distributed Data Store for the Social Graph (ATC '13)",
+          "url": "https://www.usenix.org/conference/atc13/technical-sessions/presentation/bronson",
+          "type": "paper"
         }
       ],
       "mentalModel": "Feed systems pick between two strategies: precompute each follower's feed when you post (fan-out on write), or assemble it at request time (fan-out on read). The real-world answer is usually hybrid — fan-out-on-write fails for celebrities, fan-out-on-read fails for the long tail.",
@@ -2664,6 +3046,26 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "HTTP Live Streaming (Apple Developer)",
+          "url": "https://developer.apple.com/streaming/",
+          "type": "doc"
+        },
+        {
+          "title": "RFC 8216 — HTTP Live Streaming",
+          "url": "https://www.rfc-editor.org/rfc/rfc8216",
+          "type": "paper"
+        },
+        {
+          "title": "Netflix — Per-Title Encode Optimization",
+          "url": "https://netflixtechblog.com/per-title-encode-optimization-7e99442b62a2",
+          "type": "article"
+        },
+        {
+          "title": "Netflix Open Connect (their own CDN)",
+          "url": "https://openconnect.netflix.com/en/",
+          "type": "doc"
         }
       ],
       "mentalModel": "Video streaming is CDN plus adaptive bitrate (HLS or DASH). The origin server should never serve video directly to viewers; the player switches quality on the fly based on the user's bandwidth. Design for the user on bad wifi, not the demo.",
@@ -2686,6 +3088,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "H3 — hexagonal hierarchical spatial index (Uber)",
+          "url": "https://h3geo.org/docs/",
+          "type": "doc"
+        },
+        {
+          "title": "S2 Cells — cell hierarchy (S2Geometry)",
+          "url": "https://s2geometry.io/devguide/s2cell_hierarchy",
+          "type": "doc"
+        },
+        {
+          "title": "Redis GEOADD — geohash-backed geo index",
+          "url": "https://redis.io/docs/latest/commands/geoadd/",
+          "type": "doc"
         }
       ],
       "mentalModel": "Geo systems need a spatial index (geohash, S2, quadtree) to answer \"nearest\" queries quickly. Driver-location updates are write-heavy, so the storage has to handle that. Remember: nearest in distance is not always best in ETA — match on the metric that actually matters.",
@@ -2708,6 +3125,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Google Wave Operational Transformation whitepaper",
+          "url": "https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html",
+          "type": "doc"
+        },
+        {
+          "title": "A Conflict-Free Replicated JSON Datatype (Kleppmann & Beresford)",
+          "url": "https://arxiv.org/abs/1608.03960",
+          "type": "paper"
+        },
+        {
+          "title": "Local-first software: you own your data, in spite of the cloud",
+          "url": "https://martin.kleppmann.com/papers/local-first.pdf",
+          "type": "paper"
         }
       ],
       "mentalModel": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs.",
@@ -2739,6 +3171,21 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
+        },
+        {
+          "title": "Elasticsearch — Near real-time search",
+          "url": "https://www.elastic.co/docs/manage-data/data-store/near-real-time-search",
+          "type": "doc"
+        },
+        {
+          "title": "Apache Lucene — release documentation",
+          "url": "https://lucene.apache.org/core/documentation.html",
+          "type": "doc"
+        },
+        {
+          "title": "Elasticsearch — Learning To Rank (LTR)",
+          "url": "https://www.elastic.co/docs/solutions/search/ranking/learning-to-rank-ltr",
+          "type": "doc"
         }
       ],
       "drills": ["design-search-platform"]
@@ -2767,6 +3214,21 @@
           "title": "Building Effective Agents (Anthropic)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
+        },
+        {
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "type": "paper"
+        },
+        {
+          "title": "Anthropic — Contextual Retrieval",
+          "url": "https://www.anthropic.com/news/contextual-retrieval",
+          "type": "article"
+        },
+        {
+          "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+          "url": "https://arxiv.org/abs/2309.15217",
+          "type": "paper"
         }
       ],
       "drills": ["design-rag-system"]
@@ -2827,6 +3289,16 @@
           "title": "NeetCode Roadmap",
           "url": "https://neetcode.io/roadmap",
           "type": "course"
+        },
+        {
+          "title": "Two Pointers — USACO Guide (Silver)",
+          "url": "https://usaco.guide/silver/two-pointers",
+          "type": "doc"
+        },
+        {
+          "title": "Tortoise and Hare — cycle detection (cp-algorithms)",
+          "url": "https://cp-algorithms.com/others/tortoise_and_hare.html",
+          "type": "doc"
         }
       ],
       "drills": ["valid-palindrome-two-pointers", "lc-valid-palindrome", "lc-3sum"],
@@ -2854,6 +3326,16 @@
           "title": "NeetCode Roadmap",
           "url": "https://neetcode.io/roadmap",
           "type": "course"
+        },
+        {
+          "title": "Sliding Window — USACO Guide (Gold)",
+          "url": "https://usaco.guide/gold/sliding-window",
+          "type": "doc"
+        },
+        {
+          "title": "Minimum Stack / Minimum Queue — the O(n) sliding-window minimum",
+          "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html",
+          "type": "doc"
         }
       ],
       "drills": [
@@ -3008,7 +3490,7 @@
       "mentalModel": "A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says \"top k\", \"k-th largest\", or \"merge k sorted\", a heap of size k is usually the answer — far cheaper than sorting everything.",
       "commonMistakes": [
         "Sorting the whole input when a size-k heap suffices",
-        "Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)",
+        "Inverting heap polarity: top-k smallest wants a size-k max-heap (evict the largest), top-k largest wants a size-k min-heap",
         "Forgetting most languages give a min-heap by default"
       ],
       "resources": [
@@ -3141,6 +3623,21 @@
           "title": "Dynamic programming (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Dynamic_programming",
           "type": "doc"
+        },
+        {
+          "title": "Algorithms (Erickson) — Ch. 3: Dynamic Programming",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/03-dynprog.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "MIT 6.006 L15 — Dynamic Programming Part 1 (SRTBOT, Fib, DAGs, Bowling)",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/",
+          "type": "video"
+        },
+        {
+          "title": "Longest increasing subsequence (cp-algorithms)",
+          "url": "https://cp-algorithms.com/sequences/longest_increasing_subsequence.html",
+          "type": "doc"
         }
       ],
       "drills": [
@@ -3170,6 +3667,16 @@
         {
           "title": "Dynamic programming (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Dynamic_programming",
+          "type": "doc"
+        },
+        {
+          "title": "MIT 6.006 L21 — DP III: Parenthesization, Edit Distance, Knapsack",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-21-dp-iii-parenthesization-edit-distance-knapsack/",
+          "type": "video"
+        },
+        {
+          "title": "Knapsack problem (cp-algorithms)",
+          "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html",
           "type": "doc"
         }
       ],
@@ -3394,6 +3901,21 @@
           "title": "STAR interview method (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
           "type": "doc"
+        },
+        {
+          "title": "Google SRE Book — Postmortem Culture: Learning from Failure",
+          "url": "https://sre.google/sre-book/postmortem-culture/",
+          "type": "doc"
+        },
+        {
+          "title": "Etsy — Debriefing Facilitation Guide (Allspaw et al.)",
+          "url": "https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "How Complex Systems Fail (Richard I. Cook)",
+          "url": "https://how.complexsystems.fail/",
+          "type": "article"
         }
       ],
       "mentalModel": "A real failure cost something you cannot get back. A useful failure story names exactly what you got wrong, what you tried next, and what concretely changed in your behavior since. \"I learned a lot\" is not a lesson.",
@@ -3497,6 +4019,16 @@
           "title": "STAR interview method (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
           "type": "doc"
+        },
+        {
+          "title": "Know Your Customers' Jobs to Be Done (Christensen et al., HBR)",
+          "url": "https://hbr.org/2016/09/know-your-customers-jobs-to-be-done",
+          "type": "article"
+        },
+        {
+          "title": "Opportunity Solution Trees (Teresa Torres)",
+          "url": "https://www.producttalk.org/2016/08/opportunity-solution-tree/",
+          "type": "article"
         }
       ],
       "mentalModel": "Customer obsession is not saying yes to whatever they ask. It is taking their underlying problem seriously, sometimes by shipping something they did not ask for. One customer's complaint is a hypothesis, not proof — go check whether it generalizes.",
@@ -3519,6 +4051,16 @@
           "title": "STAR interview method (Wikipedia)",
           "url": "https://en.wikipedia.org/wiki/Situation,_task,_action,_result",
           "type": "doc"
+        },
+        {
+          "title": "Google SRE Book — Being On-Call",
+          "url": "https://sre.google/sre-book/being-on-call/",
+          "type": "doc"
+        },
+        {
+          "title": "DORA — Generative organizational culture",
+          "url": "https://dora.dev/capabilities/generative-organizational-culture/",
+          "type": "doc"
         }
       ],
       "mentalModel": "Ownership means closing the loop, not playing the hero. The opposite of ownership is \"that is not my team.\" Real ownership notices the moments you could have said that and chose not to.",
@@ -3538,8 +4080,8 @@
       "description": "Naming the problem, the audience, and the alternative you beat.",
       "resources": [
         {
-          "title": "April Dunford — Positioning",
-          "url": "https://www.aprildunford.com/post/the-perils-of-positioning",
+          "title": "April Dunford — Everything You Know About Positioning Is Wrong",
+          "url": "https://www.aprildunford.com/post/everything-you-know-about-positioning-is-wrong",
           "type": "article"
         }
       ],
@@ -3560,8 +4102,8 @@
       "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
       "resources": [
         {
-          "title": "Julian Shapiro — Marketing & landing pages",
-          "url": "https://www.julian.com/guide/marketing/landing-pages",
+          "title": "Julian Shapiro — Landing Page Copywriting (Startup Handbook)",
+          "url": "https://www.julian.com/guide/growth/landing-pages",
           "type": "doc"
         },
         {
@@ -3624,7 +4166,7 @@
       "id": "vectors-and-spaces",
       "name": "Vectors & Vector Spaces",
       "tags": ["mathematics", "linear-algebra"],
-      "roadmaps": ["math-rating-climb-30d"],
+      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d", "math-stack-12w"],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -3644,6 +4186,21 @@
           "title": "Essence of Linear Algebra (3Blue1Brown)",
           "url": "https://www.3blue1brown.com/topics/linear-algebra",
           "type": "video"
+        },
+        {
+          "title": "3Blue1Brown — Vectors, what even are they?",
+          "url": "https://www.3blue1brown.com/lessons/vectors",
+          "type": "video"
+        },
+        {
+          "title": "3Blue1Brown — Dot products and duality",
+          "url": "https://www.3blue1brown.com/lessons/dot-products",
+          "type": "video"
+        },
+        {
+          "title": "MIT 18.06 L9 — Independence, basis, and dimension (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-9-independence-basis-and-dimension/",
+          "type": "video"
         }
       ],
       "artifacts": ["visualize-projections"]
@@ -3652,7 +4209,7 @@
       "id": "matrices-and-transformations",
       "name": "Matrices & Linear Transformations",
       "tags": ["mathematics", "linear-algebra"],
-      "roadmaps": ["math-rating-climb-30d"],
+      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d", "math-stack-12w"],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": ["vectors-and-spaces"],
@@ -3680,7 +4237,7 @@
       "id": "eigenvalues-decomposition",
       "name": "Eigenvalues & Matrix Decomposition",
       "tags": ["mathematics", "linear-algebra"],
-      "roadmaps": ["math-rating-climb-30d"],
+      "roadmaps": ["math-rating-climb-30d", "math-stack-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["matrices-and-transformations"],
@@ -3708,7 +4265,19 @@
       "id": "probability-fundamentals",
       "name": "Probability Fundamentals",
       "tags": ["mathematics", "probability"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w",
+        "math-stack-12w"
+      ],
       "difficulty": "intro",
       "priority": 5,
       "prerequisites": [],
@@ -3746,7 +4315,14 @@
       "id": "random-variables",
       "name": "Random Variables & Distributions",
       "tags": ["mathematics", "probability"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["probability-fundamentals"],
@@ -3779,7 +4355,19 @@
       "id": "descriptive-statistics",
       "name": "Descriptive Statistics",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w",
+        "math-stack-12w"
+      ],
       "difficulty": "intro",
       "priority": 4,
       "prerequisites": [],
@@ -3801,8 +4389,8 @@
           "type": "course"
         },
         {
-          "title": "Seeing Theory — Descriptive Statistics",
-          "url": "https://seeing-theory.brown.edu/basic-probability/index.html",
+          "title": "Introduction to Modern Statistics — Ch. 5: Exploring numerical data",
+          "url": "https://openintro-ims.netlify.app/explore-numerical",
           "type": "article"
         }
       ],
@@ -3812,7 +4400,14 @@
       "id": "estimation-confidence",
       "name": "Estimation & Confidence Intervals",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["random-variables", "descriptive-statistics"],
@@ -3840,7 +4435,14 @@
       "id": "hypothesis-testing",
       "name": "Hypothesis Testing",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
+      ],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["estimation-confidence", "probability-fundamentals"],
@@ -3877,7 +4479,7 @@
       "id": "regression-basics",
       "name": "Linear Regression",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d", "math-stack-12w"],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["matrices-and-transformations", "descriptive-statistics"],
@@ -3894,8 +4496,28 @@
       "reviewQuestions": ["rq-regression-as-projection"],
       "resources": [
         {
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/",
+          "type": "doc"
+        },
+        {
+          "title": "An Introduction to Statistical Learning — full text (PDF)",
+          "url": "https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "Stanford CS229 — Main lecture notes (linear regression, least squares)",
+          "url": "https://cs229.stanford.edu/main_notes.pdf",
+          "type": "course"
+        },
+        {
+          "title": "MIT 18.06 L16 — Projection matrices and least squares (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-16-projection-matrices-and-least-squares/",
+          "type": "video"
+        },
+        {
+          "title": "The Truth About Linear Regression (Cosma Shalizi, CMU)",
+          "url": "https://www.stat.cmu.edu/~cshalizi/TALR/TALR.pdf",
           "type": "doc"
         }
       ],
@@ -3905,7 +4527,7 @@
       "id": "derivatives-and-gradients",
       "name": "Derivatives & Gradients",
       "tags": ["mathematics", "calculus"],
-      "roadmaps": ["math-rating-climb-30d"],
+      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d", "math-stack-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["vectors-and-spaces"],
@@ -3943,13 +4565,13 @@
       "id": "multivariable-optimization",
       "name": "Multivariable Optimization",
       "tags": ["mathematics", "calculus"],
-      "roadmaps": ["math-rating-climb-30d"],
+      "roadmaps": ["math-rating-climb-30d", "math-stack-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["derivatives-and-gradients", "matrices-and-transformations"],
       "related": ["ml-gradient-descent", "ml-adamw", "regression-basics"],
       "description": "Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.",
-      "mentalModel": "Convex functions have one bowl-shaped minimum — gradient descent cannot get stuck. Most neural loss surfaces are non-convex but empirically tractable. Constraints (Lagrange multipliers) turn 'find the best point' into 'find the best point on this boundary'.",
+      "mentalModel": "Convexity buys you one thing: no local minimum that is not also global. It does not promise a unique minimizer (a flat valley has many), nor that a minimum exists at all (e^-x descends forever), nor that gradient descent converges — too large a step still diverges, and an ill-conditioned Hessian still crawls. Most neural losses are non-convex yet empirically tractable. Constraints (Lagrange multipliers) turn 'find the best point' into 'find the best point on this boundary'.",
       "commonMistakes": [
         "Assuming every critical point is a minimum",
         "Ignoring learning rate when the Hessian is ill-conditioned",
@@ -3981,7 +4603,7 @@
       "id": "information-entropy",
       "name": "Information & Entropy",
       "tags": ["mathematics", "probability"],
-      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d"],
+      "roadmaps": ["math-rating-climb-30d", "prob-stats-30d", "math-stack-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["probability-fundamentals", "random-variables"],
@@ -4009,7 +4631,7 @@
       "id": "classical-distributions",
       "name": "Classical Distributions",
       "tags": ["mathematics", "probability"],
-      "roadmaps": ["prob-stats-30d"],
+      "roadmaps": ["prob-stats-30d", "math-stack-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["probability-fundamentals", "random-variables"],
@@ -4047,7 +4669,7 @@
       "id": "sampling-and-clt",
       "name": "Sampling & the Central Limit Theorem",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["prob-stats-30d"],
+      "roadmaps": ["prob-stats-30d", "math-stack-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["random-variables", "descriptive-statistics"],
@@ -4080,7 +4702,7 @@
       "id": "ab-testing-engineering",
       "name": "A/B Testing for Engineers",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["prob-stats-30d"],
+      "roadmaps": ["prob-stats-30d", "math-stack-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["hypothesis-testing", "estimation-confidence", "sampling-and-clt"],
@@ -4109,8 +4731,8 @@
           "type": "paper"
         },
         {
-          "title": "Spotify — Experimentation platform & SRM",
-          "url": "https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/",
+          "title": "Spotify — New Experimentation Platform, Part 2 (validity checks & SRM)",
+          "url": "https://engineering.atspotify.com/2020/11/spotifys-new-experimentation-platform-part-2",
           "type": "article"
         }
       ]
@@ -4119,7 +4741,7 @@
       "id": "bayesian-inference",
       "name": "Bayesian Inference",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["prob-stats-30d"],
+      "roadmaps": ["prob-stats-30d", "math-stack-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["probability-fundamentals", "random-variables", "estimation-confidence"],
@@ -4152,7 +4774,7 @@
       "id": "maximum-likelihood",
       "name": "Maximum Likelihood Estimation",
       "tags": ["mathematics", "statistics"],
-      "roadmaps": ["prob-stats-30d"],
+      "roadmaps": ["prob-stats-30d", "math-stack-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["random-variables", "classical-distributions", "derivatives-and-gradients"],
@@ -4174,7 +4796,7 @@
       "reviewQuestions": ["rq-mle-cross-entropy-link", "rq-likelihood-vs-posterior"],
       "resources": [
         {
-          "title": "ISL — Chapter 4: Classification (MLE connection)",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         },
@@ -4213,7 +4835,7 @@
           "type": "article"
         },
         {
-          "title": "ISL — Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         }
@@ -4246,7 +4868,7 @@
           "type": "video"
         },
         {
-          "title": "ISL — Model Assessment",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         }
@@ -4307,9 +4929,14 @@
           "type": "video"
         },
         {
-          "title": "ISL — Principal Components",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/",
           "type": "doc"
+        },
+        {
+          "title": "A Tutorial on Principal Component Analysis (Shlens)",
+          "url": "https://arxiv.org/abs/1404.1100",
+          "type": "paper"
         }
       ]
     },
@@ -4340,7 +4967,7 @@
           "type": "doc"
         },
         {
-          "title": "Hyndman — Forecasting: Principles and Practice",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/",
           "type": "doc"
         }
@@ -4372,8 +4999,18 @@
           "type": "video"
         },
         {
-          "title": "FPP3 — Time series features",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/",
+          "type": "doc"
+        },
+        {
+          "title": "FPP3 — 9.1 Stationarity and differencing",
+          "url": "https://otexts.com/fpp3/stationarity.html",
+          "type": "doc"
+        },
+        {
+          "title": "FPP3 — Ch. 4: Time series features",
+          "url": "https://otexts.com/fpp3/features.html",
           "type": "doc"
         }
       ],
@@ -4404,6 +5041,26 @@
           "title": "MIT 6.041SC — Random processes",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
           "type": "course"
+        },
+        {
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 11: Markov Chains",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter11.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "Grinstead & Snell — Ch. 12: Random Walks",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter12.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "MIT 6.041 L16 — Markov Chains I (Tsitsiklis)",
+          "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/resources/lecture-16-markov-chains-i/",
+          "type": "video"
+        },
+        {
+          "title": "Markov Chains explained visually (Setosa)",
+          "url": "https://setosa.io/ev/markov-chains/",
+          "type": "article"
         }
       ]
     },
@@ -4474,15 +5131,14 @@
       "roadmaps": ["systems-foundations-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": [],
-      "related": ["compute-memory-storage-hierarchy"],
+      "prerequisites": ["compute-memory-storage-hierarchy"],
+      "related": [
+        "compute-memory-storage-hierarchy",
+        "network-protocol-engineering",
+        "concurrency-design"
+      ],
       "description": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
       "mentalModel": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
       "drills": ["practice-operating-system-mechanics"],
       "reviewQuestions": ["rq-operating-system-mechanics"],
       "resources": [
@@ -4506,11 +5162,6 @@
       "related": ["compute-memory-storage-hierarchy", "concurrency-design"],
       "description": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.",
       "mentalModel": "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.",
       "drills": ["practice-network-protocol-engineering"],
       "reviewQuestions": ["rq-network-protocol-engineering"],
       "resources": [
@@ -4530,15 +5181,10 @@
       "roadmaps": ["systems-foundations-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["operating-system-mechanics"],
-      "related": ["operating-system-mechanics", "network-protocol-engineering"],
+      "prerequisites": [],
+      "related": ["operating-system-mechanics", "runtime-performance-engineering"],
       "description": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
       "mentalModel": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
       "drills": ["practice-compute-memory-storage-hierarchy"],
       "reviewQuestions": ["rq-compute-memory-storage-hierarchy"],
       "resources": [
@@ -4562,11 +5208,6 @@
       "related": ["concurrency-design", "security-isolation-boundaries"],
       "description": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.",
       "mentalModel": "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.",
       "drills": ["practice-runtime-performance-engineering"],
       "reviewQuestions": ["rq-runtime-performance-engineering"],
       "resources": [
@@ -4590,11 +5231,6 @@
       "related": ["runtime-performance-engineering"],
       "description": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
       "mentalModel": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
       "drills": ["practice-security-isolation-boundaries"],
       "reviewQuestions": ["rq-security-isolation-boundaries"],
       "resources": [
@@ -4618,11 +5254,6 @@
       "related": ["containers-kubernetes"],
       "description": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.",
       "mentalModel": "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.",
       "drills": ["practice-cloud-infrastructure"],
       "reviewQuestions": ["rq-cloud-infrastructure"],
       "resources": [
@@ -4646,11 +5277,6 @@
       "related": ["cloud-infrastructure", "cicd-developer-environments"],
       "description": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.",
       "mentalModel": "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.",
       "drills": ["practice-containers-kubernetes"],
       "reviewQuestions": ["rq-containers-kubernetes"],
       "resources": [
@@ -4674,11 +5300,6 @@
       "related": ["containers-kubernetes", "platform-scheduling-orchestration"],
       "description": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.",
       "mentalModel": "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.",
       "drills": ["practice-cicd-developer-environments"],
       "reviewQuestions": ["rq-cicd-developer-environments"],
       "resources": [
@@ -4702,11 +5323,6 @@
       "related": ["cicd-developer-environments", "infrastructure-automation"],
       "description": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.",
       "mentalModel": "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.",
       "drills": ["practice-platform-scheduling-orchestration"],
       "reviewQuestions": ["rq-platform-scheduling-orchestration"],
       "resources": [
@@ -4730,11 +5346,6 @@
       "related": ["background-jobs", "retries-dlq"],
       "description": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
       "mentalModel": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
       "drills": ["practice-reliability-fault-tolerance"],
       "reviewQuestions": ["rq-reliability-fault-tolerance"],
       "resources": [
@@ -4758,11 +5369,6 @@
       "related": ["monitoring-analytics", "sandbox-execution-environments"],
       "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
       "mentalModel": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
       "drills": ["practice-opentelemetry-observability"],
       "reviewQuestions": ["rq-opentelemetry-observability"],
       "resources": [
@@ -4786,11 +5392,6 @@
       "related": ["opentelemetry-observability"],
       "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
       "mentalModel": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
       "drills": ["practice-sandbox-execution-environments"],
       "reviewQuestions": ["rq-sandbox-execution-environments"],
       "resources": [
@@ -4814,11 +5415,6 @@
       "related": ["platform-scheduling-orchestration", "background-jobs"],
       "description": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.",
       "mentalModel": "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.",
       "drills": ["practice-infrastructure-automation"],
       "reviewQuestions": ["rq-infrastructure-automation"],
       "resources": [
@@ -4842,11 +5438,6 @@
       "related": ["message-queues", "caching"],
       "description": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.",
       "mentalModel": "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.",
       "drills": ["practice-event-streaming-kafka"],
       "reviewQuestions": ["rq-event-streaming-kafka"],
       "resources": [
@@ -4870,11 +5461,6 @@
       "related": ["distributed-infra", "distributed-failure-recovery"],
       "description": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.",
       "mentalModel": "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.",
       "drills": ["practice-distributed-workflows-temporal"],
       "reviewQuestions": ["rq-distributed-workflows-temporal"],
       "resources": [
@@ -4898,11 +5484,6 @@
       "related": ["distributed-workflows-temporal"],
       "description": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
       "mentalModel": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
       "drills": ["practice-distributed-failure-recovery"],
       "reviewQuestions": ["rq-distributed-failure-recovery"],
       "resources": [
@@ -4926,11 +5507,6 @@
       "related": [],
       "description": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.",
       "mentalModel": "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.",
       "drills": ["practice-transaction-processing"],
       "reviewQuestions": ["rq-transaction-processing"],
       "resources": [
@@ -4954,11 +5530,6 @@
       "related": [],
       "description": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.",
       "mentalModel": "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.",
       "drills": ["practice-query-execution-optimization"],
       "reviewQuestions": ["rq-query-execution-optimization"],
       "resources": [
@@ -4982,11 +5553,6 @@
       "related": [],
       "description": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.",
       "mentalModel": "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.",
       "drills": ["practice-warehouses-lakehouses"],
       "reviewQuestions": ["rq-warehouses-lakehouses"],
       "resources": [
@@ -5010,11 +5576,6 @@
       "related": ["ml-adamw", "ml-training"],
       "description": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.",
       "mentalModel": "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.",
       "drills": ["practice-ml-pretraining"],
       "reviewQuestions": ["rq-ml-pretraining"],
       "resources": [
@@ -5038,11 +5599,6 @@
       "related": ["ml-data-engineering", "open-weight-models"],
       "description": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
       "mentalModel": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
       "drills": ["practice-model-quantization"],
       "reviewQuestions": ["rq-model-quantization"],
       "resources": [
@@ -5066,11 +5622,6 @@
       "related": ["model-quantization", "multimodal-models"],
       "description": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.",
       "mentalModel": "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.",
       "drills": ["practice-open-weight-models"],
       "reviewQuestions": ["rq-open-weight-models"],
       "resources": [
@@ -5087,18 +5638,13 @@
       "id": "inference-engines",
       "name": "vLLM & Inference Engines",
       "tags": ["inference-serving", "inference-engines"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
       "related": ["kv-cache-paged-attention"],
       "description": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
       "mentalModel": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
       "drills": ["practice-inference-engines"],
       "reviewQuestions": ["rq-inference-engines"],
       "resources": [
@@ -5122,11 +5668,6 @@
       "related": ["kv-cache-paged-attention", "model-routing"],
       "description": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.",
       "mentalModel": "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.",
       "drills": ["practice-continuous-batching"],
       "reviewQuestions": ["rq-continuous-batching"],
       "resources": [
@@ -5150,11 +5691,6 @@
       "related": ["inference-engines", "continuous-batching"],
       "description": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.",
       "mentalModel": "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.",
       "drills": ["practice-kv-cache-paged-attention"],
       "reviewQuestions": ["rq-kv-cache-paged-attention"],
       "resources": [
@@ -5174,15 +5710,10 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["model-routing"],
-      "related": ["model-routing", "speculative-decoding"],
+      "prerequisites": ["kv-cache-paged-attention"],
+      "related": ["ml-multi-head", "gpu-utilization", "speculative-decoding"],
       "description": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
       "mentalModel": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
       "drills": ["practice-flashattention-kernels"],
       "reviewQuestions": ["rq-flashattention-kernels"],
       "resources": [
@@ -5206,11 +5737,6 @@
       "related": ["flashattention-kernels", "gpu-utilization"],
       "description": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
       "mentalModel": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
       "drills": ["practice-speculative-decoding"],
       "reviewQuestions": ["rq-speculative-decoding"],
       "resources": [
@@ -5234,11 +5760,6 @@
       "related": ["speculative-decoding", "inference-hardware"],
       "description": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
       "mentalModel": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
       "drills": ["practice-gpu-utilization"],
       "reviewQuestions": ["rq-gpu-utilization"],
       "resources": [
@@ -5262,11 +5783,6 @@
       "related": ["inference-hardware", "local-on-device-inference"],
       "description": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
       "mentalModel": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
       "drills": ["practice-inference-cost-latency"],
       "reviewQuestions": ["rq-inference-cost-latency"],
       "resources": [
@@ -5286,15 +5802,10 @@
       "roadmaps": ["inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["image-video-generation"],
-      "related": ["image-video-generation", "robotics-systems"],
+      "prerequisites": ["inference-engines"],
+      "related": ["model-quantization", "ml-browser-runtime", "inference-cost-latency"],
       "description": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
       "mentalModel": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
       "drills": ["practice-local-on-device-inference"],
       "reviewQuestions": ["rq-local-on-device-inference"],
       "resources": [
@@ -5318,11 +5829,6 @@
       "related": ["gpu-utilization", "inference-cost-latency"],
       "description": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
       "mentalModel": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
       "drills": ["practice-inference-hardware"],
       "reviewQuestions": ["rq-inference-hardware"],
       "resources": [
@@ -5346,11 +5852,6 @@
       "related": ["agent-loops", "mcp-integrations"],
       "description": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.",
       "mentalModel": "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.",
       "drills": ["practice-agent-memory-context"],
       "reviewQuestions": ["rq-agent-memory-context"],
       "resources": [
@@ -5358,6 +5859,21 @@
           "title": "Anthropic — Building Effective Agents",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "doc"
+        },
+        {
+          "title": "MemGPT: Towards LLMs as Operating Systems",
+          "url": "https://arxiv.org/abs/2310.08560",
+          "type": "paper"
+        },
+        {
+          "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+          "url": "https://arxiv.org/abs/2304.03442",
+          "type": "paper"
+        },
+        {
+          "title": "Effective context engineering for AI agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "type": "article"
         }
       ],
       "artifacts": ["synthesize-agent-systems-12w"],
@@ -5374,11 +5890,6 @@
       "related": ["agent-memory-context", "multi-agent-coordination"],
       "description": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.",
       "mentalModel": "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.",
       "drills": ["practice-mcp-integrations"],
       "reviewQuestions": ["rq-mcp-integrations"],
       "resources": [
@@ -5402,11 +5913,6 @@
       "related": ["mcp-integrations", "agent-communication-interfaces"],
       "description": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.",
       "mentalModel": "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.",
       "drills": ["practice-multi-agent-coordination"],
       "reviewQuestions": ["rq-multi-agent-coordination"],
       "resources": [
@@ -5430,17 +5936,12 @@
       "related": ["browser-computer-use-agents", "agent-permissions-sandboxing"],
       "description": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.",
       "mentalModel": "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.",
       "drills": ["practice-durable-agent-execution"],
       "reviewQuestions": ["rq-durable-agent-execution"],
       "resources": [
         {
-          "title": "Temporal — Durable Execution",
-          "url": "https://docs.temporal.io/encyclopedia/durable-execution",
+          "title": "Temporal — Understanding Temporal (Durable Execution)",
+          "url": "https://docs.temporal.io/evaluate/understanding-temporal",
           "type": "doc"
         }
       ],
@@ -5458,11 +5959,6 @@
       "related": ["durable-agent-execution", "long-running-scheduled-agents"],
       "description": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
       "mentalModel": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
       "drills": ["practice-agent-permissions-sandboxing"],
       "reviewQuestions": ["rq-agent-permissions-sandboxing"],
       "resources": [
@@ -5486,11 +5982,6 @@
       "related": ["agent-communication-interfaces", "durable-agent-execution"],
       "description": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.",
       "mentalModel": "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.",
       "drills": ["practice-browser-computer-use-agents"],
       "reviewQuestions": ["rq-browser-computer-use-agents"],
       "resources": [
@@ -5514,11 +6005,6 @@
       "related": ["multi-agent-coordination", "browser-computer-use-agents"],
       "description": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.",
       "mentalModel": "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.",
       "drills": ["practice-agent-communication-interfaces"],
       "reviewQuestions": ["rq-agent-communication-interfaces"],
       "resources": [
@@ -5542,11 +6028,6 @@
       "related": ["agent-permissions-sandboxing"],
       "description": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.",
       "mentalModel": "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.",
       "drills": ["practice-long-running-scheduled-agents"],
       "reviewQuestions": ["rq-long-running-scheduled-agents"],
       "resources": [
@@ -5570,11 +6051,6 @@
       "related": ["ml-evaluation", "tool-use-evaluations"],
       "description": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
       "mentalModel": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
       "drills": ["practice-coding-agent-benchmarks"],
       "reviewQuestions": ["rq-coding-agent-benchmarks"],
       "resources": [
@@ -5598,11 +6074,6 @@
       "related": ["coding-agent-benchmarks", "prompt-versioning"],
       "description": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
       "mentalModel": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
       "drills": ["practice-tool-use-evaluations"],
       "reviewQuestions": ["rq-tool-use-evaluations"],
       "resources": [
@@ -5626,11 +6097,6 @@
       "related": ["prompt-versioning", "hallucination-failure-detection"],
       "description": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
       "mentalModel": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
       "drills": ["practice-ai-regression-testing"],
       "reviewQuestions": ["rq-ai-regression-testing"],
       "resources": [
@@ -5654,18 +6120,23 @@
       "related": ["ai-regression-testing", "quality-cost-latency-measurement"],
       "description": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.",
       "mentalModel": "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.",
       "drills": ["practice-hallucination-failure-detection"],
       "reviewQuestions": ["rq-hallucination-failure-detection"],
       "resources": [
         {
-          "title": "NIST AI Risk Management Framework",
-          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
-          "type": "doc"
+          "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative LLMs",
+          "url": "https://arxiv.org/abs/2303.08896",
+          "type": "paper"
+        },
+        {
+          "title": "Detecting hallucinations in large language models using semantic entropy (Nature, 2024)",
+          "url": "https://www.nature.com/articles/s41586-024-07421-0",
+          "type": "paper"
+        },
+        {
+          "title": "Extrinsic Hallucinations in LLMs (Lilian Weng)",
+          "url": "https://lilianweng.github.io/posts/2024-07-07-hallucination/",
+          "type": "article"
         }
       ],
       "artifacts": ["synthesize-ai-reliability-12w"],
@@ -5682,11 +6153,6 @@
       "related": ["quality-cost-latency-measurement", "tracing-replay"],
       "description": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.",
       "mentalModel": "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.",
       "drills": ["practice-agent-observability"],
       "reviewQuestions": ["rq-agent-observability"],
       "resources": [
@@ -5710,11 +6176,6 @@
       "related": ["agent-observability", "evidence-backed-verification"],
       "description": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.",
       "mentalModel": "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.",
       "drills": ["practice-tracing-replay"],
       "reviewQuestions": ["rq-tracing-replay"],
       "resources": [
@@ -5738,18 +6199,23 @@
       "related": ["tracing-replay", "human-review-systems"],
       "description": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.",
       "mentalModel": "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.",
       "drills": ["practice-evidence-backed-verification"],
       "reviewQuestions": ["rq-evidence-backed-verification"],
       "resources": [
         {
-          "title": "Google Testing Blog",
-          "url": "https://testing.googleblog.com/",
-          "type": "doc"
+          "title": "RARR: Researching and Revising What Language Models Say, Using Language Models",
+          "url": "https://arxiv.org/abs/2210.08726",
+          "type": "paper"
+        },
+        {
+          "title": "Enabling Large Language Models to Generate Text with Citations (ALCE)",
+          "url": "https://arxiv.org/abs/2305.14627",
+          "type": "paper"
+        },
+        {
+          "title": "Google Testing Blog — Just Say No to More End-to-End Tests",
+          "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html",
+          "type": "article"
         }
       ],
       "artifacts": ["synthesize-ai-reliability-12w"],
@@ -5766,17 +6232,22 @@
       "related": ["evidence-backed-verification"],
       "description": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.",
       "mentalModel": "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.",
       "drills": ["practice-human-review-systems"],
       "reviewQuestions": ["rq-human-review-systems"],
       "resources": [
         {
-          "title": "NIST Human-Centered AI",
-          "url": "https://www.nist.gov/artificial-intelligence",
+          "title": "People + AI Guidebook — Feedback + Control (Google PAIR)",
+          "url": "https://pair.withgoogle.com/chapter/feedback-controls/",
+          "type": "doc"
+        },
+        {
+          "title": "People + AI Guidebook — Errors + Graceful Failure (Google PAIR)",
+          "url": "https://pair.withgoogle.com/chapter/errors-failing/",
+          "type": "doc"
+        },
+        {
+          "title": "NIST AI Risk Management Framework 1.0 (NIST AI 100-1, PDF)",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
           "type": "doc"
         }
       ],
@@ -5794,11 +6265,6 @@
       "related": ["hallucination-failure-detection", "agent-observability"],
       "description": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
       "mentalModel": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
       "drills": ["practice-quality-cost-latency-measurement"],
       "reviewQuestions": ["rq-quality-cost-latency-measurement"],
       "resources": [
@@ -5822,17 +6288,27 @@
       "related": ["static-dynamic-analysis"],
       "description": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.",
       "mentalModel": "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.",
       "drills": ["practice-code-review-systems"],
       "reviewQuestions": ["rq-code-review-systems"],
       "resources": [
         {
           "title": "Google Engineering Practices — Code Review",
           "url": "https://google.github.io/eng-practices/review/",
+          "type": "doc"
+        },
+        {
+          "title": "Modern Code Review: A Case Study at Google (ICSE-SEIP 2018)",
+          "url": "https://research.google/pubs/modern-code-review-a-case-study-at-google/",
+          "type": "paper"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 9: Code Review",
+          "url": "https://abseil.io/resources/swe-book/html/ch09.html",
+          "type": "doc"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 19: Critique, Google's Code Review Tool",
+          "url": "https://abseil.io/resources/swe-book/html/ch19.html",
           "type": "doc"
         }
       ],
@@ -5850,17 +6326,32 @@
       "related": ["code-review-systems", "testing-infrastructure"],
       "description": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.",
       "mentalModel": "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.",
       "drills": ["practice-static-dynamic-analysis"],
       "reviewQuestions": ["rq-static-dynamic-analysis"],
       "resources": [
         {
           "title": "CodeQL Documentation",
           "url": "https://codeql.github.com/docs/",
+          "type": "doc"
+        },
+        {
+          "title": "Lessons from Building Static Analysis Tools at Google (CACM 2018)",
+          "url": "https://research.google/pubs/lessons-from-building-static-analysis-tools-at-google/",
+          "type": "paper"
+        },
+        {
+          "title": "Easy Abstract Interpretation with SPARTA (Strange Loop 2019)",
+          "url": "https://www.youtube.com/watch?v=_fA7vkVJhF8",
+          "type": "video"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 20: Static Analysis",
+          "url": "https://abseil.io/resources/swe-book/html/ch20.html",
+          "type": "doc"
+        },
+        {
+          "title": "AddressSanitizer (Clang docs) — dynamic analysis",
+          "url": "https://clang.llvm.org/docs/AddressSanitizer.html",
           "type": "doc"
         }
       ],
@@ -5878,17 +6369,32 @@
       "related": ["static-dynamic-analysis", "codebase-graphs"],
       "description": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.",
       "mentalModel": "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.",
       "drills": ["practice-testing-infrastructure"],
       "reviewQuestions": ["rq-testing-infrastructure"],
       "resources": [
         {
           "title": "Bazel Test Encyclopedia",
           "url": "https://bazel.build/reference/test-encyclopedia",
+          "type": "doc"
+        },
+        {
+          "title": "John Hughes — Testing the Hard Stuff and Staying Sane",
+          "url": "https://www.youtube.com/watch?v=zi0rHwfiX1Q",
+          "type": "video"
+        },
+        {
+          "title": "Flaky Tests at Google and How We Mitigate Them",
+          "url": "https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html",
+          "type": "article"
+        },
+        {
+          "title": "libFuzzer — coverage-guided fuzz testing (LLVM)",
+          "url": "https://llvm.org/docs/LibFuzzer.html",
+          "type": "doc"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 14: Larger Testing",
+          "url": "https://abseil.io/resources/swe-book/html/ch14.html",
           "type": "doc"
         }
       ],
@@ -5906,17 +6412,32 @@
       "related": ["testing-infrastructure", "dependency-blast-radius"],
       "description": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.",
       "mentalModel": "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.",
       "drills": ["practice-codebase-graphs"],
       "reviewQuestions": ["rq-codebase-graphs"],
       "resources": [
         {
           "title": "SCIP Code Intelligence Protocol",
           "url": "https://github.com/sourcegraph/scip",
+          "type": "doc"
+        },
+        {
+          "title": "SCIP — a better code indexing format than LSIF (Sourcegraph)",
+          "url": "https://sourcegraph.com/blog/announcing-scip",
+          "type": "article"
+        },
+        {
+          "title": "LSIF Specification 0.6.0",
+          "url": "https://microsoft.github.io/language-server-protocol/specifications/lsif/0.6.0/specification/",
+          "type": "doc"
+        },
+        {
+          "title": "Introducing stack graphs (GitHub Engineering)",
+          "url": "https://github.blog/open-source/introducing-stack-graphs/",
+          "type": "article"
+        },
+        {
+          "title": "Glean — Meta's code-fact database (Angle queries)",
+          "url": "https://glean.software/docs/introduction/",
           "type": "doc"
         }
       ],
@@ -5934,17 +6455,27 @@
       "related": ["codebase-graphs", "repository-intelligence"],
       "description": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.",
       "mentalModel": "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.",
       "drills": ["practice-dependency-blast-radius"],
       "reviewQuestions": ["rq-dependency-blast-radius"],
       "resources": [
         {
           "title": "Bazel Query How-To",
           "url": "https://bazel.build/query/guide",
+          "type": "doc"
+        },
+        {
+          "title": "Build Systems à la Carte (ICFP 2018)",
+          "url": "https://simon.peytonjones.org/build-systems-a-la-carte/",
+          "type": "paper"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 21: Dependency Management",
+          "url": "https://abseil.io/resources/swe-book/html/ch21.html",
+          "type": "doc"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 22: Large-Scale Changes",
+          "url": "https://abseil.io/resources/swe-book/html/ch22.html",
           "type": "doc"
         }
       ],
@@ -5962,17 +6493,32 @@
       "related": ["repository-intelligence", "coding-agent-systems"],
       "description": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.",
       "mentalModel": "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.",
       "drills": ["practice-ide-cli-tooling"],
       "reviewQuestions": ["rq-ide-cli-tooling"],
       "resources": [
         {
           "title": "Language Server Protocol Specification",
           "url": "https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/",
+          "type": "doc"
+        },
+        {
+          "title": "Debug Adapter Protocol — overview",
+          "url": "https://microsoft.github.io/debug-adapter-protocol/overview",
+          "type": "doc"
+        },
+        {
+          "title": "Command Line Interface Guidelines (clig.dev)",
+          "url": "https://clig.dev/",
+          "type": "doc"
+        },
+        {
+          "title": "ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}",
+          "url": "https://blog.burntsushi.net/ripgrep/",
+          "type": "article"
+        },
+        {
+          "title": "Tree-sitter — Using Parsers",
+          "url": "https://tree-sitter.github.io/tree-sitter/using-parsers/",
           "type": "doc"
         }
       ],
@@ -5990,11 +6536,6 @@
       "related": ["ide-cli-tooling", "software-supply-chain-health"],
       "description": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.",
       "mentalModel": "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.",
       "drills": ["practice-coding-agent-systems"],
       "reviewQuestions": ["rq-coding-agent-systems"],
       "resources": [
@@ -6002,6 +6543,21 @@
           "title": "SWE-agent",
           "url": "https://swe-agent.com/",
           "type": "doc"
+        },
+        {
+          "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "url": "https://arxiv.org/abs/2310.06770",
+          "type": "paper"
+        },
+        {
+          "title": "OpenHands: An Open Platform for AI Software Developers",
+          "url": "https://arxiv.org/abs/2407.16741",
+          "type": "paper"
+        },
+        {
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "article"
         }
       ],
       "artifacts": ["synthesize-developer-tools-12w"],
@@ -6018,11 +6574,6 @@
       "related": ["dependency-blast-radius", "ide-cli-tooling"],
       "description": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.",
       "mentalModel": "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.",
       "drills": ["practice-repository-intelligence"],
       "reviewQuestions": ["rq-repository-intelligence"],
       "resources": [
@@ -6030,6 +6581,26 @@
           "title": "GitHub Code Search Syntax",
           "url": "https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax",
           "type": "doc"
+        },
+        {
+          "title": "Software Engineering at Google — Ch. 17: Code Search",
+          "url": "https://abseil.io/resources/swe-book/html/ch17.html",
+          "type": "doc"
+        },
+        {
+          "title": "Regular Expression Matching with a Trigram Index (Russ Cox)",
+          "url": "https://swtch.com/~rsc/regexp/regexp4.html",
+          "type": "article"
+        },
+        {
+          "title": "The technology behind GitHub's new code search (Blackbird)",
+          "url": "https://github.blog/engineering/the-technology-behind-githubs-new-code-search/",
+          "type": "article"
+        },
+        {
+          "title": "CodeSearchNet Challenge: Evaluating Semantic Code Search",
+          "url": "https://arxiv.org/abs/1909.09436",
+          "type": "paper"
         }
       ],
       "artifacts": ["synthesize-developer-tools-12w"],
@@ -6046,11 +6617,6 @@
       "related": ["coding-agent-systems", "automated-debugging-remediation"],
       "description": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.",
       "mentalModel": "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.",
       "drills": ["practice-software-supply-chain-health"],
       "reviewQuestions": ["rq-software-supply-chain-health"],
       "resources": [
@@ -6058,6 +6624,26 @@
           "title": "SLSA Specification",
           "url": "https://slsa.dev/spec/v1.1/",
           "type": "doc"
+        },
+        {
+          "title": "USENIX Security '19 — in-toto: farm-to-table guarantees for bits and bytes",
+          "url": "https://www.youtube.com/watch?v=gLVmWA7LBjA",
+          "type": "video"
+        },
+        {
+          "title": "in-toto: Providing farm-to-table guarantees for bits and bytes",
+          "url": "https://www.usenix.org/conference/usenixsecurity19/presentation/torres-arias",
+          "type": "paper"
+        },
+        {
+          "title": "Sigstore — overview (signing, transparency log, attestations)",
+          "url": "https://docs.sigstore.dev/about/overview/",
+          "type": "doc"
+        },
+        {
+          "title": "Our Software Dependency Problem (Russ Cox)",
+          "url": "https://research.swtch.com/deps",
+          "type": "article"
         }
       ],
       "artifacts": ["synthesize-developer-tools-12w"],
@@ -6074,17 +6660,32 @@
       "related": ["software-supply-chain-health"],
       "description": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.",
       "mentalModel": "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.",
       "drills": ["practice-automated-debugging-remediation"],
       "reviewQuestions": ["rq-automated-debugging-remediation"],
       "resources": [
         {
           "title": "Delta Debugging",
           "url": "https://www.st.cs.uni-saarland.de/dd/",
+          "type": "doc"
+        },
+        {
+          "title": "Simplifying and Isolating Failure-Inducing Input (delta debugging, Zeller & Hildebrandt)",
+          "url": "https://www.cs.columbia.edu/~junfeng/18sp-e6121/papers/delta-debug.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "The Debugging Book — Statistical Debugging (fault localization)",
+          "url": "https://www.debuggingbook.org/html/StatisticalDebugger.html",
+          "type": "doc"
+        },
+        {
+          "title": "The Debugging Book — Reducing Failure-Inducing Inputs",
+          "url": "https://www.debuggingbook.org/html/DeltaDebugger.html",
+          "type": "doc"
+        },
+        {
+          "title": "program-repair.org — index of APR tools and benchmarks",
+          "url": "https://program-repair.org/",
           "type": "doc"
         }
       ],
@@ -6102,11 +6703,6 @@
       "related": ["api-design", "ux-interface-design"],
       "description": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.",
       "mentalModel": "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.",
       "drills": ["practice-web-mobile-engineering"],
       "reviewQuestions": ["rq-web-mobile-engineering"],
       "resources": [
@@ -6130,11 +6726,6 @@
       "related": ["web-mobile-engineering", "real-time-application-engineering"],
       "description": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
       "mentalModel": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
       "drills": ["practice-ux-interface-design"],
       "reviewQuestions": ["rq-ux-interface-design"],
       "resources": [
@@ -6158,11 +6749,6 @@
       "related": ["ux-interface-design", "messaging-realtime"],
       "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
       "mentalModel": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
       "drills": ["practice-real-time-application-engineering"],
       "reviewQuestions": ["rq-real-time-application-engineering"],
       "resources": [
@@ -6186,17 +6772,32 @@
       "related": ["game-design", "product-analytics"],
       "description": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
       "mentalModel": "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
       "drills": ["practice-interactive-2d-3d-systems"],
       "reviewQuestions": ["rq-interactive-2d-3d-systems"],
       "resources": [
         {
           "title": "WebGPU Specification",
           "url": "https://www.w3.org/TR/webgpu/",
+          "type": "doc"
+        },
+        {
+          "title": "Fix Your Timestep! (Gaffer On Games)",
+          "url": "https://gafferongames.com/post/fix_your_timestep/",
+          "type": "article"
+        },
+        {
+          "title": "Game Programming Patterns — Game Loop (Nystrom)",
+          "url": "https://gameprogrammingpatterns.com/game-loop.html",
+          "type": "doc"
+        },
+        {
+          "title": "WebGPU Fundamentals — Scene Graphs",
+          "url": "https://webgpufundamentals.org/webgpu/lessons/webgpu-scene-graphs.html",
+          "type": "doc"
+        },
+        {
+          "title": "LearnOpenGL — Coordinate Systems",
+          "url": "https://learnopengl.com/Getting-started/Coordinate-Systems",
           "type": "doc"
         }
       ],
@@ -6210,15 +6811,10 @@
       "roadmaps": ["ai-models-training-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": [],
-      "related": ["vision-models"],
+      "prerequisites": ["vision-models"],
+      "related": ["vision-models", "voice-audio-systems", "ml-embeddings"],
       "description": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
       "mentalModel": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
       "drills": ["practice-multimodal-models"],
       "reviewQuestions": ["rq-multimodal-models"],
       "resources": [
@@ -6235,18 +6831,13 @@
       "id": "vision-models",
       "name": "Vision Models",
       "tags": ["multimodal-spatial", "computer-vision"],
-      "roadmaps": ["multimodal-spatial-12w"],
+      "roadmaps": ["multimodal-spatial-12w", "ai-models-training-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["multimodal-models"],
-      "related": ["multimodal-models", "voice-audio-systems"],
+      "prerequisites": [],
+      "related": ["multimodal-models", "pose-motion-tracking", "image-video-generation"],
       "description": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
       "mentalModel": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
       "drills": ["practice-vision-models"],
       "reviewQuestions": ["rq-vision-models"],
       "resources": [
@@ -6266,15 +6857,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["voice-audio-systems"],
-      "related": ["voice-audio-systems", "image-video-generation"],
+      "prerequisites": ["vision-models"],
+      "related": ["vision-models", "robotics-systems", "spatial-interfaces"],
       "description": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
       "mentalModel": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
       "drills": ["practice-pose-motion-tracking"],
       "reviewQuestions": ["rq-pose-motion-tracking"],
       "resources": [
@@ -6294,15 +6880,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["vision-models"],
-      "related": ["vision-models", "pose-motion-tracking"],
+      "prerequisites": [],
+      "related": ["multimodal-models", "human-computer-interaction"],
       "description": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
       "mentalModel": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
       "drills": ["practice-voice-audio-systems"],
       "reviewQuestions": ["rq-voice-audio-systems"],
       "resources": [
@@ -6322,15 +6903,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["pose-motion-tracking"],
-      "related": ["pose-motion-tracking", "local-on-device-inference"],
+      "prerequisites": ["vision-models"],
+      "related": ["vision-models", "ml-training"],
       "description": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
       "mentalModel": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
       "drills": ["practice-image-video-generation"],
       "reviewQuestions": ["rq-image-video-generation"],
       "resources": [
@@ -6350,15 +6926,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["local-on-device-inference"],
-      "related": ["local-on-device-inference", "spatial-interfaces"],
+      "prerequisites": ["pose-motion-tracking"],
+      "related": ["pose-motion-tracking", "local-on-device-inference"],
       "description": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
       "mentalModel": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
       "drills": ["practice-robotics-systems"],
       "reviewQuestions": ["rq-robotics-systems"],
       "resources": [
@@ -6378,15 +6949,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["robotics-systems"],
-      "related": ["robotics-systems", "human-computer-interaction"],
+      "prerequisites": ["human-computer-interaction", "pose-motion-tracking"],
+      "related": ["human-computer-interaction", "pose-motion-tracking", "ml-webgpu"],
       "description": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
       "mentalModel": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
       "drills": ["practice-spatial-interfaces"],
       "reviewQuestions": ["rq-spatial-interfaces"],
       "resources": [
@@ -6406,15 +6972,10 @@
       "roadmaps": ["multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["spatial-interfaces"],
-      "related": ["spatial-interfaces", "ml-webgpu"],
+      "prerequisites": [],
+      "related": ["ux-interface-design", "spatial-interfaces"],
       "description": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
       "mentalModel": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
-      "commonMistakes": [
-        "Naming a tool without explaining the mechanism or failure mode",
-        "Optimizing one metric while ignoring the system-level trade-off"
-      ],
-      "realWorldUsage": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
       "drills": ["practice-human-computer-interaction"],
       "reviewQuestions": ["rq-human-computer-interaction"],
       "resources": [

@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Automated Debugging &amp; Remediation</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Delta Debugging to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Delta Debugging, Simplifying and Isolating Failure-Inducing Input (delta debugging, Zeller &amp; Hildebrandt), The Debugging Book — Statistical Debugging (fault localization) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Automated Debugging &amp; Remediation with Software Supply-chain Health. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Automated Debugging &amp; Remediation and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://www.st.cs.uni-saarland.de/dd/" rel="noreferrer">Delta Debugging</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://www.st.cs.uni-saarland.de/dd/" rel="noreferrer">Delta Debugging</a> <span class="muted">(doc)</span></li><li><a href="https://www.cs.columbia.edu/~junfeng/18sp-e6121/papers/delta-debug.pdf" rel="noreferrer">Simplifying and Isolating Failure-Inducing Input (delta debugging, Zeller &amp; Hildebrandt)</a> <span class="muted">(paper)</span></li><li><a href="https://www.debuggingbook.org/html/StatisticalDebugger.html" rel="noreferrer">The Debugging Book — Statistical Debugging (fault localization)</a> <span class="muted">(doc)</span></li><li><a href="https://www.debuggingbook.org/html/DeltaDebugger.html" rel="noreferrer">The Debugging Book — Reducing Failure-Inducing Inputs</a> <span class="muted">(doc)</span></li><li><a href="https://program-repair.org/" rel="noreferrer">program-repair.org — index of APR tools and benchmarks</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with reproduction, faultLocalization, patchVerification plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-automated-debugging-remediation">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Automated Debugging &amp; Remediation?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why must reproduction come before hypothesis generation in an automated repair loop?</li></ul>
     </section>
 
     <section>

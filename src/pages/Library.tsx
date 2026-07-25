@@ -3,11 +3,25 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useLibrary } from '../hooks/useLibrary';
+import { useProfile } from '../hooks/useProfile';
+import { trackFilter } from '../lib/profile';
+import { tagsMatchTracks } from '../lib/trackMatch';
 
 export default function Library() {
   const { repos, search, generatedAt } = useLibrary();
+  const { profile } = useProfile();
   const [query, setQuery] = useState('');
-  const filtered = useMemo(() => search(query), [query, search]);
+  const [allTracks, setAllTracks] = useState(false);
+  const tracks = trackFilter(profile);
+  const matched = useMemo(() => search(query), [query, search]);
+  // Selected tracks come first; the rest stay one click away rather than
+  // disappearing, because the repo tags only map onto tracks approximately.
+  const inTracks = useMemo(
+    () => (tracks ? matched.filter((r) => tagsMatchTracks(r.tags, tracks)) : matched),
+    [matched, tracks]
+  );
+  const narrowed = tracks && !allTracks && inTracks.length > 0;
+  const filtered = narrowed ? inTracks : matched;
   const totals = useMemo(
     () => ({
       sections: repos.reduce((sum, repo) => sum + repo.sectionCount, 0),
@@ -68,9 +82,22 @@ export default function Library() {
           className="h-11 w-full rounded-md border border-white/10 bg-white/[0.04] pl-10 pr-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-sky-400/50"
         />
       </label>
-      <div className="mb-3 flex items-center justify-between text-xs text-white/35">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-white/35">
         <span>{filtered.length} repositories</span>
-        {query && <span>Matching “{query}”</span>}
+        <div className="flex items-center gap-3">
+          {query && <span>Matching “{query}”</span>}
+          {tracks && inTracks.length > 0 && inTracks.length < matched.length && (
+            <button
+              type="button"
+              onClick={() => setAllTracks((v) => !v)}
+              className="underline hover:text-white/70"
+            >
+              {narrowed
+                ? `Showing your tracks · show all ${matched.length}`
+                : 'Show only my tracks'}
+            </button>
+          )}
+        </div>
       </div>
       <section className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((repo) => (

@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Software Supply-chain Health</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use SLSA Specification to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use SLSA Specification, USENIX Security &#39;19 — in-toto: farm-to-table guarantees for bits and bytes, in-toto: Providing farm-to-table guarantees for bits and bytes to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Software Supply-chain Health with Coding Agent Systems, Automated Debugging &amp; Remediation. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Software Supply-chain Health and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://slsa.dev/spec/v1.1/" rel="noreferrer">SLSA Specification</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://slsa.dev/spec/v1.1/" rel="noreferrer">SLSA Specification</a> <span class="muted">(doc)</span></li><li><a href="https://www.youtube.com/watch?v=gLVmWA7LBjA" rel="noreferrer">USENIX Security &#39;19 — in-toto: farm-to-table guarantees for bits and bytes</a> <span class="muted">(video)</span></li><li><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/torres-arias" rel="noreferrer">in-toto: Providing farm-to-table guarantees for bits and bytes</a> <span class="muted">(paper)</span></li><li><a href="https://docs.sigstore.dev/about/overview/" rel="noreferrer">Sigstore — overview (signing, transparency log, attestations)</a> <span class="muted">(doc)</span></li><li><a href="https://research.swtch.com/deps" rel="noreferrer">Our Software Dependency Problem (Russ Cox)</a> <span class="muted">(article)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with provenance, dependencyPolicy, artifactVerification plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-software-supply-chain-health">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Software Supply-chain Health?</li></ul>
+      <h3>Review prompts</h3><ul><li>An SBOM and a provenance attestation answer different questions. What are they?</li></ul>
     </section>
 
     <section>

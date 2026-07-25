@@ -6,6 +6,7 @@ import {
   EDITORIAL_DRILLS,
   REVIEW_QUESTIONS,
   type ReviewQuestion,
+  primaryGroup,
   type Roadmap,
   ROADMAP_BY_ID,
   ROADMAPS,
@@ -21,6 +22,7 @@ import {
   type LearnerProfile,
   normalizeModalityWeights,
   normalizeRoadmapWeights,
+  trackFilter,
 } from './profile';
 import {
   pickDrillForConcept,
@@ -89,6 +91,14 @@ function pickWeightedRoadmap(
   return ROADMAP_BY_ID[best?.id ?? 'ai-search-infra-90-day'] ?? ROADMAPS[0];
 }
 
+/** True when the learner has not narrowed tracks, or this concept is in one. */
+export function conceptInSelectedTracks(concept: Concept, tracks: Set<string> | null): boolean {
+  if (!tracks) return true;
+  if (concept.tags.some((tag) => tracks.has(tag))) return true;
+  const group = primaryGroup(concept);
+  return group ? tracks.has(group.id) : false;
+}
+
 export function pickConceptForSession(
   profile: LearnerProfile,
   mastery: Record<string, MasteryEntry>,
@@ -96,6 +106,7 @@ export function pickConceptForSession(
 ): { roadmap: Roadmap; concept: Concept } | null {
   const skip = new Set(profile.skipConceptIds);
   const weights = normalizeRoadmapWeights(profile.roadmapWeights);
+  const tracks = trackFilter(profile);
 
   // Due concepts across weighted roadmaps first
   const dueCandidates: { concept: Concept; roadmap: Roadmap; score: number }[] = [];
@@ -105,6 +116,7 @@ export function pickConceptForSession(
     const idSet = new Set(roadmap.milestones.flatMap((m) => m.concepts));
     for (const c of ALL_CONCEPTS) {
       if (!idSet.has(c.id) || skip.has(c.id)) continue;
+      if (!conceptInSelectedTracks(c, tracks)) continue;
       if (!isDue(mastery[c.id]) || !reachable(c, mastery, gateCtx, skip)) continue;
       dueCandidates.push({
         concept: c,
@@ -124,13 +136,31 @@ export function pickConceptForSession(
     const roadmap = ROADMAP_BY_ID[rid];
     if (!roadmap) continue;
     const concept = pickNextConceptInRoadmap(roadmap, mastery, gateCtx);
-    if (concept && !skip.has(concept.id)) return { roadmap, concept };
+    if (concept && !skip.has(concept.id) && conceptInSelectedTracks(concept, tracks)) {
+      return { roadmap, concept };
+    }
   }
 
   const global = pickNextConcept(mastery, gateCtx);
-  if (global && !skip.has(global.id)) {
+  if (global && !skip.has(global.id) && conceptInSelectedTracks(global, tracks)) {
     const roadmap = pickWeightedRoadmap(profile, mastery);
     return { roadmap, concept: global };
+  }
+
+  if (tracks) {
+    // The weighted roadmaps may not cover the tracks the learner picked, so
+    // look across the whole catalogue before giving up on their choice.
+    const inTrack = ALL_CONCEPTS.filter(
+      (c) =>
+        conceptInSelectedTracks(c, tracks) &&
+        deriveConceptStatus(mastery[c.id]) !== 'mastered' &&
+        reachable(c, mastery, gateCtx, skip)
+    ).sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+    if (inTrack.length) {
+      return { roadmap: pickWeightedRoadmap(profile, mastery), concept: inTrack[0] };
+    }
+    // A track filter narrows the session; it must not be able to empty it.
+    return pickConceptForSession({ ...profile, trackIds: [] }, mastery, gateCtx);
   }
   return null;
 }
@@ -205,9 +235,21 @@ export function buildSessionPlan(opts: {
 
   let picked = pickConceptForSession(profile, mastery, gateCtx);
   const failedConcept = pickFailedDrillConcept(drillState, mastery);
-  if (failedConcept && (!picked || (mastery[failedConcept.id]?.confidence ?? 1) < 0.55)) {
+  const failedConceptAllowed =
+    failedConcept &&
+    !new Set(profile.skipConceptIds).has(failedConcept.id) &&
+    conceptInSelectedTracks(failedConcept, trackFilter(profile))
+      ? failedConcept
+      : null;
+  // An untouched concept has NO confidence, not maximum confidence — the old
+  // `?? 1` default meant this override could never fire for a concept the
+  // learner had failed but never formally reviewed.
+  if (
+    failedConceptAllowed &&
+    (!picked || (mastery[failedConceptAllowed.id]?.confidence ?? 0) < 0.55)
+  ) {
     picked = {
-      concept: failedConcept,
+      concept: failedConceptAllowed,
       roadmap: pickWeightedRoadmap(profile, mastery),
     };
   }

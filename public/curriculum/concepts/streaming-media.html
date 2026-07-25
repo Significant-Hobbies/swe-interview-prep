@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Streaming Media</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, HTTP Live Streaming (Apple Developer), RFC 8216 — HTTP Live Streaming to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Streaming Media with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Video streaming (Netflix-style) and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://developer.apple.com/streaming/" rel="noreferrer">HTTP Live Streaming (Apple Developer)</a> <span class="muted">(doc)</span></li><li><a href="https://www.rfc-editor.org/rfc/rfc8216" rel="noreferrer">RFC 8216 — HTTP Live Streaming</a> <span class="muted">(paper)</span></li><li><a href="https://netflixtechblog.com/per-title-encode-optimization-7e99442b62a2" rel="noreferrer">Netflix — Per-Title Encode Optimization</a> <span class="muted">(article)</span></li><li><a href="https://openconnect.netflix.com/en/" rel="noreferrer">Netflix Open Connect (their own CDN)</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> CDN + manifest (HLS/DASH) flow + the bitrate-adaptation loop.</p>
           <a href="/drills/design-video-streaming">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Streaming Media in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>What does adaptive bitrate demand of the encoding pipeline?</li></ul>
     </section>
 
     <section>

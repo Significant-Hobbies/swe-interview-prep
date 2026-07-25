@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Repository Intelligence</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use GitHub Code Search Syntax to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use GitHub Code Search Syntax, Software Engineering at Google — Ch. 17: Code Search, Regular Expression Matching with a Trigram Index (Russ Cox) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Repository Intelligence with Dependency &amp; Blast-radius Analysis, IDE &amp; CLI Tooling. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Repository Intelligence and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax" rel="noreferrer">GitHub Code Search Syntax</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax" rel="noreferrer">GitHub Code Search Syntax</a> <span class="muted">(doc)</span></li><li><a href="https://abseil.io/resources/swe-book/html/ch17.html" rel="noreferrer">Software Engineering at Google — Ch. 17: Code Search</a> <span class="muted">(doc)</span></li><li><a href="https://swtch.com/~rsc/regexp/regexp4.html" rel="noreferrer">Regular Expression Matching with a Trigram Index (Russ Cox)</a> <span class="muted">(article)</span></li><li><a href="https://github.blog/engineering/the-technology-behind-githubs-new-code-search/" rel="noreferrer">The technology behind GitHub&#39;s new code search (Blackbird)</a> <span class="muted">(article)</span></li><li><a href="https://arxiv.org/abs/1909.09436" rel="noreferrer">CodeSearchNet Challenge: Evaluating Semantic Code Search</a> <span class="muted">(paper)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with index, retrieval, contextAssembly plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-repository-intelligence">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Repository Intelligence?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is embedding-based semantic search insufficient on its own for repository questions?</li></ul>
     </section>
 
     <section>

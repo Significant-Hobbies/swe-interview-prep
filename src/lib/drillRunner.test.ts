@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { DRILLS } from '../data/learning-os';
+import { drillVerification } from './contentQuality';
 import { runDrillTests, type DrillTestCase } from './drillRunner';
 
 describe('runDrillTests', () => {
@@ -54,6 +56,23 @@ describe('runDrillTests', () => {
     expect(result.output).toBe('8');
   });
 
+  it('grades only what `run` prints, not what the editor printed', () => {
+    const tests: DrillTestCase[] = [{ run: 'console.log(solve());', expect: '42' }];
+    // Printing the expected answer at the top level used to be enough.
+    const spoof = 'console.log("42");\nfunction solve() { return 0; }';
+    expect(runDrillTests(spoof, tests).passed).toBe(false);
+    expect(runDrillTests('function solve() { return 42; }', tests).passed).toBe(true);
+  });
+
+  it('lets user code redeclare a setup const instead of throwing', () => {
+    const tests: DrillTestCase[] = [
+      { setup: 'const LIMIT = 1;', run: 'console.log(LIMIT);', expect: '9' },
+    ];
+    const result = runDrillTests('const LIMIT = 9;', tests);
+    expect(result.errors).toBe('');
+    expect(result.passed).toBe(true);
+  });
+
   it('returns runtime errors without throwing', () => {
     const tests: DrillTestCase[] = [
       {
@@ -65,5 +84,44 @@ describe('runDrillTests', () => {
     expect(result.passed).toBe(false);
     expect(result.message).toBe('boom');
     expect(result.errors).toBe('boom');
+  });
+});
+
+// Regression guard for the whole catalog: setups used to carry the reference
+// implementation, so 116 drills passed with a completely empty editor.
+describe('drill catalog integrity', () => {
+  const tested = DRILLS.filter((d) => d.testCases?.length);
+
+  it('has drills with automated checks', () => {
+    expect(tested.length).toBeGreaterThan(200);
+  });
+
+  it('no drill can be passed with an empty editor', () => {
+    const gamed = tested
+      .filter((d) => runDrillTests('', d.testCases ?? []).passed)
+      .map((d) => d.id);
+    expect(gamed).toEqual([]);
+  });
+
+  it('every reference solution actually passes its own tests', () => {
+    const broken = tested
+      .filter((d) => d.referenceSolution)
+      .filter((d) => !runDrillTests(d.referenceSolution ?? '', d.testCases ?? []).passed)
+      .map((d) => d.id);
+    expect(broken).toEqual([]);
+  });
+
+  it('no reference solution leaks back into a test setup', () => {
+    const leaked = tested
+      .filter((d) => d.referenceSolution)
+      .filter((d) => (d.testCases ?? []).some((t) => t.setup?.includes(d.referenceSolution ?? '')))
+      .map((d) => d.id);
+    expect(leaked).toEqual([]);
+  });
+
+  it('drills without automated checks are labelled self-reported', () => {
+    const unchecked = DRILLS.filter((d) => !d.testCases?.length);
+    expect(unchecked.length).toBeGreaterThan(0);
+    expect(unchecked.every((d) => drillVerification(d) === 'self-reported')).toBe(true);
   });
 });

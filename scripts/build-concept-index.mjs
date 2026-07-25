@@ -13,6 +13,9 @@ const LIBRARY_DIR = join(ROOT, 'src', 'data', 'library');
 const CONCEPTS_PATH = join(ROOT, 'src', 'data', 'concepts.json');
 const OUT_PATH = join(LIBRARY_DIR, 'concept-index.json');
 
+/** An own-title hit scores 10, an ancestor-heading hit 4. */
+const MIN_SCORE = 8;
+
 function loadJSON(p) {
   return JSON.parse(readFileSync(p, 'utf8'));
 }
@@ -67,26 +70,46 @@ function tokens(name, id) {
   return [base, ...extra.map((k) => k.toLowerCase())];
 }
 
+/**
+ * Substring matching produced pure noise — `rag` matched "local stoRAGe",
+ * `consensus` matched nothing useful. Queries must land on word boundaries.
+ */
+function countMatches(text, query) {
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(?<![a-z0-9])${escaped}(?![a-z0-9])`, 'g');
+  return (text.match(re) || []).length;
+}
+
 function score(text, queries) {
   const lower = text.toLowerCase();
   let s = 0;
   for (const q of queries) {
-    if (!q) continue;
-    let idx = 0;
-    let hits = 0;
-    while ((idx = lower.indexOf(q, idx)) !== -1 && hits < 5) {
-      hits++;
-      idx += q.length;
-    }
-    s += hits;
+    // Two-letter queries match far too much to be evidence of anything.
+    if (!q || q.length < 3) continue;
+    s += Math.min(5, countMatches(lower, q));
   }
   return s;
+}
+
+/**
+ * Depth-first walk over `sections[].children`. The indexer used to read only
+ * the top level, which meant it saw 2 of system-design's 305 sections while
+ * `shared/lib/ingest-library.mjs` and `RepoView.tsx` both recursed.
+ */
+function flattenSections(sections, trail = [], out = []) {
+  for (const section of sections || []) {
+    out.push({ section, trail });
+    if (section.children?.length) {
+      flattenSections(section.children, [...trail, section.title || ''], out);
+    }
+  }
+  return out;
 }
 
 function makeSnippet(content, query) {
   if (!content) return '';
   const lower = content.toLowerCase();
-  const idx = lower.indexOf(query.toLowerCase());
+  const idx = Math.max(0, lower.indexOf(query.toLowerCase()));
   const start = Math.max(0, idx - 60);
   const end = Math.min(content.length, idx + 200);
   return `${(start > 0 ? '…' : '') + content.slice(start, end).replace(/\s+/g, ' ').trim()}…`;
@@ -106,15 +129,21 @@ for (const concept of concepts) {
     const contentPath = join(LIBRARY_DIR, repo.id, 'content.json');
     if (!existsSync(contentPath)) continue;
     const content = loadJSON(contentPath);
-    const sections = content.sections || [];
+    const sections = flattenSections(content.sections);
 
-    for (const section of sections) {
+    for (const { section, trail } of sections) {
       const title = section.title || '';
       const body = section.content || '';
-      const titleScore = score(title, queries) * 10;
+      if (!body.trim()) continue;
+      // A body-only hit is not evidence that a section is *about* a concept,
+      // so a heading match is mandatory: the section's own title, or failing
+      // that an ancestor heading, which is weaker evidence.
+      const ownScore = score(title, queries) * 10;
+      const trailScore = ownScore ? 0 : score(trail.join(' \n '), queries) * 4;
+      if (ownScore === 0 && trailScore === 0) continue;
       const bodyScore = Math.min(5, score(body, queries));
-      const total = titleScore + bodyScore;
-      if (total < 3) continue;
+      const total = ownScore + trailScore + bodyScore;
+      if (total < MIN_SCORE) continue;
       candidates.push({
         repoId: repo.id,
         repoName: repo.name,

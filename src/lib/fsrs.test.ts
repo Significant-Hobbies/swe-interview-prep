@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { decayConfidence, isDue, type MasteryRow, reviewConcept } from './fsrs';
+import { deriveConceptStatus } from './conceptState';
+import { masteryConfidence, type MasteryRow, reviewConcept } from './fsrs';
 
 describe('fsrs', () => {
   describe('reviewConcept', () => {
@@ -48,28 +49,9 @@ describe('fsrs', () => {
     });
   });
 
-  describe('isDue', () => {
-    it('returns true for null/undefined row', () => {
-      expect(isDue(null)).toBe(true);
-      expect(isDue({} as MasteryRow)).toBe(true);
-    });
-
-    it('returns true when due is in past', () => {
-      expect(isDue({ due: new Date(Date.now() - 86400000).toISOString() } as MasteryRow)).toBe(
-        true
-      );
-    });
-
-    it('returns false when due is in future', () => {
-      expect(isDue({ due: new Date(Date.now() + 86400000).toISOString() } as MasteryRow)).toBe(
-        false
-      );
-    });
-  });
-
-  describe('decayConfidence', () => {
+  describe('masteryConfidence', () => {
     it('returns 0 for never-reviewed', () => {
-      expect(decayConfidence({} as MasteryRow)).toBe(0);
+      expect(masteryConfidence({} as MasteryRow)).toBe(0);
     });
 
     it('decays toward 0 as time passes', () => {
@@ -85,7 +67,7 @@ describe('fsrs', () => {
         due: new Date().toISOString(),
         confidence: 1,
       };
-      expect(decayConfidence(row)).toBeLessThan(0.5);
+      expect(masteryConfidence(row)).toBeLessThan(0.5);
     });
 
     it('stays high right after review', () => {
@@ -101,7 +83,53 @@ describe('fsrs', () => {
         due: new Date().toISOString(),
         confidence: 1,
       };
-      expect(decayConfidence(row)).toBeGreaterThan(0.95);
+      expect(masteryConfidence(row)).toBeGreaterThan(0.95);
+    });
+
+    it('does not read as 1.0 immediately after a failed review', () => {
+      const row = reviewConcept(null, 'again');
+      // Retrievability alone would be ~1.0 here because elapsed is 0.
+      expect(masteryConfidence(row)).toBeLessThan(0.1);
+    });
+  });
+
+  // Regression: `handlers/concepts.mjs` used to return retrievability measured
+  // at review time, which is always ~1.0, so two total failures in a row were
+  // enough to mark a concept mastered.
+  describe('repeated failure never reaches mastered', () => {
+    function entry(row: MasteryRow) {
+      return {
+        stability: row.stability,
+        difficulty: row.difficulty,
+        reps: row.reps,
+        lapses: row.lapses,
+        state: row.state,
+        lastReview: row.last_review ?? null,
+        due: row.due ?? null,
+        confidence: masteryConfidence(row),
+      };
+    }
+
+    it('again x2 is not mastered', () => {
+      let row = reviewConcept(null, 'again');
+      row = reviewConcept(row, 'again');
+      expect(row.reps).toBe(2);
+      expect(entry(row).confidence).toBeLessThan(0.85);
+      expect(deriveConceptStatus(entry(row))).not.toBe('mastered');
+    });
+
+    it('again x10 is still not mastered', () => {
+      let row: MasteryRow | null = null;
+      for (let i = 0; i < 10; i++) row = reviewConcept(row, 'again');
+      expect(deriveConceptStatus(entry(row as MasteryRow))).not.toBe('mastered');
+    });
+
+    it('sustained good reviews do reach mastered', () => {
+      let row: MasteryRow | null = null;
+      for (let i = 0; i < 8; i++) {
+        row = reviewConcept(row, 'good', new Date(Date.now() + i * 5 * 86400000));
+      }
+      expect(deriveConceptStatus(entry(row as MasteryRow))).toBe('mastered');
     });
   });
 });

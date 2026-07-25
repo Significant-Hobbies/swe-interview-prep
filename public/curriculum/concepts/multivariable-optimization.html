@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Convex functions have one bowl-shaped minimum — gradient descent cannot get stuck. Most neural loss surfaces are non-convex but empirically tractable. Constraints (Lagrange multipliers) turn &#39;find the best point&#39; into &#39;find the best point on this boundary&#39;.</p>
+      <p>Convexity buys you one thing: no local minimum that is not also global. It does not promise a unique minimizer (a flat valley has many), nor that a minimum exists at all (e^-x descends forever), nor that gradient descent converges — too large a step still diverges, and an ill-conditioned Hessian still crawls. Most neural losses are non-convex yet empirically tractable. Constraints (Lagrange multipliers) turn &#39;find the best point&#39; into &#39;find the best point on this boundary&#39;.</p>
     </section>
 
     <section>
@@ -104,7 +104,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li><li><a href="/curriculum/roadmaps/math-stack-12w.html">12-Week Active Math Stack</a></li></ul>
     </section>
   </article>
     </main>

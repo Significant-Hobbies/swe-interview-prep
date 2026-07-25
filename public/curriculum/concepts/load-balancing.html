@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Load Balancing</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, Google SRE Book — Load Balancing at the Frontend, Google SRE Book — Load Balancing in the Datacenter to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Load Balancing with Consistent Hashing. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete L7 load balancer and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
+
 
     <section><h2>Common mistakes</h2><ul><li>Treating the load balancer as a single point of failure with no redundancy</li><li>Round-robin to stateful servers that need sticky sessions</li><li>No health checks, so traffic keeps hitting a dead instance</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://sre.google/sre-book/load-balancing-frontend/" rel="noreferrer">Google SRE Book — Load Balancing at the Frontend</a> <span class="muted">(doc)</span></li><li><a href="https://sre.google/sre-book/load-balancing-datacenter/" rel="noreferrer">Google SRE Book — Load Balancing in the Datacenter</a> <span class="muted">(doc)</span></li><li><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/load_balancing/overview" rel="noreferrer">Envoy — Load balancing overview</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Routing decision tree + health-check loop + a graceful-drain sequence.</p>
           <a href="/drills/design-load-balancer">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Load Balancing and name one common mistake: &quot;Treating the load balancer as a single point of failure with no redundancy…&quot;</li></ul>
+      <h3>Review prompts</h3><ul><li>Round-robin is distributing requests evenly but tail latency is bad. What is the likely cause and the fix?</li></ul>
     </section>
 
     <section>
@@ -104,7 +104,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
     </section>
   </article>
     </main>

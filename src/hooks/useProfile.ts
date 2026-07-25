@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
-import { DEFAULT_PROFILE, type LearnerProfile, PROFILE_VERSION } from '../lib/profile';
+import {
+  DEFAULT_PROFILE,
+  type LearnerProfile,
+  primaryRoadmapId,
+  PROFILE_VERSION,
+} from '../lib/profile';
 import { loadLocal, saveLocal, STORE_KEYS } from '../lib/userStore';
 import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
 
@@ -40,8 +45,7 @@ export function useProfile() {
       const merged: LearnerProfile = { ...DEFAULT_PROFILE, ...data.profile };
       setProfile(merged);
       saveGuestProfile(merged);
-      const topRoadmap = Object.entries(merged.roadmapWeights).sort((a, b) => b[1] - a[1])[0]?.[0];
-      if (topRoadmap) saveActiveRoadmapId(topRoadmap);
+      saveActiveRoadmapId(primaryRoadmapId(merged));
     } catch {
       setProfile(loadGuestProfile());
     } finally {
@@ -63,8 +67,7 @@ export function useProfile() {
       };
       setProfile(merged);
       saveGuestProfile(merged);
-      const topRoadmap = Object.entries(merged.roadmapWeights).sort((a, b) => b[1] - a[1])[0]?.[0];
-      if (topRoadmap) saveActiveRoadmapId(topRoadmap);
+      saveActiveRoadmapId(primaryRoadmapId(merged));
 
       if (user) {
         try {
@@ -83,5 +86,23 @@ export function useProfile() {
     [profile, user]
   );
 
-  return { profile, loading, saveProfile, refresh: fetchProfile };
+  /**
+   * Choosing a path writes `roadmapWeights`, which is what the planner reads.
+   * Previously the "Set as active path" controls only wrote the
+   * `activeRoadmapId` localStorage key, which nothing read back once
+   * onboarding had run — so the primary study control did nothing.
+   */
+  const setActiveRoadmap = useCallback(
+    (roadmapId: string) => saveProfile({ roadmapWeights: { [roadmapId]: 1 } }),
+    [saveProfile]
+  );
+
+  return {
+    profile,
+    loading,
+    saveProfile,
+    setActiveRoadmap,
+    activeRoadmapId: primaryRoadmapId(profile),
+    refresh: fetchProfile,
+  };
 }

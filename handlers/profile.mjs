@@ -15,11 +15,14 @@ const DEFAULT = {
   interviewHorizonDays: null,
   minutesPerDay: 45,
   roadmapWeights: { 'ai-search-infra-90-day': 1 },
+  // Empty = every track, which is the pre-v4 behaviour. Mirrors
+  // DEFAULT_PROFILE in src/lib/profile.ts; keep the two in sync.
+  trackIds: [],
   modalityWeights: { review: 0.22, drill: 0.42, build: 0.24, learn: 0.12 },
   skipConceptIds: [],
   digestEmail: false,
   pushEnabled: false,
-  onboardingVersion: 3,
+  onboardingVersion: 4,
 };
 
 export default async function handler(req, res) {

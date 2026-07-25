@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
 import { type Concept as BaseConcept, CONCEPTS } from '../data/learning-os';
-import { reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
+import { masteryConfidence, reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
 import { loadLocal, mergeRecords, saveLocal, STORE_KEYS } from '../lib/userStore';
 
 // Back-compat alias: older code reads `prereqs`; the new schema uses `prerequisites`.
@@ -33,7 +33,9 @@ function rowToEntry(row: MasteryRow): MasteryEntry {
     state: row.state,
     lastReview: row.last_review ?? null,
     due: row.due ?? null,
-    confidence: row.confidence ?? 0,
+    // Recomputed on read rather than trusting the stored snapshot, so a guest's
+    // confidence decays over time exactly like the server's does.
+    confidence: masteryConfidence(row),
   };
 }
 

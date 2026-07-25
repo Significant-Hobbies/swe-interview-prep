@@ -32,6 +32,7 @@ import { CONCEPT_BY_ID, useConceptMastery } from '../hooks/useConcepts';
 import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import { useArtifactStore, useFocusMode } from '../hooks/useUserStore';
+import { GO_RUNTIME_AVAILABLE } from '../lib/capabilities';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';
@@ -40,6 +41,11 @@ const PROBLEM_KEY = 'playground-problem';
 const PANELS_KEY = 'playground-panels';
 
 type PanelId = 'problem' | 'code' | 'diagram' | 'companion' | 'library';
+
+function resolveLanguage(lang: Language | null | undefined): Language {
+  if (lang === 'go' && !GO_RUNTIME_AVAILABLE) return 'typescript';
+  return lang ?? 'typescript';
+}
 
 function loadFromHash(): { code: string; lang: Language } | null {
   const hash = window.location.hash.slice(1);
@@ -68,8 +74,10 @@ export default function Playground() {
   const shared = loadFromHash();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [language, setLanguage] = useState<Language>(
-    () => shared?.lang || (localStorage.getItem(LANG_KEY) as Language) || 'typescript'
+  const [language, setLanguage] = useState<Language>(() =>
+    // A persisted `go` selection would otherwise strand the editor in a
+    // language whose button is hidden and whose runtime does not exist.
+    resolveLanguage(shared?.lang || (localStorage.getItem(LANG_KEY) as Language) || 'typescript')
   );
   const [code, setCode] = useState(() => shared?.code || localStorage.getItem(STORAGE_KEY) || '');
   const [problem, setProblem] = useState(() => localStorage.getItem(PROBLEM_KEY) || '');
@@ -343,12 +351,14 @@ export default function Playground() {
                 >
                   TS
                 </button>
-                <button
-                  onClick={() => handleLanguageChange('go')}
-                  className={langBtn(language === 'go')}
-                >
-                  Go
-                </button>
+                {GO_RUNTIME_AVAILABLE && (
+                  <button
+                    onClick={() => handleLanguageChange('go')}
+                    className={langBtn(language === 'go')}
+                  >
+                    Go
+                  </button>
+                )}
               </div>
             </>
           )}

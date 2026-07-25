@@ -12,7 +12,7 @@
     "concepts": 222,
     "roadmaps": 24,
     "drills": 265,
-    "reviewQuestions": 327,
+    "reviewQuestions": 239,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -492,6 +492,12 @@
       "goal": "Rebuild learning momentum by taking one concept all the way to a shipped artifact.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "probability-fundamentals",
+        "random-variables",
+        "ranking-metrics",
+        "estimation-confidence",
+        "hypothesis-testing",
         "tokenization",
         "inverted-index",
         "tf-idf",
@@ -506,6 +512,12 @@
       "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "probability-fundamentals",
+        "random-variables",
+        "topk-vector-search",
+        "estimation-confidence",
+        "hypothesis-testing",
         "tokenization",
         "inverted-index",
         "tf-idf",
@@ -527,6 +539,17 @@
       "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "probability-fundamentals",
+        "random-variables",
+        "ranking-metrics",
+        "structured-outputs",
+        "tf-idf",
+        "tokenization",
+        "vector-similarity",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "topk-vector-search",
         "inverted-index",
         "bm25",
         "embeddings",
@@ -553,6 +576,16 @@
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html",
       "conceptIds": [
+        "embeddings",
+        "http-lifecycle",
+        "structured-outputs",
+        "tokenization",
+        "tool-calling",
+        "vector-similarity",
+        "inverted-index",
+        "tf-idf",
+        "topk-vector-search",
+        "brute-force-vector-db",
         "bm25",
         "hybrid-search",
         "hnsw",
@@ -583,6 +616,14 @@
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html",
       "conceptIds": [
+        "embeddings",
+        "load-balancing",
+        "tf-idf",
+        "tokenization",
+        "vector-similarity",
+        "consistent-hashing",
+        "topk-vector-search",
+        "brute-force-vector-db",
         "storage-retrieval",
         "b-tree",
         "wal",
@@ -613,6 +654,10 @@
       "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html",
       "conceptIds": [
+        "object-modeling",
+        "replication",
+        "structured-outputs",
+        "consensus",
         "state-management",
         "strategy-pattern",
         "concurrency-design",
@@ -629,11 +674,31 @@
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
       "conceptIds": [
+        "api-design",
+        "consistent-hashing",
+        "descriptive-statistics",
+        "embeddings",
+        "idempotency",
+        "ml-multi-head",
+        "ml-tokenization",
+        "ml-training",
+        "object-modeling",
+        "probability-fundamentals",
+        "structured-outputs",
+        "ml-checkpointing",
+        "ml-math",
+        "ml-softmax-xent",
+        "ml-gradient-descent",
+        "ml-language-modeling",
+        "ml-backprop",
+        "ml-embeddings",
+        "ml-adamw",
         "ml-self-attention",
         "ml-transformer-block",
         "ml-sampling",
         "rag",
         "model-routing",
+        "ml-rl-alignment",
         "b-tree",
         "lsm-tree",
         "wal",
@@ -683,6 +748,20 @@
       "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html",
       "conceptIds": [
+        "embeddings",
+        "http-lifecycle",
+        "message-queues",
+        "object-storage",
+        "rag",
+        "replication",
+        "sharding",
+        "tokenization",
+        "vector-similarity",
+        "caching",
+        "inverted-index",
+        "tf-idf",
+        "bm25",
+        "hybrid-search",
         "load-balancing",
         "consistent-hashing",
         "consensus",
@@ -752,6 +831,9 @@
       "goal": "Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html",
       "conceptIds": [
+        "vectors-and-spaces",
+        "derivatives-and-gradients",
+        "matrices-and-transformations",
         "probability-fundamentals",
         "random-variables",
         "classical-distributions",
@@ -829,6 +911,7 @@
       "goal": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html",
       "conceptIds": [
+        "object-modeling",
         "operating-system-mechanics",
         "compute-memory-storage-hierarchy",
         "network-protocol-engineering",
@@ -844,6 +927,9 @@
       "goal": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html",
       "conceptIds": [
+        "http-lifecycle",
+        "idempotency",
+        "message-queues",
         "cloud-infrastructure",
         "containers-kubernetes",
         "cicd-developer-environments",
@@ -864,6 +950,9 @@
       "goal": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html",
       "conceptIds": [
+        "http-lifecycle",
+        "load-balancing",
+        "consistent-hashing",
         "consensus",
         "replication",
         "sharding",
@@ -884,6 +973,10 @@
       "goal": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "ml-sampling",
+        "probability-fundamentals",
+        "vision-models",
         "ml-math",
         "ml-gradient-descent",
         "ml-backprop",
@@ -914,6 +1007,22 @@
       "goal": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "ml-tokenization",
+        "probability-fundamentals",
+        "structured-outputs",
+        "ml-math",
+        "ml-softmax-xent",
+        "ml-gradient-descent",
+        "ml-language-modeling",
+        "ml-backprop",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-adamw",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-training",
+        "ml-checkpointing",
         "inference-engines",
         "kv-cache-paged-attention",
         "continuous-batching",
@@ -935,6 +1044,7 @@
       "goal": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html",
       "conceptIds": [
+        "structured-outputs",
         "tool-calling",
         "agent-loops",
         "agent-memory-context",
@@ -954,6 +1064,23 @@
       "goal": "Build an evidence-backed evaluation and observability system for models, tools, and agents.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "ml-tokenization",
+        "probability-fundamentals",
+        "structured-outputs",
+        "ml-math",
+        "ml-softmax-xent",
+        "ml-gradient-descent",
+        "ml-language-modeling",
+        "ml-sampling",
+        "ml-backprop",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-adamw",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-training",
+        "ml-lora",
         "llm-evals",
         "ml-evaluation",
         "coding-agent-benchmarks",
@@ -994,6 +1121,10 @@
       "goal": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html",
       "conceptIds": [
+        "http-lifecycle",
+        "message-queues",
+        "object-modeling",
+        "state-management",
         "api-design",
         "web-mobile-engineering",
         "ux-interface-design",
@@ -1014,6 +1145,23 @@
       "goal": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html",
       "conceptIds": [
+        "descriptive-statistics",
+        "inference-engines",
+        "ml-tokenization",
+        "probability-fundamentals",
+        "ml-math",
+        "ml-softmax-xent",
+        "ml-gradient-descent",
+        "ml-language-modeling",
+        "ml-backprop",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-adamw",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-training",
+        "ml-checkpointing",
+        "ml-browser-runtime",
         "multimodal-models",
         "vision-models",
         "voice-audio-systems",
@@ -1040,7 +1188,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/tokenization.html",
       "roadmapIds": [
         "reset-9-day",
-        "retrieval-30-day"
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
       ]
     },
     {
@@ -1057,7 +1209,9 @@
         "reset-9-day",
         "retrieval-30-day",
         "ai-search-infra-90-day",
-        "db-disk-first"
+        "db-disk-first",
+        "ai-infra-12-month",
+        "hld-practice"
       ]
     },
     {
@@ -1072,7 +1226,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html",
       "roadmapIds": [
         "reset-9-day",
-        "retrieval-30-day"
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
       ]
     },
     {
@@ -1090,7 +1248,8 @@
         "retrieval-30-day",
         "ai-search-infra-90-day",
         "ai-infra-12-month",
-        "db-disk-first"
+        "db-disk-first",
+        "hld-practice"
       ]
     },
     {
@@ -1104,7 +1263,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html",
       "roadmapIds": [
-        "retrieval-30-day"
+        "retrieval-30-day",
+        "reset-9-day",
+        "ai-search-infra-90-day"
       ]
     },
     {
@@ -1136,7 +1297,8 @@
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
-        "ai-infra-12-month"
+        "ai-infra-12-month",
+        "hld-practice"
       ]
     },
     {
@@ -1190,7 +1352,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/embeddings.html",
       "roadmapIds": [
         "retrieval-30-day",
-        "ai-search-infra-90-day"
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape",
+        "hld-practice"
       ]
     },
     {
@@ -1204,7 +1370,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html",
       "roadmapIds": [
-        "retrieval-30-day"
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "hld-practice"
       ]
     },
     {
@@ -1217,7 +1387,12 @@
         "ann"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html",
-      "roadmapIds": []
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ]
     },
     {
       "id": "brute-force-vector-db",
@@ -1231,7 +1406,9 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html",
       "roadmapIds": [
         "retrieval-30-day",
-        "ai-search-infra-90-day"
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
       ]
     },
     {
@@ -1321,7 +1498,8 @@
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
-        "swe-landscape"
+        "swe-landscape",
+        "hld-practice"
       ]
     },
     {
@@ -1360,7 +1538,15 @@
         "llm-apps"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html",
-      "roadmapIds": []
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape",
+        "inference-serving-12w",
+        "agent-systems-12w",
+        "ai-reliability-12w"
+      ]
     },
     {
       "id": "tool-calling",
@@ -1374,7 +1560,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html",
       "roadmapIds": [
-        "agent-systems-12w"
+        "agent-systems-12w",
+        "ai-infra-12-month"
       ]
     },
     {
@@ -1453,7 +1640,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-math.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1467,7 +1658,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1481,7 +1676,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1495,7 +1694,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1509,7 +1712,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1523,7 +1730,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1537,7 +1748,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1551,7 +1766,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html",
       "roadmapIds": [
-        "swe-landscape"
+        "swe-landscape",
+        "ai-models-training-12w",
+        "ai-reliability-12w"
       ]
     },
     {
@@ -1565,7 +1782,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1580,7 +1801,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html",
       "roadmapIds": [
         "swe-landscape",
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1594,7 +1818,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1609,7 +1837,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html",
       "roadmapIds": [
         "swe-landscape",
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1623,7 +1854,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-training.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1637,7 +1872,10 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "swe-landscape",
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1651,7 +1889,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "ai-reliability-12w"
       ]
     },
     {
@@ -1671,7 +1910,7 @@
     },
     {
       "id": "ml-data-engineering",
-      "name": "Style Data Engineering",
+      "name": "Training Data Engineering",
       "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
       "difficulty": "core",
       "tags": [
@@ -1696,7 +1935,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html",
       "roadmapIds": [
         "swe-landscape",
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -1743,7 +1983,12 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html",
       "roadmapIds": [
-        "swe-landscape"
+        "swe-landscape",
+        "ai-infra-12-month",
+        "hld-practice",
+        "infrastructure-platforms-12w",
+        "distributed-systems-12w",
+        "application-engineering-12w"
       ]
     },
     {
@@ -1785,7 +2030,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/idempotency.html",
       "roadmapIds": [
-        "ai-infra-12-month"
+        "ai-infra-12-month",
+        "swe-landscape",
+        "infrastructure-platforms-12w"
       ]
     },
     {
@@ -1844,7 +2091,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/caching.html",
       "roadmapIds": [
-        "distributed-systems-12w"
+        "distributed-systems-12w",
+        "hld-practice"
       ]
     },
     {
@@ -1860,7 +2108,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/message-queues.html",
       "roadmapIds": [
         "swe-landscape",
-        "distributed-systems-12w"
+        "distributed-systems-12w",
+        "hld-practice",
+        "infrastructure-platforms-12w",
+        "application-engineering-12w"
       ]
     },
     {
@@ -1892,7 +2143,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/api-design.html",
       "roadmapIds": [
         "ai-infra-12-month",
-        "application-engineering-12w"
+        "application-engineering-12w",
+        "swe-landscape"
       ]
     },
     {
@@ -1999,7 +2251,8 @@
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
-        "db-disk-first"
+        "db-disk-first",
+        "hld-practice"
       ]
     },
     {
@@ -2060,7 +2313,8 @@
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
-        "distributed-systems-12w"
+        "distributed-systems-12w",
+        "hld-practice"
       ]
     },
     {
@@ -2077,7 +2331,9 @@
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
-        "distributed-systems-12w"
+        "distributed-systems-12w",
+        "runtime",
+        "hld-practice"
       ]
     },
     {
@@ -2108,7 +2364,11 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html",
       "roadmapIds": [
-        "lld-practice"
+        "lld-practice",
+        "runtime",
+        "swe-landscape",
+        "systems-foundations-12w",
+        "application-engineering-12w"
       ]
     },
     {
@@ -2124,7 +2384,8 @@
       "roadmapIds": [
         "runtime",
         "swe-landscape",
-        "lld-practice"
+        "lld-practice",
+        "application-engineering-12w"
       ]
     },
     {
@@ -2261,7 +2522,9 @@
       "roadmapIds": [
         "runtime",
         "swe-landscape",
-        "hld-practice"
+        "hld-practice",
+        "db-disk-first",
+        "distributed-systems-12w"
       ]
     },
     {
@@ -2275,7 +2538,10 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html",
       "roadmapIds": [
-        "hld-practice"
+        "hld-practice",
+        "db-disk-first",
+        "swe-landscape",
+        "distributed-systems-12w"
       ]
     },
     {
@@ -2292,7 +2558,8 @@
         "db-disk-first",
         "swe-landscape",
         "hld-practice",
-        "distributed-systems-12w"
+        "distributed-systems-12w",
+        "runtime"
       ]
     },
     {
@@ -2890,7 +3157,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html",
       "roadmapIds": [
-        "math-rating-climb-30d"
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -2904,7 +3173,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html",
       "roadmapIds": [
-        "math-rating-climb-30d"
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -2918,7 +3189,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition.html",
       "roadmapIds": [
-        "math-rating-climb-30d"
+        "math-rating-climb-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -2933,7 +3205,16 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w",
+        "math-stack-12w"
       ]
     },
     {
@@ -2948,7 +3229,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/random-variables.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
       ]
     },
     {
@@ -2963,7 +3248,16 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "swe-landscape",
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "ai-reliability-12w",
+        "multimodal-spatial-12w",
+        "math-stack-12w"
       ]
     },
     {
@@ -2978,7 +3272,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
       ]
     },
     {
@@ -2993,7 +3291,11 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "math-stack-12w"
       ]
     },
     {
@@ -3008,7 +3310,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3022,7 +3325,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html",
       "roadmapIds": [
-        "math-rating-climb-30d"
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3036,7 +3341,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html",
       "roadmapIds": [
-        "math-rating-climb-30d"
+        "math-rating-climb-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3051,7 +3357,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/information-entropy.html",
       "roadmapIds": [
         "math-rating-climb-30d",
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3065,7 +3372,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html",
       "roadmapIds": [
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3079,7 +3387,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html",
       "roadmapIds": [
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3093,7 +3402,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html",
       "roadmapIds": [
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3107,7 +3417,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html",
       "roadmapIds": [
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3121,7 +3432,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html",
       "roadmapIds": [
-        "prob-stats-30d"
+        "prob-stats-30d",
+        "math-stack-12w"
       ]
     },
     {
@@ -3571,7 +3883,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -4147,7 +4460,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/vision-models.html",
       "roadmapIds": [
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "ai-models-training-12w"
       ]
     },
     {

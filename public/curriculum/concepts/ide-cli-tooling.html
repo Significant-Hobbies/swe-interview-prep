@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study IDE &amp; CLI Tooling</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Language Server Protocol Specification to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Language Server Protocol Specification, Debug Adapter Protocol — overview, Command Line Interface Guidelines (clig.dev) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare IDE &amp; CLI Tooling with Repository Intelligence, Coding Agent Systems. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: IDE &amp; CLI Tooling and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/" rel="noreferrer">Language Server Protocol Specification</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/" rel="noreferrer">Language Server Protocol Specification</a> <span class="muted">(doc)</span></li><li><a href="https://microsoft.github.io/debug-adapter-protocol/overview" rel="noreferrer">Debug Adapter Protocol — overview</a> <span class="muted">(doc)</span></li><li><a href="https://clig.dev/" rel="noreferrer">Command Line Interface Guidelines (clig.dev)</a> <span class="muted">(doc)</span></li><li><a href="https://blog.burntsushi.net/ripgrep/" rel="noreferrer">ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}</a> <span class="muted">(article)</span></li><li><a href="https://tree-sitter.github.io/tree-sitter/using-parsers/" rel="noreferrer">Tree-sitter — Using Parsers</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with protocol, feedbackLoop, automationContract plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-ide-cli-tooling">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing IDE &amp; CLI Tooling?</li></ul>
+      <h3>Review prompts</h3><ul><li>What does the language-server architecture decouple, and what problem does that solve?</li></ul>
     </section>
 
     <section>

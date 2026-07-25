@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Sharding</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Designing Data-Intensive Applications to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Designing Data-Intensive Applications, Notion — Herding elephants: sharding Postgres, Vitess — Sharding to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Sharding with Replication. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Pick a shard key and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
+
 
     <section><h2>Common mistakes</h2><ul><li>A shard key that creates a hot shard (e.g. sharding by date)</li><li>Cross-shard joins and transactions, which are slow or impossible</li><li>No plan for re-sharding as data grows</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://dataintensive.net/" rel="noreferrer">Designing Data-Intensive Applications</a> <span class="muted">(course)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://dataintensive.net/" rel="noreferrer">Designing Data-Intensive Applications</a> <span class="muted">(course)</span></li><li><a href="https://www.notion.com/blog/sharding-postgres-at-notion" rel="noreferrer">Notion — Herding elephants: sharding Postgres</a> <span class="muted">(article)</span></li><li><a href="https://vitess.io/docs/22.0/reference/features/sharding/" rel="noreferrer">Vitess — Sharding</a> <span class="muted">(doc)</span></li><li><a href="https://research.google/pubs/spanner-googles-globally-distributed-database-2/" rel="noreferrer">Spanner: Google&#39;s Globally-Distributed Database</a> <span class="muted">(paper)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> tenant_id co-locates tenant data; hash spreads load; user_id splits tenant across shards.</p>
           <a href="/drills/shard-key-choice">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Sharding and name one common mistake: &quot;A shard key that creates a hot shard (e.g. sharding by date)…&quot;</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is changing the shard key later so much harder than choosing a different index?</li></ul>
     </section>
 
     <section>
@@ -108,7 +108,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li></ul>
     </section>
   </article>
     </main>

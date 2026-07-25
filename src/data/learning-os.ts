@@ -148,6 +148,12 @@ export interface Drill {
   solutionNotes: string;
   /** Automated checks — editorial drills should include at least one. */
   testCases?: DrillTestCase[];
+  /**
+   * Known-good implementation, kept out of `testCases[].setup` so the tests
+   * cannot be satisfied without user code. Used by the drill-integrity test;
+   * never rendered in the drill workspace.
+   */
+  referenceSolution?: string;
   /** External practice link (LeetCode metadata stubs). */
   externalUrl?: string;
   leetcodeNumber?: number;
@@ -395,7 +401,12 @@ const PROJECTS: Project[] = (projectsData as any).projects;
 const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (
   reviewQuestionsData as any
 ).reviewQuestions.map((q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }));
-const INGESTED_REVIEW_QUESTIONS: ReviewQuestion[] = (
+/**
+ * Quarantined: template questions scraped out of the library, kept on disk so
+ * a future regeneration has a baseline, but deliberately NOT merged into
+ * `REVIEW_QUESTIONS`. See `isSchedulableReviewQuestion` for why.
+ */
+export const INGESTED_REVIEW_QUESTIONS: ReviewQuestion[] = (
   (reviewQuestionsIngestedData as any).reviewQuestions ?? []
 ).filter(isSchedulableReviewQuestion);
 export const REVIEW_QUESTIONS: ReviewQuestion[] = [

@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Feed Systems</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, Feeding Frenzy: Selectively Materializing Users&#39; Event Feeds (SIGMOD 2010), Meta Engineering — News Feed ranking to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Feed Systems with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete News feed (Twitter-style) and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://jeffterrace.com/docs/feeding-frenzy-sigmod10-web.pdf" rel="noreferrer">Feeding Frenzy: Selectively Materializing Users&#39; Event Feeds (SIGMOD 2010)</a> <span class="muted">(paper)</span></li><li><a href="https://engineering.fb.com/2021/01/26/ml-applications/news-feed-ranking/" rel="noreferrer">Meta Engineering — News Feed ranking</a> <span class="muted">(article)</span></li><li><a href="https://www.usenix.org/conference/atc13/technical-sessions/presentation/bronson" rel="noreferrer">TAO: Facebook&#39;s Distributed Data Store for the Social Graph (ATC &#39;13)</a> <span class="muted">(paper)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Hybrid fan-out strategy + storage layout + a back-of-envelope read/write QPS estimate.</p>
           <a href="/drills/design-news-feed">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Feed Systems in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>Describe the hybrid feed strategy and say exactly where the merge happens.</li></ul>
     </section>
 
     <section>

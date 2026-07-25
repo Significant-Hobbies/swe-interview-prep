@@ -46,7 +46,7 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/search-ir.html">Search &amp; IR</a></nav>
       <article>
-    <p class="eyebrow">12mo roadmap · 4 milestones</p>
+    <p class="eyebrow">12mo roadmap · 5 milestones</p>
     <h1>12-Month Advanced AI Infrastructure</h1>
     <p class="lede">The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.</p>
     <p><strong>Outcome:</strong> Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.</p>
@@ -61,27 +61,34 @@
       <h2>Milestones</h2>
       <article class="milestone">
           <p class="eyebrow">Milestone 1</p>
+          <h3>Prerequisites — unlock the rest of this path</h3>
+          <p>Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/embeddings.html">Embeddings</a></li><li><a href="/curriculum/concepts/http-lifecycle.html">HTTP Lifecycle</a></li><li><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></li><li><a href="/curriculum/concepts/tokenization.html">Tokenization</a></li><li><a href="/curriculum/concepts/tool-calling.html">Tool Calling</a></li><li><a href="/curriculum/concepts/vector-similarity.html">Vector Similarity</a></li><li><a href="/curriculum/concepts/inverted-index.html">Inverted Index</a></li><li><a href="/curriculum/concepts/tf-idf.html">TF-IDF</a></li><li><a href="/curriculum/concepts/topk-vector-search.html">Top-k Vector Search</a></li><li><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></li></ul>
+
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 2</p>
           <h3>Q1 — Retrieval and vector foundations</h3>
           <p>Complete the 90-day AI search/infra roadmap.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/bm25.html">BM25</a></li><li><a href="/curriculum/concepts/hybrid-search.html">Hybrid Search</a></li><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li><li><a href="/curriculum/concepts/metadata-filtering.html">Metadata Filtering</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Hybrid search v0 in HighSignal</strong> — Combine BM25 and vector retrieval with reciprocal rank fusion.</li><li><strong>Brute-force vector index</strong> — An exact nearest-neighbour index — the recall=1.0 baseline.</li><li><strong>RAG pipeline v0</strong> — An end-to-end retrieve → pack → generate pipeline grounded in a document corpus.</li></ul>
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 2</p>
+          <p class="eyebrow">Milestone 3</p>
           <h3>Q2 — Production backend depth</h3>
           <p>API platform strength: keys, limits, idempotency, queues, observability.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/api-design.html">API Design</a></li><li><a href="/curriculum/concepts/api-keys.html">API Keys</a></li><li><a href="/curriculum/concepts/rate-limiting.html">Rate Limiting</a></li><li><a href="/curriculum/concepts/idempotency.html">Idempotency</a></li><li><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></li><li><a href="/curriculum/concepts/monitoring-analytics.html">Observability</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Reusable API key system</strong> — Issue, hash, scope, and rotate API keys for machine clients.</li><li><strong>Reusable rate limiter</strong> — A token-bucket rate limiter usable as middleware.</li><li><strong>Job queue with retries and DLQ</strong> — A background job queue with backoff, jitter, and a dead-letter queue.</li><li><strong>Structured logging package</strong> — A structured logger with a request correlation id.</li></ul>
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 3</p>
+          <p class="eyebrow">Milestone 4</p>
           <h3>Q3 — Storage systems</h3>
           <p>Build the storage foundations behind a Turbopuffer-class system.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/lsm-tree.html">LSM Tree</a></li><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/compaction.html">Compaction</a></li><li><a href="/curriculum/concepts/object-storage.html">Object Storage</a></li><li><a href="/curriculum/concepts/columnar-storage.html">Columnar Storage</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Toy write-ahead log</strong> — An append-only WAL with crash recovery.</li><li><strong>Toy LSM tree</strong> — A minimal LSM storage engine: memtable, SSTables, compaction.</li><li><strong>Object-storage-backed index</strong> — Store index segments in object storage with a hot in-memory cache.</li></ul>
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 4</p>
+          <p class="eyebrow">Milestone 5</p>
           <h3>Q4 — System design and synthesis</h3>
           <p>Turn the depth into architecture-level design and a real prototype.</p>
           <h4>Concepts</h4>

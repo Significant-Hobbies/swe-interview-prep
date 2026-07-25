@@ -21,10 +21,6 @@ export default function CompanionPanel({ context }: Props) {
   const handleSend = () => {
     if (!input.trim() || isStreaming) return;
     const config = loadAIConfig();
-    if (!config.model) {
-      alert('Configure AI in settings first.');
-      return;
-    }
     ask(input.trim(), config, context);
     setInput('');
   };

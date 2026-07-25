@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Consistent Hashing</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, Consistent Hashing and Random Trees (Karger et al., STOC 1997), Consistent Hashing with Bounded Loads (Google Research) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Consistent Hashing with Sharding. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Consistent-hash key router and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf" rel="noreferrer">Consistent Hashing and Random Trees (Karger et al., STOC 1997)</a> <span class="muted">(paper)</span></li><li><a href="https://research.google/blog/consistent-hashing-with-bounded-loads/" rel="noreferrer">Consistent Hashing with Bounded Loads (Google Research)</a> <span class="muted">(article)</span></li><li><a href="https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf" rel="noreferrer">Dynamo: Amazon&#39;s Highly Available Key-value Store (SOSP 2007)</a> <span class="muted">(paper)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Ring diagram + the algorithm for routing a key + the % of keys that move when N→N+1 nodes.</p>
           <a href="/drills/design-consistent-hashing">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Consistent Hashing in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>The ring already limits key movement to about 1/N. So why are virtual nodes needed?</li></ul>
     </section>
 
     <section>
@@ -104,7 +104,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
     </section>
   </article>
     </main>

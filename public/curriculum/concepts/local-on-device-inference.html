@@ -59,7 +59,7 @@
     <section>
       <h2>How to study Local &amp; On-device Inference</h2>
       <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use llama.cpp to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
-      <p>Next, compare Local &amp; On-device Inference with Image &amp; Video Generation, Robotics Systems. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Local &amp; On-device Inference and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+      <p>Next, compare Local &amp; On-device Inference with Model Quantization, Browser ML Runtime, Inference Cost &amp; Latency Optimization. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Local &amp; On-device Inference and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
     <section>
@@ -72,9 +72,9 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with modelFormat, memoryBudget, deviceFallback plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-local-on-device-inference">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Local &amp; On-device Inference?</li></ul>
+      <h3>Review prompts</h3><ul><li>A model fits in device RAM and still runs badly on a phone. What is the constraint you overlooked?</li></ul>
     </section>
 
     <section>
@@ -106,8 +106,8 @@
     </section>
 
     <section class="grid two">
-      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/image-video-generation.html">Image &amp; Video Generation</a></li></ul></div>
-      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/image-video-generation.html">Image &amp; Video Generation</a></li><li><a href="/curriculum/concepts/robotics-systems.html">Robotics Systems</a></li></ul></div>
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/inference-engines.html">vLLM &amp; Inference Engines</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/model-quantization.html">Model Quantization</a></li><li><a href="/curriculum/concepts/ml-browser-runtime.html">Browser ML Runtime</a></li><li><a href="/curriculum/concepts/inference-cost-latency.html">Inference Cost &amp; Latency Optimization</a></li></ul></div>
     </section>
 
     <section>

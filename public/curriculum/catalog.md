@@ -142,7 +142,7 @@ Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, 
 - [Checkpointing](https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html) — Weights + optimizer state, resume, dataset manifests.
 - [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html) — Frozen base, low-rank adapters, rank/alpha.
 - [RL Alignment (GRPO & Policy Gradient)](https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html) — Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.
-- [Style Data Engineering](https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html) — Cleaning, dedup, JSONL tasks, memorization tests.
+- [Training Data Engineering](https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html) — Cleaning, dedup, JSONL tasks, memorization tests.
 - [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html) — Web Workers, WASM, OPFS, TypedArrays.
 - [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html) — WGSL, compute kernels, matmul, CPU parity.
 - [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html) — Held-out loss, baselines, hallucination, leakage.

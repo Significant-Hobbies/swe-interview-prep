@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Codebase Graphs</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use SCIP Code Intelligence Protocol to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use SCIP Code Intelligence Protocol, SCIP — a better code indexing format than LSIF (Sourcegraph), LSIF Specification 0.6.0 to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Codebase Graphs with Testing Infrastructure, Dependency &amp; Blast-radius Analysis. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Codebase Graphs and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/sourcegraph/scip" rel="noreferrer">SCIP Code Intelligence Protocol</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/sourcegraph/scip" rel="noreferrer">SCIP Code Intelligence Protocol</a> <span class="muted">(doc)</span></li><li><a href="https://sourcegraph.com/blog/announcing-scip" rel="noreferrer">SCIP — a better code indexing format than LSIF (Sourcegraph)</a> <span class="muted">(article)</span></li><li><a href="https://microsoft.github.io/language-server-protocol/specifications/lsif/0.6.0/specification/" rel="noreferrer">LSIF Specification 0.6.0</a> <span class="muted">(doc)</span></li><li><a href="https://github.blog/open-source/introducing-stack-graphs/" rel="noreferrer">Introducing stack graphs (GitHub Engineering)</a> <span class="muted">(article)</span></li><li><a href="https://glean.software/docs/introduction/" rel="noreferrer">Glean — Meta&#39;s code-fact database (Angle queries)</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with nodeIdentity, edgeTypes, incrementalUpdate plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-codebase-graphs">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Codebase Graphs?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is stable symbol identity the hard part of a codebase graph, rather than parsing?</li></ul>
     </section>
 
     <section>

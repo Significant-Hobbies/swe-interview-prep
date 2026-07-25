@@ -1,8 +1,26 @@
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
-import { reviewConcept, decayConfidence } from '../shared/lib/fsrs.mjs';
+import { reviewConcept, masteryConfidence } from '../shared/lib/fsrs.mjs';
 import { randomBytes } from 'node:crypto';
+
+/**
+ * Snake_case DB/FSRS row → the camelCase shape `useConcepts` expects.
+ * Returning the raw row here silently dropped `lastReview`, which reset FSRS
+ * history on the client the next time it wrote mastery back.
+ */
+function toClient(row, now = new Date()) {
+  return {
+    stability: row.stability,
+    difficulty: row.difficulty,
+    reps: row.reps,
+    lapses: row.lapses,
+    state: row.state,
+    lastReview: row.last_review ?? null,
+    due: row.due ?? null,
+    confidence: masteryConfidence(row, now),
+  };
+}
 
 let initialized = false;
 async function ensureInit() {
@@ -71,17 +89,7 @@ export default async function handler(req, res) {
     const now = new Date();
     const mastery = {};
     for (const row of r.rows) {
-      const decayed = decayConfidence(row, now);
-      mastery[row.concept_id] = {
-        stability: row.stability,
-        difficulty: row.difficulty,
-        reps: row.reps,
-        lapses: row.lapses,
-        state: row.state,
-        lastReview: row.last_review,
-        due: row.due,
-        confidence: decayed,
-      };
+      mastery[row.concept_id] = toClient(row, now);
     }
     return res.status(200).json({ mastery });
   }
@@ -92,7 +100,7 @@ export default async function handler(req, res) {
     const prev = await getMastery(db, user.id, conceptId);
     const next = reviewConcept(prev, rating);
     await upsertMastery(db, user.id, conceptId, next);
-    return res.status(200).json({ mastery: { ...next, confidence: decayConfidence(next) } });
+    return res.status(200).json({ mastery: toClient(next) });
   }
 
   if (req.method === 'PUT') {
@@ -105,10 +113,7 @@ export default async function handler(req, res) {
       const prev = await getMastery(db, user.id, u.conceptId);
       const next = reviewConcept(prev, u.rating);
       await upsertMastery(db, user.id, u.conceptId, next);
-      results.push({
-        conceptId: u.conceptId,
-        mastery: { ...next, confidence: decayConfidence(next) },
-      });
+      results.push({ conceptId: u.conceptId, mastery: toClient(next) });
     }
     return res.status(200).json({ results });
   }

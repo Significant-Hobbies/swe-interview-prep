@@ -1,6 +1,7 @@
 import { createClient } from '@libsql/client/web';
 
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { AIConfigError, generateStream } from '../../shared/lib/ai.mjs';
 import { syncReaderLearningFeed } from '../../shared/lib/reader-learning.mjs';
 import { withTiming } from '../_lib/timing.js';
 
@@ -447,6 +448,67 @@ async function handleReaderLearning(request, env) {
   return json(snapshot, { headers: { 'cache-control': 'private, no-store' } });
 }
 
+/**
+ * Socratic companion chat. Streams SSE frames shaped `data: {"text": "..."}`
+ * followed by `data: [DONE]`, which is what `useCompanion.pumpSSE` parses.
+ *
+ * Credentials come from the request (BYOK, entered in Settings) or from the
+ * deployment's AI_ENDPOINT_URL / AI_API_KEY / AI_MODEL. When neither exists
+ * the client gets a 503 with an actionable message rather than a bare 404.
+ */
+async function handleAiChat(request, env) {
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
+  const user = await currentUser(request, env);
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { endpointUrl, apiKey, model, messages, systemPrompt } = (await request.json()) || {};
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return json({ error: 'messages array required' }, { status: 400 });
+  }
+
+  let textStream;
+  try {
+    textStream = generateStream({
+      endpointUrl,
+      apiKey,
+      model,
+      system: systemPrompt,
+      messages,
+      env,
+    });
+  } catch (error) {
+    if (error instanceof AIConfigError) return json({ error: error.message }, { status: 503 });
+    throw error;
+  }
+
+  const encoder = new TextEncoder();
+  const body = new ReadableStream({
+    async start(controller) {
+      const send = (payload) => controller.enqueue(encoder.encode(`data: ${payload}\n\n`));
+      try {
+        for await (const chunk of textStream) {
+          if (chunk) send(JSON.stringify({ text: chunk }));
+        }
+      } catch (error) {
+        // Headers are already flushed, so the only way to report is in-band.
+        console.error('AI chat stream failed', error);
+        send(JSON.stringify({ error: 'The AI provider stopped responding. Try again.' }));
+      } finally {
+        send('[DONE]');
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(body, {
+    headers: {
+      'content-type': 'text/event-stream; charset=utf-8',
+      'cache-control': 'no-cache, no-store',
+      connection: 'keep-alive',
+    },
+  });
+}
+
 export const onRequest = withTiming(async ({ request, env, params, next }) => {
   const path = (params.path || []).join('/');
   try {
@@ -459,6 +521,7 @@ export const onRequest = withTiming(async ({ request, env, params, next }) => {
       const manifestUrl = new URL('/api-ai.json', request.url);
       return await next(new Request(manifestUrl, request));
     }
+    if (path === 'ai/chat') return await handleAiChat(request, env);
     if (path === 'auth/google') return await handleGoogle(request, env);
     if (path === 'auth/logout') return await handleLogout(request);
     if (path === 'auth/verify') return await handleVerify(request, env);
