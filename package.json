@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "dev:frontend": "vite",
+    "verify:sources": "node scripts/verify-sources.mjs",
+    "verify:citations": "node scripts/verify-citations.mjs",
     "build": "pnpm generate:public-curriculum && node scripts/validate-env.mjs build && vite build",
     "lint": "biome check .",
     "preview": "vite preview",

@@ -2425,11 +2425,6 @@
           "type": "paper"
         },
         {
-          "title": "LevelDB Implementation Notes (google/leveldb)",
-          "url": "https://github.com/google/leveldb/blob/main/doc/impl.md",
-          "type": "doc"
-        },
-        {
           "title": "SQLite — Write-Ahead Logging",
           "url": "https://www.sqlite.org/wal.html",
           "type": "doc"
@@ -3151,11 +3146,6 @@
           "title": "System Design Primer",
           "url": "https://github.com/donnemartin/system-design-primer",
           "type": "article"
-        },
-        {
-          "title": "Google Wave Operational Transformation whitepaper",
-          "url": "https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html",
-          "type": "doc"
         },
         {
           "title": "A Conflict-Free Replicated JSON Datatype (Kleppmann & Beresford)",
@@ -5601,7 +5591,7 @@
       "reviewQuestions": ["rq-event-streaming-kafka"],
       "resources": [
         {
-          "title": "Kafka: a Distributed Messaging System",
+          "title": "Kafka: a Distributed Messaging System for Log Processing",
           "url": "https://notes.stephenholiday.com/Kafka.pdf",
           "type": "paper"
         }

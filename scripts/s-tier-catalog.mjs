@@ -516,8 +516,8 @@ export const CONCEPT_MEDIA = {
   },
   'message-queues': {
     paper: L(
-      'Kafka: a Distributed Messaging System (Kreps et al.)',
-      'https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/'
+      'Kafka: a Distributed Messaging System for Log Processing',
+      'https://notes.stephenholiday.com/Kafka.pdf'
     ),
   },
   'monitoring-analytics': {
@@ -542,10 +542,6 @@ export const CONCEPT_MEDIA = {
   },
   'auth-systems': { paper: L('OAuth 2.0 RFC 6749', 'https://www.rfc-editor.org/rfc/rfc6749') },
   'ecommerce-payments': {
-    paper: L(
-      'Sagas (Garcia-Molina & Salem)',
-      'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/tr-87-13.pdf'
-    ),
     blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'b-tree': {
@@ -557,12 +553,7 @@ export const CONCEPT_MEDIA = {
       'https://www.cs.umb.edu/~poneil/lsmtree.pdf'
     ),
   },
-  wal: {
-    paper: L(
-      'ARIES: A Transaction Recovery Method (Mohan et al.)',
-      'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf'
-    ),
-  },
+  wal: {},
   compaction: {
     paper: L(
       'WiscKey: Separating Keys from Values in SSD-Conscious Storage (FAST ’16)',
@@ -581,12 +572,7 @@ export const CONCEPT_MEDIA = {
   'secondary-index': {
     paper: L('Modern B-Tree Techniques (Graefe)', 'https://doi.org/10.1561/1900000028'),
   },
-  'storage-retrieval': {
-    paper: L(
-      'ARIES: A Transaction Recovery Method (Mohan et al.)',
-      'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf'
-    ),
-  },
+  'storage-retrieval': {},
   sharding: { paper: L('Spanner (Corbett et al.)', 'https://research.google/pubs/pub39966/') },
   replication: {
     paper: L(
@@ -604,12 +590,7 @@ export const CONCEPT_MEDIA = {
   'object-modeling': {
     paper: L('Domain-Driven Design at 20 (Fowler)', 'https://dl.acm.org/doi/10.1145/3373471'),
   },
-  'state-management': {
-    paper: L(
-      'Statecharts: a visual formalism (Harel)',
-      'https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf'
-    ),
-  },
+  'state-management': {},
   'concurrency-design': {
     paper: L(
       'The Java Memory Model (Manson et al.)',
@@ -625,12 +606,7 @@ export const CONCEPT_MEDIA = {
   'load-balancing': {
     paper: L('Maglev (Eisenbud et al.)', 'https://research.google/pubs/pub44824/'),
   },
-  'consistent-hashing': {
-    paper: L(
-      'Consistent Hashing (Karger et al.)',
-      'https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf'
-    ),
-  },
+  'consistent-hashing': {},
   consensus: { paper: L('Raft (Ongaro & Ousterhout)', 'https://raft.github.io/raft.pdf') },
   'distributed-infra': {
     paper: L('MapReduce (Dean & Ghemawat)', 'https://research.google/pubs/pub62/'),
@@ -679,8 +655,8 @@ export const CONCEPT_MEDIA = {
   'binary-search': {},
   trees: {
     paper: L(
-      'Red-black trees (Guibas & Sedgewick)',
-      'https://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf'
+      'Left-Leaning Red-Black Trees (Sedgewick)',
+      'https://sedgewick.io/wp-content/themes/sedgewick/papers/2008LLRB.pdf'
     ),
   },
   'shortest-path': {
@@ -690,7 +666,10 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'union-find': {
-    paper: L('Union-find (Tarjan)', 'https://www.cs.princeton.edu/~rs/talks/UF.pdf'),
+    paper: L(
+      'Union-Find (Sedgewick & Wayne, Algorithms 4th ed.)',
+      'https://algs4.cs.princeton.edu/15uf/'
+    ),
   },
   'math-geometry': {
     paper: L(
@@ -799,7 +778,7 @@ export const CONCEPT_MEDIA = {
   },
   'bayesian-inference': {
     paper: L('Bayesian Data Analysis overview (Gelman et al.)', 'https://arxiv.org/abs/1507.02672'),
-    book: L('Statistical Rethinking (McElreath)', 'https://xcelab.net/rm/statistical-rethinking/'),
+    book: L('Statistical Rethinking (McElreath)', 'https://xcelab.net/rm/'),
   },
   'matrix-rank-basis': {
     paper: L(
@@ -905,12 +884,7 @@ export const CONCEPT_MEDIA = {
       'https://doi.org/10.1145/196699.196721'
     ),
   },
-  'game-design': {
-    paper: L(
-      'Statecharts: a visual formalism (Harel)',
-      'https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf'
-    ),
-  },
+  'game-design': {},
   'two-pointers': {
     paper: L("Floyd's cycle-finding algorithm", 'https://arxiv.org/abs/1307.5574'),
   },
@@ -935,9 +909,7 @@ export const CONCEPT_MEDIA = {
       'https://dl.acm.org/doi/10.1145/360827.360855'
     ),
   },
-  heap: {
-    paper: L('Heapsort (Williams)', 'https://www.cs.princeton.edu/~rs/algsDS07/sorting/heap.pdf'),
-  },
+  heap: {},
   backtracking: {
     paper: L('Dancing links — exact cover (Knuth)', 'https://arxiv.org/abs/0804.4098'),
   },
@@ -1680,10 +1652,6 @@ const CURATED_MEDIA_SYSTEMS = {
     ),
   },
   'lsm-tree': {
-    blog: L(
-      'LevelDB Implementation Notes (google/leveldb)',
-      'https://github.com/google/leveldb/blob/main/doc/impl.md'
-    ),
     book: L(
       'CMU 15-445/645 (Fall 2025) Lecture 5 notes — Database Storage II (log-structured storage, LSM)',
       'https://15445.courses.cs.cmu.edu/fall2025/notes/05-storage2.pdf'
@@ -2347,6 +2315,213 @@ for (const [conceptId, links] of Object.entries({
     L(
       'Node.js Best Practices — Preventing database injection vulnerabilities',
       '/library/node-best-practices?section=sections-security-ormodmusage-md'
+    ),
+  ],
+})) {
+  CONCEPT_LIBRARY_LINKS[conceptId] = [...(CONCEPT_LIBRARY_LINKS[conceptId] ?? []), ...links];
+}
+/**
+ * Curated 2026-07-25 for the last of the gap concepts.
+ *
+ * A third false-200 turned up here and it is the worst kind: Microsoft's copy
+ * of the LambdaMART paper returns 200 WITH content-type application/pdf under
+ * a .pdf URL, and the body is a 4 KB HTML bot-block page. Status, extension and
+ * content-type all agreed and all lied — only reading the leading bytes caught
+ * it. Every PDF below was byte-checked for the %PDF magic number.
+ */
+const CURATED_MEDIA_FINAL = {
+  'cdn-edge-delivery': {
+    paper: L(
+      'AdaptSize: Orchestrating the Hot Object Memory Cache in a Content Delivery Network',
+      'https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/berger'
+    ),
+    blog: L(
+      'Tiered Cache Smart Topology',
+      'https://blog.cloudflare.com/tiered-cache-smart-topology/'
+    ),
+  },
+  'click-models': {
+    paper: L('Unbiased Learning-to-Rank with Biased Feedback', 'https://arxiv.org/abs/1608.04468'),
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — Indirect relevance feedback',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/indirect-relevance-feedback-1.html'
+    ),
+  },
+  'disk-based-ann': {
+    paper: L(
+      'DiskANN: Fast Accurate Billion-point Nearest Neighbor Search on a Single Node',
+      'https://proceedings.neurips.cc/paper/2019/file/09853c7fb1d3f8ee67a61b6bf4a7f8e6-Paper.pdf'
+    ),
+  },
+  'index-updates-tombstones': {
+    paper: L(
+      'FreshDiskANN: A Fast and Accurate Graph-Based ANN Index for Streaming Similarity Search',
+      'https://arxiv.org/abs/2105.09613'
+    ),
+    blog: L(
+      'Vector search in Elasticsearch: Integration & the design rationale',
+      'https://www.elastic.co/search-labs/blog/vector-search-elasticsearch-rationale'
+    ),
+  },
+  'learning-to-rank': {
+    paper: L(
+      'From RankNet to LambdaRank to LambdaMART: An Overview',
+      'https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/'
+    ),
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — Result ranking by machine learning',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/result-ranking-by-machine-learning-1.html'
+    ),
+  },
+  'vector-quantization': {
+    paper: L(
+      'RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search',
+      'https://arxiv.org/abs/2405.12497'
+    ),
+    blog: L(
+      'Scalar quantization 101: The basics, benefits and applications',
+      'https://www.elastic.co/search-labs/blog/scalar-quantization-101'
+    ),
+  },
+};
+
+for (const [conceptId, slots] of Object.entries(CURATED_MEDIA_FINAL)) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+for (const [conceptId, links] of Object.entries({
+  'cdn-edge-delivery': [
+    L(
+      'System Design (karanpratapsingh) — Content Delivery Network (CDN)',
+      '/library/system-design?section=readme-md-content-delivery-network-cdn'
+    ),
+    L(
+      'System Design (karanpratapsingh) — Cache Invalidation',
+      '/library/system-design?section=readme-md-caching-cache-invalidation'
+    ),
+    L(
+      'System Design 101 — What is a CDN (Content Delivery Network)?',
+      '/library/system-design-101?section=data-guides-what-is-cdn-content-delivery-network-md'
+    ),
+  ],
+})) {
+  CONCEPT_LIBRARY_LINKS[conceptId] = [...(CONCEPT_LIBRARY_LINKS[conceptId] ?? []), ...links];
+}
+/**
+ * Curated 2026-07-25 — dsa, databases, backend and mathematics gap concepts.
+ *
+ * Two more false-200s were rejected while assembling this: a UW course PDF
+ * that 200s under a .pdf path but redirects to a Shibboleth SSO login page,
+ * and a citeseerx entry whose effective URL is web.archive.org rather than the
+ * allowlisted host. Five DOIs were dropped despite confirmed identity because
+ * they 403 to any client — a resolving DOI is not a reachable source.
+ */
+const CURATED_MEDIA_LAST = {
+  'buffer-pool': {
+    paper: L(
+      'Operating System Support for Database Management (Stonebraker, CACM 1981)',
+      'https://people.eecs.berkeley.edu/~prabal/resources/osprelim/Sto81.pdf'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 4 notes — Memory & Disk Management (Buffer Pool)',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/04-bufferpool.pdf'
+    ),
+  },
+  combinatorics: {
+    paper: L(
+      'MIT 6.042J (Spring 2015) Session 27 reading — Pigeonhole Principle and Inclusion-Exclusion (Chapter 14.8–14.9)',
+      'https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_session27.pdf'
+    ),
+    book: L(
+      'MIT 6.042J (Spring 2015) Session 25 reading — Cardinality Rules (Chapter 14.1–14.2)',
+      'https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_session25.pdf'
+    ),
+  },
+  normalization: {
+    book: L(
+      'UW CSE 414 (Spring 2024) Lecture 13 — Functional Dependencies and BCNF',
+      'https://courses.cs.washington.edu/courses/cse414/24sp/lectures/lec13_BCNF.pdf'
+    ),
+  },
+  'numerical-stability': {
+    paper: L(
+      'MIT 18.335J (Spring 2019) Lecture 3a — Notes on the accuracy of naive summation',
+      'https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/906cd44ea38d0bb54e13138efd67f3a1_MIT18_335JS19_lec3-1.pdf'
+    ),
+    blog: L(
+      'CS231n — Linear Classification: SVM vs Softmax, cross-entropy loss',
+      'https://cs231n.github.io/linear-classify/'
+    ),
+    book: L(
+      'MIT 18.335J (Spring 2019) Lecture 2 — Floating-Point Arithmetic, the IEEE Standard',
+      'https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/2f313023ae3404bc217a81a31b227170_MIT18_335JS19_lec2.pdf'
+    ),
+  },
+  pagination: {
+    blog: L(
+      'Pagination with Relative Cursors (Shopify Engineering)',
+      'https://shopify.engineering/pagination-relative-cursors'
+    ),
+    more: L(
+      'PostgreSQL Documentation — 7.6. LIMIT and OFFSET',
+      'https://www.postgresql.org/docs/current/queries-limit.html'
+    ),
+  },
+  quickselect: {
+    video: L(
+      'MIT 6.046J — Lecture 2: Divide & Conquer: Convex Hull, Median Finding',
+      'https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-2-divide-conquer-convex-hull-median-finding/'
+    ),
+    paper: L(
+      'Time bounds for selection (Blum, Floyd, Pratt, Rivest, Tarjan, JCSS 1973)',
+      'https://doi.org/10.1016/S0022-0000(73)80033-9'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Recursion (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf'
+    ),
+  },
+  'recursion-and-induction': {
+    paper: L(
+      'Jeff Erickson, Algorithms — appendix: Solving Recurrences (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/notes/99-recurrences.pdf'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Recursion (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf'
+    ),
+  },
+};
+
+for (const [conceptId, slots] of Object.entries(CURATED_MEDIA_LAST)) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+for (const [conceptId, links] of Object.entries({
+  normalization: [
+    L(
+      'System Design (karanpratapsingh) — Normalization',
+      '/library/system-design?section=readme-md-normalization-and-denormalization-normalization'
+    ),
+    L(
+      'System Design (karanpratapsingh) — Normalization and Denormalization: Terms',
+      '/library/system-design?section=readme-md-normalization-and-denormalization-terms'
+    ),
+    L(
+      'System Design (karanpratapsingh) — Denormalization',
+      '/library/system-design?section=readme-md-normalization-and-denormalization-denormalization'
+    ),
+  ],
+  pagination: [
+    L(
+      'System Design 101 — How Do We Perform Pagination in API Design',
+      '/library/system-design-101?section=data-guides-how-do-we-perform-pagination-in-api-design-md'
+    ),
+  ],
+  'recursion-and-induction': [
+    L(
+      'Tech Interview Handbook — Recursion',
+      '/library/tech-interview-handbook?section=apps-website-contents-algorithms-recursion-md'
     ),
   ],
 })) {

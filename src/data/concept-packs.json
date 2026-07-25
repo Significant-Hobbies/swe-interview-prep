@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 181,
-      "paper": 216,
-      "blog": 175,
-      "book": 140,
+      "video": 182,
+      "paper": 223,
+      "blog": 179,
+      "book": 147,
       "problem": 252,
       "write": 252,
-      "more": 92,
-      "items": 1308
+      "more": 98,
+      "items": 1333
     }
   },
   "packs": {
@@ -1711,8 +1711,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "Kafka: a Distributed Messaging System (Kreps et al.)",
-          "url": "https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/"
+          "title": "Kafka: a Distributed Messaging System for Log Processing",
+          "url": "https://notes.stephenholiday.com/Kafka.pdf"
         },
         {
           "category": "problem",
@@ -1815,11 +1815,6 @@
     "ecommerce-payments": {
       "items": [
         {
-          "category": "paper",
-          "title": "Sagas (Garcia-Molina & Salem)",
-          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/tr-87-13.pdf"
-        },
-        {
           "category": "book",
           "title": "Patterns of Distributed Systems (Unmesh Joshi, on martinfowler.com) — Two-Phase Commit",
           "url": "https://martinfowler.com/articles/patterns-of-distributed-systems/two-phase-commit.html"
@@ -1896,8 +1891,8 @@
         },
         {
           "category": "blog",
-          "title": "LevelDB Implementation Notes (google/leveldb)",
-          "url": "https://github.com/google/leveldb/blob/main/doc/impl.md"
+          "title": "Martin Kleppmann — blog",
+          "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
@@ -1919,11 +1914,6 @@
     },
     "wal": {
       "items": [
-        {
-          "category": "paper",
-          "title": "ARIES: A Transaction Recovery Method (Mohan et al.)",
-          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf"
-        },
         {
           "category": "blog",
           "title": "SQLite — Write-Ahead Logging",
@@ -2070,11 +2060,6 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
-          "category": "paper",
-          "title": "ARIES: A Transaction Recovery Method (Mohan et al.)",
-          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf"
-        },
-        {
           "category": "blog",
           "title": "PostgreSQL Documentation — 66.6. Database Page Layout",
           "url": "https://www.postgresql.org/docs/current/storage-page-layout.html"
@@ -2085,14 +2070,9 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/03-storage1.pdf"
         },
         {
-          "category": "more",
+          "category": "paper",
           "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
-        },
-        {
-          "category": "more",
-          "title": "LevelDB Implementation Notes (google/leveldb)",
-          "url": "https://github.com/google/leveldb/blob/main/doc/impl.md"
         },
         {
           "category": "more",
@@ -2255,11 +2235,6 @@
     "state-management": {
       "items": [
         {
-          "category": "paper",
-          "title": "Statecharts: a visual formalism (Harel)",
-          "url": "https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf"
-        },
-        {
           "category": "blog",
           "title": "Statecharts — What is a statechart?",
           "url": "https://statecharts.dev/what-is-a-statechart.html"
@@ -2283,6 +2258,11 @@
           "category": "video",
           "title": "Welcome to the world of Statecharts",
           "url": "https://statecharts.dev/"
+        },
+        {
+          "category": "paper",
+          "title": "Statecharts: A Visual Formalism for Complex Systems (Harel, 1987)",
+          "url": "https://dubroy.com/refs/Statecharts_a_visual_formalism_for_complex_systems.pdf"
         },
         {
           "category": "more",
@@ -2545,11 +2525,6 @@
     "game-design": {
       "items": [
         {
-          "category": "paper",
-          "title": "Statecharts: a visual formalism (Harel)",
-          "url": "https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf"
-        },
-        {
           "category": "blog",
           "title": "Gaffer On Games (Glenn Fiedler) — Fix Your Timestep!",
           "url": "https://gafferongames.com/post/fix_your_timestep/"
@@ -2635,11 +2610,6 @@
     "consistent-hashing": {
       "items": [
         {
-          "category": "paper",
-          "title": "Consistent Hashing (Karger et al.)",
-          "url": "https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf"
-        },
-        {
           "category": "more",
           "title": "System Design 101 — Consistent Hashing Explained",
           "url": "/library/system-design-101?section=data-guides-consistent-hashing-md"
@@ -2650,7 +2620,7 @@
           "url": "https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf"
         },
         {
-          "category": "blog",
+          "category": "paper",
           "title": "Consistent Hashing with Bounded Loads (Google Research)",
           "url": "https://research.google/blog/consistent-hashing-with-bounded-loads/"
         },
@@ -2871,16 +2841,11 @@
         },
         {
           "category": "video",
-          "title": "Google Wave Operational Transformation whitepaper",
-          "url": "https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html"
-        },
-        {
-          "category": "blog",
           "title": "A Conflict-Free Replicated JSON Datatype (Kleppmann & Beresford)",
           "url": "https://arxiv.org/abs/1608.03960"
         },
         {
-          "category": "book",
+          "category": "blog",
           "title": "Local-first software: you own your data, in spite of the cloud",
           "url": "https://martin.kleppmann.com/papers/local-first.pdf"
         },
@@ -3176,8 +3141,8 @@
         },
         {
           "category": "paper",
-          "title": "Red-black trees (Guibas & Sedgewick)",
-          "url": "https://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf"
+          "title": "Left-Leaning Red-Black Trees (Sedgewick)",
+          "url": "https://sedgewick.io/wp-content/themes/sedgewick/papers/2008LLRB.pdf"
         },
         {
           "category": "blog",
@@ -3223,11 +3188,6 @@
           "category": "video",
           "title": "MIT 6.006 — Lecture 8: Binary Heaps",
           "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-8-binary-heaps/"
-        },
-        {
-          "category": "paper",
-          "title": "Heapsort (Williams)",
-          "url": "https://www.cs.princeton.edu/~rs/algsDS07/sorting/heap.pdf"
         },
         {
           "category": "blog",
@@ -3351,8 +3311,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "Union-find (Tarjan)",
-          "url": "https://www.cs.princeton.edu/~rs/talks/UF.pdf"
+          "title": "Union-Find (Sedgewick & Wayne, Algorithms 4th ed.)",
+          "url": "https://algs4.cs.princeton.edu/15uf/"
         },
         {
           "category": "blog",
@@ -4573,7 +4533,7 @@
         {
           "category": "book",
           "title": "Statistical Rethinking (McElreath)",
-          "url": "https://xcelab.net/rm/statistical-rethinking/"
+          "url": "https://xcelab.net/rm/"
         }
       ]
     },
@@ -5321,7 +5281,7 @@
       "items": [
         {
           "category": "paper",
-          "title": "Kafka: a Distributed Messaging System",
+          "title": "Kafka: a Distributed Messaging System for Log Processing",
           "url": "https://notes.stephenholiday.com/Kafka.pdf"
         },
         {
@@ -7610,6 +7570,21 @@
     "recursion-and-induction": {
       "items": [
         {
+          "category": "paper",
+          "title": "Jeff Erickson, Algorithms — appendix: Solving Recurrences (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/99-recurrences.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Jeff Erickson, Algorithms — chapter: Recursion (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf"
+        },
+        {
+          "category": "more",
+          "title": "Tech Interview Handbook — Recursion",
+          "url": "/library/tech-interview-handbook?section=apps-website-contents-algorithms-recursion-md"
+        },
+        {
           "category": "problem",
           "title": "Solve a divide-and-conquer recurrence",
           "url": "/drills/recurrence-depth"
@@ -7625,6 +7600,21 @@
     "quickselect": {
       "items": [
         {
+          "category": "video",
+          "title": "MIT 6.046J — Lecture 2: Divide & Conquer: Convex Hull, Median Finding",
+          "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-2-divide-conquer-convex-hull-median-finding/"
+        },
+        {
+          "category": "paper",
+          "title": "Time bounds for selection (Blum, Floyd, Pratt, Rivest, Tarjan, JCSS 1973)",
+          "url": "https://doi.org/10.1016/S0022-0000(73)80033-9"
+        },
+        {
+          "category": "book",
+          "title": "Jeff Erickson, Algorithms — chapter: Recursion (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf"
+        },
+        {
           "category": "problem",
           "title": "k-th smallest by quickselect",
           "url": "/drills/kth-smallest-quickselect"
@@ -7639,6 +7629,26 @@
     },
     "normalization": {
       "items": [
+        {
+          "category": "book",
+          "title": "UW CSE 414 (Spring 2024) Lecture 13 — Functional Dependencies and BCNF",
+          "url": "https://courses.cs.washington.edu/courses/cse414/24sp/lectures/lec13_BCNF.pdf"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Normalization",
+          "url": "/library/system-design?section=readme-md-normalization-and-denormalization-normalization"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Normalization and Denormalization: Terms",
+          "url": "/library/system-design?section=readme-md-normalization-and-denormalization-terms"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Denormalization",
+          "url": "/library/system-design?section=readme-md-normalization-and-denormalization-denormalization"
+        },
         {
           "category": "problem",
           "title": "Spot the update anomaly",
@@ -7660,14 +7670,19 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
+          "category": "paper",
+          "title": "Operating System Support for Database Management (Stonebraker, CACM 1981)",
+          "url": "https://people.eecs.berkeley.edu/~prabal/resources/osprelim/Sto81.pdf"
+        },
+        {
           "category": "blog",
           "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Database Internals (Petrov)",
-          "url": "https://www.databass.dev/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 4 notes — Memory & Disk Management (Buffer Pool)",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/04-bufferpool.pdf"
         },
         {
           "category": "problem",
@@ -7679,11 +7694,26 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Buffer Pool\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A database manages its own page cache because it knows things the OS cannot: which pages a query will touch next, which are dirty and pinned by an open transaction, and that a sequential scan should not evict the working set"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
         }
       ]
     },
     "pagination": {
       "items": [
+        {
+          "category": "blog",
+          "title": "Pagination with Relative Cursors (Shopify Engineering)",
+          "url": "https://shopify.engineering/pagination-relative-cursors"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — How Do We Perform Pagination in API Design",
+          "url": "/library/system-design-101?section=data-guides-how-do-we-perform-pagination-in-api-design-md"
+        },
         {
           "category": "problem",
           "title": "Cursor pagination that survives inserts",
@@ -7700,6 +7730,16 @@
     "combinatorics": {
       "items": [
         {
+          "category": "paper",
+          "title": "MIT 6.042J (Spring 2015) Session 27 reading — Pigeonhole Principle and Inclusion-Exclusion (Chapter 14.8–14.9)",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_session27.pdf"
+        },
+        {
+          "category": "book",
+          "title": "MIT 6.042J (Spring 2015) Session 25 reading — Cardinality Rules (Chapter 14.1–14.2)",
+          "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_session25.pdf"
+        },
+        {
           "category": "problem",
           "title": "Count with inclusion-exclusion",
           "url": "/drills/count-with-inclusion-exclusion"
@@ -7714,6 +7754,21 @@
     },
     "numerical-stability": {
       "items": [
+        {
+          "category": "paper",
+          "title": "MIT 18.335J (Spring 2019) Lecture 3a — Notes on the accuracy of naive summation",
+          "url": "https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/906cd44ea38d0bb54e13138efd67f3a1_MIT18_335JS19_lec3-1.pdf"
+        },
+        {
+          "category": "blog",
+          "title": "CS231n — Linear Classification: SVM vs Softmax, cross-entropy loss",
+          "url": "https://cs231n.github.io/linear-classify/"
+        },
+        {
+          "category": "book",
+          "title": "MIT 18.335J (Spring 2019) Lecture 2 — Floating-Point Arithmetic, the IEEE Standard",
+          "url": "https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/2f313023ae3404bc217a81a31b227170_MIT18_335JS19_lec2.pdf"
+        },
         {
           "category": "problem",
           "title": "Log-sum-exp without overflow",
@@ -7730,6 +7785,16 @@
     "learning-to-rank": {
       "items": [
         {
+          "category": "paper",
+          "title": "From RankNet to LambdaRank to LambdaMART: An Overview",
+          "url": "https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/"
+        },
+        {
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — Result ranking by machine learning",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/result-ranking-by-machine-learning-1.html"
+        },
+        {
           "category": "problem",
           "title": "NDCG@k",
           "url": "/drills/ndcg-at-k"
@@ -7744,6 +7809,16 @@
     },
     "click-models": {
       "items": [
+        {
+          "category": "paper",
+          "title": "Unbiased Learning-to-Rank with Biased Feedback",
+          "url": "https://arxiv.org/abs/1608.04468"
+        },
+        {
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — Indirect relevance feedback",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/indirect-relevance-feedback-1.html"
+        },
         {
           "category": "problem",
           "title": "Debias clicks by inverse propensity",
@@ -7760,6 +7835,16 @@
     "vector-quantization": {
       "items": [
         {
+          "category": "paper",
+          "title": "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search",
+          "url": "https://arxiv.org/abs/2405.12497"
+        },
+        {
+          "category": "blog",
+          "title": "Scalar quantization 101: The basics, benefits and applications",
+          "url": "https://www.elastic.co/search-labs/blog/scalar-quantization-101"
+        },
+        {
           "category": "problem",
           "title": "Scalar quantise and rescore",
           "url": "/drills/scalar-quantize-roundtrip"
@@ -7774,6 +7859,11 @@
     },
     "disk-based-ann": {
       "items": [
+        {
+          "category": "paper",
+          "title": "DiskANN: Fast Accurate Billion-point Nearest Neighbor Search on a Single Node",
+          "url": "https://proceedings.neurips.cc/paper/2019/file/09853c7fb1d3f8ee67a61b6bf4a7f8e6-Paper.pdf"
+        },
         {
           "category": "problem",
           "title": "Cost a disk-resident search by I/O",
@@ -7790,6 +7880,16 @@
     "index-updates-tombstones": {
       "items": [
         {
+          "category": "paper",
+          "title": "FreshDiskANN: A Fast and Accurate Graph-Based ANN Index for Streaming Similarity Search",
+          "url": "https://arxiv.org/abs/2105.09613"
+        },
+        {
+          "category": "blog",
+          "title": "Vector search in Elasticsearch: Integration & the design rationale",
+          "url": "https://www.elastic.co/search-labs/blog/vector-search-elasticsearch-rationale"
+        },
+        {
           "category": "problem",
           "title": "Tombstones erode recall",
           "url": "/drills/tombstone-recall-drift"
@@ -7804,6 +7904,31 @@
     },
     "cdn-edge-delivery": {
       "items": [
+        {
+          "category": "paper",
+          "title": "AdaptSize: Orchestrating the Hot Object Memory Cache in a Content Delivery Network",
+          "url": "https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/berger"
+        },
+        {
+          "category": "blog",
+          "title": "Tiered Cache Smart Topology",
+          "url": "https://blog.cloudflare.com/tiered-cache-smart-topology/"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Content Delivery Network (CDN)",
+          "url": "/library/system-design?section=readme-md-content-delivery-network-cdn"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Cache Invalidation",
+          "url": "/library/system-design?section=readme-md-caching-cache-invalidation"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — What is a CDN (Content Delivery Network)?",
+          "url": "/library/system-design-101?section=data-guides-what-is-cdn-content-delivery-network-md"
+        },
         {
           "category": "problem",
           "title": "Decide the edge cache key",
