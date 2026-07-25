@@ -966,8 +966,8 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "RouteLLM — an open-source framework for cost-effective LLM routing (LMSYS)",
+          "url": "https://lmsys.org/blog/2024-07-01-routellm/"
         },
         {
           "category": "book",
@@ -994,6 +994,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Model Routing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Not every request needs the frontier model"
+        },
+        {
+          "category": "more",
+          "title": "Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing",
+          "url": "https://arxiv.org/abs/2404.14618"
         }
       ]
     },
@@ -1261,8 +1266,8 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "An overview of gradient descent optimization algorithms (Sebastian Ruder)",
+          "url": "https://www.ruder.io/optimizing-gradient-descent/"
         },
         {
           "category": "book",
@@ -1736,8 +1741,8 @@
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — LLM data flywheels",
-          "url": "https://eugeneyan.com/writing/llm-evaluators/"
+          "title": "Data Cascades in High-Stakes AI (Sambasivan et al., CHI 2021)",
+          "url": "https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/"
         },
         {
           "category": "book",
@@ -2871,8 +2876,8 @@
         },
         {
           "category": "paper",
-          "title": "Program development by stepwise refinement (Wirth)",
-          "url": "https://doi.org/10.1145/356953.356949"
+          "title": "Program Development by Stepwise Refinement (Wirth, CACM 1971)",
+          "url": "https://doi.org/10.1145/362575.362577"
         },
         {
           "category": "blog",
@@ -2906,8 +2911,8 @@
         },
         {
           "category": "paper",
-          "title": "Applications Programming in Smalltalk-80 (Krasner et al.)",
-          "url": "https://doi.org/10.1145/361233.361234"
+          "title": "A Cookbook for Using the Model-View-Controller User Interface Paradigm in Smalltalk-80 (Krasner & Pope, 1988)",
+          "url": "https://www.ics.uci.edu/~redmiles/ics227-SQ04/papers/KrasnerPope88.pdf"
         },
         {
           "category": "blog",
@@ -2976,8 +2981,8 @@
         },
         {
           "category": "paper",
-          "title": "Open-Closed Principle (Martin)",
-          "url": "https://doi.org/10.1109/MS.2003.1207080"
+          "title": "The Open-Closed Principle (Robert C. Martin, C++ Report 1996)",
+          "url": "https://www.cs.utexas.edu/users/downing/papers/OCP-1996.pdf"
         },
         {
           "category": "blog",
@@ -3046,8 +3051,8 @@
         },
         {
           "category": "paper",
-          "title": "Command pattern in interactive systems (Myers)",
-          "url": "https://doi.org/10.1145/800214.806205"
+          "title": "A Selective Undo Mechanism for Graphical User Interfaces Based on Command Objects (Berlage, TOCHI 1994)",
+          "url": "https://doi.org/10.1145/196699.196721"
         },
         {
           "category": "blog",
@@ -4156,8 +4161,8 @@
         },
         {
           "category": "paper",
-          "title": "Dynamic programming (Bellman)",
-          "url": "https://doi.org/10.1073/pnas.48.8.1257"
+          "title": "On the Theory of Dynamic Programming (Bellman, 1952)",
+          "url": "https://doi.org/10.1073/pnas.38.8.716"
         },
         {
           "category": "blog",
@@ -4356,8 +4361,8 @@
         },
         {
           "category": "paper",
-          "title": "Graph-based algorithms for Boolean function manipulation (Bryant)",
-          "url": "https://doi.org/10.1016/0898-1221(92)90016-Z"
+          "title": "Graph-Based Algorithms for Boolean Function Manipulation (Bryant, 1986)",
+          "url": "https://doi.org/10.1109/TC.1986.1676819"
         },
         {
           "category": "blog",
@@ -4571,8 +4576,8 @@
         },
         {
           "category": "paper",
-          "title": "Grounding in communication (Clark & Brennan)",
-          "url": "https://doi.org/10.1016/S0010-0277(91)90013-P"
+          "title": "Grounding in Communication (Clark & Brennan, 1991)",
+          "url": "https://doi.org/10.1037/10096-006"
         },
         {
           "category": "blog",
@@ -4721,8 +4726,8 @@
         },
         {
           "category": "paper",
-          "title": "On the criteria for decomposing systems into modules (Parnas)",
-          "url": "https://doi.org/10.1145/362486.362498"
+          "title": "On the Criteria To Be Used in Decomposing Systems into Modules (Parnas, CACM 1972)",
+          "url": "https://doi.org/10.1145/361598.361623"
         },
         {
           "category": "blog",
@@ -4766,8 +4771,8 @@
         },
         {
           "category": "paper",
-          "title": "Market segmentation (Smith)",
-          "url": "https://doi.org/10.1177/002224295601300407"
+          "title": "Product Differentiation and Market Segmentation as Alternative Marketing Strategies (Smith, 1956)",
+          "url": "https://doi.org/10.1177/002224295602100102"
         },
         {
           "category": "blog",
@@ -6849,6 +6854,16 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Human Review Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Human review is a risk-control system"
+        },
+        {
+          "category": "book",
+          "title": "People + AI Guidebook — Errors + Graceful Failure (Google PAIR)",
+          "url": "https://pair.withgoogle.com/chapter/explainability-trust/"
+        },
+        {
+          "category": "more",
+          "title": "NIST AI Risk Management Framework 1.0 (PDF)",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
         }
       ]
     },
