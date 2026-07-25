@@ -1,26 +1,10 @@
-import {
-  BarChart3,
-  BookOpen,
-  Code2,
-  Dumbbell,
-  FolderKanban,
-  Hammer,
-  LayoutGrid,
-  LogIn,
-  LogOut,
-  Mic,
-  Network,
-  NotebookPen,
-  RotateCcw,
-  Settings,
-  type LucideIcon,
-} from 'lucide-react';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { LogIn, LogOut, Settings } from 'lucide-react';
+import { lazy, Suspense, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
-import { BROWSE_DESTINATIONS } from '../lib/browseLinks';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
+import { SiteHeader } from './SiteHeader';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 // Lazy-loaded: DigestBanner pulls in learning-os.ts (722 KB / 179 KB gzip of
@@ -32,157 +16,19 @@ const DigestBanner = lazy(() =>
 );
 const SettingsModal = lazy(() => import('./SettingsModal'));
 
-interface NavItem {
-  to: string;
-  label: string;
-  icon: typeof Network;
-}
-
-const BROWSE_ICONS: Record<string, LucideIcon> = {
-  library: BookOpen,
-  explore: LayoutGrid,
-  concepts: Network,
-  drills: Dumbbell,
-  reviews: RotateCcw,
-  docs: BookOpen,
-  build: Hammer,
-  playground: Code2,
-  projects: FolderKanban,
-  notes: NotebookPen,
-  mock: Mic,
-};
-
-// Six primary tabs + Docs. Full catalog lives under Browse.
-const PRIMARY_NAV: NavItem[] = [
-  { to: '/today', label: 'Today', icon: Network },
-  { to: '/learn', label: 'Learn', icon: BookOpen },
-  { to: '/practice', label: 'Practice', icon: Dumbbell },
-  { to: '/mock', label: 'Mock', icon: Mic },
-  { to: '/playground', label: 'Playground', icon: Code2 },
-  { to: '/progress', label: 'Progress', icon: BarChart3 },
-  { to: '/learning', label: 'Docs', icon: BookOpen },
-];
-
-const BROWSE_NAV: NavItem[] = BROWSE_DESTINATIONS.map((d) => ({
-  to: d.to,
-  label: d.label,
-  icon: BROWSE_ICONS[d.id] ?? LayoutGrid,
-}));
-
-// Mobile bottom bar — five highest-traffic + browse overflow.
-const MOBILE_PRIMARY: NavItem[] = [
-  { to: '/today', label: 'Today', icon: Network },
-  { to: '/learn', label: 'Learn', icon: BookOpen },
-  { to: '/practice', label: 'Practice', icon: Dumbbell },
-  { to: '/mock', label: 'Mock', icon: Mic },
-  { to: '/progress', label: 'Progress', icon: BarChart3 },
-];
-
-function navActive(pathname: string, to: string) {
-  const base = to.split('?')[0];
-  if (base === '/today') return pathname === '/today' || pathname === '/';
-  if (base === '/learning') return pathname === '/learning' || pathname.startsWith('/learning/');
-  return pathname === base || pathname.startsWith(`${base}/`);
-}
-
 export default function Layout() {
   const location = useLocation();
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [browseOpen, setBrowseOpen] = useState(false);
-  const browseDesktopRef = useRef<HTMLDivElement>(null);
-  const browseMobileRef = useRef<HTMLDivElement>(null);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
   const showSetupHint = !onboardingDone && location.pathname !== '/onboarding';
 
-  useEffect(() => {
-    if (!browseOpen) return;
-    function handleClick(e: MouseEvent) {
-      const t = e.target as Node;
-      if (
-        browseOpen &&
-        !browseDesktopRef.current?.contains(t) &&
-        !browseMobileRef.current?.contains(t)
-      ) {
-        setBrowseOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [browseOpen]);
-
-  useEffect(() => {
-    setBrowseOpen(false);
-  }, []);
-
-  const navClass = ({ isActive }: { isActive: boolean }) =>
-    `relative inline-flex h-16 items-center px-1 text-sm transition-colors duration-150 ${
-      isActive ? 'text-white' : 'text-white/50 hover:text-white'
-    }`;
-
-  const tabClass = (to: string) => {
-    const active = navActive(location.pathname, to);
-    return `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors duration-150 ${
-      active ? 'text-white' : 'text-white/40'
-    }`;
-  };
-
-  const browseActive = BROWSE_NAV.some((item) => navActive(location.pathname, item.to));
-
   return (
     <TooltipProvider delayDuration={250}>
-      <div className="min-h-screen bg-black pb-16 md:pb-0">
-        <nav className="sticky top-0 z-50 isolate border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
-          <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-4 md:px-6">
-            <NavLink
-              to="/"
-              className="relative z-10 flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
-            >
-              <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
-              <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
-            </NavLink>
-
-            <div className="relative z-10 hidden flex-1 items-center justify-center gap-5 lg:gap-6 md:flex">
-              {PRIMARY_NAV.map(({ to, label }) => (
-                <NavLink key={to} to={to} className={navClass}>
-                  <span>{label}</span>
-                </NavLink>
-              ))}
-              <div ref={browseDesktopRef} className="relative">
-                <button
-                  type="button"
-                  onClick={() => setBrowseOpen((o) => !o)}
-                  className={`inline-flex h-16 items-center gap-1 px-1 text-sm transition-colors duration-150 ${
-                    browseOpen || browseActive ? 'text-white' : 'text-white/50 hover:text-white'
-                  }`}
-                  aria-expanded={browseOpen}
-                  aria-haspopup="menu"
-                >
-                  Browse
-                  <LayoutGrid className="h-3.5 w-3.5" />
-                </button>
-                {browseOpen && (
-                  <div
-                    role="menu"
-                    className="absolute left-1/2 top-full z-50 mt-1 min-w-[12rem] -translate-x-1/2 rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50"
-                  >
-                    {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
-                      <Link
-                        key={to}
-                        to={to}
-                        role="menuitem"
-                        className="flex items-center gap-2 px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
-                      >
-                        <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
-                        {label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex shrink-0 items-center gap-1">
+      <div className="min-h-screen bg-black">
+        <SiteHeader
+          actions={
+            <>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -230,9 +76,9 @@ export default function Layout() {
                   <span className="hidden sm:inline">Sign in</span>
                 </button>
               ) : null}
-            </div>
-          </div>
-        </nav>
+            </>
+          }
+        />
 
         <Suspense fallback={null}>
           <DigestBanner />
@@ -256,50 +102,13 @@ export default function Layout() {
           </div>
         )}
 
-        <main>
+        <main id="main-content">
           <Outlet />
         </main>
 
         <Suspense fallback={null}>
           <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </Suspense>
-
-        <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-white/[0.08] bg-black/95 backdrop-blur-xl md:hidden">
-          {MOBILE_PRIMARY.map(({ to, label, icon: Icon }) => (
-            <NavLink key={to} to={to} className={tabClass(to)}>
-              <Icon className="h-5 w-5" />
-              <span>{label}</span>
-            </NavLink>
-          ))}
-          <div ref={browseMobileRef} className="relative flex flex-1 flex-col">
-            <button
-              type="button"
-              onClick={() => setBrowseOpen((o) => !o)}
-              className={`flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[10px] transition-colors ${
-                browseOpen || browseActive ? 'text-white' : 'text-white/40'
-              }`}
-              aria-expanded={browseOpen}
-              aria-label="Browse catalog"
-            >
-              <LayoutGrid className="h-5 w-5" />
-              <span>Browse</span>
-            </button>
-            {browseOpen && (
-              <div className="absolute bottom-full right-0 mb-2 max-h-[70vh] min-w-[11rem] overflow-y-auto rounded-xl border border-white/10 bg-black py-1 shadow-2xl shadow-black/50">
-                {BROWSE_NAV.map(({ to, label, icon: Icon }) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    className="flex items-center gap-2 px-3 py-2.5 text-xs text-white/70 hover:bg-white/5 hover:text-white"
-                  >
-                    <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     </TooltipProvider>
   );

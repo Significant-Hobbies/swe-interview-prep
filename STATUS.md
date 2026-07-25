@@ -21,7 +21,8 @@ workspaces.
 - None. The personally requested curriculum expansion and public SEO
   publication are complete: 18 tracks, 222 concepts, 24 roadmaps, and 265
   JavaScript-independent curriculum pages with exact sitemap and agent-catalog
-  coverage.
+  coverage. The homepage, application, and generated curriculum now also share
+  one responsive navigation hierarchy without adding a backend dependency.
 
 ## Blockers / known gaps
 

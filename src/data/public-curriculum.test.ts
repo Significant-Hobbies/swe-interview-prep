@@ -9,6 +9,7 @@ import conceptsData from './concepts.json';
 import roadmapsData from './roadmaps.json';
 import curriculumSummary from './public-curriculum-summary.json';
 import { TRACKS } from './learning-os';
+import { SITE_NAV_ITEMS } from './site-navigation';
 
 const root = resolve(__dirname, '../..');
 const concepts = (conceptsData as { concepts: { id: string }[] }).concepts;
@@ -85,6 +86,24 @@ describe('public curriculum publication', () => {
         .replaceAll(/\s+/g, ' ')
         .trim();
       expect(visibleText.split(' ').filter(Boolean).length, path).toBeGreaterThanOrEqual(300);
+    }
+  });
+
+  it('renders the canonical navigation model on every generated page', () => {
+    for (const path of manifest.htmlPaths) {
+      const file =
+        path === '/curriculum/'
+          ? resolve(root, 'public/curriculum/index.html')
+          : resolve(root, `public${path}`);
+      const html = readFileSync(file, 'utf8');
+      expect(html).toContain('<nav class="desktop-nav" aria-label="Primary">');
+      expect(html).toContain('<nav aria-label="Compact">');
+      const header = html.match(/<header class="site-header">[\s\S]*?<\/header>/)?.[0];
+      expect(header, `${path}: site header`).toBeTruthy();
+      for (const item of SITE_NAV_ITEMS) {
+        const link = `href="${item.to}">${item.label}</a>`;
+        expect(header?.split(link), `${path}: ${item.label}`).toHaveLength(3);
+      }
     }
   });
 });
