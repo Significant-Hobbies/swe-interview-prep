@@ -83,10 +83,6 @@ export function isFormulaicReviewQuestion(q: Pick<ReviewQuestion, 'question'>): 
   return FORMULAIC_QUESTION_STEMS.some((stem) => text.includes(stem));
 }
 
-export function isIngestedReviewQuestion(id: string): boolean {
-  return id.startsWith('rq-lib-');
-}
-
 function isAnkiReviewQuestion(id: string): boolean {
   return id.startsWith('rq-anki-');
 }
@@ -94,21 +90,11 @@ function isAnkiReviewQuestion(id: string): boolean {
 /**
  * Questions eligible for FSRS scheduling and session planning.
  *
- * Library-ingested questions are QUARANTINED. Every one of them is the same
- * template ("{Repo}: {Section} — explain the core idea in your own words")
- * with a scraped markdown fragment as the answer, mapped to a concept by a
- * keyword match that lands roughly at random (an AWS certificate page mapped
- * to `load-balancing`, a DevOps page to `teamwork-and-collaboration`). The
- * only gate was an answer length of 80 characters, which those pass trivially.
- * Re-enable when `scripts/ingest-library-rqs.mjs` can produce a real question
- * and a real answer with a defensible concept mapping.
- *
  * Editorial questions are judged on their text, not their id — see
  * `isFormulaicReviewQuestion`.
  */
 export function isSchedulableReviewQuestion(q: ReviewQuestion): boolean {
   if (isFormulaicReviewQuestion(q)) return false;
-  if (q.source === 'library' || isIngestedReviewQuestion(q.id)) return false;
   if (q.source === 'anki' || isAnkiReviewQuestion(q.id)) {
     return (q.question?.length ?? 0) >= 8 && (q.answer?.length ?? 0) >= 20;
   }

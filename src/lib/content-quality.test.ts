@@ -14,13 +14,11 @@ import {
   REVIEW_QUESTIONS,
   type ReviewQuestion,
 } from '../data/learning-os';
-import reviewQuestionsIngestedData from '../data/review-questions-ingested.json';
 import {
   isEditorialArtifact,
   isEditorialDrill,
   isMetadataDrill,
   isFormulaicReviewQuestion,
-  isIngestedReviewQuestion,
   isSchedulableReviewQuestion,
   isStubPlaygroundCode,
 } from './contentQuality';
@@ -107,16 +105,6 @@ describe('content quality bar', () => {
     expect(core.length).toBeGreaterThan(0);
     expect(core.every(isSchedulableReviewQuestion)).toBe(true);
     expect(REVIEW_QUESTIONS.some((q) => q.id.endsWith('-core'))).toBe(true);
-  });
-
-  it('ingested library review questions are quarantined from scheduling', () => {
-    const ingested = reviewQuestionsIngestedData.reviewQuestions ?? [];
-    expect(ingested.length).toBeGreaterThan(0);
-    expect(ingested.every((q: { id: string }) => isIngestedReviewQuestion(q.id))).toBe(true);
-    // They are template questions with scraped answers and near-random concept
-    // mapping, so none of them may reach the FSRS queue.
-    expect((ingested as ReviewQuestion[]).some((q) => isSchedulableReviewQuestion(q))).toBe(false);
-    expect(REVIEW_QUESTIONS.some((q) => isIngestedReviewQuestion(q.id))).toBe(false);
   });
 
   it('spine playground templates are not stubs', () => {

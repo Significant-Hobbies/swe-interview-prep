@@ -6,16 +6,10 @@ import drillsData from './drills.json';
 import externalResourcesData from './external-resources.json';
 import projectsData from './projects.json';
 import reviewQuestionsData from './review-questions.json';
-import reviewQuestionsIngestedData from './review-questions-ingested.json';
 import conceptPacksData from './concept-packs.json';
 import roadmapsData from './roadmaps.json';
 import { buildTopicPack, type TopicPack } from '../lib/topicPack';
-import {
-  isEditorialArtifact,
-  isEditorialDrill,
-  isMetadataDrill,
-  isSchedulableReviewQuestion,
-} from '../lib/contentQuality';
+import { isEditorialArtifact, isEditorialDrill, isMetadataDrill } from '../lib/contentQuality';
 
 type TrackId =
   | 'search-ir'
@@ -401,18 +395,7 @@ const PROJECTS: Project[] = (projectsData as any).projects;
 const EDITORIAL_REVIEW_QUESTIONS: ReviewQuestion[] = (
   reviewQuestionsData as any
 ).reviewQuestions.map((q: ReviewQuestion) => ({ ...q, source: q.source ?? 'editorial' }));
-/**
- * Quarantined: template questions scraped out of the library, kept on disk so
- * a future regeneration has a baseline, but deliberately NOT merged into
- * `REVIEW_QUESTIONS`. See `isSchedulableReviewQuestion` for why.
- */
-export const INGESTED_REVIEW_QUESTIONS: ReviewQuestion[] = (
-  (reviewQuestionsIngestedData as any).reviewQuestions ?? []
-).filter(isSchedulableReviewQuestion);
-export const REVIEW_QUESTIONS: ReviewQuestion[] = [
-  ...EDITORIAL_REVIEW_QUESTIONS,
-  ...INGESTED_REVIEW_QUESTIONS,
-];
+export const REVIEW_QUESTIONS: ReviewQuestion[] = EDITORIAL_REVIEW_QUESTIONS;
 
 const TRACK_BY_ID: Record<string, Track> = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
 export const CONCEPT_BY_ID: Record<string, Concept> = Object.fromEntries(

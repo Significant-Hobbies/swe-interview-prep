@@ -30,7 +30,7 @@
       "reviewQuestions": ["rq-tokenization-symmetry"],
       "resources": [
         {
-          "title": "Stanford IR Book — Tokenization",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html",
           "type": "doc"
         },
@@ -105,7 +105,7 @@
       "reviewQuestions": ["rq-tfidf-idf-why"],
       "resources": [
         {
-          "title": "Stanford IR Book — Scoring & term weighting",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
           "type": "doc"
         }
@@ -181,7 +181,7 @@
       "artifacts": ["search-eval-harness"],
       "resources": [
         {
-          "title": "Stanford IR Book — Evaluation in IR",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
           "type": "doc"
         }
@@ -301,7 +301,7 @@
       "description": "Expanding, correcting, and normalizing queries before retrieval.",
       "resources": [
         {
-          "title": "Stanford IR Book — Query expansion",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §9.2 Query expansion",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html",
           "type": "doc"
         }
@@ -952,7 +952,7 @@
           "type": "doc"
         },
         {
-          "title": "Using LLM-as-a-Judge for evaluation (Hamel Husain)",
+          "title": "Using LLM-as-a-Judge For Evaluation: A Complete Guide (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/llm-judge/",
           "type": "article"
         }
@@ -4515,11 +4515,6 @@
       "reviewQuestions": ["rq-regression-as-projection"],
       "resources": [
         {
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/",
-          "type": "doc"
-        },
-        {
           "title": "An Introduction to Statistical Learning — full text (PDF)",
           "url": "https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf",
           "type": "paper"
@@ -4815,11 +4810,6 @@
       "reviewQuestions": ["rq-mle-cross-entropy-link", "rq-likelihood-vs-posterior"],
       "resources": [
         {
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/",
-          "type": "doc"
-        },
-        {
           "title": "StatQuest — Maximum Likelihood",
           "url": "https://www.youtube.com/watch?v=XepXbq9wr90",
           "type": "video"
@@ -4852,11 +4842,6 @@
           "title": "Seeing Theory — Regression",
           "url": "https://seeing-theory.brown.edu/regression-analysis/index.html",
           "type": "article"
-        },
-        {
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/",
-          "type": "doc"
         }
       ]
     },
@@ -4885,11 +4870,6 @@
           "title": "StatQuest — Bias and Variance",
           "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
           "type": "video"
-        },
-        {
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/",
-          "type": "doc"
         }
       ]
     },
@@ -4946,11 +4926,6 @@
           "title": "StatQuest — PCA",
           "url": "https://www.youtube.com/watch?v=FgakZw6K1QQ",
           "type": "video"
-        },
-        {
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/",
-          "type": "doc"
         },
         {
           "title": "A Tutorial on Principal Component Analysis (Shlens)",

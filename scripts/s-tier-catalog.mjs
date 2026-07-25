@@ -130,18 +130,9 @@ export const TAG_MEDIA = {
       'https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/'
     ),
   },
-  behavioral: {
-    video: L(
-      'Google re:Work — Structured interviews',
-      'https://rework.withgoogle.com/guides/hiring-use-structured-interviews/'
-    ),
-    blog: L('Google re:Work — guide library', 'https://rework.withgoogle.com/guides/'),
-    book: L('Work Rules! (Laszlo Bock)', 'https://rework.withgoogle.com/'),
-    paper: L(
-      'Validity of selection methods (Schmidt & Hunter)',
-      'https://psycnet.apa.org/doiLanding?doi=10.1037/0021-9010.70.3.472'
-    ),
-  },
+  // `behavioral` had no per-concept media, only a site root and a book
+  // storefront repeated across the track. Removed rather than retitled.
+
   product: {
     book: L(
       'Inspired (Marty Cagan)',
@@ -170,10 +161,9 @@ export const TAG_MEDIA = {
       'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'
     ),
   },
-  statistics: {
-    blog: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
-    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
-  },
+  // `statistics` had no per-concept media, only a site root and a book
+  // storefront repeated across the track. Removed rather than retitled.
+
   probability: {
     blog: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
     book: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
@@ -307,7 +297,7 @@ export const CONCEPT_MEDIA = {
   },
   hnsw: {
     paper: L(
-      'Efficient and robust ANN with HNSW (Malkov & Yashunin)',
+      'Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)',
       'https://arxiv.org/abs/1603.09320'
     ),
   },
@@ -349,9 +339,17 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'tool-calling': { paper: L('Toolformer (Schick et al.)', 'https://arxiv.org/abs/2302.04761') },
-  'agent-loops': { paper: L('ReAct (Yao et al.)', 'https://arxiv.org/abs/2210.03629') },
+  'agent-loops': {
+    paper: L(
+      'ReAct: Synergizing Reasoning and Acting in Language Models',
+      'https://arxiv.org/abs/2210.03629'
+    ),
+  },
   'model-routing': {
-    paper: L('FrugalGPT (Chen et al.)', 'https://arxiv.org/abs/2305.05176'),
+    paper: L(
+      'FrugalGPT: Using LLMs While Reducing Cost and Improving Performance (Chen et al.)',
+      'https://arxiv.org/abs/2305.05176'
+    ),
     blog: L(
       'RouteLLM — cost-effective LLM routing (LMSYS)',
       'https://lmsys.org/blog/2024-07-01-routellm/'
@@ -447,7 +445,9 @@ export const CONCEPT_MEDIA = {
   'ml-checkpointing': {
     paper: L('Megatron-LM (Shoeybi et al.)', 'https://arxiv.org/abs/1909.08053'),
   },
-  'ml-lora': { paper: L('LoRA (Hu et al.)', 'https://arxiv.org/abs/2106.09685') },
+  'ml-lora': {
+    paper: L('LoRA: Low-Rank Adaptation (Hu et al.)', 'https://arxiv.org/abs/2106.09685'),
+  },
   'ml-rl-alignment': {
     paper: L('Proximal Policy Optimization (Schulman et al.)', 'https://arxiv.org/abs/1706.03741'),
     blog: L(
@@ -1474,7 +1474,7 @@ const CURATED_MEDIA = {
     ),
   },
   'sliding-window': {
-    blog: L('USACO Guide — Sliding Window', 'https://usaco.guide/gold/sliding-window'),
+    blog: L('Sliding Window — USACO Guide (Gold)', 'https://usaco.guide/gold/sliding-window'),
   },
   stack: {
     blog: L('USACO Guide — Stacks (incl. monotonic stack)', 'https://usaco.guide/gold/stacks'),
@@ -1516,7 +1516,7 @@ const CURATED_MEDIA = {
     ),
   },
   'two-pointers': {
-    blog: L('USACO Guide — Two Pointers', 'https://usaco.guide/silver/two-pointers'),
+    blog: L('Two Pointers — USACO Guide (Silver)', 'https://usaco.guide/silver/two-pointers'),
   },
   'union-find': {
     blog: L(
@@ -2072,6 +2072,41 @@ const SLOTS = ['video', 'paper', 'blog', 'book'];
 /** Tag defaults only backfill teaching paths — papers need concept-specific relevance. */
 const TAG_FALLBACK_SLOTS = ['video', 'blog', 'book'];
 
+/**
+ * Tags whose media may fill a concept's slots.
+ *
+ * BROAD TRACK TAGS ARE DELIBERATELY EXCLUDED. A track's standing reference is
+ * not a source for any particular concept in it: Designing Data-Intensive
+ * Applications' storefront told you nothing about `sharding`, CS336's course
+ * homepage nothing about `chunking`, and the Illustrated GPT-2 — which explains
+ * one decoder block — was the blog for `model-quantization` and `llm-evals`.
+ * Between them 22 URLs occupied 226 of 591 media slots, purely because a slot
+ * existed and wanted filling.
+ *
+ * A narrow topic tag ("transformers", "storage-engines", "linear-algebra") is
+ * about one subject, so its media stays eligible. Anything broader belongs on
+ * the track page once, not stamped across every card in the track.
+ */
+const SLOT_ELIGIBLE_TAGS = new Set([
+  'embeddings',
+  'training',
+  'language-modeling',
+  'transformers',
+  'rag',
+  'evals',
+  'evaluation',
+  'http',
+  'storage-engines',
+  'low-level-design',
+  'behavioral',
+  'statistics',
+  'probability',
+  'quant',
+  'linear-algebra',
+  'foundations',
+  'runtime',
+]);
+
 export function tagsForConcept(concept) {
   const tags = new Set(concept.tags ?? []);
   tags.add(concept.id);
@@ -2088,6 +2123,7 @@ export function sTierSlotsForConcept(concept) {
     if (conceptSlots[slot]) out[slot] = { ...conceptSlots[slot] };
   }
   for (const tag of TAG_PRIORITY) {
+    if (!SLOT_ELIGIBLE_TAGS.has(tag)) continue;
     if (!tagsForConcept(concept).includes(tag)) continue;
     const def = TAG_MEDIA[tag];
     if (!def) continue;

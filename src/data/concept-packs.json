@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 210,
-      "paper": 212,
-      "blog": 207,
-      "book": 194,
+      "video": 170,
+      "paper": 208,
+      "blog": 164,
+      "book": 135,
       "problem": 222,
       "write": 222,
-      "more": 131,
-      "items": 1398
+      "more": 69,
+      "items": 1190
     }
   },
   "packs": {
@@ -30,12 +30,12 @@
           "url": "https://arxiv.org/abs/1508.07909"
         },
         {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
         },
         {
-          "category": "book",
+          "category": "blog",
           "title": "Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
         },
@@ -55,11 +55,6 @@
     "inverted-index": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Inverted Files for Text Search Engines (Zobel & Moffat)",
           "url": "https://dl.acm.org/doi/10.1145/1167694.1167696"
@@ -71,6 +66,11 @@
         },
         {
           "category": "book",
+          "title": "Stanford IR Book — A first take at building an inverted index",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html"
+        },
+        {
+          "category": "video",
           "title": "Stanford IR Book — A first take at building an inverted index",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html"
         },
@@ -90,22 +90,17 @@
     "tf-idf": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Term-weighting approaches in IR (Salton & Buckley)",
           "url": "https://doi.org/10.1016/0306-4573(88)90021-0"
         },
         {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html"
         },
         {
-          "category": "book",
+          "category": "video",
           "title": "Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html"
         },
@@ -125,11 +120,6 @@
     "bm25": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "BM25 at large scale (Lv & Zhai)",
           "url": "https://arxiv.org/abs/1004.5028"
@@ -143,6 +133,11 @@
           "category": "book",
           "title": "Introduction to Information Retrieval (Manning et al.) — §11.4.3 Okapi BM25: a non-binary model",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html"
+        },
+        {
+          "category": "video",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
+          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "problem",
@@ -160,22 +155,17 @@
     "ranking-metrics": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "NDCG evaluation metric (Järvelin & Kekäläinen)",
           "url": "https://doi.org/10.1145/582415.582418"
         },
         {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html"
         },
         {
-          "category": "book",
+          "category": "video",
           "title": "Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html"
         },
@@ -195,19 +185,9 @@
     "search-evals": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "BEIR benchmark (Thakur et al.)",
           "url": "https://arxiv.org/abs/2104.08663"
-        },
-        {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
@@ -230,27 +210,12 @@
     "hybrid-search": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Reciprocal Rank Fusion (Cormack et al.)",
           "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
         },
         {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Elasticsearch — Hybrid search",
           "url": "https://www.elastic.co/search-labs/blog/hybrid-search-elasticsearch"
         },
@@ -270,24 +235,9 @@
     "reranking": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Cross-Encoders for Semantic Similarity (Reimers & Gurevych)",
           "url": "https://arxiv.org/abs/1908.10084"
-        },
-        {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
         },
         {
           "category": "problem",
@@ -305,22 +255,17 @@
     "query-rewriting": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Relevance feedback and query expansion (Manning, IR Book ch. 9)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/relevance-feedback-and-pseudo-relevance-feedback-1.html"
         },
         {
-          "category": "blog",
-          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §9.2 Query expansion",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html"
         },
         {
-          "category": "book",
+          "category": "video",
           "title": "Introduction to Information Retrieval (Manning et al.) — §9.2 Query expansion",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html"
         },
@@ -340,11 +285,6 @@
     "search-discovery": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "TREC: Experiment and Evaluation in IR (Voorhees & Harman)",
           "url": "https://arxiv.org/abs/0912.5326"
@@ -355,17 +295,12 @@
           "url": "https://eugeneyan.com/writing/patterns-for-personalization/"
         },
         {
-          "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Stanford IR Book — A first take at building an inverted index",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Stanford IR Book — Wildcard queries (permuterm / k-gram indexes)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/wildcard-queries-1.html"
         },
@@ -430,19 +365,9 @@
     "vector-similarity": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "FAISS: Billion-scale similarity search (Johnson et al.)",
           "url": "https://arxiv.org/abs/1702.08734"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
@@ -465,24 +390,9 @@
     "topk-vector-search": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "ScaNN: Efficient vector similarity search (Guo et al.)",
           "url": "https://arxiv.org/abs/1902.10342"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -500,24 +410,9 @@
     "brute-force-vector-db": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "Exact nearest neighbors using approximate search (Indyk)",
           "url": "https://arxiv.org/abs/1307.5568"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -535,13 +430,8 @@
     "hnsw": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
-          "title": "Efficient and robust ANN with HNSW (Malkov & Yashunin)",
+          "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
           "url": "https://arxiv.org/abs/1603.09320"
         },
         {
@@ -550,9 +440,9 @@
           "url": "https://www.pinecone.io/learn/hnsw/"
         },
         {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
+          "category": "video",
+          "title": "Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)",
+          "url": "https://arxiv.org/abs/1603.09320"
         },
         {
           "category": "problem",
@@ -570,24 +460,9 @@
     "ivf": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
           "url": "https://arxiv.org/abs/1011.3589"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -605,24 +480,9 @@
     "product-quantization": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "Product Quantization for Nearest Neighbor Search (Jégou et al.)",
           "url": "https://arxiv.org/abs/1011.3589"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -640,24 +500,9 @@
     "metadata-filtering": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "Filtered-DiskANN (Subramanya et al.)",
           "url": "https://arxiv.org/abs/2201.08051"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -675,24 +520,9 @@
     "recall-latency-tradeoffs": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning (course)",
-          "url": "https://web.stanford.edu/class/cs224n/"
-        },
-        {
           "category": "paper",
           "title": "The Case for Learned Index Structures (Kraska et al.)",
           "url": "https://arxiv.org/abs/1712.01208"
-        },
-        {
-          "category": "blog",
-          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
-        },
-        {
-          "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
         },
         {
           "category": "problem",
@@ -710,24 +540,19 @@
     "rag": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
           "url": "https://arxiv.org/abs/2005.11401"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "category": "video",
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
+          "url": "https://arxiv.org/abs/2005.11401"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "category": "blog",
+          "title": "Lilian Weng — How to Build an Open-Domain Question Answering System?",
+          "url": "https://lilianweng.github.io/posts/2020-10-29-odqa/"
         },
         {
           "category": "problem",
@@ -745,24 +570,9 @@
     "chunking": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Lost in the Middle (Liu et al.)",
           "url": "https://arxiv.org/abs/2307.03172"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -780,27 +590,12 @@
     "context-packing": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "RULER: Real context size of LLMs (Hsieh et al.)",
           "url": "https://arxiv.org/abs/2404.06654"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Lost in the Middle (Liu et al.)",
           "url": "https://arxiv.org/abs/2307.03172"
         },
@@ -820,24 +615,9 @@
     "structured-outputs": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Grammar-Constrained Decoding for LLMs (GCD survey)",
           "url": "https://arxiv.org/abs/2305.19234"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -855,24 +635,9 @@
     "tool-calling": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Toolformer (Schick et al.)",
           "url": "https://arxiv.org/abs/2302.04761"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -890,32 +655,22 @@
     "agent-loops": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
-          "title": "ReAct (Yao et al.)",
+          "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
           "url": "https://arxiv.org/abs/2210.03629"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
-          "category": "more",
+          "category": "blog",
+          "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+          "url": "https://arxiv.org/abs/2210.03629"
+        },
+        {
+          "category": "book",
           "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
           "url": "https://arxiv.org/abs/2303.11366"
         },
@@ -935,13 +690,8 @@
     "model-routing": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
-          "title": "FrugalGPT (Chen et al.)",
+          "title": "FrugalGPT: Using LLMs While Reducing Cost and Improving Performance (Chen et al.)",
           "url": "https://arxiv.org/abs/2305.05176"
         },
         {
@@ -950,14 +700,14 @@
           "url": "https://lmsys.org/blog/2024-07-01-routellm/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
+        },
+        {
+          "category": "book",
+          "title": "FrugalGPT: Using LLMs While Reducing Cost and Improving Performance (Chen et al.)",
+          "url": "https://arxiv.org/abs/2305.05176"
         },
         {
           "category": "more",
@@ -985,24 +735,9 @@
     "prompt-versioning": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Promptbreeder (Fernando et al.)",
           "url": "https://arxiv.org/abs/2309.16797"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -1020,39 +755,34 @@
     "llm-evals": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "HELM (Liang et al.)",
           "url": "https://arxiv.org/abs/2211.09110"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Your AI product needs evals (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/evals/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
           "url": "https://arxiv.org/abs/2306.05685"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "HELM — Holistic Evaluation of Language Models (Stanford CRFM)",
           "url": "https://crfm.stanford.edu/helm/"
+        },
+        {
+          "category": "more",
+          "title": "EleutherAI — lm-evaluation-harness",
+          "url": "https://github.com/EleutherAI/lm-evaluation-harness"
+        },
+        {
+          "category": "more",
+          "title": "Using LLM-as-a-Judge For Evaluation: A Complete Guide (Hamel Husain)",
+          "url": "https://hamel.dev/blog/posts/llm-judge/"
         },
         {
           "category": "problem",
@@ -1125,17 +855,12 @@
           "url": "https://arxiv.org/abs/1412.6980"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
           "category": "book",
           "title": "Deep Learning (Goodfellow, Bengio, Courville)",
           "url": "https://www.deeplearningbook.org/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
@@ -1170,17 +895,12 @@
           "url": "https://hal.science/hal-04206682/document"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
           "category": "book",
           "title": "Deep Learning (Goodfellow, Bengio, Courville)",
           "url": "https://www.deeplearningbook.org/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
@@ -1310,24 +1030,24 @@
     "ml-language-modeling": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Language Models are Few-Shot Learners (Brown et al.)",
           "url": "https://arxiv.org/abs/2005.14165"
         },
         {
           "category": "book",
+          "title": "Alisa's Book of LLMs (Alisa Wuffles)",
+          "url": "https://alisawuffles.notion.site/alisa-s-book-of-llms"
+        },
+        {
+          "category": "video",
           "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "blog",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "The Illustrated GPT-2 — language modeling objective",
+          "url": "https://jalammar.github.io/illustrated-gpt2/"
         },
         {
           "category": "problem",
@@ -1345,11 +1065,6 @@
     "ml-sampling": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
           "url": "https://arxiv.org/abs/1904.09751"
@@ -1360,14 +1075,14 @@
           "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Stanford CS336 — L10 Inference (Spring 2025)",
           "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_10.json"
+        },
+        {
+          "category": "book",
+          "title": "The Curious Case of Neural Text Degeneration (Holtzman et al.)",
+          "url": "https://arxiv.org/abs/1904.09751"
         },
         {
           "category": "problem",
@@ -1385,11 +1100,6 @@
     "ml-embeddings": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Word2Vec (Mikolov et al.)",
           "url": "https://arxiv.org/abs/1301.3781"
@@ -1400,12 +1110,7 @@
           "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
         },
@@ -1425,11 +1130,6 @@
     "ml-self-attention": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Attention Is All You Need",
           "url": "https://arxiv.org/abs/1706.03762"
@@ -1440,17 +1140,12 @@
           "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Stanford CS336 — L6 Kernels & Triton (FlashAttention2)",
           "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_06.json"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
         },
@@ -1458,6 +1153,11 @@
           "category": "more",
           "title": "The Annotated Transformer",
           "url": "https://nlp.seas.harvard.edu/annotated-transformer/"
+        },
+        {
+          "category": "more",
+          "title": "Attention in transformers, visually (3Blue1Brown)",
+          "url": "https://www.3blue1brown.com/lessons/attention"
         },
         {
           "category": "problem",
@@ -1475,11 +1175,6 @@
     "ml-multi-head": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "BERT: Pre-training of Deep Bidirectional Transformers (Devlin et al.)",
           "url": "https://arxiv.org/abs/1810.04805"
@@ -1490,17 +1185,12 @@
           "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "The Annotated Transformer",
           "url": "https://nlp.seas.harvard.edu/annotated-transformer/"
         },
@@ -1520,11 +1210,6 @@
     "ml-transformer-block": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Layer Normalization (Ba et al.)",
           "url": "https://arxiv.org/abs/1607.06450"
@@ -1535,12 +1220,12 @@
           "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
-          "category": "book",
+          "category": "video",
           "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "CS224n — Self-Attention & Transformers (Stanford)",
           "url": "https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf"
         },
@@ -1565,11 +1250,6 @@
     "ml-training": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Scaling Laws (Kaplan et al.)",
           "url": "https://arxiv.org/abs/2001.08361"
@@ -1580,12 +1260,7 @@
           "url": "https://karpathy.github.io/neuralnets/"
         },
         {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Stanford CS336 — L2 PyTorch & resource accounting (Spring 2025)",
           "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_02.json"
         },
@@ -1605,24 +1280,9 @@
     "ml-checkpointing": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Megatron-LM (Shoeybi et al.)",
           "url": "https://arxiv.org/abs/1909.08053"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -1640,24 +1300,14 @@
     "ml-lora": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
-          "title": "LoRA (Hu et al.)",
+          "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
           "url": "https://arxiv.org/abs/2106.09685"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "category": "video",
+          "title": "LoRA: Low-Rank Adaptation (Hu et al.)",
+          "url": "https://arxiv.org/abs/2106.09685"
         },
         {
           "category": "problem",
@@ -1675,11 +1325,6 @@
     "ml-rl-alignment": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Proximal Policy Optimization (Schulman et al.)",
           "url": "https://arxiv.org/abs/1706.03741"
@@ -1688,11 +1333,6 @@
           "category": "blog",
           "title": "Policy gradients for LMs (Hamish Ivison)",
           "url": "https://ivison.id.au/2026/02/09/policy-gradient.html"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "problem",
@@ -1710,11 +1350,6 @@
     "ml-data-engineering": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "Deduplicating Training Data (Lee et al.)",
           "url": "https://arxiv.org/abs/2107.06499"
@@ -1725,12 +1360,12 @@
           "url": "https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/"
         },
         {
-          "category": "book",
+          "category": "video",
           "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Rules of Machine Learning: Best Practices for ML Engineering (Google)",
           "url": "https://developers.google.com/machine-learning/guides/rules-of-ml"
         },
@@ -1795,17 +1430,12 @@
           "url": "https://www.w3.org/TR/webgpu/"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
           "category": "book",
           "title": "Operating Systems: Three Easy Pieces",
           "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "WebGPU API (MDN)",
           "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
         },
@@ -1825,37 +1455,22 @@
     "ml-evaluation": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
           "category": "paper",
           "title": "GLUE: A Multi-Task Benchmark (Wang et al.)",
           "url": "https://arxiv.org/abs/1809.07430"
         },
         {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Stanford CS336 — L12 Evaluation (Spring 2025)",
           "url": "https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_12.json"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Eugene Yan — Evaluation & Hallucination",
           "url": "https://eugeneyan.com/writing/evals/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Your AI product needs evals (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/evals/"
         },
@@ -1883,11 +1498,6 @@
           "category": "blog",
           "title": "MDN Web Docs — An overview of HTTP",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
@@ -1918,16 +1528,6 @@
           "category": "paper",
           "title": "OAuth 2.0 Bearer Token (RFC 6750)",
           "url": "https://www.rfc-editor.org/rfc/rfc6750.html"
-        },
-        {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -2020,16 +1620,6 @@
           "url": "https://www.usenix.org/legacy/event/osdi99/full_papers/fox/fox.pdf"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "problem",
           "title": "Implement backoff with jitter",
           "url": "/drills/implement-backoff-jitter"
@@ -2048,16 +1638,6 @@
           "category": "paper",
           "title": "End-to-End Arguments in System Design (Saltzer et al.)",
           "url": "https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
@@ -2085,16 +1665,6 @@
           "url": "https://research.google/pubs/pub41684/"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "problem",
           "title": "At-least-once job delivery",
           "url": "/drills/job-at-least-once"
@@ -2110,27 +1680,12 @@
     "caching": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Scaling Memcache at Facebook (Nishtala et al.)",
           "url": "https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final170_update.pdf"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "HTTP caching (MDN)",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
         },
@@ -2150,24 +1705,9 @@
     "message-queues": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Kafka: a Distributed Messaging System (Kreps et al.)",
           "url": "https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/"
-        },
-        {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -2193,11 +1733,6 @@
           "category": "blog",
           "title": "Site Reliability Engineering — Monitoring Distributed Systems",
           "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "video",
@@ -2230,11 +1765,6 @@
           "url": "https://martinfowler.com/articles/richardsonMaturityModel.html"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "more",
           "title": "System Design (karanpratapsingh) — REST",
           "url": "/library/system-design?section=readme-md-rest-graphql-grpc-rest"
@@ -2265,11 +1795,6 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "problem",
           "title": "JWT revocation tradeoff",
           "url": "/drills/jwt-vs-session-revoke"
@@ -2288,11 +1813,6 @@
           "category": "paper",
           "title": "Sagas (Garcia-Molina & Salem)",
           "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/tr-87-13.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
@@ -2405,11 +1925,6 @@
     "wal": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "ARIES: A Transaction Recovery Method (Mohan et al.)",
           "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf"
@@ -2425,7 +1940,7 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/21-logging.pdf"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "PostgreSQL — Write-Ahead Logging",
           "url": "https://www.postgresql.org/docs/current/wal-intro.html"
         },
@@ -2445,24 +1960,9 @@
     "compaction": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "WiscKey (Lu et al.)",
           "url": "https://www.usenix.org/system/files/conference/fast18/fast18-lu.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -2480,24 +1980,9 @@
     "object-storage": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "The Google File System (Ghemawat et al.)",
           "url": "https://research.google/pubs/pub51/"
-        },
-        {
-          "category": "blog",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
@@ -2560,11 +2045,6 @@
     "secondary-index": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford CS276 — Information Retrieval",
-          "url": "https://web.stanford.edu/class/cs276/"
-        },
-        {
           "category": "paper",
           "title": "Modern B-Tree Techniques (Graefe)",
           "url": "https://research.google/pubs/pub37649/"
@@ -2573,11 +2053,6 @@
           "category": "blog",
           "title": "PostgreSQL Documentation — 11.2. Index Types",
           "url": "https://www.postgresql.org/docs/current/indexes-types.html"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
         },
         {
           "category": "more",
@@ -2655,32 +2130,22 @@
     "sharding": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "Spanner (Corbett et al.)",
           "url": "https://research.google/pubs/pub39966/"
         },
         {
-          "category": "blog",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "book",
+          "category": "video",
           "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Notion — Herding elephants: sharding Postgres",
           "url": "https://www.notion.com/blog/sharding-postgres-at-notion"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Vitess — Sharding",
           "url": "https://vitess.io/docs/22.0/reference/features/sharding/"
         },
@@ -2705,27 +2170,17 @@
     "replication": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "Chain Replication (van Renesse et al.)",
           "url": "https://www.usenix.org/legacy/event/osdi04/tech/full_papers/renesse/renesse.pdf"
         },
         {
-          "category": "blog",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "book",
+          "category": "video",
           "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "PostgreSQL — High Availability, Load Balancing, and Replication",
           "url": "https://www.postgresql.org/docs/current/high-availability.html"
         },
@@ -2745,11 +2200,6 @@
     "cap-theorem": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "paper",
           "title": "Brewer's conjecture and the feasibility of CAP (Gilbert & Lynch)",
           "url": "https://arxiv.org/abs/0902.0936"
@@ -2758,11 +2208,6 @@
           "category": "blog",
           "title": "Martin Kleppmann — Please stop calling databases CP or AP",
           "url": "https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
@@ -3210,16 +2655,6 @@
           "url": "https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "more",
           "title": "System Design 101 — Consistent Hashing Explained",
           "url": "/library/system-design-101?section=data-guides-consistent-hashing-md"
@@ -3230,7 +2665,7 @@
           "url": "https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Consistent Hashing with Bounded Loads (Google Research)",
           "url": "https://research.google/blog/consistent-hashing-with-bounded-loads/"
         },
@@ -3250,24 +2685,9 @@
     "consensus": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Raft (Ongaro & Ousterhout)",
           "url": "https://raft.github.io/raft.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -3285,37 +2705,22 @@
     "distributed-infra": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "MapReduce (Dean & Ghemawat)",
           "url": "https://research.google/pubs/pub62/"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Kubernetes — Cluster components",
           "url": "https://kubernetes.io/docs/concepts/overview/components/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Consul — Service discovery explained",
           "url": "https://developer.hashicorp.com/consul/docs/concepts/service-discovery"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
           "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/"
         },
@@ -3335,32 +2740,17 @@
     "messaging-realtime": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "The WebSocket Protocol (RFC 6455)",
           "url": "https://www.rfc-editor.org/rfc/rfc6455.html"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "MDN — The WebSocket API",
           "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Real-time communication at scale with Elixir at Discord",
           "url": "https://elixir-lang.org/blog/2020/10/08/real-time-communication-at-scale-with-elixir-at-discord/"
         },
@@ -3390,11 +2780,6 @@
           "url": "https://engineering.fb.com/2013/06/25/core-infra/tao-the-power-of-the-graph/"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "more",
           "title": "System Design Primer — Design the Twitter timeline and search (fan-out)",
           "url": "/library/system-design-primer?section=solutions-system-design-twitter-readme-md"
@@ -3420,27 +2805,17 @@
           "url": "https://arxiv.org/abs/1207.2052"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "video",
           "title": "HTTP Live Streaming (Apple Developer)",
           "url": "https://developer.apple.com/streaming/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "Netflix — Per-Title Encode Optimization",
           "url": "https://netflixtechblog.com/per-title-encode-optimization-7e99442b62a2"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Netflix Open Connect (their own CDN)",
           "url": "https://openconnect.netflix.com/en/"
         },
@@ -3470,17 +2845,12 @@
           "url": "https://h3geo.org/docs/highlights/indexing"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "video",
           "title": "H3 — hexagonal hierarchical spatial index (Uber)",
           "url": "https://h3geo.org/docs/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "S2 Cells — cell hierarchy (S2Geometry)",
           "url": "https://s2geometry.io/devguide/s2cell_hierarchy"
         },
@@ -3510,16 +2880,6 @@
           "url": "https://neil.fraser.name/writing/ot/"
         },
         {
-          "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "more",
           "title": "System Design 101 — How to Design Google Docs",
           "url": "/library/system-design-101?section=data-guides-how-to-design-google-docs-md"
@@ -3530,12 +2890,12 @@
           "url": "https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "A Conflict-Free Replicated JSON Datatype (Kleppmann & Beresford)",
           "url": "https://arxiv.org/abs/1608.03960"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Local-first software: you own your data, in spite of the cloud",
           "url": "https://martin.kleppmann.com/papers/local-first.pdf"
         },
@@ -3565,11 +2925,6 @@
           "url": "https://eugeneyan.com/writing/system-design-for-discovery/"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "more",
           "title": "System Design 101 — How Do Search Engines Work? (crawling, indexing, ranking)",
           "url": "/library/system-design-101?section=data-guides-how-do-search-engines-work-md"
@@ -3580,7 +2935,7 @@
           "url": "https://www.elastic.co/docs/manage-data/data-store/near-real-time-search"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Apache Lucene — release documentation",
           "url": "https://lucene.apache.org/core/documentation.html"
         },
@@ -3620,17 +2975,12 @@
           "url": "https://eugeneyan.com/writing/llm-patterns/"
         },
         {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
-        {
           "category": "video",
           "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
           "url": "https://arxiv.org/abs/2005.11401"
         },
@@ -3695,27 +3045,22 @@
     "two-pointers": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Floyd's cycle-finding algorithm",
           "url": "https://arxiv.org/abs/1307.5574"
         },
         {
           "category": "blog",
-          "title": "USACO Guide — Two Pointers",
+          "title": "Two Pointers — USACO Guide (Silver)",
+          "url": "https://usaco.guide/silver/two-pointers"
+        },
+        {
+          "category": "video",
+          "title": "Two Pointers — USACO Guide (Silver)",
           "url": "https://usaco.guide/silver/two-pointers"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
-          "category": "more",
           "title": "cp-algorithms — Tortoise and Hare (linked list cycle detection)",
           "url": "https://cp-algorithms.com/others/tortoise_and_hare.html"
         },
@@ -3735,27 +3080,22 @@
     "sliding-window": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Maximum subarray problem (Kadane)",
           "url": "https://arxiv.org/abs/0804.4088"
         },
         {
           "category": "blog",
-          "title": "USACO Guide — Sliding Window",
+          "title": "Sliding Window — USACO Guide (Gold)",
+          "url": "https://usaco.guide/gold/sliding-window"
+        },
+        {
+          "category": "video",
+          "title": "Sliding Window — USACO Guide (Gold)",
           "url": "https://usaco.guide/gold/sliding-window"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
-          "category": "more",
           "title": "Minimum Stack / Minimum Queue — the O(n) sliding-window minimum",
           "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html"
         },
@@ -3775,11 +3115,6 @@
     "stack": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Threads and stacks (OSTEP)",
           "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf"
@@ -3788,11 +3123,6 @@
           "category": "blog",
           "title": "USACO Guide — Stacks (incl. monotonic stack)",
           "url": "https://usaco.guide/gold/stacks"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
         },
         {
           "category": "problem",
@@ -3810,11 +3140,6 @@
     "binary-search": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Programming Pearls: Writing Correct Programs (Bentley)",
           "url": "https://www.cs.uaf.edu/~chesley/classes/cs611/Spring2018/Bentley75.pdf"
@@ -3823,11 +3148,6 @@
           "category": "blog",
           "title": "cp-algorithms — Binary Search",
           "url": "https://cp-algorithms.com/num_methods/binary_search.html"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
         },
         {
           "category": "problem",
@@ -3845,11 +3165,6 @@
     "linked-list": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Skip Lists: A Probabilistic Alternative to Balanced Trees (Pugh, CACM 1990)",
           "url": "https://doi.org/10.1145/78973.78977"
@@ -3858,11 +3173,6 @@
           "category": "blog",
           "title": "cp-algorithms — Tortoise and Hare (linked list cycle detection)",
           "url": "https://cp-algorithms.com/others/tortoise_and_hare.html"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
         },
         {
           "category": "problem",
@@ -3895,11 +3205,6 @@
           "url": "https://usaco.guide/silver/intro-tree"
         },
         {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
           "category": "problem",
           "title": "Binary tree level-order traversal",
           "url": "/drills/level-order-traversal"
@@ -3915,24 +3220,9 @@
     "tries": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Efficient string matching (Aho & Corasick)",
           "url": "https://dl.acm.org/doi/10.1145/360827.360855"
-        },
-        {
-          "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
         },
         {
           "category": "problem",
@@ -3965,11 +3255,6 @@
           "url": "https://usaco.guide/silver/priority-queues"
         },
         {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
           "category": "problem",
           "title": "Kth largest element with a heap",
           "url": "/drills/kth-largest-heap"
@@ -3984,11 +3269,6 @@
     },
     "backtracking": {
       "items": [
-        {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
         {
           "category": "paper",
           "title": "Dancing links — exact cover (Knuth)",
@@ -4090,11 +3370,6 @@
     "union-find": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Union-find (Tarjan)",
           "url": "https://www.cs.princeton.edu/~rs/talks/UF.pdf"
@@ -4181,11 +3456,6 @@
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
-          "category": "more",
           "title": "MIT 6.006 L21 — DP III: Parenthesization, Edit Distance, Knapsack",
           "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-21-dp-iii-parenthesization-edit-distance-knapsack/"
         },
@@ -4255,11 +3525,6 @@
           "url": "https://usaco.guide/plat/sweep-line"
         },
         {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
           "category": "problem",
           "title": "Merge overlapping intervals",
           "url": "/drills/merge-intervals"
@@ -4290,11 +3555,6 @@
           "url": "https://cp-algorithms.com/geometry/basic-geometry.html"
         },
         {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
           "category": "problem",
           "title": "GCD and modulo arithmetic",
           "url": "/drills/gcd-modular"
@@ -4310,11 +3570,6 @@
     "bit-manipulation": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
-        },
-        {
           "category": "paper",
           "title": "Graph-Based Algorithms for Boolean Function Manipulation (Bryant, IEEE TC 1986)",
           "url": "https://doi.org/10.1109/TC.1986.1676819"
@@ -4323,11 +3578,6 @@
           "category": "blog",
           "title": "cp-algorithms — Bit manipulation",
           "url": "https://cp-algorithms.com/algebra/bit-manipulation.html"
-        },
-        {
-          "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
         },
         {
           "category": "problem",
@@ -4345,11 +3595,6 @@
     "leadership-and-influence": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Transformational leadership meta-analysis (Avolio et al.)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0021-9010.89.6.901"
@@ -4358,11 +3603,6 @@
           "category": "blog",
           "title": "Daniel Goleman (HBR) — What Makes a Leader?",
           "url": "https://hbr.org/2004/01/what-makes-a-leader"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4385,11 +3625,6 @@
     "conflict-resolution": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Conflict in organizations (De Dreu & Gelfand)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0033-2909.129.3.359"
@@ -4398,11 +3633,6 @@
           "category": "blog",
           "title": "HBR — How to Handle a Disagreement on Your Team",
           "url": "https://hbr.org/2017/07/how-to-handle-a-disagreement-on-your-team"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4425,11 +3655,6 @@
     "problem-solving-and-decision-making": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Judgment under uncertainty (Tversky & Kahneman)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1126/science.185.4157.1124"
@@ -4438,11 +3663,6 @@
           "category": "blog",
           "title": "Kahneman, Lovallo & Sibony (HBR) — Before You Make That Big Decision",
           "url": "https://hbr.org/2011/06/the-big-idea-before-you-make-that-big-decision"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4465,11 +3685,6 @@
     "teamwork-and-collaboration": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Psychological safety and learning (Edmondson)",
           "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Edmondson%20Psychological%20safety.pdf"
@@ -4478,11 +3693,6 @@
           "category": "blog",
           "title": "Alex Pentland (HBR) — The New Science of Building Great Teams",
           "url": "https://hbr.org/2012/04/the-new-science-of-building-great-teams"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4505,11 +3715,6 @@
     "failure-and-learning": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Learning from failures in organizations (Cannon & Edmondson)",
           "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Cannon%20and%20Edmondson%20Concealing%20mistakes.pdf"
@@ -4521,6 +3726,11 @@
         },
         {
           "category": "book",
+          "title": "Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure",
+          "url": "https://sre.google/sre-book/postmortem-culture/"
+        },
+        {
+          "category": "video",
           "title": "Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure",
           "url": "https://sre.google/sre-book/postmortem-culture/"
         },
@@ -4545,11 +3755,6 @@
     "communication": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Grounding in Communication (Clark & Brennan, 1991)",
           "url": "https://doi.org/10.1037/10096-006"
@@ -4558,11 +3763,6 @@
           "category": "blog",
           "title": "re:Work — Communicate effectively",
           "url": "https://rework.withgoogle.com/guides/"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4580,11 +3780,6 @@
     "time-management-and-prioritization": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Goal setting theory (Locke & Latham)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0033-295X.57.2.129"
@@ -4593,11 +3788,6 @@
           "category": "blog",
           "title": "Oncken & Wass (HBR) — Management Time: Who's Got the Monkey?",
           "url": "https://hbr.org/1999/11/management-time-whos-got-the-monkey"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4620,11 +3810,6 @@
     "innovation-and-creativity": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Creativity in context (Amabile)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0021-9010.72.4.609"
@@ -4633,11 +3818,6 @@
           "category": "blog",
           "title": "Marty Cagan (SVPG) — Innovating in Large Companies",
           "url": "https://www.svpg.com/innovating-in-large-companies/"
-        },
-        {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
         },
         {
           "category": "problem",
@@ -4655,11 +3835,6 @@
     "customer-obsession": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "Customer satisfaction meta-analysis (Szymanski & Henard)",
           "url": "https://psycnet.apa.org/doiLanding?doi=10.1037/0021-9010.84.2.310"
@@ -4670,17 +3845,12 @@
           "url": "https://www.producttalk.org/customer-interviews/"
         },
         {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Know Your Customers' Jobs to Be Done (Christensen et al., HBR)",
           "url": "https://hbr.org/2016/09/know-your-customers-jobs-to-be-done"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "Opportunity Solution Trees (Teresa Torres)",
           "url": "https://www.producttalk.org/2016/08/opportunity-solution-tree/"
         },
@@ -4700,11 +3870,6 @@
     "ownership-and-accountability": {
       "items": [
         {
-          "category": "video",
-          "title": "Google re:Work — Structured interviews",
-          "url": "https://rework.withgoogle.com/guides/hiring-use-structured-interviews/"
-        },
-        {
           "category": "paper",
           "title": "On the Criteria To Be Used in Decomposing Systems into Modules (Parnas, CACM 1972)",
           "url": "https://doi.org/10.1145/361598.361623"
@@ -4715,17 +3880,12 @@
           "url": "https://sre.google/sre-book/embracing-risk/"
         },
         {
-          "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Google SRE Book — Being On-Call",
           "url": "https://sre.google/sre-book/being-on-call/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "DORA — Generative organizational culture",
           "url": "https://dora.dev/capabilities/generative-organizational-culture/"
         },
@@ -4780,11 +3940,6 @@
           "url": "https://arxiv.org/abs/1512.04922"
         },
         {
-          "category": "blog",
-          "title": "SVPG — product essays",
-          "url": "https://www.svpg.com/articles/"
-        },
-        {
           "category": "book",
           "title": "Inspired (Marty Cagan)",
           "url": "https://www.svpg.com/inspired-how-to-create-products-customers-love-2nd-edition/"
@@ -4808,11 +3963,6 @@
           "category": "paper",
           "title": "The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)",
           "url": "https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf"
-        },
-        {
-          "category": "blog",
-          "title": "SVPG — product essays",
-          "url": "https://www.svpg.com/articles/"
         },
         {
           "category": "book",
@@ -4870,11 +4020,6 @@
           "url": "https://www.3blue1brown.com/lessons/vectors"
         },
         {
-          "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
-        },
-        {
           "category": "book",
           "title": "Linear Algebra (Strang) — MIT OCW",
           "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
@@ -4883,6 +4028,11 @@
           "category": "paper",
           "title": "Essence of Linear Algebra (3Blue1Brown)",
           "url": "https://www.3blue1brown.com/topics/linear-algebra"
+        },
+        {
+          "category": "blog",
+          "title": "3Blue1Brown — Vectors, what even are they?",
+          "url": "https://www.3blue1brown.com/lessons/vectors"
         },
         {
           "category": "more",
@@ -4920,17 +4070,12 @@
           "url": "https://arxiv.org/abs/0909.4061"
         },
         {
-          "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
-        },
-        {
           "category": "book",
           "title": "Linear Algebra (Strang) — MIT OCW",
           "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "MIT 18.06 Linear Algebra (Strang)",
           "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/"
         },
@@ -5055,19 +4200,9 @@
     "descriptive-statistics": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
-        },
-        {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
@@ -5075,7 +4210,7 @@
           "url": "https://openintro-ims.netlify.app/explore-numerical.html"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "Introduction to Modern Statistics — Ch. 5: Exploring numerical data",
           "url": "https://openintro-ims.netlify.app/explore-numerical"
         },
@@ -5100,22 +4235,12 @@
     "estimation-confidence": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
-        },
-        {
           "category": "book",
           "title": "Introduction to Modern Statistics — Ch. 12: Confidence intervals with bootstrapping",
           "url": "https://openintro-ims.netlify.app/foundations-bootstrapping.html"
         },
         {
-          "category": "paper",
+          "category": "video",
           "title": "MIT 18.650 Statistics for Applications",
           "url": "https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/"
         },
@@ -5143,11 +4268,6 @@
           "category": "paper",
           "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
-        },
-        {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
@@ -5196,11 +4316,6 @@
         },
         {
           "category": "more",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "more",
           "title": "An Introduction to Statistical Learning — full text (PDF)",
           "url": "https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf"
         },
@@ -5208,6 +4323,11 @@
           "category": "more",
           "title": "Stanford CS229 — Main lecture notes (linear regression, least squares)",
           "url": "https://cs229.stanford.edu/main_notes.pdf"
+        },
+        {
+          "category": "more",
+          "title": "MIT 18.06 L16 — Projection matrices and least squares (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-16-projection-matrices-and-least-squares/"
         },
         {
           "category": "problem",
@@ -5219,11 +4339,6 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Linear Regression\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Linear regression finds the best linear predictor — geometrically, it projects the target vector onto the column space of your features"
-        },
-        {
-          "category": "more",
-          "title": "MIT 18.06 L16 — Projection matrices and least squares (Strang)",
-          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-16-projection-matrices-and-least-squares/"
         }
       ]
     },
@@ -5241,18 +4356,13 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
+          "title": "CS231n — Backpropagation & computational graphs",
+          "url": "https://cs231n.github.io/optimization-2/"
         },
         {
           "category": "book",
-          "title": "Linear Algebra (Strang) — MIT OCW",
-          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
-        },
-        {
-          "category": "more",
-          "title": "CS231n — Backpropagation & computational graphs",
-          "url": "https://cs231n.github.io/optimization-2/"
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html"
         },
         {
           "category": "more",
@@ -5275,11 +4385,6 @@
     "multivariable-optimization": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "Convex Optimization (Boyd & Vandenberghe)",
           "url": "https://arxiv.org/abs/0805.3141"
@@ -5290,17 +4395,12 @@
           "url": "https://www.ruder.io/optimizing-gradient-descent/"
         },
         {
-          "category": "book",
-          "title": "Linear Algebra (Strang) — MIT OCW",
-          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Convex Optimization (Boyd & Vandenberghe)",
           "url": "https://web.stanford.edu/~boyd/cvxbook/"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
@@ -5410,11 +4510,6 @@
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
-        },
-        {
           "category": "book",
           "title": "Grinstead & Snell, Introduction to Probability — Ch. 9: Central Limit Theorem (PDF)",
           "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter9.pdf"
@@ -5440,11 +4535,6 @@
     "ab-testing-engineering": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "Trustworthy Online Controlled Experiments (Kohavi et al.)",
           "url": "https://arxiv.org/abs/1209.2402"
@@ -5455,12 +4545,7 @@
           "url": "https://research.google/pubs/overlapping-experiment-infrastructure-more-better-faster-experimentation/"
         },
         {
-          "category": "book",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
-        },
-        {
-          "category": "more",
+          "category": "video",
           "title": "Microsoft ExP platform paper",
           "url": "https://arxiv.org/abs/1803.03218"
         },
@@ -5488,11 +4573,6 @@
           "category": "paper",
           "title": "Bayesian Data Analysis overview (Gelman et al.)",
           "url": "https://arxiv.org/abs/1507.02672"
-        },
-        {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
@@ -5530,11 +4610,6 @@
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
-        },
-        {
           "category": "book",
           "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
@@ -5555,19 +4630,9 @@
     "covariance-correlation": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
-        },
-        {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
@@ -5590,11 +4655,6 @@
     "bias-variance-overfitting": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "Bias-Variance tradeoff (Geman et al.)",
           "url": "https://arxiv.org/abs/0803.3498"
@@ -5608,6 +4668,11 @@
           "category": "book",
           "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
+        },
+        {
+          "category": "video",
+          "title": "StatQuest — Bias and Variance",
+          "url": "https://www.youtube.com/watch?v=EuBBz3bI-aA"
         },
         {
           "category": "problem",
@@ -5635,17 +4700,12 @@
           "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-29-singular-value-decomposition/"
         },
         {
-          "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
-        },
-        {
           "category": "book",
           "title": "Linear Algebra (Strang) — MIT OCW",
           "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "3Blue1Brown — Span and linear independence",
           "url": "https://www.3blue1brown.com/lessons/span"
         },
@@ -5683,11 +4743,6 @@
           "category": "book",
           "title": "Linear Algebra (Strang) — MIT OCW",
           "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
-        },
-        {
-          "category": "more",
-          "title": "An Introduction to Statistical Learning — book site",
-          "url": "https://www.statlearning.com/"
         },
         {
           "category": "problem",
@@ -5790,11 +4845,6 @@
     "random-walks-markov": {
       "items": [
         {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
-        {
           "category": "paper",
           "title": "The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)",
           "url": "https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf"
@@ -5810,7 +4860,7 @@
           "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter11.pdf"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
         },
@@ -5874,11 +4924,6 @@
     },
     "momentum-backtest": {
       "items": [
-        {
-          "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-        },
         {
           "category": "paper",
           "title": "The Probability of Backtest Overfitting (Bailey et al.)",
@@ -6290,11 +5335,6 @@
     "event-streaming-kafka": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Kafka: a Distributed Messaging System",
           "url": "https://notes.stephenholiday.com/Kafka.pdf"
@@ -6315,17 +5355,12 @@
     "distributed-workflows-temporal": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Netherite: Efficient Execution of Serverless Workflows (PVLDB 15)",
           "url": "https://www.vldb.org/pvldb/vol15/p1591-burckhardt.pdf"
         },
         {
-          "category": "blog",
+          "category": "video",
           "title": "Reliable Actors with Retry Orchestration",
           "url": "https://arxiv.org/abs/2111.11562"
         },
@@ -6355,11 +5390,6 @@
     "distributed-failure-recovery": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "blog",
           "title": "The Network is Reliable (Bailis & Kingsbury)",
           "url": "https://aphyr.com/posts/288-the-network-is-reliable"
@@ -6368,6 +5398,11 @@
           "category": "paper",
           "title": "Gray Failure: The Achilles' Heel of Cloud-Scale Systems (HotOS '17)",
           "url": "https://www.microsoft.com/en-us/research/publication/gray-failure-achilles-heel-cloud-scale-systems/"
+        },
+        {
+          "category": "video",
+          "title": "Partitions for Everyone! — Kyle Kingsbury (Strange Loop 2013)",
+          "url": "https://www.youtube.com/watch?v=EOlw6dlxXU0"
         },
         {
           "category": "book",
@@ -6386,11 +5421,6 @@
           "body": "Explain \"Distributed Failure Recovery\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: In a distributed system, failure is ambiguous"
         },
         {
-          "category": "video",
-          "title": "Partitions for Everyone! — Kyle Kingsbury (Strange Loop 2013)",
-          "url": "https://www.youtube.com/watch?v=EOlw6dlxXU0"
-        },
-        {
           "category": "paper",
           "title": "Simple Testing Can Prevent Most Critical Failures (OSDI '14)",
           "url": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan"
@@ -6405,11 +5435,6 @@
     "transaction-processing": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "blog",
           "title": "Martin Kleppmann — Hermitage: Testing the \"I\" in ACID",
           "url": "https://martin.kleppmann.com/2014/11/25/hermitage-testing-the-i-in-acid.html"
@@ -6420,7 +5445,7 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/17-concurrencycontrol.pdf"
         },
         {
-          "category": "paper",
+          "category": "video",
           "title": "PostgreSQL Transaction Isolation",
           "url": "https://www.postgresql.org/docs/current/transaction-iso.html"
         },
@@ -6440,11 +5465,6 @@
     "query-execution-optimization": {
       "items": [
         {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
           "category": "blog",
           "title": "PostgreSQL Documentation — 51.5. Planner/Optimizer",
           "url": "https://www.postgresql.org/docs/current/planner-optimizer.html"
@@ -6455,7 +5475,7 @@
           "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/15-optimization1.pdf"
         },
         {
-          "category": "paper",
+          "category": "video",
           "title": "Architecture of a Database System",
           "url": "https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf"
         },
@@ -6474,21 +5494,6 @@
     },
     "warehouses-lakehouses": {
       "items": [
-        {
-          "category": "video",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "blog",
-          "title": "CMU 15-445 — Database Systems (course)",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
-        },
-        {
-          "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
-          "url": "https://dataintensive.net/"
-        },
         {
           "category": "paper",
           "title": "Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores",
@@ -6511,21 +5516,6 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "paper",
           "title": "Stanford CS336 — Language Modeling from Scratch",
           "url": "https://cs336.stanford.edu/"
         },
@@ -6546,36 +5536,21 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "paper",
           "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
           "url": "https://arxiv.org/abs/2306.00978"
         },
         {
-          "category": "more",
+          "category": "paper",
           "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
           "url": "https://arxiv.org/abs/2208.07339"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
           "url": "https://arxiv.org/abs/2211.10438"
         },
         {
-          "category": "more",
+          "category": "book",
           "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
           "url": "https://arxiv.org/abs/2210.17323"
         },
@@ -6601,31 +5576,16 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
-        },
-        {
-          "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
-        },
-        {
-          "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
-          "url": "https://cs336.stanford.edu/spring2025/"
-        },
-        {
-          "category": "paper",
           "title": "The Llama 3 Herd of Models",
           "url": "https://arxiv.org/abs/2407.21783"
         },
         {
-          "category": "more",
+          "category": "paper",
           "title": "DeepSeek-V3 Technical Report",
           "url": "https://arxiv.org/abs/2412.19437"
         },
         {
-          "category": "more",
+          "category": "blog",
           "title": "OLMo: Accelerating the Science of Language Models",
           "url": "https://arxiv.org/abs/2402.00838"
         },
