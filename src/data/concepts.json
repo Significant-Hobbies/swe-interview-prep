@@ -2100,30 +2100,53 @@
       "id": "monitoring-analytics",
       "name": "Observability",
       "tags": ["infrastructure-platforms", "backend", "observability"],
-      "roadmaps": ["ai-infra-12-month", "runtime", "infrastructure-platforms-12w"],
+      "roadmaps": ["ai-infra-12-month", "infrastructure-platforms-12w", "runtime"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
       "related": ["api-design"],
-      "description": "Metrics, traces, logs, SLOs.",
-      "mentalModel": "The three pillars answer different questions: metrics say something is wrong, traces say where, logs say why. Structured logs and a request id stitch them together.",
+      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
+      "mentalModel": "The three pillars answer different questions: metrics say something is wrong, traces say where, logs say why. A structured log plus a request id is what stitches them together. OpenTelemetry is the reason that stitching survives a service hop — it standardises the signals and, more importantly, propagates trace context across process boundaries, so instrumentation is portable and a trace does not end at the edge of the service that started it.",
       "commonMistakes": [
         "Unstructured logs you cannot query",
         "Alerting on causes instead of user-facing symptoms (SLOs)",
-        "No correlation id across services"
+        "No correlation id across services",
+        "Instrumenting with a vendor SDK, so switching backends means re-instrumenting everything",
+        "Dropping trace context at an async boundary, which silently truncates every downstream span",
+        "Head sampling at a rate that discards exactly the rare failures you needed"
       ],
       "realWorldUsage": "OpenTelemetry, Datadog, PostHog, every production service.",
       "projectApplications": ["codevetter", "highsignal"],
       "artifacts": ["structured-logging", "synthesize-infrastructure-platforms-12w"],
-      "reviewQuestions": ["rq-three-pillars"],
+      "reviewQuestions": ["rq-three-pillars", "rq-opentelemetry-observability"],
       "resources": [
         {
           "title": "Site Reliability Engineering — Monitoring Distributed Systems",
           "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
           "type": "doc"
+        },
+        {
+          "title": "Canopy: An End-to-End Performance Tracing And Analysis System (SOSP '17)",
+          "url": "https://www.microsoft.com/en-us/research/publication/canopy-an-end-to-end-performance-tracing-and-analysis-system/",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX SREcon22 Asia/Pacific — OpenTelemetry and Observability: What, Why, and Why Now?",
+          "url": "https://www.youtube.com/watch?v=sn6MWZPED24",
+          "type": "video"
+        },
+        {
+          "title": "Dapper, a Large-Scale Distributed Systems Tracing Infrastructure",
+          "url": "https://research.google/pubs/dapper-a-large-scale-distributed-systems-tracing-infrastructure/",
+          "type": "paper"
+        },
+        {
+          "title": "OpenTelemetry Documentation",
+          "url": "https://opentelemetry.io/docs/",
+          "type": "doc"
         }
       ],
-      "drills": ["slo-error-budget"]
+      "drills": ["slo-error-budget", "practice-opentelemetry-observability"]
     },
     {
       "id": "api-design",
@@ -2978,16 +3001,16 @@
       "name": "Real-time Systems",
       "tags": ["distributed-systems", "system-design", "event-driven"],
       "roadmaps": [
-        "swe-landscape",
-        "hld-practice",
+        "application-engineering-12w",
         "distributed-systems-12w",
-        "application-engineering-12w"
+        "hld-practice",
+        "swe-landscape"
       ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["message-queues"],
       "related": [],
-      "description": "WebSockets, presence, delivery.",
+      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
       "resources": [
         {
           "title": "System Design Primer",
@@ -3010,10 +3033,15 @@
           "type": "article"
         }
       ],
-      "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice.",
-      "drills": ["design-chat-system"],
-      "reviewQuestions": ["rq-messaging-realtime-core"],
-      "artifacts": ["synthesize-distributed-systems-12w", "synthesize-application-engineering-12w"]
+      "mentalModel": "Realtime messaging is two problems wearing one name. On the server it is long-lived connections plus fan-out: WebSockets are stateful, which constrains your load balancer, and choosing per-channel versus per-user fan-out is the central design decision. On the client it is maintaining a local projection of remote state that survives disconnects and reordering — so the protocol needs message identity, a sequence number, a reconnect-and-catch-up path, and a reconciliation rule for optimistic updates the server later rejects.",
+      "drills": ["design-chat-system", "practice-real-time-application-engineering"],
+      "reviewQuestions": ["rq-messaging-realtime-core", "rq-real-time-application-engineering"],
+      "artifacts": ["synthesize-distributed-systems-12w", "synthesize-application-engineering-12w"],
+      "commonMistakes": [
+        "Sticky sessions as the only fan-out plan, so one hot channel pins to one node",
+        "No sequence number, leaving the client unable to tell a reconnect gap from an ordering swap",
+        "Optimistic UI with no reconciliation path when the server rejects the write"
+      ]
     },
     {
       "id": "social-media",
@@ -5468,57 +5496,14 @@
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
-      "id": "opentelemetry-observability",
-      "name": "Observability & OpenTelemetry",
-      "tags": ["infrastructure-platforms", "observability"],
-      "roadmaps": ["infrastructure-platforms-12w"],
-      "difficulty": "core",
-      "priority": 3,
-      "prerequisites": ["monitoring-analytics"],
-      "related": ["monitoring-analytics", "sandbox-execution-environments"],
-      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
-      "mentalModel": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
-      "drills": ["practice-opentelemetry-observability"],
-      "reviewQuestions": ["rq-opentelemetry-observability"],
-      "resources": [
-        {
-          "title": "Canopy: An End-to-End Performance Tracing And Analysis System (SOSP '17)",
-          "url": "https://www.microsoft.com/en-us/research/publication/canopy-an-end-to-end-performance-tracing-and-analysis-system/",
-          "type": "doc"
-        },
-        {
-          "title": "USENIX SREcon22 Asia/Pacific — OpenTelemetry and Observability: What, Why, and Why Now?",
-          "url": "https://www.youtube.com/watch?v=sn6MWZPED24",
-          "type": "video"
-        },
-        {
-          "title": "Dapper, a Large-Scale Distributed Systems Tracing Infrastructure",
-          "url": "https://research.google/pubs/dapper-a-large-scale-distributed-systems-tracing-infrastructure/",
-          "type": "paper"
-        },
-        {
-          "title": "Site Reliability Engineering — Monitoring Distributed Systems",
-          "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
-          "type": "doc"
-        },
-        {
-          "title": "OpenTelemetry Documentation",
-          "url": "https://opentelemetry.io/docs/",
-          "type": "doc"
-        }
-      ],
-      "artifacts": ["synthesize-infrastructure-platforms-12w"],
-      "curriculumSource": "learning-domain-expansion-v1"
-    },
-    {
       "id": "sandbox-execution-environments",
       "name": "Sandboxes & Execution Environments",
       "tags": ["infrastructure-platforms", "sandboxes"],
       "roadmaps": ["infrastructure-platforms-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["opentelemetry-observability"],
-      "related": ["opentelemetry-observability"],
+      "prerequisites": ["monitoring-analytics"],
+      "related": ["monitoring-analytics"],
       "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
       "mentalModel": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
       "drills": ["practice-sandbox-execution-environments"],
@@ -7316,7 +7301,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["web-mobile-engineering"],
-      "related": ["web-mobile-engineering", "real-time-application-engineering"],
+      "related": ["web-mobile-engineering", "messaging-realtime"],
       "description": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
       "mentalModel": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
       "drills": ["practice-ux-interface-design"],
@@ -7326,29 +7311,6 @@
           "title": "W3C Web Content Accessibility Guidelines",
           "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
           "type": "doc"
-        }
-      ],
-      "artifacts": ["synthesize-application-engineering-12w"],
-      "curriculumSource": "learning-domain-expansion-v1"
-    },
-    {
-      "id": "real-time-application-engineering",
-      "name": "Real-time Application Engineering",
-      "tags": ["application-engineering", "real-time"],
-      "roadmaps": ["application-engineering-12w"],
-      "difficulty": "core",
-      "priority": 3,
-      "prerequisites": ["ux-interface-design"],
-      "related": ["ux-interface-design", "messaging-realtime"],
-      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
-      "mentalModel": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
-      "drills": ["practice-real-time-application-engineering"],
-      "reviewQuestions": ["rq-real-time-application-engineering"],
-      "resources": [
-        {
-          "title": "The WebSocket Protocol",
-          "url": "https://www.rfc-editor.org/rfc/rfc6455",
-          "type": "paper"
         }
       ],
       "artifacts": ["synthesize-application-engineering-12w"],

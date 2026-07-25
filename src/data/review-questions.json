@@ -1455,7 +1455,7 @@
     },
     {
       "id": "rq-opentelemetry-observability",
-      "conceptId": "opentelemetry-observability",
+      "conceptId": "monitoring-analytics",
       "type": "compare",
       "difficulty": "core",
       "question": "You have metrics and logs. What does a trace add that neither gives you?",
@@ -1955,7 +1955,7 @@
     },
     {
       "id": "rq-real-time-application-engineering",
-      "conceptId": "real-time-application-engineering",
+      "conceptId": "messaging-realtime",
       "type": "explain",
       "difficulty": "core",
       "question": "Optimistic UI applies the change locally before the server confirms. What has to be designed for that not to corrupt state?",

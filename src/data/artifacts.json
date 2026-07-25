@@ -506,7 +506,6 @@
         "reliability-fault-tolerance",
         "retries-dlq",
         "monitoring-analytics",
-        "opentelemetry-observability",
         "sandbox-execution-environments"
       ],
       "projects": [],
@@ -754,7 +753,6 @@
         "api-design",
         "web-mobile-engineering",
         "ux-interface-design",
-        "real-time-application-engineering",
         "messaging-realtime",
         "game-design",
         "interactive-2d-3d-systems",

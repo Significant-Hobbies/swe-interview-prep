@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 252 concepts across
+A public, JavaScript-free index of 250 concepts across
 19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -177,7 +177,7 @@ Production backend strength: HTTP, API design, auth, rate limiting, idempotency,
 - [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html) — Offloading slow work to workers: scheduling, concurrency, visibility.
 - [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching.html) — Cache-aside, write-through, eviction policies.
 - [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html) — Kafka, SQS, exactly-once vs at-least-once.
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html) — Metrics, traces, logs, SLOs.
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
 - [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html) — REST, gRPC, versioning, pagination.
 - [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html) — OAuth2, JWT, session, RBAC.
 - [Payments](https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html) — Idempotency, sagas, double-entry.
@@ -234,7 +234,7 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 - [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html) — Ring, virtual nodes, rebalancing.
 - [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html) — Raft, Paxos, leader election.
 - [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html) — Service discovery, orchestration.
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html) — WebSockets, presence, delivery.
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
 - [Feed Systems](https://learn.significanthobbies.com/curriculum/concepts/social-media.html) — Fan-out write/read, timeline.
 - [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html) — CDN, HLS, transcoding pipeline.
 - [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport.html) — Geohash, quadtree, dispatch.
@@ -335,18 +335,17 @@ Operating systems, networks, concurrency, hardware, runtimes, performance, secur
 Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html
-- Concepts: 11
+- Concepts: 10
 - Roadmaps: 1
 
 - [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html) — Backoff + jitter, poison messages, dead-letter queues.
 - [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html) — Offloading slow work to workers: scheduling, concurrency, visibility.
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html) — Metrics, traces, logs, SLOs.
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
 - [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure.html) — Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.
 - [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html) — Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.
 - [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html) — Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.
 - [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html) — Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.
 - [Reliability & Fault Tolerance](https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance.html) — SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.
-- [Observability & OpenTelemetry](https://learn.significanthobbies.com/curriculum/concepts/opentelemetry-observability.html) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
 - [Sandboxes & Execution Environments](https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments.html) — Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.
 - [Infrastructure Automation](https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation.html) — Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.
 
@@ -365,7 +364,7 @@ Coordination, replication, partitioning, event systems, caching, durable workflo
 - [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html) — Strong/eventual/causal, PACELC.
 - [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html) — Raft, Paxos, leader election.
 - [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html) — Service discovery, orchestration.
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html) — WebSockets, presence, delivery.
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
 - [Event Streaming & Kafka](https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka.html) — Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.
 - [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html) — Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.
 - [Distributed Failure Recovery](https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery.html) — Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.
@@ -455,13 +454,12 @@ Code review, analysis, testing infrastructure, repository graphs, coding agents,
 Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/application-engineering.html
-- Concepts: 5
+- Concepts: 4
 - Roadmaps: 1
 
 - [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design.html) — Turn engines, board state, rules.
 - [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html) — Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.
 - [UX & Interface Design](https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design.html) — User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.
-- [Real-time Application Engineering](https://learn.significanthobbies.com/curriculum/concepts/real-time-application-engineering.html) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
 - [2D/3D Interactive Systems](https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems.html) — Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.
 
 ## Multimodal & Spatial Computing

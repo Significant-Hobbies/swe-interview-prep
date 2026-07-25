@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Real-time Systems | SWE Prep</title>
-    <meta name="description" content="WebSockets, presence, delivery. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="description" content="WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.">
     <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Real-time Systems | SWE Prep">
-    <meta property="og:description" content="WebSockets, presence, delivery. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:description" content="WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.">
     <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Real-time Systems | SWE Prep">
-    <meta name="twitter:description" content="WebSockets, presence, delivery. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:description" content="WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Real-time Systems","description":"WebSockets, presence, delivery.","url":"https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Real-time Systems","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Real-time Systems","description":"WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.","url":"https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Real-time Systems","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -48,18 +48,18 @@
       <article>
     <p class="eyebrow">Distributed Systems · core</p>
     <h1>Real-time Systems</h1>
-    <p class="lede">WebSockets, presence, delivery.</p>
+    <p class="lede">WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.</p>
     <div class="pills"><span>distributed-systems</span><span>system-design</span><span>event-driven</span></div>
 
     <section>
       <h2>Mental model</h2>
-      <p>Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice.</p>
+      <p>Realtime messaging is two problems wearing one name. On the server it is long-lived connections plus fan-out: WebSockets are stateful, which constrains your load balancer, and choosing per-channel versus per-user fan-out is the central design decision. On the client it is maintaining a local projection of remote state that survives disconnects and reordering — so the protocol needs message identity, a sequence number, a reconnect-and-catch-up path, and a reconciliation rule for optimistic updates the server later rejects.</p>
     </section>
 
     <section>
       <h2>How to study Real-time Systems</h2>
       <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, RFC 6455 — The WebSocket Protocol, MDN — The WebSocket API to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
-      <p>Next, compare Real-time Systems with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Realtime chat system and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+      <p>Next, compare Real-time Systems with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Realtime chat system, Design exercise: Real-time Application Engineering and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
     <section>
@@ -74,7 +74,7 @@
 
 
 
-
+    <section><h2>Common mistakes</h2><ul><li>Sticky sessions as the only fan-out plan, so one hot channel pins to one node</li><li>No sequence number, leaving the client unable to tell a reconnect gap from an ordering swap</li><li>Optimistic UI with no reconciliation path when the server rejects the write</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
@@ -88,8 +88,13 @@
           <p>Design a Slack-like chat: 1:1 + channels, presence, delivery + read receipts, offline message queue. Pick the wire protocol and how messages fan out.</p>
           <p><strong>Expected evidence:</strong> Connection layer + message storage + the fan-out strategy for a 10k-member channel.</p>
           <a href="/drills/design-chat-system">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Design exercise: Real-time Application Engineering</h3>
+          <p>WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling. Implement designOutline() returning non-empty values for: connectionLifecycle, ordering, reconciliation. Each value must name a concrete mechanism or decision.</p>
+          <p><strong>Expected evidence:</strong> A design outline with connectionLifecycle, ordering, reconciliation plus an explicit failure mode or trade-off.</p>
+          <a href="/drills/practice-real-time-application-engineering">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Why do WebSockets constrain your load balancer in ways HTTP requests do not?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why do WebSockets constrain your load balancer in ways HTTP requests do not?</li><li>Optimistic UI applies the change locally before the server confirms. What has to be designed for that not to corrupt state?</li></ul>
     </section>
 
     <section>
@@ -112,7 +117,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li><li><a href="/curriculum/roadmaps/application-engineering-12w.html">12-Week Application Engineering</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/application-engineering-12w.html">12-Week Application Engineering</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li></ul>
     </section>
   </article>
     </main>

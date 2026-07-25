@@ -3987,7 +3987,7 @@
     {
       "id": "practice-opentelemetry-observability",
       "title": "Design exercise: Observability & OpenTelemetry",
-      "conceptId": "opentelemetry-observability",
+      "conceptId": "monitoring-analytics",
       "type": "system-design-prompt",
       "difficulty": "core",
       "prompt": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines. Implement designOutline() returning non-empty values for: signals, contextPropagation, sampling. Each value must name a concrete mechanism or decision.",
@@ -4937,7 +4937,7 @@
     {
       "id": "practice-real-time-application-engineering",
       "title": "Design exercise: Real-time Application Engineering",
-      "conceptId": "real-time-application-engineering",
+      "conceptId": "messaging-realtime",
       "type": "system-design-prompt",
       "difficulty": "core",
       "prompt": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling. Implement designOutline() returning non-empty values for: connectionLifecycle, ordering, reconciliation. Each value must name a concrete mechanism or decision.",

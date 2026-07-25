@@ -58,7 +58,7 @@
         },
         {
           "name": "Observability and OpenTelemetry",
-          "concepts": ["opentelemetry-observability", "monitoring-analytics"]
+          "concepts": ["monitoring-analytics"]
         },
         {
           "name": "Sandboxes and execution environments",
@@ -394,7 +394,7 @@
         },
         {
           "name": "Real-time applications",
-          "concepts": ["real-time-application-engineering", "messaging-realtime"]
+          "concepts": ["messaging-realtime"]
         },
         {
           "name": "Voice interfaces",

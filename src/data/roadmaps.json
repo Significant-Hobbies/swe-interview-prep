@@ -1290,14 +1290,12 @@
             "reliability-fault-tolerance",
             "retries-dlq",
             "monitoring-analytics",
-            "opentelemetry-observability",
             "sandbox-execution-environments"
           ],
           "drills": [
             "practice-reliability-fault-tolerance",
             "implement-backoff-jitter",
             "slo-error-budget",
-            "practice-opentelemetry-observability",
             "practice-sandbox-execution-environments"
           ],
           "artifacts": ["synthesize-infrastructure-platforms-12w"]
@@ -1812,14 +1810,8 @@
         {
           "title": "Weeks 5-8 — Production systems and trade-offs",
           "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
-          "concepts": [
-            "real-time-application-engineering",
-            "messaging-realtime",
-            "game-design",
-            "interactive-2d-3d-systems"
-          ],
+          "concepts": ["messaging-realtime", "game-design", "interactive-2d-3d-systems"],
           "drills": [
-            "practice-real-time-application-engineering",
             "design-chat-system",
             "design-online-game-server",
             "practice-interactive-2d-3d-systems"

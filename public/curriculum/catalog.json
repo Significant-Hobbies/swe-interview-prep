@@ -9,7 +9,7 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 252,
+    "concepts": 250,
     "roadmaps": 24,
     "drills": 295,
     "reviewQuestions": 269,
@@ -369,7 +369,6 @@
         "cicd-developer-environments",
         "platform-scheduling-orchestration",
         "reliability-fault-tolerance",
-        "opentelemetry-observability",
         "sandbox-execution-environments",
         "infrastructure-automation"
       ],
@@ -497,7 +496,6 @@
         "game-design",
         "web-mobile-engineering",
         "ux-interface-design",
-        "real-time-application-engineering",
         "interactive-2d-3d-systems"
       ],
       "roadmapIds": [
@@ -1031,7 +1029,6 @@
         "reliability-fault-tolerance",
         "retries-dlq",
         "monitoring-analytics",
-        "opentelemetry-observability",
         "sandbox-execution-environments"
       ]
     },
@@ -1230,7 +1227,6 @@
         "api-design",
         "web-mobile-engineering",
         "ux-interface-design",
-        "real-time-application-engineering",
         "messaging-realtime",
         "game-design",
         "interactive-2d-3d-systems",
@@ -2232,7 +2228,7 @@
     {
       "id": "monitoring-analytics",
       "name": "Observability",
-      "description": "Metrics, traces, logs, SLOs.",
+      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
       "difficulty": "core",
       "tags": [
         "infrastructure-platforms",
@@ -2242,8 +2238,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html",
       "roadmapIds": [
         "ai-infra-12-month",
-        "runtime",
-        "infrastructure-platforms-12w"
+        "infrastructure-platforms-12w",
+        "runtime"
       ]
     },
     {
@@ -2699,7 +2695,7 @@
     {
       "id": "messaging-realtime",
       "name": "Real-time Systems",
-      "description": "WebSockets, presence, delivery.",
+      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
       "difficulty": "core",
       "tags": [
         "distributed-systems",
@@ -2708,10 +2704,10 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html",
       "roadmapIds": [
-        "swe-landscape",
-        "hld-practice",
+        "application-engineering-12w",
         "distributed-systems-12w",
-        "application-engineering-12w"
+        "hld-practice",
+        "swe-landscape"
       ]
     },
     {
@@ -3824,20 +3820,6 @@
       ]
     },
     {
-      "id": "opentelemetry-observability",
-      "name": "Observability & OpenTelemetry",
-      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
-      "difficulty": "core",
-      "tags": [
-        "infrastructure-platforms",
-        "observability"
-      ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/opentelemetry-observability.html",
-      "roadmapIds": [
-        "infrastructure-platforms-12w"
-      ]
-    },
-    {
       "id": "sandbox-execution-environments",
       "name": "Sandboxes & Execution Environments",
       "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
@@ -4528,20 +4510,6 @@
       ]
     },
     {
-      "id": "real-time-application-engineering",
-      "name": "Real-time Application Engineering",
-      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
-      "difficulty": "core",
-      "tags": [
-        "application-engineering",
-        "real-time"
-      ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/real-time-application-engineering.html",
-      "roadmapIds": [
-        "application-engineering-12w"
-      ]
-    },
-    {
       "id": "interactive-2d-3d-systems",
       "name": "2D/3D Interactive Systems",
       "description": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
@@ -5193,7 +5161,6 @@
         {
           "name": "Observability and OpenTelemetry",
           "concepts": [
-            "opentelemetry-observability",
             "monitoring-analytics"
           ]
         },
@@ -5702,7 +5669,6 @@
         {
           "name": "Real-time applications",
           "concepts": [
-            "real-time-application-engineering",
             "messaging-realtime"
           ]
         },
