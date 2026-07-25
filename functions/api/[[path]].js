@@ -447,11 +447,18 @@ async function handleReaderLearning(request, env) {
   return json(snapshot, { headers: { 'cache-control': 'private, no-store' } });
 }
 
-export const onRequest = withTiming(async ({ request, env, params }) => {
+export const onRequest = withTiming(async ({ request, env, params, next }) => {
   const path = (params.path || []).join('/');
   try {
     // NOTE: each handler is `await`ed so a rejected promise is caught here —
     // returning the promise bare would let the rejection escape this try/catch.
+    if (path === 'ai') {
+      if (request.method !== 'GET' && request.method !== 'HEAD') {
+        return json({ error: 'Method not allowed' }, { status: 405 });
+      }
+      const manifestUrl = new URL('/api-ai.json', request.url);
+      return await next(new Request(manifestUrl, request));
+    }
     if (path === 'auth/google') return await handleGoogle(request, env);
     if (path === 'auth/logout') return await handleLogout(request);
     if (path === 'auth/verify') return await handleVerify(request, env);
