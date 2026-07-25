@@ -486,8 +486,8 @@
       "conceptId": "multivariable-optimization",
       "type": "compare",
       "difficulty": "advanced",
-      "question": "Why is convex optimization easier than training neural networks?",
-      "answer": "Convex functions have a single global minimum; any local minimum is global. Neural loss surfaces are non-convex with many saddle points, so we rely on SGD heuristics rather than global guarantees."
+      "question": "Convexity makes optimisation easier — but what exactly does it guarantee, and what does it not?",
+      "answer": "It guarantees only that no local minimum is a non-global one, so a descent method cannot get trapped in a worse basin. It does not promise a unique minimiser (a flat valley has many), nor that a minimum exists at all (e^-x descends forever), nor convergence at any step size — too large a step still diverges. Neural losses are non-convex, so none of that holds and we rely on SGD heuristics plus conditioning tricks instead of a guarantee."
     },
     {
       "id": "rq-cross-entropy-loss",
@@ -774,8 +774,8 @@
       "conceptId": "ml-embeddings",
       "type": "explain",
       "difficulty": "core",
-      "question": "A transformer's attention is permutation-invariant. What does that force the embedding layer to do?",
-      "answer": "Add position information, because attention alone sees a set, not a sequence — shuffle the tokens and the output shuffles with them. Position gets injected as a learned or sinusoidal embedding added to the token embedding, or as a rotation applied to Q and K (RoPE)."
+      "question": "Self-attention is permutation-equivariant — shuffle the tokens and the output shuffles with them. What does that force the embedding layer to do, and why?",
+      "answer": "Attention is a weighted sum over a set, so nothing in it distinguishes \"the cat sat\" from \"sat cat the\" — the outputs simply permute along with the inputs. Order has to enter through the embedding, as a learned or sinusoidal positional signal added to (or rotated into) the token vector, before attention ever runs. Drop it and the model is a bag of words."
     },
     {
       "id": "rq-ml-self-attention-core",

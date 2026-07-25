@@ -261,8 +261,8 @@ export const CONCEPT_MEDIA = {
   },
   'query-rewriting': {
     paper: L(
-      'Relevance feedback and query expansion (Rocchio)',
-      'https://doi.org/10.1145/321879.321880'
+      'Relevance feedback and query expansion (Manning, IR Book ch. 9)',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/relevance-feedback-and-pseudo-relevance-feedback-1.html'
     ),
   },
   'search-discovery': {
@@ -926,7 +926,12 @@ export const CONCEPT_MEDIA = {
       'https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf'
     ),
   },
-  'linked-list': { paper: L('Skip lists (Pugh)', 'https://doi.org/10.1137/0221006') },
+  'linked-list': {
+    paper: L(
+      'Skip Lists: A Probabilistic Alternative to Balanced Trees (Pugh, CACM 1990)',
+      'https://doi.org/10.1145/78973.78977'
+    ),
+  },
   tries: {
     paper: L(
       'Efficient string matching (Aho & Corasick)',

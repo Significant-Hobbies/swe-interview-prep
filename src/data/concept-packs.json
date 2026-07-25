@@ -331,8 +331,8 @@
         },
         {
           "category": "paper",
-          "title": "Relevance feedback and query expansion (Rocchio)",
-          "url": "https://doi.org/10.1145/321879.321880"
+          "title": "Relevance feedback and query expansion (Manning, IR Book ch. 9)",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/relevance-feedback-and-pseudo-relevance-feedback-1.html"
         },
         {
           "category": "blog",
@@ -3881,8 +3881,8 @@
         },
         {
           "category": "paper",
-          "title": "Skip lists (Pugh)",
-          "url": "https://doi.org/10.1137/0221006"
+          "title": "Skip Lists: A Probabilistic Alternative to Balanced Trees (Pugh, CACM 1990)",
+          "url": "https://doi.org/10.1145/78973.78977"
         },
         {
           "category": "blog",
@@ -7383,11 +7383,6 @@
           "category": "paper",
           "title": "Enabling Large Language Models to Generate Text with Citations (ALCE)",
           "url": "https://arxiv.org/abs/2305.14627"
-        },
-        {
-          "category": "blog",
-          "title": "Google Testing Blog — Just Say No to More End-to-End Tests",
-          "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html"
         },
         {
           "category": "problem",
