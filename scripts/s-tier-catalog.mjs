@@ -10,7 +10,7 @@ export const TAG_MEDIA = {
   'search-ir': {
     video: L('Stanford CS276 — Information Retrieval', 'https://web.stanford.edu/class/cs276/'),
     blog: L(
-      'Elastic — Practical BM25',
+      'Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables',
       'https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables'
     ),
     book: L(
@@ -19,9 +19,12 @@ export const TAG_MEDIA = {
     ),
   },
   'vector-db': {
-    video: L('Stanford CS224N — NLP with Deep Learning', 'https://web.stanford.edu/class/cs224n/'),
+    video: L(
+      'Stanford CS224N — NLP with Deep Learning (course)',
+      'https://web.stanford.edu/class/cs224n/'
+    ),
     blog: L(
-      'Stanford IR — vector spaces & dot products',
+      'Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)',
       'https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html'
     ),
     book: L(
@@ -39,7 +42,7 @@ export const TAG_MEDIA = {
     ),
     blog: L('The Illustrated GPT-2 (jalammar)', 'https://jalammar.github.io/illustrated-gpt2/'),
     book: L(
-      'Stanford CS336 — Language Modeling from Scratch',
+      'Stanford CS336 — Language Modeling from Scratch (course)',
       'https://cs336.stanford.edu/spring2025/'
     ),
   },
@@ -64,29 +67,43 @@ export const TAG_MEDIA = {
     ),
   },
   backend: {
-    video: L('MIT 6.824 — Distributed Systems', 'https://pdos.csail.mit.edu/6.824/'),
     blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
-    book: L('Designing Data-Intensive Applications (Kleppmann)', 'https://dataintensive.net/'),
+    book: L(
+      'Designing Data-Intensive Applications (Kleppmann) — book site',
+      'https://dataintensive.net/'
+    ),
   },
   http: {
     paper: L('RFC 9110 — HTTP Semantics', 'https://www.rfc-editor.org/rfc/rfc9110.html'),
   },
   databases: {
-    video: L('CMU 15-445 — Database Systems', 'https://15445.courses.cs.cmu.edu/fall2025/'),
-    blog: L('CMU 15-445 — course notes', 'https://15445.courses.cs.cmu.edu/fall2025/'),
-    book: L('Designing Data-Intensive Applications (Kleppmann)', 'https://dataintensive.net/'),
+    video: L(
+      'CMU 15-445 — Database Systems (course)',
+      'https://15445.courses.cs.cmu.edu/fall2025/'
+    ),
+    blog: L('CMU 15-445 — Database Systems (course)', 'https://15445.courses.cs.cmu.edu/fall2025/'),
+    book: L(
+      'Designing Data-Intensive Applications (Kleppmann) — book site',
+      'https://dataintensive.net/'
+    ),
   },
   'storage-engines': {
-    video: L('CMU 15-445 — Storage & indexing', 'https://15445.courses.cs.cmu.edu/fall2025/'),
-    blog: L('Martin Kleppmann — storage & replication', 'https://martin.kleppmann.com/'),
+    video: L(
+      'CMU 15-445 — Database Systems (course)',
+      'https://15445.courses.cs.cmu.edu/fall2025/'
+    ),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
     book: L('Database Internals (Petrov)', 'https://www.databass.dev/'),
   },
   'system-design': {
-    video: L('MIT 6.824 — Distributed Systems', 'https://pdos.csail.mit.edu/6.824/'),
-    blog: L('Martin Kleppmann — notes', 'https://martin.kleppmann.com/'),
-    book: L('Designing Data-Intensive Applications (Kleppmann)', 'https://dataintensive.net/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
+    book: L(
+      'Designing Data-Intensive Applications (Kleppmann) — book site',
+      'https://dataintensive.net/'
+    ),
   },
   'distributed-systems': {
+    video: L('MIT 6.824 — Distributed Systems', 'https://pdos.csail.mit.edu/6.824/'),
     paper: L(
       'Time, Clocks, and the Ordering of Events (Lamport)',
       'https://lamport.azurewebsites.net/pubs/time-clocks.pdf'
@@ -126,10 +143,6 @@ export const TAG_MEDIA = {
     ),
   },
   product: {
-    video: L(
-      'Stanford CS — product management (guest: Marty Cagan)',
-      'https://www.youtube.com/watch?v=9hMUCQuvRro'
-    ),
     book: L(
       'Inspired (Marty Cagan)',
       'https://www.svpg.com/inspired-how-to-create-products-customers-love-2nd-edition/'
@@ -158,20 +171,12 @@ export const TAG_MEDIA = {
     ),
   },
   statistics: {
-    video: L('StatQuest — Statistics fundamentals', 'https://www.youtube.com/@statquest'),
-    blog: L('ISL — online companion', 'https://www.statlearning.com/'),
-    book: L('An Introduction to Statistical Learning', 'https://www.statlearning.com/'),
+    blog: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
+    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
   },
   probability: {
-    video: L(
-      'Harvard Stat 110 lectures',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
-    blog: L('Harvard Stat 110 course site', 'https://projects.iq.harvard.edu/stat110/home'),
-    book: L(
-      'Introduction to Probability (Blitzstein & Hwang)',
-      'https://projects.iq.harvard.edu/stat110/home'
-    ),
+    blog: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
+    book: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
   },
   quant: {
     paper: L(
@@ -196,7 +201,10 @@ export const TAG_MEDIA = {
     video: L('MIT 6.1810 — Operating Systems', 'https://pdos.csail.mit.edu/6.1810/2025/'),
   },
   rag: {
-    paper: L('Retrieval-Augmented Generation (Lewis et al.)', 'https://arxiv.org/abs/2005.11401'),
+    paper: L(
+      'Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)',
+      'https://arxiv.org/abs/2005.11401'
+    ),
   },
   evals: {
     paper: L('Holistic Evaluation of Language Models (HELM)', 'https://arxiv.org/abs/2211.09110'),
@@ -274,7 +282,10 @@ export const CONCEPT_MEDIA = {
   },
   embeddings: {
     paper: L('GloVe (Pennington et al.)', 'https://arxiv.org/abs/1406.3001'),
-    video: L('Stanford CS224N — course lectures', 'https://web.stanford.edu/class/cs224n/'),
+    video: L(
+      'Stanford CS224N — NLP with Deep Learning (course)',
+      'https://web.stanford.edu/class/cs224n/'
+    ),
   },
   'vector-similarity': {
     paper: L(
@@ -322,7 +333,10 @@ export const CONCEPT_MEDIA = {
     ),
   },
   rag: {
-    paper: L('Retrieval-Augmented Generation (Lewis et al.)', 'https://arxiv.org/abs/2005.11401'),
+    paper: L(
+      'Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)',
+      'https://arxiv.org/abs/2005.11401'
+    ),
   },
   chunking: { paper: L('Lost in the Middle (Liu et al.)', 'https://arxiv.org/abs/2307.03172') },
   'context-packing': {
@@ -372,7 +386,10 @@ export const CONCEPT_MEDIA = {
     video: L('micrograd — backprop (Karpathy)', 'https://www.youtube.com/watch?v=VMj-3S1tku0'),
   },
   'ml-softmax-xent': {
-    blog: L('Karpathy — softmax & classification', 'https://karpathy.github.io/neuralnets/'),
+    blog: L(
+      "Karpathy — Hacker's Guide to Neural Networks",
+      'https://karpathy.github.io/neuralnets/'
+    ),
   },
   'ml-adamw': {
     paper: L(
@@ -380,7 +397,7 @@ export const CONCEPT_MEDIA = {
       'https://arxiv.org/abs/1711.05101'
     ),
     blog: L(
-      'An overview of gradient descent optimization algorithms (Ruder)',
+      'Sebastian Ruder — An overview of gradient descent optimization algorithms',
       'https://www.ruder.io/optimizing-gradient-descent/'
     ),
   },
@@ -423,7 +440,7 @@ export const CONCEPT_MEDIA = {
   'ml-training': {
     paper: L('Scaling Laws (Kaplan et al.)', 'https://arxiv.org/abs/2001.08361'),
     blog: L(
-      'Karpathy — A Recipe for Training Neural Nets',
+      "Karpathy — Hacker's Guide to Neural Networks",
       'https://karpathy.github.io/neuralnets/'
     ),
   },
@@ -447,7 +464,10 @@ export const CONCEPT_MEDIA = {
   },
   'ml-browser-runtime': {
     paper: L('WebGPU specification (W3C)', 'https://www.w3.org/TR/webgpu/'),
-    blog: L('Karpathy — neural nets basics', 'https://karpathy.github.io/neuralnets/'),
+    blog: L(
+      "Karpathy — Hacker's Guide to Neural Networks",
+      'https://karpathy.github.io/neuralnets/'
+    ),
   },
   'ml-webgpu': { paper: L('WebGPU specification (W3C)', 'https://www.w3.org/TR/webgpu/') },
   'ml-evaluation': {
@@ -467,7 +487,7 @@ export const CONCEPT_MEDIA = {
       'Dynamo: idempotent operations (DeCandia et al.)',
       'https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf'
     ),
-    blog: L('Martin Kleppmann — idempotency & delivery', 'https://martin.kleppmann.com/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'retries-dlq': {
     paper: L(
@@ -480,7 +500,7 @@ export const CONCEPT_MEDIA = {
       'End-to-End Arguments in System Design (Saltzer et al.)',
       'https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf'
     ),
-    blog: L('Martin Kleppmann — event delivery', 'https://martin.kleppmann.com/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'background-jobs': {
     paper: L(
@@ -506,7 +526,7 @@ export const CONCEPT_MEDIA = {
       'https://research.google/pubs/pub36356/'
     ),
     blog: L(
-      'Google SRE — monitoring chapter',
+      'Site Reliability Engineering — Monitoring Distributed Systems',
       'https://sre.google/sre-book/monitoring-distributed-systems/'
     ),
   },
@@ -526,7 +546,7 @@ export const CONCEPT_MEDIA = {
       'Sagas (Garcia-Molina & Salem)',
       'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/tr-87-13.pdf'
     ),
-    blog: L('Martin Kleppmann — transactions', 'https://martin.kleppmann.com/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'b-tree': {
     paper: L('The Ubiquitous B-Tree (Comer)', 'https://dl.acm.org/doi/10.1145/356924.356938'),
@@ -539,7 +559,7 @@ export const CONCEPT_MEDIA = {
   },
   wal: {
     paper: L(
-      'ARIES (Mohan et al.)',
+      'ARIES: A Transaction Recovery Method (Mohan et al.)',
       'https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf'
     ),
   },
@@ -579,14 +599,14 @@ export const CONCEPT_MEDIA = {
       "Brewer's conjecture and the feasibility of CAP (Gilbert & Lynch)",
       'https://arxiv.org/abs/0902.0936'
     ),
-    blog: L('Martin Kleppmann — CAP & consistency', 'https://martin.kleppmann.com/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'object-modeling': {
     paper: L('Domain-Driven Design at 20 (Fowler)', 'https://dl.acm.org/doi/10.1145/3373471'),
   },
   'state-management': {
     paper: L(
-      'Statecharts (Harel)',
+      'Statecharts: a visual formalism (Harel)',
       'https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf'
     ),
   },
@@ -623,7 +643,7 @@ export const CONCEPT_MEDIA = {
       "TAO: Facebook's Distributed Data Store (Bronson et al.)",
       'https://www.usenix.org/system/files/conference/atc13/atc13-bronson.pdf'
     ),
-    blog: L('Martin Kleppmann — fan-out architectures', 'https://martin.kleppmann.com/'),
+    blog: L('Martin Kleppmann — blog', 'https://martin.kleppmann.com/'),
   },
   'streaming-media': {
     paper: L('DASH — MPEG adaptive streaming', 'https://arxiv.org/abs/1207.2052'),
@@ -666,14 +686,17 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'shortest-path': {
-    paper: L('Dijkstra (1959)', 'https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf'),
+    paper: L(
+      'A note on two problems in connexion with graphs (Dijkstra)',
+      'https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf'
+    ),
   },
   'union-find': {
     paper: L('Union-find (Tarjan)', 'https://www.cs.princeton.edu/~rs/talks/UF.pdf'),
   },
   'math-geometry': {
     paper: L(
-      'Geometric divide-and-conquer (Erickson)',
+      'Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)',
       'https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf'
     ),
     blog: L(
@@ -708,24 +731,16 @@ export const CONCEPT_MEDIA = {
   },
   'ab-testing-engineering': {
     paper: L(
-      'Trustworthy Online Controlled Experiments (Kohavi)',
+      'Trustworthy Online Controlled Experiments (Kohavi et al.)',
       'https://arxiv.org/abs/1209.2402'
     ),
   },
   'probability-fundamentals': {
-    video: L(
-      'Harvard Stat 110 lectures',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
-    book: L(
-      'Introduction to Probability (Blitzstein & Hwang)',
-      'https://projects.iq.harvard.edu/stat110/home'
-    ),
+    book: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
   },
   'descriptive-statistics': {
-    video: L('StatQuest — Statistics fundamentals', 'https://www.youtube.com/@statquest'),
     paper: L(
-      'MIT 18.650 — Exploratory data analysis',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     book: L(
@@ -734,9 +749,8 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'hypothesis-testing': {
-    video: L('StatQuest — p-values and hypothesis tests', 'https://www.youtube.com/@statquest'),
     paper: L(
-      'MIT 18.650 — Hypothesis testing',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     book: L(
@@ -746,17 +760,17 @@ export const CONCEPT_MEDIA = {
   },
   'sampling-and-clt': {
     paper: L(
-      'MIT 18.650 — Central limit theorem',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     book: L(
-      'Seeing Theory — Central Limit Theorem',
+      'Seeing Theory — Probability Distributions',
       'https://seeing-theory.brown.edu/probability-distributions/index.html'
     ),
   },
   'covariance-correlation': {
     paper: L(
-      'MIT 18.650 — Covariance and correlation',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     book: L(
@@ -766,7 +780,7 @@ export const CONCEPT_MEDIA = {
   },
   'classical-distributions': {
     paper: L(
-      'MIT 18.650 — Probability distributions',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     book: L(
@@ -775,16 +789,15 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'regression-basics': {
-    video: L('StatQuest — linear regression', 'https://www.youtube.com/@statquest'),
     paper: L(
-      'Least-squares regression (MIT 18.650)',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
     blog: L(
       'Seeing Theory — Regression Analysis',
       'https://seeing-theory.brown.edu/regression-analysis/index.html'
     ),
-    book: L('An Introduction to Statistical Learning', 'https://www.statlearning.com/'),
+    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
   },
   'bayesian-inference': {
     paper: L('Bayesian Data Analysis overview (Gelman et al.)', 'https://arxiv.org/abs/1507.02672'),
@@ -799,10 +812,10 @@ export const CONCEPT_MEDIA = {
   'pca-projection': { paper: L('A Tutorial on PCA (Shlens)', 'https://arxiv.org/abs/1404.1100') },
   'maximum-likelihood': {
     paper: L(
-      'MIT 18.650 — Maximum likelihood estimation',
+      'MIT 18.650 — Statistics for Applications (course)',
       'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'
     ),
-    book: L('An Introduction to Statistical Learning', 'https://www.statlearning.com/'),
+    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
   },
   'bias-variance-overfitting': {
     paper: L('Bias-Variance tradeoff (Geman et al.)', 'https://arxiv.org/abs/0803.3498'),
@@ -810,73 +823,59 @@ export const CONCEPT_MEDIA = {
       'Seeing Theory — Frequentist Inference',
       'https://seeing-theory.brown.edu/frequentist-inference/index.html'
     ),
-    book: L('An Introduction to Statistical Learning', 'https://www.statlearning.com/'),
+    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
   },
   'returns-volatility': {
-    video: L(
-      'Harvard Stat 110 — variance & expectation',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
     paper: L(
       'Deflated Sharpe Ratio (Bailey & López de Prado)',
       'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551'
     ),
-    blog: L('Harvard Stat 110 course site', 'https://projects.iq.harvard.edu/stat110/home'),
-    book: L(
-      'Introduction to Probability (Blitzstein & Hwang)',
-      'https://projects.iq.harvard.edu/stat110/home'
-    ),
+    blog: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
+    book: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
   },
   'stationarity-autocorrelation': {
-    video: L('StatQuest — stationarity', 'https://www.youtube.com/@statquest'),
     paper: L(
       'Automatic Time Series Forecasting (Hyndman & Khandakar)',
       'https://arxiv.org/abs/1104.4935'
     ),
-    blog: L('FPP3 — time series features', 'https://otexts.com/fpp3/'),
-    book: L('Forecasting: Principles and Practice (Hyndman)', 'https://otexts.com/fpp3/'),
+    blog: L(
+      'Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)',
+      'https://otexts.com/fpp3/'
+    ),
+    book: L(
+      'Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)',
+      'https://otexts.com/fpp3/'
+    ),
   },
   'random-walks-markov': {
-    video: L(
-      'Harvard Stat 110 — Markov chains',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
     paper: L(
-      'The PageRank Citation Ranking (Brin & Page)',
+      'The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)',
       'https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf'
     ),
-    blog: L('Harvard Stat 110 course site', 'https://projects.iq.harvard.edu/stat110/home'),
-    book: L(
-      'Introduction to Probability (Blitzstein & Hwang)',
-      'https://projects.iq.harvard.edu/stat110/home'
-    ),
+    blog: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
+    book: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
   },
   'portfolio-risk-metrics': {
-    video: L(
-      'Harvard Stat 110 — expectation & variance',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
     paper: L(
       'Modern Portfolio Theory (Markowitz)',
       'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=391562'
     ),
-    blog: L(
-      'Introduction to Probability — covariance',
-      'https://projects.iq.harvard.edu/stat110/home'
+    blog: L('Harvard Stat 110 — course site', 'https://projects.iq.harvard.edu/stat110/home'),
+    book: L(
+      'Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)',
+      'https://otexts.com/fpp3/'
     ),
-    book: L('Forecasting: Principles and Practice (Hyndman)', 'https://otexts.com/fpp3/'),
   },
   'momentum-backtest': {
-    video: L(
-      'Harvard Stat 110 — hypothesis testing intuition',
-      'https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg'
-    ),
     paper: L(
       'The Probability of Backtest Overfitting (Bailey et al.)',
       'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2737846'
     ),
-    blog: L('Google SRE — Postmortem culture', 'https://sre.google/sre-book/postmortem-culture/'),
-    book: L('An Introduction to Statistical Learning', 'https://www.statlearning.com/'),
+    blog: L(
+      'Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure',
+      'https://sre.google/sre-book/postmortem-culture/'
+    ),
+    book: L('An Introduction to Statistical Learning — book site', 'https://www.statlearning.com/'),
   },
   'strategy-pattern': {
     paper: L(
@@ -961,13 +960,13 @@ export const CONCEPT_MEDIA = {
   },
   greedy: {
     paper: L(
-      'Greedy algorithms (Erickson)',
+      'Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)',
       'https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf'
     ),
   },
   intervals: {
     paper: L(
-      'Geometric sweep algorithms (Erickson)',
+      'Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)',
       'https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf'
     ),
   },
@@ -1022,7 +1021,10 @@ export const CONCEPT_MEDIA = {
       'Learning from failures in organizations (Cannon & Edmondson)',
       'https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Cannon%20and%20Edmondson%20Concealing%20mistakes.pdf'
     ),
-    blog: L('Google SRE — Postmortem culture', 'https://sre.google/sre-book/postmortem-culture/'),
+    blog: L(
+      'Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure',
+      'https://sre.google/sre-book/postmortem-culture/'
+    ),
   },
   communication: {
     paper: L(
@@ -1063,10 +1065,6 @@ export const CONCEPT_MEDIA = {
     blog: L('Google SRE — Embracing risk', 'https://sre.google/sre-book/embracing-risk/'),
   },
   positioning: {
-    video: L(
-      'Marty Cagan @ Stanford — product discovery',
-      'https://www.youtube.com/watch?v=9hMUCQuvRro'
-    ),
     paper: L(
       'Product Differentiation and Market Segmentation (Smith, 1956)',
       'https://doi.org/10.1177/002224295602100102'
@@ -1078,10 +1076,6 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'landing-pages': {
-    video: L(
-      'Marty Cagan @ Stanford — product discovery',
-      'https://www.youtube.com/watch?v=9hMUCQuvRro'
-    ),
     paper: L('Peeking at A/B Tests (Johari et al.)', 'https://arxiv.org/abs/1512.04922'),
     blog: L('SVPG — product discovery', 'https://www.svpg.com/articles/'),
     book: L(
@@ -1090,10 +1084,6 @@ export const CONCEPT_MEDIA = {
     ),
   },
   seo: {
-    video: L(
-      'Stanford — product growth (Marty Cagan)',
-      'https://www.youtube.com/watch?v=9hMUCQuvRro'
-    ),
     paper: L(
       'The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)',
       'https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf'
@@ -1105,10 +1095,6 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'product-analytics': {
-    video: L(
-      'Kohavi — Trustworthy experiments (Stanford)',
-      'https://www.youtube.com/watch?v=9hMUCQuvRro'
-    ),
     paper: L(
       'Trustworthy Online Controlled Experiments (Kohavi et al.)',
       'https://arxiv.org/abs/1209.2402'
@@ -1120,6 +1106,895 @@ export const CONCEPT_MEDIA = {
     ),
   },
 };
+
+/**
+ * Curated 2026-07-25 (dsa / mathematics / product).
+ *
+ * Every URL here was checked three ways before it landed: HTTP 200, the live
+ * page title (or decompressed PDF text) confirms the topic, and it passes
+ * isSTierSource. 85 slots across 52 concepts, 85 distinct URLs — no URL is
+ * reused, which is the whole point: these replace track anchors that had one
+ * link standing in for a whole track.
+ *
+ * Slots are deliberately left empty where no deep link earns its place. A
+ * concept with one excellent pointer is finished, not half-done.
+ */
+const CURATED_MEDIA = {
+  'ab-testing-engineering': {
+    blog: L(
+      'Google Research — Overlapping Experiment Infrastructure: More, Better, Faster Experimentation',
+      'https://research.google/pubs/overlapping-experiment-infrastructure-more-better-faster-experimentation/'
+    ),
+  },
+  'array-hashing': {
+    video: L(
+      'MIT 6.006 — Lecture 4: Hashing',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-4-hashing/'
+    ),
+    blog: L('USACO Guide — Introduction to Sets & Maps', 'https://usaco.guide/bronze/intro-sets'),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Hashing (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/notes/05-hashing.pdf'
+    ),
+  },
+  backtracking: {
+    blog: L(
+      'USACO Guide — Complete Search with Recursion',
+      'https://usaco.guide/bronze/complete-rec'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Backtracking (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/02-backtracking.pdf'
+    ),
+  },
+  'bayesian-inference': {
+    video: L(
+      'MIT 18.650 — Lecture 17: Bayesian Statistics',
+      'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-17-video/'
+    ),
+    book: L(
+      'Seeing Theory (Brown University) — Ch. 4: Bayesian Inference',
+      'https://seeing-theory.brown.edu/bayesian-inference/index.html'
+    ),
+  },
+  'bias-variance-overfitting': {
+    blog: L(
+      'Cornell CS4780 — Lecture 12: Bias-Variance Tradeoff',
+      'https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote12.html'
+    ),
+  },
+  'binary-search': {
+    blog: L(
+      'cp-algorithms — Binary Search',
+      'https://cp-algorithms.com/num_methods/binary_search.html'
+    ),
+  },
+  'bit-manipulation': {
+    blog: L(
+      'cp-algorithms — Bit manipulation',
+      'https://cp-algorithms.com/algebra/bit-manipulation.html'
+    ),
+  },
+  'classical-distributions': {
+    video: L(
+      '3Blue1Brown — Binomial distributions',
+      'https://www.3blue1brown.com/lessons/binomial-distributions'
+    ),
+    book: L(
+      'Grinstead & Snell, Introduction to Probability — Ch. 5: Important Distributions and Densities (PDF)',
+      'https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter5.pdf'
+    ),
+  },
+  'conflict-resolution': {
+    blog: L(
+      'HBR — How to Handle a Disagreement on Your Team',
+      'https://hbr.org/2017/07/how-to-handle-a-disagreement-on-your-team'
+    ),
+  },
+  'customer-obsession': {
+    blog: L(
+      'Teresa Torres (Product Talk) — Customer Interviews: How to Recruit, What to Ask, and How to Synthesize',
+      'https://www.producttalk.org/customer-interviews/'
+    ),
+  },
+  'derivatives-and-gradients': {
+    video: L(
+      'MIT 18.02SC — Part B: Chain Rule, Gradient and Directional Derivatives',
+      'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/2.-partial-derivatives/part-b-chain-rule-gradient-and-directional-derivatives/'
+    ),
+  },
+  'descriptive-statistics': {
+    book: L(
+      'Introduction to Modern Statistics — Ch. 5: Exploring numerical data',
+      'https://openintro-ims.netlify.app/explore-numerical.html'
+    ),
+  },
+  'dp-1d': {
+    video: L(
+      'MIT 6.006 — Lecture 15: Dynamic Programming, Part 1 (SRTBOT, Fib, DAGs, Bowling)',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/'
+    ),
+    blog: L(
+      'cp-algorithms — Introduction to Dynamic Programming',
+      'https://cp-algorithms.com/dynamic_programming/intro-to-dp.html'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Dynamic Programming (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/03-dynprog.pdf'
+    ),
+  },
+  'dp-2d': {
+    video: L(
+      'MIT 6.006 — Lecture 16: Dynamic Programming, Part 2 (LCS, LIS, Coins)',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/'
+    ),
+    blog: L(
+      'cp-algorithms — Knapsack Problem',
+      'https://cp-algorithms.com/dynamic_programming/knapsack.html'
+    ),
+  },
+  'eigenvalues-decomposition': {
+    video: L(
+      '3Blue1Brown — Eigenvectors and eigenvalues',
+      'https://www.3blue1brown.com/lessons/eigenvalues'
+    ),
+    blog: L(
+      'Setosa — Eigenvectors and Eigenvalues explained visually',
+      'https://setosa.io/ev/eigenvectors-and-eigenvalues/'
+    ),
+  },
+  'estimation-confidence': {
+    book: L(
+      'Introduction to Modern Statistics — Ch. 12: Confidence intervals with bootstrapping',
+      'https://openintro-ims.netlify.app/foundations-bootstrapping.html'
+    ),
+  },
+  'failure-and-learning': {
+    blog: L(
+      'Amy Edmondson (HBR) — Strategies for Learning from Failure',
+      'https://hbr.org/2011/04/strategies-for-learning-from-failure'
+    ),
+    book: L(
+      'Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure',
+      'https://sre.google/sre-book/postmortem-culture/'
+    ),
+  },
+  graphs: {
+    video: L(
+      'MIT 6.006 — Lecture 10: Depth-First Search',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/'
+    ),
+    blog: L('USACO Guide — Graph Traversal', 'https://usaco.guide/silver/graph-traversal'),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Basic Graph Algorithms (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/05-graphs.pdf'
+    ),
+  },
+  greedy: {
+    video: L(
+      'MIT 6.046J — Lecture 12: Greedy Algorithms: Minimum Spanning Tree',
+      'https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-12-greedy-algorithms-minimum-spanning-tree/'
+    ),
+    blog: L(
+      'USACO Guide — Greedy Algorithms with Sorting',
+      'https://usaco.guide/silver/greedy-sorting'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf'
+    ),
+  },
+  heap: {
+    video: L(
+      'MIT 6.006 — Lecture 8: Binary Heaps',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-8-binary-heaps/'
+    ),
+    blog: L('USACO Guide — Priority Queues', 'https://usaco.guide/silver/priority-queues'),
+  },
+  'hypothesis-testing': {
+    video: L(
+      'MIT 18.650 — Lecture 7: Parametric Hypothesis Testing',
+      'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-7-video/'
+    ),
+    book: L(
+      'Introduction to Modern Statistics — Ch. 11: Hypothesis testing with randomization',
+      'https://openintro-ims.netlify.app/foundations-randomization.html'
+    ),
+  },
+  'information-entropy': {
+    video: L('3Blue1Brown — Reinventing Entropy', 'https://www.3blue1brown.com/lessons/entropy'),
+    blog: L(
+      'Chris Olah — Visual Information Theory',
+      'https://colah.github.io/posts/2015-09-Visual-Information/'
+    ),
+  },
+  'innovation-and-creativity': {
+    blog: L(
+      'Marty Cagan (SVPG) — Innovating in Large Companies',
+      'https://www.svpg.com/innovating-in-large-companies/'
+    ),
+  },
+  intervals: {
+    video: L(
+      'MIT 6.046J — Lecture 1: Overview, Interval Scheduling',
+      'https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-1-course-overview-interval-scheduling/'
+    ),
+    blog: L('USACO Guide — Sweep Line', 'https://usaco.guide/plat/sweep-line'),
+  },
+  'leadership-and-influence': {
+    blog: L(
+      'Daniel Goleman (HBR) — What Makes a Leader?',
+      'https://hbr.org/2004/01/what-makes-a-leader'
+    ),
+  },
+  'linked-list': {
+    blog: L(
+      'cp-algorithms — Tortoise and Hare (linked list cycle detection)',
+      'https://cp-algorithms.com/others/tortoise_and_hare.html'
+    ),
+  },
+  'math-geometry': {
+    video: L(
+      'MIT 6.046J — Lecture 2: Divide & Conquer: Convex Hull, Median Finding',
+      'https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-2-divide-conquer-convex-hull-median-finding/'
+    ),
+    blog: L(
+      'cp-algorithms — Basic Geometry',
+      'https://cp-algorithms.com/geometry/basic-geometry.html'
+    ),
+  },
+  'matrices-and-transformations': {
+    video: L(
+      '3Blue1Brown — Linear transformations and matrices',
+      'https://www.3blue1brown.com/lessons/linear-transformations'
+    ),
+  },
+  'matrix-rank-basis': {
+    video: L(
+      'MIT 18.06 L9 — Independence, basis, and dimension (Strang)',
+      'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-9-independence-basis-and-dimension/'
+    ),
+  },
+  'maximum-likelihood': {
+    video: L(
+      'MIT 18.650 — Lecture 4: Parametric Inference and Maximum Likelihood Estimation',
+      'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-4-video/'
+    ),
+  },
+  'multivariable-optimization': {
+    blog: L(
+      'Sebastian Ruder — An overview of gradient descent optimization algorithms',
+      'https://www.ruder.io/optimizing-gradient-descent/'
+    ),
+  },
+  'pca-projection': {
+    video: L(
+      'MIT 18.650 — Lecture 19: Principal Component Analysis',
+      'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-19-video/'
+    ),
+    blog: L(
+      'Setosa — Principal Component Analysis explained visually',
+      'https://setosa.io/ev/principal-component-analysis/'
+    ),
+  },
+  'portfolio-risk-metrics': {
+    video: L(
+      'MIT 18.S096 — Lecture 14: Portfolio Theory',
+      'https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-14-portfolio-theory/'
+    ),
+  },
+  positioning: {
+    blog: L(
+      "Kim & D'Aveni (HBR) — Mapping Your Competitive Position",
+      'https://hbr.org/2007/11/mapping-your-competitive-position'
+    ),
+  },
+  'probability-fundamentals': {
+    video: L("3Blue1Brown — Bayes' theorem", 'https://www.3blue1brown.com/lessons/bayes-theorem'),
+    blog: L(
+      'Setosa — Conditional probability explained visually',
+      'https://setosa.io/ev/conditional-probability/'
+    ),
+    book: L(
+      'Grinstead & Snell, Introduction to Probability — Ch. 4: Conditional Probability (PDF)',
+      'https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter4.pdf'
+    ),
+  },
+  'problem-solving-and-decision-making': {
+    blog: L(
+      'Kahneman, Lovallo & Sibony (HBR) — Before You Make That Big Decision',
+      'https://hbr.org/2011/06/the-big-idea-before-you-make-that-big-decision'
+    ),
+  },
+  'product-analytics': {
+    blog: L(
+      'Google Research — Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications (HEART framework paper)',
+      'https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/'
+    ),
+  },
+  'random-variables': {
+    video: L(
+      '3Blue1Brown — Why "probability of 0" does not mean "impossible"',
+      'https://www.3blue1brown.com/lessons/pdfs'
+    ),
+    book: L(
+      'Grinstead & Snell, Introduction to Probability — Ch. 6: Expected Value and Variance (PDF)',
+      'https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter6.pdf'
+    ),
+  },
+  'random-walks-markov': {
+    blog: L('Setosa — Markov Chains explained visually', 'https://setosa.io/ev/markov-chains/'),
+    book: L(
+      'Grinstead & Snell, Introduction to Probability — Ch. 11: Markov Chains (PDF)',
+      'https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter11.pdf'
+    ),
+  },
+  'regression-basics': {
+    video: L(
+      'MIT 18.650 — Lecture 13: Regression',
+      'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-13-video/'
+    ),
+    blog: L(
+      'Setosa — Ordinary Least Squares Regression explained visually',
+      'https://setosa.io/ev/ordinary-least-squares-regression/'
+    ),
+    book: L(
+      'Introduction to Modern Statistics — Ch. 7: Linear regression with a single predictor',
+      'https://openintro-ims.netlify.app/model-slr.html'
+    ),
+  },
+  'returns-volatility': {
+    video: L(
+      'MIT 18.S096 — Lecture 9: Volatility Modeling',
+      'https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-9-volatility-modeling/'
+    ),
+  },
+  'sampling-and-clt': {
+    video: L(
+      '3Blue1Brown — But what is the Central Limit Theorem?',
+      'https://www.3blue1brown.com/lessons/clt'
+    ),
+    book: L(
+      'Grinstead & Snell, Introduction to Probability — Ch. 9: Central Limit Theorem (PDF)',
+      'https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter9.pdf'
+    ),
+  },
+  'shortest-path': {
+    video: L(
+      'MIT 6.006 — Lecture 13: Dijkstra',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/'
+    ),
+    blog: L(
+      'cp-algorithms — Dijkstra: finding shortest paths from a given vertex',
+      'https://cp-algorithms.com/graph/dijkstra.html'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Shortest Paths (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/08-sssp.pdf'
+    ),
+  },
+  'sliding-window': {
+    blog: L('USACO Guide — Sliding Window', 'https://usaco.guide/gold/sliding-window'),
+  },
+  stack: {
+    blog: L('USACO Guide — Stacks (incl. monotonic stack)', 'https://usaco.guide/gold/stacks'),
+  },
+  'stationarity-autocorrelation': {
+    video: L(
+      'MIT 18.S096 — Lecture 8: Time Series Analysis I',
+      'https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-8-time-series-analysis-i/'
+    ),
+    blog: L(
+      'Forecasting: Principles and Practice (3rd ed) — §2.8 Autocorrelation',
+      'https://otexts.com/fpp3/acf.html'
+    ),
+    book: L(
+      'Forecasting: Principles and Practice (3rd ed) — §9.1 Stationarity and differencing',
+      'https://otexts.com/fpp3/stationarity.html'
+    ),
+  },
+  'teamwork-and-collaboration': {
+    blog: L(
+      'Alex Pentland (HBR) — The New Science of Building Great Teams',
+      'https://hbr.org/2012/04/the-new-science-of-building-great-teams'
+    ),
+  },
+  'time-management-and-prioritization': {
+    blog: L(
+      "Oncken & Wass (HBR) — Management Time: Who's Got the Monkey?",
+      'https://hbr.org/1999/11/management-time-whos-got-the-monkey'
+    ),
+  },
+  trees: {
+    video: L(
+      'MIT 6.006 — Lecture 6: Binary Trees, Part 1',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-6-binary-trees-part-1/'
+    ),
+    blog: L(
+      'USACO Guide — Introduction to Tree Algorithms',
+      'https://usaco.guide/silver/intro-tree'
+    ),
+  },
+  'two-pointers': {
+    blog: L('USACO Guide — Two Pointers', 'https://usaco.guide/silver/two-pointers'),
+  },
+  'union-find': {
+    blog: L(
+      'cp-algorithms — Disjoint Set Union',
+      'https://cp-algorithms.com/data_structures/disjoint_set_union.html'
+    ),
+    book: L(
+      'Jeff Erickson, Algorithms — chapter: Disjoint Sets (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/notes/11-unionfind.pdf'
+    ),
+  },
+  'vectors-and-spaces': {
+    video: L(
+      '3Blue1Brown — Vectors, what even are they?',
+      'https://www.3blue1brown.com/lessons/vectors'
+    ),
+  },
+};
+
+/**
+ * Curated 2026-07-25 (system-design / databases / backend / search-ir / vector-db).
+ *
+ * Same three gates as CURATED_MEDIA: HTTP 200, the live page confirms the topic
+ * (CMU 15-445 PDFs were text-extracted to check the lecture number), and
+ * isSTierSource passes. 53 slots across 36 concepts.
+ *
+ * The Gang-of-Four concepts are served by Nystrom's Game Programming Patterns,
+ * which has real per-pattern chapters. `strategy-pattern` is left empty on
+ * purpose: GPP has no Strategy chapter and refactoring.guru is on the BLOCKED
+ * list, so there is no honest deep link to give it.
+ */
+const CURATED_MEDIA_SYSTEMS = {
+  'auth-systems': {
+    blog: L(
+      'MDN Web Docs — HTTP authentication',
+      'https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication'
+    ),
+  },
+  'b-tree': {
+    blog: L(
+      'PostgreSQL Documentation — 65.1. B-Tree Indexes (internals)',
+      'https://www.postgresql.org/docs/current/btree.html'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 8 notes — Indexes & Filters I (B+Trees)',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/08-indexes1.pdf'
+    ),
+  },
+  bm25: {
+    blog: L(
+      'Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables',
+      'https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables'
+    ),
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §11.4.3 Okapi BM25: a non-binary model',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html'
+    ),
+  },
+  'cap-theorem': {
+    blog: L(
+      'Martin Kleppmann — Please stop calling databases CP or AP',
+      'https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html'
+    ),
+  },
+  'columnar-storage': {
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 6 notes — Storage Models & Compression',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/06-storage3.pdf'
+    ),
+  },
+  'command-chain': {
+    blog: L(
+      'Martin Fowler — Command Oriented Interface',
+      'https://martinfowler.com/bliki/CommandOrientedInterface.html'
+    ),
+    book: L(
+      'Game Programming Patterns (Nystrom) — chapter: Command',
+      'https://gameprogrammingpatterns.com/command.html'
+    ),
+  },
+  'ecommerce-payments': {
+    book: L(
+      'Patterns of Distributed Systems (Unmesh Joshi, on martinfowler.com) — Two-Phase Commit',
+      'https://martinfowler.com/articles/patterns-of-distributed-systems/two-phase-commit.html'
+    ),
+  },
+  embeddings: {
+    video: L(
+      'Stanford CS224N (Winter 2021) Lecture 1 — Intro & Word Vectors',
+      'https://www.youtube.com/watch?v=rmVRLeJRkl4'
+    ),
+    blog: L(
+      'The Illustrated Word2vec (Jay Alammar)',
+      'https://jalammar.github.io/illustrated-word2vec/'
+    ),
+    book: L(
+      'Speech and Language Processing, 3rd ed. (Jurafsky & Martin) — Ch. 6: Vector Semantics and Embeddings',
+      'https://web.stanford.edu/~jurafsky/slp3/6.pdf'
+    ),
+  },
+  'factory-creational': {
+    blog: L(
+      'Martin Fowler — Inversion of Control Containers and the Dependency Injection pattern',
+      'https://martinfowler.com/articles/injection.html'
+    ),
+    book: L(
+      'Game Programming Patterns (Nystrom) — chapter: Singleton',
+      'https://gameprogrammingpatterns.com/singleton.html'
+    ),
+  },
+  'game-design': {
+    blog: L(
+      'Gaffer On Games (Glenn Fiedler) — Fix Your Timestep!',
+      'https://gafferongames.com/post/fix_your_timestep/'
+    ),
+    book: L(
+      'Game Programming Patterns (Nystrom) — chapter: Game Loop',
+      'https://gameprogrammingpatterns.com/game-loop.html'
+    ),
+  },
+  hnsw: {
+    blog: L(
+      'Pinecone — Hierarchical Navigable Small Worlds (HNSW)',
+      'https://www.pinecone.io/learn/hnsw/'
+    ),
+  },
+  'http-lifecycle': {
+    blog: L(
+      'MDN Web Docs — An overview of HTTP',
+      'https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview'
+    ),
+  },
+  idempotency: {
+    blog: L(
+      'Stripe — Designing robust and predictable APIs with idempotency',
+      'https://stripe.com/blog/idempotency'
+    ),
+    book: L(
+      'Patterns of Distributed Systems (Unmesh Joshi, on martinfowler.com) — Idempotent Receiver',
+      'https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html'
+    ),
+  },
+  'inverted-index': {
+    book: L(
+      'Stanford IR Book — A first take at building an inverted index',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html'
+    ),
+  },
+  'load-balancing': {
+    blog: L(
+      "Cloudflare — Unimog, Cloudflare's edge load balancer",
+      'https://blog.cloudflare.com/unimog-cloudflares-edge-load-balancer/'
+    ),
+    book: L(
+      'Site Reliability Engineering (Google) — chapter 19: Load Balancing at the Frontend',
+      'https://sre.google/sre-book/load-balancing-frontend/'
+    ),
+  },
+  'location-transport': {
+    blog: L(
+      'H3 documentation — Indexing (hexagonal hierarchical geospatial index)',
+      'https://h3geo.org/docs/highlights/indexing'
+    ),
+  },
+  'lsm-tree': {
+    blog: L(
+      'LevelDB Implementation Notes (google/leveldb)',
+      'https://github.com/google/leveldb/blob/main/doc/impl.md'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 5 notes — Database Storage II (log-structured storage, LSM)',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/05-storage2.pdf'
+    ),
+  },
+  'object-modeling': {
+    blog: L(
+      'Martin Fowler — Anemic Domain Model',
+      'https://martinfowler.com/bliki/AnemicDomainModel.html'
+    ),
+  },
+  'observer-pattern': {
+    blog: L(
+      'Patterns of Distributed Systems (Joshi, on martinfowler.com) — State Watch',
+      'https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html'
+    ),
+    book: L(
+      'Game Programming Patterns (Nystrom) — chapter: Observer',
+      'https://gameprogrammingpatterns.com/observer.html'
+    ),
+  },
+  'query-execution-optimization': {
+    blog: L(
+      'PostgreSQL Documentation — 51.5. Planner/Optimizer',
+      'https://www.postgresql.org/docs/current/planner-optimizer.html'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 15 notes — Query Planning & Optimization',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/15-optimization1.pdf'
+    ),
+  },
+  'query-rewriting': {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §9.2 Query expansion',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html'
+    ),
+  },
+  'rag-system-design': {
+    blog: L(
+      'Eugene Yan — Patterns for Building LLM-based Systems & Products',
+      'https://eugeneyan.com/writing/llm-patterns/'
+    ),
+  },
+  'ranking-metrics': {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html'
+    ),
+  },
+  'rate-limiting': {
+    blog: L(
+      'Stripe — Scaling your API with rate limiters',
+      'https://stripe.com/blog/rate-limiters'
+    ),
+    book: L(
+      'Site Reliability Engineering (Google) — chapter 21: Handling Overload',
+      'https://sre.google/sre-book/handling-overload/'
+    ),
+  },
+  'search-discovery': {
+    blog: L(
+      'Eugene Yan — Patterns for Personalization in Recommendations and Search',
+      'https://eugeneyan.com/writing/patterns-for-personalization/'
+    ),
+  },
+  'search-evals': {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §8.1 Information retrieval system evaluation',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/information-retrieval-system-evaluation-1.html'
+    ),
+  },
+  'search-platform-design': {
+    blog: L(
+      'Eugene Yan — System Design for Recommendations and Search',
+      'https://eugeneyan.com/writing/system-design-for-discovery/'
+    ),
+  },
+  'secondary-index': {
+    blog: L(
+      'PostgreSQL Documentation — 11.2. Index Types',
+      'https://www.postgresql.org/docs/current/indexes-types.html'
+    ),
+  },
+  'social-media': {
+    blog: L(
+      'Engineering at Meta — TAO: The power of the graph',
+      'https://engineering.fb.com/2013/06/25/core-infra/tao-the-power-of-the-graph/'
+    ),
+  },
+  'state-management': {
+    blog: L(
+      'Statecharts — What is a statechart?',
+      'https://statecharts.dev/what-is-a-statechart.html'
+    ),
+    book: L(
+      'Game Programming Patterns (Nystrom) — chapter: State',
+      'https://gameprogrammingpatterns.com/state.html'
+    ),
+  },
+  'storage-retrieval': {
+    blog: L(
+      'PostgreSQL Documentation — 66.6. Database Page Layout',
+      'https://www.postgresql.org/docs/current/storage-page-layout.html'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 3 notes — Database Storage I',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/03-storage1.pdf'
+    ),
+  },
+  'tf-idf': {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html'
+    ),
+  },
+  tokenization: {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html'
+    ),
+  },
+  'transaction-processing': {
+    blog: L(
+      'Martin Kleppmann — Hermitage: Testing the "I" in ACID',
+      'https://martin.kleppmann.com/2014/11/25/hermitage-testing-the-i-in-acid.html'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 17 notes — Concurrency Control Theory',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/17-concurrencycontrol.pdf'
+    ),
+  },
+  'vector-similarity': {
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html'
+    ),
+  },
+  wal: {
+    blog: L('SQLite — Write-Ahead Logging', 'https://www.sqlite.org/wal.html'),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 21 notes — Database Logging',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/21-logging.pdf'
+    ),
+  },
+};
+
+/**
+ * Deep links into the vendored repositories under src/data/library/.
+ *
+ * These are first-party in-app destinations that RepoView already renders,
+ * and they are the owner's preferred resource layer. They land in the `more`
+ * slot rather than video/blog/book: they are not that kind of media, and the
+ * point is to surface material already vetted when the repo was ingested.
+ */
+export const CONCEPT_LIBRARY_LINKS = {
+  'api-design': [
+    L(
+      'System Design (karanpratapsingh) — REST',
+      '/library/system-design?section=readme-md-rest-graphql-grpc-rest'
+    ),
+  ],
+  'booking-inventory': [
+    L(
+      'Grokking OOP — Design a Movie Ticket Booking System',
+      '/library/grokking-oop?section=docs-case-studies-design-a-movie-ticket-booking-system-md'
+    ),
+  ],
+  'cap-theorem': [
+    L(
+      'System Design 101 — CAP Theorem: One of the Most Misunderstood Terms',
+      '/library/system-design-101?section=data-guides-cap-theorem-one-of-the-most-misunderstood-terms-md'
+    ),
+  ],
+  'collaboration-productivity': [
+    L(
+      'System Design 101 — How to Design Google Docs',
+      '/library/system-design-101?section=data-guides-how-to-design-google-docs-md'
+    ),
+  ],
+  'consistent-hashing': [
+    L(
+      'System Design 101 — Consistent Hashing Explained',
+      '/library/system-design-101?section=data-guides-consistent-hashing-md'
+    ),
+  ],
+  'decorator-structural': [
+    L(
+      'Low Level Design — Adapter Design Pattern in Python',
+      '/library/low-level-design?section=design-patterns-python-adapter-readme-md'
+    ),
+  ],
+  'ecommerce-payments': [
+    L(
+      'System Design 101 — 10 Principles for Building Resilient Payment Systems (Shopify)',
+      '/library/system-design-101?section=data-guides-10-principles-for-building-resilient-payment-systems-by-shopify-md'
+    ),
+  ],
+  'game-design': [
+    L(
+      'Grokking OOP — Design Chess',
+      '/library/grokking-oop?section=docs-case-studies-design-chess-md'
+    ),
+  ],
+  'http-lifecycle': [
+    L(
+      'System Design 101 — HTTP/1 -> HTTP/2 -> HTTP/3',
+      '/library/system-design-101?section=data-guides-http1-http2-http3-md'
+    ),
+  ],
+  idempotency: [
+    L(
+      'System Design 101 — Top 6 Cases to Apply Idempotency',
+      '/library/system-design-101?section=data-guides-top-6-cases-to-apply-idempotency-md'
+    ),
+  ],
+  'load-balancing': [
+    L(
+      'System Design Primer — Load balancer',
+      '/library/system-design-primer?section=readme-md-load-balancer'
+    ),
+  ],
+  'object-modeling': [
+    L(
+      'Grokking OOP — Object Oriented Basics',
+      '/library/grokking-oop?section=docs-oop-fundamentals-object-oriented-basics-md'
+    ),
+    L(
+      'Grokking OOP — Class Diagram',
+      '/library/grokking-oop?section=docs-oop-fundamentals-class-diagram-md'
+    ),
+  ],
+  'object-storage': [
+    L(
+      'System Design 101 — Storage Systems Overview (block, file, object)',
+      '/library/system-design-101?section=data-guides-storage-systems-overview-md'
+    ),
+  ],
+  'observer-pattern': [
+    L(
+      'Low Level Design — Designing a Pub-Sub System',
+      '/library/low-level-design?section=problems-pub-sub-system-md'
+    ),
+  ],
+  'search-platform-design': [
+    L(
+      'System Design 101 — How Do Search Engines Work? (crawling, indexing, ranking)',
+      '/library/system-design-101?section=data-guides-how-do-search-engines-work-md'
+    ),
+  ],
+  'secondary-index': [
+    L(
+      'System Design (karanpratapsingh) — Indexes',
+      '/library/system-design?section=readme-md-indexes'
+    ),
+  ],
+  'social-media': [
+    L(
+      'System Design Primer — Design the Twitter timeline and search (fan-out)',
+      '/library/system-design-primer?section=solutions-system-design-twitter-readme-md'
+    ),
+  ],
+  'state-management': [
+    L(
+      'Low Level Design — Traffic Signal System (State design pattern)',
+      '/library/low-level-design?section=solutions-java-src-trafficsignalcontrolsystem-readme-md'
+    ),
+    L(
+      'Low Level Design — Designing a Vending Machine (state interface, idle/ready/dispense)',
+      '/library/low-level-design?section=problems-vending-machine-md'
+    ),
+  ],
+  webhooks: [
+    L(
+      'System Design 101 — Polling vs Webhooks',
+      '/library/system-design-101?section=data-guides-polling-vs-webhooks-md'
+    ),
+  ],
+};
+
+for (const [conceptId, slots] of Object.entries(CURATED_MEDIA_SYSTEMS)) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+// Homepages wearing an article's title. Deleted outright — a replacement was
+// found for most of these above; the rest are honestly empty.
+for (const conceptId of [
+  'cap-theorem',
+  'ecommerce-payments',
+  'idempotency',
+  'social-media',
+  'webhooks',
+]) {
+  if (CONCEPT_MEDIA[conceptId]?.blog?.url === 'https://martin.kleppmann.com/') {
+    delete CONCEPT_MEDIA[conceptId].blog;
+  }
+}
+
+// Curated entries win: they are per-concept and verified, whereas anything
+// they overwrite was a track anchor or a homepage wearing an article's title.
+for (const [conceptId, slots] of Object.entries(CURATED_MEDIA)) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+// No honest replacement exists, so the misleading entry is deleted outright
+// rather than retitled. The canonical SEO source (developers.google.com)
+// is on the BLOCKED list in source-tier.mjs, so `seo` stays empty.
+for (const conceptId of ['landing-pages', 'seo']) {
+  if (CONCEPT_MEDIA[conceptId]) delete CONCEPT_MEDIA[conceptId].blog;
+}
 
 const TAG_ALIASES = {
   tokenization: ['search-ir'],
@@ -1150,34 +2025,47 @@ const TAG_ALIASES = {
   growth: ['product'],
 };
 
+/**
+ * Most specific tag first. A concept's narrow topic tag supplies its sources;
+ * the broad track anchor is a last resort.
+ *
+ * This list used to run the other way — `system-design` outranked
+ * `low-level-design`, so the six Gang-of-Four pattern concepts were served
+ * Designing Data-Intensive Applications and MIT 6.824 instead of the GoF book
+ * and Fowler's catalog they already had available. Track anchors are shared by
+ * design, so ranking them first is what made one URL the book slot for 47
+ * concepts and another the video slot for 34.
+ */
 const TAG_PRIORITY = [
-  'search-ir',
-  'vector-db',
+  // Narrow topic tags — genuinely about one subject.
   'embeddings',
-  'ai-systems',
   'training',
   'language-modeling',
   'transformers',
   'rag',
   'evals',
   'evaluation',
-  'backend',
   'http',
-  'databases',
   'storage-engines',
-  'system-design',
-  'distributed-systems',
   'low-level-design',
-  'dsa',
   'behavioral',
-  'product',
   'statistics',
   'probability',
   'quant',
-  'mathematics',
   'linear-algebra',
   'foundations',
   'runtime',
+  // Broad track anchors — the standing reference for a whole track.
+  'search-ir',
+  'vector-db',
+  'ai-systems',
+  'backend',
+  'databases',
+  'system-design',
+  'distributed-systems',
+  'dsa',
+  'product',
+  'mathematics',
 ];
 
 const SLOTS = ['video', 'paper', 'blog', 'book'];

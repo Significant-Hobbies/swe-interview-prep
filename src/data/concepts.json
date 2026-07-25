@@ -71,7 +71,7 @@
       "reviewQuestions": ["rq-inverted-vs-forward"],
       "resources": [
         {
-          "title": "Stanford IR Book — The term vocabulary & postings lists",
+          "title": "Stanford IR Book — A first take at building an inverted index",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html",
           "type": "doc"
         }
@@ -153,7 +153,7 @@
           "type": "doc"
         },
         {
-          "title": "Practical BM25 (Elastic blog)",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables",
           "type": "article"
         }
@@ -651,7 +651,7 @@
       "reviewQuestions": ["rq-rag-quality-ceiling", "rq-rag-vs-finetune"],
       "resources": [
         {
-          "title": "Retrieval-Augmented Generation (Lewis et al.)",
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
           "url": "https://arxiv.org/abs/2005.11401",
           "type": "paper"
         },
@@ -814,7 +814,7 @@
       "reviewQuestions": ["rq-agent-stopping"],
       "resources": [
         {
-          "title": "Building Effective Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         },
@@ -858,7 +858,7 @@
       "reviewQuestions": ["rq-routing-eval"],
       "resources": [
         {
-          "title": "Building Effective Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         },
@@ -1030,7 +1030,7 @@
           "type": "course"
         },
         {
-          "title": "CS231n — Optimization (gradient descent, SGD)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/",
           "type": "course"
         },
@@ -1182,7 +1182,7 @@
       "description": "Byte-level, char-level, BPE, vocab design.",
       "resources": [
         {
-          "title": "Stanford CS336 — L1 Overview & tokenization (Spring 2025)",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/",
           "type": "course"
         },
@@ -1235,7 +1235,7 @@
           "type": "course"
         },
         {
-          "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/",
           "type": "course"
         },
@@ -1470,7 +1470,7 @@
       ],
       "resources": [
         {
-          "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/",
           "type": "course"
         },
@@ -1700,7 +1700,7 @@
       "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
       "resources": [
         {
-          "title": "Stanford CS336 — L13–14 Data pipeline (Spring 2025)",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/",
           "type": "course"
         },
@@ -1805,7 +1805,7 @@
           "type": "doc"
         },
         {
-          "title": "Hamel Husain — Your AI Product Needs Evals",
+          "title": "Your AI product needs evals (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/evals/",
           "type": "doc"
         }
@@ -2111,7 +2111,7 @@
       "reviewQuestions": ["rq-three-pillars"],
       "resources": [
         {
-          "title": "Monitoring Distributed Systems (Google SRE Book)",
+          "title": "Site Reliability Engineering — Monitoring Distributed Systems",
           "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
           "type": "doc"
         }
@@ -2408,7 +2408,7 @@
       ],
       "resources": [
         {
-          "title": "Designing Data-Intensive Applications",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/",
           "type": "course"
         },
@@ -2418,7 +2418,7 @@
           "type": "paper"
         },
         {
-          "title": "LevelDB — implementation notes",
+          "title": "LevelDB Implementation Notes (google/leveldb)",
           "url": "https://github.com/google/leveldb/blob/main/doc/impl.md",
           "type": "doc"
         },
@@ -2450,7 +2450,7 @@
       ],
       "resources": [
         {
-          "title": "Designing Data-Intensive Applications",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/",
           "type": "course"
         },
@@ -2498,7 +2498,7 @@
       ],
       "resources": [
         {
-          "title": "Designing Data-Intensive Applications",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/",
           "type": "course"
         },
@@ -2795,7 +2795,7 @@
       "description": "Turn engines, board state, rules.",
       "resources": [
         {
-          "title": "Game Programming Patterns — State (Nystrom)",
+          "title": "Game Programming Patterns (Nystrom) — chapter: State",
           "url": "https://gameprogrammingpatterns.com/state.html",
           "type": "doc"
         },
@@ -2839,7 +2839,7 @@
           "type": "article"
         },
         {
-          "title": "Google SRE Book — Load Balancing at the Frontend",
+          "title": "Site Reliability Engineering (Google) — chapter 19: Load Balancing at the Frontend",
           "url": "https://sre.google/sre-book/load-balancing-frontend/",
           "type": "doc"
         },
@@ -3230,7 +3230,7 @@
       "reviewQuestions": ["rq-rag-two-pipelines"],
       "resources": [
         {
-          "title": "Building Effective Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "article"
         },
@@ -3315,7 +3315,7 @@
           "type": "doc"
         },
         {
-          "title": "Tortoise and Hare — cycle detection (cp-algorithms)",
+          "title": "cp-algorithms — Tortoise and Hare (linked list cycle detection)",
           "url": "https://cp-algorithms.com/others/tortoise_and_hare.html",
           "type": "doc"
         }
@@ -3922,7 +3922,7 @@
           "type": "doc"
         },
         {
-          "title": "Google SRE Book — Postmortem Culture: Learning from Failure",
+          "title": "Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure",
           "url": "https://sre.google/sre-book/postmortem-culture/",
           "type": "doc"
         },
@@ -4318,7 +4318,7 @@
           "type": "course"
         },
         {
-          "title": "MIT 6.041SC — Introduction to Probability",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
           "type": "course"
         },
@@ -4358,7 +4358,7 @@
       "reviewQuestions": ["rq-expectation-vs-sample-mean", "rq-pdf-not-probability"],
       "resources": [
         {
-          "title": "MIT 6.041 Probabilistic Systems Analysis",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
           "type": "course"
         },
@@ -4515,7 +4515,7 @@
       "reviewQuestions": ["rq-regression-as-projection"],
       "resources": [
         {
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         },
@@ -4563,7 +4563,7 @@
       "reviewQuestions": ["rq-gradient-descent-direction"],
       "resources": [
         {
-          "title": "CS231n — Optimization (gradients & backprop)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/",
           "type": "course"
         },
@@ -4605,7 +4605,7 @@
           "type": "doc"
         },
         {
-          "title": "CS231n — Optimization (SGD, momentum, adaptive methods)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/",
           "type": "course"
         },
@@ -4705,7 +4705,7 @@
       "reviewQuestions": ["rq-clt-why-averages", "rq-standard-error-vs-stddev"],
       "resources": [
         {
-          "title": "Seeing Theory — Central Limit Theorem",
+          "title": "Seeing Theory — Probability Distributions",
           "url": "https://seeing-theory.brown.edu/probability-distributions/index.html",
           "type": "article"
         },
@@ -4815,7 +4815,7 @@
       "reviewQuestions": ["rq-mle-cross-entropy-link", "rq-likelihood-vs-posterior"],
       "resources": [
         {
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         },
@@ -4854,7 +4854,7 @@
           "type": "article"
         },
         {
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         }
@@ -4887,7 +4887,7 @@
           "type": "video"
         },
         {
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         }
@@ -4948,7 +4948,7 @@
           "type": "video"
         },
         {
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/",
           "type": "doc"
         },
@@ -5057,7 +5057,7 @@
       "artifacts": ["simulate-random-processes"],
       "resources": [
         {
-          "title": "MIT 6.041SC — Random processes",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
           "type": "course"
         },
@@ -5348,7 +5348,7 @@
           "type": "video"
         },
         {
-          "title": "Large-scale cluster management at Google with Borg (EuroSys '15)",
+          "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
           "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
           "type": "paper"
         },
@@ -5457,7 +5457,7 @@
       "reviewQuestions": ["rq-platform-scheduling-orchestration"],
       "resources": [
         {
-          "title": "Large-scale cluster management at Google with Borg",
+          "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
           "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
           "type": "doc"
         }
@@ -5933,7 +5933,7 @@
           "type": "video"
         },
         {
-          "title": "Efficient Memory Management for LLM Serving with PagedAttention (vLLM, SOSP '23)",
+          "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
           "url": "https://arxiv.org/abs/2309.06180",
           "type": "paper"
         },
@@ -6032,7 +6032,7 @@
       "reviewQuestions": ["rq-flashattention-kernels"],
       "resources": [
         {
-          "title": "FlashAttention",
+          "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
           "url": "https://arxiv.org/abs/2205.14135",
           "type": "paper"
         }
@@ -6255,7 +6255,7 @@
       "reviewQuestions": ["rq-agent-memory-context"],
       "resources": [
         {
-          "title": "Anthropic — Building Effective Agents",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "doc"
         },
@@ -6488,7 +6488,7 @@
           "type": "doc"
         },
         {
-          "title": "Building Effective AI Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents",
           "type": "doc"
         },
@@ -6526,7 +6526,7 @@
       "reviewQuestions": ["rq-long-running-scheduled-agents"],
       "resources": [
         {
-          "title": "Effective Context Engineering for AI Agents",
+          "title": "Effective context engineering for AI agents (Anthropic)",
           "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
           "type": "doc"
         },
@@ -6873,7 +6873,7 @@
           "type": "paper"
         },
         {
-          "title": "Holistic Evaluation of Language Models (HELM) — Stanford CRFM",
+          "title": "HELM — Holistic Evaluation of Language Models (Stanford CRFM)",
           "url": "https://crfm.stanford.edu/helm/",
           "type": "article"
         },
@@ -7390,17 +7390,17 @@
       "reviewQuestions": ["rq-interactive-2d-3d-systems"],
       "resources": [
         {
-          "title": "WebGPU Specification",
+          "title": "WebGPU specification (W3C)",
           "url": "https://www.w3.org/TR/webgpu/",
           "type": "doc"
         },
         {
-          "title": "Fix Your Timestep! (Gaffer On Games)",
+          "title": "Gaffer On Games (Glenn Fiedler) — Fix Your Timestep!",
           "url": "https://gafferongames.com/post/fix_your_timestep/",
           "type": "article"
         },
         {
-          "title": "Game Programming Patterns — Game Loop (Nystrom)",
+          "title": "Game Programming Patterns (Nystrom) — chapter: Game Loop",
           "url": "https://gameprogrammingpatterns.com/game-loop.html",
           "type": "doc"
         },

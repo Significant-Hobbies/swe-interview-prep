@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import artifactsData from '../data/artifacts.json';
+import conceptPacksData from '../data/concept-packs.json';
 import conceptsData from '../data/concepts.json';
 import drillsData from '../data/drills.json';
 import reviewQuestionsData from '../data/review-questions.json';
@@ -23,6 +24,10 @@ import {
   isSchedulableReviewQuestion,
   isStubPlaygroundCode,
 } from './contentQuality';
+
+interface PackShape {
+  items: { category: string; title: string; url?: string }[];
+}
 
 const concepts = conceptsData.concepts;
 const artifacts = artifactsData.artifacts;
@@ -129,5 +134,34 @@ describe('content quality bar', () => {
       expect(block, id).toBeTruthy();
       expect(isStubPlaygroundCode(block?.[1] ?? ''), id).toBe(false);
     }
+  });
+});
+
+describe('source titles', () => {
+  // One URL, one title.
+  //
+  // Titles used to be written per concept over a shared URL, so
+  // martin.kleppmann.com — a homepage — appeared under 8 different titles
+  // ("— CAP & consistency", "— fan-out architectures", "— transactions"),
+  // each promising an article that does not exist there. The MIT 18.650 course
+  // page carried 7, and one YouTube id was cited as both a Kohavi talk and a
+  // Marty Cagan talk (it turned out to be a removed video). A URL describing
+  // itself differently on every card is the tell for an invented description.
+  it('no URL is described by more than one title', () => {
+    const byUrl = new Map<string, Set<string>>();
+    for (const pack of Object.values(conceptPacksData.packs as Record<string, PackShape>)) {
+      for (const item of pack.items) {
+        if (!item.url?.startsWith('http')) continue;
+        if (!byUrl.has(item.url)) byUrl.set(item.url, new Set());
+        byUrl.get(item.url)?.add(item.title);
+      }
+    }
+    const conflicting = [...byUrl.entries()]
+      .filter(([, titles]) => titles.size > 1)
+      .map(([url, titles]) => `${url}\n    ${[...titles].join('\n    ')}`);
+    expect(
+      conflicting,
+      `a URL must have one canonical title:\n  ${conflicting.join('\n  ')}`
+    ).toEqual([]);
   });
 });

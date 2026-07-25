@@ -199,8 +199,15 @@ for (const concept of concepts) {
 
   for (const repo of manifest.repos) {
     const repoTracks = declaredTracks(repo);
-    // A repo scoped to other tracks is not evidence about this concept.
-    if (repoTracks.size > 0 && !repoTracks.has(conceptTrack)) continue;
+    // A repo scoped to other tracks is weak evidence about this concept — but
+    // not no evidence. vLLM is scoped to inference-serving and genuinely
+    // documents `structured-outputs` and `tool-calling` (ai-systems /
+    // agent-systems); cs231n is scoped to multimodal-spatial and documents
+    // gradient descent. A cross-track repo therefore still qualifies, but only
+    // on an exact whole-name heading match (see `crossTrack` below) — partial
+    // and topic-tag matches stay blocked, since those are what produced
+    // `garak` -> distributed-systems.
+    const crossTrack = repoTracks.size > 0 && !repoTracks.has(conceptTrack);
     // Shared topic tags (e.g. "linear-algebra", "vision") are real evidence
     // that a repo covers this concept's subject area.
     const topicOverlap = (repo.tags ?? []).filter(
@@ -224,6 +231,29 @@ for (const concept of concepts) {
       // even when the exact phrase differs ("Paged Attention" vs the concept
       // "KV Cache & PagedAttention"). Scored below an exact phrase hit.
       const coverage = tokenCoverage(title, queries[0]);
+      // A repo scoped to another track has to clear the highest bar there is:
+      // the heading must be ABOUT the concept, not merely mention it. So the
+      // full name has to appear AND the heading must be little more than that
+      // name. Exact-phrase alone is not enough — it still admits homonyms
+      // across domains ("Encoding vs Encryption vs Tokenization" is payment
+      // tokenization, not the text kind; "Making Sense of Search Engine
+      // Optimization" is not discovery search).
+      // Three conditions, all necessary:
+      //  - the concept's own NAME appears, not a KEYWORDS synonym (a synonym
+      //    match gave `array-hashing` -> "Consistent Hashing");
+      //  - the name is at least two distinctive words, because a single generic
+      //    one is a homonym waiting to happen (`graphs` -> "CUDA Graphs",
+      //    `greedy` -> "Non Greedy" decoding, `communication` -> network
+      //    communication);
+      //  - the heading is barely longer than the name, so the section is about
+      //    the concept rather than mentioning it in passing.
+      if (crossTrack) {
+        const nameWords = significantTokens(queries[0]);
+        const headingWords = significantTokens(title.toLowerCase()).length;
+        if (nameWords.length < 2) continue;
+        if (countMatches(title.toLowerCase(), queries[0]) === 0) continue;
+        if (headingWords > nameWords.length + 1) continue;
+      }
       let ownScore = phraseScore || (coverage >= 0.6 ? Math.round(coverage * 12) : 0);
       // Topic-tag fallback, only for a repo scoped to this concept's track —
       // otherwise "vision" or "evals" would drag in unrelated repos.

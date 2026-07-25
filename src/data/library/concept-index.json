@@ -22,6 +22,47 @@
       "snippet": "# File Search - [And Predicate.java](https://github.com/ByteByteGoHq/ood-interview/blob/HEAD/file_search/filesearch/clause/AndPredicate.java) - [Composite Predicate.java](https://github.com/ByteByteG…"
     }
   ],
+  "structured-outputs": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-structured-outputs-md",
+      "title": "Structured Outputs",
+      "snippet": "# Structured Outputs vLLM supports the generation of structured outputs using [xgrammar](https://github.com/mlc-ai/xgrammar) or [guidance](https://github.com/guidance-ai/llguidance) as backends. This d…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "examples-features-structured-outputs-readme-md",
+      "title": "Structured Outputs",
+      "snippet": "# Structured Outputs This script demonstrates various structured output capabilities of vLLM's OpenAI-compatible server. It can run individual constraint type or all of them. It supports both streaming…"
+    }
+  ],
+  "tool-calling": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-reasoning-outputs-md-reasoning-outputs-tool-calling",
+      "title": "Tool Calling",
+      "snippet": "## Tool Calling The reasoning content is also available when both tool calling and the reasoning parser are enabled. Additionally, tool calling only parses functions from the `content` field, not from t…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-tool-calling-md",
+      "title": "Tool Calling",
+      "snippet": "# Tool Calling vLLM currently supports named function calling, as well as the `auto`, `required` (as of `vllm>=0.8.3`), and `none` options for the `tool_choice` field in the chat completion API.…"
+    }
+  ],
+  "ml-gradient-descent": [
+    {
+      "repoId": "cs231n",
+      "repoName": "CS231n Course Notes",
+      "sectionId": "optimization-1-md-vanilla-gradient-descent",
+      "title": "Vanilla Gradient Descent",
+      "snippet": "# Vanilla Gradient Descent while True: weights_grad = evaluate_gradient(loss_fun, data, weights) weights += - step_size * weights_grad # perform parameter update ``` This simple loop is at the core of all…"
+    }
+  ],
   "ml-browser-runtime": [
     {
       "repoId": "react-questions",
@@ -132,6 +173,15 @@
       "sectionId": "readme-md-6-security-best-practices-6-12-prevent-brute-force-attacks-against-authorization",
       "title": "![✔] 6.12. Prevent Brute Force Attacks Against Authorization",
       "snippet": "## ![✔] 6.12. Prevent brute-force attacks against authorization <a href=\"https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication\" target=\"_blank\"><img src=\"https://img.shields.io/badge/%…"
+    }
+  ],
+  "object-storage": [
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-storage-object-storage",
+      "title": "Object Storage",
+      "snippet": "## Object Storage Object storage, which is also known as object-based storage, breaks data files up into pieces called objects. It then stores those objects in a single repository, which can be spread o…"
     }
   ],
   "sharding": [

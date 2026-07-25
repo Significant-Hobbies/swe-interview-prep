@@ -136,9 +136,23 @@ const S_TIER_PRIMARY_HOSTS = new Set([
 const S_TIER_PRIMARY_PATH =
   /github\.com\/(?:EleutherAI\/lm-evaluation-harness|google\/leveldb\/blob\/main\/doc\/impl\.md)|github\.blog\/(?:engineering|open-source)\//i;
 
+/**
+ * First-party in-app destinations: a section of a vendored GitHub repository
+ * (`/library/<repoId>?section=<id>`) or a drill (`/drills/<id>`).
+ *
+ * These are relative paths, so `new URL(url)` throws and the allowlist used to
+ * reject them outright — which meant the 27 repos under src/data/library/,
+ * ~4,600 sections of vetted material, could never fill a media slot. They were
+ * reachable only from a separate panel. The repos are already reviewed when
+ * they are added to scripts/library.config.json; there is no third party left
+ * to vet, so the external allowlist does not apply to them.
+ */
+const FIRST_PARTY_PATH = /^\/(library|drills)\//;
+
 export function isSTierSource(title, url, slot) {
   const hay = `${title} ${url}`;
   if (BLOCKED.some((re) => re.test(url) || re.test(title))) return false;
+  if (FIRST_PARTY_PATH.test(url)) return true;
   if (S_TIER_PINECONE.test(url)) return true;
   try {
     const hostname = new URL(url).hostname.replace(/^www\./, '');

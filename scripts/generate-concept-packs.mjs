@@ -12,7 +12,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { isSTierSource } from './source-tier.mjs';
-import { sTierSlotsForConcept } from './s-tier-catalog.mjs';
+import { CONCEPT_LIBRARY_LINKS, sTierSlotsForConcept } from './s-tier-catalog.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const concepts = JSON.parse(readFileSync(join(root, 'src/data/concepts.json'), 'utf8')).concepts;
@@ -57,6 +57,13 @@ function buildPack(concept) {
   for (const slot of MEDIA_SLOTS) {
     const link = catalogSlots[slot];
     if (link?.url) add(slot, link.title, link.url, slot);
+  }
+
+  // Vendored-repo sections, before external `more` links. The 27 repos under
+  // src/data/library/ are the owner's preferred resource layer but reached the
+  // concept page only through a separate panel; these put them on the card.
+  for (const link of CONCEPT_LIBRARY_LINKS[concept.id] ?? []) {
+    add('more', link.title, link.url);
   }
 
   for (const r of concept.resources ?? []) {
@@ -122,6 +129,14 @@ const violations = [];
  * So: the catalog owns the default slots, a human's extra link is kept. Kept
  * items still pass the same S-tier gate as generated ones — nothing skips
  * review by virtue of being hand-added.
+ *
+ * The catch is telling a human's link apart from a PREVIOUS generator run's
+ * output. Naively keeping everything unreproduced meant that retiring a catalog
+ * entry never took effect: reordering TAG_PRIORITY so the Gang-of-Four concepts
+ * got the GoF book instead of Designing Data-Intensive Applications left both
+ * on the card. So anything the catalog is capable of emitting — for any concept
+ * — is treated as generator output and dropped when this run does not re-emit
+ * it. Only URLs the catalog has never heard of count as curated.
  */
 let existingPacks = {};
 try {
@@ -130,11 +145,21 @@ try {
   existingPacks = {};
 }
 
+/** Every URL the catalog can produce, across all concepts. */
+const catalogUrls = new Set();
+for (const concept of concepts) {
+  for (const link of Object.values(sTierSlotsForConcept(concept))) {
+    if (link?.url) catalogUrls.add(link.url);
+  }
+}
+
 function preserveCurated(conceptId, pack) {
   const previous = existingPacks[conceptId]?.items ?? [];
   const generated = new Set(pack.items.map((i) => i.url).filter(Boolean));
   for (const item of previous) {
     if (!item.url || generated.has(item.url)) continue;
+    // Superseded catalog output, not a human's link.
+    if (catalogUrls.has(item.url)) continue;
     if (
       !isSTierSource(
         item.title,

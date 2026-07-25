@@ -6,13 +6,13 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 228,
+      "video": 210,
       "paper": 212,
-      "blog": 199,
-      "book": 185,
+      "blog": 207,
+      "book": 194,
       "problem": 222,
       "write": 222,
-      "more": 130,
+      "more": 131,
       "items": 1398
     }
   },
@@ -31,17 +31,12 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
-          "title": "Stanford IR Book — Tokenization",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html"
         },
         {
@@ -76,12 +71,7 @@
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
-          "title": "Stanford IR Book — The term vocabulary & postings lists",
+          "title": "Stanford IR Book — A first take at building an inverted index",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html"
         },
         {
@@ -111,17 +101,12 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
-          "title": "Stanford IR Book — Scoring & term weighting",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html"
         },
         {
@@ -151,13 +136,13 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
+          "title": "Introduction to Information Retrieval (Manning et al.) — §11.4.3 Okapi BM25: a non-binary model",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html"
         },
         {
           "category": "problem",
@@ -186,17 +171,12 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
-          "title": "Stanford IR Book — Evaluation in IR",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html"
         },
         {
@@ -226,13 +206,13 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
+          "title": "Introduction to Information Retrieval (Manning et al.) — §8.1 Information retrieval system evaluation",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/information-retrieval-system-evaluation-1.html"
         },
         {
           "category": "problem",
@@ -261,7 +241,7 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
@@ -301,7 +281,7 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
@@ -336,17 +316,12 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
+          "title": "Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables",
           "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
         },
         {
           "category": "book",
-          "title": "Introduction to Information Retrieval (Manning et al.)",
-          "url": "https://nlp.stanford.edu/IR-book/"
-        },
-        {
-          "category": "more",
-          "title": "Stanford IR Book — Query expansion",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §9.2 Query expansion",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/query-expansion-1.html"
         },
         {
@@ -376,8 +351,8 @@
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — ML engineering essays",
-          "url": "https://eugeneyan.com/writing/"
+          "title": "Eugene Yan — Patterns for Personalization in Recommendations and Search",
+          "url": "https://eugeneyan.com/writing/patterns-for-personalization/"
         },
         {
           "category": "book",
@@ -409,6 +384,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Search Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A search system is a pipeline, not a scoring function: analyze -> inverted index -> cheap candidate retrieval -> expensive reranking -> serve"
+        },
+        {
+          "category": "blog",
+          "title": "Eugene Yan — ML engineering essays",
+          "url": "https://eugeneyan.com/writing/"
         }
       ]
     },
@@ -416,8 +396,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — course lectures",
-          "url": "https://web.stanford.edu/class/cs224n/"
+          "title": "Stanford CS224N (Winter 2021) Lecture 1 — Intro & Word Vectors",
+          "url": "https://www.youtube.com/watch?v=rmVRLeJRkl4"
         },
         {
           "category": "paper",
@@ -426,13 +406,13 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
+          "title": "The Illustrated Word2vec (Jay Alammar)",
+          "url": "https://jalammar.github.io/illustrated-word2vec/"
         },
         {
           "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
+          "title": "Speech and Language Processing, 3rd ed. (Jurafsky & Martin) — Ch. 6: Vector Semantics and Embeddings",
+          "url": "https://web.stanford.edu/~jurafsky/slp3/6.pdf"
         },
         {
           "category": "problem",
@@ -451,7 +431,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -461,13 +441,13 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "book",
-          "title": "Speech and Language Processing (Jurafsky & Martin)",
-          "url": "https://web.stanford.edu/~jurafsky/slp3/"
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
           "category": "problem",
@@ -486,7 +466,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -496,7 +476,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -521,7 +501,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -531,7 +511,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -556,7 +536,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -566,8 +546,8 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
-          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
+          "title": "Pinecone — Hierarchical Navigable Small Worlds (HNSW)",
+          "url": "https://www.pinecone.io/learn/hnsw/"
         },
         {
           "category": "book",
@@ -591,7 +571,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -601,7 +581,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -626,7 +606,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -636,7 +616,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -661,7 +641,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -671,7 +651,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -696,7 +676,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS224N — NLP with Deep Learning",
+          "title": "Stanford CS224N — NLP with Deep Learning (course)",
           "url": "https://web.stanford.edu/class/cs224n/"
         },
         {
@@ -706,7 +686,7 @@
         },
         {
           "category": "blog",
-          "title": "Stanford IR — vector spaces & dot products",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §6.3.3 Dot products (cosine similarity)",
           "url": "https://nlp.stanford.edu/IR-book/html/htmledition/dot-products-1.html"
         },
         {
@@ -736,7 +716,7 @@
         },
         {
           "category": "paper",
-          "title": "Retrieval-Augmented Generation (Lewis et al.)",
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)",
           "url": "https://arxiv.org/abs/2005.11401"
         },
         {
@@ -746,7 +726,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -781,7 +761,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -816,7 +796,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -856,7 +836,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -891,7 +871,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -926,12 +906,12 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "more",
-          "title": "Building Effective Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
@@ -971,12 +951,12 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "more",
-          "title": "Building Effective Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
@@ -1021,7 +1001,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1056,7 +1036,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1151,12 +1131,12 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Deep Learning (Goodfellow, Bengio, Courville)",
+          "url": "https://www.deeplearningbook.org/"
         },
         {
           "category": "more",
-          "title": "CS231n — Optimization (gradient descent, SGD)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
         {
@@ -1196,8 +1176,8 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Deep Learning (Goodfellow, Bengio, Courville)",
+          "url": "https://www.deeplearningbook.org/"
         },
         {
           "category": "more",
@@ -1221,18 +1201,18 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html"
         },
         {
           "category": "blog",
-          "title": "Karpathy — softmax & classification",
+          "title": "Karpathy — Hacker's Guide to Neural Networks",
           "url": "https://karpathy.github.io/neuralnets/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Deep Learning (Goodfellow, Bengio, Courville)",
+          "url": "https://www.deeplearningbook.org/"
         },
         {
           "category": "paper",
@@ -1256,8 +1236,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+          "title": "Neural Networks: Zero to Hero (Karpathy)",
+          "url": "https://karpathy.ai/zero-to-hero.html"
         },
         {
           "category": "paper",
@@ -1266,13 +1246,13 @@
         },
         {
           "category": "blog",
-          "title": "An overview of gradient descent optimization algorithms (Ruder)",
+          "title": "Sebastian Ruder — An overview of gradient descent optimization algorithms",
           "url": "https://www.ruder.io/optimizing-gradient-descent/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Deep Learning (Goodfellow, Bengio, Courville)",
+          "url": "https://www.deeplearningbook.org/"
         },
         {
           "category": "more",
@@ -1306,12 +1286,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1341,12 +1321,12 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
           "category": "blog",
-          "title": "Stanford CS336 — Language Modeling from Scratch (Spring 2025)",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1376,12 +1356,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1416,12 +1396,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1456,12 +1436,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1506,12 +1486,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1551,12 +1531,12 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "The Illustrated Transformer (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1596,12 +1576,12 @@
         },
         {
           "category": "blog",
-          "title": "Karpathy — A Recipe for Training Neural Nets",
+          "title": "Karpathy — Hacker's Guide to Neural Networks",
           "url": "https://karpathy.github.io/neuralnets/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1641,7 +1621,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1676,7 +1656,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1711,7 +1691,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1746,7 +1726,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1771,8 +1751,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+          "title": "MIT 6.1810 — Operating Systems",
+          "url": "https://pdos.csail.mit.edu/6.1810/2025/"
         },
         {
           "category": "paper",
@@ -1781,13 +1761,13 @@
         },
         {
           "category": "blog",
-          "title": "Karpathy — neural nets basics",
+          "title": "Karpathy — Hacker's Guide to Neural Networks",
           "url": "https://karpathy.github.io/neuralnets/"
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Operating Systems: Three Easy Pieces",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
         },
         {
           "category": "problem",
@@ -1806,8 +1786,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Stanford CS336 — Spring 2025 lectures",
-          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+          "title": "MIT 6.1810 — Operating Systems",
+          "url": "https://pdos.csail.mit.edu/6.1810/2025/"
         },
         {
           "category": "paper",
@@ -1821,8 +1801,8 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
-          "url": "https://cs336.stanford.edu/spring2025/"
+          "title": "Operating Systems: Three Easy Pieces",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
         },
         {
           "category": "more",
@@ -1861,7 +1841,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -1876,7 +1856,7 @@
         },
         {
           "category": "more",
-          "title": "Hamel Husain — Your AI Product Needs Evals",
+          "title": "Your AI product needs evals (Hamel Husain)",
           "url": "https://hamel.dev/blog/posts/evals/"
         },
         {
@@ -1895,27 +1875,27 @@
     "http-lifecycle": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "RFC 9110 — HTTP Semantics",
           "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
+          "title": "MDN Web Docs — An overview of HTTP",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
+          "title": "System Design 101 — HTTP/1 -> HTTP/2 -> HTTP/3",
+          "url": "/library/system-design-101?section=data-guides-http1-http2-http3-md"
+        },
+        {
+          "category": "video",
           "title": "MDN — An overview of HTTP",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
         },
@@ -1935,11 +1915,6 @@
     "api-keys": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "OAuth 2.0 Bearer Token (RFC 6750)",
           "url": "https://www.rfc-editor.org/rfc/rfc6750.html"
@@ -1951,7 +1926,7 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -1970,27 +1945,22 @@
     "rate-limiting": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "The Tail at Scale (Dean & Barroso)",
           "url": "https://research.google/pubs/pub40801/"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Stripe — Scaling your API with rate limiters",
+          "url": "https://stripe.com/blog/rate-limiters"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Site Reliability Engineering (Google) — chapter 21: Handling Overload",
+          "url": "https://sre.google/sre-book/handling-overload/"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "429 Too Many Requests (MDN)",
           "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429"
         },
@@ -2010,24 +1980,24 @@
     "idempotency": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Dynamo: idempotent operations (DeCandia et al.)",
           "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — idempotency & delivery",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Stripe — Designing robust and predictable APIs with idempotency",
+          "url": "https://stripe.com/blog/idempotency"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Patterns of Distributed Systems (Unmesh Joshi, on martinfowler.com) — Idempotent Receiver",
+          "url": "https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Top 6 Cases to Apply Idempotency",
+          "url": "/library/system-design-101?section=data-guides-top-6-cases-to-apply-idempotency-md"
         },
         {
           "category": "problem",
@@ -2045,11 +2015,6 @@
     "retries-dlq": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Harvest, Yield, and Scalable Tolerant Systems (Fox et al.)",
           "url": "https://www.usenix.org/legacy/event/osdi99/full_papers/fox/fox.pdf"
@@ -2061,7 +2026,7 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2080,24 +2045,24 @@
     "webhooks": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "End-to-End Arguments in System Design (Saltzer et al.)",
           "url": "https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — event delivery",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Polling vs Webhooks",
+          "url": "/library/system-design-101?section=data-guides-polling-vs-webhooks-md"
         },
         {
           "category": "problem",
@@ -2115,11 +2080,6 @@
     "background-jobs": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Omega: flexible, scalable schedulers (Schwarzkopf et al.)",
           "url": "https://research.google/pubs/pub41684/"
@@ -2131,7 +2091,7 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2166,7 +2126,7 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2206,7 +2166,7 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2225,24 +2185,24 @@
     "monitoring-analytics": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Dapper, a Large-Scale Distributed Systems Tracing Infrastructure",
           "url": "https://research.google/pubs/pub36356/"
         },
         {
           "category": "blog",
-          "title": "Google SRE — monitoring chapter",
+          "title": "Site Reliability Engineering — Monitoring Distributed Systems",
           "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "video",
+          "title": "Site Reliability Engineering — Monitoring Distributed Systems",
+          "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
         },
         {
           "category": "problem",
@@ -2260,11 +2220,6 @@
     "api-design": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "REST dissertation (Fielding)",
           "url": "https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm"
@@ -2276,8 +2231,13 @@
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — REST",
+          "url": "/library/system-design?section=readme-md-rest-graphql-grpc-rest"
         },
         {
           "category": "problem",
@@ -2295,23 +2255,18 @@
     "auth-systems": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "OAuth 2.0 RFC 6749",
           "url": "https://www.rfc-editor.org/rfc/rfc6749"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — blog",
-          "url": "https://martin.kleppmann.com/"
+          "title": "MDN Web Docs — HTTP authentication",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2330,24 +2285,24 @@
     "ecommerce-payments": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Sagas (Garcia-Molina & Salem)",
           "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/tr-87-13.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — transactions",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Patterns of Distributed Systems (Unmesh Joshi, on martinfowler.com) — Two-Phase Commit",
+          "url": "https://martinfowler.com/articles/patterns-of-distributed-systems/two-phase-commit.html"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — 10 Principles for Building Resilient Payment Systems (Shopify)",
+          "url": "/library/system-design-101?section=data-guides-10-principles-for-building-resilient-payment-systems-by-shopify-md"
         },
         {
           "category": "problem",
@@ -2366,7 +2321,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2376,13 +2331,13 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "PostgreSQL Documentation — 65.1. B-Tree Indexes (internals)",
+          "url": "https://www.postgresql.org/docs/current/btree.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 8 notes — Indexes & Filters I (B+Trees)",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/08-indexes1.pdf"
         },
         {
           "category": "more",
@@ -2399,6 +2354,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"B-Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A B-tree is a wide, shallow tree sized to disk pages: each node holds many keys so the tree stays ~3-4 levels deep even for billions of rows"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2406,7 +2366,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2416,13 +2376,13 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "LevelDB Implementation Notes (google/leveldb)",
+          "url": "https://github.com/google/leveldb/blob/main/doc/impl.md"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 5 notes — Database Storage II (log-structured storage, LSM)",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/05-storage2.pdf"
         },
         {
           "category": "problem",
@@ -2434,6 +2394,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"LSM Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An LSM tree turns random writes into sequential ones: buffer writes in an in-memory memtable, flush to immutable sorted files (SSTables), and merge them in the background"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2441,23 +2406,23 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "paper",
-          "title": "ARIES (Mohan et al.)",
+          "title": "ARIES: A Transaction Recovery Method (Mohan et al.)",
           "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-89-12.pdf"
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "SQLite — Write-Ahead Logging",
+          "url": "https://www.sqlite.org/wal.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 21 notes — Database Logging",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/21-logging.pdf"
         },
         {
           "category": "more",
@@ -2481,7 +2446,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2491,12 +2456,12 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2516,7 +2481,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2526,13 +2491,18 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Storage Systems Overview (block, file, object)",
+          "url": "/library/system-design-101?section=data-guides-storage-systems-overview-md"
         },
         {
           "category": "problem",
@@ -2551,7 +2521,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2561,13 +2531,13 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "Martin Kleppmann — blog",
+          "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 6 notes — Storage Models & Compression",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/06-storage3.pdf"
         },
         {
           "category": "problem",
@@ -2579,6 +2549,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Columnar Storage\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A column store groups data by column instead of by row"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2596,13 +2571,18 @@
         },
         {
           "category": "blog",
-          "title": "Elastic — Practical BM25",
-          "url": "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+          "title": "PostgreSQL Documentation — 11.2. Index Types",
+          "url": "https://www.postgresql.org/docs/current/indexes-types.html"
         },
         {
           "category": "book",
           "title": "Introduction to Information Retrieval (Manning et al.)",
           "url": "https://nlp.stanford.edu/IR-book/"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Indexes",
+          "url": "/library/system-design?section=readme-md-indexes"
         },
         {
           "category": "problem",
@@ -2621,7 +2601,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2631,17 +2611,22 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "PostgreSQL Documentation — 66.6. Database Page Layout",
+          "url": "https://www.postgresql.org/docs/current/storage-page-layout.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 3 notes — Database Storage I",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/03-storage1.pdf"
+        },
+        {
+          "category": "more",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
-          "title": "LevelDB — implementation notes",
+          "title": "LevelDB Implementation Notes (google/leveldb)",
           "url": "https://github.com/google/leveldb/blob/main/doc/impl.md"
         },
         {
@@ -2659,6 +2644,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Storage Engines\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A storage engine is the layer that actually puts bytes on disk and finds them again"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2666,7 +2656,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2676,12 +2666,12 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2716,7 +2706,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2726,12 +2716,12 @@
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -2756,7 +2746,7 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
@@ -2766,13 +2756,18 @@
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — CAP & consistency",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Kleppmann — Please stop calling databases CP or AP",
+          "url": "https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — CAP Theorem: One of the Most Misunderstood Terms",
+          "url": "/library/system-design-101?section=data-guides-cap-theorem-one-of-the-most-misunderstood-terms-md"
         },
         {
           "category": "problem",
@@ -2790,24 +2785,29 @@
     "object-modeling": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Domain-Driven Design at 20 (Fowler)",
           "url": "https://dl.acm.org/doi/10.1145/3373471"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — Anemic Domain Model",
+          "url": "https://martinfowler.com/bliki/AnemicDomainModel.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332"
+        },
+        {
+          "category": "more",
+          "title": "Grokking OOP — Object Oriented Basics",
+          "url": "/library/grokking-oop?section=docs-oop-fundamentals-object-oriented-basics-md"
+        },
+        {
+          "category": "more",
+          "title": "Grokking OOP — Class Diagram",
+          "url": "/library/grokking-oop?section=docs-oop-fundamentals-class-diagram-md"
         },
         {
           "category": "problem",
@@ -2825,27 +2825,32 @@
     "state-management": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
-          "title": "Statecharts (Harel)",
+          "title": "Statecharts: a visual formalism (Harel)",
           "url": "https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Statecharts — What is a statechart?",
+          "url": "https://statecharts.dev/what-is-a-statechart.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Game Programming Patterns (Nystrom) — chapter: State",
+          "url": "https://gameprogrammingpatterns.com/state.html"
         },
         {
           "category": "more",
+          "title": "Low Level Design — Traffic Signal System (State design pattern)",
+          "url": "/library/low-level-design?section=solutions-java-src-trafficsignalcontrolsystem-readme-md"
+        },
+        {
+          "category": "more",
+          "title": "Low Level Design — Designing a Vending Machine (state interface, idle/ready/dispense)",
+          "url": "/library/low-level-design?section=problems-vending-machine-md"
+        },
+        {
+          "category": "video",
           "title": "Welcome to the world of Statecharts",
           "url": "https://statecharts.dev/"
         },
@@ -2870,24 +2875,19 @@
     "strategy-pattern": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Program Development by Stepwise Refinement (Wirth, CACM 1971)",
           "url": "https://doi.org/10.1145/362575.362577"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — design patterns catalog",
+          "url": "https://martinfowler.com/eaaCatalog/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332"
         },
         {
           "category": "problem",
@@ -2905,24 +2905,24 @@
     "observer-pattern": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "A Cookbook for Using MVC in Smalltalk-80 (Krasner & Pope, 1988)",
           "url": "https://www.ics.uci.edu/~redmiles/ics227-SQ04/papers/KrasnerPope88.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Patterns of Distributed Systems (Joshi, on martinfowler.com) — State Watch",
+          "url": "https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Game Programming Patterns (Nystrom) — chapter: Observer",
+          "url": "https://gameprogrammingpatterns.com/observer.html"
+        },
+        {
+          "category": "more",
+          "title": "Low Level Design — Designing a Pub-Sub System",
+          "url": "/library/low-level-design?section=problems-pub-sub-system-md"
         },
         {
           "category": "problem",
@@ -2940,24 +2940,19 @@
     "factory-creational": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Design Patterns: Abstract Factory (Gamma et al.)",
           "url": "https://dl.acm.org/doi/10.1145/879141.879181"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — Inversion of Control Containers and the Dependency Injection pattern",
+          "url": "https://martinfowler.com/articles/injection.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Game Programming Patterns (Nystrom) — chapter: Singleton",
+          "url": "https://gameprogrammingpatterns.com/singleton.html"
         },
         {
           "category": "problem",
@@ -2975,24 +2970,24 @@
     "decorator-structural": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "The Open-Closed Principle (Robert C. Martin, C++ Report 1996)",
           "url": "https://www.cs.utexas.edu/users/downing/papers/OCP-1996.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — design patterns catalog",
+          "url": "https://martinfowler.com/eaaCatalog/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332"
+        },
+        {
+          "category": "more",
+          "title": "Low Level Design — Adapter Design Pattern in Python",
+          "url": "/library/low-level-design?section=design-patterns-python-adapter-readme-md"
         },
         {
           "category": "problem",
@@ -3010,24 +3005,19 @@
     "concurrency-design": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "The Java Memory Model (Manson et al.)",
           "url": "https://dl.acm.org/doi/10.1145/1462169.1462182"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — design patterns catalog",
+          "url": "https://martinfowler.com/eaaCatalog/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332"
         },
         {
           "category": "problem",
@@ -3045,24 +3035,19 @@
     "command-chain": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "A Selective Undo Mechanism for GUIs Based on Command Objects (Berlage, TOCHI 1994)",
           "url": "https://doi.org/10.1145/196699.196721"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — Command Oriented Interface",
+          "url": "https://martinfowler.com/bliki/CommandOrientedInterface.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Game Programming Patterns (Nystrom) — chapter: Command",
+          "url": "https://gameprogrammingpatterns.com/command.html"
         },
         {
           "category": "problem",
@@ -3080,27 +3065,27 @@
     "booking-inventory": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "F1: A Distributed SQL Database (Shute et al.)",
           "url": "https://research.google/pubs/pub38189/"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Martin Fowler — design patterns catalog",
+          "url": "https://martinfowler.com/eaaCatalog/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332"
         },
         {
           "category": "more",
+          "title": "Grokking OOP — Design a Movie Ticket Booking System",
+          "url": "/library/grokking-oop?section=docs-case-studies-design-a-movie-ticket-booking-system-md"
+        },
+        {
+          "category": "video",
           "title": "Shopify — Scaling inventory reservations",
           "url": "https://shopify.engineering/scaling-inventory-reservations"
         },
@@ -3130,28 +3115,28 @@
     "game-design": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Statecharts: a visual formalism (Harel)",
           "url": "https://www.wisdom.weizmann.ac.il/~harel/papers/Statecharts.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Gaffer On Games (Glenn Fiedler) — Fix Your Timestep!",
+          "url": "https://gafferongames.com/post/fix_your_timestep/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Game Programming Patterns (Nystrom) — chapter: Game Loop",
+          "url": "https://gameprogrammingpatterns.com/game-loop.html"
         },
         {
           "category": "more",
-          "title": "Game Programming Patterns — State (Nystrom)",
+          "title": "Grokking OOP — Design Chess",
+          "url": "/library/grokking-oop?section=docs-case-studies-design-chess-md"
+        },
+        {
+          "category": "video",
+          "title": "Game Programming Patterns (Nystrom) — chapter: State",
           "url": "https://gameprogrammingpatterns.com/state.html"
         },
         {
@@ -3170,28 +3155,28 @@
     "load-balancing": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Maglev (Eisenbud et al.)",
           "url": "https://research.google/pubs/pub44824/"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Cloudflare — Unimog, Cloudflare's edge load balancer",
+          "url": "https://blog.cloudflare.com/unimog-cloudflares-edge-load-balancer/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "Site Reliability Engineering (Google) — chapter 19: Load Balancing at the Frontend",
+          "url": "https://sre.google/sre-book/load-balancing-frontend/"
         },
         {
           "category": "more",
-          "title": "Google SRE Book — Load Balancing at the Frontend",
+          "title": "System Design Primer — Load balancer",
+          "url": "/library/system-design-primer?section=readme-md-load-balancer"
+        },
+        {
+          "category": "video",
+          "title": "Site Reliability Engineering (Google) — chapter 19: Load Balancing at the Frontend",
           "url": "https://sre.google/sre-book/load-balancing-frontend/"
         },
         {
@@ -3220,27 +3205,27 @@
     "consistent-hashing": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Consistent Hashing (Karger et al.)",
           "url": "https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
+          "title": "System Design 101 — Consistent Hashing Explained",
+          "url": "/library/system-design-101?section=data-guides-consistent-hashing-md"
+        },
+        {
+          "category": "video",
           "title": "Consistent Hashing and Random Trees (Karger et al., STOC 1997)",
           "url": "https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf"
         },
@@ -3276,12 +3261,12 @@
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -3311,12 +3296,12 @@
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -3361,12 +3346,12 @@
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -3395,24 +3380,24 @@
     "social-media": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "TAO: Facebook's Distributed Data Store (Bronson et al.)",
           "url": "https://www.usenix.org/system/files/conference/atc13/atc13-bronson.pdf"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — fan-out architectures",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Engineering at Meta — TAO: The power of the graph",
+          "url": "https://engineering.fb.com/2013/06/25/core-infra/tao-the-power-of-the-graph/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "more",
+          "title": "System Design Primer — Design the Twitter timeline and search (fan-out)",
+          "url": "/library/system-design-primer?section=solutions-system-design-twitter-readme-md"
         },
         {
           "category": "problem",
@@ -3430,27 +3415,22 @@
     "streaming-media": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "DASH — MPEG adaptive streaming",
           "url": "https://arxiv.org/abs/1207.2052"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "HTTP Live Streaming (Apple Developer)",
           "url": "https://developer.apple.com/streaming/"
         },
@@ -3480,27 +3460,22 @@
     "location-transport": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Contraction Hierarchies (Geisberger et al.)",
           "url": "https://arxiv.org/abs/1111.2059"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "H3 documentation — Indexing (hexagonal hierarchical geospatial index)",
+          "url": "https://h3geo.org/docs/highlights/indexing"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
-          "category": "more",
+          "category": "video",
           "title": "H3 — hexagonal hierarchical spatial index (Uber)",
           "url": "https://h3geo.org/docs/"
         },
@@ -3530,27 +3505,27 @@
     "collaboration-productivity": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Operational Transformation (Ellis & Gibbs)",
           "url": "https://neil.fraser.name/writing/ot/"
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
+          "title": "Martin Kleppmann — blog",
           "url": "https://martin.kleppmann.com/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
+          "title": "System Design 101 — How to Design Google Docs",
+          "url": "/library/system-design-101?section=data-guides-how-to-design-google-docs-md"
+        },
+        {
+          "category": "video",
           "title": "Google Wave Operational Transformation whitepaper",
           "url": "https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html"
         },
@@ -3580,27 +3555,27 @@
     "search-platform-design": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
-        {
           "category": "paper",
           "title": "Bigtable: A Distributed Storage System (Chang et al.)",
           "url": "https://research.google/pubs/pub27898/"
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — ML engineering essays",
-          "url": "https://eugeneyan.com/writing/"
+          "title": "Eugene Yan — System Design for Recommendations and Search",
+          "url": "https://eugeneyan.com/writing/system-design-for-discovery/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
+          "title": "System Design 101 — How Do Search Engines Work? (crawling, indexing, ranking)",
+          "url": "/library/system-design-101?section=data-guides-how-do-search-engines-work-md"
+        },
+        {
+          "category": "video",
           "title": "Elasticsearch — Near real-time search",
           "url": "https://www.elastic.co/docs/manage-data/data-store/near-real-time-search"
         },
@@ -3624,16 +3599,16 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Search Platform Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A search platform splits into an ingestion/indexing path (durable, batchy, write-optimized) and a query path (low-latency, cacheable, read-optimized)"
+        },
+        {
+          "category": "blog",
+          "title": "Eugene Yan — ML engineering essays",
+          "url": "https://eugeneyan.com/writing/"
         }
       ]
     },
     "rag-system-design": {
       "items": [
-        {
-          "category": "video",
-          "title": "MIT 6.824 — Distributed Systems",
-          "url": "https://pdos.csail.mit.edu/6.824/"
-        },
         {
           "category": "paper",
           "title": "REALM: Retrieval-Augmented Language Model (Guu et al.)",
@@ -3641,17 +3616,17 @@
         },
         {
           "category": "blog",
-          "title": "Martin Kleppmann — notes",
-          "url": "https://martin.kleppmann.com/"
+          "title": "Eugene Yan — Patterns for Building LLM-based Systems & Products",
+          "url": "https://eugeneyan.com/writing/llm-patterns/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
-          "category": "more",
-          "title": "Building Effective Agents (Anthropic)",
+          "category": "video",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
@@ -3663,6 +3638,11 @@
           "category": "more",
           "title": "Anthropic — Contextual Retrieval",
           "url": "https://www.anthropic.com/news/contextual-retrieval"
+        },
+        {
+          "category": "more",
+          "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+          "url": "https://arxiv.org/abs/2309.15217"
         },
         {
           "category": "problem",
@@ -3681,8 +3661,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 4: Hashing",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-4-hashing/"
         },
         {
           "category": "paper",
@@ -3691,13 +3671,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Introduction to Sets & Maps",
+          "url": "https://usaco.guide/bronze/intro-sets"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Hashing (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/05-hashing.pdf"
         },
         {
           "category": "problem",
@@ -3726,8 +3706,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Two Pointers",
+          "url": "https://usaco.guide/silver/two-pointers"
         },
         {
           "category": "book",
@@ -3736,12 +3716,7 @@
         },
         {
           "category": "more",
-          "title": "Two Pointers — USACO Guide (Silver)",
-          "url": "https://usaco.guide/silver/two-pointers"
-        },
-        {
-          "category": "more",
-          "title": "Tortoise and Hare — cycle detection (cp-algorithms)",
+          "title": "cp-algorithms — Tortoise and Hare (linked list cycle detection)",
           "url": "https://cp-algorithms.com/others/tortoise_and_hare.html"
         },
         {
@@ -3771,18 +3746,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Sliding Window",
+          "url": "https://usaco.guide/gold/sliding-window"
         },
         {
           "category": "book",
           "title": "Introduction to Algorithms (CLRS)",
           "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
-          "category": "more",
-          "title": "Sliding Window — USACO Guide (Gold)",
-          "url": "https://usaco.guide/gold/sliding-window"
         },
         {
           "category": "more",
@@ -3816,8 +3786,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Stacks (incl. monotonic stack)",
+          "url": "https://usaco.guide/gold/stacks"
         },
         {
           "category": "book",
@@ -3851,8 +3821,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Binary Search",
+          "url": "https://cp-algorithms.com/num_methods/binary_search.html"
         },
         {
           "category": "book",
@@ -3886,8 +3856,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Tortoise and Hare (linked list cycle detection)",
+          "url": "https://cp-algorithms.com/others/tortoise_and_hare.html"
         },
         {
           "category": "book",
@@ -3911,8 +3881,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 6: Binary Trees, Part 1",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-6-binary-trees-part-1/"
         },
         {
           "category": "paper",
@@ -3921,8 +3891,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Introduction to Tree Algorithms",
+          "url": "https://usaco.guide/silver/intro-tree"
         },
         {
           "category": "book",
@@ -3981,8 +3951,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 8: Binary Heaps",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-8-binary-heaps/"
         },
         {
           "category": "paper",
@@ -3991,8 +3961,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Priority Queues",
+          "url": "https://usaco.guide/silver/priority-queues"
         },
         {
           "category": "book",
@@ -4026,13 +3996,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Complete Search with Recursion",
+          "url": "https://usaco.guide/bronze/complete-rec"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Backtracking (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/02-backtracking.pdf"
         },
         {
           "category": "problem",
@@ -4051,8 +4021,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 10: Depth-First Search",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/"
         },
         {
           "category": "paper",
@@ -4061,13 +4031,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Graph Traversal",
+          "url": "https://usaco.guide/silver/graph-traversal"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Basic Graph Algorithms (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/05-graphs.pdf"
         },
         {
           "category": "problem",
@@ -4086,23 +4056,23 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 13: Dijkstra",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/"
         },
         {
           "category": "paper",
-          "title": "Dijkstra (1959)",
+          "title": "A note on two problems in connexion with graphs (Dijkstra)",
           "url": "https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf"
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Dijkstra: finding shortest paths from a given vertex",
+          "url": "https://cp-algorithms.com/graph/dijkstra.html"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Shortest Paths (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/08-sssp.pdf"
         },
         {
           "category": "problem",
@@ -4131,13 +4101,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Disjoint Set Union",
+          "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Disjoint Sets (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/11-unionfind.pdf"
         },
         {
           "category": "problem",
@@ -4156,8 +4126,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 15: Dynamic Programming, Part 1 (SRTBOT, Fib, DAGs, Bowling)",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/"
         },
         {
           "category": "paper",
@@ -4166,23 +4136,13 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Introduction to Dynamic Programming",
+          "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
-        },
-        {
-          "category": "more",
-          "title": "Algorithms (Erickson) — Ch. 3: Dynamic Programming",
+          "title": "Jeff Erickson, Algorithms — chapter: Dynamic Programming (PDF)",
           "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/03-dynprog.pdf"
-        },
-        {
-          "category": "more",
-          "title": "MIT 6.006 L15 — Dynamic Programming Part 1 (SRTBOT, Fib, DAGs, Bowling)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srtbot-fib-dags-bowling/"
         },
         {
           "category": "more",
@@ -4206,8 +4166,8 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.006 — Lecture 16: Dynamic Programming, Part 2 (LCS, LIS, Coins)",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/"
         },
         {
           "category": "paper",
@@ -4216,8 +4176,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Knapsack Problem",
+          "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html"
         },
         {
           "category": "book",
@@ -4228,11 +4188,6 @@
           "category": "more",
           "title": "MIT 6.006 L21 — DP III: Parenthesization, Edit Distance, Knapsack",
           "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-21-dp-iii-parenthesization-edit-distance-knapsack/"
-        },
-        {
-          "category": "more",
-          "title": "Knapsack problem (cp-algorithms)",
-          "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html"
         },
         {
           "category": "problem",
@@ -4251,23 +4206,23 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.046J — Lecture 12: Greedy Algorithms: Minimum Spanning Tree",
+          "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-12-greedy-algorithms-minimum-spanning-tree/"
         },
         {
           "category": "paper",
-          "title": "Greedy algorithms (Erickson)",
+          "title": "Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)",
           "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf"
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Greedy Algorithms with Sorting",
+          "url": "https://usaco.guide/silver/greedy-sorting"
         },
         {
           "category": "book",
-          "title": "Introduction to Algorithms (CLRS)",
-          "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
+          "title": "Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf"
         },
         {
           "category": "problem",
@@ -4286,18 +4241,18 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.046J — Lecture 1: Overview, Interval Scheduling",
+          "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-1-course-overview-interval-scheduling/"
         },
         {
           "category": "paper",
-          "title": "Geometric sweep algorithms (Erickson)",
+          "title": "Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)",
           "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf"
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "USACO Guide — Sweep Line",
+          "url": "https://usaco.guide/plat/sweep-line"
         },
         {
           "category": "book",
@@ -4321,18 +4276,18 @@
       "items": [
         {
           "category": "video",
-          "title": "MIT 6.006 — Introduction to Algorithms (OCW)",
-          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+          "title": "MIT 6.046J — Lecture 2: Divide & Conquer: Convex Hull, Median Finding",
+          "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-2-divide-conquer-convex-hull-median-finding/"
         },
         {
           "category": "paper",
-          "title": "Geometric divide-and-conquer (Erickson)",
+          "title": "Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)",
           "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf"
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — geometric algorithms",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Basic Geometry",
+          "url": "https://cp-algorithms.com/geometry/basic-geometry.html"
         },
         {
           "category": "book",
@@ -4366,8 +4321,8 @@
         },
         {
           "category": "blog",
-          "title": "Jeff Erickson — Algorithms manuscript",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          "title": "cp-algorithms — Bit manipulation",
+          "url": "https://cp-algorithms.com/algebra/bit-manipulation.html"
         },
         {
           "category": "book",
@@ -4401,8 +4356,8 @@
         },
         {
           "category": "blog",
-          "title": "re:Work — Develop and support managers",
-          "url": "https://rework.withgoogle.com/guides/managers-develop-and-support-managers/"
+          "title": "Daniel Goleman (HBR) — What Makes a Leader?",
+          "url": "https://hbr.org/2004/01/what-makes-a-leader"
         },
         {
           "category": "book",
@@ -4419,6 +4374,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Leadership\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Leadership without authority is getting people aligned on an outcome when you cannot order them to do it"
+        },
+        {
+          "category": "blog",
+          "title": "re:Work — Develop and support managers",
+          "url": "https://rework.withgoogle.com/guides/managers-develop-and-support-managers/"
         }
       ]
     },
@@ -4436,8 +4396,8 @@
         },
         {
           "category": "blog",
-          "title": "re:Work — Understanding team effectiveness",
-          "url": "https://rework.withgoogle.com/guides/understanding-team-effectiveness/"
+          "title": "HBR — How to Handle a Disagreement on Your Team",
+          "url": "https://hbr.org/2017/07/how-to-handle-a-disagreement-on-your-team"
         },
         {
           "category": "book",
@@ -4454,6 +4414,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Conflict Resolution\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Conflict means information surfaced — two people disagree about something that was probably already there"
+        },
+        {
+          "category": "blog",
+          "title": "re:Work — Understanding team effectiveness",
+          "url": "https://rework.withgoogle.com/guides/understanding-team-effectiveness/"
         }
       ]
     },
@@ -4471,8 +4436,8 @@
         },
         {
           "category": "blog",
-          "title": "re:Work — Set goals with OKRs",
-          "url": "https://rework.withgoogle.com/guides/set-goals-with-okrs/"
+          "title": "Kahneman, Lovallo & Sibony (HBR) — Before You Make That Big Decision",
+          "url": "https://hbr.org/2011/06/the-big-idea-before-you-make-that-big-decision"
         },
         {
           "category": "book",
@@ -4489,6 +4454,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Decision Making\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Decisions are bets you make with incomplete information"
+        },
+        {
+          "category": "blog",
+          "title": "re:Work — Set goals with OKRs",
+          "url": "https://rework.withgoogle.com/guides/set-goals-with-okrs/"
         }
       ]
     },
@@ -4506,8 +4476,8 @@
         },
         {
           "category": "blog",
-          "title": "re:Work — Understanding team effectiveness",
-          "url": "https://rework.withgoogle.com/guides/understanding-team-effectiveness/"
+          "title": "Alex Pentland (HBR) — The New Science of Building Great Teams",
+          "url": "https://hbr.org/2012/04/the-new-science-of-building-great-teams"
         },
         {
           "category": "book",
@@ -4524,6 +4494,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Collaboration\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Collaboration means making the other person's job easier than they were expecting"
+        },
+        {
+          "category": "blog",
+          "title": "re:Work — Understanding team effectiveness",
+          "url": "https://rework.withgoogle.com/guides/understanding-team-effectiveness/"
         }
       ]
     },
@@ -4541,13 +4516,13 @@
         },
         {
           "category": "blog",
-          "title": "Google SRE — Postmortem culture",
-          "url": "https://sre.google/sre-book/postmortem-culture/"
+          "title": "Amy Edmondson (HBR) — Strategies for Learning from Failure",
+          "url": "https://hbr.org/2011/04/strategies-for-learning-from-failure"
         },
         {
           "category": "book",
-          "title": "Work Rules! (Laszlo Bock)",
-          "url": "https://rework.withgoogle.com/"
+          "title": "Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure",
+          "url": "https://sre.google/sre-book/postmortem-culture/"
         },
         {
           "category": "more",
@@ -4616,8 +4591,8 @@
         },
         {
           "category": "blog",
-          "title": "re:Work — Set goals with OKRs",
-          "url": "https://rework.withgoogle.com/guides/set-goals-with-okrs/"
+          "title": "Oncken & Wass (HBR) — Management Time: Who's Got the Monkey?",
+          "url": "https://hbr.org/1999/11/management-time-whos-got-the-monkey"
         },
         {
           "category": "book",
@@ -4634,6 +4609,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Prioritization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Prioritization is saying no to good things, not bad ones"
+        },
+        {
+          "category": "blog",
+          "title": "re:Work — Set goals with OKRs",
+          "url": "https://rework.withgoogle.com/guides/set-goals-with-okrs/"
         }
       ]
     },
@@ -4651,8 +4631,8 @@
         },
         {
           "category": "blog",
-          "title": "SVPG — product discovery essays",
-          "url": "https://www.svpg.com/articles/"
+          "title": "Marty Cagan (SVPG) — Innovating in Large Companies",
+          "url": "https://www.svpg.com/innovating-in-large-companies/"
         },
         {
           "category": "book",
@@ -4686,8 +4666,8 @@
         },
         {
           "category": "blog",
-          "title": "SVPG — customer discovery",
-          "url": "https://www.svpg.com/articles/"
+          "title": "Teresa Torres (Product Talk) — Customer Interviews: How to Recruit, What to Ask, and How to Synthesize",
+          "url": "https://www.producttalk.org/customer-interviews/"
         },
         {
           "category": "book",
@@ -4765,19 +4745,14 @@
     "positioning": {
       "items": [
         {
-          "category": "video",
-          "title": "Marty Cagan @ Stanford — product discovery",
-          "url": "https://www.youtube.com/watch?v=9hMUCQuvRro"
-        },
-        {
           "category": "paper",
           "title": "Product Differentiation and Market Segmentation (Smith, 1956)",
           "url": "https://doi.org/10.1177/002224295602100102"
         },
         {
           "category": "blog",
-          "title": "SVPG — positioning & product strategy",
-          "url": "https://www.svpg.com/articles/"
+          "title": "Kim & D'Aveni (HBR) — Mapping Your Competitive Position",
+          "url": "https://hbr.org/2007/11/mapping-your-competitive-position"
         },
         {
           "category": "book",
@@ -4800,18 +4775,13 @@
     "landing-pages": {
       "items": [
         {
-          "category": "video",
-          "title": "Marty Cagan @ Stanford — product discovery",
-          "url": "https://www.youtube.com/watch?v=9hMUCQuvRro"
-        },
-        {
           "category": "paper",
           "title": "Peeking at A/B Tests (Johari et al.)",
           "url": "https://arxiv.org/abs/1512.04922"
         },
         {
           "category": "blog",
-          "title": "SVPG — product discovery",
+          "title": "SVPG — product essays",
           "url": "https://www.svpg.com/articles/"
         },
         {
@@ -4835,18 +4805,13 @@
     "seo": {
       "items": [
         {
-          "category": "video",
-          "title": "Stanford — product growth (Marty Cagan)",
-          "url": "https://www.youtube.com/watch?v=9hMUCQuvRro"
-        },
-        {
           "category": "paper",
           "title": "The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)",
           "url": "https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf"
         },
         {
           "category": "blog",
-          "title": "SVPG — growth & discovery",
+          "title": "SVPG — product essays",
           "url": "https://www.svpg.com/articles/"
         },
         {
@@ -4870,19 +4835,14 @@
     "product-analytics": {
       "items": [
         {
-          "category": "video",
-          "title": "Kohavi — Trustworthy experiments (Stanford)",
-          "url": "https://www.youtube.com/watch?v=9hMUCQuvRro"
-        },
-        {
           "category": "paper",
           "title": "Trustworthy Online Controlled Experiments (Kohavi et al.)",
           "url": "https://arxiv.org/abs/1209.2402"
         },
         {
           "category": "blog",
-          "title": "SVPG — product analytics essays",
-          "url": "https://www.svpg.com/articles/"
+          "title": "Google Research — Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications (HEART framework paper)",
+          "url": "https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/"
         },
         {
           "category": "book",
@@ -4906,8 +4866,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "3Blue1Brown — Vectors, what even are they?",
+          "url": "https://www.3blue1brown.com/lessons/vectors"
         },
         {
           "category": "blog",
@@ -4923,11 +4883,6 @@
           "category": "paper",
           "title": "Essence of Linear Algebra (3Blue1Brown)",
           "url": "https://www.3blue1brown.com/topics/linear-algebra"
-        },
-        {
-          "category": "more",
-          "title": "3Blue1Brown — Vectors, what even are they?",
-          "url": "https://www.3blue1brown.com/lessons/vectors"
         },
         {
           "category": "more",
@@ -4956,8 +4911,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "3Blue1Brown — Linear transformations and matrices",
+          "url": "https://www.3blue1brown.com/lessons/linear-transformations"
         },
         {
           "category": "paper",
@@ -4996,8 +4951,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "3Blue1Brown — Eigenvectors and eigenvalues",
+          "url": "https://www.3blue1brown.com/lessons/eigenvalues"
         },
         {
           "category": "paper",
@@ -5006,8 +4961,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
+          "title": "Setosa — Eigenvectors and Eigenvalues explained visually",
+          "url": "https://setosa.io/ev/eigenvectors-and-eigenvalues/"
         },
         {
           "category": "book",
@@ -5031,22 +4986,22 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 lectures",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "3Blue1Brown — Bayes' theorem",
+          "url": "https://www.3blue1brown.com/lessons/bayes-theorem"
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
+          "title": "Setosa — Conditional probability explained visually",
+          "url": "https://setosa.io/ev/conditional-probability/"
         },
         {
           "category": "book",
-          "title": "Introduction to Probability (Blitzstein & Hwang)",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 4: Conditional Probability (PDF)",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter4.pdf"
         },
         {
           "category": "paper",
-          "title": "MIT 6.041SC — Introduction to Probability",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
         },
         {
@@ -5066,22 +5021,22 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 lectures",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "3Blue1Brown — Why \"probability of 0\" does not mean \"impossible\"",
+          "url": "https://www.3blue1brown.com/lessons/pdfs"
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
+          "title": "Harvard Stat 110 — course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
           "category": "book",
-          "title": "Introduction to Probability (Blitzstein & Hwang)",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 6: Expected Value and Variance (PDF)",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter6.pdf"
         },
         {
           "category": "paper",
-          "title": "MIT 6.041 Probabilistic Systems Analysis",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
           "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
         },
         {
@@ -5101,23 +5056,23 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Exploratory data analysis",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "Seeing Theory — Basic Probability",
-          "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
+          "title": "Introduction to Modern Statistics — Ch. 5: Exploring numerical data",
+          "url": "https://openintro-ims.netlify.app/explore-numerical.html"
         },
         {
           "category": "more",
@@ -5134,6 +5089,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Descriptive Statistics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Descriptive stats compress a dataset into a few numbers you can reason about"
+        },
+        {
+          "category": "book",
+          "title": "Seeing Theory — Basic Probability",
+          "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
         }
       ]
     },
@@ -5141,18 +5101,18 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
+          "title": "Introduction to Modern Statistics — Ch. 12: Confidence intervals with bootstrapping",
+          "url": "https://openintro-ims.netlify.app/foundations-bootstrapping.html"
         },
         {
           "category": "paper",
@@ -5176,23 +5136,23 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — p-values and hypothesis tests",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "MIT 18.650 — Lecture 7: Parametric Hypothesis Testing",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-7-video/"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Hypothesis testing",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "Seeing Theory — Frequentist Inference",
-          "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html"
+          "title": "Introduction to Modern Statistics — Ch. 11: Hypothesis testing with randomization",
+          "url": "https://openintro-ims.netlify.app/foundations-randomization.html"
         },
         {
           "category": "problem",
@@ -5204,6 +5164,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Hypothesis Testing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Hypothesis testing asks: 'how surprising is this data if nothing real changed"
+        },
+        {
+          "category": "book",
+          "title": "Seeing Theory — Frequentist Inference",
+          "url": "https://seeing-theory.brown.edu/frequentist-inference/index.html"
         }
       ]
     },
@@ -5211,22 +5176,27 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — linear regression",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "MIT 18.650 — Lecture 13: Regression",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-13-video/"
         },
         {
           "category": "paper",
-          "title": "Least-squares regression (MIT 18.650)",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
-          "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
+          "category": "blog",
+          "title": "Setosa — Ordinary Least Squares Regression explained visually",
+          "url": "https://setosa.io/ev/ordinary-least-squares-regression/"
         },
         {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "category": "book",
+          "title": "Introduction to Modern Statistics — Ch. 7: Linear regression with a single predictor",
+          "url": "https://openintro-ims.netlify.app/model-slr.html"
+        },
+        {
+          "category": "more",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5240,11 +5210,6 @@
           "url": "https://cs229.stanford.edu/main_notes.pdf"
         },
         {
-          "category": "more",
-          "title": "MIT 18.06 L16 — Projection matrices and least squares (Strang)",
-          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-16-projection-matrices-and-least-squares/"
-        },
-        {
           "category": "problem",
           "title": "Fit a simple linear regression",
           "url": "/drills/fit-simple-regression"
@@ -5254,6 +5219,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Linear Regression\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Linear regression finds the best linear predictor — geometrically, it projects the target vector onto the column space of your features"
+        },
+        {
+          "category": "more",
+          "title": "MIT 18.06 L16 — Projection matrices and least squares (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-16-projection-matrices-and-least-squares/"
         }
       ]
     },
@@ -5261,8 +5231,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "MIT 18.02SC — Part B: Chain Rule, Gradient and Directional Derivatives",
+          "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/2.-partial-derivatives/part-b-chain-rule-gradient-and-directional-derivatives/"
         },
         {
           "category": "paper",
@@ -5281,7 +5251,7 @@
         },
         {
           "category": "more",
-          "title": "CS231n — Optimization (gradients & backprop)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
         {
@@ -5316,8 +5286,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
+          "title": "Sebastian Ruder — An overview of gradient descent optimization algorithms",
+          "url": "https://www.ruder.io/optimizing-gradient-descent/"
         },
         {
           "category": "book",
@@ -5331,7 +5301,7 @@
         },
         {
           "category": "more",
-          "title": "CS231n — Optimization (SGD, momentum, adaptive methods)",
+          "title": "CS231n — Backpropagation & computational graphs",
           "url": "https://cs231n.github.io/optimization-2/"
         },
         {
@@ -5351,8 +5321,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 lectures",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "3Blue1Brown — Reinventing Entropy",
+          "url": "https://www.3blue1brown.com/lessons/entropy"
         },
         {
           "category": "paper",
@@ -5361,8 +5331,8 @@
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
+          "title": "Chris Olah — Visual Information Theory",
+          "url": "https://colah.github.io/posts/2015-09-Visual-Information/"
         },
         {
           "category": "book",
@@ -5386,23 +5356,23 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 lectures",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "3Blue1Brown — Binomial distributions",
+          "url": "https://www.3blue1brown.com/lessons/binomial-distributions"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Probability distributions",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
+          "title": "Harvard Stat 110 — course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
           "category": "book",
-          "title": "Seeing Theory — Probability Distributions",
-          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 5: Important Distributions and Densities (PDF)",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter5.pdf"
         },
         {
           "category": "more",
@@ -5419,6 +5389,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Classical Distributions\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Distributions are reusable uncertainty templates"
+        },
+        {
+          "category": "book",
+          "title": "Seeing Theory — Probability Distributions",
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
         }
       ]
     },
@@ -5426,23 +5401,23 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "3Blue1Brown — But what is the Central Limit Theorem?",
+          "url": "https://www.3blue1brown.com/lessons/clt"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Central limit theorem",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "Seeing Theory — Central Limit Theorem",
-          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 9: Central Limit Theorem (PDF)",
+          "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter9.pdf"
         },
         {
           "category": "problem",
@@ -5454,6 +5429,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Sampling & the Central Limit Theorem\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Your data is one draw from a bigger game"
+        },
+        {
+          "category": "book",
+          "title": "Seeing Theory — Probability Distributions",
+          "url": "https://seeing-theory.brown.edu/probability-distributions/index.html"
         }
       ]
     },
@@ -5461,22 +5441,22 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
-          "title": "Trustworthy Online Controlled Experiments (Kohavi)",
+          "title": "Trustworthy Online Controlled Experiments (Kohavi et al.)",
           "url": "https://arxiv.org/abs/1209.2402"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
-          "url": "https://www.statlearning.com/"
+          "title": "Google Research — Overlapping Experiment Infrastructure: More, Better, Faster Experimentation",
+          "url": "https://research.google/pubs/overlapping-experiment-infrastructure-more-better-faster-experimentation/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5501,8 +5481,8 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "MIT 18.650 — Lecture 17: Bayesian Statistics",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-17-video/"
         },
         {
           "category": "paper",
@@ -5511,13 +5491,13 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "Statistical Rethinking (McElreath)",
-          "url": "https://xcelab.net/rm/statistical-rethinking/"
+          "title": "Seeing Theory (Brown University) — Ch. 4: Bayesian Inference",
+          "url": "https://seeing-theory.brown.edu/bayesian-inference/index.html"
         },
         {
           "category": "problem",
@@ -5529,6 +5509,11 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Bayesian Inference\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Frequentist stats ask how surprising the data is under a null"
+        },
+        {
+          "category": "book",
+          "title": "Statistical Rethinking (McElreath)",
+          "url": "https://xcelab.net/rm/statistical-rethinking/"
         }
       ]
     },
@@ -5536,22 +5521,22 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "MIT 18.650 — Lecture 4: Parametric Inference and Maximum Likelihood Estimation",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-4-video/"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Maximum likelihood estimation",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5571,17 +5556,17 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
-          "title": "MIT 18.650 — Covariance and correlation",
+          "title": "MIT 18.650 — Statistics for Applications (course)",
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5606,8 +5591,8 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — Statistics fundamentals",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
@@ -5615,13 +5600,13 @@
           "url": "https://arxiv.org/abs/0803.3498"
         },
         {
-          "category": "book",
-          "title": "An Introduction to Statistical Learning",
-          "url": "https://www.statlearning.com/"
+          "category": "blog",
+          "title": "Cornell CS4780 — Lecture 12: Bias-Variance Tradeoff",
+          "url": "https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote12.html"
         },
         {
-          "category": "blog",
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "category": "book",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5641,8 +5626,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "MIT 18.06 L9 — Independence, basis, and dimension (Strang)",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-9-independence-basis-and-dimension/"
         },
         {
           "category": "paper",
@@ -5681,8 +5666,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Essence of Linear Algebra (3Blue1Brown)",
-          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+          "title": "MIT 18.650 — Lecture 19: Principal Component Analysis",
+          "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/resources/lecture-19-video/"
         },
         {
           "category": "paper",
@@ -5691,8 +5676,8 @@
         },
         {
           "category": "blog",
-          "title": "3Blue1Brown — math visualizations",
-          "url": "https://www.3blue1brown.com/"
+          "title": "Setosa — Principal Component Analysis explained visually",
+          "url": "https://setosa.io/ev/principal-component-analysis/"
         },
         {
           "category": "book",
@@ -5701,7 +5686,7 @@
         },
         {
           "category": "more",
-          "title": "An Introduction to Statistical Learning (free book + labs)",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5721,8 +5706,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 — variance & expectation",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "MIT 18.S096 — Lecture 9: Volatility Modeling",
+          "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-9-volatility-modeling/"
         },
         {
           "category": "paper",
@@ -5731,12 +5716,12 @@
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
+          "title": "Harvard Stat 110 — course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
           "category": "book",
-          "title": "Introduction to Probability (Blitzstein & Hwang)",
+          "title": "Harvard Stat 110 — course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
@@ -5761,8 +5746,8 @@
       "items": [
         {
           "category": "video",
-          "title": "StatQuest — stationarity",
-          "url": "https://www.youtube.com/@statquest"
+          "title": "MIT 18.S096 — Lecture 8: Time Series Analysis I",
+          "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-8-time-series-analysis-i/"
         },
         {
           "category": "paper",
@@ -5771,18 +5756,18 @@
         },
         {
           "category": "blog",
-          "title": "FPP3 — time series features",
-          "url": "https://otexts.com/fpp3/"
+          "title": "Forecasting: Principles and Practice (3rd ed) — §2.8 Autocorrelation",
+          "url": "https://otexts.com/fpp3/acf.html"
         },
         {
           "category": "book",
-          "title": "Forecasting: Principles and Practice (Hyndman)",
-          "url": "https://otexts.com/fpp3/"
+          "title": "Forecasting: Principles and Practice (3rd ed) — §9.1 Stationarity and differencing",
+          "url": "https://otexts.com/fpp3/stationarity.html"
         },
         {
           "category": "more",
-          "title": "FPP3 — 9.1 Stationarity and differencing",
-          "url": "https://otexts.com/fpp3/stationarity.html"
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
+          "url": "https://otexts.com/fpp3/"
         },
         {
           "category": "more",
@@ -5806,38 +5791,38 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 — Markov chains",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
-          "title": "The PageRank Citation Ranking (Brin & Page)",
+          "title": "The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page)",
           "url": "https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf"
         },
         {
           "category": "blog",
-          "title": "Harvard Stat 110 course site",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
+          "title": "Setosa — Markov Chains explained visually",
+          "url": "https://setosa.io/ev/markov-chains/"
         },
         {
           "category": "book",
-          "title": "Introduction to Probability (Blitzstein & Hwang)",
-          "url": "https://projects.iq.harvard.edu/stat110/home"
-        },
-        {
-          "category": "more",
-          "title": "MIT 6.041SC — Random processes",
-          "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
-        },
-        {
-          "category": "more",
-          "title": "Grinstead & Snell, Introduction to Probability — Ch. 11: Markov Chains",
+          "title": "Grinstead & Snell, Introduction to Probability — Ch. 11: Markov Chains (PDF)",
           "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter11.pdf"
+        },
+        {
+          "category": "more",
+          "title": "MIT 6.041SC — Probabilistic Systems Analysis (course)",
+          "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"
         },
         {
           "category": "more",
           "title": "Grinstead & Snell — Ch. 12: Random Walks",
           "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter12.pdf"
+        },
+        {
+          "category": "more",
+          "title": "MIT 6.041 L16 — Markov Chains I (Tsitsiklis)",
+          "url": "https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/resources/lecture-16-markov-chains-i/"
         },
         {
           "category": "problem",
@@ -5856,8 +5841,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 — expectation & variance",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "MIT 18.S096 — Lecture 14: Portfolio Theory",
+          "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-14-portfolio-theory/"
         },
         {
           "category": "paper",
@@ -5866,12 +5851,12 @@
         },
         {
           "category": "blog",
-          "title": "Introduction to Probability — covariance",
+          "title": "Harvard Stat 110 — course site",
           "url": "https://projects.iq.harvard.edu/stat110/home"
         },
         {
           "category": "book",
-          "title": "Forecasting: Principles and Practice (Hyndman)",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/"
         },
         {
@@ -5891,8 +5876,8 @@
       "items": [
         {
           "category": "video",
-          "title": "Harvard Stat 110 — hypothesis testing intuition",
-          "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v4vJLp4i3MtA7WFTObS8Jg"
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
         },
         {
           "category": "paper",
@@ -5901,12 +5886,12 @@
         },
         {
           "category": "blog",
-          "title": "Google SRE — Postmortem culture",
+          "title": "Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure",
           "url": "https://sre.google/sre-book/postmortem-culture/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning — book site",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -6081,7 +6066,7 @@
         },
         {
           "category": "blog",
-          "title": "Large-scale cluster management at Google with Borg (EuroSys '15)",
+          "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
           "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/"
         },
         {
@@ -6176,7 +6161,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Large-scale cluster management at Google with Borg",
+          "title": "Large-scale cluster management at Google with Borg (EuroSys 2015)",
           "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/"
         },
         {
@@ -6305,6 +6290,11 @@
     "event-streaming-kafka": {
       "items": [
         {
+          "category": "video",
+          "title": "MIT 6.824 — Distributed Systems",
+          "url": "https://pdos.csail.mit.edu/6.824/"
+        },
+        {
           "category": "paper",
           "title": "Kafka: a Distributed Messaging System",
           "url": "https://notes.stephenholiday.com/Kafka.pdf"
@@ -6325,12 +6315,17 @@
     "distributed-workflows-temporal": {
       "items": [
         {
+          "category": "video",
+          "title": "MIT 6.824 — Distributed Systems",
+          "url": "https://pdos.csail.mit.edu/6.824/"
+        },
+        {
           "category": "paper",
           "title": "Netherite: Efficient Execution of Serverless Workflows (PVLDB 15)",
           "url": "https://www.vldb.org/pvldb/vol15/p1591-burckhardt.pdf"
         },
         {
-          "category": "video",
+          "category": "blog",
           "title": "Reliable Actors with Retry Orchestration",
           "url": "https://arxiv.org/abs/2111.11562"
         },
@@ -6360,6 +6355,11 @@
     "distributed-failure-recovery": {
       "items": [
         {
+          "category": "video",
+          "title": "MIT 6.824 — Distributed Systems",
+          "url": "https://pdos.csail.mit.edu/6.824/"
+        },
+        {
           "category": "blog",
           "title": "The Network is Reliable (Bailis & Kingsbury)",
           "url": "https://aphyr.com/posts/288-the-network-is-reliable"
@@ -6368,11 +6368,6 @@
           "category": "paper",
           "title": "Gray Failure: The Achilles' Heel of Cloud-Scale Systems (HotOS '17)",
           "url": "https://www.microsoft.com/en-us/research/publication/gray-failure-achilles-heel-cloud-scale-systems/"
-        },
-        {
-          "category": "video",
-          "title": "Partitions for Everyone! — Kyle Kingsbury (Strange Loop 2013)",
-          "url": "https://www.youtube.com/watch?v=EOlw6dlxXU0"
         },
         {
           "category": "book",
@@ -6391,6 +6386,11 @@
           "body": "Explain \"Distributed Failure Recovery\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: In a distributed system, failure is ambiguous"
         },
         {
+          "category": "video",
+          "title": "Partitions for Everyone! — Kyle Kingsbury (Strange Loop 2013)",
+          "url": "https://www.youtube.com/watch?v=EOlw6dlxXU0"
+        },
+        {
           "category": "paper",
           "title": "Simple Testing Can Prevent Most Critical Failures (OSDI '14)",
           "url": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan"
@@ -6406,18 +6406,18 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "Martin Kleppmann — Hermitage: Testing the \"I\" in ACID",
+          "url": "https://martin.kleppmann.com/2014/11/25/hermitage-testing-the-i-in-acid.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 17 notes — Concurrency Control Theory",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/17-concurrencycontrol.pdf"
         },
         {
           "category": "paper",
@@ -6441,18 +6441,18 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
-          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+          "title": "PostgreSQL Documentation — 51.5. Planner/Optimizer",
+          "url": "https://www.postgresql.org/docs/current/planner-optimizer.html"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
-          "url": "https://dataintensive.net/"
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 15 notes — Query Planning & Optimization",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/15-optimization1.pdf"
         },
         {
           "category": "paper",
@@ -6476,17 +6476,17 @@
       "items": [
         {
           "category": "video",
-          "title": "CMU 15-445 — Database Systems",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "blog",
-          "title": "CMU 15-445 — course notes",
+          "title": "CMU 15-445 — Database Systems (course)",
           "url": "https://15445.courses.cs.cmu.edu/fall2025/"
         },
         {
           "category": "book",
-          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
           "url": "https://dataintensive.net/"
         },
         {
@@ -6521,7 +6521,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -6556,7 +6556,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -6611,7 +6611,7 @@
         },
         {
           "category": "book",
-          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "title": "Stanford CS336 — Language Modeling from Scratch (course)",
           "url": "https://cs336.stanford.edu/spring2025/"
         },
         {
@@ -6661,7 +6661,7 @@
         },
         {
           "category": "blog",
-          "title": "Efficient Memory Management for LLM Serving with PagedAttention (vLLM, SOSP '23)",
+          "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
           "url": "https://arxiv.org/abs/2309.06180"
         },
         {
@@ -6746,7 +6746,7 @@
       "items": [
         {
           "category": "video",
-          "title": "FlashAttention",
+          "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
           "url": "https://arxiv.org/abs/2205.14135"
         },
         {
@@ -6931,7 +6931,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Anthropic — Building Effective Agents",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
@@ -7126,7 +7126,7 @@
         },
         {
           "category": "paper",
-          "title": "Building Effective AI Agents (Anthropic)",
+          "title": "Building Effective AI Agents (Anthropic Engineering)",
           "url": "https://www.anthropic.com/engineering/building-effective-agents"
         },
         {
@@ -7156,7 +7156,7 @@
       "items": [
         {
           "category": "video",
-          "title": "Effective Context Engineering for AI Agents",
+          "title": "Effective context engineering for AI agents (Anthropic)",
           "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
         },
         {
@@ -7385,6 +7385,11 @@
           "url": "https://arxiv.org/abs/2305.14627"
         },
         {
+          "category": "blog",
+          "title": "Google Testing Blog — Just Say No to More End-to-End Tests",
+          "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html"
+        },
+        {
           "category": "problem",
           "title": "Design exercise: Evidence-backed Verification",
           "url": "/drills/practice-evidence-backed-verification"
@@ -7451,7 +7456,7 @@
         },
         {
           "category": "book",
-          "title": "Holistic Evaluation of Language Models (HELM) — Stanford CRFM",
+          "title": "HELM — Holistic Evaluation of Language Models (Stanford CRFM)",
           "url": "https://crfm.stanford.edu/helm/"
         },
         {
@@ -7871,17 +7876,17 @@
       "items": [
         {
           "category": "video",
-          "title": "WebGPU Specification",
+          "title": "WebGPU specification (W3C)",
           "url": "https://www.w3.org/TR/webgpu/"
         },
         {
           "category": "paper",
-          "title": "Fix Your Timestep! (Gaffer On Games)",
+          "title": "Gaffer On Games (Glenn Fiedler) — Fix Your Timestep!",
           "url": "https://gafferongames.com/post/fix_your_timestep/"
         },
         {
           "category": "blog",
-          "title": "Game Programming Patterns — Game Loop (Nystrom)",
+          "title": "Game Programming Patterns (Nystrom) — chapter: Game Loop",
           "url": "https://gameprogrammingpatterns.com/game-loop.html"
         },
         {
