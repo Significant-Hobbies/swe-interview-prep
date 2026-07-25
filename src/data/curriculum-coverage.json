@@ -627,6 +627,14 @@
     "quickselect",
     "normalization",
     "buffer-pool",
-    "pagination"
+    "pagination",
+    "combinatorics",
+    "numerical-stability",
+    "learning-to-rank",
+    "click-models",
+    "vector-quantization",
+    "disk-based-ann",
+    "index-updates-tombstones",
+    "cdn-edge-delivery"
   ]
 }

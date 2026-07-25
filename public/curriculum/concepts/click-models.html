@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Click Models &amp; Position Bias | SWE Prep</title>
+    <meta name="description" content="Why clicks are not relevance labels, and how to debias implicit feedback.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/click-models.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Click Models &amp; Position Bias | SWE Prep">
+    <meta property="og:description" content="Why clicks are not relevance labels, and how to debias implicit feedback.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/click-models.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Click Models &amp; Position Bias | SWE Prep">
+    <meta name="twitter:description" content="Why clicks are not relevance labels, and how to debias implicit feedback.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Click Models & Position Bias","description":"Why clicks are not relevance labels, and how to debias implicit feedback.","url":"https://learn.significanthobbies.com/curriculum/concepts/click-models.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Click Models & Position Bias","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/search-ir.html">Search &amp; IR</a></nav>
+      <article>
+    <p class="eyebrow">Search &amp; IR · advanced</p>
+    <h1>Click Models &amp; Position Bias</h1>
+    <p class="lede">Why clicks are not relevance labels, and how to debias implicit feedback.</p>
+    <div class="pills"><span>search-ir</span><span>evaluation</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A click means the user examined the result AND judged it worth clicking, so the observed rate confounds relevance with position — rank 1 gets clicked far more than rank 5 for identical content. Training on raw clicks therefore teaches the model to reproduce the ranking that generated them, a feedback loop that entrenches whatever was already on top. Inverse-propensity weighting breaks it by dividing each click by the estimated probability that the position was examined, which is why deliberate result randomisation is worth its cost.</p>
+    </section>
+
+    <section>
+      <h2>How to study Click Models &amp; Position Bias</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Click Models &amp; Position Bias with Learning to Rank, A/B Testing for Engineers. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Debias clicks by inverse propensity and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Every search team&#39;s offline evaluation, and the reason interleaving experiments beat naive CTR comparisons.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Treating click-through rate as a relevance label and locking in the incumbent ranking</li><li>Estimating position bias from the same log the ranker produced, with no randomisation to identify it</li><li>Ignoring that a click is not satisfaction — a fast return to the results page is evidence against it</li><li>Comparing CTR across layouts, where the examination probability changed too</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Debias clicks by inverse propensity</h3>
+          <p>Implement debiasedCtr(events, propensity) where events are {docId, position, clicked} and propensity maps position -&gt; probability of examination. Return docId -&gt; estimated relevance = (sum of clicks / propensity[position]) / (number of impressions). Round each value to 4 decimals.</p>
+          <p><strong>Expected evidence:</strong> A doc clicked 1/10 times at position 1 (p=1.0) scores lower than one clicked 1/10 times at position 5 (p=0.2).</p>
+          <a href="/drills/ipw-debias-clicks">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>A team trains its ranker on click-through rate and the ranking gets more entrenched each cycle. Explain the loop and the standard correction.</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/search-evals.html">Search Evals</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/learning-to-rank.html">Learning to Rank</a></li><li><a href="/curriculum/concepts/ab-testing-engineering.html">A/B Testing for Engineers</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

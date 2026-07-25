@@ -5743,6 +5743,226 @@
         }
       ],
       "referenceSolution": "function page(rows, cursor, limit) {\n  const after = (r) =>\n    !cursor || r.createdAt > cursor.createdAt || (r.createdAt === cursor.createdAt && r.id > cursor.id);\n  const items = rows.filter(after).slice(0, limit);\n  const nextCursor =\n    items.length === limit\n      ? { createdAt: items[items.length - 1].createdAt, id: items[items.length - 1].id }\n      : null;\n  return { items, nextCursor };\n}"
+    },
+    {
+      "id": "count-with-inclusion-exclusion",
+      "title": "Count with inclusion-exclusion",
+      "conceptId": "combinatorics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement countDivisible(n, divisors) — how many integers in 1..n are divisible by AT LEAST ONE of the divisors. Use inclusion-exclusion over every non-empty subset, adding odd-sized subsets and subtracting even-sized ones, with lcm for each subset.",
+      "expectedOutput": "countDivisible(100,[3,5]) -> 47   (33 + 20 - 6)",
+      "hints": [
+        "Iterate subsets with a bitmask; lcm(a,b) = a*b/gcd(a,b) applied across the subset.",
+        "Sign is +1 for odd-sized subsets and -1 for even — that is what stops the overlaps being double-counted."
+      ],
+      "solutionNotes": "Adding the individual counts alone gives 53; the 6 multiples of 15 were counted twice.",
+      "testCases": [
+        {
+          "run": "console.log(countDivisible(100,[3,5]), countDivisible(100,[2]), countDivisible(10,[2,3,5]));",
+          "expect": "47 50 8"
+        },
+        {
+          "run": "console.log(countDivisible(1000,[3,5,7]), countDivisible(0,[3]), countDivisible(20,[4,6]));",
+          "expect": "543 0 7"
+        }
+      ],
+      "referenceSolution": "function countDivisible(n, divisors) {\n  const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));\n  let total = 0;\n  for (let mask = 1; mask < 1 << divisors.length; mask++) {\n    let l = 1, bits = 0;\n    for (let i = 0; i < divisors.length; i++) {\n      if (mask & (1 << i)) { l = (l * divisors[i]) / gcd(l, divisors[i]); bits++; }\n    }\n    total += (bits % 2 === 1 ? 1 : -1) * Math.floor(n / l);\n  }\n  return total;\n}"
+    },
+    {
+      "id": "logsumexp-stable",
+      "title": "Log-sum-exp without overflow",
+      "conceptId": "numerical-stability",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement logSumExp(xs) returning log(sum(exp(x))) that stays finite for large inputs by subtracting the maximum first. Must return a finite number for [1000, 1001, 1002], where the naive form overflows to Infinity.",
+      "expectedOutput": "logSumExp([1000,1001,1002]) ~ 1002.4076; logSumExp([0,0]) ~ 0.6931",
+      "hints": [
+        "log(sum(exp(x))) = m + log(sum(exp(x - m))) where m is the max — algebraically identical, numerically safe.",
+        "Handle an all -Infinity input without producing NaN."
+      ],
+      "solutionNotes": "Nothing about the maths changed; shifting by the max just moves the computation into a range the exponent can represent.",
+      "testCases": [
+        {
+          "run": "console.log(Number.isFinite(logSumExp([1000,1001,1002])), logSumExp([1000,1001,1002]).toFixed(4));",
+          "expect": "true 1002.4076"
+        },
+        {
+          "run": "console.log(logSumExp([0,0]).toFixed(4), logSumExp([5]).toFixed(4));",
+          "expect": "0.6931 5.0000"
+        },
+        {
+          "run": "console.log(Number.isFinite(logSumExp([-1000,-1001])), logSumExp([-1000,-1001]).toFixed(4));",
+          "expect": "true -999.6867"
+        }
+      ],
+      "referenceSolution": "function logSumExp(xs) {\n  const m = Math.max(...xs);\n  if (!Number.isFinite(m)) return m;\n  let sum = 0;\n  for (const x of xs) sum += Math.exp(x - m);\n  return m + Math.log(sum);\n}"
+    },
+    {
+      "id": "ndcg-at-k",
+      "title": "NDCG@k",
+      "conceptId": "learning-to-rank",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Implement ndcgAtK(relevances, k) where relevances are graded gains in RANKED order. DCG = sum over i of rel_i / log2(i + 2) for i from 0. IDCG uses the same relevances sorted descending. Return DCG/IDCG rounded to 4 decimals, or 0 when IDCG is 0.",
+      "expectedOutput": "ndcgAtK([3,2,3,0,1,2],6) -> 0.9608",
+      "hints": [
+        "The discount is log2(rank+1) with ranks starting at 1, i.e. log2(i+2) for zero-based i.",
+        "IDCG is the best achievable ordering of the SAME relevance values, truncated to k as well."
+      ],
+      "solutionNotes": "NDCG depends only on the order, which is why it has no useful gradient and ranking models optimise a surrogate.",
+      "testCases": [
+        {
+          "run": "console.log(ndcgAtK([3,2,3,0,1,2],6));",
+          "expect": "0.9608"
+        },
+        {
+          "run": "console.log(ndcgAtK([3,3,3],3), ndcgAtK([0,0,0],3), ndcgAtK([0,0,3],3));",
+          "expect": "1 0 0.5"
+        },
+        {
+          "run": "console.log(ndcgAtK([3,2,3,0,1,2],3), ndcgAtK([1],1));",
+          "expect": "0.9778 1"
+        }
+      ],
+      "referenceSolution": "function ndcgAtK(relevances, k) {\n  const dcg = (arr) =>\n    arr.slice(0, k).reduce((s, rel, i) => s + rel / Math.log2(i + 2), 0);\n  const ideal = dcg([...relevances].sort((a, b) => b - a));\n  if (ideal === 0) return 0;\n  return Math.round((dcg(relevances) / ideal) * 10000) / 10000;\n}"
+    },
+    {
+      "id": "ipw-debias-clicks",
+      "title": "Debias clicks by inverse propensity",
+      "conceptId": "click-models",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Implement debiasedCtr(events, propensity) where events are {docId, position, clicked} and propensity maps position -> probability of examination. Return docId -> estimated relevance = (sum of clicks / propensity[position]) / (number of impressions). Round each value to 4 decimals.",
+      "expectedOutput": "A doc clicked 1/10 times at position 1 (p=1.0) scores lower than one clicked 1/10 times at position 5 (p=0.2).",
+      "hints": [
+        "Weight each CLICK by 1/propensity, then divide by impressions — not by the sum of weights.",
+        "The whole point is that a click from a rarely-examined position is stronger evidence."
+      ],
+      "solutionNotes": "Without the weighting, position becomes the dominant feature and the model relearns the ranking that produced the log.",
+      "testCases": [
+        {
+          "setup": "const ev=[{docId:'a',position:1,clicked:true},{docId:'a',position:1,clicked:false},{docId:'b',position:5,clicked:true},{docId:'b',position:5,clicked:false}];\nconst p={1:1.0,5:0.2};",
+          "run": "const r=debiasedCtr(ev,p); console.log(r.a, r.b, r.b > r.a);",
+          "expect": "0.5 2.5 true"
+        },
+        {
+          "setup": "const ev2=[{docId:'x',position:1,clicked:false},{docId:'x',position:1,clicked:false}]; const p2={1:1.0};",
+          "run": "console.log(debiasedCtr(ev2,p2).x);",
+          "expect": "0"
+        }
+      ],
+      "referenceSolution": "function debiasedCtr(events, propensity) {\n  const acc = {};\n  for (const e of events) {\n    acc[e.docId] ??= { weighted: 0, impressions: 0 };\n    acc[e.docId].impressions++;\n    if (e.clicked) acc[e.docId].weighted += 1 / propensity[e.position];\n  }\n  const out = {};\n  for (const [id, v] of Object.entries(acc)) {\n    out[id] = Math.round((v.weighted / v.impressions) * 10000) / 10000;\n  }\n  return out;\n}"
+    },
+    {
+      "id": "scalar-quantize-roundtrip",
+      "title": "Scalar quantise and rescore",
+      "conceptId": "vector-quantization",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement quantize(vec, min, max) mapping each float to an int in 0..255, dequantize(codes, min, max) mapping back to the bucket centre, and maxAbsError(vec, min, max) returning the largest absolute reconstruction error. Values outside [min,max] clamp.",
+      "expectedOutput": "Error is bounded by half a bucket width: (max-min)/255/2.",
+      "hints": [
+        "Bucket width is (max-min)/255; the centre of a bucket is the honest reconstruction.",
+        "Clamp before scaling or an outlier will produce a code outside 0..255."
+      ],
+      "solutionNotes": "A bounded reconstruction error is exactly why a two-stage retrieve-then-rescore recovers most of the recall.",
+      "testCases": [
+        {
+          "run": "const v=[0,0.5,1]; const c=quantize(v,0,1); console.log(c[0], c[2], c.every(x=>x>=0&&x<=255));",
+          "expect": "0 255 true"
+        },
+        {
+          "run": "const v=[0,0.5,1]; console.log(maxAbsError(v,0,1) <= (1/255)/2 + 1e-9);",
+          "expect": "true"
+        },
+        {
+          "run": "const v=[-5,5]; const c=quantize(v,0,1); console.log(c[0], c[1]);",
+          "expect": "0 255"
+        }
+      ],
+      "referenceSolution": "function quantize(vec, min, max) {\n  const width = (max - min) / 255;\n  return vec.map((x) => {\n    const c = Math.round((Math.min(max, Math.max(min, x)) - min) / width);\n    return Math.min(255, Math.max(0, c));\n  });\n}\n\nfunction dequantize(codes, min, max) {\n  const width = (max - min) / 255;\n  return codes.map((c) => min + c * width);\n}\n\nfunction maxAbsError(vec, min, max) {\n  const back = dequantize(quantize(vec, min, max), min, max);\n  return Math.max(...vec.map((x, i) => Math.abs(Math.min(max, Math.max(min, x)) - back[i])));\n}"
+    },
+    {
+      "id": "count-random-reads",
+      "title": "Cost a disk-resident search by I/O",
+      "conceptId": "disk-based-ann",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Implement queryCost({hops, neighboursPerHop, cachedFraction, readLatencyUs, compareLatencyNs}) returning { randomReads, totalUs } rounded to 2 decimals. Every hop fetches neighboursPerHop nodes; a cachedFraction of them avoid the SSD. Comparisons cost compareLatencyNs each and happen for every fetched neighbour.",
+      "expectedOutput": "With SSD reads at 100us, I/O dominates comparisons by orders of magnitude.",
+      "hints": [
+        "randomReads = hops * neighboursPerHop * (1 - cachedFraction); do not round it away before costing it.",
+        "Convert nanoseconds to microseconds before adding, or the comparison term vanishes."
+      ],
+      "solutionNotes": "Making the I/O term explicit is the point: on disk, comparison count stops being the thing worth optimising.",
+      "testCases": [
+        {
+          "run": "const r=queryCost({hops:10,neighboursPerHop:32,cachedFraction:0.9,readLatencyUs:100,compareLatencyNs:50}); console.log(r.randomReads, r.totalUs);",
+          "expect": "32 3216"
+        },
+        {
+          "run": "const r=queryCost({hops:10,neighboursPerHop:32,cachedFraction:1,readLatencyUs:100,compareLatencyNs:50}); console.log(r.randomReads, r.totalUs);",
+          "expect": "0 16"
+        }
+      ],
+      "referenceSolution": "function queryCost({ hops, neighboursPerHop, cachedFraction, readLatencyUs, compareLatencyNs }) {\n  const fetched = hops * neighboursPerHop;\n  const randomReads = fetched * (1 - cachedFraction);\n  const totalUs = randomReads * readLatencyUs + (fetched * compareLatencyNs) / 1000;\n  const r2 = (x) => Math.round(x * 100) / 100;\n  return { randomReads: r2(randomReads), totalUs: r2(totalUs) };\n}"
+    },
+    {
+      "id": "tombstone-recall-drift",
+      "title": "Tombstones erode recall",
+      "conceptId": "index-updates-tombstones",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Implement search(graph, deleted, entry, query, k, budget) — a greedy walk over an adjacency map. Visit at most `budget` nodes; tombstoned nodes (in `deleted`) are traversed and count against the budget but must NOT appear in results. Return the ids of up to k live nodes with the smallest |value - query|, best first.",
+      "expectedOutput": "With tombstones present the same budget returns fewer live results.",
+      "hints": [
+        "A deleted node still consumes budget — that is the cost tombstones impose.",
+        "Filter on output, not on traversal; skipping them entirely would disconnect the graph."
+      ],
+      "solutionNotes": "Tombstones are a debt: they occupy the traversal budget until compaction reclaims them, which is why recall drifts down with no code change.",
+      "testCases": [
+        {
+          "setup": "const g={1:{v:10,n:[2,3]},2:{v:12,n:[4]},3:{v:20,n:[4]},4:{v:11,n:[]}};",
+          "run": "console.log(JSON.stringify(search(g,new Set(),1,11,2,10)));",
+          "expect": "[4,1]"
+        },
+        {
+          "setup": "const g={1:{v:10,n:[2,3]},2:{v:12,n:[4]},3:{v:20,n:[4]},4:{v:11,n:[]}};",
+          "run": "const a=search(g,new Set(),1,11,3,10).length, b=search(g,new Set([4,2]),1,11,3,10).length; console.log(a, b, a>b);",
+          "expect": "3 2 true"
+        }
+      ],
+      "referenceSolution": "function search(graph, deleted, entry, query, k, budget) {\n  const seen = new Set();\n  const queue = [entry];\n  const found = [];\n  let visited = 0;\n  while (queue.length && visited < budget) {\n    const id = queue.shift();\n    if (seen.has(id) || !graph[id]) continue;\n    seen.add(id);\n    visited++;\n    if (!deleted.has(id)) found.push(id);\n    for (const n of graph[id].n) if (!seen.has(n)) queue.push(n);\n  }\n  return found\n    .sort((a, b) => Math.abs(graph[a].v - query) - Math.abs(graph[b].v - query))\n    .slice(0, k);\n}"
+    },
+    {
+      "id": "cache-key-and-ttl",
+      "title": "Decide the edge cache key",
+      "conceptId": "cdn-edge-delivery",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement edgePolicy({ url, hasAuthCookie, varyHeaders, contentHashed }) returning { cacheable, ttlSeconds, key }. Never cache when hasAuthCookie is true (ttl 0). A content-hashed URL is immutable: ttl 31536000. Otherwise ttl 300. The key is the url plus each varyHeader appended as '|<header>' in the given order.",
+      "expectedOutput": "content-hashed -> one year; authed -> not cacheable; otherwise 5 minutes",
+      "hints": [
+        "Personalised responses must be excluded before any TTL question is asked.",
+        "Immutability is what makes a one-year TTL safe — a change produces a different URL, so nothing needs purging."
+      ],
+      "solutionNotes": "Content-hashed URLs turn invalidation into a non-problem, which is why they beat purge as a default strategy.",
+      "testCases": [
+        {
+          "run": "const a=edgePolicy({url:'/app.abc123.js',hasAuthCookie:false,varyHeaders:[],contentHashed:true}); console.log(a.cacheable, a.ttlSeconds, a.key);",
+          "expect": "true 31536000 /app.abc123.js"
+        },
+        {
+          "run": "const b=edgePolicy({url:'/me',hasAuthCookie:true,varyHeaders:['Cookie'],contentHashed:false}); console.log(b.cacheable, b.ttlSeconds);",
+          "expect": "false 0"
+        },
+        {
+          "run": "const c=edgePolicy({url:'/page',hasAuthCookie:false,varyHeaders:['Accept-Encoding','Accept-Language'],contentHashed:false}); console.log(c.ttlSeconds, c.key);",
+          "expect": "300 /page|Accept-Encoding|Accept-Language"
+        }
+      ],
+      "referenceSolution": "function edgePolicy({ url, hasAuthCookie, varyHeaders, contentHashed }) {\n  const key = [url, ...varyHeaders].join('|');\n  if (hasAuthCookie) return { cacheable: false, ttlSeconds: 0, key };\n  return { cacheable: true, ttlSeconds: contentHashed ? 31536000 : 300, key };\n}"
     }
   ]
 }

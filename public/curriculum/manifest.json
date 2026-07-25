@@ -2,10 +2,10 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 244,
+    "concepts": 252,
     "roadmaps": 24,
-    "drills": 287,
-    "reviewQuestions": 261,
+    "drills": 295,
+    "reviewQuestions": 269,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -298,6 +298,14 @@
     "/curriculum/concepts/quickselect.html",
     "/curriculum/concepts/normalization.html",
     "/curriculum/concepts/buffer-pool.html",
-    "/curriculum/concepts/pagination.html"
+    "/curriculum/concepts/pagination.html",
+    "/curriculum/concepts/combinatorics.html",
+    "/curriculum/concepts/numerical-stability.html",
+    "/curriculum/concepts/learning-to-rank.html",
+    "/curriculum/concepts/click-models.html",
+    "/curriculum/concepts/vector-quantization.html",
+    "/curriculum/concepts/disk-based-ann.html",
+    "/curriculum/concepts/index-updates-tombstones.html",
+    "/curriculum/concepts/cdn-edge-delivery.html"
   ]
 }

@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Vector DB & ANN","description":"Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.","url":"https://learn.significanthobbies.com/curriculum/tracks/vector-db.html","numberOfItems":9,"hasPart":[{"@type":"LearningResource","name":"Embeddings","url":"https://learn.significanthobbies.com/curriculum/concepts/embeddings.html"},{"@type":"LearningResource","name":"Vector Similarity","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html"},{"@type":"LearningResource","name":"Top-k Vector Search","url":"https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html"},{"@type":"LearningResource","name":"Brute-Force Vector DB","url":"https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html"},{"@type":"LearningResource","name":"HNSW","url":"https://learn.significanthobbies.com/curriculum/concepts/hnsw.html"},{"@type":"LearningResource","name":"IVF (Inverted File)","url":"https://learn.significanthobbies.com/curriculum/concepts/ivf.html"},{"@type":"LearningResource","name":"Product Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html"},{"@type":"LearningResource","name":"Metadata Filtering","url":"https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html"},{"@type":"LearningResource","name":"Recall / Latency Tradeoffs","url":"https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Vector DB & ANN","description":"Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.","url":"https://learn.significanthobbies.com/curriculum/tracks/vector-db.html","numberOfItems":12,"hasPart":[{"@type":"LearningResource","name":"Embeddings","url":"https://learn.significanthobbies.com/curriculum/concepts/embeddings.html"},{"@type":"LearningResource","name":"Vector Similarity","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html"},{"@type":"LearningResource","name":"Top-k Vector Search","url":"https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html"},{"@type":"LearningResource","name":"Brute-Force Vector DB","url":"https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html"},{"@type":"LearningResource","name":"HNSW","url":"https://learn.significanthobbies.com/curriculum/concepts/hnsw.html"},{"@type":"LearningResource","name":"IVF (Inverted File)","url":"https://learn.significanthobbies.com/curriculum/concepts/ivf.html"},{"@type":"LearningResource","name":"Product Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html"},{"@type":"LearningResource","name":"Metadata Filtering","url":"https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html"},{"@type":"LearningResource","name":"Recall / Latency Tradeoffs","url":"https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html"},{"@type":"LearningResource","name":"Scalar & Binary Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html"},{"@type":"LearningResource","name":"Disk-Based ANN","url":"https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html"},{"@type":"LearningResource","name":"Index Updates & Tombstones","url":"https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,12 +46,12 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
       <article>
-    <p class="eyebrow">Learning track · 9 concepts</p>
+    <p class="eyebrow">Learning track · 12 concepts</p>
     <h1>Vector DB &amp; ANN</h1>
     <p class="lede">Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.</p>
     <section>
       <h2>What mastery looks like</h2>
-      <p>This track contains 9 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Vector DB &amp; ANN, use the track description as the boundary: learn enough detail to reason clearly about vector search engines: similarity, top-k, brute force, hnsw, ivf, quantization, metadata filtering, and recall/latency tradeoffs.</p>
+      <p>This track contains 12 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Vector DB &amp; ANN, use the track description as the boundary: learn enough detail to reason clearly about vector search engines: similarity, top-k, brute force, hnsw, ivf, quantization, metadata filtering, and recall/latency tradeoffs.</p>
       <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
     </section>
     <section>
@@ -101,6 +101,18 @@
         <p class="eyebrow">advanced</p>
         <h3><a href="/curriculum/concepts/recall-latency-tradeoffs.html">Recall / Latency Tradeoffs</a></h3>
         <p>Reading recall-vs-latency curves to choose ANN parameters.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/vector-quantization.html">Scalar &amp; Binary Quantization</a></h3>
+        <p>Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/disk-based-ann.html">Disk-Based ANN</a></h3>
+        <p>DiskANN and SPANN — serving vector indexes that do not fit in memory.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/index-updates-tombstones.html">Index Updates &amp; Tombstones</a></h3>
+        <p>Deleting and updating vectors in a graph index without rebuilding it.</p>
       </article></div>
     </section>
   </article>

@@ -10,10 +10,10 @@
       "paper": 216,
       "blog": 175,
       "book": 140,
-      "problem": 244,
-      "write": 244,
+      "problem": 252,
+      "write": 252,
       "more": 92,
-      "items": 1292
+      "items": 1308
     }
   },
   "packs": {
@@ -7694,6 +7694,126 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Pagination\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: OFFSET makes the database produce and discard every skipped row, so page 10,000 costs proportionally more than page 1 — and because the underlying rows shift between requests, an insert can make a client see the same item twice or miss one entirely"
+        }
+      ]
+    },
+    "combinatorics": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Count with inclusion-exclusion",
+          "url": "/drills/count-with-inclusion-exclusion"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Combinatorics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Every counting problem is a question about whether order matters and whether repetition is allowed; get those two right and the formula follows"
+        }
+      ]
+    },
+    "numerical-stability": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Log-sum-exp without overflow",
+          "url": "/drills/logsumexp-stable"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Numerical Stability\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Floating point stores a fixed number of significant digits, so error is relative, not absolute — and subtracting two nearly equal numbers throws away the leading digits that agreed, leaving noise promoted to the front"
+        }
+      ]
+    },
+    "learning-to-rank": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "NDCG@k",
+          "url": "/drills/ndcg-at-k"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Learning to Rank\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Ranking quality is measured by NDCG, which depends on sort order and therefore has zero gradient almost everywhere — so learning-to-rank is largely the story of optimising something else that correlates"
+        }
+      ]
+    },
+    "click-models": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Debias clicks by inverse propensity",
+          "url": "/drills/ipw-debias-clicks"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Click Models & Position Bias\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A click means the user examined the result AND judged it worth clicking, so the observed rate confounds relevance with position — rank 1 gets clicked far more than rank 5 for identical content"
+        }
+      ]
+    },
+    "vector-quantization": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Scalar quantise and rescore",
+          "url": "/drills/scalar-quantize-roundtrip"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Scalar & Binary Quantization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Quantisation trades recall for memory, and memory is what decides whether an index fits in RAM"
+        }
+      ]
+    },
+    "disk-based-ann": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Cost a disk-resident search by I/O",
+          "url": "/drills/count-random-reads"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Disk-Based ANN\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An in-memory graph index like HNSW is bounded by RAM, so at billion scale the index has to live on SSD — and then the cost model inverts: what matters is not comparisons but the number of random reads, because each one costs a hundred microseconds"
+        }
+      ]
+    },
+    "index-updates-tombstones": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Tombstones erode recall",
+          "url": "/drills/tombstone-recall-drift"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Index Updates & Tombstones\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A proximity graph has no cheap delete: removing a node severs the edges other nodes rely on for connectivity, so implementations mark it deleted and filter it at query time instead"
+        }
+      ]
+    },
+    "cdn-edge-delivery": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Decide the edge cache key",
+          "url": "/drills/cache-key-and-ttl"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"CDN & Edge Delivery\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A CDN is a cache hierarchy whose top tier is geographic: the edge answers what it can, a shield tier absorbs the misses so the origin sees one request instead of one per POP, and only genuine misses reach you"
         }
       ]
     }

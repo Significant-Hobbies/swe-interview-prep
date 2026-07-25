@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 244 concepts across
+A public, JavaScript-free index of 252 concepts across
 19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -42,7 +42,7 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/search-ir.html
-- Concepts: 11
+- Concepts: 13
 - Roadmaps: 4
 
 - [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
@@ -56,13 +56,15 @@ Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranki
 - [Query Rewriting](https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html) — Expanding, correcting, and normalizing queries before retrieval.
 - [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html) — Inverted index, ranking, autocomplete at scale.
 - [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
+- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
+- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models.html) — Why clicks are not relevance labels, and how to debias implicit feedback.
 
 ## Mathematics
 
 Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/mathematics.html
-- Concepts: 28
+- Concepts: 30
 - Roadmaps: 3
 
 - [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
@@ -93,13 +95,15 @@ Active math only: solve, derive, implement, simulate — never aesthetic consump
 - [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html) — Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.
 - [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html) — Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.
 - [Curse of Dimensionality](https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality.html) — Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
+- [Combinatorics](https://learn.significanthobbies.com/curriculum/concepts/combinatorics.html) — Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
+- [Numerical Stability](https://learn.significanthobbies.com/curriculum/concepts/numerical-stability.html) — Floating point, catastrophic cancellation, and the log-sum-exp trick.
 
 ## Vector DB & ANN
 
 Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/vector-db.html
-- Concepts: 9
+- Concepts: 12
 - Roadmaps: 3
 
 - [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html) — Mapping text/images into dense vectors where distance encodes meaning.
@@ -111,6 +115,9 @@ Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, 
 - [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html) — Compress vectors into sub-space codebooks for tiny memory footprint.
 - [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html) — Combining vector search with structured predicates (tenant, date, tags).
 - [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html) — Reading recall-vs-latency curves to choose ANN parameters.
+- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
+- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html) — DiskANN and SPANN — serving vector indexes that do not fit in memory.
+- [Index Updates & Tombstones](https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html) — Deleting and updating vectors in a graph index without rebuilding it.
 
 ## AI Systems
 
@@ -210,7 +217,7 @@ Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, comp
 Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/system-design.html
-- Concepts: 25
+- Concepts: 26
 - Roadmaps: 6
 
 - [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
@@ -238,6 +245,7 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 - [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html) — Separating functional from non-functional requirements and cutting scope to something buildable.
 - [Rate Limiter Design](https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design.html) — Token bucket versus sliding window, and making a limiter work across many nodes.
 - [Unique ID Generation](https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html) — Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.
+- [CDN & Edge Delivery](https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery.html) — Cache hierarchy, origin shield, and invalidation versus TTL at the edge.
 
 ## DSA & Implementation
 

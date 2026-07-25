@@ -9,10 +9,10 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 244,
+    "concepts": 252,
     "roadmaps": 24,
-    "drills": 287,
-    "reviewQuestions": 261,
+    "drills": 295,
+    "reviewQuestions": 269,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -34,7 +34,9 @@
         "reranking",
         "query-rewriting",
         "search-discovery",
-        "top-k-pruning"
+        "top-k-pruning",
+        "learning-to-rank",
+        "click-models"
       ],
       "roadmapIds": [
         "reset-9-day",
@@ -76,7 +78,9 @@
         "portfolio-risk-metrics",
         "momentum-backtest",
         "queueing-theory",
-        "curse-of-dimensionality"
+        "curse-of-dimensionality",
+        "combinatorics",
+        "numerical-stability"
       ],
       "roadmapIds": [
         "math-rating-climb-30d",
@@ -98,7 +102,10 @@
         "ivf",
         "product-quantization",
         "metadata-filtering",
-        "recall-latency-tradeoffs"
+        "recall-latency-tradeoffs",
+        "vector-quantization",
+        "disk-based-ann",
+        "index-updates-tombstones"
       ],
       "roadmapIds": [
         "retrieval-30-day",
@@ -245,7 +252,8 @@
         "capacity-estimation",
         "requirements-scoping",
         "rate-limiter-design",
-        "unique-id-generation"
+        "unique-id-generation",
+        "cdn-edge-delivery"
       ],
       "roadmapIds": [
         "ai-infra-12-month",
@@ -544,6 +552,9 @@
       "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html",
       "conceptIds": [
+        "learning-to-rank",
+        "click-models",
+        "vector-quantization",
         "vectors-and-spaces",
         "curse-of-dimensionality",
         "top-k-pruning",
@@ -574,6 +585,10 @@
       "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html",
       "conceptIds": [
+        "learning-to-rank",
+        "vector-quantization",
+        "disk-based-ann",
+        "index-updates-tombstones",
         "top-k-pruning",
         "descriptive-statistics",
         "probability-fundamentals",
@@ -612,6 +627,10 @@
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html",
       "conceptIds": [
+        "ml-math",
+        "probability-fundamentals",
+        "descriptive-statistics",
+        "numerical-stability",
         "capacity-estimation",
         "requirements-scoping",
         "embeddings",
@@ -654,6 +673,8 @@
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html",
       "conceptIds": [
+        "normalization",
+        "buffer-pool",
         "isolation-levels",
         "join-algorithms",
         "embeddings",
@@ -714,6 +735,9 @@
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
       "conceptIds": [
+        "caching",
+        "cdn-edge-delivery",
+        "pagination",
         "queueing-theory",
         "transaction-processing",
         "isolation-levels",
@@ -796,6 +820,7 @@
       "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html",
       "conceptIds": [
+        "cdn-edge-delivery",
         "rate-limiting",
         "rate-limiter-design",
         "unique-id-generation",
@@ -835,6 +860,8 @@
       "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html",
       "conceptIds": [
+        "recursion-and-induction",
+        "quickselect",
         "prefix-sums",
         "monotonic-stack",
         "string-matching",
@@ -890,6 +917,7 @@
       "goal": "Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html",
       "conceptIds": [
+        "combinatorics",
         "vectors-and-spaces",
         "derivatives-and-gradients",
         "matrices-and-transformations",
@@ -916,6 +944,9 @@
       "goal": "Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html",
       "conceptIds": [
+        "ml-math",
+        "combinatorics",
+        "numerical-stability",
         "queueing-theory",
         "curse-of-dimensionality",
         "probability-fundamentals",
@@ -1195,6 +1226,7 @@
         "object-modeling",
         "state-management",
         "web-security-basics",
+        "pagination",
         "api-design",
         "web-mobile-engineering",
         "ux-interface-design",
@@ -1716,7 +1748,9 @@
         "swe-landscape",
         "inference-serving-12w",
         "ai-reliability-12w",
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "ai-infra-12-month",
+        "math-stack-12w"
       ]
     },
     {
@@ -2172,7 +2206,8 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/caching.html",
       "roadmapIds": [
         "distributed-systems-12w",
-        "hld-practice"
+        "hld-practice",
+        "swe-landscape"
       ]
     },
     {
@@ -3296,7 +3331,8 @@
         "inference-serving-12w",
         "ai-reliability-12w",
         "multimodal-spatial-12w",
-        "math-stack-12w"
+        "math-stack-12w",
+        "ai-infra-12-month"
       ]
     },
     {
@@ -3339,7 +3375,8 @@
         "inference-serving-12w",
         "ai-reliability-12w",
         "multimodal-spatial-12w",
-        "math-stack-12w"
+        "math-stack-12w",
+        "ai-infra-12-month"
       ]
     },
     {
@@ -4950,6 +4987,123 @@
       "roadmapIds": [
         "swe-landscape",
         "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "combinatorics",
+      "name": "Combinatorics",
+      "description": "Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "counting"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/combinatorics.html",
+      "roadmapIds": [
+        "math-stack-12w",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "numerical-stability",
+      "name": "Numerical Stability",
+      "description": "Floating point, catastrophic cancellation, and the log-sum-exp trick.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "numerics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/numerical-stability.html",
+      "roadmapIds": [
+        "math-stack-12w",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "learning-to-rank",
+      "name": "Learning to Rank",
+      "description": "Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.",
+      "difficulty": "advanced",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "click-models",
+      "name": "Click Models & Position Bias",
+      "description": "Why clicks are not relevance labels, and how to debias implicit feedback.",
+      "difficulty": "advanced",
+      "tags": [
+        "search-ir",
+        "evaluation"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/click-models.html",
+      "roadmapIds": [
+        "retrieval-30-day"
+      ]
+    },
+    {
+      "id": "vector-quantization",
+      "name": "Scalar & Binary Quantization",
+      "description": "Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "compression"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "disk-based-ann",
+      "name": "Disk-Based ANN",
+      "description": "DiskANN and SPANN — serving vector indexes that do not fit in memory.",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "indexing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "index-updates-tombstones",
+      "name": "Index Updates & Tombstones",
+      "description": "Deleting and updating vectors in a graph index without rebuilding it.",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "indexing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "cdn-edge-delivery",
+      "name": "CDN & Edge Delivery",
+      "description": "Cache hierarchy, origin shield, and invalidation versus TTL at the edge.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery.html",
+      "roadmapIds": [
+        "hld-practice",
+        "swe-landscape"
       ]
     }
   ],

@@ -2228,6 +2228,70 @@
       "difficulty": "core",
       "question": "An endpoint using OFFSET is fine on page 1 and times out on page 5,000, and users occasionally report a duplicated row. Explain both symptoms and the single change that fixes them.",
       "answer": "OFFSET makes the database generate and discard every skipped row, so cost grows linearly with page depth — page 5,000 produces 100,000 rows to return 20. The duplicate is the same mechanism seen differently: a row inserted before the window shifts everything down by one, so the next page re-serves an item the client already had. Keyset pagination fixes both by resuming after a key rather than counting skipped rows: each page is an index seek at constant cost, and an insert elsewhere cannot move the window."
+    },
+    {
+      "id": "rq-combinatorics-complement",
+      "conceptId": "combinatorics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "'At least one collision among k hashed items' is awkward to count directly. What is the standard move, and why is it easier?",
+      "answer": "Count the complement — the probability that ALL k are distinct — and subtract from 1. 'At least one' is a union over many overlapping events, so direct counting needs inclusion-exclusion across every subset; 'all distinct' is a single product of independent-ish factors. This is the birthday-paradox calculation, and it is why collisions appear at roughly sqrt(N) items rather than N."
+    },
+    {
+      "id": "rq-catastrophic-cancellation",
+      "conceptId": "numerical-stability",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Subtracting two nearly equal floats is called catastrophic. What exactly is lost, and why does using doubles only postpone it?",
+      "answer": "Floating point keeps a fixed number of significant digits, so when two close numbers are subtracted the leading digits — the ones that agreed — cancel and the result is carried by the trailing digits, which are precisely the least accurate. Relative error explodes even though absolute error did not change. Doubles give more significant digits, so the failure needs closer inputs, but the mechanism is identical. The real fix is algebraic: reorder to avoid the subtraction, or shift domains as log-sum-exp does."
+    },
+    {
+      "id": "rq-ltr-nondifferentiable",
+      "conceptId": "learning-to-rank",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "NDCG has zero gradient almost everywhere. How does LambdaMART optimise it anyway?",
+      "answer": "NDCG depends only on sort order, so an infinitesimal score change usually moves nothing and the derivative is zero — until a swap happens, where it jumps. LambdaMART never differentiates NDCG. It computes a pairwise gradient for each document pair and scales it by |ΔNDCG|, the change that swapping those two would cause. The metric enters as a weight rather than as a function to differentiate, so pairs that matter to NDCG pull harder."
+    },
+    {
+      "id": "rq-clicks-not-relevance",
+      "conceptId": "click-models",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "A team trains its ranker on click-through rate and the ranking gets more entrenched each cycle. Explain the loop and the standard correction.",
+      "answer": "A click requires the user to have examined the result, and examination falls steeply with rank — so CTR measures relevance multiplied by position. Training on it teaches the model that being at the top predicts clicks, it promotes what was already promoted, and the next log is even more skewed. Inverse-propensity weighting corrects it by dividing each click by the estimated examination probability for that position, so a click from rank 8 counts far more than one from rank 1. Estimating those propensities honestly needs some randomisation in the logging policy."
+    },
+    {
+      "id": "rq-quantize-rescore",
+      "conceptId": "vector-quantization",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Binary quantisation cuts memory 32x but loses a lot of precision. Why does the two-stage retrieve-then-rescore pattern get most of the accuracy back?",
+      "answer": "The compressed representation only has to be good enough to RANK candidates roughly — to get the true nearest neighbours somewhere into an over-fetched candidate set of, say, 10x k. Precision is then restored by rescoring just those few hundred candidates against full-precision vectors, which is cheap because it touches a tiny fraction of the index. You pay full precision only where it changes the answer, so memory follows the compressed vectors and accuracy follows the rescore."
+    },
+    {
+      "id": "rq-diskann-io-bound",
+      "conceptId": "disk-based-ann",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Moving an ANN index from RAM to SSD inverts what you optimise. What becomes the cost, and how does DiskANN keep it low?",
+      "answer": "In memory the cost is distance comparisons; on SSD it is random reads, each around 100 microseconds — thousands of times a comparison. A traversal that was cheap becomes dominated by the number of pages touched, so optimising comparison count is optimising the wrong term. DiskANN keeps compressed vectors resident in RAM to steer the search and reads full-precision neighbourhoods from SSD only for the few nodes it actually needs, turning a long traversal into a handful of reads."
+    },
+    {
+      "id": "rq-graph-delete-cost",
+      "conceptId": "index-updates-tombstones",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "Why can a proximity-graph index not simply remove a deleted node, and what does the tombstone cost you over time?",
+      "answer": "Other nodes reach their neighbours through that node's edges; excising it can disconnect regions of the graph and silently reduce recall for queries that used to route through it. So implementations mark it deleted and filter it from results. The debt is that the node still occupies memory and is still traversed, consuming search budget that returns nothing — as the tombstone ratio climbs, recall and latency both drift with no code change, until a compaction rebuilds the region."
+    },
+    {
+      "id": "rq-cdn-immutable-urls",
+      "conceptId": "cdn-edge-delivery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why do content-hashed URLs with a one-year TTL beat a short TTL plus purge-on-deploy?",
+      "answer": "Because they make invalidation unnecessary rather than fast. A hashed URL names a specific byte sequence, so a change produces a different URL — the old entry is never wrong, it is simply unreferenced, and the new one is a plain cache miss. Purge is eventually consistent across POPs, can fail partially, and leaves a window where users get stale content; a short TTL trades constant origin load for a smaller version of the same window. The immutable approach has neither problem."
     }
   ]
 }

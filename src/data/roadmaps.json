@@ -58,6 +58,9 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "learning-to-rank",
+            "click-models",
+            "vector-quantization",
             "vectors-and-spaces",
             "curse-of-dimensionality",
             "top-k-pruning",
@@ -69,6 +72,9 @@
             "hypothesis-testing"
           ],
           "drills": [
+            "ndcg-at-k",
+            "ipw-debias-clicks",
+            "scalar-quantize-roundtrip",
             "compute-dot-product",
             "distance-concentration",
             "wand-threshold-skip",
@@ -128,6 +134,10 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "learning-to-rank",
+            "vector-quantization",
+            "disk-based-ann",
+            "index-updates-tombstones",
             "top-k-pruning",
             "descriptive-statistics",
             "probability-fundamentals",
@@ -142,6 +152,10 @@
             "topk-vector-search"
           ],
           "drills": [
+            "ndcg-at-k",
+            "scalar-quantize-roundtrip",
+            "count-random-reads",
+            "tombstone-recall-drift",
             "wand-threshold-skip",
             "summarize-dataset-stats",
             "conditional-probability-bayes",
@@ -210,6 +224,10 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "ml-math",
+            "probability-fundamentals",
+            "descriptive-statistics",
+            "numerical-stability",
             "capacity-estimation",
             "requirements-scoping",
             "embeddings",
@@ -224,6 +242,10 @@
             "brute-force-vector-db"
           ],
           "drills": [
+            "ml-dot-matmul-shapes",
+            "conditional-probability-bayes",
+            "summarize-dataset-stats",
+            "logsumexp-stable",
             "size-a-write-heavy-service",
             "classify-requirements",
             "embed-and-search",
@@ -483,6 +505,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "caching",
+            "cdn-edge-delivery",
             "pagination",
             "queueing-theory",
             "transaction-processing",
@@ -513,6 +537,8 @@
             "ml-adamw"
           ],
           "drills": [
+            "cache-stampede",
+            "cache-key-and-ttl",
             "keyset-pagination",
             "utilisation-latency-curve",
             "practice-transaction-processing",
@@ -694,6 +720,7 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "cdn-edge-delivery",
             "rate-limiting",
             "rate-limiter-design",
             "unique-id-generation",
@@ -715,6 +742,7 @@
             "hybrid-search"
           ],
           "drills": [
+            "cache-key-and-ttl",
             "implement-token-bucket",
             "token-bucket-limiter",
             "snowflake-id-layout",
@@ -914,11 +942,17 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "combinatorics",
             "vectors-and-spaces",
             "derivatives-and-gradients",
             "matrices-and-transformations"
           ],
-          "drills": [],
+          "drills": [
+            "count-with-inclusion-exclusion",
+            "compute-dot-product",
+            "compute-gradient-2d",
+            "multiply-2x2-matrix"
+          ],
           "artifacts": []
         },
         {
@@ -995,6 +1029,9 @@
           "title": "Week 1 — Probability gym",
           "goal": "Conditional probability, Bayes, distributions — plus simulate random processes.",
           "concepts": [
+            "ml-math",
+            "combinatorics",
+            "numerical-stability",
             "queueing-theory",
             "curse-of-dimensionality",
             "probability-fundamentals",
@@ -1002,6 +1039,9 @@
             "random-walks-markov"
           ],
           "drills": [
+            "ml-dot-matmul-shapes",
+            "count-with-inclusion-exclusion",
+            "logsumexp-stable",
             "utilisation-latency-curve",
             "distance-concentration",
             "conditional-probability-bayes",

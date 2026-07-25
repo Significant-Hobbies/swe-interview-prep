@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disk-Based ANN | SWE Prep</title>
+    <meta name="description" content="DiskANN and SPANN — serving vector indexes that do not fit in memory. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Disk-Based ANN | SWE Prep">
+    <meta property="og:description" content="DiskANN and SPANN — serving vector indexes that do not fit in memory. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Disk-Based ANN | SWE Prep">
+    <meta name="twitter:description" content="DiskANN and SPANN — serving vector indexes that do not fit in memory. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Disk-Based ANN","description":"DiskANN and SPANN — serving vector indexes that do not fit in memory.","url":"https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Disk-Based ANN","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · advanced</p>
+    <h1>Disk-Based ANN</h1>
+    <p class="lede">DiskANN and SPANN — serving vector indexes that do not fit in memory.</p>
+    <div class="pills"><span>vector-db</span><span>indexing</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>An in-memory graph index like HNSW is bounded by RAM, so at billion scale the index has to live on SSD — and then the cost model inverts: what matters is not comparisons but the number of random reads, because each one costs a hundred microseconds. DiskANN&#39;s answer is to keep compressed vectors in memory to guide the search and touch the SSD only for the few full-precision neighbourhoods it actually needs, so a query costs a handful of reads rather than a traversal&#39;s worth.</p>
+    </section>
+
+    <section>
+      <h2>How to study Disk-Based ANN</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Disk-Based ANN with Scalar &amp; Binary Quantization, Compute, Memory &amp; Storage Hierarchy. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Cost a disk-resident search by I/O and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Billion-scale retrieval on commodity hardware, where an all-in-RAM index would cost an order of magnitude more.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Carrying over in-memory intuition and optimising comparison count instead of I/O count</li><li>Ignoring that SSD random-read latency, not bandwidth, sets the query floor</li><li>Rebuilding the whole index for small update volumes rather than maintaining a delta</li><li>Benchmarking with a warm page cache, which hides the disk cost entirely</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Cost a disk-resident search by I/O</h3>
+          <p>Implement queryCost({hops, neighboursPerHop, cachedFraction, readLatencyUs, compareLatencyNs}) returning { randomReads, totalUs } rounded to 2 decimals. Every hop fetches neighboursPerHop nodes; a cachedFraction of them avoid the SSD. Comparisons cost compareLatencyNs each and happen for every fetched neighbour.</p>
+          <p><strong>Expected evidence:</strong> With SSD reads at 100us, I/O dominates comparisons by orders of magnitude.</p>
+          <a href="/drills/count-random-reads">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Moving an ANN index from RAM to SSD inverts what you optimise. What becomes the cost, and how does DiskANN keep it low?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/vector-quantization.html">Scalar &amp; Binary Quantization</a></li><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>
