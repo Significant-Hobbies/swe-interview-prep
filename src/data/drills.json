@@ -5456,6 +5456,147 @@
         }
       ],
       "referenceSolution": "function buildQuery(table, filters) {\n  const keys = Object.keys(filters);\n  const values = [];\n  const clauses = keys.map((key, i) => {\n    if (!ALLOWED.has(key)) throw new Error(`disallowed column: ${key}`);\n    values.push(filters[key]);\n    return `${key} = $${i + 1}`;\n  });\n  return { text: `SELECT * FROM ${table} WHERE ${clauses.join(' AND ')}`, values };\n}"
+    },
+    {
+      "id": "utilisation-latency-curve",
+      "title": "Latency against utilisation",
+      "conceptId": "queueing-theory",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "For an M/M/1 queue implement mm1(lambdaRate, muRate) returning { rho, avgInSystem, avgWaitSeconds } where rho = λ/µ, L = ρ/(1−ρ), W = 1/(µ−λ). Return null when the queue is unstable (λ >= µ). Round rho to 2 decimals, avgInSystem to 2, avgWaitSeconds to 4.",
+      "expectedOutput": "mm1(50,100) -> { rho:0.5, avgInSystem:1, avgWaitSeconds:0.02 }; mm1(95,100) -> avgInSystem 19",
+      "hints": [
+        "Stability first: at λ >= µ the queue grows without bound and the formulas are meaningless.",
+        "Note how little λ changes between the two cases and how much L does — that is the 1/(1−ρ) term."
+      ],
+      "solutionNotes": "Doubling load from 50% to 95% utilisation multiplies queue length nineteenfold. That nonlinearity is the whole reason to run servers well below saturation.",
+      "testCases": [
+        {
+          "run": "const a = mm1(50,100); console.log(a.rho, a.avgInSystem, a.avgWaitSeconds);",
+          "expect": "0.5 1 0.02"
+        },
+        {
+          "run": "const b = mm1(95,100); console.log(b.rho, b.avgInSystem, b.avgWaitSeconds);",
+          "expect": "0.95 19 0.2"
+        },
+        {
+          "run": "console.log(mm1(100,100), mm1(120,100));",
+          "expect": "null null"
+        }
+      ],
+      "referenceSolution": "function mm1(lambdaRate, muRate) {\n  if (lambdaRate >= muRate) return null;\n  const rho = lambdaRate / muRate;\n  const round = (x, d) => Math.round(x * 10 ** d) / 10 ** d;\n  return {\n    rho: round(rho, 2),\n    avgInSystem: round(rho / (1 - rho), 2),\n    avgWaitSeconds: round(1 / (muRate - lambdaRate), 4),\n  };\n}"
+    },
+    {
+      "id": "distance-concentration",
+      "title": "Distances concentrate as dimensions grow",
+      "conceptId": "curse-of-dimensionality",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement contrast(points, query) returning (maxDist - minDist) / minDist using Euclidean distance — the relative contrast between the farthest and nearest point. Round to 3 decimals. Return 0 when minDist is 0.",
+      "expectedOutput": "Contrast is large in low dimensions and tends toward 0 as dimensionality grows.",
+      "hints": [
+        "Plain Euclidean distance; the interesting part is what the ratio does as the vectors get longer.",
+        "Guard the zero-distance case before dividing."
+      ],
+      "solutionNotes": "Run it on uniform random points at d=2 and d=1000: contrast collapses, which is why 'nearest' stops discriminating and exact high-dimensional search degenerates to a scan.",
+      "testCases": [
+        {
+          "setup": "const pts = [[0,0],[3,4],[6,8]]; const q = [0,0];",
+          "run": "console.log(contrast(pts.slice(1), q));",
+          "expect": "1"
+        },
+        {
+          "setup": "function mk(d,seed){let s=seed;const r=()=>((s=s*1103515245+12345&0x7fffffff)/0x7fffffff);return Array.from({length:d},r);}\nconst lo=[mk(2,1),mk(2,2),mk(2,3),mk(2,4)]; const hi=[mk(500,1),mk(500,2),mk(500,3),mk(500,4)];",
+          "run": "const a=contrast(lo,mk(2,9)), b=contrast(hi,mk(500,9)); console.log(a > b, b < 0.5);",
+          "expect": "true true"
+        }
+      ],
+      "referenceSolution": "function contrast(points, query) {\n  const dist = (p) => Math.sqrt(p.reduce((s, v, i) => s + (v - query[i]) ** 2, 0));\n  const ds = points.map(dist);\n  const min = Math.min(...ds), max = Math.max(...ds);\n  if (min === 0) return 0;\n  return Math.round(((max - min) / min) * 1000) / 1000;\n}"
+    },
+    {
+      "id": "wand-threshold-skip",
+      "title": "Skip documents that cannot reach the top k",
+      "conceptId": "top-k-pruning",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "prompt": "Implement prune(docs, upperBounds, k) where docs is [{id, terms:[termName], score}] and upperBounds maps term -> max possible contribution. Walk docs in order maintaining a top-k heap; BEFORE scoring a document, skip it when the sum of its terms' upper bounds is <= the current k-th best score. Return { top: ids of the top k by score descending, scored: how many documents you actually scored }.",
+      "expectedOutput": "Pruning must not change the top k — only how many documents were scored.",
+      "hints": [
+        "The threshold is the k-th best score so far, and it is 0 (skip nothing) until the heap holds k documents.",
+        "Use <= so a document that can only tie is skipped; ties do not displace an existing result."
+      ],
+      "solutionNotes": "This is safe pruning: identical output to scoring everything. The only observable difference is `scored`.",
+      "testCases": [
+        {
+          "setup": "const docs=[{id:1,terms:['a'],score:9},{id:2,terms:['b'],score:8},{id:3,terms:['c'],score:1},{id:4,terms:['c'],score:2}];\nconst ub={a:10,b:9,c:3};",
+          "run": "const r=prune(docs,ub,2); console.log(JSON.stringify(r.top), r.scored);",
+          "expect": "[1,2] 2"
+        },
+        {
+          "setup": "const docs2=[{id:1,terms:['x'],score:5},{id:2,terms:['x'],score:7},{id:3,terms:['x'],score:6}];const ub2={x:10};",
+          "run": "const r=prune(docs2,ub2,2); console.log(JSON.stringify(r.top), r.scored);",
+          "expect": "[2,3] 3"
+        }
+      ],
+      "referenceSolution": "function prune(docs, upperBounds, k) {\n  const heap = [];\n  let scored = 0;\n  for (const doc of docs) {\n    const threshold = heap.length >= k ? heap[heap.length - 1].score : 0;\n    const bound = doc.terms.reduce((s, t) => s + (upperBounds[t] ?? 0), 0);\n    if (heap.length >= k && bound <= threshold) continue;\n    scored++;\n    heap.push(doc);\n    heap.sort((a, b) => b.score - a.score);\n    if (heap.length > k) heap.pop();\n  }\n  return { top: heap.map((d) => d.id), scored };\n}"
+    },
+    {
+      "id": "token-bucket-limiter",
+      "title": "Token bucket rate limiter",
+      "conceptId": "rate-limiter-design",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement makeLimiter(capacity, refillPerSecond) returning allow(nowMs) -> boolean. Tokens refill continuously at refillPerSecond, capped at capacity; the bucket starts full. Each allowed call consumes one token. Do not refill in discrete ticks.",
+      "expectedOutput": "capacity 2, refill 1/s: two immediate calls allowed, third denied, allowed again one second later.",
+      "hints": [
+        "Refill by elapsed time since the last call: tokens += (now - last)/1000 * rate, clamped to capacity.",
+        "The burst allowance is the capacity — that is the deliberate difference from a fixed window."
+      ],
+      "solutionNotes": "Continuous refill is what removes the fixed-window boundary problem, where a client can spend a full quota either side of the reset and observe double the intended rate.",
+      "testCases": [
+        {
+          "run": "const a = makeLimiter(2,1); console.log(a(0), a(0), a(0));",
+          "expect": "true true false"
+        },
+        {
+          "run": "const b = makeLimiter(2,1); b(0); b(0); console.log(b(1000), b(1000));",
+          "expect": "true false"
+        },
+        {
+          "run": "const c = makeLimiter(3,10); c(0); c(0); c(0); console.log(c(0), c(1000));",
+          "expect": "false true"
+        }
+      ],
+      "referenceSolution": "function makeLimiter(capacity, refillPerSecond) {\n  let tokens = capacity;\n  let last = null;\n  return (nowMs) => {\n    if (last === null) last = nowMs;\n    tokens = Math.min(capacity, tokens + ((nowMs - last) / 1000) * refillPerSecond);\n    last = nowMs;\n    if (tokens >= 1) { tokens -= 1; return true; }\n    return false;\n  };\n}"
+    },
+    {
+      "id": "snowflake-id-layout",
+      "title": "Pack and unpack a Snowflake id",
+      "conceptId": "unique-id-generation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement pack(timestampMs, machineId, sequence) and unpack(id) for a 64-bit Snowflake layout: 41 bits timestamp (ms since a custom epoch), 10 bits machine id, 12 bits sequence. Use BigInt. pack must throw when machineId or sequence exceeds its field.",
+      "expectedOutput": "unpack(pack(1700000000000n, 42n, 7n)) -> { timestampMs: 1700000000000n, machineId: 42n, sequence: 7n }",
+      "hints": [
+        "Shift the timestamp left by 22, the machine id by 12, then OR in the sequence.",
+        "Field widths are what bound the design: 10 bits is 1024 machines, 12 bits is 4096 ids per machine per millisecond."
+      ],
+      "solutionNotes": "Ids are time-ordered because the timestamp occupies the high bits — that ordering is what keeps index inserts at the right edge of the B-tree.",
+      "testCases": [
+        {
+          "run": "const id = pack(1700000000000n, 42n, 7n); const u = unpack(id); console.log(u.timestampMs === 1700000000000n, u.machineId === 42n, u.sequence === 7n);",
+          "expect": "true true true"
+        },
+        {
+          "run": "const a = pack(1n, 0n, 0n), b = pack(2n, 0n, 0n); console.log(b > a, pack(0n,1023n,4095n) > 0n);",
+          "expect": "true true"
+        },
+        {
+          "run": "let t=0; try { pack(1n, 1024n, 0n); } catch { t++; } try { pack(1n, 0n, 4096n); } catch { t++; } console.log(t);",
+          "expect": "2"
+        }
+      ],
+      "referenceSolution": "function pack(timestampMs, machineId, sequence) {\n  if (machineId > 1023n || machineId < 0n) throw new Error('machineId out of range');\n  if (sequence > 4095n || sequence < 0n) throw new Error('sequence out of range');\n  return (BigInt(timestampMs) << 22n) | (BigInt(machineId) << 12n) | BigInt(sequence);\n}\n\nfunction unpack(id) {\n  return {\n    timestampMs: BigInt(id) >> 22n,\n    machineId: (BigInt(id) >> 12n) & 1023n,\n    sequence: BigInt(id) & 4095n,\n  };\n}"
     }
   ]
 }

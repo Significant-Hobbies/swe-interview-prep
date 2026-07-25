@@ -58,6 +58,9 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "vectors-and-spaces",
+            "curse-of-dimensionality",
+            "top-k-pruning",
             "descriptive-statistics",
             "probability-fundamentals",
             "random-variables",
@@ -65,7 +68,17 @@
             "estimation-confidence",
             "hypothesis-testing"
           ],
-          "drills": [],
+          "drills": [
+            "compute-dot-product",
+            "distance-concentration",
+            "wand-threshold-skip",
+            "summarize-dataset-stats",
+            "conditional-probability-bayes",
+            "compute-expectation-variance",
+            "implement-topk-heap",
+            "construct-confidence-interval",
+            "interpret-p-value"
+          ],
           "artifacts": []
         },
         {
@@ -115,6 +128,7 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "top-k-pruning",
             "descriptive-statistics",
             "probability-fundamentals",
             "random-variables",
@@ -127,7 +141,20 @@
             "hypothesis-testing",
             "topk-vector-search"
           ],
-          "drills": [],
+          "drills": [
+            "wand-threshold-skip",
+            "summarize-dataset-stats",
+            "conditional-probability-bayes",
+            "compute-expectation-variance",
+            "compute-precision-recall",
+            "structured-extraction",
+            "calculate-tfidf",
+            "build-tokenizer",
+            "implement-similarity-metrics",
+            "construct-confidence-interval",
+            "interpret-p-value",
+            "implement-topk-heap"
+          ],
           "artifacts": []
         },
         {
@@ -452,6 +479,7 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "queueing-theory",
             "transaction-processing",
             "isolation-levels",
             "retries-and-circuit-breakers",
@@ -480,6 +508,7 @@
             "ml-adamw"
           ],
           "drills": [
+            "utilisation-latency-curve",
             "practice-transaction-processing",
             "detect-write-skew",
             "backoff-with-jitter",
@@ -659,6 +688,9 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "rate-limiting",
+            "rate-limiter-design",
+            "unique-id-generation",
             "capacity-estimation",
             "requirements-scoping",
             "embeddings",
@@ -677,6 +709,9 @@
             "hybrid-search"
           ],
           "drills": [
+            "implement-token-bucket",
+            "token-bucket-limiter",
+            "snowflake-id-layout",
             "size-a-write-heavy-service",
             "classify-requirements",
             "embed-and-search",
@@ -950,14 +985,18 @@
           "title": "Week 1 — Probability gym",
           "goal": "Conditional probability, Bayes, distributions — plus simulate random processes.",
           "concepts": [
+            "queueing-theory",
+            "curse-of-dimensionality",
             "probability-fundamentals",
             "classical-distributions",
             "random-walks-markov"
           ],
           "drills": [
+            "utilisation-latency-curve",
+            "distance-concentration",
             "conditional-probability-bayes",
-            "independence-inclusion-exclusion",
-            "match-distribution-scenario"
+            "match-distribution-scenario",
+            "simulate-markov-chain"
           ],
           "artifacts": ["simulate-random-processes", "math-weekly-writeup"]
         },

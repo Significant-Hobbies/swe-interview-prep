@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 234 concepts across
+A public, JavaScript-free index of 239 concepts across
 19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -42,7 +42,7 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/search-ir.html
-- Concepts: 10
+- Concepts: 11
 - Roadmaps: 4
 
 - [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
@@ -55,13 +55,14 @@ Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranki
 - [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html) — A second-stage cross-encoder pass that reorders the top-k candidates.
 - [Query Rewriting](https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html) — Expanding, correcting, and normalizing queries before retrieval.
 - [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html) — Inverted index, ranking, autocomplete at scale.
+- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
 
 ## Mathematics
 
 Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/mathematics.html
-- Concepts: 26
+- Concepts: 28
 - Roadmaps: 3
 
 - [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
@@ -90,6 +91,8 @@ Active math only: solve, derive, implement, simulate — never aesthetic consump
 - [Random Walks & Markov Chains](https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov.html) — Markov property, random walks, transition matrices — generative story behind market efficiency intuition.
 - [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics.html) — Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.
 - [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html) — Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.
+- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html) — Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.
+- [Curse of Dimensionality](https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality.html) — Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
 
 ## Vector DB & ANN
 
@@ -204,7 +207,7 @@ Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, comp
 Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/system-design.html
-- Concepts: 23
+- Concepts: 25
 - Roadmaps: 6
 
 - [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
@@ -230,6 +233,8 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 - [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html) — Architecting a production RAG system: ingestion, retrieval, generation, evals.
 - [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html) — Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.
 - [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html) — Separating functional from non-functional requirements and cutting scope to something buildable.
+- [Rate Limiter Design](https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design.html) — Token bucket versus sliding window, and making a limiter work across many nodes.
+- [Unique ID Generation](https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html) — Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.
 
 ## DSA & Implementation
 

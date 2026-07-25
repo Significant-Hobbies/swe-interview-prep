@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unique ID Generation | SWE Prep</title>
+    <meta name="description" content="Snowflake, ULID, and UUIDv7 — unique ids without a central allocator. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Unique ID Generation | SWE Prep">
+    <meta property="og:description" content="Snowflake, ULID, and UUIDv7 — unique ids without a central allocator. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unique ID Generation | SWE Prep">
+    <meta name="twitter:description" content="Snowflake, ULID, and UUIDv7 — unique ids without a central allocator. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Unique ID Generation","description":"Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.","url":"https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Unique ID Generation","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
+      <article>
+    <p class="eyebrow">System Design · core</p>
+    <h1>Unique ID Generation</h1>
+    <p class="lede">Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.</p>
+    <div class="pills"><span>system-design</span><span>scalability</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A database sequence is a coordination point, so distributed id schemes buy independence by partitioning the id space: Snowflake spends bits on a timestamp, a machine id, and a per-millisecond counter, so two nodes cannot collide without sharing a machine id. Time-ordered prefixes are the second reason to care — random UUIDv4 keys scatter writes across a B-tree and destroy insert locality, whereas UUIDv7 and ULID sort by creation time and keep inserts at the right edge of the index.</p>
+    </section>
+
+    <section>
+      <h2>How to study Unique ID Generation</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Unique ID Generation with Sharding, Consistent Hashing. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Pack and unpack a Snowflake id and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Primary keys at scale, idempotency keys, and any id generated before a write reaches the database.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Using random UUIDv4 as a clustered primary key, causing page splits and index fragmentation</li><li>Ignoring clock skew and rollback — Snowflake ids collide or go backwards if the clock moves</li><li>Leaking information: a sequential id exposes volume, and a timestamped one exposes creation time</li><li>Assuming machine ids assign themselves; duplicated worker ids are the classic Snowflake outage</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Pack and unpack a Snowflake id</h3>
+          <p>Implement pack(timestampMs, machineId, sequence) and unpack(id) for a 64-bit Snowflake layout: 41 bits timestamp (ms since a custom epoch), 10 bits machine id, 12 bits sequence. Use BigInt. pack must throw when machineId or sequence exceeds its field.</p>
+          <p><strong>Expected evidence:</strong> unpack(pack(1700000000000n, 42n, 7n)) -&gt; { timestampMs: 1700000000000n, machineId: 42n, sequence: 7n }</p>
+          <a href="/drills/snowflake-id-layout">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Switching a primary key from random UUIDv4 to UUIDv7 improved write throughput without any schema change. Why?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/capacity-estimation.html">Capacity Estimation</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/sharding.html">Sharding</a></li><li><a href="/curriculum/concepts/consistent-hashing.html">Consistent Hashing</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

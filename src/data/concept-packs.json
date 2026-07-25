@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 174,
-      "paper": 209,
-      "blog": 166,
-      "book": 135,
-      "problem": 234,
-      "write": 234,
-      "more": 74,
-      "items": 1226
+      "video": 177,
+      "paper": 215,
+      "blog": 174,
+      "book": 143,
+      "problem": 239,
+      "write": 239,
+      "more": 91,
+      "items": 1278
     }
   },
   "packs": {
@@ -7200,6 +7200,16 @@
     "prefix-sums": {
       "items": [
         {
+          "category": "blog",
+          "title": "USACO Guide — Introduction to Prefix Sums",
+          "url": "https://usaco.guide/silver/prefix-sums"
+        },
+        {
+          "category": "more",
+          "title": "Coding Interview Patterns — Prefix Sums",
+          "url": "/library/coding-interview-patterns?section=source-prefix-sums"
+        },
+        {
           "category": "problem",
           "title": "Answer range-sum queries in O(1)",
           "url": "/drills/range-sum-queries"
@@ -7214,6 +7224,21 @@
     },
     "monotonic-stack": {
       "items": [
+        {
+          "category": "blog",
+          "title": "USACO Guide — Stacks (incl. monotonic stack)",
+          "url": "https://usaco.guide/gold/stacks"
+        },
+        {
+          "category": "book",
+          "title": "Minimum Stack / Minimum Queue — the O(n) sliding-window minimum",
+          "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html"
+        },
+        {
+          "category": "more",
+          "title": "Coding Interview Patterns — Stacks (next greater element, sliding-window maximum)",
+          "url": "/library/coding-interview-patterns?section=source-stacks"
+        },
         {
           "category": "problem",
           "title": "Next greater element",
@@ -7230,6 +7255,31 @@
     "string-matching": {
       "items": [
         {
+          "category": "video",
+          "title": "MIT 6.006 — Lecture 9: Table Doubling, Karp-Rabin",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-9-table-doubling-karp-rabin/"
+        },
+        {
+          "category": "blog",
+          "title": "cp-algorithms — Prefix function: Knuth-Morris-Pratt",
+          "url": "https://cp-algorithms.com/string/prefix-function.html"
+        },
+        {
+          "category": "book",
+          "title": "Algorithms (Erickson) — Lecture 7: String Matching (Karp-Rabin, Knuth-Morris-Pratt)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/07-strings.pdf"
+        },
+        {
+          "category": "more",
+          "title": "JavaScript Algorithms — Knuth–Morris–Pratt string search",
+          "url": "/library/javascript-algorithms?section=src-algorithms-string-knuth-morris-pratt-readme-md"
+        },
+        {
+          "category": "more",
+          "title": "JavaScript Algorithms — Rabin–Karp rolling-hash string search",
+          "url": "/library/javascript-algorithms?section=src-algorithms-string-rabin-karp-readme-md"
+        },
+        {
           "category": "problem",
           "title": "Rabin-Karp substring search",
           "url": "/drills/rolling-hash-search"
@@ -7244,6 +7294,31 @@
     },
     "minimum-spanning-tree": {
       "items": [
+        {
+          "category": "video",
+          "title": "MIT 6.046J — Lecture 12: Greedy Algorithms: Minimum Spanning Tree",
+          "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-12-greedy-algorithms-minimum-spanning-tree/"
+        },
+        {
+          "category": "blog",
+          "title": "cp-algorithms — Minimum spanning tree: Kruskal's algorithm",
+          "url": "https://cp-algorithms.com/graph/mst_kruskal.html"
+        },
+        {
+          "category": "book",
+          "title": "Algorithms (Erickson) — Chapter 7: Minimum Spanning Trees",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/07-mst.pdf"
+        },
+        {
+          "category": "more",
+          "title": "JavaScript Algorithms — Kruskal's Algorithm",
+          "url": "/library/javascript-algorithms?section=src-algorithms-graph-kruskal-readme-md"
+        },
+        {
+          "category": "more",
+          "title": "JavaScript Algorithms — Prim's Algorithm",
+          "url": "/library/javascript-algorithms?section=src-algorithms-graph-prim-readme-md"
+        },
         {
           "category": "problem",
           "title": "Total weight of a minimum spanning tree",
@@ -7260,6 +7335,21 @@
     "isolation-levels": {
       "items": [
         {
+          "category": "paper",
+          "title": "A Critique of ANSI SQL Isolation Levels (Berenson, Bernstein, Gray, Melton, O'Neil, O'Neil)",
+          "url": "https://arxiv.org/abs/cs/0701157"
+        },
+        {
+          "category": "book",
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 20 notes — Multi-Version Concurrency Control",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/20-multiversioning.pdf"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Database Isolation Levels",
+          "url": "/library/system-design-101?section=data-guides-what-are-database-isolation-levels-md"
+        },
+        {
           "category": "problem",
           "title": "Detect write skew under snapshot isolation",
           "url": "/drills/detect-write-skew"
@@ -7274,6 +7364,16 @@
     },
     "join-algorithms": {
       "items": [
+        {
+          "category": "paper",
+          "title": "How Good Are Query Optimizers, Really? (Leis et al., PVLDB 9)",
+          "url": "https://www.vldb.org/pvldb/vol9/p204-leis.pdf"
+        },
+        {
+          "category": "book",
+          "title": "CMU 15-445/645 (Fall 2025) Lecture 12 notes — Join Algorithms",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/notes/12-joins.pdf"
+        },
         {
           "category": "problem",
           "title": "Pick the join the planner should pick",
@@ -7290,6 +7390,31 @@
     "retries-and-circuit-breakers": {
       "items": [
         {
+          "category": "blog",
+          "title": "Martin Fowler — Circuit Breaker",
+          "url": "https://martinfowler.com/bliki/CircuitBreaker.html"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Retry Strategies for System Failures",
+          "url": "/library/system-design-101?section=data-guides-how-do-we-retry-on-failures-md"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Circuit Breaker",
+          "url": "/library/system-design?section=readme-md-circuit-breaker"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Resiliency Patterns",
+          "url": "/library/system-design-101?section=data-guides-resiliency-patterns-md"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Top 6 Cases to Apply Idempotency",
+          "url": "/library/system-design-101?section=data-guides-top-6-cases-to-apply-idempotency-md"
+        },
+        {
           "category": "problem",
           "title": "Exponential backoff with full jitter",
           "url": "/drills/backoff-with-jitter"
@@ -7305,6 +7430,26 @@
     "web-security-basics": {
       "items": [
         {
+          "category": "blog",
+          "title": "MDN — Cross-Origin Resource Sharing (CORS)",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+        },
+        {
+          "category": "more",
+          "title": "DevOps Exercises — Security",
+          "url": "/library/devops-exercises?section=devops-security"
+        },
+        {
+          "category": "more",
+          "title": "Node.js Best Practices — Validate the incoming JSON schemas",
+          "url": "/library/node-best-practices?section=sections-security-validation-md"
+        },
+        {
+          "category": "more",
+          "title": "Node.js Best Practices — Preventing database injection vulnerabilities",
+          "url": "/library/node-best-practices?section=sections-security-ormodmusage-md"
+        },
+        {
           "category": "problem",
           "title": "Parameterise instead of escaping",
           "url": "/drills/parameterise-a-query"
@@ -7314,6 +7459,146 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Web Security Basics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Almost every one of these is the same bug: data crossing into a place where it is interpreted as code or as authority"
+        }
+      ]
+    },
+    "queueing-theory": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "MIT 2.854 — The M/M/1 Queue: utilization ρ = λ/µ and Little's law L = λW",
+          "url": "https://ocw.mit.edu/courses/2-854-introduction-to-manufacturing-systems-fall-2016/927056a1af54772a587fd84ad4951e71_MIT2_854F16_Mm1Queue.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Performance Modeling and Design of Computer Systems: Queueing Theory in Action (Harchol-Balter) — Chapter 1",
+          "url": "https://www.cs.cmu.edu/~harchol/PerformanceModeling/chpt1.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Latency against utilisation",
+          "url": "/drills/utilisation-latency-curve"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Queueing Theory\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Little's law (L = λW) is an accounting identity, not a model: it holds for any stable system regardless of arrival or service distribution, which is why it works on a queue, a thread pool, or a whole company's hiring pipeline"
+        }
+      ]
+    },
+    "curse-of-dimensionality": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Essence of Linear Algebra (3Blue1Brown)",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+        },
+        {
+          "category": "paper",
+          "title": "When Is “Nearest Neighbor” Meaningful? (Beyer, Goldstein, Ramakrishnan, Shaft, ICDT 1999)",
+          "url": "https://doi.org/10.1007/3-540-49257-7_15"
+        },
+        {
+          "category": "blog",
+          "title": "A Few Useful Things to Know about Machine Learning (Domingos, CACM 2012) — §3 Intuition Fails in High Dimensions",
+          "url": "https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Linear Algebra (Strang) — MIT OCW",
+          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+        },
+        {
+          "category": "problem",
+          "title": "Distances concentrate as dimensions grow",
+          "url": "/drills/distance-concentration"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Curse of Dimensionality\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: As dimensions grow, the distance from a query to its nearest and farthest points converges: the ratio (max−min)/min tends to zero, so 'nearest' stops being meaningful and an index that prunes by distance has nothing left to prune with"
+        }
+      ]
+    },
+    "top-k-pruning": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "Faster Top-k Document Retrieval Using Block-Max Indexes (Ding & Suel, SIGIR 2011)",
+          "url": "https://research.engineering.nyu.edu/~suel/papers/bmw.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Introduction to Information Retrieval (Manning et al.) — §7.1.1 Inexact top K document retrieval",
+          "url": "https://nlp.stanford.edu/IR-book/html/htmledition/inexact-top-k-document-retrieval-1.html"
+        },
+        {
+          "category": "problem",
+          "title": "Skip documents that cannot reach the top k",
+          "url": "/drills/wand-threshold-skip"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Top-k Pruning (WAND)\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Scoring every posting is wasted work when you only need the top k: once the heap holds k results, any document whose best possible score cannot exceed the current threshold can be skipped without computing it"
+        }
+      ]
+    },
+    "rate-limiter-design": {
+      "items": [
+        {
+          "category": "blog",
+          "title": "Stripe — Scaling your API with rate limiters",
+          "url": "https://stripe.com/blog/rate-limiters"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Rate limiting algorithms",
+          "url": "/library/system-design?section=readme-md-rate-limiting-algorithms"
+        },
+        {
+          "category": "more",
+          "title": "System Design (karanpratapsingh) — Rate Limiting in Distributed Systems",
+          "url": "/library/system-design?section=readme-md-rate-limiting-rate-limiting-in-distributed-systems"
+        },
+        {
+          "category": "problem",
+          "title": "Token bucket rate limiter",
+          "url": "/drills/token-bucket-limiter"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Rate Limiter Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Fixed windows are simple and wrong at the boundary — a client can send a full quota at the end of one window and again at the start of the next, so the observed rate doubles"
+        }
+      ]
+    },
+    "unique-id-generation": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "RFC 9562 — Universally Unique IDentifiers (UUIDs)",
+          "url": "https://www.rfc-editor.org/rfc/rfc9562.html"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Explaining 5 Unique ID Generators",
+          "url": "/library/system-design-101?section=data-guides-explaining-5-unique-id-generators-in-distributed-systems-md"
+        },
+        {
+          "category": "problem",
+          "title": "Pack and unpack a Snowflake id",
+          "url": "/drills/snowflake-id-layout"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Unique ID Generation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A database sequence is a coordination point, so distributed id schemes buy independence by partitioning the id space: Snowflake spends bits on a timestamp, a machine id, and a per-millisecond counter, so two nodes cannot collide without sharing a machine id"
         }
       ]
     }

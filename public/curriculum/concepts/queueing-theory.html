@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Queueing Theory | SWE Prep</title>
+    <meta name="description" content="Little&#39;s law and the utilisation curve — why latency explodes before a system runs out of capacity.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Queueing Theory | SWE Prep">
+    <meta property="og:description" content="Little&#39;s law and the utilisation curve — why latency explodes before a system runs out of capacity.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Queueing Theory | SWE Prep">
+    <meta name="twitter:description" content="Little&#39;s law and the utilisation curve — why latency explodes before a system runs out of capacity.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Queueing Theory","description":"Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.","url":"https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Queueing Theory","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Queueing Theory</h1>
+    <p class="lede">Little&#39;s law and the utilisation curve — why latency explodes before a system runs out of capacity.</p>
+    <div class="pills"><span>mathematics</span><span>queueing</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Little&#39;s law (L = λW) is an accounting identity, not a model: it holds for any stable system regardless of arrival or service distribution, which is why it works on a queue, a thread pool, or a whole company&#39;s hiring pipeline. The result that actually changes designs is the utilisation curve — waiting time scales as 1/(1−ρ), so a server at 50% has a small queue and one at 95% has twenty times that. Systems do not fall over when utilisation hits 100%; they fall over well before, because latency goes vertical as ρ approaches 1.</p>
+    </section>
+
+    <section>
+      <h2>How to study Queueing Theory</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Queueing Theory with Capacity Estimation, Rate Limiting. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Latency against utilisation and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Thread-pool and connection-pool sizing, autoscaling thresholds, and the reason SRE targets utilisation well below saturation.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Sizing for average utilisation and being surprised by tail latency — the curve is nonlinear, so the mean hides it</li><li>Applying Little&#39;s law to an unstable system where the queue grows without bound; it requires λ &lt; µ</li><li>Adding servers to fix latency caused by variance rather than by load</li><li>Reading 70% CPU as &#39;30% headroom&#39; when the queueing delay at 70% is already several times the service time</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Latency against utilisation</h3>
+          <p>For an M/M/1 queue implement mm1(lambdaRate, muRate) returning { rho, avgInSystem, avgWaitSeconds } where rho = λ/µ, L = ρ/(1−ρ), W = 1/(µ−λ). Return null when the queue is unstable (λ &gt;= µ). Round rho to 2 decimals, avgInSystem to 2, avgWaitSeconds to 4.</p>
+          <p><strong>Expected evidence:</strong> mm1(50,100) -&gt; { rho:0.5, avgInSystem:1, avgWaitSeconds:0.02 }; mm1(95,100) -&gt; avgInSystem 19</p>
+          <a href="/drills/utilisation-latency-curve">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>A service sits at 70% CPU and someone reports &#39;30% headroom&#39;. Using the utilisation curve, why is that reading wrong?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/capacity-estimation.html">Capacity Estimation</a></li><li><a href="/curriculum/concepts/rate-limiting.html">Rate Limiting</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-stack-12w.html">12-Week Active Math Stack</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

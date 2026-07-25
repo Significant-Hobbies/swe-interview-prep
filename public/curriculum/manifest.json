@@ -2,10 +2,10 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 234,
+    "concepts": 239,
     "roadmaps": 24,
-    "drills": 277,
-    "reviewQuestions": 251,
+    "drills": 282,
+    "reviewQuestions": 256,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -288,6 +288,11 @@
     "/curriculum/concepts/isolation-levels.html",
     "/curriculum/concepts/join-algorithms.html",
     "/curriculum/concepts/retries-and-circuit-breakers.html",
-    "/curriculum/concepts/web-security-basics.html"
+    "/curriculum/concepts/web-security-basics.html",
+    "/curriculum/concepts/queueing-theory.html",
+    "/curriculum/concepts/curse-of-dimensionality.html",
+    "/curriculum/concepts/top-k-pruning.html",
+    "/curriculum/concepts/rate-limiter-design.html",
+    "/curriculum/concepts/unique-id-generation.html"
   ]
 }

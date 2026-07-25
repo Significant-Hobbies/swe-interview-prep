@@ -2136,6 +2136,222 @@ export function tagsForConcept(concept) {
   return [...tags];
 }
 
+/**
+ * Curated 2026-07-25 for the concepts added to close the audit's coverage gaps.
+ *
+ * Verified three ways as usual, plus two catches a status-code check would have
+ * shipped: MIT's Little's Law PDF now 301s twice to a faculty homepage and
+ * serves HTML as a 200, and the widely-cited engineering.nyu.edu copy of the
+ * block-max WAND paper returns Suel's home page under a .pdf URL. Both were
+ * rejected; the real block-max paper lives on research.engineering.nyu.edu.
+ */
+const CURATED_MEDIA_GAPS = {
+  'curse-of-dimensionality': {
+    paper: L(
+      'When Is “Nearest Neighbor” Meaningful? (Beyer, Goldstein, Ramakrishnan, Shaft, ICDT 1999)',
+      'https://doi.org/10.1007/3-540-49257-7_15'
+    ),
+    blog: L(
+      'A Few Useful Things to Know about Machine Learning (Domingos, CACM 2012) — §3 Intuition Fails in High Dimensions',
+      'https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf'
+    ),
+  },
+  'isolation-levels': {
+    paper: L(
+      "A Critique of ANSI SQL Isolation Levels (Berenson, Bernstein, Gray, Melton, O'Neil, O'Neil)",
+      'https://arxiv.org/abs/cs/0701157'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 20 notes — Multi-Version Concurrency Control',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/20-multiversioning.pdf'
+    ),
+  },
+  'join-algorithms': {
+    paper: L(
+      'How Good Are Query Optimizers, Really? (Leis et al., PVLDB 9)',
+      'https://www.vldb.org/pvldb/vol9/p204-leis.pdf'
+    ),
+    book: L(
+      'CMU 15-445/645 (Fall 2025) Lecture 12 notes — Join Algorithms',
+      'https://15445.courses.cs.cmu.edu/fall2025/notes/12-joins.pdf'
+    ),
+  },
+  'minimum-spanning-tree': {
+    video: L(
+      'MIT 6.046J — Lecture 12: Greedy Algorithms: Minimum Spanning Tree',
+      'https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-12-greedy-algorithms-minimum-spanning-tree/'
+    ),
+    blog: L(
+      "cp-algorithms — Minimum spanning tree: Kruskal's algorithm",
+      'https://cp-algorithms.com/graph/mst_kruskal.html'
+    ),
+    book: L(
+      'Algorithms (Erickson) — Chapter 7: Minimum Spanning Trees',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/07-mst.pdf'
+    ),
+  },
+  'monotonic-stack': {
+    blog: L('USACO Guide — Stacks (incl. monotonic stack)', 'https://usaco.guide/gold/stacks'),
+    book: L(
+      'Minimum Stack / Minimum Queue — the O(n) sliding-window minimum',
+      'https://cp-algorithms.com/data_structures/stack_queue_modification.html'
+    ),
+  },
+  'prefix-sums': {
+    blog: L('USACO Guide — Introduction to Prefix Sums', 'https://usaco.guide/silver/prefix-sums'),
+  },
+  'queueing-theory': {
+    paper: L(
+      "MIT 2.854 — The M/M/1 Queue: utilization ρ = λ/µ and Little's law L = λW",
+      'https://ocw.mit.edu/courses/2-854-introduction-to-manufacturing-systems-fall-2016/927056a1af54772a587fd84ad4951e71_MIT2_854F16_Mm1Queue.pdf'
+    ),
+    book: L(
+      'Performance Modeling and Design of Computer Systems: Queueing Theory in Action (Harchol-Balter) — Chapter 1',
+      'https://www.cs.cmu.edu/~harchol/PerformanceModeling/chpt1.pdf'
+    ),
+  },
+  'rate-limiter-design': {
+    blog: L(
+      'Stripe — Scaling your API with rate limiters',
+      'https://stripe.com/blog/rate-limiters'
+    ),
+  },
+  'retries-and-circuit-breakers': {
+    blog: L(
+      'Martin Fowler — Circuit Breaker',
+      'https://martinfowler.com/bliki/CircuitBreaker.html'
+    ),
+  },
+  'string-matching': {
+    video: L(
+      'MIT 6.006 — Lecture 9: Table Doubling, Karp-Rabin',
+      'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-9-table-doubling-karp-rabin/'
+    ),
+    blog: L(
+      'cp-algorithms — Prefix function: Knuth-Morris-Pratt',
+      'https://cp-algorithms.com/string/prefix-function.html'
+    ),
+    book: L(
+      'Algorithms (Erickson) — Lecture 7: String Matching (Karp-Rabin, Knuth-Morris-Pratt)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/notes/07-strings.pdf'
+    ),
+  },
+  'top-k-pruning': {
+    paper: L(
+      'Faster Top-k Document Retrieval Using Block-Max Indexes (Ding & Suel, SIGIR 2011)',
+      'https://research.engineering.nyu.edu/~suel/papers/bmw.pdf'
+    ),
+    book: L(
+      'Introduction to Information Retrieval (Manning et al.) — §7.1.1 Inexact top K document retrieval',
+      'https://nlp.stanford.edu/IR-book/html/htmledition/inexact-top-k-document-retrieval-1.html'
+    ),
+  },
+  'unique-id-generation': {
+    paper: L(
+      'RFC 9562 — Universally Unique IDentifiers (UUIDs)',
+      'https://www.rfc-editor.org/rfc/rfc9562.html'
+    ),
+  },
+  'web-security-basics': {
+    blog: L(
+      'MDN — Cross-Origin Resource Sharing (CORS)',
+      'https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS'
+    ),
+  },
+};
+
+for (const [conceptId, slots] of Object.entries(CURATED_MEDIA_GAPS)) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+// Vendored-repo sections covering the same concepts.
+for (const [conceptId, links] of Object.entries({
+  'isolation-levels': [
+    L(
+      'System Design 101 — Database Isolation Levels',
+      '/library/system-design-101?section=data-guides-what-are-database-isolation-levels-md'
+    ),
+  ],
+  'minimum-spanning-tree': [
+    L(
+      "JavaScript Algorithms — Kruskal's Algorithm",
+      '/library/javascript-algorithms?section=src-algorithms-graph-kruskal-readme-md'
+    ),
+    L(
+      "JavaScript Algorithms — Prim's Algorithm",
+      '/library/javascript-algorithms?section=src-algorithms-graph-prim-readme-md'
+    ),
+  ],
+  'monotonic-stack': [
+    L(
+      'Coding Interview Patterns — Stacks (next greater element, sliding-window maximum)',
+      '/library/coding-interview-patterns?section=source-stacks'
+    ),
+  ],
+  'prefix-sums': [
+    L(
+      'Coding Interview Patterns — Prefix Sums',
+      '/library/coding-interview-patterns?section=source-prefix-sums'
+    ),
+  ],
+  'rate-limiter-design': [
+    L(
+      'System Design (karanpratapsingh) — Rate limiting algorithms',
+      '/library/system-design?section=readme-md-rate-limiting-algorithms'
+    ),
+    L(
+      'System Design (karanpratapsingh) — Rate Limiting in Distributed Systems',
+      '/library/system-design?section=readme-md-rate-limiting-rate-limiting-in-distributed-systems'
+    ),
+  ],
+  'retries-and-circuit-breakers': [
+    L(
+      'System Design 101 — Retry Strategies for System Failures',
+      '/library/system-design-101?section=data-guides-how-do-we-retry-on-failures-md'
+    ),
+    L(
+      'System Design (karanpratapsingh) — Circuit Breaker',
+      '/library/system-design?section=readme-md-circuit-breaker'
+    ),
+    L(
+      'System Design 101 — Resiliency Patterns',
+      '/library/system-design-101?section=data-guides-resiliency-patterns-md'
+    ),
+    L(
+      'System Design 101 — Top 6 Cases to Apply Idempotency',
+      '/library/system-design-101?section=data-guides-top-6-cases-to-apply-idempotency-md'
+    ),
+  ],
+  'string-matching': [
+    L(
+      'JavaScript Algorithms — Knuth–Morris–Pratt string search',
+      '/library/javascript-algorithms?section=src-algorithms-string-knuth-morris-pratt-readme-md'
+    ),
+    L(
+      'JavaScript Algorithms — Rabin–Karp rolling-hash string search',
+      '/library/javascript-algorithms?section=src-algorithms-string-rabin-karp-readme-md'
+    ),
+  ],
+  'unique-id-generation': [
+    L(
+      'System Design 101 — Explaining 5 Unique ID Generators',
+      '/library/system-design-101?section=data-guides-explaining-5-unique-id-generators-in-distributed-systems-md'
+    ),
+  ],
+  'web-security-basics': [
+    L('DevOps Exercises — Security', '/library/devops-exercises?section=devops-security'),
+    L(
+      'Node.js Best Practices — Validate the incoming JSON schemas',
+      '/library/node-best-practices?section=sections-security-validation-md'
+    ),
+    L(
+      'Node.js Best Practices — Preventing database injection vulnerabilities',
+      '/library/node-best-practices?section=sections-security-ormodmusage-md'
+    ),
+  ],
+})) {
+  CONCEPT_LIBRARY_LINKS[conceptId] = [...(CONCEPT_LIBRARY_LINKS[conceptId] ?? []), ...links];
+}
 export function sTierSlotsForConcept(concept) {
   const out = {};
   const conceptSlots = CONCEPT_MEDIA[concept.id] ?? {};

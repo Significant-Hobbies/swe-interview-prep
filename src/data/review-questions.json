@@ -2148,6 +2148,46 @@
       "difficulty": "core",
       "question": "A reviewer says 'we set CORS headers, so the API is protected from other sites.' Why is that backwards, and what actually defends the endpoint?",
       "answer": "CORS relaxes the same-origin policy rather than enforcing it — a CORS header grants a foreign origin access that the browser would otherwise deny, so a permissive one removes protection. It also only constrains browsers; curl and any server ignore it entirely. What defends the endpoint is authentication and authorisation checked server-side on every request, plus a CSRF token or SameSite cookies for state-changing requests the browser would otherwise authenticate automatically."
+    },
+    {
+      "id": "rq-littles-law-utilisation",
+      "conceptId": "queueing-theory",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A service sits at 70% CPU and someone reports '30% headroom'. Using the utilisation curve, why is that reading wrong?",
+      "answer": "Headroom is not linear in utilisation. Queueing delay scales as 1/(1−ρ), so at ρ=0.7 the wait is already about 2.3x the service time, and the remaining 30% of capacity buys far less than the first 30% did — pushing to 0.9 triples the wait again. Capacity is consumed smoothly but latency is not, which is why systems degrade long before saturation and why utilisation targets sit well below 100%."
+    },
+    {
+      "id": "rq-distance-concentration",
+      "conceptId": "curse-of-dimensionality",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "In high dimensions the ratio (farthest − nearest)/nearest tends to zero. What does that break, and why do vector databases still work?",
+      "answer": "It breaks pruning. An index that discards candidates because they are 'too far' needs the distances to differ meaningfully; once nearest and farthest converge, there is nothing to discard and exact search degenerates to a full scan. Vector databases still work because the theorem assumes independent uniformly distributed coordinates, and real embeddings do not look like that — they concentrate on a much lower-dimensional manifold, leaving enough structure for graph and partition indexes to exploit."
+    },
+    {
+      "id": "rq-wand-safe-pruning",
+      "conceptId": "top-k-pruning",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "WAND skips documents without scoring them. Why is the returned top-k still exactly the same as an exhaustive scan, and when does the technique stop paying off?",
+      "answer": "Because a document is only skipped when the SUM OF UPPER BOUNDS on its matching terms cannot exceed the current k-th best score — the skip is justified by a bound on the best case, so no skipped document could have entered the top k. The win shrinks as k grows: a larger k keeps the threshold lower for longer, so fewer documents fall under it, and it vanishes entirely for queries that need deep result sets rather than a shallow top-k."
+    },
+    {
+      "id": "rq-rate-limit-boundary",
+      "conceptId": "rate-limiter-design",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A fixed-window limiter allows 100 requests per minute, yet a client sustains 200 in a sixty-second span. Explain the mechanism and what fixes it.",
+      "answer": "The client sends 100 in the last instant of one window and 100 in the first instant of the next. Each window is individually within budget, but the sixty seconds straddling the boundary sees double the intended rate. A token bucket refills continuously so there is no boundary to exploit, and it makes the permitted burst explicit — the bucket capacity — rather than an accident of where the window happens to fall."
+    },
+    {
+      "id": "rq-uuid-insert-locality",
+      "conceptId": "unique-id-generation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Switching a primary key from random UUIDv4 to UUIDv7 improved write throughput without any schema change. Why?",
+      "answer": "UUIDv4 is random, so consecutive inserts land in unrelated positions of the B-tree: every insert dirties a different page, the working set becomes the whole index, and pages split repeatedly. UUIDv7 puts a millisecond timestamp in the high bits, so ids are roughly time-ordered and inserts concentrate at the right edge of the index — the same few pages stay hot in the buffer pool and splits become rare. Same uniqueness guarantee, very different locality."
     }
   ]
 }

@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Search & IR","description":"Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.","url":"https://learn.significanthobbies.com/curriculum/tracks/search-ir.html","numberOfItems":10,"hasPart":[{"@type":"LearningResource","name":"Tokenization","url":"https://learn.significanthobbies.com/curriculum/concepts/tokenization.html"},{"@type":"LearningResource","name":"Inverted Index","url":"https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html"},{"@type":"LearningResource","name":"TF-IDF","url":"https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html"},{"@type":"LearningResource","name":"BM25","url":"https://learn.significanthobbies.com/curriculum/concepts/bm25.html"},{"@type":"LearningResource","name":"Ranking Metrics","url":"https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html"},{"@type":"LearningResource","name":"Search Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/search-evals.html"},{"@type":"LearningResource","name":"Hybrid Search","url":"https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html"},{"@type":"LearningResource","name":"Reranking","url":"https://learn.significanthobbies.com/curriculum/concepts/reranking.html"},{"@type":"LearningResource","name":"Query Rewriting","url":"https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html"},{"@type":"LearningResource","name":"Search Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Search & IR","description":"Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.","url":"https://learn.significanthobbies.com/curriculum/tracks/search-ir.html","numberOfItems":11,"hasPart":[{"@type":"LearningResource","name":"Tokenization","url":"https://learn.significanthobbies.com/curriculum/concepts/tokenization.html"},{"@type":"LearningResource","name":"Inverted Index","url":"https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html"},{"@type":"LearningResource","name":"TF-IDF","url":"https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html"},{"@type":"LearningResource","name":"BM25","url":"https://learn.significanthobbies.com/curriculum/concepts/bm25.html"},{"@type":"LearningResource","name":"Ranking Metrics","url":"https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html"},{"@type":"LearningResource","name":"Search Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/search-evals.html"},{"@type":"LearningResource","name":"Hybrid Search","url":"https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html"},{"@type":"LearningResource","name":"Reranking","url":"https://learn.significanthobbies.com/curriculum/concepts/reranking.html"},{"@type":"LearningResource","name":"Query Rewriting","url":"https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html"},{"@type":"LearningResource","name":"Search Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html"},{"@type":"LearningResource","name":"Top-k Pruning (WAND)","url":"https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,17 +46,17 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
       <article>
-    <p class="eyebrow">Learning track · 10 concepts</p>
+    <p class="eyebrow">Learning track · 11 concepts</p>
     <h1>Search &amp; IR</h1>
     <p class="lede">Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.</p>
     <section>
       <h2>What mastery looks like</h2>
-      <p>This track contains 10 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Search &amp; IR, use the track description as the boundary: learn enough detail to reason clearly about lexical retrieval beyond embeddings: tokenization, inverted indexes, bm25, ranking, hybrid search, and search evaluation.</p>
+      <p>This track contains 11 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Search &amp; IR, use the track description as the boundary: learn enough detail to reason clearly about lexical retrieval beyond embeddings: tokenization, inverted indexes, bm25, ranking, hybrid search, and search evaluation.</p>
       <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
     </section>
     <section>
       <h2>Suggested study sequence</h2>
-      <p>Start with Tokenization to establish the basic vocabulary. Continue through the core concepts by alternating explanation with an executable drill. Treat Hybrid Search, Reranking as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>Start with Tokenization to establish the basic vocabulary. Continue through the core concepts by alternating explanation with an executable drill. Treat Hybrid Search, Reranking, Top-k Pruning (WAND) as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
       <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
     </section>
     <section>
@@ -105,6 +105,10 @@
         <p class="eyebrow">core</p>
         <h3><a href="/curriculum/concepts/search-discovery.html">Search Systems</a></h3>
         <p>Inverted index, ranking, autocomplete at scale.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/top-k-pruning.html">Top-k Pruning (WAND)</a></h3>
+        <p>WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.</p>
       </article></div>
     </section>
   </article>
