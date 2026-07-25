@@ -1294,6 +1294,14 @@ function replaceGenerated(records, record, kind) {
     if (field in existing) merged[field] = existing[field];
     else delete merged[field];
   }
+  // `roadmaps` is structure, so the generator owns which of ITS paths a concept
+  // belongs to — but it must not delete memberships in paths it does not manage
+  // (swe-landscape, hld-practice, db-disk-first are all hand-maintained). Union
+  // rather than replace: adding `transaction-processing` to swe-landscape so
+  // `isolation-levels` stayed reachable was silently reverted on the next run.
+  if (Array.isArray(existing.roadmaps)) {
+    merged.roadmaps = [...new Set([...(merged.roadmaps ?? []), ...existing.roadmaps])];
+  }
   records[index] = merged;
 }
 

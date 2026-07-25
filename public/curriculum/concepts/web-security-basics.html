@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Security Basics | SWE Prep</title>
+    <meta name="description" content="XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Web Security Basics | SWE Prep">
+    <meta property="og:description" content="XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Security Basics | SWE Prep">
+    <meta name="twitter:description" content="XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Web Security Basics","description":"XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.","url":"https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Web Security Basics","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/backend.html">Backend</a></nav>
+      <article>
+    <p class="eyebrow">Backend · core</p>
+    <h1>Web Security Basics</h1>
+    <p class="lede">XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.</p>
+    <div class="pills"><span>backend</span><span>security</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Almost every one of these is the same bug: data crossing into a place where it is interpreted as code or as authority. Injection (SQLi, XSS) is untrusted input reaching an interpreter, and the fix is never escaping-by-hand but parameterisation and contextual output encoding. CSRF is different in kind — a confused deputy, where the browser helpfully attaches your cookies to a request your site did not initiate, which is why the defence is an unguessable token or SameSite rather than validation. CORS is not a defence at all; it relaxes the same-origin policy, so a permissive CORS header removes protection rather than adding it.</p>
+    </section>
+
+    <section>
+      <h2>How to study Web Security Basics</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Web Security Basics with API Design, Security &amp; Isolation Boundaries. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Parameterise instead of escaping and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>The OWASP categories that dominate real breaches, and the review checklist for any endpoint that takes user input.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Treating CORS as a security control — it grants access, it does not restrict it</li><li>Escaping output once globally instead of per context; HTML, attribute, URL and JS contexts need different encodings</li><li>Blocklisting dangerous input instead of parameterising the query</li><li>Storing session tokens in localStorage, which is readable by any XSS you ever ship</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Parameterise instead of escaping</h3>
+          <p>Implement buildQuery(table, filters) returning { text, values }: a parameterised SQL string using $1, $2 … placeholders in order, plus the values array. Column names come from a fixed ALLOWED set — reject anything else by throwing. Never interpolate a value into the string.</p>
+          <p><strong>Expected evidence:</strong> buildQuery(&#39;users&#39;, {name:&#39;ann&#39;, age:30}) -&gt; { text: &#39;SELECT * FROM users WHERE name = $1 AND age = $2&#39;, values: [&#39;ann&#39;, 30] }</p>
+          <a href="/drills/parameterise-a-query">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>A reviewer says &#39;we set CORS headers, so the API is protected from other sites.&#39; Why is that backwards, and what actually defends the endpoint?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/auth-systems.html">Auth Systems</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/api-design.html">API Design</a></li><li><a href="/curriculum/concepts/security-isolation-boundaries.html">Security &amp; Isolation Boundaries</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/application-engineering-12w.html">12-Week Application Engineering</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

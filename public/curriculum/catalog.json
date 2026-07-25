@@ -9,10 +9,10 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 226,
+    "concepts": 234,
     "roadmaps": 24,
-    "drills": 269,
-    "reviewQuestions": 243,
+    "drills": 277,
+    "reviewQuestions": 251,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -168,7 +168,9 @@
         "monitoring-analytics",
         "api-design",
         "auth-systems",
-        "ecommerce-payments"
+        "ecommerce-payments",
+        "retries-and-circuit-breakers",
+        "web-security-basics"
       ],
       "roadmapIds": [
         "ai-infra-12-month",
@@ -196,7 +198,9 @@
         "cap-theorem",
         "transaction-processing",
         "query-execution-optimization",
-        "warehouses-lakehouses"
+        "warehouses-lakehouses",
+        "isolation-levels",
+        "join-algorithms"
       ],
       "roadmapIds": [
         "ai-search-infra-90-day",
@@ -270,7 +274,11 @@
         "math-geometry",
         "bit-manipulation",
         "complexity-analysis",
-        "sorting"
+        "sorting",
+        "prefix-sums",
+        "monotonic-stack",
+        "string-matching",
+        "minimum-spanning-tree"
       ],
       "roadmapIds": [
         "dsa-practice"
@@ -632,6 +640,8 @@
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html",
       "conceptIds": [
+        "isolation-levels",
+        "join-algorithms",
         "embeddings",
         "load-balancing",
         "tf-idf",
@@ -690,6 +700,10 @@
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
       "conceptIds": [
+        "transaction-processing",
+        "isolation-levels",
+        "retries-and-circuit-breakers",
+        "web-security-basics",
         "capacity-estimation",
         "requirements-scoping",
         "ml-lora",
@@ -803,6 +817,10 @@
       "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html",
       "conceptIds": [
+        "prefix-sums",
+        "monotonic-stack",
+        "string-matching",
+        "minimum-spanning-tree",
         "complexity-analysis",
         "sorting",
         "array-hashing",
@@ -974,8 +992,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html",
       "conceptIds": [
         "http-lifecycle",
+        "idempotency",
         "load-balancing",
         "consistent-hashing",
+        "retries-and-circuit-breakers",
         "consensus",
         "replication",
         "sharding",
@@ -1151,8 +1171,10 @@
       "conceptIds": [
         "http-lifecycle",
         "message-queues",
+        "auth-systems",
         "object-modeling",
         "state-management",
+        "web-security-basics",
         "api-design",
         "web-mobile-engineering",
         "ux-interface-design",
@@ -2068,7 +2090,8 @@
       "roadmapIds": [
         "ai-infra-12-month",
         "swe-landscape",
-        "infrastructure-platforms-12w"
+        "infrastructure-platforms-12w",
+        "distributed-systems-12w"
       ]
     },
     {
@@ -2194,7 +2217,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html",
       "roadmapIds": [
-        "swe-landscape"
+        "swe-landscape",
+        "application-engineering-12w"
       ]
     },
     {
@@ -3835,7 +3859,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html",
       "roadmapIds": [
-        "db-disk-first"
+        "db-disk-first",
+        "swe-landscape"
       ]
     },
     {
@@ -4644,6 +4669,121 @@
         "hld-practice",
         "swe-landscape",
         "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "prefix-sums",
+      "name": "Prefix Sums",
+      "description": "Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "prefix-sums"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/prefix-sums.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "monotonic-stack",
+      "name": "Monotonic Stack",
+      "description": "A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "stack"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "string-matching",
+      "name": "String Matching",
+      "description": "Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "strings"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/string-matching.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "minimum-spanning-tree",
+      "name": "Minimum Spanning Tree",
+      "description": "Kruskal and Prim — connecting every node at least total cost.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "isolation-levels",
+      "name": "Isolation Levels & MVCC",
+      "description": "What each isolation level actually prevents, and how MVCC delivers snapshots without read locks.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "transactions"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/isolation-levels.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "join-algorithms",
+      "name": "Join Algorithms",
+      "description": "Nested-loop, hash, and merge joins — and why cardinality estimates decide which one you get.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "query-execution"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/join-algorithms.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "retries-and-circuit-breakers",
+      "name": "Retries & Circuit Breakers",
+      "description": "Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "reliability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "web-security-basics",
+      "name": "Web Security Basics",
+      "description": "XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "security"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "application-engineering-12w"
       ]
     }
   ],

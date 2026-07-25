@@ -277,6 +277,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "isolation-levels",
+            "join-algorithms",
             "embeddings",
             "load-balancing",
             "tf-idf",
@@ -286,7 +288,18 @@
             "topk-vector-search",
             "brute-force-vector-db"
           ],
-          "drills": [],
+          "drills": [
+            "detect-write-skew",
+            "pick-a-join-strategy",
+            "embed-and-search",
+            "design-load-balancer",
+            "calculate-tfidf",
+            "build-tokenizer",
+            "implement-similarity-metrics",
+            "design-consistent-hashing",
+            "implement-topk-heap",
+            "build-brute-force-index"
+          ],
           "artifacts": []
         },
         {
@@ -439,6 +452,10 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "transaction-processing",
+            "isolation-levels",
+            "retries-and-circuit-breakers",
+            "web-security-basics",
             "capacity-estimation",
             "requirements-scoping",
             "ml-lora",
@@ -463,6 +480,10 @@
             "ml-adamw"
           ],
           "drills": [
+            "practice-transaction-processing",
+            "detect-write-skew",
+            "backoff-with-jitter",
+            "parameterise-a-query",
             "size-a-write-heavy-service",
             "classify-requirements",
             "ml-lora-param-count",
@@ -724,6 +745,10 @@
           "title": "Days 1-5 — Arrays & strings",
           "goal": "The pattern recognition that unlocks 30%+ of interview problems.",
           "concepts": [
+            "prefix-sums",
+            "monotonic-stack",
+            "string-matching",
+            "minimum-spanning-tree",
             "complexity-analysis",
             "sorting",
             "array-hashing",
@@ -732,6 +757,10 @@
             "intervals"
           ],
           "drills": [
+            "range-sum-queries",
+            "next-greater-element",
+            "rolling-hash-search",
+            "kruskal-mst-weight",
             "analyse-amortised-growth",
             "stable-sort-by-key",
             "two-sum-hashmap",
@@ -1200,8 +1229,10 @@
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
             "http-lifecycle",
+            "idempotency",
             "load-balancing",
             "consistent-hashing",
+            "retries-and-circuit-breakers",
             "consensus",
             "replication",
             "sharding",
@@ -1209,8 +1240,10 @@
           ],
           "drills": [
             "http-idempotent-retry",
+            "implement-idempotency-key",
             "design-load-balancer",
             "design-consistent-hashing",
+            "backoff-with-jitter",
             "design-leader-election",
             "replication-lag-read",
             "shard-key-choice",
@@ -1664,8 +1697,10 @@
           "concepts": [
             "http-lifecycle",
             "message-queues",
+            "auth-systems",
             "object-modeling",
             "state-management",
+            "web-security-basics",
             "api-design",
             "web-mobile-engineering",
             "ux-interface-design"
@@ -1673,8 +1708,10 @@
           "drills": [
             "http-idempotent-retry",
             "queue-backpressure",
+            "jwt-vs-session-revoke",
             "design-parking-lot",
             "design-vending-machine",
+            "parameterise-a-query",
             "design-paginated-api",
             "practice-web-mobile-engineering",
             "practice-ux-interface-design"

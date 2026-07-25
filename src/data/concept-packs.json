@@ -10,10 +10,10 @@
       "paper": 209,
       "blog": 166,
       "book": 135,
-      "problem": 226,
-      "write": 226,
+      "problem": 234,
+      "write": 234,
       "more": 74,
-      "items": 1210
+      "items": 1226
     }
   },
   "packs": {
@@ -7194,6 +7194,126 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Requirements Scoping\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Functional requirements say what the system does; non-functional ones say what it must survive — and only the second kind changes the architecture"
+        }
+      ]
+    },
+    "prefix-sums": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Answer range-sum queries in O(1)",
+          "url": "/drills/range-sum-queries"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Prefix Sums\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A prefix array trades one O(n) pass for O(1) range answers afterwards: sum(i"
+        }
+      ]
+    },
+    "monotonic-stack": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Next greater element",
+          "url": "/drills/next-greater-element"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Monotonic Stack\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Keep the stack monotonic and every element enters and leaves exactly once, so a shape that looks like a nested loop is linear"
+        }
+      ]
+    },
+    "string-matching": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Rabin-Karp substring search",
+          "url": "/drills/rolling-hash-search"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"String Matching\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Naive matching restarts the pattern after every mismatch, throwing away what the prefix already proved"
+        }
+      ]
+    },
+    "minimum-spanning-tree": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Total weight of a minimum spanning tree",
+          "url": "/drills/kruskal-mst-weight"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Minimum Spanning Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Both algorithms are the same greedy argument from different ends: the cut property says the lightest edge crossing any cut is safe, so Kruskal takes globally cheapest edges and uses union-find to reject cycles, while Prim grows one component and takes the cheapest edge leaving it"
+        }
+      ]
+    },
+    "isolation-levels": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Detect write skew under snapshot isolation",
+          "url": "/drills/detect-write-skew"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Isolation Levels & MVCC\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An isolation level is a contract about which anomalies you are willing to see, not a dial labelled 'safety'"
+        }
+      ]
+    },
+    "join-algorithms": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Pick the join the planner should pick",
+          "url": "/drills/pick-a-join-strategy"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Join Algorithms\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Three strategies with different shapes: nested-loop wins when one side is tiny or an index makes lookups cheap, hash join wins on large unsorted equijoins if the build side fits in memory, merge join wins when both inputs already arrive sorted"
+        }
+      ]
+    },
+    "retries-and-circuit-breakers": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Exponential backoff with full jitter",
+          "url": "/drills/backoff-with-jitter"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Retries & Circuit Breakers\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A naive retry is a load multiplier aimed at a service that is already struggling, and synchronised clients retrying on the same schedule produce a thundering herd"
+        }
+      ]
+    },
+    "web-security-basics": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Parameterise instead of escaping",
+          "url": "/drills/parameterise-a-query"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Web Security Basics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Almost every one of these is the same bug: data crossing into a place where it is interpreted as code or as authority"
         }
       ]
     }

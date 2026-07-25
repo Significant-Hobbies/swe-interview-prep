@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Backend","description":"Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.","url":"https://learn.significanthobbies.com/curriculum/tracks/backend.html","numberOfItems":13,"hasPart":[{"@type":"LearningResource","name":"HTTP Lifecycle","url":"https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html"},{"@type":"LearningResource","name":"API Keys","url":"https://learn.significanthobbies.com/curriculum/concepts/api-keys.html"},{"@type":"LearningResource","name":"Rate Limiting","url":"https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html"},{"@type":"LearningResource","name":"Idempotency","url":"https://learn.significanthobbies.com/curriculum/concepts/idempotency.html"},{"@type":"LearningResource","name":"Retries & DLQ","url":"https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html"},{"@type":"LearningResource","name":"Webhooks","url":"https://learn.significanthobbies.com/curriculum/concepts/webhooks.html"},{"@type":"LearningResource","name":"Background Jobs","url":"https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html"},{"@type":"LearningResource","name":"Caching","url":"https://learn.significanthobbies.com/curriculum/concepts/caching.html"},{"@type":"LearningResource","name":"Message Queues","url":"https://learn.significanthobbies.com/curriculum/concepts/message-queues.html"},{"@type":"LearningResource","name":"Observability","url":"https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html"},{"@type":"LearningResource","name":"API Design","url":"https://learn.significanthobbies.com/curriculum/concepts/api-design.html"},{"@type":"LearningResource","name":"Auth Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html"},{"@type":"LearningResource","name":"Payments","url":"https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Backend","description":"Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.","url":"https://learn.significanthobbies.com/curriculum/tracks/backend.html","numberOfItems":15,"hasPart":[{"@type":"LearningResource","name":"HTTP Lifecycle","url":"https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html"},{"@type":"LearningResource","name":"API Keys","url":"https://learn.significanthobbies.com/curriculum/concepts/api-keys.html"},{"@type":"LearningResource","name":"Rate Limiting","url":"https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html"},{"@type":"LearningResource","name":"Idempotency","url":"https://learn.significanthobbies.com/curriculum/concepts/idempotency.html"},{"@type":"LearningResource","name":"Retries & DLQ","url":"https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html"},{"@type":"LearningResource","name":"Webhooks","url":"https://learn.significanthobbies.com/curriculum/concepts/webhooks.html"},{"@type":"LearningResource","name":"Background Jobs","url":"https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html"},{"@type":"LearningResource","name":"Caching","url":"https://learn.significanthobbies.com/curriculum/concepts/caching.html"},{"@type":"LearningResource","name":"Message Queues","url":"https://learn.significanthobbies.com/curriculum/concepts/message-queues.html"},{"@type":"LearningResource","name":"Observability","url":"https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html"},{"@type":"LearningResource","name":"API Design","url":"https://learn.significanthobbies.com/curriculum/concepts/api-design.html"},{"@type":"LearningResource","name":"Auth Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html"},{"@type":"LearningResource","name":"Payments","url":"https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html"},{"@type":"LearningResource","name":"Retries & Circuit Breakers","url":"https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html"},{"@type":"LearningResource","name":"Web Security Basics","url":"https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,12 +46,12 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
       <article>
-    <p class="eyebrow">Learning track · 13 concepts</p>
+    <p class="eyebrow">Learning track · 15 concepts</p>
     <h1>Backend</h1>
     <p class="lede">Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</p>
     <section>
       <h2>What mastery looks like</h2>
-      <p>This track contains 13 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Backend, use the track description as the boundary: learn enough detail to reason clearly about production backend strength: http, api design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</p>
+      <p>This track contains 15 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Backend, use the track description as the boundary: learn enough detail to reason clearly about production backend strength: http, api design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</p>
       <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
     </section>
     <section>
@@ -117,6 +117,14 @@
         <p class="eyebrow">core</p>
         <h3><a href="/curriculum/concepts/ecommerce-payments.html">Payments</a></h3>
         <p>Idempotency, sagas, double-entry.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/retries-and-circuit-breakers.html">Retries &amp; Circuit Breakers</a></h3>
+        <p>Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/web-security-basics.html">Web Security Basics</a></h3>
+        <p>XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.</p>
       </article></div>
     </section>
   </article>

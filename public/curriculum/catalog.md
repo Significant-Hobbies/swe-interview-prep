@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 226 concepts across
+A public, JavaScript-free index of 234 concepts across
 19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -155,7 +155,7 @@ Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, 
 Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/backend.html
-- Concepts: 13
+- Concepts: 15
 - Roadmaps: 4
 
 - [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html) — DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
@@ -171,13 +171,15 @@ Production backend strength: HTTP, API design, auth, rate limiting, idempotency,
 - [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html) — REST, gRPC, versioning, pagination.
 - [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html) — OAuth2, JWT, session, RBAC.
 - [Payments](https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html) — Idempotency, sagas, double-entry.
+- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html) — Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.
+- [Web Security Basics](https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html) — XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
 
 ## Databases & Storage
 
 Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/databases.html
-- Concepts: 14
+- Concepts: 16
 - Roadmaps: 4
 
 - [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree.html) — The balanced, disk-friendly tree behind most relational indexes.
@@ -194,6 +196,8 @@ Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, comp
 - [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html) — ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.
 - [Query Execution & Optimization](https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization.html) — Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.
 - [Data Warehouses & Lakehouses](https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses.html) — Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.
+- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels.html) — What each isolation level actually prevents, and how MVCC delivers snapshots without read locks.
+- [Join Algorithms](https://learn.significanthobbies.com/curriculum/concepts/join-algorithms.html) — Nested-loop, hash, and merge joins — and why cardinality estimates decide which one you get.
 
 ## System Design
 
@@ -232,7 +236,7 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/dsa.html
-- Concepts: 21
+- Concepts: 25
 - Roadmaps: 1
 
 - [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html) — Hash maps, sets, frequency counting.
@@ -256,6 +260,10 @@ Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, 
 - [Bit Manipulation](https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html) — Bitwise ops, masks, XOR tricks.
 - [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
 - [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
+- [Prefix Sums](https://learn.significanthobbies.com/curriculum/concepts/prefix-sums.html) — Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
+- [Monotonic Stack](https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack.html) — A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
+- [String Matching](https://learn.significanthobbies.com/curriculum/concepts/string-matching.html) — Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
+- [Minimum Spanning Tree](https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree.html) — Kruskal and Prim — connecting every node at least total cost.
 
 ## Behavioral & Communication
 

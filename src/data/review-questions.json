@@ -2084,6 +2084,70 @@
       "difficulty": "core",
       "question": "Two requirements: 'users can follow each other' and 'reads outnumber writes 100 to 1'. Which one changes the architecture, and why is that the whole point of the split?",
       "answer": "The read/write ratio does. 'Users can follow each other' is satisfiable by almost any design, so it constrains nothing; a 100:1 read skew immediately argues for caching, read replicas, and probably fan-out on write. Functional requirements tell you what to build, non-functional ones tell you what it has to survive — and only the second kind can rule a design out, which is why they are worth extracting first."
+    },
+    {
+      "id": "rq-prefix-sums-invertible",
+      "conceptId": "prefix-sums",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Prefix sums answer range-sum in O(1). Why does the same trick fail for range-minimum, and what does that tell you about which operations it works for?",
+      "answer": "Because the query is a subtraction: sum(i..j) = prefix[j+1] - prefix[i] only recovers the range if the operation can be undone. Addition is invertible, min is not — knowing the min over 0..j and over 0..i tells you nothing about the min between them. So prefix works for associative AND invertible operations (sum, xor, product over a field); for min or max you need a structure that recomputes over overlapping blocks, like a sparse table."
+    },
+    {
+      "id": "rq-monotonic-amortised",
+      "conceptId": "monotonic-stack",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A monotonic stack has a while loop nested inside a for loop, yet it runs in O(n). What is the counting argument, and at which moment is an element's answer known?",
+      "answer": "Each index is pushed exactly once and popped at most once, so the inner while performs at most n pops across the entire outer loop — the total work is bounded by pushes, not by the nesting. The answer is known at the moment of the pop: the element being popped has just met the first element to its right that is greater, which is precisely its next-greater. Anything still on the stack when the scan ends never met one."
+    },
+    {
+      "id": "rq-string-matching-verify",
+      "conceptId": "string-matching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Rabin-Karp finds a window whose hash equals the pattern's hash. Why is it wrong to report a match, and what is the worst case if you skip the check?",
+      "answer": "Equal hashes mean the window might match — hashing maps many strings to one value, so a collision is a false positive. Reporting without comparing characters returns wrong answers on ordinary input and can be induced deliberately: an adversary who knows your modulus can force a collision on every window, which also drags the runtime to O(nm) since you would be verifying everywhere. The verification is what keeps it correct; a large random-ish modulus is what keeps it fast."
+    },
+    {
+      "id": "rq-mst-vs-shortest-path",
+      "conceptId": "minimum-spanning-tree",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Someone proposes routing traffic along the MST because it is the cheapest set of edges. What is wrong with that reasoning?",
+      "answer": "An MST minimises the total weight of the edge set, not the distance between any particular pair. The unique MST path between two nodes can be arbitrarily worse than their shortest path — a direct cheap-ish edge is excluded whenever it would form a cycle, even though it is the best route. Minimum total cost and minimum pairwise distance are different objectives; the second needs Dijkstra or Floyd-Warshall."
+    },
+    {
+      "id": "rq-snapshot-write-skew",
+      "conceptId": "isolation-levels",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Two on-call engineers each check 'is anyone else on duty?', both see one other person, and both go off duty. Snapshot isolation did not stop it. Why not, and what does?",
+      "answer": "Both transactions read the same consistent snapshot and then wrote DIFFERENT rows — their own. Snapshot isolation only rejects transactions that write the same row, so disjoint writes over an overlapping read set slip through; this is write skew. The invariant spanned rows neither transaction wrote. Fixes: true serializable isolation, a materialised lock via SELECT FOR UPDATE on the rows read, or a constraint that expresses the invariant in the database rather than in the transaction."
+    },
+    {
+      "id": "rq-join-cardinality",
+      "conceptId": "join-algorithms",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A query was fast in staging and unusable in production with the same plan shape. Why do cardinality estimates explain this more often than the join algorithm itself?",
+      "answer": "The planner chooses the algorithm from estimated row counts. Staging has small, freshly-analysed tables, so the estimate is close and a nested loop over a few hundred rows is genuinely best. In production the same estimate can be off by orders of magnitude — stale statistics, skew, or a correlated predicate the planner assumes is independent — and that nested loop now runs millions of index probes where a hash join would have been linear. EXPLAIN ANALYZE shows estimated against actual rows, which is where the discrepancy becomes visible."
+    },
+    {
+      "id": "rq-retry-amplification",
+      "conceptId": "retries-and-circuit-breakers",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A dependency slows down, clients retry three times at each of three layers, and the outage gets worse. Trace the amplification and name the two mechanisms that stop it.",
+      "answer": "Three retries at three layers multiply, not add: one user request becomes up to 27 at the bottom, and every client retrying on the same schedule lands simultaneously — load rises exactly when the dependency has least capacity. Jittered exponential backoff spreads the arrivals in time so the herd desynchronises; a circuit breaker stops them entirely once failures pass a threshold, failing fast to give the dependency room to recover. A retry budget is the third lever: cap retries as a fraction of total traffic, and retry at ONE layer, not every layer."
+    },
+    {
+      "id": "rq-cors-is-not-a-defence",
+      "conceptId": "web-security-basics",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A reviewer says 'we set CORS headers, so the API is protected from other sites.' Why is that backwards, and what actually defends the endpoint?",
+      "answer": "CORS relaxes the same-origin policy rather than enforcing it — a CORS header grants a foreign origin access that the browser would otherwise deny, so a permissive one removes protection. It also only constrains browsers; curl and any server ignore it entirely. What defends the endpoint is authentication and authorisation checked server-side on every request, plus a CSRF token or SameSite cookies for state-changing requests the browser would otherwise authenticate automatically."
     }
   ]
 }

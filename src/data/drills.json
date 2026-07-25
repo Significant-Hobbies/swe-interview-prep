@@ -5227,6 +5227,235 @@
         }
       ],
       "referenceSolution": "const NON_FUNCTIONAL = /latency|availab|throughput|durab|consisten|outnumber|daily active|survive|scale|cost|encrypt|p9\\d/i;\n\nfunction classify(requirements) {\n  const functional = [];\n  const nonFunctional = [];\n  for (const requirement of requirements) {\n    (NON_FUNCTIONAL.test(requirement) ? nonFunctional : functional).push(requirement);\n  }\n  return { functional, nonFunctional };\n}"
+    },
+    {
+      "id": "range-sum-queries",
+      "title": "Answer range-sum queries in O(1)",
+      "conceptId": "prefix-sums",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement makeRangeSum(nums) returning a function query(i, j) that gives the inclusive sum of nums[i..j] in O(1) per call. Build the prefix array once.",
+      "expectedOutput": "const q = makeRangeSum([1,2,3,4,5]); q(1,3) -> 9; q(0,4) -> 15",
+      "hints": [
+        "Build prefix of length n+1 so prefix[0] = 0 and you never special-case i === 0.",
+        "Inclusive sum(i..j) is prefix[j+1] - prefix[i]."
+      ],
+      "solutionNotes": "The n+1 length is what removes the i === 0 branch — the usual source of off-by-one here.",
+      "testCases": [
+        {
+          "setup": "const nums = [1,2,3,4,5];",
+          "run": "const q = makeRangeSum(nums); console.log(q(1,3), q(0,4), q(2,2), q(0,0));",
+          "expect": "9 15 3 1"
+        },
+        {
+          "setup": "const big = Array.from({length:1000},(_,i)=>i+1);",
+          "run": "const q = makeRangeSum(big); console.log(q(0,999), q(500,500), q(10,20));",
+          "expect": "500500 501 176"
+        }
+      ],
+      "referenceSolution": "function makeRangeSum(nums) {\n  const prefix = new Array(nums.length + 1).fill(0);\n  for (let i = 0; i < nums.length; i++) prefix[i + 1] = prefix[i] + nums[i];\n  return (i, j) => prefix[j + 1] - prefix[i];\n}"
+    },
+    {
+      "id": "next-greater-element",
+      "title": "Next greater element",
+      "conceptId": "monotonic-stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement nextGreater(nums) returning an array where result[i] is the next element to the right strictly greater than nums[i], or -1 if none. Must be O(n) — each index pushed and popped at most once.",
+      "expectedOutput": "nextGreater([2,1,2,4,3]) -> [4,2,4,-1,-1]",
+      "hints": [
+        "Keep a stack of INDICES whose answer is still unknown, with decreasing values.",
+        "When the current element is greater than the value at the stack top, you have just found that index's answer — pop and record."
+      ],
+      "solutionNotes": "Anything left on the stack at the end has no greater element to its right, so it stays -1.",
+      "testCases": [
+        {
+          "run": "console.log(JSON.stringify(nextGreater([2,1,2,4,3])));",
+          "expect": "[4,2,4,-1,-1]"
+        },
+        {
+          "run": "console.log(JSON.stringify(nextGreater([5,4,3,2,1])), JSON.stringify(nextGreater([1,2,3])));",
+          "expect": "[-1,-1,-1,-1,-1] [2,3,-1]"
+        },
+        {
+          "run": "console.log(JSON.stringify(nextGreater([2,2,2])));",
+          "expect": "[-1,-1,-1]"
+        }
+      ],
+      "referenceSolution": "function nextGreater(nums) {\n  const result = new Array(nums.length).fill(-1);\n  const stack = [];\n  for (let i = 0; i < nums.length; i++) {\n    while (stack.length && nums[i] > nums[stack[stack.length - 1]]) {\n      result[stack.pop()] = nums[i];\n    }\n    stack.push(i);\n  }\n  return result;\n}"
+    },
+    {
+      "id": "rolling-hash-search",
+      "title": "Rabin-Karp substring search",
+      "conceptId": "string-matching",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement findAll(text, pattern) returning every start index where pattern occurs, using a rolling hash. You MUST verify a character-by-character match on every hash hit — a hash collision is not a match.",
+      "expectedOutput": "findAll('abababa','aba') -> [0,2,4]",
+      "hints": [
+        "Roll the hash by removing the leading character's contribution and appending the new one; do not rehash the window.",
+        "On a hash hit, compare the substring. Skipping that check is the bug this drill is about."
+      ],
+      "solutionNotes": "Overlapping matches are expected — advance by one, not by the pattern length.",
+      "testCases": [
+        {
+          "run": "console.log(JSON.stringify(findAll('abababa','aba')));",
+          "expect": "[0,2,4]"
+        },
+        {
+          "run": "console.log(JSON.stringify(findAll('hello world','o')), JSON.stringify(findAll('aaa','aaaa')));",
+          "expect": "[4,7] []"
+        },
+        {
+          "run": "console.log(JSON.stringify(findAll('abcabc','abc')), JSON.stringify(findAll('xyz','a')));",
+          "expect": "[0,3] []"
+        }
+      ],
+      "referenceSolution": "function findAll(text, pattern) {\n  const n = text.length, m = pattern.length;\n  const out = [];\n  if (m === 0 || m > n) return out;\n  const BASE = 256n, MOD = 1000000007n;\n  let high = 1n;\n  for (let i = 0; i < m - 1; i++) high = (high * BASE) % MOD;\n  let ph = 0n, th = 0n;\n  for (let i = 0; i < m; i++) {\n    ph = (ph * BASE + BigInt(pattern.charCodeAt(i))) % MOD;\n    th = (th * BASE + BigInt(text.charCodeAt(i))) % MOD;\n  }\n  for (let i = 0; i + m <= n; i++) {\n    if (ph === th && text.slice(i, i + m) === pattern) out.push(i);\n    if (i + m < n) {\n      th = (th - BigInt(text.charCodeAt(i)) * high % MOD + MOD) % MOD;\n      th = (th * BASE + BigInt(text.charCodeAt(i + m))) % MOD;\n    }\n  }\n  return out;\n}"
+    },
+    {
+      "id": "kruskal-mst-weight",
+      "title": "Total weight of a minimum spanning tree",
+      "conceptId": "minimum-spanning-tree",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement mstWeight(n, edges) where edges are [u, v, w] on nodes 0..n-1. Return the total weight of a minimum spanning tree, or -1 if the graph is not connected. Use Kruskal with union-find.",
+      "expectedOutput": "mstWeight(4, [[0,1,1],[1,2,2],[0,2,4],[2,3,3]]) -> 6",
+      "hints": [
+        "Sort edges by weight, then add an edge only when its endpoints are in different components.",
+        "A spanning tree on n nodes has exactly n-1 edges — if you finish with fewer, the graph was disconnected."
+      ],
+      "solutionNotes": "Union-find is what makes the cycle check near-constant; without it the rejection step dominates.",
+      "testCases": [
+        {
+          "run": "console.log(mstWeight(4, [[0,1,1],[1,2,2],[0,2,4],[2,3,3]]));",
+          "expect": "6"
+        },
+        {
+          "run": "console.log(mstWeight(3, [[0,1,5]]), mstWeight(1, []), mstWeight(2, [[0,1,7],[0,1,2]]));",
+          "expect": "-1 0 2"
+        }
+      ],
+      "referenceSolution": "function mstWeight(n, edges) {\n  const parent = Array.from({ length: n }, (_, i) => i);\n  const find = (x) => (parent[x] === x ? x : (parent[x] = find(parent[x])));\n  let total = 0, used = 0;\n  for (const [u, v, w] of [...edges].sort((a, b) => a[2] - b[2])) {\n    const ru = find(u), rv = find(v);\n    if (ru === rv) continue;\n    parent[ru] = rv;\n    total += w;\n    used++;\n  }\n  return used === n - 1 ? total : -1;\n}"
+    },
+    {
+      "id": "detect-write-skew",
+      "title": "Detect write skew under snapshot isolation",
+      "conceptId": "isolation-levels",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Two transactions each read the same snapshot and then write DIFFERENT rows based on what they read — snapshot isolation permits this, and the invariant breaks. Implement wouldSkew(t1, t2) where each transaction is { reads: string[], writes: string[] }. Return true when they are a write-skew risk: their read sets overlap, at least one transaction writes a row the OTHER read, and they write disjoint rows. Return false otherwise.",
+      "expectedOutput": "wouldSkew({reads:['a','b'],writes:['a']},{reads:['a','b'],writes:['b']}) -> true",
+      "hints": [
+        "Disjoint writes are what makes it invisible to first-committer-wins conflict detection.",
+        "The danger sign is a write landing on a row the other transaction based its decision on."
+      ],
+      "solutionNotes": "Overlapping writes get caught by conflict detection; disjoint writes over an overlapping read set are exactly the case snapshot isolation lets through.",
+      "testCases": [
+        {
+          "run": "console.log(wouldSkew({reads:['a','b'],writes:['a']},{reads:['a','b'],writes:['b']}));",
+          "expect": "true"
+        },
+        {
+          "run": "console.log(wouldSkew({reads:['a'],writes:['a']},{reads:['a'],writes:['a']}), wouldSkew({reads:['a'],writes:['a']},{reads:['b'],writes:['b']}));",
+          "expect": "false false"
+        },
+        {
+          "run": "console.log(wouldSkew({reads:['x','y'],writes:['x']},{reads:['y','z'],writes:['y']}), wouldSkew({reads:['p'],writes:['q']},{reads:['r'],writes:['s']}));",
+          "expect": "true false"
+        }
+      ],
+      "referenceSolution": "function wouldSkew(t1, t2) {\n  const r1 = new Set(t1.reads), r2 = new Set(t2.reads);\n  const w1 = new Set(t1.writes), w2 = new Set(t2.writes);\n  const readsOverlap = [...r1].some((k) => r2.has(k));\n  const writesDisjoint = ![...w1].some((k) => w2.has(k));\n  const crossWrite = [...w1].some((k) => r2.has(k)) || [...w2].some((k) => r1.has(k));\n  return readsOverlap && writesDisjoint && crossWrite;\n}"
+    },
+    {
+      "id": "pick-a-join-strategy",
+      "title": "Pick the join the planner should pick",
+      "conceptId": "join-algorithms",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement chooseJoin({ leftRows, rightRows, leftSorted, rightSorted, hasIndexOnRight, memoryRows }) returning 'nested-loop', 'hash', or 'merge'. Rules: if both inputs are already sorted on the key, merge. Otherwise if the smaller side exceeds memoryRows, fall back to merge (hash would spill). Otherwise if the right side has an index and the left is small (<= 100 rows), nested-loop. Otherwise hash.",
+      "expectedOutput": "chooseJoin({leftRows:10,rightRows:1e6,leftSorted:false,rightSorted:false,hasIndexOnRight:true,memoryRows:1e5}) -> 'nested-loop'",
+      "hints": [
+        "Check the sorted case first — it is free and beats everything.",
+        "'Smaller side' is the build side for a hash join; that is the one that has to fit."
+      ],
+      "solutionNotes": "The order of the checks is the point: a planner applies the cheapest applicable strategy, and the memory test is what stops hash join from silently spilling.",
+      "testCases": [
+        {
+          "run": "console.log(chooseJoin({leftRows:10,rightRows:1e6,leftSorted:false,rightSorted:false,hasIndexOnRight:true,memoryRows:1e5}));",
+          "expect": "nested-loop"
+        },
+        {
+          "run": "console.log(chooseJoin({leftRows:5e5,rightRows:5e5,leftSorted:true,rightSorted:true,hasIndexOnRight:false,memoryRows:1e3}), chooseJoin({leftRows:5e5,rightRows:9e5,leftSorted:false,rightSorted:false,hasIndexOnRight:false,memoryRows:1e3}));",
+          "expect": "merge merge"
+        },
+        {
+          "run": "console.log(chooseJoin({leftRows:1e4,rightRows:2e4,leftSorted:false,rightSorted:false,hasIndexOnRight:false,memoryRows:1e5}), chooseJoin({leftRows:5000,rightRows:9e5,leftSorted:false,rightSorted:false,hasIndexOnRight:true,memoryRows:1e6}));",
+          "expect": "hash hash"
+        }
+      ],
+      "referenceSolution": "function chooseJoin(p) {\n  if (p.leftSorted && p.rightSorted) return 'merge';\n  const smaller = Math.min(p.leftRows, p.rightRows);\n  if (smaller > p.memoryRows) return 'merge';\n  if (p.hasIndexOnRight && p.leftRows <= 100) return 'nested-loop';\n  return 'hash';\n}"
+    },
+    {
+      "id": "backoff-with-jitter",
+      "title": "Exponential backoff with full jitter",
+      "conceptId": "retries-and-circuit-breakers",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement backoffDelays(attempts, baseMs, capMs, rand) returning the delay for each attempt using capped exponential backoff with FULL jitter: delay = rand() * min(capMs, baseMs * 2^attempt), floored to an integer. `rand` is a supplied function returning [0,1) so the result is deterministic under test. Attempt numbering starts at 0.",
+      "expectedOutput": "backoffDelays(4, 100, 1000, () => 1) -> [100, 200, 400, 800]",
+      "hints": [
+        "Cap the exponential FIRST, then apply jitter to the capped value — the other order defeats the cap.",
+        "Full jitter means the delay is uniform in [0, ceiling), not ceiling ± a wobble."
+      ],
+      "solutionNotes": "Jitter is what desynchronises clients; without it every retry lands at the same instant and reproduces the herd the backoff was meant to prevent.",
+      "testCases": [
+        {
+          "run": "console.log(JSON.stringify(backoffDelays(4, 100, 1000, () => 1)));",
+          "expect": "[100,200,400,800]"
+        },
+        {
+          "run": "console.log(JSON.stringify(backoffDelays(6, 100, 1000, () => 1)));",
+          "expect": "[100,200,400,800,1000,1000]"
+        },
+        {
+          "run": "console.log(JSON.stringify(backoffDelays(3, 100, 1000, () => 0)), JSON.stringify(backoffDelays(3, 100, 1000, () => 0.5)));",
+          "expect": "[0,0,0] [50,100,200]"
+        }
+      ],
+      "referenceSolution": "function backoffDelays(attempts, baseMs, capMs, rand) {\n  const out = [];\n  for (let i = 0; i < attempts; i++) {\n    const ceiling = Math.min(capMs, baseMs * 2 ** i);\n    out.push(Math.floor(rand() * ceiling));\n  }\n  return out;\n}"
+    },
+    {
+      "id": "parameterise-a-query",
+      "title": "Parameterise instead of escaping",
+      "conceptId": "web-security-basics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement buildQuery(table, filters) returning { text, values }: a parameterised SQL string using $1, $2 … placeholders in order, plus the values array. Column names come from a fixed ALLOWED set — reject anything else by throwing. Never interpolate a value into the string.",
+      "expectedOutput": "buildQuery('users', {name:'ann', age:30}) -> { text: 'SELECT * FROM users WHERE name = $1 AND age = $2', values: ['ann', 30] }",
+      "hints": [
+        "Values are never concatenated. Identifiers cannot be parameterised, which is exactly why they need an allowlist.",
+        "A value containing a quote must end up in `values` untouched, not escaped into `text`."
+      ],
+      "solutionNotes": "Parameterisation puts values outside the parser, so quoting tricks have nothing to break out of. Identifiers still need an allowlist because placeholders cannot carry them.",
+      "testCases": [
+        {
+          "setup": "const ALLOWED = new Set(['name','age','email']);",
+          "run": "const q = buildQuery('users', {name:'ann', age:30}); console.log(q.text); console.log(JSON.stringify(q.values));",
+          "expect": ["SELECT * FROM users WHERE name = $1 AND age = $2", "[\"ann\",30]"]
+        },
+        {
+          "setup": "const ALLOWED = new Set(['name','age','email']);",
+          "run": "const q = buildQuery('users', {name:\"a' OR 1=1 --\"}); console.log(q.text); console.log(JSON.stringify(q.values));",
+          "expect": ["SELECT * FROM users WHERE name = $1", "[\"a' OR 1=1 --\"]"]
+        },
+        {
+          "setup": "const ALLOWED = new Set(['name','age','email']);",
+          "run": "let threw = false; try { buildQuery('users', {'age; DROP TABLE users': 1}); } catch { threw = true; } console.log(threw);",
+          "expect": "true"
+        }
+      ],
+      "referenceSolution": "function buildQuery(table, filters) {\n  const keys = Object.keys(filters);\n  const values = [];\n  const clauses = keys.map((key, i) => {\n    if (!ALLOWED.has(key)) throw new Error(`disallowed column: ${key}`);\n    values.push(filters[key]);\n    return `${key} = $${i + 1}`;\n  });\n  return { text: `SELECT * FROM ${table} WHERE ${clauses.join(' AND ')}`, values };\n}"
     }
   ]
 }

@@ -2,10 +2,10 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 226,
+    "concepts": 234,
     "roadmaps": 24,
-    "drills": 269,
-    "reviewQuestions": 243,
+    "drills": 277,
+    "reviewQuestions": 251,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -280,6 +280,14 @@
     "/curriculum/concepts/complexity-analysis.html",
     "/curriculum/concepts/sorting.html",
     "/curriculum/concepts/capacity-estimation.html",
-    "/curriculum/concepts/requirements-scoping.html"
+    "/curriculum/concepts/requirements-scoping.html",
+    "/curriculum/concepts/prefix-sums.html",
+    "/curriculum/concepts/monotonic-stack.html",
+    "/curriculum/concepts/string-matching.html",
+    "/curriculum/concepts/minimum-spanning-tree.html",
+    "/curriculum/concepts/isolation-levels.html",
+    "/curriculum/concepts/join-algorithms.html",
+    "/curriculum/concepts/retries-and-circuit-breakers.html",
+    "/curriculum/concepts/web-security-basics.html"
   ]
 }

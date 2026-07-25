@@ -609,6 +609,14 @@
     "complexity-analysis",
     "sorting",
     "capacity-estimation",
-    "requirements-scoping"
+    "requirements-scoping",
+    "prefix-sums",
+    "monotonic-stack",
+    "string-matching",
+    "minimum-spanning-tree",
+    "isolation-levels",
+    "join-algorithms",
+    "retries-and-circuit-breakers",
+    "web-security-basics"
   ]
 }
