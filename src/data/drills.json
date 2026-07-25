@@ -5123,6 +5123,58 @@
         }
       ],
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "analyse-amortised-growth",
+      "title": "Amortised growth of a dynamic array",
+      "conceptId": "complexity-analysis",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "prompt": "Implement pushCount(n): build a dynamic array by pushing n items, doubling capacity when full (starting at capacity 1), and return the TOTAL number of element copies performed. This is the sum that makes push O(1) amortised — for n=8 the copies are 1+2+4 = 7.",
+      "expectedOutput": "pushCount(8) -> 7, pushCount(1) -> 0, pushCount(100) -> 127",
+      "hints": [
+        "You only copy at the moment capacity is exhausted, and you copy everything currently stored.",
+        "Capacities go 1, 2, 4, 8 … so the copies form a geometric series that sums to less than n."
+      ],
+      "solutionNotes": "Total copies stay below n, which is why the per-push average is constant even though a single push can cost O(n).",
+      "testCases": [
+        {
+          "run": "console.log(pushCount(1), pushCount(8), pushCount(100));",
+          "expect": "0 7 127"
+        },
+        {
+          "run": "console.log(pushCount(0), pushCount(2), pushCount(17));",
+          "expect": "0 1 31"
+        }
+      ],
+      "referenceSolution": "function pushCount(n) {\n  let cap = 1, size = 0, copies = 0;\n  for (let i = 0; i < n; i++) {\n    if (size === cap) { copies += size; cap *= 2; }\n    size++;\n  }\n  return copies;\n}"
+    },
+    {
+      "id": "stable-sort-by-key",
+      "title": "Stable sort by one key",
+      "conceptId": "sorting",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement sortByScore(rows) returning rows ordered by descending numeric `score`, with the original relative order preserved for equal scores (a stable sort). Do not mutate the input.",
+      "expectedOutput": "Equal scores keep input order: [a:5, b:3, c:5] -> [a:5, c:5, b:3]",
+      "hints": [
+        "Decorate each row with its original index, then break ties on that index.",
+        "A comparator returning 0 for ties does not guarantee stability in every runtime — make the tie-break explicit."
+      ],
+      "solutionNotes": "Tie-breaking on the original index makes stability explicit rather than relying on the engine's sort being stable.",
+      "testCases": [
+        {
+          "setup": "const rows = [{id:'a',score:5},{id:'b',score:3},{id:'c',score:5},{id:'d',score:9},{id:'e',score:3}];",
+          "run": "console.log(sortByScore(rows).map(r => r.id).join(','));",
+          "expect": "d,a,c,b,e"
+        },
+        {
+          "setup": "const rows2 = [{id:'x',score:1},{id:'y',score:1},{id:'z',score:1}];",
+          "run": "const out = sortByScore(rows2); console.log(out.map(r => r.id).join(','), rows2.map(r => r.id).join(','));",
+          "expect": "x,y,z x,y,z"
+        }
+      ],
+      "referenceSolution": "function sortByScore(rows) {\n  return rows\n    .map((row, index) => ({ row, index }))\n    .sort((a, b) => b.row.score - a.row.score || a.index - b.index)\n    .map((entry) => entry.row);\n}"
     }
   ]
 }

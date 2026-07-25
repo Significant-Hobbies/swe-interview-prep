@@ -491,8 +491,8 @@ export const CONCEPT_MEDIA = {
   },
   'retries-dlq': {
     paper: L(
-      'Harvest, Yield, and Scalable Tolerant Systems (Fox et al.)',
-      'https://www.usenix.org/legacy/event/osdi99/full_papers/fox/fox.pdf'
+      'Harvest, Yield, and Scalable Tolerant Systems (Fox & Brewer, HotOS 1999)',
+      'https://doi.org/10.1109/HOTOS.1999.798396'
     ),
   },
   webhooks: {
@@ -565,8 +565,8 @@ export const CONCEPT_MEDIA = {
   },
   compaction: {
     paper: L(
-      'WiscKey (Lu et al.)',
-      'https://www.usenix.org/system/files/conference/fast18/fast18-lu.pdf'
+      'WiscKey: Separating Keys from Values in SSD-Conscious Storage (FAST ’16)',
+      'https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf'
     ),
   },
   'object-storage': {
@@ -579,7 +579,7 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'secondary-index': {
-    paper: L('Modern B-Tree Techniques (Graefe)', 'https://research.google/pubs/pub37649/'),
+    paper: L('Modern B-Tree Techniques (Graefe)', 'https://doi.org/10.1561/1900000028'),
   },
   'storage-retrieval': {
     paper: L(
@@ -652,7 +652,10 @@ export const CONCEPT_MEDIA = {
     paper: L('Contraction Hierarchies (Geisberger et al.)', 'https://arxiv.org/abs/1111.2059'),
   },
   'collaboration-productivity': {
-    paper: L('Operational Transformation (Ellis & Gibbs)', 'https://neil.fraser.name/writing/ot/'),
+    paper: L(
+      'Concurrency Control in Groupware Systems (Ellis & Gibbs, SIGMOD 1989)',
+      'https://doi.org/10.1145/67544.66963'
+    ),
   },
   'search-platform-design': {
     paper: L(
@@ -669,16 +672,11 @@ export const CONCEPT_MEDIA = {
   },
   'array-hashing': {
     paper: L(
-      'Universal hashing (Carter & Wegman)',
-      'https://www.cs.cmu.edu/~15150/docs/carterwegman.pdf'
+      'Universal Classes of Hash Functions (Carter & Wegman, 1979)',
+      'https://doi.org/10.1016/0022-0000(79)90044-8'
     ),
   },
-  'binary-search': {
-    paper: L(
-      'Programming Pearls: Writing Correct Programs (Bentley)',
-      'https://www.cs.uaf.edu/~chesley/classes/cs611/Spring2018/Bentley75.pdf'
-    ),
-  },
+  'binary-search': {},
   trees: {
     paper: L(
       'Red-black trees (Guibas & Sedgewick)',
@@ -687,8 +685,8 @@ export const CONCEPT_MEDIA = {
   },
   'shortest-path': {
     paper: L(
-      'A note on two problems in connexion with graphs (Dijkstra)',
-      'https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf'
+      'A Note on Two Problems in Connexion with Graphs (Dijkstra, 1959)',
+      'https://doi.org/10.1007/BF01386390'
     ),
   },
   'union-find': {
@@ -696,8 +694,8 @@ export const CONCEPT_MEDIA = {
   },
   'math-geometry': {
     paper: L(
-      'Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)',
-      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf'
+      'Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf'
     ),
     blog: L(
       'Jeff Erickson — geometric algorithms',
@@ -945,8 +943,8 @@ export const CONCEPT_MEDIA = {
   },
   graphs: {
     paper: L(
-      'A note on two problems in connexion with graphs (Dijkstra)',
-      'https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf'
+      'A Note on Two Problems in Connexion with Graphs (Dijkstra, 1959)',
+      'https://doi.org/10.1007/BF01386390'
     ),
   },
   'dp-1d': {
@@ -966,8 +964,8 @@ export const CONCEPT_MEDIA = {
   },
   intervals: {
     paper: L(
-      'Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)',
-      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf'
+      'Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)',
+      'https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf'
     ),
   },
   'bit-manipulation': {
@@ -1018,8 +1016,8 @@ export const CONCEPT_MEDIA = {
   },
   'failure-and-learning': {
     paper: L(
-      'Learning from failures in organizations (Cannon & Edmondson)',
-      'https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Cannon%20and%20Edmondson%20Concealing%20mistakes.pdf'
+      'Failing to Learn and Learning to Fail (Intelligently) — Cannon & Edmondson',
+      'https://doi.org/10.1016/j.lrp.2005.04.005'
     ),
     blog: L(
       'Google SRE Book — Ch. 15: Postmortem Culture: Learning from Failure',

@@ -2052,6 +2052,22 @@
       "answer": "Time to hit a target grows with distance and shrinks with target size, logarithmically. So make frequent targets large and close to where the cursor or thumb already is — and note that screen edges are effectively infinite in size, which is why edge and corner placement is disproportionately fast.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-complexity-amortised",
+      "conceptId": "complexity-analysis",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "A dynamic array's push is O(1) amortised, yet one push can still take O(n). What does the amortised bound actually promise, and when is it the wrong bound to quote?",
+      "answer": "It promises that any sequence of n pushes costs O(n) in total, because the doubling copies form a geometric series — not that any single push is cheap. It is the wrong bound when a single call has a deadline: a latency budget, a real-time frame, or a request p99, where the rare O(n) copy is exactly the case that hurts."
+    },
+    {
+      "id": "rq-sorting-stability",
+      "conceptId": "sorting",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "You sort records by score, then by date, expecting both orderings to hold. Why does this only work if the sort is stable, and what breaks if it is not?",
+      "answer": "Sorting by date first and score second only preserves the date order within equal scores if equal elements keep their relative positions — that is stability. Without it the second pass may reorder ties arbitrarily, so records with the same score come back in an unpredictable date order. The fix is either a stable sort or a single comparator that ranks on score then date explicitly."
     }
   ]
 }

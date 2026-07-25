@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 222 concepts across
+A public, JavaScript-free index of 224 concepts across
 18 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -230,7 +230,7 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/dsa.html
-- Concepts: 19
+- Concepts: 21
 - Roadmaps: 1
 
 - [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html) — Hash maps, sets, frequency counting.
@@ -252,6 +252,8 @@ Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, 
 - [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals.html) — Merge, overlap, sweep line.
 - [Math & Geometry](https://learn.significanthobbies.com/curriculum/concepts/math-geometry.html) — Number theory, modular, geometry.
 - [Bit Manipulation](https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html) — Bitwise ops, masks, XOR tricks.
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
+- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
 
 ## Product & Distribution
 

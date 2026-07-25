@@ -9,10 +9,10 @@
   ],
   "counts": {
     "tracks": 18,
-    "concepts": 222,
+    "concepts": 224,
     "roadmaps": 24,
-    "drills": 265,
-    "reviewQuestions": 239,
+    "drills": 267,
+    "reviewQuestions": 241,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -266,7 +266,9 @@
         "greedy",
         "intervals",
         "math-geometry",
-        "bit-manipulation"
+        "bit-manipulation",
+        "complexity-analysis",
+        "sorting"
       ],
       "roadmapIds": [
         "dsa-practice"
@@ -4562,6 +4564,34 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction.html",
       "roadmapIds": [
         "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "complexity-analysis",
+      "name": "Complexity Analysis",
+      "description": "Big-O, amortised cost, and space complexity — how to argue a bound before writing code.",
+      "difficulty": "intro",
+      "tags": [
+        "dsa",
+        "complexity"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "sorting",
+      "name": "Sorting",
+      "description": "Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "sorting"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sorting.html",
+      "roadmapIds": [
+        "dsa-practice"
       ]
     }
   ],

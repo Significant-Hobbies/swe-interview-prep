@@ -1,6 +1,6 @@
 # SWE Interview Prep — full agent brief
 
-SWE Interview Prep is a mechanism-first learning OS. Its 222 concepts span 18 tracks and feed 24 sequenced roadmaps. Learning follows Concept → Drill → Build → Review → Apply; private mastery state is not exposed.
+SWE Interview Prep is a mechanism-first learning OS. Its 224 concepts span 18 tracks and feed 24 sequenced roadmaps. Learning follows Concept → Drill → Build → Review → Apply; private mastery state is not exposed.
 
 ## Public machine surfaces
 

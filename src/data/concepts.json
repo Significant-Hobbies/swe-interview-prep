@@ -3259,7 +3259,7 @@
       "roadmaps": ["dsa-practice"],
       "difficulty": "intro",
       "priority": 5,
-      "prerequisites": [],
+      "prerequisites": ["complexity-analysis"],
       "related": ["two-pointers"],
       "description": "Hash maps, sets, frequency counting.",
       "mentalModel": "A hash map trades memory for time: it turns an O(n) scan for \"have I seen this?\" into an O(1) lookup. Most array problems that feel quadratic collapse to linear once you ask what you would store in a map keyed by value, complement, or frequency.",
@@ -7636,6 +7636,84 @@
       ],
       "artifacts": ["synthesize-multimodal-spatial-12w"],
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "complexity-analysis",
+      "name": "Complexity Analysis",
+      "tags": ["dsa", "complexity"],
+      "roadmaps": ["dsa-practice"],
+      "difficulty": "intro",
+      "priority": 5,
+      "prerequisites": [],
+      "related": ["sorting", "binary-search"],
+      "description": "Big-O, amortised cost, and space complexity — how to argue a bound before writing code.",
+      "mentalModel": "A complexity bound is a claim about growth, not speed: it says how the work scales as n grows, so constants and hardware drop out. Amortised cost is a separate claim — that an expensive step is rare enough to average down over a sequence, which is why a dynamic array's push is O(1) amortised despite occasionally copying everything. Space is the third axis and the one people forget: recursion depth is memory.",
+      "commonMistakes": [
+        "Reporting the complexity of the loop you can see and missing the one inside the library call (sort, includes, string concat)",
+        "Calling an amortised bound a worst-case bound — a single push can still be O(n)",
+        "Ignoring recursion depth, so an O(n) algorithm quietly uses O(n) stack",
+        "Adding complexities of sequential phases instead of taking the max, or multiplying nested loops that do not actually nest over the same n"
+      ],
+      "realWorldUsage": "Every interview asks for it, and it is the argument you make in a code review when someone adds a nested lookup inside a loop.",
+      "drills": ["analyse-amortised-growth"],
+      "reviewQuestions": ["rq-complexity-amortised"],
+      "resources": [
+        {
+          "title": "MIT 6.006 — Lecture 1: Algorithms and Computation",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-1-algorithms-and-computation/",
+          "type": "video"
+        },
+        {
+          "title": "USACO Guide — Time Complexity",
+          "url": "https://usaco.guide/bronze/time-comp",
+          "type": "doc"
+        },
+        {
+          "title": "Jeff Erickson, Algorithms — appendix: Solving Recurrences (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/99-recurrences.pdf",
+          "type": "paper"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "sorting",
+      "name": "Sorting",
+      "tags": ["dsa", "sorting"],
+      "roadmaps": ["dsa-practice"],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": ["complexity-analysis"],
+      "related": ["binary-search", "heap", "intervals"],
+      "description": "Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.",
+      "mentalModel": "Comparison sorting cannot beat O(n log n) because n! orderings need log2(n!) comparisons to distinguish — so a faster sort must stop comparing and exploit structure in the keys, which is what counting and radix sort do. The practical choice is rarely the asymptote: it is stability (does equal-key order survive?) and space (can you afford the merge buffer?).",
+      "commonMistakes": [
+        "Assuming the language's sort is stable — it is in JS and Python, it is not for primitives in many others",
+        "Sorting numbers with a default lexicographic comparator, so 10 sorts before 9",
+        "Reaching for a linear-time sort without a bounded key range, where it is slower than comparison sorting",
+        "Sorting inside a loop when one sort before the loop would do"
+      ],
+      "realWorldUsage": "Sorting is the setup step for most interval, two-pointer, and greedy solutions — getting stability or the comparator wrong silently corrupts the result rather than crashing.",
+      "drills": ["stable-sort-by-key"],
+      "reviewQuestions": ["rq-sorting-stability"],
+      "resources": [
+        {
+          "title": "MIT 6.006 — Lecture 3: Sets and Sorting",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-3-sets-and-sorting/",
+          "type": "video"
+        },
+        {
+          "title": "MIT 6.006 — Lecture 5: Linear Sorting",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-5-linear-sorting/",
+          "type": "video"
+        },
+        {
+          "title": "USACO Guide — Introduction to Sorting",
+          "url": "https://usaco.guide/bronze/intro-sorting",
+          "type": "doc"
+        }
+      ],
+      "artifacts": []
     }
   ]
 }

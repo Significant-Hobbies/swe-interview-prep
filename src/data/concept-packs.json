@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 170,
-      "paper": 208,
-      "blog": 164,
+      "video": 172,
+      "paper": 209,
+      "blog": 166,
       "book": 135,
-      "problem": 222,
-      "write": 222,
+      "problem": 224,
+      "write": 224,
       "more": 69,
-      "items": 1190
+      "items": 1199
     }
   },
   "packs": {
@@ -1616,8 +1616,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "Harvest, Yield, and Scalable Tolerant Systems (Fox et al.)",
-          "url": "https://www.usenix.org/legacy/event/osdi99/full_papers/fox/fox.pdf"
+          "title": "Harvest, Yield, and Scalable Tolerant Systems (Fox & Brewer, HotOS 1999)",
+          "url": "https://doi.org/10.1109/HOTOS.1999.798396"
         },
         {
           "category": "problem",
@@ -1961,8 +1961,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "WiscKey (Lu et al.)",
-          "url": "https://www.usenix.org/system/files/conference/fast18/fast18-lu.pdf"
+          "title": "WiscKey: Separating Keys from Values in SSD-Conscious Storage (FAST ’16)",
+          "url": "https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf"
         },
         {
           "category": "problem",
@@ -2047,7 +2047,7 @@
         {
           "category": "paper",
           "title": "Modern B-Tree Techniques (Graefe)",
-          "url": "https://research.google/pubs/pub37649/"
+          "url": "https://doi.org/10.1561/1900000028"
         },
         {
           "category": "blog",
@@ -2876,8 +2876,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "Operational Transformation (Ellis & Gibbs)",
-          "url": "https://neil.fraser.name/writing/ot/"
+          "title": "Concurrency Control in Groupware Systems (Ellis & Gibbs, SIGMOD 1989)",
+          "url": "https://doi.org/10.1145/67544.66963"
         },
         {
           "category": "more",
@@ -3016,8 +3016,8 @@
         },
         {
           "category": "paper",
-          "title": "Universal hashing (Carter & Wegman)",
-          "url": "https://www.cs.cmu.edu/~15150/docs/carterwegman.pdf"
+          "title": "Universal Classes of Hash Functions (Carter & Wegman, 1979)",
+          "url": "https://doi.org/10.1016/0022-0000(79)90044-8"
         },
         {
           "category": "blog",
@@ -3139,11 +3139,6 @@
     },
     "binary-search": {
       "items": [
-        {
-          "category": "paper",
-          "title": "Programming Pearls: Writing Correct Programs (Bentley)",
-          "url": "https://www.cs.uaf.edu/~chesley/classes/cs611/Spring2018/Bentley75.pdf"
-        },
         {
           "category": "blog",
           "title": "cp-algorithms — Binary Search",
@@ -3306,8 +3301,8 @@
         },
         {
           "category": "paper",
-          "title": "A note on two problems in connexion with graphs (Dijkstra)",
-          "url": "https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf"
+          "title": "A Note on Two Problems in Connexion with Graphs (Dijkstra, 1959)",
+          "url": "https://doi.org/10.1007/BF01386390"
         },
         {
           "category": "blog",
@@ -3341,8 +3336,8 @@
         },
         {
           "category": "paper",
-          "title": "A note on two problems in connexion with graphs (Dijkstra)",
-          "url": "https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf"
+          "title": "A Note on Two Problems in Connexion with Graphs (Dijkstra, 1959)",
+          "url": "https://doi.org/10.1007/BF01386390"
         },
         {
           "category": "blog",
@@ -3516,8 +3511,8 @@
         },
         {
           "category": "paper",
-          "title": "Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf"
+          "title": "Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf"
         },
         {
           "category": "blog",
@@ -3546,8 +3541,8 @@
         },
         {
           "category": "paper",
-          "title": "Jeff Erickson, Algorithms — chapter: Computational Geometry (PDF)",
-          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/09-dummies.pdf"
+          "title": "Jeff Erickson, Algorithms — chapter: Greedy Algorithms (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf"
         },
         {
           "category": "blog",
@@ -3716,8 +3711,8 @@
       "items": [
         {
           "category": "paper",
-          "title": "Learning from failures in organizations (Cannon & Edmondson)",
-          "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Cannon%20and%20Edmondson%20Concealing%20mistakes.pdf"
+          "title": "Failing to Learn and Learning to Fail (Intelligently) — Cannon & Edmondson",
+          "url": "https://doi.org/10.1016/j.lrp.2005.04.005"
         },
         {
           "category": "blog",
@@ -7074,6 +7069,66 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Human-Computer Interaction\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: HCI treats system quality as human task performance and experience"
+        }
+      ]
+    },
+    "complexity-analysis": {
+      "items": [
+        {
+          "category": "video",
+          "title": "MIT 6.006 — Lecture 1: Algorithms and Computation",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-1-algorithms-and-computation/"
+        },
+        {
+          "category": "paper",
+          "title": "USACO Guide — Time Complexity",
+          "url": "https://usaco.guide/bronze/time-comp"
+        },
+        {
+          "category": "blog",
+          "title": "Jeff Erickson, Algorithms — appendix: Solving Recurrences (PDF)",
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/99-recurrences.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Amortised growth of a dynamic array",
+          "url": "/drills/analyse-amortised-growth"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Complexity Analysis\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A complexity bound is a claim about growth, not speed: it says how the work scales as n grows, so constants and hardware drop out"
+        }
+      ]
+    },
+    "sorting": {
+      "items": [
+        {
+          "category": "video",
+          "title": "MIT 6.006 — Lecture 3: Sets and Sorting",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-3-sets-and-sorting/"
+        },
+        {
+          "category": "paper",
+          "title": "MIT 6.006 — Lecture 5: Linear Sorting",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-5-linear-sorting/"
+        },
+        {
+          "category": "blog",
+          "title": "USACO Guide — Introduction to Sorting",
+          "url": "https://usaco.guide/bronze/intro-sorting"
+        },
+        {
+          "category": "problem",
+          "title": "Stable sort by one key",
+          "url": "/drills/stable-sort-by-key"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Sorting\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Comparison sorting cannot beat O(n log n) because n"
         }
       ]
     }
