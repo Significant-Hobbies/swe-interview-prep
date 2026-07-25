@@ -9,10 +9,10 @@
   ],
   "counts": {
     "tracks": 18,
-    "concepts": 224,
+    "concepts": 226,
     "roadmaps": 24,
-    "drills": 267,
-    "reviewQuestions": 241,
+    "drills": 269,
+    "reviewQuestions": 243,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -231,7 +231,9 @@
         "location-transport",
         "collaboration-productivity",
         "search-platform-design",
-        "rag-system-design"
+        "rag-system-design",
+        "capacity-estimation",
+        "requirements-scoping"
       ],
       "roadmapIds": [
         "ai-infra-12-month",
@@ -4592,6 +4594,38 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/sorting.html",
       "roadmapIds": [
         "dsa-practice"
+      ]
+    },
+    {
+      "id": "capacity-estimation",
+      "name": "Capacity Estimation",
+      "description": "Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html",
+      "roadmapIds": [
+        "hld-practice",
+        "swe-landscape",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "requirements-scoping",
+      "name": "Requirements Scoping",
+      "description": "Separating functional from non-functional requirements and cutting scope to something buildable.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html",
+      "roadmapIds": [
+        "hld-practice",
+        "swe-landscape",
+        "ai-infra-12-month"
       ]
     }
   ],

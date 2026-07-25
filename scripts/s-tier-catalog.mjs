@@ -1839,6 +1839,27 @@ const CURATED_MEDIA_SYSTEMS = {
  * point is to surface material already vetted when the repo was ingested.
  */
 export const CONCEPT_LIBRARY_LINKS = {
+  'capacity-estimation': [
+    L(
+      'System Design — Estimation and Constraints',
+      '/library/system-design?section=readme-md-system-design-interviews-estimation-and-constraints'
+    ),
+    L(
+      'System Design — URL shortener: a worked estimation',
+      '/library/system-design?section=readme-md-url-shortener-estimation-and-constraints'
+    ),
+    L(
+      'System Design 101 — Which latency numbers should you know',
+      '/library/system-design-101?section=data-guides-which-latency-numbers-should-you-know-md'
+    ),
+  ],
+  'requirements-scoping': [
+    L(
+      'System Design — Requirements clarifications',
+      '/library/system-design?section=readme-md-system-design-interviews-requirements-clarifications'
+    ),
+    L('System Design — SLA, SLO, SLI', '/library/system-design?section=readme-md-sla-slo-sli-slo'),
+  ],
   'api-design': [
     L(
       'System Design (karanpratapsingh) — REST',

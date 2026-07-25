@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 172,
+      "video": 174,
       "paper": 209,
       "blog": 166,
       "book": 135,
-      "problem": 224,
-      "write": 224,
-      "more": 69,
-      "items": 1199
+      "problem": 226,
+      "write": 226,
+      "more": 74,
+      "items": 1210
     }
   },
   "packs": {
@@ -7129,6 +7129,71 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Sorting\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Comparison sorting cannot beat O(n log n) because n"
+        }
+      ]
+    },
+    "capacity-estimation": {
+      "items": [
+        {
+          "category": "more",
+          "title": "System Design — Estimation and Constraints",
+          "url": "/library/system-design?section=readme-md-system-design-interviews-estimation-and-constraints"
+        },
+        {
+          "category": "more",
+          "title": "System Design — URL shortener: a worked estimation",
+          "url": "/library/system-design?section=readme-md-url-shortener-estimation-and-constraints"
+        },
+        {
+          "category": "more",
+          "title": "System Design 101 — Which latency numbers should you know",
+          "url": "/library/system-design-101?section=data-guides-which-latency-numbers-should-you-know-md"
+        },
+        {
+          "category": "video",
+          "title": "Site Reliability Engineering (Google) — chapter 21: Handling Overload",
+          "url": "https://sre.google/sre-book/handling-overload/"
+        },
+        {
+          "category": "problem",
+          "title": "Size a write-heavy service",
+          "url": "/drills/size-a-write-heavy-service"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Capacity Estimation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Estimation exists to eliminate designs, not to be accurate"
+        }
+      ]
+    },
+    "requirements-scoping": {
+      "items": [
+        {
+          "category": "more",
+          "title": "System Design — Requirements clarifications",
+          "url": "/library/system-design?section=readme-md-system-design-interviews-requirements-clarifications"
+        },
+        {
+          "category": "more",
+          "title": "System Design — SLA, SLO, SLI",
+          "url": "/library/system-design?section=readme-md-sla-slo-sli-slo"
+        },
+        {
+          "category": "video",
+          "title": "Site Reliability Engineering — Service Level Objectives",
+          "url": "https://sre.google/sre-book/service-level-objectives/"
+        },
+        {
+          "category": "problem",
+          "title": "Split functional from non-functional",
+          "url": "/drills/classify-requirements"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Requirements Scoping\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Functional requirements say what the system does; non-functional ones say what it must survive — and only the second kind changes the architecture"
         }
       ]
     }

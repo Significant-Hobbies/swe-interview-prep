@@ -3020,7 +3020,7 @@
       "roadmaps": ["hld-practice"],
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["caching", "message-queues"],
+      "prerequisites": ["capacity-estimation", "requirements-scoping", "caching", "message-queues"],
       "related": [],
       "description": "Fan-out write/read, timeline.",
       "resources": [
@@ -3057,7 +3057,7 @@
       "roadmaps": ["hld-practice"],
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["caching"],
+      "prerequisites": ["capacity-estimation", "requirements-scoping", "caching"],
       "related": [],
       "description": "CDN, HLS, transcoding pipeline.",
       "resources": [
@@ -3099,7 +3099,7 @@
       "roadmaps": ["hld-practice"],
       "difficulty": "core",
       "priority": 2,
-      "prerequisites": ["sharding"],
+      "prerequisites": ["capacity-estimation", "requirements-scoping", "sharding"],
       "related": [],
       "description": "Geohash, quadtree, dispatch.",
       "resources": [
@@ -3136,7 +3136,7 @@
       "roadmaps": ["hld-practice"],
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["messaging-realtime"],
+      "prerequisites": ["capacity-estimation", "requirements-scoping", "messaging-realtime"],
       "related": [],
       "description": "OT, CRDT, conflict resolution.",
       "resources": [
@@ -3173,7 +3173,12 @@
       "roadmaps": ["ai-infra-12-month", "hld-practice"],
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["inverted-index", "object-storage"],
+      "prerequisites": [
+        "capacity-estimation",
+        "requirements-scoping",
+        "inverted-index",
+        "object-storage"
+      ],
       "related": ["search-discovery", "bm25"],
       "description": "End-to-end design of a search platform: ingestion, indexing, query, ranking.",
       "mentalModel": "A search platform splits into an ingestion/indexing path (durable, batchy, write-optimized) and a query path (low-latency, cacheable, read-optimized). Segment files, an object-storage tier, and an eval harness tie them together.",
@@ -3216,7 +3221,7 @@
       "roadmaps": ["ai-infra-12-month", "hld-practice"],
       "difficulty": "advanced",
       "priority": 5,
-      "prerequisites": ["rag", "hybrid-search"],
+      "prerequisites": ["capacity-estimation", "requirements-scoping", "rag", "hybrid-search"],
       "related": ["chunking", "llm-evals"],
       "description": "Architecting a production RAG system: ingestion, retrieval, generation, evals.",
       "mentalModel": "RAG system design is two pipelines and a contract: an offline ingestion pipeline (chunk → embed → index) and an online query pipeline (retrieve → rerank → pack → generate), bound by an eval harness that gates every change.",
@@ -7710,6 +7715,64 @@
         {
           "title": "USACO Guide — Introduction to Sorting",
           "url": "https://usaco.guide/bronze/intro-sorting",
+          "type": "doc"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "capacity-estimation",
+      "name": "Capacity Estimation",
+      "tags": ["system-design", "scalability"],
+      "roadmaps": ["hld-practice", "swe-landscape", "ai-infra-12-month"],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [],
+      "related": ["load-balancing", "requirements-scoping"],
+      "description": "Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.",
+      "mentalModel": "Estimation exists to eliminate designs, not to be accurate. One order of magnitude is the whole game: 100 GB/day means one machine, 100 TB/day means a fleet, and that single answer picks your storage engine, your sharding story, and whether replication is affordable. Do it before the boxes-and-arrows, because a design drawn without a number is a design you cannot defend.",
+      "commonMistakes": [
+        "Chasing precision — carrying three significant figures through an estimate whose input was a guess",
+        "Estimating average load and sizing for it, when peak is what falls over; assume peak is several times the mean",
+        "Forgetting the multipliers that dominate: replication factor, indexes, and retention window often exceed the raw payload",
+        "Quoting a storage number without a time horizon — per day and per year lead to different architectures"
+      ],
+      "realWorldUsage": "The first five minutes of every HLD interview, and the calculation that decides whether a feature needs a queue or a cron job.",
+      "drills": ["size-a-write-heavy-service"],
+      "reviewQuestions": ["rq-capacity-order-of-magnitude"],
+      "resources": [
+        {
+          "title": "Site Reliability Engineering (Google) — chapter 21: Handling Overload",
+          "url": "https://sre.google/sre-book/handling-overload/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "requirements-scoping",
+      "name": "Requirements Scoping",
+      "tags": ["system-design", "system-design-cases"],
+      "roadmaps": ["hld-practice", "swe-landscape", "ai-infra-12-month"],
+      "difficulty": "core",
+      "priority": 5,
+      "prerequisites": [],
+      "related": ["capacity-estimation", "monitoring-analytics"],
+      "description": "Separating functional from non-functional requirements and cutting scope to something buildable.",
+      "mentalModel": "Functional requirements say what the system does; non-functional ones say what it must survive — and only the second kind changes the architecture. 'Users can post' does not tell you anything, while 'reads outnumber writes 100:1 and p99 must stay under 200ms' picks your caching and replication strategy outright. Scoping is an act of subtraction: naming what you are explicitly not building is what makes the rest defensible.",
+      "commonMistakes": [
+        "Starting to design before agreeing what is out of scope, then re-architecting mid-answer",
+        "Treating a latency or availability target as a detail to add later, when it is the constraint that selects the design",
+        "Collecting requirements without a scale number, so every later decision is unfalsifiable",
+        "Accepting 'highly available' as a requirement instead of pinning an availability target and its cost"
+      ],
+      "realWorldUsage": "The skill the interview actually grades in the first ten minutes, and the same conversation that precedes any real design doc.",
+      "drills": ["classify-requirements"],
+      "reviewQuestions": ["rq-requirements-nonfunctional"],
+      "resources": [
+        {
+          "title": "Site Reliability Engineering — Service Level Objectives",
+          "url": "https://sre.google/sre-book/service-level-objectives/",
           "type": "doc"
         }
       ],

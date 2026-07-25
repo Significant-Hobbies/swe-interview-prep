@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Capacity Estimation | SWE Prep</title>
+    <meta name="description" content="Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Capacity Estimation | SWE Prep">
+    <meta property="og:description" content="Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Capacity Estimation | SWE Prep">
+    <meta name="twitter:description" content="Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Capacity Estimation","description":"Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.","url":"https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Capacity Estimation","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
+      <article>
+    <p class="eyebrow">System Design · core</p>
+    <h1>Capacity Estimation</h1>
+    <p class="lede">Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.</p>
+    <div class="pills"><span>system-design</span><span>scalability</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Estimation exists to eliminate designs, not to be accurate. One order of magnitude is the whole game: 100 GB/day means one machine, 100 TB/day means a fleet, and that single answer picks your storage engine, your sharding story, and whether replication is affordable. Do it before the boxes-and-arrows, because a design drawn without a number is a design you cannot defend.</p>
+    </section>
+
+    <section>
+      <h2>How to study Capacity Estimation</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Site Reliability Engineering (Google) — chapter 21: Handling Overload to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Capacity Estimation with Load Balancing, Requirements Scoping. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Size a write-heavy service and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>The first five minutes of every HLD interview, and the calculation that decides whether a feature needs a queue or a cron job.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Chasing precision — carrying three significant figures through an estimate whose input was a guess</li><li>Estimating average load and sizing for it, when peak is what falls over; assume peak is several times the mean</li><li>Forgetting the multipliers that dominate: replication factor, indexes, and retention window often exceed the raw payload</li><li>Quoting a storage number without a time horizon — per day and per year lead to different architectures</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://sre.google/sre-book/handling-overload/" rel="noreferrer">Site Reliability Engineering (Google) — chapter 21: Handling Overload</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Size a write-heavy service</h3>
+          <p>Implement size(dau, writesPerUserPerDay, bytesPerWrite, replicationFactor, peakMultiplier) returning { writesPerSecond, peakWritesPerSecond, storagePerDayGB, storagePerYearTB }. Use 86400 s/day and 365 d/yr. Storage counts replication. Use GB = 1e9 bytes and TB = 1e12 bytes (decimal, as capacity planning does). Round every value to the nearest integer.</p>
+          <p><strong>Expected evidence:</strong> size(10e6, 20, 500, 3, 5) -&gt; { writesPerSecond: 2315, peakWritesPerSecond: 11574, storagePerDayGB: 300, storagePerYearTB: 110 }</p>
+          <a href="/drills/size-a-write-heavy-service">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why is a back-of-the-envelope estimate useful even when the inputs are guesses, and what makes an estimate that is wrong by 10x different from one wrong by 2x?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li><li><a href="/curriculum/concepts/requirements-scoping.html">Requirements Scoping</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/hld-practice.html">HLD Practice</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

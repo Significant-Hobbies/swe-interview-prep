@@ -5175,6 +5175,58 @@
         }
       ],
       "referenceSolution": "function sortByScore(rows) {\n  return rows\n    .map((row, index) => ({ row, index }))\n    .sort((a, b) => b.row.score - a.row.score || a.index - b.index)\n    .map((entry) => entry.row);\n}"
+    },
+    {
+      "id": "size-a-write-heavy-service",
+      "title": "Size a write-heavy service",
+      "conceptId": "capacity-estimation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement size(dau, writesPerUserPerDay, bytesPerWrite, replicationFactor, peakMultiplier) returning { writesPerSecond, peakWritesPerSecond, storagePerDayGB, storagePerYearTB }. Use 86400 s/day and 365 d/yr. Storage counts replication. Use GB = 1e9 bytes and TB = 1e12 bytes (decimal, as capacity planning does). Round every value to the nearest integer.",
+      "expectedOutput": "size(10e6, 20, 500, 3, 5) -> { writesPerSecond: 2315, peakWritesPerSecond: 11574, storagePerDayGB: 300, storagePerYearTB: 110 }",
+      "hints": [
+        "Writes per second is total daily writes divided by 86400 — peak is that multiplied by the peak factor.",
+        "Replication multiplies stored bytes, not the write rate you compute per second before replication."
+      ],
+      "solutionNotes": "The point of the exercise is the order of magnitude: ~2k writes/s and ~110 TB/yr is a sharded, replicated fleet, not one box.",
+      "testCases": [
+        {
+          "run": "const r = size(10e6, 20, 500, 3, 5); console.log(r.writesPerSecond, r.peakWritesPerSecond, r.storagePerDayGB, r.storagePerYearTB);",
+          "expect": "2315 11574 300 110"
+        },
+        {
+          "run": "const r = size(1e6, 5, 200, 1, 3); console.log(r.writesPerSecond, r.peakWritesPerSecond, r.storagePerDayGB, r.storagePerYearTB);",
+          "expect": "58 174 1 0"
+        }
+      ],
+      "referenceSolution": "function size(dau, writesPerUserPerDay, bytesPerWrite, replicationFactor, peakMultiplier) {\n  const writesPerDay = dau * writesPerUserPerDay;\n  const writesPerSecond = writesPerDay / 86400;\n  const bytesPerDay = writesPerDay * bytesPerWrite * replicationFactor;\n  return {\n    writesPerSecond: Math.round(writesPerSecond),\n    peakWritesPerSecond: Math.round(writesPerSecond * peakMultiplier),\n    storagePerDayGB: Math.round(bytesPerDay / 1e9),\n    storagePerYearTB: Math.round((bytesPerDay * 365) / 1e12),\n  };\n}"
+    },
+    {
+      "id": "classify-requirements",
+      "title": "Split functional from non-functional",
+      "conceptId": "requirements-scoping",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "prompt": "Implement classify(requirements) returning { functional, nonFunctional } — two arrays preserving input order. A functional requirement states what the system DOES; a non-functional one states a quality or constraint it must hold (latency, availability, throughput, durability, consistency, cost, security posture).",
+      "expectedOutput": "'Users can upload a photo' -> functional; 'p99 read latency under 200ms' -> nonFunctional",
+      "hints": [
+        "Ask whether the statement could be satisfied by a feature, or only by an architectural property.",
+        "Anything with a number attached to time, availability, or scale is almost always non-functional."
+      ],
+      "solutionNotes": "Only the non-functional list changes the architecture — that is why the split is the first thing to do.",
+      "testCases": [
+        {
+          "setup": "const reqs = ['Users can upload a photo','p99 read latency under 200ms','Users can follow other users','99.9% availability','Feed shows newest posts first','Reads outnumber writes 100:1','Support 10M daily active users','Users can delete their account'];",
+          "run": "const r = classify(reqs); console.log(r.functional.length, r.nonFunctional.length); console.log(r.functional[0]); console.log(r.nonFunctional[0]);",
+          "expect": ["4 4", "Users can upload a photo", "p99 read latency under 200ms"]
+        },
+        {
+          "setup": "const reqs2 = ['Data must survive a single-region outage','Users can search by tag'];",
+          "run": "const r = classify(reqs2); console.log(r.nonFunctional[0] === 'Data must survive a single-region outage', r.functional[0] === 'Users can search by tag');",
+          "expect": "true true"
+        }
+      ],
+      "referenceSolution": "const NON_FUNCTIONAL = /latency|availab|throughput|durab|consisten|outnumber|daily active|survive|scale|cost|encrypt|p9\\d/i;\n\nfunction classify(requirements) {\n  const functional = [];\n  const nonFunctional = [];\n  for (const requirement of requirements) {\n    (NON_FUNCTIONAL.test(requirement) ? nonFunctional : functional).push(requirement);\n  }\n  return { functional, nonFunctional };\n}"
     }
   ]
 }

@@ -2068,6 +2068,22 @@
       "difficulty": "core",
       "question": "You sort records by score, then by date, expecting both orderings to hold. Why does this only work if the sort is stable, and what breaks if it is not?",
       "answer": "Sorting by date first and score second only preserves the date order within equal scores if equal elements keep their relative positions — that is stability. Without it the second pass may reorder ties arbitrarily, so records with the same score come back in an unpredictable date order. The fix is either a stable sort or a single comparator that ranks on score then date explicitly."
+    },
+    {
+      "id": "rq-capacity-order-of-magnitude",
+      "conceptId": "capacity-estimation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is a back-of-the-envelope estimate useful even when the inputs are guesses, and what makes an estimate that is wrong by 10x different from one wrong by 2x?",
+      "answer": "The estimate exists to eliminate architectures, not to predict a bill. Being 2x out changes nothing — the same storage engine and shard count still apply. Being 10x out crosses a boundary: single machine to fleet, one region to many, cron to queue. So carry one significant figure, size for peak rather than mean, and include the multipliers that actually dominate — replication, indexes, retention."
+    },
+    {
+      "id": "rq-requirements-nonfunctional",
+      "conceptId": "requirements-scoping",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Two requirements: 'users can follow each other' and 'reads outnumber writes 100 to 1'. Which one changes the architecture, and why is that the whole point of the split?",
+      "answer": "The read/write ratio does. 'Users can follow each other' is satisfiable by almost any design, so it constrains nothing; a 100:1 read skew immediately argues for caching, read replicas, and probably fan-out on write. Functional requirements tell you what to build, non-functional ones tell you what it has to survive — and only the second kind can rule a design out, which is why they are worth extracting first."
     }
   ]
 }

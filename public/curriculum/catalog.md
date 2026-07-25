@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 224 concepts across
+A public, JavaScript-free index of 226 concepts across
 18 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -200,7 +200,7 @@ Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, comp
 Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/system-design.html
-- Concepts: 21
+- Concepts: 23
 - Roadmaps: 6
 
 - [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
@@ -224,6 +224,8 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 - [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) — OT, CRDT, conflict resolution.
 - [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html) — End-to-end design of a search platform: ingestion, indexing, query, ranking.
 - [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html) — Architecting a production RAG system: ingestion, retrieval, generation, evals.
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html) — Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html) — Separating functional from non-functional requirements and cutting scope to something buildable.
 
 ## DSA & Implementation
 

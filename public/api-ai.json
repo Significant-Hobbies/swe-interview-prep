@@ -13,10 +13,10 @@
   "curriculum": {
     "counts": {
       "tracks": 18,
-      "concepts": 224,
+      "concepts": 226,
       "roadmaps": 24,
-      "drills": 267,
-      "reviewQuestions": 241,
+      "drills": 269,
+      "reviewQuestions": 243,
       "artifacts": 40,
       "coverageCategories": 11,
       "coverageTopics": 96
@@ -38,7 +38,7 @@
       "url": "https://learn.significanthobbies.com/curriculum/",
       "md": "https://learn.significanthobbies.com/curriculum/catalog.md",
       "kind": "collection",
-      "description": "18 tracks, 224 concepts, and 24 roadmaps as static public pages"
+      "description": "18 tracks, 226 concepts, and 24 roadmaps as static public pages"
     },
     {
       "id": "curriculum-json",

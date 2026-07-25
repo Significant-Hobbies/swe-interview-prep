@@ -2,10 +2,10 @@
   "generated": true,
   "counts": {
     "tracks": 18,
-    "concepts": 224,
+    "concepts": 226,
     "roadmaps": 24,
-    "drills": 267,
-    "reviewQuestions": 241,
+    "drills": 269,
+    "reviewQuestions": 243,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -277,6 +277,8 @@
     "/curriculum/concepts/spatial-interfaces.html",
     "/curriculum/concepts/human-computer-interaction.html",
     "/curriculum/concepts/complexity-analysis.html",
-    "/curriculum/concepts/sorting.html"
+    "/curriculum/concepts/sorting.html",
+    "/curriculum/concepts/capacity-estimation.html",
+    "/curriculum/concepts/requirements-scoping.html"
   ]
 }
