@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself.</p>
+      <p>WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself. Scope: this card owns one backend — compute shaders, WGSL, and the transfer and compilation costs that dominate matmul in practice. The surrounding browser runtime is `ml-browser-runtime`; running outside the browser is `local-on-device-inference`.</p>
     </section>
 
     <section>

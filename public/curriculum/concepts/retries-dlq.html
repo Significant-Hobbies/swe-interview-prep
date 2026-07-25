@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable.</p>
+      <p>Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable. Scope: this card owns one mechanism, queue-side: poison messages, the dead-letter queue, and getting a stuck consumer moving again. Caller-side backoff, jitter and breakers are `retries-and-circuit-breakers`; the reasoning about ambiguous failure is `distributed-failure-recovery`.</p>
     </section>
 
     <section>

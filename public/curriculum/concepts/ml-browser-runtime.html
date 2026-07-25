@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback.</p>
+      <p>You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback. Scope: this card owns the browser as a platform — Workers, WASM, OPFS, model loading and the first-load budget. The GPU backend specifically is `ml-webgpu`; native and mobile execution is `local-on-device-inference`.</p>
     </section>
 
     <section>

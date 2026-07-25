@@ -497,3 +497,51 @@ describe('learning loop coverage (roadmap.sh parity bar)', () => {
     }
   });
 });
+
+describe('scope boundaries', () => {
+  // Several concepts overlap by design — six evaluation cards, three
+  // reliability cards, three sandboxing cards. The audit's complaint was not
+  // that they duplicate each other but that "a learner cannot tell which card
+  // owns LLM-as-judge calibration". Each now carries a `Scope:` line naming
+  // what it owns and pointing at its neighbours by id. A rename that leaves one
+  // of those pointers dangling would silently send the reader nowhere.
+  it('every concept id referenced in a scope line exists', () => {
+    const ids = new Set(concepts.map((c: { id: string }) => c.id));
+    const dangling: string[] = [];
+    for (const concept of concepts as { id: string; mentalModel?: string }[]) {
+      const scope = concept.mentalModel?.split('Scope: this card owns')[1];
+      if (!scope) continue;
+      for (const [, ref] of scope.matchAll(/`([a-z0-9-]+)`/g)) {
+        if (!ids.has(ref)) dangling.push(`${concept.id} -> ${ref}`);
+      }
+    }
+    expect(dangling).toEqual([]);
+  });
+
+  it('overlapping clusters all declare their scope', () => {
+    const clustered = [
+      'ml-evaluation',
+      'llm-evals',
+      'ai-regression-testing',
+      'quality-cost-latency-measurement',
+      'coding-agent-benchmarks',
+      'tool-use-evaluations',
+      'reliability-fault-tolerance',
+      'distributed-failure-recovery',
+      'retries-dlq',
+      'security-isolation-boundaries',
+      'sandbox-execution-environments',
+      'agent-permissions-sandboxing',
+      'ml-browser-runtime',
+      'ml-webgpu',
+      'local-on-device-inference',
+    ];
+    const byId = new Map(
+      (concepts as { id: string; mentalModel?: string }[]).map((c) => [c.id, c])
+    );
+    const missing = clustered.filter(
+      (id) => !byId.get(id)?.mentalModel?.includes('Scope: this card owns')
+    );
+    expect(missing).toEqual([]);
+  });
+});

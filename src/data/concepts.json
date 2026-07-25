@@ -919,7 +919,7 @@
         "estimation-confidence"
       ],
       "description": "Measuring LLM output quality with datasets, graders, and LLM-as-judge.",
-      "mentalModel": "Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change.",
+      "mentalModel": "Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change. Scope: this card owns constructing the grader — dataset design, rubric writing, and LLM-as-judge including its calibration and bias checks. Running those graders as a release gate is `ai-regression-testing`; grading an agent's actions rather than its text is `tool-use-evaluations`.",
       "commonMistakes": [
         "Shipping prompt changes on vibes with no eval",
         "LLM-as-judge without checking the judge against humans",
@@ -1753,7 +1753,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback.",
+      "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback. Scope: this card owns the browser as a platform — Workers, WASM, OPFS, model loading and the first-load budget. The GPU backend specifically is `ml-webgpu`; native and mobile execution is `local-on-device-inference`.",
       "drills": ["ml-wasm-linear-memory"],
       "reviewQuestions": ["rq-ml-browser-runtime-core"],
       "artifacts": ["synthesize-inference-serving-12w"]
@@ -1780,7 +1780,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself.",
+      "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself. Scope: this card owns one backend — compute shaders, WGSL, and the transfer and compilation costs that dominate matmul in practice. The surrounding browser runtime is `ml-browser-runtime`; running outside the browser is `local-on-device-inference`.",
       "drills": ["ml-webgpu-buffer-alignment"],
       "reviewQuestions": ["rq-ml-webgpu-core"],
       "artifacts": ["synthesize-inference-serving-12w", "synthesize-multimodal-spatial-12w"]
@@ -1812,7 +1812,7 @@
           "type": "doc"
         }
       ],
-      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough.",
+      "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough. Scope: this card owns the offline/online split and the classical failure modes — held-out sets, baselines, leakage, distribution shift. Building a grader for free-text output is `llm-evals`; comparing whole systems on cost and latency is `quality-cost-latency-measurement`.",
       "drills": ["ml-eval-perplexity-vs-acc"],
       "reviewQuestions": ["rq-ml-evaluation-core"],
       "artifacts": ["synthesize-ai-models-training-12w", "synthesize-ai-reliability-12w"]
@@ -1959,7 +1959,7 @@
       "prerequisites": ["idempotency"],
       "related": ["message-queues", "background-jobs"],
       "description": "Backoff + jitter, poison messages, dead-letter queues.",
-      "mentalModel": "Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable.",
+      "mentalModel": "Retries fix transient failures; backoff with jitter stops a retry storm; a dead-letter queue catches messages that will never succeed so they stop blocking the queue and become debuggable. Scope: this card owns one mechanism, queue-side: poison messages, the dead-letter queue, and getting a stuck consumer moving again. Caller-side backoff, jitter and breakers are `retries-and-circuit-breakers`; the reasoning about ambiguous failure is `distributed-failure-recovery`.",
       "commonMistakes": [
         "Retrying without backoff and creating a thundering herd",
         "Retrying without jitter so all clients sync up",
@@ -5297,7 +5297,7 @@
       "prerequisites": ["runtime-performance-engineering"],
       "related": ["runtime-performance-engineering"],
       "description": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
-      "mentalModel": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+      "mentalModel": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed. Scope: this card owns the principles — threat modelling, least privilege, capabilities, and failing closed. Which mechanism implements them, and at what cost, is `sandbox-execution-environments`; applying them to an agent is `agent-permissions-sandboxing`.",
       "drills": ["practice-security-isolation-boundaries"],
       "reviewQuestions": ["rq-security-isolation-boundaries"],
       "resources": [
@@ -5482,7 +5482,7 @@
       "prerequisites": ["background-jobs"],
       "related": ["background-jobs", "retries-dlq"],
       "description": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
-      "mentalModel": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+      "mentalModel": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents. Scope: this card owns the target-setting layer — deciding what 'reliable enough' means and budgeting for it with SLOs, error budgets and fault domains. Staying CORRECT while a request is failing is `distributed-failure-recovery`; the concrete queue-retry mechanism is `retries-dlq`.",
       "drills": ["practice-reliability-fault-tolerance"],
       "reviewQuestions": ["rq-reliability-fault-tolerance"],
       "resources": [
@@ -5505,7 +5505,7 @@
       "prerequisites": ["monitoring-analytics"],
       "related": ["monitoring-analytics"],
       "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
-      "mentalModel": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+      "mentalModel": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model. Scope: this card owns the mechanisms and their trade-offs — process, container, microVM, V8 isolate, WebAssembly — compared on isolation strength, startup cost, syscall surface and density. Deciding what you are defending against is `security-isolation-boundaries`.",
       "drills": ["practice-sandbox-execution-environments"],
       "reviewQuestions": ["rq-sandbox-execution-environments"],
       "resources": [
@@ -5637,7 +5637,7 @@
       "prerequisites": ["distributed-workflows-temporal"],
       "related": ["distributed-workflows-temporal"],
       "description": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
-      "mentalModel": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+      "mentalModel": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives. Scope: this card owns correctness under partial failure — operation identity, fencing a stale writer, repair and anti-entropy, and tested restore objectives. What target you are recovering TO is `reliability-fault-tolerance`; the caller-side backoff policy is `retries-and-circuit-breakers`.",
       "drills": ["practice-distributed-failure-recovery"],
       "reviewQuestions": ["rq-distributed-failure-recovery"],
       "resources": [
@@ -6128,7 +6128,7 @@
       "prerequisites": ["model-quantization"],
       "related": ["image-video-generation", "robotics-systems"],
       "description": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
-      "mentalModel": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+      "mentalModel": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints. Scope: this card owns running outside the browser — llama.cpp, mobile accelerators, model formats, quantisation, and thermal and memory budgets. In-browser execution is `ml-browser-runtime`, and its GPU path is `ml-webgpu`.",
       "drills": ["practice-local-on-device-inference"],
       "reviewQuestions": ["rq-local-on-device-inference"],
       "resources": [
@@ -6361,7 +6361,7 @@
       "prerequisites": ["durable-agent-execution"],
       "related": ["durable-agent-execution", "long-running-scheduled-agents"],
       "description": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
-      "mentalModel": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+      "mentalModel": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use. Scope: this card owns treating an agent as an untrusted principal — capability grants, approval gates for irreversible effects, secret isolation and audit. The underlying isolation technology is `sandbox-execution-environments`; the threat-modelling discipline is `security-isolation-boundaries`.",
       "drills": ["practice-agent-permissions-sandboxing"],
       "reviewQuestions": ["rq-agent-permissions-sandboxing"],
       "resources": [
@@ -6528,7 +6528,7 @@
       "prerequisites": ["ml-evaluation"],
       "related": ["ml-evaluation", "tool-use-evaluations"],
       "description": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
-      "mentalModel": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+      "mentalModel": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled. Scope: this card owns one benchmark family and its validity — repository setup, patch grading, flaky tests, and contamination. The general practice of grading agent actions is `tool-use-evaluations`; grading text output is `llm-evals`.",
       "drills": ["practice-coding-agent-benchmarks"],
       "reviewQuestions": ["rq-coding-agent-benchmarks"],
       "resources": [
@@ -6571,7 +6571,7 @@
       "prerequisites": ["coding-agent-benchmarks"],
       "related": ["coding-agent-benchmarks", "prompt-versioning"],
       "description": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
-      "mentalModel": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+      "mentalModel": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state. Scope: this card owns grading the TRAJECTORY — tool choice, argument correctness, sequencing, error recovery, and verified end state. Grading the final text is `llm-evals`; the SWE-bench-style environment-plus-verifier setup is `coding-agent-benchmarks`.",
       "drills": ["practice-tool-use-evaluations"],
       "reviewQuestions": ["rq-tool-use-evaluations"],
       "resources": [
@@ -6594,7 +6594,7 @@
       "prerequisites": ["prompt-versioning"],
       "related": ["prompt-versioning", "hallucination-failure-detection"],
       "description": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
-      "mentalModel": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+      "mentalModel": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas. Scope: this card owns the CI application — frozen sets, versioned rubrics, repeat trials against stochastic output, and the threshold that blocks a release. How a grader is built lives in `llm-evals`; what to measure beyond quality lives in `quality-cost-latency-measurement`.",
       "drills": ["practice-ai-regression-testing"],
       "reviewQuestions": ["rq-ai-regression-testing"],
       "resources": [
@@ -6817,7 +6817,7 @@
       "prerequisites": ["hallucination-failure-detection"],
       "related": ["hallucination-failure-detection", "agent-observability"],
       "description": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
-      "mentalModel": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+      "mentalModel": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together. Scope: this card owns comparing candidate SYSTEMS on one workload — the Pareto frontier across quality, token and tool cost, latency distribution, and failure rate. Scoring an individual output is `llm-evals`; gating a release on the result is `ai-regression-testing`.",
       "drills": ["practice-quality-cost-latency-measurement"],
       "reviewQuestions": ["rq-quality-cost-latency-measurement"],
       "resources": [

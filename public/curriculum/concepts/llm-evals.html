@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change.</p>
+      <p>Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change. Scope: this card owns constructing the grader — dataset design, rubric writing, and LLM-as-judge including its calibration and bias checks. Running those graders as a release gate is `ai-regression-testing`; grading an agent&#39;s actions rather than its text is `tool-use-evaluations`.</p>
     </section>
 
     <section>
