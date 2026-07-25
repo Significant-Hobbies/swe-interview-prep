@@ -109,8 +109,48 @@ const packs = {};
 const stats = { video: 0, paper: 0, blog: 0, book: 0, problem: 0, write: 0, more: 0, items: 0 };
 const violations = [];
 
+/**
+ * Pack items already checked in that this run would not reproduce.
+ *
+ * The catalog in s-tier-catalog.mjs is hand-maintained and always incomplete,
+ * so people curate links straight into concept-packs.json. Regenerating used to
+ * silently delete every one of them: a sync run dropped 27 verified links
+ * (RouteLLM, the PAIR guidebook, the NIST AI RMF PDF, and 24 per-concept
+ * sources added for concepts that previously had none) and reinstated the
+ * track-anchor blog in their place.
+ *
+ * So: the catalog owns the default slots, a human's extra link is kept. Kept
+ * items still pass the same S-tier gate as generated ones — nothing skips
+ * review by virtue of being hand-added.
+ */
+let existingPacks = {};
+try {
+  existingPacks = JSON.parse(readFileSync(join(root, 'src/data/concept-packs.json'), 'utf8')).packs;
+} catch {
+  existingPacks = {};
+}
+
+function preserveCurated(conceptId, pack) {
+  const previous = existingPacks[conceptId]?.items ?? [];
+  const generated = new Set(pack.items.map((i) => i.url).filter(Boolean));
+  for (const item of previous) {
+    if (!item.url || generated.has(item.url)) continue;
+    if (
+      !isSTierSource(
+        item.title,
+        item.url,
+        MEDIA_SLOTS.includes(item.category) ? item.category : undefined
+      )
+    ) {
+      continue;
+    }
+    pack.items.push(item);
+  }
+  return pack;
+}
+
 for (const c of concepts) {
-  const pack = buildPack(c);
+  const pack = preserveCurated(c.id, buildPack(c));
   packs[c.id] = pack;
 
   for (const item of pack.items) {

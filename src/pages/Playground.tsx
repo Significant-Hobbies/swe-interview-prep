@@ -32,7 +32,6 @@ import { CONCEPT_BY_ID, useConceptMastery } from '../hooks/useConcepts';
 import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import { useArtifactStore, useFocusMode } from '../hooks/useUserStore';
-import { GO_RUNTIME_AVAILABLE } from '../lib/capabilities';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';
@@ -42,12 +41,18 @@ const PANELS_KEY = 'playground-panels';
 
 type PanelId = 'problem' | 'code' | 'diagram' | 'companion' | 'library';
 
-function resolveLanguage(lang: Language | null | undefined): Language {
-  if (lang === 'go' && !GO_RUNTIME_AVAILABLE) return 'typescript';
-  return lang ?? 'typescript';
+const RUNNABLE_LANGUAGES: readonly Language[] = ['javascript', 'typescript'];
+
+/**
+ * Share links and localStorage predate the removal of the Go runtime and can
+ * still carry `lang: 'go'`, so this normalises anything unrunnable rather than
+ * trusting the stored value.
+ */
+function resolveLanguage(lang: string | null | undefined): Language {
+  return RUNNABLE_LANGUAGES.includes(lang as Language) ? (lang as Language) : 'typescript';
 }
 
-function loadFromHash(): { code: string; lang: Language } | null {
+function loadFromHash(): { code: string; lang: string } | null {
   const hash = window.location.hash.slice(1);
   if (!hash) return null;
   try {
@@ -75,9 +80,7 @@ export default function Playground() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [language, setLanguage] = useState<Language>(() =>
-    // A persisted `go` selection would otherwise strand the editor in a
-    // language whose button is hidden and whose runtime does not exist.
-    resolveLanguage(shared?.lang || (localStorage.getItem(LANG_KEY) as Language) || 'typescript')
+    resolveLanguage(shared?.lang || localStorage.getItem(LANG_KEY))
   );
   const [code, setCode] = useState(() => shared?.code || localStorage.getItem(STORAGE_KEY) || '');
   const [problem, setProblem] = useState(() => localStorage.getItem(PROBLEM_KEY) || '');
@@ -85,8 +88,7 @@ export default function Playground() {
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const problemTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const editorRef = useRef<any>(null);
-  const { execute, output, errors, isRunning, execTimeMs, errorLine, goBackend } =
-    useCodeExecution();
+  const { execute, output, errors, isRunning, execTimeMs, errorLine } = useCodeExecution();
   const [copied, setCopied] = useState(false);
   const [shared_, setShared] = useState(false);
   const [hasRun, setHasRun] = useState(false);
@@ -120,10 +122,22 @@ export default function Playground() {
   );
 
   // Hydrate from query params (artifact templates, concept deep-links, prompts)
+  //
+  // Depend on the query VALUES, not on `searchParams.get` / `getArtifact`.
+  // `useSearchParams` returns a fresh URLSearchParams every render, so the bound
+  // `.get` was a new reference each time, and `getArtifact` is likewise
+  // re-created on every render (useUserStore returns a plain object literal).
+  // The effect therefore re-ran on every render and its terminating
+  // `setSearchParams({})` never settled — an infinite render loop that logged
+  // "Maximum update depth exceeded" ~84 times per visit to
+  // /playground?artifact=…, and left the query string stuck in the URL.
+  const artifactParam = searchParams.get('artifact');
+  const conceptParam = searchParams.get('concept');
+  const promptParam = searchParams.get('prompt');
   useEffect(() => {
-    const artifactId = searchParams.get('artifact');
-    const conceptId = searchParams.get('concept');
-    const promptText = searchParams.get('prompt');
+    const artifactId = artifactParam;
+    const conceptId = conceptParam;
+    const promptText = promptParam;
     if (!artifactId && !conceptId && !promptText) return;
 
     if (artifactId && !window.location.hash.slice(1)) {
@@ -173,7 +187,7 @@ export default function Playground() {
 
     setSearchParams({}, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setSearchParams, setArtifact, searchParams.get, getArtifact]);
+  }, [artifactParam, conceptParam, promptParam, setSearchParams]);
 
   const togglePanel = (id: PanelId) => {
     // In compact mode the toggle row is a single-select tab switcher.
@@ -351,14 +365,6 @@ export default function Playground() {
                 >
                   TS
                 </button>
-                {GO_RUNTIME_AVAILABLE && (
-                  <button
-                    onClick={() => handleLanguageChange('go')}
-                    className={langBtn(language === 'go')}
-                  >
-                    Go
-                  </button>
-                )}
               </div>
             </>
           )}
@@ -497,23 +503,6 @@ export default function Playground() {
                           Output
                           {hasRun && execTimeMs > 0 && (
                             <span className="ml-1.5 text-white/40">{formatTime(execTimeMs)}</span>
-                          )}
-                          {hasRun && language === 'go' && (
-                            <span
-                              className={`ml-1.5 rounded px-1 text-[10px] font-bold ${
-                                goBackend === 'wasm'
-                                  ? 'bg-green-500/20 text-green-400'
-                                  : goBackend === 'wasm-loading'
-                                    ? 'bg-blue-500/20 text-blue-400'
-                                    : 'bg-white/10 text-white'
-                              }`}
-                            >
-                              {goBackend === 'wasm'
-                                ? 'LOCAL'
-                                : goBackend === 'wasm-loading'
-                                  ? 'API (loading WASM...)'
-                                  : 'API'}
-                            </span>
                           )}
                         </button>
                         <button

@@ -336,7 +336,17 @@ export const CONCEPT_MEDIA = {
   },
   'tool-calling': { paper: L('Toolformer (Schick et al.)', 'https://arxiv.org/abs/2302.04761') },
   'agent-loops': { paper: L('ReAct (Yao et al.)', 'https://arxiv.org/abs/2210.03629') },
-  'model-routing': { paper: L('FrugalGPT (Chen et al.)', 'https://arxiv.org/abs/2305.05176') },
+  'model-routing': {
+    paper: L('FrugalGPT (Chen et al.)', 'https://arxiv.org/abs/2305.05176'),
+    blog: L(
+      'RouteLLM — cost-effective LLM routing (LMSYS)',
+      'https://lmsys.org/blog/2024-07-01-routellm/'
+    ),
+    more: L(
+      'Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing',
+      'https://arxiv.org/abs/2404.14618'
+    ),
+  },
   'prompt-versioning': {
     paper: L('Promptbreeder (Fernando et al.)', 'https://arxiv.org/abs/2309.16797'),
   },
@@ -368,6 +378,10 @@ export const CONCEPT_MEDIA = {
     paper: L(
       'Decoupled Weight Decay Regularization (Loshchilov & Hutter)',
       'https://arxiv.org/abs/1711.05101'
+    ),
+    blog: L(
+      'An overview of gradient descent optimization algorithms (Ruder)',
+      'https://www.ruder.io/optimizing-gradient-descent/'
     ),
   },
   'ml-tokenization': {
@@ -426,7 +440,10 @@ export const CONCEPT_MEDIA = {
   },
   'ml-data-engineering': {
     paper: L('Deduplicating Training Data (Lee et al.)', 'https://arxiv.org/abs/2107.06499'),
-    blog: L('Eugene Yan — LLM data flywheels', 'https://eugeneyan.com/writing/llm-evaluators/'),
+    blog: L(
+      'Data Cascades in High-Stakes AI (Sambasivan et al., CHI 2021)',
+      'https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/'
+    ),
   },
   'ml-browser-runtime': {
     paper: L('WebGPU specification (W3C)', 'https://www.w3.org/TR/webgpu/'),
@@ -863,14 +880,14 @@ export const CONCEPT_MEDIA = {
   },
   'strategy-pattern': {
     paper: L(
-      'Program development by stepwise refinement (Wirth)',
-      'https://doi.org/10.1145/356953.356949'
+      'Program Development by Stepwise Refinement (Wirth, CACM 1971)',
+      'https://doi.org/10.1145/362575.362577'
     ),
   },
   'observer-pattern': {
     paper: L(
-      'Applications Programming in Smalltalk-80 (Krasner et al.)',
-      'https://doi.org/10.1145/361233.361234'
+      'A Cookbook for Using MVC in Smalltalk-80 (Krasner & Pope, 1988)',
+      'https://www.ics.uci.edu/~redmiles/ics227-SQ04/papers/KrasnerPope88.pdf'
     ),
   },
   'factory-creational': {
@@ -880,12 +897,15 @@ export const CONCEPT_MEDIA = {
     ),
   },
   'decorator-structural': {
-    paper: L('Open-Closed Principle (Martin)', 'https://doi.org/10.1109/MS.2003.1207080'),
+    paper: L(
+      'The Open-Closed Principle (Robert C. Martin, C++ Report 1996)',
+      'https://www.cs.utexas.edu/users/downing/papers/OCP-1996.pdf'
+    ),
   },
   'command-chain': {
     paper: L(
-      'Command pattern in interactive systems (Myers)',
-      'https://doi.org/10.1145/800214.806205'
+      'A Selective Undo Mechanism for GUIs Based on Command Objects (Berlage, TOCHI 1994)',
+      'https://doi.org/10.1145/196699.196721'
     ),
   },
   'game-design': {
@@ -925,7 +945,12 @@ export const CONCEPT_MEDIA = {
       'https://www.cs.utexas.edu/~eager/380H/readings/Dijkstra59.pdf'
     ),
   },
-  'dp-1d': { paper: L('Dynamic programming (Bellman)', 'https://doi.org/10.1073/pnas.48.8.1257') },
+  'dp-1d': {
+    paper: L(
+      'On the Theory of Dynamic Programming (Bellman, PNAS 1952)',
+      'https://doi.org/10.1073/pnas.38.8.716'
+    ),
+  },
   'dp-2d': {
     paper: L('Needleman-Wunsch sequence alignment', 'https://doi.org/10.1016/0022-2836(70)90057-4'),
   },
@@ -943,8 +968,8 @@ export const CONCEPT_MEDIA = {
   },
   'bit-manipulation': {
     paper: L(
-      'Graph-based algorithms for Boolean function manipulation (Bryant)',
-      'https://doi.org/10.1016/0898-1221(92)90016-Z'
+      'Graph-Based Algorithms for Boolean Function Manipulation (Bryant, IEEE TC 1986)',
+      'https://doi.org/10.1109/TC.1986.1676819'
     ),
   },
   'leadership-and-influence': {
@@ -996,8 +1021,8 @@ export const CONCEPT_MEDIA = {
   },
   communication: {
     paper: L(
-      'Grounding in communication (Clark & Brennan)',
-      'https://doi.org/10.1016/S0010-0277(91)90013-P'
+      'Grounding in Communication (Clark & Brennan, 1991)',
+      'https://doi.org/10.1037/10096-006'
     ),
     blog: L('re:Work — Communicate effectively', 'https://rework.withgoogle.com/guides/'),
   },
@@ -1027,8 +1052,8 @@ export const CONCEPT_MEDIA = {
   },
   'ownership-and-accountability': {
     paper: L(
-      'On the criteria for decomposing systems into modules (Parnas)',
-      'https://doi.org/10.1145/362486.362498'
+      'On the Criteria To Be Used in Decomposing Systems into Modules (Parnas, CACM 1972)',
+      'https://doi.org/10.1145/361598.361623'
     ),
     blog: L('Google SRE — Embracing risk', 'https://sre.google/sre-book/embracing-risk/'),
   },
@@ -1037,7 +1062,10 @@ export const CONCEPT_MEDIA = {
       'Marty Cagan @ Stanford — product discovery',
       'https://www.youtube.com/watch?v=9hMUCQuvRro'
     ),
-    paper: L('Market segmentation (Smith)', 'https://doi.org/10.1177/002224295601300407'),
+    paper: L(
+      'Product Differentiation and Market Segmentation (Smith, 1956)',
+      'https://doi.org/10.1177/002224295602100102'
+    ),
     blog: L('SVPG — positioning & product strategy', 'https://www.svpg.com/articles/'),
     book: L(
       'Inspired (Marty Cagan)',

@@ -69,22 +69,21 @@ into `src/pages/LearningDoc.tsx`.
 5. BuildLab surfaces a "next weakest concept" card → the loop closes:
    drill → explain → mastery update → next weakest concept.
 
-## Go execution flow
+## Code execution flow
 
-Hybrid, source of truth `src/lib/goExecutor.ts`:
+Source of truth `src/hooks/useCodeExecution.ts`. JavaScript and TypeScript
+only — there is no server round-trip:
 
-1. **First run:** client POSTs to `/api/go-run`, which proxies to
-   `https://go.dev/_/compile` (the Go Playground). Auth is required by the
-   handler (`api/go-run.mjs`). Note: this route is served by the local dev
-   `api/*.mjs` handlers, not by the production Pages Function.
-2. **Background:** `startWASMLoading()` fetches a Go WASM interpreter
-   (`go-interp.wasm` + `wasm_exec.js`) from R2 and instantiates it inside a
-   Web Worker. The 38 MB binary is R2-hosted, not shipped to Pages (see
-   `.cfpagesignore` and `deploy.yml`'s `rm -rf dist/wasm`).
-3. **Once loaded:** subsequent runs execute locally in the WASM worker with a
-   hard timeout + memory cap; the API path is only a fallback.
-4. Result renders in the Monaco panel. (TypeScript is transpiled and run
-   in-browser via sucrase — no server round-trip.)
+1. TypeScript is transpiled in-browser with sucrase.
+2. The result is injected into a hidden `<iframe sandbox="allow-scripts">`
+   via `srcdoc`, with `console.*` captured into a log buffer.
+3. The iframe `postMessage`s output, errors, per-test results and elapsed
+   time back; a 5-second timer aborts a runaway program.
+
+Go execution (a `/api/go-run` → go.dev proxy plus an R2-hosted WASM
+interpreter in a Web Worker) was removed on 2026-07-25 because neither
+backend existed any more — see
+[ADR 0009](decisions/0009-remove-go-runtime.md).
 
 ## DB initialization
 

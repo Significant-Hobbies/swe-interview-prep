@@ -5181,6 +5181,36 @@
       "reviewQuestions": ["rq-network-protocol-engineering"],
       "resources": [
         {
+          "title": "RFC 9002: QUIC Loss Detection and Congestion Control",
+          "url": "https://www.rfc-editor.org/rfc/rfc9002.html",
+          "type": "doc"
+        },
+        {
+          "title": "The QUIC Transport Protocol: Design and Internet-Scale Deployment (SIGCOMM '17)",
+          "url": "https://research.google/pubs/the-quic-transport-protocol-design-and-internet-scale-deployment/",
+          "type": "doc"
+        },
+        {
+          "title": "BBR: Congestion-Based Congestion Control (ACM Queue 2016)",
+          "url": "https://web.stanford.edu/class/cs244/papers/bbr.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX NSDI '18 — Copa: Practical Delay-Based Congestion Control for the Internet",
+          "url": "https://www.youtube.com/watch?v=FDAzVFmuVUY",
+          "type": "video"
+        },
+        {
+          "title": "RFC 9000: QUIC: A UDP-Based Multiplexed and Secure Transport",
+          "url": "https://www.rfc-editor.org/rfc/rfc9000.html",
+          "type": "paper"
+        },
+        {
+          "title": "The Road to QUIC (Cloudflare)",
+          "url": "https://blog.cloudflare.com/the-road-to-quic/",
+          "type": "article"
+        },
+        {
           "title": "High Performance Browser Networking",
           "url": "https://hpbn.co/",
           "type": "doc"
@@ -5227,6 +5257,21 @@
       "reviewQuestions": ["rq-runtime-performance-engineering"],
       "resources": [
         {
+          "title": "USENIX ATC '17: Visualizing Performance with Flame Graphs (Brendan Gregg)",
+          "url": "https://www.youtube.com/watch?v=D53T1Ejig1Q",
+          "type": "video"
+        },
+        {
+          "title": "Google-Wide Profiling: A Continuous Profiling Infrastructure for Data Centers",
+          "url": "https://research.google/pubs/google-wide-profiling-a-continuous-profiling-infrastructure-for-data-centers/",
+          "type": "paper"
+        },
+        {
+          "title": "MIT 6.172 — Performance Engineering of Software Systems (OCW)",
+          "url": "https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/",
+          "type": "doc"
+        },
+        {
           "title": "Brendan Gregg — Linux Performance",
           "url": "https://www.brendangregg.com/linuxperf.html",
           "type": "doc"
@@ -5250,6 +5295,21 @@
       "reviewQuestions": ["rq-security-isolation-boundaries"],
       "resources": [
         {
+          "title": "The True Cost of Containing: A gVisor Case Study (HotCloud '19)",
+          "url": "https://www.usenix.org/system/files/hotcloud19-paper-young.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX NSDI '20 — Firecracker: Lightweight Virtualization for Serverless Applications",
+          "url": "https://www.youtube.com/watch?v=cwruf1ERAKM",
+          "type": "video"
+        },
+        {
+          "title": "Firecracker: Lightweight Virtualization for Serverless Applications (NSDI '20)",
+          "url": "https://www.usenix.org/conference/nsdi20/presentation/agache",
+          "type": "paper"
+        },
+        {
           "title": "gVisor Architecture Guide",
           "url": "https://gvisor.dev/docs/architecture_guide/",
           "type": "doc"
@@ -5272,6 +5332,31 @@
       "drills": ["practice-cloud-infrastructure"],
       "reviewQuestions": ["rq-cloud-infrastructure"],
       "resources": [
+        {
+          "title": "Above the Clouds: A Berkeley View of Cloud Computing (UCB/EECS-2009-28)",
+          "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "Cloud Programming Simplified: A Berkeley View on Serverless Computing",
+          "url": "https://arxiv.org/abs/1902.03383",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX SREcon24 Americas — Gray Failure: The Achilles' Heel of Cloud-Scale Systems",
+          "url": "https://www.youtube.com/watch?v=WCW28-xA6lo",
+          "type": "video"
+        },
+        {
+          "title": "Large-scale cluster management at Google with Borg (EuroSys '15)",
+          "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+          "type": "paper"
+        },
+        {
+          "title": "Kubernetes — Cluster Architecture",
+          "url": "https://kubernetes.io/docs/concepts/architecture/",
+          "type": "doc"
+        },
         {
           "title": "AWS Builders Library",
           "url": "https://aws.amazon.com/builders-library/",
@@ -5318,6 +5403,36 @@
       "drills": ["practice-cicd-developer-environments"],
       "reviewQuestions": ["rq-cicd-developer-environments"],
       "resources": [
+        {
+          "title": "Build Systems and Build Philosophy — Software Engineering at Google, Ch. 18",
+          "url": "https://abseil.io/resources/swe-book/html/ch18.html",
+          "type": "doc"
+        },
+        {
+          "title": "DORA — Capabilities: Trunk-based development",
+          "url": "https://dora.dev/capabilities/trunk-based-development/",
+          "type": "doc"
+        },
+        {
+          "title": "Google Testing Blog — Hermetic Servers",
+          "url": "https://testing.googleblog.com/2012/10/hermetic-servers.html",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX SREcon25 EMEA — Making Reproducible Builds Faster with Docker Bake",
+          "url": "https://www.youtube.com/watch?v=BY5v7QsfVwI",
+          "type": "video"
+        },
+        {
+          "title": "DORA — Capabilities: Continuous integration",
+          "url": "https://dora.dev/capabilities/continuous-integration/",
+          "type": "article"
+        },
+        {
+          "title": "Continuous Integration — Software Engineering at Google, Ch. 23",
+          "url": "https://abseil.io/resources/swe-book/html/ch23.html",
+          "type": "doc"
+        },
         {
           "title": "GitHub Actions Documentation",
           "url": "https://docs.github.com/en/actions",
@@ -5388,6 +5503,26 @@
       "reviewQuestions": ["rq-opentelemetry-observability"],
       "resources": [
         {
+          "title": "Canopy: An End-to-End Performance Tracing And Analysis System (SOSP '17)",
+          "url": "https://www.microsoft.com/en-us/research/publication/canopy-an-end-to-end-performance-tracing-and-analysis-system/",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX SREcon22 Asia/Pacific — OpenTelemetry and Observability: What, Why, and Why Now?",
+          "url": "https://www.youtube.com/watch?v=sn6MWZPED24",
+          "type": "video"
+        },
+        {
+          "title": "Dapper, a Large-Scale Distributed Systems Tracing Infrastructure",
+          "url": "https://research.google/pubs/dapper-a-large-scale-distributed-systems-tracing-infrastructure/",
+          "type": "paper"
+        },
+        {
+          "title": "Site Reliability Engineering — Monitoring Distributed Systems",
+          "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+          "type": "doc"
+        },
+        {
           "title": "OpenTelemetry Documentation",
           "url": "https://opentelemetry.io/docs/",
           "type": "doc"
@@ -5410,6 +5545,26 @@
       "drills": ["practice-sandbox-execution-environments"],
       "reviewQuestions": ["rq-sandbox-execution-environments"],
       "resources": [
+        {
+          "title": "Swivel: Hardening WebAssembly against Spectre (USENIX Security '21)",
+          "url": "https://www.usenix.org/system/files/sec21fall-narayan.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX Enigma 2023 — Navigating the Sandbox Buffet",
+          "url": "https://www.youtube.com/watch?v=KXZKaz4epgg",
+          "type": "video"
+        },
+        {
+          "title": "Bringing the Web up to Speed with WebAssembly (PLDI '17)",
+          "url": "https://people.mpi-sws.org/~rossberg/papers/Haas,%20Rossberg,%20Schuff,%20Titzer,%20Gohman,%20Wagner,%20Zakai,%20Bastien,%20Holman%20-%20Bringing%20the%20Web%20up%20to%20Speed%20with%20WebAssembly.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "Cloud Computing without Containers (Cloudflare Workers isolates)",
+          "url": "https://blog.cloudflare.com/cloud-computing-without-containers/",
+          "type": "article"
+        },
         {
           "title": "Wasmtime Security",
           "url": "https://docs.wasmtime.dev/security.html",
@@ -5480,6 +5635,26 @@
       "reviewQuestions": ["rq-distributed-workflows-temporal"],
       "resources": [
         {
+          "title": "Netherite: Efficient Execution of Serverless Workflows (PVLDB 15)",
+          "url": "https://www.vldb.org/pvldb/vol15/p1591-burckhardt.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "Reliable Actors with Retry Orchestration",
+          "url": "https://arxiv.org/abs/2111.11562",
+          "type": "doc"
+        },
+        {
+          "title": "Workflows, a New Abstraction for Distributed Systems — Dominik Tornow (Strange Loop 2022)",
+          "url": "https://www.youtube.com/watch?v=V_5WeVmyhzg",
+          "type": "video"
+        },
+        {
+          "title": "Durable Functions: Semantics for Stateful Serverless (OOPSLA '21)",
+          "url": "https://www.microsoft.com/en-us/research/publication/durable-functions-semantics-for-stateful-serverless/",
+          "type": "paper"
+        },
+        {
           "title": "Temporal Documentation",
           "url": "https://docs.temporal.io/",
           "type": "doc"
@@ -5502,6 +5677,36 @@
       "drills": ["practice-distributed-failure-recovery"],
       "reviewQuestions": ["rq-distributed-failure-recovery"],
       "resources": [
+        {
+          "title": "The Network is Reliable (Bailis & Kingsbury)",
+          "url": "https://aphyr.com/posts/288-the-network-is-reliable",
+          "type": "doc"
+        },
+        {
+          "title": "Gray Failure: The Achilles' Heel of Cloud-Scale Systems (HotOS '17)",
+          "url": "https://www.microsoft.com/en-us/research/publication/gray-failure-achilles-heel-cloud-scale-systems/",
+          "type": "doc"
+        },
+        {
+          "title": "Partitions for Everyone! — Kyle Kingsbury (Strange Loop 2013)",
+          "url": "https://www.youtube.com/watch?v=EOlw6dlxXU0",
+          "type": "video"
+        },
+        {
+          "title": "Simple Testing Can Prevent Most Critical Failures (OSDI '14)",
+          "url": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan",
+          "type": "paper"
+        },
+        {
+          "title": "Jepsen: etcd and Consul (Kyle Kingsbury)",
+          "url": "https://aphyr.com/posts/316-jepsen-etcd-and-consul",
+          "type": "article"
+        },
+        {
+          "title": "Site Reliability Engineering — Addressing Cascading Failures",
+          "url": "https://sre.google/sre-book/addressing-cascading-failures/",
+          "type": "doc"
+        },
         {
           "title": "Jepsen Analyses",
           "url": "https://jepsen.io/analyses",
@@ -5618,6 +5823,31 @@
       "reviewQuestions": ["rq-model-quantization"],
       "resources": [
         {
+          "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+          "url": "https://arxiv.org/abs/2306.00978",
+          "type": "doc"
+        },
+        {
+          "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+          "url": "https://arxiv.org/abs/2208.07339",
+          "type": "doc"
+        },
+        {
+          "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+          "url": "https://arxiv.org/abs/2211.10438",
+          "type": "doc"
+        },
+        {
+          "title": "Democratizing Foundation Models via k-bit Quantization — Tim Dettmers (Stanford MLSys #82)",
+          "url": "https://www.youtube.com/watch?v=EsMcVkTXZrk",
+          "type": "video"
+        },
+        {
+          "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+          "url": "https://arxiv.org/abs/2210.17323",
+          "type": "paper"
+        },
+        {
           "title": "Hugging Face Transformers — Quantization",
           "url": "https://huggingface.co/docs/transformers/main/en/quantization/overview",
           "type": "doc"
@@ -5645,6 +5875,26 @@
       "reviewQuestions": ["rq-open-weight-models"],
       "resources": [
         {
+          "title": "The Llama 3 Herd of Models",
+          "url": "https://arxiv.org/abs/2407.21783",
+          "type": "doc"
+        },
+        {
+          "title": "DeepSeek-V3 Technical Report",
+          "url": "https://arxiv.org/abs/2412.19437",
+          "type": "doc"
+        },
+        {
+          "title": "Rethinking open source generative AI: open-washing and the EU AI Act (FAccT '24)",
+          "url": "https://facctconference.org/static/papers24/facct24-120.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "OLMo: Accelerating the Science of Language Models",
+          "url": "https://arxiv.org/abs/2402.00838",
+          "type": "paper"
+        },
+        {
           "title": "Hugging Face Model Cards",
           "url": "https://huggingface.co/docs/hub/model-cards",
           "type": "doc"
@@ -5668,6 +5918,31 @@
       "reviewQuestions": ["rq-inference-engines"],
       "resources": [
         {
+          "title": "Orca: A Distributed Serving System for Transformer-Based Generative Models (OSDI '22)",
+          "url": "https://www.usenix.org/conference/osdi22/presentation/yu",
+          "type": "doc"
+        },
+        {
+          "title": "SGLang: Efficient Execution of Structured Language Model Programs",
+          "url": "https://arxiv.org/abs/2312.07104",
+          "type": "doc"
+        },
+        {
+          "title": "Stanford CS336 — Lecture 10: Inference (Language Modeling from Scratch, Spring 2025)",
+          "url": "https://www.youtube.com/watch?v=fcgPYo3OtV0",
+          "type": "video"
+        },
+        {
+          "title": "Efficient Memory Management for LLM Serving with PagedAttention (vLLM, SOSP '23)",
+          "url": "https://arxiv.org/abs/2309.06180",
+          "type": "paper"
+        },
+        {
+          "title": "Fast and Expressive LLM Inference with RadixAttention and SGLang (LMSYS)",
+          "url": "https://lmsys.org/blog/2024-01-17-sglang/",
+          "type": "article"
+        },
+        {
           "title": "vLLM Documentation",
           "url": "https://docs.vllm.ai/",
           "type": "doc"
@@ -5690,6 +5965,26 @@
       "drills": ["practice-continuous-batching"],
       "reviewQuestions": ["rq-continuous-batching"],
       "resources": [
+        {
+          "title": "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve (OSDI '24)",
+          "url": "https://arxiv.org/abs/2403.02310",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX OSDI '22 — Orca: A Distributed Serving System for Transformer-Based Generative Models",
+          "url": "https://www.youtube.com/watch?v=Ob9PPLxETYU",
+          "type": "video"
+        },
+        {
+          "title": "Orca: A Distributed Serving System for Transformer-Based Generative Models (OSDI '22)",
+          "url": "https://www.usenix.org/conference/osdi22/presentation/yu",
+          "type": "paper"
+        },
+        {
+          "title": "SGLang v0.4: Zero-Overhead Batch Scheduler (LMSYS)",
+          "url": "https://lmsys.org/blog/2024-12-04-sglang-v0-4/",
+          "type": "article"
+        },
         {
           "title": "vLLM: Easy, Fast, and Cheap LLM Serving",
           "url": "https://blog.vllm.ai/2023/06/20/vllm.html",
@@ -5783,6 +6078,31 @@
       "reviewQuestions": ["rq-gpu-utilization"],
       "resources": [
         {
+          "title": "Stanford CS149 Lecture 7 — GPU Architecture and CUDA Programming",
+          "url": "https://gfxcourses.stanford.edu/cs149/fall23content/media/gpucuda/07_gpuarch.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "Efficiently Scaling Transformer Inference",
+          "url": "https://arxiv.org/abs/2211.05102",
+          "type": "doc"
+        },
+        {
+          "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+          "url": "https://arxiv.org/abs/2205.14135",
+          "type": "doc"
+        },
+        {
+          "title": "Stanford CS336 — Lecture 5: GPUs (Language Modeling from Scratch, Spring 2025)",
+          "url": "https://www.youtube.com/watch?v=6OBtO9niT00",
+          "type": "video"
+        },
+        {
+          "title": "Roofline: An Insightful Visual Performance Model for Multicore Architectures (UCB/EECS-2008-134)",
+          "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.pdf",
+          "type": "paper"
+        },
+        {
           "title": "NVIDIA Nsight Systems Documentation",
           "url": "https://docs.nvidia.com/nsight-systems/",
           "type": "doc"
@@ -5805,6 +6125,26 @@
       "drills": ["practice-inference-cost-latency"],
       "reviewQuestions": ["rq-inference-cost-latency"],
       "resources": [
+        {
+          "title": "Splitwise: Efficient Generative LLM Inference Using Phase Splitting",
+          "url": "https://arxiv.org/abs/2311.18677",
+          "type": "doc"
+        },
+        {
+          "title": "Fast Inference from Transformers via Speculative Decoding",
+          "url": "https://arxiv.org/abs/2211.17192",
+          "type": "doc"
+        },
+        {
+          "title": "MLPerf Inference Benchmark",
+          "url": "https://arxiv.org/abs/1911.02549",
+          "type": "doc"
+        },
+        {
+          "title": "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized LLM Serving (OSDI '24)",
+          "url": "https://arxiv.org/abs/2401.09670",
+          "type": "paper"
+        },
         {
           "title": "Hugging Face — LLM Inference Optimization",
           "url": "https://huggingface.co/docs/transformers/main/en/llm_optims",
@@ -5829,6 +6169,26 @@
       "reviewQuestions": ["rq-local-on-device-inference"],
       "resources": [
         {
+          "title": "WebLLM: A High-Performance In-Browser LLM Inference Engine",
+          "url": "https://arxiv.org/abs/2412.15803",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX ATC '25 — CLONE: Customizing LLMs for Efficient Latency-Aware Inference at the Edge",
+          "url": "https://www.youtube.com/watch?v=CNQfMAQOpVs",
+          "type": "doc"
+        },
+        {
+          "title": "Deploy Machine Learning and AI Models On-device with Core ML (WWDC24)",
+          "url": "https://developer.apple.com/videos/play/wwdc2024/10161/",
+          "type": "video"
+        },
+        {
+          "title": "LLM in a flash: Efficient Large Language Model Inference with Limited Memory",
+          "url": "https://arxiv.org/abs/2312.11514",
+          "type": "paper"
+        },
+        {
           "title": "llama.cpp",
           "url": "https://github.com/ggml-org/llama.cpp",
           "type": "doc"
@@ -5851,6 +6211,26 @@
       "drills": ["practice-inference-hardware"],
       "reviewQuestions": ["rq-inference-hardware"],
       "resources": [
+        {
+          "title": "TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning",
+          "url": "https://arxiv.org/abs/2304.01433",
+          "type": "doc"
+        },
+        {
+          "title": "Stanford Lecture 15 — Efficient Methods and Hardware for Deep Learning (Song Han)",
+          "url": "https://www.youtube.com/watch?v=eZdOkDtYMoo",
+          "type": "video"
+        },
+        {
+          "title": "In-Datacenter Performance Analysis of a Tensor Processing Unit (ISCA '17)",
+          "url": "https://arxiv.org/abs/1704.04760",
+          "type": "paper"
+        },
+        {
+          "title": "Stanford CS 217 — Hardware Accelerators for Machine Learning",
+          "url": "https://cs217.stanford.edu/",
+          "type": "doc"
+        },
         {
           "title": "NVIDIA Hopper Architecture",
           "url": "https://resources.nvidia.com/en-us-tensor-core",
@@ -5913,6 +6293,26 @@
       "reviewQuestions": ["rq-mcp-integrations"],
       "resources": [
         {
+          "title": "Code execution with MCP: building more efficient AI agents",
+          "url": "https://www.anthropic.com/engineering/code-execution-with-mcp",
+          "type": "doc"
+        },
+        {
+          "title": "MCP Safety Audit: LLMs with the Model Context Protocol Allow Major Security Exploits",
+          "url": "https://arxiv.org/abs/2504.03767",
+          "type": "doc"
+        },
+        {
+          "title": "Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions",
+          "url": "https://arxiv.org/abs/2503.23278",
+          "type": "paper"
+        },
+        {
+          "title": "Introducing the Model Context Protocol (Anthropic)",
+          "url": "https://www.anthropic.com/news/model-context-protocol",
+          "type": "article"
+        },
+        {
           "title": "Model Context Protocol Specification",
           "url": "https://modelcontextprotocol.io/specification/",
           "type": "doc"
@@ -5959,6 +6359,26 @@
       "reviewQuestions": ["rq-durable-agent-execution"],
       "resources": [
         {
+          "title": "Serverless Workflows with Durable Functions and Netherite",
+          "url": "https://arxiv.org/abs/2103.00033",
+          "type": "doc"
+        },
+        {
+          "title": "Atomix: Timely, Transactional Tool Use for Reliable Agentic Workflows",
+          "url": "https://arxiv.org/abs/2602.14849",
+          "type": "doc"
+        },
+        {
+          "title": "Workflows, a New Abstraction for Distributed Systems — Dominik Tornow (Strange Loop 2022)",
+          "url": "https://www.youtube.com/watch?v=V_5WeVmyhzg",
+          "type": "video"
+        },
+        {
+          "title": "Durable Functions: Semantics for Stateful Serverless (OOPSLA '21)",
+          "url": "https://www.microsoft.com/en-us/research/publication/durable-functions-semantics-for-stateful-serverless/",
+          "type": "paper"
+        },
+        {
           "title": "Temporal — Understanding Temporal (Durable Execution)",
           "url": "https://docs.temporal.io/evaluate/understanding-temporal",
           "type": "doc"
@@ -5981,6 +6401,21 @@
       "drills": ["practice-agent-permissions-sandboxing"],
       "reviewQuestions": ["rq-agent-permissions-sandboxing"],
       "resources": [
+        {
+          "title": "How we contain Claude across products",
+          "url": "https://www.anthropic.com/engineering/how-we-contain-claude",
+          "type": "doc"
+        },
+        {
+          "title": "Defeating Prompt Injections by Design (CaMeL)",
+          "url": "https://arxiv.org/abs/2503.18813",
+          "type": "paper"
+        },
+        {
+          "title": "Making Claude Code More Secure and Autonomous with Sandboxing",
+          "url": "https://www.anthropic.com/engineering/claude-code-sandboxing",
+          "type": "article"
+        },
         {
           "title": "OWASP Top 10 for LLM Applications",
           "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
@@ -6005,6 +6440,26 @@
       "reviewQuestions": ["rq-browser-computer-use-agents"],
       "resources": [
         {
+          "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+          "url": "https://arxiv.org/abs/2307.13854",
+          "type": "doc"
+        },
+        {
+          "title": "Mind2Web: Towards a Generalist Agent for the Web",
+          "url": "https://arxiv.org/abs/2306.06070",
+          "type": "doc"
+        },
+        {
+          "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+          "url": "https://arxiv.org/abs/2404.07972",
+          "type": "paper"
+        },
+        {
+          "title": "Developing a Computer Use Model (Anthropic)",
+          "url": "https://www.anthropic.com/news/developing-computer-use",
+          "type": "article"
+        },
+        {
           "title": "Playwright Documentation",
           "url": "https://playwright.dev/docs/intro",
           "type": "doc"
@@ -6027,6 +6482,26 @@
       "drills": ["practice-agent-communication-interfaces"],
       "reviewQuestions": ["rq-agent-communication-interfaces"],
       "resources": [
+        {
+          "title": "A Survey of AI Agent Protocols",
+          "url": "https://arxiv.org/abs/2504.16736",
+          "type": "doc"
+        },
+        {
+          "title": "Building Effective AI Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "doc"
+        },
+        {
+          "title": "A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, and ANP",
+          "url": "https://arxiv.org/abs/2505.02279",
+          "type": "paper"
+        },
+        {
+          "title": "How We Built Our Multi-agent Research System (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+          "type": "article"
+        },
         {
           "title": "Agent2Agent Protocol",
           "url": "https://a2a-protocol.org/latest/",
@@ -6051,6 +6526,26 @@
       "reviewQuestions": ["rq-long-running-scheduled-agents"],
       "resources": [
         {
+          "title": "Effective Context Engineering for AI Agents",
+          "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "type": "doc"
+        },
+        {
+          "title": "Long-running Claude for Scientific Computing",
+          "url": "https://www.anthropic.com/research/long-running-Claude",
+          "type": "doc"
+        },
+        {
+          "title": "Scaling Long-Horizon LLM Agent via Context-Folding",
+          "url": "https://arxiv.org/abs/2510.11967",
+          "type": "paper"
+        },
+        {
+          "title": "Effective Harnesses for Long-running Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "type": "article"
+        },
+        {
           "title": "Cloudflare Workers Cron Triggers",
           "url": "https://developers.cloudflare.com/workers/configuration/cron-triggers/",
           "type": "doc"
@@ -6073,6 +6568,26 @@
       "drills": ["practice-coding-agent-benchmarks"],
       "reviewQuestions": ["rq-coding-agent-benchmarks"],
       "resources": [
+        {
+          "title": "Evaluating Large Language Models Trained on Code (HumanEval / Codex)",
+          "url": "https://arxiv.org/abs/2107.03374",
+          "type": "doc"
+        },
+        {
+          "title": "LiveCodeBench: Holistic and Contamination Free Evaluation of LLMs for Code",
+          "url": "https://arxiv.org/abs/2403.07974",
+          "type": "doc"
+        },
+        {
+          "title": "The SWE-Bench Illusion: When State-of-the-Art LLMs Remember Instead of Reason",
+          "url": "https://arxiv.org/abs/2506.12286",
+          "type": "doc"
+        },
+        {
+          "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "url": "https://arxiv.org/abs/2310.06770",
+          "type": "paper"
+        },
         {
           "title": "SWE-bench",
           "url": "https://www.swebench.com/",
@@ -6119,6 +6634,31 @@
       "drills": ["practice-ai-regression-testing"],
       "reviewQuestions": ["rq-ai-regression-testing"],
       "resources": [
+        {
+          "title": "LLM Evals: Everything You Need to Know (Hamel Husain)",
+          "url": "https://hamel.dev/blog/posts/evals-faq/",
+          "type": "doc"
+        },
+        {
+          "title": "Demystifying Evals for AI Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+          "type": "doc"
+        },
+        {
+          "title": "Evaluating the Effectiveness of LLM-Evaluators (Eugene Yan)",
+          "url": "https://eugeneyan.com/writing/llm-evaluators/",
+          "type": "doc"
+        },
+        {
+          "title": "A Survey on LLM-as-a-Judge",
+          "url": "https://arxiv.org/abs/2411.15594",
+          "type": "paper"
+        },
+        {
+          "title": "Using LLM-as-a-Judge For Evaluation: A Complete Guide (Hamel Husain)",
+          "url": "https://hamel.dev/blog/posts/llm-judge/",
+          "type": "article"
+        },
         {
           "title": "OpenAI Evals Documentation",
           "url": "https://platform.openai.com/docs/guides/evals",
@@ -6176,6 +6716,16 @@
       "reviewQuestions": ["rq-agent-observability"],
       "resources": [
         {
+          "title": "A Survey on AgentOps: Categorization, Challenges, and Future Directions",
+          "url": "https://arxiv.org/abs/2508.02121",
+          "type": "paper"
+        },
+        {
+          "title": "Observability in LLM Applications (Hamel Husain)",
+          "url": "https://hamel.dev/notes/llm/officehours/observability.html",
+          "type": "article"
+        },
+        {
           "title": "OpenTelemetry GenAI Semantic Conventions",
           "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
           "type": "doc"
@@ -6198,6 +6748,26 @@
       "drills": ["practice-tracing-replay"],
       "reviewQuestions": ["rq-tracing-replay"],
       "resources": [
+        {
+          "title": "Pivot Tracing: Dynamic Causal Monitoring for Distributed Systems (SOSP '15)",
+          "url": "https://cs.brown.edu/~rfonseca/pubs/mace15pivot.pdf",
+          "type": "doc"
+        },
+        {
+          "title": "USENIX Enigma 2016 — Timeless Debugging",
+          "url": "https://www.youtube.com/watch?v=eGl6kpSajag",
+          "type": "video"
+        },
+        {
+          "title": "Engineering Record And Replay For Deployability (USENIX ATC '17)",
+          "url": "https://www.usenix.org/conference/atc17/technical-sessions/presentation/ocallahan",
+          "type": "paper"
+        },
+        {
+          "title": "The Debugging Book — Tracing Executions",
+          "url": "https://www.debuggingbook.org/html/Tracer.html",
+          "type": "doc"
+        },
         {
           "title": "OpenTelemetry Traces",
           "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
@@ -6287,6 +6857,31 @@
       "drills": ["practice-quality-cost-latency-measurement"],
       "reviewQuestions": ["rq-quality-cost-latency-measurement"],
       "resources": [
+        {
+          "title": "MLPerf Inference Benchmark",
+          "url": "https://arxiv.org/abs/1911.02549",
+          "type": "doc"
+        },
+        {
+          "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+          "url": "https://arxiv.org/abs/2403.04132",
+          "type": "doc"
+        },
+        {
+          "title": "The Tail at Scale",
+          "url": "https://research.google/pubs/the-tail-at-scale/",
+          "type": "paper"
+        },
+        {
+          "title": "Holistic Evaluation of Language Models (HELM) — Stanford CRFM",
+          "url": "https://crfm.stanford.edu/helm/",
+          "type": "article"
+        },
+        {
+          "title": "Site Reliability Engineering — Service Level Objectives",
+          "url": "https://sre.google/sre-book/service-level-objectives/",
+          "type": "doc"
+        },
         {
           "title": "MLPerf Inference",
           "url": "https://mlcommons.org/benchmarks/inference-datacenter/",
@@ -6884,6 +7479,26 @@
       "reviewQuestions": ["rq-pose-motion-tracking"],
       "resources": [
         {
+          "title": "BlazePose: On-device Real-time Body Pose Tracking",
+          "url": "https://arxiv.org/abs/2006.10204",
+          "type": "doc"
+        },
+        {
+          "title": "Stacked Hourglass Networks for Human Pose Estimation",
+          "url": "https://arxiv.org/abs/1603.06937",
+          "type": "doc"
+        },
+        {
+          "title": "OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields",
+          "url": "https://arxiv.org/abs/1812.08008",
+          "type": "paper"
+        },
+        {
+          "title": "CMU Panoptic Studio — Massively Multiview Social Motion Capture",
+          "url": "https://www.cs.cmu.edu/~hanbyulj/panoptic-studio/",
+          "type": "article"
+        },
+        {
           "title": "MediaPipe Pose Landmarker",
           "url": "https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker",
           "type": "doc"
@@ -6953,6 +7568,26 @@
       "reviewQuestions": ["rq-robotics-systems"],
       "resources": [
         {
+          "title": "Robotic Manipulation — Russ Tedrake (MIT 6.4210)",
+          "url": "https://manipulation.mit.edu/",
+          "type": "doc"
+        },
+        {
+          "title": "Stanford Engineering Everywhere CS223A — Introduction to Robotics",
+          "url": "https://see.stanford.edu/Course/CS223A",
+          "type": "video"
+        },
+        {
+          "title": "Past, Present, and Future of Simultaneous Localization And Mapping",
+          "url": "https://arxiv.org/abs/1606.05830",
+          "type": "paper"
+        },
+        {
+          "title": "Underactuated Robotics — Russ Tedrake (MIT 6.832)",
+          "url": "https://underactuated.mit.edu/",
+          "type": "doc"
+        },
+        {
           "title": "ROS 2 Documentation",
           "url": "https://docs.ros.org/en/rolling/",
           "type": "doc"
@@ -6998,6 +7633,26 @@
       "drills": ["practice-human-computer-interaction"],
       "reviewQuestions": ["rq-human-computer-interaction"],
       "resources": [
+        {
+          "title": "MIT 6.831 — User Interface Design and Implementation (OCW)",
+          "url": "https://ocw.mit.edu/courses/6-831-user-interface-design-and-implementation-spring-2011/",
+          "type": "video"
+        },
+        {
+          "title": "Guidelines for Human-AI Interaction (CHI 2019)",
+          "url": "https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/",
+          "type": "paper"
+        },
+        {
+          "title": "Stanford CS147 — Introduction to Human-Computer Interaction Design",
+          "url": "https://hci.stanford.edu/courses/cs147/2025/au/",
+          "type": "article"
+        },
+        {
+          "title": "People + AI Guidebook (Google PAIR)",
+          "url": "https://pair.withgoogle.com/guidebook/",
+          "type": "doc"
+        },
         {
           "title": "Interaction Design Foundation — HCI",
           "url": "https://www.interaction-design.org/literature/topics/human-computer-interaction",

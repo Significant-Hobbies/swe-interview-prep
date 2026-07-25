@@ -13,7 +13,7 @@
       "format": "qa",
       "sectionCount": 478,
       "exerciseCount": 478,
-      "lastFetched": "2026-07-20T08:30:33.000Z"
+      "lastFetched": "2026-07-25T11:04:16.844Z"
     },
     {
       "id": "react-questions",
@@ -28,7 +28,7 @@
       "format": "qa",
       "sectionCount": 414,
       "exerciseCount": 414,
-      "lastFetched": "2026-07-20T08:30:34.372Z"
+      "lastFetched": "2026-07-25T11:04:25.436Z"
     },
     {
       "id": "frontend-handbook",
@@ -43,7 +43,7 @@
       "format": "code-heavy",
       "sectionCount": 55,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:35.812Z"
+      "lastFetched": "2026-07-25T11:04:29.096Z"
     },
     {
       "id": "system-design",
@@ -58,7 +58,7 @@
       "format": "long-form",
       "sectionCount": 241,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:37.769Z"
+      "lastFetched": "2026-07-25T11:04:31.048Z"
     },
     {
       "id": "system-design-101",
@@ -73,7 +73,7 @@
       "format": "code-heavy",
       "sectionCount": 416,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:39.209Z"
+      "lastFetched": "2026-07-25T11:04:32.428Z"
     },
     {
       "id": "low-level-design",
@@ -88,7 +88,7 @@
       "format": "code-heavy",
       "sectionCount": 262,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:40.792Z"
+      "lastFetched": "2026-07-25T11:04:45.015Z"
     },
     {
       "id": "grokking-oop",
@@ -101,9 +101,9 @@
       "tags": ["oop", "design", "uml"],
       "icon": "Boxes",
       "format": "code-heavy",
-      "sectionCount": 63,
+      "sectionCount": 62,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:42.075Z"
+      "lastFetched": "2026-07-25T11:04:56.135Z"
     },
     {
       "id": "devops-exercises",
@@ -118,7 +118,7 @@
       "format": "qa",
       "sectionCount": 49,
       "exerciseCount": 1888,
-      "lastFetched": "2026-07-20T08:30:43.243Z"
+      "lastFetched": "2026-07-25T11:05:02.829Z"
     },
     {
       "id": "coding-interview-patterns",
@@ -133,7 +133,7 @@
       "format": "code-heavy",
       "sectionCount": 20,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:43.996Z"
+      "lastFetched": "2026-07-25T11:05:04.074Z"
     },
     {
       "id": "ood-interview",
@@ -148,7 +148,7 @@
       "format": "code-heavy",
       "sectionCount": 24,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:44.561Z"
+      "lastFetched": "2026-07-25T11:05:05.289Z"
     },
     {
       "id": "system-design-primer",
@@ -163,7 +163,7 @@
       "format": "code-heavy",
       "sectionCount": 40,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:45.829Z"
+      "lastFetched": "2026-07-25T11:05:19.190Z"
     },
     {
       "id": "javascript-algorithms",
@@ -178,7 +178,7 @@
       "format": "visual",
       "sectionCount": 121,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:46.931Z"
+      "lastFetched": "2026-07-25T11:05:21.127Z"
     },
     {
       "id": "tech-interview-handbook",
@@ -193,7 +193,7 @@
       "format": "code-heavy",
       "sectionCount": 90,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:48.549Z"
+      "lastFetched": "2026-07-25T11:05:27.454Z"
     },
     {
       "id": "project-based-learning",
@@ -208,8 +208,203 @@
       "format": "code-heavy",
       "sectionCount": 22,
       "exerciseCount": 0,
-      "lastFetched": "2026-07-20T08:30:48.998Z"
+      "lastFetched": "2026-07-25T11:05:28.509Z"
+    },
+    {
+      "id": "math-for-ml",
+      "name": "Mathematics for ML",
+      "source": "https://github.com/dair-ai/Mathematics-for-ML",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/dair-ai/Mathematics-for-ML/HEAD",
+      "description": "Curated mathematics resources for machine learning",
+      "bestFor": "Filling the mathematics track, which has no repo backing",
+      "whyIncluded": "The most-referenced open index of linear algebra, calculus, and probability material for ML.",
+      "tags": ["mathematics", "linear-algebra", "probability"],
+      "icon": "Sigma",
+      "format": "long-form",
+      "sectionCount": 1,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:29.486Z"
+    },
+    {
+      "id": "awesome-vector-search",
+      "name": "Awesome Vector Search",
+      "source": "https://github.com/currentslab/awesome-vector-search",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/currentslab/awesome-vector-search/HEAD",
+      "description": "Curated vector search libraries, papers, and services",
+      "bestFor": "Vector database and ANN breadth",
+      "whyIncluded": "The maintained index of the vector-search ecosystem, which this repo otherwise links only ad hoc.",
+      "tags": ["vector-db", "ann", "embeddings"],
+      "icon": "Search",
+      "format": "long-form",
+      "sectionCount": 2,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:30.528Z"
+    },
+    {
+      "id": "ann-benchmarks",
+      "name": "ANN Benchmarks",
+      "source": "https://github.com/erikbern/ann-benchmarks",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/erikbern/ann-benchmarks/HEAD",
+      "description": "Reproducible benchmarks for approximate nearest neighbour libraries",
+      "bestFor": "Grounding recall/latency trade-offs in measured data",
+      "whyIncluded": "The canonical empirical comparison for ANN indexes; the counterweight to vendor claims.",
+      "tags": ["vector-db", "ann", "benchmarks"],
+      "icon": "Gauge",
+      "format": "visual",
+      "sectionCount": 1,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:31.952Z"
+    },
+    {
+      "id": "awesome-ai-agents",
+      "name": "Awesome AI Agents",
+      "source": "https://github.com/e2b-dev/awesome-ai-agents",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/e2b-dev/awesome-ai-agents/HEAD",
+      "description": "Index of agent frameworks, harnesses, and products",
+      "bestFor": "Agent-systems breadth, which has no repo backing",
+      "whyIncluded": "The broadest maintained survey of the agent tooling landscape.",
+      "tags": ["agent-systems", "agents", "tools"],
+      "icon": "Bot",
+      "format": "long-form",
+      "sectionCount": 219,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:33.506Z"
+    },
+    {
+      "id": "model-context-protocol",
+      "name": "Model Context Protocol",
+      "source": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/HEAD",
+      "description": "The MCP specification and documentation",
+      "bestFor": "Tool-use and integration protocol depth",
+      "whyIncluded": "Primary-source specification for the protocol the agent-systems track teaches.",
+      "tags": ["agent-systems", "mcp", "tools"],
+      "icon": "Plug",
+      "format": "code-heavy",
+      "sectionCount": 139,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:57.483Z"
+    },
+    {
+      "id": "openai-evals",
+      "name": "OpenAI Evals",
+      "source": "https://github.com/openai/evals",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/openai/evals/HEAD",
+      "description": "Framework and registry for evaluating LLMs",
+      "bestFor": "Evaluation and AI-reliability practice",
+      "whyIncluded": "A working eval harness with a large registry, not just prose about evaluation.",
+      "tags": ["ai-reliability", "evals", "llm"],
+      "icon": "ClipboardCheck",
+      "format": "code-heavy",
+      "sectionCount": 46,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:05:59.181Z"
+    },
+    {
+      "id": "lm-eval-harness",
+      "name": "LM Evaluation Harness",
+      "source": "https://github.com/EleutherAI/lm-evaluation-harness",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/EleutherAI/lm-evaluation-harness/HEAD",
+      "description": "Standard harness for few-shot LLM benchmarking",
+      "bestFor": "The de facto benchmark runner behind most reported scores",
+      "whyIncluded": "Explains how published benchmark numbers are actually produced, including their caveats.",
+      "tags": ["ai-reliability", "evals", "benchmarks"],
+      "icon": "Ruler",
+      "format": "code-heavy",
+      "sectionCount": 275,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:06:02.173Z"
+    },
+    {
+      "id": "garak",
+      "name": "garak LLM Scanner",
+      "source": "https://github.com/NVIDIA/garak",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/NVIDIA/garak/HEAD",
+      "description": "Probes LLMs for hallucination, jailbreak, and leakage failures",
+      "bestFor": "Adversarial and failure-mode testing",
+      "whyIncluded": "Turns the abstract 'hallucination detection' concepts into runnable probes.",
+      "tags": ["ai-reliability", "security", "red-teaming"],
+      "icon": "ShieldCheck",
+      "format": "code-heavy",
+      "sectionCount": 66,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:06:03.907Z"
+    },
+    {
+      "id": "missing-semester",
+      "name": "The Missing Semester (MIT)",
+      "source": "https://github.com/missing-semester/missing-semester",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/missing-semester/missing-semester/HEAD",
+      "description": "Shell, editors, version control, debugging, and profiling",
+      "bestFor": "Developer-tools track, which has zero curated sources",
+      "whyIncluded": "The standard course for the tooling literacy no CS curriculum teaches.",
+      "tags": ["developer-tools", "shell", "git", "debugging"],
+      "icon": "Terminal",
+      "format": "code-heavy",
+      "sectionCount": 198,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:06:05.859Z"
+    },
+    {
+      "id": "build-your-own-x",
+      "name": "Build Your Own X",
+      "source": "https://github.com/codecrafters-io/build-your-own-x",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/codecrafters-io/build-your-own-x/HEAD",
+      "description": "Step-by-step guides to rebuild real systems from scratch",
+      "bestFor": "The Build modality, currently all hand-authored",
+      "whyIncluded": "Mechanism-first learning by reconstruction, matching this project's stated philosophy.",
+      "tags": ["application-engineering", "projects", "systems"],
+      "icon": "Hammer",
+      "format": "long-form",
+      "sectionCount": 4,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:06:07.047Z"
+    },
+    {
+      "id": "node-best-practices",
+      "name": "Node.js Best Practices",
+      "source": "https://github.com/goldbergyoni/nodebestpractices",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/HEAD",
+      "description": "Production Node practices with rationale and failure modes",
+      "bestFor": "Application and backend engineering depth",
+      "whyIncluded": "Unusually failure-mode oriented rather than style oriented.",
+      "tags": ["application-engineering", "backend", "node"],
+      "icon": "Server",
+      "format": "code-heavy",
+      "sectionCount": 757,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:06:10.196Z"
+    },
+    {
+      "id": "cs231n",
+      "name": "CS231n Course Notes",
+      "source": "https://github.com/cs231n/cs231n.github.io",
+      "sourceBaseUrl": "https://github.com/cs231n/cs231n.github.io",
+      "description": "Stanford CS231n notes on visual recognition",
+      "bestFor": "Multimodal and vision concepts, which have no repo backing",
+      "whyIncluded": "Primary-source course notes already cited across this repo but never ingested.",
+      "tags": ["multimodal-spatial", "vision", "neural-networks"],
+      "icon": "Eye",
+      "format": "code-heavy",
+      "sectionCount": 134,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:07:32.285Z"
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "source": "https://github.com/vllm-project/vllm",
+      "sourceBaseUrl": "https://raw.githubusercontent.com/vllm-project/vllm/HEAD",
+      "description": "High-throughput LLM inference and serving engine",
+      "bestFor": "Inference-serving mechanisms: paged attention, batching",
+      "whyIncluded": "The reference implementation for the serving techniques the track teaches.",
+      "tags": ["inference-serving", "gpu", "serving"],
+      "icon": "Cpu",
+      "format": "code-heavy",
+      "sectionCount": 467,
+      "exerciseCount": 0,
+      "lastFetched": "2026-07-25T11:08:12.308Z"
     }
   ],
-  "generatedAt": "2026-07-20T08:30:31.503Z"
+  "generatedAt": "2026-07-25T11:04:14.560Z"
 }

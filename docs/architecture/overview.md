@@ -28,7 +28,7 @@ to prod.
 | --- | --- | --- |
 | Frontend | React 19 SPA, Vite 8, React Router v7, Tailwind v4 | TypeScript (strict: true) |
 | Editor / viz | Monaco, Excalidraw, hand-rolled SVG primitives in `src/components/viz.tsx` | No chart-lib dep |
-| Code execution | Hybrid Go executor: first run proxies `/api/go-run` → go.dev; a WASM interpreter (`go-interp.wasm`, R2-hosted) then loads in a Web Worker and takes over. TypeScript runs in-browser (sucrase). | `/api/go-run` requires auth (dev/legacy only — not deployed by the prod Pages Function) |
+| Code execution | JavaScript/TypeScript only, entirely in-browser: sucrase transpiles, then the code runs in a sandboxed `srcdoc` iframe with a 5s timeout (`src/hooks/useCodeExecution.ts`). | No server round-trip; the Go executor was removed 2026-07-25 (see [ADR 0009](decisions/0009-remove-go-runtime.md)) |
 | Backend | Cloudflare Pages Functions, single catch-all `functions/api/[[path]].js` | Prod routes: `auth/*`, `progress`, `learning`, `learning/reader`, `ai`. `learning` dispatches to `handlers/` via `shared/` |
 | DB | Turso (libSQL via `@libsql/client`) | Schema auto-init on first cold start; no migration runner |
 | Auth | Google One Tap → JWT httpOnly cookie | No OAuth redirect flow |

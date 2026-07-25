@@ -64,13 +64,13 @@ auth-required `activity`, `concepts`, `feynman`, `weekly`, `artifacts`,
 ### Dev / legacy handlers (`api/*.mjs`)
 
 The Vercel-style `api/*.mjs` handlers (`chat`, `chats`, `notes`, `problems`,
-`go-run`, `progress`, `learning`, `auth/*`) are **not** deployed by the
-Cloudflare Pages Function. They exist for local-dev parity; in dev the Vite
-bridge (`vite-plugin-local-ai.js`) serves `/api/chat`, `/api/chats`,
-`/api/notes`, `/api/progress`, `/api/auth/*` and `/api/health` as stubs. The
-client still calls `/api/chat`, `/api/go-run`, and `/api/ai/chat`; in
-production those paths are not backed by the Pages Function (Go still runs
-because it falls back to the client-side WASM interpreter). See
+`progress`, `learning`, `auth/*`) are **not** deployed by the Cloudflare Pages
+Function. They exist for local-dev parity; in dev the Vite bridge
+(`vite-plugin-local-ai.js`) serves `/api/chat`, `/api/chats`, `/api/notes`,
+`/api/progress`, `/api/auth/*` and `/api/health` as stubs.
+
+`/api/ai/chat` is the exception in the other direction: it is served **only**
+by the Pages Function, so in dev it falls through the bridge and 404s. See
 [`../development/setup.md`](../development/setup.md).
 
 ## Machine / agent surfaces

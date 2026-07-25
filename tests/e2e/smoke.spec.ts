@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { clickNav } from './nav';
+
 // Bypass Login by seeding guest mode in localStorage before page load.
 test.beforeEach(async ({ context, page }) => {
   await context.addInitScript(() => {
@@ -96,29 +98,41 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('button', { name: /Probability & Statistics/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: /Skip — explore the catalog/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Learn', exact: true })).toBeVisible();
-    await page.getByRole('link', { name: 'Learn', exact: true }).click();
+    await clickNav(page, 'Learn');
     await expect(page).toHaveURL(/\/learn$/);
     await expect(page.getByRole('region', { name: 'Learning paths' })).toBeVisible();
   });
 
+  // Titles must match `ROADMAP_GROUPS` in src/lib/roadmapGroups.ts. They cannot
+  // be imported here — that module pulls in JSON imports Playwright's loader
+  // rejects without import attributes — so this list is maintained by hand.
+  // It asserted 'Systems internals' and 'AI & retrieval' until now; both were
+  // renamed in 41d6114 and the test simply stayed red, because e2e does not
+  // run in CI. Update this list when a group is renamed.
   test('Explore page lists all roadmap groups', async ({ page }) => {
     await page.goto('/explore');
     await expect(page.getByRole('heading', { name: /Explore everything/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: 'Systems internals', exact: true })
-    ).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'AI & retrieval', exact: true })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Mathematics', exact: true })).toBeVisible();
+    for (const title of [
+      'Interview prep',
+      'Systems & platforms',
+      'AI-native systems',
+      'Mathematics',
+      'Software building',
+      'Multimodal & spatial',
+    ]) {
+      await expect(
+        page.getByRole('heading', { name: title, exact: true }),
+        `roadmap group "${title}" is rendered`
+      ).toBeVisible();
+    }
     await expect(page.getByRole('region', { name: 'Playground' })).toBeVisible();
   });
 
   test('primary top nav navigates between tabs', async ({ page }) => {
     await page.goto('/today');
-    await page.getByRole('link', { name: 'Learn', exact: true }).click();
+    await clickNav(page, 'Learn');
     await expect(page).toHaveURL(/\/learn$/);
-    await page.getByRole('link', { name: 'Practice', exact: true }).click();
+    await clickNav(page, 'Practice');
     await expect(page).toHaveURL(/\/practice$/);
   });
 

@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { transform } from 'sucrase';
 
 import { trackCoreAction } from '../lib/analytics';
-import { executeGo, type GoBackend } from '../lib/goExecutor';
 import type { Language, TestCase } from '../types';
 
 export interface TestResult extends TestCase {
@@ -35,7 +34,6 @@ export function useCodeExecution() {
   const [isRunning, setIsRunning] = useState(false);
   const [execTimeMs, setExecTimeMs] = useState<number>(0);
   const [errorLine, setErrorLine] = useState<number | null>(null);
-  const [goBackend, setGoBackend] = useState<GoBackend>('api');
 
   const execute = useCallback(
     (
@@ -49,25 +47,6 @@ export function useCodeExecution() {
       setTestResults([]);
       // Owner-facing analytics: code was run in the playground (a core action).
       trackCoreAction('code_run');
-
-      if (language === 'go') {
-        return executeGo(code).then((result) => {
-          setOutput(result.output);
-          setErrors(result.errors);
-          setTestResults([]);
-          setExecTimeMs(result.execTimeMs);
-          setErrorLine(result.errorLine);
-          setGoBackend(result.backend);
-          setIsRunning(false);
-          return {
-            output: result.output,
-            errors: result.errors,
-            testResults: [],
-            execTimeMs: result.execTimeMs,
-            errorLine: result.errorLine,
-          };
-        });
-      }
 
       let jsCode = code;
       if (language === 'typescript') {
@@ -219,7 +198,6 @@ export function useCodeExecution() {
     isRunning,
     execTimeMs,
     errorLine,
-    goBackend,
     clearOutput,
   };
 }

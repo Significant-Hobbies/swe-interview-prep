@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { AIConfigError, parseJSON, resolveAIConfig } from './ai.mjs';
+import { createServer } from 'node:http';
+import { afterAll, beforeAll, describe, it, expect } from 'vitest';
+import { AIConfigError, generateStream, parseJSON, resolveAIConfig } from './ai.mjs';
 
 describe('resolveAIConfig', () => {
   const deployment = {
@@ -94,5 +95,79 @@ describe('parseJSON', () => {
 
   it('extracts JSON array from prose', () => {
     expect(parseJSON('Result: [1,2,3]')).toEqual([1, 2, 3]);
+  });
+});
+
+// `generateStream` is what POST /api/ai/chat turns into SSE frames. Point it at
+// a throwaway OpenAI-compatible server on localhost so the whole provider path
+// (createOpenAICompatible → streamText → textStream) is exercised without any
+// credentials and without contacting a real provider.
+describe('generateStream against a stub OpenAI-compatible provider', () => {
+  /** @type {import('node:http').Server} */
+  let server;
+  let baseUrl;
+  let lastRequest;
+
+  beforeAll(async () => {
+    server = createServer((req, res) => {
+      const chunks = [];
+      req.on('data', (c) => chunks.push(c));
+      req.on('end', () => {
+        lastRequest = {
+          url: req.url,
+          authorization: req.headers.authorization,
+          body: JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}'),
+        };
+        res.writeHead(200, { 'content-type': 'text/event-stream' });
+        const frame = (delta) =>
+          `data: ${JSON.stringify({
+            id: 'stub',
+            object: 'chat.completion.chunk',
+            created: 0,
+            model: 'stub-model',
+            choices: [{ index: 0, delta, finish_reason: null }],
+          })}\n\n`;
+        res.write(frame({ role: 'assistant', content: 'What ' }));
+        res.write(frame({ content: 'invariant ' }));
+        res.write(frame({ content: 'holds?' }));
+        res.write('data: [DONE]\n\n');
+        res.end();
+      });
+    });
+    await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+    baseUrl = `http://127.0.0.1:${server.address().port}/v1`;
+  });
+
+  afterAll(async () => {
+    await new Promise((resolve) => server.close(resolve));
+  });
+
+  it('yields the provider text deltas in order', async () => {
+    const stream = generateStream({
+      endpointUrl: baseUrl,
+      apiKey: 'stub-key',
+      model: 'stub-model',
+      system: 'You are a Socratic programming companion',
+      messages: [{ role: 'user', content: 'review my code' }],
+    });
+
+    const deltas = [];
+    for await (const delta of stream) deltas.push(delta);
+
+    expect(deltas.join('')).toBe('What invariant holds?');
+    expect(lastRequest.url).toBe('/v1/chat/completions');
+    expect(lastRequest.authorization).toBe('Bearer stub-key');
+    expect(lastRequest.body.stream).toBe(true);
+    expect(lastRequest.body.model).toBe('stub-model');
+    expect(lastRequest.body.messages[0]).toEqual({
+      role: 'system',
+      content: 'You are a Socratic programming companion',
+    });
+  });
+
+  it('throws AIConfigError before opening a connection when nothing is configured', () => {
+    expect(() => generateStream({ messages: [{ role: 'user', content: 'hi' }], env: {} })).toThrow(
+      AIConfigError
+    );
   });
 });

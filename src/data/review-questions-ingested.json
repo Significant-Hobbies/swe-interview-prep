@@ -1,75 +1,159 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-12T12:29:41.162Z",
+  "generatedAt": "2026-07-25T11:08:18.120Z",
   "reviewQuestions": [
     {
-      "id": "rq-lib-devops-exercises-certificates-aws-cloud-practitioner-md",
-      "conceptId": "load-balancing",
+      "id": "rq-lib-coding-interview-patterns-source-backtracking",
+      "conceptId": "backtracking",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: AWS Cloud Practitioner — explain the core idea in your own words.",
-      "answer": "AWS Cloud Practitioner A summary of what you need to know for the exam can be found here Cloud 101 What is cloud computing?",
+      "question": "Coding Interview Patterns: Backtracking — explain the core idea in your own words.",
+      "answer": "Backtracking Combinations of Sum K.py Find All Permutations.py Find All Subsets.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "certificates-aws-cloud-practitioner-md",
-        "title": "AWS Cloud Practitioner"
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-backtracking",
+        "title": "Backtracking"
       }
     },
     {
-      "id": "rq-lib-devops-exercises-certificates-aws-solutions-architect-associate-md",
-      "conceptId": "load-balancing",
+      "id": "rq-lib-coding-interview-patterns-source-binary-search",
+      "conceptId": "search-discovery",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: AWS Solutions Architect Associate — explain the core idea in your own words.",
-      "answer": "AWS Solutions Architect Associate Last update: 2021 AWS Global Infrastructure Explain the following Availability zone Region Edge location AWS regions are data centers hosted across different geographical locations worldwide, each region is completely independent of one another.",
+      "question": "Coding Interview Patterns: Binary Search — explain the core idea in your own words.",
+      "answer": "Binary Search Cutting Wood.py Find the Insertion Index.py Find the Median From Two Sorted Arrays.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "certificates-aws-solutions-architect-associate-md",
-        "title": "AWS Solutions Architect Associate"
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-binary-search",
+        "title": "Binary Search"
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-aws",
-      "conceptId": "auth-systems",
+      "id": "rq-lib-coding-interview-patterns-source-bit-manipulation",
+      "conceptId": "bit-manipulation",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: AWS — explain the core idea in your own words.",
-      "answer": "AWS Note : Some of the exercises cost $$$ and can't be performed using the free tier or resources 2nd Note : The provided solutions are using the AWS console.",
+      "question": "Coding Interview Patterns: Bit Manipulation — explain the core idea in your own words.",
+      "answer": "Bit Manipulation Hamming Weights of Integers Dp.py Hamming Weights of Integers.py Lonely Integer.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-aws",
-        "title": "AWS"
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-bit-manipulation",
+        "title": "Bit Manipulation"
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-databases",
-      "conceptId": "sharding",
+      "id": "rq-lib-coding-interview-patterns-source-dynamic-programming",
+      "conceptId": "dp-1d",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: Databases — explain the core idea in your own words.",
-      "answer": "Databases Databases Exercises Questions SQL Time Series Exercises Name Topic Objective & Instructions Solution Comments Message Board Tables Relational DB Tables Exercise Solution Questions What type of databases are you familiar with?",
+      "question": "Coding Interview Patterns: Dynamic Programming — explain the core idea in your own words.",
+      "answer": "Dynamic Programming Climbing Stairs Bottom Up Optimized.py Climbing Stairs Bottom Up.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-databases",
-        "title": "Databases"
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-dynamic-programming",
+        "title": "Dynamic Programming"
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-devops",
-      "conceptId": "teamwork-and-collaboration",
+      "id": "rq-lib-coding-interview-patterns-source-graphs",
+      "conceptId": "graphs",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: Devops — explain the core idea in your own words.",
-      "answer": "DevOps Questions General What is DevOps? The definition of DevOps from selected companies: Amazon : \"DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.",
+      "question": "Coding Interview Patterns: Graphs — explain the core idea in your own words.",
+      "answer": "Graphs Bipartite Graph Validation.py Connect the Dots.py Count Islands.py Graph Deep Copy.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-devops",
-        "title": "Devops"
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-graphs",
+        "title": "Graphs"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-hash-maps-and-sets",
+      "conceptId": "array-hashing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Hash Maps and Sets — explain the core idea in your own words.",
+      "answer": "Hash Maps and Sets Geometric Sequence Triplets.py Longest Chain of Consecutive Numbers Brute Force.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-hash-maps-and-sets",
+        "title": "Hash Maps and Sets"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-intervals",
+      "conceptId": "intervals",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Intervals — explain the core idea in your own words.",
+      "answer": "Intervals Identify All Interval Overlaps.py Largest Overlap of Intervals.py Merge Overlapping Intervals.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-intervals",
+        "title": "Intervals"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-math-and-geometry",
+      "conceptId": "math-geometry",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Math and Geometry — explain the core idea in your own words.",
+      "answer": "Math and Geometry Josephus Optimized.py Josephus.py Maximum Collinear Points.py Reverse 32 Bit Integer.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-math-and-geometry",
+        "title": "Math and Geometry"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-sort-and-search",
+      "conceptId": "search-discovery",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Sort and Search — explain the core idea in your own words.",
+      "answer": "Sort and Search Dutch National Flag.py Kth Largest Integer Min Heap.py Kth Largest Integer Quickselect.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-sort-and-search",
+        "title": "Sort and Search"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-trees",
+      "conceptId": "trees",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Trees — explain the core idea in your own words.",
+      "answer": "Trees Balanced Binary Tree Validation.py Binary Search Tree Validation.py Binary Tree Columns.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-trees",
+        "title": "Trees"
+      }
+    },
+    {
+      "id": "rq-lib-coding-interview-patterns-source-two-pointers",
+      "conceptId": "two-pointers",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Coding Interview Patterns: Two Pointers — explain the core idea in your own words.",
+      "answer": "Two Pointers Is Palindrome Valid.py Largest Container Brute Force.py Largest Container.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "coding-interview-patterns",
+        "sectionId": "source-two-pointers",
+        "title": "Two Pointers"
       }
     },
     {
@@ -87,20 +171,6 @@
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-kubernetes",
-      "conceptId": "replication",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "DevOps Exercises: Kubernetes — explain the core idea in your own words.",
-      "answer": "CKA (Certified Kubernetes Administrator) CKA (Certified Kubernetes Administrator) Setup Pods Troubleshooting Pods Namespaces Nodes Services ReplicaSets Troubleshooting ReplicaSets Deployments Troubleshooting Deployments Scheduler Node Affinity Labels and Selectors Node Selector Taints Resources Limits Monitoring Scheduler Setup Set up Kubernetes cluster.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-kubernetes",
-        "title": "Kubernetes"
-      }
-    },
-    {
       "id": "rq-lib-devops-exercises-devops-observability",
       "conceptId": "monitoring-analytics",
       "type": "explain",
@@ -115,101 +185,45 @@
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-security",
-      "conceptId": "auth-systems",
+      "id": "rq-lib-frontend-handbook-website-blog-2022-06-18-javascript-object-vs-map-md-why-object-falls-short-of-a-hash-map-use-case",
+      "conceptId": "array-hashing",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: Security — explain the core idea in your own words.",
-      "answer": "Security What is DevSecOps? What its core principals? A couple of quotations from chosen companies: Snyk: \"DevSecOps refers to the integration of security practices into a DevOps software delivery model.",
+      "question": "Frontend Interview Handbook: Why `object` Falls Short of a Hash Map Use Case — explain the core idea in your own words.",
+      "answer": "Why falls short of a hash map use case Probably the most obvious downside of using objects for hash maps is that objects only allow keys that are strings and symbols.",
       "source": "library",
       "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-security",
-        "title": "Security"
+        "repoId": "frontend-handbook",
+        "sectionId": "website-blog-2022-06-18-javascript-object-vs-map-md-why-object-falls-short-of-a-hash-map-use-case",
+        "title": "Why `object` Falls Short of a Hash Map Use Case"
       }
     },
     {
-      "id": "rq-lib-devops-exercises-devops-software_development",
-      "conceptId": "two-pointers",
+      "id": "rq-lib-grokking-oop-docs-case-studies-design-stack-overflow-md",
+      "conceptId": "stack",
       "type": "explain",
       "difficulty": "core",
-      "question": "DevOps Exercises: Software Development — explain the core idea in your own words.",
-      "answer": "Software Development Agile Software Development What is Agile in regards to software development?",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-software_development",
-        "title": "Software Development"
-      }
-    },
-    {
-      "id": "rq-lib-devops-exercises-devops-terraform",
-      "conceptId": "teamwork-and-collaboration",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "DevOps Exercises: Terraform — explain the core idea in your own words.",
-      "answer": "Terraform Terraform Exercises Terraform 101 AWS Questions Terraform 101 Terraform Hands On Basics Dependencies Providers Variables Input Variables Output Variables Locals Variables Hands On Data Sources Lifecycle Provisioners State Terraform Backend Workspaces State Hands On Terraform Structures and Syntax Lists Loops Maps Conditionals Misc Modules Modules Hands On Interview Cheatsheet Import Version Control AWS Validations Secrets Production Exercises Terraform 101 Name Topi",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "devops-exercises",
-        "sectionId": "devops-terraform",
-        "title": "Terraform"
-      }
-    },
-    {
-      "id": "rq-lib-grokking-oop-design-patterns-reference-md",
-      "conceptId": "strategy-pattern",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Grokking OOP Design: Design Patterns Reference — explain the core idea in your own words.",
-      "answer": "Design Patterns Quick Reference Guide This guide provides a quick reference for all design patterns used across the case studies in this project.",
+      "question": "Grokking OOP Design: Design Stack Overflow — explain the core idea in your own words.",
+      "answer": "Design Stack Overflow Let's design an online community for developers. We'll cover the following: System Requirements Use Case Diagram Class Diagram Activity Diagram Sequence Diagram Code Stack Overflow is one of the largest online communities for developers to learn and share their knowledge.",
       "source": "library",
       "libraryRef": {
         "repoId": "grokking-oop",
-        "sectionId": "design-patterns-reference-md",
-        "title": "Design Patterns Reference"
+        "sectionId": "docs-case-studies-design-stack-overflow-md",
+        "title": "Design Stack Overflow"
       }
     },
     {
-      "id": "rq-lib-grokking-oop-diagrams-readme-md",
-      "conceptId": "strategy-pattern",
+      "id": "rq-lib-grokking-oop-object-oriented-design-case-studies-design-stack-overflow-md",
+      "conceptId": "stack",
       "type": "explain",
       "difficulty": "core",
-      "question": "Grokking OOP Design: Diagrams Readme — explain the core idea in your own words.",
-      "answer": "Object Diagrams Quick Start Guide 📋 Overview This project now includes comprehensive object diagrams that visualize the class structures, relationships, and design patterns across all case studies.",
+      "question": "Grokking OOP Design: Design Stack Overflow — explain the core idea in your own words.",
+      "answer": "Design Stack Overflow Let's design an online community for developers. We'll cover the following: System Requirements Use Case Diagram Class Diagram Activity Diagram Sequence Diagram Code Stack Overflow is one of the largest online communities for developers to learn and share their knowledge.",
       "source": "library",
       "libraryRef": {
         "repoId": "grokking-oop",
-        "sectionId": "diagrams-readme-md",
-        "title": "Diagrams Readme"
-      }
-    },
-    {
-      "id": "rq-lib-grokking-oop-example-codes-airline-management-system-java-readme-md",
-      "conceptId": "consensus",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Grokking OOP Design: Java — explain the core idea in your own words.",
-      "answer": "✈️ Airline Management System (Java) A Java implementation of the Grokking the Object Oriented Design Interview problem: Airline Management System , fully object oriented and modularized.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "grokking-oop",
-        "sectionId": "example-codes-airline-management-system-java-readme-md",
-        "title": "Java"
-      }
-    },
-    {
-      "id": "rq-lib-grokking-oop-object-diagram-documentation-md",
-      "conceptId": "state-management",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Grokking OOP Design: Object Diagram Documentation — explain the core idea in your own words.",
-      "answer": "Object Diagram Documentation Overview This document provides comprehensive documentation for the object oriented design patterns and relationships across all case studies in the \"Grokking the Object Oriented Design Interview\" project.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "grokking-oop",
-        "sectionId": "object-diagram-documentation-md",
-        "title": "Object Diagram Documentation"
+        "sectionId": "object-oriented-design-case-studies-design-stack-overflow-md",
+        "title": "Design Stack Overflow"
       }
     },
     {
@@ -241,48 +255,6 @@
       }
     },
     {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-breadth-first-search-readme-md",
-      "conceptId": "search-discovery",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Breadth First Search — explain the core idea in your own words.",
-      "answer": "Breadth First Search (BFS) Breadth first search (BFS) is an algorithm for traversing, searching tree, or graph data structures.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-graph-breadth-first-search-readme-md",
-        "title": "Breadth First Search"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-depth-first-search-readme-md",
-      "conceptId": "search-discovery",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Depth First Search — explain the core idea in your own words.",
-      "answer": "Depth First Search (DFS) Depth first search (DFS) is an algorithm for traversing or searching tree or graph data structures.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-graph-depth-first-search-readme-md",
-        "title": "Depth First Search"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-detect-cycle-readme-md",
-      "conceptId": "graphs",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Detect Cycle — explain the core idea in your own words.",
-      "answer": "Detect Cycle in Graphs In graph theory, a cycle is a path of edges and vertices wherein a vertex is reachable from itself.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-graph-detect-cycle-readme-md",
-        "title": "Detect Cycle"
-      }
-    },
-    {
       "id": "rq-lib-javascript-algorithms-src-algorithms-graph-dijkstra-readme-md",
       "conceptId": "shortest-path",
       "type": "explain",
@@ -294,34 +266,6 @@
         "repoId": "javascript-algorithms",
         "sectionId": "src-algorithms-graph-dijkstra-readme-md",
         "title": "Dijkstra"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-graph-kruskal-readme-md",
-      "conceptId": "trees",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Kruskal — explain the core idea in your own words.",
-      "answer": "Kruskal's Algorithm Read this in other languages: 한국어 Kruskal's algorithm is a minimum spanning tree algorithm which finds an edge of the least possible weight that connects any two trees in the forest.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-graph-kruskal-readme-md",
-        "title": "Kruskal"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-math-integer-partition-readme-md",
-      "conceptId": "sharding",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Integer Partition — explain the core idea in your own words.",
-      "answer": "Integer Partition In number theory and combinatorics, a partition of a positive integer , also called an integer partition , is a way of writing as a sum of positive integers.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-math-integer-partition-readme-md",
-        "title": "Integer Partition"
       }
     },
     {
@@ -339,20 +283,6 @@
       }
     },
     {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-search-interpolation-search-readme-md",
-      "conceptId": "binary-search",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Interpolation Search — explain the core idea in your own words.",
-      "answer": "Interpolation Search Interpolation search is an algorithm for searching for a key in an array that has been ordered by numerical values assigned to the keys (key values).",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-search-interpolation-search-readme-md",
-        "title": "Interpolation Search"
-      }
-    },
-    {
       "id": "rq-lib-javascript-algorithms-src-algorithms-sets-knapsack-problem-readme-md",
       "conceptId": "dp-2d",
       "type": "explain",
@@ -364,90 +294,6 @@
         "repoId": "javascript-algorithms",
         "sectionId": "src-algorithms-sets-knapsack-problem-readme-md",
         "title": "Knapsack Problem"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-sets-power-set-readme-md",
-      "conceptId": "backtracking",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Power Set — explain the core idea in your own words.",
-      "answer": "Power Set Power set of a set is the set of all of the subsets of , including the empty set and itself.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-sets-power-set-readme-md",
-        "title": "Power Set"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-sorting-heap-sort-readme-md",
-      "conceptId": "heap",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Heap Sort — explain the core idea in your own words.",
-      "answer": "Heap Sort Read this in other languages: Português Heapsort is a comparison based sorting algorithm.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-sorting-heap-sort-readme-md",
-        "title": "Heap Sort"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-string-levenshtein-distance-readme-md",
-      "conceptId": "dp-2d",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Levenshtein Distance — explain the core idea in your own words.",
-      "answer": "Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
-        "title": "Levenshtein Distance"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-uncategorized-jump-game-readme-md",
-      "conceptId": "backtracking",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Jump Game — explain the core idea in your own words.",
-      "answer": "Jump Game The Problem Given an array of non negative integers, you are initially positioned at the first index of the array.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
-        "title": "Jump Game"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-algorithms-uncategorized-n-queens-readme-md",
-      "conceptId": "backtracking",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: N Queens — explain the core idea in your own words.",
-      "answer": "N Queens Problem The eight queens puzzle is the problem of placing eight chess queens on an chessboard so that no two queens threaten each other.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-algorithms-uncategorized-n-queens-readme-md",
-        "title": "N Queens"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-algorithms-src-data-structures-deque-readme-md",
-      "conceptId": "sliding-window",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Deque — explain the core idea in your own words.",
-      "answer": "Deque (Double Ended Queue) A deque (pronounced \"deck\", short for double ended queue ) is a linear data structure that generalizes both a stack and a queue.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-data-structures-deque-readme-md",
-        "title": "Deque"
       }
     },
     {
@@ -479,20 +325,6 @@
       }
     },
     {
-      "id": "rq-lib-javascript-algorithms-src-data-structures-hash-table-readme-md",
-      "conceptId": "array-hashing",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Algorithms: Hash Table — explain the core idea in your own words.",
-      "answer": "Hash Table Read this in other languages: 简体中文 , Русский , 日本語 , Français , Português , 한국어 , Українська In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values .",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-algorithms",
-        "sectionId": "src-data-structures-hash-table-readme-md",
-        "title": "Hash Table"
-      }
-    },
-    {
       "id": "rq-lib-javascript-algorithms-src-data-structures-heap-readme-md",
       "conceptId": "heap",
       "type": "explain",
@@ -518,6 +350,20 @@
         "repoId": "javascript-algorithms",
         "sectionId": "src-data-structures-linked-list-readme-md",
         "title": "Linked List"
+      }
+    },
+    {
+      "id": "rq-lib-javascript-algorithms-src-data-structures-priority-queue-readme-md",
+      "conceptId": "heap",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "JavaScript Algorithms: Priority Queue — explain the core idea in your own words.",
+      "answer": "Priority Queue Read this in other languages: 简体中文 , Русский , 日本語 , Français , Português , 한국어 , Українська In computer science, a priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a \"priority\" associated with it.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "javascript-algorithms",
+        "sectionId": "src-data-structures-priority-queue-readme-md",
+        "title": "Priority Queue"
       }
     },
     {
@@ -549,48 +395,6 @@
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-1",
-      "conceptId": "factory-creational",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Interview Questions: 1. What are the possible ways to create objects in JavaScript — explain the core idea in your own words.",
-      "answer": "What are the possible ways to create objects in JavaScript There are many ways to create objects in javascript as mentioned below: 1.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-1",
-        "title": "1. What are the possible ways to create objects in JavaScript"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-201",
-      "conceptId": "tries",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 201. What is the main difference between Object.values and Object.entries method — explain the core idea in your own words.",
-      "answer": "What is the main difference between Object.values and Object.entries method The method's behavior is similar to method but it returns an array of values instead [key,value] pairs.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-201",
-        "title": "201. What is the main difference between Object.values and Object.entries method"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-231",
-      "conceptId": "object-modeling",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Interview Questions: 231. What are the two types of loops in javascript — explain the core idea in your own words.",
-      "answer": "What are the two types of loops in javascript 1. Entry Controlled loops: In this kind of loop type, the test condition is tested before entering the loop body.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-231",
-        "title": "231. What are the two types of loops in javascript"
-      }
-    },
-    {
       "id": "rq-lib-javascript-questions-q-238",
       "conceptId": "stack",
       "type": "explain",
@@ -619,62 +423,6 @@
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-304",
-      "conceptId": "object-modeling",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 304. What is the output of the following for loops — explain the core idea in your own words.",
-      "answer": "What is the output of the following for loops The output of the above for loops is 4 4 4 4 and 0 1 2 3 Explanation: Due to the event queue/loop of javascript, the callback function is called after the loop has been executed.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-304",
-        "title": "304. What is the output of the following for loops"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-36",
-      "conceptId": "rag",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 36. What is web storage — explain the core idea in your own words.",
-      "answer": "What is web storage Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-36",
-        "title": "36. What is web storage"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-388",
-      "conceptId": "rate-limiting",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 388. What is minimum timeout throttling — explain the core idea in your own words.",
-      "answer": "What is minimum timeout throttling Both browser and NodeJS javascript environments throttles with a minimum delay that is greater than 0ms.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-388",
-        "title": "388. What is minimum timeout throttling"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-392",
-      "conceptId": "object-modeling",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "JavaScript Interview Questions: 392. What are different event loops — explain the core idea in your own words.",
-      "answer": "What are different event loops In JavaScript, there are multiple event loops that can be used depending on the context of your application.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-392",
-        "title": "392. What are different event loops"
-      }
-    },
-    {
       "id": "rq-lib-javascript-questions-q-396",
       "conceptId": "heap",
       "type": "explain",
@@ -689,549 +437,843 @@
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-42",
-      "conceptId": "rag",
+      "id": "rq-lib-lm-eval-harness-lm-eval-tasks-benchmarks-readme-md",
+      "conceptId": "coding-agent-benchmarks",
       "type": "explain",
       "difficulty": "core",
-      "question": "JavaScript Interview Questions: 42. What are the differences between cookie, local storage and session storage — explain the core idea in your own words.",
-      "answer": "What are the differences between cookie, local storage and session storage Below are some of the differences between cookie, local storage and session storage, Feature Cookie Local storage Session storage Accessed on client or server side Both server side & client side.",
+      "question": "LM Evaluation Harness: Benchmarks — explain the core idea in your own words.",
+      "answer": "Changelog 2025 Mar 17 OpenLLM v2: Fixed few shot split to correctly use train set for arc challenge.",
       "source": "library",
       "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-42",
-        "title": "42. What are the differences between cookie, local storage and session storage"
+        "repoId": "lm-eval-harness",
+        "sectionId": "lm-eval-tasks-benchmarks-readme-md",
+        "title": "Benchmarks"
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-43",
-      "conceptId": "rag",
+      "id": "rq-lib-lm-eval-harness-lm-eval-tasks-tinybenchmarks-readme-md",
+      "conceptId": "coding-agent-benchmarks",
       "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 43. What is the main difference between localStorage and sessionStorage — explain the core idea in your own words.",
-      "answer": "What is the main difference between localStorage and sessionStorage LocalStorage is the same as SessionStorage but it persists the data even when the browser is closed and reopened(i.",
+      "difficulty": "core",
+      "question": "LM Evaluation Harness: Tiny Benchmarks — explain the core idea in your own words.",
+      "answer": "tinyBenchmarks Paper Title: Abstract: https://arxiv.org/abs/2402.14992 The versatility of large language models (LLMs) led to the creation of diverse benchmarks that thoroughly test a variety of language models' abilities.",
       "source": "library",
       "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-43",
-        "title": "43. What is the main difference between localStorage and sessionStorage"
+        "repoId": "lm-eval-harness",
+        "sectionId": "lm-eval-tasks-tinybenchmarks-readme-md",
+        "title": "Tiny Benchmarks"
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-438",
+      "id": "rq-lib-missing-semester-2020-debugging-profiling-md",
+      "conceptId": "automated-debugging-remediation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "The Missing Semester (MIT): Debugging Profiling — explain the core idea in your own words.",
+      "answer": "layout: lecture title: \"Debugging and Profiling\" description: Learn how to debug programs using logging, debuggers, and static analysis, and how to profile code for performance.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "missing-semester",
+        "sectionId": "2020-debugging-profiling-md",
+        "title": "Debugging Profiling"
+      }
+    },
+    {
+      "id": "rq-lib-missing-semester-2020-debugging-profiling-md-debugging-printf-debugging-and-logging",
+      "conceptId": "automated-debugging-remediation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "The Missing Semester (MIT): Printf Debugging and Logging — explain the core idea in your own words.",
+      "answer": "Printf debugging and Logging \"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements\" — Brian Kernighan, Unix for Beginners .",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "missing-semester",
+        "sectionId": "2020-debugging-profiling-md-debugging-printf-debugging-and-logging",
+        "title": "Printf Debugging and Logging"
+      }
+    },
+    {
+      "id": "rq-lib-missing-semester-2020-debugging-profiling-md-on-macos-static-analysis",
+      "conceptId": "static-dynamic-analysis",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "The Missing Semester (MIT): Static Analysis — explain the core idea in your own words.",
+      "answer": "Static Analysis For some issues you do not need to run any code. For example, just by carefully looking at a piece of code you could realize that your loop variable is shadowing an already existing variable or function name; or that a program reads a variable before defining it.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "missing-semester",
+        "sectionId": "2020-debugging-profiling-md-on-macos-static-analysis",
+        "title": "Static Analysis"
+      }
+    },
+    {
+      "id": "rq-lib-missing-semester-2026-shipping-code-md-dependencies-environments",
+      "conceptId": "dependency-blast-radius",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "The Missing Semester (MIT): Dependencies & Environments — explain the core idea in your own words.",
+      "answer": "Dependencies & Environments In modern software development, layers of abstraction are ubiquitous.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "missing-semester",
+        "sectionId": "2026-shipping-code-md-dependencies-environments",
+        "title": "Dependencies & Environments"
+      }
+    },
+    {
+      "id": "rq-lib-model-context-protocol-blog-content-posts-2025-07-31-governance-for-mcp-md",
+      "conceptId": "mcp-integrations",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Model Context Protocol: 2025 07 31 Governance for Mcp — explain the core idea in your own words.",
+      "answer": "title: \"Building to Last: A New Governance Model for MCP\" date: \"2025 07 31T00:00:00Z\" description: \"Introducing MCP's formal governance model: Specification Enhancement Proposals (SEPs), a maintainer structure, and a community driven process for evolving the protocol.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "model-context-protocol",
+        "sectionId": "blog-content-posts-2025-07-31-governance-for-mcp-md",
+        "title": "2025 07 31 Governance for Mcp"
+      }
+    },
+    {
+      "id": "rq-lib-model-context-protocol-blog-content-posts-2025-09-08-mcp-registry-preview-md",
+      "conceptId": "mcp-integrations",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Model Context Protocol: 2025 09 08 Mcp Registry Preview — explain the core idea in your own words.",
+      "answer": "title: Introducing the MCP Registry date: \"2025 09 08T00:00:00Z\" description: \"Launching the MCP Registry in preview: an open catalog and API for discovering publicly available MCP servers.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "model-context-protocol",
+        "sectionId": "blog-content-posts-2025-09-08-mcp-registry-preview-md",
+        "title": "2025 09 08 Mcp Registry Preview"
+      }
+    },
+    {
+      "id": "rq-lib-model-context-protocol-blog-content-posts-2025-09-26-mcp-next-version-update-md",
+      "conceptId": "mcp-integrations",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Model Context Protocol: 2025 09 26 Mcp Next Version Update — explain the core idea in your own words.",
+      "answer": "title: Update on the Next MCP Protocol Release date: \"2025 09 26T10:00:00 08:00\" draft: false description: An update on the timeline and priorities for the next Model Context Protocol specification version author: David Soria Parra tags: mcp protocol roadmap community Update (November 11, 2025): The specification release candidate (RC) date has been shifted from November 11th to November 14th, 2025 .",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "model-context-protocol",
+        "sectionId": "blog-content-posts-2025-09-26-mcp-next-version-update-md",
+        "title": "2025 09 26 Mcp Next Version Update"
+      }
+    },
+    {
+      "id": "rq-lib-model-context-protocol-seps-1865-mcp-apps-interactive-user-interfaces-for-mcp-md",
+      "conceptId": "agent-communication-interfaces",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Model Context Protocol: 1865 Mcp Apps Interactive User Interfaces for Mcp — explain the core idea in your own words.",
+      "answer": "SEP 1865: MCP Apps Interactive User Interfaces for MCP Status : Final Type : Extensions Track Created : 2025 11 21 Author(s) : Ido Salomon (@idosal), Liad Yosef (@liadyosef), Olivier Chafik (@olivierchafik), Jerome Swannack (@jeromeswannack), Jonathan Hefner (@jonathanhefner), Anton Pidkuiko (@antonpidkuiko), Nick Cooper (@nickcooper), Bryan Ashley (@bryanashley), Alexi Christakis (@alexichristakis) Sponsor : None (seeking sponsor) PR : https://github.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "model-context-protocol",
+        "sectionId": "seps-1865-mcp-apps-interactive-user-interfaces-for-mcp-md",
+        "title": "1865 Mcp Apps Interactive User Interfaces for Mcp"
+      }
+    },
+    {
+      "id": "rq-lib-node-best-practices-readme-md-4-testing-and-overall-quality-practices-4-10-mock-responses-of-external-http-services",
+      "conceptId": "http-lifecycle",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Node.js Best Practices: ![✔] 4.10 Mock Responses of External HTTP Services — explain the core idea in your own words.",
+      "answer": "[✔] 4.10 Mock responses of external HTTP services TL;DR: Use network mocking tools to simulate responses of external collaborators' services that are approached over the network (e.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "node-best-practices",
+        "sectionId": "readme-md-4-testing-and-overall-quality-practices-4-10-mock-responses-of-external-http-services",
+        "title": "![✔] 4.10 Mock Responses of External HTTP Services"
+      }
+    },
+    {
+      "id": "rq-lib-node-best-practices-readme-md-6-security-best-practices-6-12-prevent-brute-force-attacks-against-authorization",
+      "conceptId": "auth-systems",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Node.js Best Practices: ![✔] 6.12. Prevent Brute Force Attacks Against Authorization — explain the core idea in your own words.",
+      "answer": "[✔] 6.12. Prevent brute force attacks against authorization TL;DR: A simple and powerful technique is to limit authorization attempts using two metrics: 1.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "node-best-practices",
+        "sectionId": "readme-md-6-security-best-practices-6-12-prevent-brute-force-attacks-against-authorization",
+        "title": "![✔] 6.12. Prevent Brute Force Attacks Against Authorization"
+      }
+    },
+    {
+      "id": "rq-lib-node-best-practices-readme-md-6-security-best-practices-6-6-adjust-the-http-response-headers-for-enhanced-security",
+      "conceptId": "http-lifecycle",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Node.js Best Practices: ![✔] 6.6. Adjust the HTTP Response Headers for Enhanced Security — explain the core idea in your own words.",
+      "answer": "[✔] 6.6. Adjust the HTTP response headers for enhanced security TL;DR: Your application should be using secure headers to prevent attackers from using common attacks like cross site scripting (XSS), clickjacking and other malicious attacks.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "node-best-practices",
+        "sectionId": "readme-md-6-security-best-practices-6-6-adjust-the-http-response-headers-for-enhanced-security",
+        "title": "![✔] 6.6. Adjust the HTTP Response Headers for Enhanced Security"
+      }
+    },
+    {
+      "id": "rq-lib-node-best-practices-sections-security-login-rate-limit-basque-md",
       "conceptId": "rate-limiting",
       "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 438. What is throttling? — explain the core idea in your own words.",
-      "answer": "What is throttling? Throttling is a programming technique used to control the rate at which a function is executed.",
+      "difficulty": "core",
+      "question": "Node.js Best Practices: Login Rate Limit.basque — explain the core idea in your own words.",
+      "answer": "Saihestu baimenaren aurkako eraso basatiak Azalpena edo bezalako pribilegio handiko ibilbideak abiadura mugarik gabe utziz gero, aplikazioko pasahitzen hiztegiak eraso basatiak izateko arriskua sortzen da.",
       "source": "library",
       "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-438",
-        "title": "438. What is throttling?"
+        "repoId": "node-best-practices",
+        "sectionId": "sections-security-login-rate-limit-basque-md",
+        "title": "Login Rate Limit.basque"
       }
     },
     {
-      "id": "rq-lib-javascript-questions-q-465",
-      "conceptId": "caching",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 465. What is inline caching? — explain the core idea in your own words.",
-      "answer": "What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-465",
-        "title": "465. What is inline caching?"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-478",
-      "conceptId": "seo",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 478. What is the difference between const and Object.freeze — explain the core idea in your own words.",
-      "answer": "What is the difference between const and Object.freeze The main difference is that applies to variables (bindings), while applies to values (objects).",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-478",
-        "title": "478. What is the difference between const and Object.freeze"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-5",
-      "conceptId": "monitoring-analytics",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 5. What is the purpose of the array slice method — explain the core idea in your own words.",
-      "answer": "What is the purpose of the array slice method The method in JavaScript is used to extract a section of an array, returning a new array containing the selected elements.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-5",
-        "title": "5. What is the purpose of the array slice method"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-7",
-      "conceptId": "monitoring-analytics",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "JavaScript Interview Questions: 7. What is the difference between slice and splice — explain the core idea in your own words.",
-      "answer": "What is the difference between slice and splice Here are the key differences between and methods in JavaScript arrays: Does not modify the original array (immutable) Modifies the original array (mutable) Returns a shallow copy (subset) of selected elements Returns an array of the removed elements Used to extract elements from an array Used to add , remove , or replace elements in an array Syntax: Syntax: Summary: Use when you want to copy or extract elements without altering",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-7",
-        "title": "7. What is the difference between slice and splice"
-      }
-    },
-    {
-      "id": "rq-lib-javascript-questions-q-8",
-      "conceptId": "tries",
+      "id": "rq-lib-node-best-practices-sections-security-login-rate-limit-french-md",
+      "conceptId": "rate-limiting",
       "type": "explain",
       "difficulty": "core",
-      "question": "JavaScript Interview Questions: 8. How do you compare Object and Map — explain the core idea in your own words.",
-      "answer": "How do you compare Object and Map Objects and Maps both allow you to associate keys with values, retrieve those values, delete keys, and check if a key exists.",
+      "question": "Node.js Best Practices: Login Rate Limit.french — explain the core idea in your own words.",
+      "answer": "Prevent brute force attacks against authorization One Paragraph Explainer Leaving higher privileged routes such as or exposed without rate limiting leaves an application at risk of brute force password dictionary attacks.",
       "source": "library",
       "libraryRef": {
-        "repoId": "javascript-questions",
-        "sectionId": "q-8",
-        "title": "8. How do you compare Object and Map"
+        "repoId": "node-best-practices",
+        "sectionId": "sections-security-login-rate-limit-french-md",
+        "title": "Login Rate Limit.french"
       }
     },
     {
-      "id": "rq-lib-low-level-design-design-patterns-python-readme-md",
-      "conceptId": "factory-creational",
+      "id": "rq-lib-node-best-practices-sections-security-login-rate-limit-md",
+      "conceptId": "rate-limiting",
       "type": "explain",
       "difficulty": "core",
-      "question": "Awesome Low-Level Design: Python — explain the core idea in your own words.",
-      "answer": "Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations.",
+      "question": "Node.js Best Practices: Login Rate Limit — explain the core idea in your own words.",
+      "answer": "Prevent brute force attacks against authorization One Paragraph Explainer Leaving higher privileged routes such as or exposed without rate limiting leaves an application at risk of brute force password dictionary attacks.",
       "source": "library",
       "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "design-patterns-python-readme-md",
-        "title": "Python"
+        "repoId": "node-best-practices",
+        "sectionId": "sections-security-login-rate-limit-md",
+        "title": "Login Rate Limit"
       }
     },
     {
-      "id": "rq-lib-low-level-design-oop-rust-aggregation-readme-md",
-      "conceptId": "ownership-and-accountability",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Aggregation — explain the core idea in your own words.",
-      "answer": "Aggregation in Rust (References & Lifetimes) Introduction Aggregation is a specific type of association in Object Oriented Programming (OOP) representing a \"Has A\" relationship.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "oop-rust-aggregation-readme-md",
-        "title": "Aggregation"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-oop-rust-association-readme-md",
-      "conceptId": "ownership-and-accountability",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Association — explain the core idea in your own words.",
-      "answer": "Association in Rust (Shared Ownership & Weak Pointers) Introduction Association represents a \"Knows a\" or \"Uses a\" relationship.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "oop-rust-association-readme-md",
-        "title": "Association"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-oop-rust-composition-readme-md",
-      "conceptId": "ownership-and-accountability",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Composition — explain the core idea in your own words.",
-      "answer": "Composition in Rust (Ownership & Embedding) Introduction Composition is a fundamental Object Oriented Programming (OOP) principle that represents a \"Has A\" relationship.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "oop-rust-composition-readme-md",
-        "title": "Composition"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-cpp-digitalwalletservice-readme-md",
-      "conceptId": "storage-retrieval",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
-      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-cpp-digitalwalletservice-readme-md",
-        "title": "Digitalwalletservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-cpp-lrucache-readme-md",
-      "conceptId": "caching",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Lrucache — explain the core idea in your own words.",
-      "answer": "Designing a LRU Cache Requirements 1. The LRU cache should support the following operations: put(key, value): Insert a key value pair into the cache.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-cpp-lrucache-readme-md",
-        "title": "Lrucache"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-cpp-pubsubsystem-readme-md",
-      "conceptId": "observer-pattern",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
-      "answer": "Designing a Pub Sub System in Java Requirements 1. The Pub Sub system should allow publishers to publish messages to specific topics.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-cpp-pubsubsystem-readme-md",
-        "title": "Pubsubsystem"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-cpp-socialnetworkingservice-readme-md",
-      "conceptId": "social-media",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Socialnetworkingservice — explain the core idea in your own words.",
-      "answer": "Designing a Social Network Like Facebook Requirements User Registration and Authentication: Users should be able to create an account with their personal information, such as name, email, and password.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-cpp-socialnetworkingservice-readme-md",
-        "title": "Socialnetworkingservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-cpp-stackoverflow-readme-md",
-      "conceptId": "stack",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Stackoverflow — explain the core idea in your own words.",
-      "answer": "Designing Stack Overflow Requirements 1. Users can post questions, answer questions, and comment on questions and answers.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-cpp-stackoverflow-readme-md",
-        "title": "Stackoverflow"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-csharp-digitalwalletservice-readme-md",
-      "conceptId": "storage-retrieval",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
-      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-csharp-digitalwalletservice-readme-md",
-        "title": "Digitalwalletservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-csharp-lrucache-readme-md",
-      "conceptId": "caching",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Lrucache — explain the core idea in your own words.",
-      "answer": "Designing a LRU Cache Requirements 1. The LRU cache should support the following operations: put(key, value): Insert a key value pair into the cache.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-csharp-lrucache-readme-md",
-        "title": "Lrucache"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-csharp-pubsubsystem-readme-md",
-      "conceptId": "observer-pattern",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
-      "answer": "Designing a Pub Sub System in Java Requirements 1. The Pub Sub system should allow publishers to publish messages to specific topics.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-csharp-pubsubsystem-readme-md",
-        "title": "Pubsubsystem"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-csharp-socialnetworkingservice-readme-md",
-      "conceptId": "social-media",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Socialnetworkingservice — explain the core idea in your own words.",
-      "answer": "Designing a Social Network Like Facebook Requirements User Registration and Authentication: Users should be able to create an account with their personal information, such as name, email, and password.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-csharp-socialnetworkingservice-readme-md",
-        "title": "Socialnetworkingservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-golang-digitalwalletservice-readme-md",
-      "conceptId": "storage-retrieval",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Digitalwalletservice — explain the core idea in your own words.",
-      "answer": "Designing a Digital Wallet System Requirements 1. The digital wallet should allow users to create an account and manage their personal information.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-golang-digitalwalletservice-readme-md",
-        "title": "Digitalwalletservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-airlinemanagementsystem-readme-md",
-      "conceptId": "ecommerce-payments",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Airlinemanagementsystem — explain the core idea in your own words.",
-      "answer": "Airline Management System (LLD) Problem Statement Design and implement an Airline Management System that allows users to book flights, manage passengers, handle seat assignments, process payments, and track bookings and flights.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
-        "title": "Airlinemanagementsystem"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-cricinfo-readme-md",
-      "conceptId": "messaging-realtime",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Cricinfo — explain the core idea in your own words.",
-      "answer": "Cricket Information System (LLD) Problem Statement Design and implement a Cricket Information System similar to CricInfo that provides comprehensive information about cricket matches, teams, players, and live scores.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-cricinfo-readme-md",
-        "title": "Cricinfo"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-musicstreamingservice-readme-md",
-      "conceptId": "factory-creational",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Musicstreamingservice — explain the core idea in your own words.",
-      "answer": "Music Streaming Service (LLD) Problem Statement Design and implement an online music streaming service (like Spotify) that allows users to browse, search, and play songs, manage playlists, follow artists, and receive recommendations.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-musicstreamingservice-readme-md",
-        "title": "Musicstreamingservice"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-pubsubsystem-readme-md",
-      "conceptId": "observer-pattern",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Pubsubsystem — explain the core idea in your own words.",
-      "answer": "Pub/Sub System (LLD) Problem Statement Design and implement a Publish Subscribe (Pub/Sub) system that allows publishers to send messages to topics, and subscribers to receive messages from topics they are interested in.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-pubsubsystem-readme-md",
-        "title": "Pubsubsystem"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-restaurantmanagementsystem-readme-md",
-      "conceptId": "ecommerce-payments",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Restaurantmanagementsystem — explain the core idea in your own words.",
-      "answer": "Restaurant Management System (LLD) Problem Statement Design and implement a Restaurant Management System that allows customers to make reservations, place orders, manage tables, generate bills, and process payments.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-restaurantmanagementsystem-readme-md",
-        "title": "Restaurantmanagementsystem"
-      }
-    },
-    {
-      "id": "rq-lib-low-level-design-solutions-java-src-ridesharingservice-readme-md",
-      "conceptId": "ecommerce-payments",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "Awesome Low-Level Design: Ridesharingservice — explain the core idea in your own words.",
-      "answer": "Ride Sharing Service (LLD) Problem Statement Design and implement a Ride Sharing Service that allows riders to request rides, drivers to accept trips, and the system to manage trip assignments, payments, and trip status.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "low-level-design",
-        "sectionId": "solutions-java-src-ridesharingservice-readme-md",
-        "title": "Ridesharingservice"
-      }
-    },
-    {
-      "id": "rq-lib-ood-interview-file-search-filesearch-readme-md",
+      "id": "rq-lib-ood-interview-source-file-search",
       "conceptId": "search-discovery",
       "type": "explain",
       "difficulty": "core",
-      "question": "OOD Interview: Filesearch — explain the core idea in your own words.",
-      "answer": "Unix File Search Project This project implements a flexible file search system similar to Unix's find command, allowing users to search for files based on various criteria such as name, owner, size, and directory status.",
+      "question": "OOD Interview: File Search — explain the core idea in your own words.",
+      "answer": "File Search And Predicate.java Composite Predicate.java Not Predicate.java Or Predicate.",
       "source": "library",
       "libraryRef": {
         "repoId": "ood-interview",
-        "sectionId": "file-search-filesearch-readme-md",
-        "title": "Filesearch"
+        "sectionId": "source-file-search",
+        "title": "File Search"
       }
     },
     {
-      "id": "rq-lib-react-questions-q-174",
-      "conceptId": "stack",
-      "type": "explain",
-      "difficulty": "intro",
-      "question": "React Interview Questions: 174. What is the benefit of component stack trace from error boundary? — explain the core idea in your own words.",
-      "answer": "What is the benefit of component stack trace from error boundary? Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "react-questions",
-        "sectionId": "q-174",
-        "title": "174. What is the benefit of component stack trace from error boundary?"
-      }
-    },
-    {
-      "id": "rq-lib-react-questions-q-255",
-      "conceptId": "consensus",
+      "id": "rq-lib-react-questions-q-67",
+      "conceptId": "ml-browser-runtime",
       "type": "explain",
       "difficulty": "core",
-      "question": "React Interview Questions: 255. How do you use immer library for state updates? — explain the core idea in your own words.",
-      "answer": "How do you use immer library for state updates? Immer library enforces the immutability of state based on copy on write mechanism.",
+      "question": "React Interview Questions: 67. How can we find the version of React at runtime in the browser? — explain the core idea in your own words.",
+      "answer": "How can we find the version of React at runtime in the browser? You can use to get the version.",
       "source": "library",
       "libraryRef": {
         "repoId": "react-questions",
-        "sectionId": "q-255",
-        "title": "255. How do you use immer library for state updates?"
+        "sectionId": "q-67",
+        "title": "67. How can we find the version of React at runtime in the browser?"
       }
     },
     {
-      "id": "rq-lib-react-questions-q-73",
+      "id": "rq-lib-system-design-101-data-guides-8-key-oop-concepts-every-developer-should-know-md",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design 101: 8 Key OOP Concepts Every Developer Should Know — explain the core idea in your own words.",
+      "answer": "title: \"8 Key OOP Concepts Every Developer Should Know\" description: \"Learn the 8 key OOP concepts every developer should know.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-8-key-oop-concepts-every-developer-should-know-md",
+        "title": "8 Key OOP Concepts Every Developer Should Know"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-101-data-guides-a-beginner-s-guide-to-cdn-content-delivery-network-md",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design 101: A Beginner's Guide to CDN Content Delivery Network — explain the core idea in your own words.",
+      "answer": "title: \"A Beginner's Guide to CDN\" description: \"Learn about CDNs: improve performance, reliability, and security.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-a-beginner-s-guide-to-cdn-content-delivery-network-md",
+        "title": "A Beginner's Guide to CDN Content Delivery Network"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-101-data-guides-chatgpt-timeline-md",
       "conceptId": "social-media",
       "type": "explain",
       "difficulty": "core",
-      "question": "React Interview Questions: 73. What are the common folder structures for React? — explain the core idea in your own words.",
-      "answer": "What are the common folder structures for React? There are two common practices for React project file structure.",
+      "question": "System Design 101: Chatgpt Timeline — explain the core idea in your own words.",
+      "answer": "title: ChatGPT Timeline description: A visual guide to the evolution of ChatGPT and its underlying tech.",
       "source": "library",
       "libraryRef": {
-        "repoId": "react-questions",
-        "sectionId": "q-73",
-        "title": "73. What are the common folder structures for React?"
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-chatgpt-timeline-md",
+        "title": "Chatgpt Timeline"
       }
     },
     {
-      "id": "rq-lib-system-design-primer-solutions-system-design-pastebin-readme-md",
-      "conceptId": "streaming-media",
-      "type": "explain",
-      "difficulty": "core",
-      "question": "System Design Primer: Pastebin — explain the core idea in your own words.",
-      "answer": "Design Pastebin.com (or Bit.ly) Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
-      "source": "library",
-      "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-pastebin-readme-md",
-        "title": "Pastebin"
-      }
-    },
-    {
-      "id": "rq-lib-system-design-primer-solutions-system-design-query-cache-readme-md",
+      "id": "rq-lib-system-design-101-data-guides-consistent-hashing-md",
       "conceptId": "consistent-hashing",
       "type": "explain",
       "difficulty": "core",
-      "question": "System Design Primer: Query Cache — explain the core idea in your own words.",
-      "answer": "Design a key value cache to save the results of the most recent web server queries Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "question": "System Design 101: Consistent Hashing — explain the core idea in your own words.",
+      "answer": "title: \"Consistent Hashing Explained\" description: \"Explore consistent hashing: its benefits, and real world applications.",
       "source": "library",
       "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-query-cache-readme-md",
-        "title": "Query Cache"
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-consistent-hashing-md",
+        "title": "Consistent Hashing"
       }
     },
     {
-      "id": "rq-lib-system-design-primer-solutions-system-design-sales-rank-readme-md",
+      "id": "rq-lib-system-design-101-data-guides-imperative-vs-functional-vs-object-oriented-programming-md",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design 101: Imperative vs Functional vs Object Oriented Programming — explain the core idea in your own words.",
+      "answer": "title: \"Imperative vs Functional vs Object oriented Programming\" description: \"Explore imperative, functional, and object oriented programming paradigms.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-imperative-vs-functional-vs-object-oriented-programming-md",
+        "title": "Imperative vs Functional vs Object Oriented Programming"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-101-data-guides-the-fundamental-pillars-of-object-oriented-programming-md",
+      "conceptId": "object-modeling",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design 101: The Fundamental Pillars of Object Oriented Programming — explain the core idea in your own words.",
+      "answer": "title: \"The Fundamental Pillars of Object Oriented Programming\" description: \"Explore the core principles of object oriented programming (OOP).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-the-fundamental-pillars-of-object-oriented-programming-md",
+        "title": "The Fundamental Pillars of Object Oriented Programming"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-101-data-guides-top-6-load-balancing-algorithms-md",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design 101: Top 6 Load Balancing Algorithms — explain the core idea in your own words.",
+      "answer": "title: \"Top 6 Load Balancing Algorithms\" description: \"Explore the top 6 load balancing algorithms in detail.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design-101",
+        "sectionId": "data-guides-top-6-load-balancing-algorithms-md",
+        "title": "Top 6 Load Balancing Algorithms"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-caching",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Caching — explain the core idea in your own words.",
+      "answer": "Caching \"There are only two hard things in Computer Science: cache invalidation and naming things.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-caching",
+        "title": "Caching"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-caching-caching-and-memory",
+      "conceptId": "caching",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Caching and Memory — explain the core idea in your own words.",
+      "answer": "Caching and Memory Like a computer's memory, a cache is a compact, fast performing memory that stores data in a hierarchy of levels, starting at level one, and progressing from there sequentially.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-caching-caching-and-memory",
+        "title": "Caching and Memory"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-cap-theorem",
+      "conceptId": "cap-theorem",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Cap Theorem — explain the core idea in your own words.",
+      "answer": "CAP Theorem CAP theorem states that a distributed system can deliver only two of the three desired characteristics Consistency, Availability, and Partition tolerance (CAP).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-cap-theorem",
+        "title": "Cap Theorem"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-clustering-load-balancing-vs-clustering",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Load Balancing vs Clustering — explain the core idea in your own words.",
+      "answer": "Load balancing vs Clustering Load balancing shares some common traits with clustering, but they are different processes.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-clustering-load-balancing-vs-clustering",
+        "title": "Load Balancing vs Clustering"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-consistent-hashing-how-does-it-work",
+      "conceptId": "consistent-hashing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: How Does It Work — explain the core idea in your own words.",
+      "answer": "How does it work Consistent Hashing is a distributed hashing scheme that operates independently of the number of nodes in a distributed hash table by assigning them a position on an abstract circle, or hash ring.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-consistent-hashing-how-does-it-work",
+        "title": "How Does It Work"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-content-delivery-network-cdn",
       "conceptId": "streaming-media",
       "type": "explain",
       "difficulty": "core",
-      "question": "System Design Primer: Sales Rank — explain the core idea in your own words.",
-      "answer": "Design Amazon's sales rank by category feature Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "question": "System Design: Content Delivery Network (cdn) — explain the core idea in your own words.",
+      "answer": "Content Delivery Network (CDN) A content delivery network (CDN) is a geographically distributed group of servers that work together to provide fast delivery of internet content.",
       "source": "library",
       "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-sales-rank-readme-md",
-        "title": "Sales Rank"
+        "repoId": "system-design",
+        "sectionId": "readme-md-content-delivery-network-cdn",
+        "title": "Content Delivery Network (cdn)"
       }
     },
     {
-      "id": "rq-lib-system-design-primer-solutions-system-design-scaling-aws-readme-md",
+      "id": "rq-lib-system-design-readme-md-content-delivery-network-cdn-how-does-a-cdn-work",
+      "conceptId": "streaming-media",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: How Does a CDN Work? — explain the core idea in your own words.",
+      "answer": "How does a CDN work? !cdn In a CDN, the origin server contains the original versions of the content while the edge servers are numerous and distributed across various locations around the world.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-content-delivery-network-cdn-how-does-a-cdn-work",
+        "title": "How Does a CDN Work?"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-database-replication-master-master-replication",
       "conceptId": "replication",
       "type": "explain",
       "difficulty": "core",
-      "question": "System Design Primer: Scaling AWS — explain the core idea in your own words.",
-      "answer": "Design a system that scales to millions of users on AWS Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "question": "System Design: Master Master Replication — explain the core idea in your own words.",
+      "answer": "Master Master Replication Both masters serve reads/writes and coordinate with each other.",
       "source": "library",
       "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-scaling-aws-readme-md",
-        "title": "Scaling AWS"
+        "repoId": "system-design",
+        "sectionId": "readme-md-database-replication-master-master-replication",
+        "title": "Master Master Replication"
       }
     },
     {
-      "id": "rq-lib-system-design-primer-solutions-system-design-social-graph-readme-md",
-      "conceptId": "shortest-path",
+      "id": "rq-lib-system-design-readme-md-database-replication-master-slave-replication",
+      "conceptId": "replication",
       "type": "explain",
       "difficulty": "core",
-      "question": "System Design Primer: Social Graph — explain the core idea in your own words.",
-      "answer": "Design the data structures for a social network Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "question": "System Design: Master Slave Replication — explain the core idea in your own words.",
+      "answer": "Master Slave Replication The master serves reads and writes, replicating writes to one or more slaves, which serve only reads.",
       "source": "library",
       "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-social-graph-readme-md",
-        "title": "Social Graph"
+        "repoId": "system-design",
+        "sectionId": "readme-md-database-replication-master-slave-replication",
+        "title": "Master Slave Replication"
       }
     },
     {
-      "id": "rq-lib-system-design-primer-solutions-system-design-twitter-readme-md",
-      "conceptId": "api-design",
+      "id": "rq-lib-system-design-readme-md-database-replication-synchronous-vs-asynchronous-replication",
+      "conceptId": "replication",
       "type": "explain",
       "difficulty": "core",
-      "question": "System Design Primer: Twitter — explain the core idea in your own words.",
-      "answer": "Design the Twitter timeline and search Note: This document links directly to relevant areas found in the system design topics to avoid duplication.",
+      "question": "System Design: Synchronous vs Asynchronous Replication — explain the core idea in your own words.",
+      "answer": "Synchronous vs Asynchronous replication The primary difference between synchronous and asynchronous replication is how the data is written to the replica.",
       "source": "library",
       "libraryRef": {
-        "repoId": "system-design-primer",
-        "sectionId": "solutions-system-design-twitter-readme-md",
-        "title": "Twitter"
+        "repoId": "system-design",
+        "sectionId": "readme-md-database-replication-synchronous-vs-asynchronous-replication",
+        "title": "Synchronous vs Asynchronous Replication"
       }
     },
     {
-      "id": "rq-lib-tech-interview-handbook-apps-website-experimental-topics-md",
-      "conceptId": "trees",
+      "id": "rq-lib-system-design-readme-md-domain-name-system-dns-dns-caching",
+      "conceptId": "caching",
       "type": "explain",
       "difficulty": "core",
-      "question": "Tech Interview Handbook: Topics — explain the core idea in your own words.",
-      "answer": "id: topics title: Topics Arrays Strings Prefix trees (Tries) Suffix trees Suffix arrays KMP Rabin Karp Boyer Moore Sorting Bubble sort Insertion sort Merge sort Quick sort Selection sort Bucket sort Radix sort Counting sort Linked Lists Stacks Queues Hash tables Collision resolution algorithms Trees BFS DFS (inorder, postorder, preorder) Height Binary Search Trees Insert node Delete a node Find element in BST Find min, max element in BST Get successor element in tree Check if",
+      "question": "System Design: DNS Caching — explain the core idea in your own words.",
+      "answer": "DNS Caching A DNS cache (sometimes called a DNS resolver cache) is a temporary database, maintained by a computer's operating system, that contains records of all the recent visits and attempted visits to websites and other internet domains.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-domain-name-system-dns-dns-caching",
+        "title": "DNS Caching"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-load-balancing",
+      "conceptId": "load-balancing",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Load Balancing — explain the core idea in your own words.",
+      "answer": "Load Balancing Load balancing lets us distribute incoming network traffic across multiple resources ensuring high availability and reliability by sending requests only to resources that are online.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-load-balancing",
+        "title": "Load Balancing"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-message-brokers-message-brokers-vs-event-streaming",
+      "conceptId": "event-streaming-kafka",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Message Brokers vs Event Streaming — explain the core idea in your own words.",
+      "answer": "Message brokers vs Event streaming Message brokers can support two or more messaging patterns, including message queues and pub/sub, while event streaming platforms only offer pub/sub style distribution patterns.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-message-brokers-message-brokers-vs-event-streaming",
+        "title": "Message Brokers vs Event Streaming"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-message-queues",
+      "conceptId": "message-queues",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Message Queues — explain the core idea in your own words.",
+      "answer": "Message Queues A message queue is a form of service to service communication that facilitates asynchronous communication.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-message-queues",
+        "title": "Message Queues"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-message-queues-features",
+      "conceptId": "message-queues",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Features — explain the core idea in your own words.",
+      "answer": "Features Now, let's discuss some desired features of message queues: Push or Pull Delivery Most message queues provide both push and pull options for retrieving messages.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-message-queues-features",
+        "title": "Features"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-pacelc-theorem",
+      "conceptId": "cap-theorem",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Pacelc Theorem — explain the core idea in your own words.",
+      "answer": "PACELC Theorem The PACELC theorem is an extension of the CAP theorem. The CAP theorem states that in the case of network partitioning (P) in a distributed system, one has to choose between Availability (A) and Consistency (C).",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-pacelc-theorem",
+        "title": "Pacelc Theorem"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-sharding-what-is-sharding",
+      "conceptId": "sharding",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "System Design: What Is Sharding? — explain the core idea in your own words.",
+      "answer": "What is sharding? Sharding is a database architecture pattern related to horizontal partitioning , which is the practice of separating one table's rows into multiple different tables, known as partitions or shards .",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-sharding-what-is-sharding",
+        "title": "What Is Sharding?"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-sharding-when-to-use-sharding",
+      "conceptId": "sharding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: When to Use Sharding? — explain the core idea in your own words.",
+      "answer": "When to use sharding? Here are some reasons why sharding might be the right choice: Leveraging existing hardware instead of high end machines.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-sharding-when-to-use-sharding",
+        "title": "When to Use Sharding?"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-sql-databases",
+      "conceptId": "cap-theorem",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: SQL Databases — explain the core idea in your own words.",
+      "answer": "SQL databases A SQL (or relational) database is a collection of data items with pre defined relationships between them.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-sql-databases",
+        "title": "SQL Databases"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-system-design",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: System Design — explain the core idea in your own words.",
+      "answer": "System Design Hey, welcome to the course. I hope this course provides a great learning experience.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-system-design",
+        "title": "System Design"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-what-is-system-design",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "System Design: What Is System Design? — explain the core idea in your own words.",
+      "answer": "What is system design? Before we start this course, let's talk about what even is system design.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-what-is-system-design",
+        "title": "What Is System Design?"
+      }
+    },
+    {
+      "id": "rq-lib-system-design-readme-md-what-is-system-design-why-is-system-design-so-important",
+      "conceptId": "consensus",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "System Design: Why Is System Design So Important? — explain the core idea in your own words.",
+      "answer": "Why is System Design so important? System design helps us define a solution that meets the business requirements.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "system-design",
+        "sectionId": "readme-md-what-is-system-design-why-is-system-design-so-important",
+        "title": "Why Is System Design So Important?"
+      }
+    },
+    {
+      "id": "rq-lib-tech-interview-handbook-apps-website-contents-algorithms-dynamic-programming-md",
+      "conceptId": "dp-1d",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Tech Interview Handbook: Dynamic Programming — explain the core idea in your own words.",
+      "answer": "id: dynamic programming title: Dynamic programming cheatsheet for coding interviews description: Dynamic programming study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords: [ dynamic programming coding interview study guide, dynamic programming tips for coding interviews, dynamic programming practice questions, dynamic programming useful techniques, dynamic programming time complexity, dynamic programmi",
       "source": "library",
       "libraryRef": {
         "repoId": "tech-interview-handbook",
-        "sectionId": "apps-website-experimental-topics-md",
-        "title": "Topics"
+        "sectionId": "apps-website-contents-algorithms-dynamic-programming-md",
+        "title": "Dynamic Programming"
+      }
+    },
+    {
+      "id": "rq-lib-tech-interview-handbook-apps-website-contents-algorithms-linked-list-md",
+      "conceptId": "linked-list",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Tech Interview Handbook: Linked List — explain the core idea in your own words.",
+      "answer": "id: linked list title: Linked list cheatsheet for coding interviews description: Linked list study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords: [ linked list coding interview study guide, linked list tips for coding interviews, linked list practice questions, linked list useful techniques, linked list time complexity, linked list recommended study resources, ] sidebar label: Linked list toc max hea",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "tech-interview-handbook",
+        "sectionId": "apps-website-contents-algorithms-linked-list-md",
+        "title": "Linked List"
+      }
+    },
+    {
+      "id": "rq-lib-tech-interview-handbook-apps-website-contents-algorithms-trie-md",
+      "conceptId": "tries",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Tech Interview Handbook: Trie — explain the core idea in your own words.",
+      "answer": "id: trie title: Trie cheatsheet for coding interviews description: Trie study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords: [ trie coding interview study guide, trie tips for coding interviews, trie practice questions, trie useful techniques, trie time complexity, trie recommended study resources, ] sidebar label: Trie toc max heading level: 2 Introduction Tries are special trees (prefix trees) that",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "tech-interview-handbook",
+        "sectionId": "apps-website-contents-algorithms-trie-md",
+        "title": "Trie"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-configuration-optimization-md-disable-the-cache-cpu-resources-for-gpu-deployments",
+      "conceptId": "gpu-utilization",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Cpu Resources for Gpu Deployments — explain the core idea in your own words.",
+      "answer": "CPU Resources for GPU Deployments vLLM V1 uses a multi process architecture (see V1 Process Architecture) where each process requires CPU resources.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-configuration-optimization-md-disable-the-cache-cpu-resources-for-gpu-deployments",
+        "title": "Cpu Resources for Gpu Deployments"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-design-hybrid-kv-cache-manager-md",
+      "conceptId": "kv-cache-paged-attention",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Hybrid Kv Cache Manager — explain the core idea in your own words.",
+      "answer": "Hybrid KV Cache Manager !!! warning This document was written based on commit 458e74.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-design-hybrid-kv-cache-manager-md",
+        "title": "Hybrid Kv Cache Manager"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-design-nixl-kv-cache-lease-md",
+      "conceptId": "kv-cache-paged-attention",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Nixl Kv Cache Lease — explain the core idea in your own words.",
+      "answer": "NIXL KV Cache Lease Renewal In disaggregated prefill/decode deployments, the Prefill instance (P) must hold KV cache blocks in GPU memory after completing a prefill, waiting for the Decode instance (D) to read them via RDMA.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-design-nixl-kv-cache-lease-md",
+        "title": "Nixl Kv Cache Lease"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-features-multimodal-inputs-md-example-explicitly-use-the-recommended-2-hardware-decoders",
+      "conceptId": "inference-hardware",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Example: Explicitly Use the Recommended 2 Hardware Decoders — explain the core idea in your own words.",
+      "answer": "Example: explicitly use the recommended 2 hardware decoders vllm serve Qwen/Qwen3 VL 30B A3B Instruct \\ media io kwargs '{\"video\": {\"backend\": \"pynvvideocodec\", \"hw decoders\": 2}}' frame recovery media io kwargs bash",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-features-multimodal-inputs-md-example-explicitly-use-the-recommended-2-hardware-decoders",
+        "title": "Example: Explicitly Use the Recommended 2 Hardware Decoders"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-features-nixl-connector-usage-md-1st-gpu-as-prefiller",
+      "conceptId": "gpu-utilization",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: 1 St Gpu as Prefiller — explain the core idea in your own words.",
+      "answer": "1st GPU as prefiller CUDA VISIBLE DEVICES=0 \\ UCX NET DEVICES=all \\ VLLM NIXL SIDE CHANNEL PORT=5600 \\ vllm serve Qwen/Qwen3 0.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-features-nixl-connector-usage-md-1st-gpu-as-prefiller",
+        "title": "1 St Gpu as Prefiller"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-features-nixl-connector-usage-md-2nd-gpu-as-decoder",
+      "conceptId": "gpu-utilization",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: 2 Nd Gpu as Decoder — explain the core idea in your own words.",
+      "answer": "2nd GPU as decoder CUDA VISIBLE DEVICES=1 \\ UCX NET DEVICES=all \\ VLLM NIXL SIDE CHANNEL PORT=5601 \\ vllm serve Qwen/Qwen3 0.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-features-nixl-connector-usage-md-2nd-gpu-as-decoder",
+        "title": "2 Nd Gpu as Decoder"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-features-speculative-decoding-dynamic-speculative-decoding-md",
+      "conceptId": "speculative-decoding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Dynamic Speculative Decoding — explain the core idea in your own words.",
+      "answer": "Dynamic Speculative Decoding Why is Dynamic SD needed? SD methods need to verify K tokens for each sequence during decoding.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-features-speculative-decoding-dynamic-speculative-decoding-md",
+        "title": "Dynamic Speculative Decoding"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-features-speculative-decoding-readme-md",
+      "conceptId": "speculative-decoding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Speculative Decoding — explain the core idea in your own words.",
+      "answer": "Speculative Decoding This document shows how to use Speculative Decoding with vLLM to reduce inter token latency under medium to low QPS (query per second), memory bound workloads.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-features-speculative-decoding-readme-md",
+        "title": "Speculative Decoding"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-docs-usage-troubleshooting-md-incorrect-hardware-driver",
+      "conceptId": "inference-hardware",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Incorrect Hardware Driver — explain the core idea in your own words.",
+      "answer": "Incorrect hardware/driver If GPU/CPU communication cannot be established, you can use the following Python script and follow the instructions below to confirm whether the GPU/CPU communication is working correctly.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "docs-usage-troubleshooting-md-incorrect-hardware-driver",
+        "title": "Incorrect Hardware Driver"
+      }
+    },
+    {
+      "id": "rq-lib-vllm-rust-src-bench-readme-md-speed-bench-for-speculative-decoding-evaluation-auto-downloads-cached",
+      "conceptId": "speculative-decoding",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "vLLM: Speed Bench for Speculative Decoding Evaluation (auto Downloads, Cached) — explain the core idea in your own words.",
+      "answer": "SPEED Bench for speculative decoding evaluation (auto downloads, cached) vllm bench \\ backend openai chat base url http://127.",
+      "source": "library",
+      "libraryRef": {
+        "repoId": "vllm",
+        "sectionId": "rust-src-bench-readme-md-speed-bench-for-speculative-decoding-evaluation-auto-downloads-cached",
+        "title": "Speed Bench for Speculative Decoding Evaluation (auto Downloads, Cached)"
       }
     }
   ]

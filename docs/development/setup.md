@@ -34,7 +34,6 @@ route set. The `api/*.mjs` handlers are dev/legacy only and are not deployed.
 | `/api/progress`, `/api/auth/*` | In-memory Vite stubs | Pages Function → Turso |
 | `/api/learning?action=…` | Legacy `api/learning.mjs` → `handlers/` | Pages Function → `handlers/` (via `shared/`) |
 | `/api/learning/reader`, `/api/ai` | (dev stubs / static) | Pages Function |
-| `/api/go-run` | Legacy `api/go-run.mjs` → go.dev proxy | Not served (Go falls back to client WASM) |
 
 `tag` is a `/api/learning?action=tag` action, not a top-level `/api/tag`
 route. The `api/*.mjs` handlers and the Pages Function both share `handlers/`

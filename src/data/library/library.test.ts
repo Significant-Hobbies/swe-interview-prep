@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ParsedRepo } from '../../adapters/types';
+import libraryConfig from '../../../scripts/library.config.json';
 import manifest from './manifest.json';
 
 const contentModules = import.meta.glob<{ default: ParsedRepo }>('./*/content.json', {
@@ -13,7 +14,9 @@ function flattenSections(sections: ParsedRepo['sections']): ParsedRepo['sections
 
 describe('embedded learning library', () => {
   it('keeps every configured source uniquely addressable and documented', () => {
-    expect(manifest.repos).toHaveLength(14);
+    // Pinned to the config rather than a literal, so adding a source to
+    // library.config.json fails here only if the fetch was never re-run.
+    expect(manifest.repos).toHaveLength(libraryConfig.repos.length);
     expect(new Set(manifest.repos.map((repo) => repo.id)).size).toBe(manifest.repos.length);
     expect(new Set(manifest.repos.map((repo) => repo.source)).size).toBe(manifest.repos.length);
 

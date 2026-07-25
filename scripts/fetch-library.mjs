@@ -27,7 +27,10 @@ const NOISE_FILE_RE =
   /^(contributing|code[_-]?of[_-]?conduct|license|licence|changelog|security|funding|backers|sponsors|governance|maintainers|codeowners|support|pull_request_template|issue_template|acknowledgements|authors)(\.md|\.rst|\.txt)?$/i;
 
 // Translation suffixes on README/overview files — keep only the canonical one.
-const TRANSLATED_README_RE = /^readme(?:[._-][a-z]{2,3})(?:[._-][a-z]{2,4})?\.(md|rst)$/i;
+// Covers both ISO codes (README.fr.md) and spelled-out language names
+// (README.basque.md, README.brazilian-portuguese.md), which repos like
+// nodebestpractices use. `README.md` itself has no suffix and is kept.
+const TRANSLATED_README_RE = /^readme(?:[._-][a-z]{2,})(?:[._-][a-z]{2,})?\.(md|rst)$/i;
 
 // Directories to skip entirely.
 const NOISE_DIR_RE =

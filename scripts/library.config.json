@@ -162,6 +162,149 @@
       "whyIncluded": "Adds applied build-based learning across languages without duplicating interview Q&A.",
       "tags": ["projects", "practice", "full-stack", "programming"],
       "icon": "Hammer"
+    },
+    {
+      "id": "math-for-ml",
+      "source": "https://github.com/dair-ai/Mathematics-for-ML",
+      "adapter": "base",
+      "name": "Mathematics for ML",
+      "description": "Curated mathematics resources for machine learning",
+      "bestFor": "Filling the mathematics track, which has no repo backing",
+      "whyIncluded": "The most-referenced open index of linear algebra, calculus, and probability material for ML.",
+      "tags": ["mathematics", "linear-algebra", "probability"],
+      "icon": "Sigma"
+    },
+    {
+      "id": "awesome-vector-search",
+      "source": "https://github.com/currentslab/awesome-vector-search",
+      "adapter": "base",
+      "name": "Awesome Vector Search",
+      "description": "Curated vector search libraries, papers, and services",
+      "bestFor": "Vector database and ANN breadth",
+      "whyIncluded": "The maintained index of the vector-search ecosystem, which this repo otherwise links only ad hoc.",
+      "tags": ["vector-db", "ann", "embeddings"],
+      "icon": "Search"
+    },
+    {
+      "id": "ann-benchmarks",
+      "source": "https://github.com/erikbern/ann-benchmarks",
+      "adapter": "base",
+      "name": "ANN Benchmarks",
+      "description": "Reproducible benchmarks for approximate nearest neighbour libraries",
+      "bestFor": "Grounding recall/latency trade-offs in measured data",
+      "whyIncluded": "The canonical empirical comparison for ANN indexes; the counterweight to vendor claims.",
+      "tags": ["vector-db", "ann", "benchmarks"],
+      "icon": "Gauge"
+    },
+    {
+      "id": "awesome-ai-agents",
+      "source": "https://github.com/e2b-dev/awesome-ai-agents",
+      "adapter": "base",
+      "name": "Awesome AI Agents",
+      "description": "Index of agent frameworks, harnesses, and products",
+      "bestFor": "Agent-systems breadth, which has no repo backing",
+      "whyIncluded": "The broadest maintained survey of the agent tooling landscape.",
+      "tags": ["agent-systems", "agents", "tools"],
+      "icon": "Bot"
+    },
+    {
+      "id": "model-context-protocol",
+      "source": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      "adapter": "base",
+      "name": "Model Context Protocol",
+      "description": "The MCP specification and documentation",
+      "bestFor": "Tool-use and integration protocol depth",
+      "whyIncluded": "Primary-source specification for the protocol the agent-systems track teaches.",
+      "tags": ["agent-systems", "mcp", "tools"],
+      "icon": "Plug"
+    },
+    {
+      "id": "openai-evals",
+      "source": "https://github.com/openai/evals",
+      "adapter": "base",
+      "name": "OpenAI Evals",
+      "description": "Framework and registry for evaluating LLMs",
+      "bestFor": "Evaluation and AI-reliability practice",
+      "whyIncluded": "A working eval harness with a large registry, not just prose about evaluation.",
+      "tags": ["ai-reliability", "evals", "llm"],
+      "icon": "ClipboardCheck"
+    },
+    {
+      "id": "lm-eval-harness",
+      "source": "https://github.com/EleutherAI/lm-evaluation-harness",
+      "adapter": "base",
+      "name": "LM Evaluation Harness",
+      "description": "Standard harness for few-shot LLM benchmarking",
+      "bestFor": "The de facto benchmark runner behind most reported scores",
+      "whyIncluded": "Explains how published benchmark numbers are actually produced, including their caveats.",
+      "tags": ["ai-reliability", "evals", "benchmarks"],
+      "icon": "Ruler"
+    },
+    {
+      "id": "garak",
+      "source": "https://github.com/NVIDIA/garak",
+      "adapter": "base",
+      "name": "garak LLM Scanner",
+      "description": "Probes LLMs for hallucination, jailbreak, and leakage failures",
+      "bestFor": "Adversarial and failure-mode testing",
+      "whyIncluded": "Turns the abstract 'hallucination detection' concepts into runnable probes.",
+      "tags": ["ai-reliability", "security", "red-teaming"],
+      "icon": "ShieldCheck"
+    },
+    {
+      "id": "missing-semester",
+      "source": "https://github.com/missing-semester/missing-semester",
+      "adapter": "base",
+      "name": "The Missing Semester (MIT)",
+      "description": "Shell, editors, version control, debugging, and profiling",
+      "bestFor": "Developer-tools track, which has zero curated sources",
+      "whyIncluded": "The standard course for the tooling literacy no CS curriculum teaches.",
+      "tags": ["developer-tools", "shell", "git", "debugging"],
+      "icon": "Terminal"
+    },
+    {
+      "id": "build-your-own-x",
+      "source": "https://github.com/codecrafters-io/build-your-own-x",
+      "adapter": "base",
+      "name": "Build Your Own X",
+      "description": "Step-by-step guides to rebuild real systems from scratch",
+      "bestFor": "The Build modality, currently all hand-authored",
+      "whyIncluded": "Mechanism-first learning by reconstruction, matching this project's stated philosophy.",
+      "tags": ["application-engineering", "projects", "systems"],
+      "icon": "Hammer"
+    },
+    {
+      "id": "node-best-practices",
+      "source": "https://github.com/goldbergyoni/nodebestpractices",
+      "adapter": "base",
+      "name": "Node.js Best Practices",
+      "description": "Production Node practices with rationale and failure modes",
+      "bestFor": "Application and backend engineering depth",
+      "whyIncluded": "Unusually failure-mode oriented rather than style oriented.",
+      "tags": ["application-engineering", "backend", "node"],
+      "icon": "Server"
+    },
+    {
+      "id": "cs231n",
+      "source": "https://github.com/cs231n/cs231n.github.io",
+      "adapter": "base",
+      "name": "CS231n Course Notes",
+      "description": "Stanford CS231n notes on visual recognition",
+      "bestFor": "Multimodal and vision concepts, which have no repo backing",
+      "whyIncluded": "Primary-source course notes already cited across this repo but never ingested.",
+      "tags": ["multimodal-spatial", "vision", "neural-networks"],
+      "icon": "Eye"
+    },
+    {
+      "id": "vllm",
+      "source": "https://github.com/vllm-project/vllm",
+      "adapter": "base",
+      "name": "vLLM",
+      "description": "High-throughput LLM inference and serving engine",
+      "bestFor": "Inference-serving mechanisms: paged attention, batching",
+      "whyIncluded": "The reference implementation for the serving techniques the track teaches.",
+      "tags": ["inference-serving", "gpu", "serving"],
+      "icon": "Cpu"
     }
   ]
 }

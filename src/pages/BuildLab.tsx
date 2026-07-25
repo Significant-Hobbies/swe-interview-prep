@@ -53,7 +53,6 @@ import {
   drillVerification,
   isMetadataDrill,
 } from '../lib/contentQuality';
-import { GO_RUNTIME_AVAILABLE } from '../lib/capabilities';
 import { runDrillTests } from '../lib/drillRunner';
 import type { MasteryRating } from '../lib/fsrs';
 import { difficultyToElo } from '../lib/elo';
@@ -288,10 +287,9 @@ function ArtifactCard({
 const STARTER: Record<Language, string> = {
   typescript: '// Write your solution here\n\nfunction solve() {\n  \n}\n\nconsole.log(solve());\n',
   javascript: '// Write your solution here\n\nfunction solve() {\n  \n}\n\nconsole.log(solve());\n',
-  go: 'package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("hello")\n}\n',
 };
 
-const LANGUAGES: Language[] = GO_RUNTIME_AVAILABLE ? ['typescript', 'go'] : ['typescript'];
+const LANGUAGES: Language[] = ['typescript'];
 
 /**
  * FSRS rating for a solve, derived from the objective outcome rather than

@@ -1,11 +1,15 @@
 import { expect, test } from '@playwright/test';
 
+import { clickNav } from './nav';
+
 /**
  * Mobile-viewport checks. Run only the mobile project:
  *   pnpm exec playwright test --project=mobile
  *
- * Verifies the app is usable at 390px — no horizontal scroll and the bottom
- * tab bar of the Learning OS works.
+ * Verifies the app is usable at 390px — no horizontal scroll, and that every
+ * primary destination is reachable. Commit 4de5acc replaced the old
+ * `div.fixed.bottom-0` tab bar with the header's compact "Menu" disclosure;
+ * these specs drive that instead (see `clickNav` in smoke.spec.ts).
  */
 test.beforeEach(async ({ context, page }) => {
   await context.addInitScript(() => {
@@ -32,23 +36,20 @@ test.describe('Learning OS mobile (390px)', () => {
     expect(overflow).toBe(false);
   });
 
-  test('bottom tab bar navigates to Practice', async ({ page }) => {
+  test('compact menu navigates to Practice', async ({ page }) => {
     await page.goto('/learn');
-    const bottomNav = page.locator('div.fixed.bottom-0');
-    await bottomNav.getByRole('link', { name: 'Practice' }).click();
+    await clickNav(page, 'Practice');
     await expect(page).toHaveURL(/practice/);
     await expect(page.getByText('This week')).toBeVisible();
   });
 
-  test('bottom bar reaches Mock and Browse opens Playground', async ({ page }) => {
+  test('compact menu reaches Mock, Playground, and Progress', async ({ page }) => {
     await page.goto('/learn');
-    const bottomNav = page.locator('div.fixed.bottom-0');
-    await bottomNav.getByRole('link', { name: 'Mock' }).click();
+    await clickNav(page, 'Mock');
     await expect(page).toHaveURL(/mock/);
-    await bottomNav.getByRole('button', { name: 'Browse catalog' }).click();
-    await bottomNav.getByRole('link', { name: 'Playground' }).click();
+    await clickNav(page, 'Playground');
     await expect(page).toHaveURL(/playground/);
-    await bottomNav.getByRole('link', { name: 'Progress' }).click();
+    await clickNav(page, 'Progress');
     await expect(page).toHaveURL(/progress/);
   });
 

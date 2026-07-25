@@ -103,6 +103,26 @@ describe('drill catalog integrity', () => {
     expect(gamed).toEqual([]);
   });
 
+  // A validator that only measures `String(value).length` is satisfied by a
+  // Proxy that answers every property read with one long string. Ten `star-*`
+  // drills shipped that way. Graders must read OWN properties and cross-check
+  // values, not just measure them.
+  it('no drill can be passed with a junk stub', () => {
+    const stubs = [
+      'function designOutline(){return new Proxy({},{get:()=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})}',
+      'function starStory(){return new Proxy({},{get:()=>"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb1"})}',
+      // Own keys, but every field is the same padded filler.
+      `const F="lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore 42";
+       const R=new Proxy({},{get:()=>F,ownKeys:()=>[],getOwnPropertyDescriptor:()=>undefined});
+       function designOutline(){return R}
+       function starStory(){return R}`,
+    ];
+    const gamed = tested
+      .filter((d) => stubs.some((s) => runDrillTests(s, d.testCases ?? []).passed))
+      .map((d) => d.id);
+    expect(gamed).toEqual([]);
+  });
+
   it('every reference solution actually passes its own tests', () => {
     const broken = tested
       .filter((d) => d.referenceSolution)

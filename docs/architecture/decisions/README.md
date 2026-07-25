@@ -14,6 +14,7 @@ new ADR that supersedes the old one and link back.
 | 0006 | In-process Vite dev AI bridge (replace local-ai submodule) | Accepted | 2026-06 |
 | 0007 | Unified learning-sources registry (reference-only) | Accepted | 2026-07 |
 | 0008 | Embedded GitHub learning library | Accepted | 2026-02 |
+| 0009 | Remove the Go runtime instead of keeping it behind a flag | Accepted | 2026-07 |
 
 ## Format
 

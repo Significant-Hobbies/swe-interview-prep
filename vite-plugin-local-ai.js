@@ -142,6 +142,55 @@ const USER = 'local-dev-user';
 const store = { progress: new Map(), notes: new Map(), chats: new Map() };
 const key = (id) => `${USER}:${id}`;
 
+/**
+ * Dev mirror of the production `/api/ai/chat` handler: same request shape, same
+ * SSE frames (`data: {"text":…}` … `data: [DONE]`), same 503 when no BYOK
+ * config and no AI_* env. Deliberately reuses shared/lib/ai.mjs so dev and prod
+ * cannot drift. Unlike production it does not require auth — the dev bridge has
+ * no session.
+ */
+async function streamProviderChat(res, body) {
+  const { endpointUrl, apiKey, model, messages, systemPrompt } = body || {};
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return sendJson(res, 400, { error: 'messages array required' });
+  }
+
+  const { generateStream, AIConfigError } = await import('./shared/lib/ai.mjs');
+  let textStream;
+  try {
+    textStream = generateStream({
+      endpointUrl,
+      apiKey,
+      model,
+      system: systemPrompt,
+      messages,
+      env: process.env,
+    });
+  } catch (error) {
+    if (error instanceof AIConfigError) return sendJson(res, 503, { error: error.message });
+    throw error;
+  }
+
+  res.writeHead(200, {
+    'content-type': 'text/event-stream; charset=utf-8',
+    'cache-control': 'no-cache, no-store',
+    connection: 'keep-alive',
+  });
+  const send = (payload) => res.write(`data: ${payload}\n\n`);
+  try {
+    for await (const chunk of textStream) {
+      if (chunk) send(JSON.stringify({ text: chunk }));
+    }
+  } catch (error) {
+    // Headers are already flushed, so the only way to report is in-band.
+    console.error('AI chat stream failed', error);
+    send(JSON.stringify({ error: 'The AI provider stopped responding. Try again.' }));
+  } finally {
+    send('[DONE]');
+    res.end();
+  }
+}
+
 function streamChat(_req, res, body) {
   const providerName = body.provider || body.tool || 'claude';
   const { model, messages, systemPrompt } = body;
@@ -323,6 +372,13 @@ export function localAi() {
 
         // ── AI ──
         if (m === 'POST' && path === '/chat') return streamChat(req, res, body);
+        // Production serves BYOK/provider chat at /api/ai/chat (see
+        // functions/api/[[path]].js). `useCompanion` falls back to that route
+        // whenever the selected model is not a local CLI provider — which
+        // happens in dev too. Without this the dev bridge's catch-all returned
+        // 404 and the Companion rendered "Not found" instead of a real answer
+        // or a real error.
+        if (m === 'POST' && path === '/ai/chat') return streamProviderChat(res, body);
 
         // ── health / auth ──
         if (m === 'GET' && path === '/health') {

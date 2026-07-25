@@ -4,4 +4,4 @@ export interface TestCase {
   description: string;
 }
 
-export type Language = 'javascript' | 'typescript' | 'go';
+export type Language = 'javascript' | 'typescript';

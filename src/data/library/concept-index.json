@@ -1,85 +1,76 @@
 {
-  "tokenization": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-encoding-vs-encryption-vs-tokenization-md",
-      "title": "Encoding vs Encryption vs Tokenization",
-      "snippet": "--- title: \"Encoding vs Encryption vs Tokenization\" description: \"Understand encoding, encryption, and tokenization for data handling.\" image: \"https://assets.bytebytego.com/diagrams/0033-encoding-vs-encryption-vs-tokenization.png\" create…"
-    }
-  ],
   "search-discovery": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-how-do-search-engines-work-md",
-      "title": "How Do Search Engines Work",
-      "snippet": "--- title: \"How Do Search Engines Work?\" description: \"Explore the inner workings of search engines: crawling, indexing, and ranking.\" image: \"https://assets.bytebytego.com/diagrams/0103-how-do-search…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-making-sense-of-search-engine-optimization-md",
-      "title": "Making Sense of Search Engine Optimization",
-      "snippet": "--- title: \"Making Sense of Search Engine Optimization\" description: \"Understand how search engines rank websites and optimize your website.\" image: \"https://assets.bytebytego.com/diagrams/0326-seo.jp…"
-    },
     {
       "repoId": "coding-interview-patterns",
       "repoName": "Coding Interview Patterns",
       "sectionId": "source-binary-search",
       "title": "Binary Search",
       "snippet": "# Binary Search - [Cutting Wood.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Binary Search/cutting_wood.py) - [Find the Insertion Index.py](https://github.com/ByteB…"
+    },
+    {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-sort-and-search",
+      "title": "Sort and Search",
+      "snippet": "# Sort and Search - [Dutch National Flag.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Sort and Search/dutch_national_flag.py) - [Kth Largest Integer Min Heap.py](ht…"
+    },
+    {
+      "repoId": "ood-interview",
+      "repoName": "OOD Interview",
+      "sectionId": "source-file-search",
+      "title": "File Search",
+      "snippet": "# File Search - [And Predicate.java](https://github.com/ByteByteGoHq/ood-interview/blob/HEAD/file_search/filesearch/clause/AndPredicate.java) - [Composite Predicate.java](https://github.com/ByteByteG…"
+    }
+  ],
+  "ml-browser-runtime": [
+    {
+      "repoId": "react-questions",
+      "repoName": "React Interview Questions",
+      "sectionId": "q-67",
+      "title": "67. How can we find the version of React at runtime in the browser?",
+      "snippet": "### How can we find the version of React at runtime in the browser? You can use `React.version` to get the version. ```jsx harmony const REACT_VERSION = React.version; ReactDOM.render(…"
+    }
+  ],
+  "http-lifecycle": [
+    {
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-4-testing-and-overall-quality-practices-4-10-mock-responses-of-external-http-services",
+      "title": "![✔] 4.10 Mock Responses of External HTTP Services",
+      "snippet": "## ![✔] 4.10 Mock responses of external HTTP services ### `🌟 #new` **TL;DR:** Use network mocking tools to simulate responses of external collaborators' services that are approached over the networ…"
+    },
+    {
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-6-security-best-practices-6-6-adjust-the-http-response-headers-for-enhanced-security",
+      "title": "![✔] 6.6. Adjust the HTTP Response Headers for Enhanced Security",
+      "snippet": "## ![✔] 6.6. Adjust the HTTP response headers for enhanced security <a href=\"https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration\" target=\"_blank\"><img src=\"https://img.shields.io…"
     }
   ],
   "rate-limiting": [
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-438",
-      "title": "438. What is throttling?",
-      "snippet": "…vents * Mouse movement or drag events * API rate limiting **How does throttling work?** Throttling will execute the function at most once every specified time interval, ignoring additional calls until the interval has passed.…"
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "sections-security-login-rate-limit-french-md",
+      "title": "Login Rate Limit.french",
+      "snippet": "…vileged routes such as `/login` or `/admin` exposed without rate limiting leaves an application at risk of brute force password dictionary attacks. Using a strategy to limit requests to such routes can prevent the success of this by limiting the number of allo…"
     },
     {
-      "repoId": "system-design",
-      "repoName": "System Design",
-      "sectionId": "readme-md-rate-limiting-why-do-we-need-rate-limiting",
-      "title": "Why Do We Need Rate Limiting?",
-      "snippet": "## Why do we need Rate Limiting? Rate limiting is a very important part of any large-scale system and it can be used to accomplish the following: - Avoid resource starvation as a result of Denial of Service (DoS) att…"
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "sections-security-login-rate-limit-md",
+      "title": "Login Rate Limit",
+      "snippet": "…vileged routes such as `/login` or `/admin` exposed without rate limiting leaves an application at risk of brute force password dictionary attacks. Using a strategy to limit requests to such routes can prevent the success of this by limiting the number of allo…"
     },
     {
-      "repoId": "system-design",
-      "repoName": "System Design",
-      "sectionId": "readme-md-rate-limiting-rate-limiting-in-distributed-systems",
-      "title": "Rate Limiting in Distributed Systems",
-      "snippet": "## Rate Limiting in Distributed Systems Rate Limiting becomes complicated when distributed systems are involved. The two broad problems that come with rate limiting in distributed systems are: ### Inco…"
-    }
-  ],
-  "idempotency": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-top-6-cases-to-apply-idempotency-md",
-      "title": "Top 6 Cases to Apply Idempotency",
-      "snippet": "--- title: \"Top 6 Cases to Apply Idempotency\" description: \"Explore 6 key use cases where idempotency is crucial for reliable systems.\" image: \"https://assets.bytebytego.com/diagrams/0377-top-6-cases-of-leveraging-idempotency.png\" cr…"
-    }
-  ],
-  "webhooks": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-polling-vs-webhooks-md",
-      "title": "Polling vs Webhooks",
-      "snippet": "--- title: \"Polling vs Webhooks\" description: \"Polling vs webhooks: a detailed comparison of two data retrieval methods.\" image: 'https://assets.bytebytego.com/diagrams/0057-pooling-vs-webhook.png' createdAt: '2024-03-03' d…"
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "sections-security-login-rate-limit-basque-md",
+      "title": "Login Rate Limit.basque",
+      "snippet": "# Saihestu baimenaren aurkako eraso basatiak ### Azalpena `/login` edo `/admin` bezalako pribilegio handiko ibilbideak abiadura mugarik gabe utziz gero, aplikazioko pasahitzen hiztegiak eraso ba…"
     }
   ],
   "caching": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-465",
-      "title": "465. What is inline caching?",
-      "snippet": "### What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects. The V8 compiler stores a cache of the type o…"
-    },
     {
       "repoId": "system-design",
       "repoName": "System Design",
@@ -93,130 +84,54 @@
       "sectionId": "readme-md-caching",
       "title": "Caching",
       "snippet": "# Caching _\"There are only two hard things in Computer Science: cache invalidation and naming things.\" - Phil Karlton_ ![caching](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/pu…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-caching-caching-and-memory",
+      "title": "Caching and Memory",
+      "snippet": "## Caching and Memory Like a computer's memory, a cache is a compact, fast-performing memory that stores data in a hierarchy of levels, starting at level one, and progressing from there sequentially. Th…"
     }
   ],
   "message-queues": [
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-can-kafka-lose-messages-md",
-      "title": "Can Kafka Lose Messages",
-      "snippet": "--- title: \"Can Kafka Lose Messages?\" description: \"Explore Kafka's message loss scenarios and prevention strategies.\" image: \"https://assets.bytebytego.com/diagrams/0130-can-kafka-lose-messages.png\"…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-message-queues",
+      "title": "Message Queues",
+      "snippet": "# Message Queues A message queue is a form of service-to-service communication that facilitates asynchronous communication. It asynchronously receives messages from producers and sends them to consumer…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-how-do-message-queue-architectures-evolve-md",
-      "title": "How Do Message Queue Architectures Evolve",
-      "snippet": "…ft: false categories: - \"database-and-storage\" tags: - \"Message Queues\" - \"System Design\" --- ![Message Queue Evolution](https://assets.bytebytego.com/diagrams/0271-message-queue-evolve.png) * IBM MQ IBM MQ was launched in 1993. It was originally ca…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-message-queues-features",
+      "title": "Features",
+      "snippet": "## Features Now, let's discuss some desired features of message queues: ### Push or Pull Delivery Most message queues provide both push and pull options for retrieving messages. Pull means continuously querying the queue for new messages. Push means that…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-the-ultimate-kafka-101-you-cannot-miss-md",
-      "title": "The Ultimate Kafka 101 You Cannot Miss",
-      "snippet": "--- title: \"The Ultimate Kafka 101 You Cannot Miss\" description: \"Learn the fundamentals of Kafka in 8 simple steps.\" image: \"https://assets.bytebytego.com/diagrams/0246-kafka-101-8-steps-to-learn-the…"
+      "repoId": "devops-exercises",
+      "repoName": "DevOps Exercises",
+      "sectionId": "devops-kafka",
+      "title": "Kafka",
+      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a name…"
     }
   ],
   "monitoring-analytics": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-logging-tracing-metrics-md",
-      "title": "Logging Tracing Metrics",
-      "snippet": "…ption: \"Understand logging, tracing, and metrics for system observability.\" image: \"https://assets.bytebytego.com/diagrams/0264-logging-tracing-metrics.png\" createdAt: \"2024-03-11\" draft: false categories: - devops-cicd tags: - \"observability\" - \"monitor…"
-    },
     {
       "repoId": "devops-exercises",
       "repoName": "DevOps Exercises",
       "sectionId": "devops-observability",
       "title": "Observability",
       "snippet": "# Observability - [Observability](#observability) - [Monitoring](#monitoring) - [Data](#data) - [Application Performance Management](#application-performance-management) <details> <summary>What'…"
-    },
-    {
-      "repoId": "system-design",
-      "repoName": "System Design",
-      "sectionId": "readme-md-sla-slo-sli",
-      "title": "Sla, Slo, Sli",
-      "snippet": "# SLA, SLO, SLI Let's briefly discuss SLA, SLO, and SLI. These are mostly related to the business and site reliability side of things but good to know nonetheless.…"
-    }
-  ],
-  "api-design": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-how-do-we-perform-pagination-in-api-design-md",
-      "title": "How Do We Perform Pagination in API Design",
-      "snippet": "--- title: How do we Perform Pagination in API Design? description: Learn about API pagination techniques for efficient data retrieval. image: 'https://assets.bytebytego.com/diagrams/0076-api-pagination-101.png' createdAt: '2024-03-04' draft:…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-8-tips-for-efficient-api-design-md",
-      "title": "8 Tips for Efficient API Design",
-      "snippet": "--- title: '8 Tips for Efficient API Design' description: 'Improve your API design with these 8 essential tips for efficiency.' image: 'https://assets.bytebytego.com/diagrams/0385-top-8-tips-for-restful-api-design.png' createdAt: '20…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-how-does-grpc-work-md",
-      "title": "How Does Grpc Work",
-      "snippet": "--- title: How does gRPC work? description: Learn how gRPC works, its data flow, and performance benefits. image: 'https://assets.bytebytego.com/diagrams/0210-grpc.png' createdAt: '2024-01-28' draft:…"
     }
   ],
   "auth-systems": [
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-explaining-sessions-tokens-jwt-sso-and-oauth-in-one-diagram-md",
-      "title": "Explaining Sessions Tokens JWT Sso and Oauth in One Diagram",
-      "snippet": "--- title: \"Sessions, Tokens, JWT, SSO, and OAuth Explained\" description: \"Understanding sessions, tokens, JWT, SSO, and OAuth concepts.\" image: \"https://assets.bytebytego.com/diagrams/0330-session-sq…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-jwt-101-key-to-stateless-authentication-md",
-      "title": "JWT 101 Key to Stateless Authentication",
-      "snippet": "--- title: \"JWT 101: Key to Stateless Authentication\" description: \"Learn about JSON Web Tokens (JWT) for secure, stateless authentication.\" image: \"https://assets.bytebytego.com/diagrams/0244-jwt-101…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-session-cookie-jwt-token-sso-and-oauth-2-md",
-      "title": "Session Cookie JWT Token Sso and Oauth 2",
-      "snippet": "--- title: \"Session, Cookie, JWT, Token, SSO, and OAuth 2.0 Explained\" description: \"Understanding sessions, cookies, JWT, SSO, and OAuth 2.0 in one diagram.\" image: \"https://assets.bytebytego.com/dia…"
-    }
-  ],
-  "ecommerce-payments": [
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-the-payments-ecosystem-md",
-      "title": "The Payments Ecosystem",
-      "snippet": "--- title: \"The Payments Ecosystem\" description: \"Explore the key players and processes in the payments ecosystem.\" image: \"https://assets.bytebytego.com/diagrams/0360-the-payments-ecosystem.png\" createdAt: \"2024-03-…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-unified-payments-interface-upi-in-india-md",
-      "title": "Unified Payments Interface Upi in India",
-      "snippet": "--- title: \"Unified Payments Interface (UPI)\" description: \"Explore the architecture and workings of India's UPI payment system.\" image: \"https://assets.bytebytego.com/diagrams/0400-upi-2.png\" createdAt: \"2024-03-04\" dra…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-foreign-exchange-payments-md",
-      "title": "Foreign Exchange Payments",
-      "snippet": "--- title: \"Foreign Exchange Payments\" description: \"Learn how foreign exchange payments work when buying/selling internationally.\" image: \"https://assets.bytebytego.com/diagrams/0194-foreign-exchange.png\" createdAt: \"2024-03-10\"…"
-    }
-  ],
-  "object-storage": [
-    {
-      "repoId": "system-design",
-      "repoName": "System Design",
-      "sectionId": "readme-md-storage-object-storage",
-      "title": "Object Storage",
-      "snippet": "## Object Storage Object storage, which is also known as object-based storage, breaks data files up into pieces called objects. It then stores those objects in a single repository, which can be spread o…"
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-6-security-best-practices-6-12-prevent-brute-force-attacks-against-authorization",
+      "title": "![✔] 6.12. Prevent Brute Force Attacks Against Authorization",
+      "snippet": "## ![✔] 6.12. Prevent brute-force attacks against authorization <a href=\"https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication\" target=\"_blank\"><img src=\"https://img.shields.io/badge/%…"
     }
   ],
   "sharding": [
@@ -228,18 +143,18 @@
       "snippet": "## What is sharding? Sharding is a database architecture pattern related to _horizontal partitioning_, which is the practice of separating one table's rows into multiple different tables, known as _partitions_…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-a-crash-course-in-database-sharding-md",
-      "title": "A Crash Course in Database Sharding",
-      "snippet": "--- title: \"A Crash Course on Database Sharding\" description: \"Learn database sharding: concepts, techniques, and implementation.\" image: \"https://assets.bytebytego.com/diagrams/0065-a-crash-course-on-database-sharding.png\" createdAt: \"202…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-sharding",
+      "title": "Sharding",
+      "snippet": "# Sharding Before we discuss sharding, let's talk about data partitioning:…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-key-concepts-to-understand-database-sharding-md",
-      "title": "Key Concepts to Understand Database Sharding",
-      "snippet": "--- title: \"Key Concepts to Understand Database Sharding\" description: \"Explore key concepts of database sharding with vertical/horizontal strategies.\" image: \"https://assets.bytebytego.com/diagrams/0096-dbshards.png\" createdAt: \"2024-03-09\" draft:…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-sharding-when-to-use-sharding",
+      "title": "When to Use Sharding?",
+      "snippet": "## When to use sharding? Here are some reasons why sharding might be the right choice: - Leveraging existing hardware instead of high-end machines. - Maintain data in distinct geographic regions. - Quickly scale b…"
     }
   ],
   "replication": [
@@ -274,18 +189,18 @@
       "snippet": "# PACELC Theorem The PACELC theorem is an extension of the CAP theorem. The CAP theorem states that in the case of network partitioning (P) in a distributed system, one has to choose between Availabi…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-cap-theorem-one-of-the-most-misunderstood-terms-md",
-      "title": "Cap Theorem One of the Most Misunderstood Terms",
-      "snippet": "--- title: \"CAP Theorem: One of the Most Misunderstood Terms\" description: \"Explore the CAP theorem, its implications, and common misunderstandings.\" image: \"https://assets.bytebytego.com/diagrams/013…"
-    },
-    {
       "repoId": "system-design",
       "repoName": "System Design",
       "sectionId": "readme-md-cap-theorem",
       "title": "Cap Theorem",
       "snippet": "# CAP Theorem CAP theorem states that a distributed system can deliver only two of the three desired characteristics Consistency, Availability, and Partition tolerance (CAP). ![cap-theorem](https://…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-sql-databases",
+      "title": "SQL Databases",
+      "snippet": "# SQL databases A SQL (or relational) database is a collection of data items with pre-defined relationships between them. These items are organized as a set of tables with columns and rows. Tables ar…"
     }
   ],
   "object-modeling": [
@@ -297,27 +212,18 @@
       "snippet": "--- title: \"8 Key OOP Concepts Every Developer Should Know\" description: \"Learn the 8 key OOP concepts every developer should know.\" image: \"https://assets.bytebytego.com/diagrams/0294-oo-concepts.png…"
     },
     {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "docs-oop-fundamentals-class-diagram-md",
-      "title": "Class Diagram",
-      "snippet": "# Class Diagram Class diagram is the backbone of object-oriented modeling - it shows how different entities (people, things, and data) relate to each other. In other words, it shows the static struct…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-imperative-vs-functional-vs-object-oriented-programming-md",
+      "title": "Imperative vs Functional vs Object Oriented Programming",
+      "snippet": "--- title: \"Imperative vs Functional vs Object-oriented Programming\" description: \"Explore imperative, functional, and object-oriented programming paradigms.\" image: \"https://assets.bytebytego.com/dia…"
     },
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "docs-oop-fundamentals-object-oriented-basics-md",
-      "title": "Object Oriented Basics",
-      "snippet": "# Object Oriented Basics Object-oriented programming (OOP) is a style of programming that focuses on using objects to design and build applications. Contrary to procedure-oriented programming where p…"
-    }
-  ],
-  "concurrency-design": [
     {
       "repoId": "system-design-101",
       "repoName": "System Design 101",
-      "sectionId": "data-guides-concurrency-is-not-parallelism-md",
-      "title": "Concurrency Is Not Parallelism",
-      "snippet": "--- title: \"Concurrency vs Parallelism\" description: \"Understand the difference between concurrency and parallelism in system design.\" image: \"https://assets.bytebytego.com/diagrams/0150-concurrency-i…"
+      "sectionId": "data-guides-the-fundamental-pillars-of-object-oriented-programming-md",
+      "title": "The Fundamental Pillars of Object Oriented Programming",
+      "snippet": "--- title: \"The Fundamental Pillars of Object-Oriented Programming\" description: \"Explore the core principles of object-oriented programming (OOP).\" image: \"https://assets.bytebytego.com/diagrams/0197…"
     }
   ],
   "load-balancing": [
@@ -366,13 +272,73 @@
       "snippet": "## How does it work Consistent Hashing is a distributed hashing scheme that operates independently of the number of nodes in a distributed hash table by assigning them a position on an abstract circle, or hash ring. This…"
     }
   ],
+  "consensus": [
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-system-design",
+      "title": "System Design",
+      "snippet": "# System Design Hey, welcome to the course. I hope this course provides a great learning experience. _This course is also available on my [website](https://karanpratapsingh.com/courses/system-design…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design",
+      "title": "What Is System Design?",
+      "snippet": "# What is system design? Before we start this course, let's talk about what even is system design. System design is the process of defining the architecture, interfaces, and data for a system that s…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design-why-is-system-design-so-important",
+      "title": "Why Is System Design So Important?",
+      "snippet": "## Why is System Design so important? System design helps us define a solution that meets the business requirements. It is one of the earliest decisions we can make when building a system. Often it i…"
+    }
+  ],
+  "distributed-infra": [
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-system-design",
+      "title": "System Design",
+      "snippet": "# System Design Hey, welcome to the course. I hope this course provides a great learning experience. _This course is also available on my [website](https://karanpratapsingh.com/courses/system-design…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design",
+      "title": "What Is System Design?",
+      "snippet": "# What is system design? Before we start this course, let's talk about what even is system design. System design is the process of defining the architecture, interfaces, and data for a system that s…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design-why-is-system-design-so-important",
+      "title": "Why Is System Design So Important?",
+      "snippet": "## Why is System Design so important? System design helps us define a solution that meets the business requirements. It is one of the earliest decisions we can make when building a system. Often it i…"
+    }
+  ],
   "messaging-realtime": [
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-shortlong-polling-sse-websocket-md",
-      "title": "Shortlong Polling Sse Websocket",
-      "snippet": "--- title: 'Short/long polling, SSE, WebSocket' description: 'Explore real-time web updates: polling, SSE, and WebSockets.' image: 'https://assets.bytebytego.com/diagrams/0337-short-long-polling-sse-w…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-system-design",
+      "title": "System Design",
+      "snippet": "# System Design Hey, welcome to the course. I hope this course provides a great learning experience. _This course is also available on my [website](https://karanpratapsingh.com/courses/system-design…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design",
+      "title": "What Is System Design?",
+      "snippet": "# What is system design? Before we start this course, let's talk about what even is system design. System design is the process of defining the architecture, interfaces, and data for a system that s…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-what-is-system-design-why-is-system-design-so-important",
+      "title": "Why Is System Design So Important?",
+      "snippet": "## Why is System Design so important? System design helps us define a solution that meets the business requirements. It is one of the earliest decisions we can make when building a system. Often it i…"
     }
   ],
   "social-media": [
@@ -416,18 +382,18 @@
       "snippet": "## Why `Object` falls short of a hash map use case Probably the most obvious downside of using objects for hash maps is that objects only allow keys that are strings and symbols. Any other types will…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-consistent-hashing-md",
-      "title": "Consistent Hashing",
-      "snippet": "--- title: \"Consistent Hashing Explained\" description: \"Explore consistent hashing: its benefits, and real-world applications.\" image: \"https://assets.bytebytego.com/diagrams/0151-consistent-hashing.p…"
-    },
-    {
       "repoId": "coding-interview-patterns",
       "repoName": "Coding Interview Patterns",
       "sectionId": "source-hash-maps-and-sets",
       "title": "Hash Maps and Sets",
       "snippet": "# Hash Maps and Sets - [Geometric Sequence Triplets.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Hash Maps and Sets/geometric_sequence_triplets.py) - [Longest Chain…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-cryptography-polynomial-hash-readme-md",
+      "title": "Polynomial Hash",
+      "snippet": "# Polynomial Rolling Hash ## Hash Function **Hash functions** are used to map large data sets of elements of an arbitrary length (*the keys*) to smaller data sets of elements of a fixed length (*th…"
     }
   ],
   "two-pointers": [
@@ -448,18 +414,18 @@
       "snippet": "### What is the call stack Call Stack is a data structure for javascript interpreters to keep track of function calls(creates execution context) in the program. It has two major actions, 1. Whenever you call a fun…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-a-roadmap-for-full-stack-development-md",
-      "title": "A Roadmap for Full Stack Development",
-      "snippet": "--- title: \"A Roadmap for Full-Stack Development\" description: \"A guide to the technologies and skills needed for full-stack development.\" image: \"https://assets.bytebytego.com/diagrams/0199-full-stack-developer-roadmap.png\" create…"
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "docs-case-studies-design-stack-overflow-md",
+      "title": "Design Stack Overflow",
+      "snippet": "# Design Stack Overflow ### Let's design an online community for developers. **We'll cover the following:** * [System Requirements](#system-requirements) * [Use Case Diagram](#use-case-diagram) * [Class Diag…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-how-will-you-design-the-stack-overflow-website-md",
-      "title": "How Will You Design the Stack Overflow Website",
-      "snippet": "--- title: 'How to Design Stack Overflow' description: 'Explore the architecture of Stack Overflow and its design considerations.' image: 'https://assets.bytebytego.com/diagrams/0343-stack-overflow-architecture.png' createdAt:…"
+      "repoId": "grokking-oop",
+      "repoName": "Grokking OOP Design",
+      "sectionId": "object-oriented-design-case-studies-design-stack-overflow-md",
+      "title": "Design Stack Overflow",
+      "snippet": "<h1 align=\"center\">Design Stack Overflow</h1> <h3 align=\"center\">Let's design an online community for developers.</h3> **We'll cover the following:** * [System Requirements](#system-requirements) * [Use Case Diagram](#use-ca…"
     }
   ],
   "binary-search": [
@@ -515,13 +481,6 @@
       "sectionId": "source-trees",
       "title": "Trees",
       "snippet": "# Trees - [Balanced Binary Tree Validation.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Trees/balanced_binary_tree_validation.py) - [Binary Search Tree Validation.py]…"
-    },
-    {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-iqiyi-database-selection-trees-md",
-      "title": "Iqiyi Database Selection Trees",
-      "snippet": "--- title: \"iQIYI Database Selection Trees\" description: \"Explore iQIYI's database selection process for relational and NoSQL.\" image: \"https://assets.bytebytego.com/diagrams/0215-how-to-choose-db.png\" createdAt: \"2024-03-01\" draft: fals…"
     }
   ],
   "tries": [
@@ -670,6 +629,15 @@
       "snippet": "# Intervals - [Identify All Interval Overlaps.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Intervals/identify_all_interval_overlaps.py) - [Largest Overlap of Interval…"
     }
   ],
+  "math-geometry": [
+    {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-math-and-geometry",
+      "title": "Math and Geometry",
+      "snippet": "# Math and Geometry - [Josephus Optimized.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Math and Geometry/josephus_optimized.py) - [Josephus.py](https://github.com/B…"
+    }
+  ],
   "bit-manipulation": [
     {
       "repoId": "coding-interview-patterns",
@@ -679,20 +647,180 @@
       "snippet": "# Bit Manipulation - [Hamming Weights of Integers Dp.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Bit Manipulation/hamming_weights_of_integers_dp.py) - [Hamming Weigh…"
     }
   ],
-  "communication": [
+  "event-streaming-kafka": [
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "readme-md-communication",
-      "title": "Communication",
-      "snippet": "## Communication <p align=\"center\"> <img src=\"https://raw.githubusercontent.com/donnemartin/system-design-primer/HEAD/images/5KeocQs.jpg\"> <br/> <i><a href=http://www.escotal.com/osilayer.html>Sou…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-message-brokers-message-brokers-vs-event-streaming",
+      "title": "Message Brokers vs Event Streaming",
+      "snippet": "## Message brokers vs Event streaming Message brokers can support two or more messaging patterns, including message queues and pub/sub, while event streaming platforms only offer pub/sub-style distri…"
+    }
+  ],
+  "kv-cache-paged-attention": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-design-hybrid-kv-cache-manager-md",
+      "title": "Hybrid Kv Cache Manager",
+      "snippet": "# Hybrid KV Cache Manager !!! warning This document was written based on commit [458e74](https://github.com/vllm-project/vllm/commit/458e74eb907f96069e6d8a4f3c9f457001fef2ea). This feature is sti…"
     },
     {
-      "repoId": "system-design-101",
-      "repoName": "System Design 101",
-      "sectionId": "data-guides-top-9-architectural-patterns-for-data-and-communication-flow-md",
-      "title": "Top 9 Architectural Patterns for Data and Communication Flow",
-      "snippet": "--- title: \"Top 9 Architectural Patterns for Data and Communication Flow\" description: \"Explore 9 key architectural patterns for efficient data and communication.\" image: \"https://assets.bytebytego.com/diagrams/0387-top-9-system-integrations.png\" created…"
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-design-nixl-kv-cache-lease-md",
+      "title": "Nixl Kv Cache Lease",
+      "snippet": "# NIXL KV Cache Lease Renewal In disaggregated prefill/decode deployments, the Prefill instance (P) must hold KV cache blocks in GPU memory after completing a prefill, waiting for the Decode instance…"
+    }
+  ],
+  "speculative-decoding": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-speculative-decoding-readme-md",
+      "title": "Speculative Decoding",
+      "snippet": "# Speculative Decoding This document shows how to use [Speculative Decoding](https://arxiv.org/pdf/2302.01318) with vLLM to reduce inter-token latency under medium-to-low QPS (query per second), memory…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-speculative-decoding-dynamic-speculative-decoding-md",
+      "title": "Dynamic Speculative Decoding",
+      "snippet": "# Dynamic Speculative Decoding ## Why is Dynamic SD needed? SD methods need to verify K tokens for each sequence during decoding. As BS increases, the effective BS becomes BS\\*K which increases the compute re…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "rust-src-bench-readme-md-speed-bench-for-speculative-decoding-evaluation-auto-downloads-cached",
+      "title": "Speed Bench for Speculative Decoding Evaluation (auto Downloads, Cached)",
+      "snippet": "# SPEED-Bench for speculative decoding evaluation (auto-downloads, cached) vllm-bench \\ --backend openai-chat --base-url http://127.0.0.1:8000 --model <model-name> \\ --dataset-name speed-bench --speed-bench-config…"
+    }
+  ],
+  "gpu-utilization": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-configuration-optimization-md-disable-the-cache-cpu-resources-for-gpu-deployments",
+      "title": "Cpu Resources for Gpu Deployments",
+      "snippet": "…reaming token responses use CPU cycles If you observe that GPU utilization is lower than expected, CPU contention may be the bottleneck. Increasing the number of available CPU cores and even the clock speed can significantly improve end-to-end performance.…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-nixl-connector-usage-md-1st-gpu-as-prefiller",
+      "title": "1 St Gpu as Prefiller",
+      "snippet": "# 1st GPU as prefiller CUDA_VISIBLE_DEVICES=0 \\ UCX_NET_DEVICES=all \\ VLLM_NIXL_SIDE_CHANNEL_PORT=5600 \\ vllm serve Qwen/Qwen3-0.6B \\ --port 8100 \\ --enforce-eager \\ --kv-transfer-config '{\"kv_c…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-nixl-connector-usage-md-2nd-gpu-as-decoder",
+      "title": "2 Nd Gpu as Decoder",
+      "snippet": "# 2nd GPU as decoder CUDA_VISIBLE_DEVICES=1 \\ UCX_NET_DEVICES=all \\ VLLM_NIXL_SIDE_CHANNEL_PORT=5601 \\ vllm serve Qwen/Qwen3-0.6B \\ --port 8200 \\ --enforce-eager \\ --kv-transfer-config '{\"kv_con…"
+    }
+  ],
+  "inference-hardware": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-multimodal-inputs-md-example-explicitly-use-the-recommended-2-hardware-decoders",
+      "title": "Example: Explicitly Use the Recommended 2 Hardware Decoders",
+      "snippet": "# Example: explicitly use the recommended 2 hardware decoders vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct \\ --media-io-kwargs '{\"video\": {\"backend\": \"pynvvideocodec\", \"hw_decoders\": 2}}' ``` #### Vid…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-usage-troubleshooting-md-incorrect-hardware-driver",
+      "title": "Incorrect Hardware Driver",
+      "snippet": "## Incorrect hardware/driver If GPU/CPU communication cannot be established, you can use the following Python script and follow the instructions below to confirm whether the GPU/CPU communication is…"
+    }
+  ],
+  "mcp-integrations": [
+    {
+      "repoId": "model-context-protocol",
+      "repoName": "Model Context Protocol",
+      "sectionId": "blog-content-posts-2025-07-31-governance-for-mcp-md",
+      "title": "2025 07 31 Governance for Mcp",
+      "snippet": "--- title: \"Building to Last: A New Governance Model for MCP\" date: \"2025-07-31T00:00:00Z\" description: \"Introducing MCP's formal governance model: Specification Enhancement Proposals (SEPs), a mainta…"
+    },
+    {
+      "repoId": "model-context-protocol",
+      "repoName": "Model Context Protocol",
+      "sectionId": "blog-content-posts-2025-09-08-mcp-registry-preview-md",
+      "title": "2025 09 08 Mcp Registry Preview",
+      "snippet": "--- title: Introducing the MCP Registry date: \"2025-09-08T00:00:00Z\" description: \"Launching the MCP Registry in preview: an open catalog and API for discovering publicly available MCP servers.\" autho…"
+    },
+    {
+      "repoId": "model-context-protocol",
+      "repoName": "Model Context Protocol",
+      "sectionId": "blog-content-posts-2025-09-26-mcp-next-version-update-md",
+      "title": "2025 09 26 Mcp Next Version Update",
+      "snippet": "--- title: Update on the Next MCP Protocol Release date: \"2025-09-26T10:00:00-08:00\" draft: false description: An update on the timeline and priorities for the next Model Context Protocol specificatio…"
+    }
+  ],
+  "agent-communication-interfaces": [
+    {
+      "repoId": "model-context-protocol",
+      "repoName": "Model Context Protocol",
+      "sectionId": "seps-1865-mcp-apps-interactive-user-interfaces-for-mcp-md",
+      "title": "1865 Mcp Apps Interactive User Interfaces for Mcp",
+      "snippet": "# SEP-1865: MCP Apps - Interactive User Interfaces for MCP - **Status**: Final - **Type**: Extensions Track - **Created**: 2025-11-21 - **Author(s)**: Ido Salomon (@idosal), Liad Yosef (@liadyosef),…"
+    }
+  ],
+  "coding-agent-benchmarks": [
+    {
+      "repoId": "lm-eval-harness",
+      "repoName": "LM Evaluation Harness",
+      "sectionId": "lm-eval-tasks-benchmarks-readme-md",
+      "title": "Benchmarks",
+      "snippet": "### Changelog - 2025-Mar-17 OpenLLM v2: Fixed few-shot split to correctly use train set for arc_challenge.…"
+    },
+    {
+      "repoId": "lm-eval-harness",
+      "repoName": "LM Evaluation Harness",
+      "sectionId": "lm-eval-tasks-tinybenchmarks-readme-md",
+      "title": "Tiny Benchmarks",
+      "snippet": "# tinyBenchmarks ### Paper Title: `tinyBenchmarks: evaluating LLMs with fewer examples` Abstract: https://arxiv.org/abs/2402.14992 The versatility of large language models (LLMs) led to the creati…"
+    }
+  ],
+  "static-dynamic-analysis": [
+    {
+      "repoId": "missing-semester",
+      "repoName": "The Missing Semester (MIT)",
+      "sectionId": "2020-debugging-profiling-md-on-macos-static-analysis",
+      "title": "Static Analysis",
+      "snippet": "## Static Analysis For some issues you do not need to run any code. For example, just by carefully looking at a piece of code you could realize that your loop variable is shadowing an already existin…"
+    }
+  ],
+  "dependency-blast-radius": [
+    {
+      "repoId": "missing-semester",
+      "repoName": "The Missing Semester (MIT)",
+      "sectionId": "2026-shipping-code-md-dependencies-environments",
+      "title": "Dependencies & Environments",
+      "snippet": "# Dependencies & Environments In modern software development, layers of abstraction are ubiquitous. Programs naturally offload logic to other libraries or services. However, this introduces a _depend…"
+    }
+  ],
+  "automated-debugging-remediation": [
+    {
+      "repoId": "missing-semester",
+      "repoName": "The Missing Semester (MIT)",
+      "sectionId": "2020-debugging-profiling-md",
+      "title": "Debugging Profiling",
+      "snippet": "--- layout: lecture title: \"Debugging and Profiling\" description: > Learn how to debug programs using logging, debuggers, and static analysis, and how to profile code for performance. thumbnail: /st…"
+    },
+    {
+      "repoId": "missing-semester",
+      "repoName": "The Missing Semester (MIT)",
+      "sectionId": "2020-debugging-profiling-md-debugging",
+      "title": "Debugging",
+      "snippet": "# Debugging…"
+    },
+    {
+      "repoId": "missing-semester",
+      "repoName": "The Missing Semester (MIT)",
+      "sectionId": "2020-debugging-profiling-md-debugging-printf-debugging-and-logging",
+      "title": "Printf Debugging and Logging",
+      "snippet": "## Printf debugging and Logging \"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements\" — Brian Kernighan, _Unix for Beginners_. A first approa…"
     }
   ]
 }

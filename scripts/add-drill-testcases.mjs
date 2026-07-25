@@ -12,14 +12,109 @@ const DRILLS_PATH = path.join(__dirname, '../src/data/drills.json');
 
 const DESIGN_VALIDATOR = `function validateOutline(o, keys) {
   if (!o || typeof o !== 'object') return false;
-  return keys.every(k => o[k] != null && String(o[k]).trim().length >= 15);
+  const seen = new Set();
+  for (const key of keys) {
+    const value = o[key];
+    if (typeof value !== 'string') return false;
+    const text = value.trim();
+    if (text.length < 40 || text.split(/\\s+/).length < 6) return false;
+    if (seen.has(text.toLowerCase())) return false;
+    seen.add(text.toLowerCase());
+  }
+  return true;
 }`;
 
-const STAR_VALIDATOR = `function validateStar(s) {
-  const keys = ['situation','task','action','result'];
-  if (!s || typeof s !== 'object') return false;
-  if (!keys.every(k => s[k] && String(s[k]).trim().length >= 40)) return false;
-  return /\\d/.test(String(s.result));
+const STAR_VALIDATOR = `function starWords(v) {
+  return String(v == null ? '' : v).toLowerCase().match(/[a-z][a-z'-]*/g) || [];
+}
+function starProse(v, minWords) {
+  if (typeof v !== 'string') return false;
+  const w = starWords(v);
+  return w.length >= minWords && new Set(w).size >= Math.ceil(minWords * 0.7);
+}
+function starNormal(v) {
+  return String(v).trim().toLowerCase().replace(/\\s+/g, ' ');
+}
+/**
+ * Structural grader for a STAR story. It cannot judge whether the story is
+ * GOOD — that is why these drills stay 'outline-check' in contentQuality.ts.
+ * It can refuse a stub: it reads OWN enumerable properties (a get-trap Proxy
+ * exposes none), demands four mutually distinct sections of varied prose, and
+ * cross-checks a numeric metric against the words of the result paragraph.
+ */
+function validateStar(story, spec) {
+  spec = spec || {};
+  var SECTIONS = ['situation', 'task', 'action', 'result'];
+  if (!story || typeof story !== 'object' || Array.isArray(story)) return 'return a plain object literal';
+  var own = Object.keys(story);
+  for (var i = 0; i < SECTIONS.length; i++) {
+    var key = SECTIONS[i];
+    if (own.indexOf(key) === -1) return 'missing own property: ' + key;
+    if (!starProse(story[key], 20)) return key + ': needs 20+ words of varied prose';
+  }
+  var seen = new Set();
+  for (var j = 0; j < SECTIONS.length; j++) {
+    var text = starNormal(story[SECTIONS[j]]);
+    if (seen.has(text)) return 'the four sections must not repeat the same text';
+    seen.add(text);
+  }
+  var len = function (k) { return starWords(story[k]).length; };
+  var total = SECTIONS.reduce(function (n, k) { return n + len(k); }, 0);
+  if (total < 150) return 'the whole story is ' + total + ' words; write at least 150';
+  if (SECTIONS.some(function (k) { return k !== 'action' && len(k) >= len('action'); }))
+    return 'action must be the longest section';
+  var metric = story.metric;
+  if (!metric || typeof metric !== 'object' || Array.isArray(metric))
+    return 'add metric: { name, unit, before, after }';
+  var mk = Object.keys(metric);
+  var need = ['name', 'unit', 'before', 'after'];
+  for (var m = 0; m < need.length; m++) if (mk.indexOf(need[m]) === -1) return 'metric.' + need[m] + ' is missing';
+  if (!Number.isFinite(metric.before) || !Number.isFinite(metric.after))
+    return 'metric.before and metric.after must be numbers';
+  if (metric.before === metric.after) return 'metric.before and metric.after must differ';
+  if (starWords(metric.name).length < 1 || String(metric.unit).trim() === '')
+    return 'metric.name and metric.unit must be filled in';
+  var resultText = starNormal(story.result);
+  if (!starWords(metric.name).every(function (w) { return resultText.indexOf(w) !== -1; }))
+    return 'the result section must name the metric: ' + metric.name;
+  if (resultText.indexOf(String(metric.after).toLowerCase()) === -1)
+    return 'the result section must state metric.after: ' + metric.after;
+  var textReqs = spec.text || [];
+  for (var t = 0; t < textReqs.length; t++) {
+    var req = textReqs[t];
+    if (own.indexOf(req.key) === -1) return 'missing own property: ' + req.key;
+    if (!starProse(story[req.key], req.minWords)) return req.key + ': needs ' + req.minWords + '+ words of varied prose';
+    if (seen.has(starNormal(story[req.key]))) return req.key + ' must not repeat a STAR section verbatim';
+  }
+  var listReqs = spec.list || [];
+  for (var l = 0; l < listReqs.length; l++) {
+    var lr = listReqs[l];
+    var items = story[lr.key];
+    if (!Array.isArray(items) || items.length < lr.minItems) return lr.key + ': needs an array of ' + lr.minItems + '+ entries';
+    if (!items.every(function (it) { return starProse(it, lr.minWords); })) return lr.key + ': each entry needs ' + lr.minWords + '+ words';
+    if (new Set(items.map(starNormal)).size !== items.length) return lr.key + ': entries must be distinct';
+  }
+  var objReqs = spec.objectList || [];
+  for (var o = 0; o < objReqs.length; o++) {
+    var or = objReqs[o];
+    var rows = story[or.key];
+    if (!Array.isArray(rows) || rows.length < or.minItems) return or.key + ': needs an array of ' + or.minItems + '+ objects';
+    var labels = new Set();
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      if (!row || typeof row !== 'object' || Array.isArray(row)) return or.key + ': each entry must be an object';
+      var rk = Object.keys(row);
+      for (var f = 0; f < or.fields.length; f++) {
+        var field = or.fields[f];
+        if (rk.indexOf(field) === -1) return or.key + ': each entry needs ' + field;
+        if (!starProse(row[field], or.minWords)) return or.key + '.' + field + ': needs ' + or.minWords + '+ words';
+      }
+      var label = starNormal(row[or.fields[0]]);
+      if (labels.has(label)) return or.key + ': entries must be distinct';
+      labels.add(label);
+    }
+  }
+  return true;
 }`;
 
 function designCase(keys) {
@@ -32,11 +127,11 @@ function designCase(keys) {
   ];
 }
 
-function starCase() {
+function starCase(spec) {
   return [
     {
       setup: STAR_VALIDATOR,
-      run: 'console.log(validateStar(starStory()));',
+      run: `console.log(validateStar(starStory(), ${JSON.stringify(spec)}));`,
       expect: 'true',
     },
   ];
@@ -1347,20 +1442,33 @@ for (const [id, keys] of Object.entries(DESIGN_KEYS)) {
 }
 
 // --- Behavioral STAR drills ---
-const STAR_IDS = [
-  'star-leadership',
-  'star-conflict',
-  'star-tough-decision',
-  'star-cross-team',
-  'star-failure',
-  'star-communication',
-  'star-prioritization',
-  'star-innovation',
-  'star-customer-feedback',
-  'star-ownership',
-];
-for (const id of STAR_IDS) {
-  TEST_CASES[id] = starCase();
+// Each drill also demands the field its own prompt asks for, on top of the four
+// STAR sections. The grader is structural — see contentQuality.ts, these stay
+// 'outline-check'.
+/** @type {Record<string, object>} */
+const STAR_SPECS = {
+  'star-leadership': { text: [{ key: 'influenceTactic', minWords: 15 }] },
+  'star-conflict': { text: [{ key: 'theirCase', minWords: 15 }] },
+  'star-tough-decision': { text: [{ key: 'earlyWarningSignal', minWords: 12 }] },
+  'star-cross-team': { list: [{ key: 'alignmentSteps', minItems: 3, minWords: 5 }] },
+  'star-failure': { text: [{ key: 'behaviorChange', minWords: 15 }] },
+  'star-communication': { text: [{ key: 'analogy', minWords: 12 }] },
+  'star-prioritization': { list: [{ key: 'cutList', minItems: 3, minWords: 4 }] },
+  'star-innovation': {
+    objectList: [
+      {
+        key: 'rejectedAlternatives',
+        minItems: 2,
+        fields: ['option', 'whyInsufficient'],
+        minWords: 6,
+      },
+    ],
+  },
+  'star-customer-feedback': { list: [{ key: 'generalizationEvidence', minItems: 2, minWords: 5 }] },
+  'star-ownership': { text: [{ key: 'escalation', minWords: 12 }] },
+};
+for (const [id, spec] of Object.entries(STAR_SPECS)) {
+  TEST_CASES[id] = starCase(spec);
 }
 
 function main() {
