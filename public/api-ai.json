@@ -1,6 +1,6 @@
 {
   "name": "SWE Interview Prep",
-  "version": "1",
+  "version": "2",
   "url": "https://learn.significanthobbies.com",
   "llms": "https://learn.significanthobbies.com/llms.txt",
   "llmsFull": "https://learn.significanthobbies.com/llms-full.txt",
@@ -10,17 +10,45 @@
     "suffix": ".md",
     "negotiation": true
   },
+  "curriculum": {
+    "counts": {
+      "tracks": 18,
+      "concepts": 222,
+      "roadmaps": 24,
+      "drills": 265,
+      "reviewQuestions": 327,
+      "artifacts": 40,
+      "coverageCategories": 11,
+      "coverageTopics": 96
+    },
+    "html": "https://learn.significanthobbies.com/curriculum/",
+    "markdown": "https://learn.significanthobbies.com/curriculum/catalog.md",
+    "json": "https://learn.significanthobbies.com/curriculum/catalog.json"
+  },
   "surfaces": [
     {
       "id": "home",
       "url": "https://learn.significanthobbies.com/",
       "md": "https://learn.significanthobbies.com/index.md",
       "kind": "spa",
-      "description": "Product home"
+      "description": "Product home and learning-loop overview"
+    },
+    {
+      "id": "curriculum",
+      "url": "https://learn.significanthobbies.com/curriculum/",
+      "md": "https://learn.significanthobbies.com/curriculum/catalog.md",
+      "kind": "collection",
+      "description": "18 tracks, 222 concepts, and 24 roadmaps as static public pages"
+    },
+    {
+      "id": "curriculum-json",
+      "url": "https://learn.significanthobbies.com/curriculum/catalog.json",
+      "kind": "data",
+      "description": "Stable IDs, counts, relationships, and public curriculum URLs"
     }
   ],
   "auth": {
     "public": true,
-    "notes": "Auth-walled app routes are not agent-indexed unless listed here."
+    "notes": "Public curriculum is agent-indexed. Progress, notes, Reader saves, and review answers remain private."
   }
 }

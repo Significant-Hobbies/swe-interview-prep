@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IVF (Inverted File) | SWE Prep</title>
+    <meta name="description" content="Cluster vectors with k-means, then search only the nearest cells (nprobe).">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ivf.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="IVF (Inverted File) | SWE Prep">
+    <meta property="og:description" content="Cluster vectors with k-means, then search only the nearest cells (nprobe).">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ivf.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IVF (Inverted File) | SWE Prep">
+    <meta name="twitter:description" content="Cluster vectors with k-means, then search only the nearest cells (nprobe).">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"IVF (Inverted File)","description":"Cluster vectors with k-means, then search only the nearest cells (nprobe).","url":"https://learn.significanthobbies.com/curriculum/concepts/ivf.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"IVF (Inverted File)","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · advanced</p>
+    <h1>IVF (Inverted File)</h1>
+    <p class="lede">Cluster vectors with k-means, then search only the nearest cells (nprobe).</p>
+    <div class="pills"><span>vector-db</span><span>ann</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>IVF partitions the space into Voronoi cells via k-means. A query is matched to its nearest cells (nprobe of them) and only those vectors are scanned — trading recall for a big speedup.</p>
+    </section>
+
+    <section>
+      <h2>How to study IVF (Inverted File)</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Pinecone — IVF index to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare IVF (Inverted File) with HNSW, Product Quantization. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete IVF nprobe vs recall and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>FAISS IVF indexes, often combined with product quantization (IVF-PQ).</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Setting nprobe=1 and wondering why recall is poor</li><li>Too few or too many centroids for the dataset size</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.pinecone.io/learn/series/faiss/vector-indexes/" rel="noreferrer">Pinecone — IVF index</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>IVF nprobe vs recall</h3>
+          <p>100k vectors, 1000 centroids, nprobe=1 recalls 70%, nprobe=8 recalls 92%. Latency 2ms→9ms. Pick nprobe for prod if SLA is 5ms and recall target 85%.</p>
+          <p><strong>Expected evidence:</strong> nprobe=8 exceeds recall but misses SLA; try nprobe=4 and measure curve.</p>
+          <a href="/drills/ivf-nprobe-recall">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What happens to recall and latency as you increase nprobe in IVF?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li><li><a href="/curriculum/concepts/product-quantization.html">Product Quantization</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

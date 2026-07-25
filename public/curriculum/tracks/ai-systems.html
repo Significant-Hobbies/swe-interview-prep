@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Systems | SWE Prep</title>
+    <meta name="description" content="Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="AI Systems | SWE Prep">
+    <meta property="og:description" content="Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Systems | SWE Prep">
+    <meta name="twitter:description" content="Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"AI Systems","description":"Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.","url":"https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html","numberOfItems":32,"hasPart":[{"@type":"LearningResource","name":"RAG","url":"https://learn.significanthobbies.com/curriculum/concepts/rag.html"},{"@type":"LearningResource","name":"Chunking","url":"https://learn.significanthobbies.com/curriculum/concepts/chunking.html"},{"@type":"LearningResource","name":"Context Packing","url":"https://learn.significanthobbies.com/curriculum/concepts/context-packing.html"},{"@type":"LearningResource","name":"Structured Outputs","url":"https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html"},{"@type":"LearningResource","name":"Tool Calling","url":"https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html"},{"@type":"LearningResource","name":"Agent Loops","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html"},{"@type":"LearningResource","name":"Model Routing","url":"https://learn.significanthobbies.com/curriculum/concepts/model-routing.html"},{"@type":"LearningResource","name":"Prompt & Version Logging","url":"https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html"},{"@type":"LearningResource","name":"LLM Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html"},{"@type":"LearningResource","name":"ML Math Foundations","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-math.html"},{"@type":"LearningResource","name":"Gradient Descent","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html"},{"@type":"LearningResource","name":"Backpropagation","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html"},{"@type":"LearningResource","name":"Softmax & Cross-Entropy","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html"},{"@type":"LearningResource","name":"AdamW Optimizer","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html"},{"@type":"LearningResource","name":"Tokenization (LLM)","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html"},{"@type":"LearningResource","name":"Language Modeling","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling.html"},{"@type":"LearningResource","name":"Sampling & Decoding","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html"},{"@type":"LearningResource","name":"Embeddings (Transformer)","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html"},{"@type":"LearningResource","name":"Self-Attention","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html"},{"@type":"LearningResource","name":"Multi-Head Attention","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html"},{"@type":"LearningResource","name":"Transformer Block","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html"},{"@type":"LearningResource","name":"Training & Debugging","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-training.html"},{"@type":"LearningResource","name":"Checkpointing","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html"},{"@type":"LearningResource","name":"LoRA & PEFT","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html"},{"@type":"LearningResource","name":"RL Alignment (GRPO & Policy Gradient)","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html"},{"@type":"LearningResource","name":"Style Data Engineering","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html"},{"@type":"LearningResource","name":"Browser ML Runtime","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html"},{"@type":"LearningResource","name":"WebGPU Compute","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html"},{"@type":"LearningResource","name":"Model Evaluation","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html"},{"@type":"LearningResource","name":"Model Pre-training","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining.html"},{"@type":"LearningResource","name":"Model Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html"},{"@type":"LearningResource","name":"Open-Weight Models","url":"https://learn.significanthobbies.com/curriculum/concepts/open-weight-models.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 32 concepts</p>
+    <h1>AI Systems</h1>
+    <p class="lede">Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 32 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For AI Systems, use the track description as the boundary: learn enough detail to reason clearly about practical ai engineering: llm apps, rag, chunking, tool calling, agents, evals, and model/transformer foundations.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with ML Math Foundations, Tokenization (LLM) to establish the basic vocabulary. Continue through the core concepts by alternating explanation with an executable drill. Treat Context Packing, Agent Loops, Self-Attention, Multi-Head Attention as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/rag.html">RAG</a></h3>
+        <p>Retrieval-Augmented Generation: ground an LLM answer in retrieved context.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/chunking.html">Chunking</a></h3>
+        <p>Splitting documents into retrievable units that preserve meaning.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/context-packing.html">Context Packing</a></h3>
+        <p>Ordering and budgeting retrieved context within the model&#39;s window.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></h3>
+        <p>Forcing LLM output into a validated JSON schema.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/tool-calling.html">Tool Calling</a></h3>
+        <p>Letting an LLM invoke functions/APIs via structured calls.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/agent-loops.html">Agent Loops</a></h3>
+        <p>The plan → act → observe loop, with memory and stopping conditions.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/model-routing.html">Model Routing</a></h3>
+        <p>Sending each request to the cheapest model that can handle it.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/prompt-versioning.html">Prompt &amp; Version Logging</a></h3>
+        <p>Treating prompts as versioned artifacts with logged inputs/outputs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></h3>
+        <p>Measuring LLM output quality with datasets, graders, and LLM-as-judge.</p>
+      </article><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/ml-math.html">ML Math Foundations</a></h3>
+        <p>Vectors, matrices, dot products, matmul, shapes.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-gradient-descent.html">Gradient Descent</a></h3>
+        <p>Loss surfaces, learning rate, SGD steps.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-backprop.html">Backpropagation</a></h3>
+        <p>Chain rule, autograd, forward/backward passes.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-softmax-xent.html">Softmax &amp; Cross-Entropy</a></h3>
+        <p>Logits to probabilities, negative log-likelihood loss.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-adamw.html">AdamW Optimizer</a></h3>
+        <p>Moments, weight decay, gradient clipping.</p>
+      </article><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/ml-tokenization.html">Tokenization (LLM)</a></h3>
+        <p>Byte-level, char-level, BPE, vocab design.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-language-modeling.html">Language Modeling</a></h3>
+        <p>Next-token prediction, context windows, perplexity.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></h3>
+        <p>Temperature, top-k, greedy decoding.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-embeddings.html">Embeddings (Transformer)</a></h3>
+        <p>Token &amp; position embeddings, tied weights.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-self-attention.html">Self-Attention</a></h3>
+        <p>Q/K/V, scaled dot-product, causal masking.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-multi-head.html">Multi-Head Attention</a></h3>
+        <p>Parallel heads, head_dim split, output projection.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-transformer-block.html">Transformer Block</a></h3>
+        <p>Pre-LayerNorm, residuals, MLP, GELU.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-training.html">Training &amp; Debugging</a></h3>
+        <p>Init, NaNs, overfit tests, gradient checks.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-checkpointing.html">Checkpointing</a></h3>
+        <p>Weights + optimizer state, resume, dataset manifests.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-lora.html">LoRA &amp; PEFT</a></h3>
+        <p>Frozen base, low-rank adapters, rank/alpha.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-rl-alignment.html">RL Alignment (GRPO &amp; Policy Gradient)</a></h3>
+        <p>Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-data-engineering.html">Style Data Engineering</a></h3>
+        <p>Cleaning, dedup, JSONL tasks, memorization tests.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-browser-runtime.html">Browser ML Runtime</a></h3>
+        <p>Web Workers, WASM, OPFS, TypedArrays.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-webgpu.html">WebGPU Compute</a></h3>
+        <p>WGSL, compute kernels, matmul, CPU parity.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></h3>
+        <p>Held-out loss, baselines, hallucination, leakage.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-pretraining.html">Model Pre-training</a></h3>
+        <p>Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/model-quantization.html">Model Quantization</a></h3>
+        <p>Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/open-weight-models.html">Open-Weight Models</a></h3>
+        <p>Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Backend | SWE Prep</title>
+    <meta name="description" content="Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/backend.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Backend | SWE Prep">
+    <meta property="og:description" content="Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/backend.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Backend | SWE Prep">
+    <meta name="twitter:description" content="Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Backend","description":"Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.","url":"https://learn.significanthobbies.com/curriculum/tracks/backend.html","numberOfItems":13,"hasPart":[{"@type":"LearningResource","name":"HTTP Lifecycle","url":"https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html"},{"@type":"LearningResource","name":"API Keys","url":"https://learn.significanthobbies.com/curriculum/concepts/api-keys.html"},{"@type":"LearningResource","name":"Rate Limiting","url":"https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html"},{"@type":"LearningResource","name":"Idempotency","url":"https://learn.significanthobbies.com/curriculum/concepts/idempotency.html"},{"@type":"LearningResource","name":"Retries & DLQ","url":"https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html"},{"@type":"LearningResource","name":"Webhooks","url":"https://learn.significanthobbies.com/curriculum/concepts/webhooks.html"},{"@type":"LearningResource","name":"Background Jobs","url":"https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html"},{"@type":"LearningResource","name":"Caching","url":"https://learn.significanthobbies.com/curriculum/concepts/caching.html"},{"@type":"LearningResource","name":"Message Queues","url":"https://learn.significanthobbies.com/curriculum/concepts/message-queues.html"},{"@type":"LearningResource","name":"Observability","url":"https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html"},{"@type":"LearningResource","name":"API Design","url":"https://learn.significanthobbies.com/curriculum/concepts/api-design.html"},{"@type":"LearningResource","name":"Auth Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html"},{"@type":"LearningResource","name":"Payments","url":"https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 13 concepts</p>
+    <h1>Backend</h1>
+    <p class="lede">Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 13 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Backend, use the track description as the boundary: learn enough detail to reason clearly about production backend strength: http, api design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with HTTP Lifecycle to establish the basic vocabulary. Continue through the core concepts by alternating explanation with an executable drill. Use the related concepts and roadmap milestones to integrate the pieces into a complete system.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/application-engineering-12w.html">12-Week Application Engineering</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/http-lifecycle.html">HTTP Lifecycle</a></h3>
+        <p>DNS → TCP/TLS → request → response: status codes, headers, keep-alive.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/api-keys.html">API Keys</a></h3>
+        <p>Issuing, hashing, scoping, and rotating keys for machine clients.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/rate-limiting.html">Rate Limiting</a></h3>
+        <p>Token bucket, leaky bucket, sliding window.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/idempotency.html">Idempotency</a></h3>
+        <p>Idempotency keys and dedup windows for safe retries of mutations.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></h3>
+        <p>Backoff + jitter, poison messages, dead-letter queues.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/webhooks.html">Webhooks</a></h3>
+        <p>Outbound event delivery: signing, retries, idempotent receivers.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/background-jobs.html">Background Jobs</a></h3>
+        <p>Offloading slow work to workers: scheduling, concurrency, visibility.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/caching.html">Caching</a></h3>
+        <p>Cache-aside, write-through, eviction policies.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/message-queues.html">Message Queues</a></h3>
+        <p>Kafka, SQS, exactly-once vs at-least-once.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/monitoring-analytics.html">Observability</a></h3>
+        <p>Metrics, traces, logs, SLOs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/api-design.html">API Design</a></h3>
+        <p>REST, gRPC, versioning, pagination.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/auth-systems.html">Auth Systems</a></h3>
+        <p>OAuth2, JWT, session, RBAC.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ecommerce-payments.html">Payments</a></h3>
+        <p>Idempotency, sagas, double-entry.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

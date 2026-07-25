@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distributed Systems | SWE Prep</title>
+    <meta name="description" content="Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Distributed Systems | SWE Prep">
+    <meta property="og:description" content="Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Distributed Systems | SWE Prep">
+    <meta name="twitter:description" content="Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Distributed Systems","description":"Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.","url":"https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html","numberOfItems":11,"hasPart":[{"@type":"LearningResource","name":"Caching","url":"https://learn.significanthobbies.com/curriculum/concepts/caching.html"},{"@type":"LearningResource","name":"Message Queues","url":"https://learn.significanthobbies.com/curriculum/concepts/message-queues.html"},{"@type":"LearningResource","name":"Sharding","url":"https://learn.significanthobbies.com/curriculum/concepts/sharding.html"},{"@type":"LearningResource","name":"Replication","url":"https://learn.significanthobbies.com/curriculum/concepts/replication.html"},{"@type":"LearningResource","name":"CAP & Consistency Models","url":"https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html"},{"@type":"LearningResource","name":"Consensus","url":"https://learn.significanthobbies.com/curriculum/concepts/consensus.html"},{"@type":"LearningResource","name":"Distributed Infra","url":"https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html"},{"@type":"LearningResource","name":"Real-time Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html"},{"@type":"LearningResource","name":"Event Streaming & Kafka","url":"https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka.html"},{"@type":"LearningResource","name":"Distributed Workflows & Temporal","url":"https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html"},{"@type":"LearningResource","name":"Distributed Failure Recovery","url":"https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 11 concepts</p>
+    <h1>Distributed Systems</h1>
+    <p class="lede">Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 11 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Distributed Systems, use the track description as the boundary: learn enough detail to reason clearly about coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with the core concepts at the top of the list and write a one-paragraph mechanism note for each. Continue through the core concepts by alternating explanation with an executable drill. Treat Sharding, Replication, CAP &amp; Consistency Models, Consensus as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/caching.html">Caching</a></h3>
+        <p>Cache-aside, write-through, eviction policies.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/message-queues.html">Message Queues</a></h3>
+        <p>Kafka, SQS, exactly-once vs at-least-once.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/sharding.html">Sharding</a></h3>
+        <p>Range/hash/geo partitioning.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/replication.html">Replication</a></h3>
+        <p>Leader-follower, multi-leader, quorum.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></h3>
+        <p>Strong/eventual/causal, PACELC.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/consensus.html">Consensus</a></h3>
+        <p>Raft, Paxos, leader election.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></h3>
+        <p>Service discovery, orchestration.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></h3>
+        <p>WebSockets, presence, delivery.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/event-streaming-kafka.html">Event Streaming &amp; Kafka</a></h3>
+        <p>Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/distributed-workflows-temporal.html">Distributed Workflows &amp; Temporal</a></h3>
+        <p>Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/distributed-failure-recovery.html">Distributed Failure Recovery</a></h3>
+        <p>Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

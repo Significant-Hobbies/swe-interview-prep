@@ -203,9 +203,9 @@
         {
           "title": "Phase 2 — Disk-oriented storage engines",
           "goal": "Pages, B+trees, WAL, buffer pools, recovery.",
-          "concepts": ["b-tree", "wal", "storage-retrieval"],
-          "drills": [],
-          "artifacts": []
+          "concepts": ["b-tree", "wal", "storage-retrieval", "transaction-processing"],
+          "drills": ["practice-transaction-processing"],
+          "artifacts": ["toy-wal"]
         },
         {
           "title": "Phase 3 — LSM and SSD-first design",
@@ -217,16 +217,16 @@
         {
           "title": "Phase 4-5 — Columnar execution + ClickHouse",
           "goal": "Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.",
-          "concepts": ["columnar-storage", "secondary-index"],
-          "drills": [],
-          "artifacts": []
+          "concepts": ["columnar-storage", "secondary-index", "query-execution-optimization"],
+          "drills": ["practice-query-execution-optimization"],
+          "artifacts": ["object-storage-index"]
         },
         {
           "title": "Phase 6 — Cloud warehouses",
           "goal": "Storage/compute separation, shuffle, slots/warehouses, result caching.",
-          "concepts": ["object-storage", "sharding"],
-          "drills": [],
-          "artifacts": []
+          "concepts": ["object-storage", "sharding", "warehouses-lakehouses"],
+          "drills": ["practice-warehouses-lakehouses"],
+          "artifacts": ["object-storage-index"]
         },
         {
           "title": "Phase 7 — Search + vector DBs",
@@ -858,6 +858,570 @@
           "artifacts": []
         }
       ]
+    },
+    {
+      "id": "systems-foundations-12w",
+      "title": "12-Week Systems Foundations",
+      "horizon": "90d",
+      "goal": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.",
+      "description": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["systems-foundations"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["operating-system-mechanics", "compute-memory-storage-hierarchy"],
+          "drills": [
+            "practice-operating-system-mechanics",
+            "practice-compute-memory-storage-hierarchy"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": ["network-protocol-engineering", "concurrency-design"],
+          "drills": ["practice-network-protocol-engineering", "design-bank-account-locking"],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": ["runtime-performance-engineering", "security-isolation-boundaries"],
+          "drills": [
+            "practice-runtime-performance-engineering",
+            "practice-security-isolation-boundaries"
+          ],
+          "artifacts": ["synthesize-systems-foundations-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "infrastructure-platforms-12w",
+      "title": "12-Week Infrastructure & Platforms",
+      "horizon": "90d",
+      "goal": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.",
+      "description": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["infrastructure-platforms"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": [
+            "cloud-infrastructure",
+            "containers-kubernetes",
+            "cicd-developer-environments"
+          ],
+          "drills": [
+            "practice-cloud-infrastructure",
+            "practice-containers-kubernetes",
+            "practice-cicd-developer-environments"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "platform-scheduling-orchestration",
+            "infrastructure-automation",
+            "background-jobs"
+          ],
+          "drills": [
+            "practice-platform-scheduling-orchestration",
+            "practice-infrastructure-automation",
+            "job-at-least-once"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "reliability-fault-tolerance",
+            "retries-dlq",
+            "monitoring-analytics",
+            "opentelemetry-observability",
+            "sandbox-execution-environments"
+          ],
+          "drills": [
+            "practice-reliability-fault-tolerance",
+            "implement-backoff-jitter",
+            "slo-error-budget",
+            "practice-opentelemetry-observability",
+            "practice-sandbox-execution-environments"
+          ],
+          "artifacts": ["synthesize-infrastructure-platforms-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "distributed-systems-12w",
+      "title": "12-Week Distributed Systems",
+      "horizon": "90d",
+      "goal": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.",
+      "description": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["distributed-systems"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["consensus", "replication", "sharding", "cap-theorem"],
+          "drills": [
+            "design-leader-election",
+            "replication-lag-read",
+            "shard-key-choice",
+            "cap-partition-choice"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": ["message-queues", "event-streaming-kafka", "caching", "messaging-realtime"],
+          "drills": [
+            "queue-backpressure",
+            "practice-event-streaming-kafka",
+            "cache-stampede",
+            "design-chat-system"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "distributed-infra",
+            "distributed-workflows-temporal",
+            "distributed-failure-recovery"
+          ],
+          "drills": [
+            "design-rate-limiter",
+            "practice-distributed-workflows-temporal",
+            "practice-distributed-failure-recovery"
+          ],
+          "artifacts": ["synthesize-distributed-systems-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ai-models-training-12w",
+      "title": "12-Week AI Models & Training",
+      "horizon": "90d",
+      "goal": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.",
+      "description": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["ai-systems"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": [
+            "ml-math",
+            "ml-gradient-descent",
+            "ml-backprop",
+            "ml-softmax-xent",
+            "ml-tokenization",
+            "ml-language-modeling"
+          ],
+          "drills": [
+            "ml-dot-matmul-shapes",
+            "ml-sgd-step-quadratic",
+            "ml-chain-rule-gate",
+            "ml-softmax-cross-entropy",
+            "ml-bpe-merge-step",
+            "ml-perplexity-from-nll"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-adamw",
+            "ml-pretraining",
+            "ml-training",
+            "ml-checkpointing"
+          ],
+          "drills": [
+            "ml-sinusoidal-position",
+            "ml-scaled-dot-attention",
+            "ml-multi-head-split",
+            "ml-pre-norm-residual",
+            "ml-adamw-weight-decay",
+            "practice-ml-pretraining",
+            "ml-overfit-sanity-check",
+            "ml-checkpoint-resume"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "ml-lora",
+            "ml-rl-alignment",
+            "ml-data-engineering",
+            "model-quantization",
+            "open-weight-models",
+            "multimodal-models",
+            "ml-evaluation"
+          ],
+          "drills": [
+            "ml-lora-param-count",
+            "ml-grpo-group-advantage",
+            "ml-token-budget-estimate",
+            "practice-model-quantization",
+            "practice-open-weight-models",
+            "practice-multimodal-models",
+            "ml-eval-perplexity-vs-acc"
+          ],
+          "artifacts": ["synthesize-ai-models-training-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "inference-serving-12w",
+      "title": "12-Week Inference & Serving",
+      "horizon": "90d",
+      "goal": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.",
+      "description": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["inference-serving"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": [
+            "inference-engines",
+            "kv-cache-paged-attention",
+            "continuous-batching",
+            "model-routing"
+          ],
+          "drills": [
+            "practice-inference-engines",
+            "practice-kv-cache-paged-attention",
+            "practice-continuous-batching",
+            "route-by-query-cost"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "flashattention-kernels",
+            "speculative-decoding",
+            "gpu-utilization",
+            "inference-hardware"
+          ],
+          "drills": [
+            "practice-flashattention-kernels",
+            "practice-speculative-decoding",
+            "practice-gpu-utilization",
+            "practice-inference-hardware"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "inference-cost-latency",
+            "local-on-device-inference",
+            "ml-browser-runtime",
+            "ml-webgpu"
+          ],
+          "drills": [
+            "practice-inference-cost-latency",
+            "practice-local-on-device-inference",
+            "ml-wasm-linear-memory",
+            "ml-webgpu-buffer-alignment"
+          ],
+          "artifacts": ["synthesize-inference-serving-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "agent-systems-12w",
+      "title": "12-Week Agent Systems",
+      "horizon": "90d",
+      "goal": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.",
+      "description": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["agent-systems"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["tool-calling", "agent-loops", "agent-memory-context", "mcp-integrations"],
+          "drills": [
+            "build-tool-loop",
+            "agent-step-limit",
+            "practice-agent-memory-context",
+            "practice-mcp-integrations"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "multi-agent-coordination",
+            "agent-communication-interfaces",
+            "browser-computer-use-agents"
+          ],
+          "drills": [
+            "practice-multi-agent-coordination",
+            "practice-agent-communication-interfaces",
+            "practice-browser-computer-use-agents"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "durable-agent-execution",
+            "agent-permissions-sandboxing",
+            "long-running-scheduled-agents"
+          ],
+          "drills": [
+            "practice-durable-agent-execution",
+            "practice-agent-permissions-sandboxing",
+            "practice-long-running-scheduled-agents"
+          ],
+          "artifacts": ["synthesize-agent-systems-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ai-reliability-12w",
+      "title": "12-Week Evaluation & AI Reliability",
+      "horizon": "90d",
+      "goal": "Build an evidence-backed evaluation and observability system for models, tools, and agents.",
+      "description": "Build an evidence-backed evaluation and observability system for models, tools, and agents. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["ai-reliability"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": [
+            "llm-evals",
+            "ml-evaluation",
+            "coding-agent-benchmarks",
+            "tool-use-evaluations"
+          ],
+          "drills": [
+            "build-llm-eval",
+            "ml-eval-perplexity-vs-acc",
+            "practice-coding-agent-benchmarks",
+            "practice-tool-use-evaluations"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "prompt-versioning",
+            "ai-regression-testing",
+            "hallucination-failure-detection",
+            "quality-cost-latency-measurement"
+          ],
+          "drills": [
+            "prompt-version-diff",
+            "practice-ai-regression-testing",
+            "practice-hallucination-failure-detection",
+            "practice-quality-cost-latency-measurement"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "agent-observability",
+            "tracing-replay",
+            "evidence-backed-verification",
+            "human-review-systems"
+          ],
+          "drills": [
+            "practice-agent-observability",
+            "practice-tracing-replay",
+            "practice-evidence-backed-verification",
+            "practice-human-review-systems"
+          ],
+          "artifacts": ["synthesize-ai-reliability-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "developer-tools-12w",
+      "title": "12-Week Developer Tools & Code Intelligence",
+      "horizon": "90d",
+      "goal": "Build repository-aware tools that analyze, test, review, debug, and safely remediate code.",
+      "description": "Build repository-aware tools that analyze, test, review, debug, and safely remediate code. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["developer-tools"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["code-review-systems", "static-dynamic-analysis", "testing-infrastructure"],
+          "drills": [
+            "practice-code-review-systems",
+            "practice-static-dynamic-analysis",
+            "practice-testing-infrastructure"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "codebase-graphs",
+            "dependency-blast-radius",
+            "repository-intelligence",
+            "ide-cli-tooling"
+          ],
+          "drills": [
+            "practice-codebase-graphs",
+            "practice-dependency-blast-radius",
+            "practice-repository-intelligence",
+            "practice-ide-cli-tooling"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "coding-agent-systems",
+            "software-supply-chain-health",
+            "automated-debugging-remediation"
+          ],
+          "drills": [
+            "practice-coding-agent-systems",
+            "practice-software-supply-chain-health",
+            "practice-automated-debugging-remediation"
+          ],
+          "artifacts": ["synthesize-developer-tools-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "application-engineering-12w",
+      "title": "12-Week Application Engineering",
+      "horizon": "90d",
+      "goal": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.",
+      "description": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["application-engineering", "backend", "product"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["api-design", "web-mobile-engineering", "ux-interface-design"],
+          "drills": [
+            "design-paginated-api",
+            "practice-web-mobile-engineering",
+            "practice-ux-interface-design"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "real-time-application-engineering",
+            "messaging-realtime",
+            "game-design",
+            "interactive-2d-3d-systems"
+          ],
+          "drills": [
+            "practice-real-time-application-engineering",
+            "design-chat-system",
+            "design-online-game-server",
+            "practice-interactive-2d-3d-systems"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": ["product-analytics", "positioning", "landing-pages", "seo"],
+          "drills": [
+            "define-north-star-metric",
+            "draft-positioning-statement",
+            "critique-landing-page",
+            "audit-seo-onpage"
+          ],
+          "artifacts": ["synthesize-application-engineering-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "multimodal-spatial-12w",
+      "title": "12-Week Multimodal & Spatial Computing",
+      "horizon": "90d",
+      "goal": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.",
+      "description": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
+      "tracks": ["multimodal-spatial", "inference-serving"],
+      "milestones": [
+        {
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
+          "concepts": ["multimodal-models", "vision-models", "voice-audio-systems"],
+          "drills": [
+            "practice-multimodal-models",
+            "practice-vision-models",
+            "practice-voice-audio-systems"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 5-8 — Production systems and trade-offs",
+          "goal": "Design the production path, including resource, scale, safety, and operability trade-offs.",
+          "concepts": [
+            "pose-motion-tracking",
+            "image-video-generation",
+            "local-on-device-inference"
+          ],
+          "drills": [
+            "practice-pose-motion-tracking",
+            "practice-image-video-generation",
+            "practice-local-on-device-inference"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Weeks 9-12 — Reliability, verification, and synthesis",
+          "goal": "Test failure modes, measure outcomes, and ship the synthesis artifact.",
+          "concepts": [
+            "robotics-systems",
+            "spatial-interfaces",
+            "human-computer-interaction",
+            "ml-webgpu"
+          ],
+          "drills": [
+            "practice-robotics-systems",
+            "practice-spatial-interfaces",
+            "practice-human-computer-interaction",
+            "ml-webgpu-buffer-alignment"
+          ],
+          "artifacts": ["synthesize-multimodal-spatial-12w"]
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

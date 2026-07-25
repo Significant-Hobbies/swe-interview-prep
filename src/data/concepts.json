@@ -694,8 +694,8 @@
     {
       "id": "tool-calling",
       "name": "Tool Calling",
-      "tags": ["ai-systems", "agents"],
-      "roadmaps": [],
+      "tags": ["agent-systems", "ai-systems", "agents"],
+      "roadmaps": ["agent-systems-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["structured-outputs"],
@@ -718,13 +718,13 @@
           "type": "doc"
         }
       ],
-      "artifacts": []
+      "artifacts": ["synthesize-agent-systems-12w"]
     },
     {
       "id": "agent-loops",
       "name": "Agent Loops",
-      "tags": ["ai-systems", "agents"],
-      "roadmaps": ["ai-infra-12-month"],
+      "tags": ["agent-systems", "ai-systems", "agents"],
+      "roadmaps": ["ai-infra-12-month", "agent-systems-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["tool-calling"],
@@ -747,13 +747,13 @@
         }
       ],
       "drills": ["agent-step-limit"],
-      "artifacts": []
+      "artifacts": ["synthesize-agent-systems-12w"]
     },
     {
       "id": "model-routing",
       "name": "Model Routing",
-      "tags": ["ai-systems", "llm-apps"],
-      "roadmaps": ["ai-infra-12-month", "runtime", "swe-landscape"],
+      "tags": ["inference-serving", "ai-systems", "llm-apps"],
+      "roadmaps": ["ai-infra-12-month", "runtime", "swe-landscape", "inference-serving-12w"],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["structured-outputs"],
@@ -766,7 +766,7 @@
       ],
       "realWorldUsage": "Cost optimization in production LLM apps, the free-AI-first principle.",
       "projectApplications": ["sassmaker", "highsignal"],
-      "artifacts": ["model-router"],
+      "artifacts": ["model-router", "synthesize-inference-serving-12w"],
       "reviewQuestions": ["rq-routing-eval"],
       "resources": [
         {
@@ -790,8 +790,8 @@
     {
       "id": "prompt-versioning",
       "name": "Prompt & Version Logging",
-      "tags": ["ai-systems", "llm-apps"],
-      "roadmaps": [],
+      "tags": ["ai-reliability", "ai-systems", "llm-apps"],
+      "roadmaps": ["ai-reliability-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -807,13 +807,13 @@
       "mentalModel": "Treat prompts like code — every production change gets a version, a saved diff, and a re-run of your evals. Without that, when quality drops you have no commit to point at.",
       "drills": ["prompt-version-diff"],
       "reviewQuestions": ["rq-prompt-versioning-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-reliability-12w"]
     },
     {
       "id": "llm-evals",
       "name": "LLM Evals",
-      "tags": ["ai-systems", "evals"],
-      "roadmaps": ["ai-search-infra-90-day"],
+      "tags": ["ai-reliability", "ai-systems", "evals"],
+      "roadmaps": ["ai-search-infra-90-day", "ai-reliability-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["structured-outputs"],
@@ -834,7 +834,7 @@
       ],
       "realWorldUsage": "Every serious LLM product; regression gates in CI.",
       "projectApplications": ["codevetter", "highsignal"],
-      "artifacts": ["llm-eval-harness", "model-router"],
+      "artifacts": ["llm-eval-harness", "model-router", "synthesize-ai-reliability-12w"],
       "drills": ["build-llm-eval"],
       "reviewQuestions": ["rq-llm-judge-validate"],
       "resources": [
@@ -849,7 +849,7 @@
       "id": "ml-math",
       "name": "ML Math Foundations",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": ["probability-fundamentals", "descriptive-statistics"],
@@ -886,13 +886,13 @@
       "mentalModel": "Three lenses keep coming back: linear algebra describes the data (vectors and matrices), calculus describes learning (gradients), probability describes uncertainty. Pick the lens that matches the question.",
       "drills": ["ml-dot-matmul-shapes"],
       "reviewQuestions": ["rq-ml-math-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-gradient-descent",
       "name": "Gradient Descent",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-math"],
@@ -918,13 +918,13 @@
       "mentalModel": "Gradient descent is repeated tiny adjustments. At each step you move the weights a small amount in the direction that lowers the loss. The \"learning rate\" is how big each step is — too big and you overshoot the answer, too small and training crawls.",
       "drills": ["ml-sgd-step-quadratic"],
       "reviewQuestions": ["rq-ml-gradient-descent-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-backprop",
       "name": "Backpropagation",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-gradient-descent"],
@@ -950,13 +950,13 @@
       "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them.",
       "drills": ["ml-chain-rule-gate"],
       "reviewQuestions": ["rq-ml-backprop-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-softmax-xent",
       "name": "Softmax & Cross-Entropy",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-math"],
@@ -987,13 +987,13 @@
       "mentalModel": "Softmax turns raw scores (logits) into probabilities that sum to 1. Cross-entropy then measures how wrong those probabilities are versus the true answer. Together they give a clean gradient that backprop can work with.",
       "drills": ["ml-softmax-cross-entropy"],
       "reviewQuestions": ["rq-ml-softmax-xent-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-adamw",
       "name": "AdamW Optimizer",
       "tags": ["ai-systems", "foundations"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-backprop"],
@@ -1019,13 +1019,13 @@
       "mentalModel": "AdamW is the standard optimizer for training transformers. It adapts the learning rate per parameter (Adam) and applies weight decay separately from the gradient (the \"W\"). The default choice unless you have a reason to switch.",
       "drills": ["ml-adamw-weight-decay"],
       "reviewQuestions": ["rq-ml-adamw-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-tokenization",
       "name": "Tokenization (LLM)",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "intro",
       "priority": 3,
       "prerequisites": [],
@@ -1061,13 +1061,13 @@
       "mentalModel": "LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other.",
       "drills": ["ml-bpe-merge-step"],
       "reviewQuestions": ["rq-ml-tokenization-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-language-modeling",
       "name": "Language Modeling",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-tokenization", "ml-softmax-xent"],
@@ -1103,7 +1103,7 @@
       "mentalModel": "A language model does one thing: predict the next token given the ones before it. Chat, code, reasoning — all of it is built on top of this single objective.",
       "drills": ["ml-perplexity-from-nll"],
       "reviewQuestions": ["rq-ml-language-modeling-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-sampling",
@@ -1146,7 +1146,7 @@
       "id": "ml-embeddings",
       "name": "Embeddings (Transformer)",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-language-modeling"],
@@ -1177,13 +1177,13 @@
       "mentalModel": "Embeddings turn discrete things (words, items, users) into vectors of numbers so that similar things end up close together in space. Distance and direction in that space carry meaning — that geometry is what the model learns from.",
       "drills": ["ml-sinusoidal-position"],
       "reviewQuestions": ["rq-ml-embeddings-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-self-attention",
       "name": "Self-Attention",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["swe-landscape"],
+      "roadmaps": ["swe-landscape", "ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-embeddings"],
@@ -1229,13 +1229,13 @@
       ],
       "drills": ["ml-scaled-dot-attention"],
       "reviewQuestions": ["rq-ml-self-attention-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-multi-head",
       "name": "Multi-Head Attention",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-self-attention"],
@@ -1266,13 +1266,13 @@
       "mentalModel": "Attention lets each token in a sentence look at every other token and weight how relevant each one is. \"Multi-head\" runs several of these attention passes in parallel so the model can track different kinds of relationships at once (e.g. grammar, references, position).",
       "drills": ["ml-multi-head-split"],
       "reviewQuestions": ["rq-ml-multi-head-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-transformer-block",
       "name": "Transformer Block",
       "tags": ["ai-systems", "transformers"],
-      "roadmaps": ["swe-landscape"],
+      "roadmaps": ["swe-landscape", "ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-multi-head", "ml-adamw"],
@@ -1318,13 +1318,13 @@
       ],
       "drills": ["ml-pre-norm-residual"],
       "reviewQuestions": ["rq-ml-transformer-block-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-training",
       "name": "Training & Debugging",
       "tags": ["ai-systems", "training"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["ml-transformer-block"],
@@ -1370,13 +1370,13 @@
       "mentalModel": "A training loop is forward pass → loss → backward pass → optimizer step, repeated over batches of data. When training looks broken, the data is the usual culprit (leaked, mislabeled, wrong shape) — check it before blaming the model.",
       "drills": ["ml-overfit-sanity-check"],
       "reviewQuestions": ["rq-ml-training-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-checkpointing",
       "name": "Checkpointing",
       "tags": ["ai-systems", "training"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-training"],
@@ -1397,13 +1397,13 @@
       "mentalModel": "A checkpoint saves the weights and optimizer state so you can resume after a crash. Save often enough that any single failure costs less than an hour. Keep the most recent few and your best-eval-score one separately.",
       "drills": ["ml-checkpoint-resume"],
       "reviewQuestions": ["rq-ml-checkpointing-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-lora",
       "name": "LoRA & PEFT",
       "tags": ["ai-systems", "training"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-training"],
@@ -1439,13 +1439,13 @@
       "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time.",
       "drills": ["ml-lora-param-count"],
       "reviewQuestions": ["rq-ml-lora-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-rl-alignment",
       "name": "RL Alignment (GRPO & Policy Gradient)",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["swe-landscape"],
+      "roadmaps": ["swe-landscape", "ai-models-training-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-lora", "ml-sampling"],
@@ -1481,13 +1481,13 @@
       "mentalModel": "Post-training RL treats the LM as a policy: sample completions, score them with a reward model, then nudge token probabilities toward high-reward outputs. GRPO compares completions within a group (relative advantages) and reuses rollouts with importance sampling + clipping so training stays stable off-policy.",
       "drills": ["ml-grpo-group-advantage"],
       "reviewQuestions": ["rq-ml-rl-alignment-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-data-engineering",
       "name": "Style Data Engineering",
       "tags": ["ai-systems", "training"],
-      "roadmaps": [],
+      "roadmaps": ["ai-models-training-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-lora"],
@@ -1518,13 +1518,13 @@
       "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does.",
       "drills": ["ml-token-budget-estimate"],
       "reviewQuestions": ["rq-ml-data-engineering-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w"]
     },
     {
       "id": "ml-browser-runtime",
       "name": "Browser ML Runtime",
-      "tags": ["ai-systems", "runtime"],
-      "roadmaps": ["swe-landscape"],
+      "tags": ["inference-serving", "ai-systems", "runtime"],
+      "roadmaps": ["swe-landscape", "inference-serving-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-checkpointing"],
@@ -1540,13 +1540,13 @@
       "mentalModel": "You can run ML in the browser using libraries like ONNX Runtime Web, TensorFlow.js, or Transformers.js. You trade server cost and user privacy for a slower first load and a limit on model size. WebGPU is fastest, WASM works everywhere, CPU is the fallback.",
       "drills": ["ml-wasm-linear-memory"],
       "reviewQuestions": ["rq-ml-browser-runtime-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-inference-serving-12w"]
     },
     {
       "id": "ml-webgpu",
       "name": "WebGPU Compute",
-      "tags": ["ai-systems", "runtime"],
-      "roadmaps": ["swe-landscape"],
+      "tags": ["inference-serving", "ai-systems", "runtime"],
+      "roadmaps": ["swe-landscape", "inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-browser-runtime", "ml-transformer-block"],
@@ -1567,13 +1567,13 @@
       "mentalModel": "WebGPU lets JavaScript run compute shaders on the GPU, which can speed up matrix math 10-100x in the browser. The real bottlenecks are moving data to and from the GPU and compiling the shaders — not the math itself.",
       "drills": ["ml-webgpu-buffer-alignment"],
       "reviewQuestions": ["rq-ml-webgpu-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-inference-serving-12w", "synthesize-multimodal-spatial-12w"]
     },
     {
       "id": "ml-evaluation",
       "name": "Model Evaluation",
-      "tags": ["ai-systems", "evals"],
-      "roadmaps": [],
+      "tags": ["ai-reliability", "ai-systems", "evals"],
+      "roadmaps": ["ai-models-training-12w", "ai-reliability-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-lora", "ml-sampling"],
@@ -1599,7 +1599,7 @@
       "mentalModel": "Offline eval (on a held-out test set) tells you the model got better. Online eval (A/B test on real users) tells you the product got better. You need both — neither alone is enough.",
       "drills": ["ml-eval-perplexity-vs-acc"],
       "reviewQuestions": ["rq-ml-evaluation-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-ai-models-training-12w", "synthesize-ai-reliability-12w"]
     },
     {
       "id": "http-lifecycle",
@@ -1724,8 +1724,8 @@
     {
       "id": "retries-dlq",
       "name": "Retries & DLQ",
-      "tags": ["backend", "queues"],
-      "roadmaps": ["ai-infra-12-month", "swe-landscape"],
+      "tags": ["infrastructure-platforms", "backend", "queues"],
+      "roadmaps": ["ai-infra-12-month", "swe-landscape", "infrastructure-platforms-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["idempotency"],
@@ -1740,7 +1740,7 @@
       ],
       "realWorldUsage": "SQS/Kafka consumers, every background job system.",
       "projectApplications": ["highsignal", "codevetter"],
-      "artifacts": ["job-queue-retries"],
+      "artifacts": ["job-queue-retries", "synthesize-infrastructure-platforms-12w"],
       "drills": ["implement-backoff-jitter"],
       "reviewQuestions": ["rq-dlq-purpose", "rq-jitter-why"],
       "resources": [
@@ -1776,8 +1776,8 @@
     {
       "id": "background-jobs",
       "name": "Background Jobs",
-      "tags": ["backend", "jobs"],
-      "roadmaps": [],
+      "tags": ["infrastructure-platforms", "backend", "jobs"],
+      "roadmaps": ["infrastructure-platforms-12w"],
       "difficulty": "core",
       "priority": 4,
       "prerequisites": ["message-queues"],
@@ -1798,13 +1798,13 @@
       "mentalModel": "Background jobs move slow work off the request so the user gets a fast response. The hard parts are idempotency (what if the job runs twice?), retries (transient errors vs permanent ones), and visibility (where did my job go?).",
       "drills": ["job-at-least-once"],
       "reviewQuestions": ["rq-background-jobs-core"],
-      "artifacts": ["job-queue-retries"]
+      "artifacts": ["job-queue-retries", "synthesize-infrastructure-platforms-12w"]
     },
     {
       "id": "caching",
       "name": "Caching",
-      "tags": ["backend", "caching"],
-      "roadmaps": [],
+      "tags": ["distributed-systems", "backend", "caching"],
+      "roadmaps": ["distributed-systems-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["http-lifecycle"],
@@ -1826,13 +1826,13 @@
         }
       ],
       "drills": ["cache-stampede"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "message-queues",
       "name": "Message Queues",
-      "tags": ["backend", "queues"],
-      "roadmaps": ["swe-landscape"],
+      "tags": ["distributed-systems", "backend", "queues"],
+      "roadmaps": ["swe-landscape", "distributed-systems-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -1860,13 +1860,13 @@
         }
       ],
       "drills": ["queue-backpressure"],
-      "artifacts": ["job-queue-retries"]
+      "artifacts": ["job-queue-retries", "synthesize-distributed-systems-12w"]
     },
     {
       "id": "monitoring-analytics",
       "name": "Observability",
-      "tags": ["backend", "observability"],
-      "roadmaps": ["ai-infra-12-month", "runtime"],
+      "tags": ["infrastructure-platforms", "backend", "observability"],
+      "roadmaps": ["ai-infra-12-month", "runtime", "infrastructure-platforms-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": [],
@@ -1880,7 +1880,7 @@
       ],
       "realWorldUsage": "OpenTelemetry, Datadog, PostHog, every production service.",
       "projectApplications": ["codevetter", "highsignal"],
-      "artifacts": ["structured-logging"],
+      "artifacts": ["structured-logging", "synthesize-infrastructure-platforms-12w"],
       "reviewQuestions": ["rq-three-pillars"],
       "resources": [
         {
@@ -1895,7 +1895,7 @@
       "id": "api-design",
       "name": "API Design",
       "tags": ["backend", "api-design"],
-      "roadmaps": ["ai-infra-12-month"],
+      "roadmaps": ["ai-infra-12-month", "application-engineering-12w"],
       "difficulty": "core",
       "priority": 5,
       "prerequisites": ["http-lifecycle"],
@@ -1918,7 +1918,7 @@
         }
       ],
       "drills": ["design-paginated-api"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "auth-systems",
@@ -2193,8 +2193,8 @@
     {
       "id": "sharding",
       "name": "Sharding",
-      "tags": ["databases", "partitioning"],
-      "roadmaps": ["db-disk-first", "swe-landscape"],
+      "tags": ["distributed-systems", "databases", "partitioning"],
+      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["consistent-hashing"],
@@ -2215,13 +2215,13 @@
       ],
       "drills": ["shard-key-choice"],
       "reviewQuestions": ["rq-sharding-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "replication",
       "name": "Replication",
-      "tags": ["databases", "replication"],
-      "roadmaps": ["db-disk-first", "swe-landscape"],
+      "tags": ["distributed-systems", "databases", "replication"],
+      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": [],
@@ -2242,13 +2242,13 @@
       ],
       "drills": ["replication-lag-read"],
       "reviewQuestions": ["rq-replication-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "cap-theorem",
       "name": "CAP & Consistency Models",
-      "tags": ["databases", "consistency"],
-      "roadmaps": ["db-disk-first", "swe-landscape"],
+      "tags": ["distributed-systems", "databases", "consistency"],
+      "roadmaps": ["db-disk-first", "swe-landscape", "distributed-systems-12w"],
       "difficulty": "advanced",
       "priority": 4,
       "prerequisites": ["replication"],
@@ -2269,7 +2269,7 @@
       ],
       "drills": ["cap-partition-choice"],
       "reviewQuestions": ["rq-cap-theorem-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "object-modeling",
@@ -2406,8 +2406,8 @@
     {
       "id": "concurrency-design",
       "name": "Concurrency Design",
-      "tags": ["system-design", "low-level-design"],
-      "roadmaps": ["runtime", "swe-landscape", "lld-practice"],
+      "tags": ["systems-foundations", "system-design", "low-level-design"],
+      "roadmaps": ["runtime", "swe-landscape", "lld-practice", "systems-foundations-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["object-modeling"],
@@ -2423,7 +2423,7 @@
       "mentalModel": "Concurrency bugs are usually not \"add more locks.\" They are about having a clear discipline for which locks you take, in what order, and for how long. Often the cheapest fix is a single database transaction or a single-writer design.",
       "drills": ["design-bank-account-locking"],
       "reviewQuestions": ["rq-concurrency-design-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-systems-foundations-12w"]
     },
     {
       "id": "command-chain",
@@ -2472,8 +2472,8 @@
     {
       "id": "game-design",
       "name": "Game/Simulation Design",
-      "tags": ["system-design", "low-level-design"],
-      "roadmaps": ["swe-landscape", "lld-practice"],
+      "tags": ["application-engineering", "system-design", "low-level-design"],
+      "roadmaps": ["swe-landscape", "lld-practice", "application-engineering-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["state-management", "object-modeling"],
@@ -2494,7 +2494,7 @@
       "mentalModel": "Realtime game servers run a tight loop over a shared world state. The server is the source of truth; the client predicts what will happen to hide latency, then corrects itself when the server disagrees.",
       "drills": ["design-online-game-server"],
       "reviewQuestions": ["rq-game-design-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "load-balancing",
@@ -2548,8 +2548,8 @@
     {
       "id": "consensus",
       "name": "Consensus",
-      "tags": ["system-design", "distributed-systems"],
-      "roadmaps": ["db-disk-first", "swe-landscape", "hld-practice"],
+      "tags": ["distributed-systems", "system-design"],
+      "roadmaps": ["db-disk-first", "swe-landscape", "hld-practice", "distributed-systems-12w"],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["replication"],
@@ -2570,13 +2570,19 @@
       ],
       "drills": ["design-leader-election"],
       "reviewQuestions": ["rq-consensus-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "distributed-infra",
       "name": "Distributed Infra",
-      "tags": ["system-design", "distributed-systems"],
-      "roadmaps": ["db-disk-first", "runtime", "swe-landscape", "hld-practice"],
+      "tags": ["distributed-systems", "system-design"],
+      "roadmaps": [
+        "db-disk-first",
+        "runtime",
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w"
+      ],
       "difficulty": "advanced",
       "priority": 3,
       "prerequisites": ["consensus"],
@@ -2592,13 +2598,18 @@
       "mentalModel": "Distributed systems multiply the ways things can fail. Every network call can be slow, retried, lost, or duplicated. Design for partial failure first — timeouts, idempotency, bounded queues — and worry about speed second.",
       "drills": ["design-rate-limiter"],
       "reviewQuestions": ["rq-distributed-infra-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w"]
     },
     {
       "id": "messaging-realtime",
       "name": "Real-time Systems",
-      "tags": ["system-design", "event-driven"],
-      "roadmaps": ["swe-landscape", "hld-practice"],
+      "tags": ["distributed-systems", "system-design", "event-driven"],
+      "roadmaps": [
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w",
+        "application-engineering-12w"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["message-queues"],
@@ -2614,7 +2625,7 @@
       "mentalModel": "Realtime messaging is long-lived connections plus a message fan-out problem. WebSockets are stateful, which constrains your load balancer. How you fan out (per-channel vs per-user) is the central design choice.",
       "drills": ["design-chat-system"],
       "reviewQuestions": ["rq-messaging-realtime-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-distributed-systems-12w", "synthesize-application-engineering-12w"]
     },
     {
       "id": "social-media",
@@ -3519,7 +3530,7 @@
       "id": "positioning",
       "name": "Positioning",
       "tags": ["product", "positioning"],
-      "roadmaps": [],
+      "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -3535,13 +3546,13 @@
       "mentalModel": "Positioning answers two questions: \"for whom\" and \"compared to what alternative.\" If your statement could just as well describe three of your competitors, you have a description — not positioning.",
       "drills": ["draft-positioning-statement"],
       "reviewQuestions": ["rq-positioning-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "landing-pages",
       "name": "Landing Pages",
       "tags": ["product", "positioning"],
-      "roadmaps": [],
+      "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["positioning"],
@@ -3562,13 +3573,13 @@
       "mentalModel": "A landing page has one job: get the right visitor to take one action. Headline that says what it is and who it is for, one clear call to action, social proof, no distractions. If a visitor cannot tell what the product does in 3 seconds, you have lost them.",
       "drills": ["critique-landing-page"],
       "reviewQuestions": ["rq-landing-pages-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "seo",
       "name": "SEO",
       "tags": ["product", "growth"],
-      "roadmaps": [],
+      "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -3585,13 +3596,13 @@
       "mentalModel": "SEO is matching what people are searching for and earning the trust to rank for it through good content and credible links. On-page basics (title, H1, page speed) are necessary but not sufficient — the real fight is content depth and inbound links.",
       "drills": ["audit-seo-onpage"],
       "reviewQuestions": ["rq-seo-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "product-analytics",
       "name": "Product Analytics",
       "tags": ["product", "analytics"],
-      "roadmaps": [],
+      "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -3607,7 +3618,7 @@
       "mentalModel": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong.",
       "drills": ["define-north-star-metric"],
       "reviewQuestions": ["rq-product-analytics-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-application-engineering-12w"]
     },
     {
       "id": "vectors-and-spaces",
@@ -4455,6 +4466,1966 @@
           "type": "doc"
         }
       ]
+    },
+    {
+      "id": "operating-system-mechanics",
+      "name": "Operating System Mechanics",
+      "tags": ["systems-foundations", "operating-systems"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["compute-memory-storage-hierarchy"],
+      "description": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
+      "mentalModel": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
+      "drills": ["practice-operating-system-mechanics"],
+      "reviewQuestions": ["rq-operating-system-mechanics"],
+      "resources": [
+        {
+          "title": "Operating Systems: Three Easy Pieces",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "network-protocol-engineering",
+      "name": "Network Protocol Engineering",
+      "tags": ["systems-foundations", "networking"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["compute-memory-storage-hierarchy"],
+      "related": ["compute-memory-storage-hierarchy", "concurrency-design"],
+      "description": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.",
+      "mentalModel": "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.",
+      "drills": ["practice-network-protocol-engineering"],
+      "reviewQuestions": ["rq-network-protocol-engineering"],
+      "resources": [
+        {
+          "title": "High Performance Browser Networking",
+          "url": "https://hpbn.co/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "compute-memory-storage-hierarchy",
+      "name": "Compute, Memory & Storage Hierarchy",
+      "tags": ["systems-foundations", "hardware"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["operating-system-mechanics"],
+      "related": ["operating-system-mechanics", "network-protocol-engineering"],
+      "description": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
+      "mentalModel": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
+      "drills": ["practice-compute-memory-storage-hierarchy"],
+      "reviewQuestions": ["rq-compute-memory-storage-hierarchy"],
+      "resources": [
+        {
+          "title": "What Every Programmer Should Know About Memory",
+          "url": "https://akkadia.org/drepper/cpumemory.pdf",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "runtime-performance-engineering",
+      "name": "Runtime & Performance Engineering",
+      "tags": ["systems-foundations", "performance"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["concurrency-design"],
+      "related": ["concurrency-design", "security-isolation-boundaries"],
+      "description": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.",
+      "mentalModel": "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.",
+      "drills": ["practice-runtime-performance-engineering"],
+      "reviewQuestions": ["rq-runtime-performance-engineering"],
+      "resources": [
+        {
+          "title": "Brendan Gregg — Linux Performance",
+          "url": "https://www.brendangregg.com/linuxperf.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "security-isolation-boundaries",
+      "name": "Security & Isolation Boundaries",
+      "tags": ["systems-foundations", "security"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["runtime-performance-engineering"],
+      "related": ["runtime-performance-engineering"],
+      "description": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
+      "mentalModel": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
+      "drills": ["practice-security-isolation-boundaries"],
+      "reviewQuestions": ["rq-security-isolation-boundaries"],
+      "resources": [
+        {
+          "title": "gVisor Architecture Guide",
+          "url": "https://gvisor.dev/docs/architecture_guide/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "cloud-infrastructure",
+      "name": "Cloud Infrastructure",
+      "tags": ["infrastructure-platforms", "cloud"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["containers-kubernetes"],
+      "description": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.",
+      "mentalModel": "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.",
+      "drills": ["practice-cloud-infrastructure"],
+      "reviewQuestions": ["rq-cloud-infrastructure"],
+      "resources": [
+        {
+          "title": "AWS Builders Library",
+          "url": "https://aws.amazon.com/builders-library/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "containers-kubernetes",
+      "name": "Containers & Kubernetes",
+      "tags": ["infrastructure-platforms", "containers"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["cloud-infrastructure"],
+      "related": ["cloud-infrastructure", "cicd-developer-environments"],
+      "description": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.",
+      "mentalModel": "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.",
+      "drills": ["practice-containers-kubernetes"],
+      "reviewQuestions": ["rq-containers-kubernetes"],
+      "resources": [
+        {
+          "title": "Kubernetes Concepts",
+          "url": "https://kubernetes.io/docs/concepts/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "cicd-developer-environments",
+      "name": "CI/CD & Developer Environments",
+      "tags": ["infrastructure-platforms", "delivery"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["containers-kubernetes"],
+      "related": ["containers-kubernetes", "platform-scheduling-orchestration"],
+      "description": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.",
+      "mentalModel": "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.",
+      "drills": ["practice-cicd-developer-environments"],
+      "reviewQuestions": ["rq-cicd-developer-environments"],
+      "resources": [
+        {
+          "title": "GitHub Actions Documentation",
+          "url": "https://docs.github.com/en/actions",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "platform-scheduling-orchestration",
+      "name": "Scheduling & Orchestration",
+      "tags": ["infrastructure-platforms", "orchestration"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["cicd-developer-environments"],
+      "related": ["cicd-developer-environments", "infrastructure-automation"],
+      "description": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.",
+      "mentalModel": "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.",
+      "drills": ["practice-platform-scheduling-orchestration"],
+      "reviewQuestions": ["rq-platform-scheduling-orchestration"],
+      "resources": [
+        {
+          "title": "Large-scale cluster management at Google with Borg",
+          "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "reliability-fault-tolerance",
+      "name": "Reliability & Fault Tolerance",
+      "tags": ["infrastructure-platforms", "reliability"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["background-jobs"],
+      "related": ["background-jobs", "retries-dlq"],
+      "description": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
+      "mentalModel": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
+      "drills": ["practice-reliability-fault-tolerance"],
+      "reviewQuestions": ["rq-reliability-fault-tolerance"],
+      "resources": [
+        {
+          "title": "Google Site Reliability Engineering",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "opentelemetry-observability",
+      "name": "Observability & OpenTelemetry",
+      "tags": ["infrastructure-platforms", "observability"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["monitoring-analytics"],
+      "related": ["monitoring-analytics", "sandbox-execution-environments"],
+      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
+      "mentalModel": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
+      "drills": ["practice-opentelemetry-observability"],
+      "reviewQuestions": ["rq-opentelemetry-observability"],
+      "resources": [
+        {
+          "title": "OpenTelemetry Documentation",
+          "url": "https://opentelemetry.io/docs/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "sandbox-execution-environments",
+      "name": "Sandboxes & Execution Environments",
+      "tags": ["infrastructure-platforms", "sandboxes"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["opentelemetry-observability"],
+      "related": ["opentelemetry-observability"],
+      "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
+      "mentalModel": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
+      "drills": ["practice-sandbox-execution-environments"],
+      "reviewQuestions": ["rq-sandbox-execution-environments"],
+      "resources": [
+        {
+          "title": "Wasmtime Security",
+          "url": "https://docs.wasmtime.dev/security.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "infrastructure-automation",
+      "name": "Infrastructure Automation",
+      "tags": ["infrastructure-platforms", "infrastructure-as-code"],
+      "roadmaps": ["infrastructure-platforms-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["platform-scheduling-orchestration"],
+      "related": ["platform-scheduling-orchestration", "background-jobs"],
+      "description": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.",
+      "mentalModel": "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.",
+      "drills": ["practice-infrastructure-automation"],
+      "reviewQuestions": ["rq-infrastructure-automation"],
+      "resources": [
+        {
+          "title": "Terraform Language Documentation",
+          "url": "https://developer.hashicorp.com/terraform/language",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-infrastructure-platforms-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "event-streaming-kafka",
+      "name": "Event Streaming & Kafka",
+      "tags": ["distributed-systems", "event-streaming"],
+      "roadmaps": ["distributed-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["message-queues"],
+      "related": ["message-queues", "caching"],
+      "description": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.",
+      "mentalModel": "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.",
+      "drills": ["practice-event-streaming-kafka"],
+      "reviewQuestions": ["rq-event-streaming-kafka"],
+      "resources": [
+        {
+          "title": "Kafka: a Distributed Messaging System",
+          "url": "https://notes.stephenholiday.com/Kafka.pdf",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-distributed-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "distributed-workflows-temporal",
+      "name": "Distributed Workflows & Temporal",
+      "tags": ["distributed-systems", "durable-workflows"],
+      "roadmaps": ["distributed-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["distributed-infra"],
+      "related": ["distributed-infra", "distributed-failure-recovery"],
+      "description": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.",
+      "mentalModel": "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.",
+      "drills": ["practice-distributed-workflows-temporal"],
+      "reviewQuestions": ["rq-distributed-workflows-temporal"],
+      "resources": [
+        {
+          "title": "Temporal Documentation",
+          "url": "https://docs.temporal.io/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-distributed-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "distributed-failure-recovery",
+      "name": "Distributed Failure Recovery",
+      "tags": ["distributed-systems", "failure-recovery"],
+      "roadmaps": ["distributed-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["distributed-workflows-temporal"],
+      "related": ["distributed-workflows-temporal"],
+      "description": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
+      "mentalModel": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
+      "drills": ["practice-distributed-failure-recovery"],
+      "reviewQuestions": ["rq-distributed-failure-recovery"],
+      "resources": [
+        {
+          "title": "Jepsen Analyses",
+          "url": "https://jepsen.io/analyses",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-distributed-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "transaction-processing",
+      "name": "Transaction Processing",
+      "tags": ["databases", "transactions"],
+      "roadmaps": ["db-disk-first"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": [],
+      "description": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.",
+      "mentalModel": "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.",
+      "drills": ["practice-transaction-processing"],
+      "reviewQuestions": ["rq-transaction-processing"],
+      "resources": [
+        {
+          "title": "PostgreSQL Transaction Isolation",
+          "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["toy-wal"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "query-execution-optimization",
+      "name": "Query Execution & Optimization",
+      "tags": ["databases", "query-planning"],
+      "roadmaps": ["db-disk-first"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": [],
+      "description": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.",
+      "mentalModel": "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.",
+      "drills": ["practice-query-execution-optimization"],
+      "reviewQuestions": ["rq-query-execution-optimization"],
+      "resources": [
+        {
+          "title": "Architecture of a Database System",
+          "url": "https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["object-storage-index"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "warehouses-lakehouses",
+      "name": "Data Warehouses & Lakehouses",
+      "tags": ["databases", "analytics"],
+      "roadmaps": ["db-disk-first"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": [],
+      "description": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.",
+      "mentalModel": "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.",
+      "drills": ["practice-warehouses-lakehouses"],
+      "reviewQuestions": ["rq-warehouses-lakehouses"],
+      "resources": [
+        {
+          "title": "Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores",
+          "url": "https://www.vldb.org/pvldb/vol13/p3411-armbrust.pdf",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["object-storage-index"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ml-pretraining",
+      "name": "Model Pre-training",
+      "tags": ["ai-systems", "training"],
+      "roadmaps": ["ai-models-training-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ml-adamw"],
+      "related": ["ml-adamw", "ml-training"],
+      "description": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.",
+      "mentalModel": "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.",
+      "drills": ["practice-ml-pretraining"],
+      "reviewQuestions": ["rq-ml-pretraining"],
+      "resources": [
+        {
+          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "url": "https://cs336.stanford.edu/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-models-training-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "model-quantization",
+      "name": "Model Quantization",
+      "tags": ["ai-systems", "compression"],
+      "roadmaps": ["ai-models-training-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ml-data-engineering"],
+      "related": ["ml-data-engineering", "open-weight-models"],
+      "description": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
+      "mentalModel": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
+      "drills": ["practice-model-quantization"],
+      "reviewQuestions": ["rq-model-quantization"],
+      "resources": [
+        {
+          "title": "Hugging Face Transformers — Quantization",
+          "url": "https://huggingface.co/docs/transformers/main/en/quantization/overview",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-models-training-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "open-weight-models",
+      "name": "Open-Weight Models",
+      "tags": ["ai-systems", "open-models"],
+      "roadmaps": ["ai-models-training-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["model-quantization"],
+      "related": ["model-quantization", "multimodal-models"],
+      "description": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.",
+      "mentalModel": "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.",
+      "drills": ["practice-open-weight-models"],
+      "reviewQuestions": ["rq-open-weight-models"],
+      "resources": [
+        {
+          "title": "Hugging Face Model Cards",
+          "url": "https://huggingface.co/docs/hub/model-cards",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-models-training-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "inference-engines",
+      "name": "vLLM & Inference Engines",
+      "tags": ["inference-serving", "inference-engines"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["kv-cache-paged-attention"],
+      "description": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
+      "mentalModel": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
+      "drills": ["practice-inference-engines"],
+      "reviewQuestions": ["rq-inference-engines"],
+      "resources": [
+        {
+          "title": "vLLM Documentation",
+          "url": "https://docs.vllm.ai/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "continuous-batching",
+      "name": "Continuous Batching",
+      "tags": ["inference-serving", "batching"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["kv-cache-paged-attention"],
+      "related": ["kv-cache-paged-attention", "model-routing"],
+      "description": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.",
+      "mentalModel": "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.",
+      "drills": ["practice-continuous-batching"],
+      "reviewQuestions": ["rq-continuous-batching"],
+      "resources": [
+        {
+          "title": "vLLM: Easy, Fast, and Cheap LLM Serving",
+          "url": "https://blog.vllm.ai/2023/06/20/vllm.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "kv-cache-paged-attention",
+      "name": "KV Caching & PagedAttention",
+      "tags": ["inference-serving", "kv-cache"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["inference-engines"],
+      "related": ["inference-engines", "continuous-batching"],
+      "description": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.",
+      "mentalModel": "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.",
+      "drills": ["practice-kv-cache-paged-attention"],
+      "reviewQuestions": ["rq-kv-cache-paged-attention"],
+      "resources": [
+        {
+          "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+          "url": "https://arxiv.org/abs/2309.06180",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "flashattention-kernels",
+      "name": "FlashAttention & Attention Kernels",
+      "tags": ["inference-serving", "gpu-kernels"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["model-routing"],
+      "related": ["model-routing", "speculative-decoding"],
+      "description": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
+      "mentalModel": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
+      "drills": ["practice-flashattention-kernels"],
+      "reviewQuestions": ["rq-flashattention-kernels"],
+      "resources": [
+        {
+          "title": "FlashAttention",
+          "url": "https://arxiv.org/abs/2205.14135",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "speculative-decoding",
+      "name": "Speculative Decoding",
+      "tags": ["inference-serving", "decoding"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["flashattention-kernels"],
+      "related": ["flashattention-kernels", "gpu-utilization"],
+      "description": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
+      "mentalModel": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
+      "drills": ["practice-speculative-decoding"],
+      "reviewQuestions": ["rq-speculative-decoding"],
+      "resources": [
+        {
+          "title": "Fast Inference from Transformers via Speculative Decoding",
+          "url": "https://arxiv.org/abs/2211.17192",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "gpu-utilization",
+      "name": "GPU Utilization",
+      "tags": ["inference-serving", "gpu"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["speculative-decoding"],
+      "related": ["speculative-decoding", "inference-hardware"],
+      "description": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
+      "mentalModel": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
+      "drills": ["practice-gpu-utilization"],
+      "reviewQuestions": ["rq-gpu-utilization"],
+      "resources": [
+        {
+          "title": "NVIDIA Nsight Systems Documentation",
+          "url": "https://docs.nvidia.com/nsight-systems/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "inference-cost-latency",
+      "name": "Inference Cost & Latency Optimization",
+      "tags": ["inference-serving", "serving-economics"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["inference-hardware"],
+      "related": ["inference-hardware", "local-on-device-inference"],
+      "description": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
+      "mentalModel": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
+      "drills": ["practice-inference-cost-latency"],
+      "reviewQuestions": ["rq-inference-cost-latency"],
+      "resources": [
+        {
+          "title": "Hugging Face — LLM Inference Optimization",
+          "url": "https://huggingface.co/docs/transformers/main/en/llm_optims",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "local-on-device-inference",
+      "name": "Local & On-device Inference",
+      "tags": ["inference-serving", "on-device"],
+      "roadmaps": ["inference-serving-12w", "multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["image-video-generation"],
+      "related": ["image-video-generation", "robotics-systems"],
+      "description": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
+      "mentalModel": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
+      "drills": ["practice-local-on-device-inference"],
+      "reviewQuestions": ["rq-local-on-device-inference"],
+      "resources": [
+        {
+          "title": "llama.cpp",
+          "url": "https://github.com/ggml-org/llama.cpp",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w", "synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "inference-hardware",
+      "name": "Inference Hardware",
+      "tags": ["inference-serving", "hardware"],
+      "roadmaps": ["inference-serving-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["gpu-utilization"],
+      "related": ["gpu-utilization", "inference-cost-latency"],
+      "description": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
+      "mentalModel": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
+      "drills": ["practice-inference-hardware"],
+      "reviewQuestions": ["rq-inference-hardware"],
+      "resources": [
+        {
+          "title": "NVIDIA Hopper Architecture",
+          "url": "https://resources.nvidia.com/en-us-tensor-core",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-inference-serving-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "agent-memory-context",
+      "name": "Agent Memory & Context Management",
+      "tags": ["agent-systems", "memory"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-loops"],
+      "related": ["agent-loops", "mcp-integrations"],
+      "description": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.",
+      "mentalModel": "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.",
+      "drills": ["practice-agent-memory-context"],
+      "reviewQuestions": ["rq-agent-memory-context"],
+      "resources": [
+        {
+          "title": "Anthropic — Building Effective Agents",
+          "url": "https://www.anthropic.com/engineering/building-effective-agents",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "mcp-integrations",
+      "name": "MCP & Integrations",
+      "tags": ["agent-systems", "mcp"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-memory-context"],
+      "related": ["agent-memory-context", "multi-agent-coordination"],
+      "description": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.",
+      "mentalModel": "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.",
+      "drills": ["practice-mcp-integrations"],
+      "reviewQuestions": ["rq-mcp-integrations"],
+      "resources": [
+        {
+          "title": "Model Context Protocol Specification",
+          "url": "https://modelcontextprotocol.io/specification/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "multi-agent-coordination",
+      "name": "Multi-agent Coordination",
+      "tags": ["agent-systems", "multi-agent"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["mcp-integrations"],
+      "related": ["mcp-integrations", "agent-communication-interfaces"],
+      "description": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.",
+      "mentalModel": "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.",
+      "drills": ["practice-multi-agent-coordination"],
+      "reviewQuestions": ["rq-multi-agent-coordination"],
+      "resources": [
+        {
+          "title": "AutoGen: Enabling Next-Gen LLM Applications",
+          "url": "https://arxiv.org/abs/2308.08155",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "durable-agent-execution",
+      "name": "Durable Agent Execution",
+      "tags": ["agent-systems", "durability"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["browser-computer-use-agents"],
+      "related": ["browser-computer-use-agents", "agent-permissions-sandboxing"],
+      "description": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.",
+      "mentalModel": "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.",
+      "drills": ["practice-durable-agent-execution"],
+      "reviewQuestions": ["rq-durable-agent-execution"],
+      "resources": [
+        {
+          "title": "Temporal — Durable Execution",
+          "url": "https://docs.temporal.io/encyclopedia/durable-execution",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "agent-permissions-sandboxing",
+      "name": "Agent Permissions & Sandboxing",
+      "tags": ["agent-systems", "permissions"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["durable-agent-execution"],
+      "related": ["durable-agent-execution", "long-running-scheduled-agents"],
+      "description": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
+      "mentalModel": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
+      "drills": ["practice-agent-permissions-sandboxing"],
+      "reviewQuestions": ["rq-agent-permissions-sandboxing"],
+      "resources": [
+        {
+          "title": "OWASP Top 10 for LLM Applications",
+          "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "browser-computer-use-agents",
+      "name": "Browser & Computer-use Agents",
+      "tags": ["agent-systems", "computer-use"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-communication-interfaces"],
+      "related": ["agent-communication-interfaces", "durable-agent-execution"],
+      "description": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.",
+      "mentalModel": "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.",
+      "drills": ["practice-browser-computer-use-agents"],
+      "reviewQuestions": ["rq-browser-computer-use-agents"],
+      "resources": [
+        {
+          "title": "Playwright Documentation",
+          "url": "https://playwright.dev/docs/intro",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "agent-communication-interfaces",
+      "name": "Agent Communication & Interfaces",
+      "tags": ["agent-systems", "interfaces"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["multi-agent-coordination"],
+      "related": ["multi-agent-coordination", "browser-computer-use-agents"],
+      "description": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.",
+      "mentalModel": "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.",
+      "drills": ["practice-agent-communication-interfaces"],
+      "reviewQuestions": ["rq-agent-communication-interfaces"],
+      "resources": [
+        {
+          "title": "Agent2Agent Protocol",
+          "url": "https://a2a-protocol.org/latest/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "long-running-scheduled-agents",
+      "name": "Long-running & Scheduled Agents",
+      "tags": ["agent-systems", "scheduling"],
+      "roadmaps": ["agent-systems-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-permissions-sandboxing"],
+      "related": ["agent-permissions-sandboxing"],
+      "description": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.",
+      "mentalModel": "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.",
+      "drills": ["practice-long-running-scheduled-agents"],
+      "reviewQuestions": ["rq-long-running-scheduled-agents"],
+      "resources": [
+        {
+          "title": "Cloudflare Workers Cron Triggers",
+          "url": "https://developers.cloudflare.com/workers/configuration/cron-triggers/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-agent-systems-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "coding-agent-benchmarks",
+      "name": "Coding-agent Benchmarks",
+      "tags": ["ai-reliability", "benchmarks"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ml-evaluation"],
+      "related": ["ml-evaluation", "tool-use-evaluations"],
+      "description": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
+      "mentalModel": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
+      "drills": ["practice-coding-agent-benchmarks"],
+      "reviewQuestions": ["rq-coding-agent-benchmarks"],
+      "resources": [
+        {
+          "title": "SWE-bench",
+          "url": "https://www.swebench.com/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "tool-use-evaluations",
+      "name": "Tool-use Evaluations",
+      "tags": ["ai-reliability", "tool-evals"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["coding-agent-benchmarks"],
+      "related": ["coding-agent-benchmarks", "prompt-versioning"],
+      "description": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
+      "mentalModel": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
+      "drills": ["practice-tool-use-evaluations"],
+      "reviewQuestions": ["rq-tool-use-evaluations"],
+      "resources": [
+        {
+          "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction",
+          "url": "https://arxiv.org/abs/2406.12045",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ai-regression-testing",
+      "name": "AI Regression Testing",
+      "tags": ["ai-reliability", "regression"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["prompt-versioning"],
+      "related": ["prompt-versioning", "hallucination-failure-detection"],
+      "description": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
+      "mentalModel": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
+      "drills": ["practice-ai-regression-testing"],
+      "reviewQuestions": ["rq-ai-regression-testing"],
+      "resources": [
+        {
+          "title": "OpenAI Evals Documentation",
+          "url": "https://platform.openai.com/docs/guides/evals",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "hallucination-failure-detection",
+      "name": "Hallucination & Failure Detection",
+      "tags": ["ai-reliability", "failure-detection"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ai-regression-testing"],
+      "related": ["ai-regression-testing", "quality-cost-latency-measurement"],
+      "description": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.",
+      "mentalModel": "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.",
+      "drills": ["practice-hallucination-failure-detection"],
+      "reviewQuestions": ["rq-hallucination-failure-detection"],
+      "resources": [
+        {
+          "title": "NIST AI Risk Management Framework",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "agent-observability",
+      "name": "Agent Observability",
+      "tags": ["ai-reliability", "observability"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["quality-cost-latency-measurement"],
+      "related": ["quality-cost-latency-measurement", "tracing-replay"],
+      "description": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.",
+      "mentalModel": "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.",
+      "drills": ["practice-agent-observability"],
+      "reviewQuestions": ["rq-agent-observability"],
+      "resources": [
+        {
+          "title": "OpenTelemetry GenAI Semantic Conventions",
+          "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "tracing-replay",
+      "name": "Tracing & Replay",
+      "tags": ["ai-reliability", "replay"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-observability"],
+      "related": ["agent-observability", "evidence-backed-verification"],
+      "description": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.",
+      "mentalModel": "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.",
+      "drills": ["practice-tracing-replay"],
+      "reviewQuestions": ["rq-tracing-replay"],
+      "resources": [
+        {
+          "title": "OpenTelemetry Traces",
+          "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "evidence-backed-verification",
+      "name": "Evidence-backed Verification",
+      "tags": ["ai-reliability", "verification"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["tracing-replay"],
+      "related": ["tracing-replay", "human-review-systems"],
+      "description": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.",
+      "mentalModel": "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.",
+      "drills": ["practice-evidence-backed-verification"],
+      "reviewQuestions": ["rq-evidence-backed-verification"],
+      "resources": [
+        {
+          "title": "Google Testing Blog",
+          "url": "https://testing.googleblog.com/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "human-review-systems",
+      "name": "Human Review Systems",
+      "tags": ["ai-reliability", "human-review"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["evidence-backed-verification"],
+      "related": ["evidence-backed-verification"],
+      "description": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.",
+      "mentalModel": "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.",
+      "drills": ["practice-human-review-systems"],
+      "reviewQuestions": ["rq-human-review-systems"],
+      "resources": [
+        {
+          "title": "NIST Human-Centered AI",
+          "url": "https://www.nist.gov/artificial-intelligence",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "quality-cost-latency-measurement",
+      "name": "Quality, Cost & Latency Measurement",
+      "tags": ["ai-reliability", "measurement"],
+      "roadmaps": ["ai-reliability-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["hallucination-failure-detection"],
+      "related": ["hallucination-failure-detection", "agent-observability"],
+      "description": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
+      "mentalModel": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
+      "drills": ["practice-quality-cost-latency-measurement"],
+      "reviewQuestions": ["rq-quality-cost-latency-measurement"],
+      "resources": [
+        {
+          "title": "MLPerf Inference",
+          "url": "https://mlcommons.org/benchmarks/inference-datacenter/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-ai-reliability-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "code-review-systems",
+      "name": "Code Review Systems",
+      "tags": ["developer-tools", "code-review"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["static-dynamic-analysis"],
+      "description": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.",
+      "mentalModel": "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.",
+      "drills": ["practice-code-review-systems"],
+      "reviewQuestions": ["rq-code-review-systems"],
+      "resources": [
+        {
+          "title": "Google Engineering Practices — Code Review",
+          "url": "https://google.github.io/eng-practices/review/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "static-dynamic-analysis",
+      "name": "Static & Dynamic Analysis",
+      "tags": ["developer-tools", "program-analysis"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["code-review-systems"],
+      "related": ["code-review-systems", "testing-infrastructure"],
+      "description": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.",
+      "mentalModel": "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.",
+      "drills": ["practice-static-dynamic-analysis"],
+      "reviewQuestions": ["rq-static-dynamic-analysis"],
+      "resources": [
+        {
+          "title": "CodeQL Documentation",
+          "url": "https://codeql.github.com/docs/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "testing-infrastructure",
+      "name": "Testing Infrastructure",
+      "tags": ["developer-tools", "testing"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["static-dynamic-analysis"],
+      "related": ["static-dynamic-analysis", "codebase-graphs"],
+      "description": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.",
+      "mentalModel": "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.",
+      "drills": ["practice-testing-infrastructure"],
+      "reviewQuestions": ["rq-testing-infrastructure"],
+      "resources": [
+        {
+          "title": "Bazel Test Encyclopedia",
+          "url": "https://bazel.build/reference/test-encyclopedia",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "codebase-graphs",
+      "name": "Codebase Graphs",
+      "tags": ["developer-tools", "code-graphs"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["testing-infrastructure"],
+      "related": ["testing-infrastructure", "dependency-blast-radius"],
+      "description": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.",
+      "mentalModel": "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.",
+      "drills": ["practice-codebase-graphs"],
+      "reviewQuestions": ["rq-codebase-graphs"],
+      "resources": [
+        {
+          "title": "SCIP Code Intelligence Protocol",
+          "url": "https://github.com/sourcegraph/scip",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "dependency-blast-radius",
+      "name": "Dependency & Blast-radius Analysis",
+      "tags": ["developer-tools", "dependencies"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["codebase-graphs"],
+      "related": ["codebase-graphs", "repository-intelligence"],
+      "description": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.",
+      "mentalModel": "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.",
+      "drills": ["practice-dependency-blast-radius"],
+      "reviewQuestions": ["rq-dependency-blast-radius"],
+      "resources": [
+        {
+          "title": "Bazel Query How-To",
+          "url": "https://bazel.build/query/guide",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ide-cli-tooling",
+      "name": "IDE & CLI Tooling",
+      "tags": ["developer-tools", "developer-experience"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["repository-intelligence"],
+      "related": ["repository-intelligence", "coding-agent-systems"],
+      "description": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.",
+      "mentalModel": "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.",
+      "drills": ["practice-ide-cli-tooling"],
+      "reviewQuestions": ["rq-ide-cli-tooling"],
+      "resources": [
+        {
+          "title": "Language Server Protocol Specification",
+          "url": "https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "coding-agent-systems",
+      "name": "Coding Agent Systems",
+      "tags": ["developer-tools", "coding-agents"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ide-cli-tooling"],
+      "related": ["ide-cli-tooling", "software-supply-chain-health"],
+      "description": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.",
+      "mentalModel": "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.",
+      "drills": ["practice-coding-agent-systems"],
+      "reviewQuestions": ["rq-coding-agent-systems"],
+      "resources": [
+        {
+          "title": "SWE-agent",
+          "url": "https://swe-agent.com/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "repository-intelligence",
+      "name": "Repository Intelligence",
+      "tags": ["developer-tools", "repository-intelligence"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["dependency-blast-radius"],
+      "related": ["dependency-blast-radius", "ide-cli-tooling"],
+      "description": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.",
+      "mentalModel": "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.",
+      "drills": ["practice-repository-intelligence"],
+      "reviewQuestions": ["rq-repository-intelligence"],
+      "resources": [
+        {
+          "title": "GitHub Code Search Syntax",
+          "url": "https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "software-supply-chain-health",
+      "name": "Software Supply-chain Health",
+      "tags": ["developer-tools", "supply-chain"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["coding-agent-systems"],
+      "related": ["coding-agent-systems", "automated-debugging-remediation"],
+      "description": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.",
+      "mentalModel": "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.",
+      "drills": ["practice-software-supply-chain-health"],
+      "reviewQuestions": ["rq-software-supply-chain-health"],
+      "resources": [
+        {
+          "title": "SLSA Specification",
+          "url": "https://slsa.dev/spec/v1.1/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "automated-debugging-remediation",
+      "name": "Automated Debugging & Remediation",
+      "tags": ["developer-tools", "debugging"],
+      "roadmaps": ["developer-tools-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["software-supply-chain-health"],
+      "related": ["software-supply-chain-health"],
+      "description": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.",
+      "mentalModel": "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.",
+      "drills": ["practice-automated-debugging-remediation"],
+      "reviewQuestions": ["rq-automated-debugging-remediation"],
+      "resources": [
+        {
+          "title": "Delta Debugging",
+          "url": "https://www.st.cs.uni-saarland.de/dd/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-developer-tools-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "web-mobile-engineering",
+      "name": "Web & Mobile Engineering",
+      "tags": ["application-engineering", "client-platforms"],
+      "roadmaps": ["application-engineering-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["api-design"],
+      "related": ["api-design", "ux-interface-design"],
+      "description": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.",
+      "mentalModel": "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.",
+      "drills": ["practice-web-mobile-engineering"],
+      "reviewQuestions": ["rq-web-mobile-engineering"],
+      "resources": [
+        {
+          "title": "MDN Web Platform",
+          "url": "https://developer.mozilla.org/en-US/docs/Web",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-application-engineering-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "ux-interface-design",
+      "name": "UX & Interface Design",
+      "tags": ["application-engineering", "ux"],
+      "roadmaps": ["application-engineering-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["web-mobile-engineering"],
+      "related": ["web-mobile-engineering", "real-time-application-engineering"],
+      "description": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
+      "mentalModel": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
+      "drills": ["practice-ux-interface-design"],
+      "reviewQuestions": ["rq-ux-interface-design"],
+      "resources": [
+        {
+          "title": "W3C Web Content Accessibility Guidelines",
+          "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-application-engineering-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "real-time-application-engineering",
+      "name": "Real-time Application Engineering",
+      "tags": ["application-engineering", "real-time"],
+      "roadmaps": ["application-engineering-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["ux-interface-design"],
+      "related": ["ux-interface-design", "messaging-realtime"],
+      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
+      "mentalModel": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
+      "drills": ["practice-real-time-application-engineering"],
+      "reviewQuestions": ["rq-real-time-application-engineering"],
+      "resources": [
+        {
+          "title": "The WebSocket Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc6455",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-application-engineering-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "interactive-2d-3d-systems",
+      "name": "2D/3D Interactive Systems",
+      "tags": ["application-engineering", "graphics"],
+      "roadmaps": ["application-engineering-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["game-design"],
+      "related": ["game-design", "product-analytics"],
+      "description": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
+      "mentalModel": "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
+      "drills": ["practice-interactive-2d-3d-systems"],
+      "reviewQuestions": ["rq-interactive-2d-3d-systems"],
+      "resources": [
+        {
+          "title": "WebGPU Specification",
+          "url": "https://www.w3.org/TR/webgpu/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-application-engineering-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "multimodal-models",
+      "name": "Multimodal Models",
+      "tags": ["multimodal-spatial", "multimodal"],
+      "roadmaps": ["ai-models-training-12w", "multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["vision-models"],
+      "description": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
+      "mentalModel": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
+      "drills": ["practice-multimodal-models"],
+      "reviewQuestions": ["rq-multimodal-models"],
+      "resources": [
+        {
+          "title": "CLIP: Learning Transferable Visual Models From Natural Language Supervision",
+          "url": "https://arxiv.org/abs/2103.00020",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-ai-models-training-12w", "synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "vision-models",
+      "name": "Vision Models",
+      "tags": ["multimodal-spatial", "computer-vision"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["multimodal-models"],
+      "related": ["multimodal-models", "voice-audio-systems"],
+      "description": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
+      "mentalModel": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
+      "drills": ["practice-vision-models"],
+      "reviewQuestions": ["rq-vision-models"],
+      "resources": [
+        {
+          "title": "Stanford CS231n",
+          "url": "https://cs231n.stanford.edu/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "pose-motion-tracking",
+      "name": "Pose & Motion Tracking",
+      "tags": ["multimodal-spatial", "pose"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["voice-audio-systems"],
+      "related": ["voice-audio-systems", "image-video-generation"],
+      "description": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
+      "mentalModel": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
+      "drills": ["practice-pose-motion-tracking"],
+      "reviewQuestions": ["rq-pose-motion-tracking"],
+      "resources": [
+        {
+          "title": "MediaPipe Pose Landmarker",
+          "url": "https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "voice-audio-systems",
+      "name": "Voice & Audio Systems",
+      "tags": ["multimodal-spatial", "audio"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["vision-models"],
+      "related": ["vision-models", "pose-motion-tracking"],
+      "description": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
+      "mentalModel": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
+      "drills": ["practice-voice-audio-systems"],
+      "reviewQuestions": ["rq-voice-audio-systems"],
+      "resources": [
+        {
+          "title": "Web Audio API",
+          "url": "https://www.w3.org/TR/webaudio/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "image-video-generation",
+      "name": "Image & Video Generation",
+      "tags": ["multimodal-spatial", "generation"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["pose-motion-tracking"],
+      "related": ["pose-motion-tracking", "local-on-device-inference"],
+      "description": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
+      "mentalModel": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
+      "drills": ["practice-image-video-generation"],
+      "reviewQuestions": ["rq-image-video-generation"],
+      "resources": [
+        {
+          "title": "Denoising Diffusion Probabilistic Models",
+          "url": "https://arxiv.org/abs/2006.11239",
+          "type": "paper"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "robotics-systems",
+      "name": "Robotics Systems",
+      "tags": ["multimodal-spatial", "robotics"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["local-on-device-inference"],
+      "related": ["local-on-device-inference", "spatial-interfaces"],
+      "description": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
+      "mentalModel": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
+      "drills": ["practice-robotics-systems"],
+      "reviewQuestions": ["rq-robotics-systems"],
+      "resources": [
+        {
+          "title": "ROS 2 Documentation",
+          "url": "https://docs.ros.org/en/rolling/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "spatial-interfaces",
+      "name": "Spatial Interfaces",
+      "tags": ["multimodal-spatial", "spatial-computing"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["robotics-systems"],
+      "related": ["robotics-systems", "human-computer-interaction"],
+      "description": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
+      "mentalModel": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
+      "drills": ["practice-spatial-interfaces"],
+      "reviewQuestions": ["rq-spatial-interfaces"],
+      "resources": [
+        {
+          "title": "WebXR Device API",
+          "url": "https://www.w3.org/TR/webxr/",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "human-computer-interaction",
+      "name": "Human-Computer Interaction",
+      "tags": ["multimodal-spatial", "hci"],
+      "roadmaps": ["multimodal-spatial-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["spatial-interfaces"],
+      "related": ["spatial-interfaces", "ml-webgpu"],
+      "description": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
+      "mentalModel": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
+      "commonMistakes": [
+        "Naming a tool without explaining the mechanism or failure mode",
+        "Optimizing one metric while ignoring the system-level trade-off"
+      ],
+      "realWorldUsage": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
+      "drills": ["practice-human-computer-interaction"],
+      "reviewQuestions": ["rq-human-computer-interaction"],
+      "resources": [
+        {
+          "title": "Interaction Design Foundation — HCI",
+          "url": "https://www.interaction-design.org/literature/topics/human-computer-interaction",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

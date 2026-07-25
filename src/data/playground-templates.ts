@@ -1,5 +1,6 @@
 // Starter scaffolds for math-stack artifacts — active implementation, not passive reading.
 import type { Language } from '../types';
+import artifactsData from './artifacts.json';
 
 export interface PlaygroundTemplate {
   artifactId: string;
@@ -9,7 +10,7 @@ export interface PlaygroundTemplate {
   problem: string;
 }
 
-const TEMPLATES: PlaygroundTemplate[] = [
+const BASE_TEMPLATES: PlaygroundTemplate[] = [
   {
     artifactId: 'implement-bm25-highsignal',
     title: 'Implement BM25 search in HighSignal',
@@ -1528,6 +1529,99 @@ const bars: Bar[] = Array.from({ length: 24 }, (_, i) => ({ date: String(i), clo
 console.log(backtest(bars, bars));`,
   },
 ];
+
+interface DomainSynthesisArtifact {
+  id: string;
+  title: string;
+  description: string;
+  successCriteria: string[];
+  deliverables: string[];
+  curriculumSource?: string;
+}
+
+function domainSynthesisTemplate(artifact: DomainSynthesisArtifact): PlaygroundTemplate {
+  const successCriteria = artifact.successCriteria.map((criterion) => `- ${criterion}`).join('\n');
+  const deliverables = artifact.deliverables.map((deliverable) => `- ${deliverable}`).join('\n');
+
+  return {
+    artifactId: artifact.id,
+    title: artifact.title,
+    language: 'typescript',
+    problem: `# ${artifact.title}
+
+${artifact.description}
+
+## Success criteria
+${successCriteria}
+
+## Deliverables
+${deliverables}
+
+**Gym rules:** Replace the sample evidence with measurements from your system. A criterion only passes when it has reproducible evidence.`,
+    code: `type Evidence = {
+  criterion: string;
+  command: string;
+  observation: string;
+  passed: boolean;
+};
+
+type ArchitectureDecision = {
+  decision: string;
+  mechanism: string;
+  tradeoff: string;
+  failureMode: string;
+};
+
+const successCriteria = ${JSON.stringify(artifact.successCriteria, null, 2)} as const;
+
+const decisions: ArchitectureDecision[] = [
+  {
+    decision: 'Replace with the first consequential design decision',
+    mechanism: 'Name the concrete mechanism, protocol, model, or data structure',
+    tradeoff: 'State what becomes worse or more expensive',
+    failureMode: 'Describe one injected failure and expected recovery',
+  },
+];
+
+const evidence: Evidence[] = successCriteria.map((criterion) => ({
+  criterion,
+  command: 'replace-with-reproducible-command',
+  observation: 'replace-with-measured-output',
+  passed: false,
+}));
+
+function verifyCapstone(
+  criteria: readonly string[],
+  records: Evidence[],
+  architecture: ArchitectureDecision[],
+) {
+  const covered = new Map(records.map((record) => [record.criterion, record]));
+  const missing = criteria.filter((criterion) => !covered.get(criterion)?.passed);
+  const decisionsAreSpecific = architecture.every(
+    (entry) =>
+      entry.decision.trim() &&
+      entry.mechanism.trim() &&
+      entry.tradeoff.trim() &&
+      entry.failureMode.trim(),
+  );
+  return {
+    passed: missing.length === 0 && decisionsAreSpecific,
+    missing,
+    decisionsAreSpecific,
+  };
+}
+
+console.log(verifyCapstone(successCriteria, evidence, decisions));`,
+  };
+}
+
+const DOMAIN_SYNTHESIS_TEMPLATES = (
+  artifactsData as { artifacts: DomainSynthesisArtifact[] }
+).artifacts
+  .filter((artifact) => artifact.curriculumSource === 'learning-domain-expansion-v1')
+  .map(domainSynthesisTemplate);
+
+const TEMPLATES: PlaygroundTemplate[] = [...BASE_TEMPLATES, ...DOMAIN_SYNTHESIS_TEMPLATES];
 
 const BY_ID = Object.fromEntries(TEMPLATES.map((t) => [t.artifactId, t]));
 

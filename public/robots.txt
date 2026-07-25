@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://learn.significanthobbies.com/sitemap.xml
-# Agent indexing
+Allow: /curriculum/
 Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /index.md
 Allow: /api/ai
-Allow: /llms-full.txt
+
+Sitemap: https://learn.significanthobbies.com/sitemap.xml

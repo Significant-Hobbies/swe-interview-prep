@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recall / Latency Tradeoffs | SWE Prep</title>
+    <meta name="description" content="Reading recall-vs-latency curves to choose ANN parameters. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Recall / Latency Tradeoffs | SWE Prep">
+    <meta property="og:description" content="Reading recall-vs-latency curves to choose ANN parameters. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Recall / Latency Tradeoffs | SWE Prep">
+    <meta name="twitter:description" content="Reading recall-vs-latency curves to choose ANN parameters. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Recall / Latency Tradeoffs","description":"Reading recall-vs-latency curves to choose ANN parameters.","url":"https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Recall / Latency Tradeoffs","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · advanced</p>
+    <h1>Recall / Latency Tradeoffs</h1>
+    <p class="lede">Reading recall-vs-latency curves to choose ANN parameters.</p>
+    <div class="pills"><span>vector-db</span><span>ann</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Every ANN knob trades recall for speed/memory. The honest artifact is a curve: recall on the y-axis, latency (or QPS, or memory) on the x-axis, with brute force as the recall=1.0 anchor.</p>
+    </section>
+
+    <section>
+      <h2>How to study Recall / Latency Tradeoffs</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use ANN-Benchmarks to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Recall / Latency Tradeoffs with IVF (Inverted File), Product Quantization. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Read a recall–latency curve and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>ann-benchmarks.com, every vector DB selection decision.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Reporting a single recall number with no latency context</li><li>Comparing indexes at different recall operating points</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://ann-benchmarks.com/" rel="noreferrer">ANN-Benchmarks</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Read a recall–latency curve</h3>
+          <p>ANN curve: 95% recall @ 8ms, 99% @ 25ms, brute force 100% @ 200ms. Which point do you ship for interactive search?</p>
+          <p><strong>Expected evidence:</strong> 95%/8ms if UX budget ~10ms; document regression vs brute force.</p>
+          <a href="/drills/read-recall-latency-curve">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why report a recall/latency curve instead of a single recall number?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Recall / latency benchmark dashboard</h3>
+          <p>Plot recall vs latency for ANN parameter sweeps against the brute-force baseline.</p>
+          <ul><li>Brute force used as the recall=1.0 ground truth</li><li>Sweep at least one ANN parameter</li><li>Produce a recall-vs-latency curve</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ivf.html">IVF (Inverted File)</a></li><li><a href="/curriculum/concepts/product-quantization.html">Product Quantization</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

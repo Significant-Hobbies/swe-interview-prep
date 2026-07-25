@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import artifactsData from './artifacts.json';
 import conceptsData from './concepts.json';
+import curriculumCoverageData from './curriculum-coverage.json';
 import drillsData from './drills.json';
 import { TRACKS } from './learning-os';
 import projectsData from './projects.json';
@@ -9,6 +10,7 @@ import externalResourcesData from './external-resources.json';
 import reviewQuestionsData from './review-questions.json';
 import roadmapsData from './roadmaps.json';
 import { isMetadataDrill } from '../lib/contentQuality';
+import { ROADMAP_GROUPS } from '../lib/roadmapGroups';
 
 const concepts = (conceptsData as any).concepts;
 const tracks = TRACKS;
@@ -17,6 +19,10 @@ const drills = (drillsData as any).drills;
 const projects = (projectsData as any).projects;
 const reviewQuestions = (reviewQuestionsData as any).reviewQuestions;
 const roadmaps = (roadmapsData as any).roadmaps;
+const curriculumCoverage = curriculumCoverageData as {
+  categories: { id: string; topics: { name: string; concepts: string[] }[] }[];
+  preservedConceptIds: string[];
+};
 
 const conceptIds = new Set(concepts.map((c: any) => c.id));
 const trackIds = new Set(tracks.map((t: any) => t.id));
@@ -196,6 +202,71 @@ describe('concept taxonomy', () => {
     ];
     const missing = legacy.filter((id) => !conceptIds.has(id));
     expect(missing).toEqual([]);
+  });
+
+  it('preserves every concept id that existed before the domain expansion', () => {
+    expect(curriculumCoverage.preservedConceptIds).toHaveLength(152);
+    const missing = curriculumCoverage.preservedConceptIds.filter((id) => !conceptIds.has(id));
+    expect(missing).toEqual([]);
+  });
+});
+
+describe('eleven-domain curriculum expansion', () => {
+  const addedTrackIds = [
+    'systems-foundations',
+    'infrastructure-platforms',
+    'distributed-systems',
+    'inference-serving',
+    'agent-systems',
+    'ai-reliability',
+    'developer-tools',
+    'application-engineering',
+    'multimodal-spatial',
+  ];
+
+  it('maps all 96 requested subtopics across eleven categories', () => {
+    expect(curriculumCoverage.categories).toHaveLength(11);
+    const topics = curriculumCoverage.categories.flatMap((category) => category.topics);
+    expect(topics).toHaveLength(96);
+
+    const broken = topics.flatMap((topic) => {
+      if (!topic.concepts.length) return [`${topic.name} has no concepts`];
+      return topic.concepts.filter((id) => !conceptIds.has(id)).map((id) => `${topic.name}→${id}`);
+    });
+    expect(broken).toEqual([]);
+  });
+
+  it('keeps every added domain first-class and practice-backed', () => {
+    for (const id of addedTrackIds) {
+      expect(trackIds.has(id), `${id} is a known track`).toBe(true);
+      const owned = concepts.filter((concept: any) => concept.tags?.[0] === id);
+      expect(owned.length, `${id} owns concepts`).toBeGreaterThanOrEqual(3);
+      for (const concept of owned) {
+        expect(concept.drills?.length, `${concept.id} drills`).toBeGreaterThan(0);
+        expect(concept.reviewQuestions?.length, `${concept.id} reviews`).toBeGreaterThan(0);
+        expect(concept.roadmaps?.length, `${concept.id} roadmaps`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('gives every generated concept a source, drill, review, roadmap, and synthesis artifact', () => {
+    const generated = concepts.filter(
+      (concept: any) => concept.curriculumSource === 'learning-domain-expansion-v1'
+    );
+    expect(generated).toHaveLength(70);
+    for (const concept of generated) {
+      expect(concept.resources?.length, `${concept.id} resources`).toBeGreaterThan(0);
+      expect(concept.drills?.length, `${concept.id} drills`).toBeGreaterThan(0);
+      expect(concept.reviewQuestions?.length, `${concept.id} reviews`).toBeGreaterThan(0);
+      expect(concept.roadmaps?.length, `${concept.id} roadmaps`).toBeGreaterThan(0);
+      expect(concept.artifacts?.length, `${concept.id} artifacts`).toBeGreaterThan(0);
+    }
+  });
+
+  it('groups every roadmap exactly once', () => {
+    const grouped = ROADMAP_GROUPS.flatMap((group) => group.roadmapIds);
+    expect(new Set(grouped).size).toBe(grouped.length);
+    expect(new Set(grouped)).toEqual(new Set(roadmaps.map((roadmap: any) => roadmap.id)));
   });
 });
 

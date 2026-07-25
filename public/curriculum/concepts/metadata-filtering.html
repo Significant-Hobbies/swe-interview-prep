@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Metadata Filtering | SWE Prep</title>
+    <meta name="description" content="Combining vector search with structured predicates (tenant, date, tags).">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Metadata Filtering | SWE Prep">
+    <meta property="og:description" content="Combining vector search with structured predicates (tenant, date, tags).">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Metadata Filtering | SWE Prep">
+    <meta name="twitter:description" content="Combining vector search with structured predicates (tenant, date, tags).">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Metadata Filtering","description":"Combining vector search with structured predicates (tenant, date, tags).","url":"https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Metadata Filtering","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · core</p>
+    <h1>Metadata Filtering</h1>
+    <p class="lede">Combining vector search with structured predicates (tenant, date, tags).</p>
+    <div class="pills"><span>vector-db</span><span>filtering</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Real queries are &#39;nearest vectors WHERE tenant=X AND date&gt;Y&#39;. Pre-filtering shrinks the candidate set before ANN (accurate, can be slow); post-filtering runs ANN then drops misses (fast, can return too few). The hard part is doing it inside a graph index.</p>
+    </section>
+
+    <section>
+      <h2>How to study Metadata Filtering</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Pinecone — Filtering with metadata, Weaviate — Filtered ANN search to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Metadata Filtering with HNSW, RAG. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Add metadata filtering to vector search and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Every production vector DB; critical for multi-tenant RAG.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Post-filtering an HNSW result and returning fewer than k items</li><li>Treating filters as an afterthought to the index design</li><li>Ignoring multi-tenancy isolation in a shared index</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.pinecone.io/learn/vector-search-filtering/" rel="noreferrer">Pinecone — Filtering with metadata</a> <span class="muted">(doc)</span></li><li><a href="https://weaviate.io/blog/speed-up-filtered-vector-search" rel="noreferrer">Weaviate — Filtered ANN search</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Add metadata filtering to vector search</h3>
+          <p>Extend your brute-force index to support &#39;nearest WHERE field = value&#39;. Implement both pre-filtering and post-filtering and compare results and timing.</p>
+          <p><strong>Expected evidence:</strong> Filtered top-k that always returns k items when k qualify.</p>
+          <a href="/drills/implement-metadata-filter">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Compare pre-filtering and post-filtering in vector search.</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Metadata filtering for vector search</h3>
+          <p>Add structured predicate filtering to vector search.</p>
+          <ul><li>Support &#39;nearest WHERE field = value&#39; queries</li><li>Implement both pre-filter and post-filter and compare</li><li>Always return k results when k are available</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

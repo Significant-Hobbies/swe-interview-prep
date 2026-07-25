@@ -53,7 +53,7 @@ export default function Learn() {
         </h1>
         <p className="mt-4 max-w-prose text-sm text-white/50 sm:text-base">
           Today&apos;s session follows the active roadmap. Start with four macro doors, quick
-          interview picks, or all 14 roadmaps below.
+          interview picks, or all {ROADMAPS.length} roadmaps below.
         </p>
         <Link
           to="/explore"

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tokenization (LLM) | SWE Prep</title>
+    <meta name="description" content="Byte-level, char-level, BPE, vocab design. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Tokenization (LLM) | SWE Prep">
+    <meta property="og:description" content="Byte-level, char-level, BPE, vocab design. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tokenization (LLM) | SWE Prep">
+    <meta name="twitter:description" content="Byte-level, char-level, BPE, vocab design. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Tokenization (LLM)","description":"Byte-level, char-level, BPE, vocab design.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html","educationalLevel":"intro","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Tokenization (LLM)","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · intro</p>
+    <h1>Tokenization (LLM)</h1>
+    <p class="lede">Byte-level, char-level, BPE, vocab design.</p>
+    <div class="pills"><span>ai-systems</span><span>language-modeling</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>LLM tokenizers (BPE, SentencePiece) split text into small reusable pieces — often subwords — so the model can handle any input even if it has not seen the exact word. The model and the tokenizer are a pair; swapping one breaks the other.</p>
+    </section>
+
+    <section>
+      <h2>How to study Tokenization (LLM)</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stanford CS336 — L1 Overview &amp; tokenization (Spring 2025), CS336 Assignment 1 — Build a tokenizer from scratch, Let&#39;s build the GPT Tokenizer (Karpathy) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Tokenization (LLM) with Tokenization, Language Modeling. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete One BPE merge step and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://cs336.stanford.edu/spring2025/" rel="noreferrer">Stanford CS336 — L1 Overview &amp; tokenization (Spring 2025)</a> <span class="muted">(course)</span></li><li><a href="https://github.com/stanford-cs336/assignment1-basics/tree/main" rel="noreferrer">CS336 Assignment 1 — Build a tokenizer from scratch</a> <span class="muted">(doc)</span></li><li><a href="https://www.youtube.com/watch?v=zduSFxRajkE" rel="noreferrer">Let&#39;s build the GPT Tokenizer (Karpathy)</a> <span class="muted">(video)</span></li><li><a href="https://jalammar.github.io/illustrated-gpt2/" rel="noreferrer">The Illustrated GPT-2 — BPE tokenization</a> <span class="muted">(article)</span></li><li><a href="https://huggingface.co/docs/tokenizers/index" rel="noreferrer">HuggingFace — Tokenizers</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>One BPE merge step</h3>
+          <p>Corpus tokenized as [l,o,w,e,r,l,o,w,e,s,t]. Count adjacent pairs; merge the most frequent pair once. What is the new sequence?</p>
+          <p><strong>Expected evidence:</strong> lo appears twice → merge lo → [lo,w,e,r,lo,w,e,s,t].</p>
+          <a href="/drills/ml-bpe-merge-step">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Tokenization (LLM) in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: AI Models &amp; Training</h3>
+          <p>Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/tokenization.html">Tokenization</a></li><li><a href="/curriculum/concepts/ml-language-modeling.html">Language Modeling</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

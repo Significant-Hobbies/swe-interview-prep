@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DSA &amp; Implementation | SWE Prep</title>
+    <meta name="description" content="Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/dsa.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="DSA &amp; Implementation | SWE Prep">
+    <meta property="og:description" content="Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/dsa.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DSA &amp; Implementation | SWE Prep">
+    <meta name="twitter:description" content="Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DSA & Implementation","description":"Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.","url":"https://learn.significanthobbies.com/curriculum/tracks/dsa.html","numberOfItems":19,"hasPart":[{"@type":"LearningResource","name":"Arrays & Hashing","url":"https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html"},{"@type":"LearningResource","name":"Two Pointers","url":"https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html"},{"@type":"LearningResource","name":"Sliding Window","url":"https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html"},{"@type":"LearningResource","name":"Stack","url":"https://learn.significanthobbies.com/curriculum/concepts/stack.html"},{"@type":"LearningResource","name":"Binary Search","url":"https://learn.significanthobbies.com/curriculum/concepts/binary-search.html"},{"@type":"LearningResource","name":"Linked List","url":"https://learn.significanthobbies.com/curriculum/concepts/linked-list.html"},{"@type":"LearningResource","name":"Trees","url":"https://learn.significanthobbies.com/curriculum/concepts/trees.html"},{"@type":"LearningResource","name":"Trie","url":"https://learn.significanthobbies.com/curriculum/concepts/tries.html"},{"@type":"LearningResource","name":"Heap / Priority Queue","url":"https://learn.significanthobbies.com/curriculum/concepts/heap.html"},{"@type":"LearningResource","name":"Backtracking","url":"https://learn.significanthobbies.com/curriculum/concepts/backtracking.html"},{"@type":"LearningResource","name":"Graphs","url":"https://learn.significanthobbies.com/curriculum/concepts/graphs.html"},{"@type":"LearningResource","name":"Shortest Path","url":"https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html"},{"@type":"LearningResource","name":"Union-Find","url":"https://learn.significanthobbies.com/curriculum/concepts/union-find.html"},{"@type":"LearningResource","name":"1D DP","url":"https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html"},{"@type":"LearningResource","name":"2D DP","url":"https://learn.significanthobbies.com/curriculum/concepts/dp-2d.html"},{"@type":"LearningResource","name":"Greedy","url":"https://learn.significanthobbies.com/curriculum/concepts/greedy.html"},{"@type":"LearningResource","name":"Intervals","url":"https://learn.significanthobbies.com/curriculum/concepts/intervals.html"},{"@type":"LearningResource","name":"Math & Geometry","url":"https://learn.significanthobbies.com/curriculum/concepts/math-geometry.html"},{"@type":"LearningResource","name":"Bit Manipulation","url":"https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 19 concepts</p>
+    <h1>DSA &amp; Implementation</h1>
+    <p class="lede">Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 19 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For DSA &amp; Implementation, use the track description as the boundary: learn enough detail to reason clearly about fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with Arrays &amp; Hashing, Stack, Linked List to establish the basic vocabulary. Continue through the core concepts by alternating explanation with an executable drill. Treat Backtracking, Graphs, Shortest Path, 1D DP as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/dsa-practice.html">DSA Practice</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/array-hashing.html">Arrays &amp; Hashing</a></h3>
+        <p>Hash maps, sets, frequency counting.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/two-pointers.html">Two Pointers</a></h3>
+        <p>Converging/diverging pointer scans.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/sliding-window.html">Sliding Window</a></h3>
+        <p>Variable/fixed window over sequences.</p>
+      </article><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/stack.html">Stack</a></h3>
+        <p>LIFO, parsing, monotonic stack.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/binary-search.html">Binary Search</a></h3>
+        <p>Halving sorted search space, predicate search.</p>
+      </article><article class="card">
+        <p class="eyebrow">intro</p>
+        <h3><a href="/curriculum/concepts/linked-list.html">Linked List</a></h3>
+        <p>Pointer manipulation, fast/slow, reversal.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/trees.html">Trees</a></h3>
+        <p>Binary trees, BSTs, DFS/BFS.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/tries.html">Trie</a></h3>
+        <p>Prefix trees.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/heap.html">Heap / Priority Queue</a></h3>
+        <p>Top-k, k-way merge, scheduling.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/backtracking.html">Backtracking</a></h3>
+        <p>DFS with state restoration, pruning.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/graphs.html">Graphs</a></h3>
+        <p>BFS/DFS, topo sort, union-find.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/shortest-path.html">Shortest Path</a></h3>
+        <p>Dijkstra, Bellman-Ford, A*.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/union-find.html">Union-Find</a></h3>
+        <p>Disjoint set, path compression.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/dp-1d.html">1D DP</a></h3>
+        <p>Linear state recurrences.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/dp-2d.html">2D DP</a></h3>
+        <p>Grid DP, edit distance, knapsack.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/greedy.html">Greedy</a></h3>
+        <p>Local-optimal-as-global proofs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/intervals.html">Intervals</a></h3>
+        <p>Merge, overlap, sweep line.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/math-geometry.html">Math &amp; Geometry</a></h3>
+        <p>Number theory, modular, geometry.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/bit-manipulation.html">Bit Manipulation</a></h3>
+        <p>Bitwise ops, masks, XOR tricks.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,610 @@
+{
+  "version": 1,
+  "source": "User-requested eleven-domain curriculum, 2026-07-25",
+  "categories": [
+    {
+      "id": "systems-foundations",
+      "title": "Systems Foundations",
+      "topics": [
+        {
+          "name": "Operating systems",
+          "concepts": ["operating-system-mechanics"]
+        },
+        {
+          "name": "Networking",
+          "concepts": ["network-protocol-engineering", "http-lifecycle"]
+        },
+        {
+          "name": "Concurrency and parallelism",
+          "concepts": ["concurrency-design"]
+        },
+        {
+          "name": "Memory, CPU, GPU and storage",
+          "concepts": ["compute-memory-storage-hierarchy", "ml-webgpu", "object-storage"]
+        },
+        {
+          "name": "Runtime and performance engineering",
+          "concepts": ["runtime-performance-engineering"]
+        },
+        {
+          "name": "Security and isolation",
+          "concepts": ["security-isolation-boundaries", "sandbox-execution-environments"]
+        }
+      ]
+    },
+    {
+      "id": "infrastructure-platforms",
+      "title": "Infrastructure & Platforms",
+      "topics": [
+        {
+          "name": "Cloud infrastructure",
+          "concepts": ["cloud-infrastructure"]
+        },
+        {
+          "name": "Containers and Kubernetes",
+          "concepts": ["containers-kubernetes"]
+        },
+        {
+          "name": "CI/CD and developer environments",
+          "concepts": ["cicd-developer-environments"]
+        },
+        {
+          "name": "Scheduling and orchestration",
+          "concepts": ["platform-scheduling-orchestration", "background-jobs"]
+        },
+        {
+          "name": "Reliability and fault tolerance",
+          "concepts": ["reliability-fault-tolerance", "retries-dlq"]
+        },
+        {
+          "name": "Observability and OpenTelemetry",
+          "concepts": ["opentelemetry-observability", "monitoring-analytics"]
+        },
+        {
+          "name": "Sandboxes and execution environments",
+          "concepts": ["sandbox-execution-environments"]
+        },
+        {
+          "name": "Infrastructure automation",
+          "concepts": ["infrastructure-automation"]
+        }
+      ]
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems",
+      "topics": [
+        {
+          "name": "Consensus and coordination",
+          "concepts": ["consensus", "distributed-infra"]
+        },
+        {
+          "name": "Replication and partitioning",
+          "concepts": ["replication", "sharding"]
+        },
+        {
+          "name": "Messaging, Kafka and event systems",
+          "concepts": ["message-queues", "event-streaming-kafka", "messaging-realtime"]
+        },
+        {
+          "name": "Caching",
+          "concepts": ["caching"]
+        },
+        {
+          "name": "Distributed workflows and Temporal",
+          "concepts": ["distributed-workflows-temporal"]
+        },
+        {
+          "name": "Consistency models",
+          "concepts": ["cap-theorem", "transaction-processing"]
+        },
+        {
+          "name": "Resilience and failure recovery",
+          "concepts": ["distributed-failure-recovery", "retries-dlq"]
+        }
+      ]
+    },
+    {
+      "id": "databases-data-systems",
+      "title": "Databases & Data Systems",
+      "topics": [
+        {
+          "name": "Storage engines",
+          "concepts": ["storage-retrieval", "b-tree", "lsm-tree"]
+        },
+        {
+          "name": "Transactional databases",
+          "concepts": ["transaction-processing", "wal"]
+        },
+        {
+          "name": "Analytical databases",
+          "concepts": ["columnar-storage", "query-execution-optimization"]
+        },
+        {
+          "name": "Distributed databases",
+          "concepts": ["distributed-infra", "replication", "sharding"]
+        },
+        {
+          "name": "Streaming systems",
+          "concepts": ["event-streaming-kafka", "message-queues"]
+        },
+        {
+          "name": "Search and vector databases",
+          "concepts": ["search-discovery", "hnsw", "brute-force-vector-db"]
+        },
+        {
+          "name": "Indexing and query execution",
+          "concepts": ["secondary-index", "inverted-index", "query-execution-optimization"]
+        },
+        {
+          "name": "Data warehouses and lakehouses",
+          "concepts": ["warehouses-lakehouses", "columnar-storage"]
+        },
+        {
+          "name": "Memory-versus-disk architecture",
+          "concepts": ["compute-memory-storage-hierarchy", "storage-retrieval"]
+        }
+      ]
+    },
+    {
+      "id": "ai-models-training",
+      "title": "AI Models & Training",
+      "topics": [
+        {
+          "name": "Model architectures",
+          "concepts": ["ml-transformer-block", "multimodal-models"]
+        },
+        {
+          "name": "Transformers and tokenization",
+          "concepts": ["ml-tokenization", "ml-self-attention", "ml-multi-head"]
+        },
+        {
+          "name": "Pre-training",
+          "concepts": ["ml-pretraining", "ml-training"]
+        },
+        {
+          "name": "Fine-tuning",
+          "concepts": ["ml-lora"]
+        },
+        {
+          "name": "Post-training",
+          "concepts": ["ml-rl-alignment"]
+        },
+        {
+          "name": "Reinforcement learning",
+          "concepts": ["ml-rl-alignment"]
+        },
+        {
+          "name": "Quantization",
+          "concepts": ["model-quantization"]
+        },
+        {
+          "name": "Open-weight models",
+          "concepts": ["open-weight-models"]
+        },
+        {
+          "name": "Multimodal models",
+          "concepts": ["multimodal-models"]
+        }
+      ]
+    },
+    {
+      "id": "inference-serving",
+      "title": "Inference & Serving",
+      "topics": [
+        {
+          "name": "vLLM and inference engines",
+          "concepts": ["inference-engines"]
+        },
+        {
+          "name": "Continuous batching",
+          "concepts": ["continuous-batching"]
+        },
+        {
+          "name": "KV caching and PagedAttention",
+          "concepts": ["kv-cache-paged-attention"]
+        },
+        {
+          "name": "FlashAttention",
+          "concepts": ["flashattention-kernels"]
+        },
+        {
+          "name": "Speculative decoding",
+          "concepts": ["speculative-decoding"]
+        },
+        {
+          "name": "Model routing",
+          "concepts": ["model-routing"]
+        },
+        {
+          "name": "GPU utilization",
+          "concepts": ["gpu-utilization"]
+        },
+        {
+          "name": "Cost and latency optimization",
+          "concepts": ["inference-cost-latency"]
+        },
+        {
+          "name": "Local and on-device inference",
+          "concepts": ["local-on-device-inference", "ml-browser-runtime"]
+        },
+        {
+          "name": "Inference hardware",
+          "concepts": ["inference-hardware"]
+        }
+      ]
+    },
+    {
+      "id": "agent-systems",
+      "title": "Agent Systems",
+      "topics": [
+        {
+          "name": "Agent loops and harnesses",
+          "concepts": ["agent-loops"]
+        },
+        {
+          "name": "Tool use",
+          "concepts": ["tool-calling"]
+        },
+        {
+          "name": "Memory and context management",
+          "concepts": ["agent-memory-context", "context-packing"]
+        },
+        {
+          "name": "MCP and integrations",
+          "concepts": ["mcp-integrations"]
+        },
+        {
+          "name": "Multi-agent coordination",
+          "concepts": ["multi-agent-coordination"]
+        },
+        {
+          "name": "Durable execution",
+          "concepts": ["durable-agent-execution"]
+        },
+        {
+          "name": "Permissions and sandboxing",
+          "concepts": ["agent-permissions-sandboxing"]
+        },
+        {
+          "name": "Browser and computer-use agents",
+          "concepts": ["browser-computer-use-agents"]
+        },
+        {
+          "name": "Agent communication and interfaces",
+          "concepts": ["agent-communication-interfaces"]
+        },
+        {
+          "name": "Long-running and scheduled agents",
+          "concepts": ["long-running-scheduled-agents"]
+        }
+      ]
+    },
+    {
+      "id": "ai-reliability",
+      "title": "Evaluation, Verification & AI Reliability",
+      "topics": [
+        {
+          "name": "LLM evaluations",
+          "concepts": ["llm-evals", "ml-evaluation"]
+        },
+        {
+          "name": "Coding-agent benchmarks",
+          "concepts": ["coding-agent-benchmarks"]
+        },
+        {
+          "name": "Tool-use evaluations",
+          "concepts": ["tool-use-evaluations"]
+        },
+        {
+          "name": "Regression testing",
+          "concepts": ["ai-regression-testing"]
+        },
+        {
+          "name": "Hallucination and failure detection",
+          "concepts": ["hallucination-failure-detection"]
+        },
+        {
+          "name": "Agent observability",
+          "concepts": ["agent-observability"]
+        },
+        {
+          "name": "Tracing and replay",
+          "concepts": ["tracing-replay"]
+        },
+        {
+          "name": "Evidence-backed verification",
+          "concepts": ["evidence-backed-verification"]
+        },
+        {
+          "name": "Human review systems",
+          "concepts": ["human-review-systems"]
+        },
+        {
+          "name": "Cost, latency and quality measurement",
+          "concepts": ["quality-cost-latency-measurement"]
+        }
+      ]
+    },
+    {
+      "id": "developer-tools",
+      "title": "Developer Tools & Code Intelligence",
+      "topics": [
+        {
+          "name": "Code review",
+          "concepts": ["code-review-systems"]
+        },
+        {
+          "name": "Static and dynamic analysis",
+          "concepts": ["static-dynamic-analysis"]
+        },
+        {
+          "name": "Testing infrastructure",
+          "concepts": ["testing-infrastructure"]
+        },
+        {
+          "name": "Codebase graphs",
+          "concepts": ["codebase-graphs"]
+        },
+        {
+          "name": "Dependency and blast-radius analysis",
+          "concepts": ["dependency-blast-radius"]
+        },
+        {
+          "name": "IDE and CLI tooling",
+          "concepts": ["ide-cli-tooling"]
+        },
+        {
+          "name": "Coding agents",
+          "concepts": ["coding-agent-systems", "agent-loops"]
+        },
+        {
+          "name": "Repository intelligence",
+          "concepts": ["repository-intelligence"]
+        },
+        {
+          "name": "Software supply-chain health",
+          "concepts": ["software-supply-chain-health"]
+        },
+        {
+          "name": "Automated debugging and remediation",
+          "concepts": ["automated-debugging-remediation"]
+        }
+      ]
+    },
+    {
+      "id": "application-engineering",
+      "title": "Product & Application Engineering",
+      "topics": [
+        {
+          "name": "Backend and API architecture",
+          "concepts": ["api-design", "http-lifecycle"]
+        },
+        {
+          "name": "Web and mobile engineering",
+          "concepts": ["web-mobile-engineering"]
+        },
+        {
+          "name": "Product analytics",
+          "concepts": ["product-analytics"]
+        },
+        {
+          "name": "UX and interface design",
+          "concepts": ["ux-interface-design"]
+        },
+        {
+          "name": "Real-time applications",
+          "concepts": ["real-time-application-engineering", "messaging-realtime"]
+        },
+        {
+          "name": "Voice interfaces",
+          "concepts": ["voice-audio-systems"]
+        },
+        {
+          "name": "Computer vision",
+          "concepts": ["vision-models"]
+        },
+        {
+          "name": "2D/3D interactive systems",
+          "concepts": ["interactive-2d-3d-systems", "game-design"]
+        },
+        {
+          "name": "Product distribution and growth loops",
+          "concepts": ["positioning", "landing-pages", "seo", "product-analytics"]
+        }
+      ]
+    },
+    {
+      "id": "multimodal-spatial",
+      "title": "Multimodal, Robotics & Spatial Computing",
+      "topics": [
+        {
+          "name": "Vision models",
+          "concepts": ["vision-models"]
+        },
+        {
+          "name": "Pose and motion tracking",
+          "concepts": ["pose-motion-tracking"]
+        },
+        {
+          "name": "Voice and audio systems",
+          "concepts": ["voice-audio-systems"]
+        },
+        {
+          "name": "Image and video generation",
+          "concepts": ["image-video-generation"]
+        },
+        {
+          "name": "On-device intelligence",
+          "concepts": ["local-on-device-inference", "ml-webgpu"]
+        },
+        {
+          "name": "Robotics",
+          "concepts": ["robotics-systems"]
+        },
+        {
+          "name": "Spatial interfaces",
+          "concepts": ["spatial-interfaces"]
+        },
+        {
+          "name": "Human-computer interaction",
+          "concepts": ["human-computer-interaction"]
+        }
+      ]
+    }
+  ],
+  "preservedConceptIds": [
+    "tokenization",
+    "inverted-index",
+    "tf-idf",
+    "bm25",
+    "ranking-metrics",
+    "search-evals",
+    "hybrid-search",
+    "reranking",
+    "query-rewriting",
+    "search-discovery",
+    "embeddings",
+    "vector-similarity",
+    "topk-vector-search",
+    "brute-force-vector-db",
+    "hnsw",
+    "ivf",
+    "product-quantization",
+    "metadata-filtering",
+    "recall-latency-tradeoffs",
+    "rag",
+    "chunking",
+    "context-packing",
+    "structured-outputs",
+    "tool-calling",
+    "agent-loops",
+    "model-routing",
+    "prompt-versioning",
+    "llm-evals",
+    "ml-math",
+    "ml-gradient-descent",
+    "ml-backprop",
+    "ml-softmax-xent",
+    "ml-adamw",
+    "ml-tokenization",
+    "ml-language-modeling",
+    "ml-sampling",
+    "ml-embeddings",
+    "ml-self-attention",
+    "ml-multi-head",
+    "ml-transformer-block",
+    "ml-training",
+    "ml-checkpointing",
+    "ml-lora",
+    "ml-rl-alignment",
+    "ml-data-engineering",
+    "ml-browser-runtime",
+    "ml-webgpu",
+    "ml-evaluation",
+    "http-lifecycle",
+    "api-keys",
+    "rate-limiting",
+    "idempotency",
+    "retries-dlq",
+    "webhooks",
+    "background-jobs",
+    "caching",
+    "message-queues",
+    "monitoring-analytics",
+    "api-design",
+    "auth-systems",
+    "ecommerce-payments",
+    "b-tree",
+    "lsm-tree",
+    "wal",
+    "compaction",
+    "object-storage",
+    "columnar-storage",
+    "secondary-index",
+    "storage-retrieval",
+    "sharding",
+    "replication",
+    "cap-theorem",
+    "object-modeling",
+    "state-management",
+    "strategy-pattern",
+    "observer-pattern",
+    "factory-creational",
+    "decorator-structural",
+    "concurrency-design",
+    "command-chain",
+    "booking-inventory",
+    "game-design",
+    "load-balancing",
+    "consistent-hashing",
+    "consensus",
+    "distributed-infra",
+    "messaging-realtime",
+    "social-media",
+    "streaming-media",
+    "location-transport",
+    "collaboration-productivity",
+    "search-platform-design",
+    "rag-system-design",
+    "array-hashing",
+    "two-pointers",
+    "sliding-window",
+    "stack",
+    "binary-search",
+    "linked-list",
+    "trees",
+    "tries",
+    "heap",
+    "backtracking",
+    "graphs",
+    "shortest-path",
+    "union-find",
+    "dp-1d",
+    "dp-2d",
+    "greedy",
+    "intervals",
+    "math-geometry",
+    "bit-manipulation",
+    "leadership-and-influence",
+    "conflict-resolution",
+    "problem-solving-and-decision-making",
+    "teamwork-and-collaboration",
+    "failure-and-learning",
+    "communication",
+    "time-management-and-prioritization",
+    "innovation-and-creativity",
+    "customer-obsession",
+    "ownership-and-accountability",
+    "positioning",
+    "landing-pages",
+    "seo",
+    "product-analytics",
+    "vectors-and-spaces",
+    "matrices-and-transformations",
+    "eigenvalues-decomposition",
+    "probability-fundamentals",
+    "random-variables",
+    "descriptive-statistics",
+    "estimation-confidence",
+    "hypothesis-testing",
+    "regression-basics",
+    "derivatives-and-gradients",
+    "multivariable-optimization",
+    "information-entropy",
+    "classical-distributions",
+    "sampling-and-clt",
+    "ab-testing-engineering",
+    "bayesian-inference",
+    "maximum-likelihood",
+    "covariance-correlation",
+    "bias-variance-overfitting",
+    "matrix-rank-basis",
+    "pca-projection",
+    "returns-volatility",
+    "stationarity-autocorrelation",
+    "random-walks-markov",
+    "portfolio-risk-metrics",
+    "momentum-backtest"
+  ]
+}

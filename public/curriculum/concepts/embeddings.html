@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Embeddings | SWE Prep</title>
+    <meta name="description" content="Mapping text/images into dense vectors where distance encodes meaning.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/embeddings.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Embeddings | SWE Prep">
+    <meta property="og:description" content="Mapping text/images into dense vectors where distance encodes meaning.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/embeddings.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Embeddings | SWE Prep">
+    <meta name="twitter:description" content="Mapping text/images into dense vectors where distance encodes meaning.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Embeddings","description":"Mapping text/images into dense vectors where distance encodes meaning.","url":"https://learn.significanthobbies.com/curriculum/concepts/embeddings.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Embeddings","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · core</p>
+    <h1>Embeddings</h1>
+    <p class="lede">Mapping text/images into dense vectors where distance encodes meaning.</p>
+    <div class="pills"><span>vector-db</span><span>embeddings</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>An embedding model projects content into a space where &#39;close&#39; means &#39;semantically similar&#39;. Search becomes geometry: find the nearest vectors to the query vector.</p>
+    </section>
+
+    <section>
+      <h2>How to study Embeddings</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use MTEB: Massive Text Embedding Benchmark to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Embeddings with Vector Similarity, RAG, Embeddings (Transformer). Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Embed a corpus and search it and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>OpenAI/Cohere/Voyage embedding APIs, semantic search, RAG retrieval.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Comparing vectors from two different embedding models</li><li>Forgetting to normalize when using cosine similarity</li><li>Ignoring the model&#39;s max input length and silently truncating</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noreferrer">MTEB: Massive Text Embedding Benchmark</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Embed a corpus and search it</h3>
+          <p>Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.</p>
+          <p><strong>Expected evidence:</strong> Semantically relevant documents for a query that shares no exact keywords.</p>
+          <a href="/drills/embed-and-search">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What does &#39;distance&#39; mean in an embedding space?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>RAG pipeline v0</h3>
+          <p>An end-to-end retrieve → pack → generate pipeline grounded in a document corpus.</p>
+          <ul><li>Ingest documents with a chunking strategy</li><li>Retrieve relevant chunks for a query</li><li>Generate an answer grounded in retrieved context</li><li>Have at least 10 eval questions</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/vector-similarity.html">Vector Similarity</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li><li><a href="/curriculum/concepts/ml-embeddings.html">Embeddings (Transformer)</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

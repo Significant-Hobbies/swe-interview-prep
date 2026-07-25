@@ -1,19 +1,19 @@
 {
   "version": 3,
-  "generatedAt": "2026-06-22",
+  "generatedAt": "2026-07-25",
   "_meta": {
     "tier": "S",
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 152,
-      "paper": 152,
-      "blog": 152,
-      "book": 152,
-      "problem": 152,
-      "write": 152,
+      "video": 171,
+      "paper": 159,
+      "blog": 158,
+      "book": 159,
+      "problem": 222,
+      "write": 222,
       "more": 38,
-      "items": 950
+      "items": 1129
     }
   },
   "packs": {
@@ -5524,6 +5524,1251 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Momentum Backtest Discipline\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Backtest = hypothesis on history"
+        }
+      ]
+    },
+    "operating-system-mechanics": {
+      "items": [
+        {
+          "category": "book",
+          "title": "Operating Systems: Three Easy Pieces",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Operating System Mechanics",
+          "url": "/drills/practice-operating-system-mechanics"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Operating System Mechanics\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An operating system multiplexes hardware while enforcing isolation"
+        }
+      ]
+    },
+    "network-protocol-engineering": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Network Protocol Engineering",
+          "url": "/drills/practice-network-protocol-engineering"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Network Protocol Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Networks are layered state machines under delay, loss, duplication, and reordering"
+        }
+      ]
+    },
+    "compute-memory-storage-hierarchy": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "What Every Programmer Should Know About Memory",
+          "url": "https://akkadia.org/drepper/cpumemory.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Compute, Memory & Storage Hierarchy",
+          "url": "/drills/practice-compute-memory-storage-hierarchy"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Compute, Memory & Storage Hierarchy\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Performance is usually data movement"
+        }
+      ]
+    },
+    "runtime-performance-engineering": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Runtime & Performance Engineering",
+          "url": "/drills/practice-runtime-performance-engineering"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Runtime & Performance Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Performance work starts with a workload and a profile"
+        }
+      ]
+    },
+    "security-isolation-boundaries": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Security & Isolation Boundaries",
+          "url": "/drills/practice-security-isolation-boundaries"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Security & Isolation Boundaries\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Security is control over authority and information flow"
+        }
+      ]
+    },
+    "cloud-infrastructure": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Cloud Infrastructure",
+          "url": "/drills/practice-cloud-infrastructure"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Cloud Infrastructure\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Cloud systems are distributed resource managers with failure domains"
+        }
+      ]
+    },
+    "containers-kubernetes": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Containers & Kubernetes",
+          "url": "/drills/practice-containers-kubernetes"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Containers & Kubernetes\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state"
+        }
+      ]
+    },
+    "cicd-developer-environments": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: CI/CD & Developer Environments",
+          "url": "/drills/practice-cicd-developer-environments"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"CI/CD & Developer Environments\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A delivery pipeline converts source into a traceable artifact through reproducible gates"
+        }
+      ]
+    },
+    "platform-scheduling-orchestration": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "Large-scale cluster management at Google with Borg",
+          "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Scheduling & Orchestration",
+          "url": "/drills/practice-platform-scheduling-orchestration"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Scheduling & Orchestration\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Schedulers match constrained work to finite resources"
+        }
+      ]
+    },
+    "reliability-fault-tolerance": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Google Site Reliability Engineering",
+          "url": "https://sre.google/sre-book/table-of-contents/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Reliability & Fault Tolerance",
+          "url": "/drills/practice-reliability-fault-tolerance"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Reliability & Fault Tolerance\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Reliability is a measurable product property"
+        }
+      ]
+    },
+    "opentelemetry-observability": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Observability & OpenTelemetry",
+          "url": "/drills/practice-opentelemetry-observability"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Observability & OpenTelemetry\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Observability reconstructs a request across boundaries"
+        }
+      ]
+    },
+    "sandbox-execution-environments": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Sandboxes & Execution Environments",
+          "url": "/drills/practice-sandbox-execution-environments"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Sandboxes & Execution Environments\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A sandbox is a capability boundary plus resource accounting"
+        }
+      ]
+    },
+    "infrastructure-automation": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Infrastructure Automation",
+          "url": "/drills/practice-infrastructure-automation"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Infrastructure Automation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Infrastructure automation is a convergent state machine"
+        }
+      ]
+    },
+    "event-streaming-kafka": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "Kafka: a Distributed Messaging System",
+          "url": "https://notes.stephenholiday.com/Kafka.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Event Streaming & Kafka",
+          "url": "/drills/practice-event-streaming-kafka"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Event Streaming & Kafka\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Kafka turns an append-only log into a coordination boundary"
+        }
+      ]
+    },
+    "distributed-workflows-temporal": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Distributed Workflows & Temporal",
+          "url": "/drills/practice-distributed-workflows-temporal"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Distributed Workflows & Temporal\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A durable workflow persists decisions as history and replays deterministic code after failure"
+        }
+      ]
+    },
+    "distributed-failure-recovery": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Distributed Failure Recovery",
+          "url": "/drills/practice-distributed-failure-recovery"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Distributed Failure Recovery\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: In a distributed system, failure is ambiguous"
+        }
+      ]
+    },
+    "transaction-processing": {
+      "items": [
+        {
+          "category": "video",
+          "title": "CMU 15-445 — Database Systems",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "blog",
+          "title": "CMU 15-445 — course notes",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Transaction Processing",
+          "url": "/drills/practice-transaction-processing"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Transaction Processing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A transaction provides an illusion over concurrency and failure"
+        }
+      ]
+    },
+    "query-execution-optimization": {
+      "items": [
+        {
+          "category": "video",
+          "title": "CMU 15-445 — Database Systems",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "blog",
+          "title": "CMU 15-445 — course notes",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "paper",
+          "title": "Architecture of a Database System",
+          "url": "https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Query Execution & Optimization",
+          "url": "/drills/practice-query-execution-optimization"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Query Execution & Optimization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A query optimizer searches physical plans using imperfect estimates"
+        }
+      ]
+    },
+    "warehouses-lakehouses": {
+      "items": [
+        {
+          "category": "video",
+          "title": "CMU 15-445 — Database Systems",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "blog",
+          "title": "CMU 15-445 — course notes",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann)",
+          "url": "https://dataintensive.net/"
+        },
+        {
+          "category": "paper",
+          "title": "Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores",
+          "url": "https://www.vldb.org/pvldb/vol13/p3411-armbrust.pdf"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Data Warehouses & Lakehouses",
+          "url": "/drills/practice-warehouses-lakehouses"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Data Warehouses & Lakehouses\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage"
+        }
+      ]
+    },
+    "ml-pretraining": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Stanford CS336 — Spring 2025 lectures",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+        },
+        {
+          "category": "blog",
+          "title": "The Illustrated GPT-2 (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-gpt2/"
+        },
+        {
+          "category": "book",
+          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "url": "https://cs336.stanford.edu/spring2025/"
+        },
+        {
+          "category": "paper",
+          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "url": "https://cs336.stanford.edu/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Model Pre-training",
+          "url": "/drills/practice-ml-pretraining"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Model Pre-training\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Pre-training converts data and compute into general capability"
+        }
+      ]
+    },
+    "model-quantization": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Stanford CS336 — Spring 2025 lectures",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+        },
+        {
+          "category": "blog",
+          "title": "The Illustrated GPT-2 (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-gpt2/"
+        },
+        {
+          "category": "book",
+          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "url": "https://cs336.stanford.edu/spring2025/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Model Quantization",
+          "url": "/drills/practice-model-quantization"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Model Quantization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Quantization stores and computes approximate weights or activations with fewer bits"
+        }
+      ]
+    },
+    "open-weight-models": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Stanford CS336 — Spring 2025 lectures",
+          "url": "https://cs336.stanford.edu/spring2025-lectures/"
+        },
+        {
+          "category": "blog",
+          "title": "The Illustrated GPT-2 (jalammar)",
+          "url": "https://jalammar.github.io/illustrated-gpt2/"
+        },
+        {
+          "category": "book",
+          "title": "Stanford CS336 — Language Modeling from Scratch",
+          "url": "https://cs336.stanford.edu/spring2025/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Open-Weight Models",
+          "url": "/drills/practice-open-weight-models"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Open-Weight Models\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Open weights provide inspectable parameters, not automatically open data or unrestricted rights"
+        }
+      ]
+    },
+    "inference-engines": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: vLLM & Inference Engines",
+          "url": "/drills/practice-inference-engines"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"vLLM & Inference Engines\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control"
+        }
+      ]
+    },
+    "continuous-batching": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Continuous Batching",
+          "url": "/drills/practice-continuous-batching"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Continuous Batching\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request"
+        }
+      ]
+    },
+    "kv-cache-paged-attention": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+          "url": "https://arxiv.org/abs/2309.06180"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: KV Caching & PagedAttention",
+          "url": "/drills/practice-kv-cache-paged-attention"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"KV Caching & PagedAttention\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: The KV cache trades memory for avoided recomputation"
+        }
+      ]
+    },
+    "flashattention-kernels": {
+      "items": [
+        {
+          "category": "video",
+          "title": "FlashAttention",
+          "url": "https://arxiv.org/abs/2205.14135"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: FlashAttention & Attention Kernels",
+          "url": "/drills/practice-flashattention-kernels"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"FlashAttention & Attention Kernels\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: FlashAttention is exact attention reorganized around the memory hierarchy"
+        }
+      ]
+    },
+    "speculative-decoding": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Fast Inference from Transformers via Speculative Decoding",
+          "url": "https://arxiv.org/abs/2211.17192"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Speculative Decoding",
+          "url": "/drills/practice-speculative-decoding"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Speculative Decoding\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A cheap draft proposes several tokens and the target model verifies them in parallel"
+        }
+      ]
+    },
+    "gpu-utilization": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: GPU Utilization",
+          "url": "/drills/practice-gpu-utilization"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"GPU Utilization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: GPU utilization is not one percentage"
+        }
+      ]
+    },
+    "inference-cost-latency": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Inference Cost & Latency Optimization",
+          "url": "/drills/practice-inference-cost-latency"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Inference Cost & Latency Optimization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload"
+        }
+      ]
+    },
+    "local-on-device-inference": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Local & On-device Inference",
+          "url": "/drills/practice-local-on-device-inference"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Local & On-device Inference\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets"
+        }
+      ]
+    },
+    "inference-hardware": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Inference Hardware",
+          "url": "/drills/practice-inference-hardware"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Inference Hardware\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Inference hardware is a memory-and-interconnect system around matrix engines"
+        }
+      ]
+    },
+    "agent-memory-context": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Agent Memory & Context Management",
+          "url": "/drills/practice-agent-memory-context"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Agent Memory & Context Management\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Agent memory is a state architecture, not a larger prompt"
+        }
+      ]
+    },
+    "mcp-integrations": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: MCP & Integrations",
+          "url": "/drills/practice-mcp-integrations"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"MCP & Integrations\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: MCP standardizes how an AI host discovers and invokes external capabilities"
+        }
+      ]
+    },
+    "multi-agent-coordination": {
+      "items": [
+        {
+          "category": "video",
+          "title": "AutoGen: Enabling Next-Gen LLM Applications",
+          "url": "https://arxiv.org/abs/2308.08155"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Multi-agent Coordination",
+          "url": "/drills/practice-multi-agent-coordination"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Multi-agent Coordination\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Multiple agents help when work decomposes cleanly and results can be verified independently"
+        }
+      ]
+    },
+    "durable-agent-execution": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Durable Agent Execution",
+          "url": "/drills/practice-durable-agent-execution"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Durable Agent Execution\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work"
+        }
+      ]
+    },
+    "agent-permissions-sandboxing": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Agent Permissions & Sandboxing",
+          "url": "/drills/practice-agent-permissions-sandboxing"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Agent Permissions & Sandboxing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Treat an agent as an untrusted principal"
+        }
+      ]
+    },
+    "browser-computer-use-agents": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Browser & Computer-use Agents",
+          "url": "/drills/practice-browser-computer-use-agents"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Browser & Computer-use Agents\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift"
+        }
+      ]
+    },
+    "agent-communication-interfaces": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Agent Communication & Interfaces",
+          "url": "/drills/practice-agent-communication-interfaces"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Agent Communication & Interfaces\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Reliable agent interfaces exchange typed state and evidence, not vague prose"
+        }
+      ]
+    },
+    "long-running-scheduled-agents": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Long-running & Scheduled Agents",
+          "url": "/drills/practice-long-running-scheduled-agents"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Long-running & Scheduled Agents\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Long-running agents are jobs with model decisions inside"
+        }
+      ]
+    },
+    "coding-agent-benchmarks": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Coding-agent Benchmarks",
+          "url": "/drills/practice-coding-agent-benchmarks"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Coding-agent Benchmarks\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A coding benchmark is an environment plus task distribution and verifier"
+        }
+      ]
+    },
+    "tool-use-evaluations": {
+      "items": [
+        {
+          "category": "video",
+          "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction",
+          "url": "https://arxiv.org/abs/2406.12045"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Tool-use Evaluations",
+          "url": "/drills/practice-tool-use-evaluations"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Tool-use Evaluations\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state"
+        }
+      ]
+    },
+    "ai-regression-testing": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: AI Regression Testing",
+          "url": "/drills/practice-ai-regression-testing"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"AI Regression Testing\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: AI regression tests compare distributions and task outcomes, not exact strings"
+        }
+      ]
+    },
+    "hallucination-failure-detection": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Hallucination & Failure Detection",
+          "url": "/drills/practice-hallucination-failure-detection"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Hallucination & Failure Detection\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Detect failures against evidence and task constraints"
+        }
+      ]
+    },
+    "agent-observability": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Agent Observability",
+          "url": "/drills/practice-agent-observability"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Agent Observability\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Agent observability connects the final outcome to every decision and side effect"
+        }
+      ]
+    },
+    "tracing-replay": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Tracing & Replay",
+          "url": "/drills/practice-tracing-replay"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Tracing & Replay\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions"
+        }
+      ]
+    },
+    "evidence-backed-verification": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Evidence-backed Verification",
+          "url": "/drills/practice-evidence-backed-verification"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Evidence-backed Verification\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Verification turns an agent claim into inspectable evidence"
+        }
+      ]
+    },
+    "human-review-systems": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Human Review Systems",
+          "url": "/drills/practice-human-review-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Human Review Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Human review is a risk-control system"
+        }
+      ]
+    },
+    "quality-cost-latency-measurement": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Quality, Cost & Latency Measurement",
+          "url": "/drills/practice-quality-cost-latency-measurement"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Quality, Cost & Latency Measurement\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: No AI metric stands alone"
+        }
+      ]
+    },
+    "code-review-systems": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Code Review Systems",
+          "url": "/drills/practice-code-review-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Code Review Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Useful review connects a changed line to behavior and risk"
+        }
+      ]
+    },
+    "static-dynamic-analysis": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Static & Dynamic Analysis",
+          "url": "/drills/practice-static-dynamic-analysis"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Static & Dynamic Analysis\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Static analysis reasons over possible executions; dynamic analysis observes actual executions"
+        }
+      ]
+    },
+    "testing-infrastructure": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Testing Infrastructure",
+          "url": "/drills/practice-testing-infrastructure"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Testing Infrastructure\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Testing infrastructure makes failures reproducible and cheap to diagnose"
+        }
+      ]
+    },
+    "codebase-graphs": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Codebase Graphs",
+          "url": "/drills/practice-codebase-graphs"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Codebase Graphs\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A codebase graph converts files into typed relationships"
+        }
+      ]
+    },
+    "dependency-blast-radius": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Dependency & Blast-radius Analysis",
+          "url": "/drills/practice-dependency-blast-radius"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Dependency & Blast-radius Analysis\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Blast radius is the set of consumers whose behavior can change"
+        }
+      ]
+    },
+    "ide-cli-tooling": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: IDE & CLI Tooling",
+          "url": "/drills/practice-ide-cli-tooling"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"IDE & CLI Tooling\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Good developer tools expose a stable core through both structured APIs and human interfaces"
+        }
+      ]
+    },
+    "coding-agent-systems": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Coding Agent Systems",
+          "url": "/drills/practice-coding-agent-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Coding Agent Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A coding agent is a repository-aware control loop"
+        }
+      ]
+    },
+    "repository-intelligence": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Repository Intelligence",
+          "url": "/drills/practice-repository-intelligence"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Repository Intelligence\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Repository intelligence answers what exists, why it exists, who depends on it, and what changed"
+        }
+      ]
+    },
+    "software-supply-chain-health": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Software Supply-chain Health",
+          "url": "/drills/practice-software-supply-chain-health"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Software Supply-chain Health\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Supply-chain security proves what entered a build and how the artifact was produced"
+        }
+      ]
+    },
+    "automated-debugging-remediation": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Automated Debugging & Remediation",
+          "url": "/drills/practice-automated-debugging-remediation"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Automated Debugging & Remediation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence"
+        }
+      ]
+    },
+    "web-mobile-engineering": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Web & Mobile Engineering",
+          "url": "/drills/practice-web-mobile-engineering"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Web & Mobile Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Client engineering is lifecycle engineering"
+        }
+      ]
+    },
+    "ux-interface-design": {
+      "items": [
+        {
+          "category": "video",
+          "title": "W3C Web Content Accessibility Guidelines",
+          "url": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: UX & Interface Design",
+          "url": "/drills/practice-ux-interface-design"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"UX & Interface Design\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An interface is a state machine for human intent"
+        }
+      ]
+    },
+    "real-time-application-engineering": {
+      "items": [
+        {
+          "category": "paper",
+          "title": "The WebSocket Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc6455"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Real-time Application Engineering",
+          "url": "/drills/practice-real-time-application-engineering"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Real-time Application Engineering\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Real-time apps maintain a local projection of remote state under disconnects and reordering"
+        }
+      ]
+    },
+    "interactive-2d-3d-systems": {
+      "items": [
+        {
+          "category": "video",
+          "title": "WebGPU Specification",
+          "url": "https://www.w3.org/TR/webgpu/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: 2D/3D Interactive Systems",
+          "url": "/drills/practice-interactive-2d-3d-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"2D/3D Interactive Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Interactive systems turn state into frames under a deadline"
+        }
+      ]
+    },
+    "multimodal-models": {
+      "items": [
+        {
+          "category": "video",
+          "title": "CLIP: Learning Transferable Visual Models From Natural Language Supervision",
+          "url": "https://arxiv.org/abs/2103.00020"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Multimodal Models",
+          "url": "/drills/practice-multimodal-models"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Multimodal Models\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Multimodal models align different signal spaces through shared or connected representations"
+        }
+      ]
+    },
+    "vision-models": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Stanford CS231n",
+          "url": "https://cs231n.stanford.edu/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Vision Models",
+          "url": "/drills/practice-vision-models"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Vision Models\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Vision systems convert pixels into task-specific spatial representations"
+        }
+      ]
+    },
+    "pose-motion-tracking": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Pose & Motion Tracking",
+          "url": "/drills/practice-pose-motion-tracking"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Pose & Motion Tracking\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Pose tracking is temporal estimation under ambiguity"
+        }
+      ]
+    },
+    "voice-audio-systems": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Web Audio API",
+          "url": "https://www.w3.org/TR/webaudio/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Voice & Audio Systems",
+          "url": "/drills/practice-voice-audio-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Voice & Audio Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Voice systems are real-time pipelines"
+        }
+      ]
+    },
+    "image-video-generation": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Denoising Diffusion Probabilistic Models",
+          "url": "https://arxiv.org/abs/2006.11239"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Image & Video Generation",
+          "url": "/drills/practice-image-video-generation"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Image & Video Generation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Generative media iteratively maps noise or tokens into structured outputs under conditioning"
+        }
+      ]
+    },
+    "robotics-systems": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Robotics Systems",
+          "url": "/drills/practice-robotics-systems"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Robotics Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A robot closes the loop from sensing to state estimation to planning to control"
+        }
+      ]
+    },
+    "spatial-interfaces": {
+      "items": [
+        {
+          "category": "video",
+          "title": "WebXR Device API",
+          "url": "https://www.w3.org/TR/webxr/"
+        },
+        {
+          "category": "problem",
+          "title": "Design exercise: Spatial Interfaces",
+          "url": "/drills/practice-spatial-interfaces"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Spatial Interfaces\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Spatial interfaces place persistent state in a changing coordinate system"
+        }
+      ]
+    },
+    "human-computer-interaction": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Design exercise: Human-Computer Interaction",
+          "url": "/drills/practice-human-computer-interaction"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Human-Computer Interaction\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: HCI treats system quality as human task performance and experience"
         }
       ]
     }

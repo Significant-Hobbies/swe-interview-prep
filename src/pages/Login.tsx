@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
+import curriculumSummary from '../data/public-curriculum-summary.json';
 
 const PRINCIPLES = [
   {
@@ -28,7 +29,7 @@ const SURFACES = [
   {
     tag: '02',
     title: 'Practice',
-    body: '158 editorial drills with verified tests on the spine. FSRS keeps it sticky.',
+    body: `${curriculumSummary.counts.drills} focused drills connect concepts to executable practice. FSRS keeps it sticky.`,
   },
   {
     tag: '03',
@@ -173,6 +174,48 @@ export default function Login() {
                 <h3 className="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{s.body}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Public curriculum */}
+      <section className="border-t border-white/[0.08]">
+        <div className="mx-auto w-full max-w-5xl px-6 py-20">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            Public curriculum
+          </div>
+          <div className="mt-5 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="max-w-3xl text-balance text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                {curriculumSummary.counts.tracks} tracks. {curriculumSummary.counts.concepts}{' '}
+                concepts. One connected map.
+              </h2>
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-white/60 sm:text-base">
+                Browse systems, infrastructure, distributed systems, databases, AI training and
+                inference, agents, reliability, developer tools, application engineering, multimodal
+                computing, DSA, design, mathematics, search, and product engineering. Every public
+                concept includes a mental model, primary source, practice direction, review prompt,
+                and path to build evidence.
+              </p>
+            </div>
+            <a
+              href="/curriculum/"
+              className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200"
+            >
+              Browse curriculum <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-2 lg:grid-cols-3">
+            {curriculumSummary.tracks.map((track) => (
+              <a
+                key={track.id}
+                href={`/curriculum/tracks/${track.id}.html`}
+                className="bg-black p-5 transition-colors hover:bg-white/[0.04]"
+              >
+                <h3 className="text-sm font-semibold text-white">{track.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-white/50">{track.description}</p>
+              </a>
             ))}
           </div>
         </div>

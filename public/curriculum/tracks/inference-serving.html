@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inference &amp; Serving | SWE Prep</title>
+    <meta name="description" content="Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Inference &amp; Serving | SWE Prep">
+    <meta property="og:description" content="Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inference &amp; Serving | SWE Prep">
+    <meta name="twitter:description" content="Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Inference & Serving","description":"Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.","url":"https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html","numberOfItems":12,"hasPart":[{"@type":"LearningResource","name":"Model Routing","url":"https://learn.significanthobbies.com/curriculum/concepts/model-routing.html"},{"@type":"LearningResource","name":"Browser ML Runtime","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html"},{"@type":"LearningResource","name":"WebGPU Compute","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html"},{"@type":"LearningResource","name":"vLLM & Inference Engines","url":"https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html"},{"@type":"LearningResource","name":"Continuous Batching","url":"https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html"},{"@type":"LearningResource","name":"KV Caching & PagedAttention","url":"https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html"},{"@type":"LearningResource","name":"FlashAttention & Attention Kernels","url":"https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html"},{"@type":"LearningResource","name":"Speculative Decoding","url":"https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding.html"},{"@type":"LearningResource","name":"GPU Utilization","url":"https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html"},{"@type":"LearningResource","name":"Inference Cost & Latency Optimization","url":"https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html"},{"@type":"LearningResource","name":"Local & On-device Inference","url":"https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference.html"},{"@type":"LearningResource","name":"Inference Hardware","url":"https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 12 concepts</p>
+    <h1>Inference &amp; Serving</h1>
+    <p class="lede">Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 12 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Inference &amp; Serving, use the track description as the boundary: learn enough detail to reason clearly about inference engines, batching, kv caches, attention kernels, decoding, routing, hardware utilization, and serving economics.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with the core concepts at the top of the list and write a one-paragraph mechanism note for each. Continue through the core concepts by alternating explanation with an executable drill. Treat Browser ML Runtime, WebGPU Compute as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/inference-serving-12w.html">12-Week Inference &amp; Serving</a></li><li><a href="/curriculum/roadmaps/multimodal-spatial-12w.html">12-Week Multimodal &amp; Spatial Computing</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/model-routing.html">Model Routing</a></h3>
+        <p>Sending each request to the cheapest model that can handle it.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-browser-runtime.html">Browser ML Runtime</a></h3>
+        <p>Web Workers, WASM, OPFS, TypedArrays.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/ml-webgpu.html">WebGPU Compute</a></h3>
+        <p>WGSL, compute kernels, matmul, CPU parity.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/inference-engines.html">vLLM &amp; Inference Engines</a></h3>
+        <p>Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/continuous-batching.html">Continuous Batching</a></h3>
+        <p>Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/kv-cache-paged-attention.html">KV Caching &amp; PagedAttention</a></h3>
+        <p>Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/flashattention-kernels.html">FlashAttention &amp; Attention Kernels</a></h3>
+        <p>IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/speculative-decoding.html">Speculative Decoding</a></h3>
+        <p>Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/gpu-utilization.html">GPU Utilization</a></h3>
+        <p>Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/inference-cost-latency.html">Inference Cost &amp; Latency Optimization</a></h3>
+        <p>Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/local-on-device-inference.html">Local &amp; On-device Inference</a></h3>
+        <p>llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/inference-hardware.html">Inference Hardware</a></h3>
+        <p>GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

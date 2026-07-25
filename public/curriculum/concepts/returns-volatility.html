@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Returns &amp; Volatility | SWE Prep</title>
+    <meta name="description" content="Simple/log returns, realized volatility, annualization — basic quant units.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Returns &amp; Volatility | SWE Prep">
+    <meta property="og:description" content="Simple/log returns, realized volatility, annualization — basic quant units.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Returns &amp; Volatility | SWE Prep">
+    <meta name="twitter:description" content="Simple/log returns, realized volatility, annualization — basic quant units.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Returns & Volatility","description":"Simple/log returns, realized volatility, annualization — basic quant units.","url":"https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Returns & Volatility","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Returns &amp; Volatility</h1>
+    <p class="lede">Simple/log returns, realized volatility, annualization — basic quant units.</p>
+    <div class="pills"><span>mathematics</span><span>quant</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Prices drift; returns are closer to stable. Vol is return std dev, usually annualized √252. Correlate returns, not prices.</p>
+    </section>
+
+    <section>
+      <h2>How to study Returns &amp; Volatility</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Python for Finance (Hilpisch), Hyndman — Forecasting: Principles and Practice to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Returns &amp; Volatility with Sharpe, Drawdown &amp; Portfolio Risk, Stationarity &amp; Autocorrelation. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Log returns and annualized volatility and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Risk, options intuition, strategy evaluation.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Regressing price levels</li><li>Wrong annualization factor</li><li>Look-ahead in return alignment</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://github.com/yhilpisch/py4fi2nd" rel="noreferrer">Python for Finance (Hilpisch)</a> <span class="muted">(doc)</span></li><li><a href="https://otexts.com/fpp3/" rel="noreferrer">Hyndman — Forecasting: Principles and Practice</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Log returns and annualized volatility</h3>
+          <p>From 5 consecutive adjusted closes, compute log returns r_t = ln(P_t/P_{t-1}). Estimate daily σ and annualize with √252. Show one line of code or formula per step.</p>
+          <p><strong>Expected evidence:</strong> 4 log returns; σ_daily; σ_annual = σ_daily×√252.</p>
+          <a href="/drills/compute-log-returns-vol">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why model returns instead of prices?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Price data → daily returns pipeline</h3>
+          <p>Ingest adjusted close prices (CSV or free API), compute simple/log daily returns, handle missing days.</p>
+          <ul><li>≥1 year daily data for one ticker</li><li>Returns series with correct alignment (no look-ahead)</li><li>Sanity: mean daily return and count of trading days documented</li></ul>
+        </div><div class="practice-card">
+          <h3>Volatility, Sharpe, drawdown, correlation matrix</h3>
+          <p>On 2–5 tickers: annualized vol, Sharpe (assume rf=0 or document rate), max drawdown, pairwise correlation matrix.</p>
+          <ul><li>All metrics computed from returns you built (not pre-built risk APIs)</li><li>Correlation matrix symmetric, diag = 1</li><li>One paragraph interpreting whether diversification shows up</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li><li><a href="/curriculum/concepts/descriptive-statistics.html">Descriptive Statistics</a></li><li><a href="/curriculum/concepts/sampling-and-clt.html">Sampling &amp; the Central Limit Theorem</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/portfolio-risk-metrics.html">Sharpe, Drawdown &amp; Portfolio Risk</a></li><li><a href="/curriculum/concepts/stationarity-autocorrelation.html">Stationarity &amp; Autocorrelation</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-stack-12w.html">12-Week Active Math Stack</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

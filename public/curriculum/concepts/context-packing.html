@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Context Packing | SWE Prep</title>
+    <meta name="description" content="Ordering and budgeting retrieved context within the model&#39;s window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/context-packing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Context Packing | SWE Prep">
+    <meta property="og:description" content="Ordering and budgeting retrieved context within the model&#39;s window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/context-packing.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Context Packing | SWE Prep">
+    <meta name="twitter:description" content="Ordering and budgeting retrieved context within the model&#39;s window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Context Packing","description":"Ordering and budgeting retrieved context within the model's window.","url":"https://learn.significanthobbies.com/curriculum/concepts/context-packing.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Context Packing","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · advanced</p>
+    <h1>Context Packing</h1>
+    <p class="lede">Ordering and budgeting retrieved context within the model&#39;s window.</p>
+    <div class="pills"><span>ai-systems</span><span>rag</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Context is a budget. Models attend unevenly (lost-in-the-middle), so order matters: put the strongest evidence at the edges, dedupe, and cut before you overflow.</p>
+    </section>
+
+    <section>
+      <h2>How to study Context Packing</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Lost in the Middle (Liu et al.) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Context Packing with RAG, Reranking. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Pack chunks into context budget and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Filling the whole window because it is available</li><li>Ignoring position effects on attention</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://arxiv.org/abs/2307.03172" rel="noreferrer">Lost in the Middle (Liu et al.)</a> <span class="muted">(paper)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Pack chunks into context budget</h3>
+          <p>Budget 800 tokens. Chunks A=300,B=400,C=250 relevance [0.9,0.85,0.7]. Greedy pack by relevance until full. Which included?</p>
+          <p><strong>Expected evidence:</strong> A+B=700; C does not fit entirely — include partial or skip per policy.</p>
+          <a href="/drills/pack-context-budget">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What is the &#39;lost in the middle&#39; effect and how do you mitigate it?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/chunking.html">Chunking</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/rag.html">RAG</a></li><li><a href="/curriculum/concepts/reranking.html">Reranking</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <p class="muted">None assigned yet.</p>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -23,7 +23,7 @@ export const BROWSE_DESTINATIONS: BrowseDestination[] = [
     id: 'explore',
     to: '/explore',
     label: 'Explore all',
-    blurb: 'Full catalog — 14 roadmaps, no setup',
+    blurb: 'Full roadmap catalog, no setup',
   },
   {
     id: 'concepts',

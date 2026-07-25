@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transformer Block | SWE Prep</title>
+    <meta name="description" content="Pre-LayerNorm, residuals, MLP, GELU. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Transformer Block | SWE Prep">
+    <meta property="og:description" content="Pre-LayerNorm, residuals, MLP, GELU. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Transformer Block | SWE Prep">
+    <meta name="twitter:description" content="Pre-LayerNorm, residuals, MLP, GELU. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Transformer Block","description":"Pre-LayerNorm, residuals, MLP, GELU.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Transformer Block","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · advanced</p>
+    <h1>Transformer Block</h1>
+    <p class="lede">Pre-LayerNorm, residuals, MLP, GELU.</p>
+    <div class="pills"><span>ai-systems</span><span>transformers</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A transformer block is two sublayers — multi-head attention then a position-wise MLP — each wrapped in a residual connection and layer norm. Residuals keep gradients flowing; pre-LayerNorm (norm before the sublayer) makes deep stacks train stably.</p>
+    </section>
+
+    <section>
+      <h2>How to study Transformer Block</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stanford CS336 — Language Modeling from Scratch (Spring 2025), CS336 Assignment 1 — Build a transformer block from scratch, CS224n — Self-Attention &amp; Transformers (Stanford) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Transformer Block with Training &amp; Debugging. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Pre-LayerNorm residual block and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Dropping residual connections and watching deep models fail to train</li><li>Post-LayerNorm placement causing instability in deep stacks</li><li>Mismatched dimensions between the attention output and the MLP</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://cs336.stanford.edu/spring2025/" rel="noreferrer">Stanford CS336 — Language Modeling from Scratch (Spring 2025)</a> <span class="muted">(course)</span></li><li><a href="https://github.com/stanford-cs336/assignment1-basics/tree/main" rel="noreferrer">CS336 Assignment 1 — Build a transformer block from scratch</a> <span class="muted">(doc)</span></li><li><a href="https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf" rel="noreferrer">CS224n — Self-Attention &amp; Transformers (Stanford)</a> <span class="muted">(paper)</span></li><li><a href="https://jalammar.github.io/illustrated-transformer/" rel="noreferrer">The Illustrated Transformer</a> <span class="muted">(article)</span></li><li><a href="https://jalammar.github.io/illustrated-gpt2/" rel="noreferrer">The Illustrated GPT-2 — transformer block stack</a> <span class="muted">(article)</span></li><li><a href="https://nlp.seas.harvard.edu/annotated-transformer/" rel="noreferrer">The Annotated Transformer</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Pre-LayerNorm residual block</h3>
+          <p>x=[1,2], sublayer(x)=x+[0.1,−0.1]. Write pre-norm update: x + sublayer(LayerNorm(x)). If LayerNorm is identity here, new x?</p>
+          <p><strong>Expected evidence:</strong> [1.1,1.9] — residual preserves a gradient highway.</p>
+          <a href="/drills/ml-pre-norm-residual">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Transformer Block and name one common mistake: &quot;Dropping residual connections and watching deep models fail to train…&quot;</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: AI Models &amp; Training</h3>
+          <p>Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-multi-head.html">Multi-Head Attention</a></li><li><a href="/curriculum/concepts/ml-adamw.html">AdamW Optimizer</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-training.html">Training &amp; Debugging</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

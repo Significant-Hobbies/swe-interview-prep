@@ -24,6 +24,10 @@ A curated set of roadmaps and references for learning systems software in 2026. 
 | "I want one mental model that covers V8, JVM, Go runtime, vLLM, Workers" | [Runtime roadmap](./runtime-roadmap.md) |
 | "I want to see how real ML systems work in production" | [ML system design case studies](./ml-case-studies.md) |
 | "I want retrieval / search / vector / RAG depth" | 9-Day Reset → 30-Day Retrieval → 90-Day AI Search & Infra → 12-Month Advanced AI Infra (in-app `/learn`) |
+| "I want OS, cloud, containers, distributed systems, and reliability" | Systems Foundations → Infrastructure & Platforms → Distributed Systems (in-app `/learn`) |
+| "I want models, inference, agents, and rigorous AI evaluation" | AI Models & Training → Inference & Serving → Agent Systems → Evaluation & AI Reliability (in-app `/learn`) |
+| "I want code intelligence and complete application engineering" | Developer Tools & Code Intelligence → Application Engineering (in-app `/learn`) |
+| "I want vision, voice, robotics, or spatial interfaces" | Multimodal & Spatial Computing (in-app `/learn`) |
 | "I'm new to systems software entirely" | [SE Landscape](./swe-landscape.md), skim every domain first |
 
 ## All docs
@@ -39,6 +43,10 @@ The four AI roadmaps are one progressive curriculum at four horizons — not fou
 | [Runtime — what every runtime has to do](./runtime-roadmap.md) | 12-month roadmap | Cross-cutting: V8, JVM, Go, BEAM, vLLM, Workers as one shape |
 | [ML system design case studies](./ml-case-studies.md) | catalogue | 450 production ML write-ups, grouped by category |
 | 9-Day Reset → 12-Month AI Infra | in-app `/learn` | Retrieval, ANN, RAG, storage progression |
+| Systems Foundations → Distributed Systems | in-app `/learn` | OS, hardware, networks, cloud, containers, orchestration, reliability, workflows |
+| AI Models & Training → AI Reliability | in-app `/learn` | Transformers, training, inference engines, agents, evals, verification |
+| Developer Tools → Application Engineering | in-app `/learn` | Code intelligence, testing, remediation, web/mobile, UX, real-time, product |
+| Multimodal & Spatial Computing | in-app `/learn` | Vision, audio, generation, on-device inference, robotics, spatial interfaces, HCI |
 
 ## How to actually learn from this
 
@@ -59,12 +67,13 @@ If you need foundations first:
 - **CS math** — [3Blue1Brown — Essence of Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) · [Khan Academy — Probability](https://www.khanacademy.org/math/statistics-probability) · [MIT 18.06 (Strang)](https://web.mit.edu/18.06/www/)
 - **Working developer environment** — git, a real editor, a Unix shell; [Missing Semester (MIT)](https://missing.csail.mit.edu/) is the canonical course on what nobody teaches you.
 
-## Adjacent but not covered here
+## Coverage boundary
 
-These intentionally live outside the systems-software focus:
+The expanded catalog gives each requested area a sequenced applied-engineering
+path, but it does not claim research-specialist completeness:
 
-- **Product / business** — positioning, distribution, monetisation, design. The project's `product` track touches it; for depth, follow [Lenny's Newsletter](https://www.lennysnewsletter.com/), [First Round Review](https://review.firstround.com/), [Stratechery](https://stratechery.com/).
-- **ML research frontier beyond LLMs** — vision, robotics, RL. [Lil'Log](https://lilianweng.github.io/) and [The Gradient](https://thegradient.pub/) are entry points.
+- **Product / business depth** — the Product and Application Engineering tracks cover positioning, distribution, analytics, and UX; monetisation and company-building remain adjacent. Follow [Lenny's Newsletter](https://www.lennysnewsletter.com/), [First Round Review](https://review.firstround.com/), or [Stratechery](https://stratechery.com/) for depth.
+- **Research-frontier depth** — the AI Models and Multimodal paths cover mechanisms and applied systems, not exhaustive research coverage. [Lil'Log](https://lilianweng.github.io/) and [The Gradient](https://thegradient.pub/) remain useful frontier maps.
 - **Embedded / firmware / electronics** — [Memfault Interrupt blog](https://interrupt.memfault.com/blog/), [Embedded.fm podcast](https://embedded.fm/).
 - **Quantum computing** — [Quantum Country (Andy Matuschak)](https://quantum.country/), [Quantum Algorithm Zoo](https://quantumalgorithmzoo.org/).
 
@@ -77,4 +86,4 @@ These intentionally live outside the systems-software focus:
 - **Frontmatter dates.** Each doc says when it was last audited so you know how stale a recommendation might be.
 - **Maintenance notes.** Each doc has a bottom section flagging rotating URLs and dead links so re-audits are mechanical.
 
-Last index update: 2026-06-16.
+Last index update: 2026-07-25.

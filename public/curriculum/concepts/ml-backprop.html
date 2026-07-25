@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Backpropagation | SWE Prep</title>
+    <meta name="description" content="Chain rule, autograd, forward/backward passes. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Backpropagation | SWE Prep">
+    <meta property="og:description" content="Chain rule, autograd, forward/backward passes. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Backpropagation | SWE Prep">
+    <meta name="twitter:description" content="Chain rule, autograd, forward/backward passes. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Backpropagation","description":"Chain rule, autograd, forward/backward passes.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Backpropagation","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · core</p>
+    <h1>Backpropagation</h1>
+    <p class="lede">Chain rule, autograd, forward/backward passes.</p>
+    <div class="pills"><span>ai-systems</span><span>foundations</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them.</p>
+    </section>
+
+    <section>
+      <h2>How to study Backpropagation</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Neural Networks: Zero to Hero (Karpathy), CS231n — Backpropagation &amp; computational graphs, micrograd — backprop from scratch (Karpathy) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Backpropagation with AdamW Optimizer. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Chain rule on a tiny graph and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://karpathy.ai/zero-to-hero.html" rel="noreferrer">Neural Networks: Zero to Hero (Karpathy)</a> <span class="muted">(course)</span></li><li><a href="https://cs231n.github.io/optimization-2/" rel="noreferrer">CS231n — Backpropagation &amp; computational graphs</a> <span class="muted">(course)</span></li><li><a href="https://www.youtube.com/watch?v=VMj-3S1tku0" rel="noreferrer">micrograd — backprop from scratch (Karpathy)</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Chain rule on a tiny graph</h3>
+          <p>y = (2x+1)³. Compute dy/dx at x=1 via chain rule (u=2x+1, y=u³).</p>
+          <p><strong>Expected evidence:</strong> dy/dx = 6(2x+1)² → 54 at x=1.</p>
+          <a href="/drills/ml-chain-rule-gate">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Backpropagation in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: AI Models &amp; Training</h3>
+          <p>Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-gradient-descent.html">Gradient Descent</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-adamw.html">AdamW Optimizer</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

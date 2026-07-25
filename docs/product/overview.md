@@ -50,16 +50,39 @@ pages. Legacy routes redirect so external links keep working: `/dashboard` →
 
 ## Tracks
 
-Nine learning tracks (`TRACKS` in `src/data/learning-os.ts`): `search-ir`,
-`mathematics`, `vector-db`, `ai-systems`, `backend`, `databases`,
-`system-design`, `dsa`, `product`. Concept content is static JSON in
-`src/data/concepts.json` (152 concepts).
+Eighteen learning tracks (`TRACKS` in `src/data/learning-os.ts`) preserve the
+original Search/IR, mathematics, vector DB, AI, backend, databases, system
+design, DSA, and product paths, then add Systems Foundations, Infrastructure &
+Platforms, Distributed Systems, Inference & Serving, Agent Systems, AI
+Reliability, Developer Tools & Code Intelligence, Application Engineering, and
+Multimodal & Spatial Computing.
+
+Concept content is static JSON in `src/data/concepts.json` (222 concepts). The
+machine-readable contract mapping the requested eleven-domain taxonomy and its
+96 named subtopics to concepts is `src/data/curriculum-coverage.json`.
+
+## Public curriculum and SEO
+
+The same canonical data generates a JavaScript-free publication layer at
+[`/curriculum/`](https://learn.significanthobbies.com/curriculum/): one hub,
+18 track pages, 24 roadmap pages, and 222 concept pages. Concept pages publish
+the editorial explanation, mental model, primary resources, practice direction,
+review prompts, and build criteria while keeping progress, notes, saved Reader
+content, and review answers private.
+
+`scripts/generate-public-curriculum.mjs` owns these generated surfaces,
+`public/curriculum/catalog.md` and `catalog.json`, the curriculum sitemap
+entries, and the public agent catalog counts. `pnpm build` runs the generator
+before Vite so checked-in publication output cannot silently drift from the
+learning data.
 
 ## Scope
 
-**In scope:** DSA, LLD, HLD, behavioral practice, FSRS spaced repetition,
-multi-provider AI hints, LeetCode import, embedded learning library, personal
-learning sessions.
+**In scope:** DSA, LLD, HLD, systems and platform engineering, databases and
+distributed systems, AI models/training/inference/agents/reliability, developer
+tools, application engineering, multimodal/spatial systems, behavioral
+practice, FSRS spaced repetition, multi-provider AI hints, LeetCode import,
+embedded learning library, and personal learning sessions.
 
 **Out of scope** (per the 2026-07-10 personal-use closure in
 [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)): ATS/job-application features, paid

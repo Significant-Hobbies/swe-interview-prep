@@ -1,12 +1,37 @@
 # SWE Interview Prep
 
-Software engineering learning OS with spaced repetition (FSRS), drills, and feedback.
+Software engineering learning OS with 18 tracks, 222 concepts, 24 roadmaps, active practice, build artifacts, and FSRS spaced repetition.
 
-## Note for agents
+## Learning loop
 
-Much of the app is authenticated SPA. Public product brief only here.
+Concept → Drill → Build → Review → Apply. Each concept connects a concise mental model and primary source to executable practice, an explain-back prompt, and evidence you build.
 
-## Agent entrypoints
+## Curriculum scope
 
-- https://learn.significanthobbies.com/llms.txt
-- https://learn.significanthobbies.com/index.md
+- [Search & IR](https://learn.significanthobbies.com/curriculum/tracks/search-ir.html) — Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+- [Mathematics](https://learn.significanthobbies.com/curriculum/tracks/mathematics.html) — Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+- [Vector DB & ANN](https://learn.significanthobbies.com/curriculum/tracks/vector-db.html) — Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+- [AI Systems](https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html) — Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+- [Backend](https://learn.significanthobbies.com/curriculum/tracks/backend.html) — Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+- [Databases & Storage](https://learn.significanthobbies.com/curriculum/tracks/databases.html) — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+- [System Design](https://learn.significanthobbies.com/curriculum/tracks/system-design.html) — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+- [DSA & Implementation](https://learn.significanthobbies.com/curriculum/tracks/dsa.html) — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+- [Product & Distribution](https://learn.significanthobbies.com/curriculum/tracks/product.html) — Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.
+- [Systems Foundations](https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html) — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+- [Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html) — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
+- [Distributed Systems](https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html) — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+- [Inference & Serving](https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html) — Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+- [Agent Systems](https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html) — Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+- [Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html) — LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+- [Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/tracks/developer-tools.html) — Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
+- [Application Engineering](https://learn.significanthobbies.com/curriculum/tracks/application-engineering.html) — Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
+- [Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial.html) — Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
+
+## Browse without JavaScript
+
+- [Curriculum hub](https://learn.significanthobbies.com/curriculum/)
+- [Complete Markdown catalog](https://learn.significanthobbies.com/curriculum/catalog.md)
+- [Structured JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)
+- [Agent entrypoint](https://learn.significanthobbies.com/llms.txt)
+
+Private progress, notes, review answers, and saved learning sources are intentionally excluded from public surfaces.

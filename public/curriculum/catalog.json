@@ -1,0 +1,4923 @@
+{
+  "name": "SWE Prep Curriculum",
+  "version": 1,
+  "generatedFrom": [
+    "src/data/learning-os.ts",
+    "src/data/concepts.json",
+    "src/data/roadmaps.json",
+    "src/data/curriculum-coverage.json"
+  ],
+  "counts": {
+    "tracks": 18,
+    "concepts": 222,
+    "roadmaps": 24,
+    "drills": 265,
+    "reviewQuestions": 327,
+    "artifacts": 40,
+    "coverageCategories": 11,
+    "coverageTopics": 96
+  },
+  "tracks": [
+    {
+      "id": "search-ir",
+      "title": "Search & IR",
+      "description": "Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/search-ir.html",
+      "conceptIds": [
+        "tokenization",
+        "inverted-index",
+        "tf-idf",
+        "bm25",
+        "ranking-metrics",
+        "search-evals",
+        "hybrid-search",
+        "reranking",
+        "query-rewriting",
+        "search-discovery"
+      ],
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "mathematics",
+      "title": "Mathematics",
+      "description": "Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/mathematics.html",
+      "conceptIds": [
+        "vectors-and-spaces",
+        "matrices-and-transformations",
+        "eigenvalues-decomposition",
+        "probability-fundamentals",
+        "random-variables",
+        "descriptive-statistics",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "regression-basics",
+        "derivatives-and-gradients",
+        "multivariable-optimization",
+        "information-entropy",
+        "classical-distributions",
+        "sampling-and-clt",
+        "ab-testing-engineering",
+        "bayesian-inference",
+        "maximum-likelihood",
+        "covariance-correlation",
+        "bias-variance-overfitting",
+        "matrix-rank-basis",
+        "pca-projection",
+        "returns-volatility",
+        "stationarity-autocorrelation",
+        "random-walks-markov",
+        "portfolio-risk-metrics",
+        "momentum-backtest"
+      ],
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d",
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "vector-db",
+      "title": "Vector DB & ANN",
+      "description": "Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/vector-db.html",
+      "conceptIds": [
+        "embeddings",
+        "vector-similarity",
+        "topk-vector-search",
+        "brute-force-vector-db",
+        "hnsw",
+        "ivf",
+        "product-quantization",
+        "metadata-filtering",
+        "recall-latency-tradeoffs"
+      ],
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "ai-systems",
+      "title": "AI Systems",
+      "description": "Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html",
+      "conceptIds": [
+        "rag",
+        "chunking",
+        "context-packing",
+        "structured-outputs",
+        "tool-calling",
+        "agent-loops",
+        "model-routing",
+        "prompt-versioning",
+        "llm-evals",
+        "ml-math",
+        "ml-gradient-descent",
+        "ml-backprop",
+        "ml-softmax-xent",
+        "ml-adamw",
+        "ml-tokenization",
+        "ml-language-modeling",
+        "ml-sampling",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-training",
+        "ml-checkpointing",
+        "ml-lora",
+        "ml-rl-alignment",
+        "ml-data-engineering",
+        "ml-browser-runtime",
+        "ml-webgpu",
+        "ml-evaluation",
+        "ml-pretraining",
+        "model-quantization",
+        "open-weight-models"
+      ],
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape",
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "backend",
+      "title": "Backend",
+      "description": "Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/backend.html",
+      "conceptIds": [
+        "http-lifecycle",
+        "api-keys",
+        "rate-limiting",
+        "idempotency",
+        "retries-dlq",
+        "webhooks",
+        "background-jobs",
+        "caching",
+        "message-queues",
+        "monitoring-analytics",
+        "api-design",
+        "auth-systems",
+        "ecommerce-payments"
+      ],
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape",
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "databases",
+      "title": "Databases & Storage",
+      "description": "Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/databases.html",
+      "conceptIds": [
+        "b-tree",
+        "lsm-tree",
+        "wal",
+        "compaction",
+        "object-storage",
+        "columnar-storage",
+        "secondary-index",
+        "storage-retrieval",
+        "sharding",
+        "replication",
+        "cap-theorem",
+        "transaction-processing",
+        "query-execution-optimization",
+        "warehouses-lakehouses"
+      ],
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "description": "Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/system-design.html",
+      "conceptIds": [
+        "object-modeling",
+        "state-management",
+        "strategy-pattern",
+        "observer-pattern",
+        "factory-creational",
+        "decorator-structural",
+        "concurrency-design",
+        "command-chain",
+        "booking-inventory",
+        "game-design",
+        "load-balancing",
+        "consistent-hashing",
+        "consensus",
+        "distributed-infra",
+        "messaging-realtime",
+        "social-media",
+        "streaming-media",
+        "location-transport",
+        "collaboration-productivity",
+        "search-platform-design",
+        "rag-system-design"
+      ],
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "db-disk-first",
+        "runtime",
+        "swe-landscape",
+        "lld-practice",
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "dsa",
+      "title": "DSA & Implementation",
+      "description": "Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/dsa.html",
+      "conceptIds": [
+        "array-hashing",
+        "two-pointers",
+        "sliding-window",
+        "stack",
+        "binary-search",
+        "linked-list",
+        "trees",
+        "tries",
+        "heap",
+        "backtracking",
+        "graphs",
+        "shortest-path",
+        "union-find",
+        "dp-1d",
+        "dp-2d",
+        "greedy",
+        "intervals",
+        "math-geometry",
+        "bit-manipulation"
+      ],
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "product",
+      "title": "Product & Distribution",
+      "description": "Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/product.html",
+      "conceptIds": [
+        "leadership-and-influence",
+        "conflict-resolution",
+        "problem-solving-and-decision-making",
+        "teamwork-and-collaboration",
+        "failure-and-learning",
+        "communication",
+        "time-management-and-prioritization",
+        "innovation-and-creativity",
+        "customer-obsession",
+        "ownership-and-accountability",
+        "positioning",
+        "landing-pages",
+        "seo",
+        "product-analytics"
+      ],
+      "roadmapIds": [
+        "behavioral-practice",
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "systems-foundations",
+      "title": "Systems Foundations",
+      "description": "Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html",
+      "conceptIds": [
+        "concurrency-design",
+        "operating-system-mechanics",
+        "network-protocol-engineering",
+        "compute-memory-storage-hierarchy",
+        "runtime-performance-engineering",
+        "security-isolation-boundaries"
+      ],
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "infrastructure-platforms",
+      "title": "Infrastructure & Platforms",
+      "description": "Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html",
+      "conceptIds": [
+        "retries-dlq",
+        "background-jobs",
+        "monitoring-analytics",
+        "cloud-infrastructure",
+        "containers-kubernetes",
+        "cicd-developer-environments",
+        "platform-scheduling-orchestration",
+        "reliability-fault-tolerance",
+        "opentelemetry-observability",
+        "sandbox-execution-environments",
+        "infrastructure-automation"
+      ],
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems",
+      "description": "Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html",
+      "conceptIds": [
+        "caching",
+        "message-queues",
+        "sharding",
+        "replication",
+        "cap-theorem",
+        "consensus",
+        "distributed-infra",
+        "messaging-realtime",
+        "event-streaming-kafka",
+        "distributed-workflows-temporal",
+        "distributed-failure-recovery"
+      ],
+      "roadmapIds": [
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "inference-serving",
+      "title": "Inference & Serving",
+      "description": "Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html",
+      "conceptIds": [
+        "model-routing",
+        "ml-browser-runtime",
+        "ml-webgpu",
+        "inference-engines",
+        "continuous-batching",
+        "kv-cache-paged-attention",
+        "flashattention-kernels",
+        "speculative-decoding",
+        "gpu-utilization",
+        "inference-cost-latency",
+        "local-on-device-inference",
+        "inference-hardware"
+      ],
+      "roadmapIds": [
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "agent-systems",
+      "title": "Agent Systems",
+      "description": "Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html",
+      "conceptIds": [
+        "tool-calling",
+        "agent-loops",
+        "agent-memory-context",
+        "mcp-integrations",
+        "multi-agent-coordination",
+        "durable-agent-execution",
+        "agent-permissions-sandboxing",
+        "browser-computer-use-agents",
+        "agent-communication-interfaces",
+        "long-running-scheduled-agents"
+      ],
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "ai-reliability",
+      "title": "Evaluation & AI Reliability",
+      "description": "LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html",
+      "conceptIds": [
+        "prompt-versioning",
+        "llm-evals",
+        "ml-evaluation",
+        "coding-agent-benchmarks",
+        "tool-use-evaluations",
+        "ai-regression-testing",
+        "hallucination-failure-detection",
+        "agent-observability",
+        "tracing-replay",
+        "evidence-backed-verification",
+        "human-review-systems",
+        "quality-cost-latency-measurement"
+      ],
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "developer-tools",
+      "title": "Developer Tools & Code Intelligence",
+      "description": "Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/developer-tools.html",
+      "conceptIds": [
+        "code-review-systems",
+        "static-dynamic-analysis",
+        "testing-infrastructure",
+        "codebase-graphs",
+        "dependency-blast-radius",
+        "ide-cli-tooling",
+        "coding-agent-systems",
+        "repository-intelligence",
+        "software-supply-chain-health",
+        "automated-debugging-remediation"
+      ],
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "application-engineering",
+      "title": "Application Engineering",
+      "description": "Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/application-engineering.html",
+      "conceptIds": [
+        "game-design",
+        "web-mobile-engineering",
+        "ux-interface-design",
+        "real-time-application-engineering",
+        "interactive-2d-3d-systems"
+      ],
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "multimodal-spatial",
+      "title": "Multimodal & Spatial Computing",
+      "description": "Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial.html",
+      "conceptIds": [
+        "multimodal-models",
+        "vision-models",
+        "pose-motion-tracking",
+        "voice-audio-systems",
+        "image-video-generation",
+        "robotics-systems",
+        "spatial-interfaces",
+        "human-computer-interaction"
+      ],
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    }
+  ],
+  "roadmaps": [
+    {
+      "id": "reset-9-day",
+      "title": "9-Day Reset",
+      "horizon": "9d",
+      "goal": "Rebuild learning momentum by taking one concept all the way to a shipped artifact.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html",
+      "conceptIds": [
+        "tokenization",
+        "inverted-index",
+        "tf-idf",
+        "bm25",
+        "search-evals"
+      ]
+    },
+    {
+      "id": "retrieval-30-day",
+      "title": "30-Day Retrieval Basics",
+      "horizon": "30d",
+      "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html",
+      "conceptIds": [
+        "tokenization",
+        "inverted-index",
+        "tf-idf",
+        "bm25",
+        "ranking-metrics",
+        "search-evals",
+        "embeddings",
+        "vector-similarity",
+        "brute-force-vector-db",
+        "metadata-filtering",
+        "hybrid-search",
+        "reranking"
+      ]
+    },
+    {
+      "id": "ai-search-infra-90-day",
+      "title": "90-Day AI Search & Infrastructure",
+      "horizon": "90d",
+      "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html",
+      "conceptIds": [
+        "inverted-index",
+        "bm25",
+        "embeddings",
+        "hybrid-search",
+        "search-evals",
+        "brute-force-vector-db",
+        "hnsw",
+        "ivf",
+        "metadata-filtering",
+        "recall-latency-tradeoffs",
+        "rag",
+        "chunking",
+        "reranking",
+        "llm-evals",
+        "wal",
+        "lsm-tree",
+        "object-storage"
+      ]
+    },
+    {
+      "id": "ai-infra-12-month",
+      "title": "12-Month Advanced AI Infrastructure",
+      "horizon": "12mo",
+      "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html",
+      "conceptIds": [
+        "bm25",
+        "hybrid-search",
+        "hnsw",
+        "metadata-filtering",
+        "rag",
+        "api-design",
+        "api-keys",
+        "rate-limiting",
+        "idempotency",
+        "retries-dlq",
+        "monitoring-analytics",
+        "b-tree",
+        "lsm-tree",
+        "wal",
+        "compaction",
+        "object-storage",
+        "columnar-storage",
+        "search-platform-design",
+        "rag-system-design",
+        "model-routing",
+        "agent-loops"
+      ]
+    },
+    {
+      "id": "db-disk-first",
+      "title": "Disk-First Databases & RAM",
+      "horizon": "12mo",
+      "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html",
+      "conceptIds": [
+        "storage-retrieval",
+        "b-tree",
+        "wal",
+        "transaction-processing",
+        "lsm-tree",
+        "compaction",
+        "columnar-storage",
+        "secondary-index",
+        "query-execution-optimization",
+        "object-storage",
+        "sharding",
+        "warehouses-lakehouses",
+        "inverted-index",
+        "bm25",
+        "hnsw",
+        "ivf",
+        "recall-latency-tradeoffs",
+        "replication",
+        "consensus",
+        "cap-theorem",
+        "distributed-infra"
+      ]
+    },
+    {
+      "id": "runtime",
+      "title": "Runtime — what every runtime has to do",
+      "horizon": "12mo",
+      "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html",
+      "conceptIds": [
+        "state-management",
+        "strategy-pattern",
+        "concurrency-design",
+        "distributed-infra",
+        "monitoring-analytics",
+        "model-routing",
+        "load-balancing"
+      ]
+    },
+    {
+      "id": "swe-landscape",
+      "title": "The Software Engineering Landscape (2026)",
+      "horizon": "12mo",
+      "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
+      "conceptIds": [
+        "ml-self-attention",
+        "ml-transformer-block",
+        "ml-sampling",
+        "rag",
+        "model-routing",
+        "b-tree",
+        "lsm-tree",
+        "wal",
+        "columnar-storage",
+        "message-queues",
+        "messaging-realtime",
+        "retries-dlq",
+        "game-design",
+        "concurrency-design",
+        "distributed-infra",
+        "load-balancing",
+        "ml-browser-runtime",
+        "ml-webgpu",
+        "state-management",
+        "strategy-pattern",
+        "http-lifecycle",
+        "consensus",
+        "cap-theorem",
+        "sharding",
+        "replication",
+        "auth-systems"
+      ]
+    },
+    {
+      "id": "lld-practice",
+      "title": "LLD Practice",
+      "horizon": "30d",
+      "goal": "Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html",
+      "conceptIds": [
+        "object-modeling",
+        "state-management",
+        "factory-creational",
+        "strategy-pattern",
+        "observer-pattern",
+        "decorator-structural",
+        "command-chain",
+        "concurrency-design",
+        "booking-inventory",
+        "game-design"
+      ]
+    },
+    {
+      "id": "hld-practice",
+      "title": "HLD Practice",
+      "horizon": "30d",
+      "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html",
+      "conceptIds": [
+        "load-balancing",
+        "consistent-hashing",
+        "consensus",
+        "distributed-infra",
+        "messaging-realtime",
+        "social-media",
+        "streaming-media",
+        "location-transport",
+        "collaboration-productivity",
+        "search-platform-design",
+        "rag-system-design"
+      ]
+    },
+    {
+      "id": "dsa-practice",
+      "title": "DSA Practice",
+      "horizon": "30d",
+      "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html",
+      "conceptIds": [
+        "array-hashing",
+        "two-pointers",
+        "sliding-window",
+        "intervals",
+        "stack",
+        "linked-list",
+        "math-geometry",
+        "trees",
+        "tries",
+        "heap",
+        "binary-search",
+        "greedy",
+        "graphs",
+        "backtracking",
+        "shortest-path",
+        "union-find",
+        "dp-1d",
+        "dp-2d",
+        "bit-manipulation"
+      ]
+    },
+    {
+      "id": "math-rating-climb-30d",
+      "title": "30-Day Math Rating Climb",
+      "horizon": "30d",
+      "goal": "Raise your per-roadmap ELO by climbing from linear algebra through statistics to calculus — each week unlocks harder drills at your edge.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html",
+      "conceptIds": [
+        "vectors-and-spaces",
+        "matrices-and-transformations",
+        "eigenvalues-decomposition",
+        "probability-fundamentals",
+        "random-variables",
+        "descriptive-statistics",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "regression-basics",
+        "derivatives-and-gradients",
+        "multivariable-optimization",
+        "information-entropy"
+      ]
+    },
+    {
+      "id": "prob-stats-30d",
+      "title": "30-Day Probability & Statistics",
+      "horizon": "30d",
+      "goal": "Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html",
+      "conceptIds": [
+        "probability-fundamentals",
+        "random-variables",
+        "classical-distributions",
+        "descriptive-statistics",
+        "covariance-correlation",
+        "sampling-and-clt",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "ab-testing-engineering",
+        "regression-basics",
+        "bias-variance-overfitting",
+        "bayesian-inference",
+        "maximum-likelihood",
+        "information-entropy"
+      ]
+    },
+    {
+      "id": "math-stack-12w",
+      "title": "12-Week Active Math Stack",
+      "horizon": "12mo",
+      "goal": "Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html",
+      "conceptIds": [
+        "probability-fundamentals",
+        "classical-distributions",
+        "random-walks-markov",
+        "random-variables",
+        "descriptive-statistics",
+        "covariance-correlation",
+        "sampling-and-clt",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "ab-testing-engineering",
+        "regression-basics",
+        "bias-variance-overfitting",
+        "vectors-and-spaces",
+        "matrices-and-transformations",
+        "matrix-rank-basis",
+        "eigenvalues-decomposition",
+        "pca-projection",
+        "derivatives-and-gradients",
+        "multivariable-optimization",
+        "maximum-likelihood",
+        "returns-volatility",
+        "portfolio-risk-metrics",
+        "stationarity-autocorrelation",
+        "bayesian-inference",
+        "momentum-backtest",
+        "information-entropy"
+      ]
+    },
+    {
+      "id": "behavioral-practice",
+      "title": "Behavioral Practice",
+      "horizon": "30d",
+      "goal": "Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware \"what I would do differently\".",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html",
+      "conceptIds": [
+        "leadership-and-influence",
+        "ownership-and-accountability",
+        "customer-obsession",
+        "innovation-and-creativity",
+        "teamwork-and-collaboration",
+        "conflict-resolution",
+        "communication",
+        "problem-solving-and-decision-making",
+        "failure-and-learning",
+        "time-management-and-prioritization"
+      ]
+    },
+    {
+      "id": "systems-foundations-12w",
+      "title": "12-Week Systems Foundations",
+      "horizon": "90d",
+      "goal": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html",
+      "conceptIds": [
+        "operating-system-mechanics",
+        "compute-memory-storage-hierarchy",
+        "network-protocol-engineering",
+        "concurrency-design",
+        "runtime-performance-engineering",
+        "security-isolation-boundaries"
+      ]
+    },
+    {
+      "id": "infrastructure-platforms-12w",
+      "title": "12-Week Infrastructure & Platforms",
+      "horizon": "90d",
+      "goal": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html",
+      "conceptIds": [
+        "cloud-infrastructure",
+        "containers-kubernetes",
+        "cicd-developer-environments",
+        "platform-scheduling-orchestration",
+        "infrastructure-automation",
+        "background-jobs",
+        "reliability-fault-tolerance",
+        "retries-dlq",
+        "monitoring-analytics",
+        "opentelemetry-observability",
+        "sandbox-execution-environments"
+      ]
+    },
+    {
+      "id": "distributed-systems-12w",
+      "title": "12-Week Distributed Systems",
+      "horizon": "90d",
+      "goal": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html",
+      "conceptIds": [
+        "consensus",
+        "replication",
+        "sharding",
+        "cap-theorem",
+        "message-queues",
+        "event-streaming-kafka",
+        "caching",
+        "messaging-realtime",
+        "distributed-infra",
+        "distributed-workflows-temporal",
+        "distributed-failure-recovery"
+      ]
+    },
+    {
+      "id": "ai-models-training-12w",
+      "title": "12-Week AI Models & Training",
+      "horizon": "90d",
+      "goal": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html",
+      "conceptIds": [
+        "ml-math",
+        "ml-gradient-descent",
+        "ml-backprop",
+        "ml-softmax-xent",
+        "ml-tokenization",
+        "ml-language-modeling",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-adamw",
+        "ml-pretraining",
+        "ml-training",
+        "ml-checkpointing",
+        "ml-lora",
+        "ml-rl-alignment",
+        "ml-data-engineering",
+        "model-quantization",
+        "open-weight-models",
+        "multimodal-models",
+        "ml-evaluation"
+      ]
+    },
+    {
+      "id": "inference-serving-12w",
+      "title": "12-Week Inference & Serving",
+      "horizon": "90d",
+      "goal": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html",
+      "conceptIds": [
+        "inference-engines",
+        "kv-cache-paged-attention",
+        "continuous-batching",
+        "model-routing",
+        "flashattention-kernels",
+        "speculative-decoding",
+        "gpu-utilization",
+        "inference-hardware",
+        "inference-cost-latency",
+        "local-on-device-inference",
+        "ml-browser-runtime",
+        "ml-webgpu"
+      ]
+    },
+    {
+      "id": "agent-systems-12w",
+      "title": "12-Week Agent Systems",
+      "horizon": "90d",
+      "goal": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html",
+      "conceptIds": [
+        "tool-calling",
+        "agent-loops",
+        "agent-memory-context",
+        "mcp-integrations",
+        "multi-agent-coordination",
+        "agent-communication-interfaces",
+        "browser-computer-use-agents",
+        "durable-agent-execution",
+        "agent-permissions-sandboxing",
+        "long-running-scheduled-agents"
+      ]
+    },
+    {
+      "id": "ai-reliability-12w",
+      "title": "12-Week Evaluation & AI Reliability",
+      "horizon": "90d",
+      "goal": "Build an evidence-backed evaluation and observability system for models, tools, and agents.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html",
+      "conceptIds": [
+        "llm-evals",
+        "ml-evaluation",
+        "coding-agent-benchmarks",
+        "tool-use-evaluations",
+        "prompt-versioning",
+        "ai-regression-testing",
+        "hallucination-failure-detection",
+        "quality-cost-latency-measurement",
+        "agent-observability",
+        "tracing-replay",
+        "evidence-backed-verification",
+        "human-review-systems"
+      ]
+    },
+    {
+      "id": "developer-tools-12w",
+      "title": "12-Week Developer Tools & Code Intelligence",
+      "horizon": "90d",
+      "goal": "Build repository-aware tools that analyze, test, review, debug, and safely remediate code.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html",
+      "conceptIds": [
+        "code-review-systems",
+        "static-dynamic-analysis",
+        "testing-infrastructure",
+        "codebase-graphs",
+        "dependency-blast-radius",
+        "repository-intelligence",
+        "ide-cli-tooling",
+        "coding-agent-systems",
+        "software-supply-chain-health",
+        "automated-debugging-remediation"
+      ]
+    },
+    {
+      "id": "application-engineering-12w",
+      "title": "12-Week Application Engineering",
+      "horizon": "90d",
+      "goal": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html",
+      "conceptIds": [
+        "api-design",
+        "web-mobile-engineering",
+        "ux-interface-design",
+        "real-time-application-engineering",
+        "messaging-realtime",
+        "game-design",
+        "interactive-2d-3d-systems",
+        "product-analytics",
+        "positioning",
+        "landing-pages",
+        "seo"
+      ]
+    },
+    {
+      "id": "multimodal-spatial-12w",
+      "title": "12-Week Multimodal & Spatial Computing",
+      "horizon": "90d",
+      "goal": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html",
+      "conceptIds": [
+        "multimodal-models",
+        "vision-models",
+        "voice-audio-systems",
+        "pose-motion-tracking",
+        "image-video-generation",
+        "local-on-device-inference",
+        "robotics-systems",
+        "spatial-interfaces",
+        "human-computer-interaction",
+        "ml-webgpu"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "tokenization",
+      "name": "Tokenization",
+      "description": "Splitting text into terms: lowercasing, stemming, stop words, n-grams.",
+      "difficulty": "intro",
+      "tags": [
+        "search-ir",
+        "tokenization"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tokenization.html",
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day"
+      ]
+    },
+    {
+      "id": "inverted-index",
+      "name": "Inverted Index",
+      "description": "Term → posting list mapping that powers fast keyword lookup.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "indexing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html",
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "tf-idf",
+      "name": "TF-IDF",
+      "description": "Term frequency × inverse document frequency weighting for relevance.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html",
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day"
+      ]
+    },
+    {
+      "id": "bm25",
+      "name": "BM25",
+      "description": "The standard lexical ranking function: TF saturation + IDF + length normalization.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bm25.html",
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "ranking-metrics",
+      "name": "Ranking Metrics",
+      "description": "Precision, recall, MRR, and nDCG for measuring retrieval quality.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "evaluation"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html",
+      "roadmapIds": [
+        "retrieval-30-day"
+      ]
+    },
+    {
+      "id": "search-evals",
+      "name": "Search Evals",
+      "description": "Building a labelled query set and harness to compare retrieval approaches.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "evaluation"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-evals.html",
+      "roadmapIds": [
+        "reset-9-day",
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "hybrid-search",
+      "name": "Hybrid Search",
+      "description": "Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.",
+      "difficulty": "advanced",
+      "tags": [
+        "search-ir",
+        "hybrid"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "reranking",
+      "name": "Reranking",
+      "description": "A second-stage cross-encoder pass that reorders the top-k candidates.",
+      "difficulty": "advanced",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/reranking.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "query-rewriting",
+      "name": "Query Rewriting",
+      "description": "Expanding, correcting, and normalizing queries before retrieval.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "ranking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "search-discovery",
+      "name": "Search Systems",
+      "description": "Inverted index, ranking, autocomplete at scale.",
+      "difficulty": "core",
+      "tags": [
+        "search-ir",
+        "indexing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "embeddings",
+      "name": "Embeddings",
+      "description": "Mapping text/images into dense vectors where distance encodes meaning.",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "embeddings"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/embeddings.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "vector-similarity",
+      "name": "Vector Similarity",
+      "description": "Cosine, dot product, and L2 distance — how to score vector closeness.",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "similarity"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html",
+      "roadmapIds": [
+        "retrieval-30-day"
+      ]
+    },
+    {
+      "id": "topk-vector-search",
+      "name": "Top-k Vector Search",
+      "description": "Returning the k nearest vectors to a query, exact or approximate.",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "brute-force-vector-db",
+      "name": "Brute-Force Vector DB",
+      "description": "Exact nearest-neighbour search by scanning every vector — the correctness baseline.",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "hnsw",
+      "name": "HNSW",
+      "description": "Hierarchical Navigable Small World graphs — the dominant ANN index.",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hnsw.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "ivf",
+      "name": "IVF (Inverted File)",
+      "description": "Cluster vectors with k-means, then search only the nearest cells (nprobe).",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ivf.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "product-quantization",
+      "name": "Product Quantization",
+      "description": "Compress vectors into sub-space codebooks for tiny memory footprint.",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "quantization"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "metadata-filtering",
+      "name": "Metadata Filtering",
+      "description": "Combining vector search with structured predicates (tenant, date, tags).",
+      "difficulty": "core",
+      "tags": [
+        "vector-db",
+        "filtering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html",
+      "roadmapIds": [
+        "retrieval-30-day",
+        "ai-search-infra-90-day",
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "recall-latency-tradeoffs",
+      "name": "Recall / Latency Tradeoffs",
+      "description": "Reading recall-vs-latency curves to choose ANN parameters.",
+      "difficulty": "advanced",
+      "tags": [
+        "vector-db",
+        "ann"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "rag",
+      "name": "RAG",
+      "description": "Retrieval-Augmented Generation: ground an LLM answer in retrieved context.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "chunking",
+      "name": "Chunking",
+      "description": "Splitting documents into retrievable units that preserve meaning.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/chunking.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day"
+      ]
+    },
+    {
+      "id": "context-packing",
+      "name": "Context Packing",
+      "description": "Ordering and budgeting retrieved context within the model's window.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "rag"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/context-packing.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "structured-outputs",
+      "name": "Structured Outputs",
+      "description": "Forcing LLM output into a validated JSON schema.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "llm-apps"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "tool-calling",
+      "name": "Tool Calling",
+      "description": "Letting an LLM invoke functions/APIs via structured calls.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "ai-systems",
+        "agents"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "agent-loops",
+      "name": "Agent Loops",
+      "description": "The plan → act → observe loop, with memory and stopping conditions.",
+      "difficulty": "advanced",
+      "tags": [
+        "agent-systems",
+        "ai-systems",
+        "agents"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "model-routing",
+      "name": "Model Routing",
+      "description": "Sending each request to the cheapest model that can handle it.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "ai-systems",
+        "llm-apps"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-routing.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "runtime",
+        "swe-landscape",
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "prompt-versioning",
+      "name": "Prompt & Version Logging",
+      "description": "Treating prompts as versioned artifacts with logged inputs/outputs.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "ai-systems",
+        "llm-apps"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "llm-evals",
+      "name": "LLM Evals",
+      "description": "Measuring LLM output quality with datasets, graders, and LLM-as-judge.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "ai-systems",
+        "evals"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "ml-math",
+      "name": "ML Math Foundations",
+      "description": "Vectors, matrices, dot products, matmul, shapes.",
+      "difficulty": "intro",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-math.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-gradient-descent",
+      "name": "Gradient Descent",
+      "description": "Loss surfaces, learning rate, SGD steps.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-backprop",
+      "name": "Backpropagation",
+      "description": "Chain rule, autograd, forward/backward passes.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-softmax-xent",
+      "name": "Softmax & Cross-Entropy",
+      "description": "Logits to probabilities, negative log-likelihood loss.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-adamw",
+      "name": "AdamW Optimizer",
+      "description": "Moments, weight decay, gradient clipping.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "foundations"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-tokenization",
+      "name": "Tokenization (LLM)",
+      "description": "Byte-level, char-level, BPE, vocab design.",
+      "difficulty": "intro",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-language-modeling",
+      "name": "Language Modeling",
+      "description": "Next-token prediction, context windows, perplexity.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-sampling",
+      "name": "Sampling & Decoding",
+      "description": "Temperature, top-k, greedy decoding.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "language-modeling"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html",
+      "roadmapIds": [
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "ml-embeddings",
+      "name": "Embeddings (Transformer)",
+      "description": "Token & position embeddings, tied weights.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-self-attention",
+      "name": "Self-Attention",
+      "description": "Q/K/V, scaled dot-product, causal masking.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-multi-head",
+      "name": "Multi-Head Attention",
+      "description": "Parallel heads, head_dim split, output projection.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-transformer-block",
+      "name": "Transformer Block",
+      "description": "Pre-LayerNorm, residuals, MLP, GELU.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "transformers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-training",
+      "name": "Training & Debugging",
+      "description": "Init, NaNs, overfit tests, gradient checks.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-training.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-checkpointing",
+      "name": "Checkpointing",
+      "description": "Weights + optimizer state, resume, dataset manifests.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-lora",
+      "name": "LoRA & PEFT",
+      "description": "Frozen base, low-rank adapters, rank/alpha.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-rl-alignment",
+      "name": "RL Alignment (GRPO & Policy Gradient)",
+      "description": "Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.",
+      "difficulty": "advanced",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-data-engineering",
+      "name": "Style Data Engineering",
+      "description": "Cleaning, dedup, JSONL tasks, memorization tests.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "ml-browser-runtime",
+      "name": "Browser ML Runtime",
+      "description": "Web Workers, WASM, OPFS, TypedArrays.",
+      "difficulty": "advanced",
+      "tags": [
+        "inference-serving",
+        "ai-systems",
+        "runtime"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "ml-webgpu",
+      "name": "WebGPU Compute",
+      "description": "WGSL, compute kernels, matmul, CPU parity.",
+      "difficulty": "advanced",
+      "tags": [
+        "inference-serving",
+        "ai-systems",
+        "runtime"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "ml-evaluation",
+      "name": "Model Evaluation",
+      "description": "Held-out loss, baselines, hallucination, leakage.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "ai-systems",
+        "evals"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html",
+      "roadmapIds": [
+        "ai-models-training-12w",
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "http-lifecycle",
+      "name": "HTTP Lifecycle",
+      "description": "DNS → TCP/TLS → request → response: status codes, headers, keep-alive.",
+      "difficulty": "intro",
+      "tags": [
+        "backend",
+        "http"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html",
+      "roadmapIds": [
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "api-keys",
+      "name": "API Keys",
+      "description": "Issuing, hashing, scoping, and rotating keys for machine clients.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-keys.html",
+      "roadmapIds": [
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "rate-limiting",
+      "name": "Rate Limiting",
+      "description": "Token bucket, leaky bucket, sliding window.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "rate-limiting"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html",
+      "roadmapIds": [
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "idempotency",
+      "name": "Idempotency",
+      "description": "Idempotency keys and dedup windows for safe retries of mutations.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "idempotency"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/idempotency.html",
+      "roadmapIds": [
+        "ai-infra-12-month"
+      ]
+    },
+    {
+      "id": "retries-dlq",
+      "name": "Retries & DLQ",
+      "description": "Backoff + jitter, poison messages, dead-letter queues.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "backend",
+        "queues"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "swe-landscape",
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "webhooks",
+      "name": "Webhooks",
+      "description": "Outbound event delivery: signing, retries, idempotent receivers.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "webhooks"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/webhooks.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "background-jobs",
+      "name": "Background Jobs",
+      "description": "Offloading slow work to workers: scheduling, concurrency, visibility.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "backend",
+        "jobs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "caching",
+      "name": "Caching",
+      "description": "Cache-aside, write-through, eviction policies.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "backend",
+        "caching"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/caching.html",
+      "roadmapIds": [
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "message-queues",
+      "name": "Message Queues",
+      "description": "Kafka, SQS, exactly-once vs at-least-once.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "backend",
+        "queues"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/message-queues.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "monitoring-analytics",
+      "name": "Observability",
+      "description": "Metrics, traces, logs, SLOs.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "backend",
+        "observability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "runtime",
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "api-design",
+      "name": "API Design",
+      "description": "REST, gRPC, versioning, pagination.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "api-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-design.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "auth-systems",
+      "name": "Auth Systems",
+      "description": "OAuth2, JWT, session, RBAC.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html",
+      "roadmapIds": [
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "ecommerce-payments",
+      "name": "Payments",
+      "description": "Idempotency, sagas, double-entry.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "payments"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html",
+      "roadmapIds": []
+    },
+    {
+      "id": "b-tree",
+      "name": "B-Tree",
+      "description": "The balanced, disk-friendly tree behind most relational indexes.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/b-tree.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "lsm-tree",
+      "name": "LSM Tree",
+      "description": "Log-structured merge tree: write-optimized storage via sorted runs.",
+      "difficulty": "advanced",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "wal",
+      "name": "Write-Ahead Log",
+      "description": "Append-only durability log written before the data pages.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "write-path"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/wal.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "compaction",
+      "name": "Compaction",
+      "description": "Merging sorted runs to reclaim space and bound read amplification.",
+      "difficulty": "advanced",
+      "tags": [
+        "databases",
+        "write-path"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/compaction.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "object-storage",
+      "name": "Object Storage",
+      "description": "S3-style blob storage: cheap, durable, high-latency, immutable objects.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "object-storage"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-storage.html",
+      "roadmapIds": [
+        "ai-search-infra-90-day",
+        "ai-infra-12-month",
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "columnar-storage",
+      "name": "Columnar Storage",
+      "description": "Column-oriented layout for analytics: compression and vectorized scans.",
+      "difficulty": "advanced",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "db-disk-first",
+        "swe-landscape"
+      ]
+    },
+    {
+      "id": "secondary-index",
+      "name": "Secondary Indexes",
+      "description": "Extra indexes for non-primary-key lookups, and what they cost on writes.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "indexing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "storage-retrieval",
+      "name": "Storage Engines",
+      "description": "B-tree vs LSM, indexing, WAL.",
+      "difficulty": "advanced",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "sharding",
+      "name": "Sharding",
+      "description": "Range/hash/geo partitioning.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-systems",
+        "databases",
+        "partitioning"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sharding.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "swe-landscape",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "replication",
+      "name": "Replication",
+      "description": "Leader-follower, multi-leader, quorum.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-systems",
+        "databases",
+        "replication"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/replication.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "swe-landscape",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "cap-theorem",
+      "name": "CAP & Consistency Models",
+      "description": "Strong/eventual/causal, PACELC.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-systems",
+        "databases",
+        "consistency"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "swe-landscape",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "object-modeling",
+      "name": "Object Modeling",
+      "description": "Identifying classes, attributes, relationships.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "state-management",
+      "name": "State Machines",
+      "description": "States, transitions, guards.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/state-management.html",
+      "roadmapIds": [
+        "runtime",
+        "swe-landscape",
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "strategy-pattern",
+      "name": "Strategy Pattern",
+      "description": "Interchangeable algorithms.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern.html",
+      "roadmapIds": [
+        "runtime",
+        "swe-landscape",
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "observer-pattern",
+      "name": "Observer Pattern",
+      "description": "Pub/sub, event propagation.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/observer-pattern.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "factory-creational",
+      "name": "Factory & Creational",
+      "description": "Abstract factory, builder, singleton.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/factory-creational.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "decorator-structural",
+      "name": "Decorator & Structural",
+      "description": "Decorator, adapter, composite.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/decorator-structural.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "concurrency-design",
+      "name": "Concurrency Design",
+      "description": "Thread-safety, locks, producer-consumer.",
+      "difficulty": "advanced",
+      "tags": [
+        "systems-foundations",
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html",
+      "roadmapIds": [
+        "runtime",
+        "swe-landscape",
+        "lld-practice",
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "command-chain",
+      "name": "Command & Chain",
+      "description": "Command, undo, chain of responsibility.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/command-chain.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "booking-inventory",
+      "name": "Booking & Inventory",
+      "description": "Reservation, hold-confirm, optimistic locking.",
+      "difficulty": "advanced",
+      "tags": [
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/booking-inventory.html",
+      "roadmapIds": [
+        "lld-practice"
+      ]
+    },
+    {
+      "id": "game-design",
+      "name": "Game/Simulation Design",
+      "description": "Turn engines, board state, rules.",
+      "difficulty": "core",
+      "tags": [
+        "application-engineering",
+        "system-design",
+        "low-level-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/game-design.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "lld-practice",
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "load-balancing",
+      "name": "Load Balancing",
+      "description": "L4/L7, consistent hashing, health checks.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html",
+      "roadmapIds": [
+        "runtime",
+        "swe-landscape",
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "consistent-hashing",
+      "name": "Consistent Hashing",
+      "description": "Ring, virtual nodes, rebalancing.",
+      "difficulty": "advanced",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html",
+      "roadmapIds": [
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "consensus",
+      "name": "Consensus",
+      "description": "Raft, Paxos, leader election.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-systems",
+        "system-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/consensus.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "distributed-infra",
+      "name": "Distributed Infra",
+      "description": "Service discovery, orchestration.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-systems",
+        "system-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html",
+      "roadmapIds": [
+        "db-disk-first",
+        "runtime",
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "messaging-realtime",
+      "name": "Real-time Systems",
+      "description": "WebSockets, presence, delivery.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "system-design",
+        "event-driven"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "hld-practice",
+        "distributed-systems-12w",
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "social-media",
+      "name": "Feed Systems",
+      "description": "Fan-out write/read, timeline.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/social-media.html",
+      "roadmapIds": [
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "streaming-media",
+      "name": "Streaming Media",
+      "description": "CDN, HLS, transcoding pipeline.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html",
+      "roadmapIds": [
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "location-transport",
+      "name": "Geo Systems",
+      "description": "Geohash, quadtree, dispatch.",
+      "difficulty": "core",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/location-transport.html",
+      "roadmapIds": [
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "collaboration-productivity",
+      "name": "Collaboration Systems",
+      "description": "OT, CRDT, conflict resolution.",
+      "difficulty": "advanced",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html",
+      "roadmapIds": [
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "search-platform-design",
+      "name": "Search Platform Design",
+      "description": "End-to-end design of a search platform: ingestion, indexing, query, ranking.",
+      "difficulty": "advanced",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "rag-system-design",
+      "name": "RAG System Design",
+      "description": "Architecting a production RAG system: ingestion, retrieval, generation, evals.",
+      "difficulty": "advanced",
+      "tags": [
+        "system-design",
+        "system-design-cases"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html",
+      "roadmapIds": [
+        "ai-infra-12-month",
+        "hld-practice"
+      ]
+    },
+    {
+      "id": "array-hashing",
+      "name": "Arrays & Hashing",
+      "description": "Hash maps, sets, frequency counting.",
+      "difficulty": "intro",
+      "tags": [
+        "dsa",
+        "arrays-hashing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "two-pointers",
+      "name": "Two Pointers",
+      "description": "Converging/diverging pointer scans.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "two-pointers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "sliding-window",
+      "name": "Sliding Window",
+      "description": "Variable/fixed window over sequences.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "sliding-window"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "stack",
+      "name": "Stack",
+      "description": "LIFO, parsing, monotonic stack.",
+      "difficulty": "intro",
+      "tags": [
+        "dsa",
+        "stack-queue"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/stack.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "binary-search",
+      "name": "Binary Search",
+      "description": "Halving sorted search space, predicate search.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "binary-search"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/binary-search.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "linked-list",
+      "name": "Linked List",
+      "description": "Pointer manipulation, fast/slow, reversal.",
+      "difficulty": "intro",
+      "tags": [
+        "dsa",
+        "linked-list"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/linked-list.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "trees",
+      "name": "Trees",
+      "description": "Binary trees, BSTs, DFS/BFS.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "trees"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/trees.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "tries",
+      "name": "Trie",
+      "description": "Prefix trees.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "trees"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tries.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "heap",
+      "name": "Heap / Priority Queue",
+      "description": "Top-k, k-way merge, scheduling.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "heap"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/heap.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "backtracking",
+      "name": "Backtracking",
+      "description": "DFS with state restoration, pruning.",
+      "difficulty": "advanced",
+      "tags": [
+        "dsa",
+        "backtracking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/backtracking.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "graphs",
+      "name": "Graphs",
+      "description": "BFS/DFS, topo sort, union-find.",
+      "difficulty": "advanced",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/graphs.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "shortest-path",
+      "name": "Shortest Path",
+      "description": "Dijkstra, Bellman-Ford, A*.",
+      "difficulty": "advanced",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "union-find",
+      "name": "Union-Find",
+      "description": "Disjoint set, path compression.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "graphs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/union-find.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "dp-1d",
+      "name": "1D DP",
+      "description": "Linear state recurrences.",
+      "difficulty": "advanced",
+      "tags": [
+        "dsa",
+        "dynamic-programming"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "dp-2d",
+      "name": "2D DP",
+      "description": "Grid DP, edit distance, knapsack.",
+      "difficulty": "advanced",
+      "tags": [
+        "dsa",
+        "dynamic-programming"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-2d.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "greedy",
+      "name": "Greedy",
+      "description": "Local-optimal-as-global proofs.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "greedy"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/greedy.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "intervals",
+      "name": "Intervals",
+      "description": "Merge, overlap, sweep line.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "intervals"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/intervals.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "math-geometry",
+      "name": "Math & Geometry",
+      "description": "Number theory, modular, geometry.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "math"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/math-geometry.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "bit-manipulation",
+      "name": "Bit Manipulation",
+      "description": "Bitwise ops, masks, XOR tricks.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "bit-manipulation"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "leadership-and-influence",
+      "name": "Leadership",
+      "description": "Driving outcomes through others.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "conflict-resolution",
+      "name": "Conflict Resolution",
+      "description": "Disagreement handling.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "problem-solving-and-decision-making",
+      "name": "Decision Making",
+      "description": "Tradeoffs under uncertainty.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "teamwork-and-collaboration",
+      "name": "Collaboration",
+      "description": "Cross-functional work.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "failure-and-learning",
+      "name": "Failure & Learning",
+      "description": "Owning mistakes, post-mortem.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "description": "Written/verbal, audience adaptation.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/communication.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "time-management-and-prioritization",
+      "name": "Prioritization",
+      "description": "Eisenhower, OKR alignment.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "innovation-and-creativity",
+      "name": "Innovation",
+      "description": "Novel solutions, experimentation.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "customer-obsession",
+      "name": "Customer Obsession",
+      "description": "User-centered tradeoffs.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/customer-obsession.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "ownership-and-accountability",
+      "name": "Ownership",
+      "description": "End-to-end responsibility.",
+      "difficulty": "intro",
+      "tags": [
+        "product",
+        "behavioral"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability.html",
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "positioning",
+      "name": "Positioning",
+      "description": "Naming the problem, the audience, and the alternative you beat.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "positioning"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/positioning.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "landing-pages",
+      "name": "Landing Pages",
+      "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "positioning"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "seo",
+      "name": "SEO",
+      "description": "Programmatic and content SEO: intent, structure, indexability.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "growth"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/seo.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "product-analytics",
+      "name": "Product Analytics",
+      "description": "Activation, retention, funnels — measuring whether the product works.",
+      "difficulty": "core",
+      "tags": [
+        "product",
+        "analytics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "vectors-and-spaces",
+      "name": "Vectors & Vector Spaces",
+      "description": "Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.",
+      "difficulty": "intro",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html",
+      "roadmapIds": [
+        "math-rating-climb-30d"
+      ]
+    },
+    {
+      "id": "matrices-and-transformations",
+      "name": "Matrices & Linear Transformations",
+      "description": "Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.",
+      "difficulty": "intro",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html",
+      "roadmapIds": [
+        "math-rating-climb-30d"
+      ]
+    },
+    {
+      "id": "eigenvalues-decomposition",
+      "name": "Eigenvalues & Matrix Decomposition",
+      "description": "Eigenvectors as directions preserved by a transformation; eigenvalues as stretch factors; SVD as the universal factorization.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition.html",
+      "roadmapIds": [
+        "math-rating-climb-30d"
+      ]
+    },
+    {
+      "id": "probability-fundamentals",
+      "name": "Probability Fundamentals",
+      "description": "Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.",
+      "difficulty": "intro",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "random-variables",
+      "name": "Random Variables & Distributions",
+      "description": "Discrete and continuous distributions, expectation, variance, and the law of large numbers.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-variables.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "descriptive-statistics",
+      "name": "Descriptive Statistics",
+      "description": "Summarizing data: mean, median, variance, correlation, and when each summary lies.",
+      "difficulty": "intro",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "estimation-confidence",
+      "name": "Estimation & Confidence Intervals",
+      "description": "Point estimates, standard error, confidence intervals, and what '95% confident' actually means.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "hypothesis-testing",
+      "name": "Hypothesis Testing",
+      "description": "Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "regression-basics",
+      "name": "Linear Regression",
+      "description": "Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "derivatives-and-gradients",
+      "name": "Derivatives & Gradients",
+      "description": "Partial derivatives, the gradient vector, and reading a loss surface for descent direction.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "calculus"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html",
+      "roadmapIds": [
+        "math-rating-climb-30d"
+      ]
+    },
+    {
+      "id": "multivariable-optimization",
+      "name": "Multivariable Optimization",
+      "description": "Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "calculus"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html",
+      "roadmapIds": [
+        "math-rating-climb-30d"
+      ]
+    },
+    {
+      "id": "information-entropy",
+      "name": "Information & Entropy",
+      "description": "Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/information-entropy.html",
+      "roadmapIds": [
+        "math-rating-climb-30d",
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "classical-distributions",
+      "name": "Classical Distributions",
+      "description": "Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "probability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html",
+      "roadmapIds": [
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "sampling-and-clt",
+      "name": "Sampling & the Central Limit Theorem",
+      "description": "Sampling distributions, standard error of the mean, and why averages become Normal as n grows.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html",
+      "roadmapIds": [
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "ab-testing-engineering",
+      "name": "A/B Testing for Engineers",
+      "description": "Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html",
+      "roadmapIds": [
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "bayesian-inference",
+      "name": "Bayesian Inference",
+      "description": "Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html",
+      "roadmapIds": [
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "maximum-likelihood",
+      "name": "Maximum Likelihood Estimation",
+      "description": "Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html",
+      "roadmapIds": [
+        "prob-stats-30d"
+      ]
+    },
+    {
+      "id": "covariance-correlation",
+      "name": "Covariance & Correlation",
+      "description": "Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html",
+      "roadmapIds": [
+        "prob-stats-30d",
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "bias-variance-overfitting",
+      "name": "Bias, Variance & Overfitting",
+      "description": "Underfitting vs memorizing noise; why in-sample greatness lies.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "statistics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting.html",
+      "roadmapIds": [
+        "prob-stats-30d",
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "matrix-rank-basis",
+      "name": "Rank, Basis & Subspaces",
+      "description": "Column space, rank, independence — why matrices are often low-rank in practice.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "pca-projection",
+      "name": "PCA & Projection",
+      "description": "Principal components as variance-maximizing orthogonal directions; projection as subspace approximation.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "linear-algebra"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pca-projection.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "returns-volatility",
+      "name": "Returns & Volatility",
+      "description": "Simple/log returns, realized volatility, annualization — basic quant units.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "stationarity-autocorrelation",
+      "name": "Stationarity & Autocorrelation",
+      "description": "When series statistics are stable; memory in lags; noise vs signal.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "random-walks-markov",
+      "name": "Random Walks & Markov Chains",
+      "description": "Markov property, random walks, transition matrices — generative story behind market efficiency intuition.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "portfolio-risk-metrics",
+      "name": "Sharpe, Drawdown & Portfolio Risk",
+      "description": "Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.",
+      "difficulty": "core",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "momentum-backtest",
+      "name": "Momentum Backtest Discipline",
+      "description": "Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.",
+      "difficulty": "advanced",
+      "tags": [
+        "mathematics",
+        "quant"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html",
+      "roadmapIds": [
+        "math-stack-12w"
+      ]
+    },
+    {
+      "id": "operating-system-mechanics",
+      "name": "Operating System Mechanics",
+      "description": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "operating-systems"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "network-protocol-engineering",
+      "name": "Network Protocol Engineering",
+      "description": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "networking"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "compute-memory-storage-hierarchy",
+      "name": "Compute, Memory & Storage Hierarchy",
+      "description": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "hardware"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "runtime-performance-engineering",
+      "name": "Runtime & Performance Engineering",
+      "description": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "performance"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "security-isolation-boundaries",
+      "name": "Security & Isolation Boundaries",
+      "description": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "security"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "cloud-infrastructure",
+      "name": "Cloud Infrastructure",
+      "description": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "cloud"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "containers-kubernetes",
+      "name": "Containers & Kubernetes",
+      "description": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "containers"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "cicd-developer-environments",
+      "name": "CI/CD & Developer Environments",
+      "description": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "delivery"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "platform-scheduling-orchestration",
+      "name": "Scheduling & Orchestration",
+      "description": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "orchestration"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "reliability-fault-tolerance",
+      "name": "Reliability & Fault Tolerance",
+      "description": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "reliability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "opentelemetry-observability",
+      "name": "Observability & OpenTelemetry",
+      "description": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "observability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/opentelemetry-observability.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "sandbox-execution-environments",
+      "name": "Sandboxes & Execution Environments",
+      "description": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "sandboxes"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "infrastructure-automation",
+      "name": "Infrastructure Automation",
+      "description": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.",
+      "difficulty": "core",
+      "tags": [
+        "infrastructure-platforms",
+        "infrastructure-as-code"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation.html",
+      "roadmapIds": [
+        "infrastructure-platforms-12w"
+      ]
+    },
+    {
+      "id": "event-streaming-kafka",
+      "name": "Event Streaming & Kafka",
+      "description": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "event-streaming"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka.html",
+      "roadmapIds": [
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "distributed-workflows-temporal",
+      "name": "Distributed Workflows & Temporal",
+      "description": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "durable-workflows"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html",
+      "roadmapIds": [
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "distributed-failure-recovery",
+      "name": "Distributed Failure Recovery",
+      "description": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.",
+      "difficulty": "core",
+      "tags": [
+        "distributed-systems",
+        "failure-recovery"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery.html",
+      "roadmapIds": [
+        "distributed-systems-12w"
+      ]
+    },
+    {
+      "id": "transaction-processing",
+      "name": "Transaction Processing",
+      "description": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "transactions"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "query-execution-optimization",
+      "name": "Query Execution & Optimization",
+      "description": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "query-planning"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "warehouses-lakehouses",
+      "name": "Data Warehouses & Lakehouses",
+      "description": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "analytics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "ml-pretraining",
+      "name": "Model Pre-training",
+      "description": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "training"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "model-quantization",
+      "name": "Model Quantization",
+      "description": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "compression"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "open-weight-models",
+      "name": "Open-Weight Models",
+      "description": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.",
+      "difficulty": "core",
+      "tags": [
+        "ai-systems",
+        "open-models"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/open-weight-models.html",
+      "roadmapIds": [
+        "ai-models-training-12w"
+      ]
+    },
+    {
+      "id": "inference-engines",
+      "name": "vLLM & Inference Engines",
+      "description": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "inference-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "continuous-batching",
+      "name": "Continuous Batching",
+      "description": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "batching"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "kv-cache-paged-attention",
+      "name": "KV Caching & PagedAttention",
+      "description": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "kv-cache"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "flashattention-kernels",
+      "name": "FlashAttention & Attention Kernels",
+      "description": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "gpu-kernels"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "speculative-decoding",
+      "name": "Speculative Decoding",
+      "description": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "decoding"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "gpu-utilization",
+      "name": "GPU Utilization",
+      "description": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "gpu"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "inference-cost-latency",
+      "name": "Inference Cost & Latency Optimization",
+      "description": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "serving-economics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "local-on-device-inference",
+      "name": "Local & On-device Inference",
+      "description": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "on-device"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference.html",
+      "roadmapIds": [
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "inference-hardware",
+      "name": "Inference Hardware",
+      "description": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
+      "difficulty": "core",
+      "tags": [
+        "inference-serving",
+        "hardware"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html",
+      "roadmapIds": [
+        "inference-serving-12w"
+      ]
+    },
+    {
+      "id": "agent-memory-context",
+      "name": "Agent Memory & Context Management",
+      "description": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "memory"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "mcp-integrations",
+      "name": "MCP & Integrations",
+      "description": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "mcp"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "multi-agent-coordination",
+      "name": "Multi-agent Coordination",
+      "description": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "multi-agent"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "durable-agent-execution",
+      "name": "Durable Agent Execution",
+      "description": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "durability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "agent-permissions-sandboxing",
+      "name": "Agent Permissions & Sandboxing",
+      "description": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "permissions"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "browser-computer-use-agents",
+      "name": "Browser & Computer-use Agents",
+      "description": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "computer-use"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "agent-communication-interfaces",
+      "name": "Agent Communication & Interfaces",
+      "description": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "interfaces"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "long-running-scheduled-agents",
+      "name": "Long-running & Scheduled Agents",
+      "description": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "scheduling"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html",
+      "roadmapIds": [
+        "agent-systems-12w"
+      ]
+    },
+    {
+      "id": "coding-agent-benchmarks",
+      "name": "Coding-agent Benchmarks",
+      "description": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "benchmarks"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "tool-use-evaluations",
+      "name": "Tool-use Evaluations",
+      "description": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "tool-evals"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "ai-regression-testing",
+      "name": "AI Regression Testing",
+      "description": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "regression"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "hallucination-failure-detection",
+      "name": "Hallucination & Failure Detection",
+      "description": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "failure-detection"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "agent-observability",
+      "name": "Agent Observability",
+      "description": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "observability"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "tracing-replay",
+      "name": "Tracing & Replay",
+      "description": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "replay"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "evidence-backed-verification",
+      "name": "Evidence-backed Verification",
+      "description": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "verification"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "human-review-systems",
+      "name": "Human Review Systems",
+      "description": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "human-review"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "quality-cost-latency-measurement",
+      "name": "Quality, Cost & Latency Measurement",
+      "description": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.",
+      "difficulty": "core",
+      "tags": [
+        "ai-reliability",
+        "measurement"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html",
+      "roadmapIds": [
+        "ai-reliability-12w"
+      ]
+    },
+    {
+      "id": "code-review-systems",
+      "name": "Code Review Systems",
+      "description": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "code-review"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/code-review-systems.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "static-dynamic-analysis",
+      "name": "Static & Dynamic Analysis",
+      "description": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "program-analysis"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "testing-infrastructure",
+      "name": "Testing Infrastructure",
+      "description": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "testing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "codebase-graphs",
+      "name": "Codebase Graphs",
+      "description": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "code-graphs"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "dependency-blast-radius",
+      "name": "Dependency & Blast-radius Analysis",
+      "description": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "dependencies"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "ide-cli-tooling",
+      "name": "IDE & CLI Tooling",
+      "description": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "developer-experience"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "coding-agent-systems",
+      "name": "Coding Agent Systems",
+      "description": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "coding-agents"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "repository-intelligence",
+      "name": "Repository Intelligence",
+      "description": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "repository-intelligence"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "software-supply-chain-health",
+      "name": "Software Supply-chain Health",
+      "description": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "supply-chain"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "automated-debugging-remediation",
+      "name": "Automated Debugging & Remediation",
+      "description": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.",
+      "difficulty": "core",
+      "tags": [
+        "developer-tools",
+        "debugging"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation.html",
+      "roadmapIds": [
+        "developer-tools-12w"
+      ]
+    },
+    {
+      "id": "web-mobile-engineering",
+      "name": "Web & Mobile Engineering",
+      "description": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.",
+      "difficulty": "core",
+      "tags": [
+        "application-engineering",
+        "client-platforms"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "ux-interface-design",
+      "name": "UX & Interface Design",
+      "description": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.",
+      "difficulty": "core",
+      "tags": [
+        "application-engineering",
+        "ux"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "real-time-application-engineering",
+      "name": "Real-time Application Engineering",
+      "description": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.",
+      "difficulty": "core",
+      "tags": [
+        "application-engineering",
+        "real-time"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/real-time-application-engineering.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "interactive-2d-3d-systems",
+      "name": "2D/3D Interactive Systems",
+      "description": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.",
+      "difficulty": "core",
+      "tags": [
+        "application-engineering",
+        "graphics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems.html",
+      "roadmapIds": [
+        "application-engineering-12w"
+      ]
+    },
+    {
+      "id": "multimodal-models",
+      "name": "Multimodal Models",
+      "description": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "multimodal"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multimodal-models.html",
+      "roadmapIds": [
+        "ai-models-training-12w",
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "vision-models",
+      "name": "Vision Models",
+      "description": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "computer-vision"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vision-models.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "pose-motion-tracking",
+      "name": "Pose & Motion Tracking",
+      "description": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "pose"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "voice-audio-systems",
+      "name": "Voice & Audio Systems",
+      "description": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "audio"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "image-video-generation",
+      "name": "Image & Video Generation",
+      "description": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "generation"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/image-video-generation.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "robotics-systems",
+      "name": "Robotics Systems",
+      "description": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "robotics"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/robotics-systems.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "spatial-interfaces",
+      "name": "Spatial Interfaces",
+      "description": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "spatial-computing"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    },
+    {
+      "id": "human-computer-interaction",
+      "name": "Human-Computer Interaction",
+      "description": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
+      "difficulty": "core",
+      "tags": [
+        "multimodal-spatial",
+        "hci"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction.html",
+      "roadmapIds": [
+        "multimodal-spatial-12w"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "id": "systems-foundations",
+      "title": "Systems Foundations",
+      "topics": [
+        {
+          "name": "Operating systems",
+          "concepts": [
+            "operating-system-mechanics"
+          ]
+        },
+        {
+          "name": "Networking",
+          "concepts": [
+            "network-protocol-engineering",
+            "http-lifecycle"
+          ]
+        },
+        {
+          "name": "Concurrency and parallelism",
+          "concepts": [
+            "concurrency-design"
+          ]
+        },
+        {
+          "name": "Memory, CPU, GPU and storage",
+          "concepts": [
+            "compute-memory-storage-hierarchy",
+            "ml-webgpu",
+            "object-storage"
+          ]
+        },
+        {
+          "name": "Runtime and performance engineering",
+          "concepts": [
+            "runtime-performance-engineering"
+          ]
+        },
+        {
+          "name": "Security and isolation",
+          "concepts": [
+            "security-isolation-boundaries",
+            "sandbox-execution-environments"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infrastructure-platforms",
+      "title": "Infrastructure & Platforms",
+      "topics": [
+        {
+          "name": "Cloud infrastructure",
+          "concepts": [
+            "cloud-infrastructure"
+          ]
+        },
+        {
+          "name": "Containers and Kubernetes",
+          "concepts": [
+            "containers-kubernetes"
+          ]
+        },
+        {
+          "name": "CI/CD and developer environments",
+          "concepts": [
+            "cicd-developer-environments"
+          ]
+        },
+        {
+          "name": "Scheduling and orchestration",
+          "concepts": [
+            "platform-scheduling-orchestration",
+            "background-jobs"
+          ]
+        },
+        {
+          "name": "Reliability and fault tolerance",
+          "concepts": [
+            "reliability-fault-tolerance",
+            "retries-dlq"
+          ]
+        },
+        {
+          "name": "Observability and OpenTelemetry",
+          "concepts": [
+            "opentelemetry-observability",
+            "monitoring-analytics"
+          ]
+        },
+        {
+          "name": "Sandboxes and execution environments",
+          "concepts": [
+            "sandbox-execution-environments"
+          ]
+        },
+        {
+          "name": "Infrastructure automation",
+          "concepts": [
+            "infrastructure-automation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems",
+      "topics": [
+        {
+          "name": "Consensus and coordination",
+          "concepts": [
+            "consensus",
+            "distributed-infra"
+          ]
+        },
+        {
+          "name": "Replication and partitioning",
+          "concepts": [
+            "replication",
+            "sharding"
+          ]
+        },
+        {
+          "name": "Messaging, Kafka and event systems",
+          "concepts": [
+            "message-queues",
+            "event-streaming-kafka",
+            "messaging-realtime"
+          ]
+        },
+        {
+          "name": "Caching",
+          "concepts": [
+            "caching"
+          ]
+        },
+        {
+          "name": "Distributed workflows and Temporal",
+          "concepts": [
+            "distributed-workflows-temporal"
+          ]
+        },
+        {
+          "name": "Consistency models",
+          "concepts": [
+            "cap-theorem",
+            "transaction-processing"
+          ]
+        },
+        {
+          "name": "Resilience and failure recovery",
+          "concepts": [
+            "distributed-failure-recovery",
+            "retries-dlq"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "databases-data-systems",
+      "title": "Databases & Data Systems",
+      "topics": [
+        {
+          "name": "Storage engines",
+          "concepts": [
+            "storage-retrieval",
+            "b-tree",
+            "lsm-tree"
+          ]
+        },
+        {
+          "name": "Transactional databases",
+          "concepts": [
+            "transaction-processing",
+            "wal"
+          ]
+        },
+        {
+          "name": "Analytical databases",
+          "concepts": [
+            "columnar-storage",
+            "query-execution-optimization"
+          ]
+        },
+        {
+          "name": "Distributed databases",
+          "concepts": [
+            "distributed-infra",
+            "replication",
+            "sharding"
+          ]
+        },
+        {
+          "name": "Streaming systems",
+          "concepts": [
+            "event-streaming-kafka",
+            "message-queues"
+          ]
+        },
+        {
+          "name": "Search and vector databases",
+          "concepts": [
+            "search-discovery",
+            "hnsw",
+            "brute-force-vector-db"
+          ]
+        },
+        {
+          "name": "Indexing and query execution",
+          "concepts": [
+            "secondary-index",
+            "inverted-index",
+            "query-execution-optimization"
+          ]
+        },
+        {
+          "name": "Data warehouses and lakehouses",
+          "concepts": [
+            "warehouses-lakehouses",
+            "columnar-storage"
+          ]
+        },
+        {
+          "name": "Memory-versus-disk architecture",
+          "concepts": [
+            "compute-memory-storage-hierarchy",
+            "storage-retrieval"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-models-training",
+      "title": "AI Models & Training",
+      "topics": [
+        {
+          "name": "Model architectures",
+          "concepts": [
+            "ml-transformer-block",
+            "multimodal-models"
+          ]
+        },
+        {
+          "name": "Transformers and tokenization",
+          "concepts": [
+            "ml-tokenization",
+            "ml-self-attention",
+            "ml-multi-head"
+          ]
+        },
+        {
+          "name": "Pre-training",
+          "concepts": [
+            "ml-pretraining",
+            "ml-training"
+          ]
+        },
+        {
+          "name": "Fine-tuning",
+          "concepts": [
+            "ml-lora"
+          ]
+        },
+        {
+          "name": "Post-training",
+          "concepts": [
+            "ml-rl-alignment"
+          ]
+        },
+        {
+          "name": "Reinforcement learning",
+          "concepts": [
+            "ml-rl-alignment"
+          ]
+        },
+        {
+          "name": "Quantization",
+          "concepts": [
+            "model-quantization"
+          ]
+        },
+        {
+          "name": "Open-weight models",
+          "concepts": [
+            "open-weight-models"
+          ]
+        },
+        {
+          "name": "Multimodal models",
+          "concepts": [
+            "multimodal-models"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inference-serving",
+      "title": "Inference & Serving",
+      "topics": [
+        {
+          "name": "vLLM and inference engines",
+          "concepts": [
+            "inference-engines"
+          ]
+        },
+        {
+          "name": "Continuous batching",
+          "concepts": [
+            "continuous-batching"
+          ]
+        },
+        {
+          "name": "KV caching and PagedAttention",
+          "concepts": [
+            "kv-cache-paged-attention"
+          ]
+        },
+        {
+          "name": "FlashAttention",
+          "concepts": [
+            "flashattention-kernels"
+          ]
+        },
+        {
+          "name": "Speculative decoding",
+          "concepts": [
+            "speculative-decoding"
+          ]
+        },
+        {
+          "name": "Model routing",
+          "concepts": [
+            "model-routing"
+          ]
+        },
+        {
+          "name": "GPU utilization",
+          "concepts": [
+            "gpu-utilization"
+          ]
+        },
+        {
+          "name": "Cost and latency optimization",
+          "concepts": [
+            "inference-cost-latency"
+          ]
+        },
+        {
+          "name": "Local and on-device inference",
+          "concepts": [
+            "local-on-device-inference",
+            "ml-browser-runtime"
+          ]
+        },
+        {
+          "name": "Inference hardware",
+          "concepts": [
+            "inference-hardware"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agent-systems",
+      "title": "Agent Systems",
+      "topics": [
+        {
+          "name": "Agent loops and harnesses",
+          "concepts": [
+            "agent-loops"
+          ]
+        },
+        {
+          "name": "Tool use",
+          "concepts": [
+            "tool-calling"
+          ]
+        },
+        {
+          "name": "Memory and context management",
+          "concepts": [
+            "agent-memory-context",
+            "context-packing"
+          ]
+        },
+        {
+          "name": "MCP and integrations",
+          "concepts": [
+            "mcp-integrations"
+          ]
+        },
+        {
+          "name": "Multi-agent coordination",
+          "concepts": [
+            "multi-agent-coordination"
+          ]
+        },
+        {
+          "name": "Durable execution",
+          "concepts": [
+            "durable-agent-execution"
+          ]
+        },
+        {
+          "name": "Permissions and sandboxing",
+          "concepts": [
+            "agent-permissions-sandboxing"
+          ]
+        },
+        {
+          "name": "Browser and computer-use agents",
+          "concepts": [
+            "browser-computer-use-agents"
+          ]
+        },
+        {
+          "name": "Agent communication and interfaces",
+          "concepts": [
+            "agent-communication-interfaces"
+          ]
+        },
+        {
+          "name": "Long-running and scheduled agents",
+          "concepts": [
+            "long-running-scheduled-agents"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-reliability",
+      "title": "Evaluation, Verification & AI Reliability",
+      "topics": [
+        {
+          "name": "LLM evaluations",
+          "concepts": [
+            "llm-evals",
+            "ml-evaluation"
+          ]
+        },
+        {
+          "name": "Coding-agent benchmarks",
+          "concepts": [
+            "coding-agent-benchmarks"
+          ]
+        },
+        {
+          "name": "Tool-use evaluations",
+          "concepts": [
+            "tool-use-evaluations"
+          ]
+        },
+        {
+          "name": "Regression testing",
+          "concepts": [
+            "ai-regression-testing"
+          ]
+        },
+        {
+          "name": "Hallucination and failure detection",
+          "concepts": [
+            "hallucination-failure-detection"
+          ]
+        },
+        {
+          "name": "Agent observability",
+          "concepts": [
+            "agent-observability"
+          ]
+        },
+        {
+          "name": "Tracing and replay",
+          "concepts": [
+            "tracing-replay"
+          ]
+        },
+        {
+          "name": "Evidence-backed verification",
+          "concepts": [
+            "evidence-backed-verification"
+          ]
+        },
+        {
+          "name": "Human review systems",
+          "concepts": [
+            "human-review-systems"
+          ]
+        },
+        {
+          "name": "Cost, latency and quality measurement",
+          "concepts": [
+            "quality-cost-latency-measurement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "developer-tools",
+      "title": "Developer Tools & Code Intelligence",
+      "topics": [
+        {
+          "name": "Code review",
+          "concepts": [
+            "code-review-systems"
+          ]
+        },
+        {
+          "name": "Static and dynamic analysis",
+          "concepts": [
+            "static-dynamic-analysis"
+          ]
+        },
+        {
+          "name": "Testing infrastructure",
+          "concepts": [
+            "testing-infrastructure"
+          ]
+        },
+        {
+          "name": "Codebase graphs",
+          "concepts": [
+            "codebase-graphs"
+          ]
+        },
+        {
+          "name": "Dependency and blast-radius analysis",
+          "concepts": [
+            "dependency-blast-radius"
+          ]
+        },
+        {
+          "name": "IDE and CLI tooling",
+          "concepts": [
+            "ide-cli-tooling"
+          ]
+        },
+        {
+          "name": "Coding agents",
+          "concepts": [
+            "coding-agent-systems",
+            "agent-loops"
+          ]
+        },
+        {
+          "name": "Repository intelligence",
+          "concepts": [
+            "repository-intelligence"
+          ]
+        },
+        {
+          "name": "Software supply-chain health",
+          "concepts": [
+            "software-supply-chain-health"
+          ]
+        },
+        {
+          "name": "Automated debugging and remediation",
+          "concepts": [
+            "automated-debugging-remediation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "application-engineering",
+      "title": "Product & Application Engineering",
+      "topics": [
+        {
+          "name": "Backend and API architecture",
+          "concepts": [
+            "api-design",
+            "http-lifecycle"
+          ]
+        },
+        {
+          "name": "Web and mobile engineering",
+          "concepts": [
+            "web-mobile-engineering"
+          ]
+        },
+        {
+          "name": "Product analytics",
+          "concepts": [
+            "product-analytics"
+          ]
+        },
+        {
+          "name": "UX and interface design",
+          "concepts": [
+            "ux-interface-design"
+          ]
+        },
+        {
+          "name": "Real-time applications",
+          "concepts": [
+            "real-time-application-engineering",
+            "messaging-realtime"
+          ]
+        },
+        {
+          "name": "Voice interfaces",
+          "concepts": [
+            "voice-audio-systems"
+          ]
+        },
+        {
+          "name": "Computer vision",
+          "concepts": [
+            "vision-models"
+          ]
+        },
+        {
+          "name": "2D/3D interactive systems",
+          "concepts": [
+            "interactive-2d-3d-systems",
+            "game-design"
+          ]
+        },
+        {
+          "name": "Product distribution and growth loops",
+          "concepts": [
+            "positioning",
+            "landing-pages",
+            "seo",
+            "product-analytics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multimodal-spatial",
+      "title": "Multimodal, Robotics & Spatial Computing",
+      "topics": [
+        {
+          "name": "Vision models",
+          "concepts": [
+            "vision-models"
+          ]
+        },
+        {
+          "name": "Pose and motion tracking",
+          "concepts": [
+            "pose-motion-tracking"
+          ]
+        },
+        {
+          "name": "Voice and audio systems",
+          "concepts": [
+            "voice-audio-systems"
+          ]
+        },
+        {
+          "name": "Image and video generation",
+          "concepts": [
+            "image-video-generation"
+          ]
+        },
+        {
+          "name": "On-device intelligence",
+          "concepts": [
+            "local-on-device-inference",
+            "ml-webgpu"
+          ]
+        },
+        {
+          "name": "Robotics",
+          "concepts": [
+            "robotics-systems"
+          ]
+        },
+        {
+          "name": "Spatial interfaces",
+          "concepts": [
+            "spatial-interfaces"
+          ]
+        },
+        {
+          "name": "Human-computer interaction",
+          "concepts": [
+            "human-computer-interaction"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -21,6 +21,7 @@
       "!**/public/wasm",
       "!**/server",
       "!**/src/data/library/**/content.json",
+      "!**/public/curriculum",
       "!**/*.css"
     ]
   },

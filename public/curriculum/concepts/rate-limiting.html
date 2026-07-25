@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rate Limiting | SWE Prep</title>
+    <meta name="description" content="Token bucket, leaky bucket, sliding window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Rate Limiting | SWE Prep">
+    <meta property="og:description" content="Token bucket, leaky bucket, sliding window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rate Limiting | SWE Prep">
+    <meta name="twitter:description" content="Token bucket, leaky bucket, sliding window. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Rate Limiting","description":"Token bucket, leaky bucket, sliding window.","url":"https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Rate Limiting","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/backend.html">Backend</a></nav>
+      <article>
+    <p class="eyebrow">Backend · core</p>
+    <h1>Rate Limiting</h1>
+    <p class="lede">Token bucket, leaky bucket, sliding window.</p>
+    <div class="pills"><span>backend</span><span>rate-limiting</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Rate limiting protects a shared resource from any one caller. Token bucket is the workhorse: tokens refill at a steady rate, each request spends one, an empty bucket means 429 — allowing bursts up to the bucket size.</p>
+    </section>
+
+    <section>
+      <h2>How to study Rate Limiting</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use 429 Too Many Requests (MDN) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Rate Limiting with API Keys, Idempotency. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Implement a token-bucket rate limiter and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>API gateways, every public API.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Fixed-window counters that allow 2x burst at the boundary</li><li>Limiting per-server instead of globally in a cluster</li><li>No Retry-After header on 429 responses</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429" rel="noreferrer">429 Too Many Requests (MDN)</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Implement a token-bucket rate limiter</h3>
+          <p>Implement a token bucket: tokens refill at a fixed rate, each request spends one, an empty bucket returns 429 with Retry-After.</p>
+          <p><strong>Expected evidence:</strong> Allows bursts up to bucket size, then throttles to the refill rate.</p>
+          <a href="/drills/implement-token-bucket">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>How does a token bucket differ from a fixed-window counter?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Reusable rate limiter</h3>
+          <p>A token-bucket rate limiter usable as middleware.</p>
+          <ul><li>Token bucket with configurable rate and burst</li><li>Returns 429 with a Retry-After header</li><li>Works across processes (shared store)</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/http-lifecycle.html">HTTP Lifecycle</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/api-keys.html">API Keys</a></li><li><a href="/curriculum/concepts/idempotency.html">Idempotency</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

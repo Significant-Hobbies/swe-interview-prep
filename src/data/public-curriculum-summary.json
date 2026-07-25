@@ -1,0 +1,104 @@
+{
+  "counts": {
+    "tracks": 18,
+    "concepts": 222,
+    "roadmaps": 24,
+    "drills": 265,
+    "reviewQuestions": 327,
+    "artifacts": 40,
+    "coverageCategories": 11,
+    "coverageTopics": 96
+  },
+  "tracks": [
+    {
+      "id": "search-ir",
+      "title": "Search & IR",
+      "description": "Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation."
+    },
+    {
+      "id": "mathematics",
+      "title": "Mathematics",
+      "description": "Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning."
+    },
+    {
+      "id": "vector-db",
+      "title": "Vector DB & ANN",
+      "description": "Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs."
+    },
+    {
+      "id": "ai-systems",
+      "title": "AI Systems",
+      "description": "Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations."
+    },
+    {
+      "id": "backend",
+      "title": "Backend",
+      "description": "Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability."
+    },
+    {
+      "id": "databases",
+      "title": "Databases & Storage",
+      "description": "Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage."
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "description": "Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies."
+    },
+    {
+      "id": "dsa",
+      "title": "DSA & Implementation",
+      "description": "Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns."
+    },
+    {
+      "id": "product",
+      "title": "Product & Distribution",
+      "description": "Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation."
+    },
+    {
+      "id": "systems-foundations",
+      "title": "Systems Foundations",
+      "description": "Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation."
+    },
+    {
+      "id": "infrastructure-platforms",
+      "title": "Infrastructure & Platforms",
+      "description": "Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation."
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems",
+      "description": "Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery."
+    },
+    {
+      "id": "inference-serving",
+      "title": "Inference & Serving",
+      "description": "Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics."
+    },
+    {
+      "id": "agent-systems",
+      "title": "Agent Systems",
+      "description": "Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work."
+    },
+    {
+      "id": "ai-reliability",
+      "title": "Evaluation & AI Reliability",
+      "description": "LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics."
+    },
+    {
+      "id": "developer-tools",
+      "title": "Developer Tools & Code Intelligence",
+      "description": "Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation."
+    },
+    {
+      "id": "application-engineering",
+      "title": "Application Engineering",
+      "description": "Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops."
+    },
+    {
+      "id": "multimodal-spatial",
+      "title": "Multimodal & Spatial Computing",
+      "description": "Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction."
+    }
+  ]
+}

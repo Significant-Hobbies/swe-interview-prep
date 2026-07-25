@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LLM Evals | SWE Prep</title>
+    <meta name="description" content="Measuring LLM output quality with datasets, graders, and LLM-as-judge.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="LLM Evals | SWE Prep">
+    <meta property="og:description" content="Measuring LLM output quality with datasets, graders, and LLM-as-judge.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Evals | SWE Prep">
+    <meta name="twitter:description" content="Measuring LLM output quality with datasets, graders, and LLM-as-judge.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"LLM Evals","description":"Measuring LLM output quality with datasets, graders, and LLM-as-judge.","url":"https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"LLM Evals","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-reliability.html">Evaluation &amp; AI Reliability</a></nav>
+      <article>
+    <p class="eyebrow">Evaluation &amp; AI Reliability · core</p>
+    <h1>LLM Evals</h1>
+    <p class="lede">Measuring LLM output quality with datasets, graders, and LLM-as-judge.</p>
+    <div class="pills"><span>ai-reliability</span><span>ai-systems</span><span>evals</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change.</p>
+    </section>
+
+    <section>
+      <h2>How to study LLM Evals</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Your AI product needs evals (Hamel Husain) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare LLM Evals with Search Evals, Model Routing, Model Evaluation, Hypothesis Testing. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Build an LLM eval and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Every serious LLM product; regression gates in CI.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Shipping prompt changes on vibes with no eval</li><li>LLM-as-judge without checking the judge against humans</li><li>Eval set that does not cover real failure modes</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://hamel.dev/blog/posts/evals/" rel="noreferrer">Your AI product needs evals (Hamel Husain)</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Build an LLM eval</h3>
+          <p>Create a dataset of inputs with expected behavior and a grader (deterministic or LLM-as-judge). Run it as one command and score a prompt.</p>
+          <p><strong>Expected evidence:</strong> A pass-rate score that changes when you change the prompt.</p>
+          <a href="/drills/build-llm-eval">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why must an LLM-as-judge be validated against human labels?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>LLM eval harness</h3>
+          <p>A dataset + grader harness that scores LLM output on every prompt/model change.</p>
+          <ul><li>Fixed dataset of inputs with expected behavior</li><li>At least one deterministic grader and one LLM-as-judge grader</li><li>Runs as a single command and prints a score</li></ul>
+        </div><div class="practice-card">
+          <h3>Model router</h3>
+          <p>Route each request to the cheapest model that passes evals for that request class.</p>
+          <ul><li>Classify request difficulty</li><li>Dispatch to a cheap or strong model accordingly</li><li>Track cost and latency per route</li></ul>
+        </div><div class="practice-card">
+          <h3>Synthesize: Evaluation &amp; AI Reliability</h3>
+          <p>Build an evidence-backed evaluation and observability system for models, tools, and agents. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/search-evals.html">Search Evals</a></li><li><a href="/curriculum/concepts/model-routing.html">Model Routing</a></li><li><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></li><li><a href="/curriculum/concepts/hypothesis-testing.html">Hypothesis Testing</a></li><li><a href="/curriculum/concepts/ab-testing-engineering.html">A/B Testing for Engineers</a></li><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-reliability-12w.html">12-Week Evaluation &amp; AI Reliability</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>
