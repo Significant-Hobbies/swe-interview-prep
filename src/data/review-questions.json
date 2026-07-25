@@ -830,7 +830,7 @@
       "conceptId": "ml-rl-alignment",
       "type": "explain",
       "difficulty": "advanced",
-      "question": "Explain GRPO-style RL alignment in your own words. Why use group-relative advantages and importance sampling?",
+      "question": "In GRPO-style RL alignment, why are advantages computed relative to a group of completions for the same prompt, and why is importance sampling needed?",
       "answer": "The LM is a policy: sample several completions per prompt, score them, and push token probabilities toward better ones. Group-relative advantages (reward minus group mean, scaled by std) tell the model which completion beat its siblings on the same query. Importance sampling corrects for reusing rollouts from an older policy when training off-policy, and clipping keeps updates stable."
     },
     {

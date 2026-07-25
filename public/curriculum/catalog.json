@@ -674,6 +674,7 @@
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
       "conceptIds": [
+        "ml-lora",
         "api-design",
         "consistent-hashing",
         "descriptive-statistics",
@@ -973,10 +974,9 @@
       "goal": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html",
       "conceptIds": [
-        "descriptive-statistics",
         "ml-sampling",
         "probability-fundamentals",
-        "vision-models",
+        "descriptive-statistics",
         "ml-math",
         "ml-gradient-descent",
         "ml-backprop",
@@ -997,6 +997,8 @@
         "model-quantization",
         "open-weight-models",
         "multimodal-models",
+        "vision-models",
+        "voice-audio-systems",
         "ml-evaluation"
       ]
     },
@@ -1007,22 +1009,26 @@
       "goal": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html",
       "conceptIds": [
-        "descriptive-statistics",
-        "ml-tokenization",
-        "probability-fundamentals",
         "structured-outputs",
         "ml-math",
-        "ml-softmax-xent",
         "ml-gradient-descent",
-        "ml-language-modeling",
         "ml-backprop",
+        "ml-softmax-xent",
+        "ml-adamw",
+        "ml-tokenization",
+        "ml-language-modeling",
         "ml-embeddings",
         "ml-self-attention",
-        "ml-adamw",
         "ml-multi-head",
         "ml-transformer-block",
         "ml-training",
         "ml-checkpointing",
+        "probability-fundamentals",
+        "descriptive-statistics",
+        "ml-sampling",
+        "ml-data-engineering",
+        "ml-lora",
+        "model-quantization",
         "inference-engines",
         "kv-cache-paged-attention",
         "continuous-batching",
@@ -1064,23 +1070,23 @@
       "goal": "Build an evidence-backed evaluation and observability system for models, tools, and agents.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html",
       "conceptIds": [
-        "descriptive-statistics",
-        "ml-tokenization",
-        "probability-fundamentals",
         "structured-outputs",
         "ml-math",
-        "ml-softmax-xent",
         "ml-gradient-descent",
+        "ml-backprop",
+        "ml-softmax-xent",
+        "ml-adamw",
+        "ml-tokenization",
         "ml-language-modeling",
         "ml-sampling",
-        "ml-backprop",
         "ml-embeddings",
         "ml-self-attention",
-        "ml-adamw",
         "ml-multi-head",
         "ml-transformer-block",
         "ml-training",
         "ml-lora",
+        "probability-fundamentals",
+        "descriptive-statistics",
         "llm-evals",
         "ml-evaluation",
         "coding-agent-benchmarks",
@@ -1145,23 +1151,25 @@
       "goal": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html",
       "conceptIds": [
-        "descriptive-statistics",
-        "inference-engines",
-        "ml-tokenization",
-        "probability-fundamentals",
         "ml-math",
-        "ml-softmax-xent",
         "ml-gradient-descent",
-        "ml-language-modeling",
         "ml-backprop",
+        "ml-softmax-xent",
+        "ml-adamw",
+        "ml-tokenization",
+        "ml-language-modeling",
         "ml-embeddings",
         "ml-self-attention",
-        "ml-adamw",
         "ml-multi-head",
         "ml-transformer-block",
         "ml-training",
         "ml-checkpointing",
         "ml-browser-runtime",
+        "probability-fundamentals",
+        "descriptive-statistics",
+        "ml-data-engineering",
+        "ml-lora",
+        "model-quantization",
         "multimodal-models",
         "vision-models",
         "voice-audio-systems",
@@ -1768,7 +1776,8 @@
       "roadmapIds": [
         "swe-landscape",
         "ai-models-training-12w",
-        "ai-reliability-12w"
+        "ai-reliability-12w",
+        "inference-serving-12w"
       ]
     },
     {
@@ -1890,7 +1899,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html",
       "roadmapIds": [
         "ai-models-training-12w",
-        "ai-reliability-12w"
+        "ai-reliability-12w",
+        "inference-serving-12w",
+        "multimodal-spatial-12w",
+        "swe-landscape"
       ]
     },
     {
@@ -1919,7 +1931,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -3855,7 +3869,9 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html",
       "roadmapIds": [
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -3883,8 +3899,7 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html",
       "roadmapIds": [
-        "inference-serving-12w",
-        "multimodal-spatial-12w"
+        "inference-serving-12w"
       ]
     },
     {
@@ -4460,8 +4475,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/vision-models.html",
       "roadmapIds": [
-        "multimodal-spatial-12w",
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "multimodal-spatial-12w"
       ]
     },
     {
@@ -4489,6 +4504,7 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html",
       "roadmapIds": [
+        "ai-models-training-12w",
         "multimodal-spatial-12w"
       ]
     },

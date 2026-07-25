@@ -68,16 +68,40 @@ describe('content quality bar', () => {
     expect(hand.every(isEditorialArtifact)).toBe(true);
   });
 
-  it('formulaic review questions are quarantined from spine', () => {
-    const formulaic = reviewQuestionsData.reviewQuestions.filter((q: { id: string }) =>
-      isFormulaicReviewQuestion(q.id)
+  it('no editorial review question uses a formulaic template stem', () => {
+    const formulaic = (reviewQuestionsData.reviewQuestions as ReviewQuestion[]).filter(
+      isFormulaicReviewQuestion
     );
-    expect(formulaic.length).toBeGreaterThan(0);
-    const spineRqs = concepts
-      .filter((c: { id: string }) => ['bm25', 'hypothesis-testing'].includes(c.id))
-      .flatMap((c: { reviewQuestions?: string[] }) => c.reviewQuestions ?? []);
-    const bad = spineRqs.filter(isFormulaicReviewQuestion);
-    expect(bad).toEqual([]);
+    expect(formulaic.map((q) => q.id)).toEqual([]);
+  });
+
+  // A card whose answer is the concept's own mentalModel re-shows the sentence
+  // the learner just read on the concept page. It cannot test recall, and it
+  // silently inflates FSRS mastery. 153 of 239 cards were in this state before
+  // the 2026-07-25 rewrite; this gate keeps them from coming back.
+  it('no scheduled review answer merely repeats the concept mental model', () => {
+    const mentalModelById = new Map(
+      (concepts as { id: string; mentalModel?: string }[]).map((c) => [
+        c.id,
+        (c.mentalModel ?? '').trim(),
+      ])
+    );
+    const leaked = REVIEW_QUESTIONS.filter((q) => {
+      const mm = mentalModelById.get(q.conceptId);
+      return Boolean(mm) && (q.answer ?? '').trim() === mm;
+    });
+    expect(leaked.map((q) => q.id)).toEqual([]);
+  });
+
+  // The `rq-*-core` ids were quarantined wholesale by an id-suffix rule. Their
+  // answers are hand-written now, so they must actually reach the FSRS queue.
+  it('hand-written rq-*-core questions are schedulable', () => {
+    const core = (reviewQuestionsData.reviewQuestions as ReviewQuestion[]).filter(
+      (q) => q.id.startsWith('rq-') && q.id.endsWith('-core')
+    );
+    expect(core.length).toBeGreaterThan(0);
+    expect(core.every(isSchedulableReviewQuestion)).toBe(true);
+    expect(REVIEW_QUESTIONS.some((q) => q.id.endsWith('-core'))).toBe(true);
   });
 
   it('ingested library review questions are quarantined from scheduling', () => {

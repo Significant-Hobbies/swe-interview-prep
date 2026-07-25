@@ -906,6 +906,8 @@ const ROADMAP_DEFINITIONS = [
         'model-quantization',
         'open-weight-models',
         'multimodal-models',
+        'vision-models',
+        'voice-audio-systems',
         'ml-evaluation',
       ],
     ],
@@ -916,7 +918,19 @@ const ROADMAP_DEFINITIONS = [
     tracks: ['inference-serving'],
     goal: 'Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.',
     groups: [
-      ['inference-engines', 'kv-cache-paged-attention', 'continuous-batching', 'model-routing'],
+      // The first group carries this path's cross-track prerequisites. Without
+      // them the roadmap dead-ends: the planner walks a path's own concepts
+      // first, so a prereq living outside the path is never served.
+      [
+        'ml-sampling',
+        'ml-data-engineering',
+        'ml-lora',
+        'model-quantization',
+        'inference-engines',
+        'kv-cache-paged-attention',
+        'continuous-batching',
+        'model-routing',
+      ],
       ['flashattention-kernels', 'speculative-decoding', 'gpu-utilization', 'inference-hardware'],
       ['inference-cost-latency', 'local-on-device-inference', 'ml-browser-runtime', 'ml-webgpu'],
     ],
@@ -986,11 +1000,30 @@ const ROADMAP_DEFINITIONS = [
     tracks: ['multimodal-spatial', 'inference-serving'],
     goal: 'Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.',
     groups: [
-      ['multimodal-models', 'vision-models', 'voice-audio-systems'],
+      [
+        'ml-data-engineering',
+        'ml-lora',
+        'model-quantization',
+        'multimodal-models',
+        'vision-models',
+        'voice-audio-systems',
+      ],
       ['pose-motion-tracking', 'image-video-generation', 'local-on-device-inference'],
       ['robotics-systems', 'spatial-interfaces', 'human-computer-interaction', 'ml-webgpu'],
     ],
   },
+];
+
+const MILESTONE_TITLES = [
+  'Weeks 1-4 — Foundations and mechanisms',
+  'Weeks 5-8 — Production systems and trade-offs',
+  'Weeks 9-12 — Reliability, verification, and synthesis',
+];
+
+const MILESTONE_GOALS = [
+  'Build the domain vocabulary and explain the core mechanisms from first principles.',
+  'Design the production path, including resource, scale, safety, and operability trade-offs.',
+  'Test failure modes, measure outcomes, and ship the synthesis artifact.',
 ];
 
 function topic(name, concepts) {
@@ -1212,16 +1245,56 @@ COVERAGE.preservedConceptIds = conceptsFile.concepts
   .filter((concept) => concept.curriculumSource !== source)
   .map((concept) => concept.id);
 
+/**
+ * Fields a human may have rewritten after this script first created the record.
+ * They are never overwritten by a re-run — the generator owns STRUCTURE (which
+ * roadmap a concept belongs to, which drill/artifact ids hang off it), a human
+ * owns PROSE.
+ *
+ * This used to be a wholesale `records[index] = record`, which meant re-running
+ * the script silently reverted every hand-written mental model, mistake list,
+ * hint, question, and answer back to its generated placeholder. The 2026-07-25
+ * content pass rewrote ~70 concepts, 70 drills, and 153 review answers that
+ * were all sitting on that trapdoor.
+ */
+const AUTHORED_FIELDS = new Set([
+  'description',
+  'mentalModel',
+  'commonMistakes',
+  'realWorldUsage',
+  'resources',
+  'prerequisites',
+  'related',
+  'difficulty',
+  'priority',
+  'prompt',
+  'expectedOutput',
+  'hints',
+  'solutionNotes',
+  'testCases',
+  'question',
+  'answer',
+  'type',
+  'successCriteria',
+  'deliverables',
+]);
+
 function replaceGenerated(records, record, kind) {
   const index = records.findIndex((item) => item.id === record.id);
   if (index === -1) {
     records.push(record);
     return;
   }
-  if (records[index].curriculumSource !== source) {
+  const existing = records[index];
+  if (existing.curriculumSource !== source) {
     throw new Error(`${kind} id "${record.id}" already exists outside ${source}`);
   }
-  records[index] = record;
+  const merged = { ...record };
+  for (const field of AUTHORED_FIELDS) {
+    if (field in existing) merged[field] = existing[field];
+    else delete merged[field];
+  }
+  records[index] = merged;
 }
 
 function resourceType(url) {
@@ -1267,11 +1340,10 @@ for (const [
     related: [],
     description,
     mentalModel,
-    commonMistakes: [
-      'Naming a tool without explaining the mechanism or failure mode',
-      'Optimizing one metric while ignoring the system-level trade-off',
-    ],
-    realWorldUsage: description,
+    // No generated `commonMistakes` / `realWorldUsage`. They used to be a fixed
+    // two-line rubric and a verbatim copy of `description` — noise that reads as
+    // content. An absent field renders as an honest gap, which is what
+    // docs/learning/index.md promises ("gaps are visible until curated").
     drills: [`practice-${id}`],
     reviewQuestions: [`rq-${id}`],
     resources: [{ title: resourceTitle, url, type: resourceType(url) }],
@@ -1288,12 +1360,18 @@ for (const [
     difficulty: 'core',
     prompt: `${description} Implement designOutline() returning non-empty values for: ${keys.join(', ')}. Each value must name a concrete mechanism or decision.`,
     expectedOutput: `A design outline with ${keys.join(', ')} plus an explicit failure mode or trade-off.`,
-    hints: [mentalModel, 'Name the failure mode before selecting the mechanism.'],
+    // `mentalModel` must NOT appear here: it is the answer, and solutionNotes
+    // already carries it for the post-solve reveal. Printing it as hints[0]
+    // handed the learner the answer before the attempt.
+    hints: ['Name the failure mode before selecting the mechanism.'],
     solutionNotes: mentalModel,
     testCases: [
       {
+        // Substantive-answer check. The original accepted any non-empty string,
+        // so one character per key passed. This requires a real sentence per key
+        // and rejects the same text pasted into every key.
         setup:
-          "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  const seen = new Set();\n  for (const key of keys) {\n    const value = o[key];\n    if (typeof value !== 'string') return false;\n    const text = value.trim();\n    if (text.length < 40 || text.split(/\\s+/).length < 6) return false;\n    if (seen.has(text.toLowerCase())) return false;\n    seen.add(text.toLowerCase());\n  }\n  return true;\n}",
         run: `console.log(validateOutline(designOutline(), ${JSON.stringify(keys)}));`,
         expect: 'true',
       },
@@ -1302,6 +1380,12 @@ for (const [
   };
   replaceGenerated(drillsFile.drills, drill, 'drill');
 
+  // Placeholder only. A generated question cannot be specific, and its answer
+  // is the mental model the learner just read on the concept page — so it tests
+  // recognition, not recall. `isFormulaicReviewQuestion` in
+  // src/lib/contentQuality.ts detects this stem by TEXT and keeps the card out
+  // of FSRS scheduling until someone writes a real question. Do not "fix" this
+  // by inventing a cleverer template; write the card by hand.
   const review = {
     id: `rq-${id}`,
     conceptId: id,
@@ -1358,16 +1442,8 @@ for (const path of ROADMAP_DEFINITIONS) {
     description: `${path.goal} Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.`,
     tracks: path.tracks,
     milestones: path.groups.map((conceptIds, index) => ({
-      title: [
-        'Weeks 1-4 — Foundations and mechanisms',
-        'Weeks 5-8 — Production systems and trade-offs',
-        'Weeks 9-12 — Reliability, verification, and synthesis',
-      ][index],
-      goal: [
-        'Build the domain vocabulary and explain the core mechanisms from first principles.',
-        'Design the production path, including resource, scale, safety, and operability trade-offs.',
-        'Test failure modes, measure outcomes, and ship the synthesis artifact.',
-      ][index],
+      title: MILESTONE_TITLES[index] ?? `Milestone ${index + 1}`,
+      goal: MILESTONE_GOALS[index] ?? path.goal,
       concepts: conceptIds,
       drills: conceptIds.map((id) => conceptById.get(id)?.drills?.[0]).filter(Boolean),
       artifacts: index === path.groups.length - 1 ? [artifactId] : [],
@@ -1438,19 +1514,56 @@ for (const attachment of DATABASE_ATTACHMENTS) {
   if (!concept.artifacts.includes(artifact.id)) concept.artifacts.push(artifact.id);
 }
 
-// Connect new concepts to their nearest predecessor/successor without changing
-// established concepts or introducing cycles into their existing graph.
+// Seed "related" links from roadmap adjacency, and nothing else.
+//
+// This block used to also do `concept.prerequisites = [previous]`, i.e. treat a
+// concept's POSITION in a flattened group list as a dependency edge. That is
+// what produced chains like `pose-motion-tracking <- voice-audio-systems` (pose
+// estimation does not depend on speech recognition) and
+// `flashattention-kernels <- model-routing`. Worse, `newIds` is every id in
+// DEFINITIONS rather than only ids created on this run, so it re-imposed the
+// invented chain on every regeneration and silently reverted hand-authored
+// graphs. Any roadmap whose prerequisites are wrong dead-ends the daily
+// planner, which walks a path's own concepts first.
+//
+// A generator cannot know real dependencies. Leave `prerequisites` empty and
+// let a human write them; an empty list is honest, an invented one is harmful.
+// `related` is only a "see also", so adjacency is a defensible seed for it.
 for (const path of ROADMAP_DEFINITIONS) {
   const sequence = path.groups.flat();
   for (let index = 0; index < sequence.length; index++) {
     const id = sequence[index];
     if (!newIds.has(id)) continue;
     const concept = conceptById.get(id);
-    const previous = sequence[index - 1];
-    const next = sequence[index + 1];
-    concept.prerequisites = previous ? [previous] : [];
-    concept.related = [previous, next].filter(Boolean);
+    concept.prerequisites ??= [];
+    if (!concept.related?.length) {
+      concept.related = [sequence[index - 1], sequence[index + 1]].filter(Boolean);
+    }
   }
+}
+
+// Reconcile the two sources of truth for roadmap membership.
+//
+// A concept belongs to a roadmap via `concept.roadmaps`, but the roadmap PAGE
+// renders `roadmap.milestones[].concepts`. Those drift: `groups` above only
+// covers concepts this script generates, so any hand-tagged concept (an
+// existing concept a human added to a path) was tagged-but-invisible — 65 of
+// them across 10 paths before this ran. A learner following the roadmap page
+// would never be shown them, while the planner counted them as in-path.
+//
+// Anything tagged but ungrouped is, by construction, a supporting concept
+// pulled in from another track, so it lands in the foundations milestone.
+for (const roadmap of roadmapsFile.roadmaps) {
+  if (!roadmap.milestones?.length) continue;
+  const shown = new Set(roadmap.milestones.flatMap((m) => m.concepts ?? []));
+  const tagged = conceptsFile.concepts
+    .filter((concept) => (concept.roadmaps ?? []).includes(roadmap.id))
+    .map((concept) => concept.id);
+  const missing = tagged.filter((id) => !shown.has(id));
+  if (!missing.length) continue;
+  const first = roadmap.milestones[0];
+  first.concepts = [...missing, ...(first.concepts ?? [])];
+  first.drills = first.concepts.map((id) => conceptById.get(id)?.drills?.[0]).filter(Boolean);
 }
 
 for (const category of COVERAGE.categories) {

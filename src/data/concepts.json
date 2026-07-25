@@ -1264,7 +1264,12 @@
       "id": "ml-sampling",
       "name": "Sampling & Decoding",
       "tags": ["ai-systems", "language-modeling"],
-      "roadmaps": ["swe-landscape", "ai-models-training-12w", "ai-reliability-12w"],
+      "roadmaps": [
+        "swe-landscape",
+        "ai-models-training-12w",
+        "ai-reliability-12w",
+        "inference-serving-12w"
+      ],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-language-modeling"],
@@ -1295,7 +1300,7 @@
       "mentalModel": "After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate.",
       "drills": ["ml-temperature-sampling"],
       "reviewQuestions": ["rq-ml-sampling-core"],
-      "artifacts": []
+      "artifacts": ["synthesize-inference-serving-12w"]
     },
     {
       "id": "ml-embeddings",
@@ -1593,7 +1598,13 @@
       "id": "ml-lora",
       "name": "LoRA & PEFT",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["ai-models-training-12w", "ai-reliability-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "ai-reliability-12w",
+        "inference-serving-12w",
+        "multimodal-spatial-12w",
+        "swe-landscape"
+      ],
       "difficulty": "advanced",
       "priority": 2,
       "prerequisites": ["ml-training"],
@@ -1629,7 +1640,11 @@
       "mentalModel": "LoRA fine-tunes a big model cheaply by adding small trainable matrices alongside the frozen weights. You only update around 1% of the parameters yet get most of the quality of full fine-tuning, and you can swap adapters at inference time.",
       "drills": ["ml-lora-param-count"],
       "reviewQuestions": ["rq-ml-lora-core"],
-      "artifacts": ["synthesize-ai-models-training-12w"]
+      "artifacts": [
+        "synthesize-ai-models-training-12w",
+        "synthesize-inference-serving-12w",
+        "synthesize-multimodal-spatial-12w"
+      ]
     },
     {
       "id": "ml-rl-alignment",
@@ -1677,7 +1692,7 @@
       "id": "ml-data-engineering",
       "name": "Training Data Engineering",
       "tags": ["ai-systems", "training"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": ["ai-models-training-12w", "inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 2,
       "prerequisites": ["ml-lora"],
@@ -1713,7 +1728,11 @@
       "mentalModel": "In ML, the dataset is the product. The biggest quality wins usually come from cleaning, deduping, and filtering the data — not from changing the model. Pipelines need versioning and provenance the same way code does.",
       "drills": ["ml-token-budget-estimate"],
       "reviewQuestions": ["rq-ml-data-engineering-core"],
-      "artifacts": ["synthesize-ai-models-training-12w"]
+      "artifacts": [
+        "synthesize-ai-models-training-12w",
+        "synthesize-inference-serving-12w",
+        "synthesize-multimodal-spatial-12w"
+      ]
     },
     {
       "id": "ml-browser-runtime",
@@ -5132,11 +5151,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["compute-memory-storage-hierarchy"],
-      "related": [
-        "compute-memory-storage-hierarchy",
-        "network-protocol-engineering",
-        "concurrency-design"
-      ],
+      "related": ["compute-memory-storage-hierarchy"],
       "description": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
       "mentalModel": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
       "drills": ["practice-operating-system-mechanics"],
@@ -5182,7 +5197,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["operating-system-mechanics", "runtime-performance-engineering"],
+      "related": ["operating-system-mechanics", "network-protocol-engineering"],
       "description": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
       "mentalModel": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
       "drills": ["practice-compute-memory-storage-hierarchy"],
@@ -5592,11 +5607,11 @@
       "id": "model-quantization",
       "name": "Model Quantization",
       "tags": ["ai-systems", "compression"],
-      "roadmaps": ["ai-models-training-12w"],
+      "roadmaps": ["ai-models-training-12w", "inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["ml-data-engineering"],
-      "related": ["ml-data-engineering", "open-weight-models"],
+      "prerequisites": ["ml-lora"],
+      "related": ["ml-lora", "multimodal-models"],
       "description": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.",
       "mentalModel": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
       "drills": ["practice-model-quantization"],
@@ -5608,7 +5623,11 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-ai-models-training-12w"],
+      "artifacts": [
+        "synthesize-ai-models-training-12w",
+        "synthesize-inference-serving-12w",
+        "synthesize-multimodal-spatial-12w"
+      ],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -5638,11 +5657,11 @@
       "id": "inference-engines",
       "name": "vLLM & Inference Engines",
       "tags": ["inference-serving", "inference-engines"],
-      "roadmaps": ["inference-serving-12w", "multimodal-spatial-12w"],
+      "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["kv-cache-paged-attention"],
+      "related": ["model-quantization", "kv-cache-paged-attention"],
       "description": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.",
       "mentalModel": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
       "drills": ["practice-inference-engines"],
@@ -5710,8 +5729,8 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["kv-cache-paged-attention"],
-      "related": ["ml-multi-head", "gpu-utilization", "speculative-decoding"],
+      "prerequisites": ["ml-multi-head"],
+      "related": ["model-routing", "speculative-decoding"],
       "description": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.",
       "mentalModel": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
       "drills": ["practice-flashattention-kernels"],
@@ -5733,7 +5752,7 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["flashattention-kernels"],
+      "prerequisites": ["ml-sampling", "inference-engines"],
       "related": ["flashattention-kernels", "gpu-utilization"],
       "description": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.",
       "mentalModel": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
@@ -5756,7 +5775,7 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["speculative-decoding"],
+      "prerequisites": ["inference-hardware"],
       "related": ["speculative-decoding", "inference-hardware"],
       "description": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.",
       "mentalModel": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
@@ -5779,7 +5798,7 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["inference-hardware"],
+      "prerequisites": ["gpu-utilization", "continuous-batching"],
       "related": ["inference-hardware", "local-on-device-inference"],
       "description": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.",
       "mentalModel": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
@@ -5802,8 +5821,8 @@
       "roadmaps": ["inference-serving-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["inference-engines"],
-      "related": ["model-quantization", "ml-browser-runtime", "inference-cost-latency"],
+      "prerequisites": ["model-quantization"],
+      "related": ["image-video-generation", "robotics-systems"],
       "description": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.",
       "mentalModel": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
       "drills": ["practice-local-on-device-inference"],
@@ -5825,7 +5844,7 @@
       "roadmaps": ["inference-serving-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["gpu-utilization"],
+      "prerequisites": [],
       "related": ["gpu-utilization", "inference-cost-latency"],
       "description": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.",
       "mentalModel": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
@@ -6811,8 +6830,8 @@
       "roadmaps": ["ai-models-training-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["vision-models"],
-      "related": ["vision-models", "voice-audio-systems", "ml-embeddings"],
+      "prerequisites": ["vision-models", "voice-audio-systems"],
+      "related": ["model-quantization", "vision-models"],
       "description": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.",
       "mentalModel": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
       "drills": ["practice-multimodal-models"],
@@ -6831,11 +6850,11 @@
       "id": "vision-models",
       "name": "Vision Models",
       "tags": ["multimodal-spatial", "computer-vision"],
-      "roadmaps": ["multimodal-spatial-12w", "ai-models-training-12w"],
+      "roadmaps": ["ai-models-training-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["multimodal-models", "pose-motion-tracking", "image-video-generation"],
+      "related": ["multimodal-models", "voice-audio-systems"],
       "description": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.",
       "mentalModel": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
       "drills": ["practice-vision-models"],
@@ -6847,7 +6866,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "artifacts": ["synthesize-ai-models-training-12w", "synthesize-multimodal-spatial-12w"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -6858,7 +6877,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["vision-models"],
-      "related": ["vision-models", "robotics-systems", "spatial-interfaces"],
+      "related": ["voice-audio-systems", "image-video-generation"],
       "description": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.",
       "mentalModel": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
       "drills": ["practice-pose-motion-tracking"],
@@ -6877,11 +6896,11 @@
       "id": "voice-audio-systems",
       "name": "Voice & Audio Systems",
       "tags": ["multimodal-spatial", "audio"],
-      "roadmaps": ["multimodal-spatial-12w"],
+      "roadmaps": ["ai-models-training-12w", "multimodal-spatial-12w"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["multimodal-models", "human-computer-interaction"],
+      "related": ["vision-models", "pose-motion-tracking"],
       "description": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.",
       "mentalModel": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
       "drills": ["practice-voice-audio-systems"],
@@ -6893,7 +6912,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-multimodal-spatial-12w"],
+      "artifacts": ["synthesize-ai-models-training-12w", "synthesize-multimodal-spatial-12w"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -6904,7 +6923,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["vision-models"],
-      "related": ["vision-models", "ml-training"],
+      "related": ["pose-motion-tracking", "local-on-device-inference"],
       "description": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.",
       "mentalModel": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
       "drills": ["practice-image-video-generation"],
@@ -6927,7 +6946,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["pose-motion-tracking"],
-      "related": ["pose-motion-tracking", "local-on-device-inference"],
+      "related": ["local-on-device-inference", "spatial-interfaces"],
       "description": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.",
       "mentalModel": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
       "drills": ["practice-robotics-systems"],
@@ -6950,7 +6969,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["human-computer-interaction", "pose-motion-tracking"],
-      "related": ["human-computer-interaction", "pose-motion-tracking", "ml-webgpu"],
+      "related": ["robotics-systems", "human-computer-interaction"],
       "description": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.",
       "mentalModel": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
       "drills": ["practice-spatial-interfaces"],
@@ -6973,7 +6992,7 @@
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
-      "related": ["ux-interface-design", "spatial-interfaces"],
+      "related": ["spatial-interfaces", "ml-webgpu"],
       "description": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.",
       "mentalModel": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
       "drills": ["practice-human-computer-interaction"],

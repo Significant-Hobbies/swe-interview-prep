@@ -424,6 +424,7 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "ml-lora",
             "api-design",
             "consistent-hashing",
             "descriptive-statistics",
@@ -444,7 +445,28 @@
             "ml-embeddings",
             "ml-adamw"
           ],
-          "drills": [],
+          "drills": [
+            "ml-lora-param-count",
+            "design-paginated-api",
+            "design-consistent-hashing",
+            "summarize-dataset-stats",
+            "embed-and-search",
+            "implement-idempotency-key",
+            "ml-multi-head-split",
+            "ml-bpe-merge-step",
+            "ml-overfit-sanity-check",
+            "design-parking-lot",
+            "conditional-probability-bayes",
+            "structured-extraction",
+            "ml-checkpoint-resume",
+            "ml-dot-matmul-shapes",
+            "ml-softmax-cross-entropy",
+            "ml-sgd-step-quadratic",
+            "ml-perplexity-from-nll",
+            "ml-chain-rule-gate",
+            "ml-sinusoidal-position",
+            "ml-adamw-weight-decay"
+          ],
           "artifacts": []
         },
         {
@@ -1017,17 +1039,15 @@
       "tracks": ["systems-foundations"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": ["object-modeling"],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
-          "concepts": ["operating-system-mechanics", "compute-memory-storage-hierarchy"],
+          "concepts": [
+            "object-modeling",
+            "operating-system-mechanics",
+            "compute-memory-storage-hierarchy"
+          ],
           "drills": [
+            "design-parking-lot",
             "practice-operating-system-mechanics",
             "practice-compute-memory-storage-hierarchy"
           ],
@@ -1062,21 +1082,20 @@
       "tracks": ["infrastructure-platforms"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": ["http-lifecycle", "idempotency", "message-queues"],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
+            "http-lifecycle",
+            "idempotency",
+            "message-queues",
             "cloud-infrastructure",
             "containers-kubernetes",
             "cicd-developer-environments"
           ],
           "drills": [
+            "http-idempotent-retry",
+            "implement-idempotency-key",
+            "queue-backpressure",
             "practice-cloud-infrastructure",
             "practice-containers-kubernetes",
             "practice-cicd-developer-environments"
@@ -1129,17 +1148,21 @@
       "tracks": ["distributed-systems"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": ["http-lifecycle", "load-balancing", "consistent-hashing"],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
-          "concepts": ["consensus", "replication", "sharding", "cap-theorem"],
+          "concepts": [
+            "http-lifecycle",
+            "load-balancing",
+            "consistent-hashing",
+            "consensus",
+            "replication",
+            "sharding",
+            "cap-theorem"
+          ],
           "drills": [
+            "http-idempotent-retry",
+            "design-load-balancer",
+            "design-consistent-hashing",
             "design-leader-election",
             "replication-lag-read",
             "shard-key-choice",
@@ -1186,21 +1209,12 @@
       "tracks": ["ai-systems"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": [
-            "descriptive-statistics",
-            "ml-sampling",
-            "probability-fundamentals",
-            "vision-models"
-          ],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
+            "ml-sampling",
+            "probability-fundamentals",
+            "descriptive-statistics",
             "ml-math",
             "ml-gradient-descent",
             "ml-backprop",
@@ -1209,6 +1223,9 @@
             "ml-language-modeling"
           ],
           "drills": [
+            "ml-temperature-sampling",
+            "conditional-probability-bayes",
+            "summarize-dataset-stats",
             "ml-dot-matmul-shapes",
             "ml-sgd-step-quadratic",
             "ml-chain-rule-gate",
@@ -1253,6 +1270,8 @@
             "model-quantization",
             "open-weight-models",
             "multimodal-models",
+            "vision-models",
+            "voice-audio-systems",
             "ml-evaluation"
           ],
           "drills": [
@@ -1262,6 +1281,8 @@
             "practice-model-quantization",
             "practice-open-weight-models",
             "practice-multimodal-models",
+            "practice-vision-models",
+            "practice-voice-audio-systems",
             "ml-eval-perplexity-vs-acc"
           ],
           "artifacts": ["synthesize-ai-models-training-12w"]
@@ -1278,39 +1299,55 @@
       "tracks": ["inference-serving"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": [
-            "descriptive-statistics",
-            "ml-tokenization",
-            "probability-fundamentals",
-            "structured-outputs",
-            "ml-math",
-            "ml-softmax-xent",
-            "ml-gradient-descent",
-            "ml-language-modeling",
-            "ml-backprop",
-            "ml-embeddings",
-            "ml-self-attention",
-            "ml-adamw",
-            "ml-multi-head",
-            "ml-transformer-block",
-            "ml-training",
-            "ml-checkpointing"
-          ],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
+            "structured-outputs",
+            "ml-math",
+            "ml-gradient-descent",
+            "ml-backprop",
+            "ml-softmax-xent",
+            "ml-adamw",
+            "ml-tokenization",
+            "ml-language-modeling",
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-training",
+            "ml-checkpointing",
+            "probability-fundamentals",
+            "descriptive-statistics",
+            "ml-sampling",
+            "ml-data-engineering",
+            "ml-lora",
+            "model-quantization",
             "inference-engines",
             "kv-cache-paged-attention",
             "continuous-batching",
             "model-routing"
           ],
           "drills": [
+            "structured-extraction",
+            "ml-dot-matmul-shapes",
+            "ml-sgd-step-quadratic",
+            "ml-chain-rule-gate",
+            "ml-softmax-cross-entropy",
+            "ml-adamw-weight-decay",
+            "ml-bpe-merge-step",
+            "ml-perplexity-from-nll",
+            "ml-sinusoidal-position",
+            "ml-scaled-dot-attention",
+            "ml-multi-head-split",
+            "ml-pre-norm-residual",
+            "ml-overfit-sanity-check",
+            "ml-checkpoint-resume",
+            "conditional-probability-bayes",
+            "summarize-dataset-stats",
+            "ml-temperature-sampling",
+            "ml-token-budget-estimate",
+            "ml-lora-param-count",
+            "practice-model-quantization",
             "practice-inference-engines",
             "practice-kv-cache-paged-attention",
             "practice-continuous-batching",
@@ -1364,17 +1401,17 @@
       "tracks": ["agent-systems"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": ["structured-outputs"],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
-          "concepts": ["tool-calling", "agent-loops", "agent-memory-context", "mcp-integrations"],
+          "concepts": [
+            "structured-outputs",
+            "tool-calling",
+            "agent-loops",
+            "agent-memory-context",
+            "mcp-integrations"
+          ],
           "drills": [
+            "structured-extraction",
             "build-tool-loop",
             "agent-step-limit",
             "practice-agent-memory-context",
@@ -1424,40 +1461,49 @@
       "tracks": ["ai-reliability"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": [
-            "descriptive-statistics",
-            "ml-tokenization",
-            "probability-fundamentals",
-            "structured-outputs",
-            "ml-math",
-            "ml-softmax-xent",
-            "ml-gradient-descent",
-            "ml-language-modeling",
-            "ml-sampling",
-            "ml-backprop",
-            "ml-embeddings",
-            "ml-self-attention",
-            "ml-adamw",
-            "ml-multi-head",
-            "ml-transformer-block",
-            "ml-training",
-            "ml-lora"
-          ],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
+            "structured-outputs",
+            "ml-math",
+            "ml-gradient-descent",
+            "ml-backprop",
+            "ml-softmax-xent",
+            "ml-adamw",
+            "ml-tokenization",
+            "ml-language-modeling",
+            "ml-sampling",
+            "ml-embeddings",
+            "ml-self-attention",
+            "ml-multi-head",
+            "ml-transformer-block",
+            "ml-training",
+            "ml-lora",
+            "probability-fundamentals",
+            "descriptive-statistics",
             "llm-evals",
             "ml-evaluation",
             "coding-agent-benchmarks",
             "tool-use-evaluations"
           ],
           "drills": [
+            "structured-extraction",
+            "ml-dot-matmul-shapes",
+            "ml-sgd-step-quadratic",
+            "ml-chain-rule-gate",
+            "ml-softmax-cross-entropy",
+            "ml-adamw-weight-decay",
+            "ml-bpe-merge-step",
+            "ml-perplexity-from-nll",
+            "ml-temperature-sampling",
+            "ml-sinusoidal-position",
+            "ml-scaled-dot-attention",
+            "ml-multi-head-split",
+            "ml-pre-norm-residual",
+            "ml-overfit-sanity-check",
+            "ml-lora-param-count",
+            "conditional-probability-bayes",
+            "summarize-dataset-stats",
             "build-llm-eval",
             "ml-eval-perplexity-vs-acc",
             "practice-coding-agent-benchmarks",
@@ -1565,17 +1611,22 @@
       "tracks": ["application-engineering", "backend", "product"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
-          "concepts": ["http-lifecycle", "message-queues", "object-modeling", "state-management"],
-          "drills": [],
-          "artifacts": []
-        },
-        {
           "title": "Weeks 1-4 — Foundations and mechanisms",
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
-          "concepts": ["api-design", "web-mobile-engineering", "ux-interface-design"],
+          "concepts": [
+            "http-lifecycle",
+            "message-queues",
+            "object-modeling",
+            "state-management",
+            "api-design",
+            "web-mobile-engineering",
+            "ux-interface-design"
+          ],
           "drills": [
+            "http-idempotent-retry",
+            "queue-backpressure",
+            "design-parking-lot",
+            "design-vending-machine",
             "design-paginated-api",
             "practice-web-mobile-engineering",
             "practice-ux-interface-design"
@@ -1623,35 +1674,52 @@
       "tracks": ["multimodal-spatial", "inference-serving"],
       "milestones": [
         {
-          "title": "Prerequisites — unlock the rest of this path",
-          "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
+          "title": "Weeks 1-4 — Foundations and mechanisms",
+          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
-            "descriptive-statistics",
-            "inference-engines",
-            "ml-tokenization",
-            "probability-fundamentals",
             "ml-math",
-            "ml-softmax-xent",
             "ml-gradient-descent",
-            "ml-language-modeling",
             "ml-backprop",
+            "ml-softmax-xent",
+            "ml-adamw",
+            "ml-tokenization",
+            "ml-language-modeling",
             "ml-embeddings",
             "ml-self-attention",
-            "ml-adamw",
             "ml-multi-head",
             "ml-transformer-block",
             "ml-training",
             "ml-checkpointing",
-            "ml-browser-runtime"
+            "ml-browser-runtime",
+            "probability-fundamentals",
+            "descriptive-statistics",
+            "ml-data-engineering",
+            "ml-lora",
+            "model-quantization",
+            "multimodal-models",
+            "vision-models",
+            "voice-audio-systems"
           ],
-          "drills": [],
-          "artifacts": []
-        },
-        {
-          "title": "Weeks 1-4 — Foundations and mechanisms",
-          "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
-          "concepts": ["multimodal-models", "vision-models", "voice-audio-systems"],
           "drills": [
+            "ml-dot-matmul-shapes",
+            "ml-sgd-step-quadratic",
+            "ml-chain-rule-gate",
+            "ml-softmax-cross-entropy",
+            "ml-adamw-weight-decay",
+            "ml-bpe-merge-step",
+            "ml-perplexity-from-nll",
+            "ml-sinusoidal-position",
+            "ml-scaled-dot-attention",
+            "ml-multi-head-split",
+            "ml-pre-norm-residual",
+            "ml-overfit-sanity-check",
+            "ml-checkpoint-resume",
+            "ml-wasm-linear-memory",
+            "conditional-probability-bayes",
+            "summarize-dataset-stats",
+            "ml-token-budget-estimate",
+            "ml-lora-param-count",
+            "practice-model-quantization",
             "practice-multimodal-models",
             "practice-vision-models",
             "practice-voice-audio-systems"

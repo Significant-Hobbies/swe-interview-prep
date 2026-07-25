@@ -60,8 +60,27 @@ export function isEditorialArtifact(artifact: Artifact): boolean {
   return true;
 }
 
-export function isFormulaicReviewQuestion(id: string): boolean {
-  return id.endsWith('-core') && id.startsWith('rq-');
+/**
+ * Template stems produced by the content generators. A question built from one
+ * of these asks nothing specific, so answering it exercises recognition rather
+ * than recall and is worthless as an FSRS card.
+ *
+ * This is deliberately a check on the QUESTION TEXT, not on the id. The gate
+ * used to be `id.endsWith('-core')`, which quarantined a whole naming
+ * convention regardless of content — so once the `rq-*-core` answers were
+ * rewritten by hand, 84 genuine cards stayed excluded from scheduling for no
+ * reason. Judge the card, not its name.
+ */
+const FORMULAIC_QUESTION_STEMS = [
+  'in your own words',
+  'what mechanism and trade-off should an engineer explain when designing',
+  'explain the core idea',
+];
+
+export function isFormulaicReviewQuestion(q: Pick<ReviewQuestion, 'question'>): boolean {
+  const text = (q.question ?? '').toLowerCase();
+  if (!text) return true;
+  return FORMULAIC_QUESTION_STEMS.some((stem) => text.includes(stem));
 }
 
 export function isIngestedReviewQuestion(id: string): boolean {
@@ -83,9 +102,12 @@ function isAnkiReviewQuestion(id: string): boolean {
  * only gate was an answer length of 80 characters, which those pass trivially.
  * Re-enable when `scripts/ingest-library-rqs.mjs` can produce a real question
  * and a real answer with a defensible concept mapping.
+ *
+ * Editorial questions are judged on their text, not their id — see
+ * `isFormulaicReviewQuestion`.
  */
 export function isSchedulableReviewQuestion(q: ReviewQuestion): boolean {
-  if (isFormulaicReviewQuestion(q.id)) return false;
+  if (isFormulaicReviewQuestion(q)) return false;
   if (q.source === 'library' || isIngestedReviewQuestion(q.id)) return false;
   if (q.source === 'anki' || isAnkiReviewQuestion(q.id)) {
     return (q.question?.length ?? 0) >= 8 && (q.answer?.length ?? 0) >= 20;

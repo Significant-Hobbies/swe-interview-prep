@@ -585,6 +585,8 @@
         "model-quantization",
         "open-weight-models",
         "multimodal-models",
+        "vision-models",
+        "voice-audio-systems",
         "ml-evaluation"
       ],
       "projects": [],
@@ -609,6 +611,10 @@
       "type": "synthesis-project",
       "difficulty": "advanced",
       "concepts": [
+        "ml-sampling",
+        "ml-data-engineering",
+        "ml-lora",
+        "model-quantization",
         "inference-engines",
         "kv-cache-paged-attention",
         "continuous-batching",
@@ -779,6 +785,9 @@
       "type": "synthesis-project",
       "difficulty": "advanced",
       "concepts": [
+        "ml-data-engineering",
+        "ml-lora",
+        "model-quantization",
         "multimodal-models",
         "vision-models",
         "voice-audio-systems",
