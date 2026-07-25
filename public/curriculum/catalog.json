@@ -8,7 +8,7 @@
     "src/data/curriculum-coverage.json"
   ],
   "counts": {
-    "tracks": 18,
+    "tracks": 19,
     "concepts": 226,
     "roadmaps": 24,
     "drills": 269,
@@ -277,10 +277,10 @@
       ]
     },
     {
-      "id": "product",
-      "title": "Product & Distribution",
-      "description": "Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/product.html",
+      "id": "behavioral",
+      "title": "Behavioral & Communication",
+      "description": "The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/behavioral.html",
       "conceptIds": [
         "leadership-and-influence",
         "conflict-resolution",
@@ -291,14 +291,24 @@
         "time-management-and-prioritization",
         "innovation-and-creativity",
         "customer-obsession",
-        "ownership-and-accountability",
+        "ownership-and-accountability"
+      ],
+      "roadmapIds": [
+        "behavioral-practice"
+      ]
+    },
+    {
+      "id": "go-to-market",
+      "title": "Go-to-Market",
+      "description": "Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/go-to-market.html",
+      "conceptIds": [
         "positioning",
         "landing-pages",
         "seo",
         "product-analytics"
       ],
       "roadmapIds": [
-        "behavioral-practice",
         "application-engineering-12w"
       ]
     },
@@ -580,6 +590,8 @@
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html",
       "conceptIds": [
+        "capacity-estimation",
+        "requirements-scoping",
         "embeddings",
         "http-lifecycle",
         "structured-outputs",
@@ -678,6 +690,8 @@
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
       "conceptIds": [
+        "capacity-estimation",
+        "requirements-scoping",
         "ml-lora",
         "api-design",
         "consistent-hashing",
@@ -753,6 +767,8 @@
       "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html",
       "conceptIds": [
+        "capacity-estimation",
+        "requirements-scoping",
         "embeddings",
         "http-lifecycle",
         "message-queues",
@@ -787,6 +803,8 @@
       "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html",
       "conceptIds": [
+        "complexity-analysis",
+        "sorting",
         "array-hashing",
         "two-pointers",
         "sliding-window",
@@ -2974,7 +2992,7 @@
       "description": "Driving outcomes through others.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence.html",
@@ -2988,7 +3006,7 @@
       "description": "Disagreement handling.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html",
@@ -3002,7 +3020,7 @@
       "description": "Tradeoffs under uncertainty.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making.html",
@@ -3016,7 +3034,7 @@
       "description": "Cross-functional work.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration.html",
@@ -3030,7 +3048,7 @@
       "description": "Owning mistakes, post-mortem.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning.html",
@@ -3044,7 +3062,7 @@
       "description": "Written/verbal, audience adaptation.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/communication.html",
@@ -3058,7 +3076,7 @@
       "description": "Eisenhower, OKR alignment.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization.html",
@@ -3072,7 +3090,7 @@
       "description": "Novel solutions, experimentation.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity.html",
@@ -3086,7 +3104,7 @@
       "description": "User-centered tradeoffs.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/customer-obsession.html",
@@ -3100,7 +3118,7 @@
       "description": "End-to-end responsibility.",
       "difficulty": "intro",
       "tags": [
-        "product",
+        "behavioral",
         "behavioral"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability.html",
@@ -3114,7 +3132,7 @@
       "description": "Naming the problem, the audience, and the alternative you beat.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "go-to-market",
         "positioning"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/positioning.html",
@@ -3128,7 +3146,7 @@
       "description": "Turning a visitor into an activated user: hero, proof, single CTA.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "go-to-market",
         "positioning"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html",
@@ -3142,7 +3160,7 @@
       "description": "Programmatic and content SEO: intent, structure, indexability.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "go-to-market",
         "growth"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/seo.html",
@@ -3156,7 +3174,7 @@
       "description": "Activation, retention, funnels — measuring whether the product works.",
       "difficulty": "core",
       "tags": [
-        "product",
+        "go-to-market",
         "analytics"
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html",

@@ -20,7 +20,8 @@ type TrackId =
   | 'databases'
   | 'system-design'
   | 'dsa'
-  | 'product'
+  | 'behavioral'
+  | 'go-to-market'
   | 'systems-foundations'
   | 'infrastructure-platforms'
   | 'distributed-systems'
@@ -270,14 +271,25 @@ export const TRACKS: Track[] = [
     primary: false,
   },
   {
-    id: 'product',
-    title: 'Product & Distribution',
-    short: 'Product',
+    id: 'behavioral',
+    title: 'Behavioral & Communication',
+    short: 'Behavioral',
     description:
-      'Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.',
-    icon: 'Rocket',
+      'The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.',
+    icon: 'Users',
     color: 'rose',
     order: 9,
+    primary: false,
+  },
+  {
+    id: 'go-to-market',
+    title: 'Go-to-Market',
+    short: 'GTM',
+    description:
+      'Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.',
+    icon: 'Rocket',
+    color: 'amber',
+    order: 10,
     primary: false,
   },
   {

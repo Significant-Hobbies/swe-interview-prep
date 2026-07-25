@@ -1,7 +1,7 @@
 {
   "generated": true,
   "counts": {
-    "tracks": 18,
+    "tracks": 19,
     "concepts": 226,
     "roadmaps": 24,
     "drills": 269,
@@ -20,7 +20,8 @@
     "/curriculum/tracks/databases.html",
     "/curriculum/tracks/system-design.html",
     "/curriculum/tracks/dsa.html",
-    "/curriculum/tracks/product.html",
+    "/curriculum/tracks/behavioral.html",
+    "/curriculum/tracks/go-to-market.html",
     "/curriculum/tracks/systems-foundations.html",
     "/curriculum/tracks/infrastructure-platforms.html",
     "/curriculum/tracks/distributed-systems.html",

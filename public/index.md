@@ -1,6 +1,6 @@
 # SWE Interview Prep
 
-Software engineering learning OS with 18 tracks, 226 concepts, 24 roadmaps, active practice, build artifacts, and FSRS spaced repetition.
+Software engineering learning OS with 19 tracks, 226 concepts, 24 roadmaps, active practice, build artifacts, and FSRS spaced repetition.
 
 ## Learning loop
 
@@ -16,7 +16,8 @@ Concept → Drill → Build → Review → Apply. Each concept connects a concis
 - [Databases & Storage](https://learn.significanthobbies.com/curriculum/tracks/databases.html) — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
 - [System Design](https://learn.significanthobbies.com/curriculum/tracks/system-design.html) — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
 - [DSA & Implementation](https://learn.significanthobbies.com/curriculum/tracks/dsa.html) — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
-- [Product & Distribution](https://learn.significanthobbies.com/curriculum/tracks/product.html) — Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.
+- [Behavioral & Communication](https://learn.significanthobbies.com/curriculum/tracks/behavioral.html) — The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
+- [Go-to-Market](https://learn.significanthobbies.com/curriculum/tracks/go-to-market.html) — Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
 - [Systems Foundations](https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html) — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
 - [Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html) — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
 - [Distributed Systems](https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html) — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.

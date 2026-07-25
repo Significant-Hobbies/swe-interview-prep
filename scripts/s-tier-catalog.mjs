@@ -2040,8 +2040,8 @@ const TAG_ALIASES = {
   'bit-manipulation': ['dsa'],
   'dynamic-programming': ['dsa'],
   calculus: ['mathematics'],
-  analytics: ['product'],
-  growth: ['product'],
+  analytics: ['go-to-market'],
+  growth: ['go-to-market'],
 };
 
 /**
@@ -2083,7 +2083,8 @@ const TAG_PRIORITY = [
   'system-design',
   'distributed-systems',
   'dsa',
-  'product',
+  'behavioral',
+  'go-to-market',
   'mathematics',
 ];
 

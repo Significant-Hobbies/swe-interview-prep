@@ -183,6 +183,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "capacity-estimation",
+            "requirements-scoping",
             "embeddings",
             "http-lifecycle",
             "structured-outputs",
@@ -194,7 +196,20 @@
             "topk-vector-search",
             "brute-force-vector-db"
           ],
-          "drills": [],
+          "drills": [
+            "size-a-write-heavy-service",
+            "classify-requirements",
+            "embed-and-search",
+            "http-idempotent-retry",
+            "structured-extraction",
+            "build-tokenizer",
+            "build-tool-loop",
+            "implement-similarity-metrics",
+            "build-inverted-index",
+            "calculate-tfidf",
+            "implement-topk-heap",
+            "build-brute-force-index"
+          ],
           "artifacts": []
         },
         {
@@ -424,6 +439,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "capacity-estimation",
+            "requirements-scoping",
             "ml-lora",
             "api-design",
             "consistent-hashing",
@@ -446,6 +463,8 @@
             "ml-adamw"
           ],
           "drills": [
+            "size-a-write-heavy-service",
+            "classify-requirements",
             "ml-lora-param-count",
             "design-paginated-api",
             "design-consistent-hashing",
@@ -619,6 +638,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "capacity-estimation",
+            "requirements-scoping",
             "embeddings",
             "http-lifecycle",
             "message-queues",
@@ -634,7 +655,24 @@
             "bm25",
             "hybrid-search"
           ],
-          "drills": [],
+          "drills": [
+            "size-a-write-heavy-service",
+            "classify-requirements",
+            "embed-and-search",
+            "http-idempotent-retry",
+            "queue-backpressure",
+            "object-key-layout",
+            "build-rag-pipeline",
+            "replication-lag-read",
+            "shard-key-choice",
+            "build-tokenizer",
+            "implement-similarity-metrics",
+            "cache-stampede",
+            "build-inverted-index",
+            "calculate-tfidf",
+            "calculate-bm25-score",
+            "implement-rrf"
+          ],
           "artifacts": []
         },
         {
@@ -685,11 +723,21 @@
         {
           "title": "Days 1-5 — Arrays & strings",
           "goal": "The pattern recognition that unlocks 30%+ of interview problems.",
-          "concepts": ["array-hashing", "two-pointers", "sliding-window", "intervals"],
+          "concepts": [
+            "complexity-analysis",
+            "sorting",
+            "array-hashing",
+            "two-pointers",
+            "sliding-window",
+            "intervals"
+          ],
           "drills": [
+            "analyse-amortised-growth",
+            "stable-sort-by-key",
             "two-sum-hashmap",
             "valid-palindrome-two-pointers",
-            "longest-substring-sliding-window"
+            "longest-substring-sliding-window",
+            "merge-intervals"
           ],
           "artifacts": []
         },
@@ -991,7 +1039,7 @@
       "horizon": "30d",
       "goal": "Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware \"what I would do differently\".",
       "description": "A 30-day pass through behavioural interview frames. Two stories per dimension, each with situation, action, result, and a learned lesson. End able to map an unfamiliar question to a relevant story in under 10 seconds.",
-      "tracks": ["product"],
+      "tracks": ["behavioral"],
       "milestones": [
         {
           "title": "Days 1-10 — Self & ownership",
@@ -1608,7 +1656,7 @@
       "horizon": "90d",
       "goal": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.",
       "description": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.",
-      "tracks": ["application-engineering", "backend", "product"],
+      "tracks": ["application-engineering", "backend", "go-to-market"],
       "milestones": [
         {
           "title": "Weeks 1-4 — Foundations and mechanisms",

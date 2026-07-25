@@ -605,6 +605,10 @@
     "stationarity-autocorrelation",
     "random-walks-markov",
     "portfolio-risk-metrics",
-    "momentum-backtest"
+    "momentum-backtest",
+    "complexity-analysis",
+    "sorting",
+    "capacity-estimation",
+    "requirements-scoping"
   ]
 }

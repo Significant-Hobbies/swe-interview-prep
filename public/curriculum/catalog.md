@@ -1,7 +1,7 @@
 # SWE Prep Curriculum Catalog
 
 A public, JavaScript-free index of 226 concepts across
-18 tracks and 24 sequenced roadmaps.
+19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
 - Human curriculum hub: https://learn.significanthobbies.com/curriculum/
@@ -257,13 +257,13 @@ Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, 
 - [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
 - [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
 
-## Product & Distribution
+## Behavioral & Communication
 
-Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.
+The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
 
-- Public page: https://learn.significanthobbies.com/curriculum/tracks/product.html
-- Concepts: 14
-- Roadmaps: 2
+- Public page: https://learn.significanthobbies.com/curriculum/tracks/behavioral.html
+- Concepts: 10
+- Roadmaps: 1
 
 - [Leadership](https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence.html) — Driving outcomes through others.
 - [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html) — Disagreement handling.
@@ -275,6 +275,15 @@ Stay close to the market: positioning, landing pages, SEO, analytics, and the be
 - [Innovation](https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity.html) — Novel solutions, experimentation.
 - [Customer Obsession](https://learn.significanthobbies.com/curriculum/concepts/customer-obsession.html) — User-centered tradeoffs.
 - [Ownership](https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability.html) — End-to-end responsibility.
+
+## Go-to-Market
+
+Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
+
+- Public page: https://learn.significanthobbies.com/curriculum/tracks/go-to-market.html
+- Concepts: 4
+- Roadmaps: 1
+
 - [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning.html) — Naming the problem, the audience, and the alternative you beat.
 - [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html) — Turning a visitor into an activated user: hero, proof, single CTA.
 - [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo.html) — Programmatic and content SEO: intent, structure, indexability.

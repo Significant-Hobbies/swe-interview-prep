@@ -1,6 +1,6 @@
 {
   "counts": {
-    "tracks": 18,
+    "tracks": 19,
     "concepts": 226,
     "roadmaps": 24,
     "drills": 269,
@@ -51,9 +51,14 @@
       "description": "Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns."
     },
     {
-      "id": "product",
-      "title": "Product & Distribution",
-      "description": "Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation."
+      "id": "behavioral",
+      "title": "Behavioral & Communication",
+      "description": "The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure."
+    },
+    {
+      "id": "go-to-market",
+      "title": "Go-to-Market",
+      "description": "Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics."
     },
     {
       "id": "systems-foundations",

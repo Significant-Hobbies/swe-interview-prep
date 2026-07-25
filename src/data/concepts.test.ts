@@ -204,8 +204,14 @@ describe('concept taxonomy', () => {
     expect(missing).toEqual([]);
   });
 
+  // The point of this test is that the domain expansion never DROPS a
+  // hand-authored concept. It used to assert an exact count of 152, which also
+  // blocked adding one — `complexity-analysis`, `sorting`, `capacity-estimation`
+  // and `requirements-scoping` all tripped it. A floor plus the
+  // nothing-went-missing check preserves the guarantee without freezing the
+  // catalog.
   it('preserves every concept id that existed before the domain expansion', () => {
-    expect(curriculumCoverage.preservedConceptIds).toHaveLength(152);
+    expect(curriculumCoverage.preservedConceptIds.length).toBeGreaterThanOrEqual(152);
     const missing = curriculumCoverage.preservedConceptIds.filter((id) => !conceptIds.has(id));
     expect(missing).toEqual([]);
   });

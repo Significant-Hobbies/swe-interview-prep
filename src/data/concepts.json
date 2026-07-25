@@ -3805,7 +3805,7 @@
     {
       "id": "leadership-and-influence",
       "name": "Leadership",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "core",
       "priority": 2,
@@ -3832,7 +3832,7 @@
     {
       "id": "conflict-resolution",
       "name": "Conflict Resolution",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "core",
       "priority": 2,
@@ -3859,7 +3859,7 @@
     {
       "id": "problem-solving-and-decision-making",
       "name": "Decision Making",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "core",
       "priority": 2,
@@ -3886,7 +3886,7 @@
     {
       "id": "teamwork-and-collaboration",
       "name": "Collaboration",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -3913,7 +3913,7 @@
     {
       "id": "failure-and-learning",
       "name": "Failure & Learning",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -3950,7 +3950,7 @@
     {
       "id": "communication",
       "name": "Communication",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -3977,7 +3977,7 @@
     {
       "id": "time-management-and-prioritization",
       "name": "Prioritization",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -4004,7 +4004,7 @@
     {
       "id": "innovation-and-creativity",
       "name": "Innovation",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "core",
       "priority": 2,
@@ -4031,7 +4031,7 @@
     {
       "id": "customer-obsession",
       "name": "Customer Obsession",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -4063,7 +4063,7 @@
     {
       "id": "ownership-and-accountability",
       "name": "Ownership",
-      "tags": ["product", "behavioral"],
+      "tags": ["behavioral", "behavioral"],
       "roadmaps": ["behavioral-practice"],
       "difficulty": "intro",
       "priority": 2,
@@ -4095,7 +4095,7 @@
     {
       "id": "positioning",
       "name": "Positioning",
-      "tags": ["product", "positioning"],
+      "tags": ["go-to-market", "positioning"],
       "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
@@ -4117,7 +4117,7 @@
     {
       "id": "landing-pages",
       "name": "Landing Pages",
-      "tags": ["product", "positioning"],
+      "tags": ["go-to-market", "positioning"],
       "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
@@ -4144,7 +4144,7 @@
     {
       "id": "seo",
       "name": "SEO",
-      "tags": ["product", "growth"],
+      "tags": ["go-to-market", "growth"],
       "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,
@@ -4167,7 +4167,7 @@
     {
       "id": "product-analytics",
       "name": "Product Analytics",
-      "tags": ["product", "analytics"],
+      "tags": ["go-to-market", "analytics"],
       "roadmaps": ["application-engineering-12w"],
       "difficulty": "core",
       "priority": 3,

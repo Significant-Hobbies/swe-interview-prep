@@ -981,7 +981,7 @@ const ROADMAP_DEFINITIONS = [
   {
     id: 'application-engineering-12w',
     title: '12-Week Application Engineering',
-    tracks: ['application-engineering', 'backend', 'product'],
+    tracks: ['application-engineering', 'backend', 'go-to-market'],
     goal: 'Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.',
     groups: [
       ['api-design', 'web-mobile-engineering', 'ux-interface-design'],
