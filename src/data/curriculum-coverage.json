@@ -622,6 +622,11 @@
     "curse-of-dimensionality",
     "top-k-pruning",
     "rate-limiter-design",
-    "unique-id-generation"
+    "unique-id-generation",
+    "recursion-and-induction",
+    "quickselect",
+    "normalization",
+    "buffer-pool",
+    "pagination"
   ]
 }

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Normalization | SWE Prep</title>
+    <meta name="description" content="Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/normalization.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Normalization | SWE Prep">
+    <meta property="og:description" content="Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/normalization.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Normalization | SWE Prep">
+    <meta name="twitter:description" content="Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Normalization","description":"Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.","url":"https://learn.significanthobbies.com/curriculum/concepts/normalization.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Normalization","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases.html">Databases &amp; Storage</a></nav>
+      <article>
+    <p class="eyebrow">Databases &amp; Storage · core</p>
+    <h1>Normalization</h1>
+    <p class="lede">Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.</p>
+    <div class="pills"><span>databases</span><span>schema-design</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Normalisation removes update anomalies by making every fact live in exactly one place: if a non-key column depends on something other than the whole key, an update has to touch several rows and can leave them disagreeing. Third normal form is &#39;every non-key attribute depends on the key, the whole key, and nothing but the key&#39;. Denormalisation is the deliberate reintroduction of duplication to avoid a join — legitimate when reads dominate and you own the write path that keeps copies consistent, indefensible when it is an accident.</p>
+    </section>
+
+    <section>
+      <h2>How to study Normalization</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Normalization with Secondary Indexes, Join Algorithms. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Spot the update anomaly and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Schema review, and the reason a denormalised read model needs an owner for its write path.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Denormalising for performance before measuring whether the join was ever the problem</li><li>Duplicating a value with no mechanism to keep the copies in sync, so they silently diverge</li><li>Treating normal forms as a purity contest rather than a defence against anomalies</li><li>Normalising append-only analytical tables where update anomalies cannot occur</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Spot the update anomaly</h3>
+          <p>Implement violatesThirdNF(columns, key, dependencies) -&gt; boolean. `dependencies` is [{determinant: string[], dependent: string}]. Report a 3NF violation when a dependency&#39;s determinant is NOT a superset of the key AND its dependent is not itself part of the key — i.e. a non-key attribute determined by something other than the whole key.</p>
+          <p><strong>Expected evidence:</strong> key [&#39;orderId&#39;], dep {determinant:[&#39;customerId&#39;], dependent:&#39;customerCity&#39;} -&gt; true (transitive dependency)</p>
+          <a href="/drills/find-the-anomaly">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>When is denormalising a schema a legitimate engineering decision rather than a shortcut, and what must you own if you do it?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/transaction-processing.html">Transaction Processing</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/secondary-index.html">Secondary Indexes</a></li><li><a href="/curriculum/concepts/join-algorithms.html">Join Algorithms</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

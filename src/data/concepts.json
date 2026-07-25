@@ -7941,7 +7941,13 @@
       "realWorldUsage": "The difference between a dependency blip and a cascading outage, and the first thing a postmortem examines.",
       "drills": ["backoff-with-jitter"],
       "reviewQuestions": ["rq-retry-amplification"],
-      "resources": [],
+      "resources": [
+        {
+          "title": "Timeouts, retries and backoff with jitter (AWS)",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "type": "doc"
+        }
+      ],
       "artifacts": []
     },
     {
@@ -7964,7 +7970,18 @@
       "realWorldUsage": "The OWASP categories that dominate real breaches, and the review checklist for any endpoint that takes user input.",
       "drills": ["parameterise-a-query"],
       "reviewQuestions": ["rq-cors-is-not-a-defence"],
-      "resources": [],
+      "resources": [
+        {
+          "title": "OWASP Cheat Sheet — Cross-Site Request Forgery Prevention",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "type": "doc"
+        },
+        {
+          "title": "OWASP Cheat Sheet — SQL Injection Prevention",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+          "type": "doc"
+        }
+      ],
       "artifacts": []
     },
     {
@@ -8079,6 +8096,121 @@
       "realWorldUsage": "Primary keys at scale, idempotency keys, and any id generated before a write reaches the database.",
       "drills": ["snowflake-id-layout"],
       "reviewQuestions": ["rq-uuid-insert-locality"],
+      "resources": [],
+      "artifacts": []
+    },
+    {
+      "id": "recursion-and-induction",
+      "name": "Recursion & Induction",
+      "tags": ["dsa", "recursion"],
+      "roadmaps": ["dsa-practice"],
+      "difficulty": "intro",
+      "priority": 5,
+      "prerequisites": ["complexity-analysis"],
+      "related": ["dp-1d", "backtracking", "trees"],
+      "description": "Writing recursion you can trust, and solving the recurrence it produces.",
+      "mentalModel": "Trust the recursive call. You verify a base case and verify that the recursive step is correct ASSUMING the call on a smaller input is correct — that is induction, and it is why tracing the whole call tree in your head is both unnecessary and the main source of confusion. Every recursion also implies a recurrence, and the Master theorem reads it off directly: T(n) = aT(n/b) + f(n) is decided by whether the work at the leaves or at the root dominates.",
+      "commonMistakes": [
+        "Tracing execution instead of trusting the inductive hypothesis, then getting lost three levels deep",
+        "A base case that does not actually terminate every path — off-by-one on the shrink step",
+        "Recursing without shrinking the input, or shrinking it in a way that skips the base case",
+        "Ignoring stack depth: an O(n) recursion on a million elements overflows where a loop would not"
+      ],
+      "realWorldUsage": "Tree and graph traversal, divide-and-conquer, parsers, and every dynamic-programming formulation before it is memoised.",
+      "drills": ["recurrence-depth"],
+      "reviewQuestions": ["rq-recursion-induction"],
+      "resources": [],
+      "artifacts": []
+    },
+    {
+      "id": "quickselect",
+      "name": "Quickselect",
+      "tags": ["dsa", "selection"],
+      "roadmaps": ["dsa-practice"],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": ["sorting"],
+      "related": ["heap", "complexity-analysis"],
+      "description": "Finding the k-th smallest in expected O(n) by recursing into only one partition.",
+      "mentalModel": "Quicksort recurses into both halves; quickselect knows which half holds the answer and discards the other, so the work is n + n/2 + n/4 … which sums to O(n) rather than O(n log n). The catch is that the guarantee is only expected: adversarial or already-sorted input with a naive pivot degrades to O(n²), which is what randomised pivots and median-of-medians exist to prevent.",
+      "commonMistakes": [
+        "Quoting O(n) as worst case — it is expected; the worst case is quadratic without a good pivot rule",
+        "Reaching for a full sort when only one order statistic is needed",
+        "Off-by-one between the k-th smallest and index k after partitioning",
+        "Using a size-k heap for large k, where quickselect is cheaper, or quickselect for streaming data, where it does not apply"
+      ],
+      "realWorldUsage": "Median and percentile computation, top-k without full ordering, and the selection step inside median-of-medians.",
+      "drills": ["kth-smallest-quickselect"],
+      "reviewQuestions": ["rq-quickselect-expected"],
+      "resources": [],
+      "artifacts": []
+    },
+    {
+      "id": "normalization",
+      "name": "Normalization",
+      "tags": ["databases", "schema-design"],
+      "roadmaps": ["db-disk-first"],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": ["transaction-processing"],
+      "related": ["secondary-index", "join-algorithms"],
+      "description": "Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.",
+      "mentalModel": "Normalisation removes update anomalies by making every fact live in exactly one place: if a non-key column depends on something other than the whole key, an update has to touch several rows and can leave them disagreeing. Third normal form is 'every non-key attribute depends on the key, the whole key, and nothing but the key'. Denormalisation is the deliberate reintroduction of duplication to avoid a join — legitimate when reads dominate and you own the write path that keeps copies consistent, indefensible when it is an accident.",
+      "commonMistakes": [
+        "Denormalising for performance before measuring whether the join was ever the problem",
+        "Duplicating a value with no mechanism to keep the copies in sync, so they silently diverge",
+        "Treating normal forms as a purity contest rather than a defence against anomalies",
+        "Normalising append-only analytical tables where update anomalies cannot occur"
+      ],
+      "realWorldUsage": "Schema review, and the reason a denormalised read model needs an owner for its write path.",
+      "drills": ["find-the-anomaly"],
+      "reviewQuestions": ["rq-denormalise-when"],
+      "resources": [],
+      "artifacts": []
+    },
+    {
+      "id": "buffer-pool",
+      "name": "Buffer Pool",
+      "tags": ["databases", "storage-engines"],
+      "roadmaps": ["db-disk-first"],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": ["storage-retrieval"],
+      "related": ["compaction", "isolation-levels"],
+      "description": "The database's own page cache — why it does not simply trust the OS.",
+      "mentalModel": "A database manages its own page cache because it knows things the OS cannot: which pages a query will touch next, which are dirty and pinned by an open transaction, and that a sequential scan should not evict the working set. That last point is why plain LRU is wrong for a database — one big scan touches every page once and flushes everything useful, so real systems use LRU-K or clock-sweep variants that require a second reference before promoting a page.",
+      "commonMistakes": [
+        "Assuming the OS page cache is equivalent — it cannot honour pin counts or write ordering for recovery",
+        "Plain LRU, which a single sequential scan pollutes end to end",
+        "Sizing the pool to fill RAM and leaving nothing for sorts, hash joins, and the OS",
+        "Ignoring that a dirty page cannot be evicted until its log record is durable"
+      ],
+      "realWorldUsage": "The first thing to size on any database server, and the explanation for a cache hit rate that collapses after a nightly batch job.",
+      "drills": ["lru-k-eviction"],
+      "reviewQuestions": ["rq-buffer-pool-scan"],
+      "resources": [],
+      "artifacts": []
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "tags": ["backend", "api-design"],
+      "roadmaps": ["swe-landscape", "application-engineering-12w"],
+      "difficulty": "core",
+      "priority": 4,
+      "prerequisites": ["api-design"],
+      "related": ["secondary-index", "rate-limiting"],
+      "description": "Offset versus cursor pagination, stable ordering, and why deep pages get expensive.",
+      "mentalModel": "OFFSET makes the database produce and discard every skipped row, so page 10,000 costs proportionally more than page 1 — and because the underlying rows shift between requests, an insert can make a client see the same item twice or miss one entirely. Cursor (keyset) pagination replaces 'skip N' with 'resume after this key', turning every page into an index seek at constant cost and making the sequence stable under concurrent writes. The price is that you can no longer jump to an arbitrary page number.",
+      "commonMistakes": [
+        "OFFSET on a large table, where deep pages degrade linearly",
+        "Paginating without a total ordering — ties on the sort key make results non-deterministic across pages",
+        "Exposing a raw primary key as the cursor, leaking row counts and creation order",
+        "Returning a total count on every page, which often costs more than the page itself"
+      ],
+      "realWorldUsage": "Every list endpoint, and the usual cause of an API that is fine in testing and times out on real data.",
+      "drills": ["keyset-pagination"],
+      "reviewQuestions": ["rq-offset-vs-keyset"],
       "resources": [],
       "artifacts": []
     }

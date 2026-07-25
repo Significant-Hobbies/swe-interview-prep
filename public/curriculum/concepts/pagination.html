@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagination | SWE Prep</title>
+    <meta name="description" content="Offset versus cursor pagination, stable ordering, and why deep pages get expensive.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/pagination.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Pagination | SWE Prep">
+    <meta property="og:description" content="Offset versus cursor pagination, stable ordering, and why deep pages get expensive.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/pagination.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pagination | SWE Prep">
+    <meta name="twitter:description" content="Offset versus cursor pagination, stable ordering, and why deep pages get expensive.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Pagination","description":"Offset versus cursor pagination, stable ordering, and why deep pages get expensive.","url":"https://learn.significanthobbies.com/curriculum/concepts/pagination.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Pagination","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/backend.html">Backend</a></nav>
+      <article>
+    <p class="eyebrow">Backend · core</p>
+    <h1>Pagination</h1>
+    <p class="lede">Offset versus cursor pagination, stable ordering, and why deep pages get expensive.</p>
+    <div class="pills"><span>backend</span><span>api-design</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>OFFSET makes the database produce and discard every skipped row, so page 10,000 costs proportionally more than page 1 — and because the underlying rows shift between requests, an insert can make a client see the same item twice or miss one entirely. Cursor (keyset) pagination replaces &#39;skip N&#39; with &#39;resume after this key&#39;, turning every page into an index seek at constant cost and making the sequence stable under concurrent writes. The price is that you can no longer jump to an arbitrary page number.</p>
+    </section>
+
+    <section>
+      <h2>How to study Pagination</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use the linked roadmap and primary implementation references to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Pagination with Secondary Indexes, Rate Limiting. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Cursor pagination that survives inserts and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Every list endpoint, and the usual cause of an API that is fine in testing and times out on real data.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>OFFSET on a large table, where deep pages degrade linearly</li><li>Paginating without a total ordering — ties on the sort key make results non-deterministic across pages</li><li>Exposing a raw primary key as the cursor, leaking row counts and creation order</li><li>Returning a total count on every page, which often costs more than the page itself</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <p class="muted">Use the linked roadmap context and practice prompt.</p>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Cursor pagination that survives inserts</h3>
+          <p>Implement page(rows, cursor, limit) for keyset pagination. Rows are {id, createdAt} sorted by (createdAt, id) ascending. cursor is null for the first page or {createdAt, id} for &#39;resume strictly after this&#39;. Return { items, nextCursor } where nextCursor is the last item&#39;s key, or null when the page is not full.</p>
+          <p><strong>Expected evidence:</strong> Two sequential pages return disjoint items even when a row is inserted between the calls.</p>
+          <a href="/drills/keyset-pagination">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>An endpoint using OFFSET is fine on page 1 and times out on page 5,000, and users occasionally report a duplicated row. Explain both symptoms and the single change that fixes them.</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/api-design.html">API Design</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/secondary-index.html">Secondary Indexes</a></li><li><a href="/curriculum/concepts/rate-limiting.html">Rate Limiting</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/application-engineering-12w.html">12-Week Application Engineering</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

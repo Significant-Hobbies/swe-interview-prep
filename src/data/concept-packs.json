@@ -6,14 +6,14 @@
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 177,
-      "paper": 215,
-      "blog": 174,
-      "book": 143,
-      "problem": 239,
-      "write": 239,
-      "more": 91,
-      "items": 1278
+      "video": 181,
+      "paper": 216,
+      "blog": 175,
+      "book": 140,
+      "problem": 244,
+      "write": 244,
+      "more": 92,
+      "items": 1292
     }
   },
   "packs": {
@@ -1620,6 +1620,11 @@
           "url": "https://doi.org/10.1109/HOTOS.1999.798396"
         },
         {
+          "category": "video",
+          "title": "Timeouts, retries and backoff with jitter (AWS)",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+        },
+        {
           "category": "problem",
           "title": "Implement backoff with jitter",
           "url": "/drills/implement-backoff-jitter"
@@ -1874,11 +1879,6 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"B-Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A B-tree is a wide, shallow tree sized to disk pages: each node holds many keys so the tree stays ~3-4 levels deep even for billions of rows"
-        },
-        {
-          "category": "book",
-          "title": "Database Internals (Petrov)",
-          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -1914,11 +1914,6 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"LSM Tree\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: An LSM tree turns random writes into sequential ones: buffer writes in an in-memory memtable, flush to immutable sorted files (SSTables), and merge them in the background"
-        },
-        {
-          "category": "book",
-          "title": "Database Internals (Petrov)",
-          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2034,11 +2029,6 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Columnar Storage\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A column store groups data by column instead of by row"
-        },
-        {
-          "category": "book",
-          "title": "Database Internals (Petrov)",
-          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -2119,11 +2109,6 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Storage Engines\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A storage engine is the layer that actually puts bytes on disk and finds them again"
-        },
-        {
-          "category": "book",
-          "title": "Database Internals (Petrov)",
-          "url": "https://www.databass.dev/"
         }
       ]
     },
@@ -5115,6 +5100,11 @@
           "url": "https://kubernetes.io/docs/concepts/architecture/"
         },
         {
+          "category": "more",
+          "title": "AWS Builders Library",
+          "url": "https://aws.amazon.com/builders-library/"
+        },
+        {
           "category": "problem",
           "title": "Design exercise: Cloud Infrastructure",
           "url": "/drills/practice-cloud-infrastructure"
@@ -7415,6 +7405,11 @@
           "url": "/library/system-design-101?section=data-guides-top-6-cases-to-apply-idempotency-md"
         },
         {
+          "category": "video",
+          "title": "Timeouts, retries and backoff with jitter (AWS)",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+        },
+        {
           "category": "problem",
           "title": "Exponential backoff with full jitter",
           "url": "/drills/backoff-with-jitter"
@@ -7448,6 +7443,16 @@
           "category": "more",
           "title": "Node.js Best Practices — Preventing database injection vulnerabilities",
           "url": "/library/node-best-practices?section=sections-security-ormodmusage-md"
+        },
+        {
+          "category": "video",
+          "title": "OWASP Cheat Sheet — Cross-Site Request Forgery Prevention",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+        },
+        {
+          "category": "paper",
+          "title": "OWASP Cheat Sheet — SQL Injection Prevention",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
         },
         {
           "category": "problem",
@@ -7599,6 +7604,96 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"Unique ID Generation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A database sequence is a coordination point, so distributed id schemes buy independence by partitioning the id space: Snowflake spends bits on a timestamp, a machine id, and a per-millisecond counter, so two nodes cannot collide without sharing a machine id"
+        }
+      ]
+    },
+    "recursion-and-induction": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Solve a divide-and-conquer recurrence",
+          "url": "/drills/recurrence-depth"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Recursion & Induction\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Trust the recursive call"
+        }
+      ]
+    },
+    "quickselect": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "k-th smallest by quickselect",
+          "url": "/drills/kth-smallest-quickselect"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Quickselect\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Quicksort recurses into both halves; quickselect knows which half holds the answer and discards the other, so the work is n + n/2 + n/4 … which sums to O(n) rather than O(n log n)"
+        }
+      ]
+    },
+    "normalization": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Spot the update anomaly",
+          "url": "/drills/find-the-anomaly"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Normalization\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Normalisation removes update anomalies by making every fact live in exactly one place: if a non-key column depends on something other than the whole key, an update has to touch several rows and can leave them disagreeing"
+        }
+      ]
+    },
+    "buffer-pool": {
+      "items": [
+        {
+          "category": "video",
+          "title": "CMU 15-445 — Database Systems (course)",
+          "url": "https://15445.courses.cs.cmu.edu/fall2025/"
+        },
+        {
+          "category": "blog",
+          "title": "Martin Kleppmann — blog",
+          "url": "https://martin.kleppmann.com/"
+        },
+        {
+          "category": "book",
+          "title": "Database Internals (Petrov)",
+          "url": "https://www.databass.dev/"
+        },
+        {
+          "category": "problem",
+          "title": "Why LRU-K survives a scan",
+          "url": "/drills/lru-k-eviction"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Buffer Pool\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A database manages its own page cache because it knows things the OS cannot: which pages a query will touch next, which are dirty and pinned by an open transaction, and that a sequential scan should not evict the working set"
+        }
+      ]
+    },
+    "pagination": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Cursor pagination that survives inserts",
+          "url": "/drills/keyset-pagination"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Pagination\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: OFFSET makes the database produce and discard every skipped row, so page 10,000 costs proportionally more than page 1 — and because the underlying rows shift between requests, an insert can make a client see the same item twice or miss one entirely"
         }
       ]
     }

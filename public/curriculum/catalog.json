@@ -9,10 +9,10 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 239,
+    "concepts": 244,
     "roadmaps": 24,
-    "drills": 282,
-    "reviewQuestions": 256,
+    "drills": 287,
+    "reviewQuestions": 261,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -173,7 +173,8 @@
         "auth-systems",
         "ecommerce-payments",
         "retries-and-circuit-breakers",
-        "web-security-basics"
+        "web-security-basics",
+        "pagination"
       ],
       "roadmapIds": [
         "ai-infra-12-month",
@@ -203,7 +204,9 @@
         "query-execution-optimization",
         "warehouses-lakehouses",
         "isolation-levels",
-        "join-algorithms"
+        "join-algorithms",
+        "normalization",
+        "buffer-pool"
       ],
       "roadmapIds": [
         "ai-search-infra-90-day",
@@ -283,7 +286,9 @@
         "prefix-sums",
         "monotonic-stack",
         "string-matching",
-        "minimum-spanning-tree"
+        "minimum-spanning-tree",
+        "recursion-and-induction",
+        "quickselect"
       ],
       "roadmapIds": [
         "dsa-practice"
@@ -4874,6 +4879,77 @@
       "url": "https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html",
       "roadmapIds": [
         "hld-practice"
+      ]
+    },
+    {
+      "id": "recursion-and-induction",
+      "name": "Recursion & Induction",
+      "description": "Writing recursion you can trust, and solving the recurrence it produces.",
+      "difficulty": "intro",
+      "tags": [
+        "dsa",
+        "recursion"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "quickselect",
+      "name": "Quickselect",
+      "description": "Finding the k-th smallest in expected O(n) by recursing into only one partition.",
+      "difficulty": "core",
+      "tags": [
+        "dsa",
+        "selection"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/quickselect.html",
+      "roadmapIds": [
+        "dsa-practice"
+      ]
+    },
+    {
+      "id": "normalization",
+      "name": "Normalization",
+      "description": "Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "schema-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/normalization.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "buffer-pool",
+      "name": "Buffer Pool",
+      "description": "The database's own page cache — why it does not simply trust the OS.",
+      "difficulty": "core",
+      "tags": [
+        "databases",
+        "storage-engines"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/buffer-pool.html",
+      "roadmapIds": [
+        "db-disk-first"
+      ]
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "description": "Offset versus cursor pagination, stable ordering, and why deep pages get expensive.",
+      "difficulty": "core",
+      "tags": [
+        "backend",
+        "api-design"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pagination.html",
+      "roadmapIds": [
+        "swe-landscape",
+        "application-engineering-12w"
       ]
     }
   ],

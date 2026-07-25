@@ -2188,6 +2188,46 @@
       "difficulty": "core",
       "question": "Switching a primary key from random UUIDv4 to UUIDv7 improved write throughput without any schema change. Why?",
       "answer": "UUIDv4 is random, so consecutive inserts land in unrelated positions of the B-tree: every insert dirties a different page, the working set becomes the whole index, and pages split repeatedly. UUIDv7 puts a millisecond timestamp in the high bits, so ids are roughly time-ordered and inserts concentrate at the right edge of the index — the same few pages stay hot in the buffer pool and splits become rare. Same uniqueness guarantee, very different locality."
+    },
+    {
+      "id": "rq-recursion-induction",
+      "conceptId": "recursion-and-induction",
+      "type": "explain",
+      "difficulty": "intro",
+      "question": "You are three levels deep tracing a recursive call and have lost the thread. What is the argument that makes tracing unnecessary, and what must you check instead?",
+      "answer": "Induction. You assume the recursive call is already correct on a smaller input and only verify that the step combining its result is correct — the call tree takes care of itself. What you must actually check is that every path reaches a base case and that the input strictly shrinks on every call; those two together are what the induction rests on, and they are also the only places termination bugs live."
+    },
+    {
+      "id": "rq-quickselect-expected",
+      "conceptId": "quickselect",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Quickselect is O(n) and quicksort is O(n log n) despite the same partition step. Where does the log factor go, and why is the O(n) only expected?",
+      "answer": "Quicksort recurses into both partitions, so every level does n work and there are log n levels. Quickselect knows which partition contains the k-th element and discards the other, so the work is n + n/2 + n/4 … which is a geometric series summing to 2n. It is only expected because the halving depends on the pivot landing near the middle; a bad pivot on adversarial or sorted input shrinks the problem by one element at a time and gives O(n²). Randomised pivots or median-of-medians restore the guarantee."
+    },
+    {
+      "id": "rq-denormalise-when",
+      "conceptId": "normalization",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "When is denormalising a schema a legitimate engineering decision rather than a shortcut, and what must you own if you do it?",
+      "answer": "It is legitimate when reads dominate by a wide margin, the join is measurably the bottleneck, and the duplicated value changes rarely. What you take on is the write path: every copy now needs a mechanism that updates it — a trigger, an application invariant, or a rebuild job — because the anomaly normalisation was preventing has not gone away, you have merely accepted responsibility for it. Duplication with no owner is how two rows end up disagreeing about the same fact."
+    },
+    {
+      "id": "rq-buffer-pool-scan",
+      "conceptId": "buffer-pool",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A nightly report scans a large table and the morning cache hit rate collapses. What did plain LRU do, and how does LRU-K prevent it?",
+      "answer": "The scan touched every page exactly once. Under LRU each of those pages was the most-recently-used at the moment it was read, so they evicted the genuinely hot working set — which is then cold at 9am. LRU-K only promotes a page into the resident set on its K-th access, so single-touch scan pages stay in a probationary tier and are evicted before anything seen twice. The hot set survives because the policy distinguishes 'recent' from 'repeatedly useful'."
+    },
+    {
+      "id": "rq-offset-vs-keyset",
+      "conceptId": "pagination",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "An endpoint using OFFSET is fine on page 1 and times out on page 5,000, and users occasionally report a duplicated row. Explain both symptoms and the single change that fixes them.",
+      "answer": "OFFSET makes the database generate and discard every skipped row, so cost grows linearly with page depth — page 5,000 produces 100,000 rows to return 20. The duplicate is the same mechanism seen differently: a row inserted before the window shifts everything down by one, so the next page re-serves an item the client already had. Keyset pagination fixes both by resuming after a key rather than counting skipped rows: each page is an index seek at constant cost, and an insert elsewhere cannot move the window."
     }
   ]
 }

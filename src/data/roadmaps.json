@@ -304,6 +304,8 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "normalization",
+            "buffer-pool",
             "isolation-levels",
             "join-algorithms",
             "embeddings",
@@ -316,6 +318,8 @@
             "brute-force-vector-db"
           ],
           "drills": [
+            "find-the-anomaly",
+            "lru-k-eviction",
             "detect-write-skew",
             "pick-a-join-strategy",
             "embed-and-search",
@@ -479,6 +483,7 @@
           "title": "Prerequisites — unlock the rest of this path",
           "goal": "Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.",
           "concepts": [
+            "pagination",
             "queueing-theory",
             "transaction-processing",
             "isolation-levels",
@@ -508,6 +513,7 @@
             "ml-adamw"
           ],
           "drills": [
+            "keyset-pagination",
             "utilisation-latency-curve",
             "practice-transaction-processing",
             "detect-write-skew",
@@ -780,6 +786,8 @@
           "title": "Days 1-5 — Arrays & strings",
           "goal": "The pattern recognition that unlocks 30%+ of interview problems.",
           "concepts": [
+            "recursion-and-induction",
+            "quickselect",
             "prefix-sums",
             "monotonic-stack",
             "string-matching",
@@ -792,6 +800,8 @@
             "intervals"
           ],
           "drills": [
+            "recurrence-depth",
+            "kth-smallest-quickselect",
             "range-sum-queries",
             "next-greater-element",
             "rolling-hash-search",
@@ -1740,6 +1750,7 @@
             "object-modeling",
             "state-management",
             "web-security-basics",
+            "pagination",
             "api-design",
             "web-mobile-engineering",
             "ux-interface-design"
@@ -1751,6 +1762,7 @@
             "design-parking-lot",
             "design-vending-machine",
             "parameterise-a-query",
+            "keyset-pagination",
             "design-paginated-api",
             "practice-web-mobile-engineering",
             "practice-ux-interface-design"

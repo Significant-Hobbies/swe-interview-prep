@@ -2,10 +2,10 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 239,
+    "concepts": 244,
     "roadmaps": 24,
-    "drills": 282,
-    "reviewQuestions": 256,
+    "drills": 287,
+    "reviewQuestions": 261,
     "artifacts": 40,
     "coverageCategories": 11,
     "coverageTopics": 96
@@ -293,6 +293,11 @@
     "/curriculum/concepts/curse-of-dimensionality.html",
     "/curriculum/concepts/top-k-pruning.html",
     "/curriculum/concepts/rate-limiter-design.html",
-    "/curriculum/concepts/unique-id-generation.html"
+    "/curriculum/concepts/unique-id-generation.html",
+    "/curriculum/concepts/recursion-and-induction.html",
+    "/curriculum/concepts/quickselect.html",
+    "/curriculum/concepts/normalization.html",
+    "/curriculum/concepts/buffer-pool.html",
+    "/curriculum/concepts/pagination.html"
   ]
 }

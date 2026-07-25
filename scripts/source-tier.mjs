@@ -1,5 +1,15 @@
 /** Node mirror of src/lib/sourceTier.ts for pack generation scripts. */
 
+/**
+ * Narrow carve-outs from BLOCKED.
+ *
+ * `/amazon\.com/i` exists to keep out storefront and marketing pages, but it
+ * also caught the AWS Builders' Library — first-party engineering writing and
+ * the canonical reference for timeouts, retries and backoff with jitter. The
+ * block stays; this one path is allowed through.
+ */
+const BLOCK_EXCEPTIONS = [/^https:\/\/aws\.amazon\.com\/builders-library\//i];
+
 const BLOCKED = [
   /wikipedia\.org/i,
   /refactoring\.guru/i,
@@ -69,6 +79,9 @@ const S_TIER_PINECONE = /pinecone\.io\/learn\/hnsw/i;
 // the pack generator is a curation gate, not a general web reputation score.
 const S_TIER_PRIMARY_HOSTS = new Set([
   'abseil.io',
+  // The canonical reference for CSRF/XSS/SQLi prevention; nothing else on the
+  // allowlist covers the same ground.
+  'cheatsheetseries.owasp.org',
   'blog.burntsushi.net',
   'chance.dartmouth.edu',
   'citeseerx.ist.psu.edu',
@@ -151,6 +164,10 @@ const FIRST_PARTY_PATH = /^\/(library|drills)\//;
 
 export function isSTierSource(title, url, slot) {
   const hay = `${title} ${url}`;
+  // A carve-out is a positive allow, not merely an exemption from BLOCKED — the
+  // host itself is not on the allowlist and should not be, since only this one
+  // path is first-party engineering writing.
+  if (BLOCK_EXCEPTIONS.some((re) => re.test(url))) return true;
   if (BLOCKED.some((re) => re.test(url) || re.test(title))) return false;
   if (FIRST_PARTY_PATH.test(url)) return true;
   if (S_TIER_PINECONE.test(url)) return true;
