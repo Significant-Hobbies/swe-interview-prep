@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bayesian Inference | SWE Prep</title>
+    <meta name="description" content="Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Bayesian Inference | SWE Prep">
+    <meta property="og:description" content="Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bayesian Inference | SWE Prep">
+    <meta name="twitter:description" content="Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Bayesian Inference","description":"Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.","url":"https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Bayesian Inference","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · advanced</p>
+    <h1>Bayesian Inference</h1>
+    <p class="lede">Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.</p>
+    <div class="pills"><span>mathematics</span><span>statistics</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Frequentist stats ask how surprising the data is under a null. Bayesian stats start with a prior belief, observe data, and land on a posterior — a direct distribution over what you care about. Credible intervals are &#39;where the parameter probably lives&#39; given data and prior.</p>
+    </section>
+
+    <section>
+      <h2>How to study Bayesian Inference</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Seeing Theory — Bayesian Inference, Statistical Rethinking (McElreath) — lectures to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Bayesian Inference with Probability Fundamentals, Maximum Likelihood Estimation, Model Evaluation. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Beta-Binomial posterior update and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Low-data regimes, adaptive experiments, spam filtering, hierarchical models.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Treating the prior as truth instead of a starting opinion</li><li>Confusing credible intervals with confidence intervals</li><li>Using flat priors and expecting magic objectivity</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://seeing-theory.brown.edu/bayesian-inference/index.html" rel="noreferrer">Seeing Theory — Bayesian Inference</a> <span class="muted">(article)</span></li><li><a href="https://www.youtube.com/playlist?list=PLDcUM9US4vMnmGIyY4KZdH_3H9v2EEW3U" rel="noreferrer">Statistical Rethinking (McElreath) — lectures</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Beta-Binomial posterior update</h3>
+          <p>Prior: Beta(1,1) (uniform) on conversion rate θ. Observe 8 successes in 100 trials. Compute the posterior Beta(9,93). Give the posterior mean and a 95% credible interval (approximate with Normal: mean ± 1.96√(pq/(n+2))).</p>
+          <p><strong>Expected evidence:</strong> Posterior mean = 9/102 ≈ 0.088; CI roughly [0.035, 0.141] — direct &#39;where θ probably lives&#39; statement.</p>
+          <a href="/drills/beta-binomial-posterior">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Credible interval vs confidence interval?</li><li>When is Bayesian inference especially useful?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li><li><a href="/curriculum/concepts/maximum-likelihood.html">Maximum Likelihood Estimation</a></li><li><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

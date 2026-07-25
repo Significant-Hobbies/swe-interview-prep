@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Evaluation &amp; AI Reliability | SWE Prep</title>
+    <meta name="description" content="LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Evaluation &amp; AI Reliability | SWE Prep">
+    <meta property="og:description" content="LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Evaluation &amp; AI Reliability | SWE Prep">
+    <meta name="twitter:description" content="LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Evaluation & AI Reliability","description":"LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.","url":"https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html","numberOfItems":12,"hasPart":[{"@type":"LearningResource","name":"Prompt & Version Logging","url":"https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html"},{"@type":"LearningResource","name":"LLM Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html"},{"@type":"LearningResource","name":"Model Evaluation","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html"},{"@type":"LearningResource","name":"Coding-agent Benchmarks","url":"https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks.html"},{"@type":"LearningResource","name":"Tool-use Evaluations","url":"https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html"},{"@type":"LearningResource","name":"AI Regression Testing","url":"https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html"},{"@type":"LearningResource","name":"Hallucination & Failure Detection","url":"https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html"},{"@type":"LearningResource","name":"Agent Observability","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html"},{"@type":"LearningResource","name":"Tracing & Replay","url":"https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html"},{"@type":"LearningResource","name":"Evidence-backed Verification","url":"https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html"},{"@type":"LearningResource","name":"Human Review Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html"},{"@type":"LearningResource","name":"Quality, Cost & Latency Measurement","url":"https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 12 concepts</p>
+    <h1>Evaluation &amp; AI Reliability</h1>
+    <p class="lede">LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 12 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Evaluation &amp; AI Reliability, use the track description as the boundary: learn enough detail to reason clearly about llm and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with the core concepts at the top of the list and write a one-paragraph mechanism note for each. Continue through the core concepts by alternating explanation with an executable drill. Use the related concepts and roadmap milestones to integrate the pieces into a complete system.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-reliability-12w.html">12-Week Evaluation &amp; AI Reliability</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/prompt-versioning.html">Prompt &amp; Version Logging</a></h3>
+        <p>Treating prompts as versioned artifacts with logged inputs/outputs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></h3>
+        <p>Measuring LLM output quality with datasets, graders, and LLM-as-judge.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></h3>
+        <p>Held-out loss, baselines, hallucination, leakage.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/coding-agent-benchmarks.html">Coding-agent Benchmarks</a></h3>
+        <p>Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/tool-use-evaluations.html">Tool-use Evaluations</a></h3>
+        <p>Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/ai-regression-testing.html">AI Regression Testing</a></h3>
+        <p>Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/hallucination-failure-detection.html">Hallucination &amp; Failure Detection</a></h3>
+        <p>Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/agent-observability.html">Agent Observability</a></h3>
+        <p>Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/tracing-replay.html">Tracing &amp; Replay</a></h3>
+        <p>Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/evidence-backed-verification.html">Evidence-backed Verification</a></h3>
+        <p>Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/human-review-systems.html">Human Review Systems</a></h3>
+        <p>Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/quality-cost-latency-measurement.html">Quality, Cost &amp; Latency Measurement</a></h3>
+        <p>Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

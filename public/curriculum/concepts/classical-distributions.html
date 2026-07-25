@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classical Distributions | SWE Prep</title>
+    <meta name="description" content="Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Classical Distributions | SWE Prep">
+    <meta property="og:description" content="Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Classical Distributions | SWE Prep">
+    <meta name="twitter:description" content="Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Classical Distributions","description":"Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.","url":"https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Classical Distributions","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Classical Distributions</h1>
+    <p class="lede">Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.</p>
+    <div class="pills"><span>mathematics</span><span>probability</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Distributions are reusable uncertainty templates. Bernoulli/Binomial for yes/no counts; Poisson for rare events in fixed windows; Normal for sums of many small pieces (CLT); Exponential for waiting times between events.</p>
+    </section>
+
+    <section>
+      <h2>How to study Classical Distributions</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Seeing Theory — Probability Distributions, Khan Academy — Random variables &amp; distributions, MIT 18.05 — Probability &amp; Statistics (Spring 2022) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Classical Distributions with Sampling &amp; the Central Limit Theorem, Maximum Likelihood Estimation, Sampling &amp; Decoding. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Match distribution to scenario and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Queue depth modeling, click-through rates, error counts, latency approximations.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Using a Normal model on tiny counts or heavy tails</li><li>Confusing Poisson rate λ with probability</li><li>Applying Binomial when trials are not independent</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://seeing-theory.brown.edu/probability-distributions/index.html" rel="noreferrer">Seeing Theory — Probability Distributions</a> <span class="muted">(article)</span></li><li><a href="https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library" rel="noreferrer">Khan Academy — Random variables &amp; distributions</a> <span class="muted">(course)</span></li><li><a href="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/" rel="noreferrer">MIT 18.05 — Probability &amp; Statistics (Spring 2022)</a> <span class="muted">(course)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Match distribution to scenario</h3>
+          <p>For each scenario, name the best distribution: (1) 10,000 coin flips, count heads. (2) Rare server crashes, ~2 per day. (3) Time until next request in a Poisson stream. (4) Average of 500 independent user latencies.</p>
+          <p><strong>Expected evidence:</strong> (1) Binomial (≈Normal for large n). (2) Poisson. (3) Exponential. (4) Normal for the sample mean (CLT).</p>
+          <a href="/drills/match-distribution-scenario">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>When use Poisson instead of Binomial?</li><li>When is a Normal approximation reasonable for a Binomial?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/sampling-and-clt.html">Sampling &amp; the Central Limit Theorem</a></li><li><a href="/curriculum/concepts/maximum-likelihood.html">Maximum Likelihood Estimation</a></li><li><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

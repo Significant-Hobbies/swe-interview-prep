@@ -3777,6 +3777,1546 @@
       "leetcodeNumber": 190,
       "source": "leetcode-metadata",
       "testCases": []
+    },
+    {
+      "id": "practice-operating-system-mechanics",
+      "title": "Design exercise: Operating System Mechanics",
+      "conceptId": "operating-system-mechanics",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries. Implement designOutline() returning non-empty values for: processModel, memoryModel, ioPath. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with processModel, memoryModel, ioPath plus an explicit failure mode or trade-off.",
+      "hints": [
+        "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"processModel\",\"memoryModel\",\"ioPath\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-network-protocol-engineering",
+      "title": "Design exercise: Network Protocol Engineering",
+      "conceptId": "network-protocol-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols. Implement designOutline() returning non-empty values for: protocolLayers, failureHandling, latencyBudget. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with protocolLayers, failureHandling, latencyBudget plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"protocolLayers\",\"failureHandling\",\"latencyBudget\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-compute-memory-storage-hierarchy",
+      "title": "Design exercise: Compute, Memory & Storage Hierarchy",
+      "conceptId": "compute-memory-storage-hierarchy",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them. Implement designOutline() returning non-empty values for: workingSet, dataMovement, bottleneck. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with workingSet, dataMovement, bottleneck plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"workingSet\",\"dataMovement\",\"bottleneck\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-runtime-performance-engineering",
+      "title": "Design exercise: Runtime & Performance Engineering",
+      "conceptId": "runtime-performance-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency. Implement designOutline() returning non-empty values for: workload, profile, measurement. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with workload, profile, measurement plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"workload\",\"profile\",\"measurement\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-security-isolation-boundaries",
+      "title": "Design exercise: Security & Isolation Boundaries",
+      "conceptId": "security-isolation-boundaries",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults. Implement designOutline() returning non-empty values for: threatModel, trustBoundary, leastPrivilege. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with threatModel, trustBoundary, leastPrivilege plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"threatModel\",\"trustBoundary\",\"leastPrivilege\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-cloud-infrastructure",
+      "title": "Design exercise: Cloud Infrastructure",
+      "conceptId": "cloud-infrastructure",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes. Implement designOutline() returning non-empty values for: failureDomains, statePlacement, recoveryPlan. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with failureDomains, statePlacement, recoveryPlan plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"failureDomains\",\"statePlacement\",\"recoveryPlan\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-containers-kubernetes",
+      "title": "Design exercise: Containers & Kubernetes",
+      "conceptId": "containers-kubernetes",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage. Implement designOutline() returning non-empty values for: isolationPrimitive, desiredState, reconciliation. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with isolationPrimitive, desiredState, reconciliation plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"isolationPrimitive\",\"desiredState\",\"reconciliation\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-cicd-developer-environments",
+      "title": "Design exercise: CI/CD & Developer Environments",
+      "conceptId": "cicd-developer-environments",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback. Implement designOutline() returning non-empty values for: reproducibleBuild, qualityGates, rollback. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with reproducibleBuild, qualityGates, rollback plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"reproducibleBuild\",\"qualityGates\",\"rollback\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-platform-scheduling-orchestration",
+      "title": "Design exercise: Scheduling & Orchestration",
+      "conceptId": "platform-scheduling-orchestration",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops. Implement designOutline() returning non-empty values for: resourceModel, placementPolicy, fairness. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with resourceModel, placementPolicy, fairness plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"resourceModel\",\"placementPolicy\",\"fairness\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-reliability-fault-tolerance",
+      "title": "Design exercise: Reliability & Fault Tolerance",
+      "conceptId": "reliability-fault-tolerance",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design. Implement designOutline() returning non-empty values for: slo, failureDomain, degradationMode. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with slo, failureDomain, degradationMode plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"slo\",\"failureDomain\",\"degradationMode\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-opentelemetry-observability",
+      "title": "Design exercise: Observability & OpenTelemetry",
+      "conceptId": "opentelemetry-observability",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines. Implement designOutline() returning non-empty values for: signals, contextPropagation, sampling. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with signals, contextPropagation, sampling plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"signals\",\"contextPropagation\",\"sampling\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-sandbox-execution-environments",
+      "title": "Design exercise: Sandboxes & Execution Environments",
+      "conceptId": "sandbox-execution-environments",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution. Implement designOutline() returning non-empty values for: threatModel, capabilities, resourceLimits. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with threatModel, capabilities, resourceLimits plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"threatModel\",\"capabilities\",\"resourceLimits\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-infrastructure-automation",
+      "title": "Design exercise: Infrastructure Automation",
+      "conceptId": "infrastructure-automation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes. Implement designOutline() returning non-empty values for: desiredState, driftDetection, changeSafety. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with desiredState, driftDetection, changeSafety plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"desiredState\",\"driftDetection\",\"changeSafety\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-event-streaming-kafka",
+      "title": "Design exercise: Event Streaming & Kafka",
+      "conceptId": "event-streaming-kafka",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing. Implement designOutline() returning non-empty values for: partitioning, deliverySemantics, consumerRecovery. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with partitioning, deliverySemantics, consumerRecovery plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"partitioning\",\"deliverySemantics\",\"consumerRecovery\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-distributed-workflows-temporal",
+      "title": "Design exercise: Distributed Workflows & Temporal",
+      "conceptId": "distributed-workflows-temporal",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows. Implement designOutline() returning non-empty values for: workflowHistory, deterministicReplay, activityIdempotency. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with workflowHistory, deterministicReplay, activityIdempotency plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"workflowHistory\",\"deterministicReplay\",\"activityIdempotency\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-distributed-failure-recovery",
+      "title": "Design exercise: Distributed Failure Recovery",
+      "conceptId": "distributed-failure-recovery",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery. Implement designOutline() returning non-empty values for: failureDetection, duplicateControl, repairPath. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with failureDetection, duplicateControl, repairPath plus an explicit failure mode or trade-off.",
+      "hints": [
+        "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"failureDetection\",\"duplicateControl\",\"repairPath\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-transaction-processing",
+      "title": "Design exercise: Transaction Processing",
+      "conceptId": "transaction-processing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery. Implement designOutline() returning non-empty values for: isolationLevel, concurrencyControl, commitRecovery. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with isolationLevel, concurrencyControl, commitRecovery plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"isolationLevel\",\"concurrencyControl\",\"commitRecovery\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-query-execution-optimization",
+      "title": "Design exercise: Query Execution & Optimization",
+      "conceptId": "query-execution-optimization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling. Implement designOutline() returning non-empty values for: logicalPlan, costModel, physicalExecution. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with logicalPlan, costModel, physicalExecution plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"logicalPlan\",\"costModel\",\"physicalExecution\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-warehouses-lakehouses",
+      "title": "Design exercise: Data Warehouses & Lakehouses",
+      "conceptId": "warehouses-lakehouses",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture. Implement designOutline() returning non-empty values for: storageFormat, metadataLayer, queryExecution. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with storageFormat, metadataLayer, queryExecution plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"storageFormat\",\"metadataLayer\",\"queryExecution\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-ml-pretraining",
+      "title": "Design exercise: Model Pre-training",
+      "conceptId": "ml-pretraining",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability. Implement designOutline() returning non-empty values for: dataMixture, trainingLoop, scalingPlan. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with dataMixture, trainingLoop, scalingPlan plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"dataMixture\",\"trainingLoop\",\"scalingPlan\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-model-quantization",
+      "title": "Design exercise: Model Quantization",
+      "conceptId": "model-quantization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs. Implement designOutline() returning non-empty values for: numericFormat, calibration, qualityGate. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with numericFormat, calibration, qualityGate plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"numericFormat\",\"calibration\",\"qualityGate\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-open-weight-models",
+      "title": "Design exercise: Open-Weight Models",
+      "conceptId": "open-weight-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging. Implement designOutline() returning non-empty values for: license, provenance, runtimeFit. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with license, provenance, runtimeFit plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"license\",\"provenance\",\"runtimeFit\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-inference-engines",
+      "title": "Design exercise: vLLM & Inference Engines",
+      "conceptId": "inference-engines",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture. Implement designOutline() returning non-empty values for: requestScheduler, memoryManager, executionBackend. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with requestScheduler, memoryManager, executionBackend plus an explicit failure mode or trade-off.",
+      "hints": [
+        "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"requestScheduler\",\"memoryManager\",\"executionBackend\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-continuous-batching",
+      "title": "Design exercise: Continuous Batching",
+      "conceptId": "continuous-batching",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness. Implement designOutline() returning non-empty values for: admissionPolicy, prefillDecode, fairness. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with admissionPolicy, prefillDecode, fairness plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"admissionPolicy\",\"prefillDecode\",\"fairness\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-kv-cache-paged-attention",
+      "title": "Design exercise: KV Caching & PagedAttention",
+      "conceptId": "kv-cache-paged-attention",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure. Implement designOutline() returning non-empty values for: cacheSizing, pageMapping, evictionPolicy. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with cacheSizing, pageMapping, evictionPolicy plus an explicit failure mode or trade-off.",
+      "hints": [
+        "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"cacheSizing\",\"pageMapping\",\"evictionPolicy\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-flashattention-kernels",
+      "title": "Design exercise: FlashAttention & Attention Kernels",
+      "conceptId": "flashattention-kernels",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention. Implement designOutline() returning non-empty values for: memoryTraffic, tiling, numericalStability. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with memoryTraffic, tiling, numericalStability plus an explicit failure mode or trade-off.",
+      "hints": [
+        "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"memoryTraffic\",\"tiling\",\"numericalStability\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-speculative-decoding",
+      "title": "Design exercise: Speculative Decoding",
+      "conceptId": "speculative-decoding",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation. Implement designOutline() returning non-empty values for: draftStrategy, verification, acceptanceRate. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with draftStrategy, verification, acceptanceRate plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"draftStrategy\",\"verification\",\"acceptanceRate\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-gpu-utilization",
+      "title": "Design exercise: GPU Utilization",
+      "conceptId": "gpu-utilization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation. Implement designOutline() returning non-empty values for: profile, bottleneckClass, saturationPlan. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with profile, bottleneckClass, saturationPlan plus an explicit failure mode or trade-off.",
+      "hints": [
+        "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"profile\",\"bottleneckClass\",\"saturationPlan\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-inference-cost-latency",
+      "title": "Design exercise: Inference Cost & Latency Optimization",
+      "conceptId": "inference-cost-latency",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request. Implement designOutline() returning non-empty values for: workload, latencyBreakdown, costModel. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with workload, latencyBreakdown, costModel plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"workload\",\"latencyBreakdown\",\"costModel\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-local-on-device-inference",
+      "title": "Design exercise: Local & On-device Inference",
+      "conceptId": "local-on-device-inference",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory. Implement designOutline() returning non-empty values for: modelFormat, memoryBudget, deviceFallback. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with modelFormat, memoryBudget, deviceFallback plus an explicit failure mode or trade-off.",
+      "hints": [
+        "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"modelFormat\",\"memoryBudget\",\"deviceFallback\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-inference-hardware",
+      "title": "Design exercise: Inference Hardware",
+      "conceptId": "inference-hardware",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit. Implement designOutline() returning non-empty values for: modelFit, memoryBandwidth, topology. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with modelFit, memoryBandwidth, topology plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"modelFit\",\"memoryBandwidth\",\"topology\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-agent-memory-context",
+      "title": "Design exercise: Agent Memory & Context Management",
+      "conceptId": "agent-memory-context",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting. Implement designOutline() returning non-empty values for: memoryLayers, retrievalPolicy, provenance. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with memoryLayers, retrievalPolicy, provenance plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"memoryLayers\",\"retrievalPolicy\",\"provenance\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-mcp-integrations",
+      "title": "Design exercise: MCP & Integrations",
+      "conceptId": "mcp-integrations",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust. Implement designOutline() returning non-empty values for: capabilities, transport, trustBoundary. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with capabilities, transport, trustBoundary plus an explicit failure mode or trade-off.",
+      "hints": [
+        "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"capabilities\",\"transport\",\"trustBoundary\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-multi-agent-coordination",
+      "title": "Design exercise: Multi-agent Coordination",
+      "conceptId": "multi-agent-coordination",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead. Implement designOutline() returning non-empty values for: taskDecomposition, sharedState, conflictResolution. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with taskDecomposition, sharedState, conflictResolution plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"taskDecomposition\",\"sharedState\",\"conflictResolution\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-durable-agent-execution",
+      "title": "Design exercise: Durable Agent Execution",
+      "conceptId": "durable-agent-execution",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery. Implement designOutline() returning non-empty values for: checkpoint, idempotency, resumeProtocol. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with checkpoint, idempotency, resumeProtocol plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"checkpoint\",\"idempotency\",\"resumeProtocol\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-agent-permissions-sandboxing",
+      "title": "Design exercise: Agent Permissions & Sandboxing",
+      "conceptId": "agent-permissions-sandboxing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs. Implement designOutline() returning non-empty values for: capabilityScope, approvalGate, auditTrail. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with capabilityScope, approvalGate, auditTrail plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"capabilityScope\",\"approvalGate\",\"auditTrail\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-browser-computer-use-agents",
+      "title": "Design exercise: Browser & Computer-use Agents",
+      "conceptId": "browser-computer-use-agents",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation. Implement designOutline() returning non-empty values for: observation, boundedAction, stateVerification. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with observation, boundedAction, stateVerification plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"observation\",\"boundedAction\",\"stateVerification\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-agent-communication-interfaces",
+      "title": "Design exercise: Agent Communication & Interfaces",
+      "conceptId": "agent-communication-interfaces",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status. Implement designOutline() returning non-empty values for: messageSchema, statusModel, provenance. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with messageSchema, statusModel, provenance plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"messageSchema\",\"statusModel\",\"provenance\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-long-running-scheduled-agents",
+      "title": "Design exercise: Long-running & Scheduled Agents",
+      "conceptId": "long-running-scheduled-agents",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets. Implement designOutline() returning non-empty values for: trigger, leaseHeartbeat, budget. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with trigger, leaseHeartbeat, budget plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"trigger\",\"leaseHeartbeat\",\"budget\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-coding-agent-benchmarks",
+      "title": "Design exercise: Coding-agent Benchmarks",
+      "conceptId": "coding-agent-benchmarks",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity. Implement designOutline() returning non-empty values for: taskDistribution, environment, verifier. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with taskDistribution, environment, verifier plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"taskDistribution\",\"environment\",\"verifier\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-tool-use-evaluations",
+      "title": "Design exercise: Tool-use Evaluations",
+      "conceptId": "tool-use-evaluations",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification. Implement designOutline() returning non-empty values for: toolChoice, trajectory, endState. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with toolChoice, trajectory, endState plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"toolChoice\",\"trajectory\",\"endState\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-ai-regression-testing",
+      "title": "Design exercise: AI Regression Testing",
+      "conceptId": "ai-regression-testing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates. Implement designOutline() returning non-empty values for: evalSet, graderVersion, releaseThreshold. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with evalSet, graderVersion, releaseThreshold plus an explicit failure mode or trade-off.",
+      "hints": [
+        "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"evalSet\",\"graderVersion\",\"releaseThreshold\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-hallucination-failure-detection",
+      "title": "Design exercise: Hallucination & Failure Detection",
+      "conceptId": "hallucination-failure-detection",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation. Implement designOutline() returning non-empty values for: evidenceCheck, constraintCheck, escalation. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with evidenceCheck, constraintCheck, escalation plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"evidenceCheck\",\"constraintCheck\",\"escalation\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-agent-observability",
+      "title": "Design exercise: Agent Observability",
+      "conceptId": "agent-observability",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics. Implement designOutline() returning non-empty values for: runIdentity, stepSpans, redaction. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with runIdentity, stepSpans, redaction plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"runIdentity\",\"stepSpans\",\"redaction\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-tracing-replay",
+      "title": "Design exercise: Tracing & Replay",
+      "conceptId": "tracing-replay",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution. Implement designOutline() returning non-empty values for: capturedInputs, versionPins, replayMode. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with capturedInputs, versionPins, replayMode plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"capturedInputs\",\"versionPins\",\"replayMode\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-evidence-backed-verification",
+      "title": "Design exercise: Evidence-backed Verification",
+      "conceptId": "evidence-backed-verification",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria. Implement designOutline() returning non-empty values for: acceptanceCriteria, evidence, inferenceBoundary. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with acceptanceCriteria, evidence, inferenceBoundary plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"acceptanceCriteria\",\"evidence\",\"inferenceBoundary\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-human-review-systems",
+      "title": "Design exercise: Human Review Systems",
+      "conceptId": "human-review-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections. Implement designOutline() returning non-empty values for: riskRouting, reviewRubric, feedbackLoop. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with riskRouting, reviewRubric, feedbackLoop plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"riskRouting\",\"reviewRubric\",\"feedbackLoop\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-quality-cost-latency-measurement",
+      "title": "Design exercise: Quality, Cost & Latency Measurement",
+      "conceptId": "quality-cost-latency-measurement",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers. Implement designOutline() returning non-empty values for: qualityMetric, costMetric, latencyMetric. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with qualityMetric, costMetric, latencyMetric plus an explicit failure mode or trade-off.",
+      "hints": [
+        "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"qualityMetric\",\"costMetric\",\"latencyMetric\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-code-review-systems",
+      "title": "Design exercise: Code Review Systems",
+      "conceptId": "code-review-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings. Implement designOutline() returning non-empty values for: changeIntent, riskFinding, actionableEvidence. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with changeIntent, riskFinding, actionableEvidence plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"changeIntent\",\"riskFinding\",\"actionableEvidence\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-static-dynamic-analysis",
+      "title": "Design exercise: Static & Dynamic Analysis",
+      "conceptId": "static-dynamic-analysis",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation. Implement designOutline() returning non-empty values for: programModel, analysisRule, runtimeEvidence. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with programModel, analysisRule, runtimeEvidence plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"programModel\",\"analysisRule\",\"runtimeEvidence\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-testing-infrastructure",
+      "title": "Design exercise: Testing Infrastructure",
+      "conceptId": "testing-infrastructure",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control. Implement designOutline() returning non-empty values for: testBoundary, hermeticEnvironment, failureDiagnostics. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with testBoundary, hermeticEnvironment, failureDiagnostics plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"testBoundary\",\"hermeticEnvironment\",\"failureDiagnostics\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-codebase-graphs",
+      "title": "Design exercise: Codebase Graphs",
+      "conceptId": "codebase-graphs",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories. Implement designOutline() returning non-empty values for: nodeIdentity, edgeTypes, incrementalUpdate. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with nodeIdentity, edgeTypes, incrementalUpdate plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"nodeIdentity\",\"edgeTypes\",\"incrementalUpdate\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-dependency-blast-radius",
+      "title": "Design exercise: Dependency & Blast-radius Analysis",
+      "conceptId": "dependency-blast-radius",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk. Implement designOutline() returning non-empty values for: dependencyGraph, affectedSet, riskPrioritization. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with dependencyGraph, affectedSet, riskPrioritization plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"dependencyGraph\",\"affectedSet\",\"riskPrioritization\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-ide-cli-tooling",
+      "title": "Design exercise: IDE & CLI Tooling",
+      "conceptId": "ide-cli-tooling",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation. Implement designOutline() returning non-empty values for: protocol, feedbackLoop, automationContract. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with protocol, feedbackLoop, automationContract plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"protocol\",\"feedbackLoop\",\"automationContract\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-coding-agent-systems",
+      "title": "Design exercise: Coding Agent Systems",
+      "conceptId": "coding-agent-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery. Implement designOutline() returning non-empty values for: repoContext, editLoop, verification. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with repoContext, editLoop, verification plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"repoContext\",\"editLoop\",\"verification\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-repository-intelligence",
+      "title": "Design exercise: Repository Intelligence",
+      "conceptId": "repository-intelligence",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval. Implement designOutline() returning non-empty values for: index, retrieval, contextAssembly. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with index, retrieval, contextAssembly plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"index\",\"retrieval\",\"contextAssembly\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-software-supply-chain-health",
+      "title": "Design exercise: Software Supply-chain Health",
+      "conceptId": "software-supply-chain-health",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations. Implement designOutline() returning non-empty values for: provenance, dependencyPolicy, artifactVerification. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with provenance, dependencyPolicy, artifactVerification plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"provenance\",\"dependencyPolicy\",\"artifactVerification\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-automated-debugging-remediation",
+      "title": "Design exercise: Automated Debugging & Remediation",
+      "conceptId": "automated-debugging-remediation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning. Implement designOutline() returning non-empty values for: reproduction, faultLocalization, patchVerification. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with reproduction, faultLocalization, patchVerification plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"reproduction\",\"faultLocalization\",\"patchVerification\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-web-mobile-engineering",
+      "title": "Design exercise: Web & Mobile Engineering",
+      "conceptId": "web-mobile-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints. Implement designOutline() returning non-empty values for: lifecycle, stateModel, offlineFallback. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with lifecycle, stateModel, offlineFallback plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"lifecycle\",\"stateModel\",\"offlineFallback\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-ux-interface-design",
+      "title": "Design exercise: UX & Interface Design",
+      "conceptId": "ux-interface-design",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems. Implement designOutline() returning non-empty values for: userGoal, interactionStates, accessibility. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with userGoal, interactionStates, accessibility plus an explicit failure mode or trade-off.",
+      "hints": [
+        "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"userGoal\",\"interactionStates\",\"accessibility\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-real-time-application-engineering",
+      "title": "Design exercise: Real-time Application Engineering",
+      "conceptId": "real-time-application-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling. Implement designOutline() returning non-empty values for: connectionLifecycle, ordering, reconciliation. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with connectionLifecycle, ordering, reconciliation plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"connectionLifecycle\",\"ordering\",\"reconciliation\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-interactive-2d-3d-systems",
+      "title": "Design exercise: 2D/3D Interactive Systems",
+      "conceptId": "interactive-2d-3d-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets. Implement designOutline() returning non-empty values for: sceneState, renderLoop, frameBudget. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with sceneState, renderLoop, frameBudget plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"sceneState\",\"renderLoop\",\"frameBudget\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-multimodal-models",
+      "title": "Design exercise: Multimodal Models",
+      "conceptId": "multimodal-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation. Implement designOutline() returning non-empty values for: modalityEncoders, fusion, crossModalEval. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with modalityEncoders, fusion, crossModalEval plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"modalityEncoders\",\"fusion\",\"crossModalEval\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-vision-models",
+      "title": "Design exercise: Vision Models",
+      "conceptId": "vision-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation. Implement designOutline() returning non-empty values for: taskDefinition, representation, visualEval. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with taskDefinition, representation, visualEval plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"taskDefinition\",\"representation\",\"visualEval\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-pose-motion-tracking",
+      "title": "Design exercise: Pose & Motion Tracking",
+      "conceptId": "pose-motion-tracking",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency. Implement designOutline() returning non-empty values for: landmarks, temporalTracking, occlusionHandling. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with landmarks, temporalTracking, occlusionHandling plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"landmarks\",\"temporalTracking\",\"occlusionHandling\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-voice-audio-systems",
+      "title": "Design exercise: Voice & Audio Systems",
+      "conceptId": "voice-audio-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX. Implement designOutline() returning non-empty values for: audioPipeline, turnDetection, latencyBudget. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with audioPipeline, turnDetection, latencyBudget plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"audioPipeline\",\"turnDetection\",\"latencyBudget\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-image-video-generation",
+      "title": "Design exercise: Image & Video Generation",
+      "conceptId": "image-video-generation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation. Implement designOutline() returning non-empty values for: conditioning, generationProcess, qualityEval. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with conditioning, generationProcess, qualityEval plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"conditioning\",\"generationProcess\",\"qualityEval\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-robotics-systems",
+      "title": "Design exercise: Robotics Systems",
+      "conceptId": "robotics-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces. Implement designOutline() returning non-empty values for: perception, planningControl, safety. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with perception, planningControl, safety plus an explicit failure mode or trade-off.",
+      "hints": [
+        "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"perception\",\"planningControl\",\"safety\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-spatial-interfaces",
+      "title": "Design exercise: Spatial Interfaces",
+      "conceptId": "spatial-interfaces",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI. Implement designOutline() returning non-empty values for: coordinateSystem, tracking, spatialInteraction. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with coordinateSystem, tracking, spatialInteraction plus an explicit failure mode or trade-off.",
+      "hints": [
+        "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"coordinateSystem\",\"tracking\",\"spatialInteraction\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-human-computer-interaction",
+      "title": "Design exercise: Human-Computer Interaction",
+      "conceptId": "human-computer-interaction",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "prompt": "Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design. Implement designOutline() returning non-empty values for: userContext, interactionTechnique, evaluation. Each value must name a concrete mechanism or decision.",
+      "expectedOutput": "A design outline with userContext, interactionTechnique, evaluation plus an explicit failure mode or trade-off.",
+      "hints": [
+        "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
+        "Name the failure mode before selecting the mechanism."
+      ],
+      "solutionNotes": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
+      "testCases": [
+        {
+          "setup": "function validateOutline(o, keys) {\n  return Boolean(o && typeof o === 'object' && keys.every((key) => typeof o[key] === 'string' && o[key].trim().length > 0));\n}",
+          "run": "console.log(validateOutline(designOutline(), [\"userContext\",\"interactionTechnique\",\"evaluation\"]));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

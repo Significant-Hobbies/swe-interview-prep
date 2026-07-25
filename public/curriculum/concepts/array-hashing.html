@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arrays &amp; Hashing | SWE Prep</title>
+    <meta name="description" content="Hash maps, sets, frequency counting. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Arrays &amp; Hashing | SWE Prep">
+    <meta property="og:description" content="Hash maps, sets, frequency counting. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arrays &amp; Hashing | SWE Prep">
+    <meta name="twitter:description" content="Hash maps, sets, frequency counting. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Arrays & Hashing","description":"Hash maps, sets, frequency counting.","url":"https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html","educationalLevel":"intro","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Arrays & Hashing","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/dsa.html">DSA &amp; Implementation</a></nav>
+      <article>
+    <p class="eyebrow">DSA &amp; Implementation · intro</p>
+    <h1>Arrays &amp; Hashing</h1>
+    <p class="lede">Hash maps, sets, frequency counting.</p>
+    <div class="pills"><span>dsa</span><span>arrays-hashing</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A hash map trades memory for time: it turns an O(n) scan for &quot;have I seen this?&quot; into an O(1) lookup. Most array problems that feel quadratic collapse to linear once you ask what you would store in a map keyed by value, complement, or frequency.</p>
+    </section>
+
+    <section>
+      <h2>How to study Arrays &amp; Hashing</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Hash table (Wikipedia) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Arrays &amp; Hashing with Two Pointers. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Two Sum with a hash map, Two Sum, Contains Duplicate and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Reaching for nested loops before asking &quot;what would a hash map key on?&quot;</li><li>Mutating a collection while iterating it</li><li>Forgetting hash maps have no order — sort separately if order matters</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://en.wikipedia.org/wiki/Hash_table" rel="noreferrer">Hash table (Wikipedia)</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Two Sum with a hash map</h3>
+          <p>Given an array of integers and a target, return the indices of the two numbers that add to the target. Solve it in a single pass.</p>
+          <p><strong>Expected evidence:</strong> twoSum([2,7,11,15], 9) -&gt; [0,1]</p>
+          <a href="/drills/two-sum-hashmap">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Two Sum</h3>
+          <p>LeetCode #1 — Two Sum. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/two-sum/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-two-sum">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Contains Duplicate</h3>
+          <p>LeetCode #217 — Contains Duplicate. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/contains-duplicate/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-contains-duplicate">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Product of Array Except Self</h3>
+          <p>LeetCode #238 — Product of Array Except Self. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/product-of-array-except-self/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-product-of-array-except-self">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Group Anagrams</h3>
+          <p>LeetCode #49 — Group Anagrams. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/group-anagrams/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-group-anagrams">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Merge Intervals</h3>
+          <p>LeetCode #56 — Merge Intervals. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/merge-intervals/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-merge-intervals">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Rotting Oranges</h3>
+          <p>LeetCode #1036 — Rotting Oranges. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/rotting-oranges/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-rotting-oranges">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Arrays &amp; Hashing and name one common mistake: &quot;Reaching for nested loops before asking &quot;what would a hash map key on?&quot;…&quot;</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/two-pointers.html">Two Pointers</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/dsa-practice.html">DSA Practice</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

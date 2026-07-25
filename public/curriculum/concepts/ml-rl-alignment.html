@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RL Alignment (GRPO &amp; Policy Gradient) | SWE Prep</title>
+    <meta name="description" content="Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="RL Alignment (GRPO &amp; Policy Gradient) | SWE Prep">
+    <meta property="og:description" content="Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RL Alignment (GRPO &amp; Policy Gradient) | SWE Prep">
+    <meta name="twitter:description" content="Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"RL Alignment (GRPO & Policy Gradient)","description":"Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"RL Alignment (GRPO & Policy Gradient)","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · advanced</p>
+    <h1>RL Alignment (GRPO &amp; Policy Gradient)</h1>
+    <p class="lede">Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.</p>
+    <div class="pills"><span>ai-systems</span><span>training</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Post-training RL treats the LM as a policy: sample completions, score them with a reward model, then nudge token probabilities toward high-reward outputs. GRPO compares completions within a group (relative advantages) and reuses rollouts with importance sampling + clipping so training stays stable off-policy.</p>
+    </section>
+
+    <section>
+      <h2>How to study RL Alignment (GRPO &amp; Policy Gradient)</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Lightweight GRPO &amp; RL intro (Murali), Policy Gradient for LMs — RL101 notes (Hamish Ivison), Stanford CS336 — L15 Alignment: SFT &amp; RLHF (Spring 2025) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare RL Alignment (GRPO &amp; Policy Gradient) with Model Evaluation, Training &amp; Debugging. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete GRPO group-relative advantage and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://gitlostmurali.com/blog/grpo-intro/" rel="noreferrer">Lightweight GRPO &amp; RL intro (Murali)</a> <span class="muted">(article)</span></li><li><a href="https://ivison.id.au/2026/02/09/policy-gradient.html" rel="noreferrer">Policy Gradient for LMs — RL101 notes (Hamish Ivison)</a> <span class="muted">(article)</span></li><li><a href="https://github.com/stanford-cs336/spring2025-lectures/blob/61eddac004df975466cff0329b615f2d24230069/nonexecutable/2025%20Lecture%2015%20-%20RLHF%20Alignment.pdf" rel="noreferrer">Stanford CS336 — L15 Alignment: SFT &amp; RLHF (Spring 2025)</a> <span class="muted">(paper)</span></li><li><a href="https://github.com/stanford-cs336/assignment5-alignment" rel="noreferrer">CS336 Assignment 5 — Alignment &amp; reasoning RL</a> <span class="muted">(doc)</span></li><li><a href="https://lilianweng.github.io/posts/2018-04-08-policy-gradient/" rel="noreferrer">Lilian Weng — Policy Gradient Algorithms</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>GRPO group-relative advantage</h3>
+          <p>Four completions with rewards [1.0, 0.5, 0.8, 0.3]. Mean μ=0.65, population std σ≈0.269. What is the normalized advantage for the top completion (1.0)?</p>
+          <p><strong>Expected evidence:</strong> (1.0 − 0.65) / 0.269 ≈ 1.30 — GRPO upweights this rollout relative to the group.</p>
+          <a href="/drills/ml-grpo-group-advantage">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain GRPO-style RL alignment in your own words. Why use group-relative advantages and importance sampling?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: AI Models &amp; Training</h3>
+          <p>Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-lora.html">LoRA &amp; PEFT</a></li><li><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></li><li><a href="/curriculum/concepts/ml-training.html">Training &amp; Debugging</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

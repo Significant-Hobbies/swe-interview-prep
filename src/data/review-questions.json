@@ -1352,6 +1352,706 @@
       "difficulty": "core",
       "question": "Explain Product Analytics in your own words. What problem does it solve and where is it used?",
       "answer": "Good analytics looks like a small tree: one north-star metric that captures the value users get, two or three input metrics that drive it, and one guardrail you must not regress on. If a PM cannot make a tradeoff from this tree alone, the tree is wrong."
+    },
+    {
+      "id": "rq-operating-system-mechanics",
+      "conceptId": "operating-system-mechanics",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Operating System Mechanics?",
+      "answer": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-network-protocol-engineering",
+      "conceptId": "network-protocol-engineering",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Network Protocol Engineering?",
+      "answer": "Networks are layered state machines under delay, loss, duplication, and reordering. Reliability comes from explicit framing, identity, timeouts, congestion control, and retry semantics.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-compute-memory-storage-hierarchy",
+      "conceptId": "compute-memory-storage-hierarchy",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Compute, Memory & Storage Hierarchy?",
+      "answer": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-runtime-performance-engineering",
+      "conceptId": "runtime-performance-engineering",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Runtime & Performance Engineering?",
+      "answer": "Performance work starts with a workload and a profile. Optimize the dominant resource, preserve correctness, and measure throughput, tail latency, memory, and cost together.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-security-isolation-boundaries",
+      "conceptId": "security-isolation-boundaries",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Security & Isolation Boundaries?",
+      "answer": "Security is control over authority and information flow. Define the adversary, minimize ambient privilege, isolate tenants, validate boundaries, and fail closed.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-cloud-infrastructure",
+      "conceptId": "cloud-infrastructure",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Cloud Infrastructure?",
+      "answer": "Cloud systems are distributed resource managers with failure domains. Architecture should make placement, identity, state ownership, and regional recovery explicit.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-containers-kubernetes",
+      "conceptId": "containers-kubernetes",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Containers & Kubernetes?",
+      "answer": "A container is an isolated process; Kubernetes is a reconciliation system that continuously drives observed state toward declared state.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-cicd-developer-environments",
+      "conceptId": "cicd-developer-environments",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing CI/CD & Developer Environments?",
+      "answer": "A delivery pipeline converts source into a traceable artifact through reproducible gates. Promotion should move the same artifact, not rebuild it differently in each environment.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-platform-scheduling-orchestration",
+      "conceptId": "platform-scheduling-orchestration",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Scheduling & Orchestration?",
+      "answer": "Schedulers match constrained work to finite resources. Good orchestration separates desired state, placement policy, execution, observation, and correction.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-reliability-fault-tolerance",
+      "conceptId": "reliability-fault-tolerance",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Reliability & Fault Tolerance?",
+      "answer": "Reliability is a measurable product property. Define an SLO, budget failure, isolate fault domains, shed optional work, and test recovery before incidents.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-opentelemetry-observability",
+      "conceptId": "opentelemetry-observability",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Observability & OpenTelemetry?",
+      "answer": "Observability reconstructs a request across boundaries. OpenTelemetry standardizes signals and context so instrumentation is portable and correlations survive service hops.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-sandbox-execution-environments",
+      "conceptId": "sandbox-execution-environments",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Sandboxes & Execution Environments?",
+      "answer": "A sandbox is a capability boundary plus resource accounting. Isolation strength, startup cost, syscall surface, and density must match the threat model.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-infrastructure-automation",
+      "conceptId": "infrastructure-automation",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Infrastructure Automation?",
+      "answer": "Infrastructure automation is a convergent state machine. Desired configuration, observed state, diff, approval, and rollback must all be inspectable.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-event-streaming-kafka",
+      "conceptId": "event-streaming-kafka",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Event Streaming & Kafka?",
+      "answer": "Kafka turns an append-only log into a coordination boundary. Ordering is per partition, progress is an offset, and consumers own replay and idempotency.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-distributed-workflows-temporal",
+      "conceptId": "distributed-workflows-temporal",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Distributed Workflows & Temporal?",
+      "answer": "A durable workflow persists decisions as history and replays deterministic code after failure. Side effects live in retryable activities with explicit idempotency.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-distributed-failure-recovery",
+      "conceptId": "distributed-failure-recovery",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Distributed Failure Recovery?",
+      "answer": "In a distributed system, failure is ambiguous. Recovery needs bounded retries, unique operation identity, stale-writer fencing, repair mechanisms, and tested restore objectives.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-transaction-processing",
+      "conceptId": "transaction-processing",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Transaction Processing?",
+      "answer": "A transaction provides an illusion over concurrency and failure. Isolation defines which histories are legal; logging and commit protocols decide what survives.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-query-execution-optimization",
+      "conceptId": "query-execution-optimization",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Query Execution & Optimization?",
+      "answer": "A query optimizer searches physical plans using imperfect estimates. Execution quality depends on access paths, join order, memory budgets, and fallback under estimation error.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-warehouses-lakehouses",
+      "conceptId": "warehouses-lakehouses",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Data Warehouses & Lakehouses?",
+      "answer": "Warehouses optimize governed analytical execution; lakehouses place open table metadata over object storage. Both depend on pruning, columnar scans, and reliable metadata.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-ml-pretraining",
+      "conceptId": "ml-pretraining",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Model Pre-training?",
+      "answer": "Pre-training converts data and compute into general capability. The core loop is data sampling, forward/backward passes, optimizer updates, checkpointing, and continuous loss/quality diagnosis.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-model-quantization",
+      "conceptId": "model-quantization",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Model Quantization?",
+      "answer": "Quantization stores and computes approximate weights or activations with fewer bits. The serving win is real only when hardware kernels support the format and evals bound quality loss.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-open-weight-models",
+      "conceptId": "open-weight-models",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Open-Weight Models?",
+      "answer": "Open weights provide inspectable parameters, not automatically open data or unrestricted rights. Selection must include license, provenance, tokenizer, template, eval, and hardware fit.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-inference-engines",
+      "conceptId": "inference-engines",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing vLLM & Inference Engines?",
+      "answer": "An inference engine is a runtime: it schedules requests, owns model and KV memory, dispatches kernels, exposes metrics, and enforces admission control.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-continuous-batching",
+      "conceptId": "continuous-batching",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Continuous Batching?",
+      "answer": "Continuous batching changes the batch after each decoding step, filling freed slots without waiting for the slowest request. Throughput improves at the cost of scheduler complexity.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-kv-cache-paged-attention",
+      "conceptId": "kv-cache-paged-attention",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing KV Caching & PagedAttention?",
+      "answer": "The KV cache trades memory for avoided recomputation. PagedAttention maps logical token blocks to non-contiguous physical pages so variable-length requests waste less memory.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-flashattention-kernels",
+      "conceptId": "flashattention-kernels",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing FlashAttention & Attention Kernels?",
+      "answer": "FlashAttention is exact attention reorganized around the memory hierarchy. Tiling and fusion reduce expensive HBM traffic without materializing the full attention matrix.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-speculative-decoding",
+      "conceptId": "speculative-decoding",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Speculative Decoding?",
+      "answer": "A cheap draft proposes several tokens and the target model verifies them in parallel. Speedup depends on acceptance rate and verification cost while preserving the target distribution.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-gpu-utilization",
+      "conceptId": "gpu-utilization",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing GPU Utilization?",
+      "answer": "GPU utilization is not one percentage. Profile kernel occupancy, memory bandwidth, queue gaps, communication, and batch shape to find whether the workload is compute-, memory-, or launch-bound.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-inference-cost-latency",
+      "conceptId": "inference-cost-latency",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Inference Cost & Latency Optimization?",
+      "answer": "Serving optimization is a constrained frontier: quality, TTFT, token latency, throughput, availability, and cost must be measured on the same representative workload.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-local-on-device-inference",
+      "conceptId": "local-on-device-inference",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Local & On-device Inference?",
+      "answer": "On-device inference trades cloud elasticity for privacy, offline latency, and strict memory/energy budgets. Model format, quantization, kernels, and thermal limits become product constraints.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-inference-hardware",
+      "conceptId": "inference-hardware",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Inference Hardware?",
+      "answer": "Inference hardware is a memory-and-interconnect system around matrix engines. Choose by model fit, precision, bandwidth, topology, power, software support, and workload shape.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-agent-memory-context",
+      "conceptId": "agent-memory-context",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Agent Memory & Context Management?",
+      "answer": "Agent memory is a state architecture, not a larger prompt. Separate immediate working state, retrievable durable facts, event history, and summaries with provenance and expiry.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-mcp-integrations",
+      "conceptId": "mcp-integrations",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing MCP & Integrations?",
+      "answer": "MCP standardizes how an AI host discovers and invokes external capabilities. The protocol boundary does not replace authentication, authorization, validation, or user approval.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-multi-agent-coordination",
+      "conceptId": "multi-agent-coordination",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Multi-agent Coordination?",
+      "answer": "Multiple agents help when work decomposes cleanly and results can be verified independently. Shared goals, bounded tasks, explicit handoffs, and conflict resolution matter more than agent count.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-durable-agent-execution",
+      "conceptId": "durable-agent-execution",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Durable Agent Execution?",
+      "answer": "A durable agent records decisions and side-effect identities so it can resume after interruption without repeating irreversible work.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-agent-permissions-sandboxing",
+      "conceptId": "agent-permissions-sandboxing",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Agent Permissions & Sandboxing?",
+      "answer": "Treat an agent as an untrusted principal. Grant the smallest capability for the shortest time, isolate execution, require approval for irreversible effects, and log authority use.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-browser-computer-use-agents",
+      "conceptId": "browser-computer-use-agents",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Browser & Computer-use Agents?",
+      "answer": "Computer use is closed-loop control: observe current state, choose one bounded action, execute, verify the resulting state, and recover from drift.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-agent-communication-interfaces",
+      "conceptId": "agent-communication-interfaces",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Agent Communication & Interfaces?",
+      "answer": "Reliable agent interfaces exchange typed state and evidence, not vague prose. Messages need identity, intent, status, result, error, and provenance.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-long-running-scheduled-agents",
+      "conceptId": "long-running-scheduled-agents",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Long-running & Scheduled Agents?",
+      "answer": "Long-running agents are jobs with model decisions inside. They still need ownership, schedules, leases, cancellation, deadlines, observability, and bounded spend.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-coding-agent-benchmarks",
+      "conceptId": "coding-agent-benchmarks",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Coding-agent Benchmarks?",
+      "answer": "A coding benchmark is an environment plus task distribution and verifier. Scores are useful only when setup, contamination, flaky tests, and patch validity are controlled.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-tool-use-evaluations",
+      "conceptId": "tool-use-evaluations",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Tool-use Evaluations?",
+      "answer": "Tool-use evals grade the entire trajectory: correct tool, valid arguments, efficient sequence, safe handling of errors, and verified final state.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-ai-regression-testing",
+      "conceptId": "ai-regression-testing",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing AI Regression Testing?",
+      "answer": "AI regression tests compare distributions and task outcomes, not exact strings. Freeze representative cases, version graders, repeat stochastic trials, and gate meaningful deltas.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-hallucination-failure-detection",
+      "conceptId": "hallucination-failure-detection",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Hallucination & Failure Detection?",
+      "answer": "Detect failures against evidence and task constraints. Require citations where possible, validate structured claims, calibrate abstention, and route uncertainty to tools or humans.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-agent-observability",
+      "conceptId": "agent-observability",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Agent Observability?",
+      "answer": "Agent observability connects the final outcome to every decision and side effect. A run needs stable IDs, step spans, inputs, outputs, costs, errors, and redaction.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-tracing-replay",
+      "conceptId": "tracing-replay",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Tracing & Replay?",
+      "answer": "Replay requires capturing every non-deterministic dependency: model and prompt version, context, tool results, random seeds where available, and state transitions.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-evidence-backed-verification",
+      "conceptId": "evidence-backed-verification",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Evidence-backed Verification?",
+      "answer": "Verification turns an agent claim into inspectable evidence. Match each acceptance criterion to a source, command, artifact, or observed state and keep inference separate.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-human-review-systems",
+      "conceptId": "human-review-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Human Review Systems?",
+      "answer": "Human review is a risk-control system. Route uncertain or high-impact cases, give reviewers evidence and clear rubrics, measure agreement, and feed corrections into evals.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-quality-cost-latency-measurement",
+      "conceptId": "quality-cost-latency-measurement",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Quality, Cost & Latency Measurement?",
+      "answer": "No AI metric stands alone. Compare candidate systems on the same workload and plot quality, cost, latency, and failure rate together.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-code-review-systems",
+      "conceptId": "code-review-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Code Review Systems?",
+      "answer": "Useful review connects a changed line to behavior and risk. Findings need evidence, severity, scope, and a concrete remediation—not generic style commentary.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-static-dynamic-analysis",
+      "conceptId": "static-dynamic-analysis",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Static & Dynamic Analysis?",
+      "answer": "Static analysis reasons over possible executions; dynamic analysis observes actual executions. Combining them trades breadth for concrete evidence.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-testing-infrastructure",
+      "conceptId": "testing-infrastructure",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Testing Infrastructure?",
+      "answer": "Testing infrastructure makes failures reproducible and cheap to diagnose. Layer tests by boundary, isolate dependencies, record seeds, and treat flakiness as a product defect.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-codebase-graphs",
+      "conceptId": "codebase-graphs",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Codebase Graphs?",
+      "answer": "A codebase graph converts files into typed relationships. The value comes from stable symbol identity, precise edges, incremental updates, and queries tied to developer decisions.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-dependency-blast-radius",
+      "conceptId": "dependency-blast-radius",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Dependency & Blast-radius Analysis?",
+      "answer": "Blast radius is the set of consumers whose behavior can change. Combine dependency graphs, runtime evidence, public contracts, ownership, and test selection.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-ide-cli-tooling",
+      "conceptId": "ide-cli-tooling",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing IDE & CLI Tooling?",
+      "answer": "Good developer tools expose a stable core through both structured APIs and human interfaces. Fast feedback, composability, discoverability, and predictable exit behavior matter.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-coding-agent-systems",
+      "conceptId": "coding-agent-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Coding Agent Systems?",
+      "answer": "A coding agent is a repository-aware control loop. It needs scoped context, reversible edits, executable verification, and a clear handoff boundary.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-repository-intelligence",
+      "conceptId": "repository-intelligence",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Repository Intelligence?",
+      "answer": "Repository intelligence answers what exists, why it exists, who depends on it, and what changed. It combines indexed code, graphs, history, and local instructions.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-software-supply-chain-health",
+      "conceptId": "software-supply-chain-health",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Software Supply-chain Health?",
+      "answer": "Supply-chain security proves what entered a build and how the artifact was produced. Pin inputs, generate provenance, scan risk, and verify signatures at promotion boundaries.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-automated-debugging-remediation",
+      "conceptId": "automated-debugging-remediation",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Automated Debugging & Remediation?",
+      "answer": "Automated remediation should reproduce first, narrow the causal surface, make the smallest patch, verify the original failure and nearby behavior, then preserve evidence.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-web-mobile-engineering",
+      "conceptId": "web-mobile-engineering",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Web & Mobile Engineering?",
+      "answer": "Client engineering is lifecycle engineering. Model loading, interaction, backgrounding, connectivity, persistence, accessibility, and platform conventions explicitly.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-ux-interface-design",
+      "conceptId": "ux-interface-design",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing UX & Interface Design?",
+      "answer": "An interface is a state machine for human intent. Make the next action clear, expose system status, prevent errors, support recovery, and test with real tasks.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-real-time-application-engineering",
+      "conceptId": "real-time-application-engineering",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Real-time Application Engineering?",
+      "answer": "Real-time apps maintain a local projection of remote state under disconnects and reordering. Protocols need identity, sequence, reconnect, reconciliation, and degraded modes.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-interactive-2d-3d-systems",
+      "conceptId": "interactive-2d-3d-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing 2D/3D Interactive Systems?",
+      "answer": "Interactive systems turn state into frames under a deadline. Separate simulation and rendering, budget CPU/GPU work, stream assets, and measure frame-time variance.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-multimodal-models",
+      "conceptId": "multimodal-models",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Multimodal Models?",
+      "answer": "Multimodal models align different signal spaces through shared or connected representations. Data alignment, modality-specific encoders, fusion, and cross-modal evals are central.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-vision-models",
+      "conceptId": "vision-models",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Vision Models?",
+      "answer": "Vision systems convert pixels into task-specific spatial representations. Architecture, labels, augmentations, resolution, and evaluation must match deployment conditions.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-pose-motion-tracking",
+      "conceptId": "pose-motion-tracking",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Pose & Motion Tracking?",
+      "answer": "Pose tracking is temporal estimation under ambiguity. Combine per-frame evidence with identity, motion priors, smoothing, and explicit confidence through occlusion.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-voice-audio-systems",
+      "conceptId": "voice-audio-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Voice & Audio Systems?",
+      "answer": "Voice systems are real-time pipelines. Audio framing, endpointing, ASR, reasoning, TTS, interruption, and playback each consume the latency budget.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-image-video-generation",
+      "conceptId": "image-video-generation",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Image & Video Generation?",
+      "answer": "Generative media iteratively maps noise or tokens into structured outputs under conditioning. Quality requires prompt/control alignment, temporal consistency, safety, and perceptual evaluation.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-robotics-systems",
+      "conceptId": "robotics-systems",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Robotics Systems?",
+      "answer": "A robot closes the loop from sensing to state estimation to planning to control. Timing, uncertainty, physical safety, and simulation-to-real gaps dominate.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-spatial-interfaces",
+      "conceptId": "spatial-interfaces",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Spatial Interfaces?",
+      "answer": "Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-human-computer-interaction",
+      "conceptId": "human-computer-interaction",
+      "type": "design",
+      "difficulty": "core",
+      "question": "What mechanism and trade-off should an engineer explain when designing Human-Computer Interaction?",
+      "answer": "HCI treats system quality as human task performance and experience. Design from users and context, prototype interactions, and measure effectiveness, efficiency, errors, and trust.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

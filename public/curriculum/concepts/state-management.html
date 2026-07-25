@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>State Machines | SWE Prep</title>
+    <meta name="description" content="States, transitions, guards. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/state-management.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="State Machines | SWE Prep">
+    <meta property="og:description" content="States, transitions, guards. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/state-management.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="State Machines | SWE Prep">
+    <meta name="twitter:description" content="States, transitions, guards. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"State Machines","description":"States, transitions, guards.","url":"https://learn.significanthobbies.com/curriculum/concepts/state-management.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"State Machines","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
+      <article>
+    <p class="eyebrow">System Design · core</p>
+    <h1>State Machines</h1>
+    <p class="lede">States, transitions, guards.</p>
+    <div class="pills"><span>system-design</span><span>low-level-design</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A state machine is a fixed set of states plus the rules for moving between them. The win is that illegal transitions become impossible by design — if you find yourself writing many &quot;if status == X and Y&quot; checks, you are simulating a state machine the hard way.</p>
+    </section>
+
+    <section>
+      <h2>How to study State Machines</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Refactoring Guru — State to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare State Machines with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design a vending machine and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://refactoring.guru/design-patterns/state" rel="noreferrer">Refactoring Guru — State</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Design a vending machine</h3>
+          <p>Draw the state machine for a vending machine: Idle → Coin → Selecting → Dispense → Idle, plus refund / out-of-stock branches. List every transition trigger.</p>
+          <p><strong>Expected evidence:</strong> A state diagram with 5-7 states, transitions labeled by input event.</p>
+          <a href="/drills/design-vending-machine">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain State Machines in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/object-modeling.html">Object Modeling</a></li></ul></div>
+      <div><h2>Related concepts</h2><p class="muted">None assigned yet.</p></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/lld-practice.html">LLD Practice</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

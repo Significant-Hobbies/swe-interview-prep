@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sampling &amp; Decoding | SWE Prep</title>
+    <meta name="description" content="Temperature, top-k, greedy decoding. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Sampling &amp; Decoding | SWE Prep">
+    <meta property="og:description" content="Temperature, top-k, greedy decoding. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sampling &amp; Decoding | SWE Prep">
+    <meta name="twitter:description" content="Temperature, top-k, greedy decoding. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Sampling & Decoding","description":"Temperature, top-k, greedy decoding.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Sampling & Decoding","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · core</p>
+    <h1>Sampling &amp; Decoding</h1>
+    <p class="lede">Temperature, top-k, greedy decoding.</p>
+    <div class="pills"><span>ai-systems</span><span>language-modeling</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>After the model outputs a probability for each next token, you have to pick one. Greedy picks the top — safe but dull. Temperature, top-k, and top-p (nucleus) introduce controlled randomness. Pick by how much variety the task can tolerate.</p>
+    </section>
+
+    <section>
+      <h2>How to study Sampling &amp; Decoding</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stanford CS336 — L10 Inference (Spring 2025), The Curious Case of Neural Text Degeneration (Holtzman et al.), The Illustrated GPT-2 — output sampling to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Sampling &amp; Decoding with Model Evaluation. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Temperature scaling logits and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_10.json" rel="noreferrer">Stanford CS336 — L10 Inference (Spring 2025)</a> <span class="muted">(course)</span></li><li><a href="https://arxiv.org/abs/1904.09751" rel="noreferrer">The Curious Case of Neural Text Degeneration (Holtzman et al.)</a> <span class="muted">(paper)</span></li><li><a href="https://jalammar.github.io/illustrated-gpt2/" rel="noreferrer">The Illustrated GPT-2 — output sampling</a> <span class="muted">(article)</span></li><li><a href="https://huggingface.co/docs/transformers/en/generation_strategies" rel="noreferrer">HuggingFace — Generation strategies</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Temperature scaling logits</h3>
+          <p>Logits [2,1,0]. Apply temperature T=2 and T=0.5 before softmax. Which T makes the distribution sharper?</p>
+          <p><strong>Expected evidence:</strong> T&lt;1 sharpens (more greedy); T&gt;1 flattens.</p>
+          <a href="/drills/ml-temperature-sampling">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Sampling &amp; Decoding in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-language-modeling.html">Language Modeling</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

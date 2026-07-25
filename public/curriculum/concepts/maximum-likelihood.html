@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maximum Likelihood Estimation | SWE Prep</title>
+    <meta name="description" content="Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Maximum Likelihood Estimation | SWE Prep">
+    <meta property="og:description" content="Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maximum Likelihood Estimation | SWE Prep">
+    <meta name="twitter:description" content="Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Maximum Likelihood Estimation","description":"Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.","url":"https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Maximum Likelihood Estimation","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · advanced</p>
+    <h1>Maximum Likelihood Estimation</h1>
+    <p class="lede">Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.</p>
+    <div class="pills"><span>mathematics</span><span>statistics</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>MLE picks the parameter values that maximize the probability of what you actually saw. Log-likelihood turns products into sums — easier to optimize. Minimizing cross-entropy on classification data is MLE under a Bernoulli/categorical model.</p>
+    </section>
+
+    <section>
+      <h2>How to study Maximum Likelihood Estimation</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use ISL — Chapter 4: Classification (MLE connection), StatQuest — Maximum Likelihood to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Maximum Likelihood Estimation with Linear Regression, Gradient Descent, Softmax &amp; Cross-Entropy, Information &amp; Entropy. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete MLE for Bernoulli trials and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Training classifiers, fitting regression, EM algorithms, calibration.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Maximizing likelihood on training data with no regularization (overfitting)</li><li>Forgetting that MLE is a point estimate, not uncertainty</li><li>Mixing up likelihood P(data|θ) with probability of θ</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.statlearning.com/" rel="noreferrer">ISL — Chapter 4: Classification (MLE connection)</a> <span class="muted">(doc)</span></li><li><a href="https://www.youtube.com/watch?v=XepXbq9wr90" rel="noreferrer">StatQuest — Maximum Likelihood</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>MLE for Bernoulli trials</h3>
+          <p>n=100 Bernoulli trials, 55 successes. Write the likelihood L(p)=p^55(1−p)^45, take log, differentiate, and solve for p̂. Why is this the same as the sample proportion?</p>
+          <p><strong>Expected evidence:</strong> p̂=55/100=0.55. Log-likelihood derivative gives successes/n — MLE equals the intuitive estimator here.</p>
+          <a href="/drills/mle-bernoulli-derivation">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>How does MLE relate to cross-entropy loss?</li><li>Likelihood vs posterior?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li><li><a href="/curriculum/concepts/classical-distributions.html">Classical Distributions</a></li><li><a href="/curriculum/concepts/derivatives-and-gradients.html">Derivatives &amp; Gradients</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/regression-basics.html">Linear Regression</a></li><li><a href="/curriculum/concepts/ml-gradient-descent.html">Gradient Descent</a></li><li><a href="/curriculum/concepts/ml-softmax-xent.html">Softmax &amp; Cross-Entropy</a></li><li><a href="/curriculum/concepts/information-entropy.html">Information &amp; Entropy</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

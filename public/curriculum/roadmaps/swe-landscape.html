@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Software Engineering Landscape (2026) | SWE Prep</title>
+    <meta name="description" content="Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the…">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="The Software Engineering Landscape (2026) | SWE Prep">
+    <meta property="og:description" content="Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the…">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Software Engineering Landscape (2026) | SWE Prep">
+    <meta name="twitter:description" content="Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the…">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"The Software Engineering Landscape (2026)","description":"Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
+      <article>
+    <p class="eyebrow">12mo roadmap · 12 milestones</p>
+    <h1>The Software Engineering Landscape (2026)</h1>
+    <p class="lede">Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.</p>
+    <p><strong>Outcome:</strong> Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.</p>
+    <div class="pills"><span>System Design</span><span>Databases &amp; Storage</span><span>AI Systems</span><span>Backend</span></div>
+    <section>
+      <h2>How to work this roadmap</h2>
+      <p>Treat each milestone as a claim that must be supported by evidence. Before reading, write what you think the mechanism does and where it will fail. After studying the linked concepts, run the drills without copying an answer, preserve the output, and revise the explanation. Move forward when you can connect the milestone goal to a working implementation, benchmark, architecture decision, or reviewable design artifact.</p>
+      <p>The 12mo horizon is a sequencing aid, not a completion badge. Spend more time where your prediction and the observed behavior disagree. Keep a short decision log containing the mechanism selected, alternatives rejected, expected failure mode, measurement used, and remaining uncertainty. Review that log with FSRS prompts so the roadmap produces durable system judgment rather than a temporary tour of terminology.</p>
+      <p>At the end, explain Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto. from first principles to a reader outside the domain. A strong explanation should survive follow-up questions about correctness, cost, latency, resource use, security, recovery, and operational visibility. If it cannot, return to the milestone that contains the missing mechanism and build a smaller falsifiable example.</p>
+    </section>
+    <section>
+      <h2>Milestones</h2>
+      <article class="milestone">
+          <p class="eyebrow">Milestone 1</p>
+          <h3>LLMs and inference engines</h3>
+          <p>Transformers end-to-end, KV cache, paged attention, quantization.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/ml-self-attention.html">Self-Attention</a></li><li><a href="/curriculum/concepts/ml-transformer-block.html">Transformer Block</a></li><li><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li><li><a href="/curriculum/concepts/model-routing.html">Model Routing</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 2</p>
+          <h3>Databases and storage engines</h3>
+          <p>B-trees, LSM, WAL, MVCC, columnar — see the dedicated DB roadmap.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/lsm-tree.html">LSM Tree</a></li><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/columnar-storage.html">Columnar Storage</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 3</p>
+          <h3>Streaming and event systems</h3>
+          <p>Append-only logs, partitions, watermarks, stateful stream processing.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/message-queues.html">Message Queues</a></li><li><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></li><li><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 4</p>
+          <h3>Game engines and real-time graphics</h3>
+          <p>Fixed-step loops, ECS, render pipelines, GPU command buffers.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/game-design.html">Game/Simulation Design</a></li><li><a href="/curriculum/concepts/concurrency-design.html">Concurrency Design</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 5</p>
+          <h3>Containers and orchestration</h3>
+          <p>Linux namespaces, cgroups, OCI runtimes, Kubernetes scheduling.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 6</p>
+          <h3>Browsers (Chromium, Firefox, Servo)</h3>
+          <p>Parser, layout, JS engine, compositor, sandboxing, WebAssembly.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/ml-browser-runtime.html">Browser ML Runtime</a></li><li><a href="/curriculum/concepts/ml-webgpu.html">WebGPU Compute</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 7</p>
+          <h3>Compilers and language runtimes</h3>
+          <p>Lexer → parser → AST → IR → optimization → codegen; GC, JIT.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/state-management.html">State Machines</a></li><li><a href="/curriculum/concepts/strategy-pattern.html">Strategy Pattern</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 8</p>
+          <h3>Operating systems and kernels</h3>
+          <p>Processes, virtual memory, schedulers, file systems, syscalls.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/concurrency-design.html">Concurrency Design</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 9</p>
+          <h3>Networking and protocols</h3>
+          <p>TCP/IP, TLS, HTTP/2 and HTTP/3, QUIC, BGP.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/http-lifecycle.html">HTTP Lifecycle</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 10</p>
+          <h3>Distributed systems</h3>
+          <p>Consensus, replication, 2PC, gossip, vector clocks.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li><li><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></li><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li><li><a href="/curriculum/concepts/sharding.html">Sharding</a></li><li><a href="/curriculum/concepts/replication.html">Replication</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 11</p>
+          <h3>Build systems and developer tooling</h3>
+          <p>Incremental builds, content-addressed caches, LSP, tree-sitter.</p>
+          <h4>Concepts</h4>
+          <p class="muted">None assigned yet.</p>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 12</p>
+          <h3>Cryptography (applied)</h3>
+          <p>Primitives, signatures, AEAD, TLS, MLS, ZKPs.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/auth-systems.html">Auth Systems</a></li></ul>
+          
+        </article>
+    </section>
+    <p class="cta"><a href="/roadmaps/swe-landscape">Start this roadmap in the interactive app →</a></p>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

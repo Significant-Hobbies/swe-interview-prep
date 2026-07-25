@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search Evals | SWE Prep</title>
+    <meta name="description" content="Building a labelled query set and harness to compare retrieval approaches.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/search-evals.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Search Evals | SWE Prep">
+    <meta property="og:description" content="Building a labelled query set and harness to compare retrieval approaches.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/search-evals.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Search Evals | SWE Prep">
+    <meta name="twitter:description" content="Building a labelled query set and harness to compare retrieval approaches.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Search Evals","description":"Building a labelled query set and harness to compare retrieval approaches.","url":"https://learn.significanthobbies.com/curriculum/concepts/search-evals.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Search Evals","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/search-ir.html">Search &amp; IR</a></nav>
+      <article>
+    <p class="eyebrow">Search &amp; IR · core</p>
+    <h1>Search Evals</h1>
+    <p class="lede">Building a labelled query set and harness to compare retrieval approaches.</p>
+    <div class="pills"><span>search-ir</span><span>evaluation</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever — it turns ranking changes from vibes into numbers.</p>
+    </section>
+
+    <section>
+      <h2>How to study Search Evals</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use BEIR: Heterogeneous IR Benchmark to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Search Evals with BM25, Hybrid Search, LLM Evals, A/B Testing for Engineers. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Build a search eval harness and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>BEIR benchmark, internal relevance suites at every search company.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Tuning ranking without a frozen eval set</li><li>Letting the eval set leak into tuning decisions</li><li>Too few queries to detect real regressions</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://github.com/beir-cellar/beir" rel="noreferrer">BEIR: Heterogeneous IR Benchmark</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Build a search eval harness</h3>
+          <p>Create a labelled query set (query → relevant doc ids) and a harness that scores any retriever with recall@k, MRR, and nDCG.</p>
+          <p><strong>Expected evidence:</strong> A single command that prints the three metrics for a retriever.</p>
+          <a href="/drills/build-search-eval-harness">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why must the eval query set be frozen before tuning?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Search eval harness</h3>
+          <p>A reusable harness that scores any retriever against a labelled query set.</p>
+          <ul><li>At least 15 labelled queries with known-good results</li><li>Computes recall@k, MRR, and nDCG</li><li>Can score any retriever via a common interface</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ranking-metrics.html">Ranking Metrics</a></li><li><a href="/curriculum/concepts/hypothesis-testing.html">Hypothesis Testing</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/bm25.html">BM25</a></li><li><a href="/curriculum/concepts/hybrid-search.html">Hybrid Search</a></li><li><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></li><li><a href="/curriculum/concepts/ab-testing-engineering.html">A/B Testing for Engineers</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/reset-9-day.html">9-Day Reset</a></li><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 # STATUS — swe-interview-prep
 
-Last updated: 2026-07-18
+Last updated: 2026-07-25
 
 A short view of the current objective, active work, blockers, and next steps.
 Detailed history and feature inventory live in
@@ -18,10 +18,10 @@ workspaces.
 
 ## Active work
 
-- **Repository knowledge consolidation** (this change) — unified the
-  scattered `docs/` tree into a canonical structure, added ADRs, runbooks,
-  STATUS, Blume config, and docs-validation CI. Branch
-  `docs/consolidate-knowledge-system`, staged for human review.
+- None. The personally requested curriculum expansion and public SEO
+  publication are complete: 18 tracks, 222 concepts, 24 roadmaps, and 265
+  JavaScript-independent curriculum pages with exact sitemap and agent-catalog
+  coverage.
 
 ## Blockers / known gaps
 
@@ -48,12 +48,11 @@ workspaces.
 
 ## Next steps
 
-1. Human review + merge of the `docs/consolidate-knowledge-system` branch.
-2. Optional: install Blume locally (`pnpm add -D blume`) and run
+1. Optional: run
    `pnpm docs:build` to preview the rendered docs site before publishing.
-3. Optional: activate the Reader adapter by configuring `READER_API_TOKEN`
+2. Optional: activate the Reader adapter by configuring `READER_API_TOKEN`
    (runbook linked above).
-4. Optional: rotate `JWT_SECRET` (runbook linked above).
+3. Optional: rotate `JWT_SECRET` (runbook linked above).
 
 ## Deferred (do not pursue unless personally requested)
 

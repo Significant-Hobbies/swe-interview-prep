@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heap / Priority Queue | SWE Prep</title>
+    <meta name="description" content="Top-k, k-way merge, scheduling. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/heap.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Heap / Priority Queue | SWE Prep">
+    <meta property="og:description" content="Top-k, k-way merge, scheduling. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/heap.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Heap / Priority Queue | SWE Prep">
+    <meta name="twitter:description" content="Top-k, k-way merge, scheduling. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Heap / Priority Queue","description":"Top-k, k-way merge, scheduling.","url":"https://learn.significanthobbies.com/curriculum/concepts/heap.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Heap / Priority Queue","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/dsa.html">DSA &amp; Implementation</a></nav>
+      <article>
+    <p class="eyebrow">DSA &amp; Implementation · core</p>
+    <h1>Heap / Priority Queue</h1>
+    <p class="lede">Top-k, k-way merge, scheduling.</p>
+    <div class="pills"><span>dsa</span><span>heap</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A heap gives you the min or max in O(1) and re-balances in O(log n). Whenever a problem says &quot;top k&quot;, &quot;k-th largest&quot;, or &quot;merge k sorted&quot;, a heap of size k is usually the answer — far cheaper than sorting everything.</p>
+    </section>
+
+    <section>
+      <h2>How to study Heap / Priority Queue</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use VisuAlgo — Binary Heap to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Heap / Priority Queue with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Kth largest element with a heap, Top K Frequent Elements, Kth Largest Element in an Array and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Sorting the whole input when a size-k heap suffices</li><li>Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)</li><li>Forgetting most languages give a min-heap by default</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://visualgo.net/en/heap" rel="noreferrer">VisuAlgo — Binary Heap</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Kth largest element with a heap</h3>
+          <p>Return the k-th largest element of an unsorted array using a heap, without fully sorting.</p>
+          <p><strong>Expected evidence:</strong> findKthLargest([3,2,1,5,6,4], 2) -&gt; 5</p>
+          <a href="/drills/kth-largest-heap">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Top K Frequent Elements</h3>
+          <p>LeetCode #347 — Top K Frequent Elements. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/top-k-frequent-elements/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-top-k-frequent-elements">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Kth Largest Element in an Array</h3>
+          <p>LeetCode #215 — Kth Largest Element in an Array. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/kth-largest-element-in-an-array/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-kth-largest-element-in-an-array">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Task Scheduler</h3>
+          <p>LeetCode #621 — Task Scheduler. Solve on LeetCode, then implement here if you want it in your drill queue.
+
+https://leetcode.com/problems/task-scheduler/</p>
+          <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
+          <a href="/drills/lc-task-scheduler">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Heap / Priority Queue and name one common mistake: &quot;Sorting the whole input when a size-k heap suffices…&quot;</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/array-hashing.html">Arrays &amp; Hashing</a></li></ul></div>
+      <div><h2>Related concepts</h2><p class="muted">None assigned yet.</p></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/dsa-practice.html">DSA Practice</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

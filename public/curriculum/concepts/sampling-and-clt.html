@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sampling &amp; the Central Limit Theorem | SWE Prep</title>
+    <meta name="description" content="Sampling distributions, standard error of the mean, and why averages become Normal as n grows.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Sampling &amp; the Central Limit Theorem | SWE Prep">
+    <meta property="og:description" content="Sampling distributions, standard error of the mean, and why averages become Normal as n grows.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sampling &amp; the Central Limit Theorem | SWE Prep">
+    <meta name="twitter:description" content="Sampling distributions, standard error of the mean, and why averages become Normal as n grows.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Sampling & the Central Limit Theorem","description":"Sampling distributions, standard error of the mean, and why averages become Normal as n grows.","url":"https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Sampling & the Central Limit Theorem","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Sampling &amp; the Central Limit Theorem</h1>
+    <p class="lede">Sampling distributions, standard error of the mean, and why averages become Normal as n grows.</p>
+    <div class="pills"><span>mathematics</span><span>statistics</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Your data is one draw from a bigger game. The CLT says sample means from many independent pieces look Normal even when the underlying data is not — which is why confidence intervals and z-tests work on proportions and averages.</p>
+    </section>
+
+    <section>
+      <h2>How to study Sampling &amp; the Central Limit Theorem</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Seeing Theory — Central Limit Theorem, StatQuest — Central Limit Theorem to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Sampling &amp; the Central Limit Theorem with Estimation &amp; Confidence Intervals, Classical Distributions, A/B Testing for Engineers. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete CLT and required sample size, Standard error vs standard deviation and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Poll margins of error, experiment power calculations, simulation validation.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Applying CLT with n=5 and calling it rigorous</li><li>Treating the sample as the population</li><li>Ignoring dependence across samples (e.g. time-series)</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://seeing-theory.brown.edu/probability-distributions/index.html" rel="noreferrer">Seeing Theory — Central Limit Theorem</a> <span class="muted">(article)</span></li><li><a href="https://www.youtube.com/watch?v=YAlJC6Hlv8M" rel="noreferrer">StatQuest — Central Limit Theorem</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>CLT and required sample size</h3>
+          <p>A/B test on conversion rate: baseline 5%, MDE 1pp (to 6%). Rough rule: need ~16p(1−p)/δ² samples per arm for Normal approx (p=0.05, δ=0.01). Estimate n per arm. Why is n quadratic in 1/δ?</p>
+          <p><strong>Expected evidence:</strong> n ≈ 16×0.05×0.95/0.0001 ≈ 7,600 per arm. Halving MDE quadruples required n — detecting small lifts is expensive.</p>
+          <a href="/drills/clt-sample-size">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Standard error vs standard deviation</h3>
+          <p>n=100 samples, sample mean x̄=50, sample SD s=10. Compute SE = s/√n and a 95% CI for the population mean (use z=1.96). Why is SE smaller than s?</p>
+          <p><strong>Expected evidence:</strong> SE=10/10=1; CI≈[48.04, 51.96]. SE describes uncertainty of the mean; s describes spread of individual points.</p>
+          <a href="/drills/standard-error-mean">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What does the Central Limit Theorem say about sample means?</li><li>Standard error vs standard deviation?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Analyze a fake trading signal</h3>
+          <p>Given (or generate) a spurious &#39;alpha&#39; signal on synthetic or historical noise, show why it fails: multiple testing, in-sample overfit, or non-stationarity.</p>
+          <ul><li>Reproduce the &#39;great&#39; in-sample metric</li><li>Show out-of-sample or holdout collapse</li><li>Name the statistical mistake (p-hacking, data snooping, regime shift, etc.)</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li><li><a href="/curriculum/concepts/descriptive-statistics.html">Descriptive Statistics</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li><li><a href="/curriculum/concepts/classical-distributions.html">Classical Distributions</a></li><li><a href="/curriculum/concepts/ab-testing-engineering.html">A/B Testing for Engineers</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

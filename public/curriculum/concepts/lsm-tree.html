@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LSM Tree | SWE Prep</title>
+    <meta name="description" content="Log-structured merge tree: write-optimized storage via sorted runs. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="LSM Tree | SWE Prep">
+    <meta property="og:description" content="Log-structured merge tree: write-optimized storage via sorted runs. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LSM Tree | SWE Prep">
+    <meta name="twitter:description" content="Log-structured merge tree: write-optimized storage via sorted runs. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"LSM Tree","description":"Log-structured merge tree: write-optimized storage via sorted runs.","url":"https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"LSM Tree","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases.html">Databases &amp; Storage</a></nav>
+      <article>
+    <p class="eyebrow">Databases &amp; Storage · advanced</p>
+    <h1>LSM Tree</h1>
+    <p class="lede">Log-structured merge tree: write-optimized storage via sorted runs.</p>
+    <div class="pills"><span>databases</span><span>storage-engines</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>An LSM tree turns random writes into sequential ones: buffer writes in an in-memory memtable, flush to immutable sorted files (SSTables), and merge them in the background. Writes are fast; reads may touch several files (bloom filters help).</p>
+    </section>
+
+    <section>
+      <h2>How to study LSM Tree</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use RocksDB Wiki — LSM overview to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare LSM Tree with B-Tree, Compaction. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Build a memtable + SSTable flush and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>RocksDB, Cassandra, LevelDB, ScyllaDB; the write-heavy storage engine.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Ignoring read amplification across SSTable levels</li><li>No bloom filters, so every read scans every file</li><li>Forgetting that deletes are tombstones, not removals</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://github.com/facebook/rocksdb/wiki/RocksDB-Overview" rel="noreferrer">RocksDB Wiki — LSM overview</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Build a memtable + SSTable flush</h3>
+          <p>Implement an in-memory memtable that flushes to an immutable sorted file (SSTable). Support reads that merge memtable and SSTables; deletes as tombstones.</p>
+          <p><strong>Expected evidence:</strong> Writes go to the memtable; reads see the latest value across files.</p>
+          <a href="/drills/build-memtable-sstable">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>When would you choose an LSM tree over a B-tree?</li><li>Why can reads be slow in an LSM tree, and what helps?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Toy LSM tree</h3>
+          <p>A minimal LSM storage engine: memtable, SSTables, compaction.</p>
+          <ul><li>Writes buffered in a memtable and flushed to immutable sorted files</li><li>Reads merge across files; deletes are tombstones</li><li>A simple compaction pass</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/compaction.html">Compaction</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

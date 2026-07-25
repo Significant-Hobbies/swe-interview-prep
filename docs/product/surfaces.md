@@ -11,7 +11,7 @@ disagrees with code, code wins.
 | --- | --- |
 | `/` | Redirects to `/today` |
 | `/today` | Home / daily session hub |
-| `/learn`, `/learn/all` | Roadmap journey + concepts (9 tracks) |
+| `/learn`, `/learn/all` | Roadmap journey + concepts (18 tracks) |
 | `/explore` | Concept/roadmap explorer |
 | `/practice`, `/practice/all` | Drills + spaced-repetition reviews |
 | `/playground` | Monaco + Excalidraw build sandbox |
@@ -79,6 +79,12 @@ These exist so crawlers and coding agents can read the product without JS:
 
 | URL | Format |
 | --- | --- |
+| `/curriculum/` | Public HTML curriculum hub |
+| `/curriculum/tracks/:id.html` | Crawlable track page |
+| `/curriculum/roadmaps/:id.html` | Crawlable roadmap page |
+| `/curriculum/concepts/:id.html` | Crawlable concept guide |
+| `/curriculum/catalog.md` | Complete curriculum as Markdown |
+| `/curriculum/catalog.json` | Structured curriculum inventory |
 | `/llms.txt` | LLM index (curated) |
 | `/llms-full.txt` | Full LLM index |
 | `/index.md` | Homepage as markdown |
@@ -86,8 +92,10 @@ These exist so crawlers and coding agents can read the product without JS:
 | `/robots.txt` | Crawler directives |
 | `/sitemap.xml` | Sitemap |
 
-Source: `public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
-`public/api-ai.json`, `public/robots.txt`, `public/sitemap.xml`.
+Source: canonical curriculum data projected by
+`scripts/generate-public-curriculum.mjs` into `public/curriculum/`,
+`public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
+`public/api-ai.json`, `public/robots.txt`, and `public/sitemap.xml`.
 
 ## Owner-only surfaces
 

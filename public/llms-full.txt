@@ -1,34 +1,69 @@
 # SWE Interview Prep — full agent brief
 
-SWE learning OS with FSRS spaced repetition, drills, and feedback.
+SWE Interview Prep is a mechanism-first learning OS. Its 222 concepts span 18 tracks and feed 24 sequenced roadmaps. Learning follows Concept → Drill → Build → Review → Apply; private mastery state is not exposed.
 
-## Index
-
-# SWE Interview Prep
-
-Software engineering learning OS with spaced repetition (FSRS), drills, and feedback.
-
-## Note for agents
-
-Much of the app is authenticated SPA. Public product brief only here.
-
-## Agent entrypoints
+## Public machine surfaces
 
 - https://learn.significanthobbies.com/llms.txt
 - https://learn.significanthobbies.com/index.md
-
-## Product links
-
-- Home: https://learn.significanthobbies.com/ — Learning app
-
-## Machine surfaces
-
-- https://learn.significanthobbies.com/llms.txt
-- https://learn.significanthobbies.com/llms-full.txt
+- https://learn.significanthobbies.com/curriculum/
+- https://learn.significanthobbies.com/curriculum/catalog.md
+- https://learn.significanthobbies.com/curriculum/catalog.json
 - https://learn.significanthobbies.com/api/ai
-- https://learn.significanthobbies.com/index.md
 - https://learn.significanthobbies.com/sitemap.xml
 - https://learn.significanthobbies.com/robots.txt
+
+## Tracks
+
+- [Search & IR](https://learn.significanthobbies.com/curriculum/tracks/search-ir.html) — Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+- [Mathematics](https://learn.significanthobbies.com/curriculum/tracks/mathematics.html) — Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+- [Vector DB & ANN](https://learn.significanthobbies.com/curriculum/tracks/vector-db.html) — Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+- [AI Systems](https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html) — Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+- [Backend](https://learn.significanthobbies.com/curriculum/tracks/backend.html) — Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+- [Databases & Storage](https://learn.significanthobbies.com/curriculum/tracks/databases.html) — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+- [System Design](https://learn.significanthobbies.com/curriculum/tracks/system-design.html) — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+- [DSA & Implementation](https://learn.significanthobbies.com/curriculum/tracks/dsa.html) — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+- [Product & Distribution](https://learn.significanthobbies.com/curriculum/tracks/product.html) — Stay close to the market: positioning, landing pages, SEO, analytics, and the behavioral/communication foundation.
+- [Systems Foundations](https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html) — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+- [Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html) — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
+- [Distributed Systems](https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html) — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+- [Inference & Serving](https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html) — Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+- [Agent Systems](https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html) — Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+- [Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html) — LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+- [Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/tracks/developer-tools.html) — Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
+- [Application Engineering](https://learn.significanthobbies.com/curriculum/tracks/application-engineering.html) — Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
+- [Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial.html) — Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
+
+## Roadmaps
+
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html) (9d) — Rebuild learning momentum by taking one concept all the way to a shipped artifact.
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html) (30d) — Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html) (90d) — Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html) (12mo) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html) (12mo) — Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html) (12mo) — Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html) (12mo) — Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html) (30d) — Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html) (30d) — Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html) (30d) — Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html) (30d) — Raise your per-roadmap ELO by climbing from linear algebra through statistics to calculus — each week unlocks harder drills at your edge.
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html) (30d) — Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html) (12mo) — Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html) (30d) — Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware "what I would do differently".
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html) (90d) — Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html) (90d) — Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html) (90d) — Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html) (90d) — Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html) (90d) — Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html) (90d) — Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html) (90d) — Build an evidence-backed evaluation and observability system for models, tools, and agents.
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html) (90d) — Build repository-aware tools that analyze, test, review, debug, and safely remediate code.
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html) (90d) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) (90d) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
+
+## Product boundary
+
+Public curriculum pages contain editorial explanations, primary resources, practice prompts, and review questions. Progress, notes, saved Reader material, authentication data, and review answers remain private.
 
 ## Contact / fleet
 

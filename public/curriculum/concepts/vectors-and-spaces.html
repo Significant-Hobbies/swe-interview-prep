@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vectors &amp; Vector Spaces | SWE Prep</title>
+    <meta name="description" content="Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Vectors &amp; Vector Spaces | SWE Prep">
+    <meta property="og:description" content="Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vectors &amp; Vector Spaces | SWE Prep">
+    <meta name="twitter:description" content="Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Vectors & Vector Spaces","description":"Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.","url":"https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html","educationalLevel":"intro","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Vectors & Vector Spaces","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · intro</p>
+    <h1>Vectors &amp; Vector Spaces</h1>
+    <p class="lede">Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.</p>
+    <div class="pills"><span>mathematics</span><span>linear-algebra</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A vector is a point and an arrow. The dot product measures alignment (how much one vector projects onto another); orthogonality means zero projection. Most ML objects — embeddings, weights, activations — are vectors living in some space.</p>
+    </section>
+
+    <section>
+      <h2>How to study Vectors &amp; Vector Spaces</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Essence of Linear Algebra (3Blue1Brown) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Vectors &amp; Vector Spaces with Matrices &amp; Linear Transformations, ML Math Foundations, Derivatives &amp; Gradients. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Compute a dot product and angle and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Embedding similarity, cosine distance, attention scores, gradient directions.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Confusing dot product with element-wise multiplication</li><li>Treating vectors as scalars when adding dimensions</li><li>Forgetting that dot product is zero for perpendicular vectors</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.3blue1brown.com/topics/linear-algebra" rel="noreferrer">Essence of Linear Algebra (3Blue1Brown)</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Compute a dot product and angle</h3>
+          <p>Given u = [3, 4] and v = [1, 2], compute u·v, ||u||, ||v||, and cos θ between them. State whether the vectors are orthogonal.</p>
+          <p><strong>Expected evidence:</strong> u·v = 11, ||u|| = 5, ||v|| = √5, cos θ = 11/(5√5) ≈ 0.98, not orthogonal.</p>
+          <a href="/drills/compute-dot-product">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What does the dot product measure geometrically?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Visualize linear projections</h3>
+          <p>Draw vector projection onto a line/subspace: show orthogonal residual. Connect to OLS geometry.</p>
+          <ul><li>Diagram or plot: vector, subspace, projection, residual orthogonal</li><li>Numeric check: residual · subspace direction = 0</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/matrices-and-transformations.html">Matrices &amp; Linear Transformations</a></li><li><a href="/curriculum/concepts/ml-math.html">ML Math Foundations</a></li><li><a href="/curriculum/concepts/derivatives-and-gradients.html">Derivatives &amp; Gradients</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

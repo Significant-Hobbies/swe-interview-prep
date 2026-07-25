@@ -23,11 +23,11 @@ even ones you'll never specialise in.
 
 **Out of scope.** Depth in any one domain. Each section's *Further
 reading* block is the entry point to that depth; the actual deep work
-happens in a dedicated roadmap you write for yourself when a domain
-becomes load-bearing. *Adjacent-but-not-here:* the product / business
-side of software (positioning, distribution, monetisation, design), the
-ML research frontier beyond LLMs (vision, robotics, RL), embedded /
-firmware, and quantum. Add tracks for those when you need them.
+happens in a dedicated roadmap when a domain becomes load-bearing. This
+document remains a breadth map; the in-app Product, Application Engineering,
+AI Models & Training, and Multimodal & Spatial Computing tracks now own
+applied depth. Research-frontier depth, embedded / firmware, and quantum
+remain adjacent.
 
 **Who this is for.** Someone who wants the full breadth so they can pick
 the next thing to specialise in — and not be surprised by which domain a

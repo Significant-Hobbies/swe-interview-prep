@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Columnar Storage | SWE Prep</title>
+    <meta name="description" content="Column-oriented layout for analytics: compression and vectorized scans.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Columnar Storage | SWE Prep">
+    <meta property="og:description" content="Column-oriented layout for analytics: compression and vectorized scans.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Columnar Storage | SWE Prep">
+    <meta name="twitter:description" content="Column-oriented layout for analytics: compression and vectorized scans.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Columnar Storage","description":"Column-oriented layout for analytics: compression and vectorized scans.","url":"https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Columnar Storage","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases.html">Databases &amp; Storage</a></nav>
+      <article>
+    <p class="eyebrow">Databases &amp; Storage · advanced</p>
+    <h1>Columnar Storage</h1>
+    <p class="lede">Column-oriented layout for analytics: compression and vectorized scans.</p>
+    <div class="pills"><span>databases</span><span>storage-engines</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A column store groups data by column instead of by row. Reading one column out of many becomes very fast (great for analytics), but writing or updating a single row gets slower. Pick row-stores for transactions, column-stores for analytics.</p>
+    </section>
+
+    <section>
+      <h2>How to study Columnar Storage</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Apache Parquet — File format to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Columnar Storage with Object Storage. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Columnar vs row store and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://parquet.apache.org/docs/file-format/" rel="noreferrer">Apache Parquet — File format</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Columnar vs row store</h3>
+          <p>Analytics query: SELECT avg(price) FROM sales WHERE date&gt;2024. Which store wins and why?</p>
+          <p><strong>Expected evidence:</strong> Columnar — reads only price+date columns, better compression.</p>
+          <a href="/drills/columnar-vs-row">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Columnar Storage in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/object-storage.html">Object Storage</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

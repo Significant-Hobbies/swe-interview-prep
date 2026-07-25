@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message Queues | SWE Prep</title>
+    <meta name="description" content="Kafka, SQS, exactly-once vs at-least-once. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/message-queues.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Message Queues | SWE Prep">
+    <meta property="og:description" content="Kafka, SQS, exactly-once vs at-least-once. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/message-queues.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Message Queues | SWE Prep">
+    <meta name="twitter:description" content="Kafka, SQS, exactly-once vs at-least-once. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Message Queues","description":"Kafka, SQS, exactly-once vs at-least-once.","url":"https://learn.significanthobbies.com/curriculum/concepts/message-queues.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Message Queues","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/distributed-systems.html">Distributed Systems</a></nav>
+      <article>
+    <p class="eyebrow">Distributed Systems · core</p>
+    <h1>Message Queues</h1>
+    <p class="lede">Kafka, SQS, exactly-once vs at-least-once.</p>
+    <div class="pills"><span>distributed-systems</span><span>backend</span><span>queues</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A queue decouples producer speed from consumer speed and turns a sync call into a durable, retryable message. &#39;Exactly once&#39; is mostly a myth — design for at-least-once delivery plus idempotent consumers.</p>
+    </section>
+
+    <section>
+      <h2>How to study Message Queues</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Message queue (Wikipedia), Apache Kafka documentation to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Message Queues with Retries &amp; DLQ, Background Jobs. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Queue backpressure and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Kafka, SQS, RabbitMQ; ingestion and event pipelines.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Assuming exactly-once delivery</li><li>Non-idempotent consumers on an at-least-once queue</li><li>Ignoring ordering guarantees (or their absence)</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://en.wikipedia.org/wiki/Message_queue" rel="noreferrer">Message queue (Wikipedia)</a> <span class="muted">(doc)</span></li><li><a href="https://kafka.apache.org/documentation/" rel="noreferrer">Apache Kafka documentation</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Queue backpressure</h3>
+          <p>Producer 10k msg/s, consumer 2k msg/s. Queue depth grows 8k/s. When shed load — at depth 50k or consumer lag 60s?</p>
+          <p><strong>Expected evidence:</strong> Alert on lag and depth; shed at SLA breach; scale consumers or throttle producer.</p>
+          <a href="/drills/queue-backpressure">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why is &#39;exactly-once&#39; delivery usually a myth, and what do you do instead?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Job queue with retries and DLQ</h3>
+          <p>A background job queue with backoff, jitter, and a dead-letter queue.</p>
+          <ul><li>Retries with exponential backoff and jitter</li><li>Poison messages routed to a DLQ</li><li>Idempotent consumer handling</li></ul>
+        </div><div class="practice-card">
+          <h3>Synthesize: Distributed Systems</h3>
+          <p>Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></li><li><a href="/curriculum/concepts/background-jobs.html">Background Jobs</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

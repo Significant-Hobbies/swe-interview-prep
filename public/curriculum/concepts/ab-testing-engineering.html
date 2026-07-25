@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A/B Testing for Engineers | SWE Prep</title>
+    <meta name="description" content="Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="A/B Testing for Engineers | SWE Prep">
+    <meta property="og:description" content="Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A/B Testing for Engineers | SWE Prep">
+    <meta name="twitter:description" content="Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"A/B Testing for Engineers","description":"Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.","url":"https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"A/B Testing for Engineers","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>A/B Testing for Engineers</h1>
+    <p class="lede">Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.</p>
+    <div class="pills"><span>mathematics</span><span>statistics</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>An A/B test is a hypothesis test with a deployment budget. Power asks whether you&#39;d detect a real effect; practical significance asks whether the effect matters; SRM catches broken randomization before you trust the p-value.</p>
+    </section>
+
+    <section>
+      <h2>How to study A/B Testing for Engineers</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Evan Miller — Sample Size Calculator, Microsoft ExP platform paper, Spotify — Experimentation platform &amp; SRM to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare A/B Testing for Engineers with Search Evals, LLM Evals, Product Analytics, Model Evaluation. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design an A/B test with power, Interpret a sample ratio mismatch and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Feature flags, model rollouts, ranking changes, pricing experiments.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Peeking at results and stopping early when p &lt; 0.05</li><li>Ignoring sample ratio mismatch (SRM)</li><li>Shipping a statistically significant but tiny lift</li><li>Running dozens of metrics without correction</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.evanmiller.org/ab-testing/sample-size.html" rel="noreferrer">Evan Miller — Sample Size Calculator</a> <span class="muted">(doc)</span></li><li><a href="https://arxiv.org/abs/1803.03218" rel="noreferrer">Microsoft ExP platform paper</a> <span class="muted">(paper)</span></li><li><a href="https://engineering.atspotify.com/2023/03/choosing-our-experimentation-platform/" rel="noreferrer">Spotify — Experimentation platform &amp; SRM</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Design an A/B test with power</h3>
+          <p>You want to test a new ranking model on search CTR (baseline 8%, hope for +0.5pp). Define: primary metric, MDE, α, target power, estimated n per arm, duration given 50k daily users split 50/50, peeking policy, and guardrail metrics.</p>
+          <p><strong>Expected evidence:</strong> A one-page test plan with n≈7k+ per arm (similar proportion formula), ~3–4 days runtime, no peeking until fixed n, guardrails on latency and null-result rate.</p>
+          <a href="/drills/design-ab-test-power">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Interpret a sample ratio mismatch</h3>
+          <p>Planned 50/50 split; after 24h you observe 52% control / 48% treatment (n=100k total). χ² test flags SRM at p=0.001. What do you do before trusting the CTR lift?</p>
+          <p><strong>Expected evidence:</strong> Stop the test readout; investigate bucketing bugs, bot traffic, locale skew, or deployment issues. Do not ship on a broken randomization.</p>
+          <a href="/drills/interpret-srm-alert">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why is peeking at A/B results mid-test dangerous?</li><li>Statistical significance vs statistical power?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>A/B test analysis report</h3>
+          <p>Analyze a mock or real experiment: check SRM, compute CI on the lift, interpret p-value and practical significance, and write a ship/no-ship recommendation.</p>
+          <ul><li>Document sample sizes per variant and check for sample ratio mismatch</li><li>Report point estimate and 95% CI for the primary metric</li><li>State null/alternative, p-value interpretation, and Type I/II tradeoff in plain English</li><li>Recommend ship, iterate, or extend the test with a one-paragraph rationale</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/hypothesis-testing.html">Hypothesis Testing</a></li><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li><li><a href="/curriculum/concepts/sampling-and-clt.html">Sampling &amp; the Central Limit Theorem</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/search-evals.html">Search Evals</a></li><li><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></li><li><a href="/curriculum/concepts/product-analytics.html">Product Analytics</a></li><li><a href="/curriculum/concepts/ml-evaluation.html">Model Evaluation</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

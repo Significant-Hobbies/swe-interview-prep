@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Probability Fundamentals | SWE Prep</title>
+    <meta name="description" content="Sample spaces, conditional probability, independence, and Bayes&#39; rule for updating beliefs.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Probability Fundamentals | SWE Prep">
+    <meta property="og:description" content="Sample spaces, conditional probability, independence, and Bayes&#39; rule for updating beliefs.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Probability Fundamentals | SWE Prep">
+    <meta name="twitter:description" content="Sample spaces, conditional probability, independence, and Bayes&#39; rule for updating beliefs.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Probability Fundamentals","description":"Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.","url":"https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html","educationalLevel":"intro","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Probability Fundamentals","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · intro</p>
+    <h1>Probability Fundamentals</h1>
+    <p class="lede">Sample spaces, conditional probability, independence, and Bayes&#39; rule for updating beliefs.</p>
+    <div class="pills"><span>mathematics</span><span>probability</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Probability is a bookkeeping system for uncertainty. Conditional probability restricts the sample space; Bayes flips cause and effect — from &#39;how likely is the evidence given the hypothesis&#39; to &#39;how likely is the hypothesis given the evidence&#39;.</p>
+    </section>
+
+    <section>
+      <h2>How to study Probability Fundamentals</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Khan Academy — Probability, MIT 6.041SC — Introduction to Probability, Seeing Theory — Basic Probability to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Probability Fundamentals with Random Variables &amp; Distributions, Classical Distributions, Hypothesis Testing, ML Math Foundations. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Apply Bayes&#39; rule, Independence and inclusion-exclusion and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>A/B test analysis, spam filtering, medical diagnosis, model calibration.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Treating independent events as mutually exclusive</li><li>Confusing P(A|B) with P(B|A) (the prosecutor&#39;s fallacy)</li><li>Adding probabilities of overlapping events without inclusion-exclusion</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" rel="noreferrer">Khan Academy — Probability</a> <span class="muted">(course)</span></li><li><a href="https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/" rel="noreferrer">MIT 6.041SC — Introduction to Probability</a> <span class="muted">(course)</span></li><li><a href="https://seeing-theory.brown.edu/basic-probability/index.html" rel="noreferrer">Seeing Theory — Basic Probability</a> <span class="muted">(article)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Apply Bayes&#39; rule</h3>
+          <p>A test has 99% sensitivity and 95% specificity. Disease prevalence is 1%. A patient tests positive. Using Bayes&#39; rule, compute P(disease | positive) to 2 decimal places.</p>
+          <p><strong>Expected evidence:</strong> ≈ 0.17 (17%). Most positives are false alarms when the base rate is low.</p>
+          <a href="/drills/conditional-probability-bayes">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Independence and inclusion-exclusion</h3>
+          <p>P(A)=0.4, P(B)=0.5, P(A∩B)=0.2. Are A and B independent? Compute P(A∪B). If they were mutually exclusive, what would P(A∪B) be instead?</p>
+          <p><strong>Expected evidence:</strong> P(A)P(B)=0.2=P(A∩B) → independent. P(A∪B)=0.4+0.5−0.2=0.7. Mutually exclusive would give 0.9 — conflating the two is a common bug.</p>
+          <a href="/drills/independence-inclusion-exclusion">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>State Bayes&#39; rule and when you need it.</li><li>How is independence different from mutual exclusivity?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Simulate coin flips, dice, and random walks</h3>
+          <p>Code simulators (no stats libraries): Bernoulli trials, dice sums, and a 1D random walk. Plot or print distributions and compare sample mean to theory.</p>
+          <ul><li>10k coin flips: sample proportion within 0.02 of 0.5</li><li>Dice sum histogram matches triangular shape qualitatively</li><li>Random walk: report mean displacement and max |position| over T steps</li></ul>
+        </div><div class="practice-card">
+          <h3>Weekly math writeup (public note)</h3>
+          <p>Explain one concept you drilled this week in your own words — derive or prove one step, include one mistake you caught yourself making.</p>
+          <ul><li>No copy-paste from videos; prose is yours</li><li>Contains at least one worked example or derivation</li><li>States one assumption you had wrong and corrected</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/random-variables.html">Random Variables &amp; Distributions</a></li><li><a href="/curriculum/concepts/classical-distributions.html">Classical Distributions</a></li><li><a href="/curriculum/concepts/hypothesis-testing.html">Hypothesis Testing</a></li><li><a href="/curriculum/concepts/ml-math.html">ML Math Foundations</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

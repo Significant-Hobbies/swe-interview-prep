@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Model Routing | SWE Prep</title>
+    <meta name="description" content="Sending each request to the cheapest model that can handle it. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/model-routing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Model Routing | SWE Prep">
+    <meta property="og:description" content="Sending each request to the cheapest model that can handle it. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/model-routing.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Routing | SWE Prep">
+    <meta name="twitter:description" content="Sending each request to the cheapest model that can handle it. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Model Routing","description":"Sending each request to the cheapest model that can handle it.","url":"https://learn.significanthobbies.com/curriculum/concepts/model-routing.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Model Routing","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/inference-serving.html">Inference &amp; Serving</a></nav>
+      <article>
+    <p class="eyebrow">Inference &amp; Serving · core</p>
+    <h1>Model Routing</h1>
+    <p class="lede">Sending each request to the cheapest model that can handle it.</p>
+    <div class="pills"><span>inference-serving</span><span>ai-systems</span><span>llm-apps</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Not every request needs the frontier model. A router classifies difficulty and dispatches: small/cheap model for easy calls, large model for hard ones — with cost and latency tracked per route.</p>
+    </section>
+
+    <section>
+      <h2>How to study Model Routing</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Building Effective Agents (Anthropic), Training Compute-Optimal LLMs (Chinchilla), How to Scale Your Model (JAX ML scaling book) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Model Routing with LLM Evals, Prompt &amp; Version Logging. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Route by cost and difficulty and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Cost optimization in production LLM apps, the free-AI-first principle.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Routing without evals, so quality silently drops</li><li>No fallback when the cheap model fails</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.anthropic.com/engineering/building-effective-agents" rel="noreferrer">Building Effective Agents (Anthropic)</a> <span class="muted">(article)</span></li><li><a href="https://arxiv.org/abs/2203.15556" rel="noreferrer">Training Compute-Optimal LLMs (Chinchilla)</a> <span class="muted">(paper)</span></li><li><a href="https://jax-ml.github.io/scaling-book/" rel="noreferrer">How to Scale Your Model (JAX ML scaling book)</a> <span class="muted">(course)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Route by cost and difficulty</h3>
+          <p>Classify queries: &quot;2+2&quot; → small model; &quot;design payment system&quot; → large model. Write a 2-rule router on length and keyword &quot;design&quot;.</p>
+          <p><strong>Expected evidence:</strong> Rule-based router with fallback to large on low confidence.</p>
+          <a href="/drills/route-by-query-cost">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why must model routing be backed by evals?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Model router</h3>
+          <p>Route each request to the cheapest model that passes evals for that request class.</p>
+          <ul><li>Classify request difficulty</li><li>Dispatch to a cheap or strong model accordingly</li><li>Track cost and latency per route</li></ul>
+        </div><div class="practice-card">
+          <h3>Synthesize: Inference &amp; Serving</h3>
+          <p>Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></li><li><a href="/curriculum/concepts/prompt-versioning.html">Prompt &amp; Version Logging</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/runtime.html">Runtime — what every runtime has to do</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/inference-serving-12w.html">12-Week Inference &amp; Serving</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,10 +1,16 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-07-13
+Last updated: 2026-07-25
 
 ## Why/What
 
-SWE Interview Prep is a single-platform interview prep and Fleet learning product covering DSA, low-level design (LLD), system design (HLD), behavioral practice, and project learning tracks. It combines Monaco coding, Excalidraw diagramming, multi-provider AI hints, spaced repetition, LeetCode import, progress tracking, and pattern-based learning. Deployed on Cloudflare Pages with Pages Functions backend.
+SWE Interview Prep is a single-platform interview prep and Fleet learning
+product covering DSA, low-level design (LLD), system design (HLD), behavioral
+practice, systems/platform engineering, AI-native engineering, developer tools,
+application engineering, and multimodal/spatial computing. It combines Monaco
+coding, Excalidraw diagramming, multi-provider AI hints, spaced repetition,
+LeetCode import, progress tracking, and pattern-based learning. Deployed on
+Cloudflare Pages with Pages Functions backend.
 
 Out of scope: ATS/job-application features, Vercel/serverless migration, and new auth providers until the Cloudflare path is stable.
 
@@ -69,6 +75,8 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Unified learning sources (2026-07-12) | Added reference-only catalogs for all 19 active Fleet projects, project roadmaps, research paths, private Reader saves, High Signal, and 12 embedded GitHub learning repositories. Owner-only 30-minute sessions support source selection, unlimited daily runs, end-of-session questions, and FSRS rescheduling. `posttrainllm` uses the `tinygpt` repository as its canonical source. |
 | High Signal learning feed (2026-07-13) | Replaced the synthetic daily placeholder with a validated `high-signal.learning-brief.v1` adapter. Sync preserves source citations and retains the last good briefing with `stale` status on network/schema failure. External item detail now saves item-scoped takeaways and opens a prefilled Playground artifact prompt. |
 | Reader dynamic-source closure (2026-07-13) | Added a credential-free versioned Reader fixture and wired the production proxy through the tested Bearer-authenticated adapter. Supported exports map deterministically without article bodies; 401/upstream/schema failures retain only last-good Reader items as stale. The final learning flow passed unit, type, build, desktop browser, and explicit 390×844 responsive checks. |
+| Eleven-domain curriculum expansion (2026-07-25) | Personally requested expansion from 9 to 18 tracks and 152 to 222 concepts. Added 10 sequenced paths, 70 drills, 70 review prompts, 10 synthesis artifacts, and a machine-readable map covering all 96 requested systems, AI, developer-tooling, application, and multimodal subtopics while preserving all prior concept IDs. |
+| Public curriculum discovery (2026-07-25) | Published a JavaScript-independent curriculum hub plus 18 track, 24 roadmap, and 222 concept pages. Every page has unique search/social metadata, structured data, substantive learning content, internal navigation, and exact sitemap coverage; compact Markdown and JSON catalogs expose the same hierarchy to AI agents. |
 
 ## Products
 
@@ -113,6 +121,8 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Progress tracking:** completion rates across DSA, LLD, HLD, and behavioral categories (`useProgress`).
 - **Spaced repetition:** Anki-style review flow with ts-fsrs scheduling (`useSpacedRepetition`, review pages).
 - **Feynman Gate → FSRS progression (default flow):** solving a drill triggers a skippable explain-back nudge; the AI-graded explanation maps onto per-concept FSRS ratings (`feynmanRating`), updates mastery, then surfaces a "next weakest concept" card (BuildLab) so the loop closes: drill → explain → mastery update → next weakest concept. Playground's manual gate also refreshes mastery on grade.
+- **Expanded learning domains:** 18 tracks and 24 selectable roadmaps cover the original interview/search/math curriculum plus systems foundations, infrastructure, distributed systems, AI models and training, inference, agents, AI reliability, developer tools, application engineering, and multimodal/spatial computing. `src/data/curriculum-coverage.json` maps all 96 requested subtopics to stable concept IDs; every added concept has an editorial drill, review prompt, roadmap placement, canonical source, and synthesis artifact.
+- **Public curriculum discovery:** `/curriculum/` and its generated track, roadmap, and concept pages make the complete curriculum readable without JavaScript or sign-in. The build regenerates all pages, sitemap entries, homepage counts, and agent catalogs from canonical curriculum data and tests their one-to-one integrity.
 - **AI assistance:** multi-provider Socratic hints without spoilers (`useAI`); local-ai dev path documented.
 
 ### Auth and API hardening (2026-03-29 audit, archived at `docs/archive/security-audit-2026-03-29.md`)

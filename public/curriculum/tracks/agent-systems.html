@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Systems | SWE Prep</title>
+    <meta name="description" content="Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Agent Systems | SWE Prep">
+    <meta property="og:description" content="Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agent Systems | SWE Prep">
+    <meta name="twitter:description" content="Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Agent Systems","description":"Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.","url":"https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html","numberOfItems":10,"hasPart":[{"@type":"LearningResource","name":"Tool Calling","url":"https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html"},{"@type":"LearningResource","name":"Agent Loops","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html"},{"@type":"LearningResource","name":"Agent Memory & Context Management","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html"},{"@type":"LearningResource","name":"MCP & Integrations","url":"https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html"},{"@type":"LearningResource","name":"Multi-agent Coordination","url":"https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination.html"},{"@type":"LearningResource","name":"Durable Agent Execution","url":"https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html"},{"@type":"LearningResource","name":"Agent Permissions & Sandboxing","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html"},{"@type":"LearningResource","name":"Browser & Computer-use Agents","url":"https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents.html"},{"@type":"LearningResource","name":"Agent Communication & Interfaces","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html"},{"@type":"LearningResource","name":"Long-running & Scheduled Agents","url":"https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
+      <article>
+    <p class="eyebrow">Learning track · 10 concepts</p>
+    <h1>Agent Systems</h1>
+    <p class="lede">Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.</p>
+    <section>
+      <h2>What mastery looks like</h2>
+      <p>This track contains 10 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Agent Systems, use the track description as the boundary: learn enough detail to reason clearly about agent loops, tools, memory, mcp, coordination, durable execution, permissions, computer use, and long-running work.</p>
+      <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
+    </section>
+    <section>
+      <h2>Suggested study sequence</h2>
+      <p>Start with the core concepts at the top of the list and write a one-paragraph mechanism note for each. Continue through the core concepts by alternating explanation with an executable drill. Treat Agent Loops as integration work: they should combine earlier mechanisms rather than introduce disconnected facts.</p>
+      <p>At the end of each session, record one decision you can now make, one failure mode you can now predict, and one unanswered question. Revisit that question through the linked primary sources, then prove the answer in the Playground or a real repository. The track is complete when you can transfer the reasoning to an unfamiliar system, not when every page has been opened.</p>
+    </section>
+    <section>
+      <h2>Roadmaps</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/agent-systems-12w.html">12-Week Agent Systems</a></li></ul>
+    </section>
+    <section>
+      <h2>Concepts in this track</h2>
+      <div class="card-grid"><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/tool-calling.html">Tool Calling</a></h3>
+        <p>Letting an LLM invoke functions/APIs via structured calls.</p>
+      </article><article class="card">
+        <p class="eyebrow">advanced</p>
+        <h3><a href="/curriculum/concepts/agent-loops.html">Agent Loops</a></h3>
+        <p>The plan → act → observe loop, with memory and stopping conditions.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/agent-memory-context.html">Agent Memory &amp; Context Management</a></h3>
+        <p>Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/mcp-integrations.html">MCP &amp; Integrations</a></h3>
+        <p>Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/multi-agent-coordination.html">Multi-agent Coordination</a></h3>
+        <p>Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/durable-agent-execution.html">Durable Agent Execution</a></h3>
+        <p>Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/agent-permissions-sandboxing.html">Agent Permissions &amp; Sandboxing</a></h3>
+        <p>Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/browser-computer-use-agents.html">Browser &amp; Computer-use Agents</a></h3>
+        <p>DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/agent-communication-interfaces.html">Agent Communication &amp; Interfaces</a></h3>
+        <p>Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/long-running-scheduled-agents.html">Long-running &amp; Scheduled Agents</a></h3>
+        <p>Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.</p>
+      </article></div>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

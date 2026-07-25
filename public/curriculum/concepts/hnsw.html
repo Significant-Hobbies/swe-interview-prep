@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HNSW | SWE Prep</title>
+    <meta name="description" content="Hierarchical Navigable Small World graphs — the dominant ANN index. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/hnsw.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="HNSW | SWE Prep">
+    <meta property="og:description" content="Hierarchical Navigable Small World graphs — the dominant ANN index. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/hnsw.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HNSW | SWE Prep">
+    <meta name="twitter:description" content="Hierarchical Navigable Small World graphs — the dominant ANN index. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"HNSW","description":"Hierarchical Navigable Small World graphs — the dominant ANN index.","url":"https://learn.significanthobbies.com/curriculum/concepts/hnsw.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"HNSW","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/vector-db.html">Vector DB &amp; ANN</a></nav>
+      <article>
+    <p class="eyebrow">Vector DB &amp; ANN · advanced</p>
+    <h1>HNSW</h1>
+    <p class="lede">Hierarchical Navigable Small World graphs — the dominant ANN index.</p>
+    <div class="pills"><span>vector-db</span><span>ann</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers — turning O(n) scan into O(log n) graph traversal.</p>
+    </section>
+
+    <section>
+      <h2>How to study HNSW</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Efficient and robust ANN using HNSW graphs (Malkov &amp; Yashunin) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare HNSW with IVF (Inverted File), Recall / Latency Tradeoffs. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Explain HNSW search on paper and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Default index in Qdrant, Weaviate, pgvector, Lucene/Elasticsearch kNN.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Tuning efSearch/efConstruction blindly without a recall curve</li><li>Ignoring that HNSW is memory-hungry and hard to update/delete</li><li>Expecting exact results — it is approximate by design</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://arxiv.org/abs/1603.09320" rel="noreferrer">Efficient and robust ANN using HNSW graphs (Malkov &amp; Yashunin)</a> <span class="muted">(paper)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Explain HNSW search on paper</h3>
+          <p>Draw a 3-layer HNSW graph and trace a query: which layer it enters, how it greedily hops, when it descends, and where efSearch widens the search.</p>
+          <p><strong>Expected evidence:</strong> A diagram + walkthrough showing O(log n) traversal instead of O(n) scan.</p>
+          <a href="/drills/explain-hnsw-layers">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What do the layers in an HNSW graph do?</li><li>What does the efSearch parameter trade off in HNSW?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Recall / latency benchmark dashboard</h3>
+          <p>Plot recall vs latency for ANN parameter sweeps against the brute-force baseline.</p>
+          <ul><li>Brute force used as the recall=1.0 ground truth</li><li>Sweep at least one ANN parameter</li><li>Produce a recall-vs-latency curve</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ivf.html">IVF (Inverted File)</a></li><li><a href="/curriculum/concepts/recall-latency-tradeoffs.html">Recall / Latency Tradeoffs</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

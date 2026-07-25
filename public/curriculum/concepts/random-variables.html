@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Random Variables &amp; Distributions | SWE Prep</title>
+    <meta name="description" content="Discrete and continuous distributions, expectation, variance, and the law of large numbers.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/random-variables.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Random Variables &amp; Distributions | SWE Prep">
+    <meta property="og:description" content="Discrete and continuous distributions, expectation, variance, and the law of large numbers.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/random-variables.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Random Variables &amp; Distributions | SWE Prep">
+    <meta name="twitter:description" content="Discrete and continuous distributions, expectation, variance, and the law of large numbers.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Random Variables & Distributions","description":"Discrete and continuous distributions, expectation, variance, and the law of large numbers.","url":"https://learn.significanthobbies.com/curriculum/concepts/random-variables.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Random Variables & Distributions","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Random Variables &amp; Distributions</h1>
+    <p class="lede">Discrete and continuous distributions, expectation, variance, and the law of large numbers.</p>
+    <div class="pills"><span>mathematics</span><span>probability</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A random variable is a function from outcomes to numbers. Expectation is the long-run average; variance measures spread. The CLT says sums of many independent pieces look Gaussian — which is why normal distributions are everywhere.</p>
+    </section>
+
+    <section>
+      <h2>How to study Random Variables &amp; Distributions</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use MIT 6.041 Probabilistic Systems Analysis, StatQuest — Probability vs Likelihood to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Random Variables &amp; Distributions with Descriptive Statistics, Estimation &amp; Confidence Intervals, Hypothesis Testing. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Expectation and variance of a discrete RV, Normal tail probability and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Latency modeling, error bars, Monte Carlo simulation, loss function design.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Confusing the PDF value with a probability (for continuous RVs)</li><li>Assuming small samples look like their population distribution</li><li>Using variance when you mean standard deviation in an explanation</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/" rel="noreferrer">MIT 6.041 Probabilistic Systems Analysis</a> <span class="muted">(course)</span></li><li><a href="https://www.youtube.com/watch?v=pYx9wEc34tY" rel="noreferrer">StatQuest — Probability vs Likelihood</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Expectation and variance of a discrete RV</h3>
+          <p>X takes values {0, 1, 2} with probabilities {0.2, 0.5, 0.3}. Compute E[X] and Var(X) = E[X²] − (E[X])².</p>
+          <p><strong>Expected evidence:</strong> E[X] = 1.1, E[X²] = 1.5, Var(X) = 0.29.</p>
+          <a href="/drills/compute-expectation-variance">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Normal tail probability</h3>
+          <p>Latency is Normal(μ=100ms, σ=20ms). Approximate P(X &gt; 140ms) using the z-score and a standard normal table (Φ(2) ≈ 0.977). What fraction is within 1σ of the mean?</p>
+          <p><strong>Expected evidence:</strong> z=(140−100)/20=2; P(X&gt;140)≈1−0.977=0.023. Within 1σ: ≈68%.</p>
+          <a href="/drills/normal-tail-probability">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>How does the sample mean relate to expectation?</li><li>Why is f(x) in a PDF not a probability?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Simulate coin flips, dice, and random walks</h3>
+          <p>Code simulators (no stats libraries): Bernoulli trials, dice sums, and a 1D random walk. Plot or print distributions and compare sample mean to theory.</p>
+          <ul><li>10k coin flips: sample proportion within 0.02 of 0.5</li><li>Dice sum histogram matches triangular shape qualitatively</li><li>Random walk: report mean displacement and max |position| over T steps</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/descriptive-statistics.html">Descriptive Statistics</a></li><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li><li><a href="/curriculum/concepts/hypothesis-testing.html">Hypothesis Testing</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

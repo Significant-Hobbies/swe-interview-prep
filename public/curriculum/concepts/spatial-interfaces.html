@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spatial Interfaces | SWE Prep</title>
+    <meta name="description" content="Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Spatial Interfaces | SWE Prep">
+    <meta property="og:description" content="Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Spatial Interfaces | SWE Prep">
+    <meta name="twitter:description" content="Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Spatial Interfaces","description":"Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.","url":"https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Spatial Interfaces","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/multimodal-spatial.html">Multimodal &amp; Spatial Computing</a></nav>
+      <article>
+    <p class="eyebrow">Multimodal &amp; Spatial Computing · core</p>
+    <h1>Spatial Interfaces</h1>
+    <p class="lede">Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.</p>
+    <div class="pills"><span>multimodal-spatial</span><span>spatial-computing</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Spatial interfaces place persistent state in a changing coordinate system. Tracking confidence, scale, depth, occlusion, ergonomics, and recovery from lost anchors are core.</p>
+    </section>
+
+    <section>
+      <h2>How to study Spatial Interfaces</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use WebXR Device API to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Spatial Interfaces with Robotics Systems, Human-Computer Interaction. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Spatial Interfaces and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://www.w3.org/TR/webxr/" rel="noreferrer">WebXR Device API</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Design exercise: Spatial Interfaces</h3>
+          <p>Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI. Implement designOutline() returning non-empty values for: coordinateSystem, tracking, spatialInteraction. Each value must name a concrete mechanism or decision.</p>
+          <p><strong>Expected evidence:</strong> A design outline with coordinateSystem, tracking, spatialInteraction plus an explicit failure mode or trade-off.</p>
+          <a href="/drills/practice-spatial-interfaces">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Spatial Interfaces?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: Multimodal &amp; Spatial Computing</h3>
+          <p>Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/robotics-systems.html">Robotics Systems</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/robotics-systems.html">Robotics Systems</a></li><li><a href="/curriculum/concepts/human-computer-interaction.html">Human-Computer Interaction</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/multimodal-spatial-12w.html">12-Week Multimodal &amp; Spatial Computing</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

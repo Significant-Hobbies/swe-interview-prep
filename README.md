@@ -1,5 +1,9 @@
 # SWE Interview Prep
 
+[Browse the public curriculum](https://learn.significanthobbies.com/curriculum/)
+— 18 tracks, 222 concepts, and 24 sequenced roadmaps without requiring
+JavaScript or sign-in.
+
 **Product:** [learn.significanthobbies.com](https://learn.significanthobbies.com)
 
 
@@ -30,7 +34,7 @@ SWE Interview Prep consolidates everything into a single platform with integrate
 - **BYO-Endpoint AI Hints** - Get Socratic guidance without spoilers through any OpenAI-compatible endpoint (dev: local claude/codex/gemini CLIs)
 - **Spaced Repetition System** - Concept mastery via FSRS (`ts-fsrs`); Anki decks can be imported
 - **LeetCode Import** - Fetch problems directly via LeetCode API
-- **Progress Tracking** - Monitor mastery across the nine learning tracks
+- **Progress Tracking** - Monitor mastery across 18 learning tracks spanning interview fundamentals, systems, AI-native engineering, developer tools, applications, and multimodal computing
 - **Pattern-Based Learning** - Group problems by algorithmic patterns (sliding window, two pointers, etc.)
 
 ## Architecture

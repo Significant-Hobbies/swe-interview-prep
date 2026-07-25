@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disk-First Databases &amp; RAM | SWE Prep</title>
+    <meta name="description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Disk-First Databases &amp; RAM | SWE Prep">
+    <meta property="og:description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Disk-First Databases &amp; RAM | SWE Prep">
+    <meta name="twitter:description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Disk-First Databases & RAM","description":"Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases.html">Databases &amp; Storage</a></nav>
+      <article>
+    <p class="eyebrow">12mo roadmap · 8 milestones</p>
+    <h1>Disk-First Databases &amp; RAM</h1>
+    <p class="lede">Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.</p>
+    <p><strong>Outcome:</strong> Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.</p>
+    <div class="pills"><span>Databases &amp; Storage</span><span>System Design</span></div>
+    <section>
+      <h2>How to work this roadmap</h2>
+      <p>Treat each milestone as a claim that must be supported by evidence. Before reading, write what you think the mechanism does and where it will fail. After studying the linked concepts, run the drills without copying an answer, preserve the output, and revise the explanation. Move forward when you can connect the milestone goal to a working implementation, benchmark, architecture decision, or reviewable design artifact.</p>
+      <p>The 12mo horizon is a sequencing aid, not a completion badge. Spend more time where your prediction and the observed behavior disagree. Keep a short decision log containing the mechanism selected, alternatives rejected, expected failure mode, measurement used, and remaining uncertainty. Review that log with FSRS prompts so the roadmap produces durable system judgment rather than a temporary tour of terminology.</p>
+      <p>At the end, explain Build a mechanism-first mental model of how disk-based DBs spend RAM, and why. from first principles to a reader outside the domain. A strong explanation should survive follow-up questions about correctness, cost, latency, resource use, security, recovery, and operational visibility. If it cannot, return to the milestone that contains the missing mechanism and build a smaller falsifiable example.</p>
+    </section>
+    <section>
+      <h2>Milestones</h2>
+      <article class="milestone">
+          <p class="eyebrow">Milestone 1</p>
+          <h3>Phase 0-1 — Thesis + hardware</h3>
+          <p>Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/storage-retrieval.html">Storage Engines</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 2</p>
+          <h3>Phase 2 — Disk-oriented storage engines</h3>
+          <p>Pages, B+trees, WAL, buffer pools, recovery.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/storage-retrieval.html">Storage Engines</a></li><li><a href="/curriculum/concepts/transaction-processing.html">Transaction Processing</a></li></ul>
+          <h4>Build evidence</h4><ul><li><strong>Toy write-ahead log</strong> — An append-only WAL with crash recovery.</li></ul>
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 3</p>
+          <h3>Phase 3 — LSM and SSD-first design</h3>
+          <p>Memtables, SSTables, Bloom filters, compaction, read/write/space amplification.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/lsm-tree.html">LSM Tree</a></li><li><a href="/curriculum/concepts/compaction.html">Compaction</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 4</p>
+          <h3>Phase 4-5 — Columnar execution + ClickHouse</h3>
+          <p>Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/columnar-storage.html">Columnar Storage</a></li><li><a href="/curriculum/concepts/secondary-index.html">Secondary Indexes</a></li><li><a href="/curriculum/concepts/query-execution-optimization.html">Query Execution &amp; Optimization</a></li></ul>
+          <h4>Build evidence</h4><ul><li><strong>Object-storage-backed index</strong> — Store index segments in object storage with a hot in-memory cache.</li></ul>
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 5</p>
+          <h3>Phase 6 — Cloud warehouses</h3>
+          <p>Storage/compute separation, shuffle, slots/warehouses, result caching.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/object-storage.html">Object Storage</a></li><li><a href="/curriculum/concepts/sharding.html">Sharding</a></li><li><a href="/curriculum/concepts/warehouses-lakehouses.html">Data Warehouses &amp; Lakehouses</a></li></ul>
+          <h4>Build evidence</h4><ul><li><strong>Object-storage-backed index</strong> — Store index segments in object storage with a hot in-memory cache.</li></ul>
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 6</p>
+          <h3>Phase 7 — Search + vector DBs</h3>
+          <p>Inverted indexes, BM25, HNSW, IVF, PQ, DiskANN, recall/latency/memory tradeoff.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/inverted-index.html">Inverted Index</a></li><li><a href="/curriculum/concepts/bm25.html">BM25</a></li><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li><li><a href="/curriculum/concepts/ivf.html">IVF (Inverted File)</a></li><li><a href="/curriculum/concepts/recall-latency-tradeoffs.html">Recall / Latency Tradeoffs</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 7</p>
+          <h3>Phase 8 — Distributed correctness</h3>
+          <p>Replication, Raft/Paxos, MVCC across nodes, 2PC, serializability.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/replication.html">Replication</a></li><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li><li><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></li><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li></ul>
+          
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 8</p>
+          <h3>Phase 9 — Synthesis project</h3>
+          <p>Ship one of: low-RAM benchmark, ch-lowram CLI, spill-first OLAP engine, or disk-backed vector search.</p>
+          <h4>Concepts</h4>
+          <p class="muted">None assigned yet.</p>
+          
+        </article>
+    </section>
+    <p class="cta"><a href="/roadmaps/db-disk-first">Start this roadmap in the interactive app →</a></p>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

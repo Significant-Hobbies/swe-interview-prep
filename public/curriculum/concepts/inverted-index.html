@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inverted Index | SWE Prep</title>
+    <meta name="description" content="Term → posting list mapping that powers fast keyword lookup. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Inverted Index | SWE Prep">
+    <meta property="og:description" content="Term → posting list mapping that powers fast keyword lookup. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inverted Index | SWE Prep">
+    <meta name="twitter:description" content="Term → posting list mapping that powers fast keyword lookup. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Inverted Index","description":"Term → posting list mapping that powers fast keyword lookup.","url":"https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Inverted Index","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/search-ir.html">Search &amp; IR</a></nav>
+      <article>
+    <p class="eyebrow">Search &amp; IR · core</p>
+    <h1>Inverted Index</h1>
+    <p class="lede">Term → posting list mapping that powers fast keyword lookup.</p>
+    <div class="pills"><span>search-ir</span><span>indexing</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.</p>
+    </section>
+
+    <section>
+      <h2>How to study Inverted Index</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stanford IR Book — The term vocabulary &amp; postings lists to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Inverted Index with BM25, TF-IDF, Search Systems. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Build an inverted index and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Lucene, Tantivy, PostgreSQL GIN indexes, every full-text search system.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Storing postings unsorted, making intersection O(n*m)</li><li>Forgetting document frequency, which ranking later needs</li><li>Not separating the dictionary from the postings on disk</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html" rel="noreferrer">Stanford IR Book — The term vocabulary &amp; postings lists</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Build an inverted index</h3>
+          <p>From a list of documents, build a term → sorted posting list map. Support a boolean AND query by intersecting posting lists. Track document frequency per term.</p>
+          <p><strong>Expected evidence:</strong> Query &#39;quick fox&#39; returns docs containing both terms, found by list intersection.</p>
+          <a href="/drills/build-inverted-index">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>How does an inverted index differ from a forward index, and why is it faster for search?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Implement BM25 search in HighSignal</h3>
+          <p>Index a corpus of articles and serve ranked keyword search using BM25.</p>
+          <ul><li>Index at least 100 documents</li><li>Support keyword search with a tokenizer shared by index and query</li><li>Return top-k ranked results scored by BM25</li><li>Add a small set of eval queries with expected results</li></ul>
+        </div><div class="practice-card">
+          <h3>Object-storage-backed index</h3>
+          <p>Store index segments in object storage with a hot in-memory cache.</p>
+          <ul><li>Index segments persisted as immutable objects</li><li>A cache in front of object storage</li><li>Cold-read latency measured and noted</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/tokenization.html">Tokenization</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/bm25.html">BM25</a></li><li><a href="/curriculum/concepts/tf-idf.html">TF-IDF</a></li><li><a href="/curriculum/concepts/search-discovery.html">Search Systems</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/reset-9-day.html">9-Day Reset</a></li><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

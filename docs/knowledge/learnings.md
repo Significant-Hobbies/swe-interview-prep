@@ -4,13 +4,23 @@ Reusable lessons that are not obvious from the code. Add new entries at the
 top with a date. One lesson per bullet; link to the code or ADR that
 exemplifies it.
 
+## 2026-07 — Broad curriculum coverage needs a machine-readable contract
+
+Track names alone cannot prove that a broad learning taxonomy is actually
+covered. The eleven-domain expansion keeps the 96 requested subtopics in
+`src/data/curriculum-coverage.json`, maps each to stable concept IDs, and tests
+that the mappings resolve. Existing lessons are reclassified instead of
+duplicated so FSRS mastery remains attached to one canonical card. New lessons
+are accepted only when they have a source, drill, review prompt, roadmap
+placement, and synthesis artifact.
+
 ## 2026-07 — Personal-use closure changes the maintenance posture
 
 The 2026-07-10 closure (see [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)) means this
 product is maintenance-only. New work must be either reliability, a
-personally-requested workflow fix, or a doc change. Do not propose roadmap
-expansion. The `plans/2026-05-29-cognitive-fitness-roadmap.md` items are
-paused candidates, not active planned work (archived under
+personally requested change, or a doc change. Do not autonomously propose
+roadmap expansion. The `plans/2026-05-29-cognitive-fitness-roadmap.md` items
+remain paused candidates, not active planned work (archived under
 [`archive/plans/`](https://github.com/Significant-Hobbies/swe-interview-prep/tree/main/docs/archive/plans)).
 
 ## 2026-06 — A dev-only Vite plugin beats a submodule for dev affordances

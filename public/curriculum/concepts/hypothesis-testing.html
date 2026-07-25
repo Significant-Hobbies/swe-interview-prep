@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hypothesis Testing | SWE Prep</title>
+    <meta name="description" content="Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Hypothesis Testing | SWE Prep">
+    <meta property="og:description" content="Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hypothesis Testing | SWE Prep">
+    <meta name="twitter:description" content="Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Hypothesis Testing","description":"Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.","url":"https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Hypothesis Testing","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · core</p>
+    <h1>Hypothesis Testing</h1>
+    <p class="lede">Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.</p>
+    <div class="pills"><span>mathematics</span><span>statistics</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Hypothesis testing asks: &#39;how surprising is this data if nothing real changed?&#39; A p-value is not the probability the null is true — it&#39;s the probability of seeing data this extreme under the null. Low p → reject the null, but &#39;not significant&#39; is not proof of no effect.</p>
+    </section>
+
+    <section>
+      <h2>How to study Hypothesis Testing</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Seeing Theory — Hypothesis Testing, StatQuest — p-values to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Hypothesis Testing with Linear Regression, LLM Evals. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Interpret a p-value correctly, Type I vs Type II errors and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Experiment analysis, clinical trials, model comparison gates.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Treating p &lt; 0.05 as proof the effect is real</li><li>Running many tests without correction (p-hacking)</li><li>Confusing statistical significance with practical significance</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://seeing-theory.brown.edu/frequentist-inference/index.html" rel="noreferrer">Seeing Theory — Hypothesis Testing</a> <span class="muted">(article)</span></li><li><a href="https://www.youtube.com/watch?v=vemZtHjaqKA" rel="noreferrer">StatQuest — p-values</a> <span class="muted">(video)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Interpret a p-value correctly</h3>
+          <p>An A/B test reports p = 0.03 for H₀: &#39;no difference in conversion&#39;. The lift is 0.1% absolute (0.5% → 0.6%). Write two sentences: one correct interpretation of the p-value, one reason you might still not ship.</p>
+          <p><strong>Expected evidence:</strong> Correct: if there were truly no effect, we&#39;d see data this extreme ~3% of the time. Might not ship: effect is tiny (practical insignificance) or the test was one of many without correction.</p>
+          <a href="/drills/interpret-p-value">Open the interactive drill →</a>
+        </div><div class="practice-card">
+          <h3>Type I vs Type II errors</h3>
+          <p>A security patch test: H₀ = &#39;no change in error rate&#39;. You fail to reject H₀, but errors actually rose 0.5%. (a) Which error type? (b) If α=0.05 and power=0.8, what does each number mean in one sentence?</p>
+          <p><strong>Expected evidence:</strong> (a) Type II error (false negative) — missed a real regression. α=5% false-alarm rate if H₀ true; power=80% chance to detect a real effect of the assumed size.</p>
+          <a href="/drills/type-errors-power">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>What is a p-value, and what is it not?</li><li>Define Type I and Type II errors.</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>A/B test analysis report</h3>
+          <p>Analyze a mock or real experiment: check SRM, compute CI on the lift, interpret p-value and practical significance, and write a ship/no-ship recommendation.</p>
+          <ul><li>Document sample sizes per variant and check for sample ratio mismatch</li><li>Report point estimate and 95% CI for the primary metric</li><li>State null/alternative, p-value interpretation, and Type I/II tradeoff in plain English</li><li>Recommend ship, iterate, or extend the test with a one-paragraph rationale</li></ul>
+        </div><div class="practice-card">
+          <h3>Analyze a fake trading signal</h3>
+          <p>Given (or generate) a spurious &#39;alpha&#39; signal on synthetic or historical noise, show why it fails: multiple testing, in-sample overfit, or non-stationarity.</p>
+          <ul><li>Reproduce the &#39;great&#39; in-sample metric</li><li>Show out-of-sample or holdout collapse</li><li>Name the statistical mistake (p-hacking, data snooping, regime shift, etc.)</li></ul>
+        </div><div class="practice-card">
+          <h3>Simple momentum backtest vs SPY/QQQ</h3>
+          <p>12-month momentum rule on 1–3 names; compare cumulative return to SPY or QQQ over the same window. State assumptions and survivorship bias.</p>
+          <ul><li>Rule written before seeing full-sample results (or use holdout half)</li><li>Equity curve: strategy vs benchmark</li><li>Honest limitations section (costs, slippage, overfitting)</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/estimation-confidence.html">Estimation &amp; Confidence Intervals</a></li><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/regression-basics.html">Linear Regression</a></li><li><a href="/curriculum/concepts/llm-evals.html">LLM Evals</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li><li><a href="/curriculum/roadmaps/prob-stats-30d.html">30-Day Probability &amp; Statistics</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

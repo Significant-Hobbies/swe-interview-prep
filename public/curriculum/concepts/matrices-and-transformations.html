@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrices &amp; Linear Transformations | SWE Prep</title>
+    <meta name="description" content="Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Matrices &amp; Linear Transformations | SWE Prep">
+    <meta property="og:description" content="Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrices &amp; Linear Transformations | SWE Prep">
+    <meta name="twitter:description" content="Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Matrices & Linear Transformations","description":"Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.","url":"https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html","educationalLevel":"intro","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Matrices & Linear Transformations","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/mathematics.html">Mathematics</a></nav>
+      <article>
+    <p class="eyebrow">Mathematics · intro</p>
+    <h1>Matrices &amp; Linear Transformations</h1>
+    <p class="lede">Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.</p>
+    <div class="pills"><span>mathematics</span><span>linear-algebra</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A matrix is a machine that takes vectors in and pushes vectors out. Columns tell you where the basis vectors land. Matrix multiply chains machines — output of one feeds the next.</p>
+    </section>
+
+    <section>
+      <h2>How to study Matrices &amp; Linear Transformations</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use MIT 18.06 Linear Algebra (Strang) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Matrices &amp; Linear Transformations with Eigenvalues &amp; Matrix Decomposition, Linear Regression, ML Math Foundations. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Multiply 2×2 matrices by hand and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Neural network layers, image transforms, PCA, solving linear systems.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Multiplying matrices in the wrong order (not commutative)</li><li>Confusing rows vs columns when reading a transformation</li><li>Assuming every square matrix is invertible</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" rel="noreferrer">MIT 18.06 Linear Algebra (Strang)</a> <span class="muted">(course)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Multiply 2×2 matrices by hand</h3>
+          <p>Compute AB where A = [[1, 2], [0, 1]] and B = [[1, 0], [3, 1]]. Then apply A to vector x = [1, 1] and B to the result — does AB·x equal A·(B·x)?</p>
+          <p><strong>Expected evidence:</strong> AB = [[7, 2], [3, 1]]; AB·x = [9, 4] = A·(B·x). Matrix multiplication is composition.</p>
+          <a href="/drills/multiply-2x2-matrix">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>How do the columns of a matrix relate to a linear transformation?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Implement matrix multiplication from scratch</h3>
+          <p>General m×n by n×p matmul with nested loops; apply to a 2D rotation + scale transform on points.</p>
+          <ul><li>Correct matmul on 3×3 test case vs hand calculation</li><li>Apply transform to ≥4 points; verify orthogonality preserved for pure rotation</li></ul>
+        </div><div class="practice-card">
+          <h3>Least-squares regression from scratch</h3>
+          <p>Fit y = Xβ via normal equations (XᵀX)β = Xᵀy using your matmul — no sklearn. Report β, residuals, R².</p>
+          <ul><li>Matches sklearn/polyfit on a 2-feature toy dataset within 1e-6</li><li>Plot residuals; comment on one outlier&#39;s leverage</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/vectors-and-spaces.html">Vectors &amp; Vector Spaces</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/eigenvalues-decomposition.html">Eigenvalues &amp; Matrix Decomposition</a></li><li><a href="/curriculum/concepts/regression-basics.html">Linear Regression</a></li><li><a href="/curriculum/concepts/ml-math.html">ML Math Foundations</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/math-rating-climb-30d.html">30-Day Math Rating Climb</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

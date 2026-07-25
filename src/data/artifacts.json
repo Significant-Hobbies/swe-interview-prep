@@ -218,7 +218,7 @@
       "title": "Toy write-ahead log",
       "type": "code-implementation",
       "difficulty": "core",
-      "concepts": ["wal"],
+      "concepts": ["wal", "transaction-processing"],
       "projects": ["tiny-search-engine"],
       "description": "An append-only WAL with crash recovery.",
       "successCriteria": [
@@ -233,7 +233,12 @@
       "title": "Object-storage-backed index",
       "type": "code-implementation",
       "difficulty": "advanced",
-      "concepts": ["object-storage", "inverted-index"],
+      "concepts": [
+        "object-storage",
+        "inverted-index",
+        "query-execution-optimization",
+        "warehouses-lakehouses"
+      ],
       "projects": ["highsignal"],
       "description": "Store index segments in object storage with a hot in-memory cache.",
       "successCriteria": [
@@ -456,6 +461,350 @@
         "Honest limitations section (costs, slippage, overfitting)"
       ],
       "deliverables": ["Code", "Equity curve chart", "Limitations paragraph"]
+    },
+    {
+      "id": "synthesize-systems-foundations-12w",
+      "title": "Synthesize: Systems Foundations",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "operating-system-mechanics",
+        "compute-memory-storage-hierarchy",
+        "network-protocol-engineering",
+        "concurrency-design",
+        "runtime-performance-engineering",
+        "security-isolation-boundaries"
+      ],
+      "projects": [],
+      "description": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-infrastructure-platforms-12w",
+      "title": "Synthesize: Infrastructure & Platforms",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "cloud-infrastructure",
+        "containers-kubernetes",
+        "cicd-developer-environments",
+        "platform-scheduling-orchestration",
+        "infrastructure-automation",
+        "background-jobs",
+        "reliability-fault-tolerance",
+        "retries-dlq",
+        "monitoring-analytics",
+        "opentelemetry-observability",
+        "sandbox-execution-environments"
+      ],
+      "projects": [],
+      "description": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-distributed-systems-12w",
+      "title": "Synthesize: Distributed Systems",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "consensus",
+        "replication",
+        "sharding",
+        "cap-theorem",
+        "message-queues",
+        "event-streaming-kafka",
+        "caching",
+        "messaging-realtime",
+        "distributed-infra",
+        "distributed-workflows-temporal",
+        "distributed-failure-recovery"
+      ],
+      "projects": [],
+      "description": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-ai-models-training-12w",
+      "title": "Synthesize: AI Models & Training",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "ml-math",
+        "ml-gradient-descent",
+        "ml-backprop",
+        "ml-softmax-xent",
+        "ml-tokenization",
+        "ml-language-modeling",
+        "ml-embeddings",
+        "ml-self-attention",
+        "ml-multi-head",
+        "ml-transformer-block",
+        "ml-adamw",
+        "ml-pretraining",
+        "ml-training",
+        "ml-checkpointing",
+        "ml-lora",
+        "ml-rl-alignment",
+        "ml-data-engineering",
+        "model-quantization",
+        "open-weight-models",
+        "multimodal-models",
+        "ml-evaluation"
+      ],
+      "projects": [],
+      "description": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-inference-serving-12w",
+      "title": "Synthesize: Inference & Serving",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "inference-engines",
+        "kv-cache-paged-attention",
+        "continuous-batching",
+        "model-routing",
+        "flashattention-kernels",
+        "speculative-decoding",
+        "gpu-utilization",
+        "inference-hardware",
+        "inference-cost-latency",
+        "local-on-device-inference",
+        "ml-browser-runtime",
+        "ml-webgpu"
+      ],
+      "projects": [],
+      "description": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-agent-systems-12w",
+      "title": "Synthesize: Agent Systems",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "tool-calling",
+        "agent-loops",
+        "agent-memory-context",
+        "mcp-integrations",
+        "multi-agent-coordination",
+        "agent-communication-interfaces",
+        "browser-computer-use-agents",
+        "durable-agent-execution",
+        "agent-permissions-sandboxing",
+        "long-running-scheduled-agents"
+      ],
+      "projects": [],
+      "description": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-ai-reliability-12w",
+      "title": "Synthesize: Evaluation & AI Reliability",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "llm-evals",
+        "ml-evaluation",
+        "coding-agent-benchmarks",
+        "tool-use-evaluations",
+        "prompt-versioning",
+        "ai-regression-testing",
+        "hallucination-failure-detection",
+        "quality-cost-latency-measurement",
+        "agent-observability",
+        "tracing-replay",
+        "evidence-backed-verification",
+        "human-review-systems"
+      ],
+      "projects": [],
+      "description": "Build an evidence-backed evaluation and observability system for models, tools, and agents. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-developer-tools-12w",
+      "title": "Synthesize: Developer Tools & Code Intelligence",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "code-review-systems",
+        "static-dynamic-analysis",
+        "testing-infrastructure",
+        "codebase-graphs",
+        "dependency-blast-radius",
+        "repository-intelligence",
+        "ide-cli-tooling",
+        "coding-agent-systems",
+        "software-supply-chain-health",
+        "automated-debugging-remediation"
+      ],
+      "projects": [],
+      "description": "Build repository-aware tools that analyze, test, review, debug, and safely remediate code. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-application-engineering-12w",
+      "title": "Synthesize: Application Engineering",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "api-design",
+        "web-mobile-engineering",
+        "ux-interface-design",
+        "real-time-application-engineering",
+        "messaging-realtime",
+        "game-design",
+        "interactive-2d-3d-systems",
+        "product-analytics",
+        "positioning",
+        "landing-pages",
+        "seo"
+      ],
+      "projects": [],
+      "description": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "synthesize-multimodal-spatial-12w",
+      "title": "Synthesize: Multimodal & Spatial Computing",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "multimodal-models",
+        "vision-models",
+        "voice-audio-systems",
+        "pose-motion-tracking",
+        "image-video-generation",
+        "local-on-device-inference",
+        "robotics-systems",
+        "spatial-interfaces",
+        "human-computer-interaction",
+        "ml-webgpu"
+      ],
+      "projects": [],
+      "description": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "successCriteria": [
+        "Implements or precisely models the core mechanisms from all three milestones",
+        "Includes at least one injected failure or adversarial case and demonstrates recovery",
+        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
+        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+      ],
+      "deliverables": [
+        "Runnable code, reproducible benchmark, or executable design harness",
+        "Focused validation command with captured output",
+        "Architecture diagram or typed interface map",
+        "Short evidence-backed write-up"
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

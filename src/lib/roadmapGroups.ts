@@ -20,6 +20,10 @@ export const FEATURED_ROADMAP_PICKS: {
   { id: 'db-disk-first', label: 'Databases', docSlug: 'db-roadmap' },
   { id: 'runtime', label: 'Runtime', docSlug: 'runtime-roadmap' },
   { id: 'swe-landscape', label: 'OS & landscape', docSlug: 'swe-landscape' },
+  { id: 'ai-models-training-12w', label: 'AI training' },
+  { id: 'inference-serving-12w', label: 'Inference' },
+  { id: 'agent-systems-12w', label: 'Agents' },
+  { id: 'developer-tools-12w', label: 'Devtools' },
 ];
 
 export const ROADMAP_GROUPS: RoadmapGroup[] = [
@@ -31,21 +35,52 @@ export const ROADMAP_GROUPS: RoadmapGroup[] = [
   },
   {
     id: 'systems',
-    title: 'Systems internals',
-    subtitle: 'DB engines, language runtimes, OS/containers/compilers — mechanism-first.',
-    roadmapIds: ['db-disk-first', 'runtime', 'swe-landscape'],
+    title: 'Systems & platforms',
+    subtitle:
+      'Hardware, runtimes, infrastructure, distributed systems, and storage — mechanism-first.',
+    roadmapIds: [
+      'systems-foundations-12w',
+      'infrastructure-platforms-12w',
+      'distributed-systems-12w',
+      'db-disk-first',
+      'runtime',
+      'swe-landscape',
+    ],
   },
   {
     id: 'ai',
-    title: 'AI & retrieval',
-    subtitle: 'Lexical search → vectors → RAG → inference infra.',
-    roadmapIds: ['reset-9-day', 'retrieval-30-day', 'ai-search-infra-90-day', 'ai-infra-12-month'],
+    title: 'AI-native systems',
+    subtitle: 'Retrieval, model training, inference, agents, evaluation, and reliability.',
+    roadmapIds: [
+      'reset-9-day',
+      'retrieval-30-day',
+      'ai-search-infra-90-day',
+      'ai-infra-12-month',
+      'ai-models-training-12w',
+      'inference-serving-12w',
+      'agent-systems-12w',
+      'ai-reliability-12w',
+    ],
   },
   {
     id: 'math',
     title: 'Mathematics',
     subtitle: 'Probability, linear algebra, optimization — active problem solving.',
     roadmapIds: ['math-rating-climb-30d', 'prob-stats-30d', 'math-stack-12w'],
+  },
+  {
+    id: 'software-building',
+    title: 'Software building',
+    subtitle:
+      'Developer tools, repository intelligence, complete applications, and product delivery.',
+    roadmapIds: ['developer-tools-12w', 'application-engineering-12w'],
+  },
+  {
+    id: 'human-interfaces',
+    title: 'Multimodal & spatial',
+    subtitle:
+      'Vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.',
+    roadmapIds: ['multimodal-spatial-12w'],
   },
 ];
 

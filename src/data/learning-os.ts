@@ -26,7 +26,16 @@ type TrackId =
   | 'databases'
   | 'system-design'
   | 'dsa'
-  | 'product';
+  | 'product'
+  | 'systems-foundations'
+  | 'infrastructure-platforms'
+  | 'distributed-systems'
+  | 'inference-serving'
+  | 'agent-systems'
+  | 'ai-reliability'
+  | 'developer-tools'
+  | 'application-engineering'
+  | 'multimodal-spatial';
 
 export type Difficulty = 'intro' | 'core' | 'advanced';
 
@@ -169,7 +178,7 @@ export interface ReviewQuestion {
   ankiRef?: { deckName: string; externalId: string; tags?: string[] };
 }
 
-// The 8 "known groups" — top-level tags the UI gives a color/icon/title.
+// Known groups — top-level tags the UI gives a color/icon/title.
 // Any tag not in this list renders as a plain text chip.
 export const TRACKS: Track[] = [
   {
@@ -270,6 +279,105 @@ export const TRACKS: Track[] = [
     color: 'rose',
     order: 9,
     primary: false,
+  },
+  {
+    id: 'systems-foundations',
+    title: 'Systems Foundations',
+    short: 'Foundations',
+    description:
+      'Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.',
+    icon: 'Cpu',
+    color: 'slate',
+    order: 10,
+    primary: true,
+  },
+  {
+    id: 'infrastructure-platforms',
+    title: 'Infrastructure & Platforms',
+    short: 'Platform',
+    description:
+      'Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.',
+    icon: 'CloudCog',
+    color: 'sky',
+    order: 11,
+    primary: true,
+  },
+  {
+    id: 'distributed-systems',
+    title: 'Distributed Systems',
+    short: 'Distributed',
+    description:
+      'Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.',
+    icon: 'Waypoints',
+    color: 'orange',
+    order: 12,
+    primary: true,
+  },
+  {
+    id: 'inference-serving',
+    title: 'Inference & Serving',
+    short: 'Inference',
+    description:
+      'Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.',
+    icon: 'Gauge',
+    color: 'fuchsia',
+    order: 13,
+    primary: true,
+  },
+  {
+    id: 'agent-systems',
+    title: 'Agent Systems',
+    short: 'Agents',
+    description:
+      'Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.',
+    icon: 'Bot',
+    color: 'cyan',
+    order: 14,
+    primary: true,
+  },
+  {
+    id: 'ai-reliability',
+    title: 'Evaluation & AI Reliability',
+    short: 'Reliability',
+    description:
+      'LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.',
+    icon: 'ShieldCheck',
+    color: 'emerald',
+    order: 15,
+    primary: true,
+  },
+  {
+    id: 'developer-tools',
+    title: 'Developer Tools & Code Intelligence',
+    short: 'Devtools',
+    description:
+      'Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.',
+    icon: 'Wrench',
+    color: 'blue',
+    order: 16,
+    primary: true,
+  },
+  {
+    id: 'application-engineering',
+    title: 'Application Engineering',
+    short: 'Apps',
+    description:
+      'Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.',
+    icon: 'PanelsTopLeft',
+    color: 'indigo',
+    order: 17,
+    primary: true,
+  },
+  {
+    id: 'multimodal-spatial',
+    title: 'Multimodal & Spatial Computing',
+    short: 'Multimodal',
+    description:
+      'Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.',
+    icon: 'ScanSearch',
+    color: 'rose',
+    order: 18,
+    primary: true,
   },
 ];
 export const CONCEPTS: Concept[] = (conceptsData as any).concepts;

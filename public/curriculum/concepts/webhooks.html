@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Webhooks | SWE Prep</title>
+    <meta name="description" content="Outbound event delivery: signing, retries, idempotent receivers. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/webhooks.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Webhooks | SWE Prep">
+    <meta property="og:description" content="Outbound event delivery: signing, retries, idempotent receivers. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/webhooks.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Webhooks | SWE Prep">
+    <meta name="twitter:description" content="Outbound event delivery: signing, retries, idempotent receivers. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Webhooks","description":"Outbound event delivery: signing, retries, idempotent receivers.","url":"https://learn.significanthobbies.com/curriculum/concepts/webhooks.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Webhooks","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/backend.html">Backend</a></nav>
+      <article>
+    <p class="eyebrow">Backend · core</p>
+    <h1>Webhooks</h1>
+    <p class="lede">Outbound event delivery: signing, retries, idempotent receivers.</p>
+    <div class="pills"><span>backend</span><span>webhooks</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>A webhook is the provider calling your server when something happens, instead of your server polling them. Three rules: verify the signature so you trust the sender, return 200 fast and queue the actual work, and assume the same event may be delivered more than once.</p>
+    </section>
+
+    <section>
+      <h2>How to study Webhooks</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stripe — Webhooks to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Webhooks with Idempotency. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Verify webhook HMAC and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://docs.stripe.com/webhooks" rel="noreferrer">Stripe — Webhooks</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Verify webhook HMAC</h3>
+          <p>Body b, secret s, header HMAC-SHA256(s,b). Constant-time compare. Why reject if timestamp &gt;5m old?</p>
+          <p><strong>Expected evidence:</strong> Prevents replay; timing-safe compare prevents forgery leaks.</p>
+          <a href="/drills/webhook-signature-verify">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Webhooks in your own words. What problem does it solve and where is it used?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <p class="muted">Use a roadmap capstone to turn this concept into working evidence.</p>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/idempotency.html">Idempotency</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <p class="muted">None assigned yet.</p>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

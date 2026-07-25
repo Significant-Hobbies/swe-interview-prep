@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAP &amp; Consistency Models | SWE Prep</title>
+    <meta name="description" content="Strong/eventual/causal, PACELC. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="CAP &amp; Consistency Models | SWE Prep">
+    <meta property="og:description" content="Strong/eventual/causal, PACELC. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CAP &amp; Consistency Models | SWE Prep">
+    <meta name="twitter:description" content="Strong/eventual/causal, PACELC. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"CAP & Consistency Models","description":"Strong/eventual/causal, PACELC.","url":"https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"CAP & Consistency Models","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/distributed-systems.html">Distributed Systems</a></nav>
+      <article>
+    <p class="eyebrow">Distributed Systems · advanced</p>
+    <h1>CAP &amp; Consistency Models</h1>
+    <p class="lede">Strong/eventual/causal, PACELC.</p>
+    <div class="pills"><span>distributed-systems</span><span>databases</span><span>consistency</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>During a network partition you must choose: stay Consistent (reject requests that cannot be confirmed) or stay Available (serve possibly-stale data). CAP only bites during a partition; PACELC adds the everyday tradeoff — Else, Latency vs Consistency.</p>
+    </section>
+
+    <section>
+      <h2>How to study CAP &amp; Consistency Models</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use CAP theorem (Wikipedia) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare CAP &amp; Consistency Models with Consensus. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete CAP under partition and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Thinking you &quot;pick 2 of 3&quot; at all times — the choice only applies during a partition</li><li>Calling a system &quot;CA&quot; — partitions are not optional in a distributed system</li><li>Ignoring the latency-vs-consistency tradeoff that exists even with no partition</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://en.wikipedia.org/wiki/CAP_theorem" rel="noreferrer">CAP theorem (Wikipedia)</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>CAP under partition</h3>
+          <p>Network split isolates two DB nodes. Choose CP or AP for payment ledger vs social likes feed.</p>
+          <p><strong>Expected evidence:</strong> Ledger: CP (reject writes); likes: AP (allow divergence + merge).</p>
+          <a href="/drills/cap-partition-choice">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain CAP &amp; Consistency Models and name one common mistake: &quot;Thinking you &quot;pick 2 of 3&quot; at all times — the choice only applies during a parti…&quot;</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: Distributed Systems</h3>
+          <p>Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/replication.html">Replication</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/distributed-systems-12w.html">12-Week Distributed Systems</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

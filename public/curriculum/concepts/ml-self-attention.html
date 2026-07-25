@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Self-Attention | SWE Prep</title>
+    <meta name="description" content="Q/K/V, scaled dot-product, causal masking. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Self-Attention | SWE Prep">
+    <meta property="og:description" content="Q/K/V, scaled dot-product, causal masking. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Self-Attention | SWE Prep">
+    <meta name="twitter:description" content="Q/K/V, scaled dot-product, causal masking. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Self-Attention","description":"Q/K/V, scaled dot-product, causal masking.","url":"https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Self-Attention","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">SWE Prep</a>
+      <nav aria-label="Primary">
+        <a href="/curriculum/">Curriculum</a>
+        <a href="/learn">Interactive app</a>
+        <a href="/curriculum/catalog.md">Markdown catalog</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/ai-systems.html">AI Systems</a></nav>
+      <article>
+    <p class="eyebrow">AI Systems · advanced</p>
+    <h1>Self-Attention</h1>
+    <p class="lede">Q/K/V, scaled dot-product, causal masking.</p>
+    <div class="pills"><span>ai-systems</span><span>transformers</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Self-attention lets every token look at every other token and pull in what is relevant. Each token emits a query, a key, and a value; the query-key dot products (scaled, softmaxed) become weights over the values. Causal masking blocks a token from seeing the future.</p>
+    </section>
+
+    <section>
+      <h2>How to study Self-Attention</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Stanford CS336 — L6 Kernels &amp; Triton (FlashAttention2), CS224n — Self-Attention &amp; Transformers (Stanford), The Illustrated Transformer to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Self-Attention with Multi-Head Attention. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Scaled dot-product attention weights and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    
+
+    <section><h2>Common mistakes</h2><ul><li>Forgetting the 1/sqrt(d_k) scaling, which destabilizes the softmax</li><li>Omitting the causal mask in a decoder, leaking future tokens</li><li>Confusing the query/key/value roles</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://cs336.stanford.edu/spring2025-lectures/?trace=var/traces/lecture_06.json" rel="noreferrer">Stanford CS336 — L6 Kernels &amp; Triton (FlashAttention2)</a> <span class="muted">(course)</span></li><li><a href="https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf" rel="noreferrer">CS224n — Self-Attention &amp; Transformers (Stanford)</a> <span class="muted">(paper)</span></li><li><a href="https://jalammar.github.io/illustrated-transformer/" rel="noreferrer">The Illustrated Transformer</a> <span class="muted">(article)</span></li><li><a href="https://nlp.seas.harvard.edu/annotated-transformer/" rel="noreferrer">The Annotated Transformer</a> <span class="muted">(article)</span></li><li><a href="https://www.3blue1brown.com/lessons/attention" rel="noreferrer">Attention in transformers, visually (3Blue1Brown)</a> <span class="muted">(video)</span></li><li><a href="https://arxiv.org/abs/1706.03762" rel="noreferrer">Attention Is All You Need (Vaswani et al.)</a> <span class="muted">(paper)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Scaled dot-product attention weights</h3>
+          <p>Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.</p>
+          <p><strong>Expected evidence:</strong> Uniform weights 0.5/0.5 → output [2,3].</p>
+          <a href="/drills/ml-scaled-dot-attention">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Explain Self-Attention and name one common mistake: &quot;Forgetting the 1/sqrt(d_k) scaling, which destabilizes the softmax…&quot;</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Synthesize: AI Models &amp; Training</h3>
+          <p>Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
+          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-embeddings.html">Embeddings (Transformer)</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/ml-multi-head.html">Multi-Head Attention</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/swe-landscape.html">The Software Engineering Landscape (2026)</a></li><li><a href="/curriculum/roadmaps/ai-models-training-12w.html">12-Week AI Models &amp; Training</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>
