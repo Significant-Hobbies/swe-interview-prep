@@ -8,7 +8,7 @@ import {
   pickConceptForSession,
 } from './planner';
 import { ALL_CONCEPTS } from '../hooks/useConcepts';
-import { primaryGroup } from '../data/learning-os';
+import { EDITORIAL_DRILLS, primaryGroup } from '../data/learning-os';
 import type { MasteryEntry } from '../hooks/useConcepts';
 import { DEFAULT_USER_ELO } from './elo';
 import type { GateContext } from './gates';
@@ -56,6 +56,30 @@ describe('buildSessionPlan', () => {
     };
     const due = dueReviewQuestions({}, m);
     expect(due.length).toBeGreaterThan(0);
+  });
+
+  it('does not retry a failed drill outside the selected tracks', () => {
+    const failed = EDITORIAL_DRILLS.find((drill) => {
+      const concept = ALL_CONCEPTS.find((candidate) => candidate.id === drill.conceptId);
+      return concept && primaryGroup(concept)?.id !== 'dsa';
+    })!;
+    const plan = buildSessionPlan({
+      profile: {
+        ...DEFAULT_PROFILE,
+        trackIds: ['dsa'],
+      },
+      mastery: {},
+      rqMastery: {},
+      gateCtx: emptyGate,
+      drillState: {
+        [failed.id]: { status: 'unsolved', lastCode: '', attempts: 2 },
+      },
+      getElo: () => DEFAULT_USER_ELO,
+    });
+
+    expect(plan).not.toBeNull();
+    expect(plan?.concept.id).not.toBe(failed.conceptId);
+    expect(primaryGroup(plan!.concept)?.id).toBe('dsa');
   });
 });
 

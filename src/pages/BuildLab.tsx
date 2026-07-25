@@ -91,6 +91,16 @@ const COLUMNS: { status: ArtifactStatus; label: string; tone: string }[] = [
   { status: 'shipped', label: 'Shipped', tone: 'emerald' },
 ];
 
+export function shouldCreditArtifact(
+  successCriteriaCount: number,
+  prev: ArtifactEntry,
+  next: ArtifactEntry
+): boolean {
+  const isEvidenced = (entry: ArtifactEntry) =>
+    entry.criteria.length >= successCriteriaCount && entry.url.trim().length > 0;
+  return next.status === 'shipped' && isEvidenced(next) && !isEvidenced(prev);
+}
+
 function ArtifactBoard() {
   const { getArtifact, setArtifact } = useArtifactStore();
   const { review } = useConceptMastery();
@@ -102,10 +112,7 @@ function ArtifactBoard() {
   // being checked off AND an artifact link being present.
   function handleChange(artifact: Artifact, prev: ArtifactEntry, next: ArtifactEntry) {
     setArtifact(artifact.id, next);
-    const newlyShipped = next.status === 'shipped' && prev.status !== 'shipped';
-    const evidenced =
-      next.criteria.length >= artifact.successCriteria.length && next.url.trim().length > 0;
-    if (newlyShipped && evidenced) {
+    if (shouldCreditArtifact(artifact.successCriteria.length, prev, next)) {
       for (const cid of artifact.concepts) void review(cid, 'good');
     }
   }

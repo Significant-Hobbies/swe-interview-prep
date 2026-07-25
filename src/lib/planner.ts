@@ -235,12 +235,21 @@ export function buildSessionPlan(opts: {
 
   let picked = pickConceptForSession(profile, mastery, gateCtx);
   const failedConcept = pickFailedDrillConcept(drillState, mastery);
+  const failedConceptAllowed =
+    failedConcept &&
+    !new Set(profile.skipConceptIds).has(failedConcept.id) &&
+    conceptInSelectedTracks(failedConcept, trackFilter(profile))
+      ? failedConcept
+      : null;
   // An untouched concept has NO confidence, not maximum confidence — the old
   // `?? 1` default meant this override could never fire for a concept the
   // learner had failed but never formally reviewed.
-  if (failedConcept && (!picked || (mastery[failedConcept.id]?.confidence ?? 0) < 0.55)) {
+  if (
+    failedConceptAllowed &&
+    (!picked || (mastery[failedConceptAllowed.id]?.confidence ?? 0) < 0.55)
+  ) {
     picked = {
-      concept: failedConcept,
+      concept: failedConceptAllowed,
       roadmap: pickWeightedRoadmap(profile, mastery),
     };
   }
