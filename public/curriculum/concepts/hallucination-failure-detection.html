@@ -58,7 +58,7 @@
 
     <section>
       <h2>How to study Hallucination &amp; Failure Detection</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use NIST AI Risk Management Framework to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative LLMs, Detecting hallucinations in large language models using semantic entropy (Nature, 2024), Extrinsic Hallucinations in LLMs (Lilian Weng) to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
       <p>Next, compare Hallucination &amp; Failure Detection with AI Regression Testing, Quality, Cost &amp; Latency Measurement. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Hallucination &amp; Failure Detection and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
@@ -72,13 +72,13 @@
       </ul>
     </section>
 
-    <section><h2>Where it matters</h2><p>Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.</p></section>
 
-    <section><h2>Common mistakes</h2><ul><li>Naming a tool without explaining the mechanism or failure mode</li><li>Optimizing one metric while ignoring the system-level trade-off</li></ul></section>
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noreferrer">NIST AI Risk Management Framework</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://arxiv.org/abs/2303.08896" rel="noreferrer">SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative LLMs</a> <span class="muted">(paper)</span></li><li><a href="https://www.nature.com/articles/s41586-024-07421-0" rel="noreferrer">Detecting hallucinations in large language models using semantic entropy (Nature, 2024)</a> <span class="muted">(paper)</span></li><li><a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/" rel="noreferrer">Extrinsic Hallucinations in LLMs (Lilian Weng)</a> <span class="muted">(article)</span></li></ul>
     </section>
 
     <section>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> A design outline with evidenceCheck, constraintCheck, escalation plus an explicit failure mode or trade-off.</p>
           <a href="/drills/practice-hallucination-failure-detection">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What mechanism and trade-off should an engineer explain when designing Hallucination &amp; Failure Detection?</li></ul>
+      <h3>Review prompts</h3><ul><li>Name two mechanically different ways to detect a probable hallucination, and what each one misses.</li></ul>
     </section>
 
     <section>

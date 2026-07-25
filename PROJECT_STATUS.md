@@ -78,12 +78,13 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Eleven-domain curriculum expansion (2026-07-25) | Personally requested expansion from 9 to 18 tracks and 152 to 222 concepts. Added 10 sequenced paths, 70 drills, 70 review prompts, 10 synthesis artifacts, and a machine-readable map covering all 96 requested systems, AI, developer-tooling, application, and multimodal subtopics while preserving all prior concept IDs. |
 | Public curriculum discovery (2026-07-25) | Published a JavaScript-independent curriculum hub plus 18 track, 24 roadmap, and 222 concept pages. Every page has unique search/social metadata, structured data, substantive learning content, internal navigation, and exact sitemap coverage; compact Markdown and JSON catalogs expose the same hierarchy to AI agents. |
 | Unified site navigation (2026-07-25) | Replaced three drifting navigation variants with one canonical primary/browse model. The homepage and application share one React header; all 265 generated curriculum pages receive the equivalent semantic HTML/CSS header with no executable JavaScript or backend dependency. |
+| Learning-loop correctness (2026-07-25) | Unified guest/server FSRS confidence so failed reviews cannot appear mastered; made roadmap selection persist through the canonical profile; added track filtering and prerequisite milestones; graded drills/artifacts by evidence strength; exposed matching library sections on concepts; hid the unavailable Go runtime; and added an owner-authenticated production Socratic AI stream. Full tests, typecheck, lint, docs validation, and local build pass. |
 
 ## Products
 
 **Primary routes:** `/today` (`/` redirects here) · `/learn` · `/practice` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. (No `/build-lab` or `/login` route.)
 
-**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai`. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
+**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai` · `/api/ai/chat`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
 
 | Surface | Role |
 |---------|------|

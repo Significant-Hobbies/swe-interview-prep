@@ -20,10 +20,9 @@ import {
   sessionProgress,
   todayActivityKinds,
 } from '../lib/session';
-import { loadActiveRoadmapId } from '../lib/recommend';
 
 export default function Today() {
-  const { profile } = useProfile();
+  const { profile, activeRoadmapId } = useProfile();
   const plan = useSessionPlan();
   const { drills } = useDrillStore();
   const { artifacts } = useArtifactStore();
@@ -40,8 +39,6 @@ export default function Today() {
 
   const progress = enrichedPlan ? sessionProgress(enrichedPlan.blocks) : null;
   const streak = computeSessionStreak();
-
-  const activeRoadmapId = loadActiveRoadmapId();
 
   if (!enrichedPlan) {
     return (

@@ -15,6 +15,12 @@ export interface LearnerProfile {
   minutesPerDay: 15 | 30 | 45 | 90;
   /** Roadmap id → weight (need not sum to 1; normalized at use). */
   roadmapWeights: Record<string, number>;
+  /**
+   * Track ids the learner wants to study (`TRACKS[].id`, which is also a
+   * concept's primary tag). EMPTY MEANS ALL TRACKS — that is the v3 behaviour,
+   * so a migrated profile keeps working unchanged until the learner narrows it.
+   */
+  trackIds: string[];
   modalityWeights: ModalityWeights;
   skipConceptIds: string[];
   /** Daily email digest (reviews due + session ready). */
@@ -25,7 +31,8 @@ export interface LearnerProfile {
   updatedAt?: string;
 }
 
-export const PROFILE_VERSION = 3;
+/** v4 added `trackIds`. Migration default is `[]`, i.e. "all tracks". */
+export const PROFILE_VERSION = 4;
 
 const DEFAULT_MODALITY_WEIGHTS: ModalityWeights = {
   review: 0.22,
@@ -39,12 +46,35 @@ export const DEFAULT_PROFILE: LearnerProfile = {
   interviewHorizonDays: null,
   minutesPerDay: 45,
   roadmapWeights: { 'ai-search-infra-90-day': 1 },
+  trackIds: [],
   modalityWeights: { ...DEFAULT_MODALITY_WEIGHTS },
   skipConceptIds: [],
   digestEmail: false,
   pushEnabled: false,
   onboardingVersion: PROFILE_VERSION,
 };
+
+/**
+ * The active path. `roadmapWeights` is the single source of truth — the
+ * `activeRoadmapId` localStorage key is only a cache that `useProfile` keeps
+ * in sync for surfaces that render before the profile loads.
+ */
+export function primaryRoadmapId(profile: LearnerProfile): string {
+  const top = Object.entries(profile.roadmapWeights)
+    .filter(([, weight]) => weight > 0)
+    .sort((a, b) => b[1] - a[1])[0];
+  return top?.[0] ?? 'ai-search-infra-90-day';
+}
+
+/**
+ * Track filter as a Set, or `null` when the learner has not narrowed the
+ * catalogue. `null` means "no filter" — callers must not treat it as "nothing
+ * selected", or an untouched profile would see an empty app.
+ */
+export function trackFilter(profile: Pick<LearnerProfile, 'trackIds'>): Set<string> | null {
+  const ids = (profile.trackIds ?? []).filter(Boolean);
+  return ids.length ? new Set(ids) : null;
+}
 
 export function normalizeModalityWeights(w: ModalityWeights): ModalityWeights {
   const sum = w.review + w.drill + w.build + w.learn;

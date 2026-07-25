@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import ConceptLibrary from '../components/ConceptLibrary';
 import { FurtherReading } from '../components/FurtherReading';
 import TopicPackView from '../components/TopicPackView';
 import {
@@ -407,6 +408,8 @@ export default function ConceptDetail() {
             </div>
           )}
         </div>
+
+        <ConceptLibrary conceptId={concept.id} />
 
         <FurtherReading tags={concept.tags} limit={10} />
       </div>

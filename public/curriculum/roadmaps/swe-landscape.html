@@ -46,7 +46,7 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
       <article>
-    <p class="eyebrow">12mo roadmap · 12 milestones</p>
+    <p class="eyebrow">12mo roadmap · 13 milestones</p>
     <h1>The Software Engineering Landscape (2026)</h1>
     <p class="lede">Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.</p>
     <p><strong>Outcome:</strong> Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.</p>
@@ -61,88 +61,95 @@
       <h2>Milestones</h2>
       <article class="milestone">
           <p class="eyebrow">Milestone 1</p>
+          <h3>Prerequisites — unlock the rest of this path</h3>
+          <p>Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.</p>
+          <h4>Concepts</h4>
+          <ul class="link-list"><li><a href="/curriculum/concepts/api-design.html">API Design</a></li><li><a href="/curriculum/concepts/consistent-hashing.html">Consistent Hashing</a></li><li><a href="/curriculum/concepts/descriptive-statistics.html">Descriptive Statistics</a></li><li><a href="/curriculum/concepts/embeddings.html">Embeddings</a></li><li><a href="/curriculum/concepts/idempotency.html">Idempotency</a></li><li><a href="/curriculum/concepts/ml-multi-head.html">Multi-Head Attention</a></li><li><a href="/curriculum/concepts/ml-tokenization.html">Tokenization (LLM)</a></li><li><a href="/curriculum/concepts/ml-training.html">Training &amp; Debugging</a></li><li><a href="/curriculum/concepts/object-modeling.html">Object Modeling</a></li><li><a href="/curriculum/concepts/probability-fundamentals.html">Probability Fundamentals</a></li><li><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></li><li><a href="/curriculum/concepts/ml-checkpointing.html">Checkpointing</a></li><li><a href="/curriculum/concepts/ml-math.html">ML Math Foundations</a></li><li><a href="/curriculum/concepts/ml-softmax-xent.html">Softmax &amp; Cross-Entropy</a></li><li><a href="/curriculum/concepts/ml-gradient-descent.html">Gradient Descent</a></li><li><a href="/curriculum/concepts/ml-language-modeling.html">Language Modeling</a></li><li><a href="/curriculum/concepts/ml-backprop.html">Backpropagation</a></li><li><a href="/curriculum/concepts/ml-embeddings.html">Embeddings (Transformer)</a></li><li><a href="/curriculum/concepts/ml-adamw.html">AdamW Optimizer</a></li></ul>
+
+        </article><article class="milestone">
+          <p class="eyebrow">Milestone 2</p>
           <h3>LLMs and inference engines</h3>
           <p>Transformers end-to-end, KV cache, paged attention, quantization.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/ml-self-attention.html">Self-Attention</a></li><li><a href="/curriculum/concepts/ml-transformer-block.html">Transformer Block</a></li><li><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li><li><a href="/curriculum/concepts/model-routing.html">Model Routing</a></li></ul>
-          
+          <ul class="link-list"><li><a href="/curriculum/concepts/ml-self-attention.html">Self-Attention</a></li><li><a href="/curriculum/concepts/ml-transformer-block.html">Transformer Block</a></li><li><a href="/curriculum/concepts/ml-sampling.html">Sampling &amp; Decoding</a></li><li><a href="/curriculum/concepts/rag.html">RAG</a></li><li><a href="/curriculum/concepts/model-routing.html">Model Routing</a></li><li><a href="/curriculum/concepts/ml-rl-alignment.html">RL Alignment (GRPO &amp; Policy Gradient)</a></li></ul>
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 2</p>
+          <p class="eyebrow">Milestone 3</p>
           <h3>Databases and storage engines</h3>
           <p>B-trees, LSM, WAL, MVCC, columnar — see the dedicated DB roadmap.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/lsm-tree.html">LSM Tree</a></li><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/columnar-storage.html">Columnar Storage</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 3</p>
+          <p class="eyebrow">Milestone 4</p>
           <h3>Streaming and event systems</h3>
           <p>Append-only logs, partitions, watermarks, stateful stream processing.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/message-queues.html">Message Queues</a></li><li><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></li><li><a href="/curriculum/concepts/retries-dlq.html">Retries &amp; DLQ</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 4</p>
+          <p class="eyebrow">Milestone 5</p>
           <h3>Game engines and real-time graphics</h3>
           <p>Fixed-step loops, ECS, render pipelines, GPU command buffers.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/game-design.html">Game/Simulation Design</a></li><li><a href="/curriculum/concepts/concurrency-design.html">Concurrency Design</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 5</p>
+          <p class="eyebrow">Milestone 6</p>
           <h3>Containers and orchestration</h3>
           <p>Linux namespaces, cgroups, OCI runtimes, Kubernetes scheduling.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 6</p>
+          <p class="eyebrow">Milestone 7</p>
           <h3>Browsers (Chromium, Firefox, Servo)</h3>
           <p>Parser, layout, JS engine, compositor, sandboxing, WebAssembly.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/ml-browser-runtime.html">Browser ML Runtime</a></li><li><a href="/curriculum/concepts/ml-webgpu.html">WebGPU Compute</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 7</p>
+          <p class="eyebrow">Milestone 8</p>
           <h3>Compilers and language runtimes</h3>
           <p>Lexer → parser → AST → IR → optimization → codegen; GC, JIT.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/state-management.html">State Machines</a></li><li><a href="/curriculum/concepts/strategy-pattern.html">Strategy Pattern</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 8</p>
+          <p class="eyebrow">Milestone 9</p>
           <h3>Operating systems and kernels</h3>
           <p>Processes, virtual memory, schedulers, file systems, syscalls.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/concurrency-design.html">Concurrency Design</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 9</p>
+          <p class="eyebrow">Milestone 10</p>
           <h3>Networking and protocols</h3>
           <p>TCP/IP, TLS, HTTP/2 and HTTP/3, QUIC, BGP.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/http-lifecycle.html">HTTP Lifecycle</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 10</p>
+          <p class="eyebrow">Milestone 11</p>
           <h3>Distributed systems</h3>
           <p>Consensus, replication, 2PC, gossip, vector clocks.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li><li><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></li><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li><li><a href="/curriculum/concepts/sharding.html">Sharding</a></li><li><a href="/curriculum/concepts/replication.html">Replication</a></li></ul>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 11</p>
+          <p class="eyebrow">Milestone 12</p>
           <h3>Build systems and developer tooling</h3>
           <p>Incremental builds, content-addressed caches, LSP, tree-sitter.</p>
           <h4>Concepts</h4>
           <p class="muted">None assigned yet.</p>
-          
+
         </article><article class="milestone">
-          <p class="eyebrow">Milestone 12</p>
+          <p class="eyebrow">Milestone 13</p>
           <h3>Cryptography (applied)</h3>
           <p>Primitives, signatures, AEAD, TLS, MLS, ZKPs.</p>
           <h4>Concepts</h4>
           <ul class="link-list"><li><a href="/curriculum/concepts/auth-systems.html">Auth Systems</a></li></ul>
-          
+
         </article>
     </section>
     <p class="cta"><a href="/roadmaps/swe-landscape">Start this roadmap in the interactive app →</a></p>

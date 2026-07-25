@@ -7,7 +7,10 @@ import {
   loadLearningProgress,
   type LearningItem,
 } from '../data/learning-sources';
+import { useProfile } from '../hooks/useProfile';
 import { useReaderLearning } from '../hooks/useReaderLearning';
+import { trackFilter } from '../lib/profile';
+import { tagsMatchTracks } from '../lib/trackMatch';
 
 const SOURCE_PREFIX = {
   briefing: 'News',
@@ -25,6 +28,8 @@ export default function LearningSources() {
   const [query, setQuery] = useState('');
   const [sourceId, setSourceId] = useState('all');
   const reader = useReaderLearning();
+  const { profile } = useProfile();
+  const tracks = trackFilter(profile);
   const progress = loadLearningProgress();
   const allItems = useMemo(() => [...LEARNING_SOURCES.items, ...reader.items], [reader.items]);
   const allSources = useMemo(
@@ -39,14 +44,22 @@ export default function LearningSources() {
   );
   const items = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return allItems.filter((item) => {
+    const matching = allItems.filter((item) => {
       if (sourceId !== 'all' && item.sourceId !== sourceId) return false;
       if (!normalized) return true;
       return [item.title, item.summary, item.project, item.collection, ...item.tracks]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(normalized));
     });
-  }, [allItems, query, sourceId]);
+    if (!tracks) return matching;
+    // Item tags are free-form, so a hard filter would hide too much. Items in
+    // the learner's tracks are surfaced first instead — which also decides
+    // what the sprint button picks up.
+    const inTracks = matching.filter((item) => tagsMatchTracks(item.tracks, tracks));
+    if (!inTracks.length) return matching;
+    const inTrackIds = new Set(inTracks.map((item) => item.id));
+    return [...inTracks, ...matching.filter((item) => !inTrackIds.has(item.id))];
+  }, [allItems, query, sourceId, tracks]);
   const completed = Object.values(progress).filter((entry) => entry.status === 'completed').length;
   const sprintItem = items.find((item) => progress[item.id]?.status !== 'completed') || items[0];
 

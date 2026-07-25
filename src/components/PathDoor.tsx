@@ -2,8 +2,8 @@ import { ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ROADMAP_BY_ID } from '../data/learning-os';
+import { useProfile } from '../hooks/useProfile';
 import { ROADMAP_GROUPS } from '../lib/roadmapGroups';
-import { saveActiveRoadmapId } from '../lib/recommend';
 
 const GROUP_EMOJI: Record<string, string> = {
   interview: '🎯',
@@ -20,6 +20,7 @@ interface PathDoorProps {
 
 export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorProps) {
   const navigate = useNavigate();
+  const { setActiveRoadmap } = useProfile();
   const activeGroupId = activeRoadmapId
     ? ROADMAP_GROUPS.find((g) => g.roadmapIds.includes(activeRoadmapId))?.id
     : undefined;
@@ -85,7 +86,7 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
                 <button
                   type="button"
                   onClick={() => {
-                    saveActiveRoadmapId(defaultId);
+                    void setActiveRoadmap(defaultId);
                     navigate('/learn');
                   }}
                   className="border-t border-white/[0.06] px-3.5 py-2 text-left font-mono text-[10px] text-white/40 transition-colors hover:bg-white/[0.03] hover:text-white/65"

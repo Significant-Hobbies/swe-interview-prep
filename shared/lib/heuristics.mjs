@@ -3,7 +3,7 @@
  */
 
 import { categoryForConcept } from './category.mjs';
-import { decayConfidence } from './fsrs.mjs';
+import { masteryConfidence } from './fsrs.mjs';
 import { enrichPlanWithRoadmap, roadmapPromptSuffix } from './roadmap-context.mjs';
 
 const TASK_TYPES = ['build', 'review', 'read', 'explain'];
@@ -19,7 +19,7 @@ export function pickDailyConcept(concepts, masteryRows, dayOfYear = new Date()) 
   for (const m of masteryRows) {
     masteryMap[m.concept_id] = {
       ...m,
-      confidence: decayConfidence(m, now),
+      confidence: masteryConfidence(m, now),
     };
   }
 
@@ -174,7 +174,7 @@ export function buildWeeklyReport({ activity, mastery, feynman, concepts }) {
   const conceptIndex = Object.fromEntries(concepts.map((c) => [c.id, c]));
   const masteryEnriched = mastery.map((m) => ({
     ...m,
-    confidence: decayConfidence(m, now),
+    confidence: masteryConfidence(m, now),
     name: conceptIndex[m.concept_id]?.name || m.concept_id,
     category: conceptIndex[m.concept_id] ? categoryForConcept(conceptIndex[m.concept_id]) : '?',
   }));

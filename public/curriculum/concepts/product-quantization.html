@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook. A 1536-d float32 vector (6KB) shrinks to a handful of bytes, at the cost of approximate distances.</p>
+      <p>PQ splits each vector into m sub-vectors and replaces each with the id of its nearest centroid in a per-sub-space codebook. With 8-bit codes that is one byte per sub-vector: a 1536-d float32 vector (6 KB) becomes roughly 48-192 bytes depending on m — a 30-100x cut, paid for with approximate distances.</p>
     </section>
 
     <section>

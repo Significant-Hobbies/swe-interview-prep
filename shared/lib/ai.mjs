@@ -1,5 +1,39 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { generateText, streamText } from 'ai';
+
+/** Thrown when no BYOK config and no server-side AI credentials are available. */
+export class AIConfigError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'AIConfigError';
+  }
+}
+
+export const AI_CONFIG_MISSING_MESSAGE =
+  'AI is not configured. Add your own endpoint URL, API key, and model in Settings, or set AI_ENDPOINT_URL / AI_API_KEY / AI_MODEL on the deployment.';
+
+/**
+ * Resolve the provider config from an explicit (BYOK) config, falling back to
+ * environment defaults. `env` lets Cloudflare Workers pass their bindings in,
+ * since `process.env` is not the source of truth there.
+ */
+export function resolveAIConfig({ endpointUrl, apiKey, model } = {}, env = undefined) {
+  const source = env || (typeof process !== 'undefined' ? process.env : undefined) || {};
+  const eu = endpointUrl || source.AI_ENDPOINT_URL;
+  const key = apiKey || source.AI_API_KEY;
+  const m = model || source.AI_MODEL;
+  if (!eu || !key || !m) throw new AIConfigError(AI_CONFIG_MISSING_MESSAGE);
+  return { endpointUrl: eu, apiKey: key, model: m };
+}
+
+function buildProvider({ endpointUrl, apiKey }) {
+  return createOpenAICompatible({
+    baseURL: endpointUrl,
+    apiKey,
+    name: 'custom',
+    headers: { 'x-gateway-project-id': 'swe-interview-prep' },
+  });
+}
 
 /**
  * Server-side AI text generation using user-provided or env-default config.
@@ -14,23 +48,11 @@ export async function generate({
   messages,
   maxTokens = 1500,
 }) {
-  const eu = endpointUrl || process.env.AI_ENDPOINT_URL;
-  const key = apiKey || process.env.AI_API_KEY;
-  const m = model || process.env.AI_MODEL;
-  if (!eu || !key || !m) {
-    throw new Error(
-      'AI config missing: endpointUrl/apiKey/model required (or AI_ENDPOINT_URL/AI_API_KEY/AI_MODEL env vars)'
-    );
-  }
-  const provider = createOpenAICompatible({
-    baseURL: eu,
-    apiKey: key,
-    name: 'custom',
-    headers: { 'x-gateway-project-id': 'swe-interview-prep' },
-  });
+  const resolved = resolveAIConfig({ endpointUrl, apiKey, model });
+  const provider = buildProvider(resolved);
   try {
     const result = await generateText({
-      model: provider(m),
+      model: provider(resolved.model),
       system,
       messages: messages || [{ role: 'user', content: prompt }],
       maxOutputTokens: maxTokens,
@@ -46,6 +68,30 @@ export async function generate({
     wrapped.cause = e;
     throw wrapped;
   }
+}
+
+/**
+ * Streaming counterpart to `generate`. Returns an async iterable of text
+ * deltas. Throws `AIConfigError` when neither BYOK nor env credentials exist.
+ */
+export function generateStream({
+  endpointUrl,
+  apiKey,
+  model,
+  system,
+  messages,
+  maxTokens = 1500,
+  env,
+}) {
+  const resolved = resolveAIConfig({ endpointUrl, apiKey, model }, env);
+  const provider = buildProvider(resolved);
+  const result = streamText({
+    model: provider(resolved.model),
+    system: system || undefined,
+    messages,
+    maxOutputTokens: maxTokens,
+  });
+  return result.textStream;
 }
 
 /**

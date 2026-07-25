@@ -6,7 +6,7 @@ import CanonicalPrimers from '../components/CanonicalPrimers';
 import PathDoor from '../components/PathDoor';
 import PlaygroundHero from '../components/PlaygroundHero';
 import { CONCEPTS, CONCEPT_PACKS, EDITORIAL_DRILLS, ROADMAPS, TRACKS } from '../data/learning-os';
-import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
+import { useProfile } from '../hooks/useProfile';
 import { catalogPackStats, PACK_SLOT_LABEL, PACK_SLOTS } from '../lib/packStats';
 import { ROADMAP_GROUPS, roadmapsInGroup } from '../lib/roadmapGroups';
 
@@ -19,7 +19,7 @@ const HORIZON_LABEL: Record<string, string> = {
 
 export default function Explore() {
   const navigate = useNavigate();
-  const activeId = loadActiveRoadmapId();
+  const { activeRoadmapId: activeId, setActiveRoadmap } = useProfile();
   const packStats = catalogPackStats(CONCEPT_PACKS);
 
   return (
@@ -123,7 +123,7 @@ export default function Explore() {
                       <button
                         type="button"
                         onClick={() => {
-                          saveActiveRoadmapId(r.id);
+                          void setActiveRoadmap(r.id);
                           navigate('/learn');
                         }}
                         className="rounded-full border border-white/15 px-3 py-1.5 font-mono text-[10px] text-white/55 transition-colors hover:border-white/30 hover:text-white"

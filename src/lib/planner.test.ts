@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
 import { DEFAULT_PROFILE } from './profile';
-import { buildSessionPlan, dueReviewQuestions } from './planner';
+import {
+  buildSessionPlan,
+  conceptInSelectedTracks,
+  dueReviewQuestions,
+  pickConceptForSession,
+} from './planner';
+import { ALL_CONCEPTS } from '../hooks/useConcepts';
+import { primaryGroup } from '../data/learning-os';
 import type { MasteryEntry } from '../hooks/useConcepts';
 import { DEFAULT_USER_ELO } from './elo';
 import type { GateContext } from './gates';
@@ -49,5 +56,36 @@ describe('buildSessionPlan', () => {
     };
     const due = dueReviewQuestions({}, m);
     expect(due.length).toBeGreaterThan(0);
+  });
+});
+
+describe('track selection', () => {
+  it('no filter accepts every concept', () => {
+    expect(ALL_CONCEPTS.every((c) => conceptInSelectedTracks(c, null))).toBe(true);
+  });
+
+  it('a filter keeps only concepts in the chosen tracks', () => {
+    const target = ALL_CONCEPTS.find((c) => primaryGroup(c)?.id === 'dsa');
+    const other = ALL_CONCEPTS.find((c) => primaryGroup(c)?.id === 'mathematics');
+    expect(target).toBeTruthy();
+    expect(other).toBeTruthy();
+    const filter = new Set(['dsa']);
+    expect(conceptInSelectedTracks(target!, filter)).toBe(true);
+    expect(conceptInSelectedTracks(other!, filter)).toBe(false);
+  });
+
+  it('picks a concept from the selected track', () => {
+    const picked = pickConceptForSession({ ...DEFAULT_PROFILE, trackIds: ['dsa'] }, {}, emptyGate);
+    expect(picked).not.toBeNull();
+    expect(primaryGroup(picked!.concept)?.id).toBe('dsa');
+  });
+
+  it('falls back outside the filter rather than emptying the session', () => {
+    const picked = pickConceptForSession(
+      { ...DEFAULT_PROFILE, trackIds: ['no-such-track'] },
+      {},
+      emptyGate
+    );
+    expect(picked).not.toBeNull();
   });
 });

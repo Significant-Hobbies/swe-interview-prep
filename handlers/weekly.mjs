@@ -1,7 +1,7 @@
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { requireAuth } from '../api/auth/verify.mjs';
-import { decayConfidence } from '../shared/lib/fsrs.mjs';
+import { masteryConfidence } from '../shared/lib/fsrs.mjs';
 import { generate } from '../shared/lib/ai.mjs';
 import { buildWeeklyReport } from '../shared/lib/heuristics.mjs';
 import { randomBytes } from 'node:crypto';
@@ -84,7 +84,7 @@ export default async function handler(req, res) {
     const now = new Date();
     const conceptStats = mastery.rows
       .map((m) => {
-        const conf = decayConfidence(m, now);
+        const conf = masteryConfidence(m, now);
         return `${m.concept_id}: conf=${conf.toFixed(2)} reps=${m.reps} lapses=${m.lapses} last=${m.last_review?.slice(0, 10) || 'never'}`;
       })
       .join('\n');

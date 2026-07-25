@@ -40,3 +40,26 @@ describe('Pages agent catalog route', () => {
     expect(response.status).toBe(405);
   });
 });
+
+describe('Pages AI chat route', () => {
+  it('rejects unauthenticated provider requests before reading configuration', async () => {
+    const response = await onRequest({
+      request: new Request('https://learn.significanthobbies.com/api/ai/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          endpointUrl: 'https://provider.example/v1',
+          apiKey: 'user-provided-key',
+          model: 'test-model',
+          messages: [{ role: 'user', content: 'hello' }],
+        }),
+      }),
+      env: {},
+      params: { path: ['ai', 'chat'] },
+      next: vi.fn(),
+    });
+
+    expect(response.status).toBe(401);
+    await expect(response.json()).resolves.toEqual({ error: 'Unauthorized' });
+  });
+});

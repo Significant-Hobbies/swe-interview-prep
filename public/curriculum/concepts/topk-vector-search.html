@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Top-k is a bounded selection problem: maintain a size-k min-heap of best candidates while scanning. Exact search scans everything; ANN scans a clever subset.</p>
+      <p>Top-k is a bounded selection problem: keep a size-k heap whose root is the current worst survivor and evict that root when something better arrives. Ranking by similarity (higher is better) the root is the smallest, so it is a min-heap; ranking by distance (lower is better) the root is the largest, so it is a max-heap. Exact search scans everything; ANN scans a clever subset.</p>
     </section>
 
     <section>
@@ -72,7 +72,7 @@
       </ul>
     </section>
 
-    
+
 
     <section><h2>Common mistakes</h2><ul><li>Sorting all scores instead of using a k-sized heap</li><li>Confusing recall@k (quality) with k (result count)</li></ul></section>
 
@@ -108,7 +108,7 @@
 
     <section>
       <h2>Learning paths</h2>
-      <p class="muted">None assigned yet.</p>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li><li><a href="/curriculum/roadmaps/db-disk-first.html">Disk-First Databases &amp; RAM</a></li></ul>
     </section>
   </article>
     </main>

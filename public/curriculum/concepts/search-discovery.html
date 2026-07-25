@@ -53,7 +53,7 @@
 
     <section>
       <h2>Mental model</h2>
-      <p>Discovery search is for &quot;I do not know what I want yet&quot; — no real query, just signals like recency, popularity, personalization, and browseable categories. It has a different ranking function and a different evaluation than keyword search; do not measure it the same way.</p>
+      <p>A search system is a pipeline, not a scoring function: analyze -&gt; inverted index -&gt; cheap candidate retrieval -&gt; expensive reranking -&gt; serve. The first stage decides what the good ranker is ever allowed to see, so recall lost there cannot be recovered later. Autocomplete is a separate prefix index with its own latency budget, not a query against the main index.</p>
     </section>
 
     <section>
@@ -72,9 +72,9 @@
       </ul>
     </section>
 
-    
 
-    
+
+
 
     <section>
       <h2>Learn from primary sources</h2>
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> Browse: dwell/engagement; search: nDCG/precision@k.</p>
           <a href="/drills/browse-vs-search-metrics">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Search Systems in your own words. What problem does it solve and where is it used?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why can recall lost in candidate generation never be recovered by a better ranker?</li></ul>
     </section>
 
     <section>

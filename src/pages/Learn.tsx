@@ -1,5 +1,4 @@
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import BrowseLinks from '../components/BrowseLinks';
@@ -13,6 +12,7 @@ import { rollupMastery } from '../lib/conceptState';
 import { conceptAccessible } from '../lib/gates';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 import { ROADMAP_GROUPS, roadmapsInGroup, ungroupedRoadmaps } from '../lib/roadmapGroups';
+import { useProfile } from '../hooks/useProfile';
 
 const HORIZON_LABEL: Record<string, string> = {
   '9d': '9 days',
@@ -21,21 +21,21 @@ const HORIZON_LABEL: Record<string, string> = {
   '12mo': '12 months',
 };
 
-import { loadActiveRoadmapId, saveActiveRoadmapId } from '../lib/recommend';
-
 export default function Learn() {
   const { mastery } = useConceptMastery();
   const gateCtx = useGateContext();
-  const [activeId, setActiveId] = useState<string>(
-    () => loadActiveRoadmapId() || pickDefaultActive(mastery)
-  );
+  // The profile is the source of truth for the active path; picking one here
+  // rewrites `roadmapWeights`, which is what Today's planner reads.
+  const { activeRoadmapId, setActiveRoadmap } = useProfile();
 
   function pick(id: string) {
-    setActiveId(id);
-    saveActiveRoadmapId(id);
+    void setActiveRoadmap(id);
   }
 
-  const active = ROADMAPS.find((r) => r.id === activeId) ?? ROADMAPS[0];
+  const active =
+    ROADMAPS.find((r) => r.id === activeRoadmapId) ??
+    ROADMAPS.find((r) => r.id === pickDefaultActive(mastery)) ??
+    ROADMAPS[0];
   const next = pickNextConceptInRoadmap(active, mastery, gateCtx);
   const nextDrill = next ? pickDrillForConcept(next.id) : null;
 

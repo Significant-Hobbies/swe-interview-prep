@@ -1,5 +1,6 @@
 import snapshotData from './learning-sources.json';
-import { isDue, reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
+import { isDue } from '../lib/conceptState';
+import { reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
 
 type LearningSourceKind = 'native' | 'briefing' | 'project' | 'research' | 'reader';
 

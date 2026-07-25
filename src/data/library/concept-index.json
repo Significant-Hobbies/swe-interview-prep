@@ -1,48 +1,34 @@
 {
-  "search-discovery": [
+  "tokenization": [
     {
-      "repoId": "ood-interview",
-      "repoName": "OOD Interview",
-      "sectionId": "file-search-filesearch-readme-md",
-      "title": "Filesearch",
-      "snippet": "# Unix File Search Project This project implements a flexible file search system similar to Unix's find command, allowing users to search for files based on various criteria such as name, owner, siz…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-breadth-first-search-readme-md",
-      "title": "Breadth First Search",
-      "snippet": "# Breadth-First Search (BFS) Breadth-first search (BFS) is an algorithm for traversing, searching tree, or graph data structures. It starts at the tree root (or some arbitrary node of a graph, some…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-depth-first-search-readme-md",
-      "title": "Depth First Search",
-      "snippet": "# Depth-First Search (DFS) Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root (selecting some arbitrary node as the root in…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-encoding-vs-encryption-vs-tokenization-md",
+      "title": "Encoding vs Encryption vs Tokenization",
+      "snippet": "--- title: \"Encoding vs Encryption vs Tokenization\" description: \"Understand encoding, encryption, and tokenization for data handling.\" image: \"https://assets.bytebytego.com/diagrams/0033-encoding-vs-encryption-vs-tokenization.png\" create…"
     }
   ],
-  "rag": [
+  "search-discovery": [
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-42",
-      "title": "42. What are the differences between cookie, local storage and session storage",
-      "snippet": "### What are the differences between cookie, local storage and session storage Below are some of the differences between cookie, local storage and session storage, | Feature | Cookie…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-how-do-search-engines-work-md",
+      "title": "How Do Search Engines Work",
+      "snippet": "--- title: \"How Do Search Engines Work?\" description: \"Explore the inner workings of search engines: crawling, indexing, and ranking.\" image: \"https://assets.bytebytego.com/diagrams/0103-how-do-search…"
     },
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-43",
-      "title": "43. What is the main difference between localStorage and sessionStorage",
-      "snippet": "### What is the main difference between localStorage and sessionStorage LocalStorage is the same as SessionStorage but it persists the data even when the browser is closed and reopened(i.e it has no expiration time) whereas in sessionStorage data…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-making-sense-of-search-engine-optimization-md",
+      "title": "Making Sense of Search Engine Optimization",
+      "snippet": "--- title: \"Making Sense of Search Engine Optimization\" description: \"Understand how search engines rank websites and optimize your website.\" image: \"https://assets.bytebytego.com/diagrams/0326-seo.jp…"
     },
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-36",
-      "title": "36. What is web storage",
-      "snippet": "### What is web storage Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies. The web storag…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-binary-search",
+      "title": "Binary Search",
+      "snippet": "# Binary Search - [Cutting Wood.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Binary Search/cutting_wood.py) - [Find the Insertion Index.py](https://github.com/ByteB…"
     }
   ],
   "rate-limiting": [
@@ -54,11 +40,36 @@
       "snippet": "…vents * Mouse movement or drag events * API rate limiting **How does throttling work?** Throttling will execute the function at most once every specified time interval, ignoring additional calls until the interval has passed.…"
     },
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-388",
-      "title": "388. What is minimum timeout throttling",
-      "snippet": "### What is minimum timeout throttling Both browser and NodeJS javascript environments throttles with a minimum delay that is greater than 0ms. That means even though setting a delay of 0ms will not…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-rate-limiting-why-do-we-need-rate-limiting",
+      "title": "Why Do We Need Rate Limiting?",
+      "snippet": "## Why do we need Rate Limiting? Rate limiting is a very important part of any large-scale system and it can be used to accomplish the following: - Avoid resource starvation as a result of Denial of Service (DoS) att…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-rate-limiting-rate-limiting-in-distributed-systems",
+      "title": "Rate Limiting in Distributed Systems",
+      "snippet": "## Rate Limiting in Distributed Systems Rate Limiting becomes complicated when distributed systems are involved. The two broad problems that come with rate limiting in distributed systems are: ### Inco…"
+    }
+  ],
+  "idempotency": [
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-top-6-cases-to-apply-idempotency-md",
+      "title": "Top 6 Cases to Apply Idempotency",
+      "snippet": "--- title: \"Top 6 Cases to Apply Idempotency\" description: \"Explore 6 key use cases where idempotency is crucial for reliable systems.\" image: \"https://assets.bytebytego.com/diagrams/0377-top-6-cases-of-leveraging-idempotency.png\" cr…"
+    }
+  ],
+  "webhooks": [
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-polling-vs-webhooks-md",
+      "title": "Polling vs Webhooks",
+      "snippet": "--- title: \"Polling vs Webhooks\" description: \"Polling vs webhooks: a detailed comparison of two data retrieval methods.\" image: 'https://assets.bytebytego.com/diagrams/0057-pooling-vs-webhook.png' createdAt: '2024-03-03' d…"
     }
   ],
   "caching": [
@@ -70,37 +81,51 @@
       "snippet": "### What is inline caching? Inline caching is an optimization technique based on the observation that repeated calls to same function tends to occur on same type of objects. The V8 compiler stores a cache of the type o…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-lrucache-readme-md",
-      "title": "Lrucache",
-      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-domain-name-system-dns-dns-caching",
+      "title": "DNS Caching",
+      "snippet": "## DNS Caching A DNS cache (sometimes called a DNS resolver cache) is a temporary database, maintained by a computer's operating system, that contains records of all the recent visits and attempted visits t…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-lrucache-readme-md",
-      "title": "Lrucache",
-      "snippet": "# Designing a LRU Cache ## Requirements 1. The LRU cache should support the following operations: - put(key, value): Insert a key-value pair into the cache. If the cache is at capacity, remove the l…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-caching",
+      "title": "Caching",
+      "snippet": "# Caching _\"There are only two hard things in Computer Science: cache invalidation and naming things.\" - Phil Karlton_ ![caching](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/pu…"
     }
   ],
   "message-queues": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kafka",
-      "title": "Kafka",
-      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-can-kafka-lose-messages-md",
+      "title": "Can Kafka Lose Messages",
+      "snippet": "--- title: \"Can Kafka Lose Messages?\" description: \"Explore Kafka's message loss scenarios and prevention strategies.\" image: \"https://assets.bytebytego.com/diagrams/0130-can-kafka-lose-messages.png\"…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-how-do-message-queue-architectures-evolve-md",
+      "title": "How Do Message Queue Architectures Evolve",
+      "snippet": "…ft: false categories: - \"database-and-storage\" tags: - \"Message Queues\" - \"System Design\" --- ![Message Queue Evolution](https://assets.bytebytego.com/diagrams/0271-message-queue-evolve.png) * IBM MQ IBM MQ was launched in 1993. It was originally ca…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-the-ultimate-kafka-101-you-cannot-miss-md",
+      "title": "The Ultimate Kafka 101 You Cannot Miss",
+      "snippet": "--- title: \"The Ultimate Kafka 101 You Cannot Miss\" description: \"Learn the fundamentals of Kafka in 8 simple steps.\" image: \"https://assets.bytebytego.com/diagrams/0246-kafka-101-8-steps-to-learn-the…"
     }
   ],
   "monitoring-analytics": [
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-logging-tracing-metrics-md",
+      "title": "Logging Tracing Metrics",
+      "snippet": "…ption: \"Understand logging, tracing, and metrics for system observability.\" image: \"https://assets.bytebytego.com/diagrams/0264-logging-tracing-metrics.png\" createdAt: \"2024-03-11\" draft: false categories: - devops-cicd tags: - \"observability\" - \"monitor…"
+    },
     {
       "repoId": "devops-exercises",
       "repoName": "DevOps Exercises",
@@ -109,458 +134,309 @@
       "snippet": "# Observability - [Observability](#observability) - [Monitoring](#monitoring) - [Data](#data) - [Application Performance Management](#application-performance-management) <details> <summary>What'…"
     },
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-5",
-      "title": "5. What is the purpose of the array slice method",
-      "snippet": "### What is the purpose of the array slice method The `slice()` method in JavaScript is used to extract a section of an array, returning a new array containing the selected elements. It does not mod…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-7",
-      "title": "7. What is the difference between slice and splice",
-      "snippet": "### What is the difference between slice and splice Here are the key differences between `slice()` and `splice()` methods in JavaScript arrays: | `slice()`…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-sla-slo-sli",
+      "title": "Sla, Slo, Sli",
+      "snippet": "# SLA, SLO, SLI Let's briefly discuss SLA, SLO, and SLI. These are mostly related to the business and site reliability side of things but good to know nonetheless.…"
     }
   ],
   "api-design": [
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-twitter-readme-md",
-      "title": "Twitter",
-      "snippet": "# Design the Twitter timeline and search *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-of-system…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-how-do-we-perform-pagination-in-api-design-md",
+      "title": "How Do We Perform Pagination in API Design",
+      "snippet": "--- title: How do we Perform Pagination in API Design? description: Learn about API pagination techniques for efficient data retrieval. image: 'https://assets.bytebytego.com/diagrams/0076-api-pagination-101.png' createdAt: '2024-03-04' draft:…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-8-tips-for-efficient-api-design-md",
+      "title": "8 Tips for Efficient API Design",
+      "snippet": "--- title: '8 Tips for Efficient API Design' description: 'Improve your API design with these 8 essential tips for efficiency.' image: 'https://assets.bytebytego.com/diagrams/0385-top-8-tips-for-restful-api-design.png' createdAt: '20…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-how-does-grpc-work-md",
+      "title": "How Does Grpc Work",
+      "snippet": "--- title: How does gRPC work? description: Learn how gRPC works, its data flow, and performance benefits. image: 'https://assets.bytebytego.com/diagrams/0210-grpc.png' createdAt: '2024-01-28' draft:…"
     }
   ],
   "auth-systems": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-explaining-sessions-tokens-jwt-sso-and-oauth-in-one-diagram-md",
+      "title": "Explaining Sessions Tokens JWT Sso and Oauth in One Diagram",
+      "snippet": "--- title: \"Sessions, Tokens, JWT, SSO, and OAuth Explained\" description: \"Understanding sessions, tokens, JWT, SSO, and OAuth concepts.\" image: \"https://assets.bytebytego.com/diagrams/0330-session-sq…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "# AWS **Note**: Some of the exercises <b>cost $$$</b> and can't be performed using the free tier or resources **2nd Note**: The provided solutions are using the AWS console. It's recommended you us…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-jwt-101-key-to-stateless-authentication-md",
+      "title": "JWT 101 Key to Stateless Authentication",
+      "snippet": "--- title: \"JWT 101: Key to Stateless Authentication\" description: \"Learn about JSON Web Tokens (JWT) for secure, stateless authentication.\" image: \"https://assets.bytebytego.com/diagrams/0244-jwt-101…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-security",
-      "title": "Security",
-      "snippet": "# Security <details> <summary>What is DevSecOps? What its core principals?</summary><br><b> A couple of quotations from chosen companies: [Snyk](https://snyk.io/series/devsecops): \"DevSecOps refer…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-session-cookie-jwt-token-sso-and-oauth-2-md",
+      "title": "Session Cookie JWT Token Sso and Oauth 2",
+      "snippet": "--- title: \"Session, Cookie, JWT, Token, SSO, and OAuth 2.0 Explained\" description: \"Understanding sessions, cookies, JWT, SSO, and OAuth 2.0 in one diagram.\" image: \"https://assets.bytebytego.com/dia…"
     }
   ],
   "ecommerce-payments": [
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
-      "title": "Airlinemanagementsystem",
-      "snippet": "…lights, manage passengers, handle seat assignments, process payments, and track bookings and flights. --- ## Requirements - **Flight Management:** The system manages flights, each with a unique flight number, aircraft, source, destination, and schedule. - *…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-the-payments-ecosystem-md",
+      "title": "The Payments Ecosystem",
+      "snippet": "--- title: \"The Payments Ecosystem\" description: \"Explore the key players and processes in the payments ecosystem.\" image: \"https://assets.bytebytego.com/diagrams/0360-the-payments-ecosystem.png\" createdAt: \"2024-03-…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-restaurantmanagementsystem-readme-md",
-      "title": "Restaurantmanagementsystem",
-      "snippet": "…s, place orders, manage tables, generate bills, and process payments. The system should also support staff management and menu management. --- ## Requirements - **Table Management:** The system manages tables, their availability, and assignments. - **Reserv…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-unified-payments-interface-upi-in-india-md",
+      "title": "Unified Payments Interface Upi in India",
+      "snippet": "--- title: \"Unified Payments Interface (UPI)\" description: \"Explore the architecture and workings of India's UPI payment system.\" image: \"https://assets.bytebytego.com/diagrams/0400-upi-2.png\" createdAt: \"2024-03-04\" dra…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-ridesharingservice-readme-md",
-      "title": "Ridesharingservice",
-      "snippet": "…to accept trips, and the system to manage trip assignments, payments, and trip status. --- ## Requirements - **User Management:** The system manages both riders and drivers. - **Location Management:** The system tracks the current location of drivers and ri…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-foreign-exchange-payments-md",
+      "title": "Foreign Exchange Payments",
+      "snippet": "--- title: \"Foreign Exchange Payments\" description: \"Learn how foreign exchange payments work when buying/selling internationally.\" image: \"https://assets.bytebytego.com/diagrams/0194-foreign-exchange.png\" createdAt: \"2024-03-10\"…"
     }
   ],
   "object-storage": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…itory - for storing images. This can be a filesystem, swift object storage, HTTP, etc. </b></details> #### OpenStack - Swift <details> <summary>Explain Swift in detail</summary><br><b> * Swift is Object Store service and is an highly available, distribute…"
-    }
-  ],
-  "storage-retrieval": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-golang-digitalwalletservice-readme-md",
-      "title": "Digitalwalletservice",
-      "snippet": "# Designing a Digital Wallet System ## Requirements 1. The digital wallet should allow users to create an account and manage their personal information. 2. Users should be able to add and remove pay…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-storage-object-storage",
+      "title": "Object Storage",
+      "snippet": "## Object Storage Object storage, which is also known as object-based storage, breaks data files up into pieces called objects. It then stores those objects in a single repository, which can be spread o…"
     }
   ],
   "sharding": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-math-integer-partition-readme-md",
-      "title": "Integer Partition",
-      "snippet": "# Integer Partition In number theory and combinatorics, a partition of a positive integer `n`, also called an **integer partition**, is a way of writing `n` as a sum of positive integers. Two su…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-sharding-what-is-sharding",
+      "title": "What Is Sharding?",
+      "snippet": "## What is sharding? Sharding is a database architecture pattern related to _horizontal partitioning_, which is the practice of separating one table's rows into multiple different tables, known as _partitions_…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-aws",
-      "title": "AWS",
-      "snippet": "…details> <details> <summary>You need a cache that supports sharding and built with multi-threaded architecture in mind. Which one would you use?</summary><br><b> ElastiCache Memcached </b></details> <details> <summary>True or False? ElastiCache doesn't supp…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-a-crash-course-in-database-sharding-md",
+      "title": "A Crash Course in Database Sharding",
+      "snippet": "--- title: \"A Crash Course on Database Sharding\" description: \"Learn database sharding: concepts, techniques, and implementation.\" image: \"https://assets.bytebytego.com/diagrams/0065-a-crash-course-on-database-sharding.png\" createdAt: \"202…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-databases",
-      "title": "Databases",
-      "snippet": "…dered ACID compliant </details> <details> <summary>What is sharding?</summary><br><b> Sharding is a horizontal partitioning. Are you able to explain what is it good for? </b></details> <details> <summary>You find out your database became a bottleneck and u…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-key-concepts-to-understand-database-sharding-md",
+      "title": "Key Concepts to Understand Database Sharding",
+      "snippet": "--- title: \"Key Concepts to Understand Database Sharding\" description: \"Explore key concepts of database sharding with vertical/horizontal strategies.\" image: \"https://assets.bytebytego.com/diagrams/0096-dbshards.png\" createdAt: \"2024-03-09\" draft:…"
     }
   ],
   "replication": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kubernetes",
-      "title": "Kubernetes",
-      "snippet": "…bjects are there?</summary><br><b> * Pod * Service * ReplicationController * ReplicaSet * DaemonSet * Namespace * ConfigMap ... </b></details> <details> <summary>What fields are mandatory with any Kubernetes object?</summary><br><b> metadata…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-database-replication-master-slave-replication",
+      "title": "Master Slave Replication",
+      "snippet": "## Master-Slave Replication The master serves reads and writes, replicating writes to one or more slaves, which serve only reads. Slaves can also replicate additional slaves in a tree-like fashion. If the master goe…"
     },
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-scaling-aws-readme-md",
-      "title": "Scaling AWS",
-      "snippet": "…://github.com/donnemartin/system-design-primer#master-slave-replication) mode across multiple availability zones to improve redundancy * Separate out the **Web Servers** from the [**Application Servers**](https://github.com/donnemartin/system-design-primer#app…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-database-replication-master-master-replication",
+      "title": "Master Master Replication",
+      "snippet": "## Master-Master Replication Both masters serve reads/writes and coordinate with each other. If either master goes down, the system can continue to operate with both reads and writes. ![master-master-replication](ht…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…ed through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or software failure…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-database-replication-synchronous-vs-asynchronous-replication",
+      "title": "Synchronous vs Asynchronous Replication",
+      "snippet": "## Synchronous vs Asynchronous replication The primary difference between synchronous and asynchronous replication is how the data is written to the replica. In synchronous replication, data is written to primary storage and the r…"
+    }
+  ],
+  "cap-theorem": [
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-pacelc-theorem",
+      "title": "Pacelc Theorem",
+      "snippet": "# PACELC Theorem The PACELC theorem is an extension of the CAP theorem. The CAP theorem states that in the case of network partitioning (P) in a distributed system, one has to choose between Availabi…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-cap-theorem-one-of-the-most-misunderstood-terms-md",
+      "title": "Cap Theorem One of the Most Misunderstood Terms",
+      "snippet": "--- title: \"CAP Theorem: One of the Most Misunderstood Terms\" description: \"Explore the CAP theorem, its implications, and common misunderstandings.\" image: \"https://assets.bytebytego.com/diagrams/013…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-cap-theorem",
+      "title": "Cap Theorem",
+      "snippet": "# CAP Theorem CAP theorem states that a distributed system can deliver only two of the three desired characteristics Consistency, Availability, and Partition tolerance (CAP). ![cap-theorem](https://…"
     }
   ],
   "object-modeling": [
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-231",
-      "title": "231. What are the two types of loops in javascript",
-      "snippet": "### What are the two types of loops in javascript 1. **Entry Controlled loops:** In this kind of loop type, the test condition is tested before entering the loop body. For example, For Loop and Whil…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-304",
-      "title": "304. What is the output of the following for loops",
-      "snippet": "### What is the output of the following for loops ```javascript for (var i = 0; i < 4; i++) { // global scope setTimeout(() => console.log(i)); } for (let i = 0; i…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-392",
-      "title": "392. What are different event loops",
-      "snippet": "### What are different event loops In JavaScript, there are multiple event loops that can be used depending on the context of your application. The most common event loops are: 1. The Browser…"
-    }
-  ],
-  "state-management": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
-    }
-  ],
-  "strategy-pattern": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "design-patterns-reference-md",
-      "title": "Design Patterns Reference",
-      "snippet": "…lassing is impractical --- ## Behavioral Patterns ### 5. Strategy Pattern **Purpose**: Define a family of algorithms, encapsulate each one, and make them interchangeable. **Used In**: - **Chess Game**: Different movement strategies for different pieces -…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-8-key-oop-concepts-every-developer-should-know-md",
+      "title": "8 Key OOP Concepts Every Developer Should Know",
+      "snippet": "--- title: \"8 Key OOP Concepts Every Developer Should Know\" description: \"Learn the 8 key OOP concepts every developer should know.\" image: \"https://assets.bytebytego.com/diagrams/0294-oo-concepts.png…"
     },
     {
       "repoId": "grokking-oop",
       "repoName": "Grokking OOP Design",
-      "sectionId": "diagrams-readme-md",
-      "title": "Diagrams Readme",
-      "snippet": "…Pattern (ParkingLot) - Factory Pattern (multiple systems) - Strategy Pattern (Chess, Parking) - Command Pattern (ATM, Chess) - State Pattern (Orders, Bookings) - Observer Pattern (Notifications) - Composite Pattern (Shopping Cart, Itinerary) - Decorator Patter…"
+      "sectionId": "docs-oop-fundamentals-class-diagram-md",
+      "title": "Class Diagram",
+      "snippet": "# Class Diagram Class diagram is the backbone of object-oriented modeling - it shows how different entities (people, things, and data) relate to each other. In other words, it shows the static struct…"
     },
     {
       "repoId": "grokking-oop",
       "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "…n**: ParkingLot class (only one instance in the system) - **Strategy Pattern**: Different parking spot allocation strategies - **Factory Pattern**: Vehicle and ParkingSpot creation **Key Features:** - Multi-floor parking management - Different spot types (Com…"
-    }
-  ],
-  "observer-pattern": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "…er, Message), shutdown() --- ## Design Patterns Used - **Observer Pattern:** The Pub/Sub system is a concrete implementation of the Observer pattern. Topics (subjects) maintain a list of subscribers (observers) and notify them asynchronously when a new mess…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-pubsubsystem-readme-md",
-      "title": "Pubsubsystem",
-      "snippet": "# Designing a Pub-Sub System in Java ## Requirements 1. The Pub-Sub system should allow publishers to publish messages to specific topics. 2. Subscribers should be able to subscribe to topics of int…"
-    }
-  ],
-  "factory-creational": [
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-1",
-      "title": "1. What are the possible ways to create objects in JavaScript",
-      "snippet": "### What are the possible ways to create objects in JavaScript There are many ways to create objects in javascript as mentioned below: 1. **Object literal syntax:** The object literal s…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "design-patterns-python-readme-md",
-      "title": "Python",
-      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-musicstreamingservice-readme-md",
-      "title": "Musicstreamingservice",
-      "snippet": "# Music Streaming Service (LLD) ## Problem Statement Design and implement an online music streaming service (like Spotify) that allows users to browse, search, and play songs, manage playlists, fol…"
-    }
-  ],
-  "decorator-structural": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "design-patterns-python-readme-md",
-      "title": "Python",
-      "snippet": "# Design Patterns in Python This directory contains Python implementations of various design patterns, following the same examples and structure as the Java implementations. ## Implemented Patterns…"
+      "sectionId": "docs-oop-fundamentals-object-oriented-basics-md",
+      "title": "Object Oriented Basics",
+      "snippet": "# Object Oriented Basics Object-oriented programming (OOP) is a style of programming that focuses on using objects to design and build applications. Contrary to procedure-oriented programming where p…"
     }
   ],
   "concurrency-design": [
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"> <img src=\"https://raw.githubusercontent.com/ashishps1/awesome-low-level-design/HEAD/images/lld-repo-logo.png\" width=\"350\" height=\"200\"> </p> <p align=\"center\"> <a href=\"https:/…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kubernetes",
-      "title": "Kubernetes",
-      "snippet": "# Kubernetes <!-- {% raw %} --> What's your goal? * I would like to prepare for CKA certification * See [CKA](https://github.com/bregman-arie/devops-exercises/blob/HEAD/topics/kubernetes/CKA.md)…"
-    }
-  ],
-  "command-chain": [
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-concurrency-is-not-parallelism-md",
+      "title": "Concurrency Is Not Parallelism",
+      "snippet": "--- title: \"Concurrency vs Parallelism\" description: \"Understand the difference between concurrency and parallelism in system design.\" image: \"https://assets.bytebytego.com/diagrams/0150-concurrency-i…"
     }
   ],
   "load-balancing": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "certificates-aws-solutions-architect-associate-md",
-      "title": "AWS Solutions Architect Associate",
-      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-clustering-load-balancing-vs-clustering",
+      "title": "Load Balancing vs Clustering",
+      "snippet": "## Load balancing vs Clustering Load balancing shares some common traits with clustering, but they are different processes. Clustering provides redundancy and boosts capacity and availability. Servers i…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "certificates-aws-cloud-practitioner-md",
-      "title": "AWS Cloud Practitioner",
-      "snippet": "…ls> ##### AWS ELB <details> <summary>What is ELB (Elastic Load Balancing)?</summary><br><b> AWS definition: \"Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-top-6-load-balancing-algorithms-md",
+      "title": "Top 6 Load Balancing Algorithms",
+      "snippet": "--- title: \"Top 6 Load Balancing Algorithms\" description: \"Explore the top 6 load balancing algorithms in detail.\" image: \"https://assets.bytebytego.com/diagrams/0251-lb-algorithms.png\" createdAt: \"2024-03-05\" draft: f…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…is can be achieved through a variety of techniques, such as load balancing, replication, and failover mechanisms. By implementing HA in Prometheus, users can ensure that their monitoring data is always available and up-to-date, even in the face of hardware or…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-load-balancing",
+      "title": "Load Balancing",
+      "snippet": "# Load Balancing Load balancing lets us distribute incoming network traffic across multiple resources ensuring high availability and reliability by sending requests only to resources that are online. T…"
     }
   ],
   "consistent-hashing": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…summary><br><b> </b></details> <details> <summary>Explain \"Consistent Hashing\"</summary><br><b> </b></details> <details> <summary>How would you update each of the services in the following drawing without having app (foo.com) downtime?<br> <img src=\"https://…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-consistent-hashing-md",
+      "title": "Consistent Hashing",
+      "snippet": "--- title: \"Consistent Hashing Explained\" description: \"Explore consistent hashing: its benefits, and real-world applications.\" image: \"https://assets.bytebytego.com/diagrams/0151-consistent-hashing.png\" createdA…"
     },
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-query-cache-readme-md",
-      "title": "Query Cache",
-      "snippet": "…y using `machine = hash(query)`. We'll likely want to use [consistent hashing](https://github.com/donnemartin/system-design-primer#under-development). ## Additional talking points > Additional topics to dive into, depending on the problem scope and time rem…"
-    }
-  ],
-  "consensus": [
-    {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-255",
-      "title": "255. How do you use immer library for state updates?",
-      "snippet": "### How do you use immer library for state updates? Immer library enforces the immutability of state based on **copy-on-write** mechanism. It uses JavaScript proxy to keep track of updates to immuta…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-consistent-hashing",
+      "title": "Consistent Hashing",
+      "snippet": "# Consistent Hashing Let's first understand the problem we're trying to solve.…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-airlinemanagementsystem-readme-md",
-      "title": "Airlinemanagementsystem",
-      "snippet": "# Airline Management System (LLD) ## Problem Statement Design and implement an Airline Management System that allows users to book flights, manage passengers, handle seat assignments, process payme…"
-    },
-    {
-      "repoId": "grokking-oop",
-      "repoName": "Grokking OOP Design",
-      "sectionId": "object-diagram-documentation-md",
-      "title": "Object Diagram Documentation",
-      "snippet": "# Object Diagram Documentation ## Overview This document provides comprehensive documentation for the object-oriented design patterns and relationships across all case studies in the \"Grokking the…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-consistent-hashing-how-does-it-work",
+      "title": "How Does It Work",
+      "snippet": "## How does it work Consistent Hashing is a distributed hashing scheme that operates independently of the number of nodes in a distributed hash table by assigning them a position on an abstract circle, or hash ring. This…"
     }
   ],
   "messaging-realtime": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-java-src-cricinfo-readme-md",
-      "title": "Cricinfo",
-      "snippet": "# Cricket Information System (LLD) ## Problem Statement Design and implement a Cricket Information System similar to CricInfo that provides comprehensive information about cricket matches, teams, p…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kafka",
-      "title": "Kafka",
-      "snippet": "# Apache Kafka ## Kafka Exercises |Name|Topic|Objective & Instructions|Solution|Comments| |--------|--------|------|----|----| ## Kafka Self Assessment * [Kafka 101](#questions-kafka-101) <a nam…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-shortlong-polling-sse-websocket-md",
+      "title": "Shortlong Polling Sse Websocket",
+      "snippet": "--- title: 'Short/long polling, SSE, WebSocket' description: 'Explore real-time web updates: polling, SSE, and WebSockets.' image: 'https://assets.bytebytego.com/diagrams/0337-short-long-polling-sse-w…"
     }
   ],
   "social-media": [
     {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-73",
-      "title": "73. What are the common folder structures for React?",
-      "snippet": "### What are the common folder structures for React? There are two common practices for React project file structure. 1. **Grouping by features or routes:** One common way to structu…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-socialnetworkingservice-readme-md",
-      "title": "Socialnetworkingservice",
-      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-csharp-socialnetworkingservice-readme-md",
-      "title": "Socialnetworkingservice",
-      "snippet": "# Designing a Social Network Like Facebook ## Requirements #### User Registration and Authentication: - Users should be able to create an account with their personal information, such as name, email…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-chatgpt-timeline-md",
+      "title": "Chatgpt Timeline",
+      "snippet": "--- title: ChatGPT Timeline description: A visual guide to the evolution of ChatGPT and its underlying tech. image: 'https://assets.bytebytego.com/diagrams/0136-chatgpt-how-we-get-here.png' createdAt:…"
     }
   ],
   "streaming-media": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-content-delivery-network-cdn",
+      "title": "Content Delivery Network (cdn)",
+      "snippet": "# Content Delivery Network (CDN) A content delivery network (CDN) is a geographically distributed group of servers that work together to provide fast delivery of internet content. Generally, static f…"
     },
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-pastebin-readme-md",
-      "title": "Pastebin",
-      "snippet": "# Design Pastebin.com (or Bit.ly) *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-of-system-design…"
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-content-delivery-network-cdn-how-does-a-cdn-work",
+      "title": "How Does a CDN Work?",
+      "snippet": "## How does a CDN work? ![cdn](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/content-delivery-network/cdn.png) In a CDN, the origi…"
     },
     {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-sales-rank-readme-md",
-      "title": "Sales Rank",
-      "snippet": "# Design Amazon's sales rank by category feature *Note: This document links directly to relevant areas found in the [system design topics](https://github.com/donnemartin/system-design-primer#index-o…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-a-beginner-s-guide-to-cdn-content-delivery-network-md",
+      "title": "A Beginner's Guide to CDN Content Delivery Network",
+      "snippet": "--- title: \"A Beginner's Guide to CDN\" description: \"Learn about CDNs: improve performance, reliability, and security.\" image: \"https://assets.bytebytego.com/diagrams/0025-a-beginner-s-guide-to-cdn.pn…"
     }
   ],
   "array-hashing": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-cryptography-polynomial-hash-readme-md",
-      "title": "Polynomial Hash",
-      "snippet": "# Polynomial Rolling Hash ## Hash Function **Hash functions** are used to map large data sets of elements of an arbitrary length (*the keys*) to smaller data sets of elements of a fixed length (*t…"
+      "repoId": "frontend-handbook",
+      "repoName": "Frontend Interview Handbook",
+      "sectionId": "website-blog-2022-06-18-javascript-object-vs-map-md-why-object-falls-short-of-a-hash-map-use-case",
+      "title": "Why `object` Falls Short of a Hash Map Use Case",
+      "snippet": "## Why `Object` falls short of a hash map use case Probably the most obvious downside of using objects for hash maps is that objects only allow keys that are strings and symbols. Any other types will…"
     },
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-hash-table-readme-md",
-      "title": "Hash Table",
-      "snippet": "# Hash Table _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/hash-table/README.zh-CN.md), [_Русский_](https://github.com/trek…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-consistent-hashing-md",
+      "title": "Consistent Hashing",
+      "snippet": "--- title: \"Consistent Hashing Explained\" description: \"Explore consistent hashing: its benefits, and real-world applications.\" image: \"https://assets.bytebytego.com/diagrams/0151-consistent-hashing.p…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/bregman-arie/devops-exercises/HEAD/images/devops_exercises.png\"/></p> :information_source: &nbsp;This repo contains questions and exerci…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-hash-maps-and-sets",
+      "title": "Hash Maps and Sets",
+      "snippet": "# Hash Maps and Sets - [Geometric Sequence Triplets.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Hash Maps and Sets/geometric_sequence_triplets.py) - [Longest Chain…"
     }
   ],
   "two-pointers": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-software_development",
-      "title": "Software Development",
-      "snippet": "…linked list. I'll mention three here: Worst solution:<br> Two pointers where one points to the head and one points to the last node. Each time you advance the last pointer by one and check whether the distance between head pointer to the moved pointer is big…"
-    }
-  ],
-  "sliding-window": [
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-deque-readme-md",
-      "title": "Deque",
-      "snippet": "…right tool when you need **O(1) access at both ends**: - **Sliding window maximum/minimum** — maintain candidates in a monotonic deque so each element is pushed and popped at most once (overall O(n)). - **Browser history** — navigate backward (`removeFront`…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-two-pointers",
+      "title": "Two Pointers",
+      "snippet": "# Two Pointers - [Is Palindrome Valid.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Two Pointers/is_palindrome_valid.py) - [Largest Container Brute Force.py](https://g…"
     }
   ],
   "stack": [
@@ -572,21 +448,28 @@
       "snippet": "### What is the call stack Call Stack is a data structure for javascript interpreters to keep track of function calls(creates execution context) in the program. It has two major actions, 1. Whenever you call a fun…"
     },
     {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-174",
-      "title": "174. What is the benefit of component stack trace from error boundary?",
-      "snippet": "### What is the benefit of component stack trace from error boundary? Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept. Fo…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-a-roadmap-for-full-stack-development-md",
+      "title": "A Roadmap for Full Stack Development",
+      "snippet": "--- title: \"A Roadmap for Full-Stack Development\" description: \"A guide to the technologies and skills needed for full-stack development.\" image: \"https://assets.bytebytego.com/diagrams/0199-full-stack-developer-roadmap.png\" create…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-stackoverflow-readme-md",
-      "title": "Stackoverflow",
-      "snippet": "# Designing Stack Overflow ## Requirements 1. Users can post questions, answer questions, and comment on questions and answers. 2. Users can vote on questions and answers. 3. Questions should have tags associate…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-how-will-you-design-the-stack-overflow-website-md",
+      "title": "How Will You Design the Stack Overflow Website",
+      "snippet": "--- title: 'How to Design Stack Overflow' description: 'Explore the architecture of Stack Overflow and its design considerations.' image: 'https://assets.bytebytego.com/diagrams/0343-stack-overflow-architecture.png' createdAt:…"
     }
   ],
   "binary-search": [
+    {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-binary-search",
+      "title": "Binary Search",
+      "snippet": "# Binary Search - [Cutting Wood.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Binary Search/cutting_wood.py) - [Find the Insertion Index.py](https://github.com/ByteByt…"
+    },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
@@ -600,13 +483,6 @@
       "sectionId": "src-data-structures-tree-binary-search-tree-readme-md",
       "title": "Binary Search Tree",
       "snippet": "# Binary Search Tree _Read this in other languages:_ [_Português_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/tree/binary-search-tree/README.pt-BR.md) In computer…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-search-interpolation-search-readme-md",
-      "title": "Interpolation Search",
-      "snippet": "…in `O(n)` time, **Jump Search** takes `O(√ n)` time and **Binary Search** take `O(Log n)` time. The **Interpolation Search** is an improvement over Binary Search for instances, where the values in a sorted array are _uniformly_ distributed. Binary Search…"
     }
   ],
   "linked-list": [
@@ -625,34 +501,27 @@
       "snippet": "# Linked List _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/linked-list/README.zh-CN.md), [_Русский_](https://github.com/trekh…"
     },
     {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "solutions-cpp-lrucache-readme-md",
-      "title": "Lrucache",
-      "snippet": "…tions 1. The **Node** class represents a node in the doubly linked list, containing the key, value, and references to the previous and next nodes. 2. The **LRUCache** class implements the LRU cache functionality using a combination of a hash map (cache) and a…"
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-algorithms-linked-list-md",
+      "title": "Linked List",
+      "snippet": "--- id: linked-list title: Linked list cheatsheet for coding interviews description: Linked list study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords:…"
     }
   ],
   "trees": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-kruskal-readme-md",
-      "title": "Kruskal",
-      "snippet": "…an edge of the least possible weight that connects any two trees in the forest. It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a connected weighted graph adding increasing cost arcs at each step. This means it finds a subs…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-trees",
+      "title": "Trees",
+      "snippet": "# Trees - [Balanced Binary Tree Validation.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Trees/balanced_binary_tree_validation.py) - [Binary Search Tree Validation.py]…"
     },
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-data-structures-tree-binary-search-tree-readme-md",
-      "title": "Binary Search Tree",
-      "snippet": "…tree/README.pt-BR.md) In computer science, **binary search trees** (BST), sometimes called ordered or sorted binary trees, are a particular type of container: data structures that store \"items\" (such as numbers, names etc.) in memory. They allow fast lookup,…"
-    },
-    {
-      "repoId": "tech-interview-handbook",
-      "repoName": "Tech Interview Handbook",
-      "sectionId": "apps-website-experimental-topics-md",
-      "title": "Topics",
-      "snippet": "…: topics title: Topics --- ## Arrays ## Strings - Prefix trees (Tries) - Suffix trees - Suffix arrays - KMP - Rabin-Karp - Boyer-Moore ## Sorting - Bubble sort - Insertion sort - Merge sort - Quick sort - Selection sort - Bucket sort - Radix sort - Counti…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-iqiyi-database-selection-trees-md",
+      "title": "Iqiyi Database Selection Trees",
+      "snippet": "--- title: \"iQIYI Database Selection Trees\" description: \"Explore iQIYI's database selection process for relational and NoSQL.\" image: \"https://assets.bytebytego.com/diagrams/0215-how-to-choose-db.png\" createdAt: \"2024-03-01\" draft: fals…"
     }
   ],
   "tries": [
@@ -664,18 +533,11 @@
       "snippet": "# Trie _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/trie/README.zh-CN.md), [_Русский_](https://github.com/trekhleb/javascript…"
     },
     {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-201",
-      "title": "201. What is the main difference between Object.values and Object.entries method",
-      "snippet": "…t is the main difference between Object.values and Object.entries method The `Object.values()` method's behavior is similar to `Object.entries()` method but it returns an array of values instead [key,value] pairs. ```javascript const object = {…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-8",
-      "title": "8. How do you compare Object and Map",
-      "snippet": "…nd **Maps** both allow you to associate keys with values, retrieve those values, delete keys, and check if a key exists. Historically, Objects have been used as Maps, but there are several key differences that make `Map` a better choice in certain scenarios:…"
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-algorithms-trie-md",
+      "title": "Trie",
+      "snippet": "--- id: trie title: Trie cheatsheet for coding interviews description: Trie study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords:…"
     }
   ],
   "heap": [
@@ -684,60 +546,39 @@
       "repoName": "JavaScript Interview Questions",
       "sectionId": "q-396",
       "title": "396. What is heap",
-      "snippet": "### What is heap Heap(Or memory heap) is the memory location where objects are stored when we define variables. i.e, This is the place where all the memory allocations and de-allocation take place.…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-sorting-heap-sort-readme-md",
-      "title": "Heap Sort",
-      "snippet": "# Heap Sort _Read this in other languages:_ [_Português_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/algorithms/sorting/heap-sort/README.pt-BR.md) Heapsort is a comparison-base…"
+      "snippet": "### What is heap Heap(Or memory heap) is the memory location where objects are stored when we define variables. i.e, This is the place where all the memory allocations and de-allocation take place. B…"
     },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
       "sectionId": "src-data-structures-heap-readme-md",
       "title": "Heap",
-      "snippet": "# Heap (data-structure) _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/heap/README.zh-CN.md), [_Русский_](https://github.com…"
+      "snippet": "# Heap (data-structure) _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/heap/README.zh-CN.md), [_Русский_](https://github.com/…"
+    },
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-data-structures-priority-queue-readme-md",
+      "title": "Priority Queue",
+      "snippet": "# Priority Queue _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/priority-queue/README.zh-CN.md), [_Русский_](https://github.c…"
     }
   ],
   "backtracking": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
-      "title": "Jump Game",
-      "snippet": "…t index 0 is a \"good index\". ## Solutions ### Approach 1: Backtracking This is the inefficient solution where we try every single jump pattern that takes us from the first position to the last. We start from the first position and jump to every index that…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-sets-power-set-readme-md",
-      "title": "Power Set",
-      "snippet": "…werSet.js](./bwPowerSet.js) file for bitwise solution. ### Backtracking Solution In backtracking approach we're constantly trying to add next element of the set to the subset, memorizing it and then removing it and try the same with the next element. > See…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-uncategorized-n-queens-readme-md",
-      "title": "N Queens",
-      "snippet": "…on then { print this configuration; } } ``` ## Backtracking Algorithm The idea is to place queens one by one in different columns, starting from the leftmost column. When we place a queen in a column, we check for clashes with already placed qu…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-backtracking",
+      "title": "Backtracking",
+      "snippet": "# Backtracking - [Combinations of Sum K.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Backtracking/combinations_of_sum_k.py) - [Find All Permutations.py](https://githu…"
     }
   ],
   "graphs": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-graph-detect-cycle-readme-md",
-      "title": "Detect Cycle",
-      "snippet": "# Detect Cycle in Graphs In graph theory, a **cycle** is a path of edges and vertices wherein a vertex is reachable from itself. There are several different types of cycles, principally a **closed walk** and a **si…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…an create visual representations for your data (pie charts, graphs, ...) </b></details> <details> <summary>What visualization types are supported/included in Kibana?</summary><br><b> </b></details> <details> <summary>What visualization type would you use for…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-graphs",
+      "title": "Graphs",
+      "snippet": "# Graphs - [Bipartite Graph Validation.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Graphs/bipartite_graph_validation.py) - [Connect the Dots.py](https://github.com/B…"
     }
   ],
   "shortest-path": [
@@ -746,7 +587,7 @@
       "repoName": "JavaScript Algorithms",
       "sectionId": "src-algorithms-graph-bellman-ford-readme-md",
       "title": "Bellman Ford",
-      "snippet": "# Bellman–Ford Algorithm The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph. It is slower than D…"
+      "snippet": "# Bellman–Ford Algorithm The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph. It is slower than Di…"
     },
     {
       "repoId": "javascript-algorithms",
@@ -754,13 +595,6 @@
       "sectionId": "src-algorithms-graph-dijkstra-readme-md",
       "title": "Dijkstra",
       "snippet": "…sts in many variants; Dijkstra's original variant found the shortest path between two nodes, but a more common variant fixes a single node as the \"source\" node and finds shortest paths from the source to all other nodes in the graph, producing a shortest-path…"
-    },
-    {
-      "repoId": "system-design-primer",
-      "repoName": "System Design Primer",
-      "sectionId": "solutions-system-design-social-graph-readme-md",
-      "title": "Social Graph",
-      "snippet": "…ing use cases * **User** searches for someone and sees the shortest path to the searched person * **Service** has high availability ### Constraints and assumptions #### State assumptions * Traffic is not evenly distributed * Some searches are more popu…"
     }
   ],
   "union-find": [
@@ -774,135 +608,91 @@
   ],
   "dp-1d": [
     {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-dynamic-programming",
+      "title": "Dynamic Programming",
+      "snippet": "# Dynamic Programming - [Climbing Stairs Bottom Up Optimized.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Dynamic Programming/climbing_stairs_bottom_up_optimized.py…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-algorithms-dynamic-programming-md",
+      "title": "Dynamic Programming",
+      "snippet": "--- id: dynamic-programming title: Dynamic programming cheatsheet for coding interviews description: Dynamic programming study guide for coding interviews, including practice questions, techniques, ti…"
+    },
+    {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
       "sectionId": "q-25",
       "title": "25. What is memoization",
-      "snippet": "### What is memoization Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized functio…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
-      "title": "Jump Game",
-      "snippet": "# Jump Game ## The Problem Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at…"
-    },
-    {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-322",
-      "title": "322. What is the React Compiler (React Forget)?",
-      "snippet": "### What is the React Compiler (React Forget)? The **React Compiler** (formerly known as React Forget) automatically optimizes your components by adding memoization where needed - eliminating the ne…"
+      "snippet": "### What is memoization Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function…"
     }
   ],
   "dp-2d": [
+    {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-dynamic-programming",
+      "title": "Dynamic Programming",
+      "snippet": "# Dynamic Programming - [Climbing Stairs Bottom Up Optimized.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Dynamic Programming/climbing_stairs_bottom_up_optimized.py…"
+    },
     {
       "repoId": "javascript-algorithms",
       "repoName": "JavaScript Algorithms",
       "sectionId": "src-algorithms-sets-knapsack-problem-readme-md",
       "title": "Knapsack Problem",
-      "snippet": "# Knapsack Problem The knapsack problem or rucksack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to…"
+      "snippet": "# Knapsack Problem The knapsack problem or rucksack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to i…"
     },
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-string-levenshtein-distance-readme-md",
-      "title": "Levenshtein Distance",
-      "snippet": "# Levenshtein Distance The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number…"
-    },
-    {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
-      "title": "Jump Game",
-      "snippet": "# Jump Game ## The Problem Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at…"
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-algorithms-dynamic-programming-md",
+      "title": "Dynamic Programming",
+      "snippet": "--- id: dynamic-programming title: Dynamic programming cheatsheet for coding interviews description: Dynamic programming study guide for coding interviews, including practice questions, techniques, ti…"
     }
   ],
   "greedy": [
     {
-      "repoId": "javascript-algorithms",
-      "repoName": "JavaScript Algorithms",
-      "sectionId": "src-algorithms-uncategorized-jump-game-readme-md",
-      "title": "Jump Game",
-      "snippet": "…s comes from the usage of the memo table. ### Approach 4: Greedy Once we have our code in the bottom-up state, we can make one final, important observation. From a given position, when we try to see if we can jump to a GOOD position, we only ever use one -…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-greedy",
+      "title": "Greedy",
+      "snippet": "# Greedy - [Candies.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Greedy/candies.py) - [Gas Stations.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob…"
     }
   ],
-  "teamwork-and-collaboration": [
+  "intervals": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-devops",
-      "title": "Devops",
-      "snippet": "…vOps? What can it help us to achieve?</summary><br><b> * Collaboration * Improved delivery * Security * Speed * Scale * Reliability </b></details> <details> <summary>What are the anti-patterns of DevOps?</summary><br><b> A couple of examples: *…"
-    },
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-intervals",
+      "title": "Intervals",
+      "snippet": "# Intervals - [Identify All Interval Overlaps.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Intervals/identify_all_interval_overlaps.py) - [Largest Overlap of Interval…"
+    }
+  ],
+  "bit-manipulation": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-terraform",
-      "title": "Terraform",
-      "snippet": "…State stores this file in a remote storage media to enable collaboration amongst team. </b></details> <details> <summary>Explain \"State Locking\"</summary><br><b> State locking is a mechanism that blocks an operations against a specific state file from mul…"
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-bit-manipulation",
+      "title": "Bit Manipulation",
+      "snippet": "# Bit Manipulation - [Hamming Weights of Integers Dp.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Bit Manipulation/hamming_weights_of_integers_dp.py) - [Hamming Weigh…"
     }
   ],
   "communication": [
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "readme-md",
-      "title": "Overview",
-      "snippet": "…to communicate with - A Connection (so the content of the communication can reach the recipients) </b></details> <details> <summary>What is TCP/IP?</summary><br><b> A set of protocols that define how two or more devices can communicate with each other. T…"
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "readme-md-communication",
+      "title": "Communication",
+      "snippet": "## Communication <p align=\"center\"> <img src=\"https://raw.githubusercontent.com/donnemartin/system-design-primer/HEAD/images/5KeocQs.jpg\"> <br/> <i><a href=http://www.escotal.com/osilayer.html>Sou…"
     },
     {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-kubernetes",
-      "title": "Kubernetes",
-      "snippet": "…ummary><br><b> * Kubelet - an agent responsible for node communication with the master. * Kube-proxy - load balancing traffic between app components * Container runtime - the engine runs the containers (Podman, Docker, ...) </b></details> <details> <s…"
-    },
-    {
-      "repoId": "devops-exercises",
-      "repoName": "DevOps Exercises",
-      "sectionId": "devops-security",
-      "title": "Security",
-      "snippet": "…ed, private is stored inside user's computer to decrypt the communication then the public key is stored inside the remoted computer where user want to connect with and it is used to encrypt the communication. </b></details> #### Security - Cryptography <de…"
-    }
-  ],
-  "ownership-and-accountability": [
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "oop-rust-composition-readme-md",
-      "title": "Composition",
-      "snippet": "# Composition in Rust (Ownership & Embedding) ## Introduction **Composition** is a fundamental Object-Oriented Programming (OOP) principle that represents a **\"Has-A\"** relationship. It allows complex objects to be built…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "oop-rust-association-readme-md",
-      "title": "Association",
-      "snippet": "# Association in Rust (Shared Ownership & Weak Pointers) ## Introduction **Association** represents a **\"Knows-a\"** or **\"Uses-a\"** relationship. Unlike Composition (where objects die together) or Aggregation (where one borrows…"
-    },
-    {
-      "repoId": "low-level-design",
-      "repoName": "Awesome Low-Level Design",
-      "sectionId": "oop-rust-aggregation-readme-md",
-      "title": "Aggregation",
-      "snippet": "…alive.\", prof.name); } ``` --- ## **4. Advanced: Shared Ownership (`Rc<T>`)** Sometimes, you don't know who will die first. Maybe the Professor belongs to 3 Universities at once. For this, Rust uses **Reference Counting (`Rc`)**. * **`Rc<T>`**: A smart p…"
-    }
-  ],
-  "seo": [
-    {
-      "repoId": "react-questions",
-      "repoName": "React Interview Questions",
-      "sectionId": "q-321",
-      "title": "321. What is the useOptimistic hook?",
-      "snippet": "### What is the useOptimistic hook? `useOptimistic` enables optimistic UI updates - showing changes immediately before server confirmation. #### Basic Usage ```jsx import { useOptimistic } from 'react…"
-    },
-    {
-      "repoId": "javascript-questions",
-      "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-478",
-      "title": "478. What is the difference between const and Object.freeze",
-      "snippet": "…What is the output of below code? ```javascript const promiseOne = new Promise((resolve, reject) => setTimeout(resolve, 4000)); const promiseTwo = new Promise((resolve, reject) => setTimeout(reject, 4000)); Promise.all([promiseOne, promiseTwo]).then((data) =…"
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-top-9-architectural-patterns-for-data-and-communication-flow-md",
+      "title": "Top 9 Architectural Patterns for Data and Communication Flow",
+      "snippet": "--- title: \"Top 9 Architectural Patterns for Data and Communication Flow\" description: \"Explore 9 key architectural patterns for efficient data and communication.\" image: \"https://assets.bytebytego.com/diagrams/0387-top-9-system-integrations.png\" created…"
     }
   ]
 }

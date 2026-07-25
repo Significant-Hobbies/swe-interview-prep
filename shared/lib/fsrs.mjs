@@ -1,5 +1,7 @@
 import { fsrs, generatorParameters, Rating, createEmptyCard } from 'ts-fsrs';
 
+import { masteryConfidence } from './confidence.mjs';
+
 const params = generatorParameters({
   enable_fuzz: false,
   request_retention: 0.9,
@@ -31,7 +33,13 @@ function rowToCard(row) {
 }
 
 function cardToRow(card) {
-  const confidence = Math.min(1, card.stability / 30);
+  const lastReview = card.last_review ? card.last_review.toISOString() : null;
+  // Same definition the read path uses — elapsed is ~0 here, so this is the
+  // durability term only. It must never come out at 1.0 after a failed review.
+  const confidence = masteryConfidence(
+    { stability: card.stability, last_review: lastReview },
+    card.last_review ?? new Date()
+  );
   return {
     stability: card.stability,
     difficulty: card.difficulty,
@@ -40,7 +48,7 @@ function cardToRow(card) {
     reps: card.reps,
     lapses: card.lapses,
     state: card.state,
-    last_review: card.last_review ? card.last_review.toISOString() : null,
+    last_review: lastReview,
     due: card.due.toISOString(),
     confidence,
   };
@@ -52,8 +60,4 @@ export function reviewConcept(prev, rating, now = new Date()) {
   return cardToRow(result.card);
 }
 
-export function decayConfidence(row, now = new Date()) {
-  if (!row?.last_review || !row.stability) return 0;
-  const elapsed = (now.getTime() - new Date(row.last_review).getTime()) / 86400000;
-  return Math.max(0, Math.min(1, (1 + elapsed / (9 * row.stability)) ** -1));
-}
+export { masteryConfidence } from './confidence.mjs';

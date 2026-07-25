@@ -32,6 +32,7 @@ import { CONCEPT_BY_ID, useConceptMastery } from '../hooks/useConcepts';
 import { useIsCompactLayout } from '../hooks/useMediaQuery';
 import { useTagger } from '../hooks/useTagger';
 import { useArtifactStore, useFocusMode } from '../hooks/useUserStore';
+import { GO_RUNTIME_AVAILABLE } from '../lib/capabilities';
 import type { Language } from '../types';
 
 const STORAGE_KEY = 'playground-code';
@@ -343,12 +344,14 @@ export default function Playground() {
                 >
                   TS
                 </button>
-                <button
-                  onClick={() => handleLanguageChange('go')}
-                  className={langBtn(language === 'go')}
-                >
-                  Go
-                </button>
+                {GO_RUNTIME_AVAILABLE && (
+                  <button
+                    onClick={() => handleLanguageChange('go')}
+                    className={langBtn(language === 'go')}
+                  >
+                    Go
+                  </button>
+                )}
               </div>
             </>
           )}

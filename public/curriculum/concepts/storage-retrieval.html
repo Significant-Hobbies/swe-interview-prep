@@ -72,7 +72,7 @@
       </ul>
     </section>
 
-    
+
 
     <section><h2>Common mistakes</h2><ul><li>Picking an engine without knowing the read/write ratio of the workload</li><li>Ignoring write amplification and its effect on SSD lifetime</li><li>Forgetting that every secondary index is extra write cost</li></ul></section>
 
@@ -89,7 +89,7 @@
           <p><strong>Expected evidence:</strong> PUT/GET by id is primary key O(1); tag search needs inverted/secondary index.</p>
           <a href="/drills/storage-vs-retrieval">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Storage Engines and name one common mistake: &quot;Picking an engine without knowing the read/write ratio of the workload…&quot;</li></ul>
+      <h3>Review prompts</h3><ul><li>B-tree versus LSM: which one has read amplification and which has write amplification, and where does each come from?</li></ul>
     </section>
 
     <section>

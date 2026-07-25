@@ -2,7 +2,17 @@
 import type { ConceptStatus } from '../data/learning-os';
 import type { MasteryEntry } from '../hooks/useConcepts';
 
-export function isDue(m: MasteryEntry | undefined, now: Date = new Date()): boolean {
+/** Anything carrying an FSRS due date — `MasteryEntry` or a raw `MasteryRow`. */
+export interface DueLike {
+  due?: string | null;
+}
+
+/**
+ * The single `isDue` definition. A row with no due date has never been
+ * scheduled, so it is NOT due — it is not-started, and the planner reaches it
+ * through the "new concept" path instead of the review queue.
+ */
+export function isDue(m: DueLike | null | undefined, now: Date = new Date()): boolean {
   if (!m?.due) return false;
   return new Date(m.due).getTime() <= now.getTime();
 }

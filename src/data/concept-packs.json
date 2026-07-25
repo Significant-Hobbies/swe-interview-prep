@@ -936,8 +936,8 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "RouteLLM — an open-source framework for cost-effective LLM routing (LMSYS)",
+          "url": "https://lmsys.org/blog/2024-07-01-routellm/"
         },
         {
           "category": "book",
@@ -946,8 +946,13 @@
         },
         {
           "category": "more",
-          "title": "Training Compute-Optimal LLMs (Chinchilla)",
-          "url": "https://arxiv.org/abs/2203.15556"
+          "title": "FrugalGPT: Using LLMs While Reducing Cost and Improving Performance (Chen et al.)",
+          "url": "https://arxiv.org/abs/2305.05176"
+        },
+        {
+          "category": "more",
+          "title": "Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing",
+          "url": "https://arxiv.org/abs/2404.14618"
         },
         {
           "category": "problem",
@@ -1181,8 +1186,8 @@
         },
         {
           "category": "paper",
-          "title": "CS231n — Softmax & cross-entropy loss",
-          "url": "https://cs231n.github.io/optimization-2/"
+          "title": "CS231n — Linear Classification: SVM vs Softmax, cross-entropy loss",
+          "url": "https://cs231n.github.io/linear-classify/"
         },
         {
           "category": "problem",
@@ -1211,8 +1216,8 @@
         },
         {
           "category": "blog",
-          "title": "The Illustrated GPT-2 (jalammar)",
-          "url": "https://jalammar.github.io/illustrated-gpt2/"
+          "title": "An overview of gradient descent optimization algorithms (Sebastian Ruder)",
+          "url": "https://www.ruder.io/optimizing-gradient-descent/"
         },
         {
           "category": "book",
@@ -1221,8 +1226,8 @@
         },
         {
           "category": "more",
-          "title": "CS231n — Adam, learning-rate schedules",
-          "url": "https://cs231n.github.io/optimization-2/"
+          "title": "CS231n — Neural Networks 3: Adam and learning-rate schedules",
+          "url": "https://cs231n.github.io/neural-networks-3/"
         },
         {
           "category": "problem",
@@ -1686,8 +1691,8 @@
         },
         {
           "category": "blog",
-          "title": "Eugene Yan — LLM data flywheels",
-          "url": "https://eugeneyan.com/writing/llm-evaluators/"
+          "title": "Data Cascades in High-Stakes AI (Sambasivan et al., CHI 2021)",
+          "url": "https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/"
         },
         {
           "category": "book",
@@ -1696,8 +1701,8 @@
         },
         {
           "category": "more",
-          "title": "Eugene Yan — Data Flywheels for LLM Applications",
-          "url": "https://eugeneyan.com/writing/llm-patterns/"
+          "title": "Rules of Machine Learning: Best Practices for ML Engineering (Google)",
+          "url": "https://developers.google.com/machine-learning/guides/rules-of-ml"
         },
         {
           "category": "problem",
@@ -2751,8 +2756,8 @@
         },
         {
           "category": "paper",
-          "title": "Program development by stepwise refinement (Wirth)",
-          "url": "https://doi.org/10.1145/356953.356949"
+          "title": "Program Development by Stepwise Refinement (Wirth, CACM 1971)",
+          "url": "https://doi.org/10.1145/362575.362577"
         },
         {
           "category": "blog",
@@ -2856,8 +2861,8 @@
         },
         {
           "category": "paper",
-          "title": "Open-Closed Principle (Martin)",
-          "url": "https://doi.org/10.1109/MS.2003.1207080"
+          "title": "The Open-Closed Principle (Robert C. Martin, C++ Report 1996)",
+          "url": "https://www.cs.utexas.edu/users/downing/papers/OCP-1996.pdf"
         },
         {
           "category": "blog",
@@ -3871,8 +3876,8 @@
         },
         {
           "category": "paper",
-          "title": "Dynamic programming (Bellman)",
-          "url": "https://doi.org/10.1073/pnas.48.8.1257"
+          "title": "On the Theory of Dynamic Programming (Bellman, 1952)",
+          "url": "https://doi.org/10.1073/pnas.38.8.716"
         },
         {
           "category": "blog",
@@ -4046,8 +4051,8 @@
         },
         {
           "category": "paper",
-          "title": "Graph-based algorithms for Boolean function manipulation (Bryant)",
-          "url": "https://doi.org/10.1016/0898-1221(92)90016-Z"
+          "title": "Graph-Based Algorithms for Boolean Function Manipulation (Bryant, 1986)",
+          "url": "https://doi.org/10.1109/TC.1986.1676819"
         },
         {
           "category": "blog",
@@ -4256,8 +4261,8 @@
         },
         {
           "category": "paper",
-          "title": "Grounding in communication (Clark & Brennan)",
-          "url": "https://doi.org/10.1016/S0010-0277(91)90013-P"
+          "title": "Grounding in Communication (Clark & Brennan, 1991)",
+          "url": "https://doi.org/10.1037/10096-006"
         },
         {
           "category": "blog",
@@ -4396,8 +4401,8 @@
         },
         {
           "category": "paper",
-          "title": "On the criteria for decomposing systems into modules (Parnas)",
-          "url": "https://doi.org/10.1145/362486.362498"
+          "title": "On the Criteria To Be Used in Decomposing Systems into Modules (Parnas, CACM 1972)",
+          "url": "https://doi.org/10.1145/361598.361623"
         },
         {
           "category": "blog",
@@ -4431,8 +4436,8 @@
         },
         {
           "category": "paper",
-          "title": "Market segmentation (Smith)",
-          "url": "https://doi.org/10.1177/002224295601300407"
+          "title": "Product Differentiation and Market Segmentation as Alternative Marketing Strategies (Smith, 1956)",
+          "url": "https://doi.org/10.1177/002224295602100102"
         },
         {
           "category": "blog",
@@ -4756,13 +4761,13 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "Seeing Theory — Basic Probability",
-          "url": "https://seeing-theory.brown.edu/basic-probability/index.html"
+          "title": "Introduction to Modern Statistics — Ch. 5: Exploring numerical data",
+          "url": "https://openintro-ims.netlify.app/explore-numerical"
         },
         {
           "category": "problem",
@@ -4786,12 +4791,12 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -4826,7 +4831,7 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -4860,13 +4865,18 @@
           "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"
         },
         {
+          "category": "paper",
+          "title": "An Introduction to Statistical Learning — full text (PDF)",
+          "url": "https://www.statlearning.com/s/ISLR-Seventh-Printing.pdf"
+        },
+        {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "blog",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5061,7 +5071,7 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5096,12 +5106,12 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5136,7 +5146,7 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5171,12 +5181,12 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5206,7 +5216,7 @@
         },
         {
           "category": "blog",
-          "title": "ISL — online companion",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5241,12 +5251,12 @@
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
           "category": "blog",
-          "title": "ISL — Model Assessment",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5326,7 +5336,7 @@
         },
         {
           "category": "more",
-          "title": "ISL — Principal Components",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -5366,7 +5376,7 @@
         },
         {
           "category": "more",
-          "title": "Hyndman — Forecasting: Principles and Practice",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/"
         },
         {
@@ -5396,13 +5406,18 @@
         },
         {
           "category": "blog",
-          "title": "FPP3 — time series features",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/"
         },
         {
           "category": "book",
-          "title": "Forecasting: Principles and Practice (Hyndman)",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/"
+        },
+        {
+          "category": "more",
+          "title": "FPP3 — 9.1 Stationarity and differencing",
+          "url": "https://otexts.com/fpp3/stationarity.html"
         },
         {
           "category": "problem",
@@ -5476,7 +5491,7 @@
         },
         {
           "category": "book",
-          "title": "Forecasting: Principles and Practice (Hyndman)",
+          "title": "Forecasting: Principles and Practice, 3rd ed. (Hyndman & Athanasopoulos)",
           "url": "https://otexts.com/fpp3/"
         },
         {
@@ -5511,7 +5526,7 @@
         },
         {
           "category": "book",
-          "title": "An Introduction to Statistical Learning",
+          "title": "An Introduction to Statistical Learning (free book + labs)",
           "url": "https://www.statlearning.com/"
         },
         {
@@ -6315,6 +6330,21 @@
     "hallucination-failure-detection": {
       "items": [
         {
+          "category": "paper",
+          "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection",
+          "url": "https://arxiv.org/abs/2303.08896"
+        },
+        {
+          "category": "blog",
+          "title": "Extrinsic Hallucinations in LLMs (Lil'Log)",
+          "url": "https://lilianweng.github.io/posts/2024-07-07-hallucination/"
+        },
+        {
+          "category": "more",
+          "title": "Detecting hallucinations in LLMs using semantic entropy (Nature, 2024)",
+          "url": "https://www.nature.com/articles/s41586-024-07421-0"
+        },
+        {
           "category": "problem",
           "title": "Design exercise: Hallucination & Failure Detection",
           "url": "/drills/practice-hallucination-failure-detection"
@@ -6360,6 +6390,21 @@
     "evidence-backed-verification": {
       "items": [
         {
+          "category": "paper",
+          "title": "RARR: Researching and Revising What Language Models Say",
+          "url": "https://arxiv.org/abs/2210.08726"
+        },
+        {
+          "category": "blog",
+          "title": "Google Testing Blog — Just Say No to More End-to-End Tests",
+          "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html"
+        },
+        {
+          "category": "more",
+          "title": "Enabling LLMs to Generate Text with Citations (ALCE)",
+          "url": "https://arxiv.org/abs/2305.14627"
+        },
+        {
           "category": "problem",
           "title": "Design exercise: Evidence-backed Verification",
           "url": "/drills/practice-evidence-backed-verification"
@@ -6374,6 +6419,21 @@
     },
     "human-review-systems": {
       "items": [
+        {
+          "category": "blog",
+          "title": "People + AI Guidebook — Feedback + Control (Google PAIR)",
+          "url": "https://pair.withgoogle.com/chapter/feedback-controls/"
+        },
+        {
+          "category": "book",
+          "title": "People + AI Guidebook — Errors + Graceful Failure (Google PAIR)",
+          "url": "https://pair.withgoogle.com/chapter/explainability-trust/"
+        },
+        {
+          "category": "more",
+          "title": "NIST AI Risk Management Framework 1.0 (PDF)",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+        },
         {
           "category": "problem",
           "title": "Design exercise: Human Review Systems",

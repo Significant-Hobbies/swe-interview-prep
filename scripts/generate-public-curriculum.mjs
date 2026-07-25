@@ -768,21 +768,31 @@ const expectedOutputRoot = join(repoRoot, 'public', 'curriculum');
 if (outputDir !== expectedOutputRoot) {
   throw new Error(`Refusing to replace unexpected output directory: ${outputDir}`);
 }
+const cleanGeneratedText = (value) => value.replace(/[ \t]+$/gm, '');
 rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(join(outputDir, 'tracks'), { recursive: true });
 mkdirSync(join(outputDir, 'roadmaps'), { recursive: true });
 mkdirSync(join(outputDir, 'concepts'), { recursive: true });
 
 writeFileSync(join(outputDir, 'styles.css'), styles);
-writeFileSync(join(outputDir, 'index.html'), hubPage());
+writeFileSync(join(outputDir, 'index.html'), cleanGeneratedText(hubPage()));
 for (const track of TRACKS) {
-  writeFileSync(join(outputDir, 'tracks', `${track.id}.html`), trackPage(track));
+  writeFileSync(
+    join(outputDir, 'tracks', `${track.id}.html`),
+    cleanGeneratedText(trackPage(track))
+  );
 }
 for (const roadmap of ROADMAPS) {
-  writeFileSync(join(outputDir, 'roadmaps', `${roadmap.id}.html`), roadmapPage(roadmap));
+  writeFileSync(
+    join(outputDir, 'roadmaps', `${roadmap.id}.html`),
+    cleanGeneratedText(roadmapPage(roadmap))
+  );
 }
 for (const concept of CONCEPTS) {
-  writeFileSync(join(outputDir, 'concepts', `${concept.id}.html`), conceptPage(concept));
+  writeFileSync(
+    join(outputDir, 'concepts', `${concept.id}.html`),
+    cleanGeneratedText(conceptPage(concept))
+  );
 }
 writeFileSync(join(outputDir, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
 writeFileSync(join(outputDir, 'catalog.md'), catalogMarkdown(catalog));

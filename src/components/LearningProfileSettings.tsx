@@ -1,4 +1,4 @@
-import { ROADMAPS } from '../data/learning-os';
+import { ROADMAPS, sortedTracks } from '../data/learning-os';
 import { useProfile } from '../hooks/useProfile';
 import {
   type ExperienceLevel,
@@ -9,9 +9,19 @@ import {
 
 const MINUTES = [15, 30, 45, 90] as const;
 const EXPERIENCE: ExperienceLevel[] = ['student', 'mid', 'senior'];
+const TRACKS = sortedTracks();
 
 export function LearningProfileSettings() {
   const { profile, saveProfile } = useProfile();
+  const selectedTracks = profile.trackIds ?? [];
+
+  function toggleTrack(id: string) {
+    const next = selectedTracks.includes(id)
+      ? selectedTracks.filter((t) => t !== id)
+      : [...selectedTracks, id];
+    void saveProfile({ trackIds: next });
+  }
+
   const modPct: ModalityWeights = {
     review: Math.round(profile.modalityWeights.review * 100),
     drill: Math.round(profile.modalityWeights.drill * 100),
@@ -96,6 +106,40 @@ export function LearningProfileSettings() {
             </option>
           ))}
         </select>
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium text-slate-400 mb-2">Tracks</label>
+        <p className="mb-2 text-[11px] text-slate-500">
+          Narrows Today&apos;s concept picks, the Library, and Learning Sources. None selected =
+          every track.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {TRACKS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              aria-pressed={selectedTracks.includes(t.id)}
+              onClick={() => toggleTrack(t.id)}
+              className={`rounded-md px-3 py-1.5 text-xs transition-colors ${
+                selectedTracks.includes(t.id)
+                  ? 'bg-sky-500/15 text-sky-300'
+                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              }`}
+            >
+              {t.title}
+            </button>
+          ))}
+        </div>
+        {selectedTracks.length > 0 && (
+          <button
+            type="button"
+            onClick={() => void saveProfile({ trackIds: [] })}
+            className="mt-2 text-[11px] text-slate-500 underline hover:text-slate-300"
+          >
+            Clear — show all tracks
+          </button>
+        )}
       </div>
 
       <div>

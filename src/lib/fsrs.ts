@@ -8,6 +8,13 @@ import {
   type State,
 } from 'ts-fsrs';
 
+// The confidence formula is shared verbatim with the server path
+// (shared/lib/fsrs.mjs + handlers/concepts.mjs) so guest and authed users
+// cannot diverge.
+import { masteryConfidence } from '../../shared/lib/confidence.mjs';
+
+export { masteryConfidence };
+
 const params = generatorParameters({
   enable_fuzz: false,
   request_retention: 0.9,
@@ -54,8 +61,11 @@ function rowToCard(row: MasteryRow): Card {
 }
 
 function cardToRow(card: Card): MasteryRow {
-  // Confidence: bounded retrievability proxy. Stability scaled into 0..1.
-  const confidence = Math.min(1, card.stability / 30);
+  const lastReview = card.last_review ? card.last_review.toISOString() : null;
+  const confidence = masteryConfidence(
+    { stability: card.stability, last_review: lastReview },
+    card.last_review ?? new Date()
+  );
   return {
     stability: card.stability,
     difficulty: card.difficulty,
@@ -64,7 +74,7 @@ function cardToRow(card: Card): MasteryRow {
     reps: card.reps,
     lapses: card.lapses,
     state: card.state,
-    last_review: card.last_review ? card.last_review.toISOString() : null,
+    last_review: lastReview,
     due: card.due.toISOString(),
     confidence,
   };
@@ -80,14 +90,6 @@ export function reviewConcept(
   return cardToRow(result.card);
 }
 
-export function isDue(row: MasteryRow | null, now = new Date()): boolean {
-  if (!row?.due) return true;
-  return new Date(row.due) <= now;
-}
-
-export function decayConfidence(row: MasteryRow, now = new Date()): number {
-  if (!row.last_review || !row.stability) return 0;
-  const elapsed = (now.getTime() - new Date(row.last_review).getTime()) / 86400000;
-  // FSRS retrievability formula approximation: R = (1 + elapsed / (9 * S))^-1
-  return Math.max(0, Math.min(1, (1 + elapsed / (9 * row.stability)) ** -1));
-}
+// `isDue` and confidence-as-percentage live in ./conceptState — this module
+// owns scheduling only. Importing two different `isDue` definitions was how
+// "untouched means due" and "untouched means not due" ended up coexisting.

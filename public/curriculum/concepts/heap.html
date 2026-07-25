@@ -72,9 +72,9 @@
       </ul>
     </section>
 
-    
 
-    <section><h2>Common mistakes</h2><ul><li>Sorting the whole input when a size-k heap suffices</li><li>Using a max-heap when top-k smallest needs a max-heap of size k (and vice versa)</li><li>Forgetting most languages give a min-heap by default</li></ul></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Sorting the whole input when a size-k heap suffices</li><li>Inverting heap polarity: top-k smallest wants a size-k max-heap (evict the largest), top-k largest wants a size-k min-heap</li><li>Forgetting most languages give a min-heap by default</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
@@ -110,7 +110,7 @@ https://leetcode.com/problems/task-scheduler/</p>
           <p><strong>Expected evidence:</strong> Pass all LeetCode test cases for this problem.</p>
           <a href="/drills/lc-task-scheduler">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>Explain Heap / Priority Queue and name one common mistake: &quot;Sorting the whole input when a size-k heap suffices…&quot;</li></ul>
+      <h3>Review prompts</h3><ul><li>A size-k heap is O(n log k) and sorting is O(n log n). When is sorting still the better choice?</li></ul>
     </section>
 
     <section>
