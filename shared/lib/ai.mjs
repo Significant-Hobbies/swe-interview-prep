@@ -19,9 +19,10 @@ export const AI_CONFIG_MISSING_MESSAGE =
  */
 export function resolveAIConfig({ endpointUrl, apiKey, model } = {}, env = undefined) {
   const source = env || (typeof process !== 'undefined' ? process.env : undefined) || {};
-  const eu = endpointUrl || source.AI_ENDPOINT_URL;
-  const key = apiKey || source.AI_API_KEY;
-  const m = model || source.AI_MODEL;
+  const hasExplicitConfig = Boolean(endpointUrl || apiKey || model);
+  const eu = hasExplicitConfig ? endpointUrl : source.AI_ENDPOINT_URL;
+  const key = hasExplicitConfig ? apiKey : source.AI_API_KEY;
+  const m = hasExplicitConfig ? model : source.AI_MODEL;
   if (!eu || !key || !m) throw new AIConfigError(AI_CONFIG_MISSING_MESSAGE);
   return { endpointUrl: eu, apiKey: key, model: m };
 }

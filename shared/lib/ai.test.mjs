@@ -1,5 +1,50 @@
 import { describe, it, expect } from 'vitest';
-import { parseJSON } from './ai.mjs';
+import { AIConfigError, parseJSON, resolveAIConfig } from './ai.mjs';
+
+describe('resolveAIConfig', () => {
+  const deployment = {
+    AI_ENDPOINT_URL: 'https://deployment.example/v1',
+    AI_API_KEY: 'deployment-secret',
+    AI_MODEL: 'deployment-model',
+  };
+
+  it('uses a complete deployment-owned configuration as one unit', () => {
+    expect(resolveAIConfig({}, deployment)).toEqual({
+      endpointUrl: deployment.AI_ENDPOINT_URL,
+      apiKey: deployment.AI_API_KEY,
+      model: deployment.AI_MODEL,
+    });
+  });
+
+  it('uses a complete BYOK configuration as one unit', () => {
+    expect(
+      resolveAIConfig(
+        {
+          endpointUrl: 'https://byok.example/v1',
+          apiKey: 'byok-key',
+          model: 'byok-model',
+        },
+        deployment
+      )
+    ).toEqual({
+      endpointUrl: 'https://byok.example/v1',
+      apiKey: 'byok-key',
+      model: 'byok-model',
+    });
+  });
+
+  it('never combines a client-controlled endpoint with the deployment API key', () => {
+    expect(() =>
+      resolveAIConfig(
+        {
+          endpointUrl: 'https://attacker.example/v1',
+          model: 'attacker-model',
+        },
+        deployment
+      )
+    ).toThrow(AIConfigError);
+  });
+});
 
 describe('parseJSON', () => {
   it('parses raw JSON', () => {
