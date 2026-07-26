@@ -148,16 +148,18 @@ below the hub floor, which is correct: it genuinely covers two concepts here.
 
 ## Blockers / known gaps
 
-- **`pnpm ready` and `pnpm build` cannot pass on this machine.** `.env.local`
-  contains all six required keys with **empty values**, so `validate-env`
-  refuses at step 1/4. This is local setup, not code: `npx vite build`
-  (skipping only the env gate) compiles the full app in ~700ms. Filling
-  `.env.local` unblocks both.
-- **The signed-in path has never been exercised in a browser.** Every
-  verification this cycle ran as a guest. The unit tests cover the pure logic —
-  including mutation-tested proof for per-user sweep namespacing — but the
-  Google sign-in flow, the server profile round-trip, and the write-failure
-  banner have not been observed live.
+- **`.env.local` holds placeholder values, not real ones.** Its six keys were
+  empty, which blocked `validate-env` at step 1/4; they now carry obvious
+  dummies (`dummy-local-only-…`) so `pnpm ready` passes 4/4 locally. The file
+  is gitignored and nothing dummy reaches a tracked file. Production is
+  unaffected — the audit step reports Cloudflare Pages secrets present.
+- **The signed-in path still cannot be exercised locally, and dummies do not
+  change that.** Google Sign-In needs a real OAuth client ID, so a placeholder
+  gets you a green build but no session. Every verification this cycle ran as a
+  guest. Unit tests cover the pure logic — including mutation-tested proof for
+  per-user sweep namespacing — but the sign-in flow, the server profile
+  round-trip, and the write-failure banner have not been observed live. Doing
+  so needs the real `VITE_GOOGLE_CLIENT_ID`.
 - **`READER_API_TOKEN` not configured.** The private Reader adapter is
   built and tested but not activated in production. Activating it is a
   planned item — see
