@@ -1,5 +1,5 @@
 // Best-effort activity logging — signed-in users only.
-import { getAuthToken } from '../contexts/AuthContext';
+import { learningFetch } from './learningApi';
 
 export type ActivityKind =
   | 'drill_start'
@@ -20,13 +20,17 @@ export async function logActivity(opts: {
   durationMs?: number;
   payload?: Record<string, unknown>;
 }): Promise<void> {
-  const token = getAuthToken();
-  if (!token) return;
+  // Guarded by `learningFetch`, which skips auth actions without a session.
+  //
+  // This used to gate on `getAuthToken()`, which has returned a hard `null`
+  // since the JWT moved to an httpOnly cookie for XSS hardening — so the guard
+  // was passing for nobody and activity logging was silently dead for signed-in
+  // users too. The cookie rides along on `credentials: 'include'`, so no
+  // Authorization header is needed.
   try {
-    await fetch('/api/learning?action=activity', {
+    await learningFetch('activity', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         kind: opts.kind,
         conceptIds: opts.conceptIds,

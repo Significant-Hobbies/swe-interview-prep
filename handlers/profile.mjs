@@ -20,6 +20,11 @@ const DEFAULT = {
   trackIds: [],
   modalityWeights: { review: 0.22, drill: 0.42, build: 0.24, learn: 0.12 },
   skipConceptIds: [],
+  // Empty = nothing muted. Must exist here, not just in src/lib/profile.ts: a
+  // user with no row yet gets this object back from GET, and useProfile does
+  // `{ ...DEFAULT_PROFILE, ...data.profile }` — a missing key cannot win the
+  // spread, so a guest who muted domains and then signed in lost every mute.
+  mutedTags: [],
   digestEmail: false,
   pushEnabled: false,
   onboardingVersion: 4,

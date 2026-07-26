@@ -99,8 +99,15 @@ export function useConceptMastery() {
     fetchMastery();
   }, [fetchMastery]);
 
+  /**
+   * Grade a concept. Resolves `true` when the rating was durably recorded,
+   * `false` when the server rejected it and nothing was written.
+   *
+   * Callers that just fire-and-forget can keep ignoring the result; Sweep uses
+   * it to avoid marking a concept triaged when the write never landed.
+   */
   const review = useCallback(
-    async (conceptId: string, rating: MasteryRating) => {
+    async (conceptId: string, rating: MasteryRating): Promise<boolean> => {
       if (user) {
         try {
           const res = await fetch('/api/learning?action=concepts', {
@@ -109,7 +116,9 @@ export function useConceptMastery() {
             credentials: 'include',
             body: JSON.stringify({ conceptId, rating }),
           });
-          if (!res.ok) return;
+          // A rejection is authoritative (expired session, server error).
+          // Writing locally would fabricate progress that can never sync.
+          if (!res.ok) return false;
           const data = await res.json();
           if (data.mastery) {
             setMastery((prev) => {
@@ -121,10 +130,13 @@ export function useConceptMastery() {
               return next;
             });
           }
+          return true;
         } catch {
-          // fall through to local
+          // Network failure, not a rejection — fall through to the local
+          // scheduler so the rep is not lost. This previously could not happen:
+          // a `return` sat below the catch, so the comment saying "fall through
+          // to local" described behaviour the code did not have.
         }
-        return;
       }
 
       setMastery((prev) => {
@@ -133,6 +145,7 @@ export function useConceptMastery() {
         saveGuestMastery(next);
         return next;
       });
+      return true;
     },
     [user]
   );

@@ -28,6 +28,7 @@ const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
 const Explore = lazy(() => import('./pages/Explore'));
+const Sweep = lazy(() => import('./pages/Sweep'));
 const Practice = lazy(() => import('./pages/Practice'));
 const PracticeAll = lazy(() => import('./pages/PracticeAll'));
 const Playground = lazy(() => import('./pages/Playground'));
@@ -62,26 +63,6 @@ function OnboardingGate({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-function GoogleRequired({ children }: { children: React.ReactNode }) {
-  const { user, signInWithGoogle } = useAuth();
-  if (user) return <>{children}</>;
-  return (
-    <main className="mx-auto max-w-xl px-6 py-24 text-center">
-      <h1 className="text-3xl font-bold text-white">Sign in to your learning sources</h1>
-      <p className="mt-4 text-sm leading-6 text-white/50">
-        Project tracks and Reader saves stay behind your Google session.
-      </p>
-      <button
-        type="button"
-        onClick={() => void signInWithGoogle()}
-        className="mt-8 h-11 rounded-md bg-white px-5 text-sm font-semibold text-black hover:bg-white/90"
-      >
-        Continue with Google
-      </button>
-    </main>
-  );
-}
-
 function AppRoutes() {
   return (
     <Routes>
@@ -93,6 +74,7 @@ function AppRoutes() {
         <Route path="learn" element={<Learn />} />
         <Route path="learn/all" element={<LearnAll />} />
         <Route path="explore" element={<Explore />} />
+        <Route path="sweep" element={<Sweep />} />
         <Route path="learn/:id" element={<ConceptDetail />} />
         <Route path="practice" element={<Practice />} />
         <Route path="practice/all" element={<PracticeAll />} />
@@ -106,54 +88,17 @@ function AppRoutes() {
         <Route path="drills/:id" element={<BuildLab />} />
         <Route path="learning" element={<LearningDoc />} />
         <Route path="learning/:slug" element={<LearningDoc />} />
-        <Route
-          path="sources"
-          element={
-            <GoogleRequired>
-              <LearningSources />
-            </GoogleRequired>
-          }
-        />
-        <Route
-          path="sources/:id"
-          element={
-            <GoogleRequired>
-              <LearningSourceDetail />
-            </GoogleRequired>
-          }
-        />
-        <Route
-          path="session/:date"
-          element={
-            <GoogleRequired>
-              <DailyLearningSession />
-            </GoogleRequired>
-          }
-        />
-        <Route
-          path="session/:date/:sessionId"
-          element={
-            <GoogleRequired>
-              <DailyLearningSession />
-            </GoogleRequired>
-          }
-        />
-        <Route
-          path="library"
-          element={
-            <GoogleRequired>
-              <Library />
-            </GoogleRequired>
-          }
-        />
-        <Route
-          path="library/:repoSlug"
-          element={
-            <GoogleRequired>
-              <RepoView />
-            </GoogleRequired>
-          }
-        />
+        {/* Open, like every other route. Nothing here is personal: the sources
+            feed and the library are generated/vendored content committed to the
+            repo, and session progress is local until you sign in. */}
+        <Route path="sources" element={<LearningSources />} />
+        <Route path="sources/:id" element={<LearningSourceDetail />} />
+        <Route path="session/:date" element={<DailyLearningSession />} />
+        <Route path="session/:date/:sessionId" element={<DailyLearningSession />} />
+        <Route path="library" element={<Library />} />
+        <Route path="library/:repoSlug" element={<RepoView />} />
+        {/* Still reachable, no longer a gate — it holds the product pitch. */}
+        <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />
@@ -173,16 +118,9 @@ function AppRoutes() {
 }
 
 export default function App() {
-  const { user, isGuest, loading } = useAuth();
+  const { user, isGuest, loading, continueAsGuest } = useAuth();
   const location = useLocation();
   const isPublicShare = location.pathname.startsWith('/share/');
-  const isPublicInfoRoute = location.pathname === '/about' || location.pathname === '/privacy';
-  const isPrivateLearningRoute =
-    location.pathname === '/sources' ||
-    location.pathname.startsWith('/sources/') ||
-    location.pathname.startsWith('/session/') ||
-    location.pathname === '/library' ||
-    location.pathname.startsWith('/library/');
 
   useEffect(() => {
     try {
@@ -200,15 +138,20 @@ export default function App() {
     if (!loading || user || isGuest) removeLcpShell();
   }, [loading, user, isGuest]);
 
-  if (loading && !user && !isGuest) return <RouteLoading />;
+  /**
+   * Nobody is asked to sign in to use this.
+   *
+   * A visitor with no session is put straight into guest mode rather than shown
+   * a login screen. Signing in buys one thing — progress that survives the
+   * browser — so it belongs in the header as an upgrade, not in the doorway as
+   * a toll. The pitch page is still reachable at `/login` for anyone who wants
+   * it; it is no longer a gate.
+   */
+  useEffect(() => {
+    if (!loading && !user && !isGuest) continueAsGuest();
+  }, [loading, user, isGuest, continueAsGuest]);
 
-  if (!user && !isGuest && !isPublicShare && !isPublicInfoRoute && !isPrivateLearningRoute) {
-    return (
-      <Suspense fallback={null}>
-        <Login />
-      </Suspense>
-    );
-  }
+  if (loading && !user && !isGuest) return <RouteLoading />;
 
   const body = isPublicShare ? (
     <AppRoutes />

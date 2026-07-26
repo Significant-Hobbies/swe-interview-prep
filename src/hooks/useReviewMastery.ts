@@ -46,8 +46,9 @@ export function useReviewMastery() {
     void fetchMastery();
   }, [fetchMastery]);
 
+  /** Resolves `false` when the server rejected the grade and nothing was written. */
   const review = useCallback(
-    async (questionId: string, rating: MasteryRating) => {
+    async (questionId: string, rating: MasteryRating): Promise<boolean> => {
       if (user) {
         try {
           const res = await fetch('/api/learning?action=review-mastery', {
@@ -56,7 +57,7 @@ export function useReviewMastery() {
             credentials: 'include',
             body: JSON.stringify({ questionId, rating }),
           });
-          if (!res.ok) return;
+          if (!res.ok) return false;
           const data = await res.json();
           if (data.mastery) {
             setMastery((prev) => {
@@ -65,9 +66,9 @@ export function useReviewMastery() {
               return next;
             });
           }
-          return;
+          return true;
         } catch {
-          /* fall through */
+          /* network failure — fall through to the local scheduler */
         }
       }
       setMastery((prev) => {
@@ -78,6 +79,7 @@ export function useReviewMastery() {
         saveGuest(next);
         return next;
       });
+      return true;
     },
     [user]
   );

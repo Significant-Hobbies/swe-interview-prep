@@ -1,18 +1,68 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Gauge } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import BrowseLinks from '../components/BrowseLinks';
 import FeaturedPaths from '../components/FeaturedPaths';
 import PathDoor from '../components/PathDoor';
 import PlaygroundHero from '../components/PlaygroundHero';
-import { CONCEPT_BY_ID, type Roadmap, roadmapConceptIds, ROADMAPS } from '../data/learning-os';
+import { useAuth } from '../contexts/AuthContext';
+import {
+  CONCEPT_BY_ID,
+  CONCEPTS,
+  type Roadmap,
+  roadmapConceptIds,
+  ROADMAPS,
+} from '../data/learning-os';
 import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useGateContext } from '../hooks/useGates';
 import { rollupMastery } from '../lib/conceptState';
 import { conceptAccessible } from '../lib/gates';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 import { ROADMAP_GROUPS, roadmapsInGroup, ungroupedRoadmaps } from '../lib/roadmapGroups';
+import { loadSweep, sweepCoverage } from '../lib/sweep';
 import { useProfile } from '../hooks/useProfile';
+
+/**
+ * Entry point for the breadth pass. Roadmaps go deep on one path; Sweep is the
+ * orthogonal move — triage the whole catalog once so the review queue holds
+ * only what you don't already know.
+ */
+function SweepDoor() {
+  const { user } = useAuth();
+  // Lazy state, not a render-body read: `loadSweep` parses localStorage and can
+  // migrate a guest pass, and Learn re-renders several times per visit as its
+  // hooks settle. Doing that during render is an impure render.
+  const [coverage] = useState(() => sweepCoverage(CONCEPTS, loadSweep(user?.id).rated));
+  const started = coverage.rated > 0;
+
+  return (
+    <Link
+      to="/sweep"
+      className="mt-10 flex items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]"
+    >
+      <div className="min-w-0">
+        <div className="flex items-center gap-2">
+          <Gauge className="h-4 w-4 shrink-0 text-white/40" />
+          <span className="font-medium text-white">
+            {started ? 'Resume sweep' : 'Sweep the catalog'}
+          </span>
+        </div>
+        <p className="mt-1.5 text-sm text-white/50">
+          {started
+            ? `${coverage.rated} of ${coverage.total} triaged — ${coverage.fuzzy + coverage.new} gaps in review.`
+            : `Rate all ${coverage.total} concepts Known / Fuzzy / New. Only the gaps enter your review queue.`}
+        </p>
+      </div>
+      <div className="shrink-0 text-right">
+        <div className="font-mono text-lg tabular-nums text-white">{coverage.percent}%</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+          covered
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 const HORIZON_LABEL: Record<string, string> = {
   '9d': '9 days',
@@ -62,6 +112,8 @@ export default function Learn() {
           Explore full catalog <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
+
+      <SweepDoor />
 
       <PathDoor activeRoadmapId={active.id} className="mt-10" />
 

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
+import { learningFetch } from '../lib/learningApi';
 import type { ArtifactStatus, DrillStatus, ProjectStatus } from '../data/learning-os';
 import { DEFAULT_USER_ELO, updatePlayerElo } from '../lib/elo';
 import {
@@ -330,10 +331,10 @@ function loadElo(): UserEloState {
 }
 
 function syncEloToDb(state: UserEloState) {
-  fetch('/api/learning?action=elo', {
+  // Skipped entirely for guests — ELO lives in localStorage for them.
+  void learningFetch('elo', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
     body: JSON.stringify({ state }),
   }).catch(() => {});
 }
@@ -342,9 +343,11 @@ export function useUserElo() {
   const [state, setState] = useState<UserEloState>(loadElo);
 
   useEffect(() => {
-    fetch('/api/learning?action=elo', { credentials: 'include' })
-      .then((r) => r.json())
+    // Resolves null for guests, so no request is made and nothing 401s.
+    void learningFetch('elo')
+      .then((r) => r?.json())
       .then((data) => {
+        if (!data) return;
         if (data.state?.v === 2) {
           setState((prev) => {
             const merged = {

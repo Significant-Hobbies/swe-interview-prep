@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { LearningItem, LearningSource } from '../data/learning-sources';
+import { hasSession } from '../lib/learningApi';
 
 export function useReaderLearning() {
   const [items, setItems] = useState<LearningItem[]>([]);
@@ -9,6 +10,11 @@ export function useReaderLearning() {
 
   useEffect(() => {
     let cancelled = false;
+    // Owner-only endpoint. /sources is public now, so guests reach this hook.
+    if (!hasSession()) {
+      setLoading(false);
+      return;
+    }
     fetch('/api/learning/reader', { credentials: 'include' })
       .then(async (response) => {
         if (!response.ok)

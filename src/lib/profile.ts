@@ -23,6 +23,17 @@ export interface LearnerProfile {
   trackIds: string[];
   modalityWeights: ModalityWeights;
   skipConceptIds: string[];
+  /**
+   * Tags excluded from ROI ranking. Interest is stored as a NEGATIVE on
+   * purpose: with broad interests, ranking thirty domains produces "all of
+   * them" and no signal, whereas muting the three you don't care about is a
+   * twenty-second interaction that states the truth exactly. Empty means
+   * everything counts — so an un-migrated profile behaves correctly.
+   *
+   * Distinct from `trackIds`, which is a hard filter on what the planner may
+   * schedule. Muting only removes a domain from "where should I go next".
+   */
+  mutedTags?: string[];
   /** Daily email digest (reviews due + session ready). */
   digestEmail?: boolean;
   /** Browser push reminders (requires permission + subscription). */
@@ -31,7 +42,12 @@ export interface LearnerProfile {
   updatedAt?: string;
 }
 
-/** v4 added `trackIds`. Migration default is `[]`, i.e. "all tracks". */
+/**
+ * v4 added `trackIds`. Migration default is `[]`, i.e. "all tracks".
+ * v5 added `mutedTags`. Migration default is `[]`, i.e. "nothing muted", so the
+ * version is deliberately NOT bumped — an absent field already means the right
+ * thing and bumping would re-trigger onboarding for no reason.
+ */
 export const PROFILE_VERSION = 4;
 
 const DEFAULT_MODALITY_WEIGHTS: ModalityWeights = {
@@ -49,6 +65,7 @@ export const DEFAULT_PROFILE: LearnerProfile = {
   trackIds: [],
   modalityWeights: { ...DEFAULT_MODALITY_WEIGHTS },
   skipConceptIds: [],
+  mutedTags: [],
   digestEmail: false,
   pushEnabled: false,
   onboardingVersion: PROFILE_VERSION,

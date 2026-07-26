@@ -6,8 +6,15 @@
 /** BYOK / heuristic — no Turso auth required. */
 const PUBLIC_ACTIONS = ['gaps', 'critique', 'understanding', 'tag'];
 
-/** Signed-in user required. */
-const AUTH_ACTIONS = [
+/**
+ * Signed-in user required.
+ *
+ * Exported because the client gates on it too (`src/lib/learningApi.ts`) —
+ * a guest calling one of these can only ever 401, so the request is skipped
+ * rather than sent. Reading the same list on both sides means adding an action
+ * here gates the client automatically.
+ */
+export const AUTH_ACTIONS = [
   'activity',
   'concepts',
   'feynman',

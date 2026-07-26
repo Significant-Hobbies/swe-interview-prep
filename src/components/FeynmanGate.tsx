@@ -1,8 +1,8 @@
 import { Brain, Loader2, X } from 'lucide-react';
+import { learningFetch } from '../lib/learningApi';
 import { useEffect, useState } from 'react';
 
 import { REVIEW_QUESTIONS } from '../data/learning-os';
-import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from '../hooks/useAI';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import { trackCoreAction } from '../lib/analytics';
@@ -77,15 +77,11 @@ export default function FeynmanGate({
       return;
     }
     setSubmitting(true);
-    const token = getAuthToken();
     const config = loadAIConfig();
     try {
-      const res = await fetch('/api/learning?action=feynman', {
+      const res = await learningFetch('feynman', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           explanation,
           code,
@@ -96,6 +92,7 @@ export default function FeynmanGate({
           aiConfig: config,
         }),
       });
+      if (!res) throw new Error('Sign in to have an explanation graded.');
       if (!res.ok) throw new Error(`Grade failed: ${res.status}`);
       const data = await res.json();
       setResult(data);
@@ -106,10 +103,10 @@ export default function FeynmanGate({
       // Map grade + gaps + AI ratings onto FSRS updates (lib/feynmanRating),
       // then apply them to concept mastery.
       const updates = ratingsFromFeynman(data, conceptIds);
-      if (updates.length && token) {
-        await fetch('/api/learning?action=concepts', {
+      if (updates.length) {
+        await learningFetch('concepts', {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ updates }),
         });
       }
@@ -122,18 +119,16 @@ export default function FeynmanGate({
       const hardIds = updates.filter((u) => u.rating === 'hard').map((u) => u.conceptId);
       if (againIds.length) scheduleReviewsForGaps(againIds, 'again');
       if (hardIds.length) scheduleReviewsForGaps(hardIds, 'hard');
-      if (token) {
-        fetch('/api/learning?action=activity', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({
-            kind: 'feynman',
-            problemId,
-            conceptIds,
-            payload: { grade: data.grade, gaps: data.gaps },
-          }),
-        }).catch(() => {});
-      }
+      void learningFetch('activity', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'feynman',
+          problemId,
+          conceptIds,
+          payload: { grade: data.grade, gaps: data.gaps },
+        }),
+      }).catch(() => {});
     } catch (e: any) {
       alert(e.message);
     } finally {
@@ -142,14 +137,11 @@ export default function FeynmanGate({
   };
 
   const skip = () => {
-    const token = getAuthToken();
-    if (token) {
-      fetch('/api/learning?action=activity', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ kind: 'feynman_skip', problemId, conceptIds }),
-      }).catch(() => {});
-    }
+    void learningFetch('activity', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kind: 'feynman_skip', problemId, conceptIds }),
+    }).catch(() => {});
     onClose();
   };
 

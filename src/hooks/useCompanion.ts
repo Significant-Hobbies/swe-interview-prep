@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
+import { learningFetch } from '../lib/learningApi';
 
-import { getAuthToken } from '../contexts/AuthContext';
 import { type AIConfig, IS_LOCAL, LOCAL_PROVIDERS } from './useAI';
 
 export interface CompanionMessage {
@@ -46,9 +46,7 @@ async function streamLocal(
   onThreadId: (id: string) => void
 ) {
   const tool = LOCAL_TOOL_MAP[config.model] || 'claude';
-  const token = getAuthToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  if (token) headers.Authorization = `Bearer ${token}`;
   const payload: Record<string, unknown> = {
     messages: messages.map((m) => ({ role: m.role, content: m.content })),
     systemPrompt: `${SYSTEM}\n\n${systemContext}`,
@@ -209,18 +207,18 @@ ${ctx.code.slice(0, 6000)}
         ];
         persist(finalMsgs);
 
-        // Fire-and-forget activity log
-        const token = getAuthToken();
-        if (token) {
-          fetch('/api/learning?action=activity', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-            body: JSON.stringify({
-              kind: 'companion_turn',
-              payload: { language: ctx.language, codeLen: ctx.code.length, replyLen: buf.length },
-            }),
-          }).catch(() => {});
-        }
+        // Fire-and-forget activity log. Same dead guard as lib/activity.ts had:
+        // `getAuthToken()` returns a hard null since the JWT became an httpOnly
+        // cookie, so this never ran for anyone. `learningFetch` skips it for
+        // guests and lets the cookie carry auth for everyone else.
+        void learningFetch('activity', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            kind: 'companion_turn',
+            payload: { language: ctx.language, codeLen: ctx.code.length, replyLen: buf.length },
+          }),
+        }).catch(() => {});
       } catch (e: any) {
         if (e.name !== 'AbortError') setError(e.message);
       } finally {

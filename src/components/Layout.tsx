@@ -23,6 +23,18 @@ export default function Layout() {
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
   const showSetupHint = !onboardingDone && location.pathname !== '/onboarding';
 
+  /**
+   * Warn about local-only storage once there is something to lose.
+   *
+   * Shown to a blank first visit it is noise stacked on two other strips, and
+   * it is not even true yet — nothing is at risk. Once a guest has rated
+   * concepts, it is the most useful thing on the page.
+   */
+  const guestHasProgress =
+    isGuest &&
+    (Object.keys(loadLocal<Record<string, unknown>>(STORE_KEYS.mastery, {})).length > 0 ||
+      Object.keys(loadLocal<Record<string, unknown>>(STORE_KEYS.sweep, {})).length > 0);
+
   return (
     <TooltipProvider delayDuration={250}>
       <div className="min-h-screen bg-black">
@@ -83,6 +95,27 @@ export default function Layout() {
         <Suspense fallback={null}>
           <DigestBanner />
         </Suspense>
+
+        {/* Nothing here requires an account. The one thing signing in buys is
+            progress that outlives the browser — say that plainly, because a
+            guest who sweeps 250 concepts and then clears their storage loses
+            all of it silently. */}
+        {guestHasProgress && (
+          <div className="border-b border-white/[0.06] bg-white/[0.02]">
+            <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-2 md:px-6">
+              <p className="text-xs text-white/55">
+                Your progress is saved in this browser only — clearing it loses everything.
+              </p>
+              <button
+                type="button"
+                onClick={signInWithGoogle}
+                className="font-mono text-[11px] text-white/70 transition-colors hover:text-white"
+              >
+                Sign in to keep it →
+              </button>
+            </div>
+          </div>
+        )}
 
         {showSetupHint && (
           <div className="border-b border-white/[0.06] bg-white/[0.02]">

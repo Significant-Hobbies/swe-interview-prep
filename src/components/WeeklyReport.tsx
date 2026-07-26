@@ -1,4 +1,5 @@
 import { Calendar, Sparkles } from 'lucide-react';
+import { learningFetch } from '../lib/learningApi';
 import { useEffect, useState } from 'react';
 
 import { Button, Card } from './ui';
@@ -25,9 +26,10 @@ export function WeeklyReport() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    void fetch('/api/learning?action=weekly', { credentials: 'include' })
-      .then((r) => r.json())
-      .then((d) => setData(d.review))
+    // Resolves null for guests — the weekly review is built from server activity.
+    void learningFetch('weekly')
+      .then((r) => r?.json())
+      .then((d) => d && setData(d.review))
       .catch(() => {});
   }, []);
 
@@ -35,12 +37,12 @@ export function WeeklyReport() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/learning?action=weekly', {
+      const res = await learningFetch('weekly', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify(useAi ? { aiConfig: loadAIConfig() } : {}),
       });
+      if (!res) throw new Error('Sign in to generate a weekly report.');
       if (!res.ok) throw new Error(`Failed (${res.status})`);
       const json = await res.json();
       setData(json.review);

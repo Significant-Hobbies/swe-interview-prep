@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { hasSession, learningFetch } from '../lib/learningApi';
 
-import { getAuthToken } from '../contexts/AuthContext';
 import { loadAIConfig } from './useAI';
 
 interface TagResult {
@@ -34,15 +34,17 @@ export function useTagger(
     if (code === lastTaggedRef.current) return;
 
     timerRef.current = setTimeout(async () => {
-      const token = getAuthToken();
-      if (!token) return;
+      // Signed-in only. This used to read `getAuthToken()`, which returns a
+      // hard null since the JWT became a cookie — so the tagger never ran at all.
+      if (!hasSession()) return;
       const config = loadAIConfig();
       if (!config.model) return;
 
       try {
         const res = await fetch('/api/learning?action=tag', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code, language, problem, aiConfig: config }),
         });
         if (!res.ok) return;
@@ -56,14 +58,14 @@ export function useTagger(
           conceptId: t.concept_id,
           rating: t.depth === 'deep' ? 'easy' : t.depth === 'working' ? 'good' : 'hard',
         }));
-        await fetch('/api/learning?action=concepts', {
+        await learningFetch('concepts', {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ updates }),
         });
-        await fetch('/api/learning?action=activity', {
+        await learningFetch('activity', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             kind: 'auto_tag',
             conceptIds: tags.map((t) => t.concept_id),

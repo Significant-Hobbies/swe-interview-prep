@@ -315,6 +315,10 @@ export function useAuth() {
  * cookie automatically. Keep using `credentials: 'include'` (or rely on
  * default same-origin) so the cookie attaches.
  */
-export function getAuthToken(): string | null {
-  return null;
-}
+// `getAuthToken()` used to live here. It was stubbed to return null when the
+// JWT moved into an httpOnly cookie for XSS hardening, but four call sites kept
+// using it as their "am I signed in?" check — so activity logging, the
+// companion turn log, and the auto-tagger were all silently dead for signed-in
+// users, not just guests. Auth now rides the cookie via `credentials:
+// 'include'`, and `src/lib/learningApi.ts` is the single place that asks
+// whether a session exists.

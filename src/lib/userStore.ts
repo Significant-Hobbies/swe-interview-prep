@@ -18,6 +18,14 @@ export function saveLocal(key: string, value: unknown): void {
   }
 }
 
+export function removeLocal(key: string): void {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    // Storage unavailable — degrade silently.
+  }
+}
+
 /**
  * Merge DB records over local records: DB wins on conflict, local fills gaps.
  * Mirrors the merge already used by useProgress when a user signs in.
@@ -67,4 +75,5 @@ export const STORE_KEYS = {
   activeRoadmap: 'swe-os:active-roadmap',
   profile: 'swe-os:profile-v1',
   reviewMastery: 'swe-os:review-mastery-v1',
+  sweep: 'swe-os:sweep-v1',
 } as const;
