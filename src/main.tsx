@@ -25,9 +25,14 @@ const tree = (
 
 createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
 
-// Remove LCP shell after first paint so the shell h1 registers as the LCP
-// element, not the later React-rendered h1. Double rAF guarantees the browser
-// paints at least one frame with the shell visible before removal.
+// Remove the LCP shell once the browser has painted a frame, so the handoff to
+// React is not a flash of empty black.
+//
+// This used to exist to make the shell's own <h1> register as the LCP element
+// instead of React's — but that h1 was the Login hero, and Login stopped being
+// what a visitor lands on. Optimising the metric meant every cold load showed a
+// page that no longer exists. The shell is now an app-shaped skeleton with no
+// competing headline, so LCP is whatever the app actually paints.
 requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     document.getElementById('lcp-shell')?.remove();

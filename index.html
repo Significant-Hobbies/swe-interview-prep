@@ -37,24 +37,36 @@
   <body>
     <!--
       LCP shell lives outside #root so createRoot doesn't wipe it before React
-      paints the Login hero. Same pattern as today-little-log #lcp-shell.
+      paints. It is a SKELETON OF THE APP, not a landing page.
+
+      It used to render the Login hero ("Learn deeply. / Practice with intent.")
+      because Login was what a logged-out visitor got. Since every route opened
+      to guests, the default page is the app — so that hero flashed for a beat
+      on every cold load and then vanished, reading as "some old page that
+      redirects". Whatever the shell paints has to be what is actually coming,
+      or it is a bug dressed up as a performance win.
+
+      The header below mirrors the real one closely enough that the handoff to
+      React is invisible. The curriculum block underneath is what search engines
+      and non-JS clients read at the root URL; it sits below the fold.
     -->
-    <div id="lcp-shell" style="position:fixed;inset:0;z-index:0;pointer-events:none;">
+    <div
+      id="lcp-shell"
+      style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;"
+    >
       <div style="min-height:100vh;background:#000;color:#fff;">
         <header style="border-bottom:1px solid rgba(255,255,255,0.08);">
-          <div style="margin:0 auto;max-width:72rem;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;">
+          <div style="margin:0 auto;max-width:87.5rem;display:flex;align-items:center;gap:0.75rem;height:4rem;padding:0 1rem;">
             <span style="font-size:1rem;font-weight:700;letter-spacing:-0.01em;">SWE Prep</span>
+            <span style="font-size:0.875rem;color:rgba(255,255,255,0.35);">/ Learning OS</span>
           </div>
         </header>
-        <section style="padding:6rem 1.5rem 5rem;max-width:64rem;margin:0 auto;">
-          <p style="margin:0 0 1.5rem;font-family:ui-monospace,monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.4);">
-            A learning OS for systems software
-          </p>
-          <h1 style="margin:0;font-size:clamp(3rem,8vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;">
-            Learn deeply.<br />
-            <span style="color:rgba(255,255,255,0.4);">Practice with intent.</span>
-          </h1>
-        </section>
+        <!--
+          Pushed a full viewport down so it never paints during the shell's
+          brief life. It exists for crawlers and non-JS clients at the root URL,
+          not for people — `overflow:hidden` on the shell keeps it unreachable.
+        -->
+        <div style="margin-top:100vh;">
         <!-- curriculum-static:start -->
           <section style="max-width:64rem;margin:0 auto;padding:1rem 1.5rem 5rem;">
             <h2 style="font-size:1.5rem;margin:0 0 1rem;">A complete software engineering learning map</h2>
@@ -66,6 +78,7 @@
             <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a> or continue as a guest for the interactive learning workspace.</p>
           </section>
           <!-- curriculum-static:end -->
+        </div>
       </div>
     </div>
     <div id="root"></div>
