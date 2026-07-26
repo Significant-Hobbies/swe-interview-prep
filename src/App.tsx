@@ -67,6 +67,10 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/share/roadmaps/:id" element={<PublicRoadmap />} />
+      {/* Outside <Layout> on purpose. Login renders its own SiteHeader, so
+          nesting it under Layout stacked two identical navbars — the landing
+          page showed header, digest strip, setup strip, then a second header. */}
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="/today" replace />} />
         <Route path="today" element={<Today />} />
@@ -97,8 +101,6 @@ function AppRoutes() {
         <Route path="session/:date/:sessionId" element={<DailyLearningSession />} />
         <Route path="library" element={<Library />} />
         <Route path="library/:repoSlug" element={<RepoView />} />
-        {/* Still reachable, no longer a gate — it holds the product pitch. */}
-        <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />

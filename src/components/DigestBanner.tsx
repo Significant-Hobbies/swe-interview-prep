@@ -71,7 +71,18 @@ export function DigestBanner() {
   if (!messages.length) return null;
   if (location.pathname === '/onboarding') return null;
 
-  const primary = messages[0];
+  /**
+   * Drop any message that points at the page you are already on.
+   *
+   * Otherwise Today greets you with a full-width bar reading "45min session
+   * ready on Today · Go →" while that session is rendered directly beneath it —
+   * a nav bar whose only job is to link to the current URL. Stacked under the
+   * site header and the setup hint, it read as a third navbar.
+   */
+  const elsewhere = messages.filter((m) => m.href.split('?')[0] !== location.pathname);
+  if (!elsewhere.length) return null;
+
+  const primary = elsewhere[0];
 
   return (
     <div className="border-b border-white/[0.06] bg-gradient-to-r from-sky-500/8 via-transparent to-violet-500/8">

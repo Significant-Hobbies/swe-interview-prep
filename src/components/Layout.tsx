@@ -30,7 +30,16 @@ export default function Layout() {
   const [setupDismissed, setSetupDismissed] = useState(
     () => loadLocal<{ dismissed?: boolean }>(STORE_KEYS.setupHint, {}).dismissed === true
   );
-  const showSetupHint = !onboardingDone && !setupDismissed && location.pathname !== '/onboarding';
+  /**
+   * Scoped to Today so no page ever carries two strips.
+   *
+   * DigestBanner now suppresses itself on the page it links to — usually Today
+   * — so confining the hint to Today yields header + at most one strip
+   * everywhere, instead of the three stacked bars that read as three separate
+   * navbars. Today is also the only page where "personalize Today's session
+   * mix" is actionable in context.
+   */
+  const showSetupHint = !onboardingDone && !setupDismissed && location.pathname === '/today';
 
   function dismissSetupHint() {
     saveLocal(STORE_KEYS.setupHint, { dismissed: true });
