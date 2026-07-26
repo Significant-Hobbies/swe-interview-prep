@@ -42,7 +42,7 @@ export default function Today() {
 
   if (!enrichedPlan) {
     return (
-      <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
+      <div className="mx-auto w-full max-w-5xl px-6 py-10 lg:py-12">
         <h1 className="text-4xl font-bold text-white">You&apos;re caught up.</h1>
         <p className="mt-4 text-white/50">
           Pick a path or explore the full catalog — nothing is gated.
@@ -65,7 +65,7 @@ export default function Today() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
+    <div className="mx-auto w-full max-w-5xl px-6 py-10 lg:py-12">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
         <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
           Today

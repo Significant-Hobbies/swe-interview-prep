@@ -76,4 +76,5 @@ export const STORE_KEYS = {
   profile: 'swe-os:profile-v1',
   reviewMastery: 'swe-os:review-mastery-v1',
   sweep: 'swe-os:sweep-v1',
+  setupHint: 'swe-os:setup-hint-v1',
 } as const;

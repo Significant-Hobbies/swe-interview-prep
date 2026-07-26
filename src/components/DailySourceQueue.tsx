@@ -28,9 +28,31 @@ export function DailySourceQueue() {
           </Link>
         </div>
       </div>
-      <div className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-2">
-        {briefing && <QueueCard item={briefing} label="Start with the news" icon={Newspaper} />}
-        {next && <QueueCard item={next} label="Then go deeper" icon={BookOpen} />}
+      {/* Two columns only when both cards exist — the briefing is dropped once
+          the feed goes stale, and a lone card in a 2-col grid leaves a visibly
+          empty half. The survivor also drops the min-height it needed to match
+          a sibling, so it sizes to its own content instead of a tall empty box. */}
+      <div
+        className={`grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 ${
+          briefing && next ? 'md:grid-cols-2' : 'grid-cols-1'
+        }`}
+      >
+        {briefing && (
+          <QueueCard
+            item={briefing}
+            label="Start with the news"
+            icon={Newspaper}
+            matchHeight={Boolean(next)}
+          />
+        )}
+        {next && (
+          <QueueCard
+            item={next}
+            label="Then go deeper"
+            icon={BookOpen}
+            matchHeight={Boolean(briefing)}
+          />
+        )}
       </div>
     </section>
   );
@@ -40,17 +62,24 @@ function QueueCard({
   item,
   label,
   icon: Icon,
+  matchHeight,
 }: {
   item: LearningItem;
   label: string;
   icon: typeof Newspaper;
+  /** Only worth a floor when there is a sibling card to line up with. */
+  matchHeight: boolean;
 }) {
   return (
-    <article className="flex min-h-52 flex-col bg-black p-5">
+    <article className={`flex flex-col bg-black p-5 ${matchHeight ? 'min-h-52' : ''}`}>
       <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-sky-300/60">
         <Icon className="h-3.5 w-3.5" /> {label}
       </span>
-      <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
+      {/* Clamped: feed titles are sometimes a full summary sentence, which
+          otherwise runs to four lines and swallows the page. */}
+      <h3 className="mt-4 line-clamp-2 text-lg font-semibold leading-snug text-white">
+        {item.title}
+      </h3>
       <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/45">{item.summary}</p>
       <div className="mt-auto flex items-center justify-between gap-4 pt-5">
         <span className="inline-flex items-center gap-1 text-xs text-white/30">

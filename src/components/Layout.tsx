@@ -1,9 +1,9 @@
-import { LogIn, LogOut, Settings } from 'lucide-react';
+import { LogIn, LogOut, Settings, X } from 'lucide-react';
 import { lazy, Suspense, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
-import { STORE_KEYS, loadLocal } from '../lib/userStore';
+import { STORE_KEYS, loadLocal, saveLocal } from '../lib/userStore';
 import { SiteHeader } from './SiteHeader';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
@@ -21,7 +21,21 @@ export default function Layout() {
   const { user, isGuest, signInWithGoogle, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
-  const showSetupHint = !onboardingDone && location.pathname !== '/onboarding';
+
+  /**
+   * The setup hint is labelled "Optional" but had no way to decline it, so it
+   * sat under the digest banner forever — two rows of chrome above the fold on
+   * every page. Dismissing is remembered.
+   */
+  const [setupDismissed, setSetupDismissed] = useState(
+    () => loadLocal<{ dismissed?: boolean }>(STORE_KEYS.setupHint, {}).dismissed === true
+  );
+  const showSetupHint = !onboardingDone && !setupDismissed && location.pathname !== '/onboarding';
+
+  function dismissSetupHint() {
+    saveLocal(STORE_KEYS.setupHint, { dismissed: true });
+    setSetupDismissed(true);
+  }
 
   /**
    * Warn about local-only storage once there is something to lose.
@@ -130,6 +144,14 @@ export default function Layout() {
                 <Link to="/onboarding" className="text-white/70 transition-colors hover:text-white">
                   Quick setup →
                 </Link>
+                <button
+                  type="button"
+                  onClick={dismissSetupHint}
+                  aria-label="Dismiss setup hint"
+                  className="text-white/30 transition-colors hover:text-white/70"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
               </div>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BRIEFING_MAX_AGE_DAYS,
   buildDailyLearningSession,
   LEARNING_SOURCES,
   saveLearningProgress,
+  todayBriefing,
 } from './learning-sources';
 
 const memory = new Map<string, string>();
@@ -12,6 +14,33 @@ Object.defineProperty(globalThis, 'localStorage', {
     getItem: (key: string) => memory.get(key) ?? null,
     setItem: (key: string, value: string) => memory.set(key, value),
   },
+});
+
+describe('todayBriefing staleness', () => {
+  const DAY = 24 * 60 * 60 * 1000;
+  const newest = LEARNING_SOURCES.items
+    .filter((i) => i.sourceKind === 'briefing')
+    .map((i) => Date.parse(i.publishedAt ?? ''))
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => b - a)[0];
+
+  it('serves the newest briefing while the feed is fresh', () => {
+    const fresh = todayBriefing(new Date(newest));
+    expect(fresh).toBeDefined();
+    expect(Date.parse(fresh?.publishedAt ?? '')).toBe(newest);
+  });
+
+  it('serves nothing once the feed goes stale', () => {
+    // The failure this prevents: Today led with a card headed "Start with the
+    // news" showing an item ten days old, because `pnpm sync:learning-sources`
+    // has no cron. An empty slot is more honest than stale news.
+    expect(todayBriefing(new Date(newest + (BRIEFING_MAX_AGE_DAYS + 1) * DAY))).toBeUndefined();
+  });
+
+  it('draws the line at the documented age', () => {
+    expect(todayBriefing(new Date(newest + BRIEFING_MAX_AGE_DAYS * DAY))).toBeDefined();
+    expect(todayBriefing(new Date(newest + BRIEFING_MAX_AGE_DAYS * DAY + 1000))).toBeUndefined();
+  });
 });
 
 describe('unified learning sources', () => {
