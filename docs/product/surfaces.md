@@ -13,22 +13,45 @@ disagrees with code, code wins.
 | `/today` | Home / daily session hub |
 | `/learn`, `/learn/all` | Roadmap journey + concepts (18 tracks) |
 | `/explore` | Concept/roadmap explorer |
+| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS` (see [`STATUS.md`](../../STATUS.md)) |
 | `/practice`, `/practice/all` | Drills + spaced-repetition reviews |
 | `/playground` | Monaco + Excalidraw build sandbox |
 | `/mock` | Timed mock interview |
 | `/progress`, `/progress/all` | Mastery rollups + notes |
 | `/build`, `/drills/:id` | BuildLab (hands-on build/drill workspace) |
-| `/library`, `/library/:repoSlug` | Embedded GitHub learning-library reader (owner-only) |
-| `/sources`, `/sources/:id` | Unified learning-sources index (owner-only) |
-| `/session/:date`, `/session/:date/:sessionId` | Adaptive learning session (owner-only) |
+| `/library`, `/library/:repoSlug` | Embedded GitHub learning-library reader |
+| `/sources`, `/sources/:id` | Unified learning-sources index |
+| `/session/:date`, `/session/:date/:sessionId` | Adaptive learning session |
 | `/learning`, `/learning/:slug` | In-product learning roadmap markdown (served from `docs/learning/`) |
 | `/concepts/:id`, `/learn/:id` | Concept detail |
 | `/roadmaps/:id` | Roadmap detail |
 | `/projects/:id` | Project detail |
 | `/share/roadmaps/:id` | Public shared roadmap |
 | `/onboarding`, `/about`, `/privacy` | Static |
+| `/login` | Product pitch page. Reachable, but **not** a gate — see below |
 
-There is no `/login` or `/build-lab` route.
+There is no `/build-lab` route.
+
+## Access
+
+**Every route above is open.** A visitor with no session is placed into guest
+mode and lands on `/today`; nothing asks them to sign in first. Signing in buys
+exactly one thing — progress that outlives the browser — so it appears as an
+upgrade in the header, and as a strip that surfaces only once a guest has
+progress worth losing.
+
+Guest state is localStorage-only and namespaced per account, so signing in
+adopts a guest pass rather than discarding it.
+
+**Guests make no authenticated API calls.** Every `AUTH_ACTIONS` request goes
+through `src/lib/learningApi.ts`, which skips the call and resolves `null` when
+there is no session — such a request could only ever 401, and its result is
+discarded anyway. The client reads the auth/public split from
+`shared/api/learning-registry.mjs`, the same list the server enforces, so
+adding an action gates the client automatically.
+
+The only request a guest makes is one `GET /api/auth/verify` on their first
+load, which is how the app discovers there is no session. It is not repeated.
 
 ### Legacy redirects
 
@@ -99,6 +122,11 @@ Source: canonical curriculum data projected by
 
 ## Owner-only surfaces
 
-`/sources`, `/session/:date/:sessionId`, `/library`, and the Reader adapter
-require the configured owner Google account. This is a personal-use product;
-these surfaces are not advertised publicly.
+Only one remains: the Reader adapter (`GET /api/learning/reader`), which
+proxies a private token and requires the configured owner Google account.
+
+`/sources`, `/session/:date/:sessionId`, and `/library` used to sit behind the
+same gate and no longer do. Nothing they render is personal — the sources feed
+and library content are generated and vendored files committed to the repo, and
+session progress is local until you sign in. Gating them only hid public
+material behind a login.
