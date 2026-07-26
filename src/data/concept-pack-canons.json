@@ -171,7 +171,7 @@
       },
       "paper": {
         "title": "Okapi BM25 at TREC-3 (Robertson & Walker)",
-        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+        "url": "https://doi.org/10.1145/1571941.1572114"
       }
     },
     "vector-db": {

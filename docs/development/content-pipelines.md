@@ -63,7 +63,33 @@ pnpm sync:concept-packs
 ```
 
 `scripts/generate-concept-packs.mjs` → `src/data/concept-packs.json` and
-`src/data/concept-pack-canons.json`.
+`src/data/concept-pack-canons.json`. Chains into the source-hub index below,
+which is derived from the packs and would otherwise go stale.
+
+## Source hubs
+
+```bash
+pnpm build:source-hubs
+```
+
+`scripts/build-source-hubs.mjs` → `src/data/source-hubs.json`. Groups the
+pack URLs into *hubs* — one coherent body of work (a course, a book, one
+author's site) covering several concepts — so the ROI ranking can say "CMU
+15-445 covers 10 of your 15 database gaps" instead of listing fifteen
+separate lecture PDFs.
+
+Two hand-curated lists live in the script and are the whole reason its output
+is usable:
+
+- **`PUBLISHERS`** — `arxiv.org` spans 95 concepts and `doi.org` 20, but "go
+  read arxiv" is not a recommendation. Aggregators are excluded.
+- **`PATH_SCOPED`** — `ocw.mit.edu` carries dozens of unrelated courses and
+  `web.stanford.edu` hosts three separate books, so those group by path
+  prefix rather than by host.
+
+`HUB_LABELS` names the hubs, because the catalog titles the same source
+several ways (Manning's IR book appears as three different titles), so no
+prefix heuristic can recover one name.
 
 ## Ingesters (run on demand)
 

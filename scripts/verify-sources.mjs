@@ -52,6 +52,17 @@ function sources() {
       if (!seen.has(item.url)) seen.set(item.url, { url: item.url, title: item.title, conceptId });
     }
   }
+
+  // Hub landing pages. Most are NOT cited by any concept — HUB_URLS in
+  // build-source-hubs.mjs exists precisely because the group only cites deep
+  // chapter links — so without this they are the one set of user-facing URLs
+  // nothing ever checks, and the ROI card is where a dead link is most visible.
+  const { hubs } = JSON.parse(readFileSync(join(ROOT, 'src/data/source-hubs.json'), 'utf8'));
+  for (const hub of hubs ?? []) {
+    if (!hub.url?.startsWith('http')) continue;
+    if (!seen.has(hub.url)) seen.set(hub.url, { url: hub.url, title: hub.label, conceptId: 'hub' });
+  }
+
   return [...seen.values()];
 }
 

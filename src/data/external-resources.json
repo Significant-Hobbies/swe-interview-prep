@@ -2677,7 +2677,7 @@
       },
       {
         "title": "Reciprocal Rank Fusion (Cormack et al.)",
-        "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+        "url": "https://doi.org/10.1145/1571941.1572114",
         "kind": "paper",
         "source": "concept-curated"
       },

@@ -246,10 +246,12 @@ export const CONCEPT_MEDIA = {
     paper: L('BEIR benchmark (Thakur et al.)', 'https://arxiv.org/abs/2104.08663'),
   },
   'hybrid-search': {
-    paper: L(
-      'Reciprocal Rank Fusion (Cormack et al.)',
-      'https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf'
-    ),
+    // Was plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf — that host now
+    // fails to connect at all (HTTP 000, two attempts). Swapped for the DOI,
+    // whose CSL metadata confirms the same paper: "Reciprocal rank fusion
+    // outperforms condorcet and individual rank learning methods", Cormack,
+    // Clarke & Buettcher, SIGIR 2009.
+    paper: L('Reciprocal Rank Fusion (Cormack et al.)', 'https://doi.org/10.1145/1571941.1572114'),
   },
   reranking: {
     paper: L(
@@ -2092,7 +2094,12 @@ const SLOT_ELIGIBLE_TAGS = new Set([
   'quant',
   'linear-algebra',
   'foundations',
-  'runtime',
+  // `runtime` is deliberately absent. TAG_MEDIA.runtime means OS execution
+  // (OSTEP, MIT 6.1810), but the only two concepts carrying the tag are
+  // `ml-browser-runtime` and `ml-webgpu` — a different sense of the word. The
+  // collision handed an operating-systems textbook to two WebGPU concepts, and
+  // that padded OSTEP to 4 concepts, enough to be recommended as a "hub" for
+  // gaps it does not cover.
 ]);
 
 export function tagsForConcept(concept) {
@@ -2495,6 +2502,34 @@ const CURATED_MEDIA_LAST = {
 
 for (const [conceptId, slots] of Object.entries(CURATED_MEDIA_LAST)) {
   CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), ...slots };
+}
+
+/**
+ * DDIA across the distributed-systems concepts it actually covers.
+ *
+ * Found by the ROI ranking rather than by inspection: it reported "no hub" for
+ * `distributed-systems`, because the catalog cited Designing Data-Intensive
+ * Applications on only 3 concepts — too few to recommend as one body of work
+ * for an eleven-concept domain. The individual sources were fine (Raft, Chain
+ * Replication, Spanner); what was missing was the book that ties them together.
+ *
+ * Restricted to chapters DDIA genuinely spends a chapter on — ch. 9 for
+ * consensus and consistency, ch. 11 for streams. Deliberately NOT added to
+ * `caching`, `messaging-realtime`, or `distributed-infra`, where the book has
+ * little to say and the citation would be padding to make a hub appear.
+ * `distributed-failure-recovery` is skipped too: DDIA ch. 8 fits, but its book
+ * slot holds the SRE chapter on cascading failures, which is the better read.
+ *
+ * The URL and title must match the three existing citations exactly — one URL
+ * carries one title, enforced by content-quality.test.ts.
+ */
+const DDIA = L(
+  'Designing Data-Intensive Applications (Kleppmann) — book site',
+  'https://dataintensive.net/'
+);
+
+for (const conceptId of ['message-queues', 'cap-theorem', 'consensus', 'event-streaming-kafka']) {
+  CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), book: { ...DDIA } };
 }
 
 for (const [conceptId, links] of Object.entries({

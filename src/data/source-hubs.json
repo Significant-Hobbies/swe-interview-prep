@@ -1,0 +1,596 @@
+{
+  "version": 1,
+  "minConcepts": 3,
+  "hubs": [
+    {
+      "id": "jeffe.cs.illinois.edu",
+      "label": "Algorithms (Jeff Erickson)",
+      "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/",
+      "conceptIds": [
+        "array-hashing",
+        "backtracking",
+        "complexity-analysis",
+        "dp-1d",
+        "graphs",
+        "greedy",
+        "intervals",
+        "math-geometry",
+        "minimum-spanning-tree",
+        "quickselect",
+        "recursion-and-induction",
+        "shortest-path",
+        "string-matching",
+        "union-find"
+      ]
+    },
+    {
+      "id": "usaco.guide",
+      "label": "USACO Guide",
+      "url": "https://usaco.guide/",
+      "conceptIds": [
+        "array-hashing",
+        "backtracking",
+        "complexity-analysis",
+        "graphs",
+        "greedy",
+        "heap",
+        "intervals",
+        "monotonic-stack",
+        "prefix-sums",
+        "sliding-window",
+        "sorting",
+        "stack",
+        "trees",
+        "two-pointers"
+      ]
+    },
+    {
+      "id": "3blue1brown.com",
+      "label": "3Blue1Brown",
+      "url": "https://www.3blue1brown.com/",
+      "conceptIds": [
+        "classical-distributions",
+        "derivatives-and-gradients",
+        "eigenvalues-decomposition",
+        "information-entropy",
+        "matrices-and-transformations",
+        "matrix-rank-basis",
+        "ml-gradient-descent",
+        "ml-math",
+        "ml-self-attention",
+        "probability-fundamentals",
+        "random-variables",
+        "sampling-and-clt",
+        "vectors-and-spaces"
+      ]
+    },
+    {
+      "id": "cp-algorithms.com",
+      "label": "cp-algorithms",
+      "url": "https://cp-algorithms.com/",
+      "conceptIds": [
+        "binary-search",
+        "bit-manipulation",
+        "dp-1d",
+        "dp-2d",
+        "linked-list",
+        "math-geometry",
+        "minimum-spanning-tree",
+        "monotonic-stack",
+        "shortest-path",
+        "sliding-window",
+        "string-matching",
+        "two-pointers",
+        "union-find"
+      ]
+    },
+    {
+      "id": "martinfowler.com",
+      "label": "martinfowler.com — pattern catalogs",
+      "url": "https://martinfowler.com/",
+      "conceptIds": [
+        "api-design",
+        "booking-inventory",
+        "command-chain",
+        "concurrency-design",
+        "decorator-structural",
+        "ecommerce-payments",
+        "factory-creational",
+        "idempotency",
+        "object-modeling",
+        "observer-pattern",
+        "retries-and-circuit-breakers",
+        "strategy-pattern"
+      ]
+    },
+    {
+      "id": "nlp.stanford.edu",
+      "label": "Introduction to Information Retrieval (Manning et al.)",
+      "url": "https://nlp.stanford.edu/IR-book/",
+      "conceptIds": [
+        "bm25",
+        "click-models",
+        "inverted-index",
+        "learning-to-rank",
+        "query-rewriting",
+        "ranking-metrics",
+        "search-discovery",
+        "search-evals",
+        "tf-idf",
+        "tokenization",
+        "top-k-pruning",
+        "vector-similarity"
+      ]
+    },
+    {
+      "id": "anthropic.com",
+      "label": "Anthropic engineering & research",
+      "url": "https://www.anthropic.com/engineering",
+      "conceptIds": [
+        "agent-communication-interfaces",
+        "agent-loops",
+        "agent-memory-context",
+        "agent-permissions-sandboxing",
+        "ai-regression-testing",
+        "browser-computer-use-agents",
+        "coding-agent-systems",
+        "long-running-scheduled-agents",
+        "mcp-integrations",
+        "model-routing",
+        "rag-system-design"
+      ]
+    },
+    {
+      "id": "sre.google",
+      "label": "Google SRE Book",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "conceptIds": [
+        "capacity-estimation",
+        "distributed-failure-recovery",
+        "failure-and-learning",
+        "load-balancing",
+        "momentum-backtest",
+        "monitoring-analytics",
+        "ownership-and-accountability",
+        "quality-cost-latency-measurement",
+        "rate-limiting",
+        "reliability-fault-tolerance",
+        "requirements-scoping"
+      ]
+    },
+    {
+      "id": "15445.courses.cs.cmu.edu",
+      "label": "CMU 15-445 — Database Systems",
+      "url": "https://15445.courses.cs.cmu.edu/fall2025/",
+      "conceptIds": [
+        "b-tree",
+        "buffer-pool",
+        "columnar-storage",
+        "isolation-levels",
+        "join-algorithms",
+        "lsm-tree",
+        "query-execution-optimization",
+        "storage-retrieval",
+        "transaction-processing",
+        "wal"
+      ]
+    },
+    {
+      "id": "cs336.stanford.edu",
+      "label": "Stanford CS336 — Language Modeling from Scratch",
+      "url": "https://cs336.stanford.edu/",
+      "conceptIds": [
+        "ml-data-engineering",
+        "ml-evaluation",
+        "ml-language-modeling",
+        "ml-pretraining",
+        "ml-sampling",
+        "ml-self-attention",
+        "ml-tokenization",
+        "ml-training",
+        "ml-transformer-block"
+      ]
+    },
+    {
+      "id": "ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016",
+      "label": "MIT 18.650 — Statistics for Applications",
+      "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/",
+      "conceptIds": [
+        "bayesian-inference",
+        "classical-distributions",
+        "covariance-correlation",
+        "descriptive-statistics",
+        "hypothesis-testing",
+        "maximum-likelihood",
+        "pca-projection",
+        "regression-basics",
+        "sampling-and-clt"
+      ]
+    },
+    {
+      "id": "ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020",
+      "label": "MIT 6.006 — Introduction to Algorithms",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-4-hashing/",
+      "conceptIds": [
+        "array-hashing",
+        "complexity-analysis",
+        "dp-1d",
+        "dp-2d",
+        "graphs",
+        "heap",
+        "shortest-path",
+        "sorting",
+        "trees"
+      ]
+    },
+    {
+      "id": "cs231n.github.io",
+      "label": "Stanford CS231n",
+      "url": "https://cs231n.github.io/",
+      "conceptIds": [
+        "derivatives-and-gradients",
+        "ml-adamw",
+        "ml-backprop",
+        "ml-gradient-descent",
+        "ml-math",
+        "ml-softmax-xent",
+        "multivariable-optimization",
+        "numerical-stability"
+      ]
+    },
+    {
+      "id": "developer.mozilla.org",
+      "label": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/en-US/docs/Web",
+      "conceptIds": [
+        "auth-systems",
+        "caching",
+        "http-lifecycle",
+        "messaging-realtime",
+        "ml-webgpu",
+        "rate-limiting",
+        "web-mobile-engineering",
+        "web-security-basics"
+      ]
+    },
+    {
+      "id": "jalammar.github.io",
+      "label": "Jay Alammar — Illustrated series",
+      "url": "https://jalammar.github.io/illustrated-gpt2/",
+      "conceptIds": [
+        "embeddings",
+        "ml-embeddings",
+        "ml-language-modeling",
+        "ml-multi-head",
+        "ml-sampling",
+        "ml-self-attention",
+        "ml-tokenization",
+        "ml-transformer-block"
+      ]
+    },
+    {
+      "id": "postgresql.org",
+      "label": "PostgreSQL documentation",
+      "url": "https://www.postgresql.org/docs/current/",
+      "conceptIds": [
+        "b-tree",
+        "booking-inventory",
+        "query-execution-optimization",
+        "replication",
+        "secondary-index",
+        "storage-retrieval",
+        "transaction-processing",
+        "wal"
+      ]
+    },
+    {
+      "id": "dataintensive.net",
+      "label": "Designing Data-Intensive Applications (Kleppmann)",
+      "url": "https://dataintensive.net/",
+      "conceptIds": [
+        "cap-theorem",
+        "consensus",
+        "event-streaming-kafka",
+        "message-queues",
+        "replication",
+        "sharding",
+        "storage-retrieval"
+      ]
+    },
+    {
+      "id": "ocw.mit.edu/courses/18-06-linear-algebra-spring-2010",
+      "label": "MIT 18.06 — Linear Algebra (Strang)",
+      "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+      "conceptIds": [
+        "curse-of-dimensionality",
+        "eigenvalues-decomposition",
+        "matrices-and-transformations",
+        "matrix-rank-basis",
+        "pca-projection",
+        "regression-basics",
+        "vectors-and-spaces"
+      ]
+    },
+    {
+      "id": "abseil.io",
+      "label": "Software Engineering at Google",
+      "url": "https://abseil.io/resources/swe-book",
+      "conceptIds": [
+        "cicd-developer-environments",
+        "code-review-systems",
+        "dependency-blast-radius",
+        "repository-intelligence",
+        "static-dynamic-analysis",
+        "testing-infrastructure"
+      ]
+    },
+    {
+      "id": "elastic.co",
+      "label": "Elastic docs & Search Labs blog",
+      "url": "https://www.elastic.co/search-labs/blog/scalar-quantization-101",
+      "conceptIds": [
+        "bm25",
+        "hybrid-search",
+        "index-updates-tombstones",
+        "search-discovery",
+        "search-platform-design",
+        "vector-quantization"
+      ]
+    },
+    {
+      "id": "gameprogrammingpatterns.com",
+      "label": "Game Programming Patterns (Nystrom)",
+      "url": "https://gameprogrammingpatterns.com/contents.html",
+      "conceptIds": [
+        "command-chain",
+        "factory-creational",
+        "game-design",
+        "interactive-2d-3d-systems",
+        "observer-pattern",
+        "state-management"
+      ]
+    },
+    {
+      "id": "martin.kleppmann.com",
+      "label": "Martin Kleppmann",
+      "url": "https://martin.kleppmann.com/",
+      "conceptIds": [
+        "buffer-pool",
+        "cap-theorem",
+        "collaboration-productivity",
+        "columnar-storage",
+        "lsm-tree",
+        "transaction-processing"
+      ]
+    },
+    {
+      "id": "rework.withgoogle.com",
+      "label": "Google re:Work",
+      "url": "https://rework.withgoogle.com/guides/",
+      "conceptIds": [
+        "communication",
+        "conflict-resolution",
+        "leadership-and-influence",
+        "problem-solving-and-decision-making",
+        "teamwork-and-collaboration",
+        "time-management-and-prioritization"
+      ]
+    },
+    {
+      "id": "seeing-theory.brown.edu",
+      "label": "Seeing Theory (Brown)",
+      "url": "https://seeing-theory.brown.edu/",
+      "conceptIds": [
+        "bayesian-inference",
+        "classical-distributions",
+        "covariance-correlation",
+        "descriptive-statistics",
+        "hypothesis-testing",
+        "sampling-and-clt"
+      ]
+    },
+    {
+      "id": "chance.dartmouth.edu",
+      "label": "Introduction to Probability (Grinstead & Snell)",
+      "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/amsbook.mac.pdf",
+      "conceptIds": [
+        "classical-distributions",
+        "probability-fundamentals",
+        "random-variables",
+        "random-walks-markov",
+        "sampling-and-clt"
+      ]
+    },
+    {
+      "id": "eugeneyan.com",
+      "label": "Eugene Yan",
+      "url": "https://eugeneyan.com/writing/",
+      "conceptIds": [
+        "ai-regression-testing",
+        "ml-evaluation",
+        "rag-system-design",
+        "search-discovery",
+        "search-platform-design"
+      ]
+    },
+    {
+      "id": "ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015",
+      "label": "MIT 6.046J — Design and Analysis of Algorithms",
+      "url": "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-1-course-overview-interval-scheduling/",
+      "conceptIds": ["greedy", "intervals", "math-geometry", "minimum-spanning-tree", "quickselect"]
+    },
+    {
+      "id": "pearson.com",
+      "label": "Design Patterns (Gamma, Helm, Johnson, Vlissides)",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000003332",
+      "conceptIds": [
+        "booking-inventory",
+        "concurrency-design",
+        "decorator-structural",
+        "object-modeling",
+        "strategy-pattern"
+      ]
+    },
+    {
+      "id": "setosa.io",
+      "label": "Explained Visually (Setosa)",
+      "url": "https://setosa.io/ev/markov-chains/",
+      "conceptIds": [
+        "eigenvalues-decomposition",
+        "pca-projection",
+        "probability-fundamentals",
+        "random-walks-markov",
+        "regression-basics"
+      ]
+    },
+    {
+      "id": "svpg.com",
+      "label": "Silicon Valley Product Group (Cagan)",
+      "url": "https://www.svpg.com/innovating-in-large-companies/",
+      "conceptIds": [
+        "innovation-and-creativity",
+        "landing-pages",
+        "positioning",
+        "product-analytics",
+        "seo"
+      ]
+    },
+    {
+      "id": "blog.cloudflare.com",
+      "label": "Cloudflare Blog",
+      "url": "https://blog.cloudflare.com/the-road-to-quic/",
+      "conceptIds": [
+        "cdn-edge-delivery",
+        "load-balancing",
+        "network-protocol-engineering",
+        "sandbox-execution-environments"
+      ]
+    },
+    {
+      "id": "deeplearningbook.org",
+      "label": "Deep Learning (Goodfellow, Bengio, Courville)",
+      "url": "https://www.deeplearningbook.org/",
+      "conceptIds": ["ml-adamw", "ml-backprop", "ml-gradient-descent", "ml-softmax-xent"]
+    },
+    {
+      "id": "hamel.dev",
+      "label": "Hamel Husain",
+      "url": "https://hamel.dev/",
+      "conceptIds": ["agent-observability", "ai-regression-testing", "llm-evals", "ml-evaluation"]
+    },
+    {
+      "id": "karpathy.ai",
+      "label": "Andrej Karpathy",
+      "url": "https://karpathy.ai/zero-to-hero.html",
+      "conceptIds": [
+        "derivatives-and-gradients",
+        "ml-adamw",
+        "ml-gradient-descent",
+        "ml-softmax-xent"
+      ]
+    },
+    {
+      "id": "openintro-ims.netlify.app",
+      "label": "OpenIntro — Introduction to Modern Statistics",
+      "url": "https://openintro-ims.netlify.app/",
+      "conceptIds": [
+        "descriptive-statistics",
+        "estimation-confidence",
+        "hypothesis-testing",
+        "regression-basics"
+      ]
+    },
+    {
+      "id": "projects.iq.harvard.edu",
+      "label": "Harvard Stat 110",
+      "url": "https://projects.iq.harvard.edu/stat110/home",
+      "conceptIds": [
+        "classical-distributions",
+        "portfolio-risk-metrics",
+        "random-variables",
+        "returns-volatility"
+      ]
+    },
+    {
+      "id": "statlearning.com",
+      "label": "An Introduction to Statistical Learning",
+      "url": "https://www.statlearning.com/",
+      "conceptIds": [
+        "bias-variance-overfitting",
+        "maximum-likelihood",
+        "momentum-backtest",
+        "regression-basics"
+      ]
+    },
+    {
+      "id": "web.stanford.edu/class/cs224n",
+      "label": "Stanford CS224n",
+      "url": "https://web.stanford.edu/class/cs224n/",
+      "conceptIds": ["ml-embeddings", "ml-multi-head", "ml-self-attention", "ml-transformer-block"]
+    },
+    {
+      "id": "aws.amazon.com",
+      "label": "AWS Builders' Library",
+      "url": "https://aws.amazon.com/builders-library/",
+      "conceptIds": ["cloud-infrastructure", "retries-and-circuit-breakers", "retries-dlq"]
+    },
+    {
+      "id": "karpathy.github.io",
+      "label": "Andrej Karpathy — blog",
+      "url": "https://karpathy.github.io/neuralnets/",
+      "conceptIds": ["ml-browser-runtime", "ml-softmax-xent", "ml-training"]
+    },
+    {
+      "id": "kubernetes.io",
+      "label": "Kubernetes documentation",
+      "url": "https://kubernetes.io/docs/concepts/",
+      "conceptIds": ["cloud-infrastructure", "containers-kubernetes", "distributed-infra"]
+    },
+    {
+      "id": "lmsys.org",
+      "label": "LMSYS blog",
+      "url": "https://www.lmsys.org/blog/",
+      "conceptIds": ["continuous-batching", "inference-engines", "model-routing"]
+    },
+    {
+      "id": "nlp.seas.harvard.edu",
+      "label": "The Annotated Transformer",
+      "url": "https://nlp.seas.harvard.edu/annotated-transformer/",
+      "conceptIds": ["ml-multi-head", "ml-self-attention", "ml-transformer-block"]
+    },
+    {
+      "id": "ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013",
+      "label": "MIT 18.S096 — Mathematics with Applications in Finance",
+      "url": "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-14-portfolio-theory/",
+      "conceptIds": ["portfolio-risk-metrics", "returns-volatility", "stationarity-autocorrelation"]
+    },
+    {
+      "id": "ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013",
+      "label": "MIT 6.041SC — Probabilistic Systems Analysis",
+      "url": "https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/",
+      "conceptIds": ["probability-fundamentals", "random-variables", "random-walks-markov"]
+    },
+    {
+      "id": "otexts.com",
+      "label": "Forecasting: Principles and Practice (Hyndman)",
+      "url": "https://otexts.com/fpp3/",
+      "conceptIds": ["portfolio-risk-metrics", "returns-volatility", "stationarity-autocorrelation"]
+    },
+    {
+      "id": "stripe.com",
+      "label": "Stripe engineering blog",
+      "url": "https://stripe.com/blog/idempotency",
+      "conceptIds": ["idempotency", "rate-limiter-design", "rate-limiting"]
+    },
+    {
+      "id": "testing.googleblog.com",
+      "label": "Google Testing Blog",
+      "url": "https://testing.googleblog.com/",
+      "conceptIds": [
+        "cicd-developer-environments",
+        "evidence-backed-verification",
+        "testing-infrastructure"
+      ]
+    }
+  ]
+}

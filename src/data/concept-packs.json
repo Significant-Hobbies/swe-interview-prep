@@ -1,15 +1,15 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-25",
+  "generatedAt": "2026-07-26",
   "_meta": {
     "tier": "S",
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 181,
+      "video": 180,
       "paper": 221,
-      "blog": 178,
-      "book": 147,
+      "blog": 177,
+      "book": 149,
       "problem": 250,
       "write": 250,
       "more": 98,
@@ -212,7 +212,7 @@
         {
           "category": "paper",
           "title": "Reciprocal Rank Fusion (Cormack et al.)",
-          "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf"
+          "url": "https://doi.org/10.1145/1571941.1572114"
         },
         {
           "category": "video",
@@ -1385,11 +1385,6 @@
     "ml-browser-runtime": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.1810 — Operating Systems",
-          "url": "https://pdos.csail.mit.edu/6.1810/2025/"
-        },
-        {
           "category": "paper",
           "title": "WebGPU specification (W3C)",
           "url": "https://www.w3.org/TR/webgpu/"
@@ -1398,11 +1393,6 @@
           "category": "blog",
           "title": "Karpathy — Hacker's Guide to Neural Networks",
           "url": "https://karpathy.github.io/neuralnets/"
-        },
-        {
-          "category": "book",
-          "title": "Operating Systems: Three Easy Pieces",
-          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
         },
         {
           "category": "problem",
@@ -1420,22 +1410,12 @@
     "ml-webgpu": {
       "items": [
         {
-          "category": "video",
-          "title": "MIT 6.1810 — Operating Systems",
-          "url": "https://pdos.csail.mit.edu/6.1810/2025/"
-        },
-        {
           "category": "paper",
           "title": "WebGPU specification (W3C)",
           "url": "https://www.w3.org/TR/webgpu/"
         },
         {
-          "category": "book",
-          "title": "Operating Systems: Three Easy Pieces",
-          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/"
-        },
-        {
-          "category": "blog",
+          "category": "video",
           "title": "WebGPU API (MDN)",
           "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
         },
@@ -1713,6 +1693,11 @@
           "category": "paper",
           "title": "Kafka: a Distributed Messaging System for Log Processing",
           "url": "https://notes.stephenholiday.com/Kafka.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
+          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -2178,6 +2163,11 @@
           "category": "blog",
           "title": "Martin Kleppmann — Please stop calling databases CP or AP",
           "url": "https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
+          "url": "https://dataintensive.net/"
         },
         {
           "category": "more",
@@ -2648,6 +2638,11 @@
           "category": "paper",
           "title": "Raft (Ongaro & Ousterhout)",
           "url": "https://raft.github.io/raft.pdf"
+        },
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
+          "url": "https://dataintensive.net/"
         },
         {
           "category": "problem",
@@ -5249,6 +5244,11 @@
     },
     "event-streaming-kafka": {
       "items": [
+        {
+          "category": "book",
+          "title": "Designing Data-Intensive Applications (Kleppmann) — book site",
+          "url": "https://dataintensive.net/"
+        },
         {
           "category": "paper",
           "title": "Kafka: a Distributed Messaging System for Log Processing",
