@@ -21,7 +21,7 @@ const PROFILE_KEY = 'dsa-prep-profile';
 
 const AUTH_ACTION_SET = new Set<string>(AUTH_ACTIONS);
 
-export function requiresAuth(action: string): boolean {
+function requiresAuth(action: string): boolean {
   return AUTH_ACTION_SET.has(action);
 }
 

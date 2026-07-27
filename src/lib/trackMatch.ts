@@ -52,7 +52,7 @@ function normalize(tag: string): string {
 }
 
 /** Track ids implied by a set of free-form tags. */
-export function tracksForTags(tags: readonly string[]): Set<string> {
+function tracksForTags(tags: readonly string[]): Set<string> {
   const normalized = new Set(tags.map(normalize));
   const out = new Set<string>();
   for (const [trackId, aliases] of Object.entries(TRACK_ALIASES)) {

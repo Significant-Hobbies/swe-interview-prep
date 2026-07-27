@@ -113,7 +113,7 @@ export const EMPTY_SWEEP: SweepState = { rated: {}, updatedAt: '' };
  * second Google account signing in on the same browser opened a queue already
  * pre-answered with the first account's ratings.
  */
-export function sweepStorageKey(userId?: string | null): string {
+function sweepStorageKey(userId?: string | null): string {
   return userId ? `${STORE_KEYS.sweep}:${userId}` : STORE_KEYS.sweep;
 }
 

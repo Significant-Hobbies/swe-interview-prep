@@ -40,7 +40,7 @@ export const SOURCE_HUBS: SourceHub[] = hubData.hubs as SourceHub[];
  * content debt rather than hiding it behind a bad suggestion.
  */
 export const MIN_HUB_COVERAGE = 3;
-export const MIN_HUB_SHARE = 0.2;
+const MIN_HUB_SHARE = 0.2;
 
 /**
  * The count floor has to bend for a nearly-finished domain.

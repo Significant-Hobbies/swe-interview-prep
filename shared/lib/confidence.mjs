@@ -15,7 +15,7 @@
  */
 
 /** Stability (in days) at which a concept counts as fully durable. */
-export const TARGET_STABILITY_DAYS = 30;
+const TARGET_STABILITY_DAYS = 30;
 
 function clamp01(n) {
   if (!Number.isFinite(n)) return 0;
@@ -23,14 +23,14 @@ function clamp01(n) {
 }
 
 /** FSRS v4 retrievability approximation: R = (1 + elapsed / (9 * S))^-1. */
-export function retrievability(row, now = new Date()) {
+function retrievability(row, now = new Date()) {
   if (!row?.last_review || !row.stability) return 0;
   const elapsedDays = Math.max(0, (now.getTime() - new Date(row.last_review).getTime()) / 86400000);
   return clamp01((1 + elapsedDays / (9 * row.stability)) ** -1);
 }
 
 /** How settled the memory is, independent of when it was last seen. */
-export function durability(row) {
+function durability(row) {
   if (!row?.stability) return 0;
   return clamp01(row.stability / TARGET_STABILITY_DAYS);
 }
