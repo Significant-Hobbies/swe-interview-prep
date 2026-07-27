@@ -540,13 +540,6 @@
       "sectionId": "src-data-structures-trie-readme-md",
       "title": "Trie",
       "snippet": "# Trie _Read this in other languages:_ [_简体中文_](https://github.com/trekhleb/javascript-algorithms/blob/HEAD/src/data-structures/trie/README.zh-CN.md), [_Русский_](https://github.com/trekhleb/javascript…"
-    },
-    {
-      "repoId": "tech-interview-handbook",
-      "repoName": "Tech Interview Handbook",
-      "sectionId": "apps-website-contents-algorithms-trie-md",
-      "title": "Trie",
-      "snippet": "--- id: trie title: Trie cheatsheet for coding interviews description: Trie study guide for coding interviews, including practice questions, techniques, time complexity, and recommended resources keywords:…"
     }
   ],
   "heap": [
@@ -624,13 +617,6 @@
       "snippet": "# Dynamic Programming - [Climbing Stairs Bottom Up Optimized.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Dynamic Programming/climbing_stairs_bottom_up_optimized.py…"
     },
     {
-      "repoId": "tech-interview-handbook",
-      "repoName": "Tech Interview Handbook",
-      "sectionId": "apps-website-contents-algorithms-dynamic-programming-md",
-      "title": "Dynamic Programming",
-      "snippet": "--- id: dynamic-programming title: Dynamic programming cheatsheet for coding interviews description: Dynamic programming study guide for coding interviews, including practice questions, techniques, ti…"
-    },
-    {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
       "sectionId": "q-25",
@@ -652,13 +638,6 @@
       "sectionId": "src-algorithms-sets-knapsack-problem-readme-md",
       "title": "Knapsack Problem",
       "snippet": "# Knapsack Problem The knapsack problem or rucksack problem is a problem in combinatorial optimization: Given a set of items, each with a weight and a value, determine the number of each item to i…"
-    },
-    {
-      "repoId": "tech-interview-handbook",
-      "repoName": "Tech Interview Handbook",
-      "sectionId": "apps-website-contents-algorithms-dynamic-programming-md",
-      "title": "Dynamic Programming",
-      "snippet": "--- id: dynamic-programming title: Dynamic programming cheatsheet for coding interviews description: Dynamic programming study guide for coding interviews, including practice questions, techniques, ti…"
     }
   ],
   "greedy": [
@@ -695,6 +674,236 @@
       "sectionId": "source-bit-manipulation",
       "title": "Bit Manipulation",
       "snippet": "# Bit Manipulation - [Hamming Weights of Integers Dp.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Bit Manipulation/hamming_weights_of_integers_dp.py) - [Hamming Weigh…"
+    }
+  ],
+  "leadership-and-influence": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "…se stem from both higher expectations and the complexity of leadership work itself. **Lack of structure leading to incomplete signal coverage:** Unlike junior candidates who might be prodded through their stories by the interviewer, senior candidates are expe…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-md",
+      "title": "Behavioral Interview",
+      "snippet": "…uous requirements, projects where success was uncertain. **Leadership Moments:** Mentoring others, driving cross-team initiatives, representing your team externally, times when others looked to you for direction. **Learning Experiences:** Mistakes that led t…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    }
+  ],
+  "conflict-resolution": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "…ou able to push through difficult problems or blockers? - **Conflict Resolution** - How well are you able to handle and work through challenging relationships? - **Empathy** - How well are you able to see things from the perspective of others and understand yo…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "…chnical debt management - **People leadership:** Mentoring, conflict resolution, team building, hiring and performance management - **Process and operational leadership:** Establishing engineering practices, incident response, capacity planning - **Strategic a…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    }
+  ],
+  "problem-solving-and-decision-making": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "--- id: behavioral-interview-rubrics title: How candidates are evaluated in behavioral interviews at top tech companies description: Detailed behavioral interview rubrics collated from big tech compan…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "--- id: behavioral-interview-senior-candidates title: 'Behavioral interviews for senior candidates' description: How to prepare for Software Engineer behavioral interviews as a senior candidate keywor…"
+    }
+  ],
+  "teamwork-and-collaboration": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "…Ad from './\\_components/InDocAd'; _The following page is a collaboration with [Austen McDonald](https://www.linkedin.com/in/austenmc/), former Senior Engineering Manager and Hiring Committee Chair at Meta, and author of [Mastering Behavioral Interviews](http:…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-md",
+      "title": "Behavioral Interview",
+      "snippet": "…Ad from './\\_components/InDocAd'; _The following page is a collaboration with [Austen McDonald](https://www.linkedin.com/in/austenmc/), former Senior Engineering Manager and Hiring Committee Chair at Meta, and author of [Mastering Behavioral Interviews](http:…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    }
+  ],
+  "failure-and-learning": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "--- id: behavioral-interview-rubrics title: How candidates are evaluated in behavioral interviews at top tech companies description: Detailed behavioral interview rubrics collated from big tech compan…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "--- id: behavioral-interview-senior-candidates title: 'Behavioral interviews for senior candidates' description: How to prepare for Software Engineer behavioral interviews as a senior candidate keywor…"
+    }
+  ],
+  "communication": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "…nker and opens you up to misinterpretation. **Verbosity:** Communication is central to these roles, so talking too much is an easy habit to fall into. There’s a lot to cover in limited time and you need to adapt to the signal requested by the interviewer and…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "…rowth areas? Are you making a continued effort to grow? - **Communication** - Are you able to clearly communicate your stories during the interview? To assess these focus areas, interviewers ask questions on your work history and dig into the details of how y…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-md",
+      "title": "Behavioral Interview",
+      "snippet": "…lls—how you work with people, and especially qualities like communication and willingness to learn—are pivotal as companies expect more from their engineers than simply implementation <InDocAd /> ## How to prepare for behavioral interviews 1. Learn the STAR…"
+    }
+  ],
+  "time-management-and-prioritization": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "--- id: behavioral-interview-rubrics title: How candidates are evaluated in behavioral interviews at top tech companies description: Detailed behavioral interview rubrics collated from big tech compan…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "--- id: behavioral-interview-senior-candidates title: 'Behavioral interviews for senior candidates' description: How to prepare for Software Engineer behavioral interviews as a senior candidate keywor…"
+    }
+  ],
+  "innovation-and-creativity": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "--- id: behavioral-interview-rubrics title: How candidates are evaluated in behavioral interviews at top tech companies description: Detailed behavioral interview rubrics collated from big tech compan…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "--- id: behavioral-interview-senior-candidates title: 'Behavioral interviews for senior candidates' description: How to prepare for Software Engineer behavioral interviews as a senior candidate keywor…"
+    }
+  ],
+  "customer-obsession": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "--- id: behavioral-interview-rubrics title: How candidates are evaluated in behavioral interviews at top tech companies description: Detailed behavioral interview rubrics collated from big tech compan…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "--- id: behavioral-interview-senior-candidates title: 'Behavioral interviews for senior candidates' description: How to prepare for Software Engineer behavioral interviews as a senior candidate keywor…"
+    }
+  ],
+  "ownership-and-accountability": [
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-rubrics-md",
+      "title": "Behavioral Interview Rubrics",
+      "snippet": "…unstructured environment** - How well are you able to take ownership in ambiguous situations? Or do you rely on others to be told what to do? - **Perseverance** - Are you able to push through difficult problems or blockers? - **Conflict Resolution** - How wel…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-senior-candidates-md",
+      "title": "Behavioral Interview Senior Candidates",
+      "snippet": "…ral Interviews. ### Common Problematic Framings **Passive ownership:** \"I came to the sprint meeting and the manager assigned me this ticket...\" signals weak ownership and junior-level thinking rather than business-focused initiative. **Lack of proactivity:…"
+    },
+    {
+      "repoId": "tech-interview-handbook",
+      "repoName": "Tech Interview Handbook",
+      "sectionId": "apps-website-contents-behavioral-interview-questions-md",
+      "title": "Behavioral Interview Questions",
+      "snippet": "--- id: behavioral-interview-questions title: The 30 most common Software Engineer behavioral interview questions description: How to prepare for Software Engineer behavioral interviews keywords: […"
     }
   ],
   "event-streaming-kafka": [
@@ -871,6 +1080,146 @@
       "sectionId": "2020-debugging-profiling-md-debugging-printf-debugging-and-logging",
       "title": "Printf Debugging and Logging",
       "snippet": "## Printf debugging and Logging \"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements\" — Brian Kernighan, _Unix for Beginners_. A first approa…"
+    }
+  ],
+  "sorting": [
+    {
+      "repoId": "javascript-algorithms",
+      "repoName": "JavaScript Algorithms",
+      "sectionId": "src-algorithms-graph-topological-sorting-readme-md",
+      "title": "Topological Sorting",
+      "snippet": "# Topological Sorting In the field of computer science, a topological sort or topological ordering of a directed graph is a linear ordering of its vertices such that for every directed edge `uv` from vertex `u`…"
+    },
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-244",
+      "title": "244. What is the purpose of compareFunction while sorting arrays",
+      "snippet": "### What is the purpose of compareFunction while sorting arrays The compareFunction is used to define the sort order. If omitted, the array elements are converted to strings, then sorted according to each character's Unicode code point value.…"
+    }
+  ],
+  "capacity-estimation": [
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "readme-md-performance-vs-scalability",
+      "title": "Performance vs Scalability",
+      "snippet": "## Performance vs scalability A service is **scalable** if it results in increased **performance** in a manner proportional to resources added. Generally, increasing performance means serving more un…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-scalability",
+      "title": "Scalability",
+      "snippet": "# Scalability Scalability is the measure of how well a system responds to changes by adding or removing resources to meet demands. ![scalability](https://raw.githubusercontent.com/karanpratapsingh/p…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-8-must-know-scalability-strategies-md",
+      "title": "8 Must Know Scalability Strategies",
+      "snippet": "--- title: \"8 Must-Know Scalability Strategies\" description: \"Explore 8 essential strategies to effectively scale your system.\" image: \"https://assets.bytebytego.com/diagrams/0013-8-must-know-strategi…"
+    }
+  ],
+  "prefix-sums": [
+    {
+      "repoId": "coding-interview-patterns",
+      "repoName": "Coding Interview Patterns",
+      "sectionId": "source-prefix-sums",
+      "title": "Prefix Sums",
+      "snippet": "# Prefix Sums - [K Sum Subarrays Optimized.py](https://github.com/ByteByteGoHq/coding-interview-patterns/blob/HEAD/python3/Prefix Sums/k_sum_subarrays_optimized.py) - [K Sum Subarrays.py](https://githu…"
+    }
+  ],
+  "web-security-basics": [
+    {
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-6-security-best-practices",
+      "title": "`6. Security Best Practices`",
+      "snippet": "# `6. Security Best Practices` <div align=\"center\"> <img src=\"https://img.shields.io/badge/OWASP%20Threats-Top%2010-green.svg\" alt=\"54 items\"/> </div>…"
+    },
+    {
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-6-security-best-practices-6-1-embrace-linter-security-rules",
+      "title": "![✔] 6.1. Embrace Linter Security Rules",
+      "snippet": "## ![✔] 6.1. Embrace linter security rules <a href=\"https://www.owasp.org/index.php/Top_10-2017_A1-Injection\" target=\"_blank\"><img src=\"https://img.shields.io/badge/%E2%9C%94%20OWASP%20Threats%20-%20…"
+    },
+    {
+      "repoId": "node-best-practices",
+      "repoName": "Node.js Best Practices",
+      "sectionId": "readme-md-6-security-best-practices-6-5-collection-of-generic-security-best-practices",
+      "title": "![✔] 6.5. Collection of Generic Security Best Practices",
+      "snippet": "## ![✔] 6.5. Collection of generic security best practices **TL;DR:** This is a collection of security advice that is not related directly to Node.js - the Node implementation is not much different t…"
+    }
+  ],
+  "rate-limiter-design": [
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "readme-md-performance-vs-scalability",
+      "title": "Performance vs Scalability",
+      "snippet": "## Performance vs scalability A service is **scalable** if it results in increased **performance** in a manner proportional to resources added. Generally, increasing performance means serving more un…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-scalability",
+      "title": "Scalability",
+      "snippet": "# Scalability Scalability is the measure of how well a system responds to changes by adding or removing resources to meet demands. ![scalability](https://raw.githubusercontent.com/karanpratapsingh/p…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-8-must-know-scalability-strategies-md",
+      "title": "8 Must Know Scalability Strategies",
+      "snippet": "--- title: \"8 Must-Know Scalability Strategies\" description: \"Explore 8 essential strategies to effectively scale your system.\" image: \"https://assets.bytebytego.com/diagrams/0013-8-must-know-strategi…"
+    }
+  ],
+  "unique-id-generation": [
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "readme-md-performance-vs-scalability",
+      "title": "Performance vs Scalability",
+      "snippet": "## Performance vs scalability A service is **scalable** if it results in increased **performance** in a manner proportional to resources added. Generally, increasing performance means serving more un…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-scalability",
+      "title": "Scalability",
+      "snippet": "# Scalability Scalability is the measure of how well a system responds to changes by adding or removing resources to meet demands. ![scalability](https://raw.githubusercontent.com/karanpratapsingh/p…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-8-must-know-scalability-strategies-md",
+      "title": "8 Must Know Scalability Strategies",
+      "snippet": "--- title: \"8 Must-Know Scalability Strategies\" description: \"Explore 8 essential strategies to effectively scale your system.\" image: \"https://assets.bytebytego.com/diagrams/0013-8-must-know-strategi…"
+    }
+  ],
+  "cdn-edge-delivery": [
+    {
+      "repoId": "system-design-primer",
+      "repoName": "System Design Primer",
+      "sectionId": "readme-md-performance-vs-scalability",
+      "title": "Performance vs Scalability",
+      "snippet": "## Performance vs scalability A service is **scalable** if it results in increased **performance** in a manner proportional to resources added. Generally, increasing performance means serving more un…"
+    },
+    {
+      "repoId": "system-design",
+      "repoName": "System Design",
+      "sectionId": "readme-md-content-delivery-network-cdn",
+      "title": "Content Delivery Network (cdn)",
+      "snippet": "# Content Delivery Network (CDN) A content delivery network (CDN) is a geographically distributed group of servers that work together to provide fast delivery of internet content. Generally, static f…"
+    },
+    {
+      "repoId": "system-design-101",
+      "repoName": "System Design 101",
+      "sectionId": "data-guides-a-beginner-s-guide-to-cdn-content-delivery-network-md",
+      "title": "A Beginner's Guide to CDN Content Delivery Network",
+      "snippet": "--- title: \"A Beginner's Guide to CDN\" description: \"Learn about CDNs: improve performance, reliability, and security.\" image: \"https://assets.bytebytego.com/diagrams/0025-a-beginner-s-guide-to-cdn.pn…"
     }
   ]
 }
