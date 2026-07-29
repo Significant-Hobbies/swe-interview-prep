@@ -69,7 +69,7 @@ export default function Layout() {
                   <button
                     onClick={() => setSettingsOpen(true)}
                     aria-label="Settings"
-                    className="flex h-9 w-9 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
+                    className="flex h-11 w-11 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
                   >
                     <Settings className="h-4 w-4" />
                   </button>
@@ -94,7 +94,7 @@ export default function Layout() {
                       <button
                         onClick={signOut}
                         aria-label="Sign out"
-                        className="flex h-9 w-9 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
+                        className="flex h-11 w-11 items-center justify-center rounded-md text-white/50 transition-colors duration-150 hover:bg-white/5 hover:text-white"
                       >
                         <LogOut className="h-4 w-4" />
                       </button>
@@ -105,7 +105,7 @@ export default function Layout() {
               ) : isGuest ? (
                 <button
                   onClick={signInWithGoogle}
-                  className="ml-1 inline-flex items-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
+                  className="ml-1 inline-flex min-h-11 items-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
                 >
                   <LogIn className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Sign in</span>

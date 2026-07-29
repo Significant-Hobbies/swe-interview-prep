@@ -10,13 +10,13 @@ interface SiteHeaderProps {
 }
 
 function destinationClass({ isActive }: { isActive: boolean }) {
-  return `inline-flex h-16 items-center whitespace-nowrap px-1 text-sm transition-colors duration-150 ${
+  return `inline-flex h-16 min-w-11 items-center justify-center whitespace-nowrap px-1 text-sm transition-colors duration-150 ${
     isActive ? 'text-white' : 'text-white/50 hover:text-white'
   }`;
 }
 
 function menuDestinationClass({ isActive }: { isActive: boolean }) {
-  return `block rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
+  return `flex min-h-11 items-center rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
     isActive ? 'bg-white/[0.08] text-white' : 'text-white/60 hover:bg-white/[0.05] hover:text-white'
   }`;
 }
@@ -62,7 +62,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
     <>
       <a
         href="#main-content"
-        className="fixed left-4 top-3 z-60 -translate-y-16 rounded-md bg-white px-3 py-2 text-sm font-medium text-black transition-transform duration-150 focus:translate-y-0"
+        className="fixed left-4 top-3 z-60 inline-flex min-h-11 -translate-y-16 items-center rounded-md bg-white px-3 py-2 text-sm font-medium text-black transition-transform duration-150 focus:translate-y-0"
       >
         Skip to content
       </a>
@@ -72,7 +72,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
         <div className="relative mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-4 md:px-6">
           <NavLink
             to="/"
-            className="flex shrink-0 items-center gap-2 rounded-md focus-visible:ring-1 focus-visible:ring-white/50"
+            className="flex min-h-11 shrink-0 items-center gap-2 rounded-md focus-visible:ring-1 focus-visible:ring-white/50"
           >
             <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
             <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
@@ -116,7 +116,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
           <div className="ml-auto flex shrink-0 items-center gap-1">{actions}</div>
 
           <details ref={menuRef} className="group relative lg:hidden">
-            <summary className="flex h-9 cursor-pointer list-none items-center gap-1 rounded-md border border-white/15 px-3 text-xs font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.05]">
+            <summary className="flex h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-md border border-white/15 px-3 text-xs font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.05]">
               Menu
               <span
                 aria-hidden="true"

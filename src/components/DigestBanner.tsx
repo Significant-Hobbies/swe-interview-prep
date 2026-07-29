@@ -95,7 +95,7 @@ export function DigestBanner() {
         </div>
         <Link
           to={primary.href}
-          className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-white hover:text-white/80"
+          className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1 text-xs font-medium text-white hover:text-white/80"
         >
           Go <ArrowRight className="h-3 w-3" />
         </Link>

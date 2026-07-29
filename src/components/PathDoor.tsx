@@ -39,7 +39,7 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
         </div>
         <Link
           to="/explore"
-          className="inline-flex items-center gap-1 font-mono text-[11px] text-white/45 transition-colors hover:text-white/70"
+          className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] text-white/45 transition-colors hover:text-white/70"
         >
           Explore full catalog <ArrowRight className="h-3 w-3" />
         </Link>
@@ -89,7 +89,7 @@ export default function PathDoor({ activeRoadmapId, className = '' }: PathDoorPr
                     void setActiveRoadmap(defaultId);
                     navigate('/learn');
                   }}
-                  className="border-t border-white/[0.06] px-3.5 py-2 text-left font-mono text-[10px] text-white/40 transition-colors hover:bg-white/[0.03] hover:text-white/65"
+                  className="min-h-11 border-t border-white/[0.06] px-3.5 py-2 text-left font-mono text-[10px] text-white/40 transition-colors hover:bg-white/[0.03] hover:text-white/65"
                 >
                   Set as active path →
                 </button>

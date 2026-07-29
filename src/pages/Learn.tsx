@@ -107,7 +107,7 @@ export default function Learn() {
         </p>
         <Link
           to="/explore"
-          className="mt-4 inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+          className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
         >
           Explore full catalog <ArrowRight className="h-4 w-4" />
         </Link>
@@ -170,7 +170,7 @@ export default function Learn() {
             </h2>
             <Link
               to={`/concepts/${next.id}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-all hover:bg-white/90"
+              className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-all hover:bg-white/90"
             >
               Start
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -182,7 +182,10 @@ export default function Learn() {
           {nextDrill && (
             <p className="mt-3 font-mono text-xs text-white/40">
               Pair with drill:{' '}
-              <Link to={`/drills/${nextDrill.id}`} className="text-white/70 hover:text-white">
+              <Link
+                to={`/drills/${nextDrill.id}`}
+                className="inline-flex min-h-11 items-center text-white/70 hover:text-white"
+              >
                 {nextDrill.title}
               </Link>
             </p>
@@ -191,7 +194,10 @@ export default function Learn() {
       )}
 
       <nav className="mt-16 font-mono text-sm">
-        <Link to={`/roadmaps/${active.id}`} className="text-white/50 hover:text-white">
+        <Link
+          to={`/roadmaps/${active.id}`}
+          className="inline-flex min-h-11 items-center text-white/50 hover:text-white"
+        >
           Open active roadmap detail <span className="text-white/40">→</span>
         </Link>
       </nav>
