@@ -142,27 +142,8 @@ External: LeetCode API (import), multi-provider LLM APIs
   `docs/architecture/decisions/`; the 2026-03-29 audit is archived at
   `docs/archive/security-audit-2026-03-29.md`.
 
-## Todo / Planned / Deferred / Blocked
+## Work queue
 
-**Current objective, active work, blockers, unresolved questions, and next
-steps live in [`STATUS.md`](STATUS.md)** — the single source of truth for
-volatile status. The items below are retained as a fleet-format summary;
-defer to STATUS.md if they disagree.
-
-### Planned
-1. Configure the Cloudflare Pages `READER_API_TOKEN` secret to activate the private live Reader adapter.
-2. Persist external learning progress and assessment feedback through the authenticated learning API; local storage is the first usable slice.
-
-### Closure
-
-- **Personal-use support (2026-07-10):** Keep SWE Interview Prep available for direct use. No roadmap expansion; accept only maintenance, reliability, or personally requested workflow fixes.
-
-### Deferred
-- Vercel/serverless migration instructions — stale; do not guide new work.
-- Broad ATS, job boards, or application-tracking features.
-- New backend providers or alternate auth modes until Cloudflare path is proven stable.
-- Paid tiers or team workspaces.
-
-### Blocked / Known gaps
-- Low-severity audit items open: submodule `node_modules` verification; consider JWT_SECRET rotation after fallback removal (commit history exposure) — runbook at `docs/operations/runbooks/rotate-jwt-secret.md`.
-- End-to-end CI against live Turso + Cloudflare bindings is operator-dependent, not fully automated in repo.
+Open work is tracked only in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues).
+An open issue is a to-do, a linked pull request is in progress, and merge plus
+issue closure makes the work done.

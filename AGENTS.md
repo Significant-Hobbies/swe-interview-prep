@@ -148,5 +148,5 @@ intentionally does not restate it.
 
 ## Active context
 
-See [`STATUS.md`](STATUS.md) for the current objective, active work, blockers,
-and next steps.
+See [`PROJECT_STATUS.md`](PROJECT_STATUS.md) for current/shipped product truth
+and GitHub Issues for open work.
