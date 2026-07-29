@@ -47,6 +47,7 @@ const Library = lazy(() => import('./pages/Library'));
 const RepoView = lazy(() => import('./pages/RepoView'));
 const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
+const Changelog = lazy(() => import('./pages/Changelog'));
 const Login = lazy(() => import('./pages/Login'));
 
 function removeLcpShell() {
@@ -103,6 +104,7 @@ function AppRoutes() {
         <Route path="library/:repoSlug" element={<RepoView />} />
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
+        <Route path="changelog" element={<Changelog />} />
         <Route path="dashboard" element={<Navigate to="/today" replace />} />
         <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
         <Route path="concepts" element={<Navigate to="/learn/all" replace />} />

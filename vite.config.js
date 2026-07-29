@@ -37,6 +37,14 @@ function deferAppCss() {
 export default defineConfig({
   plugins: [react(), tailwindcss(), deferAppCss(), localAi()],
   assetsInclude: ['**/*.wasm'],
+  resolve: {
+    // Langium 3 re-exports these internals, while vscode-jsonrpc 9 only
+    // exposes the same symbols through its public package entry point.
+    alias: {
+      'vscode-jsonrpc/lib/common/cancellation.js': 'vscode-jsonrpc',
+      'vscode-jsonrpc/lib/common/events.js': 'vscode-jsonrpc',
+    },
+  },
   server: {
     fs: { allow: ['..'] },
   },

@@ -70,6 +70,12 @@ export const BROWSE_NAV_ITEMS: BrowseNavItem[] = [
     blurb: 'Long-form roadmaps',
   },
   {
+    id: 'changelog',
+    to: '/changelog',
+    label: 'Changelog',
+    blurb: 'Meaningful product releases',
+  },
+  {
     id: 'build',
     to: '/build',
     label: 'Build Lab',

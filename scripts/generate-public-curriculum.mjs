@@ -11,6 +11,7 @@ const origin = 'https://learn.significanthobbies.com';
 
 const vite = await createServer({
   configFile: false,
+  optimizeDeps: { noDiscovery: true },
   server: { middlewareMode: true },
   appType: 'custom',
 });
