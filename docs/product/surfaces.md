@@ -13,7 +13,7 @@ disagrees with code, code wins.
 | `/today` | Home / daily session hub |
 | `/learn`, `/learn/all` | Roadmap journey + concepts (18 tracks) |
 | `/explore` | Concept/roadmap explorer |
-| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS` (see [`STATUS.md`](../../STATUS.md)) |
+| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`; open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
 | `/practice`, `/practice/all` | Drills + spaced-repetition reviews |
 | `/playground` | Monaco + Excalidraw build sandbox |
 | `/mock` | Timed mock interview |
