@@ -83,7 +83,7 @@ only — there is no server round-trip:
 Go execution (a `/api/go-run` → go.dev proxy plus an R2-hosted WASM
 interpreter in a Web Worker) was removed on 2026-07-25 because neither
 backend existed any more — see
-[ADR 0009](decisions/0009-remove-go-runtime.md).
+[ADR 0009](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0009-remove-go-runtime.md).
 
 ## DB initialization
 
