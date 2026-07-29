@@ -75,6 +75,10 @@ samp {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+[data-saasmaker-widget] .smw-trigger {
+  min-height: 44px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
