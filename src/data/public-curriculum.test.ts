@@ -54,16 +54,41 @@ describe('public curriculum publication', () => {
       const url = `https://learn.significanthobbies.com${path}`;
       expect(sitemap.split(`<loc>${url}</loc>`)).toHaveLength(2);
     }
+    expect(sitemap).not.toContain('/api/ai');
+    expect(sitemap).not.toContain('.json</loc>');
+    expect(sitemap).not.toContain('.md</loc>');
+    expect(sitemap).not.toContain('.txt</loc>');
+  });
+
+  it('publishes a Markdown mirror for every public sitemap route', () => {
+    const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
+    const paths = [
+      ...sitemap.matchAll(/<loc>https:\/\/learn\.significanthobbies\.com([^<]*)<\/loc>/g),
+    ].map((match) => match[1]);
+    const markdownPath = (path: string) => {
+      if (path === '/') return '/index.md';
+      if (path.endsWith('/')) return `${path}index.md`;
+      if (path.endsWith('.html')) return `${path.slice(0, -5)}.md`;
+      return `${path}.md`;
+    };
+
+    for (const path of paths) {
+      const markdown = readFileSync(resolve(root, `public${markdownPath(path)}`), 'utf8');
+      expect(markdown, path).toMatch(/^#\s+\S/);
+    }
   });
 
   it('advertises public curriculum surfaces to agents', () => {
     expect(apiCatalog.curriculum.counts).toEqual(manifest.counts);
     expect(apiCatalog.curriculum.html).toBe('https://learn.significanthobbies.com/curriculum/');
+    expect(apiCatalog.markdown).toEqual({ suffix: '.md', negotiation: false });
     expect(apiCatalog.surfaces.map((surface) => surface.id)).toEqual([
       'home',
+      'changelog',
       'curriculum',
-      'curriculum-json',
     ]);
+    expect(apiCatalog.surfaces.every((surface) => 'md' in surface)).toBe(true);
+    expect(apiCatalog.dataResources.map((resource) => resource.id)).toEqual(['curriculum-json']);
   });
 
   it('emits complete on-page metadata and one h1 per HTML page', () => {

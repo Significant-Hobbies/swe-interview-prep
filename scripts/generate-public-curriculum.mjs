@@ -18,10 +18,12 @@ const vite = await createServer({
 
 let learning;
 let navigation;
+let changelog;
 try {
-  [learning, navigation] = await Promise.all([
+  [learning, navigation, changelog] = await Promise.all([
     vite.ssrLoadModule('/src/data/learning-os.ts'),
     vite.ssrLoadModule('/src/data/site-navigation.ts'),
+    vite.ssrLoadModule('/src/data/changelog.ts'),
   ]);
 } finally {
   await vite.close();
@@ -29,6 +31,7 @@ try {
 
 const { TRACKS, CONCEPTS, ROADMAPS, DRILLS, REVIEW_QUESTIONS, ARTIFACTS } = learning;
 const { PRIMARY_NAV_ITEMS, BROWSE_NAV_ITEMS } = navigation;
+const { CHANGELOG_RELEASES, CHANGELOG_REPOSITORY } = changelog;
 const coverage = JSON.parse(
   readFileSync(join(repoRoot, 'src/data/curriculum-coverage.json'), 'utf8')
 );
@@ -43,6 +46,12 @@ const artifactsById = byId(ARTIFACTS);
 const conceptUrl = (id) => `/curriculum/concepts/${id}.html`;
 const trackUrl = (id) => `/curriculum/tracks/${id}.html`;
 const roadmapUrl = (id) => `/curriculum/roadmaps/${id}.html`;
+const markdownUrl = (path) => {
+  if (path === '/') return '/index.md';
+  if (path.endsWith('/')) return `${path}index.md`;
+  if (path.endsWith('.html')) return `${path.slice(0, -5)}.md`;
+  return `${path}.md`;
+};
 const absolute = (path) => `${origin}${path}`;
 
 function escapeHtml(value) {
@@ -742,6 +751,126 @@ ${tracks}
 `;
 }
 
+function trackMarkdown(track) {
+  const concepts = CONCEPTS.filter((concept) => concept.tags.includes(track.id));
+  const roadmaps = ROADMAPS.filter((roadmap) => roadmap.tracks.includes(track.id));
+  return `# ${track.title}
+
+${plainText(track.description)}
+
+This track contains ${concepts.length} connected concepts. Mastery means explaining each
+mechanism, predicting its failure modes, and supporting decisions with code,
+measurements, or a reviewable design artifact.
+
+## Roadmaps
+
+${roadmaps.length ? roadmaps.map((roadmap) => `- [${roadmap.title}](${absolute(roadmapUrl(roadmap.id))}) — ${plainText(roadmap.goal)}`).join('\n') : '- No dedicated roadmap is assigned yet.'}
+
+## Concepts
+
+${concepts.map((concept) => `- [${concept.name}](${absolute(conceptUrl(concept.id))}) (${concept.difficulty}) — ${plainText(concept.description)}`).join('\n')}
+`;
+}
+
+function roadmapMarkdown(roadmap) {
+  const tracks = roadmap.tracks.map((id) => tracksById.get(id)).filter(Boolean);
+  const milestones = roadmap.milestones
+    .map((milestone, index) => {
+      const concepts = milestone.concepts.map((id) => conceptsById.get(id)).filter(Boolean);
+      const artifacts = milestone.artifacts.map((id) => artifactsById.get(id)).filter(Boolean);
+      return `## Milestone ${index + 1}: ${milestone.title}
+
+${plainText(milestone.goal)}
+
+### Concepts
+
+${concepts.map((concept) => `- [${concept.name}](${absolute(conceptUrl(concept.id))}) — ${plainText(concept.description)}`).join('\n')}
+
+${artifacts.length ? `### Build evidence\n\n${artifacts.map((artifact) => `- **${artifact.title}** — ${plainText(artifact.description)}`).join('\n')}` : ''}`;
+    })
+    .join('\n\n');
+
+  return `# ${roadmap.title}
+
+${plainText(roadmap.description)}
+
+- Horizon: ${roadmap.horizon}
+- Outcome: ${plainText(roadmap.goal)}
+- Tracks: ${tracks.map((track) => track.title).join(', ')}
+
+Work each milestone as a claim that needs evidence. Predict the mechanism and
+failure mode first, study the linked concepts, complete the drills without
+copying an answer, and preserve the resulting code, measurements, or design.
+
+${milestones}
+`;
+}
+
+function conceptMarkdown(concept) {
+  const tracks = concept.tags.map((id) => tracksById.get(id)).filter(Boolean);
+  const roadmaps = concept.roadmaps
+    .map((id) => ROADMAPS.find((item) => item.id === id))
+    .filter(Boolean);
+  const drills = (concept.drills ?? []).map((id) => drillsById.get(id)).filter(Boolean);
+  const reviews = (concept.reviewQuestions ?? []).map((id) => reviewsById.get(id)).filter(Boolean);
+  const prerequisites = concept.prerequisites.map((id) => conceptsById.get(id)).filter(Boolean);
+  const related = concept.related.map((id) => conceptsById.get(id)).filter(Boolean);
+  const artifacts = (concept.artifacts ?? []).map((id) => artifactsById.get(id)).filter(Boolean);
+  const resources = concept.resources ?? [];
+
+  return `# ${concept.name}
+
+${plainText(concept.description)}
+
+- Difficulty: ${concept.difficulty}
+- Tracks: ${tracks.map((track) => track.title).join(', ')}
+
+## Mental model
+
+${plainText(concept.mentalModel ?? concept.description)}
+
+${concept.realWorldUsage ? `## Where it matters\n\n${plainText(concept.realWorldUsage)}\n` : ''}
+${concept.commonMistakes?.length ? `## Common mistakes\n\n${concept.commonMistakes.map((mistake) => `- ${plainText(mistake)}`).join('\n')}\n` : ''}
+## Primary sources
+
+${resources.length ? resources.map((resource) => `- [${resource.title}](${resource.url}) (${resource.type})`).join('\n') : '- Use the linked roadmap context and practice prompt.'}
+
+## Practice
+
+${drills.length ? drills.map((drill) => `### ${drill.title}\n\n${plainText(drill.prompt)}\n\n**Expected evidence:** ${plainText(drill.expectedOutput)}`).join('\n\n') : 'Practice through the roadmap milestone and preserve the evidence.'}
+
+${reviews.length ? `## Review prompts\n\n${reviews.map((review) => `- ${plainText(review.question)}`).join('\n')}\n` : ''}
+${artifacts.length ? `## Build evidence\n\n${artifacts.map((artifact) => `- **${artifact.title}** — ${plainText(artifact.description)}`).join('\n')}\n` : ''}
+## Prerequisites
+
+${prerequisites.length ? prerequisites.map((item) => `- [${item.name}](${absolute(conceptUrl(item.id))})`).join('\n') : '- None assigned.'}
+
+## Related concepts
+
+${related.length ? related.map((item) => `- [${item.name}](${absolute(conceptUrl(item.id))})`).join('\n') : '- None assigned.'}
+
+## Learning paths
+
+${roadmaps.length ? roadmaps.map((roadmap) => `- [${roadmap.title}](${absolute(roadmapUrl(roadmap.id))})`).join('\n') : '- No roadmap is assigned yet.'}
+`;
+}
+
+function changelogMarkdown() {
+  return `# SWE Interview Prep changelog
+
+Meaningful improvements to the curriculum, practice loop, and personal learning system.
+
+- [Roadmap](${CHANGELOG_REPOSITORY}/issues)
+- [Source](${CHANGELOG_REPOSITORY})
+
+${CHANGELOG_RELEASES.map(
+  (release) => `## ${release.date} — ${release.title}
+
+${release.outcomes.map((outcome) => `- ${outcome}`).join('\n')}`
+).join('\n\n')}
+`;
+}
+
 const catalog = catalogData();
 writeFileSync(
   join(repoRoot, 'src/data/public-curriculum-summary.json'),
@@ -770,6 +899,7 @@ if (outputDir !== expectedOutputRoot) {
   throw new Error(`Refusing to replace unexpected output directory: ${outputDir}`);
 }
 const cleanGeneratedText = (value) => value.replace(/[ \t]+$/gm, '');
+const cleanMarkdown = (value) => `${value.trimEnd()}\n`;
 rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(join(outputDir, 'tracks'), { recursive: true });
 mkdirSync(join(outputDir, 'roadmaps'), { recursive: true });
@@ -777,22 +907,32 @@ mkdirSync(join(outputDir, 'concepts'), { recursive: true });
 
 writeFileSync(join(outputDir, 'styles.css'), styles);
 writeFileSync(join(outputDir, 'index.html'), cleanGeneratedText(hubPage()));
+writeFileSync(join(outputDir, 'index.md'), cleanMarkdown(catalogMarkdown(catalog)));
 for (const track of TRACKS) {
   writeFileSync(
     join(outputDir, 'tracks', `${track.id}.html`),
     cleanGeneratedText(trackPage(track))
   );
+  writeFileSync(join(outputDir, 'tracks', `${track.id}.md`), cleanMarkdown(trackMarkdown(track)));
 }
 for (const roadmap of ROADMAPS) {
   writeFileSync(
     join(outputDir, 'roadmaps', `${roadmap.id}.html`),
     cleanGeneratedText(roadmapPage(roadmap))
   );
+  writeFileSync(
+    join(outputDir, 'roadmaps', `${roadmap.id}.md`),
+    cleanMarkdown(roadmapMarkdown(roadmap))
+  );
 }
 for (const concept of CONCEPTS) {
   writeFileSync(
     join(outputDir, 'concepts', `${concept.id}.html`),
     cleanGeneratedText(conceptPage(concept))
+  );
+  writeFileSync(
+    join(outputDir, 'concepts', `${concept.id}.md`),
+    cleanMarkdown(conceptMarkdown(concept))
   );
 }
 writeFileSync(join(outputDir, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
@@ -804,28 +944,14 @@ writeFileSync(
       generated: true,
       counts: catalog.counts,
       htmlPaths,
+      markdownPaths: htmlPaths.map(markdownUrl),
     },
     null,
     2
   )}\n`
 );
 
-const baseSitemapPaths = [
-  '/',
-  '/about',
-  '/faq',
-  '/drills',
-  '/index.md',
-  '/learn',
-  '/llms.txt',
-  '/llms-full.txt',
-  '/privacy',
-  '/review',
-  '/terms',
-  '/api/ai',
-  '/curriculum/catalog.md',
-  '/curriculum/catalog.json',
-];
+const baseSitemapPaths = ['/', '/changelog'];
 const sitemapPaths = [...new Set([...baseSitemapPaths, ...htmlPaths])];
 writeFileSync(
   join(publicDir, 'sitemap.xml'),
@@ -918,6 +1044,8 @@ Private progress, notes, review answers, and saved learning sources are intentio
 `
 );
 
+writeFileSync(join(publicDir, 'changelog.md'), cleanMarkdown(changelogMarkdown()));
+
 writeFileSync(
   join(publicDir, 'api-ai.json'),
   `${JSON.stringify(
@@ -929,7 +1057,7 @@ writeFileSync(
       llmsFull: absolute('/llms-full.txt'),
       sitemap: absolute('/sitemap.xml'),
       robots: absolute('/robots.txt'),
-      markdown: { suffix: '.md', negotiation: true },
+      markdown: { suffix: '.md', negotiation: false },
       curriculum: {
         counts: catalog.counts,
         html: absolute('/curriculum/'),
@@ -945,16 +1073,24 @@ writeFileSync(
           description: 'Product home and learning-loop overview',
         },
         {
+          id: 'changelog',
+          url: absolute('/changelog'),
+          md: absolute('/changelog.md'),
+          kind: 'static',
+          description: 'Verified product releases and outcomes',
+        },
+        {
           id: 'curriculum',
           url: absolute('/curriculum/'),
-          md: absolute('/curriculum/catalog.md'),
+          md: absolute('/curriculum/index.md'),
           kind: 'collection',
           description: `${TRACKS.length} tracks, ${CONCEPTS.length} concepts, and ${ROADMAPS.length} roadmaps as static public pages`,
         },
+      ],
+      dataResources: [
         {
           id: 'curriculum-json',
           url: absolute('/curriculum/catalog.json'),
-          kind: 'data',
           description: 'Stable IDs, counts, relationships, and public curriculum URLs',
         },
       ],

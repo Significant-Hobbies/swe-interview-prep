@@ -8,7 +8,7 @@
   "robots": "https://learn.significanthobbies.com/robots.txt",
   "markdown": {
     "suffix": ".md",
-    "negotiation": true
+    "negotiation": false
   },
   "curriculum": {
     "counts": {
@@ -34,16 +34,24 @@
       "description": "Product home and learning-loop overview"
     },
     {
+      "id": "changelog",
+      "url": "https://learn.significanthobbies.com/changelog",
+      "md": "https://learn.significanthobbies.com/changelog.md",
+      "kind": "static",
+      "description": "Verified product releases and outcomes"
+    },
+    {
       "id": "curriculum",
       "url": "https://learn.significanthobbies.com/curriculum/",
-      "md": "https://learn.significanthobbies.com/curriculum/catalog.md",
+      "md": "https://learn.significanthobbies.com/curriculum/index.md",
       "kind": "collection",
       "description": "19 tracks, 250 concepts, and 24 roadmaps as static public pages"
-    },
+    }
+  ],
+  "dataResources": [
     {
       "id": "curriculum-json",
       "url": "https://learn.significanthobbies.com/curriculum/catalog.json",
-      "kind": "data",
       "description": "Stable IDs, counts, relationships, and public curriculum URLs"
     }
   ],
