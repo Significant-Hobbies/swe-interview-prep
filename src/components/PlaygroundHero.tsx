@@ -17,7 +17,7 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
           <Code2 className="h-5 w-5 shrink-0 text-sky-400" />
           <div>
             <span className="text-sm font-semibold text-white">Playground</span>
-            <p className="text-[11px] text-white/45">
+            <p className="text-[11px] text-white/60">
               No learning without an artifact — build here.
             </p>
           </div>
@@ -56,7 +56,7 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
           </Link>
           <Link
             to="/build"
-            className="font-mono text-[11px] text-white/40 transition-colors hover:text-white/65"
+            className="font-mono text-[11px] text-white/60 transition-colors hover:text-white/80"
           >
             Browse Build Lab scaffolds →
           </Link>

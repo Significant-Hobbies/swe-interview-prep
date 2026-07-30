@@ -67,11 +67,11 @@ export default function Today() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-10 lg:py-12">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60">
           Today
         </span>
         {streak > 0 && (
-          <span className="font-mono text-[10px] text-white/40">{streak}d session streak</span>
+          <span className="font-mono text-[10px] text-white/60">{streak}d session streak</span>
         )}
       </div>
 
@@ -96,33 +96,47 @@ export default function Today() {
               <CheckCircle2 className="h-3.5 w-3.5" /> Complete
             </span>
           ) : (
-            <Button tone="ghost" onClick={() => markSessionComplete()} className="text-xs">
-              Mark done for today
+            <Button
+              tone="ghost"
+              onClick={() => {
+                if (window.confirm('Mark all remaining session items complete for today?')) {
+                  markSessionComplete();
+                }
+              }}
+              className="min-h-11 text-xs"
+            >
+              Complete remaining items
             </Button>
           )}
         </div>
       )}
 
-      <DailySourceQueue />
-
       <SessionPlanView plan={enrichedPlan} />
+
+      <DailySourceQueue />
 
       <PlaygroundHero className="mt-12" compact />
 
       <nav className="mt-10 flex flex-wrap gap-6 font-mono text-sm text-white/50">
-        <Link to="/explore" className="hover:text-white">
+        <Link to="/explore" className="inline-flex min-h-11 items-center hover:text-white">
           Explore catalog
         </Link>
-        <Link to="/learn" className="hover:text-white">
+        <Link to="/learn" className="inline-flex min-h-11 items-center hover:text-white">
           Switch roadmap
         </Link>
-        <Link to={`/roadmaps/${enrichedPlan.roadmap.id}`} className="hover:text-white">
+        <Link
+          to={`/roadmaps/${enrichedPlan.roadmap.id}`}
+          className="inline-flex min-h-11 items-center hover:text-white"
+        >
           View graph
         </Link>
-        <Link to="/mock" className="hover:text-white">
+        <Link to="/mock" className="inline-flex min-h-11 items-center hover:text-white">
           Mock interview
         </Link>
-        <Link to="/practice/all?tab=reviews" className="hover:text-white">
+        <Link
+          to="/practice/all?tab=reviews"
+          className="inline-flex min-h-11 items-center hover:text-white"
+        >
           Reviews{enrichedPlan.reviewsDue > 0 && ` · ${enrichedPlan.reviewsDue} due`}
         </Link>
       </nav>

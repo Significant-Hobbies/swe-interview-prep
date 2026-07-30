@@ -62,7 +62,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
     <>
       <a
         href="#main-content"
-        className="fixed left-4 top-3 z-60 inline-flex min-h-11 -translate-y-16 items-center rounded-md bg-white px-3 py-2 text-sm font-medium text-black transition-transform duration-150 focus:translate-y-0"
+        className="skip-link fixed left-4 top-3 z-60 inline-flex min-h-11 -translate-y-16 items-center rounded-md bg-white px-3 py-2 text-sm font-medium text-black transition-transform duration-150"
       >
         Skip to content
       </a>
@@ -75,7 +75,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
             className="flex min-h-11 shrink-0 items-center gap-2 rounded-md focus-visible:ring-1 focus-visible:ring-white/50"
           >
             <span className="text-base font-bold tracking-tight text-white">SWE Prep</span>
-            <span className="hidden text-xs text-white/30 sm:inline">/ Learning OS</span>
+            <span className="hidden text-xs text-white/60 sm:inline">/ Learning OS</span>
           </NavLink>
 
           <nav

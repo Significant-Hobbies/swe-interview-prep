@@ -61,7 +61,12 @@ samp {
 }
 
 :focus-visible {
-  outline: none;
+  outline: 2px solid #ededed;
+  outline-offset: 3px;
+}
+
+.skip-link:focus-visible {
+  translate: 0 0;
 }
 
 /* Dotted grid backdrop — apply with `.dot-grid` on the hero container. */

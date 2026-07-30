@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "swe-interview-prep",
-  "target": "Systems Lab catalog and runner",
+  "target": "Today learning session",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -20,27 +20,27 @@
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/systems-lab-after-390.png"
+        "path": "artifacts/design/after-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/systems-lab-after-768.png"
+        "path": "artifacts/design/after-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/systems-lab-after-1440.png"
+        "path": "artifacts/design/after-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "pnpm test && pnpm typecheck && pnpm lint && pnpm docs:validate && pnpm build",
+      "command": "pnpm format:check && pnpm check && pnpm typecheck && pnpm test && pnpm build",
       "status": "pass"
     },
     "critique": {
-      "score": 0,
+      "score": 28,
       "maximum": 40
     },
     "audit": {
-      "score": 17,
+      "score": 15,
       "maximum": 20
     },
     "unresolved": {
@@ -51,22 +51,28 @@
       "posture": "advisory",
       "findings": [
         {
-          "rule": "design-system-font-size",
-          "count": 23,
-          "disposition": "resolved",
-          "note": "Recorded the incumbent 10px and 11px signal-label steps in DESIGN.md."
+          "rule": "homepage-payload",
+          "count": 1,
+          "disposition": "follow-up",
+          "note": "The Today route remains close to the configured JavaScript size ceiling."
         },
         {
-          "rule": "gray-on-color",
-          "count": 2,
+          "rule": "feedback-trigger-overlap",
+          "count": 1,
+          "disposition": "follow-up",
+          "note": "The fixed feedback trigger can overlap content on compact screens."
+        },
+        {
+          "rule": "undocumented-color-literals",
+          "count": 3,
           "disposition": "pre-existing",
-          "note": "Both findings point to unchanged Build Lab code outside the Systems Lab feature."
+          "note": "The detector found existing standalone cyan and scrollbar literals."
         }
       ]
     }
   },
   "ownerFeedback": {
     "decision": "delegated",
-    "note": "Owner explicitly delegated implementation with 'go for it, lets see' on 2026-07-30."
+    "note": "Owner explicitly delegated the remediation with 'Go for it. Do all of them until there is at least something.' on 2026-07-31."
   }
 }

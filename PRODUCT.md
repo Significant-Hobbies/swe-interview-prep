@@ -67,8 +67,8 @@ account-scoped in the browser.
 
 ## Evidence on Hand
 
-The repository contains the shipped application, tests, 222 canonical
-concepts, 18 tracks, 24 roadmaps, drills, artifacts, generated curriculum
+The repository contains the shipped application, tests, 250 canonical
+concepts, 19 tracks, 24 roadmaps, drills, artifacts, generated curriculum
 pages, source catalogs, FSRS state handling, and Feynman grading. These are
 product evidence. The project has no customer testimonials, commercial usage
 claims, or benchmark claims that future work may invent.
