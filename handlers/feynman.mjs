@@ -12,7 +12,7 @@ async function ensureInit() {
   }
 }
 
-const SYSTEM = `You grade a software engineer's plain-English explanation of code they just wrote.
+const CODE_SYSTEM = `You grade a software engineer's plain-English explanation of code they just wrote.
 
 Return STRICT JSON, no prose, no markdown:
 {
@@ -31,6 +31,25 @@ Grading rubric:
 Use "again" rating for concepts they butchered, "hard" for shaky, "good" for solid, "easy" for nailed.
 Only emit ratings/gaps for concept_ids in the provided concept list.`;
 
+const SYSTEMS_LAB_SYSTEM = `You grade a software engineer's causal explanation of a deterministic systems simulation they just ran.
+
+Return STRICT JSON, no prose, no markdown:
+{
+  "grade": 0-100,
+  "feedback": "one paragraph, blunt and specific",
+  "gaps": [{"concept_id": "...", "weakness": "..."}],
+  "ratings": [{"concept_id": "...", "rating": "again|hard|good|easy"}]
+}
+
+Grading rubric:
+- 90-100: prediction, mechanism, truth planes, decisive evidence, and a valid counterfactual are precise
+- 70-89: causal chain is correct but one edge or evidence claim is hand-wavy
+- 50-69: outcome is described but mechanism and evidence are partially confused
+- 0-49: status labels are repeated without explaining causality, or claims contradict the supplied evidence
+
+Use "again" for concepts they contradict, "hard" for shaky, "good" for solid, "easy" for nailed.
+Only emit ratings/gaps for concept_ids in the provided concept list. Treat the supplied simulation artifact as ground truth.`;
+
 export default async function handler(req, res) {
   await ensureInit();
   const user = await requireAuth(req, res);
@@ -39,12 +58,29 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { explanation, code, language, problem, problemId, conceptIds, aiConfig } = req.body || {};
+  const { explanation, code, language, problem, problemId, conceptIds, artifact, aiConfig } =
+    req.body || {};
   if (!explanation) return res.status(400).json({ error: 'explanation required' });
 
   const conceptList = (conceptIds || []).join(', ') || '(none tagged — infer from code)';
 
-  const prompt = `Concepts touched: ${conceptList}
+  const isSystemsLab = artifact?.type === 'systems-lab';
+  const prompt = isSystemsLab
+    ? `Concepts touched: ${conceptList}
+Simulation: ${artifact.title || problem || '(systems lab)'}
+
+Deterministic artifact:
+\`\`\`json
+${String(artifact.context || '').slice(0, 8000)}
+\`\`\`
+
+Engineer's explanation:
+"""
+${explanation.slice(0, 3000)}
+"""
+
+Grade the causal explanation against the artifact. Return JSON only.`
+    : `Concepts touched: ${conceptList}
 Language: ${language || 'unknown'}
 Problem: ${problem || '(freeform playground)'}
 
@@ -62,7 +98,12 @@ Grade now. Return JSON only.`;
 
   let parsed;
   try {
-    const text = await generate({ ...(aiConfig || {}), system: SYSTEM, prompt, maxTokens: 1500 });
+    const text = await generate({
+      ...(aiConfig || {}),
+      system: isSystemsLab ? SYSTEMS_LAB_SYSTEM : CODE_SYSTEM,
+      prompt,
+      maxTokens: 1500,
+    });
     parsed = parseJSON(text);
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
       throw new Error('AI returned non-object');

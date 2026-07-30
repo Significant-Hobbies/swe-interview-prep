@@ -77,4 +77,5 @@ export const STORE_KEYS = {
   reviewMastery: 'swe-os:review-mastery-v1',
   sweep: 'swe-os:sweep-v1',
   setupHint: 'swe-os:setup-hint-v1',
+  systemsLabs: 'swe-os:systems-labs-v1',
 } as const;

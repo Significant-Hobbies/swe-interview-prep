@@ -14,11 +14,16 @@ import MarkdownViewer from './MarkdownViewer';
 interface Props {
   open: boolean;
   onClose: () => void;
-  code: string;
-  language: string;
+  code?: string;
+  language?: string;
   problem: string;
   conceptIds?: string[];
   problemId?: string;
+  artifact?: {
+    type: 'systems-lab';
+    title: string;
+    context: string;
+  };
   /** Fired after the AI grade is applied to FSRS mastery, so the parent can
    * refresh mastery state and surface the next-weakest-concept recommendation. */
   onGraded?: (grade: number) => void;
@@ -39,6 +44,7 @@ export default function FeynmanGate({
   problem,
   conceptIds,
   problemId,
+  artifact,
   onGraded,
 }: Props) {
   const { review: reviewRq } = useReviewMastery();
@@ -89,6 +95,7 @@ export default function FeynmanGate({
           problem,
           problemId,
           conceptIds,
+          artifact,
           aiConfig: config,
         }),
       });
@@ -154,7 +161,11 @@ export default function FeynmanGate({
             <h2 className="text-base font-semibold text-slate-100">Feynman Gate</h2>
             <span className="text-xs text-slate-500">{elapsed}s</span>
           </div>
-          <button onClick={onClose} className="text-slate-500 hover:text-slate-300">
+          <button
+            onClick={onClose}
+            aria-label="Close Feynman Gate"
+            className="text-slate-500 hover:text-slate-300"
+          >
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -162,13 +173,18 @@ export default function FeynmanGate({
         {!result ? (
           <div className="p-5 space-y-4">
             <p className="text-sm text-slate-400 leading-relaxed">
-              Explain in plain English what you just built — the core idea, the tradeoffs,
-              complexity. No code. Pretend you're teaching a junior.
+              {artifact?.type === 'systems-lab'
+                ? 'Explain the causal chain in plain English: what you predicted, which mechanism decided the outcome, and which evidence proves it. Pretend you are teaching an engineer who can challenge every claim.'
+                : "Explain in plain English what you just built — the core idea, the tradeoffs, complexity. No code. Pretend you're teaching a junior."}
             </p>
             <textarea
               value={explanation}
               onChange={(e) => setExplanation(e.target.value)}
-              placeholder="The approach is… The key insight is… Time complexity is… Edge cases I handle…"
+              placeholder={
+                artifact?.type === 'systems-lab'
+                  ? 'I predicted… The decisive branch was… The evidence that proves it is… A nearby counterfactual would change because…'
+                  : 'The approach is… The key insight is… Time complexity is… Edge cases I handle…'
+              }
               rows={10}
               className="w-full resize-none rounded-md border border-slate-800 bg-slate-900 p-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500/40"
             />

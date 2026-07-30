@@ -9,8 +9,8 @@
 A single-platform SWE learning OS and interview prep product covering DSA,
 low-level design (LLD), system design (HLD), and behavioral practice. It
 combines Monaco coding, Excalidraw diagramming, multi-provider Socratic AI
-hints, FSRS spaced repetition, LeetCode import, an embedded learning-library
-reader, and progress tracking.
+hints, deterministic systems simulations, FSRS spaced repetition, LeetCode
+import, an embedded learning-library reader, and progress tracking.
 
 ## Why it exists
 
@@ -24,7 +24,9 @@ Review → Apply**.
 
 **No learning without an artifact.** Every concept maps to drills and an
 artifact the user builds. The Playground (Monaco + Excalidraw + Socratic AI +
-Feynman Gate) is the build/drill workspace.
+Feynman Gate) is the build/drill workspace. Systems Lab adds a second kind of
+artifact: a repaired infrastructure configuration plus a frozen prediction,
+actor-owned evidence, and a causal explain-back.
 
 ## Primary tabs
 
@@ -42,7 +44,8 @@ plus a Docs link:
 
 Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`)
 are reachable from inside the tabs. `/today` and `/build` (BuildLab) are real
-pages. Legacy routes redirect so external links keep working: `/dashboard` →
+pages. `/labs` and `/labs/:labId` are contextual learning surfaces rather than
+new primary tabs. Legacy routes redirect so external links keep working: `/dashboard` →
 `/today`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
 `/practice`; `/reviews`, `/review` → `/practice/all?tab=reviews`; `/projects`
 → `/progress/all`; `/notes` → `/progress/all?tab=notes`; `/vibe-learning` →
@@ -81,8 +84,9 @@ learning data.
 **In scope:** DSA, LLD, HLD, systems and platform engineering, databases and
 distributed systems, AI models/training/inference/agents/reliability, developer
 tools, application engineering, multimodal/spatial systems, behavioral
-practice, FSRS spaced repetition, multi-provider AI hints, LeetCode import,
-embedded learning library, and personal learning sessions.
+practice, deterministic systems simulations, FSRS spaced repetition,
+multi-provider AI hints, LeetCode import, embedded learning library, and
+personal learning sessions.
 
 **Out of scope** (per the 2026-07-10 personal-use closure in
 [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)): ATS/job-application features, paid
@@ -93,5 +97,6 @@ roadmap expansion beyond maintenance and personally requested workflow fixes.
 
 - [`surfaces.md`](surfaces.md) — routes and API surface inventory
 - [`learning-library.md`](learning-library.md) — the embedded GitHub library feature
+- [`systems-lab.md`](systems-lab.md) — safe simulation boundary and learning contract
 - [`../architecture/overview.md`](../architecture/overview.md) — how it's built
 - [`../../README.md`](../../README.md) — public-facing README

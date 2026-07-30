@@ -1,0 +1,62 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Learn control target sizing",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PROJECT_STATUS.md",
+    "design": "README.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design-wave2/before.png"
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design-wave2/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design-wave2/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design-wave2/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm exec biome check <changed files> && pnpm typecheck && pnpm build && git diff --check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 35,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 18,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "No deterministic detector findings in the changed surfaces.",
+        "Learn interactive targets measured 35 undersized before and 0 undersized after."
+      ]
+    }
+  },
+  "ownerFeedback": {
+    "decision": "delegated",
+    "note": "The owner explicitly delegated final judgment for design remediation wave 2 on 2026-07-29."
+  }
+}

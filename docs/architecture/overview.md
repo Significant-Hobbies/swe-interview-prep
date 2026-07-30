@@ -12,6 +12,7 @@ React SPA (Vite build → dist/)
     │
     ├── Monaco + Go code execution (client-side WASM from R2, API-proxy fallback)
     ├── Excalidraw diagrams
+    ├── Systems Lab ──► pure virtual-time reducer + checked-in evidence graphs
     ├── Socratic AI (useAI) ──► /api/chat (dev bridge) / OpenAI-compatible endpoint
     ├── Progress + FSRS hooks ──► /api/learning, /api/progress ──► Turso
     ├── Learning library + sources ──► owner-only /api/learning actions ──► Turso + remote repos
@@ -62,6 +63,15 @@ intentionally does not restate it.
   `learning-os.ts`. Mutable user state is hybrid: localStorage for guests,
   Turso for signed-in users (`useUserStore`). Signing in merges localStorage
   into the DB.
+- **Deterministic Systems Lab.** Versioned definitions under
+  `src/data/systems-labs/` describe actors, controls, reachable transitions,
+  truth planes, decisive evidence, and bounded broken-to-repaired
+  configuration challenges. `src/lib/simulation/` validates configuration
+  contracts and reduces scenarios with virtual time; it contains no adapter
+  for Kubernetes, Git, cloud, shell, or database access. Attempts and verified
+  configuration files remain account-scoped in localStorage. Only the existing
+  authenticated Feynman path may turn an explanation grade into FSRS updates,
+  and only after the configuration gate passes.
 - **FSRS spaced repetition.** Per-user per-concept state in `concept_mastery`.
   Confidence formula: `(1 + elapsed/(9×stability))^-1`. Mastery decays over
   time. The Feynman Gate grades explain-backs 0–100 and maps gaps onto

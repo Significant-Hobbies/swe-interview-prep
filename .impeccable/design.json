@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-30T00:00:00.000Z",
+  "title": "Design System: SWE Learning OS",
+  "extensions": {
+    "colorMeta": {
+      "workbench-black": {
+        "role": "neutral",
+        "displayName": "Workbench Black",
+        "canonical": "#000000"
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ededed"
+      },
+      "sky-signal": {
+        "role": "primary",
+        "displayName": "Sky Signal",
+        "canonical": "#0ea5e9"
+      },
+      "emerald-success": {
+        "role": "semantic",
+        "displayName": "Emerald Success",
+        "canonical": "#10b981"
+      },
+      "amber-warning": {
+        "role": "semantic",
+        "displayName": "Amber Warning",
+        "canonical": "#f59e0b"
+      },
+      "rose-danger": {
+        "role": "semantic",
+        "displayName": "Rose Danger",
+        "canonical": "#f43f5e"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Route-level statements only."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Teaching copy and explanatory content."
+      },
+      "label": {
+        "displayName": "Signal Label",
+        "purpose": "State, evidence, measurements, and compact metadata."
+      },
+      "detail": {
+        "displayName": "Detail",
+        "purpose": "Dense supporting metadata inside established workbench rows."
+      },
+      "micro": {
+        "displayName": "Micro Signal",
+        "purpose": "Uppercase state and truth-plane identifiers, never body copy."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "150ms ease",
+        "purpose": "Subtle color and border transitions only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ],
+    "rules": [
+      "Sky and semantic colors identify meaningful state; they do not decorate entire screens.",
+      "Use proportional type to teach and monospace type to identify, measure, or report state.",
+      "A resting surface earns hierarchy through content, border contrast, and spacing."
+    ]
+  }
+}

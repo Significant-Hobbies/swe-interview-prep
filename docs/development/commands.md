@@ -21,6 +21,24 @@ non-obvious ones. If it disagrees with `package.json`, `package.json` wins.
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm size` | `size-limit` (bundle budget; config in `.size-limit.json`). |
 
+Focused Systems Lab checks:
+
+```bash
+pnpm exec vitest run \
+  src/lib/simulation/engine.test.ts \
+  src/lib/simulation/configuration.test.ts \
+  src/lib/simulation/replay.test.ts \
+  src/data/systems-labs/systems-labs.test.ts \
+  src/lib/systemsLabAttempts.test.ts
+pnpm typecheck
+```
+
+The focused suite proves definition reachability, broken-to-repaired
+configuration challenges, byte-identical replay, versioned replay import
+validation, pinned source contracts, mutation detection, scenario outcomes,
+and the local prediction/attempt contract. It does not replace the full
+`pnpm test`, lint, build, and docs gates.
+
 ## Env + deploy gates
 
 | Command | What it does |

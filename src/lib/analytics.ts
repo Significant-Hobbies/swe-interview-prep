@@ -31,7 +31,14 @@ const PROJECT = 'swe-interview-prep' as const;
  *  - `code_run`            — code was executed in the playground.
  *  - `explanation_graded`  — a Feynman-gate explanation was graded.
  */
-export type CoreAction = 'concept_reviewed' | 'code_run' | 'explanation_graded';
+export type CoreAction = 'concept_reviewed' | 'code_run' | 'explanation_graded' | 'systems_lab';
+
+export type SystemsLabStage =
+  | 'opened'
+  | 'prediction_frozen'
+  | 'evidence_checked'
+  | 'explanation_graded'
+  | 'completed';
 
 /**
  * The fixed taxonomy. Do NOT add events here — the whole point is that all
@@ -95,6 +102,20 @@ export function trackCoreAction(action: CoreAction): void {
   // The first core action is also the activation milestone.
   trackActivated();
   emit('core_action', { action });
+}
+
+export function trackSystemsLabAction(
+  stage: SystemsLabStage,
+  properties: { labId: string; scenarioId?: string; definitionVersion: number }
+): void {
+  trackActivated();
+  trackEvent('core_action', {
+    action: 'systems_lab',
+    stage,
+    lab_id: properties.labId,
+    scenario_id: properties.scenarioId,
+    definition_version: properties.definitionVersion,
+  });
 }
 
 /** Fire on session start for a user who has prior activity. */

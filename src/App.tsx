@@ -49,6 +49,8 @@ const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Changelog = lazy(() => import('./pages/Changelog'));
 const Login = lazy(() => import('./pages/Login'));
+const SystemsLabs = lazy(() => import('./pages/SystemsLabs'));
+const SystemsLabRunner = lazy(() => import('./pages/SystemsLabRunner'));
 
 function removeLcpShell() {
   document.getElementById('lcp-shell')?.remove();
@@ -90,6 +92,8 @@ function AppRoutes() {
         <Route path="roadmaps/:id" element={<RoadmapDetail />} />
         <Route path="projects/:id" element={<ProjectDetail />} />
         <Route path="build" element={<BuildLab />} />
+        <Route path="labs" element={<SystemsLabs />} />
+        <Route path="labs/:labId" element={<SystemsLabRunner />} />
         <Route path="drills/:id" element={<BuildLab />} />
         <Route path="learning" element={<LearningDoc />} />
         <Route path="learning/:slug" element={<LearningDoc />} />

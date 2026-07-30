@@ -69,6 +69,31 @@ into `src/pages/LearningDoc.tsx`.
 5. BuildLab surfaces a "next weakest concept" card → the loop closes:
    drill → explain → mastery update → next weakest concept.
 
+## Systems Lab attempt flow
+
+1. `/labs/:labId` loads a versioned definition from the SPA bundle and
+   validates it against the checked-in concept catalog.
+2. The learner freezes one prediction. The account-scoped attempt is written
+   to localStorage; no API call occurs.
+3. The learner repairs the checked-in infrastructure files against the visible
+   delivery brief. Stable slot checks produce local configuration evidence;
+   edits after success invalidate the gate.
+4. Start, step, next-decision, and finish actions pass through a pure reducer.
+   Virtual transitions update actor state and append immutable event/evidence
+   records.
+5. On the terminal transition, deterministic comparison records whether the
+   prediction matched and which decisive evidence IDs were produced. No
+   mastery write occurs.
+6. A guest can save an explanation locally with mastery `pending`. After the
+   configuration gate passes, an authenticated learner can submit the
+   simulation artifact and explanation to the existing `feynman` action.
+7. An accepted grade follows the existing Feynman → concept mastery → review
+   question flow. Build mode and simulation add no database table or API
+   action.
+
+The runner itself has no runtime network edge. Primary-source links are normal
+external reading links and are not part of simulation execution.
+
 ## Code execution flow
 
 Source of truth `src/hooks/useCodeExecution.ts`. JavaScript and TypeScript

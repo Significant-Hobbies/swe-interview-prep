@@ -19,6 +19,7 @@ disagrees with code, code wins.
 | `/mock` | Timed mock interview |
 | `/progress`, `/progress/all` | Mastery rollups + notes |
 | `/build`, `/drills/:id` | BuildLab (hands-on build/drill workspace) |
+| `/labs`, `/labs/:labId` | Systems Lab catalog + configuration workshop + deterministic scenario runner |
 | `/library`, `/library/:repoSlug` | Embedded GitHub learning-library reader |
 | `/sources`, `/sources/:id` | Unified learning-sources index |
 | `/session/:date`, `/session/:date/:sessionId` | Adaptive learning session |
@@ -42,6 +43,13 @@ progress worth losing.
 
 Guest state is localStorage-only and namespaced per account, so signing in
 adopts a guest pass rather than discarding it.
+
+Systems Lab attempts are also account-scoped in localStorage. A guest may
+repair the bounded infrastructure configuration, predict, run, inspect
+evidence, retry, and draft an explanation. The attempt stays labeled
+mastery-pending until the configuration passes and an authenticated Feynman
+grade is accepted; clicking through or guessing never writes FSRS credit. The
+configuration validator and simulation make no API request.
 
 **Guests make no authenticated API calls.** Every `AUTH_ACTIONS` request goes
 through `src/lib/learningApi.ts`, which skips the call and resolves `null` when

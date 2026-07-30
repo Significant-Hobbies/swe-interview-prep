@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-07-25
+Last updated: 2026-07-30
 
 ## Why/What
 
@@ -66,6 +66,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Phase | Milestone |
 |-------|-----------|
 | Owned changelog (2026-07-29) | Added a public `/changelog` with verified release outcomes and direct GitHub Roadmap and Source links. |
+| Deterministic Systems Lab (2026-07-30) | Added a local-only `/labs` learning environment with versioned GitOps, OpenTelemetry sampling, and Managed Prometheus scenarios. Learners repair bounded infrastructure configurations, freeze predictions, replay virtual-time transitions, inspect actor-owned evidence, and must pass both configuration and authenticated Feynman gates before FSRS mastery can change. |
 | Platform migration | Cloudflare Pages static frontend + Pages Functions backend; Turso persistence; Google One Tap auth |
 | Core study surfaces | DSA practice (Monaco), LLD/HLD (Excalidraw), behavioral/concept routes, Build Lab, Playground |
 | Learning loops | Progress tracking across categories; ts-fsrs spaced repetition; multi-provider AI hints |
@@ -122,6 +123,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - **Behavioral / concepts:** Learn and concept-detail routes with structured content paths.
 - **Build Lab** and project-detail surfaces for hands-on build exercises.
 - **Playground** isolated coding sandbox route.
+- **Systems Lab:** versioned, deterministic GitOps, trace-sampling, and metrics-ingestion scenarios with no cluster, cloud, Git, credential, database, or shell connection. Each lab includes a broken-to-repaired configuration capstone; attempts preserve verified files, frozen predictions, and evidence locally. Guest mastery remains pending until authenticated explain-back grading.
 - **Progress tracking:** completion rates across DSA, LLD, HLD, and behavioral categories (`useProgress`).
 - **Spaced repetition:** Anki-style review flow with ts-fsrs scheduling (`useSpacedRepetition`, review pages).
 - **Feynman Gate → FSRS progression (default flow):** solving a drill triggers a skippable explain-back nudge; the AI-graded explanation maps onto per-concept FSRS ratings (`feynmanRating`), updates mastery, then surfaces a "next weakest concept" card (BuildLab) so the loop closes: drill → explain → mastery update → next weakest concept. Playground's manual gate also refreshes mastery on grade.

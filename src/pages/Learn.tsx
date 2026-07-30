@@ -1,4 +1,4 @@
-import { ArrowRight, Gauge } from 'lucide-react';
+import { ArrowRight, FlaskConical, Gauge } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -64,6 +64,27 @@ function SweepDoor() {
   );
 }
 
+function SystemsLabDoor() {
+  return (
+    <Link
+      to="/labs"
+      className="mt-4 flex min-h-20 items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
+    >
+      <div className="flex min-w-0 items-start gap-3">
+        <FlaskConical className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
+        <div>
+          <div className="font-medium text-white">Open Systems Lab</div>
+          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-white/50">
+            Predict and replay GitOps, trace sampling, and metrics ingestion without a cluster,
+            credential, or cloud account.
+          </p>
+        </div>
+      </div>
+      <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
+    </Link>
+  );
+}
+
 const HORIZON_LABEL: Record<string, string> = {
   '9d': '9 days',
   '30d': '30 days',
@@ -114,6 +135,7 @@ export default function Learn() {
       </div>
 
       <SweepDoor />
+      <SystemsLabDoor />
 
       <PathDoor activeRoadmapId={active.id} className="mt-10" />
 

@@ -33,6 +33,7 @@ import {
   reviewQuestionsForConcept,
   topicPackForConcept,
 } from '../data/learning-os';
+import { getLabsForConcept } from '../data/systems-labs';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useGates } from '../hooks/useGates';
 import { confidence1to5, deriveConceptStatus } from '../lib/conceptState';
@@ -76,6 +77,7 @@ export default function ConceptDetail() {
   const questions = reviewQuestionsForConcept(concept.id);
   const gate = gateStatus(concept.id);
   const topicPack = topicPackForConcept(concept);
+  const systemsLabs = getLabsForConcept(concept.id);
 
   async function copyAiPrompt() {
     try {
@@ -228,6 +230,31 @@ export default function ConceptDetail() {
           </section>
 
           <TopicPackView concept={concept} pack={topicPack} />
+
+          {systemsLabs.length > 0 && (
+            <section>
+              <SectionTitle>Systems Lab</SectionTitle>
+              <div className="overflow-hidden rounded-xl border border-white/[0.08]">
+                {systemsLabs.map((lab, index) => (
+                  <Link
+                    key={lab.id}
+                    to={`/labs/${lab.id}`}
+                    className={`group flex min-h-20 items-center justify-between gap-4 bg-black px-4 py-3 transition-colors hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/50 ${
+                      index > 0 ? 'border-t border-white/[0.08]' : ''
+                    }`}
+                  >
+                    <div>
+                      <div className="text-sm font-medium text-white">{lab.title}</div>
+                      <div className="mt-1 text-xs leading-relaxed text-white/45">
+                        {lab.scenarios.length} deterministic scenarios · predict, inspect, explain
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Common mistakes */}
           {concept.commonMistakes && concept.commonMistakes.length > 0 && (

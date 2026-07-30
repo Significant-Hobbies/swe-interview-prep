@@ -4,6 +4,7 @@ import {
   CheckCircle2,
   Circle,
   ExternalLink,
+  FlaskConical,
   Hammer,
   Lightbulb,
   Play,
@@ -123,12 +124,20 @@ function ArtifactBoard() {
         title="Build Lab"
         subtitle="No learning without an artifact. Move each one from idea to shipped — code, benchmark, or design doc. Shipping nudges its concepts toward mastered."
         actions={
-          <Link
-            to="/playground"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800"
-          >
-            <Hammer className="h-4 w-4" /> Open workspace
-          </Link>
+          <>
+            <Link
+              to="/labs"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-slate-700 px-3 text-sm text-slate-300 hover:bg-slate-800"
+            >
+              <FlaskConical className="h-4 w-4" /> Systems Lab
+            </Link>
+            <Link
+              to="/playground"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-slate-700 px-3 text-sm text-slate-300 hover:bg-slate-800"
+            >
+              <Hammer className="h-4 w-4" /> Open workspace
+            </Link>
+          </>
         }
       />
 
