@@ -2,12 +2,12 @@
 
 Agent bootloader. Read this first, then follow the links for depth.
 
-## Shared Fleet Standard
+## Repository operating rules
 
-Also read and follow the shared fleet-level agent standard at `../AGENTS.md`.
-Treat this repository as owned product code: protect production stability,
-keep changes scoped, verify work, and record durable follow-up tasks when
-something remains incomplete or blocked.
+This repository is independently operable. Its tracked instructions and
+commands are authoritative; no sibling Fleet checkout is required. Protect
+production stability, keep changes scoped, verify work with repo-local checks,
+and record durable follow-up in this repository's GitHub Issues.
 
 ## Purpose
 
