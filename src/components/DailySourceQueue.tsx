@@ -13,17 +13,23 @@ export function DailySourceQueue() {
   if (!briefing && !next) return null;
 
   return (
-    <section className="mb-10">
-      <div className="mb-3 flex items-center justify-between gap-4">
-        <h2 className="text-sm font-semibold text-white">Across your learning sources</h2>
+    <section className="mt-12 mb-10">
+      <div className="mb-3 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-sm font-semibold text-white">Optional source session</h2>
+          <p className="mt-1 text-xs text-white/60">Go deeper after today&apos;s primary plan.</p>
+        </div>
         <div className="flex items-center gap-4">
           <Link
             to={`/session/${new Date().toISOString().slice(0, 10)}/${Date.now()}`}
-            className="text-xs font-medium text-sky-300 hover:text-sky-200"
+            className="inline-flex min-h-11 items-center text-xs font-medium text-sky-300 hover:text-sky-200"
           >
             Start 30-minute session
           </Link>
-          <Link to="/sources" className="text-xs text-white/40 hover:text-white">
+          <Link
+            to="/sources"
+            className="inline-flex min-h-11 items-center text-xs text-white/60 hover:text-white"
+          >
             Browse all
           </Link>
         </div>
@@ -80,14 +86,14 @@ function QueueCard({
       <h3 className="mt-4 line-clamp-2 text-lg font-semibold leading-snug text-white">
         {item.title}
       </h3>
-      <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/45">{item.summary}</p>
+      <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/60">{item.summary}</p>
       <div className="mt-auto flex items-center justify-between gap-4 pt-5">
-        <span className="inline-flex items-center gap-1 text-xs text-white/30">
+        <span className="inline-flex items-center gap-1 text-xs text-white/60">
           <Clock className="h-3.5 w-3.5" /> {item.estimatedMinutes} min
         </span>
         <Link
           to={`/sources/${encodeURIComponent(item.id)}`}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-300 hover:text-sky-200"
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-sky-300 hover:text-sky-200"
         >
           Start <ArrowRight className="h-4 w-4" />
         </Link>

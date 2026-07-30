@@ -996,7 +996,7 @@ const trackSummary = TRACKS.map(
 ).join('');
 const staticContent = `${startMarker}
           <section style="max-width:64rem;margin:0 auto;padding:1rem 1.5rem 5rem;">
-            <h2 style="font-size:1.5rem;margin:0 0 1rem;">A complete software engineering learning map</h2>
+            <h1 style="font-size:1.5rem;margin:0 0 1rem;">A complete software engineering learning map</h1>
             <p>Browse ${TRACKS.length} tracks, ${CONCEPTS.length} concepts, and ${ROADMAPS.length} sequenced roadmaps. The curriculum connects systems foundations, infrastructure, distributed systems, databases, search, DSA, AI training and inference, agent reliability, developer tools, applications, and multimodal computing to active practice.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Learn through evidence, not passive reading</h2>
             <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>

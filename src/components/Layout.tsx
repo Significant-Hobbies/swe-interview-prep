@@ -105,6 +105,7 @@ export default function Layout() {
               ) : isGuest ? (
                 <button
                   onClick={signInWithGoogle}
+                  aria-label="Sign in with Google"
                   className="ml-1 inline-flex min-h-11 items-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
                 >
                   <LogIn className="h-3.5 w-3.5" />
@@ -147,7 +148,7 @@ export default function Layout() {
                 Optional: personalize Today&apos;s session mix and active path.
               </p>
               <div className="flex items-center gap-4 font-mono text-[11px]">
-                <Link to="/explore" className="text-white/45 transition-colors hover:text-white/70">
+                <Link to="/explore" className="text-white/60 transition-colors hover:text-white/80">
                   Explore catalog
                 </Link>
                 <Link to="/onboarding" className="text-white/70 transition-colors hover:text-white">
@@ -157,7 +158,7 @@ export default function Layout() {
                   type="button"
                   onClick={dismissSetupHint}
                   aria-label="Dismiss setup hint"
-                  className="text-white/30 transition-colors hover:text-white/70"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-white/60 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>

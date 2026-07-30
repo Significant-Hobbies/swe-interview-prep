@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 | Phase | Milestone |
 |-------|-----------|
+| Homepage clarity and search semantics (2026-07-31) | Made the generated JavaScript-independent homepage summary emit the page's canonical H1 and current 19-track/250-concept metadata. The Today workspace now leads with its primary plan, makes source reading explicitly optional, restores visible keyboard focus and named mobile controls, raises supporting-copy contrast, and uses 44px targets for key actions. The richer curriculum agent catalog remains intact; local format, lint, typecheck, 327 tests, and production build pass. Production deployment remains separate. |
 | Owned changelog (2026-07-29) | Added a public `/changelog` with verified release outcomes and direct GitHub Roadmap and Source links. |
 | Deterministic Systems Lab (2026-07-30) | Added a local-only `/labs` learning environment with versioned GitOps, OpenTelemetry sampling, and Managed Prometheus scenarios. Learners repair bounded infrastructure configurations, freeze predictions, replay virtual-time transitions, inspect actor-owned evidence, and must pass both configuration and authenticated Feynman gates before FSRS mastery can change. |
 | Platform migration | Cloudflare Pages static frontend + Pages Functions backend; Turso persistence; Google One Tap auth |
