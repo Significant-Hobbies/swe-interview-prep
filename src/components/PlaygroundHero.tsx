@@ -11,7 +11,7 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
     return (
       <Link
         to="/playground"
-        className={`group flex items-center justify-between gap-4 rounded-xl border border-sky-500/20 bg-gradient-to-r from-sky-500/10 via-transparent to-violet-500/10 px-4 py-3 transition-colors hover:border-sky-500/35 ${className}`}
+        className={`group flex min-h-14 items-center justify-between gap-4 rounded-xl border border-sky-500/20 bg-white/[0.02] px-4 py-3 transition-colors hover:border-sky-500/35 hover:bg-white/[0.04] ${className}`}
       >
         <div className="flex min-w-0 items-center gap-3">
           <Code2 className="h-5 w-5 shrink-0 text-sky-400" />
@@ -30,7 +30,7 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
   return (
     <section
       aria-label="Playground"
-      className={`overflow-hidden rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/12 via-black to-violet-500/10 ${className}`}
+      className={`overflow-hidden rounded-2xl border border-sky-500/20 bg-white/[0.02] ${className}`}
     >
       <div className="flex flex-col gap-6 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="max-w-lg">
@@ -49,7 +49,7 @@ export default function PlaygroundHero({ className = '', compact = false }: Play
         <div className="flex shrink-0 flex-col gap-2 sm:items-end">
           <Link
             to="/playground"
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-white/90"
+            className="group inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-white/90"
           >
             Open Playground
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

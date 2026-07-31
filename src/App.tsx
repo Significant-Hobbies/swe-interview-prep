@@ -171,10 +171,10 @@ export default function App() {
 
   return (
     <>
-      {!isPublicShare && <SaaSMakerFeedback />}
       <ErrorBoundary scope="route">
         <Suspense fallback={<RouteLoading />}>{body}</Suspense>
       </ErrorBoundary>
+      {!isPublicShare && <SaaSMakerFeedback />}
     </>
   );
 }

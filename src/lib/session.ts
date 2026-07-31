@@ -33,16 +33,6 @@ export function recordSessionActivity(kind: string): void {
   saveSessions(next);
 }
 
-export function markSessionComplete(): void {
-  const date = todayStr();
-  const logs = loadSessions();
-  const row = logs.find((l) => l.date === date) ?? { date, kinds: [], completed: false };
-  row.completed = true;
-  const next = logs.filter((l) => l.date !== date);
-  next.push(row);
-  saveSessions(next);
-}
-
 export function computeSessionStreak(): number {
   const logs = loadSessions();
   const byDate = new Map(logs.map((l) => [l.date, l]));

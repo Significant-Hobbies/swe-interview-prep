@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, Clock, Newspaper } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronDown, Clock, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -13,53 +13,63 @@ export function DailySourceQueue() {
   if (!briefing && !next) return null;
 
   return (
-    <section className="mt-12 mb-10">
-      <div className="mb-3 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="text-sm font-semibold text-white">Optional source session</h2>
-          <p className="mt-1 text-xs text-white/60">Go deeper after today&apos;s primary plan.</p>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link
-            to={`/session/${new Date().toISOString().slice(0, 10)}/${Date.now()}`}
-            className="inline-flex min-h-11 items-center text-xs font-medium text-sky-300 hover:text-sky-200"
-          >
-            Start 30-minute session
-          </Link>
-          <Link
-            to="/sources"
-            className="inline-flex min-h-11 items-center text-xs text-white/60 hover:text-white"
-          >
-            Browse all
-          </Link>
-        </div>
-      </div>
-      {/* Two columns only when both cards exist — the briefing is dropped once
-          the feed goes stale, and a lone card in a 2-col grid leaves a visibly
-          empty half. The survivor also drops the min-height it needed to match
-          a sibling, so it sizes to its own content instead of a tall empty box. */}
-      <div
-        className={`grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 ${
-          briefing && next ? 'md:grid-cols-2' : 'grid-cols-1'
-        }`}
-      >
-        {briefing && (
-          <QueueCard
-            item={briefing}
-            label="Start with the news"
-            icon={Newspaper}
-            matchHeight={Boolean(next)}
+    <section className="my-8">
+      <details className="group rounded-xl border border-white/[0.08] bg-white/[0.02]">
+        <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-xl py-3 pl-4 pr-16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black lg:pr-4">
+          <span>
+            <span className="block text-sm font-semibold text-white">Go deeper with sources</span>
+            <span className="mt-1 block text-xs text-white/60">
+              Optional reading after today&apos;s evidence-backed plan.
+            </span>
+          </span>
+          <ChevronDown
+            className="h-4 w-4 shrink-0 text-white/50 transition-transform group-open:rotate-180"
+            aria-hidden="true"
           />
-        )}
-        {next && (
-          <QueueCard
-            item={next}
-            label="Then go deeper"
-            icon={BookOpen}
-            matchHeight={Boolean(briefing)}
-          />
-        )}
-      </div>
+        </summary>
+        <div className="border-t border-white/[0.08] p-4">
+          <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link
+              to={`/session/${new Date().toISOString().slice(0, 10)}/${Date.now()}`}
+              className="inline-flex min-h-11 items-center text-xs font-medium text-sky-300 hover:text-sky-200"
+            >
+              Start 30-minute session
+            </Link>
+            <Link
+              to="/sources"
+              className="inline-flex min-h-11 items-center text-xs text-white/60 hover:text-white"
+            >
+              Browse all
+            </Link>
+          </div>
+          {/* Two columns only when both cards exist — the briefing is dropped once
+              the feed goes stale, and a lone card in a 2-col grid leaves a visibly
+              empty half. The survivor also drops the min-height it needed to match
+              a sibling, so it sizes to its own content instead of a tall empty box. */}
+          <div
+            className={`grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 ${
+              briefing && next ? 'md:grid-cols-2' : 'grid-cols-1'
+            }`}
+          >
+            {briefing && (
+              <QueueCard
+                item={briefing}
+                label="Start with the news"
+                icon={Newspaper}
+                matchHeight={Boolean(next)}
+              />
+            )}
+            {next && (
+              <QueueCard
+                item={next}
+                label="Then go deeper"
+                icon={BookOpen}
+                matchHeight={Boolean(briefing)}
+              />
+            )}
+          </div>
+        </div>
+      </details>
     </section>
   );
 }
