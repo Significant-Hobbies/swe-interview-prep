@@ -54,12 +54,16 @@ export default function SystemsLabs() {
 
       <div className="overflow-hidden rounded-xl border border-white/[0.08]">
         {systemsLabs.map((lab, index) => {
-          const completed = attempts.filter(
-            (attempt) =>
-              attempt.labId === lab.id &&
-              attempt.definitionVersion === lab.version &&
-              (attempt.status === 'completed' || attempt.status === 'explained')
-          ).length;
+          const completed = new Set(
+            attempts
+              .filter(
+                (attempt) =>
+                  attempt.labId === lab.id &&
+                  attempt.definitionVersion === lab.version &&
+                  (attempt.status === 'completed' || attempt.status === 'explained')
+              )
+              .map((attempt) => attempt.scenarioId)
+          ).size;
           const explained = attempts.filter(
             (attempt) =>
               attempt.labId === lab.id &&
@@ -79,7 +83,7 @@ export default function SystemsLabs() {
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
                     <FlaskConical className="h-4 w-4 text-white/45" aria-hidden="true" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/50">
                       {lab.eyebrow}
                     </span>
                     <Badge>v{lab.version}</Badge>
@@ -111,13 +115,13 @@ export default function SystemsLabs() {
                 </div>
 
                 <div className="flex items-center justify-between gap-8 lg:min-w-52">
-                  <div className="font-mono text-xs text-white/45">
+                  <div className="font-mono text-xs text-white/55">
                     <div className="flex items-center gap-1.5">
                       <Clock3 className="h-3.5 w-3.5" />
                       {lab.estimatedMinutes} min
                     </div>
                     <div className="mt-1.5 tabular-nums">
-                      {completed}/{lab.scenarios.length} attempts complete
+                      {completed}/{lab.scenarios.length} scenarios complete
                     </div>
                     <div className="mt-1.5 tabular-nums">
                       {lab.configurationChallenge.slots.length} setup checks
@@ -131,7 +135,7 @@ export default function SystemsLabs() {
         })}
       </div>
 
-      <p className="mt-6 max-w-3xl text-xs leading-relaxed text-white/40">
+      <p className="mt-6 max-w-3xl text-xs leading-relaxed text-white/55">
         These are intentionally models, not emulators. They preserve the controller boundaries and
         evidence relationships needed to reason correctly, while refusing every real credential and
         side effect.

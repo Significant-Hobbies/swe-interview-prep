@@ -1,0 +1,78 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Systems Lab catalog and runner",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/systems-lab-before-learn-1440.png"
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/systems-lab-after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/systems-lab-after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/systems-lab-after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm test && pnpm typecheck && pnpm lint && pnpm docs:validate && VITE_GOOGLE_CLIENT_ID=local-build-placeholder.apps.googleusercontent.com pnpm build && pnpm exec playwright test tests/e2e/systems-lab.spec.ts --project=desktop",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 33,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 18,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        {
+          "rule": "functional-text-contrast",
+          "count": 1,
+          "disposition": "resolved",
+          "note": "Raised functional evidence, validation, progress, and provenance text to WCAG AA contrast."
+        },
+        {
+          "rule": "interactive-selection-state",
+          "count": 2,
+          "disposition": "resolved",
+          "note": "Added pressed states for file and evidence selection plus a live evidence detail region."
+        },
+        {
+          "rule": "unrelated-generated-artifacts",
+          "count": 3,
+          "disposition": "pre-existing",
+          "note": "Detector findings in design.html, generated Playwright output, and the static shell are outside the Systems Lab target."
+        }
+      ]
+    }
+  },
+  "ownerFeedback": {
+    "decision": "delegated",
+    "note": "Owner approved all requested queue work and delegated execution on 2026-07-31."
+  }
+}

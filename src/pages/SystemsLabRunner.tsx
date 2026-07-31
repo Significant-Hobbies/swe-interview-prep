@@ -53,7 +53,7 @@ import {
 } from '../lib/systemsLabAttempts';
 
 const STATUS_TONE: Record<ActorStatus, string> = {
-  idle: 'text-white/45 border-white/10',
+  idle: 'text-white/55 border-white/10',
   queued: 'text-sky-200 border-sky-300/20',
   running: 'text-sky-200 border-sky-300/20',
   waiting: 'text-amber-200 border-amber-300/20',
@@ -383,7 +383,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
       <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/50">
               {lab.eyebrow}
             </span>
             <Badge>definition v{lab.version}</Badge>
@@ -397,7 +397,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/55">{lab.summary}</p>
         </div>
-        <div className="font-mono text-xs text-white/40">
+        <div className="font-mono text-xs text-white/55">
           <div>{scenario.transitions.length} deterministic transitions</div>
           <div className="mt-1">{lab.actors.length} independent actors</div>
         </div>
@@ -430,7 +430,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
               );
               return (
                 <div key={control.id} className="bg-black p-3">
-                  <div className="text-xs text-white/45">{control.label}</div>
+                  <div className="text-xs text-white/55">{control.label}</div>
                   <div className="mt-1 font-mono text-xs text-white">
                     {option?.label ?? String(scenario.controls[control.id])}
                   </div>
@@ -513,10 +513,10 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
       <section className="mb-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/50">
               4 · Run the model
             </h2>
-            <p className="mt-2 text-xs text-white/45">
+            <p className="mt-2 text-xs text-white/55">
               Virtual tick {snapshot.tick} · {snapshot.phase} · {snapshot.eventLog.length}/
               {scenario.transitions.length} transitions
             </p>
@@ -593,14 +593,14 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                         {actor.status}
                       </span>
                     </div>
-                    <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/35">
+                    <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">
                       {actor.truthPlane} · {actor.kind}
                     </div>
                   </div>
                   <div>
                     <p className="text-xs leading-relaxed text-white/55">{actor.detail}</p>
                     {Object.keys(actor.metrics).length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] text-white/40">
+                      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] text-white/50">
                         {Object.entries(actor.metrics).map(([key, value]) => (
                           <span key={key}>
                             {key}=<span className="text-white/70">{String(value)}</span>
@@ -619,7 +619,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
               <h3 className="text-sm font-medium text-white">Ordered event log</h3>
             </div>
             {snapshot.eventLog.length === 0 ? (
-              <div className="p-6 text-sm text-white/40">No transitions applied yet.</div>
+              <div className="p-6 text-sm text-white/55">No transitions applied yet.</div>
             ) : (
               <ol className="divide-y divide-white/[0.08]">
                 {snapshot.eventLog.map((event) => (
@@ -627,12 +627,12 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                     key={event.transitionId}
                     className="grid grid-cols-[auto_1fr] gap-3 px-4 py-3"
                   >
-                    <span className="font-mono text-[10px] tabular-nums text-white/35">
+                    <span className="font-mono text-[10px] tabular-nums text-white/50">
                       t{event.tick}
                     </span>
                     <div>
                       <div className="text-xs font-medium text-white">{event.title}</div>
-                      <p className="mt-1 text-xs leading-relaxed text-white/45">
+                      <p className="mt-1 text-xs leading-relaxed text-white/55">
                         {event.description}
                       </p>
                     </div>
@@ -699,7 +699,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.7fr)]">
           <Card className="overflow-hidden">
             {snapshot.evidence.length === 0 ? (
-              <div className="p-6 text-sm text-white/40">
+              <div className="p-6 text-sm text-white/55">
                 Evidence appears only when its producing transition runs.
               </div>
             ) : (
@@ -709,6 +709,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                     key={item.id}
                     type="button"
                     onClick={() => inspectEvidence(item)}
+                    aria-pressed={selectedEvidenceId === item.id}
                     className={`grid min-h-14 w-full gap-2 px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/50 sm:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)] ${
                       selectedEvidenceId === item.id ? 'bg-white/[0.06]' : 'hover:bg-white/[0.03]'
                     }`}
@@ -718,7 +719,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                         <span className="text-xs font-medium text-white">{item.label}</span>
                         {item.decisive && <Badge tone="amber">decisive</Badge>}
                       </div>
-                      <div className="mt-1 font-mono text-[10px] text-white/35">
+                      <div className="mt-1 font-mono text-[10px] text-white/50">
                         t{item.tick} · {item.truthPlane} · {item.kind}
                       </div>
                     </div>
@@ -730,26 +731,28 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
           </Card>
 
           <Card className="p-4">
-            {selectedEvidence ? (
-              <>
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
-                  Produced by {snapshot.actorStates[selectedEvidence.actorId]?.label}
+            <div aria-live="polite">
+              {selectedEvidence ? (
+                <>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/50">
+                    Produced by {snapshot.actorStates[selectedEvidence.actorId]?.label}
+                  </div>
+                  <h3 className="mt-2 text-base font-semibold text-white">
+                    {selectedEvidence.label}
+                  </h3>
+                  <div className="mt-3 break-words rounded-md border border-white/10 bg-black p-3 font-mono text-sm text-white">
+                    {String(selectedEvidence.value)}
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">
+                    {selectedEvidence.detail}
+                  </p>
+                </>
+              ) : (
+                <div className="flex min-h-32 items-center justify-center text-center text-sm text-white/55">
+                  Select an evidence record to inspect its owner and meaning.
                 </div>
-                <h3 className="mt-2 text-base font-semibold text-white">
-                  {selectedEvidence.label}
-                </h3>
-                <div className="mt-3 break-words rounded-md border border-white/10 bg-black p-3 font-mono text-sm text-white">
-                  {String(selectedEvidence.value)}
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">
-                  {selectedEvidence.detail}
-                </p>
-              </>
-            ) : (
-              <div className="flex min-h-32 items-center justify-center text-center text-sm text-white/40">
-                Select an evidence record to inspect its owner and meaning.
-              </div>
-            )}
+              )}
+            </div>
           </Card>
         </div>
       </section>
@@ -778,7 +781,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                   {scenario.expectedOutcome.summary}
                 </p>
                 <div className="mt-5">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/50">
                     Decisive records
                   </div>
                   <ul className="mt-2 space-y-2">
@@ -816,7 +819,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                   >
                     Explain the causal chain
                   </label>
-                  <p className="mt-1 text-xs leading-relaxed text-white/45">
+                  <p className="mt-1 text-xs leading-relaxed text-white/55">
                     Name the branch or controller decision, the decisive evidence, and one nearby
                     counterfactual that would change the outcome.
                   </p>
@@ -840,7 +843,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                         Grade causal explanation
                       </Button>
                     ) : (
-                      <div className="text-xs leading-relaxed text-white/45">
+                      <div className="text-xs leading-relaxed text-white/55">
                         Saved locally. Sign in to grade this explanation and apply FSRS mastery.
                       </div>
                     )}
@@ -887,7 +890,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
         </div>
         <div>
           <SectionTitle>Verification provenance</SectionTitle>
-          <p className="mb-3 text-xs leading-relaxed text-white/45">{lab.fidelity.summary}</p>
+          <p className="mb-3 text-xs leading-relaxed text-white/55">{lab.fidelity.summary}</p>
           <div className="space-y-3">
             {lab.provenance.map((record) => (
               <a
@@ -900,10 +903,10 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                 <span className="inline-flex items-center gap-1.5 text-sm text-white/75 group-hover:text-white">
                   {record.project} <ExternalLink className="h-3.5 w-3.5" />
                 </span>
-                <span className="mt-1 block font-mono text-[10px] text-white/40">
+                <span className="mt-1 block font-mono text-[10px] text-white/50">
                   {record.revision.slice(0, 12)} · {record.method} · {record.license}
                 </span>
-                <span className="mt-1 block text-xs leading-relaxed text-white/40">
+                <span className="mt-1 block text-xs leading-relaxed text-white/55">
                   {record.note}
                 </span>
               </a>
@@ -924,7 +927,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
                 <span className="inline-flex items-center gap-1.5 text-sm text-white/75 group-hover:text-white">
                   {source.label} <ExternalLink className="h-3.5 w-3.5" />
                 </span>
-                <span className="mt-1 block text-xs leading-relaxed text-white/40">
+                <span className="mt-1 block text-xs leading-relaxed text-white/55">
                   {source.note}
                 </span>
               </a>

@@ -72,7 +72,7 @@ export default function ConfigurationWorkshop({
               {challenge.summary}
             </p>
           </div>
-          <div className="font-mono text-[10px] text-white/35">
+          <div className="font-mono text-[10px] text-white/50">
             {challenge.slots.length} setup checks
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function ConfigurationWorkshop({
           {challenge.objective}
         </p>
         <div className="mt-4">
-          <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+          <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">
             Delivery brief
           </div>
           <ul className="mt-2 space-y-1.5">
@@ -105,17 +105,18 @@ export default function ConfigurationWorkshop({
                   key={file.id}
                   type="button"
                   onClick={() => setActiveFileId(file.id)}
-                  className={`min-h-9 rounded-md px-2.5 font-mono text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 ${
+                  aria-pressed={file.id === activeFileId}
+                  className={`min-h-11 rounded-md px-2.5 font-mono text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 ${
                     file.id === activeFileId
                       ? 'bg-white/[0.08] text-white'
-                      : 'text-white/40 hover:text-white/70'
+                      : 'text-white/55 hover:text-white/70'
                   }`}
                 >
                   {file.label}
                 </button>
               ))}
             </div>
-            <span className="font-mono text-[10px] text-white/35">{activeFile.path}</span>
+            <span className="font-mono text-[10px] text-white/50">{activeFile.path}</span>
           </div>
           <label htmlFor={`configuration-${challenge.id}-${activeFile.id}`} className="sr-only">
             Edit {activeFile.path}
@@ -141,13 +142,13 @@ export default function ConfigurationWorkshop({
           <div className="flex items-center justify-between gap-3">
             <h4 className="text-sm font-medium text-white">Configuration checks</h4>
             {results && (
-              <span className="font-mono text-[10px] text-white/40">
+              <span className="font-mono text-[10px] text-white/50">
                 {passedCount}/{results.length} pass
               </span>
             )}
           </div>
           {!results ? (
-            <p className="mt-3 text-xs leading-relaxed text-white/45">
+            <p className="mt-3 text-xs leading-relaxed text-white/55">
               Repair the marked setup decisions, then validate. Failures identify the broken
               contract without supplying the replacement line.
             </p>
@@ -162,7 +163,7 @@ export default function ConfigurationWorkshop({
                   )}
                   <div>
                     <div className="text-xs font-medium text-white">{result.label}</div>
-                    <p className="mt-1 text-xs leading-relaxed text-white/45">
+                    <p className="mt-1 text-xs leading-relaxed text-white/55">
                       {result.passed ? result.evidence : result.hint}
                     </p>
                   </div>

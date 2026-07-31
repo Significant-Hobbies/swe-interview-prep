@@ -3,7 +3,7 @@
 - [x] 1.1 Create the owning GitHub issue and link this OpenSpec change before feature implementation
 - [x] 1.2 Initialize missing product/design context through the required Impeccable workflow without changing the established product identity
 - [x] 1.3 Create a preserve-lane design-review receipt for the Systems Lab catalog and runner
-- [ ] 1.4 Capture before-state browser evidence for the Learn, Build Lab, Playground, and compact-layout patterns being reused
+- [x] 1.4 Capture before-state browser evidence for the Learn, Build Lab, Playground, and compact-layout patterns being reused
 
 ## 2. Simulation Engine
 
@@ -74,10 +74,10 @@
 - [x] 9.1 Run focused engine, definition, route, attempt, and mastery tests
 - [x] 9.2 Run repository typecheck, lint, full unit tests, docs validation, and production build
 - [x] 9.3 Verify offline execution and confirm the runner makes no external requests
-- [ ] 9.4 Capture runner browser evidence at 390, 768, and 1440 pixels and verify keyboard-only completion
-- [ ] 9.5 Run Impeccable critique, polish, and audit; resolve every P0/P1 and meet the Fleet score floors
+- [x] 9.4 Capture runner browser evidence at 390, 768, and 1440 pixels and verify keyboard-only completion
+- [x] 9.5 Run Impeccable critique, polish, and audit; resolve every P0/P1 and meet the Fleet score floors
 - [x] 9.6 Update canonical product, architecture, surface, command, and learning documentation for the shipped capability
-- [ ] 9.7 Validate the design-review receipt and obtain owner `keep` or `delegated` feedback
+- [x] 9.7 Validate the design-review receipt and obtain owner `keep` or `delegated` feedback
 - [x] 9.8 Run strict OpenSpec validation before requesting implementation review
 
 ## 10. Source-grounded Robustness
