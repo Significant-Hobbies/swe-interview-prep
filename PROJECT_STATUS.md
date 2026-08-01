@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-07-30
+Last updated: 2026-08-01
 
 ## Why/What
 
@@ -21,7 +21,7 @@ Out of scope: ATS/job-application features, Vercel/serverless migration, and new
 | Frontend | React 19, Vite, React Router, Tailwind CSS |
 | Editor / viz | Monaco Editor, Excalidraw; TypeScript runs in-browser (sucrase); Go via client-side WASM interpreter (R2-hosted) with `/api/go-run`→go.dev fallback |
 | Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `ai` |
-| Database | Turso (libSQL) — user progress, notes, FSRS concept mastery, imported problems |
+| Database | Cloudflare D1 — user progress, notes, FSRS concept mastery, imported problems |
 | Auth | Google One Tap → JWT httpOnly cookie |
 | AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint; in-process Vite dev AI bridge (claude/codex/gemini CLIs, no keys) |
 | SRS | ts-fsrs (FSRS algorithm — not SM-2) |
@@ -39,21 +39,21 @@ React SPA (Vite)
     ├── Monaco + Go WASM code execution (R2 asset)
     ├── Excalidraw diagrams
     ├── AI hints (useAI) ──► OpenAI-compatible endpoint (server) OR in-process Vite dev bridge (/api/chat not served by prod Function)
-    ├── Progress + FSRS hooks ──► Turso via Functions (/api/progress, /api/learning)
+    ├── Progress + FSRS hooks ──► D1 via Functions (/api/progress, /api/learning)
     └── Google One Tap ──► /api/auth/google ──► JWT cookie
 
-Turso tables (19): users, user_progress, user_notes, user_chats, user_imported_problems, concept_mastery, activity_log, … (source: shared/db/schema.mjs)
+D1 tables (19): users, user_progress, user_notes, user_chats, user_imported_problems, concept_mastery, activity_log, … (source: migrations/d1)
 External: LeetCode API (import), multi-provider LLM APIs
 ```
 
 **Dev bridge:** `vite-plugin-local-ai.js` — a dev-only Vite plugin (`apply: 'serve'`) that mounts `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory stubs for chats/progress/notes/auth. Runs in-process with Vite (no separate server, no proxy hop), ships nothing to prod. `codex` runs read-only/ephemeral on `codex login` — no API keys for local iteration. Replaced the former `local-ai` git submodule (2026-06-27).
 
-**Security posture (post-audit):** the `/api/go-run` handler requires auth (`requireAuth`); JWT secret has no production fallback (throws if unset); progress syncs to Turso for authenticated users (localStorage offline fallback retained). Note: the legacy `api/chat.mjs`/`api/go-run.mjs` handlers are dev-only and are not deployed by the prod Pages Function.
+**Security posture (post-audit):** the `/api/go-run` handler requires auth (`requireAuth`); JWT secret has no production fallback (throws if unset); progress syncs to D1 for authenticated users (localStorage offline fallback retained). Note: the legacy `api/chat.mjs`/`api/go-run.mjs` handlers are dev-only and are not deployed by the prod Pages Function.
 
 | Concern | Detail |
 |---------|--------|
 | Hosting | Cloudflare Pages project `swe-interview-prep` |
-| Database | Turso — connection via Pages Functions env |
+| Database | Cloudflare D1 — native `DB` binding in Pages Functions; Turso remains rollback-held pending separate retirement approval |
 | Auth | Google OAuth; set callback URLs for localhost and production Pages domain |
 | R2 | `swe-interview-prep-assets` — Go WASM binary |
 | AI keys | Provider keys in Pages env; dev uses in-process Vite AI bridge (CLI, no keys) |
@@ -68,7 +68,8 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Homepage clarity and search semantics (2026-07-31) | Made the generated JavaScript-independent homepage summary emit the page's canonical H1 and current 19-track/250-concept metadata. The Today workspace now leads with its primary plan, makes source reading explicitly optional, restores visible keyboard focus and named mobile controls, raises supporting-copy contrast, and uses 44px targets for key actions. The richer curriculum agent catalog remains intact; local format, lint, typecheck, 327 tests, and production build pass. Production deployment remains separate. |
 | Owned changelog (2026-07-29) | Added a public `/changelog` with verified release outcomes and direct GitHub Roadmap and Source links. |
 | Deterministic Systems Lab (2026-07-30) | Added a local-only `/labs` learning environment with versioned GitOps, OpenTelemetry sampling, and Managed Prometheus scenarios. Learners repair bounded infrastructure configurations, freeze predictions, replay virtual-time transitions, inspect actor-owned evidence, and must pass both configuration and authenticated Feynman gates before FSRS mastery can change. |
-| Platform migration | Cloudflare Pages static frontend + Pages Functions backend; Turso persistence; Google One Tap auth |
+| D1 consolidation (2026-08-01) | Moved all 19 relational tables and 32 production rows from Turso to project-owned Cloudflare D1. Native Pages bindings, deterministic migrations, full table/signature parity, foreign-key verification, live auth/API smoke checks, and rollback preservation passed. |
+| Platform migration | Cloudflare Pages static frontend + Pages Functions backend; D1 persistence; Google One Tap auth |
 | Core study surfaces | DSA practice (Monaco), LLD/HLD (Excalidraw), behavioral/concept routes, Build Lab, Playground |
 | Learning loops | Progress tracking across categories; ts-fsrs spaced repetition; multi-provider AI hints |
 | Execution path | R2-backed Go WASM interpreter for in-browser code execution |
@@ -105,7 +106,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ### Platform and deploy
 - Cloudflare Pages static frontend + Pages Functions backend in production architecture.
-- Turso/libSQL persistence for problems, notes, chats, and authenticated progress.
+- Cloudflare D1 persistence for problems, notes, chats, and authenticated progress.
 - Google One Tap auth with httpOnly JWT cookie issuance.
 - R2-backed Go WASM interpreter for in-browser code execution path.
 - PostHog analytics integration.
@@ -136,12 +137,12 @@ External: LeetCode API (import), multi-provider LLM APIs
 ### Auth and API hardening (2026-03-29 audit, archived at `docs/archive/security-audit-2026-03-29.md`)
 - Auth middleware on `/api/chat.mjs` and `/api/go-run.mjs` (401 for unauthenticated).
 - JWT `dev-secret-change-in-production` fallback removed — env required in prod.
-- Authenticated user progress and SRS data sync to Turso (debounced); localStorage retained as offline fallback.
+- Authenticated user progress and SRS data sync to D1 (debounced); localStorage retained as offline fallback.
 - Auth error responses no longer leak `hasClientId` / `clientIdLength`.
 - Google streaming API key sent via `x-goog-api-key` header instead of URL param.
 
 ### Documentation
-- README architecture diagram (Mermaid) and run steps for Cloudflare + Turso setup.
+- README architecture diagram (Mermaid) and run steps for Cloudflare + D1 setup.
 - Canonical documentation tree at `docs/` (see `docs/index.md`); ADRs at
   `docs/architecture/decisions/`; the 2026-03-29 audit is archived at
   `docs/archive/security-audit-2026-03-29.md`.
