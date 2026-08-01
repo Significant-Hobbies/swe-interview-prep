@@ -2,7 +2,7 @@
 
 Date: 2026-08
 Status: Accepted
-Supersedes: [ADR 0002](0002-turso-libsql.md)
+Supersedes: [ADR 0002](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0002-turso-libsql.md)
 
 ## Context
 
