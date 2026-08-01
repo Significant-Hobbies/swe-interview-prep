@@ -14,23 +14,26 @@ function run(cmd, args, env = process.env) {
   if (r.status !== 0) process.exit(r.status ?? 1);
 }
 
-console.log('── 1/4 Env contract (deploy) ──');
+console.log('── 1/5 Env contract (deploy) ──');
 run('node', ['scripts/validate-env.mjs', 'deploy']);
 
-console.log('\n── 2/4 Unit tests ──');
+console.log('\n── 2/5 D1 deployment binding ──');
+run('node', ['scripts/validate-d1-config.mjs']);
+
+console.log('\n── 3/5 Unit tests ──');
 run('pnpm', ['test']);
 
-console.log('\n── 3/4 Production build ──');
+console.log('\n── 4/5 Production build ──');
 run('pnpm', ['build']);
 
-console.log('\n── 4/4 Cloudflare Pages secrets (optional) ──');
+console.log('\n── 5/5 Cloudflare Pages secrets (optional) ──');
 const audit = spawnSync(
   'pnpm',
   ['exec', 'wrangler', 'pages', 'secret', 'list', '--project-name=swe-interview-prep'],
   { cwd: ROOT, env: process.env, encoding: 'utf8' }
 );
 if (audit.status === 0) {
-  const required = ['GOOGLE_CLIENT_ID', 'JWT_SECRET', 'TURSO_AUTH_TOKEN', 'TURSO_DATABASE_URL'];
+  const required = ['GOOGLE_CLIENT_ID', 'JWT_SECRET'];
   const present = required.filter((name) => audit.stdout.includes(`- ${name}:`));
   const missing = required.filter((name) => !present.includes(name));
   if (missing.length) {

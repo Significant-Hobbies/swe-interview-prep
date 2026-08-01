@@ -11,23 +11,6 @@
 // success/mid-stream-failure cases and left real for the config cases.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('@libsql/client/web', () => ({
-  createClient: () => ({
-    execute: async () => ({
-      rows: [
-        {
-          id: 'user-1',
-          google_id: 'g-1',
-          email: 'owner@example.com',
-          name: 'Owner',
-          picture: null,
-          created_at: '2026-01-01',
-        },
-      ],
-    }),
-  }),
-}));
-
 vi.mock('../lib/ai.mjs', async (importOriginal) => {
   const actual = await importOriginal();
   return {
@@ -40,10 +23,29 @@ const { AI_CONFIG_MISSING_MESSAGE, generateStream } = await import('../lib/ai.mj
 const { onRequest } = await import('../../functions/api/[[path]].js');
 
 const JWT_SECRET = 'test-secret-for-ai-chat-route';
+const DB = {
+  prepare: () => ({
+    bind: () => ({
+      all: async () => ({
+        success: true,
+        results: [
+          {
+            id: 'user-1',
+            google_id: 'g-1',
+            email: 'owner@example.com',
+            name: 'Owner',
+            picture: null,
+            created_at: '2026-01-01',
+          },
+        ],
+        meta: { changes: 0 },
+      }),
+    }),
+  }),
+};
 const ENV_NO_AI = {
   JWT_SECRET,
-  TURSO_DATABASE_URL: 'libsql://test.invalid',
-  TURSO_AUTH_TOKEN: 'test-token',
+  DB,
 };
 
 function base64Url(input) {

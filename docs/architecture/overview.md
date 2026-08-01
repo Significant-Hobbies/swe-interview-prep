@@ -1,7 +1,7 @@
 # Architecture Overview
 
 A React 19 SPA served as static files by Cloudflare Pages, with a Pages
-Functions backend (`functions/api/[[path]].js`) that talks to Turso (libSQL).
+Functions backend (`functions/api/[[path]].js`) that talks to Cloudflare D1.
 In production the Pages Function serves a small route set (`auth/*`,
 `progress`, `learning`, `learning/reader`, `ai`); AI generation runs through
 the Vercel AI SDK against a BYO OpenAI-compatible endpoint. The legacy
@@ -14,8 +14,8 @@ React SPA (Vite build → dist/)
     ├── Excalidraw diagrams
     ├── Systems Lab ──► pure virtual-time reducer + checked-in evidence graphs
     ├── Socratic AI (useAI) ──► /api/chat (dev bridge) / OpenAI-compatible endpoint
-    ├── Progress + FSRS hooks ──► /api/learning, /api/progress ──► Turso
-    ├── Learning library + sources ──► owner-only /api/learning actions ──► Turso + remote repos
+    ├── Progress + FSRS hooks ──► /api/learning, /api/progress ──► D1
+    ├── Learning library + sources ──► owner-only /api/learning actions ──► D1 + remote repos
     └── Google One Tap ──► /api/auth/google ──► httpOnly JWT cookie
 
 Local dev: vite-plugin-local-ai.js mounts /api/chat (streams claude/codex/gemini
@@ -31,7 +31,7 @@ to prod.
 | Editor / viz | Monaco, Excalidraw, hand-rolled SVG primitives in `src/components/viz.tsx` | No chart-lib dep |
 | Code execution | JavaScript/TypeScript only, entirely in-browser: sucrase transpiles, then the code runs in a sandboxed `srcdoc` iframe with a 5s timeout (`src/hooks/useCodeExecution.ts`). | No server round-trip; the Go executor was removed 2026-07-25 (see [ADR 0009](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0009-remove-go-runtime.md)) |
 | Backend | Cloudflare Pages Functions, single catch-all `functions/api/[[path]].js` | Prod routes: `auth/*`, `progress`, `learning`, `learning/reader`, `ai`. `learning` dispatches to `handlers/` via `shared/` |
-| DB | Turso (libSQL via `@libsql/client`) | Schema auto-init on first cold start; no migration runner |
+| DB | Cloudflare D1 via the Pages `DB` binding | Deterministic migrations under `migrations/d1/` |
 | Auth | Google One Tap → JWT httpOnly cookie | No OAuth redirect flow |
 | AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint (`aiConfig` per request or `AI_*` env) | Dev uses in-process CLI bridge (claude/codex/gemini), no keys |
 | Spaced repetition | `ts-fsrs` (client + server wrappers) | Per-user per-concept state in `concept_mastery` |
@@ -61,7 +61,7 @@ intentionally does not restate it.
 - **Static content vs user state.** Concepts, roadmaps, drills, artifacts,
   projects, and review-questions are static JSON in `src/data/` loaded via
   `learning-os.ts`. Mutable user state is hybrid: localStorage for guests,
-  Turso for signed-in users (`useUserStore`). Signing in merges localStorage
+  D1 for signed-in users (`useUserStore`). Signing in merges localStorage
   into the DB.
 - **Deterministic Systems Lab.** Versioned definitions under
   `src/data/systems-labs/` describe actors, controls, reachable transitions,
@@ -87,8 +87,8 @@ intentionally does not restate it.
   `/api/chat` (streams the claude/codex/gemini CLIs over SSE) plus in-memory
   stubs. Replaced the old `local-ai` git submodule — see
   [`decisions/0006-dev-ai-bridge-inprocess.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0006-dev-ai-bridge-inprocess.md).
-- **DB auto-init.** `initDatabase()` creates tables `IF NOT EXISTS` on first
-  cold start. No migration runner; additive schema changes only.
+- **Deterministic D1 migrations.** Wrangler applies SQL from `migrations/d1/`
+  before a deployment is switched. Request handlers never perform DDL.
 - **BYO AI endpoint.** Clients pass `aiConfig: {endpointUrl, apiKey, model}`
   to any OpenAI-compatible endpoint; the server (`shared/lib/ai.mjs`, using
   `@ai-sdk/openai-compatible`) falls back to `AI_ENDPOINT_URL` / `AI_API_KEY`
@@ -97,8 +97,8 @@ intentionally does not restate it.
 
 ## Database tables
 
-Schema source of truth: `shared/db/schema.mjs` (and the parallel init in
-`functions/api/[[path]].js`). Tables: `users`, `user_chats`, `user_notes`,
+Schema source of truth: `migrations/d1/`. `shared/db/d1-client.mjs` adapts the
+native binding to the existing handler result shape. Tables: `users`, `user_chats`, `user_notes`,
 `user_imported_problems`, `user_progress`, `activity_log`, `concept_mastery`,
 `daily_plan`, `weekly_review`, `feynman_logs`, `user_artifacts`,
 `user_drills`, `user_projects`, `user_learning_notes`, `user_profile`,
@@ -107,7 +107,7 @@ Schema source of truth: `shared/db/schema.mjs` (and the parallel init in
 
 The `/api/learning?action=…` endpoint consolidates every learning mutation to
 keep the serverless API surface small. Action registry:
-`shared/api/learning-registry.mjs` — public (no Turso auth): `gaps`, `critique`,
+`shared/api/learning-registry.mjs` — public (no user auth): `gaps`, `critique`,
 `understanding`, `tag`; auth-required: `activity`, `concepts`, `feynman`,
 `weekly`, `artifacts`, `drills`, `projects`, `notes`, `profile`,
 `review-mastery`, `elo`, `imported-reviews`.

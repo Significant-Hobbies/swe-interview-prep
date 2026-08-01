@@ -3,7 +3,7 @@
  * Local (api/learning.mjs) and production (functions/api) must stay in sync.
  */
 
-/** BYOK / heuristic — no Turso auth required. */
+/** BYOK / heuristic — no user auth required. */
 const PUBLIC_ACTIONS = ['gaps', 'critique', 'understanding', 'tag'];
 
 /**

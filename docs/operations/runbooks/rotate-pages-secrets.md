@@ -2,7 +2,7 @@
 
 `pnpm sync:pages-secrets` runs `scripts/sync-pages-secrets.mjs`, which pushes
 the runtime variables from `.env.local` to Cloudflare Pages. Use it on first
-setup or whenever a runtime secret rotates (`JWT_SECRET`, `TURSO_AUTH_TOKEN`,
+setup or whenever a runtime secret rotates (`JWT_SECRET`,
 `READER_API_TOKEN`, etc.).
 
 ## When to run

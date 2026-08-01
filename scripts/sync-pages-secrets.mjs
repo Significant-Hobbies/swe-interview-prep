@@ -9,7 +9,7 @@ import { loadEnvFiles } from './load-env.mjs';
 loadEnvFiles();
 
 const PROJECT = 'swe-interview-prep';
-const RUNTIME_KEYS = ['GOOGLE_CLIENT_ID', 'JWT_SECRET', 'TURSO_AUTH_TOKEN', 'TURSO_DATABASE_URL'];
+const RUNTIME_KEYS = ['GOOGLE_CLIENT_ID', 'JWT_SECRET'];
 
 const missing = RUNTIME_KEYS.filter((k) => !process.env[k]?.trim());
 if (missing.length) {

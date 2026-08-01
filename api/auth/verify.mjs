@@ -2,15 +2,12 @@ import jwt from 'jsonwebtoken';
 import { getUserById } from '../../shared/db/users.mjs';
 import { readAuthCookie } from './cookies.mjs';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const OWNER_EMAIL = process.env.OWNER_EMAIL?.toLowerCase();
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
-}
-
-export function verifyToken(token) {
+export function verifyToken(token, secret = process.env.JWT_SECRET) {
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is required');
+  }
   try {
-    return jwt.verify(token, JWT_SECRET);
+    return jwt.verify(token, secret);
   } catch {
     return null;
   }
@@ -49,7 +46,8 @@ export async function requireAuth(req, res) {
     res.status(401).json({ error: 'User not found' });
     return null;
   }
-  if (OWNER_EMAIL && user.email?.toLowerCase() !== OWNER_EMAIL) {
+  const ownerEmail = process.env.OWNER_EMAIL?.toLowerCase();
+  if (ownerEmail && user.email?.toLowerCase() !== ownerEmail) {
     res.status(403).json({ error: 'Forbidden' });
     return null;
   }

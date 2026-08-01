@@ -44,11 +44,14 @@ and the local prediction/attempt contract. It does not replace the full
 | Command | What it does |
 | --- | --- |
 | `pnpm validate:env:build` | Confirm build-time env (`VITE_GOOGLE_CLIENT_ID`) is present. |
-| `pnpm validate:env:runtime` | Confirm runtime env (Turso, JWT, Google) — for local full-stack dev. |
+| `pnpm validate:env:runtime` | Confirm runtime secrets (JWT, Google) — for local full-stack dev. |
 | `pnpm validate:env:deploy` | Strictest gate; used by `pnpm deploy` and the deploy workflow. Only prints missing names, never values. |
+| `pnpm validate:d1:deploy` | Reject a deploy unless `wrangler.toml` has a real production `DB` UUID. |
+| `pnpm db:migrate:local` | Apply tracked migrations to isolated local D1. |
+| `pnpm dev:pages` | Build, migrate local D1, and run Pages Functions locally. |
 | `pnpm ready` | `check-ready.mjs` — env + tests + build + secret audit. Run before a deploy. |
 | `pnpm sync:pages-secrets` | `sync-pages-secrets.mjs` — push runtime secrets to Cloudflare Pages (first time or rotation). |
-| `pnpm deploy` | `validate:env:deploy` + `build` + `wrangler pages deploy dist/ --project-name=swe-interview-prep`. |
+| `pnpm deploy` | Env + D1 binding validation, build, remote migrations, then `wrangler pages deploy dist/ --project-name=swe-interview-prep`. |
 
 ## Content pipelines
 

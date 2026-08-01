@@ -59,14 +59,14 @@ Novel tech used in this project, ordered from most unfamiliar to most familiar.
 ## Cloudflare Pages Functions (catch-all route)
 - What: A single `functions/api/[[path]].js` file handles every `/api/*` request at the edge, replacing traditional serverless functions.
 - Why here: TBD
-- Gotcha (from code): line 1 of `functions/api/[[path]].js` imports `@libsql/client/web` (fetch-based HTTP client) rather than `@libsql/client` (Node.js TCP client). The CF Worker runtime has no Node.js TCP stack — using the default import silently fails at runtime, not at build time.
+- Gotcha (from code): Pages supplies D1 through `env.DB`; it is not a URL or secret. `shared/db/d1-client.mjs` keeps the existing handler result shape over D1 prepared statements.
 - Source: https://developers.cloudflare.com/pages/functions/
 
-## Turso (libSQL) client
-- What: SQLite-compatible DB with a cloud primary and optional edge replicas, accessed via HTTP in edge runtimes.
-- Why here: TBD
-- Gotcha (from code): the DB client is lazily initialized once per CF Function invocation via a module-level `let db` singleton (`functions/api/[[path]].js:8-21`). A cold start re-creates the client because CF Workers don't share process state across requests from different isolates.
-- Source: https://docs.turso.tech/sdk/ts/reference
+## Cloudflare D1 binding
+- What: SQLite-compatible relational storage exposed directly to the Pages Function as a binding.
+- Why here: Keeps compute and persistence on Cloudflare and removes URL/token database credentials from the application.
+- Gotcha (from code): D1 is not a drop-in libSQL client. The adapter calls `prepare().bind().all()` and normalizes `results`/`meta.changes`; schema changes belong in ordered migrations, never request-time DDL.
+- Source: https://developers.cloudflare.com/d1/worker-api/
 
 ## React 19 lazy + Suspense for route-level code splitting
 - What: Every route component is loaded via `React.lazy` with `<Suspense>` boundaries in `App.tsx`, deferring bundle parsing until the route is first visited.
