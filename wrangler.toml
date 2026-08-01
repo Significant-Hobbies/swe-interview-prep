@@ -2,3 +2,10 @@ name = "swe-interview-prep"
 pages_build_output_dir = "dist"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "swe-interview-prep"
+database_id = "9f4f9da4-b196-4cb1-8a91-c978dd2bbd74"
+preview_database_id = "ee7a5a51-5a0a-4170-9447-9e4291d890d6"
+migrations_dir = "migrations/d1"
