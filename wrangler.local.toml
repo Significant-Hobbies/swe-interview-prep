@@ -1,0 +1,12 @@
+name = "swe-interview-prep-local"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Local-only D1 binding. Production receives its database_id in wrangler.toml
+# only after the migration receipt is approved and the remote DB is created.
+[[d1_databases]]
+binding = "DB"
+database_name = "swe-interview-prep"
+database_id = "local"
+migrations_dir = "migrations/d1"

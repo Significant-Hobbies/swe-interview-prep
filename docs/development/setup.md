@@ -5,8 +5,8 @@
 - Node.js: `.nvmrc` pins `20.18.0`; CI and the deploy workflow run on Node 22.
   Either works — 20.18.0+ is the floor.
 - pnpm (version pinned in `package.json` `packageManager`)
-- For production deploys only: a Cloudflare account, a Turso database, and a
-  Google OAuth client ID. **Local dev needs none of these.**
+- For production deploys only: a Cloudflare account with D1 and a Google OAuth
+  client ID. **Frontend-only local dev needs none of these.**
 
 ## First-time setup
 
@@ -31,13 +31,24 @@ route set. The `api/*.mjs` handlers are dev/legacy only and are not deployed.
 | --- | --- | --- |
 | `/api/chat` | `vite-plugin-local-ai.js` streams CLIs | Not served (client still calls it) |
 | `/api/chats`, `/api/notes` | In-memory Vite stubs | Not served |
-| `/api/progress`, `/api/auth/*` | In-memory Vite stubs | Pages Function → Turso |
+| `/api/progress`, `/api/auth/*` | In-memory Vite stubs | Pages Function → D1 |
 | `/api/learning?action=…` | Legacy `api/learning.mjs` → `handlers/` | Pages Function → `handlers/` (via `shared/`) |
 | `/api/learning/reader`, `/api/ai` | (dev stubs / static) | Pages Function |
 
 `tag` is a `/api/learning?action=tag` action, not a top-level `/api/tag`
 route. The `api/*.mjs` handlers and the Pages Function both share `handlers/`
 and `shared/`.
+
+For the real Pages Functions boundary against isolated local D1:
+
+```bash
+pnpm db:migrate:local
+pnpm dev:pages
+```
+
+The local database persists under Wrangler's ignored local state and never
+contacts production. Remote migrations always require the explicit
+`pnpm db:migrate:remote` command.
 
 ## Env vars
 

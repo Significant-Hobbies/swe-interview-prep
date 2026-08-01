@@ -8,6 +8,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '../..');
 
 describe('learning API parity', () => {
+  it('loads shared auth handlers without requiring Node env at module initialization', async () => {
+    const { requireAuth } = await import('../../api/auth/verify.mjs');
+    expect(requireAuth).toBeTypeOf('function');
+  });
+
   it('every registry action has a handler module', () => {
     for (const action of LEARNING_ACTIONS) {
       expect(HANDLER_MODULES[action], action).toBeDefined();

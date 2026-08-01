@@ -61,7 +61,7 @@ and PR. The short version: lint → test → build (with a placeholder
 
 ## Known gaps
 
-- End-to-end CI against live Turso + Cloudflare bindings is
+- End-to-end CI against live Cloudflare Pages + D1 bindings is
   operator-dependent, not fully automated in repo (see
   [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)).
 - Regression coverage is "paused" at the existing focused coverage per the

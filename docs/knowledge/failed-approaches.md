@@ -12,10 +12,11 @@ serverless functions. The original stack.
 a single-user-ish product, and a hardcoded `JWT_SECRET` fallback that the
 2026-03-29 audit flagged. The fleet consolidated on Cloudflare.
 
-**Replaced by:** Cloudflare Pages + Functions, Turso (libSQL), Google One
-Tap + JWT cookie. See ADRs
+**Replaced by:** Cloudflare Pages + Functions, initially Turso and later
+Cloudflare D1, plus Google One Tap + JWT cookie. See ADRs
 [0001](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0001-cloudflare-pages-over-vercel.md),
 [0002](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0002-turso-libsql.md),
+[0010](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0010-cloudflare-d1.md),
 [0003](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0003-google-one-tap-jwt.md). Full migration
 notes archived at
 [`migration-supabase-to-turso.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/archive/migration-supabase-to-turso.md).

@@ -4,7 +4,7 @@ loadEnvFiles();
 
 const CONTRACTS = {
   build: ['VITE_GOOGLE_CLIENT_ID'],
-  runtime: ['GOOGLE_CLIENT_ID', 'JWT_SECRET', 'TURSO_AUTH_TOKEN', 'TURSO_DATABASE_URL'],
+  runtime: ['GOOGLE_CLIENT_ID', 'JWT_SECRET'],
 };
 
 const mode = process.argv[2] ?? 'deploy';

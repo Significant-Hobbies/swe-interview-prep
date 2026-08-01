@@ -14,7 +14,7 @@ concept next.
 ## Decision
 
 Use `ts-fsrs` (FSRS scheduling) with per-user per-concept state stored in the
-`concept_mastery` Turso table. Confidence formula:
+`concept_mastery` relational table. Confidence formula:
 `(1 + elapsed/(9×stability))^-1`. Mastery decays over time. The Feynman Gate
 grades explain-backs 0–100 and maps gaps onto `again`/`hard` FSRS ratings.
 

@@ -87,7 +87,7 @@ route set (anything else returns `404 API route not found`):
 | `GET /api/ai` | Public agent catalog (JSON) | — |
 
 `/api/learning?action=…` actions (`shared/api/learning-registry.mjs`):
-public (no Turso auth) `gaps`, `critique`, `understanding`, `tag`;
+public (no user auth) `gaps`, `critique`, `understanding`, `tag`;
 auth-required `activity`, `concepts`, `feynman`, `weekly`, `artifacts`,
 `drills`, `projects`, `notes`, `profile`, `review-mastery`, `elo`,
 `imported-reviews`.

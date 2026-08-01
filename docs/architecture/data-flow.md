@@ -23,10 +23,10 @@ localStorage-only state.
 
 | Data | Guest | Signed-in |
 | --- | --- | --- |
-| Artifacts, drills, projects, notes | localStorage | Turso (`user_artifacts`, `user_drills`, `user_projects`, `user_learning_notes`) |
-| Concept mastery (FSRS) | Not tracked — requires sign-in | Turso (`concept_mastery`) |
-| Chat history, imported problems | localStorage | Turso (`user_chats`, `user_imported_problems`) |
-| Progress, activity, ELO | localStorage | Turso (`user_progress`, `activity_log`, `user_elo_state`) |
+| Artifacts, drills, projects, notes | localStorage | D1 (`user_artifacts`, `user_drills`, `user_projects`, `user_learning_notes`) |
+| Concept mastery (FSRS) | Not tracked — requires sign-in | D1 (`concept_mastery`) |
+| Chat history, imported problems | localStorage | D1 (`user_chats`, `user_imported_problems`) |
+| Progress, activity, ELO | localStorage | D1 (`user_progress`, `activity_log`, `user_elo_state`) |
 
 **Merge on sign-in:** localStorage state is merged into the DB when the user
 signs in (`useUserStore`). This is one-way: local → DB. The DB is authoritative
@@ -112,8 +112,8 @@ backend existed any more — see
 
 ## DB initialization
 
-`initDatabase()` runs `CREATE TABLE IF NOT EXISTS …` for every table on first
-cold start of the Pages Function. There is no migration runner — schema
-changes must be **additive only** and backwards-compatible across deploys.
-See `shared/db/schema.mjs` and the parallel init in
-`functions/api/[[path]].js` (kept in sync by hand).
+Wrangler applies ordered SQL from `migrations/d1/` before the Pages deployment
+is switched. Local D1 uses `wrangler.local.toml`; production uses the tracked
+`DB` binding in `wrangler.toml`. Schema changes remain **additive only** and
+backwards-compatible across deploys. `shared/db/d1-client.mjs` preserves the
+existing handler result contract over D1 prepared statements.

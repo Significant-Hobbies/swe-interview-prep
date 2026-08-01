@@ -41,13 +41,12 @@ the same table. A loop that stores review state separately from the
 recommender will drift. See
 [`0004-fsrs-spaced-repetition.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0004-fsrs-spaced-repetition.md).
 
-## 2026-03 — Serverless schema needs additive-only changes
+## 2026-08 — Serverless schema needs deterministic migrations
 
-There is no migration runner; `initDatabase()` runs `CREATE TABLE IF NOT
-EXISTS` on first cold start. Any schema change that would require an
-`ALTER TABLE` on existing rows must instead be additive (new column with a
-default, new table). Source of truth: `shared/db/schema.mjs`, mirrored by
-hand in `functions/api/[[path]].js`.
+Request-time `CREATE TABLE IF NOT EXISTS` duplicated schema and hid deployment
+ordering. D1 migrations under `migrations/d1/` now form one source of truth and
+must be applied before traffic moves. Schema changes remain additive and
+backwards-compatible; request handlers never perform DDL.
 
 ## 2026-03 — Reference-only beats copy for external content
 

@@ -20,7 +20,7 @@ SWE Interview Prep consolidates everything into a single platform with integrate
 | Concern | Service |
 |---------|---------|
 | Hosting | Cloudflare Pages (`swe-interview-prep`) + Pages Functions backend (`functions/api/[[path]].js`) |
-| Database | Turso (libSQL) |
+| Database | Cloudflare D1 |
 | Auth | Google One Tap (JWT cookie) |
 | File storage | Cloudflare R2 (`swe-interview-prep-assets`) — hosts the Go WASM interpreter |
 | Analytics | PostHog (via `local posthog-js wrapper`) |
@@ -67,8 +67,8 @@ graph TB
         R --> U[gemini CLI]
     end
 
-    subgraph "Cloudflare Pages Functions + Turso"
-        V[Turso libSQL] --> W[user_imported_problems]
+    subgraph "Cloudflare Pages Functions + D1"
+        V[Cloudflare D1] --> W[user_imported_problems]
         V --> X[user_progress]
         V --> Y[user_learning_notes]
         V --> Z[concept_mastery FSRS]
@@ -105,7 +105,7 @@ graph TB
 - **Frontend**: React 19 SPA with TailwindCSS, Monaco Editor for code, Excalidraw for diagrams
 - **Dev AI bridge**: in-process Vite plugin (`vite-plugin-local-ai.js`) streams the claude/codex/gemini CLIs at `/api/chat` so local dev needs no API keys; ships nothing to prod
 - **Backend**: The production Cloudflare Pages Function (`functions/api/[[path]].js`) serves auth, `/api/progress`, the consolidated `/api/learning?action=…` surface, the Reader adapter, and the `/api/ai` catalog. AI generation uses an OpenAI-compatible endpoint; `/api/chat` and `/api/go-run` are dev/legacy handlers not deployed by the Pages Function
-- **Database**: Turso/libSQL stores user progress, notes, FSRS concept mastery (`concept_mastery`), and imported problems
+- **Database**: Cloudflare D1 stores user progress, notes, FSRS concept mastery (`concept_mastery`), and imported problems through the Pages `DB` binding
 - **Auth**: Google One Tap posts credentials to `/api/auth/google`; the server issues an httpOnly JWT cookie
 - **External Integrations**: LeetCode API for problem import, multiple AI providers for hints
 
@@ -116,7 +116,7 @@ graph TB
 - Node.js: `.nvmrc` pins `20.18.0`; CI/deploy run on Node 22 (either works, 20.18.0 is the floor)
 - pnpm
 - Cloudflare account for production deploys
-- Turso database for production runtime data
+- Cloudflare D1 database for production runtime data
 
 ### Setup
 
@@ -141,9 +141,10 @@ graph TB
    ```bash
    GOOGLE_CLIENT_ID=your_google_oauth_client_id
    JWT_SECRET=your_jwt_secret
-   TURSO_DATABASE_URL=libsql://...
-   TURSO_AUTH_TOKEN=...
    ```
+
+   D1 is a Pages binding, not an environment secret. For an isolated local
+   database, run `pnpm db:migrate:local` and `pnpm dev:pages`.
 
    Optional AI/provider values can be supplied through the UI per request or via server env fallbacks such as `AI_ENDPOINT_URL`, `AI_API_KEY`, and `AI_MODEL`.
 
@@ -177,7 +178,7 @@ The deploy path validates env, builds `dist/`, and runs `wrangler pages deploy d
 
 ---
 
-**Tech Stack**: React 19, TypeScript, TailwindCSS, Vite, Cloudflare Pages Functions, Turso/libSQL
+**Tech Stack**: React 19, TypeScript, TailwindCSS, Vite, Cloudflare Pages Functions, Cloudflare D1
 **License**: MIT
 
 <!-- ACTIVE-AI-TASK-LOG:START -->

@@ -23,7 +23,7 @@ Full product context: [`docs/product/overview.md`](docs/product/overview.md).
 ## Stack (one line)
 
 React 19 SPA (Vite 8, React Router v7, Tailwind v4) + Cloudflare Pages
-Functions (`functions/api/[[path]].js`) + Turso (libSQL) + Google One Tap
+Functions (`functions/api/[[path]].js`) + Cloudflare D1 + Google One Tap
 JWT + `ts-fsrs` spaced repetition. pnpm. TypeScript (strict: true).
 
 Full architecture: [`docs/architecture/overview.md`](docs/architecture/overview.md).
@@ -51,9 +51,8 @@ Full command reference: [`docs/development/commands.md`](docs/development/comman
 - **`docs/learning/*.md` is product content.** `src/pages/LearningDoc.tsx`
   Vite-globs it at build time and serves it at `/learning/:slug`. Do not
   move, rename, or delete those files — in-app routes depend on the slugs.
-- **DB schema changes are additive only.** No migration runner; `initDatabase()`
-  runs `CREATE TABLE IF NOT EXISTS` on first cold start. Source of truth:
-  `shared/db/schema.mjs`, mirrored by hand in `functions/api/[[path]].js`.
+- **DB schema changes are additive only.** Wrangler applies deterministic D1
+  migrations from `migrations/d1/`; request handlers never mutate schema.
 - **Never commit secrets.** `.env.local` is gitignored (`*.local`). The
   Husky `pre-push` hook scans tracked files for common secret patterns.
 - **Generated content under `src/data/library/` is not hand-edited.** Change

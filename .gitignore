@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.migration-private/
 coverage
 dist
 dist-ssr
@@ -47,4 +48,3 @@ dist-docs/
 # Local agent logs / scratch
 *.agent.log
 .devin/
-

@@ -1,6 +1,6 @@
 # Deploy — swe-interview-prep (Cloudflare Pages)
 
-Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Turso**.
+Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Cloudflare D1**.
 
 ## One-command readiness
 
@@ -9,7 +9,7 @@ cp .env.example .env.local   # fill once
 pnpm ready                   # env + tests + build + secret audit
 ```
 
-Sync runtime secrets to Cloudflare (first time or rotation):
+Sync auth runtime secrets to Cloudflare (first time or rotation):
 
 ```bash
 pnpm sync:pages-secrets
@@ -25,10 +25,12 @@ Pushes to `main` run `ci.yml` (tests/lint/build) and, on doc changes,
 When dispatched, `deploy.yml`:
 
 1. `pnpm test`
-2. `pnpm validate:env:build` + `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub)
-3. `rm -rf dist/wasm` (the 38 MB Go WASM binary is R2-hosted, not shipped to Pages)
-4. `wrangler pages deploy dist/ --project-name=swe-interview-prep`
-5. Smokes the SPA and `/api/learning?action=gaps`.
+2. Validate build environment and the production D1 `DB` binding.
+3. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub).
+4. Remove the R2-hosted WASM artifact from `dist/`.
+5. Apply pending D1 migrations through Wrangler.
+6. `wrangler pages deploy dist/ --project-name=swe-interview-prep`.
+7. Smoke the SPA and `/api/learning?action=gaps`.
 
 **GitHub** (Settings → Secrets and variables):
 
@@ -43,10 +45,18 @@ When dispatched, `deploy.yml`:
 
 | Variable | Purpose |
 |----------|---------|
-| `TURSO_DATABASE_URL` | libSQL URL |
-| `TURSO_AUTH_TOKEN` | Turso token |
 | `JWT_SECRET` | Auth cookie signing |
 | `GOOGLE_CLIENT_ID` | Server Google verify |
+
+The relational database is the non-secret `DB` D1 binding in `wrangler.toml`.
+Apply tracked migrations before deploying:
+
+```bash
+pnpm db:migrate:remote
+```
+
+See [`runbooks/migrate-turso-to-d1.md`](runbooks/migrate-turso-to-d1.md) for
+the one-time cutover and rollback procedure.
 
 Google OAuth client must list your Pages origin (e.g. `https://learn.significanthobbies.com`).
 
@@ -62,6 +72,9 @@ pnpm deploy
 cp .env.example .env.local
 pnpm dev    # Vite :5173 (AI bridge runs in-process — no separate server)
 ```
+
+To exercise the real Pages Functions with isolated local D1 instead of the
+in-memory Vite stubs, run `pnpm db:migrate:local` and `pnpm dev:pages`.
 
 See [`../development/setup.md`](../development/setup.md) for full local setup.
 

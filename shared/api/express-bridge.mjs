@@ -1,4 +1,4 @@
-import { clearRequestDb, setRequestDb } from '../db/client.mjs';
+import { setRequestDb } from '../db/client.mjs';
 
 /**
  * Run an Express-style handler (req, res) inside a Fetch/worker context.
@@ -47,14 +47,10 @@ export async function runExpressHandler(handler, ctx) {
   };
 
   setRequestDb(client);
-  try {
-    await handler(req, res);
-    if (!settled) {
-      statusCode = 500;
-      payload = { error: 'Handler did not respond' };
-    }
-    return { status: statusCode, body: payload };
-  } finally {
-    clearRequestDb();
+  await handler(req, res);
+  if (!settled) {
+    statusCode = 500;
+    payload = { error: 'Handler did not respond' };
   }
+  return { status: statusCode, body: payload };
 }
