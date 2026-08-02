@@ -53,7 +53,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Concern | Detail |
 |---------|--------|
 | Hosting | Cloudflare Pages project `swe-interview-prep` |
-| Database | Cloudflare D1 — native `DB` binding in Pages Functions; Turso remains rollback-held pending separate retirement approval |
+| Database | Cloudflare D1 — authoritative native `DB` binding in Pages Functions; retired Turso database deleted 2026-08-02 |
 | Auth | Google OAuth; set callback URLs for localhost and production Pages domain |
 | R2 | `swe-interview-prep-assets` — Go WASM binary |
 | AI keys | Provider keys in Pages env; dev uses in-process Vite AI bridge (CLI, no keys) |
@@ -68,7 +68,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 | Homepage clarity and search semantics (2026-07-31) | Made the generated JavaScript-independent homepage summary emit the page's canonical H1 and current 19-track/250-concept metadata. The Today workspace now leads with its primary plan, makes source reading explicitly optional, restores visible keyboard focus and named mobile controls, raises supporting-copy contrast, and uses 44px targets for key actions. The richer curriculum agent catalog remains intact; local format, lint, typecheck, 327 tests, and production build pass. Production deployment remains separate. |
 | Owned changelog (2026-07-29) | Added a public `/changelog` with verified release outcomes and direct GitHub Roadmap and Source links. |
 | Deterministic Systems Lab (2026-07-30) | Added a local-only `/labs` learning environment with versioned GitOps, OpenTelemetry sampling, and Managed Prometheus scenarios. Learners repair bounded infrastructure configurations, freeze predictions, replay virtual-time transitions, inspect actor-owned evidence, and must pass both configuration and authenticated Feynman gates before FSRS mastery can change. |
-| D1 consolidation (2026-08-01) | Moved all 19 relational tables and 32 production rows from Turso to project-owned Cloudflare D1. Native Pages bindings, deterministic migrations, full table/signature parity, foreign-key verification, live auth/API smoke checks, and rollback preservation passed. |
+| D1 consolidation (2026-08-01) | Moved all 19 relational tables and 32 production rows from Turso to project-owned Cloudflare D1. Native Pages bindings, deterministic migrations, full table/signature parity, foreign-key verification, and live auth/API smoke checks passed; the retired source was deleted on 2026-08-02 after acceptance. |
 | Platform migration | Cloudflare Pages static frontend + Pages Functions backend; D1 persistence; Google One Tap auth |
 | Core study surfaces | DSA practice (Monaco), LLD/HLD (Excalidraw), behavioral/concept routes, Build Lab, Playground |
 | Learning loops | Progress tracking across categories; ts-fsrs spaced repetition; multi-provider AI hints |
