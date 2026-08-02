@@ -36,11 +36,11 @@
       "status": "pass"
     },
     "critique": {
-      "score": 28,
+      "score": 36,
       "maximum": 40
     },
     "audit": {
-      "score": 15,
+      "score": 19,
       "maximum": 20
     },
     "unresolved": {
@@ -51,22 +51,40 @@
       "posture": "advisory",
       "findings": [
         {
-          "rule": "homepage-payload",
-          "count": 1,
-          "disposition": "follow-up",
-          "note": "The Today route remains close to the configured JavaScript size ceiling."
-        },
-        {
-          "rule": "feedback-trigger-overlap",
-          "count": 1,
-          "disposition": "follow-up",
-          "note": "The fixed feedback trigger can overlap content on compact screens."
-        },
-        {
-          "rule": "undocumented-color-literals",
+          "rule": "design-system-color",
           "count": 3,
           "disposition": "pre-existing",
-          "note": "The detector found existing standalone cyan and scrollbar literals."
+          "note": "Existing literals in CodeEditor and the global scrollbar are outside the documented palette; none were introduced by the Today remediation."
+        },
+        {
+          "rule": "gray-on-color",
+          "count": 5,
+          "disposition": "pre-existing",
+          "note": "Existing warnings are confined to ExerciseRunner, UnderstandingCheck, and BuildLab, outside the reviewed Today surface."
+        },
+        {
+          "rule": "design-system-font-size",
+          "count": 6,
+          "disposition": "pre-existing",
+          "note": "Existing off-ramp sizes are confined to RoadmapGraph, Library, Progress, and Sweep, outside the reviewed Today surface."
+        },
+        {
+          "rule": "side-tab",
+          "count": 1,
+          "disposition": "pre-existing",
+          "note": "The existing MarkdownViewer blockquote treatment is outside the reviewed Today surface."
+        },
+        {
+          "rule": "overused-font",
+          "count": 1,
+          "disposition": "intentional",
+          "note": "Geist Mono is explicitly required by DESIGN.md for labels and measured state."
+        },
+        {
+          "rule": "codex-grid-background",
+          "count": 1,
+          "disposition": "intentional",
+          "note": "The restrained workbench grid is an existing product-specific background treatment and not part of the Today remediation."
         }
       ]
     }

@@ -33,6 +33,8 @@ interface Props {
 }
 
 export function SessionPlanView({ plan, showRationale = true }: Props) {
+  const nextBlockIndex = plan.blocks.findIndex((block) => !block.done);
+
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center gap-3">
@@ -61,10 +63,14 @@ export function SessionPlanView({ plan, showRationale = true }: Props) {
         {plan.blocks.map((block, i) => {
           const meta = BLOCK_META[block.kind];
           const Icon = meta.icon;
+          const isNext = i === nextBlockIndex;
           return (
             <li
               key={`${block.kind}-${i}`}
-              className={`group flex gap-4 rounded-xl border p-4 transition-colors duration-150 hover:border-white/20 ${meta.accent}`}
+              aria-current={isNext ? 'step' : undefined}
+              className={`group flex gap-4 rounded-xl border p-4 transition-colors duration-150 ${
+                isNext ? 'border-white/30' : 'hover:border-white/20'
+              } ${meta.accent}`}
             >
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/30 text-sm font-semibold text-white/80">
                 {block.done ? '✓' : i + 1}
@@ -78,9 +84,13 @@ export function SessionPlanView({ plan, showRationale = true }: Props) {
                 {block.subtitle && <p className="mt-1 text-xs text-white/60">{block.subtitle}</p>}
                 <Link
                   to={block.href}
-                  className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-md border border-white/15 bg-black/20 px-4 py-2 text-sm font-medium text-white transition-all duration-150 hover:border-white/30 hover:bg-white/5"
+                  className={`mt-3 inline-flex min-h-11 items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-all duration-150 ${
+                    isNext
+                      ? 'border-white bg-white text-black hover:bg-white/90'
+                      : 'border-white/15 bg-black/20 text-white hover:border-white/30 hover:bg-white/5'
+                  }`}
                 >
-                  {meta.action}
+                  {isNext ? `Continue · ${meta.action}` : meta.action}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </Link>
               </div>

@@ -20,12 +20,13 @@ function sendToAnalytics(metric: VitalMetric) {
       navigation_type: metric.navigationType,
     });
   } else {
-    // Fallback: beacon to fleet analytics endpoint
+    const endpoint = import.meta.env.VITE_WEB_VITALS_ENDPOINT?.trim();
+    if (!endpoint) return;
     const body = JSON.stringify({
       project: import.meta.env.VITE_PROJECT_SLUG ?? 'swe-interview-prep',
       ...metric,
     });
-    navigator.sendBeacon('https://vitals.fleet.workers.dev/collect', body);
+    navigator.sendBeacon(endpoint, body);
   }
 }
 
