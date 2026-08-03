@@ -276,6 +276,15 @@
       "snippet": "--- title: \"The Fundamental Pillars of Object-Oriented Programming\" description: \"Explore the core principles of object-oriented programming (OOP).\" image: \"https://assets.bytebytego.com/diagrams/0197…"
     }
   ],
+  "factory-creational": [
+    {
+      "repoId": "javascript-questions",
+      "repoName": "JavaScript Interview Questions",
+      "sectionId": "q-511",
+      "title": "511. How do you implement a singleton pattern in JavaScript?",
+      "snippet": "### How do you implement a singleton pattern in JavaScript? The singleton pattern ensures a class has only one instance and provides a global access point to it. **Classic singleton with closur…"
+    }
+  ],
   "load-balancing": [
     {
       "repoId": "system-design",
