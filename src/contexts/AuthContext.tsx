@@ -20,6 +20,33 @@ const LEGACY_KEY = 'dsa-prep-auth';
 // Empty base means cookies attach automatically.
 const API_URL = '';
 
+let googleIdentityPromise: Promise<void> | null = null;
+
+function loadGoogleIdentity(): Promise<void> {
+  if (window.google?.accounts?.id) return Promise.resolve();
+  if (googleIdentityPromise) return googleIdentityPromise;
+
+  googleIdentityPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.dataset.googleIdentity = 'true';
+    script.addEventListener('load', () => resolve(), { once: true });
+    script.addEventListener(
+      'error',
+      () => {
+        googleIdentityPromise = null;
+        reject(new Error('Google Sign-In script failed to load'));
+      },
+      { once: true }
+    );
+    document.body.appendChild(script);
+  });
+
+  return googleIdentityPromise;
+}
+
 interface User {
   id: string;
   email: string;
@@ -69,7 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(loadCachedProfile);
   const [isGuest, setIsGuest] = useState(() => localStorage.getItem(GUEST_KEY) === '1');
   const [loading, setLoading] = useState(true);
-  const [googleLoaded, setGoogleLoaded] = useState(false);
 
   // Load profile from localStorage (just non-sensitive metadata) and validate
   // the cookie session against the server. The token itself is no longer in
@@ -124,22 +150,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [isGuest]);
 
-  // Load Google Sign-In script
-  useEffect(() => {
-    if (googleLoaded) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => setGoogleLoaded(true);
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [googleLoaded]);
-
   const login = useCallback(async (credential: string) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/google`, {
@@ -165,29 +175,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Initialize Google One Tap when loaded
-  useEffect(() => {
-    if (!googleLoaded || user || isGuest) return;
-
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!clientId) {
-      console.warn('VITE_GOOGLE_CLIENT_ID not configured');
-      return;
-    }
-
-    window.google?.accounts.id.initialize({
-      client_id: clientId,
-      callback: (response: any) => {
-        if (response.credential) {
-          login(response.credential);
-        }
-      },
-    });
-
-    // Do not auto-prompt on page load. Headless/prod smoke sessions can emit
-    // Google One Tap provider errors before the user has asked to sign in.
-  }, [googleLoaded, user, isGuest, login]);
-
   const signInWithGoogle = async () => {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (!clientId) {
@@ -202,15 +189,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (!googleLoaded) {
-      console.error('Google Sign-In script not loaded yet');
+    try {
+      await loadGoogleIdentity();
+    } catch (error) {
+      console.error('Google Sign-In script failed to load:', error);
       reportAuthFailure({
         provider: 'google',
         stage: 'signin',
-        reason: 'Google Sign-In script not loaded',
+        reason: 'Google Sign-In script failed to load',
         source: 'auth-context',
       });
-      alert('Google Sign-In is loading, please try again in a moment.');
+      alert('Google Sign-In could not load. Please check your connection and try again.');
       return;
     }
 

@@ -22,7 +22,15 @@ function RouteLoading() {
   );
 }
 
-const Today = lazy(() => import('./pages/Today'));
+const loadToday = () => import('./pages/Today');
+
+// Today is the default workspace. Start its module graph with the entry bundle
+// so the headline does not wait for the router's first lazy-import waterfall.
+if (window.location.pathname === '/' || window.location.pathname === '/today') {
+  void loadToday();
+}
+
+const Today = lazy(loadToday);
 const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
