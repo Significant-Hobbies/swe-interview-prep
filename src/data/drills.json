@@ -972,18 +972,55 @@
       ]
     },
     {
+      "id": "build-g-counter-merge",
+      "title": "Make three replicas converge",
+      "conceptId": "collaboration-productivity",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "prompt": "Implement mergeGCounter(left, right) and valueGCounter(state). A grow-only counter stores one non-negative count per replica; merge takes the maximum count for every replica, and value sums the merged counts. Your merge must converge when updates arrive in different orders and remain unchanged when the same state is delivered twice.",
+      "expectedOutput": "Three independently updated replicas converge to the same {a:2,b:3,c:4} state and value 9 regardless of merge order.",
+      "hints": [
+        "Treat a missing replica entry as zero.",
+        "Per-key maximum makes merge commutative, associative, and idempotent."
+      ],
+      "solutionNotes": "A G-Counter is a state-based CRDT whose states form a join-semilattice. The per-replica maximum is the least upper bound, so reordered, repeated, or delayed delivery cannot decrease a count or prevent convergence.",
+      "testCases": [
+        {
+          "setup": "function canonical(state) { return Object.keys(state).sort().map((key) => `${key}:${state[key]}`).join(','); }",
+          "run": "const left = { a: 2, b: 0 }; const right = { a: 1, b: 3 }; console.log(canonical(mergeGCounter(left, right)));",
+          "expect": "a:2,b:3"
+        },
+        {
+          "setup": "function canonical(state) { return Object.keys(state).sort().map((key) => `${key}:${state[key]}`).join(','); }",
+          "run": "const left = { a: 2 }; const right = { b: 3 }; console.log(canonical(mergeGCounter(left, right)) === canonical(mergeGCounter(right, left)) ? 'commutative' : 'order-dependent');",
+          "expect": "commutative"
+        },
+        {
+          "setup": "function canonical(state) { return Object.keys(state).sort().map((key) => `${key}:${state[key]}`).join(','); }",
+          "run": "const state = { a: 2, b: 3 }; console.log(canonical(mergeGCounter(state, state)) === canonical(state) ? 'idempotent' : 'duplicates-change-state');",
+          "expect": "idempotent"
+        },
+        {
+          "setup": "function canonical(state) { return Object.keys(state).sort().map((key) => `${key}:${state[key]}`).join(','); }",
+          "run": "const a = { a: 2 }; const b = { b: 3 }; const c = { c: 4 }; const first = mergeGCounter(mergeGCounter(a, b), c); const second = mergeGCounter(a, mergeGCounter(c, b)); console.log(canonical(first), canonical(second), valueGCounter(first));",
+          "expect": ["a:2,b:3,c:4 a:2,b:3,c:4", "9"]
+        }
+      ],
+      "referenceSolution": "function mergeGCounter(left, right) {\n  const merged = {};\n  for (const key of new Set([...Object.keys(left), ...Object.keys(right)])) {\n    merged[key] = Math.max(left[key] ?? 0, right[key] ?? 0);\n  }\n  return merged;\n}\n\nfunction valueGCounter(state) {\n  return Object.values(state).reduce((sum, count) => sum + count, 0);\n}"
+    },
+    {
       "id": "design-collaborative-editor",
       "title": "Collaborative doc editor",
       "conceptId": "collaboration-productivity",
       "type": "system-design-prompt",
       "difficulty": "advanced",
-      "prompt": "Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Pick a conflict resolution model (OT vs CRDT) and explain the sync protocol.",
-      "expectedOutput": "Conflict model + a worked example of two concurrent edits being merged.",
+      "prompt": "Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Define how clients represent causality, choose OT or a specific CRDT family, explain the sync protocol, and work through two concurrent edits delivered in opposite orders.",
+      "expectedOutput": "Causality model + conflict algorithm + a worked merge showing that replicas reach the intended document state.",
       "hints": [
-        "CRDTs are easier to reason about; OT is more compact on the wire.",
-        "Cursor presence is a separate channel from edits."
+        "Name the invariant you need before choosing OT or a CRDT: convergence alone is not the same as preserving user intent.",
+        "Account for metadata growth, tombstones or garbage collection, offline duration, undo, and cursor presence."
       ],
-      "solutionNotes": "Pick the model that matches your latency budget — CRDTs tolerate offline, OT does not.",
+      "solutionNotes": "OT and CRDT are families, not single algorithms. A credible design states its causality model and convergence invariant, demonstrates a concurrent-edit trace, and prices coordination, metadata, garbage collection, undo, and offline behavior.",
       "testCases": [
         {
           "setup": "function validateOutline(o, keys) {\n  if (!o || typeof o !== 'object') return false;\n  const seen = new Set();\n  for (const key of keys) {\n    const value = o[key];\n    if (typeof value !== 'string') return false;\n    const text = value.trim();\n    if (text.length < 40 || text.split(/\\s+/).length < 6) return false;\n    if (seen.has(text.toLowerCase())) return false;\n    seen.add(text.toLowerCase());\n  }\n  return true;\n}",

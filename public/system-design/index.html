@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Design Interview Questions | SWE Prep</title>
+    <meta name="description" content="Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/system-design/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="System Design Interview Questions | SWE Prep">
+    <meta property="og:description" content="Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/system-design/">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="System Design Interview Questions | SWE Prep">
+    <meta name="twitter:description" content="Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"System Design Interview Questions","description":"Staged system-design interview cases with worked guides and targeted remediation.","url":"https://learn.significanthobbies.com/system-design/","numberOfItems":20,"hasPart":[{"@type":"Article","headline":"Design LLM Inference at 10K RPS | Interview Guide","url":"https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html"},{"@type":"Article","headline":"Design a Video Streaming Platform | Interview Guide","url":"https://learn.significanthobbies.com/system-design/video-streaming-platform.html"},{"@type":"Article","headline":"Design a Notification Service | Interview Guide","url":"https://learn.significanthobbies.com/system-design/notification-delivery-service.html"},{"@type":"Article","headline":"Design a Web Crawler | Interview Guide","url":"https://learn.significanthobbies.com/system-design/web-crawler.html"},{"@type":"Article","headline":"Design Dropbox or Google Drive | Interview Guide","url":"https://learn.significanthobbies.com/system-design/cloud-file-storage.html"},{"@type":"Article","headline":"Design Uber or Lyft | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ride-sharing-platform.html"},{"@type":"Article","headline":"Design Ticketmaster | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ticket-booking-platform.html"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://learn.significanthobbies.com"},{"@type":"ListItem","position":2,"name":"System design cases","item":"https://learn.significanthobbies.com/system-design/"}]}]}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a></nav>
+      <article>
+    <p class="eyebrow">Interview practice · 20 complete cases</p>
+    <h1>System design interview questions you can actually practice</h1>
+    <p class="lede">Move beyond prompt lists. Scope requirements, calculate capacity, defend an architecture, survive a failure injection, and repair the exact concept your answer missed.</p>
+    <section>
+      <h2>Practice the whole interview, not a memorized diagram</h2>
+      <p>Most system-design question lists stop at the prompt. Knowing that “design a rate limiter” is common does not prove that you can clarify its contract, estimate load, choose a consistency model, defend the hot path, or respond when the interviewer changes one constraint. These cases turn each question into a repeatable interview with observable evidence.</p>
+      <p>Every case follows six stages: scope the problem, estimate capacity, draw the high-level design, defend one critical path, respond to a failure, and review the result. The reference answer stays hidden during closed-book practice. After submission, scores cite your own words, missing dimensions link to focused concepts and drills, and already-demonstrated dimensions are not penalized by an unrelated gap.</p>
+      <p>If the topic is new, learn the linked mechanisms first and study an approved worked guide. Then wait before attempting the case without notes. If an interview is close, begin closed-book and use the review as diagnosis. A strong answer is not one remembered picture; it is a chain of explicit assumptions, unit-carrying calculations, named trade-offs, and operational responses.</p>
+    </section>
+    <section>
+      <h2>AI systems</h2>
+      <div class="card-grid"><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3><a href="/system-design/llm-inference-10k-rps.html">Design LLM inference at 10K RPS</a></h3>
+          <p>Design a production LLM inference service that sustains 10,000 requests per second. Explain how you turn that headline into capacity, architecture, overload, and reliability decisions.</p>
+          <p><a href="/mock?prompt=llm-inference-10k-rps&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/llm-inference-10k-rps.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design production RAG</h3>
+          <p>Design retrieval-augmented generation over a large, frequently changing document corpus with permissions and citations.</p>
+          <p><a href="/mock?prompt=production-rag&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a multi-tenant LLM gateway</h3>
+          <p>Design an API gateway in front of multiple LLM models and providers for thousands of tenants.</p>
+          <p><a href="/mock?prompt=multi-tenant-llm-gateway&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design real-time recommendations</h3>
+          <p>Design a real-time recommendation service for a large consumer application.</p>
+          <p><a href="/mock?prompt=real-time-recommendations&amp;from=guide">Start closed-book practice →</a></p>
+        </article></div>
+    </section><section>
+      <h2>Social and real-time</h2>
+      <div class="card-grid"><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design real-time chat</h3>
+          <p>Design real-time one-to-one and group chat for 50 million daily active users.</p>
+          <p><a href="/mock?prompt=real-time-chat&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a ranked news feed</h3>
+          <p>Design a ranked home feed for 100 million users with celebrity accounts, freshness, and moderation.</p>
+          <p><a href="/mock?prompt=ranked-news-feed&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a photo-sharing platform</h3>
+          <p>Design an Instagram-like photo-sharing service with uploads, transformations, privacy, feeds, likes, and safe deletion. Focus on media and social-delivery boundaries.</p>
+          <p><a href="/mock?prompt=photo-sharing-platform&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3><a href="/system-design/notification-delivery-service.html">Design a notification delivery service</a></h3>
+          <p>Design push, email, SMS, and in-app notification delivery with user preferences, priorities, quotas, retries, provider failure, and duplicate control.</p>
+          <p><a href="/mock?prompt=notification-delivery-service&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/notification-delivery-service.html">Read the worked guide</a></p>
+        </article></div>
+    </section><section>
+      <h2>Media and collaboration</h2>
+      <div class="card-grid"><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3><a href="/system-design/video-streaming-platform.html">Design a video streaming platform</a></h3>
+          <p>Design an on-demand video platform for creator uploads and global playback. Focus on the reusable upload, transcode, package, authorize, and CDN-delivery pattern rather than recommendations.</p>
+          <p><a href="/mock?prompt=video-streaming-platform&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/video-streaming-platform.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a collaborative document editor</h3>
+          <p>Design a Google Docs-like editor with real-time multi-user edits, offline work, presence, history, permissions, and deterministic convergence.</p>
+          <p><a href="/mock?prompt=collaborative-document-editor&amp;from=guide">Start closed-book practice →</a></p>
+        </article></div>
+    </section><section>
+      <h2>Infrastructure and storage</h2>
+      <div class="card-grid"><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a URL shortener</h3>
+          <p>Design a global URL-shortening service with custom aliases, analytics, expiration, and abuse controls.</p>
+          <p><a href="/mock?prompt=url-shortener&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 40 minutes</p>
+          <h3>Design a distributed rate limiter</h3>
+          <p>Design a global, multi-tenant rate limiter for an API gateway with burst allowances and regional enforcement.</p>
+          <p><a href="/mock?prompt=distributed-rate-limiter&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3><a href="/system-design/web-crawler.html">Design a web crawler</a></h3>
+          <p>Design a web-scale crawler that discovers, fetches, deduplicates, stores, and recrawls useful pages while obeying robots policy and host politeness.</p>
+          <p><a href="/mock?prompt=web-crawler&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/web-crawler.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a distributed cache</h3>
+          <p>Design a low-latency distributed cache with partitioning, replication, TTL, eviction, invalidation, node failure, hot keys, and stampede protection.</p>
+          <p><a href="/mock?prompt=distributed-cache&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design search autocomplete</h3>
+          <p>Design typeahead suggestions for a large search product with prefix lookup, ranking, trends, personalization, freshness, moderation, and low latency.</p>
+          <p><a href="/mock?prompt=search-autocomplete&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3><a href="/system-design/cloud-file-storage.html">Design cloud file storage</a></h3>
+          <p>Design Dropbox or Google Drive-style file synchronization with resumable uploads, folders, sharing, versions, offline conflicts, durability, and efficient transfer.</p>
+          <p><a href="/mock?prompt=cloud-file-storage&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/cloud-file-storage.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a distributed key-value store</h3>
+          <p>Design a Dynamo-style distributed key-value store with partitioning, replication, tunable consistency, durability, rebalancing, repair, and compaction.</p>
+          <p><a href="/mock?prompt=distributed-key-value-store&amp;from=guide">Start closed-book practice →</a></p>
+        </article></div>
+    </section><section>
+      <h2>Commerce and marketplaces</h2>
+      <div class="card-grid"><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3><a href="/system-design/ride-sharing-platform.html">Design a ride-sharing platform</a></h3>
+          <p>Design an Uber or Lyft-style marketplace with driver locations, nearby matching, dispatch offers, atomic trip assignment, live trip state, ETA, and regional spikes.</p>
+          <p><a href="/mock?prompt=ride-sharing-platform&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/ride-sharing-platform.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3><a href="/system-design/ticket-booking-platform.html">Design a ticket-booking platform</a></h3>
+          <p>Design Ticketmaster-style reserved-seat booking with event browse, a virtual waiting room, expiring holds, payments, oversell prevention, bots, and flash crowds.</p>
+          <p><a href="/mock?prompt=ticket-booking-platform&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/ticket-booking-platform.html">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a payment-processing system</h3>
+          <p>Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.</p>
+          <p><a href="/mock?prompt=payment-processing-system&amp;from=guide">Start closed-book practice →</a></p>
+        </article></div>
+    </section>
+    <section>
+      <h2>What the review measures</h2>
+      <p>Cases score requirements, capacity, architecture, critical-path judgment, and reliability as separate dimensions. The deterministic rubric looks for declared evidence and remains available without an AI provider. When optional AI critique is configured, it can judge phrasing against fixed anchors, but it cannot add requirements, dimensions, facts, or out-of-range scores.</p>
+      <p>7 source-reviewed worked guides are public. Practice-only cases receive guides only after their calculations, primary sources, and editorial explanations pass the same review. That prevents generic, templated pages from diluting the curriculum.</p>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

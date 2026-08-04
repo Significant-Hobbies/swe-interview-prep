@@ -35,7 +35,7 @@ measurements, or a reviewable design artifact.
 - [Feed Systems](https://learn.significanthobbies.com/curriculum/concepts/social-media.html) (core) — Fan-out write/read, timeline.
 - [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html) (core) — CDN, HLS, transcoding pipeline.
 - [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport.html) (core) — Geohash, quadtree, dispatch.
-- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) (advanced) — OT, CRDT, conflict resolution.
+- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) (advanced) — Causality, OT, CRDT merge laws, and offline conflict resolution.
 - [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html) (advanced) — End-to-end design of a search platform: ingestion, indexing, query, ranking.
 - [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html) (advanced) — Architecting a production RAG system: ingestion, retrieval, generation, evals.
 - [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html) (core) — Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.

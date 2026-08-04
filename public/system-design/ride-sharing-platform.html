@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Design Uber or Lyft | Interview Guide | SWE Prep</title>
+    <meta name="description" content="Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/system-design/ride-sharing-platform.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Design Uber or Lyft | Interview Guide | SWE Prep">
+    <meta property="og:description" content="Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/system-design/ride-sharing-platform.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Design Uber or Lyft | Interview Guide | SWE Prep">
+    <meta name="twitter:description" content="Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Design Uber or Lyft | Interview Guide","description":"Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.","url":"https://learn.significanthobbies.com/system-design/ride-sharing-platform.html","datePublished":"2026-08-05","dateModified":"2026-08-05","author":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"publisher":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"about":["Geo Systems","Real-time Systems","Transaction Processing","Unique ID Generation","Observability"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://learn.significanthobbies.com"},{"@type":"ListItem","position":2,"name":"System design cases","item":"https://learn.significanthobbies.com/system-design/"},{"@type":"ListItem","position":3,"name":"Design a ride-sharing platform","item":"https://learn.significanthobbies.com/system-design/ride-sharing-platform.html"}]}]}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/system-design/">System design cases</a></nav>
+      <article>
+    <p class="eyebrow">System design interview guide · 45 minutes</p>
+    <h1>Design a ride-sharing platform</h1>
+    <p class="lede">Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.</p>
+    <p><a href="/mock?prompt=ride-sharing-platform&amp;from=guide">Start the closed-book case →</a></p>
+    <section>
+      <h2>1. Clarify the contract</h2>
+      <p>Scope rider requests, nearby driver discovery, offer and acceptance, live trip status, cancellation, and payment handoff. Ask about cities, active drivers, location frequency, match latency, ETA accuracy, pooled rides, scheduled rides, and safety. Assume one rider and one driver per trip, location can be slightly stale, but a driver cannot hold two active assignments. Pricing and ETA models may assist decisions; the durable trip state machine remains authoritative when models are unavailable.</p><p>Treat the product name as a conversation starter, not a specification. For a ride-sharing marketplace, state what is in scope, what is explicitly excluded, who calls the system, which operation is user-visible, and whether consistency, availability, latency, durability, privacy, or cost dominates. Ask for average and peak traffic, object sizes, geographic distribution, retention, and the failure domain the design must survive. Then choose concrete assumptions and keep returning to them. This prevents a familiar brand from smuggling in dozens of features and gives the interviewer a clear way to challenge the design without changing the problem silently.</p>
+    </section><section>
+      <h2>2. Capacity math</h2>
+      <p>Assume one million active drivers sending a location every four seconds: 250,000 updates/s, with city and event hot spots. If five million rides/day peak at 10× average, match creation can reach roughly 580/s, far below telemetry volume. Size ingestion bandwidth from update bytes, index writes from meaningful cell changes, fan-out from candidate offers, and trip-event retention separately. Use arrival rate times match duration to estimate concurrent searches and reserve capacity for a regional demand spike.</p><p>Carry units through every estimate. Convert daily volume into average operations per second, multiply by an explicit peak factor, and separate reads, writes, background work, storage growth, and network egress. Estimate concurrent work with arrival rate multiplied by time in system when requests remain active. The purpose is not numerical theater: each result must change a queue, partition key, cache, retention policy, or fleet decision. Name the uncertainty with the largest architectural effect and explain how a load test or production measurement would replace the assumption before launch.</p>
+    </section><section>
+      <h2>3. Architecture</h2>
+      <p>Driver apps publish authenticated sequenced locations to regional gateways and a durable stream. A location service keeps the latest accepted point and updates an in-memory geospatial index by H3 or S2 cell. Rider requests enter a trip service, which stores an idempotent requested state and asks matching for expanding nearby candidates filtered by availability and policy. A dispatch service sends bounded offers; one transactional compare-and-swap changes driver and trip to assigned. Trip events then drive rider/driver streams, receipts, and asynchronous analytics.</p><p>Describe one end-to-end request before listing components. Separate synchronous acceptance from asynchronous processing, identify the authoritative state, and say where idempotency, authorization, rate limits, and backpressure live. Keep the control plane—configuration, placement, rollout, and policy—out of the hot data path when possible. For a ride-sharing marketplace, the architecture should make fresh geospatial supply indexing plus an atomic trip-assignment state machine visible rather than hiding it behind a generic queue and database. Name ownership boundaries and the event or state transition passed between them so retries and partial failure have defined semantics.</p>
+    </section><section>
+      <h2>4. Deep dive</h2>
+      <p>Partition the live index by city and hierarchical cell. Query the pickup cell, then expand rings until enough candidates or a latency boundary is reached. Location updates carry driver ID, event time, sequence, coordinates, accuracy, and expiry; reject older sequences and remove stale drivers. Candidate ranking can combine ETA, distance, acceptance likelihood, and fairness, but assignment uses a lease or conditional write so concurrent matchers cannot win the same driver. Releasing an expired offer must also be version-checked.</p><p>Choose the mechanism that can invalidate the entire design and defend it with alternatives. Explain its data model, concurrency boundary, partition key, ordering or consistency guarantee, and what happens at the tail rather than only on average. Compare at least two workable choices, then select one using the stated contract. A strong deep dive also includes operational evidence: the metric that shows saturation, the invariant a test can assert, and the recovery action when the mechanism is wrong. This is where the answer demonstrates engineering judgment instead of diagram recall.</p>
+    </section><section>
+      <h2>5. Failure handling</h2>
+      <p>During a stadium exit, one cell becomes hot and locations may lag. Spread cell ownership, batch index updates, cap search expansion, degrade to coarser cells, and expose longer wait estimates. Do not match drivers whose location age crosses a safety threshold. If dispatch times out after driver acceptance, retry by trip and offer ID and read the authoritative assignment before sending another offer. A regional stream failure freezes stale supply, diverts new requests when safe, and reconciles trip events before normal dispatch resumes.</p><p>Walk through detection, containment, degraded service, recovery, and reconciliation in that order. Bound queues and retries before overload; include deadlines, jitter, retry budgets, poison-item isolation, and idempotent replay. Distinguish an unavailable dependency from an ambiguous outcome because the latter may already have committed a side effect. State which features can fail open, which must fail closed, and which can return stale data. Recovery is incomplete until duplicated, missing, or divergent work is reconciled and the system proves that the original invariant holds again.</p>
+    </section><section>
+      <h2>6. Observability and cost</h2>
+      <p>Track location ingest lag and age, active indexed supply, candidate count, ring expansions, offer latency, acceptance, duplicate-assignment invariant violations, match time, cancellation, ETA error, and regional saturation. Measure rider and driver outcomes by geography without exposing raw precise traces broadly. Cost per completed trip includes location bandwidth, stream processing, index memory, map/route calls, messaging, and support. The supplied Lyft ETA reliability, Uber DeepETA, and DoorDash probabilistic ETA studies inform model monitoring and uncertainty, not assignment correctness.</p><p>Measure the user contract, work queues, resource saturation, correctness invariants, and spend separately. Use latency distributions rather than averages and break them down by operation, region, tenant, and outcome. Track queue age, retries, deduplication, throttling, and reconciliation because a green success rate can hide delayed or duplicated work. Tie cost to a useful unit such as a delivered notification, streamed minute, synchronized gigabyte, crawled document, matched trip, or confirmed booking. Capacity and cost dashboards should use the same workload dimensions as the interview estimates so assumptions can be replaced with evidence.</p>
+    </section><section>
+      <h2>7. Common mistakes</h2>
+      <p>Do not write every GPS point synchronously to one relational table and query latitude/longitude with a full scan. Avoid treating nearest distance as travel ETA, accepting out-of-order points, broadcasting each request to all drivers, or assigning through two independent writes. A map provider does not solve marketplace state. Explain stale-location policy, cell skew, offer leases, atomic assignment, rider and driver idempotency, and what the user sees when matching is degraded.</p><p>Weak answers usually jump to branded technology, omit the authoritative state, or claim exactly-once delivery without an idempotent effect. They calculate average QPS but ignore burst shape, fan-out, payload size, background amplification, and hot keys. Another common failure is promising multi-region availability without describing ownership, conflict handling, or spare capacity. Avoid treating a cache, message broker, or database as a magic box. Name the invariant each component protects and the trade-off it introduces. If a design choice would remain identical after the workload changed by one hundred times, the estimate probably did not inform the architecture.</p>
+    </section><section>
+      <h2>8. Harder follow-ups</h2>
+      <p>Add pooled rides by turning matching into constrained route insertion with explicit latency and detour budgets. Add scheduled rides with reservation and rebalancing. Discuss driver privacy, spoofed GPS, safety incident isolation, airport queues, city failover, and surge pricing. For learned ETA or acceptance ranking, define training labels, online features, calibration by region, uncertainty, drift, experiment guardrails, and a deterministic distance/time fallback. Explain how fairness goals interact with pure nearest-driver optimization.</p><p>When the interviewer changes a constraint, rebuild from the contract rather than patching the diagram. Consider data residency, abusive tenants, a tenfold burst, regional isolation, privacy deletion, multi-device concurrency, and a dependency that times out after committing. Explain which assumptions and components change and which invariant remains. Also connect the case to modern ML where relevant: ranking, anomaly detection, forecasting, moderation, or ETA models add freshness, evaluation, fallback, and online-offline consistency requirements, but they do not replace the deterministic serving and correctness path. End with the first experiment that would reduce the largest remaining uncertainty.</p>
+    </section>
+    <section><h2>Answer outline</h2><p>Ingest sequenced driver locations into a regional stream and latest-location store, index only fresh available supply in hierarchical geospatial cells, and search expanding rings for bounded candidate sets. Rank offers with ETA and policy, but atomically compare-and-swap trip and driver assignment through an idempotent state machine. Degrade hot cells safely, reject stale supply, reconcile ambiguous offers, and monitor location age, match latency, candidate depth, assignment invariants, cancellation, ETA error, and cost per completed trip.</p></section>
+    <section>
+      <h2>Primary sources</h2>
+      <ul class="resource-list"><li><a href="https://h3geo.org/docs/" rel="noreferrer">Uber H3 documentation</a> <span class="muted">(official-doc)</span></li><li><a href="https://postgis.net/workshops/postgis-intro/indexing.html" rel="noreferrer">PostGIS spatial indexes</a> <span class="muted">(official-doc)</span></li><li><a href="https://s2geometry.io/" rel="noreferrer">Google S2 Geometry</a> <span class="muted">(official-doc)</span></li><li><a href="https://eng.lyft.com/eta-estimated-time-of-arrival-reliability-at-lyft-d4ca2720bda8" rel="noreferrer">Lyft ETA reliability</a> <span class="muted">(official-doc)</span></li><li><a href="https://www.uber.com/en-GB/blog/deepeta-how-uber-predicts-arrival-times/" rel="noreferrer">Uber DeepETA</a> <span class="muted">(official-doc)</span></li></ul>
+    </section>
+    <section class="grid two">
+      <div><h2>Repair the mechanisms</h2><ul class="link-list"><li><a href="/curriculum/concepts/location-transport.html">Geo Systems</a></li><li><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></li><li><a href="/curriculum/concepts/transaction-processing.html">Transaction Processing</a></li><li><a href="/curriculum/concepts/unique-id-generation.html">Unique ID Generation</a></li><li><a href="/curriculum/concepts/monitoring-analytics.html">Observability</a></li></ul></div>
+      <div><h2>Practice drills</h2><ul class="link-list"><li><a href="/drills/design-ride-sharing">Ride-sharing dispatch</a></li><li><a href="/drills/queue-backpressure">Queue backpressure</a></li><li><a href="/drills/implement-idempotency-key">Implement idempotency keys</a></li><li><a href="/drills/practice-opentelemetry-observability">Design exercise: Observability &amp; OpenTelemetry</a></li></ul></div>
+    </section>
+    <p class="cta"><a href="/mock?prompt=ride-sharing-platform&amp;from=guide">Close the guide and attempt the interview →</a></p>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

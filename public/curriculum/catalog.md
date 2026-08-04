@@ -5,6 +5,7 @@ A public, JavaScript-free index of 250 concepts across
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
 - Human curriculum hub: https://learn.significanthobbies.com/curriculum/
+- System-design case library: https://learn.significanthobbies.com/system-design/
 - Structured JSON catalog: https://learn.significanthobbies.com/curriculum/catalog.json
 - Interactive learning app: https://learn.significanthobbies.com/learn
 
@@ -34,6 +35,29 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 - [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html) (90d) — Build repository-aware tools that analyze, test, review, debug, and safely remediate code.
 - [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html) (90d) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
 - [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) (90d) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
+
+# System-design interview cases
+
+- [Design LLM inference at 10K RPS](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html) — Design a production LLM inference service that sustains 10,000 requests per second. Explain how you turn that headline into capacity, architecture, overload, and reliability decisions.
+- [Design production RAG](https://learn.significanthobbies.com/mock?prompt=production-rag&from=guide) — Design retrieval-augmented generation over a large, frequently changing document corpus with permissions and citations.
+- [Design a multi-tenant LLM gateway](https://learn.significanthobbies.com/mock?prompt=multi-tenant-llm-gateway&from=guide) — Design an API gateway in front of multiple LLM models and providers for thousands of tenants.
+- [Design real-time recommendations](https://learn.significanthobbies.com/mock?prompt=real-time-recommendations&from=guide) — Design a real-time recommendation service for a large consumer application.
+- [Design a URL shortener](https://learn.significanthobbies.com/mock?prompt=url-shortener&from=guide) — Design a global URL-shortening service with custom aliases, analytics, expiration, and abuse controls.
+- [Design a distributed rate limiter](https://learn.significanthobbies.com/mock?prompt=distributed-rate-limiter&from=guide) — Design a global, multi-tenant rate limiter for an API gateway with burst allowances and regional enforcement.
+- [Design real-time chat](https://learn.significanthobbies.com/mock?prompt=real-time-chat&from=guide) — Design real-time one-to-one and group chat for 50 million daily active users.
+- [Design a ranked news feed](https://learn.significanthobbies.com/mock?prompt=ranked-news-feed&from=guide) — Design a ranked home feed for 100 million users with celebrity accounts, freshness, and moderation.
+- [Design a video streaming platform](https://learn.significanthobbies.com/system-design/video-streaming-platform.html) — Design an on-demand video platform for creator uploads and global playback. Focus on the reusable upload, transcode, package, authorize, and CDN-delivery pattern rather than recommendations.
+- [Design a photo-sharing platform](https://learn.significanthobbies.com/mock?prompt=photo-sharing-platform&from=guide) — Design an Instagram-like photo-sharing service with uploads, transformations, privacy, feeds, likes, and safe deletion. Focus on media and social-delivery boundaries.
+- [Design a collaborative document editor](https://learn.significanthobbies.com/mock?prompt=collaborative-document-editor&from=guide) — Design a Google Docs-like editor with real-time multi-user edits, offline work, presence, history, permissions, and deterministic convergence.
+- [Design a notification delivery service](https://learn.significanthobbies.com/system-design/notification-delivery-service.html) — Design push, email, SMS, and in-app notification delivery with user preferences, priorities, quotas, retries, provider failure, and duplicate control.
+- [Design a web crawler](https://learn.significanthobbies.com/system-design/web-crawler.html) — Design a web-scale crawler that discovers, fetches, deduplicates, stores, and recrawls useful pages while obeying robots policy and host politeness.
+- [Design a distributed cache](https://learn.significanthobbies.com/mock?prompt=distributed-cache&from=guide) — Design a low-latency distributed cache with partitioning, replication, TTL, eviction, invalidation, node failure, hot keys, and stampede protection.
+- [Design search autocomplete](https://learn.significanthobbies.com/mock?prompt=search-autocomplete&from=guide) — Design typeahead suggestions for a large search product with prefix lookup, ranking, trends, personalization, freshness, moderation, and low latency.
+- [Design cloud file storage](https://learn.significanthobbies.com/system-design/cloud-file-storage.html) — Design Dropbox or Google Drive-style file synchronization with resumable uploads, folders, sharing, versions, offline conflicts, durability, and efficient transfer.
+- [Design a distributed key-value store](https://learn.significanthobbies.com/mock?prompt=distributed-key-value-store&from=guide) — Design a Dynamo-style distributed key-value store with partitioning, replication, tunable consistency, durability, rebalancing, repair, and compaction.
+- [Design a ride-sharing platform](https://learn.significanthobbies.com/system-design/ride-sharing-platform.html) — Design an Uber or Lyft-style marketplace with driver locations, nearby matching, dispatch offers, atomic trip assignment, live trip state, ETA, and regional spikes.
+- [Design a ticket-booking platform](https://learn.significanthobbies.com/system-design/ticket-booking-platform.html) — Design Ticketmaster-style reserved-seat booking with event browse, a virtual waiting room, expiring holds, payments, oversell prevention, bots, and flash crowds.
+- [Design a payment-processing system](https://learn.significanthobbies.com/mock?prompt=payment-processing-system&from=guide) — Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.
 
 # Tracks and concepts
 
@@ -238,7 +262,7 @@ Architecture-level thinking: low-level design, scalability, distributed systems,
 - [Feed Systems](https://learn.significanthobbies.com/curriculum/concepts/social-media.html) — Fan-out write/read, timeline.
 - [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html) — CDN, HLS, transcoding pipeline.
 - [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport.html) — Geohash, quadtree, dispatch.
-- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) — OT, CRDT, conflict resolution.
+- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) — Causality, OT, CRDT merge laws, and offline conflict resolution.
 - [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html) — End-to-end design of a search platform: ingestion, indexing, query, ranking.
 - [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html) — Architecting a production RAG system: ingestion, retrieval, generation, evals.
 - [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html) — Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.

@@ -71,6 +71,6 @@ Walk a complete "design X" with capacity, storage choice, and failure modes.
 - [Feed Systems](https://learn.significanthobbies.com/curriculum/concepts/social-media.html) — Fan-out write/read, timeline.
 - [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html) — CDN, HLS, transcoding pipeline.
 - [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport.html) — Geohash, quadtree, dispatch.
-- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) — OT, CRDT, conflict resolution.
+- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html) — Causality, OT, CRDT merge laws, and offline conflict resolution.
 - [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html) — End-to-end design of a search platform: ingestion, indexing, query, ranking.
 - [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html) — Architecting a production RAG system: ingestion, retrieval, generation, evals.

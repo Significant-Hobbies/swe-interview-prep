@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-07-26",
+  "generatedAt": "2026-08-04",
   "_meta": {
     "tier": "S",
     "optional": true,
@@ -9,11 +9,11 @@
       "video": 180,
       "paper": 221,
       "blog": 177,
-      "book": 149,
-      "problem": 250,
+      "book": 150,
+      "problem": 251,
       "write": 250,
-      "more": 98,
-      "items": 1325
+      "more": 99,
+      "items": 1328
     }
   },
   "packs": {
@@ -2850,15 +2850,30 @@
           "url": "https://martin.kleppmann.com/papers/local-first.pdf"
         },
         {
+          "category": "book",
+          "title": "A comprehensive study of Convergent and Commutative Replicated Data Types",
+          "url": "https://hal.inria.fr/inria-00555588/document"
+        },
+        {
+          "category": "more",
+          "title": "Collaborative Text Editing with Eg-walker: Better, Faster, Smaller",
+          "url": "https://arxiv.org/abs/2409.14252"
+        },
+        {
           "category": "problem",
-          "title": "Collaborative doc editor",
-          "url": "/drills/design-collaborative-editor"
+          "title": "Make three replicas converge",
+          "url": "/drills/build-g-counter-merge"
         },
         {
           "category": "write",
           "title": "Explain back",
           "url": "",
-          "body": "Explain \"Collaboration Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically"
+          "body": "Explain \"Collaboration Systems\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Collaborative state needs an explicit notion of causality and a deterministic reconciliation rule"
+        },
+        {
+          "category": "problem",
+          "title": "Collaborative doc editor",
+          "url": "/drills/design-collaborative-editor"
         }
       ]
     },

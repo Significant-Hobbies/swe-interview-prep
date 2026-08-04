@@ -1,0 +1,531 @@
+{
+  "generated": true,
+  "counts": {
+    "cases": 20,
+    "approvedGuides": 7
+  },
+  "cases": [
+    {
+      "id": "llm-inference-10k-rps",
+      "version": "1.0.0",
+      "title": "Design LLM inference at 10K RPS",
+      "prompt": "Design a production LLM inference service that sustains 10,000 requests per second. Explain how you turn that headline into capacity, architecture, overload, and reliability decisions.",
+      "category": "ai-systems",
+      "pattern": "token-aware accelerator scheduling",
+      "criticalPath": "admission through continuous batching to streamed decode",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=llm-inference-10k-rps&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html",
+      "conceptIds": [
+        "inference-engines",
+        "continuous-batching",
+        "kv-cache-paged-attention",
+        "inference-cost-latency",
+        "inference-hardware",
+        "capacity-estimation",
+        "queueing-theory",
+        "load-balancing",
+        "rate-limiting",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "practice-inference-engines",
+        "practice-continuous-batching",
+        "practice-kv-cache-paged-attention",
+        "practice-inference-hardware",
+        "queue-backpressure"
+      ]
+    },
+    {
+      "id": "production-rag",
+      "version": "1.0.0",
+      "title": "Design production RAG",
+      "prompt": "Design retrieval-augmented generation over a large, frequently changing document corpus with permissions and citations.",
+      "category": "ai-systems",
+      "pattern": "fresh permission-aware retrieval augmentation",
+      "criticalPath": "authorized hybrid retrieval through grounded generation",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=production-rag&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "rag-system-design",
+        "rag",
+        "embeddings",
+        "reranking",
+        "ranking-metrics",
+        "cap-theorem",
+        "replication",
+        "monitoring-analytics",
+        "capacity-estimation"
+      ],
+      "drillIds": ["design-rag-system", "build-rag-pipeline", "replication-lag-read"]
+    },
+    {
+      "id": "multi-tenant-llm-gateway",
+      "version": "1.0.0",
+      "title": "Design a multi-tenant LLM gateway",
+      "prompt": "Design an API gateway in front of multiple LLM models and providers for thousands of tenants.",
+      "category": "ai-systems",
+      "pattern": "budgeted multi-provider model routing",
+      "criticalPath": "tenant admission through provider streaming and accounting",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=multi-tenant-llm-gateway&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "api-design",
+        "auth-systems",
+        "capacity-estimation",
+        "queueing-theory",
+        "strategy-pattern",
+        "rate-limiter-design",
+        "idempotency",
+        "monitoring-analytics",
+        "rate-limiting"
+      ],
+      "drillIds": [
+        "design-rate-limiter",
+        "queue-backpressure",
+        "design-pricing-strategies",
+        "token-bucket-limiter"
+      ]
+    },
+    {
+      "id": "real-time-recommendations",
+      "version": "1.0.0",
+      "title": "Design real-time recommendations",
+      "prompt": "Design a real-time recommendation service for a large consumer application.",
+      "category": "ai-systems",
+      "pattern": "online candidate retrieval and ranking",
+      "criticalPath": "fresh features through retrieve-rank-serve",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=real-time-recommendations&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "ranking-metrics",
+        "social-media",
+        "capacity-estimation",
+        "queueing-theory",
+        "embeddings",
+        "topk-vector-search",
+        "monitoring-analytics",
+        "replication"
+      ],
+      "drillIds": [
+        "design-news-feed",
+        "queue-backpressure",
+        "practice-opentelemetry-observability",
+        "replication-lag-read"
+      ]
+    },
+    {
+      "id": "url-shortener",
+      "version": "1.0.0",
+      "title": "Design a URL shortener",
+      "prompt": "Design a global URL-shortening service with custom aliases, analytics, expiration, and abuse controls.",
+      "category": "infrastructure-storage",
+      "pattern": "compact identifier allocation for read-heavy redirects",
+      "criticalPath": "short-code lookup to low-latency redirect",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=url-shortener&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "api-design",
+        "caching",
+        "capacity-estimation",
+        "math-geometry",
+        "storage-retrieval",
+        "consistent-hashing",
+        "sharding",
+        "rate-limiting",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "cache-key-and-ttl",
+        "design-consistent-hashing",
+        "storage-vs-retrieval",
+        "design-rate-limiter"
+      ]
+    },
+    {
+      "id": "distributed-rate-limiter",
+      "version": "1.0.0",
+      "title": "Design a distributed rate limiter",
+      "prompt": "Design a global, multi-tenant rate limiter for an API gateway with burst allowances and regional enforcement.",
+      "category": "infrastructure-storage",
+      "pattern": "distributed quota enforcement under clock and region skew",
+      "criticalPath": "atomic allowance decision before protected work",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-rate-limiter&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "rate-limiter-design",
+        "api-design",
+        "capacity-estimation",
+        "queueing-theory",
+        "rate-limiting",
+        "storage-retrieval",
+        "cap-theorem",
+        "monitoring-analytics",
+        "replication"
+      ],
+      "drillIds": [
+        "design-rate-limiter",
+        "token-bucket-limiter",
+        "implement-token-bucket",
+        "practice-opentelemetry-observability"
+      ]
+    },
+    {
+      "id": "real-time-chat",
+      "version": "1.0.0",
+      "title": "Design real-time chat",
+      "prompt": "Design real-time one-to-one and group chat for 50 million daily active users.",
+      "category": "social-real-time",
+      "pattern": "durable ordered messaging over long-lived connections",
+      "criticalPath": "connected send through durable fan-out and acknowledgement",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=real-time-chat&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "messaging-realtime",
+        "api-design",
+        "capacity-estimation",
+        "queueing-theory",
+        "message-queues",
+        "idempotency",
+        "sharding",
+        "replication",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "design-chat-system",
+        "queue-backpressure",
+        "shard-key-choice",
+        "replication-lag-read"
+      ]
+    },
+    {
+      "id": "ranked-news-feed",
+      "version": "1.0.0",
+      "title": "Design a ranked news feed",
+      "prompt": "Design a ranked home feed for 100 million users with celebrity accounts, freshness, and moderation.",
+      "category": "social-real-time",
+      "pattern": "hybrid social fan-out with policy-aware ranking",
+      "criticalPath": "candidate assembly through filtering ranking and cursor delivery",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ranked-news-feed&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "social-media",
+        "api-design",
+        "capacity-estimation",
+        "queueing-theory",
+        "ranking-metrics",
+        "caching",
+        "sharding",
+        "monitoring-analytics",
+        "replication"
+      ],
+      "drillIds": [
+        "design-news-feed",
+        "queue-backpressure",
+        "shard-key-choice",
+        "practice-opentelemetry-observability"
+      ]
+    },
+    {
+      "id": "video-streaming-platform",
+      "version": "1.0.0",
+      "title": "Design a video streaming platform",
+      "prompt": "Design an on-demand video platform for creator uploads and global playback. Focus on the reusable upload, transcode, package, authorize, and CDN-delivery pattern rather than recommendations.",
+      "category": "media-collaboration",
+      "pattern": "adaptive bitrate media processing and edge delivery",
+      "criticalPath": "immutable manifest publication through CDN-backed adaptive playback",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=video-streaming-platform&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/video-streaming-platform.html",
+      "conceptIds": [
+        "streaming-media",
+        "cdn-edge-delivery",
+        "object-storage",
+        "queueing-theory",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "design-video-streaming",
+        "queue-backpressure",
+        "cache-key-and-ttl",
+        "practice-opentelemetry-observability"
+      ]
+    },
+    {
+      "id": "photo-sharing-platform",
+      "version": "1.0.0",
+      "title": "Design a photo-sharing platform",
+      "prompt": "Design an Instagram-like photo-sharing service with uploads, transformations, privacy, feeds, likes, and safe deletion. Focus on media and social-delivery boundaries.",
+      "category": "social-real-time",
+      "pattern": "privacy-aware social media processing and delivery",
+      "criticalPath": "authorized media upload processing and CDN delivery with deletion propagation",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=photo-sharing-platform&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "image-video-generation",
+        "object-storage",
+        "cdn-edge-delivery",
+        "social-media",
+        "security-isolation-boundaries"
+      ],
+      "drillIds": [
+        "practice-image-video-generation",
+        "design-news-feed",
+        "cache-key-and-ttl",
+        "shard-key-choice"
+      ]
+    },
+    {
+      "id": "collaborative-document-editor",
+      "version": "1.0.0",
+      "title": "Design a collaborative document editor",
+      "prompt": "Design a Google Docs-like editor with real-time multi-user edits, offline work, presence, history, permissions, and deterministic convergence.",
+      "category": "media-collaboration",
+      "pattern": "convergent offline-capable replicated editing",
+      "criticalPath": "causally tracked document operations through durable convergence and snapshots",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=collaborative-document-editor&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "conflict-resolution",
+        "messaging-realtime",
+        "state-management",
+        "idempotency",
+        "replication"
+      ],
+      "drillIds": [
+        "build-g-counter-merge",
+        "design-chat-system",
+        "implement-idempotency-key",
+        "replication-lag-read"
+      ]
+    },
+    {
+      "id": "notification-delivery-service",
+      "version": "1.0.0",
+      "title": "Design a notification delivery service",
+      "prompt": "Design push, email, SMS, and in-app notification delivery with user preferences, priorities, quotas, retries, provider failure, and duplicate control.",
+      "category": "social-real-time",
+      "pattern": "preference-aware multi-channel fan-out with provider isolation",
+      "criticalPath": "durable intent through policy rendering and deduplicated provider delivery",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=notification-delivery-service&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/notification-delivery-service.html",
+      "conceptIds": [
+        "message-queues",
+        "webhooks",
+        "retries-and-circuit-breakers",
+        "idempotency",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "queue-backpressure",
+        "webhook-signature-verify",
+        "implement-idempotency-key",
+        "practice-opentelemetry-observability"
+      ]
+    },
+    {
+      "id": "web-crawler",
+      "version": "1.0.0",
+      "title": "Design a web crawler",
+      "prompt": "Design a web-scale crawler that discovers, fetches, deduplicates, stores, and recrawls useful pages while obeying robots policy and host politeness.",
+      "category": "infrastructure-storage",
+      "pattern": "polite distributed URL frontier and recrawl scheduling",
+      "criticalPath": "priority plus per-host eligibility through bounded fetch and deduplication",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=web-crawler&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/web-crawler.html",
+      "conceptIds": [
+        "search-platform-design",
+        "message-queues",
+        "sharding",
+        "object-storage",
+        "rate-limiting"
+      ],
+      "drillIds": [
+        "design-search-platform",
+        "queue-backpressure",
+        "shard-key-choice",
+        "cache-key-and-ttl"
+      ]
+    },
+    {
+      "id": "distributed-cache",
+      "version": "1.0.0",
+      "title": "Design a distributed cache",
+      "prompt": "Design a low-latency distributed cache with partitioning, replication, TTL, eviction, invalidation, node failure, hot keys, and stampede protection.",
+      "category": "infrastructure-storage",
+      "pattern": "partitioned volatile key-value serving with bounded stampede recovery",
+      "criticalPath": "consistent key routing through eviction replication and miss collapse",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-cache&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "caching",
+        "consistent-hashing",
+        "replication",
+        "monitoring-analytics",
+        "queueing-theory"
+      ],
+      "drillIds": [
+        "cache-key-and-ttl",
+        "cache-stampede",
+        "shard-key-choice",
+        "replication-lag-read"
+      ]
+    },
+    {
+      "id": "search-autocomplete",
+      "version": "1.0.0",
+      "title": "Design search autocomplete",
+      "prompt": "Design typeahead suggestions for a large search product with prefix lookup, ranking, trends, personalization, freshness, moderation, and low latency.",
+      "category": "infrastructure-storage",
+      "pattern": "low-latency prefix retrieval with freshness safety and ranking",
+      "criticalPath": "normalized prefix lookup through top-k ranking inside a keystroke budget",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=search-autocomplete&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "tries",
+        "search-platform-design",
+        "caching",
+        "ranking-metrics",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "trie-prefix-search",
+        "design-search-platform",
+        "cache-key-and-ttl",
+        "browse-vs-search-metrics"
+      ]
+    },
+    {
+      "id": "cloud-file-storage",
+      "version": "1.0.0",
+      "title": "Design cloud file storage",
+      "prompt": "Design Dropbox or Google Drive-style file synchronization with resumable uploads, folders, sharing, versions, offline conflicts, durability, and efficient transfer.",
+      "category": "infrastructure-storage",
+      "pattern": "content-addressed chunk synchronization with versioned metadata",
+      "criticalPath": "resumable missing-chunk transfer followed by atomic metadata version commit",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=cloud-file-storage&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/cloud-file-storage.html",
+      "conceptIds": [
+        "object-storage",
+        "storage-retrieval",
+        "conflict-resolution",
+        "replication",
+        "idempotency"
+      ],
+      "drillIds": [
+        "storage-vs-retrieval",
+        "replication-lag-read",
+        "implement-idempotency-key",
+        "shard-key-choice"
+      ]
+    },
+    {
+      "id": "distributed-key-value-store",
+      "version": "1.0.0",
+      "title": "Design a distributed key-value store",
+      "prompt": "Design a Dynamo-style distributed key-value store with partitioning, replication, tunable consistency, durability, rebalancing, repair, and compaction.",
+      "category": "infrastructure-storage",
+      "pattern": "replicated partitioned durable key-value state",
+      "criticalPath": "partition routing through quorum durability conflict repair and compaction",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-key-value-store&from=guide",
+      "guideUrl": null,
+      "conceptIds": ["sharding", "replication", "consensus", "wal", "lsm-tree", "isolation-levels"],
+      "drillIds": [
+        "shard-key-choice",
+        "replication-lag-read",
+        "practice-transaction-processing",
+        "storage-vs-retrieval"
+      ]
+    },
+    {
+      "id": "ride-sharing-platform",
+      "version": "1.0.0",
+      "title": "Design a ride-sharing platform",
+      "prompt": "Design an Uber or Lyft-style marketplace with driver locations, nearby matching, dispatch offers, atomic trip assignment, live trip state, ETA, and regional spikes.",
+      "category": "commerce-marketplaces",
+      "pattern": "geospatial moving-supply matching with atomic assignment",
+      "criticalPath": "fresh driver location index through bounded offer and trip assignment",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ride-sharing-platform&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/ride-sharing-platform.html",
+      "conceptIds": [
+        "location-transport",
+        "messaging-realtime",
+        "transaction-processing",
+        "unique-id-generation",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "design-ride-sharing",
+        "queue-backpressure",
+        "implement-idempotency-key",
+        "practice-opentelemetry-observability"
+      ]
+    },
+    {
+      "id": "ticket-booking-platform",
+      "version": "1.0.0",
+      "title": "Design a ticket-booking platform",
+      "prompt": "Design Ticketmaster-style reserved-seat booking with event browse, a virtual waiting room, expiring holds, payments, oversell prevention, bots, and flash crowds.",
+      "category": "commerce-marketplaces",
+      "pattern": "scarce inventory holds with idempotent purchase reconciliation",
+      "criticalPath": "atomic seat hold through ambiguous payment to confirmed order",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ticket-booking-platform&from=guide",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/ticket-booking-platform.html",
+      "conceptIds": [
+        "booking-inventory",
+        "transaction-processing",
+        "isolation-levels",
+        "idempotency",
+        "rate-limiting"
+      ],
+      "drillIds": [
+        "design-hotel-booking",
+        "practice-transaction-processing",
+        "payment-idempotency",
+        "design-rate-limiter"
+      ]
+    },
+    {
+      "id": "payment-processing-system",
+      "version": "1.0.0",
+      "title": "Design a payment-processing system",
+      "prompt": "Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.",
+      "category": "commerce-marketplaces",
+      "pattern": "idempotent payment state machine backed by an immutable double-entry ledger",
+      "criticalPath": "authorization through durable ledger posting settlement and reconciliation",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=payment-processing-system&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "ecommerce-payments",
+        "transaction-processing",
+        "idempotency",
+        "webhooks",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "payment-idempotency",
+        "implement-idempotency-key",
+        "webhook-signature-verify",
+        "practice-transaction-processing"
+      ]
+    }
+  ]
+}

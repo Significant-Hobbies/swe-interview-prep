@@ -2,6 +2,8 @@
 import { ARTIFACTS } from '../data/learning-os';
 import { loadAIConfig } from '../hooks/useAI';
 import { ALL_CONCEPTS } from '../hooks/useConcepts';
+import type { SystemDesignCase } from '../data/system-design-case-schema';
+import type { SystemDesignAttempt } from './systemDesignSession';
 
 /** True when a complete BYOK provider (endpoint + key + model) is configured. */
 export function aiConfigured(): boolean {
@@ -58,4 +60,32 @@ export function critiqueAnswer(
   expected: string
 ): Promise<Critique> {
   return postAI<Critique>('critique', { question, answer, expected });
+}
+
+export function critiqueSystemDesignAttempt(
+  caseDefinition: SystemDesignCase,
+  attempt: SystemDesignAttempt
+): Promise<unknown> {
+  return postAI<unknown>('critique', {
+    systemDesignCase: {
+      id: caseDefinition.id,
+      version: caseDefinition.version,
+      prompt: caseDefinition.prompt,
+      hiddenAssumptions: caseDefinition.hiddenAssumptions,
+      calculationAnchors: caseDefinition.calculationAnchors,
+      dimensions: caseDefinition.rubricDimensions.map((dimension) => ({
+        id: dimension.id,
+        label: dimension.label,
+        evidenceSignals: dimension.evidenceSignals,
+        misconceptionSignals: dimension.misconceptionSignals,
+        anchors: dimension.anchors,
+      })),
+    },
+    stageAnswers: Object.fromEntries(
+      Object.entries(attempt.answers).map(([stageId, submission]) => [
+        stageId,
+        submission?.answer ?? '',
+      ])
+    ),
+  });
 }

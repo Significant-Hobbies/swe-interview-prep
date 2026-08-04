@@ -1,0 +1,219 @@
+{
+  "change": "add-popular-system-design-case-batch",
+  "selectionDate": "2026-08-05",
+  "status": "owner-approved",
+  "selectionMethod": "Cross-list recurrence in current broad interview-prep lists, deduplicated against the existing eight cases and balanced by reusable system pattern.",
+  "selectionSources": [
+    "https://www.designgurus.io/blog/system-design-interview-questions-to-crack-your-next-faang-interview",
+    "https://www.educative.io/blog/system-design-interview-questions",
+    "https://www.tryexponent.com/blog/system-design-interview-guide"
+  ],
+  "ownerSourceMaterials": [
+    {
+      "path": "/Users/sarthak/Downloads/Content/Docs/useful/hld.jpeg",
+      "use": "Confirms the selected HLD classics and underlying estimation, storage, caching, sharding, replication, and messaging prerequisites."
+    },
+    {
+      "path": "/Users/sarthak/Downloads/Content/Docs/useful/interview_roadmap.jpeg",
+      "use": "Confirms the broader systems prerequisite map used by rubric remediation, including networking, databases, distributed systems, caching, load balancing, and observability."
+    },
+    {
+      "path": "/Users/sarthak/Downloads/Content/Docs/useful/lld.jpeg",
+      "use": "Kept as evidence for a later LLD-specific batch; its object-modeling questions are not mixed into this HLD case engine."
+    },
+    {
+      "path": "/Users/sarthak/Downloads/Content/Docs/useful/ML system design case studies.csv",
+      "use": "Supplies real engineering case studies for ML follow-ups and sources in recommendations, search, moderation, ETA, fraud, notifications, and media systems."
+    }
+  ],
+  "mlCaseStudyApplications": [
+    {
+      "caseId": "video-streaming-platform",
+      "examples": ["Netflix video annotation", "Tubi recommender monitoring"]
+    },
+    {
+      "caseId": "photo-sharing-platform",
+      "examples": ["Etsy visual representation learning", "Yelp video moderation"]
+    },
+    {
+      "caseId": "notification-delivery-service",
+      "examples": ["Uber out-of-app recommendation and communication"]
+    },
+    {
+      "caseId": "search-autocomplete",
+      "examples": ["Target real-time item autocomplete", "Instacart embedding search relevance"]
+    },
+    {
+      "caseId": "ride-sharing-platform",
+      "examples": ["Lyft ETA reliability", "Uber DeepETA", "DoorDash probabilistic ETA forecasting"]
+    },
+    {
+      "caseId": "payment-processing-system",
+      "examples": [
+        "Careem ML-guided temporary holds",
+        "Instacart real-time fraud detection",
+        "Uber Project RADAR"
+      ]
+    }
+  ],
+  "categories": [
+    "AI systems",
+    "Social and real-time",
+    "Media and collaboration",
+    "Infrastructure and storage",
+    "Commerce and marketplaces"
+  ],
+  "cases": [
+    {
+      "id": "video-streaming-platform",
+      "category": "Media and collaboration",
+      "query": "design a video streaming service system design interview",
+      "pattern": "upload-transcode-package-CDN playback",
+      "criticalPath": "manifest-driven adaptive-bitrate playback",
+      "failureMode": "a bad rendition rollout and origin overload",
+      "guideApproved": true,
+      "sourcePlan": [
+        "RFC 8216 HTTP Live Streaming",
+        "Apple HLS documentation",
+        "Netflix Open Connect documentation"
+      ]
+    },
+    {
+      "id": "photo-sharing-platform",
+      "category": "Social and real-time",
+      "query": "design Instagram photo sharing system interview",
+      "pattern": "media processing plus privacy-aware social delivery",
+      "criticalPath": "upload processing and authorized media delivery",
+      "failureMode": "viral media hot key during deletion",
+      "guideApproved": false,
+      "sourcePlan": ["Amazon S3 documentation", "Cloudflare Images documentation"]
+    },
+    {
+      "id": "collaborative-document-editor",
+      "category": "Media and collaboration",
+      "query": "design Google Docs collaborative editor system interview",
+      "pattern": "convergent replicated editing",
+      "criticalPath": "ordered or commutative document operations",
+      "failureMode": "offline concurrent edits after reconnect",
+      "guideApproved": false,
+      "sourcePlan": ["Automerge documentation", "Yjs documentation", "CRDT research paper"]
+    },
+    {
+      "id": "notification-delivery-service",
+      "category": "Social and real-time",
+      "query": "design notification service system design interview",
+      "pattern": "preference-aware multi-channel fan-out",
+      "criticalPath": "durable event to provider delivery with deduplication",
+      "failureMode": "provider throttling and retry amplification",
+      "guideApproved": true,
+      "sourcePlan": [
+        "RFC 8030 Web Push",
+        "Firebase Cloud Messaging documentation",
+        "Apple Push Notification service documentation"
+      ]
+    },
+    {
+      "id": "web-crawler",
+      "category": "Infrastructure and storage",
+      "query": "design a web crawler system design interview",
+      "pattern": "polite distributed frontier scheduling",
+      "criticalPath": "deduplicated per-host crawl frontier",
+      "failureMode": "crawler trap and poisoned host queue",
+      "guideApproved": true,
+      "sourcePlan": [
+        "RFC 9309 Robots Exclusion Protocol",
+        "Google crawl-budget documentation",
+        "Google URL canonicalization documentation"
+      ]
+    },
+    {
+      "id": "distributed-cache",
+      "category": "Infrastructure and storage",
+      "query": "design a distributed cache system interview",
+      "pattern": "partitioned volatile key-value serving",
+      "criticalPath": "consistent key routing and eviction",
+      "failureMode": "node loss causing cache stampede",
+      "guideApproved": false,
+      "sourcePlan": ["Memcached protocol", "Redis eviction documentation"]
+    },
+    {
+      "id": "search-autocomplete",
+      "category": "Infrastructure and storage",
+      "query": "design search autocomplete typeahead system interview",
+      "pattern": "low-latency prefix retrieval and ranking",
+      "criticalPath": "prefix lookup within a keystroke latency budget",
+      "failureMode": "trending-term surge and stale unsafe suggestions",
+      "guideApproved": false,
+      "sourcePlan": [
+        "Elasticsearch completion suggester documentation",
+        "Apache Lucene FST documentation"
+      ]
+    },
+    {
+      "id": "cloud-file-storage",
+      "category": "Infrastructure and storage",
+      "query": "design Dropbox Google Drive system design interview",
+      "pattern": "chunked object sync plus metadata consistency",
+      "criticalPath": "resumable content-addressed synchronization",
+      "failureMode": "conflicting offline edits and partial upload",
+      "guideApproved": true,
+      "sourcePlan": [
+        "Dropbox content hash documentation",
+        "Amazon S3 consistency documentation",
+        "HTTP conditional request standard"
+      ]
+    },
+    {
+      "id": "distributed-key-value-store",
+      "category": "Infrastructure and storage",
+      "query": "design distributed key value store system interview",
+      "pattern": "replicated partitioned durable storage",
+      "criticalPath": "quorum read-write and hinted repair",
+      "failureMode": "partition with conflicting replicas",
+      "guideApproved": false,
+      "sourcePlan": ["Dynamo paper", "Raft paper", "RocksDB documentation"]
+    },
+    {
+      "id": "ride-sharing-platform",
+      "category": "Commerce and marketplaces",
+      "query": "design Uber ride sharing system design interview",
+      "pattern": "geospatial supply matching under motion",
+      "criticalPath": "nearby-driver indexing and atomic trip assignment",
+      "failureMode": "regional demand spike and stale driver locations",
+      "guideApproved": true,
+      "sourcePlan": [
+        "Uber H3 documentation",
+        "PostGIS spatial indexing documentation",
+        "Google S2 geometry documentation"
+      ]
+    },
+    {
+      "id": "ticket-booking-platform",
+      "category": "Commerce and marketplaces",
+      "query": "design Ticketmaster ticket booking system interview",
+      "pattern": "scarce inventory holds and exactly-once purchase effects",
+      "criticalPath": "expiring seat hold to confirmed order",
+      "failureMode": "flash crowd plus payment timeout",
+      "guideApproved": true,
+      "sourcePlan": [
+        "PostgreSQL row locking documentation",
+        "Stripe idempotency documentation",
+        "HTTP 429 standard"
+      ]
+    },
+    {
+      "id": "payment-processing-system",
+      "category": "Commerce and marketplaces",
+      "query": "design payment system Stripe system design interview",
+      "pattern": "idempotent state machine plus immutable ledger",
+      "criticalPath": "payment authorization and double-entry posting",
+      "failureMode": "ambiguous processor timeout and duplicate webhook",
+      "guideApproved": false,
+      "sourcePlan": [
+        "Stripe idempotency documentation",
+        "PCI DSS standard",
+        "PostgreSQL transaction documentation"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@ const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, '..');
 const publicDir = join(repoRoot, 'public');
 const outputDir = join(publicDir, 'curriculum');
+const systemDesignOutputDir = join(publicDir, 'system-design');
 const origin = 'https://learn.significanthobbies.com';
 
 const vite = await createServer({
@@ -19,11 +20,13 @@ const vite = await createServer({
 let learning;
 let navigation;
 let changelog;
+let systemDesign;
 try {
-  [learning, navigation, changelog] = await Promise.all([
+  [learning, navigation, changelog, systemDesign] = await Promise.all([
     vite.ssrLoadModule('/src/data/learning-os.ts'),
     vite.ssrLoadModule('/src/data/site-navigation.ts'),
     vite.ssrLoadModule('/src/data/changelog.ts'),
+    vite.ssrLoadModule('/src/data/system-design-cases.ts'),
   ]);
 } finally {
   await vite.close();
@@ -32,6 +35,10 @@ try {
 const { TRACKS, CONCEPTS, ROADMAPS, DRILLS, REVIEW_QUESTIONS, ARTIFACTS } = learning;
 const { PRIMARY_NAV_ITEMS, BROWSE_NAV_ITEMS } = navigation;
 const { CHANGELOG_RELEASES, CHANGELOG_REPOSITORY } = changelog;
+const { SYSTEM_DESIGN_CASES, SYSTEM_DESIGN_CASE_GROUPS } = systemDesign;
+const APPROVED_SYSTEM_DESIGN_CASES = SYSTEM_DESIGN_CASES.filter(
+  (caseDefinition) => caseDefinition.publication.state === 'approved'
+);
 const coverage = JSON.parse(
   readFileSync(join(repoRoot, 'src/data/curriculum-coverage.json'), 'utf8')
 );
@@ -46,6 +53,9 @@ const artifactsById = byId(ARTIFACTS);
 const conceptUrl = (id) => `/curriculum/concepts/${id}.html`;
 const trackUrl = (id) => `/curriculum/tracks/${id}.html`;
 const roadmapUrl = (id) => `/curriculum/roadmaps/${id}.html`;
+const systemDesignGuideUrl = (caseDefinition) =>
+  `/system-design/${caseDefinition.publication.guide.slug}.html`;
+const systemDesignPracticeUrl = (caseDefinition) => `/mock?prompt=${caseDefinition.id}&from=guide`;
 const markdownUrl = (path) => {
   if (path === '/') return '/index.md';
   if (path.endsWith('/')) return `${path}index.md`;
@@ -131,11 +141,20 @@ function siteHeader() {
     </header>`;
 }
 
-function page({ title, description, path, type, body, breadcrumbs = [], schema }) {
+function page({
+  title,
+  description,
+  path,
+  type,
+  body,
+  breadcrumbs = [],
+  breadcrumbRoot = { label: 'Curriculum', href: '/curriculum/' },
+  schema,
+}) {
   const canonical = absolute(path);
   const metaTitle = seoTitle(title);
   const metaDescription = seoDescription(description, title);
-  const breadcrumbHtml = [{ label: 'Curriculum', href: '/curriculum/' }, ...breadcrumbs]
+  const breadcrumbHtml = [breadcrumbRoot, ...breadcrumbs]
     .map((item) => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`)
     .join('<span aria-hidden="true">/</span>');
 
@@ -648,6 +667,258 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);f
 @media(max-width:520px){.brand span{display:none}main{padding-top:32px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;transition-duration:.001ms!important}}`;
 
+function inlineRichText(value) {
+  return escapeHtml(value).replaceAll(/`([^`]+)`/g, '<code>$1</code>');
+}
+
+function richText(value) {
+  return String(value)
+    .trim()
+    .split(/\n\s*\n/)
+    .map((block) => {
+      const lines = block.split('\n').map((line) => line.trim());
+      if (lines.every((line) => line.startsWith('- '))) {
+        return `<ul>${lines
+          .map((line) => `<li>${inlineRichText(line.slice(2))}</li>`)
+          .join('')}</ul>`;
+      }
+      return `<p>${inlineRichText(lines.join(' '))}</p>`;
+    })
+    .join('');
+}
+
+function systemDesignHubPage() {
+  const body = `<article>
+    <p class="eyebrow">Interview practice · ${SYSTEM_DESIGN_CASES.length} complete cases</p>
+    <h1>System design interview questions you can actually practice</h1>
+    <p class="lede">Move beyond prompt lists. Scope requirements, calculate capacity, defend an architecture, survive a failure injection, and repair the exact concept your answer missed.</p>
+    <section>
+      <h2>Practice the whole interview, not a memorized diagram</h2>
+      <p>Most system-design question lists stop at the prompt. Knowing that “design a rate limiter” is common does not prove that you can clarify its contract, estimate load, choose a consistency model, defend the hot path, or respond when the interviewer changes one constraint. These cases turn each question into a repeatable interview with observable evidence.</p>
+      <p>Every case follows six stages: scope the problem, estimate capacity, draw the high-level design, defend one critical path, respond to a failure, and review the result. The reference answer stays hidden during closed-book practice. After submission, scores cite your own words, missing dimensions link to focused concepts and drills, and already-demonstrated dimensions are not penalized by an unrelated gap.</p>
+      <p>If the topic is new, learn the linked mechanisms first and study an approved worked guide. Then wait before attempting the case without notes. If an interview is close, begin closed-book and use the review as diagnosis. A strong answer is not one remembered picture; it is a chain of explicit assumptions, unit-carrying calculations, named trade-offs, and operational responses.</p>
+    </section>
+    ${SYSTEM_DESIGN_CASE_GROUPS.map(
+      (group) => `<section>
+      <h2>${escapeHtml(group.label)}</h2>
+      <div class="card-grid">${group.cases
+        .map((caseDefinition) => {
+          const guide = caseDefinition.publication.guide;
+          return `<article class="card">
+          <p class="eyebrow">${escapeHtml(caseDefinition.difficulty)} · ${caseDefinition.durationMinutes} minutes</p>
+          <h3>${
+            guide
+              ? `<a href="${systemDesignGuideUrl(caseDefinition)}">${escapeHtml(caseDefinition.title)}</a>`
+              : escapeHtml(caseDefinition.title)
+          }</h3>
+          <p>${escapeHtml(caseDefinition.prompt)}</p>
+          <p><a href="${escapeHtml(systemDesignPracticeUrl(caseDefinition))}">Start closed-book practice →</a>${
+            guide
+              ? ` · <a href="${systemDesignGuideUrl(caseDefinition)}">Read the worked guide</a>`
+              : ''
+          }</p>
+        </article>`;
+        })
+        .join('')}</div>
+    </section>`
+    ).join('')}
+    <section>
+      <h2>What the review measures</h2>
+      <p>Cases score requirements, capacity, architecture, critical-path judgment, and reliability as separate dimensions. The deterministic rubric looks for declared evidence and remains available without an AI provider. When optional AI critique is configured, it can judge phrasing against fixed anchors, but it cannot add requirements, dimensions, facts, or out-of-range scores.</p>
+      <p>${APPROVED_SYSTEM_DESIGN_CASES.length} source-reviewed worked guides are public. Practice-only cases receive guides only after their calculations, primary sources, and editorial explanations pass the same review. That prevents generic, templated pages from diluting the curriculum.</p>
+    </section>
+  </article>`;
+
+  return page({
+    title: 'System Design Interview Questions',
+    description:
+      'Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.',
+    path: '/system-design/',
+    type: 'collection',
+    body,
+    breadcrumbRoot: { label: 'Home', href: '/' },
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          name: 'System Design Interview Questions',
+          description:
+            'Staged system-design interview cases with worked guides and targeted remediation.',
+          url: absolute('/system-design/'),
+          numberOfItems: SYSTEM_DESIGN_CASES.length,
+          hasPart: APPROVED_SYSTEM_DESIGN_CASES.map((caseDefinition) => ({
+            '@type': 'Article',
+            headline: caseDefinition.publication.guide.title,
+            url: absolute(systemDesignGuideUrl(caseDefinition)),
+          })),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: origin },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'System design cases',
+              item: absolute('/system-design/'),
+            },
+          ],
+        },
+      ],
+    },
+  });
+}
+
+function systemDesignGuidePage(caseDefinition) {
+  const guide = caseDefinition.publication.guide;
+  if (!guide) throw new Error(`Approved case ${caseDefinition.id} is missing guide content`);
+  const concepts = caseDefinition.conceptIds.map((id) => conceptsById.get(id)).filter(Boolean);
+  const drills = caseDefinition.drillIds.map((id) => drillsById.get(id)).filter(Boolean);
+  const body = `<article>
+    <p class="eyebrow">System design interview guide · ${caseDefinition.durationMinutes} minutes</p>
+    <h1>${escapeHtml(caseDefinition.title)}</h1>
+    <p class="lede">${escapeHtml(guide.description)}</p>
+    <p><a href="${escapeHtml(systemDesignPracticeUrl(caseDefinition))}">Start the closed-book case →</a></p>
+    ${guide.sections
+      .map(
+        (section, index) => `<section>
+      <h2>${index + 1}. ${escapeHtml(section.heading)}</h2>
+      ${richText(section.body)}
+    </section>`
+      )
+      .join('')}
+    <section><h2>Answer outline</h2><p>${escapeHtml(guide.finalAnswer)}</p></section>
+    <section>
+      <h2>Primary sources</h2>
+      <ul class="resource-list">${caseDefinition.sources
+        .map(
+          (source) =>
+            `<li><a href="${escapeHtml(source.url)}" rel="noreferrer">${escapeHtml(source.title)}</a> <span class="muted">(${escapeHtml(source.kind)})</span></li>`
+        )
+        .join('')}</ul>
+    </section>
+    <section class="grid two">
+      <div><h2>Repair the mechanisms</h2>${linkList(
+        concepts,
+        (concept) => conceptUrl(concept.id),
+        (concept) => concept.name
+      )}</div>
+      <div><h2>Practice drills</h2>${linkList(
+        drills,
+        (drill) => `/drills/${drill.id}`,
+        (drill) => drill.title
+      )}</div>
+    </section>
+    <p class="cta"><a href="${escapeHtml(systemDesignPracticeUrl(caseDefinition))}">Close the guide and attempt the interview →</a></p>
+  </article>`;
+
+  return page({
+    title: guide.title,
+    description: guide.description,
+    path: systemDesignGuideUrl(caseDefinition),
+    type: 'concept',
+    body,
+    breadcrumbRoot: { label: 'System design cases', href: '/system-design/' },
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: guide.title,
+          description: guide.description,
+          url: absolute(systemDesignGuideUrl(caseDefinition)),
+          datePublished: guide.publishedAt,
+          dateModified: guide.updatedAt,
+          author: { '@type': 'Organization', name: 'SWE Interview Prep', url: origin },
+          publisher: { '@type': 'Organization', name: 'SWE Interview Prep', url: origin },
+          about: caseDefinition.conceptIds.map((id) => conceptsById.get(id)?.name ?? id),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: origin },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'System design cases',
+              item: absolute('/system-design/'),
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: caseDefinition.title,
+              item: absolute(systemDesignGuideUrl(caseDefinition)),
+            },
+          ],
+        },
+      ],
+    },
+  });
+}
+
+function systemDesignHubMarkdown() {
+  return `# System design interview questions you can actually practice
+
+Move beyond prompt lists. Every case covers scoping, capacity estimation, high-level design,
+a critical-path deep dive, failure injection, and evidence-backed review. Reference answers stay
+hidden during closed-book practice.
+
+${SYSTEM_DESIGN_CASE_GROUPS.map(
+  (group) => `## ${group.label}
+
+${group.cases
+  .map((caseDefinition) => {
+    const guide = caseDefinition.publication.guide;
+    return `### ${caseDefinition.title}
+
+${caseDefinition.prompt}
+
+- [Start closed-book practice](${absolute(systemDesignPracticeUrl(caseDefinition))})${
+      guide ? `\n- [Read the worked guide](${absolute(systemDesignGuideUrl(caseDefinition))})` : ''
+    }`;
+  })
+  .join('\n\n')}`
+).join('\n\n')}
+
+## How scoring works
+
+The fixed case rubric scores requirements, capacity, architecture, critical-path judgment, and
+reliability separately. Missed dimensions link to targeted concepts and drills. Practice-only cases
+do not emit placeholder public guides.
+`;
+}
+
+function systemDesignGuideMarkdown(caseDefinition) {
+  const guide = caseDefinition.publication.guide;
+  if (!guide) throw new Error(`Approved case ${caseDefinition.id} is missing guide content`);
+  return `# ${caseDefinition.title}
+
+${guide.description}
+
+- [Start the closed-book case](${absolute(systemDesignPracticeUrl(caseDefinition))})
+- [Browse all system-design cases](${absolute('/system-design/')})
+
+${guide.sections.map((section, index) => `## ${index + 1}. ${section.heading}\n\n${section.body}`).join('\n\n')}
+
+## Answer outline
+
+${guide.finalAnswer}
+
+## Primary sources
+
+${caseDefinition.sources.map((source) => `- [${source.title}](${source.url}) (${source.kind})`).join('\n')}
+
+## Repair the mechanisms
+
+${caseDefinition.conceptIds
+  .map((id) => conceptsById.get(id))
+  .filter(Boolean)
+  .map((concept) => `- [${concept.name}](${absolute(conceptUrl(concept.id))})`)
+  .join('\n')}
+`;
+}
+
 function catalogData() {
   return {
     name: 'SWE Prep Curriculum',
@@ -657,6 +928,7 @@ function catalogData() {
       'src/data/concepts.json',
       'src/data/roadmaps.json',
       'src/data/curriculum-coverage.json',
+      'src/data/system-design-cases.ts',
     ],
     counts: {
       tracks: TRACKS.length,
@@ -665,6 +937,8 @@ function catalogData() {
       drills: DRILLS.length,
       reviewQuestions: REVIEW_QUESTIONS.length,
       artifacts: ARTIFACTS.length,
+      systemDesignCases: SYSTEM_DESIGN_CASES.length,
+      systemDesignGuides: APPROVED_SYSTEM_DESIGN_CASES.length,
       coverageCategories: coverage.categories.length,
       coverageTopics: coverage.categories.reduce(
         (sum, category) => sum + category.topics.length,
@@ -699,6 +973,22 @@ function catalogData() {
       tags: concept.tags,
       url: absolute(conceptUrl(concept.id)),
       roadmapIds: concept.roadmaps,
+    })),
+    systemDesignCases: SYSTEM_DESIGN_CASES.map((caseDefinition) => ({
+      id: caseDefinition.id,
+      version: caseDefinition.version,
+      title: caseDefinition.title,
+      prompt: caseDefinition.prompt,
+      category: caseDefinition.category,
+      pattern: caseDefinition.pattern,
+      criticalPath: caseDefinition.criticalPath,
+      difficulty: caseDefinition.difficulty,
+      practiceUrl: absolute(systemDesignPracticeUrl(caseDefinition)),
+      guideUrl: caseDefinition.publication.guide
+        ? absolute(systemDesignGuideUrl(caseDefinition))
+        : null,
+      conceptIds: caseDefinition.conceptIds,
+      drillIds: caseDefinition.drillIds,
     })),
     coverage: coverage.categories,
   };
@@ -738,12 +1028,22 @@ ${catalog.counts.tracks} tracks and ${catalog.counts.roadmaps} sequenced roadmap
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
 - Human curriculum hub: ${absolute('/curriculum/')}
+- System-design case library: ${absolute('/system-design/')}
 - Structured JSON catalog: ${absolute('/curriculum/catalog.json')}
 - Interactive learning app: ${absolute('/learn')}
 
 # Roadmaps
 
 ${roadmaps}
+
+# System-design interview cases
+
+${catalog.systemDesignCases
+  .map(
+    (caseDefinition) =>
+      `- [${caseDefinition.title}](${caseDefinition.guideUrl ?? caseDefinition.practiceUrl}) — ${caseDefinition.prompt}`
+  )
+  .join('\n')}
 
 # Tracks and concepts
 
@@ -893,17 +1193,29 @@ const htmlPaths = [
   ...ROADMAPS.map((roadmap) => roadmapUrl(roadmap.id)),
   ...CONCEPTS.map((concept) => conceptUrl(concept.id)),
 ];
+const systemDesignHtmlPaths = [
+  '/system-design/',
+  ...APPROVED_SYSTEM_DESIGN_CASES.map(systemDesignGuideUrl),
+];
 
 const expectedOutputRoot = join(repoRoot, 'public', 'curriculum');
 if (outputDir !== expectedOutputRoot) {
   throw new Error(`Refusing to replace unexpected output directory: ${outputDir}`);
 }
+const expectedSystemDesignRoot = join(repoRoot, 'public', 'system-design');
+if (systemDesignOutputDir !== expectedSystemDesignRoot) {
+  throw new Error(
+    `Refusing to replace unexpected system-design output directory: ${systemDesignOutputDir}`
+  );
+}
 const cleanGeneratedText = (value) => value.replace(/[ \t]+$/gm, '');
 const cleanMarkdown = (value) => `${value.trimEnd()}\n`;
 rmSync(outputDir, { recursive: true, force: true });
+rmSync(systemDesignOutputDir, { recursive: true, force: true });
 mkdirSync(join(outputDir, 'tracks'), { recursive: true });
 mkdirSync(join(outputDir, 'roadmaps'), { recursive: true });
 mkdirSync(join(outputDir, 'concepts'), { recursive: true });
+mkdirSync(systemDesignOutputDir, { recursive: true });
 
 writeFileSync(join(outputDir, 'styles.css'), styles);
 writeFileSync(join(outputDir, 'index.html'), cleanGeneratedText(hubPage()));
@@ -951,8 +1263,51 @@ writeFileSync(
   )}\n`
 );
 
+writeFileSync(join(systemDesignOutputDir, 'index.html'), cleanGeneratedText(systemDesignHubPage()));
+writeFileSync(join(systemDesignOutputDir, 'index.md'), cleanMarkdown(systemDesignHubMarkdown()));
+for (const caseDefinition of APPROVED_SYSTEM_DESIGN_CASES) {
+  const guide = caseDefinition.publication.guide;
+  writeFileSync(
+    join(systemDesignOutputDir, `${guide.slug}.html`),
+    cleanGeneratedText(systemDesignGuidePage(caseDefinition))
+  );
+  writeFileSync(
+    join(systemDesignOutputDir, `${guide.slug}.md`),
+    cleanMarkdown(systemDesignGuideMarkdown(caseDefinition))
+  );
+}
+writeFileSync(
+  join(systemDesignOutputDir, 'catalog.json'),
+  `${JSON.stringify(
+    {
+      generated: true,
+      counts: {
+        cases: SYSTEM_DESIGN_CASES.length,
+        approvedGuides: APPROVED_SYSTEM_DESIGN_CASES.length,
+      },
+      cases: catalog.systemDesignCases,
+    },
+    null,
+    2
+  )}\n`
+);
+writeFileSync(
+  join(systemDesignOutputDir, 'manifest.json'),
+  `${JSON.stringify(
+    {
+      generated: true,
+      source: 'src/data/system-design-cases.ts',
+      htmlPaths: systemDesignHtmlPaths,
+      markdownPaths: systemDesignHtmlPaths.map(markdownUrl),
+      approvedCaseIds: APPROVED_SYSTEM_DESIGN_CASES.map((caseDefinition) => caseDefinition.id),
+    },
+    null,
+    2
+  )}\n`
+);
+
 const baseSitemapPaths = ['/', '/changelog'];
-const sitemapPaths = [...new Set([...baseSitemapPaths, ...htmlPaths])];
+const sitemapPaths = [...new Set([...baseSitemapPaths, ...htmlPaths, ...systemDesignHtmlPaths])];
 writeFileSync(
   join(publicDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
@@ -971,6 +1326,8 @@ writeFileSync(
 ## Start here
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
+- [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
+- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html): Capacity math, serving architecture, overload, and follow-ups
 - [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
 - [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
 - [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview
@@ -996,6 +1353,9 @@ SWE Interview Prep is a mechanism-first learning OS. Its ${CONCEPTS.length} conc
 - ${absolute('/curriculum/')}
 - ${absolute('/curriculum/catalog.md')}
 - ${absolute('/curriculum/catalog.json')}
+- ${absolute('/system-design/')}
+- ${absolute('/system-design/index.md')}
+- ${absolute('/system-design/catalog.json')}
 - ${absolute('/api/ai')}
 - ${absolute('/sitemap.xml')}
 - ${absolute('/robots.txt')}
@@ -1007,6 +1367,17 @@ ${TRACKS.map((track) => `- [${track.title}](${absolute(trackUrl(track.id))}) —
 ## Roadmaps
 
 ${ROADMAPS.map((roadmap) => `- [${roadmap.title}](${absolute(roadmapUrl(roadmap.id))}) (${roadmap.horizon}) — ${roadmap.goal}`).join('\n')}
+
+## System-design interview cases
+
+${SYSTEM_DESIGN_CASES.map(
+  (caseDefinition) =>
+    `- [${caseDefinition.title}](${absolute(
+      caseDefinition.publication.guide
+        ? systemDesignGuideUrl(caseDefinition)
+        : systemDesignPracticeUrl(caseDefinition)
+    )}) — ${caseDefinition.prompt}`
+).join('\n')}
 
 ## Product boundary
 
@@ -1036,6 +1407,8 @@ ${TRACKS.map((track) => `- [${track.title}](${absolute(trackUrl(track.id))}) —
 ## Browse without JavaScript
 
 - [Curriculum hub](${absolute('/curriculum/')})
+- [System-design case library](${absolute('/system-design/')})
+- [LLM inference at 10K RPS](${absolute('/system-design/llm-inference-10k-rps.html')})
 - [Complete Markdown catalog](${absolute('/curriculum/catalog.md')})
 - [Structured JSON catalog](${absolute('/curriculum/catalog.json')})
 - [Agent entrypoint](${absolute('/llms.txt')})
@@ -1086,12 +1459,25 @@ writeFileSync(
           kind: 'collection',
           description: `${TRACKS.length} tracks, ${CONCEPTS.length} concepts, and ${ROADMAPS.length} roadmaps as static public pages`,
         },
+        {
+          id: 'system-design',
+          url: absolute('/system-design/'),
+          md: absolute('/system-design/index.md'),
+          kind: 'collection',
+          description: `${SYSTEM_DESIGN_CASES.length} staged interview cases and ${APPROVED_SYSTEM_DESIGN_CASES.length} approved worked guide`,
+        },
       ],
       dataResources: [
         {
           id: 'curriculum-json',
           url: absolute('/curriculum/catalog.json'),
           description: 'Stable IDs, counts, relationships, and public curriculum URLs',
+        },
+        {
+          id: 'system-design-json',
+          url: absolute('/system-design/catalog.json'),
+          description:
+            'Versioned interview case IDs, practice URLs, guide approvals, and concept mappings',
         },
       ],
       auth: {
@@ -1110,6 +1496,7 @@ writeFileSync(
   `User-agent: *
 Allow: /
 Allow: /curriculum/
+Allow: /system-design/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /index.md
@@ -1138,7 +1525,7 @@ const staticContent = `${startMarker}
             <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Explore the curriculum</h2>
             <ul>${trackSummary}</ul>
-            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a> or continue as a guest for the interactive learning workspace.</p>
+            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, or continue as a guest for the interactive learning workspace.</p>
           </section>
           ${endMarker}`;
 const updatedIndex = indexHtml.replace(
@@ -1151,6 +1538,8 @@ console.log('Generated public curriculum', {
   tracks: TRACKS.length,
   roadmaps: ROADMAPS.length,
   concepts: CONCEPTS.length,
+  systemDesignCases: SYSTEM_DESIGN_CASES.length,
+  systemDesignGuides: APPROVED_SYSTEM_DESIGN_CASES.length,
   htmlPages: htmlPaths.length,
   sitemapUrls: sitemapPaths.length,
 });

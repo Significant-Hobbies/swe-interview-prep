@@ -3166,9 +3166,22 @@
       "roadmaps": ["hld-practice"],
       "difficulty": "advanced",
       "priority": 2,
-      "prerequisites": ["capacity-estimation", "requirements-scoping", "messaging-realtime"],
-      "related": [],
-      "description": "OT, CRDT, conflict resolution.",
+      "prerequisites": [
+        "capacity-estimation",
+        "requirements-scoping",
+        "messaging-realtime",
+        "replication",
+        "cap-theorem"
+      ],
+      "related": ["consensus"],
+      "description": "Causality, OT, CRDT merge laws, and offline conflict resolution.",
+      "commonMistakes": [
+        "Treating replica convergence as proof that concurrent edits preserve user intent",
+        "Calling CRDTs coordination-free while ignoring causal delivery, metadata compaction, tombstone garbage collection, or membership changes",
+        "Assuming every OT design requires one central server, or that every CRDT design has the same wire and storage costs",
+        "Replicating ephemeral cursor and presence state through the durable document history"
+      ],
+      "realWorldUsage": "Collaborative editors, offline-first applications, replicated JSON documents, multi-device state sync, geo-replicated counters and sets, and local-first productivity tools.",
       "resources": [
         {
           "title": "System Design Primer",
@@ -3184,10 +3197,40 @@
           "title": "Local-first software: you own your data, in spite of the cloud",
           "url": "https://martin.kleppmann.com/papers/local-first.pdf",
           "type": "paper"
+        },
+        {
+          "title": "CRDT.tech — introduction and glossary",
+          "url": "https://crdt.tech/",
+          "type": "doc"
+        },
+        {
+          "title": "Awesome CRDT — curated bibliography and implementations",
+          "url": "https://github.com/alangibson/awesome-crdt",
+          "type": "doc"
+        },
+        {
+          "title": "Time, Clocks, and the Ordering of Events in a Distributed System",
+          "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+          "type": "paper"
+        },
+        {
+          "title": "A comprehensive study of Convergent and Commutative Replicated Data Types",
+          "url": "https://hal.inria.fr/inria-00555588/document",
+          "type": "paper"
+        },
+        {
+          "title": "Collaborative Text Editing with Eg-walker: Better, Faster, Smaller",
+          "url": "https://arxiv.org/abs/2409.14252",
+          "type": "paper"
+        },
+        {
+          "title": "Why CRDT did not work out for xi-editor",
+          "url": "https://github.com/xi-editor/xi-editor/issues/1187#issuecomment-491473599",
+          "type": "article"
         }
       ],
-      "mentalModel": "Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs.",
-      "drills": ["design-collaborative-editor"],
+      "mentalModel": "Collaborative state needs an explicit notion of causality and a deterministic reconciliation rule. OT transforms concurrent operations against an agreed history; CRDTs design state or operations around algebraic merge laws so replicas converge despite reordering and duplication. Neither is universally simpler: choose from offline requirements, metadata and tombstone cost, server coordination, undo semantics, and the data structures the product needs.",
+      "drills": ["build-g-counter-merge", "design-collaborative-editor"],
       "reviewQuestions": ["rq-collaboration-productivity-core"],
       "artifacts": []
     },
