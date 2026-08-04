@@ -60,6 +60,12 @@ describe('public curriculum publication', () => {
     expect(sitemap).not.toContain('.txt</loc>');
   });
 
+  it('does not rewrite real static pages through the SPA shell', () => {
+    const redirects = readFileSync(resolve(root, 'public/_redirects'), 'utf8');
+    expect(redirects).not.toMatch(/^\/\*\s+\/index\.html\s+200$/m);
+    expect(redirects).toContain('/api/ai /api-ai.json 200');
+  });
+
   it('publishes a Markdown mirror for every public sitemap route', () => {
     const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
     const paths = [

@@ -19,7 +19,7 @@ describe('system-design public publication', () => {
     expect(manifest.htmlPaths).toEqual([
       '/system-design/',
       ...approved.map(
-        (caseDefinition) => `/system-design/${caseDefinition.publication.guide?.slug}.html`
+        (caseDefinition) => `/system-design/${caseDefinition.publication.guide?.slug}`
       ),
     ]);
     expect(publicCases.counts).toEqual({ cases: 20, approvedGuides: 7 });
@@ -69,7 +69,7 @@ describe('system-design public publication', () => {
       const html = readFileSync(resolve(root, `public/system-design/${guide?.slug}.html`), 'utf8');
       expect(html).toContain(`<h1>${caseDefinition.title}</h1>`);
       expect(html).toContain(
-        `<link rel="canonical" href="${origin}/system-design/${guide?.slug}.html">`
+        `<link rel="canonical" href="${origin}/system-design/${guide?.slug}">`
       );
       expect(html).toContain('"@type":"Article"');
       expect(html).toContain('"@type":"BreadcrumbList"');

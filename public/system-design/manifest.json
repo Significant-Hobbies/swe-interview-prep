@@ -3,13 +3,13 @@
   "source": "src/data/system-design-cases.ts",
   "htmlPaths": [
     "/system-design/",
-    "/system-design/llm-inference-10k-rps.html",
-    "/system-design/video-streaming-platform.html",
-    "/system-design/notification-delivery-service.html",
-    "/system-design/web-crawler.html",
-    "/system-design/cloud-file-storage.html",
-    "/system-design/ride-sharing-platform.html",
-    "/system-design/ticket-booking-platform.html"
+    "/system-design/llm-inference-10k-rps",
+    "/system-design/video-streaming-platform",
+    "/system-design/notification-delivery-service",
+    "/system-design/web-crawler",
+    "/system-design/cloud-file-storage",
+    "/system-design/ride-sharing-platform",
+    "/system-design/ticket-booking-platform"
   ],
   "markdownPaths": [
     "/system-design/index.md",

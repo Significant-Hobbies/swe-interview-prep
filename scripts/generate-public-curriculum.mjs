@@ -54,7 +54,7 @@ const conceptUrl = (id) => `/curriculum/concepts/${id}.html`;
 const trackUrl = (id) => `/curriculum/tracks/${id}.html`;
 const roadmapUrl = (id) => `/curriculum/roadmaps/${id}.html`;
 const systemDesignGuideUrl = (caseDefinition) =>
-  `/system-design/${caseDefinition.publication.guide.slug}.html`;
+  `/system-design/${caseDefinition.publication.guide.slug}`;
 const systemDesignPracticeUrl = (caseDefinition) => `/mock?prompt=${caseDefinition.id}&from=guide`;
 const markdownUrl = (path) => {
   if (path === '/') return '/index.md';
@@ -1327,7 +1327,7 @@ writeFileSync(
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
 - [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
-- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html): Capacity math, serving architecture, overload, and follow-ups
+- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
 - [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
 - [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
 - [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview
@@ -1408,7 +1408,7 @@ ${TRACKS.map((track) => `- [${track.title}](${absolute(trackUrl(track.id))}) —
 
 - [Curriculum hub](${absolute('/curriculum/')})
 - [System-design case library](${absolute('/system-design/')})
-- [LLM inference at 10K RPS](${absolute('/system-design/llm-inference-10k-rps.html')})
+- [LLM inference at 10K RPS](${absolute('/system-design/llm-inference-10k-rps')})
 - [Complete Markdown catalog](${absolute('/curriculum/catalog.md')})
 - [Structured JSON catalog](${absolute('/curriculum/catalog.json')})
 - [Agent entrypoint](${absolute('/llms.txt')})

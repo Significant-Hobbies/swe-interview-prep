@@ -6,7 +6,7 @@
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
 - [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
-- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html): Capacity math, serving architecture, overload, and follow-ups
+- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
 - [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
 - [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
 - [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview

@@ -11,7 +11,7 @@ hidden during closed-book practice.
 Design a production LLM inference service that sustains 10,000 requests per second. Explain how you turn that headline into capacity, architecture, overload, and reliability decisions.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=llm-inference-10k-rps&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps)
 
 ### Design production RAG
 
@@ -56,7 +56,7 @@ Design an Instagram-like photo-sharing service with uploads, transformations, pr
 Design push, email, SMS, and in-app notification delivery with user preferences, priorities, quotas, retries, provider failure, and duplicate control.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=notification-delivery-service&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/notification-delivery-service.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/notification-delivery-service)
 
 ## Media and collaboration
 
@@ -65,7 +65,7 @@ Design push, email, SMS, and in-app notification delivery with user preferences,
 Design an on-demand video platform for creator uploads and global playback. Focus on the reusable upload, transcode, package, authorize, and CDN-delivery pattern rather than recommendations.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=video-streaming-platform&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/video-streaming-platform.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/video-streaming-platform)
 
 ### Design a collaborative document editor
 
@@ -92,7 +92,7 @@ Design a global, multi-tenant rate limiter for an API gateway with burst allowan
 Design a web-scale crawler that discovers, fetches, deduplicates, stores, and recrawls useful pages while obeying robots policy and host politeness.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=web-crawler&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/web-crawler.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/web-crawler)
 
 ### Design a distributed cache
 
@@ -111,7 +111,7 @@ Design typeahead suggestions for a large search product with prefix lookup, rank
 Design Dropbox or Google Drive-style file synchronization with resumable uploads, folders, sharing, versions, offline conflicts, durability, and efficient transfer.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=cloud-file-storage&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/cloud-file-storage.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/cloud-file-storage)
 
 ### Design a distributed key-value store
 
@@ -126,14 +126,14 @@ Design a Dynamo-style distributed key-value store with partitioning, replication
 Design an Uber or Lyft-style marketplace with driver locations, nearby matching, dispatch offers, atomic trip assignment, live trip state, ETA, and regional spikes.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=ride-sharing-platform&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/ride-sharing-platform.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/ride-sharing-platform)
 
 ### Design a ticket-booking platform
 
 Design Ticketmaster-style reserved-seat booking with event browse, a virtual waiting room, expiring holds, payments, oversell prevention, bots, and flash crowds.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=ticket-booking-platform&from=guide)
-- [Read the worked guide](https://learn.significanthobbies.com/system-design/ticket-booking-platform.html)
+- [Read the worked guide](https://learn.significanthobbies.com/system-design/ticket-booking-platform)
 
 ### Design a payment-processing system
 
