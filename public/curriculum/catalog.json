@@ -5089,7 +5089,7 @@
       "criticalPath": "admission through continuous batching to streamed decode",
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=llm-inference-10k-rps&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/llm-inference-10k-rps",
       "conceptIds": [
         "inference-engines",
         "continuous-batching",
@@ -5321,7 +5321,7 @@
       "criticalPath": "immutable manifest publication through CDN-backed adaptive playback",
       "difficulty": "core",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=video-streaming-platform&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/video-streaming-platform.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/video-streaming-platform",
       "conceptIds": [
         "streaming-media",
         "cdn-edge-delivery",
@@ -5396,7 +5396,7 @@
       "criticalPath": "durable intent through policy rendering and deduplicated provider delivery",
       "difficulty": "core",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=notification-delivery-service&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/notification-delivery-service.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/notification-delivery-service",
       "conceptIds": [
         "message-queues",
         "webhooks",
@@ -5421,7 +5421,7 @@
       "criticalPath": "priority plus per-host eligibility through bounded fetch and deduplication",
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=web-crawler&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/web-crawler.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/web-crawler",
       "conceptIds": [
         "search-platform-design",
         "message-queues",
@@ -5496,7 +5496,7 @@
       "criticalPath": "resumable missing-chunk transfer followed by atomic metadata version commit",
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=cloud-file-storage&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/cloud-file-storage.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/cloud-file-storage",
       "conceptIds": [
         "object-storage",
         "storage-retrieval",
@@ -5547,7 +5547,7 @@
       "criticalPath": "fresh driver location index through bounded offer and trip assignment",
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ride-sharing-platform&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/ride-sharing-platform.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/ride-sharing-platform",
       "conceptIds": [
         "location-transport",
         "messaging-realtime",
@@ -5572,7 +5572,7 @@
       "criticalPath": "atomic seat hold through ambiguous payment to confirmed order",
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ticket-booking-platform&from=guide",
-      "guideUrl": "https://learn.significanthobbies.com/system-design/ticket-booking-platform.html",
+      "guideUrl": "https://learn.significanthobbies.com/system-design/ticket-booking-platform",
       "conceptIds": [
         "booking-inventory",
         "transaction-processing",
