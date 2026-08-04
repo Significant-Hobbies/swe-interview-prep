@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Allow: /curriculum/
+Allow: /system-design/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /index.md

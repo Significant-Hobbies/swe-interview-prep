@@ -15,9 +15,11 @@
       "tracks": 19,
       "concepts": 250,
       "roadmaps": 24,
-      "drills": 295,
+      "drills": 296,
       "reviewQuestions": 269,
       "artifacts": 40,
+      "systemDesignCases": 20,
+      "systemDesignGuides": 7,
       "coverageCategories": 11,
       "coverageTopics": 96
     },
@@ -46,6 +48,13 @@
       "md": "https://learn.significanthobbies.com/curriculum/index.md",
       "kind": "collection",
       "description": "19 tracks, 250 concepts, and 24 roadmaps as static public pages"
+    },
+    {
+      "id": "system-design",
+      "url": "https://learn.significanthobbies.com/system-design/",
+      "md": "https://learn.significanthobbies.com/system-design/index.md",
+      "kind": "collection",
+      "description": "20 staged interview cases and 7 approved worked guide"
     }
   ],
   "dataResources": [
@@ -53,6 +62,11 @@
       "id": "curriculum-json",
       "url": "https://learn.significanthobbies.com/curriculum/catalog.json",
       "description": "Stable IDs, counts, relationships, and public curriculum URLs"
+    },
+    {
+      "id": "system-design-json",
+      "url": "https://learn.significanthobbies.com/system-design/catalog.json",
+      "description": "Versioned interview case IDs, practice URLs, guide approvals, and concept mappings"
     }
   ],
   "auth": {

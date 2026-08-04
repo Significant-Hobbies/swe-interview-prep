@@ -86,9 +86,13 @@ describe('public curriculum publication', () => {
       'home',
       'changelog',
       'curriculum',
+      'system-design',
     ]);
     expect(apiCatalog.surfaces.every((surface) => 'md' in surface)).toBe(true);
-    expect(apiCatalog.dataResources.map((resource) => resource.id)).toEqual(['curriculum-json']);
+    expect(apiCatalog.dataResources.map((resource) => resource.id)).toEqual([
+      'curriculum-json',
+      'system-design-json',
+    ]);
   });
 
   it('emits complete on-page metadata and one h1 per HTML page', () => {

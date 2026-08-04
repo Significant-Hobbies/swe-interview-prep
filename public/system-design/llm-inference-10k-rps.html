@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Design LLM Inference at 10K RPS | Interview Guide | SWE Prep</title>
+    <meta name="description" content="Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Design LLM Inference at 10K RPS | Interview Guide | SWE Prep">
+    <meta property="og:description" content="Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Design LLM Inference at 10K RPS | Interview Guide | SWE Prep">
+    <meta name="twitter:description" content="Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Design LLM Inference at 10K RPS | Interview Guide","description":"Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.","url":"https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html","datePublished":"2026-08-04","dateModified":"2026-08-04","author":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"publisher":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"about":["vLLM & Inference Engines","Continuous Batching","KV Caching & PagedAttention","Inference Cost & Latency Optimization","Inference Hardware","Capacity Estimation","Queueing Theory","Load Balancing","Rate Limiting","Observability"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://learn.significanthobbies.com"},{"@type":"ListItem","position":2,"name":"System design cases","item":"https://learn.significanthobbies.com/system-design/"},{"@type":"ListItem","position":3,"name":"Design LLM inference at 10K RPS","item":"https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html"}]}]}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Learn</p>
+            <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
+            <hr>
+            <p>Browse</p>
+            <a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/system-design/">System design cases</a></nav>
+      <article>
+    <p class="eyebrow">System design interview guide · 45 minutes</p>
+    <h1>Design LLM inference at 10K RPS</h1>
+    <p class="lede">Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.</p>
+    <p><a href="/mock?prompt=llm-inference-10k-rps&amp;from=guide">Start the closed-book case →</a></p>
+    <section>
+      <h2>1. Clarify the contract</h2>
+      <p>“Design LLM inference for 10,000 requests per second” sounds like a throughput question, but 10K RPS alone cannot size an autoregressive serving system. One request might classify ten tokens; another might retain a large KV cache while streaming a 2,000-token answer. The strongest opening is to turn the headline into a measurable workload and a latency, quality, availability, and cost contract.</p><p>Ask which model or model family is served and whether quality permits quantization or a smaller fallback. Ask for p50, p95, and p99 input and output token lengths, the maximum context, streaming behavior, time-to-first-token and output-speed targets, traffic peaks, regions, availability, tenant priorities, and cost constraints. Prompt repetition determines whether prefix caching matters; sampling and authorization determine whether complete-response caching is safe.</p><p>For a concrete calculation, state assumptions after asking. Suppose one fixed model streams responses, sustained traffic is 10K RPS with a 15K short peak, an average request has 1,000 input and 200 output tokens, p99 TTFT must remain below one second, output runs near 50 tokens per second, and the service must survive one zone. These are illustrative inputs, not universal facts. Making them explicit allows every later box and number to be challenged.</p>
+    </section><section>
+      <h2>2. Capacity math</h2>
+      <p>Convert request traffic into the work the GPUs see. Steady prefill traffic is 10,000 requests/s × 1,000 input tokens/request = 10,000,000 input tokens/s. Decode traffic is 10,000 × 200 = 2,000,000 output tokens/s. At 50 generated tokens/s, a 200-token completion remains active for roughly four seconds. Little’s Law gives about 10,000 × 4 = 40,000 concurrent generations.</p><p>Repeat the math for the peak and tail token lengths. Capacity must satisfy prefill throughput, decode throughput, active-sequence and KV-cache capacity, and the latency SLO. The constraint that saturates first determines usable fleet capacity.</p><p>Do not guess a GPU count. Replay the representative prompt and output distribution against one candidate replica, sweep concurrency and batching, and find the highest sustainable throughput that still meets p99. If a measured replica sustains C requests/s, an initial estimate is ceil(peak RPS / (C × target utilization)). Cross-check with ceil(peak input tokens/s / measured prefill tokens/s per replica / utilization) and the equivalent decode equation. A 70% target utilization leaves explicit burst and failure headroom.</p><p>For combined workers, benchmark the mixed workload instead of adding independent prefill and decode counts. If long prompts demonstrably block decode and damage output cadence, consider chunked prefill or separate pools. PagedAttention explains why KV-cache management changes throughput, but a published benchmark never replaces measurement of this model, hardware, distribution, and SLO.</p>
+    </section><section>
+      <h2>3. Architecture</h2>
+      <p>The request path is client → global load balancer → API gateway → admission and quota service → model router → bounded priority queue and batch scheduler → inference worker → streaming gateway → client.</p><p>The global layer routes to a healthy region. The gateway authenticates the tenant, validates request size, assigns a deadline and request ID, enforces token-aware quotas, and propagates cancellation when the client disconnects. The model router selects a compatible pool by model, adapter, context bucket, tenant tier, and region. Long batch prompts should not share an undifferentiated queue with latency-sensitive chat.</p><p>Each serving replica holds model weights and managed KV-cache memory. The scheduler continuously forms batches from ready prefill and decode work. Finished sequences leave and new work enters instead of making a static batch wait for the longest generation. A streaming gateway forwards tokens with backpressure and must not buffer the whole answer before delivery.</p><p>A separate control plane owns the model registry, signed artifacts, rollout configuration, placement, autoscaling targets, and health. Model loading is slow and memory-heavy, so the data plane maintains warm capacity. Health distinguishes an alive process from a loaded model capable of a small inference probe.</p>
+    </section><section>
+      <h2>4. Deep dive</h2>
+      <p>Batching is a latency-throughput negotiation. Waiting briefly can create a more efficient batch, but waiting consumes the TTFT budget. The scheduler therefore needs per-class queue deadlines, maximum delay, and fairness. It should observe token work rather than treating every request equally: a tenant sending huge contexts can consume far more prefill and KV capacity than one sending short prompts.</p><p>Continuous batching handles unequal completion lengths. KV-cache blocks must be allocated and reclaimed predictably, with cancellation freeing memory promptly. Prefix caching can avoid repeated prefill for shared system prompts, but the key includes the exact model, tokenizer, adapter, and prefix. Isolation rules must prevent one tenant’s private prompt state from becoming another tenant’s cache hit.</p><p>Prefill and decode contend differently for compute and memory bandwidth. Start with a simpler combined pool. Disaggregate only when profiling shows better SLO or fleet efficiency after accounting for KV transfer, network bandwidth, routing, and extra failure modes. Likewise, quantization, speculative decoding, parallelism, and cache policies are benchmark hypotheses—not unconditional wins.</p>
+    </section><section>
+      <h2>5. Failure handling</h2>
+      <p>Unbounded queues turn a spike into a latency outage. Give every request a deadline and every queue a maximum depth and age. Admission estimates whether the selected pool can finish work before the deadline. When capacity is exhausted, reject lower-priority work early, enforce tenant token budgets, cap output for an explicit degraded tier, route eligible traffic to a smaller model, preserve reserved critical capacity, and cancel work after disconnect or deadline expiry.</p><p>Retries need budgets and jitter because blind retries amplify overload. Generation replay semantics must be explicit: a stochastic retry may not reproduce the same tokens.</p><p>Run pools across at least three failure domains and reserve enough capacity that losing one does not overload the others. On worker failure, stop routing, terminate or retry streams according to contract, and replace from a nearby artifact or node cache. On regional loss, route new requests to another warm region. Active streams may restart because transferring a live KV cache across regions is usually more complex than replaying the prompt.</p><p>If traffic doubles in thirty seconds during a zone loss, cold GPU autoscaling will be too slow. Respond with warm headroom, predictive scaling for known events, an adjustable admission limit, priority shedding, retry control, and the smaller fallback. Trigger overload policy on queue age and SLO burn before p99 collapses.</p>
+    </section><section>
+      <h2>6. Observability and cost</h2>
+      <p>Measure the user experience with TTFT, inter-token latency or time per output token, end-to-end completion time, success, cancellation, and rejection rates by tenant and model. Measure saturation with running and waiting requests, queue age, prompt and generation tokens/s, batch composition, KV-cache usage and eviction, prefix-cache hit rate, GPU memory, model-load time, and preemption or recomputation.</p><p>These signals are better scaling inputs than CPU. vLLM exposes running and waiting work, cache usage, and token rates; Triton exposes queue and batch behavior. Scaling policy should combine demand, saturation, readiness delay, and a stabilization window so slow model startup does not cause oscillation.</p><p>Report cost per successful request and per million input and output tokens, split by model and tenant. Include warm idle capacity, failed or cancelled work, cross-region traffic, and fallback usage. Optimize cost while holding quality and latency constant. A cheaper quantized result is not a win if it silently violates the product’s quality contract.</p>
+    </section><section>
+      <h2>7. Common mistakes</h2>
+      <p>Common weak answers treat RPS as the only load unit, name a GPU count without a workload benchmark, or draw an unbounded FIFO queue. They scale on CPU, ignore cancellation and retry amplification, mix long batch prompts with interactive traffic, assume prefix caching always helps, or promise regional failover without enough warm capacity to absorb it.</p><p>Another mistake is optimizing one average. Production decisions live in distributions: p99 prompt length, p99 TTFT, burst duration, queue age, and tenant skew. State which tail matters and how the system behaves when it cannot meet it.</p>
+    </section><section>
+      <h2>8. Harder follow-ups</h2>
+      <p>How does the design change for several models and thousands of tenant-specific LoRA adapters? When does prefill/decode disaggregation win, and which network bottleneck appears? How do you preserve fairness when one tenant sends very long contexts? What do you inspect when TTFT is healthy but inter-token latency degrades? How do you roll out a quantized model and prove that savings do not hide a quality regression?</p><p>Practice answering each by returning to requirements, measurements, and failure behavior. The goal is not to memorize one diagram; it is to rebuild a defensible design when the interviewer changes a constraint.</p>
+    </section>
+    <section><h2>Answer outline</h2><p>Turn 10K RPS into prompt tokens, generated tokens, concurrent sequences, and a tail-latency target. Route authenticated work through token-aware admission into bounded priority queues, then use continuous batching and managed KV-cache memory on warm multi-zone workers. Size pools from workload-replay benchmarks at the target p99 with failure headroom, and shed or degrade low-priority work before queues collapse. Operate on TTFT, inter-token latency, queue age, token throughput, KV pressure, rejection rate, and cost per token.</p></section>
+    <section>
+      <h2>Primary sources</h2>
+      <ul class="resource-list"><li><a href="https://arxiv.org/abs/2309.06180" rel="noreferrer">Efficient Memory Management for Large Language Model Serving with PagedAttention</a> <span class="muted">(paper)</span></li><li><a href="https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html" rel="noreferrer">NVIDIA Triton Inference Server dynamic batching</a> <span class="muted">(official-doc)</span></li><li><a href="https://docs.vllm.ai/en/stable/design/metrics/" rel="noreferrer">vLLM production metrics</a> <span class="muted">(official-doc)</span></li><li><a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/" rel="noreferrer">Kubernetes horizontal pod autoscaling</a> <span class="muted">(official-doc)</span></li><li><a href="https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/" rel="noreferrer">NVIDIA LLM inference benchmarking fundamentals</a> <span class="muted">(official-doc)</span></li></ul>
+    </section>
+    <section class="grid two">
+      <div><h2>Repair the mechanisms</h2><ul class="link-list"><li><a href="/curriculum/concepts/inference-engines.html">vLLM &amp; Inference Engines</a></li><li><a href="/curriculum/concepts/continuous-batching.html">Continuous Batching</a></li><li><a href="/curriculum/concepts/kv-cache-paged-attention.html">KV Caching &amp; PagedAttention</a></li><li><a href="/curriculum/concepts/inference-cost-latency.html">Inference Cost &amp; Latency Optimization</a></li><li><a href="/curriculum/concepts/inference-hardware.html">Inference Hardware</a></li><li><a href="/curriculum/concepts/capacity-estimation.html">Capacity Estimation</a></li><li><a href="/curriculum/concepts/queueing-theory.html">Queueing Theory</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li><li><a href="/curriculum/concepts/rate-limiting.html">Rate Limiting</a></li><li><a href="/curriculum/concepts/monitoring-analytics.html">Observability</a></li></ul></div>
+      <div><h2>Practice drills</h2><ul class="link-list"><li><a href="/drills/practice-inference-engines">Design exercise: vLLM &amp; Inference Engines</a></li><li><a href="/drills/practice-continuous-batching">Design exercise: Continuous Batching</a></li><li><a href="/drills/practice-kv-cache-paged-attention">Design exercise: KV Caching &amp; PagedAttention</a></li><li><a href="/drills/practice-inference-hardware">Design exercise: Inference Hardware</a></li><li><a href="/drills/queue-backpressure">Queue backpressure</a></li></ul></div>
+    </section>
+    <p class="cta"><a href="/mock?prompt=llm-inference-10k-rps&amp;from=guide">Close the guide and attempt the interview →</a></p>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

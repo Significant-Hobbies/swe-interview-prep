@@ -3,8 +3,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { Button, Card, FilterPill, PageHeader, PageShell } from '../components/ui';
+import SystemDesignInterview from '../components/SystemDesignInterview';
 import { CONCEPT_BY_ID } from '../data/learning-os';
 import { MOCK_PROMPTS, type MockKind } from '../data/mock-prompts';
+import { SYSTEM_DESIGN_CASE_BY_ID } from '../data/system-design-cases';
 import { useActivityLogger } from '../hooks/useActivity';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useProfile } from '../hooks/useProfile';
@@ -47,6 +49,11 @@ export default function MockInterview() {
     const promptId = searchParams.get('prompt');
     if (!promptId) return;
     const p = MOCK_PROMPTS.find((x) => x.id === promptId);
+    if (SYSTEM_DESIGN_CASE_BY_ID[promptId]) {
+      deepLinked.current = true;
+      setKind('system-design');
+      return;
+    }
     if (!p) return;
     deepLinked.current = true;
     setKind(p.kind);
@@ -159,154 +166,170 @@ export default function MockInterview() {
         ))}
       </div>
 
-      {recommended.length > 0 && secondsLeft === 0 && (
-        <div className="mb-6">
-          <div className="mb-2 flex items-center gap-2 text-xs font-medium text-white/50">
-            <Target className="h-3.5 w-3.5" />
-            Recommended for your gaps
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {recommended.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => start(p.id)}
-                className="rounded-lg border border-sky-500/25 bg-sky-500/8 px-3 py-2 text-left text-xs text-white hover:border-sky-500/40"
-              >
-                <span className="font-medium">{p.title}</span>
-                <span className="ml-2 font-mono text-white/40">{p.durationMinutes}m</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <div className="space-y-2">
-          {pool.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              onClick={() => start(p.id)}
-              className={`w-full rounded-lg border p-3 text-left transition-colors ${
-                active?.id === p.id
-                  ? 'border-sky-500/40 bg-sky-500/10'
-                  : 'border-white/[0.08] bg-white/[0.02] hover:border-white/15'
-              }`}
-            >
-              <div className="text-sm font-medium text-white">{p.title}</div>
-              <div className="mt-1 font-mono text-[10px] text-white/40">
-                {p.durationMinutes} min
+      {kind === 'system-design' ? (
+        <SystemDesignInterview
+          initialCaseId={searchParams.get('prompt')}
+          fromGuide={searchParams.get('from') === 'guide'}
+        />
+      ) : (
+        <>
+          {recommended.length > 0 && secondsLeft === 0 && (
+            <div className="mb-6">
+              <div className="mb-2 flex items-center gap-2 text-xs font-medium text-white/50">
+                <Target className="h-3.5 w-3.5" />
+                Recommended for your gaps
               </div>
-            </button>
-          ))}
-        </div>
-
-        {active && (
-          <Card className="p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                <Mic className="h-4 w-4 text-sky-400" />
-                <span className="text-sm font-semibold text-white">{active.title}</span>
+              <div className="flex flex-wrap gap-2">
+                {recommended.map((p) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => start(p.id)}
+                    className="rounded-lg border border-sky-500/25 bg-sky-500/8 px-3 py-2 text-left text-xs text-white hover:border-sky-500/40"
+                  >
+                    <span className="font-medium">{p.title}</span>
+                    <span className="ml-2 font-mono text-white/40">{p.durationMinutes}m</span>
+                  </button>
+                ))}
               </div>
-              {secondsLeft > 0 ? (
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-sm ${
-                    secondsLeft < 120
-                      ? 'border-rose-500/30 text-rose-300'
-                      : 'border-white/15 text-white/70'
+            </div>
+          )}
+
+          <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+            <div className="space-y-2">
+              {pool.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => start(p.id)}
+                  className={`w-full rounded-lg border p-3 text-left transition-colors ${
+                    active?.id === p.id
+                      ? 'border-sky-500/40 bg-sky-500/10'
+                      : 'border-white/[0.08] bg-white/[0.02] hover:border-white/15'
                   }`}
                 >
-                  <Clock className="h-3.5 w-3.5" />
-                  {mm}:{ss.toString().padStart(2, '0')}
-                </span>
-              ) : (
-                <Button tone="ghost" onClick={() => start(active.id)}>
-                  <RotateCcw className="h-3.5 w-3.5" /> Restart
-                </Button>
-              )}
+                  <div className="text-sm font-medium text-white">{p.title}</div>
+                  <div className="mt-1 font-mono text-[10px] text-white/40">
+                    {p.durationMinutes} min
+                  </div>
+                </button>
+              ))}
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-white/70">{active.prompt}</p>
-
-            {active.conceptIds && active.conceptIds.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {active.conceptIds.map((cid) => {
-                  const c = CONCEPT_BY_ID[cid];
-                  if (!c) return null;
-                  return (
-                    <Link
-                      key={cid}
-                      to={`/concepts/${cid}`}
-                      className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/50 hover:border-white/20 hover:text-white/70"
-                    >
-                      {c.name}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Type your answer as you would speak it…"
-              rows={8}
-              className="mt-4 w-full resize-y rounded-md border border-white/[0.08] bg-black p-3 text-sm text-white placeholder:text-white/40 focus:border-white/25 focus:outline-none"
-            />
-
-            <div className="mt-5">
-              <div className="mb-2 text-xs font-medium text-white/50">Rubric checklist</div>
-              <ul className="space-y-2">
-                {active.rubric.map((line, i) => (
-                  <li key={i}>
-                    <button
-                      type="button"
-                      onClick={() => toggleRubric(i)}
-                      className={`flex w-full items-start gap-2 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
-                        checked.has(i)
-                          ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
-                          : 'border-white/[0.08] text-white/60 hover:border-white/15'
+            {active && (
+              <Card className="p-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <Mic className="h-4 w-4 text-sky-400" />
+                    <span className="text-sm font-semibold text-white">{active.title}</span>
+                  </div>
+                  {secondsLeft > 0 ? (
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-sm ${
+                        secondsLeft < 120
+                          ? 'border-rose-500/30 text-rose-300'
+                          : 'border-white/15 text-white/70'
                       }`}
                     >
-                      <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                      {line}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                      <Clock className="h-3.5 w-3.5" />
+                      {mm}:{ss.toString().padStart(2, '0')}
+                    </span>
+                  ) : (
+                    <Button tone="ghost" onClick={() => start(active.id)}>
+                      <RotateCcw className="h-3.5 w-3.5" /> Restart
+                    </Button>
+                  )}
+                </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {secondsLeft > 0 && <Button onClick={finish}>Finish early</Button>}
-              {aiConfigured() && notes.trim().length > 40 && (
-                <Button tone="ghost" onClick={() => void requestAiFeedback()} disabled={loadingAi}>
-                  {loadingAi ? 'Grading…' : 'AI feedback'}
-                </Button>
-              )}
-            </div>
+                <p className="mt-4 text-sm leading-relaxed text-white/70">{active.prompt}</p>
 
-            {aiFeedback && (
-              <div className="mt-4 rounded-lg border border-white/[0.08] bg-black/40 p-3 text-sm text-white/70 whitespace-pre-wrap">
-                {aiFeedback}
-              </div>
+                {active.conceptIds && active.conceptIds.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {active.conceptIds.map((cid) => {
+                      const c = CONCEPT_BY_ID[cid];
+                      if (!c) return null;
+                      return (
+                        <Link
+                          key={cid}
+                          to={`/concepts/${cid}`}
+                          className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/50 hover:border-white/20 hover:text-white/70"
+                        >
+                          {c.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Type your answer as you would speak it…"
+                  rows={8}
+                  className="mt-4 w-full resize-y rounded-md border border-white/[0.08] bg-black p-3 text-sm text-white placeholder:text-white/40 focus:border-white/25 focus:outline-none"
+                />
+
+                <div className="mt-5">
+                  <div className="mb-2 text-xs font-medium text-white/50">Rubric checklist</div>
+                  <ul className="space-y-2">
+                    {active.rubric.map((line, i) => (
+                      <li key={i}>
+                        <button
+                          type="button"
+                          onClick={() => toggleRubric(i)}
+                          className={`flex w-full items-start gap-2 rounded-md border px-3 py-2 text-left text-xs transition-colors ${
+                            checked.has(i)
+                              ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
+                              : 'border-white/[0.08] text-white/60 hover:border-white/15'
+                          }`}
+                        >
+                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                          {line}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {secondsLeft > 0 && <Button onClick={finish}>Finish early</Button>}
+                  {aiConfigured() && notes.trim().length > 40 && (
+                    <Button
+                      tone="ghost"
+                      onClick={() => void requestAiFeedback()}
+                      disabled={loadingAi}
+                    >
+                      {loadingAi ? 'Grading…' : 'AI feedback'}
+                    </Button>
+                  )}
+                </div>
+
+                {aiFeedback && (
+                  <div className="mt-4 rounded-lg border border-white/[0.08] bg-black/40 p-3 text-sm text-white/70 whitespace-pre-wrap">
+                    {aiFeedback}
+                  </div>
+                )}
+
+                {secondsLeft === 0 && notes.trim() && (
+                  <p className="mt-4 text-xs text-white/40">
+                    Self-score: {checked.size}/{active.rubric.length} rubric items
+                    {active.conceptIds?.length
+                      ? ` · mastery nudged for ${active.conceptIds.length} concept${active.conceptIds.length > 1 ? 's' : ''}`
+                      : ''}{' '}
+                    ·{' '}
+                    <Link
+                      to="/practice/all?tab=reviews"
+                      className="text-sky-400 hover:text-sky-300"
+                    >
+                      follow up with reviews →
+                    </Link>
+                  </p>
+                )}
+              </Card>
             )}
-
-            {secondsLeft === 0 && notes.trim() && (
-              <p className="mt-4 text-xs text-white/40">
-                Self-score: {checked.size}/{active.rubric.length} rubric items
-                {active.conceptIds?.length
-                  ? ` · mastery nudged for ${active.conceptIds.length} concept${active.conceptIds.length > 1 ? 's' : ''}`
-                  : ''}{' '}
-                ·{' '}
-                <Link to="/practice/all?tab=reviews" className="text-sky-400 hover:text-sky-300">
-                  follow up with reviews →
-                </Link>
-              </p>
-            )}
-          </Card>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </PageShell>
   );
 }

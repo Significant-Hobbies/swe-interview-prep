@@ -31,6 +31,8 @@ Concept → Drill → Build → Review → Apply. Each concept connects a concis
 ## Browse without JavaScript
 
 - [Curriculum hub](https://learn.significanthobbies.com/curriculum/)
+- [System-design case library](https://learn.significanthobbies.com/system-design/)
+- [LLM inference at 10K RPS](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.html)
 - [Complete Markdown catalog](https://learn.significanthobbies.com/curriculum/catalog.md)
 - [Structured JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)
 - [Agent entrypoint](https://learn.significanthobbies.com/llms.txt)

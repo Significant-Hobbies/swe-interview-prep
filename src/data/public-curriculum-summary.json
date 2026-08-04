@@ -3,9 +3,11 @@
     "tracks": 19,
     "concepts": 250,
     "roadmaps": 24,
-    "drills": 295,
+    "drills": 296,
     "reviewQuestions": 269,
     "artifacts": 40,
+    "systemDesignCases": 20,
+    "systemDesignGuides": 7,
     "coverageCategories": 11,
     "coverageTopics": 96
   },

@@ -28,6 +28,13 @@ export const BROWSE_NAV_ITEMS: BrowseNavItem[] = [
     blurb: 'Public tracks, roadmaps, and concept guides',
   },
   {
+    id: 'system-design-cases',
+    to: '/system-design/',
+    label: 'System design cases',
+    reloadDocument: true,
+    blurb: 'Staged interview cases and worked guides',
+  },
+  {
     id: 'sources',
     to: '/sources',
     label: 'Learning sources',

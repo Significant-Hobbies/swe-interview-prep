@@ -1,0 +1,33 @@
+{
+  "generated": true,
+  "source": "src/data/system-design-cases.ts",
+  "htmlPaths": [
+    "/system-design/",
+    "/system-design/llm-inference-10k-rps.html",
+    "/system-design/video-streaming-platform.html",
+    "/system-design/notification-delivery-service.html",
+    "/system-design/web-crawler.html",
+    "/system-design/cloud-file-storage.html",
+    "/system-design/ride-sharing-platform.html",
+    "/system-design/ticket-booking-platform.html"
+  ],
+  "markdownPaths": [
+    "/system-design/index.md",
+    "/system-design/llm-inference-10k-rps.md",
+    "/system-design/video-streaming-platform.md",
+    "/system-design/notification-delivery-service.md",
+    "/system-design/web-crawler.md",
+    "/system-design/cloud-file-storage.md",
+    "/system-design/ride-sharing-platform.md",
+    "/system-design/ticket-booking-platform.md"
+  ],
+  "approvedCaseIds": [
+    "llm-inference-10k-rps",
+    "video-streaming-platform",
+    "notification-delivery-service",
+    "web-crawler",
+    "cloud-file-storage",
+    "ride-sharing-platform",
+    "ticket-booking-platform"
+  ]
+}

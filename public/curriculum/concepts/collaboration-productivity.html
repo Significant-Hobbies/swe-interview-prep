@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Collaboration Systems | SWE Prep</title>
-    <meta name="description" content="OT, CRDT, conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="description" content="Causality, OT, CRDT merge laws, and offline conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
     <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Collaboration Systems | SWE Prep">
-    <meta property="og:description" content="OT, CRDT, conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta property="og:description" content="Causality, OT, CRDT merge laws, and offline conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
     <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Collaboration Systems | SWE Prep">
-    <meta name="twitter:description" content="OT, CRDT, conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
+    <meta name="twitter:description" content="Causality, OT, CRDT merge laws, and offline conflict resolution. Learn the mechanism through focused drills, review prompts, and build evidence.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Collaboration Systems","description":"OT, CRDT, conflict resolution.","url":"https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Collaboration Systems","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Collaboration Systems","description":"Causality, OT, CRDT merge laws, and offline conflict resolution.","url":"https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html","educationalLevel":"advanced","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Collaboration Systems","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -28,7 +28,7 @@
           <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
           <details class="browse-menu">
             <summary>Browse <span aria-hidden="true">▾</span></summary>
-            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
+            <div class="browse-panel"><a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></div>
           </details>
         </nav>
         <details class="compact-menu">
@@ -38,7 +38,7 @@
             <a href="/today">Today</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/mock">Mock</a><a href="/playground">Playground</a><a href="/progress">Progress</a>
             <hr>
             <p>Browse</p>
-            <a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
+            <a href="/curriculum/">Curriculum</a><a href="/system-design/">System design cases</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a><a href="/explore">Explore all</a><a href="/learn/all">All concepts</a><a href="/practice/all">All drills</a><a href="/practice/all?tab=reviews">Reviews</a><a href="/learning">Docs</a><a href="/changelog">Changelog</a><a href="/build">Build Lab</a><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a>
           </nav>
         </details>
       </div>
@@ -48,18 +48,18 @@
       <article>
     <p class="eyebrow">System Design · advanced</p>
     <h1>Collaboration Systems</h1>
-    <p class="lede">OT, CRDT, conflict resolution.</p>
+    <p class="lede">Causality, OT, CRDT merge laws, and offline conflict resolution.</p>
     <div class="pills"><span>system-design</span><span>system-design-cases</span></div>
 
     <section>
       <h2>Mental model</h2>
-      <p>Collaborative editors pick one of two conflict-resolution models: Operational Transform (OT), which mathematically rewrites concurrent edits, or CRDTs, which use data structures that merge automatically. CRDTs handle offline well; OT is more compact on the wire. Pick by your latency and offline needs.</p>
+      <p>Collaborative state needs an explicit notion of causality and a deterministic reconciliation rule. OT transforms concurrent operations against an agreed history; CRDTs design state or operations around algebraic merge laws so replicas converge despite reordering and duplication. Neither is universally simpler: choose from offline requirements, metadata and tombstone cost, server coordination, undo semantics, and the data structures the product needs.</p>
     </section>
 
     <section>
       <h2>How to study Collaboration Systems</h2>
       <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use System Design Primer, A Conflict-Free Replicated JSON Datatype (Kleppmann &amp; Beresford), Local-first software: you own your data, in spite of the cloud to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
-      <p>Next, compare Collaboration Systems with the neighboring concepts in its roadmap. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Collaborative doc editor and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+      <p>Next, compare Collaboration Systems with Consensus. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Make three replicas converge, Collaborative doc editor and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
     <section>
@@ -72,24 +72,29 @@
       </ul>
     </section>
 
+    <section><h2>Where it matters</h2><p>Collaborative editors, offline-first applications, replicated JSON documents, multi-device state sync, geo-replicated counters and sets, and local-first productivity tools.</p></section>
 
-
-
+    <section><h2>Common mistakes</h2><ul><li>Treating replica convergence as proof that concurrent edits preserve user intent</li><li>Calling CRDTs coordination-free while ignoring causal delivery, metadata compaction, tombstone garbage collection, or membership changes</li><li>Assuming every OT design requires one central server, or that every CRDT design has the same wire and storage costs</li><li>Replicating ephemeral cursor and presence state through the durable document history</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://arxiv.org/abs/1608.03960" rel="noreferrer">A Conflict-Free Replicated JSON Datatype (Kleppmann &amp; Beresford)</a> <span class="muted">(paper)</span></li><li><a href="https://martin.kleppmann.com/papers/local-first.pdf" rel="noreferrer">Local-first software: you own your data, in spite of the cloud</a> <span class="muted">(paper)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://github.com/donnemartin/system-design-primer" rel="noreferrer">System Design Primer</a> <span class="muted">(article)</span></li><li><a href="https://arxiv.org/abs/1608.03960" rel="noreferrer">A Conflict-Free Replicated JSON Datatype (Kleppmann &amp; Beresford)</a> <span class="muted">(paper)</span></li><li><a href="https://martin.kleppmann.com/papers/local-first.pdf" rel="noreferrer">Local-first software: you own your data, in spite of the cloud</a> <span class="muted">(paper)</span></li><li><a href="https://crdt.tech/" rel="noreferrer">CRDT.tech — introduction and glossary</a> <span class="muted">(doc)</span></li><li><a href="https://github.com/alangibson/awesome-crdt" rel="noreferrer">Awesome CRDT — curated bibliography and implementations</a> <span class="muted">(doc)</span></li><li><a href="https://lamport.azurewebsites.net/pubs/time-clocks.pdf" rel="noreferrer">Time, Clocks, and the Ordering of Events in a Distributed System</a> <span class="muted">(paper)</span></li><li><a href="https://hal.inria.fr/inria-00555588/document" rel="noreferrer">A comprehensive study of Convergent and Commutative Replicated Data Types</a> <span class="muted">(paper)</span></li><li><a href="https://arxiv.org/abs/2409.14252" rel="noreferrer">Collaborative Text Editing with Eg-walker: Better, Faster, Smaller</a> <span class="muted">(paper)</span></li><li><a href="https://github.com/xi-editor/xi-editor/issues/1187#issuecomment-491473599" rel="noreferrer">Why CRDT did not work out for xi-editor</a> <span class="muted">(article)</span></li></ul>
     </section>
 
     <section>
       <h2>Practice and explain it back</h2>
       <div class="practice-card">
+          <h3>Make three replicas converge</h3>
+          <p>Implement mergeGCounter(left, right) and valueGCounter(state). A grow-only counter stores one non-negative count per replica; merge takes the maximum count for every replica, and value sums the merged counts. Your merge must converge when updates arrive in different orders and remain unchanged when the same state is delivered twice.</p>
+          <p><strong>Expected evidence:</strong> Three independently updated replicas converge to the same {a:2,b:3,c:4} state and value 9 regardless of merge order.</p>
+          <a href="/drills/build-g-counter-merge">Open the interactive drill →</a>
+        </div><div class="practice-card">
           <h3>Collaborative doc editor</h3>
-          <p>Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Pick a conflict resolution model (OT vs CRDT) and explain the sync protocol.</p>
-          <p><strong>Expected evidence:</strong> Conflict model + a worked example of two concurrent edits being merged.</p>
+          <p>Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Define how clients represent causality, choose OT or a specific CRDT family, explain the sync protocol, and work through two concurrent edits delivered in opposite orders.</p>
+          <p><strong>Expected evidence:</strong> Causality model + conflict algorithm + a worked merge showing that replicas reach the intended document state.</p>
           <a href="/drills/design-collaborative-editor">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What must be true of the server for OT to be correct, and why do CRDTs not need it?</li></ul>
+      <h3>Review prompts</h3><ul><li>Why is convergence alone insufficient when choosing OT or a CRDT for collaborative editing?</li></ul>
     </section>
 
     <section>
@@ -98,8 +103,8 @@
     </section>
 
     <section class="grid two">
-      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/capacity-estimation.html">Capacity Estimation</a></li><li><a href="/curriculum/concepts/requirements-scoping.html">Requirements Scoping</a></li><li><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></li></ul></div>
-      <div><h2>Related concepts</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/capacity-estimation.html">Capacity Estimation</a></li><li><a href="/curriculum/concepts/requirements-scoping.html">Requirements Scoping</a></li><li><a href="/curriculum/concepts/messaging-realtime.html">Real-time Systems</a></li><li><a href="/curriculum/concepts/replication.html">Replication</a></li><li><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li></ul></div>
     </section>
 
     <section>

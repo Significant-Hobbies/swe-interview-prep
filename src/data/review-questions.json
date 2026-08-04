@@ -1086,8 +1086,8 @@
       "conceptId": "collaboration-productivity",
       "type": "compare",
       "difficulty": "advanced",
-      "question": "What must be true of the server for OT to be correct, and why do CRDTs not need it?",
-      "answer": "OT needs a central authority to order concurrent operations and transform each against those already applied; correctness rests on transformation functions that are famously hard to get right. A CRDT puts merge into the data type, so any delivery order converges — paid for with metadata that grows with edit history."
+      "question": "Why is convergence alone insufficient when choosing OT or a CRDT for collaborative editing?",
+      "answer": "Replicas can converge on the same state while still violating what users intended, mishandling undo, or retaining unbounded metadata and tombstones. Evaluate the concrete algorithm against concurrent-edit traces, offline duration, causality tracking, garbage collection, and product semantics rather than assuming either the OT or CRDT family is automatically correct or simpler."
     },
     {
       "id": "rq-array-hashing-core",
