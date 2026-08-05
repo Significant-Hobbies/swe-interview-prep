@@ -5200,7 +5200,11 @@
       "roadmaps": ["systems-foundations-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": ["compute-memory-storage-hierarchy"],
+      "prerequisites": [
+        "data-representation",
+        "program-memory-model",
+        "compute-memory-storage-hierarchy"
+      ],
       "related": ["compute-memory-storage-hierarchy"],
       "description": "Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.",
       "mentalModel": "An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.",
@@ -5276,7 +5280,7 @@
       "roadmaps": ["systems-foundations-12w"],
       "difficulty": "core",
       "priority": 3,
-      "prerequisites": [],
+      "prerequisites": ["data-representation"],
       "related": ["operating-system-mechanics", "network-protocol-engineering"],
       "description": "CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.",
       "mentalModel": "Performance is usually data movement. Each level trades capacity and durability for latency and bandwidth, so placement decisions must follow the working set and access pattern.",
@@ -8396,6 +8400,68 @@
       "reviewQuestions": ["rq-cdn-immutable-urls"],
       "resources": [],
       "artifacts": []
+    },
+    {
+      "id": "data-representation",
+      "name": "Data Representation",
+      "tags": ["systems-foundations", "computer-arithmetic"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": [],
+      "related": ["program-memory-model", "compute-memory-storage-hierarchy"],
+      "description": "Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.",
+      "mentalModel": "Bits have no meaning until a representation gives them one. Width, signedness, byte order, numeric format, and text encoding are part of every data contract; the same bytes can describe different values when either side assumes a different representation.",
+      "drills": ["practice-data-representation"],
+      "reviewQuestions": ["rq-data-representation"],
+      "resources": [
+        {
+          "title": "Computer Systems: A Programmer's Perspective — Student Site",
+          "url": "https://csapp.cs.cmu.edu/3e/students.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1",
+      "commonMistakes": [
+        "Treating a hex dump as a value without stating width, signedness, and byte order",
+        "Comparing floating-point results as if every decimal fraction has an exact binary representation",
+        "Confusing Unicode code points with UTF-8 bytes or fixed-width characters"
+      ],
+      "realWorldUsage": "Binary protocols, database pages, file formats, model tensors, network packet inspection, serialization compatibility, and numerical debugging."
+    },
+    {
+      "id": "program-memory-model",
+      "name": "Program Memory Model",
+      "tags": ["systems-foundations", "memory-management"],
+      "roadmaps": ["systems-foundations-12w"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["data-representation"],
+      "related": [
+        "data-representation",
+        "compute-memory-storage-hierarchy",
+        "operating-system-mechanics"
+      ],
+      "description": "Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.",
+      "mentalModel": "A pointer is a typed interpretation of an address inside a process virtual address space. Stack frames follow call lifetimes, heap allocations follow explicit or runtime-managed ownership, and the loader maps code and data into a process before execution begins.",
+      "drills": ["practice-program-memory-model"],
+      "reviewQuestions": ["rq-program-memory-model"],
+      "resources": [
+        {
+          "title": "The Rust Programming Language — What Is Ownership?",
+          "url": "https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["synthesize-systems-foundations-12w"],
+      "curriculumSource": "learning-domain-expansion-v1",
+      "commonMistakes": [
+        "Saying a pointer lives on the heap when only the allocation it references is on the heap",
+        "Equating virtual addresses with stable physical memory locations",
+        "Ignoring ownership and lifetime when memory crosses thread, callback, or process boundaries"
+      ],
+      "realWorldUsage": "Debugging crashes and leaks, understanding allocators and garbage collectors, designing FFI boundaries, reading profiles, and reasoning about process isolation."
     }
   ]
 }

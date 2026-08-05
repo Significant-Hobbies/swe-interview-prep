@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operating System Mechanics | SWE Prep</title>
-    <meta name="description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html">
+    <title>Data Representation | SWE Prep</title>
+    <meta name="description" content="Binary and hexadecimal, two&#39;s complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/data-representation.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SWE Interview Prep">
-    <meta property="og:title" content="Operating System Mechanics | SWE Prep">
-    <meta property="og:description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html">
+    <meta property="og:title" content="Data Representation | SWE Prep">
+    <meta property="og:description" content="Binary and hexadecimal, two&#39;s complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/data-representation.html">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Operating System Mechanics | SWE Prep">
-    <meta name="twitter:description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
+    <meta name="twitter:title" content="Data Representation | SWE Prep">
+    <meta name="twitter:description" content="Binary and hexadecimal, two&#39;s complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Operating System Mechanics","description":"Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.","url":"https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Operating System Mechanics","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Data Representation","description":"Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.","url":"https://learn.significanthobbies.com/curriculum/concepts/data-representation.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Data Representation","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -47,19 +47,19 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/systems-foundations.html">Systems Foundations</a></nav>
       <article>
     <p class="eyebrow">Systems Foundations · core</p>
-    <h1>Operating System Mechanics</h1>
-    <p class="lede">Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.</p>
-    <div class="pills"><span>systems-foundations</span><span>operating-systems</span></div>
+    <h1>Data Representation</h1>
+    <p class="lede">Binary and hexadecimal, two&#39;s complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.</p>
+    <div class="pills"><span>systems-foundations</span><span>computer-arithmetic</span></div>
 
     <section>
       <h2>Mental model</h2>
-      <p>An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.</p>
+      <p>Bits have no meaning until a representation gives them one. Width, signedness, byte order, numeric format, and text encoding are part of every data contract; the same bytes can describe different values when either side assumes a different representation.</p>
     </section>
 
     <section>
-      <h2>How to study Operating System Mechanics</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Operating Systems: Three Easy Pieces to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
-      <p>Next, compare Operating System Mechanics with Compute, Memory &amp; Storage Hierarchy. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Operating System Mechanics and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+      <h2>How to study Data Representation</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Computer Systems: A Programmer&#39;s Perspective — Student Site to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Data Representation with Program Memory Model, Compute, Memory &amp; Storage Hierarchy. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Encode a binary compatibility fixture and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
     <section>
@@ -72,24 +72,24 @@
       </ul>
     </section>
 
+    <section><h2>Where it matters</h2><p>Binary protocols, database pages, file formats, model tensors, network packet inspection, serialization compatibility, and numerical debugging.</p></section>
 
-
-
+    <section><h2>Common mistakes</h2><ul><li>Treating a hex dump as a value without stating width, signedness, and byte order</li><li>Comparing floating-point results as if every decimal fraction has an exact binary representation</li><li>Confusing Unicode code points with UTF-8 bytes or fixed-width characters</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" rel="noreferrer">Operating Systems: Three Easy Pieces</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://csapp.cs.cmu.edu/3e/students.html" rel="noreferrer">Computer Systems: A Programmer&#39;s Perspective — Student Site</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
       <h2>Practice and explain it back</h2>
       <div class="practice-card">
-          <h3>Design exercise: Operating System Mechanics</h3>
-          <p>Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries. Implement designOutline() returning non-empty values for: processModel, memoryModel, ioPath. Each value must name a concrete mechanism or decision.</p>
-          <p><strong>Expected evidence:</strong> A design outline with processModel, memoryModel, ioPath plus an explicit failure mode or trade-off.</p>
-          <a href="/drills/practice-operating-system-mechanics">Open the interactive drill →</a>
+          <h3>Encode a binary compatibility fixture</h3>
+          <p>Implement encodeRepresentations() without hard-coding the returned fixture. Return lowercase hexadecimal strings for four values: signed16Hex for -42 encoded as a 16-bit two&#39;s-complement integer, float32Hex for 0.15625 encoded as IEEE-754 binary32, utf8Hex for the string A€, and littleEndianHex for the 32-bit value 0x12345678 written little-endian.</p>
+          <p><strong>Expected evidence:</strong> An object with signed16Hex, float32Hex, utf8Hex, and littleEndianHex derived from the requested representations.</p>
+          <a href="/drills/practice-data-representation">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What does virtual memory actually buy beyond &quot;more memory than you have&quot;?</li></ul>
+      <h3>Review prompts</h3><ul><li>A packet contains the bytes d6 ff, and one service reads -42 while another reads 65,494. Explain how both results are possible and what the protocol must specify to make the value unambiguous.</li></ul>
     </section>
 
     <section>
@@ -102,8 +102,8 @@
     </section>
 
     <section class="grid two">
-      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/data-representation.html">Data Representation</a></li><li><a href="/curriculum/concepts/program-memory-model.html">Program Memory Model</a></li><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
-      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
+      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/program-memory-model.html">Program Memory Model</a></li><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
     </section>
 
     <section>

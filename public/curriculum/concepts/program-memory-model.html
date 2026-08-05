@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operating System Mechanics | SWE Prep</title>
-    <meta name="description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html">
+    <title>Program Memory Model | SWE Prep</title>
+    <meta name="description" content="Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SWE Interview Prep">
-    <meta property="og:title" content="Operating System Mechanics | SWE Prep">
-    <meta property="og:description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html">
+    <meta property="og:title" content="Program Memory Model | SWE Prep">
+    <meta property="og:description" content="Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Operating System Mechanics | SWE Prep">
-    <meta name="twitter:description" content="Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.">
+    <meta name="twitter:title" content="Program Memory Model | SWE Prep">
+    <meta name="twitter:description" content="Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Operating System Mechanics","description":"Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.","url":"https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Operating System Mechanics","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Program Memory Model","description":"Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.","url":"https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Program Memory Model","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -47,19 +47,19 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/systems-foundations.html">Systems Foundations</a></nav>
       <article>
     <p class="eyebrow">Systems Foundations · core</p>
-    <h1>Operating System Mechanics</h1>
-    <p class="lede">Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.</p>
-    <div class="pills"><span>systems-foundations</span><span>operating-systems</span></div>
+    <h1>Program Memory Model</h1>
+    <p class="lede">Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.</p>
+    <div class="pills"><span>systems-foundations</span><span>memory-management</span></div>
 
     <section>
       <h2>Mental model</h2>
-      <p>An operating system multiplexes hardware while enforcing isolation. Processes, virtual memory, schedulers, and filesystems are policies built on CPU, memory, and device mechanisms.</p>
+      <p>A pointer is a typed interpretation of an address inside a process virtual address space. Stack frames follow call lifetimes, heap allocations follow explicit or runtime-managed ownership, and the loader maps code and data into a process before execution begins.</p>
     </section>
 
     <section>
-      <h2>How to study Operating System Mechanics</h2>
-      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use Operating Systems: Three Easy Pieces to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
-      <p>Next, compare Operating System Mechanics with Compute, Memory &amp; Storage Hierarchy. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Design exercise: Operating System Mechanics and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+      <h2>How to study Program Memory Model</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use The Rust Programming Language — What Is Ownership? to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Program Memory Model with Data Representation, Compute, Memory &amp; Storage Hierarchy, Operating System Mechanics. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Trace a program into process memory and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
     </section>
 
     <section>
@@ -72,24 +72,24 @@
       </ul>
     </section>
 
+    <section><h2>Where it matters</h2><p>Debugging crashes and leaks, understanding allocators and garbage collectors, designing FFI boundaries, reading profiles, and reasoning about process isolation.</p></section>
 
-
-
+    <section><h2>Common mistakes</h2><ul><li>Saying a pointer lives on the heap when only the allocation it references is on the heap</li><li>Equating virtual addresses with stable physical memory locations</li><li>Ignoring ownership and lifetime when memory crosses thread, callback, or process boundaries</li></ul></section>
 
     <section>
       <h2>Learn from primary sources</h2>
-      <ul class="resource-list"><li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" rel="noreferrer">Operating Systems: Three Easy Pieces</a> <span class="muted">(doc)</span></li></ul>
+      <ul class="resource-list"><li><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" rel="noreferrer">The Rust Programming Language — What Is Ownership?</a> <span class="muted">(doc)</span></li></ul>
     </section>
 
     <section>
       <h2>Practice and explain it back</h2>
       <div class="practice-card">
-          <h3>Design exercise: Operating System Mechanics</h3>
-          <p>Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries. Implement designOutline() returning non-empty values for: processModel, memoryModel, ioPath. Each value must name a concrete mechanism or decision.</p>
-          <p><strong>Expected evidence:</strong> A design outline with processModel, memoryModel, ioPath plus an explicit failure mode or trade-off.</p>
-          <a href="/drills/practice-operating-system-mechanics">Open the interactive drill →</a>
+          <h3>Trace a program into process memory</h3>
+          <p>Implement memoryMap() for this C-shaped program: static int requests; int main() { char *buffer = malloc(4096); int count = 0; serve(buffer, &amp;count); free(buffer); }. Return executable, stack, heap, pointer, and process strings. Each must be a distinct explanation of at least six words that names its storage, lifetime, ownership, or loading mechanism.</p>
+          <p><strong>Expected evidence:</strong> A five-part causal trace distinguishing the executable image, stack frame, heap allocation, pointer value, and running process virtual address space.</p>
+          <a href="/drills/practice-program-memory-model">Open the interactive drill →</a>
         </div>
-      <h3>Review prompts</h3><ul><li>What does virtual memory actually buy beyond &quot;more memory than you have&quot;?</li></ul>
+      <h3>Review prompts</h3><ul><li>In char *buffer = malloc(4096), where do the pointer and pointed-to bytes live, who controls each lifetime, and what changes when the executable becomes a process?</li></ul>
     </section>
 
     <section>
@@ -102,8 +102,8 @@
     </section>
 
     <section class="grid two">
-      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/data-representation.html">Data Representation</a></li><li><a href="/curriculum/concepts/program-memory-model.html">Program Memory Model</a></li><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
-      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li></ul></div>
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/data-representation.html">Data Representation</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/data-representation.html">Data Representation</a></li><li><a href="/curriculum/concepts/compute-memory-storage-hierarchy.html">Compute, Memory &amp; Storage Hierarchy</a></li><li><a href="/curriculum/concepts/operating-system-mechanics.html">Operating System Mechanics</a></li></ul></div>
     </section>
 
     <section>

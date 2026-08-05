@@ -2,6 +2,7 @@ import { ArrowRight, FlaskConical, Gauge } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import AiNativePath from '../components/AiNativePath';
 import BrowseLinks from '../components/BrowseLinks';
 import FeaturedPaths from '../components/FeaturedPaths';
 import PathDoor from '../components/PathDoor';
@@ -123,8 +124,8 @@ export default function Learn() {
           Set your active path.
         </h1>
         <p className="mt-4 max-w-prose text-sm text-white/50 sm:text-base">
-          Today&apos;s session follows the active roadmap. Start with four macro doors, quick
-          interview picks, or all {ROADMAPS.length} roadmaps below.
+          Today&apos;s session follows the active roadmap. Use the compact sequence below to orient
+          yourself, then choose one of {ROADMAPS.length} detailed roadmaps.
         </p>
         <Link
           to="/explore"
@@ -133,6 +134,8 @@ export default function Learn() {
           Explore full catalog <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
+
+      <AiNativePath className="mt-10" />
 
       <SweepDoor />
       <SystemsLabDoor />

@@ -40,6 +40,28 @@ function write(path, value) {
  */
 const DEFINITIONS = [
   [
+    'data-representation',
+    'Data Representation',
+    'systems-foundations',
+    'computer-arithmetic',
+    "Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.",
+    'Bits have no meaning until a representation gives them one. Width, signedness, byte order, numeric format, and text encoding are part of every data contract; the same bytes can describe different values when either side assumes a different representation.',
+    "Computer Systems: A Programmer's Perspective — Student Site",
+    'https://csapp.cs.cmu.edu/3e/students.html',
+    ['signedInteger', 'floatingPoint', 'textEncoding', 'byteOrder'],
+  ],
+  [
+    'program-memory-model',
+    'Program Memory Model',
+    'systems-foundations',
+    'memory-management',
+    'Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.',
+    'A pointer is a typed interpretation of an address inside a process virtual address space. Stack frames follow call lifetimes, heap allocations follow explicit or runtime-managed ownership, and the loader maps code and data into a process before execution begins.',
+    'The Rust Programming Language — What Is Ownership?',
+    'https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html',
+    ['executable', 'stack', 'heap', 'pointer', 'process'],
+  ],
+  [
     'operating-system-mechanics',
     'Operating System Mechanics',
     'systems-foundations',
@@ -789,6 +811,116 @@ const DEFINITIONS = [
   ],
 ];
 
+const CURATED_FOUNDATION_PACKAGES = {
+  'data-representation': {
+    concept: {
+      prerequisites: [],
+      related: ['program-memory-model', 'compute-memory-storage-hierarchy'],
+      commonMistakes: [
+        'Treating a hex dump as a value without stating width, signedness, and byte order',
+        'Comparing floating-point results as if every decimal fraction has an exact binary representation',
+        'Confusing Unicode code points with UTF-8 bytes or fixed-width characters',
+      ],
+      realWorldUsage:
+        'Binary protocols, database pages, file formats, model tensors, network packet inspection, serialization compatibility, and numerical debugging.',
+    },
+    drill: {
+      title: 'Encode a binary compatibility fixture',
+      type: 'coding',
+      prompt:
+        "Implement encodeRepresentations() without hard-coding the returned fixture. Return lowercase hexadecimal strings for four values: signed16Hex for -42 encoded as a 16-bit two's-complement integer, float32Hex for 0.15625 encoded as IEEE-754 binary32, utf8Hex for the string A€, and littleEndianHex for the 32-bit value 0x12345678 written little-endian.",
+      expectedOutput:
+        'An object with signed16Hex, float32Hex, utf8Hex, and littleEndianHex derived from the requested representations.',
+      hints: [
+        'Use fixed-width buffers or typed views so width and byte order are explicit.',
+        'A TextEncoder exposes UTF-8 bytes without assuming one byte per character.',
+      ],
+      solutionNotes:
+        'The fixture makes representation part of the interface: -42 is ffd6 at 16 bits, 0.15625 is 3e200000 in binary32, A€ is 41e282ac in UTF-8, and 0x12345678 becomes 78563412 in little-endian order.',
+      testCases: [
+        {
+          setup:
+            "function validateRepresentations(value) {\n  return value?.signed16Hex === 'ffd6' &&\n    value?.float32Hex === '3e200000' &&\n    value?.utf8Hex === '41e282ac' &&\n    value?.littleEndianHex === '78563412';\n}",
+          run: 'console.log(validateRepresentations(encodeRepresentations()));',
+          expect: 'true',
+        },
+      ],
+    },
+    review: {
+      type: 'explain',
+      question:
+        'A packet contains the bytes d6 ff, and one service reads -42 while another reads 65,494. Explain how both results are possible and what the protocol must specify to make the value unambiguous.',
+      answer:
+        "The bytes alone do not define a number. Interpreted as a little-endian 16-bit field they form 0xffd6; two's-complement signed interpretation yields -42, while unsigned interpretation yields 65,494. The protocol must specify field width, byte order, signedness, and representation version. Floating point and text fields likewise need their IEEE-754 format or character encoding stated explicitly.",
+    },
+  },
+  'program-memory-model': {
+    concept: {
+      prerequisites: ['data-representation'],
+      related: [
+        'data-representation',
+        'compute-memory-storage-hierarchy',
+        'operating-system-mechanics',
+      ],
+      commonMistakes: [
+        'Saying a pointer lives on the heap when only the allocation it references is on the heap',
+        'Equating virtual addresses with stable physical memory locations',
+        'Ignoring ownership and lifetime when memory crosses thread, callback, or process boundaries',
+      ],
+      realWorldUsage:
+        'Debugging crashes and leaks, understanding allocators and garbage collectors, designing FFI boundaries, reading profiles, and reasoning about process isolation.',
+    },
+    drill: {
+      title: 'Trace a program into process memory',
+      type: 'coding',
+      prompt:
+        'Implement memoryMap() for this C-shaped program: static int requests; int main() { char *buffer = malloc(4096); int count = 0; serve(buffer, &count); free(buffer); }. Return executable, stack, heap, pointer, and process strings. Each must be a distinct explanation of at least six words that names its storage, lifetime, ownership, or loading mechanism.',
+      expectedOutput:
+        'A five-part causal trace distinguishing the executable image, stack frame, heap allocation, pointer value, and running process virtual address space.',
+      hints: [
+        'Separate the pointer variable from the allocation it references.',
+        'Describe what the loader and operating system create before main runs.',
+      ],
+      solutionNotes:
+        "The executable is a file containing code and static data. The loader maps segments into a new process virtual address space. count and the buffer pointer are automatic values in main's stack frame; malloc owns a separate heap allocation until free releases it. The pointer stores an address, not the bytes themselves.",
+      testCases: [
+        {
+          setup:
+            "function validateMemoryMap(value) {\n  const rules = {\n    executable: /loader|mapped|code|static/i,\n    stack: /stack|frame|local|automatic/i,\n    heap: /heap|allocat|free|ownership/i,\n    pointer: /pointer|address|reference/i,\n    process: /process|virtual address|isolation/i,\n  };\n  if (!value || typeof value !== 'object') return false;\n  const seen = new Set();\n  for (const [key, rule] of Object.entries(rules)) {\n    const text = value[key]?.trim();\n    if (!text || text.split(/\\s+/).length < 6 || !rule.test(text)) return false;\n    if (seen.has(text.toLowerCase())) return false;\n    seen.add(text.toLowerCase());\n  }\n  return true;\n}",
+          run: 'console.log(validateMemoryMap(memoryMap()));',
+          expect: 'true',
+        },
+      ],
+    },
+    review: {
+      type: 'explain',
+      question:
+        'In char *buffer = malloc(4096), where do the pointer and pointed-to bytes live, who controls each lifetime, and what changes when the executable becomes a process?',
+      answer:
+        'For a local variable, buffer itself normally occupies a slot in the current stack frame while malloc returns an address to a separate heap allocation. The stack slot follows the function call lifetime; the allocation remains until free or an owning runtime releases it. Before main, the loader maps executable code and static data into a new virtual address space, creates process state and an initial stack, and transfers control to the program entry point. Physical placement may change without changing the process virtual addresses.',
+    },
+  },
+};
+
+const SYSTEMS_FOUNDATIONS_CAPSTONE = {
+  description:
+    'Build a tiny HTTP/1.1 static-file server on raw TCP sockets without a framework or high-level HTTP server library. Parse requests, serve bounded files, handle partial I/O, inject failures, measure the result, and explain how the operating system, network, memory, concurrency, and storage paths interact.',
+  successCriteria: [
+    'Accepts TCP connections, parses a bounded HTTP GET request, serves fixture files, and returns explicit errors for malformed requests, missing files, and path traversal attempts',
+    'Names and implements a concurrency model with connection, request-size, timeout, and resource limits, including correct handling of partial reads and writes',
+    'Injects at least a slow client, malformed request, or interrupted transfer and demonstrates bounded failure and recovery',
+    'Reports a reproducible workload with throughput, p50/p95 latency, peak memory, and open-connection observations',
+    'Explains the loader, process, syscall, buffer, filesystem, TCP, and scheduling path in a concise architecture note',
+  ],
+  deliverables: [
+    'Runnable C, Rust, Go, or equivalent raw-socket server plus deterministic fixture files',
+    'Protocol test matrix and focused validation command with captured output',
+    'Reproducible benchmark command and recorded throughput, latency, memory, and connection evidence',
+    'Architecture diagram tracing one request through process memory, syscalls, filesystem I/O, and TCP',
+    'Short explain-back covering decisions, failure modes, measurements, and remaining risks',
+  ],
+};
+
 const RECLASSIFICATIONS = {
   'concurrency-design': 'systems-foundations',
   'monitoring-analytics': 'infrastructure-platforms',
@@ -820,7 +952,12 @@ const ROADMAP_DEFINITIONS = [
     tracks: ['systems-foundations'],
     goal: 'Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.',
     groups: [
-      ['operating-system-mechanics', 'compute-memory-storage-hierarchy'],
+      [
+        'data-representation',
+        'program-memory-model',
+        'compute-memory-storage-hierarchy',
+        'operating-system-mechanics',
+      ],
       ['network-protocol-engineering', 'concurrency-design'],
       ['runtime-performance-engineering', 'security-isolation-boundaries'],
     ],
@@ -1010,6 +1147,11 @@ const COVERAGE = {
       id: 'systems-foundations',
       title: 'Systems Foundations',
       topics: [
+        topic('Data representation', ['data-representation']),
+        topic('Program memory and process lifecycle', [
+          'program-memory-model',
+          'operating-system-mechanics',
+        ]),
         topic('Operating systems', ['operating-system-mechanics']),
         topic('Networking', ['network-protocol-engineering', 'http-lifecycle']),
         topic('Concurrency and parallelism', ['concurrency-design']),
@@ -1324,6 +1466,7 @@ for (const [
     artifacts: artifactIdsByConcept.get(id) ?? [],
     curriculumSource: source,
   };
+  Object.assign(concept, CURATED_FOUNDATION_PACKAGES[id]?.concept ?? {});
   replaceGenerated(conceptsFile.concepts, concept, 'concept');
 
   const drill = {
@@ -1352,6 +1495,7 @@ for (const [
     ],
     curriculumSource: source,
   };
+  Object.assign(drill, CURATED_FOUNDATION_PACKAGES[id]?.drill ?? {});
   replaceGenerated(drillsFile.drills, drill, 'drill');
 
   // Placeholder only. A generated question cannot be specific, and its answer
@@ -1370,10 +1514,27 @@ for (const [
     source: 'editorial',
     curriculumSource: source,
   };
+  Object.assign(review, CURATED_FOUNDATION_PACKAGES[id]?.review ?? {});
   replaceGenerated(reviewsFile.reviewQuestions, review, 'review question');
 }
 
 const conceptById = new Map(conceptsFile.concepts.map((concept) => [concept.id, concept]));
+
+const foundationPrerequisites = {
+  'data-representation': [],
+  'program-memory-model': ['data-representation'],
+  'compute-memory-storage-hierarchy': ['data-representation'],
+  'operating-system-mechanics': [
+    'data-representation',
+    'program-memory-model',
+    'compute-memory-storage-hierarchy',
+  ],
+};
+for (const [id, prerequisites] of Object.entries(foundationPrerequisites)) {
+  const concept = conceptById.get(id);
+  if (!concept) throw new Error(`Cannot sequence missing foundation concept "${id}"`);
+  concept.prerequisites = prerequisites;
+}
 
 for (const [id, track] of Object.entries(RECLASSIFICATIONS)) {
   const concept = conceptById.get(id);
@@ -1407,6 +1568,12 @@ for (const path of ROADMAP_DEFINITIONS) {
     curriculumSource: source,
   };
   replaceGenerated(artifactsFile.artifacts, artifact, 'artifact');
+  if (path.id === 'systems-foundations-12w') {
+    const systemsArtifact = artifactsFile.artifacts.find(
+      (candidate) => candidate.id === artifactId
+    );
+    Object.assign(systemsArtifact, SYSTEMS_FOUNDATIONS_CAPSTONE);
+  }
 
   const roadmap = {
     id: path.id,

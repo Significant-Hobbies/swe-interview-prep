@@ -7,6 +7,14 @@
       "title": "Systems Foundations",
       "topics": [
         {
+          "name": "Data representation",
+          "concepts": ["data-representation"]
+        },
+        {
+          "name": "Program memory and process lifecycle",
+          "concepts": ["program-memory-model", "operating-system-mechanics"]
+        },
+        {
           "name": "Operating systems",
           "concepts": ["operating-system-mechanics"]
         },
