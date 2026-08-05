@@ -1,6 +1,6 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 250 concepts across
+A public, JavaScript-free index of 252 concepts across
 19 tracks and 24 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
@@ -344,7 +344,7 @@ Getting a built thing in front of people: positioning, landing pages, SEO, and p
 Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html
-- Concepts: 6
+- Concepts: 8
 - Roadmaps: 1
 
 - [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html) — Thread-safety, locks, producer-consumer.
@@ -353,6 +353,8 @@ Operating systems, networks, concurrency, hardware, runtimes, performance, secur
 - [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html) — CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
 - [Runtime & Performance Engineering](https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html) — Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
 - [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html) — Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html) — Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
+- [Program Memory Model](https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html) — Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.
 
 ## Infrastructure & Platforms
 

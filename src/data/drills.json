@@ -6000,6 +6000,50 @@
         }
       ],
       "referenceSolution": "function edgePolicy({ url, hasAuthCookie, varyHeaders, contentHashed }) {\n  const key = [url, ...varyHeaders].join('|');\n  if (hasAuthCookie) return { cacheable: false, ttlSeconds: 0, key };\n  return { cacheable: true, ttlSeconds: contentHashed ? 31536000 : 300, key };\n}"
+    },
+    {
+      "id": "practice-data-representation",
+      "title": "Encode a binary compatibility fixture",
+      "conceptId": "data-representation",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement encodeRepresentations() without hard-coding the returned fixture. Return lowercase hexadecimal strings for four values: signed16Hex for -42 encoded as a 16-bit two's-complement integer, float32Hex for 0.15625 encoded as IEEE-754 binary32, utf8Hex for the string A€, and littleEndianHex for the 32-bit value 0x12345678 written little-endian.",
+      "expectedOutput": "An object with signed16Hex, float32Hex, utf8Hex, and littleEndianHex derived from the requested representations.",
+      "hints": [
+        "Use fixed-width buffers or typed views so width and byte order are explicit.",
+        "A TextEncoder exposes UTF-8 bytes without assuming one byte per character."
+      ],
+      "solutionNotes": "The fixture makes representation part of the interface: -42 is ffd6 at 16 bits, 0.15625 is 3e200000 in binary32, A€ is 41e282ac in UTF-8, and 0x12345678 becomes 78563412 in little-endian order.",
+      "testCases": [
+        {
+          "setup": "function validateRepresentations(value) {\n  return value?.signed16Hex === 'ffd6' &&\n    value?.float32Hex === '3e200000' &&\n    value?.utf8Hex === '41e282ac' &&\n    value?.littleEndianHex === '78563412';\n}",
+          "run": "console.log(validateRepresentations(encodeRepresentations()));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "practice-program-memory-model",
+      "title": "Trace a program into process memory",
+      "conceptId": "program-memory-model",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement memoryMap() for this C-shaped program: static int requests; int main() { char *buffer = malloc(4096); int count = 0; serve(buffer, &count); free(buffer); }. Return executable, stack, heap, pointer, and process strings. Each must be a distinct explanation of at least six words that names its storage, lifetime, ownership, or loading mechanism.",
+      "expectedOutput": "A five-part causal trace distinguishing the executable image, stack frame, heap allocation, pointer value, and running process virtual address space.",
+      "hints": [
+        "Separate the pointer variable from the allocation it references.",
+        "Describe what the loader and operating system create before main runs."
+      ],
+      "solutionNotes": "The executable is a file containing code and static data. The loader maps segments into a new process virtual address space. count and the buffer pointer are automatic values in main's stack frame; malloc owns a separate heap allocation until free releases it. The pointer stores an address, not the bytes themselves.",
+      "testCases": [
+        {
+          "setup": "function validateMemoryMap(value) {\n  const rules = {\n    executable: /loader|mapped|code|static/i,\n    stack: /stack|frame|local|automatic/i,\n    heap: /heap|allocat|free|ownership/i,\n    pointer: /pointer|address|reference/i,\n    process: /process|virtual address|isolation/i,\n  };\n  if (!value || typeof value !== 'object') return false;\n  const seen = new Set();\n  for (const [key, rule] of Object.entries(rules)) {\n    const text = value[key]?.trim();\n    if (!text || text.split(/\\s+/).length < 6 || !rule.test(text)) return false;\n    if (seen.has(text.toLowerCase())) return false;\n    seen.add(text.toLowerCase());\n  }\n  return true;\n}",
+          "run": "console.log(validateMemoryMap(memoryMap()));",
+          "expect": "true"
+        }
+      ],
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

@@ -10,15 +10,15 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 250,
+    "concepts": 252,
     "roadmaps": 24,
-    "drills": 296,
-    "reviewQuestions": 269,
+    "drills": 298,
+    "reviewQuestions": 271,
     "artifacts": 40,
     "systemDesignCases": 20,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
-    "coverageTopics": 96
+    "coverageTopics": 98
   },
   "tracks": [
     {
@@ -352,7 +352,9 @@
         "network-protocol-engineering",
         "compute-memory-storage-hierarchy",
         "runtime-performance-engineering",
-        "security-isolation-boundaries"
+        "security-isolation-boundaries",
+        "data-representation",
+        "program-memory-model"
       ],
       "roadmapIds": [
         "systems-foundations-12w"
@@ -1005,8 +1007,10 @@
       "url": "https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html",
       "conceptIds": [
         "object-modeling",
-        "operating-system-mechanics",
+        "data-representation",
+        "program-memory-model",
         "compute-memory-storage-hierarchy",
+        "operating-system-mechanics",
         "network-protocol-engineering",
         "concurrency-design",
         "runtime-performance-engineering",
@@ -5076,6 +5080,34 @@
         "hld-practice",
         "swe-landscape"
       ]
+    },
+    {
+      "id": "data-representation",
+      "name": "Data Representation",
+      "description": "Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "computer-arithmetic"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/data-representation.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
+    },
+    {
+      "id": "program-memory-model",
+      "name": "Program Memory Model",
+      "description": "Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.",
+      "difficulty": "core",
+      "tags": [
+        "systems-foundations",
+        "memory-management"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html",
+      "roadmapIds": [
+        "systems-foundations-12w"
+      ]
     }
   ],
   "systemDesignCases": [
@@ -5618,6 +5650,19 @@
       "id": "systems-foundations",
       "title": "Systems Foundations",
       "topics": [
+        {
+          "name": "Data representation",
+          "concepts": [
+            "data-representation"
+          ]
+        },
+        {
+          "name": "Program memory and process lifecycle",
+          "concepts": [
+            "program-memory-model",
+            "operating-system-mechanics"
+          ]
+        },
         {
           "name": "Operating systems",
           "concepts": [

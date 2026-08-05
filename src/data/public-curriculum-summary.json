@@ -1,15 +1,15 @@
 {
   "counts": {
     "tracks": 19,
-    "concepts": 250,
+    "concepts": 252,
     "roadmaps": 24,
-    "drills": 296,
-    "reviewQuestions": 269,
+    "drills": 298,
+    "reviewQuestions": 271,
     "artifacts": 40,
     "systemDesignCases": 20,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
-    "coverageTopics": 96
+    "coverageTopics": 98
   },
   "tracks": [
     {

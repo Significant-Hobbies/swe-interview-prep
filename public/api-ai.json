@@ -13,15 +13,15 @@
   "curriculum": {
     "counts": {
       "tracks": 19,
-      "concepts": 250,
+      "concepts": 252,
       "roadmaps": 24,
-      "drills": 296,
-      "reviewQuestions": 269,
+      "drills": 298,
+      "reviewQuestions": 271,
       "artifacts": 40,
       "systemDesignCases": 20,
       "systemDesignGuides": 7,
       "coverageCategories": 11,
-      "coverageTopics": 96
+      "coverageTopics": 98
     },
     "html": "https://learn.significanthobbies.com/curriculum/",
     "markdown": "https://learn.significanthobbies.com/curriculum/catalog.md",
@@ -47,7 +47,7 @@
       "url": "https://learn.significanthobbies.com/curriculum/",
       "md": "https://learn.significanthobbies.com/curriculum/index.md",
       "kind": "collection",
-      "description": "19 tracks, 250 concepts, and 24 roadmaps as static public pages"
+      "description": "19 tracks, 252 concepts, and 24 roadmaps as static public pages"
     },
     {
       "id": "system-design",

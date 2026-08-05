@@ -1,19 +1,19 @@
 {
   "version": 3,
-  "generatedAt": "2026-08-04",
+  "generatedAt": "2026-08-05",
   "_meta": {
     "tier": "S",
     "optional": true,
     "schema": "items",
     "stats": {
-      "video": 180,
+      "video": 181,
       "paper": 221,
       "blog": 177,
       "book": 150,
-      "problem": 251,
-      "write": 250,
+      "problem": 253,
+      "write": 252,
       "more": 99,
-      "items": 1328
+      "items": 1333
     }
   },
   "packs": {
@@ -7904,6 +7904,41 @@
           "title": "Explain back",
           "url": "",
           "body": "Explain \"CDN & Edge Delivery\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A CDN is a cache hierarchy whose top tier is geographic: the edge answers what it can, a shield tier absorbs the misses so the origin sees one request instead of one per POP, and only genuine misses reach you"
+        }
+      ]
+    },
+    "data-representation": {
+      "items": [
+        {
+          "category": "video",
+          "title": "Computer Systems: A Programmer's Perspective — Student Site",
+          "url": "https://csapp.cs.cmu.edu/3e/students.html"
+        },
+        {
+          "category": "problem",
+          "title": "Encode a binary compatibility fixture",
+          "url": "/drills/practice-data-representation"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Data Representation\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: Bits have no meaning until a representation gives them one"
+        }
+      ]
+    },
+    "program-memory-model": {
+      "items": [
+        {
+          "category": "problem",
+          "title": "Trace a program into process memory",
+          "url": "/drills/practice-program-memory-model"
+        },
+        {
+          "category": "write",
+          "title": "Explain back",
+          "url": "",
+          "body": "Explain \"Program Memory Model\" in three sentences a junior engineer would understand — no jargon you can't define. Cover: A pointer is a typed interpretation of an address inside a process virtual address space"
         }
       ]
     }

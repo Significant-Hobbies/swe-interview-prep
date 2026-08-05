@@ -2,15 +2,15 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 250,
+    "concepts": 252,
     "roadmaps": 24,
-    "drills": 296,
-    "reviewQuestions": 269,
+    "drills": 298,
+    "reviewQuestions": 271,
     "artifacts": 40,
     "systemDesignCases": 20,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
-    "coverageTopics": 96
+    "coverageTopics": 98
   },
   "htmlPaths": [
     "/curriculum/",
@@ -306,7 +306,9 @@
     "/curriculum/concepts/vector-quantization.html",
     "/curriculum/concepts/disk-based-ann.html",
     "/curriculum/concepts/index-updates-tombstones.html",
-    "/curriculum/concepts/cdn-edge-delivery.html"
+    "/curriculum/concepts/cdn-edge-delivery.html",
+    "/curriculum/concepts/data-representation.html",
+    "/curriculum/concepts/program-memory-model.html"
   ],
   "markdownPaths": [
     "/curriculum/index.md",
@@ -602,6 +604,8 @@
     "/curriculum/concepts/vector-quantization.md",
     "/curriculum/concepts/disk-based-ann.md",
     "/curriculum/concepts/index-updates-tombstones.md",
-    "/curriculum/concepts/cdn-edge-delivery.md"
+    "/curriculum/concepts/cdn-edge-delivery.md",
+    "/curriculum/concepts/data-representation.md",
+    "/curriculum/concepts/program-memory-model.md"
   ]
 }

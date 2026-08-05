@@ -96,13 +96,13 @@
       <h2>Build evidence</h2>
       <div class="practice-card">
           <h3>Synthesize: Systems Foundations</h3>
-          <p>Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Produce one working system, benchmark, or evidence-backed design that integrates the path.</p>
-          <ul><li>Implements or precisely models the core mechanisms from all three milestones</li><li>Includes at least one injected failure or adversarial case and demonstrates recovery</li><li>Reports quality, latency, resource, reliability, or usability measurements relevant to the domain</li><li>Ships a concise architecture note explaining decisions, trade-offs, and remaining risks</li></ul>
+          <p>Build a tiny HTTP/1.1 static-file server on raw TCP sockets without a framework or high-level HTTP server library. Parse requests, serve bounded files, handle partial I/O, inject failures, measure the result, and explain how the operating system, network, memory, concurrency, and storage paths interact.</p>
+          <ul><li>Accepts TCP connections, parses a bounded HTTP GET request, serves fixture files, and returns explicit errors for malformed requests, missing files, and path traversal attempts</li><li>Names and implements a concurrency model with connection, request-size, timeout, and resource limits, including correct handling of partial reads and writes</li><li>Injects at least a slow client, malformed request, or interrupted transfer and demonstrates bounded failure and recovery</li><li>Reports a reproducible workload with throughput, p50/p95 latency, peak memory, and open-connection observations</li><li>Explains the loader, process, syscall, buffer, filesystem, TCP, and scheduling path in a concise architecture note</li></ul>
         </div>
     </section>
 
     <section class="grid two">
-      <div><h2>Prerequisites</h2><p class="muted">None assigned yet.</p></div>
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/data-representation.html">Data Representation</a></li></ul></div>
       <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/operating-system-mechanics.html">Operating System Mechanics</a></li><li><a href="/curriculum/concepts/network-protocol-engineering.html">Network Protocol Engineering</a></li></ul></div>
     </section>
 

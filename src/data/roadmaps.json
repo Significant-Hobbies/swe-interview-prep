@@ -1209,13 +1209,17 @@
           "goal": "Build the domain vocabulary and explain the core mechanisms from first principles.",
           "concepts": [
             "object-modeling",
-            "operating-system-mechanics",
-            "compute-memory-storage-hierarchy"
+            "data-representation",
+            "program-memory-model",
+            "compute-memory-storage-hierarchy",
+            "operating-system-mechanics"
           ],
           "drills": [
             "design-parking-lot",
-            "practice-operating-system-mechanics",
-            "practice-compute-memory-storage-hierarchy"
+            "practice-data-representation",
+            "practice-program-memory-model",
+            "practice-compute-memory-storage-hierarchy",
+            "practice-operating-system-mechanics"
           ],
           "artifacts": []
         },

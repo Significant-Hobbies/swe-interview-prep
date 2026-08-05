@@ -29,7 +29,7 @@ Design transfer(from, to, amount) that is safe under concurrent calls. Address d
 
 ## Build evidence
 
-- **Synthesize: Systems Foundations** — Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Produce one working system, benchmark, or evidence-backed design that integrates the path.
+- **Synthesize: Systems Foundations** — Build a tiny HTTP/1.1 static-file server on raw TCP sockets without a framework or high-level HTTP server library. Parse requests, serve bounded files, handle partial I/O, inject failures, measure the result, and explain how the operating system, network, memory, concurrency, and storage paths interact.
 
 ## Prerequisites
 

@@ -29,10 +29,12 @@ Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kerne
 
 ## Build evidence
 
-- **Synthesize: Systems Foundations** — Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Produce one working system, benchmark, or evidence-backed design that integrates the path.
+- **Synthesize: Systems Foundations** — Build a tiny HTTP/1.1 static-file server on raw TCP sockets without a framework or high-level HTTP server library. Parse requests, serve bounded files, handle partial I/O, inject failures, measure the result, and explain how the operating system, network, memory, concurrency, and storage paths interact.
 
 ## Prerequisites
 
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html)
+- [Program Memory Model](https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html)
 - [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
 
 ## Related concepts

@@ -230,16 +230,64 @@ describe('eleven-domain curriculum expansion', () => {
     'multimodal-spatial',
   ];
 
-  it('maps all 96 requested subtopics across eleven categories', () => {
+  it('maps the requested taxonomy plus two machine-level foundation gaps', () => {
     expect(curriculumCoverage.categories).toHaveLength(11);
     const topics = curriculumCoverage.categories.flatMap((category) => category.topics);
-    expect(topics).toHaveLength(96);
+    expect(topics).toHaveLength(98);
 
     const broken = topics.flatMap((topic) => {
       if (!topic.concepts.length) return [`${topic.name} has no concepts`];
       return topic.concepts.filter((id) => !conceptIds.has(id)).map((id) => `${topic.name}→${id}`);
     });
     expect(broken).toEqual([]);
+  });
+
+  it('sequences both machine-level foundation concepts before operating systems', () => {
+    const roadmap = roadmaps.find((candidate: any) => candidate.id === 'systems-foundations-12w');
+    const firstMilestone = roadmap?.milestones?.[0];
+    const sequence = firstMilestone?.concepts ?? [];
+
+    for (const id of ['data-representation', 'program-memory-model']) {
+      const concept = concepts.find((candidate: any) => candidate.id === id);
+      const drill = drills.find((candidate: any) => candidate.id === concept?.drills?.[0]);
+      const review = reviewQuestions.find(
+        (candidate: any) => candidate.id === concept?.reviewQuestions?.[0]
+      );
+
+      expect(concept?.mentalModel, `${id} mental model`).toBeTruthy();
+      expect(concept?.resources?.[0]?.url, `${id} primary source`).toMatch(/^https:\/\//);
+      expect(drill?.testCases?.length, `${id} executable drill`).toBeGreaterThan(0);
+      expect(review?.question, `${id} explain-back`).toBeTruthy();
+      expect(sequence.indexOf(id), `${id} is on the first milestone`).toBeGreaterThanOrEqual(0);
+      expect(sequence.indexOf(id), `${id} precedes operating systems`).toBeLessThan(
+        sequence.indexOf('operating-system-mechanics')
+      );
+    }
+
+    expect(
+      concepts.find((candidate: any) => candidate.id === 'operating-system-mechanics')
+        ?.prerequisites
+    ).toEqual(['data-representation', 'program-memory-model', 'compute-memory-storage-hierarchy']);
+  });
+
+  it('uses a raw-socket HTTP server as the Systems Foundations capstone', () => {
+    const artifact = artifacts.find(
+      (candidate: any) => candidate.id === 'synthesize-systems-foundations-12w'
+    );
+    const evidence = [
+      artifact?.description,
+      ...(artifact?.successCriteria ?? []),
+      ...(artifact?.deliverables ?? []),
+    ].join(' ');
+
+    expect(evidence).toMatch(/raw TCP sockets/i);
+    expect(evidence).toMatch(/HTTP\/1\.1/i);
+    expect(evidence).toMatch(/partial reads and writes/i);
+    expect(evidence).toMatch(/p50\/p95 latency/i);
+    expect(evidence).toMatch(/failure|malformed|slow client/i);
+    expect(artifact?.concepts).toEqual(
+      expect.arrayContaining(['data-representation', 'program-memory-model'])
+    );
   });
 
   it('keeps every added domain first-class and practice-backed', () => {

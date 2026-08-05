@@ -468,26 +468,30 @@
       "type": "synthesis-project",
       "difficulty": "advanced",
       "concepts": [
-        "operating-system-mechanics",
+        "data-representation",
+        "program-memory-model",
         "compute-memory-storage-hierarchy",
+        "operating-system-mechanics",
         "network-protocol-engineering",
         "concurrency-design",
         "runtime-performance-engineering",
         "security-isolation-boundaries"
       ],
       "projects": [],
-      "description": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Produce one working system, benchmark, or evidence-backed design that integrates the path.",
+      "description": "Build a tiny HTTP/1.1 static-file server on raw TCP sockets without a framework or high-level HTTP server library. Parse requests, serve bounded files, handle partial I/O, inject failures, measure the result, and explain how the operating system, network, memory, concurrency, and storage paths interact.",
       "successCriteria": [
-        "Implements or precisely models the core mechanisms from all three milestones",
-        "Includes at least one injected failure or adversarial case and demonstrates recovery",
-        "Reports quality, latency, resource, reliability, or usability measurements relevant to the domain",
-        "Ships a concise architecture note explaining decisions, trade-offs, and remaining risks"
+        "Accepts TCP connections, parses a bounded HTTP GET request, serves fixture files, and returns explicit errors for malformed requests, missing files, and path traversal attempts",
+        "Names and implements a concurrency model with connection, request-size, timeout, and resource limits, including correct handling of partial reads and writes",
+        "Injects at least a slow client, malformed request, or interrupted transfer and demonstrates bounded failure and recovery",
+        "Reports a reproducible workload with throughput, p50/p95 latency, peak memory, and open-connection observations",
+        "Explains the loader, process, syscall, buffer, filesystem, TCP, and scheduling path in a concise architecture note"
       ],
       "deliverables": [
-        "Runnable code, reproducible benchmark, or executable design harness",
-        "Focused validation command with captured output",
-        "Architecture diagram or typed interface map",
-        "Short evidence-backed write-up"
+        "Runnable C, Rust, Go, or equivalent raw-socket server plus deterministic fixture files",
+        "Protocol test matrix and focused validation command with captured output",
+        "Reproducible benchmark command and recorded throughput, latency, memory, and connection evidence",
+        "Architecture diagram tracing one request through process memory, syscalls, filesystem I/O, and TCP",
+        "Short explain-back covering decisions, failure modes, measurements, and remaining risks"
       ],
       "curriculumSource": "learning-domain-expansion-v1"
     },

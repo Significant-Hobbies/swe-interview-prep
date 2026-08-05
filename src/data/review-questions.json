@@ -2292,6 +2292,26 @@
       "difficulty": "core",
       "question": "Why do content-hashed URLs with a one-year TTL beat a short TTL plus purge-on-deploy?",
       "answer": "Because they make invalidation unnecessary rather than fast. A hashed URL names a specific byte sequence, so a change produces a different URL — the old entry is never wrong, it is simply unreferenced, and the new one is a plain cache miss. Purge is eventually consistent across POPs, can fail partially, and leaves a window where users get stale content; a short TTL trades constant origin load for a smaller version of the same window. The immutable approach has neither problem."
+    },
+    {
+      "id": "rq-data-representation",
+      "conceptId": "data-representation",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A packet contains the bytes d6 ff, and one service reads -42 while another reads 65,494. Explain how both results are possible and what the protocol must specify to make the value unambiguous.",
+      "answer": "The bytes alone do not define a number. Interpreted as a little-endian 16-bit field they form 0xffd6; two's-complement signed interpretation yields -42, while unsigned interpretation yields 65,494. The protocol must specify field width, byte order, signedness, and representation version. Floating point and text fields likewise need their IEEE-754 format or character encoding stated explicitly.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-program-memory-model",
+      "conceptId": "program-memory-model",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "In char *buffer = malloc(4096), where do the pointer and pointed-to bytes live, who controls each lifetime, and what changes when the executable becomes a process?",
+      "answer": "For a local variable, buffer itself normally occupies a slot in the current stack frame while malloc returns an address to a separate heap allocation. The stack slot follows the function call lifetime; the allocation remains until free or an owning runtime releases it. Before main, the loader maps executable code and static data into a new virtual address space, creates process state and an initial stack, and transfers control to the program entry point. Physical placement may change without changing the process virtual addresses.",
+      "source": "editorial",
+      "curriculumSource": "learning-domain-expansion-v1"
     }
   ]
 }

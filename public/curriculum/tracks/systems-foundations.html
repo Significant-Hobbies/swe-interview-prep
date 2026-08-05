@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Systems Foundations","description":"Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.","url":"https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html","numberOfItems":6,"hasPart":[{"@type":"LearningResource","name":"Concurrency Design","url":"https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html"},{"@type":"LearningResource","name":"Operating System Mechanics","url":"https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html"},{"@type":"LearningResource","name":"Network Protocol Engineering","url":"https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering.html"},{"@type":"LearningResource","name":"Compute, Memory & Storage Hierarchy","url":"https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html"},{"@type":"LearningResource","name":"Runtime & Performance Engineering","url":"https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html"},{"@type":"LearningResource","name":"Security & Isolation Boundaries","url":"https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Systems Foundations","description":"Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.","url":"https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html","numberOfItems":8,"hasPart":[{"@type":"LearningResource","name":"Concurrency Design","url":"https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html"},{"@type":"LearningResource","name":"Operating System Mechanics","url":"https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html"},{"@type":"LearningResource","name":"Network Protocol Engineering","url":"https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering.html"},{"@type":"LearningResource","name":"Compute, Memory & Storage Hierarchy","url":"https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html"},{"@type":"LearningResource","name":"Runtime & Performance Engineering","url":"https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html"},{"@type":"LearningResource","name":"Security & Isolation Boundaries","url":"https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html"},{"@type":"LearningResource","name":"Data Representation","url":"https://learn.significanthobbies.com/curriculum/concepts/data-representation.html"},{"@type":"LearningResource","name":"Program Memory Model","url":"https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,12 +46,12 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a></nav>
       <article>
-    <p class="eyebrow">Learning track · 6 concepts</p>
+    <p class="eyebrow">Learning track · 8 concepts</p>
     <h1>Systems Foundations</h1>
     <p class="lede">Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.</p>
     <section>
       <h2>What mastery looks like</h2>
-      <p>This track contains 6 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Systems Foundations, use the track description as the boundary: learn enough detail to reason clearly about operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.</p>
+      <p>This track contains 8 connected concepts rather than an unordered reading list. Mastery means you can move from vocabulary to mechanisms, predict how the system behaves under pressure, and support a design decision with code, measurements, or a failure-recovery exercise. For Systems Foundations, use the track description as the boundary: learn enough detail to reason clearly about operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.</p>
       <p>A useful explanation names the state involved, the operation that changes it, the resource or safety constraint, and the observable signal that tells you whether the mechanism works. Avoid stopping at product names. Compare at least two approaches, state what each optimizes, and identify what breaks first as scale, concurrency, latency, or uncertainty increases.</p>
     </section>
     <section>
@@ -89,6 +89,14 @@
         <p class="eyebrow">core</p>
         <h3><a href="/curriculum/concepts/security-isolation-boundaries.html">Security &amp; Isolation Boundaries</a></h3>
         <p>Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/data-representation.html">Data Representation</a></h3>
+        <p>Binary and hexadecimal, two&#39;s complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.</p>
+      </article><article class="card">
+        <p class="eyebrow">core</p>
+        <h3><a href="/curriculum/concepts/program-memory-model.html">Program Memory Model</a></h3>
+        <p>Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.</p>
       </article></div>
     </section>
   </article>
