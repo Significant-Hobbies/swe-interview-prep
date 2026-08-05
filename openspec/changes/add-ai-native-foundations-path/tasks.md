@@ -20,5 +20,5 @@
 ## 4. Verification and design review
 
 - [x] 4.1 Run focused curriculum and Learn tests, then typecheck, lint, docs validation, production build, and strict OpenSpec validation
-- [ ] 4.2 Inspect Learn in a browser and capture before/after evidence at 390, 768, and 1440 pixels
-- [ ] 4.3 Complete Impeccable critique, polish, audit, and the preserve-lane design receipt with zero unresolved P0/P1 findings
+- [x] 4.2 Inspect Learn in a browser and capture before/after evidence at 390, 768, and 1440 pixels
+- [x] 4.3 Complete Impeccable critique, polish, audit, and the preserve-lane design receipt with zero unresolved P0/P1 findings

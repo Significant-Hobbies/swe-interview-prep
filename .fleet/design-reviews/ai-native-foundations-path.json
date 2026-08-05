@@ -1,0 +1,72 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "AI-native foundations path on Learn",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/ai-native-foundations-before-1440.png"
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/ai-native-foundations-after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/ai-native-foundations-after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/ai-native-foundations-after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm format:check && pnpm check && pnpm typecheck && pnpm test && pnpm docs:validate && VITE_GOOGLE_CLIENT_ID=ci-placeholder.apps.googleusercontent.com pnpm build && pnpm size",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 34,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 19,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        {
+          "rule": "mobile-orientation-density",
+          "count": 1,
+          "disposition": "advisory",
+          "note": "The complete four-stage orientation is long on mobile but remains readable, responsive, and non-blocking."
+        },
+        {
+          "rule": "verbose-card-link-name",
+          "count": 1,
+          "disposition": "advisory",
+          "note": "Card-wide links expose complete stage context to assistive technology; a future refinement can shorten their accessible names."
+        }
+      ]
+    }
+  },
+  "ownerFeedback": {
+    "decision": "delegated",
+    "note": "Owner approved the required two-reviewer gate and authorized completion and merge on 2026-08-06."
+  }
+}
