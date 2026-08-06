@@ -1,10 +1,11 @@
-import { LogIn, LogOut, Settings, X } from 'lucide-react';
+import { LogOut, Settings, X } from 'lucide-react';
 import { lazy, Suspense, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { STORE_KEYS, loadLocal, saveLocal } from '../lib/userStore';
 import { SiteHeader } from './SiteHeader';
+import { GoogleSignInButton } from './GoogleSignInButton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 // Lazy-loaded: DigestBanner pulls in learning-os.ts (722 KB / 179 KB gzip of
@@ -18,7 +19,7 @@ const SettingsModal = lazy(() => import('./SettingsModal'));
 
 export default function Layout() {
   const location = useLocation();
-  const { user, isGuest, signInWithGoogle, signOut } = useAuth();
+  const { user, isGuest, signOut } = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
 
@@ -103,14 +104,7 @@ export default function Layout() {
                   </Tooltip>
                 </>
               ) : isGuest ? (
-                <button
-                  onClick={signInWithGoogle}
-                  aria-label="Sign in with Google"
-                  className="ml-1 inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
-                >
-                  <LogIn className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline">Sign in</span>
-                </button>
+                <GoogleSignInButton className="ml-1" />
               ) : null}
             </>
           }
@@ -130,13 +124,7 @@ export default function Layout() {
               <p className="text-xs text-white/55">
                 Your progress is saved in this browser only — clearing it loses everything.
               </p>
-              <button
-                type="button"
-                onClick={signInWithGoogle}
-                className="inline-flex min-h-11 items-center font-mono text-[11px] text-white/70 transition-colors hover:text-white"
-              >
-                Sign in to keep it →
-              </button>
+              <GoogleSignInButton />
             </div>
           </div>
         )}

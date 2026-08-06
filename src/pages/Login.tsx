@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import curriculumSummary from '../data/public-curriculum-summary.json';
 import { SiteHeader } from '../components/SiteHeader';
+import { GoogleSignInButton } from '../components/GoogleSignInButton';
 
 const PRINCIPLES = [
   {
@@ -58,7 +59,7 @@ const STEPS = [
 ];
 
 export default function Login() {
-  const { signInWithGoogle, continueAsGuest } = useAuth();
+  const { continueAsGuest } = useAuth();
   const navigate = useNavigate();
   const [debugInfo, setDebugInfo] = useState<string>('');
 
@@ -85,12 +86,7 @@ export default function Login() {
             >
               Guest
             </button>
-            <button
-              onClick={signInWithGoogle}
-              className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black transition-colors hover:bg-white/90"
-            >
-              Sign in
-            </button>
+            <GoogleSignInButton />
           </>
         }
       />
@@ -128,12 +124,7 @@ export default function Login() {
                 Try a mock interview
                 <ArrowRight className="h-4 w-4" />
               </button>
-              <button
-                onClick={signInWithGoogle}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/5"
-              >
-                Sign in with Google
-              </button>
+              <GoogleSignInButton size="large" />
               <span className="font-mono text-xs text-white/40">No sign-up needed to start.</span>
             </div>
             {import.meta.env.DEV && debugInfo && (
@@ -255,12 +246,7 @@ export default function Login() {
               >
                 Continue as guest <ArrowRight className="h-4 w-4" />
               </button>
-              <button
-                onClick={signInWithGoogle}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white hover:border-white/30 hover:bg-white/5"
-              >
-                Sign in with Google
-              </button>
+              <GoogleSignInButton size="large" />
             </div>
           </div>
         </section>
