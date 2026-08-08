@@ -22,6 +22,7 @@ export const FEATURED_ROADMAP_PICKS: {
   { id: 'swe-landscape', label: 'OS & landscape', docSlug: 'swe-landscape' },
   { id: 'ai-models-training-12w', label: 'AI training' },
   { id: 'inference-serving-12w', label: 'Inference' },
+  { id: 'trace-a-tensor', label: 'Tensor lifecycle' },
   { id: 'agent-systems-12w', label: 'Agents' },
   { id: 'developer-tools-12w', label: 'Devtools' },
 ];
@@ -58,6 +59,7 @@ export const ROADMAP_GROUPS: RoadmapGroup[] = [
       'ai-infra-12-month',
       'ai-models-training-12w',
       'inference-serving-12w',
+      'trace-a-tensor',
       'agent-systems-12w',
       'ai-reliability-12w',
     ],

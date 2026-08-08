@@ -1932,6 +1932,59 @@
         }
       ],
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "trace-a-tensor",
+      "title": "Trace a Tensor",
+      "horizon": "30d",
+      "goal": "Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.",
+      "description": "A compact AI-systems synthesis path. Four milestones connect the work expressed by a model to the machine and serving layers that execute it, ending in a measured bottleneck diagnosis and defended optimization.",
+      "tracks": ["systems-foundations", "ai-systems", "inference-serving"],
+      "milestones": [
+        {
+          "title": "Week 1 — Represent and differentiate",
+          "goal": "Explain how values become tensors and how a forward computation creates the work required by backpropagation.",
+          "concepts": ["data-representation", "ml-backprop"],
+          "drills": ["practice-data-representation", "ml-chain-rule-gate"],
+          "artifacts": []
+        },
+        {
+          "title": "Week 2 — Move and execute",
+          "goal": "Locate tensor data across the memory hierarchy and profile the runtime before choosing an optimization.",
+          "concepts": [
+            "compute-memory-storage-hierarchy",
+            "runtime-performance-engineering",
+            "inference-hardware",
+            "gpu-utilization"
+          ],
+          "drills": [
+            "practice-compute-memory-storage-hierarchy",
+            "practice-runtime-performance-engineering",
+            "practice-inference-hardware",
+            "practice-gpu-utilization"
+          ],
+          "artifacts": []
+        },
+        {
+          "title": "Week 3 — Change the work",
+          "goal": "Reduce data movement or numerical work with hardware-aware kernels and model representation changes while preserving quality.",
+          "concepts": ["flashattention-kernels", "model-quantization"],
+          "drills": ["practice-flashattention-kernels", "practice-model-quantization"],
+          "artifacts": []
+        },
+        {
+          "title": "Week 4 — Schedule, serve, and defend",
+          "goal": "Connect engine scheduling to latency, throughput, utilization, quality, and cost, then defend the measured system.",
+          "concepts": ["inference-engines", "continuous-batching", "inference-cost-latency"],
+          "drills": [
+            "practice-inference-engines",
+            "practice-continuous-batching",
+            "practice-inference-cost-latency"
+          ],
+          "artifacts": ["trace-a-tensor-capstone"]
+        }
+      ],
+      "curriculumSource": "trace-a-tensor-v1"
     }
   ]
 }

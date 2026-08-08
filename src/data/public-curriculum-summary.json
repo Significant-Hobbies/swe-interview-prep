@@ -2,10 +2,10 @@
   "counts": {
     "tracks": 19,
     "concepts": 252,
-    "roadmaps": 24,
+    "roadmaps": 25,
     "drills": 298,
     "reviewQuestions": 271,
-    "artifacts": 40,
+    "artifacts": 41,
     "systemDesignCases": 20,
     "systemDesignGuides": 7,
     "coverageCategories": 11,

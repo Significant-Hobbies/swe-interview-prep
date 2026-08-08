@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-08-01
+Last updated: 2026-08-09
 
 ## Why/What
 
@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 | Phase | Milestone |
 |-------|-----------|
+| Trace a Tensor synthesis (2026-08-09) | Added a compact 30-day roadmap that follows one workload from representation and backpropagation through memory hierarchy, runtime profiling, inference hardware, GPU kernels, quantization, engine scheduling, batching, and serving economics. It reuses 11 canonical concepts and their executable drills, then requires a layer map, reproducible workload or model, bottleneck diagnosis, and before/after evidence for one defended optimization. The interactive roadmap and deterministic public curriculum share the same source. |
 | AI-native foundations path (2026-08-06) | Added a compact Learn-page orientation from machine foundations through parallel DSA and AI engineering into system-design synthesis. The path reuses canonical roadmaps, adds data-representation and program-memory concepts plus a measurable raw-socket HTTP capstone, and republishes the curriculum and agent-readable catalogs from the same source. Responsive browser review passed at 390, 768, and 1440 pixels with zero unresolved P0/P1 findings, a 34/40 critique, and a 19/20 audit. |
 | Homepage clarity and search semantics (2026-07-31) | Made the generated JavaScript-independent homepage summary emit the page's canonical H1 and current 19-track/250-concept metadata. The Today workspace now leads with one explicit next step; source reading, secondary routes, and gap analysis start collapsed and expand with native disclosure controls. The feedback trigger is last in keyboard order, visibly focused, 44×44 through tablet widths, and protected by reserved compact-layout space. All visible controls meet 44px targets at 390, 768, and 1440px with no horizontal overflow, and the unconfigured web-vitals fallback no longer sends failing requests. The richer curriculum agent catalog remains intact; local format, lint, typecheck, 328 tests, production build, 36/40 critique, and 19/20 audit pass. Production deployment remains separate. |
 | Owned changelog (2026-07-29) | Added a public `/changelog` with verified release outcomes and direct GitHub Roadmap and Source links. |
@@ -115,6 +116,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - Husky pre-commit hooks; Biome/ESLint toolchain.
 
 ### Core study surfaces
+- **Trace a Tensor synthesis:** a 30-day cross-domain path connects representation and gradients to memory, runtime profiling, kernels, model formats, inference scheduling, and serving economics. Its capstone requires a layer map, reproducible workload or performance model, measured bottleneck, before/after evidence, and a defended optimization.
 - **AI-native foundations path:** `/learn` presents one compact macro-sequence from machine foundations through parallel DSA and AI-engineering study into system-design synthesis while linking to the existing detailed roadmaps as the canonical learning plans.
 - **Unified learning sources:** `/sources` indexes all 19 active Fleet project study queues and research-paper paths without copying canonical source bodies. The source catalog, source detail, and session routes require the configured owner Google account.
 - **Adaptive daily sessions:** `/session/:date/:sessionId` creates a fresh 30-minute session. The owner can choose any populated source or use the balanced High Signal + due-learning plan, run unlimited sessions per day, answer questions at the end, and have recall quality scheduled through the existing FSRS implementation.

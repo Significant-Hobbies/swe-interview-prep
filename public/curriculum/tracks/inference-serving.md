@@ -10,6 +10,7 @@ measurements, or a reviewable design artifact.
 
 - [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html) — Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.
 - [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
 
 ## Concepts
 

@@ -5,6 +5,11 @@ Meaningful improvements to the curriculum, practice loop, and personal learning 
 - [Roadmap](https://github.com/Significant-Hobbies/swe-interview-prep/issues)
 - [Source](https://github.com/Significant-Hobbies/swe-interview-prep)
 
+## 2026-08-09 — Trace a Tensor from model math to serving
+
+- A new 30-day synthesis roadmap connects tensor representation and backpropagation to memory, kernels, hardware, inference scheduling, and serving economics.
+- Its capstone requires a reproducible workload, a layer map, a measured bottleneck, and before-and-after evidence for one defended optimization.
+
 ## 2026-07-25 — A public curriculum anyone can inspect
 
 - The complete curriculum became readable without JavaScript or sign-in across track, roadmap, and concept pages.

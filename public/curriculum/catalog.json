@@ -11,10 +11,10 @@
   "counts": {
     "tracks": 19,
     "concepts": 252,
-    "roadmaps": 24,
+    "roadmaps": 25,
     "drills": 298,
     "reviewQuestions": 271,
-    "artifacts": 40,
+    "artifacts": 41,
     "systemDesignCases": 20,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
@@ -160,7 +160,8 @@
         "ai-infra-12-month",
         "runtime",
         "swe-landscape",
-        "ai-models-training-12w"
+        "ai-models-training-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -357,7 +358,8 @@
         "program-memory-model"
       ],
       "roadmapIds": [
-        "systems-foundations-12w"
+        "systems-foundations-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -424,7 +426,8 @@
       ],
       "roadmapIds": [
         "inference-serving-12w",
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -1280,6 +1283,26 @@
         "human-computer-interaction",
         "ml-webgpu"
       ]
+    },
+    {
+      "id": "trace-a-tensor",
+      "title": "Trace a Tensor",
+      "horizon": "30d",
+      "goal": "Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html",
+      "conceptIds": [
+        "data-representation",
+        "ml-backprop",
+        "compute-memory-storage-hierarchy",
+        "runtime-performance-engineering",
+        "inference-hardware",
+        "gpu-utilization",
+        "flashattention-kernels",
+        "model-quantization",
+        "inference-engines",
+        "continuous-batching",
+        "inference-cost-latency"
+      ]
     }
   ],
   "concepts": [
@@ -1789,7 +1812,8 @@
         "swe-landscape",
         "inference-serving-12w",
         "ai-reliability-12w",
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -3725,7 +3749,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html",
       "roadmapIds": [
-        "systems-foundations-12w"
+        "systems-foundations-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -3739,7 +3764,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html",
       "roadmapIds": [
-        "systems-foundations-12w"
+        "systems-foundations-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -3966,7 +3992,8 @@
       "roadmapIds": [
         "ai-models-training-12w",
         "inference-serving-12w",
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -3994,7 +4021,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -4008,7 +4036,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -4036,7 +4065,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -4064,7 +4094,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -4078,7 +4109,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -4107,7 +4139,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html",
       "roadmapIds": [
-        "inference-serving-12w"
+        "inference-serving-12w",
+        "trace-a-tensor"
       ]
     },
     {
@@ -5092,7 +5125,8 @@
       ],
       "url": "https://learn.significanthobbies.com/curriculum/concepts/data-representation.html",
       "roadmapIds": [
-        "systems-foundations-12w"
+        "systems-foundations-12w",
+        "trace-a-tensor"
       ]
     },
     {

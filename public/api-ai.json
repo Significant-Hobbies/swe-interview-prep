@@ -14,10 +14,10 @@
     "counts": {
       "tracks": 19,
       "concepts": 252,
-      "roadmaps": 24,
+      "roadmaps": 25,
       "drills": 298,
       "reviewQuestions": 271,
-      "artifacts": 40,
+      "artifacts": 41,
       "systemDesignCases": 20,
       "systemDesignGuides": 7,
       "coverageCategories": 11,
@@ -47,7 +47,7 @@
       "url": "https://learn.significanthobbies.com/curriculum/",
       "md": "https://learn.significanthobbies.com/curriculum/index.md",
       "kind": "collection",
-      "description": "19 tracks, 252 concepts, and 24 roadmaps as static public pages"
+      "description": "19 tracks, 252 concepts, and 25 roadmaps as static public pages"
     },
     {
       "id": "system-design",

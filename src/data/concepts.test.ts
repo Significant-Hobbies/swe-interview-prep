@@ -330,6 +330,73 @@ describe('eleven-domain curriculum expansion', () => {
   });
 });
 
+describe('Trace a Tensor synthesis', () => {
+  const lifecycle = [
+    'data-representation',
+    'ml-backprop',
+    'compute-memory-storage-hierarchy',
+    'runtime-performance-engineering',
+    'inference-hardware',
+    'gpu-utilization',
+    'flashattention-kernels',
+    'model-quantization',
+    'inference-engines',
+    'continuous-batching',
+    'inference-cost-latency',
+  ];
+
+  it('orders the tensor lifecycle from representation to serving economics', () => {
+    const roadmap = roadmaps.find((candidate: any) => candidate.id === 'trace-a-tensor');
+
+    expect(roadmap?.horizon).toBe('30d');
+    expect(roadmap?.milestones).toHaveLength(4);
+    expect(roadmap?.milestones.flatMap((milestone: any) => milestone.concepts)).toEqual(lifecycle);
+    expect(roadmap?.milestones.at(-1)?.artifacts).toEqual(['trace-a-tensor-capstone']);
+  });
+
+  it('reuses resolvable concepts and executable drills at every milestone', () => {
+    const roadmap = roadmaps.find((candidate: any) => candidate.id === 'trace-a-tensor');
+    const broken: string[] = [];
+
+    for (const milestone of roadmap?.milestones ?? []) {
+      if (!milestone.drills.length) broken.push(`${milestone.title} has no drills`);
+      for (const id of milestone.concepts) {
+        const concept = concepts.find((candidate: any) => candidate.id === id);
+        if (!concept) broken.push(`missing concept ${id}`);
+        if (!concept?.roadmaps?.includes('trace-a-tensor')) broken.push(`${id} missing roadmap`);
+      }
+      for (const id of milestone.drills) {
+        const drill = drills.find((candidate: any) => candidate.id === id);
+        if (!drill?.testCases?.length) broken.push(`${id} is not executable`);
+      }
+    }
+
+    expect(broken).toEqual([]);
+  });
+
+  it('requires a measured bottleneck diagnosis and defended optimization', () => {
+    const artifact = artifacts.find((candidate: any) => candidate.id === 'trace-a-tensor-capstone');
+    const evidence = [
+      artifact?.description,
+      ...(artifact?.successCriteria ?? []),
+      ...(artifact?.deliverables ?? []),
+    ].join(' ');
+
+    expect(artifact?.concepts).toEqual(lifecycle);
+    expect(evidence).toMatch(/layer map/i);
+    expect(evidence).toMatch(/reproducible workload|executable performance model/i);
+    expect(evidence).toMatch(/before\/after/i);
+    expect(evidence).toMatch(/bottleneck|constraint/i);
+    expect(evidence).toMatch(/quality|numerical correctness/i);
+    expect(evidence).toMatch(/trade-off|remaining risk/i);
+
+    for (const id of lifecycle) {
+      const concept = concepts.find((candidate: any) => candidate.id === id);
+      expect(concept?.artifacts, id).toContain('trace-a-tensor-capstone');
+    }
+  });
+});
+
 describe('cross-file integrity', () => {
   it('concept references resolve to artifacts/drills/review-questions', () => {
     const broken: string[] = [];

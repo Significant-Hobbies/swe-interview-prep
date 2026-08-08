@@ -25,6 +25,15 @@ describe('playground templates', () => {
     expect(tpl?.language).toBe('typescript');
   });
 
+  it('turns the Trace a Tensor evidence contract into a runnable template', () => {
+    const template = getPlaygroundTemplate('trace-a-tensor-capstone');
+
+    expect(template?.problem).toMatch(/layer map/i);
+    expect(template?.problem).toMatch(/before\/after/i);
+    expect(template?.problem).toMatch(/bottleneck/i);
+    expect(template?.code).toContain('verifyCapstone');
+  });
+
   it('lists math templates as a non-empty subset', () => {
     const math = listMathPlaygroundTemplates();
     expect(math.length).toBeGreaterThan(0);

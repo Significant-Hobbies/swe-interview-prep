@@ -1,7 +1,7 @@
 # SWE Prep Curriculum Catalog
 
 A public, JavaScript-free index of 252 concepts across
-19 tracks and 24 sequenced roadmaps.
+19 tracks and 25 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
 - Human curriculum hub: https://learn.significanthobbies.com/curriculum/
@@ -35,6 +35,7 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 - [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html) (90d) — Build repository-aware tools that analyze, test, review, debug, and safely remediate code.
 - [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html) (90d) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
 - [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) (90d) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html) (30d) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
 
 # System-design interview cases
 
@@ -149,7 +150,7 @@ Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, 
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html
 - Concepts: 32
-- Roadmaps: 5
+- Roadmaps: 6
 
 - [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html) — Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
 - [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking.html) — Splitting documents into retrievable units that preserve meaning.
@@ -345,7 +346,7 @@ Operating systems, networks, concurrency, hardware, runtimes, performance, secur
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html
 - Concepts: 8
-- Roadmaps: 1
+- Roadmaps: 2
 
 - [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html) — Thread-safety, locks, producer-consumer.
 - [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html) — Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.
@@ -401,7 +402,7 @@ Inference engines, batching, KV caches, attention kernels, decoding, routing, ha
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html
 - Concepts: 12
-- Roadmaps: 2
+- Roadmaps: 3
 
 - [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html) — Sending each request to the cheapest model that can handle it.
 - [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html) — Web Workers, WASM, OPFS, TypedArrays.

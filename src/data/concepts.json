@@ -1056,7 +1056,8 @@
         "swe-landscape",
         "inference-serving-12w",
         "ai-reliability-12w",
-        "multimodal-spatial-12w"
+        "multimodal-spatial-12w",
+        "trace-a-tensor"
       ],
       "difficulty": "core",
       "priority": 3,
@@ -1083,7 +1084,7 @@
       "mentalModel": "Backpropagation is how the network learns: compute the error at the output, then push that error backwards through each layer using the chain rule from calculus. You reuse values from the forward pass so you do not have to recompute them.",
       "drills": ["ml-chain-rule-gate"],
       "reviewQuestions": ["rq-ml-backprop-core"],
-      "artifacts": ["synthesize-ai-models-training-12w"]
+      "artifacts": ["synthesize-ai-models-training-12w", "trace-a-tensor-capstone"]
     },
     {
       "id": "ml-softmax-xent",
@@ -5277,7 +5278,7 @@
       "id": "compute-memory-storage-hierarchy",
       "name": "Compute, Memory & Storage Hierarchy",
       "tags": ["systems-foundations", "hardware"],
-      "roadmaps": ["systems-foundations-12w"],
+      "roadmaps": ["systems-foundations-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["data-representation"],
@@ -5293,14 +5294,14 @@
           "type": "paper"
         }
       ],
-      "artifacts": ["synthesize-systems-foundations-12w"],
+      "artifacts": ["synthesize-systems-foundations-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "runtime-performance-engineering",
       "name": "Runtime & Performance Engineering",
       "tags": ["systems-foundations", "performance"],
-      "roadmaps": ["systems-foundations-12w"],
+      "roadmaps": ["systems-foundations-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["concurrency-design"],
@@ -5331,7 +5332,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-systems-foundations-12w"],
+      "artifacts": ["synthesize-systems-foundations-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -5823,7 +5824,12 @@
       "id": "model-quantization",
       "name": "Model Quantization",
       "tags": ["ai-systems", "compression"],
-      "roadmaps": ["ai-models-training-12w", "inference-serving-12w", "multimodal-spatial-12w"],
+      "roadmaps": [
+        "ai-models-training-12w",
+        "inference-serving-12w",
+        "multimodal-spatial-12w",
+        "trace-a-tensor"
+      ],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-lora"],
@@ -5867,7 +5873,8 @@
       "artifacts": [
         "synthesize-ai-models-training-12w",
         "synthesize-inference-serving-12w",
-        "synthesize-multimodal-spatial-12w"
+        "synthesize-multimodal-spatial-12w",
+        "trace-a-tensor-capstone"
       ],
       "curriculumSource": "learning-domain-expansion-v1"
     },
@@ -5918,7 +5925,7 @@
       "id": "inference-engines",
       "name": "vLLM & Inference Engines",
       "tags": ["inference-serving", "inference-engines"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -5959,14 +5966,14 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "continuous-batching",
       "name": "Continuous Batching",
       "tags": ["inference-serving", "batching"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["kv-cache-paged-attention"],
@@ -6002,7 +6009,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -6032,7 +6039,7 @@
       "id": "flashattention-kernels",
       "name": "FlashAttention & Attention Kernels",
       "tags": ["inference-serving", "gpu-kernels"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["ml-multi-head"],
@@ -6048,7 +6055,7 @@
           "type": "paper"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -6078,7 +6085,7 @@
       "id": "gpu-utilization",
       "name": "GPU Utilization",
       "tags": ["inference-serving", "gpu"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["inference-hardware"],
@@ -6119,14 +6126,14 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
       "id": "inference-cost-latency",
       "name": "Inference Cost & Latency Optimization",
       "tags": ["inference-serving", "serving-economics"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": ["gpu-utilization", "continuous-batching"],
@@ -6162,7 +6169,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -6212,7 +6219,7 @@
       "id": "inference-hardware",
       "name": "Inference Hardware",
       "tags": ["inference-serving", "hardware"],
-      "roadmaps": ["inference-serving-12w"],
+      "roadmaps": ["inference-serving-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -6248,7 +6255,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-inference-serving-12w"],
+      "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1"
     },
     {
@@ -8405,7 +8412,7 @@
       "id": "data-representation",
       "name": "Data Representation",
       "tags": ["systems-foundations", "computer-arithmetic"],
-      "roadmaps": ["systems-foundations-12w"],
+      "roadmaps": ["systems-foundations-12w", "trace-a-tensor"],
       "difficulty": "core",
       "priority": 3,
       "prerequisites": [],
@@ -8421,7 +8428,7 @@
           "type": "doc"
         }
       ],
-      "artifacts": ["synthesize-systems-foundations-12w"],
+      "artifacts": ["synthesize-systems-foundations-12w", "trace-a-tensor-capstone"],
       "curriculumSource": "learning-domain-expansion-v1",
       "commonMistakes": [
         "Treating a hex dump as a value without stating width, signedness, and byte order",

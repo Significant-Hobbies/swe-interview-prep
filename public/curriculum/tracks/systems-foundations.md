@@ -9,6 +9,7 @@ measurements, or a reviewable design artifact.
 ## Roadmaps
 
 - [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html) — Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
 
 ## Concepts
 

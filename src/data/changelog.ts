@@ -2,6 +2,14 @@ export const CHANGELOG_REPOSITORY = 'https://github.com/Significant-Hobbies/swe-
 
 export const CHANGELOG_RELEASES = [
   {
+    date: '2026-08-09',
+    title: 'Trace a Tensor from model math to serving',
+    outcomes: [
+      'A new 30-day synthesis roadmap connects tensor representation and backpropagation to memory, kernels, hardware, inference scheduling, and serving economics.',
+      'Its capstone requires a reproducible workload, a layer map, a measured bottleneck, and before-and-after evidence for one defended optimization.',
+    ],
+  },
+  {
     date: '2026-07-25',
     title: 'A public curriculum anyone can inspect',
     outcomes: [

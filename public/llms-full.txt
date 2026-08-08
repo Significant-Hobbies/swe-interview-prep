@@ -1,6 +1,6 @@
 # SWE Interview Prep — full agent brief
 
-SWE Interview Prep is a mechanism-first learning OS. Its 252 concepts span 19 tracks and feed 24 sequenced roadmaps. Learning follows Concept → Drill → Build → Review → Apply; private mastery state is not exposed.
+SWE Interview Prep is a mechanism-first learning OS. Its 252 concepts span 19 tracks and feed 25 sequenced roadmaps. Learning follows Concept → Drill → Build → Review → Apply; private mastery state is not exposed.
 
 ## Public machine surfaces
 
@@ -64,6 +64,7 @@ SWE Interview Prep is a mechanism-first learning OS. Its 252 concepts span 19 tr
 - [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html) (90d) — Build repository-aware tools that analyze, test, review, debug, and safely remediate code.
 - [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html) (90d) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
 - [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) (90d) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html) (30d) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
 
 ## System-design interview cases
 

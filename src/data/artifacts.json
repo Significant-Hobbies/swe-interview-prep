@@ -816,6 +816,41 @@
         "Short evidence-backed write-up"
       ],
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "trace-a-tensor-capstone",
+      "title": "Trace a Tensor: Diagnose and Optimize One Workload",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "data-representation",
+        "ml-backprop",
+        "compute-memory-storage-hierarchy",
+        "runtime-performance-engineering",
+        "inference-hardware",
+        "gpu-utilization",
+        "flashattention-kernels",
+        "model-quantization",
+        "inference-engines",
+        "continuous-batching",
+        "inference-cost-latency"
+      ],
+      "projects": [],
+      "description": "Trace one tensor-producing model operation from its numerical representation and computation graph through memory movement, kernel execution, engine scheduling, and request-level serving. Build or precisely model a reproducible workload, identify its dominant bottleneck, apply one justified optimization, and defend the resulting quality, latency, resource, and cost trade-offs.",
+      "successCriteria": [
+        "Maps each lifecycle layer to the data representation, owner, work performed, and observable evidence",
+        "Runs or precisely models one reproducible workload and captures a before profile with latency and memory or bandwidth evidence",
+        "Diagnoses whether the dominant constraint is compute, memory movement, launch overhead, scheduling, or request shape",
+        "Applies one kernel, model-format, memory, or scheduling optimization and reports before/after measurements",
+        "Verifies output quality or numerical correctness and explains one trade-off, failure mode, or remaining risk"
+      ],
+      "deliverables": [
+        "Layer map from tensor representation to served request",
+        "Runnable workload or executable performance model with a focused validation command",
+        "Before/after benchmark table including latency and memory, bandwidth, throughput, utilization, quality, or cost evidence",
+        "Short bottleneck diagnosis and architecture note defending the optimization"
+      ],
+      "curriculumSource": "trace-a-tensor-v1"
     }
   ]
 }
