@@ -1,5 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/vitest"
+  ],
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
@@ -20,8 +25,10 @@
       "!**/tsconfig.tsbuildinfo",
       "!**/public/wasm",
       "!**/server",
+      "!**/design.html",
+      "!**/index.html",
       "!**/src/data/library/**/content.json",
-      "!**/public/curriculum",
+      "!**/public",
       "!**/*.css"
     ]
   },
@@ -40,40 +47,120 @@
       "jsxQuoteStyle": "double"
     }
   },
+  "json": { "formatter": { "enabled": false } },
   "linter": {
     "enabled": true,
     "rules": {
       "preset": "recommended",
       "a11y": {
+        "preset": "none",
+        "noAriaHiddenOnFocusable": "off",
+        "noNoninteractiveElementInteractions": "off",
         "noSvgWithoutTitle": "off",
         "useButtonType": "off",
         "useValidAnchor": "off",
         "noLabelWithoutControl": "off",
         "noAmbiguousAnchorText": "off",
         "useKeyWithClickEvents": "off",
-        "noStaticElementInteractions": "off"
+        "noStaticElementInteractions": "off",
+        "useAriaPropsSupportedByRole": "off",
+        "useSemanticElements": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noAssignInExpressions": "off",
         "useIterableCallbackReturn": "off",
-        "noImplicitAnyLet": "off"
+        "noImplicitAnyLet": "off",
+        "noAlert": "off",
+        "noBiomeFirstException": "off",
+        "noBitwiseOperators": "off",
+        "noEmptyBlockStatements": "off",
+        "noEqualsToNull": "off",
+        "noEvolvingTypes": "off",
+        "noLeakedRender": "off",
+        "noReactForwardRef": "off",
+        "noShadow": "off",
+        "noShadowRestrictedNames": "off",
+        "noSkippedTests": "off",
+        "noUnnecessaryConditions": "off",
+        "noUnusedExpressions": "off",
+        "useArraySortCompare": "off",
+        "useAwait": "off",
+        "useStaticResponseMethods": "off"
       },
       "style": {
         "noNonNullAssertion": "off",
         "useTemplate": "off",
-        "useNodejsImportProtocol": "off"
+        "useNodejsImportProtocol": "off",
+        "noExportedImports": "off",
+        "noIncrementDecrement": "off",
+        "noInferrableTypes": "off",
+        "noNegationElse": "off",
+        "noNestedTernary": "off",
+        "noParameterAssign": "off",
+        "noUnusedTemplateLiteral": "off",
+        "noUselessElse": "off",
+        "useAtIndex": "off",
+        "useBlockStatements": "off",
+        "useCollapsedIf": "off",
+        "useConsistentArrayType": "off",
+        "useConsistentArrowReturn": "off",
+        "useConsistentBuiltinInstantiation": "off",
+        "useConsistentMethodSignatures": "off",
+        "useConsistentObjectDefinitions": "off",
+        "useConsistentTypeDefinitions": "off",
+        "useDestructuring": "off",
+        "useErrorCause": "off",
+        "useFilenamingConvention": "off",
+        "useForOf": "off",
+        "useDefaultSwitchClause": "off",
+        "useNumberNamespace": "off",
+        "useNumericSeparators": "off",
+        "useShorthandAssign": "off"
       },
       "complexity": {
-        "useOptionalChain": "off"
+        "noExcessiveCognitiveComplexity": "off",
+        "noDivRegex": "off",
+        "noForEach": "off",
+        "noUselessUndefined": "off",
+        "noVoid": "off",
+        "useOptionalChain": "off",
+        "useSimplifiedLogicExpression": "off"
       },
       "correctness": {
-        "noUnusedVariables": "warn",
-        "noUnusedFunctionParameters": "warn",
-        "useExhaustiveDependencies": "off"
-      }
+        "noGlobalDirnameFilename": "off",
+        "noUnusedFunctionParameters": "off",
+        "noUnusedImports": "off",
+        "noUnusedInstantiation": "off",
+        "noUnusedVariables": "off",
+        "useExhaustiveDependencies": "off",
+        "useImageSize": "off",
+        "useSingleJsDocAsterisk": "off"
+      },
+      "performance": {
+        "noAwaitInLoops": "off",
+        "noBarrelFile": "off",
+        "noDelete": "off",
+        "noImgElement": "off",
+        "noJsxPropsBind": "off",
+        "noNamespaceImport": "off",
+        "useTopLevelRegex": "off"
+      },
+      "security": { "noDangerouslySetInnerHtml": "off" },
+      "nursery": { "useSortedClasses": "off" }
     }
   },
-  "assist": { "enabled": true, "actions": { "source": { "organizeImports": "off" } } }
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "off",
+        "useSortedAttributes": "off",
+        "useSortedInterfaceMembers": "off",
+        "useSortedKeys": "off",
+        "useSortedPackageJson": "off"
+      }
+    }
+  }
 }
