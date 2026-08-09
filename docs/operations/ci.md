@@ -23,12 +23,11 @@ Triggered only by `workflow_dispatch`; there is no push or PR trigger.
 3. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` + `VITE_SAASMAKER_API_KEY`)
 4. `rm -rf dist/wasm` — the 38MB Go WASM binary is hosted on R2, not Pages
    (see `.cfpagesignore`).
-5. `wrangler pages deploy dist/ --project-name=swe-interview-prep` via
+5. Apply D1 migrations only when the dispatch operator explicitly enables the
+   `apply_migrations` input (off by default for code-only releases).
+6. `wrangler pages deploy dist/ --project-name=swe-interview-prep` via
    `cloudflare/wrangler-action@v3`.
-6. The workflow has `push`- and `pull_request`-gated steps (smoke
-   `/api/learning?action=gaps` expecting 401/405/200; comment a preview URL),
-   but because the workflow is dispatch-only, neither event fires — these
-   steps are effectively inert.
+7. Smoke the production SPA and `/api/learning?action=gaps`.
 
 Required GitHub secrets/variables: `CLOUDFLARE_API_TOKEN`,
 `CLOUDFLARE_ACCOUNT_ID`, `VITE_GOOGLE_CLIENT_ID`, optional

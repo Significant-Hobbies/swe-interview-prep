@@ -5,6 +5,12 @@ name: Deploy to Cloudflare Pages
 # Cloudflare — no persistent PR Worker is created.
 on:
   workflow_dispatch:
+    inputs:
+      apply_migrations:
+        description: Apply pending D1 migrations before this release
+        required: true
+        type: boolean
+        default: false
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -49,6 +55,7 @@ jobs:
       - run: rm -rf dist/wasm  # 38MB Go WASM hosted on R2, not CF Pages
 
       - name: Apply D1 migrations
+        if: inputs.apply_migrations
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
