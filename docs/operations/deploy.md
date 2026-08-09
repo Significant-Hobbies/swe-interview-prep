@@ -28,7 +28,8 @@ When dispatched, `deploy.yml`:
 2. Validate build environment and the production D1 `DB` binding.
 3. `pnpm build` (with `VITE_GOOGLE_CLIENT_ID` from GitHub).
 4. Remove the R2-hosted WASM artifact from `dist/`.
-5. Apply pending D1 migrations through Wrangler.
+5. Apply pending D1 migrations through Wrangler only when the dispatch operator
+   explicitly enables `apply_migrations` (off by default for code-only releases).
 6. `wrangler pages deploy dist/ --project-name=swe-interview-prep`.
 7. Smoke the SPA and `/api/learning?action=gaps`.
 
@@ -49,7 +50,9 @@ When dispatched, `deploy.yml`:
 | `GOOGLE_CLIENT_ID` | Server Google verify |
 
 The relational database is the non-secret `DB` D1 binding in `wrangler.toml`.
-Apply tracked migrations before deploying:
+For a release that includes files under `migrations/d1/`, enable
+`apply_migrations` when dispatching the workflow. For a local release, apply
+tracked migrations before deploying:
 
 ```bash
 pnpm db:migrate:remote
