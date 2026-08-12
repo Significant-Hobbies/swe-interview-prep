@@ -1,4 +1,4 @@
-export type AiNativePathStageKind = 'foundation' | 'parallel' | 'synthesis';
+type AiNativePathStageKind = 'foundation' | 'parallel' | 'synthesis';
 
 export interface AiNativePathStage {
   id: 'foundations' | 'dsa' | 'ai-engineering' | 'system-design';

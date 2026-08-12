@@ -1,7 +1,7 @@
 import type { PredictionResult, SystemsLabDefinition } from './simulation/types';
 import { loadLocal, saveLocal, STORE_KEYS } from './userStore';
 
-export type SystemsLabAttemptStatus = 'draft' | 'predicted' | 'completed' | 'explained';
+type SystemsLabAttemptStatus = 'draft' | 'predicted' | 'completed' | 'explained';
 
 export interface SystemsLabAttempt {
   id: string;

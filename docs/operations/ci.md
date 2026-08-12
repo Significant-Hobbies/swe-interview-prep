@@ -7,10 +7,14 @@ Source of truth: `.github/workflows/*.yml`. This page describes the contracts.
 Runs on ubuntu-latest, Node 22, pnpm (from `package.json` `packageManager`).
 
 1. `pnpm install --frozen-lockfile --ignore-scripts`
-2. `pnpm lint` (Biome)
-3. `pnpm test` (Vitest)
-4. `pnpm build` with `VITE_GOOGLE_CLIENT_ID=ci-placeholder.apps.googleusercontent.com`
-5. `pnpm run size` (bundle budget from `.size-limit.json`)
+2. Install the pinned Python complexity runner through `uv`
+3. `pnpm quality` with `VITE_GOOGLE_CLIENT_ID=ci-placeholder.apps.googleusercontent.com`
+
+The quality gate covers formatting, lint, types, whole-source coverage, unused
+code, complexity, exact duplication, import cycles, severe dependency
+advisories, suppression markers, docs, production build, bundle size, and
+repository hygiene. Existing debt is recorded as a non-regression ceiling;
+unexpected debt fails CI and improvements should lower the ceiling.
 
 `--ignore-scripts` skips postinstall scripts; the build is what matters in CI.
 

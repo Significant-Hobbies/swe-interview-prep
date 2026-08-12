@@ -6,14 +6,14 @@ import type {
 } from '../data/system-design-case-schema';
 
 export const SYSTEM_DESIGN_SESSION_SCHEMA_VERSION = 1;
-export const SYSTEM_DESIGN_ATTEMPT_KEY_PREFIX = 'swe-prep:system-design-attempt:';
+const SYSTEM_DESIGN_ATTEMPT_KEY_PREFIX = 'swe-prep:system-design-attempt:';
 
-export interface StageSubmission {
+interface StageSubmission {
   answer: string;
   submittedAt: string;
 }
 
-export interface StoredDimensionResult {
+interface StoredDimensionResult {
   dimensionId: string;
   score: number;
   evidence: string[];
@@ -42,7 +42,7 @@ export interface SystemDesignAttempt {
   reviewReason?: 'submitted' | 'abandoned';
 }
 
-export interface SystemDesignAttemptEnvelope {
+interface SystemDesignAttemptEnvelope {
   schemaVersion: typeof SYSTEM_DESIGN_SESSION_SCHEMA_VERSION;
   attempt: SystemDesignAttempt;
 }
@@ -97,7 +97,7 @@ function normalizedText(attempt: SystemDesignAttempt) {
     .toLocaleLowerCase();
 }
 
-export function chooseFollowUp(
+function chooseFollowUp(
   caseDefinition: SystemDesignCase,
   attempt: SystemDesignAttempt
 ): FollowUpBranch | undefined {
@@ -109,9 +109,7 @@ export function chooseFollowUp(
   );
 }
 
-export function chooseFailureInjection(
-  caseDefinition: SystemDesignCase
-): FailureInjection | undefined {
+function chooseFailureInjection(caseDefinition: SystemDesignCase): FailureInjection | undefined {
   return caseDefinition.failureInjections[0];
 }
 

@@ -23,6 +23,11 @@ non-obvious ones. If it disagrees with `package.json`, `package.json` wins.
 | `pnpm validate:wars-content` | Validate ranked content, variants, sources, launch thresholds, and precomputed AI coverage. |
 | `pnpm audit:wars-topic -- <topic>` | Run the focused 100-question editorial contract for one Wars topic before activation. |
 | `pnpm dev:wars-worker` | Run the local Tradeoff Durable Object and Queue Worker. |
+| `pnpm quality` | Full CI gate: format, lint, types, whole-source coverage, unused code, complexity, duplication, cycles, dependency advisories, suppressions, docs, build, bundle size, and repository hygiene. |
+
+The `quality:*` scripts in `package.json` are individual code-health checks.
+Their checked-in values are non-regression ratchets: improvements should lower
+the corresponding baseline in `scripts/check-code-health.mjs`; new debt fails.
 
 The Wars validator enforces 1,200 active reviewed Blitz questions—100 per
 topic with the required difficulty split—20 active reviewed Tradeoff problems,

@@ -92,7 +92,7 @@ export function trackSignup(): void {
  * study action. De-duplicated per browser via localStorage so it stays a true
  * once-per-user milestone.
  */
-export function trackActivated(): void {
+function trackActivated(): void {
   try {
     if (localStorage.getItem(ACTIVATED_KEY)) return;
     localStorage.setItem(ACTIVATED_KEY, '1');

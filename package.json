@@ -52,7 +52,15 @@
     "docs:preview": "blume preview",
     "docs:check": "blume check",
     "knip": "knip --no-exit-code --reporter symbols",
-    "knip:strict": "knip --reporter symbols"
+    "knip:strict": "knip --reporter symbols",
+    "quality:unused": "node scripts/check-code-health.mjs unused",
+    "quality:complexity": "node scripts/check-code-health.mjs complexity",
+    "quality:duplication": "node scripts/check-code-health.mjs duplication",
+    "quality:cycles": "node scripts/check-code-health.mjs cycles",
+    "quality:dependencies": "node scripts/check-code-health.mjs dependencies",
+    "quality:suppressions": "node scripts/check-code-health.mjs suppressions",
+    "quality:hygiene": "node scripts/check-code-health.mjs hygiene",
+    "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm quality:unused && pnpm quality:complexity && pnpm quality:duplication && pnpm quality:cycles && pnpm quality:dependencies && pnpm quality:suppressions && pnpm docs:validate && pnpm build && pnpm size && pnpm quality:hygiene"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "2.0.41",
@@ -75,7 +83,7 @@
     "react-dom": "19.2.8",
     "react-markdown": "10.1.0",
     "react-resizable-panels": "4.12.2",
-    "react-router-dom": "7.18.1",
+    "react-router-dom": "7.18.2",
     "rehype-highlight": "7.0.2",
     "remark-gfm": "4.0.1",
     "sql.js": "^1.14.1",
@@ -89,18 +97,17 @@
     "@playwright/test": "1.62.0",
     "@size-limit/file": "^11.2.0",
     "@tailwindcss/vite": "4.3.3",
-    "@types/lz-string": "1.5.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "19",
     "@types/sql.js": "^1.4.11",
-    "@vercel/node": "5.8.27",
+    "@vercel/node": "5.9.9",
     "@vitejs/plugin-react": "6.0.4",
     "@vitest/coverage-v8": "4.1.10",
     "@vitest/ui": "4.1.10",
-    "astro": "5.18.2",
     "blume": "1.2.0",
     "happy-dom": "20.11.1",
     "husky": "^9.1.7",
+    "jscpd": "5.0.14",
     "knip": "^6.29.0",
     "lightningcss": "^1.33.0",
     "prettier": "3.9.6",
@@ -113,6 +120,21 @@
     "wrangler": "4.114.0"
   },
   "pnpm": {
+    "overrides": {
+      "brace-expansion@<1.1.18": "1.1.18",
+      "brace-expansion@>=2.0.0 <2.1.4": "2.1.4",
+      "brace-expansion@>=4.0.0 <5.0.9": "5.0.9",
+      "fast-uri@<3.1.5": "3.1.5",
+      "immutable@<4.3.9": "4.3.9",
+      "js-yaml@>=3.0.0 <3.15.1": "3.15.1",
+      "js-yaml@>=4.0.0 <4.3.1": "4.3.1",
+      "lodash-es@>=4.0.0 <=4.17.23": "4.18.1",
+      "minimatch@>=10.0.0 <10.2.3": "10.2.5",
+      "nanoid@<3.3.17": "3.3.17",
+      "postcss@<=8.5.22": "8.5.23",
+      "sharp@<0.35.0": "0.35.3",
+      "undici@>=7.0.0 <7.29.0": "7.29.0"
+    },
     "peerDependencyRules": {
       "allowAny": [
         "react",

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/main.tsx",
+    "functions/api/[[path]].js",
+    "api/**/*.{mjs,ts}",
+    "scripts/*.{mjs,js,ts}",
+    "*.config.{js,ts,mjs,cjs}",
+    "vite-plugin-local-ai.js"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx,js,jsx,mjs}",
+    "api/**/*.{mjs,ts}",
+    "functions/**/*.{js,mjs,ts}",
+    "handlers/**/*.{js,mjs,ts}",
+    "shared/**/*.{js,mjs,ts}",
+    "scripts/*.{mjs,js,ts}",
+    "*.config.{js,ts,mjs,cjs}",
+    "vite-plugin-local-ai.js"
+  ],
+  "ignore": [
+    // Generated library payloads are consumed through build-time content indexes.
+    "src/data/library/**/content.json"
+  ],
+  "ignoreDependencies": [
+    // Loaded by Tailwind/Vite and size/docs tooling rather than source imports.
+    // Spawned by the code-health checker rather than imported.
+    "jscpd",
+    "lightningcss",
+    "tailwindcss"
+  ]
+}
