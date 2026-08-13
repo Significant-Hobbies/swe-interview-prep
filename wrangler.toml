@@ -24,3 +24,6 @@ service = "swe-interview-prep-wars"
 
 [vars]
 WARS_REALTIME_PUBLIC_URL = "https://swe-interview-prep-wars.sarthakagrawal927.workers.dev"
+REALTIMEKIT_ACCOUNT_ID = "7d048325699a5acddb44d3be31cf6ba9"
+REALTIMEKIT_APP_ID = "4ba77120-7ebf-44d0-a21b-c1883a6a9ffe"
+REALTIMEKIT_PARTICIPANT_PRESET = "group_call_participant"
