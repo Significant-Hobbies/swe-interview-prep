@@ -9,3 +9,18 @@ database_name = "swe-interview-prep"
 database_id = "9f4f9da4-b196-4cb1-8a91-c978dd2bbd74"
 preview_database_id = "ee7a5a51-5a0a-4170-9447-9e4291d890d6"
 migrations_dir = "migrations/d1"
+
+[[r2_buckets]]
+binding = "WAR_ARTIFACTS"
+bucket_name = "swe-interview-prep-war-artifacts"
+
+[[queues.producers]]
+binding = "WAR_JOBS"
+queue = "swe-interview-prep-war-jobs"
+
+[[services]]
+binding = "WARS_REALTIME"
+service = "swe-interview-prep-wars"
+
+[vars]
+WARS_REALTIME_PUBLIC_URL = "https://swe-interview-prep-wars.sarthakagrawal927.workers.dev"
