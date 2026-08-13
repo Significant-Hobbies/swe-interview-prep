@@ -10,12 +10,12 @@
   ],
   "counts": {
     "tracks": 19,
-    "concepts": 252,
-    "roadmaps": 25,
-    "drills": 298,
-    "reviewQuestions": 271,
-    "artifacts": 41,
-    "systemDesignCases": 20,
+    "concepts": 259,
+    "roadmaps": 26,
+    "drills": 305,
+    "reviewQuestions": 278,
+    "artifacts": 43,
+    "systemDesignCases": 33,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
     "coverageTopics": 98
@@ -445,10 +445,18 @@
         "agent-permissions-sandboxing",
         "browser-computer-use-agents",
         "agent-communication-interfaces",
-        "long-running-scheduled-agents"
+        "long-running-scheduled-agents",
+        "repository-instruction-topology",
+        "agent-environment-contracts",
+        "agent-work-state-handoffs",
+        "agent-scope-control",
+        "independent-agent-verification",
+        "agent-run-lifecycle",
+        "harness-evaluation"
       ],
       "roadmapIds": [
-        "agent-systems-12w"
+        "agent-systems-12w",
+        "harness-engineering"
       ]
     },
     {
@@ -468,10 +476,13 @@
         "tracing-replay",
         "evidence-backed-verification",
         "human-review-systems",
-        "quality-cost-latency-measurement"
+        "quality-cost-latency-measurement",
+        "independent-agent-verification",
+        "harness-evaluation"
       ],
       "roadmapIds": [
-        "ai-reliability-12w"
+        "ai-reliability-12w",
+        "harness-engineering"
       ]
     },
     {
@@ -489,10 +500,14 @@
         "coding-agent-systems",
         "repository-intelligence",
         "software-supply-chain-health",
-        "automated-debugging-remediation"
+        "automated-debugging-remediation",
+        "repository-instruction-topology",
+        "agent-environment-contracts",
+        "agent-scope-control"
       ],
       "roadmapIds": [
-        "developer-tools-12w"
+        "developer-tools-12w",
+        "harness-engineering"
       ]
     },
     {
@@ -1302,6 +1317,30 @@
         "inference-engines",
         "continuous-batching",
         "inference-cost-latency"
+      ]
+    },
+    {
+      "id": "harness-engineering",
+      "title": "Harness Engineering",
+      "horizon": "30d",
+      "goal": "Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html",
+      "conceptIds": [
+        "repository-instruction-topology",
+        "coding-agent-systems",
+        "repository-intelligence",
+        "agent-environment-contracts",
+        "agent-permissions-sandboxing",
+        "agent-work-state-handoffs",
+        "durable-agent-execution",
+        "agent-memory-context",
+        "agent-scope-control",
+        "agent-observability",
+        "independent-agent-verification",
+        "ai-regression-testing",
+        "tool-use-evaluations",
+        "agent-run-lifecycle",
+        "harness-evaluation"
       ]
     }
   ],
@@ -5142,6 +5181,111 @@
       "roadmapIds": [
         "systems-foundations-12w"
       ]
+    },
+    {
+      "id": "repository-instruction-topology",
+      "name": "Repository Instruction Topology",
+      "description": "Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "developer-tools",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "agent-environment-contracts",
+      "name": "Agent Environment Contracts",
+      "description": "Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "developer-tools",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "agent-work-state-handoffs",
+      "name": "Agent Work State & Handoffs",
+      "description": "Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "durability",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "agent-scope-control",
+      "name": "Agent Scope Control",
+      "description": "Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.",
+      "difficulty": "core",
+      "tags": [
+        "agent-systems",
+        "developer-tools",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "independent-agent-verification",
+      "name": "Independent Agent Verification",
+      "description": "Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.",
+      "difficulty": "advanced",
+      "tags": [
+        "agent-systems",
+        "ai-reliability",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "agent-run-lifecycle",
+      "name": "Agent Run Lifecycle",
+      "description": "Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.",
+      "difficulty": "advanced",
+      "tags": [
+        "agent-systems",
+        "durability",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
+    },
+    {
+      "id": "harness-evaluation",
+      "name": "Harness Evaluation",
+      "description": "Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.",
+      "difficulty": "advanced",
+      "tags": [
+        "agent-systems",
+        "ai-reliability",
+        "harness-engineering"
+      ],
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html",
+      "roadmapIds": [
+        "harness-engineering"
+      ]
     }
   ],
   "systemDesignCases": [
@@ -5676,6 +5820,331 @@
         "implement-idempotency-key",
         "webhook-signature-verify",
         "practice-transaction-processing"
+      ]
+    },
+    {
+      "id": "distributed-unique-id-generator",
+      "version": "1.0.0",
+      "title": "Design a distributed unique ID generator",
+      "prompt": "Design a service that issues globally unique, roughly time-sortable 64-bit IDs to thousands of application servers across regions without a database round trip per ID.",
+      "category": "infrastructure-storage",
+      "pattern": "time-ordered identifier allocation without a central write bottleneck",
+      "criticalPath": "local ID generation from timestamp, worker identity, and per-tick sequence",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-unique-id-generator&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "unique-id-generation",
+        "distributed-infra",
+        "sharding",
+        "consensus",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "snowflake-id-layout",
+        "shard-key-choice",
+        "design-leader-election",
+        "slo-error-budget"
+      ]
+    },
+    {
+      "id": "proximity-search-service",
+      "version": "1.0.0",
+      "title": "Design a proximity search service",
+      "prompt": "Design a service that returns open businesses within a radius, filtered by category and ranked by distance, for a global consumer application.",
+      "category": "social-real-time",
+      "pattern": "geospatial candidate generation followed by exact distance filtering",
+      "criticalPath": "write location to spatial cells, retrieve nearby candidates, then rank exact distances",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=proximity-search-service&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "location-transport",
+        "sharding",
+        "caching",
+        "ranking-metrics",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "design-ride-sharing",
+        "shard-key-choice",
+        "cache-key-and-ttl",
+        "compute-precision-recall"
+      ]
+    },
+    {
+      "id": "nearby-friends-service",
+      "version": "1.0.0",
+      "title": "Design a nearby friends service",
+      "prompt": "Design an opt-in feature that shows which friends are nearby and updates within seconds as people move, while making privacy and battery cost first-class constraints.",
+      "category": "social-real-time",
+      "pattern": "privacy-filtered moving-presence fan-out over spatial subscriptions",
+      "criticalPath": "ingest a moving user location, update spatial presence, and notify authorized nearby friends",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=nearby-friends-service&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "location-transport",
+        "messaging-realtime",
+        "security-isolation-boundaries",
+        "caching",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "design-ride-sharing",
+        "design-chat-system",
+        "cache-key-and-ttl",
+        "slo-error-budget"
+      ]
+    },
+    {
+      "id": "maps-routing-platform",
+      "version": "1.0.0",
+      "title": "Design a maps and routing platform",
+      "prompt": "Design a driving-directions service that returns routes and ETAs across a continent, incorporates live traffic, and can serve map tiles separately from route computation.",
+      "category": "infrastructure-storage",
+      "pattern": "hierarchical shortest-path routing over a versioned road graph",
+      "criticalPath": "snap endpoints to the road graph, search a partitioned hierarchy, and assemble route guidance",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=maps-routing-platform&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "shortest-path",
+        "graphs",
+        "location-transport",
+        "sharding",
+        "caching"
+      ],
+      "drillIds": [
+        "dijkstra-shortest-path",
+        "design-ride-sharing",
+        "shard-key-choice",
+        "cache-key-and-ttl"
+      ]
+    },
+    {
+      "id": "distributed-message-queue",
+      "version": "1.0.0",
+      "title": "Design a distributed message queue",
+      "prompt": "Design a multi-tenant distributed queue for asynchronous jobs and event streams with durable retention, consumer groups, backpressure, and at-least-once delivery.",
+      "category": "infrastructure-storage",
+      "pattern": "partitioned durable log with consumer-owned progress and bounded redelivery",
+      "criticalPath": "append to an ordered partition, replicate, acknowledge, fetch, and advance consumer progress",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-message-queue&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "message-queues",
+        "event-streaming-kafka",
+        "replication",
+        "sharding",
+        "idempotency"
+      ],
+      "drillIds": [
+        "queue-backpressure",
+        "practice-event-streaming-kafka",
+        "replication-lag-read",
+        "implement-idempotency-key"
+      ]
+    },
+    {
+      "id": "metrics-monitoring-platform",
+      "version": "1.0.0",
+      "title": "Design a metrics monitoring platform",
+      "prompt": "Design a multi-tenant metrics platform that ingests counters, gauges, and histograms, supports dashboard queries and recording rules, and evaluates reliable alerts.",
+      "category": "infrastructure-storage",
+      "pattern": "high-cardinality time-series ingestion with rollups and query fan-out",
+      "criticalPath": "validate and shard samples, persist recent series, compact blocks, and evaluate queries and alerts",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=metrics-monitoring-platform&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "monitoring-analytics",
+        "sharding",
+        "object-storage",
+        "queueing-theory",
+        "caching"
+      ],
+      "drillIds": [
+        "practice-opentelemetry-observability",
+        "shard-key-choice",
+        "storage-vs-retrieval",
+        "utilisation-latency-curve"
+      ]
+    },
+    {
+      "id": "ad-click-aggregation-system",
+      "version": "1.0.0",
+      "title": "Design an ad click aggregation system",
+      "prompt": "Design an ad click pipeline that powers near-real-time campaign dashboards and produces auditable daily billing aggregates despite duplicates, retries, bots, and late events.",
+      "category": "commerce-marketplaces",
+      "pattern": "event-time stream aggregation with deduplication and late-data correction",
+      "criticalPath": "accept a signed click, deduplicate it, join campaign metadata, window by event time, and publish aggregates",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=ad-click-aggregation-system&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "event-streaming-kafka",
+        "idempotency",
+        "monitoring-analytics",
+        "transaction-processing",
+        "product-analytics"
+      ],
+      "drillIds": [
+        "practice-event-streaming-kafka",
+        "implement-idempotency-key",
+        "practice-transaction-processing",
+        "define-north-star-metric"
+      ]
+    },
+    {
+      "id": "hotel-reservation-system",
+      "version": "1.0.0",
+      "title": "Design a hotel reservation system",
+      "prompt": "Design a hotel booking platform that searches room availability and prevents overselling across multi-night stays, retries, payment delays, and expiring holds.",
+      "category": "commerce-marketplaces",
+      "pattern": "dated inventory holds with transactional confirmation and expiry",
+      "criticalPath": "price a room-night set, place a bounded hold, authorize payment, and atomically confirm inventory",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=hotel-reservation-system&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "booking-inventory",
+        "transaction-processing",
+        "isolation-levels",
+        "idempotency",
+        "ecommerce-payments"
+      ],
+      "drillIds": [
+        "design-hotel-booking",
+        "practice-transaction-processing",
+        "payment-idempotency",
+        "implement-idempotency-key"
+      ]
+    },
+    {
+      "id": "distributed-email-service",
+      "version": "1.0.0",
+      "title": "Design a distributed email service",
+      "prompt": "Design a transactional email platform that accepts API requests, renders templates, delivers through SMTP, handles retries and bounces, and protects sender reputation.",
+      "category": "infrastructure-storage",
+      "pattern": "policy-aware asynchronous delivery with domain throttles and feedback loops",
+      "criticalPath": "accept one logical message, expand recipients, enqueue by destination domain, attempt SMTP delivery, and process feedback",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-email-service&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "message-queues",
+        "retries-and-circuit-breakers",
+        "idempotency",
+        "security-isolation-boundaries",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "queue-backpressure",
+        "implement-idempotency-key",
+        "webhook-signature-verify",
+        "slo-error-budget"
+      ]
+    },
+    {
+      "id": "object-storage-service",
+      "version": "1.0.0",
+      "title": "Design an object storage service",
+      "prompt": "Design an S3-like object storage service with buckets, immutable object versions, multipart uploads, ranged reads, checksums, lifecycle policies, and regional durability.",
+      "category": "infrastructure-storage",
+      "pattern": "immutable blob placement with strongly identified metadata and background repair",
+      "criticalPath": "authorize a multipart upload, place erasure-coded chunks, commit metadata, and serve ranged reads",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=object-storage-service&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "object-storage",
+        "replication",
+        "sharding",
+        "transaction-processing",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "storage-vs-retrieval",
+        "replication-lag-read",
+        "shard-key-choice",
+        "practice-transaction-processing"
+      ]
+    },
+    {
+      "id": "gaming-leaderboard",
+      "version": "1.0.0",
+      "title": "Design a real-time gaming leaderboard",
+      "prompt": "Design a leaderboard for a global game with seasonal, regional, and friends-only rankings, real-time score updates, anti-cheat review, and stable end-of-season results.",
+      "category": "social-real-time",
+      "pattern": "ordered score index with idempotent event updates and rank snapshots",
+      "criticalPath": "validate a score event, update the ordered index, and answer top-N and around-player ranks",
+      "difficulty": "core",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=gaming-leaderboard&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "event-streaming-kafka",
+        "ranking-metrics",
+        "sharding",
+        "caching",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "practice-event-streaming-kafka",
+        "compute-precision-recall",
+        "shard-key-choice",
+        "cache-key-and-ttl"
+      ]
+    },
+    {
+      "id": "digital-wallet-system",
+      "version": "1.0.0",
+      "title": "Design a digital wallet",
+      "prompt": "Design a digital wallet that supports deposits, peer-to-peer transfers, merchant payments, refunds, and withdrawals while maintaining auditable balances across retries and external settlement.",
+      "category": "commerce-marketplaces",
+      "pattern": "double-entry value transfer with holds, idempotent commands, and reconciliation",
+      "criticalPath": "authorize a transfer, reserve funds, post balanced ledger entries, and expose derived balances",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=digital-wallet-system&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "ecommerce-payments",
+        "transaction-processing",
+        "idempotency",
+        "isolation-levels",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "payment-idempotency",
+        "practice-transaction-processing",
+        "implement-idempotency-key",
+        "slo-error-budget"
+      ]
+    },
+    {
+      "id": "stock-exchange",
+      "version": "1.0.0",
+      "title": "Design a stock exchange",
+      "prompt": "Design the core of a stock exchange that accepts limit and market orders, matches by price-time priority, publishes market data, and recovers without reordering or duplicating trades.",
+      "category": "commerce-marketplaces",
+      "pattern": "single-writer price-time priority matching with sequenced market-data replication",
+      "criticalPath": "risk-check and sequence an order, mutate one symbol book, emit trades, and publish ordered market data",
+      "difficulty": "advanced",
+      "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=stock-exchange&from=guide",
+      "guideUrl": null,
+      "conceptIds": [
+        "transaction-processing",
+        "event-streaming-kafka",
+        "distributed-infra",
+        "replication",
+        "monitoring-analytics"
+      ],
+      "drillIds": [
+        "practice-transaction-processing",
+        "practice-event-streaming-kafka",
+        "replication-lag-read",
+        "slo-error-budget"
       ]
     }
   ],

@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"System Design Interview Questions","description":"Staged system-design interview cases with worked guides and targeted remediation.","url":"https://learn.significanthobbies.com/system-design/","numberOfItems":20,"hasPart":[{"@type":"Article","headline":"Design LLM Inference at 10K RPS | Interview Guide","url":"https://learn.significanthobbies.com/system-design/llm-inference-10k-rps"},{"@type":"Article","headline":"Design a Video Streaming Platform | Interview Guide","url":"https://learn.significanthobbies.com/system-design/video-streaming-platform"},{"@type":"Article","headline":"Design a Notification Service | Interview Guide","url":"https://learn.significanthobbies.com/system-design/notification-delivery-service"},{"@type":"Article","headline":"Design a Web Crawler | Interview Guide","url":"https://learn.significanthobbies.com/system-design/web-crawler"},{"@type":"Article","headline":"Design Dropbox or Google Drive | Interview Guide","url":"https://learn.significanthobbies.com/system-design/cloud-file-storage"},{"@type":"Article","headline":"Design Uber or Lyft | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ride-sharing-platform"},{"@type":"Article","headline":"Design Ticketmaster | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ticket-booking-platform"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://learn.significanthobbies.com"},{"@type":"ListItem","position":2,"name":"System design cases","item":"https://learn.significanthobbies.com/system-design/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"System Design Interview Questions","description":"Staged system-design interview cases with worked guides and targeted remediation.","url":"https://learn.significanthobbies.com/system-design/","numberOfItems":33,"hasPart":[{"@type":"Article","headline":"Design LLM Inference at 10K RPS | Interview Guide","url":"https://learn.significanthobbies.com/system-design/llm-inference-10k-rps"},{"@type":"Article","headline":"Design a Video Streaming Platform | Interview Guide","url":"https://learn.significanthobbies.com/system-design/video-streaming-platform"},{"@type":"Article","headline":"Design a Notification Service | Interview Guide","url":"https://learn.significanthobbies.com/system-design/notification-delivery-service"},{"@type":"Article","headline":"Design a Web Crawler | Interview Guide","url":"https://learn.significanthobbies.com/system-design/web-crawler"},{"@type":"Article","headline":"Design Dropbox or Google Drive | Interview Guide","url":"https://learn.significanthobbies.com/system-design/cloud-file-storage"},{"@type":"Article","headline":"Design Uber or Lyft | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ride-sharing-platform"},{"@type":"Article","headline":"Design Ticketmaster | Interview Guide","url":"https://learn.significanthobbies.com/system-design/ticket-booking-platform"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://learn.significanthobbies.com"},{"@type":"ListItem","position":2,"name":"System design cases","item":"https://learn.significanthobbies.com/system-design/"}]}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -45,7 +45,7 @@
     <main id="main-content">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a></nav>
       <article>
-    <p class="eyebrow">Interview practice · 20 complete cases</p>
+    <p class="eyebrow">Interview practice · 33 complete cases</p>
     <h1>System design interview questions you can actually practice</h1>
     <p class="lede">Move beyond prompt lists. Scope requirements, calculate capacity, defend an architecture, survive a failure injection, and repair the exact concept your answer missed.</p>
     <section>
@@ -99,6 +99,21 @@
           <h3><a href="/system-design/notification-delivery-service">Design a notification delivery service</a></h3>
           <p>Design push, email, SMS, and in-app notification delivery with user preferences, priorities, quotas, retries, provider failure, and duplicate control.</p>
           <p><a href="/mock?prompt=notification-delivery-service&amp;from=guide">Start closed-book practice →</a> · <a href="/system-design/notification-delivery-service">Read the worked guide</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a proximity search service</h3>
+          <p>Design a service that returns open businesses within a radius, filtered by category and ranked by distance, for a global consumer application.</p>
+          <p><a href="/mock?prompt=proximity-search-service&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a nearby friends service</h3>
+          <p>Design an opt-in feature that shows which friends are nearby and updates within seconds as people move, while making privacy and battery cost first-class constraints.</p>
+          <p><a href="/mock?prompt=nearby-friends-service&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a real-time gaming leaderboard</h3>
+          <p>Design a leaderboard for a global game with seasonal, regional, and friends-only rankings, real-time score updates, anti-cheat review, and stable end-of-season results.</p>
+          <p><a href="/mock?prompt=gaming-leaderboard&amp;from=guide">Start closed-book practice →</a></p>
         </article></div>
     </section><section>
       <h2>Media and collaboration</h2>
@@ -150,6 +165,36 @@
           <h3>Design a distributed key-value store</h3>
           <p>Design a Dynamo-style distributed key-value store with partitioning, replication, tunable consistency, durability, rebalancing, repair, and compaction.</p>
           <p><a href="/mock?prompt=distributed-key-value-store&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a distributed unique ID generator</h3>
+          <p>Design a service that issues globally unique, roughly time-sortable 64-bit IDs to thousands of application servers across regions without a database round trip per ID.</p>
+          <p><a href="/mock?prompt=distributed-unique-id-generator&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a maps and routing platform</h3>
+          <p>Design a driving-directions service that returns routes and ETAs across a continent, incorporates live traffic, and can serve map tiles separately from route computation.</p>
+          <p><a href="/mock?prompt=maps-routing-platform&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a distributed message queue</h3>
+          <p>Design a multi-tenant distributed queue for asynchronous jobs and event streams with durable retention, consumer groups, backpressure, and at-least-once delivery.</p>
+          <p><a href="/mock?prompt=distributed-message-queue&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a metrics monitoring platform</h3>
+          <p>Design a multi-tenant metrics platform that ingests counters, gauges, and histograms, supports dashboard queries and recording rules, and evaluates reliable alerts.</p>
+          <p><a href="/mock?prompt=metrics-monitoring-platform&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a distributed email service</h3>
+          <p>Design a transactional email platform that accepts API requests, renders templates, delivers through SMTP, handles retries and bounces, and protects sender reputation.</p>
+          <p><a href="/mock?prompt=distributed-email-service&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design an object storage service</h3>
+          <p>Design an S3-like object storage service with buckets, immutable object versions, multipart uploads, ranged reads, checksums, lifecycle policies, and regional durability.</p>
+          <p><a href="/mock?prompt=object-storage-service&amp;from=guide">Start closed-book practice →</a></p>
         </article></div>
     </section><section>
       <h2>Commerce and marketplaces</h2>
@@ -168,6 +213,26 @@
           <h3>Design a payment-processing system</h3>
           <p>Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.</p>
           <p><a href="/mock?prompt=payment-processing-system&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design an ad click aggregation system</h3>
+          <p>Design an ad click pipeline that powers near-real-time campaign dashboards and produces auditable daily billing aggregates despite duplicates, retries, bots, and late events.</p>
+          <p><a href="/mock?prompt=ad-click-aggregation-system&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">core · 45 minutes</p>
+          <h3>Design a hotel reservation system</h3>
+          <p>Design a hotel booking platform that searches room availability and prevents overselling across multi-night stays, retries, payment delays, and expiring holds.</p>
+          <p><a href="/mock?prompt=hotel-reservation-system&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a digital wallet</h3>
+          <p>Design a digital wallet that supports deposits, peer-to-peer transfers, merchant payments, refunds, and withdrawals while maintaining auditable balances across retries and external settlement.</p>
+          <p><a href="/mock?prompt=digital-wallet-system&amp;from=guide">Start closed-book practice →</a></p>
+        </article><article class="card">
+          <p class="eyebrow">advanced · 45 minutes</p>
+          <h3>Design a stock exchange</h3>
+          <p>Design the core of a stock exchange that accepts limit and market orders, matches by price-time priority, publishes market data, and recovers without reordering or duplicating trades.</p>
+          <p><a href="/mock?prompt=stock-exchange&amp;from=guide">Start closed-book practice →</a></p>
         </article></div>
     </section>
     <section>

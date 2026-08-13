@@ -1985,6 +1985,66 @@
         }
       ],
       "curriculumSource": "trace-a-tensor-v1"
+    },
+    {
+      "id": "harness-engineering",
+      "title": "Harness Engineering",
+      "horizon": "30d",
+      "goal": "Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.",
+      "description": "Seven progressive builds turn instructions, repository legibility, environment setup, durable state, scope, feedback, verification, lifecycle, and evaluation into one complete coding-agent harness.",
+      "tracks": ["agent-systems", "developer-tools", "ai-reliability"],
+      "milestones": [
+        {
+          "title": "Build 1 — Prompt-only versus rules-first",
+          "goal": "Turn implicit expectations into scoped repository instructions with executable checks.",
+          "concepts": ["repository-instruction-topology", "coding-agent-systems"],
+          "drills": ["build-rules-first-workspace"],
+          "artifacts": []
+        },
+        {
+          "title": "Build 2 — Agent-readable workspace",
+          "goal": "Make repository structure, bootstrap, readiness, and capability boundaries discoverable from a fresh worktree.",
+          "concepts": ["repository-intelligence", "agent-environment-contracts", "agent-permissions-sandboxing"],
+          "drills": ["practice-repository-intelligence", "make-agent-readable-workspace"],
+          "artifacts": []
+        },
+        {
+          "title": "Build 3 — Multi-session continuity",
+          "goal": "Persist goal, progress, evidence, blockers, and next action so a new session resumes safely.",
+          "concepts": ["agent-work-state-handoffs", "durable-agent-execution", "agent-memory-context"],
+          "drills": ["build-multi-session-continuity", "practice-durable-agent-execution"],
+          "artifacts": []
+        },
+        {
+          "title": "Build 4 — Runtime feedback and scope control",
+          "goal": "Bound authority and change size while using runtime evidence to continue, complete, replan, or escalate.",
+          "concepts": ["agent-scope-control", "agent-observability", "agent-permissions-sandboxing"],
+          "drills": ["add-feedback-and-scope-control", "practice-agent-observability"],
+          "artifacts": []
+        },
+        {
+          "title": "Build 5 — Independent self-verification",
+          "goal": "Separate maker claims from a checker that reconstructs the contract and gathers fresh evidence.",
+          "concepts": ["independent-agent-verification", "ai-regression-testing", "tool-use-evaluations"],
+          "drills": ["separate-maker-and-checker", "practice-ai-regression-testing", "practice-tool-use-evaluations"],
+          "artifacts": []
+        },
+        {
+          "title": "Build 6 — Complete harness lifecycle",
+          "goal": "Connect initialization, bounded work, durable progress, checking, recovery, and terminal states in one harness.",
+          "concepts": ["agent-run-lifecycle", "coding-agent-systems", "durable-agent-execution"],
+          "drills": ["build-complete-harness-lifecycle", "practice-coding-agent-systems"],
+          "artifacts": ["build-complete-agent-harness"]
+        },
+        {
+          "title": "Build 7 — Automated maker-checker loop",
+          "goal": "Run a bounded autonomous loop, compare it with a baseline, and ablate one harness component before deciding whether it should ship.",
+          "concepts": ["harness-evaluation", "independent-agent-verification", "agent-run-lifecycle", "ai-regression-testing"],
+          "drills": ["evaluate-automated-agent-loop"],
+          "artifacts": ["automate-maker-checker-loop"]
+        }
+      ],
+      "curriculumSource": "harness-engineering-v1"
     }
   ]
 }

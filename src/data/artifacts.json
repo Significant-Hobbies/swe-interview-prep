@@ -851,6 +851,75 @@
         "Short bottleneck diagnosis and architecture note defending the optimization"
       ],
       "curriculumSource": "trace-a-tensor-v1"
+    },
+    {
+      "id": "build-complete-agent-harness",
+      "title": "Build a Complete Coding-Agent Harness",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "coding-agent-systems",
+        "repository-intelligence",
+        "repository-instruction-topology",
+        "agent-environment-contracts",
+        "agent-work-state-handoffs",
+        "agent-scope-control",
+        "durable-agent-execution",
+        "agent-observability",
+        "agent-permissions-sandboxing",
+        "independent-agent-verification",
+        "agent-run-lifecycle"
+      ],
+      "projects": [],
+      "description": "Build a repository-local harness that can take one bounded engineering task from initialization through implementation, verification, durable handoff, and explicit termination without relying on hidden machine state or chat memory.",
+      "successCriteria": [
+        "A fresh isolated workspace can bootstrap and prove readiness from repository-local commands",
+        "Instruction scopes, allowed edit roots, capabilities, budgets, and escalation triggers are explicit and mechanically inspectable",
+        "The run persists goal, progress, evidence, blockers, and the next safe action across a forced restart",
+        "A checker gathers independent evidence and can reject an unsupported maker claim",
+        "The lifecycle terminates only as complete, blocked, failed, cancelled, or escalated with durable evidence"
+      ],
+      "deliverables": [
+        "Runnable harness or deterministic simulator with a focused validation command",
+        "Instruction and environment contract files",
+        "Versioned work-state and lifecycle schema",
+        "Maker and checker transcripts with captured independent evidence",
+        "Architecture note naming invariants, permissions, failure modes, and remaining risks"
+      ],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "automate-maker-checker-loop",
+      "title": "Automate and Evaluate a Maker-Checker Loop",
+      "type": "synthesis-project",
+      "difficulty": "advanced",
+      "concepts": [
+        "repository-instruction-topology",
+        "agent-work-state-handoffs",
+        "agent-scope-control",
+        "independent-agent-verification",
+        "agent-run-lifecycle",
+        "harness-evaluation",
+        "ai-regression-testing",
+        "tool-use-evaluations"
+      ],
+      "projects": [],
+      "description": "Automate a bounded loop in which a maker attempts one task, an independent checker evaluates explicit acceptance criteria, failures return actionable evidence, and the orchestrator stops on success, escalation, cancellation, or budget exhaustion. Compare it with a baseline harness on a frozen task suite.",
+      "successCriteria": [
+        "Maker and checker roles have separate inputs and the checker ignores unsupported self-reported success",
+        "The loop has explicit goal, task and retry budgets, durable state, and semantic termination criteria",
+        "A frozen evaluation suite measures success, unsafe actions, cost, latency, retries, and human interventions",
+        "At least one component ablation isolates whether instructions, tools, verification, or retry policy caused the observed change",
+        "Release or rejection follows a declared multi-objective gate rather than pass rate alone"
+      ],
+      "deliverables": [
+        "Runnable maker-checker orchestrator or deterministic workflow simulation",
+        "Versioned acceptance contract and evaluator rubric",
+        "Baseline, candidate, and one-component-ablation result table",
+        "Captured failure and recovery trace",
+        "Short decision memo explaining whether the candidate harness should ship"
+      ],
+      "curriculumSource": "harness-engineering-v1"
     }
   ]
 }

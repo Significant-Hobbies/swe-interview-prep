@@ -6,6 +6,7 @@ import type {
   SystemDesignStageId,
 } from './system-design-case-schema';
 import { SYSTEM_DESIGN_CATEGORIES } from './system-design-case-schema';
+import { CLASSIC_GAP_SYSTEM_DESIGN_CASES } from './system-design-classic-gap-cases';
 import { POPULAR_SYSTEM_DESIGN_CASES } from './system-design-popular-cases';
 
 const SCORE_ANCHORS: RubricAnchor[] = [
@@ -1539,6 +1540,7 @@ export const SYSTEM_DESIGN_CASES: SystemDesignCase[] = [
   chatCase,
   newsFeedCase,
   ...POPULAR_SYSTEM_DESIGN_CASES,
+  ...CLASSIC_GAP_SYSTEM_DESIGN_CASES,
 ];
 
 export const SYSTEM_DESIGN_CASE_BY_ID = Object.fromEntries(

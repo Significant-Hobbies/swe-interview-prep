@@ -9,7 +9,16 @@ const Excalidraw = lazy(() =>
 
 const STORAGE_PREFIX = 'diagram-';
 
-function loadDiagram(problemId: string) {
+export interface DiagramDocument {
+  elements: readonly any[];
+  appState?: {
+    zoom?: unknown;
+    scrollX?: number;
+    scrollY?: number;
+  };
+}
+
+function loadDiagram(problemId: string): DiagramDocument | null {
   try {
     const raw = localStorage.getItem(STORAGE_PREFIX + problemId);
     return raw ? JSON.parse(raw) : null;
@@ -18,40 +27,52 @@ function loadDiagram(problemId: string) {
   }
 }
 
-function saveDiagram(problemId: string, elements: readonly any[], appState: any) {
-  localStorage.setItem(
-    STORAGE_PREFIX + problemId,
-    JSON.stringify({
-      elements,
-      appState: { zoom: appState.zoom, scrollX: appState.scrollX, scrollY: appState.scrollY },
-    })
-  );
+function serializeDiagram(elements: readonly any[], appState: any): DiagramDocument {
+  return {
+    elements,
+    appState: { zoom: appState.zoom, scrollX: appState.scrollX, scrollY: appState.scrollY },
+  };
+}
+
+function saveDiagram(problemId: string, document: DiagramDocument) {
+  localStorage.setItem(STORAGE_PREFIX + problemId, JSON.stringify(document));
 }
 
 export default function DiagramEditor({
   problemId,
   onElementsChange,
+  onDocumentChange,
+  initialDocument,
+  persist = true,
+  readOnly = false,
 }: {
   problemId: string;
   onElementsChange?: (elements: any[]) => void;
+  onDocumentChange?: (document: DiagramDocument) => void;
+  initialDocument?: DiagramDocument | null;
+  persist?: boolean;
+  readOnly?: boolean;
 }) {
   const [initialData, setInitialData] = useState<any>(undefined);
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
-    const saved = loadDiagram(problemId);
+    const saved = initialDocument ?? (persist ? loadDiagram(problemId) : null);
     setInitialData(saved || { elements: [], appState: {} });
-  }, [problemId]);
+  }, [initialDocument, persist, problemId]);
 
   const handleChange = useCallback(
     (elements: readonly any[], appState: any) => {
+      if (readOnly) return;
       if (saveTimer.current) clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(() => {
-        saveDiagram(problemId, elements, appState);
+        const document = serializeDiagram(elements, appState);
+        if (persist) saveDiagram(problemId, document);
         onElementsChange?.([...elements]);
+        onDocumentChange?.(document);
       }, 500);
     },
-    [problemId, onElementsChange]
+    [onDocumentChange, onElementsChange, persist, problemId, readOnly]
   );
 
   useEffect(() => {
@@ -72,7 +93,12 @@ export default function DiagramEditor({
           </div>
         }
       >
-        <Excalidraw initialData={initialData} onChange={handleChange} theme="dark" />
+        <Excalidraw
+          initialData={initialData}
+          onChange={handleChange}
+          theme="dark"
+          viewModeEnabled={readOnly}
+        />
       </Suspense>
     </div>
   );

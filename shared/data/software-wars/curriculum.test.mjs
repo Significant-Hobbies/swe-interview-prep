@@ -5,7 +5,7 @@ import { buildWarsCurriculumManifest, resolveWarsQueueConceptIds } from './curri
 describe('Software Wars canonical curriculum projection', () => {
   it('keeps every canonical track, roadmap, and concept visible with honest coverage', () => {
     const manifest = buildWarsCurriculumManifest(blitzQuestions);
-    expect(manifest.totals).toEqual({ tracks: 19, roadmaps: 25, concepts: 252 });
+    expect(manifest.totals).toEqual({ tracks: 19, roadmaps: 26, concepts: 259 });
     expect(manifest.concepts.find(({ id }) => id === 'idempotency')).toMatchObject({
       name: 'Idempotency',
       learnPath: '/concepts/idempotency',

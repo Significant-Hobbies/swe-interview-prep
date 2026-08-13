@@ -19,9 +19,13 @@ The system SHALL let an authenticated user start a 60–120 second Blitz battle 
 - **WHEN** a visible track, roadmap, or concept queue has fewer than five active questions
 - **THEN** the catalogue shows its candidate and active counts and prevents starting a misleading battle while preserving links to the corresponding learning surface
 
-#### Scenario: Guest attempts ranked play
-- **WHEN** a guest presses Play on a ranked or challenge battle
-- **THEN** the system preserves the intended destination and asks the guest to sign in before creating an attempt
+#### Scenario: Guest starts Blitz
+- **WHEN** a visitor without an account presses Play
+- **THEN** the system starts a complete unranked browser battle immediately, labels its state as local to that browser, and does not create Elo, FSRS evidence, public history, or a server-owned attempt
+
+#### Scenario: Guest requests a durable competitive feature
+- **WHEN** a guest requests ranked rating, history, result sharing, or a human challenge
+- **THEN** the system explains that signup upgrades persistence and competitive identity while keeping unranked Blitz playable without signup
 
 ### Requirement: Server-authoritative attempt timing
 The system MUST record match and answer deadlines on the server, reject answers submitted after the applicable deadline, and use server receipt times for scoring. Client countdowns SHALL be presentational only.

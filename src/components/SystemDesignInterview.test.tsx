@@ -5,7 +5,7 @@ import { SYSTEM_DESIGN_CASES } from '../data/system-design-cases';
 import { resolveCaseId, SystemDesignCaseSelector } from './SystemDesignInterview';
 
 describe('system-design case selector', () => {
-  it('groups all twenty cases and exposes guide availability', () => {
+  it('groups all thirty-three cases and exposes guide availability', () => {
     const html = renderToStaticMarkup(
       <SystemDesignCaseSelector activeCaseId="llm-inference-10k-rps" onSelect={vi.fn()} />
     );
@@ -21,7 +21,7 @@ describe('system-design case selector', () => {
     }
     for (const caseDefinition of SYSTEM_DESIGN_CASES) expect(html).toContain(caseDefinition.title);
     expect(html.match(/Guide \+ practice/g)).toHaveLength(7);
-    expect(html.match(/Practice only/g)).toHaveLength(13);
+    expect(html.match(/Practice only/g)).toHaveLength(26);
   });
 
   it('preserves direct prompt IDs and legacy mock aliases', () => {

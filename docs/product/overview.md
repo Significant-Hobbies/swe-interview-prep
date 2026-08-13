@@ -13,7 +13,7 @@ hints, deterministic systems simulations, FSRS spaced repetition, LeetCode
 import, an embedded learning-library reader, and progress tracking.
 
 Software Wars is the competitive diagnostic layer: a learner plays a short
-objective Blitz battle or a scheduled open-ended Tradeoff battle, receives
+objective Blitz battle or a solo or matched open-ended Tradeoff battle, receives
 concept-level remediation, and returns to the same learning and FSRS loop.
 
 ## Why it exists
@@ -44,7 +44,7 @@ peer destination:
 | Dashboard | Resume recent work; see current and next learning/practice; discover available paths |
 | Learn | Searchable high-level entry to concepts and learning paths |
 | Practice | The Playground workspace with a selector over the complete problem inventory |
-| Wars | One-minute MCQ battles and thirty-minute matched engineering battles |
+| Wars | One-minute MCQ battles and thirty-minute solo or matched engineering battles |
 
 Dashboard resumes the learner's current loop. Learn stays deliberately
 high-level, but its search and browse-all destinations cover every canonical
@@ -68,9 +68,15 @@ search-only or unreachable. The complete catalogues, stable detail routes,
 public curriculum, and generated data remain portable independently of the
 four entry surfaces.
 
-Guest Wars battles are local and explicitly unranked;
-competitive ratings, ranked answers, deadlines, challenge state, and live
-Tradeoff phases are server-owned.
+Guest Wars battles are local and explicitly unranked. Solo Tradeoff runs the
+same 30-minute problem, twist, reveal, debate, and review loop against an AI
+opponent using a learner-provided OpenAI-compatible key. The browser calls the
+selected provider directly; the key and AI session are held in tab memory and
+discarded on reload. Its artifact surface reuses the Playground's controlled
+Monaco and Excalidraw tools, keeping notes, code, and diagrams together while
+making all three read-only at the freeze boundary. Competitive ratings, ranked
+answers, deadlines, challenge state, and live Tradeoff phases remain
+server-owned. Signup is therefore an upgrade for durable state, not a play gate.
 
 ## Tracks
 
@@ -81,15 +87,24 @@ Platforms, Distributed Systems, Inference & Serving, Agent Systems, AI
 Reliability, Developer Tools & Code Intelligence, Application Engineering, and
 Multimodal & Spatial Computing.
 
-Concept content is static JSON in `src/data/concepts.json` (252 concepts). The
+Concept content is static JSON in `src/data/concepts.json` (259 concepts). The
 machine-readable contract mapping the requested eleven-domain taxonomy and its
 96 named subtopics to concepts is `src/data/curriculum-coverage.json`.
+
+Agent Systems includes a dedicated seven-build Harness Engineering roadmap,
+from scoped repository instructions and reproducible environments through
+durable handoffs, independent verification, lifecycle control, and measured
+maker-checker automation. The structured system-design catalog contains 33
+interactive cases; the additional classic batch closes gaps in IDs,
+geospatial/presence/routing, queues and metrics, streaming analytics,
+reservations and email, object storage, leaderboards, wallets, and exchange
+matching.
 
 ## Public curriculum and SEO
 
 The same canonical data generates a JavaScript-free publication layer at
 [`/curriculum/`](https://learn.significanthobbies.com/curriculum/): one hub,
-19 track pages, 25 roadmap pages, and 252 concept pages. Concept pages publish
+19 track pages, 26 roadmap pages, and 259 concept pages. Concept pages publish
 the editorial explanation, mental model, primary resources, practice direction,
 review prompts, and build criteria while keeping progress, notes, saved Reader
 content, and review answers private.
@@ -110,10 +125,10 @@ multi-provider AI hints, LeetCode import, embedded learning library, and
 personal learning sessions.
 
 The personally requested Software Wars expansion adds source-backed Blitz
-battles, scheduled Tradeoff battles, distinct ratings, managed two-person
-media, sanitized result sharing, and concept remediation. It does not add
-payments, recruiter tooling, tournaments, or unrestricted generated ranked
-content.
+battles, solo and scheduled Tradeoff battles, distinct ratings, managed
+two-person media, sanitized result sharing, and concept remediation. It does
+not add payments, recruiter tooling, tournaments, or unrestricted generated
+ranked content.
 
 The checked-in server-only ranked bank contains 1,200 independently audited,
 active questions across 12 backend and systems topics. Every question has a
@@ -133,5 +148,7 @@ roadmap expansion beyond maintenance and personally requested workflow fixes.
 - [`surfaces.md`](surfaces.md) — routes and API surface inventory
 - [`learning-library.md`](learning-library.md) — the embedded GitHub library feature
 - [`systems-lab.md`](systems-lab.md) — safe simulation boundary and learning contract
+- [`../learning/harness-engineering.md`](../learning/harness-engineering.md) — the seven-build agent-harness path
+- [`../knowledge/curriculum-coverage-sources.md`](../knowledge/curriculum-coverage-sources.md) — external coverage audits and native-content boundary
 - [`../architecture/overview.md`](../architecture/overview.md) — how it's built
 - [`../../README.md`](../../README.md) — public-facing README

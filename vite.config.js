@@ -37,6 +37,12 @@ function deferAppCss() {
 export default defineConfig({
   plugins: [react(), tailwindcss(), deferAppCss(), localAi()],
   assetsInclude: ['**/*.wasm'],
+  optimizeDeps: {
+    // Excalidraw imports this CommonJS-only font-loader dependency as a
+    // default export. Vite 8 needs explicit interop or the diagram canvas
+    // crashes while loading fonts in development.
+    needsInterop: ['es6-promise-pool'],
+  },
   resolve: {
     // Langium 3 re-exports these internals, while vscode-jsonrpc 9 only
     // exposes the same symbols through its public package entry point.

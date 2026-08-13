@@ -21,6 +21,7 @@ in [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/
 | [`operations/jobs/weekly-quality.md`](operations/jobs/weekly-quality.md) | Scheduled GitHub Actions jobs and their contracts |
 | [`operations/runbooks/reader-adapter.md`](operations/runbooks/reader-adapter.md) | Operational procedures (secret rotation, adapter activation) |
 | [`knowledge/failed-approaches.md`](knowledge/failed-approaches.md) | Durable learnings and reusable failed approaches |
+| [`knowledge/curriculum-coverage-sources.md`](knowledge/curriculum-coverage-sources.md) | External curriculum audits, resulting native coverage, and provenance boundaries |
 | [`learning/index.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/learning/index.md) | In-product learning roadmaps. **Product content** — loaded by the app at build time via Vite glob; do not move or rename |
 | [`archive/`](https://github.com/Significant-Hobbies/swe-interview-prep/tree/main/docs/archive) | Historical snapshots kept for git history and reference; not authoritative |
 

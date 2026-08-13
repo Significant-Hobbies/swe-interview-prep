@@ -1,7 +1,7 @@
 # SWE Prep Curriculum Catalog
 
-A public, JavaScript-free index of 252 concepts across
-19 tracks and 25 sequenced roadmaps.
+A public, JavaScript-free index of 259 concepts across
+19 tracks and 26 sequenced roadmaps.
 The active learning loop is Concept → Drill → Build → Review → Apply.
 
 - Human curriculum hub: https://learn.significanthobbies.com/curriculum/
@@ -36,6 +36,7 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 - [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html) (90d) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
 - [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html) (90d) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
 - [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html) (30d) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html) (30d) — Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.
 
 # System-design interview cases
 
@@ -59,6 +60,19 @@ The active learning loop is Concept → Drill → Build → Review → Apply.
 - [Design a ride-sharing platform](https://learn.significanthobbies.com/system-design/ride-sharing-platform) — Design an Uber or Lyft-style marketplace with driver locations, nearby matching, dispatch offers, atomic trip assignment, live trip state, ETA, and regional spikes.
 - [Design a ticket-booking platform](https://learn.significanthobbies.com/system-design/ticket-booking-platform) — Design Ticketmaster-style reserved-seat booking with event browse, a virtual waiting room, expiring holds, payments, oversell prevention, bots, and flash crowds.
 - [Design a payment-processing system](https://learn.significanthobbies.com/mock?prompt=payment-processing-system&from=guide) — Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.
+- [Design a distributed unique ID generator](https://learn.significanthobbies.com/mock?prompt=distributed-unique-id-generator&from=guide) — Design a service that issues globally unique, roughly time-sortable 64-bit IDs to thousands of application servers across regions without a database round trip per ID.
+- [Design a proximity search service](https://learn.significanthobbies.com/mock?prompt=proximity-search-service&from=guide) — Design a service that returns open businesses within a radius, filtered by category and ranked by distance, for a global consumer application.
+- [Design a nearby friends service](https://learn.significanthobbies.com/mock?prompt=nearby-friends-service&from=guide) — Design an opt-in feature that shows which friends are nearby and updates within seconds as people move, while making privacy and battery cost first-class constraints.
+- [Design a maps and routing platform](https://learn.significanthobbies.com/mock?prompt=maps-routing-platform&from=guide) — Design a driving-directions service that returns routes and ETAs across a continent, incorporates live traffic, and can serve map tiles separately from route computation.
+- [Design a distributed message queue](https://learn.significanthobbies.com/mock?prompt=distributed-message-queue&from=guide) — Design a multi-tenant distributed queue for asynchronous jobs and event streams with durable retention, consumer groups, backpressure, and at-least-once delivery.
+- [Design a metrics monitoring platform](https://learn.significanthobbies.com/mock?prompt=metrics-monitoring-platform&from=guide) — Design a multi-tenant metrics platform that ingests counters, gauges, and histograms, supports dashboard queries and recording rules, and evaluates reliable alerts.
+- [Design an ad click aggregation system](https://learn.significanthobbies.com/mock?prompt=ad-click-aggregation-system&from=guide) — Design an ad click pipeline that powers near-real-time campaign dashboards and produces auditable daily billing aggregates despite duplicates, retries, bots, and late events.
+- [Design a hotel reservation system](https://learn.significanthobbies.com/mock?prompt=hotel-reservation-system&from=guide) — Design a hotel booking platform that searches room availability and prevents overselling across multi-night stays, retries, payment delays, and expiring holds.
+- [Design a distributed email service](https://learn.significanthobbies.com/mock?prompt=distributed-email-service&from=guide) — Design a transactional email platform that accepts API requests, renders templates, delivers through SMTP, handles retries and bounces, and protects sender reputation.
+- [Design an object storage service](https://learn.significanthobbies.com/mock?prompt=object-storage-service&from=guide) — Design an S3-like object storage service with buckets, immutable object versions, multipart uploads, ranged reads, checksums, lifecycle policies, and regional durability.
+- [Design a real-time gaming leaderboard](https://learn.significanthobbies.com/mock?prompt=gaming-leaderboard&from=guide) — Design a leaderboard for a global game with seasonal, regional, and friends-only rankings, real-time score updates, anti-cheat review, and stable end-of-season results.
+- [Design a digital wallet](https://learn.significanthobbies.com/mock?prompt=digital-wallet-system&from=guide) — Design a digital wallet that supports deposits, peer-to-peer transfers, merchant payments, refunds, and withdrawals while maintaining auditable balances across retries and external settlement.
+- [Design a stock exchange](https://learn.significanthobbies.com/mock?prompt=stock-exchange&from=guide) — Design the core of a stock exchange that accepts limit and market orders, matches by price-time priority, publishes market data, and recovers without reordering or duplicating trades.
 
 # Tracks and concepts
 
@@ -422,8 +436,8 @@ Inference engines, batching, KV caches, attention kernels, decoding, routing, ha
 Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html
-- Concepts: 10
-- Roadmaps: 1
+- Concepts: 17
+- Roadmaps: 2
 
 - [Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html) — Letting an LLM invoke functions/APIs via structured calls.
 - [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html) — The plan → act → observe loop, with memory and stopping conditions.
@@ -435,14 +449,21 @@ Agent loops, tools, memory, MCP, coordination, durable execution, permissions, c
 - [Browser & Computer-use Agents](https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents.html) — DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.
 - [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html) — Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.
 - [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html) — Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.
+- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
+- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
+- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html) — Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
+- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
 
 ## Evaluation & AI Reliability
 
 LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html
-- Concepts: 12
-- Roadmaps: 1
+- Concepts: 14
+- Roadmaps: 2
 
 - [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html) — Treating prompts as versioned artifacts with logged inputs/outputs.
 - [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html) — Measuring LLM output quality with datasets, graders, and LLM-as-judge.
@@ -456,14 +477,16 @@ LLM and agent evaluations, regression gates, failure detection, tracing, verific
 - [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html) — Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.
 - [Human Review Systems](https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html) — Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.
 - [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html) — Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
 
 ## Developer Tools & Code Intelligence
 
 Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
 
 - Public page: https://learn.significanthobbies.com/curriculum/tracks/developer-tools.html
-- Concepts: 10
-- Roadmaps: 1
+- Concepts: 13
+- Roadmaps: 2
 
 - [Code Review Systems](https://learn.significanthobbies.com/curriculum/concepts/code-review-systems.html) — Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.
 - [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html) — ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.
@@ -475,6 +498,9 @@ Code review, analysis, testing infrastructure, repository graphs, coding agents,
 - [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html) — Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
 - [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html) — Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.
 - [Automated Debugging & Remediation](https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation.html) — Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.
+- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
+- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
 
 ## Application Engineering
 

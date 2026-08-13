@@ -8469,6 +8469,244 @@
         "Ignoring ownership and lifetime when memory crosses thread, callback, or process boundaries"
       ],
       "realWorldUsage": "Debugging crashes and leaks, understanding allocators and garbage collectors, designing FFI boundaries, reading profiles, and reasoning about process isolation."
+    },
+    {
+      "id": "repository-instruction-topology",
+      "name": "Repository Instruction Topology",
+      "tags": ["agent-systems", "developer-tools", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["repository-intelligence"],
+      "related": ["coding-agent-systems", "agent-scope-control", "repository-intelligence"],
+      "description": "Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.",
+      "mentalModel": "Instructions form a scoped configuration tree. Broad rules establish invariants, nearer files refine behavior for a subtree, and direct task intent supplies the leaf-level objective. A useful instruction is discoverable, non-contradictory, and paired with the command or artifact that proves compliance.",
+      "commonMistakes": [
+        "Putting every rule in one root document until relevant guidance is buried",
+        "Repeating the same rule at multiple scopes and letting copies drift",
+        "Writing preferences that cannot be checked while omitting the actual validation command"
+      ],
+      "realWorldUsage": "AGENTS.md hierarchies, repository custom instructions, package-local conventions, generated-code boundaries, and task-specific runbooks.",
+      "drills": ["build-rules-first-workspace"],
+      "reviewQuestions": ["rq-repository-instruction-topology"],
+      "resources": [
+        {
+          "title": "GitHub Docs — Adding repository custom instructions",
+          "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions-in-your-ide/add-repository-instructions-in-your-ide",
+          "type": "doc"
+        },
+        {
+          "title": "OpenAI — Harness engineering",
+          "url": "https://openai.com/index/harness-engineering/",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness", "automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "agent-environment-contracts",
+      "name": "Agent Environment Contracts",
+      "tags": ["agent-systems", "developer-tools", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["repository-instruction-topology"],
+      "related": ["repository-intelligence", "agent-permissions-sandboxing", "coding-agent-systems"],
+      "description": "Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.",
+      "mentalModel": "Treat the development environment as an API offered to the agent: bootstrap has declared inputs, readiness has observable outputs, and every writable or networked capability has a boundary. If a fresh session cannot establish readiness mechanically, the environment contract is incomplete.",
+      "commonMistakes": [
+        "Assuming an undeclared global tool or manually prepared service exists",
+        "Starting work before checking that dependencies and required services are ready",
+        "Sharing mutable ports, databases, or build output across concurrent agent runs"
+      ],
+      "realWorldUsage": "Per-worktree development servers, reproducible setup scripts, CI parity, local observability stacks, and sandbox readiness checks.",
+      "drills": ["make-agent-readable-workspace"],
+      "reviewQuestions": ["rq-agent-environment-contracts"],
+      "resources": [
+        {
+          "title": "OpenAI — Harness engineering",
+          "url": "https://openai.com/index/harness-engineering/",
+          "type": "article"
+        },
+        {
+          "title": "Model Context Protocol — Roots",
+          "url": "https://modelcontextprotocol.io/specification/2025-03-26/client/roots",
+          "type": "doc"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "agent-work-state-handoffs",
+      "name": "Agent Work State & Handoffs",
+      "tags": ["agent-systems", "durability", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-environment-contracts"],
+      "related": ["durable-agent-execution", "agent-memory-context", "agent-run-lifecycle"],
+      "description": "Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.",
+      "mentalModel": "A context window is a worker shift, not durable storage. The repository or workflow log owns the recoverable state: what was requested, what changed, what was verified, what failed, and the smallest safe next action. A handoff is correct when a fresh process can resume from artifacts alone.",
+      "commonMistakes": [
+        "Saving a narrative summary without exact files, commands, or observed results",
+        "Marking a task complete without durable verification evidence",
+        "Letting the chat transcript become the only record of decisions and remaining work"
+      ],
+      "realWorldUsage": "Long-running coding tasks, session compaction, workflow checkpoints, crash recovery, shift handoffs, and resumable background agents.",
+      "drills": ["build-multi-session-continuity"],
+      "reviewQuestions": ["rq-agent-work-state-handoffs"],
+      "resources": [
+        {
+          "title": "Effective Harnesses for Long-running Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "type": "article"
+        },
+        {
+          "title": "OpenAI — Symphony orchestration specification",
+          "url": "https://openai.com/index/open-source-codex-orchestration-symphony/",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness", "automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "agent-scope-control",
+      "name": "Agent Scope Control",
+      "tags": ["agent-systems", "developer-tools", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "core",
+      "priority": 3,
+      "prerequisites": ["agent-work-state-handoffs"],
+      "related": ["coding-agent-systems", "agent-observability", "agent-permissions-sandboxing"],
+      "description": "Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.",
+      "mentalModel": "Scope is a runtime invariant, not a sentence in a prompt. Convert the goal into a bounded change surface, measurable completion condition, and explicit escalation triggers. Each observation may narrow or revise the plan, but expanding authority requires a deliberate decision.",
+      "commonMistakes": [
+        "Treating an ambitious goal as permission to mutate unrelated systems",
+        "Continuing after evidence contradicts the plan instead of replanning",
+        "Using token or time limits without a semantic completion or escalation condition"
+      ],
+      "realWorldUsage": "Patch-size controls, allowed edit roots, task queues, budget enforcement, blast-radius limits, and agent escalation policies.",
+      "drills": ["add-feedback-and-scope-control"],
+      "reviewQuestions": ["rq-agent-scope-control"],
+      "resources": [
+        {
+          "title": "OpenAI — Harness engineering",
+          "url": "https://openai.com/index/harness-engineering/",
+          "type": "article"
+        },
+        {
+          "title": "Anthropic — Building effective agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness", "automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "independent-agent-verification",
+      "name": "Independent Agent Verification",
+      "tags": ["agent-systems", "ai-reliability", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "advanced",
+      "priority": 3,
+      "prerequisites": ["agent-scope-control", "ai-regression-testing"],
+      "related": ["agent-observability", "coding-agent-systems", "harness-evaluation"],
+      "description": "Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.",
+      "mentalModel": "The maker proposes a change; the checker reconstructs the contract and gathers fresh evidence. Independence means the checker does not merely repeat the maker's reasoning or accept its claimed test result. Release requires both an artifact and externally reproducible evidence against explicit criteria.",
+      "commonMistakes": [
+        "Asking the same context to review its own work without fresh evidence",
+        "Using lint success as proof of user-facing or semantic correctness",
+        "Letting a checker rewrite the work before clearly reporting the failed acceptance criterion"
+      ],
+      "realWorldUsage": "Agent-generated pull requests, evaluator agents, security review, visual regression, acceptance tests, and policy gates.",
+      "drills": ["separate-maker-and-checker"],
+      "reviewQuestions": ["rq-independent-agent-verification"],
+      "resources": [
+        {
+          "title": "Anthropic — Harness design for long-running application development",
+          "url": "https://www.anthropic.com/engineering/harness-design-long-running-apps",
+          "type": "article"
+        },
+        {
+          "title": "OpenAI — Harness engineering",
+          "url": "https://openai.com/index/harness-engineering/",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness", "automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "agent-run-lifecycle",
+      "name": "Agent Run Lifecycle",
+      "tags": ["agent-systems", "durability", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "advanced",
+      "priority": 3,
+      "prerequisites": ["agent-work-state-handoffs", "agent-scope-control"],
+      "related": ["durable-agent-execution", "long-running-scheduled-agents", "independent-agent-verification"],
+      "description": "Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.",
+      "mentalModel": "An autonomous run is a finite-state machine with an owner and a budget. It starts only after prerequisites are ready, progresses through durable states, renews authority while healthy, and terminates as complete, failed, cancelled, or escalated. 'Keep trying' is not a lifecycle state.",
+      "commonMistakes": [
+        "Using a timer as the only stop condition",
+        "Marking complete when commands ran rather than when the objective is satisfied",
+        "Retrying permanent or authorization failures as if they were transient"
+      ],
+      "realWorldUsage": "Background coding agents, durable workflows, scheduled maintenance, CI remediation loops, and multi-hour autonomous builds.",
+      "drills": ["build-complete-harness-lifecycle"],
+      "reviewQuestions": ["rq-agent-run-lifecycle"],
+      "resources": [
+        {
+          "title": "OpenAI — Unrolling the Codex agent loop",
+          "url": "https://openai.com/index/unrolling-the-codex-agent-loop/",
+          "type": "article"
+        },
+        {
+          "title": "Effective Harnesses for Long-running Agents (Anthropic)",
+          "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["build-complete-agent-harness", "automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "harness-evaluation",
+      "name": "Harness Evaluation",
+      "tags": ["agent-systems", "ai-reliability", "harness-engineering"],
+      "roadmaps": ["harness-engineering"],
+      "difficulty": "advanced",
+      "priority": 3,
+      "prerequisites": ["independent-agent-verification", "agent-run-lifecycle"],
+      "related": ["ai-regression-testing", "tool-use-evaluations", "agent-observability"],
+      "description": "Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.",
+      "mentalModel": "A harness is a policy that transforms a model and environment into task outcomes. Evaluate the whole policy on frozen tasks, record success, regressions, cost, time, interventions, and unsafe actions, then ablate one harness component at a time to learn which constraints actually carry performance.",
+      "commonMistakes": [
+        "Measuring only final pass rate and ignoring cost, retries, intervention, or unsafe actions",
+        "Changing model, tools, prompts, and evaluator together so no causal conclusion is possible",
+        "Using the same model-generated rubric and answer as both system output and ground truth"
+      ],
+      "realWorldUsage": "Coding-agent benchmarks, release gates, tool-policy experiments, prompt and instruction changes, cost controls, and harness simplification.",
+      "drills": ["evaluate-automated-agent-loop"],
+      "reviewQuestions": ["rq-harness-evaluation"],
+      "resources": [
+        {
+          "title": "Anthropic — Harness design for long-running application development",
+          "url": "https://www.anthropic.com/engineering/harness-design-long-running-apps",
+          "type": "article"
+        },
+        {
+          "title": "OpenAI — Harness engineering",
+          "url": "https://openai.com/index/harness-engineering/",
+          "type": "article"
+        }
+      ],
+      "artifacts": ["automate-maker-checker-loop"],
+      "curriculumSource": "harness-engineering-v1"
     }
   ]
 }

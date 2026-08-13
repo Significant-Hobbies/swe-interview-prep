@@ -1,6 +1,7 @@
 import {
   ArrowLeft,
   ArrowRight,
+  Bot,
   CheckCircle2,
   Clock3,
   Gavel,
@@ -8,8 +9,8 @@ import {
   MessageSquareText,
   Radio,
   RotateCcw,
-  Save,
   Scale,
+  Send,
   Share2,
   ShieldCheck,
   Users,
@@ -17,10 +18,24 @@ import {
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { Badge, Button, Card, FilterPill } from '../components/ui';
+import { SoloTradeoffSetup } from '../components/SoloTradeoffSetup';
+import {
+  TradeoffArtifactWorkspace,
+  type TradeoffArtifactKind,
+  type TradeoffDrafts,
+} from '../components/TradeoffArtifactWorkspace';
+import { Badge, Button, Card } from '../components/ui';
 import { useAuth } from '../contexts/AuthContext';
 import { PREVIEW_TRADEOFF } from '../data/software-wars-preview';
 import { trackEvent } from '../lib/analytics';
+import {
+  continueSoloDebate,
+  createSoloOpponentArtifact,
+  evaluateSoloTradeoff,
+  reviseSoloOpponentArtifact,
+  type SoloTradeoffAIConfig,
+  type SoloTradeoffDebateMessage,
+} from '../lib/soloTradeoffAI';
 import {
   checkInTradeoff,
   createChallenge,
@@ -54,7 +69,7 @@ const PHASES = [
 ] as const;
 
 type Phase = (typeof PHASES)[number]['id'];
-type Artifact = (typeof PREVIEW_TRADEOFF.allowedArtifacts)[number];
+type SessionMode = 'practice' | 'solo' | 'live';
 
 function displayPhase(phase: TradeoffPhase): Phase {
   if (phase === 'twist' || phase === 'revision') return 'revision';
@@ -73,13 +88,13 @@ export default function TradeoffWar() {
   const { matchId } = useParams();
   const { user } = useAuth();
   const [entered, setEntered] = useState(Boolean(matchId));
+  const [sessionMode, setSessionMode] = useState<SessionMode>(matchId ? 'live' : 'practice');
   const [phase, setPhase] = useState<Phase>('initial_solution');
   const [secondsLeft, setSecondsLeft] = useState(PHASES[0].seconds);
-  const [artifact, setArtifact] = useState<Artifact>('Text');
-  const [drafts, setDrafts] = useState<Record<Artifact, string>>(() => {
+  const [drafts, setDrafts] = useState<TradeoffDrafts>(() => {
     const blank = Object.fromEntries(
       PREVIEW_TRADEOFF.allowedArtifacts.map((kind) => [kind, ''])
-    ) as Record<Artifact, string>;
+    ) as TradeoffDrafts;
     try {
       return {
         ...blank,
@@ -105,12 +120,42 @@ export default function TradeoffWar() {
   const [revealedArtifacts, setRevealedArtifacts] = useState<TradeoffArtifactView[]>([]);
   const [result, setResult] = useState<Awaited<ReturnType<typeof getTradeoffResult>>>();
   const [resultAction, setResultAction] = useState('');
+  const [soloConfig, setSoloConfig] = useState<SoloTradeoffAIConfig>({
+    endpointUrl: 'https://openrouter.ai/api/v1',
+    apiKey: '',
+    model: '',
+  });
+  const [soloInitialArtifact, setSoloInitialArtifact] = useState('');
+  const [soloRevisedArtifact, setSoloRevisedArtifact] = useState('');
+  const [soloDebateMessages, setSoloDebateMessages] = useState<SoloTradeoffDebateMessage[]>([]);
+  const [soloDebateInput, setSoloDebateInput] = useState('');
+  const [soloFeedback, setSoloFeedback] = useState('');
+  const [soloBusy, setSoloBusy] = useState(false);
+  const [soloError, setSoloError] = useState('');
   const socketRef = useRef<WebSocket | undefined>(undefined);
+  const soloAbortRef = useRef<AbortController | undefined>(undefined);
 
   const activePhase = liveState ? displayPhase(liveState.phase) : phase;
   const phaseIndex = PHASES.findIndex((item) => item.id === activePhase);
-  const draft = drafts[artifact];
   const frozen = ['debate', 'voting', 'complete'].includes(activePhase);
+  const isSolo = sessionMode === 'solo';
+  const soloOpponentArtifact = soloRevisedArtifact || soloInitialArtifact;
+
+  const learnerArtifact = useMemo(
+    () =>
+      (PREVIEW_TRADEOFF.allowedArtifacts as TradeoffArtifactKind[])
+        .filter((kind) => drafts[kind].trim())
+        .map((kind) => `## ${kind}\n${drafts[kind].trim()}`)
+        .join('\n\n'),
+    [drafts]
+  );
+
+  useEffect(
+    () => () => {
+      soloAbortRef.current?.abort();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!matchId || !user || !liveState) return;
@@ -240,11 +285,18 @@ export default function TradeoffWar() {
         liveState &&
         ['initial_solution', 'revision'].includes(liveState.phase)
       ) {
-        void saveTradeoffArtifact(matchId, {
-          artifactType: artifact.toLowerCase(),
-          content: drafts[artifact],
-          idempotencyKey: warOperationId(`artifact-${artifact.toLowerCase()}`),
-        })
+        const artifacts = (Object.entries(drafts) as Array<[TradeoffArtifactKind, string]>).filter(
+          ([, content]) => content.trim()
+        );
+        void Promise.all(
+          artifacts.map(([kind, content]) =>
+            saveTradeoffArtifact(matchId, {
+              artifactType: kind.toLowerCase(),
+              content,
+              idempotencyKey: warOperationId(`artifact-${kind.toLowerCase()}`),
+            })
+          )
+        )
           .then(() => setSavedAt(new Date()))
           .catch((reason) =>
             setRoomError(reason instanceof Error ? reason.message : 'Artifact save failed')
@@ -255,7 +307,7 @@ export default function TradeoffWar() {
       }
     }, 500);
     return () => window.clearTimeout(timer);
-  }, [artifact, drafts, entered, liveState, matchId, user]);
+  }, [drafts, entered, liveState, matchId, user]);
 
   useEffect(() => {
     if (!entered || !matchId || !user) return;
@@ -278,14 +330,135 @@ export default function TradeoffWar() {
     };
   }, [entered, matchId, user]);
 
-  const wordCount = useMemo(() => draft.trim().split(/\s+/).filter(Boolean).length, [draft]);
-
-  function nextPhase() {
+  async function nextPhase() {
     if (liveState) return;
+    if (isSolo && activePhase === 'initial_solution') {
+      setSoloBusy(true);
+      setSoloError('');
+      const controller = new AbortController();
+      soloAbortRef.current?.abort();
+      soloAbortRef.current = controller;
+      try {
+        const revised = await reviseSoloOpponentArtifact(
+          soloConfig,
+          PREVIEW_TRADEOFF,
+          soloInitialArtifact,
+          controller.signal
+        );
+        setSoloRevisedArtifact(revised);
+      } catch (reason) {
+        if (reason instanceof DOMException && reason.name === 'AbortError') return;
+        setSoloError(reason instanceof Error ? reason.message : 'AI opponent revision failed.');
+        trackEvent('software_wars', {
+          action: 'provider_failure',
+          mode: 'tradeoff',
+          solo: true,
+          stage: 'twist_revision',
+        });
+        return;
+      } finally {
+        setSoloBusy(false);
+      }
+    }
     const next = PHASES[Math.min(PHASES.length - 1, phaseIndex + 1)];
     setPhase(next.id);
     setSecondsLeft(next.seconds);
-    trackEvent('software_wars', { action: 'phase_advance', mode: 'tradeoff', phase: next.id });
+    trackEvent('software_wars', {
+      action: 'phase_advance',
+      mode: 'tradeoff',
+      phase: next.id,
+      solo: isSolo,
+    });
+  }
+
+  async function startSoloSession() {
+    if (soloBusy) return;
+    setSoloBusy(true);
+    setSoloError('');
+    setRoomError('');
+    const controller = new AbortController();
+    soloAbortRef.current?.abort();
+    soloAbortRef.current = controller;
+    try {
+      const opponentArtifact = await createSoloOpponentArtifact(
+        soloConfig,
+        PREVIEW_TRADEOFF,
+        controller.signal
+      );
+      setSoloInitialArtifact(opponentArtifact);
+      setSoloRevisedArtifact('');
+      setSoloDebateMessages([]);
+      setSoloFeedback('');
+      setSoloDebateInput('');
+      setVote(undefined);
+      setPhase('initial_solution');
+      setSecondsLeft(PHASES[0].seconds);
+      setSessionMode('solo');
+      setConnection('connected');
+      setEntered(true);
+      trackEvent('software_wars', {
+        action: 'match_start',
+        mode: 'tradeoff',
+        solo: true,
+        ranked: false,
+      });
+    } catch (reason) {
+      if (reason instanceof DOMException && reason.name === 'AbortError') return;
+      setSoloError(reason instanceof Error ? reason.message : 'Could not prepare the AI opponent.');
+      trackEvent('software_wars', {
+        action: 'provider_failure',
+        mode: 'tradeoff',
+        solo: true,
+        stage: 'opponent_setup',
+      });
+    } finally {
+      setSoloBusy(false);
+    }
+  }
+
+  async function sendSoloDebateMessage() {
+    const message = soloDebateInput.trim();
+    if (!isSolo || !message || soloBusy) return;
+    setSoloBusy(true);
+    setSoloError('');
+    const controller = new AbortController();
+    soloAbortRef.current?.abort();
+    soloAbortRef.current = controller;
+    try {
+      const reply = await continueSoloDebate(
+        soloConfig,
+        PREVIEW_TRADEOFF,
+        learnerArtifact,
+        soloOpponentArtifact,
+        soloDebateMessages,
+        message,
+        controller.signal
+      );
+      setSoloDebateMessages((existing) => [
+        ...existing,
+        { role: 'user', content: message },
+        { role: 'assistant', content: reply },
+      ]);
+      setSoloDebateInput('');
+    } catch (reason) {
+      if (reason instanceof DOMException && reason.name === 'AbortError') return;
+      setSoloError(reason instanceof Error ? reason.message : 'The AI opponent did not respond.');
+    } finally {
+      setSoloBusy(false);
+    }
+  }
+
+  function continueSoloLocally() {
+    soloAbortRef.current?.abort();
+    setSoloBusy(false);
+    setSoloError('');
+    setSessionMode('practice');
+    setConnection('preview');
+    trackEvent('software_wars', {
+      action: 'solo_fallback',
+      mode: 'tradeoff',
+      phase: activePhase,
+    });
   }
 
   async function toggleConsent() {
@@ -312,8 +485,41 @@ export default function TradeoffWar() {
 
   function submitVote() {
     if (!vote) return;
+    if (isSolo) {
+      setSoloBusy(true);
+      setSoloError('');
+      const controller = new AbortController();
+      soloAbortRef.current?.abort();
+      soloAbortRef.current = controller;
+      void evaluateSoloTradeoff(
+        soloConfig,
+        PREVIEW_TRADEOFF,
+        learnerArtifact,
+        soloOpponentArtifact,
+        soloDebateMessages,
+        vote,
+        controller.signal
+      )
+        .then((feedback) => {
+          setSoloFeedback(feedback);
+          setPhase('complete');
+          setSecondsLeft(0);
+          trackEvent('software_wars', {
+            action: 'match_complete',
+            mode: 'tradeoff',
+            solo: true,
+            ranked: false,
+          });
+        })
+        .catch((reason) => {
+          if (reason instanceof DOMException && reason.name === 'AbortError') return;
+          setSoloError(reason instanceof Error ? reason.message : 'AI review failed.');
+        })
+        .finally(() => setSoloBusy(false));
+      return;
+    }
     if (!liveState) {
-      nextPhase();
+      void nextPhase();
       return;
     }
     socketRef.current?.send(
@@ -397,12 +603,12 @@ export default function TradeoffWar() {
             Engineering judgment, under pressure.
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-white/55">
-            Two engineers solve the same open-ended brief. Halfway through, the system changes.
-            Build, defend, and decide.
+            Solve an open-ended brief alone with AI or against another engineer. Halfway through,
+            the system changes. Build, defend, and decide.
           </p>
         </header>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-[1.3fr_1fr]">
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
           <Card className="p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <Badge>Practice workbench</Badge>
@@ -415,6 +621,7 @@ export default function TradeoffWar() {
             </p>
             <Button
               onClick={() => {
+                setSessionMode('practice');
                 setEntered(true);
                 trackEvent('software_wars', {
                   action: 'match_start',
@@ -427,6 +634,13 @@ export default function TradeoffWar() {
               Open workbench <ArrowRight className="h-4 w-4" />
             </Button>
           </Card>
+          <SoloTradeoffSetup
+            config={soloConfig}
+            onChange={setSoloConfig}
+            onStart={() => void startSoloSession()}
+            busy={soloBusy}
+            error={soloError}
+          />
           <Card className="p-6">
             <Users className="h-5 w-5 text-white/50" />
             <h2 className="mt-4 font-medium text-white">Schedule a real battle</h2>
@@ -434,6 +648,12 @@ export default function TradeoffWar() {
               Invite links, check-in, synchronized twists, video, private voting, and AI
               adjudication are server-backed and require two signed-in accounts.
             </p>
+            {!user && (
+              <p className="mt-4 text-xs leading-5 text-white/45">
+                Play solo or open the practice workbench without signup. Sign in only when you want
+                to invite another person.
+              </p>
+            )}
             <div className="mt-6 flex items-center gap-2 text-xs text-white/40">
               <ShieldCheck className="h-4 w-4" /> Private preview until operator launch
             </div>
@@ -446,6 +666,14 @@ export default function TradeoffWar() {
               >
                 {creatingInvite ? 'Creating invite…' : 'Create battle invite'}
               </Button>
+            )}
+            {!user && (
+              <Link
+                to="/login#sign-in"
+                className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-md border border-white/10 px-4 text-sm text-white/60 hover:border-white/20 hover:text-white"
+              >
+                Sign in to invite someone
+              </Link>
             )}
             {inviteUrl && (
               <p className="mt-3 break-all font-mono text-[10px] leading-5 text-sky-200/70">
@@ -479,8 +707,12 @@ export default function TradeoffWar() {
               {room?.problem.title ?? PREVIEW_TRADEOFF.title}
             </p>
             <p className="font-mono text-[10px] text-white/35">
-              {matchId ? `${room?.ranked ? 'Ranked' : 'Unranked'} room` : 'Practice room'} ·
-              artifacts private until reveal
+              {matchId
+                ? `${room?.ranked ? 'Ranked' : 'Unranked'} room`
+                : isSolo
+                  ? 'Solo AI room · unranked'
+                  : 'Practice room'}{' '}
+              · artifacts private until reveal
             </p>
           </div>
         </div>
@@ -510,52 +742,72 @@ export default function TradeoffWar() {
 
       <div className="mt-4 grid gap-4 xl:grid-cols-[17rem_minmax(0,1fr)_20rem]">
         <aside className="order-3 space-y-4 xl:order-1">
-          <Card className="p-3">
-            <div className="mb-3 flex items-center justify-between gap-2 px-1">
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
-                Room
-              </span>
-              <span
-                className={`inline-flex items-center gap-1 font-mono text-[10px] ${connection === 'offline' ? 'text-amber-200/70' : 'text-emerald-300/70'}`}
-              >
-                <Radio className="h-3 w-3" /> {connection}
-              </span>
-            </div>
-            <Suspense
-              fallback={<div className="min-h-40 animate-pulse rounded-lg bg-white/[0.03]" />}
-            >
-              {media ? <TradeoffMedia {...media} /> : <MediaUnavailable reason={mediaReason} />}
-            </Suspense>
-          </Card>
-
-          <Card className="p-4">
-            <div className="flex items-start gap-3">
-              <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
-              <div>
-                <p className="text-xs font-medium text-white">Transcript consent</p>
-                <p className="mt-1 text-[11px] leading-5 text-white/40">
-                  Video recording is off. A transcript is copied to project storage only if both
-                  players opt in.
-                </p>
+          {isSolo ? (
+            <Card className="p-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="flex items-center gap-2 text-xs font-medium text-white">
+                  <Bot className="h-4 w-4 text-sky-300" /> AI opponent
+                </span>
+                <span className="font-mono text-[10px] text-emerald-300/70">ready</span>
               </div>
-            </div>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={consent}
-              onClick={() => void toggleConsent()}
-              className={`mt-4 flex min-h-11 w-full items-center justify-between rounded-md border px-3 text-xs ${consent ? 'border-sky-200/30 text-sky-200' : 'border-white/10 text-white/50'}`}
-            >
-              {consent ? 'Consent given' : 'Do not transcribe'}
-              <span
-                className={`h-4 w-7 rounded-full p-0.5 ${consent ? 'bg-sky-300/70' : 'bg-white/15'}`}
-              >
+              <p className="mt-3 text-[11px] leading-5 text-white/45">
+                Its initial design was generated before entry. Your key and this AI session live
+                only in this tab.
+              </p>
+              <p className="mt-3 truncate font-mono text-[10px] text-white/35">
+                {soloConfig.model}
+              </p>
+            </Card>
+          ) : (
+            <Card className="p-3">
+              <div className="mb-3 flex items-center justify-between gap-2 px-1">
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
+                  Room
+                </span>
                 <span
-                  className={`block h-3 w-3 rounded-full bg-black transition-transform ${consent ? 'translate-x-3' : ''}`}
-                />
-              </span>
-            </button>
-          </Card>
+                  className={`inline-flex items-center gap-1 font-mono text-[10px] ${connection === 'offline' ? 'text-amber-200/70' : 'text-emerald-300/70'}`}
+                >
+                  <Radio className="h-3 w-3" /> {connection}
+                </span>
+              </div>
+              <Suspense
+                fallback={<div className="min-h-40 animate-pulse rounded-lg bg-white/[0.03]" />}
+              >
+                {media ? <TradeoffMedia {...media} /> : <MediaUnavailable reason={mediaReason} />}
+              </Suspense>
+            </Card>
+          )}
+
+          {!isSolo && (
+            <Card className="p-4">
+              <div className="flex items-start gap-3">
+                <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
+                <div>
+                  <p className="text-xs font-medium text-white">Transcript consent</p>
+                  <p className="mt-1 text-[11px] leading-5 text-white/40">
+                    Video recording is off. A transcript is copied to project storage only if both
+                    players opt in.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={consent}
+                onClick={() => void toggleConsent()}
+                className={`mt-4 flex min-h-11 w-full items-center justify-between rounded-md border px-3 text-xs ${consent ? 'border-sky-200/30 text-sky-200' : 'border-white/10 text-white/50'}`}
+              >
+                {consent ? 'Consent given' : 'Do not transcribe'}
+                <span
+                  className={`h-4 w-7 rounded-full p-0.5 ${consent ? 'bg-sky-300/70' : 'bg-white/15'}`}
+                >
+                  <span
+                    className={`block h-3 w-3 rounded-full bg-black transition-transform ${consent ? 'translate-x-3' : ''}`}
+                  />
+                </span>
+              </button>
+            </Card>
+          )}
         </aside>
 
         <main className="order-1 min-w-0 xl:order-2">
@@ -608,13 +860,18 @@ export default function TradeoffWar() {
                       ? 'Operator review required.'
                       : liveState
                         ? 'Finalizing result…'
-                        : 'Practice complete'}
+                        : isSolo
+                          ? 'Solo review complete.'
+                          : 'Practice complete'}
                 </h1>
-                <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-6 text-white/50">
+                <p className="mx-auto mt-3 max-w-xl whitespace-pre-wrap text-center text-sm leading-6 text-white/50">
                   {result?.evaluation?.reasoning ??
                     (liveState
                       ? 'Private votes and frozen evidence are being reconciled. This page updates automatically.'
-                      : `Your private vote was ${vote ?? 'not submitted'}. A real disagreement would enter rubric-based AI adjudication.`)}
+                      : isSolo
+                        ? soloFeedback ||
+                          'Comparing the frozen designs against the evaluation lens.'
+                        : `Your private vote was ${vote ?? 'not submitted'}. A real disagreement would enter rubric-based AI adjudication.`)}
                 </p>
                 {result?.rating && (
                   <div className="mx-auto mt-6 w-fit rounded-lg border border-white/10 px-5 py-3 text-center">
@@ -670,12 +927,16 @@ export default function TradeoffWar() {
                     <Button
                       tone="ghost"
                       onClick={() => {
-                        setPhase('initial_solution');
-                        setSecondsLeft(PHASES[0].seconds);
-                        setVote(undefined);
+                        if (isSolo) void startSoloSession();
+                        else {
+                          setPhase('initial_solution');
+                          setSecondsLeft(PHASES[0].seconds);
+                          setVote(undefined);
+                        }
                       }}
+                      disabled={soloBusy}
                     >
-                      Rematch
+                      {soloBusy ? 'Preparing opponent…' : 'Rematch'}
                     </Button>
                   )}
                   <Link
@@ -700,8 +961,9 @@ export default function TradeoffWar() {
                   <Scale className="mx-auto h-6 w-6 text-white/60" />
                   <h1 className="mt-4 text-2xl font-semibold text-white">Decide privately</h1>
                   <p className="mt-2 text-sm text-white/50">
-                    The other player cannot see your vote. Compatible votes finalize immediately;
-                    disagreement goes to adjudication.
+                    {isSolo
+                      ? 'Make your own call before the AI reviewer compares the frozen designs.'
+                      : 'The other player cannot see your vote. Compatible votes finalize immediately; disagreement goes to adjudication.'}
                   </p>
                   <div className="mt-7 grid grid-cols-3 gap-3">
                     {(['win', 'draw', 'loss'] as const).map((choice) => (
@@ -715,123 +977,114 @@ export default function TradeoffWar() {
                       </button>
                     ))}
                   </div>
-                  <Button onClick={submitVote} disabled={!vote} className="mt-7 min-h-11 px-5">
-                    Submit private vote <ArrowRight className="h-4 w-4" />
+                  <Button
+                    onClick={submitVote}
+                    disabled={!vote || soloBusy}
+                    className="mt-7 min-h-11 px-5"
+                  >
+                    {soloBusy ? 'Reviewing both designs…' : 'Submit private vote'}{' '}
+                    <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
             ) : (
               <div>
-                {activePhase === 'debate' && revealedArtifacts.length > 0 && (
-                  <section
-                    className="border-b border-white/[0.08] p-4"
-                    aria-label="Revealed artifacts"
-                  >
-                    <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/35">
-                      Frozen evidence revealed
-                    </p>
-                    <div className="mt-3 grid gap-3 md:grid-cols-2">
-                      {revealedArtifacts.map((item) => (
-                        <article
-                          key={item.id}
-                          className="rounded-lg border border-white/10 bg-black/20 p-4"
-                        >
-                          <div className="flex justify-between gap-3 font-mono text-[10px] uppercase text-white/35">
-                            <span>
-                              {item.side === room?.participant.side
-                                ? 'Your'
-                                : `${room?.opponent.displayName}'s`}{' '}
-                              {item.artifactType}
-                            </span>
-                            <span>v{item.version}</span>
-                          </div>
-                          <pre className="mt-3 max-h-44 overflow-auto whitespace-pre-wrap font-mono text-xs leading-5 text-white/60">
-                            {item.content || 'Stored artifact unavailable'}
-                          </pre>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                )}
-                <div className="flex flex-wrap gap-1 border-b border-white/[0.08] px-3 py-2">
-                  {PREVIEW_TRADEOFF.allowedArtifacts.map((kind) => (
-                    <FilterPill
-                      key={kind}
-                      active={artifact === kind}
-                      onClick={() => setArtifact(kind)}
+                {activePhase === 'debate' &&
+                  (revealedArtifacts.length > 0 || (isSolo && soloOpponentArtifact)) && (
+                    <section
+                      className="border-b border-white/[0.08] p-4"
+                      aria-label="Revealed artifacts"
                     >
-                      {kind}
-                    </FilterPill>
-                  ))}
-                </div>
-                <div className="relative">
-                  <textarea
-                    aria-label={`${artifact} artifact`}
-                    value={draft}
-                    disabled={frozen}
-                    onChange={(event) =>
-                      setDrafts((existing) => ({ ...existing, [artifact]: event.target.value }))
-                    }
-                    placeholder={
-                      artifact === 'Code'
-                        ? '// Sketch critical interfaces or data flow…'
-                        : artifact === 'Schema'
-                          ? 'events(id, tenant_id, endpoint_id, sequence, status, next_attempt_at)…'
-                          : artifact === 'Diagram'
-                            ? 'Diagram as Mermaid or nodes and directed edges: Client --> Gateway --> Queue…'
-                            : artifact === 'Pseudocode'
-                              ? 'deliver(event):\n  lease = acquire(event.id)\n  retry with bounded backoff…'
-                              : 'State the requirements, invariants, design, failure modes, and tradeoffs…'
-                    }
-                    className="min-h-[29rem] w-full resize-y bg-black/20 p-5 font-mono text-sm leading-6 text-white/75 outline-none placeholder:text-white/20 disabled:cursor-not-allowed disabled:text-white/45 md:p-6"
-                  />
-                  <div className="flex min-h-12 flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] px-4 py-2 font-mono text-[10px] text-white/35">
-                    <span>
-                      {wordCount} words ·{' '}
-                      {frozen
-                        ? 'artifact frozen'
-                        : savedAt
-                          ? `saved ${savedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
-                          : 'saving…'}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      {frozen ? <LockKeyhole className="h-3 w-3" /> : <Save className="h-3 w-3" />}{' '}
-                      project-owned storage
-                    </span>
-                  </div>
-                </div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/35">
+                        Frozen evidence revealed
+                      </p>
+                      <div className="mt-3 grid gap-3 md:grid-cols-2">
+                        {isSolo && soloOpponentArtifact && (
+                          <article className="rounded-lg border border-sky-300/20 bg-sky-300/[0.03] p-4">
+                            <div className="flex justify-between gap-3 font-mono text-[10px] uppercase text-white/35">
+                              <span>AI opponent artifact</span>
+                              <span>Frozen</span>
+                            </div>
+                            <pre className="mt-3 max-h-72 overflow-auto whitespace-pre-wrap font-mono text-xs leading-5 text-white/60">
+                              {soloOpponentArtifact}
+                            </pre>
+                          </article>
+                        )}
+                        {revealedArtifacts.map((item) => (
+                          <article
+                            key={item.id}
+                            className="rounded-lg border border-white/10 bg-black/20 p-4"
+                          >
+                            <div className="flex justify-between gap-3 font-mono text-[10px] uppercase text-white/35">
+                              <span>
+                                {item.side === room?.participant.side
+                                  ? 'Your'
+                                  : `${room?.opponent.displayName}'s`}{' '}
+                                {item.artifactType}
+                              </span>
+                              <span>v{item.version}</span>
+                            </div>
+                            <pre className="mt-3 max-h-44 overflow-auto whitespace-pre-wrap font-mono text-xs leading-5 text-white/60">
+                              {item.content || 'Stored artifact unavailable'}
+                            </pre>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+                <TradeoffArtifactWorkspace
+                  drafts={drafts}
+                  onChange={(kind, value) =>
+                    setDrafts((existing) => ({ ...existing, [kind]: value }))
+                  }
+                  frozen={frozen}
+                  diagramId={`tradeoff-${matchId ?? 'local'}`}
+                  savedLabel={
+                    savedAt
+                      ? `saved ${savedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · ${matchId ? 'project storage' : 'browser draft'}`
+                      : 'saving…'
+                  }
+                />
               </div>
             )}
           </Card>
         </main>
 
         <aside className="order-2 space-y-4 xl:order-3">
-          <Card className="p-4">
-            <div className="flex items-center gap-2">
-              <Clock3 className="h-4 w-4 text-white/40" />
-              <h2 className="text-xs font-medium text-white">Phase objective</h2>
-            </div>
-            <p className="mt-3 text-xs leading-5 text-white/45">
-              {activePhase === 'initial_solution' &&
-                'Establish requirements, invariants, data model, and the end-to-end delivery path.'}
-              {activePhase === 'revision' &&
-                'Absorb the twist. Amend the design and make the new tradeoffs explicit.'}
-              {activePhase === 'debate' &&
-                'Artifacts are frozen. Defend choices, probe failure modes, and concede real weaknesses.'}
-              {activePhase === 'voting' &&
-                'Vote on the stronger engineering argument, not presentation polish.'}
-            </p>
-            {!liveState && activePhase !== 'complete' && activePhase !== 'voting' && (
-              <Button onClick={nextPhase} className="mt-5 min-h-11 w-full">
-                {activePhase === 'initial_solution'
-                  ? 'Reveal twist'
-                  : activePhase === 'revision'
-                    ? 'Freeze & debate'
-                    : 'Move to voting'}{' '}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            )}
-          </Card>
+          {activePhase !== 'complete' && (
+            <Card className="p-4">
+              <div className="flex items-center gap-2">
+                <Clock3 className="h-4 w-4 text-white/40" />
+                <h2 className="text-xs font-medium text-white">Phase objective</h2>
+              </div>
+              <p className="mt-3 text-xs leading-5 text-white/45">
+                {activePhase === 'initial_solution' &&
+                  'Establish requirements, invariants, data model, and the end-to-end delivery path.'}
+                {activePhase === 'revision' &&
+                  'Absorb the twist. Amend the design and make the new tradeoffs explicit.'}
+                {activePhase === 'debate' &&
+                  'Artifacts are frozen. Defend choices, probe failure modes, and concede real weaknesses.'}
+                {activePhase === 'voting' &&
+                  'Vote on the stronger engineering argument, not presentation polish.'}
+              </p>
+              {!liveState && activePhase !== 'voting' && (
+                <Button
+                  onClick={() => void nextPhase()}
+                  disabled={soloBusy}
+                  className="mt-5 min-h-11 w-full"
+                >
+                  {soloBusy
+                    ? 'AI opponent is revising…'
+                    : activePhase === 'initial_solution'
+                      ? 'Reveal twist'
+                      : activePhase === 'revision'
+                        ? 'Freeze & debate'
+                        : 'Move to voting'}{' '}
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              )}
+            </Card>
+          )}
 
           <Card className="p-4">
             <div className="flex items-center gap-2">
@@ -846,9 +1099,76 @@ export default function TradeoffWar() {
             </ul>
           </Card>
 
+          {isSolo && activePhase === 'debate' && (
+            <Card className="p-4">
+              <div className="flex items-center gap-2">
+                <MessageSquareText className="h-4 w-4 text-sky-300/70" />
+                <h2 className="text-xs font-medium text-white">Debate the opponent</h2>
+              </div>
+              <div className="mt-3 max-h-64 space-y-3 overflow-y-auto" aria-live="polite">
+                {soloDebateMessages.length === 0 ? (
+                  <p className="text-[11px] leading-5 text-white/40">
+                    Challenge one assumption in the revealed AI design. It must defend or concede
+                    it.
+                  </p>
+                ) : (
+                  soloDebateMessages.map((message, index) => (
+                    <div
+                      key={`${message.role}-${index}`}
+                      className={`rounded-md px-3 py-2 text-[11px] leading-5 ${message.role === 'user' ? 'bg-white/[0.05] text-white/60' : 'border border-sky-300/15 text-white/55'}`}
+                    >
+                      {message.content}
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="mt-3 flex gap-2">
+                <label className="min-w-0 flex-1">
+                  <span className="sr-only">Debate message</span>
+                  <textarea
+                    value={soloDebateInput}
+                    onChange={(event) => setSoloDebateInput(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+                        event.preventDefault();
+                        void sendSoloDebateMessage();
+                      }
+                    }}
+                    placeholder="Challenge an assumption…"
+                    maxLength={4_000}
+                    className="min-h-20 w-full resize-y rounded-md border border-white/10 bg-black p-3 text-xs leading-5 text-white outline-none placeholder:text-white/25 focus:border-sky-300/40"
+                  />
+                </label>
+                <Button
+                  onClick={() => void sendSoloDebateMessage()}
+                  disabled={soloBusy || !soloDebateInput.trim()}
+                  className="self-end"
+                >
+                  <Send className="h-4 w-4" />
+                  <span className="sr-only">Send debate message</span>
+                </Button>
+              </div>
+            </Card>
+          )}
+
+          {soloError && entered && (
+            <div className="space-y-2 px-1">
+              <p role="alert" className="text-[11px] leading-5 text-amber-200/80">
+                {soloError}
+              </p>
+              <Button tone="ghost" onClick={continueSoloLocally} className="w-full">
+                Continue as local practice
+              </Button>
+            </div>
+          )}
+
           <div className="flex items-start gap-2 px-1 text-[11px] leading-5 text-white/30">
-            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" /> Server deadlines remain
-            authoritative after reconnect.
+            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" />{' '}
+            {matchId
+              ? 'Server deadlines remain authoritative after reconnect.'
+              : isSolo
+                ? 'This tab owns the timer and clears the AI session when reloaded.'
+                : 'Local practice stays private to this browser.'}
           </div>
           {roomError && (
             <p role="alert" className="px-1 text-[11px] leading-5 text-amber-200/70">

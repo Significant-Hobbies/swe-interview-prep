@@ -1,9 +1,8 @@
+# tradeoff-wars Specification
+
 ## Purpose
-
 Defines scheduled live engineering battles where players create inspectable solutions, respond to changing requirements, debate tradeoffs, and receive a fair result.
-
-## ADDED Requirements
-
+## Requirements
 ### Requirement: Scheduled 30-minute battle
 The system SHALL let authenticated users schedule or accept a 30-minute Tradeoff battle using the same versioned prompt, rules, initial requirements, and hidden twist. Documentation and external AI tools SHALL be explicitly allowed.
 
@@ -18,6 +17,36 @@ The system SHALL let authenticated users schedule or accept a 30-minute Tradeoff
 #### Scenario: Opponent does not check in
 - **WHEN** one participant remains absent through the no-show deadline
 - **THEN** the present participant may claim a forfeit or cancel without rating change according to the displayed match policy
+
+### Requirement: Solo Tradeoff with a user-provided AI opponent
+The system SHALL offer an unranked 30-minute Solo Tradeoff session without requiring another account. The learner SHALL provide an OpenAI-compatible endpoint, API key, and model for the current tab. The browser SHALL ask the provider to produce an independent initial artifact before seeing the learner's work, revise that artifact for the same hidden twist, participate in the reveal/debate phase, and return rubric-oriented feedback after the learner's self-assessment.
+
+#### Scenario: Learner starts a solo session
+- **WHEN** a learner provides a complete provider configuration and selects Start solo session
+- **THEN** the browser creates an independent AI opponent artifact, opens the same 30-minute phase flow, labels the session unranked, and never creates Tradeoff Elo or public match history
+
+#### Scenario: Solo twist is revealed
+- **WHEN** the learner advances from the initial-solution phase
+- **THEN** the same twist is applied to both sides and the AI revises only its own previously generated artifact without receiving the learner's private draft
+
+#### Scenario: Solo debate begins
+- **WHEN** the revision phase freezes
+- **THEN** the learner can inspect the AI's frozen artifact and exchange bounded debate messages that reference both revealed artifacts and the evaluation rubric
+
+#### Scenario: Provider call fails
+- **WHEN** the browser cannot reach the selected provider or the provider rejects the credential, model, or request
+- **THEN** the session preserves the learner's draft, explains the provider failure without exposing the credential, and permits retry or continuation as a local practice session
+
+### Requirement: Ephemeral Solo Tradeoff credentials
+Solo Tradeoff provider credentials MUST remain in component memory and MUST NOT be written to localStorage, sessionStorage, IndexedDB, D1, R2, analytics, logs, URLs, challenge payloads, or Learning OS backend requests. Provider calls SHALL travel directly from the learner's browser to the endpoint the learner explicitly selected.
+
+#### Scenario: Solo session refreshes or closes
+- **WHEN** the page reloads, closes, or the component unmounts
+- **THEN** the provider credential and AI transcript disappear while the learner's non-secret local draft may remain under the existing preview-draft policy
+
+#### Scenario: Solo telemetry is emitted
+- **WHEN** the product records solo start, phase, completion, or provider-failure telemetry
+- **THEN** telemetry contains only coarse mode/state metadata and excludes endpoint, model, credential, prompts, artifacts, and AI responses
 
 ### Requirement: Authoritative phase progression
 The system MUST coordinate Tradeoff phases from server-owned deadlines: check-in, initial solution, twist, revision, reveal, eight-minute debate, vote, adjudication, and complete. Clients SHALL recover the current phase and deadline after reconnecting.
@@ -37,9 +66,19 @@ The system MUST coordinate Tradeoff phases from server-owned deadlines: check-in
 ### Requirement: Private multi-format artifacts
 During solving and revision, each player's text, code, schema, pseudocode, and diagram artifacts SHALL remain private from the opponent. The system SHALL freeze immutable artifact snapshots at phase boundaries and reveal both final snapshots only when the reveal phase begins.
 
+The Tradeoff workbench SHALL reuse the Learning OS Playground's Monaco code editor and Excalidraw diagram editor. At wide widths, code and diagram SHALL be usable together alongside design notes; compact widths SHALL provide an explicit, touch-safe panel switcher without removing any artifact type. The competitive shell, phase controls, autosave adapter, and freeze rules SHALL remain Tradeoff-owned.
+
 #### Scenario: Player saves work during solving
 - **WHEN** a participant saves an artifact before the deadline
 - **THEN** the system persists an owner-visible draft and records the latest accepted version
+
+#### Scenario: Learner builds a combined solution
+- **WHEN** a learner writes design notes, edits code or pseudocode in Monaco, and draws architecture in Excalidraw
+- **THEN** all three artifacts remain part of one Tradeoff solution and are visible together on a wide workspace
+
+#### Scenario: Combined workspace freezes
+- **WHEN** the Tradeoff enters reveal, debate, voting, or complete
+- **THEN** notes and code become read-only, Excalidraw enters view mode, and the frozen composite artifact is used for reveal and evaluation
 
 #### Scenario: Reveal begins
 - **WHEN** both final artifacts are frozen or the revision deadline expires
@@ -104,3 +143,4 @@ The completed result SHALL show outcome, rating movement when ranked, frozen art
 #### Scenario: Public result is shared
 - **WHEN** a visitor opens a public Tradeoff result
 - **THEN** the system shows the outcome and opted-in artifact excerpts while withholding transcripts, private drafts, provider identifiers, and non-consented content
+

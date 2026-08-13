@@ -81,7 +81,7 @@ export function WarChallenge() {
             <p className="text-xs text-white/40">
               {user
                 ? 'Challenge matches use the original immutable question versions and are unranked.'
-                : 'Sign in from the header before accepting this challenge.'}
+                : 'Human challenge identity is durable. You can still play the same mode unranked without signup.'}
             </p>
             {user ? (
               <button
@@ -97,7 +97,7 @@ export function WarChallenge() {
                 to={challenge.mode === 'blitz' ? '/wars/blitz' : '/wars/tradeoff'}
                 className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-medium text-black"
               >
-                Practice meanwhile <ArrowRight className="h-4 w-4" />
+                Play unranked <ArrowRight className="h-4 w-4" />
               </Link>
             )}
           </div>

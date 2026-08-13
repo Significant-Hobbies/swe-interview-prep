@@ -13,12 +13,12 @@
   "curriculum": {
     "counts": {
       "tracks": 19,
-      "concepts": 252,
-      "roadmaps": 25,
-      "drills": 298,
-      "reviewQuestions": 271,
-      "artifacts": 41,
-      "systemDesignCases": 20,
+      "concepts": 259,
+      "roadmaps": 26,
+      "drills": 305,
+      "reviewQuestions": 278,
+      "artifacts": 43,
+      "systemDesignCases": 33,
       "systemDesignGuides": 7,
       "coverageCategories": 11,
       "coverageTopics": 98
@@ -47,14 +47,14 @@
       "url": "https://learn.significanthobbies.com/curriculum/",
       "md": "https://learn.significanthobbies.com/curriculum/index.md",
       "kind": "collection",
-      "description": "19 tracks, 252 concepts, and 25 roadmaps as static public pages"
+      "description": "19 tracks, 259 concepts, and 26 roadmaps as static public pages"
     },
     {
       "id": "system-design",
       "url": "https://learn.significanthobbies.com/system-design/",
       "md": "https://learn.significanthobbies.com/system-design/index.md",
       "kind": "collection",
-      "description": "20 staged interview cases and 7 approved worked guide"
+      "description": "33 staged interview cases and 7 approved worked guide"
     }
   ],
   "dataResources": [

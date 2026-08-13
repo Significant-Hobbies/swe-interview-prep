@@ -46,6 +46,14 @@ client graph. Active reads never contain answer keys. Public results expose
 aggregate scores and display-safe identities without competitive questions,
 private drafts, transcripts, or provider identifiers.
 
+Solo Tradeoff is intentionally outside those server planes. The SPA sends a
+learner-supplied key directly to the explicitly selected OpenAI-compatible
+HTTPS endpoint. Provider configuration, AI artifacts, debate messages, and
+feedback live only in component memory; they do not enter Learning OS API
+requests, URLs, analytics, D1, R2, or browser storage. The existing non-secret
+learner draft retains its local preview autosave. Solo sessions create no
+rating, match history, FSRS evidence, media room, or challenge state.
+
 ## Guest vs authenticated state
 
 | Data | Guest | Signed-in |

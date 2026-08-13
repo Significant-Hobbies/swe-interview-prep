@@ -152,6 +152,20 @@ Blitz focuses on one question and one irreversible next action. Tradeoff uses a 
 
 Pure modules own selection policy, scoring, Elo, phase transitions, vote compatibility, remediation mapping, and content validation. API handler tests use an in-memory database adapter pattern already present in the repo. UI tests mock Wars API/provider hooks. Playwright uses two browser contexts and fake media where supported; live RealtimeKit smoke remains an explicit operator check.
 
+### 11. Treat Solo Tradeoff as an ephemeral browser-to-provider session
+
+Solo Tradeoff reuses the local 30-minute phase UI but does not impersonate a ranked match. The learner explicitly supplies an OpenAI-compatible endpoint, API key, and model. A small client adapter calls that endpoint directly so the Learning OS backend never receives the credential. Configuration, opponent artifacts, debate messages, and feedback live only in React memory and are discarded on reload; the existing non-secret learner draft may continue using local preview storage.
+
+The AI produces its initial artifact before entry. On twist reveal it receives only the original prompt, twist, and its own artifact, preserving an independent comparison. Only after artifacts freeze may debate turns include the learner's revealed draft. Final feedback is rubric-oriented coaching plus a comparative outcome, never competitive Elo, FSRS mastery, public history, or an authoritative human-equivalent judgment.
+
+Custom endpoints are an explicit trust choice: the UI states that the key is sent directly to the selected provider. No provider URL, model, key, prompt, artifact, response, or transcript enters analytics. Browser CORS/provider failures degrade to the existing local workbench without losing the learner's draft.
+
+### 12. Make Wars guest-first and compose Tradeoff from Playground tools
+
+Authentication is not a play gate. Guests can always start the local unranked Blitz loop and the local or BYOK Solo Tradeoff loop. The authenticated server path remains the upgrade boundary for ranked Elo, durable history, human ghost/challenge identity, shareable server results, remediation writes, and cross-device recovery. Guest UI must describe that upgrade without replacing Play with Sign in.
+
+Tradeoff imports the same controlled Monaco and Excalidraw components used by Playground. A small Tradeoff workspace composes design notes, code/pseudocode, and diagram state; on desktop code and diagram share the canvas, while compact layouts switch one full-width tool at a time. Tradeoff owns the state adapter: guest drafts may use the existing preview key, live drafts save artifact types through the Wars API, and all editing surfaces become read-only at the competitive freeze boundary. The full Playground route, problem selector, code runner, Socratic companion, and Feynman gate are not nested into the battle shell because their navigation and learning semantics are different.
+
 ## Risks / Trade-offs
 
 - **RealtimeKit is beta and APIs may change** → pin compatible package versions, isolate provider logic, document upgrade checks, and keep the disabled adapter.

@@ -2,13 +2,14 @@
 
 Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
 
-This track contains 10 connected concepts. Mastery means explaining each
+This track contains 13 connected concepts. Mastery means explaining each
 mechanism, predicting its failure modes, and supporting decisions with code,
 measurements, or a reviewable design artifact.
 
 ## Roadmaps
 
 - [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html) — Build repository-aware tools that analyze, test, review, debug, and safely remediate code.
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html) — Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.
 
 ## Concepts
 
@@ -22,3 +23,6 @@ measurements, or a reviewable design artifact.
 - [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html) (core) — Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
 - [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html) (core) — Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.
 - [Automated Debugging & Remediation](https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation.html) (core) — Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.
+- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html) (core) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
+- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html) (core) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html) (core) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.

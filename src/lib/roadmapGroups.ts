@@ -24,6 +24,7 @@ export const FEATURED_ROADMAP_PICKS: {
   { id: 'inference-serving-12w', label: 'Inference' },
   { id: 'trace-a-tensor', label: 'Tensor lifecycle' },
   { id: 'agent-systems-12w', label: 'Agents' },
+  { id: 'harness-engineering', label: 'Harnesses' },
   { id: 'developer-tools-12w', label: 'Devtools' },
 ];
 
@@ -75,7 +76,7 @@ export const ROADMAP_GROUPS: RoadmapGroup[] = [
     title: 'Software building',
     subtitle:
       'Developer tools, repository intelligence, complete applications, and product delivery.',
-    roadmapIds: ['developer-tools-12w', 'application-engineering-12w'],
+    roadmapIds: ['developer-tools-12w', 'harness-engineering', 'application-engineering-12w'],
   },
   {
     id: 'human-interfaces',

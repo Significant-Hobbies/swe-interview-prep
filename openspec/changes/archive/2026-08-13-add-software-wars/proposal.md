@@ -9,6 +9,9 @@ The owner has explicitly requested both the short objective mode and the 30-minu
 - Add a contextual `/wars` product surface with two independent modes:
   - **Blitz Wars**: 60–120 second objective battles against precomputed AI opponents, one-use asynchronous human ghosts, or challenge-link opponents.
   - **Tradeoff Wars**: scheduled 30-minute engineering battles with live video/audio, private artifacts, a synchronized requirement twist, artifact reveal, debate, player voting, and AI adjudication when votes disagree.
+  - **Solo Tradeoff**: an unranked 30-minute session against an independently generated AI artifact, using an ephemeral user-provided OpenAI-compatible key sent directly from the browser to the selected provider.
+  - **Guest-first play**: visitors can start an unranked Blitz battle and a local or Solo Tradeoff session without signup; authentication is an upgrade for ratings, history, durable human challenges, and cross-device state.
+  - **Shared build workspace**: Tradeoff uses the existing Playground's Monaco and Excalidraw tools together, plus design notes, instead of a reduced artifact textarea switcher.
 - Add server-owned, immutable competitive state: match snapshots, question/problem versions, attempts, submissions, votes, results, separate Blitz and Tradeoff ratings, rating events, match history, challenges, and leaderboards.
 - Add a versioned, source-backed, server-only curriculum-wide question/problem bank. Every Blitz question has one canonical primary Learning OS concept plus optional supporting concepts, option-by-option explanations, a defensible answer, provenance, lifecycle status, and separately counted parameterized variants where valid.
 - Derive Blitz track, roadmap, and concept queues from the canonical 19-track, 25-roadmap, 252-concept Learning OS catalogue. Wars does not maintain a second topic catalogue; queues remain visible with honest readiness counts even when their ranked depth is incomplete.
@@ -19,6 +22,7 @@ The owner has explicitly requested both the short objective mode and the 30-minu
 - Add shareable result and challenge routes that reveal outcomes without exposing ranked question content.
 - Preserve the existing visual language and six-tab navigation. Today and Mock gain contextual entry points; Wars does not become a seventh primary tab in this change.
 - Preserve guest-first browsing, while ranked play, durable ratings, human challenges, and live Tradeoff participation require authentication.
+- Keep Solo Tradeoff available without authentication. Provider credentials and AI responses remain tab-memory-only and never enter Learning OS storage, telemetry, URLs, or backend requests.
 
 ## Capabilities
 
@@ -37,6 +41,7 @@ The owner has explicitly requested both the short objective mode and the 30-minu
 ## Impact
 
 - **Frontend:** new Wars routes, battle/result/history/leaderboard/challenge screens, shared battle components, Today/Mock entry points, and responsive media/workbench layouts.
+- **Solo AI:** browser-direct OpenAI-compatible generation for an independent initial artifact, twist revision, debate turns, and unranked feedback; no deployment-held inference key or new backend credential path is required.
 - **API:** new authenticated and public Wars endpoints rather than extending the learning action registry with unrelated competitive mutations.
 - **Data:** additive D1 migrations for competitive entities; R2 references for large artifact/transcript payloads; no request-time schema mutation.
 - **Realtime:** a separately deployable Worker/Durable Object for live match state plus Cloudflare RealtimeKit REST, SDK, webhook, and transcription integration.

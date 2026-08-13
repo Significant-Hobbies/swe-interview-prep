@@ -1,6 +1,6 @@
 # SWE Interview Prep
 
-> A software engineering learning OS with 19 tracks, 252 concepts, 25 roadmaps, active drills, build artifacts, and FSRS review.
+> A software engineering learning OS with 19 tracks, 259 concepts, 26 roadmaps, active drills, build artifacts, and FSRS review.
 
 ## Start here
 

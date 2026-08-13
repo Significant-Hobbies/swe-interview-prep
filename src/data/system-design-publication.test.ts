@@ -22,7 +22,7 @@ describe('system-design public publication', () => {
         (caseDefinition) => `/system-design/${caseDefinition.publication.guide?.slug}`
       ),
     ]);
-    expect(publicCases.counts).toEqual({ cases: 20, approvedGuides: 7 });
+    expect(publicCases.counts).toEqual({ cases: 33, approvedGuides: 7 });
 
     const generatedHtml = readdirSync(resolve(root, 'public/system-design')).filter((file) =>
       file.endsWith('.html')

@@ -342,6 +342,7 @@ export default function BlitzWar() {
   }
 
   const canStart = queue.type === 'ranked_mix' || (Boolean(user) && queue.playable);
+  const queueTitle = !user && queue.type === 'ranked_mix' ? 'Mixed battle' : queue.title;
 
   async function start() {
     setBusy(true);
@@ -781,7 +782,7 @@ export default function BlitzWar() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-8 md:px-6 md:py-12">
+    <div className="mx-auto min-w-0 w-full max-w-5xl px-4 py-8 md:px-6 md:py-12">
       <Link
         to="/wars"
         className="inline-flex min-h-11 items-center gap-2 font-mono text-xs text-white/50 hover:text-white"
@@ -792,42 +793,50 @@ export default function BlitzWar() {
         <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-sky-300">
           <Swords className="h-4 w-4" /> Blitz Wars
         </div>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white">
-          Ninety seconds. Seven decisions.
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          Ninety seconds. Every decision counts.
         </h1>
         <p className="mt-3 text-sm leading-6 text-white/55">
           Pick a lane. Accuracy decides the match; response time only breaks a tie.
         </p>
       </header>
 
-      <section className="mt-10">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Queue</h2>
-        <button
-          type="button"
-          onClick={() => setQueueSelection(RANKED_QUEUE)}
-          aria-pressed={queue.type === 'ranked_mix'}
-          className={`mt-4 flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${queue.type === 'ranked_mix' ? 'border-sky-300/40 bg-sky-300/[0.07]' : 'border-white/[0.08] bg-white/[0.02] hover:border-white/20'}`}
-        >
-          <span>
-            <span className="block text-sm font-medium text-white">Ranked Mix</span>
-            <span className="mt-1 block text-xs text-white/60">
-              Questions drawn from every approved concept
-            </span>
-          </span>
-          <Badge tone="sky">Global Elo</Badge>
-        </button>
+      <section className="mt-8 sm:mt-10" aria-labelledby="blitz-queue-heading">
+        <div className="flex min-h-11 items-center justify-between gap-3">
+          <h2
+            id="blitz-queue-heading"
+            className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40"
+          >
+            Queue
+          </h2>
+          {queue.type !== 'ranked_mix' && (
+            <button
+              type="button"
+              onClick={() => setQueueSelection(RANKED_QUEUE)}
+              className="inline-flex min-h-11 items-center rounded-md px-2 font-mono text-xs text-white/55 transition-colors hover:bg-white/[0.04] hover:text-white"
+            >
+              Use Ranked Mix
+            </button>
+          )}
+        </div>
 
-        <Card className="mt-6 grid gap-6 p-5 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
+        <Card className="grid min-w-0 gap-5 p-4 sm:p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+          <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-medium text-white">{queue.title}</h3>
+              <h3 className="font-medium text-white">{queueTitle}</h3>
               <Badge tone={queue.type === 'ranked_mix' ? 'sky' : 'default'}>
-                {queue.type === 'ranked_mix' ? 'Ranked when enabled' : 'Unranked'}
+                {queue.type === 'ranked_mix'
+                  ? user
+                    ? 'Ranked when enabled'
+                    : 'Unranked guest'
+                  : 'Unranked'}
               </Badge>
             </div>
             <p className="mt-2 max-w-xl text-sm text-white/50">
               {queue.type === 'ranked_mix'
-                ? 'Balanced questions across the full approved Software Wars bank.'
+                ? user
+                  ? 'Balanced questions across the full approved Software Wars bank.'
+                  : 'Five source-backed questions from the browser-safe guest set. No signup required.'
                 : queue.playable
                   ? `${queue.activeCount} approved questions. Practice this area without moving your global rating.`
                   : `${queue.candidateCount ?? 0} questions are currently mapped here, but this queue needs ${curriculum.minimumPlayableQuestions} approved questions before it opens.`}
@@ -847,22 +856,22 @@ export default function BlitzWar() {
           <Button
             onClick={() => void start()}
             disabled={busy || !canStart}
-            className="min-h-11 px-5"
+            className="min-h-11 w-full px-5 md:w-auto"
           >
             {busy
               ? 'Finding opponent…'
               : !queue.playable
                 ? 'Queue building'
                 : !user && queue.type !== 'ranked_mix'
-                  ? 'Sign in for this queue'
+                  ? 'Choose Mixed battle'
                   : user
                     ? 'Find opponent'
-                    : 'Start preview'}{' '}
+                    : 'Play unranked'}{' '}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </Card>
 
-        <div className="mt-7 flex flex-wrap items-end justify-between gap-4">
+        <div className="mt-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-medium text-white">Or practise a specific area</p>
             <p className="mt-1 text-xs text-white/60">
@@ -960,8 +969,8 @@ export default function BlitzWar() {
         )}
         {!user && (
           <p className="mt-4 text-xs text-white/60">
-            The browser preview uses five disclosed sample questions and never changes Elo or FSRS.
-            Sign in for server-owned matches.
+            You are playing unranked in this browser. Sign in only to keep Elo, history, challenge
+            links, and FSRS review across devices.
           </p>
         )}
       </section>

@@ -2,12 +2,12 @@
   "generated": true,
   "counts": {
     "tracks": 19,
-    "concepts": 252,
-    "roadmaps": 25,
-    "drills": 298,
-    "reviewQuestions": 271,
-    "artifacts": 41,
-    "systemDesignCases": 20,
+    "concepts": 259,
+    "roadmaps": 26,
+    "drills": 305,
+    "reviewQuestions": 278,
+    "artifacts": 43,
+    "systemDesignCases": 33,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
     "coverageTopics": 98
@@ -58,6 +58,7 @@
     "/curriculum/roadmaps/application-engineering-12w.html",
     "/curriculum/roadmaps/multimodal-spatial-12w.html",
     "/curriculum/roadmaps/trace-a-tensor.html",
+    "/curriculum/roadmaps/harness-engineering.html",
     "/curriculum/concepts/tokenization.html",
     "/curriculum/concepts/inverted-index.html",
     "/curriculum/concepts/tf-idf.html",
@@ -309,7 +310,14 @@
     "/curriculum/concepts/index-updates-tombstones.html",
     "/curriculum/concepts/cdn-edge-delivery.html",
     "/curriculum/concepts/data-representation.html",
-    "/curriculum/concepts/program-memory-model.html"
+    "/curriculum/concepts/program-memory-model.html",
+    "/curriculum/concepts/repository-instruction-topology.html",
+    "/curriculum/concepts/agent-environment-contracts.html",
+    "/curriculum/concepts/agent-work-state-handoffs.html",
+    "/curriculum/concepts/agent-scope-control.html",
+    "/curriculum/concepts/independent-agent-verification.html",
+    "/curriculum/concepts/agent-run-lifecycle.html",
+    "/curriculum/concepts/harness-evaluation.html"
   ],
   "markdownPaths": [
     "/curriculum/index.md",
@@ -357,6 +365,7 @@
     "/curriculum/roadmaps/application-engineering-12w.md",
     "/curriculum/roadmaps/multimodal-spatial-12w.md",
     "/curriculum/roadmaps/trace-a-tensor.md",
+    "/curriculum/roadmaps/harness-engineering.md",
     "/curriculum/concepts/tokenization.md",
     "/curriculum/concepts/inverted-index.md",
     "/curriculum/concepts/tf-idf.md",
@@ -608,6 +617,13 @@
     "/curriculum/concepts/index-updates-tombstones.md",
     "/curriculum/concepts/cdn-edge-delivery.md",
     "/curriculum/concepts/data-representation.md",
-    "/curriculum/concepts/program-memory-model.md"
+    "/curriculum/concepts/program-memory-model.md",
+    "/curriculum/concepts/repository-instruction-topology.md",
+    "/curriculum/concepts/agent-environment-contracts.md",
+    "/curriculum/concepts/agent-work-state-handoffs.md",
+    "/curriculum/concepts/agent-scope-control.md",
+    "/curriculum/concepts/independent-agent-verification.md",
+    "/curriculum/concepts/agent-run-lifecycle.md",
+    "/curriculum/concepts/harness-evaluation.md"
   ]
 }

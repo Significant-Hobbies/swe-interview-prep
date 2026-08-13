@@ -281,8 +281,8 @@ describe('Software Wars repository', () => {
   it('publishes canonical coverage and creates an unranked concept queue', async () => {
     expect(repository.curriculumCoverage().totals).toEqual({
       tracks: 19,
-      roadmaps: 25,
-      concepts: 252,
+      roadmaps: 26,
+      concepts: 259,
     });
     const match = await repository.createBlitzMatch(user, {
       queueType: 'concept',

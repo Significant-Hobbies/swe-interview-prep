@@ -16,6 +16,7 @@ interface CodeEditorProps {
   onRun?: () => void;
   fontSize?: number;
   errorLine?: number | null;
+  readOnly?: boolean;
 }
 
 function formatCode(code: string, language: Language): Promise<string> {
@@ -38,6 +39,7 @@ export default function CodeEditor({
   onRun,
   fontSize = 14,
   errorLine,
+  readOnly = false,
 }: CodeEditorProps) {
   const editorRef = useRef<any>(null);
   const runRef = useRef<(() => void) | undefined>(undefined);
@@ -115,7 +117,7 @@ export default function CodeEditor({
             isWholeLine: true,
             className: 'bg-red-500/15',
             glyphMarginClassName: 'text-red-400',
-            overviewRuler: { color: '#ef4444', position: 1 },
+            overviewRuler: { color: '#f43f5e', position: 1 },
           },
         },
       ]);
@@ -173,6 +175,8 @@ export default function CodeEditor({
         showFoldingControls: 'mouseover',
         // Smooth scrolling
         smoothScrolling: true,
+        readOnly,
+        domReadOnly: readOnly,
       }}
     />
   );

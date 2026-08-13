@@ -1,12 +1,12 @@
 {
   "counts": {
     "tracks": 19,
-    "concepts": 252,
-    "roadmaps": 25,
-    "drills": 298,
-    "reviewQuestions": 271,
-    "artifacts": 41,
-    "systemDesignCases": 20,
+    "concepts": 259,
+    "roadmaps": 26,
+    "drills": 305,
+    "reviewQuestions": 278,
+    "artifacts": 43,
+    "systemDesignCases": 33,
     "systemDesignGuides": 7,
     "coverageCategories": 11,
     "coverageTopics": 98

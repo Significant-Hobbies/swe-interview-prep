@@ -6044,6 +6044,171 @@
         }
       ],
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "build-rules-first-workspace",
+      "title": "Build a scoped repository instruction map",
+      "conceptId": "repository-instruction-topology",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement instructionMap() for a repository with a root AGENTS.md and a packages/api/AGENTS.md. Return {root, api, precedence, checks}. root must contain exactly three concise repository-wide invariants. api must contain exactly two API-only refinements and must not repeat a root rule. precedence must explain in at least eight words that nearer instructions refine broader instructions without silently overriding direct task intent. checks must list two runnable validation commands.",
+      "expectedOutput": "A non-duplicative instruction tree with explicit precedence and executable checks.",
+      "hints": [
+        "Put stable invariants high in the tree and package-specific commands near the owned files.",
+        "A validation command is more useful than prose such as 'make sure tests pass'."
+      ],
+      "solutionNotes": "The root owns cross-repository safety and workflow invariants; the API subtree adds only rules whose scope is the API package. Direct task intent remains the objective while local files refine how work in their subtree is performed.",
+      "testCases": [
+        {
+          "setup": "function validInstructionMap(v){ if(!v||v.root?.length!==3||v.api?.length!==2||v.checks?.length!==2) return false; const root=new Set(v.root.map(x=>x.toLowerCase())); if(v.api.some(x=>root.has(x.toLowerCase()))) return false; return v.precedence.trim().split(/\\s+/).length>=8 && v.checks.every(x=>/^(pnpm|npm|yarn|cargo|go|pytest|uv|make)\\b/.test(x)); }",
+          "run": "console.log(validInstructionMap(instructionMap()));",
+          "expect": "true"
+        }
+      ],
+      "referenceSolution": "function instructionMap(){ return { root:['Preserve existing stable identifiers','Use the repository package manager','Run the smallest relevant check first'], api:['Keep handlers free of schema mutations','Validate request data at the boundary'], precedence:'Nearer instructions refine broader rules while direct task intent remains authoritative', checks:['pnpm typecheck','pnpm test src/data/concepts.test.ts'] }; }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "make-agent-readable-workspace",
+      "title": "Define an agent-readable environment contract",
+      "conceptId": "agent-environment-contracts",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement environmentContract(worktreeId) returning {bootstrap, readiness, workspace, capabilities}. bootstrap and readiness must each contain two runnable commands. workspace must include the supplied worktreeId and distinct port, database, and output identifiers derived from it. capabilities must explicitly list filesystem, network, and secrets as allow, deny, or scoped.",
+      "expectedOutput": "A reproducible bootstrap/readiness contract whose mutable resources are isolated per worktree.",
+      "hints": [
+        "Readiness is an observable condition after bootstrap, not a second installation step.",
+        "Derive every mutable resource name from the worktree identity so concurrent runs cannot collide."
+      ],
+      "solutionNotes": "A fresh session should be able to bootstrap, prove readiness, and identify its authority without inherited machine knowledge. Per-worktree resource names remove hidden coupling between concurrent runs.",
+      "testCases": [
+        {
+          "setup": "function validEnvironment(v,id){ if(!v||v.bootstrap?.length!==2||v.readiness?.length!==2) return false; const w=JSON.stringify(v.workspace); if(!w.includes(id)||!v.workspace.port||!v.workspace.database||!v.workspace.output) return false; return ['filesystem','network','secrets'].every(k=>['allow','deny','scoped'].includes(v.capabilities?.[k])); }",
+          "run": "console.log(validEnvironment(environmentContract('task-42'),'task-42'));",
+          "expect": "true"
+        }
+      ],
+      "referenceSolution": "function environmentContract(id){ const n=[...id].reduce((a,c)=>a+c.charCodeAt(0),0); return { bootstrap:['pnpm install --frozen-lockfile','pnpm build'], readiness:['pnpm typecheck','pnpm test'], workspace:{id,port:5200+n%200,database:`db-${id}`,output:`dist-${id}`}, capabilities:{filesystem:'scoped',network:'scoped',secrets:'deny'} }; }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "build-multi-session-continuity",
+      "title": "Create a durable agent handoff",
+      "conceptId": "agent-work-state-handoffs",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement createHandoff(input) returning a JSON-safe object with schemaVersion 1, goal, status, completed, evidence, blockers, and nextAction. Reject an input that claims status 'complete' without evidence. nextAction must be one concrete action, not a list, and every evidence item must include both command and observed output.",
+      "expectedOutput": "A checkpoint that a fresh session can validate and resume without reading prior chat.",
+      "hints": [
+        "Persist observations, not merely 'tests passed'.",
+        "A good next action is the smallest safe continuation from the recorded state."
+      ],
+      "solutionNotes": "Durable handoffs make session boundaries explicit. Completion is a claim that requires reproducible evidence; incomplete work carries blockers and exactly one next action so a new worker can resume deterministically.",
+      "testCases": [
+        {
+          "setup": "function validHandoff(v){ return v?.schemaVersion===1 && ['active','blocked','complete'].includes(v.status) && Array.isArray(v.completed) && Array.isArray(v.evidence) && v.evidence.every(e=>e.command&&e.output) && typeof v.nextAction==='string' && v.nextAction.trim().length>5; }",
+          "run": "const h=createHandoff({goal:'Add retry handling',status:'active',completed:['Added bounded backoff'],evidence:[{command:'pnpm test retry',output:'8 tests passed'}],blockers:[],nextAction:'Run the timeout integration test'}); console.log(validHandoff(h));",
+          "expect": "true"
+        },
+        {
+          "run": "try { createHandoff({goal:'x',status:'complete',completed:[],evidence:[],blockers:[],nextAction:'Archive task'}); console.log('accepted'); } catch { console.log('rejected'); }",
+          "expect": "rejected"
+        }
+      ],
+      "referenceSolution": "function createHandoff(input){ if(input.status==='complete'&&!input.evidence?.length) throw new Error('completion requires evidence'); if(Array.isArray(input.nextAction)) throw new Error('one next action required'); return {schemaVersion:1,goal:input.goal,status:input.status,completed:[...(input.completed||[])],evidence:[...(input.evidence||[])],blockers:[...(input.blockers||[])],nextAction:String(input.nextAction)}; }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "add-feedback-and-scope-control",
+      "title": "Enforce runtime scope and escalation",
+      "conceptId": "agent-scope-control",
+      "type": "coding",
+      "difficulty": "core",
+      "prompt": "Implement scopeDecision(contract, observation). contract contains allowedRoots, maxFiles, and objective. observation contains touchedFiles, objectiveSatisfied, and planInvalidated. Return 'continue' only while every file is inside an allowed root, file count is within budget, the objective is incomplete, and the plan remains valid. Return 'complete' only when the objective is satisfied within scope. Return 'escalate' for any scope breach or invalidated plan.",
+      "expectedOutput": "A semantic scope gate that distinguishes continue, complete, and escalate.",
+      "hints": [
+        "Normalize path boundaries so src/api-old does not accidentally match src/api.",
+        "An invalidated plan requires review even if the file budget has not been exhausted."
+      ],
+      "solutionNotes": "Scope control combines authority and progress. Finishing the wrong objective is not completion; staying under a numeric budget is not permission to cross ownership boundaries; contradicted assumptions require escalation.",
+      "testCases": [
+        {
+          "run": "const c={allowedRoots:['src/api'],maxFiles:3,objective:'fix retry'}; console.log(scopeDecision(c,{touchedFiles:['src/api/retry.ts'],objectiveSatisfied:false,planInvalidated:false}),scopeDecision(c,{touchedFiles:['src/api/retry.ts'],objectiveSatisfied:true,planInvalidated:false}),scopeDecision(c,{touchedFiles:['src/ui/App.tsx'],objectiveSatisfied:false,planInvalidated:false}));",
+          "expect": "continue complete escalate"
+        }
+      ],
+      "referenceSolution": "function scopeDecision(c,o){ const allowed=o.touchedFiles.every(f=>c.allowedRoots.some(r=>f===r||f.startsWith(r+'/'))); if(!allowed||o.touchedFiles.length>c.maxFiles||o.planInvalidated) return 'escalate'; return o.objectiveSatisfied?'complete':'continue'; }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "separate-maker-and-checker",
+      "title": "Separate maker claims from checker evidence",
+      "conceptId": "independent-agent-verification",
+      "type": "coding",
+      "difficulty": "advanced",
+      "prompt": "Implement checkerVerdict(contract, makerReport, observations). contract contains requiredChecks and maxChangedFiles. observations contains independently observed checks and changedFiles. Return {accepted, missing, reasons}. Acceptance must depend only on the contract and observations, never on makerReport.claimedPassed. A required check passes only when observations records it as 'passed'.",
+      "expectedOutput": "An independent acceptance verdict that cannot be fooled by a producer's unsupported claim.",
+      "hints": [
+        "Use the maker report for context only; derive the verdict from fresh observations.",
+        "Report every missing check and the change-budget violation so remediation is actionable."
+      ],
+      "solutionNotes": "Role separation matters only if evidence is independent. The checker reconstructs the acceptance contract, observes the artifact, and reports failed criteria before any repair attempt.",
+      "testCases": [
+        {
+          "run": "const c={requiredChecks:['unit','ui'],maxChangedFiles:2}; console.log(JSON.stringify(checkerVerdict(c,{claimedPassed:['unit','ui']},{checks:{unit:'passed',ui:'failed'},changedFiles:['a','b']})));",
+          "expect": "{\"accepted\":false,\"missing\":[\"ui\"],\"reasons\":[\"required check ui did not pass\"]}"
+        }
+      ],
+      "referenceSolution": "function checkerVerdict(c,_maker,o){ const missing=c.requiredChecks.filter(k=>o.checks?.[k]!=='passed'); const reasons=missing.map(k=>`required check ${k} did not pass`); if(o.changedFiles.length>c.maxChangedFiles) reasons.push('change budget exceeded'); return {accepted:reasons.length===0,missing,reasons}; }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "build-complete-harness-lifecycle",
+      "title": "Implement a bounded agent run lifecycle",
+      "conceptId": "agent-run-lifecycle",
+      "type": "coding",
+      "difficulty": "advanced",
+      "prompt": "Implement transitionRun(state, event). Valid states are queued, running, checking, complete, blocked, cancelled. start moves queued to running only when event.ready is true; submit moves running to checking; accept moves checking to complete only when event.evidenceCount is positive; reject moves checking back to running when budget remains and to blocked otherwise; cancel moves any non-terminal state to cancelled. Invalid transitions must throw.",
+      "expectedOutput": "A finite-state lifecycle whose completion and retry transitions require evidence and remaining authority.",
+      "hints": [
+        "Terminal states must never silently restart.",
+        "A failed check without remaining budget is an escalation, not another retry."
+      ],
+      "solutionNotes": "The state machine makes authority and termination explicit. Readiness gates start, evidence gates completion, budget gates repair, and terminal states prevent zombie work.",
+      "testCases": [
+        {
+          "run": "let s='queued'; s=transitionRun(s,{type:'start',ready:true}); s=transitionRun(s,{type:'submit'}); s=transitionRun(s,{type:'reject',budgetRemaining:0}); console.log(s);",
+          "expect": "blocked"
+        },
+        {
+          "run": "try { transitionRun('checking',{type:'accept',evidenceCount:0}); console.log('accepted'); } catch { console.log('rejected'); }",
+          "expect": "rejected"
+        }
+      ],
+      "referenceSolution": "function transitionRun(s,e){ const terminal=['complete','blocked','cancelled']; if(e.type==='cancel'&&!terminal.includes(s)) return 'cancelled'; if(s==='queued'&&e.type==='start'&&e.ready) return 'running'; if(s==='running'&&e.type==='submit') return 'checking'; if(s==='checking'&&e.type==='accept'&&e.evidenceCount>0) return 'complete'; if(s==='checking'&&e.type==='reject') return e.budgetRemaining>0?'running':'blocked'; throw new Error('invalid transition'); }",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "evaluate-automated-agent-loop",
+      "title": "Evaluate and ablate an agent harness",
+      "conceptId": "harness-evaluation",
+      "type": "coding",
+      "difficulty": "advanced",
+      "prompt": "Implement compareHarness(baseline, candidate, limits). Each run has tasksPassed, tasksTotal, costUsd, minutes, interventions, and unsafeActions. Return successRateDelta, costDelta, timeDelta, and release. release is true only when candidate success rate does not regress, unsafeActions is zero, costUsd and minutes are within limits, and interventions do not exceed baseline.",
+      "expectedOutput": "A multi-objective harness comparison that prevents pass-rate-only releases.",
+      "hints": [
+        "Normalize pass count by task count before comparing suites.",
+        "Unsafe actions are a hard gate; cost, time, and intervention remain first-class even when success improves."
+      ],
+      "solutionNotes": "Harness evaluation measures the policy around the model. A release decision combines task outcomes with operational cost and safety; ablation then changes one component at a time to identify what caused the difference.",
+      "testCases": [
+        {
+          "run": "const b={tasksPassed:8,tasksTotal:10,costUsd:12,minutes:50,interventions:3,unsafeActions:0}; const c={tasksPassed:9,tasksTotal:10,costUsd:10,minutes:45,interventions:2,unsafeActions:0}; console.log(JSON.stringify(compareHarness(b,c,{maxCostUsd:11,maxMinutes:60})));",
+          "expect": "{\"successRateDelta\":0.1,\"costDelta\":-2,\"timeDelta\":-5,\"release\":true}"
+        }
+      ],
+      "referenceSolution": "function compareHarness(b,c,l){ const d=Number((c.tasksPassed/c.tasksTotal-b.tasksPassed/b.tasksTotal).toFixed(6)); return {successRateDelta:d,costDelta:c.costUsd-b.costUsd,timeDelta:c.minutes-b.minutes,release:d>=0&&c.unsafeActions===0&&c.costUsd<=l.maxCostUsd&&c.minutes<=l.maxMinutes&&c.interventions<=b.interventions}; }",
+      "curriculumSource": "harness-engineering-v1"
     }
   ]
 }

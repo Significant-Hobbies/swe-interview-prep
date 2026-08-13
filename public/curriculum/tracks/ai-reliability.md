@@ -2,13 +2,14 @@
 
 LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
 
-This track contains 12 connected concepts. Mastery means explaining each
+This track contains 14 connected concepts. Mastery means explaining each
 mechanism, predicting its failure modes, and supporting decisions with code,
 measurements, or a reviewable design artifact.
 
 ## Roadmaps
 
 - [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html) — Build an evidence-backed evaluation and observability system for models, tools, and agents.
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html) — Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.
 
 ## Concepts
 
@@ -24,3 +25,5 @@ measurements, or a reviewable design artifact.
 - [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html) (core) — Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.
 - [Human Review Systems](https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html) (core) — Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.
 - [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html) (core) — Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html) (advanced) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html) (advanced) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.

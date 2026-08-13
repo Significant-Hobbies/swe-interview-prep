@@ -79,6 +79,9 @@ export default function SoftwareWars() {
       <p className="mt-4 max-w-xl text-sm leading-6 text-white/55">
         Test recall in one minute or defend an engineering decision in thirty.
       </p>
+      <p className="mt-3 font-mono text-[11px] text-emerald-300/80">
+        No signup required for unranked play.
+      </p>
 
       <section
         className="mt-10 grid gap-px overflow-hidden rounded-xl bg-white/[0.1] md:grid-cols-2"
@@ -108,14 +111,14 @@ export default function SoftwareWars() {
             Engineering match
           </h2>
           <p className="mt-3 text-sm leading-6 text-white/55">
-            Match with another engineer, solve the same open-ended problem, handle a requirement
-            twist, and debate the tradeoffs.
+            Go solo with your own AI key or match with another engineer. Solve the same open-ended
+            problem, handle a requirement twist, and defend the tradeoffs.
           </p>
           <Link
             to="/wars/tradeoff"
             className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/15 px-5 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.04]"
           >
-            Find a thirty-minute match <ArrowRight className="h-4 w-4" />
+            Start thirty-minute session <ArrowRight className="h-4 w-4" />
           </Link>
         </article>
       </section>
@@ -154,7 +157,7 @@ export default function SoftwareWars() {
               </div>
               {!user && (
                 <p className="mt-4 text-xs text-white/50">
-                  Sign in to keep ratings and history across devices.
+                  Play first. Sign in only to keep ratings and history across devices.
                 </p>
               )}
               <ol className="mt-6 border-t border-white/[0.06]">

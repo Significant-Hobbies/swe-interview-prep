@@ -1619,7 +1619,9 @@ const DOMAIN_SYNTHESIS_TEMPLATES = (
   artifactsData as { artifacts: DomainSynthesisArtifact[] }
 ).artifacts
   .filter((artifact) =>
-    ['learning-domain-expansion-v1', 'trace-a-tensor-v1'].includes(artifact.curriculumSource ?? '')
+    ['learning-domain-expansion-v1', 'trace-a-tensor-v1', 'harness-engineering-v1'].includes(
+      artifact.curriculumSource ?? ''
+    )
   )
   .map(domainSynthesisTemplate);
 

@@ -9,7 +9,7 @@ const conceptIds = new Set(conceptsData.concepts.map((concept) => concept.id));
 const drillIds = new Set(drillsData.drills.map((drill) => drill.id));
 
 describe('system-design case catalog', () => {
-  it('ships the original eight followed by twelve popular practice cases', () => {
+  it('ships the original eight, twelve popular cases, and thirteen classic gap cases', () => {
     expect(SYSTEM_DESIGN_CASES.map((caseDefinition) => caseDefinition.id)).toEqual([
       'llm-inference-10k-rps',
       'production-rag',
@@ -31,6 +31,19 @@ describe('system-design case catalog', () => {
       'ride-sharing-platform',
       'ticket-booking-platform',
       'payment-processing-system',
+      'distributed-unique-id-generator',
+      'proximity-search-service',
+      'nearby-friends-service',
+      'maps-routing-platform',
+      'distributed-message-queue',
+      'metrics-monitoring-platform',
+      'ad-click-aggregation-system',
+      'hotel-reservation-system',
+      'distributed-email-service',
+      'object-storage-service',
+      'gaming-leaderboard',
+      'digital-wallet-system',
+      'stock-exchange',
     ]);
   });
 

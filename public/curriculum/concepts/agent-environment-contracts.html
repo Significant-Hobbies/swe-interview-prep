@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Environment Contracts | SWE Prep</title>
+    <meta name="description" content="Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SWE Interview Prep">
+    <meta property="og:title" content="Agent Environment Contracts | SWE Prep">
+    <meta property="og:description" content="Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html">
+    <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agent Environment Contracts | SWE Prep">
+    <meta name="twitter:description" content="Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.">
+    <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
+    <link rel="stylesheet" href="/curriculum/styles.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Agent Environment Contracts","description":"Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.","url":"https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html","educationalLevel":"core","learningResourceType":["Concept guide","Practice prompt","Review prompt"],"teaches":"Agent Environment Contracts","isPartOf":{"@type":"CollectionPage","name":"SWE Prep Curriculum","url":"https://learn.significanthobbies.com/curriculum/"}}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="/"><strong>SWE Prep</strong><span>/ Learning OS</span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="/dashboard">Dashboard</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/wars">Wars</a>
+          <details class="browse-menu">
+            <summary>Browse <span aria-hidden="true">▾</span></summary>
+            <div class="browse-panel"><section><p>Learn</p><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a></section><section><p>Practice</p><a href="/playground">Playground</a></section><section><p>Progress</p><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></section><section><p>Product</p><a href="/changelog">Changelog</a></section></div>
+          </details>
+        </nav>
+        <details class="compact-menu">
+          <summary>Menu <span aria-hidden="true">▾</span></summary>
+          <nav aria-label="Compact">
+            <p>Go</p>
+            <a href="/dashboard">Dashboard</a><a href="/learn">Learn</a><a href="/practice">Practice</a><a href="/wars">Wars</a>
+            <hr>
+            <section><p>Learn</p><a href="/curriculum/">Curriculum</a><a href="/sources">Learning sources</a><a href="/library">Repository library</a></section><section><p>Practice</p><a href="/playground">Playground</a></section><section><p>Progress</p><a href="/progress/all">Projects</a><a href="/progress/all?tab=notes">Notes</a></section><section><p>Product</p><a href="/changelog">Changelog</a></section>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/agent-systems.html">Agent Systems</a></nav>
+      <article>
+    <p class="eyebrow">Agent Systems · core</p>
+    <h1>Agent Environment Contracts</h1>
+    <p class="lede">Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.</p>
+    <div class="pills"><span>agent-systems</span><span>developer-tools</span><span>harness-engineering</span></div>
+
+    <section>
+      <h2>Mental model</h2>
+      <p>Treat the development environment as an API offered to the agent: bootstrap has declared inputs, readiness has observable outputs, and every writable or networked capability has a boundary. If a fresh session cannot establish readiness mechanically, the environment contract is incomplete.</p>
+    </section>
+
+    <section>
+      <h2>How to study Agent Environment Contracts</h2>
+      <p>Begin by restating the mental model in your own words, then connect it to a concrete system you have built or operated. Name the mechanism, the constraint it addresses, and the trade-off it introduces. Use OpenAI — Harness engineering, Model Context Protocol — Roots to check details, but close the source before writing your explanation. Retrieval is the learning step; rereading is only preparation.</p>
+      <p>Next, compare Agent Environment Contracts with Repository Intelligence, Agent Permissions &amp; Sandboxing, Coding Agent Systems. Ask what changes in correctness, latency, resource use, operability, and failure recovery. Complete Define an agent-readable environment contract and preserve the command, input, output, and one failed attempt as evidence. Finish by explaining the idea without jargon to someone who has not studied the track.</p>
+    </section>
+
+    <section>
+      <h2>Proof of understanding</h2>
+      <ul>
+        <li>Explain the mechanism from first principles and identify the state it reads or changes.</li>
+        <li>Give one situation where the concept is the right choice and one where it is not.</li>
+        <li>Predict a realistic failure mode before running the drill, then compare the prediction with evidence.</li>
+        <li>Connect the result to a roadmap or build artifact instead of treating the concept as isolated trivia.</li>
+      </ul>
+    </section>
+
+    <section><h2>Where it matters</h2><p>Per-worktree development servers, reproducible setup scripts, CI parity, local observability stacks, and sandbox readiness checks.</p></section>
+
+    <section><h2>Common mistakes</h2><ul><li>Assuming an undeclared global tool or manually prepared service exists</li><li>Starting work before checking that dependencies and required services are ready</li><li>Sharing mutable ports, databases, or build output across concurrent agent runs</li></ul></section>
+
+    <section>
+      <h2>Learn from primary sources</h2>
+      <ul class="resource-list"><li><a href="https://openai.com/index/harness-engineering/" rel="noreferrer">OpenAI — Harness engineering</a> <span class="muted">(article)</span></li><li><a href="https://modelcontextprotocol.io/specification/2025-03-26/client/roots" rel="noreferrer">Model Context Protocol — Roots</a> <span class="muted">(doc)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>Practice and explain it back</h2>
+      <div class="practice-card">
+          <h3>Define an agent-readable environment contract</h3>
+          <p>Implement environmentContract(worktreeId) returning {bootstrap, readiness, workspace, capabilities}. bootstrap and readiness must each contain two runnable commands. workspace must include the supplied worktreeId and distinct port, database, and output identifiers derived from it. capabilities must explicitly list filesystem, network, and secrets as allow, deny, or scoped.</p>
+          <p><strong>Expected evidence:</strong> A reproducible bootstrap/readiness contract whose mutable resources are isolated per worktree.</p>
+          <a href="/drills/make-agent-readable-workspace">Open the interactive drill →</a>
+        </div>
+      <h3>Review prompts</h3><ul><li>Why is &#39;the project works on my machine&#39; an unusable environment contract for an autonomous coding agent, and what evidence makes the contract reproducible?</li></ul>
+    </section>
+
+    <section>
+      <h2>Build evidence</h2>
+      <div class="practice-card">
+          <h3>Build a Complete Coding-Agent Harness</h3>
+          <p>Build a repository-local harness that can take one bounded engineering task from initialization through implementation, verification, durable handoff, and explicit termination without relying on hidden machine state or chat memory.</p>
+          <ul><li>A fresh isolated workspace can bootstrap and prove readiness from repository-local commands</li><li>Instruction scopes, allowed edit roots, capabilities, budgets, and escalation triggers are explicit and mechanically inspectable</li><li>The run persists goal, progress, evidence, blockers, and the next safe action across a forced restart</li><li>A checker gathers independent evidence and can reject an unsupported maker claim</li><li>The lifecycle terminates only as complete, blocked, failed, cancelled, or escalated with durable evidence</li></ul>
+        </div>
+    </section>
+
+    <section class="grid two">
+      <div><h2>Prerequisites</h2><ul class="link-list"><li><a href="/curriculum/concepts/repository-instruction-topology.html">Repository Instruction Topology</a></li></ul></div>
+      <div><h2>Related concepts</h2><ul class="link-list"><li><a href="/curriculum/concepts/repository-intelligence.html">Repository Intelligence</a></li><li><a href="/curriculum/concepts/agent-permissions-sandboxing.html">Agent Permissions &amp; Sandboxing</a></li><li><a href="/curriculum/concepts/coding-agent-systems.html">Coding Agent Systems</a></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Learning paths</h2>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/harness-engineering.html">Harness Engineering</a></li></ul>
+    </section>
+  </article>
+    </main>
+    <footer>
+      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
+    </footer>
+  </body>
+</html>

@@ -61,6 +61,10 @@
 - [x] 6.8 Add route/component tests for authentication upgrades, active-match answer secrecy, phase visibility, public sanitization, focus management, reduced motion, and 44px compact controls.
 - [x] 6.9 Replace the Blitz topic selector with searchable canonical track, roadmap, and concept discovery, readiness counts, internal Learn links, and disabled states for scopes with fewer than five active questions.
 - [x] 6.10 Link question metadata, mistake review, and weakness Learn actions directly to the canonical primary concept route.
+- [x] 6.11 Add a Solo Tradeoff setup path with ephemeral OpenAI-compatible endpoint/key/model fields, explicit browser-direct disclosure, and no rating or authentication requirement.
+- [x] 6.12 Generate an independent AI artifact, apply the shared twist without learner-draft leakage, reveal/debate against the frozen artifact, and return unranked rubric-oriented feedback.
+- [x] 6.13 Compose the Tradeoff artifact surface from the existing controlled Monaco and Excalidraw tools, with combined notes/code/diagram state, compact panel switching, and read-only freeze behavior.
+- [x] 6.14 Make guest Play the primary Blitz and Tradeoff action; keep unranked local battles functional without signup and present authentication only as the upgrade for durable competitive features.
 
 ## 7. Integration and Operations
 
@@ -75,6 +79,8 @@
 - [x] 8.1 Run the smallest relevant unit/API/component checks after each implementation group and resolve regressions before widening verification.
 - [x] 8.2 Run the content validator, migration verification, full Vitest suite, typecheck, lint, docs validation, and production build.
 - [x] 8.3 Run Playwright with two browser contexts and fake media for Blitz challenge/ghost and Tradeoff phase/reconnect/vote flows; record any live-provider checks that remain manual.
-- [ ] 8.4 Inspect `/wars`, Blitz, results, leaderboards, challenges, and Tradeoff at 390, 768, and 1440 pixels; capture after screenshots and resolve all overflow, input, and accessibility issues.
+- [x] 8.4 Inspect `/wars`, Blitz, results, leaderboards, challenges, and Tradeoff at 390, 768, and 1440 pixels; capture after screenshots and resolve all overflow, input, and accessibility issues.
 - [x] 8.5 Run Impeccable critique, polish, and audit; meet repository score floors with zero unresolved P0/P1 findings and complete the design receipt.
-- [ ] 8.6 Obtain the owner's final `keep` or delegated design decision, validate the design workflow receipt, and run strict OpenSpec validation before archiving.
+- [x] 8.6 Obtain the owner's final `keep` or delegated design decision, validate the design workflow receipt, and run strict OpenSpec validation before archiving.
+- [x] 8.7 Prove Solo Tradeoff credentials never enter browser storage, backend requests, telemetry, or rendered error text; test provider failure, retry, phase progression, and compact layouts.
+- [x] 8.8 Test combined artifact autosave/freeze behavior and guest-first Wars entry, then inspect the shared Tradeoff workspace at 390, 768, and 1440 pixels.

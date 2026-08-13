@@ -196,6 +196,8 @@ Sharding (horizontal & vertical), partitioning, replication, leader election, in
 
 Solve 8–10 of these end-to-end. Don't watch a video solution before attempting.
 
+The interactive Tradeoff catalog now contains 33 structured cases. The latest coverage batch adds distributed IDs, proximity search, nearby presence, map routing, a distributed queue, metrics ingestion, ad-click aggregation, hotel inventory, email delivery, object storage, leaderboards, wallets, and exchange matching. These are not prompt-only cards: each has a six-stage session, capacity anchors, an injected failure, a weighted rubric, and links back to the exact Learn concepts and Practice drills.
+
 | Problem | Why it's classic | Worked solution |
 |---|---|---|
 | URL shortener / TinyURL | Hashing, KV store, sharding 101 | [HelloInterview](https://www.hellointerview.com/learn/system-design/answer-keys/bitly) |
@@ -216,6 +218,16 @@ Solve 8–10 of these end-to-end. Don't watch a video solution before attempting
 | Payment system | Idempotency, double-spend, saga | [Stripe — idempotency](https://stripe.com/blog/idempotency) · [Uber payments](https://www.uber.com/blog/payments-overview/) |
 | Distributed cache | Consistent hashing, eviction, hot keys | [Discord scale](https://discord.com/blog/how-discord-scaled-elixir-to-5-000-000-concurrent-users) |
 | Ad-bidding (RTB) | <100 ms p99, budget pacing, fraud | [Google RTB docs](https://developers.google.com/authorized-buyers/rtb/start) |
+| Unique ID generator | Bit allocation, worker fencing, clock rollback | [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562.html) |
+| Proximity / Nearby Friends | Spatial indexing versus moving presence and privacy | [PostGIS ST_DWithin](https://postgis.net/docs/ST_DWithin.html) · [S2 geometry](https://s2geometry.io/) |
+| Maps and routing | Versioned road graphs, shortest paths, live-weight overlays | [OSRM API](https://project-osrm.org/docs/v5.24.0/api/) |
+| Distributed message queue | Partition ordering, acknowledgement quorum, consumer progress | [Kafka design](https://kafka.apache.org/documentation/#design) |
+| Metrics monitoring | Cardinality, time-series blocks, query fan-out, alert state | [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) |
+| Ad click aggregation | Event-time windows, deduplication, late corrections | [Apache Beam windowing](https://beam.apache.org/documentation/programming-guide/#windowing) |
+| Object storage | Multipart commit, erasure coding, checksums, repair | [Amazon S3 architecture](https://www.amazon.science/publications/the-s3-storage-architecture) |
+| Gaming leaderboard | Ordered score indexes, event dedupe, season closure | [Redis sorted sets](https://redis.io/docs/latest/develop/data-types/sorted-sets/) |
+| Digital wallet | Holds, double-entry ledger, settlement reconciliation | [Stripe idempotency](https://docs.stripe.com/api/idempotent_requests) |
+| Stock exchange | Sequencing, price-time priority, deterministic replay | [FIX standards](https://www.fixtrading.org/standards/) |
 
 ---
 

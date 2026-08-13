@@ -30,10 +30,12 @@ export default function Privacy() {
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">AI provider config</h2>
       <p className="mt-2">
-        Your AI <code className="rounded bg-slate-800 px-1 text-blue-300">endpointUrl</code> + key +
-        model are stored locally in the browser&apos;s storage. The server has fallback envs for
-        development but doesn&apos;t persist your API key. Each AI call goes directly to your
-        configured endpoint &mdash; we proxy without retaining the request body.
+        AI configuration saved through Settings is stored locally in your browser for the Socratic
+        learning tools. Solo Tradeoff is different: its endpoint, model, and key exist only in the
+        current tab&apos;s memory and disappear on reload. Solo requests travel directly from your
+        browser to the endpoint you select, so that provider receives the key and session content;
+        SWE Prep does not receive, proxy, log, or store them. The non-secret learner draft may still
+        use the existing local preview autosave.
       </p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">What we don&apos;t</h2>

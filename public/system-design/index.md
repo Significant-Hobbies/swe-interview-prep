@@ -58,6 +58,24 @@ Design push, email, SMS, and in-app notification delivery with user preferences,
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=notification-delivery-service&from=guide)
 - [Read the worked guide](https://learn.significanthobbies.com/system-design/notification-delivery-service)
 
+### Design a proximity search service
+
+Design a service that returns open businesses within a radius, filtered by category and ranked by distance, for a global consumer application.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=proximity-search-service&from=guide)
+
+### Design a nearby friends service
+
+Design an opt-in feature that shows which friends are nearby and updates within seconds as people move, while making privacy and battery cost first-class constraints.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=nearby-friends-service&from=guide)
+
+### Design a real-time gaming leaderboard
+
+Design a leaderboard for a global game with seasonal, regional, and friends-only rankings, real-time score updates, anti-cheat review, and stable end-of-season results.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=gaming-leaderboard&from=guide)
+
 ## Media and collaboration
 
 ### Design a video streaming platform
@@ -119,6 +137,42 @@ Design a Dynamo-style distributed key-value store with partitioning, replication
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=distributed-key-value-store&from=guide)
 
+### Design a distributed unique ID generator
+
+Design a service that issues globally unique, roughly time-sortable 64-bit IDs to thousands of application servers across regions without a database round trip per ID.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=distributed-unique-id-generator&from=guide)
+
+### Design a maps and routing platform
+
+Design a driving-directions service that returns routes and ETAs across a continent, incorporates live traffic, and can serve map tiles separately from route computation.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=maps-routing-platform&from=guide)
+
+### Design a distributed message queue
+
+Design a multi-tenant distributed queue for asynchronous jobs and event streams with durable retention, consumer groups, backpressure, and at-least-once delivery.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=distributed-message-queue&from=guide)
+
+### Design a metrics monitoring platform
+
+Design a multi-tenant metrics platform that ingests counters, gauges, and histograms, supports dashboard queries and recording rules, and evaluates reliable alerts.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=metrics-monitoring-platform&from=guide)
+
+### Design a distributed email service
+
+Design a transactional email platform that accepts API requests, renders templates, delivers through SMTP, handles retries and bounces, and protects sender reputation.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=distributed-email-service&from=guide)
+
+### Design an object storage service
+
+Design an S3-like object storage service with buckets, immutable object versions, multipart uploads, ranged reads, checksums, lifecycle policies, and regional durability.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=object-storage-service&from=guide)
+
 ## Commerce and marketplaces
 
 ### Design a ride-sharing platform
@@ -140,6 +194,30 @@ Design Ticketmaster-style reserved-seat booking with event browse, a virtual wai
 Design a payment system with authorization, capture, refunds, idempotency, webhooks, an auditable ledger, processor timeouts, reconciliation, and fraud controls.
 
 - [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=payment-processing-system&from=guide)
+
+### Design an ad click aggregation system
+
+Design an ad click pipeline that powers near-real-time campaign dashboards and produces auditable daily billing aggregates despite duplicates, retries, bots, and late events.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=ad-click-aggregation-system&from=guide)
+
+### Design a hotel reservation system
+
+Design a hotel booking platform that searches room availability and prevents overselling across multi-night stays, retries, payment delays, and expiring holds.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=hotel-reservation-system&from=guide)
+
+### Design a digital wallet
+
+Design a digital wallet that supports deposits, peer-to-peer transfers, merchant payments, refunds, and withdrawals while maintaining auditable balances across retries and external settlement.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=digital-wallet-system&from=guide)
+
+### Design a stock exchange
+
+Design the core of a stock exchange that accepts limit and market orders, matches by price-time priority, publishes market data, and recovers without reordering or duplicating trades.
+
+- [Start closed-book practice](https://learn.significanthobbies.com/mock?prompt=stock-exchange&from=guide)
 
 ## How scoring works
 

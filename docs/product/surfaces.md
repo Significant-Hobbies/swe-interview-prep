@@ -21,7 +21,7 @@ disagrees with code, code wins.
 | `/mock` | Timed mock interview |
 | `/wars` | Play-first Software Wars hub; ratings, launch status, leaderboard, and history are progressively disclosed |
 | `/wars/blitz` | Timed objective battle setup, match, result, and remediation |
-| `/wars/tradeoff`, `/wars/tradeoff/:matchId` | Tradeoff preview or authenticated live workbench |
+| `/wars/tradeoff`, `/wars/tradeoff/:matchId` | Local preview, unranked solo-AI session, or authenticated live Tradeoff workbench using the shared Monaco + Excalidraw artifact tools |
 | `/wars/challenge/:token` | Sanitized public challenge preview |
 | `/wars/results/:slug` | Sanitized public match result |
 | `/progress`, `/progress/all` | Mastery rollups + notes |
@@ -91,9 +91,14 @@ load, which is how the app discovers there is no session. It is not repeated.
 
 Software Wars is the exception to that older learning-only request rule.
 Guests may read public launch status, leaderboards, challenge previews, and
-public results. Guest battles are local unranked previews and do not write Elo
-or FSRS state. Ranked matches, history, ratings, challenge writes, Tradeoff
-artifacts, media credentials, consent, and reports require authentication.
+public results. Guest battles are local and unranked and do not write Elo or
+FSRS state. Solo Tradeoff may call a learner-selected OpenAI-compatible
+endpoint directly from the browser; its endpoint, model, key, AI artifacts,
+debate, and feedback stay in React memory and disappear on reload. The
+learner's existing non-secret local draft may still use the preview-draft
+localStorage key. Ranked matches, history, ratings, challenge writes,
+server-backed Tradeoff artifacts, media credentials, consent, and reports
+require authentication.
 
 ### Legacy redirects
 

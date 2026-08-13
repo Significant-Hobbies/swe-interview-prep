@@ -2312,6 +2312,76 @@
       "answer": "For a local variable, buffer itself normally occupies a slot in the current stack frame while malloc returns an address to a separate heap allocation. The stack slot follows the function call lifetime; the allocation remains until free or an owning runtime releases it. Before main, the loader maps executable code and static data into a new virtual address space, creates process state and an initial stack, and transfers control to the program entry point. Physical placement may change without changing the process virtual addresses.",
       "source": "editorial",
       "curriculumSource": "learning-domain-expansion-v1"
+    },
+    {
+      "id": "rq-repository-instruction-topology",
+      "conceptId": "repository-instruction-topology",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "A repository has a root instruction file and a stricter one inside packages/payments. What belongs at each level, and how should an agent resolve them for a payment-file edit?",
+      "answer": "The root owns stable repository-wide invariants such as package-manager use, safety constraints, and common validation. The payments file adds only rules specific to that subtree, such as ledger boundaries or package-local checks. For a payment edit the agent applies both, with the nearer file refining the broad contract; direct task intent still defines the objective and a local instruction must not silently grant broader authority or contradict a higher-priority safety rule.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-agent-environment-contracts",
+      "conceptId": "agent-environment-contracts",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "Why is 'the project works on my machine' an unusable environment contract for an autonomous coding agent, and what evidence makes the contract reproducible?",
+      "answer": "A new agent session cannot depend on undeclared global tools, manually started services, remembered ports, or hidden credentials. The contract needs deterministic bootstrap commands, machine-checkable readiness probes, declared runtime and dependency versions, explicit filesystem/network/secret capabilities, and isolated mutable resources such as ports, databases, and build output. A fresh worktree should be able to establish readiness from those artifacts alone.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-agent-work-state-handoffs",
+      "conceptId": "agent-work-state-handoffs",
+      "type": "explain",
+      "difficulty": "core",
+      "question": "What minimum state must survive a context reset so a different agent session can safely resume an unfinished change?",
+      "answer": "Persist the goal and acceptance contract, current status, completed work, exact changed artifacts, decisions that constrain the next step, commands run with observed results, blockers, and one smallest safe next action. The state must be versioned and repository- or workflow-backed rather than dependent on chat memory. Completion requires durable evidence; an unsupported 'tests passed' or broad narrative is not a resumable checkpoint.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-agent-scope-control",
+      "conceptId": "agent-scope-control",
+      "type": "compare",
+      "difficulty": "core",
+      "question": "Why is a token or time budget insufficient scope control, and which semantic conditions should make an agent continue, complete, or escalate?",
+      "answer": "A numeric budget limits consumption but says nothing about authority or correctness: an agent can quickly change the wrong files or spend its entire budget on an invalid plan. Continue only while work stays inside allowed roots, the change budget and assumptions remain valid, and acceptance is incomplete. Complete only when the objective is satisfied with evidence. Escalate on scope breach, invalidated assumptions, missing authority, permanent failure, or exhausted recovery budget.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-independent-agent-verification",
+      "conceptId": "independent-agent-verification",
+      "type": "explain",
+      "difficulty": "advanced",
+      "question": "A maker agent says it ran all tests and asks a checker agent to approve the change. What makes the check independent rather than another self-review?",
+      "answer": "The checker reconstructs acceptance criteria from the task and repository, inspects the actual diff and affected behavior, and gathers fresh evidence using its own commands or observations. Its verdict must not depend on the maker's claimed result or copied rationale. It reports each failed criterion before modifying anything, uses checks appropriate to semantic and user-facing risk, and accepts only when the independently observed evidence satisfies the contract.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-agent-run-lifecycle",
+      "conceptId": "agent-run-lifecycle",
+      "type": "design",
+      "difficulty": "advanced",
+      "question": "Design the terminal states and gates for a long-running agent loop. Why is 'run until the timer ends' not a safe lifecycle?",
+      "answer": "Use explicit queued, running, checking, complete, blocked or escalated, failed, and cancelled states with durable transitions. Readiness and authority gate start; leases or heartbeats show ownership; budgets bound retries; evidence gates completion; cancellation is idempotent; permanent failures and exhausted recovery move to escalation rather than back to running. A timer bounds duration but cannot decide whether the objective was met, the plan became invalid, or the agent is repeating unsafe work.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
+    },
+    {
+      "id": "rq-harness-evaluation",
+      "conceptId": "harness-evaluation",
+      "type": "compare",
+      "difficulty": "advanced",
+      "question": "A new harness raises task pass rate from 80% to 86% but doubles cost and triples human interventions. How should the team evaluate the change and discover which harness component caused it?",
+      "answer": "Treat success, unsafe actions, cost, wall time, retries, intervention rate, and failure categories as a multi-objective release contract rather than optimizing pass rate alone. Run baseline and candidate on the same versioned task suite with a stable grader and confidence intervals. Then ablate one changed component at a time—such as instructions, tools, checker, or retry policy—while holding model and tasks fixed. The original aggregate result is not enough to attribute causality or justify release.",
+      "source": "editorial",
+      "curriculumSource": "harness-engineering-v1"
     }
   ]
 }
