@@ -17,9 +17,6 @@ importers:
       '@cloudflare/realtimekit-react':
         specifier: 2.0.1
         version: 2.0.1(react@19.2.8)
-      '@cloudflare/realtimekit-react-ui':
-        specifier: 2.0.1
-        version: 2.0.1
       '@excalidraw/excalidraw':
         specifier: 0.18.1
         version: 0.18.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -634,16 +631,10 @@ packages:
     resolution: {integrity: sha512-jxQYkj8dSIzc0cD6cMMNdOc1UVjqSqu8BZdor5s8cGjW2I8BjODt/kWPVdY+u9zj3ms75Q5qaZgnxUad83+eAg==}
     engines: {node: '>=22.0.0'}
 
-  '@cloudflare/realtimekit-react-ui@2.0.1':
-    resolution: {integrity: sha512-G0lU6VxCDfFfo4z6NPfYvgctefr5yce7xgUyDQY66pDWlESSJqRCJr4EKqSg0zA2JswuYDjp36S6Ya8SBwyHpQ==}
-
   '@cloudflare/realtimekit-react@2.0.1':
     resolution: {integrity: sha512-z5BL32ABEppwxofq7meV0enFyPa7XL3X3oyb2hcI9PE0WPx1VMVM7GdDjpBjF/r6Ff0LpFA64vlyzeto0/8Pew==}
     peerDependencies:
       react: '>=16.8.6'
-
-  '@cloudflare/realtimekit-ui@2.0.1':
-    resolution: {integrity: sha512-F1Px1LJwpIw50QG76e2ViYjOv3utzd5wkoScRLqeMj7ZS8GtdX+vMVfG1+5jfvc9Ha/Qujauwsb13fam+7bfSg==}
 
   '@cloudflare/realtimekit@2.0.1':
     resolution: {integrity: sha512-GDZpFWqC/+ZHUfVSCIc8dpZza2E4HsyyU+48ENmGY2bB2EYyzsr5YNGUXtqLkap8YiUmPS1ZA1YPUA5e8d5mNA==}
@@ -5065,9 +5056,6 @@ packages:
     resolution: {integrity: sha512-XSt8tMzbW9ymE7687xztkO1ckR7qJNQ3LywY9vlYGhGi3zXrGBHuUo2Cl1ztZaICW+1eAGdkLbj6iwVqDT33kg==}
     engines: {node: '>=20.0.0'}
 
-  hark@1.2.3:
-    resolution: {integrity: sha512-u68vz9SCa38ESiFJSDjqK8XbXqWzyot7Cj6Y2b6jk2NJ+II3MY2dIrLMg/kjtIAun4Y1DHF/20hfx4rq1G5GMg==}
-
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -5119,9 +5107,6 @@ packages:
   highlight.js@11.11.1:
     resolution: {integrity: sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==}
     engines: {node: '>=12.0.0'}
-
-  hls.js@1.7.0:
-    resolution: {integrity: sha512-NnQpT6Z//+2IB2qovSUbKbrlXY1MOpi0JynZ9L2NNOuTJiNCyMSQj9k2laEj1v7CxU/Hb8oTWR98eT3mVpPQVQ==}
 
   hono@4.12.32:
     resolution: {integrity: sha512-XcuyW9qE2kJn07PkecMOBd5Vq/hMy7mmGw+idz1yblbg9N17ijJODrvPkn7/dwL3Kulj8LcRJ69DLOWf91dRUg==}
@@ -6531,9 +6516,6 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
-  resize-observer-polyfill@1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
-
   resolve-from@5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
@@ -7507,9 +7489,6 @@ packages:
     resolution: {integrity: sha512-c9bZp7b5YtRj2wOe6dlj32MK+Bx/M/d+9VB2SHM1OtsUHR0aV0tdP6DWh/iMt0kWi1t5g1Iudu6hQRNd1A4PVA==}
     engines: {node: '>=18'}
 
-  wildemitter@1.2.1:
-    resolution: {integrity: sha512-UMmSUoIQSir+XbBpTxOTS53uJ8s/lVhADCkEbhfRjUGFDPme/XGOb0sBWLx5sTz7Wx/2+TlAw1eK9O5lw5PiEw==}
-
   worker-timers-broker@6.1.8:
     resolution: {integrity: sha512-FUCJu9jlK3A8WqLTKXM9E6kAmI/dR1vAJ8dHYLMisLNB/n3GuaFIjJ7pn16ZcD1zCOf7P6H62lWIEBi+yz/zQQ==}
 
@@ -8247,22 +8226,10 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/realtimekit-react-ui@2.0.1':
-    dependencies:
-      '@cloudflare/realtimekit-ui': 2.0.1
-
   '@cloudflare/realtimekit-react@2.0.1(react@19.2.8)':
     dependencies:
       '@cloudflare/realtimekit': 2.0.1
       react: 19.2.8
-
-  '@cloudflare/realtimekit-ui@2.0.1':
-    dependencies:
-      '@floating-ui/dom': 1.8.0
-      hark: 1.2.3
-      hls.js: 1.7.0
-      lodash-es: 4.18.1
-      resize-observer-polyfill: 1.5.1
 
   '@cloudflare/realtimekit@2.0.1':
     dependencies:
@@ -12486,10 +12453,6 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  hark@1.2.3:
-    dependencies:
-      wildemitter: 1.2.1
-
   has-flag@4.0.0: {}
 
   has-symbols@1.1.0: {}
@@ -12627,8 +12590,6 @@ snapshots:
       space-separated-tokens: 2.0.2
 
   highlight.js@11.11.1: {}
-
-  hls.js@1.7.0: {}
 
   hono@4.12.32: {}
 
@@ -14309,8 +14270,6 @@ snapshots:
 
   require-from-string@2.0.2: {}
 
-  resize-observer-polyfill@1.5.1: {}
-
   resolve-from@5.0.0: {}
 
   resolve-pkg-maps@1.0.0: {}
@@ -15313,8 +15272,6 @@ snapshots:
   widest-line@5.0.0:
     dependencies:
       string-width: 7.2.0
-
-  wildemitter@1.2.1: {}
 
   worker-timers-broker@6.1.8:
     dependencies:

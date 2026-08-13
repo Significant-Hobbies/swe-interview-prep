@@ -128,7 +128,7 @@ Pages issues a short-lived match-scoped realtime token signed with a dedicated s
 
 ### 7. Wrap RealtimeKit behind a media provider contract
 
-The frontend exposes battle-specific camera tiles and controls using the official RealtimeKit React/Core UI packages rather than rendering the generic full-screen meeting. A backend provider module owns meeting creation, participant enrollment/token refresh, transcription request state, and webhook verification.
+The frontend exposes battle-specific camera tiles and controls using the official RealtimeKit Core and React lifecycle packages rather than rendering the generic full-screen meeting. A backend provider module owns meeting creation, participant enrollment/token refresh, transcription request state, and webhook verification.
 
 Required non-secret configuration is account ID and RealtimeKit app ID. Administrative API token and webhook verification material remain platform secrets. Media rooms are created near check-in, not at scheduling time. Post-meeting transcription is opt-in per match; video recording is off by default. Transcript webhooks enqueue copying into project-owned R2 before provider expiry.
 
@@ -163,7 +163,7 @@ Pure modules own selection policy, scoring, Elo, phase transitions, vote compati
 - **AI adjudication can be inconsistent or unavailable** → version prompts/models, require schema-valid rubric evidence, retry through a queue, and leave exhausted matches unrated for review.
 - **Transcripts and artifacts contain sensitive content** → explicit consent, default no video recording, private storage keys, limited public sharing, retention documentation, and deletion controls.
 - **Public competitive features conflict with prior personal-only positioning** → scope the status change explicitly to Software Wars and retain existing guest/private learning behavior.
-- **New dependencies increase bundle size** → lazy-load all Wars and RealtimeKit modules only on Wars routes and measure the production chunk.
+- **New dependencies increase bundle size** → lazy-load all Wars and RealtimeKit modules only on Wars routes, keep the focused controls local instead of bundling the general-purpose UI package, and measure the production chunk.
 
 ## Migration Plan
 

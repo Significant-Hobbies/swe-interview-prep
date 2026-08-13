@@ -58,7 +58,6 @@
     "@ai-sdk/openai-compatible": "2.0.41",
     "@cloudflare/realtimekit": "2.0.1",
     "@cloudflare/realtimekit-react": "2.0.1",
-    "@cloudflare/realtimekit-react-ui": "2.0.1",
     "@excalidraw/excalidraw": "0.18.1",
     "@monaco-editor/react": "4.7.0",
     "@radix-ui/react-tooltip": "^1.2.16",

@@ -40,7 +40,7 @@ The owner has explicitly requested both the short objective mode and the 30-minu
 - **API:** new authenticated and public Wars endpoints rather than extending the learning action registry with unrelated competitive mutations.
 - **Data:** additive D1 migrations for competitive entities; R2 references for large artifact/transcript payloads; no request-time schema mutation.
 - **Realtime:** a separately deployable Worker/Durable Object for live match state plus Cloudflare RealtimeKit REST, SDK, webhook, and transcription integration.
-- **Dependencies:** add the official Cloudflare RealtimeKit React/Core UI packages because the existing application has no WebRTC media SDK. No general-purpose state, chart, or component framework is added.
+- **Dependencies:** add the official Cloudflare RealtimeKit Core and React packages because the existing application has no WebRTC media SDK. The focused two-person controls stay local; no general-purpose state, chart, or component framework is added.
 - **Configuration:** document non-secret RealtimeKit app/account identifiers and keep API tokens/webhook secrets in Cloudflare-managed secrets. No secret or local env file is committed.
 - **Operations:** manual deployment remains the release path. RealtimeKit, the live-match Worker, additive D1 migration, and Pages build require explicit operator steps and independent rollback controls.
 - **Product status:** on completion, update canonical product docs and `PROJECT_STATUS.md` to record the owner-requested Software Wars expansion.

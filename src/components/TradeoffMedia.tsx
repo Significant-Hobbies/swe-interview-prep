@@ -1,14 +1,13 @@
 import { Camera, CameraOff, Mic, MicOff, MonitorUp, Video } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import { useRealtimeKitClient } from '@cloudflare/realtimekit-react';
+import type { RTKParticipant, RTKSelf } from '@cloudflare/realtimekit';
 import {
-  RtkCameraToggle,
-  RtkMicToggle,
-  RtkScreenShareToggle,
-  RtkSimpleGrid,
-  RtkUiProvider,
-} from '@cloudflare/realtimekit-react-ui';
+  RealtimeKitProvider,
+  useRealtimeKitClient,
+  useRealtimeKitSelector,
+} from '@cloudflare/realtimekit-react';
 
 export function TradeoffMedia({ authToken, meetingId }: { authToken: string; meetingId: string }) {
   const [meeting, initMeeting] = useRealtimeKitClient();
@@ -107,18 +106,218 @@ export function TradeoffMedia({ authToken, meetingId }: { authToken: string; mee
   }
 
   return (
-    <RtkUiProvider meeting={meeting}>
-      <div className="overflow-hidden rounded-lg bg-[#080808]">
-        <div className="h-40 [&_rtk-simple-grid]:h-full [&_rtk-simple-grid]:bg-black">
-          <RtkSimpleGrid />
-        </div>
-        <div className="flex min-h-12 items-center justify-center gap-2 border-t border-white/10 bg-black px-3">
-          <RtkMicToggle aria-label="Mute or unmute microphone" />
-          <RtkCameraToggle aria-label="Turn camera on or off" />
-          <RtkScreenShareToggle aria-label="Start or stop screen sharing" />
-        </div>
+    <RealtimeKitProvider value={meeting}>
+      <JoinedMedia />
+    </RealtimeKitProvider>
+  );
+}
+
+function JoinedMedia() {
+  const self = useRealtimeKitSelector((client) => client.self);
+  const participants = useRealtimeKitSelector((client) => client.participants.active.toArray());
+  const [controlError, setControlError] = useState('');
+  const [controlPending, setControlPending] = useState(false);
+
+  async function updateMedia(action: () => Promise<void>) {
+    if (controlPending) return;
+    setControlPending(true);
+    setControlError('');
+    try {
+      await action();
+    } catch (reason) {
+      setControlError(reason instanceof Error ? reason.message : 'Could not update media');
+    } finally {
+      setControlPending(false);
+    }
+  }
+
+  const tiles: Array<{ participant: RTKParticipant | RTKSelf; isSelf: boolean }> = [
+    { participant: self, isSelf: true },
+    ...participants.map((participant) => ({ participant, isSelf: false })),
+  ];
+
+  return (
+    <div className="overflow-hidden rounded-lg bg-[#080808]">
+      <div className="grid min-h-40 grid-cols-1 gap-px bg-white/10 sm:grid-cols-2">
+        {tiles.map(({ participant, isSelf }) => (
+          <ParticipantTile
+            key={isSelf ? 'self' : participant.id}
+            participant={participant}
+            isSelf={isSelf}
+          />
+        ))}
+        {tiles
+          .filter(({ participant }) => participant.screenShareEnabled)
+          .map(({ participant, isSelf }) => (
+            <ScreenShareTile
+              key={`screen-${isSelf ? 'self' : participant.id}`}
+              participant={participant}
+              isSelf={isSelf}
+            />
+          ))}
       </div>
-    </RtkUiProvider>
+      <div className="flex min-h-14 flex-wrap items-center justify-center gap-2 border-t border-white/10 bg-black px-3 py-2">
+        <MediaControl
+          label={self.audioEnabled ? 'Mute microphone' : 'Unmute microphone'}
+          active={self.audioEnabled}
+          disabled={controlPending}
+          onClick={() =>
+            void updateMedia(() => (self.audioEnabled ? self.disableAudio() : self.enableAudio()))
+          }
+          activeIcon={<Mic className="h-4 w-4" />}
+          inactiveIcon={<MicOff className="h-4 w-4" />}
+        />
+        <MediaControl
+          label={self.videoEnabled ? 'Turn camera off' : 'Turn camera on'}
+          active={self.videoEnabled}
+          disabled={controlPending}
+          onClick={() =>
+            void updateMedia(() => (self.videoEnabled ? self.disableVideo() : self.enableVideo()))
+          }
+          activeIcon={<Camera className="h-4 w-4" />}
+          inactiveIcon={<CameraOff className="h-4 w-4" />}
+        />
+        <MediaControl
+          label={self.screenShareEnabled ? 'Stop screen sharing' : 'Share screen'}
+          active={self.screenShareEnabled}
+          disabled={controlPending}
+          onClick={() =>
+            void updateMedia(() =>
+              self.screenShareEnabled ? self.disableScreenShare() : self.enableScreenShare()
+            )
+          }
+          activeIcon={<MonitorUp className="h-4 w-4" />}
+          inactiveIcon={<MonitorUp className="h-4 w-4" />}
+        />
+        {controlError ? (
+          <p role="alert" className="w-full text-center text-[11px] text-rose-300">
+            {controlError}
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function ParticipantTile({
+  participant,
+  isSelf,
+}: {
+  participant: RTKParticipant | RTKSelf;
+  isSelf: boolean;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    participant.registerVideoElement(video);
+    return () => participant.deregisterVideoElement(video);
+  }, [participant]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || isSelf) return;
+    audio.srcObject = participant.audioEnabled ? new MediaStream([participant.audioTrack]) : null;
+    return () => {
+      audio.srcObject = null;
+    };
+  }, [isSelf, participant, participant.audioEnabled, participant.audioTrack]);
+
+  return (
+    <div className="relative grid min-h-40 place-items-center overflow-hidden bg-black">
+      <video
+        ref={videoRef}
+        autoPlay
+        muted={isSelf}
+        playsInline
+        className={`h-full w-full object-cover ${participant.videoEnabled ? 'block' : 'hidden'}`}
+      />
+      {/* biome-ignore lint/a11y/useMediaCaption: live call audio has no prerecorded caption track */}
+      {!isSelf ? <audio ref={audioRef} autoPlay /> : null}
+      {!participant.videoEnabled ? (
+        <div className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-sm font-medium text-white/70">
+          {participant.name?.trim().charAt(0).toUpperCase() || '?'}
+        </div>
+      ) : null}
+      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/80 to-transparent px-3 pb-2 pt-6 text-[11px] text-white/70">
+        <span>{isSelf ? 'You' : participant.name || 'Opponent'}</span>
+        {participant.audioEnabled ? (
+          <Mic className="h-3.5 w-3.5" aria-label="Microphone on" />
+        ) : (
+          <MicOff className="h-3.5 w-3.5 text-white/40" aria-label="Microphone muted" />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ScreenShareTile({
+  participant,
+  isSelf,
+}: {
+  participant: RTKParticipant | RTKSelf;
+  isSelf: boolean;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const track = participant.screenShareTracks.video;
+    if (!video || !track) return;
+    video.srcObject = new MediaStream([track]);
+    return () => {
+      video.srcObject = null;
+    };
+  }, [participant, participant.screenShareTracks.video]);
+
+  return (
+    <div className="relative min-h-40 overflow-hidden bg-black">
+      <video
+        ref={videoRef}
+        autoPlay
+        muted={isSelf}
+        playsInline
+        className="h-full w-full object-contain"
+      />
+      <span className="absolute bottom-2 left-3 rounded bg-black/70 px-2 py-1 text-[10px] text-white/70">
+        {isSelf ? 'Your screen' : `${participant.name || 'Opponent'}’s screen`}
+      </span>
+    </div>
+  );
+}
+
+function MediaControl({
+  label,
+  active,
+  disabled,
+  onClick,
+  activeIcon,
+  inactiveIcon,
+}: {
+  label: string;
+  active: boolean;
+  disabled: boolean;
+  onClick: () => void;
+  activeIcon: ReactNode;
+  inactiveIcon: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      aria-pressed={active}
+      disabled={disabled}
+      onClick={onClick}
+      className={`flex h-11 w-11 items-center justify-center rounded-md border transition-colors disabled:opacity-40 ${
+        active
+          ? 'border-sky-300/40 bg-sky-300/10 text-sky-200'
+          : 'border-white/10 text-white/45 hover:border-white/20 hover:text-white'
+      }`}
+    >
+      {active ? activeIcon : inactiveIcon}
+    </button>
   );
 }
 

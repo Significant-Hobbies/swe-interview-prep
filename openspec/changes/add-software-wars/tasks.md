@@ -1,7 +1,7 @@
 ## 1. Competitive Foundations
 
 - [x] 1.1 Add an additive `0002_software_wars.sql` D1 migration with content, match, attempt, artifact, vote, evaluation, challenge, rating, report, and remediation tables plus required indexes and idempotency constraints.
-- [x] 1.2 Add the pinned official Cloudflare RealtimeKit Core/React/UI production dependencies and document why each dependency is required.
+- [x] 1.2 Add the pinned official Cloudflare RealtimeKit Core/React production dependencies and document why each dependency is required.
 - [x] 1.3 Define shared Software Wars domain types, status enums, opaque identifiers, API envelopes, visibility rules, and size limits without importing server answer material into client modules.
 - [x] 1.4 Implement and unit-test pure Blitz scoring, server-deadline checks, question selection/cooldown policy, vote compatibility, Tradeoff phase transitions, and conservative remediation mapping.
 - [x] 1.5 Implement and unit-test versioned competitive Elo at 1500 with K=48 for matches 1–10, K=24 thereafter, reciprocal human events, fixed AI ratings, rounding, and idempotent fixtures.
