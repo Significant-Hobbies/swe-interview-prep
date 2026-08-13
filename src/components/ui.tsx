@@ -321,7 +321,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${BUTTON_TONES[tone]} ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md px-3.5 py-1.5 text-sm font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${BUTTON_TONES[tone]} ${className}`}
     >
       {children}
     </button>
@@ -428,7 +428,8 @@ export function FilterPill({
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150 focus-visible:outline-none ${
+      aria-pressed={active}
+      className={`min-h-11 shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
         active
           ? 'border-white bg-white text-black'
           : 'border-white/15 text-white/60 hover:border-white/30 hover:text-white'

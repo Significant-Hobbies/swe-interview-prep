@@ -156,6 +156,14 @@ export default function MockInterview() {
             ? `Interview in ${profile.interviewHorizonDays} days — timed reps under pressure.`
             : 'Timed prompts with rubric checklists. Optional AI feedback if configured.'
         }
+        actions={
+          <Link
+            to="/wars"
+            className="inline-flex min-h-11 items-center rounded-full border border-white/15 px-4 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/5"
+          >
+            Software Wars
+          </Link>
+        }
       />
 
       <div className="mb-4 flex flex-wrap gap-2">

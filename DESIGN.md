@@ -174,8 +174,17 @@ obvious when they stack.
 
 At compact widths, multi-column workspaces become one ordered column and
 controls wrap rather than shrink below a comfortable target. The persistent
-application navigation remains the only primary navigation; feature entry
-points live contextually within existing routes.
+application navigation remains the only primary navigation, limited to
+Dashboard, Learn, Practice, and Wars. Dashboard resumes work, Learn is the
+searchable high-level learning surface, Practice is the Playground with a
+complete problem selector, and Wars begins with the duration choice. Secondary
+destinations live contextually within those routes or the grouped Browse
+disclosure. Active workspaces suppress unrelated global chrome.
+
+**The Complete Inventory Rule.** Simpler entry surfaces must not hide, delete,
+or strand canonical content. Complete concept, roadmap, and practice catalogues
+remain explicitly browsable through stable routes and portable generated data;
+search is an accelerator, never the only way to discover content.
 
 ## Elevation & Depth
 

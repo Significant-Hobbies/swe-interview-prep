@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "dev:frontend": "vite",
+    "dev:wars-worker": "wrangler dev --config workers/software-wars/wrangler.jsonc --port 8788",
     "verify:sources": "node scripts/verify-sources.mjs",
     "verify:citations": "node scripts/verify-citations.mjs",
+    "validate:wars-content": "node scripts/validate-software-wars-content.mjs",
+    "audit:wars-topic": "node scripts/audit-software-wars-topic.mjs",
     "build": "pnpm generate:public-curriculum && node scripts/validate-env.mjs build && vite build",
     "lint": "biome check .",
     "preview": "vite preview",
@@ -53,6 +56,8 @@
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "2.0.41",
+    "@cloudflare/realtimekit": "2.0.1",
+    "@cloudflare/realtimekit-react": "2.0.1",
     "@excalidraw/excalidraw": "0.18.1",
     "@monaco-editor/react": "4.7.0",
     "@radix-ui/react-tooltip": "^1.2.16",

@@ -12,6 +12,10 @@ combines Monaco coding, Excalidraw diagramming, multi-provider Socratic AI
 hints, deterministic systems simulations, FSRS spaced repetition, LeetCode
 import, an embedded learning-library reader, and progress tracking.
 
+Software Wars is the competitive diagnostic layer: a learner plays a short
+objective Blitz battle or a scheduled open-ended Tradeoff battle, receives
+concept-level remediation, and returns to the same learning and FSRS loop.
+
 ## Why it exists
 
 Technical interview prep is fragmented across LeetCode (coding), Excalidraw
@@ -28,39 +32,56 @@ Feynman Gate) is the build/drill workspace. Systems Lab adds a second kind of
 artifact: a repaired infrastructure configuration plus a frozen prediction,
 actor-owned evidence, and a causal explain-back.
 
-## Primary tabs
+## Primary destinations
 
-The primary nav (`PRIMARY_NAV` in `src/components/Layout.tsx`) has six tabs
-plus a Docs link:
+The canonical navigation model in `src/data/site-navigation.ts` exposes four
+learner intents. Secondary tools remain directly addressable, but discovery is
+grouped under the relevant intent instead of presenting every capability as a
+peer destination:
 
 | Tab | Role |
 | --- | --- |
-| Today | Home / daily session hub (the index route) |
-| Learn | Roadmap journey + concepts across the tracks |
-| Practice | Drills + spaced-repetition reviews |
-| Mock | Timed mock interview |
-| Playground | Monaco/Excalidraw build surface with Socratic AI companion |
-| Progress | Mastery rollups + notes |
+| Dashboard | Resume recent work; see current and next learning/practice; discover available paths |
+| Learn | Searchable high-level entry to concepts and learning paths |
+| Practice | The Playground workspace with a selector over the complete problem inventory |
+| Wars | One-minute MCQ battles and thirty-minute matched engineering battles |
+
+Dashboard resumes the learner's current loop. Learn stays deliberately
+high-level, but its search and browse-all destinations cover every canonical
+concept and roadmap. Practice opens directly into the Playground and keeps the
+complete problem catalogue one interaction away. Wars makes the duration
+choice explicit before exposing ratings, history, leaderboards, and
+operational detail. Active battles and workspaces use a focused shell that
+keeps account access and an exit while suppressing unrelated chrome.
 
 Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`)
-are reachable from inside the tabs. `/today` and `/build` (BuildLab) are real
-pages. `/labs` and `/labs/:labId` are contextual learning surfaces rather than
-new primary tabs. Legacy routes redirect so external links keep working: `/dashboard` →
-`/today`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
-`/practice`; `/reviews`, `/review` → `/practice/all?tab=reviews`; `/projects`
+remain reachable through contextual hubs and Browse. `/mock`, `/playground`,
+`/build`, `/labs`, `/progress`, and `/wars` remain real pages with stable deep
+links. Legacy routes redirect so external links keep working: `/today` →
+`/dashboard`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
+`/practice/all`; `/reviews`, `/review` → `/practice/all?tab=reviews`; `/projects`
 → `/progress/all`; `/notes` → `/progress/all?tab=notes`; `/vibe-learning` →
 `/playground`. See `src/App.tsx`.
 
+No simplification is allowed to make canonical learning or practice content
+search-only or unreachable. The complete catalogues, stable detail routes,
+public curriculum, and generated data remain portable independently of the
+four entry surfaces.
+
+Guest Wars battles are local and explicitly unranked;
+competitive ratings, ranked answers, deadlines, challenge state, and live
+Tradeoff phases are server-owned.
+
 ## Tracks
 
-Eighteen learning tracks (`TRACKS` in `src/data/learning-os.ts`) preserve the
+Nineteen learning tracks (`TRACKS` in `src/data/learning-os.ts`) preserve the
 original Search/IR, mathematics, vector DB, AI, backend, databases, system
 design, DSA, and product paths, then add Systems Foundations, Infrastructure &
 Platforms, Distributed Systems, Inference & Serving, Agent Systems, AI
 Reliability, Developer Tools & Code Intelligence, Application Engineering, and
 Multimodal & Spatial Computing.
 
-Concept content is static JSON in `src/data/concepts.json` (222 concepts). The
+Concept content is static JSON in `src/data/concepts.json` (252 concepts). The
 machine-readable contract mapping the requested eleven-domain taxonomy and its
 96 named subtopics to concepts is `src/data/curriculum-coverage.json`.
 
@@ -68,7 +89,7 @@ machine-readable contract mapping the requested eleven-domain taxonomy and its
 
 The same canonical data generates a JavaScript-free publication layer at
 [`/curriculum/`](https://learn.significanthobbies.com/curriculum/): one hub,
-18 track pages, 24 roadmap pages, and 222 concept pages. Concept pages publish
+19 track pages, 25 roadmap pages, and 252 concept pages. Concept pages publish
 the editorial explanation, mental model, primary resources, practice direction,
 review prompts, and build criteria while keeping progress, notes, saved Reader
 content, and review answers private.
@@ -87,6 +108,20 @@ tools, application engineering, multimodal/spatial systems, behavioral
 practice, deterministic systems simulations, FSRS spaced repetition,
 multi-provider AI hints, LeetCode import, embedded learning library, and
 personal learning sessions.
+
+The personally requested Software Wars expansion adds source-backed Blitz
+battles, scheduled Tradeoff battles, distinct ratings, managed two-person
+media, sanitized result sharing, and concept remediation. It does not add
+payments, recruiter tooling, tournaments, or unrestricted generated ranked
+content.
+
+The checked-in server-only ranked bank contains 1,200 independently audited,
+active questions across 12 backend and systems topics. Every question has a
+canonical primary Learn concept, four option-specific explanations, and
+authoritative source metadata. The validator enforces the exact topic and
+difficulty distribution, source breadth, answer-position balance, editorial
+reuse checks, and complete coverage by three fixed AI profiles (3,600 stored
+answers), so matches perform no model inference.
 
 **Out of scope** (per the 2026-07-10 personal-use closure in
 [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md)): ATS/job-application features, paid

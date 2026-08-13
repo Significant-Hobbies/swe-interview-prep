@@ -48,8 +48,9 @@ export async function generate({
   prompt,
   messages,
   maxTokens = 1500,
+  env,
 }) {
-  const resolved = resolveAIConfig({ endpointUrl, apiKey, model });
+  const resolved = resolveAIConfig({ endpointUrl, apiKey, model }, env);
   const provider = buildProvider(resolved);
   try {
     const result = await generateText({

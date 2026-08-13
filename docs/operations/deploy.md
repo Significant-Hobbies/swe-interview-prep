@@ -2,6 +2,10 @@
 
 Production: **Vite SPA** + **Pages Functions** (`functions/`) + **Cloudflare D1**.
 
+Software Wars also has a separately deployable Worker under
+`workers/software-wars/` for the Tradeoff Durable Object and Queue consumer.
+Repository code does not provision or deploy it automatically.
+
 ## One-command readiness
 
 ```bash
@@ -80,6 +84,25 @@ To exercise the real Pages Functions with isolated local D1 instead of the
 in-memory Vite stubs, run `pnpm db:migrate:local` and `pnpm dev:pages`.
 
 See [`../development/setup.md`](../development/setup.md) for full local setup.
+
+## Software Wars activation
+
+Follow [`runbooks/software-wars.md`](runbooks/software-wars.md). In short:
+
+1. Validate content, migrations, tests, and the Worker configuration before
+   changing platform state.
+2. Provision the D1/R2/Queue/DLQ and SQLite Durable Object bindings declared in
+   `workers/software-wars/wrangler.jsonc`; deploy the Worker manually.
+3. Configure the Pages service binding, public Worker URL, shared signing
+   secret, and optional RealtimeKit application/webhook credentials.
+4. Apply `migrations/d1/0002_software_wars.sql` only through the explicit
+   migration gate.
+5. Enable unranked previews first. Enable ranked flags only after the content
+   validator and a two-account smoke test pass.
+
+Rollback starts by disabling match-creation flags. Pages and the Wars Worker
+can then roll back independently. The migration is additive; completed history
+and rating events are retained rather than destructively down-migrated.
 
 ## Post-deploy smoke
 

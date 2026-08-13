@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "swe-interview-prep",
-  "target": "Today learning session",
+  "target": "Four-surface Learning OS: Dashboard, Learn, Practice, and Wars with complete catalogue preservation",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -14,25 +14,57 @@
     "probes": [],
     "selected": "existing-design",
     "approval": "not-required",
-    "before": "artifacts/design/before.png"
+    "before": "artifacts/design/software-wars/after-wars-1440.png"
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-390.png"
+        "path": "artifacts/design/final-dashboard-390.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/final-learn-390.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/final-practice-390.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/final-wars-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-768.png"
+        "path": "artifacts/design/final-dashboard-768.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/final-practice-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-1440.png"
+        "path": "artifacts/design/final-dashboard-1440.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/final-learn-1440.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/final-practice-1440.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/final-practice-selector-1440.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/final-wars-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "pnpm format:check && pnpm check && pnpm typecheck && pnpm test && pnpm build",
+      "command": "vitest run; tsc --noEmit; biome check .; docs validation; generated-curriculum + production Vite build; Playwright smoke/mobile/Wars; strict OpenSpec validation",
       "status": "pass"
     },
     "critique": {
@@ -40,7 +72,7 @@
       "maximum": 40
     },
     "audit": {
-      "score": 19,
+      "score": 17,
       "maximum": 20
     },
     "unresolved": {
@@ -50,47 +82,12 @@
     "detector": {
       "posture": "advisory",
       "findings": [
-        {
-          "rule": "design-system-color",
-          "count": 3,
-          "disposition": "pre-existing",
-          "note": "Existing literals in CodeEditor and the global scrollbar are outside the documented palette; none were introduced by the Today remediation."
-        },
-        {
-          "rule": "gray-on-color",
-          "count": 5,
-          "disposition": "pre-existing",
-          "note": "Existing warnings are confined to ExerciseRunner, UnderstandingCheck, and BuildLab, outside the reviewed Today surface."
-        },
-        {
-          "rule": "design-system-font-size",
-          "count": 6,
-          "disposition": "pre-existing",
-          "note": "Existing off-ramp sizes are confined to RoadmapGraph, Library, Progress, and Sweep, outside the reviewed Today surface."
-        },
-        {
-          "rule": "side-tab",
-          "count": 1,
-          "disposition": "pre-existing",
-          "note": "The existing MarkdownViewer blockquote treatment is outside the reviewed Today surface."
-        },
-        {
-          "rule": "overused-font",
-          "count": 1,
-          "disposition": "intentional",
-          "note": "Geist Mono is explicitly required by DESIGN.md for labels and measured state."
-        },
-        {
-          "rule": "codex-grid-background",
-          "count": 1,
-          "disposition": "intentional",
-          "note": "The restrained workbench grid is an existing product-specific background treatment and not part of the Today remediation."
-        }
+        "The final scoped detector ran exactly once, exited 0, and returned zero findings."
       ]
     }
   },
   "ownerFeedback": {
-    "decision": "delegated",
-    "note": "Owner explicitly delegated the remediation with 'Go for it. Do all of them until there is at least something.' on 2026-07-31."
+    "decision": "keep",
+    "note": "Owner reviewed the four-surface direction and responded: looks good, keep going. Dashboard resumes work; Learn is high-level and searchable; Practice is the existing Playground with all 298 canonical problems; Wars presents the one-minute and thirty-minute formats. Complete concept, roadmap, problem, public-curriculum, progress, and legacy routes remain visible and portable."
   }
 }

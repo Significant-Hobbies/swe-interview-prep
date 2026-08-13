@@ -78,4 +78,5 @@ export const STORE_KEYS = {
   sweep: 'swe-os:sweep-v1',
   setupHint: 'swe-os:setup-hint-v1',
   systemsLabs: 'swe-os:systems-labs-v1',
+  recentVisits: 'swe-os:recent-visits-v1',
 } as const;

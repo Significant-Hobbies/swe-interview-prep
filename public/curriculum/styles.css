@@ -18,7 +18,8 @@ a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
 .browse-menu>summary::-webkit-details-marker,.compact-menu>summary::-webkit-details-marker{display:none}
 .browse-menu>summary span,.compact-menu>summary span{margin-left:4px;font-size:.625rem;transition:transform 150ms}
 .browse-menu[open]>summary span,.compact-menu[open]>summary span{transform:rotate(180deg)}
-.browse-panel{position:absolute;left:50%;top:calc(100% + 4px);display:grid;width:448px;grid-template-columns:1fr 1fr;gap:4px;transform:translateX(-50%);border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#000;padding:8px}
+.browse-panel{position:absolute;left:50%;top:calc(100% + 4px);display:grid;width:576px;grid-template-columns:1fr 1fr;gap:12px;transform:translateX(-50%);border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#000;padding:12px}
+.browse-panel section>p{margin:0;padding:8px 12px 4px;color:rgba(255,255,255,.38);font-size:.6875rem;font-weight:600}
 .browse-panel a,.compact-menu nav a{display:block;border-radius:6px;color:rgba(255,255,255,.65);padding:8px 12px;font-size:.875rem;text-decoration:none;transition:background 150ms,color 150ms}
 .browse-panel a:hover,.compact-menu nav a:hover{background:rgba(255,255,255,.05);color:white}
 .compact-menu{display:none;margin-left:auto}

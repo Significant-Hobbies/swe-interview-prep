@@ -31,7 +31,12 @@ const PROJECT = 'swe-interview-prep' as const;
  *  - `code_run`            — code was executed in the playground.
  *  - `explanation_graded`  — a Feynman-gate explanation was graded.
  */
-export type CoreAction = 'concept_reviewed' | 'code_run' | 'explanation_graded' | 'systems_lab';
+export type CoreAction =
+  | 'concept_reviewed'
+  | 'code_run'
+  | 'explanation_graded'
+  | 'systems_lab'
+  | 'software_wars';
 
 export type SystemsLabStage =
   | 'opened'

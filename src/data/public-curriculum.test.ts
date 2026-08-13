@@ -137,7 +137,8 @@ describe('public curriculum publication', () => {
       expect(header, `${path}: site header`).toBeTruthy();
       for (const item of SITE_NAV_ITEMS) {
         const link = `href="${item.to}">${item.label}</a>`;
-        expect(header?.split(link), `${path}: ${item.label}`).toHaveLength(3);
+        const expectedOccurrences = 'blurb' in item && !('menu' in item && item.menu) ? 1 : 3;
+        expect(header?.split(link), `${path}: ${item.label}`).toHaveLength(expectedOccurrences);
       }
     }
   });

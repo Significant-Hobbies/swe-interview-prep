@@ -15,28 +15,36 @@ test.beforeEach(async ({ context, page }) => {
 });
 
 test.describe('Learning OS smoke', () => {
-  test('root redirects to /today and shows today plan', async ({ page }) => {
+  test('root redirects to Dashboard and shows resumable learning state', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveURL(/\/today$/);
-    await expect(page.getByText(/min session|You're caught up/i).first()).toBeVisible();
+    await expect(page).toHaveURL(/\/dashboard$/);
+    await expect(page.getByRole('heading', { name: 'Pick up where you left off.' })).toBeVisible();
+    await expect(page.getByText('Learning now')).toBeVisible();
+    await expect(page.getByText('Next in practice')).toBeVisible();
   });
 
-  test('Learn page shows roadmaps + concepts', async ({ page }) => {
+  test('Learn page searches the complete catalogue and keeps browse-all visible', async ({
+    page,
+  }) => {
     await page.goto('/learn');
     await expect(
-      page.getByRole('heading', { name: 'Set your active path.', exact: true })
+      page.getByRole('heading', { name: 'Understand the system.', exact: true })
     ).toBeVisible();
-    await expect(page.getByRole('region', { name: 'Interview quick picks' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Interview prep', exact: true })).toBeVisible();
-    await expect(page.getByRole('button', { name: /90-Day AI Search/i })).toBeVisible();
-    await expect(page.getByRole('region', { name: 'Browse catalog' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'All concepts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: /All \d+ concepts/ })).toBeVisible();
+    await page.getByRole('searchbox', { name: /Search all concepts/i }).fill('idempotency');
+    await expect(page.getByRole('link', { name: /Idempotency/i }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Browse all concepts' })).toBeVisible();
   });
 
-  test('Practice page renders drill hub', async ({ page }) => {
+  test('Practice opens the Playground with the complete problem selector', async ({ page }) => {
     await page.goto('/practice');
-    await expect(page.getByText('This week')).toBeVisible();
-    await expect(page.getByRole('region', { name: 'Browse catalog' })).toBeVisible();
+    const selector = page.getByLabel(/Choose a practice problem/i);
+    await expect(selector).toBeVisible({ timeout: 15000 });
+    await selector.click();
+    await expect(
+      page.getByRole('searchbox', { name: /Search every practice problem/i })
+    ).toBeVisible();
+    await expect(page.getByRole('link', { name: /Browse complete catalogue/i })).toBeVisible();
   });
 
   test('Practice → Reviews view on drill browser', async ({ page }) => {
@@ -48,6 +56,9 @@ test.describe('Learning OS smoke', () => {
 
   test('Playground loads the Monaco editor', async ({ page }) => {
     await page.goto('/playground');
+    if ((page.viewportSize()?.width ?? 1024) <= 500) {
+      await page.getByRole('button', { name: 'Code', exact: true }).click();
+    }
     await expect(page.locator('.monaco-editor').first()).toBeVisible({ timeout: 15000 });
   });
 
@@ -100,7 +111,7 @@ test.describe('Learning OS smoke', () => {
     await expect(page.getByRole('button', { name: /Skip — explore the catalog/i })).toBeVisible();
     await clickNav(page, 'Learn');
     await expect(page).toHaveURL(/\/learn$/);
-    await expect(page.getByRole('region', { name: 'Learning paths' })).toBeVisible();
+    await expect(page.getByRole('searchbox', { name: /Search all concepts/i })).toBeVisible();
   });
 
   // Titles must match `ROADMAP_GROUPS` in src/lib/roadmapGroups.ts. They cannot
@@ -129,9 +140,13 @@ test.describe('Learning OS smoke', () => {
   });
 
   test('primary top nav navigates between tabs', async ({ page }) => {
-    await page.goto('/today');
+    await page.goto('/dashboard');
     await clickNav(page, 'Learn');
     await expect(page).toHaveURL(/\/learn$/);
+    await clickNav(page, 'Wars');
+    await expect(page).toHaveURL(/\/wars$/);
+    await clickNav(page, 'Dashboard');
+    await expect(page).toHaveURL(/\/dashboard$/);
     await clickNav(page, 'Practice');
     await expect(page).toHaveURL(/\/practice$/);
   });
@@ -173,7 +188,7 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/concepts');
     await expect(page).toHaveURL(/\/learn\/all$/);
     await page.goto('/drills');
-    await expect(page).toHaveURL(/\/practice$/);
+    await expect(page).toHaveURL(/\/practice\/all$/);
     await page.goto('/reviews');
     await expect(page).toHaveURL(/\/practice\/all\?tab=reviews$/);
     await page.goto('/build');
@@ -184,7 +199,9 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/projects');
     await expect(page).toHaveURL(/\/progress\/all$/);
     await page.goto('/dashboard');
-    await expect(page).toHaveURL(/\/today$/);
+    await expect(page).toHaveURL(/\/dashboard$/);
+    await page.goto('/today');
+    await expect(page).toHaveURL(/\/dashboard$/);
   });
 
   test('core loop: concept detail links to a drill', async ({ page }) => {

@@ -1,0 +1,49 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "swe-interview-prep-wars",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "durable_objects": {
+    "bindings": [
+      { "name": "TRADEOFF_MATCH", "class_name": "TradeoffMatch" }
+    ]
+  },
+  "exports": {
+    "TradeoffMatch": { "type": "durable-object", "storage": "sqlite" }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "swe-interview-prep",
+      "database_id": "9f4f9da4-b196-4cb1-8a91-c978dd2bbd74",
+      "migrations_dir": "../../migrations/d1"
+    }
+  ],
+  "r2_buckets": [
+    { "binding": "WAR_ARTIFACTS", "bucket_name": "swe-interview-prep-war-artifacts" }
+  ],
+  "queues": {
+    "producers": [
+      { "binding": "WAR_JOBS", "queue": "swe-interview-prep-war-jobs" }
+    ],
+    "consumers": [
+      {
+        "queue": "swe-interview-prep-war-jobs",
+        "max_batch_size": 5,
+        "max_batch_timeout": 10,
+        "max_retries": 5,
+        "dead_letter_queue": "swe-interview-prep-war-jobs-dlq"
+      }
+    ]
+  },
+  "vars": {
+    "ENVIRONMENT": "production",
+    "PAGES_ORIGIN": "https://swe-interview-prep.pages.dev"
+  },
+  "observability": {
+    "enabled": true,
+    "logs": { "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.05 }
+  }
+}

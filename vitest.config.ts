@@ -11,6 +11,7 @@ export default defineConfig({
       'src/**/*.test.tsx',
       'shared/**/*.test.mjs',
       'handlers/**/*.test.mjs',
+      'workers/**/*.test.mjs',
     ],
     exclude: ['node_modules', 'dist', '.next', '.wrangler'],
     testTimeout: 15_000,

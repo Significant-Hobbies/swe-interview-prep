@@ -7,7 +7,7 @@ export default function Privacy() {
         ← Loop
       </Link>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-white">Privacy</h1>
-      <p className="mt-4 text-xs text-slate-500">Last updated: 2026-05-15.</p>
+      <p className="mt-4 text-xs text-slate-500">Last updated: 2026-08-13.</p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">What we store</h2>
       <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -15,7 +15,18 @@ export default function Privacy() {
         <li>Your FSRS state and per-concept mastery snapshots.</li>
         <li>Notes you write in the Playground.</li>
         <li>Daily / weekly AI plan history.</li>
+        <li>Software Wars matches, answers, ratings, reports, and remediation evidence.</li>
+        <li>Private Tradeoff artifacts; large artifacts may use project-owned object storage.</li>
       </ul>
+
+      <h2 className="mt-8 text-base font-semibold text-blue-400">Live battles</h2>
+      <p className="mt-2">
+        Tradeoff Wars can use Cloudflare RealtimeKit for two-person audio and video. Video recording
+        is off by default. Debate transcription requires disclosure and consent from both players;
+        if either declines, adjudication uses frozen artifacts, the rubric, twist response, and
+        private votes without a transcript. Public results exclude ranked questions, private drafts,
+        transcripts, and provider identifiers.
+      </p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">AI provider config</h2>
       <p className="mt-2">

@@ -26,6 +26,13 @@ import CompanionPanel from '../components/CompanionPanel';
 import DiagramEditor from '../components/DiagramEditor';
 import FeynmanGate from '../components/FeynmanGate';
 import MarkdownViewer from '../components/MarkdownViewer';
+import { ProblemSelector } from '../components/ProblemSelector';
+import {
+  CONCEPT_BY_ID as CONCEPTS_BY_ID,
+  DRILL_BY_ID,
+  PRACTICE_DRILLS,
+  type Drill,
+} from '../data/learning-os';
 import { getPlaygroundTemplate } from '../data/playground-templates';
 import { useCodeExecution } from '../hooks/useCodeExecution';
 import { CONCEPT_BY_ID, useConceptMastery } from '../hooks/useConcepts';
@@ -72,7 +79,7 @@ function loadPanels(): Set<PanelId> {
   } catch {
     /* invalid JSON */
   }
-  return new Set(['code', 'companion']);
+  return new Set(['problem', 'code']);
 }
 
 export default function Playground() {
@@ -98,6 +105,7 @@ export default function Playground() {
   const [feynmanOpen, setFeynmanOpen] = useState(false);
   const [taggedConcepts, setTaggedConcepts] = useState<string[]>([]);
   const [artifactTitle, setArtifactTitle] = useState<string | null>(null);
+  const [selectedProblemId, setSelectedProblemId] = useState<string | null>(null);
   const { enabled: focusMode, setEnabled: setFocusMode, sessionsThisWeek } = useFocusMode();
   const { getArtifact, setArtifact } = useArtifactStore();
   const { refresh: refreshMastery } = useConceptMastery();
@@ -134,6 +142,38 @@ export default function Playground() {
   const artifactParam = searchParams.get('artifact');
   const conceptParam = searchParams.get('concept');
   const promptParam = searchParams.get('prompt');
+  const problemParam = searchParams.get('problem');
+
+  const loadPracticeProblem = useCallback(
+    (drill: Drill, updateUrl = true) => {
+      const concept = CONCEPTS_BY_ID[drill.conceptId];
+      const statement = [
+        `# ${drill.title}`,
+        drill.prompt,
+        `## Expected outcome\n${drill.expectedOutput}`,
+        concept ? `## Related concept\n**${concept.name}** — ${concept.description}` : '',
+      ]
+        .filter(Boolean)
+        .join('\n\n');
+
+      setProblem(statement);
+      setProblemPreview(true);
+      setArtifactTitle(drill.title);
+      setSelectedProblemId(drill.id);
+      setTaggedConcepts([drill.conceptId]);
+      setVisiblePanels((previous) => {
+        const next = new Set(previous);
+        next.add('problem');
+        localStorage.setItem(PANELS_KEY, JSON.stringify([...next]));
+        return next;
+      });
+      if (isCompact) setActivePanel('problem');
+      localStorage.setItem(PROBLEM_KEY, statement);
+      if (updateUrl) setSearchParams({ problem: drill.id }, { replace: true });
+    },
+    [isCompact, setSearchParams]
+  );
+
   useEffect(() => {
     const artifactId = artifactParam;
     const conceptId = conceptParam;
@@ -188,6 +228,19 @@ export default function Playground() {
     setSearchParams({}, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artifactParam, conceptParam, promptParam, setSearchParams]);
+
+  useEffect(() => {
+    if (!problemParam || selectedProblemId === problemParam) return;
+    const drill = DRILL_BY_ID[problemParam];
+    if (!drill || drill.externalUrl) return;
+    loadPracticeProblem(drill, false);
+  }, [loadPracticeProblem, problemParam, selectedProblemId]);
+
+  useEffect(() => {
+    if (problem || problemParam || artifactParam || conceptParam || promptParam) return;
+    const firstInternalProblem = PRACTICE_DRILLS.find((drill) => !drill.externalUrl);
+    if (firstInternalProblem) loadPracticeProblem(firstInternalProblem);
+  }, [artifactParam, conceptParam, loadPracticeProblem, problem, problemParam, promptParam]);
 
   const togglePanel = (id: PanelId) => {
     // In compact mode the toggle row is a single-select tab switcher.
@@ -298,8 +351,9 @@ export default function Playground() {
   return (
     <div className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Toolbar */}
-      <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] bg-black/95 px-3 py-2 sm:px-4 sm:py-2.5">
-        <div className="flex min-w-0 items-center gap-3">
+      <div className="flex flex-col gap-1 border-b border-white/[0.08] bg-black/95 px-3 py-2 lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-4 lg:py-2.5">
+        <div className="flex w-full min-w-0 items-center gap-2 lg:w-auto lg:gap-3">
+          <ProblemSelector selectedId={selectedProblemId} onSelect={loadPracticeProblem} />
           {artifactTitle && (
             <span
               className="hidden max-w-[12rem] truncate text-xs font-medium text-white/60 sm:inline"
@@ -369,7 +423,7 @@ export default function Playground() {
             </>
           )}
         </div>
-        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+        <div className="flex w-full shrink-0 items-center justify-between gap-1 lg:w-auto lg:justify-start lg:gap-2">
           <button
             onClick={() => setFocusMode(!focusMode)}
             className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-xs transition-colors duration-150 ${
@@ -440,15 +494,31 @@ export default function Playground() {
           <PanelWrapper key={id} id={id} index={i} total={panels.length} defaultSize={panelSize}>
             {id === 'problem' && (
               <div className="flex flex-col h-full bg-black">
-                <div className="flex h-9 items-center justify-between border-b border-white/[0.08] px-4">
+                <div className="flex min-h-14 items-center justify-between gap-3 border-b border-white/[0.08] px-4 lg:h-9 lg:min-h-0">
                   <span className="text-xs font-medium text-white/50">Problem Statement</span>
-                  <button
-                    onClick={() => setProblemPreview(!problemPreview)}
-                    className="flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
-                  >
-                    {problemPreview ? <Pencil className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-                    {problemPreview ? 'Edit' : 'Preview'}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {isCompact && (
+                      <button
+                        type="button"
+                        onClick={() => togglePanel('code')}
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-white px-3 text-xs font-medium text-black hover:bg-white/90"
+                      >
+                        <Code2 className="h-3.5 w-3.5" />
+                        Write solution
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setProblemPreview(!problemPreview)}
+                      className="flex min-h-11 items-center gap-1 rounded px-1.5 text-xs text-white/40 transition-colors hover:bg-white/5 hover:text-white/70 lg:min-h-0 lg:py-0.5"
+                    >
+                      {problemPreview ? (
+                        <Pencil className="h-3 w-3" />
+                      ) : (
+                        <Eye className="h-3 w-3" />
+                      )}
+                      {problemPreview ? 'Edit' : 'Preview'}
+                    </button>
+                  </div>
                 </div>
                 {problemPreview ? (
                   <div className="flex-1 overflow-y-auto p-4">
@@ -602,7 +672,7 @@ export default function Playground() {
                 </Panel>
               </PanelGroup>
             )}
-            {id === 'diagram' && <DiagramEditor problemId="playground" />}
+            {id === 'diagram' && <DiagramEditor problemId={selectedProblemId ?? 'playground'} />}
             {id === 'companion' && <CompanionPanel context={{ code, language, problem }} />}
             {id === 'library' && <AmbientLibrary conceptIds={taggedConcepts} />}
           </PanelWrapper>
@@ -616,7 +686,7 @@ export default function Playground() {
         language={language}
         problem={problem}
         conceptIds={taggedConcepts}
-        problemId="playground"
+        problemId={selectedProblemId ?? 'playground'}
         onGraded={() => void refreshMastery()}
       />
     </div>

@@ -20,6 +20,17 @@ non-obvious ones. If it disagrees with `package.json`, `package.json` wins.
 | `pnpm format:check` | `biome format .` (no writes). |
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm size` | `size-limit` (bundle budget; config in `.size-limit.json`). |
+| `pnpm validate:wars-content` | Validate ranked content, variants, sources, launch thresholds, and precomputed AI coverage. |
+| `pnpm audit:wars-topic -- <topic>` | Run the focused 100-question editorial contract for one Wars topic before activation. |
+| `pnpm dev:wars-worker` | Run the local Tradeoff Durable Object and Queue Worker. |
+
+The Wars validator enforces 1,200 active reviewed Blitz questions—100 per
+topic with the required difficulty split—20 active reviewed Tradeoff problems,
+and complete stored answer coverage for every published AI profile. It also
+checks canonical concept links, option-specific explanations, duplicate and
+near-duplicate content, source breadth, and answer-position balance. The
+browser's unranked preview is a separate, disclosed sample and never enters
+ranked selection.
 
 Focused Systems Lab checks:
 

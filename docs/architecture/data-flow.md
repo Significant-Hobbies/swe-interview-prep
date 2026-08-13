@@ -19,6 +19,33 @@ non-obvious shape.
 There is no OAuth redirect flow. Guest mode (no cookie) keeps working with
 localStorage-only state.
 
+## Software Wars planes
+
+Software Wars separates durable commands, live coordination, media, and slow
+evaluation:
+
+1. The SPA sends match commands to `/api/wars/*` in Pages Functions. D1 owns
+   content snapshots, participants, attempts, results, immutable rating events,
+   reports, and remediation idempotency.
+2. A five-minute match-scoped token connects each Tradeoff participant to one
+   SQLite Durable Object. The object owns absolute phase deadlines, alarms,
+   readiness, presence, private votes, and authorized reconnect state.
+3. RealtimeKit carries audio/video and optional screen share only. Participant
+   credentials come from the backend; provider administrative credentials
+   never reach the SPA. Media never determines a phase or winner.
+4. R2 stores large immutable artifacts and mutually consented transcripts.
+   Small text artifacts stay inline in D1 up to the documented limit.
+5. A Cloudflare Queue copies expiring provider transcripts and runs versioned,
+   schema-validated Tradeoff adjudication. Exhausted retries leave the match
+   unrated in `review_required` state.
+6. Finalization appends a mode-specific rating event exactly once and writes
+   conservative concept evidence through the existing FSRS contract.
+
+Ranked authoring data lives under `shared/data/software-wars/`, outside the
+client graph. Active reads never contain answer keys. Public results expose
+aggregate scores and display-safe identities without competitive questions,
+private drafts, transcripts, or provider identifiers.
+
 ## Guest vs authenticated state
 
 | Data | Guest | Signed-in |

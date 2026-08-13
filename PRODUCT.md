@@ -33,7 +33,7 @@ living in separate tools.
 ## Operating Context
 
 The application is a React web SPA with public curriculum pages and guest-first
-interactive routes. Learners move among Today, Learn, Practice, Mock,
+interactive routes. Learners move among Dashboard, Learn, Practice, Wars,
 Playground, Progress, Build Lab, source material, and adaptive sessions.
 Monaco supports code work, Excalidraw supports diagrams, the Socratic companion
 probes understanding, and Feynman/understanding checks feed FSRS review.
@@ -52,8 +52,12 @@ account-scoped in the browser.
   stable slugs.
 - Canonical curriculum data drives both the interactive app and generated
   public curriculum.
+- Every ranked Blitz question must have one explicit canonical Learn concept,
+  authoritative sources, and authored reasoning for every answer option.
+- Blitz ratings and Tradeoff ratings are separate; ranked state, deadlines,
+  answers, and match outcomes remain server-owned.
 - Production remains a Vite/React application on Cloudflare Pages with Pages
-  Functions and Turso; production deploys are manual.
+  Functions and Cloudflare D1; production deploys are manual.
 - Schema changes are additive, and new dependencies or production services
   require explicit approval.
 
