@@ -19,7 +19,8 @@ export function SaaSMakerFeedback() {
         apiBaseUrl={API_BASE}
         position="bottom-right"
         theme="dark"
-        triggerText="Give feedback"
+        accentColor="#171717"
+        triggerText="Feedback"
       />
     </Suspense>
   );

@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-08-09
+Last updated: 2026-08-13
 
 ## Why/What
 
@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 | Phase | Milestone |
 |-------|-----------|
+| Software Wars local release candidate (2026-08-13) | Added one-minute Blitz and thirty-minute Tradeoff flows, server-owned ratings and match state, challenge/history/result surfaces, RealtimeKit media integration behind a provider adapter, and concept/FSRS remediation. The ranked server-only bank now has 1,200 independently audited active MCQs across 12 topics, 4,800 option-specific explanations, canonical Learn links, 424 reachable authoritative sources, and 3,600 precomputed answers across three fixed AI opponents. Content validation, 458 tests, typecheck, lint, docs validation, and the production build pass locally. Deployment and live-provider smoke remain explicit operator actions. |
 | Code-only release safety (2026-08-09) | The manual deploy workflow now leaves D1 unchanged by default and requires an explicit `apply_migrations` dispatch choice for schema releases, so code-only releases can use the normal GitHub-held build configuration without performing an unnecessary database operation. |
 | Shared lint baseline (2026-08-09) | Adopted the Fleet Ultracite baseline for core TypeScript, React, and Vitest code. Existing generated/static artifacts remain outside the checked surface, and compatibility exceptions preserve current product behavior while 345 files pass with zero diagnostics. |
 | Trace a Tensor synthesis (2026-08-09) | Added a compact 30-day roadmap that follows one workload from representation and backpropagation through memory hierarchy, runtime profiling, inference hardware, GPU kernels, quantization, engine scheduling, batching, and serving economics. It reuses 11 canonical concepts and their executable drills, then requires a layer map, reproducible workload or model, bottleneck diagnosis, and before/after evidence for one defended optimization. The interactive roadmap and deterministic public curriculum share the same source. |
@@ -91,13 +92,14 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 ## Products
 
-**Primary routes:** `/today` (`/` redirects here) · `/learn` · `/practice` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. (No `/build-lab` or `/login` route.)
+**Primary routes:** `/dashboard` (`/` redirects here) · `/learn` · `/practice` · `/wars` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. `/today` redirects to `/dashboard`.
 
-**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai` · `/api/ai/chat`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
+**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai` · `/api/ai/chat` · `/api/wars/*`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
 
 | Surface | Role |
 |---------|------|
 | Dashboard | Study hub and navigation |
+| Software Wars | One-minute source-backed MCQ battles and thirty-minute matched engineering battles with Learn/FSRS remediation |
 | DSA practice | Monaco editor, pattern-based grouping, LeetCode import |
 | LLD / HLD | Excalidraw architecture diagrams |
 | Learn / concepts | Structured concept and roadmap content |

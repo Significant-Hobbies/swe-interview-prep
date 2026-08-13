@@ -9,14 +9,21 @@ disagrees with code, code wins.
 
 | Route | Surface |
 | --- | --- |
-| `/` | Redirects to `/today` |
-| `/today` | Home / daily session hub |
-| `/learn`, `/learn/all` | Roadmap journey + concepts (18 tracks) |
+| `/` | Redirects to `/dashboard` |
+| `/dashboard` | Resume hub: recent destinations, current/next learning and practice, paths, and supporting progress |
+| `/today` | Legacy redirect to `/dashboard` |
+| `/learn`, `/learn/all` | Searchable high-level learning entry plus the complete concept catalogue |
 | `/explore` | Concept/roadmap explorer |
 | `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`; open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
-| `/practice`, `/practice/all` | Drills + spaced-repetition reviews |
-| `/playground` | Monaco + Excalidraw build sandbox |
+| `/practice` | Playground workspace with a selector over the complete canonical problem inventory |
+| `/practice/all` | Complete drill catalogue and spaced-repetition reviews |
+| `/playground` | Stable alias for the same Playground workspace |
 | `/mock` | Timed mock interview |
+| `/wars` | Play-first Software Wars hub; ratings, launch status, leaderboard, and history are progressively disclosed |
+| `/wars/blitz` | Timed objective battle setup, match, result, and remediation |
+| `/wars/tradeoff`, `/wars/tradeoff/:matchId` | Tradeoff preview or authenticated live workbench |
+| `/wars/challenge/:token` | Sanitized public challenge preview |
+| `/wars/results/:slug` | Sanitized public match result |
 | `/progress`, `/progress/all` | Mastery rollups + notes |
 | `/build`, `/drills/:id` | BuildLab (hands-on build/drill workspace) |
 | `/labs`, `/labs/:labId` | Systems Lab catalog + configuration workshop + deterministic scenario runner |
@@ -33,11 +40,32 @@ disagrees with code, code wins.
 
 There is no `/build-lab` route.
 
+## Navigation and focus
+
+The shared primary hierarchy is **Dashboard, Learn, Practice, Wars**.
+Dashboard resumes the learning loop, Learn provides search plus high-level path
+discovery, Practice is the existing Playground with a full problem selector,
+and Wars presents the one-minute and thirty-minute competitive formats.
+Progress, Mock, Build Lab, Systems Labs, the public curriculum, complete
+catalogues, sources, projects, and notes retain their existing URLs and remain
+visible through contextual links or Browse.
+
+The entry surfaces may be concise, but canonical inventory may not become
+search-only, hidden, or coupled to a particular presentation. Stable detail
+links, browse-all routes, generated catalogues, and public curriculum output
+are part of the product contract.
+
+Active `/practice`, `/playground`, `/drills/:id`, `/labs/:labId`, `/wars/blitz*`, and
+`/wars/tradeoff*` routes use the focused shell. It retains product identity,
+settings/account access, keyboard navigation, and a visible exit, while hiding
+the digest, setup/storage strips, and feedback trigger until the learner exits
+the session.
+
 ## Access
 
 **Every route above is open.** A visitor with no session is placed into guest
-mode and lands on `/today`; nothing asks them to sign in first. Signing in buys
-exactly one thing — progress that outlives the browser — so it appears as an
+mode and lands on `/dashboard`; nothing asks them to sign in first. Signing in buys
+durable learning and competitive state — so it appears as an
 upgrade in the header, and as a strip that surfaces only once a guest has
 progress worth losing.
 
@@ -61,13 +89,19 @@ adding an action gates the client automatically.
 The only request a guest makes is one `GET /api/auth/verify` on their first
 load, which is how the app discovers there is no session. It is not repeated.
 
+Software Wars is the exception to that older learning-only request rule.
+Guests may read public launch status, leaderboards, challenge previews, and
+public results. Guest battles are local unranked previews and do not write Elo
+or FSRS state. Ranked matches, history, ratings, challenge writes, Tradeoff
+artifacts, media credentials, consent, and reports require authentication.
+
 ### Legacy redirects
 
-Listed in `src/App.tsx`: `/dashboard` → `/today`; `/roadmaps` → `/learn`;
-`/concepts` → `/learn/all`; `/drills` → `/practice`; `/reviews`, `/review` →
+Listed in `src/App.tsx`: `/today` → `/dashboard`; `/roadmaps` → `/learn`;
+`/concepts` → `/learn/all`; `/drills` → `/practice/all`; `/reviews`, `/review` →
 `/practice/all?tab=reviews`; `/projects` → `/progress/all`; `/notes` →
 `/progress/all?tab=notes`; `/vibe-learning` → `/playground`. Unknown paths
-(`*`) fall back to `/today`.
+(`*`) fall back to `/dashboard`.
 
 ## API surface
 
@@ -85,6 +119,15 @@ route set (anything else returns `404 API route not found`):
 | `GET/POST /api/learning?action=…` | Consolidated learning API (see actions below) | JWT for auth actions |
 | `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
 | `GET /api/ai` | Public agent catalog (JSON) | — |
+| `GET /api/wars/status` | Launch gates and validated content counts | — |
+| `GET /api/wars/leaderboard/:mode` | Sanitized mode leaderboard | — |
+| `GET /api/wars/results/:slug` | Sanitized public result | — |
+| `GET /api/wars/challenges/:token` | Sanitized challenge preview | — |
+| `GET /api/wars/ratings`, `GET /api/wars/history` | Private competitive profile | JWT |
+| `/api/wars/blitz/matches/*` | Create, resume, answer, finalize, report, and share Blitz matches | JWT |
+| `/api/wars/tradeoff/matches/*` | Schedule, check in, save/reveal artifacts, issue media credentials, record consent, vote, report, and read/share participant results | JWT |
+| `POST /api/wars/challenges` | Create an opaque challenge link | JWT |
+| `POST /api/wars/provider/realtimekit/webhook` | Provider lifecycle events | RealtimeKit signature |
 
 `/api/learning?action=…` actions (`shared/api/learning-registry.mjs`):
 public (no user auth) `gaps`, `critique`, `understanding`, `tag`;
@@ -103,6 +146,11 @@ Function. They exist for local-dev parity; in dev the Vite bridge
 `/api/ai/chat` is the exception in the other direction: it is served **only**
 by the Pages Function, so in dev it falls through the bridge and 404s. See
 [`../development/setup.md`](../development/setup.md).
+
+Wars local UI work uses the explicit browser-only unranked preview when the
+Pages API is unavailable. API verification uses `pnpm dev:pages` with isolated
+local D1; the separate realtime Worker uses `pnpm dev:wars-worker`. Preview
+questions are not used in ranked matches.
 
 ## Machine / agent surfaces
 

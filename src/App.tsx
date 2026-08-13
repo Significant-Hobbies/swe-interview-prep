@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { trackReturned, trackSignup } from './lib/analytics';
+import { focusedRoute } from './lib/focusedRoute';
 import { loadLocal, STORE_KEYS } from './lib/userStore';
 
 const SEEN_KEY = 'swe-interview-prep:seen';
@@ -22,22 +23,25 @@ function RouteLoading() {
   );
 }
 
-const loadToday = () => import('./pages/Today');
+const loadDashboard = () => import('./pages/Today');
 
-// Today is the default workspace. Start its module graph with the entry bundle
+// Dashboard is the default workspace. Start its module graph with the entry bundle
 // so the headline does not wait for the router's first lazy-import waterfall.
-if (window.location.pathname === '/' || window.location.pathname === '/today') {
-  void loadToday();
+if (
+  window.location.pathname === '/' ||
+  window.location.pathname === '/dashboard' ||
+  window.location.pathname === '/today'
+) {
+  void loadDashboard();
 }
 
-const Today = lazy(loadToday);
+const Today = lazy(loadDashboard);
 const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Sweep = lazy(() => import('./pages/Sweep'));
-const Practice = lazy(() => import('./pages/Practice'));
 const PracticeAll = lazy(() => import('./pages/PracticeAll'));
 const Playground = lazy(() => import('./pages/Playground'));
 const Progress = lazy(() => import('./pages/Progress'));
@@ -59,6 +63,15 @@ const Changelog = lazy(() => import('./pages/Changelog'));
 const Login = lazy(() => import('./pages/Login'));
 const SystemsLabs = lazy(() => import('./pages/SystemsLabs'));
 const SystemsLabRunner = lazy(() => import('./pages/SystemsLabRunner'));
+const SoftwareWars = lazy(() => import('./pages/SoftwareWars'));
+const BlitzWar = lazy(() => import('./pages/BlitzWar'));
+const TradeoffWar = lazy(() => import('./pages/TradeoffWar'));
+const WarChallenge = lazy(() =>
+  import('./pages/WarPublic').then((module) => ({ default: module.WarChallenge }))
+);
+const WarResult = lazy(() =>
+  import('./pages/WarPublic').then((module) => ({ default: module.WarResult }))
+);
 
 function removeLcpShell() {
   document.getElementById('lcp-shell')?.remove();
@@ -69,7 +82,7 @@ function OnboardingGate({ children }: { children: React.ReactNode }) {
   const done = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
   // Onboarding is optional — only redirect away once already completed.
   if (done && location.pathname === '/onboarding') {
-    return <Navigate to="/today" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
   return <>{children}</>;
 }
@@ -83,15 +96,16 @@ function AppRoutes() {
           page showed header, digest strip, setup strip, then a second header. */}
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/today" replace />} />
-        <Route path="today" element={<Today />} />
+        <Route index element={<Navigate to="/dashboard" replace />} />
+        <Route path="dashboard" element={<Today />} />
+        <Route path="today" element={<Navigate to="/dashboard" replace />} />
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="learn" element={<Learn />} />
         <Route path="learn/all" element={<LearnAll />} />
         <Route path="explore" element={<Explore />} />
         <Route path="sweep" element={<Sweep />} />
         <Route path="learn/:id" element={<ConceptDetail />} />
-        <Route path="practice" element={<Practice />} />
+        <Route path="practice" element={<Playground />} />
         <Route path="practice/all" element={<PracticeAll />} />
         <Route path="playground" element={<Playground />} />
         <Route path="progress" element={<Progress />} />
@@ -117,17 +131,23 @@ function AppRoutes() {
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="changelog" element={<Changelog />} />
-        <Route path="dashboard" element={<Navigate to="/today" replace />} />
         <Route path="roadmaps" element={<Navigate to="/learn" replace />} />
         <Route path="concepts" element={<Navigate to="/learn/all" replace />} />
-        <Route path="drills" element={<Navigate to="/practice" replace />} />
+        <Route path="drills" element={<Navigate to="/practice/all" replace />} />
         <Route path="reviews" element={<Navigate to="/practice/all?tab=reviews" replace />} />
         <Route path="review" element={<Navigate to="/practice/all?tab=reviews" replace />} />
         <Route path="projects" element={<Navigate to="/progress/all" replace />} />
         <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
         <Route path="mock" element={<MockInterview />} />
+        <Route path="wars" element={<SoftwareWars />} />
+        <Route path="wars/blitz" element={<BlitzWar />} />
+        <Route path="wars/blitz/:matchId" element={<BlitzWar />} />
+        <Route path="wars/tradeoff" element={<TradeoffWar />} />
+        <Route path="wars/tradeoff/:matchId" element={<TradeoffWar />} />
+        <Route path="wars/challenge/:token" element={<WarChallenge />} />
+        <Route path="wars/results/:slug" element={<WarResult />} />
         <Route path="vibe-learning" element={<Navigate to="/playground" replace />} />
-        <Route path="*" element={<Navigate to="/today" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>
   );
@@ -137,6 +157,7 @@ export default function App() {
   const { user, isGuest, loading, continueAsGuest } = useAuth();
   const location = useLocation();
   const isPublicShare = location.pathname.startsWith('/share/');
+  const isFocused = focusedRoute(location.pathname) !== null;
 
   useEffect(() => {
     try {
@@ -182,7 +203,7 @@ export default function App() {
       <ErrorBoundary scope="route">
         <Suspense fallback={<RouteLoading />}>{body}</Suspense>
       </ErrorBoundary>
-      {!isPublicShare && <SaaSMakerFeedback />}
+      {!isPublicShare && !isFocused && <SaaSMakerFeedback />}
     </>
   );
 }

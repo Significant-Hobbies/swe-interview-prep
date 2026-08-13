@@ -1,52 +1,27 @@
-import { LogOut, Settings, X } from 'lucide-react';
-import { lazy, Suspense, useState } from 'react';
+import { LogOut, Settings } from 'lucide-react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
-import { STORE_KEYS, loadLocal, saveLocal } from '../lib/userStore';
+import { focusedRoute } from '../lib/focusedRoute';
+import { recordRecentVisit } from '../lib/recentVisits';
+import { STORE_KEYS, loadLocal } from '../lib/userStore';
 import { SiteHeader } from './SiteHeader';
-import { GoogleSignInButton } from './GoogleSignInButton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
-// Lazy-loaded: DigestBanner pulls in learning-os.ts (722 KB / 179 KB gzip of
-// JSON data) via useConcepts/planner. SettingsModal imports
-// ImportAndNotifySettings + LearningProfileSettings which also read learning-os.
-// Deferring both keeps the data chunk off the initial page load.
-const DigestBanner = lazy(() =>
-  import('./DigestBanner').then((m) => ({ default: m.DigestBanner }))
-);
+// SettingsModal imports ImportAndNotifySettings + LearningProfileSettings,
+// which read the full learning catalogue. Defer it from the initial shell.
 const SettingsModal = lazy(() => import('./SettingsModal'));
 
 export default function Layout() {
   const location = useLocation();
   const { user, isGuest, signOut } = useAuth();
+  const focus = focusedRoute(location.pathname);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const onboardingDone = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
 
-  /**
-   * The setup hint is labelled "Optional" but had no way to decline it, so it
-   * sat under the digest banner forever — two rows of chrome above the fold on
-   * every page. Dismissing is remembered.
-   */
-  const [setupDismissed, setSetupDismissed] = useState(
-    () => loadLocal<{ dismissed?: boolean }>(STORE_KEYS.setupHint, {}).dismissed === true
-  );
-  /**
-   * Scoped to Today so no page ever carries two strips.
-   *
-   * DigestBanner now suppresses itself on the page it links to — usually Today
-   * — so confining the hint to Today yields header + at most one strip
-   * everywhere, instead of the three stacked bars that read as three separate
-   * navbars. Today is also the only page where "personalize Today's session
-   * mix" is actionable in context.
-   */
-  const showSetupHint = !onboardingDone && !setupDismissed && location.pathname === '/today';
-
-  function dismissSetupHint() {
-    saveLocal(STORE_KEYS.setupHint, { dismissed: true });
-    setSetupDismissed(true);
-  }
-
+  useEffect(() => {
+    recordRecentVisit(location.pathname, location.search);
+  }, [location.pathname, location.search]);
   /**
    * Warn about local-only storage once there is something to lose.
    *
@@ -63,6 +38,7 @@ export default function Layout() {
     <TooltipProvider delayDuration={250}>
       <div className="min-h-screen bg-black">
         <SiteHeader
+          focus={focus ?? undefined}
           actions={
             <>
               <Tooltip>
@@ -104,59 +80,30 @@ export default function Layout() {
                   </Tooltip>
                 </>
               ) : isGuest ? (
-                <GoogleSignInButton className="ml-1" />
+                <Link
+                  to="/login#sign-in"
+                  className="ml-1 inline-flex h-11 items-center rounded-md border border-white/10 px-3 text-xs font-medium text-white/65 transition-colors duration-150 hover:border-white/20 hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
+                >
+                  Sign in
+                </Link>
               ) : null}
             </>
           }
         />
 
-        <Suspense fallback={null}>
-          <DigestBanner />
-        </Suspense>
-
         {/* Nothing here requires an account. The one thing signing in buys is
             progress that outlives the browser — say that plainly, because a
             guest who sweeps 250 concepts and then clears their storage loses
             all of it silently. */}
-        {guestHasProgress && (
+        {!focus && guestHasProgress && (
           <div className="border-b border-white/[0.06] bg-white/[0.02]">
             <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-2 md:px-6">
               <p className="text-xs text-white/55">
                 Your progress is saved in this browser only — clearing it loses everything.
               </p>
-              <GoogleSignInButton />
-            </div>
-          </div>
-        )}
-
-        {showSetupHint && (
-          <div className="border-b border-white/[0.06] bg-white/[0.02]">
-            <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-2 md:px-6">
-              <p className="text-xs text-white/55">
-                Optional: personalize Today&apos;s session mix and active path.
-              </p>
-              <div className="flex items-center gap-4 font-mono text-[11px]">
-                <Link
-                  to="/explore"
-                  className="inline-flex min-h-11 items-center text-white/60 transition-colors hover:text-white/80"
-                >
-                  Explore catalog
-                </Link>
-                <Link
-                  to="/onboarding"
-                  className="inline-flex min-h-11 items-center text-white/70 transition-colors hover:text-white"
-                >
-                  Quick setup →
-                </Link>
-                <button
-                  type="button"
-                  onClick={dismissSetupHint}
-                  aria-label="Dismiss setup hint"
-                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-white/60 transition-colors hover:bg-white/5 hover:text-white"
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              </div>
+              <span className="font-mono text-[11px] text-white/50">
+                Sign in from the header to keep it.
+              </span>
             </div>
           </div>
         )}

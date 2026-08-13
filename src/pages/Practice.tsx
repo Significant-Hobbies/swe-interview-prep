@@ -2,10 +2,8 @@ import { ArrowRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import BrowseLinks from '../components/BrowseLinks';
-import { Sparkline } from '../components/viz';
 import { CONCEPT_BY_ID, type Drill, EDITORIAL_DRILLS, primaryGroup } from '../data/learning-os';
-import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
+import { useConceptMastery } from '../hooks/useConcepts';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import { useSessionPlan } from '../hooks/useSessionPlan';
 import { useDrillStore, useUserElo } from '../hooks/useUserStore';
@@ -25,7 +23,6 @@ export default function Practice() {
 
   const dueCount = dueReviewQuestions(rqMastery, mastery).length;
   const solvedCount = Object.values(drillState).filter((d) => d.status === 'solved').length;
-  const sparkline = useMemo(() => buildRecentActivity(mastery, 14), [mastery]);
   const streak = computeSessionStreak();
 
   const nextDrill = useMemo(
@@ -37,26 +34,58 @@ export default function Practice() {
     <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
       {nextDrill ? <NextDrillHero drill={nextDrill} /> : <AllCaughtUp />}
 
-      <section className="section-rule mt-20 pt-10">
-        <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-          This week
-        </div>
-        <div className="grid grid-cols-3 gap-8">
-          <Stat label="Solved" value={solvedCount} sub={`of ${EDITORIAL_DRILLS.length}`} />
-          <Stat
-            label="Due"
-            value={dueCount}
-            sub={dueCount ? 'reviews' : 'caught up'}
-            accent={dueCount > 0}
+      <details className="group mt-12 border-t border-white/[0.08] pt-2">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm text-white/55 hover:text-white">
+          Other ways to practice
+          <span aria-hidden="true" className="transition-transform group-open:rotate-45">
+            +
+          </span>
+        </summary>
+        <nav className="divide-y divide-white/[0.06] pb-3" aria-label="Practice modes">
+          <PracticeMode
+            to="/wars"
+            title="Software Wars"
+            description="Fast technical battles or 30-minute design debates."
           />
-          <Stat label="Streak" value={`${streak}d`} sub="active" />
-        </div>
-        <div className="mt-8">
-          <Sparkline values={sparkline} width={520} height={36} tone="sky" />
-        </div>
-      </section>
+          <PracticeMode
+            to="/mock"
+            title="Mock interview"
+            description="Rehearse technical, system-design, or behavioral answers."
+          />
+          <PracticeMode
+            to="/playground"
+            title="Playground"
+            description="Work in code, diagrams, and explain-backs."
+          />
+          <PracticeMode
+            to="/build"
+            title="Build Lab"
+            description="Turn a concept into an inspectable artifact."
+          />
+          <PracticeMode
+            to="/labs"
+            title="Systems Labs"
+            description="Repair deterministic infrastructure scenarios."
+          />
+          <PracticeMode
+            to="/practice/all?tab=reviews"
+            title="Reviews"
+            description={`${dueCount} recall ${dueCount === 1 ? 'item' : 'items'} due.`}
+          />
+        </nav>
+      </details>
 
-      <BrowseLinks className="mt-12" omit={['drills', 'reviews']} />
+      <details className="group mt-4 border-t border-white/[0.08] pt-2">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm text-white/55 hover:text-white">
+          Practice history
+          <span aria-hidden="true" className="transition-transform group-open:rotate-45">
+            +
+          </span>
+        </summary>
+        <p className="pb-4 pt-2 text-sm text-white/50">
+          {solvedCount} of {EDITORIAL_DRILLS.length} drills solved · {streak} day streak
+        </p>
+      </details>
     </div>
   );
 }
@@ -65,32 +94,30 @@ function NextDrillHero({ drill }: { drill: Drill }) {
   const concept = CONCEPT_BY_ID[drill.conceptId];
   const grp = concept ? primaryGroup(concept) : undefined;
   return (
-    <div className="relative">
-      <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-
-      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-        Next drill {grp && <span className="text-white/30">· {grp.short}</span>}{' '}
-        <span className="text-white/30">· {drill.difficulty}</span>
+    <div>
+      <div className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/50">
+        Next drill {grp && <span className="text-white/50">· {grp.short}</span>}{' '}
+        <span className="text-white/50">· {drill.difficulty}</span>
       </div>
 
-      <h1 className="text-balance text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+      <h1 className="max-w-3xl text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl">
         {drill.title}
       </h1>
 
       {concept && (
-        <p className="mt-4 font-mono text-xs text-white/40">
+        <p className="mt-4 font-mono text-xs text-white/50">
           via <span className="text-white/70">{concept.name}</span>
         </p>
       )}
 
-      <p className="mt-6 line-clamp-3 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+      <p className="mt-5 line-clamp-3 max-w-2xl text-base leading-relaxed text-white/55">
         {drill.prompt}
       </p>
 
-      <div className="mt-10">
+      <div className="mt-8">
         <Link
           to={`/drills/${drill.id}`}
-          className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-all duration-150 hover:bg-white/90"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black transition-colors hover:bg-white/90"
         >
           Open in Playground
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -103,16 +130,16 @@ function NextDrillHero({ drill }: { drill: Drill }) {
 function AllCaughtUp() {
   return (
     <div>
-      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+      <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/50">
         Next drill
       </div>
-      <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl">All solved.</h1>
+      <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">All solved.</h1>
       <p className="mt-6 max-w-prose text-base text-white/60 sm:text-lg">
         Browse drills by group to revisit any.
       </p>
       <Link
         to="/practice/all"
-        className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black hover:bg-white/90"
+        className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black hover:bg-white/90"
       >
         Browse drills <ArrowRight className="h-4 w-4" />
       </Link>
@@ -120,41 +147,22 @@ function AllCaughtUp() {
   );
 }
 
-function Stat({
-  label,
-  value,
-  sub,
-  accent,
+function PracticeMode({
+  to,
+  title,
+  description,
 }: {
-  label: string;
-  value: React.ReactNode;
-  sub?: string;
-  accent?: boolean;
+  to: string;
+  title: string;
+  description: string;
 }) {
   return (
-    <div>
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">{label}</div>
-      <div
-        className={`mt-2 text-4xl font-semibold tabular-nums tracking-tight ${accent ? 'text-amber-200' : 'text-white'}`}
-      >
-        {value}
-      </div>
-      {sub && <div className="mt-1 font-mono text-xs text-white/40">{sub}</div>}
-    </div>
+    <Link to={to} className="group flex min-h-16 items-center justify-between gap-5 py-3">
+      <span>
+        <span className="block text-sm font-medium text-white">{title}</span>
+        <span className="mt-0.5 block text-sm text-white/50">{description}</span>
+      </span>
+      <ArrowRight className="h-4 w-4 shrink-0 text-white/50 transition-transform group-hover:translate-x-0.5 group-hover:text-white" />
+    </Link>
   );
-}
-
-function buildRecentActivity(mastery: Record<string, MasteryEntry>, days: number): number[] {
-  const now = Date.now();
-  const dayMs = 24 * 60 * 60 * 1000;
-  const buckets = new Array(days).fill(0);
-  for (const m of Object.values(mastery)) {
-    if (!m.lastReview) continue;
-    const ts = Date.parse(m.lastReview);
-    if (Number.isNaN(ts)) continue;
-    const ageDays = Math.floor((now - ts) / dayMs);
-    if (ageDays < 0 || ageDays >= days) continue;
-    buckets[days - 1 - ageDays] += 1;
-  }
-  return buckets;
 }

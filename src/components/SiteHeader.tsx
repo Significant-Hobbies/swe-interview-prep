@@ -1,12 +1,19 @@
+import { ArrowLeft } from 'lucide-react';
 import { type ReactNode, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
-import { BROWSE_NAV_ITEMS, PRIMARY_NAV_ITEMS, type SiteNavItem } from '../data/site-navigation';
+import {
+  BROWSE_NAV_GROUPS,
+  BROWSE_NAV_ITEMS,
+  PRIMARY_NAV_ITEMS,
+  type SiteNavItem,
+} from '../data/site-navigation';
 
 interface SiteHeaderProps {
   actions?: ReactNode;
   onNavigate?: () => void;
   sticky?: boolean;
+  focus?: { exitTo: string; exitLabel: string };
 }
 
 function destinationClass({ isActive }: { isActive: boolean }) {
@@ -42,7 +49,7 @@ function DestinationLink({
   );
 }
 
-export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderProps) {
+export function SiteHeader({ actions, onNavigate, sticky = true, focus }: SiteHeaderProps) {
   const location = useLocation();
   const browseRef = useRef<HTMLDetailsElement>(null);
   const menuRef = useRef<HTMLDetailsElement>(null);
@@ -57,6 +64,11 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
     menuRef.current?.removeAttribute('open');
     onNavigate?.();
   };
+
+  const browseGroups = BROWSE_NAV_GROUPS.map((group) => ({
+    ...group,
+    items: BROWSE_NAV_ITEMS.filter((item) => item.group === group.id && item.menu),
+  })).filter((group) => group.items.length > 0);
 
   return (
     <>
@@ -78,21 +90,66 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
             <span className="hidden text-xs text-white/60 sm:inline">/ Learning OS</span>
           </NavLink>
 
-          <nav
-            aria-label="Primary"
-            className="absolute left-1/2 hidden min-w-0 -translate-x-1/2 items-center justify-center gap-4 lg:flex xl:gap-6"
-          >
-            {PRIMARY_NAV_ITEMS.map((item) => (
-              <DestinationLink
-                key={item.id}
-                item={item}
-                className={destinationClass}
-                onNavigate={onNavigate}
-              />
-            ))}
-            <details ref={browseRef} className="group relative">
-              <summary className="flex h-16 cursor-pointer list-none items-center gap-1 px-1 text-sm text-white/50 transition-colors hover:text-white">
-                Browse
+          {focus ? (
+            <Link
+              to={focus.exitTo}
+              aria-label={focus.exitLabel}
+              className="ml-2 inline-flex min-h-11 items-center gap-2 rounded-md px-2 text-sm text-white/55 transition-colors hover:bg-white/5 hover:text-white"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span className="sm:hidden">Exit</span>
+              <span className="hidden sm:inline">{focus.exitLabel}</span>
+            </Link>
+          ) : (
+            <nav
+              aria-label="Primary"
+              className="absolute left-1/2 hidden min-w-0 -translate-x-1/2 items-center justify-center gap-4 lg:flex xl:gap-6"
+            >
+              {PRIMARY_NAV_ITEMS.map((item) => (
+                <DestinationLink
+                  key={item.id}
+                  item={item}
+                  className={destinationClass}
+                  onNavigate={onNavigate}
+                />
+              ))}
+              <details ref={browseRef} className="group relative">
+                <summary className="flex h-16 cursor-pointer list-none items-center gap-1 px-1 text-sm text-white/50 transition-colors hover:text-white">
+                  Browse
+                  <span
+                    aria-hidden="true"
+                    className="text-[10px] transition-transform duration-150 group-open:rotate-180"
+                  >
+                    ▾
+                  </span>
+                </summary>
+                <div className="absolute left-1/2 top-full z-50 mt-1 grid w-[36rem] -translate-x-1/2 grid-cols-2 gap-4 rounded-xl border border-white/10 bg-black p-3">
+                  {browseGroups.map((group) => (
+                    <div key={group.id}>
+                      <p className="px-3 pb-1 pt-2 text-[11px] font-medium text-white/50">
+                        {group.label}
+                      </p>
+                      {group.items.map((item) => (
+                        <DestinationLink
+                          key={item.id}
+                          item={item}
+                          className={menuDestinationClass}
+                          onNavigate={closeMenus}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            </nav>
+          )}
+
+          <div className="ml-auto flex shrink-0 items-center gap-1">{actions}</div>
+
+          {!focus && (
+            <details ref={menuRef} className="group relative lg:hidden">
+              <summary className="flex h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-md border border-white/15 px-3 text-xs font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.05]">
+                Menu
                 <span
                   aria-hidden="true"
                   className="text-[10px] transition-transform duration-150 group-open:rotate-180"
@@ -100,8 +157,12 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
                   ▾
                 </span>
               </summary>
-              <div className="absolute left-1/2 top-full z-50 mt-1 grid w-[28rem] -translate-x-1/2 grid-cols-2 gap-1 rounded-xl border border-white/10 bg-black p-2">
-                {BROWSE_NAV_ITEMS.map((item) => (
+              <nav
+                aria-label="Compact"
+                className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100vh-5rem)] w-[min(22rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-white/10 bg-black p-2"
+              >
+                <p className="px-3 pb-1 pt-2 text-[11px] font-medium text-white/50">Go</p>
+                {PRIMARY_NAV_ITEMS.map((item) => (
                   <DestinationLink
                     key={item.id}
                     item={item}
@@ -109,47 +170,25 @@ export function SiteHeader({ actions, onNavigate, sticky = true }: SiteHeaderPro
                     onNavigate={closeMenus}
                   />
                 ))}
-              </div>
+                <div className="mx-3 my-2 border-t border-white/[0.08]" />
+                {browseGroups.map((group) => (
+                  <div key={group.id}>
+                    <p className="px-3 pb-1 pt-2 text-[11px] font-medium text-white/50">
+                      {group.label}
+                    </p>
+                    {group.items.map((item) => (
+                      <DestinationLink
+                        key={item.id}
+                        item={item}
+                        className={menuDestinationClass}
+                        onNavigate={closeMenus}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </nav>
             </details>
-          </nav>
-
-          <div className="ml-auto flex shrink-0 items-center gap-1">{actions}</div>
-
-          <details ref={menuRef} className="group relative lg:hidden">
-            <summary className="flex h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-md border border-white/15 px-3 text-xs font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.05]">
-              Menu
-              <span
-                aria-hidden="true"
-                className="text-[10px] transition-transform duration-150 group-open:rotate-180"
-              >
-                ▾
-              </span>
-            </summary>
-            <nav
-              aria-label="Compact"
-              className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100vh-5rem)] w-[min(22rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-white/10 bg-black p-2"
-            >
-              <p className="px-3 pb-1 pt-2 text-[11px] font-medium text-white/35">Learn</p>
-              {PRIMARY_NAV_ITEMS.map((item) => (
-                <DestinationLink
-                  key={item.id}
-                  item={item}
-                  className={menuDestinationClass}
-                  onNavigate={closeMenus}
-                />
-              ))}
-              <div className="mx-3 my-2 border-t border-white/[0.08]" />
-              <p className="px-3 pb-1 pt-2 text-[11px] font-medium text-white/35">Browse</p>
-              {BROWSE_NAV_ITEMS.map((item) => (
-                <DestinationLink
-                  key={item.id}
-                  item={item}
-                  className={menuDestinationClass}
-                  onNavigate={closeMenus}
-                />
-              ))}
-            </nav>
-          </details>
+          )}
         </div>
       </header>
     </>

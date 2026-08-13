@@ -1,357 +1,272 @@
-import { ArrowRight, FlaskConical, Gauge } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, BookOpen, Map, Search } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import AiNativePath from '../components/AiNativePath';
-import BrowseLinks from '../components/BrowseLinks';
-import FeaturedPaths from '../components/FeaturedPaths';
-import PathDoor from '../components/PathDoor';
-import PlaygroundHero from '../components/PlaygroundHero';
-import { useAuth } from '../contexts/AuthContext';
 import {
-  CONCEPT_BY_ID,
   CONCEPTS,
-  type Roadmap,
-  roadmapConceptIds,
+  ROADMAP_BY_ID,
   ROADMAPS,
+  roadmapConceptIds,
+  type Roadmap,
 } from '../data/learning-os';
-import { type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
-import { useGateContext } from '../hooks/useGates';
-import { rollupMastery } from '../lib/conceptState';
-import { conceptAccessible } from '../lib/gates';
-import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
-import { ROADMAP_GROUPS, roadmapsInGroup, ungroupedRoadmaps } from '../lib/roadmapGroups';
-import { loadSweep, sweepCoverage } from '../lib/sweep';
+import { useConceptMastery } from '../hooks/useConcepts';
 import { useProfile } from '../hooks/useProfile';
+import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
+import { ROADMAP_GROUPS } from '../lib/roadmapGroups';
+import { pickNextConceptInRoadmap } from '../lib/recommend';
+import { useGateContext } from '../hooks/useGates';
 
-/**
- * Entry point for the breadth pass. Roadmaps go deep on one path; Sweep is the
- * orthogonal move — triage the whole catalog once so the review queue holds
- * only what you don't already know.
- */
-function SweepDoor() {
-  const { user } = useAuth();
-  // Lazy state, not a render-body read: `loadSweep` parses localStorage and can
-  // migrate a guest pass, and Learn re-renders several times per visit as its
-  // hooks settle. Doing that during render is an impure render.
-  const [coverage] = useState(() => sweepCoverage(CONCEPTS, loadSweep(user?.id).rated));
-  const started = coverage.rated > 0;
-
-  return (
-    <Link
-      to="/sweep"
-      className="mt-10 flex items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04]"
-    >
-      <div className="min-w-0">
-        <div className="flex items-center gap-2">
-          <Gauge className="h-4 w-4 shrink-0 text-white/40" />
-          <span className="font-medium text-white">
-            {started ? 'Resume sweep' : 'Sweep the catalog'}
-          </span>
-        </div>
-        <p className="mt-1.5 text-sm text-white/50">
-          {started
-            ? `${coverage.rated} of ${coverage.total} triaged — ${coverage.fuzzy + coverage.new} gaps in review.`
-            : `Rate all ${coverage.total} concepts Known / Fuzzy / New. Only the gaps enter your review queue.`}
-        </p>
-      </div>
-      <div className="shrink-0 text-right">
-        <div className="font-mono text-lg tabular-nums text-white">{coverage.percent}%</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-          covered
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-function SystemsLabDoor() {
-  return (
-    <Link
-      to="/labs"
-      className="mt-4 flex min-h-20 items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
-    >
-      <div className="flex min-w-0 items-start gap-3">
-        <FlaskConical className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
-        <div>
-          <div className="font-medium text-white">Open Systems Lab</div>
-          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-white/50">
-            Predict and replay GitOps, trace sampling, and metrics ingestion without a cluster,
-            credential, or cloud account.
-          </p>
-        </div>
-      </div>
-      <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
-    </Link>
-  );
-}
-
-const HORIZON_LABEL: Record<string, string> = {
-  '9d': '9 days',
-  '30d': '30 days',
-  '90d': '90 days',
-  '12mo': '12 months',
-};
+type SearchResult =
+  | { kind: 'concept'; id: string; title: string; detail: string; href: string }
+  | { kind: 'path'; id: string; title: string; detail: string; href: string };
 
 export default function Learn() {
+  const [query, setQuery] = useState('');
   const { mastery } = useConceptMastery();
+  const { activeRoadmapId } = useProfile();
   const gateCtx = useGateContext();
-  // The profile is the source of truth for the active path; picking one here
-  // rewrites `roadmapWeights`, which is what Today's planner reads.
-  const { activeRoadmapId, setActiveRoadmap } = useProfile();
+  const activeRoadmap = ROADMAP_BY_ID[activeRoadmapId] ?? ROADMAPS[0];
+  const activeIds = roadmapConceptIds(activeRoadmap);
+  const activeProgress = rollupMastery(activeIds, mastery);
+  const nextConcept = pickNextConceptInRoadmap(activeRoadmap, mastery, gateCtx);
 
-  function pick(id: string) {
-    void setActiveRoadmap(id);
-  }
+  const searchResults = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return [];
 
-  const active =
-    ROADMAPS.find((r) => r.id === activeRoadmapId) ??
-    ROADMAPS.find((r) => r.id === pickDefaultActive(mastery)) ??
-    ROADMAPS[0];
-  const next = pickNextConceptInRoadmap(active, mastery, gateCtx);
-  const nextDrill = next ? pickDrillForConcept(next.id) : null;
+    const concepts: SearchResult[] = CONCEPTS.filter((concept) =>
+      [concept.name, concept.description, ...concept.tags].join(' ').toLowerCase().includes(needle)
+    ).map((concept) => ({
+      kind: 'concept',
+      id: concept.id,
+      title: concept.name,
+      detail: concept.description,
+      href: `/concepts/${concept.id}`,
+    }));
+
+    const paths: SearchResult[] = ROADMAPS.filter((roadmap) =>
+      [roadmap.title, roadmap.goal, ...roadmap.tracks].join(' ').toLowerCase().includes(needle)
+    ).map((roadmap) => ({
+      kind: 'path',
+      id: roadmap.id,
+      title: roadmap.title,
+      detail: roadmap.goal,
+      href: `/roadmaps/${roadmap.id}`,
+    }));
+
+    return [...paths, ...concepts];
+  }, [query]);
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
-      <div className="relative">
-        <div className="dot-grid pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+    <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
+      <header className="max-w-3xl">
+        <p className="text-sm text-white/55">Learn</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          Understand the system.
+        </h1>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
+          Follow one path or search the complete library when you need something specific.
+        </p>
+      </header>
 
-        <div className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-          Learn
+      <section className="mt-10" aria-labelledby="learn-search-label">
+        <label id="learn-search-label" htmlFor="learn-search" className="sr-only">
+          Search all concepts and learning paths
+        </label>
+        <div className="flex min-h-14 items-center gap-3 rounded-lg border border-white/15 bg-white/[0.025] px-4 focus-within:border-white/30">
+          <Search className="h-4 w-4 shrink-0 text-white/45" />
+          <input
+            id="learn-search"
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={`Search ${CONCEPTS.length} concepts and ${ROADMAPS.length} paths`}
+            className="min-w-0 flex-1 bg-transparent py-3 text-base text-white outline-none placeholder:text-white/40"
+          />
+          <Link
+            to="/learn/all"
+            className="hidden min-h-11 shrink-0 items-center text-sm text-white/55 hover:text-white sm:inline-flex"
+          >
+            Browse all
+          </Link>
         </div>
 
-        <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Set your active path.
-        </h1>
-        <p className="mt-4 max-w-prose text-sm text-white/50 sm:text-base">
-          Today&apos;s session follows the active roadmap. Use the compact sequence below to orient
-          yourself, then choose one of {ROADMAPS.length} detailed roadmaps.
-        </p>
-        <Link
-          to="/explore"
-          className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
-        >
-          Explore full catalog <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-
-      <AiNativePath className="mt-10" />
-
-      <SweepDoor />
-      <SystemsLabDoor />
-
-      <PathDoor activeRoadmapId={active.id} className="mt-10" />
-
-      <div className="mt-10">
-        <FeaturedPaths activeRoadmapId={active.id} onPick={pick} />
-      </div>
-
-      <PlaygroundHero className="mt-10" compact />
-
-      <BrowseLinks className="mt-12" />
-
-      <section className="mt-14 space-y-10">
-        {ROADMAP_GROUPS.map((group) => {
-          const roadmaps = roadmapsInGroup(group);
-          if (!roadmaps.length) return null;
-          return (
-            <div key={group.id}>
-              <div className="mb-3">
-                <h2 className="text-lg font-semibold tracking-tight text-white">{group.title}</h2>
-                <p className="mt-1 max-w-prose text-xs text-white/45">{group.subtitle}</p>
-              </div>
-              <RoadmapList
-                roadmaps={roadmaps}
-                mastery={mastery}
-                activeId={active.id}
-                onPick={pick}
-              />
-            </div>
-          );
-        })}
-        {ungroupedRoadmaps(ROADMAPS).length > 0 && (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-lg font-semibold tracking-tight text-white">More paths</h2>
-            </div>
-            <RoadmapList
-              roadmaps={ungroupedRoadmaps(ROADMAPS)}
-              mastery={mastery}
-              activeId={active.id}
-              onPick={pick}
-            />
-          </div>
-        )}
-      </section>
-
-      {next && (
-        <section className="section-rule mt-16 pt-10">
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            Continue in {active.title}
-          </div>
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              {next.name}
-            </h2>
-            <Link
-              to={`/concepts/${next.id}`}
-              className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-all hover:bg-white/90"
-            >
-              Start
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-          <p className="mt-3 max-w-prose text-sm leading-relaxed text-white/60">
-            {next.description}
-          </p>
-          {nextDrill && (
-            <p className="mt-3 font-mono text-xs text-white/40">
-              Pair with drill:{' '}
-              <Link
-                to={`/drills/${nextDrill.id}`}
-                className="inline-flex min-h-11 items-center text-white/70 hover:text-white"
-              >
-                {nextDrill.title}
+        {query.trim() && (
+          <div className="mt-3 overflow-hidden rounded-xl border border-white/[0.1] bg-black">
+            <div className="flex min-h-11 items-center justify-between border-b border-white/[0.08] px-4 text-xs text-white/50">
+              <span>{searchResults.length} matches across the complete catalogue</span>
+              <Link to="/learn/all" className="text-white/65 hover:text-white">
+                Browse all concepts
               </Link>
-            </p>
-          )}
-        </section>
-      )}
-
-      <nav className="mt-16 font-mono text-sm">
-        <Link
-          to={`/roadmaps/${active.id}`}
-          className="inline-flex min-h-11 items-center text-white/50 hover:text-white"
-        >
-          Open active roadmap detail <span className="text-white/40">→</span>
-        </Link>
-      </nav>
-    </div>
-  );
-}
-
-function RoadmapList({
-  roadmaps,
-  mastery,
-  activeId,
-  onPick,
-}: {
-  roadmaps: Roadmap[];
-  mastery: Record<string, MasteryEntry>;
-  activeId: string;
-  onPick: (id: string) => void;
-}) {
-  return (
-    <div className="grid gap-px overflow-hidden rounded-xl bg-white/10">
-      {roadmaps.map((r) => (
-        <RoadmapRow
-          key={r.id}
-          roadmap={r}
-          mastery={mastery}
-          active={r.id === activeId}
-          onPick={() => onPick(r.id)}
-        />
-      ))}
-    </div>
-  );
-}
-
-function RoadmapRow({
-  roadmap,
-  mastery,
-  active,
-  onPick,
-}: {
-  roadmap: Roadmap;
-  mastery: Record<string, MasteryEntry>;
-  active: boolean;
-  onPick: () => void;
-}) {
-  const ids = roadmapConceptIds(roadmap);
-  const roll = rollupMastery(ids, mastery);
-  const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
-
-  return (
-    <button
-      type="button"
-      onClick={onPick}
-      className={`group flex flex-col gap-3 px-5 py-4 text-left transition-colors ${
-        active ? 'bg-white/[0.04]' : 'bg-black hover:bg-white/[0.02]'
-      }`}
-      aria-pressed={active}
-    >
-      <div className="flex items-baseline justify-between gap-4">
-        <div className="min-w-0">
-          <div className="flex items-baseline gap-3">
-            <h3
-              className={`truncate text-lg font-semibold tracking-tight ${active ? 'text-white' : 'text-white/80'}`}
-            >
-              {roadmap.title}
-            </h3>
-            {active && (
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-                Active
-              </span>
+            </div>
+            {searchResults.length > 0 ? (
+              <div className="max-h-[28rem] divide-y divide-white/[0.08] overflow-y-auto">
+                {searchResults.slice(0, 20).map((result) => (
+                  <Link
+                    key={`${result.kind}-${result.id}`}
+                    to={result.href}
+                    className="flex min-h-20 items-center justify-between gap-5 px-4 py-3 transition-colors hover:bg-white/[0.035]"
+                  >
+                    <span className="min-w-0">
+                      <span className="text-xs text-white/45">
+                        {result.kind === 'path' ? 'Path' : 'Concept'}
+                      </span>
+                      <span className="mt-1 block font-medium text-white">{result.title}</span>
+                      <span className="mt-1 block truncate text-sm text-white/50">
+                        {result.detail}
+                      </span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
+                  </Link>
+                ))}
+                {searchResults.length > 20 && (
+                  <Link
+                    to={`/learn/all?q=${encodeURIComponent(query.trim())}`}
+                    className="flex min-h-12 items-center justify-center text-sm text-white/65 hover:text-white"
+                  >
+                    Show all {searchResults.length} matches
+                  </Link>
+                )}
+              </div>
+            ) : (
+              <div className="px-4 py-8 text-sm text-white/50">
+                No direct match. Browse the complete catalogue or try a broader system name.
+              </div>
             )}
           </div>
-          <p className="mt-1 line-clamp-1 text-xs text-white/40">{roadmap.goal}</p>
-        </div>
-        <div className="shrink-0 text-right font-mono text-xs text-white/40">
-          <div className="text-sm tabular-nums text-white">{Math.round(pct)}%</div>
-          <div>{HORIZON_LABEL[roadmap.horizon]}</div>
-        </div>
-      </div>
+        )}
+        <Link
+          to="/learn/all"
+          className="mt-2 inline-flex min-h-11 items-center text-sm text-white/55 hover:text-white sm:hidden"
+        >
+          Browse the complete catalogue
+        </Link>
+      </section>
 
-      <div className="h-px w-full overflow-hidden bg-white/10">
-        <div
-          className={`h-full transition-[width] duration-500 ${active ? 'bg-white' : 'bg-white/40'}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+      <section className="mt-14 border-t border-white/[0.08] pt-8" aria-labelledby="active-path">
+        <div className="flex flex-wrap items-start justify-between gap-6">
+          <div className="max-w-2xl">
+            <p className="text-sm text-white/55">Active path</p>
+            <h2 id="active-path" className="mt-2 text-2xl font-semibold tracking-tight text-white">
+              {activeRoadmap.title}
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-white/55">{activeRoadmap.goal}</p>
+          </div>
+          <div className="text-right text-sm text-white/50">
+            <p className="text-xl font-semibold text-white">
+              {activeProgress.mastered}/{activeIds.length}
+            </p>
+            <p>concepts mastered</p>
+          </div>
+        </div>
 
-      <div className="flex items-baseline justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
-        <span>{roadmap.milestones.length} milestones</span>
-        <span className="tabular-nums">
-          {roll.mastered}/{ids.length} mastered
-        </span>
-      </div>
-    </button>
+        {nextConcept ? (
+          <div className="mt-7 flex flex-col justify-between gap-5 rounded-xl border border-white/[0.1] bg-white/[0.025] p-6 sm:flex-row sm:items-end">
+            <div className="max-w-2xl">
+              <p className="text-xs text-white/50">Continue learning</p>
+              <h3 className="mt-2 text-xl font-semibold text-white">{nextConcept.name}</h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/55">
+                {nextConcept.description}
+              </p>
+            </div>
+            <Link
+              to={`/concepts/${nextConcept.id}`}
+              className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-medium text-black hover:bg-white/90"
+            >
+              Open concept <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        ) : (
+          <p className="mt-6 text-sm text-emerald-300">This path is complete.</p>
+        )}
+
+        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+          <Link
+            to={`/roadmaps/${activeRoadmap.id}`}
+            className="inline-flex min-h-11 items-center gap-2 text-white/65 hover:text-white"
+          >
+            View active path <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/explore"
+            className="inline-flex min-h-11 items-center gap-2 text-white/50 hover:text-white"
+          >
+            Change path
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-12 border-t border-white/[0.08] pt-8" aria-labelledby="learn-domains">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-sm text-white/55">Browse by domain</p>
+            <h2
+              id="learn-domains"
+              className="mt-2 text-2xl font-semibold tracking-tight text-white"
+            >
+              Six doors into the library.
+            </h2>
+          </div>
+          <Link
+            to="/explore"
+            className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+          >
+            Complete path catalogue <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="mt-5 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+          {ROADMAP_GROUPS.map((group) => (
+            <Link
+              key={group.id}
+              to={`/explore#${group.id}`}
+              className="grid min-h-20 gap-2 py-4 transition-colors hover:text-white sm:grid-cols-[12rem_1fr_auto] sm:items-center sm:gap-5"
+            >
+              <span className="flex items-center gap-2 font-medium text-white/85">
+                {group.id === 'software-building' ? (
+                  <BookOpen className="h-4 w-4 text-white/40" />
+                ) : (
+                  <Map className="h-4 w-4 text-white/40" />
+                )}
+                {group.title}
+              </span>
+              <span className="text-sm text-white/50">{group.subtitle}</span>
+              <span className="text-xs text-white/40">
+                {group.roadmapIds.length} path{group.roadmapIds.length === 1 ? '' : 's'}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <footer className="mt-10 flex flex-wrap gap-x-6 gap-y-1 border-t border-white/[0.08] pt-5 text-sm text-white/55">
+        <Link to="/learn/all" className="inline-flex min-h-11 items-center hover:text-white">
+          All {CONCEPTS.length} concepts
+        </Link>
+        <Link to="/explore" className="inline-flex min-h-11 items-center hover:text-white">
+          All {ROADMAPS.length} paths
+        </Link>
+        <Link
+          to="/curriculum/"
+          reloadDocument
+          className="inline-flex min-h-11 items-center hover:text-white"
+        >
+          Public curriculum
+        </Link>
+      </footer>
+    </div>
   );
 }
 
-function pickDefaultActive(mastery: Record<string, MasteryEntry>): string {
-  let best = ROADMAPS[0]?.id ?? '';
-  let bestScore = -1;
-  for (const r of ROADMAPS) {
-    const ids = roadmapConceptIds(r);
-    const roll = rollupMastery(ids, mastery);
-    const started = ids.length - roll.untouched;
-    const score = started > 0 && roll.mastered < ids.length ? started + roll.learning * 0.5 : -1;
-    if (score > bestScore) {
-      best = r.id;
-      bestScore = score;
-    }
-  }
-  return best;
-}
-
-function pickNextConceptInRoadmap(
-  roadmap: Roadmap,
-  mastery: Record<string, MasteryEntry>,
-  gateCtx: ReturnType<typeof useGateContext>
-) {
-  // Prefer the global recommender's pick if it lives in this roadmap;
-  // otherwise pick the first not-yet-mastered concept in milestone order.
-  const fallbackIds = roadmapConceptIds(roadmap);
-  const idSet = new Set(fallbackIds);
-  const global = pickNextConcept(mastery, gateCtx);
-  if (global && idSet.has(global.id)) return global;
-  for (const cid of fallbackIds) {
-    const m = mastery[cid];
-    if (!m || (m.confidence ?? 0) < 0.9) {
-      const c = CONCEPT_BY_ID[cid];
-      if (c && conceptAccessible(c, gateCtx)) return c;
-    }
-  }
-  return null;
+export function catalogueSearchCount(query: string): { concepts: number; paths: number } {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return { concepts: 0, paths: 0 };
+  return {
+    concepts: CONCEPTS.filter((concept) =>
+      [concept.name, concept.description, ...concept.tags].join(' ').toLowerCase().includes(needle)
+    ).length,
+    paths: ROADMAPS.filter((roadmap: Roadmap) =>
+      [roadmap.title, roadmap.goal, ...roadmap.tracks].join(' ').toLowerCase().includes(needle)
+    ).length,
+  };
 }

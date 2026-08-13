@@ -29,6 +29,7 @@ to prod.
 | --- | --- | --- |
 | Frontend | React 19 SPA, Vite 8, React Router v7, Tailwind v4 | TypeScript (strict: true) |
 | Editor / viz | Monaco, Excalidraw, hand-rolled SVG primitives in `src/components/viz.tsx` | No chart-lib dep |
+| Live media | Cloudflare RealtimeKit 2.0.1 | `@cloudflare/realtimekit` supplies the browser meeting core, `@cloudflare/realtimekit-react` provides React lifecycle hooks/providers, and `@cloudflare/realtimekit-react-ui` supplies accessible media controls and participant primitives. All three are lazy-loaded from Tradeoff Wars routes. |
 | Code execution | JavaScript/TypeScript only, entirely in-browser: sucrase transpiles, then the code runs in a sandboxed `srcdoc` iframe with a 5s timeout (`src/hooks/useCodeExecution.ts`). | No server round-trip; the Go executor was removed 2026-07-25 (see [ADR 0009](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0009-remove-go-runtime.md)) |
 | Backend | Cloudflare Pages Functions, single catch-all `functions/api/[[path]].js` | Prod routes: `auth/*`, `progress`, `learning`, `learning/reader`, `ai`. `learning` dispatches to `handlers/` via `shared/` |
 | DB | Cloudflare D1 via the Pages `DB` binding | Deterministic migrations under `migrations/d1/` |

@@ -463,7 +463,10 @@ function TrackLane({
   ];
 
   return (
-    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4">
+    <div
+      id={`track-${trackId}`}
+      className="scroll-mt-24 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4"
+    >
       <div className="mb-3 flex items-center gap-3">
         <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${color(track.color).solid}`} />
         <div className="min-w-0 flex-1">

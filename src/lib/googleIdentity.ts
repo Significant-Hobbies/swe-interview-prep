@@ -1,5 +1,6 @@
 export type GoogleButtonSize = 'small' | 'medium' | 'large';
 export type GoogleButtonText = 'signin_with' | 'continue_with';
+export type GoogleButtonTheme = 'outline' | 'filled_black';
 
 export interface GoogleIdentityApi {
   initialize(config: {
@@ -12,7 +13,7 @@ export interface GoogleIdentityApi {
     parent: HTMLElement,
     options: {
       type: 'standard';
-      theme: 'outline';
+      theme: GoogleButtonTheme;
       size: GoogleButtonSize;
       shape: 'rectangular';
       text: GoogleButtonText;
@@ -67,6 +68,7 @@ export function renderGoogleIdentityButton(options: {
   clientId: string;
   size: GoogleButtonSize;
   text: GoogleButtonText;
+  theme: GoogleButtonTheme;
   onCredential: (credential: string) => Promise<void>;
 }): void {
   activeCredentialHandler = options.onCredential;
@@ -84,7 +86,7 @@ export function renderGoogleIdentityButton(options: {
 
   options.api.renderButton(options.parent, {
     type: 'standard',
-    theme: 'outline',
+    theme: options.theme,
     size: options.size,
     shape: 'rectangular',
     text: options.text,

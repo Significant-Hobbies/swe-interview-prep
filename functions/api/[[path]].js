@@ -1,4 +1,5 @@
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { dispatchWarsRequest } from '../../shared/api/worker-wars.mjs';
 import { createD1Client } from '../../shared/db/d1-client.mjs';
 import { AIConfigError, generateStream } from '../../shared/lib/ai.mjs';
 import { syncReaderLearningFeed } from '../../shared/lib/reader-learning.mjs';
@@ -106,9 +107,6 @@ async function currentUser(request, env) {
   });
   const row = result.rows[0];
   if (!row) return null;
-  if (env.OWNER_EMAIL && String(row.email).toLowerCase() !== env.OWNER_EMAIL.toLowerCase()) {
-    return null;
-  }
   return {
     id: row.id,
     googleId: row.google_id,
@@ -116,6 +114,7 @@ async function currentUser(request, env) {
     name: row.name,
     picture: row.picture,
     createdAt: row.created_at,
+    isOwner: !env.OWNER_EMAIL || String(row.email).toLowerCase() === env.OWNER_EMAIL.toLowerCase(),
   };
 }
 
@@ -161,10 +160,6 @@ async function handleGoogle(request, env) {
   if (payload.aud !== env.GOOGLE_CLIENT_ID || !payload.sub || !payload.email) {
     return json({ error: 'Authentication failed' }, { status: 401 });
   }
-  if (env.OWNER_EMAIL && payload.email.toLowerCase() !== env.OWNER_EMAIL.toLowerCase()) {
-    return json({ error: 'This learning workspace is private' }, { status: 403 });
-  }
-
   const user = await findOrCreateUser(env, {
     googleId: payload.sub,
     email: payload.email,
@@ -200,6 +195,7 @@ async function handleProgress(request, env) {
   await initDatabase(env);
   const user = await currentUser(request, env);
   if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user.isOwner) return json({ error: 'This learning workspace is private' }, { status: 403 });
   const client = getDb(env);
   if (request.method === 'GET') {
     const result = await client.execute({
@@ -266,7 +262,8 @@ async function handleProgress(request, env) {
 
 async function handleLearning(request, env) {
   await initDatabase(env);
-  const user = await currentUser(request, env);
+  const authenticatedUser = await currentUser(request, env);
+  const user = authenticatedUser?.isOwner ? authenticatedUser : null;
   const client = getDb(env);
   return dispatchLearningAction({ request, client, user, json });
 }
@@ -276,6 +273,7 @@ async function handleReaderLearning(request, env) {
   await initDatabase(env);
   const user = await currentUser(request, env);
   if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user.isOwner) return json({ error: 'This learning workspace is private' }, { status: 403 });
   if (!env.READER_API_TOKEN) {
     return json({ error: 'Reader learning source is not configured' }, { status: 503 });
   }
@@ -300,6 +298,7 @@ async function handleAiChat(request, env) {
   if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
   const user = await currentUser(request, env);
   if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user.isOwner) return json({ error: 'This learning workspace is private' }, { status: 403 });
 
   const { endpointUrl, apiKey, model, messages, systemPrompt } = (await request.json()) || {};
   if (!Array.isArray(messages) || messages.length === 0) {
@@ -368,6 +367,17 @@ export const onRequest = withTiming(async ({ request, env, params, next }) => {
     if (path === 'progress') return await handleProgress(request, env);
     if (path === 'learning') return await handleLearning(request, env);
     if (path === 'learning/reader') return await handleReaderLearning(request, env);
+    if (path === 'wars' || path.startsWith('wars/')) {
+      await initDatabase(env);
+      return await dispatchWarsRequest({
+        request,
+        path,
+        client: getDb(env),
+        user: await currentUser(request, env),
+        env,
+        json,
+      });
+    }
     return json({ error: 'API route not found' }, { status: 404 });
   } catch (error) {
     console.error('Pages API route failed', path, error);

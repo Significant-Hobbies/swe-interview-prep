@@ -90,23 +90,8 @@ samp {
 }
 
 @media (max-width: 1024px) {
-  [data-saasmaker-widget] .smw-trigger {
-    width: 44px;
-    height: 44px;
-    justify-content: center;
-    padding: 0;
-    right: 12px;
-    bottom: max(12px, env(safe-area-inset-bottom));
-  }
-
-  [data-saasmaker-widget] .smw-trigger__text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    clip-path: inset(50%);
+  [data-saasmaker-widget] {
+    display: none !important;
   }
 }
 

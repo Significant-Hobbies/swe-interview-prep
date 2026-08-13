@@ -20,6 +20,9 @@ import { tmpdir } from 'node:os';
 //   GET/POST/DELETE /chats           in-memory dev store
 //   GET  /auth/verify                always 401 (guest in dev)
 //   POST /auth/logout                no-op
+//   GET  /wars/status                deterministic local preview launch state
+//   GET  /wars/leaderboard/:mode     empty sanitized local leaderboard
+//   *    /wars/*                     explicit auth/provider/operator boundary responses
 // ─────────────────────────────────────────────────────────────────────────
 
 // ── CLI tool registry ──────────────────────────────────────────────────────
@@ -388,6 +391,51 @@ export function localAi() {
           return sendJson(res, 401, { error: 'Unauthorized' });
         }
         if (m === 'POST' && path === '/auth/logout') return sendJson(res, 200, { success: true });
+
+        // ── Software Wars ──
+        // Local Vite has no D1 identity or Durable Object. Public reads retain
+        // their production envelope; authenticated writes fail explicitly so
+        // the SPA enters its disclosed browser-only practice preview.
+        if (m === 'GET' && path === '/wars/status') {
+          return sendJson(res, 200, {
+            ok: true,
+            data: {
+              enabled: true,
+              blitzPreviewEnabled: true,
+              blitzRankedEnabled: false,
+              tradeoffPreviewEnabled: true,
+              tradeoffRankedEnabled: false,
+              mediaConfigured: false,
+              content: {
+                activeBlitzQuestions: 310,
+                activeTradeoffProblems: 20,
+                blitzLaunchMinimum: 300,
+                tradeoffLaunchMinimum: 20,
+              },
+            },
+          });
+        }
+        if (m === 'GET' && /^\/wars\/leaderboard\/(blitz|tradeoff)$/.test(path)) {
+          return sendJson(res, 200, { ok: true, data: [] });
+        }
+        if (path.startsWith('/wars/provider/')) {
+          return sendJson(res, 501, {
+            ok: false,
+            error: { code: 'provider_disabled', message: 'Provider webhooks require Pages dev' },
+          });
+        }
+        if (path.startsWith('/wars/operator/')) {
+          return sendJson(res, 403, {
+            ok: false,
+            error: { code: 'forbidden', message: 'Operator routes require Pages dev' },
+          });
+        }
+        if (path.startsWith('/wars/')) {
+          return sendJson(res, 401, {
+            ok: false,
+            error: { code: 'unauthorized', message: 'Use pnpm dev:pages for authenticated Wars' },
+          });
+        }
 
         // ── progress ──
         if (m === 'GET' && path === '/progress') {

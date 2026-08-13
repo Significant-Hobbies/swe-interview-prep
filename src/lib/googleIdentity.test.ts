@@ -16,6 +16,7 @@ describe('renderGoogleIdentityButton', () => {
         clientId: 'client-id',
         size,
         text: 'signin_with',
+        theme: 'filled_black',
         onCredential,
       });
     }

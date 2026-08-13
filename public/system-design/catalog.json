@@ -58,7 +58,11 @@
         "monitoring-analytics",
         "capacity-estimation"
       ],
-      "drillIds": ["design-rag-system", "build-rag-pipeline", "replication-lag-read"]
+      "drillIds": [
+        "design-rag-system",
+        "build-rag-pipeline",
+        "replication-lag-read"
+      ]
     },
     {
       "id": "multi-tenant-llm-gateway",
@@ -444,7 +448,14 @@
       "difficulty": "advanced",
       "practiceUrl": "https://learn.significanthobbies.com/mock?prompt=distributed-key-value-store&from=guide",
       "guideUrl": null,
-      "conceptIds": ["sharding", "replication", "consensus", "wal", "lsm-tree", "isolation-levels"],
+      "conceptIds": [
+        "sharding",
+        "replication",
+        "consensus",
+        "wal",
+        "lsm-tree",
+        "isolation-levels"
+      ],
       "drillIds": [
         "shard-key-choice",
         "replication-lag-read",

@@ -27,7 +27,7 @@ test.describe('Learning OS mobile (390px)', () => {
   test('Learn renders with no horizontal scroll', async ({ page }) => {
     await page.goto('/learn');
     await expect(
-      page.getByRole('heading', { name: 'Set your active path.', exact: true })
+      page.getByRole('heading', { name: 'Understand the system.', exact: true })
     ).toBeVisible({ timeout: 10000 });
 
     const overflow = await page.evaluate(
@@ -40,22 +40,32 @@ test.describe('Learning OS mobile (390px)', () => {
     await page.goto('/learn');
     await clickNav(page, 'Practice');
     await expect(page).toHaveURL(/practice/);
-    await expect(page.getByText('This week')).toBeVisible();
+    await expect(page.getByLabel(/Choose a practice problem/i)).toBeVisible({ timeout: 15000 });
   });
 
-  test('compact menu reaches Mock, Playground, and Progress', async ({ page }) => {
+  test('compact menu keeps four primary destinations and groups practice tools', async ({
+    page,
+  }) => {
     await page.goto('/learn');
-    await clickNav(page, 'Mock');
-    await expect(page).toHaveURL(/mock/);
+    await clickNav(page, 'Wars');
+    await expect(page).toHaveURL(/wars/);
+    await clickNav(page, 'Dashboard');
+    await expect(page).toHaveURL(/dashboard/);
+    await clickNav(page, 'Practice');
+    await expect(page).toHaveURL(/practice/);
+    await page.getByRole('link', { name: 'Back to Dashboard' }).click();
+    await page.goto('/learn');
     await clickNav(page, 'Playground');
     await expect(page).toHaveURL(/playground/);
-    await clickNav(page, 'Progress');
-    await expect(page).toHaveURL(/progress/);
+    await page.getByRole('link', { name: 'Back to Dashboard' }).click();
+    await expect(page).toHaveURL(/dashboard/);
   });
 
   test('Practice does not overflow horizontally', async ({ page }) => {
     await page.goto('/practice');
-    await page.getByText('This week').waitFor({ state: 'visible' });
+    await page
+      .getByLabel(/Choose a practice problem/i)
+      .waitFor({ state: 'visible', timeout: 15000 });
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
     );

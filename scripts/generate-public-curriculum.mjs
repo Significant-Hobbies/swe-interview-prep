@@ -33,7 +33,7 @@ try {
 }
 
 const { TRACKS, CONCEPTS, ROADMAPS, DRILLS, REVIEW_QUESTIONS, ARTIFACTS } = learning;
-const { PRIMARY_NAV_ITEMS, BROWSE_NAV_ITEMS } = navigation;
+const { PRIMARY_NAV_ITEMS, BROWSE_NAV_ITEMS, BROWSE_NAV_GROUPS } = navigation;
 const { CHANGELOG_RELEASES, CHANGELOG_REPOSITORY } = changelog;
 const { SYSTEM_DESIGN_CASES, SYSTEM_DESIGN_CASE_GROUPS } = systemDesign;
 const APPROVED_SYSTEM_DESIGN_CASES = SYSTEM_DESIGN_CASES.filter(
@@ -115,7 +115,12 @@ function navLink(item) {
 
 function siteHeader() {
   const primaryLinks = PRIMARY_NAV_ITEMS.map(navLink).join('');
-  const browseLinks = BROWSE_NAV_ITEMS.map(navLink).join('');
+  const browseGroups = BROWSE_NAV_GROUPS.map((group) => {
+    const links = BROWSE_NAV_ITEMS.filter((item) => item.group === group.id && item.menu)
+      .map(navLink)
+      .join('');
+    return `<section><p>${escapeHtml(group.label)}</p>${links}</section>`;
+  }).join('');
   return `<a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="site-header-inner">
@@ -124,17 +129,16 @@ function siteHeader() {
           ${primaryLinks}
           <details class="browse-menu">
             <summary>Browse <span aria-hidden="true">▾</span></summary>
-            <div class="browse-panel">${browseLinks}</div>
+            <div class="browse-panel">${browseGroups}</div>
           </details>
         </nav>
         <details class="compact-menu">
           <summary>Menu <span aria-hidden="true">▾</span></summary>
           <nav aria-label="Compact">
-            <p>Learn</p>
+            <p>Go</p>
             ${primaryLinks}
             <hr>
-            <p>Browse</p>
-            ${browseLinks}
+            ${browseGroups}
           </nav>
         </details>
       </div>
@@ -630,7 +634,8 @@ a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
 .browse-menu>summary::-webkit-details-marker,.compact-menu>summary::-webkit-details-marker{display:none}
 .browse-menu>summary span,.compact-menu>summary span{margin-left:4px;font-size:.625rem;transition:transform 150ms}
 .browse-menu[open]>summary span,.compact-menu[open]>summary span{transform:rotate(180deg)}
-.browse-panel{position:absolute;left:50%;top:calc(100% + 4px);display:grid;width:448px;grid-template-columns:1fr 1fr;gap:4px;transform:translateX(-50%);border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#000;padding:8px}
+.browse-panel{position:absolute;left:50%;top:calc(100% + 4px);display:grid;width:576px;grid-template-columns:1fr 1fr;gap:12px;transform:translateX(-50%);border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#000;padding:12px}
+.browse-panel section>p{margin:0;padding:8px 12px 4px;color:rgba(255,255,255,.38);font-size:.6875rem;font-weight:600}
 .browse-panel a,.compact-menu nav a{display:block;border-radius:6px;color:rgba(255,255,255,.65);padding:8px 12px;font-size:.875rem;text-decoration:none;transition:background 150ms,color 150ms}
 .browse-panel a:hover,.compact-menu nav a:hover{background:rgba(255,255,255,.05);color:white}
 .compact-menu{display:none;margin-left:auto}

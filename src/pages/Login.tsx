@@ -86,7 +86,12 @@ export default function Login() {
             >
               Guest
             </button>
-            <GoogleSignInButton />
+            <a
+              href="#sign-in"
+              className="inline-flex h-11 items-center rounded-md border border-white/10 px-3 text-xs font-medium text-white/65 transition-colors duration-150 hover:border-white/20 hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
+            >
+              Sign in
+            </a>
           </>
         }
       />
@@ -124,7 +129,9 @@ export default function Login() {
                 Try a mock interview
                 <ArrowRight className="h-4 w-4" />
               </button>
-              <GoogleSignInButton size="large" />
+              <div id="sign-in" className="scroll-mt-24">
+                <GoogleSignInButton size="large" />
+              </div>
               <span className="font-mono text-xs text-white/40">No sign-up needed to start.</span>
             </div>
             {import.meta.env.DEV && debugInfo && (

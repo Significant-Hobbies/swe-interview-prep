@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import {
   type GoogleButtonSize,
   type GoogleButtonText,
+  type GoogleButtonTheme,
   loadGoogleIdentity,
   renderGoogleIdentityButton,
 } from '../lib/googleIdentity';
@@ -23,10 +24,12 @@ export function GoogleSignInButton({
   className,
   size = 'medium',
   text = 'signin_with',
+  theme = 'filled_black',
 }: {
   className?: string;
   size?: GoogleButtonSize;
   text?: GoogleButtonText;
+  theme?: GoogleButtonTheme;
 }) {
   const { signInWithGoogleCredential } = useAuth();
   const parentRef = useRef<HTMLDivElement>(null);
@@ -49,6 +52,7 @@ export function GoogleSignInButton({
           clientId,
           size,
           text,
+          theme,
           onCredential: async (credential) => {
             try {
               await signInWithGoogleCredential(credential);
@@ -68,7 +72,7 @@ export function GoogleSignInButton({
     return () => {
       cancelled = true;
     };
-  }, [signInWithGoogleCredential, size, text]);
+  }, [signInWithGoogleCredential, size, text, theme]);
 
   return <div ref={parentRef} className={className} />;
 }

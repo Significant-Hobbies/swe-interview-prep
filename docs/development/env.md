@@ -24,6 +24,28 @@ build-time vs runtime and where each is consumed. If it disagrees with
 The database is a Cloudflare Pages D1 binding named `DB`, declared in Wrangler
 config rather than an environment variable or secret.
 
+## Software Wars runtime configuration
+
+The Pages deployment and separate Wars Worker use these names. Configure
+values and credentials manually in Cloudflare; none belong in tracked files.
+
+| Name | Kind | Purpose |
+| --- | --- | --- |
+| `WARS_ENABLED` | Non-secret flag | Master match-creation gate. |
+| `WARS_BLITZ_PREVIEW_ENABLED`, `WARS_BLITZ_RANKED_ENABLED` | Non-secret flags | Enable unranked and ranked Blitz independently. |
+| `WARS_TRADEOFF_PREVIEW_ENABLED`, `WARS_TRADEOFF_RANKED_ENABLED` | Non-secret flags | Enable unranked and ranked Tradeoff independently. |
+| `WARS_REALTIME_PUBLIC_URL` | Non-secret URL | Public WebSocket endpoint for the Wars Worker. |
+| `REALTIMEKIT_ACCOUNT_ID`, `REALTIMEKIT_APP_ID` | Non-secret identifiers | Select the RealtimeKit application. |
+| `REALTIMEKIT_API_TOKEN` | Secret | Creates meetings and participant-scoped credentials. |
+| `REALTIMEKIT_WEBHOOK_PUBLIC_KEY` | Secret/runtime verification material | Verifies signed provider webhook bodies. |
+| `WARS_REALTIME_SIGNING_SECRET` | Secret | Signs five-minute match-scoped control-plane tokens shared by Pages and the Worker. |
+
+Pages requires `DB`, `WAR_ARTIFACTS` (R2), `WAR_JOBS` (Queue), and a
+`WARS_REALTIME` service binding. The Wars Worker declares D1, R2, Queue, DLQ,
+and SQLite Durable Object bindings in `workers/software-wars/wrangler.jsonc`.
+RealtimeKit is optional: without its account/app/token values, artifact, phase,
+and voting flows remain usable with a clear media-disabled state.
+
 ## AI provider fallbacks (runtime, optional)
 
 The client can pass `aiConfig: {endpointUrl, apiKey, model}` per request. If
