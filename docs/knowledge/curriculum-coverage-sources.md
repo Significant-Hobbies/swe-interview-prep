@@ -15,7 +15,7 @@ The audit resulted in:
 - seven progressive executable builds;
 - two integrated synthesis artifacts.
 
-The in-product [Harness engineering learning page](../learning/harness-engineering.md) describes the progression. Technical claims cite primary OpenAI, Anthropic, GitHub, MCP, and standards material rather than copying course prose.
+The in-product [Harness engineering learning page](https://learn.significanthobbies.com/learning/harness-engineering) describes the progression. Technical claims cite primary OpenAI, Anthropic, GitHub, MCP, and standards material rather than copying course prose.
 
 ## Classic system-design audit
 
@@ -38,4 +38,3 @@ The uncovered reusable patterns became thirteen first-class interactive cases:
 - stock exchanges.
 
 Each case uses the existing six-stage Tradeoff engine, calculation anchors, weighted evidence rubric, failure injection, stronger answer, authoritative sources, and canonical concept/drill remediation. Cases remain practice-only until a separate worked guide passes the existing substantive publication bar.
-
