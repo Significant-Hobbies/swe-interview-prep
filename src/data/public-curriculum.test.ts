@@ -48,6 +48,17 @@ describe('public curriculum publication', () => {
     expect(catalog.concepts).toHaveLength(concepts.length);
   });
 
+  it('renders the public root shell before client-side route work', () => {
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+    const shell = homepage.match(/<div id="public-entry-shell"[\s\S]*?<\/div>\s*<script>/)?.[0];
+
+    expect(shell).toBeTruthy();
+    expect(shell).toContain('A complete software engineering learning map');
+    expect(shell).toContain('font-size:clamp(2.25rem,8vw,3rem)');
+    expect(shell).not.toContain('margin-top:100vh');
+    expect(homepage).toContain("window.location.pathname === '/'");
+  });
+
   it('includes every generated page exactly once in the sitemap', () => {
     const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
     for (const path of manifest.htmlPaths) {

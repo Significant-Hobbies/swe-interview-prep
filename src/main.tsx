@@ -25,20 +25,6 @@ const tree = (
 
 createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
 
-// Remove the LCP shell once the browser has painted a frame, so the handoff to
-// React is not a flash of empty black.
-//
-// This used to exist to make the shell's own <h1> register as the LCP element
-// instead of React's — but that h1 was the Login hero, and Login stopped being
-// what a visitor lands on. Optimising the metric meant every cold load showed a
-// page that no longer exists. The shell is now an app-shaped skeleton with no
-// competing headline, so LCP is whatever the app actually paints.
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    document.getElementById('lcp-shell')?.remove();
-  });
-});
-
 const scheduleMonitoring = () => {
   void import('./lib/foundry-monitoring').then((m) => m.installBrowserMonitoring());
 };

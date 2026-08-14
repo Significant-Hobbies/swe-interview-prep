@@ -77,6 +77,19 @@ function removeLcpShell() {
   document.getElementById('lcp-shell')?.remove();
 }
 
+function AppReady({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    // The root route redirects to Today. Keep the initial-response shell in
+    // place until that lazy destination has committed, not merely until auth
+    // has finished or the entry bundle has started executing.
+    if (location.pathname !== '/') removeLcpShell();
+  }, [location.pathname]);
+
+  return <>{children}</>;
+}
+
 function OnboardingGate({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const done = loadLocal<{ done?: boolean }>(STORE_KEYS.onboarding, {}).done;
@@ -171,10 +184,6 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!loading || user || isGuest) removeLcpShell();
-  }, [loading, user, isGuest]);
-
   /**
    * Nobody is asked to sign in to use this.
    *
@@ -201,7 +210,9 @@ export default function App() {
   return (
     <>
       <ErrorBoundary scope="route">
-        <Suspense fallback={<RouteLoading />}>{body}</Suspense>
+        <Suspense fallback={<RouteLoading />}>
+          <AppReady>{body}</AppReady>
+        </Suspense>
       </ErrorBoundary>
       {!isPublicShare && !isFocused && <SaaSMakerFeedback />}
     </>

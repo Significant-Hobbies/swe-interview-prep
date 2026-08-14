@@ -47,12 +47,12 @@
       or it is a bug dressed up as a performance win.
 
       The header below mirrors the real one closely enough that the handoff to
-      React is invisible. The curriculum block underneath is what search engines
-      and non-JS clients read at the root URL; it sits below the fold.
+      React is invisible. On the root URL, the generated public curriculum
+      summary is also the useful loading surface and initial LCP candidate.
     -->
     <div
       id="lcp-shell"
-      style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;"
+      style="position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden;"
     >
       <div style="min-height:100vh;background:#000;color:#fff;">
         <header style="border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -61,15 +61,10 @@
             <span style="font-size:0.875rem;color:rgba(255,255,255,0.35);">/ Learning OS</span>
           </div>
         </header>
-        <!--
-          Pushed a full viewport down so it never paints during the shell's
-          brief life. It exists for crawlers and non-JS clients at the root URL,
-          not for people — `overflow:hidden` on the shell keeps it unreachable.
-        -->
-        <div style="margin-top:100vh;">
+        <div id="public-entry-shell" hidden>
         <!-- curriculum-static:start -->
-          <section style="max-width:64rem;margin:0 auto;padding:1rem 1.5rem 5rem;">
-            <h1 style="font-size:1.5rem;margin:0 0 1rem;">A complete software engineering learning map</h1>
+          <section style="max-width:64rem;margin:0 auto;padding:2.5rem 1.5rem 5rem;color:rgba(255,255,255,0.62);line-height:1.6;">
+            <h1 style="max-width:52rem;font-size:clamp(2.25rem,8vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 1rem;">A complete software engineering learning map</h1>
             <p>Browse 19 tracks, 259 concepts, and 26 sequenced roadmaps. The curriculum connects systems foundations, infrastructure, distributed systems, databases, search, DSA, AI training and inference, agent reliability, developer tools, applications, and multimodal computing to active practice.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Learn through evidence, not passive reading</h2>
             <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>
@@ -79,6 +74,11 @@
           </section>
           <!-- curriculum-static:end -->
         </div>
+        <script>
+          if (window.location.pathname === '/') {
+            document.getElementById('public-entry-shell').hidden = false;
+          }
+        </script>
       </div>
     </div>
     <div id="root"></div>
