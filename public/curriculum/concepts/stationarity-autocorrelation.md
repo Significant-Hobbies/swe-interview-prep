@@ -41,14 +41,14 @@ Daily returns show ACF lag-1 ≈ 0.02, all within confidence band. Prices show A
 
 ## Prerequisites
 
-- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html)
-- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html)
+- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility)
+- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation)
 
 ## Related concepts
 
-- [Random Walks & Markov Chains](https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov.html)
-- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html)
+- [Random Walks & Markov Chains](https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov)
+- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

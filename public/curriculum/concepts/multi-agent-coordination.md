@@ -33,13 +33,13 @@ Delegation, specialization, shared state, handoffs, arbitration, budgets, and av
 
 ## Prerequisites
 
-- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html)
+- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations)
 
 ## Related concepts
 
-- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html)
-- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html)
+- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations)
+- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

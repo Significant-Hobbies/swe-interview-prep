@@ -42,8 +42,8 @@ Regions, zones, networks, compute, managed storage, identity, load balancing, an
 
 ## Related concepts
 
-- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html)
+- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

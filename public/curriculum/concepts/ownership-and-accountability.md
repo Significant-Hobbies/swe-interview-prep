@@ -40,4 +40,4 @@ Write a STAR about a problem that was not your job but you owned anyway. Show ho
 
 ## Learning paths
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html)
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice)

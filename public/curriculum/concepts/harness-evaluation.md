@@ -42,15 +42,15 @@ Implement compareHarness(baseline, candidate, limits). Each run has tasksPassed,
 
 ## Prerequisites
 
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html)
-- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html)
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification)
+- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle)
 
 ## Related concepts
 
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html)
-- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html)
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing)
+- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

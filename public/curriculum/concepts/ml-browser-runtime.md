@@ -33,14 +33,14 @@ Page limit ~2–4GB WASM memory. Model weights 1.5B params float16 ≈ 3GB. Can 
 
 ## Prerequisites
 
-- [Checkpointing](https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html)
+- [Checkpointing](https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing)
 
 ## Related concepts
 
-- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html)
+- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

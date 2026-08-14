@@ -44,14 +44,14 @@ Agent calls tools in a loop. Max 5 steps, same tool 2× in a row triggers stop. 
 
 ## Prerequisites
 
-- [Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html)
+- [Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling)
 
 ## Related concepts
 
-- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing.html)
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
+- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

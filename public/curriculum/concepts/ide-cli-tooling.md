@@ -37,13 +37,13 @@ Language servers, editor protocols, terminal UX, diagnostics, completions, comma
 
 ## Prerequisites
 
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
 
 ## Related concepts
 
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

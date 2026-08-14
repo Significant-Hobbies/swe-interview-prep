@@ -37,15 +37,15 @@ Four completions with rewards [1.0, 0.5, 0.8, 0.3]. Mean μ=0.65, population std
 
 ## Prerequisites
 
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html)
-- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html)
+- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora)
+- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling)
 
 ## Related concepts
 
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
-- [Training & Debugging](https://learn.significanthobbies.com/curriculum/concepts/ml-training.html)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
+- [Training & Debugging](https://learn.significanthobbies.com/curriculum/concepts/ml-training)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)

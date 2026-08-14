@@ -37,11 +37,11 @@ FAISS IVF-PQ, billion-scale vector search under a memory budget.
 
 ## Prerequisites
 
-- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf.html)
+- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf)
 
 ## Related concepts
 
-- [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html)
+- [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs)
 
 ## Learning paths
 

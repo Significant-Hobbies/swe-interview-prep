@@ -35,13 +35,13 @@ Unsupported claims, citations, abstention, tool errors, constraint violations, u
 
 ## Prerequisites
 
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html)
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing)
 
 ## Related concepts
 
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html)
-- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html)
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing)
+- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

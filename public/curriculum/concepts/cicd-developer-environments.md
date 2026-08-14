@@ -39,13 +39,13 @@ Hermetic builds, reproducible environments, test gates, artifacts, previews, pro
 
 ## Prerequisites
 
-- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html)
+- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes)
 
 ## Related concepts
 
-- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html)
-- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html)
+- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes)
+- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

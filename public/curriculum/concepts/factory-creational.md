@@ -30,7 +30,7 @@ Design a Notification factory that returns Email / SMS / Push notifiers from a s
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Design a Notification factory that returns Email / SMS / Push notifiers from a s
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

@@ -33,13 +33,13 @@ Data mixtures, next-token objectives, scaling laws, distributed training, checkp
 
 ## Prerequisites
 
-- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html)
+- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw)
 
 ## Related concepts
 
-- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html)
-- [Training & Debugging](https://learn.significanthobbies.com/curriculum/concepts/ml-training.html)
+- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw)
+- [Training & Debugging](https://learn.significanthobbies.com/curriculum/concepts/ml-training)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)

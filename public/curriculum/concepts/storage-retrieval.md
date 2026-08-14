@@ -41,9 +41,9 @@ Design blob store: PUT by id vs GET by tag. Which needs secondary index? Which i
 
 ## Related concepts
 
-- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree.html)
-- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html)
+- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree)
+- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

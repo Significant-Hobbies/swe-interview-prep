@@ -41,16 +41,16 @@ Given retrieved doc ids [1,4,2,9] and relevant ids {2,4,7}, compute precision@4 
 
 ## Prerequisites
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
 
 ## Related concepts
 
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html)
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics)
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

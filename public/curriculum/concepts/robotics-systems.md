@@ -37,13 +37,13 @@ Sensing, localization, mapping, planning, control, simulation, safety, real-time
 
 ## Prerequisites
 
-- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking.html)
+- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking)
 
 ## Related concepts
 
-- [Local & On-device Inference](https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference.html)
-- [Spatial Interfaces](https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html)
+- [Local & On-device Inference](https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference)
+- [Spatial Interfaces](https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces)
 
 ## Learning paths
 
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

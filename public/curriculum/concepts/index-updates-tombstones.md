@@ -39,13 +39,13 @@ Implement search(graph, deleted, entry, query, k, budget) — a greedy walk over
 
 ## Prerequisites
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
 
 ## Related concepts
 
-- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction.html)
-- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html)
+- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction)
+- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

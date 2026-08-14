@@ -33,13 +33,13 @@ Declarative infrastructure, state, plans, drift detection, policy checks, secret
 
 ## Prerequisites
 
-- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html)
+- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration)
 
 ## Related concepts
 
-- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html)
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html)
+- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration)
+- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

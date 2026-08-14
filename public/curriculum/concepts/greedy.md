@@ -30,12 +30,12 @@ Activities by end time: [1,4],[3,5],[0,6],[5,7],[8,9],[5,9]. Max non-overlapping
 
 ## Prerequisites
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Related concepts
 
-- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals.html)
+- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

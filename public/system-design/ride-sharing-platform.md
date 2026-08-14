@@ -67,8 +67,8 @@ Ingest sequenced driver locations into a regional stream and latest-location sto
 
 ## Repair the mechanisms
 
-- [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport.html)
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html)
-- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html)
-- [Unique ID Generation](https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html)
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport)
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime)
+- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing)
+- [Unique ID Generation](https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)

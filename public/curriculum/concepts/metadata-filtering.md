@@ -42,15 +42,15 @@ Extend your brute-force index to support 'nearest WHERE field = value'. Implemen
 
 ## Prerequisites
 
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html)
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db)
 
 ## Related concepts
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)

@@ -33,13 +33,13 @@ Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, cont
 
 ## Prerequisites
 
-- [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure.html)
+- [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure)
 
 ## Related concepts
 
-- [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure.html)
-- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html)
+- [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure)
+- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

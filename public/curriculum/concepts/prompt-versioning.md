@@ -37,9 +37,9 @@ v1 and v2 prompts differ by one instruction. Name what you must re-run before sh
 
 ## Related concepts
 
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
+- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

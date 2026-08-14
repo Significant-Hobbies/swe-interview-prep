@@ -36,16 +36,16 @@ d_model=512, h=8. What is head_dim? If you project Q to 512 dims total, how many
 
 ## Prerequisites
 
-- [Self-Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html)
+- [Self-Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention)
 
 ## Related concepts
 
-- [Transformer Block](https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html)
+- [Transformer Block](https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

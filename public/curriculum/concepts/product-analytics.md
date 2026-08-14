@@ -37,8 +37,8 @@ Pick a product. Define its north-star metric (one number that captures customer 
 
 ## Related concepts
 
-- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html)
+- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

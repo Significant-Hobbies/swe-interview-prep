@@ -47,12 +47,12 @@ LeetCode #207 — Course Schedule. Solve on LeetCode, then implement here if you
 
 ## Prerequisites
 
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html)
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees)
 
 ## Related concepts
 
-- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html)
+- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

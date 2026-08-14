@@ -16,10 +16,10 @@ Concepts the later milestones depend on. Without these the planner cannot serve 
 
 ### Concepts
 
-- [Combinatorics](https://learn.significanthobbies.com/curriculum/concepts/combinatorics.html) — Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
-- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
-- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html) — Partial derivatives, the gradient vector, and reading a loss surface for descent direction.
-- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html) — Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.
+- [Combinatorics](https://learn.significanthobbies.com/curriculum/concepts/combinatorics) — Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
+- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
+- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients) — Partial derivatives, the gradient vector, and reading a loss surface for descent direction.
+- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations) — Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.
 
 
 
@@ -29,9 +29,9 @@ Conditional probability, distributions, expectation — the language of uncertai
 
 ### Concepts
 
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
-- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html) — Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
+- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions) — Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.
 
 ### Build evidence
 
@@ -44,10 +44,10 @@ Describe data honestly; understand why averages become Normal.
 
 ### Concepts
 
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
-- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html) — Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.
-- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html) — Sampling distributions, standard error of the mean, and why averages become Normal as n grows.
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
+- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation) — Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.
+- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt) — Sampling distributions, standard error of the mean, and why averages become Normal as n grows.
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
 
 ### Build evidence
 
@@ -60,10 +60,10 @@ Hypothesis tests, regression, and real A/B practice for SWE.
 
 ### Concepts
 
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html) — Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html) — Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.
-- [Bias, Variance & Overfitting](https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting.html) — Underfitting vs memorizing noise; why in-sample greatness lies.
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering) — Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics) — Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.
+- [Bias, Variance & Overfitting](https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting) — Underfitting vs memorizing noise; why in-sample greatness lies.
 
 ### Build evidence
 
@@ -76,9 +76,9 @@ Posterior thinking and MLE — the bridge to ML loss functions.
 
 ### Concepts
 
-- [Bayesian Inference](https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html) — Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.
-- [Maximum Likelihood Estimation](https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html) — Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.
-- [Information & Entropy](https://learn.significanthobbies.com/curriculum/concepts/information-entropy.html) — Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.
+- [Bayesian Inference](https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference) — Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.
+- [Maximum Likelihood Estimation](https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood) — Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.
+- [Information & Entropy](https://learn.significanthobbies.com/curriculum/concepts/information-entropy) — Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.
 
 ### Build evidence
 

@@ -37,13 +37,13 @@ Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabiliti
 
 ## Prerequisites
 
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
 
 ## Related concepts
 
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
-- [Automated Debugging & Remediation](https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation.html)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
+- [Automated Debugging & Remediation](https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

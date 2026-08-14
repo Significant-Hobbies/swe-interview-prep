@@ -41,15 +41,15 @@ Multi-tenant SaaS: shard by tenant_id vs user_id vs hash(id). Which avoids hot t
 
 ## Prerequisites
 
-- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html)
+- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing)
 
 ## Related concepts
 
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

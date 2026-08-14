@@ -44,15 +44,15 @@ Implement exponential backoff with full jitter for a retry loop, and route a mes
 
 ## Prerequisites
 
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Related concepts
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
+- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

@@ -53,16 +53,16 @@ Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Def
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html)
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
-- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
+- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem)
 
 ## Related concepts
 
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html)
+- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

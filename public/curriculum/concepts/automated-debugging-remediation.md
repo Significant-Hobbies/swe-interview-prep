@@ -37,12 +37,12 @@ Failure reproduction, hypothesis generation, telemetry, fault localization, mini
 
 ## Prerequisites
 
-- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html)
+- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health)
 
 ## Related concepts
 
-- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html)
+- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

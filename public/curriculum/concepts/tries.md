@@ -30,7 +30,7 @@ Insert ["app","apt","bat"]. Implement startsWith("ap") and search("apt").
 
 ## Prerequisites
 
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html)
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Insert ["app","apt","bat"]. Implement startsWith("ap") and search("apt").
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

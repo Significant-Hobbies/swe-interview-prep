@@ -37,13 +37,13 @@ Model Context Protocol hosts, clients, servers, tools, resources, prompts, trans
 
 ## Prerequisites
 
-- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html)
+- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context)
 
 ## Related concepts
 
-- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html)
-- [Multi-agent Coordination](https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination.html)
+- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context)
+- [Multi-agent Coordination](https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

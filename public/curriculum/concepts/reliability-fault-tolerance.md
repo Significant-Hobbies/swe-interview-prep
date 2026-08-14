@@ -33,13 +33,13 @@ SLOs, error budgets, redundancy, graceful degradation, overload control, and fai
 
 ## Prerequisites
 
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html)
+- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs)
 
 ## Related concepts
 
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html)
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html)
+- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs)
+- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

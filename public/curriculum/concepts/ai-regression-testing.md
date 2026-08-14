@@ -38,13 +38,13 @@ Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries
 
 ## Prerequisites
 
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html)
+- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning)
 
 ## Related concepts
 
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html)
-- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html)
+- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning)
+- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

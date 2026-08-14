@@ -38,16 +38,16 @@ Walk through Raft leader election: timeouts, candidacy, vote granting, split vot
 
 ## Prerequisites
 
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
 
 ## Related concepts
 
-- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html)
+- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)

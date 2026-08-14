@@ -37,13 +37,13 @@ DOM and accessibility-tree control, screenshots, visual grounding, action planni
 
 ## Prerequisites
 
-- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html)
+- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces)
 
 ## Related concepts
 
-- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html)
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html)
+- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces)
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

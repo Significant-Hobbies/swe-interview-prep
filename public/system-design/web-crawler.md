@@ -65,8 +65,8 @@ Normalize and deduplicate discovered URLs, rank them by importance and freshness
 
 ## Repair the mechanisms
 
-- [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html)
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding.html)
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
+- [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
+- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)

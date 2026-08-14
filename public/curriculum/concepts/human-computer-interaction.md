@@ -41,9 +41,9 @@ Human perception, cognition, motor control, interaction techniques, accessibilit
 
 ## Related concepts
 
-- [Spatial Interfaces](https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html)
-- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html)
+- [Spatial Interfaces](https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces)
+- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu)
 
 ## Learning paths
 
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

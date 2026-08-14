@@ -39,14 +39,14 @@ Implement countDivisible(n, divisors) — how many integers in 1..n are divisibl
 
 ## Prerequisites
 
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html)
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals)
 
 ## Related concepts
 
-- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html)
-- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html)
+- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory)
+- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)

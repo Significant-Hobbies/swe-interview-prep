@@ -42,13 +42,13 @@ Generate key sk_live_abc123, store SHA-256 hash only, show prefix sk_live for su
 
 ## Prerequisites
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html)
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle)
 
 ## Related concepts
 
-- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html)
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
+- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)

@@ -34,15 +34,15 @@ Joint text, image, audio, and video representations, encoders, projectors, fusio
 
 ## Prerequisites
 
-- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models.html)
-- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html)
+- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models)
+- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems)
 
 ## Related concepts
 
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html)
-- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models.html)
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization)
+- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

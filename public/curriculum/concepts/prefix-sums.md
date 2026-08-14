@@ -39,13 +39,13 @@ Implement makeRangeSum(nums) returning a function query(i, j) that gives the inc
 
 ## Prerequisites
 
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Related concepts
 
-- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html)
-- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html)
+- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window)
+- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

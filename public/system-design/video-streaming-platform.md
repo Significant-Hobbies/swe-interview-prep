@@ -66,8 +66,8 @@ Accept resumable uploads into object storage, asynchronously transcode and valid
 
 ## Repair the mechanisms
 
-- [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html)
-- [CDN & Edge Delivery](https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery.html)
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
-- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html)
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media)
+- [CDN & Edge Delivery](https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
+- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)

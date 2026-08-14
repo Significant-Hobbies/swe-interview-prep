@@ -37,13 +37,13 @@ Scene graphs, render loops, input, animation, physics, GPU pipelines, asset load
 
 ## Prerequisites
 
-- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design.html)
+- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design)
 
 ## Related concepts
 
-- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design.html)
-- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html)
+- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design)
+- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

@@ -33,13 +33,13 @@ Partitioned logs, producers, consumer groups, offsets, ordering, delivery semant
 
 ## Prerequisites
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
 
 ## Related concepts
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
+- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching)
 
 ## Learning paths
 
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

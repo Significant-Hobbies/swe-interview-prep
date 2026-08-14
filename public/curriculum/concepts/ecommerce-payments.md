@@ -30,12 +30,12 @@ Double-click Pay sends two POST /charge with same Idempotency-Key. How many char
 
 ## Prerequisites
 
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
 
 ## Related concepts
 
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Learning paths
 

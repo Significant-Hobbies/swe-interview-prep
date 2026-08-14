@@ -33,15 +33,15 @@ Design a key router for a sharded cache using consistent hashing with virtual no
 
 ## Prerequisites
 
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html)
+- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing)
 
 ## Related concepts
 
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding.html)
+- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

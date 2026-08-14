@@ -39,13 +39,13 @@ Implement chooseJoin({ leftRows, rightRows, leftSorted, rightSorted, hasIndexOnR
 
 ## Prerequisites
 
-- [Query Execution & Optimization](https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization.html)
+- [Query Execution & Optimization](https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization)
 
 ## Related concepts
 
-- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html)
-- [Columnar Storage](https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html)
+- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index)
+- [Columnar Storage](https://learn.significanthobbies.com/curriculum/concepts/columnar-storage)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

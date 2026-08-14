@@ -42,14 +42,14 @@ Implement environmentContract(worktreeId) returning {bootstrap, readiness, works
 
 ## Prerequisites
 
-- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html)
+- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology)
 
 ## Related concepts
 
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
-- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html)
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
+- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

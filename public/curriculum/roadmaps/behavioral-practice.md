@@ -16,10 +16,10 @@ Leadership, ownership, customer obsession, innovation.
 
 ### Concepts
 
-- [Leadership](https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence.html) — Driving outcomes through others.
-- [Ownership](https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability.html) — End-to-end responsibility.
-- [Customer Obsession](https://learn.significanthobbies.com/curriculum/concepts/customer-obsession.html) — User-centered tradeoffs.
-- [Innovation](https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity.html) — Novel solutions, experimentation.
+- [Leadership](https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence) — Driving outcomes through others.
+- [Ownership](https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability) — End-to-end responsibility.
+- [Customer Obsession](https://learn.significanthobbies.com/curriculum/concepts/customer-obsession) — User-centered tradeoffs.
+- [Innovation](https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity) — Novel solutions, experimentation.
 
 
 
@@ -29,9 +29,9 @@ Teamwork, conflict, communication.
 
 ### Concepts
 
-- [Collaboration](https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration.html) — Cross-functional work.
-- [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html) — Disagreement handling.
-- [Communication](https://learn.significanthobbies.com/curriculum/concepts/communication.html) — Written/verbal, audience adaptation.
+- [Collaboration](https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration) — Cross-functional work.
+- [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution) — Disagreement handling.
+- [Communication](https://learn.significanthobbies.com/curriculum/concepts/communication) — Written/verbal, audience adaptation.
 
 
 
@@ -41,6 +41,6 @@ Decision-making, failure, prioritisation.
 
 ### Concepts
 
-- [Decision Making](https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making.html) — Tradeoffs under uncertainty.
-- [Failure & Learning](https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning.html) — Owning mistakes, post-mortem.
-- [Prioritization](https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization.html) — Eisenhower, OKR alignment.
+- [Decision Making](https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making) — Tradeoffs under uncertainty.
+- [Failure & Learning](https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning) — Owning mistakes, post-mortem.
+- [Prioritization](https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization) — Eisenhower, OKR alignment.

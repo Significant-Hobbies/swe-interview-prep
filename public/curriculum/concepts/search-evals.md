@@ -41,18 +41,18 @@ Create a labelled query set (query → relevant doc ids) and a harness that scor
 
 ## Prerequisites
 
-- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html)
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html)
+- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics)
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing)
 
 ## Related concepts
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering)
 
 ## Learning paths
 
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html)
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

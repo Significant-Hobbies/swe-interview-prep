@@ -36,13 +36,13 @@ Direct and transitive dependencies, affected targets, ownership, runtime consume
 
 ## Prerequisites
 
-- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs.html)
+- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs)
 
 ## Related concepts
 
-- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs.html)
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
+- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

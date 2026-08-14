@@ -43,10 +43,10 @@ Request scheduling, model execution, memory management, distributed serving, API
 
 ## Related concepts
 
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html)
-- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html)
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization)
+- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

@@ -33,14 +33,14 @@ Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kerne
 
 ## Prerequisites
 
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html)
-- [Program Memory Model](https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html)
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation)
+- [Program Memory Model](https://learn.significanthobbies.com/curriculum/concepts/program-memory-model)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
 
 ## Related concepts
 
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
 
 ## Learning paths
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)

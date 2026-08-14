@@ -51,18 +51,18 @@ Planned 50/50 split; after 24h you observe 52% control / 48% treatment (n=100k t
 
 ## Prerequisites
 
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html)
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html)
-- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html)
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing)
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence)
+- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt)
 
 ## Related concepts
 
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
-- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html)
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
+- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
 
 ## Learning paths
 
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

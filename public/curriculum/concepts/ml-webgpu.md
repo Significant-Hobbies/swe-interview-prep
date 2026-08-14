@@ -35,8 +35,8 @@ Tensor 1024×1024 float32. Byte size? If maxStorageBufferBindingSize is 128MB, d
 
 ## Prerequisites
 
-- [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html)
-- [Transformer Block](https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html)
+- [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime)
+- [Transformer Block](https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block)
 
 ## Related concepts
 
@@ -44,6 +44,6 @@ Tensor 1024×1024 float32. Byte size? If maxStorageBufferBindingSize is 128MB, d
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

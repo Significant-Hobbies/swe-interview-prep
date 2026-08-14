@@ -41,17 +41,17 @@ Design a RAG system: doc ingestion → chunking → embedding → vector index, 
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
 
 ## Related concepts
 
-- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking.html)
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
+- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

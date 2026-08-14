@@ -33,13 +33,13 @@ Web and native lifecycles, rendering, navigation, state, networking, offline beh
 
 ## Prerequisites
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
 
 ## Related concepts
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
-- [UX & Interface Design](https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
+- [UX & Interface Design](https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

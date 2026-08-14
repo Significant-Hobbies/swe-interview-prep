@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vector DB &amp; ANN | SWE Prep</title>
     <meta name="description" content="Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/vector-db.html">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/vector-db">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Vector DB &amp; ANN | SWE Prep">
     <meta property="og:description" content="Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/vector-db.html">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/vector-db">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vector DB &amp; ANN | SWE Prep">
     <meta name="twitter:description" content="Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Vector DB & ANN","description":"Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.","url":"https://learn.significanthobbies.com/curriculum/tracks/vector-db.html","numberOfItems":12,"hasPart":[{"@type":"LearningResource","name":"Embeddings","url":"https://learn.significanthobbies.com/curriculum/concepts/embeddings.html"},{"@type":"LearningResource","name":"Vector Similarity","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html"},{"@type":"LearningResource","name":"Top-k Vector Search","url":"https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html"},{"@type":"LearningResource","name":"Brute-Force Vector DB","url":"https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html"},{"@type":"LearningResource","name":"HNSW","url":"https://learn.significanthobbies.com/curriculum/concepts/hnsw.html"},{"@type":"LearningResource","name":"IVF (Inverted File)","url":"https://learn.significanthobbies.com/curriculum/concepts/ivf.html"},{"@type":"LearningResource","name":"Product Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html"},{"@type":"LearningResource","name":"Metadata Filtering","url":"https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html"},{"@type":"LearningResource","name":"Recall / Latency Tradeoffs","url":"https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html"},{"@type":"LearningResource","name":"Scalar & Binary Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html"},{"@type":"LearningResource","name":"Disk-Based ANN","url":"https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html"},{"@type":"LearningResource","name":"Index Updates & Tombstones","url":"https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Vector DB & ANN","description":"Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.","url":"https://learn.significanthobbies.com/curriculum/tracks/vector-db","numberOfItems":12,"hasPart":[{"@type":"LearningResource","name":"Embeddings","url":"https://learn.significanthobbies.com/curriculum/concepts/embeddings"},{"@type":"LearningResource","name":"Vector Similarity","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-similarity"},{"@type":"LearningResource","name":"Top-k Vector Search","url":"https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search"},{"@type":"LearningResource","name":"Brute-Force Vector DB","url":"https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db"},{"@type":"LearningResource","name":"HNSW","url":"https://learn.significanthobbies.com/curriculum/concepts/hnsw"},{"@type":"LearningResource","name":"IVF (Inverted File)","url":"https://learn.significanthobbies.com/curriculum/concepts/ivf"},{"@type":"LearningResource","name":"Product Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/product-quantization"},{"@type":"LearningResource","name":"Metadata Filtering","url":"https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering"},{"@type":"LearningResource","name":"Recall / Latency Tradeoffs","url":"https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs"},{"@type":"LearningResource","name":"Scalar & Binary Quantization","url":"https://learn.significanthobbies.com/curriculum/concepts/vector-quantization"},{"@type":"LearningResource","name":"Disk-Based ANN","url":"https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann"},{"@type":"LearningResource","name":"Index Updates & Tombstones","url":"https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -60,57 +60,57 @@
     </section>
     <section>
       <h2>Roadmaps</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/retrieval-30-day">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month">12-Month Advanced AI Infrastructure</a></li></ul>
     </section>
     <section>
       <h2>Concepts in this track</h2>
       <div class="card-grid"><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/embeddings.html">Embeddings</a></h3>
+        <h3><a href="/curriculum/concepts/embeddings">Embeddings</a></h3>
         <p>Mapping text/images into dense vectors where distance encodes meaning.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/vector-similarity.html">Vector Similarity</a></h3>
+        <h3><a href="/curriculum/concepts/vector-similarity">Vector Similarity</a></h3>
         <p>Cosine, dot product, and L2 distance — how to score vector closeness.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/topk-vector-search.html">Top-k Vector Search</a></h3>
+        <h3><a href="/curriculum/concepts/topk-vector-search">Top-k Vector Search</a></h3>
         <p>Returning the k nearest vectors to a query, exact or approximate.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></h3>
+        <h3><a href="/curriculum/concepts/brute-force-vector-db">Brute-Force Vector DB</a></h3>
         <p>Exact nearest-neighbour search by scanning every vector — the correctness baseline.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/hnsw.html">HNSW</a></h3>
+        <h3><a href="/curriculum/concepts/hnsw">HNSW</a></h3>
         <p>Hierarchical Navigable Small World graphs — the dominant ANN index.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/ivf.html">IVF (Inverted File)</a></h3>
+        <h3><a href="/curriculum/concepts/ivf">IVF (Inverted File)</a></h3>
         <p>Cluster vectors with k-means, then search only the nearest cells (nprobe).</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/product-quantization.html">Product Quantization</a></h3>
+        <h3><a href="/curriculum/concepts/product-quantization">Product Quantization</a></h3>
         <p>Compress vectors into sub-space codebooks for tiny memory footprint.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/metadata-filtering.html">Metadata Filtering</a></h3>
+        <h3><a href="/curriculum/concepts/metadata-filtering">Metadata Filtering</a></h3>
         <p>Combining vector search with structured predicates (tenant, date, tags).</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/recall-latency-tradeoffs.html">Recall / Latency Tradeoffs</a></h3>
+        <h3><a href="/curriculum/concepts/recall-latency-tradeoffs">Recall / Latency Tradeoffs</a></h3>
         <p>Reading recall-vs-latency curves to choose ANN parameters.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/vector-quantization.html">Scalar &amp; Binary Quantization</a></h3>
+        <h3><a href="/curriculum/concepts/vector-quantization">Scalar &amp; Binary Quantization</a></h3>
         <p>Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/disk-based-ann.html">Disk-Based ANN</a></h3>
+        <h3><a href="/curriculum/concepts/disk-based-ann">Disk-Based ANN</a></h3>
         <p>DiskANN and SPANN — serving vector indexes that do not fit in memory.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/index-updates-tombstones.html">Index Updates &amp; Tombstones</a></h3>
+        <h3><a href="/curriculum/concepts/index-updates-tombstones">Index Updates &amp; Tombstones</a></h3>
         <p>Deleting and updating vectors in a graph index without rebuilding it.</p>
       </article></div>
     </section>

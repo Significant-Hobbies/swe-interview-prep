@@ -16,10 +16,10 @@ Concepts the later milestones depend on. Without these the planner cannot serve 
 
 ### Concepts
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html) — Leader-follower, multi-leader, quorum.
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html) — Forcing LLM output into a validated JSON schema.
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html) — Raft, Paxos, leader election.
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling) — Identifying classes, attributes, relationships.
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication) — Leader-follower, multi-leader, quorum.
+- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs) — Forcing LLM output into a validated JSON schema.
+- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus) — Raft, Paxos, leader election.
 
 
 
@@ -29,8 +29,8 @@ Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimisi
 
 ### Concepts
 
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html) — States, transitions, guards.
-- [Strategy Pattern](https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern.html) — Interchangeable algorithms.
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management) — States, transitions, guards.
+- [Strategy Pattern](https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern) — Interchangeable algorithms.
 
 
 
@@ -50,7 +50,7 @@ Cooperative vs preemptive, async runtimes, fibers, work-stealing, goroutine + BE
 
 ### Concepts
 
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html) — Thread-safety, locks, producer-consumer.
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design) — Thread-safety, locks, producer-consumer.
 
 
 
@@ -60,7 +60,7 @@ Process, thread, V8 isolate, Wasm sandbox, Firecracker, gVisor.
 
 ### Concepts
 
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html) — Service discovery, orchestration.
+- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra) — Service discovery, orchestration.
 
 
 
@@ -70,7 +70,7 @@ Sampling profilers, JFR, async-profiler, Go pprof, eBPF runtime hooks.
 
 ### Concepts
 
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
 
 
 
@@ -90,7 +90,7 @@ vLLM PagedAttention, SGLang RadixAttention, llama.cpp, TensorRT-LLM, continuous 
 
 ### Concepts
 
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html) — Sending each request to the cheapest model that can handle it.
+- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing) — Sending each request to the cheapest model that can handle it.
 
 
 
@@ -100,8 +100,8 @@ Workers, Deno, Bun, wasmtime, Firecracker — cold start, isolate startup, multi
 
 ### Concepts
 
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html) — Service discovery, orchestration.
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html) — L4/L7, consistent hashing, health checks.
+- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra) — Service discovery, orchestration.
+- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing) — L4/L7, consistent hashing, health checks.
 
 
 

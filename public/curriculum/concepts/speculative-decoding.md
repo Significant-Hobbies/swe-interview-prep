@@ -33,14 +33,14 @@ Draft models, token verification, acceptance rates, tree speculation, latency, a
 
 ## Prerequisites
 
-- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html)
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html)
+- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling)
+- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines)
 
 ## Related concepts
 
-- [FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html)
-- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html)
+- [FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels)
+- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)

@@ -66,8 +66,8 @@ Accept idempotent notification intents durably, resolve preferences and policy, 
 
 ## Repair the mechanisms
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
-- [Webhooks](https://learn.significanthobbies.com/curriculum/concepts/webhooks.html)
-- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html)
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
+- [Webhooks](https://learn.significanthobbies.com/curriculum/concepts/webhooks)
+- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)

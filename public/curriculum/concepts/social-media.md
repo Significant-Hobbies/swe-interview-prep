@@ -33,10 +33,10 @@ Design a home timeline feed: who you follow → posts you see, ranked recency-fi
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching.html)
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
 
 ## Related concepts
 
@@ -44,4 +44,4 @@ Design a home timeline feed: who you follow → posts you see, ranked recency-fi
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

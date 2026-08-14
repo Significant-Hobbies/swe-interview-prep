@@ -39,13 +39,13 @@ Implement kthSmallest(nums, k) returning the k-th smallest (k is 1-based) using 
 
 ## Prerequisites
 
-- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html)
+- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting)
 
 ## Related concepts
 
-- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap.html)
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

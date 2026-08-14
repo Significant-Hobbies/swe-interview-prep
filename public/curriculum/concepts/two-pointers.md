@@ -49,12 +49,12 @@ LeetCode #15 — 3Sum. Solve on LeetCode, then implement here if you want it in 
 
 ## Prerequisites
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Related concepts
 
-- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html)
+- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

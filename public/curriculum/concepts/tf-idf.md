@@ -37,17 +37,17 @@ Given term counts per document and document frequencies, compute the TF-IDF weig
 
 ## Prerequisites
 
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html)
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index)
 
 ## Related concepts
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
 
 ## Learning paths
 
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html)
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

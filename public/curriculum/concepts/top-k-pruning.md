@@ -39,14 +39,14 @@ Implement prune(docs, upperBounds, k) where docs is [{id, terms:[termName], scor
 
 ## Prerequisites
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
 
 ## Related concepts
 
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html)
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html)
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index)
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

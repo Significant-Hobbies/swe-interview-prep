@@ -36,13 +36,13 @@ Working context, summaries, retrieval, episodic state, durable memory, compactio
 
 ## Prerequisites
 
-- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html)
+- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops)
 
 ## Related concepts
 
-- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html)
-- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html)
+- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops)
+- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

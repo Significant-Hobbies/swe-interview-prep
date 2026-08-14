@@ -38,14 +38,14 @@ llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operatio
 
 ## Prerequisites
 
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html)
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization)
 
 ## Related concepts
 
-- [Image & Video Generation](https://learn.significanthobbies.com/curriculum/concepts/image-video-generation.html)
-- [Robotics Systems](https://learn.significanthobbies.com/curriculum/concepts/robotics-systems.html)
+- [Image & Video Generation](https://learn.significanthobbies.com/curriculum/concepts/image-video-generation)
+- [Robotics Systems](https://learn.significanthobbies.com/curriculum/concepts/robotics-systems)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

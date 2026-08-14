@@ -34,8 +34,8 @@ Design the server for a 1v1 realtime game (chess clock, but with sub-100ms moves
 
 ## Prerequisites
 
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html)
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -43,6 +43,6 @@ Design the server for a 1v1 realtime game (chess clock, but with sub-100ms moves
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

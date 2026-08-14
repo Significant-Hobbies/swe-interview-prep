@@ -40,8 +40,8 @@ Diff understanding, intent, correctness, maintainability, risk ranking, review w
 
 ## Related concepts
 
-- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html)
+- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

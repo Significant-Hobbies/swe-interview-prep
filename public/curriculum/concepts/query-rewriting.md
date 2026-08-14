@@ -30,12 +30,12 @@ Query "javascrpt react hooks" → suggest correction using edit distance ≤2 ag
 
 ## Prerequisites
 
-- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html)
+- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization)
 
 ## Related concepts
 
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
 
 ## Learning paths
 

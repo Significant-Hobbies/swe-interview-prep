@@ -30,7 +30,7 @@ n=5, edges [[0,1],[1,2],[3,4]]. How many connected components after unions?
 
 ## Prerequisites
 
-- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs.html)
+- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ n=5, edges [[0,1],[1,2],[3,4]]. How many connected components after unions?
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

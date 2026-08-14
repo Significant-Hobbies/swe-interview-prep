@@ -33,13 +33,13 @@ Tool selection, argument correctness, sequencing, recovery, side-effect safety, 
 
 ## Prerequisites
 
-- [Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks.html)
+- [Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks)
 
 ## Related concepts
 
-- [Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks.html)
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html)
+- [Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks)
+- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

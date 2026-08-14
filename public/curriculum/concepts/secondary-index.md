@@ -30,12 +30,12 @@ Table with 3 secondary indexes. One INSERT touches how many index structures?
 
 ## Prerequisites
 
-- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree.html)
+- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree)
 
 ## Related concepts
 
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html)
+- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

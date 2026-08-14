@@ -39,14 +39,14 @@ Implement ndcgAtK(relevances, k) where relevances are graded gains in RANKED ord
 
 ## Prerequisites
 
-- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html)
+- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics)
 
 ## Related concepts
 
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html)
-- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models.html)
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking)
+- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

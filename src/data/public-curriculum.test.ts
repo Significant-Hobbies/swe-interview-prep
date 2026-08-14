@@ -69,6 +69,7 @@ describe('public curriculum publication', () => {
     expect(sitemap).not.toContain('.json</loc>');
     expect(sitemap).not.toContain('.md</loc>');
     expect(sitemap).not.toContain('.txt</loc>');
+    expect(sitemap).not.toContain('.html</loc>');
   });
 
   it('does not rewrite real static pages through the SPA shell', () => {
@@ -117,11 +118,14 @@ describe('public curriculum publication', () => {
       const file =
         path === '/curriculum/'
           ? resolve(root, 'public/curriculum/index.html')
-          : resolve(root, `public${path}`);
+          : resolve(root, `public${path}.html`);
       const html = readFileSync(file, 'utf8');
       expect(html.match(/<h1(?:\s[^>]*)?>/g)).toHaveLength(1);
       expect(html).toContain('<meta name="description"');
       expect(html).toContain('<link rel="canonical"');
+      expect(html).toContain(
+        `<link rel="canonical" href="https://learn.significanthobbies.com${path}">`
+      );
       expect(html).toContain('<meta property="og:title"');
       expect(html).toContain('<script type="application/ld+json">');
       const visibleText = html
@@ -135,12 +139,20 @@ describe('public curriculum publication', () => {
     }
   });
 
+  it('serves the sitemap changelog as a canonical static page', () => {
+    const changelog = readFileSync(resolve(root, 'public/changelog.html'), 'utf8');
+    expect(changelog).toContain(
+      '<link rel="canonical" href="https://learn.significanthobbies.com/changelog">'
+    );
+    expect(changelog).toContain('<h1>What changed in SWE Interview Prep</h1>');
+  });
+
   it('renders the canonical navigation model on every generated page', () => {
     for (const path of manifest.htmlPaths) {
       const file =
         path === '/curriculum/'
           ? resolve(root, 'public/curriculum/index.html')
-          : resolve(root, `public${path}`);
+          : resolve(root, `public${path}.html`);
       const html = readFileSync(file, 'utf8');
       expect(html).toContain('<nav class="desktop-nav" aria-label="Primary">');
       expect(html).toContain('<nav aria-label="Compact">');

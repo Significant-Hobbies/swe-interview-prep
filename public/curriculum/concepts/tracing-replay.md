@@ -37,13 +37,13 @@ Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixture
 
 ## Prerequisites
 
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
 
 ## Related concepts
 
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
-- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
+- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

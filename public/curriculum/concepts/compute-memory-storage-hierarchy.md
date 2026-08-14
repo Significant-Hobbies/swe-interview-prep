@@ -34,14 +34,14 @@ CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs
 
 ## Prerequisites
 
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html)
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation)
 
 ## Related concepts
 
-- [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html)
-- [Network Protocol Engineering](https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering.html)
+- [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics)
+- [Network Protocol Engineering](https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering)
 
 ## Learning paths
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

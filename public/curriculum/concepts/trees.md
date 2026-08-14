@@ -65,12 +65,12 @@ LeetCode #572 — Subtree of Another Tree. Solve on LeetCode, then implement her
 
 ## Prerequisites
 
-- [Linked List](https://learn.significanthobbies.com/curriculum/concepts/linked-list.html)
+- [Linked List](https://learn.significanthobbies.com/curriculum/concepts/linked-list)
 
 ## Related concepts
 
-- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs.html)
+- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

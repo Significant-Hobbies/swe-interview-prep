@@ -39,13 +39,13 @@ Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and a
 
 ## Prerequisites
 
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
 
 ## Related concepts
 
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design)
 
 ## Learning paths
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)

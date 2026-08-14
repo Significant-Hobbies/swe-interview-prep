@@ -16,10 +16,10 @@ State, behaviour, extension points. The vocabulary every LLD problem reaches for
 
 ### Concepts
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html) — States, transitions, guards.
-- [Factory & Creational](https://learn.significanthobbies.com/curriculum/concepts/factory-creational.html) — Abstract factory, builder, singleton.
-- [Strategy Pattern](https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern.html) — Interchangeable algorithms.
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling) — Identifying classes, attributes, relationships.
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management) — States, transitions, guards.
+- [Factory & Creational](https://learn.significanthobbies.com/curriculum/concepts/factory-creational) — Abstract factory, builder, singleton.
+- [Strategy Pattern](https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern) — Interchangeable algorithms.
 
 
 
@@ -29,9 +29,9 @@ The handful of patterns that earn their weight in real interviews.
 
 ### Concepts
 
-- [Observer Pattern](https://learn.significanthobbies.com/curriculum/concepts/observer-pattern.html) — Pub/sub, event propagation.
-- [Decorator & Structural](https://learn.significanthobbies.com/curriculum/concepts/decorator-structural.html) — Decorator, adapter, composite.
-- [Command & Chain](https://learn.significanthobbies.com/curriculum/concepts/command-chain.html) — Command, undo, chain of responsibility.
+- [Observer Pattern](https://learn.significanthobbies.com/curriculum/concepts/observer-pattern) — Pub/sub, event propagation.
+- [Decorator & Structural](https://learn.significanthobbies.com/curriculum/concepts/decorator-structural) — Decorator, adapter, composite.
+- [Command & Chain](https://learn.significanthobbies.com/curriculum/concepts/command-chain) — Command, undo, chain of responsibility.
 
 
 
@@ -41,6 +41,6 @@ Take the patterns into full design problems with concurrency and inventory edge 
 
 ### Concepts
 
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html) — Thread-safety, locks, producer-consumer.
-- [Booking & Inventory](https://learn.significanthobbies.com/curriculum/concepts/booking-inventory.html) — Reservation, hold-confirm, optimistic locking.
-- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design.html) — Turn engines, board state, rules.
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design) — Thread-safety, locks, producer-consumer.
+- [Booking & Inventory](https://learn.significanthobbies.com/curriculum/concepts/booking-inventory) — Reservation, hold-confirm, optimistic locking.
+- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design) — Turn engines, board state, rules.

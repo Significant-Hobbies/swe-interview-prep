@@ -30,14 +30,14 @@ Analytics query: SELECT avg(price) FROM sales WHERE date>2024. Which store wins 
 
 ## Prerequisites
 
-- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree.html)
+- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree)
 
 ## Related concepts
 
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

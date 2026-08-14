@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Disk-First Databases &amp; RAM | SWE Prep</title>
     <meta name="description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Disk-First Databases &amp; RAM | SWE Prep">
     <meta property="og:description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Disk-First Databases &amp; RAM | SWE Prep">
     <meta name="twitter:description" content="Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized…">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Disk-First Databases & RAM","description":"Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Disk-First Databases & RAM","description":"Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -43,7 +43,7 @@
       </div>
     </header>
     <main id="main-content">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases.html">Databases &amp; Storage</a></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/databases">Databases &amp; Storage</a></nav>
       <article>
     <p class="eyebrow">12mo roadmap · 9 milestones</p>
     <h1>Disk-First Databases &amp; RAM</h1>
@@ -63,56 +63,56 @@
           <h3>Prerequisites — unlock the rest of this path</h3>
           <p>Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/normalization.html">Normalization</a></li><li><a href="/curriculum/concepts/buffer-pool.html">Buffer Pool</a></li><li><a href="/curriculum/concepts/isolation-levels.html">Isolation Levels &amp; MVCC</a></li><li><a href="/curriculum/concepts/join-algorithms.html">Join Algorithms</a></li><li><a href="/curriculum/concepts/embeddings.html">Embeddings</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li><li><a href="/curriculum/concepts/tf-idf.html">TF-IDF</a></li><li><a href="/curriculum/concepts/tokenization.html">Tokenization</a></li><li><a href="/curriculum/concepts/vector-similarity.html">Vector Similarity</a></li><li><a href="/curriculum/concepts/consistent-hashing.html">Consistent Hashing</a></li><li><a href="/curriculum/concepts/topk-vector-search.html">Top-k Vector Search</a></li><li><a href="/curriculum/concepts/brute-force-vector-db.html">Brute-Force Vector DB</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/normalization">Normalization</a></li><li><a href="/curriculum/concepts/buffer-pool">Buffer Pool</a></li><li><a href="/curriculum/concepts/isolation-levels">Isolation Levels &amp; MVCC</a></li><li><a href="/curriculum/concepts/join-algorithms">Join Algorithms</a></li><li><a href="/curriculum/concepts/embeddings">Embeddings</a></li><li><a href="/curriculum/concepts/load-balancing">Load Balancing</a></li><li><a href="/curriculum/concepts/tf-idf">TF-IDF</a></li><li><a href="/curriculum/concepts/tokenization">Tokenization</a></li><li><a href="/curriculum/concepts/vector-similarity">Vector Similarity</a></li><li><a href="/curriculum/concepts/consistent-hashing">Consistent Hashing</a></li><li><a href="/curriculum/concepts/topk-vector-search">Top-k Vector Search</a></li><li><a href="/curriculum/concepts/brute-force-vector-db">Brute-Force Vector DB</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 2</p>
           <h3>Phase 0-1 — Thesis + hardware</h3>
           <p>Frame active state vs stored data; understand CPU cache, DRAM, NVMe, page cache, mmap.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/storage-retrieval.html">Storage Engines</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/storage-retrieval">Storage Engines</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 3</p>
           <h3>Phase 2 — Disk-oriented storage engines</h3>
           <p>Pages, B+trees, WAL, buffer pools, recovery.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/b-tree.html">B-Tree</a></li><li><a href="/curriculum/concepts/wal.html">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/storage-retrieval.html">Storage Engines</a></li><li><a href="/curriculum/concepts/transaction-processing.html">Transaction Processing</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/b-tree">B-Tree</a></li><li><a href="/curriculum/concepts/wal">Write-Ahead Log</a></li><li><a href="/curriculum/concepts/storage-retrieval">Storage Engines</a></li><li><a href="/curriculum/concepts/transaction-processing">Transaction Processing</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Toy write-ahead log</strong> — An append-only WAL with crash recovery.</li></ul>
         </article><article class="milestone">
           <p class="eyebrow">Milestone 4</p>
           <h3>Phase 3 — LSM and SSD-first design</h3>
           <p>Memtables, SSTables, Bloom filters, compaction, read/write/space amplification.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/lsm-tree.html">LSM Tree</a></li><li><a href="/curriculum/concepts/compaction.html">Compaction</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/lsm-tree">LSM Tree</a></li><li><a href="/curriculum/concepts/compaction">Compaction</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 5</p>
           <h3>Phase 4-5 — Columnar execution + ClickHouse</h3>
           <p>Vectorized execution, projection/filter pushdown, external operators, MergeTree internals.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/columnar-storage.html">Columnar Storage</a></li><li><a href="/curriculum/concepts/secondary-index.html">Secondary Indexes</a></li><li><a href="/curriculum/concepts/query-execution-optimization.html">Query Execution &amp; Optimization</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/columnar-storage">Columnar Storage</a></li><li><a href="/curriculum/concepts/secondary-index">Secondary Indexes</a></li><li><a href="/curriculum/concepts/query-execution-optimization">Query Execution &amp; Optimization</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Object-storage-backed index</strong> — Store index segments in object storage with a hot in-memory cache.</li></ul>
         </article><article class="milestone">
           <p class="eyebrow">Milestone 6</p>
           <h3>Phase 6 — Cloud warehouses</h3>
           <p>Storage/compute separation, shuffle, slots/warehouses, result caching.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/object-storage.html">Object Storage</a></li><li><a href="/curriculum/concepts/sharding.html">Sharding</a></li><li><a href="/curriculum/concepts/warehouses-lakehouses.html">Data Warehouses &amp; Lakehouses</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/object-storage">Object Storage</a></li><li><a href="/curriculum/concepts/sharding">Sharding</a></li><li><a href="/curriculum/concepts/warehouses-lakehouses">Data Warehouses &amp; Lakehouses</a></li></ul>
           <h4>Build evidence</h4><ul><li><strong>Object-storage-backed index</strong> — Store index segments in object storage with a hot in-memory cache.</li></ul>
         </article><article class="milestone">
           <p class="eyebrow">Milestone 7</p>
           <h3>Phase 7 — Search + vector DBs</h3>
           <p>Inverted indexes, BM25, HNSW, IVF, PQ, DiskANN, recall/latency/memory tradeoff.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/inverted-index.html">Inverted Index</a></li><li><a href="/curriculum/concepts/bm25.html">BM25</a></li><li><a href="/curriculum/concepts/hnsw.html">HNSW</a></li><li><a href="/curriculum/concepts/ivf.html">IVF (Inverted File)</a></li><li><a href="/curriculum/concepts/recall-latency-tradeoffs.html">Recall / Latency Tradeoffs</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/inverted-index">Inverted Index</a></li><li><a href="/curriculum/concepts/bm25">BM25</a></li><li><a href="/curriculum/concepts/hnsw">HNSW</a></li><li><a href="/curriculum/concepts/ivf">IVF (Inverted File)</a></li><li><a href="/curriculum/concepts/recall-latency-tradeoffs">Recall / Latency Tradeoffs</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 8</p>
           <h3>Phase 8 — Distributed correctness</h3>
           <p>Replication, Raft/Paxos, MVCC across nodes, 2PC, serializability.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/replication.html">Replication</a></li><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li><li><a href="/curriculum/concepts/cap-theorem.html">CAP &amp; Consistency Models</a></li><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/replication">Replication</a></li><li><a href="/curriculum/concepts/consensus">Consensus</a></li><li><a href="/curriculum/concepts/cap-theorem">CAP &amp; Consistency Models</a></li><li><a href="/curriculum/concepts/distributed-infra">Distributed Infra</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 9</p>

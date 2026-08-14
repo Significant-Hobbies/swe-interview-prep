@@ -80,12 +80,12 @@ LeetCode #435 — Non-overlapping Intervals. Solve on LeetCode, then implement h
 
 ## Prerequisites
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Related concepts
 
-- [2D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-2d.html)
+- [2D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-2d)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

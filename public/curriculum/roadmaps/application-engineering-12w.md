@@ -16,16 +16,16 @@ Build the domain vocabulary and explain the core mechanisms from first principle
 
 ### Concepts
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html) — DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html) — Kafka, SQS, exactly-once vs at-least-once.
-- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html) — OAuth2, JWT, session, RBAC.
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html) — Identifying classes, attributes, relationships.
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html) — States, transitions, guards.
-- [Web Security Basics](https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html) — XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
-- [Pagination](https://learn.significanthobbies.com/curriculum/concepts/pagination.html) — Offset versus cursor pagination, stable ordering, and why deep pages get expensive.
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html) — REST, gRPC, versioning, pagination.
-- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html) — Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.
-- [UX & Interface Design](https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design.html) — User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle) — DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues) — Kafka, SQS, exactly-once vs at-least-once.
+- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems) — OAuth2, JWT, session, RBAC.
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling) — Identifying classes, attributes, relationships.
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management) — States, transitions, guards.
+- [Web Security Basics](https://learn.significanthobbies.com/curriculum/concepts/web-security-basics) — XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
+- [Pagination](https://learn.significanthobbies.com/curriculum/concepts/pagination) — Offset versus cursor pagination, stable ordering, and why deep pages get expensive.
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design) — REST, gRPC, versioning, pagination.
+- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering) — Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.
+- [UX & Interface Design](https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design) — User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.
 
 
 
@@ -35,9 +35,9 @@ Design the production path, including resource, scale, safety, and operability t
 
 ### Concepts
 
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
-- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design.html) — Turn engines, board state, rules.
-- [2D/3D Interactive Systems](https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems.html) — Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
+- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design) — Turn engines, board state, rules.
+- [2D/3D Interactive Systems](https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems) — Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.
 
 
 
@@ -47,10 +47,10 @@ Test failure modes, measure outcomes, and ship the synthesis artifact.
 
 ### Concepts
 
-- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html) — Activation, retention, funnels — measuring whether the product works.
-- [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning.html) — Naming the problem, the audience, and the alternative you beat.
-- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html) — Turning a visitor into an activated user: hero, proof, single CTA.
-- [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo.html) — Programmatic and content SEO: intent, structure, indexability.
+- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics) — Activation, retention, funnels — measuring whether the product works.
+- [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning) — Naming the problem, the audience, and the alternative you beat.
+- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages) — Turning a visitor into an activated user: hero, proof, single CTA.
+- [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo) — Programmatic and content SEO: intent, structure, indexability.
 
 ### Build evidence
 

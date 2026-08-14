@@ -16,18 +16,18 @@ Concepts the later milestones depend on. Without these the planner cannot serve 
 
 ### Concepts
 
-- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
-- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models.html) — Why clicks are not relevance labels, and how to debias implicit feedback.
-- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
-- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
-- [Curse of Dimensionality](https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality.html) — Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
-- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
-- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html) — Returning the k nearest vectors to a query, exact or approximate.
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
+- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
+- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models) — Why clicks are not relevance labels, and how to debias implicit feedback.
+- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
+- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
+- [Curse of Dimensionality](https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality) — Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
+- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
+- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search) — Returning the k nearest vectors to a query, exact or approximate.
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
 
 
 
@@ -37,10 +37,10 @@ Tokenization, inverted index, BM25.
 
 ### Concepts
 
-- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html) — Term → posting list mapping that powers fast keyword lookup.
-- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html) — Term frequency × inverse document frequency weighting for relevance.
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html) — The standard lexical ranking function: TF saturation + IDF + length normalization.
+- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index) — Term → posting list mapping that powers fast keyword lookup.
+- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf) — Term frequency × inverse document frequency weighting for relevance.
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25) — The standard lexical ranking function: TF saturation + IDF + length normalization.
 
 ### Build evidence
 
@@ -52,8 +52,8 @@ Make retrieval quality measurable.
 
 ### Concepts
 
-- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html) — Precision, recall, MRR, and nDCG for measuring retrieval quality.
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html) — Building a labelled query set and harness to compare retrieval approaches.
+- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics) — Precision, recall, MRR, and nDCG for measuring retrieval quality.
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals) — Building a labelled query set and harness to compare retrieval approaches.
 
 ### Build evidence
 
@@ -65,10 +65,10 @@ Embeddings, similarity, exact nearest-neighbour search.
 
 ### Concepts
 
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html) — Mapping text/images into dense vectors where distance encodes meaning.
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html) — Cosine, dot product, and L2 distance — how to score vector closeness.
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html) — Exact nearest-neighbour search by scanning every vector — the correctness baseline.
-- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html) — Combining vector search with structured predicates (tenant, date, tags).
+- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings) — Mapping text/images into dense vectors where distance encodes meaning.
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity) — Cosine, dot product, and L2 distance — how to score vector closeness.
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db) — Exact nearest-neighbour search by scanning every vector — the correctness baseline.
+- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering) — Combining vector search with structured predicates (tenant, date, tags).
 
 ### Build evidence
 
@@ -80,8 +80,8 @@ Fuse lexical and vector retrieval and prove it wins.
 
 ### Concepts
 
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html) — Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html) — A second-stage cross-encoder pass that reorders the top-k candidates.
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search) — Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking) — A second-stage cross-encoder pass that reorders the top-k candidates.
 
 ### Build evidence
 

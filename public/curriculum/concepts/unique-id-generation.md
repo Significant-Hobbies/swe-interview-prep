@@ -39,13 +39,13 @@ Implement pack(timestampMs, machineId, sequence) and unpack(id) for a 64-bit Sno
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
 
 ## Related concepts
 
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding.html)
-- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html)
+- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding)
+- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

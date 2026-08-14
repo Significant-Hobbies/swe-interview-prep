@@ -43,15 +43,15 @@ Dimensionality reduction, visualization, noise filtering.
 
 ## Prerequisites
 
-- [Eigenvalues & Matrix Decomposition](https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition.html)
-- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html)
-- [Rank, Basis & Subspaces](https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis.html)
+- [Eigenvalues & Matrix Decomposition](https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition)
+- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation)
+- [Rank, Basis & Subspaces](https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis)
 
 ## Related concepts
 
-- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html)
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
+- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

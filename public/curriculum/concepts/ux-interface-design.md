@@ -33,13 +33,13 @@ User goals, information architecture, interaction states, feedback, accessibilit
 
 ## Prerequisites
 
-- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html)
+- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering)
 
 ## Related concepts
 
-- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html)
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html)
+- [Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering)
+- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

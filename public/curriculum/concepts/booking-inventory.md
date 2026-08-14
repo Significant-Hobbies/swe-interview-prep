@@ -33,8 +33,8 @@ Design a hotel-room booking system: search availability for a date range, hold a
 
 ## Prerequisites
 
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html)
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html)
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management)
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design)
 
 ## Related concepts
 
@@ -42,4 +42,4 @@ Design a hotel-room booking system: search availability for a date range, hold a
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

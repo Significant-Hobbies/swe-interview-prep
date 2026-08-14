@@ -40,14 +40,14 @@ Implement buildQuery(table, filters) returning { text, values }: a parameterised
 
 ## Prerequisites
 
-- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html)
+- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems)
 
 ## Related concepts
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
-- [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
+- [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

@@ -43,14 +43,14 @@ Implement instructionMap() for a repository with a root AGENTS.md and a packages
 
 ## Prerequisites
 
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
 
 ## Related concepts
 
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
-- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html)
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control)
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

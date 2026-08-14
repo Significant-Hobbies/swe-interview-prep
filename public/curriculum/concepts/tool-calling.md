@@ -41,14 +41,14 @@ Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a to
 
 ## Prerequisites
 
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html)
+- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs)
 
 ## Related concepts
 
-- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
+- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)

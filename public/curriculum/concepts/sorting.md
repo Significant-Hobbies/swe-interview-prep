@@ -41,14 +41,14 @@ Implement sortByScore(rows) returning rows ordered by descending numeric `score`
 
 ## Prerequisites
 
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Related concepts
 
-- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search.html)
-- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap.html)
-- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals.html)
+- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search)
+- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap)
+- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

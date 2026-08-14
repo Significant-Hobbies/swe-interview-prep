@@ -42,10 +42,10 @@ GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision sup
 
 ## Related concepts
 
-- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html)
-- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html)
+- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization)
+- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

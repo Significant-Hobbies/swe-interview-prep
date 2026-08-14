@@ -56,4 +56,4 @@ LeetCode #190 — Reverse Bits. Solve on LeetCode, then implement here if you wa
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

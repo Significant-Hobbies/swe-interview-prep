@@ -42,17 +42,17 @@ Implement cosine similarity, dot product, and L2 distance. Show that on normaliz
 
 ## Prerequisites
 
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html)
+- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings)
 
 ## Related concepts
 
-- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html)
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html)
+- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search)
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

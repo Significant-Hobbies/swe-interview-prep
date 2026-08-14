@@ -38,13 +38,13 @@ Task success, calibrated quality, token and tool cost, latency distributions, re
 
 ## Prerequisites
 
-- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html)
+- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection)
 
 ## Related concepts
 
-- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html)
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
+- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

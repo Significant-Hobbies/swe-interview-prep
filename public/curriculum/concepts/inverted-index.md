@@ -42,19 +42,19 @@ From a list of documents, build a term → sorted posting list map. Support a bo
 
 ## Prerequisites
 
-- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html)
+- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization)
 
 ## Related concepts
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
-- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html)
-- [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf)
+- [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery)
 
 ## Learning paths
 
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html)
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

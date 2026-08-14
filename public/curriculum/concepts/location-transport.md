@@ -33,9 +33,9 @@ Design driver-rider matching: rider requests, dispatch finds the nearest availab
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding)
 
 ## Related concepts
 
@@ -43,4 +43,4 @@ Design driver-rider matching: rider requests, dispatch finds the nearest availab
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
