@@ -147,6 +147,48 @@ describe('public curriculum publication', () => {
     expect(changelog).toContain('<h1>What changed in SWE Interview Prep</h1>');
   });
 
+  // Regression for issue #69: the live sitemap must list only final direct
+  // routes (no .html that Cloudflare 308-redirects) and every listed URL must
+  // resolve to a static HTML page whose self-canonical matches the sitemap URL
+  // exactly — so crawlers never take a redirect and never see a canonical
+  // mismatch (e.g. /changelog inheriting the homepage canonical).
+  it('keeps every sitemap URL in parity with a matching self-canonical static page', () => {
+    const origin = 'https://learn.significanthobbies.com';
+    const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
+    const paths = [
+      ...sitemap.matchAll(/<loc>https:\/\/learn\.significanthobbies\.com([^<]*)<\/loc>/g),
+    ].map((match) => match[1]);
+
+    expect(paths.length).toBeGreaterThan(0);
+    // No duplicate URLs in the sitemap.
+    expect(new Set(paths).size).toBe(paths.length);
+
+    const htmlFile = (path: string) => {
+      if (path === '/') return resolve(root, 'index.html');
+      if (path === '/curriculum/') return resolve(root, 'public/curriculum/index.html');
+      if (path === '/system-design/') return resolve(root, 'public/system-design/index.html');
+      if (path === '/changelog') return resolve(root, 'public/changelog.html');
+      return resolve(root, `public${path}.html`);
+    };
+
+    // The homepage canonical is the bare origin (no trailing slash) per
+    // index.html; every other route canonicalises to its exact sitemap path.
+    const expectedCanonical = (path: string) => (path === '/' ? origin : `${origin}${path}`);
+    // index.html uses an XHTML self-closing tag; generated pages do not. Match
+    // both forms so the assertion is shape-strict, not formatter-strict.
+    const canonicalPattern = (url: string) =>
+      new RegExp(
+        `<link rel="canonical" href="${url.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')}"\\s*/?>`
+      );
+
+    for (const path of paths) {
+      // Sitemap must list final direct routes — never a .html Cloudflare redirects.
+      expect(path, path).not.toMatch(/\.html$/);
+      const html = readFileSync(htmlFile(path), 'utf8');
+      expect(html, path).toMatch(canonicalPattern(expectedCanonical(path)));
+    }
+  });
+
   it('renders the canonical navigation model on every generated page', () => {
     for (const path of manifest.htmlPaths) {
       const file =
