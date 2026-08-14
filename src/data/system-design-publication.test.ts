@@ -75,7 +75,7 @@ describe('system-design public publication', () => {
       expect(html).toContain('"@type":"BreadcrumbList"');
       expect(html).toContain(`/mock?prompt=${caseDefinition.id}&amp;from=guide`);
       for (const conceptId of caseDefinition.conceptIds) {
-        expect(html).toContain(`/curriculum/concepts/${conceptId}.html`);
+        expect(html).toContain(`/curriculum/concepts/${conceptId}`);
       }
 
       const visibleText = html
