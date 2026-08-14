@@ -35,9 +35,9 @@ import { isSchedulableReviewQuestion } from './contentQuality';
 import type { ReviewMasteryEntry } from './reviewMastery';
 import { isReviewDue, sortReviewQueue } from './reviewMastery';
 
-export type BlockKind = 'learn' | 'drill' | 'build' | 'review';
+type BlockKind = 'learn' | 'drill' | 'build' | 'review';
 
-export interface SessionBlock {
+interface SessionBlock {
   kind: BlockKind;
   minutes: number;
   title: string;

@@ -22,12 +22,12 @@ const productionPaths = [
 ];
 const sourceExtensions = new Set(['.js', '.jsx', '.mjs', '.mts', '.ts', '.tsx']);
 const baselines = {
-  complexity: { violations: 98, maxCcn: 93, maxLength: 768, maxParams: 10 },
-  duplication: { clones: 38, duplicatedLines: 483 },
+  complexity: { violations: 95, maxCcn: 93, maxLength: 768, maxParams: 10 },
+  duplication: { clones: 37, duplicatedLines: 473 },
   unused: {
-    files: 8,
-    exports: 32,
-    types: 4,
+    files: 0,
+    exports: 21,
+    types: 0,
     dependencies: 0,
     devDependencies: 0,
     unlisted: 0,

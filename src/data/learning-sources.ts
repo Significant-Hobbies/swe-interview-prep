@@ -165,18 +165,6 @@ export function buildDailyLearningSession(
   return { items: picked, studyMinutes, reviewMinutes: 30 - studyMinutes, totalMinutes: 30 };
 }
 
-export function nextDurableLearningItem(): LearningItem | undefined {
-  const progress = loadLearningProgress();
-  const durable = LEARNING_SOURCES.items.filter((item) => item.sourceKind !== 'briefing');
-  return (
-    durable.find(
-      (item) => progress[item.id]?.mastery && isDue(progress[item.id].mastery ?? null)
-    ) ||
-    durable.find((item) => progress[item.id]?.status !== 'completed') ||
-    durable[0]
-  );
-}
-
 /** Past this, it is not news. `pnpm sync:learning-sources` has no cron. */
 export const BRIEFING_MAX_AGE_DAYS = 4;
 

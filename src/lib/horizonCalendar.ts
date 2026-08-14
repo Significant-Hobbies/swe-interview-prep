@@ -7,7 +7,7 @@ import { pickConceptForSession } from './planner';
 import type { ReviewMasteryEntry } from './reviewMastery';
 import { dueReviewQuestions } from './planner';
 import type { DrillEntry } from '../hooks/useUserStore';
-export type HorizonFocus = 'review' | 'drill' | 'build' | 'learn' | 'mock';
+type HorizonFocus = 'review' | 'drill' | 'build' | 'learn' | 'mock';
 
 export interface HorizonDay {
   dayOffset: number;
