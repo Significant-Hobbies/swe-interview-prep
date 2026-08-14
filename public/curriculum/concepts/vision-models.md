@@ -38,10 +38,10 @@ Classification, detection, segmentation, embeddings, vision transformers, data a
 
 ## Related concepts
 
-- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models.html)
-- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html)
+- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models)
+- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

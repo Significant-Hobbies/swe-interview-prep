@@ -43,15 +43,15 @@ From 5 consecutive adjusted closes, compute log returns r_t = ln(P_t/P_{t-1}). E
 
 ## Prerequisites
 
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html)
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html)
-- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html)
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables)
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics)
+- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt)
 
 ## Related concepts
 
-- [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics.html)
-- [Stationarity & Autocorrelation](https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation.html)
+- [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics)
+- [Stationarity & Autocorrelation](https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

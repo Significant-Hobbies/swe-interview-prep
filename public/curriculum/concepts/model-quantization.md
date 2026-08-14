@@ -41,16 +41,16 @@ Post-training and quantization-aware methods, integer and low-bit formats, calib
 
 ## Prerequisites
 
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html)
+- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora)
 
 ## Related concepts
 
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html)
-- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models.html)
+- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora)
+- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

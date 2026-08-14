@@ -34,12 +34,12 @@ Model a parking lot with vehicle classes (Car/Bike/Truck), spot sizes, a Lot/Lev
 
 ## Related concepts
 
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management.html)
+- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management)
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

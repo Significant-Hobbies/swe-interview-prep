@@ -37,13 +37,13 @@ Durable execution, event histories, deterministic replay, activities, retries, t
 
 ## Prerequisites
 
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html)
+- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra)
 
 ## Related concepts
 
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html)
-- [Distributed Failure Recovery](https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery.html)
+- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra)
+- [Distributed Failure Recovery](https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery)
 
 ## Learning paths
 
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

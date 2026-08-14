@@ -60,10 +60,10 @@ Metrics, logs, traces, context propagation, semantic conventions, sampling, coll
 
 ## Related concepts
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)

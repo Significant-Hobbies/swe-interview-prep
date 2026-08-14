@@ -32,7 +32,7 @@ Grid [[1,3,1],[1,5,1],[4,2,1]]. Min path sum top-left to bottom-right moving onl
 
 ## Prerequisites
 
-- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html)
+- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d)
 
 ## Related concepts
 
@@ -40,4 +40,4 @@ Grid [[1,3,1],[1,5,1],[4,2,1]]. Min path sum top-left to bottom-right moving onl
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

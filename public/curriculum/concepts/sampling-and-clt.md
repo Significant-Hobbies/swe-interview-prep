@@ -49,16 +49,16 @@ n=100 samples, sample mean x̄=50, sample SD s=10. Compute SE = s/√n and a 95%
 
 ## Prerequisites
 
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html)
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html)
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables)
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics)
 
 ## Related concepts
 
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html)
-- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html)
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html)
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence)
+- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions)
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering)
 
 ## Learning paths
 
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

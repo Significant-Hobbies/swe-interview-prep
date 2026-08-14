@@ -65,8 +65,8 @@ Put flash crowds behind a signed virtual waiting room that meters admission to m
 
 ## Repair the mechanisms
 
-- [Booking & Inventory](https://learn.significanthobbies.com/curriculum/concepts/booking-inventory.html)
-- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html)
-- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels.html)
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
+- [Booking & Inventory](https://learn.significanthobbies.com/curriculum/concepts/booking-inventory)
+- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing)
+- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)

@@ -42,7 +42,7 @@ LeetCode #46 — Permutations. Solve on LeetCode, then implement here if you wan
 
 ## Prerequisites
 
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html)
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees)
 
 ## Related concepts
 
@@ -50,4 +50,4 @@ LeetCode #46 — Permutations. Solve on LeetCode, then implement here if you wan
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

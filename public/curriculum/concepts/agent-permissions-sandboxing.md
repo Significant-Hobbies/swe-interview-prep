@@ -36,13 +36,13 @@ Capability grants, read/write scopes, approval gates, secret isolation, network 
 
 ## Prerequisites
 
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html)
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution)
 
 ## Related concepts
 
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html)
-- [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html)
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution)
+- [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents)
 
 ## Learning paths
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html)
+- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w)

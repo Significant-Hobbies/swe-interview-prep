@@ -30,7 +30,7 @@ Design a checkout system where pricing strategy is swappable: flat, percentage-o
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -38,6 +38,6 @@ Design a checkout system where pricing strategy is swappable: flat, percentage-o
 
 ## Learning paths
 
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

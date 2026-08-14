@@ -16,18 +16,18 @@ The pattern recognition that unlocks 30%+ of interview problems.
 
 ### Concepts
 
-- [Recursion & Induction](https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction.html) — Writing recursion you can trust, and solving the recurrence it produces.
-- [Quickselect](https://learn.significanthobbies.com/curriculum/concepts/quickselect.html) — Finding the k-th smallest in expected O(n) by recursing into only one partition.
-- [Prefix Sums](https://learn.significanthobbies.com/curriculum/concepts/prefix-sums.html) — Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
-- [Monotonic Stack](https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack.html) — A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
-- [String Matching](https://learn.significanthobbies.com/curriculum/concepts/string-matching.html) — Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
-- [Minimum Spanning Tree](https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree.html) — Kruskal and Prim — connecting every node at least total cost.
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
-- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html) — Hash maps, sets, frequency counting.
-- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html) — Converging/diverging pointer scans.
-- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html) — Variable/fixed window over sequences.
-- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals.html) — Merge, overlap, sweep line.
+- [Recursion & Induction](https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction) — Writing recursion you can trust, and solving the recurrence it produces.
+- [Quickselect](https://learn.significanthobbies.com/curriculum/concepts/quickselect) — Finding the k-th smallest in expected O(n) by recursing into only one partition.
+- [Prefix Sums](https://learn.significanthobbies.com/curriculum/concepts/prefix-sums) — Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
+- [Monotonic Stack](https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack) — A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
+- [String Matching](https://learn.significanthobbies.com/curriculum/concepts/string-matching) — Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
+- [Minimum Spanning Tree](https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree) — Kruskal and Prim — connecting every node at least total cost.
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
+- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing) — Hash maps, sets, frequency counting.
+- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers) — Converging/diverging pointer scans.
+- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window) — Variable/fixed window over sequences.
+- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals) — Merge, overlap, sweep line.
 
 
 
@@ -37,9 +37,9 @@ Stack, linked list, math/geometry — the bread-and-butter scaffolds.
 
 ### Concepts
 
-- [Stack](https://learn.significanthobbies.com/curriculum/concepts/stack.html) — LIFO, parsing, monotonic stack.
-- [Linked List](https://learn.significanthobbies.com/curriculum/concepts/linked-list.html) — Pointer manipulation, fast/slow, reversal.
-- [Math & Geometry](https://learn.significanthobbies.com/curriculum/concepts/math-geometry.html) — Number theory, modular, geometry.
+- [Stack](https://learn.significanthobbies.com/curriculum/concepts/stack) — LIFO, parsing, monotonic stack.
+- [Linked List](https://learn.significanthobbies.com/curriculum/concepts/linked-list) — Pointer manipulation, fast/slow, reversal.
+- [Math & Geometry](https://learn.significanthobbies.com/curriculum/concepts/math-geometry) — Number theory, modular, geometry.
 
 
 
@@ -49,9 +49,9 @@ Recursive thinking and priority-queue patterns.
 
 ### Concepts
 
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html) — Binary trees, BSTs, DFS/BFS.
-- [Trie](https://learn.significanthobbies.com/curriculum/concepts/tries.html) — Prefix trees.
-- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap.html) — Top-k, k-way merge, scheduling.
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees) — Binary trees, BSTs, DFS/BFS.
+- [Trie](https://learn.significanthobbies.com/curriculum/concepts/tries) — Prefix trees.
+- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap) — Top-k, k-way merge, scheduling.
 
 
 
@@ -61,8 +61,8 @@ Two of the highest-leverage problem-solving frames.
 
 ### Concepts
 
-- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search.html) — Halving sorted search space, predicate search.
-- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy.html) — Local-optimal-as-global proofs.
+- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search) — Halving sorted search space, predicate search.
+- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy) — Local-optimal-as-global proofs.
 
 
 
@@ -72,10 +72,10 @@ Traversal, shortest-path, union-find, backtracking — the harder half of any in
 
 ### Concepts
 
-- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs.html) — BFS/DFS, topo sort, union-find.
-- [Backtracking](https://learn.significanthobbies.com/curriculum/concepts/backtracking.html) — DFS with state restoration, pruning.
-- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html) — Dijkstra, Bellman-Ford, A*.
-- [Union-Find](https://learn.significanthobbies.com/curriculum/concepts/union-find.html) — Disjoint set, path compression.
+- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs) — BFS/DFS, topo sort, union-find.
+- [Backtracking](https://learn.significanthobbies.com/curriculum/concepts/backtracking) — DFS with state restoration, pruning.
+- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path) — Dijkstra, Bellman-Ford, A*.
+- [Union-Find](https://learn.significanthobbies.com/curriculum/concepts/union-find) — Disjoint set, path compression.
 
 
 
@@ -85,6 +85,6 @@ The "hardest" categories — 1D/2D DP and bit manipulation.
 
 ### Concepts
 
-- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html) — Linear state recurrences.
-- [2D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-2d.html) — Grid DP, edit distance, knapsack.
-- [Bit Manipulation](https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html) — Bitwise ops, masks, XOR tricks.
+- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d) — Linear state recurrences.
+- [2D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-2d) — Grid DP, edit distance, knapsack.
+- [Bit Manipulation](https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation) — Bitwise ops, masks, XOR tricks.

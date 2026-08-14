@@ -30,8 +30,8 @@ Weighted graph: 0—1—2 with weights 1 and 4, and 0—2 weight 10. Shortest 0�
 
 ## Prerequisites
 
-- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs.html)
-- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap.html)
+- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs)
+- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap)
 
 ## Related concepts
 
@@ -39,4 +39,4 @@ Weighted graph: 0—1—2 with weights 1 and 4, and 0—2 weight 10. Shortest 0�
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

@@ -44,18 +44,18 @@ Given two ranked result lists (BM25 and vector), fuse them with RRF: score(d) = 
 
 ## Prerequisites
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity)
 
 ## Related concepts
 
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html)
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

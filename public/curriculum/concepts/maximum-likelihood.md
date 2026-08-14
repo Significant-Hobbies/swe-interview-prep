@@ -39,18 +39,18 @@ n=100 Bernoulli trials, 55 successes. Write the likelihood L(p)=p^55(1−p)^45, 
 
 ## Prerequisites
 
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html)
-- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html)
-- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html)
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables)
+- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions)
+- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients)
 
 ## Related concepts
 
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html)
-- [Softmax & Cross-Entropy](https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html)
-- [Information & Entropy](https://learn.significanthobbies.com/curriculum/concepts/information-entropy.html)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent)
+- [Softmax & Cross-Entropy](https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent)
+- [Information & Entropy](https://learn.significanthobbies.com/curriculum/concepts/information-entropy)
 
 ## Learning paths
 
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

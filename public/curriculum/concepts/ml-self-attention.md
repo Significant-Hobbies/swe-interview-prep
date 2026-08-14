@@ -43,16 +43,16 @@ Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for 
 
 ## Prerequisites
 
-- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html)
+- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings)
 
 ## Related concepts
 
-- [Multi-Head Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html)
+- [Multi-Head Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

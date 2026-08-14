@@ -41,14 +41,14 @@ Matrix A = [[2, 1], [1, 2]] has eigenvector v = [1, 1] with eigenvalue λ = 3. E
 
 ## Prerequisites
 
-- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html)
+- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations)
 
 ## Related concepts
 
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings)
 
 ## Learning paths
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

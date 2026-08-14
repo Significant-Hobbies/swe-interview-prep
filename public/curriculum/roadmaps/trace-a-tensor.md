@@ -16,8 +16,8 @@ Explain how values become tensors and how a forward computation creates the work
 
 ### Concepts
 
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html) — Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
-- [Backpropagation](https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html) — Chain rule, autograd, forward/backward passes.
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation) — Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
+- [Backpropagation](https://learn.significanthobbies.com/curriculum/concepts/ml-backprop) — Chain rule, autograd, forward/backward passes.
 
 
 
@@ -27,10 +27,10 @@ Locate tensor data across the memory hierarchy and profile the runtime before ch
 
 ### Concepts
 
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html) — CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
-- [Runtime & Performance Engineering](https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html) — Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html) — GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.
-- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html) — Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy) — CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
+- [Runtime & Performance Engineering](https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering) — Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
+- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware) — GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.
+- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization) — Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.
 
 
 
@@ -40,8 +40,8 @@ Reduce data movement or numerical work with hardware-aware kernels and model rep
 
 ### Concepts
 
-- [FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html) — IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html) — Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.
+- [FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels) — IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization) — Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.
 
 
 
@@ -51,9 +51,9 @@ Connect engine scheduling to latency, throughput, utilization, quality, and cost
 
 ### Concepts
 
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html) — Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.
-- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html) — Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.
-- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html) — Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.
+- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines) — Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.
+- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching) — Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.
+- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency) — Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.
 
 ### Build evidence
 

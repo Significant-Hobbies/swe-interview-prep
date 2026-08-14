@@ -35,13 +35,13 @@ Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state chan
 
 ## Prerequisites
 
-- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html)
+- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement)
 
 ## Related concepts
 
-- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html)
-- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html)
+- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement)
+- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

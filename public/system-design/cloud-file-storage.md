@@ -66,8 +66,8 @@ Synchronize immutable content-addressed chunks separately from strongly versione
 
 ## Repair the mechanisms
 
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html)
-- [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html)
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
+- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval)
+- [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)

@@ -39,4 +39,4 @@ Write a STAR about resolving a disagreement with a peer. Show the other personâ€
 
 ## Learning paths
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html)
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice)

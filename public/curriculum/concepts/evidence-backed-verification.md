@@ -35,13 +35,13 @@ Claims, source provenance, executable checks, screenshots, diffs, test outputs, 
 
 ## Prerequisites
 
-- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html)
+- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay)
 
 ## Related concepts
 
-- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html)
-- [Human Review Systems](https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html)
+- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay)
+- [Human Review Systems](https://learn.significanthobbies.com/curriculum/concepts/human-review-systems)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

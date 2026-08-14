@@ -16,22 +16,22 @@ Concepts the later milestones depend on. Without these the planner cannot serve 
 
 ### Concepts
 
-- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
-- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
-- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html) — DiskANN and SPANN — serving vector indexes that do not fit in memory.
-- [Index Updates & Tombstones](https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html) — Deleting and updating vectors in a graph index without rebuilding it.
-- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
-- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html) — Precision, recall, MRR, and nDCG for measuring retrieval quality.
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html) — Forcing LLM output into a validated JSON schema.
-- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html) — Term frequency × inverse document frequency weighting for relevance.
-- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization.html) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html) — Cosine, dot product, and L2 distance — how to score vector closeness.
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
-- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html) — Returning the k nearest vectors to a query, exact or approximate.
+- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
+- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
+- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann) — DiskANN and SPANN — serving vector indexes that do not fit in memory.
+- [Index Updates & Tombstones](https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones) — Deleting and updating vectors in a graph index without rebuilding it.
+- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
+- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics) — Precision, recall, MRR, and nDCG for measuring retrieval quality.
+- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs) — Forcing LLM output into a validated JSON schema.
+- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf) — Term frequency × inverse document frequency weighting for relevance.
+- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity) — Cosine, dot product, and L2 distance — how to score vector closeness.
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
+- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search) — Returning the k nearest vectors to a query, exact or approximate.
 
 
 
@@ -41,11 +41,11 @@ Lexical + vector retrieval, hybrid search, evals.
 
 ### Concepts
 
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html) — Term → posting list mapping that powers fast keyword lookup.
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html) — The standard lexical ranking function: TF saturation + IDF + length normalization.
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html) — Mapping text/images into dense vectors where distance encodes meaning.
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html) — Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html) — Building a labelled query set and harness to compare retrieval approaches.
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index) — Term → posting list mapping that powers fast keyword lookup.
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25) — The standard lexical ranking function: TF saturation + IDF + length normalization.
+- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings) — Mapping text/images into dense vectors where distance encodes meaning.
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search) — Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals) — Building a labelled query set and harness to compare retrieval approaches.
 
 ### Build evidence
 
@@ -59,11 +59,11 @@ Brute force, HNSW, filtering, recall/latency tradeoffs.
 
 ### Concepts
 
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html) — Exact nearest-neighbour search by scanning every vector — the correctness baseline.
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html) — Hierarchical Navigable Small World graphs — the dominant ANN index.
-- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf.html) — Cluster vectors with k-means, then search only the nearest cells (nprobe).
-- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html) — Combining vector search with structured predicates (tenant, date, tags).
-- [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html) — Reading recall-vs-latency curves to choose ANN parameters.
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db) — Exact nearest-neighbour search by scanning every vector — the correctness baseline.
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw) — Hierarchical Navigable Small World graphs — the dominant ANN index.
+- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf) — Cluster vectors with k-means, then search only the nearest cells (nprobe).
+- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering) — Combining vector search with structured predicates (tenant, date, tags).
+- [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs) — Reading recall-vs-latency curves to choose ANN parameters.
 
 ### Build evidence
 
@@ -77,13 +77,13 @@ RAG with evals, plus the storage foundations underneath.
 
 ### Concepts
 
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html) — Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
-- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking.html) — Splitting documents into retrievable units that preserve meaning.
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html) — A second-stage cross-encoder pass that reorders the top-k candidates.
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html) — Measuring LLM output quality with datasets, graders, and LLM-as-judge.
-- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal.html) — Append-only durability log written before the data pages.
-- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html) — Log-structured merge tree: write-optimized storage via sorted runs.
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html) — S3-style blob storage: cheap, durable, high-latency, immutable objects.
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag) — Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
+- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking) — Splitting documents into retrievable units that preserve meaning.
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking) — A second-stage cross-encoder pass that reorders the top-k candidates.
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals) — Measuring LLM output quality with datasets, graders, and LLM-as-judge.
+- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal) — Append-only durability log written before the data pages.
+- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree) — Log-structured merge tree: write-optimized storage via sorted runs.
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage) — S3-style blob storage: cheap, durable, high-latency, immutable objects.
 
 ### Build evidence
 

@@ -40,14 +40,14 @@ ANN curve: 95% recall @ 8ms, 99% @ 25ms, brute force 100% @ 200ms. Which point d
 
 ## Prerequisites
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
 
 ## Related concepts
 
-- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf.html)
-- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html)
+- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf)
+- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

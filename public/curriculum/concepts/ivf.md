@@ -37,14 +37,14 @@ FAISS IVF indexes, often combined with product quantization (IVF-PQ).
 
 ## Prerequisites
 
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html)
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db)
 
 ## Related concepts
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
-- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
+- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

@@ -34,14 +34,14 @@ IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hard
 
 ## Prerequisites
 
-- [Multi-Head Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html)
+- [Multi-Head Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head)
 
 ## Related concepts
 
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html)
-- [Speculative Decoding](https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding.html)
+- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing)
+- [Speculative Decoding](https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

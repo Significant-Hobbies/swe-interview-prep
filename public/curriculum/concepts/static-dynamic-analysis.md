@@ -37,13 +37,13 @@ ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers
 
 ## Prerequisites
 
-- [Code Review Systems](https://learn.significanthobbies.com/curriculum/concepts/code-review-systems.html)
+- [Code Review Systems](https://learn.significanthobbies.com/curriculum/concepts/code-review-systems)
 
 ## Related concepts
 
-- [Code Review Systems](https://learn.significanthobbies.com/curriculum/concepts/code-review-systems.html)
-- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure.html)
+- [Code Review Systems](https://learn.significanthobbies.com/curriculum/concepts/code-review-systems)
+- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

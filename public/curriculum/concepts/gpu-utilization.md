@@ -39,14 +39,14 @@ Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism,
 
 ## Prerequisites
 
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html)
+- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware)
 
 ## Related concepts
 
-- [Speculative Decoding](https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding.html)
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html)
+- [Speculative Decoding](https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding)
+- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

@@ -41,13 +41,13 @@ Write a chunker that splits on document structure (headings/paragraphs) with a t
 
 ## Prerequisites
 
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
 
 ## Related concepts
 
-- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing.html)
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html)
+- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing)
+- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

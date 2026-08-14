@@ -42,16 +42,16 @@ Implement an in-memory memtable that flushes to an immutable sorted file (SSTabl
 
 ## Prerequisites
 
-- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal.html)
+- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal)
 
 ## Related concepts
 
-- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree.html)
-- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction.html)
+- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree)
+- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

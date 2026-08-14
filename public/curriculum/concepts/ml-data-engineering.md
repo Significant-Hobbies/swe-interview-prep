@@ -39,14 +39,14 @@ Corpus: 1M docs × 800 tokens each. 3 epochs. Total tokens seen? If Chinchilla s
 
 ## Prerequisites
 
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html)
+- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora)
 
 ## Related concepts
 
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

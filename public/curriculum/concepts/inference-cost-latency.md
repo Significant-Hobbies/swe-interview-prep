@@ -38,15 +38,15 @@ Time to first token, inter-token latency, throughput, tail latency, utilization,
 
 ## Prerequisites
 
-- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html)
-- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html)
+- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization)
+- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching)
 
 ## Related concepts
 
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html)
-- [Local & On-device Inference](https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference.html)
+- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware)
+- [Local & On-device Inference](https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

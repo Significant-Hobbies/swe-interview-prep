@@ -40,8 +40,8 @@ LeetCode #21 — Merge Two Sorted Lists. Solve on LeetCode, then implement here 
 
 ## Related concepts
 
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html)
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

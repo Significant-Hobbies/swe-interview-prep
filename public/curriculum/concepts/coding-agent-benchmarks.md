@@ -37,13 +37,13 @@ Issue resolution tasks, repository setup, patch grading, test-based scoring, con
 
 ## Prerequisites
 
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
 
 ## Related concepts
 
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
-- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
+- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

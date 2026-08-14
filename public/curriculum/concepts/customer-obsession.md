@@ -40,4 +40,4 @@ Write a STAR about a time you changed a roadmap based on a single customer signa
 
 ## Learning paths
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html)
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice)

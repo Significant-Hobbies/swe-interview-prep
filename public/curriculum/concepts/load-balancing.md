@@ -42,12 +42,12 @@ Design an L7 load balancer in front of N application servers. Pick a routing alg
 
 ## Related concepts
 
-- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html)
+- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing)
 
 ## Learning paths
 
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

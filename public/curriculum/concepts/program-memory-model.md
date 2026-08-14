@@ -41,14 +41,14 @@ Implement memoryMap() for this C-shaped program: static int requests; int main()
 
 ## Prerequisites
 
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html)
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation)
 
 ## Related concepts
 
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation.html)
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
-- [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html)
+- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
+- [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics)
 
 ## Learning paths
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)

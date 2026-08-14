@@ -35,12 +35,12 @@ Review queues, risk routing, disagreement, calibration, escalation, auditability
 
 ## Prerequisites
 
-- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html)
+- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification)
 
 ## Related concepts
 
-- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html)
+- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification)
 
 ## Learning paths
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

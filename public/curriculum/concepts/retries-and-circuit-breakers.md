@@ -39,14 +39,14 @@ Implement backoffDelays(attempts, baseMs, capMs, rand) returning the delay for e
 
 ## Prerequisites
 
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Related concepts
 
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)
+- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

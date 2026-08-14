@@ -39,12 +39,12 @@ Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy
 
 ## Prerequisites
 
-- [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html)
+- [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal)
 
 ## Related concepts
 
-- [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html)
+- [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal)
 
 ## Learning paths
 
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

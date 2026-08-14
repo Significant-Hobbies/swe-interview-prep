@@ -33,7 +33,7 @@ Draw the state machine for a vending machine: Idle → Coin → Selecting → Di
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -41,7 +41,7 @@ Draw the state machine for a vending machine: Idle → Coin → Selecting → Di
 
 ## Learning paths
 
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

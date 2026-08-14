@@ -38,10 +38,10 @@ Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise
 
 ## Related concepts
 
-- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models.html)
-- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking.html)
+- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models)
+- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

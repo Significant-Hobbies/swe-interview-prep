@@ -43,12 +43,12 @@ Page holds 4 keys, insert 5th triggers split. After split how many keys in each 
 
 ## Related concepts
 
-- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html)
-- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html)
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html)
+- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree)
+- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index)
+- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

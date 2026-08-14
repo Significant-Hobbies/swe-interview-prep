@@ -39,14 +39,14 @@ Implement makeLimiter(capacity, refillPerSecond) returning allow(nowMs) -> boole
 
 ## Prerequisites
 
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
 
 ## Related concepts
 
-- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html)
-- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html)
+- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers)
+- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

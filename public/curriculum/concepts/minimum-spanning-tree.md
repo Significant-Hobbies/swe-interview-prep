@@ -39,13 +39,13 @@ Implement mstWeight(n, edges) where edges are [u, v, w] on nodes 0..n-1. Return 
 
 ## Prerequisites
 
-- [Union-Find](https://learn.significanthobbies.com/curriculum/concepts/union-find.html)
+- [Union-Find](https://learn.significanthobbies.com/curriculum/concepts/union-find)
 
 ## Related concepts
 
-- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html)
-- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy.html)
+- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path)
+- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

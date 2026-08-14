@@ -42,14 +42,14 @@ Given 252 daily returns with mean 0.04%/day and σ=1%/day (rf=0), compute annual
 
 ## Prerequisites
 
-- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html)
-- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html)
+- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility)
+- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation)
 
 ## Related concepts
 
-- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html)
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html)
+- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest)
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

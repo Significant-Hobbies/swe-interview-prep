@@ -43,11 +43,11 @@ Implement classify(requirements) returning { functional, nonFunctional } — two
 
 ## Related concepts
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)

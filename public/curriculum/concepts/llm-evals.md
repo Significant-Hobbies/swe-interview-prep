@@ -47,18 +47,18 @@ Create a dataset of inputs with expected behavior and a grader (deterministic or
 
 ## Prerequisites
 
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html)
+- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs)
 
 ## Related concepts
 
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html)
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html)
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html)
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
+- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
+- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing)
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering)
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

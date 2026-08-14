@@ -41,15 +41,15 @@ Hot key expires, 1000 requests miss together. Name two mitigations.
 
 ## Prerequisites
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html)
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle)
 
 ## Related concepts
 
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
+- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing)
 
 ## Learning paths
 
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

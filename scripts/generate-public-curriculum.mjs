@@ -50,9 +50,11 @@ const drillsById = byId(DRILLS);
 const reviewsById = byId(REVIEW_QUESTIONS);
 const artifactsById = byId(ARTIFACTS);
 
-const conceptUrl = (id) => `/curriculum/concepts/${id}.html`;
-const trackUrl = (id) => `/curriculum/tracks/${id}.html`;
-const roadmapUrl = (id) => `/curriculum/roadmaps/${id}.html`;
+// Cloudflare Pages maps the generated `.html` files to extensionless public
+// URLs. Link and canonical to those final routes so crawlers never take a 308.
+const conceptUrl = (id) => `/curriculum/concepts/${id}`;
+const trackUrl = (id) => `/curriculum/tracks/${id}`;
+const roadmapUrl = (id) => `/curriculum/roadmaps/${id}`;
 const systemDesignGuideUrl = (caseDefinition) =>
   `/system-design/${caseDefinition.publication.guide.slug}`;
 const systemDesignPracticeUrl = (caseDefinition) => `/mock?prompt=${caseDefinition.id}&from=guide`;
@@ -1176,6 +1178,40 @@ ${release.outcomes.map((outcome) => `- ${outcome}`).join('\n')}`
 `;
 }
 
+function changelogPage() {
+  const description =
+    'Meaningful improvements to the SWE Interview Prep curriculum, practice loop, and personal learning system.';
+  const releases = CHANGELOG_RELEASES.map(
+    (release) => `<section>
+      <p class="eyebrow">${escapeHtml(release.date)}</p>
+      <h2>${escapeHtml(release.title)}</h2>
+      <ul>${release.outcomes.map((outcome) => `<li>${escapeHtml(outcome)}</li>`).join('')}</ul>
+    </section>`
+  ).join('');
+
+  return page({
+    title: 'Changelog',
+    description,
+    path: '/changelog',
+    type: 'collection',
+    breadcrumbRoot: { label: 'Home', href: '/' },
+    body: `<article>
+      <p class="eyebrow">Product history</p>
+      <h1>What changed in SWE Interview Prep</h1>
+      <p class="lede">${escapeHtml(description)}</p>
+      <p><a href="${escapeHtml(`${CHANGELOG_REPOSITORY}/issues`)}">Roadmap</a> · <a href="${escapeHtml(CHANGELOG_REPOSITORY)}">Source</a></p>
+      ${releases}
+    </article>`,
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'SWE Interview Prep changelog',
+      url: absolute('/changelog'),
+      description,
+    },
+  });
+}
+
 const catalog = catalogData();
 writeFileSync(
   join(repoRoot, 'src/data/public-curriculum-summary.json'),
@@ -1423,6 +1459,7 @@ Private progress, notes, review answers, and saved learning sources are intentio
 );
 
 writeFileSync(join(publicDir, 'changelog.md'), cleanMarkdown(changelogMarkdown()));
+writeFileSync(join(publicDir, 'changelog.html'), cleanGeneratedText(changelogPage()));
 
 writeFileSync(
   join(publicDir, 'api-ai.json'),

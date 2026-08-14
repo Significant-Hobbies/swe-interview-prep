@@ -41,16 +41,16 @@ Fit a degree-1 vs degree-5 polynomial to 30 noisy points (50/50 split). Report t
 
 ## Prerequisites
 
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt)
 
 ## Related concepts
 
-- [Maximum Likelihood Estimation](https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html)
-- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html)
-- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html)
+- [Maximum Likelihood Estimation](https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood)
+- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization)
+- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest)
 
 ## Learning paths
 
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

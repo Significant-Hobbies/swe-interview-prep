@@ -41,17 +41,17 @@ Design a product search platform: ingestion → analyzer → inverted index → 
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html)
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index)
+- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage)
 
 ## Related concepts
 
-- [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html)
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
+- [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

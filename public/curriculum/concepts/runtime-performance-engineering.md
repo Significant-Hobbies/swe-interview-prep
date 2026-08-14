@@ -37,14 +37,14 @@ Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, conten
 
 ## Prerequisites
 
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html)
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design)
 
 ## Related concepts
 
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html)
-- [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html)
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design)
+- [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries)
 
 ## Learning paths
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

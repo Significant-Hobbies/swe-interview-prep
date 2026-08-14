@@ -41,14 +41,14 @@ Implement a token bucket: tokens refill at a fixed rate, each request spends one
 
 ## Prerequisites
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html)
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle)
 
 ## Related concepts
 
-- [API Keys](https://learn.significanthobbies.com/curriculum/concepts/api-keys.html)
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [API Keys](https://learn.significanthobbies.com/curriculum/concepts/api-keys)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

@@ -39,13 +39,13 @@ Implement debiasedCtr(events, propensity) where events are {docId, position, cli
 
 ## Prerequisites
 
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
 
 ## Related concepts
 
-- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html)
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html)
+- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank)
+- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)

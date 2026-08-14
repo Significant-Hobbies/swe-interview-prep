@@ -42,17 +42,17 @@ Build an index that stores vectors and answers top-k queries by scanning every v
 
 ## Prerequisites
 
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html)
-- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html)
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity)
+- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search)
 
 ## Related concepts
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
-- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
+- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

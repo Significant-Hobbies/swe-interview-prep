@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Runtime — what every runtime has to do | SWE Prep</title>
     <meta name="description" content="Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover…">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/roadmaps/runtime">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Runtime — what every runtime has to do | SWE Prep">
     <meta property="og:description" content="Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover…">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/roadmaps/runtime">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Runtime — what every runtime has to do | SWE Prep">
     <meta name="twitter:description" content="Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover…">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Runtime — what every runtime has to do","description":"Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Runtime — what every runtime has to do","description":"Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.","url":"https://learn.significanthobbies.com/curriculum/roadmaps/runtime","provider":{"@type":"Organization","name":"SWE Interview Prep","url":"https://learn.significanthobbies.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"12mo"}}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -43,7 +43,7 @@
       </div>
     </header>
     <main id="main-content">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design.html">System Design</a></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/curriculum/">Curriculum</a><span aria-hidden="true">/</span><a href="/curriculum/tracks/system-design">System Design</a></nav>
       <article>
     <p class="eyebrow">12mo roadmap · 10 milestones</p>
     <h1>Runtime — what every runtime has to do</h1>
@@ -63,14 +63,14 @@
           <h3>Prerequisites — unlock the rest of this path</h3>
           <p>Concepts the later milestones depend on. Without these the planner cannot serve the rest of this roadmap.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/object-modeling.html">Object Modeling</a></li><li><a href="/curriculum/concepts/replication.html">Replication</a></li><li><a href="/curriculum/concepts/structured-outputs.html">Structured Outputs</a></li><li><a href="/curriculum/concepts/consensus.html">Consensus</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/object-modeling">Object Modeling</a></li><li><a href="/curriculum/concepts/replication">Replication</a></li><li><a href="/curriculum/concepts/structured-outputs">Structured Outputs</a></li><li><a href="/curriculum/concepts/consensus">Consensus</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 2</p>
           <h3>Phase 0-1 — Five-job model + execution</h3>
           <p>Frame what every runtime does. Tier ladders: interpreter, baseline JIT, optimising JIT, deopt.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/state-management.html">State Machines</a></li><li><a href="/curriculum/concepts/strategy-pattern.html">Strategy Pattern</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/state-management">State Machines</a></li><li><a href="/curriculum/concepts/strategy-pattern">Strategy Pattern</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 3</p>
@@ -84,21 +84,21 @@
           <h3>Phase 3 — Scheduling</h3>
           <p>Cooperative vs preemptive, async runtimes, fibers, work-stealing, goroutine + BEAM schedulers.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/concurrency-design.html">Concurrency Design</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/concurrency-design">Concurrency Design</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 5</p>
           <h3>Phase 4 — Isolation</h3>
           <p>Process, thread, V8 isolate, Wasm sandbox, Firecracker, gVisor.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra">Distributed Infra</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 6</p>
           <h3>Phase 5 — Observability &amp; control</h3>
           <p>Sampling profilers, JFR, async-profiler, Go pprof, eBPF runtime hooks.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/monitoring-analytics.html">Observability</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/monitoring-analytics">Observability</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 7</p>
@@ -112,14 +112,14 @@
           <h3>Phase 7 — AI inference runtimes</h3>
           <p>vLLM PagedAttention, SGLang RadixAttention, llama.cpp, TensorRT-LLM, continuous batching.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/model-routing.html">Model Routing</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/model-routing">Model Routing</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 9</p>
           <h3>Phase 8 — Edge &amp; serverless runtimes</h3>
           <p>Workers, Deno, Bun, wasmtime, Firecracker — cold start, isolate startup, multi-tenant scheduling.</p>
           <h4>Concepts</h4>
-          <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra.html">Distributed Infra</a></li><li><a href="/curriculum/concepts/load-balancing.html">Load Balancing</a></li></ul>
+          <ul class="link-list"><li><a href="/curriculum/concepts/distributed-infra">Distributed Infra</a></li><li><a href="/curriculum/concepts/load-balancing">Load Balancing</a></li></ul>
 
         </article><article class="milestone">
           <p class="eyebrow">Milestone 10</p>

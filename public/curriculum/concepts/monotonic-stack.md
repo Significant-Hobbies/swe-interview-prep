@@ -39,13 +39,13 @@ Implement nextGreater(nums) returning an array where result[i] is the next eleme
 
 ## Prerequisites
 
-- [Stack](https://learn.significanthobbies.com/curriculum/concepts/stack.html)
+- [Stack](https://learn.significanthobbies.com/curriculum/concepts/stack)
 
 ## Related concepts
 
-- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html)
-- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals.html)
+- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window)
+- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

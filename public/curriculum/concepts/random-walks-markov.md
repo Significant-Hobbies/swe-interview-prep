@@ -45,14 +45,14 @@ Transition matrix P=[[0.9,0.1],[0.2,0.8]] on states {0,1}. Simulate 1000 steps f
 
 ## Prerequisites
 
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html)
-- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html)
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals)
+- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions)
 
 ## Related concepts
 
-- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html)
-- [Stationarity & Autocorrelation](https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation.html)
+- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility)
+- [Stationarity & Autocorrelation](https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

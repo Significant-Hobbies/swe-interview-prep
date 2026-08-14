@@ -39,13 +39,13 @@ Implement violatesThirdNF(columns, key, dependencies) -> boolean. `dependencies`
 
 ## Prerequisites
 
-- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html)
+- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing)
 
 ## Related concepts
 
-- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html)
-- [Join Algorithms](https://learn.significanthobbies.com/curriculum/concepts/join-algorithms.html)
+- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index)
+- [Join Algorithms](https://learn.significanthobbies.com/curriculum/concepts/join-algorithms)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

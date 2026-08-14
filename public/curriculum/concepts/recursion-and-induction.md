@@ -39,14 +39,14 @@ Implement masterCase(a, b, fExp) for T(n) = a*T(n/b) + n^fExp. Let c = log_b(a).
 
 ## Prerequisites
 
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Related concepts
 
-- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html)
-- [Backtracking](https://learn.significanthobbies.com/curriculum/concepts/backtracking.html)
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees.html)
+- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d)
+- [Backtracking](https://learn.significanthobbies.com/curriculum/concepts/backtracking)
+- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

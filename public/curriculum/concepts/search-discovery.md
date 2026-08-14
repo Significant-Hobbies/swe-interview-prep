@@ -36,13 +36,13 @@ Discovery feed: which metric — CTR, dwell time, or nDCG@10? Pick one for homep
 
 ## Prerequisites
 
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html)
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html)
+- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index)
+- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval)
 
 ## Related concepts
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
 
 ## Learning paths
 

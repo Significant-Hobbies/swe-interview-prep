@@ -39,14 +39,14 @@ Two transactions each read the same snapshot and then write DIFFERENT rows based
 
 ## Prerequisites
 
-- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html)
+- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing)
 
 ## Related concepts
 
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
+- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

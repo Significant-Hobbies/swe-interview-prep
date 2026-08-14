@@ -40,16 +40,16 @@ Loss Hessian eigenvalues 1 and 100. Why one global lr=0.1 struggles? What helps?
 
 ## Prerequisites
 
-- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html)
-- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html)
+- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients)
+- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations)
 
 ## Related concepts
 
-- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html)
-- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html)
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
+- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent)
+- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
 
 ## Learning paths
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

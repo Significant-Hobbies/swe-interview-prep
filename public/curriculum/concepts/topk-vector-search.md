@@ -37,16 +37,16 @@ Given a stream of (id, score) pairs, return the top-k by score using a size-k mi
 
 ## Prerequisites
 
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html)
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity)
 
 ## Related concepts
 
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html)
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
+- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

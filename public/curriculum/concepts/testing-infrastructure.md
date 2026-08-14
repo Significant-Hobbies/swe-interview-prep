@@ -37,13 +37,13 @@ Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixture
 
 ## Prerequisites
 
-- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html)
+- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis)
 
 ## Related concepts
 
-- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html)
-- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs.html)
+- [Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis)
+- [Codebase Graphs](https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

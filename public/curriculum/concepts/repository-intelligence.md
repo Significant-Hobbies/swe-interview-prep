@@ -37,13 +37,13 @@ Structure, symbols, history, ownership, conventions, architecture, semantic sear
 
 ## Prerequisites
 
-- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius.html)
+- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius)
 
 ## Related concepts
 
-- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius.html)
-- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling.html)
+- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius)
+- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

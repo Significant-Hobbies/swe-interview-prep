@@ -30,7 +30,7 @@ Model a coffee order with milk / sugar / whip add-ons via the decorator pattern.
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Model a coffee order with milk / sugar / whip add-ons via the decorator pattern.
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

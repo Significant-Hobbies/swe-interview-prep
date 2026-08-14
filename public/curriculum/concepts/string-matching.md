@@ -39,13 +39,13 @@ Implement findAll(text, pattern) returning every start index where pattern occur
 
 ## Prerequisites
 
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Related concepts
 
-- [Trie](https://learn.significanthobbies.com/curriculum/concepts/tries.html)
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Trie](https://learn.significanthobbies.com/curriculum/concepts/tries)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

@@ -39,14 +39,14 @@ Implement edgePolicy({ url, hasAuthCookie, varyHeaders, contentHashed }) returni
 
 ## Prerequisites
 
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching.html)
+- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching)
 
 ## Related concepts
 
-- [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html)
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html)
+- [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media)
+- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing)
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

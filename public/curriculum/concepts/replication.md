@@ -45,13 +45,13 @@ Write to primary, read replica 200ms later, lag 500ms. User sees stale read. Two
 
 ## Related concepts
 
-- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html)
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html)
+- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem)
+- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

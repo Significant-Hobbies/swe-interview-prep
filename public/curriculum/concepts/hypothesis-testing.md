@@ -51,19 +51,19 @@ A security patch test: H₀ = 'no change in error rate'. You fail to reject H₀
 
 ## Prerequisites
 
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html)
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html)
+- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence)
+- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals)
 
 ## Related concepts
 
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
 
 ## Learning paths
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html)
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html)
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

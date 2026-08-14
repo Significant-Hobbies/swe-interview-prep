@@ -37,13 +37,13 @@ Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance
 
 ## Prerequisites
 
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html)
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization)
 
 ## Related concepts
 
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html)
-- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models.html)
+- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization)
+- [Multimodal Models](https://learn.significanthobbies.com/curriculum/concepts/multimodal-models)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)

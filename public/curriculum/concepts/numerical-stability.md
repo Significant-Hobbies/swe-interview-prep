@@ -39,14 +39,14 @@ Implement logSumExp(xs) returning log(sum(exp(x))) that stays finite for large i
 
 ## Prerequisites
 
-- [ML Math Foundations](https://learn.significanthobbies.com/curriculum/concepts/ml-math.html)
+- [ML Math Foundations](https://learn.significanthobbies.com/curriculum/concepts/ml-math)
 
 ## Related concepts
 
-- [Softmax & Cross-Entropy](https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html)
-- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html)
+- [Softmax & Cross-Entropy](https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent)
+- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization)
 
 ## Learning paths
 
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)

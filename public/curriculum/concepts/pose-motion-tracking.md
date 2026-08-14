@@ -37,13 +37,13 @@ Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calib
 
 ## Prerequisites
 
-- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models.html)
+- [Vision Models](https://learn.significanthobbies.com/curriculum/concepts/vision-models)
 
 ## Related concepts
 
-- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html)
-- [Image & Video Generation](https://learn.significanthobbies.com/curriculum/concepts/image-video-generation.html)
+- [Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems)
+- [Image & Video Generation](https://learn.significanthobbies.com/curriculum/concepts/image-video-generation)
 
 ## Learning paths
 
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

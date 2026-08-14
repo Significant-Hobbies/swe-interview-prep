@@ -33,14 +33,14 @@ Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world u
 
 ## Prerequisites
 
-- [Human-Computer Interaction](https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction.html)
-- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking.html)
+- [Human-Computer Interaction](https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction)
+- [Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking)
 
 ## Related concepts
 
-- [Robotics Systems](https://learn.significanthobbies.com/curriculum/concepts/robotics-systems.html)
-- [Human-Computer Interaction](https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction.html)
+- [Robotics Systems](https://learn.significanthobbies.com/curriculum/concepts/robotics-systems)
+- [Human-Computer Interaction](https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction)
 
 ## Learning paths
 
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html)
+- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w)

@@ -43,7 +43,7 @@ LeetCode #3 — Longest Substring Without Repeating Characters. Solve on LeetCod
 
 ## Prerequisites
 
-- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html)
+- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers)
 
 ## Related concepts
 
@@ -51,4 +51,4 @@ LeetCode #3 — Longest Substring Without Repeating Characters. Solve on LeetCod
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

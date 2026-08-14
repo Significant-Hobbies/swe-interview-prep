@@ -48,7 +48,7 @@ LeetCode #883 — Car Fleet. Solve on LeetCode, then implement here if you want 
 
 ## Prerequisites
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Related concepts
 
@@ -56,4 +56,4 @@ LeetCode #883 — Car Fleet. Solve on LeetCode, then implement here if you want 
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

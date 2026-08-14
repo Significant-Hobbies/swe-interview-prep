@@ -49,7 +49,7 @@ WebSockets, server-sent events, presence, synchronization, ordering, reconnects,
 
 ## Prerequisites
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
 
 ## Related concepts
 
@@ -57,7 +57,7 @@ WebSockets, server-sent events, presence, synchronization, ordering, reconnects,
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

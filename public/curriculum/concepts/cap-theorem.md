@@ -38,14 +38,14 @@ Network split isolates two DB nodes. Choose CP or AP for payment ledger vs socia
 
 ## Prerequisites
 
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication.html)
+- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication)
 
 ## Related concepts
 
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus.html)
+- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

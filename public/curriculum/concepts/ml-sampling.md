@@ -36,15 +36,15 @@ Logits [2,1,0]. Apply temperature T=2 and T=0.5 before softmax. Which T makes th
 
 ## Prerequisites
 
-- [Language Modeling](https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling.html)
+- [Language Modeling](https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling)
 
 ## Related concepts
 
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html)
+- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)

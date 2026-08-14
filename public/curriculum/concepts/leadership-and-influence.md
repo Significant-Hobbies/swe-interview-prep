@@ -39,4 +39,4 @@ Write a 4-paragraph STAR (Situation / Task / Action / Result) about a time you l
 
 ## Learning paths
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html)
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice)

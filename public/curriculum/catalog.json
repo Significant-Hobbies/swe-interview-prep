@@ -25,7 +25,7 @@
       "id": "search-ir",
       "title": "Search & IR",
       "description": "Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/search-ir.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/search-ir",
       "conceptIds": [
         "tokenization",
         "inverted-index",
@@ -52,7 +52,7 @@
       "id": "mathematics",
       "title": "Mathematics",
       "description": "Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/mathematics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/mathematics",
       "conceptIds": [
         "vectors-and-spaces",
         "matrices-and-transformations",
@@ -95,7 +95,7 @@
       "id": "vector-db",
       "title": "Vector DB & ANN",
       "description": "Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/vector-db.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/vector-db",
       "conceptIds": [
         "embeddings",
         "vector-similarity",
@@ -120,7 +120,7 @@
       "id": "ai-systems",
       "title": "AI Systems",
       "description": "Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-systems",
       "conceptIds": [
         "rag",
         "chunking",
@@ -168,7 +168,7 @@
       "id": "backend",
       "title": "Backend",
       "description": "Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/backend.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/backend",
       "conceptIds": [
         "http-lifecycle",
         "api-keys",
@@ -198,7 +198,7 @@
       "id": "databases",
       "title": "Databases & Storage",
       "description": "Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/databases.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/databases",
       "conceptIds": [
         "b-tree",
         "lsm-tree",
@@ -230,7 +230,7 @@
       "id": "system-design",
       "title": "System Design",
       "description": "Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/system-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/system-design",
       "conceptIds": [
         "object-modeling",
         "state-management",
@@ -272,7 +272,7 @@
       "id": "dsa",
       "title": "DSA & Implementation",
       "description": "Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/dsa.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/dsa",
       "conceptIds": [
         "array-hashing",
         "two-pointers",
@@ -310,7 +310,7 @@
       "id": "behavioral",
       "title": "Behavioral & Communication",
       "description": "The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/behavioral.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/behavioral",
       "conceptIds": [
         "leadership-and-influence",
         "conflict-resolution",
@@ -331,7 +331,7 @@
       "id": "go-to-market",
       "title": "Go-to-Market",
       "description": "Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/go-to-market.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/go-to-market",
       "conceptIds": [
         "positioning",
         "landing-pages",
@@ -346,7 +346,7 @@
       "id": "systems-foundations",
       "title": "Systems Foundations",
       "description": "Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/systems-foundations",
       "conceptIds": [
         "concurrency-design",
         "operating-system-mechanics",
@@ -366,7 +366,7 @@
       "id": "infrastructure-platforms",
       "title": "Infrastructure & Platforms",
       "description": "Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms",
       "conceptIds": [
         "retries-dlq",
         "background-jobs",
@@ -387,7 +387,7 @@
       "id": "distributed-systems",
       "title": "Distributed Systems",
       "description": "Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/distributed-systems",
       "conceptIds": [
         "caching",
         "message-queues",
@@ -409,7 +409,7 @@
       "id": "inference-serving",
       "title": "Inference & Serving",
       "description": "Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/inference-serving.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/inference-serving",
       "conceptIds": [
         "model-routing",
         "ml-browser-runtime",
@@ -434,7 +434,7 @@
       "id": "agent-systems",
       "title": "Agent Systems",
       "description": "Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/agent-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/agent-systems",
       "conceptIds": [
         "tool-calling",
         "agent-loops",
@@ -463,7 +463,7 @@
       "id": "ai-reliability",
       "title": "Evaluation & AI Reliability",
       "description": "LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/ai-reliability",
       "conceptIds": [
         "prompt-versioning",
         "llm-evals",
@@ -489,7 +489,7 @@
       "id": "developer-tools",
       "title": "Developer Tools & Code Intelligence",
       "description": "Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/developer-tools.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/developer-tools",
       "conceptIds": [
         "code-review-systems",
         "static-dynamic-analysis",
@@ -514,7 +514,7 @@
       "id": "application-engineering",
       "title": "Application Engineering",
       "description": "Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/application-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/application-engineering",
       "conceptIds": [
         "game-design",
         "web-mobile-engineering",
@@ -529,7 +529,7 @@
       "id": "multimodal-spatial",
       "title": "Multimodal & Spatial Computing",
       "description": "Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.",
-      "url": "https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial.html",
+      "url": "https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial",
       "conceptIds": [
         "multimodal-models",
         "vision-models",
@@ -551,7 +551,7 @@
       "title": "9-Day Reset",
       "horizon": "9d",
       "goal": "Rebuild learning momentum by taking one concept all the way to a shipped artifact.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day",
       "conceptIds": [
         "descriptive-statistics",
         "probability-fundamentals",
@@ -571,7 +571,7 @@
       "title": "30-Day Retrieval Basics",
       "horizon": "30d",
       "goal": "Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day",
       "conceptIds": [
         "learning-to-rank",
         "click-models",
@@ -604,7 +604,7 @@
       "title": "90-Day AI Search & Infrastructure",
       "horizon": "90d",
       "goal": "Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day",
       "conceptIds": [
         "learning-to-rank",
         "vector-quantization",
@@ -646,7 +646,7 @@
       "title": "12-Month Advanced AI Infrastructure",
       "horizon": "12mo",
       "goal": "Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month",
       "conceptIds": [
         "ml-math",
         "probability-fundamentals",
@@ -692,7 +692,7 @@
       "title": "Disk-First Databases & RAM",
       "horizon": "12mo",
       "goal": "Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first",
       "conceptIds": [
         "normalization",
         "buffer-pool",
@@ -734,7 +734,7 @@
       "title": "Runtime — what every runtime has to do",
       "horizon": "12mo",
       "goal": "Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/runtime",
       "conceptIds": [
         "object-modeling",
         "replication",
@@ -754,7 +754,7 @@
       "title": "The Software Engineering Landscape (2026)",
       "horizon": "12mo",
       "goal": "Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape",
       "conceptIds": [
         "caching",
         "cdn-edge-delivery",
@@ -820,7 +820,7 @@
       "title": "LLD Practice",
       "horizon": "30d",
       "goal": "Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice",
       "conceptIds": [
         "object-modeling",
         "state-management",
@@ -839,7 +839,7 @@
       "title": "HLD Practice",
       "horizon": "30d",
       "goal": "Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice",
       "conceptIds": [
         "cdn-edge-delivery",
         "rate-limiting",
@@ -879,7 +879,7 @@
       "title": "DSA Practice",
       "horizon": "30d",
       "goal": "Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice",
       "conceptIds": [
         "recursion-and-induction",
         "quickselect",
@@ -915,7 +915,7 @@
       "title": "30-Day Math Rating Climb",
       "horizon": "30d",
       "goal": "Raise your per-roadmap ELO by climbing from linear algebra through statistics to calculus — each week unlocks harder drills at your edge.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d",
       "conceptIds": [
         "vectors-and-spaces",
         "matrices-and-transformations",
@@ -936,7 +936,7 @@
       "title": "30-Day Probability & Statistics",
       "horizon": "30d",
       "goal": "Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d",
       "conceptIds": [
         "combinatorics",
         "vectors-and-spaces",
@@ -963,7 +963,7 @@
       "title": "12-Week Active Math Stack",
       "horizon": "12mo",
       "goal": "Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w",
       "conceptIds": [
         "ml-math",
         "combinatorics",
@@ -1003,7 +1003,7 @@
       "title": "Behavioral Practice",
       "horizon": "30d",
       "goal": "Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware \"what I would do differently\".",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice",
       "conceptIds": [
         "leadership-and-influence",
         "ownership-and-accountability",
@@ -1022,7 +1022,7 @@
       "title": "12-Week Systems Foundations",
       "horizon": "90d",
       "goal": "Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w",
       "conceptIds": [
         "object-modeling",
         "data-representation",
@@ -1040,7 +1040,7 @@
       "title": "12-Week Infrastructure & Platforms",
       "horizon": "90d",
       "goal": "Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w",
       "conceptIds": [
         "http-lifecycle",
         "idempotency",
@@ -1062,7 +1062,7 @@
       "title": "12-Week Distributed Systems",
       "horizon": "90d",
       "goal": "Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w",
       "conceptIds": [
         "http-lifecycle",
         "idempotency",
@@ -1087,7 +1087,7 @@
       "title": "12-Week AI Models & Training",
       "horizon": "90d",
       "goal": "Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w",
       "conceptIds": [
         "ml-sampling",
         "probability-fundamentals",
@@ -1122,7 +1122,7 @@
       "title": "12-Week Inference & Serving",
       "horizon": "90d",
       "goal": "Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w",
       "conceptIds": [
         "structured-outputs",
         "ml-math",
@@ -1163,7 +1163,7 @@
       "title": "12-Week Agent Systems",
       "horizon": "90d",
       "goal": "Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w",
       "conceptIds": [
         "structured-outputs",
         "tool-calling",
@@ -1183,7 +1183,7 @@
       "title": "12-Week Evaluation & AI Reliability",
       "horizon": "90d",
       "goal": "Build an evidence-backed evaluation and observability system for models, tools, and agents.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w",
       "conceptIds": [
         "structured-outputs",
         "ml-math",
@@ -1221,7 +1221,7 @@
       "title": "12-Week Developer Tools & Code Intelligence",
       "horizon": "90d",
       "goal": "Build repository-aware tools that analyze, test, review, debug, and safely remediate code.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w",
       "conceptIds": [
         "code-review-systems",
         "static-dynamic-analysis",
@@ -1240,7 +1240,7 @@
       "title": "12-Week Application Engineering",
       "horizon": "90d",
       "goal": "Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w",
       "conceptIds": [
         "http-lifecycle",
         "message-queues",
@@ -1266,7 +1266,7 @@
       "title": "12-Week Multimodal & Spatial Computing",
       "horizon": "90d",
       "goal": "Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w",
       "conceptIds": [
         "ml-math",
         "ml-gradient-descent",
@@ -1304,7 +1304,7 @@
       "title": "Trace a Tensor",
       "horizon": "30d",
       "goal": "Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor",
       "conceptIds": [
         "data-representation",
         "ml-backprop",
@@ -1324,7 +1324,7 @@
       "title": "Harness Engineering",
       "horizon": "30d",
       "goal": "Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.",
-      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering",
       "conceptIds": [
         "repository-instruction-topology",
         "coding-agent-systems",
@@ -1354,7 +1354,7 @@
         "search-ir",
         "tokenization"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tokenization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tokenization",
       "roadmapIds": [
         "reset-9-day",
         "retrieval-30-day",
@@ -1373,7 +1373,7 @@
         "search-ir",
         "indexing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inverted-index",
       "roadmapIds": [
         "reset-9-day",
         "retrieval-30-day",
@@ -1392,7 +1392,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tf-idf",
       "roadmapIds": [
         "reset-9-day",
         "retrieval-30-day",
@@ -1411,7 +1411,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/bm25.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bm25",
       "roadmapIds": [
         "reset-9-day",
         "retrieval-30-day",
@@ -1430,7 +1430,7 @@
         "search-ir",
         "evaluation"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics",
       "roadmapIds": [
         "retrieval-30-day",
         "reset-9-day",
@@ -1446,7 +1446,7 @@
         "search-ir",
         "evaluation"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-evals.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-evals",
       "roadmapIds": [
         "reset-9-day",
         "retrieval-30-day",
@@ -1462,7 +1462,7 @@
         "search-ir",
         "hybrid"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hybrid-search",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1479,7 +1479,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/reranking.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/reranking",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day"
@@ -1494,7 +1494,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-rewriting",
       "roadmapIds": []
     },
     {
@@ -1506,7 +1506,7 @@
         "search-ir",
         "indexing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-discovery",
       "roadmapIds": []
     },
     {
@@ -1518,7 +1518,7 @@
         "vector-db",
         "embeddings"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/embeddings.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/embeddings",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1537,7 +1537,7 @@
         "vector-db",
         "similarity"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-similarity",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1555,7 +1555,7 @@
         "vector-db",
         "ann"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1572,7 +1572,7 @@
         "vector-db",
         "ann"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1589,7 +1589,7 @@
         "vector-db",
         "ann"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/hnsw.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hnsw",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -1605,7 +1605,7 @@
         "vector-db",
         "ann"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ivf.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ivf",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "db-disk-first"
@@ -1620,7 +1620,7 @@
         "vector-db",
         "quantization"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-quantization",
       "roadmapIds": []
     },
     {
@@ -1632,7 +1632,7 @@
         "vector-db",
         "filtering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day",
@@ -1648,7 +1648,7 @@
         "vector-db",
         "ann"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "db-disk-first"
@@ -1663,7 +1663,7 @@
         "ai-systems",
         "rag"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -1680,7 +1680,7 @@
         "ai-systems",
         "rag"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/chunking.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/chunking",
       "roadmapIds": [
         "ai-search-infra-90-day"
       ]
@@ -1694,7 +1694,7 @@
         "ai-systems",
         "rag"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/context-packing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/context-packing",
       "roadmapIds": []
     },
     {
@@ -1706,7 +1706,7 @@
         "ai-systems",
         "llm-apps"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/structured-outputs",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -1727,7 +1727,7 @@
         "ai-systems",
         "agents"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-calling.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-calling",
       "roadmapIds": [
         "agent-systems-12w",
         "ai-infra-12-month"
@@ -1743,7 +1743,7 @@
         "ai-systems",
         "agents"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-loops.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-loops",
       "roadmapIds": [
         "ai-infra-12-month",
         "agent-systems-12w"
@@ -1759,7 +1759,7 @@
         "ai-systems",
         "llm-apps"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-routing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-routing",
       "roadmapIds": [
         "ai-infra-12-month",
         "runtime",
@@ -1777,7 +1777,7 @@
         "ai-systems",
         "llm-apps"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -1792,7 +1792,7 @@
         "ai-systems",
         "evals"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/llm-evals",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-reliability-12w"
@@ -1807,7 +1807,7 @@
         "ai-systems",
         "foundations"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-math.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-math",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1827,7 +1827,7 @@
         "ai-systems",
         "foundations"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1845,7 +1845,7 @@
         "ai-systems",
         "foundations"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-backprop",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1864,7 +1864,7 @@
         "ai-systems",
         "foundations"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1882,7 +1882,7 @@
         "ai-systems",
         "foundations"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-adamw.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-adamw",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1900,7 +1900,7 @@
         "ai-systems",
         "language-modeling"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1918,7 +1918,7 @@
         "ai-systems",
         "language-modeling"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1936,7 +1936,7 @@
         "ai-systems",
         "language-modeling"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-sampling",
       "roadmapIds": [
         "swe-landscape",
         "ai-models-training-12w",
@@ -1953,7 +1953,7 @@
         "ai-systems",
         "transformers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -1971,7 +1971,7 @@
         "ai-systems",
         "transformers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention",
       "roadmapIds": [
         "swe-landscape",
         "ai-models-training-12w",
@@ -1989,7 +1989,7 @@
         "ai-systems",
         "transformers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -2007,7 +2007,7 @@
         "ai-systems",
         "transformers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block",
       "roadmapIds": [
         "swe-landscape",
         "ai-models-training-12w",
@@ -2025,7 +2025,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-training.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-training",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -2043,7 +2043,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing",
       "roadmapIds": [
         "ai-models-training-12w",
         "swe-landscape",
@@ -2060,7 +2060,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-lora",
       "roadmapIds": [
         "ai-models-training-12w",
         "ai-reliability-12w",
@@ -2078,7 +2078,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment",
       "roadmapIds": [
         "swe-landscape",
         "ai-models-training-12w"
@@ -2093,7 +2093,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering",
       "roadmapIds": [
         "ai-models-training-12w",
         "inference-serving-12w",
@@ -2110,7 +2110,7 @@
         "ai-systems",
         "runtime"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime",
       "roadmapIds": [
         "swe-landscape",
         "inference-serving-12w",
@@ -2127,7 +2127,7 @@
         "ai-systems",
         "runtime"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu",
       "roadmapIds": [
         "swe-landscape",
         "inference-serving-12w",
@@ -2144,7 +2144,7 @@
         "ai-systems",
         "evals"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation",
       "roadmapIds": [
         "ai-models-training-12w",
         "ai-reliability-12w"
@@ -2159,7 +2159,7 @@
         "backend",
         "http"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle",
       "roadmapIds": [
         "swe-landscape",
         "ai-infra-12-month",
@@ -2178,7 +2178,7 @@
         "backend",
         "auth"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-keys.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-keys",
       "roadmapIds": [
         "ai-infra-12-month"
       ]
@@ -2192,7 +2192,7 @@
         "backend",
         "rate-limiting"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rate-limiting",
       "roadmapIds": [
         "ai-infra-12-month",
         "hld-practice"
@@ -2207,7 +2207,7 @@
         "backend",
         "idempotency"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/idempotency.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/idempotency",
       "roadmapIds": [
         "ai-infra-12-month",
         "swe-landscape",
@@ -2225,7 +2225,7 @@
         "backend",
         "queues"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-dlq",
       "roadmapIds": [
         "ai-infra-12-month",
         "swe-landscape",
@@ -2241,7 +2241,7 @@
         "backend",
         "webhooks"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/webhooks.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/webhooks",
       "roadmapIds": []
     },
     {
@@ -2254,7 +2254,7 @@
         "backend",
         "jobs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/background-jobs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/background-jobs",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -2269,7 +2269,7 @@
         "backend",
         "caching"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/caching.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/caching",
       "roadmapIds": [
         "distributed-systems-12w",
         "hld-practice",
@@ -2286,7 +2286,7 @@
         "backend",
         "queues"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/message-queues.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/message-queues",
       "roadmapIds": [
         "swe-landscape",
         "distributed-systems-12w",
@@ -2305,7 +2305,7 @@
         "backend",
         "observability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics",
       "roadmapIds": [
         "ai-infra-12-month",
         "infrastructure-platforms-12w",
@@ -2321,7 +2321,7 @@
         "backend",
         "api-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/api-design",
       "roadmapIds": [
         "ai-infra-12-month",
         "application-engineering-12w",
@@ -2337,7 +2337,7 @@
         "backend",
         "auth"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/auth-systems",
       "roadmapIds": [
         "swe-landscape",
         "application-engineering-12w"
@@ -2352,7 +2352,7 @@
         "backend",
         "payments"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments",
       "roadmapIds": []
     },
     {
@@ -2364,7 +2364,7 @@
         "databases",
         "storage-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/b-tree.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/b-tree",
       "roadmapIds": [
         "ai-infra-12-month",
         "db-disk-first",
@@ -2380,7 +2380,7 @@
         "databases",
         "storage-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/lsm-tree",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -2397,7 +2397,7 @@
         "databases",
         "write-path"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/wal.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/wal",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -2414,7 +2414,7 @@
         "databases",
         "write-path"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/compaction.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/compaction",
       "roadmapIds": [
         "ai-infra-12-month",
         "db-disk-first"
@@ -2429,7 +2429,7 @@
         "databases",
         "object-storage"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-storage.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-storage",
       "roadmapIds": [
         "ai-search-infra-90-day",
         "ai-infra-12-month",
@@ -2446,7 +2446,7 @@
         "databases",
         "storage-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/columnar-storage.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/columnar-storage",
       "roadmapIds": [
         "ai-infra-12-month",
         "db-disk-first",
@@ -2462,7 +2462,7 @@
         "databases",
         "indexing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/secondary-index",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -2476,7 +2476,7 @@
         "databases",
         "storage-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -2491,7 +2491,7 @@
         "databases",
         "partitioning"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/sharding.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sharding",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
@@ -2509,7 +2509,7 @@
         "databases",
         "replication"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/replication.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/replication",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
@@ -2528,7 +2528,7 @@
         "databases",
         "consistency"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/cap-theorem.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cap-theorem",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
@@ -2544,7 +2544,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/object-modeling",
       "roadmapIds": [
         "lld-practice",
         "runtime",
@@ -2562,7 +2562,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/state-management.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/state-management",
       "roadmapIds": [
         "runtime",
         "swe-landscape",
@@ -2579,7 +2579,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern",
       "roadmapIds": [
         "runtime",
         "swe-landscape",
@@ -2595,7 +2595,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/observer-pattern.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/observer-pattern",
       "roadmapIds": [
         "lld-practice"
       ]
@@ -2609,7 +2609,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/factory-creational.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/factory-creational",
       "roadmapIds": [
         "lld-practice"
       ]
@@ -2623,7 +2623,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/decorator-structural.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/decorator-structural",
       "roadmapIds": [
         "lld-practice"
       ]
@@ -2638,7 +2638,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/concurrency-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/concurrency-design",
       "roadmapIds": [
         "runtime",
         "swe-landscape",
@@ -2655,7 +2655,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/command-chain.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/command-chain",
       "roadmapIds": [
         "lld-practice"
       ]
@@ -2669,7 +2669,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/booking-inventory.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/booking-inventory",
       "roadmapIds": [
         "lld-practice"
       ]
@@ -2684,7 +2684,7 @@
         "system-design",
         "low-level-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/game-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/game-design",
       "roadmapIds": [
         "swe-landscape",
         "lld-practice",
@@ -2700,7 +2700,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/load-balancing",
       "roadmapIds": [
         "runtime",
         "swe-landscape",
@@ -2718,7 +2718,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing",
       "roadmapIds": [
         "hld-practice",
         "db-disk-first",
@@ -2735,7 +2735,7 @@
         "distributed-systems",
         "system-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/consensus.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/consensus",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape",
@@ -2753,7 +2753,7 @@
         "distributed-systems",
         "system-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-infra.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-infra",
       "roadmapIds": [
         "db-disk-first",
         "runtime",
@@ -2772,7 +2772,7 @@
         "system-design",
         "event-driven"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime",
       "roadmapIds": [
         "application-engineering-12w",
         "distributed-systems-12w",
@@ -2789,7 +2789,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/social-media.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/social-media",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -2803,7 +2803,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/streaming-media.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/streaming-media",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -2817,7 +2817,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/location-transport.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/location-transport",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -2831,7 +2831,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -2845,7 +2845,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-platform-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/search-platform-design",
       "roadmapIds": [
         "ai-infra-12-month",
         "hld-practice"
@@ -2860,7 +2860,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag-system-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rag-system-design",
       "roadmapIds": [
         "ai-infra-12-month",
         "hld-practice"
@@ -2875,7 +2875,7 @@
         "dsa",
         "arrays-hashing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/array-hashing",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2889,7 +2889,7 @@
         "dsa",
         "two-pointers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/two-pointers",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2903,7 +2903,7 @@
         "dsa",
         "sliding-window"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/sliding-window.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sliding-window",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2917,7 +2917,7 @@
         "dsa",
         "stack-queue"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/stack.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/stack",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2931,7 +2931,7 @@
         "dsa",
         "binary-search"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/binary-search.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/binary-search",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2945,7 +2945,7 @@
         "dsa",
         "linked-list"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/linked-list.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/linked-list",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2959,7 +2959,7 @@
         "dsa",
         "trees"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/trees.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/trees",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2973,7 +2973,7 @@
         "dsa",
         "trees"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tries.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tries",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -2987,7 +2987,7 @@
         "dsa",
         "heap"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/heap.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/heap",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3001,7 +3001,7 @@
         "dsa",
         "backtracking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/backtracking.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/backtracking",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3015,7 +3015,7 @@
         "dsa",
         "graphs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/graphs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/graphs",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3029,7 +3029,7 @@
         "dsa",
         "graphs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/shortest-path.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/shortest-path",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3043,7 +3043,7 @@
         "dsa",
         "graphs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/union-find.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/union-find",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3057,7 +3057,7 @@
         "dsa",
         "dynamic-programming"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-1d.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-1d",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3071,7 +3071,7 @@
         "dsa",
         "dynamic-programming"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-2d.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dp-2d",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3085,7 +3085,7 @@
         "dsa",
         "greedy"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/greedy.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/greedy",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3099,7 +3099,7 @@
         "dsa",
         "intervals"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/intervals.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/intervals",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3113,7 +3113,7 @@
         "dsa",
         "math"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/math-geometry.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/math-geometry",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3127,7 +3127,7 @@
         "dsa",
         "bit-manipulation"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -3141,7 +3141,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3155,7 +3155,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3169,7 +3169,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3183,7 +3183,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3197,7 +3197,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3211,7 +3211,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/communication.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/communication",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3225,7 +3225,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3239,7 +3239,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3253,7 +3253,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/customer-obsession.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/customer-obsession",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3267,7 +3267,7 @@
         "behavioral",
         "behavioral"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability",
       "roadmapIds": [
         "behavioral-practice"
       ]
@@ -3281,7 +3281,7 @@
         "go-to-market",
         "positioning"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/positioning.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/positioning",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -3295,7 +3295,7 @@
         "go-to-market",
         "positioning"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/landing-pages",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -3309,7 +3309,7 @@
         "go-to-market",
         "growth"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/seo.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/seo",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -3323,7 +3323,7 @@
         "go-to-market",
         "analytics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/product-analytics",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -3337,7 +3337,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3354,7 +3354,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3370,7 +3370,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition",
       "roadmapIds": [
         "math-rating-climb-30d",
         "math-stack-12w"
@@ -3385,7 +3385,7 @@
         "mathematics",
         "probability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3410,7 +3410,7 @@
         "mathematics",
         "probability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-variables.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-variables",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3429,7 +3429,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3454,7 +3454,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3473,7 +3473,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3492,7 +3492,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/regression-basics",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3508,7 +3508,7 @@
         "mathematics",
         "calculus"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3524,7 +3524,7 @@
         "mathematics",
         "calculus"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization",
       "roadmapIds": [
         "math-rating-climb-30d",
         "math-stack-12w"
@@ -3539,7 +3539,7 @@
         "mathematics",
         "probability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/information-entropy.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/information-entropy",
       "roadmapIds": [
         "math-rating-climb-30d",
         "prob-stats-30d",
@@ -3555,7 +3555,7 @@
         "mathematics",
         "probability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/classical-distributions.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/classical-distributions",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3570,7 +3570,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3585,7 +3585,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3600,7 +3600,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3615,7 +3615,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3630,7 +3630,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3645,7 +3645,7 @@
         "mathematics",
         "statistics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting",
       "roadmapIds": [
         "prob-stats-30d",
         "math-stack-12w"
@@ -3660,7 +3660,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3674,7 +3674,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/pca-projection.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pca-projection",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3688,7 +3688,7 @@
         "mathematics",
         "quant"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/returns-volatility.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/returns-volatility",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3702,7 +3702,7 @@
         "mathematics",
         "quant"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3716,7 +3716,7 @@
         "mathematics",
         "quant"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3730,7 +3730,7 @@
         "mathematics",
         "quant"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3744,7 +3744,7 @@
         "mathematics",
         "quant"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest",
       "roadmapIds": [
         "math-stack-12w"
       ]
@@ -3758,7 +3758,7 @@
         "systems-foundations",
         "operating-systems"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics",
       "roadmapIds": [
         "systems-foundations-12w"
       ]
@@ -3772,7 +3772,7 @@
         "systems-foundations",
         "networking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering",
       "roadmapIds": [
         "systems-foundations-12w"
       ]
@@ -3786,7 +3786,7 @@
         "systems-foundations",
         "hardware"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy",
       "roadmapIds": [
         "systems-foundations-12w",
         "trace-a-tensor"
@@ -3801,7 +3801,7 @@
         "systems-foundations",
         "performance"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering",
       "roadmapIds": [
         "systems-foundations-12w",
         "trace-a-tensor"
@@ -3816,7 +3816,7 @@
         "systems-foundations",
         "security"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries",
       "roadmapIds": [
         "systems-foundations-12w"
       ]
@@ -3830,7 +3830,7 @@
         "infrastructure-platforms",
         "cloud"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3844,7 +3844,7 @@
         "infrastructure-platforms",
         "containers"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3858,7 +3858,7 @@
         "infrastructure-platforms",
         "delivery"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3872,7 +3872,7 @@
         "infrastructure-platforms",
         "orchestration"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3886,7 +3886,7 @@
         "infrastructure-platforms",
         "reliability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3900,7 +3900,7 @@
         "infrastructure-platforms",
         "sandboxes"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3914,7 +3914,7 @@
         "infrastructure-platforms",
         "infrastructure-as-code"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation",
       "roadmapIds": [
         "infrastructure-platforms-12w"
       ]
@@ -3928,7 +3928,7 @@
         "distributed-systems",
         "event-streaming"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka",
       "roadmapIds": [
         "distributed-systems-12w"
       ]
@@ -3942,7 +3942,7 @@
         "distributed-systems",
         "durable-workflows"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal",
       "roadmapIds": [
         "distributed-systems-12w"
       ]
@@ -3956,7 +3956,7 @@
         "distributed-systems",
         "failure-recovery"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery",
       "roadmapIds": [
         "distributed-systems-12w"
       ]
@@ -3970,7 +3970,7 @@
         "databases",
         "transactions"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/transaction-processing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/transaction-processing",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape"
@@ -3985,7 +3985,7 @@
         "databases",
         "query-planning"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -3999,7 +3999,7 @@
         "databases",
         "analytics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -4013,7 +4013,7 @@
         "ai-systems",
         "training"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining",
       "roadmapIds": [
         "ai-models-training-12w"
       ]
@@ -4027,7 +4027,7 @@
         "ai-systems",
         "compression"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-quantization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/model-quantization",
       "roadmapIds": [
         "ai-models-training-12w",
         "inference-serving-12w",
@@ -4044,7 +4044,7 @@
         "ai-systems",
         "open-models"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/open-weight-models.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/open-weight-models",
       "roadmapIds": [
         "ai-models-training-12w"
       ]
@@ -4058,7 +4058,7 @@
         "inference-serving",
         "inference-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-engines",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4073,7 +4073,7 @@
         "inference-serving",
         "batching"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/continuous-batching",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4088,7 +4088,7 @@
         "inference-serving",
         "kv-cache"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention",
       "roadmapIds": [
         "inference-serving-12w"
       ]
@@ -4102,7 +4102,7 @@
         "inference-serving",
         "gpu-kernels"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4117,7 +4117,7 @@
         "inference-serving",
         "decoding"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding",
       "roadmapIds": [
         "inference-serving-12w"
       ]
@@ -4131,7 +4131,7 @@
         "inference-serving",
         "gpu"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4146,7 +4146,7 @@
         "inference-serving",
         "serving-economics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4161,7 +4161,7 @@
         "inference-serving",
         "on-device"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference",
       "roadmapIds": [
         "inference-serving-12w",
         "multimodal-spatial-12w"
@@ -4176,7 +4176,7 @@
         "inference-serving",
         "hardware"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/inference-hardware",
       "roadmapIds": [
         "inference-serving-12w",
         "trace-a-tensor"
@@ -4191,7 +4191,7 @@
         "agent-systems",
         "memory"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4205,7 +4205,7 @@
         "agent-systems",
         "mcp"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4219,7 +4219,7 @@
         "agent-systems",
         "multi-agent"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4233,7 +4233,7 @@
         "agent-systems",
         "durability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4247,7 +4247,7 @@
         "agent-systems",
         "permissions"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4261,7 +4261,7 @@
         "agent-systems",
         "computer-use"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4275,7 +4275,7 @@
         "agent-systems",
         "interfaces"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4289,7 +4289,7 @@
         "agent-systems",
         "scheduling"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents",
       "roadmapIds": [
         "agent-systems-12w"
       ]
@@ -4303,7 +4303,7 @@
         "ai-reliability",
         "benchmarks"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4317,7 +4317,7 @@
         "ai-reliability",
         "tool-evals"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4331,7 +4331,7 @@
         "ai-reliability",
         "regression"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4345,7 +4345,7 @@
         "ai-reliability",
         "failure-detection"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4359,7 +4359,7 @@
         "ai-reliability",
         "observability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-observability",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4373,7 +4373,7 @@
         "ai-reliability",
         "replay"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/tracing-replay.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/tracing-replay",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4387,7 +4387,7 @@
         "ai-reliability",
         "verification"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4401,7 +4401,7 @@
         "ai-reliability",
         "human-review"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-review-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-review-systems",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4415,7 +4415,7 @@
         "ai-reliability",
         "measurement"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement",
       "roadmapIds": [
         "ai-reliability-12w"
       ]
@@ -4429,7 +4429,7 @@
         "developer-tools",
         "code-review"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/code-review-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/code-review-systems",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4443,7 +4443,7 @@
         "developer-tools",
         "program-analysis"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4457,7 +4457,7 @@
         "developer-tools",
         "testing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4471,7 +4471,7 @@
         "developer-tools",
         "code-graphs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4485,7 +4485,7 @@
         "developer-tools",
         "dependencies"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4499,7 +4499,7 @@
         "developer-tools",
         "developer-experience"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4513,7 +4513,7 @@
         "developer-tools",
         "coding-agents"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4527,7 +4527,7 @@
         "developer-tools",
         "repository-intelligence"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4541,7 +4541,7 @@
         "developer-tools",
         "supply-chain"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4555,7 +4555,7 @@
         "developer-tools",
         "debugging"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation",
       "roadmapIds": [
         "developer-tools-12w"
       ]
@@ -4569,7 +4569,7 @@
         "application-engineering",
         "client-platforms"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -4583,7 +4583,7 @@
         "application-engineering",
         "ux"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -4597,7 +4597,7 @@
         "application-engineering",
         "graphics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems",
       "roadmapIds": [
         "application-engineering-12w"
       ]
@@ -4611,7 +4611,7 @@
         "multimodal-spatial",
         "multimodal"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/multimodal-models.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/multimodal-models",
       "roadmapIds": [
         "ai-models-training-12w",
         "multimodal-spatial-12w"
@@ -4626,7 +4626,7 @@
         "multimodal-spatial",
         "computer-vision"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/vision-models.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vision-models",
       "roadmapIds": [
         "ai-models-training-12w",
         "multimodal-spatial-12w"
@@ -4641,7 +4641,7 @@
         "multimodal-spatial",
         "pose"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking",
       "roadmapIds": [
         "multimodal-spatial-12w"
       ]
@@ -4655,7 +4655,7 @@
         "multimodal-spatial",
         "audio"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems",
       "roadmapIds": [
         "ai-models-training-12w",
         "multimodal-spatial-12w"
@@ -4670,7 +4670,7 @@
         "multimodal-spatial",
         "generation"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/image-video-generation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/image-video-generation",
       "roadmapIds": [
         "multimodal-spatial-12w"
       ]
@@ -4684,7 +4684,7 @@
         "multimodal-spatial",
         "robotics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/robotics-systems.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/robotics-systems",
       "roadmapIds": [
         "multimodal-spatial-12w"
       ]
@@ -4698,7 +4698,7 @@
         "multimodal-spatial",
         "spatial-computing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces",
       "roadmapIds": [
         "multimodal-spatial-12w"
       ]
@@ -4712,7 +4712,7 @@
         "multimodal-spatial",
         "hci"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction",
       "roadmapIds": [
         "multimodal-spatial-12w"
       ]
@@ -4726,7 +4726,7 @@
         "dsa",
         "complexity"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4740,7 +4740,7 @@
         "dsa",
         "sorting"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/sorting.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/sorting",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4754,7 +4754,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation",
       "roadmapIds": [
         "hld-practice",
         "swe-landscape",
@@ -4770,7 +4770,7 @@
         "system-design",
         "system-design-cases"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping",
       "roadmapIds": [
         "hld-practice",
         "swe-landscape",
@@ -4786,7 +4786,7 @@
         "dsa",
         "prefix-sums"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/prefix-sums.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/prefix-sums",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4800,7 +4800,7 @@
         "dsa",
         "stack"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4814,7 +4814,7 @@
         "dsa",
         "strings"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/string-matching.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/string-matching",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4828,7 +4828,7 @@
         "dsa",
         "graphs"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4842,7 +4842,7 @@
         "databases",
         "transactions"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/isolation-levels.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/isolation-levels",
       "roadmapIds": [
         "db-disk-first",
         "swe-landscape"
@@ -4857,7 +4857,7 @@
         "databases",
         "query-execution"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/join-algorithms.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/join-algorithms",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -4871,7 +4871,7 @@
         "backend",
         "reliability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers",
       "roadmapIds": [
         "swe-landscape",
         "distributed-systems-12w"
@@ -4886,7 +4886,7 @@
         "backend",
         "security"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-security-basics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/web-security-basics",
       "roadmapIds": [
         "swe-landscape",
         "application-engineering-12w"
@@ -4901,7 +4901,7 @@
         "mathematics",
         "queueing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/queueing-theory",
       "roadmapIds": [
         "math-stack-12w",
         "swe-landscape"
@@ -4916,7 +4916,7 @@
         "mathematics",
         "linear-algebra"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality",
       "roadmapIds": [
         "math-stack-12w",
         "retrieval-30-day"
@@ -4931,7 +4931,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day"
@@ -4946,7 +4946,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -4960,7 +4960,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation",
       "roadmapIds": [
         "hld-practice"
       ]
@@ -4974,7 +4974,7 @@
         "dsa",
         "recursion"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -4988,7 +4988,7 @@
         "dsa",
         "selection"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/quickselect.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/quickselect",
       "roadmapIds": [
         "dsa-practice"
       ]
@@ -5002,7 +5002,7 @@
         "databases",
         "schema-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/normalization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/normalization",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -5016,7 +5016,7 @@
         "databases",
         "storage-engines"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/buffer-pool.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/buffer-pool",
       "roadmapIds": [
         "db-disk-first"
       ]
@@ -5030,7 +5030,7 @@
         "backend",
         "api-design"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/pagination.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/pagination",
       "roadmapIds": [
         "swe-landscape",
         "application-engineering-12w"
@@ -5045,7 +5045,7 @@
         "mathematics",
         "counting"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/combinatorics.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/combinatorics",
       "roadmapIds": [
         "math-stack-12w",
         "prob-stats-30d"
@@ -5060,7 +5060,7 @@
         "mathematics",
         "numerics"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/numerical-stability.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/numerical-stability",
       "roadmapIds": [
         "math-stack-12w",
         "ai-infra-12-month"
@@ -5075,7 +5075,7 @@
         "search-ir",
         "ranking"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day"
@@ -5090,7 +5090,7 @@
         "search-ir",
         "evaluation"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/click-models.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/click-models",
       "roadmapIds": [
         "retrieval-30-day"
       ]
@@ -5104,7 +5104,7 @@
         "vector-db",
         "compression"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/vector-quantization",
       "roadmapIds": [
         "retrieval-30-day",
         "ai-search-infra-90-day"
@@ -5119,7 +5119,7 @@
         "vector-db",
         "indexing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann",
       "roadmapIds": [
         "ai-search-infra-90-day"
       ]
@@ -5133,7 +5133,7 @@
         "vector-db",
         "indexing"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones",
       "roadmapIds": [
         "ai-search-infra-90-day"
       ]
@@ -5147,7 +5147,7 @@
         "system-design",
         "scalability"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery",
       "roadmapIds": [
         "hld-practice",
         "swe-landscape"
@@ -5162,7 +5162,7 @@
         "systems-foundations",
         "computer-arithmetic"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/data-representation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/data-representation",
       "roadmapIds": [
         "systems-foundations-12w",
         "trace-a-tensor"
@@ -5177,7 +5177,7 @@
         "systems-foundations",
         "memory-management"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/program-memory-model.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/program-memory-model",
       "roadmapIds": [
         "systems-foundations-12w"
       ]
@@ -5192,7 +5192,7 @@
         "developer-tools",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5207,7 +5207,7 @@
         "developer-tools",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5222,7 +5222,7 @@
         "durability",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5237,7 +5237,7 @@
         "developer-tools",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5252,7 +5252,7 @@
         "ai-reliability",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5267,7 +5267,7 @@
         "durability",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle",
       "roadmapIds": [
         "harness-engineering"
       ]
@@ -5282,7 +5282,7 @@
         "ai-reliability",
         "harness-engineering"
       ],
-      "url": "https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html",
+      "url": "https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation",
       "roadmapIds": [
         "harness-engineering"
       ]

@@ -16,8 +16,8 @@ Turn implicit expectations into scoped repository instructions with executable c
 
 ### Concepts
 
-- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology.html) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html) — Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
+- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems) — Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
 
 
 
@@ -27,9 +27,9 @@ Make repository structure, bootstrap, readiness, and capability boundaries disco
 
 ### Concepts
 
-- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence.html) — Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
-- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
-- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html) — Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
+- [Repository Intelligence](https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence) — Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
+- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
+- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing) — Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
 
 
 
@@ -39,9 +39,9 @@ Persist goal, progress, evidence, blockers, and next action so a new session res
 
 ### Concepts
 
-- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html) — Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html) — Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
-- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html) — Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.
+- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs) — Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution) — Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
+- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context) — Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.
 
 
 
@@ -51,9 +51,9 @@ Bound authority and change size while using runtime evidence to continue, comple
 
 ### Concepts
 
-- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html) — Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.
-- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html) — Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability) — Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.
+- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing) — Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
 
 
 
@@ -63,9 +63,9 @@ Separate maker claims from a checker that reconstructs the contract and gathers 
 
 ### Concepts
 
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html) — Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
-- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations.html) — Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing) — Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
+- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations) — Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.
 
 
 
@@ -75,9 +75,9 @@ Connect initialization, bounded work, durable progress, checking, recovery, and 
 
 ### Concepts
 
-- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html) — Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html) — Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
+- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems) — Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution) — Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
 
 ### Build evidence
 
@@ -89,10 +89,10 @@ Run a bounded autonomous loop, compare it with a baseline, and ablate one harnes
 
 ### Concepts
 
-- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
-- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html) — Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
+- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing) — Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
 
 ### Build evidence
 

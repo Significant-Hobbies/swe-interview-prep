@@ -30,7 +30,7 @@ Merge [[1,3],[2,6],[8,10],[15,18]] → ?
 
 ## Prerequisites
 
-- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy.html)
+- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Merge [[1,3],[2,6],[8,10],[15,18]] → ?
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

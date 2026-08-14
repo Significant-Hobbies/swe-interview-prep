@@ -71,12 +71,12 @@ LeetCode #1036 — Rotting Oranges. Solve on LeetCode, then implement here if yo
 
 ## Prerequisites
 
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis.html)
+- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis)
 
 ## Related concepts
 
-- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers.html)
+- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

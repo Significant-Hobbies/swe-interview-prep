@@ -42,16 +42,16 @@ Compute AB where A = [[1, 2], [0, 1]] and B = [[1, 0], [3, 1]]. Then apply A to 
 
 ## Prerequisites
 
-- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html)
+- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces)
 
 ## Related concepts
 
-- [Eigenvalues & Matrix Decomposition](https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition.html)
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [ML Math Foundations](https://learn.significanthobbies.com/curriculum/concepts/ml-math.html)
+- [Eigenvalues & Matrix Decomposition](https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [ML Math Foundations](https://learn.significanthobbies.com/curriculum/concepts/ml-math)
 
 ## Learning paths
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html)
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

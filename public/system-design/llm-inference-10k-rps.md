@@ -85,13 +85,13 @@ Turn 10K RPS into prompt tokens, generated tokens, concurrent sequences, and a t
 
 ## Repair the mechanisms
 
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html)
-- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html)
-- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html)
-- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency.html)
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware.html)
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory.html)
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing.html)
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines)
+- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching)
+- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention)
+- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency)
+- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory)
+- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)

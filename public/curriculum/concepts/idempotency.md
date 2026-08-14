@@ -38,16 +38,16 @@ Add idempotency-key handling to a mutating endpoint: first request executes and 
 
 ## Prerequisites
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html)
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle)
 
 ## Related concepts
 
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html)
-- [Payments](https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments.html)
+- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq)
+- [Payments](https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)
+- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w)

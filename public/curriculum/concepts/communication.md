@@ -39,4 +39,4 @@ Write a STAR about explaining a technical concept to a non-technical stakeholder
 
 ## Learning paths
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice.html)
+- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice)

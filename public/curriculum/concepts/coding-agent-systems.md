@@ -36,13 +36,13 @@ Repository context, planning, file edits, tools, tests, sandboxes, review loops,
 
 ## Prerequisites
 
-- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling.html)
+- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling)
 
 ## Related concepts
 
-- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling.html)
-- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health.html)
+- [IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling)
+- [Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

@@ -43,14 +43,14 @@ Implement createHandoff(input) returning a JSON-safe object with schemaVersion 1
 
 ## Prerequisites
 
-- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts.html)
+- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts)
 
 ## Related concepts
 
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html)
-- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context.html)
-- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle.html)
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution)
+- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context)
+- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

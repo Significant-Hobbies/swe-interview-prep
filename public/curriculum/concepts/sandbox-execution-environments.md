@@ -37,12 +37,12 @@ Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas,
 
 ## Prerequisites
 
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)
 
 ## Related concepts
 
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics.html)
+- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

@@ -33,13 +33,13 @@ Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, 
 
 ## Prerequisites
 
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html)
+- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines)
 
 ## Related concepts
 
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines.html)
-- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching.html)
+- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines)
+- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)

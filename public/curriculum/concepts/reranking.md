@@ -38,15 +38,15 @@ Retrieve top-5 by BM25, then rerank with scores [0.9,0.2,0.8,0.1,0.7] for query 
 
 ## Prerequisites
 
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25.html)
+- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
 
 ## Related concepts
 
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals.html)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
+- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

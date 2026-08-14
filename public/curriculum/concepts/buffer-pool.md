@@ -39,13 +39,13 @@ Implement simulate(capacity, accesses, policy) returning the number of hits. pol
 
 ## Prerequisites
 
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval.html)
+- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval)
 
 ## Related concepts
 
-- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction.html)
-- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels.html)
+- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction)
+- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels)
 
 ## Learning paths
 
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

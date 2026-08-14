@@ -38,14 +38,14 @@ Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chun
 
 ## Prerequisites
 
-- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html)
+- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention)
 
 ## Related concepts
 
-- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention.html)
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing.html)
+- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention)
+- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing)
 
 ## Learning paths
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor.html)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)
+- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor)

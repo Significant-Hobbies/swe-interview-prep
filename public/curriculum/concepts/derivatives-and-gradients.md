@@ -40,16 +40,16 @@ f(x, y) = x² + 3xy + y². Compute ∇f at (1, 2). In which direction should you
 
 ## Prerequisites
 
-- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces.html)
+- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces)
 
 ## Related concepts
 
-- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization.html)
-- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent.html)
-- [Backpropagation](https://learn.significanthobbies.com/curriculum/concepts/ml-backprop.html)
+- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization)
+- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent)
+- [Backpropagation](https://learn.significanthobbies.com/curriculum/concepts/ml-backprop)
 
 ## Learning paths
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d.html)
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

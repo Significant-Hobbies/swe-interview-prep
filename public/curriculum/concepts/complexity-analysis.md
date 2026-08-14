@@ -45,9 +45,9 @@ Implement pushCount(n): build a dynamic array by pushing n items, doubling capac
 
 ## Related concepts
 
-- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting.html)
-- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search.html)
+- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting)
+- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search)
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

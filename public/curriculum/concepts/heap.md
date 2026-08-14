@@ -53,7 +53,7 @@ LeetCode #621 — Task Scheduler. Solve on LeetCode, then implement here if you 
 
 ## Prerequisites
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing.html)
+- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing)
 
 ## Related concepts
 
@@ -61,4 +61,4 @@ LeetCode #621 — Task Scheduler. Solve on LeetCode, then implement here if you 
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

@@ -41,15 +41,15 @@ List endpoint returns 10M rows. Why offset pagination fails? Sketch cursor on (c
 
 ## Prerequisites
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle.html)
+- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle)
 
 ## Related concepts
 
-- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems.html)
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)

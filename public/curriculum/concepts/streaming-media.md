@@ -34,9 +34,9 @@ Design a video-on-demand service: catalog browse, adaptive bitrate streaming, CD
 
 ## Prerequisites
 
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation.html)
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping.html)
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching.html)
+- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation)
+- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping)
+- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching)
 
 ## Related concepts
 
@@ -44,4 +44,4 @@ Design a video-on-demand service: catalog browse, adaptive bitrate streaming, CD
 
 ## Learning paths
 
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

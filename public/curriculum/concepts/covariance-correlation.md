@@ -42,16 +42,16 @@ Given 3 aligned series (n=20 each), compute the 3×3 sample covariance matrix an
 
 ## Prerequisites
 
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics.html)
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables.html)
+- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics)
+- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables)
 
 ## Related concepts
 
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics.html)
-- [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics.html)
-- [PCA & Projection](https://learn.significanthobbies.com/curriculum/concepts/pca-projection.html)
+- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics)
+- [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics)
+- [PCA & Projection](https://learn.significanthobbies.com/curriculum/concepts/pca-projection)
 
 ## Learning paths
 
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d.html)
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w.html)
+- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d)
+- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w)

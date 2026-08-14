@@ -37,13 +37,13 @@ Symbols, references, calls, imports, ownership, data flow, build targets, and gr
 
 ## Prerequisites
 
-- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure.html)
+- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure)
 
 ## Related concepts
 
-- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure.html)
-- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius.html)
+- [Testing Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure)
+- [Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius)
 
 ## Learning paths
 
-- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w.html)
+- [12-Week Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/roadmaps/developer-tools-12w)

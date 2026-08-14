@@ -42,13 +42,13 @@ User logs out. Session store vs JWT blacklist vs short TTL+refresh — pick one 
 
 ## Prerequisites
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
 
 ## Related concepts
 
-- [API Keys](https://learn.significanthobbies.com/curriculum/concepts/api-keys.html)
+- [API Keys](https://learn.significanthobbies.com/curriculum/concepts/api-keys)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

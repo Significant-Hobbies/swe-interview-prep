@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Search &amp; IR | SWE Prep</title>
     <meta name="description" content="Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.">
-    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/search-ir.html">
+    <link rel="canonical" href="https://learn.significanthobbies.com/curriculum/tracks/search-ir">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="Search &amp; IR | SWE Prep">
     <meta property="og:description" content="Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.">
-    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/search-ir.html">
+    <meta property="og:url" content="https://learn.significanthobbies.com/curriculum/tracks/search-ir">
     <meta property="og:image" content="https://learn.significanthobbies.com/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Search &amp; IR | SWE Prep">
     <meta name="twitter:description" content="Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.">
     <meta name="twitter:image" content="https://learn.significanthobbies.com/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Search & IR","description":"Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.","url":"https://learn.significanthobbies.com/curriculum/tracks/search-ir.html","numberOfItems":13,"hasPart":[{"@type":"LearningResource","name":"Tokenization","url":"https://learn.significanthobbies.com/curriculum/concepts/tokenization.html"},{"@type":"LearningResource","name":"Inverted Index","url":"https://learn.significanthobbies.com/curriculum/concepts/inverted-index.html"},{"@type":"LearningResource","name":"TF-IDF","url":"https://learn.significanthobbies.com/curriculum/concepts/tf-idf.html"},{"@type":"LearningResource","name":"BM25","url":"https://learn.significanthobbies.com/curriculum/concepts/bm25.html"},{"@type":"LearningResource","name":"Ranking Metrics","url":"https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics.html"},{"@type":"LearningResource","name":"Search Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/search-evals.html"},{"@type":"LearningResource","name":"Hybrid Search","url":"https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html"},{"@type":"LearningResource","name":"Reranking","url":"https://learn.significanthobbies.com/curriculum/concepts/reranking.html"},{"@type":"LearningResource","name":"Query Rewriting","url":"https://learn.significanthobbies.com/curriculum/concepts/query-rewriting.html"},{"@type":"LearningResource","name":"Search Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/search-discovery.html"},{"@type":"LearningResource","name":"Top-k Pruning (WAND)","url":"https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning.html"},{"@type":"LearningResource","name":"Learning to Rank","url":"https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank.html"},{"@type":"LearningResource","name":"Click Models & Position Bias","url":"https://learn.significanthobbies.com/curriculum/concepts/click-models.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Search & IR","description":"Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.","url":"https://learn.significanthobbies.com/curriculum/tracks/search-ir","numberOfItems":13,"hasPart":[{"@type":"LearningResource","name":"Tokenization","url":"https://learn.significanthobbies.com/curriculum/concepts/tokenization"},{"@type":"LearningResource","name":"Inverted Index","url":"https://learn.significanthobbies.com/curriculum/concepts/inverted-index"},{"@type":"LearningResource","name":"TF-IDF","url":"https://learn.significanthobbies.com/curriculum/concepts/tf-idf"},{"@type":"LearningResource","name":"BM25","url":"https://learn.significanthobbies.com/curriculum/concepts/bm25"},{"@type":"LearningResource","name":"Ranking Metrics","url":"https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics"},{"@type":"LearningResource","name":"Search Evals","url":"https://learn.significanthobbies.com/curriculum/concepts/search-evals"},{"@type":"LearningResource","name":"Hybrid Search","url":"https://learn.significanthobbies.com/curriculum/concepts/hybrid-search"},{"@type":"LearningResource","name":"Reranking","url":"https://learn.significanthobbies.com/curriculum/concepts/reranking"},{"@type":"LearningResource","name":"Query Rewriting","url":"https://learn.significanthobbies.com/curriculum/concepts/query-rewriting"},{"@type":"LearningResource","name":"Search Systems","url":"https://learn.significanthobbies.com/curriculum/concepts/search-discovery"},{"@type":"LearningResource","name":"Top-k Pruning (WAND)","url":"https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning"},{"@type":"LearningResource","name":"Learning to Rank","url":"https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank"},{"@type":"LearningResource","name":"Click Models & Position Bias","url":"https://learn.significanthobbies.com/curriculum/concepts/click-models"}]}</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -60,61 +60,61 @@
     </section>
     <section>
       <h2>Roadmaps</h2>
-      <ul class="link-list"><li><a href="/curriculum/roadmaps/reset-9-day.html">9-Day Reset</a></li><li><a href="/curriculum/roadmaps/retrieval-30-day.html">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day.html">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month.html">12-Month Advanced AI Infrastructure</a></li></ul>
+      <ul class="link-list"><li><a href="/curriculum/roadmaps/reset-9-day">9-Day Reset</a></li><li><a href="/curriculum/roadmaps/retrieval-30-day">30-Day Retrieval Basics</a></li><li><a href="/curriculum/roadmaps/ai-search-infra-90-day">90-Day AI Search &amp; Infrastructure</a></li><li><a href="/curriculum/roadmaps/ai-infra-12-month">12-Month Advanced AI Infrastructure</a></li></ul>
     </section>
     <section>
       <h2>Concepts in this track</h2>
       <div class="card-grid"><article class="card">
         <p class="eyebrow">intro</p>
-        <h3><a href="/curriculum/concepts/tokenization.html">Tokenization</a></h3>
+        <h3><a href="/curriculum/concepts/tokenization">Tokenization</a></h3>
         <p>Splitting text into terms: lowercasing, stemming, stop words, n-grams.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/inverted-index.html">Inverted Index</a></h3>
+        <h3><a href="/curriculum/concepts/inverted-index">Inverted Index</a></h3>
         <p>Term → posting list mapping that powers fast keyword lookup.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/tf-idf.html">TF-IDF</a></h3>
+        <h3><a href="/curriculum/concepts/tf-idf">TF-IDF</a></h3>
         <p>Term frequency × inverse document frequency weighting for relevance.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/bm25.html">BM25</a></h3>
+        <h3><a href="/curriculum/concepts/bm25">BM25</a></h3>
         <p>The standard lexical ranking function: TF saturation + IDF + length normalization.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/ranking-metrics.html">Ranking Metrics</a></h3>
+        <h3><a href="/curriculum/concepts/ranking-metrics">Ranking Metrics</a></h3>
         <p>Precision, recall, MRR, and nDCG for measuring retrieval quality.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/search-evals.html">Search Evals</a></h3>
+        <h3><a href="/curriculum/concepts/search-evals">Search Evals</a></h3>
         <p>Building a labelled query set and harness to compare retrieval approaches.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/hybrid-search.html">Hybrid Search</a></h3>
+        <h3><a href="/curriculum/concepts/hybrid-search">Hybrid Search</a></h3>
         <p>Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/reranking.html">Reranking</a></h3>
+        <h3><a href="/curriculum/concepts/reranking">Reranking</a></h3>
         <p>A second-stage cross-encoder pass that reorders the top-k candidates.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/query-rewriting.html">Query Rewriting</a></h3>
+        <h3><a href="/curriculum/concepts/query-rewriting">Query Rewriting</a></h3>
         <p>Expanding, correcting, and normalizing queries before retrieval.</p>
       </article><article class="card">
         <p class="eyebrow">core</p>
-        <h3><a href="/curriculum/concepts/search-discovery.html">Search Systems</a></h3>
+        <h3><a href="/curriculum/concepts/search-discovery">Search Systems</a></h3>
         <p>Inverted index, ranking, autocomplete at scale.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/top-k-pruning.html">Top-k Pruning (WAND)</a></h3>
+        <h3><a href="/curriculum/concepts/top-k-pruning">Top-k Pruning (WAND)</a></h3>
         <p>WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/learning-to-rank.html">Learning to Rank</a></h3>
+        <h3><a href="/curriculum/concepts/learning-to-rank">Learning to Rank</a></h3>
         <p>Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.</p>
       </article><article class="card">
         <p class="eyebrow">advanced</p>
-        <h3><a href="/curriculum/concepts/click-models.html">Click Models &amp; Position Bias</a></h3>
+        <h3><a href="/curriculum/concepts/click-models">Click Models &amp; Position Bias</a></h3>
         <p>Why clicks are not relevance labels, and how to debias implicit feedback.</p>
       </article></div>
     </section>

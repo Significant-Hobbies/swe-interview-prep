@@ -35,12 +35,12 @@ Worker crashes after processing but before ACK. What happens on redelivery? How 
 
 ## Prerequisites
 
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues.html)
+- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues)
 
 ## Related concepts
 
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html)
+- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

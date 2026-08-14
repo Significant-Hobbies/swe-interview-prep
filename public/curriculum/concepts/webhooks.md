@@ -30,11 +30,11 @@ Body b, secret s, header HMAC-SHA256(s,b). Constant-time compare. Why reject if 
 
 ## Prerequisites
 
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq.html)
+- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq)
 
 ## Related concepts
 
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency.html)
+- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency)
 
 ## Learning paths
 

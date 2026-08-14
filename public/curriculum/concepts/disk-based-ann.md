@@ -39,13 +39,13 @@ Implement queryCost({hops, neighboursPerHop, cachedFraction, readLatencyUs, comp
 
 ## Prerequisites
 
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
 
 ## Related concepts
 
-- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization.html)
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy.html)
+- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization)
+- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

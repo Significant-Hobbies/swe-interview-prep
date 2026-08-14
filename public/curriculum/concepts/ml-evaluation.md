@@ -36,14 +36,14 @@ LM benchmark: PPX dropped 5% but exact-match QA accuracy flat. What does that im
 
 ## Prerequisites
 
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora.html)
-- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling.html)
+- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora)
+- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling)
 
 ## Related concepts
 
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
 
 ## Learning paths
 
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w.html)
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w.html)
+- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w)
+- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w)

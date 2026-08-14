@@ -34,13 +34,13 @@ Pick a real landing page (not your own). Score it against: clear hero (3s rule),
 
 ## Prerequisites
 
-- [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning.html)
+- [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning)
 
 ## Related concepts
 
-- [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo.html)
-- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics.html)
+- [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo)
+- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

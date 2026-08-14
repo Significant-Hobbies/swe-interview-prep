@@ -33,13 +33,13 @@ Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and re
 
 ## Prerequisites
 
-- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html)
+- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments)
 
 ## Related concepts
 
-- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments.html)
-- [Infrastructure Automation](https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation.html)
+- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments)
+- [Infrastructure Automation](https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation)
 
 ## Learning paths
 
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w.html)
+- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w)

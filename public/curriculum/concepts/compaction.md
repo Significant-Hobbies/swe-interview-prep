@@ -41,13 +41,13 @@ L0 has 4 SSTables, threshold 4 triggers compaction to L1. Why not compact every 
 
 ## Prerequisites
 
-- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree.html)
+- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree)
 
 ## Related concepts
 
-- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal.html)
+- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first)

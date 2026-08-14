@@ -44,16 +44,16 @@ Classify queries: "2+2" → small model; "design payment system" → large model
 
 ## Prerequisites
 
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs.html)
+- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs)
 
 ## Related concepts
 
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals.html)
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning.html)
+- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
+- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning)
 
 ## Learning paths
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w.html)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w)

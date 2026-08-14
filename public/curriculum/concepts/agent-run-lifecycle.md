@@ -43,15 +43,15 @@ Implement transitionRun(state, event). Valid states are queued, running, checkin
 
 ## Prerequisites
 
-- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html)
-- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html)
+- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs)
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control)
 
 ## Related concepts
 
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution.html)
-- [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents.html)
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification.html)
+- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution)
+- [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents)
+- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

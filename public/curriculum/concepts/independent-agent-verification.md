@@ -43,15 +43,15 @@ Implement checkerVerdict(contract, makerReport, observations). contract contains
 
 ## Prerequisites
 
-- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control.html)
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing.html)
+- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control)
+- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing)
 
 ## Related concepts
 
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
-- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation.html)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
+- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

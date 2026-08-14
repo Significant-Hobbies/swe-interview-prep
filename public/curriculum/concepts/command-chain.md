@@ -30,7 +30,7 @@ Design undo/redo for a text editor using the Command pattern. Each user action b
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Design undo/redo for a text editor using the Command pattern. Each user action b
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

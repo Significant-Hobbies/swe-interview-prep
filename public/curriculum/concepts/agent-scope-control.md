@@ -43,14 +43,14 @@ Implement scopeDecision(contract, observation). contract contains allowedRoots, 
 
 ## Prerequisites
 
-- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs.html)
+- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs)
 
 ## Related concepts
 
-- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems.html)
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability.html)
-- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing.html)
+- [Coding Agent Systems](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems)
+- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability)
+- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing)
 
 ## Learning paths
 
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering.html)
+- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering)

@@ -47,18 +47,18 @@ Chunk a small document set, embed and index it, retrieve for a query, pack conte
 
 ## Prerequisites
 
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings.html)
+- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings)
 
 ## Related concepts
 
-- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking.html)
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search.html)
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html)
-- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing.html)
+- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking)
+- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking)
+- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing)
 
 ## Learning paths
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month.html)
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice.html)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)
+- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice)

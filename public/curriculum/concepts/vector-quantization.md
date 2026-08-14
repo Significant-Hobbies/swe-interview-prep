@@ -39,14 +39,14 @@ Implement quantize(vec, min, max) mapping each float to an int in 0..255, dequan
 
 ## Prerequisites
 
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity.html)
+- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity)
 
 ## Related concepts
 
-- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization.html)
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw.html)
+- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization)
+- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
 
 ## Learning paths
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day.html)
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day.html)
+- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day)
+- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day)

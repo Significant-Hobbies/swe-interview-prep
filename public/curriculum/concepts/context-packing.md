@@ -34,12 +34,12 @@ Budget 800 tokens. Chunks A=300,B=400,C=250 relevance [0.9,0.85,0.7]. Greedy pac
 
 ## Prerequisites
 
-- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking.html)
+- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking)
 
 ## Related concepts
 
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag.html)
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking.html)
+- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
+- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking)
 
 ## Learning paths
 

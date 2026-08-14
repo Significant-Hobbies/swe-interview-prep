@@ -39,14 +39,14 @@ Implement page(rows, cursor, limit) for keyset pagination. Rows are {id, created
 
 ## Prerequisites
 
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design.html)
+- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design)
 
 ## Related concepts
 
-- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index.html)
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting.html)
+- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index)
+- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting)
 
 ## Learning paths
 
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape.html)
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

@@ -38,4 +38,4 @@ gcd(48,18)? What is (7^10) mod 13 via repeated squaring?
 
 ## Learning paths
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice.html)
+- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice)

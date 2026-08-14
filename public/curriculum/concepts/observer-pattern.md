@@ -30,7 +30,7 @@ Build an in-memory event bus: publishers fire events, subscribers register handl
 
 ## Prerequisites
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling.html)
+- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling)
 
 ## Related concepts
 
@@ -38,4 +38,4 @@ Build an in-memory event bus: publishers fire events, subscribers register handl
 
 ## Learning paths
 
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice.html)
+- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice)

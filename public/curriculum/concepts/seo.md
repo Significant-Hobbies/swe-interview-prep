@@ -37,8 +37,8 @@ Pick a page on a real product site. Audit: title tag, meta description, H1, inte
 
 ## Related concepts
 
-- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html)
+- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)

@@ -37,8 +37,8 @@ Write a 2-sentence positioning statement for a product you use, using the form: 
 
 ## Related concepts
 
-- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages.html)
+- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages)
 
 ## Learning paths
 
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w.html)
+- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w)
