@@ -8,7 +8,7 @@ export const SYSTEM_DESIGN_STAGE_IDS = [
 ] as const;
 
 export type SystemDesignStageId = (typeof SYSTEM_DESIGN_STAGE_IDS)[number];
-export type PublicationState = 'practice-only' | 'approved';
+type PublicationState = 'practice-only' | 'approved';
 
 export const SYSTEM_DESIGN_CATEGORIES = [
   { id: 'ai-systems', label: 'AI systems' },
@@ -72,7 +72,7 @@ export interface SystemDesignSource {
   kind: 'paper' | 'official-doc' | 'standard';
 }
 
-export interface StudyGuideSection {
+interface StudyGuideSection {
   heading: string;
   body: string;
 }

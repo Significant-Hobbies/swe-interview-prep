@@ -37,6 +37,7 @@ pnpm test           # vitest run
 pnpm test:e2e       # playwright test
 pnpm lint           # biome check .
 pnpm typecheck      # tsc --noEmit
+pnpm quality        # full non-regression code-health and release-readiness gate
 pnpm ready          # env + tests + build + secret audit (pre-deploy gate)
 pnpm docs:validate  # validate the docs/ tree (no install required)
 ```

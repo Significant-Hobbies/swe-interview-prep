@@ -9,7 +9,10 @@ pnpm test:coverage     # vitest run --coverage
 ```
 
 Config: `vitest.config.ts`. DOM environment: `happy-dom`. Coverage output:
-`coverage/` (gitignored).
+`coverage/` (gitignored). Coverage measures all production TypeScript and
+JavaScript under `src/`, `api/`, `handlers/`, `shared/`, and `functions/`, not
+only files already imported by tests. The checked-in floors preserve the
+measured baseline and must not fall.
 
 Collocated tests live next to their source: `*.test.ts` / `*.test.tsx` in
 `src/lib/`, `src/hooks/`, `src/data/`, `src/pages/`, and `shared/lib/`. The
@@ -56,8 +59,8 @@ The CI workflow runs `pnpm run size` after the build.
 ## CI
 
 See [`../operations/ci.md`](../operations/ci.md) for what runs on every push
-and PR. The short version: lint → test → build (with a placeholder
-`VITE_GOOGLE_CLIENT_ID`) → bundle-size check.
+and PR. The short version is `pnpm quality`, with a placeholder
+`VITE_GOOGLE_CLIENT_ID` for the production build.
 
 ## Known gaps
 

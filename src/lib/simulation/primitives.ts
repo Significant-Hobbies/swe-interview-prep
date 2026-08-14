@@ -132,13 +132,3 @@ export function projectHealth(input: HealthProjectionInput): TransitionDraft {
     ],
   };
 }
-
-export function branchByControls<T extends { controls: Record<string, ScalarValue> }>(
-  candidates: T[],
-  controls: Record<string, ScalarValue>
-): T | undefined {
-  return candidates.find((candidate) => {
-    const keys = new Set([...Object.keys(candidate.controls), ...Object.keys(controls)]);
-    return [...keys].every((key) => candidate.controls[key] === controls[key]);
-  });
-}

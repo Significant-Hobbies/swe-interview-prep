@@ -2,13 +2,13 @@ import type { RubricDimension, SystemDesignCase } from '../data/system-design-ca
 import type { MasteryRating } from './fsrs';
 import type { SystemDesignAttempt } from './systemDesignSession';
 
-export type SystemDesignReadinessBand =
+type SystemDesignReadinessBand =
   | 'interview-ready'
   | 'strong-with-gaps'
   | 'developing'
   | 'rebuild-foundations';
 
-export interface SystemDesignDimensionReview {
+interface SystemDesignDimensionReview {
   dimensionId: string;
   label: string;
   score: 0 | 1 | 2 | 3;
@@ -18,7 +18,7 @@ export interface SystemDesignDimensionReview {
   anchor: string;
 }
 
-export interface SystemDesignRemediation {
+interface SystemDesignRemediation {
   concepts: { conceptId: string; rating: MasteryRating; dimensionId: string }[];
   drillIds: string[];
 }
@@ -88,7 +88,7 @@ function overallScore(dimensions: SystemDesignDimensionReview[]) {
   );
 }
 
-export function remediationFromDimensions(
+function remediationFromDimensions(
   caseDefinition: SystemDesignCase,
   dimensions: SystemDesignDimensionReview[]
 ): SystemDesignRemediation {
@@ -214,7 +214,7 @@ export function validateSystemDesignAiReview(
   return candidate as SystemDesignAiReview;
 }
 
-export function mergeSystemDesignAiReview(
+function mergeSystemDesignAiReview(
   caseDefinition: SystemDesignCase,
   local: SystemDesignReview,
   ai: SystemDesignAiReview

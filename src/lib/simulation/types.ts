@@ -63,12 +63,12 @@ export interface TransitionDefinition {
   next: string | null;
 }
 
-export interface PredictionOption {
+interface PredictionOption {
   id: string;
   label: string;
 }
 
-export interface ExpectedOutcome {
+interface ExpectedOutcome {
   summary: string;
   actorStates: Partial<Record<string, ActorStatus>>;
   evidenceIds: string[];
@@ -87,29 +87,29 @@ export interface ScenarioDefinition {
   expectedOutcome: ExpectedOutcome;
 }
 
-export interface ControlOption {
+interface ControlOption {
   value: ScalarValue;
   label: string;
 }
 
-export interface ControlDefinition {
+interface ControlDefinition {
   id: string;
   label: string;
   description: string;
   options: ControlOption[];
 }
 
-export interface SourceReference {
+interface SourceReference {
   label: string;
   href: string;
   note: string;
 }
 
-export type FidelityLevel = 'modeled' | 'source-verified' | 'oracle-verified';
+type FidelityLevel = 'modeled' | 'source-verified' | 'oracle-verified';
 
-export type VerificationMethod = 'source-review' | 'upstream-test-vector' | 'executable-oracle';
+type VerificationMethod = 'source-review' | 'upstream-test-vector' | 'executable-oracle';
 
-export interface UpstreamProvenance {
+interface UpstreamProvenance {
   id: string;
   project: string;
   repository: string;
@@ -121,12 +121,12 @@ export interface UpstreamProvenance {
   note: string;
 }
 
-export interface LabFidelity {
+interface LabFidelity {
   level: FidelityLevel;
   summary: string;
 }
 
-export interface ConfigurationFileDefinition {
+interface ConfigurationFileDefinition {
   id: string;
   label: string;
   path: string;
@@ -199,7 +199,7 @@ export interface EvidenceRecord extends EvidenceDefinition {
   sequence: number;
 }
 
-export interface EventRecord {
+interface EventRecord {
   transitionId: string;
   actorId: string;
   title: string;
@@ -208,7 +208,7 @@ export interface EventRecord {
   sequence: number;
 }
 
-export type SimulationPhase = 'ready' | 'running' | 'paused' | 'complete';
+type SimulationPhase = 'ready' | 'running' | 'paused' | 'complete';
 
 export interface SimulationSnapshot {
   labId: string;
@@ -239,7 +239,7 @@ export interface SimulationReplayV1 {
   finalSnapshotFingerprint: string;
 }
 
-export interface SourceContractAssertion {
+interface SourceContractAssertion {
   path: string;
   expected: ScalarValue;
   note: string;

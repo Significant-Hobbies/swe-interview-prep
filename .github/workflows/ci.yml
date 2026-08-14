@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -30,15 +32,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Lint
-        run: pnpm lint
+      - name: Setup Python complexity tooling
+        uses: astral-sh/setup-uv@v7
 
-      - name: Test
-        run: pnpm test
-
-      - name: Build
-        run: pnpm build
+      - name: Quality gate
+        run: pnpm quality
         env:
           VITE_GOOGLE_CLIENT_ID: ci-placeholder.apps.googleusercontent.com
-      - name: Check bundle size
-        run: pnpm run size
