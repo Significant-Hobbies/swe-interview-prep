@@ -59,6 +59,28 @@ describe('public curriculum publication', () => {
     expect(homepage).toContain("window.location.pathname === '/'");
   });
 
+  it('pins the shell styles the async stylesheet would otherwise reflow', () => {
+    // The app stylesheet loads asynchronously, so the shell paints under UA
+    // defaults first. Every value Tailwind's preflight would change afterwards
+    // has to be pinned in the head, or the shell reflows on arrival — that is
+    // the 0.117 desktop CLS from #42. Selectors are `#lcp-shell <tag>` so they
+    // outrank preflight regardless of load order.
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+    const head = homepage.slice(0, homepage.indexOf('</head>'));
+
+    for (const rule of [
+      '#lcp-shell *::after',
+      'box-sizing: border-box',
+      'font-family',
+      'line-height: 1.5',
+      '#lcp-shell p',
+      '#lcp-shell h2',
+      '#lcp-shell ul',
+    ]) {
+      expect(head).toContain(rule);
+    }
+  });
+
   it('includes every generated page exactly once in the sitemap', () => {
     const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
     for (const path of manifest.htmlPaths) {
