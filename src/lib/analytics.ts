@@ -1,10 +1,10 @@
 /**
- * Owner-facing analytics — the fixed 4-event taxonomy.
+ * Owner-facing analytics — the fixed 5-event taxonomy.
  *
- * EVERY fleet project emits exactly these four events — `signup`, `activated`,
- * `core_action`, `returned` — so a single PostHog project can build one
- * cross-fleet funnel (signup -> activated -> core_action) and a D1/D7
- * retention insight, with no custom dashboard.
+ * EVERY fleet project emits exactly these five events — `signup`, `activated`,
+ * `core_action`, `returned`, `page_view` — so a single PostHog project can
+ * build one cross-fleet funnel (signup -> activated -> core_action) and a
+ * D1/D7 retention insight, with no custom dashboard.
  *
  * Every event carries a `project_id` property. This is what makes per-app and
  * cross-fleet views possible from one PostHog login.
@@ -47,7 +47,7 @@ export type SystemsLabStage =
 
 /**
  * The fixed taxonomy. Do NOT add events here — the whole point is that all
- * fleet projects emit the same four. Product-specific detail goes in
+ * fleet projects emit the same five. Product-specific detail goes in
  * `CoreAction` (or as extra properties), never as a new top-level event name.
  */
 interface AnalyticsEventMap {
@@ -59,6 +59,8 @@ interface AnalyticsEventMap {
   core_action: { project_id: typeof PROJECT; action: CoreAction };
   /** A return session by a user with prior activity. */
   returned: { project_id: typeof PROJECT };
+  /** A page view, tracked manually on route change with the project_id. */
+  page_view: { project_id: typeof PROJECT };
 }
 
 export function trackEvent(event: string, properties: Record<string, unknown> = {}): void {
@@ -126,4 +128,9 @@ export function trackSystemsLabAction(
 /** Fire on session start for a user who has prior activity. */
 export function trackReturned(): void {
   emit('returned', {});
+}
+
+/** Fire on each route change to record a page view with the project_id. */
+export function trackPageView(): void {
+  emit('page_view', {});
 }
