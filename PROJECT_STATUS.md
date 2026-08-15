@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-08-14
+Last updated: 2026-08-15
 
 ## Why/What
 
@@ -116,6 +116,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 - CI-enforced Fleet code-health ratchets across coverage, dead code, complexity, duplication, cycles, dependency advisories, suppression markers, documentation, builds, bundle size, and repository hygiene.
 - Fleet Ultracite lint baseline for core TypeScript, React, and Vitest code with a clean 345-file check.
 - Cloudflare Pages static frontend + Pages Functions backend in production architecture.
+- **Core Web Vitals on the public root:** the generated curriculum summary is the initial-response shell and the LCP element on `/`, held until the lazy destination route commits, with its styles pinned against the asynchronously loaded stylesheet. Production five-run measurement: mobile-mid p75 LCP 1.22 s and CLS 0.010, desktop 656 ms and CLS 0.002, performance score 100 on both.
 - Cloudflare D1 persistence for problems, notes, chats, and authenticated progress.
 - Google One Tap auth with httpOnly JWT cookie issuance.
 - R2-backed Go WASM interpreter for in-browser code execution path.

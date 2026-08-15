@@ -5,7 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
-import { trackReturned, trackSignup } from './lib/analytics';
+import { trackPageView, trackReturned, trackSignup } from './lib/analytics';
 import { focusedRoute } from './lib/focusedRoute';
 import { loadLocal, STORE_KEYS } from './lib/userStore';
 
@@ -183,6 +183,13 @@ export default function App() {
       /* noop */
     }
   }, []);
+
+  // Manually track page_view on every route change. PostHog's built-in
+  // capture_pageview is disabled (see foundry-monitoring.ts) so we can attach
+  // the project_id property to every page view.
+  useEffect(() => {
+    trackPageView();
+  }, [location.pathname]);
 
   /**
    * Nobody is asked to sign in to use this.
