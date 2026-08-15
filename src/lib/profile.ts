@@ -140,13 +140,6 @@ export function minutesLabel(m: number): string {
         : '45 min · standard';
 }
 
-/** ELO offset so drill picker matches experience level. */
-export function experienceEloOffset(e: ExperienceLevel): number {
-  if (e === 'student') return -200;
-  if (e === 'senior') return 200;
-  return 0;
-}
-
 /** Shift modality mix toward learn for students, drill for seniors. */
 export function adjustWeightsForExperience(
   weights: ModalityWeights,

@@ -87,13 +87,6 @@ export const ROADMAP_GROUPS: RoadmapGroup[] = [
   },
 ];
 
-const GROUPED_IDS = new Set(ROADMAP_GROUPS.flatMap((g) => g.roadmapIds));
-
-/** Roadmaps not in any group (should be empty; fallback for new entries). */
-export function ungroupedRoadmaps(all: Roadmap[]): Roadmap[] {
-  return all.filter((r) => !GROUPED_IDS.has(r.id));
-}
-
 export function roadmapsInGroup(group: RoadmapGroup): Roadmap[] {
   return group.roadmapIds.map((id) => ROADMAP_BY_ID[id]).filter((r): r is Roadmap => Boolean(r));
 }

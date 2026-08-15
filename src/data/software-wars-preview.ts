@@ -14,7 +14,7 @@ const WAR_TOPIC_OPTIONS = [
   { label: 'Security', slug: 'security' },
 ] as const;
 
-export type WarTopic = (typeof WAR_TOPIC_OPTIONS)[number]['label'];
+type WarTopic = (typeof WAR_TOPIC_OPTIONS)[number]['label'];
 
 export interface PreviewQuestion {
   id: string;
@@ -27,12 +27,6 @@ export interface PreviewQuestion {
   explanation: string;
   concept: string;
   source: { title: string; url: string };
-}
-
-export const WAR_TOPICS: WarTopic[] = WAR_TOPIC_OPTIONS.map(({ label }) => label);
-
-export function warTopicSlug(topic: WarTopic): string {
-  return WAR_TOPIC_OPTIONS.find(({ label }) => label === topic)?.slug ?? 'ranked_mix';
 }
 
 /**

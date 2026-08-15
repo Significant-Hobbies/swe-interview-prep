@@ -42,7 +42,7 @@ export interface LeaderboardEntry {
   losses: number;
 }
 
-export const PREVIEW_STATUS: WarsStatus = {
+const PREVIEW_STATUS: WarsStatus = {
   enabled: true,
   blitzPreviewEnabled: true,
   blitzRankedEnabled: false,
@@ -308,10 +308,6 @@ export interface TradeoffState {
   ownVote: 'win' | 'draw' | 'loss' | null;
   result: 'side_a' | 'side_b' | 'draw' | null;
   noShowClaimAvailableTo: 'side_a' | 'side_b' | null;
-}
-
-export async function getTradeoffRoom(matchId: string) {
-  return request<TradeoffRoom>(`/tradeoff/matches/${encodeURIComponent(matchId)}`);
 }
 
 export async function checkInTradeoff(matchId: string) {

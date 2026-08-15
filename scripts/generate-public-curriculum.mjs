@@ -206,7 +206,7 @@ function tagPills(values) {
     .join('')}</div>`;
 }
 
-function conceptPage(concept) {
+function resolveConceptRelations(concept) {
   const tracks = concept.tags.map((id) => tracksById.get(id)).filter(Boolean);
   const roadmaps = concept.roadmaps
     .map((id) => ROADMAPS.find((item) => item.id === id))
@@ -217,6 +217,12 @@ function conceptPage(concept) {
   const related = concept.related.map((id) => conceptsById.get(id)).filter(Boolean);
   const artifacts = (concept.artifacts ?? []).map((id) => artifactsById.get(id)).filter(Boolean);
   const resources = concept.resources ?? [];
+  return { tracks, roadmaps, drills, reviews, prerequisites, related, artifacts, resources };
+}
+
+function conceptPage(concept) {
+  const { tracks, roadmaps, drills, reviews, prerequisites, related, artifacts, resources } =
+    resolveConceptRelations(concept);
   const primaryTrack = tracks[0];
   const relatedNames = related.slice(0, 4).map((item) => item.name);
   const drillNames = drills.slice(0, 3).map((item) => item.title);
@@ -1114,16 +1120,8 @@ ${milestones}
 }
 
 function conceptMarkdown(concept) {
-  const tracks = concept.tags.map((id) => tracksById.get(id)).filter(Boolean);
-  const roadmaps = concept.roadmaps
-    .map((id) => ROADMAPS.find((item) => item.id === id))
-    .filter(Boolean);
-  const drills = (concept.drills ?? []).map((id) => drillsById.get(id)).filter(Boolean);
-  const reviews = (concept.reviewQuestions ?? []).map((id) => reviewsById.get(id)).filter(Boolean);
-  const prerequisites = concept.prerequisites.map((id) => conceptsById.get(id)).filter(Boolean);
-  const related = concept.related.map((id) => conceptsById.get(id)).filter(Boolean);
-  const artifacts = (concept.artifacts ?? []).map((id) => artifactsById.get(id)).filter(Boolean);
-  const resources = concept.resources ?? [];
+  const { tracks, roadmaps, drills, reviews, prerequisites, related, artifacts, resources } =
+    resolveConceptRelations(concept);
 
   return `# ${concept.name}
 

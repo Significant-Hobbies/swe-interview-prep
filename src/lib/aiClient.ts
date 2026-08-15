@@ -1,7 +1,5 @@
-// Client wrappers for the BYOK AI endpoints (Gap Analyzer, Review Critic).
-import { ARTIFACTS } from '../data/learning-os';
+// Client wrappers for the BYOK AI endpoints (Review Critic).
 import { loadAIConfig } from '../hooks/useAI';
-import { ALL_CONCEPTS } from '../hooks/useConcepts';
 import type { SystemDesignCase } from '../data/system-design-case-schema';
 import type { SystemDesignAttempt } from './systemDesignSession';
 
@@ -9,14 +7,6 @@ import type { SystemDesignAttempt } from './systemDesignSession';
 export function aiConfigured(): boolean {
   const c = loadAIConfig();
   return !!(c.endpointUrl && c.apiKey && c.model);
-}
-
-export interface GapAnalysis {
-  summary: string;
-  weakAreas: string[];
-  nextConcepts: { conceptId: string; why: string }[];
-  recommendedArtifact: { artifactId: string; why: string };
-  generator?: 'heuristic' | 'ai';
 }
 
 export interface Critique {
@@ -42,16 +32,6 @@ async function postAI<T>(action: string, body: Record<string, unknown>): Promise
   }
   if (!res.ok) throw new Error(data.error || `AI request failed (${res.status}).`);
   return data as T;
-}
-
-export function analyzeGaps(profile: Record<string, unknown>): Promise<GapAnalysis> {
-  return postAI<GapAnalysis>('gaps', {
-    profile,
-    catalog: {
-      concepts: ALL_CONCEPTS.map((c) => ({ id: c.id, name: c.name, tags: c.tags })),
-      artifacts: ARTIFACTS.map((a) => ({ id: a.id, title: a.title })),
-    },
-  });
 }
 
 export function critiqueAnswer(

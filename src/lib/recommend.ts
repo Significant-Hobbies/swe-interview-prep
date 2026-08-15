@@ -10,11 +10,9 @@ import {
   type Roadmap,
 } from '../data/learning-os';
 import { ALL_CONCEPTS, type Concept, type MasteryEntry } from '../hooks/useConcepts';
-import type { DrillEntry } from '../hooks/useUserStore';
 import { isSchedulableReviewQuestion } from './contentQuality';
 import { deriveConceptStatus, isDue } from './conceptState';
 import { type GateContext, conceptAccessible } from './gates';
-import { type ExperienceLevel, experienceEloOffset } from './profile';
 
 const PREREQ_THRESHOLD = 0.4;
 const ACTIVE_ROADMAP_KEY = 'swe-os:active-roadmap';
@@ -129,37 +127,4 @@ export function weakConcepts(mastery: Record<string, MasteryEntry>, limit = 6): 
   return ALL_CONCEPTS.filter((c) => mastery[c.id] && (mastery[c.id].confidence ?? 1) < 0.6)
     .sort((a, b) => (mastery[a.id]?.confidence ?? 0) - (mastery[b.id]?.confidence ?? 0))
     .slice(0, limit);
-}
-
-/** Practice drill picker — editorial drills only, aligned to today concept when possible. */
-export function pickPracticeDrill(
-  drillState: Record<string, DrillEntry>,
-  getElo: (roadmapId: string) => number,
-  todayConceptId?: string | null,
-  experience: ExperienceLevel = 'mid'
-): Drill | null {
-  const pool = EDITORIAL_DRILLS.filter(
-    (d) => (drillState[d.id]?.status ?? 'unsolved') !== 'solved'
-  );
-  if (!pool.length) return null;
-
-  if (todayConceptId) {
-    const match = pool.find((d) => d.conceptId === todayConceptId);
-    if (match) return match;
-  }
-
-  const eloOffset = experienceEloOffset(experience);
-  const ranked = pool
-    .map((d) => {
-      const roadmaps = ALL_CONCEPTS.find((c) => c.id === d.conceptId)?.roadmaps ?? [];
-      const userElo = (roadmaps.length ? Math.max(...roadmaps.map(getElo)) : 1500) + eloOffset;
-      const problemElo = d.difficulty === 'intro' ? 1200 : d.difficulty === 'core' ? 1600 : 2000;
-      const distance = Math.abs(problemElo - userElo);
-      const inProgressBoost = drillState[d.id]?.status === 'attempted' ? -100 : 0;
-      const failBoost =
-        (drillState[d.id]?.attempts ?? 0) >= 2 && drillState[d.id]?.status !== 'solved' ? -150 : 0;
-      return { drill: d, score: distance + inProgressBoost + failBoost };
-    })
-    .sort((a, b) => a.score - b.score);
-  return ranked[0]?.drill ?? null;
 }
