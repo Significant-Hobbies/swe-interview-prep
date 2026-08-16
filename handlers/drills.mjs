@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 
-import { requireAuth } from '../api/auth/verify.mjs';
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 
@@ -12,13 +12,12 @@ async function ensureInit() {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT * FROM user_drills WHERE user_id = ?',
       args: [user.id],
@@ -33,12 +32,12 @@ export default async function handler(req, res) {
         updatedAt: row.updated_at,
       };
     }
-    return res.status(200).json({ drills });
+    return json({ drills });
   }
 
-  if (req.method === 'POST') {
-    const { drillId, status, lastCode } = req.body || {};
-    if (!drillId) return res.status(400).json({ error: 'drillId required' });
+  if (request.method === 'POST') {
+    const { drillId, status, lastCode } = await readJsonBody(request);
+    if (!drillId) return json({ error: 'drillId required' }, { status: 400 });
     const now = new Date().toISOString();
     // attempts increments on every save; status reflects the latest outcome.
     await db.execute({
@@ -69,8 +68,8 @@ export default async function handler(req, res) {
         JSON.stringify({ drillId, status: status || 'attempted' }),
       ],
     });
-    return res.status(200).json({ ok: true });
+    return json({ ok: true });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

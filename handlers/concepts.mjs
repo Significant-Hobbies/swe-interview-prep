@@ -1,8 +1,9 @@
+import { randomBytes } from 'node:crypto';
+
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
-import { reviewConcept, masteryConfidence } from '../shared/lib/fsrs.mjs';
-import { randomBytes } from 'node:crypto';
+import { masteryConfidence, reviewConcept } from '../shared/lib/fsrs.mjs';
 
 /**
  * Snake_case DB/FSRS row → the camelCase shape `useConcepts` expects.
@@ -75,13 +76,12 @@ async function upsertMastery(db, userId, conceptId, row) {
   });
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT * FROM concept_mastery WHERE user_id = ?',
       args: [user.id],
@@ -91,22 +91,23 @@ export default async function handler(req, res) {
     for (const row of r.rows) {
       mastery[row.concept_id] = toClient(row, now);
     }
-    return res.status(200).json({ mastery });
+    return json({ mastery });
   }
 
-  if (req.method === 'POST') {
-    const { conceptId, rating } = req.body || {};
-    if (!conceptId || !rating) return res.status(400).json({ error: 'conceptId, rating required' });
+  if (request.method === 'POST') {
+    const { conceptId, rating } = await readJsonBody(request);
+    if (!conceptId || !rating)
+      return json({ error: 'conceptId, rating required' }, { status: 400 });
     const prev = await getMastery(db, user.id, conceptId);
     const next = reviewConcept(prev, rating);
     await upsertMastery(db, user.id, conceptId, next);
-    return res.status(200).json({ mastery: toClient(next) });
+    return json({ mastery: toClient(next) });
   }
 
-  if (req.method === 'PUT') {
+  if (request.method === 'PUT') {
     // Bulk update from tagger: [{conceptId, rating}]
-    const { updates } = req.body || {};
-    if (!Array.isArray(updates)) return res.status(400).json({ error: 'updates array required' });
+    const { updates } = await readJsonBody(request);
+    if (!Array.isArray(updates)) return json({ error: 'updates array required' }, { status: 400 });
     const results = [];
     for (const u of updates) {
       if (!u.conceptId || !u.rating) continue;
@@ -115,8 +116,8 @@ export default async function handler(req, res) {
       await upsertMastery(db, user.id, u.conceptId, next);
       results.push({ conceptId: u.conceptId, mastery: toClient(next) });
     }
-    return res.status(200).json({ results });
+    return json({ results });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

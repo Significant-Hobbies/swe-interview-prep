@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 
-import { requireAuth } from '../api/auth/verify.mjs';
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 
@@ -12,13 +12,12 @@ async function ensureInit() {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT * FROM user_projects WHERE user_id = ?',
       args: [user.id],
@@ -32,12 +31,12 @@ export default async function handler(req, res) {
         updatedAt: row.updated_at,
       };
     }
-    return res.status(200).json({ projects });
+    return json({ projects });
   }
 
-  if (req.method === 'POST') {
-    const { projectId, status, nextAction, milestones } = req.body || {};
-    if (!projectId) return res.status(400).json({ error: 'projectId required' });
+  if (request.method === 'POST') {
+    const { projectId, status, nextAction, milestones } = await readJsonBody(request);
+    if (!projectId) return json({ error: 'projectId required' }, { status: 400 });
     await db.execute({
       sql: `INSERT INTO user_projects (id, user_id, project_id, status, next_action, milestones_json)
             VALUES (?, ?, ?, ?, ?, ?)
@@ -55,8 +54,8 @@ export default async function handler(req, res) {
         milestones ? JSON.stringify(milestones) : null,
       ],
     });
-    return res.status(200).json({ ok: true });
+    return json({ ok: true });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

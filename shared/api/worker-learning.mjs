@@ -1,5 +1,5 @@
+import { setRequestDb } from '../db/client.mjs';
 import { HANDLER_MODULES, LEARNING_ACTIONS } from './learning-registry.mjs';
-import { runExpressHandler } from './express-bridge.mjs';
 
 const PUBLIC_NO_AUTH = new Set(['gaps', 'critique', 'understanding', 'tag']);
 
@@ -25,6 +25,10 @@ export async function dispatchLearningAction(ctx) {
 
   const mod = await loader();
   const handler = mod.default;
-  const { status, body } = await runExpressHandler(handler, { request, client, user });
-  return json(body ?? {}, { status });
+  setRequestDb(client);
+  const response = await handler({ request, user, json });
+  if (!(response instanceof Response)) {
+    return json({ error: 'Handler did not respond' }, { status: 500 });
+  }
+  return response;
 }

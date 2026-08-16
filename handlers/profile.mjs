@@ -1,6 +1,6 @@
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
 
 let initialized = false;
 async function ensureInit() {
@@ -30,26 +30,25 @@ const DEFAULT = {
   onboardingVersion: 4,
 };
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT profile_json, updated_at FROM user_profile WHERE user_id = ?',
       args: [user.id],
     });
-    if (!r.rows.length) return res.status(200).json({ profile: DEFAULT, updatedAt: null });
+    if (!r.rows.length) return json({ profile: DEFAULT, updatedAt: null });
     const profile = JSON.parse(r.rows[0].profile_json);
-    return res.status(200).json({ profile, updatedAt: r.rows[0].updated_at });
+    return json({ profile, updatedAt: r.rows[0].updated_at });
   }
 
-  if (req.method === 'PUT') {
-    const { profile } = req.body || {};
+  if (request.method === 'PUT') {
+    const { profile } = await readJsonBody(request);
     if (!profile || typeof profile !== 'object') {
-      return res.status(400).json({ error: 'profile object required' });
+      return json({ error: 'profile object required' }, { status: 400 });
     }
     const merged = { ...DEFAULT, ...profile, updatedAt: new Date().toISOString() };
     await db.execute({
@@ -57,8 +56,8 @@ export default async function handler(req, res) {
             ON CONFLICT(user_id) DO UPDATE SET profile_json = excluded.profile_json, updated_at = datetime('now')`,
       args: [user.id, JSON.stringify(merged)],
     });
-    return res.status(200).json({ profile: merged });
+    return json({ profile: merged });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

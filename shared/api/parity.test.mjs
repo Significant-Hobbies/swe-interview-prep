@@ -1,5 +1,5 @@
-import { readFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { HANDLER_MODULES, LEARNING_ACTIONS } from './learning-registry.mjs';
@@ -35,9 +35,40 @@ describe('learning API parity', () => {
     expect(readFileSync(join(ROOT, 'vite.config.js'), 'utf8')).toContain('localAi()');
   });
 
-  it('local learning.mjs uses registry', () => {
+  it('local learning.mjs wraps dispatchLearningAction', () => {
     const src = readFileSync(join(ROOT, 'api/learning.mjs'), 'utf8');
-    expect(src).toContain('learning-registry.mjs');
+    expect(src).toContain('dispatchLearningAction');
+    expect(src).not.toContain('mod.default(req, res)');
     expect(src).not.toContain('daily.mjs');
+  });
+
+  it('dispatchLearningAction does not import the Express bridge', async () => {
+    const src = readFileSync(join(ROOT, 'shared/api/worker-learning.mjs'), 'utf8');
+    expect(src).toContain('dispatchLearningAction');
+    expect(src).not.toContain('express-bridge');
+    expect(src).not.toContain('runExpressHandler');
+    expect(existsSync(join(ROOT, 'shared/api/express-bridge.mjs'))).toBe(false);
+    const { dispatchLearningAction } = await import('./worker-learning.mjs');
+    expect(dispatchLearningAction).toBeTypeOf('function');
+  });
+
+  it('dispatchLearningAction rejects unknown actions and unauthenticated auth actions', async () => {
+    const { dispatchLearningAction } = await import('./worker-learning.mjs');
+    const json = (body, init = {}) =>
+      new Response(JSON.stringify(body), { status: init.status ?? 200 });
+    const unknown = await dispatchLearningAction({
+      request: new Request('http://localhost/api/learning?action=nope'),
+      client: null,
+      user: null,
+      json,
+    });
+    expect(unknown.status).toBe(400);
+    const unauth = await dispatchLearningAction({
+      request: new Request('http://localhost/api/learning?action=activity'),
+      client: null,
+      user: null,
+      json,
+    });
+    expect(unauth.status).toBe(401);
   });
 });
