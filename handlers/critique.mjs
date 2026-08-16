@@ -1,5 +1,6 @@
 // AI Review Critic — grades the learner's recall/explanation answer against a
 // reference answer. BYOK only (no server-key fallback, so no auth needed).
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
 
 const SYSTEM = `You grade an engineer's recall answer against a reference answer.
@@ -71,15 +72,17 @@ export function validateSystemDesignResponse(value, systemDesignCase, stageAnswe
   return { dimensions: value.dimensions, verdict: value.verdict.trim() };
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+export default async function handler({ request, json }) {
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
 
-  const { aiConfig, question, answer, expected, systemDesignCase, stageAnswers } = req.body || {};
+  const { aiConfig, question, answer, expected, systemDesignCase, stageAnswers } =
+    await readJsonBody(request);
   const hasAI = aiConfig?.endpointUrl && aiConfig.apiKey && aiConfig.model;
   if (!hasAI) {
-    return res
-      .status(400)
-      .json({ error: 'Configure an AI provider in Settings to use the Review Critic.' });
+    return json(
+      { error: 'Configure an AI provider in Settings to use the Review Critic.' },
+      { status: 400 }
+    );
   }
   if (systemDesignCase) {
     if (
@@ -89,9 +92,10 @@ export default async function handler(req, res) {
       !stageAnswers ||
       typeof stageAnswers !== 'object'
     ) {
-      return res
-        .status(400)
-        .json({ error: 'valid systemDesignCase and stageAnswers are required' });
+      return json(
+        { error: 'valid systemDesignCase and stageAnswers are required' },
+        { status: 400 }
+      );
     }
 
     const systemDesignPrompt = `Case and fixed rubric:\n${JSON.stringify(systemDesignCase)}\n\nLearner stage answers:\n${JSON.stringify(stageAnswers)}\n\nGrade now. JSON only.`;
@@ -110,16 +114,17 @@ export default async function handler(req, res) {
         stageAnswers
       );
       if (!validated) throw new Error('provider returned an invalid system-design critique');
-      return res.status(200).json(validated);
+      return json(validated);
     } catch (err) {
-      return res
-        .status(502)
-        .json({ error: `AI request failed: ${err.message || 'unknown error'}` });
+      return json(
+        { error: `AI request failed: ${err.message || 'unknown error'}` },
+        { status: 502 }
+      );
     }
   }
 
   if (!question || !answer) {
-    return res.status(400).json({ error: 'question and answer are required' });
+    return json({ error: 'question and answer are required' }, { status: 400 });
   }
 
   const prompt = `Question:
@@ -142,8 +147,8 @@ Grade now. JSON only.`;
       prompt,
       maxTokens: 800,
     });
-    return res.status(200).json(parseJSON(text));
+    return json(parseJSON(text));
   } catch (err) {
-    return res.status(502).json({ error: `AI request failed: ${err.message || 'unknown error'}` });
+    return json({ error: `AI request failed: ${err.message || 'unknown error'}` }, { status: 502 });
   }
 }

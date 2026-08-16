@@ -32,7 +32,7 @@ route set. The `api/*.mjs` handlers are dev/legacy only and are not deployed.
 | `/api/chat` | `vite-plugin-local-ai.js` streams CLIs | Not served (client still calls it) |
 | `/api/chats`, `/api/notes` | In-memory Vite stubs | Not served |
 | `/api/progress`, `/api/auth/*` | In-memory Vite stubs | Pages Function → D1 |
-| `/api/learning?action=…` | Legacy `api/learning.mjs` → `handlers/` | Pages Function → `handlers/` (via `shared/`) |
+| `/api/learning?action=…` | Legacy `api/learning.mjs` → `dispatchLearningAction` → Fetch `handlers/` | Pages Function → `dispatchLearningAction` → Fetch `handlers/` |
 | `/api/learning/reader`, `/api/ai` | (dev stubs / static) | Pages Function |
 
 `tag` is a `/api/learning?action=tag` action, not a top-level `/api/tag`

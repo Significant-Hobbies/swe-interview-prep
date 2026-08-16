@@ -4,6 +4,13 @@ Reusable lessons that are not obvious from the code. Add new entries at the
 top with a date. One lesson per bullet; link to the code or ADR that
 exemplifies it.
 
+## 2026-08 — Learning actions are Fetch handlers, not Express
+
+Production already authenticates in the Pages Function and
+`dispatchLearningAction`. The Express `(req, res)` adapter was leftover from
+Vercel — handlers now take `{ request, user, json }` and return `json(...)`.
+Do not reintroduce a second Express dispatcher for `/api/learning`.
+
 ## 2026-07 — Broad curriculum coverage needs a machine-readable contract
 
 Track names alone cannot prove that a broad learning taxonomy is actually
