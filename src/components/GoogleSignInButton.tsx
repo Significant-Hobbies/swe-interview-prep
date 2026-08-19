@@ -8,6 +8,7 @@ import {
   loadGoogleIdentity,
   renderGoogleIdentityButton,
 } from '../lib/googleIdentity';
+import { getGoogleClientId } from '../lib/googleClientId';
 
 function reportGoogleAuthFailure(reason: string) {
   void import('../lib/foundry-monitoring').then((module) =>
@@ -36,11 +37,8 @@ export function GoogleSignInButton({
 
   useEffect(() => {
     const parent = parentRef.current;
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!parent || !clientId) {
-      if (!clientId) reportGoogleAuthFailure('Missing VITE_GOOGLE_CLIENT_ID');
-      return;
-    }
+    const clientId = getGoogleClientId();
+    if (!parent) return;
 
     let cancelled = false;
     void loadGoogleIdentity()

@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import curriculumSummary from '../data/public-curriculum-summary.json';
 import { SiteHeader } from '../components/SiteHeader';
 import { GoogleSignInButton } from '../components/GoogleSignInButton';
+import { getGoogleClientId } from '../lib/googleClientId';
 
 const PRINCIPLES = [
   {
@@ -59,9 +60,13 @@ const STEPS = [
 ];
 
 export default function Login() {
-  const { continueAsGuest } = useAuth();
+  const { continueAsGuest, user } = useAuth();
   const navigate = useNavigate();
   const [debugInfo, setDebugInfo] = useState<string>('');
+
+  useEffect(() => {
+    if (user) navigate('/dashboard', { replace: true });
+  }, [navigate, user]);
 
   const startMockAsGuest = () => {
     continueAsGuest();
@@ -70,8 +75,7 @@ export default function Login() {
 
   useEffect(() => {
     document.getElementById('lcp-shell')?.remove();
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    setDebugInfo(clientId ? 'Client ID configured' : 'Missing VITE_GOOGLE_CLIENT_ID');
+    setDebugInfo(getGoogleClientId() ? 'Client ID configured' : 'Google sign-in unavailable');
   }, []);
 
   return (
