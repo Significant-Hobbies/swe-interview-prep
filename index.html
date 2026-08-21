@@ -31,16 +31,12 @@
     <link rel="canonical" href="https://learn.significanthobbies.com" />
 
     <!--
-      The app stylesheet is loaded asynchronously, so the shell below paints
-      before it applies. Left alone, the shell first renders with UA defaults
-      (serif, UA block margins, UA list padding) and reflows the instant
-      Tailwind's preflight lands — measured as a 0.117 desktop CLS attributed
-      entirely to the shell's <section>.
+      The shell can paint before React commits. Keep its inherited and
+      tag-level values pinned to the app stylesheet so the handoff remains
+      stable even if cached HTML and assets arrive at different speeds.
 
-      These rules pin the inherited and tag-level values that the stylesheet
-      would otherwise change, so the shell's layout is identical before and
-      after the stylesheet arrives. `#lcp-shell <tag>` outranks preflight's
-      bare type selectors, so load order does not matter.
+      `#lcp-shell <tag>` outranks preflight's bare type selectors, so load
+      order does not matter.
     -->
     <style>
       /* Preflight's box-sizing reset is the single largest shift: without it
