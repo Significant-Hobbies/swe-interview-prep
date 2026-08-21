@@ -93,7 +93,11 @@ export default function Learn() {
 
         {query.trim() && (
           <div className="mt-3 overflow-hidden rounded-xl border border-white/[0.1] bg-black">
-            <div className="flex min-h-11 items-center justify-between border-b border-white/[0.08] px-4 text-xs text-white/50">
+            <div
+              className="flex min-h-11 items-center justify-between border-b border-white/[0.08] px-4 text-xs text-white/60"
+              role="status"
+              aria-live="polite"
+            >
               <span>{searchResults.length} matches across the complete catalogue</span>
               <Link to="/learn/all" className="text-white/65 hover:text-white">
                 Browse all concepts
@@ -108,7 +112,7 @@ export default function Learn() {
                     className="flex min-h-20 items-center justify-between gap-5 px-4 py-3 transition-colors hover:bg-white/[0.035]"
                   >
                     <span className="min-w-0">
-                      <span className="text-xs text-white/45">
+                      <span className="text-xs text-white/60">
                         {result.kind === 'path' ? 'Path' : 'Concept'}
                       </span>
                       <span className="mt-1 block font-medium text-white">{result.title}</span>
@@ -141,6 +145,47 @@ export default function Learn() {
         >
           Browse the complete catalogue
         </Link>
+      </section>
+
+      <section className="mt-12 border-t border-white/[0.08] pt-8" aria-labelledby="learning-tools">
+        <p className="text-sm text-white/55">Learning tools</p>
+        <h2 id="learning-tools" className="mt-2 text-2xl font-semibold tracking-tight text-white">
+          Trace, retrieve, and apply.
+        </h2>
+        <div className="mt-5 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+          {[
+            {
+              title: 'Learn Inference path',
+              detail: 'All 42 sections mapped to concepts, retrieval prompts, and focused study.',
+              href: '/learn/inference',
+            },
+            {
+              title: 'Notation reference',
+              detail: 'Search symbols, pronunciation, meaning, units, and validity boundaries.',
+              href: '/learn/notation',
+            },
+            {
+              title: 'Paper programme',
+              detail: 'A rotating primary source with a retrieval and application contract.',
+              href: '/learn/papers',
+            },
+            {
+              title: 'Systems decision labs',
+              detail: 'Predict, calculate, decide, and verify with immutable evidence.',
+              href: '/labs',
+            },
+          ].map((tool) => (
+            <Link
+              key={tool.href}
+              to={tool.href}
+              className="grid min-h-20 gap-2 py-4 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-5"
+            >
+              <span className="font-medium text-white/85">{tool.title}</span>
+              <span className="text-sm text-white/50">{tool.detail}</span>
+              <ArrowRight className="h-4 w-4 text-white/35" />
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="mt-14 border-t border-white/[0.08] pt-8" aria-labelledby="active-path">
@@ -231,7 +276,7 @@ export default function Learn() {
                 {group.title}
               </span>
               <span className="text-sm text-white/50">{group.subtitle}</span>
-              <span className="text-xs text-white/40">
+              <span className="text-xs text-white/60">
                 {group.roadmapIds.length} path{group.roadmapIds.length === 1 ? '' : 's'}
               </span>
             </Link>

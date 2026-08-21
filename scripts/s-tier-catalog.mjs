@@ -2532,6 +2532,17 @@ for (const conceptId of ['message-queues', 'cap-theorem', 'consensus', 'event-st
   CONCEPT_MEDIA[conceptId] = { ...(CONCEPT_MEDIA[conceptId] ?? {}), book: { ...DDIA } };
 }
 
+// The interactive guide makes the serving stack approachable while linking to
+// its underlying book; the concept's other sources remain the primary papers
+// and first-party runtime documentation.
+CONCEPT_MEDIA['inference-engines'] = {
+  ...(CONCEPT_MEDIA['inference-engines'] ?? {}),
+  book: L(
+    'Learn Inference — interactive guide to inference engineering',
+    'https://learn-inference.com/'
+  ),
+};
+
 for (const [conceptId, links] of Object.entries({
   normalization: [
     L(

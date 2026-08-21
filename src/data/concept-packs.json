@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generatedAt": "2026-08-13",
+  "generatedAt": "2026-08-19",
   "_meta": {
     "tier": "S",
     "optional": true,
@@ -12,8 +12,8 @@
       "book": 150,
       "problem": 260,
       "write": 259,
-      "more": 99,
-      "items": 1352
+      "more": 100,
+      "items": 1353
     }
   },
   "packs": {
@@ -5540,6 +5540,11 @@
     "inference-engines": {
       "items": [
         {
+          "category": "book",
+          "title": "Learn Inference — interactive guide to inference engineering",
+          "url": "https://learn-inference.com/"
+        },
+        {
           "category": "paper",
           "title": "Orca: A Distributed Serving System for Transformer-Based Generative Models (OSDI '22)",
           "url": "https://www.usenix.org/conference/osdi22/presentation/yu"
@@ -5555,7 +5560,7 @@
           "url": "https://arxiv.org/abs/2309.06180"
         },
         {
-          "category": "book",
+          "category": "more",
           "title": "Fast and Expressive LLM Inference with RadixAttention and SGLang (LMSYS)",
           "url": "https://lmsys.org/blog/2024-01-17-sglang/"
         },

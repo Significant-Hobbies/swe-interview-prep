@@ -40,6 +40,11 @@ const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
+const InferencePath = lazy(() => import('./pages/InferencePath'));
+const NotationReference = lazy(() => import('./pages/NotationReference'));
+const KnowledgeMap = lazy(() => import('./pages/KnowledgeMap'));
+const PaperProgramme = lazy(() => import('./pages/PaperProgramme'));
+const FocusedStudy = lazy(() => import('./pages/FocusedStudy'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Sweep = lazy(() => import('./pages/Sweep'));
 const PracticeAll = lazy(() => import('./pages/PracticeAll'));
@@ -63,6 +68,7 @@ const Changelog = lazy(() => import('./pages/Changelog'));
 const Login = lazy(() => import('./pages/Login'));
 const SystemsLabs = lazy(() => import('./pages/SystemsLabs'));
 const SystemsLabRunner = lazy(() => import('./pages/SystemsLabRunner'));
+const DecisionLab = lazy(() => import('./pages/DecisionLab'));
 const SoftwareWars = lazy(() => import('./pages/SoftwareWars'));
 const BlitzWar = lazy(() => import('./pages/BlitzWar'));
 const TradeoffWar = lazy(() => import('./pages/TradeoffWar'));
@@ -115,6 +121,11 @@ function AppRoutes() {
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="learn" element={<Learn />} />
         <Route path="learn/all" element={<LearnAll />} />
+        <Route path="learn/inference" element={<InferencePath />} />
+        <Route path="learn/notation" element={<NotationReference />} />
+        <Route path="learn/map/:conceptId" element={<KnowledgeMap />} />
+        <Route path="learn/papers" element={<PaperProgramme />} />
+        <Route path="study/:focusKind/:focusId" element={<FocusedStudy />} />
         <Route path="explore" element={<Explore />} />
         <Route path="sweep" element={<Sweep />} />
         <Route path="learn/:id" element={<ConceptDetail />} />
@@ -128,6 +139,7 @@ function AppRoutes() {
         <Route path="projects/:id" element={<ProjectDetail />} />
         <Route path="build" element={<BuildLab />} />
         <Route path="labs" element={<SystemsLabs />} />
+        <Route path="labs/decision/:labId" element={<DecisionLab />} />
         <Route path="labs/:labId" element={<SystemsLabRunner />} />
         <Route path="drills/:id" element={<BuildLab />} />
         <Route path="learning" element={<LearningDoc />} />

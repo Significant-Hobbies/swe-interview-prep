@@ -5964,6 +5964,16 @@
           "title": "vLLM Documentation",
           "url": "https://docs.vllm.ai/",
           "type": "doc"
+        },
+        {
+          "title": "Learn Inference — interactive guide to inference engineering",
+          "url": "https://learn-inference.com/",
+          "type": "book"
+        },
+        {
+          "title": "Inference Engineering (Philip Kiely, Baseten)",
+          "url": "https://www.baseten.co/inference-engineering/",
+          "type": "book"
         }
       ],
       "artifacts": ["synthesize-inference-serving-12w", "trace-a-tensor-capstone"],

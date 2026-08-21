@@ -4,6 +4,29 @@ Reusable lessons that are not obvious from the code. Add new entries at the
 top with a date. One lesson per bullet; link to the code or ADR that
 exemplifies it.
 
+## 2026-08 — Choose the concept before the learning format
+
+New papers and calculators are tempting because they are novel, but novelty is
+not a learning priority. Choose recovery, retention, or progression from
+learner state first; only then select the best fitting evidence action for the
+winning concept. This keeps a fresh source from displacing failed practice or
+an overdue review, and makes “why today?” inspectable.
+
+The daily paper choice may rotate deterministically for variety, but only
+inside that concept-first boundary. Mutable continuity and durable evidence
+also need different stores: a draft may be overwritten while typing and
+ignored when a definition version changes, while a decision receipt or paper
+attempt is append-only. Keeping them separate avoids turning resume behavior
+into accidental mastery history.
+
+## 2026-08 — Calculations become learning only through decisions and explanation
+
+A numeric result is useful evidence, not mastery. Freeze a prediction before
+reveal, preserve assumptions and derived values in an immutable receipt, then
+require a mitigation, counterfactual, verification metric, and causal
+explain-back. Keep opened, calculated, retrieved, pending, and verified states
+separate so UI completion cannot fabricate FSRS progress.
+
 ## 2026-07 — Broad curriculum coverage needs a machine-readable contract
 
 Track names alone cannot prove that a broad learning taxonomy is actually

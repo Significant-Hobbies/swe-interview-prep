@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { gradeToRating, ratingsFromFeynman } from './feynmanRating';
+import { gradeToRating, isPassingFeynmanGrade, ratingsFromFeynman } from './feynmanRating';
 
 describe('gradeToRating', () => {
   it('maps rubric bands to FSRS ratings', () => {
@@ -17,6 +17,12 @@ describe('gradeToRating', () => {
   it('treats non-finite grades as failure', () => {
     expect(gradeToRating(Number.NaN)).toBe('again');
     expect(gradeToRating(Number.POSITIVE_INFINITY)).toBe('again');
+  });
+
+  it('only accepts good or easy explanations as verified', () => {
+    expect(isPassingFeynmanGrade(69)).toBe(false);
+    expect(isPassingFeynmanGrade(70)).toBe(true);
+    expect(isPassingFeynmanGrade(90)).toBe(true);
   });
 });
 

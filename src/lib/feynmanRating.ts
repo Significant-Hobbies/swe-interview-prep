@@ -33,6 +33,12 @@ export function gradeToRating(grade: number): MasteryRating {
   return 'again';
 }
 
+/** A Feynman explanation verifies applied mastery only at the good/easy boundary. */
+export function isPassingFeynmanGrade(grade: number): boolean {
+  const rating = gradeToRating(grade);
+  return rating === 'good' || rating === 'easy';
+}
+
 /**
  * Normalize a Feynman grading result into per-concept FSRS rating updates.
  *

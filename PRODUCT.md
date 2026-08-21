@@ -54,6 +54,16 @@ account-scoped in the browser.
   public curriculum.
 - Every ranked Blitz question must have one explicit canonical Learn concept,
   authoritative sources, and authored reasoning for every answer option.
+- Dashboard answers “what should I learn today?” with one deterministic
+  recovery, retention, or progression priority and an explicit evidence
+  contract before showing optional history or catalogue context.
+- Decision labs, formulas, and paper contracts may produce local evidence, but
+  only the existing authenticated Feynman-to-FSRS path may grant mastery.
+- Learn Inference is represented as a 42-section companion path that links to
+  the canonical book; the product stores original summaries and retrieval
+  prompts, not copied source bodies.
+- Focused study and decision-lab drafts are account-scoped, version-aware
+  continuity state. Completing a draft is evidence, not mastery.
 - Blitz ratings and Tradeoff ratings are separate; ranked state, deadlines,
   answers, and match outcomes remain server-owned.
 - Production remains a Vite/React application on Cloudflare Pages with Pages

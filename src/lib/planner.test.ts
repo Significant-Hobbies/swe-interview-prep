@@ -58,6 +58,41 @@ describe('buildSessionPlan', () => {
     expect(due.length).toBeGreaterThan(0);
   });
 
+  it('exposes deterministic retention reasoning with injected time', () => {
+    const now = new Date('2026-08-20T10:00:00.000Z');
+    const first = pickConceptForSession(DEFAULT_PROFILE, {}, emptyGate, now)!;
+    const m: Record<string, MasteryEntry> = {
+      [first.concept.id]: mastery(0.3, '2026-08-19T10:00:00.000Z'),
+    };
+    const options = {
+      profile: DEFAULT_PROFILE,
+      mastery: m,
+      rqMastery: {},
+      gateCtx: emptyGate,
+      drillState: {},
+      getElo: () => DEFAULT_USER_ELO,
+      now,
+    };
+    expect(buildSessionPlan(options)).toEqual(buildSessionPlan(options));
+    expect(buildSessionPlan(options)?.selectionReason).toBe('retention');
+    expect(buildSessionPlan(options)?.selectedAt).toBe(now.toISOString());
+  });
+
+  it('lets repeated failed practice outrank due novelty', () => {
+    const failed = EDITORIAL_DRILLS.find((drill) => drill.conceptId === 'inference-engines')!;
+    const plan = buildSessionPlan({
+      profile: DEFAULT_PROFILE,
+      mastery: { bm25: mastery(0.2, '2026-08-19T10:00:00.000Z') },
+      rqMastery: {},
+      gateCtx: emptyGate,
+      drillState: { [failed.id]: { status: 'attempted', lastCode: '', attempts: 3 } },
+      getElo: () => DEFAULT_USER_ELO,
+      now: new Date('2026-08-20T10:00:00.000Z'),
+    });
+    expect(plan?.concept.id).toBe('inference-engines');
+    expect(plan?.selectionReason).toBe('recovery');
+  });
+
   it('does not retry a failed drill outside the selected tracks', () => {
     const failed = EDITORIAL_DRILLS.find((drill) => {
       const concept = ALL_CONCEPTS.find((candidate) => candidate.id === drill.conceptId);

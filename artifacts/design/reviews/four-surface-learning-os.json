@@ -1,0 +1,55 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Four-surface Learning OS: Dashboard, Learn, Practice, and Wars with complete catalogue preservation",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/software-wars/after-wars-1440.png"
+  },
+  "evidence": {
+    "screenshots": [
+      { "width": 390, "path": "artifacts/design/final-dashboard-390.png" },
+      { "width": 390, "path": "artifacts/design/final-learn-390.png" },
+      { "width": 390, "path": "artifacts/design/final-practice-390.png" },
+      { "width": 390, "path": "artifacts/design/final-wars-390.png" },
+      { "width": 768, "path": "artifacts/design/final-dashboard-768.png" },
+      { "width": 768, "path": "artifacts/design/final-practice-768.png" },
+      { "width": 1440, "path": "artifacts/design/final-dashboard-1440.png" },
+      { "width": 1440, "path": "artifacts/design/final-learn-1440.png" },
+      { "width": 1440, "path": "artifacts/design/final-practice-1440.png" },
+      { "width": 1440, "path": "artifacts/design/final-practice-selector-1440.png" },
+      { "width": 1440, "path": "artifacts/design/final-wars-1440.png" },
+      { "width": 390, "path": "artifacts/design/software-wars/final-tradeoff-playground-390.png" },
+      { "width": 390, "path": "artifacts/design/software-wars/final-tradeoff-diagram-390.png" },
+      { "width": 768, "path": "artifacts/design/software-wars/final-tradeoff-playground-768.png" },
+      { "width": 1440, "path": "artifacts/design/software-wars/final-tradeoff-playground-1440.png" }
+    ],
+    "projectCheck": {
+      "command": "vitest run; tsc --noEmit; biome check .; docs validation; generated-curriculum + production Vite build; Playwright smoke/mobile/Wars; strict OpenSpec validation",
+      "status": "pass"
+    },
+    "critique": { "score": 36, "maximum": 40 },
+    "audit": { "score": 17, "maximum": 20 },
+    "unresolved": { "p0": 0, "p1": 0 },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "The final scoped detector ran exactly once and found one advisory legacy color literal in CodeEditor; it was aligned to the documented rose-danger token before handoff."
+      ]
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner reviewed the four-surface direction and responded: looks good, keep going. Dashboard resumes work; Learn is high-level and searchable; Practice is the existing Playground with all 298 canonical problems; Wars presents the one-minute and thirty-minute formats. Complete concept, roadmap, problem, public-curriculum, progress, and legacy routes remain visible and portable."
+  }
+}
