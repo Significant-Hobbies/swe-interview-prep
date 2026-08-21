@@ -1,8 +1,26 @@
 [
   {
-    "name": "JS bundle",
-    "path": "dist/assets/*.js",
-    "limit": "8.6 MB",
+    "name": "Initial app entry",
+    "path": "dist/assets/index-*.js",
+    "limit": "40 kB",
+    "gzip": true
+  },
+  {
+    "name": "Initial React vendor",
+    "path": "dist/assets/vendor-react-*.js",
+    "limit": "90 kB",
+    "gzip": true
+  },
+  {
+    "name": "Initial icon vendor",
+    "path": "dist/assets/vendor-lucide-*.js",
+    "limit": "15 kB",
+    "gzip": true
+  },
+  {
+    "name": "Initial runtime",
+    "path": "dist/assets/rolldown-runtime-*.js",
+    "limit": "2 kB",
     "gzip": true
   },
   {
