@@ -59,6 +59,31 @@ describe('public curriculum publication', () => {
     expect(homepage).toContain("window.location.pathname === '/'");
   });
 
+  it('keeps the product name inside the single h1', () => {
+    // The visible h1 is the tagline, so the product name only reaches screen
+    // readers and indexers through a visually-hidden span. The generator
+    // dropped it once already and a build silently stripped it from the live
+    // page, which costs brand findability on the one h1 the site has.
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+    const heading = homepage.match(/<h1[\s\S]*?<\/h1>/)?.[0];
+
+    expect(heading).toBeTruthy();
+    expect(heading).toContain('SWE Interview Prep');
+    expect(heading).toContain('clip:rect(0,0,0,0)');
+  });
+
+  it('advertises every public developer surface in llms.txt', () => {
+    // These three are served by functions/_middleware.ts and the sitemap
+    // writer, not by this generator, so nothing else fails when the generator
+    // forgets them — they just quietly stop being discoverable.
+    const llms = readFileSync(resolve(root, 'public/llms.txt'), 'utf8');
+
+    expect(llms).toContain('## Developer docs');
+    for (const path of ['/openapi.json', '/sitemap.xml', '/api/ai']) {
+      expect(llms).toContain(path);
+    }
+  });
+
   it('pins the shell styles the async stylesheet would otherwise reflow', () => {
     // The app stylesheet loads asynchronously, so the shell paints under UA
     // defaults first. Every value Tailwind's preflight would change afterwards
