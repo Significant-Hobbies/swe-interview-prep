@@ -12,6 +12,8 @@ import { Link, useParams } from 'react-router-dom';
 
 import ConceptLibrary from '../components/ConceptLibrary';
 import { FurtherReading } from '../components/FurtherReading';
+import { FormulaExplainer } from '../components/FormulaExplainer';
+import { PaperLearningCard } from '../components/PaperLearningCard';
 import TopicPackView from '../components/TopicPackView';
 import {
   Badge,
@@ -34,10 +36,13 @@ import {
   topicPackForConcept,
 } from '../data/learning-os';
 import { getLabsForConcept } from '../data/systems-labs';
+import { formulasForConcept } from '../data/formulas';
+import { papersForConcept } from '../data/paper-contracts';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useGates } from '../hooks/useGates';
 import { confidence1to5, deriveConceptStatus } from '../lib/conceptState';
 import { mocksForConcept } from '../lib/mockRecommend';
+import { decisionLabForConcept } from '../lib/dailyPriority';
 import { ConceptNotes } from './partials/ConceptNotes';
 
 const RATINGS: { id: 'again' | 'hard' | 'good' | 'easy'; label: string; tone: string }[] = [
@@ -78,6 +83,9 @@ export default function ConceptDetail() {
   const gate = gateStatus(concept.id);
   const topicPack = topicPackForConcept(concept);
   const systemsLabs = getLabsForConcept(concept.id);
+  const formulas = formulasForConcept(concept.id);
+  const papers = papersForConcept(concept.id);
+  const decisionLab = decisionLabForConcept(concept.id);
 
   async function copyAiPrompt() {
     try {
@@ -93,7 +101,7 @@ export default function ConceptDetail() {
     <PageShell>
       <Link
         to="/learn"
-        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
+        className="mb-4 inline-flex min-h-11 items-center gap-1 text-xs text-white/60 hover:text-white"
       >
         <ArrowLeft className="h-3.5 w-3.5" /> Concepts
       </Link>
@@ -130,6 +138,20 @@ export default function ConceptDetail() {
           <span>{meta.label}</span>
         </div>
         <p className="mt-3 max-w-2xl text-sm text-white/70">{concept.description}</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            to={`/study/concept/${concept.id}`}
+            className="inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-4 text-sm font-medium text-black"
+          >
+            Focused study <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to={`/learn/map/${concept.id}`}
+            className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/15 px-4 text-sm text-white/70 hover:text-white"
+          >
+            Knowledge map
+          </Link>
+        </div>
       </div>
 
       {gate.blocked && (
@@ -154,7 +176,7 @@ export default function ConceptDetail() {
                         {req.label}
                       </Link>
                     ) : (
-                      <span className={req.met ? 'text-white/40 line-through' : 'text-white/70'}>
+                      <span className={req.met ? 'text-white/60 line-through' : 'text-white/70'}>
                         {req.label}
                       </span>
                     )}
@@ -169,7 +191,7 @@ export default function ConceptDetail() {
       {/* Confidence + rating */}
       <Card className="mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="text-xs font-medium text-white/40">Your confidence</div>
+          <div className="text-xs font-medium text-white/60">Your confidence</div>
           <div className="mt-1 flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((n) => (
               <span
@@ -177,18 +199,18 @@ export default function ConceptDetail() {
                 className={`h-2.5 w-6 rounded-sm ${n <= confidence1to5(m) ? color(meta.color).solid : 'bg-white/5'}`}
               />
             ))}
-            <span className="ml-2 text-xs text-white/40">
+            <span className="ml-2 text-xs text-white/60">
               {m ? `${confidence1to5(m)}/5` : 'untouched'}
             </span>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="mr-1 text-xs text-white/40">Log a self-review:</span>
+          <span className="mr-1 text-xs text-white/60">Log a self-review:</span>
           {RATINGS.map((r) => (
             <button
               key={r.id}
               onClick={() => review(concept.id, r.id)}
-              className={`rounded-md border px-2.5 py-1 text-xs font-medium ${color(r.tone).bg} ${color(r.tone).border} ${color(r.tone).text}`}
+              className={`min-h-11 rounded-md border px-3 text-xs font-medium ${color(r.tone).bg} ${color(r.tone).border} ${color(r.tone).text}`}
             >
               {r.label}
             </button>
@@ -231,6 +253,45 @@ export default function ConceptDetail() {
 
           <TopicPackView concept={concept} pack={topicPack} />
 
+          {(decisionLab || formulas.length > 0) && (
+            <section>
+              <SectionTitle>Decision support</SectionTitle>
+              <div className="overflow-hidden rounded-xl border border-white/[0.08]">
+                {decisionLab && (
+                  <Link
+                    to={`/labs/decision/${decisionLab[0]}`}
+                    className="group flex min-h-20 items-center justify-between gap-4 bg-black px-4 py-4 transition-colors hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/50"
+                  >
+                    <div>
+                      <div className="text-sm font-medium text-white">{decisionLab[1].title}</div>
+                      <div className="mt-1 text-xs leading-relaxed text-white/60">
+                        Freeze a prediction · calculate · issue a decision receipt · explain
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                )}
+                {formulas.map((formula) => (
+                  <FormulaExplainer key={formula.id} formula={formula} />
+                ))}
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-white/60">
+                Formula views and calculations clarify assumptions; they do not update mastery.
+              </p>
+            </section>
+          )}
+
+          {papers.length > 0 && (
+            <section id="papers">
+              <SectionTitle>Paper contracts</SectionTitle>
+              <div className="overflow-hidden rounded-xl border border-white/[0.08]">
+                {papers.map((paper) => (
+                  <PaperLearningCard key={paper.id} paper={paper} />
+                ))}
+              </div>
+            </section>
+          )}
+
           {systemsLabs.length > 0 && (
             <section>
               <SectionTitle>Systems Lab</SectionTitle>
@@ -245,7 +306,7 @@ export default function ConceptDetail() {
                   >
                     <div>
                       <div className="text-sm font-medium text-white">{lab.title}</div>
-                      <div className="mt-1 text-xs leading-relaxed text-white/45">
+                      <div className="mt-1 text-xs leading-relaxed text-white/60">
                         {lab.scenarios.length} deterministic scenarios · predict, inspect, explain
                       </div>
                     </div>
@@ -299,7 +360,7 @@ export default function ConceptDetail() {
                       >
                         <div>
                           <div className="text-sm font-medium text-white">{d.title}</div>
-                          <div className="text-xs text-white/40">
+                          <div className="text-xs text-white/60">
                             {d.type} · {d.difficulty}
                           </div>
                         </div>
@@ -310,7 +371,7 @@ export default function ConceptDetail() {
                 )}
                 {leetcodeDrills.length > 0 && (
                   <div>
-                    <p className="mb-2 text-[11px] text-white/40">LeetCode practice</p>
+                    <p className="mb-2 text-xs text-white/60">LeetCode practice</p>
                     <div className="space-y-2">
                       {leetcodeDrills.map((d) => (
                         <Card
@@ -326,7 +387,7 @@ export default function ConceptDetail() {
                                 LeetCode
                               </span>
                             </div>
-                            <div className="text-xs text-white/40">{d.difficulty} · external</div>
+                            <div className="text-xs text-white/60">{d.difficulty} · external</div>
                           </div>
                           <ExternalLink className="h-4 w-4 shrink-0 text-sky-400/60" />
                         </Card>
@@ -336,7 +397,7 @@ export default function ConceptDetail() {
                 )}
               </div>
             ) : (
-              <p className="text-sm text-white/40">No drills mapped yet.</p>
+              <p className="text-sm text-white/60">No drills mapped yet.</p>
             )}
           </section>
 
@@ -354,7 +415,7 @@ export default function ConceptDetail() {
                   >
                     <div>
                       <div className="text-sm font-medium text-white">{m.title}</div>
-                      <div className="text-xs text-white/40">
+                      <div className="text-xs text-white/60">
                         {m.kind.replace('-', ' ')} · {m.durationMinutes} min
                       </div>
                     </div>
@@ -379,14 +440,14 @@ export default function ConceptDetail() {
                   >
                     <div>
                       <div className="text-sm font-medium text-white">{a.title}</div>
-                      <div className="text-xs text-white/40">{a.type}</div>
+                      <div className="text-xs text-white/60">{a.type}</div>
                     </div>
                     <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
                   </Card>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-white/40">No artifacts mapped yet.</p>
+              <p className="text-sm text-white/60">No artifacts mapped yet.</p>
             )}
           </section>
 
@@ -427,7 +488,7 @@ export default function ConceptDetail() {
                   return (
                     <Card key={p} as="link" to={`/projects/${p}`} className="p-3">
                       <div className="text-sm font-medium text-white">{proj?.name || p}</div>
-                      {proj && <div className="text-xs text-white/40">{proj.lane}</div>}
+                      {proj && <div className="text-xs text-white/60">{proj.lane}</div>}
                     </Card>
                   );
                 })}

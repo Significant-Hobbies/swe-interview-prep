@@ -4,6 +4,19 @@ Scope: the deterministic, client-only systems learning surface at `/labs`.
 This page documents the product boundary and authoring contract; checked-in
 definitions remain the executable source of truth.
 
+`/labs` also indexes six smaller decision labs. They deliberately do not use
+the actor-transition engine: inference capacity, workload capacity, Wilson
+confidence, two-model routing, RAG readiness, and inference benchmark
+normalization are pure arithmetic over declared inputs. Their shared flow is
+Inputs → Frozen prediction → Reveal → Decision → Counterfactual → Receipt →
+Explain. Receipts are immutable, versioned, account-scoped local evidence and
+remain mastery-pending until the existing authenticated Feynman path accepts a
+causal explanation.
+
+Mutable work is kept separate: the shared shell auto-saves a version-matched,
+account-scoped draft and may load declared scenario presets. A saved receipt
+clears that draft; it never edits or replaces prior receipts.
+
 ## Learning loop
 
 Each attempt follows one evidence-gated sequence:
@@ -50,6 +63,16 @@ This boundary is intentional:
 
 External links at the end of each lab are optional primary-source reading.
 Opening one is outside simulation execution.
+
+Decision labs share the same safety posture. They have no cloud credentials or
+runtime service dependency and make no claim to predict real latency. The
+inference calculator separates weights, raw KV cache, declared reserve, and
+headroom while naming excluded runtime overhead. The evaluation calculator
+uses 95% Wilson intervals and reports insufficient evidence when its declared
+conservative comparison rule cannot support a direction. Routing uses
+synthetic profiles rather than live provider claims; RAG readiness accepts
+aggregate counts rather than documents; benchmarking normalizes learner-entered
+client totals and compares no vendors.
 
 ## Fidelity and source contracts
 

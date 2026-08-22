@@ -13,6 +13,9 @@ React SPA (Vite build → dist/)
     ├── Monaco + Go code execution (client-side WASM from R2, API-proxy fallback)
     ├── Excalidraw diagrams
     ├── Systems Lab ──► pure virtual-time reducer + checked-in evidence graphs
+    ├── Decision labs ──► pure calculators + immutable local decision receipts
+    ├── Focused study ──► version-aware, account-scoped local continuity drafts
+    ├── Daily priority ──► profile + FSRS + practice + local evidence
     ├── Socratic AI (useAI) ──► /api/chat (dev bridge) / OpenAI-compatible endpoint
     ├── Progress + FSRS hooks ──► /api/learning, /api/progress ──► D1
     ├── Learning library + sources ──► owner-only /api/learning actions ──► D1 + remote repos
@@ -64,6 +67,11 @@ intentionally does not restate it.
   `learning-os.ts`. Mutable user state is hybrid: localStorage for guests,
   D1 for signed-in users (`useUserStore`). Signing in merges localStorage
   into the DB.
+- **Learning evidence vs continuity.** Append-only decision receipts and paper
+  attempts live in the versioned learning-evidence store. Overwritable
+  decision-lab and focused-study drafts live in a separate account-scoped
+  continuity store; a lab definition mismatch is ignored and issuing a
+  receipt clears only the corresponding draft.
 - **Deterministic Systems Lab.** Versioned definitions under
   `src/data/systems-labs/` describe actors, controls, reachable transitions,
   truth planes, decisive evidence, and bounded broken-to-repaired

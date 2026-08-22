@@ -1,5 +1,5 @@
-import { ArrowRight, BookOpen, Clock3, Code2, History, Route } from 'lucide-react';
-import { useEffect, useMemo } from 'react';
+import { ArrowRight, BookOpen, Clock3, Code2, History, Route, Target } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -10,19 +10,40 @@ import {
   ROADMAPS,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
+import { useLearningEvidence } from '../hooks/useLearningEvidence';
+import { useProfile } from '../hooks/useProfile';
 import { useSessionPlan } from '../hooks/useSessionPlan';
 import { useDrillStore } from '../hooks/useUserStore';
+import { useAuth } from '../contexts/AuthContext';
 import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
+import { buildDailyLearningPriority } from '../lib/dailyPriority';
+import { loadFocusedStudyDrafts } from '../lib/learningContinuity';
 import { loadRecentVisits } from '../lib/recentVisits';
 import { recordSessionActivity } from '../lib/session';
 
 export default function Today() {
   const plan = useSessionPlan();
-  const { mastery } = useConceptMastery();
+  const { mastery, loading: masteryLoading } = useConceptMastery();
   const { drills } = useDrillStore();
+  const { profile } = useProfile();
+  const { loading: authLoading } = useAuth();
+  const { accountScope, decisionReceipts, paperAttempts } = useLearningEvidence();
+  const [online, setOnline] = useState(() =>
+    typeof navigator === 'undefined' ? true : navigator.onLine
+  );
 
   useEffect(() => {
     recordSessionActivity('session_start');
+  }, []);
+
+  useEffect(() => {
+    const refresh = () => setOnline(navigator.onLine);
+    window.addEventListener('online', refresh);
+    window.addEventListener('offline', refresh);
+    return () => {
+      window.removeEventListener('online', refresh);
+      window.removeEventListener('offline', refresh);
+    };
   }, []);
 
   const recentVisits = useMemo(() => loadRecentVisits().slice(0, 5), []);
@@ -56,36 +77,122 @@ export default function Today() {
     CONCEPTS.map((concept) => concept.id),
     mastery
   );
-  const nextBlock = plan?.blocks.find((block) => !block.done) ?? plan?.blocks[0] ?? null;
+  const focusedStudyDrafts = useMemo(() => loadFocusedStudyDrafts(accountScope), [accountScope]);
+  const priority = useMemo(
+    () =>
+      buildDailyLearningPriority({
+        plan,
+        profile,
+        mastery,
+        drillState: drills,
+        decisionReceipts,
+        paperAttempts,
+        focusedStudyDrafts,
+        masteryAvailable: !masteryLoading,
+        online,
+      }),
+    [
+      plan,
+      profile,
+      mastery,
+      drills,
+      decisionReceipts,
+      paperAttempts,
+      focusedStudyDrafts,
+      masteryLoading,
+      online,
+    ]
+  );
+  const loadingPriority = authLoading || masteryLoading;
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm text-white/55">Dashboard</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Pick up where you left off.
-        </h1>
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
-          Your learning path, practice queue, and recent work in one place.
-        </p>
-        {nextBlock ? (
-          <Link
-            to={nextBlock.href}
-            className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black transition-colors hover:bg-white/90"
-          >
-            Continue {currentConcept?.name ?? 'learning'}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+      <header aria-labelledby="daily-priority">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-white/50">
+          <span>Dashboard · Learn this today</span>
+          <span className="font-mono text-xs">
+            {loadingPriority
+              ? 'reading learning state'
+              : `${priority.minutes} min · ${priority.reason.replace('-', ' ')}`}
+          </span>
+        </div>
+
+        {loadingPriority ? (
+          <div className="mt-6 border-y border-white/[0.08] py-10" aria-busy="true">
+            <h1 id="daily-priority" className="text-xl font-semibold text-white">
+              Building today’s priority from your learning state…
+            </h1>
+          </div>
         ) : (
-          <Link
-            to="/learn"
-            className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black transition-colors hover:bg-white/90"
-          >
-            Choose a learning path
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="mt-6 border-y border-white/[0.08] py-8 sm:py-10">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(17rem,0.65fr)] lg:gap-12">
+              <div>
+                <div className="flex items-center gap-2 text-xs text-sky-300">
+                  <Target className="h-4 w-4" aria-hidden="true" />
+                  <span>{priority.state.replace('-', ' ')}</span>
+                </div>
+                <h1
+                  id="daily-priority"
+                  className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+                >
+                  {priority.objective}
+                </h1>
+                <div className="mt-6 max-w-3xl">
+                  <h2 className="text-xs font-medium text-white/60">Why this wins today</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65 sm:text-base">
+                    {priority.rationale}
+                  </p>
+                </div>
+                <Link
+                  to={priority.action.href}
+                  className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+                >
+                  {priority.action.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="border-t border-white/[0.08] pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                <h2 className="text-xs font-medium text-white/60">Evidence required</h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/75">{priority.evidence}</p>
+                <div className="mt-6 border-t border-white/[0.08] pt-5">
+                  <h2 className="text-xs font-medium text-white/60">Completion unlocks</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">{priority.unlocks}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </header>
+
+      {plan && !loadingPriority && (
+        <section className="mt-8" aria-labelledby="session-map">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 id="session-map" className="text-sm font-semibold text-white">
+              Supporting session map
+            </h2>
+            <span className="text-xs text-white/60">
+              Primary decision stays fixed until evidence changes
+            </span>
+          </div>
+          <div className="mt-3 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+            {plan.blocks.map((block) => (
+              <Link
+                key={`${block.kind}:${block.href}`}
+                to={block.href}
+                className="grid min-h-14 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-3 text-sm hover:text-white"
+              >
+                <span className="w-12 font-mono text-xs text-white/60">{block.minutes}m</span>
+                <span>
+                  <span className="font-medium text-white/80">{block.title}</span>
+                  {block.subtitle && <span className="ml-2 text-white/60">{block.subtitle}</span>}
+                </span>
+                <ArrowRight className="h-4 w-4 text-white/35" />
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-14 border-t border-white/[0.08] pt-8" aria-labelledby="learning-now">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -228,7 +335,7 @@ export default function Today() {
                   className="flex min-h-12 items-center justify-between gap-4 text-sm text-white/60 hover:text-white"
                 >
                   <span>{visit.label}</span>
-                  <span className="font-mono text-[10px] text-white/40">
+                  <span className="font-mono text-[10px] text-white/60">
                     {new Date(visit.visitedAt).toLocaleDateString(undefined, {
                       month: 'short',
                       day: 'numeric',

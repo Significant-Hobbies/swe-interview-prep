@@ -7,8 +7,11 @@ export function focusedRoute(pathname: string): FocusedRoute | null {
   if (pathname === '/practice' || pathname === '/playground' || pathname.startsWith('/drills/')) {
     return { exitTo: '/dashboard', exitLabel: 'Back to Dashboard' };
   }
-  if (/^\/labs\/[^/]+$/.test(pathname)) {
+  if (/^\/labs\/[^/]+$/.test(pathname) || pathname.startsWith('/labs/decision/')) {
     return { exitTo: '/labs', exitLabel: 'Back to Systems Labs' };
+  }
+  if (pathname.startsWith('/study/')) {
+    return { exitTo: '/learn', exitLabel: 'Exit focused study' };
   }
   if (pathname === '/wars/blitz' || pathname.startsWith('/wars/blitz/')) {
     return { exitTo: '/wars', exitLabel: 'Exit Blitz' };

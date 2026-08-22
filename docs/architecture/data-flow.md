@@ -104,6 +104,32 @@ into `src/pages/LearningDoc.tsx`.
 5. BuildLab surfaces a "next weakest concept" card → the loop closes:
    drill → explain → mastery update → next weakest concept.
 
+## Daily priority and decision evidence
+
+1. The existing session planner chooses one reachable concept using ordered
+   intervention classes: repeated failed practice, due low-confidence mastery,
+   then roadmap progression. Time is injectable so unchanged state is
+   deterministic.
+2. A pure projection chooses the strongest evidence action for that concept
+   and exposes the objective, “why today” rationale, time budget, completion
+   predicate, and what completion unlocks.
+3. Formula views, paper opens, calculations, frozen predictions, retrievals,
+   receipts, pending explanations, and verified explanations remain distinct
+   evidence states. Versioned decision receipts and paper attempts are stored
+   in an account namespace in localStorage.
+4. Local evidence changes refresh Dashboard immediately. A receipt or paper
+   attempt remains mastery-pending until the authenticated Feynman action
+   accepts the explanation; only then can the existing concept-mastery API
+   update FSRS.
+5. Known-unavailable external sources cannot become the primary assignment;
+   the projection falls back to a local concept, drill, or decision lab.
+6. A stable UTC-day rotation selects among available concept-linked paper
+   contracts, but it runs only after recovery and retention selection and
+   after any unverified concept-linked decision lab.
+7. Mutable decision-lab and focused-study drafts live in a separate
+   account-scoped continuity store. Definition-version mismatches are ignored;
+   issuing an immutable receipt clears the corresponding mutable draft.
+
 ## Systems Lab attempt flow
 
 1. `/labs/:labId` loads a versioned definition from the SPA bundle and

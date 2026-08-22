@@ -20,7 +20,7 @@ interface Props {
   conceptIds?: string[];
   problemId?: string;
   artifact?: {
-    type: 'systems-lab';
+    type: 'systems-lab' | 'decision-receipt' | 'paper-attempt' | 'focused-study';
     title: string;
     context: string;
   };

@@ -32,6 +32,12 @@ Feynman Gate) is the build/drill workspace. Systems Lab adds a second kind of
 artifact: a repaired infrastructure configuration plus a frozen prediction,
 actor-owned evidence, and a causal explain-back.
 
+Dashboard turns the same principle into one daily decision. Failed practice
+recovery outranks overdue retention, which outranks roadmap progression. The
+winning concept is paired with an explicit evidence contract: retrieval,
+drill, decision receipt, paper retrieval, artifact, or explain-back. Opening a
+source or producing a calculation never counts as mastery.
+
 ## Primary destinations
 
 The canonical navigation model in `src/data/site-navigation.ts` exposes four
@@ -41,14 +47,17 @@ peer destination:
 
 | Tab | Role |
 | --- | --- |
-| Dashboard | Resume recent work; see current and next learning/practice; discover available paths |
+| Dashboard | Answer what to learn today with one evidence-backed priority; keep recent work and paths as supporting context |
 | Learn | Searchable high-level entry to concepts and learning paths |
 | Practice | The Playground workspace with a selector over the complete problem inventory |
 | Wars | One-minute MCQ battles and thirty-minute solo or matched engineering battles |
 
 Dashboard resumes the learner's current loop. Learn stays deliberately
 high-level, but its search and browse-all destinations cover every canonical
-concept and roadmap. Practice opens directly into the Playground and keeps the
+concept and roadmap. Its contextual tools expose the complete 42-section Learn
+Inference companion path, searchable formula and notation reference,
+prerequisite/related/unlock knowledge topography, rotating paper programme,
+and focused resumable study. Practice opens directly into the Playground and keeps the
 complete problem catalogue one interaction away. Wars makes the duration
 choice explicit before exposing ratings, history, leaderboards, and
 operational detail. Active battles and workspaces use a focused shell that
@@ -56,7 +65,9 @@ keeps account access and an exit while suppressing unrelated chrome.
 
 Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`)
 remain reachable through contextual hubs and Browse. `/mock`, `/playground`,
-`/build`, `/labs`, `/progress`, and `/wars` remain real pages with stable deep
+`/build`, `/labs`, `/labs/decision/:labId`, `/learn/inference`,
+`/learn/notation`, `/learn/papers`, `/learn/map/:conceptId`,
+`/study/:focusKind/:focusId`, `/progress`, and `/wars` remain real pages with stable deep
 links. Legacy routes redirect so external links keep working: `/today` →
 `/dashboard`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
 `/practice/all`; `/reviews`, `/review` → `/practice/all?tab=reviews`; `/projects`

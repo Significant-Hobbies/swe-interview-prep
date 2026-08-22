@@ -1,0 +1,60 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Evidence-driven daily learning and decision labs",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [
+      "artifacts/design/distilled-today-1440.png",
+      "artifacts/design/systems-lab-after-1440.png"
+    ],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/distilled-today-1440.png"
+  },
+  "evidence": {
+    "screenshots": [
+      { "width": 390, "path": "artifacts/design/daily-learning-dashboard-390.png" },
+      { "width": 768, "path": "artifacts/design/daily-learning-dashboard-768.png" },
+      { "width": 1440, "path": "artifacts/design/daily-learning-dashboard-1440.png" },
+      { "width": 390, "path": "artifacts/design/daily-learning-labs-390.png" },
+      { "width": 768, "path": "artifacts/design/daily-learning-labs-768.png" },
+      { "width": 1440, "path": "artifacts/design/daily-learning-labs-1440.png" },
+      { "width": 390, "path": "artifacts/design/daily-learning-inference-capacity-390.png" },
+      { "width": 768, "path": "artifacts/design/daily-learning-inference-capacity-768.png" },
+      { "width": 1440, "path": "artifacts/design/daily-learning-inference-capacity-1440.png" },
+      { "width": 390, "path": "artifacts/design/daily-learning-capacity-planning-390.png" },
+      { "width": 768, "path": "artifacts/design/daily-learning-capacity-planning-768.png" },
+      { "width": 1440, "path": "artifacts/design/daily-learning-capacity-planning-1440.png" },
+      { "width": 390, "path": "artifacts/design/daily-learning-evaluation-confidence-390.png" },
+      { "width": 768, "path": "artifacts/design/daily-learning-evaluation-confidence-768.png" },
+      { "width": 1440, "path": "artifacts/design/daily-learning-evaluation-confidence-1440.png" }
+    ],
+    "projectCheck": {
+      "command": "vitest run; tsc --noEmit; biome check .; docs validation; generated-curriculum + production Vite build; size limit; repository hygiene; responsive Playwright captures",
+      "status": "pass"
+    },
+    "critique": { "score": 33, "maximum": 40 },
+    "audit": { "score": 17, "maximum": 20 },
+    "unresolved": { "p0": 0, "p1": 0 },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "The scoped detector ran exactly once and returned no implementation-integrity findings.",
+        "The accessibility audit found contrast, textarea naming, and nested-main issues; all were fixed before handoff.",
+        "The final independent critique found zero unresolved P0 or P1 issues after responsive recapture."
+      ]
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner reviewed the evidence-driven daily-learning direction and responded: keep going. Preserve the deterministic daily priority, evidence-gated labs, formula support, and source-led learning contracts."
+  }
+}

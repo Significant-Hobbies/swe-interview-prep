@@ -57,7 +57,11 @@ export interface SessionPlan {
   reviewQueue: ReviewQuestion[];
   drill: Drill | null;
   artifact: Artifact | null;
+  selectionReason: SessionSelectionReason;
+  selectedAt: string;
 }
+
+export type SessionSelectionReason = 'recovery' | 'retention' | 'progression';
 
 const MIN_PER_REVIEW = 3;
 
@@ -102,8 +106,9 @@ export function conceptInSelectedTracks(concept: Concept, tracks: Set<string> | 
 export function pickConceptForSession(
   profile: LearnerProfile,
   mastery: Record<string, MasteryEntry>,
-  gateCtx: GateContext | null | undefined
-): { roadmap: Roadmap; concept: Concept } | null {
+  gateCtx: GateContext | null | undefined,
+  now = new Date()
+): { roadmap: Roadmap; concept: Concept; selectionReason: 'retention' | 'progression' } | null {
   const skip = new Set(profile.skipConceptIds);
   const weights = normalizeRoadmapWeights(profile.roadmapWeights);
   const tracks = trackFilter(profile);
@@ -117,7 +122,7 @@ export function pickConceptForSession(
     for (const c of ALL_CONCEPTS) {
       if (!idSet.has(c.id) || skip.has(c.id)) continue;
       if (!conceptInSelectedTracks(c, tracks)) continue;
-      if (!isDue(mastery[c.id]) || !reachable(c, mastery, gateCtx, skip)) continue;
+      if (!isDue(mastery[c.id], now) || !reachable(c, mastery, gateCtx, skip)) continue;
       dueCandidates.push({
         concept: c,
         roadmap,
@@ -126,8 +131,12 @@ export function pickConceptForSession(
     }
   }
   if (dueCandidates.length) {
-    dueCandidates.sort((a, b) => b.score - a.score);
-    return { concept: dueCandidates[0].concept, roadmap: dueCandidates[0].roadmap };
+    dueCandidates.sort((a, b) => b.score - a.score || a.concept.id.localeCompare(b.concept.id));
+    return {
+      concept: dueCandidates[0].concept,
+      roadmap: dueCandidates[0].roadmap,
+      selectionReason: 'retention',
+    };
   }
 
   // Weighted roadmap walk
@@ -137,14 +146,14 @@ export function pickConceptForSession(
     if (!roadmap) continue;
     const concept = pickNextConceptInRoadmap(roadmap, mastery, gateCtx);
     if (concept && !skip.has(concept.id) && conceptInSelectedTracks(concept, tracks)) {
-      return { roadmap, concept };
+      return { roadmap, concept, selectionReason: 'progression' };
     }
   }
 
   const global = pickNextConcept(mastery, gateCtx);
   if (global && !skip.has(global.id) && conceptInSelectedTracks(global, tracks)) {
     const roadmap = pickWeightedRoadmap(profile, mastery);
-    return { roadmap, concept: global };
+    return { roadmap, concept: global, selectionReason: 'progression' };
   }
 
   if (tracks) {
@@ -157,10 +166,14 @@ export function pickConceptForSession(
         reachable(c, mastery, gateCtx, skip)
     ).sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
     if (inTrack.length) {
-      return { roadmap: pickWeightedRoadmap(profile, mastery), concept: inTrack[0] };
+      return {
+        roadmap: pickWeightedRoadmap(profile, mastery),
+        concept: inTrack[0],
+        selectionReason: 'progression',
+      };
     }
     // A track filter narrows the session; it must not be able to empty it.
-    return pickConceptForSession({ ...profile, trackIds: [] }, mastery, gateCtx);
+    return pickConceptForSession({ ...profile, trackIds: [] }, mastery, gateCtx, now);
   }
   return null;
 }
@@ -185,13 +198,14 @@ export function reviewQuestionPool(extra: ReviewQuestion[] = []): ReviewQuestion
 export function dueReviewQuestions(
   rqMastery: Record<string, ReviewMasteryEntry>,
   conceptMastery: Record<string, MasteryEntry>,
-  extra: ReviewQuestion[] = []
+  extra: ReviewQuestion[] = [],
+  now = new Date()
 ): ReviewQuestion[] {
   const due = reviewQuestionPool(extra).filter((q) => {
     if (!isSchedulableReviewQuestion(q)) return false;
     const rq = rqMastery[q.id];
-    if (rq) return isReviewDue(rq);
-    return isDue(conceptMastery[q.conceptId]);
+    if (rq) return isReviewDue(rq, now);
+    return isDue(conceptMastery[q.conceptId], now);
   });
   return sortReviewQueue(due, rqMastery, conceptMastery);
 }
@@ -204,6 +218,7 @@ export function buildSessionPlan(opts: {
   drillState: Record<string, DrillEntry>;
   getElo: (roadmapId: string) => number;
   extraReviewQuestions?: ReviewQuestion[];
+  now?: Date;
 }): SessionPlan | null {
   const { profile, mastery, rqMastery, gateCtx, drillState } = opts;
   const totalMinutes = profile.minutesPerDay;
@@ -226,14 +241,15 @@ export function buildSessionPlan(opts: {
     drillMin = Math.max(10, drillMin - Math.floor(excess / 2));
   }
 
-  const reviewQueue = dueReviewQuestions(rqMastery, mastery, opts.extraReviewQuestions ?? []);
+  const now = opts.now ?? new Date();
+  const reviewQueue = dueReviewQuestions(rqMastery, mastery, opts.extraReviewQuestions ?? [], now);
   const maxReviews = Math.max(1, Math.floor(reviewMin / MIN_PER_REVIEW));
   const reviewsToShow = reviewQueue.slice(0, maxReviews);
   const actualReviewMin = reviewsToShow.length
     ? Math.min(reviewMin, reviewsToShow.length * MIN_PER_REVIEW)
     : 0;
 
-  let picked = pickConceptForSession(profile, mastery, gateCtx);
+  let picked = pickConceptForSession(profile, mastery, gateCtx, now);
   const failedConcept = pickFailedDrillConcept(drillState, mastery);
   const failedConceptAllowed =
     failedConcept &&
@@ -251,11 +267,14 @@ export function buildSessionPlan(opts: {
     picked = {
       concept: failedConceptAllowed,
       roadmap: pickWeightedRoadmap(profile, mastery),
+      selectionReason: 'progression',
     };
   }
   if (!picked) return null;
 
   const { concept, roadmap } = picked;
+  const selectionReason: SessionSelectionReason =
+    failedConceptAllowed?.id === concept.id ? 'recovery' : picked.selectionReason;
   const drill = pickDrillForConcept(concept.id);
   const artifact = pickEditorialArtifactForConcept(concept.id);
   const conf = mastery[concept.id]?.confidence;
@@ -336,5 +355,7 @@ export function buildSessionPlan(opts: {
     reviewQueue: reviewsToShow,
     drill,
     artifact,
+    selectionReason,
+    selectedAt: now.toISOString(),
   };
 }

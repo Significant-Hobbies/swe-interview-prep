@@ -10,9 +10,14 @@ disagrees with code, code wins.
 | Route | Surface |
 | --- | --- |
 | `/` | Redirects to `/dashboard` |
-| `/dashboard` | Resume hub: recent destinations, current/next learning and practice, paths, and supporting progress |
+| `/dashboard` | One deterministic daily learning priority with its rationale, time budget, evidence contract, and supporting session map |
 | `/today` | Legacy redirect to `/dashboard` |
 | `/learn`, `/learn/all` | Searchable high-level learning entry plus the complete concept catalogue |
+| `/learn/inference` | Complete 42-section companion path through the canonical Learn Inference book |
+| `/learn/notation` | Searchable formula, bound, unit, and notation reference |
+| `/learn/map/:conceptId` | Accessible prerequisite, related-concept, and downstream-unlock topography |
+| `/learn/papers` | Deterministic rotating primary-source programme and retrieval contracts |
+| `/study/:focusKind/:focusId` | Account-scoped resumable Learn → Retrieve → Apply → Explain session |
 | `/explore` | Concept/roadmap explorer |
 | `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`. Model and deferred work: [`breadth-sweep.md`](breadth-sweep.md); open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
 | `/practice` | Playground workspace with a selector over the complete canonical problem inventory |
@@ -26,7 +31,8 @@ disagrees with code, code wins.
 | `/wars/results/:slug` | Sanitized public match result |
 | `/progress`, `/progress/all` | Mastery rollups + notes |
 | `/build`, `/drills/:id` | BuildLab (hands-on build/drill workspace) |
-| `/labs`, `/labs/:labId` | Systems Lab catalog + configuration workshop + deterministic scenario runner |
+| `/labs`, `/labs/:labId` | Lab catalog + configuration workshop + deterministic Systems Lab scenario runner |
+| `/labs/decision/:labId` | Six local decision labs: inference capacity, capacity planning, evaluation confidence, model routing, RAG readiness, and inference benchmarking |
 | `/library`, `/library/:repoSlug` | Embedded GitHub learning-library reader |
 | `/sources`, `/sources/:id` | Unified learning-sources index |
 | `/session/:date`, `/session/:date/:sessionId` | Adaptive learning session |
@@ -55,7 +61,7 @@ search-only, hidden, or coupled to a particular presentation. Stable detail
 links, browse-all routes, generated catalogues, and public curriculum output
 are part of the product contract.
 
-Active `/practice`, `/playground`, `/drills/:id`, `/labs/:labId`, `/wars/blitz*`, and
+Active `/practice`, `/playground`, `/drills/:id`, `/labs/:labId`, `/study/*`, `/wars/blitz*`, and
 `/wars/tradeoff*` routes use the focused shell. It retains product identity,
 settings/account access, keyboard navigation, and a visible exit, while hiding
 the digest, setup/storage strips, and feedback trigger until the learner exits
@@ -72,7 +78,11 @@ progress worth losing.
 Guest state is localStorage-only and namespaced per account, so signing in
 adopts a guest pass rather than discarding it.
 
-Systems Lab attempts are also account-scoped in localStorage. A guest may
+Systems Lab attempts are also account-scoped in localStorage. Decision receipts
+and paper attempts use a separate versioned, account-scoped local evidence
+store; resumable study sessions and mutable decision-lab drafts use a separate
+continuity store and never rewrite immutable receipts. None adds a D1 table or
+mastery API. A guest may
 repair the bounded infrastructure configuration, predict, run, inspect
 evidence, retry, and draft an explanation. The attempt stays labeled
 mastery-pending until the configuration passes and an authenticated Feynman

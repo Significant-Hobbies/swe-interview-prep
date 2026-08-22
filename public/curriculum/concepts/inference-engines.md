@@ -19,6 +19,8 @@ An inference engine is a runtime: it schedules requests, owns model and KV memor
 - [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) (paper)
 - [Fast and Expressive LLM Inference with RadixAttention and SGLang (LMSYS)](https://lmsys.org/blog/2024-01-17-sglang/) (article)
 - [vLLM Documentation](https://docs.vllm.ai/) (doc)
+- [Learn Inference — interactive guide to inference engineering](https://learn-inference.com/) (book)
+- [Inference Engineering (Philip Kiely, Baseten)](https://www.baseten.co/inference-engineering/) (book)
 
 ## Practice
 
