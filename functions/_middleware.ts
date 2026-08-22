@@ -267,6 +267,83 @@ function isKnownRoute(pathname: string): boolean {
   return SPA_ROUTES.has(segment);
 }
 
+function isAssetPath(pathname: string): boolean {
+  return (
+    pathname.startsWith('/assets/') ||
+    pathname.startsWith('/_astro/') ||
+    (pathname.includes('.') && !pathname.endsWith('.md'))
+  );
+}
+
+function openApiResponse(): Response {
+  const headers = new Headers({
+    'content-type': 'application/json; charset=utf-8',
+    'access-control-allow-origin': '*',
+    'cache-control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+  });
+  addRateLimitHeaders(headers);
+  return new Response(JSON.stringify(OPENAPI_SPEC, null, 2), { headers });
+}
+
+async function markdownAlternate(
+  context: Parameters<PagesFunction>[0],
+  url: URL,
+  pathname: string
+): Promise<Response | null> {
+  const { request } = context;
+  if (!wantsMarkdown(request) || pathname.endsWith('.md') || pathname.startsWith('/api/')) {
+    return null;
+  }
+  if (!context.env.ASSETS) return null;
+
+  const mdUrl = new URL(url);
+  mdUrl.pathname = pathname === '/' ? '/index.md' : `${pathname.replace(/\/$/, '')}.md`;
+  const mdResponse = await context.env.ASSETS.fetch(new Request(mdUrl.toString(), request));
+  if (mdResponse.status !== 200) return null;
+
+  const headers = new Headers(mdResponse.headers);
+  headers.set('content-type', 'text/markdown; charset=utf-8');
+  headers.set('vary', 'Accept, Accept-Encoding');
+  headers.set('x-content-type-options', 'nosniff');
+  return new Response(request.method === 'HEAD' ? null : mdResponse.body, {
+    status: 200,
+    headers,
+  });
+}
+
+async function soft404Response(
+  context: Parameters<PagesFunction>[0],
+  url: URL,
+  pathname: string
+): Promise<Response | null> {
+  if (pathname.startsWith('/api/') || isKnownRoute(pathname) || !context.env.ASSETS) return null;
+
+  const checkUrl = new URL(url);
+  checkUrl.pathname = pathname.endsWith('/') ? `${pathname}index.html` : `${pathname}/index.html`;
+  const checkResponse = await context.env.ASSETS.fetch(new Request(checkUrl.toString()));
+  if (checkResponse.status === 200) return null;
+
+  return wantsMarkdown(context.request) ? markdown404(pathname, context.request.method) : html404();
+}
+
+function normalizePageResponse(response: Response, request: Request, pathname: string): Response {
+  if (response.status === 404 && !pathname.startsWith('/api/')) {
+    return wantsMarkdown(request) ? markdown404(pathname, request.method) : html404();
+  }
+
+  const contentType = response.headers.get('content-type') ?? '';
+  if (response.status !== 200 || !contentType.includes('text/html')) return response;
+
+  const headers = new Headers(response.headers);
+  const existingVary = headers.get('vary');
+  headers.set('vary', existingVary ? `${existingVary}, Accept` : 'Accept, Accept-Encoding');
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 export const onRequest: PagesFunction = async (context) => {
   const { request } = context;
 
@@ -279,13 +356,7 @@ export const onRequest: PagesFunction = async (context) => {
 
   // /openapi.json — serve the spec directly.
   if (pathname === '/openapi.json' || pathname === '/openapi.yaml') {
-    const headers = new Headers({
-      'content-type': 'application/json; charset=utf-8',
-      'access-control-allow-origin': '*',
-      'cache-control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
-    });
-    addRateLimitHeaders(headers);
-    return new Response(JSON.stringify(OPENAPI_SPEC, null, 2), { headers });
+    return openApiResponse();
   }
 
   // JSON errors for unknown /api/* paths (excluding the catch-all API route).
@@ -298,72 +369,19 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   // Skip asset paths — let Pages handle directly.
-  if (
-    pathname.startsWith('/assets/') ||
-    pathname.startsWith('/_astro/') ||
-    (pathname.includes('.') && !pathname.endsWith('.md'))
-  ) {
+  if (isAssetPath(pathname)) {
     return context.next();
   }
 
   // Accept: text/markdown negotiation for HTML pages that have a .md alternate.
-  if (wantsMarkdown(request) && !pathname.endsWith('.md') && !pathname.startsWith('/api/')) {
-    const mdPath = pathname === '/' ? '/index.md' : `${pathname.replace(/\/$/, '')}.md`;
-    if (context.env.ASSETS) {
-      const mdUrl = new URL(url);
-      mdUrl.pathname = mdPath;
-      const mdResponse = await context.env.ASSETS.fetch(new Request(mdUrl.toString(), request));
-      if (mdResponse.status === 200) {
-        const headers = new Headers(mdResponse.headers);
-        headers.set('content-type', 'text/markdown; charset=utf-8');
-        headers.set('vary', 'Accept, Accept-Encoding');
-        headers.set('x-content-type-options', 'nosniff');
-        return new Response(request.method === 'HEAD' ? null : mdResponse.body, {
-          status: 200,
-          headers,
-        });
-      }
-    }
-  }
+  const alternate = await markdownAlternate(context, url, pathname);
+  if (alternate) return alternate;
 
   // SPA soft-404 detection: if the path is not a known SPA route and not a
   // static file, return 404 instead of serving the SPA shell with 200.
-  if (!pathname.startsWith('/api/') && !isKnownRoute(pathname) && context.env.ASSETS) {
-    // Check if a static file exists for this path.
-    const checkPath = pathname.endsWith('/') ? `${pathname}index.html` : `${pathname}/index.html`;
-    const checkUrl = new URL(url);
-    checkUrl.pathname = checkPath;
-    const checkResponse = await context.env.ASSETS.fetch(new Request(checkUrl.toString()));
-    if (checkResponse.status !== 200) {
-      if (wantsMarkdown(request)) {
-        return markdown404(pathname, request.method);
-      }
-      return html404();
-    }
-  }
+  const soft404 = await soft404Response(context, url, pathname);
+  if (soft404) return soft404;
 
   const response = await context.next();
-  const contentType = response.headers.get('content-type') ?? '';
-
-  // Agent-friendly 404 with markdown recovery body.
-  if (response.status === 404 && !pathname.startsWith('/api/')) {
-    if (wantsMarkdown(request)) {
-      return markdown404(pathname, request.method);
-    }
-    return html404();
-  }
-
-  if (response.status !== 200 || !contentType.includes('text/html')) {
-    return response;
-  }
-
-  // Add Vary: Accept to HTML pages that might have markdown alternates.
-  const headers = new Headers(response.headers);
-  const existingVary = headers.get('vary');
-  headers.set('vary', existingVary ? `${existingVary}, Accept` : 'Accept, Accept-Encoding');
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers,
-  });
+  return normalizePageResponse(response, request, pathname);
 };
