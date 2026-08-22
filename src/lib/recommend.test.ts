@@ -4,14 +4,16 @@ import { CONCEPT_BY_ID } from '../hooks/useConcepts';
 import type { MasteryEntry } from '../hooks/useConcepts';
 import type { GateContext } from './gates';
 import { DEFAULT_USER_ELO } from './elo';
+import { ALL_CONCEPTS } from '../hooks/useConcepts';
 import {
+  conceptGaps,
   dueConcepts,
   dueReviewQuestions,
   pickDrillForConcept,
   pickNextConcept,
   prereqsMet,
-  weakConcepts,
 } from './recommend';
+import { sweepOrder } from './sweep';
 
 function mastery(confidence: number, due?: string, reps = 3): MasteryEntry {
   return {
@@ -95,12 +97,13 @@ describe('dashboard helpers', () => {
     expect(dueConcepts(m).map((c) => c.id)).toContain('tokenization');
   });
 
-  it('weakConcepts returns low-confidence started concepts', () => {
+  it('conceptGaps reports low-confidence started concepts as shaky', () => {
     const m = {
       bm25: mastery(0.2, undefined, 1),
       tokenization: mastery(0.9, undefined, 3),
     };
-    expect(weakConcepts(m, 3).map((c) => c.id)).toEqual(['bm25']);
+    const shaky = conceptGaps(m, 40).filter((g) => g.kind === 'shaky');
+    expect(shaky.map((g) => g.concept.id)).toEqual(['bm25']);
   });
 
   it('pickDrillForConcept returns first mapped drill', () => {
@@ -112,5 +115,51 @@ describe('dashboard helpers', () => {
     const past = new Date(Date.now() - 1000).toISOString();
     const m = { tokenization: mastery(0.4, past, 1) };
     expect(dueReviewQuestions(m).length).toBeGreaterThan(0);
+  });
+});
+
+/**
+ * The bug this suite exists for: `weakConcepts()` filtered on
+ * `mastery[c.id] && …`, so a concept never opened could not be reported as a
+ * gap at any surface. The old test passed a fixture where every concept had a
+ * mastery row, so the blind spot was invisible to it — hence the first case
+ * below, which passes an empty mastery map on purpose.
+ */
+describe('conceptGaps — untouched concepts count as gaps', () => {
+  it('reports untouched concepts when nothing has ever been studied', () => {
+    const gaps = conceptGaps({}, 5);
+    expect(gaps).toHaveLength(5);
+    expect(gaps.every((g) => g.kind === 'uncovered')).toBe(true);
+    expect(gaps.every((g) => g.confidence === 0)).toBe(true);
+  });
+
+  it('reports an untouched concept alongside a studied-but-shaky one', () => {
+    const m = { bm25: mastery(0.2, undefined, 1) };
+    const gaps = conceptGaps(m, 3);
+    expect(gaps).toHaveLength(3);
+    // Shaky first — its confidence is decaying now; an uncovered concept has
+    // been at zero since the catalogue was written and keeps until tomorrow.
+    expect(gaps[0]).toMatchObject({ kind: 'shaky' });
+    expect(gaps[0].concept.id).toBe('bm25');
+    expect(gaps.slice(1).every((g) => g.kind === 'uncovered')).toBe(true);
+    expect(gaps.some((g) => g.concept.id === 'bm25' && g.kind === 'uncovered')).toBe(false);
+  });
+
+  it('reports nothing once every concept is touched and confident', () => {
+    const all: Record<string, MasteryEntry> = {};
+    for (const id of Object.keys(CONCEPT_BY_ID)) all[id] = mastery(0.95);
+    expect(conceptGaps(all, 6)).toEqual([]);
+  });
+
+  it('orders untouched concepts by sweepOrder — foundations before frontier', () => {
+    const gaps = conceptGaps({}, 250).map((g) => g.concept);
+    const expected = [...ALL_CONCEPTS].sort(sweepOrder);
+    expect(gaps.map((c) => c.id)).toEqual(expected.slice(0, gaps.length).map((c) => c.id));
+    expect(gaps[0].difficulty).toBe('intro');
+  });
+
+  it('honours the limit and covers the whole catalogue when asked', () => {
+    expect(conceptGaps({}, 1)).toHaveLength(1);
+    expect(conceptGaps({}, ALL_CONCEPTS.length)).toHaveLength(ALL_CONCEPTS.length);
   });
 });
