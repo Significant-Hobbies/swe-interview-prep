@@ -49,7 +49,7 @@ curriculum pages and adding an entry costs a full regeneration of them.
 A sweep rating is self-assessment, not recall performance, so each one maps
 onto the FSRS grade that produces the interval the claim deserves. FSRS itself
 is unchanged — Sweep is a new *producer* of ratings, not a new scheduler (see
-[ADR 0004](../architecture/decisions/0004-fsrs-spaced-repetition.md)).
+[ADR 0004](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0004-fsrs-spaced-repetition.md)).
 
 | Sweep rating | FSRS grade | Seeds review cards |
 | --- | --- | --- |
@@ -175,5 +175,5 @@ not here.
 
 - [`surfaces.md`](surfaces.md) — route and API inventory
 - [`content-pipelines.md`](../development/content-pipelines.md#source-hubs) — how the hub index is generated
-- [ADR 0004](../architecture/decisions/0004-fsrs-spaced-repetition.md) — why FSRS owns scheduling
+- [ADR 0004](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/docs/architecture/decisions/0004-fsrs-spaced-repetition.md) — why FSRS owns scheduling
 - [`learnings.md`](../knowledge/learnings.md) — the reusable lesson behind the coverage fix
