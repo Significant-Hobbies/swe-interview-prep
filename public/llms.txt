@@ -16,7 +16,6 @@
 ## Developer docs
 
 - [OpenAPI spec](https://learn.significanthobbies.com/openapi.json): OpenAPI 3.1 specification for the public API
-- [Agent catalog](https://learn.significanthobbies.com/api/ai): JSON inventory of public agent surfaces
 - [Sitemap](https://learn.significanthobbies.com/sitemap.xml): XML sitemap of all public pages
 
 ## Interactive product
