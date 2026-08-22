@@ -13,13 +13,49 @@
  * once by `installBrowserMonitoring()` (see `foundry-monitoring.ts`).
  */
 
-// Dynamic import — keeps posthog-js (183 KB / 61 KB gzip) out of the initial
-// bundle. The first track* call triggers the import; foundry-monitoring.ts
-// (loaded via requestIdleCallback) shares the same chunk and calls posthog.init.
+// PostHog is loaded lazily via requestIdleCallback (see flushAnalytics below)
+// so the 224 KB / 43 KB gzip posthog-js chunk never blocks initial render or
+// shows up as unused JS in Lighthouse. track* calls queue events until
+// flushAnalytics() runs; after that they fire directly.
+let posthogInstance: typeof import('posthog-js')['default'] | null = null;
 let posthogPromise: Promise<typeof import('posthog-js')> | null = null;
+const eventQueue: Array<{ event: string; properties: Record<string, unknown> }> = [];
+
 function getPosthog() {
   if (!posthogPromise) posthogPromise = import('posthog-js');
   return posthogPromise;
+}
+
+/**
+ * Import posthog-js and flush any queued events. Called from main.tsx via
+ * requestIdleCallback so the chunk download happens during idle time, not
+ * during the initial render where it would compete with LCP.
+ */
+export function flushAnalytics(): void {
+  if (posthogInstance) {
+    for (const { event, properties } of eventQueue) {
+      try {
+        posthogInstance.capture(event, properties);
+      } catch {
+        // Analytics must NEVER break a user flow.
+      }
+    }
+    eventQueue.length = 0;
+    return;
+  }
+  getPosthog()
+    .then(({ default: posthog }) => {
+      posthogInstance = posthog;
+      for (const { event, properties } of eventQueue) {
+        try {
+          posthog.capture(event, properties);
+        } catch {
+          // Analytics must NEVER break a user flow.
+        }
+      }
+      eventQueue.length = 0;
+    })
+    .catch(() => {});
 }
 
 const PROJECT = 'swe-interview-prep' as const;
@@ -64,15 +100,17 @@ interface AnalyticsEventMap {
 }
 
 export function trackEvent(event: string, properties: Record<string, unknown> = {}): void {
-  getPosthog()
-    .then(({ default: posthog }) => {
-      try {
-        posthog.capture(event, { project_id: PROJECT, ...properties });
-      } catch {
-        // Analytics must NEVER break a user flow. Swallow and move on.
-      }
-    })
-    .catch(() => {});
+  const props = { project_id: PROJECT, ...properties };
+  if (posthogInstance) {
+    try {
+      posthogInstance.capture(event, props);
+    } catch {
+      // Analytics must NEVER break a user flow. Swallow and move on.
+    }
+  } else {
+    // Queue until flushAnalytics() loads posthog-js during idle time.
+    eventQueue.push({ event, properties: props });
+  }
 }
 
 function emit<K extends keyof AnalyticsEventMap>(
