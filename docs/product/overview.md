@@ -159,6 +159,7 @@ roadmap expansion beyond maintenance and personally requested workflow fixes.
 - [`surfaces.md`](surfaces.md) — routes and API surface inventory
 - [`learning-library.md`](learning-library.md) — the embedded GitHub library feature
 - [`systems-lab.md`](systems-lab.md) — safe simulation boundary and learning contract
+- [`breadth-sweep.md`](breadth-sweep.md) — breadth triage, ROI ranking, and coverage-gap reporting
 - [Harness Engineering](https://learn.significanthobbies.com/learning/harness-engineering) — the seven-build agent-harness path
 - [`../knowledge/curriculum-coverage-sources.md`](../knowledge/curriculum-coverage-sources.md) — external coverage audits and native-content boundary
 - [`../architecture/overview.md`](../architecture/overview.md) — how it's built

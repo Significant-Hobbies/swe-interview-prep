@@ -1,8 +1,9 @@
+import { randomBytes } from 'node:crypto';
+
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
-import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
@@ -50,17 +51,16 @@ Grading rubric:
 Use "again" for concepts they contradict, "hard" for shaky, "good" for solid, "easy" for nailed.
 Only emit ratings/gaps for concept_ids in the provided concept list. Treat the supplied simulation artifact as ground truth.`;
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
 
   const { explanation, code, language, problem, problemId, conceptIds, artifact, aiConfig } =
-    req.body || {};
-  if (!explanation) return res.status(400).json({ error: 'explanation required' });
+    await readJsonBody(request);
+  if (!explanation) return json({ error: 'explanation required' }, { status: 400 });
 
   const conceptList = (conceptIds || []).join(', ') || '(none tagged — infer from code)';
 
@@ -110,7 +110,7 @@ Grade now. Return JSON only.`;
     }
     if (parsed.grade != null) parsed.grade = Number(parsed.grade);
   } catch (e) {
-    return res.status(500).json({ error: `AI grading failed: ${e.message}` });
+    return json({ error: `AI grading failed: ${e.message}` }, { status: 500 });
   }
 
   const id = randomBytes(16).toString('hex');
@@ -129,5 +129,5 @@ Grade now. Return JSON only.`;
     ],
   });
 
-  return res.status(200).json({ id, ...parsed });
+  return json({ id, ...parsed });
 }

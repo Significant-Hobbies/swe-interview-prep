@@ -1,6 +1,7 @@
 /**
  * Canonical learning API surface — single source of truth for action names.
- * Local (api/learning.mjs) and production (functions/api) must stay in sync.
+ * Local (api/learning.mjs) and production (functions/api) dispatch the same
+ * Fetch handlers via dispatchLearningAction.
  */
 
 /** BYOK / heuristic — no user auth required. */
@@ -31,7 +32,7 @@ export const AUTH_ACTIONS = [
 
 export const LEARNING_ACTIONS = [...new Set([...PUBLIC_ACTIONS, ...AUTH_ACTIONS])].sort();
 
-/** Actions routed through handlers/*.mjs (Express-style). */
+/** Actions routed through handlers/*.mjs (Fetch-style). */
 export const HANDLER_MODULES = {
   activity: () => import('../../handlers/activity.mjs'),
   concepts: () => import('../../handlers/concepts.mjs'),

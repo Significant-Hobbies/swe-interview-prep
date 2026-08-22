@@ -38,7 +38,7 @@ import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/use
 import { useGateContext } from '../hooks/useGates';
 import { confidencePct, deriveConceptStatus, rollupMastery } from '../lib/conceptState';
 import { conceptAccessible } from '../lib/gates';
-import { pickDrillForConcept, pickNextConcept, weakConcepts } from '../lib/recommend';
+import { conceptGaps, pickDrillForConcept, pickNextConcept } from '../lib/recommend';
 
 type StatusFilter = 'all' | 'untouched' | 'active' | 'mastered';
 
@@ -92,7 +92,7 @@ export default function Learn() {
         mastery={mastery}
       />
 
-      <WeakAreasPanel mastery={mastery} loading={loading} />
+      <GapsPanel mastery={mastery} loading={loading} />
 
       <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_300px]">
         <RoadmapPicker activeId={activeRoadmap.id} mastery={mastery} />
@@ -245,23 +245,28 @@ function ActivePathHero({
   );
 }
 
-// --- Weak areas panel -------------------------------------------------------
+// --- Gaps panel -------------------------------------------------------------
 
-function WeakAreasPanel({
+/**
+ * Both kinds of gap, in one list: low confidence on something started, and
+ * concepts never opened at all. The second used to be unreportable — see
+ * `conceptGaps` in lib/recommend.ts.
+ */
+function GapsPanel({
   mastery,
   loading,
 }: {
   mastery: Record<string, MasteryEntry>;
   loading: boolean;
 }) {
-  const weak = weakConcepts(mastery, 4);
+  const gaps = conceptGaps(mastery, 4);
   const hasAnyMastery = Object.keys(mastery).length > 0;
 
   return (
     <section className="mt-6">
       <SectionHeader
-        title="Weak areas"
-        subtitle="Concepts you've started but whose confidence is still low — review or drill to strengthen them."
+        title="Biggest gaps"
+        subtitle="Concepts whose confidence is low, plus concepts you have never opened — retention and coverage in one list."
       />
       {loading && !hasAnyMastery ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -272,18 +277,16 @@ function WeakAreasPanel({
             />
           ))}
         </div>
-      ) : weak.length === 0 ? (
+      ) : gaps.length === 0 ? (
         <EmptyState
-          title={hasAnyMastery ? 'No weak areas right now' : 'Start a concept to see weak areas'}
-          hint={
-            hasAnyMastery
-              ? 'Your weakest concepts will surface here as confidence decays or you start new ones.'
-              : 'Rate your first concept review to begin tracking mastery.'
-          }
+          title="No gaps left"
+          hint="Every concept in the catalogue has been opened and none has fallen below the confidence bar. Gaps reappear here as confidence decays."
         />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {weak.map((c) => {
+          {gaps.map((gap) => {
+            const c = gap.concept;
+            const uncovered = gap.kind === 'uncovered';
             const m = mastery[c.id];
             const drill = pickDrillForConcept(c.id);
             const trk = primaryGroup(c);
@@ -303,25 +306,31 @@ function WeakAreasPanel({
                     </Link>
                     {trk && <div className="mt-0.5 text-xs text-white/40">{trk.short}</div>}
                   </div>
-                  <span className="shrink-0 font-mono text-xs text-amber-300">{pct}%</span>
+                  <span
+                    className={`shrink-0 font-mono text-xs ${uncovered ? 'text-sky-300' : 'text-amber-300'}`}
+                  >
+                    {uncovered ? 'new' : `${pct}%`}
+                  </span>
                 </div>
                 <div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                     <div
                       className="h-full rounded-full bg-amber-500 transition-[width] duration-300"
-                      style={{ width: `${pct}%` }}
+                      style={{ width: uncovered ? '0%' : `${pct}%` }}
                     />
                   </div>
                   <div className="mt-1 text-xs text-white/40">
-                    {m?.reps ?? 0} rep{(m?.reps ?? 0) !== 1 ? 's' : ''}
+                    {uncovered
+                      ? 'never opened'
+                      : `${m?.reps ?? 0} rep${(m?.reps ?? 0) !== 1 ? 's' : ''}`}
                   </div>
                 </div>
                 <div className="mt-auto flex gap-2">
                   <Link
-                    to="/practice?tab=reviews"
+                    to={uncovered ? `/concepts/${c.id}` : '/practice?tab=reviews'}
                     className="flex-1 rounded-md border border-white/15 py-1.5 text-center text-xs font-medium text-white/80 transition-colors duration-150 hover:border-white/30 hover:bg-white/5"
                   >
-                    Review
+                    {uncovered ? 'Read' : 'Review'}
                   </Link>
                   {drill && (
                     <Link

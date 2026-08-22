@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 
-import { requireAuth } from '../api/auth/verify.mjs';
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 
@@ -23,25 +23,24 @@ function toEntry(row) {
   };
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT * FROM user_artifacts WHERE user_id = ?',
       args: [user.id],
     });
     const artifacts = {};
     for (const row of r.rows) artifacts[row.artifact_id] = toEntry(row);
-    return res.status(200).json({ artifacts });
+    return json({ artifacts });
   }
 
-  if (req.method === 'POST') {
-    const { artifactId, status, url, path, notes, criteria } = req.body || {};
-    if (!artifactId) return res.status(400).json({ error: 'artifactId required' });
+  if (request.method === 'POST') {
+    const { artifactId, status, url, path, notes, criteria } = await readJsonBody(request);
+    if (!artifactId) return json({ error: 'artifactId required' }, { status: 400 });
     await db.execute({
       sql: `INSERT INTO user_artifacts (id, user_id, artifact_id, status, url, path, notes, criteria_json)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -63,8 +62,8 @@ export default async function handler(req, res) {
         criteria ? JSON.stringify(criteria) : null,
       ],
     });
-    return res.status(200).json({ ok: true });
+    return json({ ok: true });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

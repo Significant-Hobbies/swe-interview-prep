@@ -13,6 +13,11 @@
 - [Full agent brief](https://learn.significanthobbies.com/llms-full.txt): Tracks and roadmap links
 - [Agent catalog](https://learn.significanthobbies.com/api/ai): JSON inventory of public surfaces
 
+## Developer docs
+
+- [OpenAPI spec](https://learn.significanthobbies.com/openapi.json): OpenAPI 3.1 specification for the public API
+- [Sitemap](https://learn.significanthobbies.com/sitemap.xml): XML sitemap of all public pages
+
 ## Interactive product
 
 - [Learning app](https://learn.significanthobbies.com/learn): FSRS, drills, Playground, Socratic feedback, and progress

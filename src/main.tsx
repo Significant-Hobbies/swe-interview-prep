@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthProvider } from './contexts/AuthContext';
+import { flushAnalytics } from './lib/analytics';
 const root = document.getElementById('root');
 
 if (!root) {
@@ -27,6 +28,7 @@ createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</Strict
 
 const scheduleMonitoring = () => {
   void import('./lib/foundry-monitoring').then((m) => m.installBrowserMonitoring());
+  flushAnalytics();
 };
 if ('requestIdleCallback' in window) {
   requestIdleCallback(scheduleMonitoring, { timeout: 3000 });

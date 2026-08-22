@@ -14,6 +14,7 @@ in [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/
 | --- | --- |
 | [`product/overview.md`](product/overview.md) | What the product is, its surfaces, and competitive context |
 | [`product/systems-lab.md`](product/systems-lab.md) | Deterministic Systems Lab boundary, learning loop, and authoring contract |
+| [`product/breadth-sweep.md`](product/breadth-sweep.md) | Breadth layer: triage at `/sweep`, ROI ranking, coverage gaps, and what is deferred |
 | [`architecture/overview.md`](architecture/overview.md) | System architecture, request/data flow, and decision records (ADRs) |
 | [`architecture/decisions/README.md`](architecture/decisions/README.md) | Architecture Decision Records — why a choice was made |
 | [`development/commands.md`](development/commands.md) | Local setup, commands, environment, testing, content pipelines |

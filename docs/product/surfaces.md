@@ -19,7 +19,7 @@ disagrees with code, code wins.
 | `/learn/papers` | Deterministic rotating primary-source programme and retrieval contracts |
 | `/study/:focusKind/:focusId` | Account-scoped resumable Learn → Retrieve → Apply → Explain session |
 | `/explore` | Concept/roadmap explorer |
-| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`; open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
+| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`. Model and deferred work: [`breadth-sweep.md`](breadth-sweep.md); open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
 | `/practice` | Playground workspace with a selector over the complete canonical problem inventory |
 | `/practice/all` | Complete drill catalogue and spaced-repetition reviews |
 | `/playground` | Stable alias for the same Playground workspace |

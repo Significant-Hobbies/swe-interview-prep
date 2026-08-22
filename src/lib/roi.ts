@@ -1,15 +1,14 @@
 /**
  * Where the next hour is worth the most.
  *
- * The app could not answer this before, for one structural reason:
- * `weakConcepts()` in recommend.ts filters on `mastery[c.id] && …`, so a
- * concept you have NEVER touched can never be reported as a gap. Every
- * downstream surface inherited that blind spot — the app could say you were
- * shaky on something you had studied, but never that you had not opened
- * distributed systems at all.
+ * The app could not answer this before, for one structural reason: the
+ * recommender filtered on `mastery[c.id] && …`, so a concept never touched
+ * could not be reported as a gap. `conceptGaps()` in recommend.ts now counts
+ * untouched concepts too, and carries the full account of that bug.
  *
- * Sweep fixes the input: after a triage pass, "not known" is observable rather
- * than absent. This module turns that into a ranking.
+ * Sweep is the sharper input: after a triage pass, "not known" is a claim the
+ * learner made rather than an absence the app has to interpret. This module
+ * turns that into a ranking.
  *
  * Deliberately no model and no LLM — it is set intersection over
  * `concept-packs.json` and your own sweep state, so nothing inferred is ever

@@ -9,6 +9,7 @@
 // path uses generate() which falls back to env vars; production CF Pages
 // mirrors this in functions/api/[[path]].js with BYOK only.
 
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
 
 const QUIZ_SYSTEM = `You write open-ended comprehension questions that test whether a reader has internalised a learning doc.
@@ -70,14 +71,15 @@ function truncate(s, n) {
   return s.length > n ? `${s.slice(0, n)}\n…[truncated]` : s;
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+export default async function handler({ request, json }) {
+  if (request.method !== 'POST') {
+    return json({ error: 'Method not allowed' }, { status: 405 });
   }
-  const { op, docTitle, docContent, questions, answers, explanation, aiConfig } = req.body || {};
+  const { op, docTitle, docContent, questions, answers, explanation, aiConfig } =
+    await readJsonBody(request);
   if (!op)
-    return res.status(400).json({ error: 'op required: quiz | grade-quiz | grade-explanation' });
-  if (!docContent) return res.status(400).json({ error: 'docContent required' });
+    return json({ error: 'op required: quiz | grade-quiz | grade-explanation' }, { status: 400 });
+  if (!docContent) return json({ error: 'docContent required' }, { status: 400 });
 
   const docExcerpt = truncate(docContent, 8000);
   const title = docTitle || '(untitled doc)';
@@ -91,9 +93,10 @@ export default async function handler(req, res) {
       maxTokens = 900;
     } else if (op === 'grade-quiz') {
       if (!Array.isArray(questions) || !Array.isArray(answers)) {
-        return res
-          .status(400)
-          .json({ error: 'questions and answers arrays required for grade-quiz' });
+        return json(
+          { error: 'questions and answers arrays required for grade-quiz' },
+          { status: 400 }
+        );
       }
       const qa = questions
         .map((q, i) => `Q${i + 1}: ${q}\nA${i + 1}: ${truncate(answers[i] || '(blank)', 1500)}`)
@@ -103,22 +106,22 @@ export default async function handler(req, res) {
       maxTokens = 1800;
     } else if (op === 'grade-explanation') {
       if (!explanation || explanation.trim().length < 30) {
-        return res.status(400).json({ error: 'explanation required (at least 30 chars)' });
+        return json({ error: 'explanation required (at least 30 chars)' }, { status: 400 });
       }
       system = GRADE_EXPLANATION_SYSTEM;
       prompt = `Doc title: ${title}\n\nDoc content:\n"""\n${docExcerpt}\n"""\n\nReader's explanation:\n"""\n${truncate(explanation, 4000)}\n"""\n\nGrade now. JSON only.`;
       maxTokens = 1200;
     } else {
-      return res.status(400).json({ error: `unknown op: ${op}` });
+      return json({ error: `unknown op: ${op}` }, { status: 400 });
     }
 
     const text = await generate({ ...(aiConfig || {}), system, prompt, maxTokens });
     const parsed = parseJSON(text);
     if (!parsed || typeof parsed !== 'object') {
-      return res.status(502).json({ error: 'AI returned non-object' });
+      return json({ error: 'AI returned non-object' }, { status: 502 });
     }
-    return res.status(200).json(parsed);
+    return json(parsed);
   } catch (e) {
-    return res.status(500).json({ error: `AI call failed: ${e.message}` });
+    return json({ error: `AI call failed: ${e.message}` }, { status: 500 });
   }
 }

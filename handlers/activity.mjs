@@ -1,7 +1,8 @@
+import { randomBytes } from 'node:crypto';
+
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
-import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
@@ -11,15 +12,14 @@ async function ensureInit() {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'POST') {
-    const { kind, problemId, conceptIds, durationMs, payload } = req.body || {};
-    if (!kind) return res.status(400).json({ error: 'kind required' });
+  if (request.method === 'POST') {
+    const { kind, problemId, conceptIds, durationMs, payload } = await readJsonBody(request);
+    if (!kind) return json({ error: 'kind required' }, { status: 400 });
     const id = randomBytes(16).toString('hex');
     await db.execute({
       sql: `INSERT INTO activity_log (id, user_id, kind, problem_id, concept_ids, duration_ms, payload)
@@ -34,11 +34,11 @@ export default async function handler(req, res) {
         payload ? JSON.stringify(payload) : null,
       ],
     });
-    return res.status(200).json({ id });
+    return json({ id });
   }
 
-  if (req.method === 'GET') {
-    const days = parseInt(req.query.days || '7', 10);
+  if (request.method === 'GET') {
+    const days = parseInt(new URL(request.url).searchParams.get('days') || '7', 10);
     const since = new Date(Date.now() - days * 86400000).toISOString();
     const result = await db.execute({
       sql: `SELECT id, kind, problem_id, concept_ids, duration_ms, payload, created_at
@@ -54,8 +54,8 @@ export default async function handler(req, res) {
       payload: r.payload ? JSON.parse(r.payload) : null,
       createdAt: r.created_at,
     }));
-    return res.status(200).json({ activity: rows });
+    return json({ activity: rows });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

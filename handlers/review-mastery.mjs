@@ -1,8 +1,9 @@
+import { randomBytes } from 'node:crypto';
+
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
 import { reviewConcept } from '../shared/lib/fsrs.mjs';
-import { randomBytes } from 'node:crypto';
 
 let initialized = false;
 async function ensureInit() {
@@ -66,13 +67,12 @@ function toClient(row) {
   };
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT question_id, stability, difficulty, reps, lapses, state, last_review, due FROM review_question_mastery WHERE user_id = ?',
       args: [user.id],
@@ -81,30 +81,30 @@ export default async function handler(req, res) {
     for (const row of r.rows) {
       mastery[row.question_id] = toClient(row);
     }
-    return res.status(200).json({ mastery });
+    return json({ mastery });
   }
 
-  if (req.method === 'POST') {
-    const { questionId, rating } = req.body || {};
+  if (request.method === 'POST') {
+    const { questionId, rating } = await readJsonBody(request);
     if (!questionId || !rating)
-      return res.status(400).json({ error: 'questionId, rating required' });
+      return json({ error: 'questionId, rating required' }, { status: 400 });
     const prev = await getRow(db, user.id, questionId);
     const next = reviewConcept(prev, rating);
     await upsert(db, user.id, questionId, next);
-    return res.status(200).json({ mastery: toClient({ ...next, question_id: questionId }) });
+    return json({ mastery: toClient({ ...next, question_id: questionId }) });
   }
 
-  if (req.method === 'PUT') {
-    const { updates } = req.body || {};
-    if (!Array.isArray(updates)) return res.status(400).json({ error: 'updates array required' });
+  if (request.method === 'PUT') {
+    const { updates } = await readJsonBody(request);
+    if (!Array.isArray(updates)) return json({ error: 'updates array required' }, { status: 400 });
     for (const u of updates) {
       if (!u.questionId || !u.rating) continue;
       const prev = await getRow(db, user.id, u.questionId);
       const next = reviewConcept(prev, u.rating);
       await upsert(db, user.id, u.questionId, next);
     }
-    return res.status(200).json({ ok: true });
+    return json({ ok: true });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

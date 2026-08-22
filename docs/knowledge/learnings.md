@@ -26,6 +26,23 @@ reveal, preserve assumptions and derived values in an immutable receipt, then
 require a mitigation, counterfactual, verification metric, and causal
 explain-back. Keep opened, calculated, retrieved, pending, and verified states
 separate so UI completion cannot fabricate FSRS progress.
+## 2026-08 — A truthiness filter can make absence unreportable
+
+`weakConcepts()` filtered on `mastery[c.id] && …`, so a concept never opened
+could not be reported as a gap at any surface — and the product's goal is
+coverage, which is exactly a statement about absence. The tell was a passing
+test whose fixture gave every concept a mastery row, so the blind spot was
+invisible to it. Generalize: when a record's *absence* carries meaning, a
+truthiness guard silently deletes that meaning, and a fixture where every key
+is present will never catch it. Fix and reasoning:
+[`breadth-sweep.md`](../product/breadth-sweep.md).
+
+## 2026-08 — Learning actions are Fetch handlers, not Express
+
+Production already authenticates in the Pages Function and
+`dispatchLearningAction`. The Express `(req, res)` adapter was leftover from
+Vercel — handlers now take `{ request, user, json }` and return `json(...)`.
+Do not reintroduce a second Express dispatcher for `/api/learning`.
 
 ## 2026-07 — Broad curriculum coverage needs a machine-readable contract
 

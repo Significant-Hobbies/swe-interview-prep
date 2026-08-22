@@ -1,6 +1,6 @@
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
 import {
   deleteImportedDeck,
   listImportedReviews,
@@ -15,29 +15,29 @@ async function ensureInit() {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const reviews = await listImportedReviews(db, user.id);
-    return res.status(200).json({ reviews });
+    return json({ reviews });
   }
 
-  if (req.method === 'POST') {
-    const { deckName, cards } = req.body || {};
+  if (request.method === 'POST') {
+    const { deckName, cards } = await readJsonBody(request);
     const result = await upsertImportedReviews(db, user.id, { deckName, cards });
     const reviews = await listImportedReviews(db, user.id);
-    return res.status(200).json({ ...result, reviews });
+    return json({ ...result, reviews });
   }
 
-  if (req.method === 'DELETE') {
-    const deckName = req.query.deck || req.body?.deckName;
+  if (request.method === 'DELETE') {
+    const body = await readJsonBody(request);
+    const deckName = new URL(request.url).searchParams.get('deck') || body?.deckName;
     const result = await deleteImportedDeck(db, user.id, deckName);
-    return res.status(200).json(result);
+    return json(result);
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

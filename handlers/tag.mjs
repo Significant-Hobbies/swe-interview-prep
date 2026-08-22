@@ -1,4 +1,4 @@
-import { requireAuth } from '../api/auth/verify.mjs';
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { generate, parseJSON } from '../shared/lib/ai.mjs';
 import { tagConcepts } from '../shared/lib/heuristics.mjs';
@@ -32,14 +32,12 @@ Rules:
 - "surface" = mentioned/imported, "working" = used correctly, "deep" = non-trivial application
 - Empty array if no concept clearly used`;
 
-export default async function handler(req, res) {
+export default async function handler({ request, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, { status: 405 });
 
-  const { code, language, problem, aiConfig } = req.body || {};
-  if (!code || code.length < 30) return res.status(200).json({ concepts: [] });
+  const { code, language, problem, aiConfig } = await readJsonBody(request);
+  if (!code || code.length < 30) return json({ concepts: [] });
 
   const concepts = loadConcepts();
   const conceptList = concepts.map((c) => `${c.id}: ${c.name}`).join('\n');
@@ -62,10 +60,10 @@ Tag now. JSON only.`;
     try {
       const text = await generate({ ...aiConfig, system: SYSTEM, prompt, maxTokens: 600 });
       const parsed = parseJSON(text);
-      return res.status(200).json({ ...parsed, generator: 'ai' });
+      return json({ ...parsed, generator: 'ai' });
     } catch {
       // Fall through to heuristic
     }
   }
-  return res.status(200).json({ concepts: tagConcepts(code, language), generator: 'heuristic' });
+  return json({ concepts: tagConcepts(code, language), generator: 'heuristic' });
 }

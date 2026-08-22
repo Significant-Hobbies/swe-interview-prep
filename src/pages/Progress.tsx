@@ -8,7 +8,7 @@ import { EDITORIAL_ARTIFACTS, EDITORIAL_DRILLS } from '../data/learning-os';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useArtifactStore, useDrillStore } from '../hooks/useUserStore';
 import { confidencePct, rollupMastery } from '../lib/conceptState';
-import { weakConcepts } from '../lib/recommend';
+import { conceptGaps } from '../lib/recommend';
 
 export default function Progress() {
   const { mastery } = useConceptMastery();
@@ -23,9 +23,11 @@ export default function Progress() {
   const shipped = Object.values(artifacts).filter((a) => a.status === 'shipped').length;
   const sparkline = useMemo(() => buildRecentActivity(mastery, 30), [mastery]);
   const pct = overall.total ? (overall.mastered / overall.total) * 100 : 0;
-  // The 2-3 weakest touched concepts — the "what to master next" queue fed by
-  // drills, explain-backs (Feynman Gate), and reviews.
-  const weakest = useMemo(() => weakConcepts(mastery, 3), [mastery]);
+  // The 2-3 thinnest concepts — the "what to master next" queue fed by drills,
+  // explain-backs (Feynman Gate), and reviews. Includes concepts never opened,
+  // which is the only way this page can report a coverage gap rather than only
+  // a confidence one.
+  const gaps = useMemo(() => conceptGaps(mastery, 3), [mastery]);
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
@@ -61,23 +63,26 @@ export default function Progress() {
         <Sub label="Started" value={`${overall.total - overall.untouched}/${overall.total}`} />
       </section>
 
-      {weakest.length > 0 && (
+      {gaps.length > 0 && (
         <section className="section-rule mt-16 pt-10">
           <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            Weakest concepts
+            Biggest gaps
           </div>
           <div className="flex flex-col gap-2.5">
-            {weakest.map((c) => (
+            {gaps.map((gap) => (
               <Link
-                key={c.id}
-                to={`/concepts/${c.id}`}
+                key={gap.concept.id}
+                to={`/concepts/${gap.concept.id}`}
                 className="group flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-mono text-sm"
               >
                 <span className="text-white group-hover:text-white/70">
-                  Next: master {c.name} <span className="text-white/40">→</span>
+                  {gap.kind === 'uncovered' ? 'Next: cover' : 'Next: master'} {gap.concept.name}{' '}
+                  <span className="text-white/40">→</span>
                 </span>
                 <span className="text-xs tabular-nums text-white/40">
-                  {confidencePct(mastery[c.id])}% confident
+                  {gap.kind === 'uncovered'
+                    ? 'never opened'
+                    : `${confidencePct(mastery[gap.concept.id])}% confident`}
                 </span>
               </Link>
             ))}

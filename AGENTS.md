@@ -132,12 +132,13 @@ intentionally does not restate it.
 
 ### Adding Tasks
 - Track product work in this repository's GitHub issues or OpenSpec changes.
-- Keep cross-project infrastructure work in Fleet Workspace, not SaaS Maker.
+- Keep reusable cross-project automation in Workflows and Skills and private
+  portfolio metadata in Site Health, not SaaS Maker.
 
 ### Using SaaS Maker
 - SaaS Maker is used only for the embedded feedback widget.
-- Fleet Workspace owns shared project metadata and infrastructure; this product
-  remains independently versioned and deployed.
+- Site Health owns private portfolio metadata; Workflows and Skills owns shared
+  automation. This product remains independently versioned and deployed.
 
 ### Free AI First
 - Prefer free/local AI paths for routine development and analysis: the `free-ai` gateway, local models, provider free tiers, and cached context.

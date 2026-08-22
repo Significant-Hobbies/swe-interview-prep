@@ -48,7 +48,7 @@ to prod.
 ```
 src/                 React SPA (pages, components, hooks, data, lib, adapters)
 api/                 Legacy local handlers (.mjs) — kept for local dev parity
-handlers/            Action handlers used by both api/ and functions/
+handlers/            Fetch-style action handlers used by dispatchLearningAction
 functions/api/       Cloudflare Pages Functions (production catch-all)
 shared/              Code shared between api/ and functions/ (db, lib, handlers, fixtures)
 scripts/             Content pipelines + env validation + deploy helpers

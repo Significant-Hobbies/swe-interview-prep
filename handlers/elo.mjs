@@ -1,6 +1,6 @@
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
 
 let initialized = false;
 async function ensureInit() {
@@ -12,32 +12,31 @@ async function ensureInit() {
 
 const EMPTY = { elo: {}, solves: {}, v: 2 };
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT state_json FROM user_elo_state WHERE user_id = ?',
       args: [user.id],
     });
-    if (!r.rows.length) return res.status(200).json({ state: EMPTY });
-    return res.status(200).json({ state: JSON.parse(r.rows[0].state_json) });
+    if (!r.rows.length) return json({ state: EMPTY });
+    return json({ state: JSON.parse(r.rows[0].state_json) });
   }
 
-  if (req.method === 'PUT') {
-    const { state } = req.body || {};
+  if (request.method === 'PUT') {
+    const { state } = await readJsonBody(request);
     if (!state || typeof state !== 'object')
-      return res.status(400).json({ error: 'state required' });
+      return json({ error: 'state required' }, { status: 400 });
     await db.execute({
       sql: `INSERT INTO user_elo_state (user_id, state_json, updated_at) VALUES (?, ?, datetime('now'))
             ON CONFLICT(user_id) DO UPDATE SET state_json = excluded.state_json, updated_at = datetime('now')`,
       args: [user.id, JSON.stringify({ ...EMPTY, ...state, v: 2 })],
     });
-    return res.status(200).json({ ok: true });
+    return json({ ok: true });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }

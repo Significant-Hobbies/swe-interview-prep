@@ -1,10 +1,11 @@
+import { randomBytes } from 'node:crypto';
+
+import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
-import { requireAuth } from '../api/auth/verify.mjs';
-import { masteryConfidence } from '../shared/lib/fsrs.mjs';
 import { generate } from '../shared/lib/ai.mjs';
+import { masteryConfidence } from '../shared/lib/fsrs.mjs';
 import { buildWeeklyReport } from '../shared/lib/heuristics.mjs';
-import { randomBytes } from 'node:crypto';
 
 import conceptsData from '../src/data/concepts.json' with { type: 'json' };
 
@@ -39,20 +40,19 @@ function weekStart(date = new Date()) {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), diff)).toISOString().slice(0, 10);
 }
 
-export default async function handler(req, res) {
+export default async function handler({ request, user, json }) {
   await ensureInit();
-  const user = await requireAuth(req, res);
-  if (!user) return;
+  if (!user) return json({ error: 'Unauthorized' }, { status: 401 });
   const db = getDb();
   const ws = weekStart();
 
-  if (req.method === 'GET') {
+  if (request.method === 'GET') {
     const r = await db.execute({
       sql: 'SELECT report_md, stats_json, created_at FROM weekly_review WHERE user_id = ? ORDER BY week_start DESC LIMIT 1',
       args: [user.id],
     });
-    if (r.rows.length === 0) return res.status(200).json({ review: null });
-    return res.status(200).json({
+    if (r.rows.length === 0) return json({ review: null });
+    return json({
       review: {
         reportMd: r.rows[0].report_md,
         stats: r.rows[0].stats_json ? JSON.parse(r.rows[0].stats_json) : null,
@@ -61,8 +61,8 @@ export default async function handler(req, res) {
     });
   }
 
-  if (req.method === 'POST') {
-    const { aiConfig } = req.body || {};
+  if (request.method === 'POST') {
+    const { aiConfig } = await readJsonBody(request);
 
     const activity = await db.execute({
       sql: `SELECT kind, concept_ids, duration_ms, payload, created_at FROM activity_log
@@ -166,10 +166,10 @@ Write the review now.`;
       args: [id, user.id, ws, report, JSON.stringify(finalStats)],
     });
 
-    return res.status(200).json({
+    return json({
       review: { reportMd: report, stats: finalStats, createdAt: new Date().toISOString() },
     });
   }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+  return json({ error: 'Method not allowed' }, { status: 405 });
 }
