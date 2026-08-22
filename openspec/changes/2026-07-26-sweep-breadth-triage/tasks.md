@@ -34,6 +34,17 @@
 - [x] Missing live region, low-contrast shortcut legend, undo shortcut unlabelled
 - [x] Five dead exports removed
 
+## Fixed after review (issue #79)
+
+- [x] `weakConcepts()` replaced by `conceptGaps()` — untouched concepts are now
+      reportable as gaps, so the blind spot named in the proposal is closed at
+      the recommender rather than only at the Sweep ranking. Propagated to
+      `/progress` and `/learn/all`, which label an uncovered concept
+      `never opened` rather than "0% confident". Regression tests in
+      `src/lib/recommend.test.ts` pass an empty mastery map on purpose — the
+      old fixture gave every concept a row, which is why the bug survived.
+- [x] Canonical docs home: `docs/product/breadth-sweep.md`
+
 ## Open
 
 - [ ] Cross-device sync — needs approval before touching the schema:

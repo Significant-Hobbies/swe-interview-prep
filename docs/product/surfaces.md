@@ -14,7 +14,7 @@ disagrees with code, code wins.
 | `/today` | Legacy redirect to `/dashboard` |
 | `/learn`, `/learn/all` | Searchable high-level learning entry plus the complete concept catalogue |
 | `/explore` | Concept/roadmap explorer |
-| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`; open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
+| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`. Model and deferred work: [`breadth-sweep.md`](breadth-sweep.md); open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
 | `/practice` | Playground workspace with a selector over the complete canonical problem inventory |
 | `/practice/all` | Complete drill catalogue and spaced-repetition reviews |
 | `/playground` | Stable alias for the same Playground workspace |

@@ -45,8 +45,8 @@ const INCIDENTAL: SourceHub[] = [
 
 describe('isUnknown', () => {
   it('treats untouched concepts as unknown — the blind spot this exists to fix', () => {
-    // recommend.ts `weakConcepts` requires mastery[c.id] to exist, so a domain
-    // you have never opened is invisible to it. Here, absence IS the signal.
+    // Absence IS the signal here: a concept is a gap until it is rated Known,
+    // so a domain never opened ranks rather than disappearing.
     expect(isUnknown('never-seen', {})).toBe(true);
     expect(isUnknown('x', { x: 'new' })).toBe(true);
     expect(isUnknown('x', { x: 'fuzzy' })).toBe(true);
