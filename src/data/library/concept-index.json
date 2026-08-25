@@ -72,6 +72,29 @@
       "snippet": "### How can we find the version of React at runtime in the browser? You can use `React.version` to get the version. ```jsx harmony const REACT_VERSION = React.version; ReactDOM.render(…"
     }
   ],
+  "ml-evaluation": [
+    {
+      "repoId": "lm-eval-harness",
+      "repoName": "LM Evaluation Harness",
+      "sectionId": "readme-md-language-model-evaluation-harness",
+      "title": "Language Model Evaluation Harness",
+      "snippet": "# Language Model Evaluation Harness [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10256836.svg)](https://doi.org/10.5281/zenodo.10256836) ---…"
+    },
+    {
+      "repoId": "lm-eval-harness",
+      "repoName": "LM Evaluation Harness",
+      "sectionId": "readme-md-language-model-evaluation-harness-overview",
+      "title": "Overview",
+      "snippet": "…rt for custom prompts and evaluation metrics. The Language Model Evaluation Harness is the backend for 🤗 Hugging Face's popular [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard), has been used in [hundreds of papers](ht…"
+    },
+    {
+      "repoId": "lm-eval-harness",
+      "repoName": "LM Evaluation Harness",
+      "sectionId": "readme-md-language-model-evaluation-harness-latest-news",
+      "title": "Latest News 📣",
+      "snippet": "## Latest News 📣 - [2025/12] **CLI refactored** with subcommands (`run`, `ls`, `validate`) and YAML config file support via `--config`. See the [CLI Reference](https://github.com/EleutherAI/lm-evalua…"
+    }
+  ],
   "http-lifecycle": [
     {
       "repoId": "node-best-practices",
@@ -280,8 +303,8 @@
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-511",
-      "title": "511. How do you implement a singleton pattern in JavaScript?",
+      "sectionId": "q-512",
+      "title": "512. How do you implement a singleton pattern in JavaScript?",
       "snippet": "### How do you implement a singleton pattern in JavaScript? The singleton pattern ensures a class has only one instance and provides a global access point to it. **Classic singleton with closur…"
     }
   ],
@@ -468,8 +491,8 @@
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-238",
-      "title": "238. What is the call stack",
+      "sectionId": "q-239",
+      "title": "239. What is the call stack",
       "snippet": "### What is the call stack Call Stack is a data structure for javascript interpreters to keep track of function calls(creates execution context) in the program. It has two major actions, 1. Whenever you call a fun…"
     },
     {
@@ -555,8 +578,8 @@
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-396",
-      "title": "396. What is heap",
+      "sectionId": "q-397",
+      "title": "397. What is heap",
       "snippet": "### What is heap Heap(Or memory heap) is the memory location where objects are stored when we define variables. i.e, This is the place where all the memory allocations and de-allocation take place. B…"
     },
     {
@@ -1102,8 +1125,8 @@
     {
       "repoId": "javascript-questions",
       "repoName": "JavaScript Interview Questions",
-      "sectionId": "q-244",
-      "title": "244. What is the purpose of compareFunction while sorting arrays",
+      "sectionId": "q-245",
+      "title": "245. What is the purpose of compareFunction while sorting arrays",
       "snippet": "### What is the purpose of compareFunction while sorting arrays The compareFunction is used to define the sort order. If omitted, the array elements are converted to strings, then sorted according to each character's Unicode code point value.…"
     }
   ],
