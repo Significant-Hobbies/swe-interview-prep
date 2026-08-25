@@ -1,9 +1,7 @@
 # swe-interview-prep — Documentation
 
 This directory is the canonical, source-of-truth documentation for the
-` swe-interview-prep ` repository. Markdown here is authoritative; the
-[Blume](https://useblume.dev) config at the repo root is only a presentation
-and search layer over these same files.
+` swe-interview-prep ` repository. Markdown here is authoritative.
 
 Agent-facing rules live in [`AGENTS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/AGENTS.md). Current state lives
 in [`STATUS.md`](https://github.com/Significant-Hobbies/swe-interview-prep/blob/main/STATUS.md).

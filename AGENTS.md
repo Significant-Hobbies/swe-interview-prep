@@ -105,9 +105,8 @@ The canonical documentation tree is [`docs/`](docs/). Start at
 6. **No empty placeholder docs.** If a page would be empty, do not create it.
 7. **Run `pnpm docs:validate` before committing doc changes.** CI enforces
    it on every PR.
-8. **Blume is only the presentation layer.** `blume.config.ts` renders
-   `docs/`; it is not a source of truth. Generated Blume files (`.blume/`,
-   `dist-docs/`) are gitignored.
+8. **Markdown is the documentation source of truth.** Keep the docs tree
+   valid with `pnpm docs:validate`.
 
 ## Repo structure (high level)
 

@@ -50,9 +50,8 @@ Refreshes the embedded library and commits changes if any. See
 
 ## `docs.yml` — docs validation
 
-Runs on push/PR when `docs/`, `blume.config.ts`, or `scripts/validate-docs.mjs`
-change. Validates the docs tree (required files, broken internal links) and,
-when Blume is configured, runs `blume validate` over internal links. See
+Runs on push/PR when `docs/` or `scripts/validate-docs.mjs` change. Validates
+the docs tree (required files and broken internal links). See
 [`jobs/docs-validate.md`](jobs/docs-validate.md).
 
 ## Dependabot

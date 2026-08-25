@@ -5,7 +5,7 @@ contract.
 
 ## Triggers
 
-- Push or PR changing `docs/`, `blume.config.ts`, `scripts/validate-docs.mjs`,
+- Push or PR changing `docs/`, `scripts/validate-docs.mjs`,
   or `.github/workflows/docs.yml`.
 - `workflow_dispatch`.
 
@@ -14,12 +14,9 @@ contract.
 1. `pnpm docs:validate` — `scripts/validate-docs.mjs` checks the `docs/` tree:
    required files present, no broken intra-doc markdown links, no empty
    placeholder docs, ADR index in sync with `architecture/decisions/`.
-2. If `blume.config.ts` is present and Blume is installable in CI, run
-   `blume validate` for internal-link validation across the rendered site.
-
-The committed Markdown in `docs/` is the source of truth; Blume is only the
-presentation layer. A failure here means a doc references a file that does
-not exist, or the tree is missing a required page.
+The committed Markdown in `docs/` is the source of truth. A failure here means
+a doc references a file that does not exist, or the tree is missing a required
+page.
 
 ## Local run
 

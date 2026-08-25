@@ -14,13 +14,11 @@ const OUTPUT = join(APP_ROOT, 'src', 'data', 'learning-sources.json');
 const EXCLUDED_PROJECTS = new Set([
   'knowledge-base',
   'open-historia',
-  'today-little-log',
   'truehire',
   'verified-bases',
   'companion-robot',
   'device-net-test',
   'forecast-lab',
-  'elves-hq',
   'saas-maker-ci-fix',
 ]);
 const ACTIVE_PROJECTS = [

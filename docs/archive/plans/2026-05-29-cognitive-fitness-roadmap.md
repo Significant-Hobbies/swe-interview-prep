@@ -64,33 +64,26 @@ See `src/pages/About.tsx` for the in-product research-basis section.
 
 These require coordination with adjacent projects under `../`. See `memory: project-fleet-architecture-vision` for the email-as-identity inter-app pattern.
 
-11. **psiScore → intensity gating** (`../today-little-log` → `swe-interview-prep`)
-    - today-little-log exposes `GET /api/today-state` returning `{ psiScore, sleep, energy }` for the current user
-    - swe-interview-prep reads this and gates drill intensity by recovery state (low psiScore → suggest easier drill or rest day, not at-ELO)
-    - First fleet integration; tests whether the lifestyle→intensity loop the research most strongly endorses changes behavior
-    - Auth: shared service token + `X-Fleet-User-Email` header. No unified-auth migration needed.
-
-12. **Reading-seeds-problems** (`../reader` → `swe-interview-prep`)
+11. **Reading-seeds-problems** (`../reader` → `swe-interview-prep`)
     - reader exposes recent article tags / concepts captured
     - swe-interview-prep biases problem suggestions toward concepts you've been reading about (closes the read → drill → build loop)
-    - More speculative than #11 — defer until psiScore integration teaches us whether cross-app signals actually change behavior.
+    - Defer until a smaller cross-app experiment shows that external signals change behavior.
 
-13. **Reader: production-leaning rewrite** (`../reader`)
+12. **Reader: production-leaning rewrite** (`../reader`)
     - Today's AI summary in reader is consumption-leaning (atrophy risk per Kosmyna 2025 / Lee 2025).
     - Flip to production-leaning: AI summary becomes optional, gated behind "explain back first" (FeynmanGate-style for articles).
     - Out of scope for swe-interview-prep — flagged as fleet-level architecture decision.
 
 ### Architecture / long-term
 
-14. **Fleet inter-app comms framework**
-    - Codify the email-as-identity pattern as a small shared TS module that all three projects depend on (`@fleet/inter-app-auth` or similar — not yet a real package).
+13. **Fleet inter-app comms framework**
+    - Codify the email-as-identity pattern as a small shared TS module that participating projects depend on (`@fleet/inter-app-auth` or similar — not yet a real package).
     - Shared service-token validation, email-header parsing, request signing for hardening (signed JWT instead of plaintext email when multi-user becomes a thing).
     - Defer until at least 2 inter-app integrations exist; YAGNI before that.
 
-15. **Mobile (PWA-ify swe-interview-prep)**
+14. **Mobile (PWA-ify swe-interview-prep)**
     - Mobile-first nav already exists in `Layout.tsx`. Adding PWA installable shell (vite-plugin-pwa) is roughly half a day.
     - Use case is the coupling layer — quick checks (intensity recommendation, focus toggle, focus-session count, daily review) — not deep work.
-    - today-little-log already PWA-shaped; this would catch swe-interview-prep up.
     - User said "drop the mobile thing for now" 2026-05-29 — revisit when other pieces stabilize.
 
 ## Out of scope (deliberately)

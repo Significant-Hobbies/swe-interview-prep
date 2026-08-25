@@ -91,10 +91,3 @@ when to run it. The short list:
 | Command | Purpose |
 | --- | --- |
 | `pnpm docs:validate` | Validate the `docs/` tree (required files, broken internal links, structure). |
-| `pnpm docs:build` | Build the Blume docs site into `dist-docs/` (presentation layer only). |
-| `pnpm docs:preview` | Preview the Blume docs site locally. |
-| `pnpm docs:check` | `blume check` — type-check the Blume site (requires Blume installed). |
-
-`docs:build` / `docs:preview` / `docs:check` require `blume` to be installed
-(`pnpm add -D blume` or `npx blume`). The committed Markdown in `docs/` is
-the source of truth; Blume is only the presentation and search layer.

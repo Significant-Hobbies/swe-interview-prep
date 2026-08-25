@@ -54,7 +54,6 @@ const required = [
   'docs/operations/runbooks/reader-adapter.md',
   'docs/knowledge/learnings.md',
   'docs/knowledge/failed-approaches.md',
-  'blume.config.ts',
   'scripts/validate-docs.mjs',
 ];
 for (const rel of required) {
