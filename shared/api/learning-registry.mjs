@@ -5,7 +5,7 @@
  */
 
 /** BYOK / heuristic — no user auth required. */
-const PUBLIC_ACTIONS = ['gaps', 'critique', 'understanding', 'tag'];
+const PUBLIC_ACTIONS = ['gaps', 'critique', 'role-fit', 'understanding', 'tag'];
 
 /**
  * Signed-in user required.
@@ -44,6 +44,7 @@ export const HANDLER_MODULES = {
   projects: () => import('../../handlers/projects.mjs'),
   notes: () => import('../../handlers/learning-notes.mjs'),
   gaps: () => import('../../handlers/gaps.mjs'),
+  'role-fit': () => import('../../handlers/role-fit.mjs'),
   critique: () => import('../../handlers/critique.mjs'),
   understanding: () => import('../../handlers/understanding-check.mjs'),
   profile: () => import('../../handlers/profile.mjs'),

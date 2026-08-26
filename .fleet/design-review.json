@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "swe-interview-prep",
-  "target": "Complete Fanout-inspired learning surfaces",
+  "target": "Job-description role-fit learning plan",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -10,91 +10,37 @@
     "design": "DESIGN.md"
   },
   "direction": {
-    "references": ["https://fanout.sh/", "https://learn-inference.com/"],
-    "probes": [
-      "complete source path",
-      "focused resumable study",
-      "searchable notation",
-      "decision evidence",
-      "daily-priority integrity"
-    ],
+    "references": [],
+    "probes": [],
     "selected": "existing-design",
     "approval": "not-required",
-    "before": "artifacts/design/daily-learning-dashboard-1440.png"
+    "before": "artifacts/design/role-fit-before-learn-1440.png"
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/fanout-learn-390.png"
+        "path": "artifacts/design/role-fit-after-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/fanout-learn-768.png"
+        "path": "artifacts/design/role-fit-after-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/fanout-learn-1440.png"
-      },
-      {
-        "width": 390,
-        "path": "artifacts/design/fanout-inference-390.png"
-      },
-      {
-        "width": 768,
-        "path": "artifacts/design/fanout-inference-768.png"
-      },
-      {
-        "width": 1440,
-        "path": "artifacts/design/fanout-inference-1440.png"
-      },
-      {
-        "width": 390,
-        "path": "artifacts/design/fanout-focused-study-390.png"
-      },
-      {
-        "width": 768,
-        "path": "artifacts/design/fanout-focused-study-768.png"
-      },
-      {
-        "width": 1440,
-        "path": "artifacts/design/fanout-focused-study-1440.png"
-      },
-      {
-        "width": 390,
-        "path": "artifacts/design/fanout-model-routing-390.png"
-      },
-      {
-        "width": 768,
-        "path": "artifacts/design/fanout-model-routing-768.png"
-      },
-      {
-        "width": 1440,
-        "path": "artifacts/design/fanout-model-routing-1440.png"
-      },
-      {
-        "width": 390,
-        "path": "artifacts/design/fanout-notation-390.png"
-      },
-      {
-        "width": 768,
-        "path": "artifacts/design/fanout-notation-768.png"
-      },
-      {
-        "width": 1440,
-        "path": "artifacts/design/fanout-notation-1440.png"
+        "path": "artifacts/design/role-fit-after-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "pnpm quality",
-      "status": "passed"
+      "command": "pnpm quality && pnpm exec playwright test tests/e2e/role-fit.spec.ts",
+      "status": "pass"
     },
     "critique": {
-      "score": 37,
+      "score": 36,
       "maximum": 40
     },
     "audit": {
-      "score": 16,
+      "score": 18,
       "maximum": 20
     },
     "unresolved": {
@@ -103,11 +49,19 @@
     },
     "detector": {
       "posture": "advisory",
-      "findings": []
+      "findings": [
+        {
+          "rule": "design-system-font-size",
+          "severity": "advisory",
+          "path": "src/pages/Sweep.tsx",
+          "status": "fixed",
+          "note": "Replaced the off-ramp 15px body size with the documented text-sm step after the detector's single run."
+        }
+      ]
     }
   },
   "ownerFeedback": {
-    "decision": "pending",
-    "note": ""
+    "decision": "delegated",
+    "note": "Owner approved the feature and explicitly asked Codex to sort it out end to end; final judgment was delegated for this preserve-mode pass."
   }
 }

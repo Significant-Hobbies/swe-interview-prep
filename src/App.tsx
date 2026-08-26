@@ -40,6 +40,7 @@ const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
+const RoleFit = lazy(() => import('./pages/RoleFit'));
 const InferencePath = lazy(() => import('./pages/InferencePath'));
 const NotationReference = lazy(() => import('./pages/NotationReference'));
 const KnowledgeMap = lazy(() => import('./pages/KnowledgeMap'));
@@ -121,6 +122,7 @@ function AppRoutes() {
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="learn" element={<Learn />} />
         <Route path="learn/all" element={<LearnAll />} />
+        <Route path="learn/role-fit" element={<RoleFit />} />
         <Route path="learn/inference" element={<InferencePath />} />
         <Route path="learn/notation" element={<NotationReference />} />
         <Route path="learn/map/:conceptId" element={<KnowledgeMap />} />

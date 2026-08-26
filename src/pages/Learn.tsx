@@ -23,7 +23,7 @@ type SearchResult =
 export default function Learn() {
   const [query, setQuery] = useState('');
   const { mastery } = useConceptMastery();
-  const { activeRoadmapId } = useProfile();
+  const { activeRoadmapId, profile } = useProfile();
   const gateCtx = useGateContext();
   const activeRoadmap = ROADMAP_BY_ID[activeRoadmapId] ?? ROADMAPS[0];
   const activeIds = roadmapConceptIds(activeRoadmap);
@@ -154,6 +154,15 @@ export default function Learn() {
         </h2>
         <div className="mt-5 divide-y divide-white/[0.08] border-y border-white/[0.08]">
           {[
+            {
+              title: profile.roleFocus
+                ? `Role target: ${profile.roleFocus.roleTitle}`
+                : 'Prepare for a role',
+              detail: profile.roleFocus
+                ? `${profile.roleFocus.targetConceptIds.length} direct concepts and ${profile.roleFocus.supportingConceptIds.length} prerequisites. Continue the saved plan or map another role.`
+                : 'Paste a job description and turn its requirements into a grounded learning target.',
+              href: '/learn/role-fit',
+            },
             {
               title: 'Learn Inference path',
               detail: 'All 42 sections mapped to concepts, retrieval prompts, and focused study.',

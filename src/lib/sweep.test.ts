@@ -121,6 +121,14 @@ describe('buildSweepQueue', () => {
     expect(ids).toEqual(['intro', 'core', 'adv']);
   });
 
+  it('scopes to an explicit role concept set without putting ids in the URL', () => {
+    const ids = buildSweepQueue(catalog, {
+      conceptIds: new Set(['core', 'elsewhere']),
+      rated: {},
+    }).map((c) => c.id);
+    expect(ids).toEqual(['elsewhere', 'core']);
+  });
+
   it('is resumable — already-rated concepts drop out of the queue', () => {
     const ids = buildSweepQueue(catalog, { rated: { intro: 'known', adv: 'new' } }).map(
       (c) => c.id

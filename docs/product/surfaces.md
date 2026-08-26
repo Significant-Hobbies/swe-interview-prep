@@ -17,9 +17,10 @@ disagrees with code, code wins.
 | `/learn/notation` | Searchable formula, bound, unit, and notation reference |
 | `/learn/map/:conceptId` | Accessible prerequisite, related-concept, and downstream-unlock topography |
 | `/learn/papers` | Deterministic rotating primary-source programme and retrieval contracts |
+| `/learn/role-fit` | Paste a job description, map exact requirement phrases to canonical concepts, compare them with learning evidence, and activate a sanitized role-focused plan |
 | `/study/:focusKind/:focusId` | Account-scoped resumable Learn → Retrieve → Apply → Explain session |
 | `/explore` | Concept/roadmap explorer |
-| `/sweep`, `/sweep?domain=<tag>` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`. Model and deferred work: [`breadth-sweep.md`](breadth-sweep.md); open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
+| `/sweep`, `/sweep?domain=<tag>`, `/sweep?focus=role` | Breadth triage — rate every concept Known/Fuzzy/New; ROI ranking + domain muting. Role focus narrows the queue to the active role's direct and prerequisite concepts. Reachable from `/learn`, deliberately not in `SITE_NAV_ITEMS`. Model and deferred work: [`breadth-sweep.md`](breadth-sweep.md); open follow-up lives in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues) |
 | `/practice` | Playground workspace with a selector over the complete canonical problem inventory |
 | `/practice/all` | Complete drill catalogue and spaced-repetition reviews |
 | `/playground` | Stable alias for the same Playground workspace |
@@ -96,8 +97,11 @@ discarded anyway. The client reads the auth/public split from
 `shared/api/learning-registry.mjs`, the same list the server enforces, so
 adding an action gates the client automatically.
 
-The only request a guest makes is one `GET /api/auth/verify` on their first
-load, which is how the app discovers there is no session. It is not repeated.
+Outside an explicitly submitted AI action, the only request a guest makes is
+one `GET /api/auth/verify` on their first load, which is how the app discovers
+there is no session. It is not repeated. Role fit can use a learner-configured
+OpenAI-compatible provider without a product session; the deployment provider
+fallback remains owner-only.
 
 Software Wars is the exception to that older learning-only request rule.
 Guests may read public launch status, leaderboards, challenge previews, and
@@ -145,10 +149,16 @@ route set (anything else returns `404 API route not found`):
 | `POST /api/wars/provider/realtimekit/webhook` | Provider lifecycle events | RealtimeKit signature |
 
 `/api/learning?action=…` actions (`shared/api/learning-registry.mjs`):
-public (no user auth) `gaps`, `critique`, `understanding`, `tag`;
+public (no user auth) `gaps`, `critique`, `understanding`, `tag`, `role-fit`;
 auth-required `activity`, `concepts`, `feynman`, `weekly`, `artifacts`,
 `drills`, `projects`, `notes`, `profile`, `review-mastery`, `elo`,
 `imported-reviews`.
+
+`role-fit` accepts a job description only for the current request. Its response
+is rejected unless every retained mapping names existing concept IDs and cites
+an exact phrase present in the submitted text. The server does not persist the
+posting or provider response. Activating a result stores only sanitized target
+metadata in the learner profile and never writes mastery.
 
 ### Dev / legacy handlers (`api/*.mjs`)
 

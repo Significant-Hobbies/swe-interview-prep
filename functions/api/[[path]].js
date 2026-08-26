@@ -265,7 +265,7 @@ async function handleLearning(request, env) {
   const authenticatedUser = await currentUser(request, env);
   const user = authenticatedUser?.isOwner ? authenticatedUser : null;
   const client = getDb(env);
-  return dispatchLearningAction({ request, client, user, json });
+  return dispatchLearningAction({ request, client, user, env, json });
 }
 
 async function handleReaderLearning(request, env) {

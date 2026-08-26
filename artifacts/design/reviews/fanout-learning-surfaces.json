@@ -1,0 +1,113 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Complete Fanout-inspired learning surfaces",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": ["https://fanout.sh/", "https://learn-inference.com/"],
+    "probes": [
+      "complete source path",
+      "focused resumable study",
+      "searchable notation",
+      "decision evidence",
+      "daily-priority integrity"
+    ],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/daily-learning-dashboard-1440.png"
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/fanout-learn-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/fanout-learn-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/fanout-learn-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/fanout-inference-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/fanout-inference-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/fanout-inference-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/fanout-focused-study-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/fanout-focused-study-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/fanout-focused-study-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/fanout-model-routing-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/fanout-model-routing-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/fanout-model-routing-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/fanout-notation-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/fanout-notation-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/fanout-notation-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm quality",
+      "status": "passed"
+    },
+    "critique": {
+      "score": 37,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 16,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "pending",
+    "note": "Archived before the role-fit design pass; historical feedback was not recorded."
+  }
+}

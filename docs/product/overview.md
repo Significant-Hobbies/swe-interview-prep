@@ -38,6 +38,14 @@ winning concept is paired with an explicit evidence contract: retrieval,
 drill, decision receipt, paper retrieval, artifact, or explain-back. Opening a
 source or producing a calculation never counts as mastery.
 
+Role fit applies that loop to a concrete job description. It grounds the
+posting's requirements in canonical curriculum concepts, keeps demonstrated,
+unverified, and weak concepts separate, expands required prerequisites, and
+turns the accepted result into a focused Sweep and learning target. The raw
+posting and provider response are never added to the learner profile; only the
+validated concept IDs, roadmap weights, target title, and a source fingerprint
+are retained.
+
 ## Primary destinations
 
 The canonical navigation model in `src/data/site-navigation.ts` exposes four
@@ -57,7 +65,7 @@ high-level, but its search and browse-all destinations cover every canonical
 concept and roadmap. Its contextual tools expose the complete 42-section Learn
 Inference companion path, searchable formula and notation reference,
 prerequisite/related/unlock knowledge topography, rotating paper programme,
-and focused resumable study. Practice opens directly into the Playground and keeps the
+focused resumable study, and job-description role fit. Practice opens directly into the Playground and keeps the
 complete problem catalogue one interaction away. Wars makes the duration
 choice explicit before exposing ratings, history, leaderboards, and
 operational detail. Active battles and workspaces use a focused shell that
@@ -66,7 +74,7 @@ keeps account access and an exit while suppressing unrelated chrome.
 Detail pages (`/concepts/:id`, `/roadmaps/:id`, `/projects/:id`, `/drills/:id`)
 remain reachable through contextual hubs and Browse. `/mock`, `/playground`,
 `/build`, `/labs`, `/labs/decision/:labId`, `/learn/inference`,
-`/learn/notation`, `/learn/papers`, `/learn/map/:conceptId`,
+`/learn/notation`, `/learn/papers`, `/learn/role-fit`, `/learn/map/:conceptId`,
 `/study/:focusKind/:focusId`, `/progress`, and `/wars` remain real pages with stable deep
 links. Legacy routes redirect so external links keep working: `/today` →
 `/dashboard`; `/roadmaps` → `/learn`; `/concepts` → `/learn/all`; `/drills` →
@@ -134,6 +142,11 @@ tools, application engineering, multimodal/spatial systems, behavioral
 practice, deterministic systems simulations, FSRS spaced repetition,
 multi-provider AI hints, LeetCode import, embedded learning library, and
 personal learning sessions.
+
+The personally requested role-fit workflow is a curriculum planning aid, not
+an ATS or job-application tracker. It accepts one pasted posting, validates AI
+output against the checked-in curriculum, and activates a sanitized learning
+focus without storing the raw job description.
 
 The personally requested Software Wars expansion adds source-backed Blitz
 battles, solo and scheduled Tradeoff battles, distinct ratings, managed

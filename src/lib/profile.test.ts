@@ -40,3 +40,29 @@ describe('primaryRoadmapId', () => {
     );
   });
 });
+
+describe('optional sanitized role focus', () => {
+  it('keeps legacy profiles valid without re-triggering onboarding', () => {
+    const legacy: LearnerProfile = { ...DEFAULT_PROFILE };
+    expect(legacy.roleFocus).toBeUndefined();
+    expect(legacy.onboardingVersion).toBe(PROFILE_VERSION);
+  });
+
+  it('round-trips canonical role metadata without a raw job description field', () => {
+    const profile: LearnerProfile = {
+      ...DEFAULT_PROFILE,
+      roleFocus: {
+        roleTitle: 'Backend Engineer',
+        targetConceptIds: ['idempotency'],
+        supportingConceptIds: ['http-lifecycle'],
+        roadmapWeights: { 'distributed-systems-12w': 1 },
+        trackIds: ['backend'],
+        sourceFingerprint: 'rf-deadbeef',
+        createdAt: '2026-08-26T00:00:00.000Z',
+        updatedAt: '2026-08-26T00:00:00.000Z',
+      },
+    };
+    expect(JSON.parse(JSON.stringify(profile)).roleFocus.targetConceptIds).toEqual(['idempotency']);
+    expect(JSON.stringify(profile)).not.toContain('jobDescription');
+  });
+});

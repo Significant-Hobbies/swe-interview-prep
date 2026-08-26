@@ -181,14 +181,17 @@ export function sweepOrder(a: Concept, b: Concept): number {
 export interface SweepQueueOptions {
   /** Restrict to one tag. Omit to sweep everything. */
   tag?: string;
+  /** Restrict to an explicit canonical concept set, e.g. an active role focus. */
+  conceptIds?: ReadonlySet<string>;
   /** Concepts already rated in this pass — excluded from the queue. */
   rated: Record<string, SweepRating>;
 }
 
 export function buildSweepQueue(concepts: Concept[], options: SweepQueueOptions): Concept[] {
-  const { tag, rated } = options;
+  const { tag, conceptIds, rated } = options;
   return concepts
     .filter((c) => (tag ? (c.tags ?? []).includes(tag) : true))
+    .filter((c) => (conceptIds ? conceptIds.has(c.id) : true))
     .filter((c) => !rated[c.id])
     .sort(sweepOrder);
 }

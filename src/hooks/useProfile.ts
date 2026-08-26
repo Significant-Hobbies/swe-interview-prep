@@ -69,19 +69,21 @@ export function useProfile() {
       saveGuestProfile(merged);
       saveActiveRoadmapId(primaryRoadmapId(merged));
 
+      let persistence: 'account' | 'local' = 'local';
       if (user) {
         try {
-          await fetch('/api/learning?action=profile', {
+          const response = await fetch('/api/learning?action=profile', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({ profile: merged }),
           });
+          if (response.ok) persistence = 'account';
         } catch {
           /* local wins */
         }
       }
-      return merged;
+      return { profile: merged, persistence } as const;
     },
     [profile, user]
   );

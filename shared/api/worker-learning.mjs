@@ -1,10 +1,10 @@
 import { setRequestDb } from '../db/client.mjs';
 import { HANDLER_MODULES, LEARNING_ACTIONS } from './learning-registry.mjs';
 
-const PUBLIC_NO_AUTH = new Set(['gaps', 'critique', 'understanding', 'tag']);
+const PUBLIC_NO_AUTH = new Set(['gaps', 'critique', 'role-fit', 'understanding', 'tag']);
 
 export async function dispatchLearningAction(ctx) {
-  const { request, client, user, json } = ctx;
+  const { request, client, user, env, json } = ctx;
   const action = new URL(request.url).searchParams.get('action');
 
   if (!action || !LEARNING_ACTIONS.includes(action)) {
@@ -26,7 +26,7 @@ export async function dispatchLearningAction(ctx) {
   const mod = await loader();
   const handler = mod.default;
   setRequestDb(client);
-  const response = await handler({ request, user, json });
+  const response = await handler({ request, user, env, json });
   if (!(response instanceof Response)) {
     return json({ error: 'Handler did not respond' }, { status: 500 });
   }

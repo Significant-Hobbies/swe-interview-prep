@@ -2,6 +2,14 @@ export const CHANGELOG_REPOSITORY = 'https://github.com/Significant-Hobbies/swe-
 
 export const CHANGELOG_RELEASES = [
   {
+    date: '2026-08-27',
+    title: 'Turn a job description into a learning target',
+    outcomes: [
+      'A new role-fit workflow maps exact requirement phrases from a pasted job description onto canonical curriculum concepts and names unsupported requirements honestly.',
+      'The resulting target separates existing evidence from unverified and weak areas, expands prerequisites, and opens a focused Known, Fuzzy, or New Sweep without retaining the raw posting.',
+    ],
+  },
+  {
     date: '2026-08-09',
     title: 'Trace a Tensor from model math to serving',
     outcomes: [

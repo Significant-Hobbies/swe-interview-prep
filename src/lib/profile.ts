@@ -8,6 +8,17 @@ export interface ModalityWeights {
   learn: number;
 }
 
+export interface RoleFocus {
+  roleTitle: string;
+  targetConceptIds: string[];
+  supportingConceptIds: string[];
+  roadmapWeights: Record<string, number>;
+  trackIds: string[];
+  sourceFingerprint: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface LearnerProfile {
   experience: ExperienceLevel;
   /** Days until target interview; null = no deadline. */
@@ -34,6 +45,8 @@ export interface LearnerProfile {
    * schedule. Muting only removes a domain from "where should I go next".
    */
   mutedTags?: string[];
+  /** Sanitized active role target. Raw job-description text is never stored. */
+  roleFocus?: RoleFocus;
   /** Daily email digest (reviews due + session ready). */
   digestEmail?: boolean;
   /** Browser push reminders (requires permission + subscription). */

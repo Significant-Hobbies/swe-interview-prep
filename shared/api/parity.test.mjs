@@ -71,4 +71,25 @@ describe('learning API parity', () => {
     });
     expect(unauth.status).toBe(401);
   });
+
+  it('lets public role-fit requests reach their own provider boundary', async () => {
+    const { dispatchLearningAction } = await import('./worker-learning.mjs');
+    const json = (body, init = {}) =>
+      new Response(JSON.stringify(body), { status: init.status ?? 200 });
+    const response = await dispatchLearningAction({
+      request: new Request('http://localhost/api/learning?action=role-fit', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jobDescription: 'x'.repeat(80) }),
+      }),
+      client: null,
+      user: null,
+      env: {},
+      json,
+    });
+    expect(response.status).toBe(401);
+    expect(await response.json()).toMatchObject({
+      error: expect.stringMatching(/sign in|configure/i),
+    });
+  });
 });

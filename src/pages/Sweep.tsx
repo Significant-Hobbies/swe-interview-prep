@@ -18,8 +18,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { CONCEPTS, REVIEW_QUESTIONS, type Concept } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
 import { useProfile } from '../hooks/useProfile';
+import type { RoleFocus } from '../lib/profile';
 import { useReviewMastery } from '../hooks/useReviewMastery';
-import { rankDomains } from '../lib/roi';
+import { type DomainRoi, rankDomains } from '../lib/roi';
 import { recordSessionActivity } from '../lib/session';
 import {
   buildSweepQueue,
@@ -42,6 +43,111 @@ const RATING_CLASS: Record<SweepRating, string> = {
   fuzzy: 'border-amber-200/25 text-amber-200 hover:bg-amber-200/10',
   new: 'border-rose-200/25 text-rose-200 hover:bg-rose-200/10',
 };
+
+function TopDomain({ domain }: { domain: DomainRoi }) {
+  return (
+    <Card className="mb-8 p-5">
+      <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+        {domain.swept ? 'Highest ROI' : 'Highest ROI · untriaged, so this is an upper bound'}
+      </div>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="text-xl font-semibold text-white">{domain.tag}</span>
+        <span className="text-sm text-white/50">
+          {domain.unknown} unknown
+          {domain.thin > 0 && ` · ${domain.thin} too thin to learn from here`}
+        </span>
+      </div>
+      <p className="mt-3 text-sm text-white/60">
+        {domain.hub ? (
+          <>
+            <a
+              href={domain.hub.url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-white underline-offset-4 hover:underline"
+            >
+              {domain.hub.label} ↗
+            </a>{' '}
+            covers {domain.hub.covers} of them — likely a better use of an hour than more cards.
+          </>
+        ) : (
+          'No single outside source in the catalog covers enough of this domain to recommend. Sweeping it will at least tell you which gaps matter.'
+        )}
+      </p>
+      <div className="mt-4">
+        <Link to={`/sweep?domain=${domain.tag}`}>
+          <Button>Sweep {domain.tag}</Button>
+        </Link>
+      </div>
+    </Card>
+  );
+}
+
+function DomainGrid({
+  domains,
+  onToggleMute,
+}: {
+  domains: DomainRoi[];
+  onToggleMute: (tag: string) => void;
+}) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {domains.map((domain) => (
+        <Card key={domain.tag} className="p-4">
+          <div className="flex items-baseline justify-between gap-2">
+            <Link
+              to={`/sweep?domain=${domain.tag}`}
+              className="font-medium text-white underline-offset-4 hover:underline"
+            >
+              {domain.tag}
+            </Link>
+            <span className="font-mono text-[10px] text-white/40">{domain.total}</span>
+          </div>
+          <div className="mt-3">
+            <ProgressBar value={domain.percent} tone={domain.percent === 100 ? 'emerald' : 'sky'} />
+          </div>
+          <div className="mt-2 font-mono text-[10px] text-white/40">
+            {domain.unknown} unknown
+            {domain.hub ? ` · ${domain.hub.label} covers ${domain.hub.covers}` : ' · no hub'}
+          </div>
+          <button
+            type="button"
+            onClick={() => onToggleMute(domain.tag)}
+            className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-mono text-xs text-white/60 hover:text-white"
+          >
+            <VolumeX className="h-3 w-3" />
+            Not interested
+          </button>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+function MutedDomains({
+  muted,
+  onToggleMute,
+}: {
+  muted: string[];
+  onToggleMute: (tag: string) => void;
+}) {
+  if (!muted.length) return null;
+  return (
+    <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-white/[0.08] pt-5">
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">Muted</span>
+      {muted.map((tag) => (
+        <button
+          key={tag}
+          type="button"
+          onClick={() => onToggleMute(tag)}
+          className="inline-flex min-h-11 items-center rounded-full border border-white/15 px-2.5 font-mono text-[10px] text-white/60 hover:border-white/30 hover:text-white"
+        >
+          {tag} ×
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function DomainPicker() {
   const { profile, saveProfile } = useProfile();
@@ -80,50 +186,13 @@ function DomainPicker() {
         />
       </div>
 
-      {top && (
-        <Card className="mb-8 p-5">
-          <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            {/* The caveat is about THIS domain, not the app as a whole — having
-                swept elsewhere says nothing about how much of this one you know. */}
-            {top.swept ? 'Highest ROI' : 'Highest ROI · untriaged, so this is an upper bound'}
-          </div>
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="text-xl font-semibold text-white">{top.tag}</span>
-            <span className="text-sm text-white/50">
-              {top.unknown} unknown
-              {top.thin > 0 && ` · ${top.thin} too thin to learn from here`}
-            </span>
-          </div>
-          <p className="mt-3 text-sm text-white/60">
-            {top.hub ? (
-              <>
-                <a
-                  href={top.hub.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white underline-offset-4 hover:underline"
-                >
-                  {top.hub.label} ↗
-                </a>{' '}
-                covers {top.hub.covers} of them — likely a better use of an hour than more cards.
-              </>
-            ) : (
-              'No single outside source in the catalog covers enough of this domain to recommend. Sweeping it will at least tell you which gaps matter.'
-            )}
-          </p>
-          <div className="mt-4">
-            <Link to={`/sweep?domain=${top.tag}`}>
-              <Button>Sweep {top.tag}</Button>
-            </Link>
-          </div>
-        </Card>
-      )}
+      {top && <TopDomain domain={top} />}
 
       <SectionTitle
         action={
           <Link
             to={`/sweep?domain=${ALL_DOMAINS}`}
-            className="text-xs text-white/60 underline-offset-4 hover:text-white hover:underline"
+            className="inline-flex min-h-11 items-center text-xs text-white/60 underline-offset-4 hover:text-white hover:underline"
           >
             Sweep everything →
           </Link>
@@ -132,57 +201,8 @@ function DomainPicker() {
         Domains by payoff
       </SectionTitle>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {ranked.map((domain) => (
-          <Card key={domain.tag} className="p-4">
-            <div className="flex items-baseline justify-between gap-2">
-              <Link
-                to={`/sweep?domain=${domain.tag}`}
-                className="font-medium text-white underline-offset-4 hover:underline"
-              >
-                {domain.tag}
-              </Link>
-              <span className="font-mono text-[10px] text-white/40">{domain.total}</span>
-            </div>
-            <div className="mt-3">
-              <ProgressBar
-                value={domain.percent}
-                tone={domain.percent === 100 ? 'emerald' : 'sky'}
-              />
-            </div>
-            <div className="mt-2 font-mono text-[10px] text-white/40">
-              {domain.unknown} unknown
-              {domain.hub ? ` · ${domain.hub.label} covers ${domain.hub.covers}` : ' · no hub'}
-            </div>
-            <button
-              type="button"
-              onClick={() => toggleMute(domain.tag)}
-              className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] text-white/30 hover:text-white/70"
-            >
-              <VolumeX className="h-3 w-3" />
-              Not interested
-            </button>
-          </Card>
-        ))}
-      </div>
-
-      {muted.length > 0 && (
-        <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-white/[0.08] pt-5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
-            Muted
-          </span>
-          {muted.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => toggleMute(tag)}
-              className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[10px] text-white/50 hover:border-white/30 hover:text-white"
-            >
-              {tag} ×
-            </button>
-          ))}
-        </div>
-      )}
+      <DomainGrid domains={ranked} onToggleMute={toggleMute} />
+      <MutedDomains muted={muted} onToggleMute={toggleMute} />
     </PageShell>
   );
 }
@@ -203,7 +223,7 @@ function ConceptCard({ concept }: { concept: Concept }) {
 
       <h2 className="text-2xl font-semibold tracking-tight text-white">{concept.name}</h2>
 
-      <p className="mt-4 text-[15px] leading-relaxed text-white/80">
+      <p className="mt-4 text-sm leading-relaxed text-white/80">
         {concept.mentalModel || concept.description}
       </p>
 
@@ -261,12 +281,45 @@ function ConceptCard({ concept }: { concept: Concept }) {
 export default function Sweep() {
   const [params] = useSearchParams();
   const domainParam = params.get('domain');
+  const focusParam = params.get('focus');
+  const { profile } = useProfile();
+  if (focusParam === 'role') {
+    if (!profile.roleFocus) {
+      return (
+        <PageShell>
+          <PageHeader
+            eyebrow="Role sweep"
+            title="Choose a role target first"
+            subtitle="Paste a job description, inspect the grounded matches, and activate that role before starting its focused Sweep."
+          />
+          <EmptyState
+            icon={<Gauge className="h-6 w-6" />}
+            title="No active role target"
+            hint="Role Sweep reads the sanitized concept set from your active learning profile."
+          />
+          <div className="mt-6">
+            <Link to="/learn/role-fit">
+              <Button>Prepare for a role</Button>
+            </Link>
+          </div>
+        </PageShell>
+      );
+    }
+    return <SweepRunner domainParam={ALL_DOMAINS} roleFocus={profile.roleFocus} />;
+  }
   if (!domainParam) return <DomainPicker />;
   return <SweepRunner domainParam={domainParam} />;
 }
 
-function SweepRunner({ domainParam }: { domainParam: string }) {
-  const domain = domainParam === ALL_DOMAINS ? undefined : domainParam;
+function SweepRunner({ domainParam, roleFocus }: { domainParam: string; roleFocus?: RoleFocus }) {
+  const domain = roleFocus || domainParam === ALL_DOMAINS ? undefined : domainParam;
+  const roleConceptIds = useMemo(
+    () =>
+      roleFocus
+        ? new Set([...roleFocus.targetConceptIds, ...roleFocus.supportingConceptIds])
+        : undefined,
+    [roleFocus]
+  );
 
   const { user } = useAuth();
   const [sweep, setSweep] = useState<SweepState>(() => loadSweep(user?.id));
@@ -277,12 +330,22 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
   const { mastery: rqMastery, review: reviewRq } = useReviewMastery();
 
   const scope = useMemo(
-    () => (domain ? CONCEPTS.filter((c) => (c.tags ?? []).includes(domain)) : CONCEPTS),
-    [domain]
+    () =>
+      roleConceptIds
+        ? CONCEPTS.filter((concept) => roleConceptIds.has(concept.id))
+        : domain
+          ? CONCEPTS.filter((c) => (c.tags ?? []).includes(domain))
+          : CONCEPTS,
+    [domain, roleConceptIds]
   );
   const queue = useMemo(
-    () => buildSweepQueue(CONCEPTS, { tag: domain, rated: sweep.rated }),
-    [domain, sweep.rated]
+    () =>
+      buildSweepQueue(CONCEPTS, {
+        tag: domain,
+        conceptIds: roleConceptIds,
+        rated: sweep.rated,
+      }),
+    [domain, roleConceptIds, sweep.rated]
   );
   const coverage = useMemo(() => sweepCoverage(scope, sweep.rated), [scope, sweep.rated]);
   const current = queue[0];
@@ -304,14 +367,26 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
       setSaving(true);
       setSaveError('');
       const writes = sweepWrites(current.id, rating, REVIEW_QUESTIONS, rqMastery);
-      const results = await Promise.all([
-        reviewConceptMastery(writes.conceptId, writes.conceptRating),
-        ...writes.reviewSeeds.map((seed) => reviewRq(seed.questionId, seed.rating)),
-      ]);
-      setSaving(false);
-      if (results.some((ok) => ok === false)) {
-        setSaveError('Could not save that rating — you may need to sign in again.');
+      try {
+        // Seed first. Successful seed writes update rqMastery, so a retry skips
+        // them; the concept grade is written only after every seed succeeds.
+        const seedResults = await Promise.all(
+          writes.reviewSeeds.map((seed) => reviewRq(seed.questionId, seed.rating))
+        );
+        if (seedResults.some((ok) => ok === false)) {
+          setSaveError('Could not finish seeding reviews — you may need to sign in again.');
+          return;
+        }
+        const conceptSaved = await reviewConceptMastery(writes.conceptId, writes.conceptRating);
+        if (conceptSaved === false) {
+          setSaveError('Could not save that rating — you may need to sign in again.');
+          return;
+        }
+      } catch {
+        setSaveError('Could not finish saving that rating.');
         return;
+      } finally {
+        setSaving(false);
       }
       recordSessionActivity('sweep');
       setSweep((prev) => {
@@ -375,7 +450,13 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
   return (
     <PageShell>
       <PageHeader
-        eyebrow={domain ? `Sweep · ${domain}` : 'Sweep · everything'}
+        eyebrow={
+          roleFocus
+            ? `Role sweep · ${roleFocus.roleTitle}`
+            : domain
+              ? `Sweep · ${domain}`
+              : 'Sweep · everything'
+        }
         title={current ? current.name : 'Domain swept'}
         subtitle={
           current
@@ -384,11 +465,11 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
         }
         actions={
           <Link
-            to="/sweep"
-            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white"
+            to={roleFocus ? '/learn/role-fit' : '/sweep'}
+            className="inline-flex min-h-11 items-center gap-1.5 text-xs text-white/60 hover:text-white"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Domains
+            {roleFocus ? 'Role plan' : 'Domains'}
           </Link>
         }
       />
@@ -413,18 +494,19 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
           role="alert"
           className="mb-4 rounded-lg border border-rose-200/25 bg-rose-200/5 px-4 py-3 text-sm text-rose-200"
         >
-          {saveError} This concept stays in the queue — nothing was recorded.
+          {saveError} This concept stays in the queue. Completed review seeds are remembered and
+          will not be repeated.
         </div>
       )}
 
       {current ? (
         <>
-          {/* The heading is stable while its content swaps, so without a live
-              region a screen-reader user gets no signal that the rating
-              registered or that a different concept is now on screen. */}
-          <div aria-live="polite" aria-atomic="true">
-            <ConceptCard concept={current} />
-          </div>
+          {lastRated && (
+            <p className="sr-only" role="status" aria-live="polite">
+              Rated {lastRated.name}. Next concept loaded.
+            </p>
+          )}
+          <ConceptCard concept={current} />
 
           <div className="mt-6 grid grid-cols-3 gap-2">
             {SWEEP_RATINGS.map((rating) => (
@@ -436,7 +518,7 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
                 disabled={saving}
                 className={`rounded-lg border px-3 py-3 text-sm font-medium transition-colors duration-150 disabled:opacity-50 ${RATING_CLASS[rating.id]}`}
               >
-                <span className="mr-2 font-mono text-[10px] text-white/40">{rating.key}</span>
+                <span className="mr-2 font-mono text-[10px] text-white/60">{rating.key}</span>
                 {rating.label}
               </button>
             ))}
@@ -454,7 +536,7 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
                 type="button"
                 onClick={undo}
                 aria-keyshortcuts="u"
-                className="inline-flex items-center gap-1.5 text-white/70 hover:text-white"
+                className="inline-flex min-h-11 items-center gap-1.5 text-white/70 hover:text-white"
               >
                 <Undo2 className="h-3.5 w-3.5" />
                 Undo {lastRated.name}
@@ -475,11 +557,11 @@ function SweepRunner({ domainParam }: { domainParam: string }) {
           <Link to="/practice/all?tab=reviews">
             <Button>Start reviewing the gaps</Button>
           </Link>
-          <Link to="/sweep">
+          <Link to={roleFocus ? '/learn/role-fit' : '/sweep'}>
             <Button tone="ghost">
               <span className="inline-flex items-center gap-1.5">
                 <Layers className="h-3.5 w-3.5" />
-                Sweep another domain
+                {roleFocus ? 'Return to role plan' : 'Sweep another domain'}
               </span>
             </Button>
           </Link>

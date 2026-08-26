@@ -52,6 +52,7 @@ export default async function handler(req, res) {
     request: toFetchRequest(req),
     client,
     user,
+    env: process.env,
     json,
   });
   const payload = await response.json();

@@ -4,6 +4,16 @@ Reusable lessons that are not obvious from the code. Add new entries at the
 top with a date. One lesson per bullet; link to the code or ADR that
 exemplifies it.
 
+## 2026-08 — Constrain model interpretation with source quotes and canonical IDs
+
+A model can interpret an unstructured job posting, but it cannot be the source
+of curriculum truth. Require each proposed mapping to cite an exact phrase from
+the submitted text and to select only IDs from the checked-in concept catalog;
+discard unknown IDs, unsupported phrases, and empty mappings before planning.
+The deterministic layer then expands prerequisites and compares those concepts
+with FSRS and Sweep evidence. Persist only the accepted IDs, weights, title,
+and source fingerprint—never the raw posting or provider response.
+
 ## 2026-08 — Choose the concept before the learning format
 
 New papers and calculators are tempting because they are novel, but novelty is

@@ -5,6 +5,11 @@ Meaningful improvements to the curriculum, practice loop, and personal learning 
 - [Roadmap](https://github.com/Significant-Hobbies/swe-interview-prep/issues)
 - [Source](https://github.com/Significant-Hobbies/swe-interview-prep)
 
+## 2026-08-27 — Turn a job description into a learning target
+
+- A new role-fit workflow maps exact requirement phrases from a pasted job description onto canonical curriculum concepts and names unsupported requirements honestly.
+- The resulting target separates existing evidence from unverified and weak areas, expands prerequisites, and opens a focused Known, Fuzzy, or New Sweep without retaining the raw posting.
+
 ## 2026-08-09 — Trace a Tensor from model math to serving
 
 - A new 30-day synthesis roadmap connects tensor representation and backpropagation to memory, kernels, hardware, inference scheduling, and serving economics.
