@@ -1,0 +1,76 @@
+{
+  "$schema": "fleet.landing-audit.scorecard.v1",
+  "project": "swe-interview-prep",
+  "priority": "P2",
+  "candidate": "https://indicate-grid-sleeve-wrote.trycloudflare.com/login",
+  "productionChanged": false,
+  "checkedAt": "2026-08-28",
+  "purpose": {
+    "score": 96,
+    "minimum": 85,
+    "p0": 0,
+    "p1": 0,
+    "note": "The hero identifies a personal SWE learning OS for interview preparation, the audience, the evidence-gated learning loop, a real first-session plan, guest and signed-in access, maintenance-only state, and the absence of checkout."
+  },
+  "design": {
+    "score": 93,
+    "minimum": 85,
+    "p0": 0,
+    "p1": 0,
+    "note": "The restrained black, white, and cyan evidence-led workbench feels specific to engineering practice. It uses a real plan and artifact contract as proof instead of generic feature cards. Exact 390, 768, and 1440 captures show clean reflow and no horizontal overflow."
+  },
+  "seo": {
+    "score": 97,
+    "passed": 17,
+    "failed": 0,
+    "warnings": 1,
+    "note": "The homepage response passes every substantive on-page and site-level check. The sole warning is the expected local-origin versus production-origin sitemap comparison. A 315-page local link crawl found zero internal errors and zero internal redirects; app drill and utility routes are intentionally outside the public curriculum sitemap."
+  },
+  "geo": {
+    "score": 100,
+    "productionTier": "S",
+    "productionScore": 100,
+    "note": "Production already passes the complete Fleet agent-index contract, including Markdown coverage and the bounded catalog surfaces."
+  },
+  "performance": {
+    "score": 94,
+    "successfulCoverageRuns": 20,
+    "attemptedCoverageRuns": 20,
+    "weightedLcpMs": 1300,
+    "weightedCls": 0,
+    "weightedTbtMs": 0,
+    "profiles": {
+      "mobileSlowScore": 79,
+      "mobileSlowLcpMs": 3915,
+      "mobileMidScore": 98,
+      "mobileMidLcpMs": 1812,
+      "mobileFastScore": 100,
+      "mobileFastLcpMs": 764,
+      "desktopScore": 100,
+      "desktopLcpMs": 411
+    },
+    "note": "All twenty production-faithful Pages-runtime audits completed. The new matching first-paint shell moved the acceptance gate from needs-work to good and cut mid-mobile LCP by roughly one second. The deliberately brutal slow-3G low-end profile remains the only weak edge; CLS and weighted TBT are zero."
+  },
+  "verification": {
+    "primaryJourney": "A visitor can understand the learning mechanism, inspect a real first-session plan, browse public curriculum proof, and start as a guest or sign in for durable progress without encountering invented pricing.",
+    "repositoryCheck": "The complete quality gate passes format, lint, TypeScript, 551 tests, source health, complexity, duplication, cycles, dependency checks, docs, production build, size budgets, and repository hygiene.",
+    "seoAudit": "17 passed, 0 failed, 1 local-origin warning; 315 sitemap pages crawl with zero internal errors or redirects.",
+    "agentIndex": "Production S-tier at 100.",
+    "footer": {
+      "askAi": "pass",
+      "projectStrip": "pass",
+      "note": "The explicit project strip remains mounted and Ask AI loads after window load with compose disabled, preventing it from replacing the strip."
+    },
+    "responsiveScreenshots": [
+      ".fleet/evidence/landing-audit/after-390.png",
+      ".fleet/evidence/landing-audit/after-768.png",
+      ".fleet/evidence/landing-audit/after-1440.png"
+    ]
+  },
+  "limitations": [
+    "No deployment, commit, push, migration, DNS change, account action, or production configuration change was performed.",
+    "The temporary Cloudflare quick tunnel has no uptime guarantee and exists only to review the current local Pages candidate.",
+    "The synthetic slow-3G plus 6x CPU profile remains below the desired performance band, while the weighted coverage profile and all other device classes are good.",
+    "INP requires field interaction data and is not measured by Lighthouse navigation mode."
+  ]
+}
