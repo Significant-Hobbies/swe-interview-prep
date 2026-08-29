@@ -5,6 +5,29 @@ Allow: /system-design/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /index.md
+Allow: /agents.md
+Allow: /pricing.md
+Allow: /skill.md
 Allow: /api/ai
+Allow: /.well-known/ai-catalog.json
+Allow: /.well-known/agent-skills/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 Sitemap: https://learn.significanthobbies.com/sitemap.xml

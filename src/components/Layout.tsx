@@ -108,9 +108,37 @@ export default function Layout() {
           </div>
         )}
 
-        <main id="main-content">
+        <main id="main-content" className="min-h-[calc(100vh-4rem)]">
           <Outlet />
         </main>
+
+        {!focus && (
+          <footer className="border-t border-white/[0.08]">
+            <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 text-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
+              <div>
+                <p className="font-medium text-white/75">SWE Interview Prep</p>
+                <p className="mt-2 max-w-2xl leading-6 text-white/45">
+                  Personal, maintenance-only learning software for turning interview study into
+                  retained, artifact-backed understanding. No paid tier or checkout.
+                </p>
+              </div>
+              <nav aria-label="Product information" className="flex flex-wrap gap-x-5 gap-y-3">
+                <Link to="/login" className="text-white/50 hover:text-white">
+                  How it works
+                </Link>
+                <a href="/curriculum/" className="text-white/50 hover:text-white">
+                  Curriculum
+                </a>
+                <Link to="/changelog" className="text-white/50 hover:text-white">
+                  Changelog
+                </Link>
+                <Link to="/privacy" className="text-white/50 hover:text-white">
+                  Privacy
+                </Link>
+              </nav>
+            </div>
+          </footer>
+        )}
 
         <Suspense fallback={null}>
           <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />

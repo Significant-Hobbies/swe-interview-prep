@@ -1,10 +1,34 @@
+---
+title: SWE Interview Prep
+description: A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
+updated: 2026-08-28
+---
+
 # SWE Interview Prep
 
-Software engineering learning OS with 19 tracks, 259 concepts, 26 roadmaps, active practice, build artifacts, and FSRS spaced repetition.
+A personal learning OS for software engineers preparing for interviews or
+strengthening practical technical judgment. It connects 19 tracks,
+259 concepts, and 26 roadmaps to active practice,
+build artifacts, explain-backs, and FSRS spaced repetition.
 
 ## Learning loop
 
 Concept → Drill → Build → Review → Apply. Each concept connects a concise mental model and primary source to executable practice, an explain-back prompt, and evidence you build.
+
+## Audience and outcome
+
+Use SWE Interview Prep to prepare across DSA, low-level design, system design,
+behavioral interviews, systems and platform engineering, AI-native engineering,
+developer tools, application engineering, and multimodal systems. The intended
+outcome is understanding that survives retrieval and can be demonstrated through
+code, diagrams, benchmarks, decisions, explanations, or projects.
+
+## Access and current state
+
+- Start as a guest; guest progress stays in the current browser.
+- Google sign-in keeps learning and competitive progress across sessions.
+- The product is mature, personal-use software in maintenance-only mode.
+- There is no paid tier, subscription, or checkout.
 
 ## Curriculum scope
 

@@ -2,6 +2,10 @@
 
 > A software engineering learning OS with 19 tracks, 259 concepts, 26 roadmaps, active drills, build artifacts, and FSRS review.
 
+SWE Interview Prep is for software engineers preparing for interviews or
+strengthening practical technical judgment. It turns study into retrieval,
+practice, an observable artifact, an explain-back, and scheduled review.
+
 ## Start here
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
@@ -12,6 +16,9 @@
 - [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview
 - [Full agent brief](https://learn.significanthobbies.com/llms-full.txt): Tracks and roadmap links
 - [Agent catalog](https://learn.significanthobbies.com/api/ai): JSON inventory of public surfaces
+- [Agent instructions](https://learn.significanthobbies.com/agents.md): Good uses and privacy boundaries
+- [Learning-plan skill](https://learn.significanthobbies.com/skill.md): Evidence-backed planning workflow
+- [Access and pricing](https://learn.significanthobbies.com/pricing.md): Guest, signed-in, and current commercial state
 
 ## Developer docs
 
@@ -21,3 +28,6 @@
 ## Interactive product
 
 - [Learning app](https://learn.significanthobbies.com/learn): FSRS, drills, Playground, Socratic feedback, and progress
+
+The product is mature, personal-use software in maintenance-only mode. There is
+no paid tier, subscription, or checkout.

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "swe-interview-learning-plan",
+      "type": "skill-md",
+      "description": "Build an evidence-backed software-engineering learning plan from a target role, interview goal, or technical gap without claiming mastery from reading alone.",
+      "url": "/.well-known/agent-skills/swe-interview-learning-plan/SKILL.md",
+      "digest": "sha256:1debbe234e45ef3598ee1c704ef3a1f3091950ff1e9b0f2718ae3c980a6736e9"
+    }
+  ]
+}

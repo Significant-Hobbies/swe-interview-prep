@@ -6,9 +6,14 @@
   "llmsFull": "https://learn.significanthobbies.com/llms-full.txt",
   "sitemap": "https://learn.significanthobbies.com/sitemap.xml",
   "robots": "https://learn.significanthobbies.com/robots.txt",
+  "openapi": "https://learn.significanthobbies.com/openapi.json",
+  "pricing": "https://learn.significanthobbies.com/pricing.md",
+  "instructions": "https://learn.significanthobbies.com/agents.md",
+  "aiCatalog": "https://learn.significanthobbies.com/.well-known/ai-catalog.json",
+  "agentSkills": "https://learn.significanthobbies.com/.well-known/agent-skills/index.json",
   "markdown": {
     "suffix": ".md",
-    "negotiation": false
+    "negotiation": true
   },
   "curriculum": {
     "counts": {
@@ -71,6 +76,10 @@
   ],
   "auth": {
     "public": true,
-    "notes": "Public curriculum is agent-indexed. Progress, notes, Reader saves, and review answers remain private."
+    "notes": "Public curriculum and guest access do not require an account. Google sign-in preserves learning state across sessions. Progress, notes, Reader saves, and review answers remain private."
+  },
+  "commercial": {
+    "state": "no-public-checkout",
+    "notes": "There is currently no paid tier, subscription, or checkout. This is a current-state statement, not a permanent pricing promise."
   }
 }

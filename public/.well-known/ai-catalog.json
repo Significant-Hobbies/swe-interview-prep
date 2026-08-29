@@ -1,0 +1,24 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "SWE Interview Prep",
+    "identifier": "did:web:learn.significanthobbies.com",
+    "documentationUrl": "https://learn.significanthobbies.com/llms-full.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:learn.significanthobbies.com:skill:swe-interview-learning-plan",
+      "displayName": "SWE Interview Prep learning plan",
+      "type": "text/markdown",
+      "url": "https://learn.significanthobbies.com/.well-known/agent-skills/swe-interview-learning-plan/SKILL.md",
+      "description": "Bounded guidance for turning an interview goal or technical gap into retrieval, practice, an artifact, and review."
+    },
+    {
+      "identifier": "urn:air:learn.significanthobbies.com:api:public-agent-surfaces",
+      "displayName": "SWE Interview Prep public discovery surfaces",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://learn.significanthobbies.com/openapi.json",
+      "description": "Read-only discovery API for public curriculum and product surfaces; it does not expose private learning state."
+    }
+  ]
+}

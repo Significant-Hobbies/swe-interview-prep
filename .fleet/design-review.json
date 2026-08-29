@@ -2,7 +2,8 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "swe-interview-prep",
-  "target": "Job-description role-fit learning plan",
+  "target": "Landing explanation and new-learner product entry",
+  "surfaceMode": "persuade",
   "mode": "preserve",
   "register": "product",
   "context": {
@@ -12,35 +13,48 @@
   "direction": {
     "references": [],
     "probes": [],
-    "selected": "existing-design",
+    "selected": "evidence-led-workbench",
     "approval": "not-required",
-    "before": "artifacts/design/role-fit-before-learn-1440.png"
+    "before": "artifacts/design/landing-audit-2026-08-28/login-1440.png",
+    "contract": {
+      "purpose": "Explain SWE Interview Prep as a personal learning OS that turns interview study into retained, artifact-backed understanding.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "A personal software-engineering learning OS that turns study into retained, artifact-backed understanding.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Software engineers preparing for interviews or strengthening practical engineering judgment.",
+      "job": "Choose what to learn next, practise it, build evidence, explain it back, and retain it.",
+      "thesis": "Understanding is earned through evidence, not content consumption.",
+      "system": "A restrained black, white, and cyan editorial workbench with direct product proof.",
+      "signature": "A real first-session plan paired with the Learn, Build, Verify, Retain evidence contract.",
+      "risk": "The broad curriculum could bury the interview purpose, or claims could outrun visible product proof. The landing keeps the evidence loop and one real first-session plan ahead of curriculum breadth."
+    }
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/role-fit-after-390.png"
+        "path": ".fleet/evidence/landing-audit/after-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/role-fit-after-768.png"
+        "path": ".fleet/evidence/landing-audit/after-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/role-fit-after-1440.png"
+        "path": ".fleet/evidence/landing-audit/after-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "pnpm quality && pnpm exec playwright test tests/e2e/role-fit.spec.ts",
+      "command": "pnpm quality",
       "status": "pass"
     },
     "critique": {
-      "score": 36,
+      "score": 35,
       "maximum": 40
     },
     "audit": {
-      "score": 18,
+      "score": 19,
       "maximum": 20
     },
     "unresolved": {
@@ -50,18 +64,51 @@
     "detector": {
       "posture": "advisory",
       "findings": [
-        {
-          "rule": "design-system-font-size",
-          "severity": "advisory",
-          "path": "src/pages/Sweep.tsx",
-          "status": "fixed",
-          "note": "Replaced the off-ramp 15px body size with the documented text-sm step after the detector's single run."
-        }
+        "Exact 390, 768, and 1440 CSS-pixel captures show no horizontal overflow and preserve the product thesis, evidence contract, proof example, current-state boundary, and primary action.",
+        "The login route now receives an honest inline first-paint shell that mirrors the same hero and evidence contract until React commits. It reduced mid-mobile LCP from 2.86 seconds to 1.81 seconds without introducing layout shift.",
+        "The synthetic low-end Android plus slow-3G profile remains the sole weak performance edge at 3.92 seconds p75; the weighted coverage profile is good at 1.30 seconds with zero CLS and zero TBT."
       ]
+    },
+    "comprehension": {
+      "status": "pass",
+      "reviewer": "Independent screenshot reviewer (Harvey)",
+      "answers": {
+        "product": "A personal software-engineering learning OS for interview preparation.",
+        "audience": "Software engineers preparing for interviews or building stronger engineering judgment.",
+        "value": "It turns study into understanding and engineering evidence that can be explained and retained.",
+        "mechanism": "The learner follows a Concept, Drill, Build, Review, Apply loop and must produce an artifact.",
+        "proof": "The page shows a real first-session plan, the evidence required, curriculum breadth, and current product state.",
+        "nextAction": "Open today's plan as a guest, with optional Google sign-in for durable progress."
+      },
+      "purposeScore": {
+        "product": 25,
+        "audience": 14,
+        "value": 15,
+        "mechanism": 15,
+        "proof": 12,
+        "nextAction": 15,
+        "total": 96
+      },
+      "mismatches": []
+    },
+    "performance": {
+      "report": ".fleet/evidence/landing-audit/performance.html",
+      "validRuns": 20,
+      "attemptedRuns": 20,
+      "slowMobileP75LcpMs": 3915,
+      "mobileMidP75LcpMs": 1812,
+      "weightedLcpMs": 1300,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    "visualQuality": {
+      "priority": "P2",
+      "score": 93,
+      "minimum": 85
     }
   },
   "ownerFeedback": {
     "decision": "delegated",
-    "note": "Owner approved the feature and explicitly asked Codex to sort it out end to end; final judgment was delegated for this preserve-mode pass."
+    "note": "The owner explicitly delegated final design judgment and asked the agent to proceed without repeated feedback pauses."
   }
 }

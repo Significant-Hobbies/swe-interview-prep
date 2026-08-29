@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -48,28 +49,31 @@ describe('public curriculum publication', () => {
     expect(catalog.concepts).toHaveLength(concepts.length);
   });
 
-  it('renders the public root shell before client-side route work', () => {
+  it('renders purpose-matched root and login shells before client-side route work', () => {
     const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
     const shell = homepage.match(/<div id="public-entry-shell"[\s\S]*?<\/div>\s*<script>/)?.[0];
 
     expect(shell).toBeTruthy();
-    expect(shell).toContain('A complete software engineering learning map');
+    expect(shell).toContain(
+      'Prepare for software-engineering interviews by building understanding you can prove'
+    );
+    expect(shell).toContain('personal learning OS');
     expect(shell).toContain('font-size:clamp(2.25rem,8vw,3rem)');
     expect(shell).not.toContain('margin-top:100vh');
-    expect(homepage).toContain("window.location.pathname === '/'");
+    expect(homepage).toContain('const initialPath = window.location.pathname');
+    expect(homepage).toContain("initialPath !== '/'");
+    expect(homepage).toContain("initialPath === '/login'");
+    expect(homepage).toContain('id="login-entry-template"');
+    expect(homepage).toContain('Turn interview prep into engineering you can prove.');
   });
 
-  it('keeps the product name inside the single h1', () => {
-    // The visible h1 is the tagline, so the product name only reaches screen
-    // readers and indexers through a visually-hidden span. The generator
-    // dropped it once already and a build silently stripped it from the live
-    // page, which costs brand findability on the one h1 the site has.
+  it('keeps the purpose inside the single public-shell h1', () => {
     const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
     const heading = homepage.match(/<h1[\s\S]*?<\/h1>/)?.[0];
 
     expect(heading).toBeTruthy();
-    expect(heading).toContain('SWE Interview Prep');
-    expect(heading).toContain('clip:rect(0,0,0,0)');
+    expect(heading).toContain('software-engineering interviews');
+    expect(heading).toContain('understanding you can prove');
   });
 
   it('advertises every public developer surface in llms.txt', () => {
@@ -139,14 +143,16 @@ describe('public curriculum publication', () => {
 
     for (const path of paths) {
       const markdown = readFileSync(resolve(root, `public${markdownPath(path)}`), 'utf8');
-      expect(markdown, path).toMatch(/^#\s+\S/);
+      expect(markdown, path).toMatch(/^(?:---[\s\S]*?---\s*)?#\s+\S/);
     }
   });
 
   it('advertises public curriculum surfaces to agents', () => {
     expect(apiCatalog.curriculum.counts).toEqual(manifest.counts);
     expect(apiCatalog.curriculum.html).toBe('https://learn.significanthobbies.com/curriculum/');
-    expect(apiCatalog.markdown).toEqual({ suffix: '.md', negotiation: false });
+    expect(apiCatalog.markdown).toEqual({ suffix: '.md', negotiation: true });
+    expect(apiCatalog.pricing).toBe('https://learn.significanthobbies.com/pricing.md');
+    expect(apiCatalog.instructions).toBe('https://learn.significanthobbies.com/agents.md');
     expect(apiCatalog.surfaces.map((surface) => surface.id)).toEqual([
       'home',
       'changelog',
@@ -158,6 +164,29 @@ describe('public curriculum publication', () => {
       'curriculum-json',
       'system-design-json',
     ]);
+  });
+
+  it('publishes a digest-verified learning-plan skill and truthful social card', () => {
+    const skill = readFileSync(resolve(root, 'public/skill.md'), 'utf8');
+    const installedSkill = readFileSync(
+      resolve(root, 'public/.well-known/agent-skills/swe-interview-learning-plan/SKILL.md'),
+      'utf8'
+    );
+    const skillIndex = JSON.parse(
+      readFileSync(resolve(root, 'public/.well-known/agent-skills/index.json'), 'utf8')
+    );
+    const digest = createHash('sha256').update(skill).digest('hex');
+    const socialCard = readFileSync(resolve(root, 'public/og-image.svg'), 'utf8');
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+
+    expect(installedSkill).toBe(skill);
+    expect(skillIndex.skills[0].digest).toBe(`sha256:${digest}`);
+    expect(skill).toContain('does not prove mastery');
+    expect(skill).toContain('no paid tier');
+    expect(socialCard).toContain('SWE INTERVIEW PREP');
+    expect(socialCard).toContain('Explain it back.');
+    expect(socialCard).not.toContain('DSA Prep Studio');
+    expect(homepage).toContain('https://learn.significanthobbies.com/og-image.png');
   });
 
   it('emits complete on-page metadata and one h1 per HTML page', () => {

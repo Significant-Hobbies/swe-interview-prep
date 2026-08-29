@@ -299,7 +299,9 @@ async function markdownAlternate(
   const mdUrl = new URL(url);
   mdUrl.pathname = pathname === '/' ? '/index.md' : `${pathname.replace(/\/$/, '')}.md`;
   const mdResponse = await context.env.ASSETS.fetch(new Request(mdUrl.toString(), request));
-  if (mdResponse.status !== 200) return null;
+  if (mdResponse.status !== 200 || mdResponse.headers.get('content-type')?.includes('text/html')) {
+    return null;
+  }
 
   const headers = new Headers(mdResponse.headers);
   headers.set('content-type', 'text/markdown; charset=utf-8');
@@ -311,17 +313,28 @@ async function markdownAlternate(
   });
 }
 
-async function soft404Response(
+async function markdownAsset(
   context: Parameters<PagesFunction>[0],
-  url: URL,
   pathname: string
 ): Promise<Response | null> {
-  if (pathname.startsWith('/api/') || isKnownRoute(pathname) || !context.env.ASSETS) return null;
+  if (!pathname.endsWith('.md') || !context.env.ASSETS) return null;
 
-  const checkUrl = new URL(url);
-  checkUrl.pathname = pathname.endsWith('/') ? `${pathname}index.html` : `${pathname}/index.html`;
-  const checkResponse = await context.env.ASSETS.fetch(new Request(checkUrl.toString()));
-  if (checkResponse.status === 200) return null;
+  const response = await context.env.ASSETS.fetch(context.request);
+  if (response.status !== 200 || response.headers.get('content-type')?.includes('text/html')) {
+    return null;
+  }
+
+  const headers = new Headers(response.headers);
+  headers.set('content-type', 'text/markdown; charset=utf-8');
+  headers.set('x-content-type-options', 'nosniff');
+  return new Response(context.request.method === 'HEAD' ? null : response.body, {
+    status: 200,
+    headers,
+  });
+}
+
+function soft404Response(context: Parameters<PagesFunction>[0], pathname: string): Response | null {
+  if (pathname.startsWith('/api/') || isKnownRoute(pathname) || isAssetPath(pathname)) return null;
 
   return wantsMarkdown(context.request) ? markdown404(pathname, context.request.method) : html404();
 }
@@ -368,6 +381,11 @@ export const onRequest: PagesFunction = async (context) => {
     return context.next();
   }
 
+  // Pages' SPA fallback can hide root-level Markdown files. Serve verified
+  // Markdown assets directly before the generic asset and soft-404 branches.
+  const directMarkdown = await markdownAsset(context, pathname);
+  if (directMarkdown) return directMarkdown;
+
   // Skip asset paths — let Pages handle directly.
   if (isAssetPath(pathname)) {
     return context.next();
@@ -379,7 +397,7 @@ export const onRequest: PagesFunction = async (context) => {
 
   // SPA soft-404 detection: if the path is not a known SPA route and not a
   // static file, return 404 instead of serving the SPA shell with 200.
-  const soft404 = await soft404Response(context, url, pathname);
+  const soft404 = soft404Response(context, pathname);
   if (soft404) return soft404;
 
   const response = await context.next();

@@ -13,6 +13,11 @@ SWE Interview Prep is a mechanism-first learning OS. Its 259 concepts span 19 tr
 - https://learn.significanthobbies.com/system-design/index.md
 - https://learn.significanthobbies.com/system-design/catalog.json
 - https://learn.significanthobbies.com/api/ai
+- https://learn.significanthobbies.com/.well-known/ai-catalog.json
+- https://learn.significanthobbies.com/.well-known/agent-skills/index.json
+- https://learn.significanthobbies.com/agents.md
+- https://learn.significanthobbies.com/pricing.md
+- https://learn.significanthobbies.com/skill.md
 - https://learn.significanthobbies.com/sitemap.xml
 - https://learn.significanthobbies.com/robots.txt
 

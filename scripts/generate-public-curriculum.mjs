@@ -1,4 +1,5 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
@@ -1345,13 +1346,127 @@ writeFileSync(
   )}\n`
 );
 
+const learningPlanSkill =
+  [
+    '---',
+    'name: swe-interview-learning-plan',
+    'description: Build an evidence-backed software-engineering learning plan from a target role, interview goal, or technical gap without claiming mastery from reading alone.',
+    'version: 1.0.0',
+    'homepage: https://learn.significanthobbies.com/',
+    '---',
+    '',
+    '# SWE Interview Prep learning plan',
+    '',
+    'Use this skill when a software engineer wants to prepare for an interview,',
+    'strengthen practical technical judgment, or turn a broad topic into a focused',
+    'sequence of study and practice.',
+    '',
+    '## Inputs',
+    '',
+    '- Target role, interview, or technical goal',
+    '- Current evidence: code, diagrams, explanations, decisions, or completed drills',
+    '- Available time and deadline',
+    '- Topics that are known, fuzzy, or new',
+    '',
+    '## Workflow',
+    '',
+    '1. Translate the goal into the smallest relevant curriculum tracks and concepts.',
+    '2. Keep demonstrated, self-reported, unverified, and weak understanding separate.',
+    '3. Expand prerequisites only when they block the target mechanism.',
+    '4. For each concept, choose one retrieval prompt and one observable artifact.',
+    '5. Order the work as Concept → Drill → Build → Review → Apply.',
+    '6. Use primary sources for mechanisms and the public curriculum for sequencing.',
+    '7. Schedule retrieval after the first successful explanation or artifact review.',
+    "8. End with one next action that fits the person's available time.",
+    '',
+    '## Output format',
+    '',
+    '```markdown',
+    '## Focused learning plan',
+    '- Goal: <role, interview, or technical outcome>',
+    '- Current evidence: <demonstrated, self-reported, unverified, and weak>',
+    '- Concepts: <small ordered set with prerequisites>',
+    '- Practice: <drill or interview case>',
+    '- Artifact: <code, diagram, benchmark, decision, or explanation>',
+    '- Review: <retrieval prompt and timing>',
+    '- Next action: <one bounded action>',
+    '```',
+    '',
+    '## Product boundaries',
+    '',
+    'The public curriculum can guide sequencing, but it cannot read private progress,',
+    'notes, saved Reader material, or review answers. Opening a source, completing a',
+    'calculation, or reporting confidence does not prove mastery. SWE Interview Prep',
+    'is currently a personal-use, maintenance-only product with no paid tier,',
+    'subscription, or checkout.',
+  ].join('\n') + '\n';
+const learningPlanSkillDigest = createHash('sha256').update(learningPlanSkill).digest('hex');
+const agentSkillsDir = join(publicDir, '.well-known', 'agent-skills');
+const learningPlanSkillDir = join(agentSkillsDir, 'swe-interview-learning-plan');
+mkdirSync(learningPlanSkillDir, { recursive: true });
+writeFileSync(join(publicDir, 'skill.md'), learningPlanSkill);
+writeFileSync(join(learningPlanSkillDir, 'SKILL.md'), learningPlanSkill);
+writeFileSync(
+  join(agentSkillsDir, 'index.json'),
+  `${JSON.stringify(
+    {
+      $schema: 'https://schemas.agentskills.io/discovery/0.2.0/schema.json',
+      skills: [
+        {
+          name: 'swe-interview-learning-plan',
+          type: 'skill-md',
+          description:
+            'Build an evidence-backed software-engineering learning plan from a target role, interview goal, or technical gap without claiming mastery from reading alone.',
+          url: '/.well-known/agent-skills/swe-interview-learning-plan/SKILL.md',
+          digest: `sha256:${learningPlanSkillDigest}`,
+        },
+      ],
+    },
+    null,
+    2
+  )}\n`
+);
+writeFileSync(
+  join(publicDir, '.well-known', 'ai-catalog.json'),
+  `${JSON.stringify(
+    {
+      specVersion: '1.0',
+      host: {
+        displayName: 'SWE Interview Prep',
+        identifier: 'did:web:learn.significanthobbies.com',
+        documentationUrl: absolute('/llms-full.txt'),
+      },
+      entries: [
+        {
+          identifier: 'urn:air:learn.significanthobbies.com:skill:swe-interview-learning-plan',
+          displayName: 'SWE Interview Prep learning plan',
+          type: 'text/markdown',
+          url: absolute('/.well-known/agent-skills/swe-interview-learning-plan/SKILL.md'),
+          description:
+            'Bounded guidance for turning an interview goal or technical gap into retrieval, practice, an artifact, and review.',
+        },
+        {
+          identifier: 'urn:air:learn.significanthobbies.com:api:public-agent-surfaces',
+          displayName: 'SWE Interview Prep public discovery surfaces',
+          type: 'application/vnd.oai.openapi+json',
+          url: absolute('/openapi.json'),
+          description:
+            'Read-only discovery API for public curriculum and product surfaces; it does not expose private learning state.',
+        },
+      ],
+    },
+    null,
+    2
+  )}\n`
+);
+
 const baseSitemapPaths = ['/', '/changelog'];
 const sitemapPaths = [...new Set([...baseSitemapPaths, ...htmlPaths, ...systemDesignHtmlPaths])];
 writeFileSync(
   join(publicDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc></url>`).join('\n')}
+${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc><lastmod>2026-08-28</lastmod></url>`).join('\n')}
 </urlset>
 `
 );
@@ -1361,6 +1476,10 @@ writeFileSync(
   `# SWE Interview Prep
 
 > A software engineering learning OS with ${TRACKS.length} tracks, ${CONCEPTS.length} concepts, ${ROADMAPS.length} roadmaps, active drills, build artifacts, and FSRS review.
+
+SWE Interview Prep is for software engineers preparing for interviews or
+strengthening practical technical judgment. It turns study into retrieval,
+practice, an observable artifact, an explain-back, and scheduled review.
 
 ## Start here
 
@@ -1372,6 +1491,9 @@ writeFileSync(
 - [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview
 - [Full agent brief](https://learn.significanthobbies.com/llms-full.txt): Tracks and roadmap links
 - [Agent catalog](https://learn.significanthobbies.com/api/ai): JSON inventory of public surfaces
+- [Agent instructions](https://learn.significanthobbies.com/agents.md): Good uses and privacy boundaries
+- [Learning-plan skill](https://learn.significanthobbies.com/skill.md): Evidence-backed planning workflow
+- [Access and pricing](https://learn.significanthobbies.com/pricing.md): Guest, signed-in, and current commercial state
 
 ## Developer docs
 
@@ -1381,6 +1503,9 @@ writeFileSync(
 ## Interactive product
 
 - [Learning app](https://learn.significanthobbies.com/learn): FSRS, drills, Playground, Socratic feedback, and progress
+
+The product is mature, personal-use software in maintenance-only mode. There is
+no paid tier, subscription, or checkout.
 `
 );
 
@@ -1401,6 +1526,11 @@ SWE Interview Prep is a mechanism-first learning OS. Its ${CONCEPTS.length} conc
 - ${absolute('/system-design/index.md')}
 - ${absolute('/system-design/catalog.json')}
 - ${absolute('/api/ai')}
+- ${absolute('/.well-known/ai-catalog.json')}
+- ${absolute('/.well-known/agent-skills/index.json')}
+- ${absolute('/agents.md')}
+- ${absolute('/pricing.md')}
+- ${absolute('/skill.md')}
 - ${absolute('/sitemap.xml')}
 - ${absolute('/robots.txt')}
 
@@ -1436,13 +1566,37 @@ Public curriculum pages contain editorial explanations, primary resources, pract
 
 writeFileSync(
   join(publicDir, 'index.md'),
-  `# SWE Interview Prep
+  `---
+title: SWE Interview Prep
+description: A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
+updated: 2026-08-28
+---
 
-Software engineering learning OS with ${TRACKS.length} tracks, ${CONCEPTS.length} concepts, ${ROADMAPS.length} roadmaps, active practice, build artifacts, and FSRS spaced repetition.
+# SWE Interview Prep
+
+A personal learning OS for software engineers preparing for interviews or
+strengthening practical technical judgment. It connects ${TRACKS.length} tracks,
+${CONCEPTS.length} concepts, and ${ROADMAPS.length} roadmaps to active practice,
+build artifacts, explain-backs, and FSRS spaced repetition.
 
 ## Learning loop
 
 Concept → Drill → Build → Review → Apply. Each concept connects a concise mental model and primary source to executable practice, an explain-back prompt, and evidence you build.
+
+## Audience and outcome
+
+Use SWE Interview Prep to prepare across DSA, low-level design, system design,
+behavioral interviews, systems and platform engineering, AI-native engineering,
+developer tools, application engineering, and multimodal systems. The intended
+outcome is understanding that survives retrieval and can be demonstrated through
+code, diagrams, benchmarks, decisions, explanations, or projects.
+
+## Access and current state
+
+- Start as a guest; guest progress stays in the current browser.
+- Google sign-in keeps learning and competitive progress across sessions.
+- The product is mature, personal-use software in maintenance-only mode.
+- There is no paid tier, subscription, or checkout.
 
 ## Curriculum scope
 
@@ -1461,6 +1615,79 @@ Private progress, notes, review answers, and saved learning sources are intentio
 `
 );
 
+writeFileSync(
+  join(publicDir, 'pricing.md'),
+  `---
+title: SWE Interview Prep access and pricing
+description: Current guest access, signed-in persistence, and commercial state for SWE Interview Prep.
+updated: 2026-08-28
+---
+
+# Access and pricing
+
+SWE Interview Prep does not currently have a paid tier, subscription, or
+checkout. This records the product's current state; it is not a permanent
+free-pricing promise.
+
+## Guest access
+
+Every learning route is open. Guest progress stays in the current browser and
+can be lost if browser storage is cleared.
+
+## Signed-in access
+
+Google sign-in keeps learning and competitive progress across sessions. It is
+an upgrade for durable state, not a gate to the curriculum or practice tools.
+
+## Product state
+
+The product is mature, personal-use software in maintenance-only mode. New
+scope is held unless it improves practice, retention, or a personally requested
+workflow.
+`
+);
+
+writeFileSync(
+  join(publicDir, 'agents.md'),
+  `---
+title: SWE Interview Prep agent instructions
+description: Public agent guidance and privacy boundaries for the SWE Interview Prep curriculum.
+updated: 2026-08-28
+---
+
+# Agent instructions
+
+Use the public curriculum to help a software engineer choose relevant concepts,
+prerequisites, drills, interview cases, and build evidence.
+
+## Good uses
+
+- Map an interview or technical goal to a small set of curriculum concepts.
+- Build a Concept → Drill → Build → Review → Apply plan.
+- Recommend public primary sources and practice routes.
+- Keep demonstrated, self-reported, unverified, and weak understanding separate.
+- Require code, diagrams, benchmarks, decisions, explanations, or projects
+  before claiming demonstrated understanding.
+
+## Boundaries
+
+- Do not claim access to private progress, notes, saved Reader material, or
+  review answers.
+- Do not treat opening a source, making a calculation, or reporting confidence
+  as mastery.
+- Do not describe a paid tier, subscription, or checkout; none currently exists.
+- Do not invent public write APIs, OAuth scopes, MCP tools, or recruiter features.
+
+## Public discovery
+
+- [Product brief](https://learn.significanthobbies.com/index.md)
+- [Curriculum](https://learn.significanthobbies.com/curriculum/)
+- [System-design cases](https://learn.significanthobbies.com/system-design/)
+- [Learning-plan skill](https://learn.significanthobbies.com/skill.md)
+- [OpenAPI](https://learn.significanthobbies.com/openapi.json)
+`
+);
+
 writeFileSync(join(publicDir, 'changelog.md'), cleanMarkdown(changelogMarkdown()));
 writeFileSync(join(publicDir, 'changelog.html'), cleanGeneratedText(changelogPage()));
 
@@ -1475,7 +1702,12 @@ writeFileSync(
       llmsFull: absolute('/llms-full.txt'),
       sitemap: absolute('/sitemap.xml'),
       robots: absolute('/robots.txt'),
-      markdown: { suffix: '.md', negotiation: false },
+      openapi: absolute('/openapi.json'),
+      pricing: absolute('/pricing.md'),
+      instructions: absolute('/agents.md'),
+      aiCatalog: absolute('/.well-known/ai-catalog.json'),
+      agentSkills: absolute('/.well-known/agent-skills/index.json'),
+      markdown: { suffix: '.md', negotiation: true },
       curriculum: {
         counts: catalog.counts,
         html: absolute('/curriculum/'),
@@ -1528,7 +1760,12 @@ writeFileSync(
       auth: {
         public: true,
         notes:
-          'Public curriculum is agent-indexed. Progress, notes, Reader saves, and review answers remain private.',
+          'Public curriculum and guest access do not require an account. Google sign-in preserves learning state across sessions. Progress, notes, Reader saves, and review answers remain private.',
+      },
+      commercial: {
+        state: 'no-public-checkout',
+        notes:
+          'There is currently no paid tier, subscription, or checkout. This is a current-state statement, not a permanent pricing promise.',
       },
     },
     null,
@@ -1545,7 +1782,30 @@ Allow: /system-design/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /index.md
+Allow: /agents.md
+Allow: /pricing.md
+Allow: /skill.md
 Allow: /api/ai
+Allow: /.well-known/ai-catalog.json
+Allow: /.well-known/agent-skills/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 Sitemap: ${absolute('/sitemap.xml')}
 `
@@ -1564,10 +1824,11 @@ const trackSummary = TRACKS.map(
 ).join('');
 const staticContent = `${startMarker}
           <section style="max-width:64rem;margin:0 auto;padding:2.5rem 1.5rem 5rem;color:rgba(255,255,255,0.62);line-height:1.6;">
-            <h1 style="max-width:52rem;font-size:clamp(2.25rem,8vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 1rem;"><span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">SWE Interview Prep</span>A complete software engineering learning map</h1>
-            <p>Browse ${TRACKS.length} tracks, ${CONCEPTS.length} concepts, and ${ROADMAPS.length} sequenced roadmaps. The curriculum connects systems foundations, infrastructure, distributed systems, databases, search, DSA, AI training and inference, agent reliability, developer tools, applications, and multimodal computing to active practice.</p>
+            <h1 style="max-width:52rem;font-size:clamp(2.25rem,8vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 1rem;">Prepare for software-engineering interviews by building understanding you can prove</h1>
+            <p>SWE Interview Prep is a personal learning OS for engineers preparing for interviews or strengthening practical technical judgment. It turns study into retrieval, practice, code or diagrams, an explain-back, and scheduled review.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Learn through evidence, not passive reading</h2>
             <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>
+            <p>Start without an account; guest progress stays in the current browser. Google sign-in keeps learning state across sessions. The product is currently maintenance-only and has no paid tier, subscription, or checkout.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Explore the curriculum</h2>
             <ul>${trackSummary}</ul>
             <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, or continue as a guest for the interactive learning workspace.</p>

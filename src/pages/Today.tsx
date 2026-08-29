@@ -107,6 +107,35 @@ export default function Today() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
+      {!loadingPriority && priority.state === 'new-learner' && (
+        <section
+          aria-labelledby="product-intro"
+          className="mb-10 grid gap-5 border-b border-white/[0.08] pb-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
+        >
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-300/75">
+              Personal SWE learning OS
+            </p>
+            <h2
+              id="product-intro"
+              className="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-white sm:text-3xl"
+            >
+              Prepare for interviews by building understanding you can demonstrate.
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/55">
+              Learn a mechanism, practise it, produce code, diagrams, decisions, or an explanation,
+              then retrieve it again when FSRS schedules the review.
+            </p>
+          </div>
+          <Link
+            to="/login"
+            className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+          >
+            How the system works <ArrowRight className="h-4 w-4" />
+          </Link>
+        </section>
+      )}
+
       <header aria-labelledby="daily-priority">
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-white/50">
           <span>Dashboard · Learn this today</span>
