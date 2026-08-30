@@ -130,6 +130,23 @@ into `src/pages/LearningDoc.tsx`.
    account-scoped continuity store. Definition-version mismatches are ignored;
    issuing an immutable receipt clears the corresponding mutable draft.
 
+## ChatGPT read projection
+
+1. ChatGPT authenticates to the shared Streamable HTTP MCP gateway with the
+   exact `swe-interview-prep.read` resource audience.
+2. The gateway verifies the Auth0 token and forwards it only for the two
+   private learning operations. Public curriculum tools remain catalog reads.
+3. Pages Functions verify the RS256 token again, require the exact issuer,
+   audience, scope, lifetime, and Google subject, then resolve that subject to
+   `users.google_id`.
+4. `/api/mcp/daily` computes one deterministic recovery, retention, or
+   progression priority from the profile, FSRS concept mastery, and drill
+   state. `/api/mcp/progress` summarizes the same D1 evidence plus explain-back
+   and activity totals.
+5. Both endpoints are `GET`, return `private, no-store`, and expose no mutation
+   tool. ChatGPT can describe the next action and link into the product, but it
+   cannot mark learning complete or change mastery.
+
 ## Systems Lab attempt flow
 
 1. `/labs/:labId` loads a versioned definition from the SPA bundle and

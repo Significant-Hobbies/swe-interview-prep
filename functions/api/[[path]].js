@@ -1,4 +1,5 @@
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { handleMcpLearningRequest } from '../../shared/api/mcp-learning.mjs';
 import { dispatchWarsRequest } from '../../shared/api/worker-wars.mjs';
 import { createD1Client } from '../../shared/db/d1-client.mjs';
 import { AIConfigError, generateStream } from '../../shared/lib/ai.mjs';
@@ -7,6 +8,7 @@ import { withTiming } from '../_lib/timing.js';
 
 const AUTH_COOKIE_NAME = 'dsa_prep_auth';
 const AUTH_COOKIE_MAX_AGE = 30 * 24 * 60 * 60;
+const MCP_LEARNING_PATHS = new Set(['mcp/daily', 'mcp/progress']);
 
 function getDb(env) {
   return createD1Client(env.DB);
@@ -367,7 +369,17 @@ export const onRequest = withTiming(async ({ request, env, params, next }) => {
     if (path === 'progress') return await handleProgress(request, env);
     if (path === 'learning') return await handleLearning(request, env);
     if (path === 'learning/reader') return await handleReaderLearning(request, env);
-    if (path === 'wars' || path.startsWith('wars/')) {
+    if (MCP_LEARNING_PATHS.has(path)) {
+      await initDatabase(env);
+      return await handleMcpLearningRequest({
+        request,
+        path,
+        env,
+        client: getDb(env),
+        json,
+      });
+    }
+    if (path.split('/')[0] === 'wars') {
       await initDatabase(env);
       return await dispatchWarsRequest({
         request,

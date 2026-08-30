@@ -23,6 +23,7 @@ binding = "WARS_REALTIME"
 service = "swe-interview-prep-wars"
 
 [vars]
+AUTH0_ISSUER = "https://dev-0suel086hm1blvg7.us.auth0.com/"
 WARS_REALTIME_PUBLIC_URL = "https://swe-interview-prep-wars.sarthakagrawal927.workers.dev"
 REALTIMEKIT_ACCOUNT_ID = "7d048325699a5acddb44d3be31cf6ba9"
 REALTIMEKIT_APP_ID = "4ba77120-7ebf-44d0-a21b-c1883a6a9ffe"

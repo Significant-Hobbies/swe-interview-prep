@@ -72,6 +72,7 @@
     "fflate": "^0.8.3",
     "fzstd": "^0.1.1",
     "google-auth-library": "10.9.1",
+    "jose": "6.2.8",
     "jsonwebtoken": "9.0.3",
     "lucide-react": "1.27.0",
     "lz-string": "1.5.0",

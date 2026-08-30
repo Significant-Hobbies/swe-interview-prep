@@ -53,6 +53,11 @@ When dispatched, `deploy.yml`:
 | `JWT_SECRET` | Auth cookie signing |
 | `GOOGLE_CLIENT_ID` | Server Google verify |
 
+The non-secret `AUTH0_ISSUER` Wrangler variable enables RS256 verification for
+the read-only ChatGPT learning connection. It is deployed with the tracked
+Pages configuration; no Auth0 client secret is stored in this repository or
+required by the product.
+
 The relational database is the non-secret `DB` D1 binding in `wrangler.toml`.
 For a release that includes files under `migrations/d1/`, enable
 `apply_migrations` when dispatching the workflow. For a local release, apply

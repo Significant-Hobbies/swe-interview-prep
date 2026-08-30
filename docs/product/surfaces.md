@@ -137,6 +137,8 @@ route set (anything else returns `404 API route not found`):
 | `GET /api/progress` | Progress rollups | JWT |
 | `GET/POST /api/learning?action=…` | Consolidated learning API (see actions below) | JWT for auth actions |
 | `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
+| `GET /api/mcp/daily` | Product-computed daily learning priority for the ChatGPT connection | Auth0 OAuth, `swe-interview-prep.read` |
+| `GET /api/mcp/progress` | Read-only concept, drill, explain-back, and activity projection | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/ai` | Public agent catalog (JSON) | — |
 | `GET /api/wars/status` | Launch gates and validated content counts | — |
 | `GET /api/wars/leaderboard/:mode` | Sanitized mode leaderboard | — |
@@ -200,6 +202,13 @@ Source: canonical curriculum data projected by
 `scripts/generate-public-curriculum.mjs` into `public/curriculum/`,
 `public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
 `public/api-ai.json`, `public/robots.txt`, and `public/sitemap.xml`.
+
+The ChatGPT MCP gateway combines these public catalogs with two private,
+user-scoped projections. The product verifies the gateway's Auth0 token again,
+maps its Google subject to the existing `users.google_id`, and reads D1. It
+cannot update progress or accept a claim that a concept was learned; mastery
+still changes only through product evidence, reviews, and accepted
+explain-backs.
 
 ## Owner-only surfaces
 

@@ -19,6 +19,7 @@ build-time vs runtime and where each is consumed. If it disagrees with
 | --- | --- | --- |
 | `GOOGLE_CLIENT_ID` | Yes | Server-side Google credential verification. |
 | `JWT_SECRET` | Yes | Signs the `dsa_prep_auth` httpOnly cookie. **No fallback** — the audit removed `dev-secret-change-in-production`. |
+| `AUTH0_ISSUER` | Yes for ChatGPT connection | Public Auth0 tenant issuer used to verify the connection's RS256 access token. The production value is a non-secret Wrangler variable. |
 | `READER_API_TOKEN` | Optional | Activates the private Reader adapter (owner-only). See [`../operations/runbooks/reader-adapter.md`](../operations/runbooks/reader-adapter.md). |
 
 The database is a Cloudflare Pages D1 binding named `DB`, declared in Wrangler
@@ -66,7 +67,7 @@ CLIs with no keys.
 | --- | --- |
 | `.env.local` (gitignored) | Local dev: `VITE_*` and any runtime vars for full-stack local. |
 | GitHub Secrets/Variables | `VITE_GOOGLE_CLIENT_ID`, `VITE_SAASMAKER_API_KEY`, `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`. |
-| Cloudflare Pages runtime secrets | `GOOGLE_CLIENT_ID`, `JWT_SECRET`, `READER_API_TOKEN`. Sync the required auth secrets via `pnpm sync:pages-secrets`; D1 is the `DB` binding. |
+| Cloudflare Pages runtime | Secrets: `GOOGLE_CLIENT_ID`, `JWT_SECRET`, `READER_API_TOKEN`. Non-secret Wrangler variable: `AUTH0_ISSUER`. Sync the required auth secrets via `pnpm sync:pages-secrets`; D1 is the `DB` binding. |
 
 ## Validation
 
