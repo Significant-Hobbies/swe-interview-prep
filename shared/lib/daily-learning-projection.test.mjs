@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildDailyLearningProjection } from './daily-learning-projection.mjs';
+import {
+  buildCurrentLearningVerification,
+  buildDailyLearningProjection,
+} from './daily-learning-projection.mjs';
 
 const now = new Date('2026-08-30T06:00:00.000Z');
 
@@ -21,8 +24,42 @@ describe('daily learning projection', () => {
     const projection = buildDailyLearningProjection({ now });
     expect(projection.priority.reason).toBe('progression');
     expect(projection.priority.concept).not.toBeNull();
+    expect(projection.priority.actionUrl).toMatch(/^https:\/\//);
+    expect(projection.priority.conceptUrl).toContain(projection.priority.concept.id);
     expect(projection.progress.concepts.untouched).toBe(projection.progress.concepts.total);
     expect(projection.tracking.masteryPolicy).toContain('read-only');
+  });
+
+  it('builds an answer-free, three-part check for the current concept', () => {
+    const projection = buildDailyLearningProjection({ now });
+    const verification = buildCurrentLearningVerification(projection);
+    expect(verification.state).toBe('verification-required');
+    expect(verification.questions.map((question) => question.category)).toEqual([
+      'mechanism',
+      'application-tradeoff',
+      'failure-counterexample',
+    ]);
+    expect(verification.questions.every((question) => !('answer' in question))).toBe(true);
+    expect(verification.instructions.join(' ')).toMatch(/one question at a time/i);
+    expect(verification.instructions.join(' ')).toMatch(/do not describe.*complete/i);
+  });
+
+  it('returns no quiz or concept link when the learner is caught up', () => {
+    const verification = buildCurrentLearningVerification({
+      generatedAt: now.toISOString(),
+      priority: {
+        concept: null,
+        actionUrl: 'https://learn.significanthobbies.com/playground',
+      },
+      tracking: { masteryPolicy: 'Product evidence only.' },
+    });
+    expect(verification).toMatchObject({
+      state: 'caught-up',
+      concept: null,
+      conceptUrl: null,
+      actionUrl: 'https://learn.significanthobbies.com/playground',
+      questions: [],
+    });
   });
 
   it('puts repeated failed practice ahead of novelty', () => {

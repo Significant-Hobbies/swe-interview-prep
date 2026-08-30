@@ -20,7 +20,7 @@ Out of scope: ATS/job-application features, Vercel/serverless migration, and new
 |-------|--------|
 | Frontend | React 19, Vite, React Router, Tailwind CSS |
 | Editor / viz | Monaco Editor, Excalidraw; TypeScript runs in-browser (sucrase); Go via client-side WASM interpreter (R2-hosted) with `/api/go-run`→go.dev fallback |
-| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `mcp/daily`, `mcp/progress`, `ai` |
+| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `mcp/daily`, `mcp/progress`, `mcp/verification`, `ai` |
 | Database | Cloudflare D1 — user progress, notes, FSRS concept mastery, imported problems |
 | Auth | Google One Tap → JWT httpOnly cookie |
 | AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint; in-process Vite dev AI bridge (claude/codex/gemini CLIs, no keys) |
@@ -100,7 +100,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 **Primary routes:** `/dashboard` (`/` redirects here) · `/learn` · `/practice` · `/wars` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. `/today` redirects to `/dashboard`.
 
-**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/mcp/daily` · `/api/mcp/progress` · `/api/ai` · `/api/ai/chat` · `/api/wars/*`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
+**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/mcp/daily` · `/api/mcp/progress` · `/api/mcp/verification` · `/api/ai` · `/api/ai/chat` · `/api/wars/*`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
 
 | Surface | Role |
 |---------|------|

@@ -1,5 +1,6 @@
 import conceptsData from '../../src/data/concepts.json' with { type: 'json' };
 import drillsData from '../../src/data/drills.json' with { type: 'json' };
+import reviewQuestionsData from '../../src/data/review-questions.json' with { type: 'json' };
 import roadmapsData from '../../src/data/roadmaps.json' with { type: 'json' };
 
 import { masteryConfidence } from './confidence.mjs';
@@ -8,10 +9,12 @@ const CONCEPTS = conceptsData.concepts ?? [];
 const CONCEPT_BY_ID = new Map(CONCEPTS.map((concept) => [concept.id, concept]));
 const DRILLS = drillsData.drills ?? [];
 const DRILL_BY_ID = new Map(DRILLS.map((drill) => [drill.id, drill]));
+const REVIEW_QUESTIONS = reviewQuestionsData.reviewQuestions ?? [];
 const ROADMAPS = roadmapsData.roadmaps ?? [];
 const ROADMAP_BY_ID = new Map(ROADMAPS.map((roadmap) => [roadmap.id, roadmap]));
 const DEFAULT_ROADMAP_ID = 'ai-search-infra-90-day';
 const PREREQUISITE_CONFIDENCE = 0.4;
+const PRODUCT_ORIGIN = 'https://learn.significanthobbies.com';
 
 const DEFAULT_PROFILE = {
   minutesPerDay: 45,
@@ -167,18 +170,18 @@ function actionFor(concept, reason, drill) {
   if (reason === 'recovery' && drill) {
     return {
       label: 'Retry the failed drill',
-      url: `https://learn.significanthobbies.com/drills/${drill.id}`,
+      url: `${PRODUCT_ORIGIN}/drills/${drill.id}`,
     };
   }
   if (reason === 'retention') {
     return {
       label: 'Start due retrieval',
-      url: 'https://learn.significanthobbies.com/practice/all?tab=reviews',
+      url: `${PRODUCT_ORIGIN}/practice/all?tab=reviews`,
     };
   }
   return {
     label: 'Start focused study',
-    url: `https://learn.significanthobbies.com/study/concept/${concept.id}`,
+    url: `${PRODUCT_ORIGIN}/study/concept/${concept.id}`,
   };
 }
 
@@ -230,8 +233,10 @@ function dailyPriority({ mastery, drillRows, profile, now }) {
       minutes: profile.minutesPerDay,
       action: {
         label: 'Start a synthesis note',
-        url: 'https://learn.significanthobbies.com/playground',
+        url: `${PRODUCT_ORIGIN}/playground`,
       },
+      actionUrl: `${PRODUCT_ORIGIN}/playground`,
+      conceptUrl: null,
     };
   }
 
@@ -239,6 +244,7 @@ function dailyPriority({ mastery, drillRows, profile, now }) {
   const entry = mastery[concept.id];
   const copy = priorityCopy(candidate, entry);
 
+  const action = actionFor(concept, reason, candidate.drill);
   return {
     state: 'ready',
     reason,
@@ -254,7 +260,82 @@ function dailyPriority({ mastery, drillRows, profile, now }) {
     roadmap: roadmap ? { id: roadmap.id, title: roadmap.title } : null,
     ...copy,
     minutes: profile.minutesPerDay,
-    action: actionFor(concept, reason, candidate.drill),
+    action,
+    actionUrl: action.url,
+    conceptUrl: `${PRODUCT_ORIGIN}/curriculum/concepts/${concept.id}`,
+  };
+}
+
+function verificationQuestions(concept) {
+  const authored = REVIEW_QUESTIONS.filter((question) => question.conceptId === concept.id);
+  const questions = [];
+  const used = new Set();
+
+  function add(category, id, prompt, source) {
+    if (!prompt || used.has(prompt)) return;
+    used.add(prompt);
+    questions.push({ id, category, prompt, source });
+  }
+
+  const mechanism = authored.find((question) =>
+    ['recall', 'explain', 'implement'].includes(question.type)
+  );
+  const tradeoff = authored.find((question) => ['compare', 'design'].includes(question.type));
+
+  add(
+    'mechanism',
+    mechanism?.id ?? `check-${concept.id}-mechanism`,
+    mechanism?.question ??
+      `Explain ${concept.name} from first principles: what state does it read or change, and why does that mechanism work?`,
+    mechanism ? 'authored-review' : 'deterministic-fallback'
+  );
+  add(
+    'application-tradeoff',
+    tradeoff?.id ?? `check-${concept.id}-tradeoff`,
+    tradeoff?.question ??
+      `Give one situation where ${concept.name} is the right choice and one where it is not. What trade-off decides between them?`,
+    tradeoff ? 'authored-review' : 'deterministic-fallback'
+  );
+  add(
+    'failure-counterexample',
+    `check-${concept.id}-failure`,
+    `Name a realistic failure mode or counterexample for ${concept.name}. What observable evidence would reveal it?`,
+    'deterministic-fallback'
+  );
+
+  return questions;
+}
+
+export function buildCurrentLearningVerification(projection) {
+  const priority = projection.priority;
+  if (!priority.concept) {
+    return {
+      schemaVersion: 'swe-learning-verification.v1',
+      generatedAt: projection.generatedAt,
+      state: 'caught-up',
+      concept: null,
+      questions: [],
+      actionUrl: priority.actionUrl,
+      conceptUrl: null,
+      completionPolicy: projection.tracking.masteryPolicy,
+    };
+  }
+
+  const concept = CONCEPT_BY_ID.get(priority.concept.id);
+  return {
+    schemaVersion: 'swe-learning-verification.v1',
+    generatedAt: projection.generatedAt,
+    state: 'verification-required',
+    concept: priority.concept,
+    questions: verificationQuestions(concept),
+    actionUrl: priority.actionUrl,
+    conceptUrl: priority.conceptUrl,
+    instructions: [
+      'Ask one question at a time and probe unclear reasoning without giving the answer.',
+      'Do not describe the concept as complete from conversation alone.',
+      'Use the product action to submit evidence, then re-read the daily priority before offering progression.',
+    ],
+    completionPolicy: projection.tracking.masteryPolicy,
   };
 }
 

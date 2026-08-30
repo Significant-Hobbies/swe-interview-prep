@@ -134,18 +134,23 @@ into `src/pages/LearningDoc.tsx`.
 
 1. ChatGPT authenticates to the shared Streamable HTTP MCP gateway with the
    exact `swe-interview-prep.read` resource audience.
-2. The gateway verifies the Auth0 token and forwards it only for the two
+2. The gateway verifies the Auth0 token and forwards it only for the three
    private learning operations. Public curriculum tools remain catalog reads.
 3. Pages Functions verify the RS256 token again, require the exact issuer,
    audience, scope, lifetime, and Google subject, then resolve that subject to
    `users.google_id`.
 4. `/api/mcp/daily` computes one deterministic recovery, retention, or
    progression priority from the profile, FSRS concept mastery, and drill
-   state. `/api/mcp/progress` summarizes the same D1 evidence plus explain-back
-   and activity totals.
-5. Both endpoints are `GET`, return `private, no-store`, and expose no mutation
-   tool. ChatGPT can describe the next action and link into the product, but it
-   cannot mark learning complete or change mastery.
+   state and returns absolute product action and concept-guide links.
+   `/api/mcp/progress` summarizes the same D1 evidence plus explain-back and
+   activity totals. `/api/mcp/verification` returns three answer-free prompts
+   for the current concept: mechanism, application/trade-off, and
+   failure/counterexample.
+5. All three endpoints are `GET`, return `private, no-store`, and expose no
+   mutation tool. ChatGPT asks one prompt at a time and may link into the
+   product, but conversation alone cannot mark learning complete or change
+   mastery. After accepted product evidence, a fresh daily read selects the
+   next priority in the same conversation.
 
 ## Systems Lab attempt flow
 

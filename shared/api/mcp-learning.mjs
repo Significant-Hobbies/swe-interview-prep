@@ -1,5 +1,8 @@
 import { verifySweInterviewPrepAuth0Subject } from '../lib/auth0-mcp.mjs';
-import { loadDailyLearningProjection } from '../lib/daily-learning-projection.mjs';
+import {
+  buildCurrentLearningVerification,
+  loadDailyLearningProjection,
+} from '../lib/daily-learning-projection.mjs';
 
 const MAX_AUTHORIZATION_BYTES = 20_000;
 
@@ -78,6 +81,9 @@ export async function handleMcpLearningRequest({
       },
       { headers: privateHeaders() }
     );
+  }
+  if (path === 'mcp/verification') {
+    return json(buildCurrentLearningVerification(projection), { headers: privateHeaders() });
   }
   return json({ error: 'API route not found' }, { status: 404, headers: privateHeaders() });
 }

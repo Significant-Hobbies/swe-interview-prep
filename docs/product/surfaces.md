@@ -139,6 +139,7 @@ route set (anything else returns `404 API route not found`):
 | `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
 | `GET /api/mcp/daily` | Product-computed daily learning priority for the ChatGPT connection | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/progress` | Read-only concept, drill, explain-back, and activity projection | Auth0 OAuth, `swe-interview-prep.read` |
+| `GET /api/mcp/verification` | Answer-free Socratic prompts for the current product-selected concept | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/ai` | Public agent catalog (JSON) | — |
 | `GET /api/wars/status` | Launch gates and validated content counts | — |
 | `GET /api/wars/leaderboard/:mode` | Sanitized mode leaderboard | — |
@@ -203,12 +204,15 @@ Source: canonical curriculum data projected by
 `public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
 `public/api-ai.json`, `public/robots.txt`, and `public/sitemap.xml`.
 
-The ChatGPT MCP gateway combines these public catalogs with two private,
+The ChatGPT MCP gateway combines these public catalogs with three private,
 user-scoped projections. The product verifies the gateway's Auth0 token again,
 maps its Google subject to the existing `users.google_id`, and reads D1. It
 cannot update progress or accept a claim that a concept was learned; mastery
 still changes only through product evidence, reviews, and accepted
-explain-backs.
+explain-backs. The daily projection returns absolute action and concept-guide
+links. The verification projection returns only question prompts—not their
+stored answers—so ChatGPT can probe understanding one question at a time before
+linking back to the product gate.
 
 ## Owner-only surfaces
 

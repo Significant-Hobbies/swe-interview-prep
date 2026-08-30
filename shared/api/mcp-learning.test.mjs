@@ -43,7 +43,29 @@ describe('MCP learning product boundary', () => {
     expect(response.headers.get('cache-control')).toBe('private, no-store');
     const body = await response.json();
     expect(body.priority.reason).toBe('progression');
+    expect(body.priority.actionUrl).toMatch(/^https:\/\//);
+    expect(body.priority.conceptUrl).toMatch(/^https:\/\//);
     expect(body).not.toHaveProperty('progress');
+  });
+
+  it('returns answer-free verification prompts under the same read scope', async () => {
+    const response = await handleMcpLearningRequest({
+      request: new Request('https://learn.example/api/mcp/verification', {
+        headers: authorization,
+      }),
+      path: 'mcp/verification',
+      env: { OWNER_EMAIL: 'owner@example.com' },
+      client: clientFor(),
+      json,
+      verifySubject: async () => 'google-user-1',
+      now: new Date('2026-08-30T06:00:00.000Z'),
+    });
+    expect(response.status).toBe(200);
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+    const body = await response.json();
+    expect(body.state).toBe('verification-required');
+    expect(body.questions).toHaveLength(3);
+    expect(JSON.stringify(body)).not.toContain('"answer"');
   });
 
   it('rejects missing, invalid, unmapped, and non-owner credentials', async () => {
