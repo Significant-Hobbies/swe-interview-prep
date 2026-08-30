@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-08-15
+Last updated: 2026-08-30
 
 ## Why/What
 
@@ -20,7 +20,7 @@ Out of scope: ATS/job-application features, Vercel/serverless migration, and new
 |-------|--------|
 | Frontend | React 19, Vite, React Router, Tailwind CSS |
 | Editor / viz | Monaco Editor, Excalidraw; TypeScript runs in-browser (sucrase); Go via client-side WASM interpreter (R2-hosted) with `/api/go-run`→go.dev fallback |
-| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `ai` |
+| Backend | Cloudflare Pages Functions (`functions/api/[[path]].js`) — serves `auth/*`, `progress`, `learning`, `learning/reader`, `mcp/daily`, `mcp/progress`, `ai` |
 | Database | Cloudflare D1 — user progress, notes, FSRS concept mastery, imported problems |
 | Auth | Google One Tap → JWT httpOnly cookie |
 | AI | Vercel AI SDK via `@ai-sdk/openai-compatible` against a BYO endpoint; in-process Vite dev AI bridge (claude/codex/gemini CLIs, no keys) |
@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 | Phase | Milestone |
 |-------|-----------|
+| Read-only ChatGPT learning connection (2026-08-30) | Shipped OAuth-bound `/api/mcp/daily` and `/api/mcp/progress` projections over the shared Streamable HTTP gateway. ChatGPT can retrieve one deterministic recovery, retention, or progression priority, inspect D1-backed concept/drill/explain-back/activity progress, and deep-link into the product. The connection cannot write progress or grant mastery; only product evidence, reviews, and accepted explain-backs change FSRS state. Product CI, code-only Pages deployment, gateway CI/deployment, protected-resource metadata, and unauthenticated fail-closed smokes pass. ChatGPT app creation and the authenticated owner smoke remain the final client gate. |
 | Job-description role fit (2026-08-27) | Added a grounded `/learn/role-fit` workflow that maps exact phrases from a pasted job description onto canonical curriculum concepts, separates demonstrated, unverified, weak, and unsupported requirements, expands prerequisites, and activates a sanitized role target with a focused Sweep. Raw postings and provider responses are not persisted; deployment AI remains owner-only while guests may use complete BYOK configuration. |
 | Fanout-inspired learning surfaces (local, 2026-08-20) | Added the complete 42-section Learn Inference companion path, searchable formula/notation reference, accessible concept topography, eight-source rotating paper programme, focused resumable study, three additional decision labs, scenario presets, and version-aware local drafts. Dashboard remains concept-first: failed practice and due retrieval still outrank progression and evidence-format selection. The size gate has since moved to per-chunk gzipped budgets on the first-load graph, which this expansion stays within. Local verification is recorded in GitHub issue #86; deployment remains separate. |
 | First-paint stylesheet stability (2026-08-22) | Removed the build-only asynchronous stylesheet rewrite so production CSS loads through Vite's normal blocking link. The pinned shell reset remains as a stable React handoff instead of compensating for intentionally delayed application styles. Corrected the size gate to bound the four scripts in the generated first-load graph rather than summing click-loaded curriculum documents as initial JavaScript. |
@@ -99,7 +100,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 **Primary routes:** `/dashboard` (`/` redirects here) · `/learn` · `/practice` · `/wars` · `/mock` · `/playground` · `/progress` · `/build` (BuildLab) · `/library` · `/sources` · `/session/:date/:sessionId` · concept/roadmap/project detail pages. `/today` redirects to `/dashboard`.
 
-**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/ai` · `/api/ai/chat` · `/api/wars/*`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
+**Primary API (prod Pages Function):** `/api/auth/google` · `/api/auth/logout` · `/api/auth/verify` · `/api/progress` · `/api/learning?action=…` · `/api/learning/reader` · `/api/mcp/daily` · `/api/mcp/progress` · `/api/ai` · `/api/ai/chat` · `/api/wars/*`. The chat stream is owner-authenticated and accepts BYOK or deployment AI configuration. `/api/chat`, `/api/chats`, `/api/notes`, `/api/problems`, `/api/go-run` are dev/legacy handlers, not served in prod.
 
 | Surface | Role |
 |---------|------|
