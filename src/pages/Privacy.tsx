@@ -7,7 +7,7 @@ export default function Privacy() {
         ← Loop
       </Link>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-white">Privacy</h1>
-      <p className="mt-4 text-xs text-slate-500">Last updated: 2026-08-13.</p>
+      <p className="mt-4 text-xs text-slate-500">Last updated: 2026-08-31.</p>
 
       <h2 className="mt-8 text-base font-semibold text-blue-400">What we store</h2>
       <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -38,9 +38,17 @@ export default function Privacy() {
         use the existing local preview autosave.
       </p>
 
+      <h2 className="mt-8 text-base font-semibold text-blue-400">Website analytics</h2>
+      <p className="mt-2">
+        The public site uses PostHog for product events and Microsoft Clarity for session replay and
+        heatmaps. These services may receive browser, device, page, and interaction data under their
+        respective privacy policies. Learning content, notes, and provider keys are not sent to
+        Clarity by application code.
+      </p>
+
       <h2 className="mt-8 text-base font-semibold text-blue-400">What we don&apos;t</h2>
       <ul className="mt-2 list-disc space-y-1 pl-5">
-        <li>No third-party tracking pixels or remarketing tags.</li>
+        <li>No remarketing tags.</li>
         <li>No selling of progress or mastery data.</li>
       </ul>
 

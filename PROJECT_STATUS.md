@@ -1,6 +1,6 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-08-30
+Last updated: 2026-08-31
 
 ## Why/What
 
@@ -65,6 +65,7 @@ External: LeetCode API (import), multi-provider LLM APIs
 
 | Phase | Milestone |
 |-------|-----------|
+| Product-owned Clarity source wiring (2026-08-31) | Added the distinct SWE Interview Prep Clarity project to the application shell and corrected the privacy surface to disclose both analytics services. No deployment ran. |
 | Read-only ChatGPT learning connection (2026-08-30) | Shipped OAuth-bound `/api/mcp/daily` and `/api/mcp/progress` projections over the shared Streamable HTTP gateway. ChatGPT can retrieve one deterministic recovery, retention, or progression priority, inspect D1-backed concept/drill/explain-back/activity progress, and deep-link into the product. The connection cannot write progress or grant mastery; only product evidence, reviews, and accepted explain-backs change FSRS state. Product CI, code-only Pages deployment, gateway CI/deployment, protected-resource metadata, and unauthenticated fail-closed smokes pass. The developer-mode ChatGPT app is connected through the exact Auth0 audience and read permission; authenticated owner smokes returned a concrete daily lesson and the matching honest progress snapshot. ChatGPT's active `Daily SWE Lesson` task runs at 09:00 Asia/Kolkata and requests the progress-derived lesson, rationale, evidence, duration, and deep link without any mastery mutation. |
 | Job-description role fit (2026-08-27) | Added a grounded `/learn/role-fit` workflow that maps exact phrases from a pasted job description onto canonical curriculum concepts, separates demonstrated, unverified, weak, and unsupported requirements, expands prerequisites, and activates a sanitized role target with a focused Sweep. Raw postings and provider responses are not persisted; deployment AI remains owner-only while guests may use complete BYOK configuration. |
 | Fanout-inspired learning surfaces (local, 2026-08-20) | Added the complete 42-section Learn Inference companion path, searchable formula/notation reference, accessible concept topography, eight-source rotating paper programme, focused resumable study, three additional decision labs, scenario presets, and version-aware local drafts. Dashboard remains concept-first: failed practice and due retrieval still outrank progression and evidence-format selection. The size gate has since moved to per-chunk gzipped budgets on the first-load graph, which this expansion stays within. Local verification is recorded in GitHub issue #86; deployment remains separate. |
