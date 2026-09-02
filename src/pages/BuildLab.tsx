@@ -54,7 +54,8 @@ import {
   drillVerification,
   isMetadataDrill,
 } from '../lib/contentQuality';
-import { runDrillTests } from '../lib/drillRunner';
+import { drillContract } from '../lib/drillContract';
+import { type DrillTestCase, runDrillTests } from '../lib/drillRunner';
 import type { MasteryRating } from '../lib/fsrs';
 import { difficultyToElo } from '../lib/elo';
 import { pickDrillForConcept, pickNextConcept } from '../lib/recommend';
@@ -64,7 +65,7 @@ import {
   unsuspendReviewQuestion,
 } from '../lib/reviewMastery';
 import { recordSessionActivity } from '../lib/session';
-import { playgroundArtifactUrl } from '../lib/gates';
+import { playgroundArtifactUrl, playgroundProblemUrl } from '../lib/gates';
 import type { Language } from '../types';
 
 export function resolveBuildLabView(
@@ -600,6 +601,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
                 <p className="mt-1 text-xs text-slate-400">
                   {DRILL_VERIFICATION_HINT[verification]}
                 </p>
+                <ContractHint testCases={drill.testCases} />
               </Card>
 
               <Card className="p-3">
@@ -631,7 +633,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
                   <Check className="h-4 w-4" /> Mark solved
                 </Button>
                 <Link
-                  to="/playground"
+                  to={playgroundProblemUrl(drillId)}
                   className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800"
                 >
                   <Hammer className="h-4 w-4" /> Full workspace
@@ -658,6 +660,41 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         }}
       />
     </PageShell>
+  );
+}
+
+/**
+ * The symbols the grader will call, shown next to the grading explanation.
+ *
+ * Most auto-graded drills never name the function their tests invoke, so the
+ * prompt asks for a design and the grader silently requires
+ * `paginationChoice(rows)`. This makes the contract visible without revealing
+ * any expected value — the calls are shown, the assertions are not.
+ */
+function ContractHint({ testCases }: { testCases?: DrillTestCase[] }) {
+  const { required, calls } = drillContract(testCases);
+  if (!required.length) return null;
+
+  return (
+    <div className="mt-2 border-t border-slate-800 pt-2">
+      <div className="text-[11px] font-medium text-slate-500">
+        Your code must define {required.length === 1 ? 'this' : 'these'}
+      </div>
+      <div className="mt-1 flex flex-wrap gap-1">
+        {required.map((name) => (
+          <code
+            key={name}
+            className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[11px] text-sky-300"
+          >
+            {name}
+          </code>
+        ))}
+      </div>
+      <div className="mt-2 text-[11px] font-medium text-slate-500">The grader runs</div>
+      <pre className="mt-1 overflow-x-auto whitespace-pre-wrap rounded bg-slate-950 p-2 font-mono text-[11px] text-slate-400">
+        {calls.join('\n')}
+      </pre>
+    </div>
   );
 }
 

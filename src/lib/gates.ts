@@ -188,3 +188,14 @@ function prereqsMetForGate(concept: Concept, ctx: GateContext): boolean {
 export function playgroundArtifactUrl(artifactId: string): string {
   return `/playground?artifact=${encodeURIComponent(artifactId)}`;
 }
+
+/**
+ * Deep-link into the Playground carrying the drill you were already on.
+ *
+ * Without the `problem` param the Playground falls back to the first internal
+ * drill in the catalog, so "Full workspace" on a drill page used to swap the
+ * question out from under you.
+ */
+export function playgroundProblemUrl(drillId: string): string {
+  return `/playground?problem=${encodeURIComponent(drillId)}`;
+}

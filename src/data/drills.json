@@ -2171,11 +2171,11 @@
       "solutionNotes": "Temperature trades diversity vs determinism.",
       "testCases": [
         {
-          "setup": "function softmax(xs){const m=Math.max(...xs);const ex=xs.map(x=>Math.exp(x-m));const s=ex.reduce((a,b)=>a+b,0);return ex.map(e=>e/s);}\nfunction scaled(T,xs){return softmax(xs.map(x=>x/T));}",
-          "run": "const hot=scaled(0.5,[2,1,0]);console.log(hot[0].toFixed(2));",
-          "expect": ["0.76"]
+          "run": "const sharp = scaled(0.5, [2,1,0]);\nconst flat = scaled(2, [2,1,0]);\nconsole.log(sharp[0].toFixed(2), flat[0].toFixed(2));",
+          "expect": ["0.87", "0.51"]
         }
-      ]
+      ],
+      "referenceSolution": "function softmax(xs) {\n  const m = Math.max(...xs);\n  const ex = xs.map((x) => Math.exp(x - m));\n  const s = ex.reduce((a, b) => a + b, 0);\n  return ex.map((e) => e / s);\n}\nfunction scaled(T, xs) {\n  return softmax(xs.map((x) => x / T));\n}"
     },
     {
       "id": "ml-sinusoidal-position",
@@ -2210,11 +2210,11 @@
       "solutionNotes": "Scaling stops dot products from saturating softmax.",
       "testCases": [
         {
-          "setup": "function attnRow(q,k,v,dk){const scores=k.map(ki=>q.reduce((s,qj,j)=>s+qj*ki[j],0)/Math.sqrt(dk));const m=Math.max(...scores);const ex=scores.map(s=>Math.exp(s-m));const w=ex.map(e=>e/ex.reduce((a,b)=>a+b,0));return w.map((wi,i)=>wi*v[i].reduce((s,vj,j)=>s+wj*vj,0));}",
-          "run": "const o=attnRow([1,0],[[1,0],[0,1]],[[1,2],[3,4]],2);console.log(o[0].toFixed(1),o[1].toFixed(1));",
-          "expect": ["2.0", "3.0"]
+          "run": "const o = attnRow([1,0], [[1,0],[0,1]], [[1,2],[3,4]], 2);\nconsole.log(o[0].toFixed(1), o[1].toFixed(1));",
+          "expect": ["1.7", "2.7"]
         }
-      ]
+      ],
+      "referenceSolution": "function attnRow(q, k, v, dk) {\n  const scores = k.map((ki) => q.reduce((s, qj, j) => s + qj * ki[j], 0) / Math.sqrt(dk));\n  const m = Math.max(...scores);\n  const ex = scores.map((s) => Math.exp(s - m));\n  const z = ex.reduce((a, b) => a + b, 0);\n  const w = ex.map((e) => e / z);\n  return v[0].map((_, col) => w.reduce((s, wi, i) => s + wi * v[i][col], 0));\n}"
     },
     {
       "id": "ml-multi-head-split",
@@ -2474,11 +2474,12 @@
       "solutionNotes": "Subset template generalizes to combinations/permutations.",
       "testCases": [
         {
-          "setup": "function subsets(nums){const out=[],path=[];function dfs(i){if(i===nums.length){out.push([...path]);return;}dfs(i+1);path.push(nums[i]);dfs(i+1);path.pop();}dfs(0);return out.sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));}",
-          "run": "console.log(JSON.stringify(subsets([1,2])));",
-          "expect": ["[[],[1],[2],[1,2]]"]
+          "setup": "function normalizeSubsets(rows) {\n  if (!Array.isArray(rows)) return \"not an array\";\n  return JSON.stringify(rows.map((r) => [...r].sort((a, b) => a - b).join(\",\")).sort());\n}",
+          "run": "console.log(normalizeSubsets(subsets([1,2])));",
+          "expect": ["[\"\",\"1\",\"1,2\",\"2\"]"]
         }
-      ]
+      ],
+      "referenceSolution": "function subsets(nums) {\n  const out = [];\n  const path = [];\n  function dfs(i) {\n    if (i === nums.length) {\n      out.push([...path]);\n      return;\n    }\n    dfs(i + 1);\n    path.push(nums[i]);\n    dfs(i + 1);\n    path.pop();\n  }\n  dfs(0);\n  return out;\n}"
     },
     {
       "id": "dijkstra-shortest-path",
@@ -2546,11 +2547,11 @@
       "solutionNotes": "Greedy works when matroid structure holds.",
       "testCases": [
         {
-          "setup": "function maxActs(a){a.sort((x,y)=>x[1]-y[1]);let end=-1,c=0;for(const[s,e]of a){if(s>=end){c++;end=e;}}return c;}",
           "run": "console.log(maxActs([[1,4],[3,5],[0,6],[5,7],[8,9],[5,9]]));",
-          "expect": ["4"]
+          "expect": ["3"]
         }
-      ]
+      ],
+      "referenceSolution": "function maxActs(a) {\n  const sorted = [...a].sort((x, y) => x[1] - y[1]);\n  let end = -Infinity;\n  let count = 0;\n  for (const [s, e] of sorted) {\n    if (s >= end) {\n      count++;\n      end = e;\n    }\n  }\n  return count;\n}"
     },
     {
       "id": "merge-intervals",
@@ -2600,11 +2601,11 @@
       "solutionNotes": "Bitmask/XOR tricks are fast interview wins.",
       "testCases": [
         {
-          "setup": "function single(nums){return nums.reduce((a,b)=>a^b,0);}",
           "run": "console.log(single([4,1,2,1,4]));",
-          "expect": ["5"]
+          "expect": ["2"]
         }
-      ]
+      ],
+      "referenceSolution": "function single(nums) {\n  return nums.reduce((a, b) => a ^ b, 0);\n}"
     },
     {
       "id": "cross-encoder-rerank",

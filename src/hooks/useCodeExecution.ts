@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import { transform } from 'sucrase';
 
 import { trackCoreAction } from '../lib/analytics';
+import { transpile } from '../lib/transpile';
 import type { Language, TestCase } from '../types';
 
 export interface TestResult extends TestCase {
@@ -16,15 +16,6 @@ interface ExecuteResult {
   testResults: TestResult[];
   execTimeMs: number;
   errorLine: number | null;
-}
-
-function transpileTS(code: string): { code: string | null; error: string | null } {
-  try {
-    const result = transform(code, { transforms: ['typescript'], disableESTransforms: true });
-    return { code: result.code, error: null };
-  } catch (e: any) {
-    return { code: null, error: e.message };
-  }
 }
 
 export function useCodeExecution() {
@@ -50,7 +41,7 @@ export function useCodeExecution() {
 
       let jsCode = code;
       if (language === 'typescript') {
-        const { code: transpiled, error } = transpileTS(code);
+        const { code: transpiled, error } = transpile(code, language);
         if (error) {
           setErrors(`TypeScript Error: ${error}`);
           setErrorLine(null);

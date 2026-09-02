@@ -73,6 +73,45 @@ describe('runDrillTests', () => {
     expect(result.passed).toBe(true);
   });
 
+  // The editor is TypeScript by default. The runner used to hand the raw
+  // buffer to `new Function`, so a single annotation failed both Run and Mark
+  // solved with an unlocatable "Unexpected token ':'".
+  it('strips TypeScript before grading', () => {
+    const tests: DrillTestCase[] = [
+      { run: 'console.log(paginationChoice(10000000));', expect: 'cursor' },
+    ];
+    const userCode =
+      "function paginationChoice(rows: number): string {\n  return rows > 100000 ? 'cursor' : 'offset-ok';\n}";
+    const result = runDrillTests(userCode, tests);
+    expect(result.errors).toBe('');
+    expect(result.passed).toBe(true);
+  });
+
+  it('accepts interfaces and generics, not just annotations', () => {
+    const tests: DrillTestCase[] = [{ run: 'console.log(first([7, 8]));', expect: '7' }];
+    const userCode =
+      'interface Box<T> { value: T }\nfunction first<T>(xs: T[]): T { return xs[0]; }';
+    expect(runDrillTests(userCode, tests).passed).toBe(true);
+  });
+
+  it('reports a syntax error with the line and column in the user source', () => {
+    const tests: DrillTestCase[] = [{ run: 'console.log(solve());', expect: '1' }];
+    const result = runDrillTests('function solve() {\n  return (\n}', tests);
+    expect(result.passed).toBe(false);
+    expect(result.message).toContain('Syntax error in your code');
+    expect(result.message).toMatch(/\(3:\d+\)/);
+  });
+
+  it('reports a syntax error before running any test case', () => {
+    const tests: DrillTestCase[] = [
+      { run: 'console.log("a");', expect: 'a' },
+      { run: 'console.log("b");', expect: 'b' },
+    ];
+    const result = runDrillTests('function (', tests);
+    expect(result.message).not.toContain('Test 1 failed');
+    expect(result.message).toContain('Syntax error in your code');
+  });
+
   it('returns runtime errors without throwing', () => {
     const tests: DrillTestCase[] = [
       {

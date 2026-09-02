@@ -5,6 +5,12 @@ Meaningful improvements to the curriculum, practice loop, and personal learning 
 - [Roadmap](https://github.com/Significant-Hobbies/swe-interview-prep/issues)
 - [Source](https://github.com/Significant-Hobbies/swe-interview-prep)
 
+## 2026-09-03 — Drills grade what you actually wrote
+
+- TypeScript solutions are graded instead of rejected, and a real syntax error now names its line and column instead of reporting an unlocatable "Unexpected token".
+- Every auto-graded drill states the function its tests will call and the exact statement the grader runs, so passing no longer depends on guessing an unnamed symbol.
+- Five drills that asserted an output no correct solution could produce were repaired, and "Full workspace" carries the drill you were on instead of opening an unrelated question.
+
 ## 2026-08-27 — Turn a job description into a learning target
 
 - A new role-fit workflow maps exact requirement phrases from a pasted job description onto canonical curriculum concepts and names unsupported requirements honestly.

@@ -4,6 +4,28 @@ Reusable lessons that are not obvious from the code. Add new entries at the
 top with a date. One lesson per bullet; link to the code or ADR that
 exemplifies it.
 
+## 2026-09 — Two paths that run user code must share one compile step
+
+The Playground executor stripped TypeScript with sucrase; the drill grader
+handed the raw editor buffer to `new Function`. The editor defaults to
+TypeScript, so one type annotation failed both Run and Mark solved with a bare
+`SyntaxError: Unexpected token ':'` and no location — and because Run grades
+before executing, the working path was never reached. A comment claiming
+"TypeScript stripped by caller" is not a contract. Both paths now go through
+`src/lib/transpile.ts`, which also positions syntax errors `(line:column)`
+against the user's own source rather than the wrapper it gets embedded in.
+
+## 2026-09 — A grader that requires an unnamed symbol is unpassable
+
+176 drill test cases call a specific identifier — `numIslands`, `tfidf`,
+`designOutline` — that the prompt never names, so passing meant guessing.
+Deriving the contract from the test cases (`src/lib/drillContract.ts`) and
+showing it fixes every drill at once and cannot drift from what is graded.
+The same extraction doubles as an invariant: an auto-graded drill whose
+required set is empty has its answer sitting in `testCases[].setup`. That
+check found five drills whose setup held the whole implementation *and*
+asserted an output it never produced.
+
 ## 2026-08 — Constrain model interpretation with source quotes and canonical IDs
 
 A model can interpret an unstructured job posting, but it cannot be the source
