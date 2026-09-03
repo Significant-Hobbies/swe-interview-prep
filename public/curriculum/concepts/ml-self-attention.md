@@ -31,7 +31,7 @@ Self-attention lets every token look at every other token and pull in what is re
 
 Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.
 
-**Expected evidence:** Uniform weights 0.5/0.5 → output [2,3].
+**Expected evidence:** Scaled scores [0.71, 0] → weights ≈ 0.67/0.33 → output ≈ [1.7, 2.7].
 
 ## Review prompts
 

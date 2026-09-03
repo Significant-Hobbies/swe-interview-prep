@@ -29,7 +29,7 @@ Cross-entropy loss, language model training, variational inference, compression.
 
 True distribution P=(0.5, 0.5); model Q=(0.9, 0.1). Compute H(P) and cross-entropy H(P,Q) in bits (log base 2). Which term dominates?
 
-**Expected evidence:** H(P)=1 bit. H(P,Q)=−0.5 log₂0.9−0.5 log₂0.1≈0.47+1.66≈2.13 bits. The Q=0.1 on the true class (prob 0.5) dominates — being confidently wrong is expensive.
+**Expected evidence:** H(P)=1 bit. H(P,Q) = −0.5·log₂0.9 − 0.5·log₂0.1 ≈ 0.08 + 1.66 ≈ 1.74 bits. The 1.66 dominates: the model gave 0.1 to a class that occurs half the time, and being confidently wrong is expensive.
 
 ## Review prompts
 

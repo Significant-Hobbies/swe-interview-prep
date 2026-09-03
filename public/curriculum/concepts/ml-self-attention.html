@@ -85,7 +85,7 @@
       <div class="practice-card">
           <h3>Scaled dot-product attention weights</h3>
           <p>Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.</p>
-          <p><strong>Expected evidence:</strong> Uniform weights 0.5/0.5 → output [2,3].</p>
+          <p><strong>Expected evidence:</strong> Scaled scores [0.71, 0] → weights ≈ 0.67/0.33 → output ≈ [1.7, 2.7].</p>
           <a href="/drills/ml-scaled-dot-attention">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Why divide the query-key dot product by sqrt(d_k)?</li></ul>

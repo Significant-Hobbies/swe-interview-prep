@@ -1851,7 +1851,7 @@
       "type": "coding-problem",
       "difficulty": "advanced",
       "prompt": "True distribution P=(0.5, 0.5); model Q=(0.9, 0.1). Compute H(P) and cross-entropy H(P,Q) in bits (log base 2). Which term dominates?",
-      "expectedOutput": "H(P)=1 bit. H(P,Q)=−0.5 log₂0.9−0.5 log₂0.1≈0.47+1.66≈2.13 bits. The Q=0.1 on the true class (prob 0.5) dominates — being confidently wrong is expensive.",
+      "expectedOutput": "H(P)=1 bit. H(P,Q) = −0.5·log₂0.9 − 0.5·log₂0.1 ≈ 0.08 + 1.66 ≈ 1.74 bits. The 1.66 dominates: the model gave 0.1 to a class that occurs half the time, and being confidently wrong is expensive.",
       "hints": ["H(P)=−Σ p log₂ p.", "Cross-entropy uses Q as the model distribution."],
       "solutionNotes": "This is why softmax+cross-entropy punishes confident wrong answers harshly.",
       "testCases": [
@@ -2109,7 +2109,7 @@
       "type": "coding-problem",
       "difficulty": "core",
       "prompt": "Weight w=2, grad=0.5, lr=0.1, decay=0.01. Compare one step: (a) L2 in gradient w−lr·(grad+decay·w) vs (b) AdamW-style w−lr·grad then w·(1−lr·decay).",
-      "expectedOutput": "L2→1.33; decoupled→1.33 then shrink (slightly different effective decay).",
+      "expectedOutput": "Both ≈ 1.948 (L2 1.94800, decoupled 1.94805). One step barely separates them — the point is that decoupled decay never enters the gradient, so it is not rescaled by the adaptive step.",
       "hints": [
         "Coupled L2 adds decay·w to the gradient.",
         "AdamW applies decay directly on weights."
@@ -2205,7 +2205,7 @@
       "type": "coding-problem",
       "difficulty": "advanced",
       "prompt": "Q=K=[[1,0],[0,1]], V=[[1,2],[3,4]], d_k=2. Compute softmax(QKᵀ/√d_k)·V for one query row.",
-      "expectedOutput": "Uniform weights 0.5/0.5 → output [2,3].",
+      "expectedOutput": "Scaled scores [0.71, 0] → weights ≈ 0.67/0.33 → output ≈ [1.7, 2.7].",
       "hints": ["Scale before softmax.", "Apply weights to values."],
       "solutionNotes": "Scaling stops dot products from saturating softmax.",
       "testCases": [
@@ -2542,7 +2542,7 @@
       "type": "coding-problem",
       "difficulty": "core",
       "prompt": "Activities by end time: [1,4],[3,5],[0,6],[5,7],[8,9],[5,9]. Max non-overlapping count?",
-      "expectedOutput": "4 activities.",
+      "expectedOutput": "3 activities: [1,4], [5,7], [8,9].",
       "hints": ["Sort by finish time.", "Take next compatible activity greedily."],
       "solutionNotes": "Greedy works when matroid structure holds.",
       "testCases": [
@@ -2596,7 +2596,7 @@
       "type": "coding-problem",
       "difficulty": "intro",
       "prompt": "Every element appears twice except one. Find it in O(n) time, O(1) space.",
-      "expectedOutput": "xor all → 5 for [4,1,2,1,4].",
+      "expectedOutput": "xor all → 2 for [4,1,2,1,4].",
       "hints": ["a^a=0, a^0=a.", "XOR is commutative — order does not matter."],
       "solutionNotes": "Bitmask/XOR tricks are fast interview wins.",
       "testCases": [

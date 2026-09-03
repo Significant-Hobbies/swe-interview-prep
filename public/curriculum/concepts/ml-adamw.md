@@ -23,7 +23,7 @@ AdamW is the standard optimizer for training transformers. It adapts the learnin
 
 Weight w=2, grad=0.5, lr=0.1, decay=0.01. Compare one step: (a) L2 in gradient w−lr·(grad+decay·w) vs (b) AdamW-style w−lr·grad then w·(1−lr·decay).
 
-**Expected evidence:** L2→1.33; decoupled→1.33 then shrink (slightly different effective decay).
+**Expected evidence:** Both ≈ 1.948 (L2 1.94800, decoupled 1.94805). One step barely separates them — the point is that decoupled decay never enters the gradient, so it is not rescaled by the adaptive step.
 
 ## Review prompts
 

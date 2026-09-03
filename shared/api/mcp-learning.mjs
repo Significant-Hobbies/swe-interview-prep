@@ -1,6 +1,7 @@
 import { verifySweInterviewPrepAuth0Subject } from '../lib/auth0-mcp.mjs';
 import {
   buildCurrentLearningVerification,
+  loadAttemptsProjection,
   loadDailyLearningProjection,
 } from '../lib/daily-learning-projection.mjs';
 
@@ -57,6 +58,14 @@ export async function handleMcpLearningRequest({
       { error: 'This learning workspace is private' },
       { status: 403, headers: privateHeaders() }
     );
+  }
+
+  // Answered before the daily projection so a read of the learner's own work
+  // does not also pay for the mastery/profile/activity fan-out it never uses.
+  if (path === 'mcp/attempts') {
+    return json(await loadAttemptsProjection(client, user.id, now), {
+      headers: privateHeaders(),
+    });
   }
 
   const projection = await loadDailyLearningProjection(client, user.id, now);

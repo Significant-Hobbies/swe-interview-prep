@@ -85,7 +85,7 @@
       <div class="practice-card">
           <h3>AdamW vs L2-on-gradient</h3>
           <p>Weight w=2, grad=0.5, lr=0.1, decay=0.01. Compare one step: (a) L2 in gradient w−lr·(grad+decay·w) vs (b) AdamW-style w−lr·grad then w·(1−lr·decay).</p>
-          <p><strong>Expected evidence:</strong> L2→1.33; decoupled→1.33 then shrink (slightly different effective decay).</p>
+          <p><strong>Expected evidence:</strong> Both ≈ 1.948 (L2 1.94800, decoupled 1.94805). One step barely separates them — the point is that decoupled decay never enters the gradient, so it is not rescaled by the adaptive step.</p>
           <a href="/drills/ml-adamw-weight-decay">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>What does the W in AdamW change, and why did plain Adam plus L2 not do the same thing?</li></ul>

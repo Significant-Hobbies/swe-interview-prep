@@ -134,7 +134,7 @@ into `src/pages/LearningDoc.tsx`.
 
 1. ChatGPT authenticates to the shared Streamable HTTP MCP gateway with the
    exact `swe-interview-prep.read` resource audience.
-2. The gateway verifies the Auth0 token and forwards it only for the three
+2. The gateway verifies the Auth0 token and forwards it only for the four
    private learning operations. Public curriculum tools remain catalog reads.
 3. Pages Functions verify the RS256 token again, require the exact issuer,
    audience, scope, lifetime, and Google subject, then resolve that subject to
@@ -146,7 +146,12 @@ into `src/pages/LearningDoc.tsx`.
    activity totals. `/api/mcp/verification` returns three answer-free prompts
    for the current concept: mechanism, application/trade-off, and
    failure/counterexample.
-5. All three endpoints are `GET`, return `private, no-store`, and expose no
+   `/api/mcp/attempts` returns the learner's own recent drill attempts — the
+   submitted code, attempt count, status, and each test case's `run` statement.
+   It withholds `expect` values and `referenceSolution`, so an assistant can
+   review the work without being handed the answer, and it skips the daily
+   fan-out it does not need.
+5. All four endpoints are `GET`, return `private, no-store`, and expose no
    mutation tool. ChatGPT asks one prompt at a time and may link into the
    product, but conversation alone cannot mark learning complete or change
    mastery. After accepted product evidence, a fresh daily read selects the

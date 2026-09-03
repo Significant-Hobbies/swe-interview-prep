@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildAttemptsProjection,
   buildCurrentLearningVerification,
   buildDailyLearningProjection,
 } from './daily-learning-projection.mjs';
@@ -110,5 +111,75 @@ describe('daily learning projection', () => {
     expect(projection.progress.concepts.untouched).toBe(projection.progress.concepts.total - 2);
     expect(projection.progress.activity.activeMinutes).toBe(5);
     expect(projection.progress.explainBacks).toEqual({ count: 2, averageGrade: 81 });
+  });
+});
+
+describe('attempt projection', () => {
+  function attempt(drillId, overrides = {}) {
+    return {
+      drill_id: drillId,
+      status: 'attempted',
+      attempts: 1,
+      last_code: 'function paginationChoice() {}',
+      last_attempt: '2026-08-30T05:00:00.000Z',
+      ...overrides,
+    };
+  }
+
+  it('carries the code and the call the grader makes', () => {
+    const { attempts } = buildAttemptsProjection({
+      drillRows: [attempt('design-paginated-api')],
+      now,
+    });
+    expect(attempts).toHaveLength(1);
+    expect(attempts[0].submittedCode).toBe('function paginationChoice() {}');
+    expect(attempts[0].graderCalls).toEqual(['console.log(paginationChoice(10000000));']);
+    expect(attempts[0].concept).toBe('API Design');
+  });
+
+  it('ignores untouched drills and ids no longer in the catalog', () => {
+    const { attempts } = buildAttemptsProjection({
+      drillRows: [
+        attempt('design-paginated-api', { attempts: 0, last_code: null, status: 'unsolved' }),
+        attempt('deleted-drill-id'),
+      ],
+      now,
+    });
+    expect(attempts).toEqual([]);
+  });
+
+  it('keeps a solved drill even with no attempt counter', () => {
+    const { attempts } = buildAttemptsProjection({
+      drillRows: [attempt('design-paginated-api', { attempts: 0, status: 'solved' })],
+      now,
+    });
+    expect(attempts.map((a) => a.status)).toEqual(['solved']);
+  });
+
+  it('returns the most recent attempts first', () => {
+    const { attempts } = buildAttemptsProjection({
+      drillRows: [
+        attempt('design-paginated-api', { last_attempt: '2026-08-01T00:00:00.000Z' }),
+        attempt('single-number-xor', { last_attempt: '2026-08-29T00:00:00.000Z' }),
+      ],
+      now,
+    });
+    expect(attempts.map((a) => a.drillId)).toEqual(['single-number-xor', 'design-paginated-api']);
+  });
+
+  // A pasted file should not become the whole response body.
+  it('truncates a runaway editor buffer', () => {
+    const { attempts } = buildAttemptsProjection({
+      drillRows: [attempt('design-paginated-api', { last_code: 'x'.repeat(50_000) })],
+      now,
+    });
+    expect(attempts[0].submittedCode.length).toBeLessThan(21_000);
+    expect(attempts[0].submittedCode).toContain('truncated');
+  });
+
+  it('states that reading here cannot move mastery', () => {
+    const projection = buildAttemptsProjection({ drillRows: [], now });
+    expect(projection.schemaVersion).toBe('swe-learning-attempts.v1');
+    expect(projection.tracking.masteryPolicy).toMatch(/read-only/i);
   });
 });

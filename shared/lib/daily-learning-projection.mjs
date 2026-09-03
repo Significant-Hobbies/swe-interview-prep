@@ -457,3 +457,84 @@ export async function loadDailyLearningProjection(db, userId, now = new Date()) 
     now,
   });
 }
+
+// --- Attempt projection ------------------------------------------------------
+
+/** Most recent attempts returned in one read. Keeps the payload bounded. */
+const ATTEMPT_LIMIT = 20;
+
+/** Editor buffers are usually small; a runaway paste should not be. */
+const MAX_ATTEMPT_CODE_BYTES = 20_000;
+
+/**
+ * What the grader will execute, minus what it asserts.
+ *
+ * `run` tells a reader which symbol the drill requires and how it is called —
+ * the contract the prompt frequently leaves unstated. `expect` and
+ * `referenceSolution` are deliberately withheld: this projection exists so an
+ * assistant can judge the learner's reasoning, not so it can read out the
+ * answer and hand it over.
+ */
+function graderCalls(drill) {
+  return (drill.testCases ?? []).map((test) => String(test.run ?? '').trim()).filter(Boolean);
+}
+
+function attemptCode(value) {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  return value.length > MAX_ATTEMPT_CODE_BYTES
+    ? `${value.slice(0, MAX_ATTEMPT_CODE_BYTES)}\n/* truncated */`
+    : value;
+}
+
+export function buildAttemptsProjection({ drillRows = [], now = new Date() }) {
+  const attempts = drillRows
+    .filter((row) => (row.attempts ?? 0) > 0 || row.last_code || row.status === 'solved')
+    .map((row) => {
+      const drill = DRILL_BY_ID.get(row.drill_id);
+      if (!drill) return null;
+      const concept = CONCEPT_BY_ID.get(drill.conceptId);
+      return {
+        drillId: drill.id,
+        title: drill.title,
+        url: `${PRODUCT_ORIGIN}/drills/${drill.id}`,
+        conceptId: drill.conceptId,
+        concept: concept?.name ?? null,
+        type: drill.type,
+        difficulty: drill.difficulty,
+        prompt: drill.prompt,
+        expectedOutcome: drill.expectedOutput ?? null,
+        graderCalls: graderCalls(drill),
+        autoGraded: Boolean(drill.testCases?.length),
+        status: row.status ?? 'unsolved',
+        attempts: Number(row.attempts ?? 0),
+        lastAttemptAt: row.last_attempt ?? null,
+        updatedAt: row.updated_at ?? null,
+        submittedCode: attemptCode(row.last_code),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => String(b.lastAttemptAt ?? '').localeCompare(String(a.lastAttemptAt ?? '')))
+    .slice(0, ATTEMPT_LIMIT);
+
+  return {
+    schemaVersion: 'swe-learning-attempts.v1',
+    generatedAt: now.toISOString(),
+    attempts,
+    tracking: {
+      sourceOfTruth: 'SWE Interview Prep',
+      contentPolicy:
+        'Attempts carry the learner code and the statements the grader runs. Expected values and reference solutions are never included.',
+      masteryPolicy:
+        'ChatGPT is read-only. Feedback here changes nothing; mastery moves only through product evidence, reviews, and accepted explain-backs.',
+    },
+  };
+}
+
+export async function loadAttemptsProjection(db, userId, now = new Date()) {
+  const drills = await db.execute({
+    sql: `SELECT drill_id, status, attempts, last_code, last_attempt, updated_at
+          FROM user_drills WHERE user_id = ?`,
+    args: [userId],
+  });
+  return buildAttemptsProjection({ drillRows: drills.rows, now });
+}

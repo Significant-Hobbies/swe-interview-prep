@@ -137,6 +137,7 @@ route set (anything else returns `404 API route not found`):
 | `GET /api/progress` | Progress rollups | JWT |
 | `GET/POST /api/learning?action=…` | Consolidated learning API (see actions below) | JWT for auth actions |
 | `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
+| `GET /api/mcp/attempts` | Recent drill attempts: submitted code plus the statements the grader runs | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/daily` | Product-computed daily learning priority for the ChatGPT connection | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/progress` | Read-only concept, drill, explain-back, and activity projection | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/verification` | Answer-free Socratic prompts for the current product-selected concept | Auth0 OAuth, `swe-interview-prep.read` |
@@ -204,7 +205,7 @@ Source: canonical curriculum data projected by
 `public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
 `public/api-ai.json`, `public/robots.txt`, and `public/sitemap.xml`.
 
-The ChatGPT MCP gateway combines these public catalogs with three private,
+The ChatGPT MCP gateway combines these public catalogs with four private,
 user-scoped projections. The product verifies the gateway's Auth0 token again,
 maps its Google subject to the existing `users.google_id`, and reads D1. It
 cannot update progress or accept a claim that a concept was learned; mastery
@@ -213,6 +214,15 @@ explain-backs. The daily projection returns absolute action and concept-guide
 links. The verification projection returns only question prompts—not their
 stored answers—so ChatGPT can probe understanding one question at a time before
 linking back to the product gate.
+
+The attempts projection is the only one that returns what the learner actually
+wrote. It carries the submitted code and each test case's `run` statement — the
+call signature most prompts leave unstated — so an assistant can review the
+reasoning. It never carries `expect` values or `referenceSolution`: the surface
+exists to let something read the work, not to let it read out the answer. That
+is what keeps it compatible with
+[ADR 0005](../architecture/decisions/0005-socratic-no-solutions.md), which binds
+the in-product companion rather than an external assistant.
 
 ## Owner-only surfaces
 

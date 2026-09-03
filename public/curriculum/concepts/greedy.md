@@ -21,7 +21,7 @@ A greedy algorithm always picks the choice that looks best right now. It only gi
 
 Activities by end time: [1,4],[3,5],[0,6],[5,7],[8,9],[5,9]. Max non-overlapping count?
 
-**Expected evidence:** 4 activities.
+**Expected evidence:** 3 activities: [1,4], [5,7], [8,9].
 
 ## Review prompts
 

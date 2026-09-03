@@ -21,7 +21,7 @@ Bits give you three superpowers: a bitmask is an O(1) set, XOR cancels duplicate
 
 Every element appears twice except one. Find it in O(n) time, O(1) space.
 
-**Expected evidence:** xor all → 5 for [4,1,2,1,4].
+**Expected evidence:** xor all → 2 for [4,1,2,1,4].
 
 ### Single Number
 

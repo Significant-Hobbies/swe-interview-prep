@@ -8,7 +8,12 @@ import { withTiming } from '../_lib/timing.js';
 
 const AUTH_COOKIE_NAME = 'dsa_prep_auth';
 const AUTH_COOKIE_MAX_AGE = 30 * 24 * 60 * 60;
-const MCP_LEARNING_PATHS = new Set(['mcp/daily', 'mcp/progress', 'mcp/verification']);
+const MCP_LEARNING_PATHS = new Set([
+  'mcp/attempts',
+  'mcp/daily',
+  'mcp/progress',
+  'mcp/verification',
+]);
 
 function getDb(env) {
   return createD1Client(env.DB);
