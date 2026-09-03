@@ -59,19 +59,12 @@
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
       }
+      /* Still live: the /login entry shell is the only prose left in here.
+         The h2/ul/a pins that sat alongside this went out with the curriculum
+         summary — that text now renders in the noscript block, outside #lcp-shell,
+         where preflight never reaches it. */
       #lcp-shell p {
         margin: 0 0 1rem;
-      }
-      #lcp-shell h2 {
-        font-weight: 700;
-      }
-      #lcp-shell ul {
-        margin: 0 0 1rem;
-        padding-left: 1.25rem;
-        list-style: disc;
-      }
-      #lcp-shell a {
-        text-decoration: none;
       }
     </style>
 
@@ -100,8 +93,8 @@
       or it is a bug dressed up as a performance win.
 
       The header below mirrors the real one closely enough that the handoff to
-      React is invisible. On the root URL, the generated public curriculum
-      summary is also the useful loading surface and initial LCP candidate.
+      React is invisible. On the root URL it is followed by a skeleton of the
+      dashboard, which is where `/` redirects — not by readable copy.
     -->
     <div
       id="lcp-shell"
@@ -115,18 +108,43 @@
           </div>
         </header>
         <div id="public-entry-shell">
-        <!-- curriculum-static:start -->
-          <section style="max-width:64rem;margin:0 auto;padding:2.5rem 1.5rem 5rem;color:rgba(255,255,255,0.62);line-height:1.6;">
-            <h1 style="max-width:52rem;font-size:clamp(2.25rem,8vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 1rem;">Prepare for software-engineering interviews by building understanding you can prove</h1>
-            <p>SWE Interview Prep is a personal learning OS for engineers preparing for interviews or strengthening practical technical judgment. It turns study into retrieval, practice, code or diagrams, an explain-back, and scheduled review.</p>
-            <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Learn through evidence, not passive reading</h2>
-            <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>
-            <p>Start without an account; guest progress stays in the current browser. Google sign-in keeps learning state across sessions. The product is currently maintenance-only and has no paid tier, subscription, or checkout.</p>
-            <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Explore the curriculum</h2>
-            <ul><li><strong>Search &amp; IR</strong> — Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.</li><li><strong>Mathematics</strong> — Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability &amp; statistics → linear algebra → optimization → quant bridge. No artifact, no learning.</li><li><strong>Vector DB &amp; ANN</strong> — Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.</li><li><strong>AI Systems</strong> — Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.</li><li><strong>Backend</strong> — Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</li><li><strong>Databases &amp; Storage</strong> — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.</li><li><strong>System Design</strong> — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.</li><li><strong>DSA &amp; Implementation</strong> — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.</li><li><strong>Behavioral &amp; Communication</strong> — The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.</li><li><strong>Go-to-Market</strong> — Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.</li><li><strong>Systems Foundations</strong> — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.</li><li><strong>Infrastructure &amp; Platforms</strong> — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.</li><li><strong>Distributed Systems</strong> — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.</li><li><strong>Inference &amp; Serving</strong> — Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.</li><li><strong>Agent Systems</strong> — Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.</li><li><strong>Evaluation &amp; AI Reliability</strong> — LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.</li><li><strong>Developer Tools &amp; Code Intelligence</strong> — Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.</li><li><strong>Application Engineering</strong> — Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.</li><li><strong>Multimodal &amp; Spatial Computing</strong> — Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.</li></ul>
-            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, or continue as a guest for the interactive learning workspace.</p>
+          <!--
+            A skeleton of the dashboard, which is where `/` actually goes.
+
+            This deliberately paints NO prose. It used to paint the generated
+            curriculum summary — a headline, three paragraphs and nineteen
+            bullets — so every cold start began with a wall of text the visitor
+            started reading and then watched vanish. That is the same bug the
+            Login hero above was removed for, in a new costume: whatever the
+            shell paints has to be what is actually coming, and what is coming
+            is the dashboard.
+
+            The curriculum text still ships to crawlers that do not run
+            JavaScript, from the noscript block at the end of the body.
+          --><section
+            style="max-width:87.5rem;margin:0 auto;padding:1.75rem 1rem;"
+            aria-hidden="true"
+          >
+            <div style="height:0.7rem;width:7.5rem;border-radius:0.25rem;background:rgba(255,255,255,0.09);"></div>
+            <div style="height:2.1rem;width:min(24rem,72%);border-radius:0.4rem;background:rgba(255,255,255,0.13);margin-top:1rem;"></div>
+            <div style="display:grid;gap:1rem;margin-top:2.25rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));">
+              <div style="border:1px solid rgba(255,255,255,0.08);border-radius:0.75rem;padding:1.15rem;">
+                <div style="height:0.65rem;width:5.5rem;border-radius:0.25rem;background:rgba(255,255,255,0.10);"></div>
+                <div style="height:1rem;width:82%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:1rem;"></div>
+                <div style="height:1rem;width:58%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:0.55rem;"></div>
+              </div>
+              <div style="border:1px solid rgba(255,255,255,0.08);border-radius:0.75rem;padding:1.15rem;">
+                <div style="height:0.65rem;width:4.75rem;border-radius:0.25rem;background:rgba(255,255,255,0.10);"></div>
+                <div style="height:1rem;width:74%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:1rem;"></div>
+                <div style="height:1rem;width:64%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:0.55rem;"></div>
+              </div>
+              <div style="border:1px solid rgba(255,255,255,0.08);border-radius:0.75rem;padding:1.15rem;">
+                <div style="height:0.65rem;width:6rem;border-radius:0.25rem;background:rgba(255,255,255,0.10);"></div>
+                <div style="height:1rem;width:68%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:1rem;"></div>
+                <div style="height:1rem;width:52%;border-radius:0.3rem;background:rgba(255,255,255,0.06);margin-top:0.55rem;"></div>
+              </div>
+            </div>
           </section>
-          <!-- curriculum-static:end -->
         </div>
         <template id="login-entry-template">
           <style>
@@ -229,14 +247,43 @@
         </script>
       </div>
     </div>
+
+    <!--
+      Crawler fallback for `/`, for agents that do not execute JavaScript.
+      It lives here rather than in the painted shell because rendering it to
+      real visitors made every cold start look like a marketing page that
+      redirects. Generated between the markers by
+      scripts/generate-public-curriculum.mjs — edit the generator, not this.
+    -->
+    <noscript>
+      <!-- curriculum-static:start -->
+          <section style="max-width:64rem;margin:0 auto;padding:2.5rem 1.5rem 5rem;color:rgba(255,255,255,0.62);line-height:1.6;">
+            <h1 style="max-width:52rem;font-size:clamp(2.25rem,8vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 1rem;">Prepare for software-engineering interviews by building understanding you can prove</h1>
+            <p>SWE Interview Prep is a personal learning OS for engineers preparing for interviews or strengthening practical technical judgment. It turns study into retrieval, practice, code or diagrams, an explain-back, and scheduled review.</p>
+            <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Learn through evidence, not passive reading</h2>
+            <p>Every concept is designed around the same loop: Concept → Drill → Build → Review → Apply. Start with a concise mental model and primary source, test it with an executable exercise, build a measurable artifact, explain the mechanism back, and let FSRS schedule the next review.</p>
+            <p>Start without an account; guest progress stays in the current browser. Google sign-in keeps learning state across sessions. The product is currently maintenance-only and has no paid tier, subscription, or checkout.</p>
+            <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Explore the curriculum</h2>
+            <ul><li><strong>Search &amp; IR</strong> — Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.</li><li><strong>Mathematics</strong> — Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability &amp; statistics → linear algebra → optimization → quant bridge. No artifact, no learning.</li><li><strong>Vector DB &amp; ANN</strong> — Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.</li><li><strong>AI Systems</strong> — Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.</li><li><strong>Backend</strong> — Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.</li><li><strong>Databases &amp; Storage</strong> — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.</li><li><strong>System Design</strong> — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.</li><li><strong>DSA &amp; Implementation</strong> — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.</li><li><strong>Behavioral &amp; Communication</strong> — The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.</li><li><strong>Go-to-Market</strong> — Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.</li><li><strong>Systems Foundations</strong> — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.</li><li><strong>Infrastructure &amp; Platforms</strong> — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.</li><li><strong>Distributed Systems</strong> — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.</li><li><strong>Inference &amp; Serving</strong> — Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.</li><li><strong>Agent Systems</strong> — Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.</li><li><strong>Evaluation &amp; AI Reliability</strong> — LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.</li><li><strong>Developer Tools &amp; Code Intelligence</strong> — Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.</li><li><strong>Application Engineering</strong> — Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.</li><li><strong>Multimodal &amp; Spatial Computing</strong> — Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.</li></ul>
+            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, or continue as a guest for the interactive learning workspace.</p>
+          </section>
+          <!-- curriculum-static:end -->
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <portfolio-project-strip current-project="swe-interview-prep"></portfolio-project-strip>
     <script>
-      // The shared footer is useful after the app is interactive, not during
-      // the first render. Loading its two cross-origin bundles after `load`
-      // keeps them from competing with the dashboard module on slow links.
-      window.addEventListener('load', () => {
+      // The shared footer belongs to an interactive app, not to a loading
+      // screen. Loading its two cross-origin bundles late keeps them from
+      // competing with the dashboard module on slow links.
+      //
+      // `load` alone is not late enough: it fires when the initial response's
+      // subresources are done, which on a cold start is well before the lazy
+      // route chunk has committed. The footer then painted while the LCP
+      // shell was still up, so a loading screen grew a fully-rendered footer.
+      // #lcp-shell is removed the moment the real route commits (or the error
+      // boundary trips), which is the actual signal we want.
+      function mountFooterSurfaces() {
         const projectStrip = document.createElement('script');
         projectStrip.src = 'https://sassmaker.com/project-strip.js';
         projectStrip.dataset.project = 'swe-interview-prep';
@@ -247,7 +294,19 @@
         askAi.dataset.name = 'SWE Interview Prep';
         askAi.dataset.compose = 'false';
         document.body.append(askAi);
-      });
+      }
+
+      function whenAppPainted(run) {
+        if (!document.getElementById('lcp-shell')) return run();
+        const observer = new MutationObserver(() => {
+          if (document.getElementById('lcp-shell')) return;
+          observer.disconnect();
+          run();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+
+      window.addEventListener('load', () => whenAppPainted(mountFooterSurfaces));
     </script>
   </body>
 </html>

@@ -7,6 +7,7 @@ import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { trackPageView, trackReturned, trackSignup } from './lib/analytics';
 import { focusedRoute } from './lib/focusedRoute';
+import { removeLcpShell } from './lib/lcpShell';
 import { loadLocal, STORE_KEYS } from './lib/userStore';
 
 const SEEN_KEY = 'swe-interview-prep:seen';
@@ -79,10 +80,6 @@ const WarChallenge = lazy(() =>
 const WarResult = lazy(() =>
   import('./pages/WarPublic').then((module) => ({ default: module.WarResult }))
 );
-
-function removeLcpShell() {
-  document.getElementById('lcp-shell')?.remove();
-}
 
 function AppReady({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -230,11 +227,16 @@ export default function App() {
 
   return (
     <>
-      <ErrorBoundary scope="route">
-        <Suspense fallback={<RouteLoading />}>
-          <AppReady>{body}</AppReady>
-        </Suspense>
-      </ErrorBoundary>
+      {/* AppReady sits OUTSIDE the boundary on purpose. It used to be inside,
+          so a route chunk that failed to load took the shell-removal with it:
+          the error screen rendered in #root while the fixed LCP shell stayed
+          painted on top, and the visitor just kept staring at the loading
+          shell with no sign anything had gone wrong. */}
+      <AppReady>
+        <ErrorBoundary scope="route">
+          <Suspense fallback={<RouteLoading />}>{body}</Suspense>
+        </ErrorBoundary>
+      </AppReady>
       {!isPublicShare && !isFocused && <SaaSMakerFeedback />}
     </>
   );

@@ -1,5 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
+import { removeLcpShell } from '../lib/lcpShell';
+
 interface Props {
   children: ReactNode;
   /** Where this boundary sits — used for monitoring + copy. */
@@ -25,6 +27,9 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   override componentDidCatch(error: Error, info: ErrorInfo) {
+    // Belt and braces with AppReady: whatever else happens, an error screen
+    // must not stay hidden behind the fixed loading shell.
+    removeLcpShell();
     console.error('ErrorBoundary caught:', error, info);
     void import('../lib/foundry-monitoring').then((m) =>
       m.captureError(error, {

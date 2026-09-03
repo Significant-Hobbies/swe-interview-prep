@@ -51,14 +51,14 @@ describe('public curriculum publication', () => {
 
   it('renders purpose-matched root and login shells before client-side route work', () => {
     const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
-    const shell = homepage.match(/<div id="public-entry-shell"[\s\S]*?<\/div>\s*<script>/)?.[0];
+    const shell = homepage.match(/<div id="public-entry-shell">[\s\S]*?<\/section>\s*<\/div>/)?.[0];
 
     expect(shell).toBeTruthy();
-    expect(shell).toContain(
-      'Prepare for software-engineering interviews by building understanding you can prove'
-    );
-    expect(shell).toContain('personal learning OS');
-    expect(shell).toContain('font-size:clamp(2.25rem,8vw,3rem)');
+    // The root shell paints a skeleton of the dashboard it is about to become,
+    // never readable copy. The curriculum summary used to live here and read
+    // as a marketing page that then redirected away on every cold start.
+    expect(shell).toMatch(/<section[\s\S]*aria-hidden="true"/);
+    expect(shell?.replace(/<!--[\s\S]*?-->/g, '')).not.toMatch(/<(h1|h2|p|ul)\b/);
     expect(shell).not.toContain('margin-top:100vh');
     expect(homepage).toContain('const initialPath = window.location.pathname');
     expect(homepage).toContain("initialPath !== '/'");
@@ -67,13 +67,55 @@ describe('public curriculum publication', () => {
     expect(homepage).toContain('Turn interview prep into engineering you can prove.');
   });
 
-  it('keeps the purpose inside the single public-shell h1', () => {
+  it('keeps the crawler description of / in noscript, out of the painted shell', () => {
     const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
-    const heading = homepage.match(/<h1[\s\S]*?<\/h1>/)?.[0];
+    const noscript = homepage.match(/<noscript>[\s\S]*?<\/noscript>/)?.[0];
 
-    expect(heading).toBeTruthy();
-    expect(heading).toContain('software-engineering interviews');
-    expect(heading).toContain('understanding you can prove');
+    expect(noscript).toBeTruthy();
+    expect(noscript).toContain('curriculum-static:start');
+    expect(noscript).toContain(
+      'Prepare for software-engineering interviews by building understanding you can prove'
+    );
+    expect(noscript).toContain('personal learning OS');
+    // It must sit outside the fixed overlay, or a JS-less visitor gets the
+    // text inside a `pointer-events:none; overflow:hidden` layer.
+    expect(homepage.indexOf('curriculum-static:start')).toBeGreaterThan(
+      homepage.indexOf('id="login-entry-shell"')
+    );
+  });
+
+  it('keeps the purpose inside the single h1', () => {
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+    const headings = homepage.match(/<h1[\s\S]*?<\/h1>/g) ?? [];
+
+    expect(headings).toHaveLength(1);
+    expect(headings[0]).toContain('software-engineering interviews');
+    expect(headings[0]).toContain('understanding you can prove');
+  });
+
+  it('does not let a downstream cache outlive the hashed assets the shell names', () => {
+    // `/` hardcodes content-hashed chunk filenames. A cached copy that
+    // survives a deploy points at chunks the new deployment does not have,
+    // Pages answers each with fallback HTML, and every dynamic import dies on
+    // a MIME check. This shipped as `s-maxage=86400` and was observed live as
+    // `cf-cache-status: HIT` with `age: 52300`.
+    const headers = readFileSync(resolve(root, 'public/_headers'), 'utf8');
+    const rootRule = headers.slice(headers.indexOf('\n/\n'));
+
+    expect(rootRule).toMatch(/Cache-Control:[^\n]*max-age=0/);
+    expect(rootRule).toMatch(/Cache-Control:[^\n]*must-revalidate/);
+    expect(rootRule).not.toMatch(/s-maxage=(?!0\b)\d+/);
+    expect(rootRule).not.toContain('stale-while-revalidate');
+  });
+
+  it('holds the shared footer back until the app has actually painted', () => {
+    const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+
+    // `load` fires long before a lazy route chunk commits on a cold start, so
+    // the footer used to render onto the loading shell.
+    expect(homepage).toContain('whenAppPainted(mountFooterSurfaces)');
+    expect(homepage).toMatch(/whenAppPainted[\s\S]*?getElementById\('lcp-shell'\)/);
+    expect(homepage).toMatch(/whenAppPainted[\s\S]*?MutationObserver/);
   });
 
   it('advertises every public developer surface in llms.txt', () => {
@@ -102,9 +144,8 @@ describe('public curriculum publication', () => {
       'box-sizing: border-box',
       'font-family',
       'line-height: 1.5',
+      // /login is the only prose left inside the shell.
       '#lcp-shell p',
-      '#lcp-shell h2',
-      '#lcp-shell ul',
     ]) {
       expect(head).toContain(rule);
     }

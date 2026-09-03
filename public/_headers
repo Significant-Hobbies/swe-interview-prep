@@ -1,2 +1,17 @@
+# The root URL serves the SPA shell, and that shell hardcodes content-hashed
+# asset filenames that change on every deploy. Caching it downstream is a
+# correctness bug, not a performance win: an edge or browser copy that outlives
+# a deploy asks for chunk names the new deployment does not have, Pages answers
+# each miss with the fallback HTML, and every dynamic import dies on a MIME
+# check. The app then crashes into its error boundary behind the still-painted
+# LCP shell.
+#
+# This used to be `max-age=3600, s-maxage=86400, stale-while-revalidate=604800`,
+# which meant up to a day of edge-served staleness (and a week of SWR) after
+# every release — reproduced as `cf-cache-status: HIT` with `age: 52300`.
+#
+# `must-revalidate` still allows a stored copy; it just forces the conditional
+# request, so a 304 keeps almost all of the benefit. This matches what Pages
+# already serves for every other route.
 /
-  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=0, must-revalidate
