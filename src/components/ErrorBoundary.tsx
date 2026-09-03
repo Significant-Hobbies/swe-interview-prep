@@ -1,5 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
+import { recoverFromStaleChunk } from '../lib/chunkRecovery';
 import { removeLcpShell } from '../lib/lcpShell';
 
 interface Props {
@@ -31,6 +32,9 @@ export class ErrorBoundary extends Component<Props, State> {
     // must not stay hidden behind the fixed loading shell.
     removeLcpShell();
     console.error('ErrorBoundary caught:', error, info);
+    // A cached document naming chunks this deployment no longer has is not a
+    // bug in the page — it is a stale document. Reload once and it resolves.
+    if (recoverFromStaleChunk(error)) return;
     void import('../lib/foundry-monitoring').then((m) =>
       m.captureError(error, {
         scope: this.props.scope ?? 'root',
