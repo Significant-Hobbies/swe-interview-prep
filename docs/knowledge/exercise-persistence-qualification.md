@@ -68,3 +68,36 @@ qualification.
 
 Validation: full `pnpm quality` passed 607 tests across 95 files; the final
 transaction rollback addition passed with all 11 handler/import tests.
+
+## Hosted guest checkpoint — 2026-09-08
+
+An isolated Chrome context at `https://learn.significanthobbies.com` started
+with no learning evidence and a visible Sign in link. The Dashboard's
+"Build a search tokenizer" link opened the real Monaco drill editor.
+Keyboard selection and typing were used; no editor model or saved state was
+injected. The generic fill tool could not edit Monaco, but click, Select All,
+and keyboard typing worked.
+
+- The starter remained unsolved with `tokenize is not defined`.
+- A function returning an empty array remained unsolved with an explicit
+  expected-versus-actual test failure.
+- A lowercase/split/stop-word/suffix implementation passed the authored tests
+  and became `solved · 1 attempts`.
+- The post-solve prompt explicitly required sign-in for explain-back grading
+  and concept mastery; it did not claim guest mastery.
+- Reload restored the submitted code and solved status. Running again passed.
+- A 390 × 844 mobile/touch viewport retained readable controls and wrapped
+  code, with document width and scroll width both 390. Its screenshot was
+  visually inspected. This is browser emulation, not physical-phone keyboard
+  or Safari qualification.
+
+These observations cover the existing production deployment
+`8f1a01ef-0492-4415-8261-24f162685ba3`, source prefix `3687863`, as reported by
+Cloudflare Pages. They do not qualify the pending sync repair. A read-only
+remote migration check found only `0003_record_sync_receipts.sql` pending.
+The deploy guard rejected the latest library-refresh source `4b0f613` because
+it has no push CI run. A checked documentation follow-up must obtain current
+push CI before the existing deployment workflow can apply the additive
+migration and release the repair. No migration or deployment occurred during
+this checkpoint; authenticated D1, account isolation, and lost-ack retries
+remain open in #97.
