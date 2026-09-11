@@ -68,6 +68,8 @@ const About = lazy(() => import('./pages/About'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Changelog = lazy(() => import('./pages/Changelog'));
 const Login = lazy(() => import('./pages/Login'));
+const Play = lazy(() => import('./pages/Play'));
+const Scale = lazy(() => import('./pages/Scale'));
 const SystemsLabs = lazy(() => import('./pages/SystemsLabs'));
 const SystemsLabRunner = lazy(() => import('./pages/SystemsLabRunner'));
 const DecisionLab = lazy(() => import('./pages/DecisionLab'));
@@ -112,6 +114,7 @@ function AppRoutes() {
           nesting it under Layout stacked two identical navbars — the landing
           page showed header, digest strip, setup strip, then a second header. */}
       <Route path="/login" element={<Login />} />
+      <Route path="/play/scale" element={<Scale />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Today />} />
@@ -163,6 +166,7 @@ function AppRoutes() {
         <Route path="projects" element={<Navigate to="/progress/all" replace />} />
         <Route path="notes" element={<Navigate to="/progress/all?tab=notes" replace />} />
         <Route path="mock" element={<MockInterview />} />
+        <Route path="play" element={<Play />} />
         <Route path="wars" element={<SoftwareWars />} />
         <Route path="wars/blitz" element={<BlitzWar />} />
         <Route path="wars/blitz/:matchId" element={<BlitzWar />} />

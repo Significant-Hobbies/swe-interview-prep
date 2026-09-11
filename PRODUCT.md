@@ -33,7 +33,7 @@ living in separate tools.
 ## Operating Context
 
 The application is a React web SPA with public curriculum pages and guest-first
-interactive routes. Learners move among Dashboard, Learn, Practice, Wars,
+interactive routes. Learners move among Dashboard, Learn, Practice, Play,
 Playground, Progress, Build Lab, source material, and adaptive sessions.
 Monaco supports code work, Excalidraw supports diagrams, the Socratic companion
 probes understanding, and Feynman/understanding checks feed FSRS review.
@@ -100,3 +100,5 @@ claims, or benchmark claims that future work may invent.
 Interactive learning must remain keyboard-operable, responsive from compact
 mobile layouts through desktop workspaces, legible without color-only state,
 and compatible with reduced-motion preferences.
+
+Scale gameplay and its device-local persistence are described in [Scale in Play](docs/product/scale.md).

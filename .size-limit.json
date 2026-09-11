@@ -24,9 +24,30 @@
     "gzip": true
   },
   {
-    "name": "CSS bundle",
-    "path": "dist/assets/*.css",
+    "name": "Learning app CSS",
+    "path": [
+      "dist/assets/*.css",
+      "!dist/assets/Scale-*.css"
+    ],
     "limit": "50 KB",
+    "gzip": true
+  },
+  {
+    "name": "Lazy Scale CSS",
+    "path": "dist/assets/Scale-*.css",
+    "limit": "10 kB",
+    "gzip": true
+  },
+  {
+    "name": "Lazy Scale interface",
+    "path": "dist/assets/Scale-*.js",
+    "limit": "33 kB",
+    "gzip": true
+  },
+  {
+    "name": "Scale simulation worker",
+    "path": "dist/assets/worker-*.js",
+    "limit": "40 kB",
     "gzip": true
   }
 ]

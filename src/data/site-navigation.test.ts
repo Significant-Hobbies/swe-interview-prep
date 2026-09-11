@@ -13,7 +13,7 @@ describe('site navigation model', () => {
       'Dashboard',
       'Learn',
       'Practice',
-      'Wars',
+      'Play',
     ]);
     expect(PRIMARY_NAV_ITEMS).toHaveLength(4);
     expect(BROWSE_NAV_ITEMS.filter((item) => item.menu)).toHaveLength(7);

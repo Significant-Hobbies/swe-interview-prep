@@ -29,7 +29,8 @@
       "!**/index.html",
       "!**/src/data/library/**/content.json",
       "!**/public",
-      "!**/*.css"
+      "!**/*.css",
+      "!**/src/features/scale/vendor"
     ]
   },
   "formatter": {

@@ -1,0 +1,120 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Dark Scale and independently saved project difficulty profiles",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-learning-shell-and-scale-workbench",
+    "approval": "not-required",
+    "before": "artifacts/design/scale-dark/before-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "Turn software engineering study into retained causal understanding backed by evidence.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Personal SWE learning OS with an evidence-gated learning loop.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Engineers building practical systems judgment.",
+      "job": "Choose an engineering project at an appropriate difficulty and diagnose its bottlenecks.",
+      "thesis": "Keep discovery compact and expose detail only in the chosen activity.",
+      "system": "Charcoal canvas, raised green-neutral surfaces, pale green actions, amber pressure, coral errors. Existing Scale typography and workbench layout.",
+      "signature": "Different projects expose different bottlenecks in the same measured architecture.",
+      "risk": "Expert project names could imply unsupported fidelity; the picker and guide explicitly name absent social and AI infrastructure mechanisms."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-dark/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-dark/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-dark/after-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-dark/picker-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-dark/picker-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-dark/picker-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm exec vitest run src/features/scale src/pages/Scale.test.tsx; pnpm typecheck; focused Biome check; pnpm build; pnpm exec size-limit; pnpm docs:validate; git diff --check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 35,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 17,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "Independent detector returned []. Reviewed color mappings fixed: amber latency legend, neutral experiment comparison values, green positive values and amber diagnosis title. Query-driven project picker fixes Browser Back."
+      ]
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner explicitly requested dark Scale and project difficulty from SaaS to Facebook-style or OpenRouter-style; implementation follows that direction."
+  }
+}

@@ -30,7 +30,7 @@ export default function SystemsLabs() {
         subtitle="Use compact calculation labs for declared engineering constraints or run a system transition by transition. Both end in evidence you still have to explain."
         actions={
           <Badge tone="emerald">
-            <ShieldCheck className="h-3 w-3" /> Local simulation only
+            <ShieldCheck className="h-3 w-3" /> Browser simulations
           </Badge>
         }
       />
@@ -93,8 +93,8 @@ export default function SystemsLabs() {
             Systems simulations
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-white/55">
-            Step through modeled actors and inspect evidence owned by the component that produced
-            it.
+            Step through modeled actors and inspect their evidence. Each lab also includes an
+            optional Platform Lab exercise for the existing local Kubernetes setup.
           </p>
         </div>
 

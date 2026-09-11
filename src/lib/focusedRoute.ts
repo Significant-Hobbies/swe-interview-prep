@@ -4,6 +4,7 @@ export interface FocusedRoute {
 }
 
 export function focusedRoute(pathname: string): FocusedRoute | null {
+  if (pathname === '/play/scale') return { exitTo: '/play', exitLabel: 'Back to Play' };
   if (pathname === '/practice' || pathname === '/playground' || pathname.startsWith('/drills/')) {
     return { exitTo: '/dashboard', exitLabel: 'Back to Dashboard' };
   }

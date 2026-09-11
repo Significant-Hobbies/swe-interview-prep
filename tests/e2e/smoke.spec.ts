@@ -18,7 +18,9 @@ test.describe('Learning OS smoke', () => {
   test('root redirects to Dashboard and shows resumable learning state', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/dashboard$/);
-    await expect(page.getByRole('heading', { name: 'Pick up where you left off.' })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Build a causal model of Tokenization.', exact: true })
+    ).toBeVisible();
     await expect(page.getByText('Learning now')).toBeVisible();
     await expect(page.getByText('Next in practice')).toBeVisible();
   });
@@ -143,8 +145,8 @@ test.describe('Learning OS smoke', () => {
     await page.goto('/dashboard');
     await clickNav(page, 'Learn');
     await expect(page).toHaveURL(/\/learn$/);
-    await clickNav(page, 'Wars');
-    await expect(page).toHaveURL(/\/wars$/);
+    await clickNav(page, 'Play');
+    await expect(page).toHaveURL(/\/play$/);
     await clickNav(page, 'Dashboard');
     await expect(page).toHaveURL(/\/dashboard$/);
     await clickNav(page, 'Practice');
@@ -216,7 +218,10 @@ test.describe('Learning OS smoke', () => {
 
   test('playground loads artifact template from query param', async ({ page }) => {
     await page.goto('/playground?artifact=simulate-random-processes');
-    await expect(page).toHaveURL(/artifact=simulate-random-processes/);
+    // The workspace consumes the deep link once and persists the loaded template.
+    if ((page.viewportSize()?.width ?? 1024) <= 500) {
+      await page.getByRole('button', { name: 'Code', exact: true }).click();
+    }
     await expect(page.locator('.monaco-editor').first()).toBeVisible({ timeout: 15000 });
     await expect(page.locator('.monaco-editor').first()).toContainText(/coinFlips/);
   });

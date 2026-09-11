@@ -1,0 +1,108 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Scale campaign decisions, setbacks and recovery",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-learning-shell-and-scale-workbench",
+    "approval": "not-required",
+    "before": "artifacts/design/scale-learning/after-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "Turn software engineering study into retained causal understanding backed by evidence.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Personal SWE learning OS with an evidence-gated learning loop.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Engineers building practical systems judgment.",
+      "job": "Choose an event risk, diagnose pressure, recover from failure, and earn the next milestone.",
+      "thesis": "Keep discovery compact and expose detail only in the chosen activity.",
+      "system": "Inherit SWE Geist typography, black canvas, neutral surfaces, restrained sky accents, near-white primary controls; emerald health, amber pressure, rose errors.",
+      "signature": "Different projects expose different bottlenecks in the same measured architecture.",
+      "risk": "Campaign narrative must keep tools and measurements discoverable."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-campaign/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-campaign/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-campaign/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm typecheck; pnpm exec vitest run src/features/scale src/pages/Scale.test.tsx; pnpm build; pnpm exec size-limit; pnpm docs:validate; git diff --check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 35,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 18,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "Self-review of offer, active pressure and setback states. Existing SWE theme and native buttons retained; campaign appears above architecture so choices remain visible. 390/768/1440 captures have no horizontal overflow. Mobile choices stack. No independent reviewer or aesthetic detector used."
+      ]
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner explicitly requires the existing SWE theme and no separate Scale visual identity."
+  }
+}

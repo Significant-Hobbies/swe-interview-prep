@@ -16,7 +16,7 @@ export const PRIMARY_NAV_ITEMS: SiteNavItem[] = [
   { id: 'dashboard', to: '/dashboard', label: 'Dashboard' },
   { id: 'learn', to: '/learn', label: 'Learn' },
   { id: 'practice', to: '/practice', label: 'Practice' },
-  { id: 'wars', to: '/wars', label: 'Wars' },
+  { id: 'play', to: '/play', label: 'Play' },
 ];
 
 export const BROWSE_NAV_ITEMS: BrowseNavItem[] = [

@@ -18,6 +18,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import FeynmanGate from '../components/FeynmanGate';
+import PlatformExercise from '../components/simulation/PlatformExercise';
 import ConfigurationWorkshop from '../components/simulation/ConfigurationWorkshop';
 import { Badge, Button, Card, EmptyState, PageShell, SectionTitle } from '../components/ui';
 import { useAuth } from '../contexts/AuthContext';
@@ -147,20 +148,29 @@ export default function SystemsLabRunner() {
   return <Runner lab={lab} />;
 }
 
+function restoreAttempt(
+  accountScope: string,
+  lab: SystemsLabDefinition,
+  scenarioId: string,
+  attempts: SystemsLabAttempt[]
+): SystemsLabAttempt {
+  return (
+    latestCompatibleAttempt(attempts, lab, scenarioId) ??
+    reuseVerifiedSystemsLabConfiguration(
+      createSystemsLabAttempt(accountScope, lab, scenarioId),
+      attempts
+    )
+  );
+}
+
 function Runner({ lab }: { lab: SystemsLabDefinition }) {
   const { user } = useAuth();
   const accountScope = user?.id ?? 'guest';
   const [attempts, setAttempts] = useState(() => loadSystemsLabAttempts(accountScope));
   const [scenarioId, setScenarioId] = useState(lab.defaultScenarioId);
   const scenario = lab.scenarios.find((candidate) => candidate.id === scenarioId)!;
-  const storedAttempt = latestCompatibleAttempt(attempts, lab, scenarioId);
-  const [attempt, setAttempt] = useState<SystemsLabAttempt>(
-    () =>
-      storedAttempt ??
-      reuseVerifiedSystemsLabConfiguration(
-        createSystemsLabAttempt(accountScope, lab, scenarioId),
-        attempts
-      )
+  const [attempt, setAttempt] = useState<SystemsLabAttempt>(() =>
+    restoreAttempt(accountScope, lab, scenarioId, attempts)
   );
   const [predictionDraft, setPredictionDraft] = useState(attempt.predictionId ?? '');
   const [snapshot, setSnapshot] = useState(() => snapshotForAttempt(lab, scenarioId, attempt));
@@ -184,12 +194,7 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
 
   useEffect(() => {
     const scopedAttempts = loadSystemsLabAttempts(accountScope);
-    const scopedAttempt =
-      latestCompatibleAttempt(scopedAttempts, lab, scenarioId) ??
-      reuseVerifiedSystemsLabConfiguration(
-        createSystemsLabAttempt(accountScope, lab, scenarioId),
-        scopedAttempts
-      );
+    const scopedAttempt = restoreAttempt(accountScope, lab, scenarioId, scopedAttempts);
     setAttempts(scopedAttempts);
     setAttempt(scopedAttempt);
     setPredictionDraft(scopedAttempt.predictionId ?? '');
@@ -402,6 +407,8 @@ function Runner({ lab }: { lab: SystemsLabDefinition }) {
           <div className="mt-1">{lab.actors.length} independent actors</div>
         </div>
       </div>
+
+      <PlatformExercise labId={lab.id} />
 
       <section className="mb-8">
         <SectionTitle>1 · Configure the case</SectionTitle>

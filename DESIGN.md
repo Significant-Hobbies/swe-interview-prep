@@ -175,9 +175,9 @@ obvious when they stack.
 At compact widths, multi-column workspaces become one ordered column and
 controls wrap rather than shrink below a comfortable target. The persistent
 application navigation remains the only primary navigation, limited to
-Dashboard, Learn, Practice, and Wars. Dashboard resumes work, Learn is the
+Dashboard, Learn, Practice, and Play. Dashboard resumes work, Learn is the
 searchable high-level learning surface, Practice is the Playground with a
-complete problem selector, and Wars begins with the duration choice. Secondary
+complete problem selector, and Play begins with the duration choice. Secondary
 destinations live contextually within those routes or the grouped Browse
 disclosure. Active workspaces suppress unrelated global chrome.
 
@@ -270,3 +270,7 @@ ground truth.
 - **Don't** collapse independent system states into one green or red summary.
 - **Don't** add a top-level navigation item for every learning tool.
 - **Don't** reward clicks or guessed outcomes with positive mastery.
+
+## Scale workbench
+
+Scale uses the same black canvas, Geist typography, neutral panels, restrained sky accents, and near-white primary buttons as the rest of SWE. Emerald means healthy, amber means pressure, and rose means failure. It must not introduce its own palette or font family. The workbench keeps its existing layout and a visible Back to Play action; scoped selectors protect other learning routes.

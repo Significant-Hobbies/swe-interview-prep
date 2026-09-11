@@ -41,7 +41,7 @@ test('Systems Lab catalog and runner stay bounded at required review widths', as
     await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
     await page.goto('/labs');
     await expect(
-      page.getByRole('heading', { name: 'Make the mechanism move.', exact: true })
+      page.getByRole('heading', { name: 'Predict first. Decide from evidence.', exact: true })
     ).toBeVisible();
 
     expect(

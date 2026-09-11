@@ -1,0 +1,108 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Scale aligned with the existing SWE theme",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-learning-shell-and-scale-workbench",
+    "approval": "not-required",
+    "before": "artifacts/design/scale-dark/after-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "Turn software engineering study into retained causal understanding backed by evidence.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Personal SWE learning OS with an evidence-gated learning loop.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Engineers building practical systems judgment.",
+      "job": "Choose an engineering project at an appropriate difficulty and diagnose its bottlenecks.",
+      "thesis": "Keep discovery compact and expose detail only in the chosen activity.",
+      "system": "Inherit SWE Geist typography, black canvas, neutral surfaces, restrained sky accents, near-white primary controls; emerald health, amber pressure, rose errors.",
+      "signature": "Different projects expose different bottlenecks in the same measured architecture.",
+      "risk": "Avoid a separate Scale identity. Layout and gameplay are unchanged; CSS aliases reference existing Tailwind signal colors."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-swe-theme/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-swe-theme/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-swe-theme/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm build; pnpm exec size-limit; pnpm exec biome check src/features/scale/ScaleWorkbench.tsx; pnpm docs:validate; git diff --check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 36,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 18,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "Correction scan returned []. No old green palette, DM Sans or Manrope references remain in active Scale code. Pressured node dot override corrected."
+      ]
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner explicitly requires the existing SWE theme and no separate Scale visual identity."
+  }
+}

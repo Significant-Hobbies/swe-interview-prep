@@ -547,7 +547,7 @@ test('guest and public Wars routes preserve compact accessibility and private da
   await page.goto('/wars/blitz');
   await expect(page.getByRole('link', { name: 'Exit Blitz' })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'Primary' })).toHaveCount(0);
-  await page.getByRole('button', { name: /Start preview/i }).click();
+  await page.getByRole('button', { name: 'Play unranked', exact: true }).click();
   const question = page.getByRole('heading', { name: /A client retries a timed-out POST/i });
   await expect(question).toBeFocused();
   const firstAnswer = page.getByRole('radio').first();
@@ -564,8 +564,9 @@ test('guest and public Wars routes preserve compact accessibility and private da
   await expect(page.getByText('PRIVATE_ANSWER_SENTINEL')).toHaveCount(0);
 
   await page.goto('/wars/challenge/public-challenge');
-  await expect(page.getByText(/Sign in from the header before accepting/i)).toBeVisible();
-  const practice = page.getByRole('link', { name: /Practice meanwhile/i });
+  await expect(page.getByText(/Human challenge identity is durable/i)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Accept challenge', exact: true })).toHaveCount(0);
+  const practice = page.getByRole('link', { name: 'Play unranked', exact: true });
   expect(
     await practice.evaluate((element) => element.getBoundingClientRect().height)
   ).toBeGreaterThanOrEqual(44);

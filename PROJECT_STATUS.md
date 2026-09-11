@@ -1,6 +1,19 @@
 # swe-interview-prep — PROJECT_STATUS
 
-Last updated: 2026-09-07
+Last updated: 2026-09-11
+
+## Scale release candidate
+
+Scale is integrated at `/play/scale` with five company profiles, 17 engineering
+interventions, shared Game/Sandbox simulation, contextual learning and two
+risk/reward campaign events. Play groups Scale and the existing Wars modes.
+The existing SWE dark theme is preserved. Platform exercises are optional
+material inside Systems Labs. This release needs no schema migration.
+See [product scope](docs/product/scale.md) and
+[gameplay evidence and limitations](docs/knowledge/scale-gameplay-qualification.md).
+Deployment status is recorded by the manual Deploy workflow, not inferred from
+local test success. Remaining realism and balance work is tracked in
+[issue 99](https://github.com/Significant-Hobbies/swe-interview-prep/issues/99).
 
 ## Exercise qualification
 

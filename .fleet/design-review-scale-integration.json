@@ -1,0 +1,120 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "swe-interview-prep",
+  "target": "Play, native Scale workbench, and contextual platform exercises",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [],
+    "selected": "existing-learning-shell-and-scale-workbench",
+    "approval": "not-required",
+    "before": "artifacts/design/scale-integration/before-standalone-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "Turn software engineering study into retained causal understanding backed by evidence.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Personal SWE learning OS with an evidence-gated learning loop.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Engineers building practical systems judgment.",
+      "job": "Choose one learning experience and move between simulation and optional real lab evidence.",
+      "thesis": "Keep discovery compact and expose detail only in the chosen activity.",
+      "system": "Existing black Geist learning shell; isolated warm paper DM Sans and Manrope Scale workbench.",
+      "signature": "A growing company paired with an architecture and its measured bottleneck.",
+      "risk": "Two different visual surfaces could fragment the app; a native route and visible Play exit preserve continuity."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-integration/play-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-integration/play-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-integration/play-1440.png"
+      },
+      {
+        "width": 390,
+        "path": "artifacts/design/scale-integration/scale-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/scale-integration/scale-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/scale-integration/scale-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm typecheck; pnpm exec vitest run src/features/scale src/data/site-navigation.test.ts src/lib/focusedRoute.test.ts src/data/systems-labs/systems-labs.test.ts; pnpm build; pnpm exec size-limit; pnpm docs:validate; focused biome check; git diff --check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 35,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 17,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [
+        "Independent detector scan returned no findings. Review P2 fixes applied: visible phone exit, remove inert chevron, explicit local prerequisites, rotating disclosure icon, heading hierarchy, selected section state."
+      ]
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "agent-selected",
+    "note": "Owner asked to fold Scale and platform-lab into SWE and avoid overcrowding. Preserved four primary entries; platform guides remain inside corresponding existing Labs."
+  }
+}

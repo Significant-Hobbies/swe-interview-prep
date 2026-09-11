@@ -47,8 +47,8 @@ test.describe('Learning OS mobile (390px)', () => {
     page,
   }) => {
     await page.goto('/learn');
-    await clickNav(page, 'Wars');
-    await expect(page).toHaveURL(/wars/);
+    await clickNav(page, 'Play');
+    await expect(page).toHaveURL(/play/);
     await clickNav(page, 'Dashboard');
     await expect(page).toHaveURL(/dashboard/);
     await clickNav(page, 'Practice');

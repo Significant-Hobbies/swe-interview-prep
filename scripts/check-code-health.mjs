@@ -20,10 +20,14 @@ const productionPaths = [
   'vite.config.js',
   'vitest.config.ts',
 ];
+const scalePath = 'src/features/scale/';
+const vendorPath = `${scalePath}vendor/breakscale/`;
+// Initial Scale budget is isolated from the existing application; see issue #99.
+const scaleComplexity = { violations: 15, maxCcn: 58, maxLength: 174, maxParams: 4 };
 const sourceExtensions = new Set(['.js', '.jsx', '.mjs', '.mts', '.ts', '.tsx']);
 const baselines = {
-  complexity: { violations: 95, maxCcn: 93, maxLength: 768, maxParams: 10 },
-  duplication: { clones: 37, duplicatedLines: 473 },
+  complexity: { violations: 95, maxCcn: 93, maxLength: 759, maxParams: 10 },
+  duplication: { clones: 35, duplicatedLines: 457 },
   unused: {
     files: 0,
     exports: 21,
@@ -115,6 +119,8 @@ function checkComplexity() {
     '-x',
     'src/data/library/**',
     '-x',
+    `${vendorPath}**`,
+    '-x',
     'scripts/check-code-health.mjs',
     '-x',
     '**/*.d.ts',
@@ -123,9 +129,24 @@ function checkComplexity() {
   const rows = result.stdout
     .trim()
     .split('\n')
-    .map((line) => line.match(/^(\d+),(\d+),(\d+),(\d+),(\d+),/u))
-    .filter(Boolean)
-    .map((match) => match.slice(1).map(Number));
+    .map((line) => {
+      const match = line.match(/^(\d+),(\d+),(\d+),(\d+),(\d+),/u);
+      return match ? { values: match.slice(1).map(Number), scale: line.includes(scalePath) } : null;
+    })
+    .filter(Boolean);
+  checkComplexityBudget(
+    'Application',
+    rows.filter((row) => !row.scale).map((row) => row.values),
+    baselines.complexity
+  );
+  checkComplexityBudget(
+    'Scale',
+    rows.filter((row) => row.scale).map((row) => row.values),
+    scaleComplexity
+  );
+}
+
+function checkComplexityBudget(label, rows, baseline) {
   const observed = {
     functions: rows.length,
     nloc: rows.reduce((sum, row) => sum + row[0], 0),
@@ -135,11 +156,11 @@ function checkComplexity() {
     maxParams: Math.max(...rows.map((row) => row[3])),
   };
   console.log(
-    `Complexity: ${observed.functions} functions, ${observed.nloc} NLOC, ` +
+    `Complexity (${label}): ${observed.functions} functions, ${observed.nloc} NLOC, ` +
       `${observed.violations} violations; max CCN ${observed.maxCcn}, ` +
       `max length ${observed.maxLength}, max params ${observed.maxParams}.`
   );
-  failRegressions('Complexity', observed, baselines.complexity);
+  failRegressions(`Complexity (${label})`, observed, baseline);
 }
 
 function checkDuplication() {
@@ -157,7 +178,7 @@ function checkDuplication() {
     '--format',
     'javascript,jsx,typescript,tsx',
     '--ignore',
-    '**/*.test.*,**/*.spec.*,**/*.d.ts,**/node_modules/**,**/dist/**,**/coverage/**,scripts/check-code-health.mjs',
+    `**/*.test.*,**/*.spec.*,**/*.d.ts,**/node_modules/**,**/dist/**,**/coverage/**,scripts/check-code-health.mjs,${vendorPath}**`,
     '--reporters',
     'json',
     '--output',
@@ -184,8 +205,23 @@ function checkCycles() {
     'Knip cycle analysis'
   );
   const cycles = (report.issues ?? []).flatMap((issue) => issue.cycles ?? []);
-  if (cycles.length > 0) throw new Error(`Dependency cycles detected: ${cycles.length}`);
-  console.log('Cycles: zero JavaScript or TypeScript import cycles.');
+  // Four upstream dispatch cycles are retained; any other cycle fails the gate.
+  const retained = new Set(
+    ['edge', 'control', 'messaging', 'resilience'].map((part) =>
+      [`${vendorPath}behaviour.ts`, `${vendorPath}behaviour-${part}.ts`].sort().join('|')
+    )
+  );
+  const unexpected = cycles.filter(
+    (cycle) =>
+      !retained.has(
+        cycle
+          .map((entry) => entry.name)
+          .sort()
+          .join('|')
+      )
+  );
+  if (unexpected.length > 0) throw new Error(`Unexpected dependency cycles: ${unexpected.length}`);
+  console.log(`Cycles: zero unexpected; ${cycles.length} retained upstream dispatch cycles.`);
 }
 
 function checkDependencies() {
