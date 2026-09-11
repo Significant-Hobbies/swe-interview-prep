@@ -36,6 +36,29 @@ mastery, and ELO are outside this repair. Hosted qualification remains #97.
 The task reconciliation found no prior open Issues or PRs; no historical
 product intention was closed as complete.
 
+### Scale and platform follow-ups
+
+Scale and the optional platform learning guides are shipped in the Play and
+Systems Labs surfaces. The [Scale qualification record](docs/knowledge/scale-gameplay-qualification.md)
+documents the evidence and limits from [issue #99](https://github.com/Significant-Hobbies/swe-interview-prep/issues/99).
+Campaigns already include bounded customer churn; the optional work below is
+stronger realism and qualification, not a missing release requirement:
+
+- Add workload-specific correctness, recovery, and delivery objectives so
+  different valid architectures create distinct decisions.
+- Qualify queue, stream, cache, CDN, search, and replica strategies in
+  dedicated scenarios and continue balance work without arbitrary mandatory
+  tool checklists.
+- Preserve incident-specific lesson selections and improve incident history
+  beyond the current bounded journal.
+- Reduce the recorded first-party Scale complexity debt (15 functions over the
+  general threshold, with maximum CCN 58 and 174 lines).
+
+The optional Platform Lab guides still require the existing external
+`platform-lab` checkout and private `vault-common` sibling chart. SWE does not
+bundle that infrastructure or claim cluster evidence; a portable kit remains
+future work until that dependency is replaced and verified.
+
 ## Problem
 
 Technical interview preparation is fragmented across multiple tools: LeetCode for coding, Excalidraw for diagrams, ChatGPT for hints, and Anki for spaced repetition. Switching between tools breaks flow and makes it hard to track progress holistically.
