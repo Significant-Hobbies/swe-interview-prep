@@ -61,3 +61,9 @@ Three newly reported development-tooling advisories were patched through
 transitive overrides: sharp 0.35.4, js-yaml 4.3.2 and smol-toml 1.7.1.
 Five previously accepted high-severity transitive advisories remain tracked in
 issue 61; the gate reports zero unexpected severe advisories.
+
+The first hosted check found that the Pages middleware route allowlist omitted
+`play`, returning a real 404 for direct visits despite local SPA success.
+The allowlist now includes Play. Five middleware regression cases cover Play,
+Scale, a project deep link, the existing Wars route and an unknown-route 404.
+Hosted verification must exercise direct URLs, not only navigation from the SPA.

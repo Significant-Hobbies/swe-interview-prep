@@ -23,6 +23,7 @@ const SPA_ROUTES = new Set([
   'sweep',
   'practice',
   'playground',
+  'play',
   'progress',
   'concepts',
   'roadmaps',
