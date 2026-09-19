@@ -23,6 +23,7 @@ export class RecordSyncStore<T> {
   private revision = 0;
   private activation = 0;
   private readonly requests = new Set<AbortController>();
+  private persistChain: Promise<boolean> = Promise.resolve(true);
   // Every operationId this store has created, loaded, or adopted. Stops an
   // acknowledged operation from being resurrected by a stale stored envelope.
   private readonly seen = new Set<string>();
@@ -68,42 +69,68 @@ export class RecordSyncStore<T> {
     for (const listener of this.listeners) listener();
   }
 
-  private persist(): boolean {
+  private reportPersistenceFailure(error: string) {
+    this.publish({ status: 'failed', error });
+    return false;
+  }
+
+  private async commitPersist(): Promise<boolean> {
+    const locks = globalThis.navigator?.locks;
+    if (!locks) {
+      return this.reportPersistenceFailure(
+        'This browser cannot guarantee durable multi-tab saves. Use a supported browser, then retry.'
+      );
+    }
+    try {
+      return await locks.request(`${this.key}:writer`, { mode: 'exclusive' }, async () => {
+        // Merge inside the Web Lock. localStorage has no compare-and-swap, so
+        // reading before acquiring the lock would still lose another tab's
+        // operation between read and setItem.
+        const stored = this.readStored();
+        const adopted: Operation<T>[] = [];
+        for (const operation of stored.pending) {
+          if (this.seen.has(operation.operationId)) continue;
+          adopted.push(operation);
+        }
+        const pending = [...adopted, ...this.state.pending];
+        const data: Record<string, T> = { ...stored.data };
+        for (const id of this.touched) {
+          if (id in this.state.data) data[id] = this.state.data[id];
+        }
+        for (const operation of pending) data[operation.id] = operation.entry;
+        try {
+          localStorage.setItem(this.key, JSON.stringify(this.accountId ? { data, pending } : data));
+        } catch {
+          return this.reportPersistenceFailure(
+            'Changes are not saved in this browser. Free storage and retry before leaving.'
+          );
+        }
+        // Adoption is committed only after storage succeeds. Otherwise a retry
+        // would skip the other tab's operation without ever retaining it locally.
+        for (const operation of adopted) this.seen.add(operation.operationId);
+        this.publish({
+          data,
+          pending,
+          ...(this.accountId && pending.length && this.state.status === 'synced'
+            ? { status: 'pending' as const }
+            : {}),
+        });
+        return true;
+      });
+    } catch {
+      return this.reportPersistenceFailure(
+        'Could not acquire the durable multi-tab save lock. Keep this tab open and retry.'
+      );
+    }
+  }
+
+  private persist(): Promise<boolean> {
     // Merge rather than overwrite: another tab sharing this storage key may
     // hold newer entries or undelivered operations. Adopted operations are
     // flushed like our own; receipts make any double delivery a no-op.
-    const stored = this.readStored();
-    const adopted: Operation<T>[] = [];
-    for (const operation of stored.pending) {
-      if (this.seen.has(operation.operationId)) continue;
-      adopted.push(operation);
-    }
-    const pending = [...adopted, ...this.state.pending];
-    const data: Record<string, T> = { ...stored.data };
-    for (const id of this.touched) {
-      if (id in this.state.data) data[id] = this.state.data[id];
-    }
-    for (const operation of pending) data[operation.id] = operation.entry;
-    try {
-      localStorage.setItem(this.key, JSON.stringify(this.accountId ? { data, pending } : data));
-    } catch {
-      this.publish({
-        status: 'failed',
-        error: 'Changes are not saved in this browser. Free storage and retry before leaving.',
-      });
-      return false;
-    }
-    // Adoption is committed only after storage succeeds. Otherwise a retry
-    // would skip the other tab's operation without ever retaining it locally.
-    for (const operation of adopted) this.seen.add(operation.operationId);
-    this.publish({
-      data,
-      pending,
-      ...(this.accountId && pending.length && this.state.status === 'synced'
-        ? { status: 'pending' as const }
-        : {}),
-    });
-    return true;
+    const commit = this.persistChain.then(() => this.commitPersist());
+    this.persistChain = commit.catch(() => false);
+    return commit;
   }
 
   set(id: string, update: T | ((previous: T | undefined) => T)) {
@@ -122,9 +149,11 @@ export class RecordSyncStore<T> {
       error: null,
       status: this.accountId ? 'pending' : 'local-only',
     });
-    if (!this.persist() || !this.accountId) return;
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => void this.flush(), 500);
+    void this.persist().then((saved) => {
+      if (!saved || !this.accountId) return;
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => void this.flush(), 500);
+    });
   }
 
   setActive(active: boolean) {
@@ -172,11 +201,11 @@ export class RecordSyncStore<T> {
       for (const id of Object.keys(remote)) this.touched.add(id);
       const data = { ...this.state.data, ...remote };
       for (const operation of this.state.pending) data[operation.id] = operation.entry;
-      this.publish({
-        data,
-        ...(this.state.pending.length ? {} : { status: 'synced', error: null }),
-      });
-      this.persist();
+      this.publish({ data });
+      if (!this.active || activation !== this.activation) return;
+      if (!(await this.persist())) return;
+      if (!this.active || activation !== this.activation || revision !== this.revision) return;
+      if (!this.state.pending.length) this.publish({ status: 'synced', error: null });
     } catch (error) {
       if (this.active && activation === this.activation)
         this.publish({
@@ -187,19 +216,26 @@ export class RecordSyncStore<T> {
   }
 
   retry = () => {
-    if (!this.persist()) return;
-    this.publish({ error: null, status: this.accountId ? 'pending' : 'local-only' });
-    void this.reconcile();
-    void this.flush();
+    void this.persist().then((saved) => {
+      if (!saved) return;
+      this.publish({ error: null, status: this.accountId ? 'pending' : 'local-only' });
+      void this.reconcile();
+      void this.flush();
+    });
   };
 
   async flush() {
     clearTimeout(this.timer);
-    if (this.inFlight || !this.active || !this.accountId || !this.state.pending.length) return;
-    if (!this.persist()) return;
+    if (this.inFlight) return;
     this.inFlight = true;
+    if (!this.active || !this.accountId || !this.state.pending.length) {
+      this.inFlight = false;
+      return;
+    }
     const activation = this.activation;
     try {
+      if (!(await this.persist())) return;
+      if (!this.active || activation !== this.activation) return;
       while (this.active && activation === this.activation && this.state.pending.length) {
         const operation = this.state.pending[0];
         const response = await this.request({
@@ -221,7 +257,8 @@ export class RecordSyncStore<T> {
           pending: this.state.pending.filter((item) => item.operationId !== operation.operationId),
           error: null,
         });
-        if (!this.persist()) return;
+        if (!(await this.persist())) return;
+        if (!this.active || activation !== this.activation) return;
       }
       if (this.active && activation === this.activation) {
         this.publish({ status: 'synced', error: null });
