@@ -23,6 +23,13 @@ export class RecordSyncStore<T> {
   private revision = 0;
   private activation = 0;
   private readonly requests = new Set<AbortController>();
+  // Every operationId this store has created, loaded, or adopted. Stops an
+  // acknowledged operation from being resurrected by a stale stored envelope.
+  private readonly seen = new Set<string>();
+  // Records this store authored or adopted from the server this session. On a
+  // shared-storage merge they outrank the stored copy; untouched records defer
+  // to whatever another tab wrote more recently.
+  private readonly touched = new Set<string>();
 
   constructor(config: RecordSyncConfig<T>, accountId: string | null) {
     this.config = config;
@@ -30,14 +37,24 @@ export class RecordSyncStore<T> {
     this.key = accountId
       ? `${config.localKey}:account:${encodeURIComponent(accountId)}:v1`
       : config.localKey;
-    let envelope: Envelope<T> = { data: {}, pending: [] };
+    const envelope = this.readStored();
+    for (const operation of envelope.pending) this.seen.add(operation.operationId);
+    this.state = { ...envelope, status: accountId ? 'pending' : 'local-only', error: null };
+  }
+
+  /** Read the shared envelope; another tab may have written since our last persist. */
+  private readStored(): Envelope<T> {
     try {
       const saved = JSON.parse(localStorage.getItem(this.key) || 'null');
-      if (saved) envelope = accountId ? saved : { data: saved, pending: [] };
+      if (!saved || typeof saved !== 'object') return { data: {}, pending: [] };
+      if (!this.accountId) return { data: saved, pending: [] };
+      return {
+        data: saved.data && typeof saved.data === 'object' ? saved.data : {},
+        pending: Array.isArray(saved.pending) ? saved.pending : [],
+      };
     } catch {
-      /* A readable error is set if the next local save fails. */
+      return { data: {}, pending: [] };
     }
-    this.state = { ...envelope, status: accountId ? 'pending' : 'local-only', error: null };
   }
 
   getSnapshot = () => this.state;
@@ -52,10 +69,23 @@ export class RecordSyncStore<T> {
   }
 
   private persist(): boolean {
+    // Merge rather than overwrite: another tab sharing this storage key may
+    // hold newer entries or undelivered operations. Adopted operations are
+    // flushed like our own; receipts make any double delivery a no-op.
+    const stored = this.readStored();
+    const adopted: Operation<T>[] = [];
+    for (const operation of stored.pending) {
+      if (this.seen.has(operation.operationId)) continue;
+      adopted.push(operation);
+    }
+    const pending = [...adopted, ...this.state.pending];
+    const data: Record<string, T> = { ...stored.data };
+    for (const id of this.touched) {
+      if (id in this.state.data) data[id] = this.state.data[id];
+    }
+    for (const operation of pending) data[operation.id] = operation.entry;
     try {
-      const { data, pending } = this.state;
       localStorage.setItem(this.key, JSON.stringify(this.accountId ? { data, pending } : data));
-      return true;
     } catch {
       this.publish({
         status: 'failed',
@@ -63,6 +93,17 @@ export class RecordSyncStore<T> {
       });
       return false;
     }
+    // Adoption is committed only after storage succeeds. Otherwise a retry
+    // would skip the other tab's operation without ever retaining it locally.
+    for (const operation of adopted) this.seen.add(operation.operationId);
+    this.publish({
+      data,
+      pending,
+      ...(this.accountId && pending.length && this.state.status === 'synced'
+        ? { status: 'pending' as const }
+        : {}),
+    });
+    return true;
   }
 
   set(id: string, update: T | ((previous: T | undefined) => T)) {
@@ -70,9 +111,10 @@ export class RecordSyncStore<T> {
       typeof update === 'function'
         ? (update as (previous: T | undefined) => T)(this.state.data[id])
         : update;
-    const pending = this.accountId
-      ? [...this.state.pending, { id, entry, operationId: crypto.randomUUID() }]
-      : [];
+    const operationId = crypto.randomUUID();
+    this.seen.add(operationId);
+    this.touched.add(id);
+    const pending = this.accountId ? [...this.state.pending, { id, entry, operationId }] : [];
     this.revision += 1;
     this.publish({
       data: { ...this.state.data, [id]: entry },
@@ -127,6 +169,7 @@ export class RecordSyncStore<T> {
         throw new Error('Could not read account progress. Your local changes remain available.');
       const remote = (await response.json())[this.config.field] || {};
       if (!this.active || activation !== this.activation || revision !== this.revision) return;
+      for (const id of Object.keys(remote)) this.touched.add(id);
       const data = { ...this.state.data, ...remote };
       for (const operation of this.state.pending) data[operation.id] = operation.entry;
       this.publish({

@@ -22,10 +22,14 @@ const handlers = { drills, artifacts, projects };
 let database;
 let account = 'alice';
 let stores;
+let storage;
 function store(user = 'alice') {
   const result = new RecordSyncStore(config, user);
   stores.push(result);
   return result;
+}
+function savedEnvelope(user = 'alice') {
+  return JSON.parse(storage.get(`test-drills:account:${encodeURIComponent(user)}:v1`) || 'null');
 }
 async function network(url, init = {}) {
   const action = new URL(String(url), 'http://local').searchParams.get('action');
@@ -42,7 +46,7 @@ async function network(url, init = {}) {
 beforeEach(() => {
   account = 'alice';
   stores = [];
-  const storage = new Map();
+  storage = new Map();
   vi.stubGlobal('localStorage', {
     getItem: (key) => storage.get(key) ?? null,
     setItem: (key, value) => storage.set(key, value),
@@ -87,6 +91,31 @@ afterEach(() => {
   database.close();
   vi.unstubAllGlobals();
 });
+it('retains adopted operations when storage fails before the merged envelope is durable', () => {
+  const surviving = store();
+  const closedTab = store();
+  closedTab.set('other-tab', content('must survive'));
+  vi.stubGlobal('localStorage', {
+    getItem: (key) => storage.get(key) ?? null,
+    setItem: () => {
+      throw new Error('quota exceeded');
+    },
+  });
+  surviving.set('own-edit', content('also retained'));
+  expect(surviving.getSnapshot().status).toBe('failed');
+  vi.stubGlobal('localStorage', {
+    getItem: (key) => storage.get(key) ?? null,
+    setItem: (key, value) => storage.set(key, value),
+  });
+  surviving.retry();
+  expect(
+    savedEnvelope()
+      .pending.map((operation) => operation.id)
+      .sort()
+  ).toEqual(['other-tab', 'own-edit']);
+  expect(surviving.getSnapshot().pending).toHaveLength(2);
+});
+
 it('retains failed writes through reload and retries a lost acknowledgment without duplicate attempts', async () => {
   let fail = true;
   let loseAcknowledgment = false;
@@ -247,4 +276,146 @@ it('rolls back the record and receipt together when the activity write fails', a
   database.exec('DROP TRIGGER reject_activity');
   expect((await network('/api/learning?action=drills', init)).status).toBe(200);
   expect(database.prepare('SELECT attempts FROM user_drills').get()?.attempts).toBe(1);
+});
+it("delivers a dead tab's pending write after reconnect instead of dropping it", async () => {
+  let offline = true;
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (url, init) => {
+      if (init?.method === 'POST' && offline) return new Response('', { status: 503 });
+      return network(url, init);
+    })
+  );
+  const tabA = store();
+  const tabB = store();
+  tabA.set('first-tab', content('code from tab A'));
+  tabB.set('second-tab', content('code from tab B'));
+  tabA.setActive(true);
+  tabB.setActive(true);
+  await vi.waitFor(() => {
+    expect(tabA.getSnapshot().status).toBe('failed');
+    expect(tabB.getSnapshot().status).toBe('failed');
+  });
+  // Both tabs' undelivered operations must survive in the shared envelope.
+  const queued = savedEnvelope();
+  expect(queued.pending).toHaveLength(2);
+  expect(queued.data['first-tab'].lastCode).toBe('code from tab A');
+  expect(queued.data['second-tab'].lastCode).toBe('code from tab B');
+  // Tab A closes with its edit still undelivered; only tab B stays open.
+  tabA.setActive(false);
+  offline = false;
+  tabB.retry();
+  await vi.waitFor(() => expect(tabB.getSnapshot().status).toBe('synced'));
+  expect(
+    database
+      .prepare('SELECT drill_id, last_code, attempts FROM user_drills ORDER BY drill_id')
+      .all()
+  ).toEqual([
+    { drill_id: 'first-tab', last_code: 'code from tab A', attempts: 1 },
+    { drill_id: 'second-tab', last_code: 'code from tab B', attempts: 1 },
+  ]);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM record_sync_receipts').get()?.n).toBe(2);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM activity_log').get()?.n).toBe(2);
+  // A reload inherits a clean envelope and hydrates both records remotely.
+  const reloaded = store();
+  expect(reloaded.getSnapshot().pending).toHaveLength(0);
+  reloaded.setActive(true);
+  await vi.waitFor(() => expect(reloaded.getSnapshot().status).toBe('synced'));
+  expect(reloaded.getSnapshot().data['first-tab'].lastCode).toBe('code from tab A');
+  expect(reloaded.getSnapshot().data['second-tab'].lastCode).toBe('code from tab B');
+});
+it('serializes same-record writes from two tabs without losing or duplicating attempts', async () => {
+  const tabA = store();
+  const tabB = store();
+  tabA.set('shared', content('version from tab A'));
+  tabB.set('shared', content('version from tab B'));
+  tabA.setActive(true);
+  await vi.waitFor(() => expect(tabA.getSnapshot().status).toBe('synced'));
+  tabB.setActive(true);
+  await vi.waitFor(() => {
+    expect(tabA.getSnapshot().status).toBe('synced');
+    expect(tabB.getSnapshot().status).toBe('synced');
+  });
+  // Every queued edit is one real attempt; receipts stop any double-count.
+  expect(database.prepare('SELECT attempts, last_code FROM user_drills').get()).toMatchObject({
+    attempts: 2,
+  });
+  expect(database.prepare('SELECT COUNT(*) AS n FROM record_sync_receipts').get()?.n).toBe(2);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM activity_log').get()?.n).toBe(2);
+  // A fresh tab converges to exactly what the server recorded.
+  const reloaded = store();
+  reloaded.setActive(true);
+  await vi.waitFor(() => expect(reloaded.getSnapshot().status).toBe('synced'));
+  const committed = database.prepare('SELECT last_code FROM user_drills').get()?.last_code;
+  expect(reloaded.getSnapshot().data.shared.lastCode).toBe(committed);
+  expect(['version from tab A', 'version from tab B']).toContain(committed);
+});
+it('merges same-account writes from two devices through the server without loss', async () => {
+  const deviceA = storage;
+  const tabA = store();
+  tabA.set('device-a', content('written on device A'));
+  tabA.setActive(true);
+  await vi.waitFor(() => expect(tabA.getSnapshot().status).toBe('synced'));
+  // A second device has its own browser storage; the server is the merge point.
+  storage = new Map();
+  const tabB = store();
+  expect(tabB.getSnapshot().data['device-a']).toBeUndefined();
+  tabB.set('device-b', content('written on device B'));
+  tabB.setActive(true);
+  await vi.waitFor(() => expect(tabB.getSnapshot().status).toBe('synced'));
+  expect(tabB.getSnapshot().data['device-a'].lastCode).toBe('written on device A');
+  // Device A picks up the other device's committed record on its next reconcile.
+  storage = deviceA;
+  const backOnA = store();
+  backOnA.setActive(true);
+  await vi.waitFor(() => expect(backOnA.getSnapshot().status).toBe('synced'));
+  expect(backOnA.getSnapshot().data['device-b'].lastCode).toBe('written on device B');
+  expect(database.prepare('SELECT COUNT(*) AS n FROM user_drills').get()?.n).toBe(2);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM record_sync_receipts').get()?.n).toBe(2);
+});
+it('commits an in-flight write under the original account through sign-out and deduplicates its retry', async () => {
+  let release;
+  const delayed = new Promise((resolve) => {
+    release = resolve;
+  });
+  let posted = false;
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (url, init) => {
+      // The handler runs under the cookie that was present when the request
+      // was sent; only the response is delayed past the sign-out.
+      const response = network(url, init);
+      if (init?.method === 'POST') {
+        posted = true;
+        await delayed;
+      }
+      return response;
+    })
+  );
+  const aliceStore = store();
+  aliceStore.set('in-flight', content('committed during sign-out'));
+  aliceStore.setActive(true);
+  await vi.waitFor(() => expect(posted).toBe(true));
+  aliceStore.setActive(false);
+  account = 'bob';
+  release();
+  await vi.waitFor(() =>
+    expect(database.prepare('SELECT COUNT(*) AS n FROM user_drills').get()?.n).toBe(1)
+  );
+  const bob = store('bob');
+  bob.setActive(true);
+  await vi.waitFor(() => expect(bob.getSnapshot().status).toBe('synced'));
+  expect(bob.getSnapshot().data).toEqual({});
+  // The write landed once, under Alice; Bob sees and owns nothing.
+  expect(database.prepare('SELECT user_id, attempts FROM user_drills').get()).toMatchObject({
+    user_id: 'alice',
+    attempts: 1,
+  });
+  // Alice's retained pending operation retries as a deduplicated no-op.
+  account = 'alice';
+  aliceStore.setActive(true);
+  await vi.waitFor(() => expect(aliceStore.getSnapshot().status).toBe('synced'));
+  expect(database.prepare('SELECT attempts FROM user_drills').get()?.attempts).toBe(1);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM activity_log').get()?.n).toBe(1);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM record_sync_receipts').get()?.n).toBe(1);
 });
