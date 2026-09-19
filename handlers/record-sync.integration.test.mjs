@@ -23,6 +23,40 @@ let database;
 let account = 'alice';
 let stores;
 let storage;
+function immediateLocks() {
+  return {
+    request: (_name, _options, callback) =>
+      Promise.resolve().then(() => callback({ name: 'record-sync' })),
+  };
+}
+function serializedLocks(blocked = false) {
+  const queue = [];
+  let active = false;
+  const drain = () => {
+    if (blocked || active || !queue.length) return;
+    active = true;
+    const { callback, resolve, reject } = queue.shift();
+    Promise.resolve()
+      .then(() => callback({ name: 'record-sync' }))
+      .then(resolve, reject)
+      .finally(() => {
+        active = false;
+        drain();
+      });
+  };
+  return {
+    request: (_name, _options, callback) =>
+      new Promise((resolve, reject) => {
+        queue.push({ callback, resolve, reject });
+        drain();
+      }),
+    pending: () => queue.length,
+    release: () => {
+      blocked = false;
+      drain();
+    },
+  };
+}
 function store(user = 'alice') {
   const result = new RecordSyncStore(config, user);
   stores.push(result);
@@ -51,6 +85,7 @@ beforeEach(() => {
     getItem: (key) => storage.get(key) ?? null,
     setItem: (key, value) => storage.set(key, value),
   });
+  vi.stubGlobal('navigator', { locks: immediateLocks() });
   database = new DatabaseSync(':memory:');
   for (const migration of ['0001_initial.sql', '0003_record_sync_receipts.sql']) {
     database.exec(readFileSync(new URL(`../migrations/d1/${migration}`, import.meta.url), 'utf8'));
@@ -91,10 +126,11 @@ afterEach(() => {
   database.close();
   vi.unstubAllGlobals();
 });
-it('retains adopted operations when storage fails before the merged envelope is durable', () => {
+it('retains adopted operations when storage fails before the merged envelope is durable', async () => {
   const surviving = store();
   const closedTab = store();
   closedTab.set('other-tab', content('must survive'));
+  await vi.waitFor(() => expect(savedEnvelope().pending).toHaveLength(1));
   vi.stubGlobal('localStorage', {
     getItem: (key) => storage.get(key) ?? null,
     setItem: () => {
@@ -102,18 +138,137 @@ it('retains adopted operations when storage fails before the merged envelope is 
     },
   });
   surviving.set('own-edit', content('also retained'));
-  expect(surviving.getSnapshot().status).toBe('failed');
+  await vi.waitFor(() => expect(surviving.getSnapshot().status).toBe('failed'));
   vi.stubGlobal('localStorage', {
     getItem: (key) => storage.get(key) ?? null,
     setItem: (key, value) => storage.set(key, value),
   });
   surviving.retry();
+  await vi.waitFor(() => expect(savedEnvelope().pending).toHaveLength(2));
   expect(
     savedEnvelope()
       .pending.map((operation) => operation.id)
       .sort()
   ).toEqual(['other-tab', 'own-edit']);
   expect(surviving.getSnapshot().pending).toHaveLength(2);
+});
+
+it('serializes a truly interleaved localStorage read and write across tabs', async () => {
+  const locks = serializedLocks();
+  vi.stubGlobal('navigator', { locks });
+  const tabA = store();
+  const tabB = store();
+  const originalGetItem = localStorage.getItem;
+  let reentered = false;
+  vi.stubGlobal('localStorage', {
+    getItem: (key) => {
+      const value = originalGetItem(key);
+      if (!reentered && key.includes('test-drills:account:')) {
+        reentered = true;
+        tabB.set('from-b', content('tab B'));
+      }
+      return value;
+    },
+    setItem: (key, value) => storage.set(key, value),
+  });
+  tabA.set('from-a', content('tab A'));
+  await vi.waitFor(() => expect(savedEnvelope().pending).toHaveLength(2));
+  expect(
+    savedEnvelope()
+      .pending.map((operation) => operation.id)
+      .sort()
+  ).toEqual(['from-a', 'from-b']);
+  const reloaded = store();
+  reloaded.setActive(true);
+  await vi.waitFor(() => expect(reloaded.getSnapshot().status).toBe('synced'));
+  expect(reloaded.getSnapshot().data['from-a'].lastCode).toBe('tab A');
+  expect(reloaded.getSnapshot().data['from-b'].lastCode).toBe('tab B');
+  expect(savedEnvelope().pending).toHaveLength(0);
+  expect(
+    database
+      .prepare('SELECT drill_id, last_code, attempts FROM user_drills ORDER BY drill_id')
+      .all()
+  ).toEqual([
+    { drill_id: 'from-a', last_code: 'tab A', attempts: 1 },
+    { drill_id: 'from-b', last_code: 'tab B', attempts: 1 },
+  ]);
+  expect(database.prepare('SELECT COUNT(*) AS n FROM record_sync_receipts').get()?.n).toBe(2);
+});
+
+it('performs every persistence read and write while holding the account key mutex', async () => {
+  const held = new Set();
+  const locks = {
+    request: (name, _options, callback) => {
+      held.add(name);
+      return Promise.resolve()
+        .then(() => callback({ name, mode: 'exclusive' }))
+        .finally(() => held.delete(name));
+    },
+  };
+  vi.stubGlobal('navigator', { locks });
+  const current = store();
+  const key = current.key;
+  let assertHeld = false;
+  const originalGetItem = localStorage.getItem;
+  const originalSetItem = localStorage.setItem;
+  vi.stubGlobal('localStorage', {
+    getItem: (readKey) => {
+      if (assertHeld && readKey === key) expect(held.has(`${key}:writer`)).toBe(true);
+      return originalGetItem(readKey);
+    },
+    setItem: (writeKey, value) => {
+      if (assertHeld && writeKey === key) expect(held.has(`${key}:writer`)).toBe(true);
+      return originalSetItem(writeKey, value);
+    },
+  });
+  assertHeld = true;
+  current.set('mutex-checked', content('under lock'));
+  await vi.waitFor(() => expect(savedEnvelope().pending).toHaveLength(1));
+});
+
+it('reports a lock rejection instead of claiming a durable save', async () => {
+  vi.stubGlobal('navigator', {
+    locks: { request: vi.fn().mockRejectedValue(new Error('lock unavailable')) },
+  });
+  const current = store();
+  current.set('synthetic', content('must report lock failure'));
+  await vi.waitFor(() => expect(current.getSnapshot().status).toBe('failed'));
+  expect(current.getSnapshot().error).toContain('durable multi-tab save lock');
+  expect(storage.size).toBe(0);
+});
+
+it('reports unsupported Web Locks instead of silently using the racy fallback', async () => {
+  vi.stubGlobal('navigator', {});
+  const current = store();
+  current.set('synthetic', content('must report unsupported locks'));
+  await vi.waitFor(() => expect(current.getSnapshot().status).toBe('failed'));
+  expect(current.getSnapshot().error).toContain('cannot guarantee durable multi-tab saves');
+  expect(storage.size).toBe(0);
+});
+
+it('does not POST from a flush whose activation changed while persistence was queued', async () => {
+  const locks = serializedLocks(true);
+  vi.stubGlobal('navigator', { locks });
+  const current = store();
+  current.set('queued', content('do not post after sign-out'));
+  current.setActive(true);
+  await vi.waitFor(() => expect(locks.pending()).toBeGreaterThan(0));
+  current.setActive(false);
+  locks.release();
+  await vi.waitFor(() => expect(savedEnvelope().pending).toHaveLength(1));
+  expect(vi.mocked(fetch).mock.calls.some(([, init]) => init?.method === 'POST')).toBe(false);
+  expect(current.getSnapshot().pending).toHaveLength(1);
+});
+
+it('does not report synced while reconcile persistence is still queued', async () => {
+  const locks = serializedLocks(true);
+  vi.stubGlobal('navigator', { locks });
+  const current = store();
+  current.setActive(true);
+  await vi.waitFor(() => expect(locks.pending()).toBeGreaterThan(0));
+  expect(current.getSnapshot().status).not.toBe('synced');
+  locks.release();
+  await vi.waitFor(() => expect(current.getSnapshot().status).toBe('synced'));
 });
 
 it('retains failed writes through reload and retries a lost acknowledgment without duplicate attempts', async () => {
