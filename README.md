@@ -29,9 +29,10 @@ attributed to whichever account signs in next.
 
 **Rollout prerequisite:** apply additive D1 migration
 `0003_record_sync_receipts.sql` before deploying the new handlers/client. No
-remote migration or deployment has been performed. This contract covers one
-active browser tab; concurrent-tab and cross-device conflict resolution, notes,
-mastery, and ELO are outside this repair. Hosted qualification remains #97.
+remote migration or deployment has been performed. Concurrent-tab and
+cross-device record recovery is replay-tested against the real handlers;
+conflict resolution stays server-ordered last-writer-wins, and notes, mastery,
+and ELO remain outside this repair. Hosted qualification remains #97.
 
 The task reconciliation found no prior open Issues or PRs; no historical
 product intention was closed as complete.

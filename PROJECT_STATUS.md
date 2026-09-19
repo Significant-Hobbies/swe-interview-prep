@@ -30,10 +30,13 @@ passed 607 tests across 95 files; the final rollback test passed in the
 11-test handler/import run.
 
 Apply additive D1 migration `0003_record_sync_receipts.sql` before a future
-approved deployment. Hosted qualification, mobile/editor interaction, and
-concurrent-tab/cross-device behavior remain
+approved deployment. The outbox now merges shared-storage envelopes so a second
+tab cannot silently drop another tab's undelivered operations, and the handler
+replays prove concurrent-tab, cross-device, and sign-out-mid-write recovery end
+to end against real handlers and SQLite. Hosted qualification, real Google
+login, physical mobile/editor interaction, and live AI explain-back remain
 [#97](https://github.com/Significant-Hobbies/swe-interview-prep/issues/97).
-The repair covers one active tab and excludes notes/mastery/ELO sync.
+Notes/mastery/ELO sync stays outside the receipt contract.
 No deployment or existing learner-data mutation occurred.
 
 ## Why/What

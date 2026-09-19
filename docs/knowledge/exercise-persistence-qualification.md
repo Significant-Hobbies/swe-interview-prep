@@ -63,11 +63,71 @@ authentication and network responses, not a Google account browser login.
 The new `0003_record_sync_receipts.sql` must be applied before deploying. No
 remote migration or deployment occurred. This repair qualifies one active tab;
 concurrent-tab and cross-device conflict resolution and other stores
-(notes/mastery/ELO) remain outside its contract. #97 retains hosted workflow
-qualification.
+(notes/mastery/ELO) remain outside its contract — the record-store replay
+coverage added later is in the 2026-09-19 section below. #97 retains hosted
+workflow qualification.
 
 Validation: full `pnpm quality` passed 607 tests across 95 files; the final
 transaction rollback addition passed with all 11 handler/import tests.
+
+## Concurrent-tab and cross-device replay — 2026-09-19 (#97 source phase)
+
+Auditing the #98 contract against #97 found one real gap: `persist()` wrote the
+whole `{data, pending}` envelope, so a second tab's save overwrote the first
+tab's undelivered operations. An edit queued offline in a tab that then closed
+before flushing was silently dropped from the outbox. `persist()` now merges
+instead of overwriting: it adopts unknown pending operations by `operationId`,
+defers to the stored copy for records this tab never touched, and reapplies the
+records this tab authored or adopted from the server. A `seen` set of known
+operation IDs keeps acknowledged operations from resurrecting out of a stale
+envelope, so a deduplicated retry cannot double-count attempts or activity.
+
+`handlers/record-sync.integration.test.mjs` replays the cases against the real
+drill/artifact/project handlers and native SQLite with the real migrations:
+
+- A tab closing with an undelivered write no longer loses it — the surviving
+  tab adopts the pending operation and delivers it on reconnect; a later reload
+  inherits a clean envelope and rehydrates both records from the server.
+- Two tabs writing the same record produce one attempt per queued operation,
+  one receipt per operation, and converge to the last committed write.
+- Two devices (separate storage maps) merge through the server: each device
+  picks up the other's committed record on its next reconcile.
+- A write in flight during sign-out still commits under the original account;
+  the retained pending retry is a receipt-deduplicated no-op, and the second
+  account sees and owns nothing.
+
+`src/components/FeynmanGate.test.tsx` proves the explain-back unavailability
+contract at source level: a failed grading request reports the failure, leaves
+the drafted explanation in the open gate, and issues no mastery write.
+
+Residual limits, honestly stated: simultaneous same-millisecond persists from
+two tabs can still interleave (localStorage has no compare-and-swap), adopted
+operations wait for the adopting tab's next flush, and cross-device freshness
+is reconcile-driven rather than live. Truly overlapping read/merge/write calls
+can still lose a queued operation; the sequential replay tests do not prove
+atomic cross-tab persistence. This remains an open qualification gap. Failed
+storage writes now leave adopted operations eligible for retry, covered by a
+regression that failed before the repair. Notes, concept mastery,
+review-question mastery, and ELO remain
+fire-and-forget stores outside the receipt/outbox contract.
+
+### Migration order and rollback
+
+`0003_record_sync_receipts.sql` is additive (`CREATE TABLE IF NOT EXISTS`) and
+must be applied **before** the code deploys: without the table, every receipted
+write fails inside `recordSync.commit` and the client parks work as `failed`.
+Deploy-then-migrate is therefore the broken order; migrate-then-deploy and
+migrate-only are both safe. Rolling the code back is safe with the table in
+place — pre-receipt handlers never reference it. Do not drop the table while
+receipted code is deployed. The hosted gate remains owner-approved: apply via
+`pnpm db:migrate:remote` (or the deploy workflow's `apply_migrations` gate),
+then deploy, then run the browser handoff script recorded in issue #97.
+
+Validation: `pnpm quality` — 967 tests across 119 files, coverage floors,
+lint/typecheck, code-health ratchets, docs validation, production build, and
+bundle-size limits all pass. The build was verified with a placeholder
+`VITE_GOOGLE_CLIENT_ID` because this worktree has no `.env.local`; no real
+credential was used or needed. No remote migration or deployment occurred.
 
 ## Hosted guest checkpoint — 2026-09-08
 
