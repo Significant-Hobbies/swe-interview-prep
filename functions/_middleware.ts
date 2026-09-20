@@ -43,6 +43,7 @@ const SPA_ROUTES = new Set([
   'vibe-learning',
   'curriculum',
   'system-design',
+  'articles',
   'notes',
   'review',
   'reviews',

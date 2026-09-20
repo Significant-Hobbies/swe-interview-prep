@@ -97,6 +97,15 @@ export const BROWSE_NAV_ITEMS: BrowseNavItem[] = [
     menu: true,
   },
   {
+    id: 'articles',
+    to: '/articles/',
+    label: 'Articles',
+    reloadDocument: true,
+    blurb: 'Long-form engineering learning guides',
+    group: 'product',
+    menu: true,
+  },
+  {
     id: 'build',
     to: '/build',
     label: 'Build Lab',

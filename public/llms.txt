@@ -10,6 +10,7 @@ practice, an observable artifact, an explain-back, and scheduled review.
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
 - [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
+- [Learning guides](https://learn.significanthobbies.com/articles/): Long-form essays on evidence-backed engineering learning
 - [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
 - [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
 - [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
