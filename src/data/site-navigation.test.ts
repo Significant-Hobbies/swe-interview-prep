@@ -16,7 +16,7 @@ describe('site navigation model', () => {
       'Play',
     ]);
     expect(PRIMARY_NAV_ITEMS).toHaveLength(4);
-    expect(BROWSE_NAV_ITEMS.filter((item) => item.menu)).toHaveLength(7);
+    expect(BROWSE_NAV_ITEMS.filter((item) => item.menu)).toHaveLength(8);
     expect(
       BROWSE_NAV_ITEMS.filter((item) => item.group === 'practice').map((item) => item.label)
     ).toEqual(

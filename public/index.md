@@ -56,6 +56,7 @@ code, diagrams, benchmarks, decisions, explanations, or projects.
 
 - [Curriculum hub](https://learn.significanthobbies.com/curriculum/)
 - [System-design case library](https://learn.significanthobbies.com/system-design/)
+- [Learning guides](https://learn.significanthobbies.com/articles/)
 - [LLM inference at 10K RPS](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps)
 - [Complete Markdown catalog](https://learn.significanthobbies.com/curriculum/catalog.md)
 - [Structured JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)

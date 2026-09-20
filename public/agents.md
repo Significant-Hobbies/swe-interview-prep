@@ -32,5 +32,6 @@ prerequisites, drills, interview cases, and build evidence.
 - [Product brief](https://learn.significanthobbies.com/index.md)
 - [Curriculum](https://learn.significanthobbies.com/curriculum/)
 - [System-design cases](https://learn.significanthobbies.com/system-design/)
+- [Learning guides](https://learn.significanthobbies.com/articles/)
 - [Learning-plan skill](https://learn.significanthobbies.com/skill.md)
 - [OpenAPI](https://learn.significanthobbies.com/openapi.json)

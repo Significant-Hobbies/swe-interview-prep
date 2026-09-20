@@ -1,0 +1,24 @@
+{
+  "generated": true,
+  "source": "marketing/articles/swe-interview-prep/",
+  "htmlPaths": [
+    "/articles/",
+    "/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge",
+    "/articles/designing-useful-guest-mode-technical-learning",
+    "/articles/how-a-socratic-coding-assistant-should-respond-to-learners",
+    "/articles/how-to-turn-a-failed-coding-interview-into-a-learning-plan",
+    "/articles/recognition-vs-causal-understanding-in-technical-study",
+    "/articles/what-counts-as-evidence-of-mastery-in-software-engineering",
+    "/articles/why-technical-learning-needs-an-inspectable-artifact"
+  ],
+  "markdownPaths": [
+    "/articles/index.md",
+    "/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge.md",
+    "/articles/designing-useful-guest-mode-technical-learning.md",
+    "/articles/how-a-socratic-coding-assistant-should-respond-to-learners.md",
+    "/articles/how-to-turn-a-failed-coding-interview-into-a-learning-plan.md",
+    "/articles/recognition-vs-causal-understanding-in-technical-study.md",
+    "/articles/what-counts-as-evidence-of-mastery-in-software-engineering.md",
+    "/articles/why-technical-learning-needs-an-inspectable-artifact.md"
+  ]
+}

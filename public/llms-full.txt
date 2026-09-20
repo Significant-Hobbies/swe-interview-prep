@@ -12,6 +12,9 @@ SWE Interview Prep is a mechanism-first learning OS. Its 259 concepts span 19 tr
 - https://learn.significanthobbies.com/system-design/
 - https://learn.significanthobbies.com/system-design/index.md
 - https://learn.significanthobbies.com/system-design/catalog.json
+- https://learn.significanthobbies.com/articles/
+- https://learn.significanthobbies.com/articles/index.md
+- https://learn.significanthobbies.com/articles/catalog.json
 - https://learn.significanthobbies.com/api/ai
 - https://learn.significanthobbies.com/.well-known/ai-catalog.json
 - https://learn.significanthobbies.com/.well-known/agent-skills/index.json
@@ -107,6 +110,16 @@ SWE Interview Prep is a mechanism-first learning OS. Its 259 concepts span 19 tr
 - [Design a real-time gaming leaderboard](https://learn.significanthobbies.com/mock?prompt=gaming-leaderboard&from=guide) — Design a leaderboard for a global game with seasonal, regional, and friends-only rankings, real-time score updates, anti-cheat review, and stable end-of-season results.
 - [Design a digital wallet](https://learn.significanthobbies.com/mock?prompt=digital-wallet-system&from=guide) — Design a digital wallet that supports deposits, peer-to-peer transfers, merchant payments, refunds, and withdrawals while maintaining auditable balances across retries and external settlement.
 - [Design a stock exchange](https://learn.significanthobbies.com/mock?prompt=stock-exchange&from=guide) — Design the core of a stock exchange that accepts limit and market orders, matches by price-time priority, publishes market data, and recovers without reordering or duplicating trades.
+
+## Articles
+
+- [Applying FSRS Spaced Repetition to Software Engineering Knowledge](https://learn.significanthobbies.com/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge) — Explore how to use the FSRS algorithm for software engineering knowledge. Learn how an evidence-gated learning loop moves spaced repetition beyond rote memorization to systemic understanding.
+- [Designing Useful Guest-Mode Technical Learning](https://learn.significanthobbies.com/articles/designing-useful-guest-mode-technical-learning) — Learn how to build a robust guest mode for technical learning platforms that persists complex state and transitions seamlessly to authenticated accounts.
+- [How a Socratic coding assistant should respond to learners](https://learn.significanthobbies.com/articles/how-a-socratic-coding-assistant-should-respond-to-learners) — An AI shouldn't just hand out code. Learn why Socratic AI coding assistants must probe understanding, withhold direct solutions, and enforce the Feynman Gate to build actual mastery.
+- [How to Turn a Failed Coding Interview Into a Learning Plan](https://learn.significanthobbies.com/articles/how-to-turn-a-failed-coding-interview-into-a-learning-plan) — Failed a coding interview? Don't panic. Learn how to extract signal from rejection, diagnose the root cause, and build an evidence-backed learning plan.
+- [Recognition vs Causal Understanding in Technical Study](https://learn.significanthobbies.com/articles/recognition-vs-causal-understanding-in-technical-study) — Explore the gap between recognition memory and causal understanding in software engineering study, and how evidence-gated loops build durable mastery.
+- [What Counts as Evidence of Mastery in Software Engineering?](https://learn.significanthobbies.com/articles/what-counts-as-evidence-of-mastery-in-software-engineering) — Explore why completed tutorials aren't enough and how to build verifiable evidence of engineering mastery through working artifacts, explain-backs, and tradeoff analysis.
+- [Why technical learning needs an inspectable artifact](https://learn.significanthobbies.com/articles/why-technical-learning-needs-an-inspectable-artifact) — Passive technical learning creates the illusion of competence. Discover why true engineering mastery requires inspectable artifacts, causal explanations, and rigorous evidence loops.
 
 ## Product boundary
 

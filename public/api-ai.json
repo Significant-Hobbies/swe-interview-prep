@@ -60,6 +60,13 @@
       "md": "https://learn.significanthobbies.com/system-design/index.md",
       "kind": "collection",
       "description": "33 staged interview cases and 7 approved worked guide"
+    },
+    {
+      "id": "articles",
+      "url": "https://learn.significanthobbies.com/articles/",
+      "md": "https://learn.significanthobbies.com/articles/index.md",
+      "kind": "collection",
+      "description": "7 long-form guides on evidence-backed engineering learning"
     }
   ],
   "dataResources": [
@@ -72,6 +79,11 @@
       "id": "system-design-json",
       "url": "https://learn.significanthobbies.com/system-design/catalog.json",
       "description": "Versioned interview case IDs, practice URLs, guide approvals, and concept mappings"
+    },
+    {
+      "id": "articles-json",
+      "url": "https://learn.significanthobbies.com/articles/catalog.json",
+      "description": "Published learning-guide slugs, titles, descriptions, and URLs"
     }
   ],
   "auth": {

@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -173,7 +173,7 @@ function page({
     <title>${escapeHtml(metaTitle)}</title>
     <meta name="description" content="${escapeHtml(metaDescription)}">
     <link rel="canonical" href="${escapeHtml(canonical)}">
-    <meta property="og:type" content="${type === 'concept' ? 'article' : 'website'}">
+    <meta property="og:type" content="${type === 'concept' || type === 'article' ? 'article' : 'website'}">
     <meta property="og:site_name" content="SWE Interview Prep">
     <meta property="og:title" content="${escapeHtml(metaTitle)}">
     <meta property="og:description" content="${escapeHtml(metaDescription)}">
@@ -933,6 +933,384 @@ ${caseDefinition.conceptIds
 `;
 }
 
+// --- Public articles -------------------------------------------------------
+// Long-form guides recovered from marketing drafts. The raw drafts stay in
+// marketing/articles/swe-interview-prep/; this generator strips the working
+// material (targeting frontmatter, outlines, internal-link notes, and source
+// notes) and publishes clean HTML + Markdown mirrors under /articles/.
+
+const articlesSourceDir = join(repoRoot, 'marketing', 'articles', 'swe-interview-prep');
+const articlesOutputDir = join(publicDir, 'articles');
+const ARTICLES_UPDATED = '2026-09-20';
+const articleUrl = (slug) => `/articles/${slug}`;
+
+const HEADING_PATTERN = /^(#{1,6})\s+(.*)$/;
+const WORKING_SECTION_PATTERN = /(outline|source notes|internal[-\s]links?|suggested internal)/i;
+const INLINE_NOTE_PATTERN = /[\s*([]*internal[-\s]link suggestions?\b.*$/i;
+const RULE_PATTERN = /^\s*(?:-{3,}|\*{3,}|_{3,})\s*$/;
+const LIST_MARKER = /^(\s*)(?:[-*+]|\d+[.)])\s+/;
+
+function parseArticleFrontmatter(raw) {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) return { fields: {}, body: raw };
+  const fields = {};
+  for (const line of match[1].split('\n')) {
+    const field = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
+    if (field) fields[field[1]] = field[2].trim().replace(/^"(.*)"$/, '$1');
+  }
+  return { fields, body: raw.slice(match[0].length) };
+}
+
+// Removes a working-material heading plus its body. Most sections run to the
+// next heading at the same or a higher level; an outline is a list by
+// definition, so it ends at the first non-list line or heading — the drafts
+// are not consistent about outline vs. section heading depth, and letting a
+// shallow `## Outline` swallow deeper `###` sections would erase the article.
+function stripWorkingSections(lines) {
+  const kept = [];
+  let index = 0;
+  while (index < lines.length) {
+    const heading = lines[index].match(HEADING_PATTERN);
+    if (!heading || !WORKING_SECTION_PATTERN.test(heading[2])) {
+      kept.push(lines[index]);
+      index += 1;
+      continue;
+    }
+    const level = heading[1].length;
+    index += 1;
+    if (/outline/i.test(heading[2])) {
+      while (
+        index < lines.length &&
+        (lines[index].trim() === '' ||
+          LIST_MARKER.test(lines[index]) ||
+          RULE_PATTERN.test(lines[index]))
+      ) {
+        index += 1;
+      }
+      continue;
+    }
+    while (index < lines.length) {
+      const next = lines[index].match(HEADING_PATTERN);
+      if (next && next[1].length <= level) break;
+      index += 1;
+    }
+  }
+  return kept;
+}
+
+function normalizeHeadings(lines, title) {
+  const slug = (value) =>
+    value
+      .toLowerCase()
+      .replaceAll(/[^a-z0-9]+/g, ' ')
+      .trim();
+  const wanted = slug(title);
+  const withoutDocTitle = [];
+  let docTitleDropped = false;
+  for (const line of lines) {
+    const heading = line.match(HEADING_PATTERN);
+    if (heading && heading[1].length === 1 && !docTitleDropped && slug(heading[2]) === wanted) {
+      docTitleDropped = true;
+      continue;
+    }
+    withoutDocTitle.push(line);
+  }
+  // Demote stray h1s so each page keeps a single h1 (the template's own).
+  const demoted = withoutDocTitle.map((line) => {
+    const heading = line.match(HEADING_PATTERN);
+    if (!heading) return line;
+    return `${'#'.repeat(Math.max(2, heading[1].length))} ${heading[2]}`;
+  });
+  const minLevel = demoted.reduce((min, line) => {
+    const heading = line.match(HEADING_PATTERN);
+    return heading ? Math.min(min, heading[1].length) : min;
+  }, 7);
+  if (minLevel <= 2 || minLevel === 7) return demoted;
+  // Drafts that wrote their top-level sections as h3 are promoted so article
+  // sections consistently render as h2 like every other generated page.
+  const shift = minLevel - 2;
+  return demoted.map((line) => {
+    const heading = line.match(HEADING_PATTERN);
+    return heading ? `${'#'.repeat(heading[1].length - shift)} ${heading[2]}` : line;
+  });
+}
+
+function cleanArticleBody(raw, title) {
+  const { body } = parseArticleFrontmatter(raw.replaceAll(/<!--[\s\S]*?-->/g, ''));
+  const lines = normalizeHeadings(
+    stripWorkingSections(body.split('\n')).map((line) =>
+      line.replace(INLINE_NOTE_PATTERN, '').replace(/[ \t]+$/, '')
+    ),
+    title
+  );
+  const compacted = [];
+  for (const line of lines) {
+    const value = line.trim() === '' ? '' : line;
+    if (value === '' && compacted[compacted.length - 1] === '') continue;
+    compacted.push(value);
+  }
+  while (compacted.length && (compacted[0] === '' || RULE_PATTERN.test(compacted[0]))) {
+    compacted.shift();
+  }
+  while (
+    compacted.length &&
+    (compacted[compacted.length - 1] === '' || RULE_PATTERN.test(compacted[compacted.length - 1]))
+  ) {
+    compacted.pop();
+  }
+  return `${compacted.join('\n').trim()}\n`;
+}
+
+function loadArticles() {
+  return readdirSync(articlesSourceDir)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const raw = readFileSync(join(articlesSourceDir, file), 'utf8');
+      const { fields } = parseArticleFrontmatter(raw);
+      if (!fields.title) throw new Error(`Article ${file} is missing a frontmatter title`);
+      return {
+        slug: fields.slug || file.replace(/\.md$/, ''),
+        title: fields.title,
+        description: fields.meta_description || fields.description || '',
+        body: cleanArticleBody(raw, fields.title),
+      };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+const ARTICLES = loadArticles();
+
+function articleInline(value) {
+  return escapeHtml(value)
+    .replaceAll(/`([^`]+)`/g, '<code>$1</code>')
+    .replaceAll(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replaceAll(/\*([^*\n]+)\*/g, '<em>$1</em>')
+    .replaceAll(/\[([^\]]+)\]\((https?:[^)\s]+|\/[^)\s]*)\)/g, '<a href="$2">$1</a>');
+}
+
+function isListBlock(block) {
+  return block.split('\n').every((line) => line.trim() === '' || LIST_MARKER.test(line));
+}
+
+// A draft list can put blank lines between items; merge consecutive list
+// blocks so they render as one list rather than restarting the numbering.
+function articleBlocks(markdown) {
+  const blocks = [];
+  for (const block of markdown.trim().split(/\n\s*\n/)) {
+    const previous = blocks[blocks.length - 1];
+    if (previous && isListBlock(block) && isListBlock(previous)) {
+      blocks[blocks.length - 1] = `${previous}\n${block}`;
+    } else {
+      blocks.push(block);
+    }
+  }
+  return blocks;
+}
+
+function listItems(lines) {
+  const parsed = [];
+  for (const line of lines) {
+    const match = line.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/);
+    if (match) {
+      parsed.push({
+        indent: match[1].replaceAll('\t', '    ').length,
+        ordered: /\d/.test(match[2]),
+        text: match[3].trim(),
+        children: [],
+      });
+    }
+  }
+  const root = { indent: -1, children: [] };
+  const stack = [root];
+  for (const item of parsed) {
+    while (stack.length > 1 && item.indent <= stack.at(-1).indent) stack.pop();
+    stack.at(-1).children.push(item);
+    stack.push(item);
+  }
+  return root.children;
+}
+
+function renderListItems(items) {
+  if (!items.length) return '';
+  const tag = items[0].ordered ? 'ol' : 'ul';
+  return `<${tag}>${items
+    .map((item) => `<li>${articleInline(item.text)}${renderListItems(item.children)}</li>`)
+    .join('')}</${tag}>`;
+}
+
+function articleBodyHtml(markdown) {
+  return articleBlocks(markdown)
+    .map((block) => {
+      const lines = block.split('\n');
+      const heading = lines[0].match(HEADING_PATTERN);
+      if (lines.length === 1 && heading) {
+        return `<h${heading[1].length}>${articleInline(heading[2].trim())}</h${heading[1].length}>`;
+      }
+      if (lines.length === 1 && RULE_PATTERN.test(lines[0])) return '<hr>';
+      if (isListBlock(block)) return renderListItems(listItems(lines));
+      // Split mixed blocks so `>` quote lines render as a blockquote even when
+      // they share the block with their lead-in paragraph line.
+      const runs = [];
+      for (const line of lines) {
+        const quote = line.trimStart().startsWith('>');
+        const last = runs[runs.length - 1];
+        if (last && last.quote === quote) {
+          last.lines.push(line);
+        } else {
+          runs.push({ quote, lines: [line] });
+        }
+      }
+      return runs
+        .map((run) =>
+          run.quote
+            ? `<blockquote>${run.lines
+                .map((line) => `<p>${articleInline(line.trimStart().replace(/^>\s?/, ''))}</p>`)
+                .join('')}</blockquote>`
+            : `<p>${articleInline(run.lines.map((line) => line.trim()).join(' '))}</p>`
+        )
+        .join('');
+    })
+    .join('\n');
+}
+
+function articlePage(article) {
+  const others = ARTICLES.filter((item) => item.slug !== article.slug);
+  const body = `<article>
+    <p class="eyebrow">SWE Prep guide</p>
+    <h1>${escapeHtml(article.title)}</h1>
+    <p class="lede">${escapeHtml(article.description)}</p>
+    ${articleBodyHtml(article.body)}
+    <section>
+      <h2>Keep reading</h2>
+      ${linkList(
+        others,
+        (item) => articleUrl(item.slug),
+        (item) => item.title
+      )}
+    </section>
+    <p class="cta"><a href="/learn">Turn this into practice in the learning workspace →</a></p>
+  </article>`;
+
+  return page({
+    title: article.title,
+    description: article.description,
+    path: articleUrl(article.slug),
+    type: 'article',
+    body,
+    breadcrumbRoot: { label: 'Articles', href: '/articles/' },
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: article.title,
+          description: article.description,
+          url: absolute(articleUrl(article.slug)),
+          datePublished: ARTICLES_UPDATED,
+          dateModified: ARTICLES_UPDATED,
+          author: { '@type': 'Organization', name: 'SWE Interview Prep', url: origin },
+          publisher: { '@type': 'Organization', name: 'SWE Interview Prep', url: origin },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: origin },
+            { '@type': 'ListItem', position: 2, name: 'Articles', item: absolute('/articles/') },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: article.title,
+              item: absolute(articleUrl(article.slug)),
+            },
+          ],
+        },
+      ],
+    },
+  });
+}
+
+function articlesHubPage() {
+  const body = `<article>
+    <p class="eyebrow">Guides · ${ARTICLES.length} articles</p>
+    <h1>Evidence-backed engineering learning, in long form</h1>
+    <p class="lede">Essays on how software engineers actually retain knowledge: spaced repetition that waits for proof, Socratic assistants that refuse to answer, inspectable artifacts, guest-mode design, and turning a failed interview into a plan.</p>
+    <section>
+      <h2>Read the guides</h2>
+      <div class="card-grid">${ARTICLES.map(
+        (article) => `<article class="card">
+          <p class="eyebrow">Guide</p>
+          <h3><a href="${articleUrl(article.slug)}">${escapeHtml(article.title)}</a></h3>
+          <p>${escapeHtml(article.description)}</p>
+        </article>`
+      ).join('')}</div>
+    </section>
+    <section>
+      <h2>From reading to retention</h2>
+      <p>Every guide ends where the learning loop begins. The public curriculum maps the concepts these essays reference; the interactive workspace schedules retrieval, drills, and explain-backs so the ideas survive contact with a real interview.</p>
+      <p><a href="/curriculum/">Browse the curriculum</a> · <a href="/system-design/">Practice system-design cases</a></p>
+    </section>
+  </article>`;
+
+  return page({
+    title: 'Engineering Learning Guides',
+    description: `${ARTICLES.length} long-form guides on evidence-backed software engineering learning: spaced repetition, Socratic assistance, artifacts, guest mode, and interview recovery.`,
+    path: '/articles/',
+    type: 'collection',
+    body,
+    breadcrumbRoot: { label: 'Home', href: '/' },
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'SWE Prep engineering learning guides',
+      description: 'Long-form guides on evidence-backed software engineering learning.',
+      url: absolute('/articles/'),
+      numberOfItems: ARTICLES.length,
+      hasPart: ARTICLES.map((article) => ({
+        '@type': 'Article',
+        headline: article.title,
+        url: absolute(articleUrl(article.slug)),
+      })),
+    },
+  });
+}
+
+const yamlQuote = (value) => `"${String(value).replaceAll('"', '\\"')}"`;
+
+function articleMarkdown(article) {
+  const others = ARTICLES.filter((item) => item.slug !== article.slug);
+  return `---
+title: ${yamlQuote(article.title)}
+description: ${yamlQuote(article.description)}
+updated: ${ARTICLES_UPDATED}
+---
+
+# ${article.title}
+
+${article.body}
+## Keep reading
+
+${others.map((item) => `- [${item.title}](${absolute(articleUrl(item.slug))})`).join('\n')}
+- [All guides](${absolute('/articles/')})
+- [Public curriculum](${absolute('/curriculum/')})
+`;
+}
+
+function articlesHubMarkdown() {
+  return `---
+title: "Engineering learning guides"
+description: "Long-form guides on evidence-backed software engineering learning."
+updated: ${ARTICLES_UPDATED}
+---
+
+# Engineering learning guides
+
+${ARTICLES.map(
+  (article) =>
+    `## ${article.title}\n\n${article.description}\n\n- [Read the guide](${absolute(articleUrl(article.slug))})`
+).join('\n\n')}
+`;
+}
+
 function catalogData() {
   return {
     name: 'SWE Prep Curriculum',
@@ -1236,6 +1614,7 @@ const systemDesignHtmlPaths = [
   '/system-design/',
   ...APPROVED_SYSTEM_DESIGN_CASES.map(systemDesignGuideUrl),
 ];
+const articleHtmlPaths = ['/articles/', ...ARTICLES.map((article) => articleUrl(article.slug))];
 
 const expectedOutputRoot = join(repoRoot, 'public', 'curriculum');
 if (outputDir !== expectedOutputRoot) {
@@ -1246,6 +1625,10 @@ if (systemDesignOutputDir !== expectedSystemDesignRoot) {
   throw new Error(
     `Refusing to replace unexpected system-design output directory: ${systemDesignOutputDir}`
   );
+}
+const expectedArticlesRoot = join(repoRoot, 'public', 'articles');
+if (articlesOutputDir !== expectedArticlesRoot) {
+  throw new Error(`Refusing to replace unexpected articles output directory: ${articlesOutputDir}`);
 }
 const cleanGeneratedText = (value) => value.replace(/[ \t]+$/gm, '');
 const cleanMarkdown = (value) => `${value.trimEnd()}\n`;
@@ -1339,6 +1722,53 @@ writeFileSync(
       htmlPaths: systemDesignHtmlPaths,
       markdownPaths: systemDesignHtmlPaths.map(markdownUrl),
       approvedCaseIds: APPROVED_SYSTEM_DESIGN_CASES.map((caseDefinition) => caseDefinition.id),
+    },
+    null,
+    2
+  )}\n`
+);
+
+rmSync(articlesOutputDir, { recursive: true, force: true });
+mkdirSync(articlesOutputDir, { recursive: true });
+writeFileSync(join(articlesOutputDir, 'index.html'), cleanGeneratedText(articlesHubPage()));
+writeFileSync(join(articlesOutputDir, 'index.md'), cleanMarkdown(articlesHubMarkdown()));
+for (const article of ARTICLES) {
+  writeFileSync(
+    join(articlesOutputDir, `${article.slug}.html`),
+    cleanGeneratedText(articlePage(article))
+  );
+  writeFileSync(
+    join(articlesOutputDir, `${article.slug}.md`),
+    cleanMarkdown(articleMarkdown(article))
+  );
+}
+writeFileSync(
+  join(articlesOutputDir, 'catalog.json'),
+  `${JSON.stringify(
+    {
+      generated: true,
+      source: 'marketing/articles/swe-interview-prep/',
+      counts: { articles: ARTICLES.length },
+      articles: ARTICLES.map((article) => ({
+        slug: article.slug,
+        title: article.title,
+        description: article.description,
+        url: absolute(articleUrl(article.slug)),
+        markdown: absolute(markdownUrl(articleUrl(article.slug))),
+      })),
+    },
+    null,
+    2
+  )}\n`
+);
+writeFileSync(
+  join(articlesOutputDir, 'manifest.json'),
+  `${JSON.stringify(
+    {
+      generated: true,
+      source: 'marketing/articles/swe-interview-prep/',
+      htmlPaths: articleHtmlPaths,
+      markdownPaths: articleHtmlPaths.map(markdownUrl),
     },
     null,
     2
@@ -1460,12 +1890,15 @@ writeFileSync(
 );
 
 const baseSitemapPaths = ['/', '/changelog'];
-const sitemapPaths = [...new Set([...baseSitemapPaths, ...htmlPaths, ...systemDesignHtmlPaths])];
+const sitemapPaths = [
+  ...new Set([...baseSitemapPaths, ...htmlPaths, ...systemDesignHtmlPaths, ...articleHtmlPaths]),
+];
+const sitemapLastmod = (path) => (path.startsWith('/articles') ? ARTICLES_UPDATED : '2026-08-28');
 writeFileSync(
   join(publicDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc><lastmod>2026-08-28</lastmod></url>`).join('\n')}
+${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc><lastmod>${sitemapLastmod(path)}</lastmod></url>`).join('\n')}
 </urlset>
 `
 );
@@ -1484,6 +1917,7 @@ practice, an observable artifact, an explain-back, and scheduled review.
 
 - [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
 - [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
+- [Learning guides](https://learn.significanthobbies.com/articles/): Long-form essays on evidence-backed engineering learning
 - [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
 - [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
 - [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
@@ -1524,6 +1958,9 @@ SWE Interview Prep is a mechanism-first learning OS. Its ${CONCEPTS.length} conc
 - ${absolute('/system-design/')}
 - ${absolute('/system-design/index.md')}
 - ${absolute('/system-design/catalog.json')}
+- ${absolute('/articles/')}
+- ${absolute('/articles/index.md')}
+- ${absolute('/articles/catalog.json')}
 - ${absolute('/api/ai')}
 - ${absolute('/.well-known/ai-catalog.json')}
 - ${absolute('/.well-known/agent-skills/index.json')}
@@ -1551,6 +1988,10 @@ ${SYSTEM_DESIGN_CASES.map(
         : systemDesignPracticeUrl(caseDefinition)
     )}) — ${caseDefinition.prompt}`
 ).join('\n')}
+
+## Articles
+
+${ARTICLES.map((article) => `- [${article.title}](${absolute(articleUrl(article.slug))}) — ${article.description}`).join('\n')}
 
 ## Product boundary
 
@@ -1605,6 +2046,7 @@ ${TRACKS.map((track) => `- [${track.title}](${absolute(trackUrl(track.id))}) —
 
 - [Curriculum hub](${absolute('/curriculum/')})
 - [System-design case library](${absolute('/system-design/')})
+- [Learning guides](${absolute('/articles/')})
 - [LLM inference at 10K RPS](${absolute('/system-design/llm-inference-10k-rps')})
 - [Complete Markdown catalog](${absolute('/curriculum/catalog.md')})
 - [Structured JSON catalog](${absolute('/curriculum/catalog.json')})
@@ -1682,6 +2124,7 @@ prerequisites, drills, interview cases, and build evidence.
 - [Product brief](https://learn.significanthobbies.com/index.md)
 - [Curriculum](https://learn.significanthobbies.com/curriculum/)
 - [System-design cases](https://learn.significanthobbies.com/system-design/)
+- [Learning guides](https://learn.significanthobbies.com/articles/)
 - [Learning-plan skill](https://learn.significanthobbies.com/skill.md)
 - [OpenAPI](https://learn.significanthobbies.com/openapi.json)
 `
@@ -1742,6 +2185,13 @@ writeFileSync(
           kind: 'collection',
           description: `${SYSTEM_DESIGN_CASES.length} staged interview cases and ${APPROVED_SYSTEM_DESIGN_CASES.length} approved worked guide`,
         },
+        {
+          id: 'articles',
+          url: absolute('/articles/'),
+          md: absolute('/articles/index.md'),
+          kind: 'collection',
+          description: `${ARTICLES.length} long-form guides on evidence-backed engineering learning`,
+        },
       ],
       dataResources: [
         {
@@ -1754,6 +2204,11 @@ writeFileSync(
           url: absolute('/system-design/catalog.json'),
           description:
             'Versioned interview case IDs, practice URLs, guide approvals, and concept mappings',
+        },
+        {
+          id: 'articles-json',
+          url: absolute('/articles/catalog.json'),
+          description: 'Published learning-guide slugs, titles, descriptions, and URLs',
         },
       ],
       auth: {
@@ -1778,6 +2233,7 @@ writeFileSync(
 Allow: /
 Allow: /curriculum/
 Allow: /system-design/
+Allow: /articles/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /index.md
@@ -1830,7 +2286,7 @@ const staticContent = `${startMarker}
             <p>Start without an account; guest progress stays in the current browser. Google sign-in keeps learning state across sessions. The product is currently maintenance-only and has no paid tier, subscription, or checkout.</p>
             <h2 style="font-size:1.5rem;margin:2rem 0 1rem;">Explore the curriculum</h2>
             <ul>${trackSummary}</ul>
-            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, or continue as a guest for the interactive learning workspace.</p>
+            <p><a href="/curriculum/" style="color:#67e8f9;">Browse the public curriculum</a>, <a href="/system-design/" style="color:#67e8f9;">practice system-design interview cases</a>, <a href="/articles/" style="color:#67e8f9;">read the learning guides</a>, or continue as a guest for the interactive learning workspace.</p>
           </section>
           ${endMarker}`;
 const updatedIndex = indexHtml.replace(
@@ -1845,6 +2301,7 @@ console.log('Generated public curriculum', {
   concepts: CONCEPTS.length,
   systemDesignCases: SYSTEM_DESIGN_CASES.length,
   systemDesignGuides: APPROVED_SYSTEM_DESIGN_CASES.length,
+  articles: ARTICLES.length,
   htmlPages: htmlPaths.length,
   sitemapUrls: sitemapPaths.length,
 });

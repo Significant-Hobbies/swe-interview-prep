@@ -199,11 +199,13 @@ describe('public curriculum publication', () => {
       'changelog',
       'curriculum',
       'system-design',
+      'articles',
     ]);
     expect(apiCatalog.surfaces.every((surface) => 'md' in surface)).toBe(true);
     expect(apiCatalog.dataResources.map((resource) => resource.id)).toEqual([
       'curriculum-json',
       'system-design-json',
+      'articles-json',
     ]);
   });
 
@@ -284,6 +286,7 @@ describe('public curriculum publication', () => {
       if (path === '/') return resolve(root, 'index.html');
       if (path === '/curriculum/') return resolve(root, 'public/curriculum/index.html');
       if (path === '/system-design/') return resolve(root, 'public/system-design/index.html');
+      if (path === '/articles/') return resolve(root, 'public/articles/index.html');
       if (path === '/changelog') return resolve(root, 'public/changelog.html');
       return resolve(root, `public${path}.html`);
     };
