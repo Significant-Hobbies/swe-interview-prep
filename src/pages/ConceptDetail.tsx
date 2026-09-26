@@ -7,7 +7,7 @@ import {
   Lock,
   Sparkles,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import ConceptLibrary from '../components/ConceptLibrary';
@@ -58,6 +58,21 @@ export default function ConceptDetail() {
   const { mastery, review } = useConceptMastery();
   const { gateStatus } = useGates();
   const [copied, setCopied] = useState(false);
+
+  // The SPA shell serves a generic <title>; give each concept its own title
+  // and point canonical at the static curriculum page so the duplicate
+  // /concepts/ vs /curriculum/concepts/ URLs consolidate ranking signals.
+  useEffect(() => {
+    if (!concept) return;
+    document.title = `${concept.name} · SWE Prep`;
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = `${window.location.origin}/curriculum/concepts/${concept.id}`;
+  }, [concept]);
 
   if (!concept) {
     return (
