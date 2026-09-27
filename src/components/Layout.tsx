@@ -1,5 +1,5 @@
 import { LogOut, Settings } from 'lucide-react';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { createElement, lazy, Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -118,14 +118,14 @@ export default function Layout() {
           <footer className="border-t border-white/[0.08]">
             <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 text-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
               <div className="md:col-span-2">
-                <saas-maker-newsletter-capture
-                  catalog-id="swe-interview-prep"
-                  product-name="SWE Interview Prep"
-                  kind="newsletter"
-                  source="footer"
-                  privacy-url="https://learn.significanthobbies.com/privacy"
-                  theme="dark"
-                />
+                {createElement('saas-maker-newsletter-capture', {
+                  'catalog-id': 'swe-interview-prep',
+                  'product-name': 'SWE Interview Prep',
+                  kind: 'newsletter',
+                  source: 'footer',
+                  'privacy-url': 'https://learn.significanthobbies.com/privacy',
+                  theme: 'dark',
+                })}
               </div>
               <div>
                 <p className="font-medium text-white/75">SWE Interview Prep</p>
