@@ -174,6 +174,7 @@ export default function Today() {
                 </div>
                 <Link
                   to={priority.action.href}
+                  onClick={() => window.appHealth?.track('cta.daily_priority')}
                   className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-medium text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
                 >
                   {priority.action.label}
@@ -276,6 +277,7 @@ export default function Today() {
           </div>
           <Link
             to="/practice"
+            onClick={() => window.appHealth?.track('cta.open_practice_workspace')}
             className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
           >
             Open workspace <ArrowRight className="h-4 w-4" />
@@ -305,6 +307,7 @@ export default function Today() {
             href={nextPractice ? `/practice?problem=${nextPractice.id}` : '/practice'}
             action={nextPractice ? 'Start problem' : 'Browse problems'}
             icon={Code2}
+            ctaEvent="cta.start_practice_problem"
           />
         </div>
       </section>
@@ -405,6 +408,7 @@ function DashboardStep({
   href,
   action,
   icon: Icon,
+  ctaEvent,
 }: {
   label: string;
   title: string;
@@ -412,6 +416,7 @@ function DashboardStep({
   href: string;
   action: string;
   icon: typeof BookOpen;
+  ctaEvent?: string;
 }) {
   return (
     <article className="flex min-h-60 flex-col bg-black p-6">
@@ -423,6 +428,7 @@ function DashboardStep({
       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/55">{detail}</p>
       <Link
         to={href}
+        onClick={ctaEvent ? () => window.appHealth?.track(ctaEvent) : undefined}
         className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 text-sm font-medium text-white/70 hover:text-white"
       >
         {action} <ArrowRight className="h-4 w-4" />

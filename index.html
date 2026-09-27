@@ -283,7 +283,7 @@
     <portfolio-project-strip current-project="swe-interview-prep"></portfolio-project-strip>
     <script>
       // The shared footer belongs to an interactive app, not to a loading
-      // screen. Loading its two cross-origin bundles late keeps them from
+      // screen. Loading its cross-origin bundles late keeps them from
       // competing with the dashboard module on slow links.
       //
       // `load` alone is not late enough: it fires when the initial response's
@@ -293,6 +293,11 @@
       // #lcp-shell is removed the moment the real route commits (or the error
       // boundary trips), which is the actual signal we want.
       function mountFooterSurfaces() {
+        const newsletterCapture = document.createElement('script');
+        newsletterCapture.type = 'module';
+        newsletterCapture.src = 'https://sassmaker.com/newsletter-capture.js';
+        document.body.append(newsletterCapture);
+
         const projectStrip = document.createElement('script');
         projectStrip.src = 'https://sassmaker.com/project-strip.js';
         projectStrip.dataset.project = 'swe-interview-prep';

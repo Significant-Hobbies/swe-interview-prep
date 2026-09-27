@@ -117,6 +117,16 @@ export default function Layout() {
         {!focus && (
           <footer className="border-t border-white/[0.08]">
             <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 text-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
+              <div className="md:col-span-2">
+                <saas-maker-newsletter-capture
+                  catalog-id="swe-interview-prep"
+                  product-name="SWE Interview Prep"
+                  kind="newsletter"
+                  source="footer"
+                  privacy-url="https://learn.significanthobbies.com/privacy"
+                  theme="dark"
+                />
+              </div>
               <div>
                 <p className="font-medium text-white/75">SWE Interview Prep</p>
                 <p className="mt-2 max-w-2xl leading-6 text-white/45">
