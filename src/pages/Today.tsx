@@ -307,7 +307,6 @@ export default function Today() {
             href={nextPractice ? `/practice?problem=${nextPractice.id}` : '/practice'}
             action={nextPractice ? 'Start problem' : 'Browse problems'}
             icon={Code2}
-            ctaEvent="cta.start_practice_problem"
           />
         </div>
       </section>
@@ -408,7 +407,6 @@ function DashboardStep({
   href,
   action,
   icon: Icon,
-  ctaEvent,
 }: {
   label: string;
   title: string;
@@ -416,7 +414,6 @@ function DashboardStep({
   href: string;
   action: string;
   icon: typeof BookOpen;
-  ctaEvent?: string;
 }) {
   return (
     <article className="flex min-h-60 flex-col bg-black p-6">
@@ -428,7 +425,11 @@ function DashboardStep({
       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/55">{detail}</p>
       <Link
         to={href}
-        onClick={ctaEvent ? () => window.appHealth?.track(ctaEvent) : undefined}
+        onClick={
+          action === 'Start problem'
+            ? () => window.appHealth?.track('cta.start_practice_problem')
+            : undefined
+        }
         className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 text-sm font-medium text-white/70 hover:text-white"
       >
         {action} <ArrowRight className="h-4 w-4" />
