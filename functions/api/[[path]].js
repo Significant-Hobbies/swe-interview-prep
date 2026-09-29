@@ -4,6 +4,8 @@ import { dispatchWarsRequest } from '../../shared/api/worker-wars.mjs';
 import { createD1Client } from '../../shared/db/d1-client.mjs';
 import { AIConfigError, generateStream } from '../../shared/lib/ai.mjs';
 import { syncReaderLearningFeed } from '../../shared/lib/reader-learning.mjs';
+import { createAppHealthClient } from '@saas-maker/app-health';
+import { withPagesFunctionHealth } from '@saas-maker/app-health/pages';
 import { withTiming } from '../_lib/timing.js';
 
 const AUTH_COOKIE_NAME = 'dsa_prep_auth';
@@ -355,7 +357,7 @@ async function handleAiChat(request, env) {
   });
 }
 
-export const onRequest = withTiming(async ({ request, env, params, next }) => {
+const handleApiRequest = withTiming(async ({ request, env, params, next }) => {
   const path = (params.path || []).join('/');
   try {
     // NOTE: each handler is `await`ed so a rejected promise is caught here —
@@ -406,3 +408,45 @@ export const onRequest = withTiming(async ({ request, env, params, next }) => {
     return json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 });
+
+function healthRoute(path) {
+  if (path === 'ai' || path === 'ai/chat') return `/api/${path}`;
+  if (
+    [
+      'auth/google',
+      'auth/logout',
+      'auth/verify',
+      'progress',
+      'learning',
+      'learning/reader',
+    ].includes(path)
+  ) {
+    return `/api/${path}`;
+  }
+  if (MCP_LEARNING_PATHS.has(path)) return `/api/${path}`;
+  // Wars routes can contain user supplied identifiers. Keep them aggregated
+  // under a fixed route label instead of exporting path segments.
+  if (path === 'wars' || path.startsWith('wars/')) return '/api/wars';
+  return null;
+}
+
+function appHealthClient({ env }) {
+  if (typeof env.APP_HEALTH_INGEST_KEY !== 'string' || !env.APP_HEALTH_INGEST_KEY) {
+    return null;
+  }
+  return createAppHealthClient({
+    key: env.APP_HEALTH_INGEST_KEY,
+    endpoint: 'https://ingest.sassmaker.com/v1/ingest',
+    runtime: 'worker',
+    disableTimer: true,
+    maxRetries: 1,
+    requestTimeoutMs: 1500,
+  });
+}
+
+export function onRequest(context) {
+  const path = (context.params.path || []).join('/');
+  const route = healthRoute(path);
+  if (!route || context.request.method === 'OPTIONS') return handleApiRequest(context);
+  return withPagesFunctionHealth({ route, client: appHealthClient }, handleApiRequest)(context);
+}
