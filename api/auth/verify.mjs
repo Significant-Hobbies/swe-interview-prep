@@ -26,7 +26,7 @@ function extractToken(req) {
   return null;
 }
 
-export async function requireAuth(req, res) {
+export async function requireAuth(req, res, { allowNonOwner = false } = {}) {
   if (req._authenticatedUser) return req._authenticatedUser;
   const token = extractToken(req);
   if (!token) {
@@ -47,7 +47,7 @@ export async function requireAuth(req, res) {
     return null;
   }
   const ownerEmail = process.env.OWNER_EMAIL?.toLowerCase();
-  if (ownerEmail && user.email?.toLowerCase() !== ownerEmail) {
+  if (!allowNonOwner && ownerEmail && user.email?.toLowerCase() !== ownerEmail) {
     res.status(403).json({ error: 'Forbidden' });
     return null;
   }
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const user = await requireAuth(req, res);
+  const user = await requireAuth(req, res, { allowNonOwner: true });
   if (!user) return;
 
   return res.status(200).json({ user });

@@ -1,7 +1,7 @@
 // Leftover local dispatcher — same Fetch handlers as production.
 // Production: functions/api/[[path]].js → dispatchLearningAction.
 import { requireAuth } from './auth/verify.mjs';
-import { AUTH_ACTIONS } from '../shared/api/learning-registry.mjs';
+import { AUTH_ACTIONS, USER_RECORD_ACTIONS } from '../shared/api/learning-registry.mjs';
 import { dispatchLearningAction } from '../shared/api/worker-learning.mjs';
 import { getDb } from '../shared/db/client.mjs';
 
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
   const action = req.query?.action;
   let user = req._authenticatedUser || null;
   if (!user && AUTH_ACTIONS.includes(action)) {
-    user = await requireAuth(req, res);
+    user = await requireAuth(req, res, { allowNonOwner: USER_RECORD_ACTIONS.includes(action) });
     if (!user) return;
   }
 
