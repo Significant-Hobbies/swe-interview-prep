@@ -7,6 +7,9 @@
 /** BYOK / heuristic — no user auth required. */
 const PUBLIC_ACTIONS = ['gaps', 'critique', 'role-fit', 'understanding', 'tag'];
 
+/** Account-owned records only; no owner library or deployment-funded AI access. */
+export const USER_RECORD_ACTIONS = ['artifacts', 'drills', 'projects'];
+
 /**
  * Signed-in user required.
  *

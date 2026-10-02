@@ -97,6 +97,11 @@ discarded anyway. The client reads the auth/public split from
 `shared/api/learning-registry.mjs`, the same list the server enforces, so
 adding an action gates the client automatically.
 
+Signed-in learners may synchronize their own artifacts, drills and project
+records. These three actions bind every read/write to the authenticated user
+and reject a mismatched account ID. Other learning actions retain the owner
+gate; signing in does not grant access to the owner's library or hosted AI.
+
 Outside an explicitly submitted AI action, the only request a guest makes is
 one `GET /api/auth/verify` on their first load, which is how the app discovers
 there is no session. It is not repeated. Role fit can use a learner-configured

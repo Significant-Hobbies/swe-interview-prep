@@ -1,4 +1,5 @@
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
+import { USER_RECORD_ACTIONS } from '../../shared/api/learning-registry.mjs';
 import { handleMcpLearningRequest } from '../../shared/api/mcp-learning.mjs';
 import { dispatchWarsRequest } from '../../shared/api/worker-wars.mjs';
 import { createD1Client } from '../../shared/db/d1-client.mjs';
@@ -272,7 +273,9 @@ async function handleProgress(request, env) {
 async function handleLearning(request, env) {
   await initDatabase(env);
   const authenticatedUser = await currentUser(request, env);
-  const user = authenticatedUser?.isOwner ? authenticatedUser : null;
+  const action = new URL(request.url).searchParams.get('action');
+  const user =
+    authenticatedUser?.isOwner || USER_RECORD_ACTIONS.includes(action) ? authenticatedUser : null;
   const client = getDb(env);
   return dispatchLearningAction({ request, client, user, env, json });
 }
