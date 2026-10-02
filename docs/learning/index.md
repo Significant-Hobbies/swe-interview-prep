@@ -22,6 +22,7 @@ A curated set of roadmaps and references for learning systems software in 2026. 
 | "I want the design rounds — LLD + HLD" | [System design](./system-design.md) |
 | "I want to learn how databases *actually work* (internals)" | [Disk-First DB roadmap](./db-roadmap.md) |
 | "I want one mental model that covers V8, JVM, Go runtime, vLLM, Workers" | [Runtime roadmap](./runtime-roadmap.md) |
+| "I want a first hands-on distributed-systems exercise" | [Maelstrom Echo lab](./maelstrom-echo.md) |
 | "I want to see how real ML systems work in production" | [ML system design case studies](./ml-case-studies.md) |
 | "I want retrieval / search / vector / RAG depth" | 9-Day Reset → 30-Day Retrieval → 90-Day AI Search & Infra → 12-Month Advanced AI Infra (in-app `/learn`) |
 | "I want OS, cloud, containers, distributed systems, and reliability" | Systems Foundations → Infrastructure & Platforms → Distributed Systems (in-app `/learn`) |
@@ -41,6 +42,7 @@ The four AI roadmaps are one progressive curriculum at four horizons — not fou
 | [System design](./system-design.md) | catalogue | LLD patterns + HLD components + the canonical "design X" practice problems |
 | [Disk-First Databases & RAM](./db-roadmap.md) | 12-month roadmap | DB internals: storage engines, execution, distributed |
 | [Runtime — what every runtime has to do](./runtime-roadmap.md) | 12-month roadmap | Cross-cutting: V8, JVM, Go, BEAM, vLLM, Workers as one shape |
+| [Maelstrom Echo lab](./maelstrom-echo.md) | one-session lab | Request/reply envelopes, correlation IDs, and protocol-level testing |
 | [ML system design case studies](./ml-case-studies.md) | catalogue | 450 production ML write-ups, grouped by category |
 | 9-Day Reset → 12-Month AI Infra | in-app `/learn` | Retrieval, ANN, RAG, storage progression |
 | Systems Foundations → Distributed Systems | in-app `/learn` | OS, hardware, networks, cloud, containers, orchestration, reliability, workflows |

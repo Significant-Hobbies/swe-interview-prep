@@ -46,6 +46,10 @@ const DOC_META: Record<string, DocMeta> = {
     blurb: 'Cross-cutting view of V8, JVM, Go, BEAM, vLLM, Workers — all do the same five jobs.',
     companionRoadmapId: 'runtime',
   },
+  'maelstrom-echo': {
+    title: 'Maelstrom Echo — a first distributed-systems lab',
+    blurb: 'A one-session exercise in message envelopes, reply correlation, and protocol testing.',
+  },
   'swe-landscape': {
     title: 'The Software Engineering Landscape (2026)',
     blurb: 'One page per major systems-software domain. Vocabulary first, depth on demand.',
