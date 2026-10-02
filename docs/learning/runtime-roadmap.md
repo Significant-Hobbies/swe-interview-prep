@@ -205,6 +205,10 @@ Pick one. Don't pick all four.
   capability API, measure per-tenant memory limit + CPU quota
   enforcement. Output: a multi-tenant evaluator runnable in one binary.
 
+For a smaller first distributed-systems exercise, use the [Maelstrom Echo
+lab](./maelstrom-echo.md). It focuses on message envelopes and request/reply
+correlation; it does not replace the larger synthesis projects above.
+
 ---
 
 ## Cross-runtime cheat sheet
