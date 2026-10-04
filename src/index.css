@@ -89,12 +89,6 @@ samp {
   outline-offset: 3px;
 }
 
-@media (max-width: 1024px) {
-  [data-saasmaker-widget] {
-    display: none !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
