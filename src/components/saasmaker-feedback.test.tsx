@@ -23,6 +23,15 @@ describe('SaaS Maker feedback binding', () => {
     document.body.append(container);
     root = createRoot(container);
     vi.stubGlobal('fetch', vi.fn());
+    const append = document.head.append.bind(document.head);
+    vi.spyOn(document.head, 'append').mockImplementation((...nodes) => {
+      // Happy DOM emits an immediate error for disabled external scripts.
+      // Keep the DOM node inert so each test controls load/error timing.
+      for (const node of nodes) {
+        if (node instanceof HTMLScriptElement) node.type = 'application/x-feedback-test';
+      }
+      append(...nodes);
+    });
     delete (window as Window & { SaasMakerFeedback?: unknown }).SaasMakerFeedback;
   });
 
