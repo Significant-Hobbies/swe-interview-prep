@@ -30,11 +30,17 @@ describe('SaaS Maker feedback binding', () => {
     await act(async () => root.unmount());
     container.remove();
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
     vi.useRealTimers();
     delete (window as Window & { SaasMakerFeedback?: unknown }).SaasMakerFeedback;
   });
 
   it('loads on intent, mounts with the catalog key, and reopens the same root', async () => {
+    vi.spyOn(window, 'location', 'get').mockReturnValue({
+      origin: 'https://learn.significanthobbies.com',
+      pathname: '/practice',
+      href: 'https://learn.significanthobbies.com/practice?invite=testfixture#private',
+    } as Location);
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
       json: async () => ({ api_key: TEST_KEY }),
@@ -66,7 +72,10 @@ describe('SaaS Maker feedback binding', () => {
     );
     expect(api.mountSharedFooterFeedback).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
-      expect.objectContaining({ apiKey: TEST_KEY })
+      expect.objectContaining({
+        apiKey: TEST_KEY,
+        pageUrl: 'https://learn.significanthobbies.com/practice',
+      })
     );
     const mountNode = api.mountSharedFooterFeedback.mock.calls[0][0];
     expect(mountNode.children).toHaveLength(0);

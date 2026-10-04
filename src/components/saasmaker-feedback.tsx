@@ -79,7 +79,7 @@ export function SaaSMakerFeedback() {
     trigger.current?.focus();
     const options = {
       apiKey: projectKey,
-      pageUrl: window.location.href,
+      pageUrl: window.location.origin + window.location.pathname,
       pageTitle: document.title,
     };
     try {
