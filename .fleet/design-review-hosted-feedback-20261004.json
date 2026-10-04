@@ -1,0 +1,226 @@
+{
+  "$schema": "fleet.design-review.v2",
+  "version": 2,
+  "project": "swe-interview-prep",
+  "target": "Existing hover feedback shared form parity",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "productSurfaces": {
+      "scope": "standalone",
+      "landing": "",
+      "app": "https://learn.significanthobbies.com/dashboard",
+      "reason": "Bounded existing application feedback adapter repair; the public login and curriculum surfaces retain their current identity and routes."
+    },
+    "pairedPreview": {
+      "landing": "",
+      "app": ""
+    },
+    "source": "existing",
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "ownerEvidence": {
+      "path": "",
+      "quote": ""
+    },
+    "supplied": "",
+    "before": ".fleet-local/evidence/hosted-feedback-20261004/before.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [
+        "https://sassmaker.com/feedback-launcher.js"
+      ],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "SWE Interview Prep helps software engineers build retained artifact-backed understanding through an evidence-gated study and practice loop.",
+      "purposeSource": "PRODUCT.md and canonical site-health/docs/project-dossiers/swe-interview-prep.yaml purposeContract",
+      "canonicalPurpose": "SWE Interview Prep is a personal learning OS that turns software-engineering study into retained, artifact-backed understanding.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Software engineers studying practical mechanisms and interview skills.",
+      "job": "Send feedback without interrupting active study or requiring an email address.",
+      "thesis": "Preserve the quiet black engineering workbench and existing bottom-right feedback affordance; use the maintained shared form.",
+      "system": "Geist typography; neutral near-black surfaces, near-white text, sparse sky focus accents, 44px trigger, existing floating bottom-right placement.",
+      "signature": "Feedback remains outside focused learning and shared routes so the evidence-gated practice workbench remains uninterrupted.",
+      "risk": "Lazy hosted first-party module can fail or drift; show retry state and verify actual deployed consent and focus behavior.",
+      "qualityBar": "Optional email, explicit unchecked consent and privacy link, keyboard entry/trap/Escape/return, one widget root, no duplicate submissions or initial bundle load."
+    }
+  },
+  "evidence": {
+    "platform": "web",
+    "productContinuity": {
+      "status": "not-applicable",
+      "reason": "Bounded existing application feedback adapter repair; the public login and curriculum surfaces retain their current identity and routes.",
+      "reviewer": "",
+      "report": "artifacts/design/product-continuity.md",
+      "surfaces": {
+        "landing": "artifacts/design/landing.png",
+        "app": "artifacts/design/app.png"
+      },
+      "checks": {
+        "designSystem": {
+          "status": "pending",
+          "observation": ""
+        },
+        "identity": {
+          "status": "pending",
+          "observation": ""
+        },
+        "vocabulary": {
+          "status": "pending",
+          "observation": ""
+        },
+        "productTruth": {
+          "status": "pending",
+          "observation": ""
+        },
+        "handoff": {
+          "status": "pending",
+          "observation": ""
+        }
+      }
+    },
+    "slopScale": {
+      "platform": "web",
+      "posture": "advisory",
+      "reason": "",
+      "checkpoints": [
+        {
+          "stage": "iteration",
+          "status": "scanned",
+          "command": "node /Users/sarthak/Desktop/fleet/saas-maker/tooling/scripts/slop-score.mjs http://127.0.0.1:8794/dashboard --json",
+          "report": ".fleet-local/evidence/hosted-feedback-20261004/slop-full-app-iteration.json",
+          "findingsReview": "Geist, permanent dark workbench, and four-item path group are intentional existing DESIGN.md choices. Scan covers initial dashboard, not open modal; modal craft reviewed from actual captures and keyboard evidence."
+        },
+        {
+          "stage": "final",
+          "status": "scanned",
+          "command": "node /Users/sarthak/Desktop/fleet/saas-maker/tooling/scripts/slop-score.mjs http://127.0.0.1:8794/dashboard --json",
+          "report": ".fleet-local/evidence/hosted-feedback-20261004/slop-full-app-final.json",
+          "findingsReview": "Geist, permanent dark workbench, and four-item path group are intentional existing DESIGN.md choices. Scan covers initial dashboard, not open modal; modal craft reviewed from actual captures and keyboard evidence."
+        }
+      ]
+    },
+    "visualReview": {
+      "status": "pass",
+      "reviewer": "Root agent direct rendered review",
+      "direction": "existing-design",
+      "report": ".fleet-local/evidence/hosted-feedback-20261004/visual-review.md",
+      "checks": {
+        "hierarchy": {
+          "status": "pass",
+          "observation": "Direct line, type, required fields, optional fields, consent and Submit retain clear sequence in actual form captures."
+        },
+        "typography": {
+          "status": "pass",
+          "observation": "Geist workbench unchanged; dialog title, labels and focus are legible at all three widths; subdued consent noted in review."
+        },
+        "composition": {
+          "status": "pass",
+          "observation": "Actual guest dashboard remains behind a right-side desktop dialog; compact form has no horizontal overflow."
+        },
+        "identity": {
+          "status": "pass",
+          "observation": "Quiet black learning workbench preserved; shared navy Direct line form intentionally distinct; focused and shared routes remain uninterrupted."
+        },
+        "interaction": {
+          "status": "pass",
+          "observation": "Title gets focus; Tab wraps Submit to Close; Escape and Close restore Feedback; one dialog after reopen; focused study and public roadmap have zero feedback triggers."
+        },
+        "responsive": {
+          "status": "pass",
+          "observation": "Complete CI-built app captured at 390, 768 and 1440; required controls and consent visible, 44px trigger, no horizontal overflow."
+        }
+      }
+    },
+    "screenshots": [
+      {
+        "width": 390,
+        "path": ".fleet-local/evidence/hosted-feedback-20261004/full-app-after-390.png"
+      },
+      {
+        "width": 768,
+        "path": ".fleet-local/evidence/hosted-feedback-20261004/full-app-after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": ".fleet-local/evidence/hosted-feedback-20261004/full-app-after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "pnpm quality (GitHub Actions 37192953403 at e91fc369664c270dca8221bd2e69b0bc37d1d473)",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 35,
+      "maximum": 40,
+      "dimensions": {
+        "hierarchy": 7,
+        "typography": 7,
+        "composition": 7,
+        "identity": 6,
+        "interaction": 4,
+        "responsive": 4
+      }
+    },
+    "audit": {
+      "score": 17,
+      "maximum": 20,
+      "dimensions": {
+        "purpose": 4,
+        "accessibility": 5,
+        "behavior": 3,
+        "responsive": 3,
+        "performance": 2
+      }
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": []
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "not-required",
+    "note": "Preserve work follows the existing direction; this is not owner acceptance of the result."
+  }
+}

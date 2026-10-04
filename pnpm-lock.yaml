@@ -48,9 +48,6 @@ importers:
       '@saas-maker/app-health':
         specifier: https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz
         version: https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz
-      '@saas-maker/feedback':
-        specifier: ^0.2.1
-        version: 0.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       ai:
         specifier: 6.0.168
         version: 6.0.168(zod@4.4.3)
@@ -2210,12 +2207,6 @@ packages:
         optional: true
       hono:
         optional: true
-
-  '@saas-maker/feedback@0.2.1':
-    resolution: {integrity: sha512-ajtrH7t/hhzxrNzX2BU0i5nfGpXNu7w4EQCFBajsuFn255O29trRCu3VNL1NoQhWwypjEEdeaK4DqoEY4zd7rw==}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
 
   '@sindresorhus/is@7.2.0':
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
@@ -6308,11 +6299,6 @@ snapshots:
     optional: true
 
   '@saas-maker/app-health@https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz': {}
-
-  '@saas-maker/feedback@0.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
-    dependencies:
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
 
   '@sindresorhus/is@7.2.0': {}
 
