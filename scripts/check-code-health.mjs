@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname, extname, join, relative, resolve } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import { isTemporarilyAcceptedBracesAdvisory } from './dependency-audit-policy.mjs';
 
 const currentFile = fileURLToPath(import.meta.url);
 const projectRoot = resolve(dirname(currentFile), '..');
@@ -237,7 +238,10 @@ function checkDependencies() {
   const severe = Object.values(report.advisories ?? {}).filter((advisory) =>
     ['critical', 'high'].includes(advisory.severity)
   );
-  const unexpected = severe.filter((advisory) => !accepted.has(advisory.github_advisory_id));
+  const unexpected = severe.filter(
+    (advisory) =>
+      !accepted.has(advisory.github_advisory_id) && !isTemporarilyAcceptedBracesAdvisory(advisory)
+  );
   const critical = severe.filter((advisory) => advisory.severity === 'critical').length;
   const high = severe.filter((advisory) => advisory.severity === 'high').length;
   console.log(

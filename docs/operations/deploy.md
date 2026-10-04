@@ -44,7 +44,7 @@ When dispatched, `deploy.yml`:
 | `CLOUDFLARE_API_TOKEN` | Secret | Wrangler deploy (Pages Edit) |
 | `CLOUDFLARE_ACCOUNT_ID` | Variable | From Cloudflare dashboard |
 | `VITE_GOOGLE_CLIENT_ID` | Secret | Baked into SPA at build |
-| `VITE_SAASMAKER_API_KEY` | Secret | Feedback widget (optional) |
+| `VITE_SAASMAKER_API_KEY` | Secret | No longer required for the feedback launcher; it binds through SaaS Maker's public catalog capture-config endpoint |
 
 **Cloudflare Pages secrets** (runtime — set via `pnpm sync:pages-secrets`):
 
