@@ -60,7 +60,10 @@ describe('SaaS Maker feedback binding', () => {
 
   it.each([
     ['invalid key shape', { ok: true, json: async () => ({ api_key: 'wrong-project' }) }],
-    ['invented publishable suffix', { ok: true, json: async () => ({ api_key: 'pk_testfixture123_publishable' }) }],
+    [
+      'invented publishable suffix',
+      { ok: true, json: async () => ({ api_key: 'pk_testfixture123_publishable' }) },
+    ],
     ['unavailable binding', { ok: false, json: async () => ({}) }],
   ])('fails closed for %s', async (_case, response) => {
     vi.mocked(fetch).mockResolvedValue(response as Response);
@@ -79,7 +82,9 @@ describe('SaaS Maker feedback binding', () => {
     vi.mocked(fetch).mockImplementation((_input, init) => {
       requestSignal = init?.signal as AbortSignal;
       return new Promise((_resolve, reject) => {
-        requestSignal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')));
+        requestSignal?.addEventListener('abort', () =>
+          reject(new DOMException('Aborted', 'AbortError'))
+        );
       });
     });
 
