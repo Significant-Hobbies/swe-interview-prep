@@ -1,0 +1,211 @@
+{
+  "$schema": "fleet.design-review.v2",
+  "version": 2,
+  "project": "swe-interview-prep",
+  "target": "Existing hover feedback shared form parity",
+  "surfaceMode": "operate",
+  "mode": "preserve",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "productSurfaces": {
+      "scope": "standalone",
+      "landing": "",
+      "app": "https://learn.significanthobbies.com/dashboard",
+      "reason": "Bounded existing application feedback adapter repair; the public login and curriculum surfaces retain their current identity and routes."
+    },
+    "pairedPreview": {
+      "landing": "",
+      "app": ""
+    },
+    "source": "existing",
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "ownerEvidence": {
+      "path": "",
+      "quote": ""
+    },
+    "supplied": "",
+    "before": ".fleet-local/evidence/hosted-feedback-20261004/before.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [
+        "https://sassmaker.com/feedback-launcher.js"
+      ],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "SWE Interview Prep helps software engineers build retained artifact-backed understanding through an evidence-gated study and practice loop.",
+      "purposeSource": "PRODUCT.md and canonical site-health/docs/project-dossiers/swe-interview-prep.yaml purposeContract",
+      "canonicalPurpose": "SWE Interview Prep is a personal learning OS that turns software-engineering study into retained, artifact-backed understanding.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "Software engineers studying practical mechanisms and interview skills.",
+      "job": "Send feedback without interrupting active study or requiring an email address.",
+      "thesis": "Preserve the quiet black engineering workbench and existing bottom-right feedback affordance; use the maintained shared form.",
+      "system": "Geist typography; neutral near-black surfaces, near-white text, sparse sky focus accents, 44px trigger, existing floating bottom-right placement.",
+      "signature": "Feedback remains outside focused learning and shared routes so the evidence-gated practice workbench remains uninterrupted.",
+      "risk": "Lazy hosted first-party module can fail or drift; show retry state and verify actual deployed consent and focus behavior.",
+      "qualityBar": "Optional email, explicit unchecked consent and privacy link, keyboard entry/trap/Escape/return, one widget root, no duplicate submissions or initial bundle load."
+    }
+  },
+  "evidence": {
+    "platform": "web",
+    "productContinuity": {
+      "status": "not-applicable",
+      "reason": "Bounded existing application feedback adapter repair; the public login and curriculum surfaces retain their current identity and routes.",
+      "reviewer": "",
+      "report": "artifacts/design/product-continuity.md",
+      "surfaces": {
+        "landing": "artifacts/design/landing.png",
+        "app": "artifacts/design/app.png"
+      },
+      "checks": {
+        "designSystem": {
+          "status": "pending",
+          "observation": ""
+        },
+        "identity": {
+          "status": "pending",
+          "observation": ""
+        },
+        "vocabulary": {
+          "status": "pending",
+          "observation": ""
+        },
+        "productTruth": {
+          "status": "pending",
+          "observation": ""
+        },
+        "handoff": {
+          "status": "pending",
+          "observation": ""
+        }
+      }
+    },
+    "slopScale": {
+      "platform": "web",
+      "posture": "advisory",
+      "reason": "",
+      "checkpoints": []
+    },
+    "visualReview": {
+      "status": "pending",
+      "reviewer": "",
+      "direction": "",
+      "report": "artifacts/design/review.md",
+      "checks": {
+        "hierarchy": {
+          "status": "pending",
+          "observation": ""
+        },
+        "typography": {
+          "status": "pending",
+          "observation": ""
+        },
+        "composition": {
+          "status": "pending",
+          "observation": ""
+        },
+        "identity": {
+          "status": "pending",
+          "observation": ""
+        },
+        "interaction": {
+          "status": "pending",
+          "observation": ""
+        },
+        "responsive": {
+          "status": "pending",
+          "observation": ""
+        }
+      }
+    },
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "replace-with-project-check",
+      "status": "pending"
+    },
+    "critique": {
+      "score": 0,
+      "maximum": 40,
+      "dimensions": {
+        "hierarchy": 0,
+        "typography": 0,
+        "composition": 0,
+        "identity": 0,
+        "interaction": 0,
+        "responsive": 0
+      }
+    },
+    "audit": {
+      "score": 0,
+      "maximum": 20,
+      "dimensions": {
+        "purpose": 0,
+        "accessibility": 0,
+        "behavior": 0,
+        "responsive": 0,
+        "performance": 0
+      }
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": []
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "not-required",
+    "note": "Preserve work follows the existing direction; this is not owner acceptance of the result."
+  }
+}
