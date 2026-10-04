@@ -240,8 +240,7 @@ function checkDependencies() {
   );
   const unexpected = severe.filter(
     (advisory) =>
-      !accepted.has(advisory.github_advisory_id) &&
-      !isTemporarilyAcceptedBracesAdvisory(advisory)
+      !accepted.has(advisory.github_advisory_id) && !isTemporarilyAcceptedBracesAdvisory(advisory)
   );
   const critical = severe.filter((advisory) => advisory.severity === 'critical').length;
   const high = severe.filter((advisory) => advisory.severity === 'high').length;

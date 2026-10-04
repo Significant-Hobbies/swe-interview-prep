@@ -40,7 +40,10 @@ test('rejects changed versions, paths, and additional findings', () => {
   );
   assert.equal(
     isTemporarilyAcceptedBracesAdvisory(
-      { ...knownFinding, findings: [{ ...knownFinding.findings[0], paths: ['.>unexpected>braces'] }] },
+      {
+        ...knownFinding,
+        findings: [{ ...knownFinding.findings[0], paths: ['.>unexpected>braces'] }],
+      },
       new Date('2026-10-04T00:00:00Z')
     ),
     false
