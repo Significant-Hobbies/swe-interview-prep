@@ -67,7 +67,6 @@
     "@excalidraw/excalidraw": "0.18.1",
     "@monaco-editor/react": "4.7.0",
     "@radix-ui/react-tooltip": "^1.2.16",
-    "@saas-maker/feedback": "^0.2.1",
     "ai": "6.0.168",
     "clsx": "^2.1.1",
     "fflate": "^0.8.3",
