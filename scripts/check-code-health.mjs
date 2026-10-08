@@ -228,13 +228,7 @@ function checkCycles() {
 function checkDependencies() {
   const report = parseJson(run('pnpm', ['audit', '--json'], { allowFailure: true }), 'pnpm audit');
   // Transitive major upgrades are tracked in #61; no unexpected severe advisory is allowed.
-  const accepted = new Set([
-    'GHSA-28wg-ghj8-5hjv',
-    'GHSA-2v37-7h3g-55p8',
-    'GHSA-v9p9-hfj2-hcw8',
-    'GHSA-vrm6-8vpv-qv8q',
-    'GHSA-vxpw-j846-p89q',
-  ]);
+  const accepted = new Set([]);
   const severe = Object.values(report.advisories ?? {}).filter((advisory) =>
     ['critical', 'high'].includes(advisory.severity)
   );
