@@ -299,14 +299,19 @@
         document.body.append(newsletterCapture);
 
         const projectStrip = document.createElement('script');
-        projectStrip.src = 'https://sassmaker.com/project-strip.js';
+        projectStrip.src = 'https://sassmaker.com/project-strip.js?v=precise-b0adaa67';
         projectStrip.dataset.project = 'swe-interview-prep';
+        projectStrip.dataset.theme = 'dark';
+        projectStrip.dataset.hostOnly = 'true';
         document.body.append(projectStrip);
 
         const askAi = document.createElement('script');
-        askAi.src = 'https://sassmaker.com/ai-chat-footer.js';
+        askAi.src = 'https://sassmaker.com/ai-chat-footer.js?v=precise-b0adaa67';
         askAi.dataset.name = 'SWE Interview Prep';
-        askAi.dataset.compose = 'false';
+        askAi.dataset.project = 'swe-interview-prep';
+        askAi.dataset.hostOnly = 'true';
+        askAi.dataset.surface = 'app';
+        askAi.dataset.theme = 'dark';
         document.body.append(askAi);
       }
 

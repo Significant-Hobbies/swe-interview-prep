@@ -192,10 +192,17 @@ function page({
       <nav class="breadcrumbs" aria-label="Breadcrumb">${breadcrumbHtml}</nav>
       ${body}
     </main>
-    <footer>
-      <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
-      <p><a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/llms.txt">AI index</a></p>
-    </footer>
+    <fleet-footer-extension data-fleet-footer-project="swe-interview-prep" product-name="SWE Interview Prep" theme="dark" surface="app" font-base="/fonts/fleet-footer-precise-v1/" art-src="/footer-art/swe-interview-prep.webp" art-alt="SWE Interview Prep: A practical learning workshop centers a small built artifact and review notebook. Concept sketches, a drill jig and an application folio form a physical sequence in the wings; the journey ends with evidence rather than a trophy." art-width="2171" art-height="724" art-position="50% 50%" art-credit="Original illustration for SWE Interview Prep">
+      <footer slot="navigation" data-fleet-footer-navigation>
+        <nav class="footer-routes" aria-label="SWE Interview Prep links">
+          <section><h2 data-fleet-footer-group-label>Learn</h2><a data-fleet-footer-primary href="/curriculum/">Curriculum</a><a href="/learn">Learning app</a><a href="/system-design/">System design</a><a href="/articles/">Engineering guides</a></section>
+          <section><h2 data-fleet-footer-group-label>Product</h2><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/llms.txt">AI index</a></section>
+        </nav>
+        <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
+      </footer>
+    </fleet-footer-extension>
+    <script src="https://sassmaker.com/project-strip.js?v=precise-b0adaa67" data-project="swe-interview-prep" data-theme="dark" data-host-only="true" defer></script>
+    <script src="https://sassmaker.com/ai-chat-footer.js?v=precise-b0adaa67" data-name="SWE Interview Prep" data-project="swe-interview-prep" data-theme="dark" data-surface="app" data-host-only="true" defer></script>
   </body>
 </html>
 `;
@@ -677,6 +684,13 @@ h4{color:#d4d4d8}
 .link-list li,.resource-list li{margin:.45em 0}
 .cta{margin-top:36px;font-weight:700}
 footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:.86rem}
+fleet-footer-extension{--fleet-footer-canvas:var(--bg);--fleet-footer-lower:var(--bg);--fleet-footer-border:var(--line);--fleet-footer-max-width:1120px;--fleet-footer-app-mobile-signature-size:2rem;color:var(--text)}
+fleet-footer-extension>footer[slot=navigation]{width:100%;margin:0;padding:0;border:0;font-size:14px}
+fleet-footer-extension .footer-routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+fleet-footer-extension .footer-routes section{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+fleet-footer-extension .footer-routes h2{margin:0 0 .5rem;color:var(--muted)}
+fleet-footer-extension .footer-routes a{text-decoration:none}
+fleet-footer-extension>footer[slot=navigation]>p{margin-top:1.5rem;font-size:12px;color:var(--muted)}
 @media(max-width:1023px){.site-header-inner{padding:0 16px}.desktop-nav{display:none}.compact-menu{display:block}}
 @media(max-width:520px){.brand span{display:none}main{padding-top:32px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;transition-duration:.001ms!important}}`;
