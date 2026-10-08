@@ -61,8 +61,8 @@ Full command reference: [`docs/development/commands.md`](docs/development/comman
 - **`JWT_SECRET` has no fallback.** The audit removed
   `dev-secret-change-in-production`. Rotation runbook:
   [`docs/operations/runbooks/rotate-jwt-secret.md`](docs/operations/runbooks/rotate-jwt-secret.md).
-- **Do not push, deploy, or open PRs without explicit user instruction.**
-  Make changes locally and leave them for human review.
+- **Do not deploy without explicit user instruction.**
+  Commit and push safe changes.
 
 ## Documentation navigation
 
@@ -131,12 +131,12 @@ intentionally does not restate it.
 
 ### Adding Tasks
 - Track product work in this repository's GitHub issues or OpenSpec changes.
-- Keep reusable cross-project automation in Workflows and Skills and private
+- Keep reusable cross-project automation in `saas-maker/tooling/` and private
   portfolio metadata in Site Health, not SaaS Maker.
 
 ### Using SaaS Maker
 - SaaS Maker is used only for the embedded feedback widget.
-- Site Health owns private portfolio metadata; Workflows and Skills owns shared
+- Site Health owns private portfolio metadata; `saas-maker/tooling/` owns shared
   automation. This product remains independently versioned and deployed.
 
 ### Free AI First
