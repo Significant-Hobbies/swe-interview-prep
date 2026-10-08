@@ -43,3 +43,6 @@ cache.bin
 # Local agent logs / scratch
 *.agent.log
 .devin/
+
+# Private footer review and release evidence (machine-local)
+/.fleet-local/
