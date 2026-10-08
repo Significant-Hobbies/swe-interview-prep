@@ -1,5 +1,5 @@
 import { LogOut, Settings } from 'lucide-react';
-import { createElement, lazy, Suspense, useEffect, useState } from 'react';
+import { createElement, lazy, Suspense, useEffect, useState, type CSSProperties } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -114,43 +114,80 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        {!focus && (
-          <footer className="border-t border-white/[0.08]">
-            <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 text-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
-              <div className="md:col-span-2">
-                {createElement('saas-maker-newsletter-capture', {
-                  'catalog-id': 'swe-interview-prep',
-                  'product-name': 'SWE Interview Prep',
-                  kind: 'newsletter',
-                  source: 'footer',
-                  'privacy-url': 'https://learn.significanthobbies.com/privacy',
-                  theme: 'dark',
-                })}
-              </div>
-              <div>
-                <p className="font-medium text-white/75">SWE Interview Prep</p>
-                <p className="mt-2 max-w-2xl leading-6 text-white/45">
-                  Personal, maintenance-only learning software for turning interview study into
-                  retained, artifact-backed understanding. No paid tier or checkout.
-                </p>
-              </div>
-              <nav aria-label="Product information" className="flex flex-wrap gap-x-5 gap-y-3">
-                <Link to="/login" className="text-white/50 hover:text-white">
-                  How it works
-                </Link>
-                <a href="/curriculum/" className="text-white/50 hover:text-white">
-                  Curriculum
-                </a>
-                <Link to="/changelog" className="text-white/50 hover:text-white">
-                  Changelog
-                </Link>
-                <Link to="/privacy" className="text-white/50 hover:text-white">
-                  Privacy
-                </Link>
+        {!focus &&
+          createElement(
+            'fleet-footer-extension',
+            {
+              'data-fleet-footer-project': 'swe-interview-prep',
+              'product-name': 'SWE Interview Prep',
+              theme: 'dark',
+              surface: 'app',
+              'font-base': '/fonts/fleet-footer-precise-v1/',
+              'art-src': '/footer-art/swe-interview-prep.webp',
+              'art-alt':
+                'SWE Interview Prep: A practical learning workshop centers a small built artifact and review notebook. Concept sketches, a drill jig and an application folio form a physical sequence in the wings; the journey ends with evidence rather than a trophy.',
+              'art-width': '2171',
+              'art-height': '724',
+              'art-position': '50% 50%',
+              'art-credit': 'Original illustration for SWE Interview Prep',
+              className: 'block w-full text-white/75',
+              style: {
+                '--fleet-footer-canvas': '#000000',
+                '--fleet-footer-lower': '#000000',
+                '--fleet-footer-max-width': '1400px',
+                '--fleet-footer-app-mobile-signature-size': '2rem',
+              } as CSSProperties,
+            },
+            <footer slot="navigation" data-fleet-footer-navigation>
+              <nav aria-label="Product information" className="grid gap-6 text-sm sm:grid-cols-2">
+                <section>
+                  <h2 data-fleet-footer-group-label className="mb-2 text-white/50">
+                    Learn
+                  </h2>
+                  <div className="flex flex-col items-start">
+                    <Link
+                      to="/login"
+                      data-fleet-footer-primary
+                      className="text-white/60 hover:text-white"
+                    >
+                      How it works
+                    </Link>
+                    <a href="/curriculum/" className="text-white/60 hover:text-white">
+                      Curriculum
+                    </a>
+                  </div>
+                </section>
+                <section>
+                  <h2 data-fleet-footer-group-label className="mb-2 text-white/50">
+                    Product
+                  </h2>
+                  <div className="flex flex-col items-start">
+                    <Link to="/changelog" className="text-white/60 hover:text-white">
+                      Changelog
+                    </Link>
+                    <Link to="/privacy" className="text-white/60 hover:text-white">
+                      Privacy
+                    </Link>
+                  </div>
+                </section>
               </nav>
-            </div>
-          </footer>
-        )}
+              <p className="mt-6 text-xs leading-6 text-white/50">
+                Personal, maintenance-only learning software for turning interview study into
+                retained, artifact-backed understanding. No paid tier or checkout.
+              </p>
+            </footer>,
+            createElement('saas-maker-newsletter-capture', {
+              slot: 'capture',
+              'catalog-id': 'swe-interview-prep',
+              'product-name': 'SWE Interview Prep',
+              kind: 'newsletter',
+              source: 'footer',
+              'privacy-url': 'https://learn.significanthobbies.com/privacy',
+              theme: 'dark',
+              layout: 'compact',
+              integrated: '',
+            })
+          )}
 
         <Suspense fallback={null}>
           <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
