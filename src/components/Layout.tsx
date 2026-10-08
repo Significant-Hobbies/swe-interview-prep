@@ -114,19 +114,17 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        {!focus && (
-          <footer className="border-t border-white/[0.08]">
+        {!focus && createElement("fleet-footer-extension", {
+          "product-name": "SWE Interview Prep",
+          "data-fleet-footer-project": "swe-interview-prep",
+          "art-src": "https://sassmaker.com/footer-art/swe-interview-prep.webp",
+          surface: "app",
+          theme: "dark",
+          className: "block text-white/75",
+        },
+          <footer slot="navigation" data-fleet-footer-navigation className="border-t border-white/[0.08]">
             <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 text-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
-              <div className="md:col-span-2">
-                {createElement('saas-maker-newsletter-capture', {
-                  'catalog-id': 'swe-interview-prep',
-                  'product-name': 'SWE Interview Prep',
-                  kind: 'newsletter',
-                  source: 'footer',
-                  'privacy-url': 'https://learn.significanthobbies.com/privacy',
-                  theme: 'dark',
-                })}
-              </div>
+
               <div>
                 <p className="font-medium text-white/75">SWE Interview Prep</p>
                 <p className="mt-2 max-w-2xl leading-6 text-white/45">
@@ -149,7 +147,18 @@ export default function Layout() {
                 </Link>
               </nav>
             </div>
-          </footer>
+          </footer>,
+          createElement('saas-maker-newsletter-capture', {
+                  slot: 'capture',
+                  'catalog-id': 'swe-interview-prep',
+                  'product-name': 'SWE Interview Prep',
+                  kind: 'newsletter',
+                  source: 'footer',
+                  'privacy-url': 'https://learn.significanthobbies.com/privacy',
+                  theme: 'dark',
+                }),
+          createElement("ai-chat-footer", { "product-name": "SWE Interview Prep", slot: "ai", theme: "dark" }),
+          createElement("portfolio-project-strip", { "current-project": "swe-interview-prep", slot: "projects" }),
         )}
 
         <Suspense fallback={null}>

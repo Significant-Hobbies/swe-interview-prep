@@ -280,7 +280,6 @@
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <portfolio-project-strip current-project="swe-interview-prep"></portfolio-project-strip>
     <script>
       // The shared footer belongs to an interactive app, not to a loading
       // screen. Loading its cross-origin bundles late keeps them from
@@ -306,7 +305,10 @@
         const askAi = document.createElement('script');
         askAi.src = 'https://sassmaker.com/ai-chat-footer.js';
         askAi.dataset.name = 'SWE Interview Prep';
-        askAi.dataset.compose = 'false';
+        askAi.dataset.hostOnly = 'true';
+        askAi.dataset.project = 'swe-interview-prep';
+        askAi.dataset.surface = 'app';
+        askAi.dataset.theme = 'dark';
         document.body.append(askAi);
       }
 
