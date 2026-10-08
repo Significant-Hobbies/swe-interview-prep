@@ -7,7 +7,7 @@ import {
   Lock,
   Sparkles,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import ConceptLibrary from '../components/ConceptLibrary';
@@ -52,12 +52,37 @@ const RATINGS: { id: 'again' | 'hard' | 'good' | 'easy'; label: string; tone: st
   { id: 'easy', label: 'Easy', tone: 'emerald' },
 ];
 
+const CANONICAL_ORIGIN = 'https://learn.significanthobbies.com';
+
 export default function ConceptDetail() {
   const { id } = useParams();
   const concept = id ? CONCEPT_BY_ID[id] : undefined;
   const { mastery, review } = useConceptMastery();
   const { gateStatus } = useGates();
   const [copied, setCopied] = useState(false);
+
+  // The SPA shell serves a generic <title> and a site-root canonical. Give each
+  // concept its own title and point canonical at the static curriculum page so
+  // the duplicate /concepts/ and /curriculum/concepts/ URLs consolidate
+  // ranking signals. Restore both when the route changes.
+  useEffect(() => {
+    if (!concept) return;
+    const previousTitle = document.title;
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const previousHref = canonical?.getAttribute('href') ?? null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    document.title = `${concept.name} · SWE Prep`;
+    canonical.href = `${CANONICAL_ORIGIN}/curriculum/concepts/${concept.id}`;
+    return () => {
+      document.title = previousTitle;
+      if (previousHref === null) canonical.remove();
+      else canonical.setAttribute('href', previousHref);
+    };
+  }, [concept]);
 
   if (!concept) {
     return (
