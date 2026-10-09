@@ -54,7 +54,8 @@ describe('public curriculum publication', () => {
     const shell = homepage.match(/<div id="public-entry-shell">[\s\S]*?<\/section>\s*<\/div>/)?.[0];
 
     expect(shell).toBeTruthy();
-    // The root shell paints a skeleton of the dashboard it is about to become,
+    // For returning learners the root shell paints a skeleton of the dashboard
+    // it is about to become (first-time visitors get the landing, no skeleton),
     // never readable copy. The curriculum summary used to live here and read
     // as a marketing page that then redirected away on every cold start.
     expect(shell).toMatch(/<section[\s\S]*aria-hidden="true"/);

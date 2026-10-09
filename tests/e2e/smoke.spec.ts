@@ -15,7 +15,18 @@ test.beforeEach(async ({ context, page }) => {
 });
 
 test.describe('Learning OS smoke', () => {
-  test('root redirects to Dashboard and shows resumable learning state', async ({ page }) => {
+  test('root shows the landing to a first-time visitor', async ({ context, page }) => {
+    await context.addInitScript(() => localStorage.removeItem('swe-os:onboarding-v1'));
+    await page.goto('/');
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      'Prepare for interviews by building understanding you can demonstrate.'
+    );
+    await page.getByRole('link', { name: 'Start learning' }).first().click();
+    await expect(page).toHaveURL(/\/dashboard$/);
+  });
+
+  test('root redirects a returning learner to Dashboard', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/dashboard$/);
     await expect(

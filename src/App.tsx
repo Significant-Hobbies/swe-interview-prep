@@ -8,6 +8,7 @@ import { useAuth } from './contexts/AuthContext';
 import { trackPageView, trackReturned, trackSignup } from './lib/analytics';
 import { focusedRoute } from './lib/focusedRoute';
 import { removeLcpShell } from './lib/lcpShell';
+import { hasLearnerProgress } from './lib/learnerState';
 import { loadLocal, STORE_KEYS } from './lib/userStore';
 
 const SEEN_KEY = 'swe-interview-prep:seen';
@@ -25,17 +26,19 @@ function RouteLoading() {
 }
 
 const loadDashboard = () => import('./pages/Today');
+const loadHome = () => import('./pages/Home');
 
-// Dashboard is the default workspace. Start its module graph with the entry bundle
-// so the headline does not wait for the router's first lazy-import waterfall.
-if (
-  window.location.pathname === '/' ||
-  window.location.pathname === '/dashboard' ||
-  window.location.pathname === '/today'
-) {
+// Start the destination's module graph with the entry bundle so the headline
+// does not wait for the router's first lazy-import waterfall. `/` is the
+// landing for first-time visitors and the dashboard for returning learners.
+if (window.location.pathname === '/') {
+  void loadHome();
+  if (hasLearnerProgress()) void loadDashboard();
+} else if (window.location.pathname === '/dashboard' || window.location.pathname === '/today') {
   void loadDashboard();
 }
 
+const Home = lazy(loadHome);
 const Today = lazy(loadDashboard);
 const Onboarding = lazy(() => import('./pages/Onboarding'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
@@ -87,9 +90,10 @@ function AppReady({ children }: { children: React.ReactNode }) {
   const location = useLocation();
 
   useEffect(() => {
-    // The root route redirects to Today. Keep the initial-response shell in
-    // place until that lazy destination has committed, not merely until auth
-    // has finished or the entry bundle has started executing.
+    // The root route resolves to the landing or the dashboard. Keep the
+    // initial-response shell in place until that lazy destination has
+    // committed (the landing removes it itself), not merely until auth has
+    // finished or the entry bundle has started executing.
     if (location.pathname !== '/') removeLcpShell();
   }, [location.pathname]);
 
@@ -116,7 +120,7 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/play/scale" element={<Scale />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
+        <Route index element={<Home />} />
         <Route path="dashboard" element={<Today />} />
         <Route path="today" element={<Navigate to="/dashboard" replace />} />
         <Route path="onboarding" element={<Onboarding />} />
