@@ -447,103 +447,106 @@ const ANSWERS = [
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
-function Landing() {
-  // `/` keeps the pre-React shell up until its real destination commits.
-  useEffect(() => {
-    removeLcpShell();
-    document.title = 'SWE Interview Prep — Build understanding you can demonstrate';
-  }, []);
-
+function Hero() {
   return (
-    <div className="overflow-x-clip">
-      {/* Hero */}
-      <section className="relative" aria-labelledby="home-hero">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-16 pt-14 sm:px-8 md:pt-20 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-14 lg:pb-24 lg:pt-24">
-          <div>
-            <Eyebrow accent>Personal SWE learning OS · Interview prep</Eyebrow>
-            <Display
-              as="h1"
-              id="home-hero"
-              className="mt-6 text-[clamp(2.6rem,4.3vw,3.45rem)] lg:text-wrap"
-            >
-              Prepare for interviews <br className="hidden lg:block" />
-              by building understanding <br className="hidden lg:block" />
-              you can <span className="text-sky-300">demonstrate.</span>
-            </Display>
-            <p className="mt-7 max-w-[34rem] text-[17px] leading-[1.65] text-white/60">
-              Learn a mechanism, practise it in code or a diagram, explain it back in your own
-              words, and let FSRS bring it back right before you would have forgotten it.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <PrimaryCta>Start learning</PrimaryCta>
-              <a
-                href="/curriculum/"
-                className="inline-flex min-h-11 items-center gap-1 text-sm text-white/55 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
-              >
-                Browse the curriculum <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
-            <p className="mt-5 font-mono text-[11px] tracking-[0.04em] text-white/35">
-              Free · no account needed · progress stays in this browser
-            </p>
-          </div>
-          <LoopVisual />
-        </div>
-
-        {/* The loop, in one line each */}
-        <div className="border-y border-white/[0.07]">
-          <ol className="mx-auto grid max-w-[1200px] grid-cols-1 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
-            {LOOP.map((item, index) => (
-              <li
-                key={item.label}
-                className={`py-6 sm:pr-6 ${index > 0 ? 'border-t border-white/[0.07] sm:border-t-0' : ''} ${
-                  index >= 2 ? 'sm:border-t sm:border-white/[0.07] lg:border-t-0' : ''
-                } lg:border-l lg:border-white/[0.07] lg:pl-6 lg:first:border-l-0 lg:first:pl-0`}
-              >
-                <p className="font-mono text-[11px] text-white/35">
-                  {item.step} <span className="ml-1 text-white/80">{item.label}</span>
-                </p>
-                <p className="mt-2 text-[13px] leading-5 text-white/50">{item.line}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Statement */}
-      <section className="border-b border-white/[0.07] bg-[#050505]">
-        <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-20 lg:py-32">
-          <Display className="text-[clamp(2.2rem,4.6vw,3.9rem)]">
-            Reading about a mechanism is not the same as being able to explain it.
+    <section className="relative" aria-labelledby="home-hero">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-16 pt-14 sm:px-8 md:pt-20 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-14 lg:pb-24 lg:pt-24">
+        <div>
+          <Eyebrow accent>Personal SWE learning OS · Interview prep</Eyebrow>
+          <Display
+            as="h1"
+            id="home-hero"
+            className="mt-6 text-[clamp(2.6rem,4.3vw,3.45rem)] lg:text-wrap"
+          >
+            Prepare for interviews <br className="hidden lg:block" />
+            by building understanding <br className="hidden lg:block" />
+            you can <span className="text-sky-300">demonstrate.</span>
           </Display>
-          <div className="lg:pt-3">
-            <p className="text-lg font-semibold tracking-tight text-white">
-              That gap is the interview.
-            </p>
-            <p className="mt-3 text-[15px] leading-7 text-white/55">
-              Every concept here ends in something you made or said: running code, a diagram, a
-              decision, an explanation. Mastery is what you demonstrated, not pages you read.
-            </p>
+          <p className="mt-7 max-w-[34rem] text-[17px] leading-[1.65] text-white/60">
+            Learn a mechanism, practise it in code or a diagram, explain it back in your own words,
+            and let FSRS bring it back right before you would have forgotten it.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <PrimaryCta>Start learning</PrimaryCta>
+            <a
+              href="/curriculum/"
+              className="inline-flex min-h-11 items-center gap-1 text-sm text-white/55 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
+            >
+              Browse the curriculum <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </div>
-        </div>
-      </section>
-
-      {/* One loop */}
-      <section className="border-b border-white/[0.07]" aria-labelledby="home-loop">
-        <div className="mx-auto grid max-w-[1200px] gap-6 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:items-end lg:gap-20 lg:py-20">
-          <div>
-            <Eyebrow>One loop, every concept</Eyebrow>
-            <Display id="home-loop" className="mt-4 text-[clamp(2.2rem,5vw,4rem)]">
-              Learn. Practise. Explain. Review.
-            </Display>
-          </div>
-          <p className="max-w-md text-[15px] leading-7 text-white/55">
-            DSA, system design, backend, AI systems, and behavioural rounds share one mastery model
-            instead of five separate tools.
+          <p className="mt-5 font-mono text-[11px] tracking-[0.04em] text-white/35">
+            Free · no account needed · progress stays in this browser
           </p>
         </div>
-      </section>
+        <LoopVisual />
+      </div>
 
+      {/* The loop, in one line each */}
+      <div className="border-y border-white/[0.07]">
+        <ol className="mx-auto grid max-w-[1200px] grid-cols-1 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
+          {LOOP.map((item, index) => (
+            <li
+              key={item.label}
+              className={`py-6 sm:pr-6 ${index > 0 ? 'border-t border-white/[0.07] sm:border-t-0' : ''} ${
+                index >= 2 ? 'sm:border-t sm:border-white/[0.07] lg:border-t-0' : ''
+              } lg:border-l lg:border-white/[0.07] lg:pl-6 lg:first:border-l-0 lg:first:pl-0`}
+            >
+              <p className="font-mono text-[11px] text-white/35">
+                {item.step} <span className="ml-1 text-white/80">{item.label}</span>
+              </p>
+              <p className="mt-2 text-[13px] leading-5 text-white/50">{item.line}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Statement() {
+  return (
+    <section className="border-b border-white/[0.07] bg-[#050505]">
+      <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-20 lg:py-32">
+        <Display className="text-[clamp(2.2rem,4.6vw,3.9rem)]">
+          Reading about a mechanism is not the same as being able to explain it.
+        </Display>
+        <div className="lg:pt-3">
+          <p className="text-lg font-semibold tracking-tight text-white">
+            That gap is the interview.
+          </p>
+          <p className="mt-3 text-[15px] leading-7 text-white/55">
+            Every concept here ends in something you made or said: running code, a diagram, a
+            decision, an explanation. Mastery is what you demonstrated, not pages you read.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LoopIntro() {
+  return (
+    <section className="border-b border-white/[0.07]" aria-labelledby="home-loop">
+      <div className="mx-auto grid max-w-[1200px] gap-6 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:items-end lg:gap-20 lg:py-20">
+        <div>
+          <Eyebrow>One loop, every concept</Eyebrow>
+          <Display id="home-loop" className="mt-4 text-[clamp(2.2rem,5vw,4rem)]">
+            Learn. Practise. Explain. Review.
+          </Display>
+        </div>
+        <p className="max-w-md text-[15px] leading-7 text-white/55">
+          DSA, system design, backend, AI systems, and behavioural rounds share one mastery model
+          instead of five separate tools.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Features() {
+  return (
+    <>
       {FEATURES.map((feature, index) => (
         <section key={feature.eyebrow} className="border-b border-white/[0.07]">
           <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-28">
@@ -558,99 +561,132 @@ function Landing() {
           </div>
         </section>
       ))}
+    </>
+  );
+}
 
-      {/* Coverage */}
-      <section className="border-b border-white/[0.07] bg-[#050505]" aria-labelledby="home-tracks">
-        <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:py-28">
-          <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-20">
-            <div>
-              <Eyebrow>What it covers</Eyebrow>
-              <Display id="home-tracks" className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
-                {counts.tracks} tracks. One mastery model.
-              </Display>
-            </div>
-            <p className="max-w-md text-[15px] leading-7 text-white/55">
-              From arrays and graphs to inference serving and agent systems, plus the interview
-              round that is not about code.
+function Coverage() {
+  return (
+    <section className="border-b border-white/[0.07] bg-[#050505]" aria-labelledby="home-tracks">
+      <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-20">
+          <div>
+            <Eyebrow>What it covers</Eyebrow>
+            <Display id="home-tracks" className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
+              {counts.tracks} tracks. One mastery model.
+            </Display>
+          </div>
+          <p className="max-w-md text-[15px] leading-7 text-white/55">
+            From arrays and graphs to inference serving and agent systems, plus the interview round
+            that is not about code.
+          </p>
+        </div>
+        <ul className="mt-12 grid grid-cols-2 gap-x-5 border-t border-white/[0.07] sm:gap-x-10 lg:grid-cols-3">
+          {curriculumSummary.tracks.map((track) => (
+            <li key={track.id} className="border-b border-white/[0.07] py-4">
+              <p className="text-[13px] font-medium leading-5 tracking-tight text-white/90 sm:text-[15px]">
+                {track.title}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function Fit() {
+  return (
+    <section className="border-b border-white/[0.07]">
+      <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-28">
+        <div>
+          <Eyebrow>An honest fit</Eyebrow>
+          <Display className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
+            Interview prep that takes understanding seriously.
+          </Display>
+        </div>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
+          <div>
+            <p className="text-[15px] font-semibold text-white">A fit</p>
+            <p className="mt-2 text-[15px] leading-7 text-white/55">
+              Engineers who want to explain why a B-tree, a rate limiter, or a KV cache behaves the
+              way it does, and still remember it in three weeks.
             </p>
           </div>
-          <ul className="mt-12 grid grid-cols-2 gap-x-5 border-t border-white/[0.07] sm:gap-x-10 lg:grid-cols-3">
-            {curriculumSummary.tracks.map((track) => (
-              <li key={track.id} className="border-b border-white/[0.07] py-4">
-                <p className="text-[13px] font-medium leading-5 tracking-tight text-white/90 sm:text-[15px]">
-                  {track.title}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Fit */}
-      <section className="border-b border-white/[0.07]">
-        <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-28">
           <div>
-            <Eyebrow>An honest fit</Eyebrow>
-            <Display className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
-              Interview prep that takes understanding seriously.
-            </Display>
-          </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-            <div>
-              <p className="text-[15px] font-semibold text-white">A fit</p>
-              <p className="mt-2 text-[15px] leading-7 text-white/55">
-                Engineers who want to explain why a B-tree, a rate limiter, or a KV cache behaves
-                the way it does, and still remember it in three weeks.
-              </p>
-            </div>
-            <div>
-              <p className="text-[15px] font-semibold text-white">Not a fit</p>
-              <p className="mt-2 text-[15px] leading-7 text-white/55">
-                An answer bank to memorise the night before. Nothing here hands you a solution, and
-                progress is earned, not clicked.
-              </p>
-            </div>
+            <p className="text-[15px] font-semibold text-white">Not a fit</p>
+            <p className="mt-2 text-[15px] leading-7 text-white/55">
+              An answer bank to memorise the night before. Nothing here hands you a solution, and
+              progress is earned, not clicked.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Answers */}
-      <section className="border-b border-white/[0.07]" aria-labelledby="home-answers">
-        <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:py-28">
-          <Display id="home-answers" className="text-[clamp(2.1rem,4.4vw,3.6rem)]">
-            A few honest answers.
+function Answers() {
+  return (
+    <section className="border-b border-white/[0.07]" aria-labelledby="home-answers">
+      <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:py-28">
+        <Display id="home-answers" className="text-[clamp(2.1rem,4.4vw,3.6rem)]">
+          A few honest answers.
+        </Display>
+        <div className="border-t border-white/[0.08]">
+          {ANSWERS.map((item) => (
+            <details key={item.q} className="group border-b border-white/[0.08]">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-white/90 marker:hidden [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <span
+                  aria-hidden="true"
+                  className="text-lg leading-none text-white/40 transition-transform duration-150 group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <p className="max-w-xl pb-5 text-[14px] leading-6 text-white/55">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Close() {
+  return (
+    <section>
+      <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 px-5 py-24 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:py-32">
+        <div>
+          <Eyebrow accent>Start with one concept</Eyebrow>
+          <Display className="mt-4 max-w-3xl text-[clamp(2.2rem,5vw,4.2rem)]">
+            Pick one mechanism. Prove you understand it.
           </Display>
-          <div className="border-t border-white/[0.08]">
-            {ANSWERS.map((item) => (
-              <details key={item.q} className="group border-b border-white/[0.08]">
-                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-white/90 marker:hidden [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <span
-                    aria-hidden="true"
-                    className="text-lg leading-none text-white/40 transition-transform duration-150 group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="max-w-xl pb-5 text-[14px] leading-6 text-white/55">{item.a}</p>
-              </details>
-            ))}
-          </div>
         </div>
-      </section>
+        <PrimaryCta>Start learning</PrimaryCta>
+      </div>
+    </section>
+  );
+}
 
-      {/* Close */}
-      <section>
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 px-5 py-24 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:py-32">
-          <div>
-            <Eyebrow accent>Start with one concept</Eyebrow>
-            <Display className="mt-4 max-w-3xl text-[clamp(2.2rem,5vw,4.2rem)]">
-              Pick one mechanism. Prove you understand it.
-            </Display>
-          </div>
-          <PrimaryCta>Start learning</PrimaryCta>
-        </div>
-      </section>
+function Landing() {
+  // `/` keeps the pre-React shell up until its real destination commits.
+  useEffect(() => {
+    removeLcpShell();
+    document.title = 'SWE Interview Prep — Build understanding you can demonstrate';
+  }, []);
+
+  return (
+    <div className="overflow-x-clip">
+      <Hero />
+      <Statement />
+      <LoopIntro />
+      <Features />
+      <Coverage />
+      <Fit />
+      <Answers />
+      <Close />
     </div>
   );
 }

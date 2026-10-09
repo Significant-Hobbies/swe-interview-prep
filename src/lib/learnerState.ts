@@ -10,7 +10,7 @@ import { STORE_KEYS } from './userStore';
  * and the dashboard (returning learners). The LCP shell script in
  * `index.html` mirrors this list; keep the two in step.
  */
-export const LEARNER_PROGRESS_KEYS = [
+const LEARNER_PROGRESS_KEYS = [
   STORE_KEYS.mastery,
   STORE_KEYS.reviewMastery,
   STORE_KEYS.sweep,
