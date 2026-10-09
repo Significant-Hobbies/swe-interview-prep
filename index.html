@@ -244,7 +244,33 @@
         <div id="login-entry-shell"></div>
         <script>
           const initialPath = window.location.pathname;
-          if (initialPath !== '/') {
+          // `/` is the dashboard only for returning learners; first-time
+          // visitors get the landing, so painting a dashboard skeleton for
+          // them would promise the wrong page. Mirrors src/lib/learnerState.ts; the
+          // cached profile (dsa-prep-profile) means a signed-in learner.
+          function hasLearnerProgress() {
+            const keys = ['mastery', 'review-mastery-v1', 'sweep-v1', 'drills', 'artifacts',
+              'projects', 'notes', 'systems-labs-v1', 'learning-evidence-v1', 'active-roadmap',
+              'onboarding-v1'];
+            const has = (v) => {
+              if (v === null || v === undefined || v === false || v === '') return false;
+              if (Array.isArray(v)) return v.some(has);
+              if (typeof v === 'object') {
+                return Object.keys(v).some((k) => k !== 'schemaVersion' && k !== 'version' && has(v[k]));
+              }
+              return true;
+            };
+            try {
+              if (localStorage.getItem('dsa-prep-profile')) return true;
+              return keys.some((k) => {
+                const raw = localStorage.getItem('swe-os:' + k);
+                return raw ? has(JSON.parse(raw)) : false;
+              });
+            } catch {
+              return false;
+            }
+          }
+          if (initialPath !== '/' || !hasLearnerProgress()) {
             document.getElementById('public-entry-shell').hidden = true;
           }
           if (initialPath === '/login') {
