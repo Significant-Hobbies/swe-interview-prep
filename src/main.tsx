@@ -29,14 +29,27 @@ const tree = (
 
 createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
 
+// Idle callbacks can run before the lazy landing route has painted. Keep
+// PostHog and its optional bundles out of the initial loading waterfall.
+const monitoringEvents = ['pointerdown', 'keydown', 'touchstart', 'scroll'] as const;
+let monitoringStarted = false;
 const scheduleMonitoring = () => {
-  void import('./lib/foundry-monitoring').then((m) => m.installBrowserMonitoring());
-  flushAnalytics();
+  if (monitoringStarted) return;
+  monitoringStarted = true;
+  clearTimeout(monitoringTimer);
+  for (const event of monitoringEvents) {
+    window.removeEventListener(event, scheduleMonitoring);
+  }
+  void import('./lib/foundry-monitoring')
+    .then((m) => {
+      m.installBrowserMonitoring();
+      flushAnalytics();
+    })
+    .catch(() => {});
 };
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(scheduleMonitoring, { timeout: 3000 });
-} else {
-  setTimeout(scheduleMonitoring, 1);
+const monitoringTimer = setTimeout(scheduleMonitoring, 30000);
+for (const event of monitoringEvents) {
+  window.addEventListener(event, scheduleMonitoring, { passive: true, once: true });
 }
 
 const scheduleVitals = () => {
