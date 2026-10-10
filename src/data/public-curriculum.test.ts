@@ -106,7 +106,8 @@ describe('public curriculum publication', () => {
     const headers = readFileSync(resolve(root, 'public/_headers'), 'utf8');
     const rootRule = headers.slice(headers.indexOf('\n/\n'));
     const cacheControl = rootRule.match(/Cache-Control:([^\n]*)/)?.[1] ?? '';
-    const directive = (name: string) => Number(cacheControl.match(new RegExp(`${name}=(\\d+)`))?.[1] ?? 0);
+    const directive = (name: string) =>
+      Number(cacheControl.match(new RegExp(`${name}=(\\d+)`))?.[1] ?? 0);
 
     expect(directive('max-age')).toBe(0);
     expect(directive('s-maxage')).toBeLessThanOrEqual(300);
