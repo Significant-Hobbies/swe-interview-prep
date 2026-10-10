@@ -316,54 +316,5 @@
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // The shared footer belongs to an interactive app, not to a loading
-      // screen. Loading its cross-origin bundles late keeps them from
-      // competing with the dashboard module on slow links.
-      //
-      // `load` alone is not late enough: it fires when the initial response's
-      // subresources are done, which on a cold start is well before the lazy
-      // route chunk has committed. The footer then painted while the LCP
-      // shell was still up, so a loading screen grew a fully-rendered footer.
-      // #lcp-shell is removed the moment the real route commits (or the error
-      // boundary trips), which is the actual signal we want.
-      function mountFooterSurfaces() {
-        const newsletterCapture = document.createElement('script');
-        newsletterCapture.type = 'module';
-        newsletterCapture.src = 'https://sassmaker.com/newsletter-capture.js';
-        document.body.append(newsletterCapture);
-
-        const projectStrip = document.createElement('script');
-        projectStrip.src = 'https://sassmaker.com/project-strip.js?v=precise-b0adaa67';
-        projectStrip.dataset.project = 'swe-interview-prep';
-        projectStrip.dataset.theme = 'dark';
-        projectStrip.dataset.hostOnly = 'true';
-        document.body.append(projectStrip);
-
-        const askAi = document.createElement('script');
-        askAi.src = 'https://sassmaker.com/ai-chat-footer.js?v=precise-b0adaa67';
-        askAi.dataset.name = 'SWE Interview Prep';
-        askAi.dataset.project = 'swe-interview-prep';
-        askAi.dataset.hostOnly = 'true';
-        askAi.dataset.surface = 'app';
-        askAi.dataset.theme = 'dark';
-        // The app keeps its native floating feedback launcher (SaaSMakerFeedback),
-        // so the shared footer must not mount a second feedback entry point.
-        askAi.dataset.feedback = 'false';
-        document.body.append(askAi);
-      }
-
-      function whenAppPainted(run) {
-        if (!document.getElementById('lcp-shell')) return run();
-        const observer = new MutationObserver(() => {
-          if (document.getElementById('lcp-shell')) return;
-          observer.disconnect();
-          run();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-      }
-
-      window.addEventListener('load', () => whenAppPainted(mountFooterSurfaces));
-    </script>
   </body>
 </html>

@@ -3,6 +3,41 @@ import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
+import { renderStudioFooterHtml } from '@saas-maker/ui/footer-html';
+
+const studioFooterHtml = renderStudioFooterHtml({
+  product: 'SWE Interview Prep',
+  url: 'https://learn.significanthobbies.com',
+  catalogId: 'swe-interview-prep',
+  capture: 'newsletter',
+  variant: 'studio',
+  privacyUrl: 'https://learn.significanthobbies.com/privacy',
+  summary: 'Built for active learning: Concept → Drill → Build → Review → Apply.',
+  groups: [
+    {
+      title: 'Learn',
+      links: [
+        { label: 'Curriculum', href: '/curriculum/' },
+        { label: 'Learning app', href: '/learn' },
+        { label: 'System design', href: '/system-design/' },
+        { label: 'Engineering guides', href: '/articles/' },
+      ],
+    },
+    {
+      title: 'Product',
+      links: [
+        { label: 'About', href: '/about' },
+        { label: 'Privacy', href: '/privacy' },
+        { label: 'AI index', href: '/llms.txt' },
+      ],
+    },
+  ],
+  art: {
+    src: '/footer-art/swe-interview-prep.webp',
+    alt: 'SWE Interview Prep: A practical learning workshop centers a small built artifact and review notebook. Concept sketches, a drill jig and an application folio form a physical sequence in the wings; the journey ends with evidence rather than a trophy.',
+    position: '50% 50%',
+  },
+});
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, '..');
@@ -184,6 +219,8 @@ function page({
     <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
     <meta name="twitter:image" content="${origin}/og-image.svg">
     <link rel="stylesheet" href="/curriculum/styles.css">
+    <link rel="stylesheet" href="/footer.css">
+    <script type="module" src="/footer.js"></script>
     <script type="application/ld+json">${jsonLd(schema)}</script>
   </head>
   <body>
@@ -192,17 +229,7 @@ function page({
       <nav class="breadcrumbs" aria-label="Breadcrumb">${breadcrumbHtml}</nav>
       ${body}
     </main>
-    <fleet-footer-extension data-fleet-footer-project="swe-interview-prep" product-name="SWE Interview Prep" theme="dark" surface="app" font-base="/fonts/fleet-footer-precise-v1/" art-src="/footer-art/swe-interview-prep.webp" art-alt="SWE Interview Prep: A practical learning workshop centers a small built artifact and review notebook. Concept sketches, a drill jig and an application folio form a physical sequence in the wings; the journey ends with evidence rather than a trophy." art-width="2171" art-height="724" art-position="50% 50%" art-credit="Original illustration for SWE Interview Prep">
-      <footer slot="navigation" data-fleet-footer-navigation>
-        <nav class="footer-routes" aria-label="SWE Interview Prep links">
-          <section><h2 data-fleet-footer-group-label>Learn</h2><a data-fleet-footer-primary href="/curriculum/">Curriculum</a><a href="/learn">Learning app</a><a href="/system-design/">System design</a><a href="/articles/">Engineering guides</a></section>
-          <section><h2 data-fleet-footer-group-label>Product</h2><a href="/about">About</a><a href="/privacy">Privacy</a><a href="/llms.txt">AI index</a></section>
-        </nav>
-        <p>Built for active learning: Concept → Drill → Build → Review → Apply.</p>
-      </footer>
-    </fleet-footer-extension>
-    <script src="https://sassmaker.com/project-strip.js?v=precise-b0adaa67" data-project="swe-interview-prep" data-theme="dark" data-host-only="true" defer></script>
-    <script src="https://sassmaker.com/ai-chat-footer.js?v=precise-b0adaa67" data-name="SWE Interview Prep" data-project="swe-interview-prep" data-theme="dark" data-surface="app" data-host-only="true" defer></script>
+    <studio-footer data-mode="dark">${studioFooterHtml}</studio-footer>
   </body>
 </html>
 `;
@@ -630,7 +657,9 @@ function hubPage() {
   });
 }
 
-const styles = `:root{color-scheme:dark;--bg:#09090b;--panel:#141418;--text:#f7f7f8;--muted:#a1a1aa;--line:#29292f;--accent:#67e8f9}
+// Page rules sit in the lowest layer so the SaaS Maker footer's own layered CSS
+// is never overridden by this page's bare element selectors (h2, a, p).
+const styles = `@layer page,theme,base,components,utilities;@layer page{:root{color-scheme:dark;--bg:#09090b;--panel:#141418;--text:#f7f7f8;--muted:#a1a1aa;--line:#29292f;--accent:#67e8f9}
 *{box-sizing:border-box}
 html{font-family:"Geist",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
 body{margin:0}
@@ -659,7 +688,7 @@ a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
 .compact-menu nav{position:absolute;right:0;top:calc(100% + 8px);width:min(352px,calc(100vw - 32px));max-height:calc(100vh - 80px);overflow-y:auto;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#000;padding:8px}
 .compact-menu nav p{margin:0;padding:8px 12px 4px;color:rgba(255,255,255,.38);font-size:.6875rem;font-weight:600}
 .compact-menu nav hr{margin:8px 12px;border:0;border-top:1px solid rgba(255,255,255,.08)}
-main,footer{width:min(1120px,calc(100% - 32px));margin:auto}
+main,body>footer{width:min(1120px,calc(100% - 32px));margin:auto}
 main{padding:48px 0 80px}
 .breadcrumbs{display:flex;gap:10px;flex-wrap:wrap;color:#71717a;font-size:.82rem;margin-bottom:28px}
 .breadcrumbs a{color:var(--muted);text-decoration:none}
@@ -683,17 +712,11 @@ h4{color:#d4d4d8}
 .link-list,.resource-list{padding-left:20px}
 .link-list li,.resource-list li{margin:.45em 0}
 .cta{margin-top:36px;font-weight:700}
-footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:.86rem}
-fleet-footer-extension{--fleet-footer-canvas:var(--bg);--fleet-footer-lower:var(--bg);--fleet-footer-border:var(--line);--fleet-footer-max-width:1120px;--fleet-footer-app-mobile-signature-size:2rem;color:var(--text)}
-fleet-footer-extension>footer[slot=navigation]{width:100%;margin:0;padding:0;border:0;font-size:14px}
-fleet-footer-extension .footer-routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
-fleet-footer-extension .footer-routes section{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
-fleet-footer-extension .footer-routes h2{margin:0 0 .5rem;color:var(--muted)}
-fleet-footer-extension .footer-routes a{text-decoration:none}
-fleet-footer-extension>footer[slot=navigation]>p{margin-top:1.5rem;font-size:12px;color:var(--muted)}
+body>footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:.86rem}
 @media(max-width:1023px){.site-header-inner{padding:0 16px}.desktop-nav{display:none}.compact-menu{display:block}}
 @media(max-width:520px){.brand span{display:none}main{padding-top:32px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;transition-duration:.001ms!important}}`;
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;transition-duration:.001ms!important}}}
+studio-footer input[name=email]{min-height:3rem}`;
 
 function inlineRichText(value) {
   return escapeHtml(value).replaceAll(/`([^`]+)`/g, '<code>$1</code>');

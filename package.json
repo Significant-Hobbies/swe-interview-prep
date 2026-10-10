@@ -60,13 +60,14 @@
     "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm quality:unused && pnpm quality:complexity && pnpm quality:duplication && pnpm quality:cycles && pnpm quality:dependencies && pnpm quality:suppressions && pnpm docs:validate && pnpm build && pnpm size && pnpm quality:hygiene"
   },
   "dependencies": {
-    "@saas-maker/app-health": "https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz",
     "@ai-sdk/openai-compatible": "2.0.41",
     "@cloudflare/realtimekit": "2.0.1",
     "@cloudflare/realtimekit-react": "2.0.1",
     "@excalidraw/excalidraw": "0.18.1",
     "@monaco-editor/react": "4.7.0",
     "@radix-ui/react-tooltip": "^1.2.16",
+    "@saas-maker/app-health": "https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz",
+    "@saas-maker/ui": "github:sass-maker/ui-library#v0.1.15&path:/packages/ui",
     "ai": "6.0.168",
     "clsx": "^2.1.1",
     "fflate": "^0.8.3",
