@@ -13,9 +13,8 @@
  * once by `installBrowserMonitoring()` (see `foundry-monitoring.ts`).
  */
 
-// PostHog is loaded lazily via requestIdleCallback (see flushAnalytics below)
-// so the 224 KB / 43 KB gzip posthog-js chunk never blocks initial render or
-// shows up as unused JS in Lighthouse. track* calls queue events until
+// PostHog is loaded after interaction or a 30-second fallback (see main.tsx)
+// to avoid competing with the initial route download. track* calls queue events until
 // flushAnalytics() runs; after that they fire directly.
 let posthogInstance: typeof import('posthog-js')['default'] | null = null;
 let posthogPromise: Promise<typeof import('posthog-js')> | null = null;
@@ -27,9 +26,8 @@ function getPosthog() {
 }
 
 /**
- * Import posthog-js and flush any queued events. Called from main.tsx via
- * requestIdleCallback so the chunk download happens during idle time, not
- * during the initial render where it would compete with LCP.
+ * Import posthog-js and flush any queued events. Called from main.tsx after
+ * browser monitoring initializes on interaction or the fallback timer.
  */
 export function flushAnalytics(): void {
   if (posthogInstance) {
@@ -108,7 +106,7 @@ export function trackEvent(event: string, properties: Record<string, unknown> = 
       // Analytics must NEVER break a user flow. Swallow and move on.
     }
   } else {
-    // Queue until flushAnalytics() loads posthog-js during idle time.
+    // Queue until flushAnalytics() loads posthog-js after deferred initialization.
     eventQueue.push({ event, properties: props });
   }
 }
