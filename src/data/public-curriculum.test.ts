@@ -94,24 +94,19 @@ describe('public curriculum publication', () => {
     expect(headings[0]).toContain('understanding you can prove');
   });
 
-  it('bounds how long a downstream cache can outlive the hashed assets the shell names', () => {
+  it('does not let a downstream cache outlive the hashed assets the shell names', () => {
     // `/` hardcodes content-hashed chunk filenames. A cached copy that
     // survives a deploy points at chunks the new deployment does not have,
     // Pages answers each with fallback HTML, and every dynamic import dies on
-    // a MIME check. A day-long `s-maxage=86400` shipped once and was observed
-    // live as `cf-cache-status: HIT` with `age: 52300`. A short edge TTL is
-    // allowed (it removes the per-request origin round trip, app-health#83),
-    // but it must stay at most five minutes plus one minute of SWR, and
-    // browsers must keep revalidating.
+    // a MIME check. This shipped as `s-maxage=86400` and was observed live as
+    // `cf-cache-status: HIT` with `age: 52300`.
     const headers = readFileSync(resolve(root, 'public/_headers'), 'utf8');
     const rootRule = headers.slice(headers.indexOf('\n/\n'));
-    const cacheControl = rootRule.match(/Cache-Control:([^\n]*)/)?.[1] ?? '';
-    const directive = (name: string) =>
-      Number(cacheControl.match(new RegExp(`${name}=(\\d+)`))?.[1] ?? 0);
 
-    expect(directive('max-age')).toBe(0);
-    expect(directive('s-maxage')).toBeLessThanOrEqual(300);
-    expect(directive('stale-while-revalidate')).toBeLessThanOrEqual(60);
+    expect(rootRule).toMatch(/Cache-Control:[^\n]*max-age=0/);
+    expect(rootRule).toMatch(/Cache-Control:[^\n]*must-revalidate/);
+    expect(rootRule).not.toMatch(/s-maxage=(?!0\b)\d+/);
+    expect(rootRule).not.toContain('stale-while-revalidate');
   });
 
   it('holds the shared footer back until the app has actually painted', () => {
