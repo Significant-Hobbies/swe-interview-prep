@@ -80,15 +80,6 @@ samp {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-[data-saasmaker-widget] .smw-trigger {
-  min-height: 44px;
-}
-
-[data-saasmaker-widget] .smw-trigger:focus-visible {
-  outline: 2px solid #ededed;
-  outline-offset: 3px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -98,4 +89,9 @@ samp {
     transition-duration: 0.001ms;
     scroll-behavior: auto;
   }
+}
+
+/* The footer's email field collapses to a sliver in its stacked mobile layout. */
+studio-footer input[name='email'] {
+  min-height: 3rem;
 }

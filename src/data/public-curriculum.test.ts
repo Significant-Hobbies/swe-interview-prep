@@ -109,14 +109,22 @@ describe('public curriculum publication', () => {
     expect(rootRule).not.toContain('stale-while-revalidate');
   });
 
-  it('holds the shared footer back until the app has actually painted', () => {
+  it('serves the SaaS Maker studio footer instead of the hosted Precise loaders', () => {
     const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
+    const curriculum = readFileSync(resolve(root, 'public/curriculum/index.html'), 'utf8');
 
-    // `load` fires long before a lazy route chunk commits on a cold start, so
-    // the footer used to render onto the loading shell.
-    expect(homepage).toContain('whenAppPainted(mountFooterSurfaces)');
-    expect(homepage).toMatch(/whenAppPainted[\s\S]*?getElementById\('lcp-shell'\)/);
-    expect(homepage).toMatch(/whenAppPainted[\s\S]*?MutationObserver/);
+    for (const page of [homepage, curriculum]) {
+      expect(page).not.toMatch(
+        /sassmaker\.com\/(ai-chat-footer|project-strip|newsletter-capture|feedback-launcher)/
+      );
+    }
+    expect(curriculum).toContain('<studio-footer');
+    expect(curriculum).toContain('data-fleet-footer="studio" data-catalog-id="swe-interview-prep"');
+    expect(curriculum).toContain('href="/footer.css"');
+    expect(curriculum).toContain('src="/footer.js"');
+    expect(readFileSync(resolve(root, 'src/components/StudioFooter.tsx'), 'utf8')).toContain(
+      "'catalog-id': 'swe-interview-prep'"
+    );
   });
 
   it('advertises every public developer surface in llms.txt', () => {

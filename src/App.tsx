@@ -3,10 +3,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
 import Layout from './components/Layout';
-import { SaaSMakerFeedback } from './components/saasmaker-feedback';
 import { useAuth } from './contexts/AuthContext';
 import { trackPageView, trackReturned, trackSignup } from './lib/analytics';
-import { focusedRoute } from './lib/focusedRoute';
 import { removeLcpShell } from './lib/lcpShell';
 import { hasLearnerProgress } from './lib/learnerState';
 import { loadLocal, STORE_KEYS } from './lib/userStore';
@@ -189,7 +187,6 @@ export default function App() {
   const { user, isGuest, loading, continueAsGuest } = useAuth();
   const location = useLocation();
   const isPublicShare = location.pathname.startsWith('/share/');
-  const isFocused = focusedRoute(location.pathname) !== null;
 
   useEffect(() => {
     try {
@@ -245,7 +242,6 @@ export default function App() {
           <Suspense fallback={<RouteLoading />}>{body}</Suspense>
         </ErrorBoundary>
       </AppReady>
-      {!isPublicShare && !isFocused && <SaaSMakerFeedback />}
     </>
   );
 }
