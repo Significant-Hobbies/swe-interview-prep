@@ -134,6 +134,7 @@ describe('public home representation cache', () => {
     { 'content-encoding': 'gzip' },
     { 'cache-control': 'no-store' },
     { 'cache-control': 'no-cache' },
+    { 'cache-control': 'public, max-age=0' },
     { 'cache-control': 'public, s-maxage=0' },
     { vary: 'Cookie' },
     { vary: '*' },
@@ -146,6 +147,16 @@ describe('public home representation cache', () => {
       expect(cache.entries.size).toBe(0);
     });
   }
+  it('allows the static shell max-age=0,must-revalidate policy in the internal cache', async () => {
+    const cache = new UrlCache();
+    vi.stubGlobal('caches', { default: cache });
+    const response = await respond('text/html', {}, '/', 'a'.repeat(64), 200, {
+      'cache-control': 'public, max-age=0, must-revalidate',
+    });
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+    expect(cache.entries.size).toBe(1);
+    expect([...cache.entries.values()][0].headers.get('cache-control')).toBe('public, max-age=60');
+  });
   for (const status of [401, 403, 404, 429, 500]) {
     it(`never stores ${status}`, async () => {
       const cache = new UrlCache();
