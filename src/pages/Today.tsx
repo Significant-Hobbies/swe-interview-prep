@@ -107,35 +107,6 @@ export default function Today() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
-      {!loadingPriority && priority.state === 'new-learner' && (
-        <section
-          aria-labelledby="product-intro"
-          className="mb-10 grid gap-5 border-b border-white/[0.08] pb-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
-        >
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-300/75">
-              Personal SWE learning OS
-            </p>
-            <h2
-              id="product-intro"
-              className="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-white sm:text-3xl"
-            >
-              Prepare for interviews by building understanding you can demonstrate.
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/55">
-              Learn a mechanism, practise it, produce code, diagrams, decisions, or an explanation,
-              then retrieve it again when FSRS schedules the review.
-            </p>
-          </div>
-          <Link
-            to="/login"
-            className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
-          >
-            How the system works <ArrowRight className="h-4 w-4" />
-          </Link>
-        </section>
-      )}
-
       <header aria-labelledby="daily-priority">
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-white/50">
           <span>Dashboard · Learn this today</span>
@@ -224,178 +195,198 @@ export default function Today() {
         </section>
       )}
 
-      <section className="mt-14 border-t border-white/[0.08] pt-8" aria-labelledby="learning-now">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm text-white/55">Learning</p>
-            <h2 id="learning-now" className="mt-2 text-2xl font-semibold tracking-tight text-white">
-              {activeRoadmap?.title ?? 'Choose a path'}
-            </h2>
-          </div>
-          {activeRoadmap && (
-            <Link
-              to={`/roadmaps/${activeRoadmap.id}`}
-              className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
-            >
-              View path <ArrowRight className="h-4 w-4" />
-            </Link>
-          )}
-        </div>
-
-        <div className="mt-6 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] md:grid-cols-2">
-          <DashboardStep
-            label="Learning now"
-            title={currentConcept?.name ?? 'No concept selected'}
-            detail={currentConcept?.description ?? 'Choose a path to build your learning queue.'}
-            href={currentConcept ? `/concepts/${currentConcept.id}` : '/learn'}
-            action={currentConcept ? 'Continue' : 'Choose path'}
-            icon={BookOpen}
-          />
-          <DashboardStep
-            label="Next in learning"
-            title={nextConcept?.name ?? 'Path checkpoint'}
-            detail={
-              nextConcept?.description ??
-              'Complete the current concept and the path will advance automatically.'
-            }
-            href={
-              nextConcept ? `/concepts/${nextConcept.id}` : `/roadmaps/${activeRoadmap?.id ?? ''}`
-            }
-            action="Preview"
-            icon={Route}
-          />
-        </div>
-      </section>
-
-      <section className="mt-12 border-t border-white/[0.08] pt-8" aria-labelledby="practice-now">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm text-white/55">Practice</p>
-            <h2 id="practice-now" className="mt-2 text-2xl font-semibold tracking-tight text-white">
-              Turn the concept into evidence.
-            </h2>
-          </div>
-          <Link
-            to="/practice"
-            onClick={() => window.appHealth?.track('cta.open_practice_workspace')}
-            className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+      {!loadingPriority && priority.reason !== 'new-learner' && (
+        <>
+          <section
+            className="mt-14 border-t border-white/[0.08] pt-8"
+            aria-labelledby="learning-now"
           >
-            Open workspace <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="mt-6 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] md:grid-cols-2">
-          <DashboardStep
-            label="Last practised"
-            title={lastPractice?.drill.title ?? 'No practice yet'}
-            detail={
-              lastPractice
-                ? `${lastPractice.entry.attempts} attempt${lastPractice.entry.attempts === 1 ? '' : 's'} · ${lastPractice.entry.status}`
-                : 'Select a problem in Practice to start building a history.'
-            }
-            href={lastPractice ? `/practice?problem=${lastPractice.drill.id}` : '/practice'}
-            action={lastPractice ? 'Open again' : 'Start practice'}
-            icon={History}
-          />
-          <DashboardStep
-            label="Next in practice"
-            title={nextPractice?.title ?? 'Choose a problem'}
-            detail={
-              nextPractice?.prompt ??
-              'The complete problem catalogue is available from the workspace selector.'
-            }
-            href={nextPractice ? `/practice?problem=${nextPractice.id}` : '/practice'}
-            action={nextPractice ? 'Start problem' : 'Browse problems'}
-            icon={Code2}
-          />
-        </div>
-      </section>
-
-      <section
-        className="mt-12 border-t border-white/[0.08] pt-8"
-        aria-labelledby="available-paths"
-      >
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm text-white/55">Available paths</p>
-            <h2
-              id="available-paths"
-              className="mt-2 text-2xl font-semibold tracking-tight text-white"
-            >
-              Go deeper when you need to.
-            </h2>
-          </div>
-          <Link
-            to="/explore"
-            className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
-          >
-            Browse all {ROADMAPS.length} paths <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-5 divide-y divide-white/[0.08] border-y border-white/[0.08]">
-          {ROADMAPS.filter((roadmap) => roadmap.id !== activeRoadmap?.id)
-            .slice(0, 4)
-            .map((roadmap) => (
-              <Link
-                key={roadmap.id}
-                to={`/roadmaps/${roadmap.id}`}
-                className="flex min-h-16 items-center justify-between gap-5 py-3 text-sm transition-colors hover:text-white"
-              >
-                <span>
-                  <span className="font-medium text-white/85">{roadmap.title}</span>
-                  <span className="ml-3 hidden text-white/50 sm:inline">{roadmap.goal}</span>
-                </span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
-              </Link>
-            ))}
-        </div>
-      </section>
-
-      <section className="mt-12 grid gap-10 border-t border-white/[0.08] pt-8 md:grid-cols-[1fr_0.65fr]">
-        <div>
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="text-lg font-semibold text-white">Recently visited</h2>
-            <Clock3 className="h-4 w-4 text-white/40" />
-          </div>
-          {recentVisits.length > 0 ? (
-            <nav className="mt-3 divide-y divide-white/[0.08]" aria-label="Recently visited">
-              {recentVisits.map((visit) => (
-                <Link
-                  key={visit.href}
-                  to={visit.href}
-                  className="flex min-h-12 items-center justify-between gap-4 text-sm text-white/60 hover:text-white"
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm text-white/55">Learning</p>
+                <h2
+                  id="learning-now"
+                  className="mt-2 text-2xl font-semibold tracking-tight text-white"
                 >
-                  <span>{visit.label}</span>
-                  <span className="font-mono text-[10px] text-white/60">
-                    {new Date(visit.visitedAt).toLocaleDateString(undefined, {
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </span>
+                  {activeRoadmap?.title ?? 'Choose a path'}
+                </h2>
+              </div>
+              {activeRoadmap && (
+                <Link
+                  to={`/roadmaps/${activeRoadmap.id}`}
+                  className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+                >
+                  View path <ArrowRight className="h-4 w-4" />
                 </Link>
-              ))}
-            </nav>
-          ) : (
-            <p className="mt-4 text-sm text-white/50">
-              Concepts, paths, and practice problems you open will appear here.
-            </p>
-          )}
-        </div>
+              )}
+            </div>
 
-        <div>
-          <h2 className="text-lg font-semibold text-white">Progress</h2>
-          <p className="mt-3 text-sm leading-relaxed text-white/55">
-            {masteryRollup.mastered} mastered · {masteryRollup.learning} learning ·{' '}
-            {plan?.reviewsDue ?? 0} reviews due
-          </p>
-          <Link
-            to="/progress"
-            className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm text-white/65 hover:text-white"
+            <div className="mt-6 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] md:grid-cols-2">
+              <DashboardStep
+                label="Learning now"
+                title={currentConcept?.name ?? 'No concept selected'}
+                detail={
+                  currentConcept?.description ?? 'Choose a path to build your learning queue.'
+                }
+                href={currentConcept ? `/concepts/${currentConcept.id}` : '/learn'}
+                action={currentConcept ? 'Continue' : 'Choose path'}
+                icon={BookOpen}
+              />
+              <DashboardStep
+                label="Next in learning"
+                title={nextConcept?.name ?? 'Path checkpoint'}
+                detail={
+                  nextConcept?.description ??
+                  'Complete the current concept and the path will advance automatically.'
+                }
+                href={
+                  nextConcept
+                    ? `/concepts/${nextConcept.id}`
+                    : `/roadmaps/${activeRoadmap?.id ?? ''}`
+                }
+                action="Preview"
+                icon={Route}
+              />
+            </div>
+          </section>
+
+          <section
+            className="mt-12 border-t border-white/[0.08] pt-8"
+            aria-labelledby="practice-now"
           >
-            Inspect progress <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm text-white/55">Practice</p>
+                <h2
+                  id="practice-now"
+                  className="mt-2 text-2xl font-semibold tracking-tight text-white"
+                >
+                  Turn the concept into evidence.
+                </h2>
+              </div>
+              <Link
+                to="/practice"
+                onClick={() => window.appHealth?.track('cta.open_practice_workspace')}
+                className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+              >
+                Open workspace <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="mt-6 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] md:grid-cols-2">
+              <DashboardStep
+                label="Last practised"
+                title={lastPractice?.drill.title ?? 'No practice yet'}
+                detail={
+                  lastPractice
+                    ? `${lastPractice.entry.attempts} attempt${lastPractice.entry.attempts === 1 ? '' : 's'} · ${lastPractice.entry.status}`
+                    : 'Select a problem in Practice to start building a history.'
+                }
+                href={lastPractice ? `/practice?problem=${lastPractice.drill.id}` : '/practice'}
+                action={lastPractice ? 'Open again' : 'Start practice'}
+                icon={History}
+              />
+              <DashboardStep
+                label="Next in practice"
+                title={nextPractice?.title ?? 'Choose a problem'}
+                detail={
+                  nextPractice?.prompt ??
+                  'The complete problem catalogue is available from the workspace selector.'
+                }
+                href={nextPractice ? `/practice?problem=${nextPractice.id}` : '/practice'}
+                action={nextPractice ? 'Start problem' : 'Browse problems'}
+                icon={Code2}
+              />
+            </div>
+          </section>
+
+          <section
+            className="mt-12 border-t border-white/[0.08] pt-8"
+            aria-labelledby="available-paths"
+          >
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm text-white/55">Available paths</p>
+                <h2
+                  id="available-paths"
+                  className="mt-2 text-2xl font-semibold tracking-tight text-white"
+                >
+                  Go deeper when you need to.
+                </h2>
+              </div>
+              <Link
+                to="/explore"
+                className="inline-flex min-h-11 items-center gap-2 text-sm text-white/60 hover:text-white"
+              >
+                Browse all {ROADMAPS.length} paths <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="mt-5 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+              {ROADMAPS.filter((roadmap) => roadmap.id !== activeRoadmap?.id)
+                .slice(0, 4)
+                .map((roadmap) => (
+                  <Link
+                    key={roadmap.id}
+                    to={`/roadmaps/${roadmap.id}`}
+                    className="flex min-h-16 items-center justify-between gap-5 py-3 text-sm transition-colors hover:text-white"
+                  >
+                    <span>
+                      <span className="font-medium text-white/85">{roadmap.title}</span>
+                      <span className="ml-3 hidden text-white/50 sm:inline">{roadmap.goal}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/40" />
+                  </Link>
+                ))}
+            </div>
+          </section>
+
+          <section className="mt-12 grid gap-10 border-t border-white/[0.08] pt-8 md:grid-cols-[1fr_0.65fr]">
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="text-lg font-semibold text-white">Recently visited</h2>
+                <Clock3 className="h-4 w-4 text-white/40" />
+              </div>
+              {recentVisits.length > 0 ? (
+                <nav className="mt-3 divide-y divide-white/[0.08]" aria-label="Recently visited">
+                  {recentVisits.map((visit) => (
+                    <Link
+                      key={visit.href}
+                      to={visit.href}
+                      className="flex min-h-12 items-center justify-between gap-4 text-sm text-white/60 hover:text-white"
+                    >
+                      <span>{visit.label}</span>
+                      <span className="font-mono text-[10px] text-white/60">
+                        {new Date(visit.visitedAt).toLocaleDateString(undefined, {
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </span>
+                    </Link>
+                  ))}
+                </nav>
+              ) : (
+                <p className="mt-4 text-sm text-white/50">
+                  Concepts, paths, and practice problems you open will appear here.
+                </p>
+              )}
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-white">Progress</h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/55">
+                {masteryRollup.mastered} mastered · {masteryRollup.learning} learning ·{' '}
+                {plan?.reviewsDue ?? 0} reviews due
+              </p>
+              <Link
+                to="/progress"
+                className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm text-white/65 hover:text-white"
+              >
+                Inspect progress <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

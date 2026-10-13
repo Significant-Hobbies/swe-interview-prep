@@ -26,14 +26,16 @@ test.describe('Learning OS smoke', () => {
     await expect(page).toHaveURL(/\/dashboard$/);
   });
 
-  test('root redirects a returning learner to Dashboard', async ({ page }) => {
+  test('root redirects a returning guest to a focused new-learner Dashboard', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/dashboard$/);
     await expect(
       page.getByRole('heading', { name: 'Build a causal model of Tokenization.', exact: true })
     ).toBeVisible();
-    await expect(page.getByText('Learning now')).toBeVisible();
-    await expect(page.getByText('Next in practice')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Start focused study' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Supporting session map' })).toBeVisible();
+    await expect(page.getByText('Learning now', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Next in practice', { exact: true })).toHaveCount(0);
   });
 
   test('Learn page searches the complete catalogue and keeps browse-all visible', async ({
