@@ -103,7 +103,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true, focus }: SiteHe
           ) : (
             <nav
               aria-label="Primary"
-              className="absolute left-1/2 hidden min-w-0 -translate-x-1/2 items-center justify-center gap-4 lg:flex xl:gap-6"
+              className="absolute left-1/2 hidden min-w-0 -translate-x-1/2 items-center justify-center gap-4 lg:flex! xl:gap-6"
             >
               {PRIMARY_NAV_ITEMS.map((item) => (
                 <DestinationLink
