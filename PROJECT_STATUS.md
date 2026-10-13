@@ -207,3 +207,21 @@ External: LeetCode API (import), multi-provider LLM APIs
 Open work is tracked only in [GitHub Issues](https://github.com/Significant-Hobbies/swe-interview-prep/issues).
 An open issue is a to-do, a linked pull request is in progress, and merge plus
 issue closure makes the work done.
+
+## Public entry source candidate (#137 / shared #248)
+
+Signed-out Start Learning links use the existing `/learn` route. Cookie-session
+verification still runs for cached signed-in profiles, and signed-in home
+routing still uses the dashboard; visitors without a cached profile skip the
+protected verification endpoint. No dashboard redesign was made.
+
+The public root uses build-content and format-specific Cache API lookup URLs,
+a 60-second internal TTL and downstream no-store headers. Missing markers and
+session/private/error responses bypass caching; a marker asset lookup remains
+on warm requests. Local guest rendering and URL-only doubles do not establish
+real edge or TTFB acceptance. The guarded production build still requires
+`VITE_GOOGLE_CLIENT_ID` and was not replaced with a synthetic OAuth setting.
+
+Human/device/production approval and real edge acceptance remain open under
+[#137](https://github.com/Significant-Hobbies/swe-interview-prep/issues/137) and
+[SaaS Maker #248](https://github.com/sass-maker/saas-maker/issues/248).

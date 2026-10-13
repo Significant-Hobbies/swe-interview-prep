@@ -11,7 +11,7 @@
     "verify:citations": "node scripts/verify-citations.mjs",
     "validate:wars-content": "node scripts/validate-software-wars-content.mjs",
     "audit:wars-topic": "node scripts/audit-software-wars-topic.mjs",
-    "build": "pnpm generate:public-curriculum && node scripts/validate-env.mjs build && vite build",
+    "build": "pnpm generate:public-curriculum && node scripts/validate-env.mjs build && vite build && node scripts/write-public-cache-generation.mjs",
     "lint": "biome check .",
     "preview": "vite preview",
     "fetch-library": "node scripts/fetch-library.mjs && node scripts/build-concept-index.mjs && biome format --write src/data/library",
