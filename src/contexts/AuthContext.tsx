@@ -63,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     }
 
-    if (isGuest) {
+    if (isGuest || !hasCachedProfile) {
       return () => {
         cancelled = true;
       };

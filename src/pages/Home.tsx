@@ -22,7 +22,7 @@ export default function Home() {
 
 const { counts } = curriculumSummary;
 
-const START = '/dashboard';
+const START = '/learn';
 
 const LOOP = [
   {
