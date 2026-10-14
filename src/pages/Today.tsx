@@ -1,3 +1,4 @@
+import { ConceptMasteryReadState } from '../components/ConceptMasteryReadState';
 import { ArrowRight, BookOpen, Clock3, Code2, History, Route, Target } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -23,7 +24,7 @@ import { recordSessionActivity } from '../lib/session';
 
 export default function Today() {
   const plan = useSessionPlan();
-  const { mastery, loading: masteryLoading } = useConceptMastery();
+  const { mastery, loading: masteryLoading, error: masteryError, refresh } = useConceptMastery();
   const { drills } = useDrillStore();
   const { profile } = useProfile();
   const { loading: authLoading } = useAuth();
@@ -53,6 +54,7 @@ export default function Today() {
     if (!activeRoadmap || !currentConcept) return null;
     const ids = roadmapConceptIds(activeRoadmap);
     const currentIndex = ids.indexOf(currentConcept.id);
+
     return (
       ids
         .slice(Math.max(0, currentIndex + 1))
@@ -104,6 +106,13 @@ export default function Today() {
     ]
   );
   const loadingPriority = authLoading || masteryLoading;
+
+  if (masteryError)
+    return (
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
+        <ConceptMasteryReadState error={masteryError} refresh={refresh} />
+      </div>
+    );
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
