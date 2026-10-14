@@ -11,6 +11,7 @@ import {
   DRILL_BY_ID,
   groupForTag,
   type Milestone,
+  type Roadmap,
   ROADMAP_BY_ID,
   roadmapConceptIds,
 } from '../data/learning-os';
@@ -43,10 +44,6 @@ export default function RoadmapDetail() {
     );
   }
 
-  const ids = roadmapConceptIds(roadmap);
-  const roll = rollupMastery(ids, mastery);
-  const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
-
   return (
     <PageShell>
       <Link
@@ -74,57 +71,95 @@ export default function RoadmapDetail() {
         <p className="mt-3 max-w-2xl text-sm text-white/70">{roadmap.description}</p>
       </div>
 
-      <ConceptMasteryReadBoundary loading={loading} error={error} refresh={refresh}>
-        <Card className="mb-6 p-4">
-          <div className="mb-1.5 flex items-center justify-between text-sm">
-            <span className="font-medium text-white/80">Overall progress</span>
-            <span className="text-white/40">
-              {roll.mastered}/{ids.length} concepts mastered
-            </span>
-          </div>
-          <ProgressBar value={pct} />
-          <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
-          <a
-            href={`/share/roadmaps/${roadmap.id}`}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 inline-block text-xs text-sky-400 hover:text-sky-300"
-          >
-            Share public roadmap →
-          </a>
-        </Card>
+      <RoadmapProgress
+        roadmap={roadmap}
+        mastery={mastery}
+        loading={loading}
+        error={error}
+        refresh={refresh}
+      />
 
-        <div className="mb-6">
-          <RoadmapGraph roadmap={roadmap} mastery={mastery} />
-        </div>
+      <div className="mb-6">
+        <RoadmapGraph
+          roadmap={roadmap}
+          mastery={mastery}
+          masteryUnavailable={loading || Boolean(error)}
+        />
+      </div>
 
-        {ROADMAP_DEEP_DIVE[roadmap.id] && (
-          <Link
-            to={`/learning/${ROADMAP_DEEP_DIVE[roadmap.id]}`}
-            className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
-          >
-            <div className="flex items-center gap-3">
-              <BookOpen className="h-4 w-4 shrink-0 text-white" />
-              <div>
-                <div className="text-sm font-semibold text-white">Read the deep-dive doc</div>
-                <div className="text-xs text-white/40">
-                  Full mechanism-first writeup with every external source — papers, blog series,
-                  talks.
-                </div>
+      {ROADMAP_DEEP_DIVE[roadmap.id] && (
+        <Link
+          to={`/learning/${ROADMAP_DEEP_DIVE[roadmap.id]}`}
+          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
+        >
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-4 w-4 shrink-0 text-white" />
+            <div>
+              <div className="text-sm font-semibold text-white">Read the deep-dive doc</div>
+              <div className="text-xs text-white/40">
+                Full mechanism-first writeup with every external source — papers, blog series,
+                talks.
               </div>
             </div>
-            <span className="shrink-0 text-xs font-medium text-white">Open →</span>
-          </Link>
-        )}
+          </div>
+          <span className="shrink-0 text-xs font-medium text-white">Open →</span>
+        </Link>
+      )}
 
-        <div className="space-y-5">
-          {roadmap.milestones.map((m, i) => (
-            <MilestoneBlock key={i} milestone={m} index={i} mastery={mastery} />
-          ))}
-        </div>
-      </ConceptMasteryReadBoundary>
+      <div className="space-y-5">
+        {roadmap.milestones.map((m, i) => (
+          <MilestoneBlock
+            key={i}
+            milestone={m}
+            index={i}
+            mastery={mastery}
+            masteryUnavailable={loading || Boolean(error)}
+          />
+        ))}
+      </div>
       <FurtherReading tags={roadmap.tracks} limit={15} />
     </PageShell>
+  );
+}
+
+function RoadmapProgress({
+  roadmap,
+  mastery,
+  loading,
+  error,
+  refresh,
+}: {
+  roadmap: Roadmap;
+  mastery: Record<string, MasteryEntry>;
+  loading: boolean;
+  error: string | null;
+  refresh: () => Promise<void>;
+}) {
+  const ids = roadmapConceptIds(roadmap);
+  const roll = rollupMastery(ids, mastery);
+  const pct = ids.length ? (roll.mastered / ids.length) * 100 : 0;
+
+  return (
+    <ConceptMasteryReadBoundary loading={loading} error={error} refresh={refresh}>
+      <Card className="mb-6 p-4">
+        <div className="mb-1.5 flex items-center justify-between text-sm">
+          <span className="font-medium text-white/80">Overall progress</span>
+          <span className="text-white/40">
+            {roll.mastered}/{ids.length} concepts mastered
+          </span>
+        </div>
+        <ProgressBar value={pct} />
+        <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
+        <a
+          href={`/share/roadmaps/${roadmap.id}`}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 inline-block text-xs text-sky-400 hover:text-sky-300"
+        >
+          Share public roadmap →
+        </a>
+      </Card>
+    </ConceptMasteryReadBoundary>
   );
 }
 
@@ -132,10 +167,12 @@ function MilestoneBlock({
   milestone,
   index,
   mastery,
+  masteryUnavailable,
 }: {
   milestone: Milestone;
   index: number;
   mastery: Record<string, MasteryEntry>;
+  masteryUnavailable: boolean;
 }) {
   const roll = rollupMastery(milestone.concepts, mastery);
   const pct = milestone.concepts.length ? (roll.mastered / milestone.concepts.length) * 100 : 0;
@@ -149,8 +186,7 @@ function MilestoneBlock({
           <p className="mt-0.5 text-sm text-white/50">{milestone.goal}</p>
         </div>
         <div className="w-24 shrink-0">
-          <ProgressBar value={pct} />
-          <div className="mt-1 text-right text-[11px] text-white/40">{Math.round(pct)}%</div>
+          <MilestoneProgress value={pct} unavailable={masteryUnavailable} />
         </div>
       </div>
 
@@ -161,8 +197,7 @@ function MilestoneBlock({
             {milestone.concepts.map((cid) => {
               const c = CONCEPT_BY_ID[cid];
               if (!c) return null;
-              const status = deriveConceptStatus(mastery[cid]);
-              const done = status === 'mastered';
+              const done = isKnownMastered(mastery[cid], masteryUnavailable);
               return (
                 <Link
                   key={cid}
@@ -231,4 +266,23 @@ function MilestoneBlock({
       </div>
     </Card>
   );
+}
+
+function MilestoneProgress({ value, unavailable }: { value: number; unavailable: boolean }) {
+  return (
+    <>
+      {unavailable ? (
+        <div className="h-1 rounded-full bg-white/10" aria-hidden="true" />
+      ) : (
+        <ProgressBar value={value} />
+      )}
+      <div className="mt-1 text-right text-[11px] text-white/40">
+        {unavailable ? 'Unavailable' : `${Math.round(value)}%`}
+      </div>
+    </>
+  );
+}
+
+function isKnownMastered(entry: MasteryEntry | undefined, unavailable: boolean) {
+  return !unavailable && deriveConceptStatus(entry) === 'mastered';
 }

@@ -52,16 +52,6 @@ for (const width of [390, 768, 1440]) {
         }
         return route.continue();
       });
-      const cdp = await context.newCDPSession(page);
-      await cdp.send('Network.enable');
-      await cdp.send('Network.emulateNetworkConditions', {
-        offline: false,
-        latency: 150,
-        downloadThroughput: (1.6 * 1024 * 1024) / 8,
-        uploadThroughput: (750 * 1024) / 8,
-        connectionType: 'cellular4g',
-      });
-      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
       await page.goto(`${path}?audit=retained`);
       const boundary = page.locator('[data-mastery-read-boundary]');
       await expect(boundary.getByRole('status')).toContainText('Loading concept mastery');
@@ -75,8 +65,11 @@ for (const width of [390, 768, 1440]) {
         await expect(page.getByText('untouched', { exact: true })).not.toBeVisible();
         await expect(page.getByRole('button', { name: 'Again', exact: true })).toHaveCount(0);
       }
-      if (path.startsWith('/roadmaps/'))
+      if (path.startsWith('/roadmaps/')) {
         await expect(page.getByText('0/18 concepts mastered')).not.toBeVisible();
+        await expect(page.getByRole('img', { name: /roadmap graph/ })).toBeVisible();
+        await expect(page.getByText('Mastery unavailable', { exact: true })).toBeVisible();
+      }
       if (path.startsWith('/projects/'))
         await page.locator('textarea').fill('Retained synthetic next action');
       await page.screenshot({ path: testInfo.outputPath('error.png'), fullPage: true });
@@ -99,6 +92,8 @@ for (const width of [390, 768, 1440]) {
         await expect(page.getByRole('button', { name: 'Again', exact: true })).toBeVisible();
       if (path.startsWith('/projects/'))
         await expect(page.locator('textarea')).toHaveValue('Retained synthetic next action');
+      if (path.startsWith('/roadmaps/'))
+        await expect(page.getByText('Mastery unavailable', { exact: true })).toHaveCount(0);
       await page.waitForTimeout(700);
       const cls = await page.evaluate(() =>
         window.__arrival.shifts

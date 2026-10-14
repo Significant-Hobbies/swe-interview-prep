@@ -24,7 +24,7 @@ export function ConceptMasteryReadBoundary({
         {children}
       </div>
       {unavailable && (
-        <div className="absolute inset-0 p-4 [&>div]:min-h-0">
+        <div className="absolute inset-0 flex items-center justify-center p-4 [&>div]:min-h-0 [&>div]:w-full [&>div]:max-w-md">
           <ConceptMasteryReadState error={error} refresh={refresh} />
         </div>
       )}

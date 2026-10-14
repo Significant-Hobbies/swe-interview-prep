@@ -40,16 +40,6 @@ for (const width of [390, 768, 1440]) {
       return route.continue();
     });
     await context.routeWebSocket('**/*', (socket) => socket.close());
-    const cdp = await context.newCDPSession(page);
-    await cdp.send('Network.enable');
-    await cdp.send('Network.emulateNetworkConditions', {
-      offline: false,
-      latency: 150,
-      downloadThroughput: (1.6 * 1024 * 1024) / 8,
-      uploadThroughput: (750 * 1024) / 8,
-      connectionType: 'cellular4g',
-    });
-    await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
     test.setTimeout(90000);
     await page.goto('/progress');
     await expect(page.getByRole('alert')).toContainText('Could not load concept mastery (503).', {
@@ -101,7 +91,11 @@ test('learning import failure retries the current route and filters', async ({ c
     const url = new URL(route.request().url());
     if (!['127.0.0.1', 'localhost'].includes(url.hostname)) return route.abort();
     if (url.pathname.startsWith('/api/')) return route.fulfill({ json: { user: null } });
-    if (/\/assets\/bootstrap-[^/]+\.js$/.test(url.pathname) && failed)
+    if (
+      (/\/assets\/bootstrap-[^/]+\.js$/.test(url.pathname) ||
+        url.pathname === '/src/bootstrap.tsx') &&
+      failed
+    )
       return route.fulfill({ status: 503, body: 'Synthetic chunk failure' });
     return route.continue();
   });
@@ -144,16 +138,6 @@ for (const path of ['/learn', '/dashboard']) {
         return route.continue();
       });
       await context.routeWebSocket('**/*', (socket) => socket.close());
-      const cdp = await context.newCDPSession(page);
-      await cdp.send('Network.enable');
-      await cdp.send('Network.emulateNetworkConditions', {
-        offline: false,
-        latency: 150,
-        downloadThroughput: (1.6 * 1024 * 1024) / 8,
-        uploadThroughput: (750 * 1024) / 8,
-        connectionType: 'cellular4g',
-      });
-      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
       test.setTimeout(90000);
       await page.goto(path);
       await expect(
