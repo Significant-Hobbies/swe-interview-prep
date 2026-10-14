@@ -1,3 +1,4 @@
+import { ConceptMasteryReadBoundary } from '../components/ConceptMasteryReadBoundary';
 import { ArrowLeft, BookOpen, CheckCircle2, Circle, Dumbbell, Hammer } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ const ROADMAP_DEEP_DIVE: Record<string, string> = {
 export default function RoadmapDetail() {
   const { id } = useParams();
   const roadmap = id ? ROADMAP_BY_ID[id] : undefined;
-  const { mastery } = useConceptMastery();
+  const { mastery, loading, error, refresh } = useConceptMastery();
 
   if (!roadmap) {
     return (
@@ -73,54 +74,55 @@ export default function RoadmapDetail() {
         <p className="mt-3 max-w-2xl text-sm text-white/70">{roadmap.description}</p>
       </div>
 
-      <Card className="mb-6 p-4">
-        <div className="mb-1.5 flex items-center justify-between text-sm">
-          <span className="font-medium text-white/80">Overall progress</span>
-          <span className="text-white/40">
-            {roll.mastered}/{ids.length} concepts mastered
-          </span>
+      <ConceptMasteryReadBoundary loading={loading} error={error} refresh={refresh}>
+        <Card className="mb-6 p-4">
+          <div className="mb-1.5 flex items-center justify-between text-sm">
+            <span className="font-medium text-white/80">Overall progress</span>
+            <span className="text-white/40">
+              {roll.mastered}/{ids.length} concepts mastered
+            </span>
+          </div>
+          <ProgressBar value={pct} />
+          <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
+          <a
+            href={`/share/roadmaps/${roadmap.id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-block text-xs text-sky-400 hover:text-sky-300"
+          >
+            Share public roadmap →
+          </a>
+        </Card>
+
+        <div className="mb-6">
+          <RoadmapGraph roadmap={roadmap} mastery={mastery} />
         </div>
-        <ProgressBar value={pct} />
-        <p className="mt-2 text-xs text-white/40">Goal: {roadmap.goal}</p>
-        <a
-          href={`/share/roadmaps/${roadmap.id}`}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-block text-xs text-sky-400 hover:text-sky-300"
-        >
-          Share public roadmap →
-        </a>
-      </Card>
 
-      <div className="mb-6">
-        <RoadmapGraph roadmap={roadmap} mastery={mastery} />
-      </div>
-
-      {ROADMAP_DEEP_DIVE[roadmap.id] && (
-        <Link
-          to={`/learning/${ROADMAP_DEEP_DIVE[roadmap.id]}`}
-          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
-        >
-          <div className="flex items-center gap-3">
-            <BookOpen className="h-4 w-4 shrink-0 text-white" />
-            <div>
-              <div className="text-sm font-semibold text-white">Read the deep-dive doc</div>
-              <div className="text-xs text-white/40">
-                Full mechanism-first writeup with every external source — papers, blog series,
-                talks.
+        {ROADMAP_DEEP_DIVE[roadmap.id] && (
+          <Link
+            to={`/learning/${ROADMAP_DEEP_DIVE[roadmap.id]}`}
+            className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
+          >
+            <div className="flex items-center gap-3">
+              <BookOpen className="h-4 w-4 shrink-0 text-white" />
+              <div>
+                <div className="text-sm font-semibold text-white">Read the deep-dive doc</div>
+                <div className="text-xs text-white/40">
+                  Full mechanism-first writeup with every external source — papers, blog series,
+                  talks.
+                </div>
               </div>
             </div>
-          </div>
-          <span className="shrink-0 text-xs font-medium text-white">Open →</span>
-        </Link>
-      )}
+            <span className="shrink-0 text-xs font-medium text-white">Open →</span>
+          </Link>
+        )}
 
-      <div className="space-y-5">
-        {roadmap.milestones.map((m, i) => (
-          <MilestoneBlock key={i} milestone={m} index={i} mastery={mastery} />
-        ))}
-      </div>
-
+        <div className="space-y-5">
+          {roadmap.milestones.map((m, i) => (
+            <MilestoneBlock key={i} milestone={m} index={i} mastery={mastery} />
+          ))}
+        </div>
+      </ConceptMasteryReadBoundary>
       <FurtherReading tags={roadmap.tracks} limit={15} />
     </PageShell>
   );

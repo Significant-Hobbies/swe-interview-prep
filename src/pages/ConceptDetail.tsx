@@ -1,3 +1,4 @@
+import { ConceptMasteryReadBoundary } from '../components/ConceptMasteryReadBoundary';
 import {
   ArrowLeft,
   ArrowRight,
@@ -57,7 +58,7 @@ const CANONICAL_ORIGIN = 'https://learn.significanthobbies.com';
 export default function ConceptDetail() {
   const { id } = useParams();
   const concept = id ? CONCEPT_BY_ID[id] : undefined;
-  const { mastery, review } = useConceptMastery();
+  const { mastery, review, loading, error, refresh } = useConceptMastery();
   const { gateStatus } = useGates();
   const [copied, setCopied] = useState(false);
 
@@ -160,7 +161,7 @@ export default function ConceptDetail() {
             {concept.difficulty}
           </Badge>
           <span className="text-white/30">·</span>
-          <span>{meta.label}</span>
+          <span>{loading ? 'Loading mastery…' : error ? 'Mastery unavailable' : meta.label}</span>
         </div>
         <p className="mt-3 max-w-2xl text-sm text-white/70">{concept.description}</p>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -213,36 +214,37 @@ export default function ConceptDetail() {
         </Card>
       )}
 
-      {/* Confidence + rating */}
-      <Card className="mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <div className="text-xs font-medium text-white/60">Your confidence</div>
-          <div className="mt-1 flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((n) => (
-              <span
-                key={n}
-                className={`h-2.5 w-6 rounded-sm ${n <= confidence1to5(m) ? color(meta.color).solid : 'bg-white/5'}`}
-              />
-            ))}
-            <span className="ml-2 text-xs text-white/60">
-              {m ? `${confidence1to5(m)}/5` : 'untouched'}
-            </span>
+      <ConceptMasteryReadBoundary loading={loading} error={error} refresh={refresh}>
+        {/* Confidence + rating */}
+        <Card className="mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="text-xs font-medium text-white/60">Your confidence</div>
+            <div className="mt-1 flex items-center gap-1">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span
+                  key={n}
+                  className={`h-2.5 w-6 rounded-sm ${n <= confidence1to5(m) ? color(meta.color).solid : 'bg-white/5'}`}
+                />
+              ))}
+              <span className="ml-2 text-xs text-white/60">
+                {m ? `${confidence1to5(m)}/5` : 'untouched'}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="mr-1 text-xs text-white/60">Log a self-review:</span>
-          {RATINGS.map((r) => (
-            <button
-              key={r.id}
-              onClick={() => review(concept.id, r.id)}
-              className={`min-h-11 rounded-md border px-3 text-xs font-medium ${color(r.tone).bg} ${color(r.tone).border} ${color(r.tone).text}`}
-            >
-              {r.label}
-            </button>
-          ))}
-        </div>
-      </Card>
-
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="mr-1 text-xs text-white/60">Log a self-review:</span>
+            {RATINGS.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => review(concept.id, r.id)}
+                className={`min-h-11 rounded-md border px-3 text-xs font-medium ${color(r.tone).bg} ${color(r.tone).border} ${color(r.tone).text}`}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </Card>
+      </ConceptMasteryReadBoundary>
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           {/* Mental model */}
