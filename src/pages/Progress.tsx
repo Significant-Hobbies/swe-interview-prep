@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ConceptMasteryReadState } from '../components/ConceptMasteryReadState';
 import { RetentionDashboard } from '../components/RetentionDashboard';
 import { WeeklyReport } from '../components/WeeklyReport';
 import { Sparkline } from '../components/viz';
@@ -11,7 +12,7 @@ import { confidencePct, rollupMastery } from '../lib/conceptState';
 import { conceptGaps } from '../lib/recommend';
 
 export default function Progress() {
-  const { mastery } = useConceptMastery();
+  const { mastery, loading, error, refresh } = useConceptMastery();
   const { artifacts } = useArtifactStore();
   const { drills } = useDrillStore();
 
@@ -28,6 +29,15 @@ export default function Progress() {
   // which is the only way this page can report a coverage gap rather than only
   // a confidence one.
   const gaps = useMemo(() => conceptGaps(mastery, 3), [mastery]);
+
+  if (loading || error) {
+    return (
+      <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">
+        <h1 className="mb-6 text-2xl font-semibold">Progress</h1>
+        <ConceptMasteryReadState error={error} refresh={refresh} />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-16 lg:py-24">

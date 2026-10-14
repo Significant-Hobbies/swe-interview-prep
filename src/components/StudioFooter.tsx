@@ -26,7 +26,7 @@ const config = {
   },
 };
 
-/** The SaaS Maker UI framework-free footer (public/footer.css + footer.js, from @saas-maker/ui). */
+/** Published shared footer element (ui-library 3e3ad4d); original footer CSS/theme retained. */
 function loadFooterAssets() {
   if (!document.querySelector('link[data-studio-footer]')) {
     const css = document.createElement('link');
@@ -44,7 +44,7 @@ function loadFooterAssets() {
   }
 }
 
-export function StudioFooter() {
+export function StudioFooter({ mode = 'full' }: { mode?: 'full' | 'compact' }) {
   useEffect(loadFooterAssets, []);
   return createElement(
     'studio-footer',
@@ -54,6 +54,9 @@ export function StudioFooter() {
       'catalog-id': 'swe-interview-prep',
       capture: 'newsletter',
       variant: 'studio',
+      mode,
+      // The existing app utilities provide compact spacing; keep footer.css unchanged.
+      'class-name': mode === 'compact' ? 'py-6' : undefined,
       'privacy-url': 'https://learn.significanthobbies.com/privacy',
       'data-mode': 'dark',
     },

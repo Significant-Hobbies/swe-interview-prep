@@ -26,6 +26,7 @@ import {
   ROADMAPS,
   sortedTracks,
 } from '../data/learning-os';
+import { ConceptMasteryReadState } from '../components/ConceptMasteryReadState';
 import { ALL_CONCEPTS, useConceptMastery } from '../hooks/useConcepts';
 import {
   type LearningNote,
@@ -85,7 +86,7 @@ export default function Progress() {
 }
 
 function Overview() {
-  const { mastery } = useConceptMastery();
+  const { mastery, loading, error, refresh } = useConceptMastery();
   const { artifacts } = useArtifactStore();
   const { drills } = useDrillStore();
   const { sessionsThisWeek } = useFocusMode();
@@ -100,6 +101,8 @@ function Overview() {
   const shipped = Object.values(artifacts).filter((a) => a.status === 'shipped').length;
   const building = Object.values(artifacts).filter((a) => a.status === 'building').length;
   const drillsSolved = Object.values(drills).filter((d) => d.status === 'solved').length;
+
+  if (loading || error) return <ConceptMasteryReadState error={error} refresh={refresh} />;
 
   return (
     <>

@@ -115,7 +115,7 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        {!focus && <StudioFooter />}
+        {!focus && <StudioFooter mode={location.pathname === '/' ? 'full' : 'compact'} />}
 
         <Suspense fallback={null}>
           <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />

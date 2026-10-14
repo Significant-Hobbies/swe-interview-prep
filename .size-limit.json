@@ -1,7 +1,7 @@
 [
   {
     "name": "Initial app entry",
-    "path": "dist/assets/index-*.js",
+    "path": ["dist/assets/index-*.js", "dist/assets/bootstrap-*.js"],
     "limit": "40 kB",
     "gzip": true
   },
