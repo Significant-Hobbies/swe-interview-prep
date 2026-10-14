@@ -69,27 +69,28 @@ export function useConceptMastery() {
   const [mastery, setMastery] = useState<Record<string, MasteryEntry>>(() =>
     user ? {} : loadGuestMastery()
   );
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(Boolean(user));
+  const [error, setError] = useState<string | null>(null);
 
   const fetchMastery = useCallback(async () => {
     if (!user) {
       setMastery(loadGuestMastery());
+      setError(null);
+      setLoading(false);
       return;
     }
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch('/api/learning?action=concepts', { credentials: 'include' });
-      if (!res.ok) {
-        setMastery(loadGuestMastery());
-        return;
-      }
+      if (!res.ok) throw new Error(`Could not load concept mastery (${res.status}).`);
       const data = await res.json();
       const remote = (data.mastery || {}) as Record<string, MasteryEntry>;
       const merged = mergeRecords(loadGuestMastery(), remote);
       setMastery(merged);
       saveGuestMastery(merged);
-    } catch {
-      setMastery(loadGuestMastery());
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Could not load concept mastery.');
     } finally {
       setLoading(false);
     }
@@ -150,5 +151,5 @@ export function useConceptMastery() {
     [user]
   );
 
-  return { mastery, loading, refresh: fetchMastery, review };
+  return { mastery, loading, error, refresh: fetchMastery, review };
 }

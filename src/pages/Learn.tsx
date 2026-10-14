@@ -1,3 +1,4 @@
+import { ConceptMasteryReadState } from '../components/ConceptMasteryReadState';
 import { ArrowRight, BookOpen, Map, Search } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ type SearchResult =
 
 export default function Learn() {
   const [query, setQuery] = useState('');
-  const { mastery } = useConceptMastery();
+  const { mastery, loading: masteryLoading, error: masteryError, refresh } = useConceptMastery();
   const { activeRoadmapId, profile } = useProfile();
   const gateCtx = useGateContext();
   const activeRoadmap = ROADMAP_BY_ID[activeRoadmapId] ?? ROADMAPS[0];
@@ -56,6 +57,13 @@ export default function Learn() {
 
     return [...paths, ...concepts];
   }, [query]);
+
+  if (masteryLoading || masteryError)
+    return (
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">
+        <ConceptMasteryReadState error={masteryError} refresh={refresh} />
+      </div>
+    );
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:py-16">

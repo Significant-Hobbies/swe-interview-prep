@@ -1,3 +1,4 @@
+import { ConceptMasteryReadBoundary } from '../components/ConceptMasteryReadBoundary';
 import { ArrowLeft, CheckCircle2, Circle } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ export default function ProjectDetail() {
   const { id } = useParams();
   const project = id ? PROJECT_BY_ID[id] : undefined;
   const { getProject, setProject } = useProjectStore();
-  const { mastery } = useConceptMastery();
+  const { mastery, loading, error, refresh } = useConceptMastery();
 
   if (!project) {
     return (
@@ -133,28 +134,30 @@ export default function ProjectDetail() {
             )}
           </section>
 
-          <section>
-            <SectionTitle>Mapped concepts</SectionTitle>
-            {concepts.length ? (
-              <div className="flex flex-wrap gap-1.5">
-                {concepts.map((c) => {
-                  const status = deriveConceptStatus(mastery[c.id]);
-                  return (
-                    <Link
-                      key={c.id}
-                      to={`/concepts/${c.id}`}
-                      className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2 py-1 text-xs text-white/70 hover:border-white/15 hover:text-white"
-                    >
-                      {c.name}
-                      {status === 'mastered' && <span className="ml-1 text-emerald-400">✓</span>}
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-sm text-white/40">No concepts mapped yet.</p>
-            )}
-          </section>
+          <ConceptMasteryReadBoundary loading={loading} error={error} refresh={refresh}>
+            <section>
+              <SectionTitle>Mapped concepts</SectionTitle>
+              {concepts.length ? (
+                <div className="flex flex-wrap gap-1.5">
+                  {concepts.map((c) => {
+                    const status = deriveConceptStatus(mastery[c.id]);
+                    return (
+                      <Link
+                        key={c.id}
+                        to={`/concepts/${c.id}`}
+                        className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2 py-1 text-xs text-white/70 hover:border-white/15 hover:text-white"
+                      >
+                        {c.name}
+                        {status === 'mastered' && <span className="ml-1 text-emerald-400">✓</span>}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-sm text-white/40">No concepts mapped yet.</p>
+              )}
+            </section>{' '}
+          </ConceptMasteryReadBoundary>
         </div>
 
         <div className="space-y-6">

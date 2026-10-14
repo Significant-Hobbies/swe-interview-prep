@@ -34,6 +34,7 @@ import {
   sortedTracks,
   TRACKS,
 } from '../data/learning-os';
+import { ConceptMasteryReadState } from '../components/ConceptMasteryReadState';
 import { ALL_CONCEPTS, type MasteryEntry, useConceptMastery } from '../hooks/useConcepts';
 import { useGateContext } from '../hooks/useGates';
 import { confidencePct, deriveConceptStatus, rollupMastery } from '../lib/conceptState';
@@ -61,7 +62,7 @@ const STATUS_TONE: Record<string, string> = {
 const PRIMARY_ROADMAP_ID = 'ai-search-infra-90-day';
 
 export default function Learn() {
-  const { mastery, loading } = useConceptMastery();
+  const { mastery, loading, error, refresh } = useConceptMastery();
   const gateCtx = useGateContext();
 
   // The "active" roadmap is the one with the most progress, falling back to the
@@ -73,47 +74,50 @@ export default function Learn() {
 
   return (
     <PageShell wide>
-      <Link
-        to="/learn"
-        className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" /> Learn
-      </Link>
-      <PageHeader
-        title="Everything in Learn"
-        subtitle={`${ROADMAPS.length} roadmaps · ${ALL_CONCEPTS.length} concepts · ${TRACKS.length} tracks. Search, browse, switch roadmaps.`}
-      />
-
-      <ActivePathHero
-        roadmap={activeRoadmap}
-        nextConcept={next}
-        nextDrillTitle={nextDrill?.title}
-        upNext={upNext}
-        mastery={mastery}
-      />
-
-      <GapsPanel mastery={mastery} loading={loading} />
-
-      <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_300px]">
-        <RoadmapPicker activeId={activeRoadmap.id} mastery={mastery} />
-        <MasteryPanel mastery={mastery} />
-      </section>
-
-      <section className="mt-8">
-        <SectionHeader
-          title="Tracks"
-          subtitle="Each track is a learning lane. Dots = concepts coloured by status."
+      {error && <ConceptMasteryReadState error={error} refresh={refresh} />}
+      <div hidden={Boolean(error)}>
+        <Link
+          to="/learn"
+          className="mb-4 inline-flex items-center gap-1 text-xs text-white/40 hover:text-white/70"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" /> Learn
+        </Link>
+        <PageHeader
+          title="Everything in Learn"
+          subtitle={`${ROADMAPS.length} roadmaps · ${ALL_CONCEPTS.length} concepts · ${TRACKS.length} tracks. Search, browse, switch roadmaps.`}
         />
-        <div className="space-y-3">
-          {sortedTracks().map((t) => (
-            <TrackLane key={t.id} trackId={t.id} mastery={mastery} />
-          ))}
-        </div>
-      </section>
 
-      <section className="mt-8">
-        <ConceptBrowser mastery={mastery} gateCtx={gateCtx} />
-      </section>
+        <ActivePathHero
+          roadmap={activeRoadmap}
+          nextConcept={next}
+          nextDrillTitle={nextDrill?.title}
+          upNext={upNext}
+          mastery={mastery}
+        />
+
+        <GapsPanel mastery={mastery} loading={loading} />
+
+        <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_300px]">
+          <RoadmapPicker activeId={activeRoadmap.id} mastery={mastery} />
+          <MasteryPanel mastery={mastery} />
+        </section>
+
+        <section className="mt-8">
+          <SectionHeader
+            title="Tracks"
+            subtitle="Each track is a learning lane. Dots = concepts coloured by status."
+          />
+          <div className="space-y-3">
+            {sortedTracks().map((t) => (
+              <TrackLane key={t.id} trackId={t.id} mastery={mastery} />
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8">
+          <ConceptBrowser mastery={mastery} gateCtx={gateCtx} />
+        </section>
+      </div>
     </PageShell>
   );
 }

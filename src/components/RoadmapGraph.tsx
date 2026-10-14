@@ -8,6 +8,7 @@ import { color } from './ui';
 interface RoadmapGraphProps {
   roadmap: Roadmap;
   mastery: Record<string, MasteryEntry>;
+  masteryUnavailable?: boolean;
 }
 
 const NODE_W = 148;
@@ -16,7 +17,7 @@ const GAP_X = 24;
 const GAP_Y = 56;
 
 /** roadmap.sh-style node graph — milestones as columns, concepts as checkable nodes. */
-export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
+export function RoadmapGraph({ roadmap, mastery, masteryUnavailable = false }: RoadmapGraphProps) {
   const columns = roadmap.milestones.flatMap((m, col) =>
     m.concepts.map((cid, row) => ({ cid, col, row, milestone: m.title }))
   );
@@ -26,7 +27,12 @@ export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
   const height = maxRows * (NODE_H + GAP_Y) + GAP_Y + 32;
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-white/[0.08] bg-black/40 p-4">
+    <div className="relative overflow-x-auto rounded-xl border border-white/[0.08] bg-black/40 p-4">
+      {masteryUnavailable && (
+        <span className="absolute right-4 top-3 rounded-md border border-white/10 bg-black/80 px-2 py-1 text-[10px] text-white/50">
+          Mastery unavailable
+        </span>
+      )}
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="min-w-[640px] w-full"
@@ -73,11 +79,11 @@ export function RoadmapGraph({ roadmap, mastery }: RoadmapGraphProps) {
         {columns.map(({ cid, col, row }) => {
           const c = CONCEPT_BY_ID[cid];
           if (!c) return null;
-          const status = deriveConceptStatus(mastery[cid]);
+          const status = masteryUnavailable ? null : deriveConceptStatus(mastery[cid]);
           const x = GAP_X + col * (NODE_W + GAP_X);
           const y = 36 + row * (NODE_H + GAP_Y);
           const done = status === 'mastered';
-          const active = status !== 'not-started' && !done;
+          const active = status !== null && status !== 'not-started' && !done;
           const fill = done
             ? 'rgba(16,185,129,0.15)'
             : active
