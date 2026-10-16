@@ -2,16 +2,25 @@
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  clearMasteryCache,
+  masteryCacheGeneration,
+  readMasteryCache,
+  writeMasteryCache,
+} from '../lib/masteryCache';
 import { AuthProvider, useAuth } from './AuthContext';
 
 const profile = { id: 'public-fixture', name: 'Fixture learner', email: 'fixture@example.invalid' };
 let root: Root;
 let container: HTMLDivElement;
+let auth: ReturnType<typeof useAuth>;
 function State() {
+  auth = useAuth();
   const { user, loading } = useAuth();
   return <p>{loading ? 'loading' : user ? user.name : 'signed out'}</p>;
 }
 beforeEach(() => {
+  clearMasteryCache();
   localStorage.clear();
   container = document.createElement('div');
   document.body.append(container);
@@ -57,10 +66,28 @@ describe('session verification boundary', () => {
     expect(container.textContent).toBe(profile.name);
   });
   it('still clears stale cached profiles after server rejection', async () => {
+    writeMasteryCache(profile.id, {}, masteryCacheGeneration());
     localStorage.setItem('dsa-prep-profile', JSON.stringify(profile));
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 401 })));
     await render();
     expect(localStorage.getItem('dsa-prep-profile')).toBeNull();
+    expect(container.textContent).toBe('signed out');
+    expect(readMasteryCache(profile.id)).toBeUndefined();
+  });
+  it('clears account mastery before attempting a best-effort logout', async () => {
+    localStorage.setItem('dsa-prep-profile', JSON.stringify(profile));
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(new Response(JSON.stringify({ user: profile })))
+        .mockRejectedValueOnce(new TypeError('offline'))
+    );
+    await render();
+    writeMasteryCache(profile.id, {}, masteryCacheGeneration());
+    expect(readMasteryCache(profile.id)).toEqual({});
+    await act(async () => auth.signOut());
+    expect(readMasteryCache(profile.id)).toBeUndefined();
     expect(container.textContent).toBe('signed out');
   });
 });

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { type Concept as BaseConcept, CONCEPTS } from '../data/learning-os';
 import { masteryConfidence, reviewConcept, type MasteryRating, type MasteryRow } from '../lib/fsrs';
+import { masteryCacheGeneration, readMasteryCache, writeMasteryCache } from '../lib/masteryCache';
 import { loadLocal, mergeRecords, saveLocal, STORE_KEYS } from '../lib/userStore';
 
 // Back-compat alias: older code reads `prereqs`; the new schema uses `prerequisites`.
@@ -59,42 +60,55 @@ function loadGuestMastery(): Record<string, MasteryEntry> {
   return Object.fromEntries(Object.entries(raw).map(([k, v]) => [k, rowToEntry(v)]));
 }
 
-function saveGuestMastery(mastery: Record<string, MasteryEntry>): void {
+function saveMastery(
+  mastery: Record<string, MasteryEntry>,
+  userId: string | undefined,
+  generation: number
+): void {
   const raw = Object.fromEntries(Object.entries(mastery).map(([k, v]) => [k, entryToRow(v)]));
   saveLocal(STORE_KEYS.mastery, raw);
+  if (userId) writeMasteryCache(userId, raw, generation);
 }
 
 export function useConceptMastery() {
   const { user } = useAuth();
+  const userId = user?.id;
   const [mastery, setMastery] = useState<Record<string, MasteryEntry>>(() =>
-    user ? {} : loadGuestMastery()
+    userId
+      ? Object.fromEntries(
+          Object.entries(readMasteryCache(userId) ?? {}).map(([id, row]) => [id, rowToEntry(row)])
+        )
+      : loadGuestMastery()
   );
-  const [loading, setLoading] = useState(Boolean(user));
+  const [loading, setLoading] = useState(Boolean(userId && !readMasteryCache(userId)));
   const [error, setError] = useState<string | null>(null);
 
   const fetchMastery = useCallback(async () => {
-    if (!user) {
+    if (!userId) {
       setMastery(loadGuestMastery());
       setError(null);
       setLoading(false);
       return;
     }
-    setLoading(true);
+    const generation = masteryCacheGeneration();
+    setLoading(!readMasteryCache(userId));
     setError(null);
     try {
       const res = await fetch('/api/learning?action=concepts', { credentials: 'include' });
       if (!res.ok) throw new Error(`Could not load concept mastery (${res.status}).`);
       const data = await res.json();
+      if (generation !== masteryCacheGeneration()) return;
       const remote = (data.mastery || {}) as Record<string, MasteryEntry>;
       const merged = mergeRecords(loadGuestMastery(), remote);
       setMastery(merged);
-      saveGuestMastery(merged);
+      saveMastery(merged, userId, generation);
     } catch (reason) {
+      if (generation !== masteryCacheGeneration()) return;
       setError(reason instanceof Error ? reason.message : 'Could not load concept mastery.');
     } finally {
-      setLoading(false);
+      if (generation === masteryCacheGeneration()) setLoading(false);
     }
-  }, [user]);
+  }, [userId]);
 
   useEffect(() => {
     fetchMastery();
@@ -109,7 +123,8 @@ export function useConceptMastery() {
    */
   const review = useCallback(
     async (conceptId: string, rating: MasteryRating): Promise<boolean> => {
-      if (user) {
+      const generation = masteryCacheGeneration();
+      if (userId) {
         try {
           const res = await fetch('/api/learning?action=concepts', {
             method: 'POST',
@@ -121,34 +136,35 @@ export function useConceptMastery() {
           // Writing locally would fabricate progress that can never sync.
           if (!res.ok) return false;
           const data = await res.json();
+          if (generation !== masteryCacheGeneration()) return false;
           if (data.mastery) {
             setMastery((prev) => {
+              if (generation !== masteryCacheGeneration()) return prev;
               const next = {
                 ...prev,
                 [conceptId]: { ...data.mastery, confidence: data.mastery.confidence },
               };
-              saveGuestMastery(next);
+              saveMastery(next, userId, generation);
               return next;
             });
           }
           return true;
         } catch {
-          // Network failure, not a rejection — fall through to the local
-          // scheduler so the rep is not lost. This previously could not happen:
-          // a `return` sat below the catch, so the comment saying "fall through
-          // to local" described behaviour the code did not have.
+          // Preserve an offline review locally; an explicit server rejection
+          // above remains authoritative and never fabricates progress.
         }
       }
-
+      if (generation !== masteryCacheGeneration()) return false;
       setMastery((prev) => {
+        if (generation !== masteryCacheGeneration()) return prev;
         const row = reviewConcept(prev[conceptId] ? entryToRow(prev[conceptId]) : null, rating);
         const next = { ...prev, [conceptId]: rowToEntry(row) };
-        saveGuestMastery(next);
+        saveMastery(next, userId, generation);
         return next;
       });
       return true;
     },
-    [user]
+    [userId]
   );
 
   return { mastery, loading, error, refresh: fetchMastery, review };

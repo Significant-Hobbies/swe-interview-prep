@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { clearMasteryCache } from '../lib/masteryCache';
 
 const GUEST_KEY = 'dsa-prep-guest';
 // Profile cache only — the JWT now lives in an httpOnly cookie (XSS hardening).
@@ -83,6 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
         } else if (res.status === 401) {
           // Cookie missing/invalid — drop any cached profile.
+          clearMasteryCache();
           setUser(null);
           localStorage.removeItem(PROFILE_KEY);
         }
@@ -112,6 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const data = await res.json();
+      clearMasteryCache();
       setUser(data.user);
       setIsGuest(false);
       // Cache profile only — the JWT lives in an httpOnly cookie now.
@@ -124,6 +127,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signOut = async () => {
+    clearMasteryCache();
     setUser(null);
     setIsGuest(false);
     localStorage.removeItem(PROFILE_KEY);
@@ -137,6 +141,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const continueAsGuest = () => {
+    clearMasteryCache();
     setIsGuest(true);
     localStorage.setItem(GUEST_KEY, '1');
   };
