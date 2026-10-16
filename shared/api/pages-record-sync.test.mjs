@@ -1,15 +1,19 @@
 // @vitest-environment node
-import { createHmac } from 'node:crypto';
-import { readFileSync } from 'node:fs';
-import { DatabaseSync } from 'node:sqlite';
+import { createHmac, randomUUID } from 'node:crypto';
+import { existsSync, readFileSync, unlinkSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { backup, DatabaseSync } from 'node:sqlite';
 import { afterEach, beforeEach, expect, it } from 'vitest';
 import { onRequest } from '../../functions/api/[[path]].js';
 
 const secret = 'synthetic-test-signing-key';
 let database;
 let env;
+let databaseFile;
 
 beforeEach(() => {
+  databaseFile = undefined;
   database = new DatabaseSync(':memory:');
   for (const migration of ['0001_initial.sql', '0003_record_sync_receipts.sql']) {
     database.exec(
@@ -17,7 +21,7 @@ beforeEach(() => {
     );
   }
   database.exec(
-    "INSERT INTO users (id,google_id,email,name) VALUES ('alice','alice','alice@example.invalid','Alice'), ('bob','bob','bob@example.invalid','Bob')"
+    "INSERT INTO users (id,google_id,email,name) VALUES ('alice','alice','alice@example.invalid','Alice'), ('bob','bob','bob@example.invalid','Bob'), ('owner','owner','owner@example.invalid','Synthetic owner')"
   );
   env = {
     JWT_SECRET: secret,
@@ -49,7 +53,10 @@ beforeEach(() => {
     },
   };
 });
-afterEach(() => database.close());
+afterEach(() => {
+  database.close();
+  if (databaseFile && existsSync(databaseFile)) unlinkSync(databaseFile);
+});
 
 function request(action, user = 'alice', body = undefined, accountId = user, path = ['learning']) {
   const unsigned = [
@@ -107,4 +114,41 @@ it('retains owner-only learning and provider access and rejects anonymous record
   const response = await request('', 'alice', { messages: [] }, 'alice', ['ai', 'chat']);
   expect(response.status).toBe(403);
   expect((await request('', 'alice', undefined, 'alice', ['auth', 'verify'])).status).toBe(200);
+});
+
+it('retains signed-in owner mastery after reopening the backing database', async () => {
+  databaseFile = join(tmpdir(), `swe-mastery-${randomUUID()}.sqlite`);
+  await backup(database, databaseFile);
+  database.close();
+  database = new DatabaseSync(databaseFile);
+
+  const initial = await request('concepts', 'owner');
+  expect(initial.status).toBe(200);
+  expect(await initial.json()).toEqual({ mastery: {} });
+  const saved = await request('concepts', 'owner', {
+    conceptId: 'tokenization',
+    rating: 'good',
+  });
+  expect(saved.status).toBe(200);
+  const { mastery } = await saved.json();
+  expect(mastery.reps).toBe(1);
+  expect(Number.isFinite(Date.parse(mastery.lastReview))).toBe(true);
+  expect(Number.isFinite(Date.parse(mastery.due))).toBe(true);
+
+  database.close();
+  database = new DatabaseSync(databaseFile);
+  const restored = await request('concepts', 'owner');
+  expect(restored.status).toBe(200);
+  const readback = await restored.json();
+  expect(Object.keys(readback.mastery)).toEqual(['tokenization']);
+  expect(readback.mastery.tokenization).toMatchObject({
+    reps: mastery.reps,
+    lapses: mastery.lapses,
+    stability: mastery.stability,
+    difficulty: mastery.difficulty,
+    lastReview: mastery.lastReview,
+    due: mastery.due,
+  });
+  expect((await request('concepts', 'alice')).status).toBe(401);
+  expect((await request('concepts', '')).status).toBe(401);
 });
