@@ -17,7 +17,7 @@
       "format": "qa",
       "sectionCount": 518,
       "exerciseCount": 518,
-      "lastFetched": "2026-10-12T13:36:14.326Z"
+      "lastFetched": "2026-10-19T11:19:29.388Z"
     },
     {
       "id": "react-questions",
@@ -36,7 +36,7 @@
       "format": "qa",
       "sectionCount": 444,
       "exerciseCount": 444,
-      "lastFetched": "2026-10-12T13:36:15.101Z"
+      "lastFetched": "2026-10-19T11:19:30.162Z"
     },
     {
       "id": "frontend-handbook",
@@ -57,7 +57,7 @@
       "format": "code-heavy",
       "sectionCount": 61,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:15.573Z"
+      "lastFetched": "2026-10-19T11:19:30.643Z"
     },
     {
       "id": "system-design",
@@ -74,9 +74,9 @@
       ],
       "icon": "Network",
       "format": "long-form",
-      "sectionCount": 241,
+      "sectionCount": 246,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:15.971Z"
+      "lastFetched": "2026-10-19T11:19:31.071Z"
     },
     {
       "id": "system-design-101",
@@ -95,7 +95,7 @@
       "format": "code-heavy",
       "sectionCount": 416,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:16.280Z"
+      "lastFetched": "2026-10-19T11:19:31.332Z"
     },
     {
       "id": "low-level-design",
@@ -114,7 +114,7 @@
       "format": "code-heavy",
       "sectionCount": 262,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:17.003Z"
+      "lastFetched": "2026-10-19T11:19:32.418Z"
     },
     {
       "id": "grokking-oop",
@@ -133,7 +133,7 @@
       "format": "code-heavy",
       "sectionCount": 63,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:17.651Z"
+      "lastFetched": "2026-10-19T11:19:32.846Z"
     },
     {
       "id": "devops-exercises",
@@ -154,7 +154,7 @@
       "format": "qa",
       "sectionCount": 49,
       "exerciseCount": 1888,
-      "lastFetched": "2026-10-12T13:36:18.035Z"
+      "lastFetched": "2026-10-19T11:19:33.225Z"
     },
     {
       "id": "coding-interview-patterns",
@@ -174,7 +174,7 @@
       "format": "code-heavy",
       "sectionCount": 20,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:18.345Z"
+      "lastFetched": "2026-10-19T11:19:33.527Z"
     },
     {
       "id": "ood-interview",
@@ -194,7 +194,7 @@
       "format": "code-heavy",
       "sectionCount": 24,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:18.568Z"
+      "lastFetched": "2026-10-19T11:19:33.755Z"
     },
     {
       "id": "system-design-primer",
@@ -213,7 +213,7 @@
       "format": "code-heavy",
       "sectionCount": 40,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:19.087Z"
+      "lastFetched": "2026-10-19T11:19:34.129Z"
     },
     {
       "id": "javascript-algorithms",
@@ -232,7 +232,7 @@
       "format": "visual",
       "sectionCount": 120,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:19.515Z"
+      "lastFetched": "2026-10-19T11:19:34.567Z"
     },
     {
       "id": "tech-interview-handbook",
@@ -252,7 +252,7 @@
       "format": "code-heavy",
       "sectionCount": 90,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:20.090Z"
+      "lastFetched": "2026-10-19T11:19:35.158Z"
     },
     {
       "id": "project-based-learning",
@@ -272,7 +272,7 @@
       "format": "code-heavy",
       "sectionCount": 22,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:20.288Z"
+      "lastFetched": "2026-10-19T11:19:35.341Z"
     },
     {
       "id": "math-for-ml",
@@ -291,7 +291,7 @@
       "format": "long-form",
       "sectionCount": 1,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:20.481Z"
+      "lastFetched": "2026-10-19T11:19:35.522Z"
     },
     {
       "id": "awesome-vector-search",
@@ -310,7 +310,7 @@
       "format": "long-form",
       "sectionCount": 2,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:20.682Z"
+      "lastFetched": "2026-10-19T11:19:35.718Z"
     },
     {
       "id": "ann-benchmarks",
@@ -329,7 +329,7 @@
       "format": "visual",
       "sectionCount": 1,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:20.976Z"
+      "lastFetched": "2026-10-19T11:19:35.952Z"
     },
     {
       "id": "awesome-ai-agents",
@@ -348,7 +348,7 @@
       "format": "long-form",
       "sectionCount": 219,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:21.278Z"
+      "lastFetched": "2026-10-19T11:19:36.220Z"
     },
     {
       "id": "model-context-protocol",
@@ -367,7 +367,7 @@
       "format": "code-heavy",
       "sectionCount": 154,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:23.008Z"
+      "lastFetched": "2026-10-19T11:19:37.760Z"
     },
     {
       "id": "openai-evals",
@@ -386,7 +386,7 @@
       "format": "code-heavy",
       "sectionCount": 46,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:44.013Z"
+      "lastFetched": "2026-10-19T11:19:56.159Z"
     },
     {
       "id": "lm-eval-harness",
@@ -405,7 +405,7 @@
       "format": "code-heavy",
       "sectionCount": 287,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:45.619Z"
+      "lastFetched": "2026-10-19T11:19:57.726Z"
     },
     {
       "id": "garak",
@@ -424,7 +424,7 @@
       "format": "code-heavy",
       "sectionCount": 67,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:46.223Z"
+      "lastFetched": "2026-10-19T11:19:58.330Z"
     },
     {
       "id": "missing-semester",
@@ -444,7 +444,7 @@
       "format": "code-heavy",
       "sectionCount": 198,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:46.747Z"
+      "lastFetched": "2026-10-19T11:19:58.859Z"
     },
     {
       "id": "build-your-own-x",
@@ -463,7 +463,7 @@
       "format": "long-form",
       "sectionCount": 4,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:46.929Z"
+      "lastFetched": "2026-10-19T11:19:59.047Z"
     },
     {
       "id": "node-best-practices",
@@ -482,7 +482,7 @@
       "format": "code-heavy",
       "sectionCount": 757,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:47.530Z"
+      "lastFetched": "2026-10-19T11:19:59.690Z"
     },
     {
       "id": "cs231n",
@@ -501,7 +501,7 @@
       "format": "code-heavy",
       "sectionCount": 134,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:50.688Z"
+      "lastFetched": "2026-10-19T11:20:03.591Z"
     },
     {
       "id": "vllm",
@@ -518,10 +518,10 @@
       ],
       "icon": "Cpu",
       "format": "code-heavy",
-      "sectionCount": 565,
+      "sectionCount": 572,
       "exerciseCount": 0,
-      "lastFetched": "2026-10-12T13:36:56.450Z"
+      "lastFetched": "2026-10-19T11:20:09.317Z"
     }
   ],
-  "generatedAt": "2026-10-12T13:36:13.986Z"
+  "generatedAt": "2026-10-19T11:19:29.041Z"
 }
