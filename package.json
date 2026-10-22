@@ -96,10 +96,10 @@
     "@playwright/test": "1.62.0",
     "@size-limit/file": "^11.2.0",
     "@tailwindcss/vite": "4.3.3",
+    "@types/node": "26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "19",
     "@types/sql.js": "^1.4.11",
-    "@vercel/node": "5.9.9",
     "@vitejs/plugin-react": "6.0.4",
     "@vitest/coverage-v8": "4.1.10",
     "@vitest/ui": "4.1.10",
@@ -113,12 +113,13 @@
     "tailwindcss": "^4.3.3",
     "typescript": "6.0.3",
     "ultracite": "7.10.2",
-    "vite": "8.1.5",
+    "vite": "8.1.6",
     "vitest": "4.1.10",
     "wrangler": "4.114.0"
   },
   "pnpm": {
     "overrides": {
+      "@excalidraw/excalidraw@0.18.1>sass": "1.79.6",
       "brace-expansion@<1.1.21": "1.1.21",
       "brace-expansion@>=2.0.0 <2.1.4": "2.1.4",
       "brace-expansion@>=4.0.0 <5.0.12": "5.0.12",
