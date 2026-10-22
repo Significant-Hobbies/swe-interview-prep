@@ -144,6 +144,9 @@
         "react",
         "react-dom"
       ]
+    },
+    "patchedDependencies": {
+      "es6-promise-pool@2.5.0": "patches/es6-promise-pool@2.5.0.patch"
     }
   },
   "packageManager": "pnpm@10.33.2"

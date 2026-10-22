@@ -1,0 +1,17 @@
+diff --git a/es6-promise-pool.js b/es6-promise-pool.js
+--- a/es6-promise-pool.js
++++ b/es6-promise-pool.js
+@@ -1,9 +1,10 @@
+ (function (root, factory) {
+   /* istanbul ignore next */
+-  if (typeof define === 'function' && define.amd) {
+-    define([], factory)
+-  } else if (typeof exports === 'object') {
++  // A bundled CommonJS module must not register with Monaco's global AMD loader.
++  if (typeof exports === 'object') {
+     module.exports = factory()
++  } else if (typeof define === 'function' && define.amd) {
++    define([], factory)
+   } else {
+     root.PromisePool = factory()
+     // Legacy API
