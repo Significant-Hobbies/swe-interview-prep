@@ -51,7 +51,7 @@ function Eyebrow({ children, accent = false }: { children: ReactNode; accent?: b
   return (
     <p
       className={`font-mono text-[11px] font-medium uppercase tracking-[0.16em] ${
-        accent ? 'text-sky-300/85' : 'text-white/45'
+        accent ? 'text-sky-300/85' : 'text-white/55'
       }`}
     >
       {children}
@@ -94,7 +94,7 @@ function PrimaryCta({ children }: { children: ReactNode }) {
 
 function Illustrative({ children }: { children: ReactNode }) {
   return (
-    <p className="mt-3 text-center font-mono text-[10px] tracking-[0.08em] text-white/35">
+    <p className="mt-3 text-center font-mono text-[10px] tracking-[0.08em] text-white/55">
       {children}
     </p>
   );
@@ -185,7 +185,7 @@ function LoopVisual() {
               index === 3 ? 'border-sky-400/40 bg-[#04121b]' : 'border-white/[0.12] bg-[#0b0b0b]'
             }`}
           >
-            <span className="font-mono text-[9px] tracking-[0.14em] text-white/40">
+            <span className="font-mono text-[9px] tracking-[0.14em] text-white/55">
               {item.step}
             </span>
             <span
@@ -200,7 +200,7 @@ function LoopVisual() {
 
         {/* The concept travelling through the loop. */}
         <div className="absolute left-1/2 top-1/2 w-[46%] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/[0.12] bg-black/80 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-sm sm:p-4">
-          <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40 sm:text-[9.5px]">
+          <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/55 sm:text-[9.5px]">
             Search &amp; IR · concept
           </p>
           <p className="mt-1.5 text-[15px] font-semibold leading-tight tracking-tight text-white sm:text-lg">
@@ -234,7 +234,7 @@ function Panel({ label, children }: { label: string; children: ReactNode }) {
           <span className="h-2 w-2 rounded-full bg-white/15" />
           <span className="h-2 w-2 rounded-full bg-white/15" />
           <span className="h-2 w-2 rounded-full bg-white/15" />
-          <span className="ml-2 truncate font-mono text-[10px] tracking-[0.08em] text-white/40">
+          <span className="ml-2 truncate font-mono text-[10px] tracking-[0.08em] text-white/55">
             {label}
           </span>
         </div>
@@ -264,7 +264,7 @@ function LearnPanel() {
             key={term}
             className="grid grid-cols-[6.5rem_1fr] gap-3 py-2.5 text-[12px] leading-5"
           >
-            <dt className="font-mono text-[10.5px] text-white/40">{term}</dt>
+            <dt className="font-mono text-[10.5px] text-white/55">{term}</dt>
             <dd className="text-white/70">{detail}</dd>
           </div>
         ))}
@@ -310,7 +310,7 @@ function ExplainPanel() {
   return (
     <Panel label="explain / feynman gate">
       <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3.5">
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
+        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
           Socratic companion
         </p>
         <p className="mt-1.5 text-[13px] leading-5 text-white/80">
@@ -326,7 +326,7 @@ function ExplainPanel() {
           Both go through the same analyzer, so “foxes” stems to “fox” on both sides. The failure
           mode: stem too hard and “university” collides with “universe”.
         </p>
-        <p className="mt-3 text-[11px] text-white/40">One example · one failure mode</p>
+        <p className="mt-3 text-[11px] text-white/55">One example · one failure mode</p>
       </div>
     </Panel>
   );
@@ -345,7 +345,7 @@ function ReviewPanel() {
           <li key={item.name} className="flex items-center justify-between gap-3 py-2.5">
             <span className="text-[13px] text-white/85">{item.name}</span>
             <span
-              className={`font-mono text-[11px] ${item.due ? 'text-sky-300' : 'text-white/40'}`}
+              className={`font-mono text-[11px] ${item.due ? 'text-sky-300' : 'text-white/55'}`}
             >
               {item.when}
             </span>
@@ -475,7 +475,7 @@ function Hero() {
               Browse the curriculum <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
-          <p className="mt-5 font-mono text-[11px] tracking-[0.04em] text-white/35">
+          <p className="mt-5 font-mono text-[11px] tracking-[0.04em] text-white/55">
             Free · no account needed · progress stays in this browser
           </p>
         </div>
@@ -492,7 +492,7 @@ function Hero() {
                 index >= 2 ? 'sm:border-t sm:border-white/[0.07] lg:border-t-0' : ''
               } lg:border-l lg:border-white/[0.07] lg:pl-6 lg:first:border-l-0 lg:first:pl-0`}
             >
-              <p className="font-mono text-[11px] text-white/35">
+              <p className="font-mono text-[11px] text-white/55">
                 {item.step} <span className="ml-1 text-white/80">{item.label}</span>
               </p>
               <p className="mt-2 text-[13px] leading-5 text-white/50">{item.line}</p>

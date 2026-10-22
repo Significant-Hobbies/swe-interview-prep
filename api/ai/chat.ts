@@ -1,8 +1,16 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { streamText } from 'ai';
+import type { ApiRequest, ApiResponse } from './types';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+type ChatBody = {
+  endpointUrl?: string;
+  apiKey?: string;
+  model?: string;
+  messages?: Parameters<typeof streamText>[0]['messages'];
+  systemPrompt?: string;
+};
+
+export default async function handler(req: ApiRequest<ChatBody>, res: ApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
