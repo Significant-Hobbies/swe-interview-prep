@@ -309,8 +309,8 @@ const LANGUAGES: Language[] = ['typescript'];
 export function ratingForSolve(
   verification: DrillVerification,
   attemptsBefore: number
-): MasteryRating {
-  if (verification === 'self-reported') return 'hard';
+): MasteryRating | null {
+  if (verification === 'self-reported') return null;
   if (verification === 'outline-check') return attemptsBefore >= 3 ? 'hard' : 'good';
   if (attemptsBefore === 0) return 'easy';
   return attemptsBefore <= 2 ? 'good' : 'hard';
@@ -378,12 +378,21 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
       if (!result.passed) return;
     }
     const wasSolved = entry.status === 'solved';
+    const masteryRating = status === 'solved' ? ratingForSolve(verification, entry.attempts) : null;
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
-    // Solving a drill closes the loop — it nudges the concept toward mastery,
-    // then asks for a 30-second explain-back (Feynman Gate) to prove it.
+    // Verified solves can seed mastery/review state. A self-reported external
+    // solve remains an activity record until the explain-back provides evidence.
     if (status === 'solved') {
       setShowExplainNudge(true);
-      void review(drill?.conceptId, ratingForSolve(verification, entry.attempts));
+      if (masteryRating) {
+        void review(drill?.conceptId, masteryRating);
+        for (const seed of reviewsToSeedForConcept(drill?.conceptId, REVIEW_QUESTIONS, rqMastery)) {
+          void reviewRq(seed.questionId, seed.rating);
+        }
+        for (const q of REVIEW_QUESTIONS.filter((rq) => rq.conceptId === drill?.conceptId)) {
+          if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
+        }
+      }
       void logActivity({
         kind: 'drill_solve',
         conceptIds: [drill?.conceptId],
@@ -391,12 +400,6 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         payload: { difficulty: drill?.difficulty },
       });
       recordSessionActivity('drill_solve');
-      for (const seed of reviewsToSeedForConcept(drill?.conceptId, REVIEW_QUESTIONS, rqMastery)) {
-        void reviewRq(seed.questionId, seed.rating);
-      }
-      for (const q of REVIEW_QUESTIONS.filter((rq) => rq.conceptId === drill?.conceptId)) {
-        if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
-      }
     } else if (status === 'attempted') {
       void logActivity({
         kind: 'drill_fail',
@@ -409,7 +412,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     // First-time solve bumps ELO for every roadmap this concept belongs to.
     // v1 only counts the success signal; an explicit "couldn't solve" path
     // would be needed to push ELO down.
-    if (status === 'solved' && !wasSolved && concept) {
+    if (status === 'solved' && !wasSolved && concept && masteryRating) {
       recordResult(concept.roadmaps, difficultyToElo(drill?.difficulty), 1);
     }
   }
@@ -546,8 +549,8 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
           {external ? (
             <Card className="p-4">
               <p className="text-sm text-slate-400">
-                This drill links to LeetCode — solve there first, then mark solved here to update
-                mastery.
+                This drill links to LeetCode — mark your completion here as self-reported. Pass the
+                explain-back to update mastery.
               </p>
               <p className="mt-2 text-xs text-amber-200/80">
                 {DRILL_VERIFICATION_HINT['self-reported']}

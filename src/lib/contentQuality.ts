@@ -42,7 +42,7 @@ export const DRILL_VERIFICATION_HINT: Record<DrillVerification, string> = {
   'outline-check':
     'Only the shape of your outline is checked — that every required point is answered in your own words. Nobody grades whether it is right, so mastery moves less than an auto-graded drill.',
   'self-reported':
-    'Nothing is verified in-app. Marking this solved is your own claim, and it moves mastery less than an auto-graded drill.',
+    'Nothing is verified in-app. Marking this solved records your claim only; pass the explain-back to update mastery.',
 };
 
 export function isEditorialDrill(drill: Drill): boolean {
