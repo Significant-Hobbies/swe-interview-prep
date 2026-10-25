@@ -11,6 +11,8 @@ import { STORE_KEYS } from '../lib/userStore';
 const auth = vi.hoisted(() => ({ user: null as null | { id: string } }));
 const mastery = vi.hoisted(() => ({ review: vi.fn(), refresh: vi.fn() }));
 const reviewMastery = vi.hoisted(() => ({ review: vi.fn(), mastery: {} }));
+const elo = vi.hoisted(() => ({ recordResult: vi.fn() }));
+const suspendedQuestions = vi.hoisted(() => ({ unsuspend: vi.fn() }));
 vi.mock('../contexts/AuthContext', () => ({ useAuth: () => ({ user: auth.user }) }));
 vi.mock('../components/CodeEditor', () => ({
   default: ({ code, onChange }: { code: string; onChange: (value: string) => void }) => (
@@ -29,13 +31,18 @@ vi.mock('../hooks/useConcepts', () => ({
 vi.mock('../hooks/useReviewMastery', () => ({
   useReviewMastery: () => reviewMastery,
 }));
+vi.mock('../lib/reviewMastery', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../lib/reviewMastery')>()),
+  loadSuspendedRqs: () => new Set(['rq-array-hashing-core', 'rq-tokenization-symmetry']),
+  unsuspendReviewQuestion: suspendedQuestions.unsuspend,
+}));
 vi.mock('../hooks/useActivity', () => ({ useActivityLogger: () => vi.fn() }));
 vi.mock('../hooks/useCodeExecution', () => ({
   useCodeExecution: () => ({ output: '', errors: '', isRunning: false, execute: vi.fn() }),
 }));
 vi.mock('../hooks/useUserStore', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../hooks/useUserStore')>()),
-  useUserElo: () => ({ recordResult: vi.fn() }),
+  useUserElo: () => elo,
 }));
 
 const storage = new Map<string, string>();
@@ -95,6 +102,8 @@ describe('drill grading and saved exercise resume', () => {
     mastery.review.mockClear();
     mastery.refresh.mockClear();
     reviewMastery.review.mockClear();
+    elo.recordResult.mockClear();
+    suspendedQuestions.unsuspend.mockClear();
     container = document.createElement('div');
     document.body.append(container);
     root = createRoot(container);
@@ -115,6 +124,8 @@ describe('drill grading and saved exercise resume', () => {
     await act(async () => click(solve()));
     expect(mastery.review).toHaveBeenCalledWith(drill.conceptId, 'easy');
     expect(reviewMastery.review).toHaveBeenCalled();
+    expect(elo.recordResult).toHaveBeenCalledOnce();
+    expect(suspendedQuestions.unsuspend).toHaveBeenCalledWith('rq-tokenization-symmetry');
     const saved = JSON.parse(storage.get(STORE_KEYS.drills)!)[drill.id];
     expect(saved).toEqual({ status: 'solved', lastCode: drill.referenceSolution, attempts: 1 });
     expect(container.textContent).toContain('All tests passed.');
@@ -148,6 +159,8 @@ describe('drill grading and saved exercise resume', () => {
     });
     expect(mastery.review).not.toHaveBeenCalled();
     expect(reviewMastery.review).not.toHaveBeenCalled();
+    expect(elo.recordResult).not.toHaveBeenCalled();
+    expect(suspendedQuestions.unsuspend).not.toHaveBeenCalled();
   });
 
   it('hydrates account code received after mount without overwriting a learner edit', async () => {

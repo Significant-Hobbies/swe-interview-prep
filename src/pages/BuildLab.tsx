@@ -378,16 +378,19 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
       if (!result.passed) return;
     }
     const wasSolved = entry.status === 'solved';
+    const masteryRating = status === 'solved' ? ratingForSolve(verification, entry.attempts) : null;
     setDrill(drillId, { status, lastCode: code, attempts: entry.attempts });
     // Verified solves can seed mastery/review state. A self-reported external
     // solve remains an activity record until the explain-back provides evidence.
     if (status === 'solved') {
       setShowExplainNudge(true);
-      const masteryRating = ratingForSolve(verification, entry.attempts);
       if (masteryRating) {
         void review(drill?.conceptId, masteryRating);
         for (const seed of reviewsToSeedForConcept(drill?.conceptId, REVIEW_QUESTIONS, rqMastery)) {
           void reviewRq(seed.questionId, seed.rating);
+        }
+        for (const q of REVIEW_QUESTIONS.filter((rq) => rq.conceptId === drill?.conceptId)) {
+          if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
         }
       }
       void logActivity({
@@ -397,9 +400,6 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
         payload: { difficulty: drill?.difficulty },
       });
       recordSessionActivity('drill_solve');
-      for (const q of REVIEW_QUESTIONS.filter((rq) => rq.conceptId === drill?.conceptId)) {
-        if (loadSuspendedRqs().has(q.id)) unsuspendReviewQuestion(q.id);
-      }
     } else if (status === 'attempted') {
       void logActivity({
         kind: 'drill_fail',
@@ -412,7 +412,7 @@ function DrillWorkspace({ drillId }: { drillId: string }) {
     // First-time solve bumps ELO for every roadmap this concept belongs to.
     // v1 only counts the success signal; an explicit "couldn't solve" path
     // would be needed to push ELO down.
-    if (status === 'solved' && !wasSolved && concept) {
+    if (status === 'solved' && !wasSolved && concept && masteryRating) {
       recordResult(concept.roadmaps, difficultyToElo(drill?.difficulty), 1);
     }
   }
