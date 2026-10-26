@@ -133,7 +133,7 @@ export default function FeynmanGate({
           kind: 'feynman',
           problemId,
           conceptIds,
-          payload: { grade: data.grade, gaps: data.gaps },
+          payload: { interventionId: data.id, grade: data.grade, gaps: data.gaps },
         }),
       }).catch(() => {});
     } catch (e: any) {
