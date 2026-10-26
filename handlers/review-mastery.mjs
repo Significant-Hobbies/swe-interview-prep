@@ -4,6 +4,7 @@ import { readJsonBody } from '../shared/api/read-json.mjs';
 import { getDb } from '../shared/db/client.mjs';
 import { initDatabase } from '../shared/db/schema.mjs';
 import { reviewConcept } from '../shared/lib/fsrs.mjs';
+import { prepareDelayedTransferReceipt } from './activity.mjs';
 
 let initialized = false;
 async function ensureInit() {
@@ -54,6 +55,54 @@ async function upsert(db, userId, questionId, row) {
   });
 }
 
+async function prepareOptionalDelayedTransfer(
+  db,
+  userId,
+  questionId,
+  dueSnapshot,
+  submission,
+  now
+) {
+  if (!submission || !dueSnapshot) return null;
+  const { conceptId, payload } = submission;
+  try {
+    const prepared = await prepareDelayedTransferReceipt({
+      db,
+      userId,
+      problemId: questionId,
+      conceptIds: [conceptId],
+      payload,
+      questionDueSnapshot: dueSnapshot,
+      now,
+    });
+    return prepared.error ? null : { conceptId, payload: prepared.payload };
+  } catch {
+    return null;
+  }
+}
+
+async function storeOptionalDelayedTransfer(db, userId, questionId, prepared) {
+  if (!prepared) return;
+  const { conceptId, payload } = prepared;
+  try {
+    await db.execute({
+      sql: `INSERT INTO activity_log (id, user_id, kind, problem_id, concept_ids, duration_ms, payload)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      args: [
+        randomBytes(16).toString('hex'),
+        userId,
+        'delayed_transfer',
+        questionId,
+        JSON.stringify([conceptId]),
+        0,
+        JSON.stringify(payload),
+      ],
+    });
+  } catch {
+    // Receipt storage is optional; the FSRS review is already saved.
+  }
+}
+
 function toClient(row) {
   if (!row) return null;
   return {
@@ -65,6 +114,29 @@ function toClient(row) {
     lastReview: row.last_review,
     due: row.due,
   };
+}
+
+export async function saveReview({
+  db,
+  userId,
+  questionId,
+  rating,
+  delayedTransfer,
+  now = new Date(),
+}) {
+  const prev = await getRow(db, userId, questionId);
+  const preparedTransfer = await prepareOptionalDelayedTransfer(
+    db,
+    userId,
+    questionId,
+    prev?.due,
+    delayedTransfer,
+    now
+  );
+  const next = reviewConcept(prev, rating);
+  await upsert(db, userId, questionId, next);
+  await storeOptionalDelayedTransfer(db, userId, questionId, preparedTransfer);
+  return toClient({ ...next, question_id: questionId });
 }
 
 export default async function handler({ request, user, json }) {
@@ -85,13 +157,17 @@ export default async function handler({ request, user, json }) {
   }
 
   if (request.method === 'POST') {
-    const { questionId, rating } = await readJsonBody(request);
+    const { questionId, rating, delayedTransfer } = await readJsonBody(request);
     if (!questionId || !rating)
       return json({ error: 'questionId, rating required' }, { status: 400 });
-    const prev = await getRow(db, user.id, questionId);
-    const next = reviewConcept(prev, rating);
-    await upsert(db, user.id, questionId, next);
-    return json({ mastery: toClient({ ...next, question_id: questionId }) });
+    const mastery = await saveReview({
+      db,
+      userId: user.id,
+      questionId,
+      rating,
+      delayedTransfer,
+    });
+    return json({ mastery });
   }
 
   if (request.method === 'PUT') {

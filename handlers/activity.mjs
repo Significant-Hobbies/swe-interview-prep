@@ -28,6 +28,7 @@ export async function prepareDelayedTransferReceipt({
   conceptIds,
   payload,
   now = new Date(),
+  questionDueSnapshot,
 }) {
   if (
     typeof problemId !== 'string' ||
@@ -89,10 +90,13 @@ export async function prepareDelayedTransferReceipt({
     };
   }
 
-  const questionDueResult = await db.execute({
-    sql: 'SELECT due FROM review_question_mastery WHERE user_id = ? AND question_id = ?',
-    args: [userId, problemId],
-  });
+  const questionDueResult =
+    questionDueSnapshot === undefined
+      ? await db.execute({
+          sql: 'SELECT due FROM review_question_mastery WHERE user_id = ? AND question_id = ?',
+          args: [userId, problemId],
+        })
+      : { rows: questionDueSnapshot ? [{ due: questionDueSnapshot }] : [] };
   let reviewDueAt;
   let dueSource;
   if (questionDueResult.rows.length) {

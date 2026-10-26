@@ -19,7 +19,7 @@ import { useDrillStore } from '../hooks/useUserStore';
 import { useAuth } from '../contexts/AuthContext';
 import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
 import { buildDailyLearningPriority } from '../lib/dailyPriority';
-import { latestUnresolvedDelayedTransfer } from '../lib/delayedTransfer';
+import { dueDelayedTransferDecision, unresolvedDelayedTransfers } from '../lib/delayedTransfer';
 import { loadFocusedStudyDrafts } from '../lib/learningContinuity';
 import { loadRecentVisits } from '../lib/recentVisits';
 import { recordSessionActivity } from '../lib/session';
@@ -87,9 +87,13 @@ export default function Today() {
     mastery
   );
   const focusedStudyDrafts = useMemo(() => loadFocusedStudyDrafts(accountScope), [accountScope]);
-  const delayedTransferDecision = useMemo(
-    () => latestUnresolvedDelayedTransfer(delayedTransferEvents, delayedTransferInterventions),
+  const delayedTransferDecisions = useMemo(
+    () => unresolvedDelayedTransfers(delayedTransferEvents, delayedTransferInterventions),
     [delayedTransferEvents, delayedTransferInterventions]
+  );
+  const delayedTransferDecision = useMemo(
+    () => dueDelayedTransferDecision(delayedTransferDecisions, plan?.reviewQueue ?? []),
+    [delayedTransferDecisions, plan?.reviewQueue]
   );
   const priority = useMemo(
     () =>

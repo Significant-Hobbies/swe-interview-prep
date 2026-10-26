@@ -1,32 +1,14 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import {
   classifyDelayedTransfer,
-  continueAfterOptionalMeasurement,
-  latestUnresolvedDelayedTransfer,
+  dueDelayedTransferDecision,
   parseDelayedTransferEvents,
   type DelayedTransferEvent,
+  unresolvedDelayedTransfers,
 } from './delayedTransfer';
 
 describe('delayed transfer evidence', () => {
-  it('continues the existing review action when measurement is unavailable or rejected', async () => {
-    const continueReview = vi.fn().mockResolvedValue('saved');
-    const rejectedMeasurement = vi.fn().mockRejectedValue(new Error('unavailable'));
-    const stalledMeasurement = vi.fn(() => new Promise(() => {}));
-
-    await expect(continueAfterOptionalMeasurement(null, continueReview)).resolves.toBe('saved');
-    await expect(
-      continueAfterOptionalMeasurement(rejectedMeasurement, continueReview)
-    ).resolves.toBe('saved');
-    await expect(
-      continueAfterOptionalMeasurement(stalledMeasurement, continueReview)
-    ).resolves.toBe('saved');
-
-    expect(rejectedMeasurement).toHaveBeenCalledOnce();
-    expect(stalledMeasurement).toHaveBeenCalledOnce();
-    expect(continueReview).toHaveBeenCalledTimes(3);
-  });
-
   it('records an unknown result when no existing critique is available', () => {
     expect(classifyDelayedTransfer(null, 'unknown')).toEqual({
       outcome: 'unknown',
@@ -97,14 +79,14 @@ describe('delayed transfer evidence', () => {
         createdAt: '2026-10-25T10:00:00.000Z',
       },
     ];
-    expect(latestUnresolvedDelayedTransfer([event], interventions)).toMatchObject({
+    expect(unresolvedDelayedTransfers([event], interventions)[0]).toMatchObject({
       conceptId: 'inference-engines',
       interventionId: 'new-intervention',
       outcome: 'pending',
       reviewQuestionId: null,
     });
     expect(
-      latestUnresolvedDelayedTransfer(
+      unresolvedDelayedTransfers(
         [
           {
             ...event,
@@ -114,6 +96,48 @@ describe('delayed transfer evidence', () => {
         ],
         interventions
       )
+    ).toEqual([]);
+  });
+
+  it('selects the strongest unresolved result among due concepts without a pending intervention masking it', () => {
+    const failed: DelayedTransferEvent = {
+      id: 'event-a',
+      conceptId: 'inference-engines',
+      reviewQuestionId: 'review-a',
+      interventionId: 'intervention-a',
+      interventionAt: '2026-10-20T10:00:00.000Z',
+      reviewDueAt: '2026-10-21T10:00:00.000Z',
+      elapsedMs: 86400000,
+      outcome: 'not-demonstrated',
+      score: 20,
+      critiqueSource: 'heuristic',
+      createdAt: '2026-10-21T10:00:00.000Z',
+    };
+    const interventions = [
+      {
+        id: 'feynman-a',
+        conceptIds: ['inference-engines'],
+        interventionId: 'intervention-a',
+        createdAt: '2026-10-20T10:00:00.000Z',
+      },
+      {
+        id: 'feynman-b',
+        conceptIds: ['resource-allocation'],
+        interventionId: 'intervention-b',
+        createdAt: '2026-10-22T10:00:00.000Z',
+      },
+    ];
+    const decisions = unresolvedDelayedTransfers([failed], interventions);
+
+    expect(decisions).toHaveLength(2);
+    expect(
+      dueDelayedTransferDecision(decisions, [
+        { id: 'review-a', conceptId: 'inference-engines' },
+        { id: 'review-b', conceptId: 'resource-allocation' },
+      ])
+    ).toMatchObject({ conceptId: 'inference-engines', outcome: 'not-demonstrated' });
+    expect(
+      dueDelayedTransferDecision(decisions, [{ id: 'review-b', conceptId: 'resource-allocation' }])
     ).toBeNull();
   });
 });

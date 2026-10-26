@@ -36,20 +36,6 @@ export interface DelayedTransferDecision {
   createdAt: string;
 }
 
-export function continueAfterOptionalMeasurement<T>(
-  measure: (() => Promise<unknown>) | null,
-  continueAction: () => T | Promise<T>
-): T | Promise<T> {
-  if (measure) {
-    try {
-      void Promise.resolve(measure()).catch(() => {});
-    } catch {
-      // Optional measurement cannot veto the existing review flow.
-    }
-  }
-  return continueAction();
-}
-
 export function classifyDelayedTransfer(
   critique: Critique | null,
   source: DelayedTransferCritiqueSource
@@ -70,96 +56,140 @@ export function classifyDelayedTransfer(
   };
 }
 
-export function latestUnresolvedDelayedTransfer(
-  events: DelayedTransferEvent[],
-  interventions: DelayedTransferIntervention[] = []
-): DelayedTransferDecision | null {
-  const latestInterventionByConcept = new Map<string, DelayedTransferIntervention>();
+function newestInterventionByConcept(
+  interventions: DelayedTransferIntervention[]
+): Map<string, DelayedTransferIntervention> {
+  const latest = new Map<string, DelayedTransferIntervention>();
   for (const intervention of interventions) {
     for (const conceptId of intervention.conceptIds) {
-      const current = latestInterventionByConcept.get(conceptId);
-      if (!current || intervention.createdAt > current.createdAt) {
-        latestInterventionByConcept.set(conceptId, intervention);
-      }
+      const current = latest.get(conceptId);
+      if (!current || intervention.createdAt > current.createdAt)
+        latest.set(conceptId, intervention);
     }
   }
+  return latest;
+}
 
-  const latestByConcept = new Map<string, DelayedTransferEvent>();
+function newestEventByConcept(events: DelayedTransferEvent[]): Map<string, DelayedTransferEvent> {
+  const latest = new Map<string, DelayedTransferEvent>();
   for (const event of events) {
-    const current = latestByConcept.get(event.conceptId);
+    const current = latest.get(event.conceptId);
     if (
       !current ||
       event.interventionAt > current.interventionAt ||
       (event.interventionAt === current.interventionAt && event.createdAt > current.createdAt)
     ) {
-      latestByConcept.set(event.conceptId, event);
+      latest.set(event.conceptId, event);
     }
   }
+  return latest;
+}
 
-  const decisions: DelayedTransferDecision[] = [];
-  for (const [conceptId, intervention] of latestInterventionByConcept) {
-    const event = latestByConcept.get(conceptId);
-    if (event && event.interventionId === intervention.interventionId) {
-      if (event.outcome !== 'demonstrated') decisions.push(event);
-      continue;
-    }
-    decisions.push({
-      conceptId,
-      reviewQuestionId: null,
-      interventionId: intervention.interventionId,
-      interventionAt: intervention.createdAt,
-      elapsedMs: 0,
-      outcome: 'pending',
-      score: null,
-      critiqueSource: 'unknown',
-      createdAt: intervention.createdAt,
-    });
+function decisionForIntervention(
+  conceptId: string,
+  intervention: DelayedTransferIntervention,
+  event: DelayedTransferEvent | undefined
+): DelayedTransferDecision | null {
+  if (event?.interventionId === intervention.interventionId) {
+    return event.outcome === 'demonstrated' ? null : event;
   }
-  return decisions.sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
+  return {
+    conceptId,
+    reviewQuestionId: null,
+    interventionId: intervention.interventionId,
+    interventionAt: intervention.createdAt,
+    elapsedMs: 0,
+    outcome: 'pending',
+    score: null,
+    critiqueSource: 'unknown',
+    createdAt: intervention.createdAt,
+  };
+}
+
+export function unresolvedDelayedTransfers(
+  events: DelayedTransferEvent[],
+  interventions: DelayedTransferIntervention[] = []
+): DelayedTransferDecision[] {
+  const latestInterventions = newestInterventionByConcept(interventions);
+  const latestEvents = newestEventByConcept(events);
+  return [...latestInterventions].flatMap(([conceptId, intervention]) => {
+    const decision = decisionForIntervention(conceptId, intervention, latestEvents.get(conceptId));
+    return decision ? [decision] : [];
+  });
+}
+
+export function dueDelayedTransferDecision(
+  decisions: DelayedTransferDecision[],
+  reviewQueue: { id: string; conceptId: string }[]
+): DelayedTransferDecision | null {
+  const dueConcepts = new Set(reviewQueue.map((question) => question.conceptId));
+  const severity: Record<DelayedTransferDecision['outcome'], number> = {
+    'not-demonstrated': 0,
+    partial: 1,
+    unknown: 2,
+    demonstrated: 3,
+    pending: 4,
+  };
+  return (
+    decisions
+      .filter((decision) => decision.outcome !== 'pending' && dueConcepts.has(decision.conceptId))
+      .sort(
+        (a, b) =>
+          severity[a.outcome] - severity[b.outcome] || b.createdAt.localeCompare(a.createdAt)
+      )[0] ?? null
+  );
+}
+
+function isEventPayload(payload: unknown, concepts: unknown): payload is Record<string, unknown> {
+  if (!payload || typeof payload !== 'object') return false;
+  const fields = payload as Record<string, unknown>;
+  return (
+    typeof fields.conceptId === 'string' &&
+    Array.isArray(concepts) &&
+    concepts.includes(fields.conceptId) &&
+    typeof fields.interventionId === 'string' &&
+    typeof fields.interventionAt === 'string' &&
+    typeof fields.reviewDueAt === 'string' &&
+    typeof fields.elapsedMs === 'number' &&
+    ['demonstrated', 'partial', 'not-demonstrated', 'unknown'].includes(String(fields.outcome)) &&
+    ['heuristic', 'ai', 'unknown'].includes(String(fields.critiqueSource)) &&
+    (fields.score === null || typeof fields.score === 'number')
+  );
+}
+
+function parseDelayedTransferEvent(item: unknown): DelayedTransferEvent | null {
+  if (!item || typeof item !== 'object') return null;
+  const row = item as Record<string, unknown>;
+  const payload = row.payload;
+  if (
+    row.kind !== 'delayed_transfer' ||
+    typeof row.id !== 'string' ||
+    typeof row.problemId !== 'string' ||
+    typeof row.createdAt !== 'string' ||
+    !isEventPayload(payload, row.conceptIds)
+  ) {
+    return null;
+  }
+  return {
+    id: row.id,
+    conceptId: payload.conceptId as string,
+    reviewQuestionId: row.problemId,
+    interventionId: payload.interventionId as string,
+    interventionAt: payload.interventionAt as string,
+    reviewDueAt: payload.reviewDueAt as string,
+    elapsedMs: payload.elapsedMs as number,
+    outcome: payload.outcome as DelayedTransferOutcome,
+    score: payload.score as number | null,
+    critiqueSource: payload.critiqueSource as DelayedTransferCritiqueSource,
+    createdAt: row.createdAt,
+  };
 }
 
 export function parseDelayedTransferEvents(value: unknown): DelayedTransferEvent[] {
   if (!Array.isArray(value)) return [];
-  return value.flatMap((item): DelayedTransferEvent[] => {
-    if (!item || typeof item !== 'object') return [];
-    const row = item as Record<string, unknown>;
-    const payload = row.payload as Record<string, unknown> | null;
-    const concepts = row.conceptIds;
-    if (
-      row.kind !== 'delayed_transfer' ||
-      typeof row.id !== 'string' ||
-      typeof row.problemId !== 'string' ||
-      !Array.isArray(concepts) ||
-      typeof payload?.conceptId !== 'string' ||
-      !concepts.includes(payload.conceptId) ||
-      typeof payload.interventionId !== 'string' ||
-      typeof payload.interventionAt !== 'string' ||
-      typeof payload.reviewDueAt !== 'string' ||
-      typeof payload.elapsedMs !== 'number' ||
-      !['demonstrated', 'partial', 'not-demonstrated', 'unknown'].includes(
-        String(payload.outcome)
-      ) ||
-      !['heuristic', 'ai', 'unknown'].includes(String(payload.critiqueSource)) ||
-      (payload.score !== null && typeof payload.score !== 'number') ||
-      typeof row.createdAt !== 'string'
-    ) {
-      return [];
-    }
-    return [
-      {
-        id: row.id,
-        conceptId: payload.conceptId,
-        reviewQuestionId: row.problemId,
-        interventionId: payload.interventionId,
-        interventionAt: payload.interventionAt,
-        reviewDueAt: payload.reviewDueAt,
-        elapsedMs: payload.elapsedMs,
-        outcome: payload.outcome as DelayedTransferOutcome,
-        score: payload.score as number | null,
-        critiqueSource: payload.critiqueSource as DelayedTransferCritiqueSource,
-        createdAt: row.createdAt,
-      },
-    ];
+  return value.flatMap((item) => {
+    const event = parseDelayedTransferEvent(item);
+    return event ? [event] : [];
   });
 }
 

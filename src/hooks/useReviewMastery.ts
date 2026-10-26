@@ -5,6 +5,17 @@ import type { MasteryRating } from '../lib/fsrs';
 import { loadLocal, saveLocal, STORE_KEYS } from '../lib/userStore';
 import { type ReviewMasteryEntry, reviewQuestion } from '../lib/reviewMastery';
 
+interface DelayedTransferSubmission {
+  conceptId: string;
+  payload: {
+    schemaVersion: 1;
+    interventionId: string;
+    outcome: 'demonstrated' | 'partial' | 'not-demonstrated' | 'unknown';
+    score: number | null;
+    critiqueSource: 'heuristic' | 'ai' | 'unknown';
+  };
+}
+
 function loadGuest(): Record<string, ReviewMasteryEntry> {
   return loadLocal(STORE_KEYS.reviewMastery, {});
 }
@@ -48,14 +59,18 @@ export function useReviewMastery() {
 
   /** Resolves `false` when the server rejected the grade and nothing was written. */
   const review = useCallback(
-    async (questionId: string, rating: MasteryRating): Promise<boolean> => {
+    async (
+      questionId: string,
+      rating: MasteryRating,
+      delayedTransfer?: DelayedTransferSubmission
+    ): Promise<boolean> => {
       if (user) {
         try {
           const res = await fetch('/api/learning?action=review-mastery', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify({ questionId, rating }),
+            body: JSON.stringify({ questionId, rating, delayedTransfer }),
           });
           if (!res.ok) return false;
           const data = await res.json();

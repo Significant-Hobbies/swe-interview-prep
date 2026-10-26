@@ -36,7 +36,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { aiConfigured, type Critique, critiqueAnswer } from '../lib/aiClient';
 import {
   classifyDelayedTransfer,
-  continueAfterOptionalMeasurement,
   parseDelayedTransferInterventions,
   type DelayedTransferCritiqueSource,
 } from '../lib/delayedTransfer';
@@ -507,45 +506,35 @@ function ReviewSession({ focusQuestionId }: { focusQuestionId?: string }) {
             .filter((item) => item.conceptIds.includes(current.conceptId))
             .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0]
         : undefined;
-      const measure =
+      const transfer = classifyDelayedTransfer(critique, critiqueSource ?? 'unknown');
+      const delayedTransfer =
         user && mode === 'due' && intervention
-          ? async () => {
-              const transfer = classifyDelayedTransfer(critique, critiqueSource ?? 'unknown');
-              return learningFetch('activity', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  kind: 'delayed_transfer',
-                  problemId: current.id,
-                  conceptIds: [current.conceptId],
-                  payload: {
-                    schemaVersion: 1,
-                    interventionId: intervention.interventionId,
-                    outcome: transfer.outcome,
-                    score: transfer.score,
-                    critiqueSource: transfer.critiqueSource,
-                  },
-                }),
-              });
+          ? {
+              conceptId: current.conceptId,
+              payload: {
+                schemaVersion: 1 as const,
+                interventionId: intervention.interventionId,
+                outcome: transfer.outcome,
+                score: transfer.score,
+                critiqueSource: transfer.critiqueSource,
+              },
             }
-          : null;
+          : undefined;
 
-      await continueAfterOptionalMeasurement(measure, async () => {
-        void reviewRq(current.id, rating);
-        void reviewConcept(current.conceptId, rating);
-        void logActivity({
-          kind: 'review_session',
-          conceptIds: [current.conceptId],
-          problemId: current.id,
-        });
-        recordSessionActivity('review_session');
-        setDone((prev) => new Set(prev).add(current.id));
-        setRevealed(false);
-        setAnswer('');
-        setCritique(null);
-        setCritiqueError('');
-        setCritiqueSource(null);
+      void reviewRq(current.id, rating, delayedTransfer);
+      void reviewConcept(current.conceptId, rating);
+      void logActivity({
+        kind: 'review_session',
+        conceptIds: [current.conceptId],
+        problemId: current.id,
       });
+      recordSessionActivity('review_session');
+      setDone((prev) => new Set(prev).add(current.id));
+      setRevealed(false);
+      setAnswer('');
+      setCritique(null);
+      setCritiqueError('');
+      setCritiqueSource(null);
     } finally {
       setSubmittingRating(false);
     }
