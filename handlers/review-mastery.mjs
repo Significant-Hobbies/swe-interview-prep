@@ -59,20 +59,31 @@ async function prepareOptionalDelayedTransfer(
   db,
   userId,
   questionId,
-  dueSnapshot,
+  previousQuestion,
   submission,
   now
 ) {
-  if (!submission || !dueSnapshot) return null;
+  if (!submission) return null;
   const { conceptId, payload } = submission;
   try {
+    let dueSnapshot = previousQuestion ? { due: previousQuestion.due, source: 'question' } : null;
+    if (!previousQuestion) {
+      const conceptDue = await db.execute({
+        sql: 'SELECT due FROM concept_mastery WHERE user_id = ? AND concept_id = ?',
+        args: [userId, conceptId],
+      });
+      dueSnapshot = conceptDue.rows[0]?.due
+        ? { due: conceptDue.rows[0].due, source: 'concept' }
+        : null;
+    }
+    if (!dueSnapshot?.due) return null;
     const prepared = await prepareDelayedTransferReceipt({
       db,
       userId,
       problemId: questionId,
       conceptIds: [conceptId],
       payload,
-      questionDueSnapshot: dueSnapshot,
+      dueSnapshot,
       now,
     });
     return prepared.error ? null : { conceptId, payload: prepared.payload };
@@ -129,7 +140,7 @@ export async function saveReview({
     db,
     userId,
     questionId,
-    prev?.due,
+    prev,
     delayedTransfer,
     now
   );

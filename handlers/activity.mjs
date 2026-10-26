@@ -28,7 +28,7 @@ export async function prepareDelayedTransferReceipt({
   conceptIds,
   payload,
   now = new Date(),
-  questionDueSnapshot,
+  dueSnapshot,
 }) {
   if (
     typeof problemId !== 'string' ||
@@ -91,17 +91,17 @@ export async function prepareDelayedTransferReceipt({
   }
 
   const questionDueResult =
-    questionDueSnapshot === undefined
+    dueSnapshot === undefined
       ? await db.execute({
           sql: 'SELECT due FROM review_question_mastery WHERE user_id = ? AND question_id = ?',
           args: [userId, problemId],
         })
-      : { rows: questionDueSnapshot ? [{ due: questionDueSnapshot }] : [] };
+      : { rows: dueSnapshot ? [{ ...dueSnapshot }] : [] };
   let reviewDueAt;
   let dueSource;
   if (questionDueResult.rows.length) {
     reviewDueAt = questionDueResult.rows[0].due;
-    dueSource = 'question';
+    dueSource = questionDueResult.rows[0].source || 'question';
     const due = parseDatabaseTimestamp(reviewDueAt);
     if (!reviewDueAt || !Number.isFinite(due.getTime()) || due.getTime() > now.getTime()) {
       return { error: 'Review is not due for this question.', status: 409 };
@@ -143,19 +143,13 @@ export default async function handler({ request, user, json }) {
   if (request.method === 'POST') {
     const { kind, problemId, conceptIds, durationMs, payload } = await readJsonBody(request);
     if (!kind) return json({ error: 'kind required' }, { status: 400 });
-    const id = randomBytes(16).toString('hex');
-    let storedPayload = payload;
     if (kind === 'delayed_transfer') {
-      const prepared = await prepareDelayedTransferReceipt({
-        db,
-        userId: user.id,
-        problemId,
-        conceptIds,
-        payload,
-      });
-      if (prepared.error) return json({ error: prepared.error }, { status: prepared.status });
-      storedPayload = prepared.payload;
+      return json(
+        { error: 'Delayed transfer receipts must accompany a saved review.' },
+        { status: 400 }
+      );
     }
+    const id = randomBytes(16).toString('hex');
     await db.execute({
       sql: `INSERT INTO activity_log (id, user_id, kind, problem_id, concept_ids, duration_ms, payload)
             VALUES (?, ?, ?, ?, ?, ?, ?)`,
@@ -165,8 +159,8 @@ export default async function handler({ request, user, json }) {
         kind,
         problemId || null,
         conceptIds ? JSON.stringify(conceptIds) : null,
-        kind === 'delayed_transfer' ? 0 : durationMs || 0,
-        storedPayload ? JSON.stringify(storedPayload) : null,
+        durationMs || 0,
+        payload ? JSON.stringify(payload) : null,
       ],
     });
     return json({ id });

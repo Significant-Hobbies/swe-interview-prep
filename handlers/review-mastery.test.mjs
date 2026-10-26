@@ -14,6 +14,8 @@ function dbFor({
   feynman = intervention,
   failInterventionLookup = false,
   failReceiptStorage = false,
+  questionMissing = false,
+  conceptDue = priorDue,
 } = {}) {
   const operations = [];
   const receipts = [];
@@ -23,7 +25,13 @@ function dbFor({
     async execute({ sql, args }) {
       if (sql.includes('SELECT * FROM review_question_mastery')) {
         operations.push('read-review');
-        return { rows: [{ question_id: 'review-1', due: priorDue }] };
+        return {
+          rows: questionMissing ? [] : [{ question_id: 'review-1', due: priorDue }],
+        };
+      }
+      if (sql.includes('FROM concept_mastery')) {
+        operations.push('read-concept-due');
+        return { rows: conceptDue ? [{ due: conceptDue }] : [] };
       }
       if (sql.includes('FROM feynman_logs')) {
         operations.push('validate-intervention');
@@ -147,5 +155,30 @@ describe('review with optional delayed-transfer measurement', () => {
       'store-receipt',
     ]);
     expect(db.receipts).toEqual([]);
+  });
+
+  it('uses authenticated pre-update concept due metadata when no question schedule exists', async () => {
+    const db = dbFor({ questionMissing: true });
+
+    await saveReview({
+      db,
+      userId: 'owner-1',
+      questionId: 'review-1',
+      rating: 'good',
+      delayedTransfer,
+      now,
+    });
+
+    expect(db.operations).toEqual([
+      'read-review',
+      'read-concept-due',
+      'validate-intervention',
+      'save-review',
+      'store-receipt',
+    ]);
+    expect(db.receipts[0]).toMatchObject({
+      dueSource: 'concept',
+      reviewDueAt: '2026-10-26T11:00:00.000Z',
+    });
   });
 });

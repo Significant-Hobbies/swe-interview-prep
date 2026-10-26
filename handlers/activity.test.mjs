@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
-import { prepareDelayedTransferReceipt } from './activity.mjs';
+import { describe, expect, it, vi } from 'vitest';
+
+const { getDbMock, initDatabaseMock } = vi.hoisted(() => ({
+  getDbMock: vi.fn(),
+  initDatabaseMock: vi.fn(),
+}));
+
+vi.mock('../shared/db/client.mjs', () => ({ getDb: getDbMock }));
+vi.mock('../shared/db/schema.mjs', () => ({ initDatabase: initDatabaseMock }));
+
+import activityHandler, { prepareDelayedTransferReceipt } from './activity.mjs';
 
 const now = new Date('2026-10-26T12:00:00.000Z');
 const intervention = {
@@ -47,6 +56,27 @@ function receipt(overrides = {}) {
 }
 
 describe('delayed transfer activity receipt', () => {
+  it('rejects detached receipt writes on the generic activity endpoint', async () => {
+    const execute = vi.fn();
+    getDbMock.mockReturnValue({ execute });
+
+    const result = await activityHandler({
+      request: new Request('https://example.test/api/activity', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'delayed_transfer' }),
+      }),
+      user: { id: 'owner-1' },
+      json: (body, status = 200) => ({ body, status }),
+    });
+
+    expect(result).toMatchObject({
+      body: { error: 'Delayed transfer receipts must accompany a saved review.' },
+      status: { status: 400 },
+    });
+    expect(execute).not.toHaveBeenCalled();
+  });
+
   it('stores only a linked, content-minimized result with verified elapsed and due metadata', async () => {
     const result = await prepareDelayedTransferReceipt(receipt());
     expect(result.payload).toEqual({
