@@ -66,16 +66,7 @@ async function prepareOptionalDelayedTransfer(
   if (!submission) return null;
   const { conceptId, payload } = submission;
   try {
-    let dueSnapshot = previousQuestion ? { due: previousQuestion.due, source: 'question' } : null;
-    if (!previousQuestion) {
-      const conceptDue = await db.execute({
-        sql: 'SELECT due FROM concept_mastery WHERE user_id = ? AND concept_id = ?',
-        args: [userId, conceptId],
-      });
-      dueSnapshot = conceptDue.rows[0]?.due
-        ? { due: conceptDue.rows[0].due, source: 'concept' }
-        : null;
-    }
+    const dueSnapshot = previousQuestion ? { due: previousQuestion.due, source: 'question' } : null;
     if (!dueSnapshot?.due) return null;
     const prepared = await prepareDelayedTransferReceipt({
       db,

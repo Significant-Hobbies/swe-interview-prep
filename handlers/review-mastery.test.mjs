@@ -157,7 +157,7 @@ describe('review with optional delayed-transfer measurement', () => {
     expect(db.receipts).toEqual([]);
   });
 
-  it('uses authenticated pre-update concept due metadata when no question schedule exists', async () => {
+  it('excludes receipts when only concept due metadata exists', async () => {
     const db = dbFor({ questionMissing: true });
 
     await saveReview({
@@ -169,16 +169,7 @@ describe('review with optional delayed-transfer measurement', () => {
       now,
     });
 
-    expect(db.operations).toEqual([
-      'read-review',
-      'read-concept-due',
-      'validate-intervention',
-      'save-review',
-      'store-receipt',
-    ]);
-    expect(db.receipts[0]).toMatchObject({
-      dueSource: 'concept',
-      reviewDueAt: '2026-10-26T11:00:00.000Z',
-    });
+    expect(db.operations).toEqual(['read-review', 'save-review']);
+    expect(db.receipts).toEqual([]);
   });
 });
