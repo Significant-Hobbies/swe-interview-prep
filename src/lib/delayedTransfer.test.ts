@@ -105,7 +105,13 @@ describe('delayed transfer evidence', () => {
     });
     expect(
       latestUnresolvedDelayedTransfer(
-        [{ ...event, interventionId: 'new-intervention', interventionAt: '2026-10-25T10:00:00.000Z' }],
+        [
+          {
+            ...event,
+            interventionId: 'new-intervention',
+            interventionAt: '2026-10-25T10:00:00.000Z',
+          },
+        ],
         interventions
       )
     ).toBeNull();

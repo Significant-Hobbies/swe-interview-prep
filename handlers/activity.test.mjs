@@ -8,7 +8,11 @@ const intervention = {
   created_at: '2026-10-24 12:00:00',
 };
 
-function dbFor({ feynman = intervention, questionDue = '2026-10-26 11:00:00', conceptDue = null } = {}) {
+function dbFor({
+  feynman = intervention,
+  questionDue = '2026-10-26 11:00:00',
+  conceptDue = null,
+} = {}) {
   return {
     async execute({ sql }) {
       if (sql.includes('FROM feynman_logs')) return { rows: feynman ? [feynman] : [] };
@@ -83,7 +87,9 @@ describe('delayed transfer activity receipt', () => {
 
   it('rejects a question with a future due date even if the concept itself is due', async () => {
     const result = await prepareDelayedTransferReceipt(
-      receipt({ db: dbFor({ questionDue: '2026-10-27 12:00:00', conceptDue: '2026-10-25 12:00:00' }) })
+      receipt({
+        db: dbFor({ questionDue: '2026-10-27 12:00:00', conceptDue: '2026-10-25 12:00:00' }),
+      })
     );
     expect(result).toMatchObject({ status: 409 });
   });

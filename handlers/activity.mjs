@@ -48,12 +48,16 @@ export async function prepareDelayedTransferReceipt({
   if (
     (payload.outcome === 'unknown' && (score !== null || payload.critiqueSource !== 'unknown')) ||
     (payload.outcome !== 'unknown' &&
-      (!Number.isInteger(score) || score < 0 || score > 100 || payload.critiqueSource === 'unknown'))
+      (!Number.isInteger(score) ||
+        score < 0 ||
+        score > 100 ||
+        payload.critiqueSource === 'unknown'))
   ) {
     return { error: 'Invalid delayed transfer result.', status: 400 };
   }
   if (score !== null) {
-    const expectedOutcome = score >= 80 ? 'demonstrated' : score >= 55 ? 'partial' : 'not-demonstrated';
+    const expectedOutcome =
+      score >= 80 ? 'demonstrated' : score >= 55 ? 'partial' : 'not-demonstrated';
     if (payload.outcome !== expectedOutcome) {
       return { error: 'Delayed transfer result does not match its score band.', status: 400 };
     }
@@ -79,7 +83,10 @@ export async function prepareDelayedTransferReceipt({
     !Number.isFinite(interventionAt.getTime()) ||
     interventionAt.getTime() >= now.getTime()
   ) {
-    return { error: 'Intervention does not match this concept or precede the review.', status: 409 };
+    return {
+      error: 'Intervention does not match this concept or precede the review.',
+      status: 409,
+    };
   }
 
   const questionDueResult = await db.execute({

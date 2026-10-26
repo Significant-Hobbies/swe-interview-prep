@@ -98,9 +98,9 @@ describe('daily learning priority', () => {
     expect(priority.reason).toBe('retention');
   });
 
-  it('keeps a failed delayed transfer as the next task regardless of the FSRS schedule', () => {
+  it('prioritizes a failed delayed transfer when a review for the concept is due', () => {
     const priority = buildDailyLearningPriority({
-      plan: plan('progression'),
+      plan: plan('retention'),
       profile: DEFAULT_PROFILE,
       mastery: {
         'inference-engines': {
@@ -119,6 +119,7 @@ describe('daily learning priority', () => {
         reviewQuestionId: 'review-inference',
         interventionId: 'intervention-1',
         interventionAt: '2026-10-20T10:00:00.000Z',
+        elapsedMs: 86400000,
         outcome: 'not-demonstrated',
         score: 30,
         critiqueSource: 'heuristic',
@@ -129,9 +130,68 @@ describe('daily learning priority', () => {
 
     expect(priority.reason).toBe('recovery');
     expect(priority.conceptId).toBe('inference-engines');
-    expect(priority.action.href).toBe('/practice/all?tab=reviews&review=review-inference');
+    expect(priority.action.href).toBe(
+      `/practice/all?tab=reviews&review=${REVIEW_QUESTIONS.find((q) => q.conceptId === 'inference-engines')!.id}`
+    );
     expect(priority.rationale).toMatch(/did not demonstrate recall/i);
     expect(priority.rationale).toMatch(/FSRS rating alone does not clear/i);
+    expect(priority.evidence).toMatch(/1440 minutes after its intervention/i);
+  });
+
+  it('returns to the regular planner when an unresolved result has no due retry', () => {
+    const base = {
+      plan: plan('progression'),
+      profile: DEFAULT_PROFILE,
+      mastery: {
+        'inference-engines': {
+          stability: 20,
+          difficulty: 3,
+          reps: 8,
+          lapses: 0,
+          state: 2,
+          confidence: 0.95,
+          due: '2027-01-01T00:00:00.000Z',
+        },
+      },
+      drillState: {},
+      now: new Date('2026-10-26T10:00:00.000Z'),
+    };
+    const regular = buildDailyLearningPriority(base);
+    const withFailedResult = buildDailyLearningPriority({
+      ...base,
+      delayedTransferDecision: {
+        conceptId: 'inference-engines',
+        reviewQuestionId: 'review-inference',
+        interventionId: 'intervention-1',
+        interventionAt: '2026-10-20T10:00:00.000Z',
+        elapsedMs: 86400000,
+        outcome: 'not-demonstrated',
+        score: 30,
+        critiqueSource: 'heuristic',
+        createdAt: '2026-10-21T10:00:00.000Z',
+      },
+    });
+
+    expect(withFailedResult.action).toEqual(regular.action);
+    expect(withFailedResult.completionPredicate).toEqual(regular.completionPredicate);
+    expect(withFailedResult.reason).toBe(regular.reason);
+
+    const pending = buildDailyLearningPriority({
+      ...base,
+      delayedTransferDecision: {
+        conceptId: 'inference-engines',
+        reviewQuestionId: null,
+        interventionId: 'intervention-2',
+        interventionAt: '2026-10-25T10:00:00.000Z',
+        elapsedMs: 0,
+        outcome: 'pending',
+        score: null,
+        critiqueSource: 'unknown',
+        createdAt: '2026-10-25T10:00:00.000Z',
+      },
+    });
+    expect(pending.action).toEqual(regular.action);
+    expect(pending.completionPredicate).toEqual(regular.completionPredicate);
   });
 
   it('keeps unknown results pending and includes their state in the recommendation fingerprint', () => {
@@ -149,6 +209,7 @@ describe('daily learning priority', () => {
         reviewQuestionId: null,
         interventionId: 'intervention-2',
         interventionAt: '2026-10-25T10:00:00.000Z',
+        elapsedMs: 0,
         outcome: 'pending',
         score: null,
         critiqueSource: 'unknown',
@@ -156,8 +217,11 @@ describe('daily learning priority', () => {
       },
     });
     expect(priority.action.href).toContain('/practice/all?tab=reviews&review=');
+    expect(priority.action.label).toBe('Review without hints');
     expect(priority.rationale).toMatch(/no delayed no-hint result has been recorded/i);
-    expect(priority.completionPredicate.refId).toBe(REVIEW_QUESTIONS.find((q) => q.conceptId === 'inference-engines')!.id);
+    expect(priority.completionPredicate.refId).toBe(
+      REVIEW_QUESTIONS.find((q) => q.conceptId === 'inference-engines')!.id
+    );
     expect(priority.freshness.evidenceFingerprint).toContain('intervention-2:pending');
   });
 
@@ -168,10 +232,12 @@ describe('daily learning priority', () => {
       mastery: {},
       drillState: {},
       delayedTransferAvailable: false,
+      online: true,
       now: new Date('2026-10-26T10:00:00.000Z'),
     });
-    expect(priority.state).toBe('source-unavailable');
-    expect(priority.rationale).toMatch(/history is unavailable|history could not be read/i);
+    expect(priority.state).toBe('new-learner');
+    expect(priority.rationale).toMatch(/delayed-transfer history could not be read/i);
+    expect(priority.rationale).toMatch(/no learning evidence/i);
   });
 
   it('advances past a verified lab receipt with otherwise identical state', () => {

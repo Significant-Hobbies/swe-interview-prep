@@ -29,6 +29,7 @@ export interface DelayedTransferDecision {
   reviewQuestionId: string | null;
   interventionId: string;
   interventionAt: string;
+  elapsedMs: number;
   outcome: DelayedTransferOutcome | 'pending';
   score: number | null;
   critiqueSource: DelayedTransferCritiqueSource;
@@ -52,7 +53,11 @@ export function continueAfterOptionalMeasurement<T>(
 export function classifyDelayedTransfer(
   critique: Critique | null,
   source: DelayedTransferCritiqueSource
-): { outcome: DelayedTransferOutcome; score: number | null; critiqueSource: DelayedTransferCritiqueSource } {
+): {
+  outcome: DelayedTransferOutcome;
+  score: number | null;
+  critiqueSource: DelayedTransferCritiqueSource;
+} {
   if (!critique || source === 'unknown' || !Number.isFinite(critique.score)) {
     return { outcome: 'unknown', score: null, critiqueSource: 'unknown' };
   }
@@ -103,6 +108,7 @@ export function latestUnresolvedDelayedTransfer(
       reviewQuestionId: null,
       interventionId: intervention.interventionId,
       interventionAt: intervention.createdAt,
+      elapsedMs: 0,
       outcome: 'pending',
       score: null,
       critiqueSource: 'unknown',
@@ -130,26 +136,30 @@ export function parseDelayedTransferEvents(value: unknown): DelayedTransferEvent
       typeof payload.interventionAt !== 'string' ||
       typeof payload.reviewDueAt !== 'string' ||
       typeof payload.elapsedMs !== 'number' ||
-      !['demonstrated', 'partial', 'not-demonstrated', 'unknown'].includes(String(payload.outcome)) ||
+      !['demonstrated', 'partial', 'not-demonstrated', 'unknown'].includes(
+        String(payload.outcome)
+      ) ||
       !['heuristic', 'ai', 'unknown'].includes(String(payload.critiqueSource)) ||
       (payload.score !== null && typeof payload.score !== 'number') ||
       typeof row.createdAt !== 'string'
     ) {
       return [];
     }
-    return [{
-      id: row.id,
-      conceptId: payload.conceptId,
-      reviewQuestionId: row.problemId,
-      interventionId: payload.interventionId,
-      interventionAt: payload.interventionAt,
-      reviewDueAt: payload.reviewDueAt,
-      elapsedMs: payload.elapsedMs,
-      outcome: payload.outcome as DelayedTransferOutcome,
-      score: payload.score as number | null,
-      critiqueSource: payload.critiqueSource as DelayedTransferCritiqueSource,
-      createdAt: row.createdAt,
-    }];
+    return [
+      {
+        id: row.id,
+        conceptId: payload.conceptId,
+        reviewQuestionId: row.problemId,
+        interventionId: payload.interventionId,
+        interventionAt: payload.interventionAt,
+        reviewDueAt: payload.reviewDueAt,
+        elapsedMs: payload.elapsedMs,
+        outcome: payload.outcome as DelayedTransferOutcome,
+        score: payload.score as number | null,
+        critiqueSource: payload.critiqueSource as DelayedTransferCritiqueSource,
+        createdAt: row.createdAt,
+      },
+    ];
   });
 }
 
@@ -168,11 +178,13 @@ export function parseDelayedTransferInterventions(value: unknown): DelayedTransf
     ) {
       return [];
     }
-    return [{
-      id: typeof row.id === 'string' ? row.id : payload.interventionId,
-      conceptIds: row.conceptIds as string[],
-      interventionId: payload.interventionId,
-      createdAt: row.createdAt,
-    }];
+    return [
+      {
+        id: typeof row.id === 'string' ? row.id : payload.interventionId,
+        conceptIds: row.conceptIds as string[],
+        interventionId: payload.interventionId,
+        createdAt: row.createdAt,
+      },
+    ];
   });
 }

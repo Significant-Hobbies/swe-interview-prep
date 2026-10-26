@@ -507,27 +507,28 @@ function ReviewSession({ focusQuestionId }: { focusQuestionId?: string }) {
             .filter((item) => item.conceptIds.includes(current.conceptId))
             .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0]
         : undefined;
-      const measure = user && mode === 'due' && intervention
-        ? async () => {
-            const transfer = classifyDelayedTransfer(critique, critiqueSource ?? 'unknown');
-            return learningFetch('activity', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                kind: 'delayed_transfer',
-                problemId: current.id,
-                conceptIds: [current.conceptId],
-                payload: {
-                  schemaVersion: 1,
-                  interventionId: intervention.interventionId,
-                  outcome: transfer.outcome,
-                  score: transfer.score,
-                  critiqueSource: transfer.critiqueSource,
-                },
-              }),
-            });
-          }
-        : null;
+      const measure =
+        user && mode === 'due' && intervention
+          ? async () => {
+              const transfer = classifyDelayedTransfer(critique, critiqueSource ?? 'unknown');
+              return learningFetch('activity', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  kind: 'delayed_transfer',
+                  problemId: current.id,
+                  conceptIds: [current.conceptId],
+                  payload: {
+                    schemaVersion: 1,
+                    interventionId: intervention.interventionId,
+                    outcome: transfer.outcome,
+                    score: transfer.score,
+                    critiqueSource: transfer.critiqueSource,
+                  },
+                }),
+              });
+            }
+          : null;
 
       await continueAfterOptionalMeasurement(measure, async () => {
         void reviewRq(current.id, rating);
@@ -685,9 +686,7 @@ function ReviewSession({ focusQuestionId }: { focusQuestionId?: string }) {
               </>
             )}
 
-            <ReviewRatingButtons
-              onRate={next}
-            />
+            <ReviewRatingButtons onRate={next} />
           </div>
         )}
       </Card>
