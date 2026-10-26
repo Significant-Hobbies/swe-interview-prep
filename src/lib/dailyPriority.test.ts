@@ -98,6 +98,82 @@ describe('daily learning priority', () => {
     expect(priority.reason).toBe('retention');
   });
 
+  it('keeps a failed delayed transfer as the next task regardless of the FSRS schedule', () => {
+    const priority = buildDailyLearningPriority({
+      plan: plan('progression'),
+      profile: DEFAULT_PROFILE,
+      mastery: {
+        'inference-engines': {
+          stability: 20,
+          difficulty: 3,
+          reps: 8,
+          lapses: 0,
+          state: 2,
+          confidence: 0.95,
+          due: '2027-01-01T00:00:00.000Z',
+        },
+      },
+      drillState: {},
+      delayedTransferDecision: {
+        conceptId: 'inference-engines',
+        reviewQuestionId: 'review-inference',
+        interventionId: 'intervention-1',
+        interventionAt: '2026-10-20T10:00:00.000Z',
+        outcome: 'not-demonstrated',
+        score: 30,
+        critiqueSource: 'heuristic',
+        createdAt: '2026-10-21T10:00:00.000Z',
+      },
+      now: new Date('2026-10-26T10:00:00.000Z'),
+    });
+
+    expect(priority.reason).toBe('recovery');
+    expect(priority.conceptId).toBe('inference-engines');
+    expect(priority.action.href).toBe('/practice/all?tab=reviews&review=review-inference');
+    expect(priority.rationale).toMatch(/did not demonstrate recall/i);
+    expect(priority.rationale).toMatch(/FSRS rating alone does not clear/i);
+  });
+
+  it('keeps unknown results pending and includes their state in the recommendation fingerprint', () => {
+    const base = {
+      plan: plan('retention'),
+      profile: DEFAULT_PROFILE,
+      mastery: {},
+      drillState: {},
+      now: new Date('2026-10-26T10:00:00.000Z'),
+    };
+    const priority = buildDailyLearningPriority({
+      ...base,
+      delayedTransferDecision: {
+        conceptId: 'inference-engines',
+        reviewQuestionId: null,
+        interventionId: 'intervention-2',
+        interventionAt: '2026-10-25T10:00:00.000Z',
+        outcome: 'pending',
+        score: null,
+        critiqueSource: 'unknown',
+        createdAt: '2026-10-25T10:00:00.000Z',
+      },
+    });
+    expect(priority.action.href).toContain('/practice/all?tab=reviews&review=');
+    expect(priority.rationale).toMatch(/no delayed no-hint result has been recorded/i);
+    expect(priority.completionPredicate.refId).toBe(REVIEW_QUESTIONS.find((q) => q.conceptId === 'inference-engines')!.id);
+    expect(priority.freshness.evidenceFingerprint).toContain('intervention-2:pending');
+  });
+
+  it('does not treat unavailable delayed-transfer history as a clean result', () => {
+    const priority = buildDailyLearningPriority({
+      plan: plan('progression'),
+      profile: DEFAULT_PROFILE,
+      mastery: {},
+      drillState: {},
+      delayedTransferAvailable: false,
+      now: new Date('2026-10-26T10:00:00.000Z'),
+    });
+    expect(priority.state).toBe('source-unavailable');
+    expect(priority.rationale).toMatch(/history is unavailable|history could not be read/i);
+  });
+
   it('advances past a verified lab receipt with otherwise identical state', () => {
     const base = {
       plan: plan('progression'),

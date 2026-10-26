@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, Target } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { AnswerCritiquePanel, ReviewRatingButtons } from '../components/ReviewFeedback';
@@ -32,8 +32,16 @@ import { useImportedReviews } from '../hooks/useImportedReviews';
 import { useReviewMastery } from '../hooks/useReviewMastery';
 import { type DrillEntry, useDrillStore, useUserElo } from '../hooks/useUserStore';
 import { useActivityLogger } from '../hooks/useActivity';
+import { useAuth } from '../contexts/AuthContext';
 import { aiConfigured, type Critique, critiqueAnswer } from '../lib/aiClient';
+import {
+  classifyDelayedTransfer,
+  continueAfterOptionalMeasurement,
+  parseDelayedTransferInterventions,
+  type DelayedTransferCritiqueSource,
+} from '../lib/delayedTransfer';
 import { critiqueAnswerHeuristic } from '../lib/heuristicCritique';
+import { learningFetch } from '../lib/learningApi';
 import { dueReviewQuestions, reviewQuestionPool } from '../lib/planner';
 import { isLeech, suspendReviewQuestion } from '../lib/reviewMastery';
 import { recordSessionActivity } from '../lib/session';
@@ -110,7 +118,11 @@ export default function Practice() {
         </TabGroup>
       </div>
 
-      {tab === 'drills' ? <DrillsTab /> : <ReviewSession />}
+      {tab === 'drills' ? (
+        <DrillsTab />
+      ) : (
+        <ReviewSession focusQuestionId={searchParams.get('review') ?? undefined} />
+      )}
     </PageShell>
   );
 }
@@ -396,7 +408,8 @@ function DrillCard({
 
 // --- Reviews tab ------------------------------------------------------------
 
-function ReviewSession() {
+function ReviewSession({ focusQuestionId }: { focusQuestionId?: string }) {
+  const { user } = useAuth();
   const { mastery, review: reviewConcept } = useConceptMastery();
   const { mastery: rqMastery, review: reviewRq } = useReviewMastery();
   const { reviews: importedReviews } = useImportedReviews();
@@ -408,12 +421,63 @@ function ReviewSession() {
   const [critiquing, setCritiquing] = useState(false);
   const [critiqueError, setCritiqueError] = useState('');
   const [critiqueSource, setCritiqueSource] = useState<'heuristic' | 'ai' | null>(null);
+  const [submittingRating, setSubmittingRating] = useState(false);
+  const [interventions, setInterventions] = useState<
+    { id: string; conceptIds: string[]; createdAt: string; interventionId: string }[]
+  >([]);
+  const [interventionsLoaded, setInterventionsLoaded] = useState(!user);
+
+  useEffect(() => {
+    if (!user) {
+      setInterventionsLoaded(true);
+      return;
+    }
+    let active = true;
+    void learningFetch('activity', { query: 'days=365&kind=feynman' })
+      .then(async (response) => {
+        if (!response?.ok) return;
+        const data = await response.json();
+        if (active) {
+          setInterventions(parseDelayedTransferInterventions(data.activity));
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (active) setInterventionsLoaded(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, [user]);
 
   const { queue, mode } = useMemo(() => {
     const pool = reviewQuestionPool(importedReviews);
     const due = dueReviewQuestions(rqMastery, mastery, importedReviews).filter(
       (q) => !done.has(q.id)
     );
+    const focusedQuestion = focusQuestionId
+      ? pool.find((question) => question.id === focusQuestionId)
+      : undefined;
+    if (
+      focusedQuestion &&
+      !done.has(focusedQuestion.id) &&
+      (rqMastery[focusedQuestion.id] || mastery[focusedQuestion.conceptId])
+    ) {
+      const rest = due.length
+        ? due
+        : pool.filter(
+            (question) =>
+              question.id !== focusedQuestion.id &&
+              !done.has(question.id) &&
+              (rqMastery[question.id] || mastery[question.conceptId])
+          );
+      return {
+        queue: [focusedQuestion, ...rest.filter((question) => question.id !== focusedQuestion.id)],
+        mode: due.some((question) => question.id === focusedQuestion.id)
+          ? ('due' as const)
+          : ('practice' as const),
+      };
+    }
     if (due.length) return { queue: due, mode: 'due' as const };
     const practice = pool.filter((q) => {
       if (done.has(q.id)) return false;
@@ -422,27 +486,68 @@ function ReviewSession() {
     if (practice.length) return { queue: practice, mode: 'practice' as const };
     const starter = pool.filter((q) => !done.has(q.id));
     return { queue: starter, mode: 'new' as const };
-  }, [mastery, rqMastery, importedReviews, done]);
+  }, [mastery, rqMastery, importedReviews, done, focusQuestionId]);
 
-  const current: ReviewQuestion | undefined = queue[0];
+  const orderedQueue = useMemo(() => {
+    if (!focusQuestionId) return queue;
+    const index = queue.findIndex((question) => question.id === focusQuestionId);
+    if (index <= 0) return queue;
+    return [queue[index], ...queue.slice(0, index), ...queue.slice(index + 1)];
+  }, [focusQuestionId, queue]);
+
+  const current: ReviewQuestion | undefined = orderedQueue[0];
   const leech = current ? isLeech(rqMastery[current.id]) : false;
 
-  function next(rating: 'again' | 'hard' | 'good' | 'easy') {
-    if (!current) return;
-    void reviewRq(current.id, rating);
-    void reviewConcept(current.conceptId, rating);
-    void logActivity({
-      kind: 'review_session',
-      conceptIds: [current.conceptId],
-      problemId: current.id,
-    });
-    recordSessionActivity('review_session');
-    setDone((prev) => new Set(prev).add(current.id));
-    setRevealed(false);
-    setAnswer('');
-    setCritique(null);
-    setCritiqueError('');
-    setCritiqueSource(null);
+  async function next(rating: 'again' | 'hard' | 'good' | 'easy') {
+    if (!current || submittingRating) return;
+    setSubmittingRating(true);
+    try {
+      const intervention = interventionsLoaded
+        ? interventions
+            .filter((item) => item.conceptIds.includes(current.conceptId))
+            .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0]
+        : undefined;
+      const measure = user && mode === 'due' && intervention
+        ? async () => {
+            const transfer = classifyDelayedTransfer(critique, critiqueSource ?? 'unknown');
+            return learningFetch('activity', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                kind: 'delayed_transfer',
+                problemId: current.id,
+                conceptIds: [current.conceptId],
+                payload: {
+                  schemaVersion: 1,
+                  interventionId: intervention.interventionId,
+                  outcome: transfer.outcome,
+                  score: transfer.score,
+                  critiqueSource: transfer.critiqueSource,
+                },
+              }),
+            });
+          }
+        : null;
+
+      await continueAfterOptionalMeasurement(measure, async () => {
+        void reviewRq(current.id, rating);
+        void reviewConcept(current.conceptId, rating);
+        void logActivity({
+          kind: 'review_session',
+          conceptIds: [current.conceptId],
+          problemId: current.id,
+        });
+        recordSessionActivity('review_session');
+        setDone((prev) => new Set(prev).add(current.id));
+        setRevealed(false);
+        setAnswer('');
+        setCritique(null);
+        setCritiqueError('');
+        setCritiqueSource(null);
+      });
+    } finally {
+      setSubmittingRating(false);
+    }
   }
 
   function runHeuristicCritique() {
@@ -580,7 +685,9 @@ function ReviewSession() {
               </>
             )}
 
-            <ReviewRatingButtons onRate={next} />
+            <ReviewRatingButtons
+              onRate={next}
+            />
           </div>
         )}
       </Card>

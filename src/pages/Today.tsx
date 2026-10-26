@@ -11,6 +11,7 @@ import {
   ROADMAPS,
 } from '../data/learning-os';
 import { useConceptMastery } from '../hooks/useConcepts';
+import { useDelayedTransfer } from '../hooks/useDelayedTransfer';
 import { useLearningEvidence } from '../hooks/useLearningEvidence';
 import { useProfile } from '../hooks/useProfile';
 import { useSessionPlan } from '../hooks/useSessionPlan';
@@ -18,6 +19,7 @@ import { useDrillStore } from '../hooks/useUserStore';
 import { useAuth } from '../contexts/AuthContext';
 import { deriveConceptStatus, rollupMastery } from '../lib/conceptState';
 import { buildDailyLearningPriority } from '../lib/dailyPriority';
+import { latestUnresolvedDelayedTransfer } from '../lib/delayedTransfer';
 import { loadFocusedStudyDrafts } from '../lib/learningContinuity';
 import { loadRecentVisits } from '../lib/recentVisits';
 import { recordSessionActivity } from '../lib/session';
@@ -29,6 +31,11 @@ export default function Today() {
   const { profile } = useProfile();
   const { loading: authLoading } = useAuth();
   const { accountScope, decisionReceipts, paperAttempts } = useLearningEvidence();
+  const {
+    events: delayedTransferEvents,
+    interventions: delayedTransferInterventions,
+    available: delayedTransferAvailable,
+  } = useDelayedTransfer();
   const [online, setOnline] = useState(() =>
     typeof navigator === 'undefined' ? true : navigator.onLine
   );
@@ -80,6 +87,10 @@ export default function Today() {
     mastery
   );
   const focusedStudyDrafts = useMemo(() => loadFocusedStudyDrafts(accountScope), [accountScope]);
+  const delayedTransferDecision = useMemo(
+    () => latestUnresolvedDelayedTransfer(delayedTransferEvents, delayedTransferInterventions),
+    [delayedTransferEvents, delayedTransferInterventions]
+  );
   const priority = useMemo(
     () =>
       buildDailyLearningPriority({
@@ -90,6 +101,8 @@ export default function Today() {
         decisionReceipts,
         paperAttempts,
         focusedStudyDrafts,
+        delayedTransferDecision,
+        delayedTransferAvailable,
         masteryAvailable: !masteryLoading,
         online,
       }),
@@ -101,6 +114,8 @@ export default function Today() {
       decisionReceipts,
       paperAttempts,
       focusedStudyDrafts,
+      delayedTransferDecision,
+      delayedTransferAvailable,
       masteryLoading,
       online,
     ]

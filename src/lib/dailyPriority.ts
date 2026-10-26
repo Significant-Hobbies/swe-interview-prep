@@ -1,3 +1,4 @@
+import { CONCEPT_BY_ID } from '../data/learning-os';
 import { PAPER_CONTRACTS } from '../data/paper-contracts';
 import type { LearnerProfile } from './profile';
 import type { DrillEntry } from '../hooks/useUserStore';
@@ -6,6 +7,7 @@ import type { SessionPlan, SessionSelectionReason } from './planner';
 import type { DecisionLabId, DecisionReceiptV1, PaperLearningAttemptV1 } from './learningEvidence';
 import type { FocusedStudyDraftV1 } from './learningContinuity';
 import { selectRotatingPaper } from './paperRotation';
+import type { DelayedTransferDecision } from './delayedTransfer';
 
 type DailyPriorityReason =
   | SessionSelectionReason
@@ -95,7 +97,8 @@ export function decisionLabForConcept(conceptId: string) {
 function fingerprint(
   receipts: DecisionReceiptV1[],
   papers: PaperLearningAttemptV1[],
-  focusedStudies: FocusedStudyDraftV1[]
+  focusedStudies: FocusedStudyDraftV1[],
+  delayedTransferDecision?: DelayedTransferDecision | null
 ): string {
   return [
     ...receipts.map((item) => `${item.id}:${item.evidenceState}`),
@@ -103,6 +106,9 @@ function fingerprint(
     ...focusedStudies.map(
       (item) => `${item.focusKind}:${item.focusId}:${item.completedAt ?? item.updatedAt}`
     ),
+    delayedTransferDecision
+      ? `delayed:${delayedTransferDecision.interventionId}:${delayedTransferDecision.outcome}:${delayedTransferDecision.createdAt}`
+      : '',
   ]
     .sort()
     .join('|');
@@ -116,6 +122,8 @@ interface DailyPriorityInput {
   decisionReceipts?: DecisionReceiptV1[];
   paperAttempts?: PaperLearningAttemptV1[];
   focusedStudyDrafts?: FocusedStudyDraftV1[];
+  delayedTransferDecision?: DelayedTransferDecision | null;
+  delayedTransferAvailable?: boolean;
   masteryAvailable?: boolean;
   online?: boolean;
   now?: Date;
@@ -138,12 +146,15 @@ function caughtUpPriority(
   args: DailyPriorityInput,
   freshness: DailyLearningPriority['freshness']
 ): DailyLearningPriority {
+  const transferUnavailable = args.delayedTransferAvailable === false;
   return {
     conceptId: null,
     roadmapId: null,
-    reason: 'caught-up',
+    reason: transferUnavailable ? 'source-unavailable' : 'caught-up',
     objective: 'Synthesize one mechanism you can now explain without notes.',
-    rationale: 'No due, failed, or reachable unfinished concept remains in the selected scope.',
+    rationale: transferUnavailable
+      ? 'No current plan is available, and delayed-transfer history could not be read; this does not establish that transfer outcomes are complete.'
+      : 'No due, failed, or reachable unfinished concept remains in the selected scope.',
     evidence: 'Write a causal explanation and one counterexample in Playground.',
     completionPredicate: { kind: 'concept-explained', refId: 'synthesis' },
     action: { kind: 'artifact', label: 'Start a synthesis note', href: '/playground' },
@@ -151,7 +162,7 @@ function caughtUpPriority(
     minutes: args.profile.minutesPerDay,
     unlocks: 'A broader path or a fresh profile focus.',
     freshness,
-    state: 'caught-up',
+    state: transferUnavailable ? 'source-unavailable' : 'caught-up',
   };
 }
 
@@ -169,6 +180,8 @@ function priorityRationale(
   } else if (reason === 'retention') {
     const confidence = Math.round((args.mastery[concept.id]?.confidence ?? 0) * 100);
     rationale = `${plan.reviewsDue} review${plan.reviewsDue === 1 ? '' : 's'} are due; ${concept.name} is the weakest reachable item at ${confidence}% confidence.`;
+  } else if (args.delayedTransferAvailable === false) {
+    rationale = `Delayed-transfer history is unavailable, so this recommendation cannot account for a previous no-hint result. ${concept.name} remains the next reachable concept in ${plan.roadmap.title}.`;
   } else if (reason === 'new-learner') {
     rationale = `You have no learning evidence yet. This is the first reachable concept in ${plan.roadmap.title}, based on your profile—not an inferred weakness.`;
   } else if (completedFocusedStudy) {
@@ -324,6 +337,59 @@ function conceptPriority(context: PriorityContext): DailyLearningPriority {
   };
 }
 
+function delayedTransferPriority(
+  args: DailyPriorityInput,
+  freshness: DailyLearningPriority['freshness']
+): DailyLearningPriority | null {
+  const decision = args.delayedTransferDecision;
+  const concept = decision ? CONCEPT_BY_ID[decision.conceptId] : null;
+  if (!decision || !concept) return null;
+  const reviewQuestionId =
+    decision.reviewQuestionId ??
+    (decision.outcome === 'pending'
+      ? args.plan?.reviewQueue.find((question) => question.conceptId === concept.id)?.id ?? null
+      : null);
+  if (!reviewQuestionId) return null;
+
+  const failed = decision.outcome === 'not-demonstrated';
+  const elapsedMinutes = Math.max(
+    0,
+    Math.round((Date.parse(decision.createdAt) - Date.parse(decision.interventionAt)) / 60000)
+  );
+  const outcomeEvidence = {
+    pending: 'No delayed no-hint result has been recorded yet.',
+    unknown: 'The delayed no-hint attempt had no available critique result.',
+    partial: 'The delayed no-hint result was partial.',
+    'not-demonstrated': 'The delayed no-hint result did not demonstrate recall.',
+    demonstrated: 'The delayed no-hint result demonstrated recall.',
+  }[decision.outcome];
+
+  return {
+    conceptId: concept.id,
+    roadmapId: args.plan?.roadmap.id ?? concept.roadmaps[0] ?? null,
+    reason: failed ? 'recovery' : 'retention',
+    objective: failed
+      ? `Rebuild ${concept.name} from memory before moving on.`
+      : `Check delayed recall for ${concept.name} without hints.`,
+    rationale: `${outcomeEvidence} Keep this concept in the next task; a learner-selected FSRS rating alone does not clear the delayed-transfer result.${decision.score === null ? '' : ` The existing critique score was ${decision.score}/100.`}`,
+    evidence:
+      decision.outcome === 'pending'
+        ? 'Complete the due review without opening the reference, then record the result.'
+        : `Retry the same review without hints. The result was recorded ${elapsedMinutes} minutes after its intervention.`,
+    completionPredicate: { kind: 'reviewed', refId: reviewQuestionId },
+    action: {
+      kind: 'review',
+      label: 'Retry without hints',
+      href: `/practice/all?tab=reviews&review=${encodeURIComponent(reviewQuestionId)}`,
+    },
+    supportingActions: [],
+    minutes: args.plan?.totalMinutes ?? args.profile.minutesPerDay,
+    unlocks: 'A demonstrated delayed result or a clearer review target.',
+    freshness,
+    state: args.online === false ? 'offline-local' : 'ready',
+  };
+}
+
 export function buildDailyLearningPriority(args: DailyPriorityInput): DailyLearningPriority {
   const now = args.now ?? new Date();
   const decisionReceipts = args.decisionReceipts ?? [];
@@ -331,8 +397,15 @@ export function buildDailyLearningPriority(args: DailyPriorityInput): DailyLearn
   const focusedStudyDrafts = args.focusedStudyDrafts ?? [];
   const freshness = {
     selectedAt: now.toISOString(),
-    evidenceFingerprint: fingerprint(decisionReceipts, paperAttempts, focusedStudyDrafts),
+    evidenceFingerprint: fingerprint(
+      decisionReceipts,
+      paperAttempts,
+      focusedStudyDrafts,
+      args.delayedTransferDecision
+    ),
   };
+  const transferPriority = delayedTransferPriority(args, freshness);
+  if (transferPriority) return transferPriority;
   if (!args.plan) return caughtUpPriority(args, freshness);
 
   const { plan } = args;
@@ -361,7 +434,14 @@ export function buildDailyLearningPriority(args: DailyPriorityInput): DailyLearn
       minutes: block.minutes,
     })),
     freshness,
-    state: !args.online ? 'offline-local' : reason === 'new-learner' ? 'new-learner' : 'ready',
+    state:
+      args.delayedTransferAvailable === false
+        ? 'source-unavailable'
+        : !args.online
+          ? 'offline-local'
+          : reason === 'new-learner'
+            ? 'new-learner'
+            : 'ready',
     decisionReceipts,
     paperAttempts,
     now,
