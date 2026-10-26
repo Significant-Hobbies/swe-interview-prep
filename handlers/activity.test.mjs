@@ -17,20 +17,10 @@ const intervention = {
   created_at: '2026-10-24 12:00:00',
 };
 
-function dbFor({
-  feynman = intervention,
-  questionDue = '2026-10-26 11:00:00',
-  conceptDue = null,
-} = {}) {
+function dbFor({ feynman = intervention } = {}) {
   return {
     async execute({ sql }) {
       if (sql.includes('FROM feynman_logs')) return { rows: feynman ? [feynman] : [] };
-      if (sql.includes('FROM review_question_mastery')) {
-        return { rows: questionDue === false ? [] : [{ due: questionDue }] };
-      }
-      if (sql.includes('FROM concept_mastery')) {
-        return { rows: conceptDue ? [{ due: conceptDue }] : [] };
-      }
       throw new Error(`Unexpected query: ${sql}`);
     },
   };
@@ -51,6 +41,7 @@ function receipt(overrides = {}) {
       answer: 'must never be persisted',
     },
     now,
+    dueSnapshot: { due: '2026-10-26 11:00:00', source: 'question' },
     ...overrides,
   };
 }
@@ -118,17 +109,22 @@ describe('delayed transfer activity receipt', () => {
   it('rejects a question with a future due date even if the concept itself is due', async () => {
     const result = await prepareDelayedTransferReceipt(
       receipt({
-        db: dbFor({ questionDue: '2026-10-27 12:00:00', conceptDue: '2026-10-25 12:00:00' }),
+        dueSnapshot: { due: '2026-10-27 12:00:00', source: 'question' },
       })
     );
     expect(result).toMatchObject({ status: 409 });
   });
 
-  it('uses concept due provenance only when the question has no schedule row', async () => {
+  it('rejects concept-only due provenance', async () => {
     const result = await prepareDelayedTransferReceipt(
-      receipt({ db: dbFor({ questionDue: false, conceptDue: '2026-10-25 12:00:00' }) })
+      receipt({ dueSnapshot: { due: '2026-10-25 12:00:00', source: 'concept' } })
     );
-    expect(result.payload).toMatchObject({ dueSource: 'concept' });
+    expect(result).toMatchObject({ status: 409 });
+  });
+
+  it('rejects receipt preparation without a server-held question schedule', async () => {
+    const result = await prepareDelayedTransferReceipt(receipt({ dueSnapshot: null }));
+    expect(result).toMatchObject({ status: 409 });
   });
 
   it('rejects inconsistent score and outcome claims', async () => {

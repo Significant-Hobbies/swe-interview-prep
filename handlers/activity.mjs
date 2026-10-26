@@ -90,33 +90,15 @@ export async function prepareDelayedTransferReceipt({
     };
   }
 
-  const questionDueResult =
-    dueSnapshot === undefined
-      ? await db.execute({
-          sql: 'SELECT due FROM review_question_mastery WHERE user_id = ? AND question_id = ?',
-          args: [userId, problemId],
-        })
-      : { rows: dueSnapshot ? [{ ...dueSnapshot }] : [] };
-  let reviewDueAt;
-  let dueSource;
-  if (questionDueResult.rows.length) {
-    reviewDueAt = questionDueResult.rows[0].due;
-    dueSource = questionDueResult.rows[0].source || 'question';
-    const due = parseDatabaseTimestamp(reviewDueAt);
-    if (!reviewDueAt || !Number.isFinite(due.getTime()) || due.getTime() > now.getTime()) {
-      return { error: 'Review is not due for this question.', status: 409 };
-    }
-  } else {
-    const conceptDueResult = await db.execute({
-      sql: 'SELECT due FROM concept_mastery WHERE user_id = ? AND concept_id = ?',
-      args: [userId, conceptId],
-    });
-    reviewDueAt = conceptDueResult.rows[0]?.due;
-    dueSource = 'concept';
-    const due = parseDatabaseTimestamp(reviewDueAt);
-    if (!reviewDueAt || !Number.isFinite(due.getTime()) || due.getTime() > now.getTime()) {
-      return { error: 'Review is not due for this concept.', status: 409 };
-    }
+  const reviewDueAt = dueSnapshot?.due;
+  const due = parseDatabaseTimestamp(reviewDueAt);
+  if (
+    dueSnapshot?.source !== 'question' ||
+    !reviewDueAt ||
+    !Number.isFinite(due.getTime()) ||
+    due.getTime() > now.getTime()
+  ) {
+    return { error: 'Review is not due for this question.', status: 409 };
   }
 
   return {
@@ -126,7 +108,7 @@ export async function prepareDelayedTransferReceipt({
       interventionAt: interventionAt.toISOString(),
       elapsedMs: now.getTime() - interventionAt.getTime(),
       reviewDueAt: parseDatabaseTimestamp(reviewDueAt).toISOString(),
-      dueSource,
+      dueSource: 'question',
       conceptId,
       outcome: payload.outcome,
       score,
