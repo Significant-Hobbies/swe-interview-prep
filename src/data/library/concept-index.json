@@ -1013,6 +1013,13 @@
     {
       "repoId": "vllm",
       "repoName": "vLLM",
+      "sectionId": "docs-contributing-readme-md-install-some-common-test-dependencies-hardware-agnostic",
+      "title": "Install Some Common Test Dependencies (hardware Agnostic)",
+      "snippet": "# Install some common test dependencies (hardware agnostic) uv pip install pytest pytest-asyncio…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
       "sectionId": "docs-features-multimodal-inputs-md-example-explicitly-use-the-recommended-2-hardware-decoders",
       "title": "Example: Explicitly Use the Recommended 2 Hardware Decoders",
       "snippet": "# Example: explicitly use the recommended 2 hardware decoders vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct \\ --media-io-kwargs '{\"video\": {\"backend\": \"pynvvideocodec\", \"hw_decoders\": 2}}' ``` #### Vid…"
