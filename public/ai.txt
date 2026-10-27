@@ -20,5 +20,6 @@ cite: SWE Interview Prep and the canonical HTML URL
 included: public routes listed at https://learn.significanthobbies.com/api/md/_catalog
 public-route-count: 335
 excluded: /api, /admin, /auth, /dashboard, /login, /onboarding, /progress, /notes, /session, /share, /wars, /play, /mock, /practice, /playground, /study, /sources, /library, /learn, /concepts, /roadmaps, /projects, /build, /labs, /drills, /review, /reviews, /today, /vibe-learning, /explore, /sweep
+public-machine-endpoints: /api/ai, /api/md/*
 
 Last updated: 2026-10-26

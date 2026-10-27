@@ -2,7 +2,7 @@
 
 > A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
 
-Generated: 2026-10-26
+Generated: 2026-10-27
 
 ---
 <!-- source: https://learn.significanthobbies.com/ -->
@@ -700,7 +700,6 @@ Knowing the concepts is the Blitz layer. Designing the contracts and defending t
 - [GitHub Docs — Adding repository custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions-in-your-ide/add-repository-instructions-in-your-ide)
 
 
-
 ---
 <!-- source: https://learn.significanthobbies.com/learning -->
 # Learning OS — Start Here
@@ -869,6 +868,7 @@ Not in Atul Kumar's roadmap but every loop has at least one round of this.
 - NeetCode reorganises sporadically; `/roadmap` URL has been stable since 2023.
 - CMU 15-445 URL is unversioned (302s to the latest year).
 - MIT 6.S081 was renumbered to 6.1810; same materials.
+
 
 ---
 <!-- source: https://learn.significanthobbies.com/learning/maelstrom-echo -->
@@ -1357,7 +1357,6 @@ The single best reference for the loop is [Eugene Yan — ML system design](http
 - Source CSV has 450 rows, harvested 2024-12. Every link here was in that source set.
 - Some Medium / Substack URLs rot. Re-audit by searching the title; engineering teams republish across domains.
 - Categories are the upstream tag taxonomy, not ours. "product feature" is a catch-all and overlaps with most other tags.
-
 
 
 ---
