@@ -23,7 +23,7 @@ export default function Home() {
 
 const { counts } = curriculumSummary;
 
-const START = '/learn';
+const START = publicCopy.startPath;
 
 const LOOP = publicCopy.loop;
 

@@ -72,7 +72,7 @@ export async function writeReadability({ repoRoot, publicDir, pages }) {
       ? 0
       : row.path.startsWith('/learning')
         ? 1
-        : row.path.endsWith('/')
+        : row.path.endsWith('/') || /^(?:\/system-design\/|\/articles\/)/.test(row.path)
           ? 2
           : 3;
   routes.sort((left, right) => rank(left) - rank(right));
@@ -106,7 +106,7 @@ export async function writeReadability({ repoRoot, publicDir, pages }) {
   await writeFile(join(publicDir, 'robots.txt'), robots());
   await writeFile(
     join(publicDir, 'sitemap.xml'),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map((row) => `<url><loc>${row.url}</loc></url>`).join('')}</urlset>\n`
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map((row) => `<url><loc>${row.url}</loc>${row.lastModified ? `<lastmod>${row.lastModified}</lastmod>` : ''}</url>`).join('')}</urlset>\n`
   );
   console.log(`Registered ${routes.length} public Markdown routes; learner state is excluded.`);
 }

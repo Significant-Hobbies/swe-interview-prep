@@ -8,7 +8,7 @@ Personal SWE learning OS · Interview prep
 
 Learn a mechanism, practise it in code or a diagram, explain it back in your own words, and let FSRS bring it back right before you would have forgotten it.
 
-[Start learning](https://learn.significanthobbies.com/dashboard) · [Browse the curriculum](https://learn.significanthobbies.com/curriculum/)
+[Start learning](https://learn.significanthobbies.com/learn) · [Browse the curriculum](https://learn.significanthobbies.com/curriculum/)
 
 Free · no account needed · progress stays in this browser
 
@@ -165,4 +165,4 @@ It is a mature personal learning system, built for its author’s own preparatio
 
 Pick one mechanism. Prove you understand it.
 
-[Start learning](https://learn.significanthobbies.com/dashboard)
+[Start learning](https://learn.significanthobbies.com/learn)

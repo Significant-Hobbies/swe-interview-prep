@@ -208,3 +208,52 @@ it('unknown Markdown paths cannot advertise off-origin canonicals', async () => 
     assert.ok(response.headers.get('link').includes(fixtureOrigin + '/llms.txt'));
   }
 });
+
+describe('reviewed discovery and preserved Markdown boundaries', () => {
+  it('keeps guidance, flagship guides, dates and matching landing destinations', async () => {
+    const index = readFileSync(join(root, 'llms.txt'), 'utf8');
+    const full = readFileSync(join(root, 'llms-full.txt'), 'utf8');
+    for (const path of [
+      '/agents.md',
+      '/skill.md',
+      '/pricing.md',
+      '/curriculum/catalog.md',
+      '/curriculum/catalog.json',
+    ])
+      expect(index).toContain(identity.url + path);
+    for (const path of [
+      '/system-design/llm-inference-10k-rps',
+      '/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge',
+    ]) {
+      expect(index).toContain(identity.url + path);
+      expect(full).toContain('<!-- source: ' + identity.url + path + ' -->');
+    }
+    expect(readFileSync(join(root, 'sitemap.xml'), 'utf8')).toContain('<lastmod>');
+    expect(readFileSync(join(root, 'index.md'), 'utf8')).toContain(
+      '[Start learning](' + identity.url + '/learn)'
+    );
+    expect(full).not.toMatch(/\]\(\.\.?\//);
+    expect(full).not.toContain(identity.url + '/learning/hld');
+    expect(full).not.toContain(identity.url + '/learning/interview-topics');
+  });
+  it('serves genuine Markdown and rejects missing or HTML preserved assets', async () => {
+    for (const path of ['/agents.md', '/skill.md', '/pricing.md', '/curriculum/catalog.md']) {
+      const response = await request(path);
+      expect(response.status).toBe(200);
+      expect(response.headers.get('content-type')).toContain('text/markdown');
+      expect(response.headers.get('x-content-type-options')).toBe('nosniff');
+    }
+    for (const response of [
+      new Response('missing', { status: 404 }),
+      new Response('<html>fallback</html>', { headers: { 'content-type': 'text/html' } }),
+    ]) {
+      const result = await onRequest({
+        request: new Request(identity.url + '/agents.md'),
+        env: { ASSETS: { fetch: async () => response } },
+        next: async () => response,
+      });
+      expect(result.status).toBe(404);
+      expect(result.headers.get('cache-control')).toBe('no-store');
+    }
+  });
+});

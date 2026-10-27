@@ -13,6 +13,14 @@ export const identity = {
   sitemap: 'https://learn.significanthobbies.com/sitemap.xml',
   trainingAllowed: true,
   updatedAt: '2026-10-26',
+  notes: [
+    '## Agent guidance',
+    '- [Agent usage and privacy boundaries](https://learn.significanthobbies.com/agents.md)',
+    '- [Agent skill](https://learn.significanthobbies.com/skill.md)',
+    '- [Pricing](https://learn.significanthobbies.com/pricing.md)',
+    '- [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md)',
+    '- [Curriculum JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)',
+  ],
   excludedPaths: [
     '/api',
     '/admin',

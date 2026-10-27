@@ -162,6 +162,7 @@
       "body": "FSRS schedules the next retrieval from what you actually demonstrated, so strong concepts wait longer and shaky ones come back soon. {{counts.reviewQuestions}} review questions keep it honest."
     }
   ],
+  "startPath": "/learn",
   "links": [
     "/dashboard",
     "/curriculum/"

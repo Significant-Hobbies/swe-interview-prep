@@ -17,7 +17,7 @@ The full source database is maintained by [Evidently AI — ML System Design 500
 
 ## What "ML system design" interviews actually test
 
-Same as classical [HLD](./hld.md), with three extra axes:
+Same as classical [HLD](./system-design.md), with three extra axes:
 
 - **Data and features.** Where does the training data come from? Labels, freshness, leakage. What features are online (low-latency lookup), what are batch?
 - **Online / offline split.** What's served from a model vs from rules? What's the candidate generation step? What's the ranking step?
@@ -382,8 +382,8 @@ The single best reference for the loop is [Eugene Yan — ML system design](http
 
 ## Companion docs in this project
 
-- [Interview topics index](./interview-topics.md) — where ML sits in the broader interview map.
-- [High-Level Design](./hld.md) — every ML system is also a system; pair with this.
+- [Interview topics index](./interview-prep.md) — where ML sits in the broader interview map.
+- [High-Level Design](./system-design.md) — every ML system is also a system; pair with this.
 - [The SE Landscape](./swe-landscape.md) — AI domain section.
 - In-app: `/learn` → AI Systems track for the FSRS-tracked curriculum.
 

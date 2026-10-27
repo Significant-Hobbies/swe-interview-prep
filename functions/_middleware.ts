@@ -439,6 +439,32 @@ function normalizePageResponse(response: Response, request: Request, pathname: s
   });
 }
 
+async function preservedMarkdown(context: Parameters<PagesFunction>[0], url: URL) {
+  const asset = context.env.ASSETS
+    ? await context.env.ASSETS.fetch(new Request(url.origin + url.pathname))
+    : await context.next();
+  const body = await asset.text();
+  if (
+    !asset.ok ||
+    asset.headers.get('content-type')?.includes('text/html') ||
+    new RegExp('^\\s*(?:<!doctype|<html)', 'i').test(body)
+  ) {
+    return new Response('# Not found\n', {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'X-Content-Type-Options': 'nosniff',
+        'X-Robots-Tag': 'noindex',
+        'Cache-Control': 'no-store',
+      },
+    });
+  }
+  const headers = new Headers(asset.headers);
+  headers.set('Content-Type', 'text/markdown; charset=utf-8');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  return new Response(body, { headers });
+}
+
 const resolveRequest: PagesFunction = async (context) => {
   const { request } = context;
 
@@ -473,12 +499,9 @@ const resolveRequest: PagesFunction = async (context) => {
     return context.next();
   }
 
-  if (
-    isAssetPath(pathname) ||
-    pathname.startsWith('/.well-known/') ||
-    ['/agents.md', '/pricing.md', '/skill.md', '/curriculum/catalog.md'].includes(pathname)
-  )
-    return context.next();
+  if (['/agents.md', '/pricing.md', '/skill.md', '/curriculum/catalog.md'].includes(pathname))
+    return preservedMarkdown(context, url);
+  if (isAssetPath(pathname) || pathname.startsWith('/.well-known/')) return context.next();
 
   // SPA soft-404 detection: if the path is not a known SPA route and not a
   // static file, return 404 instead of serving the SPA shell with 200.
