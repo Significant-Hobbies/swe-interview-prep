@@ -1,5 +1,9 @@
 # Trie
 
+> Prefix trees.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tries
+
 Prefix trees.
 
 - Difficulty: core

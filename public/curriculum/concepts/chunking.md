@@ -1,5 +1,9 @@
 # Chunking
 
+> Splitting documents into retrievable units that preserve meaning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/chunking
+
 Splitting documents into retrievable units that preserve meaning.
 
 - Difficulty: core

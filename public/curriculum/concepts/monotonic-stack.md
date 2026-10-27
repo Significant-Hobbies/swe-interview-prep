@@ -1,5 +1,9 @@
 # Monotonic Stack
 
+> A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack
+
 A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
 
 - Difficulty: core

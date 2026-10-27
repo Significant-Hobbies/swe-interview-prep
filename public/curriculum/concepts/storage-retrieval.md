@@ -1,5 +1,9 @@
 # Storage Engines
 
+> B-tree vs LSM, indexing, WAL.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval
+
 B-tree vs LSM, indexing, WAL.
 
 - Difficulty: advanced

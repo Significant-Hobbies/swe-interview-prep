@@ -1,5 +1,9 @@
 # Self-Attention
 
+> Q/K/V, scaled dot-product, causal masking.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention
+
 Q/K/V, scaled dot-product, causal masking.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Stationarity & Autocorrelation
 
+> When series statistics are stable; memory in lags; noise vs signal.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation
+
 When series statistics are stable; memory in lags; noise vs signal.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Hallucination & Failure Detection
 
+> Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection
+
 Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.
 
 - Difficulty: core

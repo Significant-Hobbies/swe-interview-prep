@@ -1,5 +1,9 @@
 # Complexity Analysis
 
+> Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis
+
 Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
 
 - Difficulty: intro

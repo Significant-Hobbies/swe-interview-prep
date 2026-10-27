@@ -1,5 +1,9 @@
 # Bias, Variance & Overfitting
 
+> Underfitting vs memorizing noise; why in-sample greatness lies.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting
+
 Underfitting vs memorizing noise; why in-sample greatness lies.
 
 - Difficulty: core

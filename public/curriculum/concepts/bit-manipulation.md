@@ -1,5 +1,9 @@
 # Bit Manipulation
 
+> Bitwise ops, masks, XOR tricks.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation
+
 Bitwise ops, masks, XOR tricks.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Long-running & Scheduled Agents
 
+> Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents
+
 Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Recall / Latency Tradeoffs
 
+> Reading recall-vs-latency curves to choose ANN parameters.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs
+
 Reading recall-vs-latency curves to choose ANN parameters.
 
 - Difficulty: advanced

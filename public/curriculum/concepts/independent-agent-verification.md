@@ -1,5 +1,9 @@
 # Independent Agent Verification
 
+> Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification
+
 Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
 
 - Difficulty: advanced

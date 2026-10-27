@@ -1,5 +1,9 @@
 # Command & Chain
 
+> Command, undo, chain of responsibility.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/command-chain
+
 Command, undo, chain of responsibility.
 
 - Difficulty: core

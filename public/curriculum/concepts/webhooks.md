@@ -1,5 +1,9 @@
 # Webhooks
 
+> Outbound event delivery: signing, retries, idempotent receivers.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/webhooks
+
 Outbound event delivery: signing, retries, idempotent receivers.
 
 - Difficulty: core

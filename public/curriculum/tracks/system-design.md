@@ -1,5 +1,9 @@
 # System Design
 
+> Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/system-design
+
 Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
 
 This track contains 26 connected concepts. Mastery means explaining each

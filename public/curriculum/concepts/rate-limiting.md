@@ -1,5 +1,9 @@
 # Rate Limiting
 
+> Token bucket, leaky bucket, sliding window.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/rate-limiting
+
 Token bucket, leaky bucket, sliding window.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # LSM Tree
 
+> Log-structured merge tree: write-optimized storage via sorted runs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/lsm-tree
+
 Log-structured merge tree: write-optimized storage via sorted runs.
 
 - Difficulty: advanced

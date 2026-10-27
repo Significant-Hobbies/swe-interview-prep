@@ -1,5 +1,9 @@
 # Matrices & Linear Transformations
 
+> Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations
+
 Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.
 
 - Difficulty: intro

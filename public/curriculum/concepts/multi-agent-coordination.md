@@ -1,5 +1,9 @@
 # Multi-agent Coordination
 
+> Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination
+
 Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.
 
 - Difficulty: core

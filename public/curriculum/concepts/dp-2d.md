@@ -1,5 +1,9 @@
 # 2D DP
 
+> Grid DP, edit distance, knapsack.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/dp-2d
+
 Grid DP, edit distance, knapsack.
 
 - Difficulty: advanced

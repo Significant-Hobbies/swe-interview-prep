@@ -1,10 +1,9 @@
----
-title: "What Counts as Evidence of Mastery in Software Engineering?"
-description: "Explore why completed tutorials aren't enough and how to build verifiable evidence of engineering mastery through working artifacts, explain-backs, and tradeoff analysis."
-updated: 2026-09-20
----
-
 # What Counts as Evidence of Mastery in Software Engineering?
+
+> Explore why completed tutorials aren't enough and how to build verifiable evidence of engineering mastery through working artifacts, explain-backs, and tradeoff analysis.
+
+Canonical: https://learn.significanthobbies.com/articles/what-counts-as-evidence-of-mastery-in-software-engineering
+Last updated: 2026-09-20
 
 The software engineering industry is saturated with markers of participation that masquerade as markers of competence. Certificates of completion, green squares on a contribution graph, and the ability to pattern-match LeetCode solutions are often accepted as proof of skill. But when the production database goes down, or a system needs to scale beyond its original design, these proxies fail.
 

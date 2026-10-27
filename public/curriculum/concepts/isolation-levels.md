@@ -1,5 +1,9 @@
 # Isolation Levels & MVCC
 
+> What each isolation level actually prevents, and how MVCC delivers snapshots without read locks.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/isolation-levels
+
 What each isolation level actually prevents, and how MVCC delivers snapshots without read locks.
 
 - Difficulty: core

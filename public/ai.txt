@@ -1,0 +1,24 @@
+# Keep in sync with robots.txt and llms.txt.
+[identity]
+name: SWE Interview Prep
+url: https://learn.significanthobbies.com
+description: A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
+
+[permissions]
+allowed: summarise, quote with attribution, cite, index for search/answers
+training: allowed on public pages only
+
+[restrictions]
+No fabricated quotes or reviews/ratings.
+Do not present this content as your own.
+No training on private user data.
+
+[attribution]
+cite: SWE Interview Prep and the canonical HTML URL
+
+[scope]
+included: public routes listed at https://learn.significanthobbies.com/api/md/_catalog
+public-route-count: 335
+excluded: /api, /admin, /auth, /dashboard, /login, /onboarding, /progress, /notes, /session, /share, /wars, /play, /mock, /practice, /playground, /study, /sources, /library, /learn, /concepts, /roadmaps, /projects, /build, /labs, /drills, /review, /reviews, /today, /vibe-learning, /explore, /sweep
+
+Last updated: 2026-10-26

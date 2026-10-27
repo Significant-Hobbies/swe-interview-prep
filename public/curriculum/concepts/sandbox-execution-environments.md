@@ -1,5 +1,9 @@
 # Sandboxes & Execution Environments
 
+> Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments
+
 Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.
 
 - Difficulty: core

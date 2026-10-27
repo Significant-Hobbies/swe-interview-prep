@@ -1,5 +1,9 @@
 # Rank, Basis & Subspaces
 
+> Column space, rank, independence — why matrices are often low-rank in practice.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis
+
 Column space, rank, independence — why matrices are often low-rank in practice.
 
 - Difficulty: core

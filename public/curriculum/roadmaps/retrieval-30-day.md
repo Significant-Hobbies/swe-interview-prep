@@ -1,5 +1,9 @@
 # 30-Day Retrieval Basics
 
+> Four weeks that take you from tokenization to a working hybrid retriever evaluated against a frozen query set.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day
+
 Four weeks that take you from tokenization to a working hybrid retriever evaluated against a frozen query set.
 
 - Horizon: 30d

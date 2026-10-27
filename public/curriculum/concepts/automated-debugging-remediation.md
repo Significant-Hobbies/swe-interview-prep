@@ -1,5 +1,9 @@
 # Automated Debugging & Remediation
 
+> Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/automated-debugging-remediation
+
 Failure reproduction, hypothesis generation, telemetry, fault localization, minimal patches, validation, rollback, and learning.
 
 - Difficulty: core

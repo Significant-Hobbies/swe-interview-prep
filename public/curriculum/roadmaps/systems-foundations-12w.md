@@ -1,5 +1,9 @@
 # 12-Week Systems Foundations
 
+> Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w
+
 Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

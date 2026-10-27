@@ -1,5 +1,9 @@
 # Observability
 
+> Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics
+
 Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Failure & Learning
 
+> Owning mistakes, post-mortem.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning
+
 Owning mistakes, post-mortem.
 
 - Difficulty: intro

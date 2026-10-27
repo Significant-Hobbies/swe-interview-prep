@@ -1,5 +1,9 @@
 # Search Systems
 
+> Inverted index, ranking, autocomplete at scale.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/search-discovery
+
 Inverted index, ranking, autocomplete at scale.
 
 - Difficulty: core

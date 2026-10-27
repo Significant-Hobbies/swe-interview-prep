@@ -1,5 +1,9 @@
 # CAP & Consistency Models
 
+> Strong/eventual/causal, PACELC.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/cap-theorem
+
 Strong/eventual/causal, PACELC.
 
 - Difficulty: advanced

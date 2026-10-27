@@ -1,5 +1,9 @@
 # SEO
 
+> Programmatic and content SEO: intent, structure, indexability.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/seo
+
 Programmatic and content SEO: intent, structure, indexability.
 
 - Difficulty: core

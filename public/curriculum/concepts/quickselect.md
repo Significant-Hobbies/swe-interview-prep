@@ -1,5 +1,9 @@
 # Quickselect
 
+> Finding the k-th smallest in expected O(n) by recursing into only one partition.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/quickselect
+
 Finding the k-th smallest in expected O(n) by recursing into only one partition.
 
 - Difficulty: core

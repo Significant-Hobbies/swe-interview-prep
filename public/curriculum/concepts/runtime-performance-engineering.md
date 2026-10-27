@@ -1,5 +1,9 @@
 # Runtime & Performance Engineering
 
+> Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering
+
 Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
 
 - Difficulty: core

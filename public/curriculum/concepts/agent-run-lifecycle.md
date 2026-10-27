@@ -1,5 +1,9 @@
 # Agent Run Lifecycle
 
+> Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle
+
 Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
 
 - Difficulty: advanced

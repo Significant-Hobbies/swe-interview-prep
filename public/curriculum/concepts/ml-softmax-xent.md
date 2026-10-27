@@ -1,5 +1,9 @@
 # Softmax & Cross-Entropy
 
+> Logits to probabilities, negative log-likelihood loss.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent
+
 Logits to probabilities, negative log-likelihood loss.
 
 - Difficulty: core

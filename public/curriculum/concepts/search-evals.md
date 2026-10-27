@@ -1,5 +1,9 @@
 # Search Evals
 
+> Building a labelled query set and harness to compare retrieval approaches.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/search-evals
+
 Building a labelled query set and harness to compare retrieval approaches.
 
 - Difficulty: core

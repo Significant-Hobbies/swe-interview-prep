@@ -1,5 +1,9 @@
 # Web & Mobile Engineering
 
+> Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/web-mobile-engineering
+
 Web and native lifecycles, rendering, navigation, state, networking, offline behavior, accessibility, and release constraints.
 
 - Difficulty: core

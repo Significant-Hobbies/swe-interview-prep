@@ -1,5 +1,9 @@
 # CI/CD & Developer Environments
 
+> Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments
+
 Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.
 
 - Difficulty: core

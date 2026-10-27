@@ -1,5 +1,9 @@
 # Data Representation
 
+> Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/data-representation
+
 Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
 
 - Difficulty: core

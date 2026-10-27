@@ -1,5 +1,9 @@
 # MCP & Integrations
 
+> Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations
+
 Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.
 
 - Difficulty: core

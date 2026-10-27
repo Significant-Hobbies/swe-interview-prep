@@ -1,5 +1,9 @@
 # 12-Week Infrastructure & Platforms
 
+> Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w
+
 Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

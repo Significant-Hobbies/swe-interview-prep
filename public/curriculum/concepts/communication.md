@@ -1,5 +1,9 @@
 # Communication
 
+> Written/verbal, audience adaptation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/communication
+
 Written/verbal, audience adaptation.
 
 - Difficulty: intro

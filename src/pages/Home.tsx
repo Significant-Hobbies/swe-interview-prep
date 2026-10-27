@@ -1,3 +1,4 @@
+import publicCopy from '../data/public-copy/home.json';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useEffect, type ReactNode } from 'react';
 import { Link, Navigate } from 'react-router-dom';
@@ -16,7 +17,7 @@ import { removeLcpShell } from '../lib/lcpShell';
  */
 export default function Home() {
   const { user } = useAuth();
-  if (user || hasLearnerProgress()) return <Navigate to="/dashboard" replace />;
+  if (user || hasLearnerProgress()) return <Navigate to={publicCopy.links[0]} replace />;
   return <Landing />;
 }
 
@@ -24,28 +25,7 @@ const { counts } = curriculumSummary;
 
 const START = '/learn';
 
-const LOOP = [
-  {
-    step: '01',
-    label: 'Learn',
-    line: 'A mental model, a primary source, and the prerequisites.',
-  },
-  {
-    step: '02',
-    label: 'Practise',
-    line: 'Code or a diagram in a real workspace, run against tests.',
-  },
-  {
-    step: '03',
-    label: 'Explain',
-    line: 'Say it back in your own words. The AI asks; it never answers.',
-  },
-  {
-    step: '04',
-    label: 'Review',
-    line: 'FSRS brings it back right before you would have forgotten it.',
-  },
-] as const;
+const LOOP = publicCopy.loop;
 
 function Eyebrow({ children, accent = false }: { children: ReactNode; accent?: boolean }) {
   return (
@@ -134,10 +114,7 @@ function LoopVisual() {
           role="img"
           aria-labelledby="loop-visual-title"
         >
-          <title id="loop-visual-title">
-            The learning loop: learn, practise, explain, then FSRS review, which feeds back into
-            learning.
-          </title>
+          <title id="loop-visual-title">{publicCopy.blocks.LoopVisual[0]}</title>
           <defs>
             <marker
               id="loop-arrow"
@@ -201,10 +178,10 @@ function LoopVisual() {
         {/* The concept travelling through the loop. */}
         <div className="absolute left-1/2 top-1/2 w-[46%] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/[0.12] bg-black/80 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-sm sm:p-4">
           <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/55 sm:text-[9.5px]">
-            Search &amp; IR · concept
+            {publicCopy.blocks.LoopVisual[1]}
           </p>
           <p className="mt-1.5 text-[15px] font-semibold leading-tight tracking-tight text-white sm:text-lg">
-            Tokenization
+            {publicCopy.blocks.LoopVisual[2]}
           </p>
           <div className="mt-2.5 flex gap-1" aria-hidden="true">
             <span className="h-1 flex-1 rounded-full bg-sky-400" />
@@ -213,11 +190,11 @@ function LoopVisual() {
             <span className="h-1 flex-1 rounded-full bg-white/15" />
           </div>
           <p className="mt-2 text-[10px] leading-snug text-white/50 sm:text-[11px]">
-            Explained back. Next review set by FSRS.
+            {publicCopy.blocks.LoopVisual[3]}
           </p>
         </div>
       </div>
-      <Illustrative>Illustrative · one concept moving through the loop</Illustrative>
+      <Illustrative>{publicCopy.blocks.LoopVisual[4]}</Illustrative>
     </figure>
   );
 }
@@ -240,24 +217,22 @@ function Panel({ label, children }: { label: string; children: ReactNode }) {
         </div>
         <div className="p-5">{children}</div>
       </div>
-      <Illustrative>Illustrative · simplified from the app</Illustrative>
+      <Illustrative>{publicCopy.blocks.Panel[0]}</Illustrative>
     </figure>
   );
 }
 
 function LearnPanel() {
-  const rows = [
-    ['Mental model', 'The same analyzer must run at index time and query time.'],
-    ['Primary source', 'Introduction to Information Retrieval, §2.2.1'],
-    ['Related', 'Inverted index · BM25'],
-  ];
+  const rows = publicCopy.learnRows;
   return (
     <Panel label="learn / tokenization">
-      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-sky-300/80">Concept</p>
-      <p className="mt-1.5 text-xl font-semibold tracking-tight text-white">Tokenization</p>
-      <p className="mt-1 text-[13px] leading-5 text-white/55">
-        Splitting text into terms: lowercasing, stemming, stop words, n-grams.
+      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-sky-300/80">
+        {publicCopy.blocks.LearnPanel[0]}
       </p>
+      <p className="mt-1.5 text-xl font-semibold tracking-tight text-white">
+        {publicCopy.blocks.LearnPanel[1]}
+      </p>
+      <p className="mt-1 text-[13px] leading-5 text-white/55">{publicCopy.blocks.LearnPanel[2]}</p>
       <dl className="mt-4 divide-y divide-white/[0.06] border-t border-white/[0.06]">
         {rows.map(([term, detail]) => (
           <div
@@ -276,31 +251,40 @@ function LearnPanel() {
 function PractisePanel() {
   return (
     <Panel label="practice / build-tokenizer.js">
-      <p className="text-[13px] font-semibold text-white">Build a search tokenizer</p>
+      <p className="text-[13px] font-semibold text-white">{publicCopy.blocks.PractisePanel[0]}</p>
       <p className="mt-1 text-[12px] leading-5 text-white/50">
-        Lowercase, split on non-alphanumerics, drop stop words, stem. Same function at index and
-        query time.
+        {publicCopy.blocks.PractisePanel[1]}
       </p>
       <pre className="mt-4 overflow-x-auto rounded-lg border border-white/[0.06] bg-black p-3.5 text-[11.5px] leading-[1.65] text-white/75">
         <code>
-          <span className="text-sky-300">function</span> tokenize(s) {'{'}
+          <span className="text-sky-300">{publicCopy.blocks.PractisePanel[2]}</span>
+          {publicCopy.blocks.PractisePanel[3]}
+          {'{'}
           {'\n'}
           {'  '}
-          <span className="text-sky-300">return</span> s.toLowerCase()
+          <span className="text-sky-300">{publicCopy.blocks.PractisePanel[4]}</span>
+          {publicCopy.blocks.PractisePanel[5]}
           {'\n'}
-          {'    '}.split(<span className="text-amber-200/80">/[^a-z0-9]+/</span>){'\n'}
-          {'    '}.filter(Boolean)
+          {'    '}
+          {publicCopy.blocks.PractisePanel[6]}
+          <span className="text-amber-200/80">{publicCopy.blocks.PractisePanel[7]}</span>
+          {publicCopy.blocks.PractisePanel[8]}
           {'\n'}
-          {'    '}.filter(t =&gt; !STOPS.has(t))
+          {'    '}
+          {publicCopy.blocks.PractisePanel[9]}
           {'\n'}
-          {'    '}.map(stem);
+          {'    '}
+          {publicCopy.blocks.PractisePanel[10]}
+          {'\n'}
+          {'    '}
+          {publicCopy.blocks.PractisePanel[11]}
           {'\n'}
           {'}'}
         </code>
       </pre>
       <div className="mt-3 flex items-center gap-2 font-mono text-[11px] text-emerald-300/85">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        tokenize('The Quick Brown Foxes!') → ["quick","brown","fox"]
+        {publicCopy.blocks.PractisePanel[12]}
       </div>
     </Panel>
   );
@@ -311,33 +295,27 @@ function ExplainPanel() {
     <Panel label="explain / feynman gate">
       <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3.5">
         <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
-          Socratic companion
+          {publicCopy.blocks.ExplainPanel[0]}
         </p>
         <p className="mt-1.5 text-[13px] leading-5 text-white/80">
-          If a document says “Foxes” and the query says “fox”, where in your pipeline do they become
-          the same term?
+          {publicCopy.blocks.ExplainPanel[1]}
         </p>
       </div>
       <div className="mt-3 rounded-xl border border-sky-400/25 bg-sky-400/[0.04] p-3.5">
         <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-sky-300/80">
-          Your explain-back
+          {publicCopy.blocks.ExplainPanel[2]}
         </p>
         <p className="mt-1.5 text-[13px] leading-5 text-white/75">
-          Both go through the same analyzer, so “foxes” stems to “fox” on both sides. The failure
-          mode: stem too hard and “university” collides with “universe”.
+          {publicCopy.blocks.ExplainPanel[3]}
         </p>
-        <p className="mt-3 text-[11px] text-white/55">One example · one failure mode</p>
+        <p className="mt-3 text-[11px] text-white/55">{publicCopy.blocks.ExplainPanel[4]}</p>
       </div>
     </Panel>
   );
 }
 
 function ReviewPanel() {
-  const queue = [
-    { name: 'Tokenization', when: 'Due today', due: true },
-    { name: 'Inverted index', when: 'In 3 days', due: false },
-    { name: 'BM25 scoring', when: 'In 9 days', due: false },
-  ];
+  const queue = publicCopy.reviewQueue;
   return (
     <Panel label="review / fsrs queue">
       <ul className="divide-y divide-white/[0.06]">
@@ -352,11 +330,9 @@ function ReviewPanel() {
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-[12px] leading-5 text-white/55">
-        Without looking: why must the tokenizer be identical at index and query time?
-      </p>
+      <p className="mt-4 text-[12px] leading-5 text-white/55">{publicCopy.blocks.ReviewPanel[0]}</p>
       <div className="mt-3 grid grid-cols-4 gap-1.5">
-        {['Again', 'Hard', 'Good', 'Easy'].map((rating) => (
+        {publicCopy.ratings.map((rating) => (
           <span
             key={rating}
             className={`rounded-md border py-1.5 text-center text-[11px] ${
@@ -373,75 +349,63 @@ function ReviewPanel() {
   );
 }
 
+const formatPublicCopy = (text: string) =>
+  text.replace(/\{\{counts\.(\w+)\}\}/g, (_, key: string) =>
+    String(counts[key as keyof typeof counts])
+  );
+
 const FEATURES = [
   {
-    eyebrow: 'Learn',
+    eyebrow: publicCopy.features[0].eyebrow,
     title: (
       <>
-        Start from
+        {publicCopy.blocks.featureTitle0[0]}
         <br />
-        the mechanism.
+        {publicCopy.blocks.featureTitle0[1]}
       </>
     ),
-    body: `${counts.concepts} concepts across ${counts.tracks} tracks, each with a short mental model, a primary source, and the prerequisites it rests on. ${counts.roadmaps} roadmaps order them, from a 9-day reset to a 12-month run.`,
+    body: formatPublicCopy(publicCopy.features[0].body),
     visual: <LearnPanel />,
   },
   {
-    eyebrow: 'Practise',
+    eyebrow: publicCopy.features[1].eyebrow,
     title: (
       <>
-        Make it run,
+        {publicCopy.blocks.featureTitle1[0]}
         <br />
-        or draw it.
+        {publicCopy.blocks.featureTitle1[1]}
       </>
     ),
-    body: `${counts.drills} drills in a Monaco editor and an Excalidraw canvas. Code runs against tests; system designs become diagrams you can defend.`,
+    body: formatPublicCopy(publicCopy.features[1].body),
     visual: <PractisePanel />,
   },
   {
-    eyebrow: 'Explain',
+    eyebrow: publicCopy.features[2].eyebrow,
     title: (
       <>
-        Say it back,
+        {publicCopy.blocks.featureTitle2[0]}
         <br />
-        without the key.
+        {publicCopy.blocks.featureTitle2[1]}
       </>
     ),
-    body: 'The Socratic companion only asks questions; it never hands over a solution. A Feynman explain-back gates the concept: one example, one failure mode, in your own words.',
+    body: formatPublicCopy(publicCopy.features[2].body),
     visual: <ExplainPanel />,
   },
   {
-    eyebrow: 'Review',
+    eyebrow: publicCopy.features[3].eyebrow,
     title: (
       <>
-        Retrieve it
+        {publicCopy.blocks.featureTitle3[0]}
         <br />
-        before it fades.
+        {publicCopy.blocks.featureTitle3[1]}
       </>
     ),
-    body: `FSRS schedules the next retrieval from what you actually demonstrated, so strong concepts wait longer and shaky ones come back soon. ${counts.reviewQuestions} review questions keep it honest.`,
+    body: formatPublicCopy(publicCopy.features[3].body),
     visual: <ReviewPanel />,
   },
 ];
 
-const ANSWERS = [
-  {
-    q: 'Do I need an account?',
-    a: 'No. Every route works as a guest, and guest progress stays in this browser. Google sign-in only adds progress that follows you across devices.',
-  },
-  {
-    q: 'Does it cost anything?',
-    a: 'No. There is no paid tier, subscription, or checkout.',
-  },
-  {
-    q: 'Will the AI just give me the answer?',
-    a: 'No, by design. The companion probes your understanding with questions. Working it out is the point.',
-  },
-  {
-    q: 'Is it actively developed?',
-    a: 'It is a mature personal learning system, built for its author’s own preparation and now in maintenance-only mode. It is kept working, not chasing features.',
-  },
-];
+const ANSWERS = publicCopy.answers;
 
 /* ------------------------------------------------------------------ */
 /* Page                                                                */
@@ -452,31 +416,34 @@ function Hero() {
     <section className="relative" aria-labelledby="home-hero">
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-16 pt-14 sm:px-8 md:pt-20 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-14 lg:pb-24 lg:pt-24">
         <div>
-          <Eyebrow accent>Personal SWE learning OS · Interview prep</Eyebrow>
+          <Eyebrow accent>{publicCopy.blocks.Hero[0]}</Eyebrow>
           <Display
             as="h1"
             id="home-hero"
             className="mt-6 text-[clamp(2.6rem,4.3vw,3.45rem)] lg:text-wrap"
           >
-            Prepare for interviews <br className="hidden lg:block" />
-            by building understanding <br className="hidden lg:block" />
-            you can <span className="text-sky-300">demonstrate.</span>
+            {publicCopy.blocks.Hero[1]}
+            <br className="hidden lg:block" />
+            {publicCopy.blocks.Hero[2]}
+            <br className="hidden lg:block" />
+            {publicCopy.blocks.Hero[3]}
+            <span className="text-sky-300">{publicCopy.blocks.Hero[4]}</span>
           </Display>
           <p className="mt-7 max-w-[34rem] text-[17px] leading-[1.65] text-white/60">
-            Learn a mechanism, practise it in code or a diagram, explain it back in your own words,
-            and let FSRS bring it back right before you would have forgotten it.
+            {publicCopy.blocks.Hero[5]}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <PrimaryCta>Start learning</PrimaryCta>
+            <PrimaryCta>{publicCopy.blocks.Hero[6]}</PrimaryCta>
             <a
-              href="/curriculum/"
+              href={publicCopy.links[1]}
               className="inline-flex min-h-11 items-center gap-1 text-sm text-white/55 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
             >
-              Browse the curriculum <ArrowUpRight className="h-3.5 w-3.5" />
+              {publicCopy.blocks.Hero[7]}
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
           <p className="mt-5 font-mono text-[11px] tracking-[0.04em] text-white/55">
-            Free · no account needed · progress stays in this browser
+            {publicCopy.blocks.Hero[8]}
           </p>
         </div>
         <LoopVisual />
@@ -509,15 +476,14 @@ function Statement() {
     <section className="border-b border-white/[0.07] bg-[#050505]">
       <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-20 lg:py-32">
         <Display className="text-[clamp(2.2rem,4.6vw,3.9rem)]">
-          Reading about a mechanism is not the same as being able to explain it.
+          {publicCopy.blocks.Statement[0]}
         </Display>
         <div className="lg:pt-3">
           <p className="text-lg font-semibold tracking-tight text-white">
-            That gap is the interview.
+            {publicCopy.blocks.Statement[1]}
           </p>
           <p className="mt-3 text-[15px] leading-7 text-white/55">
-            Every concept here ends in something you made or said: running code, a diagram, a
-            decision, an explanation. Mastery is what you demonstrated, not pages you read.
+            {publicCopy.blocks.Statement[2]}
           </p>
         </div>
       </div>
@@ -530,14 +496,13 @@ function LoopIntro() {
     <section className="border-b border-white/[0.07]" aria-labelledby="home-loop">
       <div className="mx-auto grid max-w-[1200px] gap-6 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:items-end lg:gap-20 lg:py-20">
         <div>
-          <Eyebrow>One loop, every concept</Eyebrow>
+          <Eyebrow>{publicCopy.blocks.LoopIntro[0]}</Eyebrow>
           <Display id="home-loop" className="mt-4 text-[clamp(2.2rem,5vw,4rem)]">
-            Learn. Practise. Explain. Review.
+            {publicCopy.blocks.LoopIntro[1]}
           </Display>
         </div>
         <p className="max-w-md text-[15px] leading-7 text-white/55">
-          DSA, system design, backend, AI systems, and behavioural rounds share one mastery model
-          instead of five separate tools.
+          {publicCopy.blocks.LoopIntro[2]}
         </p>
       </div>
     </section>
@@ -552,7 +517,10 @@ function Features() {
           <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-28">
             <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
               <Eyebrow accent>
-                0{index + 1} · {feature.eyebrow}
+                {publicCopy.blocks.Features[0]}
+                {index + 1}
+                {publicCopy.blocks.Features[1]}
+                {feature.eyebrow}
               </Eyebrow>
               <Display className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">{feature.title}</Display>
               <p className="mt-6 max-w-md text-[15px] leading-7 text-white/55">{feature.body}</p>
@@ -571,14 +539,14 @@ function Coverage() {
       <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:py-28">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-20">
           <div>
-            <Eyebrow>What it covers</Eyebrow>
+            <Eyebrow>{publicCopy.blocks.Coverage[0]}</Eyebrow>
             <Display id="home-tracks" className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
-              {counts.tracks} tracks. One mastery model.
+              {counts.tracks}
+              {publicCopy.blocks.Coverage[1]}
             </Display>
           </div>
           <p className="max-w-md text-[15px] leading-7 text-white/55">
-            From arrays and graphs to inference serving and agent systems, plus the interview round
-            that is not about code.
+            {publicCopy.blocks.Coverage[2]}
           </p>
         </div>
         <ul className="mt-12 grid grid-cols-2 gap-x-5 border-t border-white/[0.07] sm:gap-x-10 lg:grid-cols-3">
@@ -600,25 +568,19 @@ function Fit() {
     <section className="border-b border-white/[0.07]">
       <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-28">
         <div>
-          <Eyebrow>An honest fit</Eyebrow>
+          <Eyebrow>{publicCopy.blocks.Fit[0]}</Eyebrow>
           <Display className="mt-4 text-[clamp(2.1rem,4.4vw,3.6rem)]">
-            Interview prep that takes understanding seriously.
+            {publicCopy.blocks.Fit[1]}
           </Display>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
           <div>
-            <p className="text-[15px] font-semibold text-white">A fit</p>
-            <p className="mt-2 text-[15px] leading-7 text-white/55">
-              Engineers who want to explain why a B-tree, a rate limiter, or a KV cache behaves the
-              way it does, and still remember it in three weeks.
-            </p>
+            <p className="text-[15px] font-semibold text-white">{publicCopy.blocks.Fit[2]}</p>
+            <p className="mt-2 text-[15px] leading-7 text-white/55">{publicCopy.blocks.Fit[3]}</p>
           </div>
           <div>
-            <p className="text-[15px] font-semibold text-white">Not a fit</p>
-            <p className="mt-2 text-[15px] leading-7 text-white/55">
-              An answer bank to memorise the night before. Nothing here hands you a solution, and
-              progress is earned, not clicked.
-            </p>
+            <p className="text-[15px] font-semibold text-white">{publicCopy.blocks.Fit[4]}</p>
+            <p className="mt-2 text-[15px] leading-7 text-white/55">{publicCopy.blocks.Fit[5]}</p>
           </div>
         </div>
       </div>
@@ -631,7 +593,7 @@ function Answers() {
     <section className="border-b border-white/[0.07]" aria-labelledby="home-answers">
       <div className="mx-auto grid max-w-[1200px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:py-28">
         <Display id="home-answers" className="text-[clamp(2.1rem,4.4vw,3.6rem)]">
-          A few honest answers.
+          {publicCopy.blocks.Answers[0]}
         </Display>
         <div className="border-t border-white/[0.08]">
           {ANSWERS.map((item) => (
@@ -642,7 +604,7 @@ function Answers() {
                   aria-hidden="true"
                   className="text-lg leading-none text-white/40 transition-transform duration-150 group-open:rotate-45"
                 >
-                  +
+                  {publicCopy.blocks.Answers[1]}
                 </span>
               </summary>
               <p className="max-w-xl pb-5 text-[14px] leading-6 text-white/55">{item.a}</p>
@@ -659,12 +621,12 @@ function Close() {
     <section>
       <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 px-5 py-24 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:py-32">
         <div>
-          <Eyebrow accent>Start with one concept</Eyebrow>
+          <Eyebrow accent>{publicCopy.blocks.Close[0]}</Eyebrow>
           <Display className="mt-4 max-w-3xl text-[clamp(2.2rem,5vw,4.2rem)]">
-            Pick one mechanism. Prove you understand it.
+            {publicCopy.blocks.Close[1]}
           </Display>
         </div>
-        <PrimaryCta>Start learning</PrimaryCta>
+        <PrimaryCta>{publicCopy.blocks.Close[2]}</PrimaryCta>
       </div>
     </section>
   );

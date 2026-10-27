@@ -1,10 +1,9 @@
----
-title: "How a Socratic coding assistant should respond to learners"
-description: "An AI shouldn't just hand out code. Learn why Socratic AI coding assistants must probe understanding, withhold direct solutions, and enforce the Feynman Gate to build actual mastery."
-updated: 2026-09-20
----
-
 # How a Socratic coding assistant should respond to learners
+
+> An AI shouldn't just hand out code. Learn why Socratic AI coding assistants must probe understanding, withhold direct solutions, and enforce the Feynman Gate to build actual mastery.
+
+Canonical: https://learn.significanthobbies.com/articles/how-a-socratic-coding-assistant-should-respond-to-learners
+Last updated: 2026-09-20
 
 ## Introduction: The distinction between generating code and teaching engineering
 

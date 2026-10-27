@@ -1,5 +1,9 @@
 # Model Routing
 
+> Sending each request to the cheapest model that can handle it.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/model-routing
+
 Sending each request to the cheapest model that can handle it.
 
 - Difficulty: core

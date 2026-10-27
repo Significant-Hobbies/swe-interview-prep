@@ -1,0 +1,206 @@
+{
+  "blocks": {
+    "LoopVisual": [
+      "The learning loop: learn, practise, explain, then FSRS review, which feeds back into learning.",
+      "Search & IR · concept",
+      "Tokenization",
+      "Explained back. Next review set by FSRS.",
+      "Illustrative · one concept moving through the loop"
+    ],
+    "Panel": [
+      "Illustrative · simplified from the app"
+    ],
+    "LearnPanel": [
+      "Concept",
+      "Tokenization",
+      "Splitting text into terms: lowercasing, stemming, stop words, n-grams."
+    ],
+    "PractisePanel": [
+      "Build a search tokenizer",
+      "Lowercase, split on non-alphanumerics, drop stop words, stem. Same function at index and query time.",
+      "function",
+      " tokenize(s) ",
+      "return",
+      " s.toLowerCase()",
+      ".split(",
+      "/[^a-z0-9]+/",
+      ")",
+      ".filter(Boolean)",
+      ".filter(t => !STOPS.has(t))",
+      ".map(stem);",
+      "tokenize('The Quick Brown Foxes!') → [\"quick\",\"brown\",\"fox\"]"
+    ],
+    "ExplainPanel": [
+      "Socratic companion",
+      "If a document says “Foxes” and the query says “fox”, where in your pipeline do they become the same term?",
+      "Your explain-back",
+      "Both go through the same analyzer, so “foxes” stems to “fox” on both sides. The failure mode: stem too hard and “university” collides with “universe”.",
+      "One example · one failure mode"
+    ],
+    "ReviewPanel": [
+      "Without looking: why must the tokenizer be identical at index and query time?"
+    ],
+    "featureTitle0": [
+      "Start from",
+      "the mechanism."
+    ],
+    "featureTitle1": [
+      "Make it run,",
+      "or draw it."
+    ],
+    "featureTitle2": [
+      "Say it back,",
+      "without the key."
+    ],
+    "featureTitle3": [
+      "Retrieve it",
+      "before it fades."
+    ],
+    "Hero": [
+      "Personal SWE learning OS · Interview prep",
+      "Prepare for interviews ",
+      "by building understanding ",
+      "you can ",
+      "demonstrate.",
+      "Learn a mechanism, practise it in code or a diagram, explain it back in your own words, and let FSRS bring it back right before you would have forgotten it.",
+      "Start learning",
+      "Browse the curriculum ",
+      "Free · no account needed · progress stays in this browser"
+    ],
+    "Statement": [
+      "Reading about a mechanism is not the same as being able to explain it.",
+      "That gap is the interview.",
+      "Every concept here ends in something you made or said: running code, a diagram, a decision, an explanation. Mastery is what you demonstrated, not pages you read."
+    ],
+    "LoopIntro": [
+      "One loop, every concept",
+      "Learn. Practise. Explain. Review.",
+      "DSA, system design, backend, AI systems, and behavioural rounds share one mastery model instead of five separate tools."
+    ],
+    "Features": [
+      "0",
+      " · "
+    ],
+    "Coverage": [
+      "What it covers",
+      " tracks. One mastery model.",
+      "From arrays and graphs to inference serving and agent systems, plus the interview round that is not about code."
+    ],
+    "Fit": [
+      "An honest fit",
+      "Interview prep that takes understanding seriously.",
+      "A fit",
+      "Engineers who want to explain why a B-tree, a rate limiter, or a KV cache behaves the way it does, and still remember it in three weeks.",
+      "Not a fit",
+      "An answer bank to memorise the night before. Nothing here hands you a solution, and progress is earned, not clicked."
+    ],
+    "Answers": [
+      "A few honest answers.",
+      "+"
+    ],
+    "Close": [
+      "Start with one concept",
+      "Pick one mechanism. Prove you understand it.",
+      "Start learning"
+    ]
+  },
+  "loop": [
+    {
+      "step": "01",
+      "label": "Learn",
+      "line": "A mental model, a primary source, and the prerequisites."
+    },
+    {
+      "step": "02",
+      "label": "Practise",
+      "line": "Code or a diagram in a real workspace, run against tests."
+    },
+    {
+      "step": "03",
+      "label": "Explain",
+      "line": "Say it back in your own words. The AI asks; it never answers."
+    },
+    {
+      "step": "04",
+      "label": "Review",
+      "line": "FSRS brings it back right before you would have forgotten it."
+    }
+  ],
+  "answers": [
+    {
+      "q": "Do I need an account?",
+      "a": "No. Every route works as a guest, and guest progress stays in this browser. Google sign-in only adds progress that follows you across devices."
+    },
+    {
+      "q": "Does it cost anything?",
+      "a": "No. There is no paid tier, subscription, or checkout."
+    },
+    {
+      "q": "Will the AI just give me the answer?",
+      "a": "No, by design. The companion probes your understanding with questions. Working it out is the point."
+    },
+    {
+      "q": "Is it actively developed?",
+      "a": "It is a mature personal learning system, built for its author’s own preparation and now in maintenance-only mode. It is kept working, not chasing features."
+    }
+  ],
+  "features": [
+    {
+      "eyebrow": "Learn",
+      "body": "{{counts.concepts}} concepts across {{counts.tracks}} tracks, each with a short mental model, a primary source, and the prerequisites it rests on. {{counts.roadmaps}} roadmaps order them, from a 9-day reset to a 12-month run."
+    },
+    {
+      "eyebrow": "Practise",
+      "body": "{{counts.drills}} drills in a Monaco editor and an Excalidraw canvas. Code runs against tests; system designs become diagrams you can defend."
+    },
+    {
+      "eyebrow": "Explain",
+      "body": "The Socratic companion only asks questions; it never hands over a solution. A Feynman explain-back gates the concept: one example, one failure mode, in your own words."
+    },
+    {
+      "eyebrow": "Review",
+      "body": "FSRS schedules the next retrieval from what you actually demonstrated, so strong concepts wait longer and shaky ones come back soon. {{counts.reviewQuestions}} review questions keep it honest."
+    }
+  ],
+  "links": [
+    "/dashboard",
+    "/curriculum/"
+  ],
+  "learnRows": [
+    [
+      "Mental model",
+      "The same analyzer must run at index time and query time."
+    ],
+    [
+      "Primary source",
+      "Introduction to Information Retrieval, §2.2.1"
+    ],
+    [
+      "Related",
+      "Inverted index · BM25"
+    ]
+  ],
+  "reviewQueue": [
+    {
+      "name": "Tokenization",
+      "when": "Due today",
+      "due": true
+    },
+    {
+      "name": "Inverted index",
+      "when": "In 3 days",
+      "due": false
+    },
+    {
+      "name": "BM25 scoring",
+      "when": "In 9 days",
+      "due": false
+    }
+  ],
+  "ratings": [
+    "Again",
+    "Hard",
+    "Good",
+    "Easy"
+  ]
+}

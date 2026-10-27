@@ -1,5 +1,9 @@
 # vLLM & Inference Engines
 
+> Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/inference-engines
+
 Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.
 
 - Difficulty: core

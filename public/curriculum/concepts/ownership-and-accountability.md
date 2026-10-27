@@ -1,5 +1,9 @@
 # Ownership
 
+> End-to-end responsibility.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability
+
 End-to-end responsibility.
 
 - Difficulty: intro

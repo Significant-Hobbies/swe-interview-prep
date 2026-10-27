@@ -1,5 +1,9 @@
 # Distributed Infra
 
+> Service discovery, orchestration.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/distributed-infra
+
 Service discovery, orchestration.
 
 - Difficulty: advanced

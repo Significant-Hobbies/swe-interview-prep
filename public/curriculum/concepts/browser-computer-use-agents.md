@@ -1,5 +1,9 @@
 # Browser & Computer-use Agents
 
+> DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents
+
 DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.
 
 - Difficulty: core

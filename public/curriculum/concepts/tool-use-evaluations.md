@@ -1,5 +1,9 @@
 # Tool-use Evaluations
 
+> Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations
+
 Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.
 
 - Difficulty: core

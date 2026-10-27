@@ -1,3 +1,9 @@
+# Changelog
+
+> Meaningful improvements to the SWE Interview Prep curriculum, practice loop, and personal learning system.
+
+Canonical: https://learn.significanthobbies.com/changelog
+
 # SWE Interview Prep changelog
 
 Meaningful improvements to the curriculum, practice loop, and personal learning system.

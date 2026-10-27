@@ -1,5 +1,9 @@
 # Hybrid Search
 
+> Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/hybrid-search
+
 Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
 
 - Difficulty: advanced

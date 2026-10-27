@@ -1,5 +1,9 @@
 # Hypothesis Testing
 
+> Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing
+
 Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
 
 - Difficulty: core

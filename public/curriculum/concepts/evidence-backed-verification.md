@@ -1,5 +1,9 @@
 # Evidence-backed Verification
 
+> Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification
+
 Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.
 
 - Difficulty: core

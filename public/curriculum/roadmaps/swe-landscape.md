@@ -1,5 +1,9 @@
 # The Software Engineering Landscape (2026)
 
+> Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape
+
 Companion to docs/learning/swe-landscape.md. One milestone per domain, each a link hub to canonical sources. Pick 2-3 milestones to go deep on; treat the rest as vocabulary.
 
 - Horizon: 12mo

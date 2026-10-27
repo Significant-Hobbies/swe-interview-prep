@@ -1,5 +1,9 @@
 # WebGPU Compute
 
+> WGSL, compute kernels, matmul, CPU parity.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu
+
 WGSL, compute kernels, matmul, CPU parity.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Replication
 
+> Leader-follower, multi-leader, quorum.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/replication
+
 Leader-follower, multi-leader, quorum.
 
 - Difficulty: advanced

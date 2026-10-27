@@ -1,5 +1,9 @@
 # Speculative Decoding
 
+> Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding
+
 Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.
 
 - Difficulty: core

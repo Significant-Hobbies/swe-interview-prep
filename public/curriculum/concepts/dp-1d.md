@@ -1,5 +1,9 @@
 # 1D DP
 
+> Linear state recurrences.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/dp-1d
+
 Linear state recurrences.
 
 - Difficulty: advanced

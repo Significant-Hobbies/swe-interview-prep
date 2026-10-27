@@ -1,3 +1,9 @@
+# Design a Notification Service | Interview Guide
+
+> Design preference-aware push, email, SMS, and in-app notification fan-out with quotas, deduplication, retries, provider failure, and observability.
+
+Canonical: https://learn.significanthobbies.com/system-design/notification-delivery-service
+
 # Design a notification delivery service
 
 Design preference-aware push, email, SMS, and in-app notification fan-out with quotas, deduplication, retries, provider failure, and observability.

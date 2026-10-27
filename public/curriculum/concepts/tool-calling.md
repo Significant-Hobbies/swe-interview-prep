@@ -1,5 +1,9 @@
 # Tool Calling
 
+> Letting an LLM invoke functions/APIs via structured calls.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tool-calling
+
 Letting an LLM invoke functions/APIs via structured calls.
 
 - Difficulty: core

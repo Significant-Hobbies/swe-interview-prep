@@ -1,5 +1,9 @@
 # Sorting
 
+> Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/sorting
+
 Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
 
 - Difficulty: core

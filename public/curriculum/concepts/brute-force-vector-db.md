@@ -1,5 +1,9 @@
 # Brute-Force Vector DB
 
+> Exact nearest-neighbour search by scanning every vector — the correctness baseline.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db
+
 Exact nearest-neighbour search by scanning every vector — the correctness baseline.
 
 - Difficulty: core

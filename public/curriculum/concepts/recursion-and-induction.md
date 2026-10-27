@@ -1,5 +1,9 @@
 # Recursion & Induction
 
+> Writing recursion you can trust, and solving the recurrence it produces.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction
+
 Writing recursion you can trust, and solving the recurrence it produces.
 
 - Difficulty: intro

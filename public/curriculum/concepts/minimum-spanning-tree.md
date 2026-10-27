@@ -1,5 +1,9 @@
 # Minimum Spanning Tree
 
+> Kruskal and Prim — connecting every node at least total cost.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree
+
 Kruskal and Prim — connecting every node at least total cost.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Reranking
 
+> A second-stage cross-encoder pass that reorders the top-k candidates.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/reranking
+
 A second-stage cross-encoder pass that reorders the top-k candidates.
 
 - Difficulty: advanced

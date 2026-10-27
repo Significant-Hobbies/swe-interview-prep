@@ -1,5 +1,9 @@
 # Index Updates & Tombstones
 
+> Deleting and updating vectors in a graph index without rebuilding it.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones
+
 Deleting and updating vectors in a graph index without rebuilding it.
 
 - Difficulty: advanced

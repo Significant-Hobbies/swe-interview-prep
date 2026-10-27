@@ -1,5 +1,9 @@
 # Linear Regression
 
+> Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/regression-basics
+
 Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.
 
 - Difficulty: core

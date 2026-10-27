@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 import { renderStudioFooterHtml } from '@saas-maker/ui/footer-html';
+import { writeReadability } from './public-readability.mjs';
 
 const studioFooterHtml = renderStudioFooterHtml({
   product: 'SWE Interview Prep',
@@ -183,6 +184,8 @@ function siteHeader() {
     </header>`;
 }
 
+const publicPages = new Map();
+
 function page({
   title,
   description,
@@ -193,6 +196,7 @@ function page({
   breadcrumbRoot = { label: 'Curriculum', href: '/curriculum/' },
   schema,
 }) {
+  publicPages.set(path, { path, title, description, assetPath: markdownUrl(path) });
   const canonical = absolute(path);
   const metaTitle = seoTitle(title);
   const metaDescription = seoDescription(description, title);
@@ -207,6 +211,8 @@ function page({
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${escapeHtml(metaTitle)}</title>
     <meta name="description" content="${escapeHtml(metaDescription)}">
+    <meta name="ai-summary" content="${escapeHtml(metaDescription)}">
+    <link rel="alternate" type="text/markdown" href="${absolute(markdownUrl(path))}">
     <link rel="canonical" href="${escapeHtml(canonical)}">
     <meta property="og:type" content="${type === 'concept' || type === 'article' ? 'article' : 'website'}">
     <meta property="og:site_name" content="SWE Interview Prep">
@@ -2342,3 +2348,5 @@ console.log('Generated public curriculum', {
   htmlPages: htmlPaths.length,
   sitemapUrls: sitemapPaths.length,
 });
+
+await writeReadability({ repoRoot, publicDir, pages: [...publicPages.values()] });

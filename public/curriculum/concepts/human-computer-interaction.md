@@ -1,5 +1,9 @@
 # Human-Computer Interaction
 
+> Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/human-computer-interaction
+
 Human perception, cognition, motor control, interaction techniques, accessibility, evaluation, and responsible design.
 
 - Difficulty: core

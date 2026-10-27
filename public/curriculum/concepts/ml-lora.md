@@ -1,5 +1,9 @@
 # LoRA & PEFT
 
+> Frozen base, low-rank adapters, rank/alpha.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-lora
+
 Frozen base, low-rank adapters, rank/alpha.
 
 - Difficulty: advanced

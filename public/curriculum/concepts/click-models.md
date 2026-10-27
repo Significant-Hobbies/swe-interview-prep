@@ -1,5 +1,9 @@
 # Click Models & Position Bias
 
+> Why clicks are not relevance labels, and how to debias implicit feedback.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/click-models
+
 Why clicks are not relevance labels, and how to debias implicit feedback.
 
 - Difficulty: advanced

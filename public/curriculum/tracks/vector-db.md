@@ -1,5 +1,9 @@
 # Vector DB & ANN
 
+> Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/vector-db
+
 Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
 
 This track contains 12 connected concepts. Mastery means explaining each

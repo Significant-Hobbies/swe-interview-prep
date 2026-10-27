@@ -1,5 +1,9 @@
 # Robotics Systems
 
+> Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/robotics-systems
+
 Sensing, localization, mapping, planning, control, simulation, safety, real-time loops, and hardware interfaces.
 
 - Difficulty: core

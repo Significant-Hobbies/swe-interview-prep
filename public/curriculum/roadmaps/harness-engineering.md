@@ -1,5 +1,9 @@
 # Harness Engineering
 
+> Seven progressive builds turn instructions, repository legibility, environment setup, durable state, scope, feedback, verification, lifecycle, and evaluation into one complete coding-agent harness.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering
+
 Seven progressive builds turn instructions, repository legibility, environment setup, durable state, scope, feedback, verification, lifecycle, and evaluation into one complete coding-agent harness.
 
 - Horizon: 30d

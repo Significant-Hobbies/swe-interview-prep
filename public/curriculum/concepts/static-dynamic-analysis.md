@@ -1,5 +1,9 @@
 # Static & Dynamic Analysis
 
+> ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/static-dynamic-analysis
+
 ASTs, control/data flow, abstract interpretation, symbolic execution, sanitizers, profiling, and runtime instrumentation.
 
 - Difficulty: core

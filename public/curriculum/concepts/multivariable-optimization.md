@@ -1,5 +1,9 @@
 # Multivariable Optimization
 
+> Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization
+
 Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.
 
 - Difficulty: advanced

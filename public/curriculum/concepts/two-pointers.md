@@ -1,5 +1,9 @@
 # Two Pointers
 
+> Converging/diverging pointer scans.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/two-pointers
+
 Converging/diverging pointer scans.
 
 - Difficulty: core

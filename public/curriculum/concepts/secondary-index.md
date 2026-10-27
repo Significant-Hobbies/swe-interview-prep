@@ -1,5 +1,9 @@
 # Secondary Indexes
 
+> Extra indexes for non-primary-key lookups, and what they cost on writes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/secondary-index
+
 Extra indexes for non-primary-key lookups, and what they cost on writes.
 
 - Difficulty: core

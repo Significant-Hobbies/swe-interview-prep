@@ -1,10 +1,9 @@
----
-title: "Why technical learning needs an inspectable artifact"
-description: "Passive technical learning creates the illusion of competence. Discover why true engineering mastery requires inspectable artifacts, causal explanations, and rigorous evidence loops."
-updated: 2026-09-20
----
-
 # Why technical learning needs an inspectable artifact
+
+> Passive technical learning creates the illusion of competence. Discover why true engineering mastery requires inspectable artifacts, causal explanations, and rigorous evidence loops.
+
+Canonical: https://learn.significanthobbies.com/articles/why-technical-learning-needs-an-inspectable-artifact
+Last updated: 2026-09-20
 
 The standard approach to technical learning often looks like an assembly line of consumption. We watch two-hour system design videos, read comprehensive API documentation, and scroll through carefully curated "top 50 interview questions" lists. When we read a clean, well-explained solution to a distributed caching problem, our brains nod along. We recognize the logic. We understand the vocabulary. We feel competent.
 

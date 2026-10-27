@@ -1,5 +1,9 @@
 # Query Execution & Optimization
 
+> Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization
+
 Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Leadership
 
+> Driving outcomes through others.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence
+
 Driving outcomes through others.
 
 - Difficulty: core

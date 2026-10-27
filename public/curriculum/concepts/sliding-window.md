@@ -1,5 +1,9 @@
 # Sliding Window
 
+> Variable/fixed window over sequences.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/sliding-window
+
 Variable/fixed window over sequences.
 
 - Difficulty: core

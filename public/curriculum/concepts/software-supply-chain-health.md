@@ -1,5 +1,9 @@
 # Software Supply-chain Health
 
+> Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/software-supply-chain-health
+
 Dependency provenance, lockfiles, SBOMs, signing, build integrity, vulnerabilities, update policy, and release attestations.
 
 - Difficulty: core

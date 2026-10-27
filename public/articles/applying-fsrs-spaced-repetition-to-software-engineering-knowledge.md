@@ -1,10 +1,9 @@
----
-title: "Applying FSRS Spaced Repetition to Software Engineering Knowledge"
-description: "Explore how to use the FSRS algorithm for software engineering knowledge. Learn how an evidence-gated learning loop moves spaced repetition beyond rote memorization to systemic understanding."
-updated: 2026-09-20
----
-
 # Applying FSRS Spaced Repetition to Software Engineering Knowledge
+
+> Explore how to use the FSRS algorithm for software engineering knowledge. Learn how an evidence-gated learning loop moves spaced repetition beyond rote memorization to systemic understanding.
+
+Canonical: https://learn.significanthobbies.com/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge
+Last updated: 2026-09-20
 
 ## The Gap in Engineering Knowledge Retention
 

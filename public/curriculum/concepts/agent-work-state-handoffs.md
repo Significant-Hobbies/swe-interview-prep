@@ -1,5 +1,9 @@
 # Agent Work State & Handoffs
 
+> Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs
+
 Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
 
 - Difficulty: core

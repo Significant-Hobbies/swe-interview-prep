@@ -1,5 +1,9 @@
 # Training & Debugging
 
+> Init, NaNs, overfit tests, gradient checks.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-training
+
 Init, NaNs, overfit tests, gradient checks.
 
 - Difficulty: advanced

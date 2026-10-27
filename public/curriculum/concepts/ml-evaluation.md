@@ -1,5 +1,9 @@
 # Model Evaluation
 
+> Held-out loss, baselines, hallucination, leakage.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation
+
 Held-out loss, baselines, hallucination, leakage.
 
 - Difficulty: core

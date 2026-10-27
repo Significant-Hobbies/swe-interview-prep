@@ -1,5 +1,9 @@
 # Compaction
 
+> Merging sorted runs to reclaim space and bound read amplification.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/compaction
+
 Merging sorted runs to reclaim space and bound read amplification.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Arrays & Hashing
 
+> Hash maps, sets, frequency counting.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/array-hashing
+
 Hash maps, sets, frequency counting.
 
 - Difficulty: intro

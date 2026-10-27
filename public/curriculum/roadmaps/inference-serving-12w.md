@@ -1,5 +1,9 @@
 # 12-Week Inference & Serving
 
+> Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w
+
 Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

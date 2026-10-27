@@ -1,5 +1,9 @@
 # String Matching
 
+> Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/string-matching
+
 Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
 
 - Difficulty: core

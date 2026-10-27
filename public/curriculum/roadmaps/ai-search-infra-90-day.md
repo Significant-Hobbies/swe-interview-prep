@@ -1,5 +1,9 @@
 # 90-Day AI Search & Infrastructure
 
+> The core roadmap. Three months that move from retrieval basics to ANN, RAG, and the storage foundations behind systems like Turbopuffer.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day
+
 The core roadmap. Three months that move from retrieval basics to ANN, RAG, and the storage foundations behind systems like Turbopuffer.
 
 - Horizon: 90d

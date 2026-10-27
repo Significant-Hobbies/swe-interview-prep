@@ -22,6 +22,13 @@ function context(request: Request, generation = 'a'.repeat(64), status = 200, ex
     if (new URL(input.url).pathname === '/public-cache-generation.txt') {
       return Promise.resolve(new Response(generation));
     }
+    if (new URL(input.url).pathname === '/api/md/_catalog') {
+      return Promise.resolve(
+        Response.json([
+          { path: '/', title: 'Public home', description: 'Public home', assetPath: '/index.md' },
+        ])
+      );
+    }
     const markdown = new URL(input.url).pathname.endsWith('.md');
     return Promise.resolve(
       new Response(markdown ? '# public brief' : '<html>public home</html>', {
@@ -76,8 +83,8 @@ describe('public home representation cache', () => {
       }
       expect(cache.entries.size).toBe(2);
       expect(cache.keys.every((key) => !key.headers.has('accept'))).toBe(true);
-      // warm requests do not touch the asset server
-      expect(calls).toBe(6);
+      // Warm requests read only the deployment marker; cold formats load their public catalog.
+      expect(calls).toBe(8);
     });
   }
   it('resolves cold HEAD as GET, warms full bodies and strips warm HEAD bodies', async () => {

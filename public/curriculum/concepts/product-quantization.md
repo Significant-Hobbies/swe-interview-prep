@@ -1,5 +1,9 @@
 # Product Quantization
 
+> Compress vectors into sub-space codebooks for tiny memory footprint.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/product-quantization
+
 Compress vectors into sub-space codebooks for tiny memory footprint.
 
 - Difficulty: advanced

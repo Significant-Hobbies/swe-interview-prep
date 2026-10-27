@@ -1,5 +1,9 @@
 # RL Alignment (GRPO & Policy Gradient)
 
+> Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment
+
 Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.
 
 - Difficulty: advanced

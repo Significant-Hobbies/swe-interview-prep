@@ -1,5 +1,9 @@
 # Model Quantization
 
+> Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/model-quantization
+
 Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.
 
 - Difficulty: core

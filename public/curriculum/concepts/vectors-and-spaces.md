@@ -1,5 +1,9 @@
 # Vectors & Vector Spaces
 
+> Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces
+
 Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
 
 - Difficulty: intro

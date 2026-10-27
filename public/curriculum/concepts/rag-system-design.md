@@ -1,5 +1,9 @@
 # RAG System Design
 
+> Architecting a production RAG system: ingestion, retrieval, generation, evals.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/rag-system-design
+
 Architecting a production RAG system: ingestion, retrieval, generation, evals.
 
 - Difficulty: advanced

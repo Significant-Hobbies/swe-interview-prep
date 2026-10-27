@@ -1,5 +1,9 @@
 # A/B Testing for Engineers
 
+> Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering
+
 Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.
 
 - Difficulty: core

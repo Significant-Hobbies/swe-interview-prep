@@ -1,5 +1,9 @@
 # Product Analytics
 
+> Activation, retention, funnels — measuring whether the product works.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/product-analytics
+
 Activation, retention, funnels — measuring whether the product works.
 
 - Difficulty: core

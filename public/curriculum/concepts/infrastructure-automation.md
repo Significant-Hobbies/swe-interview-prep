@@ -1,5 +1,9 @@
 # Infrastructure Automation
 
+> Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation
+
 Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Rate Limiter Design
 
+> Token bucket versus sliding window, and making a limiter work across many nodes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design
+
 Token bucket versus sliding window, and making a limiter work across many nodes.
 
 - Difficulty: core

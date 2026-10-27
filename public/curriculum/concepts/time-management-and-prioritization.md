@@ -1,5 +1,9 @@
 # Prioritization
 
+> Eisenhower, OKR alignment.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization
+
 Eisenhower, OKR alignment.
 
 - Difficulty: intro

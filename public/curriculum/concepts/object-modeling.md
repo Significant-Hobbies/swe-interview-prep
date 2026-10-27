@@ -1,5 +1,9 @@
 # Object Modeling
 
+> Identifying classes, attributes, relationships.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/object-modeling
+
 Identifying classes, attributes, relationships.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Runtime — what every runtime has to do
 
+> Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/runtime
+
 Companion to docs/learning/runtime-roadmap.md. Treats every runtime as doing the same five jobs: execute, allocate, schedule, isolate, observe. Phases cover each job, then deep-dives into language runtimes, AI inference runtimes, and edge runtimes.
 
 - Horizon: 12mo

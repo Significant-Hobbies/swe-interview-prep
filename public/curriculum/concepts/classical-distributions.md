@@ -1,5 +1,9 @@
 # Classical Distributions
 
+> Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/classical-distributions
+
 Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.
 
 - Difficulty: core

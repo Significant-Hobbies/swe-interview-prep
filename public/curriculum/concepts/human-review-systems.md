@@ -1,5 +1,9 @@
 # Human Review Systems
 
+> Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/human-review-systems
+
 Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.
 
 - Difficulty: core

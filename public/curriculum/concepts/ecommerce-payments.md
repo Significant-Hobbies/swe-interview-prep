@@ -1,5 +1,9 @@
 # Payments
 
+> Idempotency, sagas, double-entry.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments
+
 Idempotency, sagas, double-entry.
 
 - Difficulty: core

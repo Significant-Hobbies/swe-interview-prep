@@ -1,5 +1,9 @@
 # Real-time Systems
 
+> WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime
+
 WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
 
 - Difficulty: core

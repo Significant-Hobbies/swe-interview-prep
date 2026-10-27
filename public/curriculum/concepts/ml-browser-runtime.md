@@ -1,5 +1,9 @@
 # Browser ML Runtime
 
+> Web Workers, WASM, OPFS, TypedArrays.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime
+
 Web Workers, WASM, OPFS, TypedArrays.
 
 - Difficulty: advanced

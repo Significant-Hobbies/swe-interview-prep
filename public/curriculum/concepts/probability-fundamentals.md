@@ -1,5 +1,9 @@
 # Probability Fundamentals
 
+> Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals
+
 Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
 
 - Difficulty: intro

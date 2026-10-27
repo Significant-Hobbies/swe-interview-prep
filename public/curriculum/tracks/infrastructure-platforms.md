@@ -1,5 +1,9 @@
 # Infrastructure & Platforms
 
+> Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms
+
 Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
 
 This track contains 10 connected concepts. Mastery means explaining each

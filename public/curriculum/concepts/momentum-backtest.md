@@ -1,5 +1,9 @@
 # Momentum Backtest Discipline
 
+> Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest
+
 Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.
 
 - Difficulty: advanced

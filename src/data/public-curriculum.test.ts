@@ -133,7 +133,7 @@ describe('public curriculum publication', () => {
     // forgets them — they just quietly stop being discoverable.
     const llms = readFileSync(resolve(root, 'public/llms.txt'), 'utf8');
 
-    expect(llms).toContain('## Developer docs');
+    expect(llms).toContain('## Machine-readable');
     for (const path of ['/openapi.json', '/sitemap.xml', '/api/ai']) {
       expect(llms).toContain(path);
     }
@@ -313,6 +313,17 @@ describe('public curriculum publication', () => {
     for (const path of paths) {
       // Sitemap must list final direct routes — never a .html Cloudflare redirects.
       expect(path, path).not.toMatch(/\.html$/);
+      if (['/about', '/privacy', '/learning'].includes(path) || path.startsWith('/learning/')) {
+        // These source-backed React pages receive their canonical/head tags in
+        // Pages middleware; the real-runtime test checks the resulting HTML.
+        const registry = JSON.parse(readFileSync(resolve(root, 'public/api/md/_catalog'), 'utf8'));
+        const row = registry.find((entry: { path: string }) => entry.path === path);
+        expect(row?.url).toBe(`${origin}${path}`);
+        expect(readFileSync(resolve(root, `public${row.assetPath}`), 'utf8')).toContain(
+          `Canonical: ${origin}${path}`
+        );
+        continue;
+      }
       const html = readFileSync(htmlFile(path), 'utf8');
       expect(html, path).toMatch(canonicalPattern(expectedCanonical(path)));
     }

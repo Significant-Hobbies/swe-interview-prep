@@ -1,5 +1,9 @@
 # Codebase Graphs
 
+> Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/codebase-graphs
+
 Symbols, references, calls, imports, ownership, data flow, build targets, and graph queries over repositories.
 
 - Difficulty: core

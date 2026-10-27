@@ -1,5 +1,9 @@
 # Go-to-Market
 
+> Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/go-to-market
+
 Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
 
 This track contains 4 connected concepts. Mastery means explaining each

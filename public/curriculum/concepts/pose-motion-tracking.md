@@ -1,5 +1,9 @@
 # Pose & Motion Tracking
 
+> Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/pose-motion-tracking
+
 Landmarks, skeletons, optical flow, temporal smoothing, identity tracking, calibration, occlusion, and latency.
 
 - Difficulty: core

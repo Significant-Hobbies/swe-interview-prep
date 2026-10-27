@@ -1,5 +1,9 @@
 # Coding Agent Systems
 
+> Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/coding-agent-systems
+
 Repository context, planning, file edits, tools, tests, sandboxes, review loops, and patch delivery.
 
 - Difficulty: core

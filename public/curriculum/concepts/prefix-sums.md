@@ -1,5 +1,9 @@
 # Prefix Sums
 
+> Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/prefix-sums
+
 Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
 
 - Difficulty: core

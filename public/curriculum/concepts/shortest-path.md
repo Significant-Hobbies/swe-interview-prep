@@ -1,5 +1,9 @@
 # Shortest Path
 
+> Dijkstra, Bellman-Ford, A*.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/shortest-path
+
 Dijkstra, Bellman-Ford, A*.
 
 - Difficulty: advanced

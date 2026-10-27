@@ -1,5 +1,9 @@
 # AI Systems
 
+> Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/ai-systems
+
 Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
 
 This track contains 32 connected concepts. Mastery means explaining each

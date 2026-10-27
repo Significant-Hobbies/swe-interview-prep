@@ -1,5 +1,9 @@
 # Cloud Infrastructure
 
+> Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure
+
 Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.
 
 - Difficulty: core

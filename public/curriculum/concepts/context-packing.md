@@ -1,5 +1,9 @@
 # Context Packing
 
+> Ordering and budgeting retrieved context within the model's window.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/context-packing
+
 Ordering and budgeting retrieved context within the model's window.
 
 - Difficulty: advanced

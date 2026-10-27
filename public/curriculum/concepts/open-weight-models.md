@@ -1,5 +1,9 @@
 # Open-Weight Models
 
+> Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/open-weight-models
+
 Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.
 
 - Difficulty: core

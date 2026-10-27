@@ -1,5 +1,9 @@
 # Stack
 
+> LIFO, parsing, monotonic stack.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/stack
+
 LIFO, parsing, monotonic stack.
 
 - Difficulty: intro

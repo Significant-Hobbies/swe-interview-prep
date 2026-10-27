@@ -1,5 +1,9 @@
 # Transaction Processing
 
+> ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/transaction-processing
+
 ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.
 
 - Difficulty: core

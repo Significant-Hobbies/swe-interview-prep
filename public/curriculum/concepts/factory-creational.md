@@ -1,5 +1,9 @@
 # Factory & Creational
 
+> Abstract factory, builder, singleton.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/factory-creational
+
 Abstract factory, builder, singleton.
 
 - Difficulty: core

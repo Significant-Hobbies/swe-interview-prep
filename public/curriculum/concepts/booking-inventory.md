@@ -1,5 +1,9 @@
 # Booking & Inventory
 
+> Reservation, hold-confirm, optimistic locking.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/booking-inventory
+
 Reservation, hold-confirm, optimistic locking.
 
 - Difficulty: advanced

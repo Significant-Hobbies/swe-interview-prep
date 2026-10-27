@@ -1,5 +1,9 @@
 # Geo Systems
 
+> Geohash, quadtree, dispatch.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/location-transport
+
 Geohash, quadtree, dispatch.
 
 - Difficulty: core

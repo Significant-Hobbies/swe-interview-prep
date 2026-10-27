@@ -1,5 +1,9 @@
 # Union-Find
 
+> Disjoint set, path compression.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/union-find
+
 Disjoint set, path compression.
 
 - Difficulty: core

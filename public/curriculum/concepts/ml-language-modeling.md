@@ -1,5 +1,9 @@
 # Language Modeling
 
+> Next-token prediction, context windows, perplexity.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling
+
 Next-token prediction, context windows, perplexity.
 
 - Difficulty: core

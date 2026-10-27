@@ -1,5 +1,9 @@
 # Search Platform Design
 
+> End-to-end design of a search platform: ingestion, indexing, query, ranking.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/search-platform-design
+
 End-to-end design of a search platform: ingestion, indexing, query, ranking.
 
 - Difficulty: advanced

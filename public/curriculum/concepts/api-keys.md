@@ -1,5 +1,9 @@
 # API Keys
 
+> Issuing, hashing, scoping, and rotating keys for machine clients.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/api-keys
+
 Issuing, hashing, scoping, and rotating keys for machine clients.
 
 - Difficulty: core

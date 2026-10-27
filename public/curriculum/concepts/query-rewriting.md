@@ -1,5 +1,9 @@
 # Query Rewriting
 
+> Expanding, correcting, and normalizing queries before retrieval.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/query-rewriting
+
 Expanding, correcting, and normalizing queries before retrieval.
 
 - Difficulty: core

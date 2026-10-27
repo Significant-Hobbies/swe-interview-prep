@@ -1,5 +1,9 @@
 # Coding-agent Benchmarks
 
+> Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks
+
 Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.
 
 - Difficulty: core

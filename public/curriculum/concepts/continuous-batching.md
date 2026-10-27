@@ -1,5 +1,9 @@
 # Continuous Batching
 
+> Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/continuous-batching
+
 Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.
 
 - Difficulty: core

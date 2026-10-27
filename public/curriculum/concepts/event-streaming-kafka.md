@@ -1,5 +1,9 @@
 # Event Streaming & Kafka
 
+> Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka
+
 Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.
 
 - Difficulty: core

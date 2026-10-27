@@ -1,5 +1,9 @@
 # Distributed Systems
 
+> Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/distributed-systems
+
 Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
 
 This track contains 11 connected concepts. Mastery means explaining each

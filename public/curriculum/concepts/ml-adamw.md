@@ -1,5 +1,9 @@
 # AdamW Optimizer
 
+> Moments, weight decay, gradient clipping.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-adamw
+
 Moments, weight decay, gradient clipping.
 
 - Difficulty: core

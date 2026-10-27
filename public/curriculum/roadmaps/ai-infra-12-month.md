@@ -1,5 +1,9 @@
 # 12-Month Advanced AI Infrastructure
 
+> The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month
+
 The long arc. A year of compounding depth across search, vector databases, AI systems, backend, storage, and system design — measured in shipped artifacts and project features.
 
 - Horizon: 12mo

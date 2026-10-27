@@ -1,5 +1,9 @@
 # Sharpe, Drawdown & Portfolio Risk
 
+> Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics
+
 Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.
 
 - Difficulty: core

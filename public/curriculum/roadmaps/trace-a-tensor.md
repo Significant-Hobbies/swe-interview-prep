@@ -1,5 +1,9 @@
 # Trace a Tensor
 
+> A compact AI-systems synthesis path. Four milestones connect the work expressed by a model to the machine and serving layers that execute it, ending in a measured bottleneck diagnosis and defended optimization.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor
+
 A compact AI-systems synthesis path. Four milestones connect the work expressed by a model to the machine and serving layers that execute it, ending in a measured bottleneck diagnosis and defended optimization.
 
 - Horizon: 30d

@@ -1,5 +1,9 @@
 # Agent Permissions & Sandboxing
 
+> Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing
+
 Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
 
 - Difficulty: core

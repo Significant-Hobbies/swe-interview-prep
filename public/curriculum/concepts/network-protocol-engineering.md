@@ -1,5 +1,9 @@
 # Network Protocol Engineering
 
+> Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering
+
 Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.
 
 - Difficulty: core

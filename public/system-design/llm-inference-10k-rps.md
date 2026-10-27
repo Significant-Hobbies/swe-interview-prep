@@ -1,3 +1,9 @@
+# Design LLM Inference at 10K RPS | Interview Guide
+
+> Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.
+
+Canonical: https://learn.significanthobbies.com/system-design/llm-inference-10k-rps
+
 # Design LLM inference at 10K RPS
 
 Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.

@@ -1,5 +1,9 @@
 # Sharding
 
+> Range/hash/geo partitioning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/sharding
+
 Range/hash/geo partitioning.
 
 - Difficulty: advanced

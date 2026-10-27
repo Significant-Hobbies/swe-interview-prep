@@ -1,5 +1,9 @@
 # HNSW
 
+> Hierarchical Navigable Small World graphs — the dominant ANN index.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/hnsw
+
 Hierarchical Navigable Small World graphs — the dominant ANN index.
 
 - Difficulty: advanced

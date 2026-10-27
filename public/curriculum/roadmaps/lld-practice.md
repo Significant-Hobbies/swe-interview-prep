@@ -1,5 +1,9 @@
 # LLD Practice
 
+> A 30-day sprint through the canonical low-level-design problems. Patterns first, then applied "design X" exercises. End able to walk through a parking lot, ticketing system, or game design with implementation and tradeoff notes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice
+
 A 30-day sprint through the canonical low-level-design problems. Patterns first, then applied "design X" exercises. End able to walk through a parking lot, ticketing system, or game design with implementation and tradeoff notes.
 
 - Horizon: 30d

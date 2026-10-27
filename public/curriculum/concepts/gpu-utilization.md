@@ -1,5 +1,9 @@
 # GPU Utilization
 
+> Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization
+
 Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.
 
 - Difficulty: core

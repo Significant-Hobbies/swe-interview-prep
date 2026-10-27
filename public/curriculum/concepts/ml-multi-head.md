@@ -1,5 +1,9 @@
 # Multi-Head Attention
 
+> Parallel heads, head_dim split, output projection.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head
+
 Parallel heads, head_dim split, output projection.
 
 - Difficulty: advanced

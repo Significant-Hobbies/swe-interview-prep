@@ -1,5 +1,9 @@
 # Testing Infrastructure
 
+> Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/testing-infrastructure
+
 Unit, integration, contract, E2E, property, fuzz, hermetic environments, fixtures, sharding, and flaky-test control.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Evaluation & AI Reliability
 
+> LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/ai-reliability
+
 LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
 
 This track contains 14 connected concepts. Mastery means explaining each

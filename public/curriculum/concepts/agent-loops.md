@@ -1,5 +1,9 @@
 # Agent Loops
 
+> The plan → act → observe loop, with memory and stopping conditions.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-loops
+
 The plan → act → observe loop, with memory and stopping conditions.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Behavioral Practice
 
+> A 30-day pass through behavioural interview frames. Two stories per dimension, each with situation, action, result, and a learned lesson. End able to map an unfamiliar question to a relevant story in under 10 seconds.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice
+
 A 30-day pass through behavioural interview frames. Two stories per dimension, each with situation, action, result, and a learned lesson. End able to map an unfamiliar question to a relevant story in under 10 seconds.
 
 - Horizon: 30d

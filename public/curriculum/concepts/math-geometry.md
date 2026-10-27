@@ -1,5 +1,9 @@
 # Math & Geometry
 
+> Number theory, modular, geometry.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/math-geometry
+
 Number theory, modular, geometry.
 
 - Difficulty: core

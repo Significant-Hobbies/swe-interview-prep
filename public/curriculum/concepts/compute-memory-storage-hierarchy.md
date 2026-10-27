@@ -1,5 +1,9 @@
 # Compute, Memory & Storage Hierarchy
 
+> CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy
+
 CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
 
 - Difficulty: core

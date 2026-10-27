@@ -1,5 +1,9 @@
 # Agent Systems
 
+> Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/agent-systems
+
 Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
 
 This track contains 17 connected concepts. Mastery means explaining each

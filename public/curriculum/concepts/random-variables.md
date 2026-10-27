@@ -1,5 +1,9 @@
 # Random Variables & Distributions
 
+> Discrete and continuous distributions, expectation, variance, and the law of large numbers.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/random-variables
+
 Discrete and continuous distributions, expectation, variance, and the law of large numbers.
 
 - Difficulty: core

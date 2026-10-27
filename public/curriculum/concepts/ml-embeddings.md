@@ -1,5 +1,9 @@
 # Embeddings (Transformer)
 
+> Token & position embeddings, tied weights.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings
+
 Token & position embeddings, tied weights.
 
 - Difficulty: core

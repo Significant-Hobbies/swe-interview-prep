@@ -1,5 +1,9 @@
 # DSA & Implementation
 
+> Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/dsa
+
 Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
 
 This track contains 27 connected concepts. Mastery means explaining each

@@ -1,5 +1,9 @@
 # Consensus
 
+> Raft, Paxos, leader election.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/consensus
+
 Raft, Paxos, leader election.
 
 - Difficulty: advanced

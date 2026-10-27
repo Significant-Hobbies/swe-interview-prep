@@ -1,5 +1,9 @@
 # Sampling & Decoding
 
+> Temperature, top-k, greedy decoding.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-sampling
+
 Temperature, top-k, greedy decoding.
 
 - Difficulty: core

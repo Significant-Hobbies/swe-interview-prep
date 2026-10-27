@@ -1,5 +1,9 @@
 # Backpropagation
 
+> Chain rule, autograd, forward/backward passes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-backprop
+
 Chain rule, autograd, forward/backward passes.
 
 - Difficulty: core

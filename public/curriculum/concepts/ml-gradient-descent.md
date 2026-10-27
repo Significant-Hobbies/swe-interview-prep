@@ -1,5 +1,9 @@
 # Gradient Descent
 
+> Loss surfaces, learning rate, SGD steps.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent
+
 Loss surfaces, learning rate, SGD steps.
 
 - Difficulty: core

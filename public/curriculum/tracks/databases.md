@@ -1,5 +1,9 @@
 # Databases & Storage
 
+> Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/databases
+
 Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
 
 This track contains 18 connected concepts. Mastery means explaining each

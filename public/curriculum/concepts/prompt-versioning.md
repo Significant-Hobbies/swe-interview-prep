@@ -1,5 +1,9 @@
 # Prompt & Version Logging
 
+> Treating prompts as versioned artifacts with logged inputs/outputs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning
+
 Treating prompts as versioned artifacts with logged inputs/outputs.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Retries & DLQ
 
+> Backoff + jitter, poison messages, dead-letter queues.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/retries-dlq
+
 Backoff + jitter, poison messages, dead-letter queues.
 
 - Difficulty: core

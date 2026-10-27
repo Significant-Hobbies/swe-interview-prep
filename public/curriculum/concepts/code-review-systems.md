@@ -1,5 +1,9 @@
 # Code Review Systems
 
+> Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/code-review-systems
+
 Diff understanding, intent, correctness, maintainability, risk ranking, review workflows, and actionable findings.
 
 - Difficulty: core

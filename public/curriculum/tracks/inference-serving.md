@@ -1,5 +1,9 @@
 # Inference & Serving
 
+> Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/inference-serving
+
 Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
 
 This track contains 12 connected concepts. Mastery means explaining each

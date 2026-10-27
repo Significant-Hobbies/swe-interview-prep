@@ -1,5 +1,9 @@
 # Voice & Audio Systems
 
+> Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/voice-audio-systems
+
 Capture, codecs, streaming, speech recognition, synthesis, turn detection, noise handling, latency, and conversational UX.
 
 - Difficulty: core

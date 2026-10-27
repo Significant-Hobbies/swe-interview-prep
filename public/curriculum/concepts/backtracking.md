@@ -1,5 +1,9 @@
 # Backtracking
 
+> DFS with state restoration, pruning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/backtracking
+
 DFS with state restoration, pruning.
 
 - Difficulty: advanced

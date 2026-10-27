@@ -1,5 +1,9 @@
 # AI Regression Testing
 
+> Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing
+
 Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
 
 - Difficulty: core
