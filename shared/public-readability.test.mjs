@@ -192,7 +192,12 @@ it('unknown Markdown paths cannot advertise off-origin canonicals', async () => 
   const { createAgentSurfaceManifest } = await import('./agent-surfaces/manifest.mjs');
   const { createAgentSurfaceHandler } = await import('./agent-surfaces/handler.mjs');
   const fixtureOrigin = 'https://public.example';
-  const manifest = createAgentSurfaceManifest({ name: 'Public fixture', url: fixtureOrigin, summary: 'Public fixture', pages: { '/': '# Public' } });
+  const manifest = createAgentSurfaceManifest({
+    name: 'Public fixture',
+    url: fixtureOrigin,
+    summary: 'Public fixture',
+    pages: { '/': '# Public' },
+  });
   const handler = createAgentSurfaceHandler({ manifest });
   for (const path of ['/api/md//evil.example/x', '//evil.example/x.md']) {
     const response = await handler(new Request(fixtureOrigin + path));
