@@ -28,6 +28,8 @@
     "src/features/scale/vendor/breakscale/**": ["exports", "types"],
     "shared/agent-surfaces/**": ["exports", "types"]
   },
+  // macOS runtime-harness cleanup executable, not a module import on Linux CI.
+  "ignoreUnresolved": ["/usr/bin/trash"],
   "ignoreDependencies": [
     // Loaded by Tailwind/Vite and size/docs tooling rather than source imports.
     // Spawned by the code-health checker rather than imported.
