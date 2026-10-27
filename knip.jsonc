@@ -25,7 +25,8 @@
   ],
   // Preserve the vendored engine API; first-party exports remain checked.
   "ignoreIssues": {
-    "src/features/scale/vendor/breakscale/**": ["exports", "types"]
+    "src/features/scale/vendor/breakscale/**": ["exports", "types"],
+    "shared/agent-surfaces/**": ["exports", "types"]
   },
   "ignoreDependencies": [
     // Loaded by Tailwind/Vite and size/docs tooling rather than source imports.

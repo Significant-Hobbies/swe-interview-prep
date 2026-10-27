@@ -47,7 +47,7 @@ export const identity = {
     '/sweep',
   ],
 };
-export function privatePath(path) {
+function privatePath(path) {
   return identity.excludedPaths.some(
     (prefix) => path === prefix || path.startsWith(prefix + '/') || path === prefix + '.md'
   );

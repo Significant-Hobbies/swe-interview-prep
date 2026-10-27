@@ -16,7 +16,6 @@ export function advertisePublic(
   response: Response,
   assets?: { fetch(request: Request): Promise<Response> }
 ): Promise<Response>;
-export function privatePath(path: string): boolean;
 export function robots(): string;
 export function wantsMarkdown(request: Request): boolean;
 export function markdownResponse(

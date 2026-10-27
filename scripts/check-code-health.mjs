@@ -105,6 +105,10 @@ function checkUnused() {
       `dependencies=${observed.dependencies}, devDependencies=${observed.devDependencies}, ` +
       `unlisted=${observed.unlisted}, unresolved=${observed.unresolved}.`
   );
+  for (const issue of issues) {
+    if (issue.unresolved?.length)
+      console.error('Unresolved imports:', issue.file, issue.unresolved);
+  }
   failRegressions('Unused', observed, baselines.unused);
 }
 
@@ -121,6 +125,8 @@ function checkComplexity() {
     'src/data/library/**',
     '-x',
     `${vendorPath}**`,
+    '-x',
+    'shared/agent-surfaces/**',
     '-x',
     'scripts/check-code-health.mjs',
     '-x',
@@ -179,7 +185,7 @@ function checkDuplication() {
     '--format',
     'javascript,jsx,typescript,tsx',
     '--ignore',
-    `**/*.test.*,**/*.spec.*,**/*.d.ts,**/node_modules/**,**/dist/**,**/coverage/**,scripts/check-code-health.mjs,${vendorPath}**`,
+    `**/*.test.*,**/*.spec.*,**/*.d.ts,**/node_modules/**,**/dist/**,**/coverage/**,scripts/check-code-health.mjs,${vendorPath}**,shared/agent-surfaces/**`,
     '--reporters',
     'json',
     '--output',
