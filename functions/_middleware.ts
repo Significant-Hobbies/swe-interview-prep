@@ -444,10 +444,12 @@ async function preservedMarkdown(context: Parameters<PagesFunction>[0], url: URL
     ? await context.env.ASSETS.fetch(new Request(url.origin + url.pathname))
     : await context.next();
   const body = await asset.text();
+  const prefix = body.trimStart().toLowerCase();
   if (
     !asset.ok ||
     asset.headers.get('content-type')?.includes('text/html') ||
-    new RegExp('^\\s*(?:<!doctype|<html)', 'i').test(body)
+    prefix.startsWith('<!doctype') ||
+    prefix.startsWith('<html')
   ) {
     return new Response('# Not found\n', {
       status: 404,
