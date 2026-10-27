@@ -1,5 +1,9 @@
 # Retries & Circuit Breakers
 
+> Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers
+
 Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.
 
 - Difficulty: core

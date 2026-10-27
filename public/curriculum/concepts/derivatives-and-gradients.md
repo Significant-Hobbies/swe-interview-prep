@@ -1,5 +1,9 @@
 # Derivatives & Gradients
 
+> Partial derivatives, the gradient vector, and reading a loss surface for descent direction.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients
+
 Partial derivatives, the gradient vector, and reading a loss surface for descent direction.
 
 - Difficulty: core

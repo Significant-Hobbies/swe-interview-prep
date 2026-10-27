@@ -1,5 +1,9 @@
 # 12-Week Multimodal & Spatial Computing
 
+> Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w
+
 Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

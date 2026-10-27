@@ -1,5 +1,9 @@
 # Operating System Mechanics
 
+> Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics
+
 Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.
 
 - Difficulty: core

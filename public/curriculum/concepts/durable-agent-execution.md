@@ -1,5 +1,9 @@
 # Durable Agent Execution
 
+> Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution
+
 Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
 
 - Difficulty: core

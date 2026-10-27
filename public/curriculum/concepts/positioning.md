@@ -1,5 +1,9 @@
 # Positioning
 
+> Naming the problem, the audience, and the alternative you beat.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/positioning
+
 Naming the problem, the audience, and the alternative you beat.
 
 - Difficulty: core

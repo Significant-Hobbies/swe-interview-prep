@@ -1,5 +1,9 @@
 # 12-Week Distributed Systems
 
+> Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w
+
 Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

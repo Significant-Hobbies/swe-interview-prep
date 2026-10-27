@@ -1,3 +1,9 @@
+# Design Uber or Lyft | Interview Guide
+
+> Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.
+
+Canonical: https://learn.significanthobbies.com/system-design/ride-sharing-platform
+
 # Design a ride-sharing platform
 
 Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.

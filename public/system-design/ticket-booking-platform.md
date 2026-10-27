@@ -1,3 +1,9 @@
+# Design Ticketmaster | Interview Guide
+
+> Design browse, virtual waiting room, seat holds, payment, oversell prevention, flash-crowd control, expiration, reconciliation, and fairness.
+
+Canonical: https://learn.significanthobbies.com/system-design/ticket-booking-platform
+
 # Design a ticket-booking platform
 
 Design browse, virtual waiting room, seat holds, payment, oversell prevention, flash-crowd control, expiration, reconciliation, and fairness.

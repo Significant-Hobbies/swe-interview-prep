@@ -1,5 +1,9 @@
 # Capacity Estimation
 
+> Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation
+
 Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.
 
 - Difficulty: core

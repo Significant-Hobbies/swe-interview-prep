@@ -1,5 +1,9 @@
 # Intervals
 
+> Merge, overlap, sweep line.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/intervals
+
 Merge, overlap, sweep line.
 
 - Difficulty: core

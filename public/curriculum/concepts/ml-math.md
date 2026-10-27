@@ -1,5 +1,9 @@
 # ML Math Foundations
 
+> Vectors, matrices, dot products, matmul, shapes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-math
+
 Vectors, matrices, dot products, matmul, shapes.
 
 - Difficulty: intro

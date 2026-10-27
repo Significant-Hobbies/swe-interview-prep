@@ -1,10 +1,9 @@
----
-title: "Recognition vs Causal Understanding in Technical Study"
-description: "Explore the gap between recognition memory and causal understanding in software engineering study, and how evidence-gated loops build durable mastery."
-updated: 2026-09-20
----
-
 # Recognition vs Causal Understanding in Technical Study
+
+> Explore the gap between recognition memory and causal understanding in software engineering study, and how evidence-gated loops build durable mastery.
+
+Canonical: https://learn.significanthobbies.com/articles/recognition-vs-causal-understanding-in-technical-study
+Last updated: 2026-09-20
 
 ## The Trap of Recognition Memory
 

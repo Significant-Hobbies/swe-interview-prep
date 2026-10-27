@@ -1,5 +1,9 @@
 # B-Tree
 
+> The balanced, disk-friendly tree behind most relational indexes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/b-tree
+
 The balanced, disk-friendly tree behind most relational indexes.
 
 - Difficulty: core

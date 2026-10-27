@@ -1,5 +1,9 @@
 # Distributed Workflows & Temporal
 
+> Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal
+
 Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Data Warehouses & Lakehouses
 
+> Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses
+
 Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.
 
 - Difficulty: core

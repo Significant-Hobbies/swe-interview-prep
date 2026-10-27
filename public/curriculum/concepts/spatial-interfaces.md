@@ -1,5 +1,9 @@
 # Spatial Interfaces
 
+> Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/spatial-interfaces
+
 Coordinate systems, anchors, tracking, depth, occlusion, hand/eye input, world understanding, and spatial UI.
 
 - Difficulty: core

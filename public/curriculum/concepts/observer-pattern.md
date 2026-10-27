@@ -1,5 +1,9 @@
 # Observer Pattern
 
+> Pub/sub, event propagation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/observer-pattern
+
 Pub/sub, event propagation.
 
 - Difficulty: core

@@ -1,3 +1,9 @@
+# Design a Web Crawler | Interview Guide
+
+> Design a polite distributed web crawler with URL normalization, robots enforcement, host scheduling, deduplication, recrawling, traps, and failure isolation.
+
+Canonical: https://learn.significanthobbies.com/system-design/web-crawler
+
 # Design a web crawler
 
 Design a polite distributed web crawler with URL normalization, robots enforcement, host scheduling, deduplication, recrawling, traps, and failure isolation.

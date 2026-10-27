@@ -1,5 +1,9 @@
 # Tokenization (LLM)
 
+> Byte-level, char-level, BPE, vocab design.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization
+
 Byte-level, char-level, BPE, vocab design.
 
 - Difficulty: intro

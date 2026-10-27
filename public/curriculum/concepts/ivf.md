@@ -1,5 +1,9 @@
 # IVF (Inverted File)
 
+> Cluster vectors with k-means, then search only the nearest cells (nprobe).
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ivf
+
 Cluster vectors with k-means, then search only the nearest cells (nprobe).
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Bayesian Inference
 
+> Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference
+
 Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.
 
 - Difficulty: advanced

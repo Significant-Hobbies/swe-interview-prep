@@ -1,5 +1,9 @@
 # Pagination
 
+> Offset versus cursor pagination, stable ordering, and why deep pages get expensive.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/pagination
+
 Offset versus cursor pagination, stable ordering, and why deep pages get expensive.
 
 - Difficulty: core

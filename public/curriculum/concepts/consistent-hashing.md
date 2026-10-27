@@ -1,5 +1,9 @@
 # Consistent Hashing
 
+> Ring, virtual nodes, rebalancing.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing
+
 Ring, virtual nodes, rebalancing.
 
 - Difficulty: advanced

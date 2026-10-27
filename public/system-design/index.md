@@ -1,3 +1,9 @@
+# System Design Interview Questions
+
+> Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.
+
+Canonical: https://learn.significanthobbies.com/system-design/
+
 # System design interview questions you can actually practice
 
 Move beyond prompt lists. Every case covers scoping, capacity estimation, high-level design,

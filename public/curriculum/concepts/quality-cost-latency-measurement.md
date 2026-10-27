@@ -1,5 +1,9 @@
 # Quality, Cost & Latency Measurement
 
+> Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement
+
 Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.
 
 - Difficulty: core

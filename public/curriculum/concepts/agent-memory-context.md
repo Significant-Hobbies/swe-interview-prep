@@ -1,5 +1,9 @@
 # Agent Memory & Context Management
 
+> Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context
+
 Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Estimation & Confidence Intervals
 
+> Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence
+
 Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
 
 - Difficulty: core

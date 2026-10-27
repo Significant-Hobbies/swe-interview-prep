@@ -1,5 +1,9 @@
 # Streaming Media
 
+> CDN, HLS, transcoding pipeline.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/streaming-media
+
 CDN, HLS, transcoding pipeline.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Eigenvalues & Matrix Decomposition
 
+> Eigenvectors as directions preserved by a transformation; eigenvalues as stretch factors; SVD as the universal factorization.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition
+
 Eigenvectors as directions preserved by a transformation; eigenvalues as stretch factors; SVD as the universal factorization.
 
 - Difficulty: advanced

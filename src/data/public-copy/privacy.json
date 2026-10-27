@@ -1,0 +1,31 @@
+{
+  "title": "Privacy",
+  "path": "/privacy",
+  "text": [
+    "← Loop",
+    "Privacy",
+    "Last updated: 2026-08-31.",
+    "What we store",
+    "Google identity (id, name, email, avatar) when you sign in.",
+    "Your FSRS state and per-concept mastery snapshots.",
+    "Notes you write in the Playground.",
+    "Daily / weekly AI plan history.",
+    "Software Wars matches, answers, ratings, reports, and remediation evidence.",
+    "Private Tradeoff artifacts; large artifacts may use project-owned object storage.",
+    "Live battles",
+    "Tradeoff Wars can use Cloudflare RealtimeKit for two-person audio and video. Video recording is off by default. Debate transcription requires disclosure and consent from both players; if either declines, adjudication uses frozen artifacts, the rubric, twist response, and private votes without a transcript. Public results exclude ranked questions, private drafts, transcripts, and provider identifiers.",
+    "AI provider config",
+    "AI configuration saved through Settings is stored locally in your browser for the Socratic learning tools. Solo Tradeoff is different: its endpoint, model, and key exist only in the current tab's memory and disappear on reload. Solo requests travel directly from your browser to the endpoint you select, so that provider receives the key and session content; SWE Prep does not receive, proxy, log, or store them. The non-secret learner draft may still use the existing local preview autosave.",
+    "Website analytics",
+    "The public site uses PostHog for product events and Microsoft Clarity for session replay and heatmaps. These services may receive browser, device, page, and interaction data under their respective privacy policies. Learning content, notes, and provider keys are not sent to Clarity by application code.",
+    "What we don't",
+    "No remarketing tags.",
+    "No selling of progress or mastery data.",
+    "Deletion",
+    "Sign out and clear browser storage to wipe local state. Email the maintainer to delete your server-side FSRS state and notes."
+  ],
+  "links": [
+    "/"
+  ],
+  "markdown": "[{{text.0}}]({{links.0}})\n\n# {{text.1}}\n\n{{text.2}}\n\n## {{text.3}}\n\n- {{text.4}}\n\n- {{text.5}}\n\n- {{text.6}}\n\n- {{text.7}}\n\n- {{text.8}}\n\n- {{text.9}}\n\n## {{text.10}}\n\n{{text.11}}\n\n## {{text.12}}\n\n{{text.13}}\n\n## {{text.14}}\n\n{{text.15}}\n\n## {{text.16}}\n\n- {{text.17}}\n\n- {{text.18}}\n\n## {{text.19}}\n\n{{text.20}}"
+}

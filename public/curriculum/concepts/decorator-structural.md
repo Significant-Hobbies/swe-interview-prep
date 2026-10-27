@@ -1,5 +1,9 @@
 # Decorator & Structural
 
+> Decorator, adapter, composite.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/decorator-structural
+
 Decorator, adapter, composite.
 
 - Difficulty: core

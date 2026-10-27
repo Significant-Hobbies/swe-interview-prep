@@ -1,5 +1,9 @@
 # Model Pre-training
 
+> Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining
+
 Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.
 
 - Difficulty: core

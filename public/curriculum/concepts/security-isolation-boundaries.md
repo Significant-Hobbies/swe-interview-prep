@@ -1,5 +1,9 @@
 # Security & Isolation Boundaries
 
+> Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries
+
 Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # IDE & CLI Tooling
 
+> Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ide-cli-tooling
+
 Language servers, editor protocols, terminal UX, diagnostics, completions, commands, configuration, and automation.
 
 - Difficulty: core

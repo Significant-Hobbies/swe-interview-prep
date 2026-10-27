@@ -1,5 +1,9 @@
 # Containers & Kubernetes
 
+> Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes
+
 Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.
 
 - Difficulty: core

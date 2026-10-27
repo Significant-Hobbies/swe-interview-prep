@@ -1,5 +1,9 @@
 # HLD Practice
 
+> A 30-day sprint through high-level system design. Primitives first (load balancing, consistent hashing, consensus), then full-stack "design X" cases. End comfortable scoping requirements, capacity, storage choice, queue boundaries, and failure modes.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice
+
 A 30-day sprint through high-level system design. Primitives first (load balancing, consistent hashing, consensus), then full-stack "design X" cases. End comfortable scoping requirements, capacity, storage choice, queue boundaries, and failure modes.
 
 - Horizon: 30d

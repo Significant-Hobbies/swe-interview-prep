@@ -1,5 +1,9 @@
 # Inverted Index
 
+> Term → posting list mapping that powers fast keyword lookup.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/inverted-index
+
 Term → posting list mapping that powers fast keyword lookup.
 
 - Difficulty: core

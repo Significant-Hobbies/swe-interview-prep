@@ -1,5 +1,9 @@
 # Decision Making
 
+> Tradeoffs under uncertainty.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making
+
 Tradeoffs under uncertainty.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Numerical Stability
 
+> Floating point, catastrophic cancellation, and the log-sum-exp trick.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/numerical-stability
+
 Floating point, catastrophic cancellation, and the log-sum-exp trick.
 
 - Difficulty: core

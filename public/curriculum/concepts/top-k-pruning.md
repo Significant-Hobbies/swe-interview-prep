@@ -1,5 +1,9 @@
 # Top-k Pruning (WAND)
 
+> WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning
+
 WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
 
 - Difficulty: advanced

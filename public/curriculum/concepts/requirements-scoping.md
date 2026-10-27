@@ -1,5 +1,9 @@
 # Requirements Scoping
 
+> Separating functional from non-functional requirements and cutting scope to something buildable.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping
+
 Separating functional from non-functional requirements and cutting scope to something buildable.
 
 - Difficulty: core

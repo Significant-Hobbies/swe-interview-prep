@@ -1,5 +1,9 @@
 # Trees
 
+> Binary trees, BSTs, DFS/BFS.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/trees
+
 Binary trees, BSTs, DFS/BFS.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # 9-Day Reset
 
+> A short sprint to break inertia. End the nine days with one real artifact — a working BM25 search — and the loop muscle memory restored.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day
+
 A short sprint to break inertia. End the nine days with one real artifact — a working BM25 search — and the loop muscle memory restored.
 
 - Horizon: 9d

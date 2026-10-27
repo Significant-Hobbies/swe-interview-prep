@@ -1,3 +1,10 @@
+import {
+  wantsMarkdown,
+  markdownResponse,
+  handlePublicReadability,
+  advertisePublic,
+} from '../shared/public-readability.mjs';
+
 type PagesFunction = (context: {
   request: Request;
   env: { ASSETS?: { fetch: (request: Request) => Promise<Response> } };
@@ -317,13 +324,6 @@ const OPENAPI_SPEC = {
   },
 };
 
-function wantsMarkdown(request: Request): boolean {
-  const accept = (request.headers.get('accept') || '').toLowerCase();
-  if (!accept.includes('text/markdown')) return false;
-  if (!accept.includes('text/html')) return true;
-  return accept.indexOf('text/markdown') < accept.indexOf('text/html');
-}
-
 function normalizePath(pathname: string): string {
   if (!pathname || pathname === '/') return '/';
   const withSlash = pathname.startsWith('/') ? pathname : `/${pathname}`;
@@ -350,14 +350,13 @@ function markdown404(pathname: string, method: string): Response {
 - [Agent catalog (JSON)](${SITE_URL}/api/ai)
 - [OpenAPI spec](${SITE_URL}/openapi.json)
 `;
-  return new Response(method === 'HEAD' ? null : body, {
-    status: 404,
-    headers: {
-      'content-type': 'text/markdown; charset=utf-8',
-      'cache-control': 'no-store',
-      'x-content-type-options': 'nosniff',
-    },
+  const canonical = SITE_URL + path.replace(/\.md$/, '').replace(/\/index$/, '/');
+  const response = markdownResponse(body, new Request(SITE_URL + path, { method }), {
+    'Cache-Control': 'no-store',
+    'Content-Location': canonical,
+    Link: `<${canonical}>; rel="canonical"`,
   });
+  return new Response(response.body, { status: 404, headers: response.headers });
 }
 
 function html404(): Response {
@@ -410,63 +409,21 @@ function openApiResponse(): Response {
   return new Response(JSON.stringify(OPENAPI_SPEC, null, 2), { headers });
 }
 
-async function markdownAlternate(
-  context: Parameters<PagesFunction>[0],
-  url: URL,
-  pathname: string
-): Promise<Response | null> {
-  const { request } = context;
-  if (!wantsMarkdown(request) || pathname.endsWith('.md') || pathname.startsWith('/api/')) {
-    return null;
-  }
-  if (!context.env.ASSETS) return null;
-
-  const mdUrl = new URL(url);
-  mdUrl.pathname = pathname === '/' ? '/index.md' : `${pathname.replace(/\/$/, '')}.md`;
-  const mdResponse = await context.env.ASSETS.fetch(new Request(mdUrl.toString(), request));
-  if (mdResponse.status !== 200 || mdResponse.headers.get('content-type')?.includes('text/html')) {
-    return null;
-  }
-
-  const headers = new Headers(mdResponse.headers);
-  headers.set('content-type', 'text/markdown; charset=utf-8');
-  headers.set('vary', 'Accept, Accept-Encoding');
-  headers.set('x-content-type-options', 'nosniff');
-  return new Response(request.method === 'HEAD' ? null : mdResponse.body, {
-    status: 200,
-    headers,
-  });
-}
-
-async function markdownAsset(
-  context: Parameters<PagesFunction>[0],
-  pathname: string
-): Promise<Response | null> {
-  if (!pathname.endsWith('.md') || !context.env.ASSETS) return null;
-
-  const response = await context.env.ASSETS.fetch(context.request);
-  if (response.status !== 200 || response.headers.get('content-type')?.includes('text/html')) {
-    return null;
-  }
-
-  const headers = new Headers(response.headers);
-  headers.set('content-type', 'text/markdown; charset=utf-8');
-  headers.set('x-content-type-options', 'nosniff');
-  return new Response(context.request.method === 'HEAD' ? null : response.body, {
-    status: 200,
-    headers,
-  });
-}
-
 function soft404Response(context: Parameters<PagesFunction>[0], pathname: string): Response | null {
-  if (pathname.startsWith('/api/') || isKnownRoute(pathname) || isAssetPath(pathname)) return null;
+  if (pathname.startsWith('/api/')) return null;
+  if (pathname.endsWith('.md')) return markdown404(pathname, context.request.method);
+  if (isKnownRoute(pathname) || isAssetPath(pathname)) return null;
 
-  return wantsMarkdown(context.request) ? markdown404(pathname, context.request.method) : html404();
+  return pathname.endsWith('.md') || wantsMarkdown(context.request)
+    ? markdown404(pathname, context.request.method)
+    : html404();
 }
 
 function normalizePageResponse(response: Response, request: Request, pathname: string): Response {
   if (response.status === 404 && !pathname.startsWith('/api/')) {
-    return wantsMarkdown(request) ? markdown404(pathname, request.method) : html404();
+    return pathname.endsWith('.md') || wantsMarkdown(request)
+      ? markdown404(pathname, request.method)
+      : html404();
   }
 
   const contentType = response.headers.get('content-type') ?? '';
@@ -482,12 +439,50 @@ function normalizePageResponse(response: Response, request: Request, pathname: s
   });
 }
 
+async function preservedMarkdown(context: Parameters<PagesFunction>[0], url: URL) {
+  const asset = context.env.ASSETS
+    ? await context.env.ASSETS.fetch(new Request(url.origin + url.pathname))
+    : await context.next();
+  const body = await asset.text();
+  const prefix = body.trimStart().toLowerCase();
+  if (
+    !asset.ok ||
+    asset.headers.get('content-type')?.includes('text/html') ||
+    prefix.startsWith('<!doctype') ||
+    prefix.startsWith('<html')
+  ) {
+    return new Response('# Not found\n', {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'X-Content-Type-Options': 'nosniff',
+        'X-Robots-Tag': 'noindex',
+        'Cache-Control': 'no-store',
+      },
+    });
+  }
+  const headers = new Headers(asset.headers);
+  headers.set('Content-Type', 'text/markdown; charset=utf-8');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  return new Response(body, { headers });
+}
+
 const resolveRequest: PagesFunction = async (context) => {
   const { request } = context;
 
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    return context.next();
+  const readable = await handlePublicReadability(request, context.env.ASSETS);
+  if (readable) {
+    // The outer home cache has its own representation key and always restores
+    // downstream no-store. Its explicitly public renderer can warm that cache.
+    if (new URL(request.url).pathname === '/' && readable.status === 200) {
+      const headers = new Headers(readable.headers);
+      headers.delete('CDN-Cache-Control');
+      headers.delete('Cloudflare-CDN-Cache-Control');
+      return new Response(readable.body, { status: readable.status, headers });
+    }
+    return readable;
   }
+  if (request.method !== 'GET' && request.method !== 'HEAD') return context.next();
 
   const url = new URL(request.url);
   const pathname = url.pathname;
@@ -506,19 +501,9 @@ const resolveRequest: PagesFunction = async (context) => {
     return context.next();
   }
 
-  // Pages' SPA fallback can hide root-level Markdown files. Serve verified
-  // Markdown assets directly before the generic asset and soft-404 branches.
-  const directMarkdown = await markdownAsset(context, pathname);
-  if (directMarkdown) return directMarkdown;
-
-  // Skip asset paths — let Pages handle directly.
-  if (isAssetPath(pathname)) {
-    return context.next();
-  }
-
-  // Accept: text/markdown negotiation for HTML pages that have a .md alternate.
-  const alternate = await markdownAlternate(context, url, pathname);
-  if (alternate) return alternate;
+  if (['/agents.md', '/pricing.md', '/skill.md', '/curriculum/catalog.md'].includes(pathname))
+    return preservedMarkdown(context, url);
+  if (isAssetPath(pathname) || pathname.startsWith('/.well-known/')) return context.next();
 
   // SPA soft-404 detection: if the path is not a known SPA route and not a
   // static file, return 404 instead of serving the SPA shell with 200.
@@ -526,7 +511,11 @@ const resolveRequest: PagesFunction = async (context) => {
   if (soft404) return soft404;
 
   const response = await context.next();
-  return normalizePageResponse(response, request, pathname);
+  return advertisePublic(
+    request,
+    normalizePageResponse(response, request, pathname),
+    context.env.ASSETS
+  );
 };
 
 export const onRequest: PagesFunction = async (context) => {

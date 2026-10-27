@@ -1,5 +1,9 @@
 # Ranking Metrics
 
+> Precision, recall, MRR, and nDCG for measuring retrieval quality.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics
+
 Precision, recall, MRR, and nDCG for measuring retrieval quality.
 
 - Difficulty: core

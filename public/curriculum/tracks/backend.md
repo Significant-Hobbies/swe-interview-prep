@@ -1,5 +1,9 @@
 # Backend
 
+> Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/backend
+
 Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
 
 This track contains 16 connected concepts. Mastery means explaining each

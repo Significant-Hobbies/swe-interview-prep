@@ -1,5 +1,9 @@
 # API Design
 
+> REST, gRPC, versioning, pagination.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/api-design
+
 REST, gRPC, versioning, pagination.
 
 - Difficulty: core

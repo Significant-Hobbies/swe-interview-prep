@@ -1,5 +1,9 @@
 # Normalization
 
+> Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/normalization
+
 Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.
 
 - Difficulty: core

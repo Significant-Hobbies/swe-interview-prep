@@ -1,5 +1,9 @@
 # Conflict Resolution
 
+> Disagreement handling.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution
+
 Disagreement handling.
 
 - Difficulty: core

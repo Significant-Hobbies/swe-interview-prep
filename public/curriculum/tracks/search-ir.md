@@ -1,5 +1,9 @@
 # Search & IR
 
+> Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/search-ir
+
 Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
 
 This track contains 13 connected concepts. Mastery means explaining each

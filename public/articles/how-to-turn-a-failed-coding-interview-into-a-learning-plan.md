@@ -1,10 +1,9 @@
----
-title: "How to Turn a Failed Coding Interview Into a Learning Plan"
-description: "Failed a coding interview? Don't panic. Learn how to extract signal from rejection, diagnose the root cause, and build an evidence-backed learning plan."
-updated: 2026-09-20
----
-
 # How to Turn a Failed Coding Interview Into a Learning Plan
+
+> Failed a coding interview? Don't panic. Learn how to extract signal from rejection, diagnose the root cause, and build an evidence-backed learning plan.
+
+Canonical: https://learn.significanthobbies.com/articles/how-to-turn-a-failed-coding-interview-into-a-learning-plan
+Last updated: 2026-09-20
 
 ## The Immediate Aftermath: Extracting Signal from Rejection
 

@@ -1,5 +1,9 @@
 # Queueing Theory
 
+> Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/queueing-theory
+
 Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.
 
 - Difficulty: core

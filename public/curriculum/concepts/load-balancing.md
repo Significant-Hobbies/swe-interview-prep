@@ -1,5 +1,9 @@
 # Load Balancing
 
+> L4/L7, consistent hashing, health checks.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/load-balancing
+
 L4/L7, consistent hashing, health checks.
 
 - Difficulty: core

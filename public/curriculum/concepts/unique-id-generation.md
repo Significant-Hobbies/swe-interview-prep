@@ -1,5 +1,9 @@
 # Unique ID Generation
 
+> Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation
+
 Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.
 
 - Difficulty: core

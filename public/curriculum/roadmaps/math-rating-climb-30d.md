@@ -1,5 +1,9 @@
 # 30-Day Math Rating Climb
 
+> Like chess ratings: you start near 1500, solve drills matched to your level, and harder problems appear as you improve. Four weeks through the foundations that underpin ML, search evals, and systems reasoning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d
+
 Like chess ratings: you start near 1500, solve drills matched to your level, and harder problems appear as you improve. Four weeks through the foundations that underpin ML, search evals, and systems reasoning.
 
 - Horizon: 30d

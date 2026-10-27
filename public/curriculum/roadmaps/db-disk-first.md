@@ -1,5 +1,9 @@
 # Disk-First Databases & RAM
 
+> Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first
+
 Companion to docs/learning/db-roadmap.md. Phased link-hub roadmap from the disk-first DB PDF: RAM vs SSD, storage engines, LSM, columnar/vectorized execution, ClickHouse internals, cloud warehouses, search/vector, distributed correctness, and a synthesis project.
 
 - Horizon: 12mo

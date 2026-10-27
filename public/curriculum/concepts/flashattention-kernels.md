@@ -1,5 +1,9 @@
 # FlashAttention & Attention Kernels
 
+> IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels
+
 IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.
 
 - Difficulty: core

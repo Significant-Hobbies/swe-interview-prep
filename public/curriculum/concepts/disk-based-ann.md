@@ -1,5 +1,9 @@
 # Disk-Based ANN
 
+> DiskANN and SPANN — serving vector indexes that do not fit in memory.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann
+
 DiskANN and SPANN — serving vector indexes that do not fit in memory.
 
 - Difficulty: advanced

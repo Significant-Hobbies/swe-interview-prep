@@ -1,5 +1,9 @@
 # Auth Systems
 
+> OAuth2, JWT, session, RBAC.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/auth-systems
+
 OAuth2, JWT, session, RBAC.
 
 - Difficulty: core

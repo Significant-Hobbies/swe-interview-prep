@@ -1,5 +1,9 @@
 # Learning to Rank
 
+> Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank
+
 Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
 
 - Difficulty: advanced

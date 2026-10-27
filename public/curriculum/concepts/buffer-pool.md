@@ -1,5 +1,9 @@
 # Buffer Pool
 
+> The database's own page cache — why it does not simply trust the OS.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/buffer-pool
+
 The database's own page cache — why it does not simply trust the OS.
 
 - Difficulty: core

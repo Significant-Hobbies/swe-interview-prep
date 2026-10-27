@@ -1,5 +1,9 @@
 # Innovation
 
+> Novel solutions, experimentation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity
+
 Novel solutions, experimentation.
 
 - Difficulty: core

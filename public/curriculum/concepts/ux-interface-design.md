@@ -1,5 +1,9 @@
 # UX & Interface Design
 
+> User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ux-interface-design
+
 User goals, information architecture, interaction states, feedback, accessibility, usability testing, and design systems.
 
 - Difficulty: core

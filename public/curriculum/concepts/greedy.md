@@ -1,5 +1,9 @@
 # Greedy
 
+> Local-optimal-as-global proofs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/greedy
+
 Local-optimal-as-global proofs.
 
 - Difficulty: core

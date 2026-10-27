@@ -1,5 +1,9 @@
 # Inference Cost & Latency Optimization
 
+> Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency
+
 Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.
 
 - Difficulty: core

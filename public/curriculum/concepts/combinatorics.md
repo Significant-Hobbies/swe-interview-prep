@@ -1,5 +1,9 @@
 # Combinatorics
 
+> Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/combinatorics
+
 Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
 
 - Difficulty: core

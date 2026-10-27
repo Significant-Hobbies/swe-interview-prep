@@ -1,5 +1,9 @@
 # Caching
 
+> Cache-aside, write-through, eviction policies.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/caching
+
 Cache-aside, write-through, eviction policies.
 
 - Difficulty: core

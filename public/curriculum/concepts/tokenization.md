@@ -1,5 +1,9 @@
 # Tokenization
 
+> Splitting text into terms: lowercasing, stemming, stop words, n-grams.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tokenization
+
 Splitting text into terms: lowercasing, stemming, stop words, n-grams.
 
 - Difficulty: intro

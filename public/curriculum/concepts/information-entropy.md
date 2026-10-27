@@ -1,5 +1,9 @@
 # Information & Entropy
 
+> Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/information-entropy
+
 Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.
 
 - Difficulty: advanced

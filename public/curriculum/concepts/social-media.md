@@ -1,5 +1,9 @@
 # Feed Systems
 
+> Fan-out write/read, timeline.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/social-media
+
 Fan-out write/read, timeline.
 
 - Difficulty: core

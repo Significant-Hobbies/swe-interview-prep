@@ -1,5 +1,9 @@
 # Reliability & Fault Tolerance
 
+> SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance
+
 SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.
 
 - Difficulty: core

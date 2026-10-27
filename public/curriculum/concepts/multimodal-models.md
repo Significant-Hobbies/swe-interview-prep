@@ -1,5 +1,9 @@
 # Multimodal Models
 
+> Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/multimodal-models
+
 Joint text, image, audio, and video representations, encoders, projectors, fusion, generation, and cross-modal evaluation.
 
 - Difficulty: core

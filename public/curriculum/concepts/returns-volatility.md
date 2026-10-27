@@ -1,5 +1,9 @@
 # Returns & Volatility
 
+> Simple/log returns, realized volatility, annualization — basic quant units.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/returns-volatility
+
 Simple/log returns, realized volatility, annualization — basic quant units.
 
 - Difficulty: core

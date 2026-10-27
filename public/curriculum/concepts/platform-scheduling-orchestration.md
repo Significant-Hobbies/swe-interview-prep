@@ -1,5 +1,9 @@
 # Scheduling & Orchestration
 
+> Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration
+
 Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.
 
 - Difficulty: core

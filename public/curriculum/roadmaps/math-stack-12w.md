@@ -1,5 +1,9 @@
 # 12-Week Active Math Stack
 
+> 5 days/week: 90m math + 30m implementation. Weeks 1–4 probability & statistics (simulate, implement stats, debunk fake signals). Weeks 5–8 linear algebra (matmul, OLS, PCA from scratch). Weeks 9–12 quant bridge (returns, vol, Sharpe, drawdown, momentum backtest vs SPY/QQQ). One public note per week. No artifact = no learning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w
+
 5 days/week: 90m math + 30m implementation. Weeks 1–4 probability & statistics (simulate, implement stats, debunk fake signals). Weeks 5–8 linear algebra (matmul, OLS, PCA from scratch). Weeks 9–12 quant bridge (returns, vol, Sharpe, drawdown, momentum backtest vs SPY/QQQ). One public note per week. No artifact = no learning.
 
 - Horizon: 12mo

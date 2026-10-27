@@ -1,5 +1,9 @@
 # Tracing & Replay
 
+> Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tracing-replay
+
 Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Game/Simulation Design
 
+> Turn engines, board state, rules.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/game-design
+
 Turn engines, board state, rules.
 
 - Difficulty: core

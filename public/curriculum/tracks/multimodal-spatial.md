@@ -1,5 +1,9 @@
 # Multimodal & Spatial Computing
 
+> Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial
+
 Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
 
 This track contains 8 connected concepts. Mastery means explaining each

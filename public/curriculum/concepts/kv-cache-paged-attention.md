@@ -1,5 +1,9 @@
 # KV Caching & PagedAttention
 
+> Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention
+
 Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.
 
 - Difficulty: core

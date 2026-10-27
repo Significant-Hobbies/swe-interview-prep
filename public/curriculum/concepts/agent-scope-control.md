@@ -1,5 +1,9 @@
 # Agent Scope Control
 
+> Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control
+
 Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
 
 - Difficulty: core

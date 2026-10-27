@@ -1,5 +1,9 @@
 # Inference Hardware
 
+> GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/inference-hardware
+
 GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.
 
 - Difficulty: core

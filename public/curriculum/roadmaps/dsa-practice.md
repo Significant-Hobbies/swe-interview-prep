@@ -1,5 +1,9 @@
 # DSA Practice
 
+> A 30-day algorithmic sprint covering the NeetCode roadmap surface area. End able to recognise the pattern from problem shape, implement cleanly, and reason about complexity without slipping.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice
+
 A 30-day algorithmic sprint covering the NeetCode roadmap surface area. End able to recognise the pattern from problem shape, implement cleanly, and reason about complexity without slipping.
 
 - Horizon: 30d

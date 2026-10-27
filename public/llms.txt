@@ -1,34 +1,76 @@
 # SWE Interview Prep
 
-> A software engineering learning OS with 19 tracks, 259 concepts, 26 roadmaps, active drills, build artifacts, and FSRS review.
+> A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
 
-SWE Interview Prep is for software engineers preparing for interviews or
-strengthening practical technical judgment. It turns study into retrieval,
-practice, an observable artifact, an explain-back, and scheduled review.
+## Agent guidance
+- [Agent usage and privacy boundaries](https://learn.significanthobbies.com/agents.md)
+- [Agent skill](https://learn.significanthobbies.com/skill.md)
+- [Pricing](https://learn.significanthobbies.com/pricing.md)
+- [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md)
+- [Curriculum JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)
 
-## Start here
+<!-- Keep in sync with robots.txt and ai.txt. -->
 
-- [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
-- [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
-- [Learning guides](https://learn.significanthobbies.com/articles/): Long-form essays on evidence-backed engineering learning
-- [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
-- [Curriculum catalog](https://learn.significanthobbies.com/curriculum/catalog.md): Complete Markdown inventory
-- [Structured curriculum](https://learn.significanthobbies.com/curriculum/catalog.json): JSON inventory with stable IDs
-- [Product brief](https://learn.significanthobbies.com/index.md): Product and learning-loop overview
-- [Full agent brief](https://learn.significanthobbies.com/llms-full.txt): Tracks and roadmap links
-- [Agent catalog](https://learn.significanthobbies.com/api/ai): JSON inventory of public surfaces
-- [Agent instructions](https://learn.significanthobbies.com/agents.md): Good uses and privacy boundaries
-- [Learning-plan skill](https://learn.significanthobbies.com/skill.md): Evidence-backed planning workflow
-- [Access and pricing](https://learn.significanthobbies.com/pricing.md): Guest, signed-in, and current commercial state
+## Public pages
 
-## Developer docs
+- [Prepare for interviews by building understanding you can demonstrate.](https://learn.significanthobbies.com/index.md): A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
+- [Privacy](https://learn.significanthobbies.com/privacy.md): How SWE Interview Prep handles identity, learning state, AI providers, analytics, and deletion.
+- [About](https://learn.significanthobbies.com/about.md): The learning model, tools, research basis, and design principles behind SWE Interview Prep.
+- [Database Learning Roadmap — Disk-First Mental Model](https://learn.significanthobbies.com/learning/db-roadmap.md): Database Learning Roadmap — Disk-First Mental Model
+- [Harness engineering](https://learn.significanthobbies.com/learning/harness-engineering.md): Harness engineering
+- [Learning OS — Start Here](https://learn.significanthobbies.com/learning.md): Learning OS — Start Here
+- [Interview prep](https://learn.significanthobbies.com/learning/interview-prep.md): Interview prep
+- [Maelstrom Echo — a first distributed-systems lab](https://learn.significanthobbies.com/learning/maelstrom-echo.md): Maelstrom Echo — a first distributed-systems lab
+- [ML system design case studies](https://learn.significanthobbies.com/learning/ml-case-studies.md): ML system design case studies
+- [New things to learn — swe-interview-prep](https://learn.significanthobbies.com/learning/new-things.md): New things to learn — swe-interview-prep
+- [Runtime Roadmap — What every runtime has to do](https://learn.significanthobbies.com/learning/runtime-roadmap.md): Runtime Roadmap — What every runtime has to do
+- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/learning/swe-landscape.md): The Software Engineering Landscape (2026)
+- [System design](https://learn.significanthobbies.com/learning/system-design.md): System design
+- [Software Engineering Curriculum](https://learn.significanthobbies.com/curriculum.md): 259 concepts across 19 software engineering tracks, with 26 sequenced roadmaps, active drills, review prompts, and build artifacts.
+- [System Design Interview Questions](https://learn.significanthobbies.com/system-design.md): Practice common system design interview questions with staged prompts, capacity math, failure drills, worked guides, and targeted concept review.
+- [Design LLM Inference at 10K RPS | Interview Guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps.md): Work through requirements, token math, batching, GPU fleet sizing, reliability, and follow-ups for a 10,000 RPS LLM inference interview.
+- [Design a Video Streaming Platform | Interview Guide](https://learn.significanthobbies.com/system-design/video-streaming-platform.md): Design upload, transcoding, adaptive-bitrate packaging, CDN delivery, playback reliability, and cost controls for a YouTube or Netflix-style interview.
+- [Design a Notification Service | Interview Guide](https://learn.significanthobbies.com/system-design/notification-delivery-service.md): Design preference-aware push, email, SMS, and in-app notification fan-out with quotas, deduplication, retries, provider failure, and observability.
+- [Design a Web Crawler | Interview Guide](https://learn.significanthobbies.com/system-design/web-crawler.md): Design a polite distributed web crawler with URL normalization, robots enforcement, host scheduling, deduplication, recrawling, traps, and failure isolation.
+- [Design Dropbox or Google Drive | Interview Guide](https://learn.significanthobbies.com/system-design/cloud-file-storage.md): Design resumable chunked uploads, metadata, multi-device synchronization, versioning, conflict handling, sharing, durability, and storage cost.
+- [Design Uber or Lyft | Interview Guide](https://learn.significanthobbies.com/system-design/ride-sharing-platform.md): Design driver location ingestion, nearby matching, atomic trip assignment, dispatch, ETA, regional overload, safety, and marketplace observability.
+- [Design Ticketmaster | Interview Guide](https://learn.significanthobbies.com/system-design/ticket-booking-platform.md): Design browse, virtual waiting room, seat holds, payment, oversell prevention, flash-crowd control, expiration, reconciliation, and fairness.
+- [Engineering Learning Guides](https://learn.significanthobbies.com/articles.md): 7 long-form guides on evidence-backed software engineering learning: spaced repetition, Socratic assistance, artifacts, guest mode, and interview recovery.
+- [Applying FSRS Spaced Repetition to Software Engineering Knowledge](https://learn.significanthobbies.com/articles/applying-fsrs-spaced-repetition-to-software-engineering-knowledge.md): Explore how to use the FSRS algorithm for software engineering knowledge. Learn how an evidence-gated learning loop moves spaced repetition beyond rote memorization to systemic understanding.
+- [Designing Useful Guest-Mode Technical Learning](https://learn.significanthobbies.com/articles/designing-useful-guest-mode-technical-learning.md): Learn how to build a robust guest mode for technical learning platforms that persists complex state and transitions seamlessly to authenticated accounts.
+- [How a Socratic coding assistant should respond to learners](https://learn.significanthobbies.com/articles/how-a-socratic-coding-assistant-should-respond-to-learners.md): An AI shouldn't just hand out code. Learn why Socratic AI coding assistants must probe understanding, withhold direct solutions, and enforce the Feynman Gate to build actual mastery.
+- [How to Turn a Failed Coding Interview Into a Learning Plan](https://learn.significanthobbies.com/articles/how-to-turn-a-failed-coding-interview-into-a-learning-plan.md): Failed a coding interview? Don't panic. Learn how to extract signal from rejection, diagnose the root cause, and build an evidence-backed learning plan.
+- [Recognition vs Causal Understanding in Technical Study](https://learn.significanthobbies.com/articles/recognition-vs-causal-understanding-in-technical-study.md): Explore the gap between recognition memory and causal understanding in software engineering study, and how evidence-gated loops build durable mastery.
+- [What Counts as Evidence of Mastery in Software Engineering?](https://learn.significanthobbies.com/articles/what-counts-as-evidence-of-mastery-in-software-engineering.md): Explore why completed tutorials aren't enough and how to build verifiable evidence of engineering mastery through working artifacts, explain-backs, and tradeoff analysis.
+- [Why technical learning needs an inspectable artifact](https://learn.significanthobbies.com/articles/why-technical-learning-needs-an-inspectable-artifact.md): Passive technical learning creates the illusion of competence. Discover why true engineering mastery requires inspectable artifacts, causal explanations, and rigorous evidence loops.
+- [Search & IR](https://learn.significanthobbies.com/curriculum/tracks/search-ir.md): Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+- [Mathematics](https://learn.significanthobbies.com/curriculum/tracks/mathematics.md): Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+- [Vector DB & ANN](https://learn.significanthobbies.com/curriculum/tracks/vector-db.md): Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+- [AI Systems](https://learn.significanthobbies.com/curriculum/tracks/ai-systems.md): Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+- [Backend](https://learn.significanthobbies.com/curriculum/tracks/backend.md): Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+- [Databases & Storage](https://learn.significanthobbies.com/curriculum/tracks/databases.md): Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+- [System Design](https://learn.significanthobbies.com/curriculum/tracks/system-design.md): Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+- [DSA & Implementation](https://learn.significanthobbies.com/curriculum/tracks/dsa.md): Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+- [Behavioral & Communication](https://learn.significanthobbies.com/curriculum/tracks/behavioral.md): The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
+- [Go-to-Market](https://learn.significanthobbies.com/curriculum/tracks/go-to-market.md): Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
+- [Systems Foundations](https://learn.significanthobbies.com/curriculum/tracks/systems-foundations.md): Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+- [Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms.md): Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
+- [Distributed Systems](https://learn.significanthobbies.com/curriculum/tracks/distributed-systems.md): Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+- [Inference & Serving](https://learn.significanthobbies.com/curriculum/tracks/inference-serving.md): Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+- [Agent Systems](https://learn.significanthobbies.com/curriculum/tracks/agent-systems.md): Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+- [Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/tracks/ai-reliability.md): LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+- [Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/tracks/developer-tools.md): Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
+- [Application Engineering](https://learn.significanthobbies.com/curriculum/tracks/application-engineering.md): Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
+- [Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial.md): Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
+- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day.md): A short sprint to break inertia. End the nine days with one real artifact — a working BM25 search — and the loop muscle memory restored.
 
-- [OpenAPI spec](https://learn.significanthobbies.com/openapi.json): OpenAPI 3.1 specification for the public API
-- [Sitemap](https://learn.significanthobbies.com/sitemap.xml): XML sitemap of all public pages
+Showing 50 of 335 pages; the catalog lists all public routes.
 
-## Interactive product
+## Machine-readable
 
-- [Learning app](https://learn.significanthobbies.com/learn): FSRS, drills, Playground, Socratic feedback, and progress
-
-The product is mature, personal-use software in maintenance-only mode. There is
-no paid tier, subscription, or checkout.
+- [Full content](https://learn.significanthobbies.com/llms-full.txt): Bounded public page content
+- [Markdown catalog](https://learn.significanthobbies.com/api/md/_catalog): All registered public routes
+- [Agent catalog](https://learn.significanthobbies.com/api/ai): Existing discovery contract
+- [AI usage policy](https://learn.significanthobbies.com/ai.txt): Permissions and attribution
+- [Sitemap](https://learn.significanthobbies.com/sitemap.xml): Canonical HTML pages
+- [OpenAPI](https://learn.significanthobbies.com/openapi.json): Public API contract

@@ -1,5 +1,9 @@
 # Landing Pages
 
+> Turning a visitor into an activated user: hero, proof, single CTA.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/landing-pages
+
 Turning a visitor into an activated user: hero, proof, single CTA.
 
 - Difficulty: core

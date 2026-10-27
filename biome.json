@@ -30,7 +30,8 @@
       "!**/src/data/library/**/content.json",
       "!**/public",
       "!**/*.css",
-      "!**/src/features/scale/vendor"
+      "!**/src/features/scale/vendor",
+      "!**/shared/agent-surfaces"
     ]
   },
   "formatter": {

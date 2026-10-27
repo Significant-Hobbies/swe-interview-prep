@@ -1,5 +1,9 @@
 # Customer Obsession
 
+> User-centered tradeoffs.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/customer-obsession
+
 User-centered tradeoffs.
 
 - Difficulty: intro

@@ -1,5 +1,9 @@
 # 12-Week Agent Systems
 
+> Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w
+
 Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

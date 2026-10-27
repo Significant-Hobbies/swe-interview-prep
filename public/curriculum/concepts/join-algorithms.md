@@ -1,5 +1,9 @@
 # Join Algorithms
 
+> Nested-loop, hash, and merge joins — and why cardinality estimates decide which one you get.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/join-algorithms
+
 Nested-loop, hash, and merge joins — and why cardinality estimates decide which one you get.
 
 - Difficulty: core

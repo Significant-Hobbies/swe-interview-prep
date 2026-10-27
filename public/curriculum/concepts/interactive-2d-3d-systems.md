@@ -1,5 +1,9 @@
 # 2D/3D Interactive Systems
 
+> Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/interactive-2d-3d-systems
+
 Scene graphs, render loops, input, animation, physics, GPU pipelines, asset loading, and performance budgets.
 
 - Difficulty: core

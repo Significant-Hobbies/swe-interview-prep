@@ -1,8 +1,9 @@
----
-title: "Engineering learning guides"
-description: "Long-form guides on evidence-backed software engineering learning."
-updated: 2026-09-20
----
+# Engineering Learning Guides
+
+> 7 long-form guides on evidence-backed software engineering learning: spaced repetition, Socratic assistance, artifacts, guest mode, and interview recovery.
+
+Canonical: https://learn.significanthobbies.com/articles/
+Last updated: 2026-09-20
 
 # Engineering learning guides
 

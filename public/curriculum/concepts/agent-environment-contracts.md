@@ -1,5 +1,9 @@
 # Agent Environment Contracts
 
+> Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts
+
 Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
 
 - Difficulty: core

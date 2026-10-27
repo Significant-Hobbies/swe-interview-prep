@@ -1,5 +1,9 @@
 # Harness Evaluation
 
+> Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation
+
 Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
 
 - Difficulty: advanced

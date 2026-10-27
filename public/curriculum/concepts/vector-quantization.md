@@ -1,5 +1,9 @@
 # Scalar & Binary Quantization
 
+> Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/vector-quantization
+
 Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
 
 - Difficulty: core

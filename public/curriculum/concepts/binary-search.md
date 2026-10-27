@@ -1,5 +1,9 @@
 # Binary Search
 
+> Halving sorted search space, predicate search.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/binary-search
+
 Halving sorted search space, predicate search.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # State Machines
 
+> States, transitions, guards.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/state-management
+
 States, transitions, guards.
 
 - Difficulty: core

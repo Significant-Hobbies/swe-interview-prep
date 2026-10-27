@@ -1,5 +1,9 @@
 # Transformer Block
 
+> Pre-LayerNorm, residuals, MLP, GELU.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block
+
 Pre-LayerNorm, residuals, MLP, GELU.
 
 - Difficulty: advanced

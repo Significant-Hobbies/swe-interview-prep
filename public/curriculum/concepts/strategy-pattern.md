@@ -1,5 +1,9 @@
 # Strategy Pattern
 
+> Interchangeable algorithms.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern
+
 Interchangeable algorithms.
 
 - Difficulty: core

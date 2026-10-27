@@ -1,5 +1,9 @@
 # TF-IDF
 
+> Term frequency × inverse document frequency weighting for relevance.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/tf-idf
+
 Term frequency × inverse document frequency weighting for relevance.
 
 - Difficulty: core

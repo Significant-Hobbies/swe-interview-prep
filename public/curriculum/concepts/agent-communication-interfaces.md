@@ -1,5 +1,9 @@
 # Agent Communication & Interfaces
 
+> Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces
+
 Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.
 
 - Difficulty: core

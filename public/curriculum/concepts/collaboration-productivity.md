@@ -1,5 +1,9 @@
 # Collaboration Systems
 
+> Causality, OT, CRDT merge laws, and offline conflict resolution.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity
+
 Causality, OT, CRDT merge laws, and offline conflict resolution.
 
 - Difficulty: advanced

@@ -1,5 +1,9 @@
 # Top-k Vector Search
 
+> Returning the k nearest vectors to a query, exact or approximate.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search
+
 Returning the k nearest vectors to a query, exact or approximate.
 
 - Difficulty: core

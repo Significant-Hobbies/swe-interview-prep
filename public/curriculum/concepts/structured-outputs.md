@@ -1,5 +1,9 @@
 # Structured Outputs
 
+> Forcing LLM output into a validated JSON schema.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/structured-outputs
+
 Forcing LLM output into a validated JSON schema.
 
 - Difficulty: core

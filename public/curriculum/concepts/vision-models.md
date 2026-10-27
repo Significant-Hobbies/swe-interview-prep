@@ -1,5 +1,9 @@
 # Vision Models
 
+> Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/vision-models
+
 Classification, detection, segmentation, embeddings, vision transformers, data augmentation, and visual evaluation.
 
 - Difficulty: core

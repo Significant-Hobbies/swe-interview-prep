@@ -1,5 +1,9 @@
 # PCA & Projection
 
+> Principal components as variance-maximizing orthogonal directions; projection as subspace approximation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/pca-projection
+
 Principal components as variance-maximizing orthogonal directions; projection as subspace approximation.
 
 - Difficulty: advanced

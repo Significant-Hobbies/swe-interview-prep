@@ -1,5 +1,9 @@
 # Curse of Dimensionality
 
+> Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality
+
 Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
 
 - Difficulty: core

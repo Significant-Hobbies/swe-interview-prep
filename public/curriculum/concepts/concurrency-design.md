@@ -1,5 +1,9 @@
 # Concurrency Design
 
+> Thread-safety, locks, producer-consumer.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/concurrency-design
+
 Thread-safety, locks, producer-consumer.
 
 - Difficulty: advanced

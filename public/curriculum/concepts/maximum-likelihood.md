@@ -1,5 +1,9 @@
 # Maximum Likelihood Estimation
 
+> Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood
+
 Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.
 
 - Difficulty: advanced

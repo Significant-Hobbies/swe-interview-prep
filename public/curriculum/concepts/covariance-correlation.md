@@ -1,5 +1,9 @@
 # Covariance & Correlation
 
+> Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation
+
 Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.
 
 - Difficulty: core

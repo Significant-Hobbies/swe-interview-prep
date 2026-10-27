@@ -1,5 +1,9 @@
 # Local & On-device Inference
 
+> llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference
+
 llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Idempotency
 
+> Idempotency keys and dedup windows for safe retries of mutations.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/idempotency
+
 Idempotency keys and dedup windows for safe retries of mutations.
 
 - Difficulty: core

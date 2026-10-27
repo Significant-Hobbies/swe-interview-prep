@@ -1,5 +1,9 @@
 # Distributed Failure Recovery
 
+> Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery
+
 Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.
 
 - Difficulty: core

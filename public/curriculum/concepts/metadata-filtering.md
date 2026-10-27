@@ -1,5 +1,9 @@
 # Metadata Filtering
 
+> Combining vector search with structured predicates (tenant, date, tags).
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering
+
 Combining vector search with structured predicates (tenant, date, tags).
 
 - Difficulty: core

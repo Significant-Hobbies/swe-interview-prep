@@ -1,5 +1,9 @@
 # Agent Observability
 
+> Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/agent-observability
+
 Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.
 
 - Difficulty: core

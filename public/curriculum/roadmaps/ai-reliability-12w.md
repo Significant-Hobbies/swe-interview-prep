@@ -1,5 +1,9 @@
 # 12-Week Evaluation & AI Reliability
 
+> Build an evidence-backed evaluation and observability system for models, tools, and agents. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w
+
 Build an evidence-backed evaluation and observability system for models, tools, and agents. Three four-week milestones move from mechanisms to production trade-offs and a measured synthesis artifact.
 
 - Horizon: 90d

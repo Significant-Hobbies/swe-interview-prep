@@ -1,5 +1,9 @@
 # HTTP Lifecycle
 
+> DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle
+
 DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
 
 - Difficulty: intro

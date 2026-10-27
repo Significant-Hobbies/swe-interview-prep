@@ -1,5 +1,9 @@
 # 30-Day Probability & Statistics
 
+> Daily (5d/wk): 45m concepts (canonical externals) + 45m problems + 15m notes. Every week ships code or a writeup. External-heavy (Seeing Theory, MIT OCW, StatQuest, ISL). Not aesthetic math — the gym is solving, simulating, checking assumptions.
+
+Canonical: https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d
+
 Daily (5d/wk): 45m concepts (canonical externals) + 45m problems + 15m notes. Every week ships code or a writeup. External-heavy (Seeing Theory, MIT OCW, StatQuest, ISL). Not aesthetic math — the gym is solving, simulating, checking assumptions.
 
 - Horizon: 30d

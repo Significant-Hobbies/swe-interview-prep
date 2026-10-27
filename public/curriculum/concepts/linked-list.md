@@ -1,5 +1,9 @@
 # Linked List
 
+> Pointer manipulation, fast/slow, reversal.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/linked-list
+
 Pointer manipulation, fast/slow, reversal.
 
 - Difficulty: intro

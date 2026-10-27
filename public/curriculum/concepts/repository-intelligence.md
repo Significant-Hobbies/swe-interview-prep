@@ -1,5 +1,9 @@
 # Repository Intelligence
 
+> Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/repository-intelligence
+
 Structure, symbols, history, ownership, conventions, architecture, semantic search, and change-aware retrieval.
 
 - Difficulty: core

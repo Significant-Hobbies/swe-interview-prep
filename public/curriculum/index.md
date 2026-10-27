@@ -1,3 +1,9 @@
+# Software Engineering Curriculum
+
+> 259 concepts across 19 software engineering tracks, with 26 sequenced roadmaps, active drills, review prompts, and build artifacts.
+
+Canonical: https://learn.significanthobbies.com/curriculum/
+
 # SWE Prep Curriculum Catalog
 
 A public, JavaScript-free index of 259 concepts across

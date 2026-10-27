@@ -1,3 +1,9 @@
+# Design Dropbox or Google Drive | Interview Guide
+
+> Design resumable chunked uploads, metadata, multi-device synchronization, versioning, conflict handling, sharing, durability, and storage cost.
+
+Canonical: https://learn.significanthobbies.com/system-design/cloud-file-storage
+
 # Design cloud file storage
 
 Design resumable chunked uploads, metadata, multi-device synchronization, versioning, conflict handling, sharing, durability, and storage cost.

@@ -1,5 +1,9 @@
 # CDN & Edge Delivery
 
+> Cache hierarchy, origin shield, and invalidation versus TTL at the edge.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery
+
 Cache hierarchy, origin shield, and invalidation versus TTL at the edge.
 
 - Difficulty: core

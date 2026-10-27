@@ -1,5 +1,9 @@
 # Image & Video Generation
 
+> Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/image-video-generation
+
 Diffusion and transformer generation, conditioning, latent spaces, control, consistency, safety, and media evaluation.
 
 - Difficulty: core

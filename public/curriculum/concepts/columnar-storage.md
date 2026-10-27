@@ -1,5 +1,9 @@
 # Columnar Storage
 
+> Column-oriented layout for analytics: compression and vectorized scans.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/columnar-storage
+
 Column-oriented layout for analytics: compression and vectorized scans.
 
 - Difficulty: advanced

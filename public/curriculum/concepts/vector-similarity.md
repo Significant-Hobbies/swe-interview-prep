@@ -1,5 +1,9 @@
 # Vector Similarity
 
+> Cosine, dot product, and L2 distance — how to score vector closeness.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/vector-similarity
+
 Cosine, dot product, and L2 distance — how to score vector closeness.
 
 - Difficulty: core

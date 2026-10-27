@@ -1,5 +1,9 @@
 # Object Storage
 
+> S3-style blob storage: cheap, durable, high-latency, immutable objects.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/object-storage
+
 S3-style blob storage: cheap, durable, high-latency, immutable objects.
 
 - Difficulty: core

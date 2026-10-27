@@ -1,5 +1,9 @@
 # Web Security Basics
 
+> XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/web-security-basics
+
 XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
 
 - Difficulty: core

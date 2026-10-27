@@ -1,5 +1,9 @@
 # Application Engineering
 
+> Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/application-engineering
+
 Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
 
 This track contains 4 connected concepts. Mastery means explaining each

@@ -1,5 +1,9 @@
 # LLM Evals
 
+> Measuring LLM output quality with datasets, graders, and LLM-as-judge.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/llm-evals
+
 Measuring LLM output quality with datasets, graders, and LLM-as-judge.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Write-Ahead Log
 
+> Append-only durability log written before the data pages.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/wal
+
 Append-only durability log written before the data pages.
 
 - Difficulty: core

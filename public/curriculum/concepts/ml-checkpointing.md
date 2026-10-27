@@ -1,5 +1,9 @@
 # Checkpointing
 
+> Weights + optimizer state, resume, dataset manifests.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing
+
 Weights + optimizer state, resume, dataset manifests.
 
 - Difficulty: core

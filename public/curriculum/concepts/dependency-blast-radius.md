@@ -1,5 +1,9 @@
 # Dependency & Blast-radius Analysis
 
+> Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/dependency-blast-radius
+
 Direct and transitive dependencies, affected targets, ownership, runtime consumers, schema impact, and change risk.
 
 - Difficulty: core

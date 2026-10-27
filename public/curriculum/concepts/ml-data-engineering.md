@@ -1,5 +1,9 @@
 # Training Data Engineering
 
+> Cleaning, dedup, JSONL tasks, memorization tests.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering
+
 Cleaning, dedup, JSONL tasks, memorization tests.
 
 - Difficulty: core

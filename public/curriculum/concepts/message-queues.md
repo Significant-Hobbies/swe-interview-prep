@@ -1,5 +1,9 @@
 # Message Queues
 
+> Kafka, SQS, exactly-once vs at-least-once.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/message-queues
+
 Kafka, SQS, exactly-once vs at-least-once.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Background Jobs
 
+> Offloading slow work to workers: scheduling, concurrency, visibility.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/background-jobs
+
 Offloading slow work to workers: scheduling, concurrency, visibility.
 
 - Difficulty: core

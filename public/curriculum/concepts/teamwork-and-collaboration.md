@@ -1,5 +1,9 @@
 # Collaboration
 
+> Cross-functional work.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration
+
 Cross-functional work.
 
 - Difficulty: intro

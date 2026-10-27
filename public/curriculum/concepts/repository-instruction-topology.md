@@ -1,5 +1,9 @@
 # Repository Instruction Topology
 
+> Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology
+
 Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
 
 - Difficulty: core

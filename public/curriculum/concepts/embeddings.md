@@ -1,5 +1,9 @@
 # Embeddings
 
+> Mapping text/images into dense vectors where distance encodes meaning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/embeddings
+
 Mapping text/images into dense vectors where distance encodes meaning.
 
 - Difficulty: core

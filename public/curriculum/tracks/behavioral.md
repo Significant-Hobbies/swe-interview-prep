@@ -1,5 +1,9 @@
 # Behavioral & Communication
 
+> The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/behavioral
+
 The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
 
 This track contains 10 connected concepts. Mastery means explaining each

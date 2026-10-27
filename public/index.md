@@ -1,65 +1,168 @@
----
-title: SWE Interview Prep
-description: A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
-updated: 2026-08-28
----
+# Prepare for interviews by building understanding you can demonstrate.
 
-# SWE Interview Prep
+> A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
 
-A personal learning OS for software engineers preparing for interviews or
-strengthening practical technical judgment. It connects 19 tracks,
-259 concepts, and 26 roadmaps to active practice,
-build artifacts, explain-backs, and FSRS spaced repetition.
+Canonical: https://learn.significanthobbies.com/
 
-## Learning loop
+Personal SWE learning OS · Interview prep
 
-Concept → Drill → Build → Review → Apply. Each concept connects a concise mental model and primary source to executable practice, an explain-back prompt, and evidence you build.
+Learn a mechanism, practise it in code or a diagram, explain it back in your own words, and let FSRS bring it back right before you would have forgotten it.
 
-## Audience and outcome
+[Start learning](https://learn.significanthobbies.com/learn) · [Browse the curriculum](https://learn.significanthobbies.com/curriculum/)
 
-Use SWE Interview Prep to prepare across DSA, low-level design, system design,
-behavioral interviews, systems and platform engineering, AI-native engineering,
-developer tools, application engineering, and multimodal systems. The intended
-outcome is understanding that survives retrieval and can be demonstrated through
-code, diagrams, benchmarks, decisions, explanations, or projects.
+Free · no account needed · progress stays in this browser
 
-## Access and current state
+Search & IR · concept
 
-- Start as a guest; guest progress stays in the current browser.
-- Google sign-in keeps learning and competitive progress across sessions.
-- The product is mature, personal-use software in maintenance-only mode.
-- There is no paid tier, subscription, or checkout.
+Tokenization
 
-## Curriculum scope
+Explained back. Next review set by FSRS.
 
-- [Search & IR](https://learn.significanthobbies.com/curriculum/tracks/search-ir) — Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
-- [Mathematics](https://learn.significanthobbies.com/curriculum/tracks/mathematics) — Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
-- [Vector DB & ANN](https://learn.significanthobbies.com/curriculum/tracks/vector-db) — Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
-- [AI Systems](https://learn.significanthobbies.com/curriculum/tracks/ai-systems) — Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
-- [Backend](https://learn.significanthobbies.com/curriculum/tracks/backend) — Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
-- [Databases & Storage](https://learn.significanthobbies.com/curriculum/tracks/databases) — Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
-- [System Design](https://learn.significanthobbies.com/curriculum/tracks/system-design) — Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
-- [DSA & Implementation](https://learn.significanthobbies.com/curriculum/tracks/dsa) — Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
-- [Behavioral & Communication](https://learn.significanthobbies.com/curriculum/tracks/behavioral) — The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
-- [Go-to-Market](https://learn.significanthobbies.com/curriculum/tracks/go-to-market) — Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
-- [Systems Foundations](https://learn.significanthobbies.com/curriculum/tracks/systems-foundations) — Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
-- [Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms) — Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
-- [Distributed Systems](https://learn.significanthobbies.com/curriculum/tracks/distributed-systems) — Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
-- [Inference & Serving](https://learn.significanthobbies.com/curriculum/tracks/inference-serving) — Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
-- [Agent Systems](https://learn.significanthobbies.com/curriculum/tracks/agent-systems) — Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
-- [Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/tracks/ai-reliability) — LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
-- [Developer Tools & Code Intelligence](https://learn.significanthobbies.com/curriculum/tracks/developer-tools) — Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
-- [Application Engineering](https://learn.significanthobbies.com/curriculum/tracks/application-engineering) — Backend, web, mobile, product analytics, UX, real-time applications, interactive systems, and distribution loops.
-- [Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/tracks/multimodal-spatial) — Vision, pose, voice, generation, on-device intelligence, robotics, spatial interfaces, and human-computer interaction.
+Illustrative · one concept moving through the loop
 
-## Browse without JavaScript
+- **Learn:** A mental model, a primary source, and the prerequisites.
+- **Practise:** Code or a diagram in a real workspace, run against tests.
+- **Explain:** Say it back in your own words. The AI asks; it never answers.
+- **Review:** FSRS brings it back right before you would have forgotten it.
 
-- [Curriculum hub](https://learn.significanthobbies.com/curriculum/)
-- [System-design case library](https://learn.significanthobbies.com/system-design/)
-- [Learning guides](https://learn.significanthobbies.com/articles/)
-- [LLM inference at 10K RPS](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps)
-- [Complete Markdown catalog](https://learn.significanthobbies.com/curriculum/catalog.md)
-- [Structured JSON catalog](https://learn.significanthobbies.com/curriculum/catalog.json)
-- [Agent entrypoint](https://learn.significanthobbies.com/llms.txt)
+## Reading about a mechanism is not the same as being able to explain it.
 
-Private progress, notes, review answers, and saved learning sources are intentionally excluded from public surfaces.
+That gap is the interview.
+
+Every concept here ends in something you made or said: running code, a diagram, a decision, an explanation. Mastery is what you demonstrated, not pages you read.
+
+## Learn. Practise. Explain. Review.
+
+One loop, every concept
+
+DSA, system design, backend, AI systems, and behavioural rounds share one mastery model instead of five separate tools.
+
+### Learn: Start from the mechanism.
+
+259 concepts across 19 tracks, each with a short mental model, a primary source, and the prerequisites it rests on. 26 roadmaps order them, from a 9-day reset to a 12-month run.
+
+Concept
+
+Tokenization
+
+Splitting text into terms: lowercasing, stemming, stop words, n-grams.
+
+- **Mental model:** The same analyzer must run at index time and query time.
+- **Primary source:** Introduction to Information Retrieval, §2.2.1
+- **Related:** Inverted index · BM25
+
+Illustrative · simplified from the app
+
+### Practise: Make it run, or draw it.
+
+305 drills in a Monaco editor and an Excalidraw canvas. Code runs against tests; system designs become diagrams you can defend.
+
+Build a search tokenizer
+
+Lowercase, split on non-alphanumerics, drop stop words, stem. Same function at index and query time.
+
+```javascript
+function tokenize(s) {
+  return s.toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean)
+    .filter(t => !STOPS.has(t))
+    .map(stem);
+}
+```
+
+tokenize('The Quick Brown Foxes!') → ["quick","brown","fox"]
+
+Illustrative · simplified from the app
+
+### Explain: Say it back, without the key.
+
+The Socratic companion only asks questions; it never hands over a solution. A Feynman explain-back gates the concept: one example, one failure mode, in your own words.
+
+Socratic companion
+
+If a document says “Foxes” and the query says “fox”, where in your pipeline do they become the same term?
+
+Your explain-back
+
+Both go through the same analyzer, so “foxes” stems to “fox” on both sides. The failure mode: stem too hard and “university” collides with “universe”.
+
+One example · one failure mode
+
+Illustrative · simplified from the app
+
+### Review: Retrieve it before it fades.
+
+FSRS schedules the next retrieval from what you actually demonstrated, so strong concepts wait longer and shaky ones come back soon. 278 review questions keep it honest.
+
+- Tokenization: Due today
+- Inverted index: In 3 days
+- BM25 scoring: In 9 days
+
+Without looking: why must the tokenizer be identical at index and query time?
+
+Again · Hard · Good · Easy
+
+Illustrative · simplified from the app
+
+## What it covers
+
+19 tracks. One mastery model.
+
+From arrays and graphs to inference serving and agent systems, plus the interview round that is not about code.
+
+- Search & IR
+- Mathematics
+- Vector DB & ANN
+- AI Systems
+- Backend
+- Databases & Storage
+- System Design
+- DSA & Implementation
+- Behavioral & Communication
+- Go-to-Market
+- Systems Foundations
+- Infrastructure & Platforms
+- Distributed Systems
+- Inference & Serving
+- Agent Systems
+- Evaluation & AI Reliability
+- Developer Tools & Code Intelligence
+- Application Engineering
+- Multimodal & Spatial Computing
+
+## An honest fit
+
+Interview prep that takes understanding seriously.
+
+### A fit
+
+Engineers who want to explain why a B-tree, a rate limiter, or a KV cache behaves the way it does, and still remember it in three weeks.
+
+### Not a fit
+
+An answer bank to memorise the night before. Nothing here hands you a solution, and progress is earned, not clicked.
+
+## A few honest answers.
+
+### Do I need an account?
+
+No. Every route works as a guest, and guest progress stays in this browser. Google sign-in only adds progress that follows you across devices.
+
+### Does it cost anything?
+
+No. There is no paid tier, subscription, or checkout.
+
+### Will the AI just give me the answer?
+
+No, by design. The companion probes your understanding with questions. Working it out is the point.
+
+### Is it actively developed?
+
+It is a mature personal learning system, built for its author’s own preparation and now in maintenance-only mode. It is kept working, not chasing features.
+
+## Start with one concept
+
+Pick one mechanism. Prove you understand it.
+
+[Start learning](https://learn.significanthobbies.com/learn)

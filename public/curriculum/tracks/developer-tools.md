@@ -1,5 +1,9 @@
 # Developer Tools & Code Intelligence
 
+> Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/developer-tools
+
 Code review, analysis, testing infrastructure, repository graphs, coding agents, supply-chain health, and remediation.
 
 This track contains 13 connected concepts. Mastery means explaining each

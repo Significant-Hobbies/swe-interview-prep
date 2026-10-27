@@ -1,5 +1,9 @@
 # Mathematics
 
+> Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/mathematics
+
 Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
 
 This track contains 30 connected concepts. Mastery means explaining each

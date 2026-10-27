@@ -1,5 +1,9 @@
 # Program Memory Model
 
+> Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/program-memory-model
+
 Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.
 
 - Difficulty: core

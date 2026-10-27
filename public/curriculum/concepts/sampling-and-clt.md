@@ -1,5 +1,9 @@
 # Sampling & the Central Limit Theorem
 
+> Sampling distributions, standard error of the mean, and why averages become Normal as n grows.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt
+
 Sampling distributions, standard error of the mean, and why averages become Normal as n grows.
 
 - Difficulty: core

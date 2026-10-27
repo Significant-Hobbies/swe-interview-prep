@@ -1,5 +1,9 @@
 # Heap / Priority Queue
 
+> Top-k, k-way merge, scheduling.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/heap
+
 Top-k, k-way merge, scheduling.
 
 - Difficulty: core

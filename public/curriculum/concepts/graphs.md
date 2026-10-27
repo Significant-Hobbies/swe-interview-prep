@@ -1,5 +1,9 @@
 # Graphs
 
+> BFS/DFS, topo sort, union-find.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/graphs
+
 BFS/DFS, topo sort, union-find.
 
 - Difficulty: advanced

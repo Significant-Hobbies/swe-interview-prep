@@ -1,5 +1,9 @@
 # Random Walks & Markov Chains
 
+> Markov property, random walks, transition matrices — generative story behind market efficiency intuition.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov
+
 Markov property, random walks, transition matrices — generative story behind market efficiency intuition.
 
 - Difficulty: core

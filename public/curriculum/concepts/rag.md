@@ -1,5 +1,9 @@
 # RAG
 
+> Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/rag
+
 Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
 
 - Difficulty: core

@@ -1,5 +1,9 @@
 # Systems Foundations
 
+> Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+
+Canonical: https://learn.significanthobbies.com/curriculum/tracks/systems-foundations
+
 Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
 
 This track contains 8 connected concepts. Mastery means explaining each

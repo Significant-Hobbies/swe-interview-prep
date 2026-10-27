@@ -1,5 +1,9 @@
 # Descriptive Statistics
 
+> Summarizing data: mean, median, variance, correlation, and when each summary lies.
+
+Canonical: https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics
+
 Summarizing data: mean, median, variance, correlation, and when each summary lies.
 
 - Difficulty: intro

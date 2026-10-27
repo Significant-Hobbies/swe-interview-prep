@@ -1,3 +1,9 @@
+# Design a Video Streaming Platform | Interview Guide
+
+> Design upload, transcoding, adaptive-bitrate packaging, CDN delivery, playback reliability, and cost controls for a YouTube or Netflix-style interview.
+
+Canonical: https://learn.significanthobbies.com/system-design/video-streaming-platform
+
 # Design a video streaming platform
 
 Design upload, transcoding, adaptive-bitrate packaging, CDN delivery, playback reliability, and cost controls for a YouTube or Netflix-style interview.
