@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { spawn, execFileSync } from 'node:child_process';
-import { mkdtemp, symlink } from 'node:fs/promises';
+import { mkdtemp, symlink, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createServer } from 'node:net';
@@ -191,7 +191,8 @@ for (const product of ['swe-interview-prep']) {
         if (server.exitCode !== null) resolve();
         else server.once('exit', resolve);
       });
-      execFileSync('/usr/bin/trash', [harness]);
+      if (process.platform === 'darwin') execFileSync('/usr/bin/trash', [harness]);
+      else await rm(harness, { recursive: true, force: true });
     }
   });
 }
