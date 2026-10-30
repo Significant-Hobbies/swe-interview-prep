@@ -19,7 +19,7 @@ export default function Layout() {
   const location = useLocation();
   const { user, isGuest, signOut } = useAuth();
   const focus = focusedRoute(location.pathname);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState<boolean | null>(null);
 
   useEffect(() => {
     recordRecentVisit(location.pathname, location.search);
@@ -117,9 +117,11 @@ export default function Layout() {
 
         {!focus && <StudioFooter mode={location.pathname === '/' ? 'full' : 'compact'} />}
 
-        <Suspense fallback={null}>
-          <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-        </Suspense>
+        {settingsOpen !== null && (
+          <Suspense fallback={null}>
+            <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+          </Suspense>
+        )}
       </div>
     </TooltipProvider>
   );

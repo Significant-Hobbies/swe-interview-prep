@@ -1,4 +1,5 @@
 // The existing inline learning shell can paint before React and its stylesheet arrive.
+if (window.location.pathname === '/') void import('./pages/Home').catch(() => {});
 void import('./bootstrap').catch(() => {
   document.getElementById('lcp-shell')?.remove();
   const root = document.getElementById('root');
