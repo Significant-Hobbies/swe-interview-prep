@@ -35,8 +35,27 @@ export default defineConfig({
                 (href) => !scripts.has(href) && !html.includes(href)
               )
             : [];
+          // Keep the same entry CSS in the document, without making the
+          // dynamic React bootstrap wait for another stylesheet request.
+          let inlined = 0;
+          const styledHtml = html.replace(
+            /<link rel="stylesheet" crossorigin href="\/([^"/]+\/[^"/]+\.css)">/g,
+            (_link, href) => {
+              const css = bundle[href];
+              if (
+                css?.type !== 'asset' ||
+                typeof css.source !== 'string' ||
+                /<\/style/i.test(css.source)
+              ) {
+                throw new Error('Invalid learning entry stylesheet');
+              }
+              inlined += 1;
+              return `<style>${css.source}</style>`;
+            }
+          );
+          if (inlined !== 1) throw new Error('Expected one learning entry stylesheet');
           return {
-            html,
+            html: styledHtml,
             tags: [
               {
                 tag: 'script',
