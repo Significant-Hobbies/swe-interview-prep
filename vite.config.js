@@ -4,7 +4,60 @@ import { defineConfig } from 'vite';
 import { localAi } from './vite-plugin-local-ai.js';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), localAi()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    localAi(),
+    {
+      name: 'preload-learning-entry',
+      apply: 'build',
+      transformIndexHtml: {
+        order: 'post',
+        handler(html, { bundle }) {
+          const entry = Object.values(bundle ?? {}).find(
+            (file) => file.type === 'chunk' && file.facadeModuleId?.endsWith('/src/bootstrap.tsx')
+          );
+          if (!entry) throw new Error('Learning bootstrap entry was not emitted');
+          const scripts = new Set();
+          const styles = new Set();
+          const visit = (file) => {
+            if (!file || file.type !== 'chunk' || scripts.has(file.fileName)) return;
+            scripts.add(file.fileName);
+            for (const stylesheet of file.viteMetadata?.importedCss ?? []) styles.add(stylesheet);
+            for (const dependency of file.imports) visit(bundle[dependency]);
+          };
+          visit(entry);
+          const home = Object.values(bundle).find(
+            (file) => file.type === 'chunk' && file.facadeModuleId?.endsWith('/src/pages/Home.tsx')
+          );
+          const homeScripts = home
+            ? [home.fileName, ...home.imports].filter(
+                (href) => !scripts.has(href) && !html.includes(href)
+              )
+            : [];
+          return {
+            html,
+            tags: [
+              {
+                tag: 'script',
+                children: `if(location.pathname==='/'){for(const href of ${JSON.stringify(homeScripts)}){const link=document.createElement('link');link.rel='modulepreload';link.crossOrigin='anonymous';link.href='/'+href;document.head.append(link)}}`,
+              },
+              ...[...styles].map((href) => ({
+                tag: 'link',
+                attrs: { rel: 'stylesheet', href: `/${href}` },
+              })),
+              ...[...scripts]
+                .filter((href) => !html.includes(href))
+                .map((href) => ({
+                  tag: 'link',
+                  attrs: { rel: 'modulepreload', crossorigin: true, href: `/${href}` },
+                })),
+            ],
+          };
+        },
+      },
+    },
+  ],
   assetsInclude: ['**/*.wasm'],
   optimizeDeps: {
     // Excalidraw imports this CommonJS-only font-loader dependency as a
