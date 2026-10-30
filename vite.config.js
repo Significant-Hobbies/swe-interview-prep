@@ -52,7 +52,7 @@ export default defineConfig({
                   tag: 'link',
                   attrs: { rel: 'modulepreload', crossorigin: true, href: `/${href}` },
                 })),
-            ],
+            ].map((tag) => ({ ...tag, injectTo: 'head' })),
           };
         },
       },
