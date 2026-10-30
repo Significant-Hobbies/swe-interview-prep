@@ -41,10 +41,24 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(loadCachedProfile);
-  const [isGuest, setIsGuest] = useState(() => localStorage.getItem(GUEST_KEY) === '1');
-  const [loading, setLoading] = useState(true);
+export function AuthProvider({
+  children,
+  initialPublicGuest = false,
+}: {
+  children: React.ReactNode;
+  initialPublicGuest?: boolean;
+}) {
+  const [user, setUser] = useState<User | null>(() =>
+    initialPublicGuest && typeof window === 'undefined' ? null : loadCachedProfile()
+  );
+  const [isGuest, setIsGuest] = useState(
+    () => (initialPublicGuest && !user) || localStorage.getItem(GUEST_KEY) === '1'
+  );
+  const [loading, setLoading] = useState(!initialPublicGuest || user !== null);
+
+  useEffect(() => {
+    if (initialPublicGuest && !user) localStorage.setItem(GUEST_KEY, '1');
+  }, [initialPublicGuest, user]);
 
   // Load profile from localStorage (just non-sensitive metadata) and validate
   // the cookie session against the server. The token itself is no longer in

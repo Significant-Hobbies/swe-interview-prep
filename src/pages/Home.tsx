@@ -597,7 +597,11 @@ function Answers() {
         </Display>
         <div className="border-t border-white/[0.08]">
           {ANSWERS.map((item) => (
-            <details key={item.q} className="group border-b border-white/[0.08]">
+            <details
+              key={item.q}
+              className="group border-b border-white/[0.08]"
+              suppressHydrationWarning
+            >
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-medium text-white/90 marker:hidden [&::-webkit-details-marker]:hidden">
                 {item.q}
                 <span

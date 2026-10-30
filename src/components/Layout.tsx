@@ -5,6 +5,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { focusedRoute } from '../lib/focusedRoute';
 import { recordRecentVisit } from '../lib/recentVisits';
+import { consumeInitialSettings } from '../lib/publicEntry';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
 import { SiteHeader } from './SiteHeader';
 import { RecordSyncStatus } from './RecordSyncStatus';
@@ -20,6 +21,10 @@ export default function Layout() {
   const { user, isGuest, signOut } = useAuth();
   const focus = focusedRoute(location.pathname);
   const [settingsOpen, setSettingsOpen] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (consumeInitialSettings()) setSettingsOpen(true);
+  }, []);
 
   useEffect(() => {
     recordRecentVisit(location.pathname, location.search);

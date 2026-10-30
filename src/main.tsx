@@ -6,6 +6,7 @@ void import('./bootstrap').catch(() => {
   document.getElementById('lcp-shell')?.remove();
   const root = document.getElementById('root');
   if (!root) return;
+  root.removeAttribute('data-public-prerender');
   const main = document.createElement('main');
   main.style.cssText =
     'margin:64px auto;padding:24px;max-width:800px;color:white;font-family:system-ui,sans-serif';

@@ -53,8 +53,12 @@ export function SiteHeader({ actions, onNavigate, sticky = true, focus }: SiteHe
   const location = useLocation();
   const browseRef = useRef<HTMLDetailsElement>(null);
   const menuRef = useRef<HTMLDetailsElement>(null);
+  const previousRoute = useRef(`${location.pathname}${location.search}`);
 
   useEffect(() => {
+    const route = `${location.pathname}${location.search}`;
+    if (previousRoute.current === route) return;
+    previousRoute.current = route;
     browseRef.current?.removeAttribute('open');
     menuRef.current?.removeAttribute('open');
   }, [location.pathname, location.search]);
@@ -113,7 +117,8 @@ export function SiteHeader({ actions, onNavigate, sticky = true, focus }: SiteHe
                   onNavigate={onNavigate}
                 />
               ))}
-              <details ref={browseRef} className="group relative">
+              {/* Native disclosure state can change before hydration. */}
+              <details ref={browseRef} className="group relative" suppressHydrationWarning>
                 <summary className="flex h-16 cursor-pointer list-none items-center gap-1 px-1 text-sm text-white/50 transition-colors hover:text-white">
                   Browse
                   <span
@@ -147,7 +152,7 @@ export function SiteHeader({ actions, onNavigate, sticky = true, focus }: SiteHe
           <div className="ml-auto flex shrink-0 items-center gap-1">{actions}</div>
 
           {!focus && (
-            <details ref={menuRef} className="group relative lg:hidden">
+            <details ref={menuRef} className="group relative lg:hidden" suppressHydrationWarning>
               <summary className="flex h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-md border border-white/15 px-3 text-xs font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.05]">
                 Menu
                 <span

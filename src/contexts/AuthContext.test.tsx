@@ -31,16 +31,35 @@ afterEach(async () => {
   container.remove();
   vi.unstubAllGlobals();
 });
-async function render() {
+async function render(initialPublicGuest = false) {
   await act(async () => {
     root.render(
-      <AuthProvider>
+      <AuthProvider initialPublicGuest={initialPublicGuest}>
         <State />
       </AuthProvider>
     );
   });
 }
 describe('session verification boundary', () => {
+  it('starts a prerendered blank guest without verification and persists the usual guest marker', async () => {
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    await render(true);
+    expect(auth.isGuest).toBe(true);
+    expect(auth.loading).toBe(false);
+    expect(localStorage.getItem('dsa-prep-guest')).toBe('1');
+    expect(fetch).not.toHaveBeenCalled();
+  });
+  it('never lets a public hint replace a cached profile or skip cookie verification', async () => {
+    localStorage.setItem('dsa-prep-profile', JSON.stringify(profile));
+    const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify({ user: profile })));
+    vi.stubGlobal('fetch', fetch);
+    await render(true);
+    expect(auth.user).toEqual(profile);
+    expect(auth.isGuest).toBe(false);
+    expect(fetch).toHaveBeenCalledWith('/api/auth/verify', { credentials: 'include' });
+    expect(localStorage.getItem('dsa-prep-guest')).toBeNull();
+  });
   it('settles a signed-out visitor without requesting protected auth verification', async () => {
     const fetch = vi.fn();
     vi.stubGlobal('fetch', fetch);

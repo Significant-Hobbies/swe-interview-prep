@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx';
@@ -7,16 +7,18 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthProvider } from './contexts/AuthContext';
 import { RecordSyncBoundary } from './components/RecordSyncBoundary';
 import { flushAnalytics } from './lib/analytics';
+import { preparePublicEntry } from './lib/publicEntry';
 const root = document.getElementById('root');
 
 if (!root) {
   throw new Error('Root element not found');
 }
 
+const publicGuest = preparePublicEntry(root);
 const tree = (
   <ErrorBoundary scope="root">
     <BrowserRouter>
-      <AuthProvider>
+      <AuthProvider initialPublicGuest={publicGuest}>
         <RecordSyncBoundary>
           <App />
         </RecordSyncBoundary>
@@ -25,7 +27,11 @@ const tree = (
   </ErrorBoundary>
 );
 
-createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
+if (publicGuest) {
+  hydrateRoot(root, tree);
+} else {
+  createRoot(root).render(import.meta.env.PROD ? tree : <StrictMode>{tree}</StrictMode>);
+}
 
 // Idle callbacks can run before the lazy landing route has painted. Keep
 // PostHog and its optional bundles out of the initial loading waterfall.
