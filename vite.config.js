@@ -111,9 +111,8 @@ export default defineConfig({
     cssMinify: 'lightningcss',
     rollupOptions: {
       output: {
-        // Keep the shared renderer stable. Let the bundler place icons with
-        // their actual consumers so lazy learning tools do not add icons to
-        // the public landing's initial download.
+        // Split stable vendor code into its own chunk so app-code changes
+        // don't invalidate the browser cache for React/router/lucide.
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
           if (
@@ -123,6 +122,7 @@ export default defineConfig({
           ) {
             return 'vendor-react';
           }
+          if (id.includes('/lucide-react')) return 'vendor-lucide';
         },
       },
     },
