@@ -15,7 +15,10 @@ export function preparePublicEntry(root: HTMLElement): boolean {
   const state = window.__sweEntry;
   const entry = initialEntry();
   const hydrate = Boolean(
-    state?.enabled && root.hasAttribute('data-public-prerender') && entry.prerender
+    state?.enabled &&
+      state.prerender &&
+      root.hasAttribute('data-public-prerender') &&
+      entry.prerender
   );
   if (state?.capture) document.removeEventListener('click', state.capture, true);
   root.querySelector('button[aria-label="Settings"]')?.removeAttribute('aria-busy');
