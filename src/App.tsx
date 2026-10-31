@@ -29,10 +29,13 @@ const loadHome = () => import('./pages/Home');
 // Start the destination's module graph with the entry bundle so the headline
 // does not wait for the router's first lazy-import waterfall. `/` is the
 // landing for first-time visitors and the dashboard for returning learners.
-if (window.location.pathname === '/') {
+if (typeof window !== 'undefined' && window.location.pathname === '/') {
   void loadHome();
   if (hasLearnerProgress()) void loadDashboard();
-} else if (window.location.pathname === '/dashboard' || window.location.pathname === '/today') {
+} else if (
+  typeof window !== 'undefined' &&
+  (window.location.pathname === '/dashboard' || window.location.pathname === '/today')
+) {
   void loadDashboard();
 }
 

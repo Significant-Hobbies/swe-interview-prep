@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { localAi } from './vite-plugin-local-ai.js';
+import { publicEntry } from './vite-plugin-public-entry.js';
 
 export default defineConfig({
   plugins: [
@@ -76,6 +77,7 @@ export default defineConfig({
         },
       },
     },
+    publicEntry(),
   ],
   assetsInclude: ['**/*.wasm'],
   optimizeDeps: {
