@@ -4,6 +4,13 @@ import {
   handlePublicReadability,
   advertisePublic,
 } from '../shared/public-readability.mjs';
+import curriculumManifest from '../public/curriculum/manifest.json';
+
+const PUBLIC_DRILL_PATHS = new Set(
+  curriculumManifest.htmlPaths
+    .filter((path) => path.startsWith('/curriculum/drills/'))
+    .map((path) => path.replace(/\/$/, ''))
+);
 
 type PagesFunction = (context: {
   request: Request;
@@ -366,6 +373,7 @@ function html404(): Response {
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'cache-control': 'no-store',
+      'x-robots-tag': 'noindex',
       vary: 'Accept, Accept-Encoding',
     },
   });
@@ -412,6 +420,14 @@ function openApiResponse(): Response {
 function soft404Response(context: Parameters<PagesFunction>[0], pathname: string): Response | null {
   if (pathname.startsWith('/api/')) return null;
   if (pathname.endsWith('.md')) return markdown404(pathname, context.request.method);
+  if (
+    (pathname === '/curriculum/drills' || pathname.startsWith('/curriculum/drills/')) &&
+    !PUBLIC_DRILL_PATHS.has(pathname.replace(/\/$/, ''))
+  ) {
+    return wantsMarkdown(context.request)
+      ? markdown404(pathname, context.request.method)
+      : html404();
+  }
   if (isKnownRoute(pathname) || isAssetPath(pathname)) return null;
 
   return pathname.endsWith('.md') || wantsMarkdown(context.request)

@@ -90,7 +90,7 @@
           <h3>Decide the edge cache key</h3>
           <p>Implement edgePolicy({ url, hasAuthCookie, varyHeaders, contentHashed }) returning { cacheable, ttlSeconds, key }. Never cache when hasAuthCookie is true (ttl 0). A content-hashed URL is immutable: ttl 31536000. Otherwise ttl 300. The key is the url plus each varyHeader appended as &#39;|&lt;header&gt;&#39; in the given order.</p>
           <p><strong>Expected evidence:</strong> content-hashed -&gt; one year; authed -&gt; not cacheable; otherwise 5 minutes</p>
-          <a href="/drills/cache-key-and-ttl">Open the interactive drill →</a>
+          <a href="/curriculum/drills/cache-key-and-ttl">Read the practice brief</a> · <a href="/drills/cache-key-and-ttl">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Why do content-hashed URLs with a one-year TTL beat a short TTL plus purge-on-deploy?</li></ul>
     </section>

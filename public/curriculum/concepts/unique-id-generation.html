@@ -90,7 +90,7 @@
           <h3>Pack and unpack a Snowflake id</h3>
           <p>Implement pack(timestampMs, machineId, sequence) and unpack(id) for a 64-bit Snowflake layout: 41 bits timestamp (ms since a custom epoch), 10 bits machine id, 12 bits sequence. Use BigInt. pack must throw when machineId or sequence exceeds its field.</p>
           <p><strong>Expected evidence:</strong> unpack(pack(1700000000000n, 42n, 7n)) -&gt; { timestampMs: 1700000000000n, machineId: 42n, sequence: 7n }</p>
-          <a href="/drills/snowflake-id-layout">Open the interactive drill →</a>
+          <a href="/curriculum/drills/snowflake-id-layout">Read the practice brief</a> · <a href="/drills/snowflake-id-layout">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Switching a primary key from random UUIDv4 to UUIDv7 improved write throughput without any schema change. Why?</li></ul>
     </section>

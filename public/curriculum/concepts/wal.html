@@ -90,7 +90,7 @@
           <h3>Build a write-ahead log</h3>
           <p>Implement an append-only WAL: append + fsync each change before acknowledging it, and replay the log on startup to recover state.</p>
           <p><strong>Expected evidence:</strong> State survives a simulated crash by replaying the log.</p>
-          <a href="/drills/build-wal">Open the interactive drill →</a>
+          <a href="/curriculum/drills/build-wal">Read the practice brief</a> · <a href="/drills/build-wal">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Why write to a WAL before updating the main data structure?</li><li>Why is fsync required for WAL durability?</li></ul>
     </section>

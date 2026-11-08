@@ -90,7 +90,7 @@
           <h3>Pick the join the planner should pick</h3>
           <p>Implement chooseJoin({ leftRows, rightRows, leftSorted, rightSorted, hasIndexOnRight, memoryRows }) returning &#39;nested-loop&#39;, &#39;hash&#39;, or &#39;merge&#39;. Rules: if both inputs are already sorted on the key, merge. Otherwise if the smaller side exceeds memoryRows, fall back to merge (hash would spill). Otherwise if the right side has an index and the left is small (&lt;= 100 rows), nested-loop. Otherwise hash.</p>
           <p><strong>Expected evidence:</strong> chooseJoin({leftRows:10,rightRows:1e6,leftSorted:false,rightSorted:false,hasIndexOnRight:true,memoryRows:1e5}) -&gt; &#39;nested-loop&#39;</p>
-          <a href="/drills/pick-a-join-strategy">Open the interactive drill →</a>
+          <a href="/curriculum/drills/pick-a-join-strategy">Read the practice brief</a> · <a href="/drills/pick-a-join-strategy">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>A query was fast in staging and unusable in production with the same plan shape. Why do cardinality estimates explain this more often than the join algorithm itself?</li></ul>
     </section>

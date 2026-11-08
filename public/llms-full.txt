@@ -2,7 +2,7 @@
 
 > A personal learning OS that turns software-engineering interview study into retained, artifact-backed understanding.
 
-Generated: 2026-10-27
+Generated: 2026-11-08
 
 ---
 <!-- source: https://learn.significanthobbies.com/ -->
@@ -2994,6 +2994,323 @@ Vision, pose, voice, generation, on-device intelligence, robotics, spatial inter
 
 
 ---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/ -->
+# Software engineering practice briefs
+
+> 305 authored practice prompts with expected evidence, hints, concept explanations and primary sources.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/
+
+305 authored prompts with expected evidence, hints and concept context.
+
+- [Build a search tokenizer](https://learn.significanthobbies.com/curriculum/drills/build-tokenizer)
+- [Build an inverted index](https://learn.significanthobbies.com/curriculum/drills/build-inverted-index)
+- [Calculate a TF-IDF score by hand](https://learn.significanthobbies.com/curriculum/drills/calculate-tfidf)
+- [Calculate a BM25 score by hand](https://learn.significanthobbies.com/curriculum/drills/calculate-bm25-score)
+- [Implement a BM25 ranker](https://learn.significanthobbies.com/curriculum/drills/implement-bm25-ranker)
+- [Compute precision and recall by hand](https://learn.significanthobbies.com/curriculum/drills/compute-precision-recall)
+- [Build a search eval harness](https://learn.significanthobbies.com/curriculum/drills/build-search-eval-harness)
+- [Implement reciprocal rank fusion](https://learn.significanthobbies.com/curriculum/drills/implement-rrf)
+- [Embed a corpus and search it](https://learn.significanthobbies.com/curriculum/drills/embed-and-search)
+- [Implement similarity metrics](https://learn.significanthobbies.com/curriculum/drills/implement-similarity-metrics)
+- [Top-k with a bounded heap](https://learn.significanthobbies.com/curriculum/drills/implement-topk-heap)
+- [Build a brute-force vector index](https://learn.significanthobbies.com/curriculum/drills/build-brute-force-index)
+- [Explain HNSW search on paper](https://learn.significanthobbies.com/curriculum/drills/explain-hnsw-layers)
+- [Add metadata filtering to vector search](https://learn.significanthobbies.com/curriculum/drills/implement-metadata-filter)
+- [Build a minimal RAG pipeline](https://learn.significanthobbies.com/curriculum/drills/build-rag-pipeline)
+- [Build a structure-aware chunker](https://learn.significanthobbies.com/curriculum/drills/build-chunker)
+- [Schema-constrained extraction](https://learn.significanthobbies.com/curriculum/drills/structured-extraction)
+- [Build a tool-calling loop](https://learn.significanthobbies.com/curriculum/drills/build-tool-loop)
+- [Build an LLM eval](https://learn.significanthobbies.com/curriculum/drills/build-llm-eval)
+- [Implement a token-bucket rate limiter](https://learn.significanthobbies.com/curriculum/drills/implement-token-bucket)
+- [Implement idempotency keys](https://learn.significanthobbies.com/curriculum/drills/implement-idempotency-key)
+- [Implement backoff with jitter](https://learn.significanthobbies.com/curriculum/drills/implement-backoff-jitter)
+- [Build a memtable + SSTable flush](https://learn.significanthobbies.com/curriculum/drills/build-memtable-sstable)
+- [Build a write-ahead log](https://learn.significanthobbies.com/curriculum/drills/build-wal)
+- [Two Sum with a hash map](https://learn.significanthobbies.com/curriculum/drills/two-sum-hashmap)
+- [Valid palindrome with two pointers](https://learn.significanthobbies.com/curriculum/drills/valid-palindrome-two-pointers)
+- [Longest substring without repeats](https://learn.significanthobbies.com/curriculum/drills/longest-substring-sliding-window)
+- [Search in a rotated sorted array](https://learn.significanthobbies.com/curriculum/drills/search-rotated-array)
+- [Binary tree level-order traversal](https://learn.significanthobbies.com/curriculum/drills/level-order-traversal)
+- [Number of islands](https://learn.significanthobbies.com/curriculum/drills/number-of-islands)
+- [House robber (1D DP)](https://learn.significanthobbies.com/curriculum/drills/house-robber-dp)
+- [Kth largest element with a heap](https://learn.significanthobbies.com/curriculum/drills/kth-largest-heap)
+- [Design a parking lot](https://learn.significanthobbies.com/curriculum/drills/design-parking-lot)
+- [Design a vending machine](https://learn.significanthobbies.com/curriculum/drills/design-vending-machine)
+- [Pluggable pricing strategies](https://learn.significanthobbies.com/curriculum/drills/design-pricing-strategies)
+- [In-process pub/sub bus](https://learn.significanthobbies.com/curriculum/drills/design-pub-sub-bus)
+- [Notification factory](https://learn.significanthobbies.com/curriculum/drills/design-notification-factory)
+- [Coffee-shop order decorator](https://learn.significanthobbies.com/curriculum/drills/design-coffee-decorator)
+- [Concurrent bank transfers](https://learn.significanthobbies.com/curriculum/drills/design-bank-account-locking)
+- [Undo / redo stack](https://learn.significanthobbies.com/curriculum/drills/design-undo-redo)
+- [Hotel booking system](https://learn.significanthobbies.com/curriculum/drills/design-hotel-booking)
+- [L7 load balancer](https://learn.significanthobbies.com/curriculum/drills/design-load-balancer)
+- [Distributed rate limiter](https://learn.significanthobbies.com/curriculum/drills/design-rate-limiter)
+- [Realtime chat system](https://learn.significanthobbies.com/curriculum/drills/design-chat-system)
+- [News feed (Twitter-style)](https://learn.significanthobbies.com/curriculum/drills/design-news-feed)
+- [Video streaming (Netflix-style)](https://learn.significanthobbies.com/curriculum/drills/design-video-streaming)
+- [Ride-sharing dispatch](https://learn.significanthobbies.com/curriculum/drills/design-ride-sharing)
+- [Make three replicas converge](https://learn.significanthobbies.com/curriculum/drills/build-g-counter-merge)
+- [Collaborative doc editor](https://learn.significanthobbies.com/curriculum/drills/design-collaborative-editor)
+- [Search platform end-to-end](https://learn.significanthobbies.com/curriculum/drills/design-search-platform)
+- [Production RAG pipeline](https://learn.significanthobbies.com/curriculum/drills/design-rag-system)
+- [Consistent-hash key router](https://learn.significanthobbies.com/curriculum/drills/design-consistent-hashing)
+- [Leader election walkthrough](https://learn.significanthobbies.com/curriculum/drills/design-leader-election)
+- [Realtime game server](https://learn.significanthobbies.com/curriculum/drills/design-online-game-server)
+- [STAR: leadership story](https://learn.significanthobbies.com/curriculum/drills/star-leadership)
+- [STAR: peer conflict](https://learn.significanthobbies.com/curriculum/drills/star-conflict)
+- [STAR: tough decision](https://learn.significanthobbies.com/curriculum/drills/star-tough-decision)
+- [STAR: cross-team collab](https://learn.significanthobbies.com/curriculum/drills/star-cross-team)
+- [STAR: a real failure](https://learn.significanthobbies.com/curriculum/drills/star-failure)
+- [STAR: explaining to a non-expert](https://learn.significanthobbies.com/curriculum/drills/star-communication)
+- [STAR: ruthless prioritization](https://learn.significanthobbies.com/curriculum/drills/star-prioritization)
+- [STAR: an unconventional idea](https://learn.significanthobbies.com/curriculum/drills/star-innovation)
+- [STAR: acting on customer feedback](https://learn.significanthobbies.com/curriculum/drills/star-customer-feedback)
+- [STAR: end-to-end ownership](https://learn.significanthobbies.com/curriculum/drills/star-ownership)
+- [Draft a product positioning statement](https://learn.significanthobbies.com/curriculum/drills/draft-positioning-statement)
+- [Critique a real landing page](https://learn.significanthobbies.com/curriculum/drills/critique-landing-page)
+- [On-page SEO audit](https://learn.significanthobbies.com/curriculum/drills/audit-seo-onpage)
+- [Define a north-star metric](https://learn.significanthobbies.com/curriculum/drills/define-north-star-metric)
+- [Compute a dot product and angle](https://learn.significanthobbies.com/curriculum/drills/compute-dot-product)
+- [Multiply 2×2 matrices by hand](https://learn.significanthobbies.com/curriculum/drills/multiply-2x2-matrix)
+- [Interpret an eigenvalue](https://learn.significanthobbies.com/curriculum/drills/interpret-eigenvalue)
+- [Apply Bayes' rule](https://learn.significanthobbies.com/curriculum/drills/conditional-probability-bayes)
+- [Expectation and variance of a discrete RV](https://learn.significanthobbies.com/curriculum/drills/compute-expectation-variance)
+- [Summarize a small dataset](https://learn.significanthobbies.com/curriculum/drills/summarize-dataset-stats)
+- [Construct a 95% confidence interval](https://learn.significanthobbies.com/curriculum/drills/construct-confidence-interval)
+- [Interpret a p-value correctly](https://learn.significanthobbies.com/curriculum/drills/interpret-p-value)
+- [Fit a simple linear regression](https://learn.significanthobbies.com/curriculum/drills/fit-simple-regression)
+- [Compute a 2D gradient](https://learn.significanthobbies.com/curriculum/drills/compute-gradient-2d)
+- [Independence and inclusion-exclusion](https://learn.significanthobbies.com/curriculum/drills/independence-inclusion-exclusion)
+- [Normal tail probability](https://learn.significanthobbies.com/curriculum/drills/normal-tail-probability)
+- [Correlation pitfalls](https://learn.significanthobbies.com/curriculum/drills/correlation-pitfalls)
+- [Type I vs Type II errors](https://learn.significanthobbies.com/curriculum/drills/type-errors-power)
+- [Match distribution to scenario](https://learn.significanthobbies.com/curriculum/drills/match-distribution-scenario)
+- [CLT and required sample size](https://learn.significanthobbies.com/curriculum/drills/clt-sample-size)
+- [Standard error vs standard deviation](https://learn.significanthobbies.com/curriculum/drills/standard-error-mean)
+- [Design an A/B test with power](https://learn.significanthobbies.com/curriculum/drills/design-ab-test-power)
+- [Interpret a sample ratio mismatch](https://learn.significanthobbies.com/curriculum/drills/interpret-srm-alert)
+- [Beta-Binomial posterior update](https://learn.significanthobbies.com/curriculum/drills/beta-binomial-posterior)
+- [MLE for Bernoulli trials](https://learn.significanthobbies.com/curriculum/drills/mle-bernoulli-derivation)
+- [Compute cross-entropy in bits](https://learn.significanthobbies.com/curriculum/drills/compute-cross-entropy-bits)
+- [Compute covariance and correlation matrix](https://learn.significanthobbies.com/curriculum/drills/compute-covariance-matrix)
+- [Diagnose overfit with a train/holdout split](https://learn.significanthobbies.com/curriculum/drills/diagnose-overfit-split)
+- [Identify rank and column space](https://learn.significanthobbies.com/curriculum/drills/identify-rank-subspace)
+- [PCA variance explained](https://learn.significanthobbies.com/curriculum/drills/pca-variance-explained)
+- [Log returns and annualized volatility](https://learn.significanthobbies.com/curriculum/drills/compute-log-returns-vol)
+- [Interpret an ACF plot](https://learn.significanthobbies.com/curriculum/drills/interpret-autocorrelation-plot)
+- [Simulate a two-state Markov chain](https://learn.significanthobbies.com/curriculum/drills/simulate-markov-chain)
+- [Sharpe ratio and max drawdown](https://learn.significanthobbies.com/curriculum/drills/compute-sharpe-drawdown)
+- [Design an honest momentum backtest](https://learn.significanthobbies.com/curriculum/drills/design-honest-backtest)
+- [Dot product and matmul shapes](https://learn.significanthobbies.com/curriculum/drills/ml-dot-matmul-shapes)
+- [One SGD step on a quadratic](https://learn.significanthobbies.com/curriculum/drills/ml-sgd-step-quadratic)
+- [Chain rule on a tiny graph](https://learn.significanthobbies.com/curriculum/drills/ml-chain-rule-gate)
+- [Softmax and cross-entropy loss](https://learn.significanthobbies.com/curriculum/drills/ml-softmax-cross-entropy)
+- [AdamW vs L2-on-gradient](https://learn.significanthobbies.com/curriculum/drills/ml-adamw-weight-decay)
+- [One BPE merge step](https://learn.significanthobbies.com/curriculum/drills/ml-bpe-merge-step)
+- [Perplexity from average NLL](https://learn.significanthobbies.com/curriculum/drills/ml-perplexity-from-nll)
+- [Temperature scaling logits](https://learn.significanthobbies.com/curriculum/drills/ml-temperature-sampling)
+- [Sinusoidal position encoding](https://learn.significanthobbies.com/curriculum/drills/ml-sinusoidal-position)
+- [Scaled dot-product attention weights](https://learn.significanthobbies.com/curriculum/drills/ml-scaled-dot-attention)
+- [Split embedding across heads](https://learn.significanthobbies.com/curriculum/drills/ml-multi-head-split)
+- [Pre-LayerNorm residual block](https://learn.significanthobbies.com/curriculum/drills/ml-pre-norm-residual)
+- [Overfit a single batch sanity check](https://learn.significanthobbies.com/curriculum/drills/ml-overfit-sanity-check)
+- [Checkpoint must include optimizer state](https://learn.significanthobbies.com/curriculum/drills/ml-checkpoint-resume)
+- [GRPO group-relative advantage](https://learn.significanthobbies.com/curriculum/drills/ml-grpo-group-advantage)
+- [LoRA parameter count](https://learn.significanthobbies.com/curriculum/drills/ml-lora-param-count)
+- [Estimate training token budget](https://learn.significanthobbies.com/curriculum/drills/ml-token-budget-estimate)
+- [WASM linear memory growth](https://learn.significanthobbies.com/curriculum/drills/ml-wasm-linear-memory)
+- [WebGPU buffer upload size](https://learn.significanthobbies.com/curriculum/drills/ml-webgpu-buffer-alignment)
+- [Perplexity vs classification accuracy](https://learn.significanthobbies.com/curriculum/drills/ml-eval-perplexity-vs-acc)
+- [Valid parentheses with a stack](https://learn.significanthobbies.com/curriculum/drills/valid-parentheses-stack)
+- [Reverse a linked list in place](https://learn.significanthobbies.com/curriculum/drills/reverse-linked-list)
+- [Trie prefix membership](https://learn.significanthobbies.com/curriculum/drills/trie-prefix-search)
+- [Generate all subsets](https://learn.significanthobbies.com/curriculum/drills/subsets-backtracking)
+- [Dijkstra shortest path](https://learn.significanthobbies.com/curriculum/drills/dijkstra-shortest-path)
+- [Union-find component count](https://learn.significanthobbies.com/curriculum/drills/union-find-connected-components)
+- [Minimum path sum in a grid](https://learn.significanthobbies.com/curriculum/drills/grid-min-path-dp)
+- [Activity selection greedy](https://learn.significanthobbies.com/curriculum/drills/activity-selection-greedy)
+- [Merge overlapping intervals](https://learn.significanthobbies.com/curriculum/drills/merge-intervals)
+- [GCD and modulo arithmetic](https://learn.significanthobbies.com/curriculum/drills/gcd-modular)
+- [Find the single number (XOR)](https://learn.significanthobbies.com/curriculum/drills/single-number-xor)
+- [Cross-encoder rerank top-k](https://learn.significanthobbies.com/curriculum/drills/cross-encoder-rerank)
+- [Spell-correct a search query](https://learn.significanthobbies.com/curriculum/drills/spell-correct-query)
+- [Browse vs search metrics](https://learn.significanthobbies.com/curriculum/drills/browse-vs-search-metrics)
+- [IVF nprobe vs recall](https://learn.significanthobbies.com/curriculum/drills/ivf-nprobe-recall)
+- [PQ codebook footprint](https://learn.significanthobbies.com/curriculum/drills/pq-codebook-size)
+- [Read a recall–latency curve](https://learn.significanthobbies.com/curriculum/drills/read-recall-latency-curve)
+- [Pack chunks into context budget](https://learn.significanthobbies.com/curriculum/drills/pack-context-budget)
+- [Cap agent tool loop](https://learn.significanthobbies.com/curriculum/drills/agent-step-limit)
+- [Route by cost and difficulty](https://learn.significanthobbies.com/curriculum/drills/route-by-query-cost)
+- [Diff two prompt versions](https://learn.significanthobbies.com/curriculum/drills/prompt-version-diff)
+- [Idempotent POST retry](https://learn.significanthobbies.com/curriculum/drills/http-idempotent-retry)
+- [Hash and prefix API keys](https://learn.significanthobbies.com/curriculum/drills/hash-api-key)
+- [Verify webhook HMAC](https://learn.significanthobbies.com/curriculum/drills/webhook-signature-verify)
+- [At-least-once job delivery](https://learn.significanthobbies.com/curriculum/drills/job-at-least-once)
+- [Cache stampede](https://learn.significanthobbies.com/curriculum/drills/cache-stampede)
+- [Queue backpressure](https://learn.significanthobbies.com/curriculum/drills/queue-backpressure)
+- [SLO error budget](https://learn.significanthobbies.com/curriculum/drills/slo-error-budget)
+- [Design cursor pagination](https://learn.significanthobbies.com/curriculum/drills/design-paginated-api)
+- [JWT revocation tradeoff](https://learn.significanthobbies.com/curriculum/drills/jwt-vs-session-revoke)
+- [Idempotent charge](https://learn.significanthobbies.com/curriculum/drills/payment-idempotency)
+- [B-tree page split](https://learn.significanthobbies.com/curriculum/drills/b-tree-split)
+- [LSM compaction levels](https://learn.significanthobbies.com/curriculum/drills/lsm-compaction-levels)
+- [Object key layout](https://learn.significanthobbies.com/curriculum/drills/object-key-layout)
+- [Columnar vs row store](https://learn.significanthobbies.com/curriculum/drills/columnar-vs-row)
+- [Secondary index write cost](https://learn.significanthobbies.com/curriculum/drills/secondary-index-write)
+- [Storage vs retrieval API](https://learn.significanthobbies.com/curriculum/drills/storage-vs-retrieval)
+- [Pick a shard key](https://learn.significanthobbies.com/curriculum/drills/shard-key-choice)
+- [Read-your-writes under lag](https://learn.significanthobbies.com/curriculum/drills/replication-lag-read)
+- [CAP under partition](https://learn.significanthobbies.com/curriculum/drills/cap-partition-choice)
+- [Condition number and learning rate](https://learn.significanthobbies.com/curriculum/drills/hessian-learning-rate)
+- [Two Sum](https://learn.significanthobbies.com/curriculum/drills/lc-two-sum)
+- [Valid Palindrome](https://learn.significanthobbies.com/curriculum/drills/lc-valid-palindrome)
+- [Best Time to Buy and Sell Stock](https://learn.significanthobbies.com/curriculum/drills/lc-best-time-to-buy-and-sell-stock)
+- [Contains Duplicate](https://learn.significanthobbies.com/curriculum/drills/lc-contains-duplicate)
+- [Maximum Subarray](https://learn.significanthobbies.com/curriculum/drills/lc-maximum-subarray)
+- [3Sum](https://learn.significanthobbies.com/curriculum/drills/lc-3sum)
+- [Longest Substring Without Repeating Characters](https://learn.significanthobbies.com/curriculum/drills/lc-longest-substring-without-repeating-characters)
+- [Valid Parentheses](https://learn.significanthobbies.com/curriculum/drills/lc-valid-parentheses)
+- [Merge Two Sorted Lists](https://learn.significanthobbies.com/curriculum/drills/lc-merge-two-sorted-lists)
+- [Binary Search](https://learn.significanthobbies.com/curriculum/drills/lc-binary-search)
+- [Number of Islands](https://learn.significanthobbies.com/curriculum/drills/lc-number-of-islands)
+- [Climbing Stairs](https://learn.significanthobbies.com/curriculum/drills/lc-climbing-stairs)
+- [Coin Change](https://learn.significanthobbies.com/curriculum/drills/lc-coin-change)
+- [House Robber](https://learn.significanthobbies.com/curriculum/drills/lc-house-robber)
+- [Product of Array Except Self](https://learn.significanthobbies.com/curriculum/drills/lc-product-of-array-except-self)
+- [Group Anagrams](https://learn.significanthobbies.com/curriculum/drills/lc-group-anagrams)
+- [Top K Frequent Elements](https://learn.significanthobbies.com/curriculum/drills/lc-top-k-frequent-elements)
+- [Invert Binary Tree](https://learn.significanthobbies.com/curriculum/drills/lc-invert-binary-tree)
+- [Maximum Depth of Binary Tree](https://learn.significanthobbies.com/curriculum/drills/lc-maximum-depth-of-binary-tree)
+- [Kth Largest Element in an Array](https://learn.significanthobbies.com/curriculum/drills/lc-kth-largest-element-in-an-array)
+- [Word Search](https://learn.significanthobbies.com/curriculum/drills/lc-word-search)
+- [Permutations](https://learn.significanthobbies.com/curriculum/drills/lc-permutations)
+- [Jump Game](https://learn.significanthobbies.com/curriculum/drills/lc-jump-game)
+- [Merge Intervals](https://learn.significanthobbies.com/curriculum/drills/lc-merge-intervals)
+- [Single Number](https://learn.significanthobbies.com/curriculum/drills/lc-single-number)
+- [Lowest Common Ancestor of a Binary Search Tree](https://learn.significanthobbies.com/curriculum/drills/lc-lowest-common-ancestor-of-a-binary-search-tree)
+- [Serialize and Deserialize Binary Tree](https://learn.significanthobbies.com/curriculum/drills/lc-serialize-and-deserialize-binary-tree)
+- [Course Schedule](https://learn.significanthobbies.com/curriculum/drills/lc-course-schedule)
+- [Rotting Oranges](https://learn.significanthobbies.com/curriculum/drills/lc-rotting-oranges)
+- [Task Scheduler](https://learn.significanthobbies.com/curriculum/drills/lc-task-scheduler)
+- [Subtree of Another Tree](https://learn.significanthobbies.com/curriculum/drills/lc-subtree-of-another-tree)
+- [Daily Temperatures](https://learn.significanthobbies.com/curriculum/drills/lc-daily-temperatures)
+- [Car Fleet](https://learn.significanthobbies.com/curriculum/drills/lc-car-fleet)
+- [Non-overlapping Intervals](https://learn.significanthobbies.com/curriculum/drills/lc-non-overlapping-intervals)
+- [Sum of Two Integers](https://learn.significanthobbies.com/curriculum/drills/lc-sum-of-two-integers)
+- [Reverse Bits](https://learn.significanthobbies.com/curriculum/drills/lc-reverse-bits)
+- [Design exercise: Operating System Mechanics](https://learn.significanthobbies.com/curriculum/drills/practice-operating-system-mechanics)
+- [Design exercise: Network Protocol Engineering](https://learn.significanthobbies.com/curriculum/drills/practice-network-protocol-engineering)
+- [Design exercise: Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/drills/practice-compute-memory-storage-hierarchy)
+- [Design exercise: Runtime & Performance Engineering](https://learn.significanthobbies.com/curriculum/drills/practice-runtime-performance-engineering)
+- [Design exercise: Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/drills/practice-security-isolation-boundaries)
+- [Design exercise: Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/drills/practice-cloud-infrastructure)
+- [Design exercise: Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/drills/practice-containers-kubernetes)
+- [Design exercise: CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/drills/practice-cicd-developer-environments)
+- [Design exercise: Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/drills/practice-platform-scheduling-orchestration)
+- [Design exercise: Reliability & Fault Tolerance](https://learn.significanthobbies.com/curriculum/drills/practice-reliability-fault-tolerance)
+- [Design exercise: Observability & OpenTelemetry](https://learn.significanthobbies.com/curriculum/drills/practice-opentelemetry-observability)
+- [Design exercise: Sandboxes & Execution Environments](https://learn.significanthobbies.com/curriculum/drills/practice-sandbox-execution-environments)
+- [Design exercise: Infrastructure Automation](https://learn.significanthobbies.com/curriculum/drills/practice-infrastructure-automation)
+- [Design exercise: Event Streaming & Kafka](https://learn.significanthobbies.com/curriculum/drills/practice-event-streaming-kafka)
+- [Design exercise: Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/drills/practice-distributed-workflows-temporal)
+- [Design exercise: Distributed Failure Recovery](https://learn.significanthobbies.com/curriculum/drills/practice-distributed-failure-recovery)
+- [Design exercise: Transaction Processing](https://learn.significanthobbies.com/curriculum/drills/practice-transaction-processing)
+- [Design exercise: Query Execution & Optimization](https://learn.significanthobbies.com/curriculum/drills/practice-query-execution-optimization)
+- [Design exercise: Data Warehouses & Lakehouses](https://learn.significanthobbies.com/curriculum/drills/practice-warehouses-lakehouses)
+- [Design exercise: Model Pre-training](https://learn.significanthobbies.com/curriculum/drills/practice-ml-pretraining)
+- [Design exercise: Model Quantization](https://learn.significanthobbies.com/curriculum/drills/practice-model-quantization)
+- [Design exercise: Open-Weight Models](https://learn.significanthobbies.com/curriculum/drills/practice-open-weight-models)
+- [Design exercise: vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/drills/practice-inference-engines)
+- [Design exercise: Continuous Batching](https://learn.significanthobbies.com/curriculum/drills/practice-continuous-batching)
+- [Design exercise: KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/drills/practice-kv-cache-paged-attention)
+- [Design exercise: FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/drills/practice-flashattention-kernels)
+- [Design exercise: Speculative Decoding](https://learn.significanthobbies.com/curriculum/drills/practice-speculative-decoding)
+- [Design exercise: GPU Utilization](https://learn.significanthobbies.com/curriculum/drills/practice-gpu-utilization)
+- [Design exercise: Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/drills/practice-inference-cost-latency)
+- [Design exercise: Local & On-device Inference](https://learn.significanthobbies.com/curriculum/drills/practice-local-on-device-inference)
+- [Design exercise: Inference Hardware](https://learn.significanthobbies.com/curriculum/drills/practice-inference-hardware)
+- [Design exercise: Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/drills/practice-agent-memory-context)
+- [Design exercise: MCP & Integrations](https://learn.significanthobbies.com/curriculum/drills/practice-mcp-integrations)
+- [Design exercise: Multi-agent Coordination](https://learn.significanthobbies.com/curriculum/drills/practice-multi-agent-coordination)
+- [Design exercise: Durable Agent Execution](https://learn.significanthobbies.com/curriculum/drills/practice-durable-agent-execution)
+- [Design exercise: Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/drills/practice-agent-permissions-sandboxing)
+- [Design exercise: Browser & Computer-use Agents](https://learn.significanthobbies.com/curriculum/drills/practice-browser-computer-use-agents)
+- [Design exercise: Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/drills/practice-agent-communication-interfaces)
+- [Design exercise: Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/drills/practice-long-running-scheduled-agents)
+- [Design exercise: Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/drills/practice-coding-agent-benchmarks)
+- [Design exercise: Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/drills/practice-tool-use-evaluations)
+- [Design exercise: AI Regression Testing](https://learn.significanthobbies.com/curriculum/drills/practice-ai-regression-testing)
+- [Design exercise: Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/drills/practice-hallucination-failure-detection)
+- [Design exercise: Agent Observability](https://learn.significanthobbies.com/curriculum/drills/practice-agent-observability)
+- [Design exercise: Tracing & Replay](https://learn.significanthobbies.com/curriculum/drills/practice-tracing-replay)
+- [Design exercise: Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/drills/practice-evidence-backed-verification)
+- [Design exercise: Human Review Systems](https://learn.significanthobbies.com/curriculum/drills/practice-human-review-systems)
+- [Design exercise: Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/drills/practice-quality-cost-latency-measurement)
+- [Design exercise: Code Review Systems](https://learn.significanthobbies.com/curriculum/drills/practice-code-review-systems)
+- [Design exercise: Static & Dynamic Analysis](https://learn.significanthobbies.com/curriculum/drills/practice-static-dynamic-analysis)
+- [Design exercise: Testing Infrastructure](https://learn.significanthobbies.com/curriculum/drills/practice-testing-infrastructure)
+- [Design exercise: Codebase Graphs](https://learn.significanthobbies.com/curriculum/drills/practice-codebase-graphs)
+- [Design exercise: Dependency & Blast-radius Analysis](https://learn.significanthobbies.com/curriculum/drills/practice-dependency-blast-radius)
+- [Design exercise: IDE & CLI Tooling](https://learn.significanthobbies.com/curriculum/drills/practice-ide-cli-tooling)
+- [Design exercise: Coding Agent Systems](https://learn.significanthobbies.com/curriculum/drills/practice-coding-agent-systems)
+- [Design exercise: Repository Intelligence](https://learn.significanthobbies.com/curriculum/drills/practice-repository-intelligence)
+- [Design exercise: Software Supply-chain Health](https://learn.significanthobbies.com/curriculum/drills/practice-software-supply-chain-health)
+- [Design exercise: Automated Debugging & Remediation](https://learn.significanthobbies.com/curriculum/drills/practice-automated-debugging-remediation)
+- [Design exercise: Web & Mobile Engineering](https://learn.significanthobbies.com/curriculum/drills/practice-web-mobile-engineering)
+- [Design exercise: UX & Interface Design](https://learn.significanthobbies.com/curriculum/drills/practice-ux-interface-design)
+- [Design exercise: Real-time Application Engineering](https://learn.significanthobbies.com/curriculum/drills/practice-real-time-application-engineering)
+- [Design exercise: 2D/3D Interactive Systems](https://learn.significanthobbies.com/curriculum/drills/practice-interactive-2d-3d-systems)
+- [Design exercise: Multimodal Models](https://learn.significanthobbies.com/curriculum/drills/practice-multimodal-models)
+- [Design exercise: Vision Models](https://learn.significanthobbies.com/curriculum/drills/practice-vision-models)
+- [Design exercise: Pose & Motion Tracking](https://learn.significanthobbies.com/curriculum/drills/practice-pose-motion-tracking)
+- [Design exercise: Voice & Audio Systems](https://learn.significanthobbies.com/curriculum/drills/practice-voice-audio-systems)
+- [Design exercise: Image & Video Generation](https://learn.significanthobbies.com/curriculum/drills/practice-image-video-generation)
+- [Design exercise: Robotics Systems](https://learn.significanthobbies.com/curriculum/drills/practice-robotics-systems)
+- [Design exercise: Spatial Interfaces](https://learn.significanthobbies.com/curriculum/drills/practice-spatial-interfaces)
+- [Design exercise: Human-Computer Interaction](https://learn.significanthobbies.com/curriculum/drills/practice-human-computer-interaction)
+- [Amortised growth of a dynamic array](https://learn.significanthobbies.com/curriculum/drills/analyse-amortised-growth)
+- [Stable sort by one key](https://learn.significanthobbies.com/curriculum/drills/stable-sort-by-key)
+- [Size a write-heavy service](https://learn.significanthobbies.com/curriculum/drills/size-a-write-heavy-service)
+- [Split functional from non-functional](https://learn.significanthobbies.com/curriculum/drills/classify-requirements)
+- [Answer range-sum queries in O(1)](https://learn.significanthobbies.com/curriculum/drills/range-sum-queries)
+- [Next greater element](https://learn.significanthobbies.com/curriculum/drills/next-greater-element)
+- [Rabin-Karp substring search](https://learn.significanthobbies.com/curriculum/drills/rolling-hash-search)
+- [Total weight of a minimum spanning tree](https://learn.significanthobbies.com/curriculum/drills/kruskal-mst-weight)
+- [Detect write skew under snapshot isolation](https://learn.significanthobbies.com/curriculum/drills/detect-write-skew)
+- [Pick the join the planner should pick](https://learn.significanthobbies.com/curriculum/drills/pick-a-join-strategy)
+- [Exponential backoff with full jitter](https://learn.significanthobbies.com/curriculum/drills/backoff-with-jitter)
+- [Parameterise instead of escaping](https://learn.significanthobbies.com/curriculum/drills/parameterise-a-query)
+- [Latency against utilisation](https://learn.significanthobbies.com/curriculum/drills/utilisation-latency-curve)
+- [Distances concentrate as dimensions grow](https://learn.significanthobbies.com/curriculum/drills/distance-concentration)
+- [Skip documents that cannot reach the top k](https://learn.significanthobbies.com/curriculum/drills/wand-threshold-skip)
+- [Token bucket rate limiter](https://learn.significanthobbies.com/curriculum/drills/token-bucket-limiter)
+- [Pack and unpack a Snowflake id](https://learn.significanthobbies.com/curriculum/drills/snowflake-id-layout)
+- [Solve a divide-and-conquer recurrence](https://learn.significanthobbies.com/curriculum/drills/recurrence-depth)
+- [k-th smallest by quickselect](https://learn.significanthobbies.com/curriculum/drills/kth-smallest-quickselect)
+- [Spot the update anomaly](https://learn.significanthobbies.com/curriculum/drills/find-the-anomaly)
+- [Why LRU-K survives a scan](https://learn.significanthobbies.com/curriculum/drills/lru-k-eviction)
+- [Cursor pagination that survives inserts](https://learn.significanthobbies.com/curriculum/drills/keyset-pagination)
+- [Count with inclusion-exclusion](https://learn.significanthobbies.com/curriculum/drills/count-with-inclusion-exclusion)
+- [Log-sum-exp without overflow](https://learn.significanthobbies.com/curriculum/drills/logsumexp-stable)
+- [NDCG@k](https://learn.significanthobbies.com/curriculum/drills/ndcg-at-k)
+- [Debias clicks by inverse propensity](https://learn.significanthobbies.com/curriculum/drills/ipw-debias-clicks)
+- [Scalar quantise and rescore](https://learn.significanthobbies.com/curriculum/drills/scalar-quantize-roundtrip)
+- [Cost a disk-resident search by I/O](https://learn.significanthobbies.com/curriculum/drills/count-random-reads)
+- [Tombstones erode recall](https://learn.significanthobbies.com/curriculum/drills/tombstone-recall-drift)
+- [Decide the edge cache key](https://learn.significanthobbies.com/curriculum/drills/cache-key-and-ttl)
+- [Encode a binary compatibility fixture](https://learn.significanthobbies.com/curriculum/drills/practice-data-representation)
+- [Trace a program into process memory](https://learn.significanthobbies.com/curriculum/drills/practice-program-memory-model)
+- [Build a scoped repository instruction map](https://learn.significanthobbies.com/curriculum/drills/build-rules-first-workspace)
+- [Define an agent-readable environment contract](https://learn.significanthobbies.com/curriculum/drills/make-agent-readable-workspace)
+- [Create a durable agent handoff](https://learn.significanthobbies.com/curriculum/drills/build-multi-session-continuity)
+- [Enforce runtime scope and escalation](https://learn.significanthobbies.com/curriculum/drills/add-feedback-and-scope-control)
+- [Separate maker claims from checker evidence](https://learn.significanthobbies.com/curriculum/drills/separate-maker-and-checker)
+- [Implement a bounded agent run lifecycle](https://learn.significanthobbies.com/curriculum/drills/build-complete-harness-lifecycle)
+- [Evaluate and ablate an agent harness](https://learn.significanthobbies.com/curriculum/drills/evaluate-automated-agent-loop)
+
+
+---
 <!-- source: https://learn.significanthobbies.com/system-design/ -->
 # System Design Interview Questions
 
@@ -4528,645 +4845,607 @@ Select a single technical concept you believe you understand but haven't activel
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/search-ir -->
-# Search & IR
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-tokenizer -->
+# Build a search tokenizer
 
-> Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+> Write a tokenizer that lowercases, splits on non-alphanumerics, removes a small stop-word set, and applies simple suffix stemming. Use the exact same function for indexing and querying.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/search-ir
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-tokenizer
 
-Lexical retrieval beyond embeddings: tokenization, inverted indexes, BM25, ranking, hybrid search, and search evaluation.
+Write a tokenizer that lowercases, splits on non-alphanumerics, removes a small stop-word set, and applies simple suffix stemming. Use the exact same function for indexing and querying.
 
-This track contains 13 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Tokenization decides what counts as a 'word' for search. The same analyzer must run at index time and query time, or the query term will never match the indexed term.
 
-- [9-Day Reset](https://learn.significanthobbies.com/curriculum/roadmaps/reset-9-day) — Rebuild learning momentum by taking one concept all the way to a shipped artifact.
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day) — Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day) — Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
+## Expected evidence
 
-## Concepts
+tokenize('The Quick Brown Foxes!') → ['quick','brown','fox']
 
-- [Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization) (intro) — Splitting text into terms: lowercasing, stemming, stop words, n-grams.
-- [Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index) (core) — Term → posting list mapping that powers fast keyword lookup.
-- [TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf) (core) — Term frequency × inverse document frequency weighting for relevance.
-- [BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25) (core) — The standard lexical ranking function: TF saturation + IDF + length normalization.
-- [Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics) (core) — Precision, recall, MRR, and nDCG for measuring retrieval quality.
-- [Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals) (core) — Building a labelled query set and harness to compare retrieval approaches.
-- [Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search) (advanced) — Fusing lexical (BM25) and vector retrieval, usually via reciprocal rank fusion.
-- [Reranking](https://learn.significanthobbies.com/curriculum/concepts/reranking) (advanced) — A second-stage cross-encoder pass that reorders the top-k candidates.
-- [Query Rewriting](https://learn.significanthobbies.com/curriculum/concepts/query-rewriting) (core) — Expanding, correcting, and normalizing queries before retrieval.
-- [Search Systems](https://learn.significanthobbies.com/curriculum/concepts/search-discovery) (core) — Inverted index, ranking, autocomplete at scale.
-- [Top-k Pruning (WAND)](https://learn.significanthobbies.com/curriculum/concepts/top-k-pruning) (advanced) — WAND, MaxScore, and block-max — skipping documents that cannot reach the top k.
-- [Learning to Rank](https://learn.significanthobbies.com/curriculum/concepts/learning-to-rank) (advanced) — Pointwise, pairwise, and listwise objectives — and why the metric you care about is not differentiable.
-- [Click Models & Position Bias](https://learn.significanthobbies.com/curriculum/concepts/click-models) (advanced) — Why clicks are not relevance labels, and how to debias implicit feedback.
+## Hints
+
+- The analyzer must be symmetric across index and query time.
+- Keep stop words minimal — they hurt short queries.
+
+## Sources and practice
+
+- [Introduction to Information Retrieval (Manning et al.) — §2.2.1 Tokenization](https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html)
+- [Let's build the GPT Tokenizer (Karpathy)](https://www.youtube.com/watch?v=zduSFxRajkE)
+- [Study Tokenization](https://learn.significanthobbies.com/curriculum/concepts/tokenization)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-tokenizer)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/mathematics -->
-# Mathematics
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-inverted-index -->
+# Build an inverted index
 
-> Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+> From a list of documents, build a term → sorted posting list map. Support a boolean AND query by intersecting posting lists. Track document frequency per term.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/mathematics
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-inverted-index
 
-Active math only: solve, derive, implement, simulate — never aesthetic consumption. Stack: probability & statistics → linear algebra → optimization → quant bridge. No artifact, no learning.
+From a list of documents, build a term → sorted posting list map. Support a boolean AND query by intersecting posting lists. Track document frequency per term.
 
-This track contains 30 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+An inverted index flips documents inside out: instead of doc → terms, you store term → list of docs (postings). Query answering becomes intersecting/merging sorted posting lists.
 
-- [30-Day Math Rating Climb](https://learn.significanthobbies.com/curriculum/roadmaps/math-rating-climb-30d) — Raise your per-roadmap ELO by climbing from linear algebra through statistics to calculus — each week unlocks harder drills at your edge.
-- [30-Day Probability & Statistics](https://learn.significanthobbies.com/curriculum/roadmaps/prob-stats-30d) — Active probability & statistics — solve, derive, implement. No passive video watching as a substitute for problems.
-- [12-Week Active Math Stack](https://learn.significanthobbies.com/curriculum/roadmaps/math-stack-12w) — Math → AI systems → distributed/data → quant tools. Active only: solve, derive, implement, simulate — never aesthetic consumption.
+## Expected evidence
 
-## Concepts
+Query 'quick fox' returns docs containing both terms, found by list intersection.
 
-- [Vectors & Vector Spaces](https://learn.significanthobbies.com/curriculum/concepts/vectors-and-spaces) (intro) — Vectors as ordered lists, dot products, norms, orthogonality, and the geometric picture of n-dimensional space.
-- [Matrices & Linear Transformations](https://learn.significanthobbies.com/curriculum/concepts/matrices-and-transformations) (intro) — Matrix multiplication as composing linear maps: rotation, scaling, projection, and change of basis.
-- [Eigenvalues & Matrix Decomposition](https://learn.significanthobbies.com/curriculum/concepts/eigenvalues-decomposition) (advanced) — Eigenvectors as directions preserved by a transformation; eigenvalues as stretch factors; SVD as the universal factorization.
-- [Probability Fundamentals](https://learn.significanthobbies.com/curriculum/concepts/probability-fundamentals) (intro) — Sample spaces, conditional probability, independence, and Bayes' rule for updating beliefs.
-- [Random Variables & Distributions](https://learn.significanthobbies.com/curriculum/concepts/random-variables) (core) — Discrete and continuous distributions, expectation, variance, and the law of large numbers.
-- [Descriptive Statistics](https://learn.significanthobbies.com/curriculum/concepts/descriptive-statistics) (intro) — Summarizing data: mean, median, variance, correlation, and when each summary lies.
-- [Estimation & Confidence Intervals](https://learn.significanthobbies.com/curriculum/concepts/estimation-confidence) (core) — Point estimates, standard error, confidence intervals, and what '95% confident' actually means.
-- [Hypothesis Testing](https://learn.significanthobbies.com/curriculum/concepts/hypothesis-testing) (core) — Null and alternative hypotheses, p-values, significance, power, and Type I/II errors.
-- [Linear Regression](https://learn.significanthobbies.com/curriculum/concepts/regression-basics) (core) — Fitting a line (or hyperplane) by least squares; residuals, R², and the geometry of projection.
-- [Derivatives & Gradients](https://learn.significanthobbies.com/curriculum/concepts/derivatives-and-gradients) (core) — Partial derivatives, the gradient vector, and reading a loss surface for descent direction.
-- [Multivariable Optimization](https://learn.significanthobbies.com/curriculum/concepts/multivariable-optimization) (advanced) — Convexity, critical points, constrained optimization, and why SGD works on non-convex losses anyway.
-- [Information & Entropy](https://learn.significanthobbies.com/curriculum/concepts/information-entropy) (advanced) — Entropy as surprise, cross-entropy as a loss, KL divergence as a distributional distance.
-- [Classical Distributions](https://learn.significanthobbies.com/curriculum/concepts/classical-distributions) (core) — Bernoulli, Binomial, Poisson, Normal, and Exponential — when each models the world and what to expect from them.
-- [Sampling & the Central Limit Theorem](https://learn.significanthobbies.com/curriculum/concepts/sampling-and-clt) (core) — Sampling distributions, standard error of the mean, and why averages become Normal as n grows.
-- [A/B Testing for Engineers](https://learn.significanthobbies.com/curriculum/concepts/ab-testing-engineering) (core) — Sample size, statistical power, practical significance, SRM checks, and multiple-comparison traps in product experiments.
-- [Bayesian Inference](https://learn.significanthobbies.com/curriculum/concepts/bayesian-inference) (advanced) — Priors, posteriors, credible intervals, and when Bayesian updating beats frequentist tests.
-- [Maximum Likelihood Estimation](https://learn.significanthobbies.com/curriculum/concepts/maximum-likelihood) (advanced) — Choosing parameters that make the observed data most probable; log-likelihood; connection to cross-entropy loss.
-- [Covariance & Correlation](https://learn.significanthobbies.com/curriculum/concepts/covariance-correlation) (core) — Covariance measures co-movement; correlation normalizes to [−1, 1]. Foundation for regression, PCA, and portfolio risk.
-- [Bias, Variance & Overfitting](https://learn.significanthobbies.com/curriculum/concepts/bias-variance-overfitting) (core) — Underfitting vs memorizing noise; why in-sample greatness lies.
-- [Rank, Basis & Subspaces](https://learn.significanthobbies.com/curriculum/concepts/matrix-rank-basis) (core) — Column space, rank, independence — why matrices are often low-rank in practice.
-- [PCA & Projection](https://learn.significanthobbies.com/curriculum/concepts/pca-projection) (advanced) — Principal components as variance-maximizing orthogonal directions; projection as subspace approximation.
-- [Returns & Volatility](https://learn.significanthobbies.com/curriculum/concepts/returns-volatility) (core) — Simple/log returns, realized volatility, annualization — basic quant units.
-- [Stationarity & Autocorrelation](https://learn.significanthobbies.com/curriculum/concepts/stationarity-autocorrelation) (advanced) — When series statistics are stable; memory in lags; noise vs signal.
-- [Random Walks & Markov Chains](https://learn.significanthobbies.com/curriculum/concepts/random-walks-markov) (core) — Markov property, random walks, transition matrices — generative story behind market efficiency intuition.
-- [Sharpe, Drawdown & Portfolio Risk](https://learn.significanthobbies.com/curriculum/concepts/portfolio-risk-metrics) (core) — Sharpe, max drawdown, correlation matrices — risk-adjusted comparison.
-- [Momentum Backtest Discipline](https://learn.significanthobbies.com/curriculum/concepts/momentum-backtest) (advanced) — Momentum rules, SPY/QQQ benchmarks, holdout honesty — why most backtests lie.
-- [Queueing Theory](https://learn.significanthobbies.com/curriculum/concepts/queueing-theory) (core) — Little's law and the utilisation curve — why latency explodes before a system runs out of capacity.
-- [Curse of Dimensionality](https://learn.significanthobbies.com/curriculum/concepts/curse-of-dimensionality) (core) — Why distances concentrate in high dimensions, and what that does to nearest-neighbour search.
-- [Combinatorics](https://learn.significanthobbies.com/curriculum/concepts/combinatorics) (core) — Counting without enumerating — permutations, combinations, inclusion-exclusion, pigeonhole.
-- [Numerical Stability](https://learn.significanthobbies.com/curriculum/concepts/numerical-stability) (core) — Floating point, catastrophic cancellation, and the log-sum-exp trick.
+## Hints
+
+- Keep posting lists sorted by doc id so intersection is linear.
+- Store document frequency now — ranking needs it later.
+
+## Sources and practice
+
+- [Stanford IR Book — A first take at building an inverted index](https://nlp.stanford.edu/IR-book/html/htmledition/a-first-take-at-building-an-inverted-index-1.html)
+- [Study Inverted Index](https://learn.significanthobbies.com/curriculum/concepts/inverted-index)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-inverted-index)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/vector-db -->
-# Vector DB & ANN
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/calculate-tfidf -->
+# Calculate a TF-IDF score by hand
 
-> Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+> Given term counts per document and document frequencies, compute the TF-IDF weight of a term in a document. Use dampened TF (1 + log tf) and IDF = log(N / df).
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/vector-db
+Canonical: https://learn.significanthobbies.com/curriculum/drills/calculate-tfidf
 
-Vector search engines: similarity, top-k, brute force, HNSW, IVF, quantization, metadata filtering, and recall/latency tradeoffs.
+Given term counts per document and document frequencies, compute the TF-IDF weight of a term in a document. Use dampened TF (1 + log tf) and IDF = log(N / df).
 
-This track contains 12 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+TF-IDF says a term matters more when it appears often in a document (TF) but is rare across the corpus (IDF). It is the conceptual ancestor of BM25.
 
-- [30-Day Retrieval Basics](https://learn.significanthobbies.com/curriculum/roadmaps/retrieval-30-day) — Build a solid foundation in both lexical and vector retrieval, ending with hybrid search.
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day) — Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
+## Expected evidence
 
-## Concepts
+A single numeric weight, higher for frequent-here-but-rare-overall terms.
 
-- [Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings) (core) — Mapping text/images into dense vectors where distance encodes meaning.
-- [Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity) (core) — Cosine, dot product, and L2 distance — how to score vector closeness.
-- [Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search) (core) — Returning the k nearest vectors to a query, exact or approximate.
-- [Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db) (core) — Exact nearest-neighbour search by scanning every vector — the correctness baseline.
-- [HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw) (advanced) — Hierarchical Navigable Small World graphs — the dominant ANN index.
-- [IVF (Inverted File)](https://learn.significanthobbies.com/curriculum/concepts/ivf) (advanced) — Cluster vectors with k-means, then search only the nearest cells (nprobe).
-- [Product Quantization](https://learn.significanthobbies.com/curriculum/concepts/product-quantization) (advanced) — Compress vectors into sub-space codebooks for tiny memory footprint.
-- [Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering) (core) — Combining vector search with structured predicates (tenant, date, tags).
-- [Recall / Latency Tradeoffs](https://learn.significanthobbies.com/curriculum/concepts/recall-latency-tradeoffs) (advanced) — Reading recall-vs-latency curves to choose ANN parameters.
-- [Scalar & Binary Quantization](https://learn.significanthobbies.com/curriculum/concepts/vector-quantization) (core) — Shrinking vectors to int8 or single bits, and rescoring to recover the lost precision.
-- [Disk-Based ANN](https://learn.significanthobbies.com/curriculum/concepts/disk-based-ann) (advanced) — DiskANN and SPANN — serving vector indexes that do not fit in memory.
-- [Index Updates & Tombstones](https://learn.significanthobbies.com/curriculum/concepts/index-updates-tombstones) (advanced) — Deleting and updating vectors in a graph index without rebuilding it.
+## Hints
+
+- IDF rewards rarity across the corpus.
+- Dampen raw term frequency.
+
+## Sources and practice
+
+- [Introduction to Information Retrieval (Manning et al.) — §6.2.2 Tf-idf weighting](https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html)
+- [Study TF-IDF](https://learn.significanthobbies.com/curriculum/concepts/tf-idf)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/calculate-tfidf)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/ai-systems -->
-# AI Systems
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/calculate-bm25-score -->
+# Calculate a BM25 score by hand
 
-> Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+> Given tf, df, N, document length, average document length, k1=1.2 and b=0.75, compute the BM25 score of a query term for a document.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/ai-systems
+Canonical: https://learn.significanthobbies.com/curriculum/drills/calculate-bm25-score
 
-Practical AI engineering: LLM apps, RAG, chunking, tool calling, agents, evals, and model/transformer foundations.
+Given tf, df, N, document length, average document length, k1=1.2 and b=0.75, compute the BM25 score of a query term for a document.
 
-This track contains 32 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter). It is still the strongest single keyword ranker and the lexical half of hybrid search.
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day) — Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime) — Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape) — Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.
-- [12-Week AI Models & Training](https://learn.significanthobbies.com/curriculum/roadmaps/ai-models-training-12w) — Move from transformer foundations through pre-training, fine-tuning, post-training, compression, and evaluation.
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
+## Expected evidence
 
-## Concepts
+A numeric score; verify TF saturation by checking the 10th occurrence adds little.
 
-- [RAG](https://learn.significanthobbies.com/curriculum/concepts/rag) (core) — Retrieval-Augmented Generation: ground an LLM answer in retrieved context.
-- [Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking) (core) — Splitting documents into retrievable units that preserve meaning.
-- [Context Packing](https://learn.significanthobbies.com/curriculum/concepts/context-packing) (advanced) — Ordering and budgeting retrieved context within the model's window.
-- [Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs) (core) — Forcing LLM output into a validated JSON schema.
-- [Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling) (core) — Letting an LLM invoke functions/APIs via structured calls.
-- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops) (advanced) — The plan → act → observe loop, with memory and stopping conditions.
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing) (core) — Sending each request to the cheapest model that can handle it.
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning) (core) — Treating prompts as versioned artifacts with logged inputs/outputs.
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals) (core) — Measuring LLM output quality with datasets, graders, and LLM-as-judge.
-- [ML Math Foundations](https://learn.significanthobbies.com/curriculum/concepts/ml-math) (intro) — Vectors, matrices, dot products, matmul, shapes.
-- [Gradient Descent](https://learn.significanthobbies.com/curriculum/concepts/ml-gradient-descent) (core) — Loss surfaces, learning rate, SGD steps.
-- [Backpropagation](https://learn.significanthobbies.com/curriculum/concepts/ml-backprop) (core) — Chain rule, autograd, forward/backward passes.
-- [Softmax & Cross-Entropy](https://learn.significanthobbies.com/curriculum/concepts/ml-softmax-xent) (core) — Logits to probabilities, negative log-likelihood loss.
-- [AdamW Optimizer](https://learn.significanthobbies.com/curriculum/concepts/ml-adamw) (core) — Moments, weight decay, gradient clipping.
-- [Tokenization (LLM)](https://learn.significanthobbies.com/curriculum/concepts/ml-tokenization) (intro) — Byte-level, char-level, BPE, vocab design.
-- [Language Modeling](https://learn.significanthobbies.com/curriculum/concepts/ml-language-modeling) (core) — Next-token prediction, context windows, perplexity.
-- [Sampling & Decoding](https://learn.significanthobbies.com/curriculum/concepts/ml-sampling) (core) — Temperature, top-k, greedy decoding.
-- [Embeddings (Transformer)](https://learn.significanthobbies.com/curriculum/concepts/ml-embeddings) (core) — Token & position embeddings, tied weights.
-- [Self-Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-self-attention) (advanced) — Q/K/V, scaled dot-product, causal masking.
-- [Multi-Head Attention](https://learn.significanthobbies.com/curriculum/concepts/ml-multi-head) (advanced) — Parallel heads, head_dim split, output projection.
-- [Transformer Block](https://learn.significanthobbies.com/curriculum/concepts/ml-transformer-block) (advanced) — Pre-LayerNorm, residuals, MLP, GELU.
-- [Training & Debugging](https://learn.significanthobbies.com/curriculum/concepts/ml-training) (advanced) — Init, NaNs, overfit tests, gradient checks.
-- [Checkpointing](https://learn.significanthobbies.com/curriculum/concepts/ml-checkpointing) (core) — Weights + optimizer state, resume, dataset manifests.
-- [LoRA & PEFT](https://learn.significanthobbies.com/curriculum/concepts/ml-lora) (advanced) — Frozen base, low-rank adapters, rank/alpha.
-- [RL Alignment (GRPO & Policy Gradient)](https://learn.significanthobbies.com/curriculum/concepts/ml-rl-alignment) (advanced) — Policy gradient, advantages, GRPO/CISPO, on- vs off-policy RLHF.
-- [Training Data Engineering](https://learn.significanthobbies.com/curriculum/concepts/ml-data-engineering) (core) — Cleaning, dedup, JSONL tasks, memorization tests.
-- [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime) (advanced) — Web Workers, WASM, OPFS, TypedArrays.
-- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu) (advanced) — WGSL, compute kernels, matmul, CPU parity.
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation) (core) — Held-out loss, baselines, hallucination, leakage.
-- [Model Pre-training](https://learn.significanthobbies.com/curriculum/concepts/ml-pretraining) (core) — Data mixtures, next-token objectives, scaling laws, distributed training, checkpoints, and training stability.
-- [Model Quantization](https://learn.significanthobbies.com/curriculum/concepts/model-quantization) (core) — Post-training and quantization-aware methods, integer and low-bit formats, calibration, kernels, and quality trade-offs.
-- [Open-Weight Models](https://learn.significanthobbies.com/curriculum/concepts/open-weight-models) (core) — Model cards, licenses, weights, tokenizers, chat templates, adapters, provenance, and reproducible packaging.
+## Hints
+
+- Score = IDF · (tf·(k1+1)) / (tf + k1·(1 - b + b·dl/avgdl)).
+- b controls length normalization; k1 controls TF saturation.
+
+## Sources and practice
+
+- [Okapi BM25 (Wikipedia)](https://en.wikipedia.org/wiki/Okapi_BM25)
+- [Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables)
+- [Study BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/calculate-bm25-score)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/backend -->
-# Backend
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/implement-bm25-ranker -->
+# Implement a BM25 ranker
 
-> Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+> On top of your inverted index, implement BM25 scoring and return the top-k documents for a multi-term query.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/backend
+Canonical: https://learn.significanthobbies.com/curriculum/drills/implement-bm25-ranker
 
-Production backend strength: HTTP, API design, auth, rate limiting, idempotency, queues, jobs, caching, and observability.
+On top of your inverted index, implement BM25 scoring and return the top-k documents for a multi-term query.
 
-This track contains 16 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+BM25 fixes TF-IDF's two flaws: term frequency saturates (the 10th occurrence adds little via the k1 parameter) and document length is normalized (the b parameter). It is still the strongest single keyword ranker and the lexical half of hybrid search.
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime) — Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape) — Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
+## Expected evidence
 
-## Concepts
+Ranked top-k results for a query, scored by summed per-term BM25.
 
-- [HTTP Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/http-lifecycle) (intro) — DNS → TCP/TLS → request → response: status codes, headers, keep-alive.
-- [API Keys](https://learn.significanthobbies.com/curriculum/concepts/api-keys) (core) — Issuing, hashing, scoping, and rotating keys for machine clients.
-- [Rate Limiting](https://learn.significanthobbies.com/curriculum/concepts/rate-limiting) (core) — Token bucket, leaky bucket, sliding window.
-- [Idempotency](https://learn.significanthobbies.com/curriculum/concepts/idempotency) (core) — Idempotency keys and dedup windows for safe retries of mutations.
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq) (core) — Backoff + jitter, poison messages, dead-letter queues.
-- [Webhooks](https://learn.significanthobbies.com/curriculum/concepts/webhooks) (core) — Outbound event delivery: signing, retries, idempotent receivers.
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs) (core) — Offloading slow work to workers: scheduling, concurrency, visibility.
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching) (core) — Cache-aside, write-through, eviction policies.
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues) (core) — Kafka, SQS, exactly-once vs at-least-once.
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics) (core) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
-- [API Design](https://learn.significanthobbies.com/curriculum/concepts/api-design) (core) — REST, gRPC, versioning, pagination.
-- [Auth Systems](https://learn.significanthobbies.com/curriculum/concepts/auth-systems) (core) — OAuth2, JWT, session, RBAC.
-- [Payments](https://learn.significanthobbies.com/curriculum/concepts/ecommerce-payments) (core) — Idempotency, sagas, double-entry.
-- [Retries & Circuit Breakers](https://learn.significanthobbies.com/curriculum/concepts/retries-and-circuit-breakers) (core) — Backoff, jitter, budgets, and breakers — retrying without turning a blip into an outage.
-- [Web Security Basics](https://learn.significanthobbies.com/curriculum/concepts/web-security-basics) (core) — XSS, CSRF, SQL injection, and CORS — the injection and confused-deputy bugs that keep recurring.
-- [Pagination](https://learn.significanthobbies.com/curriculum/concepts/pagination) (core) — Offset versus cursor pagination, stable ordering, and why deep pages get expensive.
+## Hints
+
+- Sum per-term BM25 contributions for multi-term queries.
+- Use a k-sized heap for the top-k.
+
+## Sources and practice
+
+- [Okapi BM25 (Wikipedia)](https://en.wikipedia.org/wiki/Okapi_BM25)
+- [Elastic — Practical BM25 Part 2: The BM25 Algorithm and its Variables](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables)
+- [Study BM25](https://learn.significanthobbies.com/curriculum/concepts/bm25)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/implement-bm25-ranker)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/databases -->
-# Databases & Storage
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/compute-precision-recall -->
+# Compute precision and recall by hand
 
-> Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+> Given retrieved doc ids [1,4,2,9] and relevant ids {2,4,7}, compute precision@4 and recall@4.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/databases
+Canonical: https://learn.significanthobbies.com/curriculum/drills/compute-precision-recall
 
-Storage foundations for Turbopuffer-class systems: B-trees, LSM trees, WAL, compaction, partitioning, replication, object storage.
+Given retrieved doc ids [1,4,2,9] and relevant ids {2,4,7}, compute precision@4 and recall@4.
 
-This track contains 18 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Precision/recall measure set quality; MRR rewards getting one right answer near the top; nDCG rewards graded relevance discounted by rank. Pick the metric that matches what users feel.
 
-- [90-Day AI Search & Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-search-infra-90-day) — Build a strong retrieval, vector, AI-systems, and storage foundation through HighSignal and Codevetter.
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first) — Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape) — Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.
+## Expected evidence
 
-## Concepts
+precision@4 = 0.5 (2 relevant in 4), recall@4 = 2/3.
 
-- [B-Tree](https://learn.significanthobbies.com/curriculum/concepts/b-tree) (core) — The balanced, disk-friendly tree behind most relational indexes.
-- [LSM Tree](https://learn.significanthobbies.com/curriculum/concepts/lsm-tree) (advanced) — Log-structured merge tree: write-optimized storage via sorted runs.
-- [Write-Ahead Log](https://learn.significanthobbies.com/curriculum/concepts/wal) (core) — Append-only durability log written before the data pages.
-- [Compaction](https://learn.significanthobbies.com/curriculum/concepts/compaction) (advanced) — Merging sorted runs to reclaim space and bound read amplification.
-- [Object Storage](https://learn.significanthobbies.com/curriculum/concepts/object-storage) (core) — S3-style blob storage: cheap, durable, high-latency, immutable objects.
-- [Columnar Storage](https://learn.significanthobbies.com/curriculum/concepts/columnar-storage) (advanced) — Column-oriented layout for analytics: compression and vectorized scans.
-- [Secondary Indexes](https://learn.significanthobbies.com/curriculum/concepts/secondary-index) (core) — Extra indexes for non-primary-key lookups, and what they cost on writes.
-- [Storage Engines](https://learn.significanthobbies.com/curriculum/concepts/storage-retrieval) (advanced) — B-tree vs LSM, indexing, WAL.
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding) (advanced) — Range/hash/geo partitioning.
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication) (advanced) — Leader-follower, multi-leader, quorum.
-- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem) (advanced) — Strong/eventual/causal, PACELC.
-- [Transaction Processing](https://learn.significanthobbies.com/curriculum/concepts/transaction-processing) (core) — ACID, MVCC, isolation anomalies, locking, optimistic control, serializability, commit, and recovery.
-- [Query Execution & Optimization](https://learn.significanthobbies.com/curriculum/concepts/query-execution-optimization) (core) — Logical and physical plans, cardinality estimation, join ordering, indexes, vectorized execution, and spilling.
-- [Data Warehouses & Lakehouses](https://learn.significanthobbies.com/curriculum/concepts/warehouses-lakehouses) (core) — Columnar files, table formats, storage-compute separation, batch execution, metadata, governance, and lakehouse architecture.
-- [Isolation Levels & MVCC](https://learn.significanthobbies.com/curriculum/concepts/isolation-levels) (core) — What each isolation level actually prevents, and how MVCC delivers snapshots without read locks.
-- [Join Algorithms](https://learn.significanthobbies.com/curriculum/concepts/join-algorithms) (core) — Nested-loop, hash, and merge joins — and why cardinality estimates decide which one you get.
-- [Normalization](https://learn.significanthobbies.com/curriculum/concepts/normalization) (core) — Functional dependencies, 1NF through BCNF, and the cases where denormalising is right.
-- [Buffer Pool](https://learn.significanthobbies.com/curriculum/concepts/buffer-pool) (core) — The database's own page cache — why it does not simply trust the OS.
+## Hints
+
+- Precision = relevant retrieved / total retrieved.
+- Recall = relevant retrieved / total relevant in corpus.
+
+## Sources and practice
+
+- [Introduction to Information Retrieval (Manning et al.) — §8.4 Evaluation of ranked retrieval results](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html)
+- [Study Ranking Metrics](https://learn.significanthobbies.com/curriculum/concepts/ranking-metrics)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/compute-precision-recall)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/system-design -->
-# System Design
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-search-eval-harness -->
+# Build a search eval harness
 
-> Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+> Create a labelled query set (query → relevant doc ids) and a harness that scores any retriever with recall@k, MRR, and nDCG.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/system-design
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-search-eval-harness
 
-Architecture-level thinking: low-level design, scalability, distributed systems, event-driven design, and end-to-end case studies.
+Create a labelled query set (query → relevant doc ids) and a harness that scores any retriever with recall@k, MRR, and nDCG.
 
-This track contains 26 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+You cannot improve retrieval you cannot measure. A search eval is a fixed set of queries with known-good results plus a harness that scores any retriever — it turns ranking changes from vibes into numbers.
 
-- [12-Month Advanced AI Infrastructure](https://learn.significanthobbies.com/curriculum/roadmaps/ai-infra-12-month) — Reach the depth to design and reason about systems like Turbopuffer, and ship them through HighSignal and Codevetter.
-- [Disk-First Databases & RAM](https://learn.significanthobbies.com/curriculum/roadmaps/db-disk-first) — Build a mechanism-first mental model of how disk-based DBs spend RAM, and why.
-- [Runtime — what every runtime has to do](https://learn.significanthobbies.com/curriculum/roadmaps/runtime) — Build one cross-cutting mental model for V8, JVM, Go, BEAM, .NET CLR, vLLM, SGLang, Cloudflare Workers, and wasmtime.
-- [The Software Engineering Landscape (2026)](https://learn.significanthobbies.com/curriculum/roadmaps/swe-landscape) — Get a working mental model of every major systems-software domain — LLMs, DBs, streaming, game engines, containers, browsers, compilers, OS, networking, distributed, build, crypto.
-- [LLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/lld-practice) — Build the design-rounds muscle: model state and behaviour explicitly, justify every class boundary.
-- [HLD Practice](https://learn.significanthobbies.com/curriculum/roadmaps/hld-practice) — Be able to design X — feed, chat, ride-hailing, search — under a 45-minute clock with credible numbers.
+## Expected evidence
 
-## Concepts
+A single command that prints the three metrics for a retriever.
 
-- [Object Modeling](https://learn.significanthobbies.com/curriculum/concepts/object-modeling) (core) — Identifying classes, attributes, relationships.
-- [State Machines](https://learn.significanthobbies.com/curriculum/concepts/state-management) (core) — States, transitions, guards.
-- [Strategy Pattern](https://learn.significanthobbies.com/curriculum/concepts/strategy-pattern) (core) — Interchangeable algorithms.
-- [Observer Pattern](https://learn.significanthobbies.com/curriculum/concepts/observer-pattern) (core) — Pub/sub, event propagation.
-- [Factory & Creational](https://learn.significanthobbies.com/curriculum/concepts/factory-creational) (core) — Abstract factory, builder, singleton.
-- [Decorator & Structural](https://learn.significanthobbies.com/curriculum/concepts/decorator-structural) (core) — Decorator, adapter, composite.
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design) (advanced) — Thread-safety, locks, producer-consumer.
-- [Command & Chain](https://learn.significanthobbies.com/curriculum/concepts/command-chain) (core) — Command, undo, chain of responsibility.
-- [Booking & Inventory](https://learn.significanthobbies.com/curriculum/concepts/booking-inventory) (advanced) — Reservation, hold-confirm, optimistic locking.
-- [Game/Simulation Design](https://learn.significanthobbies.com/curriculum/concepts/game-design) (core) — Turn engines, board state, rules.
-- [Load Balancing](https://learn.significanthobbies.com/curriculum/concepts/load-balancing) (core) — L4/L7, consistent hashing, health checks.
-- [Consistent Hashing](https://learn.significanthobbies.com/curriculum/concepts/consistent-hashing) (advanced) — Ring, virtual nodes, rebalancing.
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus) (advanced) — Raft, Paxos, leader election.
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra) (advanced) — Service discovery, orchestration.
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime) (core) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
-- [Feed Systems](https://learn.significanthobbies.com/curriculum/concepts/social-media) (core) — Fan-out write/read, timeline.
-- [Streaming Media](https://learn.significanthobbies.com/curriculum/concepts/streaming-media) (core) — CDN, HLS, transcoding pipeline.
-- [Geo Systems](https://learn.significanthobbies.com/curriculum/concepts/location-transport) (core) — Geohash, quadtree, dispatch.
-- [Collaboration Systems](https://learn.significanthobbies.com/curriculum/concepts/collaboration-productivity) (advanced) — Causality, OT, CRDT merge laws, and offline conflict resolution.
-- [Search Platform Design](https://learn.significanthobbies.com/curriculum/concepts/search-platform-design) (advanced) — End-to-end design of a search platform: ingestion, indexing, query, ranking.
-- [RAG System Design](https://learn.significanthobbies.com/curriculum/concepts/rag-system-design) (advanced) — Architecting a production RAG system: ingestion, retrieval, generation, evals.
-- [Capacity Estimation](https://learn.significanthobbies.com/curriculum/concepts/capacity-estimation) (core) — Back-of-the-envelope QPS, storage, and bandwidth maths that sizes a design before you draw it.
-- [Requirements Scoping](https://learn.significanthobbies.com/curriculum/concepts/requirements-scoping) (core) — Separating functional from non-functional requirements and cutting scope to something buildable.
-- [Rate Limiter Design](https://learn.significanthobbies.com/curriculum/concepts/rate-limiter-design) (core) — Token bucket versus sliding window, and making a limiter work across many nodes.
-- [Unique ID Generation](https://learn.significanthobbies.com/curriculum/concepts/unique-id-generation) (core) — Snowflake, ULID, and UUIDv7 — unique ids without a central allocator.
-- [CDN & Edge Delivery](https://learn.significanthobbies.com/curriculum/concepts/cdn-edge-delivery) (core) — Cache hierarchy, origin shield, and invalidation versus TTL at the edge.
+## Hints
+
+- Freeze the query set before tuning.
+- Score retrievers through one common interface.
+
+## Sources and practice
+
+- [BEIR: Heterogeneous IR Benchmark](https://github.com/beir-cellar/beir)
+- [Study Search Evals](https://learn.significanthobbies.com/curriculum/concepts/search-evals)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-search-eval-harness)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/dsa -->
-# DSA & Implementation
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/implement-rrf -->
+# Implement reciprocal rank fusion
 
-> Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+> Given two ranked result lists (BM25 and vector), fuse them with RRF: score(d) = Σ 1/(k + rank_i(d)), k≈60.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/dsa
+Canonical: https://learn.significanthobbies.com/curriculum/drills/implement-rrf
 
-Fast, clean implementation ability: arrays, graphs, trees, dynamic programming, and the core algorithmic patterns.
+Given two ranked result lists (BM25 and vector), fuse them with RRF: score(d) = Σ 1/(k + rank_i(d)), k≈60.
 
-This track contains 27 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Lexical search nails exact terms and rare tokens; vector search captures meaning. Hybrid search runs both and fuses the rankings (commonly Reciprocal Rank Fusion) so you get precision and recall together.
 
-- [DSA Practice](https://learn.significanthobbies.com/curriculum/roadmaps/dsa-practice) — Solve canonical patterns from scratch — no references, explain the invariant, add one edge-case test.
+## Expected evidence
 
-## Concepts
+A single fused ranking that uses rank, not raw scores.
 
-- [Arrays & Hashing](https://learn.significanthobbies.com/curriculum/concepts/array-hashing) (intro) — Hash maps, sets, frequency counting.
-- [Two Pointers](https://learn.significanthobbies.com/curriculum/concepts/two-pointers) (core) — Converging/diverging pointer scans.
-- [Sliding Window](https://learn.significanthobbies.com/curriculum/concepts/sliding-window) (core) — Variable/fixed window over sequences.
-- [Stack](https://learn.significanthobbies.com/curriculum/concepts/stack) (intro) — LIFO, parsing, monotonic stack.
-- [Binary Search](https://learn.significanthobbies.com/curriculum/concepts/binary-search) (core) — Halving sorted search space, predicate search.
-- [Linked List](https://learn.significanthobbies.com/curriculum/concepts/linked-list) (intro) — Pointer manipulation, fast/slow, reversal.
-- [Trees](https://learn.significanthobbies.com/curriculum/concepts/trees) (core) — Binary trees, BSTs, DFS/BFS.
-- [Trie](https://learn.significanthobbies.com/curriculum/concepts/tries) (core) — Prefix trees.
-- [Heap / Priority Queue](https://learn.significanthobbies.com/curriculum/concepts/heap) (core) — Top-k, k-way merge, scheduling.
-- [Backtracking](https://learn.significanthobbies.com/curriculum/concepts/backtracking) (advanced) — DFS with state restoration, pruning.
-- [Graphs](https://learn.significanthobbies.com/curriculum/concepts/graphs) (advanced) — BFS/DFS, topo sort, union-find.
-- [Shortest Path](https://learn.significanthobbies.com/curriculum/concepts/shortest-path) (advanced) — Dijkstra, Bellman-Ford, A*.
-- [Union-Find](https://learn.significanthobbies.com/curriculum/concepts/union-find) (core) — Disjoint set, path compression.
-- [1D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-1d) (advanced) — Linear state recurrences.
-- [2D DP](https://learn.significanthobbies.com/curriculum/concepts/dp-2d) (advanced) — Grid DP, edit distance, knapsack.
-- [Greedy](https://learn.significanthobbies.com/curriculum/concepts/greedy) (core) — Local-optimal-as-global proofs.
-- [Intervals](https://learn.significanthobbies.com/curriculum/concepts/intervals) (core) — Merge, overlap, sweep line.
-- [Math & Geometry](https://learn.significanthobbies.com/curriculum/concepts/math-geometry) (core) — Number theory, modular, geometry.
-- [Bit Manipulation](https://learn.significanthobbies.com/curriculum/concepts/bit-manipulation) (core) — Bitwise ops, masks, XOR tricks.
-- [Complexity Analysis](https://learn.significanthobbies.com/curriculum/concepts/complexity-analysis) (intro) — Big-O, amortised cost, and space complexity — how to argue a bound before writing code.
-- [Sorting](https://learn.significanthobbies.com/curriculum/concepts/sorting) (core) — Comparison sorts, stability, in-place versus extra space, and when a linear-time sort is available.
-- [Prefix Sums](https://learn.significanthobbies.com/curriculum/concepts/prefix-sums) (core) — Precomputed cumulative arrays that turn repeated range queries into O(1) lookups.
-- [Monotonic Stack](https://learn.significanthobbies.com/curriculum/concepts/monotonic-stack) (core) — A stack kept sorted so each element is pushed and popped once, answering next-greater questions in O(n).
-- [String Matching](https://learn.significanthobbies.com/curriculum/concepts/string-matching) (core) — Finding a pattern in text in linear time — KMP's failure function and Rabin-Karp's rolling hash.
-- [Minimum Spanning Tree](https://learn.significanthobbies.com/curriculum/concepts/minimum-spanning-tree) (core) — Kruskal and Prim — connecting every node at least total cost.
-- [Recursion & Induction](https://learn.significanthobbies.com/curriculum/concepts/recursion-and-induction) (intro) — Writing recursion you can trust, and solving the recurrence it produces.
-- [Quickselect](https://learn.significanthobbies.com/curriculum/concepts/quickselect) (core) — Finding the k-th smallest in expected O(n) by recursing into only one partition.
+## Hints
+
+- RRF uses ranks, sidestepping incomparable score scales.
+- A document missing from a list simply contributes nothing from it.
+
+## Sources and practice
+
+- [Reciprocal Rank Fusion (Cormack et al.)](https://doi.org/10.1145/1571941.1572114)
+- [Elasticsearch — Hybrid search](https://www.elastic.co/search-labs/blog/hybrid-search-elasticsearch)
+- [Pinecone — Hybrid search overview](https://www.pinecone.io/learn/hybrid-search/)
+- [Study Hybrid Search](https://learn.significanthobbies.com/curriculum/concepts/hybrid-search)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/implement-rrf)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/behavioral -->
-# Behavioral & Communication
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/embed-and-search -->
+# Embed a corpus and search it
 
-> The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
+> Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/behavioral
+Canonical: https://learn.significanthobbies.com/curriculum/drills/embed-and-search
 
-The interview round that is not about code: influence, conflict, ownership, prioritisation, and learning from failure.
+Embed a small corpus with an embedding model, embed a query, and return the nearest documents by cosine similarity.
 
-This track contains 10 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+An embedding model projects content into a space where 'close' means 'semantically similar'. Search becomes geometry: find the nearest vectors to the query vector.
 
-- [Behavioral Practice](https://learn.significanthobbies.com/curriculum/roadmaps/behavioral-practice) — Have a STAR-shaped story for every Amazon-style leadership principle, with one self-aware "what I would do differently".
+## Expected evidence
 
-## Concepts
+Semantically relevant documents for a query that shares no exact keywords.
 
-- [Leadership](https://learn.significanthobbies.com/curriculum/concepts/leadership-and-influence) (core) — Driving outcomes through others.
-- [Conflict Resolution](https://learn.significanthobbies.com/curriculum/concepts/conflict-resolution) (core) — Disagreement handling.
-- [Decision Making](https://learn.significanthobbies.com/curriculum/concepts/problem-solving-and-decision-making) (core) — Tradeoffs under uncertainty.
-- [Collaboration](https://learn.significanthobbies.com/curriculum/concepts/teamwork-and-collaboration) (intro) — Cross-functional work.
-- [Failure & Learning](https://learn.significanthobbies.com/curriculum/concepts/failure-and-learning) (intro) — Owning mistakes, post-mortem.
-- [Communication](https://learn.significanthobbies.com/curriculum/concepts/communication) (intro) — Written/verbal, audience adaptation.
-- [Prioritization](https://learn.significanthobbies.com/curriculum/concepts/time-management-and-prioritization) (intro) — Eisenhower, OKR alignment.
-- [Innovation](https://learn.significanthobbies.com/curriculum/concepts/innovation-and-creativity) (core) — Novel solutions, experimentation.
-- [Customer Obsession](https://learn.significanthobbies.com/curriculum/concepts/customer-obsession) (intro) — User-centered tradeoffs.
-- [Ownership](https://learn.significanthobbies.com/curriculum/concepts/ownership-and-accountability) (intro) — End-to-end responsibility.
+## Hints
 
+- Normalize vectors before cosine.
+- Use the same model for corpus and query.
 
----
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/go-to-market -->
-# Go-to-Market
+## Sources and practice
 
-> Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
-
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/go-to-market
-
-Getting a built thing in front of people: positioning, landing pages, SEO, and product analytics.
-
-This track contains 4 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
-
-## Roadmaps
-
-- [12-Week Application Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/application-engineering-12w) — Turn backend, client, UX, real-time, interactive, analytics, and distribution skills into one complete product.
-
-## Concepts
-
-- [Positioning](https://learn.significanthobbies.com/curriculum/concepts/positioning) (core) — Naming the problem, the audience, and the alternative you beat.
-- [Landing Pages](https://learn.significanthobbies.com/curriculum/concepts/landing-pages) (core) — Turning a visitor into an activated user: hero, proof, single CTA.
-- [SEO](https://learn.significanthobbies.com/curriculum/concepts/seo) (core) — Programmatic and content SEO: intent, structure, indexability.
-- [Product Analytics](https://learn.significanthobbies.com/curriculum/concepts/product-analytics) (core) — Activation, retention, funnels — measuring whether the product works.
+- [MTEB: Massive Text Embedding Benchmark](https://huggingface.co/spaces/mteb/leaderboard)
+- [Study Embeddings](https://learn.significanthobbies.com/curriculum/concepts/embeddings)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/embed-and-search)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/systems-foundations -->
-# Systems Foundations
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/implement-similarity-metrics -->
+# Implement similarity metrics
 
-> Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+> Implement cosine similarity, dot product, and L2 distance. Show that on normalized vectors, cosine and dot product produce the same ranking.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/systems-foundations
+Canonical: https://learn.significanthobbies.com/curriculum/drills/implement-similarity-metrics
 
-Operating systems, networks, concurrency, hardware, runtimes, performance, security, and isolation.
+Implement cosine similarity, dot product, and L2 distance. Show that on normalized vectors, cosine and dot product produce the same ranking.
 
-This track contains 8 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Cosine measures angle (direction), dot product measures angle and magnitude, L2 measures straight-line distance. On normalized vectors cosine and dot product rank identically, and L2 becomes a monotonic function of them.
 
-- [12-Week Systems Foundations](https://learn.significanthobbies.com/curriculum/roadmaps/systems-foundations-12w) — Build a mechanism-first model from hardware and kernels through runtimes, networks, performance, and isolation.
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
+## Expected evidence
 
-## Concepts
+Three functions; a demonstration that normalized cosine == dot ranking.
 
-- [Concurrency Design](https://learn.significanthobbies.com/curriculum/concepts/concurrency-design) (advanced) — Thread-safety, locks, producer-consumer.
-- [Operating System Mechanics](https://learn.significanthobbies.com/curriculum/concepts/operating-system-mechanics) (core) — Processes, threads, virtual memory, scheduling, filesystems, syscalls, and kernel boundaries.
-- [Network Protocol Engineering](https://learn.significanthobbies.com/curriculum/concepts/network-protocol-engineering) (core) — Packet flow across Ethernet, IP, TCP/QUIC, TLS, DNS, HTTP, load balancers, and application protocols.
-- [Compute, Memory & Storage Hierarchy](https://learn.significanthobbies.com/curriculum/concepts/compute-memory-storage-hierarchy) (core) — CPU caches, NUMA, DRAM, GPU memory, NVMe, object storage, and the movement costs between them.
-- [Runtime & Performance Engineering](https://learn.significanthobbies.com/curriculum/concepts/runtime-performance-engineering) (core) — Profiling, allocation, JIT/AOT execution, garbage collection, scheduling, contention, and tail latency.
-- [Security & Isolation Boundaries](https://learn.significanthobbies.com/curriculum/concepts/security-isolation-boundaries) (core) — Threat models, least privilege, capabilities, process and VM isolation, side channels, and secure defaults.
-- [Data Representation](https://learn.significanthobbies.com/curriculum/concepts/data-representation) (core) — Binary and hexadecimal, two's complement, IEEE-754 floating point, Unicode, byte order, and serialized bytes.
-- [Program Memory Model](https://learn.significanthobbies.com/curriculum/concepts/program-memory-model) (core) — Pointers, stack frames, heap allocation, object lifetime, executable loading, and the transition from a program on disk to a running process.
+## Hints
 
+- Cosine = dot / (‖a‖·‖b‖).
+- On unit vectors L2² = 2 − 2·cosine.
 
----
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms -->
-# Infrastructure & Platforms
+## Sources and practice
 
-> Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
-
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/infrastructure-platforms
-
-Cloud infrastructure, containers, CI/CD, orchestration, reliability, observability, sandboxes, and infrastructure automation.
-
-This track contains 10 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
-
-## Roadmaps
-
-- [12-Week Infrastructure & Platforms](https://learn.significanthobbies.com/curriculum/roadmaps/infrastructure-platforms-12w) — Design and operate a reproducible, observable, fault-tolerant platform for untrusted workloads.
-
-## Concepts
-
-- [Retries & DLQ](https://learn.significanthobbies.com/curriculum/concepts/retries-dlq) (core) — Backoff + jitter, poison messages, dead-letter queues.
-- [Background Jobs](https://learn.significanthobbies.com/curriculum/concepts/background-jobs) (core) — Offloading slow work to workers: scheduling, concurrency, visibility.
-- [Observability](https://learn.significanthobbies.com/curriculum/concepts/monitoring-analytics) (core) — Metrics, logs, traces, context propagation, semantic conventions, sampling, collectors, and telemetry pipelines.
-- [Cloud Infrastructure](https://learn.significanthobbies.com/curriculum/concepts/cloud-infrastructure) (core) — Regions, zones, networks, compute, managed storage, identity, load balancing, and control planes.
-- [Containers & Kubernetes](https://learn.significanthobbies.com/curriculum/concepts/containers-kubernetes) (core) — Namespaces, cgroups, OCI images, container runtimes, Kubernetes scheduling, controllers, networking, and storage.
-- [CI/CD & Developer Environments](https://learn.significanthobbies.com/curriculum/concepts/cicd-developer-environments) (core) — Hermetic builds, reproducible environments, test gates, artifacts, previews, progressive delivery, and rollback.
-- [Scheduling & Orchestration](https://learn.significanthobbies.com/curriculum/concepts/platform-scheduling-orchestration) (core) — Placement, queues, priorities, quotas, fairness, preemption, autoscaling, and reconciliation loops.
-- [Reliability & Fault Tolerance](https://learn.significanthobbies.com/curriculum/concepts/reliability-fault-tolerance) (core) — SLOs, error budgets, redundancy, graceful degradation, overload control, and failure-domain design.
-- [Sandboxes & Execution Environments](https://learn.significanthobbies.com/curriculum/concepts/sandbox-execution-environments) (core) — Processes, containers, microVMs, V8 isolates, WebAssembly, capabilities, quotas, and untrusted-code execution.
-- [Infrastructure Automation](https://learn.significanthobbies.com/curriculum/concepts/infrastructure-automation) (core) — Declarative infrastructure, state, plans, drift detection, policy checks, secrets boundaries, and safe changes.
+- [Pinecone — Vector similarity explained](https://www.pinecone.io/learn/vector-similarity/)
+- [Study Vector Similarity](https://learn.significanthobbies.com/curriculum/concepts/vector-similarity)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/implement-similarity-metrics)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/distributed-systems -->
-# Distributed Systems
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/implement-topk-heap -->
+# Top-k with a bounded heap
 
-> Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+> Given a stream of (id, score) pairs, return the top-k by score using a size-k min-heap — without sorting everything.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/distributed-systems
+Canonical: https://learn.significanthobbies.com/curriculum/drills/implement-topk-heap
 
-Coordination, replication, partitioning, event systems, caching, durable workflows, consistency, and recovery.
+Given a stream of (id, score) pairs, return the top-k by score using a size-k min-heap — without sorting everything.
 
-This track contains 11 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Top-k is a bounded selection problem: keep a size-k heap whose root is the current worst survivor and evict that root when something better arrives. Ranking by similarity (higher is better) the root is the smallest, so it is a min-heap; ranking by distance (lower is better) the root is the largest, so it is a max-heap. Exact search scans everything; ANN scans a clever subset.
 
-- [12-Week Distributed Systems](https://learn.significanthobbies.com/curriculum/roadmaps/distributed-systems-12w) — Reason about coordination, data placement, logs, durable workflows, consistency, and recovery under partial failure.
+## Expected evidence
 
-## Concepts
+Correct top-k in O(n log k) time and O(k) space.
 
-- [Caching](https://learn.significanthobbies.com/curriculum/concepts/caching) (core) — Cache-aside, write-through, eviction policies.
-- [Message Queues](https://learn.significanthobbies.com/curriculum/concepts/message-queues) (core) — Kafka, SQS, exactly-once vs at-least-once.
-- [Sharding](https://learn.significanthobbies.com/curriculum/concepts/sharding) (advanced) — Range/hash/geo partitioning.
-- [Replication](https://learn.significanthobbies.com/curriculum/concepts/replication) (advanced) — Leader-follower, multi-leader, quorum.
-- [CAP & Consistency Models](https://learn.significanthobbies.com/curriculum/concepts/cap-theorem) (advanced) — Strong/eventual/causal, PACELC.
-- [Consensus](https://learn.significanthobbies.com/curriculum/concepts/consensus) (advanced) — Raft, Paxos, leader election.
-- [Distributed Infra](https://learn.significanthobbies.com/curriculum/concepts/distributed-infra) (advanced) — Service discovery, orchestration.
-- [Real-time Systems](https://learn.significanthobbies.com/curriculum/concepts/messaging-realtime) (core) — WebSockets, server-sent events, presence, synchronization, ordering, reconnects, optimistic UI, and conflict handling.
-- [Event Streaming & Kafka](https://learn.significanthobbies.com/curriculum/concepts/event-streaming-kafka) (core) — Partitioned logs, producers, consumer groups, offsets, ordering, delivery semantics, backpressure, and stream processing.
-- [Distributed Workflows & Temporal](https://learn.significanthobbies.com/curriculum/concepts/distributed-workflows-temporal) (core) — Durable execution, event histories, deterministic replay, activities, retries, timers, and long-running workflows.
-- [Distributed Failure Recovery](https://learn.significanthobbies.com/curriculum/concepts/distributed-failure-recovery) (core) — Partial failure, timeouts, retries, deduplication, fencing, repair, anti-entropy, and disaster recovery.
+## Hints
+
+- Keep a min-heap of size k; the root is the weakest kept item.
+- Replace the root when a better score arrives.
+
+## Sources and practice
+
+- [Nearest neighbor search (Wikipedia)](https://en.wikipedia.org/wiki/Nearest_neighbor_search)
+- [Study Top-k Vector Search](https://learn.significanthobbies.com/curriculum/concepts/topk-vector-search)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/implement-topk-heap)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/inference-serving -->
-# Inference & Serving
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-brute-force-index -->
+# Build a brute-force vector index
 
-> Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+> Build an index that stores vectors and answers top-k queries by scanning every vector. Benchmark latency as the vector count grows.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/inference-serving
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-brute-force-index
 
-Inference engines, batching, KV caches, attention kernels, decoding, routing, hardware utilization, and serving economics.
+Build an index that stores vectors and answers top-k queries by scanning every vector. Benchmark latency as the vector count grows.
 
-This track contains 12 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Brute force computes the metric against every stored vector. It is O(n·d) and slow at scale, but it is exact — making it the recall=1.0 baseline that every ANN index is measured against.
 
-- [12-Week Inference & Serving](https://learn.significanthobbies.com/curriculum/roadmaps/inference-serving-12w) — Build a production mental model for inference engines, memory, kernels, routing, hardware, and serving economics.
-- [12-Week Multimodal & Spatial Computing](https://learn.significanthobbies.com/curriculum/roadmaps/multimodal-spatial-12w) — Connect vision, audio, generation, on-device intelligence, robotics, spatial interfaces, and HCI.
-- [Trace a Tensor](https://learn.significanthobbies.com/curriculum/roadmaps/trace-a-tensor) — Follow one model workload from representation and gradients to memory, kernels, scheduling, and serving economics.
+## Expected evidence
 
-## Concepts
+Exact top-k results; a latency-vs-n table.
 
-- [Model Routing](https://learn.significanthobbies.com/curriculum/concepts/model-routing) (core) — Sending each request to the cheapest model that can handle it.
-- [Browser ML Runtime](https://learn.significanthobbies.com/curriculum/concepts/ml-browser-runtime) (advanced) — Web Workers, WASM, OPFS, TypedArrays.
-- [WebGPU Compute](https://learn.significanthobbies.com/curriculum/concepts/ml-webgpu) (advanced) — WGSL, compute kernels, matmul, CPU parity.
-- [vLLM & Inference Engines](https://learn.significanthobbies.com/curriculum/concepts/inference-engines) (core) — Request scheduling, model execution, memory management, distributed serving, APIs, and engine architecture.
-- [Continuous Batching](https://learn.significanthobbies.com/curriculum/concepts/continuous-batching) (core) — Iteration-level scheduling, dynamic admission, prefill/decode interleaving, chunked prefill, and fairness.
-- [KV Caching & PagedAttention](https://learn.significanthobbies.com/curriculum/concepts/kv-cache-paged-attention) (core) — Attention-state reuse, KV memory sizing, paging, fragmentation, prefix caching, eviction, and multi-tenant pressure.
-- [FlashAttention & Attention Kernels](https://learn.significanthobbies.com/curriculum/concepts/flashattention-kernels) (core) — IO-aware tiling, fused kernels, SRAM/HBM movement, numerical stability, and hardware-aware attention.
-- [Speculative Decoding](https://learn.significanthobbies.com/curriculum/concepts/speculative-decoding) (core) — Draft models, token verification, acceptance rates, tree speculation, latency, and quality preservation.
-- [GPU Utilization](https://learn.significanthobbies.com/curriculum/concepts/gpu-utilization) (core) — Compute occupancy, memory bandwidth, kernel launch overhead, tensor parallelism, profiling, and saturation.
-- [Inference Cost & Latency Optimization](https://learn.significanthobbies.com/curriculum/concepts/inference-cost-latency) (core) — Time to first token, inter-token latency, throughput, tail latency, utilization, quality, and cost per request.
-- [Local & On-device Inference](https://learn.significanthobbies.com/curriculum/concepts/local-on-device-inference) (core) — llama.cpp, WebGPU, mobile accelerators, model formats, privacy, offline operation, and constrained memory.
-- [Inference Hardware](https://learn.significanthobbies.com/curriculum/concepts/inference-hardware) (core) — GPUs, TPUs, NPUs, CPUs, memory bandwidth, interconnects, topology, precision support, and deployment fit.
+## Hints
+
+- Batch the scan as a matrix multiply.
+- This is your recall=1.0 baseline.
+
+## Sources and practice
+
+- [FAISS — Getting started](https://github.com/facebookresearch/faiss/wiki/Getting-started)
+- [Study Brute-Force Vector DB](https://learn.significanthobbies.com/curriculum/concepts/brute-force-vector-db)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-brute-force-index)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/agent-systems -->
-# Agent Systems
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/explain-hnsw-layers -->
+# Explain HNSW search on paper
 
-> Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+> Draw a 3-layer HNSW graph and trace a query: which layer it enters, how it greedily hops, when it descends, and where efSearch widens the search.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/agent-systems
+Canonical: https://learn.significanthobbies.com/curriculum/drills/explain-hnsw-layers
 
-Agent loops, tools, memory, MCP, coordination, durable execution, permissions, computer use, and long-running work.
+Draw a 3-layer HNSW graph and trace a query: which layer it enters, how it greedily hops, when it descends, and where efSearch widens the search.
 
-This track contains 17 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+HNSW builds a layered proximity graph: sparse upper layers for long hops, dense lower layers for fine search. A query greedily walks toward the nearest neighbour, descending layers, so it touches a small neighbourhood instead of the whole set. Malkov & Yashunin report polylogarithmic search cost empirically — it is a measured scaling, not a proven bound.
 
-- [12-Week Agent Systems](https://learn.significanthobbies.com/curriculum/roadmaps/agent-systems-12w) — Engineer useful agents with bounded loops, tools, memory, protocols, durability, permissions, and long-running control.
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering) — Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.
+## Expected evidence
 
-## Concepts
+A diagram + walkthrough showing O(log n) traversal instead of O(n) scan.
 
-- [Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling) (core) — Letting an LLM invoke functions/APIs via structured calls.
-- [Agent Loops](https://learn.significanthobbies.com/curriculum/concepts/agent-loops) (advanced) — The plan → act → observe loop, with memory and stopping conditions.
-- [Agent Memory & Context Management](https://learn.significanthobbies.com/curriculum/concepts/agent-memory-context) (core) — Working context, summaries, retrieval, episodic state, durable memory, compaction, provenance, and forgetting.
-- [MCP & Integrations](https://learn.significanthobbies.com/curriculum/concepts/mcp-integrations) (core) — Model Context Protocol hosts, clients, servers, tools, resources, prompts, transports, capability negotiation, and trust.
-- [Multi-agent Coordination](https://learn.significanthobbies.com/curriculum/concepts/multi-agent-coordination) (core) — Delegation, specialization, shared state, handoffs, arbitration, budgets, and avoiding coordination overhead.
-- [Durable Agent Execution](https://learn.significanthobbies.com/curriculum/concepts/durable-agent-execution) (core) — Checkpointed loops, resumable tools, idempotency, leases, event histories, retries, and crash recovery.
-- [Agent Permissions & Sandboxing](https://learn.significanthobbies.com/curriculum/concepts/agent-permissions-sandboxing) (core) — Capability grants, read/write scopes, approval gates, secret isolation, network policy, quotas, and audit logs.
-- [Browser & Computer-use Agents](https://learn.significanthobbies.com/curriculum/concepts/browser-computer-use-agents) (core) — DOM and accessibility-tree control, screenshots, visual grounding, action planning, waits, recovery, and confirmation.
-- [Agent Communication & Interfaces](https://learn.significanthobbies.com/curriculum/concepts/agent-communication-interfaces) (core) — Typed messages, events, artifacts, streaming updates, human checkpoints, agent-to-agent protocols, and UI status.
-- [Long-running & Scheduled Agents](https://learn.significanthobbies.com/curriculum/concepts/long-running-scheduled-agents) (core) — Cron triggers, queues, leases, heartbeats, deadlines, cancellation, checkpoints, notifications, and cost budgets.
-- [Repository Instruction Topology](https://learn.significanthobbies.com/curriculum/concepts/repository-instruction-topology) (core) — Repository-wide and path-local instructions, precedence, ownership boundaries, and concise executable guidance for coding agents.
-- [Agent Environment Contracts](https://learn.significanthobbies.com/curriculum/concepts/agent-environment-contracts) (core) — Deterministic bootstrap, dependency and runtime discovery, readiness probes, isolated workspaces, and explicit validation commands.
-- [Agent Work State & Handoffs](https://learn.significanthobbies.com/curriculum/concepts/agent-work-state-handoffs) (core) — Versioned goals, plans, checkpoints, evidence, blockers, and next actions that let a new session resume without relying on hidden conversational memory.
-- [Agent Scope Control](https://learn.significanthobbies.com/curriculum/concepts/agent-scope-control) (core) — Bounded task decomposition, allowed edit roots, budgets, change-size limits, and escalation when evidence invalidates the plan.
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification) (advanced) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
-- [Agent Run Lifecycle](https://learn.significanthobbies.com/curriculum/concepts/agent-run-lifecycle) (advanced) — Run initialization, leases and heartbeats, progress transitions, budgets, completion evidence, cancellation, escalation, and safe termination.
-- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation) (advanced) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
+## Hints
+
+- Upper layers = long hops; lower layers = fine search.
+- efSearch trades recall for latency.
+
+## Sources and practice
+
+- [Efficient and robust ANN using HNSW graphs (Malkov & Yashunin)](https://arxiv.org/abs/1603.09320)
+- [Study HNSW](https://learn.significanthobbies.com/curriculum/concepts/hnsw)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/explain-hnsw-layers)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
 ---
-<!-- source: https://learn.significanthobbies.com/curriculum/tracks/ai-reliability -->
-# Evaluation & AI Reliability
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/implement-metadata-filter -->
+# Add metadata filtering to vector search
 
-> LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+> Extend your brute-force index to support 'nearest WHERE field = value'. Implement both pre-filtering and post-filtering and compare results and timing.
 
-Canonical: https://learn.significanthobbies.com/curriculum/tracks/ai-reliability
+Canonical: https://learn.significanthobbies.com/curriculum/drills/implement-metadata-filter
 
-LLM and agent evaluations, regression gates, failure detection, tracing, verification, human review, and quality economics.
+Extend your brute-force index to support 'nearest WHERE field = value'. Implement both pre-filtering and post-filtering and compare results and timing.
 
-This track contains 14 connected concepts. Mastery means explaining each
-mechanism, predicting its failure modes, and supporting decisions with code,
-measurements, or a reviewable design artifact.
+## The mechanism
 
-## Roadmaps
+Real queries are 'nearest vectors WHERE tenant=X AND date>Y'. Pre-filtering shrinks the candidate set before ANN (accurate, can be slow); post-filtering runs ANN then drops misses (fast, can return too few). The hard part is doing it inside a graph index.
 
-- [12-Week Evaluation & AI Reliability](https://learn.significanthobbies.com/curriculum/roadmaps/ai-reliability-12w) — Build an evidence-backed evaluation and observability system for models, tools, and agents.
-- [Harness Engineering](https://learn.significanthobbies.com/curriculum/roadmaps/harness-engineering) — Design, build, verify, and evaluate the environment around a coding agent so it can make reliable progress across bounded and long-running tasks.
+## Expected evidence
 
-## Concepts
+Filtered top-k that always returns k items when k qualify.
 
-- [Prompt & Version Logging](https://learn.significanthobbies.com/curriculum/concepts/prompt-versioning) (core) — Treating prompts as versioned artifacts with logged inputs/outputs.
-- [LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals) (core) — Measuring LLM output quality with datasets, graders, and LLM-as-judge.
-- [Model Evaluation](https://learn.significanthobbies.com/curriculum/concepts/ml-evaluation) (core) — Held-out loss, baselines, hallucination, leakage.
-- [Coding-agent Benchmarks](https://learn.significanthobbies.com/curriculum/concepts/coding-agent-benchmarks) (core) — Issue resolution tasks, repository setup, patch grading, test-based scoring, contamination, and benchmark validity.
-- [Tool-use Evaluations](https://learn.significanthobbies.com/curriculum/concepts/tool-use-evaluations) (core) — Tool selection, argument correctness, sequencing, recovery, side-effect safety, and end-state verification.
-- [AI Regression Testing](https://learn.significanthobbies.com/curriculum/concepts/ai-regression-testing) (core) — Frozen eval sets, golden cases, rubric versions, stochastic thresholds, canaries, and release gates.
-- [Hallucination & Failure Detection](https://learn.significanthobbies.com/curriculum/concepts/hallucination-failure-detection) (core) — Unsupported claims, citations, abstention, tool errors, constraint violations, uncertainty, and escalation.
-- [Agent Observability](https://learn.significanthobbies.com/curriculum/concepts/agent-observability) (core) — Runs, steps, prompts, model calls, tool calls, tokens, costs, errors, state changes, and outcome metrics.
-- [Tracing & Replay](https://learn.significanthobbies.com/curriculum/concepts/tracing-replay) (core) — Deterministic inputs, event logs, snapshots, prompt/model versions, tool fixtures, and counterfactual re-execution.
-- [Evidence-backed Verification](https://learn.significanthobbies.com/curriculum/concepts/evidence-backed-verification) (core) — Claims, source provenance, executable checks, screenshots, diffs, test outputs, and acceptance criteria.
-- [Human Review Systems](https://learn.significanthobbies.com/curriculum/concepts/human-review-systems) (core) — Review queues, risk routing, disagreement, calibration, escalation, auditability, and learning from corrections.
-- [Quality, Cost & Latency Measurement](https://learn.significanthobbies.com/curriculum/concepts/quality-cost-latency-measurement) (core) — Task success, calibrated quality, token and tool cost, latency distributions, reliability, and Pareto frontiers.
-- [Independent Agent Verification](https://learn.significanthobbies.com/curriculum/concepts/independent-agent-verification) (advanced) — Maker-checker role separation, independent evidence gathering, adversarial review, and acceptance gates that do not trust the producer's self-report.
-- [Harness Evaluation](https://learn.significanthobbies.com/curriculum/concepts/harness-evaluation) (advanced) — Task suites, outcome rubrics, trajectory metrics, cost and latency budgets, ablations, and regression gates for the harness rather than the model alone.
+## Hints
+
+- Post-filtering an ANN result can return fewer than k.
+- Pre-filtering is exact but scans the filtered subset.
+
+## Sources and practice
+
+- [Pinecone — Filtering with metadata](https://www.pinecone.io/learn/vector-search-filtering/)
+- [Weaviate — Filtered ANN search](https://weaviate.io/blog/speed-up-filtered-vector-search)
+- [Study Metadata Filtering](https://learn.significanthobbies.com/curriculum/concepts/metadata-filtering)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/implement-metadata-filter)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
 
 
-Included 46 of 335 registered public pages (limit 50 pages / 500000 characters).
+---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-rag-pipeline -->
+# Build a minimal RAG pipeline
+
+> Chunk a small document set, embed and index it, retrieve for a query, pack context, and generate a grounded answer.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-rag-pipeline
+
+Chunk a small document set, embed and index it, retrieve for a query, pack context, and generate a grounded answer.
+
+## The mechanism
+
+RAG = retrieve relevant chunks, pack them into the prompt, then generate. The quality ceiling is set by retrieval — a perfect LLM cannot answer from context it never received. Most 'RAG is bad' problems are retrieval problems.
+
+## Expected evidence
+
+Answers grounded in retrieved chunks, with sources.
+
+## Hints
+
+- Retrieval quality is the ceiling — debug retrieval first.
+- Keep the eval set fixed.
+
+## Sources and practice
+
+- [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al.)](https://arxiv.org/abs/2005.11401)
+- [Lilian Weng — How to Build an Open-Domain Question Answering System?](https://lilianweng.github.io/posts/2020-10-29-odqa/)
+- [LangChain — RAG from scratch](https://python.langchain.com/docs/tutorials/rag/)
+- [Pinecone — RAG guide](https://www.pinecone.io/learn/retrieval-augmented-generation/)
+- [Study RAG](https://learn.significanthobbies.com/curriculum/concepts/rag)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-rag-pipeline)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
+
+
+---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-chunker -->
+# Build a structure-aware chunker
+
+> Write a chunker that splits on document structure (headings/paragraphs) with a target size and overlap, instead of fixed character cuts.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-chunker
+
+Write a chunker that splits on document structure (headings/paragraphs) with a target size and overlap, instead of fixed character cuts.
+
+## The mechanism
+
+A chunk is the atomic unit of retrieval — too big and embeddings blur, too small and context is lost. Good chunking respects structure (headings, functions, paragraphs) and adds overlap so answers are not cut in half.
+
+## Expected evidence
+
+Chunks that respect structure and overlap at boundaries.
+
+## Hints
+
+- Overlap prevents losing boundary-spanning answers.
+- Different document types may need different strategies.
+
+## Sources and practice
+
+- [Pinecone — Chunking strategies](https://www.pinecone.io/learn/chunking-strategies/)
+- [Study Chunking](https://learn.significanthobbies.com/curriculum/concepts/chunking)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-chunker)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
+
+
+---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/structured-extraction -->
+# Schema-constrained extraction
+
+> Define a JSON schema and use structured-output mode to extract typed fields from unstructured text. Validate the result and reject on failure.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/structured-extraction
+
+Define a JSON schema and use structured-output mode to extract typed fields from unstructured text. Validate the result and reject on failure.
+
+## The mechanism
+
+Free text is unparseable glue between systems. Structured outputs constrain generation to a schema (via grammar/JSON mode) so the model's answer is a typed object your code can trust — or reject.
+
+## Expected evidence
+
+A validated typed object, or an explicit rejection.
+
+## Hints
+
+- Use schema/JSON mode, not regex on prose.
+- Always validate before trusting downstream.
+
+## Sources and practice
+
+- [OpenAI — Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+- [Study Structured Outputs](https://learn.significanthobbies.com/curriculum/concepts/structured-outputs)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/structured-extraction)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
+
+
+---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-tool-loop -->
+# Build a tool-calling loop
+
+> Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a tool call, you execute it, feed the result back, repeat until done.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-tool-loop
+
+Give an LLM two tools (e.g. search and calculator). Run a loop: model emits a tool call, you execute it, feed the result back, repeat until done.
+
+## The mechanism
+
+Tool calling turns the LLM into a planner: it emits a structured request to a named tool, your code executes it, and the result goes back into context. The model never runs code — it decides what to run.
+
+## Expected evidence
+
+A task solved across multiple tool calls.
+
+## Hints
+
+- Tool descriptions must be precise.
+- Handle failed tool calls explicitly.
+
+## Sources and practice
+
+- [Anthropic — Tool use](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)
+- [Study Tool Calling](https://learn.significanthobbies.com/curriculum/concepts/tool-calling)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-tool-loop)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
+
+
+---
+<!-- source: https://learn.significanthobbies.com/curriculum/drills/build-llm-eval -->
+# Build an LLM eval
+
+> Create a dataset of inputs with expected behavior and a grader (deterministic or LLM-as-judge). Run it as one command and score a prompt.
+
+Canonical: https://learn.significanthobbies.com/curriculum/drills/build-llm-eval
+
+Create a dataset of inputs with expected behavior and a grader (deterministic or LLM-as-judge). Run it as one command and score a prompt.
+
+## The mechanism
+
+Evals are unit tests for non-deterministic systems. Fix a dataset of inputs with expected behavior, define a grader (exact match, rubric, or LLM-as-judge), and run it on every prompt/model change. Scope: this card owns constructing the grader — dataset design, rubric writing, and LLM-as-judge including its calibration and bias checks. Running those graders as a release gate is `ai-regression-testing`; grading an agent's actions rather than its text is `tool-use-evaluations`.
+
+## Expected evidence
+
+A pass-rate score that changes when you change the prompt.
+
+## Hints
+
+- Cover real failure modes, not just happy paths.
+- Validate an LLM judge against human labels.
+
+## Sources and practice
+
+- [Your AI product needs evals (Hamel Husain)](https://hamel.dev/blog/posts/evals/)
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685)
+- [HELM — Holistic Evaluation of Language Models (Stanford CRFM)](https://crfm.stanford.edu/helm/)
+- [EleutherAI — lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)
+- [Using LLM-as-a-Judge For Evaluation: A Complete Guide (Hamel Husain)](https://hamel.dev/blog/posts/llm-judge/)
+- [Study LLM Evals](https://learn.significanthobbies.com/curriculum/concepts/llm-evals)
+- [Try the interactive drill](https://learn.significanthobbies.com/drills/build-llm-eval)
+- [All practice briefs](https://learn.significanthobbies.com/curriculum/drills/)
+
+
+Included 50 of 641 registered public pages (limit 50 pages / 500000 characters).
 
 Full catalog: https://learn.significanthobbies.com/api/md/_catalog

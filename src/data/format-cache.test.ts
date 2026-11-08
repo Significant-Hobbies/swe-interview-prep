@@ -60,6 +60,23 @@ async function respond(
     )
   );
 }
+describe('public practice route admission', () => {
+  it('returns a real 404 for an unknown brief rather than the SPA shell', async () => {
+    const response = await respond('text/html', {}, '/curriculum/drills/not-an-authored-drill');
+    expect(response.status).toBe(404);
+    expect(response.headers.get('x-robots-tag')).toBe('noindex');
+  });
+
+  it('keeps known public briefs and the interactive practice route available', async () => {
+    for (const path of [
+      '/curriculum/drills/',
+      '/curriculum/drills/build-tokenizer',
+      '/drills/build-tokenizer',
+    ]) {
+      expect((await respond('text/html', {}, path)).status).toBe(200);
+    }
+  });
+});
 afterEach(() => {
   vi.unstubAllGlobals();
   calls = 0;

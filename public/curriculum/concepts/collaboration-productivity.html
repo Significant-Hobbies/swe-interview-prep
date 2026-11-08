@@ -90,12 +90,12 @@
           <h3>Make three replicas converge</h3>
           <p>Implement mergeGCounter(left, right) and valueGCounter(state). A grow-only counter stores one non-negative count per replica; merge takes the maximum count for every replica, and value sums the merged counts. Your merge must converge when updates arrive in different orders and remain unchanged when the same state is delivered twice.</p>
           <p><strong>Expected evidence:</strong> Three independently updated replicas converge to the same {a:2,b:3,c:4} state and value 9 regardless of merge order.</p>
-          <a href="/drills/build-g-counter-merge">Open the interactive drill →</a>
+          <a href="/curriculum/drills/build-g-counter-merge">Read the practice brief</a> · <a href="/drills/build-g-counter-merge">Open the interactive drill →</a>
         </div><div class="practice-card">
           <h3>Collaborative doc editor</h3>
           <p>Design a Google-Docs-style collaborative editor for 2-50 concurrent editors. Define how clients represent causality, choose OT or a specific CRDT family, explain the sync protocol, and work through two concurrent edits delivered in opposite orders.</p>
           <p><strong>Expected evidence:</strong> Causality model + conflict algorithm + a worked merge showing that replicas reach the intended document state.</p>
-          <a href="/drills/design-collaborative-editor">Open the interactive drill →</a>
+          <a href="/curriculum/drills/design-collaborative-editor">Read the practice brief</a> · <a href="/drills/design-collaborative-editor">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Why is convergence alone insufficient when choosing OT or a CRDT for collaborative editing?</li></ul>
     </section>
