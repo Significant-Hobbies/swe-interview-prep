@@ -90,7 +90,7 @@
           <h3>Implement a bounded agent run lifecycle</h3>
           <p>Implement transitionRun(state, event). Valid states are queued, running, checking, complete, blocked, cancelled. start moves queued to running only when event.ready is true; submit moves running to checking; accept moves checking to complete only when event.evidenceCount is positive; reject moves checking back to running when budget remains and to blocked otherwise; cancel moves any non-terminal state to cancelled. Invalid transitions must throw.</p>
           <p><strong>Expected evidence:</strong> A finite-state lifecycle whose completion and retry transitions require evidence and remaining authority.</p>
-          <a href="/drills/build-complete-harness-lifecycle">Open the interactive drill →</a>
+          <a href="/curriculum/drills/build-complete-harness-lifecycle">Read the practice brief</a> · <a href="/drills/build-complete-harness-lifecycle">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>Design the terminal states and gates for a long-running agent loop. Why is &#39;run until the timer ends&#39; not a safe lifecycle?</li></ul>
     </section>

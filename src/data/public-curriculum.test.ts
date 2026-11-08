@@ -7,6 +7,7 @@ import apiCatalog from '../../public/api-ai.json';
 import catalog from '../../public/curriculum/catalog.json';
 import manifest from '../../public/curriculum/manifest.json';
 import conceptsData from './concepts.json';
+import drillsData from './drills.json';
 import roadmapsData from './roadmaps.json';
 import curriculumSummary from './public-curriculum-summary.json';
 import { TRACKS } from './learning-os';
@@ -21,7 +22,9 @@ describe('public curriculum publication', () => {
     expect(manifest.counts.tracks).toBe(TRACKS.length);
     expect(manifest.counts.roadmaps).toBe(roadmaps.length);
     expect(manifest.counts.concepts).toBe(concepts.length);
-    expect(manifest.htmlPaths).toHaveLength(1 + TRACKS.length + roadmaps.length + concepts.length);
+    expect(manifest.htmlPaths).toHaveLength(
+      2 + TRACKS.length + roadmaps.length + concepts.length + drillsData.drills.length
+    );
 
     for (const track of TRACKS) {
       const escapedTitle = track.title.replaceAll('&', '&amp;');
@@ -207,6 +210,7 @@ describe('public curriculum publication', () => {
       'home',
       'changelog',
       'curriculum',
+      'practice-briefs',
       'system-design',
       'articles',
     ]);
@@ -243,10 +247,9 @@ describe('public curriculum publication', () => {
 
   it('emits complete on-page metadata and one h1 per HTML page', () => {
     for (const path of manifest.htmlPaths) {
-      const file =
-        path === '/curriculum/'
-          ? resolve(root, 'public/curriculum/index.html')
-          : resolve(root, `public${path}.html`);
+      const file = path.endsWith('/')
+        ? resolve(root, `public${path}index.html`)
+        : resolve(root, `public${path}.html`);
       const html = readFileSync(file, 'utf8');
       expect(html.match(/<h1(?:\s[^>]*)?>/g)).toHaveLength(1);
       expect(html).toContain('<meta name="description"');
@@ -263,7 +266,15 @@ describe('public curriculum publication', () => {
         .replaceAll(/&[a-z#0-9]+;/gi, ' ')
         .replaceAll(/\s+/g, ' ')
         .trim();
-      expect(visibleText.split(' ').filter(Boolean).length, path).toBeGreaterThanOrEqual(300);
+      if (path.startsWith('/curriculum/drills/') && !path.endsWith('/')) {
+        const drill = drillsData.drills.find((item) => path.endsWith(`/${item.id}`));
+        expect(drill).toBeDefined();
+        expect(html).toContain('Expected evidence');
+        expect(html).toContain('The mechanism');
+        expect(html).toContain(`/drills/${drill?.id}`);
+      } else {
+        expect(visibleText.split(' ').filter(Boolean).length, path).toBeGreaterThanOrEqual(300);
+      }
     }
   });
 
@@ -293,9 +304,7 @@ describe('public curriculum publication', () => {
 
     const htmlFile = (path: string) => {
       if (path === '/') return resolve(root, 'index.html');
-      if (path === '/curriculum/') return resolve(root, 'public/curriculum/index.html');
-      if (path === '/system-design/') return resolve(root, 'public/system-design/index.html');
-      if (path === '/articles/') return resolve(root, 'public/articles/index.html');
+      if (path.endsWith('/')) return resolve(root, `public${path}index.html`);
       if (path === '/changelog') return resolve(root, 'public/changelog.html');
       return resolve(root, `public${path}.html`);
     };
@@ -331,10 +340,9 @@ describe('public curriculum publication', () => {
 
   it('renders the canonical navigation model on every generated page', () => {
     for (const path of manifest.htmlPaths) {
-      const file =
-        path === '/curriculum/'
-          ? resolve(root, 'public/curriculum/index.html')
-          : resolve(root, `public${path}.html`);
+      const file = path.endsWith('/')
+        ? resolve(root, `public${path}index.html`)
+        : resolve(root, `public${path}.html`);
       const html = readFileSync(file, 'utf8');
       expect(html).toContain('<nav class="desktop-nav" aria-label="Primary">');
       expect(html).toContain('<nav aria-label="Compact">');

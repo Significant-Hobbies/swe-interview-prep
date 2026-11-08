@@ -90,7 +90,7 @@
           <h3>Exponential backoff with full jitter</h3>
           <p>Implement backoffDelays(attempts, baseMs, capMs, rand) returning the delay for each attempt using capped exponential backoff with FULL jitter: delay = rand() * min(capMs, baseMs * 2^attempt), floored to an integer. `rand` is a supplied function returning [0,1) so the result is deterministic under test. Attempt numbering starts at 0.</p>
           <p><strong>Expected evidence:</strong> backoffDelays(4, 100, 1000, () =&gt; 1) -&gt; [100, 200, 400, 800]</p>
-          <a href="/drills/backoff-with-jitter">Open the interactive drill →</a>
+          <a href="/curriculum/drills/backoff-with-jitter">Read the practice brief</a> · <a href="/drills/backoff-with-jitter">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>A dependency slows down, clients retry three times at each of three layers, and the outage gets worse. Trace the amplification and name the two mechanisms that stop it.</li></ul>
     </section>

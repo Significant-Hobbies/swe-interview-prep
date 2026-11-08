@@ -90,7 +90,7 @@
           <h3>Parameterise instead of escaping</h3>
           <p>Implement buildQuery(table, filters) returning { text, values }: a parameterised SQL string using $1, $2 … placeholders in order, plus the values array. Column names come from a fixed ALLOWED set — reject anything else by throwing. Never interpolate a value into the string.</p>
           <p><strong>Expected evidence:</strong> buildQuery(&#39;users&#39;, {name:&#39;ann&#39;, age:30}) -&gt; { text: &#39;SELECT * FROM users WHERE name = $1 AND age = $2&#39;, values: [&#39;ann&#39;, 30] }</p>
-          <a href="/drills/parameterise-a-query">Open the interactive drill →</a>
+          <a href="/curriculum/drills/parameterise-a-query">Read the practice brief</a> · <a href="/drills/parameterise-a-query">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>A reviewer says &#39;we set CORS headers, so the API is protected from other sites.&#39; Why is that backwards, and what actually defends the endpoint?</li></ul>
     </section>

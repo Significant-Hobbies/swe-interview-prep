@@ -4,6 +4,7 @@
   "generatedFrom": [
     "src/data/learning-os.ts",
     "src/data/concepts.json",
+    "src/data/drills.json",
     "src/data/roadmaps.json",
     "src/data/curriculum-coverage.json",
     "src/data/system-design-cases.ts"
@@ -5286,6 +5287,2753 @@
       "roadmapIds": [
         "harness-engineering"
       ]
+    }
+  ],
+  "drills": [
+    {
+      "id": "build-tokenizer",
+      "title": "Build a search tokenizer",
+      "conceptId": "tokenization",
+      "type": "implementation-task",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-tokenizer",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-tokenizer"
+    },
+    {
+      "id": "build-inverted-index",
+      "title": "Build an inverted index",
+      "conceptId": "inverted-index",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-inverted-index",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-inverted-index"
+    },
+    {
+      "id": "calculate-tfidf",
+      "title": "Calculate a TF-IDF score by hand",
+      "conceptId": "tf-idf",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/calculate-tfidf",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/calculate-tfidf"
+    },
+    {
+      "id": "calculate-bm25-score",
+      "title": "Calculate a BM25 score by hand",
+      "conceptId": "bm25",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/calculate-bm25-score",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/calculate-bm25-score"
+    },
+    {
+      "id": "implement-bm25-ranker",
+      "title": "Implement a BM25 ranker",
+      "conceptId": "bm25",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-bm25-ranker",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-bm25-ranker"
+    },
+    {
+      "id": "compute-precision-recall",
+      "title": "Compute precision and recall by hand",
+      "conceptId": "ranking-metrics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-precision-recall",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-precision-recall"
+    },
+    {
+      "id": "build-search-eval-harness",
+      "title": "Build a search eval harness",
+      "conceptId": "search-evals",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-search-eval-harness",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-search-eval-harness"
+    },
+    {
+      "id": "implement-rrf",
+      "title": "Implement reciprocal rank fusion",
+      "conceptId": "hybrid-search",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-rrf",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-rrf"
+    },
+    {
+      "id": "embed-and-search",
+      "title": "Embed a corpus and search it",
+      "conceptId": "embeddings",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/embed-and-search",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/embed-and-search"
+    },
+    {
+      "id": "implement-similarity-metrics",
+      "title": "Implement similarity metrics",
+      "conceptId": "vector-similarity",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-similarity-metrics",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-similarity-metrics"
+    },
+    {
+      "id": "implement-topk-heap",
+      "title": "Top-k with a bounded heap",
+      "conceptId": "topk-vector-search",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-topk-heap",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-topk-heap"
+    },
+    {
+      "id": "build-brute-force-index",
+      "title": "Build a brute-force vector index",
+      "conceptId": "brute-force-vector-db",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-brute-force-index",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-brute-force-index"
+    },
+    {
+      "id": "explain-hnsw-layers",
+      "title": "Explain HNSW search on paper",
+      "conceptId": "hnsw",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/explain-hnsw-layers",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/explain-hnsw-layers"
+    },
+    {
+      "id": "implement-metadata-filter",
+      "title": "Add metadata filtering to vector search",
+      "conceptId": "metadata-filtering",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-metadata-filter",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-metadata-filter"
+    },
+    {
+      "id": "build-rag-pipeline",
+      "title": "Build a minimal RAG pipeline",
+      "conceptId": "rag",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-rag-pipeline",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-rag-pipeline"
+    },
+    {
+      "id": "build-chunker",
+      "title": "Build a structure-aware chunker",
+      "conceptId": "chunking",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-chunker",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-chunker"
+    },
+    {
+      "id": "structured-extraction",
+      "title": "Schema-constrained extraction",
+      "conceptId": "structured-outputs",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/structured-extraction",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/structured-extraction"
+    },
+    {
+      "id": "build-tool-loop",
+      "title": "Build a tool-calling loop",
+      "conceptId": "tool-calling",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-tool-loop",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-tool-loop"
+    },
+    {
+      "id": "build-llm-eval",
+      "title": "Build an LLM eval",
+      "conceptId": "llm-evals",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-llm-eval",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-llm-eval"
+    },
+    {
+      "id": "implement-token-bucket",
+      "title": "Implement a token-bucket rate limiter",
+      "conceptId": "rate-limiting",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-token-bucket",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-token-bucket"
+    },
+    {
+      "id": "implement-idempotency-key",
+      "title": "Implement idempotency keys",
+      "conceptId": "idempotency",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-idempotency-key",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-idempotency-key"
+    },
+    {
+      "id": "implement-backoff-jitter",
+      "title": "Implement backoff with jitter",
+      "conceptId": "retries-dlq",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/implement-backoff-jitter",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/implement-backoff-jitter"
+    },
+    {
+      "id": "build-memtable-sstable",
+      "title": "Build a memtable + SSTable flush",
+      "conceptId": "lsm-tree",
+      "type": "implementation-task",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-memtable-sstable",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-memtable-sstable"
+    },
+    {
+      "id": "build-wal",
+      "title": "Build a write-ahead log",
+      "conceptId": "wal",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-wal",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-wal"
+    },
+    {
+      "id": "two-sum-hashmap",
+      "title": "Two Sum with a hash map",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/two-sum-hashmap",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/two-sum-hashmap"
+    },
+    {
+      "id": "valid-palindrome-two-pointers",
+      "title": "Valid palindrome with two pointers",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/valid-palindrome-two-pointers",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/valid-palindrome-two-pointers"
+    },
+    {
+      "id": "longest-substring-sliding-window",
+      "title": "Longest substring without repeats",
+      "conceptId": "sliding-window",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/longest-substring-sliding-window",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/longest-substring-sliding-window"
+    },
+    {
+      "id": "search-rotated-array",
+      "title": "Search in a rotated sorted array",
+      "conceptId": "binary-search",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/search-rotated-array",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/search-rotated-array"
+    },
+    {
+      "id": "level-order-traversal",
+      "title": "Binary tree level-order traversal",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/level-order-traversal",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/level-order-traversal"
+    },
+    {
+      "id": "number-of-islands",
+      "title": "Number of islands",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/number-of-islands",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/number-of-islands"
+    },
+    {
+      "id": "house-robber-dp",
+      "title": "House robber (1D DP)",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/house-robber-dp",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/house-robber-dp"
+    },
+    {
+      "id": "kth-largest-heap",
+      "title": "Kth largest element with a heap",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/kth-largest-heap",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/kth-largest-heap"
+    },
+    {
+      "id": "design-parking-lot",
+      "title": "Design a parking lot",
+      "conceptId": "object-modeling",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-parking-lot",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-parking-lot"
+    },
+    {
+      "id": "design-vending-machine",
+      "title": "Design a vending machine",
+      "conceptId": "state-management",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-vending-machine",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-vending-machine"
+    },
+    {
+      "id": "design-pricing-strategies",
+      "title": "Pluggable pricing strategies",
+      "conceptId": "strategy-pattern",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-pricing-strategies",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-pricing-strategies"
+    },
+    {
+      "id": "design-pub-sub-bus",
+      "title": "In-process pub/sub bus",
+      "conceptId": "observer-pattern",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-pub-sub-bus",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-pub-sub-bus"
+    },
+    {
+      "id": "design-notification-factory",
+      "title": "Notification factory",
+      "conceptId": "factory-creational",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-notification-factory",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-notification-factory"
+    },
+    {
+      "id": "design-coffee-decorator",
+      "title": "Coffee-shop order decorator",
+      "conceptId": "decorator-structural",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-coffee-decorator",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-coffee-decorator"
+    },
+    {
+      "id": "design-bank-account-locking",
+      "title": "Concurrent bank transfers",
+      "conceptId": "concurrency-design",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-bank-account-locking",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-bank-account-locking"
+    },
+    {
+      "id": "design-undo-redo",
+      "title": "Undo / redo stack",
+      "conceptId": "command-chain",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-undo-redo",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-undo-redo"
+    },
+    {
+      "id": "design-hotel-booking",
+      "title": "Hotel booking system",
+      "conceptId": "booking-inventory",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-hotel-booking",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-hotel-booking"
+    },
+    {
+      "id": "design-load-balancer",
+      "title": "L7 load balancer",
+      "conceptId": "load-balancing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-load-balancer",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-load-balancer"
+    },
+    {
+      "id": "design-rate-limiter",
+      "title": "Distributed rate limiter",
+      "conceptId": "distributed-infra",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-rate-limiter",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-rate-limiter"
+    },
+    {
+      "id": "design-chat-system",
+      "title": "Realtime chat system",
+      "conceptId": "messaging-realtime",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-chat-system",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-chat-system"
+    },
+    {
+      "id": "design-news-feed",
+      "title": "News feed (Twitter-style)",
+      "conceptId": "social-media",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-news-feed",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-news-feed"
+    },
+    {
+      "id": "design-video-streaming",
+      "title": "Video streaming (Netflix-style)",
+      "conceptId": "streaming-media",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-video-streaming",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-video-streaming"
+    },
+    {
+      "id": "design-ride-sharing",
+      "title": "Ride-sharing dispatch",
+      "conceptId": "location-transport",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-ride-sharing",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-ride-sharing"
+    },
+    {
+      "id": "build-g-counter-merge",
+      "title": "Make three replicas converge",
+      "conceptId": "collaboration-productivity",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-g-counter-merge",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-g-counter-merge"
+    },
+    {
+      "id": "design-collaborative-editor",
+      "title": "Collaborative doc editor",
+      "conceptId": "collaboration-productivity",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-collaborative-editor",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-collaborative-editor"
+    },
+    {
+      "id": "design-search-platform",
+      "title": "Search platform end-to-end",
+      "conceptId": "search-platform-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-search-platform",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-search-platform"
+    },
+    {
+      "id": "design-rag-system",
+      "title": "Production RAG pipeline",
+      "conceptId": "rag-system-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-rag-system",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-rag-system"
+    },
+    {
+      "id": "design-consistent-hashing",
+      "title": "Consistent-hash key router",
+      "conceptId": "consistent-hashing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-consistent-hashing",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-consistent-hashing"
+    },
+    {
+      "id": "design-leader-election",
+      "title": "Leader election walkthrough",
+      "conceptId": "consensus",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-leader-election",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-leader-election"
+    },
+    {
+      "id": "design-online-game-server",
+      "title": "Realtime game server",
+      "conceptId": "game-design",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-online-game-server",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-online-game-server"
+    },
+    {
+      "id": "star-leadership",
+      "title": "STAR: leadership story",
+      "conceptId": "leadership-and-influence",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-leadership",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-leadership"
+    },
+    {
+      "id": "star-conflict",
+      "title": "STAR: peer conflict",
+      "conceptId": "conflict-resolution",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-conflict",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-conflict"
+    },
+    {
+      "id": "star-tough-decision",
+      "title": "STAR: tough decision",
+      "conceptId": "problem-solving-and-decision-making",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-tough-decision",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-tough-decision"
+    },
+    {
+      "id": "star-cross-team",
+      "title": "STAR: cross-team collab",
+      "conceptId": "teamwork-and-collaboration",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-cross-team",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-cross-team"
+    },
+    {
+      "id": "star-failure",
+      "title": "STAR: a real failure",
+      "conceptId": "failure-and-learning",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-failure",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-failure"
+    },
+    {
+      "id": "star-communication",
+      "title": "STAR: explaining to a non-expert",
+      "conceptId": "communication",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-communication",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-communication"
+    },
+    {
+      "id": "star-prioritization",
+      "title": "STAR: ruthless prioritization",
+      "conceptId": "time-management-and-prioritization",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-prioritization",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-prioritization"
+    },
+    {
+      "id": "star-innovation",
+      "title": "STAR: an unconventional idea",
+      "conceptId": "innovation-and-creativity",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-innovation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-innovation"
+    },
+    {
+      "id": "star-customer-feedback",
+      "title": "STAR: acting on customer feedback",
+      "conceptId": "customer-obsession",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-customer-feedback",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-customer-feedback"
+    },
+    {
+      "id": "star-ownership",
+      "title": "STAR: end-to-end ownership",
+      "conceptId": "ownership-and-accountability",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/star-ownership",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/star-ownership"
+    },
+    {
+      "id": "draft-positioning-statement",
+      "title": "Draft a product positioning statement",
+      "conceptId": "positioning",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/draft-positioning-statement",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/draft-positioning-statement"
+    },
+    {
+      "id": "critique-landing-page",
+      "title": "Critique a real landing page",
+      "conceptId": "landing-pages",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/critique-landing-page",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/critique-landing-page"
+    },
+    {
+      "id": "audit-seo-onpage",
+      "title": "On-page SEO audit",
+      "conceptId": "seo",
+      "type": "system-design-prompt",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/audit-seo-onpage",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/audit-seo-onpage"
+    },
+    {
+      "id": "define-north-star-metric",
+      "title": "Define a north-star metric",
+      "conceptId": "product-analytics",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/define-north-star-metric",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/define-north-star-metric"
+    },
+    {
+      "id": "compute-dot-product",
+      "title": "Compute a dot product and angle",
+      "conceptId": "vectors-and-spaces",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-dot-product",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-dot-product"
+    },
+    {
+      "id": "multiply-2x2-matrix",
+      "title": "Multiply 2×2 matrices by hand",
+      "conceptId": "matrices-and-transformations",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/multiply-2x2-matrix",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/multiply-2x2-matrix"
+    },
+    {
+      "id": "interpret-eigenvalue",
+      "title": "Interpret an eigenvalue",
+      "conceptId": "eigenvalues-decomposition",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/interpret-eigenvalue",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/interpret-eigenvalue"
+    },
+    {
+      "id": "conditional-probability-bayes",
+      "title": "Apply Bayes' rule",
+      "conceptId": "probability-fundamentals",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/conditional-probability-bayes",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/conditional-probability-bayes"
+    },
+    {
+      "id": "compute-expectation-variance",
+      "title": "Expectation and variance of a discrete RV",
+      "conceptId": "random-variables",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-expectation-variance",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-expectation-variance"
+    },
+    {
+      "id": "summarize-dataset-stats",
+      "title": "Summarize a small dataset",
+      "conceptId": "descriptive-statistics",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/summarize-dataset-stats",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/summarize-dataset-stats"
+    },
+    {
+      "id": "construct-confidence-interval",
+      "title": "Construct a 95% confidence interval",
+      "conceptId": "estimation-confidence",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/construct-confidence-interval",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/construct-confidence-interval"
+    },
+    {
+      "id": "interpret-p-value",
+      "title": "Interpret a p-value correctly",
+      "conceptId": "hypothesis-testing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/interpret-p-value",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/interpret-p-value"
+    },
+    {
+      "id": "fit-simple-regression",
+      "title": "Fit a simple linear regression",
+      "conceptId": "regression-basics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/fit-simple-regression",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/fit-simple-regression"
+    },
+    {
+      "id": "compute-gradient-2d",
+      "title": "Compute a 2D gradient",
+      "conceptId": "derivatives-and-gradients",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-gradient-2d",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-gradient-2d"
+    },
+    {
+      "id": "independence-inclusion-exclusion",
+      "title": "Independence and inclusion-exclusion",
+      "conceptId": "probability-fundamentals",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/independence-inclusion-exclusion",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/independence-inclusion-exclusion"
+    },
+    {
+      "id": "normal-tail-probability",
+      "title": "Normal tail probability",
+      "conceptId": "random-variables",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/normal-tail-probability",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/normal-tail-probability"
+    },
+    {
+      "id": "correlation-pitfalls",
+      "title": "Correlation pitfalls",
+      "conceptId": "descriptive-statistics",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/correlation-pitfalls",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/correlation-pitfalls"
+    },
+    {
+      "id": "type-errors-power",
+      "title": "Type I vs Type II errors",
+      "conceptId": "hypothesis-testing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/type-errors-power",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/type-errors-power"
+    },
+    {
+      "id": "match-distribution-scenario",
+      "title": "Match distribution to scenario",
+      "conceptId": "classical-distributions",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/match-distribution-scenario",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/match-distribution-scenario"
+    },
+    {
+      "id": "clt-sample-size",
+      "title": "CLT and required sample size",
+      "conceptId": "sampling-and-clt",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/clt-sample-size",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/clt-sample-size"
+    },
+    {
+      "id": "standard-error-mean",
+      "title": "Standard error vs standard deviation",
+      "conceptId": "sampling-and-clt",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/standard-error-mean",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/standard-error-mean"
+    },
+    {
+      "id": "design-ab-test-power",
+      "title": "Design an A/B test with power",
+      "conceptId": "ab-testing-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-ab-test-power",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-ab-test-power"
+    },
+    {
+      "id": "interpret-srm-alert",
+      "title": "Interpret a sample ratio mismatch",
+      "conceptId": "ab-testing-engineering",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/interpret-srm-alert",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/interpret-srm-alert"
+    },
+    {
+      "id": "beta-binomial-posterior",
+      "title": "Beta-Binomial posterior update",
+      "conceptId": "bayesian-inference",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/beta-binomial-posterior",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/beta-binomial-posterior"
+    },
+    {
+      "id": "mle-bernoulli-derivation",
+      "title": "MLE for Bernoulli trials",
+      "conceptId": "maximum-likelihood",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/mle-bernoulli-derivation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/mle-bernoulli-derivation"
+    },
+    {
+      "id": "compute-cross-entropy-bits",
+      "title": "Compute cross-entropy in bits",
+      "conceptId": "information-entropy",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-cross-entropy-bits",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-cross-entropy-bits"
+    },
+    {
+      "id": "compute-covariance-matrix",
+      "title": "Compute covariance and correlation matrix",
+      "conceptId": "covariance-correlation",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-covariance-matrix",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-covariance-matrix"
+    },
+    {
+      "id": "diagnose-overfit-split",
+      "title": "Diagnose overfit with a train/holdout split",
+      "conceptId": "bias-variance-overfitting",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/diagnose-overfit-split",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/diagnose-overfit-split"
+    },
+    {
+      "id": "identify-rank-subspace",
+      "title": "Identify rank and column space",
+      "conceptId": "matrix-rank-basis",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/identify-rank-subspace",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/identify-rank-subspace"
+    },
+    {
+      "id": "pca-variance-explained",
+      "title": "PCA variance explained",
+      "conceptId": "pca-projection",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/pca-variance-explained",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/pca-variance-explained"
+    },
+    {
+      "id": "compute-log-returns-vol",
+      "title": "Log returns and annualized volatility",
+      "conceptId": "returns-volatility",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-log-returns-vol",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-log-returns-vol"
+    },
+    {
+      "id": "interpret-autocorrelation-plot",
+      "title": "Interpret an ACF plot",
+      "conceptId": "stationarity-autocorrelation",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/interpret-autocorrelation-plot",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/interpret-autocorrelation-plot"
+    },
+    {
+      "id": "simulate-markov-chain",
+      "title": "Simulate a two-state Markov chain",
+      "conceptId": "random-walks-markov",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/simulate-markov-chain",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/simulate-markov-chain"
+    },
+    {
+      "id": "compute-sharpe-drawdown",
+      "title": "Sharpe ratio and max drawdown",
+      "conceptId": "portfolio-risk-metrics",
+      "type": "implementation-task",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/compute-sharpe-drawdown",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/compute-sharpe-drawdown"
+    },
+    {
+      "id": "design-honest-backtest",
+      "title": "Design an honest momentum backtest",
+      "conceptId": "momentum-backtest",
+      "type": "system-design-prompt",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-honest-backtest",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-honest-backtest"
+    },
+    {
+      "id": "ml-dot-matmul-shapes",
+      "title": "Dot product and matmul shapes",
+      "conceptId": "ml-math",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-dot-matmul-shapes",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-dot-matmul-shapes"
+    },
+    {
+      "id": "ml-sgd-step-quadratic",
+      "title": "One SGD step on a quadratic",
+      "conceptId": "ml-gradient-descent",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-sgd-step-quadratic",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-sgd-step-quadratic"
+    },
+    {
+      "id": "ml-chain-rule-gate",
+      "title": "Chain rule on a tiny graph",
+      "conceptId": "ml-backprop",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-chain-rule-gate",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-chain-rule-gate"
+    },
+    {
+      "id": "ml-softmax-cross-entropy",
+      "title": "Softmax and cross-entropy loss",
+      "conceptId": "ml-softmax-xent",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-softmax-cross-entropy",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-softmax-cross-entropy"
+    },
+    {
+      "id": "ml-adamw-weight-decay",
+      "title": "AdamW vs L2-on-gradient",
+      "conceptId": "ml-adamw",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-adamw-weight-decay",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-adamw-weight-decay"
+    },
+    {
+      "id": "ml-bpe-merge-step",
+      "title": "One BPE merge step",
+      "conceptId": "ml-tokenization",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-bpe-merge-step",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-bpe-merge-step"
+    },
+    {
+      "id": "ml-perplexity-from-nll",
+      "title": "Perplexity from average NLL",
+      "conceptId": "ml-language-modeling",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-perplexity-from-nll",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-perplexity-from-nll"
+    },
+    {
+      "id": "ml-temperature-sampling",
+      "title": "Temperature scaling logits",
+      "conceptId": "ml-sampling",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-temperature-sampling",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-temperature-sampling"
+    },
+    {
+      "id": "ml-sinusoidal-position",
+      "title": "Sinusoidal position encoding",
+      "conceptId": "ml-embeddings",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-sinusoidal-position",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-sinusoidal-position"
+    },
+    {
+      "id": "ml-scaled-dot-attention",
+      "title": "Scaled dot-product attention weights",
+      "conceptId": "ml-self-attention",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-scaled-dot-attention",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-scaled-dot-attention"
+    },
+    {
+      "id": "ml-multi-head-split",
+      "title": "Split embedding across heads",
+      "conceptId": "ml-multi-head",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-multi-head-split",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-multi-head-split"
+    },
+    {
+      "id": "ml-pre-norm-residual",
+      "title": "Pre-LayerNorm residual block",
+      "conceptId": "ml-transformer-block",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-pre-norm-residual",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-pre-norm-residual"
+    },
+    {
+      "id": "ml-overfit-sanity-check",
+      "title": "Overfit a single batch sanity check",
+      "conceptId": "ml-training",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-overfit-sanity-check",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-overfit-sanity-check"
+    },
+    {
+      "id": "ml-checkpoint-resume",
+      "title": "Checkpoint must include optimizer state",
+      "conceptId": "ml-checkpointing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-checkpoint-resume",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-checkpoint-resume"
+    },
+    {
+      "id": "ml-grpo-group-advantage",
+      "title": "GRPO group-relative advantage",
+      "conceptId": "ml-rl-alignment",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-grpo-group-advantage",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-grpo-group-advantage"
+    },
+    {
+      "id": "ml-lora-param-count",
+      "title": "LoRA parameter count",
+      "conceptId": "ml-lora",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-lora-param-count",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-lora-param-count"
+    },
+    {
+      "id": "ml-token-budget-estimate",
+      "title": "Estimate training token budget",
+      "conceptId": "ml-data-engineering",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-token-budget-estimate",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-token-budget-estimate"
+    },
+    {
+      "id": "ml-wasm-linear-memory",
+      "title": "WASM linear memory growth",
+      "conceptId": "ml-browser-runtime",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-wasm-linear-memory",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-wasm-linear-memory"
+    },
+    {
+      "id": "ml-webgpu-buffer-alignment",
+      "title": "WebGPU buffer upload size",
+      "conceptId": "ml-webgpu",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-webgpu-buffer-alignment",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-webgpu-buffer-alignment"
+    },
+    {
+      "id": "ml-eval-perplexity-vs-acc",
+      "title": "Perplexity vs classification accuracy",
+      "conceptId": "ml-evaluation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ml-eval-perplexity-vs-acc",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ml-eval-perplexity-vs-acc"
+    },
+    {
+      "id": "valid-parentheses-stack",
+      "title": "Valid parentheses with a stack",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/valid-parentheses-stack",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/valid-parentheses-stack"
+    },
+    {
+      "id": "reverse-linked-list",
+      "title": "Reverse a linked list in place",
+      "conceptId": "linked-list",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/reverse-linked-list",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/reverse-linked-list"
+    },
+    {
+      "id": "trie-prefix-search",
+      "title": "Trie prefix membership",
+      "conceptId": "tries",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/trie-prefix-search",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/trie-prefix-search"
+    },
+    {
+      "id": "subsets-backtracking",
+      "title": "Generate all subsets",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/subsets-backtracking",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/subsets-backtracking"
+    },
+    {
+      "id": "dijkstra-shortest-path",
+      "title": "Dijkstra shortest path",
+      "conceptId": "shortest-path",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/dijkstra-shortest-path",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/dijkstra-shortest-path"
+    },
+    {
+      "id": "union-find-connected-components",
+      "title": "Union-find component count",
+      "conceptId": "union-find",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/union-find-connected-components",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/union-find-connected-components"
+    },
+    {
+      "id": "grid-min-path-dp",
+      "title": "Minimum path sum in a grid",
+      "conceptId": "dp-2d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/grid-min-path-dp",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/grid-min-path-dp"
+    },
+    {
+      "id": "activity-selection-greedy",
+      "title": "Activity selection greedy",
+      "conceptId": "greedy",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/activity-selection-greedy",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/activity-selection-greedy"
+    },
+    {
+      "id": "merge-intervals",
+      "title": "Merge overlapping intervals",
+      "conceptId": "intervals",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/merge-intervals",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/merge-intervals"
+    },
+    {
+      "id": "gcd-modular",
+      "title": "GCD and modulo arithmetic",
+      "conceptId": "math-geometry",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/gcd-modular",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/gcd-modular"
+    },
+    {
+      "id": "single-number-xor",
+      "title": "Find the single number (XOR)",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/single-number-xor",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/single-number-xor"
+    },
+    {
+      "id": "cross-encoder-rerank",
+      "title": "Cross-encoder rerank top-k",
+      "conceptId": "reranking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/cross-encoder-rerank",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/cross-encoder-rerank"
+    },
+    {
+      "id": "spell-correct-query",
+      "title": "Spell-correct a search query",
+      "conceptId": "query-rewriting",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/spell-correct-query",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/spell-correct-query"
+    },
+    {
+      "id": "browse-vs-search-metrics",
+      "title": "Browse vs search metrics",
+      "conceptId": "search-discovery",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/browse-vs-search-metrics",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/browse-vs-search-metrics"
+    },
+    {
+      "id": "ivf-nprobe-recall",
+      "title": "IVF nprobe vs recall",
+      "conceptId": "ivf",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ivf-nprobe-recall",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ivf-nprobe-recall"
+    },
+    {
+      "id": "pq-codebook-size",
+      "title": "PQ codebook footprint",
+      "conceptId": "product-quantization",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/pq-codebook-size",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/pq-codebook-size"
+    },
+    {
+      "id": "read-recall-latency-curve",
+      "title": "Read a recall–latency curve",
+      "conceptId": "recall-latency-tradeoffs",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/read-recall-latency-curve",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/read-recall-latency-curve"
+    },
+    {
+      "id": "pack-context-budget",
+      "title": "Pack chunks into context budget",
+      "conceptId": "context-packing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/pack-context-budget",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/pack-context-budget"
+    },
+    {
+      "id": "agent-step-limit",
+      "title": "Cap agent tool loop",
+      "conceptId": "agent-loops",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/agent-step-limit",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/agent-step-limit"
+    },
+    {
+      "id": "route-by-query-cost",
+      "title": "Route by cost and difficulty",
+      "conceptId": "model-routing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/route-by-query-cost",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/route-by-query-cost"
+    },
+    {
+      "id": "prompt-version-diff",
+      "title": "Diff two prompt versions",
+      "conceptId": "prompt-versioning",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/prompt-version-diff",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/prompt-version-diff"
+    },
+    {
+      "id": "http-idempotent-retry",
+      "title": "Idempotent POST retry",
+      "conceptId": "http-lifecycle",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/http-idempotent-retry",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/http-idempotent-retry"
+    },
+    {
+      "id": "hash-api-key",
+      "title": "Hash and prefix API keys",
+      "conceptId": "api-keys",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/hash-api-key",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/hash-api-key"
+    },
+    {
+      "id": "webhook-signature-verify",
+      "title": "Verify webhook HMAC",
+      "conceptId": "webhooks",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/webhook-signature-verify",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/webhook-signature-verify"
+    },
+    {
+      "id": "job-at-least-once",
+      "title": "At-least-once job delivery",
+      "conceptId": "background-jobs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/job-at-least-once",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/job-at-least-once"
+    },
+    {
+      "id": "cache-stampede",
+      "title": "Cache stampede",
+      "conceptId": "caching",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/cache-stampede",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/cache-stampede"
+    },
+    {
+      "id": "queue-backpressure",
+      "title": "Queue backpressure",
+      "conceptId": "message-queues",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/queue-backpressure",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/queue-backpressure"
+    },
+    {
+      "id": "slo-error-budget",
+      "title": "SLO error budget",
+      "conceptId": "monitoring-analytics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/slo-error-budget",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/slo-error-budget"
+    },
+    {
+      "id": "design-paginated-api",
+      "title": "Design cursor pagination",
+      "conceptId": "api-design",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/design-paginated-api",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/design-paginated-api"
+    },
+    {
+      "id": "jwt-vs-session-revoke",
+      "title": "JWT revocation tradeoff",
+      "conceptId": "auth-systems",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/jwt-vs-session-revoke",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/jwt-vs-session-revoke"
+    },
+    {
+      "id": "payment-idempotency",
+      "title": "Idempotent charge",
+      "conceptId": "ecommerce-payments",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/payment-idempotency",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/payment-idempotency"
+    },
+    {
+      "id": "b-tree-split",
+      "title": "B-tree page split",
+      "conceptId": "b-tree",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/b-tree-split",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/b-tree-split"
+    },
+    {
+      "id": "lsm-compaction-levels",
+      "title": "LSM compaction levels",
+      "conceptId": "compaction",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lsm-compaction-levels",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lsm-compaction-levels"
+    },
+    {
+      "id": "object-key-layout",
+      "title": "Object key layout",
+      "conceptId": "object-storage",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/object-key-layout",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/object-key-layout"
+    },
+    {
+      "id": "columnar-vs-row",
+      "title": "Columnar vs row store",
+      "conceptId": "columnar-storage",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/columnar-vs-row",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/columnar-vs-row"
+    },
+    {
+      "id": "secondary-index-write",
+      "title": "Secondary index write cost",
+      "conceptId": "secondary-index",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/secondary-index-write",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/secondary-index-write"
+    },
+    {
+      "id": "storage-vs-retrieval",
+      "title": "Storage vs retrieval API",
+      "conceptId": "storage-retrieval",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/storage-vs-retrieval",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/storage-vs-retrieval"
+    },
+    {
+      "id": "shard-key-choice",
+      "title": "Pick a shard key",
+      "conceptId": "sharding",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/shard-key-choice",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/shard-key-choice"
+    },
+    {
+      "id": "replication-lag-read",
+      "title": "Read-your-writes under lag",
+      "conceptId": "replication",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/replication-lag-read",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/replication-lag-read"
+    },
+    {
+      "id": "cap-partition-choice",
+      "title": "CAP under partition",
+      "conceptId": "cap-theorem",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/cap-partition-choice",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/cap-partition-choice"
+    },
+    {
+      "id": "hessian-learning-rate",
+      "title": "Condition number and learning rate",
+      "conceptId": "multivariable-optimization",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/hessian-learning-rate",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/hessian-learning-rate"
+    },
+    {
+      "id": "lc-two-sum",
+      "title": "Two Sum",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-two-sum",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-two-sum"
+    },
+    {
+      "id": "lc-valid-palindrome",
+      "title": "Valid Palindrome",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-valid-palindrome",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-valid-palindrome"
+    },
+    {
+      "id": "lc-best-time-to-buy-and-sell-stock",
+      "title": "Best Time to Buy and Sell Stock",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-best-time-to-buy-and-sell-stock",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-best-time-to-buy-and-sell-stock"
+    },
+    {
+      "id": "lc-contains-duplicate",
+      "title": "Contains Duplicate",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-contains-duplicate",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-contains-duplicate"
+    },
+    {
+      "id": "lc-maximum-subarray",
+      "title": "Maximum Subarray",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-maximum-subarray",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-maximum-subarray"
+    },
+    {
+      "id": "lc-3sum",
+      "title": "3Sum",
+      "conceptId": "two-pointers",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-3sum",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-3sum"
+    },
+    {
+      "id": "lc-longest-substring-without-repeating-characters",
+      "title": "Longest Substring Without Repeating Characters",
+      "conceptId": "sliding-window",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-longest-substring-without-repeating-characters",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-longest-substring-without-repeating-characters"
+    },
+    {
+      "id": "lc-valid-parentheses",
+      "title": "Valid Parentheses",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-valid-parentheses",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-valid-parentheses"
+    },
+    {
+      "id": "lc-merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "conceptId": "linked-list",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-merge-two-sorted-lists",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-merge-two-sorted-lists"
+    },
+    {
+      "id": "lc-binary-search",
+      "title": "Binary Search",
+      "conceptId": "binary-search",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-binary-search",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-binary-search"
+    },
+    {
+      "id": "lc-number-of-islands",
+      "title": "Number of Islands",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-number-of-islands",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-number-of-islands"
+    },
+    {
+      "id": "lc-climbing-stairs",
+      "title": "Climbing Stairs",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-climbing-stairs",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-climbing-stairs"
+    },
+    {
+      "id": "lc-coin-change",
+      "title": "Coin Change",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-coin-change",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-coin-change"
+    },
+    {
+      "id": "lc-house-robber",
+      "title": "House Robber",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-house-robber",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-house-robber"
+    },
+    {
+      "id": "lc-product-of-array-except-self",
+      "title": "Product of Array Except Self",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-product-of-array-except-self",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-product-of-array-except-self"
+    },
+    {
+      "id": "lc-group-anagrams",
+      "title": "Group Anagrams",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-group-anagrams",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-group-anagrams"
+    },
+    {
+      "id": "lc-top-k-frequent-elements",
+      "title": "Top K Frequent Elements",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-top-k-frequent-elements",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-top-k-frequent-elements"
+    },
+    {
+      "id": "lc-invert-binary-tree",
+      "title": "Invert Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-invert-binary-tree",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-invert-binary-tree"
+    },
+    {
+      "id": "lc-maximum-depth-of-binary-tree",
+      "title": "Maximum Depth of Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-maximum-depth-of-binary-tree",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-maximum-depth-of-binary-tree"
+    },
+    {
+      "id": "lc-kth-largest-element-in-an-array",
+      "title": "Kth Largest Element in an Array",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-kth-largest-element-in-an-array",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-kth-largest-element-in-an-array"
+    },
+    {
+      "id": "lc-word-search",
+      "title": "Word Search",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-word-search",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-word-search"
+    },
+    {
+      "id": "lc-permutations",
+      "title": "Permutations",
+      "conceptId": "backtracking",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-permutations",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-permutations"
+    },
+    {
+      "id": "lc-jump-game",
+      "title": "Jump Game",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-jump-game",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-jump-game"
+    },
+    {
+      "id": "lc-merge-intervals",
+      "title": "Merge Intervals",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-merge-intervals",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-merge-intervals"
+    },
+    {
+      "id": "lc-single-number",
+      "title": "Single Number",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-single-number",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-single-number"
+    },
+    {
+      "id": "lc-lowest-common-ancestor-of-a-binary-search-tree",
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-lowest-common-ancestor-of-a-binary-search-tree",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-lowest-common-ancestor-of-a-binary-search-tree"
+    },
+    {
+      "id": "lc-serialize-and-deserialize-binary-tree",
+      "title": "Serialize and Deserialize Binary Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-serialize-and-deserialize-binary-tree",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-serialize-and-deserialize-binary-tree"
+    },
+    {
+      "id": "lc-course-schedule",
+      "title": "Course Schedule",
+      "conceptId": "graphs",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-course-schedule",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-course-schedule"
+    },
+    {
+      "id": "lc-rotting-oranges",
+      "title": "Rotting Oranges",
+      "conceptId": "array-hashing",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-rotting-oranges",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-rotting-oranges"
+    },
+    {
+      "id": "lc-task-scheduler",
+      "title": "Task Scheduler",
+      "conceptId": "heap",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-task-scheduler",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-task-scheduler"
+    },
+    {
+      "id": "lc-subtree-of-another-tree",
+      "title": "Subtree of Another Tree",
+      "conceptId": "trees",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-subtree-of-another-tree",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-subtree-of-another-tree"
+    },
+    {
+      "id": "lc-daily-temperatures",
+      "title": "Daily Temperatures",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-daily-temperatures",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-daily-temperatures"
+    },
+    {
+      "id": "lc-car-fleet",
+      "title": "Car Fleet",
+      "conceptId": "stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-car-fleet",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-car-fleet"
+    },
+    {
+      "id": "lc-non-overlapping-intervals",
+      "title": "Non-overlapping Intervals",
+      "conceptId": "dp-1d",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-non-overlapping-intervals",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-non-overlapping-intervals"
+    },
+    {
+      "id": "lc-sum-of-two-integers",
+      "title": "Sum of Two Integers",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-sum-of-two-integers",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-sum-of-two-integers"
+    },
+    {
+      "id": "lc-reverse-bits",
+      "title": "Reverse Bits",
+      "conceptId": "bit-manipulation",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lc-reverse-bits",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lc-reverse-bits"
+    },
+    {
+      "id": "practice-operating-system-mechanics",
+      "title": "Design exercise: Operating System Mechanics",
+      "conceptId": "operating-system-mechanics",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-operating-system-mechanics",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-operating-system-mechanics"
+    },
+    {
+      "id": "practice-network-protocol-engineering",
+      "title": "Design exercise: Network Protocol Engineering",
+      "conceptId": "network-protocol-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-network-protocol-engineering",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-network-protocol-engineering"
+    },
+    {
+      "id": "practice-compute-memory-storage-hierarchy",
+      "title": "Design exercise: Compute, Memory & Storage Hierarchy",
+      "conceptId": "compute-memory-storage-hierarchy",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-compute-memory-storage-hierarchy",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-compute-memory-storage-hierarchy"
+    },
+    {
+      "id": "practice-runtime-performance-engineering",
+      "title": "Design exercise: Runtime & Performance Engineering",
+      "conceptId": "runtime-performance-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-runtime-performance-engineering",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-runtime-performance-engineering"
+    },
+    {
+      "id": "practice-security-isolation-boundaries",
+      "title": "Design exercise: Security & Isolation Boundaries",
+      "conceptId": "security-isolation-boundaries",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-security-isolation-boundaries",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-security-isolation-boundaries"
+    },
+    {
+      "id": "practice-cloud-infrastructure",
+      "title": "Design exercise: Cloud Infrastructure",
+      "conceptId": "cloud-infrastructure",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-cloud-infrastructure",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-cloud-infrastructure"
+    },
+    {
+      "id": "practice-containers-kubernetes",
+      "title": "Design exercise: Containers & Kubernetes",
+      "conceptId": "containers-kubernetes",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-containers-kubernetes",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-containers-kubernetes"
+    },
+    {
+      "id": "practice-cicd-developer-environments",
+      "title": "Design exercise: CI/CD & Developer Environments",
+      "conceptId": "cicd-developer-environments",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-cicd-developer-environments",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-cicd-developer-environments"
+    },
+    {
+      "id": "practice-platform-scheduling-orchestration",
+      "title": "Design exercise: Scheduling & Orchestration",
+      "conceptId": "platform-scheduling-orchestration",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-platform-scheduling-orchestration",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-platform-scheduling-orchestration"
+    },
+    {
+      "id": "practice-reliability-fault-tolerance",
+      "title": "Design exercise: Reliability & Fault Tolerance",
+      "conceptId": "reliability-fault-tolerance",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-reliability-fault-tolerance",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-reliability-fault-tolerance"
+    },
+    {
+      "id": "practice-opentelemetry-observability",
+      "title": "Design exercise: Observability & OpenTelemetry",
+      "conceptId": "monitoring-analytics",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-opentelemetry-observability",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-opentelemetry-observability"
+    },
+    {
+      "id": "practice-sandbox-execution-environments",
+      "title": "Design exercise: Sandboxes & Execution Environments",
+      "conceptId": "sandbox-execution-environments",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-sandbox-execution-environments",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-sandbox-execution-environments"
+    },
+    {
+      "id": "practice-infrastructure-automation",
+      "title": "Design exercise: Infrastructure Automation",
+      "conceptId": "infrastructure-automation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-infrastructure-automation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-infrastructure-automation"
+    },
+    {
+      "id": "practice-event-streaming-kafka",
+      "title": "Design exercise: Event Streaming & Kafka",
+      "conceptId": "event-streaming-kafka",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-event-streaming-kafka",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-event-streaming-kafka"
+    },
+    {
+      "id": "practice-distributed-workflows-temporal",
+      "title": "Design exercise: Distributed Workflows & Temporal",
+      "conceptId": "distributed-workflows-temporal",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-distributed-workflows-temporal",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-distributed-workflows-temporal"
+    },
+    {
+      "id": "practice-distributed-failure-recovery",
+      "title": "Design exercise: Distributed Failure Recovery",
+      "conceptId": "distributed-failure-recovery",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-distributed-failure-recovery",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-distributed-failure-recovery"
+    },
+    {
+      "id": "practice-transaction-processing",
+      "title": "Design exercise: Transaction Processing",
+      "conceptId": "transaction-processing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-transaction-processing",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-transaction-processing"
+    },
+    {
+      "id": "practice-query-execution-optimization",
+      "title": "Design exercise: Query Execution & Optimization",
+      "conceptId": "query-execution-optimization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-query-execution-optimization",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-query-execution-optimization"
+    },
+    {
+      "id": "practice-warehouses-lakehouses",
+      "title": "Design exercise: Data Warehouses & Lakehouses",
+      "conceptId": "warehouses-lakehouses",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-warehouses-lakehouses",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-warehouses-lakehouses"
+    },
+    {
+      "id": "practice-ml-pretraining",
+      "title": "Design exercise: Model Pre-training",
+      "conceptId": "ml-pretraining",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-ml-pretraining",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-ml-pretraining"
+    },
+    {
+      "id": "practice-model-quantization",
+      "title": "Design exercise: Model Quantization",
+      "conceptId": "model-quantization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-model-quantization",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-model-quantization"
+    },
+    {
+      "id": "practice-open-weight-models",
+      "title": "Design exercise: Open-Weight Models",
+      "conceptId": "open-weight-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-open-weight-models",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-open-weight-models"
+    },
+    {
+      "id": "practice-inference-engines",
+      "title": "Design exercise: vLLM & Inference Engines",
+      "conceptId": "inference-engines",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-inference-engines",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-inference-engines"
+    },
+    {
+      "id": "practice-continuous-batching",
+      "title": "Design exercise: Continuous Batching",
+      "conceptId": "continuous-batching",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-continuous-batching",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-continuous-batching"
+    },
+    {
+      "id": "practice-kv-cache-paged-attention",
+      "title": "Design exercise: KV Caching & PagedAttention",
+      "conceptId": "kv-cache-paged-attention",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-kv-cache-paged-attention",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-kv-cache-paged-attention"
+    },
+    {
+      "id": "practice-flashattention-kernels",
+      "title": "Design exercise: FlashAttention & Attention Kernels",
+      "conceptId": "flashattention-kernels",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-flashattention-kernels",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-flashattention-kernels"
+    },
+    {
+      "id": "practice-speculative-decoding",
+      "title": "Design exercise: Speculative Decoding",
+      "conceptId": "speculative-decoding",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-speculative-decoding",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-speculative-decoding"
+    },
+    {
+      "id": "practice-gpu-utilization",
+      "title": "Design exercise: GPU Utilization",
+      "conceptId": "gpu-utilization",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-gpu-utilization",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-gpu-utilization"
+    },
+    {
+      "id": "practice-inference-cost-latency",
+      "title": "Design exercise: Inference Cost & Latency Optimization",
+      "conceptId": "inference-cost-latency",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-inference-cost-latency",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-inference-cost-latency"
+    },
+    {
+      "id": "practice-local-on-device-inference",
+      "title": "Design exercise: Local & On-device Inference",
+      "conceptId": "local-on-device-inference",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-local-on-device-inference",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-local-on-device-inference"
+    },
+    {
+      "id": "practice-inference-hardware",
+      "title": "Design exercise: Inference Hardware",
+      "conceptId": "inference-hardware",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-inference-hardware",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-inference-hardware"
+    },
+    {
+      "id": "practice-agent-memory-context",
+      "title": "Design exercise: Agent Memory & Context Management",
+      "conceptId": "agent-memory-context",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-agent-memory-context",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-agent-memory-context"
+    },
+    {
+      "id": "practice-mcp-integrations",
+      "title": "Design exercise: MCP & Integrations",
+      "conceptId": "mcp-integrations",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-mcp-integrations",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-mcp-integrations"
+    },
+    {
+      "id": "practice-multi-agent-coordination",
+      "title": "Design exercise: Multi-agent Coordination",
+      "conceptId": "multi-agent-coordination",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-multi-agent-coordination",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-multi-agent-coordination"
+    },
+    {
+      "id": "practice-durable-agent-execution",
+      "title": "Design exercise: Durable Agent Execution",
+      "conceptId": "durable-agent-execution",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-durable-agent-execution",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-durable-agent-execution"
+    },
+    {
+      "id": "practice-agent-permissions-sandboxing",
+      "title": "Design exercise: Agent Permissions & Sandboxing",
+      "conceptId": "agent-permissions-sandboxing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-agent-permissions-sandboxing",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-agent-permissions-sandboxing"
+    },
+    {
+      "id": "practice-browser-computer-use-agents",
+      "title": "Design exercise: Browser & Computer-use Agents",
+      "conceptId": "browser-computer-use-agents",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-browser-computer-use-agents",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-browser-computer-use-agents"
+    },
+    {
+      "id": "practice-agent-communication-interfaces",
+      "title": "Design exercise: Agent Communication & Interfaces",
+      "conceptId": "agent-communication-interfaces",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-agent-communication-interfaces",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-agent-communication-interfaces"
+    },
+    {
+      "id": "practice-long-running-scheduled-agents",
+      "title": "Design exercise: Long-running & Scheduled Agents",
+      "conceptId": "long-running-scheduled-agents",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-long-running-scheduled-agents",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-long-running-scheduled-agents"
+    },
+    {
+      "id": "practice-coding-agent-benchmarks",
+      "title": "Design exercise: Coding-agent Benchmarks",
+      "conceptId": "coding-agent-benchmarks",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-coding-agent-benchmarks",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-coding-agent-benchmarks"
+    },
+    {
+      "id": "practice-tool-use-evaluations",
+      "title": "Design exercise: Tool-use Evaluations",
+      "conceptId": "tool-use-evaluations",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-tool-use-evaluations",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-tool-use-evaluations"
+    },
+    {
+      "id": "practice-ai-regression-testing",
+      "title": "Design exercise: AI Regression Testing",
+      "conceptId": "ai-regression-testing",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-ai-regression-testing",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-ai-regression-testing"
+    },
+    {
+      "id": "practice-hallucination-failure-detection",
+      "title": "Design exercise: Hallucination & Failure Detection",
+      "conceptId": "hallucination-failure-detection",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-hallucination-failure-detection",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-hallucination-failure-detection"
+    },
+    {
+      "id": "practice-agent-observability",
+      "title": "Design exercise: Agent Observability",
+      "conceptId": "agent-observability",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-agent-observability",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-agent-observability"
+    },
+    {
+      "id": "practice-tracing-replay",
+      "title": "Design exercise: Tracing & Replay",
+      "conceptId": "tracing-replay",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-tracing-replay",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-tracing-replay"
+    },
+    {
+      "id": "practice-evidence-backed-verification",
+      "title": "Design exercise: Evidence-backed Verification",
+      "conceptId": "evidence-backed-verification",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-evidence-backed-verification",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-evidence-backed-verification"
+    },
+    {
+      "id": "practice-human-review-systems",
+      "title": "Design exercise: Human Review Systems",
+      "conceptId": "human-review-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-human-review-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-human-review-systems"
+    },
+    {
+      "id": "practice-quality-cost-latency-measurement",
+      "title": "Design exercise: Quality, Cost & Latency Measurement",
+      "conceptId": "quality-cost-latency-measurement",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-quality-cost-latency-measurement",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-quality-cost-latency-measurement"
+    },
+    {
+      "id": "practice-code-review-systems",
+      "title": "Design exercise: Code Review Systems",
+      "conceptId": "code-review-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-code-review-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-code-review-systems"
+    },
+    {
+      "id": "practice-static-dynamic-analysis",
+      "title": "Design exercise: Static & Dynamic Analysis",
+      "conceptId": "static-dynamic-analysis",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-static-dynamic-analysis",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-static-dynamic-analysis"
+    },
+    {
+      "id": "practice-testing-infrastructure",
+      "title": "Design exercise: Testing Infrastructure",
+      "conceptId": "testing-infrastructure",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-testing-infrastructure",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-testing-infrastructure"
+    },
+    {
+      "id": "practice-codebase-graphs",
+      "title": "Design exercise: Codebase Graphs",
+      "conceptId": "codebase-graphs",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-codebase-graphs",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-codebase-graphs"
+    },
+    {
+      "id": "practice-dependency-blast-radius",
+      "title": "Design exercise: Dependency & Blast-radius Analysis",
+      "conceptId": "dependency-blast-radius",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-dependency-blast-radius",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-dependency-blast-radius"
+    },
+    {
+      "id": "practice-ide-cli-tooling",
+      "title": "Design exercise: IDE & CLI Tooling",
+      "conceptId": "ide-cli-tooling",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-ide-cli-tooling",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-ide-cli-tooling"
+    },
+    {
+      "id": "practice-coding-agent-systems",
+      "title": "Design exercise: Coding Agent Systems",
+      "conceptId": "coding-agent-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-coding-agent-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-coding-agent-systems"
+    },
+    {
+      "id": "practice-repository-intelligence",
+      "title": "Design exercise: Repository Intelligence",
+      "conceptId": "repository-intelligence",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-repository-intelligence",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-repository-intelligence"
+    },
+    {
+      "id": "practice-software-supply-chain-health",
+      "title": "Design exercise: Software Supply-chain Health",
+      "conceptId": "software-supply-chain-health",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-software-supply-chain-health",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-software-supply-chain-health"
+    },
+    {
+      "id": "practice-automated-debugging-remediation",
+      "title": "Design exercise: Automated Debugging & Remediation",
+      "conceptId": "automated-debugging-remediation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-automated-debugging-remediation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-automated-debugging-remediation"
+    },
+    {
+      "id": "practice-web-mobile-engineering",
+      "title": "Design exercise: Web & Mobile Engineering",
+      "conceptId": "web-mobile-engineering",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-web-mobile-engineering",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-web-mobile-engineering"
+    },
+    {
+      "id": "practice-ux-interface-design",
+      "title": "Design exercise: UX & Interface Design",
+      "conceptId": "ux-interface-design",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-ux-interface-design",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-ux-interface-design"
+    },
+    {
+      "id": "practice-real-time-application-engineering",
+      "title": "Design exercise: Real-time Application Engineering",
+      "conceptId": "messaging-realtime",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-real-time-application-engineering",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-real-time-application-engineering"
+    },
+    {
+      "id": "practice-interactive-2d-3d-systems",
+      "title": "Design exercise: 2D/3D Interactive Systems",
+      "conceptId": "interactive-2d-3d-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-interactive-2d-3d-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-interactive-2d-3d-systems"
+    },
+    {
+      "id": "practice-multimodal-models",
+      "title": "Design exercise: Multimodal Models",
+      "conceptId": "multimodal-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-multimodal-models",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-multimodal-models"
+    },
+    {
+      "id": "practice-vision-models",
+      "title": "Design exercise: Vision Models",
+      "conceptId": "vision-models",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-vision-models",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-vision-models"
+    },
+    {
+      "id": "practice-pose-motion-tracking",
+      "title": "Design exercise: Pose & Motion Tracking",
+      "conceptId": "pose-motion-tracking",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-pose-motion-tracking",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-pose-motion-tracking"
+    },
+    {
+      "id": "practice-voice-audio-systems",
+      "title": "Design exercise: Voice & Audio Systems",
+      "conceptId": "voice-audio-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-voice-audio-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-voice-audio-systems"
+    },
+    {
+      "id": "practice-image-video-generation",
+      "title": "Design exercise: Image & Video Generation",
+      "conceptId": "image-video-generation",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-image-video-generation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-image-video-generation"
+    },
+    {
+      "id": "practice-robotics-systems",
+      "title": "Design exercise: Robotics Systems",
+      "conceptId": "robotics-systems",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-robotics-systems",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-robotics-systems"
+    },
+    {
+      "id": "practice-spatial-interfaces",
+      "title": "Design exercise: Spatial Interfaces",
+      "conceptId": "spatial-interfaces",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-spatial-interfaces",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-spatial-interfaces"
+    },
+    {
+      "id": "practice-human-computer-interaction",
+      "title": "Design exercise: Human-Computer Interaction",
+      "conceptId": "human-computer-interaction",
+      "type": "system-design-prompt",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-human-computer-interaction",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-human-computer-interaction"
+    },
+    {
+      "id": "analyse-amortised-growth",
+      "title": "Amortised growth of a dynamic array",
+      "conceptId": "complexity-analysis",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/analyse-amortised-growth",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/analyse-amortised-growth"
+    },
+    {
+      "id": "stable-sort-by-key",
+      "title": "Stable sort by one key",
+      "conceptId": "sorting",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/stable-sort-by-key",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/stable-sort-by-key"
+    },
+    {
+      "id": "size-a-write-heavy-service",
+      "title": "Size a write-heavy service",
+      "conceptId": "capacity-estimation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/size-a-write-heavy-service",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/size-a-write-heavy-service"
+    },
+    {
+      "id": "classify-requirements",
+      "title": "Split functional from non-functional",
+      "conceptId": "requirements-scoping",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/classify-requirements",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/classify-requirements"
+    },
+    {
+      "id": "range-sum-queries",
+      "title": "Answer range-sum queries in O(1)",
+      "conceptId": "prefix-sums",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/range-sum-queries",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/range-sum-queries"
+    },
+    {
+      "id": "next-greater-element",
+      "title": "Next greater element",
+      "conceptId": "monotonic-stack",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/next-greater-element",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/next-greater-element"
+    },
+    {
+      "id": "rolling-hash-search",
+      "title": "Rabin-Karp substring search",
+      "conceptId": "string-matching",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/rolling-hash-search",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/rolling-hash-search"
+    },
+    {
+      "id": "kruskal-mst-weight",
+      "title": "Total weight of a minimum spanning tree",
+      "conceptId": "minimum-spanning-tree",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/kruskal-mst-weight",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/kruskal-mst-weight"
+    },
+    {
+      "id": "detect-write-skew",
+      "title": "Detect write skew under snapshot isolation",
+      "conceptId": "isolation-levels",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/detect-write-skew",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/detect-write-skew"
+    },
+    {
+      "id": "pick-a-join-strategy",
+      "title": "Pick the join the planner should pick",
+      "conceptId": "join-algorithms",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/pick-a-join-strategy",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/pick-a-join-strategy"
+    },
+    {
+      "id": "backoff-with-jitter",
+      "title": "Exponential backoff with full jitter",
+      "conceptId": "retries-and-circuit-breakers",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/backoff-with-jitter",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/backoff-with-jitter"
+    },
+    {
+      "id": "parameterise-a-query",
+      "title": "Parameterise instead of escaping",
+      "conceptId": "web-security-basics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/parameterise-a-query",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/parameterise-a-query"
+    },
+    {
+      "id": "utilisation-latency-curve",
+      "title": "Latency against utilisation",
+      "conceptId": "queueing-theory",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/utilisation-latency-curve",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/utilisation-latency-curve"
+    },
+    {
+      "id": "distance-concentration",
+      "title": "Distances concentrate as dimensions grow",
+      "conceptId": "curse-of-dimensionality",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/distance-concentration",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/distance-concentration"
+    },
+    {
+      "id": "wand-threshold-skip",
+      "title": "Skip documents that cannot reach the top k",
+      "conceptId": "top-k-pruning",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/wand-threshold-skip",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/wand-threshold-skip"
+    },
+    {
+      "id": "token-bucket-limiter",
+      "title": "Token bucket rate limiter",
+      "conceptId": "rate-limiter-design",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/token-bucket-limiter",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/token-bucket-limiter"
+    },
+    {
+      "id": "snowflake-id-layout",
+      "title": "Pack and unpack a Snowflake id",
+      "conceptId": "unique-id-generation",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/snowflake-id-layout",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/snowflake-id-layout"
+    },
+    {
+      "id": "recurrence-depth",
+      "title": "Solve a divide-and-conquer recurrence",
+      "conceptId": "recursion-and-induction",
+      "type": "coding-problem",
+      "difficulty": "intro",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/recurrence-depth",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/recurrence-depth"
+    },
+    {
+      "id": "kth-smallest-quickselect",
+      "title": "k-th smallest by quickselect",
+      "conceptId": "quickselect",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/kth-smallest-quickselect",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/kth-smallest-quickselect"
+    },
+    {
+      "id": "find-the-anomaly",
+      "title": "Spot the update anomaly",
+      "conceptId": "normalization",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/find-the-anomaly",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/find-the-anomaly"
+    },
+    {
+      "id": "lru-k-eviction",
+      "title": "Why LRU-K survives a scan",
+      "conceptId": "buffer-pool",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/lru-k-eviction",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/lru-k-eviction"
+    },
+    {
+      "id": "keyset-pagination",
+      "title": "Cursor pagination that survives inserts",
+      "conceptId": "pagination",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/keyset-pagination",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/keyset-pagination"
+    },
+    {
+      "id": "count-with-inclusion-exclusion",
+      "title": "Count with inclusion-exclusion",
+      "conceptId": "combinatorics",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/count-with-inclusion-exclusion",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/count-with-inclusion-exclusion"
+    },
+    {
+      "id": "logsumexp-stable",
+      "title": "Log-sum-exp without overflow",
+      "conceptId": "numerical-stability",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/logsumexp-stable",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/logsumexp-stable"
+    },
+    {
+      "id": "ndcg-at-k",
+      "title": "NDCG@k",
+      "conceptId": "learning-to-rank",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ndcg-at-k",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ndcg-at-k"
+    },
+    {
+      "id": "ipw-debias-clicks",
+      "title": "Debias clicks by inverse propensity",
+      "conceptId": "click-models",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/ipw-debias-clicks",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/ipw-debias-clicks"
+    },
+    {
+      "id": "scalar-quantize-roundtrip",
+      "title": "Scalar quantise and rescore",
+      "conceptId": "vector-quantization",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/scalar-quantize-roundtrip",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/scalar-quantize-roundtrip"
+    },
+    {
+      "id": "count-random-reads",
+      "title": "Cost a disk-resident search by I/O",
+      "conceptId": "disk-based-ann",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/count-random-reads",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/count-random-reads"
+    },
+    {
+      "id": "tombstone-recall-drift",
+      "title": "Tombstones erode recall",
+      "conceptId": "index-updates-tombstones",
+      "type": "coding-problem",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/tombstone-recall-drift",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/tombstone-recall-drift"
+    },
+    {
+      "id": "cache-key-and-ttl",
+      "title": "Decide the edge cache key",
+      "conceptId": "cdn-edge-delivery",
+      "type": "coding-problem",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/cache-key-and-ttl",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/cache-key-and-ttl"
+    },
+    {
+      "id": "practice-data-representation",
+      "title": "Encode a binary compatibility fixture",
+      "conceptId": "data-representation",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-data-representation",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-data-representation"
+    },
+    {
+      "id": "practice-program-memory-model",
+      "title": "Trace a program into process memory",
+      "conceptId": "program-memory-model",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/practice-program-memory-model",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/practice-program-memory-model"
+    },
+    {
+      "id": "build-rules-first-workspace",
+      "title": "Build a scoped repository instruction map",
+      "conceptId": "repository-instruction-topology",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-rules-first-workspace",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-rules-first-workspace"
+    },
+    {
+      "id": "make-agent-readable-workspace",
+      "title": "Define an agent-readable environment contract",
+      "conceptId": "agent-environment-contracts",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/make-agent-readable-workspace",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/make-agent-readable-workspace"
+    },
+    {
+      "id": "build-multi-session-continuity",
+      "title": "Create a durable agent handoff",
+      "conceptId": "agent-work-state-handoffs",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-multi-session-continuity",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-multi-session-continuity"
+    },
+    {
+      "id": "add-feedback-and-scope-control",
+      "title": "Enforce runtime scope and escalation",
+      "conceptId": "agent-scope-control",
+      "type": "coding",
+      "difficulty": "core",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/add-feedback-and-scope-control",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/add-feedback-and-scope-control"
+    },
+    {
+      "id": "separate-maker-and-checker",
+      "title": "Separate maker claims from checker evidence",
+      "conceptId": "independent-agent-verification",
+      "type": "coding",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/separate-maker-and-checker",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/separate-maker-and-checker"
+    },
+    {
+      "id": "build-complete-harness-lifecycle",
+      "title": "Implement a bounded agent run lifecycle",
+      "conceptId": "agent-run-lifecycle",
+      "type": "coding",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/build-complete-harness-lifecycle",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/build-complete-harness-lifecycle"
+    },
+    {
+      "id": "evaluate-automated-agent-loop",
+      "title": "Evaluate and ablate an agent harness",
+      "conceptId": "harness-evaluation",
+      "type": "coding",
+      "difficulty": "advanced",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/evaluate-automated-agent-loop",
+      "practiceUrl": "https://learn.significanthobbies.com/drills/evaluate-automated-agent-loop"
     }
   ],
   "systemDesignCases": [

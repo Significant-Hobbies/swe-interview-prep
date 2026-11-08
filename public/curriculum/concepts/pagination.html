@@ -90,7 +90,7 @@
           <h3>Cursor pagination that survives inserts</h3>
           <p>Implement page(rows, cursor, limit) for keyset pagination. Rows are {id, createdAt} sorted by (createdAt, id) ascending. cursor is null for the first page or {createdAt, id} for &#39;resume strictly after this&#39;. Return { items, nextCursor } where nextCursor is the last item&#39;s key, or null when the page is not full.</p>
           <p><strong>Expected evidence:</strong> Two sequential pages return disjoint items even when a row is inserted between the calls.</p>
-          <a href="/drills/keyset-pagination">Open the interactive drill →</a>
+          <a href="/curriculum/drills/keyset-pagination">Read the practice brief</a> · <a href="/drills/keyset-pagination">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>An endpoint using OFFSET is fine on page 1 and times out on page 5,000, and users occasionally report a duplicated row. Explain both symptoms and the single change that fixes them.</li></ul>
     </section>

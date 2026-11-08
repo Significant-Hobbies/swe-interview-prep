@@ -90,6 +90,7 @@ const artifactsById = byId(ARTIFACTS);
 // Cloudflare Pages maps the generated `.html` files to extensionless public
 // URLs. Link and canonical to those final routes so crawlers never take a 308.
 const conceptUrl = (id) => `/curriculum/concepts/${id}`;
+const drillUrl = (id) => `/curriculum/drills/${id}`;
 const trackUrl = (id) => `/curriculum/tracks/${id}`;
 const roadmapUrl = (id) => `/curriculum/roadmaps/${id}`;
 const systemDesignGuideUrl = (caseDefinition) =>
@@ -348,7 +349,7 @@ function conceptPage(concept) {
           <h3>${escapeHtml(drill.title)}</h3>
           <p>${escapeHtml(drill.prompt)}</p>
           <p><strong>Expected evidence:</strong> ${escapeHtml(drill.expectedOutput)}</p>
-          <a href="/drills/${escapeHtml(drill.id)}">Open the interactive drill →</a>
+          <a href="${drillUrl(drill.id)}">Read the practice brief</a> · <a href="/drills/${escapeHtml(drill.id)}">Open the interactive drill →</a>
         </div>`
               )
               .join('')
@@ -426,6 +427,107 @@ function conceptPage(concept) {
       },
     },
   });
+}
+
+function drillPage(drill) {
+  const concept = conceptsById.get(drill.conceptId);
+  if (!concept) throw new Error(`Drill ${drill.id} has no known concept`);
+  const related = DRILLS.filter(
+    (item) => item.conceptId === drill.conceptId && item.id !== drill.id
+  );
+  return page({
+    title: drill.title,
+    description: drill.prompt,
+    path: drillUrl(drill.id),
+    type: 'concept',
+    breadcrumbs: [{ label: concept.name, href: conceptUrl(concept.id) }],
+    body: `<article>
+      <p class="eyebrow">${escapeHtml(drill.difficulty)} practice · ${escapeHtml(drill.type.replaceAll('-', ' '))}</p>
+      <h1>${escapeHtml(drill.title)}</h1>
+      <p class="lede drill-prompt">${escapeHtml(drill.prompt)}</p>
+      <section><h2>The mechanism</h2><p>${escapeHtml(concept.mentalModel)}</p>
+        <p><a href="${conceptUrl(concept.id)}">Study ${escapeHtml(concept.name)}</a></p>
+      </section>
+      <section><h2>Expected evidence</h2><pre>${escapeHtml(drill.expectedOutput)}</pre></section>
+      <p class="cta"><a href="/drills/${escapeHtml(drill.id)}">Try this drill in the practice workspace →</a></p>
+      ${drill.hints.length ? `<details class="practice-card"><summary>Hints when you need them</summary><ul>${drill.hints.map((hint) => `<li>${escapeHtml(hint)}</li>`).join('')}</ul></details>` : ''}
+      ${concept.commonMistakes?.length ? `<section><h2>Watch for these mistakes</h2><ul>${concept.commonMistakes.map((mistake) => `<li>${escapeHtml(mistake)}</li>`).join('')}</ul></section>` : ''}
+      ${concept.resources?.length ? `<section><h2>Check the sources</h2><ul>${concept.resources.map((resource) => `<li><a href="${escapeHtml(resource.url)}" rel="noreferrer">${escapeHtml(resource.title)}</a></li>`).join('')}</ul></section>` : ''}
+      ${related.length ? `<section><h2>Practice the same mechanism</h2>${linkList(related, (item) => drillUrl(item.id))}</section>` : ''}
+      <p><a href="/curriculum/drills/">Browse all practice briefs</a></p>
+    </article>`,
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'LearningResource',
+      name: drill.title,
+      description: drill.prompt,
+      url: absolute(drillUrl(drill.id)),
+      educationalLevel: drill.difficulty,
+      learningResourceType: 'Practice exercise',
+      teaches: concept.name,
+      isPartOf: {
+        '@type': 'CollectionPage',
+        name: 'SWE Prep practice briefs',
+        url: absolute('/curriculum/drills/'),
+      },
+    },
+  });
+}
+
+function drillsHubPage() {
+  return page({
+    title: 'Software engineering practice briefs',
+    description: `${DRILLS.length} authored practice prompts with expected evidence, hints, concept explanations and primary sources.`,
+    path: '/curriculum/drills/',
+    type: 'collection',
+    body: `<article><p class="eyebrow">${DRILLS.length} practice briefs</p>
+      <h1>Build something you can check</h1>
+      <p class="lede">Choose a mechanism, attempt the task, and compare what you made with the expected evidence. Hints stay separate from the prompt so you can try it first.</p>
+      ${TRACKS.map((track) => {
+        const drills = DRILLS.filter((drill) =>
+          conceptsById.get(drill.conceptId)?.tags.includes(track.id)
+        );
+        return drills.length
+          ? `<section><h2>${escapeHtml(track.title)}</h2>${linkList(drills, (item) => drillUrl(item.id))}</section>`
+          : '';
+      }).join('')}
+      <section><h2>All practice prompts</h2>${linkList(DRILLS, (item) => drillUrl(item.id))}</section>
+    </article>`,
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Software engineering practice briefs',
+      url: absolute('/curriculum/drills/'),
+      numberOfItems: DRILLS.length,
+    },
+  });
+}
+
+function drillMarkdown(drill) {
+  const concept = conceptsById.get(drill.conceptId);
+  return `# ${drill.title}
+
+${drill.prompt}
+
+## The mechanism
+
+${concept.mentalModel}
+
+## Expected evidence
+
+${drill.expectedOutput}
+
+## Hints
+
+${drill.hints.map((hint) => `- ${hint}`).join('\n')}
+
+## Sources and practice
+
+${(concept.resources ?? []).map((resource) => `- [${resource.title}](${resource.url})`).join('\n')}
+- [Study ${concept.name}](${absolute(conceptUrl(concept.id))})
+- [Try the interactive drill](${absolute(`/drills/${drill.id}`)})
+- [All practice briefs](${absolute('/curriculum/drills/')})
+`;
 }
 
 function trackPage(track) {
@@ -619,6 +721,10 @@ function hubPage() {
       ).join('')}</div>
     </section>
     <section>
+      <h2>Try an authored practice prompt</h2>
+      <p><a href="/curriculum/drills/">Browse ${DRILLS.length} practice briefs</a> with expected evidence, progressive hints and the concepts behind each task.</p>
+    </section>
+    <section>
       <h2>Requested domain coverage</h2>
       <p>The expanded taxonomy maps ${coverage.categories.length} broad domains and ${coverage.categories.reduce(
         (sum, category) => sum + category.topics.length,
@@ -707,6 +813,8 @@ h4{color:#d4d4d8}
 .lede{font-size:clamp(1.08rem,2vw,1.35rem);color:#d4d4d8;max-width:780px}
 .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:#71717a}
 .muted{color:var(--muted)}
+.drill-prompt{white-space:pre-line;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid var(--line);background:var(--panel);padding:16px;border-radius:8px}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}
 .pills span{border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#d4d4d8;font-size:.78rem}
 .grid{display:grid;gap:20px}
@@ -1361,6 +1469,7 @@ function catalogData() {
     generatedFrom: [
       'src/data/learning-os.ts',
       'src/data/concepts.json',
+      'src/data/drills.json',
       'src/data/roadmaps.json',
       'src/data/curriculum-coverage.json',
       'src/data/system-design-cases.ts',
@@ -1408,6 +1517,15 @@ function catalogData() {
       tags: concept.tags,
       url: absolute(conceptUrl(concept.id)),
       roadmapIds: concept.roadmaps,
+    })),
+    drills: DRILLS.map((drill) => ({
+      id: drill.id,
+      title: drill.title,
+      conceptId: drill.conceptId,
+      type: drill.type,
+      difficulty: drill.difficulty,
+      url: absolute(drillUrl(drill.id)),
+      practiceUrl: absolute(`/drills/${drill.id}`),
     })),
     systemDesignCases: SYSTEM_DESIGN_CASES.map((caseDefinition) => ({
       id: caseDefinition.id,
@@ -1649,9 +1767,11 @@ writeFileSync(
 );
 const htmlPaths = [
   '/curriculum/',
+  '/curriculum/drills/',
   ...TRACKS.map((track) => trackUrl(track.id)),
   ...ROADMAPS.map((roadmap) => roadmapUrl(roadmap.id)),
   ...CONCEPTS.map((concept) => conceptUrl(concept.id)),
+  ...DRILLS.map((drill) => drillUrl(drill.id)),
 ];
 const systemDesignHtmlPaths = [
   '/system-design/',
@@ -1680,11 +1800,26 @@ rmSync(systemDesignOutputDir, { recursive: true, force: true });
 mkdirSync(join(outputDir, 'tracks'), { recursive: true });
 mkdirSync(join(outputDir, 'roadmaps'), { recursive: true });
 mkdirSync(join(outputDir, 'concepts'), { recursive: true });
+mkdirSync(join(outputDir, 'drills'), { recursive: true });
 mkdirSync(systemDesignOutputDir, { recursive: true });
 
 writeFileSync(join(outputDir, 'styles.css'), styles);
 writeFileSync(join(outputDir, 'index.html'), cleanGeneratedText(hubPage()));
 writeFileSync(join(outputDir, 'index.md'), cleanMarkdown(catalogMarkdown(catalog)));
+writeFileSync(join(outputDir, 'drills', 'index.html'), cleanGeneratedText(drillsHubPage()));
+writeFileSync(
+  join(outputDir, 'drills', 'index.md'),
+  cleanMarkdown(
+    `# Software engineering practice briefs\n\n${DRILLS.length} authored prompts with expected evidence, hints and concept context.\n\n${DRILLS.map((drill) => `- [${drill.title}](${absolute(drillUrl(drill.id))})`).join('\n')}`
+  )
+);
+for (const drill of DRILLS) {
+  writeFileSync(
+    join(outputDir, 'drills', `${drill.id}.html`),
+    cleanGeneratedText(drillPage(drill))
+  );
+  writeFileSync(join(outputDir, 'drills', `${drill.id}.md`), cleanMarkdown(drillMarkdown(drill)));
+}
 for (const track of TRACKS) {
   writeFileSync(
     join(outputDir, 'tracks', `${track.id}.html`),
@@ -1941,7 +2076,7 @@ writeFileSync(
   join(publicDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc><lastmod>${sitemapLastmod(path)}</lastmod></url>`).join('\n')}
+${sitemapPaths.map((path) => `  <url><loc>${escapeHtml(absolute(path))}</loc>${path.startsWith('/curriculum/drills/') ? '' : `<lastmod>${sitemapLastmod(path)}</lastmod>`}</url>`).join('\n')}
 </urlset>
 `
 );
@@ -1958,7 +2093,8 @@ practice, an observable artifact, an explain-back, and scheduled review.
 
 ## Start here
 
-- [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, and concept pages
+- [Public curriculum](https://learn.significanthobbies.com/curriculum/): Crawlable track, roadmap, concept and practice pages
+- [Practice briefs](https://learn.significanthobbies.com/curriculum/drills/): Authored prompts, expected evidence and progressive hints
 - [System-design cases](https://learn.significanthobbies.com/system-design/): Staged interview prompts and approved worked guides
 - [Learning guides](https://learn.significanthobbies.com/articles/): Long-form essays on evidence-backed engineering learning
 - [10K RPS LLM inference guide](https://learn.significanthobbies.com/system-design/llm-inference-10k-rps): Capacity math, serving architecture, overload, and follow-ups
@@ -2220,6 +2356,13 @@ writeFileSync(
           md: absolute('/curriculum/index.md'),
           kind: 'collection',
           description: `${TRACKS.length} tracks, ${CONCEPTS.length} concepts, and ${ROADMAPS.length} roadmaps as static public pages`,
+        },
+        {
+          id: 'practice-briefs',
+          url: absolute('/curriculum/drills/'),
+          md: absolute('/curriculum/drills/index.md'),
+          kind: 'collection',
+          description: `${DRILLS.length} authored practice prompts with evidence, hints and concept context`,
         },
         {
           id: 'system-design',

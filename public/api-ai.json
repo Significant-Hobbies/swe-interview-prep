@@ -55,6 +55,13 @@
       "description": "19 tracks, 259 concepts, and 26 roadmaps as static public pages"
     },
     {
+      "id": "practice-briefs",
+      "url": "https://learn.significanthobbies.com/curriculum/drills/",
+      "md": "https://learn.significanthobbies.com/curriculum/drills/index.md",
+      "kind": "collection",
+      "description": "305 authored practice prompts with evidence, hints and concept context"
+    },
+    {
       "id": "system-design",
       "url": "https://learn.significanthobbies.com/system-design/",
       "md": "https://learn.significanthobbies.com/system-design/index.md",

@@ -90,7 +90,7 @@
           <h3>Skip documents that cannot reach the top k</h3>
           <p>Implement prune(docs, upperBounds, k) where docs is [{id, terms:[termName], score}] and upperBounds maps term -&gt; max possible contribution. Walk docs in order maintaining a top-k heap; BEFORE scoring a document, skip it when the sum of its terms&#39; upper bounds is &lt;= the current k-th best score. Return { top: ids of the top k by score descending, scored: how many documents you actually scored }.</p>
           <p><strong>Expected evidence:</strong> Pruning must not change the top k — only how many documents were scored.</p>
-          <a href="/drills/wand-threshold-skip">Open the interactive drill →</a>
+          <a href="/curriculum/drills/wand-threshold-skip">Read the practice brief</a> · <a href="/drills/wand-threshold-skip">Open the interactive drill →</a>
         </div>
       <h3>Review prompts</h3><ul><li>WAND skips documents without scoring them. Why is the returned top-k still exactly the same as an exhaustive scan, and when does the technique stop paying off?</li></ul>
     </section>
