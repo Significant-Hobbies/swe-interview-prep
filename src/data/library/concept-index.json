@@ -961,6 +961,13 @@
       "sectionId": "docs-design-nixl-kv-cache-lease-md",
       "title": "Nixl Kv Cache Lease",
       "snippet": "# NIXL KV Cache Lease Renewal In disaggregated prefill/decode deployments, the Prefill instance (P) must hold KV cache blocks in GPU memory after completing a prefill, waiting for the Decode instance…"
+    },
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-features-sleep-mode-md-put-the-engine-to-sleep-level-1-offload-weights-to-cpu-ram-discard-kv-cache",
+      "title": "Put the Engine to Sleep (level=1: Offload Weights to Cpu Ram, Discard Kv Cache)",
+      "snippet": "# Put the engine to sleep (level=1: offload weights to CPU RAM, discard KV cache) llm.sleep(level=1)…"
     }
   ],
   "speculative-decoding": [
