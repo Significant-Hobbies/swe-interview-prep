@@ -981,19 +981,26 @@
     {
       "repoId": "vllm",
       "repoName": "vLLM",
-      "sectionId": "docs-features-speculative-decoding-dynamic-speculative-decoding-md",
-      "title": "Dynamic Speculative Decoding",
-      "snippet": "# Dynamic Speculative Decoding ## Why is Dynamic SD needed? SD methods need to verify K tokens for each sequence during decoding. As BS increases, the effective BS becomes BS\\*K which increases the compute re…"
+      "sectionId": "docs-features-preload-md-node-r-4-local-gpus-speculative-decoding",
+      "title": "Speculative Decoding",
+      "snippet": "## Speculative decoding With MTP, EAGLE or EAGLE3 speculative decoding, `vllm preload` additionally starts a draft daemon group that caches the draft model. It uses its own cache key, Unix sockets (`*_d…"
     },
     {
       "repoId": "vllm",
       "repoName": "vLLM",
-      "sectionId": "rust-src-bench-readme-md-speed-bench-for-speculative-decoding-evaluation-auto-downloads-cached",
-      "title": "Speed Bench for Speculative Decoding Evaluation (auto Downloads, Cached)",
-      "snippet": "# SPEED-Bench for speculative decoding evaluation (auto-downloads, cached) vllm-bench \\ --backend openai-chat --base-url http://127.0.0.1:8000 --model <model-name> \\ --dataset-name speed-bench --speed-bench-config…"
+      "sectionId": "docs-features-speculative-decoding-dynamic-speculative-decoding-md",
+      "title": "Dynamic Speculative Decoding",
+      "snippet": "# Dynamic Speculative Decoding ## Why is Dynamic SD needed? SD methods need to verify K tokens for each sequence during decoding. As BS increases, the effective BS becomes BS\\*K which increases the compute re…"
     }
   ],
   "gpu-utilization": [
+    {
+      "repoId": "vllm",
+      "repoName": "vLLM",
+      "sectionId": "docs-configuration-optimization-md-optimization-and-tuning-gpu-memory-utilization",
+      "title": "Gpu Memory Utilization",
+      "snippet": "## GPU Memory Utilization On CUDA and ROCm, vLLM sizes the KV cache from the memory actually free after CUDA graph capture and warmup (the extensible KV cache, `--enable-extensible-kv-cache`). It kee…"
+    },
     {
       "repoId": "vllm",
       "repoName": "vLLM",
@@ -1007,13 +1014,6 @@
       "sectionId": "docs-features-nixl-connector-usage-md-1st-gpu-as-prefiller",
       "title": "1 St Gpu as Prefiller",
       "snippet": "# 1st GPU as prefiller CUDA_VISIBLE_DEVICES=0 \\ UCX_NET_DEVICES=all \\ VLLM_NIXL_SIDE_CHANNEL_PORT=5600 \\ vllm serve Qwen/Qwen3-0.6B \\ --port 8100 \\ --enforce-eager \\ --kv-transfer-config '{\"kv_c…"
-    },
-    {
-      "repoId": "vllm",
-      "repoName": "vLLM",
-      "sectionId": "docs-features-nixl-connector-usage-md-2nd-gpu-as-decoder",
-      "title": "2 Nd Gpu as Decoder",
-      "snippet": "# 2nd GPU as decoder CUDA_VISIBLE_DEVICES=1 \\ UCX_NET_DEVICES=all \\ VLLM_NIXL_SIDE_CHANNEL_PORT=5601 \\ vllm serve Qwen/Qwen3-0.6B \\ --port 8200 \\ --enforce-eager \\ --kv-transfer-config '{\"kv_con…"
     }
   ],
   "inference-hardware": [
@@ -1029,7 +1029,7 @@
       "repoName": "vLLM",
       "sectionId": "docs-features-multimodal-inputs-md-example-explicitly-use-the-recommended-2-hardware-decoders",
       "title": "Example: Explicitly Use the Recommended 2 Hardware Decoders",
-      "snippet": "# Example: explicitly use the recommended 2 hardware decoders vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct \\ --media-io-kwargs '{\"video\": {\"backend\": \"pynvvideocodec\", \"hw_decoders\": 2}}' ``` #### Vid…"
+      "snippet": "# Example: explicitly use the recommended 2 hardware decoders vllm serve Qwen/Qwen3-VL-30B-A3B-Instruct \\ --media-io-kwargs '{\"video\": {\"backend\": \"pynvvideocodec\", \"hw_decoders\": 2}}' ``` To sampl…"
     },
     {
       "repoId": "vllm",
