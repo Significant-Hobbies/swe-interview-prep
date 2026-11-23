@@ -62,7 +62,11 @@ for (const width of [390, 768, 1440]) {
     });
     await page.reload();
     await expect(page.getByRole('alert')).toHaveCount(0);
-    await page.getByRole('link', { name: 'SWE Prep', exact: true }).click();
+    const homeLink = page
+      .getByRole('banner')
+      .getByRole('link', { name: /^SWE Prep(?: \/ Learning OS)?$/ });
+    await expect(homeLink).toHaveAttribute('href', '/');
+    await homeLink.click();
     await expect(page).toHaveURL(/\/$/);
     await expect(page.locator('studio-footer form[data-subscribe]')).toHaveCount(1);
     const theme = await page.evaluate(() => ({
