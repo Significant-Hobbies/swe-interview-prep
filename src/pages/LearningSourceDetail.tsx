@@ -49,7 +49,11 @@ export default function LearningSourceDetail() {
   if (!item)
     return (
       <main className="mx-auto max-w-3xl px-6 py-20">
-        <h1 className="text-3xl font-bold text-white">Learning item not found</h1>
+        <h1 className="text-3xl font-bold text-white">
+          {id.startsWith('reader:') && reader.denied
+            ? 'Reader is available from its connected account.'
+            : 'Learning item not found'}
+        </h1>
         <Link to="/sources" className="mt-6 inline-flex text-sky-300">
           Back to all sources
         </Link>

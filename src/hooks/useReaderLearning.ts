@@ -16,14 +16,22 @@ const NO_ITEMS: LearningItem[] = [];
 
 export function useReaderLearning() {
   const auth = useAuth();
-  const accountId = auth.loading || auth.isGuest ? null : (auth.user?.id ?? null);
+  const accountId = auth.isGuest ? null : (auth.user?.id ?? null);
+  const verifiedAccountId = auth.loading ? null : accountId;
   const [attempt, setAttempt] = useState(0);
   const [result, setResult] = useState<ReaderResult | null>(null);
-  const request = useMemo(() => ({ accountId, attempt }), [accountId, attempt]);
+  const request = useMemo(
+    () => ({ accountId: verifiedAccountId, attempt }),
+    [verifiedAccountId, attempt]
+  );
 
   useEffect(() => {
     if (!request.accountId) return;
     const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      controller.abort();
+      setResult({ request, state: 'error' });
+    }, 12000);
     fetch('/api/learning/reader', { credentials: 'include', signal: controller.signal })
       .then(async (response) => {
         if (controller.signal.aborted) return;
@@ -44,8 +52,12 @@ export function useReaderLearning() {
       })
       .catch(() => {
         if (!controller.signal.aborted) setResult({ request, state: 'error' });
-      });
-    return () => controller.abort();
+      })
+      .finally(() => window.clearTimeout(timeout));
+    return () => {
+      window.clearTimeout(timeout);
+      controller.abort();
+    };
   }, [request]);
 
   // During an account switch, hide the prior response before the effect runs.

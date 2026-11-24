@@ -89,6 +89,25 @@ test('authenticated catalog and daily session remain responsive', async ({ page 
   await expectNoHorizontalOverflow(page);
 });
 
+test('verification of the same cached account preserves a study in progress', async ({ page }) => {
+  let release!: () => void;
+  const verifying = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/api/auth/verify', async (route) => {
+    await verifying;
+    await route.fulfill({ json: { user: fixtureUser } });
+  });
+  await page.goto('/session/2026-11-24/held-verification');
+  await page.getByRole('button', { name: /I studied these/ }).click();
+  const questions = page.getByRole('heading', { name: 'Questions before scheduling' });
+  await expect(questions).toBeVisible();
+  const read = page.waitForResponse((response) => response.url().endsWith('/api/learning/reader'));
+  release();
+  await read;
+  await expect(questions).toBeVisible();
+});
+
 for (const width of [390, 768, 1440]) {
   test(`Reader session retries a failed read without recording an empty study at ${width}`, async ({
     page,
