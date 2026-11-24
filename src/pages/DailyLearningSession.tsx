@@ -24,9 +24,31 @@ const SOURCE_PREFIX = {
 export default function DailyLearningSession() {
   const { date = new Date().toISOString().slice(0, 10), sessionId = '1' } = useParams();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const sourceId = searchParams.get('source') || undefined;
   const reader = useReaderLearning();
+  return (
+    <LearningSession
+      key={JSON.stringify([date, sessionId, sourceId, reader.accountId])}
+      date={date}
+      sessionId={sessionId}
+      sourceId={sourceId}
+      reader={reader}
+    />
+  );
+}
+
+function LearningSession({
+  date,
+  sessionId,
+  sourceId,
+  reader,
+}: {
+  date: string;
+  sessionId: string;
+  sourceId?: string;
+  reader: ReturnType<typeof useReaderLearning>;
+}) {
+  const navigate = useNavigate();
   const plan = useMemo(
     () => buildDailyLearningSession(`${date}:${sessionId}`, reader.items, sourceId),
     [date, sessionId, reader.items, sourceId]
@@ -38,10 +60,12 @@ export default function DailyLearningSession() {
       ...dynamic,
     ].filter((source) => source.itemCount > 0 && source.kind !== 'native');
   }, [reader.source]);
-  const assessments = plan.items.flatMap((item) =>
+  const [activePlan, setActivePlan] = useState<typeof plan | null>(null);
+  const session = activePlan ?? plan;
+  const assessments = session.items.flatMap((item) =>
     (item.assessments || []).map((assessment) => ({ item, assessment }))
   );
-  const reviewPrompts = plan.items.flatMap((item) =>
+  const reviewPrompts = session.items.flatMap((item) =>
     (item.reviewQuestions || []).map((question) => ({ item, question }))
   );
   const [phase, setPhase] = useState<Phase>('study');
@@ -63,8 +87,9 @@ export default function DailyLearningSession() {
       ? correct / assessments.length
       : 0;
   const selectedSource = sources.find((source) => source.id === sourceId);
+  const isReader = sourceId === 'reader';
   const moduleNames = [
-    ...new Set(plan.items.map((item) => item.hierarchy?.module).filter(Boolean)),
+    ...new Set(session.items.map((item) => item.hierarchy?.module).filter(Boolean)),
   ];
 
   function finish() {
@@ -75,7 +100,8 @@ export default function DailyLearningSession() {
         : score >= 0.5
           ? 'hard'
           : 'again';
-    for (const item of plan.items) rateLearningItem(item.id, rating);
+    if (!session.items.length) return;
+    for (const item of session.items) rateLearningItem(item.id, rating);
     recordSessionActivity('external_learning_session');
     setPhase('done');
   }
@@ -99,7 +125,7 @@ export default function DailyLearningSession() {
           Daily learning session
         </span>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          {selectedSource ? selectedSource.label : 'Learn, recall, schedule.'}
+          {selectedSource?.label ?? (isReader ? 'Reader' : 'Learn, recall, schedule.')}
         </h1>
         {selectedSource && (
           <div className="mt-3 flex flex-wrap items-center gap-2 text-sm leading-6 text-white/50">
@@ -117,8 +143,11 @@ export default function DailyLearningSession() {
           </div>
         )}
         <div className="mt-6 max-w-md">
-          <label className="mb-2 block text-xs text-white/40">Choose what you want today</label>
+          <label htmlFor="session-source" className="mb-2 block text-xs text-white/40">
+            Choose what you want today
+          </label>
           <select
+            id="session-source"
             value={sourceId || ''}
             onChange={(event) =>
               navigate(
@@ -128,6 +157,9 @@ export default function DailyLearningSession() {
             className="h-11 w-full rounded-md border border-white/10 bg-black px-3 text-sm text-white/70 outline-none focus:border-sky-400/50"
           >
             <option value="">Balanced: High Signal + due learning</option>
+            {sourceId && !selectedSource && (
+              <option value={sourceId}>{isReader ? 'Reader' : 'Unavailable source'}</option>
+            )}
             {sources.map((source) => (
               <option key={source.id} value={source.id}>
                 {SOURCE_PREFIX[source.kind]} · {source.label} · {source.itemCount} items
@@ -137,18 +169,50 @@ export default function DailyLearningSession() {
         </div>
       </header>
 
-      {phase === 'study' && (
+      {phase === 'study' && session.items.length > 0 && (
         <StudyPhase
-          items={plan.items}
-          minutes={plan.studyMinutes}
-          onContinue={() => setPhase('questions')}
+          items={session.items}
+          minutes={session.studyMinutes}
+          onContinue={() => {
+            setActivePlan(session);
+            setPhase('questions');
+          }}
         />
+      )}
+      {phase === 'study' && session.items.length === 0 && (
+        <section className="min-h-80 py-10">
+          <h2 className="text-2xl font-semibold text-white">Study</h2>
+          {isReader && reader.loading ? (
+            <p role="status" className="mt-4 text-sm text-white/60">
+              Loading Reader items…
+            </p>
+          ) : isReader && reader.failed ? (
+            <div className="mt-4">
+              <p role="alert" className="text-sm text-white/70">
+                Could not load Reader items.
+              </p>
+              <button
+                type="button"
+                onClick={reader.retry}
+                className="mt-4 min-h-11 rounded-md border border-white/15 px-4 text-sm text-white hover:bg-white/5"
+              >
+                Try again
+              </button>
+            </div>
+          ) : (
+            <p className="mt-4 text-sm text-white/60">
+              {isReader && reader.denied
+                ? 'Reader is available from its connected account. Choose another source to study.'
+                : 'No study items are available for this source. Choose another source to continue.'}
+            </p>
+          )}
+        </section>
       )}
       {phase === 'questions' && (
         <section className="py-10">
           <div className="mb-8">
             <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
-              Final {plan.reviewMinutes} minutes
+              Final {session.reviewMinutes} minutes
             </span>
             <h2 className="mt-2 text-2xl font-semibold text-white">Questions before scheduling</h2>
           </div>

@@ -1,39 +1,62 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
+import { useAuth } from '../contexts/AuthContext';
 import type { LearningItem, LearningSource } from '../data/learning-sources';
-import { hasSession } from '../lib/learningApi';
+
+type RequestIdentity = { accountId: string | null; attempt: number };
+type ReaderResult =
+  | {
+      request: RequestIdentity;
+      state: 'ready';
+      items: LearningItem[];
+      source: LearningSource | null;
+    }
+  | { request: RequestIdentity; state: 'denied' | 'error' };
+const NO_ITEMS: LearningItem[] = [];
 
 export function useReaderLearning() {
-  const [items, setItems] = useState<LearningItem[]>([]);
-  const [source, setSource] = useState<LearningSource | null>(null);
-  const [loading, setLoading] = useState(true);
+  const auth = useAuth();
+  const accountId = auth.loading || auth.isGuest ? null : (auth.user?.id ?? null);
+  const [attempt, setAttempt] = useState(0);
+  const [result, setResult] = useState<ReaderResult | null>(null);
+  const request = useMemo(() => ({ accountId, attempt }), [accountId, attempt]);
 
   useEffect(() => {
-    let cancelled = false;
-    // Owner-only endpoint. /sources is public now, so guests reach this hook.
-    if (!hasSession()) {
-      setLoading(false);
-      return;
-    }
-    fetch('/api/learning/reader', { credentials: 'include' })
+    if (!request.accountId) return;
+    const controller = new AbortController();
+    fetch('/api/learning/reader', { credentials: 'include', signal: controller.signal })
       .then(async (response) => {
-        if (!response.ok)
-          throw new Error(`Reader learning source unavailable (${response.status})`);
-        return response.json();
+        if (controller.signal.aborted) return;
+        if (response.status === 401 || response.status === 403) {
+          setResult({ request, state: 'denied' });
+          return;
+        }
+        if (!response.ok) throw new Error('Reader learning source unavailable');
+        const payload = await response.json();
+        if (!Array.isArray(payload?.items)) throw new Error('Reader learning source is invalid');
+        if (!controller.signal.aborted)
+          setResult({
+            request,
+            state: 'ready',
+            items: payload.items,
+            source: payload.source ?? null,
+          });
       })
-      .then((payload) => {
-        if (cancelled) return;
-        setItems(payload.items || []);
-        setSource(payload.source || null);
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+      .catch(() => {
+        if (!controller.signal.aborted) setResult({ request, state: 'error' });
       });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    return () => controller.abort();
+  }, [request]);
 
-  return { items, source, loading };
+  // During an account switch, hide the prior response before the effect runs.
+  const current = result?.request === request ? result : null;
+  return {
+    accountId,
+    items: current?.state === 'ready' ? current.items : NO_ITEMS,
+    source: current?.state === 'ready' ? current.source : null,
+    loading: !auth.isGuest && (auth.loading || (!!accountId && !current)),
+    denied: current?.state === 'denied' || !accountId,
+    failed: current?.state === 'error',
+    retry: () => setAttempt((value) => value + 1),
+  };
 }

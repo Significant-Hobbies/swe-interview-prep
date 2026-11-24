@@ -27,9 +27,24 @@ export default function LearningSourceDetail() {
   const { notes, saveNote } = useLearningNotes();
   const [noteDraft, setNoteDraft] = useState('');
 
-  if (!item && reader.loading)
+  if (!item && id.startsWith('reader:') && reader.loading)
     return (
-      <main className="mx-auto max-w-3xl px-6 py-20 text-white/50">Loading learning session…</main>
+      <main className="mx-auto min-h-80 max-w-3xl px-6 py-20 text-white/50">
+        <p role="status">Loading Reader item…</p>
+      </main>
+    );
+  if (!item && id.startsWith('reader:') && reader.failed)
+    return (
+      <main className="mx-auto min-h-80 max-w-3xl px-6 py-20 text-white/70">
+        <p role="alert">Could not load this Reader item.</p>
+        <button
+          type="button"
+          onClick={reader.retry}
+          className="mt-4 min-h-11 rounded-md border border-white/15 px-4 text-sm text-white hover:bg-white/5"
+        >
+          Try again
+        </button>
+      </main>
     );
   if (!item)
     return (

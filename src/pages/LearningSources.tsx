@@ -84,6 +84,18 @@ export default function LearningSources() {
           <Metric value={completed} label="completed" />
         </div>
       </header>
+      {reader.failed && (
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white/70">
+          <p role="alert">Could not load Reader items.</p>
+          <button
+            type="button"
+            onClick={reader.retry}
+            className="min-h-11 rounded-md border border-white/15 px-4 text-white hover:bg-white/5"
+          >
+            Try again
+          </button>
+        </div>
+      )}
 
       <section className="sticky top-16 z-30 -mx-4 border-b border-white/10 bg-black/90 px-4 py-4 backdrop-blur-xl md:-mx-6 md:px-6">
         <div className="mx-auto grid max-w-[1400px] gap-3 lg:grid-cols-[minmax(260px,1fr)_auto_auto] lg:items-center">

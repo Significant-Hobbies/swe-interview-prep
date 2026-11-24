@@ -7,9 +7,14 @@ const fixtureUser = {
 };
 
 test.beforeEach(async ({ context, page }) => {
+  await context.route('**/*', (route) => {
+    const { hostname } = new URL(route.request().url());
+    return ['localhost', '127.0.0.1'].includes(hostname) ? route.continue() : route.abort();
+  });
   await context.addInitScript((user) => {
     localStorage.removeItem('dsa-prep-guest');
-    localStorage.setItem('dsa-prep-profile', JSON.stringify(user));
+    if (!sessionStorage.getItem('qa-reader-account-b'))
+      localStorage.setItem('dsa-prep-profile', JSON.stringify(user));
     localStorage.setItem('swe-os:onboarding-v1', JSON.stringify({ done: true }));
   }, fixtureUser);
   await page.route('**/api/auth/verify', (route) =>
@@ -83,3 +88,107 @@ test('authenticated catalog and daily session remain responsive', async ({ page 
   ).toBeVisible();
   await expectNoHorizontalOverflow(page);
 });
+
+for (const width of [390, 768, 1440]) {
+  test(`Reader session retries a failed read without recording an empty study at ${width}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    let release!: () => void;
+    const pending = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let attempts = 0;
+    let populated = false;
+    let denied = false;
+    await page.route('**/api/auth/logout', (route) => route.fulfill({ json: { ok: true } }));
+    await page.route('**/api/learning/reader', async (route) => {
+      attempts += 1;
+      if (attempts === 1) {
+        await pending;
+        await route.fulfill({ status: 503, json: { error: 'Synthetic Reader failure' } });
+        return;
+      }
+      if (denied) {
+        await route.fulfill({ status: 403, json: { error: 'Private source' } });
+        return;
+      }
+      await route.fulfill({
+        json: {
+          items: populated
+            ? [
+                {
+                  id: 'reader:qa',
+                  sourceId: 'reader',
+                  sourceKind: 'reader',
+                  title: 'Synthetic Reader article',
+                  summary: 'Test content',
+                  canonicalUrl: 'https://example.invalid/qa',
+                  tracks: [],
+                  format: 'article',
+                  estimatedMinutes: 8,
+                  fingerprint: 'qa',
+                },
+              ]
+            : [],
+          source: { id: 'reader', kind: 'reader', label: 'Reader', itemCount: populated ? 1 : 0 },
+        },
+      });
+    });
+
+    const path = '/session/2026-11-24/e2e-reader?source=reader';
+    const study = page.getByRole('button', { name: /I studied these/ });
+    await page.goto(path);
+    await expect(page.getByRole('status')).toContainText('Loading Reader items…');
+    await expect(study).toHaveCount(0);
+    release();
+    await expect(page.getByRole('alert')).toHaveText('Could not load Reader items.');
+    await expect(study).toHaveCount(0);
+    await page.getByRole('button', { name: 'Try again', exact: true }).click();
+    await expect(
+      page.getByText('No study items are available for this source.', { exact: false })
+    ).toBeVisible();
+    await expect(study).toHaveCount(0);
+    expect(attempts).toBe(2);
+    expect(await page.evaluate(() => localStorage.getItem('swe-os:daily-sessions'))).toBeNull();
+
+    populated = true;
+    await page.reload();
+    await expect(page.getByRole('heading', { name: /Synthetic Reader article/ })).toBeVisible();
+    await expect(study).toBeEnabled();
+    await study.click();
+    await expect(page.getByRole('heading', { name: 'Questions before scheduling' })).toBeVisible();
+    await page
+      .getByRole('textbox', { name: /What will you remember/ })
+      .fill('Synthetic completed study reflection.');
+    await page.getByRole('button', { name: 'Finish and schedule reviews' }).click();
+    await expect(page.getByRole('heading', { name: 'Session complete' })).toBeVisible();
+    const kinds = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem('swe-os:daily-sessions') || '[]').flatMap(
+        (row: { kinds: string[] }) => row.kinds
+      )
+    );
+    expect(kinds).toEqual(['external_learning_session']);
+    await page.getByRole('button', { name: 'Sign out' }).click();
+    await expect(
+      page.getByText('Reader is available from its connected account.', { exact: false })
+    ).toBeVisible();
+    await expect(page.getByText('Synthetic Reader article', { exact: false })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Finish and schedule reviews' })).toHaveCount(0);
+    expect(attempts).toBe(3);
+    const accountB = { id: 'reader-e2e-b', email: 'b@example.test', name: 'Reader Test B' };
+    await page.route('**/api/auth/verify', (route) => route.fulfill({ json: { user: accountB } }));
+    denied = true;
+    await page.evaluate((user) => {
+      sessionStorage.setItem('qa-reader-account-b', '1');
+      localStorage.setItem('dsa-prep-profile', JSON.stringify(user));
+    }, accountB);
+    await page.reload();
+    await expect(
+      page.getByText('Reader is available from its connected account.', { exact: false })
+    ).toBeVisible();
+    await expect(page.getByText('Synthetic Reader article', { exact: false })).toHaveCount(0);
+    expect(attempts).toBe(4);
+    await expectNoHorizontalOverflow(page);
+  });
+}
