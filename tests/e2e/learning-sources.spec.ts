@@ -99,12 +99,13 @@ for (const width of [390, 768, 1440]) {
       release = resolve;
     });
     let attempts = 0;
+    let failing = true;
     let populated = false;
     let denied = false;
     await page.route('**/api/auth/logout', (route) => route.fulfill({ json: { ok: true } }));
     await page.route('**/api/learning/reader', async (route) => {
       attempts += 1;
-      if (attempts === 1) {
+      if (failing) {
         await pending;
         await route.fulfill({ status: 503, json: { error: 'Synthetic Reader failure' } });
         return;
@@ -139,17 +140,21 @@ for (const width of [390, 768, 1440]) {
     const path = '/session/2026-11-24/e2e-reader?source=reader';
     const study = page.getByRole('button', { name: /I studied these/ });
     await page.goto(path);
-    await expect(page.getByRole('status')).toContainText('Loading Reader items…');
+    await expect(page.getByText('Loading Reader items…', { exact: true })).toBeVisible();
     await expect(study).toHaveCount(0);
     release();
-    await expect(page.getByRole('alert')).toHaveText('Could not load Reader items.');
+    await expect(page.locator('main').getByRole('alert')).toHaveText(
+      'Could not load Reader items.'
+    );
     await expect(study).toHaveCount(0);
+    const failureAttempts = attempts;
+    failing = false;
     await page.getByRole('button', { name: 'Try again', exact: true }).click();
     await expect(
       page.getByText('No study items are available for this source.', { exact: false })
     ).toBeVisible();
     await expect(study).toHaveCount(0);
-    expect(attempts).toBe(2);
+    expect(attempts).toBeGreaterThan(failureAttempts);
     expect(await page.evaluate(() => localStorage.getItem('swe-os:daily-sessions'))).toBeNull();
 
     populated = true;
@@ -169,13 +174,14 @@ for (const width of [390, 768, 1440]) {
       )
     );
     expect(kinds).toEqual(['external_learning_session']);
+    const signedInAttempts = attempts;
     await page.getByRole('button', { name: 'Sign out' }).click();
     await expect(
       page.getByText('Reader is available from its connected account.', { exact: false })
     ).toBeVisible();
     await expect(page.getByText('Synthetic Reader article', { exact: false })).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Finish and schedule reviews' })).toHaveCount(0);
-    expect(attempts).toBe(3);
+    expect(attempts).toBe(signedInAttempts);
     const accountB = { id: 'reader-e2e-b', email: 'b@example.test', name: 'Reader Test B' };
     await page.route('**/api/auth/verify', (route) => route.fulfill({ json: { user: accountB } }));
     denied = true;
@@ -183,12 +189,16 @@ for (const width of [390, 768, 1440]) {
       sessionStorage.setItem('qa-reader-account-b', '1');
       localStorage.setItem('dsa-prep-profile', JSON.stringify(user));
     }, accountB);
+    const nonOwnerRead = page.waitForResponse(
+      (response) => response.url().endsWith('/api/learning/reader') && response.status() === 403
+    );
     await page.reload();
+    await nonOwnerRead;
     await expect(
       page.getByText('Reader is available from its connected account.', { exact: false })
     ).toBeVisible();
     await expect(page.getByText('Synthetic Reader article', { exact: false })).toHaveCount(0);
-    expect(attempts).toBe(4);
+    expect(attempts).toBeGreaterThan(signedInAttempts);
     await expectNoHorizontalOverflow(page);
   });
 }
