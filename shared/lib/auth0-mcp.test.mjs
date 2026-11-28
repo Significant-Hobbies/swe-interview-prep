@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   SWE_INTERVIEW_PREP_MCP_AUDIENCE,
+  verifySweInterviewPrepAuth0Grant,
   verifySweInterviewPrepAuth0Subject,
 } from './auth0-mcp.mjs';
 
@@ -18,6 +19,7 @@ async function fixture() {
       const now = Math.floor(Date.now() / 1000);
       const claims = {
         permissions: overrides.permissions ?? ['swe-interview-prep.read'],
+        ...(overrides.scope ? { scope: overrides.scope } : {}),
       };
       return new SignJWT(claims)
         .setProtectedHeader({ alg: 'RS256', kid: 'swe-test' })
@@ -49,6 +51,34 @@ describe('SWE Interview Prep Auth0 MCP verification', () => {
         verifySweInterviewPrepAuth0Subject(await signed.token(overrides), env, signed.keySet)
       ).resolves.toBeNull();
     }
+  });
+
+  it('grants native read and write access only from delegated scopes', async () => {
+    const signed = await fixture();
+    const env = { AUTH0_ISSUER: issuer };
+    const grant = (overrides) =>
+      signed
+        .token(overrides)
+        .then((token) => verifySweInterviewPrepAuth0Grant(token, env, signed.keySet));
+    // Read present only as an API permission, not delegated by the user.
+    await expect(grant({})).resolves.toBeNull();
+    await expect(grant({ scope: 'openid swe-interview-prep.read' })).resolves.toEqual({
+      googleId: 'google-user-1',
+      scopes: ['swe-interview-prep.read'],
+    });
+    // Write as a permission alone is not delegated write access.
+    await expect(
+      grant({
+        scope: 'swe-interview-prep.read',
+        permissions: ['swe-interview-prep.read', 'swe-interview-prep.write'],
+      })
+    ).resolves.toEqual({ googleId: 'google-user-1', scopes: ['swe-interview-prep.read'] });
+    await expect(
+      grant({ scope: 'swe-interview-prep.read swe-interview-prep.write' })
+    ).resolves.toEqual({
+      googleId: 'google-user-1',
+      scopes: ['swe-interview-prep.read', 'swe-interview-prep.write'],
+    });
   });
 
   it('fails closed for an invalid issuer configuration', async () => {

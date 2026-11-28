@@ -78,7 +78,7 @@ function nextInterval(previous, outcome) {
 }
 
 /** Fold one assessment into a knowledge state. Returns a new object. */
-export function applyAssessment(state, assessment) {
+function applyAssessment(state, assessment) {
   const next = { ...state, evidence_count: (state.evidence_count ?? 0) + 1 };
   if (assessment.method === 'self-assessment') {
     next.self_reported_level = assessment.demonstrated_level;
@@ -108,10 +108,15 @@ export function applyAssessment(state, assessment) {
 }
 
 /** Recompute evidence-derived fields from scratch (used after deletions). */
+/**
+ * Recompute every evidence-derived field from the stored assessments, in
+ * assessment-time order, so backfilled or deleted evidence cannot leave a
+ * stale level. Target level, interest, exposure and notes are kept.
+ */
 export function replayAssessments(state, assessments) {
   const reset = {
     ...state,
-    self_reported_level: state.self_reported_level,
+    self_reported_level: null,
     assessed_level: null,
     outcome: null,
     confidence: 0,
@@ -123,7 +128,8 @@ export function replayAssessments(state, assessments) {
   return [...assessments]
     .sort(
       (a, b) =>
-        String(a.assessed_at).localeCompare(String(b.assessed_at)) || a.id.localeCompare(b.id)
+        String(a.assessed_at).localeCompare(String(b.assessed_at)) ||
+        String(a.id).localeCompare(String(b.id))
     )
     .reduce(applyAssessment, reset);
 }

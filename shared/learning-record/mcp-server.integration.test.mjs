@@ -1,100 +1,19 @@
 // @vitest-environment node
-import { readFileSync, readdirSync } from 'node:fs';
-import { DatabaseSync } from 'node:sqlite';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import { createD1Client } from '../db/d1-client.mjs';
-import { handleLearningMcpRequest } from './mcp-server.mjs';
+import { createMcpHarness } from './mcp-test-harness.mjs';
 import { canonicalUrl } from './schema.mjs';
 
-let database;
-let client;
-let now;
-let rpcId = 0;
-
-const GRANTS = {
-  'alice.read.write': {
-    googleId: 'g-alice',
-    scopes: ['swe-interview-prep.read', 'swe-interview-prep.write'],
-  },
-  'alice.read.only': { googleId: 'g-alice', scopes: ['swe-interview-prep.read'] },
-  'bob.read.write': {
-    googleId: 'g-bob',
-    scopes: ['swe-interview-prep.read', 'swe-interview-prep.write'],
-  },
-};
-
-function d1Binding(db) {
-  return {
-    prepare(sql) {
-      const statement = db.prepare(sql);
-      const bound = (args) => ({
-        execute: () => ({
-          results: statement.all(...args),
-          meta: { changes: Number(db.prepare('SELECT changes() AS n').get()?.n) },
-        }),
-        all: async () => bound(args).execute(),
-        bind: (...values) => bound(values),
-      });
-      return bound([]);
-    },
-    async batch(statements) {
-      db.exec('BEGIN');
-      try {
-        const result = statements.map((statement) => statement.execute());
-        db.exec('COMMIT');
-        return result;
-      } catch (error) {
-        db.exec('ROLLBACK');
-        throw error;
-      }
-    },
-  };
-}
+let h;
+const rpc = (...args) => h.rpc(...args);
+const call = (...args) => h.call(...args);
+const ok = (...args) => h.ok(...args);
 
 beforeEach(() => {
-  database = new DatabaseSync(':memory:');
-  const dir = new URL('../../migrations/d1/', import.meta.url);
-  for (const file of readdirSync(dir)
-    .filter((name) => name.endsWith('.sql'))
-    .sort()) {
-    database.exec(readFileSync(new URL(file, dir), 'utf8'));
-  }
-  database.exec(`INSERT INTO users (id, google_id, email, name) VALUES
-    ('alice', 'g-alice', 'alice@example.invalid', 'Alice'),
-    ('bob', 'g-bob', 'bob@example.invalid', 'Bob')`);
-  client = createD1Client(d1Binding(database));
-  now = new Date('2026-11-28T09:00:00.000Z');
+  h = createMcpHarness();
 });
 
-afterEach(() => database.close());
-
-async function rpc(method, params, token = 'alice.read.write', env = {}) {
-  const response = await handleLearningMcpRequest({
-    request: new Request('https://learn.example/api/mcp', {
-      method: 'POST',
-      headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: ++rpcId, method, params }),
-    }),
-    env,
-    client,
-    verifyGrant: async (value) => GRANTS[value] ?? null,
-    now,
-  });
-  return { status: response.status, body: await response.json() };
-}
-
-async function call(name, args = {}, token = 'alice.read.write') {
-  const { body } = await rpc('tools/call', { name, arguments: args }, token);
-  if (body.error) throw new Error(`${name}: ${body.error.message}`);
-  return { ...body.result.structuredContent, isError: body.result.isError === true };
-}
-
-async function ok(name, args, token) {
-  const result = await call(name, args, token);
-  if (result.isError) throw new Error(`${name}: ${JSON.stringify(result.error)}`);
-  return result;
-}
+afterEach(() => h.close());
 
 describe('MCP protocol and authorization', () => {
   it('initializes, lists every PRD tool with schemas and rejects missing auth', async () => {
@@ -269,7 +188,7 @@ describe('courses, sessions and assessments', () => {
     });
     expect(retry.course.id).toBe(course.id);
     expect(retry.idempotentReplay).toBe(true);
-    expect(database.prepare('SELECT COUNT(*) AS n FROM learning_courses').get().n).toBe(1);
+    expect(h.database.prepare('SELECT COUNT(*) AS n FROM learning_courses').get().n).toBe(1);
     const reused = await call('create_course', {
       title: 'Other',
       objective: 'Other',
@@ -300,7 +219,7 @@ describe('courses, sessions and assessments', () => {
       idempotencyKey: 'session-bm25-1',
     });
     expect(startedAgain.session.id).toBe(sessionId);
-    expect(database.prepare('SELECT COUNT(*) AS n FROM learning_sessions').get().n).toBe(1);
+    expect(h.database.prepare('SELECT COUNT(*) AS n FROM learning_sessions').get().n).toBe(1);
 
     await ok('update_learning_session', {
       sessionId,
@@ -350,7 +269,7 @@ describe('courses, sessions and assessments', () => {
     expect(completed.policy).toMatch(/activity and exposure only/u);
 
     // A later conversation reads everything back.
-    now = new Date('2026-11-29T09:00:00.000Z');
+    h.now = new Date('2026-11-29T09:00:00.000Z');
     const history = await ok('get_learning_history', { courseId: course.id });
     expect(history.items).toHaveLength(1);
     expect(history.items[0].unresolvedQuestions).toEqual(['How does BM25F weight fields?']);
@@ -452,7 +371,7 @@ describe('external resources and unstructured learning', () => {
     expect(again.resource.status).toBe('discussed');
     expect(again.resource.title).toBe('CRDTs for mortals');
     expect(again.resource.topics).toEqual(['local-first']);
-    expect(database.prepare('SELECT COUNT(*) AS n FROM learning_resources').get().n).toBe(1);
+    expect(h.database.prepare('SELECT COUNT(*) AS n FROM learning_resources').get().n).toBe(1);
 
     const knowledge = await ok('get_knowledge_state', { subjects: [{ topic: 'CRDT tombstones' }] });
     expect(knowledge.items[0].level).toBe('unassessed');
@@ -544,7 +463,7 @@ describe('curriculum gaps, isolation and cleanup', () => {
       sessionId: session.session.id,
       idempotencyKey: 'iso-assess-1',
     });
-    now = new Date('2026-11-28T10:00:00.000Z');
+    h.now = new Date('2026-11-28T10:00:00.000Z');
     const bad = await ok('submit_assessment', {
       subject: { topic: 'Zig comptime' },
       method: 'exercise',
@@ -563,12 +482,12 @@ describe('curriculum gaps, isolation and cleanup', () => {
       id: session.session.id,
       cascade: true,
     });
-    expect(database.prepare('SELECT COUNT(*) AS n FROM learning_assessments').get().n).toBe(0);
+    expect(h.database.prepare('SELECT COUNT(*) AS n FROM learning_assessments').get().n).toBe(0);
     await ok('delete_learning_record', {
       entity: 'knowledge-state',
       subject: { topic: 'Zig comptime' },
     });
-    expect(database.prepare('SELECT COUNT(*) AS n FROM knowledge_states').get().n).toBe(0);
+    expect(h.database.prepare('SELECT COUNT(*) AS n FROM knowledge_states').get().n).toBe(0);
     expect(good.assessment.id).toMatch(/^asm_/u);
   });
 });

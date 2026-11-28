@@ -9,7 +9,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 type Json = Record<string, any>;
 const OVERVIEW_TITLE = 'What you know, and what\u2019s next.';
-type View = 'overview' | 'course' | 'session' | 'resource';
+type View = 'overview' | 'course' | 'session' | 'resource' | 'gap';
 
 function useRecord(view: View, id?: string) {
   const { user } = useAuth();
@@ -75,11 +75,13 @@ function Section({
   title,
   count,
   children,
+  footer,
 }: {
   id: string;
   title: string;
-  count?: number;
+  count?: number | string;
   children: ReactNode;
+  footer?: ReactNode;
 }) {
   return (
     <section id={id} className="section-rule mt-12 scroll-mt-20 pt-8">
@@ -88,6 +90,7 @@ function Section({
         {count !== undefined && <span className="font-mono text-xs text-white/40">{count}</span>}
       </div>
       <div className="mt-5">{children}</div>
+      {footer}
     </section>
   );
 }
@@ -331,9 +334,9 @@ function KnowledgeSection({ data }: { data: Json }) {
   );
 }
 
-function CoursesSection({ data }: { data: Json }) {
+function CoursesSection({ data, more }: { data: Json; more?: ReactNode }) {
   return (
-    <Section id="courses" title="Courses" count={data.courses.length}>
+    <Section id="courses" title="Courses" count={data.coursesCount} footer={more}>
       {data.courses.length ? (
         <ul className="divide-y divide-white/5">
           {data.courses.map((course: Json) => (
@@ -379,10 +382,10 @@ function ResourceRow({ resource }: { resource: Json }) {
   );
 }
 
-function ResourcesSection({ data }: { data: Json }) {
+function ResourcesSection({ data, more }: { data: Json; more?: ReactNode }) {
   const resources: Json[] = data.resources;
   return (
-    <Section id="resources" title="Reading" count={resources.length}>
+    <Section id="resources" title="Reading" count={data.resourcesCount} footer={more}>
       {resources.length ? (
         <ul className="divide-y divide-white/5">
           {resources.map((resource) => (
@@ -396,23 +399,20 @@ function ResourcesSection({ data }: { data: Json }) {
   );
 }
 
-function GapsSection({ data }: { data: Json }) {
+function GapsSection({ data, more }: { data: Json; more?: ReactNode }) {
   return (
-    <Section id="gaps" title="Curriculum gaps" count={data.gaps.length}>
+    <Section id="gaps" title="Curriculum gaps" count={data.gapsCount} footer={more}>
       {data.gaps.length ? (
         <ul className="divide-y divide-white/5">
           {data.gaps.map((gap: Json) => (
-            <li key={gap.id} id={'gap-' + gap.id} className="py-3">
+            <li key={gap.id} className="py-3">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
-                <span className="text-white">{gap.topic}</span>
+                <Link to={recordHref('gaps', gap.id)} className="text-white hover:underline">
+                  {gap.topic}
+                </Link>
                 <span className="flex items-center gap-2">
                   <Pill>{gap.gapKind}</Pill>
                   <Pill tone={gap.status === 'resolved' ? 'emerald' : 'amber'}>{gap.status}</Pill>
-                  {gap.prUrl && (
-                    <a href={gap.prUrl} className="font-mono text-xs text-sky-300 hover:underline">
-                      PR
-                    </a>
-                  )}
                 </span>
               </div>
               <p className="mt-1 text-xs leading-5 text-white/50">{gap.description}</p>
@@ -426,8 +426,77 @@ function GapsSection({ data }: { data: Json }) {
   );
 }
 
+type Page = { items: Json[]; nextCursor: string | null };
+const PAGED_SECTIONS = ['courses', 'sessions', 'resources', 'gaps'] as const;
+type PagedSection = (typeof PAGED_SECTIONS)[number];
+
+/** Overview lists start with the first page and append later pages on request. */
+function usePagedSections(data: Json | null) {
+  const [pages, setPages] = useState<Partial<Record<PagedSection, Page>>>({});
+  const [loadingMore, setLoadingMore] = useState<PagedSection | null>(null);
+  useEffect(() => {
+    if (!data) return;
+    setPages(Object.fromEntries(PAGED_SECTIONS.map((key) => [key, data[key]])));
+  }, [data]);
+  const loadMore = async (key: PagedSection) => {
+    const cursor = pages[key]?.nextCursor;
+    if (!cursor) return;
+    setLoadingMore(key);
+    try {
+      const params = new URLSearchParams({ view: 'list', section: key, cursor });
+      const response = await fetch(['/api/learning-record', params.toString()].join('?'), {
+        credentials: 'include',
+      });
+      if (!response.ok) return;
+      const next: Page = await response.json();
+      setPages((current) => ({
+        ...current,
+        [key]: {
+          items: [...(current[key]?.items ?? []), ...next.items],
+          nextCursor: next.nextCursor,
+        },
+      }));
+    } finally {
+      setLoadingMore(null);
+    }
+  };
+  return { pages, loadMore, loadingMore };
+}
+
+function MoreButton({ onClick, busy }: { onClick: () => void; busy: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={busy}
+      className="mt-4 rounded border border-white/15 px-3 py-1.5 font-mono text-xs text-white/70 hover:border-white/30 hover:text-white disabled:opacity-50"
+    >
+      {busy ? 'Loading…' : 'Show more'}
+    </button>
+  );
+}
+
 function Overview() {
   const { data, loading, error, signedIn } = useRecord('overview');
+  const { pages, loadMore, loadingMore } = usePagedSections(data);
+  const view: Json | null = data
+    ? {
+        ...data,
+        ...Object.fromEntries(
+          PAGED_SECTIONS.flatMap((key) => {
+            const page = pages[key] ?? data[key];
+            return [
+              [key, page?.items ?? []],
+              [`${key}Count`, `${page?.items?.length ?? 0}${page?.nextCursor ? '+' : ''}`],
+            ];
+          })
+        ),
+      }
+    : null;
+  const more = (key: PagedSection) =>
+    (pages[key] ?? data?.[key])?.nextCursor ? (
+      <MoreButton onClick={() => void loadMore(key)} busy={loadingMore === key} />
+    ) : undefined;
   return (
     <Shell eyebrow="Learning record" title={OVERVIEW_TITLE}>
       <p className="mt-4 max-w-2xl text-sm leading-6 text-white/55">
@@ -435,33 +504,62 @@ function Overview() {
         Levels change only with assessed evidence; untouched subjects are unassessed, not beginner.
       </p>
       <Status loading={loading} error={error} signedIn={signedIn} />
-      {data && (
+      {view && (
         <>
           <nav className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-white/50">
             {['profile', 'knowledge', 'courses', 'sessions', 'resources', 'gaps'].map((anchor) => (
-              <a key={anchor} href={`#${anchor}`} className="hover:text-white">
+              <a key={anchor} href={'#' + anchor} className="hover:text-white">
                 {anchor}
               </a>
             ))}
           </nav>
-
-          <ProfileSection data={data} />
-
-          <KnowledgeSection data={data} />
-
-          <CoursesSection data={data} />
-
-          <Section id="sessions" title="Sessions" count={data.sessions.length}>
-            {data.sessions.length ? (
-              <SessionList sessions={data.sessions} />
+          <ProfileSection data={view} />
+          <KnowledgeSection data={view} />
+          <CoursesSection data={view} more={more('courses')} />
+          <Section
+            id="sessions"
+            title="Sessions"
+            count={view.sessionsCount}
+            footer={more('sessions')}
+          >
+            {view.sessions.length ? (
+              <SessionList sessions={view.sessions} />
             ) : (
               <Empty>No sessions recorded yet.</Empty>
             )}
           </Section>
+          <ResourcesSection data={view} more={more('resources')} />
+          <GapsSection data={view} more={more('gaps')} />
+        </>
+      )}
+    </Shell>
+  );
+}
 
-          <ResourcesSection data={data} />
-
-          <GapsSection data={data} />
+function GapDetail({ id }: { id: string }) {
+  const { data, loading, error, signedIn } = useRecord('gap', id);
+  const gap = data?.gap;
+  return (
+    <Shell back eyebrow="Curriculum gap" title={gap?.topic ?? 'Curriculum gap'}>
+      <Status loading={loading} error={error} signedIn={signedIn} />
+      {gap && (
+        <>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <Pill>{gap.gapKind}</Pill>
+            <Pill tone={gap.status === 'resolved' ? 'emerald' : 'amber'}>{gap.status}</Pill>
+            {gap.prUrl && (
+              <a href={gap.prUrl} className="font-mono text-xs text-sky-300 hover:underline">
+                Pull request
+              </a>
+            )}
+          </div>
+          <p className="mt-5 max-w-2xl text-sm leading-6 text-white/70">{gap.description}</p>
+          <List title="Learning objectives" items={gap.learningObjectives} />
+          <List title="Evidence" items={gap.evidence} />
+          <List
+            title="Related concepts"
+            items={[...gap.prerequisiteConceptIds, ...gap.relatedConceptIds]}
+          />
         </>
       )}
     </Shell>
@@ -700,5 +798,6 @@ export default function LearningRecord() {
   if (kind === 'courses' && id) return <CourseDetail id={id} />;
   if (kind === 'sessions' && id) return <SessionDetail id={id} />;
   if (kind === 'resources' && id) return <ResourceDetail id={id} />;
+  if (kind === 'gaps' && id) return <GapDetail id={id} />;
   return <Overview />;
 }

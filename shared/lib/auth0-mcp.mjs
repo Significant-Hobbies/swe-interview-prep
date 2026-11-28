@@ -49,12 +49,17 @@ function remoteJwks(issuer) {
   return cachedRemoteJwks;
 }
 
-/**
- * Verify the gateway-forwarded Auth0 token and return the Google subject plus
- * granted scopes. Write access is honoured only from the delegated `scope`
- * claim (what the user consented to), matching the gateway's own check.
- */
-export async function verifySweInterviewPrepAuth0Grant(token, env, getKey) {
+function validLifetime(payload) {
+  return (
+    typeof payload.iat === 'number' &&
+    typeof payload.exp === 'number' &&
+    payload.exp > payload.iat &&
+    payload.exp - payload.iat <= MAX_TOKEN_LIFETIME_SECONDS + CLOCK_TOLERANCE_SECONDS
+  );
+}
+
+/** Verified Google subject and claims, using the legacy read-permission rule. */
+async function verifyClaims(token, env, getKey) {
   const issuer = auth0Issuer(env.AUTH0_ISSUER);
   if (!issuer) return null;
   try {
@@ -71,27 +76,31 @@ export async function verifySweInterviewPrepAuth0Grant(token, env, getKey) {
       ...stringClaims(payload.scopes),
       ...stringClaims(payload.permissions),
     ]);
-    if (
-      !match ||
-      typeof payload.iat !== 'number' ||
-      typeof payload.exp !== 'number' ||
-      payload.exp <= payload.iat ||
-      payload.exp - payload.iat > MAX_TOKEN_LIFETIME_SECONDS + CLOCK_TOLERANCE_SECONDS ||
-      !permissions.has(REQUIRED_SCOPE)
-    ) {
-      return null;
-    }
-    const delegated = new Set(stringClaims(payload.scope));
-    const scopes = [REQUIRED_SCOPE];
-    if (delegated.has(SWE_INTERVIEW_PREP_WRITE_SCOPE)) scopes.push(SWE_INTERVIEW_PREP_WRITE_SCOPE);
-    return match[1] ? { googleId: match[1], scopes } : null;
+    if (!match?.[1] || !validLifetime(payload) || !permissions.has(REQUIRED_SCOPE)) return null;
+    return { googleId: match[1], payload };
   } catch {
     return null;
   }
 }
 
+/**
+ * Verify the gateway-forwarded Auth0 token for the native MCP server. Both read
+ * and write access are honoured only from the delegated `scope` claim (what the
+ * user consented to), matching the gateway's own check for write-capable routes.
+ */
+export async function verifySweInterviewPrepAuth0Grant(token, env, getKey) {
+  const verified = await verifyClaims(token, env, getKey);
+  if (!verified) return null;
+  const delegated = new Set(stringClaims(verified.payload.scope));
+  if (!delegated.has(REQUIRED_SCOPE)) return null;
+  const scopes = [REQUIRED_SCOPE];
+  if (delegated.has(SWE_INTERVIEW_PREP_WRITE_SCOPE)) scopes.push(SWE_INTERVIEW_PREP_WRITE_SCOPE);
+  return { googleId: verified.googleId, scopes };
+}
+
+/** Legacy GET /api/mcp/* projections: read permission from any claim. */
 export async function verifySweInterviewPrepAuth0Subject(token, env, getKey) {
-  return (await verifySweInterviewPrepAuth0Grant(token, env, getKey))?.googleId ?? null;
+  return (await verifyClaims(token, env, getKey))?.googleId ?? null;
 }
 
 export const SWE_INTERVIEW_PREP_MCP_AUDIENCE = AUDIENCE;

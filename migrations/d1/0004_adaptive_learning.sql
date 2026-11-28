@@ -157,13 +157,15 @@ CREATE TABLE IF NOT EXISTS learning_priority_overrides (
 
 CREATE INDEX IF NOT EXISTS idx_overrides_user_day ON learning_priority_overrides(user_id, day, created_at DESC);
 
--- Stored responses for retried MCP mutations, keyed by the caller's key.
+-- Retried MCP mutations, keyed by the caller's key. A key is reserved
+-- ('pending') before the mutation runs and completed with its response.
 CREATE TABLE IF NOT EXISTS mcp_mutation_receipts (
   user_id TEXT NOT NULL,
   idempotency_key TEXT NOT NULL,
   tool TEXT NOT NULL,
   request_hash TEXT NOT NULL,
-  response_json TEXT NOT NULL,
+  state TEXT NOT NULL DEFAULT 'pending',
+  response_json TEXT NOT NULL DEFAULT '',
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   PRIMARY KEY (user_id, idempotency_key),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

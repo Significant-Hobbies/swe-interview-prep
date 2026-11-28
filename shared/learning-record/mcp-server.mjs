@@ -122,6 +122,22 @@ async function authenticate(request, env, client, verifyGrant) {
   return { user, scopes: new Set(grant.scopes ?? []) };
 }
 
+function replayReceipt(receipt, name, hash) {
+  if (receipt.tool !== name || receipt.request_hash !== hash) {
+    throw new LearningRecordError(
+      'idempotency_conflict',
+      'This idempotencyKey was already used for a different request. Generate a new key for a new mutation.'
+    );
+  }
+  if (receipt.state !== 'complete') {
+    throw new LearningRecordError(
+      'idempotency_in_progress',
+      'A request with this idempotencyKey is still running. Retry the same call shortly.'
+    );
+  }
+  return { ...JSON.parse(receipt.response_json), idempotentReplay: true };
+}
+
 async function callTool({ params, auth, client, now, clientName }) {
   const name = params?.name;
   const tool = requireTool(name);
@@ -138,18 +154,19 @@ async function callTool({ params, auth, client, now, clientName }) {
 
   const { idempotencyKey, ...rest } = args;
   const hash = await sha256Hex(`${name}:${stableStringify(rest)}`);
-  const receipt = await store.findReceipt(client, userId, idempotencyKey);
-  if (receipt) {
-    if (receipt.tool !== name || receipt.request_hash !== hash) {
-      throw new LearningRecordError(
-        'idempotency_conflict',
-        'This idempotencyKey was already used for a different request. Generate a new key for a new mutation.'
-      );
-    }
-    return { ...JSON.parse(receipt.response_json), idempotentReplay: true };
+  const receipt = await store.reserveReceipt(client, userId, idempotencyKey, name, hash, now);
+  if (receipt) return replayReceipt(receipt, name, hash);
+  let response;
+  try {
+    response = await tool.handler(rest, { ...ctx, idempotencySeed: idempotencyKey });
+  } catch (error) {
+    // Nothing was applied, so the caller may retry the same key.
+    await store.releaseReceipt(client, userId, idempotencyKey);
+    throw error;
   }
-  const response = await tool.handler(rest, { ...ctx, idempotencySeed: idempotencyKey });
-  await store.saveReceipt(client, userId, idempotencyKey, name, hash, response);
+  // The mutation is applied. If recording the response fails the key stays
+  // reserved, so a retry reports "in progress" instead of applying it twice.
+  await store.completeReceipt(client, userId, idempotencyKey, response);
   return response;
 }
 

@@ -7,7 +7,13 @@ import {
   loadAttemptsProjection,
   loadDailyLearningProjection,
 } from '../lib/daily-learning-projection.mjs';
-import { CONCEPT_BY_ID, conceptUrl, getCurriculumItem, searchCurriculum } from './curriculum.mjs';
+import {
+  CONCEPT_BY_ID,
+  PRODUCT_ORIGIN,
+  conceptUrl,
+  getCurriculumItem,
+  searchCurriculum,
+} from './curriculum.mjs';
 import { buildAdaptivePriority } from './recommend.mjs';
 import {
   ASSESSED_LEVELS,
@@ -197,6 +203,20 @@ const assessmentProvenance = s.object(
   },
   []
 );
+const proposedConcept = s.object({
+  id: s.id(),
+  name: s.text(200),
+  description: s.text(2_000),
+  difficulty: s.enumOf(['intro', 'core', 'advanced']),
+  priority: s.int(1, 5),
+  tags: s.list(s.id(), 10, 'tags[0] must be a track id.'),
+  mentalModel: s.text(2_000),
+  commonMistakes: strings(10, 500),
+  resources: s.list(
+    s.object({ title: s.text(300), url: s.url(), type: s.text(40) }, ['title', 'url']),
+    10
+  ),
+});
 const priorityChoice = s.object(
   {
     objective: s.text(1_000),
@@ -272,9 +292,11 @@ const TOOLS = {
     annotations: read,
     handler: async (args, ctx) => {
       const projection = await loadDailyLearningProjection(ctx.db, ctx.userId, ctx.now);
-      if (args.conceptId) {
-        const concept = CONCEPT_BY_ID.get(args.conceptId);
-        if (!concept) getCurriculumItem('concept', args.conceptId);
+      const adaptive = args.conceptId ? null : (await adaptivePriority(ctx)).priority;
+      const conceptId = args.conceptId ?? adaptive?.concepts?.[0]?.id;
+      if (conceptId) {
+        const concept = CONCEPT_BY_ID.get(conceptId);
+        if (!concept) getCurriculumItem('concept', conceptId);
         projection.priority = {
           ...projection.priority,
           concept: {
@@ -284,6 +306,7 @@ const TOOLS = {
             difficulty: concept.difficulty,
             tags: concept.tags,
           },
+          actionUrl: adaptive?.actionUrl ?? `${PRODUCT_ORIGIN}/study/concept/${concept.id}`,
           conceptUrl: conceptUrl(concept.id),
         };
       }
@@ -684,7 +707,7 @@ const TOOLS = {
     title: 'Save learning resource',
     description:
       'Register an external article, paper, video, documentation page, repository, book or podcast. Deduplicated by canonical URL (tracking parameters, fragments, www, arXiv versions and youtu.be links are normalized): saving again merges concepts/topics, fills only missing metadata and returns the same record (change metadata with update_learning_resource). Status: recommended, saved, reading, discussed, completed. Reading a resource never implies mastery.',
-    inputSchema: resourceInput,
+    inputSchema: { ...resourceInput, properties: { ...resourceInput.properties, idempotencyKey } },
     annotations: write,
     mutation: true,
     handler: (args, ctx) => store.saveResource(ctx.db, ctx.userId, args, ctx),
@@ -760,20 +783,7 @@ const TOOLS = {
           1_000,
           'What revealed the gap, e.g. a question the curriculum could not support.'
         ),
-        proposedConcept: s.object({
-          id: s.id(),
-          name: s.text(200),
-          description: s.text(2_000),
-          difficulty: s.enumOf(['intro', 'core', 'advanced']),
-          priority: s.int(1, 5),
-          tags: s.list(s.id(), 10, 'tags[0] must be a track id.'),
-          mentalModel: s.text(2_000),
-          commonMistakes: strings(10, 500),
-          resources: s.list(
-            s.object({ title: s.text(300), url: s.url(), type: s.text(40) }, ['title', 'url']),
-            10
-          ),
-        }),
+        proposedConcept,
         sessionId: s.id(),
         idempotencyKey,
       },
@@ -794,7 +804,7 @@ const TOOLS = {
         prUrl: s.url(),
         description: s.text(4_000),
         learningObjectives: strings(20, 1_000),
-        proposedConcept: { type: 'object' },
+        proposedConcept,
         idempotencyKey,
       },
       ['gapId']

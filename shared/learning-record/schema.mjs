@@ -236,8 +236,23 @@ export function slugify(value) {
     .slice(0, 120);
 }
 
+const TOPIC_SYMBOLS = [
+  ['+', ' plus '],
+  ['#', ' sharp '],
+  ['.', ' dot '],
+  ['&', ' and '],
+  ['@', ' at '],
+  ['*', ' star '],
+];
+
+/**
+ * Stable key for a free-text topic. Meaningful symbols are spelled out so
+ * "C++", "C#" and ".NET" stay distinct instead of collapsing to one slug.
+ */
 export function topicKey(topic) {
-  const slug = slugify(topic);
+  let text = String(topic ?? '').toLowerCase();
+  for (const [symbol, word] of TOPIC_SYMBOLS) text = text.split(symbol).join(word);
+  const slug = slugify(text);
   if (!slug) throw invalid(`Topic "${topic}" must contain letters or digits.`);
   return `topic:${slug}`;
 }
@@ -294,7 +309,12 @@ export function canonicalUrl(value) {
     .sort(([a], [b]) => a.localeCompare(b));
   const search = new URLSearchParams(params).toString();
   if (pathname.length > 1) pathname = pathname.replace(/\/+$/u, '');
-  if (host === 'github.com' || host === 'youtube.com') pathname = pathname.toLowerCase();
+  if (host === 'github.com') {
+    // Owner and repository names are case-insensitive; refs and file paths are not.
+    const [, owner = '', repo = '', ...rest] = pathname.split('/');
+    pathname =
+      ['', owner.toLowerCase(), repo.toLowerCase(), ...rest].join('/').replace(/\/+$/u, '') || '/';
+  }
   const port = url.port ? `:${url.port}` : '';
   return `https://${host}${port}${pathname || '/'}${search ? `?${search}` : ''}`;
 }
