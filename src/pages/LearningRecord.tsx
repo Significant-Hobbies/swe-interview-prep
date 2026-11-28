@@ -79,6 +79,14 @@ function useRecord(view: View, id?: string) {
   return { ...state, signedIn: Boolean(user) };
 }
 
+const itemKey = (item: Json) => String(item.id ?? item.subject?.key ?? JSON.stringify(item));
+
+/** Recency-ordered lists can shift while paging; never show an entry twice. */
+function appendUnique(existing: Json[], incoming: Json[]) {
+  const seen = new Set(existing.map(itemKey));
+  return [...existing, ...incoming.filter((item) => !seen.has(itemKey(item)))];
+}
+
 /** Overview lists start with the first page and append later pages on request. */
 function usePagedSections(data: Json | null) {
   const [pages, setPages] = useState({} as PageMap);
@@ -111,7 +119,7 @@ function usePagedSections(data: Json | null) {
       const next = await fetchPage(key, cursor);
       setPages((current) => ({
         ...current,
-        [key]: { ...next, items: [...(current[key]?.items ?? []), ...next.items] },
+        [key]: { ...next, items: appendUnique(current[key]?.items ?? [], next.items) },
       }));
     } catch (error) {
       setErrors((current) => ({ ...current, [key]: errorMessage(error) }));

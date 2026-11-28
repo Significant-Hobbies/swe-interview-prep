@@ -59,7 +59,7 @@ describe('subject identity', () => {
   it('never re-keys a free-text topic as a curriculum concept', async () => {
     await assess({ topic: 'BM25' }, { demonstratedLevel: 'advanced' });
     const topic = await level({ topic: 'BM25' });
-    expect(topic.subject.key).toMatch(/^topic:bm25~[0-9a-f]{8}$/u);
+    expect(topic.subject.key).toMatch(/^topic:bm25~[0-9a-f]{16}$/u);
     expect(topic.level).toBe('advanced');
     expect((await level({ conceptId: 'bm25' })).level).toBe('unassessed');
   });
@@ -448,7 +448,7 @@ describe('reads', () => {
       topic: '++',
       gapKind: 'missing',
       description: 'Increment operators',
-      proposedConcept: { tags: ['search-ir'] },
+      proposedConcept: { tags: ['search-ir'], drills: ['inc-drill'], reviewQuestions: ['inc-rq'] },
     });
     expect(report.contribution.entry.id).toBe('plus-plus');
     expect(report.contribution.problems).toEqual([]);

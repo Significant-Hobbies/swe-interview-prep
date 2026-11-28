@@ -54,7 +54,7 @@ const idempotencyKey = {
   maxLength: 128,
   pattern: '^[A-Za-z0-9._:-]+$',
   description:
-    'Caller-generated unique key for this logical mutation. Reuse the same key when retrying; a retry returns the original result without duplicating records.',
+    'Caller-generated unique key for this logical mutation. Reuse the same key when retrying: the mutation is never applied twice. A retry returns the current state of the records it touched (marked idempotentReplay), not a copy of the first response; one-time fields such as knowledgeBefore are omitted, and a record deleted since is reported as deleted.',
 };
 const strings = (maxItems = 50, maxLength = 2_000, description = '') =>
   s.list(s.text(maxLength), maxItems, description);
@@ -217,6 +217,9 @@ const proposedConcept = s.object({
     s.object({ title: s.text(300), url: s.url(), type: s.text(40) }, ['title', 'url']),
     10
   ),
+  drills: s.list(s.id(), 10, 'Drill ids in src/data/drills.json (add new drills in the same PR).'),
+  reviewQuestions: s.list(s.id(), 10, 'Review question ids in src/data/review-questions.json.'),
+  roadmaps: s.list(s.id(), 10, 'Roadmap ids this concept belongs to.'),
 });
 const priorityChoice = s.object(
   {
@@ -482,7 +485,7 @@ const TOOLS = {
   get_knowledge_state: {
     title: 'Get knowledge state',
     description:
-      'Concept, domain and free-topic understanding: assessed level (or "unassessed"), self-reported level, target, interest, assessment confidence, evidence counts, last assessed and review due. Filter by category: previously-known, newly-learned, needs-depth, needs-revision, due-for-review, unassessed.',
+      'Concept, domain and free-topic understanding: assessed level (or "unassessed"), self-reported level, target, interest, assessment confidence, evidence counts, last assessed and review due. Filter by category: previously-known, newly-learned, needs-depth, needs-revision, due-for-review, unassessed. Ordered by most recent activity, so an assessment recorded while paging can move a subject; dedupe by subject key.',
     inputSchema: s.object({
       subjects: s.list(
         subject,
@@ -544,7 +547,8 @@ const TOOLS = {
   },
   list_courses: {
     title: 'List courses',
-    description: 'List courses, primary first. Filter by status, text or primaryOnly.',
+    description:
+      'List courses, newest first, with a stable cursor. Each item says whether it is primary; pass primaryOnly to get the primary course directly. Filter by status or text.',
     inputSchema: s.object({
       status: s.enumOf(COURSE_STATUSES),
       primaryOnly: { type: 'boolean' },
@@ -669,7 +673,7 @@ const TOOLS = {
   get_learning_history: {
     title: 'Get learning history',
     description:
-      'Chronological session history (newest first by default). Filter by kind, status, course, concept, topic, resource, text, or date range. detail=true returns full records.',
+      'Chronological session history (newest first by default). Filter by kind, status, course, concept, topic, resource, text, or date range. detail=true returns full records. Pages follow started_at; editing the start time of a session while paging can move it, so dedupe by id.',
     inputSchema: s.object({
       kind: s.enumOf(SESSION_KINDS),
       status: s.enumOf(['active', 'completed']),
@@ -940,7 +944,7 @@ const REPLAY_READERS = {
   resource: (ref, ctx) => store.getResource(ctx.db, ctx.userId, { resourceId: ref.id }),
   gap: (ref, ctx) => store.getGap(ctx.db, ctx.userId, { gapId: ref.id }),
   override: async (ref, ctx) => ({
-    override: { id: ref.id },
+    override: await store.getOverride(ctx.db, ctx.userId, ref.id),
     priority: await adaptivePriority(ctx),
   }),
   deletion: (ref) => ref.result,

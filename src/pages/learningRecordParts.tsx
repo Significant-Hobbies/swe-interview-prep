@@ -1,26 +1,10 @@
 import { ArrowLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-import type { Json, SectionProps } from './learningRecordTypes';
+import { type Json, profileRows, type SectionProps } from './learningRecordTypes';
 
 // Building blocks for the read-only learning record pages.
-
-const PROFILE_LIST_FIELDS = [
-  'interests',
-  'disinterests',
-  'careerObjectives',
-  'priorities',
-  'preferredMethods',
-];
-
-const PROFILE_LABELS: Record<string, string> = {
-  interests: 'Interests',
-  disinterests: 'Disinterests',
-  careerObjectives: 'Career objectives',
-  priorities: 'Priorities',
-  preferredMethods: 'Preferred methods',
-};
 
 export function recordHref(kind: string, id: string) {
   return ['', 'record', kind, encodeURIComponent(id)].join('/');
@@ -160,10 +144,14 @@ export function Status({
   error: string | null;
   signedIn: boolean;
 }) {
+  const location = useLocation();
   if (!signedIn) {
+    const loginHref = ['/login', new URLSearchParams({ next: location.pathname }).toString()].join(
+      '?'
+    );
     return (
       <p className="mt-8 text-sm text-white/60">
-        <Link to="/login" className="text-white underline underline-offset-4">
+        <Link to={loginHref} className="text-white underline underline-offset-4">
           Sign in
         </Link>{' '}
         to see the learning record your assistant keeps.
@@ -187,9 +175,11 @@ export function Status({
 
 export function ProfileSection({ data }: { data: Json }) {
   const profile = data.profile?.profile ?? {};
+  const rows = profileRows(profile);
+  const hasContent = Boolean(profile.background || profile.availableTime || rows.length);
   return (
     <Section id="profile" title="Profile">
-      {Object.keys(profile).length ? (
+      {hasContent ? (
         <dl className="grid gap-x-8 gap-y-4 text-sm sm:grid-cols-2">
           {profile.background && (
             <div className="sm:col-span-2">
@@ -199,16 +189,14 @@ export function ProfileSection({ data }: { data: Json }) {
               <dd className="mt-1 text-white/75">{profile.background}</dd>
             </div>
           )}
-          {PROFILE_LIST_FIELDS.map((key) =>
-            profile[key]?.length ? (
-              <div key={key}>
-                <dt>
-                  <Label>{PROFILE_LABELS[key]}</Label>
-                </dt>
-                <dd className="mt-1 text-white/75">{profile[key].join(' · ')}</dd>
-              </div>
-            ) : null
-          )}
+          {rows.map((row) => (
+            <div key={row.key}>
+              <dt>
+                <Label>{row.label}</Label>
+              </dt>
+              <dd className="mt-1 text-white/75">{row.value}</dd>
+            </div>
+          ))}
           {profile.availableTime && (
             <div>
               <dt>

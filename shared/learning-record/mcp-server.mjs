@@ -82,7 +82,7 @@ function toolError(error) {
       error: {
         code: 'internal_error',
         message:
-          'The learning record could not complete this request. Retry with the same idempotencyKey.',
+          'The learning record could not complete this request. Retry with the same idempotencyKey; if that reports the request as in progress, read the current state before sending the change again with a new key.',
       },
     },
     true
@@ -165,19 +165,42 @@ async function callTool({ params, auth, client, now, clientName }) {
   const receipt = await store.reserveReceipt(client, userId, idempotencyKey, name, hash, now);
   if (receipt) return replayFromReceipt(receipt, name, hash, ctx);
   // Seeds are namespaced by tool so distinct keys can never alias one record.
-  const seeded = { ...ctx, idempotencySeed: `${name}:${idempotencyKey}` };
+  const writes = { changed: false };
+  const seeded = {
+    ...ctx,
+    db: trackChanges(client, writes),
+    idempotencySeed: `${name}:${idempotencyKey}`,
+  };
   let response;
   try {
     response = await tool.handler(rest, seeded);
   } catch (error) {
-    await store.releaseReceipt(client, userId, idempotencyKey);
+    // The key is reusable only when the failed request changed nothing. Once
+    // a write committed, the reservation stays and a retry is told to re-read,
+    // so it can never re-apply the mutation over a newer edit.
+    if (!writes.changed) await store.releaseReceipt(client, userId, idempotencyKey);
     throw error;
   }
   await store.completeReceipt(client, userId, idempotencyKey, receiptRef(name, response, now));
   return response;
 }
 
-/** Parse one JSON-RPC message, or return an error response. */
+/** A database client that records whether any write statement changed a row. */
+function trackChanges(client, writes) {
+  const isWrite = (statement) => /^\s*(INSERT|UPDATE|DELETE|REPLACE)\b/iu.test(statement.sql);
+  const note = (statements, results) => {
+    if (results.some((result, index) => isWrite(statements[index]) && result.rowsAffected > 0)) {
+      writes.changed = true;
+    }
+    return results;
+  };
+  return {
+    ...client,
+    execute: async (statement) => note([statement], [await client.execute(statement)])[0],
+    batch: async (statements) => note(statements, await client.batch(statements)),
+  };
+}
+
 /** Read at most MAX_BODY_BYTES from the request stream. */
 async function readBoundedText(request) {
   const declared = Number(request.headers.get('content-length') ?? 0);

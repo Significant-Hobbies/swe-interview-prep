@@ -251,9 +251,20 @@ const TOPIC_SYMBOLS = [
   ['*', ' star '],
 ];
 
-/** 32-bit FNV-1a, hex. Deterministic and synchronous for short identity suffixes. */
-function fnv1a(value) {
-  let hash = 0x811c9dc5;
+function spellSymbols(value) {
+  let text = value;
+  for (const [symbol, word] of TOPIC_SYMBOLS) text = text.split(symbol).join(word);
+  return text;
+}
+
+/** Readable slug for a topic ("C++" reads c-plus-plus); empty for untransliterable scripts. */
+export function topicSlug(topic) {
+  return slugify(spellSymbols(String(topic ?? '').toLowerCase()));
+}
+
+/** 32-bit FNV-1a from a given offset basis, hex. */
+function fnv1a(value, basis = 0x811c9dc5) {
+  let hash = basis;
   for (const char of value) {
     hash ^= char.codePointAt(0);
     hash = Math.imul(hash, 0x01000193) >>> 0;
@@ -261,22 +272,31 @@ function fnv1a(value) {
   return hash.toString(16).padStart(8, '0');
 }
 
+/** 64-bit identity suffix: two independent FNV-1a passes. */
+function identityHash(value) {
+  return `${fnv1a(value)}${fnv1a(value, 0x050c5d1f)}`;
+}
+
 /**
  * Stable key for a free-text topic: a readable slug ("C++" reads c-plus-plus)
- * plus a hash of the normalized text. Case and spacing do not matter.
+ * plus a 64-bit hash of the normalized text. Case and spacing do not matter.
+ * Topics in scripts the slug cannot transliterate keep a generic slug; the
+ * hash still identifies them, and the learner's label is stored separately.
  */
 export function topicKey(topic) {
   const normalized = String(topic ?? '')
+    .normalize('NFC')
     .toLowerCase()
     .trim()
     .replace(/\s+/gu, ' ');
-  let text = normalized;
-  for (const [symbol, word] of TOPIC_SYMBOLS) text = text.split(symbol).join(word);
-  const slug = slugify(text).slice(0, 80);
-  if (!slug) throw invalid(`Topic "${topic}" must contain letters or digits.`);
-  // The readable slug can collapse punctuation or truncate; the hash of the
-  // full normalized text keeps every distinct topic distinct.
-  return `topic:${slug}~${fnv1a(normalized)}`;
+  const text = spellSymbols(normalized);
+  if (!/[\p{L}\p{N}]/u.test(text)) {
+    throw invalid(`Topic "${topic}" must contain letters or digits.`);
+  }
+  const slug = slugify(text).slice(0, 80) || 'topic';
+  // The readable slug can collapse punctuation, scripts or length; the hash of
+  // the full normalized text keeps distinct topics distinct.
+  return `topic:${slug}~${identityHash(normalized)}`;
 }
 
 function httpUrl(value) {

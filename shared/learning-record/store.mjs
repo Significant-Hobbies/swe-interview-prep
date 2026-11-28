@@ -272,25 +272,34 @@ function subjectsFrom(conceptIds = [], topics = []) {
   return [...subjects.values()];
 }
 
-export async function getKnowledgeState(db, userId, args, ctx) {
-  const now = ctx?.now ?? new Date();
-  const states = await loadAllStates(db, userId);
-  let entries = [...states.values()];
+/** One entry per subject: recorded states, plus empty ones for requested or curriculum subjects. */
+function requestedEntries(states, args) {
+  const entries = new Map();
   if (args.subjects?.length) {
-    const keys = new Set(args.subjects.map((subject) => resolveSubject(subject).key));
-    entries = entries.filter((state) => keys.has(state.subject_key));
     for (const subject of args.subjects) {
       const resolved = resolveSubject(subject);
-      if (!states.has(resolved.key)) entries.push(emptyState(resolved));
+      entries.set(resolved.key, states.get(resolved.key) ?? emptyState(resolved));
     }
+  } else {
+    for (const [key, state] of states) entries.set(key, state);
   }
   if (args.includeUnassessedCurriculum) {
     for (const concept of CONCEPT_BY_ID.values()) {
-      if (!states.has(concept.id)) {
-        entries.push(emptyState({ key: concept.id, kind: 'concept', label: concept.name }));
+      if (!entries.has(concept.id) && !states.has(concept.id)) {
+        entries.set(
+          concept.id,
+          emptyState({ key: concept.id, kind: 'concept', label: concept.name })
+        );
       }
     }
   }
+  return [...entries.values()];
+}
+
+export async function getKnowledgeState(db, userId, args, ctx) {
+  const now = ctx?.now ?? new Date();
+  const states = await loadAllStates(db, userId);
+  let entries = requestedEntries(states, args);
   if (args.subjectKind)
     entries = entries.filter((state) => state.subject_kind === args.subjectKind);
   if (args.domain) {
@@ -423,6 +432,10 @@ function insertAssessmentStatement(userId, row, guard) {
     conditions.push('EXISTS (SELECT 1 FROM learning_sessions WHERE user_id = ? AND id = ?)');
     args.push(userId, row.session_id);
   }
+  if (row.course_id) {
+    conditions.push('EXISTS (SELECT 1 FROM learning_courses WHERE user_id = ? AND id = ?)');
+    args.push(userId, row.course_id);
+  }
   if (guard) {
     conditions.push(guard.sql);
     args.push(...guard.args);
@@ -448,12 +461,11 @@ export async function submitAssessment(db, userId, args, ctx) {
   const row = assessmentRow(id, subject, args, sessionRow, ctx);
   const before =
     (await loadStates(db, userId, [subject.key])).get(subject.key) ?? emptyState(subject);
-  const sessionGuard = row.session_id
-    ? {
-        sql: 'EXISTS (SELECT 1 FROM learning_sessions WHERE user_id = ? AND id = ?)',
-        args: [userId, row.session_id],
-      }
-    : undefined;
+  // The target level is saved only if the assessment itself was stored.
+  const sessionGuard = {
+    sql: 'EXISTS (SELECT 1 FROM learning_assessments WHERE user_id = ? AND id = ?)',
+    args: [userId, row.id],
+  };
   await db.batch([
     insertAssessmentStatement(userId, row),
     preferenceStatement(userId, subject, { targetLevel: args.targetLevel }, ctx, sessionGuard),
@@ -463,7 +475,7 @@ export async function submitAssessment(db, userId, args, ctx) {
     args: [userId, id],
   });
   if (!stored.rows[0])
-    throw notFound(`Session "${args.sessionId}" was deleted before the assessment was saved.`);
+    throw notFound('The session or course was deleted before the assessment was saved.');
   const after = (await loadStates(db, userId, [subject.key])).get(subject.key);
   return {
     assessment: presentAssessment(stored.rows[0]),
@@ -989,6 +1001,8 @@ function removeLessons(lessons, ids) {
 
 function reorderLessons(lessons, order) {
   const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  if (new Set(order).size !== order.length)
+    throw invalid('lessonOrder must not repeat a lesson id.');
   const ordered = order.map((id) => {
     if (!byId.has(id)) throw invalid(`lessonOrder references unknown lesson "${id}".`);
     return byId.get(id);
@@ -1181,12 +1195,19 @@ export async function saveResource(db, userId, args, ctx) {
   return { resource: resourceFromRow(saved), created: Number(result.rows[0]?.version) === 1 };
 }
 
-function editedList(current, add, remove) {
+/**
+ * Apply association edits. Without edits the stored list is kept verbatim, so
+ * changing another field never trims associations merged in by earlier saves.
+ */
+function editedList(stored, current, add, remove) {
+  if (!add?.length && !remove?.length) return stored;
   const drop = new Set((remove ?? []).map((value) => value.toLowerCase()));
-  return uniqueStrings([
-    ...current.filter((value) => !drop.has(value.toLowerCase())),
-    ...(add ?? []),
-  ]);
+  return JSON.stringify(
+    uniqueStrings(
+      [...current.filter((value) => !drop.has(value.toLowerCase())), ...(add ?? [])],
+      Number.MAX_SAFE_INTEGER
+    )
+  );
 }
 
 export async function updateResource(db, userId, args, ctx) {
@@ -1211,8 +1232,13 @@ export async function updateResource(db, userId, args, ctx) {
       patched(set, 'publishedAt', current.publishedAt),
       patched(set, 'summary', current.summary),
       patched(set, 'notes', current.notes),
-      JSON.stringify(editedList(current.conceptIds, args.addConceptIds, args.removeConceptIds)),
-      JSON.stringify(editedList(current.topics, args.addTopics, args.removeTopics)),
+      editedList(
+        row.concept_ids_json,
+        current.conceptIds,
+        args.addConceptIds,
+        args.removeConceptIds
+      ),
+      editedList(row.topics_json, current.topics, args.addTopics, args.removeTopics),
       nowIso(ctx),
       userId,
       current.id,
@@ -1380,6 +1406,18 @@ function validateRecordSubjects(changes) {
   for (const signal of changes.interestSignals ?? []) resolveSubject(signal.subject);
 }
 
+const SESSION_LIST_LIMIT = 500;
+
+/** An append that would exceed a session list's limit is rejected, never truncated. */
+function withinSessionLimit(key, values) {
+  if (values.length > SESSION_LIST_LIMIT) {
+    throw invalid(
+      `A session holds at most ${SESSION_LIST_LIMIT} ${key}. Start a new session to record more.`
+    );
+  }
+  return values;
+}
+
 async function mergeRecord(db, userId, record, changes, ctx) {
   validateRecordSubjects(changes);
   await requireResourceIds(db, userId, changes.resourceIds);
@@ -1391,11 +1429,17 @@ async function mergeRecord(db, userId, record, changes, ctx) {
   const next = { ...record };
   for (const key of SESSION_STRING_LISTS) {
     if (additions[key]?.length)
-      next[key] = uniqueStrings([...(next[key] ?? []), ...additions[key]], 500);
+      next[key] = withinSessionLimit(
+        key,
+        uniqueStrings([...(next[key] ?? []), ...additions[key]], SESSION_LIST_LIMIT + 1)
+      );
   }
   for (const key of SESSION_OBJECT_LISTS) {
     if (additions[key]?.length)
-      next[key] = dedupeObjects([...(next[key] ?? []), ...additions[key]], 500);
+      next[key] = withinSessionLimit(
+        key,
+        dedupeObjects([...(next[key] ?? []), ...additions[key]], SESSION_LIST_LIMIT + 1)
+      );
   }
   return { record: next, planned };
 }
@@ -1448,12 +1492,9 @@ function lessonStatusStatement(userId, courseId, lessonId, status, ctx, guard, o
 }
 
 /** Engagement roll-up: exposure and interest only, never assessed level. */
-function engagementStatements(userId, record, endedAt, ctx, guard, extraSubjects = []) {
+function engagementStatements(userId, record, endedAt, ctx, guard, sessionId = null) {
   const interests = new Map();
   const subjects = subjectsFrom(record.conceptIds, record.topics);
-  for (const subject of extraSubjects) {
-    if (!subjects.some((item) => item.key === subject.key)) subjects.push(subject);
-  }
   for (const signal of record.interestSignals ?? []) {
     const subject = resolveSubject(signal.subject);
     interests.set(subject.key, signal.interest);
@@ -1469,6 +1510,18 @@ function engagementStatements(userId, record, endedAt, ctx, guard, extraSubjects
               ${guardSuffix(guard)}`,
       args: [nowIso(ctx), userId, JSON.stringify(record.resourceIds), ...(guard?.args ?? [])],
     });
+  }
+  if (sessionId) {
+    statements.push(
+      assessedEngagementStatement(
+        userId,
+        sessionId,
+        subjects.map((subject) => subject.key),
+        endedAt,
+        ctx,
+        guard
+      )
+    );
   }
   return statements;
 }
@@ -1531,7 +1584,7 @@ export async function startSession(db, userId, args, ctx) {
     {
       sql: `INSERT INTO learning_sessions (id, user_id, kind, status, title, course_id, lesson_id,
               record_json, summary, started_at, ended_at, duration_minutes, write_token, created_at, updated_at)
-            SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ${linkGuard.sql}
+            SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? WHERE ${linkGuard.sql}
             ON CONFLICT(id) DO NOTHING`,
       args: [
         id,
@@ -1567,14 +1620,14 @@ export async function startSession(db, userId, args, ctx) {
   return getSession(db, userId, { sessionId: id });
 }
 
-/** The session insert applies only if its course (and lesson) still exist. */
+/** A condition that holds only while a session's course (and lesson) still exist. */
 function courseLinkGuard(userId, courseId, lessonId) {
-  if (!courseId) return { sql: 'WHERE 1', args: [] };
+  if (!courseId) return { sql: '1', args: [] };
   const lesson = lessonId
     ? " AND EXISTS (SELECT 1 FROM json_each(c.lessons_json) WHERE json_extract(value, '$.id') = ?)"
     : '';
   return {
-    sql: `WHERE EXISTS (SELECT 1 FROM learning_courses c WHERE c.user_id = ? AND c.id = ?${lesson})`,
+    sql: `EXISTS (SELECT 1 FROM learning_courses c WHERE c.user_id = ? AND c.id = ?${lesson})`,
     args: lessonId ? [userId, courseId, lessonId] : [userId, courseId],
   };
 }
@@ -1625,11 +1678,13 @@ function assertVersion(row, expected, label, reread) {
 }
 
 function sessionUpdateStatement(userId, row, fields, token, ctx) {
+  // The destination course and lesson must still exist when the update lands.
+  const link = courseLinkGuard(userId, fields.courseId, fields.lessonId);
   return {
     sql: `UPDATE learning_sessions SET kind = ?, status = ?, title = ?, course_id = ?, lesson_id = ?,
             record_json = ?, summary = ?, started_at = ?, ended_at = ?, duration_minutes = ?,
             version = version + 1, write_token = ?, updated_at = ?
-          WHERE user_id = ? AND id = ? AND version = ?`,
+          WHERE user_id = ? AND id = ? AND version = ? AND ${link.sql}`,
     args: [
       fields.kind,
       fields.status,
@@ -1646,12 +1701,13 @@ function sessionUpdateStatement(userId, row, fields, token, ctx) {
       userId,
       row.id,
       row.version,
+      ...link.args,
     ],
   };
 }
 
 function sessionSideEffects(userId, context, ctx, guard) {
-  const { lessonId, courseId, args, complete, row, record, endedAt, assessed } = context;
+  const { lessonId, courseId, args, complete, row, record, endedAt } = context;
   const statements = [];
   if (courseId && lessonId && args.lessonStatus) {
     statements.push(
@@ -1659,25 +1715,40 @@ function sessionSideEffects(userId, context, ctx, guard) {
     );
   }
   if (complete && row.status !== 'completed') {
-    statements.push(...engagementStatements(userId, record, endedAt, ctx, guard, assessed));
+    statements.push(...engagementStatements(userId, record, endedAt, ctx, guard, row.id));
   }
   return statements;
 }
 
-/** Subjects assessed during a session, so completing it records their exposure too. */
-async function loadAssessedSubjects(db, userId, sessionId) {
-  const result = await db.execute({
-    sql: `SELECT DISTINCT a.subject_key, COALESCE(k.label, a.subject_label) AS label FROM learning_assessments a
-          LEFT JOIN knowledge_states k ON k.user_id = a.user_id AND k.subject_key = a.subject_key
-          WHERE a.user_id = ? AND a.session_id = ?`,
-    args: [userId, sessionId],
-  });
-  return result.rows.map((row) => {
-    const concept = CONCEPT_BY_ID.get(row.subject_key);
-    if (concept) return { key: concept.id, kind: 'concept', label: concept.name };
-    const kind = row.subject_key.startsWith('domain:') ? 'domain' : 'topic';
-    return { key: row.subject_key, kind, label: row.label ?? row.subject_key };
-  });
+/**
+ * Exposure for subjects assessed during a session but not named on it. It
+ * reads the assessments inside the completion batch, so evidence saved while
+ * the session is completing is still counted.
+ */
+function assessedEngagementStatement(userId, sessionId, namedKeys, endedAt, ctx, guard) {
+  return {
+    sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
+          SELECT ?, a.subject_key,
+            CASE WHEN a.subject_key LIKE 'domain:%' THEN 'domain'
+                 WHEN a.subject_key LIKE 'topic:%' THEN 'topic' ELSE 'concept' END,
+            MAX(a.subject_label), 1, ?, ?
+          FROM learning_assessments a
+          WHERE a.user_id = ? AND a.session_id = ? AND a.subject_key NOT IN ${JSON_LIST} ${guardSuffix(guard)}
+          GROUP BY a.subject_key
+          ON CONFLICT(user_id, subject_key) DO UPDATE SET
+            exposure_count = knowledge_states.exposure_count + 1,
+            last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
+            updated_at = excluded.updated_at`,
+    args: [
+      userId,
+      endedAt,
+      nowIso(ctx),
+      userId,
+      sessionId,
+      JSON.stringify(namedKeys),
+      ...(guard?.args ?? []),
+    ],
+  };
 }
 
 const SESSION_UPDATE_ATTEMPTS = 3;
@@ -1707,8 +1778,6 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
     record,
     summary: firstDefined(args.summary, set.summary, row.summary),
   };
-  const assessed =
-    complete && row.status !== 'completed' ? await loadAssessedSubjects(db, userId, row.id) : [];
   const token = crypto.randomUUID();
   const guard = tokenGuard('learning_sessions', 'id', row.id, userId, token);
   const results = await db.batch([
@@ -1716,7 +1785,7 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
     ...plannedResourceStatements(userId, planned, ctx, guard),
     ...sessionSideEffects(
       userId,
-      { lessonId, courseId, args, complete, row, record, endedAt: times.endedAt, assessed },
+      { lessonId, courseId, args, complete, row, record, endedAt: times.endedAt },
       ctx,
       guard
     ),
@@ -1981,6 +2050,8 @@ function gapFromRow(row) {
   };
 }
 
+const OPEN_GAP_STATUSES = new Set(['open', 'proposed', 'pr-opened']);
+
 const OPEN_GAP_SQL = `SELECT * FROM curriculum_gaps WHERE user_id = ? AND topic_key = ?
   AND status IN ('open', 'proposed', 'pr-opened') ORDER BY created_at LIMIT 1`;
 
@@ -2097,9 +2168,11 @@ async function swapGapFields(db, userId, row, args, ctx) {
   if (args.proposedConcept) record.proposedConcept = args.proposedConcept;
   const nextStatus =
     args.status ?? (args.prUrl && row.status === 'open' ? 'pr-opened' : row.status);
-  const result = await db.execute({
+  await assertNoOtherOpenGap(db, userId, row, nextStatus);
+  const result = await uniqueAsConflict(db, {
     sql: `UPDATE curriculum_gaps SET status = ?, pr_url = ?, description = ?, record_json = ?, updated_at = ?
-          WHERE user_id = ? AND id = ? AND record_json = ? AND status = ?`,
+          WHERE user_id = ? AND id = ? AND record_json = ? AND status = ?
+            AND description = ? AND pr_url IS ?`,
     args: [
       nextStatus,
       args.prUrl ?? row.pr_url,
@@ -2110,9 +2183,38 @@ async function swapGapFields(db, userId, row, args, ctx) {
       row.id,
       row.record_json,
       row.status,
+      row.description,
+      row.pr_url ?? null,
     ],
   });
   return result.rowsAffected > 0;
+}
+
+/** A concurrent reopen that collides with the unique open-topic index is a conflict, not a crash. */
+async function uniqueAsConflict(db, statement) {
+  try {
+    return await db.execute(statement);
+  } catch (error) {
+    if (/UNIQUE constraint/u.test(String(error?.message))) {
+      throw conflict(
+        'Another unresolved gap now covers this topic. List gaps and update that one.'
+      );
+    }
+    throw error;
+  }
+}
+
+/** Reopening a gap is refused while another unresolved gap covers the same topic. */
+async function assertNoOtherOpenGap(db, userId, row, nextStatus) {
+  if (!OPEN_GAP_STATUSES.has(nextStatus) || OPEN_GAP_STATUSES.has(row.status)) return;
+  const other = (await db.execute({ sql: OPEN_GAP_SQL, args: [userId, row.topic_key] })).rows[0];
+  if (other && other.id !== row.id) {
+    throw new LearningRecordError(
+      'version_conflict',
+      `Gap "${other.id}" is already open for this topic. Update that gap instead.`,
+      { openGapId: other.id }
+    );
+  }
 }
 
 export async function getGap(db, userId, args) {
@@ -2134,14 +2236,7 @@ export async function listGaps(db, userId, args) {
 
 // --- Priority overrides ----------------------------------------------------------
 
-export async function loadOverride(db, userId, day) {
-  const result = await db.execute({
-    sql: `SELECT * FROM learning_priority_overrides WHERE user_id = ? AND day = ?
-          ORDER BY created_at DESC, rowid DESC LIMIT 1`,
-    args: [userId, day],
-  });
-  const row = result.rows[0];
-  if (!row) return null;
+function overrideFromRow(row) {
   return {
     id: row.id,
     day: row.day,
@@ -2150,6 +2245,42 @@ export async function loadOverride(db, userId, day) {
     recommended: parseJson(row.recommended_json, {}),
     createdAt: row.created_at,
   };
+}
+
+/** Whether the course, lesson and resource an override chose still exist. */
+async function overrideTargetsExist(db, userId, chosen) {
+  try {
+    if (chosen.courseId) await validateCourseLink(db, userId, chosen.courseId, chosen.lessonId);
+    if (chosen.resourceId)
+      await requireOwned(db, 'learning_resources', userId, chosen.resourceId, 'Resource');
+    return true;
+  } catch (error) {
+    if (error instanceof LearningRecordError) return false;
+    throw error;
+  }
+}
+
+/**
+ * Today's active override: the latest one, unless what it chose has since
+ * been deleted, in which case the computed recommendation applies again.
+ */
+export async function loadOverride(db, userId, day) {
+  const result = await db.execute({
+    sql: `SELECT * FROM learning_priority_overrides WHERE user_id = ? AND day = ?
+          ORDER BY created_at DESC, rowid DESC LIMIT 1`,
+    args: [userId, day],
+  });
+  const row = result.rows[0];
+  if (!row) return null;
+  const override = overrideFromRow(row);
+  return (await overrideTargetsExist(db, userId, override.chosen)) ? override : null;
+}
+
+/** One override by id, as recorded. */
+export async function getOverride(db, userId, id) {
+  return overrideFromRow(
+    await requireOwned(db, 'learning_priority_overrides', userId, id, 'Override')
+  );
 }
 
 export async function saveOverride(db, userId, { day, recommended, chosen, reason }, ctx) {
@@ -2171,7 +2302,7 @@ export async function saveOverride(db, userId, { day, recommended, chosen, reaso
       nowIso(ctx),
     ],
   });
-  return loadOverride(db, userId, day);
+  return getOverride(db, userId, id);
 }
 
 // --- Deletion (cleanup) ------------------------------------------------------------
@@ -2246,6 +2377,29 @@ async function deleteCourse(db, userId, args) {
   return { entity: 'course', id: row.id, deleted: true };
 }
 
+/**
+ * Resource ids derive from the canonical URL, so a later re-save of the same
+ * URL reuses the id. Unlinking it from sessions in the same batch keeps old
+ * sessions from showing the replacement.
+ */
+async function deleteResource(db, userId, args) {
+  const row = await requireOwned(db, 'learning_resources', userId, args.id, 'Resource');
+  await db.batch([
+    {
+      sql: `UPDATE learning_sessions SET
+              record_json = json_set(record_json, '$.resourceIds', json((
+                SELECT json_group_array(value) FROM json_each(learning_sessions.record_json, '$.resourceIds')
+                WHERE value <> ?))),
+              version = version + 1
+            WHERE user_id = ?
+              AND EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.resourceIds') WHERE value = ?)`,
+      args: [row.id, userId, row.id],
+    },
+    { sql: 'DELETE FROM learning_resources WHERE user_id = ? AND id = ?', args: [userId, row.id] },
+  ]);
+  return { entity: 'resource', id: row.id, deleted: true };
+}
+
 function simpleDelete(entity, table, label) {
   return async (db, userId, args) => {
     const row = await requireOwned(db, table, userId, args.id, label);
@@ -2262,7 +2416,7 @@ const DELETERS = {
   assessment: deleteAssessment,
   session: deleteSession,
   course: deleteCourse,
-  resource: simpleDelete('resource', 'learning_resources', 'Resource'),
+  resource: deleteResource,
   'curriculum-gap': simpleDelete('curriculum-gap', 'curriculum_gaps', 'Curriculum gap'),
 };
 

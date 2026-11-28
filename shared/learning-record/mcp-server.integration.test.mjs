@@ -418,7 +418,12 @@ describe('curriculum gaps, isolation and cleanup', () => {
       description: 'No coverage of tombstone GC',
       relatedConceptIds: ['bm25'],
       learningObjectives: ['Explain causal stability'],
-      proposedConcept: { tags: ['search-ir'], difficulty: 'advanced' },
+      proposedConcept: {
+        tags: ['search-ir'],
+        difficulty: 'advanced',
+        drills: ['crdt-gc-drill'],
+        reviewQuestions: ['crdt-gc-review'],
+      },
     });
     expect(first.contribution.file).toBe('src/data/concepts.json');
     expect(first.contribution.entry.id).toBe('crdt-garbage-collection');

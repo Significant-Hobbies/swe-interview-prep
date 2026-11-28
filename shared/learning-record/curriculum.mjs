@@ -4,7 +4,7 @@ import conceptsData from '../../src/data/concepts.json' with { type: 'json' };
 import drillsData from '../../src/data/drills.json' with { type: 'json' };
 import reviewQuestionsData from '../../src/data/review-questions.json' with { type: 'json' };
 
-import { decodeCursor, encodeCursor, invalid, notFound, slugify, topicKey } from './schema.mjs';
+import { decodeCursor, encodeCursor, invalid, notFound, slugify, topicSlug } from './schema.mjs';
 
 export const PRODUCT_ORIGIN = 'https://learn.significanthobbies.com';
 
@@ -263,7 +263,13 @@ export function getCurriculumItem(kind, id) {
  * A ready-to-review concepts.json entry for a curriculum gap, following the
  * fields that src/data/concepts.test.ts requires.
  */
-const OPTIONAL_PROPOSAL_FIELDS = ['mentalModel', 'commonMistakes', 'resources'];
+const OPTIONAL_PROPOSAL_FIELDS = [
+  'mentalModel',
+  'commonMistakes',
+  'resources',
+  'drills',
+  'reviewQuestions',
+];
 
 function proposalDomain(tags, gap) {
   const tagged = tags.find((tag) => TRACK_IDS.has(tag));
@@ -290,14 +296,30 @@ const PRACTICE_BACKED_TRACKS = new Set(
   })
 );
 
-function proposalProblems(id, domain) {
+/**
+ * Problems the PR must resolve before src/data/concepts.test.ts passes. Every
+ * concept needs an editorial drill and a review question; practice-backed
+ * tracks also need a roadmap.
+ */
+function proposalProblems(entry, domain) {
   const problems = [];
+  const { id } = entry;
   if (CONCEPT_BY_ID.has(id)) problems.push(`Concept id "${id}" already exists; extend it instead.`);
   if (!domain) problems.push('tags[0] must be an existing track id; pass proposedConcept.tags.');
   if (!id) problems.push('The concept needs an id; pass proposedConcept.id.');
-  if (PRACTICE_BACKED_TRACKS.has(domain)) {
+  if (!entry.drills?.length) {
     problems.push(
-      `Track "${domain}" requires every concept to link drills, reviewQuestions and roadmaps. Add a drill (src/data/drills.json, with a testCase) and a review question (src/data/review-questions.json), link their ids on the entry and add it to a roadmap, or the concepts test fails.`
+      'Every concept links at least one editorial drill: add one to src/data/drills.json (with a testCase, conceptId set to this id) and list its id in entry.drills.'
+    );
+  }
+  if (!entry.reviewQuestions?.length) {
+    problems.push(
+      'Every concept links at least one review question: add one to src/data/review-questions.json and list its id in entry.reviewQuestions.'
+    );
+  }
+  if (PRACTICE_BACKED_TRACKS.has(domain) && !entry.roadmaps?.length) {
+    problems.push(
+      `Track "${domain}" requires every concept to be on a roadmap; add it to one and list it in entry.roadmaps.`
     );
   }
   return problems;
@@ -305,9 +327,7 @@ function proposalProblems(id, domain) {
 
 function proposedConceptEntry(gap) {
   const proposal = { difficulty: 'core', priority: 3, ...(gap.proposedConcept || {}) };
-  const id = proposal.id
-    ? slugify(proposal.id)
-    : topicKey(gap.topic).slice('topic:'.length).split('~')[0];
+  const id = proposal.id ? slugify(proposal.id) : topicSlug(gap.topic);
   const tags = (proposal.tags || []).filter(Boolean);
   const domain = proposalDomain(tags, gap);
   const optional = Object.fromEntries(
@@ -318,7 +338,7 @@ function proposedConceptEntry(gap) {
       id,
       name: proposal.name || gap.topic,
       tags: domain ? [domain, ...tags.filter((tag) => tag !== domain)] : tags,
-      roadmaps: [],
+      roadmaps: proposal.roadmaps ?? [],
       difficulty: proposal.difficulty,
       priority: proposal.priority,
       prerequisites: gap.prerequisiteConceptIds || [],
@@ -326,12 +346,13 @@ function proposedConceptEntry(gap) {
       description: proposal.description || gap.description,
       ...optional,
     },
-    problems: proposalProblems(id, domain),
+    domain,
   };
 }
 
 export function contributionGuide(gap) {
-  const { entry, problems } = proposedConceptEntry(gap);
+  const { entry, domain } = proposedConceptEntry(gap);
+  const problems = proposalProblems(entry, domain);
   const branch = `curriculum/${entry.id || 'gap'}`;
   return {
     repository: 'Significant-Hobbies/swe-interview-prep',

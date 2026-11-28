@@ -135,7 +135,9 @@ describe('curriculum gaps', () => {
       description: 'Not covered',
       proposedConcept: { tags: ['distributed-systems'] },
     });
-    expect(guide.problems.join(' ')).toMatch(/drills, reviewQuestions and roadmaps/u);
+    expect(guide.problems.join(' ')).toMatch(/editorial drill/u);
+    expect(guide.problems.join(' ')).toMatch(/review question/u);
+    expect(guide.problems.join(' ')).toMatch(/roadmap/u);
   });
 });
 

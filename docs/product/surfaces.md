@@ -239,8 +239,13 @@ What the assistant can do:
   pull request, without pausing the lesson;
 - get one adaptive daily priority and override it with a recorded reason.
 
-Every create-style mutation takes an `idempotencyKey`; retries return the
-original result. Answer-free checks remain: no tool returns stored review
+Every create-style mutation takes an `idempotencyKey` and is never applied
+twice. A retry returns the current state of the records the first call
+touched, marked `idempotentReplay` (one-time fields such as
+`knowledgeBefore` are omitted; a record deleted since is reported as
+deleted). If a call fails after part of it committed, the key stays reserved
+and a retry reports it as in progress: re-read, then send any missing change
+with a new key. Answer-free checks remain: no tool returns stored review
 answers, expected outputs or reference solutions, which keeps the surface
 compatible with [ADR 0005](../architecture/decisions/0005-socratic-no-solutions.md).
 The older `GET /api/mcp/*` projections remain for compatibility.
