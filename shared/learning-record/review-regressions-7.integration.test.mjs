@@ -49,33 +49,36 @@ describe('exposure credits', () => {
 });
 
 describe('resource identity', () => {
-  it('does not recreate a URL saved and deleted while a save was planning', async () => {
+  it('does not recreate a URL saved and deleted right after a save read its identity', async () => {
     const url = 'https://example.com/raced';
-    const gate = h.pauseOnce(matches(/INSERT INTO learning_resources/u));
+    const gate = h.pauseAfterOnce(matches(/\(SELECT id FROM learning_resources/u));
     const pending = h.call('save_learning_resource', { url, title: 'Raced' });
     await gate.reached;
-    // The paused save planned generation 0. Another request saves and deletes
-    // the URL before the paused write lands, retiring that generation-0 id.
-    h.database
-      .prepare(
-        `INSERT INTO learning_resource_deletions (user_id, resource_id, url_fingerprint, deleted_at)
-         SELECT 'alice', ?, 'fingerprint', '2026-11-28T00:00:00.000Z'`
-      )
-      .run(await plannedId(url));
+    const other = await h.ok('save_learning_resource', { url, title: 'Other' });
+    await h.ok('delete_learning_record', { entity: 'resource', id: other.resource.id });
     gate.release();
     const result = await pending;
     expect(result.error.code).toBe('version_conflict');
     expect(h.count('learning_resources')).toBe(0);
   });
-});
 
-/** The generation-0 id the store derives for a URL (same derivation as newId). */
-async function plannedId(url) {
-  const bytes = new TextEncoder().encode(`alice:res:${url}#0`);
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  const hex = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0'));
-  return `res_${hex.join('').slice(0, 24)}`;
-}
+  it("answers a save with its own write, not a later writer's", async () => {
+    const url = 'https://example.com/answer';
+    await h.ok('save_learning_resource', { url, title: 'A' });
+    const gate = h.pauseAfterOnce(matches(/INSERT INTO learning_resources/u));
+    const pending = h.ok('save_learning_resource', { url, topics: ['First'] });
+    await gate.reached;
+    await h.ok('save_learning_resource', { url, status: 'completed', topics: ['Second'] });
+    gate.release();
+    const first = await pending;
+    expect(first.resource.version).toBe(2);
+    expect(first.resource.status).toBe('saved');
+    expect(first.created).toBe(false);
+    const stored = await h.ok('get_learning_resource', { url });
+    expect(stored.resource.version).toBe(3);
+    expect(stored.resource.topics).toEqual(['First', 'Second']);
+  });
+});
 
 describe('history search', () => {
   it('matches session text, not JSON field names', async () => {
@@ -86,6 +89,14 @@ describe('history search', () => {
     });
     expect((await h.ok('get_learning_history', { q: 'topics' })).items).toHaveLength(0);
     expect((await h.ok('get_learning_history', { q: 'Gossip' })).items).toHaveLength(1);
+  });
+
+  it('rejects text with NUL characters, which stored-text search could not match', async () => {
+    const result = await h.call('start_learning_session', {
+      title: 'packet\u0000tail',
+      idempotencyKey: key('s'),
+    });
+    expect(result.error.code).toBe('invalid_input');
   });
 });
 

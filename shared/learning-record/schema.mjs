@@ -93,6 +93,11 @@ const STRING_RULES = [
     () => 'must not be empty',
   ],
   [
+    // SQLite text functions stop at NUL, so stored text could not be searched.
+    (_schema, value) => value.includes('\u0000'),
+    () => 'must not contain NUL characters',
+  ],
+  [
     (schema, value) => schema.maxLength !== undefined && value.length > schema.maxLength,
     (schema) => `must be at most ${schema.maxLength} characters`,
   ],

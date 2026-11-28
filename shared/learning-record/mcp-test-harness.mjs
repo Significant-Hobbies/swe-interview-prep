@@ -63,6 +63,26 @@ function createHooks() {
         },
       });
     },
+    /** The statement commits, then its caller waits until released. */
+    pauseAfterOnce(predicate) {
+      let release;
+      let reached;
+      const gate = new Promise((resolve) => {
+        release = resolve;
+      });
+      const arrived = new Promise((resolve) => {
+        reached = resolve;
+      });
+      hooks.push({
+        predicate,
+        after: true,
+        run: async () => {
+          reached();
+          await gate;
+        },
+      });
+      return { reached: arrived, release: () => release() };
+    },
     /** The statement commits, then the call rejects: a lost acknowledgment. */
     loseAckOnce(predicate) {
       hooks.push({
@@ -141,6 +161,7 @@ export function createMcpHarness() {
     pauseOnce: hooks.pauseOnce,
     failOnce: hooks.failOnce,
     loseAckOnce: hooks.loseAckOnce,
+    pauseAfterOnce: hooks.pauseAfterOnce,
     now: new Date('2026-11-28T09:00:00.000Z'),
     rpcId: 0,
     count: (table) => database.prepare(`SELECT COUNT(*) AS n FROM ${table}`).get().n,
