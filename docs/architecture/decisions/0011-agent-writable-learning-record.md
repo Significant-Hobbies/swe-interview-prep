@@ -32,12 +32,14 @@ anticipate structured, attributed assessment evidence.
    adds learner profiles, knowledge states, courses, sessions, resources,
    assessments, curriculum gaps, priority overrides and mutation receipts.
    No existing table changes.
-4. **Evidence, not activity, moves knowledge.** Only `submit_assessment`
-   changes an assessed level. Self-assessment is stored as self-reported.
-   Completing a session or lesson, or reading a resource, records exposure
-   and interest only. A subject with no assessed evidence is "unassessed",
-   never beginner. Knowledge state is replayable from assessments, so a
-   deleted assessment is recomputed rather than left stale.
+4. **Evidence, not activity, moves knowledge, and knowledge is derived.**
+   Only `submit_assessment` adds evidence. Assessed level, confidence and
+   review dates are computed from the stored assessments when read, never
+   cached, so deletions, backfills and concurrent submissions cannot leave a
+   stale level. `knowledge_states` keeps only learner-declared preferences
+   (target, interest, notes) and exposure. Self-assessment is self-reported
+   evidence. Completing a session or lesson, or reading a resource, records
+   exposure and interest only. No evidence means "unassessed", never beginner.
 5. **Product FSRS mastery is unchanged.** `concept_mastery` stays owned by
    in-product reviews and explain-backs. The adaptive recommender reads both
    signals.
@@ -46,9 +48,15 @@ anticipate structured, attributed assessment evidence.
    curriculum is thin. Gaps are recorded with a validated `concepts.json`
    entry so an agent with GitHub access can open a PR; learning never waits
    for that PR.
-7. **Safe retries.** Create-style mutations require an `idempotencyKey`;
-   created ids derive from it, and receipts replay the original response.
-   Resources deduplicate by canonical URL.
+7. **Atomic, retry-safe mutations.** Each mutation commits as one D1 batch;
+   statements that depend on a versioned write are guarded by that write's
+   random `write_token`, so a lost race or a failure leaves nothing behind.
+   Create-style mutations require an `idempotencyKey`; keys are reserved
+   before running, ids derive from the tool-namespaced key, and every
+   mutation is idempotent for its key. Receipts store references to the
+   records touched, never their content, and a replay re-reads them, so
+   deleted data cannot be replayed. Resources deduplicate by canonical URL
+   with an atomic upsert; an open curriculum gap is unique per topic.
 
 ## Alternatives considered
 

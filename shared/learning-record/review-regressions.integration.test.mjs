@@ -229,9 +229,9 @@ describe('deletion', () => {
     expect(remaining.total).toBe(0);
   });
 
-  it('keeps evidence and level together when recomputation fails mid-delete', async () => {
+  it('keeps evidence and level together when a delete fails', async () => {
     const first = await assess({ conceptId: 'bm25' }, { demonstratedLevel: 'advanced' });
-    h.failOnce(isKnowledgeWrite);
+    h.failOnce((sql) => /DELETE FROM learning_assessments/u.test(sql));
     const failed = await h.call('delete_learning_record', {
       entity: 'assessment',
       id: first.assessment.id,

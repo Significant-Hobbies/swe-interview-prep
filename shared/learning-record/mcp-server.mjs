@@ -10,7 +10,7 @@ import {
 } from '../lib/auth0-mcp.mjs';
 import { LearningRecordError, sha256Hex, stableStringify, validate } from './schema.mjs';
 import * as store from './store.mjs';
-import { requireTool, toolList } from './tools.mjs';
+import { receiptRef, replayReceipt, requireTool, toolList } from './tools.mjs';
 
 const SUPPORTED_PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 const MAX_BODY_BYTES = 256_000;
@@ -122,7 +122,12 @@ async function authenticate(request, env, client, verifyGrant) {
   return { user, scopes: new Set(grant.scopes ?? []) };
 }
 
-function replayReceipt(receipt, name, hash) {
+/**
+ * Replay a completed request. Receipts hold only references to the records a
+ * mutation touched, and the replay re-reads them, so a record deleted since
+ * then can never be replayed and no learner content lives in receipts.
+ */
+async function replayFromReceipt(receipt, name, hash, ctx) {
   if (receipt.tool !== name || receipt.request_hash !== hash) {
     throw new LearningRecordError(
       'idempotency_conflict',
@@ -135,7 +140,10 @@ function replayReceipt(receipt, name, hash) {
       'A request with this idempotencyKey is still running. Retry the same call shortly.'
     );
   }
-  return { ...JSON.parse(receipt.response_json), idempotentReplay: true };
+  return {
+    ...(await replayReceipt(JSON.parse(receipt.response_json), ctx)),
+    idempotentReplay: true,
+  };
 }
 
 async function callTool({ params, auth, client, now, clientName }) {
@@ -155,28 +163,54 @@ async function callTool({ params, auth, client, now, clientName }) {
   const { idempotencyKey, ...rest } = args;
   const hash = await sha256Hex(`${name}:${stableStringify(rest)}`);
   const receipt = await store.reserveReceipt(client, userId, idempotencyKey, name, hash, now);
-  if (receipt) return replayReceipt(receipt, name, hash);
+  if (receipt) return replayFromReceipt(receipt, name, hash, ctx);
+  // Seeds are namespaced by tool so distinct keys can never alias one record.
+  // Every mutation is idempotent for a given seed, so even a re-run after an
+  // abandoned reservation expires cannot apply the same request twice.
+  const seeded = { ...ctx, idempotencySeed: `${name}:${idempotencyKey}` };
   let response;
   try {
-    response = await tool.handler(rest, { ...ctx, idempotencySeed: idempotencyKey });
+    response = await tool.handler(rest, seeded);
   } catch (error) {
-    // Nothing was applied, so the caller may retry the same key.
     await store.releaseReceipt(client, userId, idempotencyKey);
     throw error;
   }
-  // The mutation is applied. If recording the response fails the key stays
-  // reserved, so a retry reports "in progress" instead of applying it twice.
-  await store.completeReceipt(client, userId, idempotencyKey, response);
+  await store.completeReceipt(client, userId, idempotencyKey, receiptRef(name, response));
   return response;
 }
 
 /** Parse one JSON-RPC message, or return an error response. */
-async function readMessage(request) {
-  const length = Number(request.headers.get('content-length') ?? 0);
-  const text = length > MAX_BODY_BYTES ? '' : await request.text();
-  if (length > MAX_BODY_BYTES || text.length > MAX_BODY_BYTES) {
-    return { error: rpcError(413, null, -32600, 'Request body is too large.') };
+/** Read at most MAX_BODY_BYTES from the request stream. */
+async function readBoundedText(request) {
+  const declared = Number(request.headers.get('content-length') ?? 0);
+  if (declared > MAX_BODY_BYTES) return null;
+  if (!request.body) return '';
+  const reader = request.body.getReader();
+  const chunks = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_BODY_BYTES) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
   }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+/** Parse one JSON-RPC message, or return an error response. */
+async function readMessage(request) {
+  const text = await readBoundedText(request);
+  if (text === null) return { error: rpcError(413, null, -32600, 'Request body is too large.') };
   let message;
   try {
     message = JSON.parse(text);
@@ -237,11 +271,12 @@ export async function handleLearningMcpRequest({
 }) {
   if (request.method !== 'POST')
     return rpcError(405, null, -32000, 'Use POST with a JSON-RPC message.');
+  // Authenticate from headers before reading any body.
+  const auth = await authenticate(request, env, client, verifyGrant);
+  if (auth.error) return rpcError(auth.error[0], null, -32001, auth.error[1]);
   const { message, error } = await readMessage(request);
   if (error) return error;
   const id = message.id;
-  const auth = await authenticate(request, env, client, verifyGrant);
-  if (auth.error) return rpcError(auth.error[0], id, -32001, auth.error[1]);
   if (id === undefined)
     return new Response(null, { status: 202, headers: { 'cache-control': 'no-store' } });
   if (message.method === 'initialize') return rpcResult(id, initializeResult(message.params));

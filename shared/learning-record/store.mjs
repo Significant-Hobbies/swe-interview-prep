@@ -9,19 +9,15 @@ import {
   contributionGuide,
   requireConceptIds,
 } from './curriculum.mjs';
-import {
-  categoryOf,
-  emptyState,
-  presentState,
-  replayAssessments,
-  resolveSubject,
-} from './knowledge.mjs';
+import { categoryOf, deriveState, emptyState, presentState, resolveSubject } from './knowledge.mjs';
 import {
   INTEREST_RANK,
   LearningRecordError,
   RESOURCE_STATUS_RANK,
   canonicalUrl,
   decodeCursor,
+  decodeKeyset,
+  encodeKeyset,
   encodeCursor,
   invalid,
   notFound,
@@ -89,65 +85,86 @@ function dedupeObjects(values, limit = 200) {
 // Lists are bound as one JSON parameter: D1 caps a statement at 100 parameters.
 const JSON_LIST = '(SELECT value FROM json_each(?))';
 
+function subjectFromKey(key, label) {
+  if (CONCEPT_BY_ID.has(key)) return resolveSubject({ conceptId: key });
+  if (key.startsWith('domain:')) return { key, kind: 'domain', label: label ?? key.slice(7) };
+  return { key, kind: 'topic', label: label ?? key.slice(6) };
+}
+
+/** Derive knowledge states for subjects from preferences plus assessments. */
+function deriveStates(preferenceRows, assessmentRows, keys) {
+  const preferences = new Map(preferenceRows.map((row) => [row.subject_key, row]));
+  const evidence = new Map();
+  for (const row of assessmentRows) {
+    if (!evidence.has(row.subject_key)) evidence.set(row.subject_key, []);
+    evidence.get(row.subject_key).push(row);
+  }
+  const states = new Map();
+  for (const key of keys ?? new Set([...preferences.keys(), ...evidence.keys()])) {
+    if (!preferences.has(key) && !evidence.has(key)) continue;
+    const preference = preferences.get(key);
+    const subject = subjectFromKey(key, preference?.label ?? evidence.get(key)?.[0]?.subject_label);
+    states.set(key, deriveState(subject, preference, evidence.get(key)));
+  }
+  return states;
+}
+
+const EVIDENCE_COLUMNS = 'id, subject_key, method, demonstrated_level, outcome, score, assessed_at';
+
 async function loadStates(db, userId, keys) {
   if (!keys.length) return new Map();
-  const result = await db.execute({
-    sql: `SELECT * FROM knowledge_states WHERE user_id = ? AND subject_key IN ${JSON_LIST}`,
-    args: [userId, JSON.stringify(keys)],
-  });
-  return new Map(result.rows.map((row) => [row.subject_key, row]));
+  const list = JSON.stringify([...new Set(keys)]);
+  const [preferences, assessments] = await Promise.all([
+    db.execute({
+      sql: `SELECT * FROM knowledge_states WHERE user_id = ? AND subject_key IN ${JSON_LIST}`,
+      args: [userId, list],
+    }),
+    db.execute({
+      sql: `SELECT ${EVIDENCE_COLUMNS} FROM learning_assessments WHERE user_id = ? AND subject_key IN ${JSON_LIST}`,
+      args: [userId, list],
+    }),
+  ]);
+  return deriveStates(preferences.rows, assessments.rows, new Set(keys));
 }
 
 export async function loadAllStates(db, userId) {
-  const result = await db.execute({
-    sql: 'SELECT * FROM knowledge_states WHERE user_id = ?',
-    args: [userId],
-  });
-  return new Map(result.rows.map((row) => [row.subject_key, row]));
+  const [preferences, assessments] = await Promise.all([
+    db.execute({ sql: 'SELECT * FROM knowledge_states WHERE user_id = ?', args: [userId] }),
+    db.execute({
+      sql: `SELECT ${EVIDENCE_COLUMNS} FROM learning_assessments WHERE user_id = ?`,
+      args: [userId],
+    }),
+  ]);
+  return deriveStates(preferences.rows, assessments.rows);
 }
 
+/** Set learner preferences for a subject; omitted (undefined) fields are kept. */
 /**
- * Write only the evidence-derived fields. With `guard`, a concurrent writer
- * holding fewer assessments cannot overwrite a newer recomputation.
+ * Optional batch guard: `{ sql, args }` that must hold for a statement to apply,
+ * typically "the versioned write earlier in this batch landed".
  */
-function evidenceStatement(userId, state, ctx, { guard = true } = {}) {
+function guardClause(guard) {
+  return guard ? { sql: `WHERE ${guard.sql}`, args: guard.args } : { sql: 'WHERE 1', args: [] };
+}
+
+function guardSuffix(guard) {
+  return guard ? ['AND', guard.sql].join(' ') : '';
+}
+
+function tokenGuard(table, idColumn, id, userId, token) {
   return {
-    sql: `INSERT INTO knowledge_states (
-            user_id, subject_key, subject_kind, label, self_reported_level, assessed_level, confidence,
-            outcome, evidence_count, review_interval_days, review_due_at, last_assessed_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          ON CONFLICT(user_id, subject_key) DO UPDATE SET
-            self_reported_level = excluded.self_reported_level,
-            assessed_level = excluded.assessed_level, confidence = excluded.confidence,
-            outcome = excluded.outcome, evidence_count = excluded.evidence_count,
-            review_interval_days = excluded.review_interval_days,
-            review_due_at = excluded.review_due_at, last_assessed_at = excluded.last_assessed_at,
-            updated_at = excluded.updated_at
-          ${guard ? 'WHERE excluded.evidence_count >= knowledge_states.evidence_count' : ''}`,
-    args: [
-      userId,
-      state.subject_key,
-      state.subject_kind,
-      state.label,
-      state.self_reported_level ?? null,
-      state.assessed_level ?? null,
-      state.confidence ?? 0,
-      state.outcome ?? null,
-      state.evidence_count ?? 0,
-      state.review_interval_days ?? null,
-      state.review_due_at ?? null,
-      state.last_assessed_at ?? null,
-      nowIso(ctx),
-    ],
+    sql: `EXISTS (SELECT 1 FROM ${table} WHERE user_id = ? AND ${idColumn} = ? AND write_token = ?)`,
+    args: [userId, id, token],
   };
 }
 
 /** Set learner preferences for a subject; omitted (undefined) fields are kept. */
-function preferenceStatement(userId, subject, preferences, ctx) {
+function preferenceStatement(userId, subject, preferences, ctx, guard) {
   const value = (key) => (preferences[key] === undefined ? null : preferences[key]);
+  const where = guardClause(guard);
   return {
     sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, target_level, interest, notes, updated_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+          SELECT ?, ?, ?, ?, ?, ?, ?, ? ${where.sql}
           ON CONFLICT(user_id, subject_key) DO UPDATE SET
             target_level = COALESCE(excluded.target_level, knowledge_states.target_level),
             interest = COALESCE(excluded.interest, knowledge_states.interest),
@@ -162,15 +179,17 @@ function preferenceStatement(userId, subject, preferences, ctx) {
       value('interest'),
       value('notes'),
       nowIso(ctx),
+      ...where.args,
     ],
   };
 }
 
 /** Record exposure (and optional interest) without touching evidence fields. */
-function engagementStatement(userId, subject, endedAt, interest, ctx) {
+function engagementStatement(userId, subject, endedAt, interest, ctx, guard) {
+  const where = guardClause(guard);
   return {
     sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, interest, exposure_count, last_engaged_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, 1, ?, ?)
+          SELECT ?, ?, ?, ?, ?, 1, ?, ? ${where.sql}
           ON CONFLICT(user_id, subject_key) DO UPDATE SET
             exposure_count = knowledge_states.exposure_count + 1,
             last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
@@ -184,41 +203,9 @@ function engagementStatement(userId, subject, endedAt, interest, ctx) {
       interest ?? null,
       endedAt,
       nowIso(ctx),
+      ...where.args,
     ],
   };
-}
-
-function subjectFromKey(key, label) {
-  if (CONCEPT_BY_ID.has(key)) return resolveSubject({ conceptId: key });
-  if (key.startsWith('domain:')) return { key, kind: 'domain', label: label ?? key.slice(7) };
-  return { key, kind: 'topic', label: label ?? key.slice(6) };
-}
-
-/**
- * Recompute a subject's evidence from its stored assessments, optionally
- * ignoring assessments that are about to be deleted in the same batch.
- */
-async function recomputedState(db, userId, key, exclude = {}) {
-  const current = (await loadStates(db, userId, [key])).get(key);
-  const assessments = await db.execute({
-    sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND subject_key = ?',
-    args: [userId, key],
-  });
-  const kept = assessments.rows.filter(
-    (row) =>
-      !exclude.ids?.includes(row.id) && (!exclude.sessionId || row.session_id !== exclude.sessionId)
-  );
-  const base = current ?? emptyState(subjectFromKey(key));
-  return { before: base, after: replayAssessments(base, kept) };
-}
-
-async function recomputeStatements(db, userId, keys, exclude, ctx) {
-  const statements = [];
-  for (const key of new Set(keys)) {
-    const { after } = await recomputedState(db, userId, key, exclude);
-    statements.push(evidenceStatement(userId, after, ctx, { guard: false }));
-  }
-  return statements;
 }
 
 /** Subjects from a session/resource: curriculum concepts plus free-text topics. */
@@ -378,39 +365,29 @@ const ASSESSMENT_COLUMNS = [
   'assessed_at',
 ];
 
-function insertAssessmentStatement(userId, row) {
-  return {
-    sql: `INSERT OR IGNORE INTO learning_assessments (${ASSESSMENT_COLUMNS.join(', ')})
-          VALUES (${ASSESSMENT_COLUMNS.map(() => '?').join(', ')})`,
-    args: ASSESSMENT_COLUMNS.map((column) => (column === 'user_id' ? userId : row[column])),
-  };
-}
-
-/** Append a value to a JSON list in record_json inside SQL, so concurrent edits are not lost. */
-function appendToSessionList(userId, sessionId, list, value, ctx) {
-  const path = `$.${list}`;
-  return {
-    sql: `UPDATE learning_sessions SET
-            record_json = CASE
-              WHEN EXISTS (SELECT 1 FROM json_each(record_json, '${path}') WHERE value = ?) THEN record_json
-              ELSE json_insert(
-                json_set(record_json, '${path}', json(COALESCE(json_extract(record_json, '${path}'), '[]'))),
-                '${path}[#]', ?)
-            END,
-            version = version + 1, updated_at = ?
-          WHERE user_id = ? AND id = ?`,
-    args: [value, value, nowIso(ctx), userId, sessionId],
-  };
-}
-
-function sessionLinkStatements(userId, sessionId, subject, assessmentId, ctx) {
-  const statements = [appendToSessionList(userId, sessionId, 'assessmentIds', assessmentId, ctx)];
-  if (subject.kind === 'concept') {
-    statements.push(appendToSessionList(userId, sessionId, 'conceptIds', subject.key, ctx));
-  } else if (subject.kind === 'topic') {
-    statements.push(appendToSessionList(userId, sessionId, 'topics', subject.label, ctx));
+/**
+ * Insert an assessment. When it belongs to a session, the insert applies only
+ * if that session still exists, so a concurrent session deletion cannot leave
+ * an orphaned assessment behind.
+ */
+function insertAssessmentStatement(userId, row, guard) {
+  const values = ASSESSMENT_COLUMNS.map((column) => (column === 'user_id' ? userId : row[column]));
+  const conditions = [];
+  const args = [...values];
+  if (row.session_id) {
+    conditions.push('EXISTS (SELECT 1 FROM learning_sessions WHERE user_id = ? AND id = ?)');
+    args.push(userId, row.session_id);
   }
-  return statements;
+  if (guard) {
+    conditions.push(guard.sql);
+    args.push(...guard.args);
+  }
+  return {
+    sql: `INSERT INTO learning_assessments (${ASSESSMENT_COLUMNS.join(', ')})
+          SELECT ${ASSESSMENT_COLUMNS.map(() => '?').join(', ')} WHERE ${conditions.join(' AND ') || '1'}
+          ON CONFLICT(id) DO NOTHING`,
+    args,
+  };
 }
 
 export async function submitAssessment(db, userId, args, ctx) {
@@ -423,33 +400,36 @@ export async function submitAssessment(db, userId, args, ctx) {
     : null;
   if (args.courseId) await requireOwned(db, 'learning_courses', userId, args.courseId, 'Course');
   const id = await newId('asm', ctx);
-  const existing = await db.execute({
-    sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND id = ?',
-    args: [userId, id],
-  });
-  if (existing.rows[0]) return { assessment: presentAssessment(existing.rows[0]), replayed: true };
   const row = assessmentRow(id, subject, args, sessionRow, ctx);
   const before =
     (await loadStates(db, userId, [subject.key])).get(subject.key) ?? emptyState(subject);
-  const statements = [insertAssessmentStatement(userId, row)];
-  if (sessionRow)
-    statements.push(...sessionLinkStatements(userId, sessionRow.id, subject, id, ctx));
-  if (args.targetLevel)
-    statements.push(preferenceStatement(userId, subject, { targetLevel: args.targetLevel }, ctx));
-  await db.batch(statements);
-  const { after } = await recomputedState(db, userId, subject.key);
-  await db.execute(
-    evidenceStatement(userId, { ...after, label: before.label ?? subject.label }, ctx)
-  );
-  const saved = (await loadStates(db, userId, [subject.key])).get(subject.key) ?? after;
+  await db.batch([
+    insertAssessmentStatement(userId, row),
+    preferenceStatement(userId, subject, { targetLevel: args.targetLevel }, ctx),
+  ]);
+  const stored = await db.execute({
+    sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND id = ?',
+    args: [userId, id],
+  });
+  if (!stored.rows[0])
+    throw notFound(`Session "${args.sessionId}" was deleted before the assessment was saved.`);
+  const after = (await loadStates(db, userId, [subject.key])).get(subject.key);
   return {
-    assessment: presentAssessment({ ...row, user_id: userId }),
+    assessment: presentAssessment(stored.rows[0]),
     knowledgeBefore: presentState(before, ctx?.now),
-    knowledgeAfter: presentState(saved, ctx?.now),
+    knowledgeAfter: presentState(after, ctx?.now),
     policy:
       row.method === 'self-assessment'
         ? 'Self-assessment updates the self-reported level only; assessed level is unchanged.'
         : 'Assessed level reflects this evidence. Review is scheduled from the outcome.',
+  };
+}
+
+export async function getAssessment(db, userId, args) {
+  return {
+    assessment: presentAssessment(
+      await requireOwned(db, 'learning_assessments', userId, args.assessmentId, 'Assessment')
+    ),
   };
 }
 
@@ -502,48 +482,43 @@ const PROFILE_ARRAY_FIELDS = new Set([
 ]);
 
 export async function getProfile(db, userId) {
-  const [profile, legacy, selfReported] = await Promise.all([
+  const [profile, legacy, states] = await Promise.all([
     db.execute({ sql: 'SELECT * FROM learner_profiles WHERE user_id = ?', args: [userId] }),
     db.execute({ sql: 'SELECT profile_json FROM user_profile WHERE user_id = ?', args: [userId] }),
-    db.execute({
-      sql: `SELECT subject_key, subject_kind, label, self_reported_level, target_level, interest
-            FROM knowledge_states WHERE user_id = ?
-              AND (self_reported_level IS NOT NULL OR target_level IS NOT NULL OR interest IS NOT NULL)
-            ORDER BY updated_at DESC LIMIT 200`,
-      args: [userId],
-    }),
+    loadAllStates(db, userId),
   ]);
   const row = profile.rows[0];
   const legacyProfile = parseJson(legacy.rows[0]?.profile_json, {});
-  const data = parseJson(row?.profile_json, {});
+  const subjectPreferences = [...states.values()]
+    .filter((state) => state.self_reported_level || state.target_level || state.interest)
+    .slice(0, 200)
+    .map((state) => ({
+      subject: { key: state.subject_key, kind: state.subject_kind, label: state.label },
+      selfReportedLevel: state.self_reported_level ?? null,
+      targetLevel: state.target_level ?? null,
+      interest: state.interest ?? null,
+    }));
   return {
-    profile: data,
+    profile: parseJson(row?.profile_json, {}),
     version: row?.version ?? 0,
     updatedAt: row?.updated_at ?? null,
     productPreferences: {
       minutesPerDay: legacyProfile.minutesPerDay ?? null,
       trackIds: legacyProfile.trackIds ?? [],
     },
-    subjectPreferences: selfReported.rows.map((state) => ({
-      subject: { key: state.subject_key, kind: state.subject_kind, label: state.label },
-      selfReportedLevel: state.self_reported_level ?? null,
-      targetLevel: state.target_level ?? null,
-      interest: state.interest ?? null,
-    })),
+    subjectPreferences,
     policy: 'Self-reported familiarity is stored separately from assessed knowledge.',
     url: links.profile(),
   };
 }
 
 /** Self-reports are stored as self-assessment evidence plus subject preferences. */
-async function selfAssessmentStatements(userId, items, ctx) {
+async function selfAssessmentStatements(userId, items, ctx, guard) {
   const statements = [];
-  const keys = [];
   for (const [index, item] of items.entries()) {
     const subject = resolveSubject(item);
-    statements.push(preferenceStatement(userId, subject, item, ctx));
+    statements.push(preferenceStatement(userId, subject, item, ctx, guard));
     if (!item.level) continue;
-    keys.push(subject.key);
     const seed = ctx?.idempotencySeed ? `${ctx.idempotencySeed}:${index}` : undefined;
     const row = assessmentRow(
       await newId('asm', ctx, seed),
@@ -557,9 +532,9 @@ async function selfAssessmentStatements(userId, items, ctx) {
       null,
       ctx
     );
-    statements.push(insertAssessmentStatement(userId, row));
+    statements.push(insertAssessmentStatement(userId, row, guard));
   }
-  return { statements, keys };
+  return statements;
 }
 
 export async function updateProfile(db, userId, args, ctx) {
@@ -603,34 +578,39 @@ export async function updateProfile(db, userId, args, ctx) {
         )
     );
   }
+  const changedProfile = Boolean(args.set || args.append || args.remove);
+  if (!changedProfile && !args.selfAssessments?.length) {
+    throw invalid('Nothing to update: pass set, append, remove or selfAssessments.');
+  }
   const statements = [];
-  const changedProfile = args.set || args.append || args.remove;
+  let guard;
   if (changedProfile) {
+    const token = crypto.randomUUID();
+    guard = {
+      sql: 'EXISTS (SELECT 1 FROM learner_profiles WHERE user_id = ? AND write_token = ?)',
+      args: [userId, token],
+    };
     statements.push(
       row
         ? {
-            sql: `UPDATE learner_profiles SET profile_json = ?, version = version + 1, updated_at = ?
+            sql: `UPDATE learner_profiles SET profile_json = ?, version = version + 1, write_token = ?, updated_at = ?
                   WHERE user_id = ? AND version = ?`,
-            args: [JSON.stringify(profile), nowIso(ctx), userId, version],
+            args: [JSON.stringify(profile), token, nowIso(ctx), userId, version],
           }
         : {
-            sql: `INSERT INTO learner_profiles (user_id, profile_json, version, updated_at)
-                  VALUES (?, ?, 1, ?) ON CONFLICT(user_id) DO NOTHING`,
-            args: [userId, JSON.stringify(profile), nowIso(ctx)],
+            sql: `INSERT INTO learner_profiles (user_id, profile_json, version, write_token, updated_at)
+                  VALUES (?, ?, 1, ?, ?) ON CONFLICT(user_id) DO NOTHING`,
+            args: [userId, JSON.stringify(profile), token, nowIso(ctx)],
           }
     );
   }
-  const selfReported = await selfAssessmentStatements(userId, args.selfAssessments ?? [], ctx);
-  statements.push(...selfReported.statements);
-  if (!statements.length)
-    throw invalid('Nothing to update: pass set, append, remove or selfAssessments.');
+  // Self-reports commit only together with the profile write they came with.
+  statements.push(
+    ...(await selfAssessmentStatements(userId, args.selfAssessments ?? [], ctx, guard))
+  );
   const results = await db.batch(statements);
   if (changedProfile && results[0].rowsAffected === 0) {
     throw conflict('Profile changed concurrently. Re-read with get_learning_profile and retry.');
-  }
-  for (const key of selfReported.keys) {
-    const { after } = await recomputedState(db, userId, key);
-    await db.execute(evidenceStatement(userId, after, ctx));
   }
   return getProfile(db, userId);
 }
@@ -740,19 +720,21 @@ async function loadCourses(db, userId, statuses) {
   return result.rows.map(courseFromRow);
 }
 
+/** Every distinct subject a course covers (uncapped). */
+function courseSubjectKeys(course) {
+  const keys = new Set();
+  for (const lesson of course.lessons) {
+    for (const conceptId of lesson.conceptIds) keys.add(conceptId);
+    for (const topic of lesson.topics) keys.add(resolveSubject({ topic }).key);
+  }
+  return [...keys];
+}
+
+const ASSESSED_ORDER = ['beginner', 'intermediate', 'advanced', 'expert'];
+
 function courseProgress(course, states, now) {
   const lessons = course.lessons;
-  const conceptIds = uniqueStrings(lessons.flatMap((lesson) => lesson.conceptIds));
-  const topicKeys = uniqueStrings(lessons.flatMap((lesson) => lesson.topics))
-    .map((topic) => {
-      try {
-        return resolveSubject({ topic }).key;
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean);
-  const target = course.targetLevel;
+  const targetRank = course.targetLevel ? ASSESSED_ORDER.indexOf(course.targetLevel) : 1;
   const evidence = {
     subjects: 0,
     atOrAboveTarget: 0,
@@ -760,30 +742,25 @@ function courseProgress(course, states, now) {
     unassessed: 0,
     needsRevision: 0,
   };
-  for (const key of uniqueStrings([...conceptIds, ...topicKeys])) {
+  for (const key of courseSubjectKeys(course)) {
     evidence.subjects += 1;
     const state = states.get(key);
     const category = categoryOf(state, now);
-    if (category === 'unassessed') evidence.unassessed += 1;
-    else {
-      const levelRank = ['beginner', 'intermediate', 'advanced', 'expert'].indexOf(
-        state.assessed_level
-      );
-      const targetRank = target
-        ? ['beginner', 'intermediate', 'advanced', 'expert'].indexOf(target)
-        : 1;
-      if (levelRank >= targetRank) evidence.atOrAboveTarget += 1;
-      else evidence.belowTarget += 1;
-      if (category === 'needs-revision' || category === 'due-for-review')
-        evidence.needsRevision += 1;
+    if (category === 'unassessed') {
+      evidence.unassessed += 1;
+      continue;
     }
+    if (ASSESSED_ORDER.indexOf(state.assessed_level) >= targetRank) evidence.atOrAboveTarget += 1;
+    else evidence.belowTarget += 1;
+    if (category === 'needs-revision' || category === 'due-for-review') evidence.needsRevision += 1;
   }
+  const count = (status) => lessons.filter((lesson) => lesson.status === status).length;
   return {
     lessons: {
       total: lessons.length,
-      completed: lessons.filter((lesson) => lesson.status === 'completed').length,
-      active: lessons.filter((lesson) => lesson.status === 'active').length,
-      skipped: lessons.filter((lesson) => lesson.status === 'skipped').length,
+      completed: count('completed'),
+      active: count('active'),
+      skipped: count('skipped'),
     },
     evidence,
     policy: 'Lesson completion is activity. Evidence counts come only from assessments.',
@@ -800,9 +777,15 @@ async function shouldBePrimary(db, userId, args, status) {
   return primaries.rows.length === 0;
 }
 
-const CLEAR_PRIMARY = (userId) => ({
-  sql: 'UPDATE learning_courses SET is_primary = 0 WHERE user_id = ? AND is_primary = 1',
-  args: [userId],
+/**
+ * Demote every other primary course, but only if the write identified by
+ * `token` landed. Bumps versions so stale edits of a demoted course fail.
+ */
+const CLEAR_OTHER_PRIMARIES = (userId, courseId, token) => ({
+  sql: `UPDATE learning_courses SET is_primary = 0, version = version + 1
+        WHERE user_id = ? AND is_primary = 1 AND id != ?
+          AND EXISTS (SELECT 1 FROM learning_courses WHERE user_id = ? AND id = ? AND write_token = ?)`,
+  args: [userId, courseId, userId, courseId, token],
 });
 
 export async function createCourse(db, userId, args, ctx) {
@@ -815,10 +798,11 @@ export async function createCourse(db, userId, args, ctx) {
   const lessons = normalizeLessons(args.lessons ?? []);
   const status = args.status ?? 'active';
   const isPrimary = await shouldBePrimary(db, userId, args, status);
+  const token = crypto.randomUUID();
   const insert = {
     sql: `INSERT INTO learning_courses (id, user_id, title, objective, target_level, status, is_primary,
-            lessons_json, supplemental_objectives_json, notes, created_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            lessons_json, supplemental_objectives_json, notes, write_token, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`,
     args: [
       id,
       userId,
@@ -830,22 +814,19 @@ export async function createCourse(db, userId, args, ctx) {
       JSON.stringify(lessons),
       JSON.stringify(uniqueStrings(args.supplementalObjectives ?? [])),
       args.notes ?? null,
+      token,
       nowIso(ctx),
       nowIso(ctx),
     ],
   };
-  await db.batch(isPrimary ? [CLEAR_PRIMARY(userId), insert] : [insert]);
+  await db.batch(isPrimary ? [insert, CLEAR_OTHER_PRIMARIES(userId, id, token)] : [insert]);
   return getCourse(db, userId, { courseId: id }, ctx);
 }
 
 export async function getCourse(db, userId, args, ctx) {
   const row = await requireOwned(db, 'learning_courses', userId, args.courseId, 'Course');
   const course = courseFromRow(row);
-  const keys = uniqueStrings(course.lessons.flatMap((lesson) => lesson.conceptIds));
-  const topicKeys = course.lessons.flatMap((lesson) =>
-    lesson.topics.map((topic) => resolveSubject({ topic }).key)
-  );
-  const states = await loadStates(db, userId, uniqueStrings([...keys, ...topicKeys]));
+  const states = await loadStates(db, userId, courseSubjectKeys(course));
   const sessions = await db.execute({
     sql: `SELECT id, kind, title, status, lesson_id, started_at, ended_at, summary FROM learning_sessions
           WHERE user_id = ? AND course_id = ? ORDER BY started_at DESC LIMIT 10`,
@@ -1005,15 +986,15 @@ function courseUpdateArgs(course, args) {
 }
 
 /** Sessions linked to a lesson that no longer exists keep the course link only. */
-async function detachRemovedLessons(db, userId, course, ctx) {
-  const row = await requireOwned(db, 'learning_courses', userId, course.id, 'Course');
-  const lessonIds = parseJson(row.lessons_json, []).map((lesson) => lesson.id);
-  await db.execute({
+/** Sessions linked to a lesson that no longer exists keep only the course link. */
+function detachRemovedLessonsStatement(userId, courseId, lessonIds, token, ctx) {
+  return {
     sql: `UPDATE learning_sessions SET lesson_id = NULL, version = version + 1, updated_at = ?
           WHERE user_id = ? AND course_id = ? AND lesson_id IS NOT NULL
-            AND lesson_id NOT IN ${JSON_LIST}`,
-    args: [nowIso(ctx), userId, course.id, JSON.stringify(lessonIds)],
-  });
+            AND lesson_id NOT IN ${JSON_LIST}
+            AND EXISTS (SELECT 1 FROM learning_courses WHERE user_id = ? AND id = ? AND write_token = ?)`,
+    args: [nowIso(ctx), userId, courseId, JSON.stringify(lessonIds), userId, courseId, token],
+  };
 }
 
 export async function updateCourse(db, userId, args, ctx) {
@@ -1021,19 +1002,23 @@ export async function updateCourse(db, userId, args, ctx) {
   assertVersion(row, args.expectedVersion, 'Course', 'get_course');
   const course = courseFromRow(row);
   const { isPrimary, values } = courseUpdateArgs(course, args);
-  const update = {
-    sql: `UPDATE learning_courses SET title = ?, objective = ?, target_level = ?, status = ?,
-            is_primary = ?, lessons_json = ?, supplemental_objectives_json = ?, notes = ?,
-            version = version + 1, updated_at = ?
-          WHERE user_id = ? AND id = ? AND version = ?`,
-    args: [...values, nowIso(ctx), userId, course.id, row.version],
-  };
-  const statements = isPrimary && !course.isPrimary ? [CLEAR_PRIMARY(userId), update] : [update];
+  const lessonIds = JSON.parse(values[5]).map((lesson) => lesson.id);
+  const token = crypto.randomUUID();
+  const statements = [
+    {
+      sql: `UPDATE learning_courses SET title = ?, objective = ?, target_level = ?, status = ?,
+              is_primary = ?, lessons_json = ?, supplemental_objectives_json = ?, notes = ?,
+              version = version + 1, write_token = ?, updated_at = ?
+            WHERE user_id = ? AND id = ? AND version = ?`,
+      args: [...values, token, nowIso(ctx), userId, course.id, row.version],
+    },
+    detachRemovedLessonsStatement(userId, course.id, lessonIds, token, ctx),
+  ];
+  if (isPrimary) statements.push(CLEAR_OTHER_PRIMARIES(userId, course.id, token));
   const results = await db.batch(statements);
-  if (results.at(-1).rowsAffected === 0) {
+  if (results[0].rowsAffected === 0) {
     throw conflict('Course changed concurrently. Re-read with get_course and retry.');
   }
-  await detachRemovedLessons(db, userId, course, ctx);
   return getCourse(db, userId, { courseId: course.id }, ctx);
 }
 
@@ -1069,87 +1054,80 @@ async function findResourceByUrl(db, userId, canonical) {
   return result.rows[0] ?? null;
 }
 
-const RESOURCE_OPTIONAL_FIELDS = ['author', 'publishedAt', 'summary', 'notes'];
+const STATUS_ORDER = `',recommended,saved,reading,discussed,completed,'`;
+const statusRank = (expression) => `instr(${STATUS_ORDER}, ',' || ${expression} || ',')`;
+const mergedJsonList = (column) =>
+  `(SELECT json_group_array(value) FROM (
+      SELECT value FROM json_each(learning_resources.${column})
+      UNION SELECT value FROM json_each(excluded.${column})))`;
 
-function optionalFields(source) {
-  return Object.fromEntries(RESOURCE_OPTIONAL_FIELDS.map((key) => [key, source[key] ?? null]));
-}
-
-async function insertResource(db, userId, canonical, args, conceptIds, ctx, autoStatus) {
-  if (!args.title) throw invalid('title is required when saving a new resource.');
-  const id = await newId('res', { ...ctx, idempotencySeed: undefined }, canonical);
-  const optional = optionalFields(args);
-  const status = args.status || autoStatus || 'saved';
-  await db.execute({
+/**
+ * Save or merge a resource by canonical URL in one statement, against the row
+ * as it is at write time: associations merge, missing metadata is filled, and
+ * status only moves forward unless the caller set it explicitly.
+ */
+function resourceUpsertStatement(userId, plan, options, ctx, guard) {
+  const { id, canonical, args, conceptIds } = plan;
+  const explicit = Boolean(args.status);
+  const status = args.status || options.autoStatus || 'saved';
+  const where = guardClause(guard);
+  return {
     sql: `INSERT INTO learning_resources (id, user_id, canonical_url, url, title, kind, status, author,
             published_at, summary, concept_ids_json, topics_json, notes, created_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          ON CONFLICT(user_id, canonical_url) DO NOTHING`,
+          SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ${where.sql}
+          ON CONFLICT(user_id, canonical_url) DO UPDATE SET
+            status = CASE
+              WHEN ${explicit ? 1 : 0} = 1 THEN excluded.status
+              WHEN ${statusRank('excluded.status')} > ${statusRank('learning_resources.status')} THEN excluded.status
+              ELSE learning_resources.status END,
+            author = COALESCE(learning_resources.author, excluded.author),
+            published_at = COALESCE(learning_resources.published_at, excluded.published_at),
+            summary = COALESCE(learning_resources.summary, excluded.summary),
+            notes = COALESCE(learning_resources.notes, excluded.notes),
+            concept_ids_json = ${mergedJsonList('concept_ids_json')},
+            topics_json = ${mergedJsonList('topics_json')},
+            version = learning_resources.version + 1,
+            updated_at = excluded.updated_at
+          RETURNING id, version`,
     args: [
       id,
       userId,
       canonical,
       args.url,
-      args.title,
+      args.title || canonical,
       args.kind || 'article',
       status,
-      optional.author,
-      optional.publishedAt,
-      optional.summary,
+      args.author ?? null,
+      args.publishedAt ?? null,
+      args.summary ?? null,
       JSON.stringify(conceptIds),
       JSON.stringify(uniqueStrings(args.topics || [])),
-      optional.notes,
+      args.notes ?? null,
       nowIso(ctx),
       nowIso(ctx),
+      ...where.args,
     ],
-  });
+  };
 }
 
-function nextResourceStatus(current, explicit, autoStatus) {
-  if (explicit) return explicit;
-  if (autoStatus && RESOURCE_STATUS_RANK[autoStatus] > RESOURCE_STATUS_RANK[current])
-    return autoStatus;
-  return current;
-}
-
-/** Re-saving a known URL merges associations and fills only missing metadata. */
-/** Re-saving a known URL merges associations and fills only missing metadata. */
-async function mergeResource(db, userId, current, args, conceptIds, ctx, autoStatus) {
-  const incoming = optionalFields(args);
-  const kept = optionalFields(current);
-  const filled = Object.fromEntries(
-    RESOURCE_OPTIONAL_FIELDS.map((key) => [key, kept[key] === null ? incoming[key] : kept[key]])
-  );
-  await db.execute({
-    sql: `UPDATE learning_resources SET status = ?, author = ?, published_at = ?, summary = ?,
-            concept_ids_json = ?, topics_json = ?, notes = ?, version = version + 1, updated_at = ?
-          WHERE user_id = ? AND id = ?`,
-    args: [
-      nextResourceStatus(current.status, args.status, autoStatus),
-      filled.author,
-      filled.publishedAt,
-      filled.summary,
-      JSON.stringify(uniqueStrings([...current.conceptIds, ...conceptIds])),
-      JSON.stringify(uniqueStrings([...current.topics, ...(args.topics || [])])),
-      filled.notes,
-      nowIso(ctx),
-      userId,
-      current.id,
-    ],
-  });
+/** Validate a resource input and work out its id without writing. */
+async function planResource(db, userId, args, ctx) {
+  const canonical = canonicalUrl(args.url);
+  const conceptIds = requireConceptIds(uniqueStrings(args.conceptIds ?? []));
+  const existing = await findResourceByUrl(db, userId, canonical);
+  if (!existing && !args.title)
+    throw invalid(`title is required for the new resource ${args.url}.`);
+  const id =
+    existing?.id ?? (await newId('res', { ...ctx, idempotencySeed: undefined }, canonical));
+  return { id, canonical, conceptIds, args };
 }
 
 /** Upsert by canonical URL; status only moves forward unless set explicitly. */
-export async function saveResource(db, userId, args, ctx, { autoStatus } = {}) {
-  const canonical = canonicalUrl(args.url);
-  const conceptIds = requireConceptIds(uniqueStrings(args.conceptIds ?? []));
-  const row = await findResourceByUrl(db, userId, canonical);
-  if (row) await mergeResource(db, userId, resourceFromRow(row), args, conceptIds, ctx, autoStatus);
-  else await insertResource(db, userId, canonical, args, conceptIds, ctx, autoStatus);
-  return {
-    resource: resourceFromRow(await findResourceByUrl(db, userId, canonical)),
-    created: !row,
-  };
+export async function saveResource(db, userId, args, ctx) {
+  const plan = await planResource(db, userId, args, ctx);
+  const result = await db.execute(resourceUpsertStatement(userId, plan, {}, ctx));
+  const saved = await findResourceByUrl(db, userId, plan.canonical);
+  return { resource: resourceFromRow(saved), created: Number(result.rows[0]?.version) === 1 };
 }
 
 function editedList(current, add, remove) {
@@ -1316,26 +1294,22 @@ function sessionFromRow(row) {
  * Resource ids derive from the canonical URL, so they are known up front and
  * the resources are saved only after the session write has succeeded.
  */
+/**
+ * Validate inline resources and work out their ids without writing anything.
+ * Resource ids derive from the canonical URL, so the upserts can join the
+ * session's own batch and commit only together with it.
+ */
 async function planSessionResources(db, userId, resources, ctx) {
   const planned = [];
-  for (const resource of resources ?? []) {
-    const canonical = canonicalUrl(resource.url);
-    requireConceptIds(uniqueStrings(resource.conceptIds ?? []));
-    const existing = await findResourceByUrl(db, userId, canonical);
-    if (!existing && !resource.title) {
-      throw invalid(`title is required for the new resource ${resource.url}.`);
-    }
-    const id =
-      existing?.id ?? (await newId('res', { ...ctx, idempotencySeed: undefined }, canonical));
-    planned.push({ id, resource });
-  }
+  for (const resource of resources ?? [])
+    planned.push(await planResource(db, userId, resource, ctx));
   return planned;
 }
 
-async function savePlannedResources(db, userId, planned, ctx) {
-  for (const { resource } of planned) {
-    await saveResource(db, userId, resource, ctx, { autoStatus: 'discussed' });
-  }
+function plannedResourceStatements(userId, planned, ctx, guard) {
+  return planned.map((plan) =>
+    resourceUpsertStatement(userId, plan, { autoStatus: 'discussed' }, ctx, guard)
+  );
 }
 
 async function requireResourceIds(db, userId, ids) {
@@ -1399,36 +1373,44 @@ async function validateCourseLink(db, userId, courseId, lessonId) {
   return { row, course };
 }
 
-function lessonStatusStatement(userId, link, lessonId, status, ctx) {
-  const lessons = link.course.lessons.map((lesson) =>
-    lesson.id === lessonId ? { ...lesson, status } : lesson
-  );
+/**
+ * Set one lesson's status inside SQL, against the course as it is now, so a
+ * concurrent course edit is never overwritten by a stale lesson list.
+ */
+function lessonStatusStatement(userId, courseId, lessonId, status, ctx, guard) {
+  const where = guardSuffix(guard);
   return {
-    sql: `UPDATE learning_courses SET lessons_json = ?, version = version + 1, updated_at = ?
-          WHERE user_id = ? AND id = ?`,
-    args: [JSON.stringify(lessons), nowIso(ctx), userId, link.course.id],
+    sql: `UPDATE learning_courses SET
+            lessons_json = json_set(lessons_json, '$[' || (
+              SELECT key FROM json_each(learning_courses.lessons_json)
+              WHERE json_extract(value, '$.id') = ?
+            ) || '].status', ?),
+            version = version + 1, updated_at = ?
+          WHERE user_id = ? AND id = ?
+            AND EXISTS (SELECT 1 FROM json_each(learning_courses.lessons_json) WHERE json_extract(value, '$.id') = ?)
+            ${where}`,
+    args: [lessonId, status, nowIso(ctx), userId, courseId, lessonId, ...(guard?.args ?? [])],
   };
 }
 
 /** Engagement roll-up: exposure and interest only, never assessed level. */
-function engagementStatements(userId, record, endedAt, ctx) {
+function engagementStatements(userId, record, endedAt, ctx, guard) {
   const interests = new Map();
-  for (const signal of record.interestSignals ?? []) {
-    interests.set(resolveSubject(signal.subject).key, signal.interest);
-  }
   const subjects = subjectsFrom(record.conceptIds, record.topics);
   for (const signal of record.interestSignals ?? []) {
     const subject = resolveSubject(signal.subject);
+    interests.set(subject.key, signal.interest);
     if (!subjects.some((item) => item.key === subject.key)) subjects.push(subject);
   }
   const statements = subjects.map((subject) =>
-    engagementStatement(userId, subject, endedAt, interests.get(subject.key), ctx)
+    engagementStatement(userId, subject, endedAt, interests.get(subject.key), ctx, guard)
   );
   if (record.resourceIds?.length) {
     statements.push({
       sql: `UPDATE learning_resources SET status = 'discussed', version = version + 1, updated_at = ?
-            WHERE user_id = ? AND id IN ${JSON_LIST} AND status IN ('recommended', 'saved', 'reading')`,
-      args: [nowIso(ctx), userId, JSON.stringify(record.resourceIds)],
+            WHERE user_id = ? AND id IN ${JSON_LIST} AND status IN ('recommended', 'saved', 'reading')
+              ${guardSuffix(guard)}`,
+      args: [nowIso(ctx), userId, JSON.stringify(record.resourceIds), ...(guard?.args ?? [])],
     });
   }
   return statements;
@@ -1446,13 +1428,20 @@ function sessionTimes(args, ctx) {
   return { startedAt, endedAt, duration };
 }
 
-function startLessonStatement(userId, link, args, ctx) {
+function startLessonStatement(userId, link, args, ctx, guard) {
   if (!link || !args.lessonId) return null;
   const lesson = link.course.lessons.find((item) => item.id === args.lessonId);
   const status = args.lessonStatus ?? (lesson.status === 'planned' ? 'active' : null);
-  return status ? lessonStatusStatement(userId, link, args.lessonId, status, ctx) : null;
+  return status
+    ? lessonStatusStatement(userId, link.course.id, args.lessonId, status, ctx, guard)
+    : null;
 }
 
+/**
+ * Create a session. The session row, its inline resources, lesson status and
+ * (for retrospective logs) engagement all commit in one batch, so a retry
+ * that finds the session also finds every effect.
+ */
 export async function startSession(db, userId, args, ctx) {
   const id = await newId('ses', ctx);
   const existing = await db.execute({
@@ -1463,11 +1452,13 @@ export async function startSession(db, userId, args, ctx) {
   const { startedAt, endedAt, duration } = sessionTimes(args, ctx);
   const link = await validateCourseLink(db, userId, args.courseId, args.lessonId);
   const { record, planned } = await mergeRecord(db, userId, {}, args, ctx);
+  const token = crypto.randomUUID();
+  const guard = tokenGuard('learning_sessions', 'id', id, userId, token);
   const statements = [
     {
       sql: `INSERT INTO learning_sessions (id, user_id, kind, status, title, course_id, lesson_id,
-              record_json, summary, started_at, ended_at, duration_minutes, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              record_json, summary, started_at, ended_at, duration_minutes, write_token, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`,
       args: [
         id,
         userId,
@@ -1481,16 +1472,17 @@ export async function startSession(db, userId, args, ctx) {
         startedAt,
         endedAt,
         duration,
+        token,
         nowIso(ctx),
         nowIso(ctx),
       ],
     },
+    ...plannedResourceStatements(userId, planned, ctx, guard),
   ];
-  const lessonStatement = startLessonStatement(userId, link, args, ctx);
+  const lessonStatement = startLessonStatement(userId, link, args, ctx, guard);
   if (lessonStatement) statements.push(lessonStatement);
+  if (endedAt) statements.push(...engagementStatements(userId, record, endedAt, ctx, guard));
   await db.batch(statements);
-  await savePlannedResources(db, userId, planned, ctx);
-  if (endedAt) await db.batch(engagementStatements(userId, record, endedAt, ctx));
   return getSession(db, userId, { sessionId: id });
 }
 
@@ -1539,11 +1531,11 @@ function assertVersion(row, expected, label, reread) {
   }
 }
 
-function sessionUpdateStatement(userId, row, fields, ctx) {
+function sessionUpdateStatement(userId, row, fields, token, ctx) {
   return {
     sql: `UPDATE learning_sessions SET kind = ?, status = ?, title = ?, course_id = ?, lesson_id = ?,
             record_json = ?, summary = ?, started_at = ?, ended_at = ?, duration_minutes = ?,
-            version = version + 1, updated_at = ?
+            version = version + 1, write_token = ?, updated_at = ?
           WHERE user_id = ? AND id = ? AND version = ?`,
     args: [
       fields.kind,
@@ -1556,6 +1548,7 @@ function sessionUpdateStatement(userId, row, fields, ctx) {
       fields.startedAt,
       fields.endedAt,
       fields.duration,
+      token,
       nowIso(ctx),
       userId,
       row.id,
@@ -1564,14 +1557,16 @@ function sessionUpdateStatement(userId, row, fields, ctx) {
   };
 }
 
-function sessionSideEffects(userId, context, ctx) {
-  const { link, lessonId, args, complete, row, record, endedAt } = context;
+function sessionSideEffects(userId, context, ctx, guard) {
+  const { lessonId, courseId, args, complete, row, record, endedAt } = context;
   const statements = [];
-  if (link && lessonId && args.lessonStatus) {
-    statements.push(lessonStatusStatement(userId, link, lessonId, args.lessonStatus, ctx));
+  if (courseId && lessonId && args.lessonStatus) {
+    statements.push(
+      lessonStatusStatement(userId, courseId, lessonId, args.lessonStatus, ctx, guard)
+    );
   }
   if (complete && row.status !== 'completed') {
-    statements.push(...engagementStatements(userId, record, endedAt, ctx));
+    statements.push(...engagementStatements(userId, record, endedAt, ctx, guard));
   }
   return statements;
 }
@@ -1579,6 +1574,11 @@ function sessionSideEffects(userId, context, ctx) {
 const SESSION_UPDATE_ATTEMPTS = 3;
 
 /** One versioned attempt. Returns null when the session changed underneath it. */
+/**
+ * One versioned attempt. The session write and all of its effects commit in a
+ * single batch; effects are guarded by this attempt's write token, so a lost
+ * race changes nothing. Returns null when the session changed underneath it.
+ */
 async function attemptSessionUpdate(db, userId, args, ctx, complete) {
   const row = await requireOwned(db, 'learning_sessions', userId, args.sessionId, 'Session');
   assertVersion(row, args.expectedVersion, 'Session', 'get_learning_session');
@@ -1586,7 +1586,7 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
   const times = completionTimes(row, set, args, ctx, complete);
   const courseId = patched(set, 'courseId', row.course_id);
   const lessonId = patched(set, 'lessonId', row.lesson_id);
-  const link = await validateCourseLink(db, userId, courseId, lessonId);
+  await validateCourseLink(db, userId, courseId, lessonId);
   const cleaned = removeFromRecord(parseJson(row.record_json, {}), args.remove);
   const { record, planned } = await mergeRecord(db, userId, cleaned, args.append || {}, ctx);
   const fields = {
@@ -1599,17 +1599,19 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
     record,
     summary: firstDefined(args.summary, set.summary, row.summary),
   };
-  const result = await db.execute(sessionUpdateStatement(userId, row, fields, ctx));
-  if (result.rowsAffected === 0) return null;
-  // Effects follow only a successful update, so a rejected edit leaves no trace.
-  await savePlannedResources(db, userId, planned, ctx);
-  const effects = sessionSideEffects(
-    userId,
-    { link, lessonId, args, complete, row, record, endedAt: times.endedAt },
-    ctx
-  );
-  if (effects.length) await db.batch(effects);
-  return row;
+  const token = crypto.randomUUID();
+  const guard = tokenGuard('learning_sessions', 'id', row.id, userId, token);
+  const results = await db.batch([
+    sessionUpdateStatement(userId, row, fields, token, ctx),
+    ...plannedResourceStatements(userId, planned, ctx, guard),
+    ...sessionSideEffects(
+      userId,
+      { lessonId, courseId, args, complete, row, record, endedAt: times.endedAt },
+      ctx,
+      guard
+    ),
+  ]);
+  return results[0].rowsAffected === 0 ? null : row;
 }
 
 export async function updateSession(db, userId, args, ctx, { complete = false } = {}) {
@@ -1632,10 +1634,31 @@ export async function updateSession(db, userId, args, ctx, { complete = false } 
   };
 }
 
+/** Subjects assessed during a session count as explored in it, without writing to the session. */
+function assessedSubjects(session, assessmentRows, labelRows) {
+  const labels = new Map(labelRows.map((row) => [row.subject_key, row.label]));
+  const assessedKeys = assessmentRows.map((row) => row.subject_key);
+  return {
+    conceptIds: uniqueStrings(
+      [...session.conceptIds, ...assessedKeys.filter((key) => CONCEPT_BY_ID.has(key))],
+      500
+    ),
+    topics: uniqueStrings(
+      [
+        ...session.topics,
+        ...assessedKeys
+          .filter((key) => key.startsWith('topic:'))
+          .map((key) => labels.get(key) ?? key.slice(6)),
+      ],
+      500
+    ),
+  };
+}
+
 export async function getSession(db, userId, args) {
   const row = await requireOwned(db, 'learning_sessions', userId, args.sessionId, 'Session');
   const session = sessionFromRow(row);
-  const [assessments, resources, course] = await Promise.all([
+  const [assessments, resources, course, preferenceLabels] = await Promise.all([
     db.execute({
       sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND session_id = ? ORDER BY assessed_at',
       args: [userId, session.id],
@@ -1652,6 +1675,11 @@ export async function getSession(db, userId, args) {
           args: [userId, session.courseId],
         })
       : { rows: [] },
+    db.execute({
+      sql: `SELECT subject_key, label FROM knowledge_states WHERE user_id = ? AND subject_key IN (
+              SELECT subject_key FROM learning_assessments WHERE user_id = ? AND session_id = ?)`,
+      args: [userId, userId, session.id],
+    }),
   ]);
   const courseRow = course.rows[0];
   const lesson = courseRow
@@ -1664,12 +1692,16 @@ export async function getSession(db, userId, args) {
         ? { id: courseRow.id, title: courseRow.title, url: links.course(courseRow.id) }
         : null,
       lesson: lesson ? { id: lesson.id, title: lesson.title, status: lesson.status } : null,
-      concepts: session.conceptIds
+      concepts: uniqueStrings(
+        [...session.conceptIds, ...assessments.rows.map((item) => item.subject_key)],
+        500
+      )
         .filter((id) => CONCEPT_BY_ID.has(id))
         .map((id) => conceptSummary(CONCEPT_BY_ID.get(id))),
       resources: resources.rows.map(resourceFromRow),
       // Live rows, so deleted evidence never lingers in a cached id list.
       assessmentIds: assessments.rows.map((item) => item.id),
+      ...assessedSubjects(session, assessments.rows, preferenceLabels.rows),
       assessments: assessments.rows.map(presentAssessment),
     },
   };
@@ -1688,17 +1720,19 @@ export async function getHistory(db, userId, args) {
       params.push(args[field]);
     }
   }
+  const assessedIn = `EXISTS (SELECT 1 FROM learning_assessments a
+    WHERE a.user_id = learning_sessions.user_id AND a.session_id = learning_sessions.id AND a.subject_key = ?)`;
   if (args.conceptId) {
     where.push(
-      "EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.conceptIds') WHERE value = ?)"
+      `(EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.conceptIds') WHERE value = ?) OR ${assessedIn})`
     );
-    params.push(args.conceptId);
+    params.push(args.conceptId, args.conceptId);
   }
   if (args.topic) {
     where.push(
-      "EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.topics') WHERE lower(value) = lower(?))"
+      `(EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.topics') WHERE lower(value) = lower(?)) OR ${assessedIn})`
     );
-    params.push(args.topic);
+    params.push(args.topic, topicKey(args.topic));
   }
   if (args.resourceId) {
     where.push(
@@ -1718,46 +1752,61 @@ export async function getHistory(db, userId, args) {
     where.push('started_at <= ?');
     params.push(new Date(args.until).toISOString());
   }
-  const order = args.order === 'asc' ? 'ASC' : 'DESC';
-  const paging = pageArgs(args);
+  const ascending = args.order === 'asc';
+  const order = ascending ? 'ASC' : 'DESC';
+  // Keyset pagination: rows recorded while a client pages never shift or repeat a page.
+  const after = decodeKeyset(args.cursor);
+  if (after) {
+    const comparison = ascending ? '>' : '<';
+    where.push(`(started_at ${comparison} ? OR (started_at = ? AND id ${comparison} ?))`);
+    params.push(after[0], after[0], after[1]);
+  }
+  const limit = Math.min(Math.max(args.limit ?? 20, 1), MAX_PAGE);
   const result = await db.execute({
     sql: `SELECT learning_sessions.*, (
             SELECT COUNT(*) FROM learning_assessments a
             WHERE a.user_id = learning_sessions.user_id AND a.session_id = learning_sessions.id
           ) AS assessment_count
           FROM learning_sessions WHERE ${where.join(' AND ')}
-          ORDER BY started_at ${order}, id ${order} LIMIT ? OFFSET ?`,
-    args: [...params, paging.limit + 1, paging.offset],
+          ORDER BY started_at ${order}, id ${order} LIMIT ?`,
+    args: [...params, limit + 1],
   });
-  return pageResult(result.rows, paging, (row) => {
-    const session = sessionFromRow(row);
-    if (args.detail) return session;
-    return {
-      id: session.id,
-      kind: session.kind,
-      status: session.status,
-      title: session.title,
-      courseId: session.courseId,
-      lessonId: session.lessonId,
-      startedAt: session.startedAt,
-      endedAt: session.endedAt,
-      durationMinutes: session.durationMinutes,
-      summary: session.summary,
-      conceptIds: session.conceptIds,
-      topics: session.topics,
-      resourceIds: session.resourceIds,
-      insights: session.insights.slice(0, 5),
-      unresolvedQuestions: session.unresolvedQuestions,
-      nextSteps: session.nextSteps,
-      assessmentCount: Number(row.assessment_count ?? 0),
-      url: session.url,
-    };
-  });
+  const rows = result.rows.slice(0, limit);
+  const last = rows.at(-1);
+  const nextCursor = result.rows.length > limit ? encodeKeyset([last.started_at, last.id]) : null;
+  return {
+    nextCursor,
+    items: rows.map((row) => {
+      const session = sessionFromRow(row);
+      if (args.detail) return session;
+      return {
+        id: session.id,
+        kind: session.kind,
+        status: session.status,
+        title: session.title,
+        courseId: session.courseId,
+        lessonId: session.lessonId,
+        startedAt: session.startedAt,
+        endedAt: session.endedAt,
+        durationMinutes: session.durationMinutes,
+        summary: session.summary,
+        conceptIds: session.conceptIds,
+        topics: session.topics,
+        resourceIds: session.resourceIds,
+        insights: session.insights.slice(0, 5),
+        unresolvedQuestions: session.unresolvedQuestions,
+        nextSteps: session.nextSteps,
+        assessmentCount: Number(row.assessment_count ?? 0),
+        url: session.url,
+      };
+    }),
+  };
 }
 
 // --- Curriculum gaps -------------------------------------------------------------
 
 const GAP_RECORD_DEFAULTS = {
+  reports: [],
   relatedConceptIds: [],
   prerequisiteConceptIds: [],
   learningObjectives: [],
@@ -1791,21 +1840,28 @@ function gapFromRow(row) {
 const OPEN_GAP_SQL = `SELECT * FROM curriculum_gaps WHERE user_id = ? AND topic_key = ?
   AND status IN ('open', 'proposed', 'pr-opened') ORDER BY created_at LIMIT 1`;
 
-function mergeGapRecord(record, args) {
-  const merge = (key) => uniqueStrings([...(record[key] ?? []), ...(args[key] ?? [])]);
+/**
+ * Merge a report into a gap record. Each report has an id (the request's
+ * idempotency seed when present), so re-running the same report is a no-op.
+ */
+function mergeGapRecord(record, args, reportId) {
+  const merge = (key) => uniqueStrings([...(record[key] ?? []), ...(args[key] ?? [])], 500);
+  const reports = uniqueStrings([...(record.reports ?? []), reportId], 1000);
   return {
     relatedConceptIds: merge('relatedConceptIds'),
     prerequisiteConceptIds: merge('prerequisiteConceptIds'),
     learningObjectives: merge('learningObjectives'),
     proposedConcept: args.proposedConcept ?? record.proposedConcept ?? null,
     evidence: merge('evidence'),
-    reportCount: (record.reportCount ?? 1) + 1,
+    reports,
+    reportCount: reports.length,
   };
 }
 
-async function insertGap(db, userId, key, args, ctx) {
+/** Insert a new open gap; the partial unique index makes a concurrent duplicate a no-op. */
+async function insertGap(db, userId, key, args, reportId, ctx) {
   const id = await newId('gap', ctx);
-  await db.execute({
+  const result = await db.execute({
     sql: `INSERT OR IGNORE INTO curriculum_gaps (id, user_id, topic, topic_key, gap_kind, description, status,
             record_json, session_id, created_at, updated_at)
           VALUES (?, ?, ?, ?, ?, ?, 'open', ?, ?, ?, ?)`,
@@ -1816,13 +1872,35 @@ async function insertGap(db, userId, key, args, ctx) {
       key,
       args.gapKind,
       args.description,
-      JSON.stringify({ ...mergeGapRecord({}, args), reportCount: 1 }),
+      JSON.stringify(mergeGapRecord({}, args, reportId)),
       args.sessionId ?? null,
       nowIso(ctx),
       nowIso(ctx),
     ],
   });
+  return result.rowsAffected > 0;
 }
+
+/** Compare-and-swap merge into an existing open gap. */
+async function mergeIntoGap(db, userId, row, args, reportId, ctx) {
+  const merged = mergeGapRecord(parseJson(row.record_json, {}), args, reportId);
+  const result = await db.execute({
+    sql: `UPDATE curriculum_gaps SET description = ?, gap_kind = ?, record_json = ?, updated_at = ?
+          WHERE user_id = ? AND id = ? AND record_json = ?`,
+    args: [
+      args.description ?? row.description,
+      args.gapKind ?? row.gap_kind,
+      JSON.stringify(merged),
+      nowIso(ctx),
+      userId,
+      row.id,
+      row.record_json,
+    ],
+  });
+  return result.rowsAffected > 0;
+}
+
+const GAP_WRITE_ATTEMPTS = 5;
 
 export async function reportGap(db, userId, args, ctx) {
   requireConceptIds(args.relatedConceptIds ?? [], 'relatedConceptIds');
@@ -1830,26 +1908,22 @@ export async function reportGap(db, userId, args, ctx) {
   if (args.sessionId)
     await requireOwned(db, 'learning_sessions', userId, args.sessionId, 'Session');
   const key = topicKey(args.topic);
-  const row = (await db.execute({ sql: OPEN_GAP_SQL, args: [userId, key] })).rows[0];
-  if (row) {
-    const merged = mergeGapRecord(parseJson(row.record_json, {}), args);
-    await db.execute({
-      sql: `UPDATE curriculum_gaps SET description = ?, gap_kind = ?, record_json = ?, updated_at = ?
-            WHERE user_id = ? AND id = ?`,
-      args: [
-        args.description ?? row.description,
-        args.gapKind ?? row.gap_kind,
-        JSON.stringify(merged),
-        nowIso(ctx),
-        userId,
-        row.id,
-      ],
-    });
-  } else {
-    await insertGap(db, userId, key, args, ctx);
+  const reportId = ctx?.idempotencySeed ?? crypto.randomUUID();
+  let merged = false;
+  for (let attempt = 0; attempt < GAP_WRITE_ATTEMPTS; attempt += 1) {
+    const row = (await db.execute({ sql: OPEN_GAP_SQL, args: [userId, key] })).rows[0];
+    if (row) {
+      merged = true;
+      if (await mergeIntoGap(db, userId, row, args, reportId, ctx)) break;
+    } else if (await insertGap(db, userId, key, args, reportId, ctx)) {
+      break;
+    }
+    if (attempt === GAP_WRITE_ATTEMPTS - 1) {
+      throw conflict('The curriculum gap changed concurrently. Retry the same call.');
+    }
   }
   const gap = gapFromRow((await db.execute({ sql: OPEN_GAP_SQL, args: [userId, key] })).rows[0]);
-  return { gap, merged: Boolean(row), contribution: contributionGuide(gap) };
+  return { gap, merged, contribution: contributionGuide(gap) };
 }
 
 export async function updateGap(db, userId, args, ctx) {
@@ -1937,18 +2011,9 @@ export async function saveOverride(db, userId, { day, recommended, chosen, reaso
 
 // --- Deletion (cleanup) ------------------------------------------------------------
 
-async function assessmentsFor(db, userId, column, value) {
-  const result = await db.execute({
-    sql: `SELECT id, subject_key FROM learning_assessments WHERE user_id = ? AND ${column} = ?`,
-    args: [userId, value],
-  });
-  return result.rows;
-}
-
-/** Removes the subject, all of its evidence and any stored responses that mention it. */
+/** Removes the subject's preferences and all of its evidence together. */
 async function deleteKnowledgeState(db, userId, args) {
   const subject = resolveSubject(args.subject ?? {});
-  const assessments = await assessmentsFor(db, userId, 'subject_key', subject.key);
   const result = await db.batch([
     {
       sql: 'DELETE FROM learning_assessments WHERE user_id = ? AND subject_key = ?',
@@ -1958,51 +2023,28 @@ async function deleteKnowledgeState(db, userId, args) {
       sql: 'DELETE FROM knowledge_states WHERE user_id = ? AND subject_key = ?',
       args: [userId, subject.key],
     },
-    ...purgeReceiptsStatements(
-      userId,
-      assessments.map((row) => row.id)
-    ),
   ]);
   return {
     entity: 'knowledge-state',
     subject: subject.key,
-    deleted: result[1].rowsAffected > 0,
+    deleted: result[0].rowsAffected + result[1].rowsAffected > 0,
     deletedAssessments: result[0].rowsAffected,
   };
 }
 
-/** Deletion and knowledge recomputation commit together, so evidence and levels never diverge. */
-async function deleteAssessment(db, userId, args, ctx) {
+/** Knowledge is derived from the remaining assessments, so a delete is one statement. */
+async function deleteAssessment(db, userId, args) {
   const row = await requireOwned(db, 'learning_assessments', userId, args.id, 'Assessment');
-  const recompute = await recomputeStatements(
-    db,
-    userId,
-    [row.subject_key],
-    { ids: [row.id] },
-    ctx
-  );
-  await db.batch([
-    {
-      sql: 'DELETE FROM learning_assessments WHERE user_id = ? AND id = ?',
-      args: [userId, row.id],
-    },
-    ...recompute,
-    ...purgeReceiptsStatements(userId, [row.id]),
-  ]);
+  await db.execute({
+    sql: 'DELETE FROM learning_assessments WHERE user_id = ? AND id = ?',
+    args: [userId, row.id],
+  });
   return { entity: 'assessment', id: row.id, deleted: true };
 }
 
-async function deleteSession(db, userId, args, ctx) {
+async function deleteSession(db, userId, args) {
   const row = await requireOwned(db, 'learning_sessions', userId, args.id, 'Session');
-  const assessments = args.cascade ? await assessmentsFor(db, userId, 'session_id', row.id) : [];
-  const recompute = await recomputeStatements(
-    db,
-    userId,
-    assessments.map((item) => item.subject_key),
-    { sessionId: row.id },
-    ctx
-  );
-  const detachOrDelete = args.cascade
+  const assessments = args.cascade
     ? {
         sql: 'DELETE FROM learning_assessments WHERE user_id = ? AND session_id = ?',
         args: [userId, row.id],
@@ -2011,20 +2053,23 @@ async function deleteSession(db, userId, args, ctx) {
         sql: 'UPDATE learning_assessments SET session_id = NULL WHERE user_id = ? AND session_id = ?',
         args: [userId, row.id],
       };
-  await db.batch([
-    detachOrDelete,
+  const result = await db.batch([
+    assessments,
     { sql: 'DELETE FROM learning_sessions WHERE user_id = ? AND id = ?', args: [userId, row.id] },
-    ...recompute,
-    ...purgeReceiptsStatements(userId, [row.id, ...assessments.map((item) => item.id)]),
   ]);
-  return { entity: 'session', id: row.id, deleted: true, deletedAssessments: assessments.length };
+  return {
+    entity: 'session',
+    id: row.id,
+    deleted: true,
+    deletedAssessments: args.cascade ? result[0].rowsAffected : 0,
+  };
 }
 
 async function deleteCourse(db, userId, args) {
   const row = await requireOwned(db, 'learning_courses', userId, args.id, 'Course');
   await db.batch([
     {
-      sql: 'UPDATE learning_sessions SET course_id = NULL, lesson_id = NULL WHERE user_id = ? AND course_id = ?',
+      sql: 'UPDATE learning_sessions SET course_id = NULL, lesson_id = NULL, version = version + 1 WHERE user_id = ? AND course_id = ?',
       args: [userId, row.id],
     },
     {
@@ -2032,7 +2077,6 @@ async function deleteCourse(db, userId, args) {
       args: [userId, row.id],
     },
     { sql: 'DELETE FROM learning_courses WHERE user_id = ? AND id = ?', args: [userId, row.id] },
-    ...purgeReceiptsStatements(userId, [row.id]),
   ]);
   return { entity: 'course', id: row.id, deleted: true };
 }
@@ -2040,10 +2084,10 @@ async function deleteCourse(db, userId, args) {
 function simpleDelete(entity, table, label) {
   return async (db, userId, args) => {
     const row = await requireOwned(db, table, userId, args.id, label);
-    await db.batch([
-      { sql: `DELETE FROM ${table} WHERE user_id = ? AND id = ?`, args: [userId, row.id] },
-      ...purgeReceiptsStatements(userId, [row.id]),
-    ]);
+    await db.execute({
+      sql: `DELETE FROM ${table} WHERE user_id = ? AND id = ?`,
+      args: [userId, row.id],
+    });
     return { entity, id: row.id, deleted: true };
   };
 }
@@ -2108,23 +2152,6 @@ export async function releaseReceipt(db, userId, key) {
     sql: "DELETE FROM mcp_mutation_receipts WHERE user_id = ? AND idempotency_key = ? AND state = 'pending'",
     args: [userId, key],
   });
-}
-
-const DELETED_RECEIPT = JSON.stringify({
-  deletedRecord: true,
-  message: 'The record this request created or changed has since been deleted.',
-});
-
-/**
- * Replace stored responses that mention deleted records with a tombstone, so a
- * retry can neither replay deleted content nor silently recreate the record.
- */
-function purgeReceiptsStatements(userId, ids) {
-  return [...new Set(ids)].filter(Boolean).map((id) => ({
-    sql: `UPDATE mcp_mutation_receipts SET response_json = ?
-          WHERE user_id = ? AND state = 'complete' AND instr(response_json, ?) > 0`,
-    args: [DELETED_RECEIPT, userId, id],
-  }));
 }
 
 // --- Recommendation inputs --------------------------------------------------------

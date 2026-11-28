@@ -39,12 +39,10 @@ export function resolveSubject({ conceptId, domain, topic } = {}) {
     }
     return { key: `domain:${domain}`, kind: 'domain', label: domain };
   }
+  // Topics keep their own key even if a same-named concept is added later, so
+  // evidence recorded under a topic is never silently disconnected.
   const label = String(topic).trim();
-  // A free-text topic that exactly names a concept is that concept.
-  const key = topicKey(label);
-  const concept = CONCEPT_BY_ID.get(key.slice('topic:'.length));
-  if (concept) return { key: concept.id, kind: 'concept', label: concept.name };
-  return { key, kind: 'topic', label };
+  return { key: topicKey(label), kind: 'topic', label };
 }
 
 export function emptyState(subject) {
@@ -109,11 +107,21 @@ function applyAssessment(state, assessment) {
 
 /** Recompute evidence-derived fields from scratch (used after deletions). */
 /**
+ * Knowledge state for a subject: stored preferences and engagement plus
+ * evidence derived from its assessments. Deriving on read means deletions,
+ * backfills and concurrent submissions can never leave a stale level.
+ */
+export function deriveState(subject, preferences, assessments = []) {
+  const base = { ...emptyState(subject), ...(preferences ?? {}) };
+  return replayAssessments(base, assessments);
+}
+
+/**
  * Recompute every evidence-derived field from the stored assessments, in
  * assessment-time order, so backfilled or deleted evidence cannot leave a
  * stale level. Target level, interest, exposure and notes are kept.
  */
-export function replayAssessments(state, assessments) {
+function replayAssessments(state, assessments) {
   const reset = {
     ...state,
     self_reported_level: null,

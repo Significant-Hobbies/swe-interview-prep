@@ -245,16 +245,33 @@ const TOPIC_SYMBOLS = [
   ['*', ' star '],
 ];
 
+/** 32-bit FNV-1a, hex. Deterministic and synchronous for short identity suffixes. */
+function fnv1a(value) {
+  let hash = 0x811c9dc5;
+  for (const char of value) {
+    hash ^= char.codePointAt(0);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(16).padStart(8, '0');
+}
+
 /**
- * Stable key for a free-text topic. Meaningful symbols are spelled out so
- * "C++", "C#" and ".NET" stay distinct instead of collapsing to one slug.
+ * Stable key for a free-text topic. Common symbols are spelled out ("C++" is
+ * c-plus-plus, "C#" is c-sharp). If any other symbol remains, a short hash of
+ * the normalized text keeps topics such as "SQL < operator" and
+ * "SQL > operator" distinct while the key stays readable.
  */
 export function topicKey(topic) {
-  let text = String(topic ?? '').toLowerCase();
+  const normalized = String(topic ?? '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/gu, ' ');
+  let text = normalized;
   for (const [symbol, word] of TOPIC_SYMBOLS) text = text.split(symbol).join(word);
   const slug = slugify(text);
   if (!slug) throw invalid(`Topic "${topic}" must contain letters or digits.`);
-  return `topic:${slug}`;
+  const lossy = /[^a-z0-9\s_-]/u.test(text.normalize('NFKD').replace(/[̀-ͯ]/gu, ''));
+  return lossy ? `topic:${slug}~${fnv1a(normalized)}` : `topic:${slug}`;
 }
 
 function httpUrl(value) {
@@ -371,6 +388,30 @@ export function decodeCursor(cursor) {
   try {
     const match = /^o:(\d{1,7})$/u.exec(atob(cursor));
     if (match) return Number(match[1]);
+  } catch {
+    // fall through
+  }
+  throw invalid('cursor is invalid; pass the nextCursor value from the previous page.');
+}
+
+/** Keyset cursor: the sort values of the last row, so new rows never shift pages. */
+export function encodeKeyset(values) {
+  return btoa(`k:${JSON.stringify(values)}`);
+}
+
+export function decodeKeyset(cursor) {
+  if (!cursor) return null;
+  try {
+    const text = atob(cursor);
+    if (text.startsWith('k:')) {
+      const values = JSON.parse(text.slice(2));
+      if (
+        Array.isArray(values) &&
+        values.every((value) => typeof value === 'string' || typeof value === 'number')
+      ) {
+        return values;
+      }
+    }
   } catch {
     // fall through
   }

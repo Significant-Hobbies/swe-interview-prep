@@ -4,7 +4,7 @@ import conceptsData from '../../src/data/concepts.json' with { type: 'json' };
 import drillsData from '../../src/data/drills.json' with { type: 'json' };
 import reviewQuestionsData from '../../src/data/review-questions.json' with { type: 'json' };
 
-import { decodeCursor, encodeCursor, invalid, notFound, slugify } from './schema.mjs';
+import { decodeCursor, encodeCursor, invalid, notFound, slugify, topicKey } from './schema.mjs';
 
 export const PRODUCT_ORIGIN = 'https://learn.significanthobbies.com';
 
@@ -276,12 +276,15 @@ function proposalProblems(id, domain) {
   const problems = [];
   if (CONCEPT_BY_ID.has(id)) problems.push(`Concept id "${id}" already exists; extend it instead.`);
   if (!domain) problems.push('tags[0] must be an existing track id; pass proposedConcept.tags.');
+  if (!id) problems.push('The concept needs an id; pass proposedConcept.id.');
   return problems;
 }
 
 function proposedConceptEntry(gap) {
   const proposal = { difficulty: 'core', priority: 3, ...(gap.proposedConcept || {}) };
-  const id = slugify(proposal.id || gap.topic);
+  const id = proposal.id
+    ? slugify(proposal.id)
+    : topicKey(gap.topic).slice('topic:'.length).split('~')[0];
   const tags = (proposal.tags || []).filter(Boolean);
   const domain = proposalDomain(tags, gap);
   const optional = Object.fromEntries(

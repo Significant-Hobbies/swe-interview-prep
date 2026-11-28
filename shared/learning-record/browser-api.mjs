@@ -15,6 +15,8 @@ const DETAIL_VIEWS = {
 };
 
 const LIST_SECTIONS = {
+  knowledge: (client, userId, cursor, ctx) =>
+    store.getKnowledgeState(client, userId, { limit: 50, cursor }, ctx),
   courses: (client, userId, cursor) => store.listCourses(client, userId, { limit: PAGE, cursor }),
   sessions: (client, userId, cursor) => store.getHistory(client, userId, { limit: PAGE, cursor }),
   resources: (client, userId, cursor) =>
@@ -59,9 +61,12 @@ export async function handleLearningRecordRequest({
       return json(await DETAIL_VIEWS[view](client, user.id, id, ctx), { headers: noStore });
     const section = LIST_SECTIONS[url.searchParams.get('section')];
     if (view === 'list' && section) {
-      return json(await section(client, user.id, url.searchParams.get('cursor') || undefined), {
-        headers: noStore,
-      });
+      return json(
+        await section(client, user.id, url.searchParams.get('cursor') || undefined, ctx),
+        {
+          headers: noStore,
+        }
+      );
     }
     if (view !== 'overview')
       return json({ error: 'Unknown view' }, { status: 400, headers: noStore });

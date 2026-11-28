@@ -25,6 +25,7 @@ import {
   LESSON_STATUSES,
   OUTCOMES,
   RESOURCE_KINDS,
+  LearningRecordError,
   RESOURCE_STATUSES,
   SESSION_KINDS,
   invalid,
@@ -45,7 +46,7 @@ const subject = s.object(
 );
 const page = {
   limit: s.int(1, 50, 'Page size (default 20).'),
-  cursor: { type: 'string', maxLength: 40, description: 'nextCursor from the previous page.' },
+  cursor: { type: 'string', maxLength: 400, description: 'nextCursor from the previous page.' },
 };
 const idempotencyKey = {
   type: 'string',
@@ -245,6 +246,68 @@ async function adaptivePriority(ctx, { withOverride = true } = {}) {
   return buildAdaptivePriority({ inputs, legacy: legacy.priority, now, override });
 }
 
+function topicCheck(projection, priority) {
+  const topic = priority.topic ?? priority.objective;
+  const prompt = (id, category, text) => ({
+    id,
+    category,
+    prompt: text,
+    source: 'deterministic-fallback',
+  });
+  return {
+    schemaVersion: 'swe-learning-verification.v1',
+    generatedAt: projection.generatedAt,
+    state: 'verification-required',
+    concept: null,
+    topic,
+    questions: [
+      prompt(
+        'topic-mechanism',
+        'mechanism',
+        `Explain ${topic} from first principles: what does it change, and why does that work?`
+      ),
+      prompt(
+        'topic-tradeoff',
+        'application-tradeoff',
+        `When is ${topic} the right choice, and when is it not? What trade-off decides?`
+      ),
+      prompt(
+        'topic-failure',
+        'failure-counterexample',
+        `Name a realistic failure mode of ${topic}. What evidence would reveal it?`
+      ),
+    ],
+    actionUrl: priority.actionUrl ?? `${PRODUCT_ORIGIN}/record`,
+    conceptUrl: null,
+    completionPolicy: projection.tracking.masteryPolicy,
+  };
+}
+
+/** Questions for the explicit concept, or for whatever today's priority (including an override) chose. */
+async function understandingCheck(args, ctx) {
+  const projection = await loadDailyLearningProjection(ctx.db, ctx.userId, ctx.now);
+  const priority = args.conceptId ? null : (await adaptivePriority(ctx)).priority;
+  const conceptId = args.conceptId ?? priority?.concepts?.[0]?.id ?? priority?.conceptIds?.[0];
+  const recordWith =
+    'submit_assessment (method "socratic" or "explain-back") with the learner response and your evaluation.';
+  if (!conceptId && priority) return { ...topicCheck(projection, priority), recordWith };
+  const concept = CONCEPT_BY_ID.get(conceptId);
+  if (!concept) getCurriculumItem('concept', conceptId);
+  projection.priority = {
+    ...projection.priority,
+    concept: {
+      id: concept.id,
+      name: concept.name,
+      description: concept.description,
+      difficulty: concept.difficulty,
+      tags: concept.tags,
+    },
+    actionUrl: priority?.actionUrl ?? `${PRODUCT_ORIGIN}/study/concept/${concept.id}`,
+    conceptUrl: conceptUrl(concept.id),
+  };
+  return { ...buildCurrentLearningVerification(projection), recordWith };
+}
+
 const read = {
   readOnlyHint: true,
   destructiveHint: false,
@@ -290,32 +353,7 @@ const TOOLS = {
       "Answer-free Socratic questions for a concept (default: today's priority concept). Ask one at a time, then record the result with submit_assessment.",
     inputSchema: s.object({ conceptId: s.id() }),
     annotations: read,
-    handler: async (args, ctx) => {
-      const projection = await loadDailyLearningProjection(ctx.db, ctx.userId, ctx.now);
-      const adaptive = args.conceptId ? null : (await adaptivePriority(ctx)).priority;
-      const conceptId = args.conceptId ?? adaptive?.concepts?.[0]?.id;
-      if (conceptId) {
-        const concept = CONCEPT_BY_ID.get(conceptId);
-        if (!concept) getCurriculumItem('concept', conceptId);
-        projection.priority = {
-          ...projection.priority,
-          concept: {
-            id: concept.id,
-            name: concept.name,
-            description: concept.description,
-            difficulty: concept.difficulty,
-            tags: concept.tags,
-          },
-          actionUrl: adaptive?.actionUrl ?? `${PRODUCT_ORIGIN}/study/concept/${concept.id}`,
-          conceptUrl: conceptUrl(concept.id),
-        };
-      }
-      return {
-        ...buildCurrentLearningVerification(projection),
-        recordWith:
-          'submit_assessment (method "socratic" or "explain-back") with the learner response and your evaluation.',
-      };
-    },
+    handler: (args, ctx) => understandingCheck(args, ctx),
   },
   get_recent_attempts: {
     title: 'Get recent drill attempts',
@@ -874,6 +912,48 @@ const TOOLS = {
     handler: (args, ctx) => store.deleteRecord(ctx.db, ctx.userId, args, ctx),
   },
 };
+
+const RECORD_KINDS = ['course', 'session', 'assessment', 'resource', 'gap'];
+
+/** What a receipt keeps: references to touched records, never their content. */
+export function receiptRef(name, response) {
+  if (name === 'update_learning_profile') return { kind: 'profile' };
+  if (name === 'delete_learning_record') return { kind: 'deletion', result: response };
+  if (name === 'override_daily_learning_priority')
+    return { kind: 'override', id: response?.override?.id };
+  const kind = RECORD_KINDS.find((candidate) => response?.[candidate]?.id);
+  return kind ? { kind, id: response[kind].id } : { kind: 'none' };
+}
+
+const REPLAY_READERS = {
+  profile: (_ref, ctx) => store.getProfile(ctx.db, ctx.userId),
+  course: (ref, ctx) => store.getCourse(ctx.db, ctx.userId, { courseId: ref.id }, ctx),
+  session: (ref, ctx) => store.getSession(ctx.db, ctx.userId, { sessionId: ref.id }),
+  assessment: (ref, ctx) => store.getAssessment(ctx.db, ctx.userId, { assessmentId: ref.id }),
+  resource: (ref, ctx) => store.getResource(ctx.db, ctx.userId, { resourceId: ref.id }),
+  gap: (ref, ctx) => store.getGap(ctx.db, ctx.userId, { gapId: ref.id }),
+  override: async (ref, ctx) => ({
+    override: { id: ref.id },
+    priority: await adaptivePriority(ctx),
+  }),
+  deletion: (ref) => ref.result,
+  none: () => ({}),
+};
+
+/** Re-read the current state of what an earlier request touched. */
+export async function replayReceipt(ref, ctx) {
+  try {
+    return await (REPLAY_READERS[ref?.kind] ?? REPLAY_READERS.none)(ref, ctx);
+  } catch (error) {
+    if (error instanceof LearningRecordError && error.code === 'not_found') {
+      return {
+        deletedRecord: true,
+        message: 'The record this request created or changed has since been deleted.',
+      };
+    }
+    throw error;
+  }
+}
 
 export function toolList() {
   return Object.entries(TOOLS).map(([name, tool]) => ({

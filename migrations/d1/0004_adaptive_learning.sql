@@ -6,30 +6,26 @@ CREATE TABLE IF NOT EXISTS learner_profiles (
   user_id TEXT PRIMARY KEY,
   profile_json TEXT NOT NULL DEFAULT '{}',
   version INTEGER NOT NULL DEFAULT 1,
+  -- Random per write; dependent statements in the same batch apply only if
+  -- this write landed.
+  write_token TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- One row per assessed or declared subject. subject_key is a curriculum concept
--- id, `domain:<track>` or `topic:<slug>` for subjects outside the curriculum.
--- Absence of a row means unassessed, never beginner.
+-- Learner-declared preferences and engagement per subject. subject_key is a
+-- curriculum concept id, `domain:<track>` or `topic:<slug>`. Assessed level,
+-- confidence and review dates are derived from learning_assessments on read,
+-- so they can never drift from the evidence. No evidence means unassessed.
 CREATE TABLE IF NOT EXISTS knowledge_states (
   user_id TEXT NOT NULL,
   subject_key TEXT NOT NULL,
   subject_kind TEXT NOT NULL,
   label TEXT NOT NULL,
-  self_reported_level TEXT,
-  assessed_level TEXT,
   target_level TEXT,
   interest TEXT,
-  confidence REAL NOT NULL DEFAULT 0,
-  outcome TEXT,
-  evidence_count INTEGER NOT NULL DEFAULT 0,
   exposure_count INTEGER NOT NULL DEFAULT 0,
-  review_interval_days INTEGER,
-  review_due_at TEXT,
-  last_assessed_at TEXT,
   last_engaged_at TEXT,
   notes TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
@@ -37,8 +33,6 @@ CREATE TABLE IF NOT EXISTS knowledge_states (
   PRIMARY KEY (user_id, subject_key),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
-CREATE INDEX IF NOT EXISTS idx_knowledge_user_due ON knowledge_states(user_id, review_due_at);
 
 CREATE TABLE IF NOT EXISTS learning_courses (
   id TEXT PRIMARY KEY,
@@ -52,6 +46,7 @@ CREATE TABLE IF NOT EXISTS learning_courses (
   supplemental_objectives_json TEXT NOT NULL DEFAULT '[]',
   notes TEXT,
   version INTEGER NOT NULL DEFAULT 1,
+  write_token TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -96,6 +91,7 @@ CREATE TABLE IF NOT EXISTS learning_sessions (
   ended_at TEXT,
   duration_minutes INTEGER,
   version INTEGER NOT NULL DEFAULT 1,
+  write_token TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -142,7 +138,9 @@ CREATE TABLE IF NOT EXISTS curriculum_gaps (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_gaps_user_topic ON curriculum_gaps(user_id, topic_key);
+-- At most one unresolved gap per topic, so concurrent reports merge.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_gaps_user_open_topic ON curriculum_gaps(user_id, topic_key)
+  WHERE status IN ('open', 'proposed', 'pr-opened');
 
 CREATE TABLE IF NOT EXISTS learning_priority_overrides (
   id TEXT PRIMARY KEY,
@@ -158,7 +156,8 @@ CREATE TABLE IF NOT EXISTS learning_priority_overrides (
 CREATE INDEX IF NOT EXISTS idx_overrides_user_day ON learning_priority_overrides(user_id, day, created_at DESC);
 
 -- Retried MCP mutations, keyed by the caller's key. A key is reserved
--- ('pending') before the mutation runs and completed with its response.
+-- ('pending') before the mutation runs and completed with references to the
+-- records it touched (never their content), which a replay re-reads.
 CREATE TABLE IF NOT EXISTS mcp_mutation_receipts (
   user_id TEXT NOT NULL,
   idempotency_key TEXT NOT NULL,
