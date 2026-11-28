@@ -142,6 +142,8 @@ route set (anything else returns `404 API route not found`):
 | `GET /api/progress` | Progress rollups | JWT |
 | `GET/POST /api/learning?action=…` | Consolidated learning API (see actions below) | JWT for auth actions |
 | `GET /api/learning/reader` | Private Reader adapter proxy | Owner |
+| `POST /api/mcp` | Native MCP server: learning profile, knowledge state, courses, sessions, resources, assessments, curriculum gaps, adaptive daily priority, curriculum search | Auth0 OAuth, `swe-interview-prep.read`; mutations also `swe-interview-prep.write` |
+| `GET /api/learning-record?view=…` | Read-only learning record for the `/record` pages | JWT |
 | `GET /api/mcp/attempts` | Recent drill attempts: submitted code plus the statements the grader runs | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/daily` | Product-computed daily learning priority for the ChatGPT connection | Auth0 OAuth, `swe-interview-prep.read` |
 | `GET /api/mcp/progress` | Read-only concept, drill, explain-back, and activity projection | Auth0 OAuth, `swe-interview-prep.read` |
@@ -210,24 +212,42 @@ Source: canonical curriculum data projected by
 `public/llms.txt`, `public/llms-full.txt`, `public/index.md`,
 `public/api-ai.json`, `public/robots.txt`, and `public/sitemap.xml`.
 
-The ChatGPT MCP gateway combines these public catalogs with four private,
-user-scoped projections. The product verifies the gateway's Auth0 token again,
-maps its Google subject to the existing `users.google_id`, and reads D1. It
-cannot update progress or accept a claim that a concept was learned; mastery
-still changes only through product evidence, reviews, and accepted
-explain-backs. The daily projection returns absolute action and concept-guide
-links. The verification projection returns only question prompts—not their
-stored answers—so ChatGPT can probe understanding one question at a time before
-linking back to the product gate.
+The ChatGPT connection proxies to the product's native MCP server at
+`POST /api/mcp` ([ADR 0011](../architecture/decisions/0011-agent-writable-learning-record.md)).
+The product verifies the gateway's Auth0 token again, maps its Google subject
+to `users.google_id` and scopes every query to that learner. Read tools need
+`swe-interview-prep.read`; tools that change the record also need
+`swe-interview-prep.write`. Tool schemas live in
+`shared/learning-record/tools.mjs` and are enforced as advertised.
 
-The attempts projection is the only one that returns what the learner actually
-wrote. It carries the submitted code and each test case's `run` statement — the
-call signature most prompts leave unstated — so an assistant can review the
-reasoning. It never carries `expect` values or `referenceSolution`: the surface
-exists to let something read the work, not to let it read out the answer. That
-is what keeps it compatible with
-[ADR 0005](../architecture/decisions/0005-socratic-no-solutions.md), which binds
-the in-product companion rather than an external assistant.
+What the assistant can do:
+
+- read and partially update the learner profile, including self-reported
+  levels, targets and interest per concept, domain or free topic;
+- read knowledge state, where untouched subjects are "unassessed" and
+  self-reported levels never count as demonstrated;
+- create, adapt and list personalized courses whose lessons reference
+  curriculum concepts or free-text topics;
+- record learning sessions with or without a course — lessons, reading or
+  discussing a shared article, exploration — and append questions, insights,
+  misconceptions, exercises and unresolved questions as they happen;
+- save external resources (articles, papers, videos, docs, repositories,
+  books), deduplicated by canonical URL;
+- submit assessment evidence with provenance; only this changes an assessed
+  level and schedules review;
+- report curriculum gaps and receive a validated `concepts.json` entry for a
+  pull request, without pausing the lesson;
+- get one adaptive daily priority and override it with a recorded reason.
+
+Every create-style mutation takes an `idempotencyKey`; retries return the
+original result. Answer-free checks remain: no tool returns stored review
+answers, expected outputs or reference solutions, which keeps the surface
+compatible with [ADR 0005](../architecture/decisions/0005-socratic-no-solutions.md).
+The older `GET /api/mcp/*` projections remain for compatibility.
+
+The learner can see the same record at `/record` (courses, sessions and
+resources have their own `/record/<kind>/<id>` pages, which are the deep links
+the tools return). The page is read-only and never required.
 
 ## Owner-only surfaces
 

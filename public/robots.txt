@@ -14,6 +14,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -82,6 +84,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -150,6 +154,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -218,6 +224,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -286,6 +294,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -354,6 +364,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -422,6 +434,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -490,6 +504,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -558,6 +574,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -626,6 +644,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -694,6 +714,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -762,6 +784,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$
@@ -830,6 +854,8 @@ Disallow: /onboarding$
 Disallow: /onboarding/
 Disallow: /progress$
 Disallow: /progress/
+Disallow: /record$
+Disallow: /record/
 Disallow: /notes$
 Disallow: /notes/
 Disallow: /session$

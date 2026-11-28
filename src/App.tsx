@@ -42,6 +42,7 @@ if (typeof window !== 'undefined' && window.location.pathname === '/') {
 const Home = lazy(loadHome);
 const Today = lazy(loadDashboard);
 const Onboarding = lazy(() => import('./pages/Onboarding'));
+const LearningRecord = lazy(() => import('./pages/LearningRecord'));
 const PublicRoadmap = lazy(() => import('./pages/PublicRoadmap'));
 const Learn = lazy(() => import('./pages/Learn'));
 const LearnAll = lazy(() => import('./pages/LearnAll'));
@@ -141,6 +142,8 @@ function AppRoutes() {
         <Route path="playground" element={<Playground />} />
         <Route path="progress" element={<Progress />} />
         <Route path="progress/all" element={<ProgressAll />} />
+        <Route path="record" element={<LearningRecord />} />
+        <Route path="record/:kind/:id" element={<LearningRecord />} />
         <Route path="concepts/:id" element={<ConceptDetail />} />
         <Route path="roadmaps/:id" element={<RoadmapDetail />} />
         <Route path="projects/:id" element={<ProjectDetail />} />

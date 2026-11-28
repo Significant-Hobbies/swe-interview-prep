@@ -162,6 +162,7 @@ const SPA_ROUTES = new Set([
   'playground',
   'play',
   'progress',
+  'record',
   'concepts',
   'roadmaps',
   'projects',

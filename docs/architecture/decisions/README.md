@@ -16,6 +16,7 @@ new ADR that supersedes the old one and link back.
 | 0008 | Embedded GitHub learning library | Accepted | 2026-02 |
 | 0009 | Remove the Go runtime instead of keeping it behind a flag | Accepted | 2026-07 |
 | 0010 | Cloudflare D1 for relational persistence | Accepted | 2026-08 |
+| 0011 | Agent-writable learning record over a native MCP server | Accepted | 2026-11 |
 
 ## Format
 

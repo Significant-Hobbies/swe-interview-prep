@@ -1,6 +1,8 @@
 import { dispatchLearningAction } from '../../shared/api/worker-learning.mjs';
 import { USER_RECORD_ACTIONS } from '../../shared/api/learning-registry.mjs';
 import { handleMcpLearningRequest } from '../../shared/api/mcp-learning.mjs';
+import { handleLearningRecordRequest } from '../../shared/learning-record/browser-api.mjs';
+import { handleLearningMcpRequest } from '../../shared/learning-record/mcp-server.mjs';
 import { dispatchWarsRequest } from '../../shared/api/worker-wars.mjs';
 import { createD1Client } from '../../shared/db/d1-client.mjs';
 import { AIConfigError, generateStream } from '../../shared/lib/ai.mjs';
@@ -360,6 +362,23 @@ async function handleAiChat(request, env) {
   });
 }
 
+/** MCP surfaces (native server and legacy read-only projections) and the learning record view. */
+async function handleLearningRecordRoutes(path, request, env) {
+  const legacyProjection = MCP_LEARNING_PATHS.has(path);
+  if (!legacyProjection && path !== 'mcp' && path !== 'learning-record') return null;
+  await initDatabase(env);
+  if (legacyProjection) {
+    return handleMcpLearningRequest({ request, path, env, client: getDb(env), json });
+  }
+  if (path === 'mcp') return handleLearningMcpRequest({ request, env, client: getDb(env) });
+  return handleLearningRecordRequest({
+    request,
+    client: getDb(env),
+    user: await currentUser(request, env),
+    json,
+  });
+}
+
 const handleApiRequest = withTiming(async ({ request, env, params, next }) => {
   const path = (params.path || []).join('/');
   try {
@@ -379,16 +398,8 @@ const handleApiRequest = withTiming(async ({ request, env, params, next }) => {
     if (path === 'progress') return await handleProgress(request, env);
     if (path === 'learning') return await handleLearning(request, env);
     if (path === 'learning/reader') return await handleReaderLearning(request, env);
-    if (MCP_LEARNING_PATHS.has(path)) {
-      await initDatabase(env);
-      return await handleMcpLearningRequest({
-        request,
-        path,
-        env,
-        client: getDb(env),
-        json,
-      });
-    }
+    const learningRecord = await handleLearningRecordRoutes(path, request, env);
+    if (learningRecord) return learningRecord;
     if (path.split('/')[0] === 'wars') {
       await initDatabase(env);
       return await dispatchWarsRequest({
@@ -422,6 +433,8 @@ function healthRoute(path) {
       'progress',
       'learning',
       'learning/reader',
+      'learning-record',
+      'mcp',
     ].includes(path)
   ) {
     return `/api/${path}`;

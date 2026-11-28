@@ -115,6 +115,9 @@ export default function Progress() {
         <Link to="/progress/all?tab=notes" className="text-white/50 hover:text-white">
           Notes
         </Link>
+        <Link to="/record" className="text-white/50 hover:text-white">
+          Learning record
+        </Link>
       </nav>
     </div>
   );
