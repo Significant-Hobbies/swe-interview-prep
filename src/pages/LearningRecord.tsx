@@ -1,5 +1,5 @@
 import { ArrowLeft, ExternalLink } from 'lucide-react';
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -23,6 +23,7 @@ import {
 } from './learningRecordParts';
 import {
   type ErrorMap,
+  type LoadingMap,
   type Json,
   type MoreButtonProps,
   PAGED_SECTIONS,
@@ -31,7 +32,6 @@ import {
   type PagedSection,
   type SectionProps,
   INITIAL_RECORD_STATE,
-  NO_SECTION,
   errorMessage,
   pagedOf,
 } from './learningRecordTypes';
@@ -82,7 +82,9 @@ function useRecord(view: View, id?: string) {
 /** Overview lists start with the first page and append later pages on request. */
 function usePagedSections(data: Json | null) {
   const [pages, setPages] = useState({} as PageMap);
-  const [loadingMore, setLoadingMore] = useState(NO_SECTION);
+  // Per section, so one section finishing never re-enables another's button.
+  const [loadingMore, setLoadingMore] = useState({} as LoadingMap);
+  const inFlight = useRef(new Set([] as PagedSection[]));
   const [errors, setErrors] = useState({} as ErrorMap);
   useEffect(() => {
     if (!data) return;
@@ -101,8 +103,9 @@ function usePagedSections(data: Json | null) {
   };
   const loadMore = async (key: PagedSection) => {
     const cursor = pages[key]?.nextCursor;
-    if (!cursor) return;
-    setLoadingMore(key);
+    if (!cursor || inFlight.current.has(key)) return;
+    inFlight.current.add(key);
+    setLoadingMore((current) => ({ ...current, [key]: true }));
     setErrors((current) => ({ ...current, [key]: undefined }));
     try {
       const next = await fetchPage(key, cursor);
@@ -113,7 +116,8 @@ function usePagedSections(data: Json | null) {
     } catch (error) {
       setErrors((current) => ({ ...current, [key]: errorMessage(error) }));
     } finally {
-      setLoadingMore(null);
+      inFlight.current.delete(key);
+      setLoadingMore((current) => ({ ...current, [key]: false }));
     }
   };
   return { pages, loadMore, loadingMore, errors };
@@ -163,7 +167,7 @@ function Overview() {
     pageOf(key)?.nextCursor ? (
       <MoreButton
         onClick={() => void loadMore(key)}
-        busy={loadingMore === key}
+        busy={loadingMore[key] === true}
         error={errors[key]}
       />
     ) : undefined;

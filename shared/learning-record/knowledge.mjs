@@ -137,6 +137,7 @@ function replayAssessments(state, assessments) {
     .sort(
       (a, b) =>
         String(a.assessed_at).localeCompare(String(b.assessed_at)) ||
+        (a.row_order ?? 0) - (b.row_order ?? 0) ||
         String(a.id).localeCompare(String(b.id))
     )
     .reduce(applyAssessment, reset);

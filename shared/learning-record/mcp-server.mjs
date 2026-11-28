@@ -137,7 +137,7 @@ async function replayFromReceipt(receipt, name, hash, ctx) {
   if (receipt.state !== 'complete') {
     throw new LearningRecordError(
       'idempotency_in_progress',
-      'A request with this idempotencyKey is still running. Retry the same call shortly.'
+      'A request with this idempotencyKey is still running or stopped before finishing. Retry shortly; if it stays in progress, read the current state and, only if the change is missing, send it again with a new idempotencyKey.'
     );
   }
   return {
@@ -165,8 +165,6 @@ async function callTool({ params, auth, client, now, clientName }) {
   const receipt = await store.reserveReceipt(client, userId, idempotencyKey, name, hash, now);
   if (receipt) return replayFromReceipt(receipt, name, hash, ctx);
   // Seeds are namespaced by tool so distinct keys can never alias one record.
-  // Every mutation is idempotent for a given seed, so even a re-run after an
-  // abandoned reservation expires cannot apply the same request twice.
   const seeded = { ...ctx, idempotencySeed: `${name}:${idempotencyKey}` };
   let response;
   try {
@@ -175,7 +173,7 @@ async function callTool({ params, auth, client, now, clientName }) {
     await store.releaseReceipt(client, userId, idempotencyKey);
     throw error;
   }
-  await store.completeReceipt(client, userId, idempotencyKey, receiptRef(name, response));
+  await store.completeReceipt(client, userId, idempotencyKey, receiptRef(name, response, now));
   return response;
 }
 

@@ -36,7 +36,7 @@ async function level(subject) {
 describe('subject identity', () => {
   it('keeps symbol-distinct topics separate for evidence and deletion', async () => {
     expect(topicKey('C++')).not.toBe(topicKey('C#'));
-    expect(topicKey('.NET')).toBe('topic:dot-net');
+    expect(topicKey('.NET')).toMatch(/^topic:dot-net~[0-9a-f]{8}$/u);
     await assess({ topic: 'C++' }, { demonstratedLevel: 'advanced' });
     await assess({ topic: 'C#' }, { demonstratedLevel: 'beginner', outcome: 'needs-depth' });
     expect((await level({ topic: 'C++' })).level).toBe('advanced');

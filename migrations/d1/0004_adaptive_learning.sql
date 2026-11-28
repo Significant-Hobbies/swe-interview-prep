@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS learning_courses (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_courses_user_status ON learning_courses(user_id, status, updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_courses_user_created ON learning_courses(user_id, created_at DESC, id);
 
 CREATE TABLE IF NOT EXISTS learning_resources (
   id TEXT PRIMARY KEY,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS learning_resources (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_resources_user_updated ON learning_resources(user_id, updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_resources_user_created ON learning_resources(user_id, created_at DESC, id);
 
 CREATE TABLE IF NOT EXISTS learning_sessions (
   id TEXT PRIMARY KEY,
@@ -103,6 +103,8 @@ CREATE TABLE IF NOT EXISTS learning_assessments (
   id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL,
   subject_key TEXT NOT NULL,
+  -- The subject as the learner named it; topic keys carry a hash suffix.
+  subject_label TEXT NOT NULL,
   session_id TEXT,
   course_id TEXT,
   method TEXT NOT NULL,
@@ -139,6 +141,7 @@ CREATE TABLE IF NOT EXISTS curriculum_gaps (
 );
 
 -- At most one unresolved gap per topic, so concurrent reports merge.
+CREATE INDEX IF NOT EXISTS idx_gaps_user_created ON curriculum_gaps(user_id, created_at DESC, id);
 CREATE UNIQUE INDEX IF NOT EXISTS idx_gaps_user_open_topic ON curriculum_gaps(user_id, topic_key)
   WHERE status IN ('open', 'proposed', 'pr-opened');
 

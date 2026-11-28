@@ -272,11 +272,34 @@ function proposalDomain(tags, gap) {
   return related.map((conceptId) => domainOf(CONCEPT_BY_ID.get(conceptId))).find(Boolean) || null;
 }
 
+/**
+ * Tracks whose every concept links a drill, a review question and a roadmap.
+ * src/data/concepts.test.ts enforces this for those tracks, so a new concept
+ * there needs the same links (and the drill/review entries) in the PR.
+ */
+const PRACTICE_BACKED_TRACKS = new Set(
+  [...TRACK_IDS].filter((track) => {
+    const owned = CONCEPTS.filter((concept) => concept.tags?.[0] === track);
+    return (
+      owned.length > 0 &&
+      owned.every(
+        (concept) =>
+          concept.drills?.length && concept.reviewQuestions?.length && concept.roadmaps?.length
+      )
+    );
+  })
+);
+
 function proposalProblems(id, domain) {
   const problems = [];
   if (CONCEPT_BY_ID.has(id)) problems.push(`Concept id "${id}" already exists; extend it instead.`);
   if (!domain) problems.push('tags[0] must be an existing track id; pass proposedConcept.tags.');
   if (!id) problems.push('The concept needs an id; pass proposedConcept.id.');
+  if (PRACTICE_BACKED_TRACKS.has(domain)) {
+    problems.push(
+      `Track "${domain}" requires every concept to link drills, reviewQuestions and roadmaps. Add a drill (src/data/drills.json, with a testCase) and a review question (src/data/review-questions.json), link their ids on the entry and add it to a roadmap, or the concepts test fails.`
+    );
+  }
   return problems;
 }
 

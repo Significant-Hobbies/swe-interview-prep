@@ -13,7 +13,7 @@
 import { CONCEPT_BY_ID, PRODUCT_ORIGIN, conceptSummary, conceptUrl } from './curriculum.mjs';
 import { belowTarget, categoryOf, presentState, resolveSubject } from './knowledge.mjs';
 import { nextCourseLesson, links } from './store.mjs';
-import { INTEREST_RANK, LEVEL_RANK } from './schema.mjs';
+import { INTEREST_RANK, LEVEL_RANK, topicKey } from './schema.mjs';
 
 const DAY_MS = 86_400_000;
 
@@ -49,8 +49,13 @@ function conceptRef(conceptId, states, now) {
   };
 }
 
+/** Subject keys a lesson covers: curriculum concepts plus its free-text topics. */
+function lessonSubjectKeys(lesson) {
+  return [...(lesson.conceptIds ?? []), ...(lesson.topics ?? []).map((topic) => topicKey(topic))];
+}
+
 function courseConceptIds(course) {
-  return new Set(course.lessons.flatMap((lesson) => lesson.conceptIds ?? []));
+  return new Set(course.lessons.flatMap(lessonSubjectKeys));
 }
 
 function revisionCandidates(inputs, now, primaryConcepts) {
@@ -131,7 +136,7 @@ function courseLessonCandidate(course, lesson, unassessed, primary, index) {
             'These prerequisites are unassessed, not unknown. Probe each with one quick question; skip teaching what the learner already knows.',
         }
       : null,
-    subjectKeys: lesson.conceptIds ?? [],
+    subjectKeys: lessonSubjectKeys(lesson),
     topic: lesson.topics?.[0] ?? null,
     course,
     lesson,
@@ -331,7 +336,8 @@ export function buildAdaptivePriority({ inputs, legacy, now = new Date(), overri
 
   const seen = new Set();
   const ranked = candidates.filter((candidate) => {
-    const key = `${candidate.kind}:${(candidate.subjectKeys ?? []).join(',')}`;
+    const scope = candidate.lesson ? `${candidate.course.id}/${candidate.lesson.id}` : '';
+    const key = `${candidate.kind}:${scope}:${(candidate.subjectKeys ?? []).join(',')}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

@@ -10,7 +10,7 @@ export type PageMap = Partial<Record<PagedSection, Page>>;
 export type ErrorMap = Partial<Record<PagedSection, string>>;
 export type SectionProps = { data: Json; more?: ReactNode };
 export type MoreButtonProps = { onClick: () => void; busy: boolean; error?: string };
-export const NO_SECTION: PagedSection | null = null;
+export type LoadingMap = Partial<Record<PagedSection, boolean>>;
 
 export function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);

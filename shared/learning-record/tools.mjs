@@ -916,19 +916,26 @@ const TOOLS = {
 const RECORD_KINDS = ['course', 'session', 'assessment', 'resource', 'gap'];
 
 /** What a receipt keeps: references to touched records, never their content. */
-export function receiptRef(name, response) {
-  if (name === 'update_learning_profile') return { kind: 'profile' };
-  if (name === 'delete_learning_record') return { kind: 'deletion', result: response };
-  if (name === 'override_daily_learning_priority')
-    return { kind: 'override', id: response?.override?.id };
+export function receiptRef(name, response, at = new Date()) {
+  const stamp = { at: at.toISOString() };
+  if (name === 'update_learning_profile') return { kind: 'profile', ...stamp };
+  if (name === 'delete_learning_record') return { kind: 'deletion', result: response, ...stamp };
+  if (name === 'override_daily_learning_priority') {
+    return { kind: 'override', id: response?.override?.id, ...stamp };
+  }
+  if (name === 'complete_learning_session') {
+    return { kind: 'completed-session', id: response?.session?.id, ...stamp };
+  }
   const kind = RECORD_KINDS.find((candidate) => response?.[candidate]?.id);
-  return kind ? { kind, id: response[kind].id } : { kind: 'none' };
+  return kind ? { kind, id: response[kind].id, ...stamp } : { kind: 'none', ...stamp };
 }
 
 const REPLAY_READERS = {
   profile: (_ref, ctx) => store.getProfile(ctx.db, ctx.userId),
   course: (ref, ctx) => store.getCourse(ctx.db, ctx.userId, { courseId: ref.id }, ctx),
   session: (ref, ctx) => store.getSession(ctx.db, ctx.userId, { sessionId: ref.id }),
+  'completed-session': (ref, ctx) =>
+    store.getCompletedSession(ctx.db, ctx.userId, { sessionId: ref.id }, ctx),
   assessment: (ref, ctx) => store.getAssessment(ctx.db, ctx.userId, { assessmentId: ref.id }),
   resource: (ref, ctx) => store.getResource(ctx.db, ctx.userId, { resourceId: ref.id }),
   gap: (ref, ctx) => store.getGap(ctx.db, ctx.userId, { gapId: ref.id }),
@@ -941,16 +948,26 @@ const REPLAY_READERS = {
 };
 
 /** Re-read the current state of what an earlier request touched. */
+const DELETED_REPLAY = {
+  deletedRecord: true,
+  message: 'The record this request created or changed has since been deleted.',
+};
+
+/** The record a replay found, if it was created after the receipt (so it is a replacement). */
+function createdAfter(result, ref) {
+  if (!ref?.at) return false;
+  const record = RECORD_KINDS.map((kind) => result?.[kind]).find((value) => value?.createdAt);
+  return Boolean(record && record.createdAt > ref.at);
+}
+
+/** Re-read the current state of what an earlier request touched. */
 export async function replayReceipt(ref, ctx) {
   try {
-    return await (REPLAY_READERS[ref?.kind] ?? REPLAY_READERS.none)(ref, ctx);
+    const result = await (REPLAY_READERS[ref?.kind] ?? REPLAY_READERS.none)(ref, ctx);
+    // A record re-created at the same id after deletion is not what this request made.
+    return createdAfter(result, ref) ? DELETED_REPLAY : result;
   } catch (error) {
-    if (error instanceof LearningRecordError && error.code === 'not_found') {
-      return {
-        deletedRecord: true,
-        message: 'The record this request created or changed has since been deleted.',
-      };
-    }
+    if (error instanceof LearningRecordError && error.code === 'not_found') return DELETED_REPLAY;
     throw error;
   }
 }

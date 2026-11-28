@@ -337,7 +337,7 @@ describe('courses, sessions and assessments', () => {
 
 describe('external resources and unstructured learning', () => {
   it('records a discussed article without curriculum coverage and never treats it as mastery', async () => {
-    const url = 'https://www.Example.com/posts/crdts/?utm_source=twitter&ref=hn#comments';
+    const url = 'https://www.Example.com/posts/crdts/?utm_source=twitter&fbclid=abc#comments';
     const session = await ok('start_learning_session', {
       kind: 'reading',
       title: 'Discussing a CRDT article',

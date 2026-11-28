@@ -81,6 +81,12 @@ function matchesType(value, type) {
   return actual === type;
 }
 
+/** Dates in learning records stay between 2000 and 2100. */
+function plausibleDate(value) {
+  const time = Date.parse(value);
+  return Number.isFinite(time) && time >= Date.UTC(2000, 0, 1) && time < Date.UTC(2100, 0, 1);
+}
+
 const STRING_RULES = [
   [
     (schema, value) => schema.minLength !== undefined && value.trim().length < schema.minLength,
@@ -99,8 +105,8 @@ const STRING_RULES = [
     () => 'must be an absolute http(s) URL',
   ],
   [
-    (schema, value) => schema.format === 'date-time' && !Number.isFinite(Date.parse(value)),
-    () => 'must be an ISO 8601 date-time',
+    (schema, value) => schema.format === 'date-time' && !plausibleDate(value),
+    () => 'must be an ISO 8601 date-time between 2000 and 2100',
   ],
 ];
 const NUMBER_RULES = [
@@ -256,10 +262,8 @@ function fnv1a(value) {
 }
 
 /**
- * Stable key for a free-text topic. Common symbols are spelled out ("C++" is
- * c-plus-plus, "C#" is c-sharp). If any other symbol remains, a short hash of
- * the normalized text keeps topics such as "SQL < operator" and
- * "SQL > operator" distinct while the key stays readable.
+ * Stable key for a free-text topic: a readable slug ("C++" reads c-plus-plus)
+ * plus a hash of the normalized text. Case and spacing do not matter.
  */
 export function topicKey(topic) {
   const normalized = String(topic ?? '')
@@ -268,10 +272,11 @@ export function topicKey(topic) {
     .replace(/\s+/gu, ' ');
   let text = normalized;
   for (const [symbol, word] of TOPIC_SYMBOLS) text = text.split(symbol).join(word);
-  const slug = slugify(text);
+  const slug = slugify(text).slice(0, 80);
   if (!slug) throw invalid(`Topic "${topic}" must contain letters or digits.`);
-  const lossy = /[^a-z0-9\s_-]/u.test(text.normalize('NFKD').replace(/[̀-ͯ]/gu, ''));
-  return lossy ? `topic:${slug}~${fnv1a(normalized)}` : `topic:${slug}`;
+  // The readable slug can collapse punctuation or truncate; the hash of the
+  // full normalized text keeps every distinct topic distinct.
+  return `topic:${slug}~${fnv1a(normalized)}`;
 }
 
 function httpUrl(value) {
@@ -284,7 +289,7 @@ function httpUrl(value) {
 }
 
 const TRACKING_PARAMS =
-  /^(utm_[a-z_]+|fbclid|gclid|mc_cid|mc_eid|ref|ref_src|ref_url|source|si|igshid|_hsenc|_hsmi)$/iu;
+  /^(utm_[a-z_]+|fbclid|gclid|dclid|msclkid|mc_cid|mc_eid|ref_src|ref_url|igshid|_hsenc|_hsmi)$/iu;
 
 /**
  * Canonical identity for an external resource so the same article shared twice
@@ -399,7 +404,7 @@ export function encodeKeyset(values) {
   return btoa(`k:${JSON.stringify(values)}`);
 }
 
-export function decodeKeyset(cursor) {
+export function decodeKeyset(cursor, length = 2) {
   if (!cursor) return null;
   try {
     const text = atob(cursor);
@@ -407,6 +412,7 @@ export function decodeKeyset(cursor) {
       const values = JSON.parse(text.slice(2));
       if (
         Array.isArray(values) &&
+        values.length === length &&
         values.every((value) => typeof value === 'string' || typeof value === 'number')
       ) {
         return values;

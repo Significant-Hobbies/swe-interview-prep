@@ -59,7 +59,7 @@ describe('subject identity', () => {
   it('never re-keys a free-text topic as a curriculum concept', async () => {
     await assess({ topic: 'BM25' }, { demonstratedLevel: 'advanced' });
     const topic = await level({ topic: 'BM25' });
-    expect(topic.subject.key).toBe('topic:bm25');
+    expect(topic.subject.key).toMatch(/^topic:bm25~[0-9a-f]{8}$/u);
     expect(topic.level).toBe('advanced');
     expect((await level({ conceptId: 'bm25' })).level).toBe('unassessed');
   });
@@ -341,7 +341,7 @@ describe('idempotency receipts', () => {
     );
   });
 
-  it('does not apply a mutation twice when its abandoned reservation expires', async () => {
+  it('never re-runs a mutation whose reservation was abandoned, however old', async () => {
     const args = {
       topic: 'Merkle trees',
       gapKind: 'missing',
@@ -350,8 +350,10 @@ describe('idempotency receipts', () => {
     };
     h.failOnce(matches(/UPDATE mcp_mutation_receipts SET state/u));
     expect((await h.call('report_curriculum_gap', args)).isError).toBe(true);
-    h.now = new Date(h.now.getTime() + 121_000);
-    await h.ok('report_curriculum_gap', args);
+    h.now = new Date(h.now.getTime() + 86_400_000);
+    const retry = await h.call('report_curriculum_gap', args);
+    expect(retry.isError).toBe(true);
+    expect(retry.error.code).toBe('idempotency_in_progress');
     expect((await h.ok('list_curriculum_gaps', {})).items[0].reportCount).toBe(1);
   });
 });
