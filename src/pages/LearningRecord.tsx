@@ -153,11 +153,20 @@ function MoreButton({ onClick, busy, error }: MoreButtonProps) {
 
 const RECORD_SECTIONS = new Set(['profile', 'knowledge', ...PAGED_SECTIONS]);
 
+/** The section a fragment names, decoded; empty when it is malformed. */
+function sectionId(hash: string) {
+  try {
+    return decodeURIComponent(hash.slice(1));
+  } catch {
+    return '';
+  }
+}
+
 /** Scroll to a linked section (#profile, #knowledge) once the record has loaded. */
 function useSectionAnchor(ready: boolean) {
   const { hash } = useLocation();
   useEffect(() => {
-    const id = hash.slice(1);
+    const id = sectionId(hash);
     if (!ready || !RECORD_SECTIONS.has(id)) return;
     document.getElementById(id)?.scrollIntoView();
   }, [ready, hash]);

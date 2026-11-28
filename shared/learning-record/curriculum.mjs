@@ -314,7 +314,10 @@ function linkProblems(ids, owners, conceptId, kind, file) {
       `These ${kind} belong to other concepts and would not show on this one: ${foreign.join(', ')}. Add ${kind} for "${conceptId}" instead.`
     );
   }
-  const missing = ids.filter((id) => !owners.has(id) && !id.startsWith('drill-'));
+  // Drill placeholders get their own diagnostic; every other unknown id is listed.
+  const missing = ids.filter(
+    (id) => !owners.has(id) && !(kind === 'drills' && id.startsWith('drill-'))
+  );
   if (missing.length) {
     problems.push(
       `Add these ${kind} to ${file} in the same PR, with conceptId "${conceptId}": ${missing.join(', ')}.`

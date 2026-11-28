@@ -1168,14 +1168,6 @@ function resourceFromRow(row) {
 }
 
 /** Upsert by canonical URL; status only moves forward unless set explicitly. */
-async function findResourceByUrl(db, userId, canonical) {
-  const result = await db.execute({
-    sql: 'SELECT * FROM learning_resources WHERE user_id = ? AND canonical_url = ?',
-    args: [userId, canonical],
-  });
-  return result.rows[0] ?? null;
-}
-
 const STATUS_ORDER = `',recommended,saved,reading,discussed,completed,'`;
 const statusRank = (expression) => `instr(${STATUS_ORDER}, ',' || ${expression} || ',')`;
 const mergedJsonList = (column) =>
@@ -1211,7 +1203,7 @@ function resourceUpsertStatement(userId, plan, options, ctx, guard) {
             topics_json = ${mergedJsonList('topics_json')},
             version = learning_resources.version + 1,
             updated_at = excluded.updated_at
-          RETURNING id, version`,
+          RETURNING *`,
     args: [
       id,
       userId,
@@ -1235,33 +1227,37 @@ function resourceUpsertStatement(userId, plan, options, ctx, guard) {
   };
 }
 
-/**
- * A new resource's id: the canonical URL plus its generation (earlier
- * deletions of that URL). Concurrent first saves agree on the id; a re-save
- * after deletion gets a new one.
- */
 /** Deletion records keep a learner-scoped fingerprint, never the URL itself. */
 async function urlFingerprint(userId, canonical) {
   return sha256Hex(`${userId}:resource-url:${canonical}`);
 }
 
-async function newResourceId(db, userId, canonical, ctx) {
-  const deletions = await db.execute({
-    sql: 'SELECT COUNT(*) AS n FROM learning_resource_deletions WHERE user_id = ? AND url_fingerprint = ?',
-    args: [userId, await urlFingerprint(userId, canonical)],
+/**
+ * The live resource for a URL and the URL's deletion generation, read in one
+ * statement so a save-and-delete in between cannot shift the generation.
+ */
+async function resourceIdentity(db, userId, canonical) {
+  const result = await db.execute({
+    sql: `SELECT
+            (SELECT id FROM learning_resources WHERE user_id = ? AND canonical_url = ?) AS id,
+            (SELECT COUNT(*) FROM learning_resource_deletions WHERE user_id = ? AND url_fingerprint = ?) AS generation`,
+    args: [userId, canonical, userId, await urlFingerprint(userId, canonical)],
   });
-  const generation = Number(deletions.rows[0]?.n ?? 0);
-  return newId('res', { ...ctx, idempotencySeed: undefined }, `${canonical}#${generation}`);
+  const row = result.rows[0] ?? {};
+  return { existingId: row.id ?? null, generation: Number(row.generation ?? 0) };
 }
 
 /** Validate a resource input and work out its id without writing. */
 async function planResource(db, userId, args, ctx) {
   const canonical = canonicalUrl(args.url);
   const conceptIds = requireConceptIds(uniqueStrings(args.conceptIds ?? []));
-  const existing = await findResourceByUrl(db, userId, canonical);
-  if (!existing && !args.title)
+  const { existingId, generation } = await resourceIdentity(db, userId, canonical);
+  if (!existingId && !args.title)
     throw invalid(`title is required for the new resource ${args.url}.`);
-  const id = existing?.id ?? (await newResourceId(db, userId, canonical, ctx));
+  // Concurrent first saves agree on the id; a re-save after deletion gets a new one.
+  const id =
+    existingId ??
+    (await newId('res', { ...ctx, idempotencySeed: undefined }, `${canonical}#${generation}`));
   return { id, canonical, conceptIds, args };
 }
 
@@ -1272,8 +1268,8 @@ export async function saveResource(db, userId, args, ctx) {
   const written = result.rows[0];
   // No row means the planned id was deleted meanwhile; never answer with a replacement.
   if (!written) throw conflict('The resource was deleted while it was being saved. Save it again.');
-  const saved = await requireOwned(db, 'learning_resources', userId, written.id, 'Resource');
-  return { resource: resourceFromRow(saved), created: Number(written.version) === 1 };
+  // Answer from the row this write produced, never a later writer's state.
+  return { resource: resourceFromRow(written), created: Number(written.version) === 1 };
 }
 
 /**
@@ -2104,7 +2100,7 @@ export async function getHistory(db, userId, args) {
   }
   if (args.q) {
     where.push(
-      "(title LIKE ? OR summary LIKE ? OR json_remove(record_json, '$.topicKeys') LIKE ?)"
+      "(title LIKE ? OR summary LIKE ? OR EXISTS (SELECT 1 FROM json_tree(json_remove(learning_sessions.record_json, '$.topicKeys')) WHERE type = 'text' AND value LIKE ?))"
     );
     params.push(`%${args.q}%`, `%${args.q}%`, `%${args.q}%`);
   }
@@ -2468,6 +2464,10 @@ async function deleteKnowledgeState(db, userId, args) {
     },
     {
       sql: 'DELETE FROM knowledge_states WHERE user_id = ? AND subject_key = ?',
+      args: [userId, subject.key],
+    },
+    {
+      sql: 'DELETE FROM learning_exposure_credits WHERE user_id = ? AND subject_key = ?',
       args: [userId, subject.key],
     },
   ]);
