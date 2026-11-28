@@ -83,13 +83,14 @@ CREATE INDEX IF NOT EXISTS idx_resources_user_created ON learning_resources(user
 CREATE TABLE IF NOT EXISTS learning_resource_deletions (
   user_id TEXT NOT NULL,
   resource_id TEXT NOT NULL,
-  canonical_url TEXT NOT NULL,
+  -- A learner-scoped hash of the canonical URL; the URL itself is not kept.
+  url_fingerprint TEXT NOT NULL,
   deleted_at TEXT NOT NULL,
   PRIMARY KEY (user_id, resource_id),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_resource_deletions_url ON learning_resource_deletions(user_id, canonical_url);
+CREATE INDEX IF NOT EXISTS idx_resource_deletions_url ON learning_resource_deletions(user_id, url_fingerprint);
 
 CREATE TABLE IF NOT EXISTS learning_sessions (
   id TEXT PRIMARY KEY,
@@ -112,6 +113,16 @@ CREATE TABLE IF NOT EXISTS learning_sessions (
 );
 
 CREATE INDEX IF NOT EXISTS idx_sessions_user_started ON learning_sessions(user_id, started_at DESC, id);
+
+-- One row per session and subject whose exposure was counted, so exposure
+-- is counted once per session however completion and assessments interleave.
+CREATE TABLE IF NOT EXISTS learning_exposure_credits (
+  user_id TEXT NOT NULL,
+  session_id TEXT NOT NULL,
+  subject_key TEXT NOT NULL,
+  PRIMARY KEY (user_id, session_id, subject_key),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
 CREATE TABLE IF NOT EXISTS learning_assessments (
   id TEXT PRIMARY KEY,

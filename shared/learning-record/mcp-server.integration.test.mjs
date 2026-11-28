@@ -421,14 +421,16 @@ describe('curriculum gaps, isolation and cleanup', () => {
       proposedConcept: {
         tags: ['search-ir'],
         difficulty: 'advanced',
-        drills: ['build-tokenizer'],
-        reviewQuestions: ['rq-tokenization-symmetry'],
+        drills: ['new-practice-drill'],
+        reviewQuestions: ['new-practice-review'],
       },
     });
     expect(first.contribution.file).toBe('src/data/concepts.json');
     expect(first.contribution.entry.id).toBe('crdt-garbage-collection');
     expect(first.contribution.entry.tags[0]).toBe('search-ir');
-    expect(first.contribution.problems).toEqual([]);
+    expect(first.contribution.problems.every((problem) => problem.startsWith('Add these'))).toBe(
+      true
+    );
     const second = await ok('report_curriculum_gap', {
       topic: 'CRDT Garbage Collection',
       gapKind: 'missing',

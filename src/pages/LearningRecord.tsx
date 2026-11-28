@@ -151,12 +151,15 @@ function MoreButton({ onClick, busy, error }: MoreButtonProps) {
   );
 }
 
+const RECORD_SECTIONS = new Set(['profile', 'knowledge', ...PAGED_SECTIONS]);
+
 /** Scroll to a linked section (#profile, #knowledge) once the record has loaded. */
 function useSectionAnchor(ready: boolean) {
   const { hash } = useLocation();
   useEffect(() => {
-    if (!ready || !hash) return;
-    document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView();
+    const id = hash.slice(1);
+    if (!ready || !RECORD_SECTIONS.has(id)) return;
+    document.getElementById(id)?.scrollIntoView();
   }, [ready, hash]);
 }
 

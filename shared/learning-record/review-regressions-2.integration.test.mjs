@@ -458,11 +458,13 @@ describe('reads', () => {
       description: 'Increment operators',
       proposedConcept: {
         tags: ['search-ir'],
-        drills: ['build-tokenizer'],
-        reviewQuestions: ['rq-tokenization-symmetry'],
+        drills: ['new-practice-drill'],
+        reviewQuestions: ['new-practice-review'],
       },
     });
     expect(report.contribution.entry.id).toBe('plus-plus');
-    expect(report.contribution.problems).toEqual([]);
+    expect(report.contribution.problems.every((problem) => problem.startsWith('Add these'))).toBe(
+      true
+    );
   });
 });

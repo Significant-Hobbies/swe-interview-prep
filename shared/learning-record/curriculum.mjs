@@ -10,9 +10,9 @@ export const PRODUCT_ORIGIN = 'https://learn.significanthobbies.com';
 
 const CONCEPTS = conceptsData.concepts ?? [];
 export const CONCEPT_BY_ID = new Map(CONCEPTS.map((concept) => [concept.id, concept]));
-const DRILL_IDS = new Set((drillsData.drills ?? []).map((drill) => drill.id));
-const REVIEW_QUESTION_IDS = new Set(
-  (reviewQuestionsData.reviewQuestions ?? []).map((question) => question.id)
+const DRILL_OWNER = new Map((drillsData.drills ?? []).map((drill) => [drill.id, drill.conceptId]));
+const REVIEW_OWNER = new Map(
+  (reviewQuestionsData.reviewQuestions ?? []).map((question) => [question.id, question.conceptId])
 );
 const DRILLS_BY_CONCEPT = new Map();
 for (const drill of drillsData.drills ?? []) {
@@ -300,14 +300,36 @@ const PRACTICE_BACKED_TRACKS = new Set(
   })
 );
 
-/** Drill and review-question links the PR must add or resolve. */
+/**
+ * Practice links the PR must add or fix. The concept page loads practice by
+ * each entry's conceptId, so linked drills and questions must belong to this
+ * concept: existing ones owned by another concept are reported, new ones must
+ * be added in the same PR with conceptId set to this concept.
+ */
+function linkProblems(ids, owners, conceptId, kind, file) {
+  const problems = [];
+  const foreign = ids.filter((id) => owners.has(id) && owners.get(id) !== conceptId);
+  if (foreign.length) {
+    problems.push(
+      `These ${kind} belong to other concepts and would not show on this one: ${foreign.join(', ')}. Add ${kind} for "${conceptId}" instead.`
+    );
+  }
+  const missing = ids.filter((id) => !owners.has(id) && !id.startsWith('drill-'));
+  if (missing.length) {
+    problems.push(
+      `Add these ${kind} to ${file} in the same PR, with conceptId "${conceptId}": ${missing.join(', ')}.`
+    );
+  }
+  return problems;
+}
+
 function practiceProblems(entry) {
   const problems = [];
   const drills = entry.drills ?? [];
   const reviews = entry.reviewQuestions ?? [];
   if (!drills.length) {
     problems.push(
-      'Every concept links at least one editorial drill: add one to src/data/drills.json (in-app drills need a non-empty testCases array; conceptId set to this id) and list its id in entry.drills.'
+      `Every concept links at least one editorial drill: add one to src/data/drills.json with conceptId "${entry.id}" (in-app drills need a non-empty testCases array) and list its id in entry.drills.`
     );
   }
   const placeholders = drills.filter((id) => id.startsWith('drill-'));
@@ -316,23 +338,21 @@ function practiceProblems(entry) {
       `Drill ids starting with "drill-" are rejected as placeholders: ${placeholders.join(', ')}. Use an editorial id.`
     );
   }
-  const newDrills = drills.filter((id) => !DRILL_IDS.has(id) && !id.startsWith('drill-'));
-  if (newDrills.length) {
-    problems.push(
-      `Add these drills to src/data/drills.json in the same PR: ${newDrills.join(', ')}.`
-    );
-  }
+  problems.push(...linkProblems(drills, DRILL_OWNER, entry.id, 'drills', 'src/data/drills.json'));
   if (!reviews.length) {
     problems.push(
-      'Every concept links at least one review question: add one to src/data/review-questions.json and list its id in entry.reviewQuestions.'
+      `Every concept links at least one review question: add one to src/data/review-questions.json with conceptId "${entry.id}" and list its id in entry.reviewQuestions.`
     );
   }
-  const newReviews = reviews.filter((id) => !REVIEW_QUESTION_IDS.has(id));
-  if (newReviews.length) {
-    problems.push(
-      `Add these review questions to src/data/review-questions.json in the same PR: ${newReviews.join(', ')}.`
-    );
-  }
+  problems.push(
+    ...linkProblems(
+      reviews,
+      REVIEW_OWNER,
+      entry.id,
+      'review questions',
+      'src/data/review-questions.json'
+    )
+  );
   return problems;
 }
 

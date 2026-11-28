@@ -345,9 +345,13 @@ function identityHash(value) {
  * hash still identifies them, and the learner's label is stored separately.
  */
 export function topicKey(topic) {
-  const normalized = String(topic ?? '')
+  const raw = String(topic ?? '');
+  // Lone surrogates would all encode to U+FFFD and merge distinct topics.
+  if (/[\uD800-\uDFFF]/u.test(raw)) throw invalid(`Topic "${topic}" is not valid Unicode text.`);
+  const normalized = raw
     .normalize('NFC')
     .toLowerCase()
+    .replace(/ς/gu, 'σ')
     .trim()
     .replace(/\s+/gu, ' ');
   const text = spellSymbols(normalized);

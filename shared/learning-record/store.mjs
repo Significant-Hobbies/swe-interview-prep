@@ -235,27 +235,45 @@ function preferenceStatement(userId, subject, preferences, ctx, guard) {
 }
 
 /** Record exposure (and optional interest) without touching evidence fields. */
-function engagementStatement(userId, subject, endedAt, interest, ctx, guard) {
+const NOT_CREDITED = `NOT EXISTS (SELECT 1 FROM learning_exposure_credits
+  WHERE user_id = ? AND session_id = ? AND subject_key = ?)`;
+
+/**
+ * One session's exposure to one subject, counted at most once: the credit row
+ * written alongside makes any later recount (completion, a late assessment, a
+ * replaced assessment) a no-op.
+ */
+function engagementStatement(userId, subject, endedAt, interest, ctx, guard, sessionId) {
   const where = guardClause(guard);
-  return {
-    sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, interest, exposure_count, last_engaged_at, updated_at)
-          SELECT ?, ?, ?, ?, ?, 1, ?, ? ${where.sql}
-          ON CONFLICT(user_id, subject_key) DO UPDATE SET
-            exposure_count = knowledge_states.exposure_count + 1,
-            last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
-            interest = COALESCE(excluded.interest, knowledge_states.interest),
-            updated_at = excluded.updated_at`,
-    args: [
-      userId,
-      subject.key,
-      subject.kind,
-      subject.label,
-      interest ?? null,
-      endedAt,
-      nowIso(ctx),
-      ...where.args,
-    ],
-  };
+  return [
+    {
+      sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, interest, exposure_count, last_engaged_at, updated_at)
+            SELECT ?, ?, ?, ?, ?, 1, ?, ? ${where.sql} AND ${NOT_CREDITED}
+            ON CONFLICT(user_id, subject_key) DO UPDATE SET
+              exposure_count = knowledge_states.exposure_count + 1,
+              last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
+              interest = COALESCE(excluded.interest, knowledge_states.interest),
+              updated_at = excluded.updated_at`,
+      args: [
+        userId,
+        subject.key,
+        subject.kind,
+        subject.label,
+        interest ?? null,
+        endedAt,
+        nowIso(ctx),
+        ...where.args,
+        userId,
+        sessionId,
+        subject.key,
+      ],
+    },
+    {
+      sql: `INSERT OR IGNORE INTO learning_exposure_credits (user_id, session_id, subject_key)
+            SELECT ?, ?, ? ${where.sql}`,
+      args: [userId, sessionId, subject.key, ...where.args],
+    },
+  ];
 }
 
 /** Subjects from a session/resource: curriculum concepts plus free-text topics. */
@@ -451,44 +469,39 @@ function insertAssessmentStatement(userId, row, guard) {
 /**
  * Exposure for evidence that lands on an already completed session. The
  * completion batch counts subjects assessed before it; this covers the other
- * commit order. Each session counts a subject once: not if the session named
- * it, and not if an earlier assessment in the session already covered it.
+ * commit order. The session's credit for the subject keeps it to one count.
  */
 function lateAssessmentExposure(userId, subject, row, ctx) {
-  return {
-    sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
-          SELECT ?, ?, ?, ?, 1, ?, ?
-          WHERE EXISTS (SELECT 1 FROM learning_assessments WHERE user_id = ? AND id = ?)
-            AND EXISTS (
-              SELECT 1 FROM learning_sessions s WHERE s.user_id = ? AND s.id = ? AND s.status = 'completed'
-                AND NOT EXISTS (SELECT 1 FROM json_each(s.record_json, '$.conceptIds') WHERE value = ?)
-                AND NOT EXISTS (SELECT 1 FROM json_each(s.record_json, '$.topicKeys') WHERE value = ?))
-            AND NOT EXISTS (
-              SELECT 1 FROM learning_assessments
-              WHERE user_id = ? AND session_id = ? AND subject_key = ? AND id <> ?)
-          ON CONFLICT(user_id, subject_key) DO UPDATE SET
-            exposure_count = knowledge_states.exposure_count + 1,
-            last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
-            updated_at = excluded.updated_at`,
-    args: [
-      userId,
-      subject.key,
-      subject.kind,
-      subject.label,
-      row.assessed_at,
-      nowIso(ctx),
-      userId,
-      row.id,
-      userId,
-      row.session_id,
-      subject.key,
-      subject.key,
-      userId,
-      row.session_id,
-      subject.key,
-      row.id,
-    ],
-  };
+  const lands = `EXISTS (SELECT 1 FROM learning_assessments WHERE user_id = ? AND id = ?)
+    AND EXISTS (SELECT 1 FROM learning_sessions WHERE user_id = ? AND id = ? AND status = 'completed')`;
+  const landsArgs = [userId, row.id, userId, row.session_id];
+  return [
+    {
+      sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
+            SELECT ?, ?, ?, ?, 1, ?, ? WHERE ${lands} AND ${NOT_CREDITED}
+            ON CONFLICT(user_id, subject_key) DO UPDATE SET
+              exposure_count = knowledge_states.exposure_count + 1,
+              last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
+              updated_at = excluded.updated_at`,
+      args: [
+        userId,
+        subject.key,
+        subject.kind,
+        subject.label,
+        row.assessed_at,
+        nowIso(ctx),
+        ...landsArgs,
+        userId,
+        row.session_id,
+        subject.key,
+      ],
+    },
+    {
+      sql: `INSERT OR IGNORE INTO learning_exposure_credits (user_id, session_id, subject_key)
+            SELECT ?, ?, ? WHERE ${lands}`,
+      args: [userId, row.session_id, subject.key, ...landsArgs],
+    },
+  ];
 }
 
 export async function submitAssessment(db, userId, args, ctx) {
@@ -512,7 +525,7 @@ export async function submitAssessment(db, userId, args, ctx) {
   await db.batch([
     insertAssessmentStatement(userId, row),
     preferenceStatement(userId, subject, { targetLevel: args.targetLevel }, ctx, sessionGuard),
-    ...(row.session_id ? [lateAssessmentExposure(userId, subject, row, ctx)] : []),
+    ...(row.session_id ? lateAssessmentExposure(userId, subject, row, ctx) : []),
   ]);
   const stored = await db.execute({
     sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND id = ?',
@@ -1227,10 +1240,15 @@ function resourceUpsertStatement(userId, plan, options, ctx, guard) {
  * deletions of that URL). Concurrent first saves agree on the id; a re-save
  * after deletion gets a new one.
  */
+/** Deletion records keep a learner-scoped fingerprint, never the URL itself. */
+async function urlFingerprint(userId, canonical) {
+  return sha256Hex(`${userId}:resource-url:${canonical}`);
+}
+
 async function newResourceId(db, userId, canonical, ctx) {
   const deletions = await db.execute({
-    sql: 'SELECT COUNT(*) AS n FROM learning_resource_deletions WHERE user_id = ? AND canonical_url = ?',
-    args: [userId, canonical],
+    sql: 'SELECT COUNT(*) AS n FROM learning_resource_deletions WHERE user_id = ? AND url_fingerprint = ?',
+    args: [userId, await urlFingerprint(userId, canonical)],
   });
   const generation = Number(deletions.rows[0]?.n ?? 0);
   return newId('res', { ...ctx, idempotencySeed: undefined }, `${canonical}#${generation}`);
@@ -1251,9 +1269,11 @@ async function planResource(db, userId, args, ctx) {
 export async function saveResource(db, userId, args, ctx) {
   const plan = await planResource(db, userId, args, ctx);
   const result = await db.execute(resourceUpsertStatement(userId, plan, {}, ctx));
-  const saved = await findResourceByUrl(db, userId, plan.canonical);
-  if (!saved) throw conflict('The resource was deleted while it was being saved. Save it again.');
-  return { resource: resourceFromRow(saved), created: Number(result.rows[0]?.version) === 1 };
+  const written = result.rows[0];
+  // No row means the planned id was deleted meanwhile; never answer with a replacement.
+  if (!written) throw conflict('The resource was deleted while it was being saved. Save it again.');
+  const saved = await requireOwned(db, 'learning_resources', userId, written.id, 'Resource');
+  return { resource: resourceFromRow(saved), created: Number(written.version) === 1 };
 }
 
 /**
@@ -1479,10 +1499,10 @@ function withinSessionLimit(key, values) {
   return values;
 }
 
-async function mergeRecord(db, userId, record, changes, ctx) {
+async function mergeRecord(db, userId, record, changes, ctx, preplanned = null) {
   validateRecordSubjects(changes);
   await requireResourceIds(db, userId, changes.resourceIds);
-  const planned = await planSessionResources(db, userId, changes.resources, ctx);
+  const planned = preplanned ?? (await planSessionResources(db, userId, changes.resources, ctx));
   const additions = {
     ...changes,
     resourceIds: [...(changes.resourceIds ?? []), ...planned.map((item) => item.id)],
@@ -1553,7 +1573,7 @@ function lessonStatusStatement(userId, courseId, lessonId, status, ctx, guard, o
 }
 
 /** Engagement roll-up: exposure and interest only, never assessed level. */
-function engagementStatements(userId, record, endedAt, ctx, guard, sessionId = null) {
+function engagementStatements(userId, record, endedAt, ctx, guard, sessionId) {
   const interests = new Map();
   const subjects = subjectsFrom(record.conceptIds, record.topics);
   for (const signal of record.interestSignals ?? []) {
@@ -1561,8 +1581,8 @@ function engagementStatements(userId, record, endedAt, ctx, guard, sessionId = n
     interests.set(subject.key, signal.interest);
     if (!subjects.some((item) => item.key === subject.key)) subjects.push(subject);
   }
-  const statements = subjects.map((subject) =>
-    engagementStatement(userId, subject, endedAt, interests.get(subject.key), ctx, guard)
+  const statements = subjects.flatMap((subject) =>
+    engagementStatement(userId, subject, endedAt, interests.get(subject.key), ctx, guard, sessionId)
   );
   if (record.resourceIds?.length) {
     statements.push({
@@ -1572,18 +1592,7 @@ function engagementStatements(userId, record, endedAt, ctx, guard, sessionId = n
       args: [nowIso(ctx), userId, JSON.stringify(record.resourceIds), ...(guard?.args ?? [])],
     });
   }
-  if (sessionId) {
-    statements.push(
-      assessedEngagementStatement(
-        userId,
-        sessionId,
-        subjects.map((subject) => subject.key),
-        endedAt,
-        ctx,
-        guard
-      )
-    );
-  }
+  statements.push(...assessedEngagementStatements(userId, sessionId, endedAt, ctx, guard));
   return statements;
 }
 
@@ -1676,7 +1685,7 @@ export async function startSession(db, userId, args, ctx) {
   ];
   const lessonStatement = startLessonStatement(userId, link, args, ctx, guard);
   if (lessonStatement) statements.push(lessonStatement);
-  if (endedAt) statements.push(...engagementStatements(userId, record, endedAt, ctx, guard));
+  if (endedAt) statements.push(...engagementStatements(userId, record, endedAt, ctx, guard, id));
   await db.batch(statements);
   const created = await db.execute({
     sql: 'SELECT id FROM learning_sessions WHERE user_id = ? AND id = ?',
@@ -1831,34 +1840,37 @@ function sessionSideEffects(userId, context, ctx, guard) {
 }
 
 /**
- * Exposure for subjects assessed during a session but not named on it. It
- * reads the assessments inside the completion batch, so evidence saved while
- * the session is completing is still counted.
+ * Exposure for subjects assessed during a session. It reads the assessments
+ * inside the completion batch, so evidence saved while the session is
+ * completing is still counted; credits keep each subject to one count.
  */
-function assessedEngagementStatement(userId, sessionId, namedKeys, endedAt, ctx, guard) {
-  return {
-    sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
-          SELECT ?, a.subject_key,
-            CASE WHEN a.subject_key LIKE 'domain:%' THEN 'domain'
-                 WHEN a.subject_key LIKE 'topic:%' THEN 'topic' ELSE 'concept' END,
-            MAX(a.subject_label), 1, ?, ?
-          FROM learning_assessments a
-          WHERE a.user_id = ? AND a.session_id = ? AND a.subject_key NOT IN ${JSON_LIST} ${guardSuffix(guard)}
-          GROUP BY a.subject_key
-          ON CONFLICT(user_id, subject_key) DO UPDATE SET
-            exposure_count = knowledge_states.exposure_count + 1,
-            last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
-            updated_at = excluded.updated_at`,
-    args: [
-      userId,
-      endedAt,
-      nowIso(ctx),
-      userId,
-      sessionId,
-      JSON.stringify(namedKeys),
-      ...(guard?.args ?? []),
-    ],
-  };
+function assessedEngagementStatements(userId, sessionId, endedAt, ctx, guard) {
+  const suffix = guardSuffix(guard);
+  return [
+    {
+      sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
+            SELECT ?, a.subject_key,
+              CASE WHEN a.subject_key LIKE 'domain:%' THEN 'domain'
+                   WHEN a.subject_key LIKE 'topic:%' THEN 'topic' ELSE 'concept' END,
+              MAX(a.subject_label), 1, ?, ?
+            FROM learning_assessments a
+            WHERE a.user_id = ? AND a.session_id = ? ${suffix}
+              AND NOT EXISTS (SELECT 1 FROM learning_exposure_credits c
+                WHERE c.user_id = a.user_id AND c.session_id = a.session_id AND c.subject_key = a.subject_key)
+            GROUP BY a.subject_key
+            ON CONFLICT(user_id, subject_key) DO UPDATE SET
+              exposure_count = knowledge_states.exposure_count + 1,
+              last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
+              updated_at = excluded.updated_at`,
+      args: [userId, endedAt, nowIso(ctx), userId, sessionId, ...(guard?.args ?? [])],
+    },
+    {
+      sql: `INSERT OR IGNORE INTO learning_exposure_credits (user_id, session_id, subject_key)
+            SELECT DISTINCT a.user_id, a.session_id, a.subject_key FROM learning_assessments a
+            WHERE a.user_id = ? AND a.session_id = ? ${suffix}`,
+      args: [userId, sessionId, ...(guard?.args ?? [])],
+    },
+  ];
 }
 
 const SESSION_UPDATE_ATTEMPTS = 3;
@@ -1868,7 +1880,7 @@ const SESSION_UPDATE_ATTEMPTS = 3;
  * single batch; effects are guarded by this attempt's write token, so a lost
  * race changes nothing. Returns null when the session changed underneath it.
  */
-async function attemptSessionUpdate(db, userId, args, ctx, complete) {
+async function attemptSessionUpdate(db, userId, args, ctx, complete, plan) {
   const row = await requireOwned(db, 'learning_sessions', userId, args.sessionId, 'Session');
   assertVersion(row, args.expectedVersion, 'Session', 'get_learning_session');
   const set = args.set || {};
@@ -1877,7 +1889,17 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
   const lessonId = patched(set, 'lessonId', row.lesson_id);
   await validateCourseLink(db, userId, courseId, lessonId);
   const cleaned = removeFromRecord(parseJson(row.record_json, {}), args.remove);
-  const { record, planned } = await mergeRecord(db, userId, cleaned, args.append || {}, ctx);
+  // Inline resources are planned once per request: a retry must never re-plan
+  // a resource deleted meanwhile under a new generation and recreate it.
+  const { record, planned } = await mergeRecord(
+    db,
+    userId,
+    cleaned,
+    args.append || {},
+    ctx,
+    plan.planned
+  );
+  plan.planned = planned;
   const fields = {
     ...times,
     kind: set.kind || row.kind,
@@ -1909,13 +1931,29 @@ export async function updateSession(db, userId, args, ctx, { complete = false } 
   // merged by re-reading and retrying instead of failing the caller.
   const attempts = args.expectedVersion === undefined ? SESSION_UPDATE_ATTEMPTS : 1;
   let row = null;
+  const plan = { planned: null };
   for (let attempt = 0; attempt < attempts && !row; attempt += 1) {
-    row = await attemptSessionUpdate(db, userId, args, ctx, complete);
+    row = await attemptSessionUpdate(db, userId, args, ctx, complete, plan);
+    if (!row) await assertPlannedResourcesLive(db, userId, plan.planned);
   }
   if (!row)
     throw conflict('Session changed concurrently. Re-read with get_learning_session and retry.');
   if (!complete) return getSession(db, userId, { sessionId: row.id });
   return getCompletedSession(db, userId, { sessionId: row.id }, ctx);
+}
+
+/** A resource this request attaches was deleted meanwhile: stop rather than recreate it. */
+async function assertPlannedResourcesLive(db, userId, planned) {
+  if (!planned?.length) return;
+  const deleted = await db.execute({
+    sql: `SELECT resource_id FROM learning_resource_deletions WHERE user_id = ? AND resource_id IN ${JSON_LIST}`,
+    args: [userId, JSON.stringify(planned.map((item) => item.id))],
+  });
+  if (deleted.rows.length) {
+    throw conflict(
+      'A resource this request attaches was deleted meanwhile. Re-read the session and attach it again if it is still wanted.'
+    );
+  }
 }
 
 /** Subjects assessed during a session count as explored in it, without writing to the session. */
@@ -2065,7 +2103,9 @@ export async function getHistory(db, userId, args) {
     params.push(args.resourceId);
   }
   if (args.q) {
-    where.push('(title LIKE ? OR summary LIKE ? OR record_json LIKE ?)');
+    where.push(
+      "(title LIKE ? OR summary LIKE ? OR json_remove(record_json, '$.topicKeys') LIKE ?)"
+    );
     params.push(`%${args.q}%`, `%${args.q}%`, `%${args.q}%`);
   }
   if (args.since) {
@@ -2462,6 +2502,10 @@ async function deleteSession(db, userId, args) {
       };
   const result = await db.batch([
     assessments,
+    {
+      sql: 'DELETE FROM learning_exposure_credits WHERE user_id = ? AND session_id = ?',
+      args: [userId, row.id],
+    },
     { sql: 'DELETE FROM learning_sessions WHERE user_id = ? AND id = ?', args: [userId, row.id] },
   ]);
   return {
@@ -2506,9 +2550,9 @@ async function deleteResource(db, userId, args, ctx) {
       args: [row.id, userId, row.id],
     },
     {
-      sql: `INSERT OR IGNORE INTO learning_resource_deletions (user_id, resource_id, canonical_url, deleted_at)
+      sql: `INSERT OR IGNORE INTO learning_resource_deletions (user_id, resource_id, url_fingerprint, deleted_at)
             VALUES (?, ?, ?, ?)`,
-      args: [userId, row.id, row.canonical_url, nowIso(ctx)],
+      args: [userId, row.id, await urlFingerprint(userId, row.canonical_url), nowIso(ctx)],
     },
     { sql: 'DELETE FROM learning_resources WHERE user_id = ? AND id = ?', args: [userId, row.id] },
   ]);
