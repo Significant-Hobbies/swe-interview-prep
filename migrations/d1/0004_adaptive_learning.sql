@@ -77,6 +77,20 @@ CREATE TABLE IF NOT EXISTS learning_resources (
 
 CREATE INDEX IF NOT EXISTS idx_resources_user_created ON learning_resources(user_id, created_at DESC, id);
 
+-- Ids of deleted resources. Resource ids derive from the canonical URL and a
+-- generation (the number of earlier deletions), so a re-saved URL gets a new
+-- id and stale references, receipts and overrides never reach the new row.
+CREATE TABLE IF NOT EXISTS learning_resource_deletions (
+  user_id TEXT NOT NULL,
+  resource_id TEXT NOT NULL,
+  canonical_url TEXT NOT NULL,
+  deleted_at TEXT NOT NULL,
+  PRIMARY KEY (user_id, resource_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_resource_deletions_url ON learning_resource_deletions(user_id, canonical_url);
+
 CREATE TABLE IF NOT EXISTS learning_sessions (
   id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL,

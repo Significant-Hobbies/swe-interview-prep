@@ -8,6 +8,7 @@ import { GitHubRepoLink } from '../components/GitHubRepoLink';
 import { SiteHeader } from '../components/SiteHeader';
 import { GoogleSignInButton } from '../components/GoogleSignInButton';
 import { getGoogleClientId } from '../lib/googleClientId';
+import { recordDestination } from '../lib/recordReturn';
 
 const PRINCIPLES = [
   {
@@ -78,15 +79,6 @@ const CURRENT_STATE = [
     value: 'There is no paid tier, subscription, or checkout.',
   },
 ];
-
-/** Only an in-app learning record route is accepted as a post-sign-in destination. */
-function recordDestination(next: string | null) {
-  if (!next) return null;
-  const parts = next.split('/');
-  const isRecord = parts[0] === '' && parts[1] === 'record' && parts.length <= 4;
-  const safe = parts.slice(2).every((part) => /^[A-Za-z0-9_.%-]+$/u.test(part) && part !== '..');
-  return isRecord && safe ? next : null;
-}
 
 export default function Login() {
   const { continueAsGuest, user } = useAuth();

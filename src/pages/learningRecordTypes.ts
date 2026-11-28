@@ -30,18 +30,32 @@ const PROFILE_TEXT_LISTS: Array<[string, string]> = [
   ['preferredMethods', 'Preferred methods'],
 ];
 
+const withDetail = (text: string, detail?: string) => (detail ? `${text} — ${detail}` : text);
+
 function experienceLine(item: Json) {
   const where = item.organization ? ` at ${item.organization}` : '';
-  const years = item.years ? ` · ${item.years} yrs` : '';
-  return `${item.role}${where}${years}`;
+  const years = typeof item.years === 'number' ? ` · ${item.years} yrs` : '';
+  return withDetail(`${item.role}${where}${years}`, item.summary);
 }
 
 function skillLine(item: Json) {
-  return item.level ? `${item.name} (${item.level}, self-reported)` : item.name;
+  const name = item.level ? `${item.name} (${item.level}, self-reported)` : item.name;
+  return withDetail(name, item.notes);
 }
 
 function depthLine(item: Json) {
-  return `${item.domain}: ${item.targetLevel}`;
+  return withDetail(`${item.domain}: ${item.targetLevel}`, item.why);
+}
+
+/** Available time as labelled budgets plus any notes. */
+function availabilityLine(time: Json) {
+  const parts = [
+    time.minutesPerDay ? `${time.minutesPerDay} min a day` : '',
+    time.minutesPerSession ? `${time.minutesPerSession} min a session` : '',
+    time.daysPerWeek ? `${time.daysPerWeek} days a week` : '',
+    time.notes ?? '',
+  ].filter(Boolean);
+  return parts.join(' · ');
 }
 
 export type ProfileRow = { key: string; label: string; value: string };
@@ -59,6 +73,9 @@ export function profileRows(profile: Json): ProfileRow[] {
   for (const [key, label, line] of objectLists) {
     if (profile[key]?.length) rows.push({ key, label, value: profile[key].map(line).join(' · ') });
   }
+  const availability = profile.availableTime ? availabilityLine(profile.availableTime) : '';
+  if (availability)
+    rows.push({ key: 'availableTime', label: 'Available time', value: availability });
   if (profile.timezone) rows.push({ key: 'timezone', label: 'Timezone', value: profile.timezone });
   return rows;
 }

@@ -25,6 +25,15 @@ const D1_MAX_PARAMETERS = 100;
  * Interleaving hooks: a test can pause the first statement matching a
  * predicate (to force a race ordering) or make one fail (to simulate a crash).
  */
+async function runHook(hooks, sqls, after) {
+  const index = hooks.findIndex(
+    (hook) => Boolean(hook.after) === after && sqls.some((sql) => hook.predicate(sql))
+  );
+  if (index < 0) return;
+  const [hook] = hooks.splice(index, 1);
+  await hook.run();
+}
+
 function createHooks() {
   const hooks = [];
   return {
@@ -54,11 +63,21 @@ function createHooks() {
         },
       });
     },
+    /** The statement commits, then the call rejects: a lost acknowledgment. */
+    loseAckOnce(predicate) {
+      hooks.push({
+        predicate,
+        after: true,
+        run: async () => {
+          throw new Error('Injected lost acknowledgment');
+        },
+      });
+    },
     async before(sqls) {
-      const index = hooks.findIndex((hook) => sqls.some((sql) => hook.predicate(sql)));
-      if (index < 0) return;
-      const [hook] = hooks.splice(index, 1);
-      await hook.run();
+      await runHook(hooks, sqls, false);
+    },
+    async after(sqls) {
+      await runHook(hooks, sqls, true);
     },
   };
 }
@@ -80,7 +99,9 @@ function d1Binding(db, hooks) {
         },
         all: async () => {
           await hooks.before([sql]);
-          return bound(args).execute();
+          const result = bound(args).execute();
+          await hooks.after([sql]);
+          return result;
         },
         bind: (...values) => bound(values),
       });
@@ -92,9 +113,10 @@ function d1Binding(db, hooks) {
       try {
         const result = statements.map((statement) => statement.execute());
         db.exec('COMMIT');
+        await hooks.after(statements.map((statement) => statement.sql));
         return result;
       } catch (error) {
-        db.exec('ROLLBACK');
+        if (db.isTransaction) db.exec('ROLLBACK');
         throw error;
       }
     },
@@ -118,6 +140,7 @@ export function createMcpHarness() {
     client: createD1Client(d1Binding(database, hooks)),
     pauseOnce: hooks.pauseOnce,
     failOnce: hooks.failOnce,
+    loseAckOnce: hooks.loseAckOnce,
     now: new Date('2026-11-28T09:00:00.000Z'),
     rpcId: 0,
     count: (table) => database.prepare(`SELECT COUNT(*) AS n FROM ${table}`).get().n,

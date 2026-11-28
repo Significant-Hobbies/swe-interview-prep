@@ -83,7 +83,7 @@ describe('subject identity', () => {
 });
 
 describe('atomic mutations', () => {
-  it('leaves nothing behind when a session batch fails, and the retry applies everything', async () => {
+  it('leaves nothing behind when a session batch fails, and a new key applies everything', async () => {
     const args = {
       title: 'Reading',
       resources: [{ url: 'https://example.com/r', title: 'R' }],
@@ -93,7 +93,15 @@ describe('atomic mutations', () => {
     expect((await h.call('start_learning_session', args)).isError).toBe(true);
     expect(h.count('learning_sessions')).toBe(0);
     expect(h.count('learning_resources')).toBe(0);
-    const { session } = await h.ok('start_learning_session', args);
+    // The failed batch's outcome is unknown to the server, so the same key
+    // is never re-run; after re-reading, the caller sends it with a new key.
+    expect((await h.call('start_learning_session', args)).error.code).toBe(
+      'idempotency_in_progress'
+    );
+    const { session } = await h.ok('start_learning_session', {
+      ...args,
+      idempotencyKey: key('session'),
+    });
     expect(session.resources).toHaveLength(1);
   });
 
@@ -448,7 +456,11 @@ describe('reads', () => {
       topic: '++',
       gapKind: 'missing',
       description: 'Increment operators',
-      proposedConcept: { tags: ['search-ir'], drills: ['inc-drill'], reviewQuestions: ['inc-rq'] },
+      proposedConcept: {
+        tags: ['search-ir'],
+        drills: ['build-tokenizer'],
+        reviewQuestions: ['rq-tokenization-symmetry'],
+      },
     });
     expect(report.contribution.entry.id).toBe('plus-plus');
     expect(report.contribution.problems).toEqual([]);

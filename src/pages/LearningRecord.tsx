@@ -1,6 +1,6 @@
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import {
@@ -151,9 +151,19 @@ function MoreButton({ onClick, busy, error }: MoreButtonProps) {
   );
 }
 
+/** Scroll to a linked section (#profile, #knowledge) once the record has loaded. */
+function useSectionAnchor(ready: boolean) {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!ready || !hash) return;
+    document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView();
+  }, [ready, hash]);
+}
+
 function Overview() {
   const { data, loading, error, signedIn } = useRecord('overview');
   const { pages, loadMore, loadingMore, errors } = usePagedSections(data);
+  useSectionAnchor(Boolean(data));
   const pageOf = (key: PagedSection) => pagedOf(pages, data, key);
   const countOf = (key: PagedSection) => {
     const page = pageOf(key);

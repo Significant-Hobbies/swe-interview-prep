@@ -175,9 +175,10 @@ async function callTool({ params, auth, client, now, clientName }) {
   try {
     response = await tool.handler(rest, seeded);
   } catch (error) {
-    // The key is reusable only when the failed request changed nothing. Once
-    // a write committed, the reservation stays and a retry is told to re-read,
-    // so it can never re-apply the mutation over a newer edit.
+    // The key is reusable only when the failed request is known to have
+    // changed nothing. After any write that may have committed, the
+    // reservation stays and a retry is told to re-read, so it can never
+    // re-apply the mutation over a newer edit.
     if (!writes.changed) await store.releaseReceipt(client, userId, idempotencyKey);
     throw error;
   }
@@ -185,19 +186,31 @@ async function callTool({ params, auth, client, now, clientName }) {
   return response;
 }
 
-/** A database client that records whether any write statement changed a row. */
+/**
+ * A database client that records whether a write may have committed. A write
+ * counts as soon as it is attempted: if the call then rejects, its outcome is
+ * unknown (the commit may have landed and only the acknowledgment was lost).
+ * Only a write that resolved reporting zero changed rows is known to be a no-op.
+ */
 function trackChanges(client, writes) {
   const isWrite = (statement) => /^\s*(INSERT|UPDATE|DELETE|REPLACE)\b/iu.test(statement.sql);
-  const note = (statements, results) => {
-    if (results.some((result, index) => isWrite(statements[index]) && result.rowsAffected > 0)) {
-      writes.changed = true;
+  const run = async (statements, call) => {
+    const writing = statements.some(isWrite);
+    const previous = writes.changed;
+    if (writing) writes.changed = true;
+    const results = await call();
+    if (writing && !previous) {
+      writes.changed = results.some(
+        (result, index) => isWrite(statements[index]) && result.rowsAffected > 0
+      );
     }
     return results;
   };
   return {
     ...client,
-    execute: async (statement) => note([statement], [await client.execute(statement)])[0],
-    batch: async (statements) => note(statements, await client.batch(statements)),
+    execute: async (statement) =>
+      (await run([statement], async () => [await client.execute(statement)]))[0],
+    batch: async (statements) => run(statements, () => client.batch(statements)),
   };
 }
 

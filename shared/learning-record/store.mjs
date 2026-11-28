@@ -448,6 +448,49 @@ function insertAssessmentStatement(userId, row, guard) {
   };
 }
 
+/**
+ * Exposure for evidence that lands on an already completed session. The
+ * completion batch counts subjects assessed before it; this covers the other
+ * commit order. Each session counts a subject once: not if the session named
+ * it, and not if an earlier assessment in the session already covered it.
+ */
+function lateAssessmentExposure(userId, subject, row, ctx) {
+  return {
+    sql: `INSERT INTO knowledge_states (user_id, subject_key, subject_kind, label, exposure_count, last_engaged_at, updated_at)
+          SELECT ?, ?, ?, ?, 1, ?, ?
+          WHERE EXISTS (SELECT 1 FROM learning_assessments WHERE user_id = ? AND id = ?)
+            AND EXISTS (
+              SELECT 1 FROM learning_sessions s WHERE s.user_id = ? AND s.id = ? AND s.status = 'completed'
+                AND NOT EXISTS (SELECT 1 FROM json_each(s.record_json, '$.conceptIds') WHERE value = ?)
+                AND NOT EXISTS (SELECT 1 FROM json_each(s.record_json, '$.topicKeys') WHERE value = ?))
+            AND NOT EXISTS (
+              SELECT 1 FROM learning_assessments
+              WHERE user_id = ? AND session_id = ? AND subject_key = ? AND id <> ?)
+          ON CONFLICT(user_id, subject_key) DO UPDATE SET
+            exposure_count = knowledge_states.exposure_count + 1,
+            last_engaged_at = MAX(COALESCE(knowledge_states.last_engaged_at, ''), excluded.last_engaged_at),
+            updated_at = excluded.updated_at`,
+    args: [
+      userId,
+      subject.key,
+      subject.kind,
+      subject.label,
+      row.assessed_at,
+      nowIso(ctx),
+      userId,
+      row.id,
+      userId,
+      row.session_id,
+      subject.key,
+      subject.key,
+      userId,
+      row.session_id,
+      subject.key,
+      row.id,
+    ],
+  };
+}
+
 export async function submitAssessment(db, userId, args, ctx) {
   const subject = resolveSubject(args.subject);
   if (args.method !== 'self-assessment' && !args.outcome) {
@@ -469,6 +512,7 @@ export async function submitAssessment(db, userId, args, ctx) {
   await db.batch([
     insertAssessmentStatement(userId, row),
     preferenceStatement(userId, subject, { targetLevel: args.targetLevel }, ctx, sessionGuard),
+    ...(row.session_id ? [lateAssessmentExposure(userId, subject, row, ctx)] : []),
   ]);
   const stored = await db.execute({
     sql: 'SELECT * FROM learning_assessments WHERE user_id = ? AND id = ?',
@@ -1140,6 +1184,7 @@ function resourceUpsertStatement(userId, plan, options, ctx, guard) {
     sql: `INSERT INTO learning_resources (id, user_id, canonical_url, url, title, kind, status, author,
             published_at, summary, concept_ids_json, topics_json, notes, created_at, updated_at)
           SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ${where.sql}
+            AND NOT EXISTS (SELECT 1 FROM learning_resource_deletions d WHERE d.user_id = ? AND d.resource_id = ?)
           ON CONFLICT(user_id, canonical_url) DO UPDATE SET
             status = CASE
               WHEN ${explicit ? 1 : 0} = 1 THEN excluded.status
@@ -1171,8 +1216,24 @@ function resourceUpsertStatement(userId, plan, options, ctx, guard) {
       nowIso(ctx),
       nowIso(ctx),
       ...where.args,
+      userId,
+      id,
     ],
   };
+}
+
+/**
+ * A new resource's id: the canonical URL plus its generation (earlier
+ * deletions of that URL). Concurrent first saves agree on the id; a re-save
+ * after deletion gets a new one.
+ */
+async function newResourceId(db, userId, canonical, ctx) {
+  const deletions = await db.execute({
+    sql: 'SELECT COUNT(*) AS n FROM learning_resource_deletions WHERE user_id = ? AND canonical_url = ?',
+    args: [userId, canonical],
+  });
+  const generation = Number(deletions.rows[0]?.n ?? 0);
+  return newId('res', { ...ctx, idempotencySeed: undefined }, `${canonical}#${generation}`);
 }
 
 /** Validate a resource input and work out its id without writing. */
@@ -1182,8 +1243,7 @@ async function planResource(db, userId, args, ctx) {
   const existing = await findResourceByUrl(db, userId, canonical);
   if (!existing && !args.title)
     throw invalid(`title is required for the new resource ${args.url}.`);
-  const id =
-    existing?.id ?? (await newId('res', { ...ctx, idempotencySeed: undefined }, canonical));
+  const id = existing?.id ?? (await newResourceId(db, userId, canonical, ctx));
   return { id, canonical, conceptIds, args };
 }
 
@@ -1192,6 +1252,7 @@ export async function saveResource(db, userId, args, ctx) {
   const plan = await planResource(db, userId, args, ctx);
   const result = await db.execute(resourceUpsertStatement(userId, plan, {}, ctx));
   const saved = await findResourceByUrl(db, userId, plan.canonical);
+  if (!saved) throw conflict('The resource was deleted while it was being saved. Save it again.');
   return { resource: resourceFromRow(saved), created: Number(result.rows[0]?.version) === 1 };
 }
 
@@ -1579,7 +1640,13 @@ export async function startSession(db, userId, args, ctx) {
   const { record, planned } = await mergeRecord(db, userId, {}, args, ctx);
   const token = crypto.randomUUID();
   const guard = tokenGuard('learning_sessions', 'id', id, userId, token);
-  const linkGuard = courseLinkGuard(userId, args.courseId, args.lessonId);
+  const linkGuard = sessionWriteGuard(
+    userId,
+    args.courseId,
+    args.lessonId,
+    args.resourceIds,
+    planned.map((plan) => plan.id)
+  );
   const statements = [
     {
       sql: `INSERT INTO learning_sessions (id, user_id, kind, status, title, course_id, lesson_id,
@@ -1594,7 +1661,7 @@ export async function startSession(db, userId, args, ctx) {
         args.title,
         args.courseId ?? null,
         args.lessonId ?? null,
-        JSON.stringify(record),
+        serializeRecord(record),
         args.summary ?? null,
         startedAt,
         endedAt,
@@ -1616,8 +1683,36 @@ export async function startSession(db, userId, args, ctx) {
     args: [userId, id],
   });
   if (!created.rows[0])
-    throw notFound('The course or lesson was removed while the session was being started.');
+    throw notFound(
+      'A linked course, lesson or resource was removed while the session was being started.'
+    );
   return getSession(db, userId, { sessionId: id });
+}
+
+/**
+ * A condition that holds only while the resources a session write links still
+ * exist: explicit ids must be live, and inline resources must not have been
+ * deleted since they were planned.
+ */
+function resourceLinkGuard(userId, explicitIds = [], plannedIds = []) {
+  if (!explicitIds.length && !plannedIds.length) return { sql: '1', args: [] };
+  return {
+    sql: `(SELECT COUNT(*) FROM learning_resources WHERE user_id = ? AND id IN ${JSON_LIST}) = ?
+          AND NOT EXISTS (SELECT 1 FROM learning_resource_deletions WHERE user_id = ? AND resource_id IN ${JSON_LIST})`,
+    args: [
+      userId,
+      JSON.stringify(explicitIds),
+      new Set(explicitIds).size,
+      userId,
+      JSON.stringify([...explicitIds, ...plannedIds]),
+    ],
+  };
+}
+
+function sessionWriteGuard(userId, courseId, lessonId, explicitIds, plannedIds) {
+  const course = courseLinkGuard(userId, courseId, lessonId);
+  const resources = resourceLinkGuard(userId, explicitIds, plannedIds);
+  return { sql: `${course.sql} AND ${resources.sql}`, args: [...course.args, ...resources.args] };
 }
 
 /** A condition that holds only while a session's course (and lesson) still exist. */
@@ -1677,9 +1772,24 @@ function assertVersion(row, expected, label, reread) {
   }
 }
 
+/** Session record JSON, with normalized topic keys for case- and script-safe lookup. */
+function serializeRecord(record) {
+  return JSON.stringify({
+    ...record,
+    topicKeys: (record.topics ?? []).map((topic) => topicKey(topic)),
+  });
+}
+
 function sessionUpdateStatement(userId, row, fields, token, ctx) {
-  // The destination course and lesson must still exist when the update lands.
-  const link = courseLinkGuard(userId, fields.courseId, fields.lessonId);
+  // The destination course, lesson and newly linked resources must still
+  // exist when the update lands.
+  const link = sessionWriteGuard(
+    userId,
+    fields.courseId,
+    fields.lessonId,
+    fields.links.explicit,
+    fields.links.planned
+  );
   return {
     sql: `UPDATE learning_sessions SET kind = ?, status = ?, title = ?, course_id = ?, lesson_id = ?,
             record_json = ?, summary = ?, started_at = ?, ended_at = ?, duration_minutes = ?,
@@ -1691,7 +1801,7 @@ function sessionUpdateStatement(userId, row, fields, token, ctx) {
       fields.title,
       fields.courseId,
       fields.lessonId,
-      JSON.stringify(fields.record),
+      serializeRecord(fields.record),
       fields.summary,
       fields.startedAt,
       fields.endedAt,
@@ -1777,6 +1887,7 @@ async function attemptSessionUpdate(db, userId, args, ctx, complete) {
     lessonId,
     record,
     summary: firstDefined(args.summary, set.summary, row.summary),
+    links: { explicit: args.append?.resourceIds ?? [], planned: planned.map((plan) => plan.id) },
   };
   const token = crypto.randomUUID();
   const guard = tokenGuard('learning_sessions', 'id', row.id, userId, token);
@@ -1943,9 +2054,9 @@ export async function getHistory(db, userId, args) {
   }
   if (args.topic) {
     where.push(
-      `(EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.topics') WHERE lower(value) = lower(?)) OR ${assessedIn})`
+      `(EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.topicKeys') WHERE value = ?) OR ${assessedIn})`
     );
-    params.push(args.topic, topicKey(args.topic));
+    params.push(topicKey(args.topic), topicKey(args.topic));
   }
   if (args.resourceId) {
     where.push(
@@ -2378,11 +2489,10 @@ async function deleteCourse(db, userId, args) {
 }
 
 /**
- * Resource ids derive from the canonical URL, so a later re-save of the same
- * URL reuses the id. Unlinking it from sessions in the same batch keeps old
- * sessions from showing the replacement.
+ * Unlinks the resource from sessions and records its id as deleted, so a
+ * re-save of the URL gets a new id that old references never reach.
  */
-async function deleteResource(db, userId, args) {
+async function deleteResource(db, userId, args, ctx) {
   const row = await requireOwned(db, 'learning_resources', userId, args.id, 'Resource');
   await db.batch([
     {
@@ -2394,6 +2504,11 @@ async function deleteResource(db, userId, args) {
             WHERE user_id = ?
               AND EXISTS (SELECT 1 FROM json_each(learning_sessions.record_json, '$.resourceIds') WHERE value = ?)`,
       args: [row.id, userId, row.id],
+    },
+    {
+      sql: `INSERT OR IGNORE INTO learning_resource_deletions (user_id, resource_id, canonical_url, deleted_at)
+            VALUES (?, ?, ?, ?)`,
+      args: [userId, row.id, row.canonical_url, nowIso(ctx)],
     },
     { sql: 'DELETE FROM learning_resources WHERE user_id = ? AND id = ?', args: [userId, row.id] },
   ]);

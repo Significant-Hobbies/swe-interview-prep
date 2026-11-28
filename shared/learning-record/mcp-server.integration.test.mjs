@@ -421,8 +421,8 @@ describe('curriculum gaps, isolation and cleanup', () => {
       proposedConcept: {
         tags: ['search-ir'],
         difficulty: 'advanced',
-        drills: ['crdt-gc-drill'],
-        reviewQuestions: ['crdt-gc-review'],
+        drills: ['build-tokenizer'],
+        reviewQuestions: ['rq-tokenization-symmetry'],
       },
     });
     expect(first.contribution.file).toBe('src/data/concepts.json');

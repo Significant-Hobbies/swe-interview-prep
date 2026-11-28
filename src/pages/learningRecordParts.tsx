@@ -2,6 +2,8 @@ import { ArrowLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { loginHref } from '../lib/recordReturn';
+
 import { type Json, profileRows, type SectionProps } from './learningRecordTypes';
 
 // Building blocks for the read-only learning record pages.
@@ -146,12 +148,10 @@ export function Status({
 }) {
   const location = useLocation();
   if (!signedIn) {
-    const loginHref = ['/login', new URLSearchParams({ next: location.pathname }).toString()].join(
-      '?'
-    );
+    const signInHref = loginHref(location.pathname, location.hash);
     return (
       <p className="mt-8 text-sm text-white/60">
-        <Link to={loginHref} className="text-white underline underline-offset-4">
+        <Link to={signInHref} className="text-white underline underline-offset-4">
           Sign in
         </Link>{' '}
         to see the learning record your assistant keeps.
@@ -176,7 +176,7 @@ export function Status({
 export function ProfileSection({ data }: { data: Json }) {
   const profile = data.profile?.profile ?? {};
   const rows = profileRows(profile);
-  const hasContent = Boolean(profile.background || profile.availableTime || rows.length);
+  const hasContent = Boolean(profile.background || rows.length);
   return (
     <Section id="profile" title="Profile">
       {hasContent ? (
@@ -197,22 +197,6 @@ export function ProfileSection({ data }: { data: Json }) {
               <dd className="mt-1 text-white/75">{row.value}</dd>
             </div>
           ))}
-          {profile.availableTime && (
-            <div>
-              <dt>
-                <Label>Available time</Label>
-              </dt>
-              <dd className="mt-1 text-white/75">
-                {profile.availableTime.minutesPerDay ??
-                  profile.availableTime.minutesPerSession ??
-                  '—'}{' '}
-                min
-                {profile.availableTime.daysPerWeek
-                  ? ` · ${profile.availableTime.daysPerWeek} days a week`
-                  : ''}
-              </dd>
-            </div>
-          )}
         </dl>
       ) : (
         <Empty>No profile yet. Tell your assistant about your background and goals.</Empty>

@@ -10,6 +10,10 @@ export const PRODUCT_ORIGIN = 'https://learn.significanthobbies.com';
 
 const CONCEPTS = conceptsData.concepts ?? [];
 export const CONCEPT_BY_ID = new Map(CONCEPTS.map((concept) => [concept.id, concept]));
+const DRILL_IDS = new Set((drillsData.drills ?? []).map((drill) => drill.id));
+const REVIEW_QUESTION_IDS = new Set(
+  (reviewQuestionsData.reviewQuestions ?? []).map((question) => question.id)
+);
 const DRILLS_BY_CONCEPT = new Map();
 for (const drill of drillsData.drills ?? []) {
   if (!DRILLS_BY_CONCEPT.has(drill.conceptId)) DRILLS_BY_CONCEPT.set(drill.conceptId, []);
@@ -296,6 +300,42 @@ const PRACTICE_BACKED_TRACKS = new Set(
   })
 );
 
+/** Drill and review-question links the PR must add or resolve. */
+function practiceProblems(entry) {
+  const problems = [];
+  const drills = entry.drills ?? [];
+  const reviews = entry.reviewQuestions ?? [];
+  if (!drills.length) {
+    problems.push(
+      'Every concept links at least one editorial drill: add one to src/data/drills.json (in-app drills need a non-empty testCases array; conceptId set to this id) and list its id in entry.drills.'
+    );
+  }
+  const placeholders = drills.filter((id) => id.startsWith('drill-'));
+  if (placeholders.length) {
+    problems.push(
+      `Drill ids starting with "drill-" are rejected as placeholders: ${placeholders.join(', ')}. Use an editorial id.`
+    );
+  }
+  const newDrills = drills.filter((id) => !DRILL_IDS.has(id) && !id.startsWith('drill-'));
+  if (newDrills.length) {
+    problems.push(
+      `Add these drills to src/data/drills.json in the same PR: ${newDrills.join(', ')}.`
+    );
+  }
+  if (!reviews.length) {
+    problems.push(
+      'Every concept links at least one review question: add one to src/data/review-questions.json and list its id in entry.reviewQuestions.'
+    );
+  }
+  const newReviews = reviews.filter((id) => !REVIEW_QUESTION_IDS.has(id));
+  if (newReviews.length) {
+    problems.push(
+      `Add these review questions to src/data/review-questions.json in the same PR: ${newReviews.join(', ')}.`
+    );
+  }
+  return problems;
+}
+
 /**
  * Problems the PR must resolve before src/data/concepts.test.ts passes. Every
  * concept needs an editorial drill and a review question; practice-backed
@@ -307,16 +347,7 @@ function proposalProblems(entry, domain) {
   if (CONCEPT_BY_ID.has(id)) problems.push(`Concept id "${id}" already exists; extend it instead.`);
   if (!domain) problems.push('tags[0] must be an existing track id; pass proposedConcept.tags.');
   if (!id) problems.push('The concept needs an id; pass proposedConcept.id.');
-  if (!entry.drills?.length) {
-    problems.push(
-      'Every concept links at least one editorial drill: add one to src/data/drills.json (with a testCase, conceptId set to this id) and list its id in entry.drills.'
-    );
-  }
-  if (!entry.reviewQuestions?.length) {
-    problems.push(
-      'Every concept links at least one review question: add one to src/data/review-questions.json and list its id in entry.reviewQuestions.'
-    );
-  }
+  problems.push(...practiceProblems(entry));
   if (PRACTICE_BACKED_TRACKS.has(domain) && !entry.roadmaps?.length) {
     problems.push(
       `Track "${domain}" requires every concept to be on a roadmap; add it to one and list it in entry.roadmaps.`
