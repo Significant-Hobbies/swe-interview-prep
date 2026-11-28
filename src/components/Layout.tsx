@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { focusedRoute } from '../lib/focusedRoute';
+import { loginHref } from '../lib/recordReturn';
 import { recordRecentVisit } from '../lib/recentVisits';
 import { consumeInitialSettings } from '../lib/publicEntry';
 import { STORE_KEYS, loadLocal } from '../lib/userStore';
@@ -88,7 +89,7 @@ export default function Layout() {
                 </>
               ) : isGuest ? (
                 <Link
-                  to="/login#sign-in"
+                  to={loginHref(location.pathname, location.hash)}
                   className="ml-1 inline-flex h-11 items-center rounded-md border border-white/10 px-3 text-xs font-medium text-white/65 transition-colors duration-150 hover:border-white/20 hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
                 >
                   Sign in

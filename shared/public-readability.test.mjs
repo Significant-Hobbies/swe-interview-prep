@@ -144,6 +144,7 @@ describe('source-backed public readability', () => {
     for (const path of [
       '/dashboard',
       '/progress',
+      '/record/sessions/private',
       '/session/private',
       '/wars/results/private',
       '/admin/private',

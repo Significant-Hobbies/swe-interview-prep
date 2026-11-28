@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import curriculumSummary from '../data/public-curriculum-summary.json';
@@ -8,6 +8,7 @@ import { GitHubRepoLink } from '../components/GitHubRepoLink';
 import { SiteHeader } from '../components/SiteHeader';
 import { GoogleSignInButton } from '../components/GoogleSignInButton';
 import { getGoogleClientId } from '../lib/googleClientId';
+import { recordDestination } from '../lib/recordReturn';
 
 const PRINCIPLES = [
   {
@@ -82,11 +83,13 @@ const CURRENT_STATE = [
 export default function Login() {
   const { continueAsGuest, user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const destination = recordDestination(searchParams.get('next')) ?? '/dashboard';
   const [debugInfo, setDebugInfo] = useState<string>('');
 
   useEffect(() => {
-    if (user) navigate('/dashboard', { replace: true });
-  }, [navigate, user]);
+    if (user) navigate(destination, { replace: true });
+  }, [destination, navigate, user]);
 
   const startMockAsGuest = () => {
     continueAsGuest();

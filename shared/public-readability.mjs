@@ -29,6 +29,7 @@ export const identity = {
     '/login',
     '/onboarding',
     '/progress',
+    '/record',
     '/notes',
     '/session',
     '/share',
